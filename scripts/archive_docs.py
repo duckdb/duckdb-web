@@ -10,7 +10,7 @@ import frontmatter
 # Update _config.yml to specify the new version number
 # Add a new row to /_data/versions.csv with the new version number
 # Run this script. More options below, but as an example:
-# 	run this script in the top level docs directory like: python3 scripts/archive_docs.py 0.3.4
+# 	run this script in the top level docs directory like: python3 scripts/archive_docs.py 1.0
 # When testing, run a clean (non-incremental) serve: jekyll serve
 
 if len(sys.argv) < 2:
@@ -114,6 +114,11 @@ def copy_file(source_path, target_path, version):
                     ]
                     doc["redirect_from"] = redirect_from_field_to_archive
 
+                doc.content = doc.content.replace(
+                    f"{{% link docs/",
+                    f"{{% link docs/archive/{version}/",
+                )
+
                 of.write(frontmatter.dumps(doc))
         else:
             shutil.copy(source_path, target_path)
@@ -148,13 +153,13 @@ def archive_installation_page(version):
     with open(f"_includes/installation.html") as main_installation_file, open(
         f"docs/archive/{version}/installation/index.html", "w"
     ) as archived_installation_file:
-        installation_page = main_installation_file.read()
+        installation_page = "\n" + main_installation_file.read()
         installation_page = installation_page.replace(" (Latest Release)", "")
         installation_page = installation_page.replace(
             "{{ site.currentduckdbversion }}", version
         )
         # we leave the variable "{{ site.nextjavaversion }}" as is
-        # to allow the "GitHub main (Bleeding Edge)" to move with new versions
+        # to allow the "GitHub main (Nightly Build)" to move with new versions
 
         archived_installation_file.write(
             frontmatter.dumps(current_installation_file_loaded)

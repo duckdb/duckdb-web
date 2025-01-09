@@ -1,9 +1,20 @@
 ---
 layout: docu
 title: Node.js API
+redirect_from:
+  - /docs/api/nodejs
+  - /docs/api/nodejs/
 ---
 
-This package provides a node.js API for [DuckDB](https://github.com/duckdb/duckdb), the "SQLite for Analytics". The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
+> Deprecated The old DuckDB Node.js package is deprecated.
+> Please use the [DuckDB Node Neo package]({% link docs/api/node_neo/overview.md %}) instead.
+
+This package provides a Node.js API for DuckDB.
+The API for this client is somewhat compliant to the SQLite Node.js client for easier transition.
+
+For TypeScript wrappers, see the [duckdb-async project](https://www.npmjs.com/package/duckdb-async).
+
+## Initializing
 
 Load the package and create a database object:
 
@@ -12,7 +23,7 @@ const duckdb = require('duckdb');
 const db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
 ```
 
-All options as described on [Database configuration](../../sql/configuration#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
+All options as described on [Database configuration]({% link docs/configuration/overview.md %}#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
 
 ```js
 const db = new duckdb.Database(':memory:', {
@@ -26,12 +37,15 @@ const db = new duckdb.Database(':memory:', {
 });
 ```
 
-Then you can run a query:
+## Running a Query
+
+The following code snippet runs a simple query using the `Database.all()` method.
 
 ```js
 db.all('SELECT 42 AS fortytwo', function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+    return;
   }
   console.log(res[0].fortytwo)
 });
@@ -40,16 +54,19 @@ db.all('SELECT 42 AS fortytwo', function(err, res) {
 Other available methods are `each`, where the callback is invoked for each row, `run` to execute a single statement without results and `exec`, which can execute several SQL commands at once but also does not return results. All those commands can work with prepared statements, taking the values for the parameters as additional arguments. For example like so:
 
 ```js
-db.all('SELECT ?::INTEGER AS fortytwo, ?::STRING AS hello', 42, 'Hello, World', function(err, res) {
+db.all('SELECT ?::INTEGER AS fortytwo, ?::VARCHAR AS hello', 42, 'Hello, World', function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+    return;
   }
   console.log(res[0].fortytwo)
   console.log(res[0].hello)
 });
 ```
 
-However, these are all shorthands for something much more elegant. A database can have multiple `Connection`s, those are created using `db.connect()`.
+## Connections
+
+A database can have multiple `Connection`s, those are created using `db.connect()`.
 
 ```js
 const con = db.connect();
@@ -57,32 +74,35 @@ const con = db.connect();
 
 You can create multiple connections, each with their own transaction context.
 
-
 `Connection` objects also contain shorthands to directly call `run()`, `all()` and `each()` with parameters and callbacks, respectively, for example:
 
 ```js
 con.all('SELECT 42 AS fortytwo', function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+    return;
   }
   console.log(res[0].fortytwo)
 });
 ```
 
+## Prepared Statements
+
 From connections, you can create prepared statements (and only that) using `con.prepare()`:
 
 ```js
-const stmt = con.prepare('select ?::INTEGER as fortytwo');
-``` 
+const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo');
+```
 
 To execute this statement, you can call for example `all()` on the `stmt` object:
 
 ```js
 stmt.all(42, function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+  } else {
+    console.log(res[0].fortytwo)
   }
-  console.log(res[0].fortytwo)
 });
 ```
 
@@ -97,26 +117,30 @@ for (let i = 0; i < 10; i++) {
 stmt.finalize();
 con.all('SELECT * FROM a', function(err, res) {
   if (err) {
-    throw err;
+    console.warn(err);
+  } else {
+    console.log(res)
   }
-  console.log(res)
 });
 ```
 
 `prepare()` can also take a callback which gets the prepared statement as an argument:
 
 ```js
-const stmt = con.prepare('select ?::INTEGER as fortytwo', function(err, stmt) {
+const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo', function(err, stmt) {
   stmt.all(42, function(err, res) {
     if (err) {
-      throw err;
+      console.warn(err);
+    } else {
+      console.log(res[0].fortytwo)
     }
-    console.log(res[0].fortytwo)
   });
 });
 ```
 
-[Apache Arrow](https://duckdb.org/docs/guides/python/sql_on_arrow) can be used to insert data into DuckDB without making a copy:
+## Inserting Data via Arrow
+
+[Apache Arrow]({% link docs/guides/python/sql_on_arrow.md %}) can be used to insert data into DuckDB without making a copy:
 
 ```js
 const arrow = require('apache-arrow');
@@ -130,18 +154,26 @@ const jsonData = [
 // note; doesn't work on Windows yet
 db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
     if (err) {
-        throw err;
+        console.warn(err);
+        return;
     }
 
     const arrowTable = arrow.tableFromJSON(jsonData);
     db.register_buffer("jsonDataTable", [arrow.tableToIPC(arrowTable)], true, (err, res) => {
         if (err) {
-            throw err;
+            console.warn(err);
+            return;
         }
 
         // `SELECT * FROM jsonDataTable` would return the entries in `jsonData`
     });
 });
-
 ```
 
+## Loading Unsigned Extensions
+
+To load [unsigned extensions]({% link docs/extensions/overview.md %}#ensuring-the-integrity-of-extensions), instantiate the database as follows:
+
+```js
+db = new duckdb.Database(':memory:', {"allow_unsigned_extensions": "true"});
+```

@@ -8,4 +8,8 @@ cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/.."
 . scripts/docker-vars.sh
 
 docker build . \
-    --tag ${JEKYLL_DOCKER_IMAGE_NAME}
+    --tag ${JEKYLL_DOCKER_IMAGE_NAME} \
+    --build-arg UID=$(id -u) \
+    --build-arg UNAME=$(id -un) \
+    --build-arg GID=$(id -g) \
+    --build-arg GNAME=$(id -gn)

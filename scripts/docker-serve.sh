@@ -13,6 +13,7 @@ docker run \
     --rm \
     --interactive \
     --name ${JEKYLL_DOCKER_CONTAINER_NAME} \
+    --user "$(id -un):$(id -gn)" \
     --volume="${PWD}:/srv/jekyll:Z" \
     --publish 4000:4000 \
     --publish 35729:35729 \

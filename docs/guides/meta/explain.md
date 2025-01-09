@@ -1,83 +1,99 @@
 ---
 layout: docu
-title: Explain
+title: "EXPLAIN: Inspect Query Plans"
 ---
-
-In order to view the query plan of a query, prepend `EXPLAIN` to a query.
 
 ```sql
 EXPLAIN SELECT * FROM tbl;
 ```
 
-By default only the final physical plan is shown. In order to see the unoptimized and optimized logical plans, change the `explain_output` setting:
+The `EXPLAIN` statement displays the physical plan, i.e., the query plan that will get executed,
+and is enabled by prepending the query with `EXPLAIN`.
+The physical plan is a tree of operators that are executed in a specific order to produce the result of the query.
+To generate an efficient physical plan, the query optimizer transforms the existing physical plan into a better physical plan.
+
+To demonstrate, see the below example:
 
 ```sql
-SET explain_output='all'; 
-```
+CREATE TABLE students (name VARCHAR, sid INTEGER);
+CREATE TABLE exams (eid INTEGER, subject VARCHAR, sid INTEGER);
+INSERT INTO students VALUES ('Mark', 1), ('Joe', 2), ('Matthew', 3);
+INSERT INTO exams VALUES (10, 'Physics', 1), (20, 'Chemistry', 2), (30, 'Literature', 3);
 
-Below is an example of running `EXPLAIN` on `Q1` of the TPC-H benchmark.
+EXPLAIN ANALYZE
+    SELECT name
+    FROM students
+    JOIN exams USING (sid)
+    WHERE name LIKE 'Ma%';
+```
 
 ```text
+┌─────────────────────────────┐
+│┌───────────────────────────┐│
+││       Physical Plan       ││
+│└───────────────────────────┘│
+└─────────────────────────────┘
 ┌───────────────────────────┐
-│          ORDER_BY         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│ lineitem.l_returnflag ASC │
-│ lineitem.l_linestatus ASC │
-└─────────────┬─────────────┘                             
-┌─────────────┴─────────────┐
-│       HASH_GROUP_BY       │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             #0            │
-│             #1            │
-│          sum(#2)          │
-│          sum(#3)          │
-│          sum(#4)          │
-│          sum(#5)          │
-│          avg(#6)          │
-│          avg(#7)          │
-│          avg(#8)          │
-│        count_star()       │
-└─────────────┬─────────────┘                             
-┌─────────────┴─────────────┐
 │         PROJECTION        │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│        l_returnflag       │
-│        l_linestatus       │
-│         l_quantity        │
-│      l_extendedprice      │
-│             #4            │
-│   (#4 * (1.00 + l_tax))   │
-│         l_quantity        │
-│      l_extendedprice      │
-│         l_discount        │
-└─────────────┬─────────────┘                             
+│            name           │
+└─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
-│         PROJECTION        │
+│         HASH_JOIN         │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│        l_returnflag       │
-│        l_linestatus       │
-│         l_quantity        │
-│      l_extendedprice      │
-│ (l_extendedprice * (1.00 -│
-│        l_discount))       │
-│           l_tax           │
-│         l_discount        │
-└─────────────┬─────────────┘                             
-┌─────────────┴─────────────┐
-│          SEQ_SCAN         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          lineitem         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│         l_shipdate        │
-│        l_returnflag       │
-│        l_linestatus       │
-│         l_quantity        │
-│      l_extendedprice      │
-│         l_discount        │
-│           l_tax           │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│ Filters: l_shipdate<=1998 │
-│-09-02 AND l_shipdate ...  │
-│            NULL           │
-└───────────────────────────┘    
+│           INNER           │
+│         sid = sid         ├──────────────┐
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │              │
+│           EC: 1           │              │
+└─────────────┬─────────────┘              │
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         SEQ_SCAN          ││           FILTER          │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           exams           ││     prefix(name, 'Ma')    │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│            sid            ││           EC: 1           │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││                           │
+│           EC: 3           ││                           │
+└───────────────────────────┘└─────────────┬─────────────┘
+                             ┌─────────────┴─────────────┐
+                             │         SEQ_SCAN          │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │          students         │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │            sid            │
+                             │            name           │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │ Filters: name>=Ma AND name│
+                             │  <Mb AND name IS NOT NULL │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │           EC: 1           │
+                             └───────────────────────────┘
 ```
+
+Note that the query is not actually executed – therefore, we can only see the estimated cardinality (`EC`) for each operator, which is calculated by using the statistics of the base tables and applying heuristics for each operator.
+
+## Additional Explain Settings
+
+The `EXPLAIN` statement supports additional settings that can be used to control the output. The following settings are available:
+
+The default setting. Only shows the physical plan.
+
+```sql
+PRAGMA explain_output = 'physical_only';
+```
+
+Shows only the optimized plan.
+
+```sql
+PRAGMA explain_output = 'optimized_only';
+```
+
+Shows both the physical and optimized plans.
+
+```sql
+PRAGMA explain_output = 'all';
+```
+
+## See Also
+
+For more information, see the [”Profiling” page]({% link docs/dev/profiling.md %}).

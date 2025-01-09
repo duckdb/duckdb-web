@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: LIMIT Clause
+title: LIMIT and OFFSET Clauses
 railroad: query_syntax/orderby.js
 ---
 
@@ -8,25 +8,40 @@ railroad: query_syntax/orderby.js
 
 Note that while `LIMIT` can be used without an `ORDER BY` clause, the results might not be deterministic without the `ORDER BY` clause. This can still be useful, however, for example when you want to inspect a quick snapshot of the data.
 
-
 ## Examples
 
+Select the first 5 rows from the addresses table:
+
 ```sql
--- select the first 5 rows from the addresses table
 SELECT *
 FROM addresses
 LIMIT 5;
--- select the 5 rows from the addresses table, starting at position 5 (i.e., ignoring the first 5 rows)
+```
+
+Select the 5 rows from the addresses table, starting at position 5 (i.e., ignoring the first 5 rows):
+
+```sql
 SELECT *
 FROM addresses
 LIMIT 5
 OFFSET 5;
--- select the top 5 cities with the highest population
-SELECT city, COUNT(*) AS population
+```
+
+Select the top 5 cities with the highest population:
+
+```sql
+SELECT city, count(*) AS population
 FROM addresses
 GROUP BY city
 ORDER BY population DESC
 LIMIT 5;
+```
+Select 10% of the rows from the addresses table:
+
+```sql
+SELECT *
+FROM addresses
+LIMIT 10%;
 ```
 
 ## Syntax

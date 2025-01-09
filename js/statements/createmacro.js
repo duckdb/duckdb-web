@@ -3,6 +3,8 @@ function GenerateCreateMacro(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Keyword("CREATE"),
+			GenerateOrReplace(),
+			GenerateTemporary(),
 			Choice(0, [
 				Keyword("MACRO"),
 				Keyword("FUNCTION"),
@@ -13,21 +15,23 @@ function GenerateCreateMacro(options = {}) {
 				Keyword(".")
 			]), "skip"),
 			Expression("macro-name"),
-			Keyword("("),
-			ZeroOrMore(Sequence([
-				Expression("param-name"),
-				], "skip")
-			),
-			ZeroOrMore(Sequence([
-				Expression("param-name"),
-				Keyword("="),
-				Expression("default-value")
-				], "skip")
-			),
-			Keyword(")"),
-			Keyword("AS"),
-			Optional("TABLE"),
-			Expression("expr")
+			OneOrMore(Sequence([
+				Keyword("("),
+				ZeroOrMore(Sequence([
+					Expression("param-name"),
+					], "skip")
+				),
+				ZeroOrMore(Sequence([
+					Expression("param-name"),
+					Keyword(":="),
+					Expression("default-value")
+					], "skip")
+				),
+				Keyword(")"),
+				Keyword("AS"),
+				Optional("TABLE"),
+				Expression("expr")
+			]), ",")
 		])
 	])
 }

@@ -8,11 +8,15 @@
           "url": "/docs/",
           "subfolderitems": [
             {
+              "page": "Getting Started",
+              "url": "/docs"
+            },
+            {
               "page": "Installation",
               "url": "/docs/installation/"
             },
             {
-              "page": "How-To Guides",
+              "page": "Guides",
               "url": "/docs/guides/index"
             },
             {
@@ -24,7 +28,7 @@
               "url": "/docs/api/overview"
             },
             {
-              "page": "SQL",
+              "page": "SQL Introduction",
               "url": "/docs/sql/introduction"
             },
             {
@@ -34,20 +38,34 @@
             {
               "page": "FAQ",
               "url": "/faq"
-            },
+            }
           ]
         },
         {
-          "page": "Blog",
-          "url": "/news/"
+          "page": "Resources",
+          "url": "#",
+          "subfolderitems": [
+            {
+              "page": "Blog",
+              "url": "/news/"
+            },
+            {
+              "page": "Media",
+              "url": "/media/"
+            },
+            {
+              "page": "Events",
+              "url": "/events/"
+            },
+            {
+              "page": "Webshop",
+              "url": "https://shop.duckdb.org/"
+            }
+          ]
         },
         {
           "page": "GitHub",
           "url": "https://github.com/duckdb/duckdb"
-        },
-        {
-          "page": "Contributing",
-          "url": "https://github.com/duckdb/duckdb/blob/main/CONTRIBUTING.md"
         }
       ]
     }

@@ -6,36 +6,36 @@ gold:
   - name: MotherDuck
     url: https://motherduck.com
     logoimg: motherduck.svg
-    
+
   - name: Posit
     url: https://posit.co
     logoimg: posit.svg
-    
+
 silver:
   - name: Mode
     url: https://mode.com
     logoimg: mode.svg
-    
+
   - name: Hex
     url: https://hex.tech
     logoimg: hex.svg
-    
+
   - name: Watershed
     url: https://watershedclimate.com
     logoimg: watershed.svg
-    
+
   - name: Relational AI
     url: https://relational.ai
-    logoimg: relational-ai.svg
+    logoimg: relationalai.svg
 
   - name: Rill
     url: https://www.rilldata.com
     logoimg: rill.svg
-    
+
   - name: Omni
     url: https://www.exploreomni.com
     logoimg: omni.svg
-        
+
   - name: Liquid Analytics
     url: https://www.liquidanalytics.com/
     logoimg: liquidanalytics.svg
@@ -43,7 +43,7 @@ silver:
   - name: Summer Forever
     url: https://www.summer.io/
     logoimg: summer.svg
-    
+
   - name: Hugging Face
     url: https://huggingface.co/
     logoimg: huggingface.svg
@@ -51,3 +51,20 @@ silver:
   - name: STOIC
     url: https://stoic.com/
     logoimg: stoic.svg
+
+  - name: BoilingData
+    url: https://www.boilingdata.com/
+    logoimg: boilingdata.svg
+
+  - name: Overture Maps Foundation
+    url: https://overturemaps.org/
+    logoimg: overturemaps.svg
+
+  - name: Crunchy Data
+    url: https://www.crunchydata.com/
+    logoimg: crunchydata.svg
+
+technical:
+  - name: Cloudflare
+    url: https://www.cloudflare.com/
+    logoimg: cloudflare.svg

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<title>{{ page.title }} – DuckDB Community Extensions</title>
+
+	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/communityextensions.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/darkmode.css?{{ site.data['hash'] }}">
+
+	<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/favicon_ce/favicon-48x48.png" sizes="48x48" />
+	<link rel="icon" type="image/svg+xml" href="{{ site.baseurl }}/images/favicon_ce/favicon.svg" />
+	<link rel="shortcut icon" href="{{ site.baseurl }}/images/favicon_ce/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon_ce/apple-touch-icon.png" />
+	<link rel="manifest" href="{{ site.baseurl }}/images/favicon_ce/site.webmanifest" />
+	<meta name="theme-color" content="#ffffff">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
+	{% seo title=false %}
+	
+	<script src="{{ site.baseurl }}/js/determine_color_scheme.js?{{ site.data['hash'] }}"></script>
+</head>
+
+<body class="documentation communityextensions{% if page.body_class %} {{ page.body_class }} {% endif %}">
+
+	<header>
+		<div class="headerline">
+			<div class="headercontent">
+				<a href="/community_extensions">
+					<div class="duckdbhome">
+						<img src="/images/logo-dl/DuckDB_Logo.png" alt="DuckDB Logo for Download" class="downloadlogo">
+						<div id="duckdb_logo"></div>
+					</div>
+				</a>
+				<div class="landingmenu">
+
+					{% include menu_secondary_ce.html %}
+
+					<nav class="mobile">
+						<div class="search_icon"></div>
+						<div class="hamburger hamburger--squeeze">
+							<div class="hamburger-box">
+								<div class="hamburger-inner"></div>
+							</div>
+						</div>
+					</nav>
+				</div>
+				<div class="options">
+					<button class="mode" data-mode="dark"></button>
+				</div>
+			</div>
+		</div>
+	</header>
+		
+	<main>
+		
+		{% include searchoverlay.html %}
+
+		{% include menu_sidebar_ce.html %}
+
+		
+		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " | remove: ":" }}{% endif %}">
+			
+			<div id="main_content_wrap">
+				<div class="headlinebar">
+					<div class="breadcrumbs">{% include breadcrumbs.html %}</div>
+
+					<div class="title">{{ page.title }}</div>
+				
+				</div>
+				
+				{% if page.extension_download_count %}
+				<div class="box-link-wrapper">
+					<div class="box-link auto-width downloads">
+						<a href="/community_extensions/download_metrics"></a>
+						<span class="symbol"><img src="/images/icons/download.svg"></span>
+						<span>Downloads</span>
+						<span class="week"><span class="num">{{ page.extension_download_count }}</span>this week</span>
+						<span class="chevron"></span>
+					</div>
+				</div>
+				{% endif %}
+
+				<p>{{ page.extension.description }}</p>
+				
+				{% if page.repo.github %}
+				<div class="box-link-wrapper">
+					<div class="box-link half-width">
+						<a href="https://github.com/{{ page.repo.github }}" target="_blank"></a>
+						<span class="symbol"><img src="/images/icons/github.svg"></span>
+						<span>Extension repository on GitHub</span>
+						<span class="chevron"></span>
+					</div>
+					{% if page.extension.name %}
+					<div class="box-link half-width">
+						<a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank"></a>
+						<span class="symbol"><img src="/images/icons/yaml.svg"></span>
+						<span>Extension descriptor (YAML)</span>
+						<span class="chevron"></span>
+					</div>
+					{% endif %}
+				</div>
+				{% endif %}
+				
+
+				{% assign ct = content | toc %}
+				{% include anchor_headings.html html=content %}
+				
+				{% if page.url contains 'overview' %}
+				<div class="index">
+					<h2 id="pages-in-this-section">Pages in This Section</h2>
+				</div>
+				{% endif %}
+				
+			</div>
+			
+		</div>
+
+	</main>
+
+
+	<script src="{{ site.baseurl }}/js/minisearch.js?{{ site.data['hash'] }}" defer></script>
+	<script src="{{ site.baseurl }}/js/search.js?{{ site.data['hash'] }}" defer></script>
+
+	<script src="{{ site.baseurl }}/js/lottie.min.js?{{ site.data['hash'] }}" defer></script>
+	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}" defer></script>
+	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}" defer></script>
+	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}" defer></script>
+
+</body>
+</html>

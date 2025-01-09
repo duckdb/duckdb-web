@@ -4,7 +4,7 @@
 # documentation.
 
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll site to Pages
+name: Build and (optionally) deploy Jekyll site to Pages
 
 on: [push, workflow_dispatch]
 
@@ -16,40 +16,74 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  group: "pages-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
   # Build job
   build_html:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0' # Not needed with a .ruby-version file
+          ruby-version: '3.3' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Get star count
+        env:
+          GH_TOKEN: ${{ secrets.GH_STAR_COUNT_TOKEN }}
+        run: |
+          STAR_COUNT=$(gh api repos/duckdb/duckdb | jq ".stargazers_count")
+          STAR_COUNT_FORMATTED=$(ruby -e 'printf("%.01fk", ARGV[0].to_i / 1000.0)' ${STAR_COUNT})
+          echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
+          echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
+          # add the update time to the index page of the documentation.
+          CURRENT_DATE=$(date +"%Y-%m-%d")
+          sed -i "s/You can also /The documentation was last updated on ${CURRENT_DATE}.\n\nYou can also /" docs/index.md
+      - name: Install Python requirements
+        run: pip install -r requirements.txt --break-system-packages
+      - name: Install zip
+        uses: montudor/action-zip@v1
+      - name: Fetch release calendar
+        run: python scripts/get_calendar.py
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5
+        if: github.repository == 'duckdb/duckdb-web'
+      - name: Publish past releases CSV file
+        run: |
+          cp _data/past_releases.csv data/duckdb-releases.csv
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-      - name: Upload HTML artifact
-        uses: actions/upload-artifact@v3
+      - name: Zip offline package
+        run: |
+          # create a copy of the _site directory for the offline package
+          cp -r _site duckdb-docs
+          echo "To browse the DuckDB website locally, run \`python -m http.server\` in this directory and connect to http://localhost:8000/" > duckdb-docs/README.md
+          # replace the necessary strings to ensure everything works properly after offline deployment.
+          python scripts/offline_docs_replace.py
+          # cleanup some directories, including the old (archive) pages
+          rm -rf scripts single-file-document duckdb-docs/docs/archive
+          # create archive
+          zip -qq -r duckdb-docs.zip duckdb-docs
+          # place the zip into the site
+          mv duckdb-docs.zip _site
+      - name: Upload site artifacts and zip archive
+        uses: actions/upload-artifact@v4
         with:
           name: html_artifact
           path: _site
 
   build_pdf:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
-      image: docker://pandoc/extra:3.1.1.0
+      image: docker://pandoc/extra:3.5
       options: --entrypoint=sh
     defaults:
       run:
@@ -60,39 +94,40 @@ jobs:
       - name: Setup Python
         run: |
           PYTHONUNBUFFERED=1
-          apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-          python3 -m ensurepip
+          apk add --update --no-cache python3 py3-pip
       - name: Install dependencies
-        run: pip3 install -r requirements.txt
+        run: pip3 install -r requirements.txt --break-system-packages
       - name: Concatenate files
         run: python3 concatenate_to_single_file.py
       - name: Convert with pandoc
         run: pandoc --defaults pandoc-configuration.yaml
-      - name: Move artifact
+      - name: Move artifacts
         run: |
           mkdir -p ../_pdf
+          sed -i '1s/^.*$/# DuckDB Documentation/' duckdb-docs.md
+          mv duckdb-docs.md ../_pdf
           mv duckdb-docs.pdf ../_pdf
       - name: Upload PDF artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pdf_artifact
           path: _pdf
 
   package_into_a_single_artifact:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [build_html, build_pdf]
     steps:
       # download both the html and the pdf artifacts into the _site directory
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: html_artifact
           path: _site
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: pdf_artifact
           path: _site
       - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
 
   # Deployment job
   deploy:
@@ -100,18 +135,18 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     if: github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: package_into_a_single_artifact
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
         with:
           timeout: 3600000
 
   LinkChecker:
     name: Link Checker
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: deploy
     steps:
       - uses: actions/checkout@v4
@@ -119,15 +154,15 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python 3.9
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
       - run: pip install linkchecker --user
 
-      - name: Link Checker on latest
+      - name: Link Checker on stable
         run: |
-          linkchecker https://duckdb.org/ --ignore-url 'https://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
+          linkchecker https://duckdb.org/ --ignore-url 'https?://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
           echo $?
 
       - run: cat report.html >> ${GITHUB_STEP_SUMMARY}

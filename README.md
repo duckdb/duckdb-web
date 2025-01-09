@@ -1,6 +1,11 @@
 <div align="center">
-  <img src="./images/logo-dl/DuckDB_Logo.svg" height="120">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="./images/logo-dl/DuckDB_Logo-horizontal.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="./images/logo-dl/DuckDB_Logo-horizontal-dark-mode.svg">
+    <img alt="DuckDB logo" src="./images/logo-dl/DuckDB_Logo-horizontal.svg" height="100">
+  </picture>
 </div>
+<br>
 
 # DuckDB Website
 
@@ -10,7 +15,7 @@ The DuckDB codebase is hosted in the [DuckDB repository](https://github.com/duck
 
 ## Building the site
 
-To build the site with Jekyll (installed locally or run via Docker), check out our [build guide](building.md).
+To build the site with Jekyll (installed locally or run via Docker), check out our [site build guide](BUILDING.md).
 
 ## Contributing
 

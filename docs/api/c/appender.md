@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: C API - Appender
+title: Appender
 ---
 
 Appenders are the most efficient way of loading data into DuckDB from within the C interface, and are recommended for
@@ -13,10 +13,10 @@ the row should be finished by calling `duckdb_appender_end_row`. After all rows 
 Note that `duckdb_appender_destroy` should always be called on the resulting appender, even if the function returns
 `DuckDBError`.
 
-## **Example**
+## Example
 
 ```c
-duckdb_query(con, "CREATE TABLE people(id INTEGER, name VARCHAR)", NULL);
+duckdb_query(con, "CREATE TABLE people (id INTEGER, name VARCHAR)", NULL);
 
 duckdb_appender appender;
 if (duckdb_appender_create(con, NULL, "people", &appender) == DuckDBError) {
@@ -36,582 +36,558 @@ duckdb_appender_end_row(appender);
 duckdb_appender_destroy(&appender);
 ```
 
-## **API Reference**
+## API Reference Overview
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_create">duckdb_appender_create</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table</span>, <span class="kt">duckdb_appender</span> *<span class="k">out_appender</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_appender_error">duckdb_appender_error</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_flush">duckdb_appender_flush</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_close">duckdb_appender_close</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_destroy">duckdb_appender_destroy</a></span>(<span class="kt">duckdb_appender</span> *<span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_begin_row">duckdb_appender_begin_row</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_end_row">duckdb_appender_end_row</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_bool">duckdb_append_bool</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">bool</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_int8">duckdb_append_int8</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">int8_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_int16">duckdb_append_int16</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">int16_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_int32">duckdb_append_int32</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">int32_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_int64">duckdb_append_int64</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">int64_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_hugeint">duckdb_append_hugeint</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_hugeint</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_uint8">duckdb_append_uint8</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">uint8_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_uint16">duckdb_append_uint16</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">uint16_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_uint32">duckdb_append_uint32</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">uint32_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_uint64">duckdb_append_uint64</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">uint64_t</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_float">duckdb_append_float</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">float</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_double">duckdb_append_double</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">double</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_date">duckdb_append_date</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_date</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_time">duckdb_append_time</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_time</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_timestamp">duckdb_append_timestamp</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_timestamp</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_interval">duckdb_append_interval</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_interval</span> <span class="k">value</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_varchar">duckdb_append_varchar</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_varchar_length">duckdb_append_varchar_length</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_blob">duckdb_append_blob</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="k">data</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_null">duckdb_append_null</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_data_chunk">duckdb_append_data_chunk</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>);
+<!-- This section is generated by scripts/generate_c_api_docs.py -->
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_appender_create"><span class="nf">duckdb_appender_create</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_appender_column_count"><span class="nf">duckdb_appender_column_count</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_appender_column_type"><span class="nf">duckdb_appender_column_type</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_appender_error"><span class="nf">duckdb_appender_error</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_flush"><span class="nf">duckdb_appender_flush</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_close"><span class="nf">duckdb_appender_close</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_destroy"><span class="nf">duckdb_appender_destroy</span></a>(<span class="kt">duckdb_appender</span> *<span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_begin_row"><span class="nf">duckdb_appender_begin_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_end_row"><span class="nf">duckdb_appender_end_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_default"><span class="nf">duckdb_append_default</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_bool"><span class="nf">duckdb_append_bool</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">bool</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_int8"><span class="nf">duckdb_append_int8</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int8_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_int16"><span class="nf">duckdb_append_int16</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int16_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_int32"><span class="nf">duckdb_append_int32</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int32_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_int64"><span class="nf">duckdb_append_int64</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int64_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_hugeint"><span class="nf">duckdb_append_hugeint</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_hugeint</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint8"><span class="nf">duckdb_append_uint8</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint8_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint16"><span class="nf">duckdb_append_uint16</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint16_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint32"><span class="nf">duckdb_append_uint32</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint32_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint64"><span class="nf">duckdb_append_uint64</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_uhugeint"><span class="nf">duckdb_append_uhugeint</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_uhugeint</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_float"><span class="nf">duckdb_append_float</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">float</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_double"><span class="nf">duckdb_append_double</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">double</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_date"><span class="nf">duckdb_append_date</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_date</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_time"><span class="nf">duckdb_append_time</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_time</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_timestamp"><span class="nf">duckdb_append_timestamp</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_interval"><span class="nf">duckdb_append_interval</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_interval</span> <span class="nv">value</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_varchar"><span class="nf">duckdb_append_varchar</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_varchar_length"><span class="nf">duckdb_append_varchar_length</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_blob"><span class="nf">duckdb_append_blob</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_null"><span class="nf">duckdb_append_null</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_append_data_chunk"><span class="nf">duckdb_append_data_chunk</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
 </code></pre></div></div>
 
-### `duckdb_appender_create`
+#### `duckdb_appender_create`
 
----
 Creates an appender object.
 
-#### Syntax
+Note that the object must be destroyed with `duckdb_appender_destroy`.
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_create</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">schema</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table</span>,<span class="k">
-</span>  <span class="kt">duckdb_appender</span> *<span class="k">out_appender
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_create</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>,<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> *<span class="nv">out_appender
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `connection`
+* `connection`: The connection context to create the appender in.
+* `schema`: The schema of the table to append to, or `nullptr` for the default schema.
+* `table`: The table name to append to.
+* `out_appender`: The resulting appender object.
 
-The connection context to create the appender in.
-* `schema`
-
-The schema of the table to append to, or `nullptr` for the default schema.
-* `table`
-
-The table name to append to.
-* `out_appender`
-
-The resulting appender object.
-* `returns`
+##### Return Value
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
 
+#### `duckdb_appender_column_count`
 
-### `duckdb_appender_error`
+Returns the number of columns in the table that belongs to the appender.
 
----
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_appender_column_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `appender`: The appender to get the column count from.
+
+##### Return Value
+
+The number of columns in the table.
+
+<br>
+
+#### `duckdb_appender_column_type`
+
+Returns the type of the column at the specified index.
+
+Note: The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_appender_column_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `appender`: The appender to get the column type from.
+* `col_idx`: The index of the column to get the type of.
+
+##### Return Value
+
+The duckdb_logical_type of the column.
+
+<br>
+
+#### `duckdb_appender_error`
+
 Returns the error message associated with the given appender.
 If the appender has no error message, this returns `nullptr` instead.
 
 The error message should not be freed. It will be de-allocated when `duckdb_appender_destroy` is called.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_appender_error</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_appender_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `appender`
+* `appender`: The appender to get the error from.
 
-The appender to get the error from.
-* `returns`
+##### Return Value
 
 The error message, or `nullptr` if there is none.
 
 <br>
 
+#### `duckdb_appender_flush`
 
-### `duckdb_appender_flush`
+Flush the appender to the table, forcing the cache of the appender to be cleared. If flushing the data triggers a
+constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
+It is not possible to append more values. Call duckdb_appender_error to obtain the error message followed by
+duckdb_appender_destroy to destroy the invalidated appender.
 
----
-Flush the appender to the table, forcing the cache of the appender to be cleared and the data to be appended to the
-base table.
+##### Syntax
 
-This should generally not be used unless you know what you are doing. Instead, call `duckdb_appender_destroy` when you
-are done with the appender.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_flush</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_flush</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `appender`
+* `appender`: The appender to flush.
 
-The appender to flush.
-* `returns`
+##### Return Value
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
 
+#### `duckdb_appender_close`
 
-### `duckdb_appender_close`
+Closes the appender by flushing all intermediate states and closing it for further appends. If flushing the data
+triggers a constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
+Call duckdb_appender_error to obtain the error message followed by duckdb_appender_destroy to destroy the invalidated
+appender.
 
----
-Close the appender, flushing all intermediate state in the appender to the table and closing it for further appends.
+##### Syntax
 
-This is generally not necessary. Call `duckdb_appender_destroy` instead.
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_close</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_close</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `appender`
+* `appender`: The appender to flush and close.
 
-The appender to flush and close.
-* `returns`
+##### Return Value
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
 
+#### `duckdb_appender_destroy`
 
-### `duckdb_appender_destroy`
+Closes the appender by flushing all intermediate states to the table and destroying it. By destroying it, this function
+de-allocates all memory associated with the appender. If flushing the data triggers a constraint violation,
+then all data is invalidated, and this function returns DuckDBError. Due to the destruction of the appender, it is no
+longer possible to obtain the specific error message with duckdb_appender_error. Therefore, call duckdb_appender_close
+before destroying the appender, if you need insights into the specific error.
 
----
-Close the appender and destroy it. Flushing all intermediate state in the appender to the table, and de-allocating
-all memory associated with the appender.
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_destroy</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> *<span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_destroy</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> *<span class="nv">appender
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `appender`
+* `appender`: The appender to flush, close and destroy.
 
-The appender to flush, close and destroy.
-* `returns`
+##### Return Value
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
 
+#### `duckdb_appender_begin_row`
 
-### `duckdb_appender_begin_row`
-
----
 A nop function, provided for backwards compatibility reasons. Does nothing. Only `duckdb_appender_end_row` is required.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_begin_row</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_begin_row</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_appender_end_row`
 
-### `duckdb_appender_end_row`
-
----
 Finish the current row of appends. After end_row is called, the next row can be appended.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_appender_end_row</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_end_row</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `appender`
+* `appender`: The appender.
 
-The appender.
-* `returns`
+##### Return Value
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
 
+#### `duckdb_append_default`
 
-### `duckdb_append_bool`
+Append a DEFAULT value (NULL if DEFAULT not available for column) to the appender.
 
----
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_default</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+</span>);
+</code></pre></div></div>
+<br>
+
+#### `duckdb_append_bool`
+
 Append a bool value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_bool</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">bool</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_bool</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">bool</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_int8`
 
-### `duckdb_append_int8`
-
----
 Append an int8_t value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_int8</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">int8_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int8</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">int8_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_int16`
 
-### `duckdb_append_int16`
-
----
 Append an int16_t value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_int16</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">int16_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int16</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">int16_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_int32`
 
-### `duckdb_append_int32`
-
----
 Append an int32_t value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_int32</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">int32_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int32</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">int32_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_int64`
 
-### `duckdb_append_int64`
-
----
 Append an int64_t value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_int64</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">int64_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int64</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">int64_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_hugeint`
 
-### `duckdb_append_hugeint`
-
----
 Append a duckdb_hugeint value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_hugeint</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_hugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_uint8`
 
-### `duckdb_append_uint8`
-
----
 Append a uint8_t value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_uint8</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint8</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_uint16`
 
-### `duckdb_append_uint16`
-
----
 Append a uint16_t value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_uint16</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">uint16_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint16</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">uint16_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_uint32`
 
-### `duckdb_append_uint32`
-
----
 Append a uint32_t value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_uint32</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">uint32_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint32</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">uint32_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_uint64`
 
-### `duckdb_append_uint64`
-
----
 Append a uint64_t value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_uint64</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">uint64_t</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint64</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">uint64_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_uhugeint`
 
-### `duckdb_append_float`
+Append a duckdb_uhugeint value to the appender.
 
----
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_uhugeint</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+<br>
+
+#### `duckdb_append_float`
+
 Append a float value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_float</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">float</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_float</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">float</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_double`
 
-### `duckdb_append_double`
-
----
 Append a double value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_double</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">double</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_double</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">double</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_date`
 
-### `duckdb_append_date`
-
----
 Append a duckdb_date value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_date</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_date</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_date</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_time`
 
-### `duckdb_append_time`
-
----
 Append a duckdb_time value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_time</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_time</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_time</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_time</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_timestamp`
 
-### `duckdb_append_timestamp`
-
----
 Append a duckdb_timestamp value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_timestamp</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_interval`
 
-### `duckdb_append_interval`
-
----
 Append a duckdb_interval value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_interval</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_interval</span> <span class="k">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_interval</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_interval</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_varchar`
 
-### `duckdb_append_varchar`
-
----
 Append a varchar value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_varchar</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_varchar</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_varchar_length`
 
-### `duckdb_append_varchar_length`
-
----
 Append a varchar value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_varchar_length</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">length
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_varchar_length</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_blob`
 
-### `duckdb_append_blob`
-
----
 Append a blob value to the appender.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_blob</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="k">data</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">length
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_blob</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_null`
 
-### `duckdb_append_null`
-
----
 Append a NULL value to the appender (of any type).
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_null</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_null</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 <br>
 
+#### `duckdb_append_data_chunk`
 
-### `duckdb_append_data_chunk`
-
----
 Appends a pre-filled data chunk to the specified appender.
 
 The types of the data chunk must exactly match the types of the table, no casting is performed.
 If the types do not match or the appender is in an invalid state, DuckDBError is returned.
 If the append is successful, DuckDBSuccess is returned.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_data_chunk</span>(<span class="k">
-</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_data_chunk</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `appender`
+* `appender`: The appender to append to.
+* `chunk`: The data chunk to append.
 
-The appender to append to.
-* `chunk`
-
-The data chunk to append.
-* `returns`
+##### Return Value
 
 The return state.
 
 <br>
-

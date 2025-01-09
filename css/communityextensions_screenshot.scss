@@ -1,0 +1,43 @@
+---
+---
+
+$ce_purple: #A293FF;
+$ce_purplelight: #f2f0fe;
+
+#duckdb_logo{
+	width: 290px;
+	background-image: url("/images/community_extensions/duckdb-community-extension-logo.svg");
+}
+
+.sidenavigation{
+	background-color: $ce_purplelight;
+}
+
+.breadcrumbs{
+	display: none;
+}
+
+.hamburger-inner, 
+.hamburger-inner:after, 
+.hamburger-inner:before,
+.hamburger.is-active .hamburger-inner, 
+.hamburger.is-active .hamburger-inner:after, 
+.hamburger.is-active .hamburger-inner:before{
+	background-color: $ce_purple;
+}
+
+.button.yellow{
+	background-color: $ce_purple;	
+}
+
+header .headerline .headercontent .landingmenu nav a:hover{
+	color: $ce_purple;
+}
+
+body.documentation.communityextensions header .headerline .headercontent .landingmenu nav .search_icon{
+	display: none;
+}
+
+code, pre {
+    font-size: 20px;
+}

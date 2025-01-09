@@ -4,23 +4,33 @@ title: Blob Type
 blurb: The blob (Binary Large OBject) type represents an arbitrary binary object stored in the database system.
 ---
 
+
 | Name | Aliases | Description |
 |:---|:---|:---|
-| blob | bytea | variable-length binary data |
+| `BLOB` | `BYTEA`, `BINARY`, `VARBINARY` | variable-length binary data |
 
 The blob (**B**inary **L**arge **OB**ject) type represents an arbitrary binary object stored in the database system. The blob type can contain any type of binary data with no restrictions. What the actual bytes represent is opaque to the database system.
 
+Create a `BLOB` value with a single byte (170):
+
 ```sql
--- create a blob value with a single byte (170)
 SELECT '\xAA'::BLOB;
--- create a blob value with three bytes (170, 171, 172)
+```
+
+Create a `BLOB` value with three bytes (170, 171, 172):
+
+```sql
 SELECT '\xAA\xAB\xAC'::BLOB;
--- create a blob value with two bytes (65, 66)
+```
+
+Create a `BLOB` value with two bytes (65, 66):
+
+```sql
 SELECT 'AB'::BLOB;
 ```
 
-Blobs are typically used to store non-textual objects that the database does not provide explicit support for, such as images. While blobs can hold objects up to 4GB in size, typically it is not recommended to store very large objects within the database system. In many situations it is better to store the large file on the file system, and store the path to the file in the database system in a `VARCHAR` field.
+Blobs are typically used to store non-textual objects that the database does not provide explicit support for, such as images. While blobs can hold objects up to 4 GB in size, typically it is not recommended to store very large objects within the database system. In many situations it is better to store the large file on the file system, and store the path to the file in the database system in a `VARCHAR` field.
 
 ## Functions
 
-See [Blob Functions](../functions/blob).
+See [Blob Functions]({% link docs/sql/functions/blob.md %}).

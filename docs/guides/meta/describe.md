@@ -3,39 +3,71 @@ layout: docu
 title: Describe
 ---
 
+## Describing a Table
+
+In order to view the schema of a table, use the `DESCRIBE` statement (or its aliases `DESC` and `SHOW`) followed by the table name.
+
+```sql
+CREATE TABLE tbl (i INTEGER PRIMARY KEY, j VARCHAR);
+DESCRIBE tbl;
+SHOW tbl; -- equivalent to DESCRIBE tbl;
+```
+
+
+| column_name | column_type | null | key  | default | extra |
+|-------------|-------------|------|------|---------|-------|
+| i           | INTEGER     | NO   | PRI  | NULL    | NULL  |
+| j           | VARCHAR     | YES  | NULL | NULL    | NULL  |
+
+## Describing a Query
+
 In order to view the schema of the result of a query, prepend `DESCRIBE` to a query.
 
 ```sql
 DESCRIBE SELECT * FROM tbl;
 ```
 
-In order to view the schema of a table, use `DESCRIBE` followed by the table name.
+
+| column_name | column_type | null | key  | default | extra |
+|-------------|-------------|------|------|---------|-------|
+| i           | INTEGER     | YES  | NULL | NULL    | NULL  |
+| j           | VARCHAR     | YES  | NULL | NULL    | NULL  |
+
+Note that there are subtle differences: compared to the result when [describing a table](#describing-a-table), nullability (`null`) and key information (`key`) are lost.
+
+## Using `DESCRIBE` in a Subquery
+
+`DESCRIBE` can be used a subquery. This allows creating a table from the description, for example:
 
 ```sql
-DESCRIBE tbl;
+CREATE TABLE tbl_description AS SELECT * FROM (DESCRIBE tbl);
 ```
 
-Below is an example of `DESCRIBE` on the `lineitem` table of TPC-H.
+## Describing Remote Tables
 
-```text
-┌─────────────────┬───────────────┬──────┬──────┬─────────┬───────┐
-│   column_name   │  column_type  │ null │ key  │ default │ extra │
-├─────────────────┼───────────────┼──────┼──────┼─────────┼───────┤
-│ l_orderkey      │ INTEGER       │ NO   │ NULL │ NULL    │ NULL  │
-│ l_partkey       │ INTEGER       │ NO   │ NULL │ NULL    │ NULL  │
-│ l_suppkey       │ INTEGER       │ NO   │ NULL │ NULL    │ NULL  │
-│ l_linenumber    │ INTEGER       │ NO   │ NULL │ NULL    │ NULL  │
-│ l_quantity      │ INTEGER       │ NO   │ NULL │ NULL    │ NULL  │
-│ l_extendedprice │ DECIMAL(15,2) │ NO   │ NULL │ NULL    │ NULL  │
-│ l_discount      │ DECIMAL(15,2) │ NO   │ NULL │ NULL    │ NULL  │
-│ l_tax           │ DECIMAL(15,2) │ NO   │ NULL │ NULL    │ NULL  │
-│ l_returnflag    │ VARCHAR       │ NO   │ NULL │ NULL    │ NULL  │
-│ l_linestatus    │ VARCHAR       │ NO   │ NULL │ NULL    │ NULL  │
-│ l_shipdate      │ DATE          │ NO   │ NULL │ NULL    │ NULL  │
-│ l_commitdate    │ DATE          │ NO   │ NULL │ NULL    │ NULL  │
-│ l_receiptdate   │ DATE          │ NO   │ NULL │ NULL    │ NULL  │
-│ l_shipinstruct  │ VARCHAR       │ NO   │ NULL │ NULL    │ NULL  │
-│ l_shipmode      │ VARCHAR       │ NO   │ NULL │ NULL    │ NULL  │
-│ l_comment       │ VARCHAR       │ NO   │ NULL │ NULL    │ NULL  │
-└─────────────────┴───────────────┴──────┴──────┴─────────┴───────┘
+It is possible to describe remote tables via the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) using the `DESCRIBE TABLE` statement. For example:
+
+```sql
+DESCRIBE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
 ```
+
+|               column_name               | column_type | null | key  | default | extra |
+|-----------------------------------------|-------------|------|------|---------|-------|
+| season_num                              | BIGINT      | YES  | NULL | NULL    | NULL  |
+| episode_num                             | BIGINT      | YES  | NULL | NULL    | NULL  |
+| aired_date                              | DATE        | YES  | NULL | NULL    | NULL  |
+| cnt_kirk_hookups                        | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_downed_redshirts                    | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_aliens_almost_took_over_planet     | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_aliens_almost_took_over_enterprise | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_vulcan_nerve_pinch                  | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_warp_speed_orders                   | BIGINT      | YES  | NULL | NULL    | NULL  |
+| highest_warp_speed_issued               | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_hand_phasers_fired                 | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_ship_phasers_fired                 | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_ship_photon_torpedos_fired         | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_transporter_pax                     | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_damn_it_jim_quote                   | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_im_givin_her_all_shes_got_quote     | BIGINT      | YES  | NULL | NULL    | NULL  |
+| cnt_highly_illogical_quote              | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_enterprise_saved_the_day           | BIGINT      | YES  | NULL | NULL    | NULL  |

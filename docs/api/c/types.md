@@ -1,56 +1,60 @@
 ---
 layout: docu
-title: C API - Types
+title: Types
 ---
 
 DuckDB is a strongly typed database system. As such, every column has a single type specified. This type is constant
 over the entire column. That is to say, a column that is labeled as an `INTEGER` column will only contain `INTEGER`
 values.
 
-DuckDB also supports columns of composite types. For example, it is possible to define an array of integers (`INT[]`). It is also possible to define types as arbitrary structs (`ROW(i INTEGER, j VARCHAR)`). For that reason, native DuckDB type objects are not mere enums, but a class that can potentially be nested.
+DuckDB also supports columns of composite types. For example, it is possible to define an array of integers (`INTEGER[]`). It is also possible to define types as arbitrary structs (`ROW(i INTEGER, j VARCHAR)`). For that reason, native DuckDB type objects are not mere enums, but a class that can potentially be nested.
 
 Types in the C API are modeled using an enum (`duckdb_type`) and a complex class (`duckdb_logical_type`). For most primitive types, e.g., integers or varchars, the enum is sufficient. For more complex types, such as lists, structs or decimals, the logical type must be used.
 
-
-
 ```c
 typedef enum DUCKDB_TYPE {
-  DUCKDB_TYPE_INVALID,
-  DUCKDB_TYPE_BOOLEAN,
-  DUCKDB_TYPE_TINYINT,
-  DUCKDB_TYPE_SMALLINT,
-  DUCKDB_TYPE_INTEGER,
-  DUCKDB_TYPE_BIGINT,
-  DUCKDB_TYPE_UTINYINT,
-  DUCKDB_TYPE_USMALLINT,
-  DUCKDB_TYPE_UINTEGER,
-  DUCKDB_TYPE_UBIGINT,
-  DUCKDB_TYPE_FLOAT,
-  DUCKDB_TYPE_DOUBLE,
-  DUCKDB_TYPE_TIMESTAMP,
-  DUCKDB_TYPE_DATE,
-  DUCKDB_TYPE_TIME,
-  DUCKDB_TYPE_INTERVAL,
-  DUCKDB_TYPE_HUGEINT,
-  DUCKDB_TYPE_VARCHAR,
-  DUCKDB_TYPE_BLOB,
-  DUCKDB_TYPE_DECIMAL,
-  DUCKDB_TYPE_TIMESTAMP_S,
-  DUCKDB_TYPE_TIMESTAMP_MS,
-  DUCKDB_TYPE_TIMESTAMP_NS,
-  DUCKDB_TYPE_ENUM,
-  DUCKDB_TYPE_LIST,
-  DUCKDB_TYPE_STRUCT,
-  DUCKDB_TYPE_MAP,
-  DUCKDB_TYPE_UUID,
-  DUCKDB_TYPE_UNION,
-  DUCKDB_TYPE_BIT,
+  DUCKDB_TYPE_INVALID = 0,
+  DUCKDB_TYPE_BOOLEAN = 1,
+  DUCKDB_TYPE_TINYINT = 2,
+  DUCKDB_TYPE_SMALLINT = 3,
+  DUCKDB_TYPE_INTEGER = 4,
+  DUCKDB_TYPE_BIGINT = 5,
+  DUCKDB_TYPE_UTINYINT = 6,
+  DUCKDB_TYPE_USMALLINT = 7,
+  DUCKDB_TYPE_UINTEGER = 8,
+  DUCKDB_TYPE_UBIGINT = 9,
+  DUCKDB_TYPE_FLOAT = 10,
+  DUCKDB_TYPE_DOUBLE = 11,
+  DUCKDB_TYPE_TIMESTAMP = 12,
+  DUCKDB_TYPE_DATE = 13,
+  DUCKDB_TYPE_TIME = 14,
+  DUCKDB_TYPE_INTERVAL = 15,
+  DUCKDB_TYPE_HUGEINT = 16,
+  DUCKDB_TYPE_UHUGEINT = 32,
+  DUCKDB_TYPE_VARCHAR = 17,
+  DUCKDB_TYPE_BLOB = 18,
+  DUCKDB_TYPE_DECIMAL = 19,
+  DUCKDB_TYPE_TIMESTAMP_S = 20,
+  DUCKDB_TYPE_TIMESTAMP_MS = 21,
+  DUCKDB_TYPE_TIMESTAMP_NS = 22,
+  DUCKDB_TYPE_ENUM = 23,
+  DUCKDB_TYPE_LIST = 24,
+  DUCKDB_TYPE_STRUCT = 25,
+  DUCKDB_TYPE_MAP = 26,
+  DUCKDB_TYPE_ARRAY = 33,
+  DUCKDB_TYPE_UUID = 27,
+  DUCKDB_TYPE_UNION = 28,
+  DUCKDB_TYPE_BIT = 29,
+  DUCKDB_TYPE_TIME_TZ = 30,
+  DUCKDB_TYPE_TIMESTAMP_TZ = 31,
 } duckdb_type;
 ```
 
+## Functions
+
 The enum type of a column in the result can be obtained using the `duckdb_column_type` function. The logical type of a column can be obtained using the `duckdb_column_logical_type` function.
 
-#### **duckdb_value**
+### `duckdb_value`
 
 The `duckdb_value` functions will auto-cast values as required. For example, it is no problem to use
 `duckdb_value_double` on a column of type `duckdb_value_int32`. The value will be auto-cast and returned as a double.
@@ -60,95 +64,88 @@ The `duckdb_value_is_null` function can be used to check if a specific value is 
 
 The exception to the auto-cast rule is the `duckdb_value_varchar_internal` function. This function does not auto-cast and only works for `VARCHAR` columns. The reason this function exists is that the result does not need to be freed.
 
-> Note that `duckdb_value_varchar` and `duckdb_value_blob` require the result to be de-allocated using `duckdb_free`.
+> `duckdb_value_varchar` and `duckdb_value_blob` require the result to be de-allocated using `duckdb_free`.
 
-#### **duckdb_result_get_chunk**
+### `duckdb_fetch_chunk`
 
-The `duckdb_result_get_chunk` function can be used to read data chunks from a DuckDB result set, and is the most efficient way of reading data from a DuckDB result using the C API. It is also the only way of reading data of certain types from a DuckDB result. For example, the `duckdb_value` functions do not support structural reading of composite types (lists or structs) or more complex types like enums and decimals.
+The `duckdb_fetch_chunk` function can be used to read data chunks from a DuckDB result set, and is the most efficient way of reading data from a DuckDB result using the C API. It is also the only way of reading data of certain types from a DuckDB result. For example, the `duckdb_value` functions do not support structural reading of composite types (lists or structs) or more complex types like enums and decimals.
 
-For more information about data chunks, see the [documentation on data chunks](data_chunk).
+For more information about data chunks, see the [documentation on data chunks]({% link docs/api/c/data_chunk.md %}).
 
-## **API Reference**
+## API Reference Overview
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nf"><a href="#duckdb_result_get_chunk">duckdb_result_get_chunk</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">chunk_index</span>);
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_result_is_streaming">duckdb_result_is_streaming</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_result_chunk_count">duckdb_result_chunk_count</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>);
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_value_boolean">duckdb_value_boolean</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">int8_t</span> <span class="nf"><a href="#duckdb_value_int8">duckdb_value_int8</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">int16_t</span> <span class="nf"><a href="#duckdb_value_int16">duckdb_value_int16</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">int32_t</span> <span class="nf"><a href="#duckdb_value_int32">duckdb_value_int32</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">int64_t</span> <span class="nf"><a href="#duckdb_value_int64">duckdb_value_int64</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_hugeint</span> <span class="nf"><a href="#duckdb_value_hugeint">duckdb_value_hugeint</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="k">duckdb_decimal</span> <span class="nf"><a href="#duckdb_value_decimal">duckdb_value_decimal</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_value_uint8">duckdb_value_uint8</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">uint16_t</span> <span class="nf"><a href="#duckdb_value_uint16">duckdb_value_uint16</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">uint32_t</span> <span class="nf"><a href="#duckdb_value_uint32">duckdb_value_uint32</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">uint64_t</span> <span class="nf"><a href="#duckdb_value_uint64">duckdb_value_uint64</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">float</span> <span class="nf"><a href="#duckdb_value_float">duckdb_value_float</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">double</span> <span class="nf"><a href="#duckdb_value_double">duckdb_value_double</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_date</span> <span class="nf"><a href="#duckdb_value_date">duckdb_value_date</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_time</span> <span class="nf"><a href="#duckdb_value_time">duckdb_value_time</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_timestamp</span> <span class="nf"><a href="#duckdb_value_timestamp">duckdb_value_timestamp</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_interval</span> <span class="nf"><a href="#duckdb_value_interval">duckdb_value_interval</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_value_varchar">duckdb_value_varchar</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_value_varchar_internal">duckdb_value_varchar_internal</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="k">duckdb_string</span> <span class="nf"><a href="#duckdb_value_string_internal">duckdb_value_string_internal</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">duckdb_blob</span> <span class="nf"><a href="#duckdb_value_blob">duckdb_value_blob</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
-<span class="kt">bool</span> <span class="nf"><a href="#duckdb_value_is_null">duckdb_value_is_null</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
+<!-- This section is generated by scripts/generate_c_api_docs.py -->
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <a href="#duckdb_result_get_chunk"><span class="nf">duckdb_result_get_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">chunk_index</span>);
+<span class="kt">bool</span> <a href="#duckdb_result_is_streaming"><span class="nf">duckdb_result_is_streaming</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_result_chunk_count"><span class="nf">duckdb_result_chunk_count</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 </code></pre></div></div>
 
-### Date/Time/Timestamp Helpers
+### Date Time Timestamp Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <span class="nf"><a href="#duckdb_from_date">duckdb_from_date</a></span>(<span class="kt">duckdb_date</span> <span class="k">date</span>);
-<span class="kt">duckdb_date</span> <span class="nf"><a href="#duckdb_to_date">duckdb_to_date</a></span>(<span class="kt">duckdb_date_struct</span> <span class="k">date</span>);
-<span class="kt">duckdb_time_struct</span> <span class="nf"><a href="#duckdb_from_time">duckdb_from_time</a></span>(<span class="kt">duckdb_time</span> <span class="k">time</span>);
-<span class="kt">duckdb_time</span> <span class="nf"><a href="#duckdb_to_time">duckdb_to_time</a></span>(<span class="kt">duckdb_time_struct</span> <span class="k">time</span>);
-<span class="kt">duckdb_timestamp_struct</span> <span class="nf"><a href="#duckdb_from_timestamp">duckdb_from_timestamp</a></span>(<span class="kt">duckdb_timestamp</span> <span class="k">ts</span>);
-<span class="kt">duckdb_timestamp</span> <span class="nf"><a href="#duckdb_to_timestamp">duckdb_to_timestamp</a></span>(<span class="kt">duckdb_timestamp_struct</span> <span class="k">ts</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <a href="#duckdb_from_date"><span class="nf">duckdb_from_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">date</span>);
+<span class="kt">duckdb_date</span> <a href="#duckdb_to_date"><span class="nf">duckdb_to_date</span></a>(<span class="kt">duckdb_date_struct</span> <span class="nv">date</span>);
+<span class="kt">bool</span> <a href="#duckdb_is_finite_date"><span class="nf">duckdb_is_finite_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">date</span>);
+<span class="kt">duckdb_time_struct</span> <a href="#duckdb_from_time"><span class="nf">duckdb_from_time</span></a>(<span class="kt">duckdb_time</span> <span class="nv">time</span>);
+<span class="kt">duckdb_time_tz</span> <a href="#duckdb_create_time_tz"><span class="nf">duckdb_create_time_tz</span></a>(<span class="kt">int64_t</span> <span class="nv">micros</span>, <span class="kt">int32_t</span> <span class="nv">offset</span>);
+<span class="kt">duckdb_time_tz_struct</span> <a href="#duckdb_from_time_tz"><span class="nf">duckdb_from_time_tz</span></a>(<span class="kt">duckdb_time_tz</span> <span class="nv">micros</span>);
+<span class="kt">duckdb_time</span> <a href="#duckdb_to_time"><span class="nf">duckdb_to_time</span></a>(<span class="kt">duckdb_time_struct</span> <span class="nv">time</span>);
+<span class="kt">duckdb_timestamp_struct</span> <a href="#duckdb_from_timestamp"><span class="nf">duckdb_from_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
+<span class="kt">duckdb_timestamp</span> <a href="#duckdb_to_timestamp"><span class="nf">duckdb_to_timestamp</span></a>(<span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts</span>);
+<span class="kt">bool</span> <a href="#duckdb_is_finite_timestamp"><span class="nf">duckdb_is_finite_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
 </code></pre></div></div>
 
 ### Hugeint Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf"><a href="#duckdb_hugeint_to_double">duckdb_hugeint_to_double</a></span>(<span class="kt">duckdb_hugeint</span> <span class="k">val</span>);
-<span class="kt">duckdb_hugeint</span> <span class="nf"><a href="#duckdb_double_to_hugeint">duckdb_double_to_hugeint</a></span>(<span class="kt">double</span> <span class="k">val</span>);
-<span class="k">duckdb_decimal</span> <span class="nf"><a href="#duckdb_double_to_decimal">duckdb_double_to_decimal</a></span>(<span class="kt">double</span> <span class="k">val</span>, <span class="kt">uint8_t</span> <span class="k">width</span>, <span class="kt">uint8_t</span> <span class="k">scale</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_hugeint_to_double"><span class="nf">duckdb_hugeint_to_double</span></a>(<span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
+<span class="kt">duckdb_hugeint</span> <a href="#duckdb_double_to_hugeint"><span class="nf">duckdb_double_to_hugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
 </code></pre></div></div>
 
 ### Decimal Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf"><a href="#duckdb_decimal_to_double">duckdb_decimal_to_double</a></span>(<span class="k">duckdb_decimal</span> <span class="k">val</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
+<span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="kt">duckdb_decimal</span> <span class="nv">val</span>);
 </code></pre></div></div>
 
 ### Logical Type Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_logical_type">duckdb_create_logical_type</a></span>(<span class="k">duckdb_type</span> <span class="k">type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_list_type">duckdb_create_list_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_map_type">duckdb_create_map_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="k">value_type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_union_type">duckdb_create_union_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>, <span class="kt">idx_t</span> <span class="k">member_count</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_struct_type">duckdb_create_struct_type</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>, <span class="kt">idx_t</span> <span class="k">member_count</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_decimal_type">duckdb_create_decimal_type</a></span>(<span class="kt">uint8_t</span> <span class="k">width</span>, <span class="kt">uint8_t</span> <span class="k">scale</span>);
-<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_get_type_id">duckdb_get_type_id</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_width">duckdb_decimal_width</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_scale">duckdb_decimal_scale</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_decimal_internal_type">duckdb_decimal_internal_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_enum_internal_type">duckdb_enum_internal_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">uint32_t</span> <span class="nf"><a href="#duckdb_enum_dictionary_size">duckdb_enum_dictionary_size</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_enum_dictionary_value">duckdb_enum_dictionary_value</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_list_type_child_type">duckdb_list_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_map_type_key_type">duckdb_map_type_key_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_map_type_value_type">duckdb_map_type_value_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_struct_type_child_count">duckdb_struct_type_child_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_struct_type_child_name">duckdb_struct_type_child_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_struct_type_child_type">duckdb_struct_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_union_type_member_count">duckdb_union_type_member_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_union_type_member_name">duckdb_union_type_member_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_union_type_member_type">duckdb_union_type_member_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_logical_type">duckdb_destroy_logical_type</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">type</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_logical_type"><span class="nf">duckdb_create_logical_type</span></a>(<span class="kt">duckdb_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#duckdb_logical_type_get_alias"><span class="nf">duckdb_logical_type_get_alias</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">void</span> <a href="#duckdb_logical_type_set_alias"><span class="nf">duckdb_logical_type_set_alias</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">alias</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_list_type"><span class="nf">duckdb_create_list_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_array_type"><span class="nf">duckdb_create_array_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">array_size</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_map_type"><span class="nf">duckdb_create_map_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">value_type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_union_type"><span class="nf">duckdb_create_union_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_struct_type"><span class="nf">duckdb_create_struct_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_enum_type"><span class="nf">duckdb_create_enum_type</span></a>(<span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_decimal_type"><span class="nf">duckdb_create_decimal_type</span></a>(<span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_get_type_id"><span class="nf">duckdb_get_type_id</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">uint8_t</span> <a href="#duckdb_decimal_width"><span class="nf">duckdb_decimal_width</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">uint8_t</span> <a href="#duckdb_decimal_scale"><span class="nf">duckdb_decimal_scale</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_decimal_internal_type"><span class="nf">duckdb_decimal_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_enum_internal_type"><span class="nf">duckdb_enum_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">uint32_t</span> <a href="#duckdb_enum_dictionary_size"><span class="nf">duckdb_enum_dictionary_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#duckdb_enum_dictionary_value"><span class="nf">duckdb_enum_dictionary_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_list_type_child_type"><span class="nf">duckdb_list_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_array_type_child_type"><span class="nf">duckdb_array_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_array_type_array_size"><span class="nf">duckdb_array_type_array_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_key_type"><span class="nf">duckdb_map_type_key_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_value_type"><span class="nf">duckdb_map_type_value_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_struct_type_child_count"><span class="nf">duckdb_struct_type_child_count</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#duckdb_struct_type_child_name"><span class="nf">duckdb_struct_type_child_name</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_struct_type_child_type"><span class="nf">duckdb_struct_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_union_type_member_count"><span class="nf">duckdb_union_type_member_count</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#duckdb_union_type_member_name"><span class="nf">duckdb_union_type_member_name</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_union_type_member_type"><span class="nf">duckdb_union_type_member_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_logical_type"><span class="nf">duckdb_destroy_logical_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">type</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_register_logical_type"><span class="nf">duckdb_register_logical_type</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">con</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="nv">duckdb_create_type_info</span> <span class="nv">info</span>);
 </code></pre></div></div>
 
-### `duckdb_result_get_chunk`
+#### `duckdb_result_get_chunk`
 
----
+> Warning Deprecation notice. This method is scheduled for removal in a future release.
+
 Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
 
 The result must be destroyed with `duckdb_destroy_data_chunk`.
@@ -161,1549 +158,1071 @@ mixed with the legacy result functions).
 
 Use `duckdb_result_chunk_count` to figure out how many chunks there are in the result.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="k">duckdb_result_get_chunk</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> <span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">chunk_index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_result_get_chunk</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">chunk_index
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `result`
+* `result`: The result object to fetch the data chunk from.
+* `chunk_index`: The chunk index to fetch from.
 
-The result object to fetch the data chunk from.
-* `chunk_index`
-
-The chunk index to fetch from.
-* `returns`
+##### Return Value
 
 The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 
 <br>
 
+#### `duckdb_result_is_streaming`
 
-### `duckdb_result_is_streaming`
+> Warning Deprecation notice. This method is scheduled for removal in a future release.
 
----
 Checks if the type of the internal result is StreamQueryResult.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_result_is_streaming</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> <span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_result_is_streaming</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `result`
+* `result`: The result object to check.
 
-The result object to check.
-* `returns`
+##### Return Value
 
 Whether or not the result object is of the type StreamQueryResult
 
 <br>
 
+#### `duckdb_result_chunk_count`
 
-### `duckdb_result_chunk_count`
+> Warning Deprecation notice. This method is scheduled for removal in a future release.
 
----
 Returns the number of data chunks present in the result.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_result_chunk_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> <span class="k">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_result_chunk_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `result`
+* `result`: The result object
 
-The result object
-* `returns`
+##### Return Value
 
 Number of data chunks present in the result.
 
 <br>
 
+#### `duckdb_result_return_type`
 
-### `duckdb_value_boolean`
+Returns the return_type of the given result, or DUCKDB_RETURN_TYPE_INVALID on error
 
----
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_value_boolean</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_result_type</span> <span class="nv">duckdb_result_return_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `returns`
+* `result`: The result object
 
-The boolean value at the specified location, or false if the value cannot be converted.
+##### Return Value
 
-<br>
-
-
-### `duckdb_value_int8`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int8_t</span> <span class="k">duckdb_value_int8</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The int8_t value at the specified location, or 0 if the value cannot be converted.
+The return_type
 
 <br>
 
+#### `duckdb_from_date`
 
-### `duckdb_value_int16`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int16_t</span> <span class="k">duckdb_value_int16</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The int16_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_int32`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int32_t</span> <span class="k">duckdb_value_int32</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The int32_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_int64`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="k">duckdb_value_int64</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The int64_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_hugeint`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="k">duckdb_value_hugeint</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_hugeint value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_decimal`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_decimal</span> <span class="k">duckdb_value_decimal</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_decimal value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_uint8`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="k">duckdb_value_uint8</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The uint8_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_uint16`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint16_t</span> <span class="k">duckdb_value_uint16</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The uint16_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_uint32`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="k">duckdb_value_uint32</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The uint32_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_uint64`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> <span class="k">duckdb_value_uint64</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The uint64_t value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_float`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="k">duckdb_value_float</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The float value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_double`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="k">duckdb_value_double</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The double value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_date`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="k">duckdb_value_date</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_date value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_time`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="k">duckdb_value_time</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_time value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_timestamp`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="k">duckdb_value_timestamp</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_timestamp value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_interval`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_interval</span> <span class="k">duckdb_value_interval</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_interval value at the specified location, or 0 if the value cannot be converted.
-
-<br>
-
-
-### `duckdb_value_varchar`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_value_varchar</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `DEPRECATED`
-
-use duckdb_value_string instead. This function does not work correctly if the string contains null bytes.
-* `returns`
-
-The text value at the specified location as a null-terminated string, or nullptr if the value cannot be
-converted. The result must be freed with `duckdb_free`.
-
-<br>
-
-
-### `duckdb_value_varchar_internal`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_value_varchar_internal</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `DEPRECATED`
-
-use duckdb_value_string_internal instead. This function does not work correctly if the string contains
-null bytes.
-* `returns`
-
-The char* value at the specified location. ONLY works on VARCHAR columns and does not auto-cast.
-If the column is NOT a VARCHAR column this function will return NULL.
-
-The result must NOT be freed.
-
-<br>
-
-
-### `duckdb_value_string_internal`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_string</span> <span class="k">duckdb_value_string_internal</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `DEPRECATED`
-
-use duckdb_value_string_internal instead. This function does not work correctly if the string contains
-null bytes.
-* `returns`
-
-The char* value at the specified location. ONLY works on VARCHAR columns and does not auto-cast.
-If the column is NOT a VARCHAR column this function will return NULL.
-
-The result must NOT be freed.
-
-<br>
-
-
-### `duckdb_value_blob`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_blob</span> <span class="k">duckdb_value_blob</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-The duckdb_blob value at the specified location. Returns a blob with blob.data set to nullptr if the
-value cannot be converted. The resulting "blob.data" must be freed with `duckdb_free.`
-
-<br>
-
-
-### `duckdb_value_is_null`
-
----
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_value_is_null</span>(<span class="k">
-</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">row
-</span>);
-</code></pre></div></div>
-
-#### Parameters
-
----
-* `returns`
-
-Returns true if the value at the specified index is NULL, and false otherwise.
-
-<br>
-
-
-### `duckdb_from_date`
-
----
 Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_date_struct`).
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <span class="k">duckdb_from_date</span>(<span class="k">
-</span>  <span class="kt">duckdb_date</span> <span class="k">date
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <span class="nv">duckdb_from_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_date</span> <span class="nv">date
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `date`
+* `date`: The date object, as obtained from a `DUCKDB_TYPE_DATE` column.
 
-The date object, as obtained from a `DUCKDB_TYPE_DATE` column.
-* `returns`
+##### Return Value
 
 The `duckdb_date_struct` with the decomposed elements.
 
 <br>
 
+#### `duckdb_to_date`
 
-### `duckdb_to_date`
-
----
 Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="k">duckdb_to_date</span>(<span class="k">
-</span>  <span class="kt">duckdb_date_struct</span> <span class="k">date
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="nv">duckdb_to_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_date_struct</span> <span class="nv">date
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `date`
+* `date`: The year, month and date stored in a `duckdb_date_struct`.
 
-The year, month and date stored in a `duckdb_date_struct`.
-* `returns`
+##### Return Value
 
 The `duckdb_date` element.
 
 <br>
 
+#### `duckdb_is_finite_date`
 
-### `duckdb_from_time`
+Test a `duckdb_date` to see if it is a finite value.
 
----
-Decompose a `duckdb_time` object into hour, minute, second and microsecond (stored as `duckdb_time_struct`).
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_struct</span> <span class="k">duckdb_from_time</span>(<span class="k">
-</span>  <span class="kt">duckdb_time</span> <span class="k">time
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_date</span>(<span class="nv">
+</span>  <span class="kt">duckdb_date</span> <span class="nv">date
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `time`
+* `date`: The date object, as obtained from a `DUCKDB_TYPE_DATE` column.
 
-The time object, as obtained from a `DUCKDB_TYPE_TIME` column.
-* `returns`
+##### Return Value
+
+True if the date is finite, false if it is ±infinity.
+
+<br>
+
+#### `duckdb_from_time`
+
+Decompose a `duckdb_time` object into hour, minute, second and microsecond (stored as `duckdb_time_struct`).
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_struct</span> <span class="nv">duckdb_from_time</span>(<span class="nv">
+</span>  <span class="kt">duckdb_time</span> <span class="nv">time
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `time`: The time object, as obtained from a `DUCKDB_TYPE_TIME` column.
+
+##### Return Value
 
 The `duckdb_time_struct` with the decomposed elements.
 
 <br>
 
+#### `duckdb_create_time_tz`
 
-### `duckdb_to_time`
+Create a `duckdb_time_tz` object from micros and a timezone offset.
 
----
-Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_time_struct`).
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="k">duckdb_to_time</span>(<span class="k">
-</span>  <span class="kt">duckdb_time_struct</span> <span class="k">time
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_tz</span> <span class="nv">duckdb_create_time_tz</span>(<span class="nv">
+</span>  <span class="kt">int64_t</span> <span class="nv">micros</span>,<span class="nv">
+</span>  <span class="kt">int32_t</span> <span class="nv">offset
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `time`
+* `micros`: The microsecond component of the time.
+* `offset`: The timezone offset component of the time.
 
-The hour, minute, second and microsecond in a `duckdb_time_struct`.
-* `returns`
+##### Return Value
+
+The `duckdb_time_tz` element.
+
+<br>
+
+#### `duckdb_from_time_tz`
+
+Decompose a TIME_TZ objects into micros and a timezone offset.
+
+Use `duckdb_from_time` to further decompose the micros into hour, minute, second and microsecond.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_tz_struct</span> <span class="nv">duckdb_from_time_tz</span>(<span class="nv">
+</span>  <span class="kt">duckdb_time_tz</span> <span class="nv">micros
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `micros`: The time object, as obtained from a `DUCKDB_TYPE_TIME_TZ` column.
+
+<br>
+
+#### `duckdb_to_time`
+
+Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_time_struct`).
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="nv">duckdb_to_time</span>(<span class="nv">
+</span>  <span class="kt">duckdb_time_struct</span> <span class="nv">time
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `time`: The hour, minute, second and microsecond in a `duckdb_time_struct`.
+
+##### Return Value
 
 The `duckdb_time` element.
 
 <br>
 
+#### `duckdb_from_timestamp`
 
-### `duckdb_from_timestamp`
-
----
 Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp_struct</span> <span class="k">duckdb_from_timestamp</span>(<span class="k">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="k">ts
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp_struct</span> <span class="nv">duckdb_from_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">ts
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `ts`
+* `ts`: The ts object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
 
-The ts object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
-* `returns`
+##### Return Value
 
 The `duckdb_timestamp_struct` with the decomposed elements.
 
 <br>
 
+#### `duckdb_to_timestamp`
 
-### `duckdb_to_timestamp`
-
----
 Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="k">duckdb_to_timestamp</span>(<span class="k">
-</span>  <span class="kt">duckdb_timestamp_struct</span> <span class="k">ts
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="nv">duckdb_to_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `ts`
+* `ts`: The de-composed elements in a `duckdb_timestamp_struct`.
 
-The de-composed elements in a `duckdb_timestamp_struct`.
-* `returns`
+##### Return Value
 
 The `duckdb_timestamp` element.
 
 <br>
 
+#### `duckdb_is_finite_timestamp`
 
-### `duckdb_hugeint_to_double`
+Test a `duckdb_timestamp` to see if it is a finite value.
 
----
-Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` column) into a double.
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="k">duckdb_hugeint_to_double</span>(<span class="k">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_timestamp</span>(<span class="nv">
+</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">ts
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `val`
+* `ts`: The timestamp object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
 
-The hugeint value.
-* `returns`
+##### Return Value
+
+True if the timestamp is finite, false if it is ±infinity.
+
+<br>
+
+#### `duckdb_hugeint_to_double`
+
+Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` column) into a double.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_hugeint_to_double</span>(<span class="nv">
+</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">val
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `val`: The hugeint value.
+
+##### Return Value
 
 The converted `double` element.
 
 <br>
 
+#### `duckdb_double_to_hugeint`
 
-### `duckdb_double_to_hugeint`
-
----
 Converts a double value to a duckdb_hugeint object.
 
 If the conversion fails because the double value is too big the result will be 0.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="k">duckdb_double_to_hugeint</span>(<span class="k">
-</span>  <span class="kt">double</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="nv">duckdb_double_to_hugeint</span>(<span class="nv">
+</span>  <span class="kt">double</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `val`
+* `val`: The double value.
 
-The double value.
-* `returns`
+##### Return Value
 
 The converted `duckdb_hugeint` element.
 
 <br>
 
+#### `duckdb_double_to_decimal`
 
-### `duckdb_double_to_decimal`
-
----
 Converts a double value to a duckdb_decimal object.
 
 If the conversion fails because the double value is too big, or the width/scale are invalid the result will be 0.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_decimal</span> <span class="k">duckdb_double_to_decimal</span>(<span class="k">
-</span>  <span class="kt">double</span> <span class="k">val</span>,<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">width</span>,<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">scale
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_decimal</span> <span class="nv">duckdb_double_to_decimal</span>(<span class="nv">
+</span>  <span class="kt">double</span> <span class="nv">val</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">scale
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `val`
+* `val`: The double value.
 
-The double value.
-* `returns`
+##### Return Value
 
 The converted `duckdb_decimal` element.
 
 <br>
 
+#### `duckdb_decimal_to_double`
 
-### `duckdb_decimal_to_double`
-
----
 Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` column) into a double.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="k">duckdb_decimal_to_double</span>(<span class="k">
-</span>  <span class="k">duckdb_decimal</span> <span class="k">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_decimal_to_double</span>(<span class="nv">
+</span>  <span class="kt">duckdb_decimal</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `val`
+* `val`: The decimal value.
 
-The decimal value.
-* `returns`
+##### Return Value
 
 The converted `double` element.
 
 <br>
 
+#### `duckdb_create_logical_type`
 
-### `duckdb_create_logical_type`
+Creates a `duckdb_logical_type` from a primitive type.
+The resulting logical type must be destroyed with `duckdb_destroy_logical_type`.
 
----
-Creates a `duckdb_logical_type` from a standard primitive type.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+Returns an invalid logical type, if type is: `DUCKDB_TYPE_INVALID`, `DUCKDB_TYPE_DECIMAL`, `DUCKDB_TYPE_ENUM`,
+`DUCKDB_TYPE_LIST`, `DUCKDB_TYPE_STRUCT`, `DUCKDB_TYPE_MAP`, `DUCKDB_TYPE_ARRAY`, or `DUCKDB_TYPE_UNION`.
 
-This should not be used with `DUCKDB_TYPE_DECIMAL`.
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_logical_type</span>(<span class="k">
-</span>  <span class="k">duckdb_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_logical_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The primitive type to create.
 
-The primitive type to create.
-* `returns`
+##### Return Value
 
 The logical type.
 
 <br>
 
+#### `duckdb_logical_type_get_alias`
 
-### `duckdb_create_list_type`
+Returns the alias of a duckdb_logical_type, if set, else `nullptr`.
+The result must be destroyed with `duckdb_free`.
 
----
-Creates a list type from its child type.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_list_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_logical_type_get_alias</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type
 
-The child type of list type to create.
-* `returns`
+##### Return Value
+
+The alias or `nullptr`
+
+<br>
+
+#### `duckdb_logical_type_set_alias`
+
+Sets the alias of a duckdb_logical_type.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_logical_type_set_alias</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">alias
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `type`: The logical type
+* `alias`: The alias to set
+
+<br>
+
+#### `duckdb_create_list_type`
+
+Creates a LIST type from its child type.
+The return type must be destroyed with `duckdb_destroy_logical_type`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_list_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `type`: The child type of the list
+
+##### Return Value
 
 The logical type.
 
 <br>
 
+#### `duckdb_create_array_type`
 
-### `duckdb_create_map_type`
+Creates an ARRAY type from its child type.
+The return type must be destroyed with `duckdb_destroy_logical_type`.
 
----
-Creates a map type from its key type and value type.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_map_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>,<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">value_type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_array_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">array_size
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The child type of the array.
+* `array_size`: The number of elements in the array.
 
-The key type and value type of map type to create.
-* `returns`
+##### Return Value
 
 The logical type.
 
 <br>
 
+#### `duckdb_create_map_type`
 
-### `duckdb_create_union_type`
+Creates a MAP type from its key type and value type.
+The return type must be destroyed with `duckdb_destroy_logical_type`.
 
----
-Creates a UNION type from the passed types array
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_union_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">member_types</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">member_count
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_map_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">value_type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `types`
+* `key_type`: The map's key type.
+* `value_type`: The map's value type.
 
-The array of types that the union should consist of.
-* `type_amount`
-
-The size of the types array.
-* `returns`
+##### Return Value
 
 The logical type.
 
 <br>
 
+#### `duckdb_create_union_type`
 
-### `duckdb_create_struct_type`
+Creates a UNION type from the passed arrays.
+The return type must be destroyed with `duckdb_destroy_logical_type`.
 
----
-Creates a STRUCT type from the passed member name and type arrays.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_struct_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="k">member_types</span>,<span class="k">
-</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">member_count
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_union_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">member_count
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `member_types`
+* `member_types`: The array of union member types.
+* `member_names`: The union member names.
+* `member_count`: The number of union members.
 
-The array of types that the struct should consist of.
-* `member_names`
-
-The array of names that the struct should consist of.
-* `member_count`
-
-The number of members that were specified for both arrays.
-* `returns`
+##### Return Value
 
 The logical type.
 
 <br>
 
+#### `duckdb_create_struct_type`
 
-### `duckdb_create_decimal_type`
+Creates a STRUCT type based on the member types and names.
+The resulting type must be destroyed with `duckdb_destroy_logical_type`.
 
----
-Creates a `duckdb_logical_type` of type decimal with the specified width and scale
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_decimal_type</span>(<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">width</span>,<span class="k">
-</span>  <span class="kt">uint8_t</span> <span class="k">scale
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_struct_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">member_count
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `width`
+* `member_types`: The array of types of the struct members.
+* `member_names`: The array of names of the struct members.
+* `member_count`: The number of members of the struct.
 
-The width of the decimal type
-* `scale`
-
-The scale of the decimal type
-* `returns`
+##### Return Value
 
 The logical type.
 
 <br>
 
+#### `duckdb_create_enum_type`
 
-### `duckdb_get_type_id`
+Creates an ENUM type from the passed member name array.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
----
-Retrieves the type class of a `duckdb_logical_type`.
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_get_type_id</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_enum_type</span>(<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">member_count
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `member_names`: The array of names that the enum should consist of.
+* `member_count`: The number of elements that were specified in the array.
 
-The logical type object
-* `returns`
+##### Return Value
 
-The type id
+The logical type.
 
 <br>
 
+#### `duckdb_create_decimal_type`
 
-### `duckdb_decimal_width`
+Creates a DECIMAL type with the specified width and scale.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 
----
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_decimal_type</span>(<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
+</span>  <span class="kt">uint8_t</span> <span class="nv">scale
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `width`: The width of the decimal type
+* `scale`: The scale of the decimal type
+
+##### Return Value
+
+The logical type.
+
+<br>
+
+#### `duckdb_get_type_id`
+
+Retrieves the enum `duckdb_type` of a `duckdb_logical_type`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_get_type_id</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `type`: The logical type.
+
+##### Return Value
+
+The `duckdb_type` id.
+
+<br>
+
+#### `duckdb_decimal_width`
+
 Retrieves the width of a decimal type.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="k">duckdb_decimal_width</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_decimal_width</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
 
-The logical type object
-* `returns`
+##### Return Value
 
 The width of the decimal type
 
 <br>
 
+#### `duckdb_decimal_scale`
 
-### `duckdb_decimal_scale`
-
----
 Retrieves the scale of a decimal type.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="k">duckdb_decimal_scale</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_decimal_scale</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
 
-The logical type object
-* `returns`
+##### Return Value
 
 The scale of the decimal type
 
 <br>
 
+#### `duckdb_decimal_internal_type`
 
-### `duckdb_decimal_internal_type`
-
----
 Retrieves the internal storage type of a decimal type.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_decimal_internal_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_decimal_internal_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
 
-The logical type object
-* `returns`
+##### Return Value
 
 The internal type of the decimal type
 
 <br>
 
+#### `duckdb_enum_internal_type`
 
-### `duckdb_enum_internal_type`
-
----
 Retrieves the internal storage type of an enum type.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_enum_internal_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_enum_internal_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
 
-The logical type object
-* `returns`
+##### Return Value
 
 The internal type of the enum type
 
 <br>
 
+#### `duckdb_enum_dictionary_size`
 
-### `duckdb_enum_dictionary_size`
+Retrieves the dictionary size of the enum type.
 
----
-Retrieves the dictionary size of the enum type
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="k">duckdb_enum_dictionary_size</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nv">duckdb_enum_dictionary_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
 
-The logical type object
-* `returns`
+##### Return Value
 
 The dictionary size of the enum type
 
 <br>
 
+#### `duckdb_enum_dictionary_value`
 
-### `duckdb_enum_dictionary_value`
-
----
 Retrieves the dictionary value at the specified position from the enum.
 
-The result must be freed with `duckdb_free`
+The result must be freed with `duckdb_free`.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_enum_dictionary_value</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_enum_dictionary_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
+* `index`: The index in the dictionary
 
-The logical type object
-* `index`
-
-The index in the dictionary
-* `returns`
+##### Return Value
 
 The string value of the enum type. Must be freed with `duckdb_free`.
 
 <br>
 
+#### `duckdb_list_type_child_type`
 
-### `duckdb_list_type_child_type`
+Retrieves the child type of the given LIST type. Also accepts MAP types.
+The result must be freed with `duckdb_destroy_logical_type`.
 
----
-Retrieves the child type of the given list type.
+##### Syntax
 
-The result must be freed with `duckdb_destroy_logical_type`
-
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_list_type_child_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_list_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type, either LIST or MAP.
 
-The logical type object
-* `returns`
+##### Return Value
 
-The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
+The child type of the LIST or MAP type.
 
 <br>
 
+#### `duckdb_array_type_child_type`
 
-### `duckdb_map_type_key_type`
+Retrieves the child type of the given ARRAY type.
 
----
-Retrieves the key type of the given map type.
+The result must be freed with `duckdb_destroy_logical_type`.
 
-The result must be freed with `duckdb_destroy_logical_type`
+##### Syntax
 
-#### Syntax
-
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_map_type_key_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_array_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type. Must be ARRAY.
 
-The logical type object
-* `returns`
+##### Return Value
+
+The child type of the ARRAY type.
+
+<br>
+
+#### `duckdb_array_type_array_size`
+
+Retrieves the array size of the given array type.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_array_type_array_size</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `type`: The logical type object
+
+##### Return Value
+
+The fixed number of elements the values of this array type can store.
+
+<br>
+
+#### `duckdb_map_type_key_type`
+
+Retrieves the key type of the given map type.
+
+The result must be freed with `duckdb_destroy_logical_type`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_map_type_key_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `type`: The logical type object
+
+##### Return Value
 
 The key type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
 
+#### `duckdb_map_type_value_type`
 
-### `duckdb_map_type_value_type`
-
----
 Retrieves the value type of the given map type.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_map_type_value_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_map_type_value_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
 
-The logical type object
-* `returns`
+##### Return Value
 
 The value type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
 
+#### `duckdb_struct_type_child_count`
 
-### `duckdb_struct_type_child_count`
-
----
 Returns the number of children of a struct type.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_struct_type_child_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_struct_type_child_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
 
-The logical type object
-* `returns`
+##### Return Value
 
 The number of children of a struct type.
 
 <br>
 
+#### `duckdb_struct_type_child_name`
 
-### `duckdb_struct_type_child_name`
-
----
 Retrieves the name of the struct child.
 
-The result must be freed with `duckdb_free`
+The result must be freed with `duckdb_free`.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_struct_type_child_name</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_struct_type_child_name</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
+* `index`: The child index
 
-The logical type object
-* `index`
-
-The child index
-* `returns`
+##### Return Value
 
 The name of the struct type. Must be freed with `duckdb_free`.
 
 <br>
 
+#### `duckdb_struct_type_child_type`
 
-### `duckdb_struct_type_child_type`
-
----
 Retrieves the child type of the given struct type at the specified index.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_struct_type_child_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_struct_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
+* `index`: The child index
 
-The logical type object
-* `index`
-
-The child index
-* `returns`
+##### Return Value
 
 The child type of the struct type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
 
+#### `duckdb_union_type_member_count`
 
-### `duckdb_union_type_member_count`
-
----
 Returns the number of members that the union type has.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_union_type_member_count</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_union_type_member_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type (union) object
 
-The logical type (union) object
-* `returns`
+##### Return Value
 
 The number of members of a union type.
 
 <br>
 
+#### `duckdb_union_type_member_name`
 
-### `duckdb_union_type_member_name`
-
----
 Retrieves the name of the union member.
 
-The result must be freed with `duckdb_free`
+The result must be freed with `duckdb_free`.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_union_type_member_name</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_union_type_member_name</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
+* `index`: The child index
 
-The logical type object
-* `index`
-
-The child index
-* `returns`
+##### Return Value
 
 The name of the union member. Must be freed with `duckdb_free`.
 
 <br>
 
+#### `duckdb_union_type_member_type`
 
-### `duckdb_union_type_member_type`
-
----
 Retrieves the child type of the given union member at the specified index.
 
-The result must be freed with `duckdb_destroy_logical_type`
+The result must be freed with `duckdb_destroy_logical_type`.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_union_type_member_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
-</span>  <span class="kt">idx_t</span> <span class="k">index
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_union_type_member_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
+* `type`: The logical type object
+* `index`: The child index
 
-The logical type object
-* `index`
-
-The child index
-* `returns`
+##### Return Value
 
 The child type of the union member. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
 
+#### `duckdb_destroy_logical_type`
 
-### `duckdb_destroy_logical_type`
-
----
 Destroys the logical type and de-allocates all memory allocated for that type.
 
-#### Syntax
+##### Syntax
 
----
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_logical_type</span>(<span class="k">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="k">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_logical_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">type
 </span>);
 </code></pre></div></div>
 
-#### Parameters
+##### Parameters
 
----
-* `type`
-
-The logical type to destroy.
+* `type`: The logical type to destroy.
 
 <br>
 
+#### `duckdb_register_logical_type`
+
+Registers a custom type within the given connection.
+The type must have an alias
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_register_logical_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">con</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="nv">duckdb_create_type_info</span> <span class="nv">info
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `con`: The connection to use
+* `type`: The custom type to register
+
+##### Return Value
+
+Whether or not the registration was successful.
+
+<br>

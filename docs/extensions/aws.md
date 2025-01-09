@@ -1,32 +1,47 @@
 ---
 layout: docu
-title: AWS
+title: AWS Extension
+github_repository: https://github.com/duckdb/duckdb_aws
 ---
 
-The `aws` extension provides features that depend on the AWS SDK.
+The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities]({% link docs/extensions/httpfs/overview.md %}#s3-api), using the AWS SDK.
 
-> This extension is currently in an experimental state. Feel free to try it out, but be aware some things may not work as expected.
+> Warning In most cases, you will not need to explicitly interact with the `aws` extension.
+> It will automatically be invoked whenever you use DuckDB's [S3 Secret functionality]({% link docs/sql/statements/create_secret.md %}).
+> See the [`httpfs` extension's S3 capabilities]({% link docs/extensions/httpfs/overview.md %}#s3) for instructions.
 
-> Binaries are available in the main extension repository for DuckDB only for nightly builds at the moment, but will be available next release of DuckDB (v0.9.0).
+## Installing and Loading
 
-## Features
-
-| function | type | description | 
-|---|---|-------|
-| `load_aws_credentials` | `PRAGMA` function | Automatically loads the AWS credentials through the [AWS Default Credentials Provider Chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html) |
-
-## Usage
-
-### Load AWS Credentials
-
-Firstly ensure the `aws` and `httpfs` extensions are loaded and installed:
+The `aws` extension will be transparently [autoloaded]({% link docs/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL aws;
 LOAD aws;
+```
+
+## Related Extensions
+
+`aws` depends on `httpfs` extension capabilities, and both will be autoloaded on the first call to `load_aws_credentials`.
+If autoinstall or autoload are disabled, you can always explicitly install and load `httpfs` as follows:
+
+```sql
 INSTALL httpfs;
 LOAD httpfs;
 ```
+
+## Legacy Features
+
+> Deprecated The `load_aws_credentials` function is deprecated.
+
+Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/sql/statements/create_secret.md %}), to load the credentials automatically, the AWS extension provided
+a special function to load the AWS credentials in the [legacy authentication method]({% link docs/extensions/httpfs/s3api_legacy_authentication.md %}).
+
+| Function | Type | Description |
+|---|---|-------|
+| `load_aws_credentials` | `PRAGMA` function | Loads the AWS credentials through the [AWS Default Credentials Provider Chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html). |
+
+### Load AWS Credentials (Legacy)
 
 To load the AWS credentials, run:
 
@@ -34,14 +49,11 @@ To load the AWS credentials, run:
 CALL load_aws_credentials();
 ```
 
-```text
-┌─────────────────────────┬──────────────────────────┬──────────────────────┬───────────────┐
-│ loaded_access_key_id    │ loaded_secret_access_key │ loaded_session_token │ loaded_region │
-│       varchar           │         varchar          │       varchar        │    varchar    │
-├─────────────────────────┼──────────────────────────┼──────────────────────┼───────────────┤
-│ AKIAIOSFODNN7EXAMPLE    │ <redacted>               │                      │ eu-west-1     │
-└─────────────────────────┴──────────────────────────┴──────────────────────┴───────────────┘
-```
+<div class="monospace_table"></div>
+
+| loaded_access_key_id | loaded_secret_access_key | loaded_session_token | loaded_region |
+|----------------------|--------------------------|----------------------|---------------|
+| AKIAIOSFODNN7EXAMPLE | `<redacted>`             | NULL                 | us-east-2     |
 
 The function takes a string parameter to specify a specific profile:
 
@@ -49,34 +61,20 @@ The function takes a string parameter to specify a specific profile:
 CALL load_aws_credentials('minio-testing-2');
 ```
 
-```text
-┌──────────────────────┬──────────────────────────┬──────────────────────┬───────────────┐
-│ loaded_access_key_id │ loaded_secret_access_key │ loaded_session_token │ loaded_region │
-│       varchar        │         varchar          │       varchar        │    varchar    │
-├──────────────────────┼──────────────────────────┼──────────────────────┼───────────────┤
-│ minio_duckdb_user_2  │ <redacted>               │                      │ eu-west-2     │
-└──────────────────────┴──────────────────────────┴──────────────────────┴───────────────┘
-```
+<div class="monospace_table"></div>
+
+| loaded_access_key_id | loaded_secret_access_key | loaded_session_token | loaded_region |
+|----------------------|--------------------------|----------------------|---------------|
+| minio_duckdb_user_2  | `<redacted>`             | NULL                 | NULL          |
 
 There are several parameters to tweak the behavior of the call:
 
 ```sql
-CALL load_aws_credentials('minio-testing-2', set_region=false, redact_secret=false);
+CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret = false);
 ```
 
-```text
-┌──────────────────────┬──────────────────────────────┬──────────────────────┬───────────────┐
-│ loaded_access_key_id │   loaded_secret_access_key   │ loaded_session_token │ loaded_region │
-│       varchar        │           varchar            │       varchar        │    varchar    │
-├──────────────────────┼──────────────────────────────┼──────────────────────┼───────────────┤
-│ minio_duckdb_user_2  │ minio_duckdb_user_password_2 │                      │               │
-└──────────────────────┴──────────────────────────────┴──────────────────────┴───────────────┘
-```
+<div class="monospace_table"></div>
 
-## Related Extensions
-
-See also the [S3 API capabilities of the `httpfs` extension](httpfs#s3).
-
-## GitHub Repository
-
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_aws)
+| loaded_access_key_id | loaded_secret_access_key     | loaded_session_token | loaded_region |
+|----------------------|------------------------------|----------------------|---------------|
+| minio_duckdb_user_2  | minio_duckdb_user_password_2 | NULL                 | NULL          |

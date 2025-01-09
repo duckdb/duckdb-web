@@ -1,25 +1,43 @@
 ---
 layout: docu
-title: Vacuum
+title: VACUUM Statement
 railroad: statements/vacuum.js
 ---
 
-The `VACUUM` statement is primarily in place for PostgreSQL compatibility.
+The `VACUUM` statement alone does nothing and is at present provided for PostgreSQL-compatibility.
+The `VACUUM ANALYZE` statement recomputes table statistics if they have become stale due to table updates or deletions.
 
 ## Examples
 
+No-op:
+
 ```sql
--- No-op.
 VACUUM;
--- Rebuild database statistics.
+```
+
+Rebuild database statistics:
+
+```sql
 VACUUM ANALYZE;
--- Rebuild statistics for the table & column.
+```
+
+Rebuild statistics for the table and column:
+
+```sql
 VACUUM ANALYZE memory.main.my_table(my_column);
 ```
+
+Not supported:
+
+```sql
+VACUUM FULL; -- error
+```
+
+## Reclaiming Space
+
+The `VACUUM` statement does not reclaim space.
+For instruction on reclaiming space, refer to the [“Reclaiming space” page]({% link docs/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
 
 ## Syntax
 
 <div id="rrdiagram1"></div>
-
-The `VACUUM` statement alone does nothing. `VACUUM ANALYZE` will recompute table statistics if they
-have become stale due to table updates or deletions.

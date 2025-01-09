@@ -3,20 +3,14 @@ layout: docu
 title: SQL Introduction
 ---
 
-Here we provide an overview of how to perform simple operations in SQL. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
+Here we provide an overview of how to perform simple operations in SQL.
+This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL.
+This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/current/tutorial-sql-intro.html).
 
-In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page](../installation?environment=cli) for information on how to install the CLI. Launching the shell should give you the following prompt:
+> DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
+> The few exceptions to this are listed on the [PostgreSQL compatibility page]({% link docs/sql/dialect/postgresql_compatibility.md %}).
 
-```text
-v0.8.1 6536a77232
-Enter ".help" for usage hints.
-Connected to a transient in-memory database.
-Use ".open FILENAME" to reopen on a persistent database.
-D
-```
-
-
-> By launching the database like this, an **in-memory database is launched**. That means that no data is persisted on disk. To persist data on disk you should also pass a database path to the shell. The database will then be stored at that path and can be reloaded from disk later.
+In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page]({% link docs/installation/index.html %}?environment=cli) for information on how to install the CLI.
 
 ## Concepts
 
@@ -33,20 +27,20 @@ CREATE TABLE weather (
     city    VARCHAR,
     temp_lo INTEGER, -- minimum temperature on a day
     temp_hi INTEGER, -- maximum temperature on a day
-    prcp    REAL,
+    prcp    FLOAT,
     date    DATE
 );
 ```
 
 You can enter this into the shell with the line breaks. The command is not terminated until the semicolon.
 
-White space (i.e., spaces, tabs, and newlines) can be used freely in SQL commands. That means you can type the command aligned differently than above, or even all on one line. Two dash characters (`--`) introduce comments. Whatever follows them is ignored up to the end of the line. SQL is case insensitive about key words and identifiers.
+White space (i.e., spaces, tabs, and newlines) can be used freely in SQL commands. That means you can type the command aligned differently than above, or even all on one line. Two dash characters (`--`) introduce comments. Whatever follows them is ignored up to the end of the line. SQL is case-insensitive about keywords and identifiers. When returning identifiers, [their original cases are preserved]({% link docs/sql/dialect/keywords_and_identifiers.md %}#rules-for-case-sensitivity).
 
 In the SQL command, we first specify the type of command that we want to perform: `CREATE TABLE`. After that follows the parameters for the command. First, the table name, `weather`, is given. Then the column names and column types follow.
 
-`city VARCHAR` specifies that the table has a column called `city` that is of type `VARCHAR`. `VARCHAR` specifies a data type that can store text of arbitrary length. The temperature fields are stored in an `INTEGER` type, a type that stores integer numbers (i.e., whole numbers without a decimal point). `REAL`  columns store single precision floating-point numbers (i.e., numbers with a decimal point). `DATE` stores a date (i.e., year, month, day combination). `DATE` only stores the specific day, not a time associated with that day.
+`city VARCHAR` specifies that the table has a column called `city` that is of type `VARCHAR`. `VARCHAR` specifies a data type that can store text of arbitrary length. The temperature fields are stored in an `INTEGER` type, a type that stores integer numbers (i.e., whole numbers without a decimal point). `FLOAT`  columns store single precision floating-point numbers (i.e., numbers with a decimal point). `DATE` stores a date (i.e., year, month, day combination). `DATE` only stores the specific day, not a time associated with that day.
 
-DuckDB supports the standard SQL types `INTEGER`, `SMALLINT`, `REAL`, `DOUBLE`, `DECIMAL`, `CHAR(n)`, `VARCHAR(n)`, `DATE`, `TIME` and `TIMESTAMP`.
+DuckDB supports the standard SQL types `INTEGER`, `SMALLINT`, `FLOAT`, `DOUBLE`, `DECIMAL`, `CHAR(n)`, `VARCHAR(n)`, `DATE`, `TIME` and `TIMESTAMP`.
 
 The second example will store cities and their associated geographical location:
 
@@ -61,7 +55,7 @@ CREATE TABLE cities (
 Finally, it should be mentioned that if you don't need a table any longer or want to recreate it differently you can remove it using the following command:
 
 ```sql
-DROP TABLE [tablename];
+DROP TABLE ⟨tablename⟩;
 ```
 
 ## Populating a Table with Rows
@@ -69,7 +63,8 @@ DROP TABLE [tablename];
 The insert statement is used to populate a table with rows:
 
 ```sql
-INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
+INSERT INTO weather
+VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
 ```
 
 Constants that are not numeric values (e.g., text and dates) must be surrounded by single quotes (`''`), as in the example. Input dates for the date type must be formatted as `'YYYY-MM-DD'`.
@@ -94,18 +89,19 @@ You can list the columns in a different order if you wish or even omit some colu
 INSERT INTO weather (date, city, temp_hi, temp_lo)
 VALUES ('1994-11-29', 'Hayward', 54, 37);
 ```
-Many developers consider explicitly listing the columns better style than relying on the order implicitly.
+
+> Tip Many developers consider explicitly listing the columns better style than relying on the order implicitly.
 
 Please enter all the commands shown above so you have some data to work with in the following sections.
 
-You could also have used `COPY` to load large amounts of data from CSV files. This is usually faster because the `COPY` command is optimized for this application while allowing less flexibility than `INSERT`. An example with [`weather.csv`](/data/weather.csv) would be:
+Alternatively, you can use the `COPY` statement. This is faster for large amounts of data because the `COPY` command is optimized for bulk loading while allowing less flexibility than `INSERT`. An example with [`weather.csv`](/data/weather.csv) would be:
 
 ```sql
 COPY weather
 FROM 'weather.csv';
 ```
 
-Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](../data/overview) for more information.
+Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section]({% link docs/data/overview.md %}) for more information.
 
 ## Querying a Table
 
@@ -116,7 +112,7 @@ SELECT *
 FROM weather;
 ```
 
-Here `*` is a shorthand for "all columns". So the same result would be had with:
+Here `*` is a shorthand for “all columns”. So the same result would be had with:
 
 ```sql
 SELECT city, temp_lo, temp_hi, prcp, date
@@ -125,57 +121,43 @@ FROM weather;
 
 The output should be:
 
-```text
-┌───────────────┬─────────┬─────────┬───────┬────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
-│    varchar    │  int32  │  int32  │ float │    date    │
-├───────────────┼─────────┼─────────┼───────┼────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
-│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
-│ Hayward       │      37 │      54 │       │ 1994-11-29 │
-└───────────────┴─────────┴─────────┴───────┴────────────┘
-```
+|     city      | temp_lo | temp_hi | prcp |    date    |
+|---------------|--------:|--------:|-----:|------------|
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
+| San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
+| Hayward       | 37      | 54      | NULL | 1994-11-29 |
 
 You can write expressions, not just simple column references, in the select list. For example, you can do:
 
 ```sql
-SELECT city, (temp_hi+temp_lo)/2 AS temp_avg, date
+SELECT city, (temp_hi + temp_lo) / 2 AS temp_avg, date
 FROM weather;
 ```
 
 This should give:
 
-```text
-┌───────────────┬──────────┬────────────┐
-│     city      │ temp_avg │    date    │
-│    varchar    │  double  │    date    │
-├───────────────┼──────────┼────────────┤
-│ San Francisco │     48.0 │ 1994-11-27 │
-│ San Francisco │     50.0 │ 1994-11-29 │
-│ Hayward       │     45.5 │ 1994-11-29 │
-└───────────────┴──────────┴────────────┘
-```
+|     city      | temp_avg |    date    |
+|---------------|---------:|------------|
+| San Francisco | 48.0     | 1994-11-27 |
+| San Francisco | 50.0     | 1994-11-29 |
+| Hayward       | 45.5     | 1994-11-29 |
 
 Notice how the `AS` clause is used to relabel the output column. (The `AS` clause is optional.)
 
-A query can be "qualified" by adding a `WHERE` clause that specifies which rows are wanted. The `WHERE` clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (`AND`, `OR`, and `NOT`) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
+A query can be “qualified” by adding a `WHERE` clause that specifies which rows are wanted. The `WHERE` clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (`AND`, `OR`, and `NOT`) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
 
 ```sql
 SELECT *
 FROM weather
-WHERE city = 'San Francisco' AND prcp > 0.0;
+WHERE city = 'San Francisco'
+  AND prcp > 0.0;
 ```
 
 Result:
 
-```text
-┌───────────────┬─────────┬─────────┬───────┬────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
-│    varchar    │  int32  │  int32  │ float │    date    │
-├───────────────┼─────────┼─────────┼───────┼────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
-└───────────────┴─────────┴─────────┴───────┴────────────┘
-```
+|     city      | temp_lo | temp_hi | prcp |    date    |
+|---------------|--------:|--------:|-----:|------------|
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 
 You can request that the results of a query be returned in sorted order:
 
@@ -185,16 +167,11 @@ FROM weather
 ORDER BY city;
 ```
 
-```text
-┌───────────────┬─────────┬─────────┬───────┬────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
-│    varchar    │  int32  │  int32  │ float │    date    │
-├───────────────┼─────────┼─────────┼───────┼────────────┤
-│ Hayward       │      37 │      54 │       │ 1994-11-29 │
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
-│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
-└───────────────┴─────────┴─────────┴───────┴────────────┘
-```
+|     city      | temp_lo | temp_hi | prcp |    date    |
+|---------------|--------:|--------:|-----:|------------|
+| Hayward       | 37      | 54      | NULL | 1994-11-29 |
+| San Francisco | 43      | 57      | 0.0  | 1994-11-29 |
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
 
 In this example, the sort order isn't fully specified, and so you might get the San Francisco rows in either order. But you'd always get the results shown above if you do:
 
@@ -211,15 +188,10 @@ SELECT DISTINCT city
 FROM weather;
 ```
 
-```text
-┌───────────────┐
-│     city      │
-│    varchar    │
-├───────────────┤
-│ Hayward       │
-│ San Francisco │
-└───────────────┘
-```
+|     city      |
+|---------------|
+| San Francisco |
+| Hayward       |
 
 Here again, the result row ordering might vary. You can ensure consistent results by using `DISTINCT` and `ORDER BY` together:
 
@@ -229,7 +201,7 @@ FROM weather
 ORDER BY city;
 ```
 
-## Joins Between Tables
+## Joins between Tables
 
 Thus far, our queries have only accessed one table at a time. Queries can access multiple tables at once, or access the same table in such a way that multiple rows of the table are being processed at the same time. A query that accesses multiple rows of the same or different tables at one time is called a join query. As an example, say you wish to list all the weather records together with the location of the associated city. To do that, we need to compare the city column of each row of the `weather` table with the name column of all rows in the `cities` table, and select the pairs of rows where these values match.
 
@@ -241,15 +213,10 @@ FROM weather, cities
 WHERE city = name;
 ```
 
-```text
-┌───────────────┬─────────┬─────────┬───────┬────────────┬───────────────┬───────────────┬───────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │     name      │      lat      │      lon      │
-│    varchar    │  int32  │  int32  │ float │    date    │    varchar    │ decimal(18,3) │ decimal(18,3) │
-├───────────────┼─────────┼─────────┼───────┼────────────┼───────────────┼───────────────┼───────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │ San Francisco │      -194.000 │        53.000 │
-│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │ San Francisco │      -194.000 │        53.000 │
-└───────────────┴─────────┴─────────┴───────┴────────────┴───────────────┴───────────────┴───────────────┘
-```
+|     city      | temp_lo | temp_hi | prcp |    date    |     name      |   lat    |  lon   |
+|---------------|--------:|--------:|-----:|------------|---------------|---------:|-------:|
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 | San Francisco | -194.000 | 53.000 |
+| San Francisco | 43      | 57      | 0.0  | 1994-11-29 | San Francisco | -194.000 | 53.000 |
 
 Observe two things about the result set:
 
@@ -262,15 +229,10 @@ FROM weather, cities
 WHERE city = name;
 ```
 
-```text
-┌───────────────┬─────────┬─────────┬───────┬────────────┬───────────────┬───────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │      lon      │      lat      │
-│    varchar    │  int32  │  int32  │ float │    date    │ decimal(18,3) │ decimal(18,3) │
-├───────────────┼─────────┼─────────┼───────┼────────────┼───────────────┼───────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │        53.000 │      -194.000 │
-│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │        53.000 │      -194.000 │
-└───────────────┴─────────┴─────────┴───────┴────────────┴───────────────┴───────────────┘
-```
+|     city      | temp_lo | temp_hi | prcp |    date    |  lon   |   lat    |
+|---------------|--------:|--------:|-----:|------------|-------:|---------:|
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 | 53.000 | -194.000 |
+| San Francisco | 43      | 57      | 0.0  | 1994-11-29 | 53.000 | -194.000 |
 
 Since the columns all had different names, the parser automatically found which table they belong to. If there were duplicate column names in the two tables you'd need to qualify the column names to show which one you meant, as in:
 
@@ -293,7 +255,7 @@ INNER JOIN cities ON weather.city = cities.name;
 
 This syntax is not as commonly used as the one above, but we show it here to help you understand the following topics.
 
-Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the `weather` table and for each row to find the matching cities row(s). If no matching row is found we want some "empty values" to be substituted for the `cities` table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
+Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the `weather` table and for each row to find the matching cities row(s). If no matching row is found we want some “empty values” to be substituted for the `cities` table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
 
 ```sql
 SELECT *
@@ -301,16 +263,11 @@ FROM weather
 LEFT OUTER JOIN cities ON weather.city = cities.name;
 ```
 
-```text
-┌───────────────┬─────────┬─────────┬───────┬────────────┬───────────────┬───────────────┬───────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │     name      │      lat      │      lon      │
-│    varchar    │  int32  │  int32  │ float │    date    │    varchar    │ decimal(18,3) │ decimal(18,3) │
-├───────────────┼─────────┼─────────┼───────┼────────────┼───────────────┼───────────────┼───────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │ San Francisco │      -194.000 │        53.000 │
-│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │ San Francisco │      -194.000 │        53.000 │
-│ Hayward       │      37 │      54 │       │ 1994-11-29 │               │               │               │
-└───────────────┴─────────┴─────────┴───────┴────────────┴───────────────┴───────────────┴───────────────┘
-```
+|     city      | temp_lo | temp_hi | prcp |    date    |     name      |   lat    |  lon   |
+|---------------|--------:|--------:|-----:|------------|---------------|---------:|-------:|
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 | San Francisco | -194.000 | 53.000 |
+| San Francisco | 43      | 57      | 0.0  | 1994-11-29 | San Francisco | -194.000 | 53.000 |
+| Hayward       | 37      | 54      | NULL | 1994-11-29 | NULL          | NULL     | NULL   |
 
 This query is called a left outer join because the table mentioned on the left of the join operator will have each of its rows in the output at least once, whereas the table on the right will only have those rows output that match some row of the left table. When outputting a left-table row for which there is no right-table match, empty (null) values are substituted for the right-table columns.
 
@@ -325,14 +282,9 @@ SELECT max(temp_lo)
 FROM weather;
 ```
 
-```text
-┌──────────────┐
-│ max(temp_lo) │
-│    int32     │
-├──────────────┤
-│           46 │
-└──────────────┘
-```
+| max(temp_lo) |
+|-------------:|
+| 46           |
 
 If we wanted to know what city (or cities) that reading occurred in, we might try:
 
@@ -350,14 +302,9 @@ FROM weather
 WHERE temp_lo = (SELECT max(temp_lo) FROM weather);
 ```
 
-```text
-┌───────────────┐
-│     city      │
-│    varchar    │
-├───────────────┤
-│ San Francisco │
-└───────────────┘
-```
+|     city      |
+|---------------|
+| San Francisco |
 
 This is OK because the subquery is an independent computation that computes its own aggregate separately from what is happening in the outer query.
 
@@ -369,17 +316,12 @@ FROM weather
 GROUP BY city;
 ```
 
-```text
-┌───────────────┬──────────────┐
-│     city      │ max(temp_lo) │
-│    varchar    │    int32     │
-├───────────────┼──────────────┤
-│ San Francisco │           46 │
-│ Hayward       │           37 │
-└───────────────┴──────────────┘
-```
+|     city      | max(temp_lo) |
+|---------------|--------------|
+| San Francisco | 46           |
+| Hayward       | 37           |
 
-Which gives us one output row per city. Each aggregate result is computed over the table rows matching that city. We can filter these grouped rows using HAVING:
+Which gives us one output row per city. Each aggregate result is computed over the table rows matching that city. We can filter these grouped rows using `HAVING`:
 
 ```sql
 SELECT city, max(temp_lo)
@@ -388,16 +330,11 @@ GROUP BY city
 HAVING max(temp_lo) < 40;
 ```
 
-```text
-┌─────────┬──────────────┐
-│  city   │ max(temp_lo) │
-│ varchar │    int32     │
-├─────────┼──────────────┤
-│ Hayward │           37 │
-└─────────┴──────────────┘
-```
+|  city   | max(temp_lo) |
+|---------|-------------:|
+| Hayward | 37           |
 
-which gives us the same results for only the cities that have all `temp_lo` values below 40. Finally, if we only care about cities whose names begin with "S", we can use the `LIKE` operator:
+which gives us the same results for only the cities that have all `temp_lo` values below 40. Finally, if we only care about cities whose names begin with `S`, we can use the `LIKE` operator:
 
 ```sql
 SELECT city, max(temp_lo)
@@ -407,7 +344,7 @@ GROUP BY city
 HAVING max(temp_lo) < 40;
 ```
 
-More information about the `LIKE` operator can be found [here](../sql/functions/patternmatching).
+More information about the `LIKE` operator can be found in the [pattern matching page]({% link docs/sql/functions/pattern_matching.md %}).
 
 It is important to understand the interaction between aggregates and SQL's `WHERE` and `HAVING` clauses. The fundamental difference between `WHERE` and `HAVING` is this: `WHERE` selects input rows before groups and aggregates are computed (thus, it controls which rows go into the aggregate computation), whereas `HAVING` selects group rows after groups and aggregates are computed. Thus, the `WHERE` clause must not contain aggregate functions; it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates. On the other hand, the `HAVING` clause always contains aggregate functions.
 
@@ -430,16 +367,11 @@ SELECT *
 FROM weather;
 ```
 
-```text
-┌───────────────┬─────────┬─────────┬───────┬────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
-│    varchar    │  int32  │  int32  │ float │    date    │
-├───────────────┼─────────┼─────────┼───────┼────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
-│ San Francisco │      41 │      55 │   0.0 │ 1994-11-29 │
-│ Hayward       │      35 │      52 │       │ 1994-11-29 │
-└───────────────┴─────────┴─────────┴───────┴────────────┘
-```
+|     city      | temp_lo | temp_hi | prcp |    date    |
+|---------------|--------:|--------:|-----:|------------|
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
+| San Francisco | 41      | 55      | 0.0  | 1994-11-29 |
+| Hayward       | 35      | 52      | NULL | 1994-11-29 |
 
 ## Deletions
 
@@ -457,20 +389,15 @@ SELECT *
 FROM weather;
 ```
 
-```text
-┌───────────────┬─────────┬─────────┬───────┬────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
-│    varchar    │  int32  │  int32  │ float │    date    │
-├───────────────┼─────────┼─────────┼───────┼────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
-│ San Francisco │      41 │      55 │   0.0 │ 1994-11-29 │
-└───────────────┴─────────┴─────────┴───────┴────────────┘
-```
+|     city      | temp_lo | temp_hi | prcp |    date    |
+|---------------|--------:|--------:|-----:|------------|
+| San Francisco | 46      | 50      | 0.25 | 1994-11-27 |
+| San Francisco | 41      | 55      | 0.0  | 1994-11-29 |
 
-One should be wary of statements of the form
+One should be cautious when issuing statements of the following form:
 
 ```sql
-DELETE FROM tablename;
+DELETE FROM ⟨table_name⟩;
 ```
 
-Without a qualification, `DELETE` will remove all rows from the given table, leaving it empty. The system will not request confirmation before doing this!
+> Warning Without a qualification, `DELETE` will remove all rows from the given table, leaving it empty. The system will not request confirmation before doing this.

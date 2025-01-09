@@ -8,19 +8,22 @@ The `HAVING` clause can be used after the `GROUP BY` clause to provide filter cr
 
 ## Examples
 
+Count the number of entries in the `addresses` table that belong to each different `city`, filtering out cities with a count below 50:
+
 ```sql
--- count the number of entries in the "addresses" table that belong to each different city
--- filtering out cities with a count below 50
-SELECT city, COUNT(*)
+SELECT city, count(*)
 FROM addresses
 GROUP BY city
-HAVING COUNT(*) >= 50;
--- compute the average income per city per street_name
--- filtering out cities with an average income bigger than twice the median income
-SELECT city, street_name, AVG(income)
+HAVING count(*) >= 50;
+```
+
+Compute the average income per city per `street_name`, filtering out cities with an average `income` bigger than twice the median `income`:
+
+```sql
+SELECT city, street_name, avg(income)
 FROM addresses
 GROUP BY city, street_name
-HAVING AVG(income) > 2 * MEDIAN(income);
+HAVING avg(income) > 2 * median(income);
 ```
 
 ## Syntax

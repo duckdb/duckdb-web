@@ -1,14 +1,15 @@
 ---
 layout: docu
-title: Alter View
+title: ALTER VIEW Statement
 ---
 
 The `ALTER VIEW` statement changes the schema of an existing view in the catalog.
 
 ## Examples
 
+Rename a view:
+
 ```sql
--- rename a view
 ALTER VIEW v1 RENAME TO v2;
 ```
 

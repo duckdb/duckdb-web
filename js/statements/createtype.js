@@ -4,9 +4,8 @@ function GenerateCreateType(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Sequence([
-				Keyword("CREATE"),
-				Keyword("TYPE"),
-				Expression("type-name"),
+				Keyword("CREATE TYPE"),
+				GenerateQualifiedTableName(options, "type-name"),
 				Keyword("AS"),
 			]),
             Choice(0, [

@@ -8,44 +8,48 @@ DuckDB-Wasm's (dynamic) extension loading is modeled after the regular DuckDB's 
 ## Format
 
 Extensions in DuckDB are binaries to be dynamically loaded via `dlopen`. A cryptographical signature is appended to the binary.
-An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's dlopen. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
+An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's `dlopen`. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
 This ensures the file remains a valid WebAssembly file.
 
-> Currently we require this custom section to be the last one, but this can be potentially relaxed in the future.
+> Currently, we require this custom section to be the last one, but this can be potentially relaxed in the future.
 
-## INSTALL and LOAD
+## `INSTALL` and `LOAD`
 
 The `INSTALL` semantic in native embeddings of DuckDB is to fetch, decompress from `gzip` and store data in local disk.
 The `LOAD` semantic in native embeddings of DuckDB is to (optionally) perform signature checks *and* dynamic load the binary with the main DuckDB binary.
 
-In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session storage. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of dlopen.
+In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session storage. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of `dlopen`.
 
 ## Autoloading
 
-[Autoloading](../../extensions/overview), i.e., the possibility for DuckDB to add extension functionality on-the-fly, is enabled by default in DuckDB-Wasm.
+[Autoloading]({% link docs/extensions/overview.md %}), i.e., the possibility for DuckDB to add extension functionality on-the-fly, is enabled by default in DuckDB-Wasm.
 
 ## List of Officially Available Extensions
 
 | Extension name | Description | Aliases |
 |---|-----|--|
-| autocomplete                                                                                                                         | Adds support for autocomplete in the shell                       |                 |
-| [excel](../../extensions/excel)                                                                                                      | Adds support for Excel-like format strings                       |                 |
-| [fts](../../extensions/full_text_search)                                                                                             | Adds support for Full-Text Search Indexes                        |                 |
-| icu                                                                                                                                  | Adds support for time zones and collations using the ICU library |                 |
-| inet                                                                                                                                 | Adds support for IP-related data types and functions             |                 |
-| [json](../../extensions/json)                                                                                                        | Adds support for JSON operations                                 |                 |
-| parquet                                                                                                                              | Adds support for reading and writing parquet files               |                 |
-| [sqlite_scanner](../../extensions/sqlite_scanner) [<span class="github">GitHub</span>](https://github.com/duckdblabs/sqlite_scanner) | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
-| sqlsmit                                                                                                                              |                                                                  |                 |
-| [substrait](../../extensions/substrait) [<span class="github">GitHub</span>](https://github.com/duckdblabs/substrait)                | Adds support for the Substrait integration                       |                 |
-| tpcds                                                                                                                                | Adds TPC-DS data generation and query support                    |                 |
-| tpch                                                                                                                                 | Adds TPC-H data generation and query support                     |                 |
+| [autocomplete]({% link docs/extensions/autocomplete.md %}) | Adds support for autocomplete in the shell                       |                 |
+| [excel]({% link docs/extensions/excel.md %})               | Adds support for Excel-like format strings                       |                 |
+| [fts]({% link docs/extensions/full_text_search.md %})      | Adds support for Full-Text Search Indexes                        |                 |
+| [icu]({% link docs/extensions/icu.md %})                   | Adds support for time zones and collations using the ICU library |                 |
+| [inet]({% link docs/extensions/inet.md %})                 | Adds support for IP-related data types and functions             |                 |
+| [json]({% link docs/data/json/overview.md %})              | Adds support for JSON operations                                 |                 |
+| [parquet]({% link docs/data/parquet/overview.md %})        | Adds support for reading and writing Parquet files               |                 |
+| [sqlite]({% link docs/extensions/sqlite.md %})             | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
+| [sqlsmith]({% link docs/extensions/sqlsmith.md %})         |                                                                  |                 |
+| [substrait]({% link docs/extensions/substrait.md %})       | Adds support for the Substrait integration                       |                 |
+| [tpcds]({% link docs/extensions/tpcds.md %})               | Adds TPC-DS data generation and query support                    |                 |
+| [tpch]({% link docs/extensions/tpch.md %})                 | Adds TPC-H data generation and query support                     |                 |
 
 WebAssembly is basically an additional platform, and there might be platform-specific limitations that make some extensions not able to match their native capabilities or to perform them in a different way. We will document here relevant differences for DuckDB-hosted extensions.
 
 ### HTTPFS
 
 The HTTPFS extension is, at the moment, not available in DuckDB-Wasm. Https protocol capabilities needs to go through an additional layer, the browser, which adds both differences and some restrictions to what is doable from native.
+
+Instead, DuckDB-Wasm has a separate implementation that for most purposes is interchangeable, but does not support all use cases (as it must follow security rules imposed by the browser, such as CORS).
+Due to this CORS restriction, any requests for data made using the HTTPFS extension must be to websites that allow (using CORS headers) the website hosting the DuckDB-Wasm instance to access that data.
+The [MDN website](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a great resource for more information regarding CORS.
 
 ## Extension Signing
 

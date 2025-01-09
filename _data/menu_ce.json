@@ -1,0 +1,57 @@
+{
+  "docsmenu": [
+    {
+      "page": "Overview",
+      "url": "/community_extensions/"
+    },
+    {
+      "page": "Documentation",
+      "url": "/community_extensions/documentation"
+    },
+    {
+      "page": "Development",
+      "url": "/community_extensions/development"
+    },
+    {
+      "page": "Download Metrics",
+      "url": "/community_extensions/download_metrics"
+    },
+    {
+      "page": "FAQ",
+      "url": "/community_extensions/faq"
+    },
+    {
+      "page": "Core Extensions",
+      "url": "/community_extensions/core_extensions"
+    },
+    {
+      "page": "List of Community Extensions",
+      "url": "/community_extensions/list_of_extensions"
+    }
+  ],
+  "extensions": [
+    "bigquery",
+    "crypto",
+    "evalexpr_rhai",
+    "flockmtl",
+    "h3",
+    "httpserver",
+    "magic",
+    "pivot_table",
+    "psql",
+    "scrooge",
+    "shellfs",
+    "ulid",
+    "chsql",
+    "duckpgq",
+    "faiss",
+    "fuzzycomplete",
+    "http_client",
+    "lindel",
+    "open_prompt",
+    "prql",
+    "quack",
+    "sheetreader",
+    "tarfs"
+  ]
+}

@@ -1,22 +1,20 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	{% if page.title == "DuckDB" %}
-    <title>{{ page.title }}</title>
+	<title>{{ page.title }}</title>
 	{% else %}
-    <title>{{ page.title }} - DuckDB</title>
+	<title>{{ page.title }} – DuckDB</title>
 	{% endif %}
 	
-	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
-	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/blog.css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css">
-	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<link rel="stylesheet" href="/css/railroad.css">
-	{% endif %}
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/blog.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css?{{ site.data['hash'] }}">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/darkmode.css?{{ site.data['hash'] }}">
 	
 	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon/favicon-32x32.png">
@@ -28,9 +26,17 @@
 	<meta name="msapplication-TileColor" content="#000000">
 	<meta name="msapplication-config" content="{{ site.baseurl }}/images/favicon/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
-	{% seo title=false %}
-
+	{% if page.url == "/news" or page.url == "/news/" %}
+		{% comment %}
+		<!-- skip description tags for the main blog page -->
+		{% endcomment %}
+	{% else %}
+		{% seo title=false %}
+	{% endif %}
+	
+	<script src="{{ site.baseurl }}/js/determine_color_scheme.js?{{ site.data['hash'] }}"></script>
 </head>
 <body {% if page.body_class %} class="{{ page.body_class }}" {% endif %}>
 	
@@ -38,9 +44,8 @@
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<!--<a href="{{ site.url }}{{ site.baseurl }}/">&#xe900;</a>-->
-					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/logo-dl/DuckDB_Logo.png" alt="DuckDB Logo for Download" class="downloadlogo"></a>
-					<div id="duckdbanimation" style="width: 109px; margin-top: 2px;"></div>
+					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/logo-dl/DuckDB_Logo-horizontal.svg" alt="DuckDB Logo for Download" class="downloadlogo"></a>
+					<div id="duckdb_logo"></div>
 				</div>
 				<div class="landingmenu">
 					
@@ -52,72 +57,92 @@
 						</div>
 					</div>
 				</div>
+				<div class="options">
+					<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
+					<button class="mode" data-mode="dark"></button>
+				</div>
 			</div>
 		</div>
 	</header>
-
+	
 	<main>
-		
 		<div class="newswrap">
-		
 			<div class="postwrap">
-				<div class="headlinebar">Blog</div>
 				<div class="postcontent">
-					{% if page.layoutpart == "postsoverview" %}
-						{% include anchor_headings.html html=content %}
-					{% else %}
-						<div class="singleentry">
-							<div class="infoline"><span>{{ page.date | date: "%Y-%m-%d" }}</span><span>{{ page.author }}</span></div>
-							<h1>{{ page.title }}</h1>
-							{% include anchor_headings.html html=content %}
-							<a href="/news/" class="backtoarchive">back to news archive <span></span></a>
+					<div class="singleentry{% if page.toc != false %} contains_toc{% endif %}">
+						<div class="content">
+							<div class="contentwidth">
+								<h1>{{ page.title }}</h1>
+								
+								{% if page.author and page.event == false or page.collection != "events" %}
+									<div class="infoline">
+										<div class="icon">
+											{% assign author = site.data.authors[page.author] %}
+											{% if author %}
+												<img src="{{ author.picture }}" alt="Author Avatar">
+											{% endif %}
+										</div>
+										<div>
+											<span class="author">{{ page.author }}</span>
+											{% if page.event != true and page.collection != "events" %}
+												<div class="publishedinfo">
+													<span>Published on</span>
+													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
+												</div>
+											{% endif %}
+										</div>
+									</div>
+								{% endif %}
+								
+								{% if page.event == true or page.collection == "events" %}
+									<div class="infoline">
+										<div class="scheduled">
+											<span>Scheduled for</span>
+											<span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
+										</div>
+										<div class="venue"><span>at {{ page.venue }}</span></div>
+									</div>
+								{% endif %}
+								
+								{% if page.excerpt != "" %}
+									<div class="excerpt">
+										{{ '_TL;DR: ' | append: page.excerpt | append: '_' | markdownify }}
+									</div>
+								{% endif %}
+								
+								{% include anchor_headings.html html=content %}
+							</div>
 						</div>
-					{% endif %}
+						
+						{% if page.toc != false %}
+							<div class="toc_sidebar">
+								{% assign toc_only = content | toc_only %}
+								{% assign toc_text_only = toc_only | strip_html | remove: ' ' %}
+								{% if toc_text_only.size > 10 %}
+									<div class="toc_menu">
+										<h5>In this article</h5>
+										{{ toc_only }}
+									</div>
+								{% endif %}
+							</div>
+						{% endif %}
+					</div>
 				</div>
-			</div>
-			
-			<div class="sidebar">
 				
-				<div class="newsarchive">
-					<h1><a href="/news/">Archive</a></h1>
-					{% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
-					<ul>
-					{% for year in postsByYear %}
-						<li><a href="/news/#y{{year.name}}">{{year.name}}</a></li>
-					{% endfor %}
-					</ul>
-				</div>
-				
-				<div class="latestnews">
-				
-					<h1><a href="/news/">Latest</a></h1>
-					<ul>
-					  {% for post in site.posts limit:5 %}
-					    <li>
-					    	<a href="{{ post.url }}">{{ post.title }}</a>
-					    </li>
-					  {% endfor %}
-					</ul>
-				</div>
+				{% include recent_posts_section.html %}
 				
 			</div>
-			
-			
 		</div>
-		
-		
 	</main>
-
-		
+	
 	{% include footer.html %}
 	
-	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
-	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
-	<script src="{{ site.baseurl }}/js/script.js"></script>
-	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-	<script src="/js/railroad.js"></script>
-	<script src="/js/{{ page.railroad }}"></script>
-	{% endif %}
-
+	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js" defer></script>
+	<script src="{{ site.baseurl }}/js/lottie.min.js" defer></script>
+	<script src="{{ site.baseurl }}/js/isotope.pkgd.min.js" defer></script>
+	<script src="{{ site.baseurl }}/js/script.js?{{ site.data['hash'] }}" defer></script>
+	<script src="{{ site.baseurl }}/js/copy_button.js" defer></script>
+	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}" defer></script>
+	
 </body>
 </html>

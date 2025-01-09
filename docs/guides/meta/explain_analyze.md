@@ -1,24 +1,36 @@
 ---
 layout: docu
-title: Profile Queries
+title: "EXPLAIN ANALYZE: Profile Queries"
 ---
 
-In order to profile a query, prepend `EXPLAIN ANALYZE` to a query.
+Prepending a query with `EXPLAIN ANALYZE` both pretty-prints the query plan,
+and executes it, providing run-time performance numbers for every operator, as well as the estimated cardinality (`EC`) and the actual cardinality.
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM tbl;
 ```
 
-The query plan will be pretty-printed to the screen using timings for every operator.
-
 Note that the **cumulative** wall-clock time that is spent on every operator is shown. When multiple threads are processing the query in parallel, the total processing time of the query may be lower than the sum of all the times spent on the individual operators.
 
-Below is an example of running `EXPLAIN ANALYZE` on `Q1` of the TPC-H benchmark.
+Below is an example of running `EXPLAIN ANALYZE` on a query:
+
+```sql
+CREATE TABLE students (name VARCHAR, sid INTEGER);
+CREATE TABLE exams (eid INTEGER, subject VARCHAR, sid INTEGER);
+INSERT INTO students VALUES ('Mark', 1), ('Joe', 2), ('Matthew', 3);
+INSERT INTO exams VALUES (10, 'Physics', 1), (20, 'Chemistry', 2), (30, 'Literature', 3);
+
+EXPLAIN ANALYZE
+    SELECT name
+    FROM students
+    JOIN exams USING (sid)
+    WHERE name LIKE 'Ma%';
+```
 
 ```text
 ┌─────────────────────────────────────┐
 │┌───────────────────────────────────┐│
-││        Total Time: 0.0496s        ││
+││        Total Time: 0.0008s        ││
 │└───────────────────────────────────┘│
 └─────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -26,82 +38,56 @@ Below is an example of running `EXPLAIN ANALYZE` on `Q1` of the TPC-H benchmark.
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
 │             0             │
 │          (0.00s)          │
-└─────────────┬─────────────┘                             
+└─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
-│          ORDER_BY         │
+│         PROJECTION        │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│ lineitem.l_returnflag ASC │
-│ lineitem.l_linestatus ASC │
+│            name           │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             4             │
+│             2             │
 │          (0.00s)          │
-└─────────────┬─────────────┘                             
+└─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
-│       HASH_GROUP_BY       │
+│         HASH_JOIN         │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             #0            │
-│             #1            │
-│          sum(#2)          │
-│          sum(#3)          │
-│          sum(#4)          │
-│          sum(#5)          │
-│          avg(#6)          │
-│          avg(#7)          │
-│          avg(#8)          │
-│        count_star()       │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             4             │
-│          (0.28s)          │
-└─────────────┬─────────────┘                             
+│           INNER           │
+│         sid = sid         │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ├──────────────┐
+│           EC: 1           │              │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │              │
+│             2             │              │
+│          (0.00s)          │              │
+└─────────────┬─────────────┘              │
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         SEQ_SCAN          ││           FILTER          │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           exams           ││     prefix(name, 'Ma')    │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│            sid            ││           EC: 1           │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           EC: 3           ││             2             │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││          (0.00s)          │
+│             3             ││                           │
+│          (0.00s)          ││                           │
+└───────────────────────────┘└─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
-│         PROJECTION        │
+│         SEQ_SCAN          │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│        l_returnflag       │
-│        l_linestatus       │
-│         l_quantity        │
-│      l_extendedprice      │
-│             #4            │
-│   (#4 * (1.00 + l_tax))   │
-│         l_quantity        │
-│      l_extendedprice      │
-│         l_discount        │
+│          students         │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          5916591          │
-│          (0.02s)          │
-└─────────────┬─────────────┘                             
-┌─────────────┴─────────────┐
-│         PROJECTION        │
+│            sid            │
+│            name           │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│        l_returnflag       │
-│        l_linestatus       │
-│         l_quantity        │
-│      l_extendedprice      │
-│ (l_extendedprice * (1.00 -│
-│        l_discount))       │
-│           l_tax           │
-│         l_discount        │
+│ Filters: name>=Ma AND name│
+│  <Mb AND name IS NOT NULL │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          5916591          │
-│          (0.02s)          │
-└─────────────┬─────────────┘                             
-┌─────────────┴─────────────┐
-│          SEQ_SCAN         │
+│           EC: 1           │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          lineitem         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│         l_shipdate        │
-│        l_returnflag       │
-│        l_linestatus       │
-│         l_quantity        │
-│      l_extendedprice      │
-│         l_discount        │
-│           l_tax           │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│ Filters: l_shipdate<=1998 │
-│-09-02 AND l_shipdate ...  │
-│            NULL           │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          5916591          │
-│          (0.08s)          │
-└───────────────────────────┘   
+│             2             │
+│          (0.00s)          │
+└───────────────────────────┘
 ```
+
+## See Also
+
+For more information, see the [”Profiling” page]({% link docs/dev/profiling.md %}).

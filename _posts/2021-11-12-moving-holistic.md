@@ -1,25 +1,18 @@
 ---
-
 layout: post
-title:  "Fast Moving Holistic Aggregates"
+title: "Fast Moving Holistic Aggregates"
 author: Richard Wesley
-excerpt_separator: <!--more-->
-
+excerpt: DuckDB, a free and open-source analytical data management system, has a windowing API that can compute complex moving aggregates like interquartile ranges and median absolute deviation much faster than the conventional approaches.
+tags: ["using DuckDB"]
 ---
 
-_TLDR: DuckDB, a free and Open-Source analytical data management system, has a windowing API
-that can compute complex moving aggregates like interquartile ranges and median absolute deviation
-much faster than the conventional approaches._
-
-In a [previous post](/2021/10/13/windowing.html),
+In a [previous post]({% post_url 2021-10-13-windowing %}),
 we described the DuckDB windowing architecture and mentioned the support for
 some advanced moving aggregates.
 In this post, we will compare the performance various possible moving implementations of these functions
 and explain how DuckDB's performant implementations work.
 
-<!--more-->
-
-## What is an Aggregate Function?
+## What Is an Aggregate Function?
 
 When people think of aggregate functions, they typically have something simple in mind such as `SUM` or `AVG`.
 But more generally, what an aggregate function does is _summarise_ a set of values into a single value.
@@ -65,7 +58,7 @@ In particular, here are the statistical holistic aggregates that DuckDB currentl
 Where things get really interesting is when we try to compute moving versions of these aggregates.
 For example, computing a moving `AVG` is fairly straightforward:
 You can subtract values that have left the frame and add in the new ones,
-or use the segment tree approach from the [previous post on windowing](/2021/10/13/windowing.html).
+or use the segment tree approach from the [previous post on windowing]({% post_url 2021-10-13-windowing %}).
 
 ### Python Example
 
@@ -77,7 +70,7 @@ for the following string data, using a frame that includes one element from each
 
 For this example we are using strings so we don't have to worry about interpolating values.
 
-```py
+```python
 data = ('a', 'b', 'c', 'd', 'c', 'b',)
 w = len(data)
 for row in range(w):
@@ -100,7 +93,7 @@ Fortunately, there are much faster approaches for all of them.
 
 ## Moving Holistic Aggregation
 
-In the [previous post on windowing](/2021/10/13/windowing.html),
+In the [previous post on windowing]({% post_url 2021-10-13-windowing %}),
 we explained the component operations used to implement a generic aggregate function
 (initialize, update, finalize, combine and window).
 In the rest of this post, we will dig into how they can be implemented for these complex aggregates.
@@ -216,38 +209,38 @@ When the mode becomes ambiguous (orange), we must recan the table.
 This approach is much faster,
 and in the benchmarks it comes in between 15 and 55 times faster than the other two.
 
-## Micro-Benchmarks
+## Microbenchmarks
 
 To benchmark the various implementations, we run moving window queries against a 10M table of integers:
 
 ```sql
-create table rank100 as
-    select b % 100 as a, b from range(10000000) tbl(b)
+CREATE TABLE rank100 AS
+    SELECT b % 100 AS a, b FROM range(10000000) tbl(b);
 ```
 
 The results are then re-aggregated down to one row to remove the impact of streaming the results.
 The frames are 100 elements wide, and the test is repeated with a fixed trailing frame:
 
 ```sql
-select quantile_cont(a, [0.25, 0.5, 0.75]) over (
-    order by b asc
-    rows between 100 preceding and current row) as iqr
-from rank100
+SELECT quantile_cont(a, [0.25, 0.5, 0.75]) OVER (
+    ORDER BY b ASC
+    ROWS BETWEEN 100 PRECEDING AND CURRENT ROW) AS iqr
+FROM rank100;
 ```
 
 and a variable frame that moves pseudo-randomly around the current value:
 
 ```sql
-select quantile_cont(a, [0.25, 0.5, 0.75]) over (
-    order by b asc
-    rows between mod(b * 47, 521) preceding and 100 - mod(b * 47, 521) following) as iqr
-from rank100
+SELECT quantile_cont(a, [0.25, 0.5, 0.75]) OVER (
+    ORDER BY b ASC
+    ROWS BETWEEN mod(b * 47, 521) PRECEDING AND 100 - mod(b * 47, 521) FOLLOWING) AS iqr
+FROM rank100;
 ```
 
 The two examples here are the interquartile range queries;
 the other queries use the single argument aggregates `median`, `mad` and `mode`.
 
-As a final step, we ran the same query with `COUNT(*)`,
+As a final step, we ran the same query with `count(*)`,
 which has the same overhead as the other benchmarks, but is trivial to compute
 (it just returns the frame size).
 That overhead was subtracted from the run times to give the algorithm timings:
@@ -274,5 +267,3 @@ DuckDB is a free and open-source database management system (MIT licensed).
 It aims to be the SQLite for Analytics,
 and provides a fast and efficient database system with zero external dependencies.
 It is available not just for Python, but also for C/C++, R, Java, and more.
-
-[Discuss this post on Hacker News](https://news.ycombinator.com/newest)

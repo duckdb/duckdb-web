@@ -1,11 +1,10 @@
 ---
 layout: post  
-title:  "DuckDB Time Zones: Supporting Calendar Extensions"
+title: "DuckDB Time Zones: Supporting Calendar Extensions"
 author: Richard Wesley
-excerpt_separator: <!--more-->
+excerpt: The DuckDB ICU extension now provides time zone support.
+tags: ["extensions"]
 ---
-
-*TLDR: The DuckDB ICU extension now provides time zone support.*
 
 Time zone support is a common request for temporal analytics, but the rules are complex and somewhat arbitrary. 
 The most well supported library for locale-specific operations is the [International Components for Unicode (ICU)](https://icu.unicode.org).
@@ -15,18 +14,15 @@ via the new `TIMESTAMP WITH TIME ZONE` (or `TIMESTAMPTZ` for short) data type. T
 
 In this post, we will describe how time works in DuckDB and what time zone functionality has been added.
 
-<!--more-->
-
-
 ## What is Time?
 
->People assume that time is a strict progression of cause to effect, 
->but actually from a non-linear, non-subjective viewpoint 
->it’s more like a big ball of wibbly wobbly timey wimey stuff. <br/>
+>People assume that time is a strict progression of cause to effect,
+>but actually from a non-linear, non-subjective viewpoint
+>it’s more like a big ball of wibbly wobbly timey wimey stuff.  
 > -- Doctor Who: Blink
 
 Time in databases can be very confusing because the way we talk about time is itself confusing.
-Local time, GMT, UTC, time zones, leap years, proleptic Gregorian calendars - it all looks like a big mess.
+Local time, GMT, UTC, time zones, leap years, proleptic Gregorian calendars – it all looks like a big mess.
 But if you step back, modeling time is actually fairly simple, and can be reduced to two pieces: instants and binning.
 
 ### Instants
@@ -39,17 +35,18 @@ In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00 +00:00`, and t
 In other words, a `TIMESTAMP` column contains instants.
 
 There are three other temporal types in SQL:
-* `DATE` - an integral count of days from a fixed date. In DuckDB, the fixed date is `1970-01-01`, again in UTC.
-* `TIME` - a (positive) count of microseconds up to a single day
-* `INTERVAL` - a set of fields for counting time differences. In DuckDB, intervals count months, days and microseconds. (Months are not completely well-defined, but when present, they represent 30 days.)
+
+* `DATE` – an integral count of days from a fixed date. In DuckDB, the fixed date is `1970-01-01`, again in UTC.
+* `TIME` – a (positive) count of microseconds up to a single day
+* `INTERVAL` – a set of fields for counting time differences. In DuckDB, intervals count months, days and microseconds. (Months are not completely well-defined, but when present, they represent 30 days.)
 
 None of these other temporal types except `TIME` can have a `WITH TIME ZONE` modifier (and shorter `TZ` suffix),
 but to understand what that modifier means, we first need to talk about *temporal binning*.
 
 ### Temporal Binning
 
-Instants are pretty straightforward - they are just a number - but binning is the part that trips people up.
-Binning is probably a familiar idea if you have worked with continuous data: 
+Instants are pretty straightforward – they are just a number – but binning is the part that trips people up.
+Binning is probably a familiar idea if you have worked with continuous data:
 You break up a set of values into ranges and map each value to the range (or *bin*) that it falls into.
 Temporal binning is just doing this to instants:
 
@@ -58,7 +55,7 @@ Temporal binning is just doing this to instants:
      width=600
      />
 
-Temporal binning systems are often called *calendars*, 
+Temporal binning systems are often called *calendars*,
 but we are going to avoid that term for now because calendars are usually associated with dates,
 and temporal binning also includes rules for time.
 These time rules are called *time zones*, and they also impact where the day boundaries used by the calendar fall.
@@ -68,7 +65,7 @@ For example, here is what the binning for a second time zone looks like at the e
      alt="Two Time Zones at the Epoch"
      width=600
      />
-     
+
 The most confusing thing about temporal binning is that there is more than one way to bin time,
 and it is not always obvious what binning should be used.
 For example, what I mean by "today" is a bin of instants often determined by where I live.
@@ -115,6 +112,7 @@ Thus a `TIMESTAMPTZ` column also stores instants,
 but expresses a "hint" that it should use a specific binning system.
 
 There are a number of operations that can be performed on instants without a binning system:
+
 * Comparing;
 * Sorting;
 * Increment (µs) difference;
@@ -141,22 +139,25 @@ DuckDB extensions can define and validate their own settings, and the ICU extens
 ```sql
 -- Load the extension
 -- This is not needed in Python or R, as the extension is already installed
-load icu;
+LOAD icu;
 
 -- Show the current time zone. The default is set to ICU's current time zone.
 SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
-----
+```
+```text
 TimeZone    Europe/Amsterdam    The current time zone   VARCHAR
-
+```
+```sql
 -- Choose a time zone.
-SET TimeZone='America/Los_Angeles';
+SET TimeZone = 'America/Los_Angeles';
 
 -- Emulate Postgres' time zone table
 SELECT name, abbrev, utc_offset 
 FROM pg_timezone_names() 
 ORDER BY 1 
 LIMIT 5;
-----
+```
+```text
 ACT ACT 09:30:00
 AET AET 10:00:00
 AGT AGT -03:00:00
@@ -172,15 +173,16 @@ Note that casting to a string is a binning operation because the text produced c
 
 Because timestamps that require custom binning have a different data type,
 the ICU extension can define additional functions with bindings to `TIMESTAMPTZ`:
-* `+` - Add an `INTERVAL` to a timestamp
-* `-` - Subtract an `INTERVAL` from a timestamp
-* `AGE` - Compute an `INTERVAL` describing the months/days/microseconds between two timestamps (or one timestamp and the current instant).
-* `DATE_DIFF` - Count part boundary crossings between two timestamp
-* `DATE_PART` - Extract a named timestamp part. This includes the part alias functions such as `YEAR`.
-* `DATE_SUB` - Count the number of complete parts between two timestamp
-* `DATE_TRUNC` - Truncate a timestamp to the given precision
-* `LAST_DAY` - Returns the last day of the month
-* `MAKE_TIMESTAMPTZ` - Constructs a `TIMESTAMPTZ` from parts, including an optional final time zone specifier. 
+
+* `+` – Add an `INTERVAL` to a timestamp
+* `-` – Subtract an `INTERVAL` from a timestamp
+* `AGE` – Compute an `INTERVAL` describing the months/days/microseconds between two timestamps (or one timestamp and the current instant).
+* `DATE_DIFF` – Count part boundary crossings between two timestamp
+* `DATE_PART` – Extract a named timestamp part. This includes the part alias functions such as `YEAR`.
+* `DATE_SUB` – Count the number of complete parts between two timestamp
+* `DATE_TRUNC` – Truncate a timestamp to the given precision
+* `LAST_DAY` – Returns the last day of the month
+* `MAKE_TIMESTAMPTZ` – Constructs a `TIMESTAMPTZ` from parts, including an optional final time zone specifier. 
 
 We have not implemented these functions for `TIMETZ` because this type has limited utility, 
 but it would not be difficult to add in the future.
@@ -194,38 +196,46 @@ ICU can also perform binning operations for some non-Gregorian calendars.
 We have added support for these calendars via a `Calendar` setting and the `icu_calendar_names` table function:
 
 ```sql
-load icu;
+LOAD icu;
 
 -- Show the current calendar. The default is set to ICU's current locale.
 SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
-----
+```
+```text
 Calendar    gregorian   The current calendar    VARCHAR
-
+```
+```sql
 -- List the available calendars
 SELECT DISTINCT name FROM icu_calendar_names()
 ORDER BY 1 DESC LIMIT 5;
-----
+```
+```text
 roc
 persian
 japanese
 iso8601
 islamic-umalqura
-
+```
+```sql
 -- Choose a calendar
 SET Calendar = 'japanese';
 
 -- Extract the current Japanese era number using Tokyo time
 SET TimeZone = 'Asia/Tokyo';
 
-SELECT era('2019-05-01 00:00:00+10'::TIMESTAMPTZ), era('2019-05-01 00:00:00+09'::TIMESTAMPTZ);
-----
+SELECT
+     era('2019-05-01 00:00:00+10'::TIMESTAMPTZ),
+     era('2019-05-01 00:00:00+09'::TIMESTAMPTZ);
+```
+```text
 235  236
 ```
 
 ### Caveats
 
-ICU has some differences in behaviour and representation from the DuckDB implementation. These are hopefully minor issues that should only be of concern to serious time nerds.
-* ICU represents instants as millisecond counts using a `double`. This makes it lose accuracy far from the epoch (e.g., around the first millenium)
+ICU has some differences in behavior and representation from the DuckDB implementation. These are hopefully minor issues that should only be of concern to serious time nerds.
+
+* ICU represents instants as millisecond counts using a `DOUBLE`. This makes it lose accuracy far from the epoch (e.g., around the first millennium)
 * ICU uses the Julian calendar for dates before the Gregorian change on `1582-10-15` instead of the proleptic Gregorian calendar. This means that dates prior to the changeover will differ, although ICU will give the date as actually written at the time.
 * ICU computes ages by using part increments instead of using the length of the earlier month like DuckDB and Postgres.
 
@@ -238,12 +248,14 @@ There is also the prospect for writing other custom binning systems via extensio
 ### DuckDB Features
 
 Here are some general projects that all binning systems could benefit from:
+
 * Add a `DATE_ROLL` function that emulates the ICU calendar `roll` operation for "rotating" around a containing bin;
 * Making casting operations extensible so extensions can add their own support;
 
 ### ICU Functionality
 
 ICU is a very rich library with a long pedigree, and there is much that could be done with the existing library:
+
 * Create a more general `MAKE_TIMESTAPTZ` variant that takes a `STRUCT` with the parts. This could be useful for some non-Gregorian calendars.
 * Extend the embedded data to contain locale temporal information (such as month names) and support formatting (`to_char`) and parsing (`to_timestamp`) of local dates. One issue here is that the ICU date formatting language is more sophisticated than the Postgres language, so multiple functions might be required (e.g., `icu_to_char`);
 * Extend the binning functions to take per-row calendar and time zone specifications to support row-level temporal analytics such as "what time of day did this happen"?
@@ -252,6 +264,7 @@ ICU is a very rich library with a long pedigree, and there is much that could be
 
 Because the time zone data type is defined in the main code base, but the calendar operations are provided by an extension,
 it is now possible to write application-specific extensions with custom calendar and time zone support such as:
+
 * Financial 4-4-5 calendars;
 * ISO week-based years;
 * Table-driven calendars;
@@ -265,4 +278,3 @@ We hope that the functionality provided can enable temporal analytic application
 We also look forward to seeing any custom calendar extensions that our users dream up!
 
 Last but not least, if you encounter any problems when using our integration, please open an issue in DuckDB's issue tracker!
-

@@ -109,7 +109,7 @@ def index_file(fname):
             'title': title,
             'text': text,
             'category': category,
-            'url': '/' + fname.replace('.md', ''),
+            'url': '/' + fname.replace('.md', '.html'),
             'blurb': blurb,
         }
     )
@@ -194,3 +194,5 @@ file_list.extend(function_list.values())
 
 with open('data/search_data.json', 'w+') as f:
     json.dump({'data': sorted(file_list, key=lambda x: x['title'])}, f, indent='\t')
+
+print("Search index file 'data/search_data.json' was generated successfully")

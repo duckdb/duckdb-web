@@ -1,0 +1,100 @@
+Service:RDT-ID,date,Service:Type,Service:Company,Service:Train number,Service:Completely cancelled,Service:Partly cancelled,Service:Maximum delay,Stop:RDT-ID,Stop:Station code,station,Stop:Arrival time,Stop:Arrival delay,Stop:Arrival cancelled,Stop:Departure time,Stop:Departure delay,Stop:Departure cancelled
+10367702,2023-01-01,Intercity,NS,1410,false,false,3,93067918,RTD,Rotterdam Centraal,,,,2023-01-01T02:00:00+01:00,1,false
+10367702,2023-01-01,Intercity,NS,1410,false,false,0,93067919,DT,Delft,2023-01-01T02:13:00+01:00,0,false,2023-01-01T02:13:00+01:00,0,false
+10367702,2023-01-01,Intercity,NS,1410,false,false,0,93067920,GV,Den Haag HS,2023-01-01T02:21:00+01:00,0,false,2023-01-01T02:22:00+01:00,0,false
+10367702,2023-01-01,Intercity,NS,1410,false,false,0,93067921,LEDN,Leiden Centraal,2023-01-01T02:35:00+01:00,0,false,2023-01-01T02:40:00+01:00,0,false
+10367702,2023-01-01,Intercity,NS,1410,false,false,0,93067922,SHL,Schiphol Airport,2023-01-01T02:56:00+01:00,0,false,2023-01-01T03:03:00+01:00,0,false
+10367702,2023-01-01,Intercity,NS,1410,false,false,0,93067923,ASS,Amsterdam Sloterdijk,2023-01-01T03:12:00+01:00,2,false,2023-01-01T03:12:00+01:00,2,false
+10367702,2023-01-01,Intercity,NS,1410,false,false,0,93067924,ASD,Amsterdam Centraal,2023-01-01T03:18:00+01:00,1,false,2023-01-01T03:19:00+01:00,3,false
+10367702,2023-01-01,Intercity,NS,1410,false,false,0,93067925,ASB,Amsterdam Bijlmer ArenA,2023-01-01T03:29:00+01:00,3,false,2023-01-01T03:30:00+01:00,3,false
+10367702,2023-01-01,Intercity,NS,1410,false,false,0,93067926,UT,Utrecht Centraal,2023-01-01T03:47:00+01:00,2,false,,,
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,10,93067927,NURNB,Nürnberg Hbf,,,,2023-01-01T02:01:00+01:00,0,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067928,FFS,Frankfurt (Main) Süd,2023-01-01T03:45:00+01:00,0,false,2023-01-01T03:47:00+01:00,0,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067929,FFFM,Frankfurt (M) Hbf,,,,,,
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067930,FNAF,Frankfurt Flughafen Fernb,2023-01-01T03:56:00+01:00,2,false,2023-01-01T03:58:00+01:00,1,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067931,FMZ,Mainz Hbf,2023-01-01T04:16:00+01:00,0,false,2023-01-01T04:18:00+01:00,0,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067932,KKO,Koblenz Hbf,2023-01-01T05:11:00+01:00,0,false,2023-01-01T05:13:00+01:00,0,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067933,KBB,Bonn-Beuel,2023-01-01T05:49:00+01:00,0,false,2023-01-01T05:57:00+01:00,0,false
+10367703,2023-05-01,Nightjet,NS Int,420,false,false,0,93067934,KT,Troisdorf,2023-01-01T05:58:00+01:00,0,false,2023-01-01T06:22:00+01:00,0,false
+10367703,2023-05-01,Nightjet,NS Int,420,false,false,0,93067935,KKD,Köln Messe/Deutz,2023-01-01T06:50:00+01:00,0,false,2023-01-01T06:55:00+01:00,0,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067936,DUSSEL,Düsseldorf Hbf,2023-01-01T07:23:00+01:00,10,false,2023-01-01T07:25:00+01:00,10,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067937,OBERH,Oberhausen Hbf,2023-01-01T07:46:00+01:00,7,false,2023-01-01T07:48:00+01:00,5,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067938,AH,Arnhem Centraal,2023-01-01T08:51:00+01:00,1,false,2023-01-01T08:57:00+01:00,0,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067939,UT,Utrecht Centraal,2023-01-01T09:29:00+01:00,0,false,2023-01-01T09:32:00+01:00,0,false
+10367703,2023-01-01,Nightjet,NS Int,420,false,false,0,93067940,ASD,Amsterdam Centraal,2023-01-01T09:59:00+01:00,0,false,,,
+10367704,2023-01-01,Intercity,NS,1409,false,false,9,93067941,UT,Utrecht Centraal,,,,2023-01-01T02:16:00+01:00,4,false
+10367704,2023-01-01,Intercity,NS,1409,false,false,0,93067942,ASB,Amsterdam Bijlmer ArenA,2023-01-01T02:33:00+01:00,4,false,2023-01-01T02:33:00+01:00,4,false
+10367704,2023-01-01,Intercity,NS,1409,false,false,0,93067943,ASD,Amsterdam Centraal,2023-01-01T02:44:00+01:00,3,false,2023-01-01T02:46:00+01:00,6,false
+10367704,2023-01-01,Intercity,NS,1409,false,false,0,93067944,ASS,Amsterdam Sloterdijk,2023-01-01T02:52:00+01:00,9,false,2023-01-01T02:52:00+01:00,8,false
+10367704,2023-01-01,Intercity,NS,1409,false,false,0,93067945,SHL,Schiphol Airport,2023-01-01T03:02:00+01:00,7,false,2023-01-01T03:05:00+01:00,5,false
+10367704,2023-01-01,Intercity,NS,1409,false,false,0,93067946,LEDN,Leiden Centraal,2023-01-01T03:21:00+01:00,3,false,2023-01-01T03:23:00+01:00,3,false
+10367704,2023-01-01,Intercity,NS,1409,false,false,0,93067947,GV,Den Haag HS,2023-01-01T03:37:00+01:00,0,false,2023-01-01T03:38:00+01:00,0,false
+10367704,2023-01-01,Intercity,NS,1409,false,false,0,93067948,DT,Delft,2023-01-01T03:45:00+01:00,0,false,2023-01-01T03:45:00+01:00,0,false
+10367704,2023-01-01,Intercity,NS,1409,false,false,0,93067949,RTD,Rotterdam Centraal,2023-01-01T03:58:00+01:00,0,false,,,
+10367705,2023-01-01,Intercity,NS,1414,false,false,3,93067950,RTD,Rotterdam Centraal,,,,2023-01-01T03:00:00+01:00,1,false
+10367705,2023-01-01,Intercity,NS,1414,false,false,0,93067951,DT,Delft,2023-01-01T03:12:00+01:00,0,false,2023-01-01T03:12:00+01:00,1,false
+10367705,2023-01-01,Intercity,NS,1414,false,false,0,93067952,GV,Den Haag HS,2023-01-01T03:21:00+01:00,0,false,2023-01-01T03:22:00+01:00,0,false
+10367705,2023-01-01,Intercity,NS,1414,false,false,0,93067953,LEDN,Leiden Centraal,2023-01-01T03:35:00+01:00,0,false,2023-01-01T03:40:00+01:00,0,false
+10367705,2023-01-01,Intercity,NS,1414,false,false,0,93067954,SHL,Schiphol Airport,2023-01-01T03:56:00+01:00,1,false,2023-01-01T04:03:00+01:00,0,false
+10367705,2023-01-01,Intercity,NS,1414,false,false,0,93067955,ASS,Amsterdam Sloterdijk,2023-01-01T04:12:00+01:00,0,false,2023-01-01T04:12:00+01:00,1,false
+10367705,2023-01-01,Intercity,NS,1414,false,false,0,93067956,ASD,Amsterdam Centraal,2023-01-01T04:18:00+01:00,1,false,2023-01-01T04:19:00+01:00,3,false
+10367705,2023-01-01,Intercity,NS,1414,false,false,0,93067957,ASB,Amsterdam Bijlmer ArenA,2023-01-01T04:29:00+01:00,3,false,2023-01-01T04:30:00+01:00,3,false
+10367705,2023-01-01,Intercity,NS,1414,false,false,0,93067958,UT,Utrecht Centraal,2023-01-01T04:47:00+01:00,2,false,,,
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,28,93067959,FFFM,Frankfurt (M) Hbf,,,,2023-01-01T03:13:00+01:00,27,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067960,FNAF,Frankfurt Flughafen Fernb,2023-01-01T03:25:00+01:00,28,false,2023-01-01T03:29:00+01:00,25,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067961,FMZ,Mainz Hbf,2023-01-01T03:46:00+01:00,24,false,2023-01-01T03:48:00+01:00,24,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067962,KKO,Koblenz Hbf,2023-01-01T04:41:00+01:00,19,false,2023-01-01T04:43:00+01:00,19,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067963,BONN,Bonn Hbf,2023-01-01T05:24:00+01:00,16,false,2023-01-01T05:26:00+01:00,16,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067964,KOLN,Köln Hbf,2023-01-01T05:53:00+01:00,13,false,2023-01-01T05:56:00+01:00,14,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067965,DUSSEL,Düsseldorf Hbf,2023-01-01T06:23:00+01:00,10,false,2023-01-01T06:25:00+01:00,11,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067966,DUISB,Duisburg Hbf,2023-01-01T06:39:00+01:00,10,false,2023-01-01T06:42:00+01:00,11,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067967,AH,Arnhem Centraal,2023-01-01T07:51:00+01:00,0,false,2023-01-01T07:56:00+01:00,1,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067968,UT,Utrecht Centraal,2023-01-01T08:33:00+01:00,2,false,2023-01-01T08:36:00+01:00,1,false
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067969,ASB,Amsterdam Bijlmer ArenA,,,,,,
+10367706,2023-01-01,Nightjet,NS Int,402,false,false,0,93067970,ASD,Amsterdam Centraal,2023-01-01T09:14:00+01:00,1,false,,,
+10367707,2023-01-01,Intercity,NS,1413,false,false,10,93067971,UT,Utrecht Centraal,,,,2023-01-01T03:16:00+01:00,6,false
+10367707,2023-01-01,Intercity,NS,1413,false,false,0,93067972,ASB,Amsterdam Bijlmer ArenA,2023-01-01T03:33:00+01:00,6,false,2023-01-01T03:33:00+01:00,7,false
+10367707,2023-01-01,Intercity,NS,1413,false,false,0,93067973,ASD,Amsterdam Centraal,2023-01-01T03:44:00+01:00,6,false,2023-01-01T03:46:00+01:00,9,false
+10367707,2023-01-01,Intercity,NS,1413,false,false,0,93067974,ASS,Amsterdam Sloterdijk,2023-01-01T03:52:00+01:00,9,false,2023-01-01T03:52:00+01:00,10,false
+10367707,2023-01-01,Intercity,NS,1413,false,false,0,93067975,SHL,Schiphol Airport,2023-01-01T04:02:00+01:00,8,false,2023-01-01T04:05:00+01:00,7,false
+10367707,2023-01-01,Intercity,NS,1413,false,false,0,93067976,LEDN,Leiden Centraal,2023-01-01T04:21:00+01:00,4,false,2023-01-01T04:23:00+01:00,4,false
+10367707,2023-01-01,Intercity,NS,1413,false,false,0,93067977,GV,Den Haag HS,2023-01-01T04:37:00+01:00,0,false,2023-01-01T04:38:00+01:00,3,false
+10367707,2023-01-01,Intercity,NS,1413,false,false,0,93067978,DT,Delft,2023-01-01T04:45:00+01:00,2,false,2023-01-01T04:45:00+01:00,3,false
+10367707,2023-01-01,Intercity,NS,1413,false,false,0,93067979,RTD,Rotterdam Centraal,2023-01-01T04:58:00+01:00,0,false,,,
+10367708,2023-01-01,Intercity,NS,1418,false,false,3,93067980,RTD,Rotterdam Centraal,,,,2023-01-01T04:00:00+01:00,3,false
+10367708,2023-01-01,Intercity,NS,1418,false,false,0,93067981,DT,Delft,2023-01-01T04:13:00+01:00,1,false,2023-01-01T04:13:00+01:00,1,false
+10367708,2023-01-01,Intercity,NS,1418,false,false,0,93067982,GV,Den Haag HS,2023-01-01T04:21:00+01:00,0,false,2023-01-01T04:22:00+01:00,0,false
+10367708,2023-01-01,Intercity,NS,1418,false,false,0,93067983,LEDN,Leiden Centraal,2023-01-01T04:35:00+01:00,0,false,2023-01-01T04:40:00+01:00,0,false
+10367708,2023-01-01,Intercity,NS,1418,false,false,0,93067984,SHL,Schiphol Airport,2023-01-01T04:56:00+01:00,0,false,2023-01-01T05:02:00+01:00,0,false
+10367708,2023-01-01,Intercity,NS,1418,false,false,0,93067985,ASS,Amsterdam Sloterdijk,2023-01-01T05:11:00+01:00,0,false,2023-01-01T05:11:00+01:00,0,false
+10367708,2023-01-01,Intercity,NS,1418,false,false,0,93067986,ASD,Amsterdam Centraal,2023-01-01T05:17:00+01:00,0,false,2023-01-01T05:19:00+01:00,2,false
+10367708,2023-01-01,Intercity,NS,1418,false,false,0,93067987,ASB,Amsterdam Bijlmer ArenA,2023-01-01T05:29:00+01:00,1,false,2023-01-01T05:30:00+01:00,1,false
+10367708,2023-01-01,Intercity,NS,1418,false,false,0,93067988,UT,Utrecht Centraal,2023-01-01T05:47:00+01:00,0,false,,,
+10367709,2023-01-01,Intercity,NS,1417,false,false,5,93067989,UT,Utrecht Centraal,,,,2023-01-01T04:15:00+01:00,2,false
+10367709,2023-01-01,Intercity,NS,1417,false,false,0,93067990,ASB,Amsterdam Bijlmer ArenA,2023-01-01T04:33:00+01:00,2,false,2023-01-01T04:33:00+01:00,2,false
+10367709,2023-01-01,Intercity,NS,1417,false,false,0,93067991,ASD,Amsterdam Centraal,2023-01-01T04:44:00+01:00,1,false,2023-01-01T04:46:00+01:00,3,false
+10367709,2023-01-01,Intercity,NS,1417,false,false,0,93067992,ASS,Amsterdam Sloterdijk,2023-01-01T04:52:00+01:00,3,false,2023-01-01T04:52:00+01:00,5,false
+10367709,2023-01-01,Intercity,NS,1417,false,false,0,93067993,SHL,Schiphol Airport,2023-01-01T05:02:00+01:00,3,false,2023-01-01T05:05:00+01:00,2,false
+10367709,2023-01-01,Intercity,NS,1417,false,false,0,93067994,LEDN,Leiden Centraal,2023-01-01T05:21:00+01:00,0,false,2023-01-01T05:23:00+01:00,0,false
+10367709,2023-01-01,Intercity,NS,1417,false,false,0,93067995,GV,Den Haag HS,2023-01-01T05:37:00+01:00,0,false,2023-01-01T05:38:00+01:00,0,false
+10367709,2023-01-01,Intercity,NS,1417,false,false,0,93067996,DT,Delft,2023-01-01T05:45:00+01:00,0,false,2023-01-01T05:45:00+01:00,0,false
+10367709,2023-01-01,Intercity,NS,1417,false,false,0,93067997,RTD,Rotterdam Centraal,2023-01-01T05:58:00+01:00,0,false,,,
+10367710,2023-01-01,Sprinter,NS,4308,false,false,2,93067998,LLS,Lelystad Centrum,,,,2023-01-01T04:44:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93067999,ALMO,Almere Oostvaarders,2023-01-01T04:55:00+01:00,0,false,2023-01-01T04:55:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068000,ALMB,Almere Buiten,2023-01-01T04:58:00+01:00,0,false,2023-01-01T04:58:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068001,ALMP,Almere Parkwijk,2023-01-01T05:01:00+01:00,0,false,2023-01-01T05:01:00+01:00,1,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068002,ALM,Almere Centrum,2023-01-01T05:05:00+01:00,0,false,2023-01-01T05:05:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068003,ALMM,Almere Muziekwijk,2023-01-01T05:08:00+01:00,0,false,2023-01-01T05:08:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068004,AMPO,Almere Poort,2023-01-01T05:12:00+01:00,0,false,2023-01-01T05:12:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068005,WP,Weesp,2023-01-01T05:19:00+01:00,2,false,2023-01-01T05:21:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068006,DMNZ,Diemen Zuid,2023-01-01T05:27:00+01:00,0,false,2023-01-01T05:27:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068007,DVD,Duivendrecht,2023-01-01T05:30:00+01:00,0,false,2023-01-01T05:30:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068008,RAI,Amsterdam RAI,2023-01-01T05:34:00+01:00,0,false,2023-01-01T05:34:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068009,ASDZ,Amsterdam Zuid,2023-01-01T05:36:00+01:00,0,false,2023-01-01T05:37:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068010,SHL,Schiphol Airport,2023-01-01T05:43:00+01:00,0,false,2023-01-01T05:45:00+01:00,0,false
+10367710,2023-01-01,Sprinter,NS,4308,false,false,0,93068011,HFD,Hoofddorp,2023-01-01T05:49:00+01:00,0,false,,,
+10367711,2023-01-01,Sprinter,NS,5806,false,false,3,93068012,AMF,Amersfoort Centraal,,,,2023-01-01T04:48:00+01:00,0,false
+10367711,2023-01-01,Sprinter,NS,5806,false,false,0,93068013,BRN,Baarn,2023-01-01T04:55:00+01:00,1,false,2023-01-01T04:55:00+01:00,0,false
+10367711,2023-01-01,Sprinter,NS,5806,false,false,0,93068014,HVS,Hilversum,2023-01-01T05:01:00+01:00,0,false,2023-01-01T05:02:00+01:00,0,false
+10367711,2023-01-01,Sprinter,NS,5806,false,false,0,93068015,HVSM,Hilversum Media Park,2023-01-01T05:04:00+01:00,0,false,2023-01-01T05:04:00+01:00,1,false
+10367711,2023-01-01,Sprinter,NS,5806,false,false,0,93068016,BSMZ,Bussum Zuid,2023-01-01T05:08:00+01:00,0,false,2023-01-01T05:08:00+01:00,1,false
