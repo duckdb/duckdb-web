@@ -17,8 +17,6 @@ On empty groups, the aggregate functions `sum`, `list`, and `string_agg` all ret
 
 To comply with standard SQL, one-based indexing is used almost everywhere, e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`). However, similarly to PostgreSQL, [JSON features use a zero-based indexing]({% link docs/data/json/overview.md %}#indexing).
 
-> While list functions use a 1-based indexing, `list_reduce` uses a 0-based indexing. This is a [known issue](https://github.com/duckdb/duckdb/issues/14619).
-
 ## Expressions
 
 ### Results That May Surprise You
