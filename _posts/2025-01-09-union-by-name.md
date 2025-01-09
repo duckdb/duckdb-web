@@ -46,7 +46,7 @@ Fast forward just a couple of decades, and DuckDB is making stacking in SQL tota
 
 ## Making Vertical Stacking Groovy Again
 
-In addition to the traditional [`UNION`]({% link docs/sql/query_syntax/setops.md %}#union) and [`UNION ALL`]({% link docs/sql/query_syntax/setops.md %}#union-all-bag-semantics) operators, DuckDB adds both [`UNION BY NAME` and `UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.html %}#union-all-by-name).
+In addition to the traditional [`UNION`]({% link docs/sql/query_syntax/setops.md %}#union) and [`UNION ALL`]({% link docs/sql/query_syntax/setops.md %}#union-all-bag-semantics) operators, DuckDB adds both [`UNION BY NAME` and `UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name).
 These will vertically stack multiple relations (e.g., `SELECT` statements) by matching on the names of columns independent of their order.
 As an example, we provide columns `a` and `b` out of order, and even introduce the entirely new column `c` and stacking will still succeed:
 
