@@ -46,7 +46,7 @@ scripts/serve-latest.sh
 
 Visit <http://localhost:4000/docs/> to browse the website.
 
-Note that to save time on building, the `serve-latest.sh` script only deploys the latest stable version and exclude the archives. To serve the full website with old versions included, run:
+Note that to save time on building, the `serve-latest.sh` script only deploys the latest stable version and excludes the archives. To serve the full website with old versions included, run:
 
 ```bash
 scripts/serve.sh
