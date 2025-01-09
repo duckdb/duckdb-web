@@ -46,21 +46,21 @@ Fast forward just a couple of decades, and DuckDB is making stacking in SQL tota
 
 ## Making Vertical Stacking Groovy Again
 
-In addition to the traditional `UNION` and `UNION ALL` operators, DuckDB adds both `UNION BY NAME` and `UNION ALL BY NAME`.
-These will vertically stack multiple relations (Ex: `SELECT` statements) by matching on the names of columns independent of their order.
+In addition to the traditional [`UNION`]({% link docs/sql/query_syntax/setops.md %}#union) and [`UNION ALL`]({% link docs/sql/query_syntax/setops.md %}#union-all-bag-semantics) operators, DuckDB adds both [`UNION BY NAME` and `UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.html %}#union-all-by-name).
+These will vertically stack multiple relations (e.g., `SELECT` statements) by matching on the names of columns independent of their order.
 As an example, we provide columns `a` and `b` out of order, and even introduce the entirely new column `c` and stacking will still succeed:
 
-```sql 
-SELECT 
+```sql
+SELECT
     42 AS a,
-    'woot' AS b 
+    'woot' AS b
 
 UNION ALL BY NAME
 
-SELECT 
+SELECT
     'woot2' AS b,
     9001 AS a,
-    'more wooting' AS c
+    'more wooting' AS c;
 ```
 
 |  a   |   b   |      c       |
@@ -106,8 +106,8 @@ Any columns that do not appear in a particular file will be filled with `NULL` v
 For example:
 
 ```sql
-COPY (SELECT 'STAR' AS col1) TO 'star.parquet';
-COPY (SELECT 'WARS' AS col2) TO 'wars.parquet';
+COPY (SELECT 'Star' AS col1) TO 'star.parquet';
+COPY (SELECT 'Wars' AS col2) TO 'wars.parquet';
 
 FROM read_parquet(
     ['star.parquet', 'wars.parquet'],
@@ -116,8 +116,8 @@ FROM read_parquet(
 
 | col1 | col2 |
 |------|------|
-| STAR | NULL |
-| NULL | WARS |
+| Star | NULL |
+| NULL | Wars |
 
 > If your files have different schemas and you did not expect it, DuckDB's friendly error messages will suggest the `union_by_name` parameter!
 > There is no need for memorization:
@@ -165,7 +165,7 @@ In many cases it also requires specifying columns in two locations: the `INSERT`
 Ignoring the sage advice of [“Don't Repeat Yourself”](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) has led to more than a few unintended consequences in my own code...
 It is always nicer to have a single location to edit rather than having to keep things in sync!
 
-## The inspirations for `UNION ALL BY NAME`
+## The Inspirations for `UNION ALL BY NAME`
 
 Other systems and communities have tackled the challenges of stacking messy data for many years.
 DuckDB takes inspiration from them and brings their improvements back into SQL!
