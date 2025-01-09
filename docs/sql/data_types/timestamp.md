@@ -17,7 +17,7 @@ They can be created using the type name followed by a string formatted according
 | `TIMESTAMP_S`  |                                           | naive timestamp with second precision                  |
 | `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | time zone aware timestamp with microsecond precision   |
 
-> Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
+> Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [Parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789';
@@ -59,7 +59,6 @@ SELECT TIMESTAMPTZ '1992-09-20 11:30:00.123456789';
 1992-09-20 11:30:00.123456+00
 ```
 
-
 ```sql
 SELECT TIMESTAMPTZ '1992-09-20 12:30:00.123456789+01:00';
 ```
@@ -68,7 +67,7 @@ SELECT TIMESTAMPTZ '1992-09-20 12:30:00.123456789+01:00';
 1992-09-20 11:30:00.123456+00
 ```
 
-DuckDB distinguishes timestamps `WITHOUT TIME ZONE` and `WITH TIME ZONE` (of which the only current representative is `TIMESTAMP WITH TIME ZONE`). 
+DuckDB distinguishes timestamps `WITHOUT TIME ZONE` and `WITH TIME ZONE` (of which the only current representative is `TIMESTAMP WITH TIME ZONE`).
 
 Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information. Instead, it only stores the `INT64` number of non-leap microseconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point in absolute time, or [*instant*]({% link docs/sql/data_types/timestamp.md %}#instants). The reason for the labels *time zone aware* and `WITH TIME ZONE` is that timestamp arithmetic, [*binning*]({% link docs/sql/data_types/timestamp.md %}#temporal-binning), and string formatting for this type are performed in a [configured time zone]({% link docs/sql/data_types/timestamp.md#time-zone-support}), which defaults to the system time zone and is just `UTC+00:00` in the examples above.  
 
@@ -77,7 +76,7 @@ It is a common data cleaning problem to disambiguate such observations, which ma
 
 ## Conversion Between Strings And Naive And Time Zone-Aware Timestamps
 
-The conversion between strings *without* UTC offsets or IANA time zone names and `WITHOUT TIME ZONE` types is unambiguous and straightforward. 
+The conversion between strings *without* UTC offsets or IANA time zone names and `WITHOUT TIME ZONE` types is unambiguous and straightforward.
 The conversion between strings *with* UTC offsets or time zone names and `WITH TIME ZONE` types is also unambiguous, but requires the `ICU` extension to handle time zone names.
 
 When strings *without* UTC offsets or time zone names are converted to a `WITH TIME ZONE` type, the string is interpreted in the configured time zone. Conversely, when strings *with* UTC offsets are passed to a `WITHOUT TIME ZONE` type, the local time in the configured time zone at the instant specified by the string is stored.
