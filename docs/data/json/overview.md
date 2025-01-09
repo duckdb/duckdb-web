@@ -25,6 +25,8 @@ While it is not a very efficient format for tabular data, it is very commonly us
 
 ## Examples
 
+The following examples use the [`todos.json`](/data/todos.json) file.
+
 ### Loading JSON
 
 Read a JSON file from disk, auto-infer options:
