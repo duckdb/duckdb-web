@@ -242,4 +242,4 @@ WHERE name = 'Calendar';
 |----------|-----------|----------------------|------------|
 | Calendar | gregorian | The current calendar | VARCHAR    |
 
-> If you find that your binning operations are not behaving as you expect, check these values and adjust them if needed.
+> If you find that your binning operations are not behaving as you expect, check the `TimeZone` and `Calendar` values and adjust them if needed.
