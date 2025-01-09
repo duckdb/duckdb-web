@@ -29,7 +29,7 @@ With DuckDB's Community Extensions being a [relatively new]({% post_url 2024-07-
 
 However, because of the batteries-included nature of the extension template and the [large]({% link community_extensions/index.md %}) [amount]({% link docs/extensions/core_extensions.md %}) or example extensions, extension development should be relatively straightforward.
 
-## Supported DuckDB Version and How to Maintain an Extension Through Releases
+## How to Maintain an Extension Through DuckDB Releases
 
 At this moment, community extensions aim to be built and distributed only for latest stable DuckDB release.
 This means that users on any but the latest stable release will see community extensions as frozen in time, with no more updates being served.
