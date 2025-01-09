@@ -178,21 +178,24 @@ SELECT $$The price is $9.95$$ AS msg;
 |--------------------|
 | The price is $9.95 |
 
-Even more, you can insert an arbitrary alphanumerical tag in the double-dollar symbols to allow for the use of regular double-dollar symbols *within* the string literal:
+Even more, you can insert alphanumerical tags in the double-dollar symbols to allow for the use of regular double-dollar symbols *within* the string literal:
 
 ```sql
-SELECT $tag$ DuckDB supports dollar-quoted string literals, which are surrounded by double-dollar symbols ($$) $tag$ AS msg;
+SELECT $tag$ this string can contain newlines,
+'single quotes',
+"double quotes",
+and $$dollar quotes$$ $tag$ AS msg
 ```
 
 <!-- This output intentionally uses the duckbox formatter -->
 
 ```text
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                 msg                                                 │
-│                                               varchar                                               │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│  DuckDB supports dollar-quoted string literals, which are surrounded by double-dollar symbols ($$)  │
-└─────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                              msg                                               │
+│                                            varchar                                             │
+├────────────────────────────────────────────────────────────────────────────────────────────────┤
+│  this string can contain newlines,\n'single quotes',\n"double quotes",\nand $$dollar quotes$$  │
+└────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 [Implicit concatenation](#implicit-string-literal-concatenation) only works for single-quoted string literals, not with dollar-quoted ones.
