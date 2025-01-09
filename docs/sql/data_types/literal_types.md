@@ -178,4 +178,21 @@ SELECT $$The price is $9.95$$ AS msg;
 |--------------------|
 | The price is $9.95 |
 
+Even more, you can insert an arbitrary alphanumerical tag in the surrounding double-dollar symbols to allow for the use of regular double-dollar symbols in the literal itself:
+
+```sql
+SELECT $tag$ DuckDB supports dollar-quoted string literals, which are surrounded by double-dollar symbols ($$) $tag$ AS msg;
+```
+
+<!-- This output intentionally uses the duckbox formatter -->
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                 msg                                                 │
+│                                               varchar                                               │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│  DuckDB supports dollar-quoted string literals, which are surrounded by double-dollar symbols ($$)  │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
 [Implicit concatenation](#implicit-string-literal-concatenation) only works for single-quoted string literals, not with dollar-quoted ones.
