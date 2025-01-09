@@ -140,6 +140,12 @@ COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
 
 <div id="rrdiagram1"></div>
 
+> To ensure compatibility with PostgreSQL, DuckDB accepts `COPY ... FROM` statements that do not fully comply with the railroad diagram shown here. For example, the following is a valid statement:
+>
+> ```sql
+> COPY tbl FROM 'tbl.csv' WITH DELIMITER '|' CSV HEADER;
+> ```
+
 ## `COPY ... TO`
 
 `COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
@@ -220,6 +226,12 @@ With few exceptions, the below options are applicable to all formats written wit
 ### Syntax
 
 <div id="rrdiagram2"></div>
+
+> To ensure compatibility with PostgreSQL, DuckDB accepts `COPY ... TO` statements that do not fully comply with the railroad diagram shown here. For example, the following is a valid statement:
+>
+> ```sql
+> COPY (SELECT 42 AS x, 84 AS y) TO 'out.csv' WITH DELIMITER '|' CSV HEADER;
+> ```
 
 ## `COPY FROM DATABASE ... TO`
 
