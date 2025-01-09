@@ -28,11 +28,12 @@ SELECT LIST(region ORDER BY amount DESC) FROM sales;
 Aggregates are functions that *combine* multiple rows into a single value. Aggregates are different from scalar functions and window functions because they change the cardinality of the result. As such, aggregates can only be used in the `SELECT` and `HAVING` clauses of a SQL query.
 
 When the `DISTINCT` clause is provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination with the `COUNT` aggregate to get the number of distinct elements; but it can be used together with any aggregate function in the system.
+There are some aggregates that are insensitive to duplicate values (e.g., `min` and `max`) and for them this clause is parsed and ignored.
 
 When the `ORDER BY` clause is provided, the values being aggregated are sorted before applying the function.
 Usually this is not important, but there are some order-sensitive aggregates that can have indeterminate results
 (e.g., `first`, `last`, `list` and `string_agg`). These can be made deterministic by ordering the arguments.
-For order-insensitive aggregates, this clause is parsed and applied, which is inefficient, but still produces the same result.
+For order-insensitive aggregates, this clause is parsed and ignored.
 
 ## General Aggregate Functions
 
