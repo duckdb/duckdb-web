@@ -178,7 +178,7 @@ SELECT $$The price is $9.95$$ AS msg;
 |--------------------|
 | The price is $9.95 |
 
-Even more, you can insert alphanumerical tags in the double-dollar symbols to allow for the use of regular double-dollar symbols *within* the string literal:
+Even more, you can insert alphanumeric tags in the double-dollar symbols to allow for the use of regular double-dollar symbols *within* the string literal:
 
 ```sql
 SELECT $tag$ this string can contain newlines,
