@@ -39,4 +39,6 @@ Primary clients are the first to receive new features and are covered by [commun
 Secondary clients receive new features but are not covered by community support.
 Finally, all tertiary clients are maintained by third parties, so there are no feature or support guarantees for them.
 
-> All clients are open-source and are open to contributions.
+> The DuckDB clients listed above are open-source and we welcome community contributions to these libraries.
+> All primary and secondary clients are available for the MIT license.
+> For tertiary clients, please consult the repository for the license.
