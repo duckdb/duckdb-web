@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Union All by Name - Vertical Stacking as the Relational Model Intended"
+title: "UNION ALL BY NAME – Vertical Stacking as the Relational Model Intended"
 author: "Alex Monahan"
 # thumb: "/images/blog/thumbs/duckdb-tricks.svg"
 # image: "/images/blog/thumbs/duckdb-tricks.png"
