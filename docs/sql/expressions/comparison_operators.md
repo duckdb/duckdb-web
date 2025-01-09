@@ -11,24 +11,34 @@ railroad: expressions/comparison.js
 The table below shows the standard comparison operators.
 Whenever either of the input arguments is `NULL`, the output of the comparison is `NULL`.
 
-
 | Operator | Description | Example | Result |
 |:---|:---|:---|:---|
 | `<` | less than | `2 < 3` | `true` |
 | `>` | greater than | `2 > 3` | `false` |
 | `<=` | less than or equal to | `2 <= 3` | `true` |
 | `>=` | greater than or equal to | `4 >= NULL` | `NULL` |
-| `=` | equal | `NULL = NULL` | `NULL` |
+| `=` or `==` | equal | `NULL = NULL` | `NULL` |
 | `<>` or `!=` | not equal | `2 <> 2` | `false` |
 
 The table below shows the standard distinction operators.
 These operators treat `NULL` values as equal.
 
-
 | Operator | Description | Example | Result |
 |:---|:---|:---|:-|
 | `IS DISTINCT FROM` | not equal, including `NULL` | `2 IS DISTINCT FROM NULL` | `true` |
 | `IS NOT DISTINCT FROM` | equal, including `NULL` | `NULL IS NOT DISTINCT FROM NULL` | `true` |
+
+### Combination Casting
+
+When performing comparison on different types, DuckDB performs [Combination Casting]({% link docs/sql/data_types/typecasting.md %}#combination-casting).
+These casts were introduced to make interactive querying more convenient and are in line with the casts performed by several programming languages but are often not compatible with PostgreSQL's behavior. For example, the following expressions evaluate and return `true` in DuckDB but fail in PostgreSQL.
+
+```sql
+SELECT 1 = true;
+SELECT 1 = '1.1';
+```
+
+> It is not possible to enforce stricter type-checking for DuckDB's comparison operator. If you require stricter type-checking, we recommend creating a [macro]({% link docs/sql/statements/create_macro.md %}) with the [`typeof` function]({% link docs/sql/functions/utility.md %}#typeofexpression) or implementing a [user-defined function]({% link docs/api/python/function.md %}).
 
 ## `BETWEEN` and `IS [NOT] NULL`
 
@@ -37,7 +47,6 @@ These operators treat `NULL` values as equal.
 Besides the standard comparison operators there are also the `BETWEEN` and `IS (NOT) NULL` operators. These behave much like operators, but have special syntax mandated by the SQL standard. They are shown in the table below.
 
 Note that `BETWEEN` and `NOT BETWEEN` are only equivalent to the examples below in the cases where both `a`, `x` and `y` are of the same type, as `BETWEEN` will cast all of its inputs to the same type.
-
 
 | Predicate | Description |
 |:---|:---|
