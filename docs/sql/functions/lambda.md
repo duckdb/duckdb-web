@@ -102,7 +102,7 @@ SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
 ## Indexes as Parameters
 
 All lambda functions accept an optional extra parameter that represents the index of the current element.
-This is always the last parameter of the lambda function, and is 1-based (i.e., the first element has index 1).
+This is always the last parameter of the lambda function (e.g., `i` in `(x, y, i)`), and is 1-based (i.e., the first element has index 1).
 
 Get all elements that are larger than their index:
 
