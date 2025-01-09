@@ -195,7 +195,7 @@ SELECT COUNT(DISTINCT name) OVER (ORDER BY time) FROM sales;
 SELECT LIST(DISTINCT name) OVER (ORDER BY time) FROM sales;
 ```
 
-### ORDER BY Arguments
+## ORDER BY Arguments
 
 All aggregate window functions support using an `ORDER BY` argument clause that is *different* from the window ordering.
 When the `ORDER BY` argument clause is provided, the values being aggregated are sorted before applying the function.
@@ -254,8 +254,6 @@ Window functions cannot access values outside of the partition containing the ro
 
 Ordering is also optional, but without it the results of [general-purpose window functions](#general-purpose-window-functions) and [order-sensitive aggregate functions]({% link docs/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions), and the order of [framing](#framing) are not well-defined.
 Each partition is ordered using the same ordering clause.
-
-> It is not currently possible to specify the aggregation order of window functions other than via the order in the `OVER` specification. In particular, it is not possible to use an aggregation order different from the frame order, e.g., `last_value(x ORDER BY y) OVER (ORDER BY z)`.
 
 Here is a table of power generation data, available as a CSV file ([`power-plant-generation-history.csv`](/data/power-plant-generation-history.csv)). To load the data, run:
 
