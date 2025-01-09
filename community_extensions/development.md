@@ -45,16 +45,16 @@ If an extension *not* compatible with both branches at the same time, the recomm
 3. This allows extension to be tested both versus latest stable *and* against current `main`.
 4. Once a release hash is set, community extensions will be built for that DuckDB hash and `ref_next` (if present) swapped for `ref`.
 
-See for example the descriptor for [`hannes/avro`](https://github.com/hannes/avro) that was published a few weeks before DuckDB v1.2.0:
+See for example the descriptor for [`hannes/avro`](https://github.com/hannes/avro) that was published a few weeks before DuckDB v1.2.0.
 It changed in <https://github.com/duckdb/community-extensions/pull/252/files> from:
 
-```diff
+```yaml
 repo:
   github: hannes/duckdb_avro
   ref: e5ed59b6ccf915c65e17eb6286b9a64f3ab09f59
 ```
 
-to
+to:
 
 ```yaml
 repo:
