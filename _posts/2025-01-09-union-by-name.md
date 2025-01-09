@@ -90,6 +90,7 @@ Unfortunately we have Codd to thank for this confusing bit!
 If only `UNION ALL` were the default...
 Typically, `UNION ALL` (and its new counterpart `UNION ALL BY NAME`!) are the desired behavior as they faithfully reproduce the input relations, just stacked together.
 This is higher performance as well, since the deduplication that occurs with `UNION` can be quite time intensive with large datasets.
+And finally, `UNION ALL` is [preserves the original row order]({% link docs/sql/dialect/order_preservation.md %}).
 
 ### Reading Multiple Files
 
