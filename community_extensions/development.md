@@ -29,6 +29,42 @@ With DuckDB's Community Extensions being a [relatively new]({% post_url 2024-07-
 
 However, because of the batteries-included nature of the extension template and the [large]({% link community_extensions/index.md %}) [amount]({% link docs/extensions/core_extensions.md %}) or example extensions, extension development should be relatively straightforward.
 
+## Supported DuckDB version and how to maintain an extension through releases
+
+At this moment, community extensions aim to be built and distributed only for latest stable DuckDB release.
+This means that users on any but the latest stable will see community extensions as frozen, with no more updates being served.
+
+When the next DuckDB release is near (as it's now, see https://duckdb.org/docs/dev/release_calendar), duckdb/community-extension switches to test extensions both versus latest stable AND current main.
+If an extension is compatible both latest stable AND current DuckDB branch, extension developer should not be impacted by new release.
+This is the hopefully common case.
+
+If an extension is NOT compatible with both branches at the same time, the reccomended path to update is the following:
+1. Have two separate branches, one targeting latest stable and one targeting current duckdb version.
+2. Provide the hash of the top latest commit on the branch targeting stable as `ref` and the one from targeting main duckdb branch as `ref_next`
+3. This allows extension to be tested both versus latest stable AND against current main
+4. Once a release hash is set, community extensions will be built for that duckdb hash, and `ref_next` (if present) swapped for `ref`
+
+See for example the descriptor for `hannes/avro` weeks away from v1.2.0.
+
+It changed in https://github.com/duckdb/community-extensions/pull/252/files from:
+```
+repo:
+  github: hannes/duckdb_avro
+  ref: e5ed59b6ccf915c65e17eb6286b9a64f3ab09f59
+```
+to
+```
+repo:
+  github: hannes/duckdb_avro
+  ref: e5ed59b6ccf915c65e17eb6286b9a64f3ab09f59
+  ref_next: c8941c92ec103f7825eb88207c04512f8a714b23
+```
+
+Here `ref`, the commit is compatible with DuckDB version v1.1.3, and `ref_next` is compatible with current main.
+
+Note that being compatible with current main can't guarantee compatibility with v1.2.0, since changes affecting the extension might still land, but should allow to iterate.
+
+
 ## Getting Help
 
 For extension development related questions, there is a dedicated channel in the [DuckDB Discord server](https://discord.com/invite/tcvwpjfnZx). The Discord server is
