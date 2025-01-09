@@ -54,50 +54,6 @@ The table below shows the available general window functions.
 
 All [aggregate functions](aggregates) can be used in a windowing context.
 
-## DISTINCT Arguments
-
-All aggregate window functions support using a `DISTINCT` clause for the arguments. When the `DISTINCT` clause is
-provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination
-with the `COUNT` aggregate to get the number of distinct elements; but it can be used together with any aggregate
-function in the system. There are some aggregates that are insensitive to duplicate values (e.g., `min`, `max`) and for
-them this clause is parsed and ignored.
-
-```sql
--- Count the number of distinct users at a given point in time
-SELECT COUNT(DISTINCT name) OVER (ORDER BY time) FROM sales;
--- Concatenate those distinct users into a list
-SELECT LIST(DISTINCT name) OVER (ORDER BY time) FROM sales;
-```
-
-### ORDER BY Arguments
-
-All aggregate window functions support using an `ORDER BY` clause that is different from the window ordering. When the
-`ORDER BY` clause is provided, the values being aggregated are sorted before applying the function. Usually this is not
-important, but there are some order-sensitive aggregates that can have indeterminate results (e.g., `mode`, `list` and
-`string_agg`). These can be made deterministic by ordering the arguments. For order-insensitive aggregates, this clause
-is parsed and ignored.
-
-```sql
--- Compute the modal value up to each time, breaking ties in favour of the most recent value.
-SELECT MODE(value ORDER BY time DESC) OVER (ORDER BY time) FROM sales;
-```
-
-The SQL standard does not provide for using `ORDER BY` with general-purpose window functions, but we have extended all
-of these functions (except `dense_rank`) to accept this syntax and use framing to restrict the range that the secondary
-ordering applies to.
-
-```sql
--- Compare each athlete's time in an event with the best time to date
-SELECT event, date, athlete, time
-    first_value(time ORDER BY time DESC) OVER w AS record_time,
-    first_value(athlete ORDER BY time DESC) OVER w AS record_athlete,
-FROM meet_results
-WINDOW w AS (PARTITION BY event ORDER BY datetime)
-ORDER BY ALL
-```
-
-Note that there is no comma separating the arguments from the `ORDER BY` clause.
-
 ## Ignoring NULLs
 
 The following functions support the `IGNORE NULLS` specification:
@@ -111,7 +67,6 @@ The following functions support the `IGNORE NULLS` specification:
 | `nth_value(expr any, nth integer)` | Skips `NULL` values when counting. | `nth_value(column, 2 IGNORE NULLS)` |
 
 Note that there is no comma separating the arguments from the `IGNORE NULLS` specification.
-Also note that the `IGNORE NULLS` specification must follow any `ORDER BY` argument specification.
 
 The inverse of `IGNORE NULLS` is `RESPECT NULLS`, which is the default for all functions.
 
