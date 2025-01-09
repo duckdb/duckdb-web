@@ -29,6 +29,10 @@ To comply with standard SQL, one-based indexing is used almost everywhere, e.g.,
 |----------------------------|---------|-------------------------------------------------------------------------------|
 | `-2^2`                     | `4.0`   | PostgreSQL compatibility means the unary minus has higher precedence than the exponentiation operator. Use additional parentheses, e.g., `-(2^2)` or the [`pow` function]({% link docs/sql/functions/numeric.md %}#powx-y), e.g. `-pow(2, 2)`, to avoid mistakes. |
 | `'t' = true`               | `true`  | Compatible with PostgreSQL.                                                   |
+| `1 = '1'`                  | `true`  | Compatible with PostgreSQL.                                                   |
+| `1 = ' 1'`                 | `true`  | Compatible with PostgreSQL.                                                   |
+| `1 = '01'`                 | `true`  | Compatible with PostgreSQL.                                                   |
+| `1 = ' 01 '`               | `true`  | Compatible with PostgreSQL.                                                   |
 | `1 = true`                 | `true`  | Not compatible with PostgreSQL.                                               |
 | `1 = '1.1'`                | `true`  | Not compatible with PostgreSQL.                                               |
 | `1 IN (0, NULL)`           | `NULL`  | Makes sense if you think of the `NULL`s in the input and output as `UNKNOWN`. |
