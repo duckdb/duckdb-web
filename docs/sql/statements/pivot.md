@@ -55,7 +55,6 @@ SELECT *
 FROM cities;
 ```
 
-
 | country |     name      | year | population |
 |---------|---------------|-----:|-----------:|
 | NL      | Amsterdam     | 2000 | 1005       |
@@ -83,7 +82,6 @@ PIVOT cities
 ON year
 USING sum(population);
 ```
-
 
 | country |     name      | 2000 | 2010 | 2020 |
 |---------|---------------|-----:|-----:|-----:|
@@ -122,7 +120,6 @@ USING sum(population)
 GROUP BY country;
 ```
 
-
 | country | 2000 | 2010 | 2020 |
 |---------|-----:|-----:|-----:|
 | NL      | 1005 | 1065 | 1158 |
@@ -139,7 +136,6 @@ ON year IN (2000, 2010)
 USING sum(population)
 GROUP BY country;
 ```
-
 
 | country | 2000 | 2010 |
 |---------|-----:|-----:|
@@ -164,7 +160,6 @@ ON country, name
 USING sum(population);
 ```
 
-
 | year | NL_Amsterdam | NL_New York City | NL_Seattle | US_Amsterdam | US_New York City | US_Seattle |
 |-----:|-------------:|------------------|------------|--------------|-----------------:|-----------:|
 | 2000 | 1005         | NULL             | NULL       | NULL         | 8015             | 564        |
@@ -183,7 +178,6 @@ PIVOT cities
 ON country || '_' || name
 USING sum(population);
 ```
-
 
 | year | NL_Amsterdam | US_New York City | US_Seattle |
 |-----:|-------------:|-----------------:|-----------:|
@@ -206,7 +200,6 @@ USING sum(population) AS total, max(population) AS max
 GROUP BY country;
 ```
 
-
 | country | 2000_total | 2000_max | 2010_total | 2010_max | 2020_total | 2020_max |
 |---------|-----------:|---------:|-----------:|---------:|-----------:|---------:|
 | US      | 8579       | 8015     | 8783       | 8175     | 9510       | 8772     |
@@ -223,7 +216,6 @@ ON year
 USING sum(population)
 GROUP BY country, name;
 ```
-
 
 | country |     name      | 2000 | 2010 | 2020 |
 |---------|---------------|-----:|-----:|-----:|
@@ -274,7 +266,6 @@ JOIN (PIVOT cities ON name USING sum(population) GROUP BY country) name_pivot
 USING (country);
 ```
 
-
 | country | 2000 | 2010 | 2020 | Amsterdam | New York City | Seattle |
 |---------|-----:|-----:|-----:|----------:|--------------:|--------:|
 | NL      | 1005 | 1065 | 1158 | 3228      | NULL          | NULL    |
@@ -322,7 +313,6 @@ PIVOT (
     GROUP BY country
 );
 ```
-
 
 | country | 2000 | 2010 | 2020 |
 |---------|-----:|-----:|-----:|

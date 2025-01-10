@@ -388,7 +388,6 @@ INSERT INTO t1
     RETURNING *;
 ```
 
-
 | i  |
 |---:|
 | 42 |
@@ -401,7 +400,6 @@ INSERT INTO t2
     SELECT 2 AS i, 3 AS j
     RETURNING *, i * j AS i_times_j;
 ```
-
 
 | i | j | i_times_j |
 |--:|--:|----------:|
@@ -418,7 +416,6 @@ INSERT INTO t3
     SELECT nextval('t3_key') AS i, 43 AS j
     RETURNING *;
 ```
-
 
 | i | j  |
 |--:|---:|

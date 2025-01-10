@@ -10,7 +10,6 @@ CREATE TABLE tbl (i INTEGER);
 SHOW TABLES;
 ```
 
-
 | name |
 |------|
 | tbl  |
@@ -23,7 +22,6 @@ CREATE SCHEMA s1;
 CREATE TABLE s1.tbl (v VARCHAR);
 SHOW ALL TABLES;
 ```
-
 
 | database | schema | table_name | column_names | column_types | temporary |
 |----------|--------|------------|--------------|--------------|-----------|

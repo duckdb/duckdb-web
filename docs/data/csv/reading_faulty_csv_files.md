@@ -112,7 +112,6 @@ FROM read_csv(
 
 Outputs:
 
-
 | name  | age |
 |-------|-----|
 | Pedro | 31  |
@@ -125,7 +124,6 @@ FROM read_csv('faulty.csv', columns = {'name': 'VARCHAR', 'age': 'INTEGER'});
 ```
 
 Outputs:
-
 
 |     name     |
 |--------------|
@@ -145,7 +143,6 @@ Note that any of the errors described in our Structural Error section will be st
 ### Reject Scans
 
 The CSV Reject Scans Table returns the following information:
-
 
 | Column name | Description | Type |
 |:--|:-----|:-|
@@ -167,7 +164,6 @@ The CSV Reject Scans Table returns the following information:
 
 The CSV Reject Errors Table returns the following information:
 
-
 | Column name | Description | Type |
 |:--|:-----|:-|
 | `scan_id` | The internal ID used in DuckDB to represent that scanner, used to join with reject scans tables | `UBIGINT` |
@@ -182,7 +178,6 @@ The CSV Reject Errors Table returns the following information:
 | `error_message` | The error message produced by DuckDB. | `VARCHAR` |
 
 ## Parameters
-
 
 The parameters listed below are used in the `read_csv` function to configure the CSV Rejects Table.
 

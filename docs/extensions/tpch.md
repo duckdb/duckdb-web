@@ -88,7 +88,6 @@ CALL dbgen(sf = 0);
 
 The data generator function `dbgen` has the following parameters:
 
-
 | Name | Type | Description |
 |--|--|------------|
 | `catalog`   | `VARCHAR`  | Target catalog                                                                                                                    |
@@ -118,7 +117,7 @@ Additionally, when the generation is done in a single step, it requires a large 
 The following table gives an estimate on the resources required to produce DuckDB database files containing the generated TPC-H data set using 128 threads.
 
 | Scale factor | Database size | Data generation time | Generator's memory usage |
-| -----------: | ------------: | -------------------: | -----------------------: |
+|-------------:|--------------:|---------------------:|-------------------------:|
 |          100 |         26 GB | 17 minutes           |                    71 GB |
 |          300 |         78 GB | 51 minutes           |                   211 GB |
 |         1000 |        265 GB | 2h 53 minutes        |                   647 GB |

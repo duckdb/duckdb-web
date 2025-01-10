@@ -67,7 +67,6 @@ with open('test/sql/storage_version/storage_version.db', 'rb') as fh:
 For changes in each given release, check out the [change log](https://github.com/duckdb/duckdb/releases) on GitHub.
 To see the commits that changed each storage version, see the [commit log](https://github.com/duckdb/duckdb/commits/main/src/storage/storage_info.cpp).
 
-
 | Storage version | DuckDB version(s)               |
 |----------------:|---------------------------------|
 | 64              | v0.9.x, v0.10.x, v1.0.0, v1.1.x |

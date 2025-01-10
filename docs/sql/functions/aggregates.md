@@ -99,7 +99,6 @@ FROM tbl;
 |-----------|
 | 3, 2, 1   |
 
-
 ### Handling `NULL` Values
 
 All general aggregate functions except for [`list`](#listarg) and [`first`](#firstarg) (and their aliases [`array_agg`](#array_aggarg) and [`arbitrary`](#arbitraryarg), respectively) ignore `NULL`s.

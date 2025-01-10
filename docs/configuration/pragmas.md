@@ -100,23 +100,22 @@ CALL pragma_storage_info('table_name');
 
 This call returns the following information for the given table:
 
-
 | Name           | Type      | Description                                           |
 |----------------|-----------|-------------------------------------------------------|
-| `row_group_id` | `BIGINT`  ||
-| `column_name`  | `VARCHAR` ||
-| `column_id`    | `BIGINT`  ||
-| `column_path`  | `VARCHAR` ||
-| `segment_id`   | `BIGINT`  ||
-| `segment_type` | `VARCHAR` ||
-| `start`        | `BIGINT`  | The start row id of this chunk                        |
-| `count`        | `BIGINT`  | The amount of entries in this storage chunk           |
+| `row_group_id` | `BIGINT`  |                                                                                                                                                    |
+| `column_name`  | `VARCHAR` |                                                                                                                                                    |
+| `column_id`    | `BIGINT`  |                                                                                                                                                    |
+| `column_path`  | `VARCHAR` |                                                                                                                                                    |
+| `segment_id`   | `BIGINT`  |                                                                                                                                                    |
+| `segment_type` | `VARCHAR` |                                                                                                                                                    |
+| `start`        | `BIGINT`  | The start row id of this chunk                                                                                                                     |
+| `count`        | `BIGINT`  | The amount of entries in this storage chunk                                                                                                        |
 | `compression`  | `VARCHAR` | Compression type used for this column – see the [“Lightweight Compression in DuckDB” blog post]({% post_url 2022-10-28-lightweight-compression %}) |
-| `stats`        | `VARCHAR` ||
-| `has_updates`  | `BOOLEAN` ||
-| `persistent`   | `BOOLEAN` | `false` if temporary table                            |
-| `block_id`     | `BIGINT`  | empty unless persistent                               |
-| `block_offset` | `BIGINT`  | empty unless persistent                               |
+| `stats`        | `VARCHAR` |                                                                                                                                                    |
+| `has_updates`  | `BOOLEAN` |                                                                                                                                                    |
+| `persistent`   | `BOOLEAN` | `false` if temporary table                                                                                                                         |
+| `block_id`     | `BIGINT`  | Empty unless persistent                                                                                                                            |
+| `block_offset` | `BIGINT`  | Empty unless persistent                                                                                                                            |
 
 See [Storage]({% link docs/internals/storage.md %}) for more information.
 

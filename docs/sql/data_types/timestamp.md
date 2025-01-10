@@ -106,8 +106,8 @@ Three special strings can be used to create timestamps:
 | Input string | Description                                      |
 |:-------------|:-------------------------------------------------|
 | `epoch`      | 1970-01-01 00:00:00[+00] (Unix system time zero) |
-| `infinity`   | later than all other timestamps                  |
-| `-infinity`  | earlier than all other timestamps                |
+| `infinity`   | Later than all other timestamps                  |
+| `-infinity`  | Earlier than all other timestamps                |
 
 The values `infinity` and `-infinity` are special cased and are displayed unchanged, whereas the value `epoch` is simply a notational shorthand that is converted to the corresponding timestamp value when read.
 

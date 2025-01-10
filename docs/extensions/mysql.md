@@ -52,7 +52,6 @@ The connection string determines the parameters for how to connect to MySQL as a
 | ssl_crlpath |                |                      |
 | ssl_key     |                |                      |
 
-
 ### Configuring via Secrets
 
 MySQL connection information can also be specified with [secrets](/docs/configuration/secrets_manager). The following syntax can be used to create a secret.
@@ -110,13 +109,13 @@ The [`ssl` connection parameters](https://dev.mysql.com/doc/refman/8.4/en/using-
 | Setting     | Description                                                                                                                                      |
 |-------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
 | ssl_mode    | The security state to use for the connection to the server: `disabled, required, verify_ca, verify_identity or preferred` (default: `preferred`) |
-| ssl_ca      | The path name of the Certificate Authority (CA) certificate file.                                                                                |
-| ssl_capath  | The path name of the directory that contains trusted SSL CA certificate files.                                                                   |
-| ssl_cert    | The path name of the client public key certificate file.                                                                                         |
-| ssl_cipher  | The list of permissible ciphers for SSL encryption.                                                                                              |
-| ssl_crl     | The path name of the file containing certificate revocation lists.                                                                               |
-| ssl_crlpath | The path name of the directory that contains files containing certificate revocation lists.                                                      |
-| ssl_key     | The path name of the client private key file.                                                                                                    |
+| ssl_ca      | The path name of the Certificate Authority (CA) certificate file                                                                                 |
+| ssl_capath  | The path name of the directory that contains trusted SSL CA certificate files                                                                    |
+| ssl_cert    | The path name of the client public key certificate file                                                                                          |
+| ssl_cipher  | The list of permissible ciphers for SSL encryption                                                                                               |
+| ssl_crl     | The path name of the file containing certificate revocation lists                                                                                |
+| ssl_crlpath | The path name of the directory that contains files containing certificate revocation lists                                                       |
+| ssl_key     | The path name of the client private key file                                                                                                     |
 
 ### Reading MySQL Tables
 

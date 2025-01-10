@@ -372,7 +372,6 @@ true
 
 There are three JSON aggregate functions.
 
-
 | Function | Description |
 |:---|:----|
 | `json_group_array(any)` | Return a JSON array with all values of `any` in the aggregation. |
