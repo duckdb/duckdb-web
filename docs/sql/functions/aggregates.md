@@ -375,7 +375,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the maximum value present in `arg`. |
+| **Description** | Returns the maximum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
 | **Example** | `max(A)` |
 | **Alias(es)** | - |
 
@@ -407,7 +407,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the minimum value present in `arg`. |
+| **Description** | Returns the minimum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
 | **Example** | `min(A)` |
 | **Alias(es)** | - |
 
