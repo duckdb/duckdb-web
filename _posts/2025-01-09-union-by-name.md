@@ -90,7 +90,7 @@ Unfortunately we have Codd to thank for this confusing bit!
 If only `UNION ALL` were the default...
 Typically, `UNION ALL` (and its new counterpart `UNION ALL BY NAME`!) are the desired behavior as they faithfully reproduce the input relations, just stacked together.
 This is higher performance as well, since the deduplication that occurs with `UNION` can be quite time intensive with large datasets.
-And finally, `UNION ALL` is [preserves the original row order]({% link docs/sql/dialect/order_preservation.md %}).
+And finally, `UNION ALL` [preserves the original row order]({% link docs/sql/dialect/order_preservation.md %}).
 
 ### Reading Multiple Files
 
@@ -127,7 +127,7 @@ FROM read_parquet(
 
 ### Data Lakes
 
-It is very common to have schema changes over time in data lakes, so this unlocks many additional uses for DuckDB in those environments
+It is very common to have schema changes over time in data lakes, so this unlocks many additional uses for DuckDB in those environments.
 The secondary effect of this feature is that you may now feel free to change your data lake schemas freely!
 Now it is painless to add more attributes to your data lake over time – DuckDB will be ready to handle the analysis!
 
@@ -146,11 +146,11 @@ CREATE TABLE year_info (year INTEGER, status VARCHAR);
 INSERT INTO year_info BY NAME 
     SELECT 
         'The planet made it through' AS status,
-        2024 as year;
+        2024 AS year;
 
 INSERT INTO year_info BY NAME 
     SELECT 
-        2025 as year;
+        2025 AS year;
 
 FROM year_info;
 ```
@@ -173,7 +173,7 @@ DuckDB takes inspiration from them and brings their improvements back into SQL!
 
 The most direct inspiration is the [Pandas `concat` function](https://pandas.pydata.org/docs/reference/api/pandas.concat.html).
 It was [added in January of 2012](https://github.com/pandas-dev/pandas/commit/35f3322ac5599c83e29fe0d61a606a7f6845b9fa), and from the very beginning it supported the addition of new columns.
-Pandas is incredibly widely used and is a significant contributor for the popularity of Python today.
+Pandas is incredibly widely used and is a significant contributor to the popularity of Python today.
 Bringing this capability to SQL can broaden its impact beyond Python and into the other languages that DuckDB supports (Java, Node.js, Go, Rust, etc.).
 Databases should learn from dataframes!
 
@@ -214,7 +214,7 @@ The benchmark continued to use Python, but I'm just showing the SQL here for bet
 CREATE OR REPLACE VIEW metrics AS 
     SELECT 
         date,
-        SUM(failure) as failures
+        SUM(failure) AS failures
     FROM read_csv_auto('⟨s3_path⟩/*.csv', union_by_name = true)
     GROUP BY date;
 
@@ -222,26 +222,53 @@ COPY metrics TO '⟨s3_path⟩/results/results.csv';
 ```
 
 When using a 4 GB instance and an older version of DuckDB (1.0.0), I am able to replicate the out of memory errors that Daniel encountered.
-If I upgrade to DuckDB 1.1.3, the queries run successfully! However, they required about 5.5 minutes to complete.
+If I upgrade to DuckDB 1.1.3, the queries run successfully! However, they required about 5.8 minutes to complete. 
+
+As I dug more deeply into the dataset, I discovered that the columns selected in the benchmark query are present in each file. 
+In prior versions of DuckDB, just having files with different sets of columns would require the `union_by_name = True` flag, even if the inconsistent or new columns were not used in the query.
+However, between the original post and version 1.1.3, DuckDB added the capability to do projection pushdown into CSV files!
+This means that only the columns used in the query are actually read from the CSV, not all columns. 
+As a result, we can actually remove the `union_by_name = true` for the benchmark query and run successfully. 
+This requires less overhead (since we do not need to invest time checking if all schemas match - we can rely on the first schema that is read). 
+
+This allows us to quantify the overhead of the flexibility that `UNION ALL BY NAME` provides.
+The simplified query runs in only 4 minutes, but it fails to exercise the capability we discussed - handling schema evolution!
+
+To exercise the `BY NAME` capability, we add a column to the SQL query that is present only in some of the files. 
+
+```sql
+CREATE OR REPLACE VIEW metrics AS 
+    SELECT 
+        date,
+        COUNT(DISTINCT datacenter) AS datacenters,
+        SUM(failure) AS failures
+    FROM read_csv_auto('⟨s3_path⟩/*.csv', union_by_name = true)
+    GROUP BY date;
+
+COPY metrics TO '⟨s3_path⟩/results/results.csv';
+```
+
+This query runs in approximately the same amount of time as the original (5.6 minutes), so it is a good proxy for the original while showcasing how DuckDB handles schema evolution!
 
 I then made a few tweaks to improve the performance.
 The first change is to skip the creation of a view and complete the operations all in one step.
 The reason this improves performance is that DuckDB will try to ensure that a view is correctly defined by binding it when it is created.
-Normally, this has negligible overhead (views are a great abstraction!), however when reading from cloud object storage, this triggers a check of the schema of each file, which can take time.
-In this case, around a minute and a half!
+Normally, this has negligible overhead (views are a great abstraction!), however when reading from cloud object storage and using `UNION ALL BY NAME`, this triggers a check of the schema of each file, which can take time.
+In this case, around 2 minutes!
 The updated SQL statement looks like this:
 
 ```sql
 COPY (
     SELECT 
         date, 
+        COUNT(DISTINCT datacenter) AS datacenters,
         SUM(failure) as failures
     FROM read_csv_auto('⟨s3_path⟩/*.csv', union_by_name = true)
     GROUP BY date
 ) TO '⟨s3_path⟩/results/results.csv';
 ```
 
-Performance improves to about 4 minutes with this change and also reduces the test down to a single query.
+Performance improves to about 3.7 minutes with this change and also reduces the test down to a single query.
 
 The next change was to increase the number of threads that DuckDB uses.
 By default, DuckDB will use a single thread per core.
@@ -250,28 +277,24 @@ DuckDB uses synchronous I/O, so with the default thread count, if a thread is do
 As a result, using more threads might be more likely to fully utilize network resources, which is the bottleneck in this test.
 Here I just made an educated guess that this would help, but monitoring CPU utilization is a better approach.
 
-With 4 threads, instead of the default of 2, performance improves to just under 3 minutes!
+With 4 threads, instead of the default of 2, performance improves to 3 minutes!
 
-Adding more threads did not meaningfully improve performance any further. Additional threads do use more memory, but with the improvements in 1.1, this is no longer an issue (I tested up to 16 threads with only 2.2 GB of memory used).
+Adding more threads did not meaningfully improve performance any further. 
+Additional threads do use more memory, but with the improvements in 1.1, this is no longer a significant issue (I tested up to 16 threads with only 2.2 GB of memory used).
 
-As an additional test in the same spirit (doing large data processing tasks on inexpensive hardware), I ran the same script on an AWS free-tier machine: a t2.micro with 1 vCPU and 1 GB memory.
-This expectedly takes longer (10 and a half minutes), but it runs without a problem.
-Increasing the number of threads to 2 improves performance to just under 7 minutes.
-It's hard to beat free!
-
-| Instance  | CPUs | Available Memory (GB) |     Query Syntax      | Threads | Total Time (minutes) | Max Memory Used (GB) |
-|-----------|-----:|----------------------:|-----------------------|--------:|---------------------:|---------------------:|
-| c5d.large | 2    | 4                     | create view then copy | 2       | 5.4                  | 0.47                 |
-| c5d.large | 2    | 4                     | copy with subquery    | 2       | 4.1                  | 0.47                 |
-| c5d.large | 2    | 4                     | copy with subquery    | 4       | 2.9                  | 0.66                 |
-| t2.micro  | 1    | 1                     | copy with subquery    | 1       | 10.5                 | 0.31                 |
-| t2.micro  | 1    | 1                     | copy with subquery    | 2       | 6.9                  | 0.47                 |
+| Instance  | CPUs | Available Memory (GB) |           Query Syntax            |    UNION Type     | Threads | Total Time (minutes) | Max Memory Used (GB) |
+|-----------|-----:|----------------------:|----------------------------------:|-------------------|--------:|---------------------:|---------------------:|
+| c5d.large | 2    | 4                     | create view, copy                 | BY NAME           | 2       | 5.8                  | 0.47                 |
+| c5d.large | 2    | 4                     | create view, copy                 | BY POSITION       | 2       | 4.0                  | 0.47                 |
+| c5d.large | 2    | 4                     | create view, copy, new col        | BY NAME           | 2       | 5.6                  | 0.47                 |
+| c5d.large | 2    | 4                     | copy subquery, new col            | BY NAME           | 2       | 4.1                  | 0.47                 |
+| c5d.large | 2    | 4                     | copy subquery, new col            | BY NAME           | 4       | 3.0                  | 0.77                 |
 
 ## Closing Thoughts
 
 When stacking data, DuckDB brings the spirit of the relational model back to SQL!
 After all, stacking data should not require column orders to match...
-`UNION ALL BY NAME` can simplify common operations like combining relations with different orders or sets of columns, inserting the results of a query into a table, or querying a data lake with a changing schema.
+The `BY NAME` keywords can simplify common operations like combining relations with different orders or sets of columns, inserting the results of a query into a table, or querying a data lake with a changing schema.
 As of DuckDB version 1.1, this is now a performant and scalable approach!
 
 Happy analyzing!
