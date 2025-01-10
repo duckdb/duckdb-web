@@ -16,4 +16,4 @@ length: "20 min"
 
 Event: [Dutch Seminar on Data Systems Design seminar](https://dsdsd.da.cwi.nl/)
 
-Speaker: Mark Raasveldt
+Speaker: [Mark Raasveldt](https://mytherin.github.io/)

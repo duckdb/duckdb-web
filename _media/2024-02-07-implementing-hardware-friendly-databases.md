@@ -16,4 +16,4 @@ length: "80 min"
 
 Podcast: [Developer Voices](https://www.youtube.com/channel/UC-0fWjosItIOD4ThhS6oyfA)
 
-Guest: Hannes Mühleisen (DuckDB Labs)
+Guest: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

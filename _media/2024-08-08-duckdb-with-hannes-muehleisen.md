@@ -14,4 +14,4 @@ length: "45 min"
 
 Podcast: [Software Engineering Daily](https://softwareengineeringdaily.com/category/all-episodes/exclusive-content/Podcast/)
 
-Guest: Hannes Mühleisen (DuckDB Labs)
+Guest: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

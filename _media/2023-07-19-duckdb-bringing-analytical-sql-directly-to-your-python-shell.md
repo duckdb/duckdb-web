@@ -16,4 +16,4 @@ length: "40 min"
 
 Event: [EuroPython 2023](https://ep2023.europython.eu/)
 
-Speaker: Pedro Holanda (DuckDB Labs)
+Speaker: [Pedro Holanda (DuckDB Labs)](https://www.pedroholanda.org/)

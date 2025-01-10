@@ -16,4 +16,4 @@ length: "65 min"
 
 Event: [Quarantine 2020 Database Talks at Carnegie Mellon University](https://db.cs.cmu.edu/seminar2020/)
 
-Speaker: Mark Raasveldt
+Speaker: [Mark Raasveldt](https://mytherin.github.io/)

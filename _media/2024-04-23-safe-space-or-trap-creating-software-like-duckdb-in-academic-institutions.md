@@ -14,4 +14,4 @@ length: "30 min"
 
 Event: [PyCon.DE 2024](https://2024.pycon.de/)
 
-Speaker: Hannes Mühleisen (DuckDB Labs)
+Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

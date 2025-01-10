@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB and the Future of Databases"
+title: "DuckDB and the future of databases"
 author: Hannes Mühleisen
 excerpt: ""
 toc: false
@@ -14,4 +14,4 @@ length: "60 min"
 
 Podcast: [Data Science Hangout by Posit](https://pos.it/dsh )
 
-Guest: Hannes Mühleisen (DuckDB Labs)
+Guest: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)
