@@ -83,7 +83,7 @@ To insert these values as literals in a SQL command, you must put quotes around 
 ```sql
 SELECT
     sqrt(2) > '-inf',
-    'nan' > sqrt(2)
+    'nan' > sqrt(2);
 ```
 
 <div class="monospace_table"></div>
