@@ -203,7 +203,7 @@ Thanks to Daniel for his permission to reuse his benchmark for this post!
 
 The benchmark requires reading 16 GB of CSV files stored on S3 that have changing schemas on a cloud instance with 4 GB of memory.
 The intent behind it is to process large datasets on small commodity hardware (which is a use case where we want to see DuckDB be helpful!).
-The original post uses Linode, but for this post we selected the most similar AWS instance having the same amount of memory (c5d.large).
+The original post uses Linode, but for this post we selected the most similar AWS instance having the same amount of memory ([`c5d.large`](https://instances.vantage.sh/aws/ec2/c5d.large)).
 
 We use two quarters' of CSV files from the [Backblaze dataset](https://www.backblaze.com/cloud-storage/resources/hard-drive-test-data#downloadingTheRawTestData) ([2023 Q2](https://blobs.duckdb.org/data/backblaze-data-2023-Q2.zip) and [2023 Q3](https://blobs.duckdb.org/data/backblaze-data-2023-Q3.zip)), which are placed in an S3 bucket.
 
@@ -293,17 +293,19 @@ Here I just made an educated guess that this would help, but monitoring CPU util
 
 With 4 threads, instead of the default of 2, performance improves to 3 minutes!
 
-Adding more threads did not meaningfully improve performance any further. 
+Adding more threads did not meaningfully improve performance any further.
 Additional threads do use more memory, but with the improvements in 1.1, this is no longer a significant issue (I tested up to 16 threads with only 2.2 GB of memory used).
 
-| Instance  | CPUs | Available Memory (GB) |           Query Syntax            |    UNION Type     | Threads | Total Time (minutes) | Max Memory Used (GB) |
-|-----------|-----:|----------------------:|----------------------------------:|-------------------|--------:|---------------------:|---------------------:|
-| c5d.large | 2    | 4                     | create view, copy                 | BY NAME           | 2       | 5.8                  | 0.47                 |
-| c5d.large | 2    | 4                     | create view, copy                 | BY POSITION       | 2       | 4.0                  | 0.47                 |
-| c5d.large | 2    | 4                     | create view, copy, new col        | BY NAME           | 2       | 5.6                  | 0.47                 |
-| c5d.large | 2    | 4                     | copy subquery, new col            | BY NAME           | 2       | 4.1                  | 0.47                 |
-| c5d.large | 2    | 4                     | copy subquery                     | BY POSITION       | 2       | 3.7                  | 0.49                 |
-| c5d.large | 2    | 4                     | copy subquery, new col            | BY NAME           | 4       | 3.0                  | 0.77                 |
+The table below summarizes the results achieved on a [`c5d.large`](https://instances.vantage.sh/aws/ec2/c5d.large) instance, which has 2 vCPUs and 4 GB RAM. We report the total runtime and the maximum memory usage for each query.
+
+|           Query syntax            |    `UNION` type     | Threads | Runtime | Memory  |
+|:----------------------------------|---------------------|--------:|--------:|--------:|
+| create view, copy                 | `BY NAME`           | 2       | 5.8 min | 0.47 GB |
+| create view, copy                 | `BY POSITION`       | 2       | 4.0 min | 0.47 GB |
+| create view, copy, new column     | `BY NAME`           | 2       | 5.6 min | 0.47 GB |
+| copy subquery, new column         | `BY NAME`           | 2       | 4.1 min | 0.47 GB |
+| copy subquery                     | `BY POSITION`       | 2       | 3.7 min | 0.49 GB |
+| copy subquery, new column         | `BY NAME`           | 4       | 3.0 min | 0.77 GB |
 
 ## Closing Thoughts
 
