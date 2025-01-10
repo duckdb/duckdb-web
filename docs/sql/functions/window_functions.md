@@ -64,18 +64,18 @@ The table below shows the available general window functions.
 
 | Name | Description |
 |:--|:-------|
-| [`cume_dist([ORDER BY ordering])`](#cume_dist) | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. |
+| [`cume_dist([ORDER BY ordering])`](#cume_distorder-by-ordering) | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. |
 | [`dense_rank()`](#dense_rank) | The rank of the current row *without gaps;* this function counts peer groups. |
-| [`first_value(expr[ ORDER BY ordering][ IGNORE NULLS])`](#first_valueexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
-| [`lag(expr[, offset[, default]][ ORDER BY ordering][ IGNORE NULLS])`](#lagexpr-offset-default-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
-| [`last_value(expr[ ORDER BY ordering][ IGNORE NULLS])`](#last_valueexpr-ignore-nulls) | Returns `expr` evaluated at the row that is the last row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
-| [`lead(expr[, offset[, default]][ ORDER BY ordering][ IGNORE NULLS])`](#leadexpr-offset-default-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
-| [`nth_value(expr, nth[ ORDER BY ordering][ IGNORE NULLS])`](#nth_valueexpr-nth-ignore-nulls) | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); `NULL` if no such row. |
-| [`ntile(num_buckets[ ORDER BY ordering])`](#ntilenum_buckets) | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. |
-| [`percent_rank([ORDER BY ordering])`](#percent_rank) | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. |
+| [`first_value(expr[ ORDER BY ordering][ IGNORE NULLS])`](#first_valueexpr-order-by-ordering-ignore-nulls) | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`lag(expr[, offset[, default]][ ORDER BY ordering][ IGNORE NULLS])`](#lagexpr-offset-default-order-by-ordering-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| [`last_value(expr[ ORDER BY ordering][ IGNORE NULLS])`](#last_valueexpr-order-by-ordering-ignore-nulls) | Returns `expr` evaluated at the row that is the last row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
+| [`lead(expr[, offset[, default]][ ORDER BY ordering][ IGNORE NULLS])`](#leadexpr-offset-default-order-by-ordering-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
+| [`nth_value(expr, nth[ ORDER BY ordering][ IGNORE NULLS])`](#nth_valueexpr-nth-order-by-ordering-ignore-nulls) | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); `NULL` if no such row. |
+| [`ntile(num_buckets[ ORDER BY ordering])`](#ntilenum_buckets-order-by-ordering) | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. |
+| [`percent_rank([ORDER BY ordering])`](#percent_rankorder-by-ordering) | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. |
 | [`rank_dense()`](#rank_dense) | The rank of the current row *without gaps*. |
-| [`rank([ORDER BY ordering])`](#rank) | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
-| [`row_number([ORDER BY ordering])`](#row_number) | The number of the current row within the partition, counting from 1. |
+| [`rank([ORDER BY ordering])`](#rankorder-by-ordering) | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
+| [`row_number([ORDER BY ordering])`](#row_numberorder-by-ordering) | The number of the current row within the partition, counting from 1. |
 
 #### `cume_dist([ORDER BY ordering])`
 
