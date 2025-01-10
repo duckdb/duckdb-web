@@ -10,23 +10,25 @@ The following logical operators are available: `AND`, `OR` and `NOT`. SQL uses a
 
 ### Binary Operators: `AND` and `OR`
 
+<div class="monospace_table"></div>
 
 | `a` | `b` | `a AND b` | `a OR b` |
 |:---|:---|:---|:---|
-| `true` | `true` | `true` | `true` |
-| `true` | `false` | `false` | `true` |
-| `true` | `NULL` | `NULL` | `true` |
-| `false` | `false` | `false` | `false` |
-| `false` | `NULL` | `false` | `NULL` |
-| `NULL` | `NULL` | `NULL` | `NULL`|
+| true | true | true | true |
+| true | false | false | true |
+| true | NULL | NULL | true |
+| false | false | false | false |
+| false | NULL | false | NULL |
+| NULL | NULL | NULL | NULL|
 
-### Unary Operator: `NOT`
+### Unary Operator: NOT
 
+<div class="monospace_table"></div>
 
 | `a` | `NOT a` |
 |:---|:---|
-| `true` | `false` |
-| `false` | `true` |
-| `NULL` | `NULL` |
+| true | false |
+| false | true |
+| NULL | NULL |
 
 The operators `AND` and `OR` are commutative, that is, you can switch the left and right operand without affecting the result.

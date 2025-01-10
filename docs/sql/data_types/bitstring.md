@@ -4,7 +4,6 @@ title: Bitstring Type
 blurb: The bitstring type are strings of 1s and 0s.
 ---
 
-
 | Name | Aliases | Description |
 |:---|:---|:---|
 | `BITSTRING` | `BIT` | Variable-length strings of 1s and 0s |

@@ -102,7 +102,6 @@ FROM addresses
 ORDER BY ALL;
 ```
 
-
 |        address         |   city    |    zip     |
 |------------------------|-----------|------------|
 | 111 Duck Duck Goose Ln | Duck Town | 11111      |

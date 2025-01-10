@@ -9,7 +9,6 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 
 ## Dot Commands
 
-
 <!-- markdownlint-disable MD056 -->
 
 | Command | Description |

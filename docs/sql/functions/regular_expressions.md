@@ -113,15 +113,14 @@ SELECT regexp_matches('abc', 'A', 'i');    -- true
 
 The regex functions support the following `options`.
 
-
 | Option | Description |
 |:---|:---|
-| `'c'`               | case-sensitive matching                             |
-| `'i'`               | case-insensitive matching                           |
-| `'l'`               | match literals instead of regular expression tokens |
-| `'m'`, `'n'`, `'p'` | newline sensitive matching                          |
-| `'g'`               | global replace, only available for `regexp_replace` |
-| `'s'`               | non-newline sensitive matching                      |
+| `'c'`               | Case-sensitive matching                             |
+| `'i'`               | Case-insensitive matching                           |
+| `'l'`               | Match literals instead of regular expression tokens |
+| `'m'`, `'n'`, `'p'` | Newline sensitive matching                          |
+| `'g'`               | Global replace, only available for `regexp_replace` |
+| `'s'`               | Non-newline sensitive matching                      |
 
 For example:
 
@@ -136,7 +135,6 @@ SELECT regexp_matches(E'hello\nworld', 'hello.world', 's'); -- true
 ### Using `regexp_matches`
 
 The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'c'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#regular-expression-syntax) doesn't match the `.` character to newline.
-
 
 | Original | Optimized equivalent |
 |:---|:---|

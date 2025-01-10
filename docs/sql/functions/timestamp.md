@@ -8,7 +8,6 @@ title: Timestamp Functions
 This section describes functions and operators for examining and manipulating [`TIMESTAMP` values]({% link docs/sql/data_types/timestamp.md %}).
 See also the related [`TIMESTAMPTZ` functions]({% link docs/sql/functions/timestamptz.md %}).
 
-
 ## Timestamp Operators
 
 The table below shows the available mathematical operators for `TIMESTAMP` types.
@@ -197,7 +196,6 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Description** | Converts integer milliseconds since the epoch to a timestamp. |
 | **Example** | `epoch_ms(701222400000)` |
 | **Result** | `1992-03-22 00:00:00` |
-
 
 #### `epoch_ms(timestamp)`
 

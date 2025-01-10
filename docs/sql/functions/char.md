@@ -883,7 +883,6 @@ SELECT format('I''d rather be {1} than {0}.', 'right', 'happy'); -- I'd rather b
 
 #### Format Specifiers
 
-
 | Specifier | Description | Example |
 |:-|:------|:---|
 | `{:d}`   | integer                                | `123456`       |
@@ -1002,7 +1001,6 @@ I'd rather be happy than right.
 ```
 
 #### Format Specifiers
-
 
 | Specifier | Description | Example |
 |:-|:------|:---|

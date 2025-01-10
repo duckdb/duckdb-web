@@ -100,7 +100,6 @@ res = duckdb.df(df).select(const).fetchall()
 print(res)
 ```
 
-
 ```text
 [('hello',), ('hello',), ('hello',), ('hello',)]
 ```

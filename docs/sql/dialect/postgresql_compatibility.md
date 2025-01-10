@@ -44,13 +44,11 @@ SELECT 1 / 2 AS x;
 
 PostgreSQL returns:
 
-
 |    x |
 | ---: |
 |    0 |
 
 DuckDB returns:
-
 
 |    x |
 | ---: |
@@ -61,7 +59,6 @@ To perform integer division in DuckDB, use the `//` operator:
 ```sql
 SELECT 1 // 2 AS x;
 ```
-
 
 |    x |
 | ---: |

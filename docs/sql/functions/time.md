@@ -11,7 +11,6 @@ This section describes functions and operators for examining and manipulating [`
 
 The table below shows the available mathematical operators for `TIME` types.
 
-
 | Operator | Description | Example | Result |
 |:-|:---|:----|:--|
 | `+` | addition of an `INTERVAL` | `TIME '01:02:03' + INTERVAL 5 HOUR` | `06:02:03` |

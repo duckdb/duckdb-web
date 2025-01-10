@@ -85,7 +85,6 @@ All [`LIST` functions]({% link docs/sql/functions/list.md %}) work with the [`AR
 | **Example** | `array_dot_product(l1, l2)` |
 | **Result** | `20.0` |
 
-
 #### `array_negative_dot_product(array1, array2)`
 
 <div class="nostroke_table"></div>

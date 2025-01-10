@@ -7,7 +7,6 @@ title: Creating JSON
 
 The following functions are used to create JSON.
 
-
 | Function | Description |
 |:--|:----|
 | `to_json(any)` | Create `JSON` from a value of `any` type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object. |
