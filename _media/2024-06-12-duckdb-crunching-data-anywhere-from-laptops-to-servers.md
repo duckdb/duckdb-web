@@ -16,7 +16,7 @@ length: "35 min"
 
 Event: [GOTO Amsterdam 2024](https://gotoams.nl/2024/)
 
-Speaker: Gabor Szarnyas (DuckDB Labs)
+Speaker: [Gabor Szarnyas (DuckDB Labs)](https://szarnyasg.org/)
 
 <div class="box-link-wrapper">
 	<div class="box-link full-width">

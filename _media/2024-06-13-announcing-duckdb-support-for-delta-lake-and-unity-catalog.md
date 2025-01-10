@@ -16,4 +16,4 @@ length: "5 min"
 
 Event: [Databricks Data + AI Summit](https://www.databricks.com/dataaisummit/)
 
-Speaker: Hannes Mühleisen (DuckDB Labs)
+Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

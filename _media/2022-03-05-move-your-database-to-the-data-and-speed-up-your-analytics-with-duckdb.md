@@ -14,4 +14,4 @@ length: "80 min"
 
 Podcast: [Data Engineering Podcast](https://www.dataengineeringpodcast.com/)
 
-Speaker: Hannes Mühleisen (DuckDB Labs)
+Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

@@ -16,4 +16,4 @@ length: "30 min"
 
 Event: [Data Engineering for AI/ML](https://home.mlops.community/public/events/dataengforai)
 
-Speaker: Hannes Mühleisen (DuckDB Labs)
+Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

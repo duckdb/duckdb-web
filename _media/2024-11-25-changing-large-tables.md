@@ -14,4 +14,4 @@ length: "20 min"
 
 Event: [Forward Data](https://www.forward-data-conference.com/en)
 
-Guest: Hannes Mühleisen (DuckDB Labs)
+Guest: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

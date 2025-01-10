@@ -16,4 +16,4 @@ You can also listen to the episode on [Apple Podcasts](https://podcasts.apple.co
 
 Podcast: [The Joe Reis Show](https://www.forward-data-conference.com/en)
 
-Guest: Hannes Mühleisen (DuckDB Labs)
+Guest: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

@@ -16,4 +16,4 @@ length: "20 min"
 
 Event: [PyData Amsterdam 2023](https://amsterdam.pydata.org/)
 
-Speaker: Hannes Mühleisen (DuckDB Labs)
+Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

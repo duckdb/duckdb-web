@@ -16,4 +16,4 @@ length: "65 min"
 
 Podcast: [The Geek Narrator](https://www.geeknarrator.com/)
 
-Guest: Mark Raasveldt (DuckDB Labs)
+Guest: [Mark Raasveldt (DuckDB Labs)](https://mytherin.github.io/)
