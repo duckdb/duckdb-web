@@ -91,7 +91,7 @@ With `'unstructured'`, the top-level JSON is read, e.g. for `birds.json`:
 ```
 
 ```sql
-FROM read_json('birds.json', format = 'unstructured');
+FROM read_json_objects('birds.json', format = 'unstructured');
 ```
 
 will result in two objects being read:
