@@ -117,7 +117,6 @@ give the user information on which extensions were updated to/from which version
 UPDATE EXTENSIONS;
 ```
 
-
 | extension_name | repository   | update_result         | previous_version | current_version |
 |:---------------|:-------------|:----------------------|:-----------------|:----------------|
 | httpfs         | core         | NO_UPDATE_AVAILABLE   | 70fd6a8a24       | 70fd6a8a24      |
@@ -133,7 +132,6 @@ The update statement can also be provided with a list of specific extensions to 
 ```sql
 UPDATE EXTENSIONS (httpfs, azure);
 ```
-
 
 | extension_name | repository   | update_result         | previous_version | current_version |
 |:---------------|:-------------|:----------------------|:-----------------|:----------------|

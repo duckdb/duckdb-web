@@ -73,7 +73,6 @@ Some additional configuration options exist for the S3 upload, though the defaul
 
 Additionally, most of the configuration options can be set via environment variables:
 
-
 | DuckDB setting         | Environment variable    | Note                                     |
 |:-----------------------|:------------------------|:-----------------------------------------|
 | `s3_region`            | `AWS_REGION`            | Takes priority over `AWS_DEFAULT_REGION` |

@@ -222,7 +222,6 @@ CREATE TABLE "Generation History" AS
 
 After partitioning by plant and ordering by date, it will have this layout:
 
-
 | Plant | Date | MWh |
 |:---|:---|---:|
 | Boston | 2019-01-02 | 564337 |
@@ -266,7 +265,6 @@ ORDER BY 1, 2;
 ```
 
 The result will be the following:
-
 
 | Plant | Date | Row |
 |:---|:---|---:|
@@ -337,7 +335,6 @@ orders each plant's partition by `Date` (to put the energy measurements next to 
 and uses a `RANGE` frame of three days on either side of each day for the `avg`
 (to handle any missing days).
 This is the result:
-
 
 | Plant | Date | MWh 7-day Moving Average |
 |:---|:---|---:|

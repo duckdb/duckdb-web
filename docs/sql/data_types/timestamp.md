@@ -115,7 +115,6 @@ The values `infinity` and `-infinity` are special cased and are displayed unchan
 SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
 ```
 
-
 | Negative  | Epoch               | Positive |
 |:----------|:--------------------|:---------|
 | -infinity | 1970-01-01 00:00:00 | infinity |

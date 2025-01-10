@@ -421,7 +421,6 @@ SELECT json_group_structure(j) FROM example2;
 In many cases, it is inefficient to extract values from JSON one-by-one.
 Instead, we can “extract” all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
 
-
 | Function | Description |
 |:---|:---|
 | `json_transform(json, structure)` | Transform `json` according to the specified `structure`. |

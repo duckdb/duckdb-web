@@ -4,10 +4,9 @@ title: Enum Data Type
 blurb: The Enum type represents a dictionary data structure with all possible unique values of a column.
 ---
 
-
 | Name | Description |
 |:--|:-----|
-| enum | Dictionary Encoding representing all possible string values of a column. |
+| enum | Dictionary Encoding representing all possible string values of a column |
 
 The enum type represents a dictionary data structure with all possible unique values of a column. For example, a column storing the days of the week can be an enum holding all possible days. Enums are particularly interesting for string columns with low cardinality (i.e., fewer distinct values). This is because the column only stores a numerical reference to the string in the enum dictionary, resulting in immense savings in disk storage and faster query performance.
 

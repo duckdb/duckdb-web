@@ -88,7 +88,6 @@ WHERE
     function_rank < 3;
 ```
 
-
 | schema_name |  function_name  | function_rank |
 |:---|:---|:---|
 | main        | !__postfix      | 1             |

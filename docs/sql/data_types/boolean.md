@@ -4,7 +4,6 @@ title: Boolean Type
 blurb: The BOOLEAN type represents a statement of truth (“true” or “false”).
 ---
 
-
 | Name | Aliases | Description |
 |:---|:---|:---|
 | `BOOLEAN` | `BOOL` | Logical Boolean (`true`/`false`) |
@@ -46,7 +45,7 @@ Below is the truth table for the `AND` conjunction (i.e., `x AND y`).
 
 <div class="monospace_table"></div>
 
-|  X  | X AND true  | X AND false | X AND NULL  |
+| `X` | `X AND true` | `X AND false` | `X AND NULL` |
 |-------|-------|-------|-------|
 | true  | true  | false | NULL  |
 | false | false | false | false |
@@ -56,7 +55,7 @@ Below is the truth table for the `OR` conjunction (i.e., `x OR y`).
 
 <div class="monospace_table"></div>
 
-|  X   | X OR true | X OR false | X OR NULL |
+| `X` | `X OR true` | `X OR false` | `X OR NULL` |
 |-------|------|-------|------|
 | true  | true | true  | true |
 | false | true | false | NULL |
