@@ -72,6 +72,7 @@ SELECT
     datepart('year', INTERVAL 12 YEARS), -- returns 12
     datepart('second', INTERVAL 1_234 MILLISECONDS), -- returns 1
     datepart('microsecond', INTERVAL 1_234 MILLISECONDS), -- returns 1_234_000
+;
 ```
 
 ## Arithmetic with Timestamps, Dates and Intervals
