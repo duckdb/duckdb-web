@@ -214,7 +214,7 @@ The benchmark continued to use Python, but I'm just showing the SQL here for bet
 CREATE OR REPLACE VIEW metrics AS 
     SELECT 
         date,
-        SUM(failure) AS failures
+        sum(failure) AS failures
     FROM read_csv_auto('⟨s3_path⟩/*.csv', union_by_name = true)
     GROUP BY date;
 
@@ -238,8 +238,8 @@ To exercise the `BY NAME` capability, we add a column to the SQL query that is p
 CREATE OR REPLACE VIEW metrics AS 
     SELECT 
         date,
-        COUNT(DISTINCT datacenter) AS datacenters,
-        SUM(failure) AS failures
+        count(DISTINCT datacenter) AS datacenters,
+        sum(failure) AS failures
     FROM read_csv_auto('⟨s3_path⟩/*.csv', union_by_name = true)
     GROUP BY date;
 
@@ -259,8 +259,8 @@ The updated SQL statement looks like this:
 COPY (
     SELECT 
         date, 
-        COUNT(DISTINCT datacenter) AS datacenters,
-        SUM(failure) as failures
+        count(DISTINCT datacenter) AS datacenters,
+        sum(failure) AS failures
     FROM read_csv_auto('⟨s3_path⟩/*.csv', union_by_name = true)
     GROUP BY date
 ) TO '⟨s3_path⟩/results/results.csv';
@@ -274,7 +274,7 @@ We can quantify the overhead of the flexibility that `UNION ALL BY NAME` provide
 COPY (
     SELECT 
         date, 
-        SUM(failure) as failures
+        sum(failure) AS failures
     FROM read_csv_auto('⟨s3_path⟩/*.csv')
     GROUP BY date
 ) TO '⟨s3_path⟩/results/results.csv';
