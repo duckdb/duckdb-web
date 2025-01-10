@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Changing Large Tables"
+title: "Changing large tables"
 author: Hannes Mühleisen
 excerpt: ""
 toc: false

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB Deep Dive, the Challenges of Lakehouses, and More"
+title: "DuckDB deep dive, the challenges of lakehouses, and more"
 author: Hannes Mühleisen
 excerpt: ""
 toc: false

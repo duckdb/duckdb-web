@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB and the Future of Databases"
+title: "DuckDB and the future of databases"
 author: Hannes Mühleisen
 excerpt: ""
 toc: false
