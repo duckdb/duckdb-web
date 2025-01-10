@@ -33,7 +33,7 @@ title: List Functions
 | [`list_intersect(list1, list2)`](#list_intersectlist1-list2) | Returns a list of all the elements that exist in both `l1` and `l2`, without duplicates. |
 | [`list_position(list, element)`](#list_positionlist-element) | Returns the index of the element if the list contains the element. If the element is not found, it returns `NULL`. |
 | [`list_prepend(element, list)`](#list_prependelement-list) | Prepends `element` to `list`. |
-| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. While list functions use a 1-based indexing, `list_reduce` uses a 0-based indexing. This is a [known issue](https://github.com/duckdb/duckdb/issues/14619). |
+| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
 | [`list_resize(list, size[, value])`](#list_resizelist-size-value) | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
 | [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | [`list_reverse(list)`](#list_reverselist) | Reverses the list. |
@@ -279,8 +279,8 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. While list functions use a 1-based indexing, `list_reduce` uses a 0-based indexing. This is a [known issue](https://github.com/duckdb/duckdb/issues/14619). |
-| **Example** | `list_reduce([4, 5, 6], (x, y) -> x + y)` |
+| **Description** | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
+| **Example** | `list_reduce([4, 5, 6], (acc, x) -> acc + x)` |
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
 

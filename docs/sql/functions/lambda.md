@@ -13,7 +13,7 @@ For example, the following are all valid lambda functions:
 
 * `param -> param > 1`
 * `s -> contains(concat(s, 'DB'), 'duck')`
-* `(x, y) -> x + y`
+* `(acc, x) -> acc + x`
 
 ## Scalar Functions That Accept Lambda Functions
 
@@ -46,7 +46,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. The list must have at least one element – the use of an initial accumulator value is currently not supported. For more information, see [Reduce](#reduce). |
-| **Example** | `list_reduce([4, 5, 6], (x, y) -> x + y)` |
+| **Example** | `list_reduce([4, 5, 6], (acc, x) -> acc + x)` |
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
 
@@ -102,7 +102,7 @@ SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
 ## Indexes as Parameters
 
 All lambda functions accept an optional extra parameter that represents the index of the current element.
-This is always the last parameter of the lambda function (e.g., `i` in `(x, y, i)`), and is 1-based (i.e., the first element has index 1).
+This is always the last parameter of the lambda function (e.g., `i` in `(x, i)`), and is 1-based (i.e., the first element has index 1).
 
 Get all elements that are larger than their index:
 
@@ -244,7 +244,7 @@ The list must have at least one element.
 Sum of all list elements:
 
 ```sql
-SELECT list_reduce([1, 2, 3, 4], (x, y) -> x + y);
+SELECT list_reduce([1, 2, 3, 4], (acc, x) -> acc + x);
 ```
 
 ```text
@@ -254,7 +254,7 @@ SELECT list_reduce([1, 2, 3, 4], (x, y) -> x + y);
 Only add up list elements if they are greater than 2:
 
 ```sql
-SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (x, y) -> x + y);
+SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (acc, x) -> acc + x);
 ```
 
 ```text
@@ -264,7 +264,7 @@ SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (x, y) -> x + y);
 Concat all list elements:
 
 ```sql
-SELECT list_reduce(['DuckDB', 'is', 'awesome'], (x, y) -> concat(x, ' ', y));
+SELECT list_reduce(['DuckDB', 'is', 'awesome'], (acc, x) -> concat(acc, ' ', x));
 ```
 
 ```text
