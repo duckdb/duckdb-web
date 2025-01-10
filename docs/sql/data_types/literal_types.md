@@ -184,7 +184,7 @@ Even more, you can insert alphanumeric tags in the double-dollar symbols to allo
 SELECT $tag$ this string can contain newlines,
 'single quotes',
 "double quotes",
-and $$dollar quotes$$ $tag$ AS msg
+and $$dollar quotes$$ $tag$ AS msg;
 ```
 
 <!-- This output intentionally uses the duckbox formatter -->
