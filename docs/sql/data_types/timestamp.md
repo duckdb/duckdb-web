@@ -11,11 +11,11 @@ They can be created using the type name followed by a string formatted according
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `TIMESTAMP_NS` |                                           | naive timestamp with nanosecond precision              |
-| `TIMESTAMP`    | `DATETIME`, `TIMESTAMP WITHOUT TIME ZONE` | naive timestamp with microsecond precision             |
-| `TIMESTAMP_MS` |                                           | naive timestamp with millisecond precision             |
-| `TIMESTAMP_S`  |                                           | naive timestamp with second precision                  |
-| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | time zone aware timestamp with microsecond precision   |
+| `TIMESTAMP_NS` |                                           | Naive timestamp with nanosecond precision              |
+| `TIMESTAMP`    | `DATETIME`, `TIMESTAMP WITHOUT TIME ZONE` | Naive timestamp with microsecond precision             |
+| `TIMESTAMP_MS` |                                           | Naive timestamp with millisecond precision             |
+| `TIMESTAMP_S`  |                                           | Naive timestamp with second precision                  |
+| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | Time zone aware timestamp with microsecond precision   |
 
 > Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [Parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
 

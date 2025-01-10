@@ -6,7 +6,7 @@ blurb: The BOOLEAN type represents a statement of truth (“true” or “false�
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `BOOLEAN` | `BOOL` | Logical Boolean (`true`/`false`) |
+| `BOOLEAN` | `BOOL` | Logical Boolean (`true` / `false`) |
 
 The `BOOLEAN` type represents a statement of truth (“true” or “false”). In SQL, the `BOOLEAN` field can also have a third state “unknown” which is represented by the SQL `NULL` value.
 
