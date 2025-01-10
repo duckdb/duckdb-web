@@ -205,7 +205,7 @@ The benchmark requires reading 16 GB of CSV files stored on S3 that have changin
 The intent behind it is to process large datasets on small commodity hardware (which is a use case where we want to see DuckDB be helpful!).
 The original post uses Linode, but for this post we selected the most similar AWS instance having the same amount of memory (c5d.large).
 
-The CSV files are sources from [this Backblaze dataset](https://www.backblaze.com/cloud-storage/resources/hard-drive-test-data#downloadingTheRawTestData) and loaded into an S3 bucket.
+We use two quarters' of CSV files from the [Backblaze dataset](https://www.backblaze.com/cloud-storage/resources/hard-drive-test-data#downloadingTheRawTestData) ([2023 Q2](https://blobs.duckdb.org/data/backblaze-data-2023-Q2.zip) and [2023 Q3](https://blobs.duckdb.org/data/backblaze-data-2023-Q3.zip)), which are placed in an S3 bucket.
 
 I modified the query [from here](https://dataengineeringcentral.substack.com/i/141997113/duckdb-reading-gb-from-s-on-a-gb-machine) very slightly to remove the `ignore_errors = true` option.
 The benchmark continued to use Python, but I'm just showing the SQL here for better syntax highlighting:
