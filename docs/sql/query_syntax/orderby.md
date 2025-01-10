@@ -118,7 +118,6 @@ FROM addresses
 ORDER BY ALL DESC;
 ```
 
-
 |        address         |   city    |    zip     |
 |------------------------|-----------|------------|
 | 123 Quack Blvd         | DuckTown  | 11111      |

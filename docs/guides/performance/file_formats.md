@@ -40,7 +40,6 @@ DuckDB works best on Parquet files with row groups of 100K-1M rows each. The rea
 
 We run a simple aggregation query over Parquet files using different row group sizes, selected between 960 and 1,966,080. The results are as follows.
 
-
 | Row group size | Execution time |
 |---------------:|---------------:|
 | 960            | 8.77 s         |
@@ -75,7 +74,6 @@ For tips on reading and writing Parquet files, see the [Parquet Tips page]({% li
 ## Loading CSV Files
 
 CSV files are often distributed in compressed format such as GZIP archives (`.csv.gz`). DuckDB can decompress these files on the fly. In fact, this is typically faster than decompressing the files first and loading them due to reduced IO.
-
 
 | Schema | Load time |
 |---|--:|

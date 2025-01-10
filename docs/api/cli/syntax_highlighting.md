@@ -14,7 +14,6 @@ Syntax highlighting can also be disabled entirely using the `.highlight off` com
 
 Below is a list of components that can be configured.
 
-
 |          Type           |   Command   |  Default color  |
 |-------------------------|-------------|-----------------|
 | Keywords                | `.keyword`  | `green`         |
@@ -25,7 +24,6 @@ Below is a list of components that can be configured.
 | Continuation (Selected) | `.cont_sel` | `green`         |
 
 The components can be configured using either a supported color name (e.g., `.keyword red`), or by directly providing a terminal code to use for rendering (e.g., `.keywordcode \033[31m`). Below is a list of supported color names and their corresponding terminal codes.
-
 
 |     Color     | Terminal code |
 |---------------|---------------|

@@ -34,7 +34,6 @@ Division of fixed-point decimals does not typically produce numbers with finite 
 
 Internally, decimals are represented as integers depending on their specified `WIDTH`.
 
-
 | Width | Internal | Size (bytes) |
 |:---|:---|---:|
 | 1-4 | `INT16` | 2 |
@@ -48,11 +47,10 @@ Performance can be impacted by using too large decimals when not required. In pa
 
 The data types `FLOAT` and `DOUBLE` precision are variable-precision numeric types. In practice, these types are usually implementations of IEEE Standard 754 for Binary Floating-Point Arithmetic (single and double precision, respectively), to the extent that the underlying processor, operating system, and compiler support it.
 
-
 | Name | Aliases | Description |
 |:--|:--|:--------|
-| `FLOAT` | `FLOAT4`, `REAL` | single precision floating-point number (4 bytes) |
-| `DOUBLE` | `FLOAT8` | double precision floating-point number (8 bytes) |
+| `FLOAT` | `FLOAT4`, `REAL` | Single precision floating-point number (4 bytes) |
+| `DOUBLE` | `FLOAT8` | Double precision floating-point number (8 bytes) |
 
 Like for fixed-point data types, conversion from literals or casts from other datatypes to floating-point types stores inputs that cannot be represented exactly as approximations. However, it can be harder to predict what inputs are affected by this. For example, it is not surprising that `1.3::DECIMAL(1, 0) - 0.7::DECIMAL(1, 0) != 0.6::DECIMAL(1, 0)` but it may he surprising that `1.3::FLOAT - 0.7::FLOAT != 0.6::FLOAT`.
 
@@ -91,7 +89,6 @@ SELECT
 | (sqrt(2) > '-inf') | ('nan' > sqrt(2)) |
 |-------------------:|------------------:|
 | true               | true              |
-
 
 ## Universally Unique Identifiers (`UUID`s)
 

@@ -25,7 +25,7 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 <div class="monospace_table"></div>
 
 | Expression              | PostgreSQL |    DuckDB |  IEEE 754 |
-| :---------------------- | ---------: | --------: | --------: |
+|:------------------------|-----------:|----------:|----------:|
 | 1.0 / 0.0               |      error |  Infinity |  Infinity |
 | 0.0 / 0.0               |      error |       NaN |       NaN |
 | -1.0 / 0.0              |      error | -Infinity | -Infinity |
@@ -85,12 +85,10 @@ ERROR:  UNION types boolean and integer cannot be matched
 
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
-
-
-|    x |
-| ---: |
-|    1 |
-|    2 |
+|   x|
+|---:|
+|   1|
+|   2|
 
 ## Case Sensitivity for Quoted Identifiers
 
@@ -133,8 +131,8 @@ SELECT table_name FROM duckdb_tables();
 
 <div class="monospace_table"></div>
 
-| table_name    |
-| ------------- |
+|  table_name   |
+|---------------|
 | MyTaBLe       |
 | PreservedCase |
 
@@ -149,7 +147,7 @@ SELECT table_name FROM duckdb_tables();
 <div class="monospace_table"></div>
 
 | table_name |
-| ---------- |
+|------------|
 | mytable    |
 
 However, the case insensitive matching in the system for identifiers cannot be turned off.
@@ -166,8 +164,8 @@ DuckDB returns:
 
 <div class="monospace_table"></div>
 
-|    t |
-| ---: |
+|  t   |
+|-----:|
 | true |
 
 Postgres returns:
@@ -235,4 +233,3 @@ DESCRIBE myschema.mytable;
 | column_name |   column_type    | null | key  | default | extra |
 |-------------|------------------|------|------|---------|-------|
 | v           | ENUM('as', 'df') | YES  | NULL | NULL    | NULL  |
-

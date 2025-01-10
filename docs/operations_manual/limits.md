@@ -14,4 +14,3 @@ This page contains DuckDB's built-in limit values.
 | Memory use | 80% of RAM | [`memory_limit`]({% link docs/configuration/pragmas.md %}#memory-limit) | Note: This limit only applies to the buffer manager. |
 | String size | 4 GB | - | |
 | Temporary directory size | unlimited | [`max_temp_directory_size`]({% link docs/configuration/overview.md %}) | |
-

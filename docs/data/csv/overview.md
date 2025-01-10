@@ -136,7 +136,6 @@ The `read_csv` automatically attempts to figure out the correct configuration of
 SELECT * FROM read_csv('flights.csv');
 ```
 
-
 | FlightDate | UniqueCarrier | OriginCityName |  DestCityName   |
 |------------|---------------|----------------|-----------------|
 | 1988-01-01 | AA            | New York, NY   | Los Angeles, CA |
@@ -152,7 +151,6 @@ CREATE TABLE ontime AS
     SELECT * FROM read_csv('flights.csv');
 DESCRIBE ontime;
 ```
-
 
 |  column_name   | column_type | null | key  | default | extra |
 |----------------|-------------|------|------|---------|-------|
@@ -187,7 +185,6 @@ CREATE TABLE ontime (
 COPY ontime FROM 'flights.csv';
 SELECT * FROM ontime;
 ```
-
 
 | flightdate | uniquecarrier | origincityname |  destcityname   |
 |------------|---------------|----------------|-----------------|

@@ -95,7 +95,6 @@ So how do we disambiguate if we want to create a `UNION` with multiple members o
 
 `UNION` types can be cast between each other if the source type is a “subset” of the target type. In other words, all the tags in the source `UNION` must be present in the target `UNION`, and all the types of the matching tags must be implicitly castable between source and target. In essence, this means that `UNION` types are covariant with respect to their members.
 
-
 | Ok | Source                 | Target                 | Comments                               |
 |----|------------------------|------------------------|----------------------------------------|
 | ✅ | `UNION(a A, b B)`      | `UNION(a A, b B, c C)` |                                        |

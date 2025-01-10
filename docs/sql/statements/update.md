@@ -48,7 +48,6 @@ SELECT *
 FROM original;
 ```
 
-
 | key |      value       |
 |-----|------------------|
 | 1   | original value   |
@@ -77,7 +76,6 @@ UPDATE original
 SELECT *
 FROM original;
 ```
-
 
 | key |    value    |
 |-----|-------------|

@@ -7,7 +7,7 @@ blurb: The bitstring type are strings of 1s and 0s.
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `BITSTRING` | `BIT` | variable-length strings of 1s and 0s |
+| `BITSTRING` | `BIT` | Variable-length strings of 1s and 0s |
 
 Bitstrings are strings of 1s and 0s. The bit type data is of variable length. A bitstring value requires 1 byte for each group of 8 bits, plus a fixed amount to store some metadata.
 
