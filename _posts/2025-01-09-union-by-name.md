@@ -230,8 +230,6 @@ However, between the original post and version 1.1.3, DuckDB added the capabilit
 This means that only the columns used in the query are actually read from the CSV, not all columns. 
 As a result, we can actually remove the `union_by_name = true` for the benchmark query and run successfully. 
 This requires less overhead (since we do not need to invest time checking if all schemas match - we can rely on the first schema that is read). 
-
-This allows us to quantify the overhead of the flexibility that `UNION ALL BY NAME` provides.
 The simplified query runs in only 4 minutes, but it fails to exercise the capability we discussed - handling schema evolution!
 
 To exercise the `BY NAME` capability, we add a column to the SQL query that is present only in some of the files. 
@@ -268,8 +266,24 @@ COPY (
 ) TO '⟨s3_path⟩/results/results.csv';
 ```
 
-Performance improves to about 3.7 minutes with this change and also reduces the test down to a single query.
+Performance improves to about 4.1 minutes with this change and also reduces the test down to a single query.
 
+We can quantify the overhead of the flexibility that `UNION ALL BY NAME` provides if we keep the improved subquery syntax, but once again remove the `datacenter` column and the `union_by_name` flag.
+
+```sql
+COPY (
+    SELECT 
+        date, 
+        SUM(failure) as failures
+    FROM read_csv_auto('⟨s3_path⟩/*.csv')
+    GROUP BY date
+) TO '⟨s3_path⟩/results/results.csv';
+```
+
+This query runs in 3.7 minutes, so the overhead of handling schema evolution is only about 10%!
+That is a small price to pay for flexibilty and ease of use.
+
+However, we can improve performance further still.
 The next change was to increase the number of threads that DuckDB uses.
 By default, DuckDB will use a single thread per core.
 However, this is a very I/O intensive query (due to the network hops reading from then writing to S3) and less of a CPU intensive one.
@@ -288,6 +302,7 @@ Additional threads do use more memory, but with the improvements in 1.1, this is
 | c5d.large | 2    | 4                     | create view, copy                 | BY POSITION       | 2       | 4.0                  | 0.47                 |
 | c5d.large | 2    | 4                     | create view, copy, new col        | BY NAME           | 2       | 5.6                  | 0.47                 |
 | c5d.large | 2    | 4                     | copy subquery, new col            | BY NAME           | 2       | 4.1                  | 0.47                 |
+| c5d.large | 2    | 4                     | copy subquery                     | BY POSITION       | 2       | 3.7                  | 0.49                 |
 | c5d.large | 2    | 4                     | copy subquery, new col            | BY NAME           | 4       | 3.0                  | 0.77                 |
 
 ## Closing Thoughts
