@@ -85,6 +85,11 @@ SET max_temp_directory_size = '4GB';
 DuckDB has a powerful extension mechanism, which have the same privileges as the user running DuckDB's (parent) process.
 This introduces security considerations. Therefore, we recommend reviewing the configuration options for [securing extensions]({% link docs/operations_manual/securing_duckdb/securing_extensions.md %}).
 
+## Privileges
+
+Avoid running DuckDB as a root user (e.g., using `sudo`).
+There is no good reason to run DuckDB as root.
+
 ## Generic Solutions
 
 Securing DuckDB can also be supported via proven means, for example:
