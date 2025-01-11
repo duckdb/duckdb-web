@@ -9,6 +9,8 @@ blurb: Numeric types are used to store numbers, and come in different shapes and
 The types `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` and `HUGEINT` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
 The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` and `UHUGEINT` store whole unsigned numbers. Attempts to store negative numbers or values outside of the allowed range will result in an error.
 
+<div class="center_aligned_header_table"></div>
+
 | Name        | Aliases                          |                                      Min |                                     Max |
 | :---------- | :------------------------------- | ---------------------------------------: | --------------------------------------: |
 | `TINYINT`   | `INT1`                           |                                     -128 |                                     127 |
@@ -86,16 +88,16 @@ SELECT
 
 <div class="monospace_table"></div>
 
-| (sqrt(2) > '-inf') | ('nan' > sqrt(2)) |
-| -----------------: | ----------------: |
-|               true |              true |
+| `(sqrt(2) > '-inf')` | `('nan' > sqrt(2))` |
+|---------------------:|----------------- -: |
+|                 true |                true |
 
 ## Universally Unique Identifiers (`UUID`s)
 
 DuckDB supports universally unique identifiers (UUIDs) through the `UUID` type. These use 128 bits and are represented internally as `HUGEINT` values.
 When printed, they are shown with lowercase hexadecimal characters, separated by dashes as follows: `⟨8 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨4 characters⟩-⟨12 characters⟩` (using 36 characters in total including the dashes). For example, `4ac7a9e9-607c-4c8a-84f3-843f0191e3fd` is a valid UUID.
 
-To generate a new UUID, use the [`uuid()` utility function]({% link docs/sql/functions/utility.md %}#utility-functions).
+To generate a new UUID, use the [`uuid()` utility function]({% link docs/sql/functions/utility.md %}#uuid).
 
 ## Functions
 
