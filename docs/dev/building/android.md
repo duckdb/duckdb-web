@@ -114,6 +114,6 @@ ld.lld: error: undefined symbol: __android_log_write
 **Solution:**
 Make sure the log library is linked:
 
-```bash
+```batch
 export LDFLAGS="-llog"
 ```
