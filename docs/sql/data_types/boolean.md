@@ -39,7 +39,7 @@ In this case 5 and `NULL` are filtered out (`5 > 10` is `false` and `NULL > 10` 
 
 ## Conjunctions
 
-The `AND`/`OR` conjunctions can be used to combine Boolean values.
+The `AND` / `OR` conjunctions can be used to combine Boolean values.
 
 Below is the truth table for the `AND` conjunction (i.e., `x AND y`).
 

@@ -163,7 +163,7 @@ DESCRIBE ontime;
 SELECT * FROM read_csv('flights.csv', sample_size = 20_000);
 ```
 
-If we set `delim`/`sep`, `quote`, `escape`, or `header` explicitly, we can bypass the automatic detection of this particular parameter:
+If we set `delim` / `sep`, `quote`, `escape`, or `header` explicitly, we can bypass the automatic detection of this particular parameter:
 
 ```sql
 SELECT * FROM read_csv('flights.csv', header = true);
