@@ -60,8 +60,8 @@ extended_description: |
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 391
-extension_download_count_pretty: 391
+extension_download_count: 400
+extension_download_count_pretty: 400
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---
