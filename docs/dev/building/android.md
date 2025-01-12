@@ -73,28 +73,34 @@ We provide build instructions for setups using macOS and Android Studio. For oth
 
 ## Building the CLI in Termux
 
-To build the [command line client]({% link docs/api/cli/overview.md %}) in the [Termux application](https://termux.dev/), install the following packages:
+1. To build the [command line client]({% link docs/api/cli/overview.md %}) in the [Termux application](https://termux.dev/), install the following packages:
 
-```batch
-pkg install -y git ninja clang cmake python3
-```
+   ```batch
+   pkg install -y git ninja clang cmake python3
+   ```
 
-Clone the DuckDB repository and build it as follows:
+1. Set the list of DuckDB extensions to build. These will be statically linked in the binary. For example:
 
-```batch
-mkdir build
-cd build
-export LDFLAGS="-llog"
-cmake \
-    -G "Ninja" \
-    -DBUILD_EXTENSIONS="" \
-    -DDUCKDB_EXPLICIT_PLATFORM=linux_arm64_android \
-    -DCMAKE_BUILD_TYPE=Release \
-    ..
-cmake --build . --config Release
-```
+   ```batch
+   DUCKDB_EXTENSIONS="icu;json"
+   ```
 
-Note that you can also use the Python client:
+1. Build DuckDB as follows:
+
+   ```batch
+   mkdir build
+   cd build
+   export LDFLAGS="-llog"
+   cmake \
+      -G "Ninja" \
+      -DBUILD_EXTENSIONS="${DUCKDB_EXTENSIONS}" \
+      -DDUCKDB_EXPLICIT_PLATFORM=linux_arm64_android \
+      -DCMAKE_BUILD_TYPE=Release \
+      ..
+   cmake --build . --config Release
+   ```
+
+Note that you can also use the Python client on Termux:
 
 ```batch
 pip install --pre --upgrade duckdb
