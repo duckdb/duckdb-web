@@ -44,7 +44,7 @@ To comply with standard SQL, one-based indexing is used almost everywhere, e.g.,
 
 ### `NaN` Values
 
-`'NaN'::FLOAT = 'NaN'::FLOAT` and `'NaN'::FLOAT > 3` violate IEEE-754 but mean floating point data types have a total order, like all other datatypes (beware the consequences for `greatest`/`least`)
+`'NaN'::FLOAT = 'NaN'::FLOAT` and `'NaN'::FLOAT > 3` violate IEEE-754 but mean floating point data types have a total order, like all other data types (beware the consequences for `greatest` / `least`).
 
 ### `age` Function
 
