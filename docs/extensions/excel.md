@@ -23,8 +23,8 @@ LOAD excel;
 
 | Function | Description |
 |:--|:---|
-| `excel_text(number, format_string)`| Format the given `number` per the rules given in the `format_string`. |
-| `text(number, format_string)` | Alias for `excel_text`. |
+| `excel_text(number, format_string)`| Format the given `number` per the rules given in the `format_string` |
+| `text(number, format_string)` | Alias for `excel_text` |
 
 ## Examples
 

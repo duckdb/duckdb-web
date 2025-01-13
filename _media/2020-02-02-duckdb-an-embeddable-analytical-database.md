@@ -16,4 +16,4 @@ length: "15 min"
 
 Event: [FOSDEM 2020](https://archive.fosdem.org/2020/)
 
-Speaker: Hannes Mühleisen
+Speaker: [Hannes Mühleisen](https://hannes.muehleisen.org/)

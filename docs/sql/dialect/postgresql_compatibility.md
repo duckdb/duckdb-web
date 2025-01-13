@@ -25,7 +25,7 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 <div class="monospace_table"></div>
 
 | Expression              | PostgreSQL |    DuckDB |  IEEE 754 |
-| :---------------------- | ---------: | --------: | --------: |
+|:------------------------|-----------:|----------:|----------:|
 | 1.0 / 0.0               |      error |  Infinity |  Infinity |
 | 0.0 / 0.0               |      error |       NaN |       NaN |
 | -1.0 / 0.0              |      error | -Infinity | -Infinity |
@@ -44,13 +44,11 @@ SELECT 1 / 2 AS x;
 
 PostgreSQL returns:
 
-
 |    x |
 | ---: |
 |    0 |
 
 DuckDB returns:
-
 
 |    x |
 | ---: |
@@ -61,7 +59,6 @@ To perform integer division in DuckDB, use the `//` operator:
 ```sql
 SELECT 1 // 2 AS x;
 ```
-
 
 |    x |
 | ---: |
@@ -85,19 +82,17 @@ ERROR:  UNION types boolean and integer cannot be matched
 
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
-
-
-|    x |
-| ---: |
-|    1 |
-|    2 |
+|   x|
+|---:|
+|   1|
+|   2|
 
 ## Case Sensitivity for Quoted Identifiers
 
 PostgreSQL is case-insensitive. The way PostgreSQL achieves case insensitivity is by lowercasing unquoted identifiers within SQL, whereas quoting preserves case, e.g., the following command creates a table named `mytable` but tries to query for `MyTaBLe` because quotes preserve the case.
 
 ```sql
-CREATE TABLE MyTaBLe(x INT);
+CREATE TABLE MyTaBLe(x INTEGER);
 SELECT * FROM "MyTaBLe";
 ```
 
@@ -108,7 +103,7 @@ ERROR:  relation "MyTaBLe" does not exist
 PostgreSQL does not only treat quoted identifiers as case-sensitive, PostgreSQL treats all identifiers as case-sensitive, e.g., this also does not work:
 
 ```sql
-CREATE TABLE "PreservedCase"(x INT);
+CREATE TABLE "PreservedCase"(x INTEGER);
 SELECT * FROM PreservedCase;
 ```
 
@@ -124,17 +119,17 @@ Therefore, DuckDB achieves case insensitivity by making identifiers fully case i
 In DuckDB, the scripts above complete successfully:
 
 ```sql
-CREATE TABLE MyTaBLe(x INT);
+CREATE TABLE MyTaBLe(x INTEGER);
 SELECT * FROM "MyTaBLe";
-CREATE TABLE "PreservedCase"(x INT);
+CREATE TABLE "PreservedCase"(x INTEGER);
 SELECT * FROM PreservedCase;
 SELECT table_name FROM duckdb_tables();
 ```
 
 <div class="monospace_table"></div>
 
-| table_name    |
-| ------------- |
+|  table_name   |
+|---------------|
 | MyTaBLe       |
 | PreservedCase |
 
@@ -142,14 +137,14 @@ PostgreSQL's behavior of lowercasing identifiers is accessible using the [`prese
 
 ```sql
 SET preserve_identifier_case = false;
-CREATE TABLE MyTaBLe(x INT);
+CREATE TABLE MyTaBLe(x INTEGER);
 SELECT table_name FROM duckdb_tables();
 ```
 
 <div class="monospace_table"></div>
 
 | table_name |
-| ---------- |
+|------------|
 | mytable    |
 
 However, the case insensitive matching in the system for identifiers cannot be turned off.
@@ -166,8 +161,8 @@ DuckDB returns:
 
 <div class="monospace_table"></div>
 
-|    t |
-| ---: |
+|  t   |
+|-----:|
 | true |
 
 Postgres returns:
@@ -235,4 +230,3 @@ DESCRIBE myschema.mytable;
 | column_name |   column_type    | null | key  | default | extra |
 |-------------|------------------|------|------|---------|-------|
 | v           | ENUM('as', 'df') | YES  | NULL | NULL    | NULL  |
-

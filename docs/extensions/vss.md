@@ -78,11 +78,11 @@ WITH (metric = 'cosine');
 
 The following table shows the supported distance metrics and their corresponding DuckDB functions
 
-| Metric   | Function                  | Description        |
-| -------- | ------------------------- | ------------------ |
-| `l2sq`   | `array_distance`          | Euclidean distance |
-| `cosine` | `array_cosine_distance` | Cosine similarity distance  |
-| `ip`     | `array_negative_inner_product`     | Negative inner product      |
+| Metric   | Function                       | Description                |
+|----------|--------------------------------|----------------------------|
+| `l2sq`   | `array_distance`               | Euclidean distance         |
+| `cosine` | `array_cosine_distance`        | Cosine similarity distance |
+| `ip`     | `array_negative_inner_product` | Negative inner product     |
 
 Note that while each `HNSW` index only applies to a single column you can create multiple `HNSW` indexes on the same table each individually indexing a different column. Additionally, you can also create multiple `HNSW` indexes to the same column, each supporting a different distance metric.
 

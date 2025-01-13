@@ -16,4 +16,4 @@ length: "10 min"
 
 Event: Data + AI Summit 2023
 
-Speaker: Hannes Mühleisen (DuckDB Labs)
+Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

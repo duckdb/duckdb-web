@@ -6,11 +6,10 @@ blurb: A time instance represents the time of a day (hour, minute, second, micro
 
 The `TIME` and `TIMETZ` types specify the hour, minute, second, microsecond of a day.
 
-
 | Name     | Aliases                  | Description                     |
 | :------- | :----------------------- | :------------------------------ |
-| `TIME`   | `TIME WITHOUT TIME ZONE` | time of day (ignores time zone) |
-| `TIMETZ` | `TIME WITH TIME ZONE`    | time of day (uses time zone)    |
+| `TIME`   | `TIME WITHOUT TIME ZONE` | Time of day (ignores time zone) |
+| `TIMETZ` | `TIME WITH TIME ZONE`    | Time of day (uses time zone)    |
 
 Instances can be created using the type names as a keyword, where the data must be formatted according to the ISO 8601 format (`hh:mm:ss[.zzzzzz][+-TT[:tt]]`).
 

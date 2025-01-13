@@ -62,7 +62,6 @@ SELECT * FROM read_csv(getvariable('list_of_files'), filename := True);
 | 42   | test.csv    |
 | 84   | test2.csv   |
 
-
 If a variable is not set, the `getvariable` function returns `NULL`:
 
 ```sql

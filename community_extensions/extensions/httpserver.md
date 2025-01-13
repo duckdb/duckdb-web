@@ -59,10 +59,10 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 141
-extension_star_count_pretty: 141
-extension_download_count: 405
-extension_download_count_pretty: 405
+extension_star_count: 142
+extension_star_count_pretty: 142
+extension_download_count: 417
+extension_download_count_pretty: 417
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---

@@ -16,7 +16,7 @@ length: "30 min"
 
 Event: [DuckCon #5]({% link _events/2024-08-15-duckcon5.md %})
 
-Speakers: Hannes Mühleisen, Mark Raasveldt (DuckDB Labs)
+Speakers: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/), [Mark Raasveldt](https://mytherin.github.io/) (DuckDB Labs)
 
 <div class="box-link-wrapper">
 	<div class="box-link full-width">

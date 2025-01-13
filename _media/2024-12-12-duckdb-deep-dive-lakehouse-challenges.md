@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB Deep Dive, the Challenges of Lakehouses, and More"
+title: "DuckDB deep dive, the challenges of lakehouses, and more"
 author: Hannes Mühleisen
 excerpt: ""
 toc: false
@@ -14,6 +14,6 @@ length: "80 min"
 
 You can also listen to the episode on [Apple Podcasts](https://podcasts.apple.com/us/podcast/hannes-muhleisen-duckdb-deep-dive-the-challenges/id1676305617?i=1000680142303)
 
-Podcast: [The Joe Reis Show](https://www.forward-data-conference.com/en)
+Podcast: [The Joe Reis Show](https://open.spotify.com/show/3mcKitYGS4VMG2eHd2PfDN)
 
-Guest: Hannes Mühleisen (DuckDB Labs)
+Guest: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

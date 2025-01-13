@@ -9,7 +9,6 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 
 ## Dot Commands
 
-
 <!-- markdownlint-disable MD056 -->
 
 | Command | Description |
@@ -30,13 +29,13 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.fullschema ?--indent?` | Show schema and the content of `sqlite_stat` tables                                                                                    |
 | `.headers on|off`        | Turn display of headers on or `off`                                                                                                    |
 | `.help ?-all? ?PATTERN?` | Show help text for `PATTERN`                                                                                                           |
-| `.highlight [on|off]`    | Toggle syntax highlighting in the shell `on`/`off`                                                                                     |
+| `.highlight [on|off]`    | Toggle syntax highlighting in the shell `on` / `off`                                                                                   |
 | `.import FILE TABLE`     | Import data from `FILE` into `TABLE`                                                                                                   |
 | `.indexes ?TABLE?`       | Show names of indexes                                                                                                                  |
 | `.keyword ?COLOR?`       | Sets the syntax highlighting color used for keywords                                                                                   |
 | `.keywordcode ?CODE?`    | Sets the syntax highlighting terminal code used for keywords                                                                           |
 | `.lint OPTIONS`          | Report potential schema issues.                                                                                                        |
-| `.log FILE|off`          | Turn logging on or off. `FILE` can be `stderr`/`stdout`                                                                                |
+| `.log FILE|off`          | Turn logging on or off. `FILE` can be `stderr` / `stdout`                                                                              |
 | `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})                        |
 | `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %}) |
 | `.mode MODE ?TABLE?`     | Set [output mode]({% link docs/api/cli/output_formats.md %})                                                                           |

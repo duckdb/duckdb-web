@@ -7,19 +7,36 @@ The environment where DuckDB is run has an obvious impact on performance. This p
 
 ## Hardware Configuration
 
-### CPU and Memory
+### CPU
 
-As a rule of thumb, DuckDB requires a **minimum** of 125 MB of memory per thread.
-For example, if you use 8 threads, you need at least 1 GB of memory.
-For ideal performance, aggregation-heavy workloads require approx. 5 GB memory per thread and join-heavy workloads require approximately 10 GB memory per thread.
+DuckDB works efficiently on both AMD64 (x86_64) and ARM64 (AArch64) CPU architectures.
+
+### Memory
 
 > Bestpractice Aim for 5-10 GB memory per thread.
 
-> Tip If you have a limited amount of memory, try to [limit the number of threads]({% link docs/configuration/pragmas.md %}#threads), e.g., by issuing `SET threads = 4;`.
+#### Minimum Required Memory
 
-### Disk
+As a rule of thumb, DuckDB requires a _minimum_ of 125 MB of memory per thread.
+For example, if you use 8 threads, you need at least 1 GB of memory.
+If you are working in a memory-constained environment, consider [limiting the number of threads]({% link docs/configuration/pragmas.md %}#threads), e.g., by issuing:
 
-DuckDB is capable of operating both as an in-memory and as a disk-based database system. In both cases, it can spill to disk to process larger-than-memory workloads (a.k.a. out-of-core processing) for which a fast disk is highly beneficial. However, if the workload fits in memory, the disk speed only has a limited effect on performance.
+```sql
+SET threads = 4;
+```
+
+#### Memory for Ideal Performance
+
+The amount of memory required for ideal performance depends on several factors, including the data set size and the queries to execute.
+Maybe surprisingly, the _queries_ have a larger effect on the memory requirement.
+Workloads containing large joins over many-to-many tables yield large intermediate datasets and thus require more memory for their evaluation to fully fit into the memory.
+As an approximation, aggregation-heavy workloads require 5 GB memory per thread and join-heavy workloads require 10 GB memory per thread.
+
+#### Larger-than-Memory Workloads
+
+DuckDB can process larger-than-memory workloads by spilling to disk.
+This is possible thanks to _out-of-core_ support for grouping, joining, sorting and windowing operators.
+Note that larger-than-memory workloads can be processed both in persistent mode and in in-memory mode as DuckDB still spills to disk in both modes.
 
 ### Local Disk
 

@@ -16,7 +16,7 @@ length: "50 min"
 
 Event: [GOTO Amsterdam 2024](https://gotoams.nl/2024/)
 
-Speaker: Hannes Mühleisen (DuckDB Labs)
+Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)
 
 <div class="box-link-wrapper">
 	<div class="box-link full-width">

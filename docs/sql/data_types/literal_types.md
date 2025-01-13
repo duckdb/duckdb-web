@@ -178,4 +178,24 @@ SELECT $$The price is $9.95$$ AS msg;
 |--------------------|
 | The price is $9.95 |
 
+Even more, you can insert alphanumeric tags in the double-dollar symbols to allow for the use of regular double-dollar symbols *within* the string literal:
+
+```sql
+SELECT $tag$ this string can contain newlines,
+'single quotes',
+"double quotes",
+and $$dollar quotes$$ $tag$ AS msg;
+```
+
+<!-- This output intentionally uses the duckbox formatter -->
+
+```text
+┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                              msg                                               │
+│                                            varchar                                             │
+├────────────────────────────────────────────────────────────────────────────────────────────────┤
+│  this string can contain newlines,\n'single quotes',\n"double quotes",\nand $$dollar quotes$$  │
+└────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
 [Implicit concatenation](#implicit-string-literal-concatenation) only works for single-quoted string literals, not with dollar-quoted ones.

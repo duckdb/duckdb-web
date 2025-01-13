@@ -136,7 +136,6 @@ The `read_csv` automatically attempts to figure out the correct configuration of
 SELECT * FROM read_csv('flights.csv');
 ```
 
-
 | FlightDate | UniqueCarrier | OriginCityName |  DestCityName   |
 |------------|---------------|----------------|-----------------|
 | 1988-01-01 | AA            | New York, NY   | Los Angeles, CA |
@@ -153,7 +152,6 @@ CREATE TABLE ontime AS
 DESCRIBE ontime;
 ```
 
-
 |  column_name   | column_type | null | key  | default | extra |
 |----------------|-------------|------|------|---------|-------|
 | FlightDate     | DATE        | YES  | NULL | NULL    | NULL  |
@@ -165,7 +163,7 @@ DESCRIBE ontime;
 SELECT * FROM read_csv('flights.csv', sample_size = 20_000);
 ```
 
-If we set `delim`/`sep`, `quote`, `escape`, or `header` explicitly, we can bypass the automatic detection of this particular parameter:
+If we set `delim` / `sep`, `quote`, `escape`, or `header` explicitly, we can bypass the automatic detection of this particular parameter:
 
 ```sql
 SELECT * FROM read_csv('flights.csv', header = true);
@@ -187,7 +185,6 @@ CREATE TABLE ontime (
 COPY ontime FROM 'flights.csv';
 SELECT * FROM ontime;
 ```
-
 
 | flightdate | uniquecarrier | origincityname |  destcityname   |
 |------------|---------------|----------------|-----------------|

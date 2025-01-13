@@ -11,11 +11,11 @@ They can be created using the type name followed by a string formatted according
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `TIMESTAMP_NS` |                                           | naive timestamp with nanosecond precision              |
-| `TIMESTAMP`    | `DATETIME`, `TIMESTAMP WITHOUT TIME ZONE` | naive timestamp with microsecond precision             |
-| `TIMESTAMP_MS` |                                           | naive timestamp with millisecond precision             |
-| `TIMESTAMP_S`  |                                           | naive timestamp with second precision                  |
-| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | time zone aware timestamp with microsecond precision   |
+| `TIMESTAMP_NS` |                                           | Naive timestamp with nanosecond precision              |
+| `TIMESTAMP`    | `DATETIME`, `TIMESTAMP WITHOUT TIME ZONE` | Naive timestamp with microsecond precision             |
+| `TIMESTAMP_MS` |                                           | Naive timestamp with millisecond precision             |
+| `TIMESTAMP_S`  |                                           | Naive timestamp with second precision                  |
+| `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | Time zone aware timestamp with microsecond precision   |
 
 > Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [Parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
 
@@ -106,15 +106,14 @@ Three special strings can be used to create timestamps:
 | Input string | Description                                      |
 |:-------------|:-------------------------------------------------|
 | `epoch`      | 1970-01-01 00:00:00[+00] (Unix system time zero) |
-| `infinity`   | later than all other timestamps                  |
-| `-infinity`  | earlier than all other timestamps                |
+| `infinity`   | Later than all other timestamps                  |
+| `-infinity`  | Earlier than all other timestamps                |
 
 The values `infinity` and `-infinity` are special cased and are displayed unchanged, whereas the value `epoch` is simply a notational shorthand that is converted to the corresponding timestamp value when read.
 
 ```sql
 SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
 ```
-
 
 | Negative  | Epoch               | Positive |
 |:----------|:--------------------|:---------|

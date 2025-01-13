@@ -7,8 +7,8 @@ redirect_from:
 
 ## List of Core Extensions
 
-| Name                         | GitHub                                                                           | Description                                                                        | Autoloadable  | Aliases                 |
-|:-----------------------------|----------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------|:--------------|:------------------------|
+| Name                                                       | GitHub                                                                                           | Description                                                                        | Autoloadable  | Aliases                 |
+|:-----------------------------------------------------------|--------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------|:--------------|:------------------------|
 | [arrow]({% link docs/extensions/arrow.md %})               | [<span class="github">GitHub</span>](https://github.com/duckdb/arrow)                            | A zero-copy data integration between Apache Arrow and DuckDB                       | no            |                         |
 | [autocomplete]({% link docs/extensions/autocomplete.md %}) |                                                                                                  | Adds support for autocomplete in the shell                                         | yes           |                         |
 | [aws]({% link docs/extensions/aws.md %})                   | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb-aws)                       | Provides features that depend on the AWS SDK                                       | yes           |                         |

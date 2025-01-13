@@ -16,4 +16,4 @@ length: "80 min"
 
 Podcast: [Data Talks on the Rocks by Rill Data](https://www.youtube.com/playlist?list=PL_ZoDsg2yFKgr_YEc4XOY0wlRLqzyR07q)
 
-Guest: Hannes Mühleisen (DuckDB Labs)
+Guest: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

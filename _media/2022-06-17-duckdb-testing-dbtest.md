@@ -16,4 +16,4 @@ length: "60 min"
 
 Event: [DBTest 2022](https://dbtest-workshop.github.io/2022/)
 
-Speaker: Mark Raasveldt (DuckDB Labs)
+Speaker: [Mark Raasveldt (DuckDB Labs)](https://mytherin.github.io/)

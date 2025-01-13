@@ -70,10 +70,9 @@ FROM 's3://express-bucket-name--use1-az5--x-s3/my-file.parquet';
 
 We ran two experiments on a `c7gd.12xlarge` instance using the [LDBC SF300 Comments `creationDate` Parquet file](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet) file (also used in the [microbenchmarks of the performance guide]({% link docs/guides/performance/benchmarks.md %}#data-sets)).
 
-
 | Experiment | File size | Runtime |
 |:-----|--:|--:|
-| Loading only from Parquet | 4.1 GB | 3.5s |
-| Creating local table from Parquet | 4.1 GB | 5.1s |
+| Loading only from Parquet | 4.1 GB | 3.5 s |
+| Creating local table from Parquet | 4.1 GB | 5.1 s |
 
 The “loading only” variant is running the load as part of an [`EXPLAIN ANALYZE`]({% link docs/guides/meta/explain_analyze.md %}) statement to measure the runtime without account creating a local table, while the “creating local table” variant uses [`CREATE TABLE ... AS SELECT`]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas) to create a persistent table on the local disk.

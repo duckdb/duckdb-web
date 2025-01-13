@@ -16,7 +16,6 @@ Consider the following table:
 
 ### Grades
 
-
 | grade | course |
 |---:|:---|
 | 7 | Math |

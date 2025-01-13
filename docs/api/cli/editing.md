@@ -9,7 +9,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Moving
 
-
 |       Key       |                                 Action                                 |
 |-----------------|------------------------------------------------------------------------|
 | `Left`          | Move back a character                                                  |
@@ -29,7 +28,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## History
 
-
 |     Key    |            Action              |
 |------------|--------------------------------|
 | `Ctrl`+`P` | Move to previous history entry |
@@ -42,7 +40,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | `Alt`+`P`  | Search the history             |
 
 ## Changing Text
-
 
 |        Key        | Action                                                   |
 |-------------------|----------------------------------------------------------|
@@ -65,7 +62,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 
 ## Completing
 
-
 |      Key      |                          Action                        |
 |---------------|--------------------------------------------------------|
 | `Tab`         | Autocomplete. When autocompleting, cycle to next entry |
@@ -73,7 +69,6 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | `Esc`+`Esc`   | When autocompleting, revert autocompletion             |
 
 ## Miscellaneous
-
 
 |    Key     |                           Action                                                   |
 |------------|------------------------------------------------------------------------------------|
