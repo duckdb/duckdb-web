@@ -1207,6 +1207,10 @@
                 {
                   "page": "Querying Parquet Files",
                   "url": "query_parquet"
+                },
+                {
+                  "page": "File Access with the file: Protocol",
+                  "url": "file_access"
                 }
               ]
             },
