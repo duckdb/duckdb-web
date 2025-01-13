@@ -32,8 +32,8 @@ For the examples in this post, I will mostly stick to using a table of athletic 
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| event | VARCHAR | The name of the event (e.g., 200 meter butterfly)
-| athlete | VARCHAR | The name of the competitor (e.g., Michael Phelps)
+| event | VARCHAR | The name of the event (e.g., 200 meter butterfly) |
+| athlete | VARCHAR | The name of the competitor (e.g., Michael Phelps) |
 | date | TIMESTAMP | The start of the event. |
 | time | DECIMAL(18, 3) | The athlete's time in that event (in seconds). |
 
@@ -41,7 +41,7 @@ For the examples in this post, I will mostly stick to using a table of athletic 
 
 > Several of the outfits, Ignatius noticed, were new enough and expensive enough to be properly considered
 > offenses against taste and decency.
->   -- John Kennedy O'Tools, _A Confederacy of Dunces_
+> -- John Kennedy O'Tools, _A Confederacy of Dunces_
 
 ### Frame Exclusion
 
