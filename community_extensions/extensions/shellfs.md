@@ -150,8 +150,8 @@ repo:
   ref: 651981d540027681c06252d433e5590370131444
   ref_next: c44c69ab61cc6c11391e4e15f76a1ceb32ff9547
 
-extension_star_count: 59
-extension_star_count_pretty: 59
+extension_star_count: 60
+extension_star_count_pretty: 60
 extension_download_count: 423
 extension_download_count_pretty: 423
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'

@@ -40,8 +40,8 @@ docs:
   extended_description: |
     The PCAP Reader Extension is experimental, use at your own risk!
 
-extension_star_count: 8
-extension_star_count_pretty: 8
+extension_star_count: 9
+extension_star_count_pretty: 9
 extension_download_count: 395
 extension_download_count_pretty: 395
 image: '/images/community_extensions/social_preview/preview_community_extension_pcap_reader.png'
