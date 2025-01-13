@@ -63,7 +63,12 @@ SELECT
     athlete,
     AVG(time) OVER w AS recent,
 FROM results
-WINDOW w AS (PARTITION BY event ORDER BY date RANGE BETWEEN 10 DAYS PRECEDING AND 10 DAYS FOLLOWING EXCLUDE CURRENT ROW)
+WINDOW w AS (
+    PARTITION BY event
+    ORDER BY date
+    RANGE BETWEEN 10 DAYS PRECEDING AND 10 DAYS FOLLOWING
+        EXCLUDE CURRENT ROW
+)
 ORDER BY event, date, athlete;
 ```
 
@@ -112,7 +117,10 @@ We can also use the `ORDER BY` modifier with order-sensitive aggregates to get s
 
 ```sql
 -- Return an alphabetised list of athletes who made or beat a time
-SELECT LIST(althete ORDER BY athlete) OVER (PARTITION by event, date ORDER BY time DESC)
+SELECT LIST(althete ORDER BY athlete) OVER (
+    PARTITION by event, date
+    ORDER BY time DESC
+)
 FROM results
 ```
 
@@ -122,7 +130,11 @@ So for example, if we wished to exclude the athlete who made the time in the pre
 
 ```sql
 -- Return an alphabetised list athletes who beat the each time
-SELECT LIST(althete ORDER BY athlete) OVER (PARTITION by event, date ORDER BY time DESC EXCLUDE CURRENT ROW)
+SELECT LIST(althete ORDER BY athlete) OVER (
+    PARTITION by event, date
+    ORDER BY time DESC
+    EXCLUDE CURRENT ROW
+)
 FROM results
 ```
 
@@ -190,7 +202,7 @@ This is simple enough that we can _stream_ the evaluation of the function on a s
 First, let's step back a bit and talk about the window _operator_.
 During parsing and optimisation of a query, all the window functions are attached to a single _logical_ window operator.
 When it comes time to plan the query, we group the functions that have common partitions and "compatible" orderings
-(see Cao et. al., (Optimization of Analytic Window Functions)[https://www.vldb.org/pvldb/vol5/p1244_yucao_vldb2012.pdf]
+(see Cao et. al., [Optimization of Analytic Window Functions](https://www.vldb.org/pvldb/vol5/p1244_yucao_vldb2012.pdf)
 for more information)
 and hand each group off to a separate physical window operator that handles that partitioning and ordering.
 In order to use the "natural order" we have to group those functions that can be streamed and execute them first
@@ -272,7 +284,11 @@ SELECT
     AVG(x) OVER w AS min_x,
     MAX(x) OVER w AS max_x,
 FROM data
-WINDOW w AS (PARTITION BY p ORDER BY s ROWS BETWEEN 1_000_000 PRECEDING and 1_000_000 FOLLOWING)
+WINDOW w AS (
+    PARTITION BY p
+    ORDER BY s
+    ROWS BETWEEN 1_000_000 PRECEDING and 1_000_000 FOLLOWING
+)
 ```
 
 Paging the data for `x` reduces the memory footprint, but the segment trees used to evaluate the three aggregates
