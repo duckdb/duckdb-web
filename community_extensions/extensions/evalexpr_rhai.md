@@ -94,7 +94,7 @@ extension:
   version: 1.0.2
 repo:
   github: rustyconover/duckdb-evalexpr-rhai-extension
-  ref: 52e2beef4fd369114c067c1f0d94c872e4f0521a
+  ref: da8f1e85b8a85ba80c8f616687f7445fc051ac24
 
 extension_star_count: 14
 extension_star_count_pretty: 14
