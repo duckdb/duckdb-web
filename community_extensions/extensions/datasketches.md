@@ -84,8 +84,8 @@ repo:
   ref: 2e02577641aa1e5acee11d7c0c6ff4d4d2be0589
   ref_next: 97ece9c4a4f5e2763de98b48f900e57dfafd895b
   
-extension_star_count: 11
-extension_star_count_pretty: 11
+extension_star_count: 12
+extension_star_count_pretty: 12
 extension_download_count: 391
 extension_download_count_pretty: 391
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
