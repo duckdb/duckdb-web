@@ -180,6 +180,20 @@ The table below shows the available general window functions.
 All [aggregate functions]({% link docs/sql/functions/aggregates.md %}) can be used in a windowing context, including the optional [`FILTER` clause]({% link docs/sql/query_syntax/filter.md %}).
 The `first` and `last` aggregate functions are shadowed by the respective general-purpose window functions, with the minor consequence that the `FILTER` clause is not available for these but `IGNORE NULLS` is.
 
+## DISTINCT Arguments
+
+All aggregate window functions support using a `DISTINCT` clause for the arguments. When the `DISTINCT` clause is
+provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination
+with the `COUNT` aggregate to get the number of distinct elements; but it can be used together with any aggregate
+function in the system.
+
+```sql
+-- Count the number of distinct users at a given point in time
+SELECT COUNT(DISTINCT name) OVER (ORDER BY time) FROM sales;
+-- Concatenate those distinct users into a list
+SELECT LIST(DISTINCT name) OVER (ORDER BY time) FROM sales;
+```
+
 ## Nulls
 
 All [general-purpose window functions](#general-purpose-window-functions) that accept `IGNORE NULLS` respect nulls by default. This default behavior can optionally be made explicit via `RESPECT NULLS`.
@@ -289,7 +303,7 @@ This distance can either be specified as an integral number of `ROWS`
 or as a `RANGE` delta expression.
 For a `RANGE` specification, there must  be only one ordering expression,
 and it has to support addition and subtraction (i.e., numbers or `INTERVAL`s).
-The default frame is from `UNBOUNDED PRECEDING` to `UNBOUNDED FOLLOWING` when no `ORDER BY` clause is present and from `UNBOUNDED PRECEDING` to `CURRENT ROW` when an `ORDER BY` clause is present. 
+The default frame is from `UNBOUNDED PRECEDING` to `UNBOUNDED FOLLOWING` when no `ORDER BY` clause is present and from `UNBOUNDED PRECEDING` to `CURRENT ROW` when an `ORDER BY` clause is present.
 It is invalid for a frame to start after it ends.
 Using the [`EXCLUDE` clause](#exclude-clause), rows around the current row can be excluded from the frame.
 
