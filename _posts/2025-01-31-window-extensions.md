@@ -39,9 +39,8 @@ For the examples in this post, I will mostly stick to using a table of athletic 
 
 ## Functionality
 
-> Several of the outfits, Ignatius noticed, were new enough and expensive enough to be properly considered
-> offenses against taste and decency.
-> -- John Kennedy O'Tools, _A Confederacy of Dunces_
+In addition implementing things from the standard that were missing,
+we have also started implementing some proposed extensions from the literature.
 
 ### Frame Exclusion
 
@@ -237,6 +236,10 @@ This works well if you have more partitions than threads, and they are all rough
 but if the partition sizes are skewed or if there is only one partitions (a common situation),
 then most of the cores will be idle, reducing throughput.
 
+<div align="center">
+<img src="/images/blog/windowing/parallel-partitions.png" alt="Thread Partition Evaluation" title="Thread Partition Evaluation" style="max-width:50%;width:50%;height:auto"/>
+</div>
+
 To improve the CPU utilisation, we changed the execution model for v1.1 to evaluate partitions in parallel.
 The partitions are evaluated from largest to smallest and
 we then distribute each partition across as many cores as we can and synchronise access to shared data structures.
@@ -244,6 +247,10 @@ This was a lot more challenging than independent single-threaded evaluation of p
 and we had some synchronisation issues (hopefully all sorted now!) that were dealt with in the v1.1.x releases.
 But we now have much better core utilisation, especially for unpartitioned data.
 As a side benefit, we were able to reduce the memory footprint because fewer partitions were in memory at a time.
+
+<div align="center">
+<img src="/images/blog/windowing/partition-major.png" alt="Partition Major Evaluation" title="Partition Major Evaluation" style="max-width:50%;width:50%;height:auto"/>
+</div>
 
 One remaining issue is the coarseness of the sub-partitions.
 At the moment to avoid copying they use the blocks produced by the sorting code,
