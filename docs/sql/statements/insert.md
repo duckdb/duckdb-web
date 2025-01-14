@@ -287,6 +287,18 @@ This fails with the following error:
 Constraint Error: NOT NULL constraint failed: t1.val2
 ```
 
+#### Composite Primary Key
+
+When multiple columns need to be part of the uniqueness constraint, use a single `PRIMARY KEY` clause including all relevant columns:
+
+```sql
+CREATE TABLE t1 (id1 INTEGER, id2 INTEGER, val1 DOUBLE, PRIMARY KEY(id1, id2));
+INSERT OR REPLACE INTO t1
+    VALUES (1, 2, 3);
+INSERT OR REPLACE INTO t1
+    VALUES (1, 2, 4);
+```
+
 ### Defining a Conflict Target
 
 A conflict target may be provided as `ON CONFLICT (conflict_target)`. This is a group of columns that an index or uniqueness/key constraint is defined on. If the conflict target is omitted, or `PRIMARY KEY` constraint(s) on the table are targeted.
