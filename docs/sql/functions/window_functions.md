@@ -189,9 +189,9 @@ function in the system.
 
 ```sql
 -- Count the number of distinct users at a given point in time
-SELECT COUNT(DISTINCT name) OVER (ORDER BY time) FROM sales;
+SELECT count(DISTINCT name) OVER (ORDER BY time) FROM sales;
 -- Concatenate those distinct users into a list
-SELECT LIST(DISTINCT name) OVER (ORDER BY time) FROM sales;
+SELECT list(DISTINCT name) OVER (ORDER BY time) FROM sales;
 ```
 
 ## Nulls
