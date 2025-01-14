@@ -106,8 +106,8 @@ docs:
 
 extension_star_count: 29
 extension_star_count_pretty: 29
-extension_download_count: 391
-extension_download_count_pretty: 391
+extension_download_count: 398
+extension_download_count_pretty: 398
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
