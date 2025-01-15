@@ -276,6 +276,8 @@ The below options are applicable when writing CSV files.
 | `FORCE_QUOTE` | The list of columns to always add quotes to, even if not required. | `VARCHAR[]` | `[]` |
 | `HEADER` | Whether or not to write a header for the CSV file. | `BOOL` | `true` |
 | `NULLSTR` | The string that is written to represent a `NULL` value. | `VARCHAR` | (empty) |
+| `PREFIX` | Prefixes the CSV file with a specified string. This option must be used in conjunction with `SUFFIX` and requires `HEADER` to be set to `false`.| `VARCHAR` | (empty) |
+| `SUFFIX` | Appends a specified string as a suffix to the CSV file. This option must be used in conjunction with `PREFIX` and requires `HEADER` to be set to `false`.| `VARCHAR` | (empty) |
 | `QUOTE` | The quoting character to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
 
