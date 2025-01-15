@@ -42,6 +42,39 @@ For the examples in this post, I will mostly stick to using a table of athletic 
 In addition implementing things from the standard that were missing,
 we have also started implementing some proposed extensions from the literature.
 
+### Qualify
+
+It may not be immediately obvious, but the SQL language 
+has rules for the order in which various expressions are computed.
+For example, aggregates (like `SUM`) are computed after row-level expressions.
+This is why SQL has two filtering clauses: `WHERE` and `HAVING`:
+`WHERE` is for row-level computations and `HAVING` is applied after `GROUP BY`.
+
+When windowing was introduced, it added another layer of computation:
+window functions are computed _after_ aggregates.
+That is great, but then how do you filter the results of an `OVER` function?
+Originally, you had to put the query in a Common Table Expression (or CTE)
+which is defined by a `WITH` clause.
+This was kind of clunky, so eventually the `QUALIFY` clause was added
+for filtering window functions.
+DuckDB now supports this, making it easier to filter the results of window functions.
+
+### GROUPS Framing
+
+In addition to the `ROWS` and `RANGE` frame boundary types,
+the standard also defines `GROUPS` as a boundary type.
+`ROWS` is pretty simple: it just counts the number of rows.
+`RANGE` is trickier: it applies its counts to the `ORDER BY` expression,
+which means that there can only be one such expression
+and you have to be able to do arithmetic on it.
+
+`GROUPS` is somewhere in between.
+A "group" in the standard's language is all the "peers" of a row.
+In turn, the peers are all the rows with the same value for the `ORDER BY` clause.
+In the original windowing code, this was not easy to implement,
+but after several years of work, the infrastructure was evolved,
+and as of 1.2 we now support this last kind of framing.
+
 ### Frame Exclusion
 
 In our original implementation, there was a piece of the 2003 specification that had not been implemented:
