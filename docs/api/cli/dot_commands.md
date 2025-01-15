@@ -14,20 +14,20 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | Command | Description |
 |---|------|
 | `.bail on|off`           | Stop after hitting an error. Default: `off`                                                                                            |
-| `.binary on|off`         | Turn binary output on or off. Default: `off`                                                                                           |
+| `.binary on|off`         | Turn binary output `on` or `off`. Default: `off`                                                                                       |
 | `.cd DIRECTORY`          | Change the working directory to `DIRECTORY`                                                                                            |
 | `.changes on|off`        | Show number of rows changed by SQL                                                                                                     |
-| `.check GLOB`            | Fail if output since .testcase does not match                                                                                          |
+| `.check GLOB`            | Fail if output since `.testcase` does not match                                                                                        |
 | `.columns`               | Column-wise rendering of query results                                                                                                 |
 | `.constant ?COLOR?`      | Sets the syntax highlighting color used for constant values                                                                            |
 | `.constantcode ?CODE?`   | Sets the syntax highlighting terminal code used for constant values                                                                    |
 | `.databases`             | List names and files of attached databases                                                                                             |
-| `.echo on|off`           | Turn command echo on or `off`                                                                                                          |
+| `.echo on|off`           | Turn command echo `on` or `off`                                                                                                        |
 | `.excel`                 | Display the output of next command in spreadsheet                                                                                      |
 | `.exit ?CODE?`           | Exit this program with return-code `CODE`                                                                                              |
 | `.explain ?on|off|auto?` | Change the `EXPLAIN` formatting mode. Default: `auto`                                                                                  |
 | `.fullschema ?--indent?` | Show schema and the content of `sqlite_stat` tables                                                                                    |
-| `.headers on|off`        | Turn display of headers on or `off`                                                                                                    |
+| `.headers on|off`        | Turn display of headers `on` or `off`                                                                                                  |
 | `.help ?-all? ?PATTERN?` | Show help text for `PATTERN`                                                                                                           |
 | `.highlight [on|off]`    | Toggle syntax highlighting in the shell `on` / `off`                                                                                   |
 | `.import FILE TABLE`     | Import data from `FILE` into `TABLE`                                                                                                   |
@@ -35,7 +35,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.keyword ?COLOR?`       | Sets the syntax highlighting color used for keywords                                                                                   |
 | `.keywordcode ?CODE?`    | Sets the syntax highlighting terminal code used for keywords                                                                           |
 | `.lint OPTIONS`          | Report potential schema issues.                                                                                                        |
-| `.log FILE|off`          | Turn logging on or off. `FILE` can be `stderr` / `stdout`                                                                              |
+| `.log FILE|off`          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                          |
 | `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})                        |
 | `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %}) |
 | `.mode MODE ?TABLE?`     | Set [output mode]({% link docs/api/cli/output_formats.md %})                                                                           |
@@ -59,7 +59,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.system CMD ARGS...`    | Run `CMD ARGS...` in a system shell                                                                                                    |
 | `.tables ?TABLE?`        | List names of tables [matching LIKE pattern]({% link docs/sql/functions/pattern_matching.md %}) `TABLE`                                |
 | `.testcase NAME`         | Begin redirecting output to `NAME`                                                                                                     |
-| `.timer on|off`          | Turn SQL timer on or off. SQL statements separated by `;` but *not* separated via newline are measured together.                       |
+| `.timer on|off`          | Turn SQL timer `on` or `off`. SQL statements separated by `;` but *not* separated via newline are measured together.                   |
 | `.width NUM1 NUM2 ...`   | Set minimum column widths for columnar output                                                                                          |
 
 ## Using the `.help` Command
