@@ -1474,7 +1474,8 @@ function GenerateFrameSpec(options) {
 	return [
 		Choice(0, [
 			Keyword("RANGE"),
-			Keyword("ROWS")
+			Keyword("ROWS"),
+			Keyword("GROUPS")
 		]),
 		Choice(0, [
 			Sequence([

@@ -2,7 +2,7 @@
 layout: post
 title: "Catching up with Windowing"
 author: "Richard Wesley"
-excerpt: "DuckDB implements a number of modern window features, some of which are extensions to the SQL standard."
+excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard."
 tags: ["using DuckDB"]
 ---
 
@@ -22,9 +22,9 @@ and these operations were eventually
 
 DuckDB has had support for window functions since the early days,
 but if they are new to you, you might want to start with my earlier blog posts
-on [Windowing in DuckDB](2021/10/13/windowing.html)
-and [Fast Moving Holistic Aggregates](2021/11/12/moving-holistic.html),
-or just [the window function documentation](docs/sql/functions/window_functions).
+on [Windowing in DuckDB](/2021/10/13/windowing.html)
+and [Fast Moving Holistic Aggregates](/2021/11/12/moving-holistic.html),
+or just [the window function documentation](/docs/sql/functions/window_functions).
 In this post, I will start by introducing the more recent functionality additions,
 and then spelunk into the internals to talk about some performance and scaling improvements.
 
@@ -39,8 +39,64 @@ For the examples in this post, I will mostly stick to using a table of athletic 
 
 ## Functionality
 
-In addition implementing things from the standard that were missing,
-we have also started implementing some proposed extensions from the literature.
+In addition to implementing things from the standard that were missing,
+we have included the `QUALIFY` SQL language extension,
+and we have started adding some proposed extensions from the literature.
+
+### GROUPS Framing
+
+In addition to the `ROWS` and `RANGE` frame boundary types,
+the standard also defines `GROUPS` as a boundary type.
+`ROWS` is pretty simple: it just counts the number of rows.
+`RANGE` is trickier: it treats its counts as distances from 
+the value of the `ORDER BY` expression at the current row.
+This means that there can only be one such expression
+and you have to be able to do arithmetic on it.
+
+`GROUPS` is somewhere in between.
+A "group" in the standard's language is all the "peers" of a row,
+which are all the rows with the same 
+value of the `ORDER BY` expression at the current row.
+In the original windowing code, this was not easy to implement,
+but after several years of work, the infrastructure has evolved,
+and as of 1.2 we now support this last type of framing.
+
+### Frame Exclusion
+
+Another missing piece of the 2003 specification is the `EXCLUDE` clause.
+Thanks to work by a community member, we have supported this since v0.10.0,
+but we somehow never got around to mentioning it in a blog post!
+
+`EXCLUDE` is an optional modifier to the frame clause for excluding rows around the `CURRENT ROW`.
+This is useful when you want to compute some aggregate value of nearby rows
+to see how the current row compares to it.
+In this example, we want to know how an athlete's time in an event compares to
+the average of all the times recorded for their event within ±10 days:
+
+```sql
+SELECT
+    event,
+    date,
+    athlete,
+    AVG(time) OVER w AS recent,
+FROM results
+WINDOW w AS (
+    PARTITION BY event
+    ORDER BY date
+    RANGE BETWEEN 10 DAYS PRECEDING AND 10 DAYS FOLLOWING
+        EXCLUDE CURRENT ROW
+)
+ORDER BY event, date, athlete;
+```
+
+There are four options for `EXCLUDE` that specify how to treat the current row:
+
+* `CURRENT ROW` - exclude just the current row
+* `GROUP` - exclude the current row and all its "peers" (rows that have the same `ORDER BY` value)
+* `TIES` - exclude all peer rows, but _not_ the current row (this makes a hole on either side)
+* `NO OTHERS` - don't exclude anything (the default)
+
+Exclusion is implemented for both windowed aggregates and for the `FIRST/LAST/NTH_VALUE` functions.
 
 ### Qualify
 
@@ -89,62 +145,6 @@ WINDOW w AS (
 )
 QUALIFY row_number() OVER w = 3
 ```
-
-### GROUPS Framing
-
-In addition to the `ROWS` and `RANGE` frame boundary types,
-the standard also defines `GROUPS` as a boundary type.
-`ROWS` is pretty simple: it just counts the number of rows.
-`RANGE` is trickier: it treats its counts as distances from 
-the value of the `ORDER BY` expression at the current row.
-This means that there can only be one such expression
-and you have to be able to do arithmetic on it.
-
-`GROUPS` is somewhere in between.
-A "group" in the standard's language is all the "peers" of a row,
-which are all the rows with the same 
-value of the `ORDER BY` expression at the current row.
-In the original windowing code, this was not easy to implement,
-but after several years of work, the infrastructure has evolved,
-and as of 1.2 we now support this last type of framing.
-
-### Frame Exclusion
-
-In our original implementation, there was a piece of the 2003 specification that had not been implemented:
-the `EXCLUDE` clause.
-Thanks to work by a community member, we have supported this since v0.10.0,
-but we somehow never got around to mentioning it in a blog post!
-
-`EXCLUDE` is an optional modifier to the frame clause for excluding rows around the `CURRENT ROW`.
-This is useful when you want to compute some aggregate value of nearby rows
-to see how the current row compares to it.
-In this example, we want to know how an athlete's time in an event compares to
-the average of all the times recorded for their event within ±10 days:
-
-```sql
-SELECT
-    event,
-    date,
-    athlete,
-    AVG(time) OVER w AS recent,
-FROM results
-WINDOW w AS (
-    PARTITION BY event
-    ORDER BY date
-    RANGE BETWEEN 10 DAYS PRECEDING AND 10 DAYS FOLLOWING
-        EXCLUDE CURRENT ROW
-)
-ORDER BY event, date, athlete;
-```
-
-There are four options for `EXCLUDE` that specify how to treat the current row:
-
-* `CURRENT ROW` - exclude just the current row
-* `GROUP` - exclude the current row and all its "peers" (rows that have the same `ORDER BY` value)
-* `TIES` - exclude all peer rows, but _not_ the current row (this makes a hole on either side)
-* `NO OTHERS` - don't exclude anything (the default)
-
-Exclusion is implemented for both windowed aggregates and for the `FIRST/LAST/NTH_VALUE` functions.
 
 ### Aggregate Modifiers
 
@@ -353,7 +353,7 @@ This could result in computing and materialising the same values multiple times:
 SELECT
     x,
     MIN(x) OVER w AS min_x,
-    AVG(x) OVER w AS min_x,
+    AVG(x) OVER w AS avg_x,
     MAX(x) OVER w AS max_x,
 FROM data
 WINDOW w AS (
