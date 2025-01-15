@@ -15,17 +15,17 @@ This section describes functions and operators for examining and manipulating [`
 | Name | Description |
 |:--|:-------|
 | [`blob || blob`](#blob--blob) | `BLOB` concatenation. |
-| [`base64(blob)`](#base64blob) | Convert a blob to a base64 encoded string. |
-| [`decode(blob)`](#decodeblob) | Convert blob to varchar. Fails if blob is not valid utf-8. |
-| [`encode(string)`](#encodestring) | Convert varchar to blob. Converts utf-8 characters into literal encoding. |
-| [`from_base64(string)`](#from_base64string) | Convert a base64 encoded string to a character string (blob). |
+| [`base64(blob)`](#base64blob) | Converts a `blob` to a base64 encoded `string`. |
+| [`decode(blob)`](#decodeblob) | Converts `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
+| [`encode(string)`](#encodestring) | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding. |
+| [`from_base64(string)`](#from_base64string) | Converts a base64 encoded `string` to a character string (`BLOB`). |
 | [`from_binary(value)`](#from_binaryvalue) | Converts a value from binary representation to a blob. |
 | [`from_hex(value)`](#from_hexvalue) | Converts a value from hexadecimal representation to a blob. |
-| [`hex(blob)`](#hexblob) | Converts blob to VARCHAR using hexadecimal encoding. |
-| [`octet_length(blob)`](#octet_lengthblob) | Number of bytes in blob. |
+| [`hex(blob)`](#hexblob) | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
+| [`octet_length(blob)`](#octet_lengthblob) | Number of bytes in `blob`. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/guides/file_formats/read_file.md %}#read_blob) for more details. |
-| [`to_base64(blob)`](#to_base64blob) | Convert a blob to a base64 encoded string. |
-| [`to_hex(blob)`](#to_hexblob) | Converts blob to VARCHAR using hexadecimal encoding. |
+| [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded `string`. |
+| [`to_hex(blob)`](#to_hexblob) | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
 | [`unbin(value)`](#unbinvalue) | Converts a value from binary representation to a blob. |
 | [`unhex(value)`](#unhexvalue) | Converts a value from hexadecimal representation to a blob. |
 
@@ -43,15 +43,15 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Convert a blob to a base64 encoded string. |
-| **Example** | `base64('A'::blob)` |
+| **Description** | Converts a `blob` to a base64 encoded `string`. |
+| **Example** | `base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 
 #### `decode(blob)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Convert blob to varchar. Fails if blob is not valid utf-8. |
+| **Description** | Converts `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
 | **Example** | `decode('\xC3\xBC'::BLOB)` |
 | **Result** | `ü` |
 
@@ -59,7 +59,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Convert varchar to blob. Converts utf-8 characters into literal encoding. |
+| **Description** | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding. |
 | **Example** | `encode('my_string_with_ü')` |
 | **Result** | `my_string_with_\xC3\xBC` |
 
@@ -67,7 +67,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Convert a base64 encoded string to a character string (blob). |
+| **Description** | Converts a base64 encoded `string` to a character string (`BLOB`). |
 | **Example** | `from_base64('QQ==')` |
 | **Result** | `A` |
 
@@ -91,7 +91,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts blob to VARCHAR using hexadecimal encoding. |
+| **Description** | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
 | **Example** | `hex('\xAA\xBB'::BLOB)` |
 | **Result** | `AABB` |
 
@@ -99,7 +99,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Number of bytes in blob. |
+| **Description** | Number of bytes in `blob`. |
 | **Example** | `octet_length('\xAA\xBB'::BLOB)` |
 | **Result** | `2` |
 
@@ -115,15 +115,15 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Convert a blob to a base64 encoded string. |
-| **Example** | `base64('A'::blob)` |
+| **Description** | Converts a `blob` to a base64 encoded `string`. |
+| **Example** | `base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 
 #### `to_hex(blob)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts blob to VARCHAR using hexadecimal encoding. |
+| **Description** | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
 | **Example** | `hex('\xAA\xBB'::BLOB)` |
 | **Result** | `AABB` |
 
