@@ -1,12 +1,23 @@
+function GenerateWindowOrderBy(options = {}) {
+	return [
+		Keyword("ORDER"),
+		Keyword("BY"),
+		GenerateOrderTerms()
+	]
+}
 
 function GenerateWindowFunction(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Expression("function-name"),
 			Keyword("("),
-			ZeroOrMore(Sequence([
-				Expression()
-			]), Keyword(",")),
+			Sequence([
+				Optional(Keyword("DISTINCT"), "skip"),
+				ZeroOrMore(Sequence([
+					Expression()
+				]), Keyword(",")),
+				Optional(Expandable("order-by", options, "order-by", GenerateWindowOrderBy))
+			]),
 			Keyword(")"),
 			Keyword("OVER"),
 			Choice(1, [
