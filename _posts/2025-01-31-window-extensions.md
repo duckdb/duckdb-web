@@ -267,7 +267,8 @@ This is simple enough that we can _stream_ the evaluation of the function on a s
 First, let's step back a bit and talk about the window _operator_.
 During parsing and optimisation of a query, all the window functions are attached to a single _logical_ window operator.
 When it comes time to plan the query, we group the functions that have common partitions and "compatible" orderings
-(see Cao et. al., [Optimization of Analytic Window Functions](https://www.vldb.org/pvldb/vol5/p1244_yucao_vldb2012.pdf)
+(see Cao et. al.,
+[_Optimization of Analytic Window Functions_](https://www.vldb.org/pvldb/vol5/p1244_yucao_vldb2012.pdf)
 for more information)
 and hand each group off to a separate _physical_ window operator that handles that partitioning and ordering.
 In order to use the "natural order" we have to group those functions that can be streamed and execute them first
@@ -286,9 +287,7 @@ So what functions can we stream? It turns out there are quite a few:
 There are a few more restrictions:
 
 * `IGNORE NULLS`, `EXCLUDE` and `ORDER BY` arguments are not allowed
-* `LEAD` and `LAG` distances are restricted to a constant within ±2048 (one vector)
-
-(The `LEAD` and `LAG` restriction is actually not a big one because usually the distance is 1.)
+* `LEAD` and `LAG` distances are restricted to a constant within ±2048 (one vector). This is not really a big deal because the distance is usually 1.
 
 In the future we may be able to relax the end of the frame to a constant distance from the current row
 that fits inside the buffer length (e.g., `BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING`)
