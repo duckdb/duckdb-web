@@ -28,13 +28,13 @@ or just [the window function documentation](docs/sql/functions/window_functions)
 In this post, I will start by introducing the more recent functionality additions,
 and then spelunk into the internals to talk about some performance and scaling improvements.
 
-For the examples in this post, I will mostly stick to using a table of athletic results:
+For the examples in this post, I will mostly stick to using a table of athletic `results`:
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | event | VARCHAR | The name of the event (e.g., 200 meter butterfly) |
 | athlete | VARCHAR | The name of the competitor (e.g., Michael Phelps) |
-| date | TIMESTAMP | The start of the event. |
+| date | TIMESTAMP | The start time of the event. |
 | time | DECIMAL(18, 3) | The athlete's time in that event (in seconds). |
 
 ## Functionality
@@ -54,26 +54,59 @@ When windowing was introduced, it added another layer of computation:
 window functions are computed _after_ aggregates.
 That is great, but then how do you filter the results of an `OVER` function?
 Originally, you had to put the query in a Common Table Expression (or CTE)
-which is defined by a `WITH` clause.
-This was kind of clunky, so eventually the `QUALIFY` clause was added
+which is defined by a `WITH` clause:
+
+```sql
+-- Find the third fastest times in each event
+WITH windowed AS (
+    SELECT 
+        event, 
+        athlete,
+        time,
+        row_number() OVER w AS r
+    FROM results
+    WINDOW w AS (
+        PARTITION BY event
+        ORDER BY time 
+    )
+)
+SELECT event, athlete, time
+FROM windowed
+WHERE r = 3
+```
+
+This was kind of clunky, so eventually the `QUALIFY` clause was proposed
 for filtering window functions.
-DuckDB now supports this, making it easier to filter the results of window functions.
+DuckDB now supports this, making it easier to filter the results of window functions:
+
+```sql
+-- Find the third fastest times in each event
+SELECT event, athlete, time
+FROM results
+WINDOW w AS (
+    PARTITION BY event
+    ORDER BY time 
+)
+QUALIFY row_number() OVER w = 3
+```
 
 ### GROUPS Framing
 
 In addition to the `ROWS` and `RANGE` frame boundary types,
 the standard also defines `GROUPS` as a boundary type.
 `ROWS` is pretty simple: it just counts the number of rows.
-`RANGE` is trickier: it applies its counts to the `ORDER BY` expression,
-which means that there can only be one such expression
+`RANGE` is trickier: it treats its counts as distances from 
+the value of the `ORDER BY` expression at the current row.
+This means that there can only be one such expression
 and you have to be able to do arithmetic on it.
 
 `GROUPS` is somewhere in between.
-A "group" in the standard's language is all the "peers" of a row.
-In turn, the peers are all the rows with the same value for the `ORDER BY` clause.
+A "group" in the standard's language is all the "peers" of a row,
+which are all the rows with the same 
+value of the `ORDER BY` expression at the current row.
 In the original windowing code, this was not easy to implement,
-but after several years of work, the infrastructure was evolved,
-and as of 1.2 we now support this last kind of framing.
+but after several years of work, the infrastructure has evolved,
+and as of 1.2 we now support this last type of framing.
 
 ### Frame Exclusion
 
@@ -123,8 +156,8 @@ but the others are not easy to implement efficiently.
 They can of course be implemented naïvely (academic-speak for "slow"!) by just computing each row independently:
 
 * re-read all the values,
-* filtering out the ones we don't want,
-* sticking them into a hash table to remove duplicates,
+* filter out the ones we don't want,
+* stick them into a hash table to remove duplicates,
 * sort the results,
 * send them off to the aggregate function to get the result
 
@@ -175,7 +208,7 @@ DuckDB will still compute this for you, but it may be horribly slow.
 ### Function Modifiers
 
 The `ORDER BY` modifier also makes sense for some non-aggregate window functions,
-especially if we let them use framing:
+especially if we let them use framing with it:
 
 ```sql
 -- Compute the current world record holder over time for each event
@@ -236,7 +269,7 @@ During parsing and optimisation of a query, all the window functions are attache
 When it comes time to plan the query, we group the functions that have common partitions and "compatible" orderings
 (see Cao et. al., [Optimization of Analytic Window Functions](https://www.vldb.org/pvldb/vol5/p1244_yucao_vldb2012.pdf)
 for more information)
-and hand each group off to a separate physical window operator that handles that partitioning and ordering.
+and hand each group off to a separate _physical_ window operator that handles that partitioning and ordering.
 In order to use the "natural order" we have to group those functions that can be streamed and execute them first
 (or the order will have been destroyed!) and hand them off to the _streaming_ physical window operator.
 
