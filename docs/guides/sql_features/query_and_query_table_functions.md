@@ -12,7 +12,7 @@ As such, they are not as powerful (or dangerous) as a generic `eval`.
 These functions are conceptually simple, but enable powerful and more dynamic SQL. For example, they allow passing in a table name as a prepared statement parameter:
 
 ```sql
-CREATE TABLE my_table(i INT);
+CREATE TABLE my_table(i INTEGER);
 INSERT INTO my_table VALUES (42);
 
 PREPARE select_from_table AS SELECT * FROM query_table($1);

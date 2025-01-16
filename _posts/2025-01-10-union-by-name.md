@@ -17,7 +17,7 @@ Well, it has been in the [SQL standard since at least 1992](https://www.contrib.
 It's time for SQL to get back to the relational model's roots when stacking data.
 Let's wind the clocks back to 1969...
 
-You just picked up your own [Ford Mustang Boss 302](https://en.wikipedia.org/wiki/Boss_302_Mustang), drifting around the corner at every street to make it to the library to read the latest research report out of IBM by Edgar Codd.
+You just picked up your own [Ford Mustang Boss 302](https://en.wikipedia.org/wiki/Boss_302_Mustang), drifting around the corner at every street to make it to the library to read the latest [research report out of IBM by Edgar Codd](https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf).
 (Do we need a Neflix special about databases?)
 Reading that report, wearing plenty of plaid, you gain a critical insight: data should be treated as unordered sets!
 (Technically [multisets](https://en.wikipedia.org/wiki/Multiset) – duplicates are everywhere...)

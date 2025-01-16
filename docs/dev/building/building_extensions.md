@@ -29,7 +29,7 @@ When this flag is set, the [`jemalloc` extension]({% link docs/extensions/jemall
 
 ### `BUILD_TPCE`
 
-When this flag is set, the [TPCE](https://www.tpc.org/tpce/) libray is built. Unlike TPC-H and TPC-DS this is not a proper extension and it's not distributed as such. Enablign this allows TPC-E enabled queries through our test suite.
+When this flag is set, the [TPCE](https://www.tpc.org/tpce/) libray is built. Unlike TPC-H and TPC-DS this is not a proper extension and it's not distributed as such. Enabling this allows TPC-E enabled queries through our test suite.
 
 ## Debug Flags
 

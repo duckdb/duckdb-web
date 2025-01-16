@@ -6,6 +6,7 @@ redirect_from:
   - /docs/dev/building
   - /docs/dev/building/build_instructions
   - /docs/dev/building/platforms
+  - /docs/dev/building/supported_platforms
 ---
 
 ## When Should You Build DuckDB?

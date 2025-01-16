@@ -144,7 +144,7 @@ DuckDB supports [lightweight compression techniques]({% post_url 2022-10-28-ligh
 
 DuckDB does not compress its in-memory tables. The reason for this is that compression is performed during checkpointing, and in-memory tables are not checkpointed.
 
-In rare cases, this can result in unintuitive performance results where queries are faster on on-disk tables compared to in-memory ones. For example, Q1 of the [TPC-H workload]({% link docs/extensions/tpch.md %}) is faster when running on-disk compared to the in-memory mode:
+In some cases, this can result in counter-intuitive performance results where queries are faster on on-disk tables compared to in-memory ones. For example, Q1 of the [TPC-H workload]({% link docs/extensions/tpch.md %}) is faster when running on-disk compared to the in-memory mode:
 
 ```sql
 INSTALL tpch;

@@ -47,7 +47,15 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 
 <div class="answer" markdown="1">
 
-DuckDB is fully open-source under the MIT license and its development takes place [on GitHub in the `duckdb/duckdb` repository](https://github.com/duckdb/duckdb). All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
+DuckDB is fully open-source under the MIT license and its development takes place [on GitHub in the `duckdb/duckdb` repository](https://github.com/duckdb/duckdb).
+All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
+
+The intellectual property of DuckDB has been purposefully moved to a non-profit entity to disconnect the licensing of the project from the commercial company, DuckDB Labs.
+The DuckDB Foundation's statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
+The [CWI (Centrum Wiskunde & Informatica)](https://cwi.nl/) has a seat on the board of the DuckDB Foundation
+and donations to the DuckDB Foundation directly fund DuckDB development.
+
+For more information on the organizations around DuckDB, see the next question–answer pair.
 
 </div>
 
@@ -64,8 +72,7 @@ DuckDB is fully open-source under the MIT license and its development takes plac
 [**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.
 
 The [**DuckDB Foundation**]({% link foundation/index.html %}) is a non-profit organization that holds the intellectual property of the DuckDB project.
-Its statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
-Donations to the DuckDB Foundation directly fund DuckDB development.
+The DuckDB Foundation's statutes ensure DuckDB remains open-source under the MIT license in perpetuity.
 
 [**DuckDB Labs**](https://duckdblabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
 DuckDB Labs employs the core contributors of the DuckDB project.

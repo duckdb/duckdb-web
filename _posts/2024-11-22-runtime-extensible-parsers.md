@@ -223,4 +223,4 @@ We plan to switch DuckDB's parser, which started as a fork of the Postgres YACC 
 
 ## Acknowledgments
 
-We would like to thank [**Torsten Grust**](https://db.cs.uni-tuebingen.de/team/members/torsten-grust/), [**Gábor Szárnyas**](https://szarnyasg.github.io) and [**Daniël ten Wolde**](https://www.cwi.nl/en/people/daniel-ten-wolde/) for their valuable suggestions. We would also like to thank [**Carlo Piovesan**](https://github.com/carlopi) for his translation of the Postgres YACC grammar to PEG.
+We would like to thank [**Torsten Grust**](https://db.cs.uni-tuebingen.de/team/members/torsten-grust/), [**Gábor Szárnyas**](https://szarnyasg.org/) and [**Daniël ten Wolde**](https://www.cwi.nl/en/people/daniel-ten-wolde/) for their valuable suggestions. We would also like to thank [**Carlo Piovesan**](https://github.com/carlopi) for his translation of the Postgres YACC grammar to PEG.
