@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title: "DuckDB's CSV Sniffer: Automatic Detection of Types and Dialects"
 author: Pedro Holanda

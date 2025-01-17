@@ -10,7 +10,8 @@ On Linux, install the required packages with the package manager of your distrib
 ### Ubuntu and Debian
 
 ```batch
-sudo apt-get update && sudo apt-get install -y git g++ cmake ninja-build libssl-dev
+sudo apt-get update
+sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 ### Fedora, CentOS, and Red Hat
