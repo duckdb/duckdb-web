@@ -86,42 +86,42 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `all_varchar` | Skip type detection for CSV parsing and assume all columns to be of type `VARCHAR`. This option is only supported by the `read_csv` function. | `BOOL` | `false` |
+| `all_varchar` | Skip type detection and assume all columns to be of type `VARCHAR`. This option is only supported by the `read_csv` function. | `BOOL` | `false` |
 | `allow_quoted_nulls` | Allow the conversion of quoted values to `NULL` values | `BOOL` | `true` |
 | `auto_detect` | [Auto detect CSV parameters]({% link docs/data/csv/auto_detection.md %}). | `BOOL` | `true` |
-| `auto_type_candidates` | Types that the sniffer uses when detecting CSV column types. The `VARCHAR` type is always included in the detected types (as a fallback option). See [example](#auto_type_candidates-details). | `TYPE[]` | [default types](#auto_type_candidates-details) |
-| `buffer_size` | Size of the buffers used to read the file. Must be large enough to always accommodate at least four lines of the CSV file. This option can significantly impact performance. | `BIGINT` | [`16 * max_line_size` |
-| `columns` | Specifies the column names and types contained within the CSV file, as a strcut (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option implies that auto detection is not used. | `STRUCT` | (empty) |
-| `comment` | Specifies the character used to represent comments in the CSV file. Comment characters can either cause an entire line to be ignored or appear anywhere within a line, causing the parser to ignore the rest of it. | `VARCHAR` | `` |
-| `compression` | Specifies the compression type for the file. By default this is detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `dateformat` or `date_format` | Specifies the date format used in the file, which is used when parsing and writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
+| `auto_type_candidates` | Types that the sniffer uses when detecting column types. The `VARCHAR` type is always included in the detected types (as a fallback option). See [example](#auto_type_candidates-details). | `TYPE[]` | [default types](#auto_type_candidates-details) |
+| `buffer_size` | Size of the buffers used to read files. Must be large enough to always accommodate at least four lines. This option can significantly impact performance. | `BIGINT` | [`16 * max_line_size` |
+| `columns` | Specifies the column names and types, as a struct (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option implies that auto detection is not used. | `STRUCT` | (empty) |
+| `comment` | Specifies the character used to start comments. Comment characters can either cause an entire line to be ignored or appear anywhere within a line, causing the parser to ignore the rest of it. | `VARCHAR` | `` |
+| `compression` | Specifies the compression type. By default this is detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
+| `dateformat` or `date_format` | Specifies the date format that is used when parsing and writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `decimal_separator` | Specifies the decimal separator for numbers. | `VARCHAR` | `.` |
-| `delimiter` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `sep`. This option is only available in the `COPY` statement. | `VARCHAR` | `,` |
-| `delim` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `sep`. | `VARCHAR` | `,` |
+| `delimiter` | Specifies the delimiter character that separates columns within each row (line). Alias for `sep`. This option is only available in the `COPY` statement. | `VARCHAR` | `,` |
+| `delim` | Specifies the delimiter character that separates columns within each row (line). Alias for `sep`. | `VARCHAR` | `,` |
 | `escape` | Specifies the string used to escape the `quote` character within quoted values. | `VARCHAR` | `"` |
 | `encoding` | Specifies the encoding used by the CSV file and ensures conversion from the source encoding to `UTF-8`.  | `VARCHAR` | `utf-8` |
-| `filename` | Add path of the containing CSV file to each row, in a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. | `BOOL` | `false` |
+| `filename` | Add path of the containing file to each row, in a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. | `BOOL` | `false` |
 | `force_not_null` | Do not match values in the the specified columns values against the `NULL` string. In the default case where the `NULL` string is empty, this means that empty values are read as zero-length strings instead of `NULL`s. | `VARCHAR[]` | `[]` |
-| `header` | Specifies whether the file contains a header line with the names of each column. | `BOOL` | `false` |
+| `header` | Specifies whether files contain header lines with the column names. | `BOOL` | `false` |
 | `hive_partitioning` | Interpret the path as a [Hive partitioned path]({% link docs/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
 | `ignore_errors` | Ignore any parsing errors encountered. | `BOOL` | `false` |
 | `max_line_size` or `maximum_line_size` | Maximum line size, in bytes. | `BIGINT` | 2000000 |
 | `names` or `column_names` | Specifies the column names, as a list. See [example]({% link docs/data/csv/tips.md %}#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
-| `new_line` | Specifies the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. The CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
+| `new_line` | Specifies the new line character(s). Options are `'\r'`,`'\n'`, or `'\r\n'`. The CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
 | `normalize_names` | Normalize column names, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
 | `null_padding` | Pad the remaining columns on the right with `NULL` values when a row lacks columns. | `BOOL` | `false` |
 | `nullstr` or `null` | Specifies a list of strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
 | `parallel` | Use the parallel CSV reader. | `BOOL` | `true` |
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | `VARCHAR` | `"` |
 | `rejects_scan` | Name of a temporary table where scan information for faulty CSV files is stored.  | `VARCHAR` | `reject_scans` |
-| `rejects_table` | Name of a temporary table where information on faulty lines in a CSV file are stored.  | `VARCHAR` | `reject_errors` |
-| `rejects_limit` | Upper limit on the number of faulty records from a CSV file that will be recorded in the rejects table. 0 is used when no limit should be applied.  | `BIGINT` | `0` |
+| `rejects_table` | Name of a temporary table where information on faulty lines in a file are stored.  | `VARCHAR` | `reject_errors` |
+| `rejects_limit` | Upper limit on the number of faulty records from a CSV file that are recorded in the rejects table. Setting this to `0` means that no limit is applied.  | `BIGINT` | `0` |
 | `rfc_4180` | Adhere to the RFC 4180 standard. Setting this to `false` may allow the parser to read structurally incorrect files. | `BOOL` | `false` |
 | `sample_size` | Number of sample rows for [auto detection of parameters]({% link docs/data/csv/auto_detection.md %}). | `BIGINT` | 20480 |
 | `sep` | Specifies the delimiter character that separates columns within each row (line) of the file. Alias for `delim`. | `VARCHAR` | `,` |
-| `skip` | Number of lines to skip at at the top of the file. | `BIGINT` | 0 |
-| `store_rejects` | Skip any errors in the file and store them in the rejects temporary table. | `BOOL` | `false` |
-| `timestampformat` or `timestamp_format` | Specifies the date format used in the file, which is used when parsing and writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
+| `skip` | Number of lines to skip at at the top of each file. | `BIGINT` | 0 |
+| `store_rejects` | Skip any lines with errors and store them in the rejects temporary table. | `BOOL` | `false` |
+| `timestampformat` or `timestamp_format` | Specifies the date format that is used when parsing and writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `types` or `dtypes` or `column_types` | Specifies the column types, as either a list (by position) or a struct (by name). [Example here]({% link docs/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
 | `union_by_name` | Unify columns of multiple schemas [by name]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name) rather than by position. Using this option increases memory consumption. | `BOOL` | `false` |
 
