@@ -94,7 +94,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `columns` | Column names and types, as a struct (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option disables auto detection. | `STRUCT` | (empty) |
 | `comment` | Character used to start comments, either at the beginning of a line or within it. | `VARCHAR` | `` |
 | `compression` | Method used to compress the CSV file. By default this is detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `dateformat` or `date_format` | [Date Format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing dates. | `VARCHAR` | (empty) |
+| `dateformat` or `date_format` | [Date format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing dates. | `VARCHAR` | (empty) |
 | `decimal_separator` | Decimal separator for numbers. | `VARCHAR` | `.` |
 | `delimiter` | Delimiter character used to separate columns within each line. Alias for `sep`. This option is only available in the `COPY` statement. | `VARCHAR` | `,` |
 | `delim` | Delimiter character used to separate columns within each line. Alias for `sep`. | `VARCHAR` | `,` |
@@ -113,9 +113,9 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `nullstr` or `null` | Strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
 | `parallel` | Use the parallel CSV reader. | `BOOL` | `true` |
 | `quote` | String used to quote values. | `VARCHAR` | `"` |
-| `rejects_scan` | Name of a temporary table where information on faulty scans is stored.  | `VARCHAR` | `reject_scans` |
-| `rejects_table` | Name of a temporary table where information on faulty lines is stored.  | `VARCHAR` | `reject_errors` |
-| `rejects_limit` | Upper limit on the number of faulty lines per file that are recorded in the rejects table. Setting this to `0` means that no limit is applied.  | `BIGINT` | `0` |
+| `rejects_scan` | Name of a [temporary table where information on faulty scans is stored]({% link docs/data/csv/reading_faulty_csv_files.md %}#reject-scans). | `VARCHAR` | `reject_scans` |
+| `rejects_table` | Name of a [temporary table where information on faulty lines is stored]({% link docs/data/csv/reading_faulty_csv_files.md %}#reject-errors). | `VARCHAR` | `reject_errors` |
+| `rejects_limit` | Upper limit on the number of faulty lines per file that are recorded in the rejects table. Setting this to `0` means that no limit is applied. | `BIGINT` | `0` |
 | `rfc_4180` | Adhere to the RFC 4180 standard. Setting this to `false` may allow the parser to read structurally incorrect files. | `BOOL` | `false` |
 | `sample_size` | Number of sample lines for [auto detection of parameters]({% link docs/data/csv/auto_detection.md %}). | `BIGINT` | 20480 |
 | `sep` | Delimiter character used to separate columns within each line. Alias for `delim`. | `VARCHAR` | `,` |
