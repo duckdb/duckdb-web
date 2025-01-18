@@ -94,9 +94,10 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `columns` | Column names and types, as a struct (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option disables auto detection. | `STRUCT` | (empty) |
 | `comment` | Character used to initiate comments. Lines starting with a comment character (optionally preceded by space characters) are completely ignored; other lines containing a comment character are parsed only up to that point. | `VARCHAR` | `` |
 | `compression` | Method used to compress CSV files. By default this is detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `dateformat` or `date_format` | [Date format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing dates. | `VARCHAR` | (empty) |
+| `dateformat` | [Date format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing dates. | `VARCHAR` | (empty) |
+| `date_format` | [Date format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing dates. This alias is only available in the `COPY` statement. | `VARCHAR` | (empty) |
 | `decimal_separator` | Decimal separator for numbers. | `VARCHAR` | `.` |
-| `delimiter` | Delimiter character used to separate columns within each line. Alias for `sep`. This option is only available in the `COPY` statement. | `VARCHAR` | `,` |
+| `delimiter` | Delimiter character used to separate columns within each line. Alias for `sep`. This alias is only available in the `COPY` statement. | `VARCHAR` | `,` |
 | `delim` | Delimiter character used to separate columns within each line. Alias for `sep`. | `VARCHAR` | `,` |
 | `escape` | String used to escape the `quote` character within quoted values. | `VARCHAR` | `"` |
 | `encoding` | Encoding used by the CSV file.  | `VARCHAR` | `utf-8` |
