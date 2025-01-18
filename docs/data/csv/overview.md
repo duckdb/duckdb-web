@@ -90,7 +90,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `allow_quoted_nulls` | Allow the conversion of quoted values to `NULL` values | `BOOL` | `true` |
 | `auto_detect` | [Auto detect CSV parameters]({% link docs/data/csv/auto_detection.md %}). | `BOOL` | `true` |
 | `auto_type_candidates` | Types that the sniffer uses when detecting column types. The `VARCHAR` type is always included as a fallback option. See [example](#auto_type_candidates-details). | `TYPE[]` | [default types](#auto_type_candidates-details) |
-| `buffer_size` | Size of the buffers used to read files. Must be large enough to always accommodate at least four lines and can significantly impact performance. | `BIGINT` | [`16 * max_line_size` |
+| `buffer_size` | Size of the buffers used to read files. Must be large enough to accommodate at least four lines and can significantly impact performance. | `BIGINT` | [`16 * max_line_size` |
 | `columns` | Column names and types, as a struct (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option implies that auto detection is not used. | `STRUCT` | (empty) |
 | `comment` | Character used to start comments, either at the start or within a line. | `VARCHAR` | `` |
 | `compression` | Method used to compress the CSV file. By default this is detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
