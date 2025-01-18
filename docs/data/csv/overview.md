@@ -100,7 +100,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `delim` | Delimiter character used to separate columns within each row. Alias for `sep`. | `VARCHAR` | `,` |
 | `escape` | String used to escape the `quote` character within quoted values. | `VARCHAR` | `"` |
 | `encoding` | Encoding used by the CSV file.  | `VARCHAR` | `utf-8` |
-| `filename` | Add path of the containing file to each row, in a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. | `BOOL` | `false` |
+| `filename` | Add path of the containing file to each row, as a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. | `BOOL` | `false` |
 | `force_not_null` | Do not match values in the the specified columns values against the `NULL` string. In the default case where the `NULL` string is empty, this means that empty values are read as zero-length strings instead of `NULL`s. | `VARCHAR[]` | `[]` |
 | `header` | First line is a header with the column names. | `BOOL` | `false` |
 | `hive_partitioning` | Interpret the path as a [Hive partitioned path]({% link docs/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
