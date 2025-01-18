@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 397
-extension_download_count_pretty: 397
+extension_download_count: 410
+extension_download_count_pretty: 410
 image: '/images/community_extensions/social_preview/preview_community_extension_pcap_reader.png'
 layout: community_extension_doc
 ---

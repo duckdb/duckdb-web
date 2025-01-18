@@ -182,10 +182,10 @@ repo:
   github: rustyconover/duckdb-fuzzycomplete-extension
   ref: 39a61c1c39a2b028101ef635fcb04856883ab498
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 413
-extension_download_count_pretty: 413
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 417
+extension_download_count_pretty: 417
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
 layout: community_extension_doc
 ---
