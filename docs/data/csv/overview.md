@@ -102,7 +102,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `encoding` | Encoding used by the CSV file.  | `VARCHAR` | `utf-8` |
 | `filename` | Add path of the containing file to each row, as a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. | `BOOL` | `false` |
 | `force_not_null` | Do not match values in the the specified columns values against the `NULL` string. In the default case where the `NULL` string is empty, this means that empty values are read as zero-length strings instead of `NULL`s. | `VARCHAR[]` | `[]` |
-| `header` | First line is a header with the column names. | `BOOL` | `false` |
+| `header` | First line of each file contains the column names. | `BOOL` | `false` |
 | `hive_partitioning` | Interpret the path as a [Hive partitioned path]({% link docs/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
 | `ignore_errors` | Ignore any parsing errors encountered. | `BOOL` | `false` |
 | `max_line_size` or `maximum_line_size` | Maximum line size, in bytes. | `BIGINT` | 2000000 |
