@@ -100,13 +100,13 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `delim` | Delimiter character used to separate columns within each line. Alias for `sep`. | `VARCHAR` | `,` |
 | `delimiter` | Alias for `delim`; only available in the `COPY` statement. | `VARCHAR` | `,` |
 | `escape` | String used to escape the `quote` character within quoted values. | `VARCHAR` | `"` |
-| `encoding` | Encoding used by the CSV file.  | `VARCHAR` | `utf-8` |
+| `encoding` | Encoding used by the CSV file. Not available in the `COPY` statement. | `VARCHAR` | `utf-8` |
 | `filename` | Add path of the containing file to each row, as a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. | `BOOL` | `false` |
 | `force_not_null` | Do not match values in the the specified columns against the `NULL` string. In the default case where the `NULL` string is empty, this means that empty values are read as zero-length strings instead of `NULL`s. | `VARCHAR[]` | `[]` |
 | `header` | First line of each file contains the column names. | `BOOL` | `false` |
 | `hive_partitioning` | Interpret the path as a [Hive partitioned path]({% link docs/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
 | `ignore_errors` | Ignore any parsing errors encountered. | `BOOL` | `false` |
-| `max_line_size` or `maximum_line_size` | Maximum line size, in bytes. | `BIGINT` | 2000000 |
+| `max_line_size` or `maximum_line_size`. Not available in the `COPY` statement. | Maximum line size, in bytes. | `BIGINT` | 2000000 |
 | `names` or `column_names` | Column names, as a list. See [example]({% link docs/data/csv/tips.md %}#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
 | `new_line` | New line character(s). Options are `'\r'`,`'\n'`, or `'\r\n'`. The CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
 | `normalize_names` | Normalize column names, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
