@@ -96,8 +96,8 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `compression` | Method used to compress the CSV file. By default this is detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `dateformat` or `date_format` | Date format used when parsing and writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `decimal_separator` | Decimal separator for numbers. | `VARCHAR` | `.` |
-| `delimiter` | Delimiter character used to separate columns within each row. Alias for `sep`. This option is only available in the `COPY` statement. | `VARCHAR` | `,` |
-| `delim` | Delimiter character used to separate columns within each row. Alias for `sep`. | `VARCHAR` | `,` |
+| `delimiter` | Delimiter character used to separate columns within each line. Alias for `sep`. This option is only available in the `COPY` statement. | `VARCHAR` | `,` |
+| `delim` | Delimiter character used to separate columns within each line. Alias for `sep`. | `VARCHAR` | `,` |
 | `escape` | String used to escape the `quote` character within quoted values. | `VARCHAR` | `"` |
 | `encoding` | Encoding used by the CSV file.  | `VARCHAR` | `utf-8` |
 | `filename` | Add path of the containing file to each row, as a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. | `BOOL` | `false` |
@@ -109,7 +109,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `names` or `column_names` | Column names, as a list. See [example]({% link docs/data/csv/tips.md %}#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
 | `new_line` | New line character(s). Options are `'\r'`,`'\n'`, or `'\r\n'`. The CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
 | `normalize_names` | Normalize column names, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
-| `null_padding` | Pad the remaining columns on the right with `NULL` values when a row lacks columns. | `BOOL` | `false` |
+| `null_padding` | Pad the remaining columns on the right with `NULL` values when a line lacks columns. | `BOOL` | `false` |
 | `nullstr` or `null` | Strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
 | `parallel` | Use the parallel CSV reader. | `BOOL` | `true` |
 | `quote` | String used to quote values. | `VARCHAR` | `"` |
@@ -117,8 +117,8 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `rejects_table` | Name of a temporary table where information on faulty lines is stored.  | `VARCHAR` | `reject_errors` |
 | `rejects_limit` | Upper limit on the number of faulty lines per file that are recorded in the rejects table. Setting this to `0` means that no limit is applied.  | `BIGINT` | `0` |
 | `rfc_4180` | Adhere to the RFC 4180 standard. Setting this to `false` may allow the parser to read structurally incorrect files. | `BOOL` | `false` |
-| `sample_size` | Number of sample rows for [auto detection of parameters]({% link docs/data/csv/auto_detection.md %}). | `BIGINT` | 20480 |
-| `sep` | Delimiter character used to separate columns within each row. Alias for `delim`. | `VARCHAR` | `,` |
+| `sample_size` | Number of sample lines for [auto detection of parameters]({% link docs/data/csv/auto_detection.md %}). | `BIGINT` | 20480 |
+| `sep` | Delimiter character used to separate columns within each line. Alias for `delim`. | `VARCHAR` | `,` |
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
 | `store_rejects` | Skip any lines with errors and store them in the rejects table. | `BOOL` | `false` |
 | `timestampformat` or `timestamp_format` | Date format used when parsing and writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
@@ -223,5 +223,5 @@ iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
 ## Order Preservation
 
 The CSV reader respects the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}) to [preserve insertion order]({% link docs/sql/dialect/order_preservation.md %}).
-When `true` (the default), the order of the rows in the resultset returned by the CSV reader is the same as the order of the corresponding lines read from the file(s).
+When `true` (the default), the order of the rows in the result set returned by the CSV reader is the same as the order of the corresponding lines read from the file(s).
 When `false`, there is no guarantee that the order is preserved.
