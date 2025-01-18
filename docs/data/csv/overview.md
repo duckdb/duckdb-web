@@ -117,7 +117,7 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `rejects_scan` | Name of the [temporary table where information on faulty scans is stored]({% link docs/data/csv/reading_faulty_csv_files.md %}#reject-scans). | `VARCHAR` | `reject_scans` |
 | `rejects_table` | Name of the [temporary table where information on faulty lines is stored]({% link docs/data/csv/reading_faulty_csv_files.md %}#reject-errors). | `VARCHAR` | `reject_errors` |
 | `rejects_limit` | Upper limit on the number of faulty lines per file that are recorded in the rejects table. Setting this to `0` means that no limit is applied. | `BIGINT` | `0` |
-| `rfc_4180` | Adhere to the RFC 4180 standard. Setting this to `false` may allow the parser to read structurally incorrect files. | `BOOL` | `false` |
+| `rfc_4180` | Enforce the RFC 4180 standard. Setting this to `false` may allow the parser to read structurally incorrect files. | `BOOL` | `false` |
 | `sample_size` | Number of sample lines for [auto detection of parameters]({% link docs/data/csv/auto_detection.md %}). | `BIGINT` | 20480 |
 | `sep` | Delimiter character used to separate columns within each line. Alias for `delim`. | `VARCHAR` | `,` |
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
