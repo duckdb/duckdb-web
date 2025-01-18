@@ -90,11 +90,11 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `allow_quoted_nulls` | Allow the conversion of quoted values to `NULL` values | `BOOL` | `true` |
 | `auto_detect` | [Auto detect CSV parameters]({% link docs/data/csv/auto_detection.md %}). | `BOOL` | `true` |
 | `auto_type_candidates` | Types that the sniffer uses when detecting column types. The `VARCHAR` type is always included as a fallback option. See [example](#auto_type_candidates-details). | `TYPE[]` | [default types](#auto_type_candidates-details) |
-| `buffer_size` | Size of the buffers used to read files. Must be large enough to accommodate at least four lines and can significantly impact performance. | `BIGINT` | [`16 * max_line_size` |
+| `buffer_size` | Size of the buffers used to read files, in bytes. Must be large enough to hold four lines and can significantly impact performance. | `BIGINT` | `16 * max_line_size` |
 | `columns` | Column names and types, as a struct (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option disables auto detection. | `STRUCT` | (empty) |
-| `comment` | Character used to start comments, either at the start of or within a line. | `VARCHAR` | `` |
+| `comment` | Character used to start comments, either at the beginning of a line or within it. | `VARCHAR` | `` |
 | `compression` | Method used to compress the CSV file. By default this is detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `dateformat` or `date_format` | Date format used when parsing and writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
+| `dateformat` or `date_format` | [Date Format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing dates. | `VARCHAR` | (empty) |
 | `decimal_separator` | Decimal separator for numbers. | `VARCHAR` | `.` |
 | `delimiter` | Delimiter character used to separate columns within each line. Alias for `sep`. This option is only available in the `COPY` statement. | `VARCHAR` | `,` |
 | `delim` | Delimiter character used to separate columns within each line. Alias for `sep`. | `VARCHAR` | `,` |
@@ -121,9 +121,9 @@ Below are parameters that can be passed to the CSV reader. These parameters are 
 | `sep` | Delimiter character used to separate columns within each line. Alias for `delim`. | `VARCHAR` | `,` |
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
 | `store_rejects` | Skip any lines with errors and store them in the rejects table. | `BOOL` | `false` |
-| `timestampformat` or `timestamp_format` | Date format used when parsing and writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
-| `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). [Example here]({% link docs/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
-| `union_by_name` | Unify columns of multiple schemas [by name]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name) rather than by position. Using this option increases memory consumption. | `BOOL` | `false` |
+| `timestampformat` or `timestamp_format` | [Date format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing timestamps. | `VARCHAR` | (empty) |
+| `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). See [example]({% link docs/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
+| `union_by_name` | Align columns from different files [by column name]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name) instead of position. Using this option increases memory consumption. | `BOOL` | `false` |
 
 ### `auto_type_candidates` Details
 
