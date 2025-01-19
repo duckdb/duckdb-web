@@ -8,10 +8,12 @@ excerpt: |
 extension:
   name: flockmtl
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.2.2
+  version: 0.2.3
   language: SQL & C++
   build: cmake
   license: MIT
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
+
   maintainers:
     - dorbanianas
     - SunnyYasser
@@ -19,7 +21,7 @@ extension:
 
 repo:
   github: dsg-polymtl/flockmtl
-  ref: c8cad4a66a0a62164b845258b6a00e72c8470b3f
+  ref: 5c4d40bcd6e9918227a6b4e5b897c880e749355e
 
 docs:
   hello_world: |
@@ -45,7 +47,7 @@ docs:
     D CREATE PROMPT('summarize', 'summarize the text into 1 word: {{text}}');
 
     -- Create a variable name for the model to do the summarizing
-    D CREATE MODEL('summarizer-model', 'gpt-4o', {'context_window': 128000, 'max_output_tokens': 16400);
+    D CREATE MODEL('summarizer-model', 'gpt-4o', {'context_window': 128000, 'max_output_tokens': 16400});
 
     -- Summarize text and pass it as parameter 
     D SELECT llm_complete({'model_name': 'summarizer-model'}, {'prompt_name': 'summarize'}, {'text': 'We support more functions and approaches to combine relational analytics and semantic analysis. Check our repo for documentation and examples.'});
@@ -55,8 +57,8 @@ docs:
 
 extension_star_count: 93
 extension_star_count_pretty: 93
-extension_download_count: 428
-extension_download_count_pretty: 428
+extension_download_count: 431
+extension_download_count_pretty: 431
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
 layout: community_extension_doc
 ---
