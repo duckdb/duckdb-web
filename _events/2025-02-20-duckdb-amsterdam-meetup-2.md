@@ -1,40 +1,37 @@
 ---
 layout: post
 event: true
-title: "DuckDB Amsterdam Meetup #1"
+title: "DuckDB Amsterdam Meetup #2"
 author: "DuckDB meetup organizers"
-thumb: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.svg"
-image: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.png"
+thumb: "/images/blog/thumbs/duckdb-amsterdam-meetup-2.svg"
+image: "/images/blog/thumbs/duckdb-amsterdam-meetup-2.png"
 excerpt: ""
 tags: ["meetup"]
-redirect_from:
-  - 2024/10/17/duckdb-amsterdam-meetup-1
 ---
 
-<img src="/images/blog/thumbs/duckdb-amsterdam-meetup-1.svg"
+<img src="/images/blog/thumbs/duckdb-amsterdam-meetup-2.svg"
      alt="DuckDB Amsterdam Meetup Splashscreen"
      width="680"
      />
 
-We are excited to announce the [first DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/303482464/), co-organized by [DuckDB Labs](https://duckdblabs.com/) and [Miro](https://miro.com/).
+We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/304415344/), co-organized by [DuckDB Labs](https://duckdblabs.com/) and [Xebia](https://xebia.com/).
 
 ### Timetable
 
-| Time  | Title   | Presenter | Slides |
-|------:|:------- |:----------|:-------|
-| 18:00 | _Venue opens_ | | |
-| 18:15 | [**DuckDB in the wild**](https://youtu.be/NarcDUhHwQw) | [Hannes Mühleisen](https://hannes.muehleisen.org/) _([DuckDB Labs](https://duckdblabs.com/))_ | [pdf](https://blobs.duckdb.org/slides/hannes-muehleisen-duckdb-in-the-wild-duckdb-amsterdam-meetup.pdf) |
-| 18:40 | [**The analytics engineering developer experience at Miro**](https://youtu.be/4trnG7Bejz4) | [Renan Leme](https://www.linkedin.com/in/renanleme/) and [Rochelle Smits-Seemann](https://www.linkedin.com/in/rochellesmitsseemann/) _([Miro](https://miro.com/))_ | |
-| 19:05 | [**Machine learning and AI at MotherDuck**](https://youtu.be/8OopWq-JSkE) | [Till Döhmen](https://www.linkedin.com/in/tdoehmen/) _([MotherDuck](https://motherduck.com/))_ | [pdf](https://blobs.duckdb.org/slides/till-doehmen-aiml-at-motherduck-duckdb-amsterdam-meetup.pdf) |
-| 19:30 | _Drinks and snacks_ | | |
+| Time  | Title   | Presenter(s) |
+|------:|:--------|:-------------|
+| 18:00 | _Venue opens_ | |
+| 18:15 | **Ducklake: A modern data platform combining DuckDB with the governance capabilities of Unity Catalog** | Daniel Tom and Frank Mbonu _([Xebia](https://xebia.com/))_ |
+| 18:40 | **Using DuckDB in a spreadsheet with WASM** | Chris Laffra _([PySheets](https://pysheets.app/))_ |
+| 19:05 | **TBA** | Marco Slot _([Crunchy Data](https://www.crunchydata.com/))_ |
+| 19:30 | _Drinks and snacks_ | |
 
-The venue is provided by [Miro](https://miro.com/).
-Drink and snacks are sponsored by [DuckDB Labs](https://duckdblabs.com/).
+The venue is provided by [Xebia](https://xebia.com/).
 
 ### Registration Process
 
-Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/303482464/).
+Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/304415344/).
 
 ### Inquiries
 
-Please contact Gabor Szarnyas at [gabor@duckdblabs.com](mailto:gabor@duckdblabs.com) if you have any questions.
+Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.
