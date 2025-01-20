@@ -1125,6 +1125,7 @@ body.documentation main .wrap a.pill{
 			margin: 0!important;
 		}	
 	}
+	&.stars,
 	&.downloads{
 		span.num{
 			color: var(--interactive-folderbox-text-color, #1A1A1A);
