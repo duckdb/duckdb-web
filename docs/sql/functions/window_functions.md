@@ -56,7 +56,7 @@ FROM sales;
 
 <div id="rrdiagram"></div>
 
-Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER ⟨window-name⟩` syntax.
+Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's [`WINDOW` clause]({% link docs/sql/query_syntax/window.md %}) and use the `OVER ⟨window-name⟩` syntax.
 
 ## General-Purpose Window Functions
 
