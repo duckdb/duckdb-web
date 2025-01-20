@@ -144,10 +144,10 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
     * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
 * In most cases, linking related GitHub issues/discussions is discouraged. This allows the documentation to be self-contained.
 
-## Latest, Stable, and Archive Pages
+## Latest and Stable Pages
 
 * The latest page, <https://duckdb.org/docs/latest/> contains documentation for the latest `main` branch of DuckDB
-* The versioned pages (e.g., <https://duckdb.org/docs/1.1/>) contain documentation for the stable versions of DuckDB. We generally do not accept contributions to these pages unless they fix a critical error. Please target the latest version of the page when submitting your contributions.
+* The versioned pages (e.g., <https://duckdb.org/docs/v1.1/>) contain documentation for the stable versions of DuckDB. We generally only accept contributions to the latest stable version. Older pages are only maintained if they contain a critical error.
 
 ## Generated Pages
 
