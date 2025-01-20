@@ -24,7 +24,7 @@ We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meet
 | 18:00 | _Venue opens_ | |
 | 18:15 | **Ducklake: A modern data platform combining DuckDB with the governance capabilities of Unity Catalog** | Daniel Tom and Frank Mbonu _([Xebia](https://xebia.com/))_ |
 | 18:40 | **Using DuckDB in a spreadsheet with WASM** | Chris Laffra _([PySheets](https://pysheets.app/))_ |
-| 19:05 | **TBA** | Marco Slot _([Crunchy Data](https://www.crunchydata.com/))_ |
+| 19:05 | **Building a Postgres Data Warehouse using DuckDB** | Marco Slot _([Crunchy Data](https://www.crunchydata.com/))_ |
 | 19:30 | _Drinks and snacks_ | |
 
 The venue is provided by [Xebia](https://xebia.com/).
