@@ -19,13 +19,13 @@ title: Documentation
 <div class="box-link-wrapper">
     <div class="box-link half-width">
         <a href="{% link docs/api/cli/overview.md %}"></a>
-        <span class="symbol"><img src="{%link images/icons/cli.svg %}"></span>
+        <span class="symbol"><img src="{% link images/icons/cli.svg %}"></span>
         <span>CLI (Command Line Interface)</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
         <a href="{% link docs/api/java.md %}"></a>
-        <span class="symbol"><img src="{%link images/icons/java.svg %}"></span>
+        <span class="symbol"><img src="{% link images/icons/java.svg %}"></span>
         <span>Java</span>
         <span class="chevron"></span>
     </div>
