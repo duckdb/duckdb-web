@@ -94,6 +94,7 @@ LOAD {{ page.extension.name }};
 | llm_first         | aggregate     |             |         |         |
 | llm_last          | aggregate     |             |         |         |
 | llm_reduce        | aggregate     |             |         |         |
+| llm_reduce_json   | aggregate     |             |         |         |
 | llm_rerank        | aggregate     |             |         |         |
 
 ### Overloaded Functions
