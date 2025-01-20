@@ -185,7 +185,7 @@ We can also use the `ORDER BY` modifier with order-sensitive aggregates to get s
 ```sql
 -- Return an alphabetised list of athletes who made or beat a time
 SELECT list(athlete ORDER BY athlete) OVER (
-    PARTITION by event, date
+    PARTITION BY event, date
     ORDER BY time DESC
 )
 FROM results;
@@ -198,7 +198,7 @@ So for example, if we wished to exclude the athlete who made the time in the pre
 ```sql
 -- Return an alphabetised list athletes who beat the each time
 SELECT list(athlete ORDER BY athlete) OVER (
-    PARTITION by event, date
+    PARTITION BY event, date
     ORDER BY time DESC
     EXCLUDE CURRENT ROW
 )
