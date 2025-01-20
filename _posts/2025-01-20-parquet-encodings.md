@@ -63,11 +63,22 @@ Compressing data is almost always a trade-off between file size and the time it 
 Let's take a look at the following example (ran on a MacBook Pro with an M1 Max):
 
 ```sql
-CALL dbgen(sf = 1); -- Generate TPC-H scale factor 1
-COPY lineitem TO 'snappy_v1.parquet' (COMPRESSION snappy, PARQUET_VERSION V1); -- 244 MB, ~0.46s
-COPY lineitem TO 'snappy_v2.parquet' (COMPRESSION snappy, PARQUET_VERSION V2); -- 170 MB, ~0.39s
-COPY lineitem TO 'zstd_v1.parquet'   (COMPRESSION zstd,   PARQUET_VERSION V1); -- 152 MB, ~0.58s
-COPY lineitem TO 'zstd_v2.parquet'   (COMPRESSION zstd,   PARQUET_VERSION V2); -- 135 MB, ~0.44s
+-- Generate TPC-H scale factor 1
+INSTALL tpch;
+LOAD tpch;
+CALL dbgen(sf = 1);
+
+-- Export to Parquet using Snappy compression
+COPY lineitem TO 'snappy_v1.parquet'
+    (COMPRESSION snappy, PARQUET_VERSION V1); -- 244 MB, ~0.46s
+COPY lineitem TO 'snappy_v2.parquet'
+    (COMPRESSION snappy, PARQUET_VERSION V2); -- 170 MB, ~0.39s
+
+-- Export to Parquet using zstd compression
+COPY lineitem TO 'zstd_v1.parquet'
+    (COMPRESSION zstd, PARQUET_VERSION V1); -- 152 MB, ~0.58s
+COPY lineitem TO 'zstd_v2.parquet'
+    (COMPRESSION zstd, PARQUET_VERSION V2); -- 135 MB, ~0.44s
 ```
 
 When using [Snappy](https://github.com/google/snappy), DuckDB's default page compression algorithm for Parquet, which focuses mostly on speed, not compression ratio, the file is ~30% smaller and writing is ~15% faster with the encodings enabled.
