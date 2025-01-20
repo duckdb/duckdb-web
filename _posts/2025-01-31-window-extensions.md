@@ -5,7 +5,7 @@ author: "Richard Wesley"
 thumb: "/images/blog/thumbs/windowing-features.svg"
 image: "/images/blog/thumbs/windowing-features.png"
 excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard."
-tags: ["using DuckDB"]
+tags: ["deep dive"]
 ---
 
 ## Background
@@ -16,7 +16,7 @@ and for many years, relational processing took little notice of data ordering.
 
 But it turns out that there are a lot of analytic operations that are related to ordering.
 For example, smoothing out noise in time series is very difficult to do in traditional SQL queries
-(it involves self-joins with inequality conditions!)
+– it involves self-joins with inequality conditions!
 So in the late 1990s database vendors started adding _windowing_ operations.
 By making the user's intent clear, the operations could be implemented much more efficiently,
 and these operations were eventually
@@ -56,7 +56,7 @@ This means that there can only be one such expression
 and you have to be able to do arithmetic on it.
 
 `GROUPS` is somewhere in between.
-A "group" in the standard's language is all the "peers" of a row,
+A “group” in the standard's language is all the “peers” of a row,
 which are all the rows with the same
 value of the `ORDER BY` expression at the current row.
 In the original windowing code, this was not easy to implement,
@@ -94,7 +94,7 @@ ORDER BY event, date, athlete;
 There are four options for `EXCLUDE` that specify how to treat the current row:
 
 * `CURRENT ROW` – exclude just the current row
-* `GROUP` – exclude the current row and all its "peers" (rows that have the same `ORDER BY` value)
+* `GROUP` – exclude the current row and all its “peers” (rows that have the same `ORDER BY` value)
 * `TIES` – exclude all peer rows, but _not_ the current row (this makes a hole on either side)
 * `NO OTHERS` – don't exclude anything (the default)
 
@@ -155,7 +155,7 @@ that are not part of the SQL:2003 standard for windowing, but which are also use
 `FILTER` is pretty straightforward (and DuckDB has supported it for a while)
 but the others are not easy to implement efficiently.
 
-They can of course be implemented naïvely (academic-speak for "slow"!) by just computing each row independently:
+They can of course be implemented naïvely (academic-speak for “slow”!) by just computing each row independently:
 
 * re-read all the values,
 * filter out the ones we don't want,
@@ -236,7 +236,7 @@ and will use the frame instead of the entire partition when an ordering argument
 ## Performance
 
 Now that we have covered several years of new functionality,
-lets get "under the feathers" and look at some performance improvements that are not part of SQL.
+lets get “under the feathers” and look at some performance improvements that are not part of SQL.
 
 ### Constant Aggregation
 
@@ -261,19 +261,19 @@ The entire relation has to be materialised,
 broken up into partitions, and each partition needs to be sorted.
 
 But what if there is no partitioning or ordering?
-This just means that the window function is computed over the entire relation, in the "natural order",
+This just means that the window function is computed over the entire relation, in the “natural order”,
 using a frame that starts with the first row and continues to the current row.
 Examples might be assigning row numbers or computing a running sum.
 This is simple enough that we can _stream_ the evaluation of the function on a single thread.
 
 First, let's step back a bit and talk about the window _operator_.
 During parsing and optimisation of a query, all the window functions are attached to a single _logical_ window operator.
-When it comes time to plan the query, we group the functions that have common partitions and "compatible" orderings
+When it comes time to plan the query, we group the functions that have common partitions and “compatible” orderings
 (see Cao et. al.,
 [_Optimization of Analytic Window Functions_](https://www.vldb.org/pvldb/vol5/p1244_yucao_vldb2012.pdf)
 for more information)
 and hand each group off to a separate _physical_ window operator that handles that partitioning and ordering.
-In order to use the "natural order" we have to group those functions that can be streamed and execute them first
+In order to use the “natural order” we have to group those functions that can be streamed and execute them first
 (or the order will have been destroyed!) and hand them off to the _streaming_ physical window operator.
 
 So what functions can we stream? It turns out there are quite a few:
@@ -372,7 +372,7 @@ This not only reduces memory, but in this example we will also reduce disk pagin
 because all three functions will be accessing the same values.
 
 There are a number of places where we are sharing expressions, including `ORDER BY` arguments,
-`RANGE` expressions and "value" functions like `LEAD`, `LAG` and `NTH_VALUE`,
+`RANGE` expressions and “value” functions like `LEAD`, `LAG` and `NTH_VALUE`,
 and we are always on the lookout for more (such as frame boundaries).
 
 ### Future Work
