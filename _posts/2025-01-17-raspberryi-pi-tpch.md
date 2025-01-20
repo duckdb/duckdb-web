@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Running TPC-H SF300 on a Raspberry Pi"
+title: "TPC-H SF300 on a Raspberry Pi"
 author: Gábor Szárnyas
 thumb: "/images/blog/thumbs/raspberry-pi.svg"
 image: "/images/blog/thumbs/raspberry-pi.png"
