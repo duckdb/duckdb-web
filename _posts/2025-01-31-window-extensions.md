@@ -80,7 +80,7 @@ SELECT
     event,
     date,
     athlete,
-    AVG(time) OVER w AS recent,
+    avg(time) OVER w AS recent,
 FROM results
 WINDOW w AS (
     PARTITION BY event
@@ -104,7 +104,7 @@ Exclusion is implemented for both windowed aggregates and for the `FIRST/LAST/NT
 
 It may not be immediately obvious, but the SQL language
 has rules for the order in which various expressions are computed.
-For example, aggregates (like `SUM`) are computed after row-level expressions.
+For example, aggregates (like `sum`) are computed after row-level expressions.
 This is why SQL has two filtering clauses: `WHERE` and `HAVING`:
 `WHERE` is for row-level computations and `HAVING` is applied after `GROUP BY`.
 
