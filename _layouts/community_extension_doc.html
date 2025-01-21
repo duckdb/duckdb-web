@@ -74,50 +74,57 @@
 				
 				</div>
 				
-				{% if page.extension_download_count_pretty || page.extension_star_count_pretty %}
 				<div class="box-link-wrapper">
-					{% if page.extension_download_count_pretty %}
-					<div class="box-link half-width downloads">
-						<a href="/community_extensions/download_metrics" aria-label="Download Metrics"></a>
-						<span class="symbol"><img src="/images/icons/download.svg"></span>
-						<span>Downloads</span>
-						<span class="week"><span class="num">{{ page.extension_download_count_pretty }}</span>this week</span>
-						<span class="chevron"></span>
-					</div>
+					{% if page.extension_download_count_pretty || page.extension_star_count_pretty %}
+						{% if page.extension_download_count_pretty %}
+						<div class="box-link half-width downloads">
+							<a href="/community_extensions/download_metrics" aria-label="Download Metrics"></a>
+							<span class="symbol"><img src="/images/icons/download.svg"></span>
+							<span>Downloads</span>
+							<span class="week"><span class="num">{{ page.extension_download_count_pretty }}</span>this week</span>
+							<span class="chevron"></span>
+						</div>
+						{% endif %}
+						{% if page.extension_star_count_pretty %}
+						<div class="box-link half-width stars">
+							<a href="https://github.com/{{ page.repo.github }}/stargazers" target="_blank" aria-label="Stargazers on GitHub" rel="noopener noreferrer"></a>
+							<span class="symbol"><img src="/images/icons/star.svg"></span>
+							<span>GitHub stars</span>
+							<span class="num">{{ page.extension_star_count_pretty }}</span>
+							<span class="chevron"></span>
+						</div>
+						{% endif %}
 					{% endif %}
-					{% if page.extension_star_count_pretty %}
-					<div class="box-link half-width stars">
-						<a href="https://github.com/{{ page.repo.github }}/stargazers" target="_blank" aria-label="Stargazers on GitHub" rel="noopener noreferrer"></a>
-						<span class="symbol"><img src="/images/icons/star.svg"></span>
-						<span>GitHub stars</span>
-						<span class="num">{{ page.extension_star_count_pretty }}</span>
-						<span class="chevron"></span>
-					</div>
-					{% endif %}
-				</div>
-				{% endif %}
 
-				<p>{{ page.extension.description }}</p>
-				
-				{% if page.repo.github %}
-				<div class="box-link-wrapper">
-					<div class="box-link half-width">
-						<a href="https://github.com/{{ page.repo.github }}" target="_blank" rel="noopener noreferrer" aria-label="Repository on GitHub"></a>
-						<span class="symbol"><img src="/images/icons/github.svg"></span>
-						<span>Extension repository on GitHub</span>
-						<span class="chevron"></span>
-					</div>
-					{% if page.extension.name %}
-					<div class="box-link half-width">
-						<a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank" rel="noopener noreferrer" aria-label="Extension descriptor (YAML)"></a>
-						<span class="symbol"><img src="/images/icons/yaml.svg"></span>
-						<span>Extension descriptor (YAML)</span>
-						<span class="chevron"></span>
-					</div>
+					{% if page.repo.github %}
+						<div class="box-link half-width">
+							<a href="https://github.com/{{ page.repo.github }}" target="_blank" rel="noopener noreferrer" aria-label="Repository on GitHub"></a>
+							<span class="symbol"><img src="/images/icons/github.svg"></span>
+							<span>Extension repository on GitHub</span>
+							<span class="chevron"></span>
+						</div>
+						{% if page.extension.name %}
+						<div class="box-link half-width">
+							<a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank" rel="noopener noreferrer" aria-label="Extension descriptor (YAML)"></a>
+							<span class="symbol"><img src="/images/icons/yaml.svg"></span>
+							<span>Extension descriptor (YAML)</span>
+							<span class="chevron"></span>
+						</div>
+						{% endif %}
 					{% endif %}
 				</div>
-				{% endif %}
+
+				{{ page.extension.description | markdownify }}
 				
+				{% if page.extension.maintainers %}
+					<div class="maintainers">
+					Maintainer(s):
+					{% for maintainer in page.extension.maintainers %}
+						<a href="https://github.com/{{ maintainer }}">{{ maintainer }}</a>
+						{%- if forloop.last %}{% else %},{% endif %}
+					{% endfor %}
+					</div>
+				{% endif %}
 
 				{% assign ct = content | toc %}
 				{% include anchor_headings.html html=content %}
