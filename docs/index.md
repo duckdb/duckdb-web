@@ -47,9 +47,13 @@ title: Documentation
         <span>WebAssembly</span>
         <span class="chevron"></span>
     </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/api/overview.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/doc.svg %}"></span>
+        <span>All Client APIs</span>
+        <span class="chevron"></span>
+    </div>
 </div>
-
-See all [client APIs]({% link docs/api/overview.md %}).
 
 ## SQL
 
