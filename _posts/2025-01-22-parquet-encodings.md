@@ -50,14 +50,16 @@ If we apply this to Parquet files, query engines should strive to read new Parqu
 ## Encodings
 
 DuckDB really likes [lightweight compression]({% post_url 2022-10-28-lightweight-compression %}).
-So, for the upcoming DuckDB 1.2.0 version, we're excited to have implemented the `DELTA_BINARY_PACKED`, `DELTA_LENGTH_BYTE_ARRAY` (added in Parquet 2.2.0 in 2015), and `BYTE_STREAM SPLIT` (added in Parquet 2.8.0 in 2019) encodings in our Parquet writer.
-DuckDB, initially created in 2018, has been able to read Parquet since [2020](https://github.com/duckdb/duckdb/pull/556), and has been able to read the encodings `DELTA_BINARY_PACKED` and `DELTA_LENGTH_BYTE_ARRAY` since [2022](https://github.com/duckdb/duckdb/pull/5457), and `BYTE_STREAM SPLIT` since [2023](https://github.com/duckdb/duckdb/pull/9240).
+So, for the upcoming DuckDB 1.2.0 version, we're excited to have implemented the `DELTA_BINARY_PACKED`, `DELTA_LENGTH_BYTE_ARRAY` (added in Parquet 2.2.0 in 2015), and `BYTE_STREAM_SPLIT` (added in Parquet 2.8.0 in 2019) encodings in our Parquet writer.
+DuckDB, initially created in 2018, has been able to read Parquet since [2020](https://github.com/duckdb/duckdb/pull/556), and has been able to read the encodings `DELTA_BINARY_PACKED` and `DELTA_LENGTH_BYTE_ARRAY` since [2022](https://github.com/duckdb/duckdb/pull/5457), and `BYTE_STREAM_SPLIT` since [2023](https://github.com/duckdb/duckdb/pull/9240).
 
 However, despite these new encodings being available in 1.2.0, DuckDB will not write them by default.
 If DuckDB did this, many of our users would have a frustrating experience because some mainstream query engines still do not support reading these encodings.
 Having a good compression ratio does not help users if their downstream application cannot read the file.
 Therefore, we had to disable writing these encodings by default.
-They are only used when setting `(PARQUET_VERSION V2)` in a `COPY` command.
+They are only used when setting `PARQUET_VERSION V2` in a `COPY` command.
+
+> DuckDB versions as old as 0.9.1 (released in late 2023) can already read files serialized with the setting `PARQUET_VERSION V2`.
 
 Compressing data is almost always a trade-off between file size and the time it takes to write.
 Let's take a look at the following example (ran on a MacBook Pro with an M1 Max):
