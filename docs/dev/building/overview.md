@@ -47,8 +47,10 @@ For some platforms, DuckDB binaries and extensions (or a [subset of extensions](
 |------------------------|------------------------------------------------------------------------------------------------------|
 | `freebsd_amd64`        | FreeBSD AMD64 (x86_64)                                                                               |
 | `freebsd_arm64`        | FreeBSD ARM64 (AArch64)                                                                              |
+| `linux_amd64_musl`     | Linux AMD64 (x86_64) with musl libc, e.g., Alpine Linux                                              |
 | `linux_arm64_android`  | Android ARM64 (AArch64)                                                                              |
 | `linux_arm64_gcc4`     | Linux ARM64 (AArch64) with GCC 4, e.g., CentOS 7                                                     |
+| `linux_arm64_musl`     | Linux ARM64 (x86_64) with musl libc, e.g., Alpine Linux                                              |
 | `wasm_eh`              | WebAssembly Exception Handling                                                                       |
 | `wasm_mvp`             | WebAssembly Minimum Viable Product                                                                   |
 | `windows_amd64_mingw`  | Windows 10+ AMD64 (x86_64) with MinGW                                                                |
