@@ -121,7 +121,7 @@ A large chunk of the bits written are wasted because query engines haven't imple
 The solution to this is surprisingly easy.
 There's no need to invent anything new to stop wasting all that space.
 Just [read the specification on Parquet encodings](https://parquet.apache.org/docs/file-format/data-pages/encodings/), and implement them.
-Some of these "newer" encodings are almost 10 years old by now!
+Some of these “newer” encodings are almost 10 years old by now!
 
 By reducing the size of Parquet files, we can reduce the amount of data we store in data centers.
 Reducing the amount of data we store even a little bit can have a big impact, as it can eventually reduce the need to build new data centers.
