@@ -12,21 +12,52 @@ Last week I went into some new windowing functionality in DuckDB available throu
 But there are other changes that improve our use of resources (such as memory) without adding new functionality.
 So let's get "under the feathers" and look at these changes.
 
+## Segment Tree Vectorisation
+
+One important improvement that was made in the summer of 2023 was converting the segment tree evaluation code
+to vectorised evaluation from single-value evaluation.
+You might wonder why it wasn't that way to begin with in a "vectorised relational database"(!), 
+but the answer is lost in the mists of time.
+My best guess is either that the published algorithm was written for values 
+or that the aggregation API had not been nailed down yet (or both).
+
+In the old version, we used the aggregate's `update` or `combine` APIs, 
+but with only the values and tree states for a single row.
+To vectorise the segment tree aggregation, we accumulate _vectors_ of leaf values and tree states
+and flush them into each output row's state when we reach the vector capacity of 2048 rows..
+Some care needed to be taken to handle order-sensitive aggregates by accumulating values in the correct order.
+`FILTER` and `EXCLUDE` clauses also provided some entertainment, but the segment trees are now fully vectorised.
+The performance gains here were about 
+[a factor of four](https://github.com/duckdb/duckdb/issues/7809#issuecomment-1679387022)
+(from "Baseline" to "Fan Out").
+
+Once segment trees were vectorised, 
+we could use the same approach when implementing `DISTINCT` aggregates with merge sort trees.
+It may be worth updating the custom window API to handle vectorisation at some point,
+because although most custom window aggregates are quite slow (e.g., `quantile`, `mad` and `mode`),
+`count(*)` is also implemented as a custom aggregate and would likely benefit from a vectorised implementation.
+
 ## Constant Aggregation
 
 A lot of window computations are aggregates over frames,
 and a common analytic task with these results is to compare a partial aggregate
 to the same aggregate over _the entire partition_.
 Computing this value repeatedly is expensive and potentially wasteful of memory
-(the old implementation would construct a segment tree even though only one value was needed.)
+(e.g, the old implementation would construct a segment tree even though only one value was needed.)
 
-The previous workaround for this was to compute the aggregate in a subquery and join it in on the partition keys,
-but that was, well, unfriendly.
+The previous performance workaround for this was 
+to compute the aggregate in a subquery and join it in on the partition keys, but that was, well, unfriendly.
 Instead, we have added an optimisation that checks for _partition-wide aggregates_
 and computes that value once per partition.
 This not only reduces memory and compute time for the aggregate itself,
 but we can often return a constant vector that shares the values across all rows in a chunk,
 reducing copy costs and potentially even downstream evaluation costs.
+
+Returning a constant vector can yield surprisingly large memory and performance benefits.
+In the issue that drove this improvement, the user was constructing a constant 100K element list(!)
+and then computing the median with a list aggregation lambda.
+By returning a single constant list, we build and reduce that list only once
+instead of once per row!
 
 ## Streaming Windows
 
@@ -149,7 +180,7 @@ because all three functions will be accessing the same values.
 
 There are a number of places where we are sharing expressions, including `ORDER BY` arguments,
 `RANGE` expressions and "value" functions like `LEAD`, `LAG` and `NTH_VALUE`,
-and we are always on the lookout for more (such as frame boundaries).
+and we are always on the lookout for more (such as frame boundaries - or even segment trees).
 
 ## Future Work
 
