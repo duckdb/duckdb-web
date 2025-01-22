@@ -126,11 +126,6 @@ Reducing the amount of data we store even a little bit can have a big impact, as
 This is not to say that data centers are evil; we will certainly need more of them in the future.
 However, making the most out of the data centers that we already have wouldn't hurt anyone.
 
-As an example, [another data center was almost built in Flevoland](https://nos.nl/artikel/2491159-hoogste-bestuursrechter-zet-definitief-streep-door-datacenter-zeewolde).
-Flevoland is the newest province of The Netherlands.
-The Dutch reclaimed it from the sea in the 20th century to accommodate the population of the overcrowded Randstad area in the West, including Amsterdam (as the saying goes: “God created the world, but the Dutch created the Netherlands”).
-After a lot of protest, a judge thankfully decided against the data center.
-
 ## Conclusion
 
 Parquet is currently the industry standard tabular data format.
