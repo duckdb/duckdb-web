@@ -60,10 +60,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 108
-extension_star_count_pretty: 108
-extension_download_count: 4460
-extension_download_count_pretty: 4.5k
+extension_star_count: 109
+extension_star_count_pretty: 109
+extension_download_count: 4441
+extension_download_count_pretty: 4.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
