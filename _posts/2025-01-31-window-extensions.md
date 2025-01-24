@@ -223,12 +223,18 @@ and will use the frame instead of the entire partition when an ordering argument
 
 > Tip If you wish to use the entire frame with an ordering argument, then you will need to be explicit and use `RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`.
 
-> Note If you wish to use the frame ordering _and_ the frame boundaries with a non-aggregate function, you will need to specify the `ORDER BY` _twice_ (once in the window specification and once in the argument list). This has not yet been optimised, but it would not be difficult.
+> Note If you wish to use the frame ordering _and_ the frame boundaries with a non-aggregate function, you will need to specify the `ORDER BY` _twice_ (once in the frame specification and once in the argument list). This has not yet been optimised, but it will be in the next major release.
 
 ## Conclusion
 
-As you can see, windowing is a big hairy beast!
-There is also not a lot of published research on effective algorithms (I've linked to pretty much all of it),
-so we are often stuck making it up ourselves or falling back to extremely simple and slow approaches.
-But I hope that many of you will find something new and exciting in what we have been up to for the past 2-3 years -
-and I will try to be more timely in blogging about future window improvements.
+Windowing is a very natural way to think about order-dependent analysis,
+but it is at odds with traditional unordered query processing.
+Nevertheless, since 2003 the SQL language has provided syntax for expressing a wide range of such queries.
+In recent years, the community has also considered further extensions to the language 
+(such as `QUALIFY` and argument modifiers like `DISTINCT` and `ORDER BY`) to improve expressivity.
+Here at DuckDB we love providing this kind of expressiveness as part of our "friendly-SQL" work.
+What may  be less obvious is that when we enable users to express their problem more naturally,
+it helps us provide more performant solutions!
+In my next post, I will go deeper into recent improvements in windowing's performance and resource utilisation.
+
+
