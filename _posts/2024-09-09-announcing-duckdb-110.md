@@ -279,7 +279,7 @@ duckdb.sql("SELECT * FROM 'ontime.parquet' WHERE flightnum = 6805;").fetchone()
 |-------:|-------:|
 | 1.17 s | 0.12 s |
 
-### Parallel Union By Name
+### Parallel `union_by_name`
 
 The `union_by_name` parameter allows combination of – for example – CSV files that have the same columns in them but not in the same order. This release [adds support for parallelism](https://github.com/duckdb/duckdb/pull/12957) when using `union_by_name`. This greatly improves reading performance when using the union by name feature on multiple files.
 
