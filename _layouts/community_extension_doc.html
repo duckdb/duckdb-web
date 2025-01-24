@@ -75,25 +75,23 @@
 				</div>
 				
 				<div class="box-link-wrapper">
-					{% if page.extension_download_count_pretty || page.extension_star_count_pretty %}
-						{% if page.extension_download_count_pretty %}
-						<div class="box-link half-width downloads">
-							<a href="/community_extensions/download_metrics" aria-label="Download Metrics"></a>
-							<span class="symbol"><img src="/images/icons/download.svg"></span>
-							<span>Downloads</span>
-							<span class="week"><span class="num">{{ page.extension_download_count_pretty }}</span>this week</span>
-							<span class="chevron"></span>
-						</div>
-						{% endif %}
-						{% if page.extension_star_count_pretty %}
-						<div class="box-link half-width stars">
-							<a href="https://github.com/{{ page.repo.github }}/stargazers" target="_blank" aria-label="Stargazers on GitHub" rel="noopener noreferrer"></a>
-							<span class="symbol"><img src="/images/icons/star.svg"></span>
-							<span>GitHub stars</span>
-							<span class="num">{{ page.extension_star_count_pretty }}</span>
-							<span class="chevron"></span>
-						</div>
-						{% endif %}
+					{% if page.extension_download_count_pretty %}
+					<div class="box-link half-width downloads">
+						<a href="/community_extensions/download_metrics" aria-label="Download Metrics"></a>
+						<span class="symbol"><img src="/images/icons/download.svg"></span>
+						<span>Downloads</span>
+						<span class="week"><span class="num">{{ page.extension_download_count_pretty }}</span>this week</span>
+						<span class="chevron"></span>
+					</div>
+					{% endif %}
+					{% if page.extension_star_count_pretty %}
+					<div class="box-link half-width stars">
+						<a href="https://github.com/{{ page.repo.github }}/stargazers" target="_blank" aria-label="Stargazers on GitHub" rel="noopener noreferrer"></a>
+						<span class="symbol"><img src="/images/icons/star.svg"></span>
+						<span>GitHub stars</span>
+						<span class="num">{{ page.extension_star_count_pretty }}</span>
+						<span class="chevron"></span>
+					</div>
 					{% endif %}
 
 					{% if page.repo.github %}
