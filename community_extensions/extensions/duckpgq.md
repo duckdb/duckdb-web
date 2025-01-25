@@ -62,8 +62,8 @@ docs:
 
 extension_star_count: 109
 extension_star_count_pretty: 109
-extension_download_count: 4475
-extension_download_count_pretty: 4.5k
+extension_download_count: 4270
+extension_download_count_pretty: 4.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
