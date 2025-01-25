@@ -42,7 +42,7 @@ DESCRIBE todos;
 | title       | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | completed   | BOOLEAN     | YES  | NULL | NULL    | NULL  |
 
-If we specify the columns, we can bypass the automatic detection. Note that not all columns need to be specified:
+If we specify types for subset of columns, `read_json` excludes columns that we don't specify:
 
 ```sql
 SELECT *
@@ -51,6 +51,63 @@ FROM read_json(
     columns = {userId: 'UBIGINT', completed: 'BOOLEAN'}
 );
 ```
+
+Note that columns without `userId` and `completed` don't read:
+
+```text
+┌────────┬───────────┐
+│ userId │ completed │
+│ uint64 │  boolean  │
+├────────┼───────────┤
+│      1 │ false     │
+│      1 │ false     │
+│      1 │ false     │
+│      1 │ true      │
+│      1 │ false     │
+│      1 │ false     │
+│      1 │ false     │
+│      1 │ true      │
+│      1 │ false     │
+│      1 │ true      │
+│      1 │ true      │
+│      1 │ true      │
+│      1 │ false     │
+│      1 │ true      │
+│      1 │ true      │
+│      1 │ true      │
+│      1 │ true      │
+│      1 │ false     │
+│      1 │ true      │
+│      1 │ true      │
+│      · │  ·        │
+│      · │  ·        │
+│      · │  ·        │
+│     10 │ false     │
+│     10 │ true      │
+│     10 │ true      │
+│     10 │ false     │
+│     10 │ false     │
+│     10 │ false     │
+│     10 │ false     │
+│     10 │ true      │
+│     10 │ true      │
+│     10 │ true      │
+│     10 │ true      │
+│     10 │ false     │
+│     10 │ true      │
+│     10 │ false     │
+│     10 │ true      │
+│     10 │ true      │
+│     10 │ true      │
+│     10 │ true      │
+│     10 │ true      │
+│     10 │ false     │
+├────────┴───────────┤
+│      200 rows      │
+│     (40 shown)     │
+└────────────────────┘
+```
+
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section]({% link docs/data/multiple_files/overview.md %}) for more information.
 
