@@ -47,67 +47,21 @@ If we specify types for subset of columns, `read_json` excludes columns that we 
 ```sql
 SELECT *
 FROM read_json(
-    'todos.json',
-    columns = {userId: 'UBIGINT', completed: 'BOOLEAN'}
-);
+        'todos.json',
+        columns = {userId: 'UBIGINT', completed: 'BOOLEAN'}
+    )
+LIMIT 5;
 ```
 
-Note that columns without `userId` and `completed` don't read:
+Note that only the `userId` and `completed` columns are shown:
 
-```text
-┌────────┬───────────┐
-│ userId │ completed │
-│ uint64 │  boolean  │
-├────────┼───────────┤
-│      1 │ false     │
-│      1 │ false     │
-│      1 │ false     │
-│      1 │ true      │
-│      1 │ false     │
-│      1 │ false     │
-│      1 │ false     │
-│      1 │ true      │
-│      1 │ false     │
-│      1 │ true      │
-│      1 │ true      │
-│      1 │ true      │
-│      1 │ false     │
-│      1 │ true      │
-│      1 │ true      │
-│      1 │ true      │
-│      1 │ true      │
-│      1 │ false     │
-│      1 │ true      │
-│      1 │ true      │
-│      · │  ·        │
-│      · │  ·        │
-│      · │  ·        │
-│     10 │ false     │
-│     10 │ true      │
-│     10 │ true      │
-│     10 │ false     │
-│     10 │ false     │
-│     10 │ false     │
-│     10 │ false     │
-│     10 │ true      │
-│     10 │ true      │
-│     10 │ true      │
-│     10 │ true      │
-│     10 │ false     │
-│     10 │ true      │
-│     10 │ false     │
-│     10 │ true      │
-│     10 │ true      │
-│     10 │ true      │
-│     10 │ true      │
-│     10 │ true      │
-│     10 │ false     │
-├────────┴───────────┤
-│      200 rows      │
-│     (40 shown)     │
-└────────────────────┘
-```
-
+| userId | completed |
+|-------:|----------:|
+| 1      | false     |
+| 1      | false     |
+| 1      | false     |
+| 1      | true      |
+| 1      | false     |
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section]({% link docs/data/multiple_files/overview.md %}) for more information.
 
