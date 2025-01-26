@@ -42,15 +42,26 @@ DESCRIBE todos;
 | title       | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | completed   | BOOLEAN     | YES  | NULL | NULL    | NULL  |
 
-If we specify the columns, we can bypass the automatic detection. Note that not all columns need to be specified:
+If we specify types for subset of columns, `read_json` excludes columns that we don't specify:
 
 ```sql
 SELECT *
 FROM read_json(
-    'todos.json',
-    columns = {userId: 'UBIGINT', completed: 'BOOLEAN'}
-);
+        'todos.json',
+        columns = {userId: 'UBIGINT', completed: 'BOOLEAN'}
+    )
+LIMIT 5;
 ```
+
+Note that only the `userId` and `completed` columns are shown:
+
+| userId | completed |
+|-------:|----------:|
+| 1      | false     |
+| 1      | false     |
+| 1      | false     |
+| 1      | true      |
+| 1      | false     |
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section]({% link docs/data/multiple_files/overview.md %}) for more information.
 
