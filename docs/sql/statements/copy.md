@@ -72,6 +72,8 @@ Copy the entire content of database `db1` to database `db2`:
 COPY FROM DATABASE db1 TO db2;
 ```
 
+> Currently, `COPY FROM DATABASE` doesn't copy indexes.
+
 Copy only the schema (catalog elements) but not any data:
 
 ```sql
