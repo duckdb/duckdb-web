@@ -72,7 +72,7 @@ Copy the entire content of database `db1` to database `db2`:
 COPY FROM DATABASE db1 TO db2;
 ```
 
-> Currently, `COPY FROM DATABASE` doesn't copy indexes.
+> Currently, indexes do not work when using `COPY FROM DATABASE`. While they are copied to the other database, they are not used by the queries. Therefore, if your workload on the new database requires indexes, recreate them manually.
 
 Copy only the schema (catalog elements) but not any data:
 
