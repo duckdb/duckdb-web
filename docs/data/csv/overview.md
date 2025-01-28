@@ -117,7 +117,6 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `rejects_scan` | Name of the [temporary table where information on faulty scans is stored]({% link docs/data/csv/reading_faulty_csv_files.md %}#reject-scans). | `VARCHAR` | `reject_scans` |
 | `rejects_table` | Name of the [temporary table where information on faulty lines is stored]({% link docs/data/csv/reading_faulty_csv_files.md %}#reject-errors). | `VARCHAR` | `reject_errors` |
 | `rejects_limit` | Upper limit on the number of faulty lines per file that are recorded in the rejects table. Setting this to `0` means that no limit is applied. | `BIGINT` | `0` |
-| `rfc_4180` | Enforce the RFC 4180 standard. Setting this to `false` may allow the parser to read structurally incorrect files. | `BOOL` | `false` |
 | `sample_size` | Number of sample lines for [auto detection of parameters]({% link docs/data/csv/auto_detection.md %}). | `BIGINT` | 20480 |
 | `sep` | Delimiter character used to separate columns within each line. Alias for `delim`. | `VARCHAR` | `,` |
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
@@ -126,7 +125,6 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `timestamp_format` | Alias for `timestampformat`; only available in the `COPY` statement. | `VARCHAR` | (empty) |
 | `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). See [example]({% link docs/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
 | `union_by_name` | Align columns from different files [by column name]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name) instead of position. Using this option increases memory consumption. | `BOOL` | `false` |
-
 
 > Tip We recommend the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert files with encodings not supported by `read_csv` to UTF-8. For example:
 >  ```bash
