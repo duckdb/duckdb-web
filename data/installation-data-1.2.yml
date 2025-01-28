@@ -2,7 +2,7 @@
   environment: Command line
   platform: Windows
   download_method: Package manager
-  architecture: x86_64
+  architecture: universal
   has_sha_512_hash: 'no'
   installation_code: winget install DuckDB.cli
   note: >-
