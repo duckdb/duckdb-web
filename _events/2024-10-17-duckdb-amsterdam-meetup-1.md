@@ -19,7 +19,7 @@ redirect_from:
 
 We are excited to announce the [first DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/303482464/), co-organized by [DuckDB Labs](https://duckdblabs.com/) and [Miro](https://miro.com/).
 
-### Timetable
+## Timetable
 
 | Time  | Title   | Presenter | Slides |
 |------:|:------- |:----------|:-------|
@@ -32,10 +32,10 @@ We are excited to announce the [first DuckDB Amsterdam meetup](https://www.meetu
 The venue is provided by [Miro](https://miro.com/).
 Drink and snacks are sponsored by [DuckDB Labs](https://duckdblabs.com/).
 
-### Registration Process
+## Registration Process
 
 Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/303482464/).
 
-### Inquiries
+## Inquiries
 
 Please contact Gabor Szarnyas at [gabor@duckdblabs.com](mailto:gabor@duckdblabs.com) if you have any questions.

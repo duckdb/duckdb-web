@@ -17,7 +17,7 @@ venue: "Xebia, Amsterdam"
 
 We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/304415344/), co-organized by [DuckDB Labs](https://duckdblabs.com/) and [Xebia](https://xebia.com/).
 
-### Timetable
+## Timetable
 
 | Time  | Title   | Presenter(s) |
 |------:|:--------|:-------------|
@@ -25,14 +25,14 @@ We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meet
 | 18:15 | **Ducklake: A modern data platform combining DuckDB with the governance capabilities of Unity Catalog** | Daniel Tom and Frank Mbonu _([Xebia](https://xebia.com/))_ |
 | 18:40 | **Using DuckDB in a spreadsheet with WASM** | Chris Laffra _([PySheets](https://pysheets.app/))_ |
 | 19:05 | **Building a Postgres Data Warehouse using DuckDB** | Marco Slot _([Crunchy Data](https://www.crunchydata.com/))_ |
-| 19:30 | _Drinks and snacks_ | |
+| 19:30 | _Drinks and snacks by [Xebia](https://xebia.com/)_ | |
 
-The venue is provided by [Xebia](https://xebia.com/).
+The venue and the catering are provided by [Xebia](https://xebia.com/).
 
-### Registration Process
+## Registration Process
 
 Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/304415344/).
 
-### Inquiries
+## Inquiries
 
 Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.
