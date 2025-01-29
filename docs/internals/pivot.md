@@ -53,7 +53,6 @@ GROUP BY ALL;
 
 This produces the result:
 
-
 | country |     name      |    list("year")    | list(population_sum) |
 |---------|---------------|--------------------|----------------------|
 | NL      | Amsterdam     | [2000, 2010, 2020] | [1005, 1065, 1158]   |
@@ -61,7 +60,6 @@ This produces the result:
 | US      | New York City | [2000, 2010, 2020] | [8015, 8175, 8772]   |
 
 The `PhysicalPivot` operator converts those lists into column names and values to return this result:
-
 
 | country |     name      | 2000 | 2010 | 2020 |
 |---------|---------------|-----:|-----:|-----:|
@@ -100,7 +98,6 @@ FROM monthly_sales;
 
 Note the single quotes to build a list of text strings to populate `month`, and the double quotes to pull the column values for use in `sales`.
 This produces the same result as the initial example:
-
 
 | empid |    dept     | month | sales |
 |------:|-------------|-------|------:|

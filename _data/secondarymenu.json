@@ -8,7 +8,7 @@
           "url": "/docs/",
           "subfolderitems": [
             {
-              "page": "Getting started",
+              "page": "Getting Started",
               "url": "/docs"
             },
             {
@@ -16,11 +16,11 @@
               "url": "/docs/installation/"
             },
             {
-              "page": "How-to guides",
+              "page": "Guides",
               "url": "/docs/guides/index"
             },
             {
-              "page": "Data import",
+              "page": "Data Import",
               "url": "/docs/data/overview"
             },
             {
@@ -28,7 +28,7 @@
               "url": "/docs/api/overview"
             },
             {
-              "page": "SQL",
+              "page": "SQL Introduction",
               "url": "/docs/sql/introduction"
             },
             {
@@ -50,12 +50,12 @@
               "url": "/news/"
             },
             {
-              "page": "Events",
-              "url": "/events/"
-            },
-            {
               "page": "Media",
               "url": "/media/"
+            },
+            {
+              "page": "Events",
+              "url": "/events/"
             },
             {
               "page": "Webshop",

@@ -2,6 +2,8 @@
 layout: post
 title: "42.parquet – A Zip Bomb for the Big Data Age"
 author: Hannes Mühleisen
+thumb: "/images/blog/thumbs/parquet-bomb.svg"
+image: "/images/blog/thumbs/parquet-bomb.png"
 excerpt: A 42 kB Parquet file can contain over 4 PB of data.
 tags: ["file formats"]
 ---

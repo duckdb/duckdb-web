@@ -90,21 +90,21 @@ Below you can see the same nodes as before in a TRIE node of 8 bits. In reality,
      alt="Art Node 4"
      width=500
  />
- 
+
 **Node 16** : Node 16 holds up to 16 different keys. Like node 4, each key is stored in a one-byte array, with one pointer per key. With its total size being 144 bytes (16\*1 + 16\*8). Like Node 4, the pointer array is aligned with the key array.
 
 <img src="/images/blog/ART/art-16.png"
      alt="Art Node 16"
      width=500
  />
- 
+
 **Node 48** : Node 48 holds up to 48 different keys. When a key is present in this node, the one-byte array position representing that key will hold an index into the pointer array that points to the child of that key. Its total size is 640 bytes (256\*1 + 48\*8). Note that the pointer array and the key array are not aligned anymore. The key array points to the position in the pointer array where the pointer of that key is stored (e.g., the key 255 in the key array is set to 2 because the position 2 of the pointer array points to the child pertinent to that key).
 
 <img src="/images/blog/ART/art-48.png"
      alt="Art Node 48"
      width=500
  />
- 
+
 **Node 256**: Node 256 holds up to 256 different keys, hence all possible values in the distribution. It only has a pointer vector, if the pointer is set, the key exists, and it points to its child. Its total size is 2048 bytes (256 pointers * 8 bytes).
 
 <img src="/images/blog/ART/art-256.png"
@@ -140,7 +140,7 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
    INSERT INTO integers VALUES (3), (2);
    -- Insert conflicting value in ART will fail
    INSERT INTO integers VALUES (3);
-   
+
    CREATE TABLE fk_integers(j INTEGER, FOREIGN KEY (j) REFERENCES integers(i));
    -- This insert works normally
    INSERT INTO fk_integers VALUES (2), (3);
@@ -356,5 +356,5 @@ Art Indexes are a core part of both constraint enforcement and keeping access sp
      alt="We want you"
      width=300
  />
- 
+
 To better understand how our indexes are used, it would be extremely helpful if you could answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98) created by one of our MSc students.

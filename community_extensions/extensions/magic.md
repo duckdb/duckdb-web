@@ -11,7 +11,7 @@ extension:
   version: 0.0.1
   language: C++
   build: cmake
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64"
+  excluded_platforms: "linux_amd64_musl;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;windows_amd64"
   license: MIT
   maintainers:
     - carlopi
@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 293
-extension_download_count_pretty: 293
+extension_download_count: 521
+extension_download_count_pretty: 521
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'
 layout: community_extension_doc
 ---

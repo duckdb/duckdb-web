@@ -8,7 +8,6 @@ redirect_from:
 The `.mode` [dot command]({% link docs/api/cli/dot_commands.md %}) may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal [output to a file]({% link docs/api/cli/dot_commands.md %}#output-writing-results-to-a-file). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point.
 The `markdown` mode is particularly useful for building documentation and the `latex` mode is useful for writing academic papers.
 
-
 |     Mode     |                 Description                 |
 |--------------|---------------------------------------------|
 | `ascii`      | Columns/rows delimited by 0x1F and 0x1E     |

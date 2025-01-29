@@ -67,38 +67,25 @@ GROUP BY GROUPING SETS ((course, type), course, type, ());
 | NULL   | Bachelor | 2            |
 | NULL   | PhD      | 1            |
 
-In the above query, we group across four different sets: `course, type`, `course`, `type` and `()` (the empty group). The result contains `NULL` for a group which is not in the grouping set for the result, i.e., the above query is equivalent to the following UNION statement:
-
-Group by course, type:
+In the above query, we group across four different sets: `course, type`, `course`, `type` and `()` (the empty group). The result contains `NULL` for a group which is not in the grouping set for the result, i.e., the above query is equivalent to the following statement of `UNION ALL` clauses:
 
 ```sql
+-- Group by course, type:
 SELECT course, type, count(*)
 FROM students
 GROUP BY course, type
 UNION ALL
-```
-
-Group by type:
-
-```sql
+-- Group by type:
 SELECT NULL AS course, type, count(*)
 FROM students
 GROUP BY type
 UNION ALL
-```
-
-Group by course:
-
-```sql
+-- Group by course:
 SELECT course, NULL AS type, count(*)
 FROM students
 GROUP BY course
 UNION ALL
-```
-
-Group by nothing:
-
-```sql
+-- Group by nothing:
 SELECT NULL AS course, NULL AS type, count(*)
 FROM students;
 ```

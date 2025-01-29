@@ -54,7 +54,7 @@ For example, the following are all valid lambda functions:
 
 All scalar functions can be arbitrarily nested.
 
-_Nested lambda functions to get all squares of even list elements:_
+Nested lambda functions to get all squares of even list elements:
 
 ```sql
 SELECT list_transform(
@@ -67,7 +67,7 @@ SELECT list_transform(
 [0, 4, 16]
 ```
 
-_Nested lambda function to add each element of the first list to the sum of the second list:_
+Nested lambda function to add each element of the first list to the sum of the second list:
 
 ```sql
 SELECT list_transform(
@@ -102,9 +102,9 @@ SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
 ## Indexes as Parameters
 
 All lambda functions accept an optional extra parameter that represents the index of the current element.
-This is always the last parameter of the lambda function, and is 1-based (i.e., the first element has index 1).
+This is always the last parameter of the lambda function (e.g., `i` in `(x, y, i)`), and is 1-based (i.e., the first element has index 1).
 
-_Get all elements that are larger than their index:_
+Get all elements that are larger than their index:
 
 ```sql
 SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);

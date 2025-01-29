@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Iceberg Extension
-github_repository: https://github.com/duckdb/duckdb_iceberg
+github_repository: https://github.com/duckdb/duckdb-iceberg
 ---
 
 The `iceberg` extension is a loadable extension that implements support for the [Apache Iceberg format](https://iceberg.apache.org/).

@@ -1,5 +1,4 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/fts
 layout: docu
 title: Full-Text Search Extension
 ---

@@ -100,7 +100,6 @@ res = duckdb.df(df).select(const).fetchall()
 print(res)
 ```
 
-
 ```text
 [('hello',), ('hello',), ('hello',), ('hello',)]
 ```
@@ -178,12 +177,12 @@ The Expression class also contains many operations that can be applied to any Ex
 
 | Operation                      | Description                                                                                                                 |
 |--------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| `.alias(name: str)`            | Applies an alias to the expression.                                                                                         |
-| `.cast(type: DuckDBPyType)`    | Applies a cast to the provided type on the expression.                                                                      |
-| `.isin(*exprs: Expression)`    | Creates an [`IN` expression]({% link docs/sql/expressions/in.md %}#in) against the provided expressions as the list.        |
-| `.isnotin(*exprs: Expression)` | Creates a [`NOT IN` expression]({% link docs/sql/expressions/in.md %}#not-in) against the provided expressions as the list. |
-| `.isnotnull()`                 | Checks whether the expression is not `NULL`.                                                                                |
-| `.isnull()`                    | Checks whether the expression is `NULL`.                                                                                    |
+| `.alias(name: str)`            | Applies an alias to the expression                                                                                          |
+| `.cast(type: DuckDBPyType)`    | Applies a cast to the provided type on the expression                                                                       |
+| `.isin(*exprs: Expression)`    | Creates an [`IN` expression]({% link docs/sql/expressions/in.md %}#in) against the provided expressions as the list         |
+| `.isnotin(*exprs: Expression)` | Creates a [`NOT IN` expression]({% link docs/sql/expressions/in.md %}#not-in) against the provided expressions as the list  |
+| `.isnotnull()`                 | Checks whether the expression is not `NULL`                                                                                 |
+| `.isnull()`                    | Checks whether the expression is `NULL`                                                                                     |
 
 ### Order Operations
 
@@ -191,7 +190,7 @@ When expressions are provided to `DuckDBPyRelation.order()`, the following order
 
 | Operation                      | Description                                                                        |
 |--------------------------------|------------------------------------------------------------------------------------|
-| `.asc()`                       | Indicates that this expression should be sorted in ascending order.                |
-| `.desc()`                      | Indicates that this expression should be sorted in descending order.               |
-| `.nulls_first()`               | Indicates that the nulls in this expression should precede the non-null values.    |
-| `.nulls_last()`                | Indicates that the nulls in this expression should come after the non-null values. |
+| `.asc()`                       | Indicates that this expression should be sorted in ascending order                 |
+| `.desc()`                      | Indicates that this expression should be sorted in descending order                |
+| `.nulls_first()`               | Indicates that the nulls in this expression should precede the non-null values     |
+| `.nulls_last()`                | Indicates that the nulls in this expression should come after the non-null values  |

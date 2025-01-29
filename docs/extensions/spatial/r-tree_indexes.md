@@ -123,10 +123,10 @@ Depending on you specific workload, you might want to experiment with the `max_n
 
 The following options can be passed to the `WITH` clause when creating an R-tree index: (e.g., `CREATE INDEX my_idx ON my_table USING RTREE (geom) WITH (⟨option⟩ = ⟨value⟩);`)
 
-| Option               | Description                                                                                   | Default                   |
-|----------------------|-----------------------------------------------------------------------------------------------|---------------------------|
-| `max_node_capacity` | The maximum number of entries per node in the R-tree.                                          | `128`                     |
-| `min_node_capacity` | The minimum number of entries per node in the R-tree.                                          | `0.4 * max_node_capacity` |
+| Option              | Description                                          |  Default                  |
+|---------------------|------------------------------------------------------|---------------------------|
+| `max_node_capacity` | The maximum number of entries per node in the R-tree | `128`                     |
+| `min_node_capacity` | The minimum number of entries per node in the R-tree | `0.4 * max_node_capacity` |
 
 *Should a node fall under the minimum number of entries after a deletion, the node will be dissolved and all the entries reinserted from the top of the tree. This is a common operation in R-tree implementations to prevent the tree from becoming too unbalanced.
 
@@ -134,11 +134,11 @@ The following options can be passed to the `WITH` clause when creating an R-tree
 
 The `rtree_index_dump(VARCHAR)` table function can be used to return all the nodes within an R-tree index which might come on handy when debugging, profiling or otherwise just inspecting the structure of the index. The function takes the name of the R-tree index as an argument and returns a table with the following columns:
 
-| Column name | Type | Description |
-|-------------|------|-------------|
-| `level`     | `INTEGER` | The level of the node in the R-tree. The root node has level 0. |
-| `bounds`    | `BOX_2DF` | The bounding box of the node. |
-| `row_id`    | `ROW_TYPE` | If this is a leaf node, the `rowid` of the row in the table, otherwise `NULL`. |
+| Column name | Type       | Description                                                                   |
+|-------------|------------|-------------------------------------------------------------------------------|
+| `level`     | `INTEGER`  | The level of the node in the R-tree. The root node has level 0                |
+| `bounds`    | `BOX_2DF`  | The bounding box of the node                                                  |
+| `row_id`    | `ROW_TYPE` | If this is a leaf node, the `rowid` of the row in the table, otherwise `NULL` |
 
 Example:
 

@@ -72,6 +72,8 @@ Copy the entire content of database `db1` to database `db2`:
 COPY FROM DATABASE db1 TO db2;
 ```
 
+> Currently, indexes do not work when using `COPY FROM DATABASE`. While they are copied to the other database, they are not used by the queries. Therefore, if your workload on the new database requires indexes, recreate them manually.
+
 Copy only the schema (catalog elements) but not any data:
 
 ```sql
@@ -139,6 +141,12 @@ COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
 ### Syntax
 
 <div id="rrdiagram1"></div>
+
+> To ensure compatibility with PostgreSQL, DuckDB accepts `COPY ... FROM` statements that do not fully comply with the railroad diagram shown here. For example, the following is a valid statement:
+>
+> ```sql
+> COPY tbl FROM 'tbl.csv' WITH DELIMITER '|' CSV HEADER;
+> ```
 
 ## `COPY ... TO`
 
@@ -221,6 +229,12 @@ With few exceptions, the below options are applicable to all formats written wit
 
 <div id="rrdiagram2"></div>
 
+> To ensure compatibility with PostgreSQL, DuckDB accepts `COPY ... TO` statements that do not fully comply with the railroad diagram shown here. For example, the following is a valid statement:
+>
+> ```sql
+> COPY (SELECT 42 AS x, 84 AS y) TO 'out.csv' WITH DELIMITER '|' CSV HEADER;
+> ```
+
 ## `COPY FROM DATABASE ... TO`
 
 The `COPY FROM DATABASE ... TO` statement copies the entire content from one attached database to another attached database. This includes the schema, including constraints, indexes, sequences, macros, and the data itself.
@@ -258,14 +272,16 @@ The below options are applicable when writing CSV files.
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use `gzip`, `file.csv.zst` will use `zstd`, and `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
+| `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `DELIM` or `SEP` | The character that is written to separate columns within each row. | `VARCHAR` | `,` |
 | `ESCAPE` | The character that should appear before a character that matches the `quote` value. | `VARCHAR` | `"` |
 | `FORCE_QUOTE` | The list of columns to always add quotes to, even if not required. | `VARCHAR[]` | `[]` |
 | `HEADER` | Whether or not to write a header for the CSV file. | `BOOL` | `true` |
 | `NULLSTR` | The string that is written to represent a `NULL` value. | `VARCHAR` | (empty) |
+| `PREFIX` | Prefixes the CSV file with a specified string. This option must be used in conjunction with `SUFFIX` and requires `HEADER` to be set to `false`.| `VARCHAR` | (empty) |
+| `SUFFIX` | Appends a specified string as a suffix to the CSV file. This option must be used in conjunction with `PREFIX` and requires `HEADER` to be set to `false`.| `VARCHAR` | (empty) |
 | `QUOTE` | The quoting character to be used when a data value is quoted. | `VARCHAR` | `"` |
-| `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
+| `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 
 ### Parquet Options
 
@@ -344,8 +360,8 @@ The below options are applicable when writing `JSON` files.
 |:--|:-----|:-|:-|
 | `ARRAY` | Whether to write a JSON array. If `true`, a JSON array of records is written, if `false`, newline-delimited JSON is written | `BOOL` | `false` |
 | `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.json.gz` will use `gzip`, `file.json.zst` will use `zstd`, and `file.json` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
-| `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
+| `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
+| `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 
 ## Limitations
 

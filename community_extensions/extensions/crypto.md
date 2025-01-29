@@ -50,7 +50,7 @@ docs:
 extension:
   build: cmake
   description: Cryptographic hash functions and HMAC
-  excluded_platforms: windows_amd64_rtools;windows_amd64
+  excluded_platforms: windows_amd64_rtools;windows_amd64_mingw;windows_amd64;linux_amd64_musl
   language: C++
   license: MIT
   maintainers:
@@ -64,8 +64,8 @@ repo:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 305
-extension_download_count_pretty: 305
+extension_download_count: 414
+extension_download_count_pretty: 414
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---

@@ -42,15 +42,26 @@ DESCRIBE todos;
 | title       | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | completed   | BOOLEAN     | YES  | NULL | NULL    | NULL  |
 
-If we specify the columns, we can bypass the automatic detection. Note that not all columns need to be specified:
+If we specify types for subset of columns, `read_json` excludes columns that we don't specify:
 
 ```sql
 SELECT *
 FROM read_json(
-    'todos.json',
-    columns = {userId: 'UBIGINT', completed: 'BOOLEAN'}
-);
+        'todos.json',
+        columns = {userId: 'UBIGINT', completed: 'BOOLEAN'}
+    )
+LIMIT 5;
 ```
+
+Note that only the `userId` and `completed` columns are shown:
+
+| userId | completed |
+|-------:|----------:|
+| 1      | false     |
+| 1      | false     |
+| 1      | false     |
+| 1      | true      |
+| 1      | false     |
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section]({% link docs/data/multiple_files/overview.md %}) for more information.
 
@@ -91,7 +102,7 @@ With `'unstructured'`, the top-level JSON is read, e.g. for `birds.json`:
 ```
 
 ```sql
-FROM read_json('birds.json', format = 'unstructured');
+FROM read_json_objects('birds.json', format = 'unstructured');
 ```
 
 will result in two objects being read:
@@ -184,7 +195,7 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | `'iso'`|
 | `union_by_name` | Whether the schema's of multiple JSON files should be [unified]({% link docs/data/multiple_files/combining_schemas.md %}) | `BOOL` | `false` |
 | `map_inference_threshold` | Controls the threshold for number of columns whose schema will be auto-detected; if JSON schema auto-detection would infer a `STRUCT` type for a field that has _more_ than this threshold number of subfields, it infers a `MAP` type instead. Set to `-1` to disable `MAP` inference. | `BIGINT` | `200` |
-| `field_appearance_threshold` | The JSON reader divides the number of appearances of each JSON field by the auto-detection sample size. If the average over the fields of an object is less than this threshold, it will default to using a `MAP` type with value type of merged field types. | `0.1` |
+| `field_appearance_threshold` | The JSON reader divides the number of appearances of each JSON field by the auto-detection sample size. If the average over the fields of an object is less than this threshold, it will default to using a `MAP` type with value type of merged field types. | `DOUBLE` | `0.1` |
 
 Note that DuckDB can convert JSON arrays directly to its internal `LIST` type, and missing keys become `NULL`:
 

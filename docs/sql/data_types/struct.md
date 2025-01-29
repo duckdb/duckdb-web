@@ -111,9 +111,8 @@ SELECT a.*
 FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 ```
 
-
 | x | y | z |
-|:---|:---|:---|
+|--:|--:|--:|
 | 1 | 2 | 3 |
 
 ### Dot Notation Order of Operations

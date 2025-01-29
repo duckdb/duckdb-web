@@ -95,7 +95,6 @@ So how do we disambiguate if we want to create a `UNION` with multiple members o
 
 `UNION` types can be cast between each other if the source type is a “subset” of the target type. In other words, all the tags in the source `UNION` must be present in the target `UNION`, and all the types of the matching tags must be implicitly castable between source and target. In essence, this means that `UNION` types are covariant with respect to their members.
 
-
 | Ok | Source                 | Target                 | Comments                               |
 |----|------------------------|------------------------|----------------------------------------|
 | ✅ | `UNION(a A, b B)`      | `UNION(a A, b B, c C)` |                                        |
@@ -106,7 +105,7 @@ So how do we disambiguate if we want to create a `UNION` with multiple members o
 
 ## Comparison and Sorting
 
-Since `UNION` types are implemented on top of `STRUCT` types internally, they can be used with all the comparison operators as well as in both `WHERE` and `HAVING` clauses with [the same semantics as `STRUCT`s]({% link docs/sql/data_types/struct.md %}#comparison-operators). The “tag” is always stored as the first struct entry, which ensures that the `UNION` types are compared and ordered by “tag” first.
+Since `UNION` types are implemented on top of `STRUCT` types internally, they can be used with all the comparison operators as well as in both `WHERE` and `HAVING` clauses with the [same semantics as `STRUCT`s]({% link docs/sql/data_types/struct.md %}#comparison-operators). The “tag” is always stored as the first struct entry, which ensures that the `UNION` types are compared and ordered by “tag” first.
 
 ## Functions
 

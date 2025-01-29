@@ -259,6 +259,6 @@ This is excellent, as it allows data to be exported from legacy systems that do 
 
 But oh boy, don't let super-convenient and fast CSV readers fool you. Your data is still best kept in self-describing, column-binary compressed formats like Parquet — or the DuckDB file format, of course! They are much smaller and more consistent. Additionally, running queries directly on Parquet files is much more beneficial due to efficient projection/filter pushdown and available statistics.
 
-One thing to note is that there exists an extensive body of work on [indexing CSV files](https://stratos.seas.harvard.edu/sites/scholar.harvard.edu/files/stratos/files/nodb-cacm.pdf) (i.e., building statistics in a way) to speed up future queries and enable filter pushdown. However, DuckDB does not perform these operations yet.
+One thing to note is that there exists an extensive body of work on [indexing CSV files](https://ir.cwi.nl/pub/19931/19931B.pdf) (i.e., building statistics in a way) to speed up future queries and enable filter pushdown. However, DuckDB does not perform these operations yet.
 
 Bottom line: Parquet is still the undisputed champion for most scenarios, but we will continue working on closing this gap wherever possible.

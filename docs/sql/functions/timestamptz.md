@@ -6,12 +6,7 @@ title: Timestamp with Time Zone Functions
 <!-- markdownlint-disable MD001 -->
 
 This section describes functions and operators for examining and manipulating [`TIMESTAMP WITH TIME ZONE`
-(or `TIMESTAMPTZ`) values]({% link docs/sql/data_types/timestamp.md %}).
-
-See also the related [`TIMESTAMP` functions]({% link docs/sql/functions/timestamptz.md %}).
-
-Despite the name, these values do not store a time zone – just an instant like `TIMESTAMP`.
-Instead, they request that the instant be binned and formatted using the current time zone, see the [blog post on DuckDB's timezone support]({% post_url 2022-01-06-time-zones %}) for more information.
+(or `TIMESTAMPTZ`) values]({% link docs/sql/data_types/timestamp.md %}). See also the related [`TIMESTAMP` functions]({% link docs/sql/functions/timestamp.md %}).
 
 Time zone support is provided by the built-in [ICU extension]({% link docs/extensions/icu.md %}).
 
@@ -511,5 +506,5 @@ the result will be `NULL`.
 
 ## Calendars
 
-The ICU extension also supports [non-Gregorian calendars]({% link docs/sql/data_types/timestamp.md %}#calendars).
+The ICU extension also supports [non-Gregorian calendars]({% link docs/sql/data_types/timestamp.md %}#calendar-support).
 If such a calendar is current, then the display and binning operations will use that calendar.

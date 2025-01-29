@@ -85,7 +85,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * The title of the page should be encoded in the front matter's `title` property. The body of the page should not start with a repetition of this title.
 * In the body of the page, restrict the use of headers to the following levels: h2 (`##`), h3 (`###`), and h4 (`####`).
-* Use headline capitalization as defined in the [Chicago Manual of Style](https://headlinecapitalization.com/).
+* Use headline capitalization as defined in the [Chicago Manual of Style](https://capitalizemytitle.com/style/Chicago/).
 
 ### SQL Style
 
@@ -107,7 +107,8 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
    ```
    ````
 * To specify placeholders (or template-style code), use the left angle and right angle characters, `⟨` and `⟩`.
-     * For example: `SELECT * FROM ⟨your_table_name⟩`.
+     * For example: `CREATE TABLE ⟨your_table_name⟩ AS FROM '⟨your_filename.parquet⟩'`.
+     * Copy the characters from here: `⟨⟩`.
      * These characters are known in LaTeX code as `\langle` and `\rangle`.
      * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
 
@@ -143,10 +144,14 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
     * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
 * In most cases, linking related GitHub issues/discussions is discouraged. This allows the documentation to be self-contained.
 
-## Archive and Generated Pages
+## Latest and Stable Pages
 
-* The archive pages (e.g., <https://duckdb.org/docs/archive/0.8.1/>) contain documentation for old versions of DuckDB. In general, we do not accept contributions to these pages – please target the latest version of the page when submitting your contributions.
-* Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Do not edit the generated content, instead, edit the source files (often found in the [`duckdb` repository](https://github.com/duckdb/duckdb)).
+* The latest page, <https://duckdb.org/docs/latest/> contains documentation for the latest `main` branch of DuckDB
+* The versioned pages (e.g., <https://duckdb.org/docs/v1.1/>) contain documentation for the stable versions of DuckDB. We generally only accept contributions to the latest stable version. Older pages are only maintained if they contain a critical error.
+
+## Generated Pages
+
+Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Avoid directly editing the generated content, instead, edit the source files (often found in the [`duckdb` repository](https://github.com/duckdb/duckdb)), and run the generator script.
 
 ## Notice
 

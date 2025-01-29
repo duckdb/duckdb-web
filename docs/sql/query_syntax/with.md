@@ -187,7 +187,7 @@ INSERT INTO edge VALUES
     (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
 ```
 
-Note that the graph contains directed cycles, e.g., between nodes 1, 2, and 5.
+Note that the graph contains directed cycles, e.g., between nodes 1, 5 and 8.
 
 #### Enumerate All Paths from a Node
 

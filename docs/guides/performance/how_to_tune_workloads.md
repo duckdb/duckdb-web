@@ -39,10 +39,10 @@ These are called _blocking operators_ as they require their entire input to be b
 and are the most memory-intensive operators in relational database systems.
 The main blocking operators are the following:
 
-* _sorting:_ [`ORDER BY`]({% link docs/sql/query_syntax/orderby.md %})
 * _grouping:_ [`GROUP BY`]({% link docs/sql/query_syntax/groupby.md %})
-* _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/sql/functions/window_functions.md %})
 * _joining:_ [`JOIN`]({% link docs/sql/query_syntax/from.md %}#joins)
+* _sorting:_ [`ORDER BY`]({% link docs/sql/query_syntax/orderby.md %})
+* _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/sql/functions/window_functions.md %})
 
 DuckDB supports larger-than-memory processing for all of these operators.
 
@@ -144,7 +144,7 @@ DuckDB supports [lightweight compression techniques]({% post_url 2022-10-28-ligh
 
 DuckDB does not compress its in-memory tables. The reason for this is that compression is performed during checkpointing, and in-memory tables are not checkpointed.
 
-In rare cases, this can result in unintuitive performance results where queries are faster on on-disk tables compared to in-memory ones. For example, Q1 of the [TPC-H workload]({% link docs/extensions/tpch.md %}) is faster when running on-disk compared to the in-memory mode:
+In some cases, this can result in counter-intuitive performance results where queries are faster on on-disk tables compared to in-memory ones. For example, Q1 of the [TPC-H workload]({% link docs/extensions/tpch.md %}) is faster when running on-disk compared to the in-memory mode:
 
 ```sql
 INSTALL tpch;

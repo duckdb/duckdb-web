@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: chsql
   description: ClickHouse SQL Macros for DuckDB
-  version: 1.0.6
+  version: 1.0.7
   language: SQL & C++
   build: cmake
   license: MIT
@@ -18,13 +18,12 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-clickhouse-sql
-  ref: 9ab2e8118dbb9e429fa8d2a9026ad019f5bf7706
+  ref: 16bcb5b0fda0ccca22f42695295f9bb4171190fb
 
 docs:
   hello_world: |
     -- Use boring ClickHouse SQL function macros in DuckDB SQL queries. Examples:
-    SELECT toString('world') AS hello, toInt8OrZero('world') AS zero;
-
+    D SELECT toString('world') AS hello, toInt8OrZero('world') AS zero;
     ┌─────────┬───────┐
     │  hello  │ zero  │
     │ varchar │ int64 │
@@ -32,7 +31,7 @@ docs:
     │ world   │     0 │
     └─────────┴───────┘
 
-    SELECT IPv4NumToString(167772161), IPv4StringToNum('10.0.0.1');
+    D SELECT IPv4NumToString(167772161), IPv4StringToNum('10.0.0.1');
     ┌────────────────────────────┬─────────────────────────────┐
     │ ipv4numtostring(167772161) │ ipv4stringtonum('10.0.0.1') │
     │          varchar           │            int32            │
@@ -41,7 +40,7 @@ docs:
     └────────────────────────────┴─────────────────────────────┘
 
     -- Query a remote ClickHouse instance via HTTP/S API using multiple formats
-    SELECT * FROM ch_scan("SELECT number * 100 FROM numbers(3)","https://play.clickhouse.com", format := 'Parquet');
+    D SELECT * FROM ch_scan("SELECT number * 100 FROM numbers(3)","https://play.clickhouse.com", format := 'Parquet');
     ┌───────────────────────┐
     │ multiply(number, 100) │
     │        varchar        │
@@ -51,14 +50,53 @@ docs:
     │ 200                   │
     └───────────────────────┘
 
+    -- Query the emulated system tables to explore columns, rows, types, storage, etc
+    D SELECT * FROM system.tables;
+    D SELECT * FROM system.columns;
+    D SELECT * FROM system.functions;
+    D SELECT * FROM system.uptime;
+    D SELECT * FROM system.disks;
+    ┌──────────┬──────────────┬────────────┬─────────────┬──────────────────┬─────────────────┬─────────┬─────────────────────┬───────────────┬──────────────┬──────────────┬───────────────┬───────────┬───────────┬────────────┐
+    │   name   │     path     │ free_space │ total_space │ unreserved_space │ keep_free_space │  type   │ object_storage_type │ metadata_type │ is_encrypted │ is_read_only │ is_write_once │ is_remote │ is_broken │ cache_path │
+    │ varchar  │   varchar    │   int64    │    int64    │      int64       │      int64      │ varchar │       varchar       │    varchar    │   boolean    │   boolean    │    boolean    │  boolean  │  boolean  │  varchar   │
+    ├──────────┼──────────────┼────────────┼─────────────┼──────────────────┼─────────────────┼─────────┼─────────────────────┼───────────────┼──────────────┼──────────────┼───────────────┼───────────┼───────────┼────────────┤
+    │ localdb  │ test.db      │          0 │      262144 │                0 │               0 │ Local   │ None                │ None          │ false        │ false        │ false         │ false     │ false     │            │
+    │ memory   │ NULL         │          0 │           0 │                0 │               0 │ Local   │ None                │ None          │ false        │ false        │ false         │ false     │ false     │            │
+    │ testduck │ /tmp/duck.db │     262144 │      786432 │           262144 │               0 │ Local   │ None                │ None          │ false        │ false        │ false         │ false     │ false     │            │
+    └──────────┴──────────────┴────────────┴─────────────┴──────────────────┴─────────────────┴─────────┴─────────────────────┴───────────────┴──────────────┴──────────────┴───────────────┴───────────┴───────────┴────────────┘
     
   extended_description: |
-    This extension implements a growing number of [ClickHouse SQL Macros](https://duckdb.org/community_extensions/extensions/chsql#added-functions) and functions for DuckDB.
+  
+    ## DuckDB ClickHouse SQL extension    
+    The DuckDB chsql community extension implements 100+ popular [ClickHouse SQL Macros](https://duckdb.org/community_extensions/extensions/chsql#added-functions), functions and helpers making it easier for users to transition between OLAP systems ⭐ 
+  
+    ### Motivation
+    DuckDB is our favourite OLAP engine but ClickHouse has lots of integrations and users. This extension is dedicated to ClickHouse refugeess.
 
-extension_star_count: 42
-extension_star_count_pretty: 42
-extension_download_count: 288
-extension_download_count_pretty: 288
+    ```
+    ✔ DuckDB SQL is awesome and full of great functions.<br>
+    ✔ ClickHouse SQL is awesome and full of great functions.
+    
+    ✔ The DuckDB library is ~51M and modular. Can LOAD extensions.<br>
+    ❌ The ClickHouse monolith is ~551M and growing. No extensions.
+    
+    ✔ DuckDB is open source and protected by a no-profit foundation.<br>
+    ❌ ClickHouse is open core and controlled by for-profit corporation.
+    
+    ✔ DuckDB embedded is fast, mature and elegantly integrated in many languages.<br>
+    ❌ chdb is still experimental, unstable and currently only supports Python.
+    ``` 
+
+    ### Extensions
+    - [chsql_native](https://duckdb.org/community_extensions/extensions/chsql_native) provides a native clickhouse client (binary) and a reader for ClickHouse Native format files
+
+    #### Legal Disclaimer
+    > DuckDB ® is a trademark of DuckDB Foundation. ClickHouse® is a trademark of ClickHouse Inc. All trademarks, service marks, and logos mentioned or depicted are the property of their respective owners. The use of any third-party trademarks, brand names, product names, and company names is purely informative or intended as parody and does not imply endorsement, affiliation, or association with the respective owners.
+
+extension_star_count: 47
+extension_star_count_pretty: 47
+extension_download_count: 414
+extension_download_count_pretty: 414
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql.png'
 layout: community_extension_doc
 ---
@@ -192,7 +230,14 @@ LOAD {{ page.extension.name }};
 | toUInt16OrNull         | macro         | Converts to an unsigned 16-bit integer or returns NULL on failure                            |                                               | SELECT toUInt16OrNull('abc');                                                                        |
 | toUInt8                | macro         | Converts a value to an unsigned 8-bit integer                                                |                                               | SELECT toUInt8('123');                                                                               |
 | JSONExtractString      | macro         | Extracts JSON data as a VARCHAR from a JSON object                                           |                                               | SELECT JSONExtractString(json_column, 'user.email');                                                 |
+| system_columns         | table         |                                                                                              |                                               |                                                                                                      |
 | chsql_openssl_version  | scalar        |                                                                                              |                                               |                                                                                                      |
+| system_functions       | table         |                                                                                              |                                               |                                                                                                      |
+| uptime                 | scalar        |                                                                                              |                                               |                                                                                                      |
+| url_flock              | table         |                                                                                              |                                               |                                                                                                      |
+| system_disks           | table         |                                                                                              |                                               |                                                                                                      |
+| system_tables          | table         |                                                                                              |                                               |                                                                                                      |
 | chsql                  | scalar        |                                                                                              |                                               |                                                                                                      |
+| system_databases       | table         |                                                                                              |                                               |                                                                                                      |
 
 

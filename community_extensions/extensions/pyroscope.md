@@ -12,7 +12,7 @@ extension:
   language: Rust
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools;windows_amd64;wasm_threads;wasm_eh;wasm_mvp"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64;wasm_threads;wasm_eh;wasm_mvp"
   requires_toolchains: "rust;python3"
   maintainers:
     - lmangani
@@ -33,10 +33,10 @@ docs:
   extended_description: |
     The Pyroscope Extension is experimental, use at your own risk!
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 397
+extension_download_count_pretty: 397
 image: '/images/community_extensions/social_preview/preview_community_extension_pyroscope.png'
 layout: community_extension_doc
 ---

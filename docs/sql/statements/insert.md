@@ -287,6 +287,18 @@ This fails with the following error:
 Constraint Error: NOT NULL constraint failed: t1.val2
 ```
 
+#### Composite Primary Key
+
+When multiple columns need to be part of the uniqueness constraint, use a single `PRIMARY KEY` clause including all relevant columns:
+
+```sql
+CREATE TABLE t1 (id1 INTEGER, id2 INTEGER, val1 DOUBLE, PRIMARY KEY(id1, id2));
+INSERT OR REPLACE INTO t1
+    VALUES (1, 2, 3);
+INSERT OR REPLACE INTO t1
+    VALUES (1, 2, 4);
+```
+
 ### Defining a Conflict Target
 
 A conflict target may be provided as `ON CONFLICT (conflict_target)`. This is a group of columns that an index or uniqueness/key constraint is defined on. If the conflict target is omitted, or `PRIMARY KEY` constraint(s) on the table are targeted.
@@ -364,7 +376,8 @@ CREATE TABLE tbl (i INTEGER PRIMARY KEY, j INTEGER);
 INSERT INTO tbl
     VALUES (1, 42);
 INSERT INTO tbl
-    SELECT DISTINCT ON(i) i, j FROM VALUES (1, 84), (1, 168) AS t (i, j)
+    SELECT DISTINCT ON(i) i, j
+    FROM VALUES (1, 84), (1, 168) AS t (i, j)
     ON CONFLICT DO UPDATE SET j = j + EXCLUDED.j;
 SELECT * FROM tbl;
 ```
@@ -388,7 +401,6 @@ INSERT INTO t1
     RETURNING *;
 ```
 
-
 | i  |
 |---:|
 | 42 |
@@ -401,7 +413,6 @@ INSERT INTO t2
     SELECT 2 AS i, 3 AS j
     RETURNING *, i * j AS i_times_j;
 ```
-
 
 | i | j | i_times_j |
 |--:|--:|----------:|
@@ -418,7 +429,6 @@ INSERT INTO t3
     SELECT nextval('t3_key') AS i, 43 AS j
     RETURNING *;
 ```
-
 
 | i | j  |
 |--:|---:|

@@ -66,12 +66,12 @@ There are also alternative characters that can be used as keywords in place of `
 
 <div class="monospace_table"></div>
 
-| LIKE-style | PostgreSQL-style |
-|:---|:---|
-| LIKE | ~~ |
-| NOT LIKE | !~~ |
-| ILIKE | ~~* |
-| NOT ILIKE | !~~* |
+| `LIKE`-style | PostgreSQL-style |
+|:-------------|:-----------------|
+| `LIKE`       | `~~`             |
+| `NOT LIKE`   | `!~~`            |
+| `ILIKE`      | `~~*`            |
+| `NOT ILIKE`  | `!~~*`           |
 
 ## `SIMILAR TO`
 
@@ -96,9 +96,9 @@ There are also alternative characters that can be used as keywords in place of `
 <div class="monospace_table"></div>
 
 | `SIMILAR TO`-style | POSIX-style |
-|:---|:---|
-| SIMILAR TO | ~ |
-| NOT SIMILAR TO | !~ |
+|:-------------------|:------------|
+| `SIMILAR TO`       | `~`         |
+| `NOT SIMILAR TO`   | `!~`        |
 
 ## Globbing
 
@@ -144,10 +144,9 @@ SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 
 Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 
-
 | GLOB-style | Symbolic-style |
-|:---|:---|
-| `GLOB` | `~~~` |
+|:-----------|:---------------|
+| `GLOB`     | `~~~`          |
 
 ### Glob Function to Find Filenames
 

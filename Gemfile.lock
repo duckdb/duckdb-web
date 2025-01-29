@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: f94df8ec13fcf54509dfefc50eb1f370aa4c6a52
+  revision: 4023a0f274a2d8a6d5ac25645dd6731742c28520
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -21,7 +21,7 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     base64 (0.2.0)
-    bigdecimal (3.1.8)
+    bigdecimal (3.1.9)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -38,22 +38,15 @@ GEM
       ffi (>= 1.15.0)
     eventmachine (1.2.7)
     execjs (2.10.0)
-    faraday (2.12.1)
+    faraday (2.12.2)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
-    ffi (1.17.0-aarch64-linux-gnu)
-    ffi (1.17.0-aarch64-linux-musl)
-    ffi (1.17.0-arm-linux-gnu)
-    ffi (1.17.0-arm-linux-musl)
-    ffi (1.17.0-arm64-darwin)
-    ffi (1.17.0-x86-linux-gnu)
-    ffi (1.17.0-x86-linux-musl)
-    ffi (1.17.0-x86_64-darwin)
-    ffi (1.17.0-x86_64-linux-gnu)
-    ffi (1.17.0-x86_64-linux-musl)
+    ffi (1.17.1-arm64-darwin)
+    ffi (1.17.1-x86_64-darwin)
+    ffi (1.17.1-x86_64-linux-gnu)
     forwardable-extended (2.6.0)
     github-pages-health-check (1.18.5)
       addressable (~> 2.3)
@@ -61,22 +54,13 @@ GEM
       octokit (>= 4, < 10)
       public_suffix (>= 3.0, < 7.0)
       typhoeus (~> 1.3)
-    google-protobuf (4.29.0)
+    google-protobuf (4.29.3-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.0-aarch64-linux)
+    google-protobuf (4.29.3-x86_64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.0-arm64-darwin)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.29.0-x86-linux)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.29.0-x86_64-darwin)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.29.0-x86_64-linux)
+    google-protobuf (4.29.3-x86_64-linux)
       bigdecimal
       rake (>= 13)
     http_parser.rb (0.8.0)
@@ -181,7 +165,7 @@ GEM
       nokogiri (~> 1.12)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.9.0)
+    json (2.9.1)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
     kramdown-parser-gfm (1.1.0)
@@ -190,21 +174,15 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.6.2)
+    logger (1.6.5)
     mercenary (0.4.0)
     net-http (0.6.0)
       uri
-    nokogiri (1.16.8-aarch64-linux)
+    nokogiri (1.18.1-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.8-arm-linux)
+    nokogiri (1.18.1-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.8-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.8-x86-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.8-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.8-x86_64-linux)
+    nokogiri (1.18.1-x86_64-linux-gnu)
       racc (~> 1.4)
     octokit (4.25.1)
       faraday (>= 1, < 3)
@@ -217,30 +195,17 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
-    rexml (3.3.9)
+    rexml (3.4.0)
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
-    sass-embedded (1.81.1-aarch64-linux-gnu)
-      google-protobuf (~> 4.28)
-    sass-embedded (1.81.1-aarch64-linux-musl)
-      google-protobuf (~> 4.28)
-    sass-embedded (1.81.1-arm-linux-gnueabihf)
-      google-protobuf (~> 4.28)
-    sass-embedded (1.81.1-arm-linux-musleabihf)
-      google-protobuf (~> 4.28)
-    sass-embedded (1.81.1-arm64-darwin)
-      google-protobuf (~> 4.28)
-    sass-embedded (1.81.1-x86-linux-gnu)
-      google-protobuf (~> 4.28)
-    sass-embedded (1.81.1-x86-linux-musl)
-      google-protobuf (~> 4.28)
-    sass-embedded (1.81.1-x86_64-darwin)
-      google-protobuf (~> 4.28)
-    sass-embedded (1.81.1-x86_64-linux-gnu)
-      google-protobuf (~> 4.28)
-    sass-embedded (1.81.1-x86_64-linux-musl)
-      google-protobuf (~> 4.28)
+    sass-embedded (1.83.4)
+      google-protobuf (~> 4.29)
+      rake (>= 13)
+    sass-embedded (1.83.4-arm64-darwin)
+      google-protobuf (~> 4.29)
+    sass-embedded (1.83.4-x86_64-darwin)
+      google-protobuf (~> 4.29)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -258,22 +223,9 @@ GEM
     word_wrap (1.0.0)
 
 PLATFORMS
-  aarch64-linux
-  aarch64-linux-gnu
-  aarch64-linux-musl
-  arm-linux
-  arm-linux-gnu
-  arm-linux-gnueabihf
-  arm-linux-musl
-  arm-linux-musleabihf
   arm64-darwin
-  x86-linux
-  x86-linux-gnu
-  x86-linux-musl
   x86_64-darwin
   x86_64-linux
-  x86_64-linux-gnu
-  x86_64-linux-musl
 
 DEPENDENCIES
   github-pages-health-check (= 1.18.5)

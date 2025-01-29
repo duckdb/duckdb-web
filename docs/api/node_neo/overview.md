@@ -5,13 +5,13 @@ title: Node.js API (Neo)
 
 An API for using [DuckDB](https://duckdb.org/) in [Node.js](https://nodejs.org/).
 
-This is a high-level API meant for applications.
+The primary package, [@duckdb/node-api](https://www.npmjs.com/package/@duckdb/node-api), is a high-level API meant for applications.
 It depends on low-level bindings that adhere closely to [DuckDB's C API](https://duckdb.org/docs/api/c/overview),
-available separately as [@duckdb/duckdb-bindings](https://www.npmjs.com/package/@duckdb/node-bindings).
+available separately as [@duckdb/node-bindings](https://www.npmjs.com/package/@duckdb/node-bindings).
 
 ## Features
 
-### Main differences from [duckdb-node](https://www.npmjs.com/package/duckdb)
+### Main Differences from [duckdb-node](https://www.npmjs.com/package/duckdb)
 
 - Native support for Promises; no need for separate [duckdb-async](https://www.npmjs.com/package/duckdb-async) wrapper.
 - DuckDB-specific API; not based on the [SQLite Node API](https://www.npmjs.com/package/sqlite3).
@@ -32,8 +32,10 @@ Some features are not yet complete:
 
 ### Supported Platforms
 
+- Linux arm64 (experimental)
 - Linux x64
 - Mac OS X (Darwin) arm64 (Apple Silicon)
+- Mac OS X (Darwin) x64 (Intel)
 - Windows (Win32) x64
 
 ## Examples
@@ -123,7 +125,7 @@ const chunks = [];
 while (true) {
   const chunk = await result.fetchChunk();
   // Last chunk will have zero rows.
-  if (chunk.rowCount === 0) {
+  if (!chunk || chunk.rowCount === 0) {
     break;
   }
   chunks.push(chunk);
@@ -141,7 +143,7 @@ Read chunk data (row-major):
 
 ```ts
 // array of rows, each as an array of values
-const columns = chunk.getRows(); 
+const rows = chunk.getRows(); 
 ```
 
 Read chunk data (one value at a time):

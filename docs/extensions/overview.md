@@ -23,7 +23,6 @@ SELECT extension_name, installed, description
 FROM duckdb_extensions();
 ```
 
-
 | extension_name    | installed | description                                                  |
 |-------------------|-----------|--------------------------------------------------------------|
 | arrow             | false     | A zero-copy data integration between Apache Arrow and DuckDB |
@@ -75,8 +74,8 @@ to `LOAD` the spatial extension (again ignoring the statement if it is already l
 
 #### Extension Repository
 
-Optionally a repository can be provided where the extension should be installed from, by appending `FROM <repository>` to the `INSTALL`/`FORCE INSTALL` command.
-This repository can either be an alias, such as [`community`]({% link docs/extensions/community_extensions.md %}), or it can be a direct URL, provided as a single-quoted string.
+Optionally a repository can be provided where the extension should be installed from, by appending `FROM ⟨repository⟩` to the `INSTALL` / `FORCE INSTALL` command.
+This repository can either be an alias, such as [`community`]({% link community_extensions/index.md %}), or it can be a direct URL, provided as a single-quoted string.
 
 After installing/loading an extension, the [`duckdb_extensions` function](#listing-extensions) can be used to get more information.
 
@@ -98,7 +97,7 @@ To see which extensions can be autoloaded, check the [core extensions list]({% l
 
 ### Community Extensions
 
-DuckDB supports installing third-party [Community Extensions]({% link docs/extensions/community_extensions.md %}).
+DuckDB supports installing third-party [Community Extensions]({% link community_extensions/index.md %}).
 These are contributed by community members but they are built, signed, and distributed in a centralized repository.
 
 ### Installing Extensions through Client APIs

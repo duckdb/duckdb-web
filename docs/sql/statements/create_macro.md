@@ -22,7 +22,7 @@ Create a macro that adds two expressions (`a` and `b`):
 CREATE MACRO add(a, b) AS a + b;
 ```
 
-Create a macro for a case expression:
+Create a macro for a `CASE` expression:
 
 ```sql
 CREATE MACRO ifelse(a, b, c) AS CASE WHEN a THEN b ELSE c END;

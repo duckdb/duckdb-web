@@ -12,7 +12,7 @@ extension:
   language: Rust
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools;windows_amd64"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64"
   requires_toolchains: "rust;python3"
   maintainers:
     - lmangani
@@ -40,10 +40,10 @@ docs:
   extended_description: |
     The PCAP Reader Extension is experimental, use at your own risk!
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 175
-extension_download_count_pretty: 175
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 408
+extension_download_count_pretty: 408
 image: '/images/community_extensions/social_preview/preview_community_extension_pcap_reader.png'
 layout: community_extension_doc
 ---

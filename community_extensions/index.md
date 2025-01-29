@@ -7,7 +7,7 @@ excerpt: |
 
 Welcome to the documentation for the DuckDB Community Extensions.
 
-This website contains all documentation specific to community contributed & maintained extensions for DuckDB.
+This website contains all documentation specific to community-contributed extensions for DuckDB.
 
 DuckDB is an analytical in-process SQL database management system, documented at [DuckDB documentation website]({% link docs/index.md %}).
 
@@ -30,7 +30,7 @@ The `quack` extension is now loaded and ready to use
 SELECT quack('world');
 ```
 
-## What are Community Extensions
+## What Are Community Extensions?
 
 Community Extensions are [DuckDB extensions]({% link docs/extensions/overview.md %}) that are not maintained by the DuckDB team.
 
@@ -44,7 +44,7 @@ Check the [Development page]({% link community_extensions/development.md %}) on 
 
 DuckDB Community extensions are conceptually similar to a package manager such as [Homebrew](https://brew.sh/), where code will reside in your own repository, but build and distribution is centralized.
 
-## Secure usage of DuckDB Community Extensions
+## Security Considerations for Using Community Extensions
 
 DuckDB Community Extensions are signed, so that on LOAD a check is performed to prove a given extensions has been built by the Community Extension CI.
 

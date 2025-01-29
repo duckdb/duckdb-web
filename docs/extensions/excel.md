@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Excel Extension
-github_repository: https://github.com/duckdb/duckdb_excel
+github_repository: https://github.com/duckdb/duckdb-excel
 ---
 
 The `excel` extension, unlike what its name may suggest, does not provide support for reading Excel files.
@@ -23,8 +23,8 @@ LOAD excel;
 
 | Function | Description |
 |:--|:---|
-| `excel_text(number, format_string)`| Format the given `number` per the rules given in the `format_string`. |
-| `text(number, format_string)` | Alias for `excel_text`. |
+| `excel_text(number, format_string)`| Format the given `number` per the rules given in the `format_string` |
+| `text(number, format_string)` | Alias for `excel_text` |
 
 ## Examples
 

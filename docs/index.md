@@ -19,13 +19,13 @@ title: Documentation
 <div class="box-link-wrapper">
     <div class="box-link half-width">
         <a href="{% link docs/api/cli/overview.md %}"></a>
-        <span class="symbol"><img src="{%link images/icons/cli.svg %}"></span>
+        <span class="symbol"><img src="{% link images/icons/cli.svg %}"></span>
         <span>CLI (command line interface)</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
         <a href="{% link docs/api/java.md %}"></a>
-        <span class="symbol"><img src="{%link images/icons/java.svg %}"></span>
+        <span class="symbol"><img src="{% link images/icons/java.svg %}"></span>
         <span>Java</span>
         <span class="chevron"></span>
     </div>
@@ -47,9 +47,13 @@ title: Documentation
         <span>WebAssembly</span>
         <span class="chevron"></span>
     </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/api/overview.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/doc.svg %}"></span>
+        <span>All client APIs</span>
+        <span class="chevron"></span>
+    </div>
 </div>
-
-See all [client APIs]({% link docs/api/overview.md %}).
 
 ## SQL
 
@@ -83,6 +87,16 @@ See all [client APIs]({% link docs/api/overview.md %}).
         <span>Installation</span>
         <span class="chevron"></span>
     </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/dev/building/overview.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/wrench.svg %}"></span>
+        <span>Building DuckDB</span>
+        <span class="chevron"></span>
+    </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/guides/offline-copy.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/doc.svg %}"></span>
+        <span>Browsing offline</span>
+        <span class="chevron"></span>
+    </div>
 </div>
-
-You can also [browse the DuckDB documentation offline]({% link docs/guides/offline-copy.md %}).

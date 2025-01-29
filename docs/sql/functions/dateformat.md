@@ -85,7 +85,6 @@ FROM read_csv('test.csv', dateformat = '%m/%d/%Y');
 
 Below is a full list of all available format specifiers.
 
-
 | Specifier | Description | Example |
 |:-|:------|:---|
 | `%a` | Abbreviated weekday name. | Sun, Mon, ... |

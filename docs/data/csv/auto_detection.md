@@ -24,20 +24,20 @@ FROM sniff_csv('my_file.csv');
 FROM sniff_csv('my_file.csv', sample_size = 1000);
 ```
 
-| Column name | Description | Example |
-|----|-----|-------|
-| `Delimiter` | delimiter | `,` |
-| `Quote` | quote character | `"` |
-| `Escape` | escape | `\` |
-| `NewLineDelimiter` | new-line delimiter | `\r\n` |
-| `Comment` | comment character | `#` |
-| `SkipRows` | number of rows skipped | 1 |
-| `HasHeader` | whether the CSV has a header | `true` |
-| `Columns` | column types encoded as a `LIST` of `STRUCT`s | `({'name': 'VARCHAR', 'age': 'BIGINT'})` |
-| `DateFormat` | date Format | `%d/%m/%Y` |
-| `TimestampFormat` | timestamp Format | `%Y-%m-%dT%H:%M:%S.%f` |
-| `UserArguments` | arguments used to invoke `sniff_csv` | `sample_size = 1000` |
-| `Prompt` | prompt ready to be used to read the CSV | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
+| Column name        | Description                                   | Example                                                           |
+|--------------------|-----------------------------------------------|-------------------------------------------------------------------|
+| `Delimiter`        | Delimiter                                     | `,`                                                               |
+| `Quote`            | Quote character                               | `"`                                                               |
+| `Escape`           | Escape                                        | `\`                                                               |
+| `NewLineDelimiter` | New-line delimiter                            | `\r\n`                                                            |
+| `Comment`          | Comment character                             | `#`                                                               |
+| `SkipRows`         | Number of rows skipped                        | 1                                                                 |
+| `HasHeader`        | Whether the CSV has a header                  | `true`                                                            |
+| `Columns`          | Column types encoded as a `LIST` of `STRUCT`s | `({'name': 'VARCHAR', 'age': 'BIGINT'})`                          |
+| `DateFormat`       | Date format                                   | `%d/%m/%Y`                                                        |
+| `TimestampFormat`  | Timestamp Format                              | `%Y-%m-%dT%H:%M:%S.%f`                                            |
+| `UserArguments`    | Arguments used to invoke `sniff_csv`          | `sample_size = 1000`                                              |
+| `Prompt`           | Prompt ready to be used to read the CSV       | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
 
 ### Prompt
 
@@ -60,7 +60,6 @@ Prompt = FROM read_csv('my_file.csv', auto_detect=false, delim=',', quote='"', e
 Dialect detection works by attempting to parse the samples using the set of considered values. The detected dialect is the dialect that has (1) a consistent number of columns for each row, and (2) the highest number of columns for each row.
 
 The following dialects are considered for automatic dialect detection.
-
 
 <!-- markdownlint-disable MD056 -->
 
