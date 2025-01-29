@@ -41,3 +41,29 @@ ART indexes create a secondary copy of the data in a second location – this co
 
 When an update statement is executed on a column that is present in an index, the statement is transformed into a *DELETE* of the original row followed by an *INSERT*.
 This has certain performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
+
+### Constraint Checking in UPDATE statements
+
+The following is a known limitation of constraint checking within an `UPDATE` statement.
+The same limitation exists in other DBMS, like postgres.
+
+Note how the number of rows in the below example exceeds DuckDB's standard vector size of 2048.
+The `UPDATE` statement is rewritten into a `DELETE`, followed by an `INSERT`.
+This rewrite happens per chunk of data (2048 rows) moving through DuckDB's processing pipeline.
+In the below example, when updating `i = 2047` to `i = 2048`, we do not yet know that `2048` will become `2049`, and so forth.
+That is because we have not yet seen that chunk.
+Thus, we throw a constraint violation.
+
+```sql
+CREATE TABLE my_table (i INT PRIMARY KEY);
+INSERT INTO my_table SELECT range FROM range(3000);
+UPDATE my_table SET i = i + 1;
+```
+
+```sql
+Constraint Error:
+Duplicate key "i: 2048" violates primary key constraint.
+```
+
+A workaround is to split the `UPDATE` into a `DELETE ... RETURNING ...` followed by an `INSERT`.
+Both statements should be run inside a transaction via `BEGIN`, eventually by `COMMIT`.
