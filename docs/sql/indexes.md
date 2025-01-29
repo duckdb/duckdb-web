@@ -37,20 +37,17 @@ ART indexes create a secondary copy of the data in a second location – this co
 
 > As expected, indexes have a strong effect on performance, slowing down loading and updates, but speeding up certain queries. Please consult the [Performance Guide]({% link docs/guides/performance/indexing.md %}) for details.
 
-### Updates Become Deletes and Inserts
-
-When an update statement is executed on a column that is present in an index, the statement is transformed into a *DELETE* of the original row followed by an *INSERT*.
-This has certain performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
-
 ### Constraint Checking in UPDATE statements
 
-The following is a known limitation of constraint checking within an `UPDATE` statement.
-The same limitation exists in other DBMS, like postgres.
+`UPDATE` statements on indexed columns are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
+This rewrite has performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
-Note how the number of rows in the below example exceeds DuckDB's standard vector size of 2048.
+Additionally, it causes the following constraint checking limitation of `UPDATE` statements. The same limitation exists in other DBMSs, like postgres.
+
+In the example below, note how the number of rows exceeds DuckDB's standard vector size, which is 2048.
 The `UPDATE` statement is rewritten into a `DELETE`, followed by an `INSERT`.
 This rewrite happens per chunk of data (2048 rows) moving through DuckDB's processing pipeline.
-In the below example, when updating `i = 2047` to `i = 2048`, we do not yet know that `2048` will become `2049`, and so forth.
+When updating `i = 2047` to `i = 2048`, we do not yet know that 2048 becomes 2049, and so forth.
 That is because we have not yet seen that chunk.
 Thus, we throw a constraint violation.
 
@@ -66,4 +63,4 @@ Duplicate key "i: 2048" violates primary key constraint.
 ```
 
 A workaround is to split the `UPDATE` into a `DELETE ... RETURNING ...` followed by an `INSERT`.
-Both statements should be run inside a transaction via `BEGIN`, eventually by `COMMIT`.
+Both statements should be run inside a transaction via `BEGIN`, and eventually `COMMIT`.
