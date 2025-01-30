@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title: "DuckDB's CSV Sniffer: Automatic Detection of Types and Dialects"
 author: Pedro Holanda
@@ -14,7 +13,7 @@ tags: ["using DuckDB"]
      width="300"
      />
 
-There are many different file formats that users can choose from when storing their data. For example, there are performance-oriented binary formats like Parquet, where data is stored in a columnar format, partitioned into row-groups, and heavily compressed. However, Parquet is known for its rigidity, requiring specialized systems to read and write these files.
+There are many different file formats that users can choose from when storing their data. For example, there are performance-oriented binary formats like Parquet, where data is stored in a columnar format, partitioned into row groups, and heavily compressed. However, Parquet is known for its rigidity, requiring specialized systems to read and write these files.
 
 On the other side of the spectrum, there are files with the CSV (comma-separated values) format, which I like to refer to as the 'Woodstock of data'. CSV files offer the advantage of flexibility; they are structured as text files, allowing users to manipulate them with any text editor, and nearly any data system can read and execute queries on them.
 

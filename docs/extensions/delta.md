@@ -86,7 +86,7 @@ While the `delta` extension is still experimental, many (scanning) features and 
 
 * multithreaded scans and Parquet metadata reading
 * data skipping/filter pushdown
-    * skipping row-groups in file (based on Parquet metadata)
+    * skipping row groups in file (based on Parquet metadata)
     * skipping complete files (based on Delta partition information)
 * projection pushdown
 * scanning tables with deletion vectors

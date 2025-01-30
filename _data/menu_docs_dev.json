@@ -1609,6 +1609,14 @@
                   "url": "windows"
                 },
                 {
+                  "page": "Python",
+                  "url": "python"
+                },
+                {
+                  "page": "R",
+                  "url": "r"
+                },
+                {
                   "page": "Troubleshooting",
                   "url": "troubleshooting"
                 }

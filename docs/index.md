@@ -9,7 +9,7 @@ title: Documentation
     <div class="box-link half-width">
         <a href="{% link docs/connect/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/link.svg %}"></span>
-        <span>DuckDB Connection Overview</span>
+        <span>DuckDB connection overview</span>
         <span class="chevron"></span>
     </div>
 </div>
@@ -19,13 +19,13 @@ title: Documentation
 <div class="box-link-wrapper">
     <div class="box-link half-width">
         <a href="{% link docs/api/cli/overview.md %}"></a>
-        <span class="symbol"><img src="{%link images/icons/cli.svg %}"></span>
-        <span>CLI (Command Line Interface)</span>
+        <span class="symbol"><img src="{% link images/icons/cli.svg %}"></span>
+        <span>CLI (command line interface)</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
         <a href="{% link docs/api/java.md %}"></a>
-        <span class="symbol"><img src="{%link images/icons/java.svg %}"></span>
+        <span class="symbol"><img src="{% link images/icons/java.svg %}"></span>
         <span>Java</span>
         <span class="chevron"></span>
     </div>
@@ -47,9 +47,13 @@ title: Documentation
         <span>WebAssembly</span>
         <span class="chevron"></span>
     </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/api/overview.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/doc.svg %}"></span>
+        <span>All client APIs</span>
+        <span class="chevron"></span>
+    </div>
 </div>
-
-See all [client APIs]({% link docs/api/overview.md %}).
 
 ## SQL
 
@@ -92,7 +96,7 @@ See all [client APIs]({% link docs/api/overview.md %}).
     <div class="box-link half-width">
         <a href="{% link docs/guides/offline-copy.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/doc.svg %}"></span>
-        <span>Browsing Offline</span>
+        <span>Browsing offline</span>
         <span class="chevron"></span>
     </div>
 </div>

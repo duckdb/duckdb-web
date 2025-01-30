@@ -102,7 +102,8 @@ Also note that implicit concatenation only works with single-quoted string liter
 For example, we can compare string literals with dates:
 
 ```sql
-SELECT d > '1992-01-01' AS result FROM (VALUES (DATE '1992-01-01')) t(d);
+SELECT d > '1992-01-01' AS result
+FROM (VALUES (DATE '1992-01-01')) t(d);
 ```
 
 | result |
@@ -112,7 +113,8 @@ SELECT d > '1992-01-01' AS result FROM (VALUES (DATE '1992-01-01')) t(d);
 However, we cannot compare `VARCHAR` values with dates.
 
 ```sql
-SELECT d > '1992-01-01'::VARCHAR FROM (VALUES (DATE '1992-01-01')) t(d);
+SELECT d > '1992-01-01'::VARCHAR
+FROM (VALUES (DATE '1992-01-01')) t(d);
 ```
 
 ```console
