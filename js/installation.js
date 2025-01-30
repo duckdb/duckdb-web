@@ -138,28 +138,8 @@ $(document).ready(function(){
 		}
 		
 	
+
 		
-		// Check if we have multiple options for architecture
-		var hasArchitectures = false;
-		for ( var i in configurables ) {
-			if ( configurables[i].architecture != 'universal' ) {
-				hasArchitectures = true;
-				$( '.architecture .info' ).hide();
-			} else {
-				$( '.architecture .info' ).show();
-			}
-		}
-	
-		if ( ! hasArchitectures ) {
-			sectionsToHide.push( 'architecture' );
-		} else {
-			configurables = configurables.filter( function ( item ) {
-				return item.architecture.toLowerCase() == architecture.toLowerCase();
-			} );
-		}
-	
-		
-		hideSections( sectionsToHide.join(',') );
 	
 		// Check if we have multiple download_method across different configurables
 		var download_methods = configurables.map( function ( item ) {
@@ -185,11 +165,12 @@ $(document).ready(function(){
 		$( '.download_method li' ).addClass( 'disabled-choice' );
 	
 		// Add disabled-choice to all applicable download_methods
-		$( '.download_method li' ).each( function() {
-			if ( download_methods.includes( $( this ).text().toLowerCase() ) ) {
-				$(this).removeClass( 'disabled-choice' );
+		$('.download_method li').each(function() {
+			const liText = $(this).text().toLowerCase().trim(); 
+			if ( download_methods.includes(liText) ) {
+				$(this).removeClass('disabled-choice');
 			}
-		} );
+		});
 	
 		$( '.download_method li.disabled-choice' ).removeClass( 'selected' );
 	
@@ -204,7 +185,6 @@ $(document).ready(function(){
 			configurables = configurables.filter( function ( item ) {
 				return item.download_method.toLowerCase() == download_method.toLowerCase();
 			});
-	
 			configurablesMinusArchitecture = configurablesMinusArchitecture.filter( function ( item ) {
 				return item.download_method.toLowerCase() == download_method.toLowerCase();
 			});
@@ -232,6 +212,29 @@ $(document).ready(function(){
 			}
 			
 		}
+		
+		// Check architecture options and if current selection is universal
+		const allAreUniversal = configurables.length > 0 && configurables.every(item => item.architecture.toLowerCase() === 'universal');
+		if (allAreUniversal) {
+			
+			sectionsToHide.push('architecture');
+			$('.architecture .info').show();
+			
+		} else {
+			
+			configurables = configurables.filter(function(item) {
+				return (
+				  item.architecture.toLowerCase() === architecture.toLowerCase()
+				  || item.architecture.toLowerCase() === 'universal'
+				);
+				
+			});
+			
+			$('.architecture .info').hide();
+		}
+		
+		hideSections( sectionsToHide.join(',') );
+		
 	
 		// If platform.select has .hide class, then show .info in it, otherwise hide .info
 		if ( $( '.yourselection .platform.select.hide').length > 0 ) {
