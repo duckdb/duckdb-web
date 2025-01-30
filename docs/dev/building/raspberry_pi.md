@@ -14,7 +14,7 @@ sudo apt-get install -y git g++ cmake ninja-build
 
 Then, clone and build it as follows:
 
-```bash
+```batch
 git clone https://github.com/duckdb/duckdb
 cd duckdb
 GEN=ninja CORE_EXTENSIONS="icu;json" make
