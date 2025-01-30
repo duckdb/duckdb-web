@@ -34,7 +34,7 @@ await conn.close();
 // Create a new connection
 const conn = await db.connect();
 // Prepare query
-const stmt = await conn.prepare(`SELECT v + ? FROM generate_series(0, 10000) AS t(v);`);
+const stmt = await conn.prepare(`SELECT v + ? FROM generate_series(0, 10_000) t(v);`);
 // ... and run the query with materialized results
 await stmt.query(234);
 // ... or result chunks
@@ -72,7 +72,7 @@ await conn.close();
 const conn = await db.connect();
 
 // Export Parquet
-conn.send(`COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet');`);
+conn.send(`COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT PARQUET);`);
 const parquet_buffer = await this._db.copyFileToBuffer('result-snappy.parquet');
 
 // Generate a download link

@@ -715,7 +715,7 @@ $(document).ready(function(){
 	
 	/** HIGHLIGHT TOC MENU **/
 	if ( $('body').hasClass('documentation') ) {
-		var headings = $('#main_content_wrap h1, #main_content_wrap h2');
+		var headings = $('#main_content_wrap h1, #main_content_wrap h2, #main_content_wrap h3');
 		var tocEntries = $('.toc-entry');
 	
 		$(window).on('scroll', function() {
