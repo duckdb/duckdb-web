@@ -50,7 +50,7 @@ Read more in the [“How to Tune Workloads” page]({% link docs/guides/performa
 **Cloud disks.** DuckDB runs well on network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) for both read-only and read-write workloads.
 
 **Network-attached storage.**
-Network-attached storage can serve DuckdB for read-only workloads.
+Network-attached storage can serve DuckDB for read-only workloads.
 However, _it is not recommended to run DuckDB in read-write mode on network-attached storage (NAS)._
 These setups include [NFS](https://en.wikipedia.org/wiki/Network_File_System),
 network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) and

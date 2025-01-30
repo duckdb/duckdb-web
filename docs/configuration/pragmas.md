@@ -71,7 +71,7 @@ pk BOOLEAN          -- part of the primary key or not
 Get the file and memory size of each database:
 
 ```sql
-SET database_size;
+PRAGMA database_size;
 CALL pragma_database_size();
 ```
 

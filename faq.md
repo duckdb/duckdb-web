@@ -50,7 +50,7 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 DuckDB is fully open-source under the MIT license and its development takes place [on GitHub in the `duckdb/duckdb` repository](https://github.com/duckdb/duckdb).
 All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
 
-The intellectual property of DuckDB has been purposefully moved to a non-profit entity to disconnect the licensing of the project from the commercial company, DuckDB Labs.
+Most of the intellectual property of DuckDB has been purposefully moved to a non-profit entity to disconnect the licensing of the project from the commercial company, DuckDB Labs.
 The DuckDB Foundation's statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
 The [CWI (Centrum Wiskunde & Informatica)](https://cwi.nl/) has a seat on the board of the DuckDB Foundation
 and donations to the DuckDB Foundation directly fund DuckDB development.
@@ -132,9 +132,9 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="answer" markdown="1">
 
-Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/extensions/core_extensions.md %}) or a [community extension]({% link community_extensions/index.md %}). We recommend following these guidelines for feature requests:
+Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/extensions/core_extensions.md %}) or a [community extension]({% link community_extensions/index.md %}). If you have a feature request for DuckDB, please follow these guidelines:
 
-* If you would like a feature to be implemented in DuckDB, please raise and issue in the [Ideas section in DuckDB's GitHub Discussions forum](https://github.com/duckdb/duckdb/discussions/categories/ideas). The DuckdB team monitors these ideas and, over time, implements the frequently requested features. For example, we recently published the [Avro Community Extension]({% link community_extensions/extensions/avro.md %}) to support reading Avro files, which was the most requested feature in the issue tracker.
+* If you have a feature idea, please raise an issue in the [“Ideas” section in DuckDB's GitHub Discussions](https://github.com/duckdb/duckdb/discussions/categories/ideas). The DuckDB team monitors these ideas and, over time, implements the frequently requested features. For example, we recently published the [Avro Community Extension]({% link community_extensions/extensions/avro.md %}) to support reading Avro files, which was the most requested feature in the issue tracker.
 * If you would like to implement a feature in the main DuckDB project, please discuss it with the DuckDB team on GitHub Discussions or on [our Discord server](https://discord.duckdb.org/). The team can verify whether the idea and the proposed implementation line up with the project's long-term vision.
 * If you would like to implement a feature as an extension, consider submitting it to the [Community Extensions repository]({% link community_extensions/index.md %}).
 

@@ -1,5 +1,5 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/httpfs
+github_directory: https://github.com/duckdb/duckdb-httpfs
 layout: docu
 redirect_from:
 - /docs/archive/0.10/extensions/httpfs
