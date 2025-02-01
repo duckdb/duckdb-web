@@ -27,10 +27,10 @@ docs:
   extended_description: |
     The zipfs extension adds support for reading files from within zip archives.
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 399
-extension_download_count_pretty: 399
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 409
+extension_download_count_pretty: 409
 image: '/images/community_extensions/social_preview/preview_community_extension_zipfs.png'
 layout: community_extension_doc
 ---
