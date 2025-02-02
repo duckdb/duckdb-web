@@ -58,10 +58,10 @@ docs:
 extended_description: |
     The TSID Extension is experimental, use at your own risk!
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 388
-extension_download_count_pretty: 388
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 408
+extension_download_count_pretty: 408
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---
