@@ -2,7 +2,6 @@
 layout: docu
 title: Working with Extensions
 redirect_from:
-  - /docs/api/c
   - /docs/extensions/troubleshooting
 ---
 
