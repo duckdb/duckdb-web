@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "jekyll", "4.3.4"
+gem "jekyll", "4.4.1"
 gem "github-pages-health-check", "1.18.5"
 gem "jekyll-avatar", "0.8.0"
 gem "jekyll-coffeescript", "1.1.1"
