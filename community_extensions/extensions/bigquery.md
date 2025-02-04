@@ -52,10 +52,10 @@ docs:
     The DuckDB BigQuery Extension integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/hafenkran/duckdb-bigquery).
 
-extension_star_count: 83
-extension_star_count_pretty: 83
-extension_download_count: 830
-extension_download_count_pretty: 830
+extension_star_count: 84
+extension_star_count_pretty: 84
+extension_download_count: 871
+extension_download_count_pretty: 871
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
