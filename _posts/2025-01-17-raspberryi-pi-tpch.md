@@ -28,7 +28,7 @@ We ventured to find out.
 
 ## Setup
 
-Our setup consisted of the following components, priced at a total of $281:
+Our setup consisted of the following components, priced at a total of $300:
 
 | Component | Price (USD) |
 |-----------|------------:|
@@ -36,8 +36,8 @@ Our setup consisted of the following components, priced at a total of $281:
 | [Raspberry Pi 27 W USB-C power supply](https://www.raspberrypi.com/products/27w-power-supply/) | 13.60 |
 | [Raspberry Pi microSD card (128 GB)](https://www.raspberrypi.com/products/sd-cards/) | 33.40 |
 | [Samsung 980 NVMe SSD (1 TB)](https://www.amazon.com/Technology-Intelligent-Turbowrite-MZ-V8V1T0B-AM/dp/B08V83JZH4) | 84.00 |
-| [Argon ONE V3 Case](https://argon40.com/products/argon-one-v3-case-for-raspberry-pi-5) | 30.00 |
-| **Total** | **$281.00** |
+| [Argon ONE V3 Case](https://argon40.com/products/argon-one-v3-m-2-nvme-case) | 49.00 |
+| **Total** | **$300.00** |
 
 We installed the heat sinks, popped the SSD into place, and assembled the house.
 Here is a photo of our machine:
@@ -174,7 +174,7 @@ If you are interested in the individual query runtimes, you can find them below.
 ### Perspective
 
 To put our results into context, we looked at [historical TPC-H results](https://www.tpc.org/tpch/results/tpch_results5.asp?version=2), and found that several enterprise solutions from 20 years ago had similar query performance, often reporting more than 60 seconds as the geometric mean of their query runtimes.
-These systems back then, with their software license and maintenance costs factored in, were priced _around $300,000!_
+Back then, these systems – with their software license and maintenance costs factored in – were priced _around $300,000!_
 This means that – if you ignore the maintenance aspects –, the “bang for your buck” metric (a.k.a. price–performance ratio) for TPC read queries has increased by around 1,000× over the last 20 years.
 This is a great demonstration of what the continuous innovation in hardware and software enables in modern systems.
 
