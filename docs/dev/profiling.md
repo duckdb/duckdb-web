@@ -100,7 +100,7 @@ For example, the `OPTIMIZER_JOIN_ORDER` metric corresponds to the `JOIN_ORDER` o
 Additionally, the following metrics are available to support the optimizer metrics:
 
 * `ALL_OPTIMIZERS`: Enables all optimizer metrics and measures the time the optimizer parent node takes.
-* `CUMMULATIVE_OPTIMIZER_TIMING`: The cumulative sum of all optimizer metrics. It is usable without turning on all optimizer metrics.
+* `CUMULATIVE_OPTIMIZER_TIMING`: The cumulative sum of all optimizer metrics. It is usable without turning on all optimizer metrics.
 
 ### Planner Metrics
 
