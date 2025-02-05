@@ -37,7 +37,7 @@ ART indexes create a secondary copy of the data in a second location – this co
 
 > As expected, indexes have a strong effect on performance, slowing down loading and updates, but speeding up certain queries. Please consult the [Performance Guide]({% link docs/guides/performance/indexing.md %}) for details.
 
-### Constraint Checking in UPDATE statements
+### Constraint Checking in `UPDATE` Statements
 
 `UPDATE` statements on indexed columns are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
 This rewrite has performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
