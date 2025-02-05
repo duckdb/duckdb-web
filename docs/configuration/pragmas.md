@@ -510,7 +510,7 @@ There exist a couple pragmas to influence which compression functions are consid
 Prefer using this compression method over any other method if possible:
 
 ```sql
-PRAGMA force_compression='bitpacking';
+PRAGMA force_compression = 'bitpacking';
 ```
 
 ##### Disabled Compression Methods
@@ -518,7 +518,7 @@ PRAGMA force_compression='bitpacking';
 Avoid using any of the listed compression methods from the comma separated list:
 
 ```sql
-PRAGMA disabled_compression_methods='fsst,rle';
+PRAGMA disabled_compression_methods = 'fsst,rle';
 ```
 
 #### Force Checkpoint
