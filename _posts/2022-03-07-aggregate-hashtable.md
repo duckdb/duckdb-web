@@ -9,7 +9,6 @@ tags: ["deep dive"]
 Grouped aggregations are a core data analysis command. It is particularly important for large-scale data analysis (“OLAP”) because it is useful for  computing statistical summaries of huge tables. DuckDB contains a highly optimized parallel aggregation capability for fast and scalable summarization.
 
 Jump [straight to the benchmarks](#experiments)?
-<!--more-->
 
 ## Introduction
 

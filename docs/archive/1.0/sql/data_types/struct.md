@@ -111,7 +111,6 @@ SELECT a.*
 FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 ```
 
-<div class="narrow_table"></div>
 
 | x | y | z |
 |:---|:---|:---|

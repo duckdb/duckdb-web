@@ -131,7 +131,7 @@ git push
 
 #### Write Your SQL Macros
 
-It it likely a bit faster to iterate if you test your macros directly in DuckDB. 
+It is likely a bit faster to iterate if you test your macros directly in DuckDB. 
 After you have written your SQL, we will move it into the extension.
 The example we will use demonstrates how to pull a dynamic set of columns from a dynamic table name (or a view name!).
 
@@ -238,7 +238,7 @@ A summary of those steps is:
      ref: 3c8a5358e42ab8d11e0253c70f7cc7d37781b2ef
    ```
 
-2. Wait for approval from the maintainers
+2. Wait for approval from the maintainers.
 
 And there you have it!
 You have created a shareable DuckDB Community Extension.

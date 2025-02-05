@@ -15,8 +15,6 @@ tags: ["release"]
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
 
-<!--more-->
-
 ## What's New in 0.10.0
 
 There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
@@ -121,7 +119,8 @@ duckdb_0100 v092.db
 
 ```sql
 SELECT l_orderkey, l_partkey, l_comment
-FROM lineitem LIMIT 1;
+FROM lineitem
+LIMIT 1;
 ```
 
 ```text
@@ -188,21 +187,19 @@ We expect that as the format stabilizes and matures this will happen less freque
 
 Below is a benchmark comparing the loading time of 11 million rows of the NYC Taxi dataset from a CSV file on an M1 Max with 10 cores:
 
-<div class="narrow_table"></div>
 
-| Version  | Load Time  |
-|----------|------------|
-| v0.9.2   | 2.6s       |
-| v0.10.0  | 1.15s      |
+| Version  | Load time  |
+|----------|-----------:|
+| v0.9.2   | 2.6 s      |
+| v0.10.0  | 1.2 s      |
 
 Furthermore, many optimizations have been done that make running queries over CSV files directly significantly faster as well. Below is a benchmark comparing the execution time of a `SELECT count(*)` query directly over the NYC Taxi CSV file.
 
-<div class="narrow_table"></div>
 
-| Version  | Query Time |
-|----------|------------|
-| v0.9.2   | 1.8s       |
-| v0.10.0  | 0.3s       |
+| Version  | Query time |
+|----------|-----------:|
+| v0.9.2   | 1.8 s      |
+| v0.10.0  | 0.3 s      |
 
 ## Fixed-Length Arrays
 
@@ -311,12 +308,12 @@ For example, a hash join might adapt its operation and perform a partitioned has
 Here is an example:
 
 ```sql
-PRAGMA memory_limit='5GB';
-SET temp_directory='/tmp/duckdb_temporary_memory_manager';
+PRAGMA memory_limit = '5GB';
+SET temp_directory = '/tmp/duckdb_temporary_memory_manager';
 
 CREATE TABLE tbl AS
-SELECT range i,
-       range j
+SELECT range AS i,
+       range AS j
 FROM range(100_000_000);
 
 SELECT max(i),
@@ -336,13 +333,12 @@ With the new version 0.10.0, this query completes in ca. 5s on a MacBook, while 
 
 Floating point numbers are notoriously difficult to compress efficiently, both in terms of compression ratio as well as speed of compression and decompression. In the past, DuckDB had support for the then state-of-the-art "[Chimp](https://github.com/duckdb/duckdb/pull/4878)" and the "[Patas](https://github.com/duckdb/duckdb/pull/5044)" compression methods. Turns out, those were not the last word in floating point compression. Researchers [Azim Afroozeh](https://www.cwi.nl/en/people/azim-afroozeh/), [Leonard Kuffo](https://www.cwi.nl/en/people/leonardo-xavier-kuffo-rivero/) and (the one and only) [Peter Boncz](https://homepages.cwi.nl/~boncz/) have recently published a paper titled "[ALP: Adaptive Lossless floating-Point Compression](https://dl.acm.org/doi/pdf/10.1145/3626717)" at SIGMOD, a top-tier academic conference for data management research. In an uncommon yet highly commendable move, they have also sent a [pull request](https://github.com/duckdb/duckdb/pull/9635) to DuckDB. The new compression scheme replaces Chimp and Patas. Inside DuckDB, ALP is **x2-4 times faster** than Patas (at decompression) achieving **compression ratios twice as high** (sometimes even much more).
 
-<div class="narrow_table"></div>
 
-| Compression  | Load   | Query  | Size   |
-|:-------------|--------|--------|--------|
-| ALP          | 0.434s | 0.02s  | 184 MB |
-| Patas        | 0.603s | 0.08s  | 275 MB |
-| Uncompressed | 0.316s | 0.012s | 489 MB |
+| Compression  | Load    | Query   | Size   |
+|:-------------|--------:|--------:|-------:|
+| ALP          | 0.434 s | 0.020 s | 184 MB |
+| Patas        | 0.603 s | 0.080 s | 275 MB |
+| Uncompressed | 0.316 s | 0.012 s | 489 MB |
 
 As a user, you don't have to do anything to make use of the new ALP compression method, DuckDB will automatically decide during checkpointing whether using ALP is beneficial for the specific dataset.
 
@@ -390,5 +386,7 @@ These were a few highlights – but there are many more features and improvement
 * [Parallel streaming query result](https://github.com/duckdb/duckdb/pull/10245)
 * [Struct filter pushdown](https://github.com/duckdb/duckdb/pull/10314)
 * [`first(x ORDER BY y)` optimizations](https://github.com/duckdb/duckdb/pull/10347)
+
+### Acknowledgments
 
 We would like to thank all of the contributors for their hard work on improving DuckDB.

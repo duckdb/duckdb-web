@@ -1,7 +1,7 @@
 ---
-layout: post
+layout: postarchive
 title: Events
-layoutpart: postsoverview
+excerpt: This page lists DuckDB meetups and DuckCon events.
 ---
 
 {% assign all_tags = "" %}
@@ -28,8 +28,12 @@ layoutpart: postsoverview
 		{% assign sorted_events = site.events | sort: 'date' | reverse %}
 		{% for event in sorted_events %}
 			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
-			{% assign tag_classes = event.tags | join: ' ' %}
-			<div class="eventpreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ event.title | escape }}">
+			{% assign tag_classes = "" %}
+			{% for tag in event.tags %}
+				{% assign slugified_tag = tag | slugify %}
+				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
+			{% endfor %}
+			<div class="eventpreview postpreview {{ tag_classes | downcase }}" data-title="{{ event.title | escape }}">
 				<a href="/events/{{ event.date | date: '%Y/%m/%d' }}/{{ event.slug | default: event.title | slugify }}/" title="{{ event.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if event.thumb %}

@@ -255,12 +255,11 @@ VARCHAR ST_AsSVG (col0 GEOMETRY, col1 BOOLEAN, col2 INTEGER)
 
 Convert the geometry into a SVG fragment or path
 
-Convert the geometry into a SVG fragment or path
-	The SVG fragment is returned as a string. The fragment is a path element that can be used in an SVG document.
-	The second Boolean argument specifies whether the path should be relative or absolute.
-	The third argument specifies the maximum number of digits to use for the coordinates.
+The SVG fragment is returned as a string. The fragment is a path element that can be used in an SVG document.
+The second Boolean argument specifies whether the path should be relative or absolute.
+The third argument specifies the maximum number of digits to use for the coordinates.
 
-	Points are formatted as cx/cy using absolute coordinates or x/y using relative coordinates.
+Points are formatted as cx/cy using absolute coordinates or x/y using relative coordinates.
 
 #### Example
 
@@ -1702,7 +1701,7 @@ VARCHAR ST_QuadKey (col0 GEOMETRY, col1 INTEGER)
 #### Description
 
 Compute the [quadkey](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system) for a given lon/lat point at a given level.
-Note that the the parameter order is **longitude**, **latitude**.
+Note that the parameter order is **longitude**, **latitude**.
 
 `level` has to be between 1 and 23, inclusive.
 

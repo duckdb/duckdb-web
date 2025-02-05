@@ -12,7 +12,6 @@ FROM pg_timezone_names()
 ORDER BY name;
 ```
 
-<div class="narrow_table"></div>
 
 |               name               |              abbrev              |
 |----------------------------------|----------------------------------|

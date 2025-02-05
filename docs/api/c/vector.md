@@ -17,7 +17,7 @@ Vectors themselves do not have sizes. Instead, the parent data chunk has a size 
 
 For primitive types, the underlying array can be obtained using the `duckdb_vector_get_data` method. The array can then be accessed using the correct native type. Below is a table that contains a mapping of the `duckdb_type` to the native type of the array.
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |       duckdb_type        |    NativeType    |
 |--------------------------|------------------|
@@ -81,7 +81,7 @@ The length can either be accessed directly, or the `duckdb_string_is_inlined` ca
 
 Decimals are stored as integer values internally. The exact native type depends on the `width` of the decimal type, as shown in the following table:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | Width |   NativeType   |
 |-------|----------------|
@@ -98,9 +98,9 @@ Decimals are stored as integer values multiplied by `10^scale`. The scale of a d
 
 Enums are stored as unsigned integer values internally. The exact native type depends on the size of the enum dictionary, as shown in the following table:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
-| Dictionary Size | NativeType |
+| Dictionary size | NativeType |
 |-----------------|------------|
 | <= 255          | uint8_t    |
 | <= 65535        | uint16_t   |
@@ -439,11 +439,9 @@ The bit is set to 1 if the value is valid (i.e., not NULL) or 0 if the value is 
 
 Validity of a specific value can be obtained like this:
 
-```c
 idx_t entry_idx = row_idx / 64;
 idx_t idx_in_entry = row_idx % 64;
 bool is_valid = validity_mask[entry_idx] & (1 << idx_in_entry);
-```
 
 Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
@@ -460,7 +458,7 @@ Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
 ##### Return Value
 
-The pointer to the validity mask, or `NULL` if no validity mask is present
+The pointer to the validity mask, or NULL if no validity mask is present
 
 <br>
 
@@ -469,7 +467,7 @@ The pointer to the validity mask, or `NULL` if no validity mask is present
 Ensures the validity mask is writable by allocating it.
 
 After this function is called, `duckdb_vector_get_validity` will ALWAYS return non-NULL.
-This allows `NULL` values to be written to the vector, regardless of whether a validity mask was present before.
+This allows NULL values to be written to the vector, regardless of whether a validity mask was present before.
 
 ##### Syntax
 

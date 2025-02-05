@@ -4,11 +4,9 @@ title: Enum Data Type
 blurb: The Enum type represents a dictionary data structure with all possible unique values of a column.
 ---
 
-<div class="narrow_table"></div>
-
 | Name | Description |
 |:--|:-----|
-| enum | Dictionary Encoding representing all possible string values of a column. |
+| `ENUM` | Dictionary representing all possible string values of a column |
 
 The enum type represents a dictionary data structure with all possible unique values of a column. For example, a column storing the days of the week can be an enum holding all possible days. Enums are particularly interesting for string columns with low cardinality (i.e., fewer distinct values). This is because the column only stores a numerical reference to the string in the enum dictionary, resulting in immense savings in disk storage and faster query performance.
 
@@ -58,9 +56,7 @@ Create an enum from a select statement. First create an example table of values:
 
 ```sql
 CREATE TABLE my_inputs AS
-    SELECT 'duck'  AS my_varchar UNION ALL
-    SELECT 'duck'  AS my_varchar UNION ALL
-    SELECT 'goose' AS my_varchar;
+    FROM (VALUES ('duck'), ('duck'), ('goose')) t(my_varchar);
 ```
 
 Create an enum using the unique string values in the `my_varchar` column:
@@ -74,8 +70,6 @@ Show the available values in the `birds` enum using the `enum_range` function:
 ```sql
 SELECT enum_range(NULL::birds) AS my_enum_range;
 ```
-
-<div class="narrow_table"></div>
 
 |  my_enum_range  |
 |-----------------|

@@ -171,7 +171,7 @@ including adding a vcpkg-managed external dependency.
 
 Firstly, you will need to install vcpkg:
 
-```bash
+```batch
 git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh
 export VCPKG_TOOLCHAIN_PATH=`pwd`/vcpkg/scripts/buildsystems/vcpkg.cmake
@@ -182,7 +182,7 @@ template”.
 
 Now to clone your newly created extension repo (including its submodules) and initialize the template:
 
-```bash
+```batch
 git clone https://github.com/⟨your-username⟩/⟨your-extension-repo⟩ --recurse-submodules
 cd your-extension-repo
 ./scripts/bootstrap-template.py url_parser
@@ -190,7 +190,7 @@ cd your-extension-repo
 
 Finally, to confirm everything works as expected, run the tests:
 
-```bash
+```batch
 make test
 ```
 

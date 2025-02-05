@@ -90,14 +90,16 @@ CREATE TABLE nyc AS
         st_union_agg(geom) AS full_geom,
         st_area(full_geom) AS area,
         st_centroid(full_geom) AS centroid,
-        count(*) AS count FROM
-st_read('https://raw.githubusercontent.com/duckdb/duckdb_spatial/main/test/data/nyc_taxi/taxi_zones/taxi_zones.shp')
+        count(*) AS count
+    FROM
+        st_read('https://raw.githubusercontent.com/duckdb/duckdb-spatial/main/test/data/nyc_taxi/taxi_zones/taxi_zones.shp')
 GROUP BY borough;
+
 SELECT borough, area, centroid::VARCHAR, count
 FROM nyc;
 ```
 
-Both your local DuckDB client and the [online DuckDB shell](https://shell.duckdb.org/#queries=v0,INSTALL-spatial~,LOAD-spatial~,CREATE-TABLE-nyc-AS-SELECT-borough%2C-st_union_agg(geom)-AS-full_geom%2C-st_area(full_geom)-AS-area%2C-st_centroid(full_geom)-AS-centroid%2C-count(*)-AS-count-FROM-st_read('https%3A%2F%2Fraw.githubusercontent.com%2Fduckdb%2Fduckdb_spatial%2Fmain%2Ftest%2Fdata%2Fnyc_taxi%2Ftaxi_zones%2Ftaxi_zones.shp')-GROUP-BY-borough~,SELECT-borough%2C-area%2C-centroid%3A%3AVARCHAR%2C-count-FROM-nyc~) will perform the same analysis.
+Both your local DuckDB client and the [online DuckDB shell](https://shell.duckdb.org/#queries=v0,INSTALL-spatial~,LOAD-spatial~,CREATE-TABLE-nyc-AS-SELECT-borough%2C-st_union_agg(geom)-AS-full_geom%2C-st_area(full_geom)-AS-area%2C-st_centroid(full_geom)-AS-centroid%2C-count(*)-AS-count-FROM-st_read('https%3A%2F%2Fraw.githubusercontent.com%2Fduckdb%2Fduckdb-spatial%2Fmain%2Ftest%2Fdata%2Fnyc_taxi%2Ftaxi_zones%2Ftaxi_zones.shp')-GROUP-BY-borough~,SELECT-borough%2C-area%2C-centroid%3A%3AVARCHAR%2C-count-FROM-nyc~) will perform the same analysis.
 
 ## Under the Hood
 

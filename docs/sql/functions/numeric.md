@@ -11,26 +11,24 @@ redirect_from:
 
 The table below shows the available mathematical operators for [numeric types]({% link docs/sql/data_types/numeric.md %}).
 
-<div class="narrow_table"></div>
-
 <!-- markdownlint-disable MD056 -->
 
 | Operator | Description | Example | Result |
 |-|-----|--|-|
-| `+`      | addition                  | `2 + 3`   | `5`   |
-| `-`      | subtraction               | `2 - 3`   | `-1`  |
-| `*`      | multiplication            | `2 * 3`   | `6`   |
-| `/`      | float division            | `5 / 2`   | `2.5` |
-| `//`     | division                  | `5 // 2`  | `2`   |
-| `%`      | modulo (remainder)        | `5 % 4`   | `1`   |
-| `**`     | exponent                  | `3 ** 4`  | `81`  |
-| `^`      | exponent (alias for `**`) | `3 ^ 4`   | `81`  |
-| `&`      | bitwise AND               | `91 & 15` | `11`  |
-| `|`      | bitwise OR                | `32 | 3`  | `35`  |
-| `<<`     | bitwise shift left        | `1 << 4`  | `16`  |
-| `>>`     | bitwise shift right       | `8 >> 2`  | `2`   |
-| `~`      | bitwise negation          | `~15`     | `-16` |
-| `!`      | factorial of `x`          | `4!`      | `24`  |
+| `+`      | Addition                  | `2 + 3`   | `5`   |
+| `-`      | Subtraction               | `2 - 3`   | `-1`  |
+| `*`      | Multiplication            | `2 * 3`   | `6`   |
+| `/`      | Float division            | `5 / 2`   | `2.5` |
+| `//`     | Division                  | `5 // 2`  | `2`   |
+| `%`      | Modulo (remainder)        | `5 % 4`   | `1`   |
+| `**`     | Exponent                  | `3 ** 4`  | `81`  |
+| `^`      | Exponent (alias for `**`) | `3 ^ 4`   | `81`  |
+| `&`      | Bitwise AND               | `91 & 15` | `11`  |
+| `|`      | Bitwise OR                | `32 | 3`  | `35`  |
+| `<<`     | Bitwise shift left        | `1 << 4`  | `16`  |
+| `>>`     | Bitwise shift right       | `8 >> 2`  | `2`   |
+| `~`      | Bitwise negation          | `~15`     | `-16` |
+| `!`      | Factorial of `x`          | `4!`      | `24`  |
 
 <!-- markdownlint-enable MD056 -->
 

@@ -14,7 +14,7 @@ This means that wherever a DuckDBPyType object is expected, it is also possible 
 
 The table below shows the mapping of Python Built-in types to DuckDB type.
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | Built-in types | DuckDB type |
 |:---------------|:------------|
@@ -29,7 +29,7 @@ The table below shows the mapping of Python Built-in types to DuckDB type.
 
 The table below shows the mapping of Numpy DType to DuckDB type.
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | Type        | DuckDB type |
 |:------------|:------------|
@@ -110,7 +110,7 @@ UNION(u1 BIGINT, u2 VARCHAR, u3 BOOLEAN, u4 BLOB)
 
 For the built-in types, you can use the constants defined in `duckdb.typing`:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | DuckDB type    |
 |:---------------|

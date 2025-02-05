@@ -13,14 +13,14 @@ The table below shows the available mathematical operators for `INTERVAL` types.
 
 | Operator | Description | Example | Result |
 |:-|:--|:----|:--|
-| `+` | addition of an `INTERVAL` | `INTERVAL 1 HOUR + INTERVAL 5 HOUR` | `INTERVAL 6 HOUR` |
-| `+` | addition to a `DATE` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27` |
-| `+` | addition to a `TIMESTAMP` | `TIMESTAMP '1992-03-22 01:02:03' + INTERVAL 5 DAY` | `1992-03-27 01:02:03` |
-| `+` | addition to a `TIME` | `TIME '01:02:03' + INTERVAL 5 HOUR` | `06:02:03` |
-| `-` | subtraction of an `INTERVAL` | `INTERVAL 5 HOUR - INTERVAL 1 HOUR` | `INTERVAL 4 HOUR` |
-| `-` | subtraction from a `DATE` | `DATE '1992-03-27' - INTERVAL 5 DAY` | `1992-03-22` |
-| `-` | subtraction from a `TIMESTAMP` | `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY` | `1992-03-22 01:02:03` |
-| `-` | subtraction from a `TIME` | `TIME '06:02:03' - INTERVAL 5 HOUR` | `01:02:03` |
+| `+` | Addition of an `INTERVAL` | `INTERVAL 1 HOUR + INTERVAL 5 HOUR` | `INTERVAL 6 HOUR` |
+| `+` | Addition to a `DATE` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27` |
+| `+` | Addition to a `TIMESTAMP` | `TIMESTAMP '1992-03-22 01:02:03' + INTERVAL 5 DAY` | `1992-03-27 01:02:03` |
+| `+` | Addition to a `TIME` | `TIME '01:02:03' + INTERVAL 5 HOUR` | `06:02:03` |
+| `-` | Subtraction of an `INTERVAL` | `INTERVAL 5 HOUR - INTERVAL 1 HOUR` | `INTERVAL 4 HOUR` |
+| `-` | Subtraction from a `DATE` | `DATE '1992-03-27' - INTERVAL 5 DAY` | `1992-03-22` |
+| `-` | Subtraction from a `TIMESTAMP` | `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY` | `1992-03-22 01:02:03` |
+| `-` | Subtraction from a `TIME` | `TIME '06:02:03' - INTERVAL 5 HOUR` | `01:02:03` |
 
 ## Interval Functions
 
@@ -35,7 +35,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | [`to_centuries(integer)`](#to_centuriesinteger) | Construct a century interval. |
 | [`to_days(integer)`](#to_daysinteger) | Construct a day interval. |
 | [`to_decades(integer)`](#to_decadesinteger) | Construct a decade interval. |
-| [`to_hours(integer)`](#to_hoursinteger) | Construct a hour interval. |
+| [`to_hours(integer)`](#to_hoursinteger) | Construct an hour interval. |
 | [`to_microseconds(integer)`](#to_microsecondsinteger) | Construct a microsecond interval. |
 | [`to_millennia(integer)`](#to_millenniainteger) | Construct a millennium interval. |
 | [`to_milliseconds(integer)`](#to_millisecondsinteger) | Construct a millisecond interval. |
@@ -107,7 +107,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Construct a hour interval. |
+| **Description** | Construct an hour interval. |
 | **Example** | `to_hours(5)` |
 | **Result** | `INTERVAL 5 HOUR` |
 

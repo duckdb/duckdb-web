@@ -36,6 +36,13 @@ GROUP BY city
 ORDER BY population DESC
 LIMIT 5;
 ```
+Select 10% of the rows from the addresses table:
+
+```sql
+SELECT *
+FROM addresses
+LIMIT 10%;
+```
 
 ## Syntax
 

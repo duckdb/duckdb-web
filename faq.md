@@ -17,8 +17,9 @@ title: Frequently Asked Questions
 
 <div class="answer" markdown="1">
 
-DuckDB is maintained by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Prof. Dr. Hannes Mühleisen](https://hannes.muehleisen.org) along with [many other contributors](https://github.com/duckdb/duckdb/graphs/contributors) from all over the world. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckDB Labs](https://www.duckdblabs.com), which provides commercial services around DuckDB. Several other DuckDB contributors are also affiliated with DuckDB Labs.  
-DuckDB's initial development took place at the [Database Architectures Group](https://www.cwi.nl/research/groups/database-architectures) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, The Netherlands. 
+DuckDB is maintained by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Prof. Dr. Hannes Mühleisen](https://hannes.muehleisen.org) along with [many other contributors](https://github.com/duckdb/duckdb/graphs/contributors) from all over the world. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckDB Labs](https://www.duckdblabs.com), which provides commercial services around DuckDB. Several other DuckDB contributors are also affiliated with DuckDB Labs.
+
+DuckDB's initial development took place at the [Database Architectures Group](https://www.cwi.nl/research/groups/database-architectures) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, The Netherlands.
 
 </div>
 
@@ -42,19 +43,43 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 
 <div class="qa-wrap" markdown="1">
 
+### Is DuckDB open-source?
+
+<div class="answer" markdown="1">
+
+DuckDB is fully open-source under the MIT license and its development takes place [on GitHub in the `duckdb/duckdb` repository](https://github.com/duckdb/duckdb).
+All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
+
+Most of the intellectual property of DuckDB has been purposefully moved to a non-profit entity to disconnect the licensing of the project from the commercial company, DuckDB Labs.
+The DuckDB Foundation's statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
+The [CWI (Centrum Wiskunde & Informatica)](https://cwi.nl/) has a seat on the board of the DuckDB Foundation
+and donations to the DuckDB Foundation directly fund DuckDB development.
+
+For more information on the organizations around DuckDB, see the next question–answer pair.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### How are DuckDB, the DuckDB Foundation, DuckDB Labs, and MotherDuck related?
 
 <div class="answer" markdown="1">
 
-[**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.<br/>
+[**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.
+
 The [**DuckDB Foundation**]({% link foundation/index.html %}) is a non-profit organization that holds the intellectual property of the DuckDB project.
-Its statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
-Donations to the DuckDB Foundation directly fund DuckDB development.<br/>
+The DuckDB Foundation's statutes ensure DuckDB remains open-source under the MIT license in perpetuity.
+
 [**DuckDB Labs**](https://duckdblabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
-DuckDB Labs employs the core contributors of the DuckDB project.<br/>
+DuckDB Labs employs the core contributors of the DuckDB project.
+
 [**MotherDuck**](https://motherduck.com/) is a venture-backed company creating a hybrid cloud/local platform using DuckDB.
 MotherDuck contracts with DuckDB Labs for development services, and DuckDB Labs owns a portion of MotherDuck.
-[See the partnership announcement for details](https://duckdblabs.com/news/2022/11/15/motherduck-partnership.html).
+[See the partnership announcement for details](https://duckdblabs.com/news/2022/11/15/motherduck-partnership).
 To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf) and the [MotherDuck documentation](https://motherduck.com/docs).
 
 </div>
@@ -69,19 +94,15 @@ To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://
 
 <div class="answer" markdown="1">
 
-You can download the DuckDB Logo here: <br/>
+You can download the DuckDB Logo here:
 
 - Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked.png) / [pdf](/images/logo-dl/DuckDB_Logo-stacked.pdf)
-<br/>
 - Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal.png) / [pdf](/images/logo-dl/DuckDB_Logo-horizontal.pdf)
-<br/>
 
 Inverted variants for dark backgrounds:
 
 - Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.png) / [pdf](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.pdf)
-<br/>
 - Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.png) / [pdf](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.pdf)
-<br/>
 
 The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
 
@@ -98,6 +119,26 @@ The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.
 <div class="answer" markdown="1">
 
 Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidelines.md %}).
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### I would like feature X to be implemented in DuckDB. How do I proceed?
+
+<div class="answer" markdown="1">
+
+Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/extensions/core_extensions.md %}) or a [community extension]({% link community_extensions/index.md %}). If you have a feature request for DuckDB, please follow these guidelines:
+
+* If you have a feature idea, please raise an issue in the [“Ideas” section in DuckDB's GitHub Discussions](https://github.com/duckdb/duckdb/discussions/categories/ideas). The DuckDB team monitors these ideas and, over time, implements the frequently requested features. For example, we recently published the [Avro Community Extension]({% link community_extensions/extensions/avro.md %}) to support reading Avro files, which was the most requested feature in the issue tracker.
+* If you would like to implement a feature in the main DuckDB project, please discuss it with the DuckDB team on GitHub Discussions or on [our Discord server](https://discord.duckdb.org/). The team can verify whether the idea and the proposed implementation line up with the project's long-term vision.
+* If you would like to implement a feature as an extension, consider submitting it to the [Community Extensions repository]({% link community_extensions/index.md %}).
+
+Please note that DuckDB Labs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://duckdblabs.com/support/), which can include implementing features in DuckDB or as DuckDB extensions.
 
 </div>
 
@@ -135,9 +176,11 @@ DuckDB can also run in [in-memory mode]({% link docs/connect/overview.md %}#in-m
 
 The type of storage used to run DuckDB has a [significant performance impact]({% link docs/guides/performance/environment.md %}#disk).
 In general, using SSDs (SATA or NVMe SSDs) leads to superior performance compared to HDDs.
-The location of the storage varies greatly depending the workload.
-_For read-only workloads,_ the DuckDB database can be stored on local disks and remote endpoints such as [HTTPS]({% link docs/extensions/httpfs/https.md %}) and cloud object storage such as [AWS S3]({% link docs/extensions/httpfs/s3api.md %}) and similar providers.
-_For read-write workloads,_ storing the database on instance-attached storage yields the best performance.
+
+The location of the storage varies greatly depending the workload:
+
+* _For read-only workloads,_ the DuckDB database can be stored on local disks and remote endpoints such as [HTTPS]({% link docs/extensions/httpfs/https.md %}) and cloud object storage such as [AWS S3]({% link docs/extensions/httpfs/s3api.md %}) and similar providers.
+* _For read-write workloads,_ storing the database on instance-attached storage yields the best performance.
 Network-attached cloud storage such as [AWS EBS](https://aws.amazon.com/ebs/) also works and its performance can be fine-tuned with the guaranteed IOPS settings.
 Based on our experience, we **advise against running read-write DuckDB workloads on on-premises [network-attached storage (NAS)](https://en.wikipedia.org/wiki/Network-attached_storage).**
 These setups are often slow and result in spurious failures that are difficult to troubleshoot.
@@ -157,6 +200,22 @@ These setups are often slow and result in spurious failures that are difficult t
 It is a common misconception that DuckDB is an in-memory database.
 While DuckDB _can_ work in-memory, it is **not an in-memory database**.
 DuckDB can make use of available memory for caching, it also fully supports disk-based persistence and [offloading larger-than-memory operations]({% link docs/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing) to disk.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### Is DuckDB built on Arrow?
+
+<div class="answer" markdown="1">
+
+DuckDB does not use the [Apache Arrow format](https://arrow.apache.org/) internally.
+However, DuckDB supports reading from / writing to Arrow using the [`arrow` extension]({% link docs/extensions/arrow.md %}).
+It can also run SQL queries directly on Arrow using [`pyarrow`]({% link docs/guides/python/sql_on_arrow.md %}).
 
 </div>
 
@@ -229,7 +288,7 @@ DuckDB does not use *explicit SIMD* (single instruction, multiple data) instruct
 
 <div class="qa-wrap" markdown="1">
 
-### I would to benchmark DuckDB against another system. How do I proceed?
+### I would like to benchmark DuckDB against another system. How do I proceed?
 
 <div class="answer" markdown="1">
 

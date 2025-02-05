@@ -6,8 +6,6 @@ blurb: Intervals represent periods of time measured in months, days, microsecond
 
 `INTERVAL`s represent periods of time that can be added to or subtracted from `DATE`, `TIMESTAMP`, `TIMESTAMPTZ`, or `TIME` values.
 
-<div class="narrow_table"></div>
-
 | Name | Description |
 |:---|:---|
 | `INTERVAL` | Period of time |
@@ -25,11 +23,14 @@ SELECT
     '48:00:00'::INTERVAL, -- HH::MM::SS string supported; stored as (48 * 60 * 60 * 1e6 microseconds)
 ;
 ```
+
 > Warning Decimal values can be used in strings but are rounded to integers.
+>
 > ```sql
 > SELECT INTERVAL '1.5' YEARS;
 > -- Returns 12 months; equivalent to `to_years(CAST(trunc(1.5) AS INTEGER))`
 > ```
+>
 > For more precision, use a more granular unit; e.g., `18 MONTHS` instead of `'1.5' YEARS`.
 
 Three basis units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and a day doesn't correspond to a fixed amount of microseconds.
@@ -73,6 +74,7 @@ SELECT
     datepart('year', INTERVAL 12 YEARS), -- returns 12
     datepart('second', INTERVAL 1_234 MILLISECONDS), -- returns 1
     datepart('microsecond', INTERVAL 1_234 MILLISECONDS), -- returns 1_234_000
+;
 ```
 
 ## Arithmetic with Timestamps, Dates and Intervals
@@ -87,6 +89,8 @@ SELECT
 ;
 ```
 
+> Adding an `INTERVAL` to a `DATE` returns a `TIMESTAMP` even when the `INTERVAL` has no microseconds component. The result is the same as if the `DATE` was cast to a `TIMESTAMP` (which sets the time component to `00:00:00`) before adding the `INTERVAL`.
+
 Conversely, subtracting two `TIMESTAMP`s or two `TIMESTAMPTZ`s from one another creates an `INTERVAL` describing the difference between the timestamps with only the *days and microseconds* components. For example:
 
 ```sql
@@ -99,6 +103,7 @@ SELECT
 Subtracting two `DATE`s from one another does not create an `INTERVAL` but rather returns the number of days between the given dates as integer value.
 
 > Warning Extracting a component of the `INTERVAL` difference between two `TIMESTAMP`s is not equivalent to computing the number of partition boundaries between the two `TIMESTAMP`s for the corresponding unit, as computed by the `datediff` function:
+>
 > ```sql
 > SELECT
 >     datediff('day', TIMESTAMP '2020-01-01 01:00:00', TIMESTAMP '2020-01-02 00:00:00'), -- 1

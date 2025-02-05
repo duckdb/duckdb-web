@@ -236,10 +236,9 @@ native_res = con.sql("SELECT sum(add_built_in_type(i)) FROM numbers").fetchall()
 arrow_res = con.sql("SELECT sum(add_arrow_type(i)) FROM numbers").fetchall()
 ```
 
-<div class="narrow_table"></div>
 
 |    Name     | Time (s) |
-|-------------|----------|
+|-------------|---------:|
 | Built-In    | 5.37     |
 | PyArrow     | 0.35     |
 
@@ -295,10 +294,9 @@ con.sql("SELECT sum(strlen_arrow(i)) FROM strings tbl(i)").fetchall()
 exec_external(con)
 ```
 
-<div class="narrow_table"></div>
 
-|    Name     | Time (s) | Peak Memory Consumption (MB) |
-|-------------|----------|------------------------------|
+|    Name     | Time (s) | Peak memory consumption (MB) |
+|-------------|---------:|-----------------------------:|
 | External    | 5.65     | 584.032                      |
 | UDF         | 5.63     | 112.848                      |
 

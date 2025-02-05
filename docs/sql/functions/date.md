@@ -15,12 +15,12 @@ The table below shows the available mathematical operators for `DATE` types.
 
 | Operator | Description | Example | Result |
 |:-|:--|:---|:--|
-| `+` | Addition of days (integers) | `DATE '1992-03-22' + 5` | `1992-03-27` |
-| `+` | Addition of an `INTERVAL` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27` |
-| `+` | Addition of a variable `INTERVAL` | `SELECT DATE '1992-03-22' + INTERVAL (d.days) DAY FROM (VALUES (5), (11)) AS d(days)` | `1992-03-27` and `1992-04-02` |
-| `-` | Subtraction of `DATE`s | `DATE '1992-03-27' - DATE '1992-03-22'` | `5` |
-| `-` | Subtraction of an `INTERVAL` | `DATE '1992-03-27' - INTERVAL 5 DAY` | `1992-03-22` |
-| `-` | Subtraction of a variable `INTERVAL` | `SELECT DATE '1992-03-27' - INTERVAL (d.days) DAY FROM (VALUES (5), (11)) AS d(days)` | `1992-03-22` and `1992-03-16` |
+| `+` | addition of days (integers) | `DATE '1992-03-22' + 5` | `1992-03-27` |
+| `+` | addition of an `INTERVAL` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27 00:00:00` |
+| `+` | addition of a variable `INTERVAL` | `SELECT DATE '1992-03-22' + INTERVAL (d.days) DAY FROM (VALUES (5), (11)) d(days)` | `1992-03-27 00:00:00` and `1992-04-02 00:00:00` |
+| `-` | subtraction of `DATE`s | `DATE '1992-03-27' - DATE '1992-03-22'` | `5` |
+| `-` | subtraction of an `INTERVAL` | `DATE '1992-03-27' - INTERVAL 5 DAY` | `1992-03-22 00:00:00` |
+| `-` | subtraction of a variable `INTERVAL` | `SELECT DATE '1992-03-27' - INTERVAL (d.days) DAY FROM (VALUES (5), (11)) d(days)` | `1992-03-22 00:00:00` and `1992-03-16 00:00:00` |
 
 Adding to or subtracting from [infinite values]({% link docs/sql/data_types/date.md %}#special-values) produces the same infinite value.
 
@@ -31,7 +31,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 
 | Name | Description |
 |:--|:-------|
-| [`current_date`](#current_date) | Current date (at start of current transaction). |
+| [`current_date`](#current_date) | Current date (at start of current transaction) in UTC. |
 | [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date. |
 | [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the dates. |
 | [`date_part(part, date)`](#date_partpart-date) | Get the [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
@@ -53,13 +53,13 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 | [`strftime(date, format)`](#strftimedate-format) | Converts a date to a string according to the [format string]({% link docs/sql/functions/dateformat.md %}). |
 | [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
 | [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to 2000-01-03 for buckets that don't include a month or year interval, and to 2000-01-01 for month and year buckets. |
-| [`today()`](#today) | Current date (start of current transaction). |
+| [`today()`](#today) | Current date (start of current transaction) in UTC. |
 
 #### `current_date`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current date (at start of current transaction). |
+| **Description** | Current date (at start of current transaction) in UTC. |
 | **Example** | `current_date` |
 | **Result** | `2022-10-08` |
 
@@ -239,7 +239,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current date (start of current transaction). |
+| **Description** | Current date (start of current transaction) in UTC. |
 | **Example** | `today()` |
 | **Result** | `2022-10-08` |
 

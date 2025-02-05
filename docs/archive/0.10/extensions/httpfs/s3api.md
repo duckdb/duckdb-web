@@ -11,7 +11,6 @@ The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Mi
 
 The following table shows which parts of the S3 API are required for each `httpfs` feature.
 
-<div class="narrow_table"></div>
 
 | Feature | Required S3 API features |
 |:---|:---|
@@ -193,7 +192,6 @@ FROM read_parquet('s3://bucket/*.parquet', filename = true);
 
 could for example result in:
 
-<div class="narrow_table"></div>
 
 | column_a | column_b | filename |
 |:---|:---|:---|
@@ -241,7 +239,6 @@ s3://my-bucket/partitioned/part_col_a=⟨val⟩/part_col_b=⟨val⟩/data_⟨thr
 
 Some additional configuration options exist for the S3 upload, though the default values should suffice for most use cases.
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:---|:---|

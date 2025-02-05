@@ -15,8 +15,6 @@ using the times in another table?
 And did you end up writing convoluted (and slow) inequality joins to get your results?
 Then this post is for you!
 
-<!--more-->
-
 ## What Is an AsOf Join?
 
 Time series data is not always perfectly aligned.
@@ -37,7 +35,6 @@ which can be cumbersome and slow to implement in standard SQL.
 Let's start with a concrete example.
 Suppose we have a table of stock [`prices`](/data/prices.csv) with timestamps:
 
-<div class="narrow_table"></div>
 
 | ticker | when | price |
 | :----- | :--- | ----: |
@@ -53,7 +50,6 @@ Suppose we have a table of stock [`prices`](/data/prices.csv) with timestamps:
 
 We have another table containing portfolio [`holdings`](/data/holdings.csv) at various points in time:
 
-<div class="narrow_table"></div>
 
 | ticker | when | shares |
 | :----- | :--- | -----: |
@@ -79,7 +75,6 @@ FROM holdings h ASOF JOIN prices p
 
 This attaches the value of the holding at that time to each row:
 
-<div class="narrow_table"></div>
 
 | ticker | when | value |
 | :----- | :--- | ----: |
@@ -109,7 +104,6 @@ ORDER BY ALL;
 As you might expect, this will produce `NULL` prices and values instead of dropping left side rows
 when there is no ticker or the time is before the prices begin.
 
-<div class="narrow_table"></div>
 
 | ticker | when | value |
 | :----- | :--- | ----: |
@@ -131,21 +125,25 @@ These can both be fairly expensive operations, but the query would look like thi
 
 ```sql
 WITH state AS (
-    SELECT ticker, price, "when",
-        lead("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+    SELECT
+        ticker,
+        price,
+        "when",
+        lead("when", 1, 'infinity')
+            OVER (PARTITION BY ticker ORDER BY "when") AS end
     FROM prices
 )
 SELECT h.ticker, h.when, price * shares AS value
-FROM holdings h INNER JOIN state s
-  ON h.ticker = s.ticker
- AND h.when >= s.when
- AND h.when < s.end;
+FROM holdings h
+INNER JOIN state s
+        ON h.ticker = s.ticker
+      AND h.when >= s.when
+      AND h.when < s.end;
 ```
 
 The default value of `infinity` is used to make sure there is an end value for the last row that can be compared.
 Here is what the `state` CTE looks like for our example:
 
-<div class="narrow_table"></div>
 
 | ticker | price |        when         |         end         |
 |:-------|------:|:--------------------|:--------------------|
@@ -224,7 +222,6 @@ But AsOf can now use any inequality, which allows it to handle other types of ev
 To explore this, let's use two very simple tables with no equality conditions.
 The build side will just have four integer "timestamps" with alphabetic values:
 
-<div class="narrow_table"></div>
 
 | Time | Value |
 | ---: | ----: |
@@ -237,7 +234,6 @@ The probe table will just be the time values plus the midpoints,
 and we can make a table showing what value each probe time matches
 for greater than or equal to:
 
-<div class="narrow_table"></div>
 
 | Probe | >=  |
 | ----: | --- |
@@ -255,7 +251,6 @@ This shows us that the interval a probe value matches is in the half-open interv
 
 Now let's see what happens if use strictly greater than as the inequality:
 
-<div class="narrow_table"></div>
 
 | Probe |  >  |
 | ----: | --- |
@@ -275,7 +270,6 @@ This means that for this inequality type, the time is not part of the interval.
 
 What if the inequality goes in the other direction, say less than or equal to?
 
-<div class="narrow_table"></div>
 
 | Probe | <=  |
 | ----: | --- |
@@ -300,7 +294,6 @@ when non-strict inequalities are used.
 
 We can check this by looking at the last inequality: strictly less than:
 
-<div class="narrow_table"></div>
 
 | Probe |  <  |
 | ----: | --- |
@@ -320,7 +313,6 @@ and it is a less than, so the time is the end of the interval.
 
 To sum up, here is the full list:
 
-<div class="narrow_table"></div>
 
 | Inequality | Interval   |
 | -- | ---------- |
@@ -352,7 +344,9 @@ Our first query can then be written as:
 
 ```sql
 SELECT ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p USING(ticker, "when");
+FROM holdings h
+ASOF JOIN prices p
+    USING(ticker, "when");
 ```
 
 Be aware that if you don't explicitly list the columns in the `SELECT`,
@@ -373,8 +367,12 @@ Remember that we used this query to convert the event table to a state table:
 
 ```sql
 WITH state AS (
-    SELECT ticker, price, "when",
-      lead("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+    SELECT
+        ticker,
+        price,
+        "when",
+        lead("when", 1, 'infinity')
+            OVER (PARTITION BY ticker ORDER BY "when") AS end
     FROM prices
 );
 ```
@@ -436,7 +434,6 @@ CREATE OR REPLACE TABLE probe AS (
 
 The `build` table looks like this:
 
-<div class="narrow_table"></div>
 
 | k |          t          | v |
 |---|---------------------|---|
@@ -448,7 +445,6 @@ The `build` table looks like this:
 
 and the probe table looks like this (with only even values for k):
 
-<div class="narrow_table"></div>
 
 | k |          t          |
 |---|---------------------|
@@ -463,7 +459,8 @@ The benchmark just does the join and sums up the `v` column:
 
 ```sql
 SELECT sum(v)
-FROM probe ASOF JOIN build USING(k, t);
+FROM probe
+ASOF JOIN build USING(k, t);
 ```
 
 The debugging `PRAGMA` does not allow us to use a hash join,
@@ -479,8 +476,11 @@ WITH state AS (
     FROM build
 )
 SELECT sum(v)
-FROM probe p INNER JOIN state s 
-  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
+FROM probe p
+INNER JOIN state s 
+        ON p.t >= s.begin
+       AND p.t < s.end
+       AND p.k = s.k;
 ```
 
 This works because the planner assumes that equality conditions are more selective
@@ -488,13 +488,12 @@ than inequalities and generates a hash join with a filter.
 
 Running the benchmark, we get results like this:
 
-<div class="narrow_table"></div>
 
-| Algorithm | Median of 5 |
-| :-------- | ----------: |
-| AsOf | 0.425 |
-| IEJoin | 3.522 |
-| State Join | 192.460 |
+| Algorithm  | Median of 5 |
+| :--------- | ----------: |
+| AsOf       |     0.425 s |
+| IEJoin     |     3.522 s |
+| State Join |   192.460 s |
 
 The runtime improvement of AsOf over IEJoin here is about 9×.
 The horrible performance of the Hash Join is caused by the long (100K) bucket chains in the hash table.
@@ -504,12 +503,14 @@ The second benchmark tests the case where the probe side is about 10× smaller t
 ```sql
 CREATE OR REPLACE TABLE probe AS
     SELECT k, 
-      '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
+      '2021-01-01T00:00:00'::TIMESTAMP +
+          INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
     FROM range(0, 100_000) tbl(k);
 
 CREATE OR REPLACE TABLE build AS
     SELECT r % 100_000 AS k, 
-      '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
+      '2021-01-01T00:00:00'::TIMESTAMP +
+          INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
       (random() * 100_000)::INTEGER AS v
     FROM range(0, 1_000_000) tbl(r);
 
@@ -524,21 +525,24 @@ WITH state AS (
   SELECT k, 
     t AS begin, 
     v, 
-    lead(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
+    lead(t, 1, 'infinity'::TIMESTAMP)
+        OVER (PARTITION BY k ORDER BY t) AS end
   FROM build
 )
 SELECT sum(v)
-FROM probe p INNER JOIN state s
-  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
+FROM probe p
+INNER JOIN state s
+        ON p.t >= s.begin
+       AND p.t < s.end
+       AND p.k = s.k;
 ```
 
-<div class="narrow_table"></div>
 
-| Algorithm  | Median of 5 |
-| :--------- | ----------: |
-| State Join |       0.065 |
-| AsOf       |       0.077 |
-| IEJoin     |      49.508 |
+| Algorithm  | Median of 5 runs |
+| :--------- | ---------------: |
+| State Join |          0.065 s |
+| AsOf       |          0.077 s |
+| IEJoin     |         49.508 s |
 
 Now the runtime improvement of AsOf over IEJoin is huge (~500×)
 because it can leverage the partitioning to eliminate almost all of the equality mismatches.

@@ -41,7 +41,7 @@ endloop
 
 `foreach` also has a number of preset combinations that should be used when required. In this manner, when new combinations are added to the preset, old tests will automatically pick up these new combinations.
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |     Preset     |                          Expansion                           |
 |----------------|--------------------------------------------------------------|

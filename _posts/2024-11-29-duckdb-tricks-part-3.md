@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB Tricks – Part 3"
-author: "Andra Ionescu, Gabor Szarnyas"
+author: "Andra Ionescu and Gabor Szarnyas"
 thumb: "/images/blog/thumbs/duckdb-tricks.svg"
 image: "/images/blog/thumbs/duckdb-tricks.png"
 excerpt: "In this new installment of the DuckDB Tricks series, we present features for convenient handling of tables and performance optimization tips for Parquet and CSV files."
@@ -24,18 +24,12 @@ where we showcase [friendly SQL features]({% link docs/sql/dialect/friendly_sql.
 ## Dataset
 
 We'll use a subset of the [Dutch railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive), which was already featured in a [blog post earlier this year]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}).
-This time, we'll use the CSV files between January and October 2024: [`services-2024-01-to-10.tar.zst`](https://blobs.duckdb.org/data/railway/services-2024-01-to-10.tar.zst).
-
-If you would like to follow the examples, you can download and decompress the dataset with the following command:
-
-```bash
-curl https://blobs.duckdb.org/data/services-2024-01-to-10.tar.zst \
-    | tar -xv --use-compress-program=unzstd
-```
+This time, we'll use the CSV files between January and October 2024: [`services-2024-01-to-10.zip`](https://blobs.duckdb.org/data/services-2024-01-to-10.zip).
+If you would like to follow the examples, download and decompress the data set before proceeding.
 
 ## Excluding Columns from a Table
 
-Before creating a table, let's look at the data in the CSV files.
+First, let's look at the data in the CSV files.
 We pick the CSV file for August and inspect it with the [`DESCRIBE` statement]({% link docs/guides/meta/describe.md %}).
 
 ```sql
@@ -68,7 +62,7 @@ SELECT * EXCLUDE(min, max, q25, q50, q75)
 FROM (SUMMARIZE FROM 'services-2024-08.csv');
 ```
 
-Alternatively, we can use the [`COLUMNS`](({% link docs/sql/expressions/star.md %}#columns)) expression with the [`NOT SIMILAR TO` operator]({% link docs/sql/functions/pattern_matching.md %}#similar-to).
+Alternatively, we can use the [`COLUMNS`]({% link docs/sql/expressions/star.md %}#columns) expression with the [`NOT SIMILAR TO` operator]({% link docs/sql/functions/pattern_matching.md %}#similar-to).
 This works with a regular expression:
 
 ```sql
@@ -185,7 +179,7 @@ We have now a table with all the data from January to October, amounting to almo
 ## Reordering Parquet Files
 
 Suppose we want to analyze the average delay of the [Intercity Direct trains](https://en.wikipedia.org/wiki/Intercity_Direct) operated by the [Nederlandse Spoorwegen (NS)](https://en.wikipedia.org/wiki/Nederlandse_Spoorwegen), measured at the final destination of the train service.
-While we can run this analysis directly on the the `.csv` files, the lack of metadata (such as schema and min-max indexes) will limit the performance.
+While we can run this analysis directly on the `.csv` files, the lack of metadata (such as schema and min-max indexes) will limit the performance.
 Let's measure this in the CLI client by turning on the [timer]({% link docs/api/cli/dot_commands.md %}):
 
 ```plsql

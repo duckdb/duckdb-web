@@ -121,11 +121,9 @@ USE memory_db;
 
 ## Options
 
-<div class="narrow_table"></div>
-
 | Name                        | Description                                                                                                                 | Type      | Default value |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------------------------|-----------|---------------|
-| `access_mode`               | Access mode of the database (**AUTOMATIC**, **READ_ONLY**, or **READ_WRITE**)                                               | `VARCHAR` | `automatic`   |
+| `access_mode`               | Access mode of the database (**AUTOMATIC**, **READ_ONLY**, or **READ_WRITE**).                                              | `VARCHAR` | `automatic`   |
 | `type`                      | The file type (**DUCKDB** or **SQLITE**), or deduced from the input string literal (MySQL, PostgreSQL).                     | `VARCHAR` | `DUCKDB`      |
 | `block_size`                | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
 
@@ -216,7 +214,7 @@ CREATE TABLE new_db.tbl (i INTEGER);
 ```
 
 ```console
-Error: Binder Error: Ambiguous reference to catalog or schema "new_db" -
+Binder Error: Ambiguous reference to catalog or schema "new_db" -
 use a fully qualified path like "memory.new_db"
 ```
 

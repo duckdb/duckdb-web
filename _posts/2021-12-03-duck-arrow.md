@@ -6,8 +6,7 @@ excerpt: The zero-copy integration between DuckDB and Apache Arrow allows for ra
 tags: ["using DuckDB"]
 ---
 
-This post is a collaboration with and cross-posted on [the Arrow blog](https://arrow.apache.org/blog/2021/12/03/arrow-duckdb/).
-<!--more-->
+This post is a collaboration with and cross-posted on the [Arrow blog](https://arrow.apache.org/blog/2021/12/03/arrow-duckdb/).
 
 Part of [Apache Arrow](https://arrow.apache.org) is an in-memory data format optimized for analytical libraries. Like Pandas and R Dataframes, it uses a columnar data model. But the Arrow project contains more than just the format: The Arrow C++ library, which is accessible in Python, R, and Ruby via bindings, has additional features that allow you to compute efficiently on datasets. These additional features are on top of the implementation of the in-memory format described above. The datasets may span multiple files in Parquet, CSV, or other formats, and files may even be on remote or cloud storage like HDFS or Amazon S3. The Arrow C++ query engine supports the streaming of query results, has an efficient implementation of complex data types (e.g., Lists, Structs, Maps), and can perform important scan optimizations like Projection and Filter Pushdown.
 
@@ -83,7 +82,7 @@ In this section, we will look at some basic examples of the code needed to read 
 
 First we need to install DuckDB and Arrow. The installation process for both libraries in Python and R is shown below.
 
-```bash
+```batch
 # Python Install
 pip install duckdb
 pip install pyarrow
@@ -210,14 +209,16 @@ record_batch_reader <- duckdb::duckdb_fetch_record_batch(res)
 cur_batch <- record_batch_reader$read_next_batch()
 ```
 
-The preceding R code shows in low-level detail how the data is streaming. We provide the helper `to_arrow()` in the Arrow package which is a wrapper around this that makes it easy to incorporate this streaming into a dplyr pipeline. [^1]
+The preceding R code shows in low-level detail how the data is streaming. We provide the helper `to_arrow()` in the Arrow package which is a wrapper around this that makes it easy to incorporate this streaming into a dplyr pipeline.
+
+> In Arrow 6.0.0, `to_arrow()` currently returns the full table, but will allow full streaming in our upcoming 7.0.0 release.
 
 ## Benchmark Comparison
 
 Here we demonstrate in a simple benchmark the performance difference between querying Arrow datasets with DuckDB and querying Arrow datasets with Pandas.
 For both the Projection and Filter pushdown comparison, we will use Arrow tables. That is due to Pandas not being capable of consuming Arrow stream objects.
 
-For the NYC Taxi benchmarks, we used the scilens diamonds configuration and for the TPC-H benchmarks, we used an m1 MacBook Pro. In both cases, parallelism in DuckDB was used (which is now on by default).
+For the NYC Taxi benchmarks, we used a server in the SciLens cluster and for the TPC-H benchmarks, we used a MacBook Pro with an M1 CPU. In both cases, parallelism in DuckDB was used (which is now on by default).
 
 For the comparison with Pandas, note that DuckDB runs in parallel, while pandas only support single-threaded execution. Besides that, one should note that we are comparing automatic optimizations. DuckDB's query optimizer can automatically push down filters and projections. This automatic optimization is not supported in pandas, but it is possible for users to manually perform some of these predicate and filter pushdowns by manually specifying them in the `read_parquet()` call.
 
@@ -361,19 +362,17 @@ res = filtered_df[["total_amount", "passenger_count","year"]]
 new_table = pa.Table.from_pandas(res)
 ```
 
-|    Name     | Time (s) | Peak Memory Usage (GBs) |
+|    Name     | Time (s) | Peak memory usage (GBs) |
 |-------------|---------:|------------------------:|
 | DuckDB      | 0.05     | 0.3                     |
 | Pandas      | 146.91   | 248                     |
 
 The difference in times between DuckDB and Pandas is a combination of all the integration benefits we explored in this article. In DuckDB the filter pushdown is applied to perform partition elimination (i.e., we skip reading the Parquet files where the year is <= 2014). The filter pushdown is also used to eliminate unrelated row_groups (i.e., row groups where the total amount is always <= 100). Due to our projection pushdown, Arrow only has to read the columns of interest from the Parquet files, which allows it to read only 4 out of 20 columns. On the other hand, Pandas is not capable of automatically pushing down any of these optimizations, which means that the full dataset must be read. **This results in the 4 orders of magnitude difference in query execution time.**
 
-In the table above, we also depict the comparison of peak memory usage between DuckDB (Streaming) and Pandas (Fully-Materializing).  In DuckDB, we only need to load the row-group of interest into memory. Hence our memory usage is low. We also have constant memory usage since we only have to keep one of these row groups in-memory at a time. Pandas, on the other hand, has to fully materialize all Parquet files when executing the query. Because of this, we see a constant steep increase in its memory consumption. **The total difference in memory consumption of the two solutions is around 3 orders of magnitude.**
+In the table above, we also depict the comparison of peak memory usage between DuckDB (Streaming) and Pandas (Fully-Materializing).  In DuckDB, we only need to load the row group of interest into memory. Hence our memory usage is low. We also have constant memory usage since we only have to keep one of these row groups in-memory at a time. Pandas, on the other hand, has to fully materialize all Parquet files when executing the query. Because of this, we see a constant steep increase in its memory consumption. **The total difference in memory consumption of the two solutions is around 3 orders of magnitude.**
 
 ## Conclusion and Feedback
 
 In this blog post, we mainly showcased how to execute queries on Arrow datasets with DuckDB. There are additional libraries that can also consume the Arrow format but they have different purposes and capabilities. As always, we are happy to hear if you want to see benchmarks with different tools for a post in the future! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;jon@voltrondata.com) or share your thoughts directly in the Hacker News post.
 
 Last but not least, if you encounter any problems when using our integration, please open an issue in either [DuckDB's issue tracker](https://github.com/duckdb/duckdb/issues) or [Arrow's issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.
-
-[^1]: In Arrow 6.0.0, `to_arrow()` currently returns the full table, but will allow full streaming in our upcoming 7.0.0 release.

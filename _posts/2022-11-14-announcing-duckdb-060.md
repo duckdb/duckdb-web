@@ -15,8 +15,6 @@ The DuckDB team is happy to announce the latest DuckDB version (0.6.0) has been 
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.6.0).
 
-<!--more-->
-
 ## What's in 0.6.0
 
 The new release contains many improvements to the storage system, general performance improvements, memory management improvements and new features. Below is a summary of the most impactful changes, together with the linked PRs that implement the features.
@@ -33,7 +31,7 @@ This version introduces [optimistic writing to disk](https://github.com/duckdb/d
 
 Below is a benchmark comparing loading time of 150 million rows of the Taxi dataset from a Parquet file on an M1 Max with 10 cores:
 
-| Version | Load Time |
+| Version | Load time |
 |---------|----------:|
 | v0.5.1  | 91.4 s    |
 | v0.6.0  | 17.2 s    |
@@ -81,7 +79,7 @@ SET experimental_parallel_csv = true;
 
 Below is the load time of a 720 MB CSV file containing the `lineitem` table from the `TPC-H` benchmark, 
 
-|     Variant     | Load Time |
+|     Variant     | Load time |
 |-----------------|----------:|
 | Single Threaded | 3.5s      |
 | Parallel        | 0.6s      |
@@ -90,7 +88,7 @@ Below is the load time of a 720 MB CSV file containing the `lineitem` table from
 
 The timings of creating an index on a single column with 16 million values is shown below.
 
-| Version | Create Index Time |
+| Version | Create index time |
 |---------|------------------:|
 | v0.5.1  |        5.92 s     |
 | v0.6.0  |        1.38 s     |
@@ -213,7 +211,7 @@ The DuckDB shell also offers several improvements over the SQLite shell, such as
 
 The number of rows that are rendered can be changed by using the `.maxrows X` setting, and you can switch back to the old rendering using the `.mode box` command.
 
-```plsql
+```sql
 SELECT * FROM '~/Data/nyctaxi/nyc-taxi/2014/04/data.parquet';
 ```
 
@@ -270,8 +268,10 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 
 **Progress Bars**. DuckDB has [supported progress bars in queries for a while now](https://github.com/duckdb/duckdb/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/duckdb/duckdb/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
 
-```plsql
+```sql
 COPY lineitem TO 'lineitem-big.parquet';
+```
+```text
    32% ▕███████████████████▏                                        ▏ 
 ```
 

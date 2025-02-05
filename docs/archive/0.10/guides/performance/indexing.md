@@ -17,7 +17,6 @@ The more ordered the data within a column, the more useful the zonemap indexes w
 
 For an example, let’s repeat the [microbenchmark for timestamps](schema#microbenchmark-using-timestamps) with a timestamp column that sorted using an ascending order vs. an unordered one.
 
-<div class="narrow_table"></div>
 
 | Column type | Ordered | Storage size | Query time |
 |---|---|---|---|

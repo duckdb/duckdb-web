@@ -48,8 +48,6 @@ SELECT *
 FROM original;
 ```
 
-<div class="narrow_table"></div>
-
 | key |      value       |
 |-----|------------------|
 | 1   | original value   |
@@ -78,8 +76,6 @@ UPDATE original
 SELECT *
 FROM original;
 ```
-
-<div class="narrow_table"></div>
 
 | key |    value    |
 |-----|-------------|

@@ -102,8 +102,6 @@ FROM addresses
 ORDER BY ALL;
 ```
 
-<div class="narrow_table"></div>
-
 |        address         |   city    |    zip     |
 |------------------------|-----------|------------|
 | 111 Duck Duck Goose Ln | Duck Town | 11111      |
@@ -118,8 +116,6 @@ SELECT *
 FROM addresses
 ORDER BY ALL DESC;
 ```
-
-<div class="narrow_table"></div>
 
 |        address         |   city    |    zip     |
 |------------------------|-----------|------------|

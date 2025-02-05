@@ -8,7 +8,6 @@ redirect_from:
 title: Bitstring Type
 ---
 
-<div class="narrow_table"></div>
 
 | Name | Aliases | Description |
 |:---|:---|:---|

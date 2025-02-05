@@ -11,8 +11,6 @@ Sorting is also used within operators, such as window functions.
 DuckDB recently improved its sorting implementation, which is now able to sort data in parallel and sort more data than fits in memory.
 In this post, we will take a look at how DuckDB sorts, and how this compares to other data management systems.
 
-<!--more-->
-
 Not interested in the implementation? [Jump straight to the experiments!](#comparison)
 
 ## Sorting Relational Data
@@ -358,7 +356,7 @@ We will use `customer` at SF100 and SF300, which fits in memory at every scale f
 We will use `catalog_sales` table at SF10 and SF100, which does not fit in memory anymore at SF100.
 
 The data was generated using DuckDB's TPC-DS extension, then exported to CSV in a random order to undo any ordering patterns that could have been in the generated data.
- 
+
 ## Catalog Sales (Numeric Types)
 
 Our first experiment on the `catalog_sales` table is selecting 1 column, then 2 columns, ..., up to all 34, always ordering by `cs_quantity` and `cs_item_sk`.

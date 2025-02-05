@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	{% if page.title == "DuckDB" %}
 	<title>{{ page.title }}</title>
 	{% else %}
@@ -31,16 +31,8 @@
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
 	{% seo title=false %}
-	
-	<script>
-		var userPrefersDark = localStorage.getItem('mode') === 'dark';
-		var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-		if (userPrefersDark || systemPrefersDark) {
-			document.documentElement.classList.add('darkmode');
-			document.documentElement.classList.add('disable-transitions');
-		}
-	</script>
 
+	<script src="{{ site.baseurl }}/js/determine_color_scheme.js?{{ site.data['hash'] }}"></script>
 </head>
 
 {% capture issue_title %}Issue found on page '{{ page.title }}'{% endcapture %}
@@ -61,11 +53,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					<div id="duckdb_logo"></div>
 				</div>
 				<div class="landingmenu">
-
-					{% include menu_secondary.html %}
-
 					<nav class="mobile">
-						<div class="search_icon"></div>
 						<div class="hamburger hamburger--squeeze">
 							<div class="hamburger-box">
 								<div class="hamburger-inner"></div>
@@ -73,45 +61,32 @@ Page URL: <https://duckdb.org{{ page.url }}>
 						</div>
 					</nav>
 				</div>
-				<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
-			</div>
-		</div>
-	</header>
-		
-	{% include banner_docversion.html %}
-		
-		{% include searchoverlay.html %}
-
-		{% include menu_sidebar.html %}
-
-
-		{% assign current_url = page.url | split:'/docs/' %}
-		{% if page.path contains "archive/" %}
-			{% for item in site.data.versions %}
-				{% if page.path contains item.version %}
-					{% assign versionviewed = item.version %}
-					{% assign pathtoreplace = "docs/archive/" | append: item.version | append: "/" %}
-					{% assign basename = page.path | replace: pathtoreplace , "" %}
-				{% endif %}
-			{% endfor %}
-		{% else %}
-			{% assign basename = page.path | replace: "docs/", "" %}
-		{% endif %}
-		
-		
-		
-		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " | remove: ":" }}{% endif %}">
-			
-			<div id="main_content_wrap">
-				
-				<div class="headlinebar">
-					<div class="breadcrumbs">{% include breadcrumbs.html %}</div>
-
+				<div class="options">
+					<div class="opensearch">
+						<span class="mac shortcut">⌘+k</span>
+						<span class="win shortcut">ctrl+k</span>
+					</div>
+					
 					{% if page.url contains '/docs/' %}
+					
+					{% include banner_docversion.html %}
+					
+			
+					
+					{% assign current_url = page.url | split:'/docs/' %}
+					{% if page.path contains "archive/" %}
+						{% for item in site.data.versions %}
+							{% if page.path contains item.version %}
+								{% assign versionviewed = item.version %}
+								{% assign pathtoreplace = "docs/archive/" | append: item.version | append: "/" %}
+								{% assign basename = page.path | replace: pathtoreplace , "" %}
+							{% endif %}
+						{% endfor %}
+					{% else %}
+						{% assign basename = page.path | replace: "docs/", "" %}
+					{% endif %}
+					
 					<div class="versionselect">
-						<div class="mode" data-mode="dark">
-							<span class="icon"></span><span class="name">Dark Mode</span>
-						</div>
 						<div class="version">
 							<div><span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span><span class="arrow"></div>
 							<div class="versionsidebar">
@@ -152,10 +127,27 @@ Page URL: <https://duckdb.org{{ page.url }}>
 						</div>
 					</div>
 					{% endif %}
-					
-					
-					<div class="title">{{ page.title }}</div>
+					<button class="mode" data-mode="dark"></button>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+
+	<main>
+	
+		{% include searchoverlay.html %}
+
+		{% include menu_sidebar.html %}
+
+
+		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " | remove: ":" }}{% endif %}">
+			
+			<div id="main_content_wrap">
 				
+				<div class="headlinebar">
+					<div class="breadcrumbs">{% include breadcrumbs.html %}</div>
+					<div class="title">{{ page.title }}</div>
 				</div>
 				
 				{% assign ct = content | toc %}
@@ -193,7 +185,6 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					</div>
 				{% endif %}
 			</div>
-			
 			
 			
 		</div>

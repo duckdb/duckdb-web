@@ -38,7 +38,6 @@ Both min-max indexes and ART indexes are persisted on disk.
 
 ### Parameters
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:-|:-----|
@@ -71,7 +70,6 @@ CREATE INDEX i_index ON integers ((j+k));
 
 ### Parameters
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:---|:---|

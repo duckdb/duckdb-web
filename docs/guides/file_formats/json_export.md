@@ -14,13 +14,26 @@ COPY tbl TO 'output.json';
 The result of queries can also be directly exported to a JSON file:
 
 ```sql
-COPY (SELECT * FROM tbl) TO 'output.json';
+COPY (SELECT * FROM range(3) tbl(n) ) TO 'output.json';
+```
+```
+{"n":0}
+{"n":1}
+{"n":2}
 ```
 
-The JSON export writes JSON lines by default. The `ARRAY` option can be used to write a JSON array instead.
+The JSON export writes JSON lines by default, standardized as [Newline-delimited JSON](https://en.wikipedia.org/wiki/JSON_streaming#NDJSON).
+The `ARRAY` option can be used to write a single JSON array object instead.
 
 ```sql
-COPY tbl TO 'output.json' (ARRAY);
+COPY (SELECT * FROM range(3) tbl(n) ) TO 'output.json' (ARRAY);
+```
+```
+[
+        {"n":0},
+        {"n":1},
+        {"n":2}
+]
 ```
 
 For additional options, see the [`COPY` statement documentation]({% link docs/sql/statements/copy.md %}).

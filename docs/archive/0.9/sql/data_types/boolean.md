@@ -8,7 +8,6 @@ redirect_from:
 title: Boolean Type
 ---
 
-<div class="narrow_table"></div>
 
 | Name | Aliases | Description |
 |:---|:---|:---|
@@ -42,7 +41,6 @@ The `AND`/`OR` conjunctions can be used to combine boolean values.
 
 Below is the truth table for the `AND` conjunction (i.e., `x AND y`).
 
-<div class="narrow_table"></div>
 
 |  X  | X AND true  | X AND false | X AND NULL  |
 |-------|-------|-------|-------|
@@ -52,7 +50,6 @@ Below is the truth table for the `AND` conjunction (i.e., `x AND y`).
 
 Below is the truth table for the `OR` conjunction (i.e., `x OR y`).
 
-<div class="narrow_table"></div>
 
 |  X   | X OR true | X OR false | X OR NULL |
 |-------|------|-------|------|

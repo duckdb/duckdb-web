@@ -11,12 +11,10 @@ This section describes functions and operators for examining and manipulating [`
 
 The table below shows the available mathematical operators for `TIME` types.
 
-<div class="narrow_table"></div>
-
 | Operator | Description | Example | Result |
 |:-|:---|:----|:--|
 | `+` | addition of an `INTERVAL` | `TIME '01:02:03' + INTERVAL 5 HOUR` | `06:02:03` |
-| `-` | subtraction of an `INTERVAL` | `TIME '06:02:03' - INTERVAL 5 HOUR'` | `01:02:03` |
+| `-` | subtraction of an `INTERVAL` | `TIME '06:02:03' - INTERVAL 5 HOUR` | `01:02:03` |
 
 ## Time Functions
 
@@ -24,7 +22,7 @@ The table below shows the available scalar functions for `TIME` types.
 
 | Name | Description |
 |:--|:-------|
-| [`current_time`](#current_time) | Current time (start of current transaction). |
+| [`current_time`](#current_time) | Current time (start of current transaction) in UTC. |
 | [`date_diff(part, starttime, endtime)`](#date_diffpart-starttime-endtime) | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the times. |
 | [`date_part(part, time)`](#date_partpart-time) | Get [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, starttime, endtime)`](#date_subpart-starttime-endtime) | The number of complete [partitions]({% link docs/sql/functions/datepart.md %}) between the times. |
@@ -32,7 +30,7 @@ The table below shows the available scalar functions for `TIME` types.
 | [`datepart(part, time)`](#datepartpart-time) | Alias of date_part. Get [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`datesub(part, starttime, endtime)`](#datesubpart-starttime-endtime) | Alias of date_sub. The number of complete [partitions]({% link docs/sql/functions/datepart.md %}) between the times. |
 | [`extract(part FROM time)`](#extractpart-from-time) | Get subfield from a time. |
-| [`get_current_time()`](#get_current_time) | Current time (start of current transaction). |
+| [`get_current_time()`](#get_current_time) | Current time (start of current transaction) in UTC. |
 | [`make_time(bigint, bigint, double)`](#make_timebigint-bigint-double) | The time for the given parts. |
 
 The only [date parts]({% link docs/sql/functions/datepart.md %}) that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds` and `microseconds`.
@@ -41,7 +39,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current time (start of current transaction). Note that parentheses should be omitted. |
+| **Description** | Current time (start of current transaction) in UTC. Note that parentheses should be omitted. |
 | **Example** | `current_time` |
 | **Result** | `10:31:58.578` |
 | **Alias** | `get_current_time()` |
@@ -106,7 +104,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current time (start of current transaction). |
+| **Description** | Current time (start of current transaction) in UTC. |
 | **Example** | `get_current_time()` |
 | **Result** | `10:31:58.578` |
 | **Alias** | `current_time` |

@@ -47,8 +47,6 @@ INSERT INTO monthly_sales VALUES
 FROM monthly_sales;
 ```
 
-<div class="narrow_table"></div>
-
 | empid |    dept     | Jan | Feb | Mar | Apr | May | Jun |
 |------:|-------------|----:|----:|----:|----:|----:|----:|
 | 1     | electronics | 1   | 2   | 3   | 4   | 5   | 6   |
@@ -72,8 +70,6 @@ INTO
     NAME month
     VALUE sales;
 ```
-
-<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |------:|-------------|-------|------:|
@@ -111,8 +107,6 @@ INTO
     NAME month
     VALUE sales;
 ```
-
-<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |------:|-------------|-------|------:|
@@ -153,8 +147,6 @@ UNPIVOT monthly_sales
         NAME quarter
         VALUE month_1_sales, month_2_sales, month_3_sales;
 ```
-
-<div class="narrow_table"></div>
 
 | empid |    dept     | quarter | month_1_sales | month_2_sales | month_3_sales |
 |------:|-------------|---------|--------------:|--------------:|--------------:|
@@ -214,7 +206,6 @@ UNPIVOT
 | col1 | 84    |
 | col2 | woot  |
 
-
 ### Simplified `UNPIVOT` Full Syntax Diagram
 
 Below is the full syntax diagram of the `UNPIVOT` statement.
@@ -245,8 +236,6 @@ FROM monthly_sales UNPIVOT (
     FOR month IN (jan, feb, mar, apr, may, jun)
 );
 ```
-
-<div class="narrow_table"></div>
 
 | empid |    dept     | month | sales |
 |------:|-------------|-------|------:|
@@ -304,8 +293,6 @@ UNPIVOT (
     )
 );
 ```
-
-<div class="narrow_table"></div>
 
 | empid |    dept     | quarter | month_1_sales | month_2_sales | month_3_sales |
 |------:|-------------|---------|--------------:|--------------:|--------------:|

@@ -24,19 +24,20 @@ FROM sniff_csv('my_file.csv');
 FROM sniff_csv('my_file.csv', sample_size = 1000);
 ```
 
-| Column name | Description | Example |
-|----|-----|-------|
-| `Delimiter` | delimiter | `,` |
-| `Quote` | quote character | `"` |
-| `Escape` | escape | `\` |
-| `NewLineDelimiter` | new-line delimiter | `\r\n` |
-| `SkipRow` | number of rows skipped | 1 |
-| `HasHeader` | whether the CSV has a header | `true` |
-| `Columns` | column types encoded as a `LIST` of `STRUCT`s | `({'name': 'VARCHAR', 'age': 'BIGINT'})` |
-| `DateFormat` | date Format | `%d/%m/%Y` |
-| `TimestampFormat` | timestamp Format | `%Y-%m-%dT%H:%M:%S.%f` |
-| `UserArguments` | arguments used to invoke `sniff_csv` | `sample_size = 1000` |
-| `Prompt` | prompt ready to be used to read the CSV | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
+| Column name        | Description                                   | Example                                                           |
+|--------------------|-----------------------------------------------|-------------------------------------------------------------------|
+| `Delimiter`        | Delimiter                                     | `,`                                                               |
+| `Quote`            | Quote character                               | `"`                                                               |
+| `Escape`           | Escape                                        | `\`                                                               |
+| `NewLineDelimiter` | New-line delimiter                            | `\r\n`                                                            |
+| `Comment`          | Comment character                             | `#`                                                               |
+| `SkipRows`         | Number of rows skipped                        | 1                                                                 |
+| `HasHeader`        | Whether the CSV has a header                  | `true`                                                            |
+| `Columns`          | Column types encoded as a `LIST` of `STRUCT`s | `({'name': 'VARCHAR', 'age': 'BIGINT'})`                          |
+| `DateFormat`       | Date format                                   | `%d/%m/%Y`                                                        |
+| `TimestampFormat`  | Timestamp Format                              | `%Y-%m-%dT%H:%M:%S.%f`                                            |
+| `UserArguments`    | Arguments used to invoke `sniff_csv`          | `sample_size = 1000`                                              |
+| `Prompt`           | Prompt ready to be used to read the CSV       | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
 
 ### Prompt
 
@@ -59,8 +60,6 @@ Prompt = FROM read_csv('my_file.csv', auto_detect=false, delim=',', quote='"', e
 Dialect detection works by attempting to parse the samples using the set of considered values. The detected dialect is the dialect that has (1) a consistent number of columns for each row, and (2) the highest number of columns for each row.
 
 The following dialects are considered for automatic dialect detection.
-
-<div class="narrow_table"></div>
 
 <!-- markdownlint-disable MD056 -->
 
@@ -96,7 +95,7 @@ After detecting the dialect, the system will attempt to figure out the types of 
 
 The type detection works by attempting to convert the values in each column to the candidate types. If the conversion is unsuccessful, the candidate type is removed from the set of candidate types for that column. After all samples have been handled – the remaining candidate type with the highest priority is chosen. The default set of candidate types is given below, in order of priority:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   Types   |
 |-----------|
@@ -114,7 +113,7 @@ The set of candidate types that should be considered by the CSV reader can be ex
 
 In addition to the default set of candidate types, other types that may be specified using the `auto_type_candidates` options are:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   Types   |
 |-----------|
@@ -157,7 +156,7 @@ If the ambiguities cannot be resolved by looking at the data the system has a li
 
 The system considers the following formats for dates (`dateformat`). Higher entries are chosen over lower entries in case of ambiguities (i.e., ISO 8601 is preferred over `MM-DD-YYYY`).
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | dateformat |
 |------------|
@@ -171,7 +170,7 @@ The system considers the following formats for dates (`dateformat`). Higher entr
 
 The system considers the following formats for timestamps (`timestampformat`). Higher entries are chosen over lower entries in case of ambiguities.
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   timestampformat    |
 |----------------------|

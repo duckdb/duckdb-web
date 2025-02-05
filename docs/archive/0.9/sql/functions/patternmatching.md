@@ -54,7 +54,6 @@ Additionally, the function `like_escape` has the same functionality as a `LIKE` 
 
 There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance PostgreSQL compatibility.
 
-<div class="narrow_table"></div>
 
 | LIKE-style | PostgreSQL-style |
 |:---|:---|
@@ -84,7 +83,6 @@ Some examples:
 
 There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
 
-<div class="narrow_table"></div>
 
 | SIMILAR TO-style | POSIX-style |
 |:---|:---|
@@ -120,7 +118,6 @@ NOT 'best.txt' GLOB '*.txt'        -- false
 
 Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 
-<div class="narrow_table"></div>
 
 | GLOB-style | Symbolic-style |
 |:---|:---|
@@ -136,7 +133,6 @@ It accepts one parameter: the path to search (which may include glob patterns).
 SELECT * FROM glob('*');
 ```
 
-<div class="narrow_table"></div>
 
 |     file      |
 |---------------|
@@ -177,7 +173,6 @@ regexp_matches('abc', '(?i)A')     -- true
 
 The `regexp_matches` function also supports the following options.
 
-<div class="narrow_table"></div>
 
 | Option | Description |
 |:---|:---|
@@ -198,7 +193,6 @@ regexp_matches('hello\nworld', 'hello.world', 's') -- true
 
 The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve the best results, the `'s'` option should be passed. By default the `RE2` library doesn't match '.' to newline.
 
-<div class="narrow_table"></div>
 
 | Original | Optimized equivalent |
 |:---|:---|

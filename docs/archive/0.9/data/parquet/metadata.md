@@ -17,7 +17,6 @@ SELECT * FROM parquet_metadata('test.parquet');
 
 Below is a table of the columns returned by `parquet_metadata`.
 
-<div class="narrow_table"></div>
 
 |           Field           |   Type    |
 |---------------------------|-----------|
@@ -59,7 +58,6 @@ SELECT * FROM parquet_schema('test.parquet');
 
 Below is a table of the columns returned by `parquet_schema`.
 
-<div class="narrow_table"></div>
 
 |      Field        |   Type    |
 |-------------------|-----------|

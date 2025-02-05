@@ -21,12 +21,6 @@
 	{% else %}
 		{%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
 	{% endif %}
-	
-	<div class="opensearch">
-		<span>Search</span>
-		<span class="mac shortcut">cmd+k</span>
-		<span class="win shortcut">ctrl+k</span>
-	</div>
 
 	<ul class="sidenav">
 		{% if site.data[menudocfile].docsmenu %}

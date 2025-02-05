@@ -14,7 +14,6 @@ Patch versions only ship bugfixes, while minor versions also introduce new featu
 The planned dates of upcoming DuckDB releases are shown below.
 **Please note that these dates are tentative** and DuckDB maintainers may decide to push back release dates to ensure the stability and quality of releases.
 
-<div class="narrow_table"></div>
 <table>
   <thead>
     <tr>
@@ -34,7 +33,6 @@ The planned dates of upcoming DuckDB releases are shown below.
 
 ## Past Releases
 
-<div class="narrow_table"></div>
 
 In the following, we list DuckDB's past releases, including their codename (where applicable).
 Prior to version 0.4.0, all releases, including patch versions, received a codename.

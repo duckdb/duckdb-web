@@ -37,7 +37,6 @@ USE mysqldb;
 
 The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below.
 
-<div class="narrow_table"></div>
 
 | Setting  |   Default    |
 |----------|--------------|

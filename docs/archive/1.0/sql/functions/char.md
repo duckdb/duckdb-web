@@ -855,7 +855,6 @@ SELECT format('I''d rather be {1} than {0}.', 'right', 'happy'); -- I'd rather b
 
 #### Format Specifiers
 
-<div class="narrow_table"></div>
 
 | Specifier | Description | Example |
 |:-|:------|:---|
@@ -966,7 +965,6 @@ I'd rather be happy than right.
 
 #### Format Specifiers
 
-<div class="narrow_table"></div>
 
 | Specifier | Description | Example |
 |:-|:------|:---|

@@ -1,7 +1,7 @@
 ---
 ---
 
-@import 'variables';
+@use 'variables' as *;
 
 /* SYNTAX HIGHLIGHTING COLORS */
 
@@ -97,17 +97,7 @@ th .k {
 	background: transparent;
 }
 
-.landing .highlight :is(.n, .vg){
-	color: #fff;
-}
 
-.landing .highlight :is(.g, .l, .no, .nd, .nx, .py, .w, .nn){
-	color: #aaaaaa;
-}
-
-.landing .highlight :is(.py){
-	color: #976F4D;
-}
 
 html.darkmode, 
 .dark{
@@ -140,7 +130,7 @@ html.darkmode,
 	
 	// type names
 	.highlight :is(.nb, .bp, .vcb){
-		color: #0098dd;
+		color: #10b1fe;
 		font-family: $fontMonoBold;
 	}
 	
@@ -182,6 +172,3 @@ html.darkmode,
 	
 }
 
-.landing .dark .highlight{
-	background-color: transparent;
-}

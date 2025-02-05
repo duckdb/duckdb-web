@@ -138,7 +138,6 @@ Compute relationships and spatial predicates between geometries.
 
 ## Spatial Aggregate Functions
 
-<div class="narrow_table"></div>
 
 | Aggregate functions                       | Implemented with |
 |-------------------------------------------|------------------|
@@ -258,7 +257,7 @@ WHERE tags['highway'] != []
 LIMIT 5;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | kind |   id   |                                                                      tags                                                                                   | refs |        lat         |    lon     | ref_roles | ref_types |
 |------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|------|--------------------|------------|-----------|-----------|

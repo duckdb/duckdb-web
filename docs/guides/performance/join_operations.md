@@ -21,8 +21,9 @@ This way, DuckDB builds a left-deep join tree following the order of `JOIN` clau
 ```sql
 SELECT …
 FROM …
-JOIN … -- this join is performed first
-JOIN … -- this join is performed second
+JOIN …  -- this join is performed first
+JOIN …; -- this join is performed second
+
 ```
 
 Once the query in question has been executed, turn back the optimizers with the following command:

@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Iceberg Extension
-github_repository: https://github.com/duckdb/duckdb_iceberg
+github_repository: https://github.com/duckdb/duckdb-iceberg
 ---
 
 The `iceberg` extension is a loadable extension that implements support for the [Apache Iceberg format](https://iceberg.apache.org/).
@@ -73,7 +73,7 @@ SELECT *
 FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |                             manifest_path                              | manifest_sequence_number | manifest_content | status  | content  |                                     file_path                                      | file_format | record_count |
 |------------------------------------------------------------------------|--------------------------|------------------|---------|----------|------------------------------------------------------------------------------------|-------------|--------------|
@@ -87,7 +87,7 @@ SELECT *
 FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | sequence_number |     snapshot_id     |      timestamp_ms       |                                         manifest_list                                          |
 |-----------------|---------------------|-------------------------|------------------------------------------------------------------------------------------------|

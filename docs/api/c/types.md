@@ -94,6 +94,9 @@ For more information about data chunks, see the [documentation on data chunks]({
 <span class="kt">duckdb_timestamp_struct</span> <a href="#duckdb_from_timestamp"><span class="nf">duckdb_from_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
 <span class="kt">duckdb_timestamp</span> <a href="#duckdb_to_timestamp"><span class="nf">duckdb_to_timestamp</span></a>(<span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts</span>);
 <span class="kt">bool</span> <a href="#duckdb_is_finite_timestamp"><span class="nf">duckdb_is_finite_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
+<span class="kt">bool</span> <a href="#duckdb_is_finite_timestamp_s"><span class="nf">duckdb_is_finite_timestamp_s</span></a>(<span class="nv">duckdb_timestamp_s</span> <span class="nv">ts</span>);
+<span class="kt">bool</span> <a href="#duckdb_is_finite_timestamp_ms"><span class="nf">duckdb_is_finite_timestamp_ms</span></a>(<span class="nv">duckdb_timestamp_ms</span> <span class="nv">ts</span>);
+<span class="kt">bool</span> <a href="#duckdb_is_finite_timestamp_ns"><span class="nf">duckdb_is_finite_timestamp_ns</span></a>(<span class="nv">duckdb_timestamp_ns</span> <span class="nv">ts</span>);
 </code></pre></div></div>
 
 ### Hugeint Helpers
@@ -446,7 +449,70 @@ Test a `duckdb_timestamp` to see if it is a finite value.
 
 ##### Parameters
 
-* `ts`: The timestamp object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
+* `ts`: The duckdb_timestamp object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
+
+##### Return Value
+
+True if the timestamp is finite, false if it is ±infinity.
+
+<br>
+
+#### `duckdb_is_finite_timestamp_s`
+
+Test a `duckdb_timestamp_s` to see if it is a finite value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_timestamp_s</span>(<span class="nv">
+</span>  <span class="nv">duckdb_timestamp_s</span> <span class="nv">ts
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `ts`: The duckdb_timestamp_s object, as obtained from a `DUCKDB_TYPE_TIMESTAMP_S` column.
+
+##### Return Value
+
+True if the timestamp is finite, false if it is ±infinity.
+
+<br>
+
+#### `duckdb_is_finite_timestamp_ms`
+
+Test a `duckdb_timestamp_ms` to see if it is a finite value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_timestamp_ms</span>(<span class="nv">
+</span>  <span class="nv">duckdb_timestamp_ms</span> <span class="nv">ts
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `ts`: The duckdb_timestamp_ms object, as obtained from a `DUCKDB_TYPE_TIMESTAMP_MS` column.
+
+##### Return Value
+
+True if the timestamp is finite, false if it is ±infinity.
+
+<br>
+
+#### `duckdb_is_finite_timestamp_ns`
+
+Test a `duckdb_timestamp_ns` to see if it is a finite value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_timestamp_ns</span>(<span class="nv">
+</span>  <span class="nv">duckdb_timestamp_ns</span> <span class="nv">ts
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `ts`: The duckdb_timestamp_ns object, as obtained from a `DUCKDB_TYPE_TIMESTAMP_NS` column.
 
 ##### Return Value
 

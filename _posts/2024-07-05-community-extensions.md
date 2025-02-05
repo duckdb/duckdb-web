@@ -66,7 +66,7 @@ The `h3` extension’s documentation is available at <https://duckdb.org/communi
 
 ### Developer Experience
 
-From the developer’s perspective, the Community Extensions repository performs the steps required for publishing extensions, including building the extensions for all relevant [platforms]({% link docs/dev/building/platforms.md %}), signing the extension binaries and serving them from the repository.
+From the developer’s perspective, the Community Extensions repository performs the steps required for publishing extensions, including building the extensions for all relevant [platforms]({% link docs/dev/building/overview.md %}#supported-platforms), signing the extension binaries and serving them from the repository.
 
 For the [maintainer of `h3`](https://github.com/isaacbrodsky/), the publication process required performing the following steps:
 
@@ -96,7 +96,6 @@ For the [maintainer of `h3`](https://github.com/isaacbrodsky/), the publication 
 
 To show that it’s feasible to publish extensions, we reached out to a few developers of key extensions. At the time of the publication of this blog post, the DuckDB Community Extensions repository already contains the following extensions.
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |----|------------|

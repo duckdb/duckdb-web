@@ -3,29 +3,42 @@ layout: docu
 title: Client APIs Overview
 ---
 
-DuckDB is an in-process database system and offers client APIs for several languages. These clients support the same DuckDB file format and SQL syntax. We strived to make their APIs follow their host language's conventions.
+DuckDB is an in-process database system and offers client APIs for several languages. These clients support the same DuckDB file format and SQL syntax. Note: DuckDB database files are portable between different clients.
 
-Client APIs:
+| Client API | Maintainer | Support tier |
+|------------|------------|--------------|
+| [C]({% link docs/api/c/overview.md %})                              | DuckDB team                                                                | Primary       |
+| [Command Line Interface (CLI)]({% link docs/api/cli/overview.md %}) | DuckDB team                                                                | Primary       |
+| [Java]({% link docs/api/java.md %})                                 | DuckDB team                                                                | Primary       |
+| [Go]({% link docs/api/go.md %})                                     | DuckDB team and [Mark Boeker](https://github.com/marcboeker)               | Primary       |
+| [Node.js (deprecated)]({% link docs/api/nodejs/overview.md %})      | DuckDB team                                                                | Primary       |
+| [Node.js (node-neo)]({% link docs/api/node_neo/overview.md %})      | Jeff Raymakers and Antony Courtney ([MotherDuck](https://motherduck.com/)) | Primary       |
+| [Python]({% link docs/api/python/overview.md %})                    | DuckDB team                                                                | Primary       |
+| [R]({% link docs/api/r.md %})                                       | DuckDB team and [Kirill Müller](https://github.com/krlmlr)                 | Primary       |
+| [WebAssembly (Wasm)]({% link docs/api/wasm/overview.md %})          | DuckDB team                                                                | Primary       |
+| [ADBC (Arrow)]({% link docs/api/adbc.md %})                         | DuckDB team                                                                | Secondary     |
+| [C++]({% link docs/api/cpp.md %})                                   | DuckDB team                                                                | Secondary     |
+| [C# (.NET)](https://duckdb.net/)                                    | [Giorgi](https://github.com/Giorgi)                                        | Secondary     |
+| [Dart]({% link docs/api/dart.md %})                                 | [TigerEye](https://www.tigereye.com/)                                      | Secondary     |
+| [ODBC]({% link docs/api/odbc/overview.md %})                        | DuckDB team                                                                | Secondary     |
+| [Rust]({% link docs/api/rust.md %})                                 | DuckDB team                                                                | Secondary     |
+| [Julia]({% link docs/api/julia.md %})                               | DuckDB team                                                                | Secondary     |
+| [Swift]({% link docs/api/swift.md %})                               | DuckDB team                                                                | Secondary     |
+| [Common Lisp](https://github.com/ak-coram/cl-duckdb)                | [ak-coram](https://github.com/ak-coram)                                    | Tertiary      |
+| [Crystal](https://github.com/amauryt/crystal-duckdb)                | [amauryt](https://github.com/amauryt)                                      | Tertiary      |
+| [Elixir](https://github.com/AlexR2D2/duckdbex)                      | [AlexR2D2](https://github.com/AlexR2D2/duckdbex)                           | Tertiary      |
+| [Erlang](https://github.com/mmzeeman/educkdb)                       | [MM Zeeman](https://github.com/mmzeeman)                                   | Tertiary      |
+| [Ruby](https://github.com/suketa/ruby-duckdb)                       | [suketa](https://github.com/suketa)                                        | Tertiary      |
+| [Zig](https://github.com/karlseguin/zuckdb.zig)                     | [karlseguin](https://github.com/karlseguin)                                | Tertiary      |
 
-* Standalone [Command Line Interface (CLI)]({% link docs/api/cli/overview.md %}) client
-* [ADBC API]({% link docs/api/adbc.md %})
-* [C]({% link docs/api/c/overview.md %})
-* [C#](https://github.com/Giorgi/DuckDB.NET) by [Giorgi](https://github.com/Giorgi)
-* [C++]({% link docs/api/cpp.md %})
-* [Common Lisp](https://github.com/ak-coram/cl-duckdb) by [ak-coram](https://github.com/ak-coram)
-* [Crystal](https://github.com/amauryt/crystal-duckdb) by [amauryt](https://github.com/amauryt)
-* [Dart]({% link docs/api/dart.md %}) by [TigerEye](https://www.tigereye.com/)
-* [Elixir](https://github.com/AlexR2D2/duckdbex) by [AlexR2D2](https://github.com/AlexR2D2/duckdbex)
-* [Erlang](https://github.com/mmzeeman/educkdb) by [MM Zeeman](https://github.com/mmzeeman)
-* [Go]({% link docs/api/go.md %}) by [marcboeker](https://github.com/marcboeker)
-* [Java]({% link docs/api/java.md %})
-* [Julia]({% link docs/api/julia.md %})
-* [Node.js]({% link docs/api/nodejs/overview.md %})
-* [ODBC API]({% link docs/api/odbc/overview.md %})
-* [Python]({% link docs/api/python/overview.md %})
-* [R]({% link docs/api/r.md %})
-* [Ruby](https://github.com/suketa/ruby-duckdb) by [suketa](https://github.com/suketa)
-* [Rust]({% link docs/api/rust.md %})
-* [Swift]({% link docs/api/swift.md %})
-* [WebAssembly (Wasm)]({% link docs/api/wasm/overview.md %})
-* [Zig](https://github.com/karlseguin/zuckdb.zig) by [karlseguin](https://github.com/karlseguin)
+## Support Tiers
+
+Since there is such a wide variety of clients, the DuckDB team focuses their development effort on the most popular clients.
+To reflect this, we distinguish three tiers of support for clients.
+Primary clients are the first to receive new features and are covered by [community support](https://duckdblabs.com/news/2023/10/02/support-policy).
+Secondary clients receive new features but are not covered by community support.
+Finally, all tertiary clients are maintained by third parties, so there are no feature or support guarantees for them.
+
+> The DuckDB clients listed above are open-source and we welcome community contributions to these libraries.
+> All primary and secondary clients are available for the MIT license.
+> For tertiary clients, please consult the repository for the license.

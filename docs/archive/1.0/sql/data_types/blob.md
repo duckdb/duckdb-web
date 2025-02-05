@@ -5,7 +5,6 @@ layout: docu
 title: Blob Type
 ---
 
-<div class="narrow_table"></div>
 
 | Name | Aliases | Description |
 |:---|:---|:---|

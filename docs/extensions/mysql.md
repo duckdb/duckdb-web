@@ -1,10 +1,10 @@
 ---
 layout: docu
 title: MySQL Extension
-github_repository: https://github.com/duckdb/duckdb_mysql
+github_repository: https://github.com/duckdb/duckdb-mysql
 ---
 
-The [`mysql` extension](https://github.com/duckdb/duckdb_mysql) allows DuckDB to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DuckDB tables, or vice versa.
+The `mysql` extension allows DuckDB to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DuckDB tables, or vice versa.
 
 ## Installing and Loading
 
@@ -33,7 +33,7 @@ USE mysqldb;
 
 The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below. Connection information can also be specified with [environment variables](https://dev.mysql.com/doc/refman/8.3/en/environment-variables.html). If no option is provided explicitly, the MySQL extension tries to read it from an environment variable.
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | Setting     | Default        | Environment variable |
 |-------------|----------------|----------------------|
@@ -51,7 +51,6 @@ The connection string determines the parameters for how to connect to MySQL as a
 | ssl_crl     |                |                      |
 | ssl_crlpath |                |                      |
 | ssl_key     |                |                      |
-
 
 ### Configuring via Secrets
 
@@ -110,13 +109,13 @@ The [`ssl` connection parameters](https://dev.mysql.com/doc/refman/8.4/en/using-
 | Setting     | Description                                                                                                                                      |
 |-------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
 | ssl_mode    | The security state to use for the connection to the server: `disabled, required, verify_ca, verify_identity or preferred` (default: `preferred`) |
-| ssl_ca      | The path name of the Certificate Authority (CA) certificate file.                                                                                |
-| ssl_capath  | The path name of the directory that contains trusted SSL CA certificate files.                                                                   |
-| ssl_cert    | The path name of the client public key certificate file.                                                                                         |
-| ssl_cipher  | The list of permissible ciphers for SSL encryption.                                                                                              |
-| ssl_crl     | The path name of the file containing certificate revocation lists.                                                                               |
-| ssl_crlpath | The path name of the directory that contains files containing certificate revocation lists.                                                      |
-| ssl_key     | The path name of the client private key file.                                                                                                    |
+| ssl_ca      | The path name of the Certificate Authority (CA) certificate file                                                                                 |
+| ssl_capath  | The path name of the directory that contains trusted SSL CA certificate files                                                                    |
+| ssl_cert    | The path name of the client public key certificate file                                                                                          |
+| ssl_cipher  | The list of permissible ciphers for SSL encryption                                                                                               |
+| ssl_crl     | The path name of the file containing certificate revocation lists                                                                                |
+| ssl_crlpath | The path name of the directory that contains files containing certificate revocation lists                                                       |
+| ssl_key     | The path name of the client private key file                                                                                                     |
 
 ### Reading MySQL Tables
 
@@ -126,7 +125,7 @@ The tables in the MySQL database can be read as if they were normal DuckDB table
 SHOW ALL TABLES;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |      name       |
 |-----------------|
@@ -136,7 +135,7 @@ SHOW ALL TABLES;
 SELECT * FROM signed_integers;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |  t   |   s    |    m     |      i      |          b           |
 |-----:|-------:|---------:|------------:|---------------------:|

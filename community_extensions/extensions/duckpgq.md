@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckpgq
   description: Extension that adds support for SQL/PGQ and graph algorithms
-  version: 0.1.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: cwida/duckpgq-extension
-  ref: 5dcec704050b15b12a7894172089dd4a79ca1435
+  ref: bac137217a27d519fbcb4678f024393dc7027f37
 
 docs:
   hello_world: |
@@ -28,11 +28,11 @@ docs:
       VERTEX TABLES (
         Person
       )
-    EDGE TABLES (
-      Person_knows_person 	SOURCE KEY (Person1Id) REFERENCES Person (id)
+      EDGE TABLES (
+        Person_knows_person SOURCE KEY (Person1Id) REFERENCES Person (id)
                             DESTINATION KEY (Person2Id) REFERENCES Person (id)
-      LABEL knows
-    );
+        LABEL knows
+      );
 
     FROM GRAPH_TABLE (snb
       MATCH (a:Person)-[k:knows]->(b:Person)
@@ -58,12 +58,12 @@ docs:
     For more information, please see the [DuckPGQ documentation](https://www.notion.so/duckpgq/b8ac652667964f958bfada1c3e53f1bb?v=3b47a8d44bdf4e0c8b503bf23f1b76f2).
     
 
-    *Disclaimer*: As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
+    *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 86
-extension_star_count_pretty: 86
-extension_download_count: 2201
-extension_download_count_pretty: 2.2k
+extension_star_count: 129
+extension_star_count_pretty: 129
+extension_download_count: 3156
+extension_download_count_pretty: 3.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -111,16 +111,14 @@ LOAD {{ page.extension.name }};
 | iterativelength              | scalar        |             |         |         |
 | iterativelength2             | scalar        |             |         |         |
 | iterativelengthbidirectional | scalar        |             |         |         |
-| local_clustering_coefficient | table         |             |         |         |
 | local_clustering_coefficient | scalar        |             |         |         |
+| local_clustering_coefficient | table         |             |         |         |
 | pagerank                     | scalar        |             |         |         |
 | pagerank                     | table         |             |         |         |
 | reachability                 | scalar        |             |         |         |
 | shortestpath                 | scalar        |             |         |         |
-| weakly_connected_component   | table         |             |         |         |
+| show_property_graphs         | pragma        |             |         |         |
 | weakly_connected_component   | scalar        |             |         |         |
+| weakly_connected_component   | table         |             |         |         |
 
-
-
----
 

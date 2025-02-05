@@ -51,6 +51,7 @@ The following clauses guarantee that the original row order is preserved:
 * `UNION ALL`
 * `WHERE`
 * Window functions with an empty `OVER` clause
+* Common table expressions and table subqueries as long as they only contains the aforementioned components
 
 > Tip `row_number() OVER ()` allows turning the original row order into an explicit column that can be referenced in the operations that don't preserve row order by default. On materialized tables, the `rowid` pseudo-column can be used to the same effect.
 
@@ -62,14 +63,15 @@ The following operations **do not** guarantee that the row order is preserved:
 * `USING SAMPLE`
 * `GROUP BY` (in particular, the output order is undefined and the order in which rows are fed into [order-sensitive aggregate functions](https://duckdb.org/docs/sql/functions/aggregates.html#order-by-clause-in-aggregate-functions) is undefined unless explicitly specified in the aggregate function)
 * `ORDER BY` (specifically, `ORDER BY` may not use a [stable algorithm](https://en.m.wikipedia.org/wiki/Stable_algorithm))
+* Scalar subqueries
 
 ## Insertion Order
 
 By default, the following components preserve insertion order:
 
-* [CSV reader]({% link docs/data/csv/overview.md %}#order-preservation)
-* [Parquet reader]({% link docs/data/parquet/overview.md %}#order-preservation)
-* [JSON reader]({% link docs/data/json/overview.md %}#order-preservation)
+* [CSV reader]({% link docs/data/csv/overview.md %}#order-preservation) (`read_csv` function)
+* [JSON reader]({% link docs/data/json/overview.md %}#order-preservation) (`read_json` function)
+* [Parquet reader]({% link docs/data/parquet/overview.md %}#order-preservation) (`read_parquet` function)
 
 Preservation of insertion order is controlled by the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}).
 This setting is `true` by default, indicating that the order should be preserved.
