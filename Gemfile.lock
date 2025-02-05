@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 4023a0f274a2d8a6d5ac25645dd6731742c28520
+  revision: ea6820a3fa857075d4e8d3c439d3809d6a2f34df
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -27,7 +27,8 @@ GEM
       execjs
     coffee-script-source (1.11.1)
     colorator (1.1.0)
-    concurrent-ruby (1.3.4)
+    concurrent-ruby (1.3.5)
+    csv (3.3.2)
     dnsruby (1.72.3)
       base64 (~> 0.2.0)
       simpleidn (~> 0.2.1)
@@ -64,19 +65,22 @@ GEM
       bigdecimal
       rake (>= 13)
     http_parser.rb (0.8.0)
-    i18n (1.14.6)
+    i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    jekyll (4.3.4)
+    jekyll (4.4.1)
       addressable (~> 2.4)
+      base64 (~> 0.2)
       colorator (~> 1.0)
+      csv (~> 3.0)
       em-websocket (~> 0.5)
       i18n (~> 1.0)
       jekyll-sass-converter (>= 2.0, < 4.0)
       jekyll-watch (~> 2.0)
+      json (~> 2.6)
       kramdown (~> 2.3, >= 2.3.1)
       kramdown-parser-gfm (~> 1.0)
       liquid (~> 4.0)
-      mercenary (>= 0.3.6, < 0.5)
+      mercenary (~> 0.3, >= 0.3.6)
       pathutil (~> 0.9)
       rouge (>= 3.0, < 5.0)
       safe_yaml (~> 1.0)
@@ -111,8 +115,8 @@ GEM
       jekyll (>= 3.3, < 5.0)
     jekyll-relative-links (0.7.0)
       jekyll (>= 3.3, < 5.0)
-    jekyll-sass-converter (3.0.0)
-      sass-embedded (~> 1.54)
+    jekyll-sass-converter (3.1.0)
+      sass-embedded (~> 1.75)
     jekyll-seo-tag (2.8.0)
       jekyll (>= 3.8, < 5.0)
     jekyll-sitemap (1.4.0)
@@ -229,7 +233,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages-health-check (= 1.18.5)
-  jekyll (= 4.3.4)
+  jekyll (= 4.4.1)
   jekyll-avatar (= 0.8.0)
   jekyll-coffeescript (= 1.1.1)
   jekyll-default-layout (= 0.1.5)
@@ -244,7 +248,7 @@ DEPENDENCIES
   jekyll-readme-index (= 0.3.0)
   jekyll-redirect-from (= 0.16.0)
   jekyll-relative-links (= 0.7.0)
-  jekyll-sass-converter (= 3.0.0)
+  jekyll-sass-converter (= 3.1.0)
   jekyll-seo-tag (= 2.8.0)
   jekyll-sitemap (= 1.4.0)
   jekyll-swiss (= 1.0.0)

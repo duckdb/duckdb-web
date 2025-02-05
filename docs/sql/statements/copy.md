@@ -272,7 +272,7 @@ The below options are applicable when writing CSV files.
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use `gzip`, `file.csv.zst` will use `zstd`, and `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
+| `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `DELIM` or `SEP` | The character that is written to separate columns within each row. | `VARCHAR` | `,` |
 | `ESCAPE` | The character that should appear before a character that matches the `quote` value. | `VARCHAR` | `"` |
 | `FORCE_QUOTE` | The list of columns to always add quotes to, even if not required. | `VARCHAR[]` | `[]` |
@@ -281,7 +281,7 @@ The below options are applicable when writing CSV files.
 | `PREFIX` | Prefixes the CSV file with a specified string. This option must be used in conjunction with `SUFFIX` and requires `HEADER` to be set to `false`.| `VARCHAR` | (empty) |
 | `SUFFIX` | Appends a specified string as a suffix to the CSV file. This option must be used in conjunction with `PREFIX` and requires `HEADER` to be set to `false`.| `VARCHAR` | (empty) |
 | `QUOTE` | The quoting character to be used when a data value is quoted. | `VARCHAR` | `"` |
-| `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
+| `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 
 ### Parquet Options
 
@@ -360,8 +360,8 @@ The below options are applicable when writing `JSON` files.
 |:--|:-----|:-|:-|
 | `ARRAY` | Whether to write a JSON array. If `true`, a JSON array of records is written, if `false`, newline-delimited JSON is written | `BOOL` | `false` |
 | `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.json.gz` will use `gzip`, `file.json.zst` will use `zstd`, and `file.json` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
-| `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
-| `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}) | `VARCHAR` | (empty) |
+| `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
+| `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 
 ## Limitations
 

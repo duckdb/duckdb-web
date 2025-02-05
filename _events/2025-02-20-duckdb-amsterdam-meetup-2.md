@@ -27,7 +27,8 @@ We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meet
 | 19:05 | **Building a Postgres Data Warehouse using DuckDB** | Marco Slot _([Crunchy Data](https://www.crunchydata.com/))_ |
 | 19:30 | _Drinks and snacks by [Xebia](https://xebia.com/)_ | |
 
-The venue and the catering are provided by [Xebia](https://xebia.com/).
+The event will be held at Xebia at Wibautstraat 200, 1091 GS Amsterdam ([Apple Maps](https://maps.apple.com/?address=Wibautstraat%20200,%201091%20GS%20Amsterdam,%20Netherlands&auid=2043309577279080291&ll=52.352271,4.912916&lsp=9902&q=Xebia%20Netherlands%20BV&t=m), [Google Maps](https://maps.app.goo.gl/oA4HEGG6E21yXXKi6)).
+The catering is provided by Xebia.
 
 ## Registration Process
 

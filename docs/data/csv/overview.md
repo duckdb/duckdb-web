@@ -92,7 +92,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `auto_type_candidates` | Types that the sniffer uses when detecting column types. The `VARCHAR` type is always included as a fallback option. See [example](#auto_type_candidates-details). | `TYPE[]` | [default types](#auto_type_candidates-details) |
 | `buffer_size` | Size of the buffers used to read files, in bytes. Must be large enough to hold four lines and can significantly impact performance. | `BIGINT` | `16 * max_line_size` |
 | `columns` | Column names and types, as a struct (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). Using this option disables auto detection. | `STRUCT` | (empty) |
-| `comment` | Character used to initiate comments. Lines starting with a comment character (optionally preceded by space characters) are completely ignored; other lines containing a comment character are parsed only up to that point. | `VARCHAR` | `` |
+| `comment` | Character used to initiate comments. Lines starting with a comment character (optionally preceded by space characters) are completely ignored; other lines containing a comment character are parsed only up to that point. | `VARCHAR` | (empty) |
 | `compression` | Method used to compress CSV files. By default this is detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `dateformat` | [Date format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing dates. | `VARCHAR` | (empty) |
 | `date_format` | Alias for `dateformat`; only available in the `COPY` statement. | `VARCHAR` | (empty) |
@@ -117,16 +117,15 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `rejects_scan` | Name of the [temporary table where information on faulty scans is stored]({% link docs/data/csv/reading_faulty_csv_files.md %}#reject-scans). | `VARCHAR` | `reject_scans` |
 | `rejects_table` | Name of the [temporary table where information on faulty lines is stored]({% link docs/data/csv/reading_faulty_csv_files.md %}#reject-errors). | `VARCHAR` | `reject_errors` |
 | `rejects_limit` | Upper limit on the number of faulty lines per file that are recorded in the rejects table. Setting this to `0` means that no limit is applied. | `BIGINT` | `0` |
-| `strict_mode` | Enforces the strictness level of the CSV Reader. When set to `true`, the parser will throw an error upon encountering any issues. When set to `false`, the parser will attempt to read structurally incorrect files. It is important to note that reading structurally incorrect files can cause ambiguity; therefore, this option should be used with caution.| `BOOL` | `true` |
 | `sample_size` | Number of sample lines for [auto detection of parameters]({% link docs/data/csv/auto_detection.md %}). | `BIGINT` | 20480 |
 | `sep` | Delimiter character used to separate columns within each line. Alias for `delim`. | `VARCHAR` | `,` |
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
 | `store_rejects` | Skip any lines with errors and store them in the rejects table. | `BOOL` | `false` |
+| `strict_mode` | Enforces the strictness level of the CSV Reader. When set to `true`, the parser will throw an error upon encountering any issues. When set to `false`, the parser will attempt to read structurally incorrect files. It is important to note that reading structurally incorrect files can cause ambiguity; therefore, this option should be used with caution. | `BOOL` | `true` |
 | `timestampformat` | [Timestamp format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing timestamps. | `VARCHAR` | (empty) |
 | `timestamp_format` | Alias for `timestampformat`; only available in the `COPY` statement. | `VARCHAR` | (empty) |
 | `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). See [example]({% link docs/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
 | `union_by_name` | Align columns from different files [by column name]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name) instead of position. Using this option increases memory consumption. | `BOOL` | `false` |
-
 
 > Tip We recommend the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert files with encodings not supported by `read_csv` to UTF-8. For example:
 >  ```bash

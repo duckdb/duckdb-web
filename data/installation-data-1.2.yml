@@ -1,0 +1,353 @@
+- variant: stable
+  environment: Command line
+  platform: Windows
+  download_method: Package manager
+  architecture: universal
+  has_sha_512_hash: 'no'
+  installation_code: winget install DuckDB.cli
+  note: >-
+    Each DuckDB client is installed without relying on any other DuckDB clients.
+
+    For example, the Python library can use a different version than the CLI
+    client.
+
+    Therefore, they need to be updated separately.
+  usage_example: duckdb
+- variant: stable
+  environment: Command line
+  platform: Windows
+  download_method: Direct download
+  architecture: x86_64
+  has_sha_512_hash: 'yes'
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-windows-amd64.zip
+  note: >-
+    Each DuckDB client is installed without relying on any other DuckDB clients.
+
+    For example, the Python library can use a different version than the CLI
+    client.
+
+    Therefore, they need to be updated separately.
+  usage_example: ./duckdb
+- variant: stable
+  environment: Command line
+  platform: Windows
+  download_method: Direct download
+  architecture: arm64
+  has_sha_512_hash: 'yes'
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-windows-arm64.zip
+  note: >-
+    Each DuckDB client is installed without relying on any other DuckDB clients.
+
+    For example, the Python library can use a different version than the CLI
+    client.
+
+    Therefore, they need to be updated separately.
+  usage_example: ./duckdb
+- variant: stable
+  environment: Command line
+  platform: macOS
+  download_method: Package manager
+  architecture: universal
+  has_sha_512_hash: 'no'
+  installation_code: brew install duckdb
+  note: >-
+    Each DuckDB client is installed without relying on any other DuckDB clients.
+
+    For example, the Python library can use a different version than the CLI
+    client.
+
+    Therefore, they need to be updated separately.
+  usage_example: duckdb
+- variant: stable
+  environment: Command line
+  platform: macOS
+  download_method: Direct download
+  architecture: universal
+  has_sha_512_hash: 'yes'
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-osx-universal.zip
+  installation_code: >-
+    curl --fail --location --progress-bar --output duckdb_cli-osx-universal.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-osx-universal.zip &&
+    unzip duckdb_cli-osx-universal.zip
+  usage_example: ./duckdb
+- variant: stable
+  environment: Command line
+  platform: Linux
+  download_method: Direct download
+  architecture: x86_64
+  has_sha_512_hash: 'yes'
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip
+  installation_code: >-
+    curl --fail --location --progress-bar --output duckdb_cli-linux-amd64.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip &&
+    unzip duckdb_cli-linux-amd64.zip
+  usage_example: ./duckdb
+- variant: stable
+  environment: Command line
+  platform: Linux
+  download_method: Direct download
+  architecture: arm64
+  has_sha_512_hash: 'yes'
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-aarch64.zip
+  installation_code: >-
+    curl --fail --location --progress-bar --output duckdb_cli-linux-aarch64.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-aarch64.zip &&
+    unzip duckdb_cli-linux-aarch64.zip
+  usage_example: ./duckdb
+- variant: stable
+  environment: Python
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  has_sha_512_hash: 'no'
+  installation_code: pip install duckdb --upgrade
+  note: >-
+    The DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+- variant: stable
+  environment: R
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  has_sha_512_hash: 'no'
+  installation_code: install.packages("duckdb")
+  note: >-
+    On aarch64, if the DuckDB R package does not successfully compile, you
+    may need to change your R environment's Make variables.
+- variant: stable
+  environment: Java
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  has_sha_512_hash: 'no'
+  installation_code: >-
+    <dependency>
+        <groupId>org.duckdb</groupId>
+        <artifactId>duckdb_jdbc</artifactId>
+        <version>1.2.0</version>
+    </dependency>
+- variant: stable
+  environment: Java
+  platform: all
+  download_method: Direct download
+  architecture: universal
+  has_sha_512_hash: 'yes'
+  link: https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/1.2.0/duckdb_jdbc-1.2.0.jar
+- variant: stable
+  environment: Node.js
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  installation_code: npm install @duckdb/node-api
+- variant: stable
+  environment: Rust
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  installation_code: cargo add duckdb --features bundled
+- variant: stable
+  environment: Go
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  installation_code: go get github.com/marcboeker/go-duckdb
+- variant: stable
+  environment: C/C++
+  platform: Windows
+  download_method: Direct download
+  architecture: x86_64
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-windows-amd64.zip
+- variant: stable
+  environment: C/C++
+  platform: Windows
+  download_method: Direct download
+  architecture: arm64
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-windows-arm64.zip
+- variant: stable
+  environment: C/C++
+  platform: macOS
+  download_method: Direct download
+  architecture: universal
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-osx-universal.zip
+- variant: stable
+  environment: C/C++
+  platform: Linux
+  download_method: Direct download
+  architecture: x86_64
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-amd64.zip
+- variant: stable
+  environment: C/C++
+  platform: Linux
+  download_method: Direct download
+  architecture: arm64
+  link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-aarch64.zip
+- variant: stable
+  environment: ODBC
+  platform: Windows
+  download_method: Direct download
+  architecture: x86_64
+  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.1.3/duckdb_odbc-windows-amd64.zip
+- variant: stable
+  environment: ODBC
+  platform: macOS
+  download_method: Direct download
+  architecture: universal
+  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.1.3/duckdb_odbc-windows-amd64.zip
+- variant: stable
+  environment: ODBC
+  platform: Linux
+  download_method: Direct download
+  architecture: x86_64
+  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.1.3/duckdb_odbc-windows-amd64.zip
+- variant: stable
+  environment: ODBC
+  platform: Linux
+  download_method: Direct download
+  architecture: arm64
+  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.2.0/duckdb_odbc-windows-amd64.zip
+- variant: nightly
+  environment: Command line
+  platform: Windows
+  download_method: Direct download
+  architecture: universal
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
+  note: >-
+    Each DuckDB client is installed without relying on any other DuckDB clients.
+
+    For example, the Python library can use a different version than the CLI
+    client.
+
+    Therefore, they need to be updated separately.
+  usage_example: ./duckdb
+- variant: nightly
+  environment: Command line
+  platform: macOS
+  download_method: Direct download
+  architecture: universal
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
+  installation_code: >-
+    curl --fail --location --progress-bar --output duckdb-binaries-osx.zip https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip &&
+    unzip duckdb-binaries-osx.zip &&
+    unzip duckdb_cli-osx-universal.zip
+  usage_example: ./duckdb
+- variant: nightly
+  environment: Command line
+  platform: Linux
+  download_method: Direct download
+  architecture: x86_64
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip'
+  installation_code: >-
+    curl --fail --location --progress-bar --output duckdb-binaries-linux.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip &&
+    unzip duckdb-binaries-linux.zip &&
+    unzip duckdb_cli-linux-amd64.zip
+  usage_example: ./duckdb
+- variant: nightly
+  environment: Command line
+  platform: Linux
+  download_method: Direct download
+  architecture: arm64
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip'
+  installation_code: >-
+    curl --fail --location --progress-bar --output duckdb-binaries-linux-aarch64.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip &&
+    unzip duckdb-binaries-linux-aarch64.zip &&
+    unzip duckdb_cli-linux-aarch64.zip
+  usage_example: ./duckdb
+- variant: nightly
+  environment: Python
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  installation_code: pip install duckdb --pre --upgrade
+  note: >-
+    The DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+- variant: nightly
+  environment: R
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  installation_code: >-
+    install.packages("duckdb", repos=c("https://duckdb.r-universe.dev",
+    "https://cloud.r-project.org"))
+  note: >-
+    On aarch64, if the DuckDB R package does not successfully compile, you
+    may need to change your R environment's Make variables.
+- variant: nightly
+  environment: Java
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  installation_code: >-
+    <dependency>
+        <groupId>org.duckdb</groupId>
+        <artifactId>duckdb_jdbc</artifactId>
+        <version>1.2.0-SNAPSHOT</version>
+    </dependency>
+
+    <repositories>
+        <repository>
+            <id>oss-sonatype</id>
+            <name>oss-sonatype</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+  note: 'Nightly Java builds are served through the Sonatype snapshots repository.'
+- variant: nightly
+  environment: Java
+  platform: all
+  download_method: Direct download
+  architecture: universal
+  link: 'https://artifacts.duckdb.org/duckdb-java/latest/java-jars.zip'
+- variant: nightly
+  environment: Node.js
+  platform: all
+  download_method: Package manager
+  architecture: universal
+  installation_code: npm install duckdb@next
+  note: The nightly release of the Node.js driver installs the old Node.js driver and not DuckDB Node Neo. For the Node Neo driver, the nightly release is currently not available.
+- variant: nightly
+  environment: C/C++
+  platform: Windows
+  download_method: Direct download
+  architecture: universal
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
+- variant: nightly
+  environment: C/C++
+  platform: macOS
+  download_method: Direct download
+  architecture: universal
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
+- variant: nightly
+  environment: C/C++
+  platform: Linux
+  download_method: Direct download
+  architecture: x86_64
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip'
+- variant: nightly
+  environment: C/C++
+  platform: Linux
+  download_method: Direct download
+  architecture: arm64
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip'
+- variant: nightly
+  environment: ODBC
+  platform: Windows
+  download_method: Direct download
+  architecture: x86_64
+  link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip'
+- variant: nightly
+  environment: ODBC
+  platform: macOS
+  download_method: Direct download
+  architecture: universal
+  link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-osx-universal.zip'
+- variant: nightly
+  environment: ODBC
+  platform: Linux
+  download_method: Direct download
+  architecture: x86_64
+  link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip'
+- variant: nightly
+  environment: ODBC
+  platform: Linux
+  download_method: Direct download
+  architecture: arm64
+  link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-aarch64.zip'

@@ -20,10 +20,10 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. http://example.com
 # Set current version of DuckDB
-currentshortduckdbversion: "1.1"
-currentduckdbversion: 1.1.3
-currentduckdbhash: "19864453f7"
-currentsnapshotversion: 1.1.4-dev
+currentshortduckdbversion: "1.2"
+currentduckdbversion: 1.2.0
+currentduckdbhash: "5f5512b827"
+currentsnapshotversion: 1.2.0-dev
 currentduckdbodbcversion: 1.1.0
 # Java
 currentjavaversion: 1.1.3
