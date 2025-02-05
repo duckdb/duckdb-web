@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: ea6820a3fa857075d4e8d3c439d3809d6a2f34df
+  revision: a867ab46a057b48579e1c840a8bd23df54cd9456
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -45,9 +45,7 @@ GEM
       logger
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
-    ffi (1.17.1-arm64-darwin)
-    ffi (1.17.1-x86_64-darwin)
-    ffi (1.17.1-x86_64-linux-gnu)
+    ffi (1.17.1)
     forwardable-extended (2.6.0)
     github-pages-health-check (1.18.5)
       addressable (~> 2.3)
@@ -180,13 +178,11 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.6.5)
     mercenary (0.4.0)
+    mini_portile2 (2.8.8)
     net-http (0.6.0)
       uri
-    nokogiri (1.18.1-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.18.1-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.18.1-x86_64-linux-gnu)
+    nokogiri (1.18.2)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     octokit (4.25.1)
       faraday (>= 1, < 3)
@@ -206,10 +202,6 @@ GEM
     sass-embedded (1.83.4)
       google-protobuf (~> 4.29)
       rake (>= 13)
-    sass-embedded (1.83.4-arm64-darwin)
-      google-protobuf (~> 4.29)
-    sass-embedded (1.83.4-x86_64-darwin)
-      google-protobuf (~> 4.29)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
