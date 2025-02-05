@@ -2,7 +2,7 @@
   environment: Command line
   platform: Windows
   download_method: Package manager
-  architecture: x86_64
+  architecture: universal
   has_sha_512_hash: 'no'
   installation_code: winget install DuckDB.cli
   note: >-
@@ -332,22 +332,22 @@
   platform: Windows
   download_method: Direct download
   architecture: x86_64
-  link: 'https://artifacts.duckdb.org/duckdb-odbc/latest/odbc-windows-amd64.zip'
+  link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip'
 - variant: nightly
   environment: ODBC
   platform: macOS
   download_method: Direct download
   architecture: universal
-  link: 'https://artifacts.duckdb.org/duckdb-odbc/latest/odbc-osx-universal.zip'
+  link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-osx-universal.zip'
 - variant: nightly
   environment: ODBC
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  link: 'https://artifacts.duckdb.org/duckdb-odbc/latest/odbc-linux-amd64.zip'
+  link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip'
 - variant: nightly
   environment: ODBC
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  link: 'https://artifacts.duckdb.org/duckdb-odbc/latest/odbc-linux-aarch64.zip'
+  link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-aarch64.zip'

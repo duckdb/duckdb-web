@@ -11,20 +11,28 @@ The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` and `UHUGEINT` store wh
 
 <div class="center_aligned_header_table"></div>
 
-| Name        | Aliases                          |                                      Min |                                     Max |
-| :---------- | :------------------------------- | ---------------------------------------: | --------------------------------------: |
-| `TINYINT`   | `INT1`                           |                                     -128 |                                     127 |
-| `SMALLINT`  | `INT2`, `INT16` `SHORT`          |                                   -32768 |                                   32767 |
-| `INTEGER`   | `INT4`, `INT32`, `INT`, `SIGNED` |                              -2147483648 |                              2147483647 |
-| `BIGINT`    | `INT8`, `INT64` `LONG`           |                     -9223372036854775808 |                     9223372036854775807 |
-| `HUGEINT`   | `INT128`                         | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727 |
-| `UTINYINT`  | -                                |                                        0 |                                     255 |
-| `USMALLINT` | -                                |                                        0 |                                   65535 |
-| `UINTEGER`  | -                                |                                        0 |                              4294967295 |
-| `UBIGINT`   | -                                |                                        0 |                    18446744073709551615 |
-| `UHUGEINT`  | -                                |                                        0 | 340282366920938463463374607431768211455 |
+| Name        | Aliases                          |     Min |       Max | Size in bytes |
+| :---------- | :------------------------------- | ------: | --------: | ------------: |
+| `TINYINT`   | `INT1`                           |   - 2^7 |   2^7 - 1 |             1 |
+| `SMALLINT`  | `INT2`, `INT16` `SHORT`          |  - 2^15 |  2^15 - 1 |             2 |
+| `INTEGER`   | `INT4`, `INT32`, `INT`, `SIGNED` |  - 2^31 |  2^31 - 1 |             4 |
+| `BIGINT`    | `INT8`, `INT64` `LONG`           |  - 2^63 |  2^63 - 1 |             8 |
+| `HUGEINT`   | `INT128`                         | - 2^127 | 2^127 - 1 |            16 |
+| `UTINYINT`  | -                                |       0 |   2^8 - 1 |             1 |
+| `USMALLINT` | -                                |       0 |  2^16 - 1 |             2 |
+| `UINTEGER`  | -                                |       0 |  2^32 - 1 |             4 |
+| `UBIGINT`   | -                                |       0 |  2^64 - 1 |             8 |
+| `UHUGEINT`  | -                                |       0 | 2^128 - 1 |            16 |
 
 The type integer is the common choice, as it offers the best balance between range, storage size, and performance. The `SMALLINT` type is generally only used if disk space is at a premium. The `BIGINT` and `HUGEINT` types are designed to be used when the range of the integer type is insufficient.
+
+## Variable Integer
+
+The previously mentioned integer types all have in common that the numbers in the minimum and maximum range all have the same storage size, `UTINYINT` is 1 byte, `SMALLINT` is 2 bytes, etc.
+But sometimes you need numbers that are even bigger than what is supported by a `HUGEINT`! For these situations the `VARINT` type can come in handy, as the `VARINT` type has a *much* bigger limit (the value can consist of up to 1,262,612 digits).
+The minimum storage size for a `VARINT` is 4 bytes, every digit takes up an extra bit, rounded up to 8 (12 digits take 12 bits, rounded up to 16, becomes two extra bytes).
+
+Both negative and positive values are supported by the `VARINT` type.
 
 ## Fixed-Point Decimals
 

@@ -15,7 +15,14 @@ The values of configuration options can be queried via the [`current_setting()` 
 
 ```sql
 SELECT current_setting('memory_limit') AS memlimit;
-SELECT value AS memlimit FROM duckdb_settings() WHERE name = 'memory_limit';
+```
+
+Or:
+
+```sql
+SELECT value AS memlimit
+FROM duckdb_settings()
+WHERE name = 'memory_limit';
 ```
 
 ## Examples

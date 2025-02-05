@@ -42,12 +42,15 @@ Note that larger-than-memory workloads can be processed both in persistent mode 
 
 DuckDB's disk-based mode is designed to work best with SSD and NVMe disks. While HDDs are supported, they will result in low performance, especially for write operations.
 
+Counter-intuitively, using a disk-based DuckDB instance can be faster than an in-memory instance due to compression.
+Read more in the [“How to Tune Workloads” page]({% link docs/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
+
 ### Network-Attached Disks
 
 **Cloud disks.** DuckDB runs well on network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) for both read-only and read-write workloads.
 
 **Network-attached storage.**
-Network-attached storage can serve DuckdB for read-only workloads.
+Network-attached storage can serve DuckDB for read-only workloads.
 However, _it is not recommended to run DuckDB in read-write mode on network-attached storage (NAS)._
 These setups include [NFS](https://en.wikipedia.org/wiki/Network_File_System),
 network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) and

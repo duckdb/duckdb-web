@@ -17,20 +17,26 @@ INSTALL vss;
 LOAD vss;
 
 CREATE TABLE my_vector_table (vec FLOAT[3]);
-INSERT INTO my_vector_table SELECT array_value(a, b, c) FROM range(1, 10) ra(a), range(1, 10) rb(b), range(1, 10) rc(c);
+INSERT INTO my_vector_table
+    SELECT array_value(a, b, c)
+    FROM range(1, 10) ra(a), range(1, 10) rb(b), range(1, 10) rc(c);
 CREATE INDEX my_hnsw_index ON my_vector_table USING HNSW (vec);
 ```
 
 The index will then be used to accelerate queries that use a `ORDER BY` clause evaluating one of the supported distance metric functions against the indexed columns and a constant vector, followed by a `LIMIT` clause. For example:
 
 ```sql
-SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3]) LIMIT 3;
+SELECT *
+FROM my_vector_table
+ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3])
+LIMIT 3;
 ```
 
 Additionally, the overloaded `min_by(col, arg, n)` can also be accelerated with the `HNSW` index if the `arg` argument is a matching distance metric function. This can be used to do quick one-shot nearest neighbor searches. For example, to get the top 3 rows with the closest vectors to `[1, 2, 3]`:
 
 ```sql
-SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3) AS result FROM my_vector_table;
+SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3) AS result
+FROM my_vector_table;
 ---- [{'vec': [1.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}, {'vec': [2.0, 2.0, 3.0]}]
 ```
 
@@ -39,7 +45,11 @@ Note how we pass the table name as the first argument to `min_by` to return a st
 We can verify that the index is being used by checking the `EXPLAIN` output and looking for the `HNSW_INDEX_SCAN` node in the plan:
 
 ```sql
-EXPLAIN SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3]) LIMIT 3;
+EXPLAIN
+SELECT *
+FROM my_vector_table
+ORDER BY array_distance(vec, [1, 2, 3]::FLOAT[3])
+LIMIT 3;
 ```
 
 ```text
@@ -133,12 +143,15 @@ These functions can be used as follows:
 CREATE TABLE haystack (id int, vec FLOAT[3]);
 CREATE TABLE needle (search_vec FLOAT[3]);
 
-INSERT INTO haystack SELECT row_number() OVER (), array_value(a,b,c)
-FROM range(1, 10) ra(a), range(1, 10) rb(b), range(1, 10) rc(c);
+INSERT INTO haystack
+    SELECT row_number() OVER (), array_value(a,b,c)
+    FROM range(1, 10) ra(a), range(1, 10) rb(b), range(1, 10) rc(c);
 
-INSERT INTO needle VALUES ([5, 5, 5]), ([1, 1, 1]);
+INSERT INTO needle
+    VALUES ([5, 5, 5]), ([1, 1, 1]);
 
-SELECT * FROM vss_join(needle, haystack, search_vec, vec, 3) AS res;
+SELECT *
+FROM vss_join(needle, haystack, search_vec, vec, 3) res;
 ```
 
 ```text
@@ -161,7 +174,8 @@ SELECT * FROM vss_join(needle, haystack, search_vec, vec, 3) AS res;
 -- Note that this requires us to specify the left table first, and then
 -- the vss_match macro which references the search column from the left
 -- table (in this case, `search_vec`).
-SELECT * FROM needle, vss_match(haystack, search_vec, vec, 3) AS res;
+SELECT *
+FROM needle, vss_match(haystack, search_vec, vec, 3) res;
 ```
 
 ```text

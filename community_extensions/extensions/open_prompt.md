@@ -104,10 +104,10 @@ docs:
     ```
 
 
-extension_star_count: 29
-extension_star_count_pretty: 29
-extension_download_count: 391
-extension_download_count_pretty: 391
+extension_star_count: 33
+extension_star_count_pretty: 33
+extension_download_count: 426
+extension_download_count_pretty: 426
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---

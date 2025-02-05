@@ -10,7 +10,8 @@ On Linux, install the required packages with the package manager of your distrib
 ### Ubuntu and Debian
 
 ```batch
-sudo apt-get update && sudo apt-get install -y git g++ cmake ninja-build libssl-dev
+sudo apt-get update
+sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 ### Fedora, CentOS, and Red Hat
@@ -45,6 +46,14 @@ build/release/duckdb
 ```
 
 For different build configurations (`debug`, `relassert`, etc.), please consult the [Build Configurations page]({% link docs/dev/building/build_configuration.md %}).
+
+### Building Using Extension Flags
+
+To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
+
+```batch
+CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
+```
 
 ## Troubleshooting
 
@@ -83,12 +92,12 @@ CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake
 **Solution:**
 Install the `libssl-dev` library.
 
-```bash
+```batch
 sudo apt-get install -y libssl-dev
 ```
 
 Then, build with:
 
-```bash
+```batch
 GEN=ninja CORE_EXTENSIONS="httpfs" make
 ```

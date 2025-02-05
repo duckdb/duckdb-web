@@ -39,10 +39,10 @@ docs:
     More information on the supported scanners and functions can be found on Scrooge's [wiki page](https://github.com/pdet/Scrooge-McDuck/wiki).
     You can also find a ROI example of Ether on the [following blogpost](https://pdet-blog.github.io/2024/06/30/ethereum.html)
 
-extension_star_count: 135
-extension_star_count_pretty: 135
-extension_download_count: 397
-extension_download_count_pretty: 397
+extension_star_count: 136
+extension_star_count_pretty: 136
+extension_download_count: 430
+extension_download_count_pretty: 430
 image: '/images/community_extensions/social_preview/preview_community_extension_scrooge.png'
 layout: community_extension_doc
 ---

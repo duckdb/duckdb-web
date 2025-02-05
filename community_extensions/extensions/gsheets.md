@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: gsheets
   description: Read and write Google Sheets using SQL
-  version: 0.0.4
+  version: 0.0.5
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: evidence-dev/duckdb_gsheets
-  ref: c4a8413fd1d1ca63cbe37db66a7676fe677da456
+  ref: 1cdc038c53e9a0d564c5ebc0b510763e7821d6e5
 
 docs:
   hello_world: |
@@ -44,6 +44,9 @@ docs:
     -- Read a spreadsheet with no header row
     SELECT * FROM read_gsheet('11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8', headers=false);
     
+    -- Read all values in as varchar, skipping type inference
+    SELECT * FROM read_gsheet('11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8', all_varchar=true);
+
     -- Read a sheet other than the first sheet using the sheet name
     SELECT * FROM read_gsheet('11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8', sheet='Sheet2');
     
@@ -63,10 +66,10 @@ docs:
     The DuckDB GSheets Extension allows reading and writing of data in Google Sheets from DuckDB.
     For detailed setup and usage instructions, visit the docs at [duckdb-gsheets.com](https://duckdb-gsheets.com).
 
-extension_star_count: 201
-extension_star_count_pretty: 201
-extension_download_count: 1417
-extension_download_count_pretty: 1.4k
+extension_star_count: 209
+extension_star_count_pretty: 209
+extension_download_count: 2139
+extension_download_count_pretty: 2.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_gsheets.png'
 layout: community_extension_doc
 ---

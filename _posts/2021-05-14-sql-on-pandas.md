@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title: "Efficient SQL on Pandas with DuckDB"
 author: Mark Raasveldt and Hannes Mühleisen
