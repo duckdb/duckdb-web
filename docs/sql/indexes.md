@@ -16,7 +16,7 @@ A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known a
 
 An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. ART indexes are automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
 
-> Warning ART indexes must currently be able to fit in-memory. Avoid creating ART indexes if the index does not fit in memory.
+> Warning ART indexes must currently be able to fit in-memory during index creation. Avoid creating ART indexes if the index does not fit in memory during index creation.
 
 ### Indexes Defined by Extensions
 
@@ -37,43 +37,30 @@ ART indexes create a secondary copy of the data in a second location – this co
 
 > As expected, indexes have a strong effect on performance, slowing down loading and updates, but speeding up certain queries. Please consult the [Performance Guide]({% link docs/guides/performance/indexing.md %}) for details.
 
-### Updates Become Deletes and Inserts
+### Constraint Checking in `UPDATE` Statements
 
-When an update statement is executed on a column that is present in an index, the statement is transformed into a *delete* of the original row followed by an *insert*.
-This has certain performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
+`UPDATE` statements on indexed columns are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
+This rewrite has performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
-### Over-Eager Unique Constraint Checking
+Additionally, it causes the following constraint checking limitation of `UPDATE` statements. The same limitation exists in other DBMSs, like postgres.
 
-Due to the presence of transactions, data can only be removed from the index after (1) the transaction that performed the delete is committed, and (2) no further transactions exist that refer to the old entry still present in the index. As a result of this – transactions that perform *deletions followed by insertions* may trigger unexpected unique constraint violations, as the deleted tuple has not actually been removed from the index yet. For example:
-
-```sql
-CREATE TABLE students (id INTEGER, name VARCHAR);
-INSERT INTO students VALUES (1, 'John Doe');
-CREATE UNIQUE INDEX students_id ON students (id);
-
-BEGIN; -- start transaction
-DELETE FROM students WHERE id = 1;
-INSERT INTO students VALUES (1, 'Jane Doe');
-```
-
-The last statement fails with the following error:
-
-```console
-Constraint Error: Duplicate key "id: 1" violates unique constraint. If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
-```
-
-This, combined with the fact that updates are turned into deletions and insertions within the same transaction, means that updating rows in the presence of unique or primary key constraints can often lead to unexpected unique constraint violations. For example, in the following query, `SET id = 1` causes a `Constraint Error` to occur.
+In the example below, note how the number of rows exceeds DuckDB's standard vector size, which is 2048.
+The `UPDATE` statement is rewritten into a `DELETE`, followed by an `INSERT`.
+This rewrite happens per chunk of data (2048 rows) moving through DuckDB's processing pipeline.
+When updating `i = 2047` to `i = 2048`, we do not yet know that 2048 becomes 2049, and so forth.
+That is because we have not yet seen that chunk.
+Thus, we throw a constraint violation.
 
 ```sql
-CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
-INSERT INTO students VALUES (1, 'John Doe');
-
-UPDATE students SET id = 1 WHERE id = 1;
+CREATE TABLE my_table (i INT PRIMARY KEY);
+INSERT INTO my_table SELECT range FROM range(3_000);
+UPDATE my_table SET i = i + 1;
 ```
 
-```console
-Constraint Error: Duplicate key "id: 1" violates primary key constraint.
-If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+```sql
+Constraint Error:
+Duplicate key "i: 2048" violates primary key constraint.
 ```
 
-Currently, this is an expected limitation of DuckDB – although we aim to resolve this in the future.
+A workaround is to split the `UPDATE` into a `DELETE ... RETURNING ...` followed by an `INSERT`.
+Both statements should be run inside a transaction via `BEGIN`, and eventually `COMMIT`.
