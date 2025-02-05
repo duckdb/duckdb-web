@@ -66,7 +66,7 @@ This shows the storage versions:
 
 This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
 
-To convert from the new format to the old format, use the following sequence in DuckDB v1.2.0:
+To convert from the new format to the old format for compatibility, use the following sequence in DuckDB v1.2.0:
 
 ```sql
 ATTACH 'file1.db';
