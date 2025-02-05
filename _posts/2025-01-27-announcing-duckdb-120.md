@@ -166,12 +166,12 @@ Previously, DuckDB was limited to CSV files with rows of up to 8 MB. The new ver
 DuckDB now supports writing many more types using dictionary encoding. This should reduce file size in some cases. DuckDB is now also able to read and write Parquet Bloom filters. Bloom filters are small indexing data structures that can be used to exclude row groups if a filter is set. This is particularly useful for often-repeated but unordered data (e.g., categorical values). A separate blog post will follow.
 
 [**Delta binary packed compression for Parquet.**](https://github.com/duckdb/duckdb/pull/14257)
-DuckDB now supports the `DELTA_BINARY_PACKED` compression as well as the `DELTA_LENGTH_BYTE_ARRAY` and `BYTE_STREAM_SPLIT` options. A few weeks ago, we elaborated on these in a [blog post]({% post_url 2025-01-22-parquet-encodings %}).
+DuckDB now supports the `DELTA_BINARY_PACKED` compression as well as the `DELTA_LENGTH_BYTE_ARRAY` and `BYTE_STREAM_SPLIT` option for Parquet files. A few weeks ago, we elaborated on these in a [blog post]({% post_url 2025-01-22-parquet-encodings %}).
 
 ### CLI Improvements
 
 [**Safe mode.**](https://github.com/duckdb/duckdb/pull/14509)
-The CLI now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/api/cli/dot_commands.md %}). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/operations_manual/securing_duckdb/overview.md %}).
+The DuckDB command line client now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/api/cli/dot_commands.md %}). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/operations_manual/securing_duckdb/overview.md %}).
 
 [**Better autocomplete.**](https://github.com/duckdb/duckdb/pull/15003)
 The autocomplete in CLI now uses a [Parsing Expression Grammar (PEG)]({% post_url 2024-11-22-runtime-extensible-parsers %}) for better autocomplete, as well as improved error messages and suggestions.
@@ -196,7 +196,7 @@ SELECT 100_000_000 AS x, pi() * 1e9 AS y;
 ### Friendly SQL
 
 [**Prefix aliases.**](https://github.com/duckdb/duckdb/pull/14436)
-SQL Expression and table aliases can now be specified before the thing they are referring to (instead of using the well-known `AS`s syntax. This can improve readability in some cases, for example:
+SQL Expression and table aliases can now be specified before the thing they are referring to (instead of using the well-known syntax of using `AS`s). This can improve readability in some cases, for example:
 
 ```sql
 SELECT 
@@ -208,7 +208,8 @@ FROM
 ```
 
 Credit for this idea goes to [Michael Toy](https://www.linkedin.com/in/michael-toy-27b3407/). A separate blog post will follow soon.
-[**RENAME clause**.](https://github.com/duckdb/duckdb/pull/14650)
+
+[**`RENAME` clause**.](https://github.com/duckdb/duckdb/pull/14650)
 DuckDB now supports the `RENAME` clause in `SELECT`. This allows renaming fields emitted by the [`*` expression]({% link docs/sql/expressions/star.md %}):
 
 ```sql
@@ -217,7 +218,7 @@ INSERT INTO integers VALUES (42, 84);
 SELECT * RENAME (col1 AS new_col1) FROM integers;
 ```
 
-[**STAR LIKE**.](https://github.com/duckdb/duckdb/pull/14662) The `LIKE` and `SIMILAR TO` clauses can now be used on `*` expressions as a short-hand for the `COLUMNS` syntax.
+[**Star `LIKE`**.](https://github.com/duckdb/duckdb/pull/14662) The `LIKE` and `SIMILAR TO` clauses can now be used on `*` expressions as a short-hand for the `COLUMNS` syntax.
 
 ```sql
 CREATE TABLE key_val(key VARCHAR, val1 INT, val2 INT);
@@ -248,7 +249,7 @@ It is hard to quantify optimizer improvements, but as a result of these optimiza
 
 ### C API for Extensions
 
-Currently, DuckDB extensions use DuckDB’s internal C++ structures. This - along with some fun linking issues - requires a lock-step development of extensions with mainline DuckDB and constant updates. Starting with this release, we expose a new C-style API for extensions in [`duckdb_extension.h`](https://github.com/duckdb/duckdb/blob/v1.2.0/src/include/duckdb_extension.h). This API can be used to create for example scalar, aggregate or table functions in DuckDB. There are two main advantages of using this API: First, many programming languages (e.g. Go, Rust, even Java) have direct bindings to C APIs, making it rather easy to integrate. Secondly, the C Extension API is stable and backwards-compatible, meaning that extensions that target this API will keep working for new DuckDB versions. We will follow up with a new extension template.
+Currently, DuckDB extensions use DuckDB’s internal C++ structures. This – along with some fun linking issues – requires a lock-step development of extensions with mainline DuckDB and constant updates. Starting with this release, we expose a new C-style API for extensions in [`duckdb_extension.h`](https://github.com/duckdb/duckdb/blob/v1.2.0/src/include/duckdb_extension.h). This API can be used to create for example scalar, aggregate or table functions in DuckDB. There are two main advantages of using this API: first, many programming languages (e.g., Go, Rust and even Java) have direct bindings to C APIs, making it rather easy to integrate. Secondly, the C Extension API is stable and backwards-compatible, meaning that extensions that target this API will keep working for new DuckDB versions. We will follow up with a new extension template.
 
 ### musl Extensions
 
@@ -257,6 +258,6 @@ The [`musl` C library](https://musl.libc.org/) is often used in lightweight setu
 
 ## Final Thoughts
 
-These were a few highlights – but there are many more features and improvements in this release.  There have been **over 5 000 commits** by over 70 contributors since we released 1.1.3. The full - very long - release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
+These were a few highlights – but there are many more features and improvements in this release.  There have been **over 5 000 commits** by over 70 contributors since we released 1.1.3. The full – very long – release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
 
 We would like to thank again our amazing community for using DuckDB, building cool projects on DuckDB and improving DuckDB by providing us feedback. Your contributions truly mean a lot!
