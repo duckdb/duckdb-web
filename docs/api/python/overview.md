@@ -226,7 +226,7 @@ con.load_extension("spatial")
 
 ### Community Extensions
 
-To load [community extensions]({% link docs/extensions/community_extensions.md %}), use `repository="community"` argument to the `install_extension` method.
+To load [community extensions]({% link community_extensions/index.md %}), use `repository="community"` argument to the `install_extension` method.
 
 For example, install and load the `h3` community extension as follows:
 

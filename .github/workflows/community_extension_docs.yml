@@ -13,6 +13,7 @@ jobs:
     needs:
       - generate_docs
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web' }}
     steps:
     - uses: actions/checkout@v4
       with:
@@ -50,4 +51,8 @@ jobs:
              --body "" \
              --title "chore: update Community Extensions docs" \
              --head "auto_update_community_extensions_docs" \
-             --base "main"
+             --base "main" \
+            || gh pr edit \
+             "auto_update_community_extensions_docs" \
+             --body "" \
+             --title "chore: update Community Extensions docs"

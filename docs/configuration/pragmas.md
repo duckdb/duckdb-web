@@ -71,7 +71,7 @@ pk BOOLEAN          -- part of the primary key or not
 Get the file and memory size of each database:
 
 ```sql
-SET database_size;
+PRAGMA database_size;
 CALL pragma_database_size();
 ```
 
@@ -100,23 +100,22 @@ CALL pragma_storage_info('table_name');
 
 This call returns the following information for the given table:
 
-
 | Name           | Type      | Description                                           |
 |----------------|-----------|-------------------------------------------------------|
-| `row_group_id` | `BIGINT`  ||
-| `column_name`  | `VARCHAR` ||
-| `column_id`    | `BIGINT`  ||
-| `column_path`  | `VARCHAR` ||
-| `segment_id`   | `BIGINT`  ||
-| `segment_type` | `VARCHAR` ||
-| `start`        | `BIGINT`  | The start row id of this chunk                        |
-| `count`        | `BIGINT`  | The amount of entries in this storage chunk           |
+| `row_group_id` | `BIGINT`  |                                                                                                                                                    |
+| `column_name`  | `VARCHAR` |                                                                                                                                                    |
+| `column_id`    | `BIGINT`  |                                                                                                                                                    |
+| `column_path`  | `VARCHAR` |                                                                                                                                                    |
+| `segment_id`   | `BIGINT`  |                                                                                                                                                    |
+| `segment_type` | `VARCHAR` |                                                                                                                                                    |
+| `start`        | `BIGINT`  | The start row id of this chunk                                                                                                                     |
+| `count`        | `BIGINT`  | The amount of entries in this storage chunk                                                                                                        |
 | `compression`  | `VARCHAR` | Compression type used for this column – see the [“Lightweight Compression in DuckDB” blog post]({% post_url 2022-10-28-lightweight-compression %}) |
-| `stats`        | `VARCHAR` ||
-| `has_updates`  | `BOOLEAN` ||
-| `persistent`   | `BOOLEAN` | `false` if temporary table                            |
-| `block_id`     | `BIGINT`  | empty unless persistent                               |
-| `block_offset` | `BIGINT`  | empty unless persistent                               |
+| `stats`        | `VARCHAR` |                                                                                                                                                    |
+| `has_updates`  | `BOOLEAN` |                                                                                                                                                    |
+| `persistent`   | `BOOLEAN` | `false` if temporary table                                                                                                                         |
+| `block_id`     | `BIGINT`  | Empty unless persistent                                                                                                                            |
+| `block_offset` | `BIGINT`  | Empty unless persistent                                                                                                                            |
 
 See [Storage]({% link docs/internals/storage.md %}) for more information.
 
@@ -136,7 +135,6 @@ Set the memory limit for the buffer manager:
 
 ```sql
 SET memory_limit = '1GB';
-SET max_memory = '1GB';
 ```
 
 > Warning The specified memory limit is only applied to the buffer manager.
@@ -567,7 +565,6 @@ SET ieee_floating_point_ops = false;
 ```
 
 In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0` and `-1.0 / 0.0`) will all return `NULL`.
-
 
 ## Query Verification (for Development)
 

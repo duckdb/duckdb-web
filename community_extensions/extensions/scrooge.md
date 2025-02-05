@@ -10,7 +10,7 @@ extension:
   description: Provides functionality for financial data-analysis, including data scanners for the Ethereum Blockchain and Yahoo Finance
   version: 0.0.2
   language: C++
-  excluded_platforms: "windows_amd64_rtools"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
   build: cmake
   license: MIT
   maintainers:
@@ -39,10 +39,10 @@ docs:
     More information on the supported scanners and functions can be found on Scrooge's [wiki page](https://github.com/pdet/Scrooge-McDuck/wiki).
     You can also find a ROI example of Ether on the [following blogpost](https://pdet-blog.github.io/2024/06/30/ethereum.html)
 
-extension_star_count: 133
-extension_star_count_pretty: 133
-extension_download_count: 224
-extension_download_count_pretty: 224
+extension_star_count: 136
+extension_star_count_pretty: 136
+extension_download_count: 437
+extension_download_count_pretty: 437
 image: '/images/community_extensions/social_preview/preview_community_extension_scrooge.png'
 layout: community_extension_doc
 ---
@@ -86,7 +86,4 @@ LOAD {{ page.extension.name }};
 |--------------|------------------------------------|------------|--------|
 | eth_node_url | URL of Ethereum node to be queried | VARCHAR    | GLOBAL |
 
-
-
----
 

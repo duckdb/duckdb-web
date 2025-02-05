@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webmacro
   description: Load DuckDB Macros from the web
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-webmacro
-  ref: eec600cbbd313453f79c8b271bfe8f576aa851f6
+  ref: 3f980d8f79df0da8da42e7d5f0bc07ddc74f816d
 
 docs:
   hello_world: |
@@ -25,7 +25,7 @@ docs:
 
     -- Load your remote macro onto your system using the gist url
     
-    D SELECT load_macro_from_url('https://gist.github.com/lmangani/518215a68e674ac662537d518799b893/raw/5f305480fdd7468f4ecda3686011bab8e8e711bf/bsky.sql') as res;
+    D SELECT load_macro_from_url('https://gist.githubusercontent.com/lmangani/518215a68e674ac662537d518799b893/raw/5f305480fdd7468f4ecda3686011bab8e8e711bf/bsky.sql') as res;
     ┌─────────────────────────────────────────┐
     │                   res                   │
     │                 varchar                 │
@@ -53,10 +53,10 @@ docs:
   extended_description: |
     The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 229
-extension_download_count_pretty: 229
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 435
+extension_download_count_pretty: 435
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---
@@ -86,7 +86,4 @@ LOAD {{ page.extension.name }};
 |---------------------|---------------|-------------|---------|---------|
 | load_macro_from_url | scalar        |             |         |         |
 
-
-
----
 

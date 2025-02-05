@@ -7,30 +7,50 @@ The environment where DuckDB is run has an obvious impact on performance. This p
 
 ## Hardware Configuration
 
-### CPU and Memory
+### CPU
 
-As a rule of thumb, DuckDB requires a **minimum** of 125 MB of memory per thread.
-For example, if you use 8 threads, you need at least 1 GB of memory.
-For ideal performance, aggregation-heavy workloads require approx. 5 GB memory per thread and join-heavy workloads require approximately 10 GB memory per thread.
+DuckDB works efficiently on both AMD64 (x86_64) and ARM64 (AArch64) CPU architectures.
+
+### Memory
 
 > Bestpractice Aim for 5-10 GB memory per thread.
 
-> Tip If you have a limited amount of memory, try to [limit the number of threads]({% link docs/configuration/pragmas.md %}#threads), e.g., by issuing `SET threads = 4;`.
+#### Minimum Required Memory
 
-### Disk
+As a rule of thumb, DuckDB requires a _minimum_ of 125 MB of memory per thread.
+For example, if you use 8 threads, you need at least 1 GB of memory.
+If you are working in a memory-constained environment, consider [limiting the number of threads]({% link docs/configuration/pragmas.md %}#threads), e.g., by issuing:
 
-DuckDB is capable of operating both as an in-memory and as a disk-based database system. In both cases, it can spill to disk to process larger-than-memory workloads (a.k.a. out-of-core processing) for which a fast disk is highly beneficial. However, if the workload fits in memory, the disk speed only has a limited effect on performance.
+```sql
+SET threads = 4;
+```
+
+#### Memory for Ideal Performance
+
+The amount of memory required for ideal performance depends on several factors, including the data set size and the queries to execute.
+Maybe surprisingly, the _queries_ have a larger effect on the memory requirement.
+Workloads containing large joins over many-to-many tables yield large intermediate datasets and thus require more memory for their evaluation to fully fit into the memory.
+As an approximation, aggregation-heavy workloads require 5 GB memory per thread and join-heavy workloads require 10 GB memory per thread.
+
+#### Larger-than-Memory Workloads
+
+DuckDB can process larger-than-memory workloads by spilling to disk.
+This is possible thanks to _out-of-core_ support for grouping, joining, sorting and windowing operators.
+Note that larger-than-memory workloads can be processed both in persistent mode and in in-memory mode as DuckDB still spills to disk in both modes.
 
 ### Local Disk
 
 DuckDB's disk-based mode is designed to work best with SSD and NVMe disks. While HDDs are supported, they will result in low performance, especially for write operations.
+
+Counter-intuitively, using a disk-based DuckDB instance can be faster than an in-memory instance due to compression.
+Read more in the [“How to Tune Workloads” page]({% link docs/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
 
 ### Network-Attached Disks
 
 **Cloud disks.** DuckDB runs well on network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) for both read-only and read-write workloads.
 
 **Network-attached storage.**
-Network-attached storage can serve DuckdB for read-only workloads.
+Network-attached storage can serve DuckDB for read-only workloads.
 However, _it is not recommended to run DuckDB in read-write mode on network-attached storage (NAS)._
 These setups include [NFS](https://en.wikipedia.org/wiki/Network_File_System),
 network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) and
@@ -45,3 +65,7 @@ as well as spurious errors cased by the underlying file system.
 ## Operating System
 
 We recommend using the latest stable version of operating systems: macOS, Windows, and Linux are all well-tested and DuckDB can run on them with high performance. Among Linux distributions, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
+
+## Memory Allocator
+
+If you have a many-core CPU running on a system where DuckDB ships with [`jemalloc`]({% link docs/extensions/jemalloc.md %}) as the default memory allocator, consider [enabling the allocator's background threads]({% link docs/extensions/jemalloc.md %}#background-threads).

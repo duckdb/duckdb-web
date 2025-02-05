@@ -578,6 +578,7 @@ body.documentation{
 			border-radius: 5px;
 		 &:hover{
 				background: rgba(0, 0, 0, 0.06);
+				color: var(--doc-sidebar-text-unselected, #262626);
 			}
 		}
 	}
@@ -1124,6 +1125,7 @@ body.documentation main .wrap a.pill{
 			margin: 0!important;
 		}	
 	}
+	&.stars,
 	&.downloads{
 		span.num{
 			color: var(--interactive-folderbox-text-color, #1A1A1A);

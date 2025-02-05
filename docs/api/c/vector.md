@@ -439,11 +439,9 @@ The bit is set to 1 if the value is valid (i.e., not NULL) or 0 if the value is 
 
 Validity of a specific value can be obtained like this:
 
-```c
 idx_t entry_idx = row_idx / 64;
 idx_t idx_in_entry = row_idx % 64;
 bool is_valid = validity_mask[entry_idx] & (1 << idx_in_entry);
-```
 
 Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
@@ -460,7 +458,7 @@ Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
 ##### Return Value
 
-The pointer to the validity mask, or `NULL` if no validity mask is present
+The pointer to the validity mask, or NULL if no validity mask is present
 
 <br>
 
@@ -469,7 +467,7 @@ The pointer to the validity mask, or `NULL` if no validity mask is present
 Ensures the validity mask is writable by allocating it.
 
 After this function is called, `duckdb_vector_get_validity` will ALWAYS return non-NULL.
-This allows `NULL` values to be written to the vector, regardless of whether a validity mask was present before.
+This allows NULL values to be written to the vector, regardless of whether a validity mask was present before.
 
 ##### Syntax
 

@@ -211,7 +211,7 @@ COPY
     (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100_000);
 ```
 
-> LZ4 compression is currently only available in the nightly and source builds:
+> LZ4 compression is currently only available in the nightly and source builds.
 
 Write a CSV file to an `LZ4_RAW`-compressed Parquet file:
 

@@ -8,11 +8,11 @@ excerpt: |
 extension:
   name: pcap_reader
   description: Read PCAP files from DuckDB
-  version: 0.0.2
+  version: 0.0.3
   language: Rust
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools;windows_amd64"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64"
   requires_toolchains: "rust;python3"
   maintainers:
     - lmangani
@@ -20,30 +20,30 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-pcap
-  ref: 254f94f7cf1e3ca512f751abbabb4c3e3ce02161
+  ref: 97240fcdc125f2a4b364ede587a91e32d0209f25
 
 docs:
   hello_world: |
     -- Basic PCAP reader for local or remote files
     D SELECT * FROM pcap_reader('test.pcap') LIMIT 3;
-    ┌────────────┬────────────────┬────────────────┬──────────┬──────────┬──────────┬─────────┬───────────────────────────────────────────┐
-    │ timestamp  │     src_ip     │     dst_ip     │ src_port │ dst_port │ protocol │ length  │                 payload                   │
-    │  varchar   │    varchar     │    varchar     │ varchar  │ varchar  │ varchar  │ varchar │                 varchar                   │
-    ├────────────┼────────────────┼────────────────┼──────────┼──────────┼──────────┼─────────┼───────────────────────────────────────────┤
-    │ 1733513420 │ xx.xx.xx.xxx   │ yyy.yyy.yy.yyy │ 64078    │ 5080     │ UDP      │ 756     │ INVITE sip:810442837619024@yyy.yyy.yy.y…  │
-    │ 1733513420 │ yyy.yyy.yy.yyy │ xx.xx.xx.xxx   │ 5080     │ 64078    │ UDP      │ 360     │ SIP/2.0 100 Trying\r\nVia: SIP/2.0/UDP …  │
-    │ 1733513420 │ yyy.yyy.yy.yyy │ xx.xx.xx.xxx   │ 5080     │ 64078    │ UDP      │ 909     │ SIP/2.0 480 Temporarily Unavailable\r\n…  │
-    ├────────────┴────────────────┴────────────────┴──────────┴──────────┴──────────┴─────────┴───────────────────────────────────────────┤
-    │ 3 rows                                                                                                                    8 columns │
-    └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ┌─────────────────────┬────────────────┬────────────────┬──────────┬──────────┬──────────┬────────┬───────────────────────────────────────────┐
+    │      timestamp      │     src_ip     │     dst_ip     │ src_port │ dst_port │ protocol │ length │                 payload                   │
+    │      timestamp      │    varchar     │    varchar     │ int32    │ int32    │ varchar  │ int32  │                 varchar                   │
+    ├─────────────────────┼────────────────┼────────────────┼──────────┼──────────┼──────────┼────────┼───────────────────────────────────────────┤
+    │ 2024-12-06 19:30:2… │ xx.xx.xx.xxx   │ yyy.yyy.yy.yyy │ 64078    │ 5080     │ UDP      │ 756    │ INVITE sip:810442837619024@yyy.yyy.yy.y…  │
+    │ 2024-12-06 19:30:2… │ yyy.yyy.yy.yyy │ xx.xx.xx.xxx   │ 5080     │ 64078    │ UDP      │ 360    │ SIP/2.0 100 Trying\r\nVia: SIP/2.0/UDP …  │
+    │ 2024-12-06 19:30:2… │ yyy.yyy.yy.yyy │ xx.xx.xx.xxx   │ 5080     │ 64078    │ UDP      │ 909    │ SIP/2.0 480 Temporarily Unavailable\r\n…  │
+    ├─────────────────────┴────────────────┴────────────────┴──────────┴──────────┴──────────┴────────┴───────────────────────────────────────────┤
+    │ 3 rows                                                                                                                            8 columns │
+    └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
   extended_description: |
     The PCAP Reader Extension is experimental, use at your own risk!
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 29
-extension_download_count_pretty: 29
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 439
+extension_download_count_pretty: 439
 image: '/images/community_extensions/social_preview/preview_community_extension_pcap_reader.png'
 layout: community_extension_doc
 ---
@@ -73,7 +73,4 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|-------------|---------|---------|
 | pcap_reader   | table         |             |         |         |
 
-
-
----
 

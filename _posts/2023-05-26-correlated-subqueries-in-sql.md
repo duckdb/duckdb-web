@@ -259,7 +259,7 @@ WHERE distance = (
                              │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
                              │           ontime          │
                              └───────────────────────────┘
-                             
+
 ```
 
 We can see the drastic performance difference that subquery decorrelation has when we compare the run-time of this query in DuckDB with the run-time in Postgres and SQLite. When running the above query on the [`ontime` dataset](https://www.transtats.bts.gov/Homepage.asp) for `2017` with roughly `~4 million` rows, we get the following performance results:

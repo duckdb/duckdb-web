@@ -57,10 +57,10 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 23
-extension_star_count_pretty: 23
-extension_download_count: 222
-extension_download_count_pretty: 222
+extension_star_count: 28
+extension_star_count_pretty: 28
+extension_download_count: 436
+extension_download_count_pretty: 436
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---
@@ -92,7 +92,4 @@ LOAD {{ page.extension.name }};
 | cron_delete   | scalar        |             |         |         |
 | cron_jobs     | table         |             |         |         |
 
-
-
----
 

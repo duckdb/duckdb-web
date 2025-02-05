@@ -8,17 +8,17 @@ excerpt: |
 extension:
   name: gsheets
   description: Read and write Google Sheets using SQL
-  version: 0.0.3
+  version: 0.0.5
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - archiewood
 
 repo:
   github: evidence-dev/duckdb_gsheets
-  ref: 5352ea30499a7f7f2dbfa45faf622906e0130cfb
+  ref: 1cdc038c53e9a0d564c5ebc0b510763e7821d6e5
 
 docs:
   hello_world: |
@@ -44,6 +44,9 @@ docs:
     -- Read a spreadsheet with no header row
     SELECT * FROM read_gsheet('11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8', headers=false);
     
+    -- Read all values in as varchar, skipping type inference
+    SELECT * FROM read_gsheet('11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8', all_varchar=true);
+
     -- Read a sheet other than the first sheet using the sheet name
     SELECT * FROM read_gsheet('11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8', sheet='Sheet2');
     
@@ -63,10 +66,10 @@ docs:
     The DuckDB GSheets Extension allows reading and writing of data in Google Sheets from DuckDB.
     For detailed setup and usage instructions, visit the docs at [duckdb-gsheets.com](https://duckdb-gsheets.com).
 
-extension_star_count: 174
-extension_star_count_pretty: 174
-extension_download_count: 234
-extension_download_count_pretty: 234
+extension_star_count: 209
+extension_star_count_pretty: 209
+extension_download_count: 1960
+extension_download_count_pretty: 2.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_gsheets.png'
 layout: community_extension_doc
 ---
@@ -96,7 +99,4 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|-------------|---------|---------|
 | read_gsheet   | table         |             |         |         |
 
-
-
----
 

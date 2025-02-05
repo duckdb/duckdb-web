@@ -196,6 +196,10 @@ h1, h2, h3, h4, h5{
 				margin-top: 60px;
 				font-weight: 500;
 			}
+			h2 + h3,
+			h3 + h4{
+				margin-top: 30px;
+			}
 			blockquote{
 				h4{
 					font-size: 16.5px;
@@ -723,7 +727,10 @@ footer{
 			}
 		}
 	}
-
+	.newswrap .postwrap .postcontent iframe{
+		width: 100%;
+		height: auto;
+	}
 	.filterbar {
 		flex-wrap: wrap;
 		margin-bottom: 30px;

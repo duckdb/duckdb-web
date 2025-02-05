@@ -16,6 +16,8 @@
 						<li data-client="java">Java</li>
 						<li data-client="nodejs">Node.js</li>
 						<li data-client="odbc">ODBC</li>
+						<li data-client="rust">Rust</li>
+						<li data-client="go">Go</li>
 					</ul>
 				</div>
 				<label class="onlymobile">
@@ -26,6 +28,8 @@
 						<option value="java">Java</option>
 						<option value="nodejs">Node.js</option>
 						<option value="odbc">ODBC</option>
+						<option value="rust">Rust</option>
+						<option value="go">Go</option>
 					</select>
 				</label>
 				
@@ -72,7 +76,7 @@ install.packages("duckdb")
 
 <div data-install="nodejs">
 {% highlight bash %}
-npm install duckdb
+npm install @duckdb/node-api
 {% endhighlight %}
 </div>
 
@@ -102,6 +106,18 @@ winget install DuckDB.cli
 
 <div data-install="odbc win">
 <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbodbcversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a>
+</div>
+
+<div data-install="rust">
+{% highlight bash %}
+cargo add duckdb --features bundled
+{% endhighlight %}
+</div>
+
+<div data-install="go">
+{% highlight bash %}
+go get github.com/marcboeker/go-duckdb
+{% endhighlight %}
 </div>
 
 </div>

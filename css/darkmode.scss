@@ -7,12 +7,20 @@ html.disable-transitions * {
 	transition: none !important;
 }
 
+html.darkmode ::-moz-selection {
+  background: var(--doc-codebox-border-color, #333);
+}
+
+html.darkmode ::selection {
+  background: var(--doc-codebox-border-color, #333);
+}
+
 html.darkmode body{
 	::-moz-selection {
-	  background: #353535;
+	  background: var(--doc-codebox-border-color, #333);
 	}
 	::selection {
-	  background: #353535;
+	  background: var(--doc-codebox-border-color, #333);
 	}
 	
 	#duckdb_logo,

@@ -450,6 +450,10 @@
 	footer .sitefooter .footercontent {
 		padding: 45px 0;
 	}
+	
+	footer .sitefooter .footercontent .bottomline{
+		margin-bottom: 0;
+	}
 
 	
 
@@ -527,8 +531,6 @@
 		padding-left: 15px;
 	}
 
-	
-
 	body.landing .stickerbanner {
 		flex-wrap: wrap;
 
@@ -572,6 +574,7 @@
 	section.blog .postpreview,
 	section.upcoming-events .postpreview,
 	.post-list .newstiles .postpreview,
+	.newswrap .postwrap .recentposts .postpreview,
 	.newswrap .postwrap .postcontent .recentposts .postpreview {
 		width: 100%;
 		margin-bottom: 10px;
@@ -666,5 +669,26 @@
 		>div:first-child {
 			margin-bottom: 0.8em;
 		}
+	}
+}
+
+/** TOUCH DEVICES **/
+@media (hover: none) {
+	html.darkmode body header .headerline .headercontent .options button.mode[data-mode=light]:hover,
+	header .headerline .headercontent .options button.mode[data-mode=dark]:hover,
+	header .headerline .headercontent .options button.mode[data-mode=light]:hover,
+	.opensearch:hover,
+	body.documentation div.version > div:first-child:hover{
+		border: 1px solid var(--menu-dropdown-border-color, #333)!important;
+	}
+	header .headerline .headercontent .options button.mode[data-mode=light]:hover,
+	html.darkmode body header .headerline .headercontent .options button.mode[data-mode=light]:hover{
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 20 20'%3E%3Cpath fill='%23B2B2B2' stroke='%23B2B2B2' stroke-miterlimit='10' stroke-width='.9' d='M10.201 14.041a4.041 4.041 0 1 0 0-8.082 4.041 4.041 0 0 0 0 8.082Z'/%3E%3Cpath stroke='%23B2B2B2' stroke-linecap='round' stroke-miterlimit='10' stroke-width='.9' d='M10.201 3.51V1.046M5.611 5.41 3.865 3.664M3.712 10H1.246m4.365 4.59-1.746 1.746m6.336.154v2.465m4.59-4.365 1.746 1.746M16.69 10h2.465m-4.364-4.59 1.746-1.746'/%3E%3C/svg%3E")!important;
+	}
+	header .headerline .headercontent .options button.mode[data-mode=dark]:hover{
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 16 16'%3E%3Cpath fill='%23666' stroke='%23666' stroke-miterlimit='10' stroke-width='.9' d='M6.558 4.993c-.324-1.467-.027-2.853.675-3.96.054-.09-.009-.207-.117-.198a7.057 7.057 0 0 0-6.318 7.93c.396 3.167 2.988 5.742 6.165 6.101a7.061 7.061 0 0 0 7.893-6.66.13.13 0 0 0-.207-.108c-2.971 2.069-7.309.448-8.09-3.105Z'/%3E%3C/svg%3E")!important;
+	}
+	html.darkmode body .opensearch:hover{
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='none' viewBox='0 0 15 15'%3E%3Cpath stroke='%23999999' stroke-width='1.5' d='m10.432 9.692 3.926 3.927'/%3E%3Ccircle cx='6.282' cy='6.303' r='5.173' stroke='%23999999' stroke-width='1.5'/%3E%3C/svg%3E")!important;
 	}
 }

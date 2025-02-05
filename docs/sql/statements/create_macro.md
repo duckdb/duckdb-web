@@ -22,7 +22,7 @@ Create a macro that adds two expressions (`a` and `b`):
 CREATE MACRO add(a, b) AS a + b;
 ```
 
-Create a macro for a case expression:
+Create a macro for a `CASE` expression:
 
 ```sql
 CREATE MACRO ifelse(a, b, c) AS CASE WHEN a THEN b ELSE c END;
@@ -268,7 +268,7 @@ SELECT my_macro(32, 52);
 ```
 
 ```console
-Error: Binder Error: Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
+Binder Error: Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
 ```
 
 ### Using Subquery Macros

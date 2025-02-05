@@ -13,7 +13,6 @@ For the behavior of the `autocomplete` extension, see the [documentation of the 
 
 ## Functions
 
-
 | Function                          | Description                                          |
 |:----------------------------------|:-----------------------------------------------------|
 | `sql_auto_complete(query_string)` | Attempts autocompletion on the given `query_string`. |
@@ -26,7 +25,6 @@ FROM sql_auto_complete('SEL');
 ```
 
 Returns:
-
 
 | suggestion  | suggestion_start |
 |-------------|------------------|

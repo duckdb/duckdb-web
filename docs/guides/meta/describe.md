@@ -5,14 +5,13 @@ title: Describe
 
 ## Describing a Table
 
-In order to view the schema of a table, use `DESCRIBE` or `SHOW` followed by the table name.
+In order to view the schema of a table, use the `DESCRIBE` statement (or its aliases `DESC` and `SHOW`) followed by the table name.
 
 ```sql
 CREATE TABLE tbl (i INTEGER PRIMARY KEY, j VARCHAR);
 DESCRIBE tbl;
 SHOW tbl; -- equivalent to DESCRIBE tbl;
 ```
-
 
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|
@@ -26,7 +25,6 @@ In order to view the schema of the result of a query, prepend `DESCRIBE` to a qu
 ```sql
 DESCRIBE SELECT * FROM tbl;
 ```
-
 
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|
@@ -49,7 +47,6 @@ It is possible to describe remote tables via the [`httpfs` extension]({% link do
 
 ```sql
 DESCRIBE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
-```
 
 |               column_name               | column_type | null | key  | default | extra |
 |-----------------------------------------|-------------|------|------|---------|-------|

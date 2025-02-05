@@ -97,31 +97,31 @@ The [`FROM` clause]({% link docs/sql/query_syntax/from.md %}) specifies the *sou
 
 <div id="rrdiagram10"></div>
 
-[The `SAMPLE` clause]({% link docs/sql/query_syntax/sample.md %}) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The `SAMPLE` clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [Samples]({% link docs/sql/samples.md %}) page for more information.
+The [`SAMPLE` clause]({% link docs/sql/query_syntax/sample.md %}) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The `SAMPLE` clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [Samples]({% link docs/sql/samples.md %}) page for more information.
 
 ## `WHERE` Clause
 
 <div id="rrdiagram5"></div>
 
-[The `WHERE` clause]({% link docs/sql/query_syntax/where.md %}) specifies any filters to apply to the data. This allows you to select only a subset of the data in which you are interested. Logically the `WHERE` clause is applied immediately after the `FROM` clause.
+The [`WHERE` clause]({% link docs/sql/query_syntax/where.md %}) specifies any filters to apply to the data. This allows you to select only a subset of the data in which you are interested. Logically the `WHERE` clause is applied immediately after the `FROM` clause.
 
 ## `GROUP BY` and `HAVING` Clauses
 
 <div id="rrdiagram6"></div>
 
-[The `GROUP BY` clause]({% link docs/sql/query_syntax/groupby.md %}) specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause. If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
+The [`GROUP BY` clause]({% link docs/sql/query_syntax/groupby.md %}) specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause. If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
 
 ## `WINDOW` Clause
 
 <div id="rrdiagram7"></div>
 
-[The `WINDOW` clause]({% link docs/sql/query_syntax/window.md %}) allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
+The [`WINDOW` clause]({% link docs/sql/query_syntax/window.md %}) allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
 
 ## `QUALIFY` Clause
 
 <div id="rrdiagram11"></div>
 
-[The `QUALIFY` clause]({% link docs/sql/query_syntax/qualify.md %}) is used to filter the result of [`WINDOW` functions]({% link docs/sql/functions/window_functions.md %}).
+The [`QUALIFY` clause]({% link docs/sql/query_syntax/qualify.md %}) is used to filter the result of [`WINDOW` functions]({% link docs/sql/functions/window_functions.md %}).
 
 ## `ORDER BY`, `LIMIT` and `OFFSET` Clauses
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckpgq
   description: Extension that adds support for SQL/PGQ and graph algorithms
-  version: 0.1.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: cwida/duckpgq-extension
-  ref: 5dcec704050b15b12a7894172089dd4a79ca1435
+  ref: bac137217a27d519fbcb4678f024393dc7027f37
 
 docs:
   hello_world: |
@@ -60,10 +60,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 91
-extension_star_count_pretty: 91
-extension_download_count: 2321
-extension_download_count_pretty: 2.3k
+extension_star_count: 129
+extension_star_count_pretty: 129
+extension_download_count: 3156
+extension_download_count_pretty: 3.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -117,10 +117,8 @@ LOAD {{ page.extension.name }};
 | pagerank                     | table         |             |         |         |
 | reachability                 | scalar        |             |         |         |
 | shortestpath                 | scalar        |             |         |         |
+| show_property_graphs         | pragma        |             |         |         |
 | weakly_connected_component   | scalar        |             |         |         |
 | weakly_connected_component   | table         |             |         |         |
 
-
-
----
 
