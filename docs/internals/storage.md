@@ -69,6 +69,7 @@ To see the commits that changed each storage version, see the [commit log](https
 
 | Storage version | DuckDB version(s)               |
 |----------------:|---------------------------------|
+| 65              | v1.2.0                          |
 | 64              | v0.9.x, v0.10.x, v1.0.0, v1.1.x |
 | 51              | v0.8.x                          |
 | 43              | v0.7.x                          |
