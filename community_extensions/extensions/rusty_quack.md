@@ -28,10 +28,10 @@ docs:
     The quack extension is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/), and it's a great starting point to get started building DuckDB extensions in Rust.
 
 
-extension_star_count: 28
-extension_star_count_pretty: 28
-extension_download_count: 428
-extension_download_count_pretty: 428
+extension_star_count: 29
+extension_star_count_pretty: 29
+extension_download_count: 440
+extension_download_count_pretty: 440
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_quack.png'
 layout: community_extension_doc
 ---
