@@ -15,15 +15,13 @@ The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been 
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
 
-<!--more-->
-
-#### What's in 0.7.0
+## What's in 0.7.0
 
 The new release contains many improvements to the JSON support, new SQL features, improvements to data ingestion and export, and other new features. Below is a summary of the most impactful changes, together with the linked PRs that implement the features.
 
-#### Data Ingestion/Export Improvements
+## Data Ingestion/Export Improvements
 
-**JSON Ingestion.** This version introduces the [`read_json` and `read_json_auto`](https://github.com/duckdb/duckdb/pull/5992) methods. These can be used to ingest JSON files into a tabular format. Similar to `read_csv`, the `read_json` method requires a schema to be specified, while the `read_json_auto` automatically infers the schema of the JSON from the file using sampling. Both [new-line delimited JSON](http://ndjson.org) and regular JSON are supported.
+**JSON Ingestion.** This version introduces the [`read_json` and `read_json_auto`](https://github.com/duckdb/duckdb/pull/5992) methods. These can be used to ingest JSON files into a tabular format. Similar to `read_csv`, the `read_json` method requires a schema to be specified, while the `read_json_auto` automatically infers the schema of the JSON from the file using sampling. Both [new-line delimited JSON](https://github.com/ndjson/ndjson-spec) and regular JSON are supported.
 
 ```sql
 FROM 'data/json/with_list.json';
@@ -70,7 +68,7 @@ orders
 
 Note that currently the parallel writing is currently limited to non-insertion order preserving – which can be toggled by setting the `preserve_insertion_order` setting to false. In a future release we aim to alleviate this restriction and order parallel insertion order preserving writes as well.
 
-#### Multi-Database Support
+## Multi-Database Support
 
 **Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DuckDB instance. This easily allows data to be transferred between separate DuckDB database files, and also allows data from separate database files to be combined together in individual queries. Remote DuckDB instances (stored on a network accessible location like GitHub, for example) may also be attached.
 
@@ -83,7 +81,7 @@ DETACH new_db;
 
 See the [documentation for more information]({% link docs/sql/statements/attach.md %}).
 
-**SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
+**SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/duckdb-sqlite) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
@@ -94,7 +92,7 @@ SELECT * FROM sqlite.tbl;
 
 Using this, SQLite database files can be attached, queried and modified as if they are native DuckDB database files. This allows data to be quickly transferred between SQLite and DuckDB – and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
 
-#### New SQL Features
+## New SQL Features
 
 **Upsert Support.** [Upsert support](https://github.com/duckdb/duckdb/pull/5866) is added with this release using the `ON CONFLICT` clause, as well as the `SQLite` compatible `INSERT OR REPLACE`/`INSERT OR IGNORE` syntax.
 
@@ -137,7 +135,7 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 | 2 | 5 |
 | 3 | 6 |
 
-#### Python API Improvements
+## Python API Improvements
 
 **Query Building.** This release introduces easier incremental query building using the Python API by allowing relations to be queried. This allows you to decompose long SQL queries into multiple smaller SQL queries, and allows you to easily inspect query intermediates.
 
@@ -214,7 +212,7 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 ```
 
 ```python
->>> duckdb.sql('select min(l_orderkey) from lineitem').show()
+>>> duckdb.sql('SELECT min(l_orderkey) FROM lineitem').show()
 ```
 
 ```text
@@ -230,7 +228,7 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 
 ```python
 import duckdb
-duckdb.sql('select 42').pl()
+duckdb.sql('SELECT 42').pl()
 ```
 
 ```text
@@ -250,7 +248,7 @@ In addition, Polars DataFrames can be directly queried using the SQL interface.
 import duckdb
 import polars as pl
 df = pl.DataFrame({'a': 42})
-duckdb.sql('select * from df').pl()
+duckdb.sql('SELECT * FROM df').pl()
 ```
 
 ```text
@@ -272,15 +270,15 @@ from fsspec import filesystem
 
 duckdb.register_filesystem(filesystem('gcs'))
 
-data = duckdb.query("select * from read_csv_auto('gcs:///bucket/file.csv')").fetchall()
+data = duckdb.query("SELECT * FROM read_csv_auto('gcs:///bucket/file.csv')").fetchall()
 ```
 
 Have a look at the [guide]({% link docs/guides/python/filesystems.md %}) for more information
 
-#### Storage Improvements
+## Storage Improvements
 
 **Delta Compression.** Compression of numeric values in the storage is improved using the new [delta and delta-constant compression](https://github.com/duckdb/duckdb/pull/5491). This compression method is particularly effective when compressing values that are equally spaced out. For example, sequences of numbers (`1, 2, 3, ...`) or timestamps with a fixed interval between them (`12:00:01, 12:00:02, 12:00:03, ...`).
 
-#### Final Thoughts
+## Final Thoughts
 
 The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.7.0). We would like to thank all of the contributors for their hard work on improving DuckDB.

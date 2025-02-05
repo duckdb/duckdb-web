@@ -26,7 +26,7 @@ SELECT
 FROM generate_series(1, 10) tbl(i);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | total_rows | lte_five | odds |
 |:---|:---|:---|
@@ -44,7 +44,7 @@ SELECT
 FROM generate_series(1, 10) tbl(i);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | lte_five_sum | odds_median | odds_lte_five_median |
 |:---|:---|:---|
@@ -96,7 +96,7 @@ SELECT
 FROM stacked_data;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   2022   |   2023   |   2024   |   2025   |  NULLs   |
 |:---|:---|:---|:---|:---|
@@ -116,7 +116,7 @@ SELECT
 FROM stacked_data;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   2022   |   2023   |   2024   |   2025   |  NULLs   |
 |:---|:---|:---|:---|:---|
@@ -134,7 +134,7 @@ SELECT
 FROM stacked_data;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   2022   |   2023   |   2024   |   2025   |  NULLs   |
 |:---|:---|:---|:---|:---|

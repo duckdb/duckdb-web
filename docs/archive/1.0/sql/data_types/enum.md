@@ -5,7 +5,6 @@ layout: docu
 title: Enum Data Type
 ---
 
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:--|:-----|
@@ -76,7 +75,6 @@ Show the available values in the `birds` enum using the `enum_range` function:
 SELECT enum_range(NULL::birds) AS my_enum_range;
 ```
 
-<div class="narrow_table"></div>
 
 |  my_enum_range  |
 |-----------------|

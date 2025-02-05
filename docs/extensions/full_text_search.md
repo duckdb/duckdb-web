@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Full-Text Search Extension
-github_directory: https://github.com/duckdb/duckdb_fts
+github_repository: https://github.com/duckdb/duckdb-fts
 ---
 
 Full-Text Search is an extension to DuckDB that allows for search through strings, similar to [SQLite's FTS5 extension](https://www.sqlite.org/fts5.html).
@@ -55,8 +55,6 @@ drop_fts_index(input_table)
 ```
 
 Drops a FTS index for the specified table.
-
-<div class="narrow_table"></div>
 
 | Name | Type | Description |
 |:--|:--|:-----------|

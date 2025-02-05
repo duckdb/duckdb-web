@@ -10,7 +10,6 @@ The following logical operators are available: `AND`, `OR` and `NOT`. SQL uses a
 
 ### Binary Operators: `AND` and `OR`
 
-<div class="narrow_table"></div>
 
 | `a` | `b` | `a AND b` | `a OR b` |
 |:---|:---|:---|:---|
@@ -23,7 +22,6 @@ The following logical operators are available: `AND`, `OR` and `NOT`. SQL uses a
 
 ### Unary Operator: `NOT`
 
-<div class="narrow_table"></div>
 
 | `a` | `NOT a` |
 |:---|:---|

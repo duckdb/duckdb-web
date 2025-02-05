@@ -1,5 +1,5 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/fts
+github_directory: https://github.com/duckdb/duckdb-fts
 layout: docu
 title: Full-Text Search Extension
 ---
@@ -56,7 +56,6 @@ drop_fts_index(input_table)
 
 Drops a FTS index for the specified table.
 
-<div class="narrow_table"></div>
 
 | Name | Type | Description |
 |:--|:--|:-----------|

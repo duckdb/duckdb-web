@@ -6,10 +6,11 @@ excerpt: |
   Evaluate the Rhai scripting language in DuckDB
 
 docs:
-  extended_description: 'The `evalexpr_rhai` extension provides a single function:
+  extended_description:
+    "The `evalexpr_rhai` extension provides a single function:
 
 
-    `evalexpr_rhai(VARCHAR, JSON) -> UNION[''ok'': JSON, ''error'': VARCHAR]`
+    `evalexpr_rhai(VARCHAR, JSON) -> UNION['ok': JSON, 'error': VARCHAR]`
 
 
     The arguments in order are:
@@ -36,8 +37,9 @@ docs:
 
     element of the expression.
 
-    '
-  hello_world: "-- Calculate the value of an expression\nSELECT evalexpr_rhai('40+2');\n\
+    "
+  hello_world:
+    "-- Calculate the value of an expression\nSELECT evalexpr_rhai('40+2');\n\
     \n┌───────────────────────────────┐\n│     evalexpr_rhai('40+2')     │\n│ union(ok\
     \ json, error varchar) │\n├───────────────────────────────┤\n│ 42            \
     \                │\n└───────────────────────────────┘\n\n-- Expression's return\
@@ -82,22 +84,22 @@ docs:
 extension:
   build: cmake
   description: Evaluate the Rhai scripting language in DuckDB
-  excluded_platforms: windows_amd64_rtools;windows_amd64
+  excluded_platforms: windows_amd64_rtools;windows_amd64_mingw;windows_amd64;linux_amd64_musl
   language: C++
   license: Apache-2.0
   maintainers:
-  - rustyconover
+    - rustyconover
   name: evalexpr_rhai
   requires_toolchains: rust
   version: 1.0.2
 repo:
   github: rustyconover/duckdb-evalexpr-rhai-extension
-  ref: 7bc848761cdd896a9613ad1db4d43b1c9b8a4b66
+  ref: da8f1e85b8a85ba80c8f616687f7445fc051ac24
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 227
-extension_download_count_pretty: 227
+extension_download_count: 452
+extension_download_count_pretty: 452
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
@@ -127,7 +129,4 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|-------------|---------|---------|
 | evalexpr_rhai | scalar        |             |         |         |
 
-
-
----
 

@@ -91,7 +91,6 @@ INSERT INTO numbers VALUES (1, 10), (2, 20), (3, NULL);
 SELECT min(COLUMNS(*)), count(COLUMNS(*)) FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id | number | id | number |
 |---:|-------:|---:|-------:|
@@ -106,7 +105,6 @@ SELECT
 FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id | min(number := (number + id)) | id |
 |---:|-----------------------------:|---:|
@@ -118,7 +116,6 @@ FROM numbers;
 SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id | number |
 |---:|-------:|
@@ -140,7 +137,6 @@ FROM (
 WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
 ```
 
-<div class="narrow_table"></div>
 
 | x | y | z |
 |--:|--:|--:|
@@ -154,7 +150,6 @@ WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
 SELECT COLUMNS('(id|numbers?)') FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id | number |
 |---:|-------:|
@@ -168,7 +163,6 @@ The matches of capture groups can be used to rename columns selected by a regula
 SELECT COLUMNS('(\w{2}).*') AS '\1' FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | id |  nu  |
 |---:|-----:|
@@ -186,7 +180,6 @@ The capture groups are one-indexed; `\0` is the original column name.
 SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 ```
 
-<div class="narrow_table"></div>
 
 | number |
 |--------|
@@ -206,7 +199,6 @@ For example:
 SELECT st.* FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS st);
 ```
 
-<div class="narrow_table"></div>
 
 | x | y | z |
 |--:|--:|--:|

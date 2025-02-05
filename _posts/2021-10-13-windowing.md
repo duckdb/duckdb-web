@@ -12,8 +12,6 @@ In this post, we will take a look at how DuckDB implements windowing.
 We will also see how DuckDB can leverage its aggregate function architecture
 to compute useful moving aggregates such as moving inter-quartile ranges (IQRs).
 
-<!--more-->
-
 ## Beyond Sets
 
 The original relational model as developed by Codd in the 1970s treated relations as *unordered sets* of tuples.

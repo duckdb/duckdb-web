@@ -1,0 +1,96 @@
+<section class="blog recentposts">
+	<div class="wrap">
+		<h1>
+			{% if page.collection == "events" %}
+				Other Events
+			{% elsif page.collection == "media" %}
+				Other Media
+			{% else %}
+				Recent Posts
+			{% endif %}
+		</h1>
+		<div class="newstileswrap">
+			{% if page.collection == "events" %}
+				{% assign items = site.events | sort: "date" | reverse %}
+			{% elsif page.collection == "media" %}
+				{% assign items = site.media | sort: "date" | reverse %}
+			{% else %}
+				{% assign items = site.posts | sort: "date" | reverse %}
+			{% endif %}
+			
+			{% assign recent_count = 0 %}
+			{% for item in items %}
+				{% if item.url != page.url and recent_count < 2 %}
+					{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
+					{% assign tag_classes = item.tags | default: "" | join: ' ' %}
+					
+					{% if page.collection == "media" %}
+						<div class="mediapreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}">
+							<a href="/media/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
+							<div class="postimg custom">
+								{% if item.thumb %}
+									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
+								{% else %}
+									<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+								{% endif %}
+							</div>
+							<div class="postdetails">
+								{% if item.tags %}
+								<div class="tags">
+									{% for tag in item.tags %}
+										<span class="tag">{{ tag }}</span>
+									{% endfor %}
+									{% if item.length %}
+										<span class="length">{{ item.length }}</span>
+									{% endif %}
+								</div>
+								{% endif %}
+								<h3>{{ item.title }}</h3>
+								<div class="meta">
+									<div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
+									<div class="author">{{ item.author | default: "DuckDB" }}</div>
+								</div>
+							</div>
+						</div>
+					{% else %}
+						<div class="postpreview {% if page.collection == 'events' %}eventpreview{% endif %} {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}">
+							<a href="{{ item.url }}" class="blocklink"></a>
+							<div class="postimg custom">
+								{% if item.thumb %}
+									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
+								{% else %}
+									<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+								{% endif %}
+							</div>
+							<div class="postdetails">
+								{% if item.tags %}
+								<div class="tags">
+									{% if page.collection == "events" %}
+										<span class="eventdate">{{ item.date | date: "%Y-%m-%d" }}</span>
+									{% endif %}
+									{% for tag in item.tags %}
+										<span class="tag">{{ tag }}</span>
+									{% endfor %}
+								</div>
+								{% endif %}
+								<h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+								<div class="meta">
+									{% if page.collection == 'events' %}
+										<div class="venue">{{ item.venue | default: "Venue not specified" }}</div>
+									{% else %}
+										<div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
+									{% endif %}
+									<div class="author">{{ item.author | default: "DuckDB" }}</div>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+					{% assign recent_count = recent_count | plus: 1 %}
+				{% endif %}
+			{% endfor %}
+		</div>
+		<a href="{{ site.url }}{{ site.baseurl }}{% if page.collection == "events" %}/events/{% elsif page.collection == "media" %}/media/{% else %}/news/{% endif %}" class="button transparent arrow-right">
+			All {% if page.collection == "events" %}events{% elsif page.collection == "media" %}media{% else %}blog posts{% endif %} <span></span>
+		</a>
+	</div>
+</section>

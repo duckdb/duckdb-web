@@ -45,7 +45,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`length(string)`](#lengthstring) | Number of characters in `string`. |
 | [`like_escape(string, like_specifier, escape_character)`](#like_escapestring-like_specifier-escape_character) | Returns true if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`lower(string)`](#lowerstring) | Convert `string` to lower case. |
-| [`lpad(string, count, character)`](#lpadstring-count-character) | Pads the `string`  with the character from the left until it has count characters. |
+| [`lpad(string, count, character)`](#lpadstring-count-character) | Pads the `string` with the `character` on the left until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
 | [`ltrim(string, characters)`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. |
 | [`ltrim(string)`](#ltrimstring) | Removes any spaces from the left side of the `string`. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
@@ -77,7 +77,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`reverse(string)`](#reversestring) | Reverses the `string`. |
 | [`right_grapheme(string, count)`](#right_graphemestring-count) | Extract the right-most `count` grapheme clusters. |
 | [`right(string, count)`](#rightstring-count) | Extract the right-most `count` characters. |
-| [`rpad(string, count, character)`](#rpadstring-count-character) | Pads the `string` with the character from the right until it has `count` characters. |
+| [`rpad(string, count, character)`](#rpadstring-count-character) | Pads the `string` with the `character` on the right until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
 | [`rtrim(string, characters)`](#rtrimstring-characters) | Removes any occurrences of any of the `characters` from the right side of the `string`. |
 | [`rtrim(string)`](#rtrimstring) | Removes any spaces from the right side of the `string`. |
 | [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value`. |
@@ -366,7 +366,7 @@ SELECT
 
 <div class="nostroke_table"></div>
 
-| **Description** | Pads the `string`  with the character from the left until it has count characters. |
+| **Description** | Pads the `string` with the `character` on the left until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
 | **Example** | `lpad('hello', 8, '>')` |
 | **Result** | `>>>hello` |
 
@@ -623,7 +623,7 @@ SELECT
 
 <div class="nostroke_table"></div>
 
-| **Description** | Pads the `string` with the character from the right until it has `count` characters. |
+| **Description** | Pads the `string` with the `character` on the right until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
 | **Example** | `rpad('hello', 10, '<')` |
 | **Result** | `hello<<<<<` |
 
@@ -883,8 +883,6 @@ SELECT format('I''d rather be {1} than {0}.', 'right', 'happy'); -- I'd rather b
 
 #### Format Specifiers
 
-<div class="narrow_table"></div>
-
 | Specifier | Description | Example |
 |:-|:------|:---|
 | `{:d}`   | integer                                | `123456`       |
@@ -1003,8 +1001,6 @@ I'd rather be happy than right.
 ```
 
 #### Format Specifiers
-
-<div class="narrow_table"></div>
 
 | Specifier | Description | Example |
 |:-|:------|:---|

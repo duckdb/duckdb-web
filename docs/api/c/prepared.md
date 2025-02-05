@@ -56,6 +56,7 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">idx_t</span> <a href="#duckdb_nparams"><span class="nf">duckdb_nparams</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_parameter_name"><span class="nf">duckdb_parameter_name</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_type</span> <a href="#duckdb_param_type"><span class="nf">duckdb_param_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_param_logical_type"><span class="nf">duckdb_param_logical_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_clear_bindings"><span class="nf">duckdb_clear_bindings</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="kt">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
 </code></pre></div></div>
@@ -193,6 +194,33 @@ Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the stat
 ##### Return Value
 
 The parameter type
+
+<br>
+
+#### `duckdb_param_logical_type`
+
+Returns the logical type for the parameter at the given index.
+
+Returns `nullptr` if the parameter index is out of range or the statement was not successfully prepared.
+
+The return type of this call should be destroyed with `duckdb_destroy_logical_type`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_param_logical_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">param_idx
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement.
+* `param_idx`: The parameter index.
+
+##### Return Value
+
+The logical type of the parameter
 
 <br>
 

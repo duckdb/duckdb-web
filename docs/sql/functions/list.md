@@ -33,7 +33,7 @@ title: List Functions
 | [`list_intersect(list1, list2)`](#list_intersectlist1-list2) | Returns a list of all the elements that exist in both `l1` and `l2`, without duplicates. |
 | [`list_position(list, element)`](#list_positionlist-element) | Returns the index of the element if the list contains the element. If the element is not found, it returns `NULL`. |
 | [`list_prepend(element, list)`](#list_prependelement-list) | Prepends `element` to `list`. |
-| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
+| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. While list functions use a 1-based indexing, `list_reduce` uses a 0-based indexing. This is a [known issue](https://github.com/duckdb/duckdb/issues/14619). |
 | [`list_resize(list, size[, value])`](#list_resizelist-size-value) | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
 | [`list_reverse_sort(list)`](#list_reverse_sortlist) | Sorts the elements of the list in reverse order. See the [Sorting Lists]({% link docs/sql/functions/list.md %}#sorting-lists) section for more details about the `NULL` sorting order. |
 | [`list_reverse(list)`](#list_reverselist) | Reverses the list. |
@@ -279,7 +279,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. |
+| **Description** | Returns a single value that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions]({% link docs/sql/functions/lambda.md %}#reduce) page for more details. While list functions use a 1-based indexing, `list_reduce` uses a 0-based indexing. This is a [known issue](https://github.com/duckdb/duckdb/issues/14619). |
 | **Example** | `list_reduce([4, 5, 6], (x, y) -> x + y)` |
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
@@ -426,7 +426,7 @@ SELECT [lower(x) FOR x IN strings] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |     strings      |
 |------------------|
@@ -437,7 +437,7 @@ SELECT [upper(x) FOR x IN strings IF len(x) > 0] AS strings
 FROM (VALUES (['Hello', '', 'World'])) t(strings);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |    strings     |
 |----------------|
@@ -450,11 +450,13 @@ In the following example, we use `x, i`, where `x` is the value and `i` is the p
 SELECT [4, 5, 6] AS l, [x FOR x, i IN l IF i != 2] filtered;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |     l     | filtered |
 |-----------|----------|
 | [4, 5, 6] | [4, 6]   |
+
+Under the hood, `[f(x) FOR x IN y IF g(x)]` is translated to `list_transform(list_filter(y, x -> f(x)), x -> f(x))`.
 
 ## Range Functions
 

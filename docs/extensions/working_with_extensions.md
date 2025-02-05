@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: Working with Extensions
+redirect_from:
+  - /docs/extensions/troubleshooting
+  - /docs/extensions/troubleshooting/
 ---
 
 ## Platforms
@@ -10,16 +13,14 @@ For platforms where packages for certain extensions are not available, users can
 
 All official extensions are distributed for the following platforms.
 
-<div class="narrow_table"></div>
-
 | Platform name      | Operating system | Architecture    | CPU types                      | Used by                    |
 |--------------------|------------------|-----------------|--------------------------------|----------------------------|
 | `linux_amd64`      | Linux            | x86_64  (AMD64) |                                | Node.js packages, etc.     |
 | `linux_amd64_gcc4` | Linux            | x86_64  (AMD64) |                                | Python packages, CLI, etc. |
-| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. | all packages               |
-| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          | all packages               |
-| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     | all packages               |
-| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               | all packages               |
+| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. | All packages               |
+| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          | All packages               |
+| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     | All packages               |
+| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               | All packages               |
 
 > For some Linux ARM distributions (e.g., Python), two different binaries are distributed. These target either the `linux_arm64` or `linux_arm64_gcc4` platforms. Note that extension binaries are distributed for the first, but not the second. Effectively that means that on these platforms your glibc version needs to be 2.28 or higher to use the distributed extension binaries.
 
@@ -107,12 +108,13 @@ and version of the different extensions. For this reason, DuckDB keeps track of 
 ```sql
 INSTALL httpfs FROM core;
 INSTALL aws FROM core_nightly;
-SELECT extension_name, extension_version, installed_from, install_mode FROM duckdb_extensions();
+SELECT extension_name, extension_version, installed_from, install_mode
+FROM duckdb_extensions();
 ```
 
 This outputs:
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | extensions_name | extensions_version | installed_from | install_mode |
 |:----------------|:-------------------|:---------------|:-------------|
@@ -164,7 +166,7 @@ Any subsequent calls to `INSTALL ⟨extension_name⟩` will use the local versio
 FORCE INSTALL extension_name;
 ```
 
-Force installing can also be used to overwrite an extension with an extension with the same name from another repository,
+Force installing can also be used to overwrite an extension with an extension of the same name from another repository,
 
 For example, first, `spatial` is installed from the core repository:
 
@@ -222,7 +224,7 @@ Note that using remote paths for compressed files is currently not possible.
 
 ### Building and Installing Extensions from Source
 
-For building and installing extensions from source, see the [building guide]({% link docs/dev/building/build_instructions.md %}#building-and-installing-extensions-from-source).
+For building and installing extensions from source, see the [building guide]({% link docs/dev/building/overview.md %}).
 
 ### Statically Linking Extensions
 
@@ -231,7 +233,7 @@ To statically link extensions, follow the [developer documentation's “Using ex
 ## In-Tree vs. Out-of-Tree
 
 Originally, DuckDB extensions lived exclusively in the DuckDB main repository, `github.com/duckdb/duckdb`. These extensions are called in-tree. Later, the concept
-of out-of-tree extensions was added, where extensions where separated into their own repository, which we call out-of-tree.
+of out-of-tree extensions was added, where extensions were separated into their own repository, which we call out-of-tree.
 
 While from a user's perspective, there are generally no noticeable differences, there are some minor differences related to versioning:
 

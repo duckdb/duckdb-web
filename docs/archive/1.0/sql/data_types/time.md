@@ -6,7 +6,6 @@ title: Time Types
 
 The `TIME` and `TIMETZ` types specify the hour, minute, second, microsecond of a day.
 
-<div class="narrow_table"></div>
 
 | Name     | Aliases                  | Description                     |
 | :------- | :----------------------- | :------------------------------ |

@@ -7,16 +7,14 @@ title: Creating JSON
 
 The following functions are used to create JSON.
 
-<div class="narrow_table"></div>
-
 | Function | Description |
 |:--|:----|
 | `to_json(any)` | Create `JSON` from a value of `any` type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object. |
 | `json_quote(any)` | Alias for `to_json`. |
 | `array_to_json(list)` | Alias for `to_json` that only accepts `LIST`. |
 | `row_to_json(list)` | Alias for `to_json` that only accepts `STRUCT`. |
-| `json_array([any, ...])` | Create a JSON array from `any` number of values. |
-| `json_object([key, value, ...])` | Create a JSON object from any number of `key`, `value` pairs. |
+| `json_array(any, ...)` | Create a JSON array from the values in the argument lists. |
+| `json_object(key, value, ...)` | Create a JSON object from `key`, `value` pairs in the argument list. Requires an even number of arguments. |
 | `json_merge_patch(json, json)` | Merge two JSON documents together. |
 
 Examples:
@@ -54,19 +52,19 @@ SELECT to_json(map(['duck'],[42]));
 ```
 
 ```sql
-SELECT json_array(42, 'duck', NULL);
+SELECT json_array('duck', 42, 'goose', 123);
 ```
 
 ```text
-[42,"duck",null]
+["duck",42,"goose",123]
 ```
 
 ```sql
-SELECT json_object('duck', 42);
+SELECT json_object('duck', 42, 'goose', 123);
 ```
 
 ```text
-{"duck":42}
+{"duck":42,"goose":123}
 ```
 
 ```sql

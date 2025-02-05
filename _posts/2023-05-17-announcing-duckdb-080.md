@@ -17,8 +17,6 @@ The DuckDB team is happy to announce the latest DuckDB release (0.8.0). This rel
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
 
-<!--more-->
-
 ## What's New in 0.8.0
 
 There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
@@ -73,7 +71,7 @@ FROM bigdata ORDER BY col DESC LIMIT 3;
 [**Pivot and Unpivot**](https://github.com/duckdb/duckdb/pull/6387). There are many shapes and sizes of data, and we do not always have control over the process in which data is generated. While SQL is well-suited for reshaping datasets, turning columns into rows or rows into columns is tedious in vanilla SQL. With this release, DuckDB introduces the `PIVOT` and `UNPIVOT` statements that allow reshaping data sets so that rows are turned into columns or vice versa. A key advantage of DuckDB's syntax is that the column names to pivot or unpivot can be automatically deduced. Here is a short example:
 
 ```sql
-CREATE TABLE sales(year INT, amount INT);
+CREATE TABLE sales(year INTEGER, amount INTEGER);
 INSERT INTO sales VALUES (2021, 42), (2022, 100), (2021, 42);
 PIVOT sales ON year USING sum(amount);
 ```
@@ -146,12 +144,12 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 
 ## Storage Improvements
 
-[**Lazy-Loading Table Metadata**](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indexes and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120x SF1) with ~770 million rows and 16 columns:
+[**Lazy-Loading Table Metadata**](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indexes and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120× SF1) with ~770 million rows and 16 columns:
 
-|         Query          | v0.6.1 | v0.7.1 | v0.8.0  | Parquet |
-|------------------------|--------|--------|-------|---------|
-| SELECT 42              | 1.60s | 0.31s  | 0.02s | -       |
-| FROM lineitem LIMIT 1; | 1.62s | 0.32s  | 0.03s | 0.27s   |
+|         Query           | v0.6.1 | v0.7.1 | v0.8.0  | Parquet |
+|-------------------------|-------:|-------:|--------:|--------:|
+| `SELECT 42`             |  1.60s | 0.31s  |   0.02s |       - |
+| `FROM lineitem LIMIT 1` |  1.62s | 0.32s  |   0.03s |   0.27s |
 
 
 ## Clients
@@ -169,7 +167,7 @@ def random_date():
      return fake.date_between()
 
 duckdb.create_function('random_date', random_date, [], DATE)
-res = duckdb.sql('select random_date()').fetchall()
+res = duckdb.sql('SELECT random_date()').fetchall()
 print(res)
 # [(datetime.date(2019, 5, 15),)]
 ```

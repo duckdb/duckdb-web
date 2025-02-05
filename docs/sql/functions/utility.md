@@ -17,13 +17,14 @@ The functions below are difficult to categorize into specific function types and
 | [`checkpoint(database)`](#checkpointdatabase) | Synchronize WAL with file for (optional) database without interrupting transactions. |
 | [`coalesce(expr, ...)`](#coalesceexpr-) | Return the first expression that evaluates to a non-`NULL` value. Accepts 1 or more parameters. Each expression can be a column, literal value, function result, or many others. |
 | [`constant_or_null(arg1, arg2)`](#constant_or_nullarg1-arg2) | If `arg2` is `NULL`, return `NULL`. Otherwise, return `arg1`. |
-| [`count_if(x)`](#count_ifx) | Returns 1 if `x` is `true` or a non-zero number. |
+| [`count_if(x)`](#count_ifx) | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
 | [`current_catalog()`](#current_catalog) | Return the name of the currently active catalog. Default is memory. |
 | [`current_schema()`](#current_schema) | Return the name of the currently active schema. Default is main. |
 | [`current_schemas(boolean)`](#current_schemasboolean) | Return list of schemas. Pass a parameter of `true` to include implicit schemas. |
 | [`current_setting('setting_name')`](#current_settingsetting_name) | Return the current value of the configuration setting. |
 | [`currval('sequence_name')`](#currvalsequence_name) | Return the current value of the sequence. Note that `nextval` must be called at least once prior to calling `currval`. |
 | [`error(message)`](#errormessage) | Throws the given error `message`. |
+| [`equi_width_bins(min, max, bincount, nice := false)`](#equi_width_binsmin-max-bincount-nice--false) | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max`, and `bincount` may be adjusted to produce more aesthetically pleasing results. |
 | [`force_checkpoint(database)`](#force_checkpointdatabase) | Synchronize WAL with file for (optional) database interrupting transactions. |
 | [`gen_random_uuid()`](#gen_random_uuid) | Alias of `uuid`. Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`getenv(var)`](#getenvvar) | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/api/cli/overview.md %}). |
@@ -31,6 +32,7 @@ The functions below are difficult to categorize into specific function types and
 | [`icu_sort_key(string, collator)`](#icu_sort_keystring-collator) | Surrogate key used to sort special characters according to the specific locale. Collator parameter is optional. Valid only when ICU extension is installed. |
 | [`if(a, b, c)`](#ifa-b-c) | Ternary conditional operator. |
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
+| [`is_histogram_other_bin(arg)`](#is_histogram_other_binarg) | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/sql/functions/aggregates.md %}#histogramargboundaries) function. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
 | [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
@@ -40,7 +42,7 @@ The functions below are difficult to categorize into specific function types and
 | [`pg_typeof(expression)`](#pg_typeofexpression) | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility. |
 | [`query(`*`query_string_literal`*`)`](#queryquery_string_literal) | Table function that parses and executes the query defined in *`query_string_literal`*. Only literal strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
 | [`query_table(`*`tbl_name`*`)`](#query_tabletbl_name) | Table function that returns the table given in *`tbl_name`*. |
-| [`query_table(`*`tbl_names`*`, [`*`by_name`*`])`](#query_tabletbl_names-by_name) | Table function that returns the union of tables given in *`tbl_names`*. If the optional *`by_name`* parameter is set to `true`, it uses [`UNION ALL BY NAME`](../../sql/query_syntax/setops#union-all-by-name) semantics. |
+| [`query_table(`*`tbl_names`*`, [`*`by_name`*`])`](#query_tabletbl_names-by_name) | Table function that returns the union of tables given in *`tbl_names`*. If the optional *`by_name`* parameter is set to `true`, it uses [`UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name) semantics. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/guides/file_formats/read_file.md %}#read_blob) for more details. |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/guides/file_formats/read_file.md %}#read_text) for more details. |
 | [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value`. |
@@ -86,7 +88,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns 1 if `x` is `true` or a non-zero number. |
+| **Description** | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
 | **Example** | `count_if(42)` |
 | **Result** | 1 |
 
@@ -136,6 +138,14 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Throws the given error `message`. |
 | **Example** | `error('access_mode')` |
+
+#### `equi_width_bins(min, max, bincount, nice := false)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max`, and `bincount` may be adjusted to produce more aesthetically pleasing results.  |
+| **Example** | `equi_width_bins(0.1, 2.7, 4, true)` |
+| **Result** | `[0.5, 1.0, 1.5, 2.0, 2.5, 3.0]` |
 
 #### `force_checkpoint(database)`
 
@@ -191,6 +201,14 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `ifnull(NULL, 'default_string')` |
 | **Result** | `default_string` |
 
+#### `is_histogram_other_bin(arg)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/sql/functions/aggregates.md %}#histogramargboundaries) function. |
+| **Example** | `is_histogram_other_bin('')` |
+| **Result** | `true` |
+
 #### `md5(string)`
 
 <div class="nostroke_table"></div>
@@ -211,7 +229,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
+| **Description** | Returns the lower 8 bytes of the MD5 hash of `string` as a `BIGINT`. |
 | **Example** | `md5_number_lower('123')` |
 | **Result** | `8091599832034528150` |
 
@@ -219,7 +237,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
+| **Description** | Returns the higher 8 bytes of the MD5 hash of `string` as a `BIGINT`. |
 | **Example** | `md5_number_higher('123')` |
 | **Result** | `6559309979213966368` |
 
@@ -247,27 +265,27 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `pg_typeof('abc')` |
 | **Result** | `varchar` |
 
-#### `query(`*`query_string_literal`*`)`
+#### `query(query_string_literal)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Table function that parses and executes the query defined in *`query_string_literal`*. Only literal strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
+| **Description** | Table function that parses and executes the query defined in `query_string_literal`. Only literal strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
 | **Example** | `query('SELECT 42 AS x')` |
 | **Result** | `42` |
 
-#### `query_table(`*`tbl_name`*`)`
+#### `query_table(tbl_name)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Table function that returns the table given in *`tbl_name`*. |
-| **Example** | `query(t1)` |
+| **Description** | Table function that returns the table given in `tbl_name`. |
+| **Example** | `query('t1')` |
 | **Result** | (the rows of `t1`) |
 
-#### `query_table(`*`tbl_names`*`, [`*`by_name`*`])`
+#### `query_table(tbl_names, [by_name])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Table function that returns the union of tables given in *`tbl_names`*. If the optional *`by_name`* parameter is set to `true`, it uses [`UNION ALL BY NAME`](../../sql/query_syntax/setops#union-all-by-name) semantics. |
+| **Description** | Table function that returns the union of tables given in `tbl_names`. If the optional `by_name` parameter is set to `true`, it uses [`UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name) semantics. |
 | **Example** | `query(['t1', 't2'])` |
 | **Result** | (the union of the two tables) |
 
@@ -338,8 +356,6 @@ The functions below are difficult to categorize into specific function types and
 ## Utility Table Functions
 
 A table function is used in place of a table in a `FROM` clause.
-
-<div class="narrow_table"></div>
 
 | Name | Description |
 |:--|:-------|

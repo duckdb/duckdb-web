@@ -31,8 +31,6 @@ SELECT avg(CAST(creationDate[9:10] AS INTEGER)) FROM Comment;
 
 The results of the microbenchmark are as follows:
 
-<div class="narrow_table"></div>
-
 | Column type | Storage size | Query time |
 | ----------- | -----------: | ---------: |
 | `DATETIME`  | 3.3 GB       | 0.9 s      |
@@ -55,8 +53,6 @@ In the second experiment, we define all columns with the `VARCHAR` type.
 While the results of the queries are the same for all both experiments, their runtime vary significantly.
 The results below show that joining on `BIGINT` columns is approx. 1.8× faster than performing the same join on `VARCHAR`-typed columns encoding the same value.
 
-<div class="narrow_table"></div>
-
 | Join column payload type | Join column schema type | Example value                            | Query time |
 | ------------------------ | ----------------------- | ---------------------------------------- | ---------: |
 | `BIGINT`                 | `BIGINT`                | `70368755640078`                         | 1.2 s      |
@@ -73,8 +69,6 @@ DuckDB allows defining [constraints]({% link docs/sql/constraints.md %}) such as
 ### Microbenchmark: The Effect of Primary Keys
 
 We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst). This table has approx. 554 million entries. We first create the schema without a primary key, then load the data. In the second experiment, we create the schema with a primary key, then load the data. In both cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
-
-<div class="narrow_table"></div>
 
 | Operation                | Execution time |
 | ------------------------ | -------------: |

@@ -94,15 +94,13 @@ FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 
 Any file name input to the `read_parquet` function can either be an exact filename, or use a glob syntax to read multiple files that match a pattern.
 
-<div class="narrow_table"></div>
-
 |  Wildcard  |                        Description                        |
 |------------|-----------------------------------------------------------|
-| `*`        | matches any number of any characters (including none)     |
-| `**`       | matches any number of subdirectories (including none)     |
-| `?`        | matches any single character                              |
-| `[abc]`    | matches one character given in the bracket                |
-| `[a-z]`    | matches one character from the range given in the bracket |
+| `*`        | Matches any number of any characters (including none)     |
+| `**`       | Matches any number of subdirectories (including none)     |
+| `?`        | Matches any single character                              |
+| `[abc]`    | Matches one character given in the bracket                |
+| `[a-z]`    | Matches one character from the range given in the bracket |
 
 Note that the `?` wildcard in globs is not supported for reads over S3 due to HTTP encoding issues.
 
@@ -137,8 +135,6 @@ SELECT *
 FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename = true);
 ```
 
-<div class="narrow_table"></div>
-
 | FlightDate | OriginCityName |  DestCityName   | UniqueCarrier |   filename   |
 |------------|----------------|-----------------|---------------|--------------|
 | 1988-01-01 | New York, NY   | Los Angeles, CA | NULL          | flights1.csv |
@@ -156,8 +152,6 @@ Search the current directory for all files.
 SELECT *
 FROM glob('*');
 ```
-
-<div class="narrow_table"></div>
 
 |     file      |
 |---------------|

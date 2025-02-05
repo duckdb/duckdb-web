@@ -18,7 +18,7 @@ For the release notes, see the [release page](https://github.com/duckdb/duckdb/r
 
 It has been almost six years since the first source code was written for the project back in 2018, and a _lot_ has happened since: There are now over 300&nbsp;000 lines of C++ engine code, over 42&nbsp;000 commits and almost 4&nbsp;000 issues were opened and closed again. DuckDB has also gained significant popularity: the project has attracted tens of thousands of stars and followers on GitHub and social media platforms. Download counts are in the millions each month, and download traffic just for extensions is upwards of four terabytes _each day_. There are even [books](https://www.manning.com/books/duckdb-in-action) [being](https://www.amazon.com/Getting-Started-DuckDB-practical-efficiently/dp/1803241004) [written](https://www.oreilly.com/library/view/duckdb-up-and/9781098159689/) about DuckDB, and – most importantly – now even [Wikipedia considers DuckDB notable](https://en.wikipedia.org/wiki/DuckDB), albeit barely.
 
-## Why now?
+## Why Now?
 
 Of course, version numbers are somewhat arbitrary and “feely”, despite [attempts](https://semver.org/spec/v2.0.0.html) at making them more mechanical. We could have released DuckDB 1.0.0 back in 2018, or we could have waited ten more years. There is never a great moment, because software (with the exception of [TeX](https://x.com/fermatslibrary/status/1740324503308169507)) is never “done”. Why choose today?
 
@@ -42,7 +42,7 @@ Regarding long-term plans, there are, of course, many things on the roadmap stil
 
 Of course, there will be issues found in today’s release. But rest assured, there will be a 1.0.1 release. There will be a 1.1.0. And there might also be a 2.0.0 at some point. We’re in this for the long run, all of us, together. We have the team and the structures and resources to do so.
 
-## Acknowledgements
+## Acknowledgments
 
 First of all, we are very, very grateful to you all. Our massive and heartfelt thanks go to everyone who has contributed code, filed issues or engaged in discussions, promoted DuckDB in their environment, and, of course, all DuckDB users. We could not have done it without you!
 

@@ -40,7 +40,7 @@ Another big advantage of PEG parsers is *error handling*: the paper ["Syntax Err
 
 A possible disadvantage of memoized packrat parsing is the memory required for memoization: the amount required is *proportional to the input size*, not the stack size. Of course, memory limitations have relaxed significantly since the invention of LALR parsers sixty years ago and queries typically are not "Big Data"` themselves.
 
-## Proof-Of-Concept Experiments
+## Proof-of-Concept Experiments
 
 To perform experiments on parser extensibility, we have implemented an – admittedly simplistic – experimental prototype PEG parser for enough of SQL to parse *all* the TPC-H and TPC-DS queries. This grammar is compatible with the `cpp-peglib` [single-header C++17 PEG execution engine](https://github.com/yhirose/cpp-peglib).
 
@@ -221,6 +221,6 @@ An obvious next step is to address the observed performance drawback observed in
 
 We plan to switch DuckDB's parser, which started as a fork of the Postgres YACC parser, to a PEG parser in the near future. As an initial step, we have performed an experiment where we found that it is possible to interpret the current Postgres YACC grammar with PEG. This should greatly simplify the transitioning process, since it ensures that the same grammar will be accepted in both parsing frameworks.
 
-## Acknowledgements
+## Acknowledgments
 
-We would like to thank [**Torsten Grust**](https://db.cs.uni-tuebingen.de/team/members/torsten-grust/), [**Gábor Szárnyas**](https://szarnyasg.github.io) and [**Daniël ten Wolde**](https://www.cwi.nl/en/people/daniel-ten-wolde/) for their valuable suggestions. We would also like to thank [**Carlo Piovesan**](https://github.com/carlopi) for his translation of the Postgres YACC grammar to PEG.
+We would like to thank [**Torsten Grust**](https://db.cs.uni-tuebingen.de/team/members/torsten-grust/), [**Gábor Szárnyas**](https://szarnyasg.org/) and [**Daniël ten Wolde**](https://www.cwi.nl/en/people/daniel-ten-wolde/) for their valuable suggestions. We would also like to thank [**Carlo Piovesan**](https://github.com/carlopi) for his translation of the Postgres YACC grammar to PEG.

@@ -65,7 +65,6 @@ SELECT
      substr(intro, starship_loc + len('starship') + 1) AS trimmed_intro;
 ```
 
-<div class="narrow_table"></div>
 
 |                        intro                        | starship_loc | trimmed_intro |
 |:---|:---|:---|
@@ -90,7 +89,6 @@ CREATE TABLE trek_facts AS
 DESCRIBE trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 |               column_name               | column_type | null | key  | default | extra |
 |:---|:---|:---|:---|:---|:---|
@@ -124,7 +122,6 @@ SELECT
 FROM trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 | episode_num | cnt_warp_speed_orders | highest_warp_speed_issued |
 |:---|:---|:---|
@@ -145,7 +142,6 @@ SELECT
 FROM trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 | max(trek_facts.cnt_warp_speed_orders) | max(trek_facts.highest_warp_speed_issued) |
 |:---|:---|
@@ -165,7 +161,6 @@ WHERE
     -- highest_warp_speed_issued >= 2
 ```
 
-<div class="narrow_table"></div>
 
 | episode_num | cnt_warp_speed_orders | highest_warp_speed_issued |
 |:---|:---|:---|
@@ -184,7 +179,6 @@ SELECT
 FROM trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 | max(trek_facts.<br>episode_num) | max(trek_facts.<br>aired_date) | max(trek_facts.<br>cnt_kirk_hookups) | ... | max(trek_facts.<br>bool_enterprise_saved_the_day) |
 |:---|:---|:---|:---|:---|
@@ -198,7 +192,6 @@ SELECT
 FROM trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 | max(trek_facts.<br>season_num) | max(trek_facts.<br>episode_num) | max(aired_date := <br>CAST(aired_date AS TIMESTAMP)) | ... | max(trek_facts.<br>bool_enterprise_saved_the_day) |
 |:---|:---|:---|:---|:---|
@@ -219,7 +212,6 @@ WHERE
     COLUMNS(col -> col LIKE '%warp%') >= 2;
 ```
 
-<div class="narrow_table"></div>
 
 | episode_num | cnt_warp_speed_orders | highest_warp_speed_issued |
 |:---|:---|:---|
@@ -245,7 +237,6 @@ SELECT
 FROM 'https://raw.githubusercontent.com/vlad-saling/star-trek-ipsum/master/src/content/content.json';
 ```
 
-<div class="narrow_table"></div>
 
 |                                                                            starship                                                                            |
 |:---|
@@ -293,7 +284,6 @@ SELECT
           .concat('.') AS im_not_messing_around_number_one;
 ```
 
-<div class="narrow_table"></div>
 
 | im_not_messing_around_number_one |
 |:---|
@@ -312,7 +302,6 @@ SELECT
      '.') AS oof;
 ```
 
-<div class="narrow_table"></div>
 
 |      oof      |
 |:---|
@@ -336,7 +325,6 @@ CREATE TABLE proverbs AS
 FROM proverbs;
 ```
 
-<div class="narrow_table"></div>
 
 |               klingon_proverb                |      borg_proverb       |
 |:---|:---|
@@ -358,7 +346,6 @@ INSERT INTO proverbs BY NAME
 SELECT * FROM proverbs;
 ```
 
-<div class="narrow_table"></div>
 
 |               klingon_proverb                |      borg_proverb       |
 |:---|:---|
@@ -373,7 +360,7 @@ Historically, databases are not well-suited for pivoting operations. However, Du
 For example, let’s take a look at some procurement forecast data just as the Earth-Romulan war was beginning:
 
 ```sql
-CREATE TABLE purchases (item VARCHAR, year INT, count INT);
+CREATE TABLE purchases (item VARCHAR, year INTEGER, count INTEGER);
 
 INSERT INTO purchases
     VALUES ('phasers', 2155, 1035),
@@ -386,7 +373,6 @@ INSERT INTO purchases
 FROM purchases;
 ```
 
-<div class="narrow_table"></div>
 
 |       item       | year | count |
 |:---|:---|:---|
@@ -409,7 +395,6 @@ CREATE TABLE pivoted_purchases AS
 FROM pivoted_purchases;
 ```
 
-<div class="narrow_table"></div>
 
 |       item       | 2155 | 2156  | 2157  |
 |:---|:---|:---|:---|
@@ -430,7 +415,6 @@ UNPIVOT pivoted_purchases
           VALUE count;
 ```
 
-<div class="narrow_table"></div>
 
 |       item       | year | count |
 |:---|:---|:---|
@@ -457,7 +441,6 @@ SELECT
           .list_transform(x -> x.string_split(' ')[1]) AS short_name;
 ```
 
-<div class="narrow_table"></div>
 
 |            ship_name             |
 |:---|
@@ -471,7 +454,6 @@ SELECT
           .list_filter(x -> x.contains('1701')) AS the_original;
 ```
 
-<div class="narrow_table"></div>
 
 |     the_original      |
 |:---|
@@ -490,7 +472,6 @@ SELECT
      IF x.contains('1701')] AS ready_to_boldly_go;
 ```
 
-<div class="narrow_table"></div>
 
 | ready_to_boldly_go |
 |:---|
@@ -509,7 +490,6 @@ SELECT
      casualties.*;
 ```
 
-<div class="narrow_table"></div>
 
 | gold_casualties | blue_casualties | red_casualties |
 |:---|:---|:---|
@@ -529,7 +509,6 @@ FROM officers
 SELECT officers;
 ```
 
-<div class="narrow_table"></div>
 
 |                   officers                   |
 |:---|
@@ -546,15 +525,14 @@ By default DuckDB will seek the common denominator of data types when combining 
 
 ```sql
 SELECT 'The Motion Picture' AS movie UNION ALL 
-SELECT 2 UNION ALL 
-SELECT 3 UNION ALL 
-SELECT 4 UNION ALL 
-SELECT 5 UNION ALL 
-SELECT 6 UNION ALL 
+SELECT 2 UNION ALL
+SELECT 3 UNION ALL
+SELECT 4 UNION ALL
+SELECT 5 UNION ALL
+SELECT 6 UNION ALL
 SELECT 'First Contact';
 ```
 
-<div class="narrow_table"></div>
 
 |       movie        |
 |:---|
@@ -569,7 +547,7 @@ SELECT 'First Contact';
 However, if a `UNION` type is used, each individual row retains its original data type. A `UNION` is defined using key-value pairs with the key as a name and the value as the data type. This also allows the specific data types to be pulled out as individual columns:
 ```sql
 CREATE TABLE movies (
-     movie UNION(num INT, name VARCHAR)
+     movie UNION(num INTEGER, name VARCHAR)
 );
 INSERT INTO movies VALUES
      ('The Motion Picture'), (2), (3), (4), (5), (6), ('First Contact');
@@ -582,7 +560,6 @@ SELECT
      movie.num;
 ```
 
-<div class="narrow_table"></div>
 
 |       movie        | type |        name        | num |
 |:---|:---|:---|:---|

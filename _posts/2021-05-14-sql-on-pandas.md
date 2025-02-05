@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title: "Efficient SQL on Pandas with DuckDB"
 author: Mark Raasveldt and Hannes Mühleisen
@@ -8,8 +7,6 @@ tags: ["using DuckDB"]
 ---
 
 Recently, an article was published [advocating for using SQL for Data Analysis](https://hakibenita.com/sql-for-data-analysis). Here at team DuckDB, we are huge fans of [SQL](https://en.wikipedia.org/wiki/SQL). It is a versatile and flexible language that allows the user to efficiently perform a wide variety of data transformations, without having to care about how the data is physically represented or how to do these data transformations in the most optimal way.
-
-<!--more-->
 
 While you can very effectively perform aggregations and data transformations in an external database system such as Postgres if your data is stored there, at some point you will need to convert that data back into [Pandas](https://pandas.pydata.org) and [NumPy](https://numpy.org). These libraries serve as the standard for data exchange between the vast ecosystem of Data Science libraries in Python<sup>1</sup> such as [scikit-learn](https://scikit-learn.org/stable/) or [TensorFlow](https://www.tensorflow.org).
 

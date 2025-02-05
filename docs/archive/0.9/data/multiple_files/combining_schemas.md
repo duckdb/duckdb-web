@@ -47,7 +47,6 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 
 Reading the two files at the same time will produce the following result set:
 
-<div class="narrow_table"></div>
 
 | FlightDate | UniqueCarrier | OriginCityName |  DestCityName   |
 |------------|---------------|----------------|-----------------|
@@ -82,7 +81,6 @@ Reading these when unifying column names **by position** results in an error - a
 SELECT * FROM read_csv_auto(['flights3.csv', 'flights4.csv'], union_by_name=true);
 ```
 
-<div class="narrow_table"></div>
 
 | FlightDate | OriginCityName |  DestCityName   | UniqueCarrier |
 |------------|----------------|-----------------|---------------|

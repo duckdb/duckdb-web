@@ -22,7 +22,7 @@
 	],
 
 	// Uncomment the next line to run commands after the container is created.
-	"postCreateCommand": "bundler"
+	"postCreateCommand": "bundle exec jekyll serve --host 0.0.0.0 --incremental --livereload"
 
 	// Configure tool-specific properties.
 	// "customizations": {},

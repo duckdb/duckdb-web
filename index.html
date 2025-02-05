@@ -18,6 +18,7 @@ body_class: landing nowrap
 			<div>
 				<div class="topbar">
 					<ul class="lang">
+						<div class="select-highlight"></div>
 						<li data-language="sql" class="active">SQL</li>
 						<li data-language="python">Python</li>
 						<li data-language="r">R</li>
@@ -27,7 +28,7 @@ body_class: landing nowrap
 				</div>
 				<div class="content haslines">
 					<div class="lines"></div>
-						<div class="code dark">
+						<div class="code">
 {% highlight sql %}
 {% include landing-page/sql/aggregation.sql %}
 {% endhighlight -%}
@@ -178,7 +179,8 @@ body_class: landing nowrap
 </section>
 {% endif %}
 
-
+<div class="landing_bg_1"></div>
+<div class="landing_bg_2"></div>
 
 
 <section class="hidden">
@@ -307,15 +309,15 @@ body_class: landing nowrap
 
 <!-- ------------------- Node.js -------------------- -->
 
-<div data-language="nodejs" data-example="nodejs-sql-query" data-buttontxt="Node.js documentation" data-buttonurl="/docs/api/nodejs/overview">
+<div data-language="nodejs" data-example="nodejs-sql-query" data-buttontxt="Node.js documentation" data-buttonurl="/docs/api/node_neo/overview">
 {% highlight javascript %}
-{% include landing-page/nodejs/sql-query.js %}
+{% include landing-page/nodejs/sql-query.mjs %}
 {% endhighlight %}
 </div>
 
-<div data-language="nodejs" data-example="nodejs-web-service-integration" data-buttontxt="Node.js documentation" data-buttonurl="/docs/api/nodejs/overview">
+<div data-language="nodejs" data-example="nodejs-web-service-integration" data-buttontxt="Node.js documentation" data-buttonurl="/docs/api/node_neo/overview">
 {% highlight javascript %}
-{% include landing-page/nodejs/web-service-integration.js %}
+{% include landing-page/nodejs/web-service-integration.mjs %}
 {% endhighlight %}
 </div>
 

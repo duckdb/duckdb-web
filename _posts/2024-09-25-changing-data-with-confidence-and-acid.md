@@ -169,6 +169,7 @@ After restarting, we can check the `customer` table:
 
 ```python
 import duckdb
+
 con = duckdb.connect("mydb.duckdb")
 con.sql("SELECT name FROM customer").show()
 ```

@@ -110,7 +110,6 @@ SELECT regexp_matches('abc', 'A', 'i');    -- true
 
 The regex functions support the following `options`.
 
-<div class="narrow_table"></div>
 
 | Option | Description |
 |:---|:---|
@@ -135,7 +134,6 @@ SELECT regexp_matches(E'hello\nworld', 'hello.world', 's'); -- true
 
 The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve best performance, the `'c'` option (case-sensitive matching) should be passed if applicable. Note that by default the [`RE2` library](#regular-expression-syntax) doesn't match the `.` character to newline.
 
-<div class="narrow_table"></div>
 
 | Original | Optimized equivalent |
 |:---|:---|

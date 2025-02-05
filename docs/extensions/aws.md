@@ -39,7 +39,7 @@ a special function to load the AWS credentials in the [legacy authentication met
 
 | Function | Type | Description |
 |---|---|-------|
-| `load_aws_credentials` | `PRAGMA` function | Loads the AWS credentials through the [AWS Default Credentials Provider Chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html). |
+| `load_aws_credentials` | `PRAGMA` function | Loads the AWS credentials through the [AWS Default Credentials Provider Chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html) |
 
 ### Load AWS Credentials (Legacy)
 
@@ -49,7 +49,7 @@ To load the AWS credentials, run:
 CALL load_aws_credentials();
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | loaded_access_key_id | loaded_secret_access_key | loaded_session_token | loaded_region |
 |----------------------|--------------------------|----------------------|---------------|
@@ -61,7 +61,7 @@ The function takes a string parameter to specify a specific profile:
 CALL load_aws_credentials('minio-testing-2');
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | loaded_access_key_id | loaded_secret_access_key | loaded_session_token | loaded_region |
 |----------------------|--------------------------|----------------------|---------------|
@@ -73,7 +73,7 @@ There are several parameters to tweak the behavior of the call:
 CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret = false);
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | loaded_access_key_id | loaded_secret_access_key     | loaded_session_token | loaded_region |
 |----------------------|------------------------------|----------------------|---------------|

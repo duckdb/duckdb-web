@@ -22,10 +22,10 @@ SELECT 'Infinity'::FLOAT - 'Infinity'::FLOAT AS x;
 SELECT 'Infinity'::FLOAT - 1.0 AS x;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | Expression              | PostgreSQL |    DuckDB |  IEEE 754 |
-| :---------------------- | ---------: | --------: | --------: |
+|:------------------------|-----------:|----------:|----------:|
 | 1.0 / 0.0               |      error |  Infinity |  Infinity |
 | 0.0 / 0.0               |      error |       NaN |       NaN |
 | -1.0 / 0.0              |      error | -Infinity | -Infinity |
@@ -44,12 +44,9 @@ SELECT 1 / 2 AS x;
 
 PostgreSQL returns:
 
-```text
- x
----
- 0
-(1 row)
-```
+|    x |
+| ---: |
+|    0 |
 
 DuckDB returns:
 
@@ -85,17 +82,17 @@ ERROR:  UNION types boolean and integer cannot be matched
 
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
-|    x |
-| ---: |
-|    1 |
-|    2 |
+|   x|
+|---:|
+|   1|
+|   2|
 
 ## Case Sensitivity for Quoted Identifiers
 
 PostgreSQL is case-insensitive. The way PostgreSQL achieves case insensitivity is by lowercasing unquoted identifiers within SQL, whereas quoting preserves case, e.g., the following command creates a table named `mytable` but tries to query for `MyTaBLe` because quotes preserve the case.
 
 ```sql
-CREATE TABLE MyTaBLe(x INT);
+CREATE TABLE MyTaBLe(x INTEGER);
 SELECT * FROM "MyTaBLe";
 ```
 
@@ -106,7 +103,7 @@ ERROR:  relation "MyTaBLe" does not exist
 PostgreSQL does not only treat quoted identifiers as case-sensitive, PostgreSQL treats all identifiers as case-sensitive, e.g., this also does not work:
 
 ```sql
-CREATE TABLE "PreservedCase"(x INT);
+CREATE TABLE "PreservedCase"(x INTEGER);
 SELECT * FROM PreservedCase;
 ```
 
@@ -122,17 +119,17 @@ Therefore, DuckDB achieves case insensitivity by making identifiers fully case i
 In DuckDB, the scripts above complete successfully:
 
 ```sql
-CREATE TABLE MyTaBLe(x INT);
+CREATE TABLE MyTaBLe(x INTEGER);
 SELECT * FROM "MyTaBLe";
-CREATE TABLE "PreservedCase"(x INT);
+CREATE TABLE "PreservedCase"(x INTEGER);
 SELECT * FROM PreservedCase;
 SELECT table_name FROM duckdb_tables();
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
-| table_name    |
-| ------------- |
+|  table_name   |
+|---------------|
 | MyTaBLe       |
 | PreservedCase |
 
@@ -140,14 +137,14 @@ PostgreSQL's behavior of lowercasing identifiers is accessible using the [`prese
 
 ```sql
 SET preserve_identifier_case = false;
-CREATE TABLE MyTaBLe(x INT);
+CREATE TABLE MyTaBLe(x INTEGER);
 SELECT table_name FROM duckdb_tables();
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | table_name |
-| ---------- |
+|------------|
 | mytable    |
 
 However, the case insensitive matching in the system for identifiers cannot be turned off.
@@ -162,14 +159,11 @@ SELECT 1 == 1 AS t;
 
 DuckDB returns:
 
-```text
-┌─────────┐
-│    t    │
-│ boolean │
-├─────────┤
-│ true    │
-└─────────┘
-```
+<div class="monospace_table"></div>
+
+|  t   |
+|-----:|
+| true |
 
 Postgres returns:
 
@@ -189,10 +183,24 @@ For instruction on reclaiming space, refer to the [“Reclaiming space” page](
 
 ## Functions
 
+### `regexp_extract` Function
+
+Unlike PostgreSQL's `regexp_substr` function, DuckDB's `regexp_extract` returns empty strings instead of `NULL`s when there is no match. 
+
 ### `to_date` Function
 
 DuckDB does not support the [`to_date` PostgreSQL date formatting function](https://www.postgresql.org/docs/17/functions-formatting.html).
 Instead, please use the [`strptime` function]({% link docs/sql/functions/dateformat.md %}#strptime-examples).
+
+### `current_date` / `current_time` / `current_timestamp`
+
+DuckDB's `current_date` and `current_time` pseudo-columns return the current date (as `DATE`) and time (as `TIME`) in UTC, whereas PostgreSQL returns the current date (as `DATE`) in the configured local timezone and time as `TIMETZ`. For the current time in the configured timezone, still as regular `TIME`, DuckDB offers the function `current_localtime()`.
+
+Both DuckDB and PostgreSQL return `current_timestamp` as `TIMESTAMPTZ`. DuckDB additionally offers `current_localtimestamp()`, which returns the time in the configured timezone as `TIMESTAMP`.
+
+DuckDB does not currently offer `current_localdate()`; though this can be computed via `current_timestamp::DATE` or `current_localtimestamp()::DATE`.
+
+> See the [DuckDB blog entry on time zones]({% post_url 2022-01-06-time-zones %}) for more information on timestamps and timezones and DuckDB's handling thereof.
 
 ## Resolution of Type Names in the Schema
 
@@ -209,7 +217,6 @@ PostgreSQL returns an error on the last statement:
 ```console
 ERROR:  type "mytype" does not exist
 LINE 1: CREATE TABLE myschema.mytable (v mytype);
-                                         ^
 ```
 
 DuckDB runs the statement and creates the table successfully, confirmed by the following query:
@@ -218,11 +225,8 @@ DuckDB runs the statement and creates the table successfully, confirmed by the f
 DESCRIBE myschema.mytable;
 ```
 
-```text
-┌─────────────┬──────────────────┬─────────┬─────────┬─────────┬─────────┐
-│ column_name │   column_type    │  null   │   key   │ default │  extra  │
-│   varchar   │     varchar      │ varchar │ varchar │ varchar │ varchar │
-├─────────────┼──────────────────┼─────────┼─────────┼─────────┼─────────┤
-│ v           │ ENUM('as', 'df') │ YES     │ NULL    │ NULL    │ NULL    │
-└─────────────┴──────────────────┴─────────┴─────────┴─────────┴─────────┘
-```
+<div class="monospace_table"></div>
+
+| column_name |   column_type    | null | key  | default | extra |
+|-------------|------------------|------|------|---------|-------|
+| v           | ENUM('as', 'df') | YES  | NULL | NULL    | NULL  |

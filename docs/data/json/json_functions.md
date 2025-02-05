@@ -15,13 +15,16 @@ These functions supports the same two location notations as [JSON Scalar functio
 | `json_extract_string(json, path)` | `json_extract_path_text` | `->>` | Extracts `VARCHAR` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `VARCHAR`. |
 | `json_value(json, path)` | | | Extracts `JSON` from `json` at the given `path`. If the `json` at the supplied path is not a scalar value, it will return `NULL`. |
 
-Note that the equality comparison operator (`=`) has a higher precedence than the `->` JSON extract operator. Therefore, surround the uses of the `->` operator with parentheses when making equality comparisons. For example:
+Note that the arrow operator `->`, which is used for JSON extracts, has a low precedence as it is also used in [lambda functions]({% link docs/sql/functions/lambda.md %}).
+
+Therefore, you need to surround the `->` operator with parentheses when expressing operations such as equality comparisons (`=`).
+For example:
 
 ```sql
 SELECT ((JSON '{"field": 42}')->'field') = 42;
 ```
 
-> Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
+> Warning DuckDB's JSON data type uses [0-based indexing]({% link docs/data/json/overview.md %}#indexing).
 
 Examples:
 
@@ -127,7 +130,7 @@ SELECT j->'species'->>['0','1'] FROM example;
 [duck, goose]
 ```
 
-Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
+Note that DuckDB's JSON data type uses [0-based indexing]({% link docs/data/json/overview.md %}#indexing).
 
 If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
 
@@ -142,7 +145,7 @@ SELECT
 FROM example;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   family   |           species            |
 |------------|------------------------------|
@@ -199,7 +202,7 @@ SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[0]');
 1
 ```
 
-Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
+Note that DuckDB's JSON data type uses [0-based indexing]({% link docs/data/json/overview.md %}#indexing).
 
 JSONPath is more expressive, and can also access from the back of lists:
 
@@ -369,8 +372,6 @@ true
 
 There are three JSON aggregate functions.
 
-<div class="narrow_table"></div>
-
 | Function | Description |
 |:---|:----|
 | `json_group_array(any)` | Return a JSON array with all values of `any` in the aggregation. |
@@ -419,8 +420,6 @@ SELECT json_group_structure(j) FROM example2;
 
 In many cases, it is inefficient to extract values from JSON one-by-one.
 Instead, we can “extract” all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
-
-<div class="narrow_table"></div>
 
 | Function | Description |
 |:---|:---|

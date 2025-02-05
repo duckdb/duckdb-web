@@ -101,7 +101,7 @@ SELECT ifnull(1, 'default_string');
 
 ## `NULL` and Conjunctions
 
-`NULL` values have special semantics in `AND`/`OR` conjunctions. For the ternary logic truth tables, see the [Boolean Type documentation]({% link docs/sql/data_types/boolean.md %}).
+`NULL` values have special semantics in `AND` / `OR` conjunctions. For the ternary logic truth tables, see the [Boolean Type documentation]({% link docs/sql/data_types/boolean.md %}).
 
 ## `NULL` and Aggregate Functions
 

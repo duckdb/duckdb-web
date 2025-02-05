@@ -12,7 +12,6 @@ duckdb -help
 
 For a list of dot commands available in the CLI shell, see the [Dot Commands page]({% link docs/archive/1.0/api/cli/dot_commands.md %}).
 
-<div class="narrow_table"></div>
 
 <!-- markdownlint-disable MD056 -->
 

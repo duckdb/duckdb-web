@@ -13,7 +13,6 @@ For the behavior of the `autocomplete` extension, see the [documentation of the 
 
 ## Functions
 
-<div class="narrow_table"></div>
 
 | Function                          | Description                                          |
 |:----------------------------------|:-----------------------------------------------------|
@@ -28,7 +27,6 @@ FROM sql_auto_complete('SEL');
 
 Returns:
 
-<div class="narrow_table"></div>
 
 | suggestion  | suggestion_start |
 |-------------|------------------|

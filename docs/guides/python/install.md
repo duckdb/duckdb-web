@@ -27,4 +27,4 @@ cd tools/pythonpkg
 python setup.py install
 ```
 
-For detailed instructions on how to compile DuckDB from source, see the [Building guide]({% link docs/dev/building/build_instructions.md %}).
+For detailed instructions on how to compile DuckDB from source, see the [Building guide]({% link docs/dev/building/overview.md %}).

@@ -16,7 +16,6 @@ Consider the following table:
 
 ### Grades
 
-<div class="narrow_table"></div>
 
 | grade | course |
 |---:|:---|
@@ -210,7 +209,7 @@ SELECT t
 FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |           t           |
 |-----------------------|

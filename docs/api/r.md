@@ -109,7 +109,7 @@ print(res)
 
 > DuckDB keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb_unregister()` method.
 
-Also refer to [the data import documentation]({% link docs/data/overview.md %}) for more options of efficiently importing data.
+Also refer to the [data import documentation]({% link docs/data/overview.md %}) for more options of efficiently importing data.
 
 ## dbplyr
 

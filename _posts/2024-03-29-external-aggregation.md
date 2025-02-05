@@ -13,8 +13,6 @@ However, even if the aggregation does not fit in memory, DuckDB can still comple
 
 Not interested in the implementation? [Jump straight to the experiments!](#experiments)
 
-<!--more-->
-
 ## Introduction
 
 Around two years ago, we published our first blog post on DuckDB’s hash aggregation, titled [“Parallel Grouped Aggregation in DuckDB”]({% post_url 2022-03-07-aggregate-hashtable %}).
@@ -200,15 +198,15 @@ We use the following queries from the benchmark to load the data:
 SET preserve_insertion_order = false;
 CREATE TABLE y (
     id1 VARCHAR, id2 VARCHAR, id3 VARCHAR,
-    id4 INT, id5 INT, id6 INT, v1 INT, v2 INT,
-    v3 FLOAT);
+    id4 INTEGER, id5 INTEGER, id6 INTEGER,
+    v1 INTEGER, v2 INTEGER, v3 FLOAT);
 COPY y FROM 'G1_1e9_2e0_0_0.csv.zst' (FORMAT CSV, AUTO_DETECT true);
 CREATE TYPE id1ENUM AS ENUM (SELECT id1 FROM y);
 CREATE TYPE id2ENUM AS ENUM (SELECT id2 FROM y);
 CREATE TABLE x (
     id1 id1ENUM, id2 id2ENUM, id3 VARCHAR,
-    id4 INT, id5 INT, id6 INT, v1 INT, v2 INT,
-    v3 FLOAT);
+    id4 INTEGER, id5 INTEGER, id6 INTEGER,
+    v1 INTEGER, v2 INTEGER, v3 FLOAT);
 INSERT INTO x (SELECT * FROM y);
 DROP TABLE IF EXISTS y;
 ```
@@ -263,7 +261,7 @@ GROUP BY id4, id5;
 ```sql
 -- Query 7: ~10,000,000 unique groups
 CREATE OR REPLACE TABLE ans AS
-SELECT id3, max(v1)-min(v2) AS range_v1_v2
+SELECT id3, max(v1) - min(v2) AS range_v1_v2
 FROM x
 GROUP BY id3;
 ```
@@ -304,9 +302,9 @@ The following table is a summary of the hardware used.
 
 | Specs       | `c6id.metal` | Laptop |  Ratio |
 |:------------|-------------:|-------:|-------:|
-| Memory      |       256 GB |  16 GB |    16x |
-| CPU cores   |           64 |      8 |     8x |
-| CPU threads |          128 |      8 |    16x |
+| Memory      |       256 GB |  16 GB |    16× |
+| CPU cores   |           64 |      8 |     8× |
+| CPU threads |          128 |      8 |    16× |
 | Hourly cost |        $6.45 |  $0.00 |    NaN |
 
 Although the CPU cores of the AWS EC2 instance are not directly comparable with those of my laptop, the instance clearly has much more compute power and memory available.
@@ -314,22 +312,22 @@ Despite the large differences in hardware, DuckDB can complete all 10 queries wi
 
 | Query | `c6id.metal` | Laptop |  Ratio |
 |------:|-------------:|-------:|-------:|
-|     1 |         0.08 |   0.74 |  9.25x |
-|     2 |         0.09 |   0.76 |  8.44x |
-|     3 |         8.01 | 156.63 | 19.55x |
-|     4 |         0.26 |   2.07 |  7.96x |
-|     5 |         6.72 | 145.00 | 21.58x |
-|     6 |        17.12 |  19.28 |  1.13x |
-|     7 |         6.33 | 124.85 | 19.72x |
-|     8 |         6.53 | 126.35 | 19.35x |
-|     9 |         0.32 |   1.90 |  5.94x |
-|    10 |         8.58 | 264.14 | 30.79x |
+|     1 |         0.08 |   0.74 |  9.25× |
+|     2 |         0.09 |   0.76 |  8.44× |
+|     3 |         8.01 | 156.63 | 19.55× |
+|     4 |         0.26 |   2.07 |  7.96× |
+|     5 |         6.72 | 145.00 | 21.58× |
+|     6 |        17.12 |  19.28 |  1.13× |
+|     7 |         6.33 | 124.85 | 19.72× |
+|     8 |         6.53 | 126.35 | 19.35× |
+|     9 |         0.32 |   1.90 |  5.94× |
+|    10 |         8.58 | 264.14 | 30.79× |
 
 The runtime of the queries is reported in seconds, and was obtained by taking the median of 3 runs on my laptop using DuckDB 0.10.1.
 The `c6id.metal` instance results were obtained from the [benchmark website](https://duckdblabs.github.io/db-benchmark/).
 Despite being unable to _fit_ all unique groups in my laptop's memory, DuckDB can _compute_ all unique groups and return them.
 The largest query, query 10, takes almost 4.5 minutes to complete.
-This is over 30x longer than with the beefy `c6id.metal` instance.
+This is over 30× longer than with the beefy `c6id.metal` instance.
 The large difference is, of course, explained by the large differences in hardware.
 Interestingly, this is still faster than Spark on the `c6id.metal` instance, which takes 603.05 seconds!
 

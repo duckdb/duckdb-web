@@ -48,7 +48,6 @@ SELECT *
 FROM original;
 ```
 
-<div class="narrow_table"></div>
 
 | key |      value       |
 |-----|------------------|
@@ -80,7 +79,6 @@ SELECT *
 FROM original;
 ```
 
-<div class="narrow_table"></div>
 
 | key |    value    |
 |-----|-------------|

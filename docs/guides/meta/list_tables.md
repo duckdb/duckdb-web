@@ -10,8 +10,6 @@ CREATE TABLE tbl (i INTEGER);
 SHOW TABLES;
 ```
 
-<div class="narrow_table"></div>
-
 | name |
 |------|
 | tbl  |
@@ -24,8 +22,6 @@ CREATE SCHEMA s1;
 CREATE TABLE s1.tbl (v VARCHAR);
 SHOW ALL TABLES;
 ```
-
-<div class="narrow_table"></div>
 
 | database | schema | table_name | column_names | column_types | temporary |
 |----------|--------|------------|--------------|--------------|-----------|

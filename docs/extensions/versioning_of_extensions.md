@@ -64,7 +64,7 @@ In general for extensions the release cycle depends on their stability level. **
 sync with DuckDB's release cycle, but may also be quietly updated between DuckDB releases. **pre-release** and **stable**
 extensions follow their own release cycle. These may or may not coincide with DuckDB releases. To find out more about the release cycle of a specific
 extension, refer to the documentation or GitHub page of the respective extension. Generally, **pre-release** and **stable** extensions will document
-their releases as GitHub releases, an example of which you can see in the [delta extension](https://github.com/duckdb/duckdb_delta/releases).
+their releases as GitHub releases, an example of which you can see in the [`delta` extension](https://github.com/duckdb/duckdb-delta/releases).
 
 Finally, there is a small exception: All [in-tree]({% link docs/extensions/working_with_extensions.md %}#in-tree-vs-out-of-tree) extensions simply
 follow DuckDB's release cycle.
@@ -75,7 +75,7 @@ Just like DuckDB itself, DuckDB's core extensions have nightly or dev builds tha
 This can be useful when your workflow depends on a new feature, or when you need to confirm that your stack is compatible with the upcoming version.
 
 Nightly builds for extensions are slightly complicated due to the fact that currently DuckDB extensions binaries are tightly bound to a single DuckDB version. Because of this tight connection,
-there is a potential risk for a combinatory explosion. Therefore, not all combinations of nightly extension build and nightly DuckDB build are available.
+there is a potential risk for a combinatorial explosion. Therefore, not all combinations of nightly extension build and nightly DuckDB build are available.
 
 In general, there are 2 ways of using nightly builds: using a nightly DuckDB build and using a stable DuckDB build. Let's go over the differences between the two:
 
@@ -117,8 +117,6 @@ give the user information on which extensions were updated to/from which version
 UPDATE EXTENSIONS;
 ```
 
-<div class="narrow_table"></div>
-
 | extension_name | repository   | update_result         | previous_version | current_version |
 |:---------------|:-------------|:----------------------|:-----------------|:----------------|
 | httpfs         | core         | NO_UPDATE_AVAILABLE   | 70fd6a8a24       | 70fd6a8a24      |
@@ -134,8 +132,6 @@ The update statement can also be provided with a list of specific extensions to 
 ```sql
 UPDATE EXTENSIONS (httpfs, azure);
 ```
-
-<div class="narrow_table"></div>
 
 | extension_name | repository   | update_result         | previous_version | current_version |
 |:---------------|:-------------|:----------------------|:-----------------|:----------------|

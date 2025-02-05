@@ -212,7 +212,7 @@ Unfortunately, the [`cut` command cannot reorder the columns](https://stackoverf
 ```bash
 (head -n 1 pop.csv; tail -n +2 pop.csv \
     | sort -t , -k 2,2 -k 3rn) \
-    | awk -F , '{ print $2 "," $1 "," $3}'
+    | awk -F , '{ print $2 "," $1 "," $3 }'
 ```
 
 The result is the following:
@@ -259,9 +259,9 @@ We again rely on `head` and `tail` to treat the headers and the rest of the file
 
 ```bash
 head -n 1 pop.csv | cut -d , -f 1; \
-  comm -12 \
-    <(tail -n +2 pop.csv | cut -d , -f 1 | sort) \
-    <(tail -n +2 cities-airports.csv | cut -d , -f 1 | sort) 
+    comm -12 \
+        <(tail -n +2 pop.csv | cut -d , -f 1 | sort) \
+        <(tail -n +2 cities-airports.csv | cut -d , -f 1 | sort) 
 ```
 
 The script produces the following output:
@@ -428,9 +428,9 @@ We have to omit the header for the `join` command to work, so we do just that an
 
 ```bash
 echo "IATA,city,airport name"; \
-  join -t , -1 2 -2 1 \
-    <(tail -n +2 cities-airports.csv | sort -t , -k 2,2) \
-    <(tail -n +2 airport-names.csv   | sort -t , -k 1,1)
+    join -t , -1 2 -2 1 \
+        <(tail -n +2 cities-airports.csv | sort -t , -k 2,2) \
+        <(tail -n +2 airport-names.csv   | sort -t , -k 1,1)
 ```
 
 The result is the following:

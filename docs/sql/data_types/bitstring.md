@@ -4,11 +4,9 @@ title: Bitstring Type
 blurb: The bitstring type are strings of 1s and 0s.
 ---
 
-<div class="narrow_table"></div>
-
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `BITSTRING` | `BIT` | variable-length strings of 1s and 0s |
+| `BITSTRING` | `BIT` | Variable-length strings of 1s and 0s |
 
 Bitstrings are strings of 1s and 0s. The bit type data is of variable length. A bitstring value requires 1 byte for each group of 8 bits, plus a fixed amount to store some metadata.
 
@@ -23,7 +21,7 @@ A string encoding a bitstring can be cast to a `BITSTRING`:
 SELECT '101010'::BITSTRING AS b;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |   b    |
 |--------|
@@ -45,7 +43,7 @@ Numeric values (integer and float values) can also be converted to a `BITSTRING`
 SELECT 123::BITSTRING AS b;
 ```
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 |                b                 |
 |----------------------------------|

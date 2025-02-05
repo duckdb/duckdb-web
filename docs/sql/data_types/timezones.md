@@ -12,7 +12,7 @@ FROM pg_timezone_names()
 ORDER BY name;
 ```
 
-<div class="narrow_table"></div>
+<div class="monospace_table"></div>
 
 |               name               |              abbrev              |
 |----------------------------------|----------------------------------|
@@ -95,7 +95,7 @@ ORDER BY name;
 | America/Argentina/Ushuaia        | America/Argentina/Ushuaia        |
 | America/Aruba                    | PRT                              |
 | America/Asuncion                 | America/Asuncion                 |
-| America/Atikokan                 | America/Atikokan                 |
+| America/Atikokan                 | EST                              |
 | America/Atka                     | America/Atka                     |
 | America/Bahia                    | America/Bahia                    |
 | America/Bahia_Banderas           | America/Bahia_Banderas           |
@@ -113,14 +113,14 @@ ORDER BY name;
 | America/Caracas                  | America/Caracas                  |
 | America/Catamarca                | America/Catamarca                |
 | America/Cayenne                  | America/Cayenne                  |
-| America/Cayman                   | America/Cayman                   |
+| America/Cayman                   | EST                              |
 | America/Chicago                  | CST                              |
 | America/Chihuahua                | America/Chihuahua                |
 | America/Ciudad_Juarez            | America/Ciudad_Juarez            |
-| America/Coral_Harbour            | America/Coral_Harbour            |
+| America/Coral_Harbour            | EST                              |
 | America/Cordoba                  | America/Cordoba                  |
 | America/Costa_Rica               | America/Costa_Rica               |
-| America/Creston                  | PNT                              |
+| America/Creston                  | MST                              |
 | America/Cuiaba                   | America/Cuiaba                   |
 | America/Curacao                  | PRT                              |
 | America/Danmarkshavn             | America/Danmarkshavn             |
@@ -190,7 +190,7 @@ ORDER BY name;
 | America/Montreal                 | America/Montreal                 |
 | America/Montserrat               | PRT                              |
 | America/Nassau                   | America/Nassau                   |
-| America/New_York                 | America/New_York                 |
+| America/New_York                 | EST5EDT                          |
 | America/Nipigon                  | America/Nipigon                  |
 | America/Nome                     | America/Nome                     |
 | America/Noronha                  | America/Noronha                  |
@@ -199,10 +199,10 @@ ORDER BY name;
 | America/North_Dakota/New_Salem   | America/North_Dakota/New_Salem   |
 | America/Nuuk                     | America/Nuuk                     |
 | America/Ojinaga                  | America/Ojinaga                  |
-| America/Panama                   | America/Panama                   |
+| America/Panama                   | EST                              |
 | America/Pangnirtung              | America/Pangnirtung              |
 | America/Paramaribo               | America/Paramaribo               |
-| America/Phoenix                  | PNT                              |
+| America/Phoenix                  | MST                              |
 | America/Port-au-Prince           | America/Port-au-Prince           |
 | America/Port_of_Spain            | PRT                              |
 | America/Porto_Acre               | America/Porto_Acre               |
@@ -400,7 +400,7 @@ ORDER BY name;
 | CET                              | CET                              |
 | CNT                              | CNT                              |
 | CST                              | CST                              |
-| CST6CDT                          | CST6CDT                          |
+| CST6CDT                          | CST                              |
 | CTT                              | CTT                              |
 | Canada/Atlantic                  | Canada/Atlantic                  |
 | Canada/Central                   | Canada/Central                   |
@@ -456,15 +456,15 @@ ORDER BY name;
 | Etc/UTC                          | UCT                              |
 | Etc/Universal                    | UCT                              |
 | Etc/Zulu                         | UCT                              |
-| Europe/Amsterdam                 | Europe/Amsterdam                 |
+| Europe/Amsterdam                 | CET                              |
 | Europe/Andorra                   | Europe/Andorra                   |
 | Europe/Astrakhan                 | Europe/Astrakhan                 |
-| Europe/Athens                    | Europe/Athens                    |
+| Europe/Athens                    | EET                              |
 | Europe/Belfast                   | GB                               |
 | Europe/Belgrade                  | Europe/Belgrade                  |
 | Europe/Berlin                    | Europe/Berlin                    |
 | Europe/Bratislava                | Europe/Bratislava                |
-| Europe/Brussels                  | Europe/Brussels                  |
+| Europe/Brussels                  | CET                              |
 | Europe/Bucharest                 | Europe/Bucharest                 |
 | Europe/Budapest                  | Europe/Budapest                  |
 | Europe/Busingen                  | Europe/Busingen                  |
@@ -481,10 +481,10 @@ ORDER BY name;
 | Europe/Kiev                      | Europe/Kiev                      |
 | Europe/Kirov                     | Europe/Kirov                     |
 | Europe/Kyiv                      | Europe/Kyiv                      |
-| Europe/Lisbon                    | Portugal                         |
+| Europe/Lisbon                    | WET                              |
 | Europe/Ljubljana                 | Europe/Ljubljana                 |
 | Europe/London                    | GB                               |
-| Europe/Luxembourg                | Europe/Luxembourg                |
+| Europe/Luxembourg                | CET                              |
 | Europe/Madrid                    | Europe/Madrid                    |
 | Europe/Malta                     | Europe/Malta                     |
 | Europe/Mariehamn                 | Europe/Mariehamn                 |
@@ -551,10 +551,10 @@ ORDER BY name;
 | Japan                            | JST                              |
 | Kwajalein                        | Kwajalein                        |
 | Libya                            | Libya                            |
-| MET                              | MET                              |
+| MET                              | CET                              |
 | MIT                              | MIT                              |
 | MST                              | MST                              |
-| MST7MDT                          | MST7MDT                          |
+| MST7MDT                          | Navajo                           |
 | Mexico/BajaNorte                 | Mexico/BajaNorte                 |
 | Mexico/BajaSur                   | Mexico/BajaSur                   |
 | Mexico/General                   | Mexico/General                   |
@@ -564,11 +564,11 @@ ORDER BY name;
 | NZ-CHAT                          | NZ-CHAT                          |
 | Navajo                           | Navajo                           |
 | PLT                              | PLT                              |
-| PNT                              | PNT                              |
+| PNT                              | MST                              |
 | PRC                              | CTT                              |
 | PRT                              | PRT                              |
 | PST                              | PST                              |
-| PST8PDT                          | PST8PDT                          |
+| PST8PDT                          | PST                              |
 | Pacific/Apia                     | MIT                              |
 | Pacific/Auckland                 | NZ                               |
 | Pacific/Bougainville             | Pacific/Bougainville             |
@@ -584,8 +584,8 @@ ORDER BY name;
 | Pacific/Gambier                  | Pacific/Gambier                  |
 | Pacific/Guadalcanal              | SST                              |
 | Pacific/Guam                     | Pacific/Guam                     |
-| Pacific/Honolulu                 | Pacific/Honolulu                 |
-| Pacific/Johnston                 | Pacific/Johnston                 |
+| Pacific/Honolulu                 | HST                              |
+| Pacific/Johnston                 | HST                              |
 | Pacific/Kanton                   | Pacific/Kanton                   |
 | Pacific/Kiritimati               | Pacific/Kiritimati               |
 | Pacific/Kosrae                   | Pacific/Kosrae                   |
@@ -614,7 +614,7 @@ ORDER BY name;
 | Pacific/Wallis                   | Pacific/Wallis                   |
 | Pacific/Yap                      | Pacific/Yap                      |
 | Poland                           | Poland                           |
-| Portugal                         | Portugal                         |
+| Portugal                         | WET                              |
 | ROC                              | ROC                              |
 | ROK                              | ROK                              |
 | SST                              | SST                              |
@@ -636,11 +636,11 @@ ORDER BY name;
 | UCT                              | UCT                              |
 | US/Alaska                        | AST                              |
 | US/Aleutian                      | US/Aleutian                      |
-| US/Arizona                       | PNT                              |
+| US/Arizona                       | MST                              |
 | US/Central                       | CST                              |
 | US/East-Indiana                  | IET                              |
-| US/Eastern                       | US/Eastern                       |
-| US/Hawaii                        | US/Hawaii                        |
+| US/Eastern                       | EST5EDT                          |
+| US/Hawaii                        | HST                              |
 | US/Indiana-Starke                | US/Indiana-Starke                |
 | US/Michigan                      | US/Michigan                      |
 | US/Mountain                      | Navajo                           |

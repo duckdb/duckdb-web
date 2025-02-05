@@ -18,7 +18,6 @@ Patch versions only ship bugfixes, while minor versions also introduce new featu
 The planned dates of upcoming DuckDB releases are shown below.
 **Please note that these dates are tentative** and DuckDB maintainers may decide to push back release dates to ensure the stability and quality of releases.
 
-<div class="narrow_table"></div>
 
 <!-- markdownlint-disable MD055 MD056 MD058 -->
 
@@ -36,7 +35,6 @@ _There are no upcoming releases announced at the moment. Please check back later
 
 ## Past Releases
 
-<div class="narrow_table"></div>
 
 In the following, we list DuckDB's past releases along with their codename where applicable.
 Between versions 0.2.2 and 0.3.3, all releases (including patch versions) received a codename.
@@ -57,4 +55,4 @@ Since version 0.4.0, only major and minor versions get a codename.
 ## Release Calendar as a CSV File
 
 You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [CSV reader]({% link docs/data/csv/overview.md %}).
-<!-- This also [works in the online DuckDB shell](https://shell.duckdb.org/#queries=v0,SELECT-release_date%2C-version_number%2C-codename%2C-duck_species_primary%2C-duck_species_secondary%0AFROM-'https%3A%2F%2Fduckdb.org%2Fdata%2Fduckdb%20releases.csv'~). -->
+This also [works in the online DuckDB shell](https://shell.duckdb.org/#queries=v0,SELECT-release_date%2C-version_number%2C-codename%2C-duck_species_primary%2C-duck_species_secondary%0AFROM-'https%3A%2F%2Fduckdb.org%2Fdata%2Fduckdb%20releases.csv'~).

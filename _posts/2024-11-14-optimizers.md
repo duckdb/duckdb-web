@@ -178,7 +178,7 @@ EXPLAIN ...
 └───────────────────────────┘└───────────────────────────┘
 ```
 
-Let's first look at the difference in execution times on my Macbook with an M1 Max and 32 GB of memory before talking about the optimizations that have taken place.
+Let's first look at the difference in execution times on my MacBook with an M1 Max and 32 GB of memory before talking about the optimizations that have taken place.
 
 |          | Unoptimized | Optimized |
 |----------|-------------|-----------|
@@ -234,7 +234,7 @@ CREATE TABLE parts AS
 SELECT
     parts.p_id,
     parts.part_name,
-    count(*) as ordered_amount
+    count(*) AS ordered_amount
 FROM parts
 INNER JOIN orders 
     ON orders.pid = parts.p_id

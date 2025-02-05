@@ -16,7 +16,15 @@ FROM table_name
 WHERE id = 3;
 ```
 
-Select all rows that match the given case-insensitive `LIKE` expression:
+Select all rows that match the given **case-sensitive** `LIKE` expression:
+
+```sql
+SELECT *
+FROM table_name
+WHERE name LIKE '%mark%';
+```
+
+Select all rows that match the given **case-insensitive** expression formulated with the `ILIKE` operator:
 
 ```sql
 SELECT *

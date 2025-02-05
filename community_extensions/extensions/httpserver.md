@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: httpserver
   description: DuckDB HTTP API Server Extension
-  version: 0.1.3
+  version: 0.1.4
   language: SQL & C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-httpserver
-  ref: 9f075f6e39e171560c622f10b05f614646470e8b
+  ref: be1356be703f9fc088c9cd863bf177e4f8b25265
 
 docs:
   hello_world: |
@@ -48,14 +48,21 @@ docs:
       }
     );
 
+    -- DuckDB API Server settings
+    * If you want no authentication, just pass an empty string as parameter.
+    * If you want the API run in foreground set `DUCKDB_HTTPSERVER_FOREGROUND=1`
+    * If you want logs set `DUCKDB_HTTPSERVER_DEBUG=1` or `DUCKDB_HTTPSERVER_SYSLOG=1`
+
+    ![image info](https://private-user-images.githubusercontent.com/1423657/376339324-e930a8d2-b3e4-454e-ba12-e5e91b30bfbe.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzMzNDI2MTksIm5iZiI6MTczMzM0MjMxOSwicGF0aCI6Ii8xNDIzNjU3LzM3NjMzOTMyNC1lOTMwYThkMi1iM2U0LTQ1NGUtYmExMi1lNWU5MWIzMGJmYmUucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI0MTIwNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNDEyMDRUMTk1ODM5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9ZjI5OTEwZGNhM2NhZGI4NDJiYTE5ZmM1ZWIzZDE4OTBkZDY3ODBkMTkxM2E1ZWNiMjRmZDAzNzlkOWEyMjVmMiZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.iCK1p26RFbEjMWPyG5i8XmhPyzUn8J9cCsm1N1T8y5E)
+
 
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 124
-extension_star_count_pretty: 124
-extension_download_count: 203
-extension_download_count_pretty: 203
+extension_star_count: 149
+extension_star_count_pretty: 149
+extension_download_count: 506
+extension_download_count_pretty: 506
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---
@@ -86,7 +93,4 @@ LOAD {{ page.extension.name }};
 | httpserve_start | scalar        |             |         |         |
 | httpserve_stop  | scalar        |             |         |         |
 
-
-
----
 

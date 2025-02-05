@@ -121,7 +121,7 @@ try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO items VALUES (?
 }
 ```
 
-> Warning Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation]({% link docs/data/overview.md %}) for better options.
+> Warning Do *not* use prepared statements to insert large amounts of data into DuckDB. See the [data import documentation]({% link docs/data/overview.md %}) for better options.
 
 ### Arrow Methods
 

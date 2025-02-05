@@ -34,7 +34,6 @@ title: Official Extensions
 Different DuckDB clients ship a different set of extensions.
 We summarize the main distributions in the table below.
 
-<div class="narrow_table"></div>
 
 | Name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Node.js |
 |------|------|------|---|---|---|---|---|

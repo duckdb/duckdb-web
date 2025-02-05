@@ -131,7 +131,7 @@ Alternatively, you can prepare statements for parameterized queries using:
 ``` ts
 // Prepare query
 const stmt = await conn.prepare<{ v: arrow.Int32 }>(
-    `SELECT (v + ?) as v FROM generate_series(0, 10000) as t(v);`
+    `SELECT (v + ?) AS v FROM generate_series(0, 10000) t(v);`
 );
 // ... and run the query with materialized results
 await stmt.query(234);
@@ -257,21 +257,29 @@ You can alternatively use the `.files` command to register files from the local 
 ```sql
 .timer on
 
-select count(*) from 'https://shell.duckdb.org/data/tpch/0_01/parquet/lineitem.parquet';
-select count(*) from 'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet';
-select avg(c_acctbal) from 'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet';
+SELECT count(*)
+FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/lineitem.parquet';
 
-select * from 'https://shell.duckdb.org/data/tpch/0_01/parquet/orders.parquet' limit 10;
+SELECT count(*)
+FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet';
 
-select n_name, avg(c_acctbal) from
-  'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet',
-  'https://shell.duckdb.org/data/tpch/0_01/parquet/nation.parquet'
-where c_nationkey = n_nationkey group by n_name;
+SELECT avg(c_acctbal)
+FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet';
 
-select * from
-  'https://shell.duckdb.org/data/tpch/0_01/parquet/region.parquet',
-  'https://shell.duckdb.org/data/tpch/0_01/parquet/nation.parquet'
-where r_regionkey = n_regionkey;
+SELECT * FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/orders.parquet' LIMIT 10;
+
+SELECT n_name, avg(c_acctbal)
+FROM
+    'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet',
+    'https://shell.duckdb.org/data/tpch/0_01/parquet/nation.parquet'
+WHERE c_nationkey = n_nationkey
+GROUP BY n_name;
+
+SELECT *
+FROM
+    'https://shell.duckdb.org/data/tpch/0_01/parquet/region.parquet',
+    'https://shell.duckdb.org/data/tpch/0_01/parquet/nation.parquet'
+WHERE r_regionkey = n_regionkey;
 ```
 
 ## Evaluation

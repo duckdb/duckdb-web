@@ -53,7 +53,7 @@ Retrieving one or more values from a list can be accomplished using brackets and
 > This is only needed in our basic examples here, not when working with a list column.
 > For example, this can't be parsed: `SELECT ['a', 'b', 'c'][1]`.
 
-<div class="narrow_table monospace_table"></div>
+<div class="monospace_table"></div>
 
 | Example                                  | Result     |
 |:-----------------------------------------|:-----------|

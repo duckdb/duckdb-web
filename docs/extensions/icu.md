@@ -20,5 +20,5 @@ LOAD icu;
 
 The `icu` extension introduces the following features:
 
-* [region-dependent collations]({% link docs/sql/expressions/collations.md %})
-* [time zones]({% link docs/sql/data_types/timezones.md %}), used for [timestamp data types]({% link docs/sql/data_types/timestamp.md %}) and [timestamp functions]({% link docs/sql/functions/timestamptz.md %})
+* [Region-dependent collations]({% link docs/sql/expressions/collations.md %})
+* [Time zones]({% link docs/sql/data_types/timezones.md %}), used for [timestamp data types]({% link docs/sql/data_types/timestamp.md %}) and [timestamp functions]({% link docs/sql/functions/timestamptz.md %})

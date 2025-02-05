@@ -12,7 +12,6 @@ Bitstrings must be of equal length when performing the bitwise operands AND, OR 
 
 The table below shows the available mathematical operators for `BIT` type.
 
-<div class="narrow_table"></div>
 
 <!-- markdownlint-disable MD056 -->
 

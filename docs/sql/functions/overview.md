@@ -26,6 +26,14 @@ SELECT goose_name.replace('goose', 'duck') AS duck_name
 FROM unnest(['African goose', 'Faroese goose', 'Hungarian goose', 'Pomeranian goose']) breed(goose_name);
 ```
 
+> Tip To apply function chaining to literals, you must use parentheses, e.g.:
+>
+> ```sql
+> SELECT ('hello world').replace(' ', '_');
+> ```
+
+> Function chaining via the dot operator is limited to *scalar* functions; it is not available for *table* functions. For example, `SELECT * FROM ('/myfile.parquet').read_parquet()` is not supported.  
+
 ## Query Functions
 
 The `duckdb_functions()` table function shows the list of functions currently built into the system.
