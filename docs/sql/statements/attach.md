@@ -51,6 +51,7 @@ ATTACH IF NOT EXISTS 'file.db' AS file_db;
 ```
 
 Attach the database `file2.db` as alias `file_db` detaching and replacing the existing alias if it exists:
+
 ```sql
 ATTACH OR REPLACE 'file2.db' AS file_db;
 ```
