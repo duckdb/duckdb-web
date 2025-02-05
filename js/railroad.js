@@ -1886,13 +1886,13 @@ function GenerateOrderBy(options) {
 function GenerateStarOptions(options) {
 	return [
 		Optional(
-			Sequence([
-				Keyword("EXCLUDE"),
-				Keyword("("),
-				OneOrMore(Expression("exclude-name"), ","),
-				Keyword(")"),
-			]), "skip"),
-			Optional(
+			Choice(0, [
+				Sequence([
+					Keyword("EXCLUDE"),
+					Keyword("("),
+					OneOrMore(Expression("exclude-name"), ","),
+					Keyword(")"),
+				]),
 				Sequence([
 					Keyword("REPLACE"),
 					Keyword("("),
@@ -1902,7 +1902,30 @@ function GenerateStarOptions(options) {
 						Expression("column-name")
 					]), ","),
 					Keyword(")"),
-				]), "skip")
+				]),
+				Sequence([
+					Keyword("RENAME"),
+					Keyword("("),
+					OneOrMore(Sequence([
+						Expression("column-name"),
+						Keyword("AS"),
+						Expression("column-name")
+					]), ","),
+					Keyword(")"),
+				]),
+				Sequence([
+					Optional(Keyword("NOT"), "skip"),
+					Choice(0, [
+						Keyword("LIKE"),
+						Keyword("SIMILAR TO"),
+						Keyword("GLOB"),
+						Keyword("ILIKE"),
+					]),
+					Expression("pattern"),
+				]),
+			]),
+			"skip"
+		)	
 	]
 }
 
