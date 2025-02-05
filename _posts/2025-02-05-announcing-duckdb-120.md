@@ -10,7 +10,7 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
 
-> Some packages (R, Java) take a few extra days to release due to the reviews required in the release pipelines.
+> Some packages (Go, R, Java) take a few extra days to release due to the reviews required in the release pipelines.
 
 We are proud to release DuckDB 1.2.0. This release is codenamed “Histrionicus” after the good-looking [Harlequin duck (Histrionicus histrionicus)](https://en.wikipedia.org/wiki/Harlequin_duck), that inhabits "cold fast moving streams in North America, Greenland, Iceland and eastern Russia".
 
