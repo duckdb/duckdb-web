@@ -136,11 +136,9 @@ Error when sniffing file "rfc_4180-defiant.csv".
 It was not possible to automatically detect the CSV Parsing dialect/types
 ```
 
-But it's parsed with the more lenient option `strict_mode = false`, which is also the default:
+But it's parsed with the more lenient option `strict_mode = false`:
 
 ```sql
-FROM read_csv('rfc_4180-defiant.csv');
--- or
 FROM read_csv('rfc_4180-defiant.csv', strict_mode = false);
 ```
 
