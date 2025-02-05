@@ -86,7 +86,7 @@ ALTER TABLE tbl ADD PRIMARY KEY (id);
 ```
 
 [**Over-eager constraint checking addressed.**](https://github.com/duckdb/duckdb/pull/15092)
-We also resolved a long-standing issue with [over-eager unique constraint checking]({% link docs/archive/1.0/sql/indexes.md %}#over-eager-unique-constraint-checking). For example, the following sequence of commands used to throw an error but now works:
+We also resolved a long-standing issue with [over-eager unique constraint checking](https://duckdb.org/docs/archive/1.1/sql/indexes.html#over-eager-unique-constraint-checking). For example, the following sequence of commands used to throw an error but now works:
 
 ```sql
 CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
