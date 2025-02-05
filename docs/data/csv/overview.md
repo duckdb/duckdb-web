@@ -121,6 +121,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `sep` | Delimiter character used to separate columns within each line. Alias for `delim`. | `VARCHAR` | `,` |
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
 | `store_rejects` | Skip any lines with errors and store them in the rejects table. | `BOOL` | `false` |
+| `strict_mode` | Enforces the strictness level of the CSV Reader. When set to `true`, the parser will throw an error upon encountering any issues. When set to `false`, the parser will attempt to read structurally incorrect files. It is important to note that reading structurally incorrect files can cause ambiguity; therefore, this option should be used with caution. | `BOOL` | `true` |
 | `timestampformat` | [Timestamp format]({% link docs/sql/functions/dateformat.md %}) used when parsing and writing timestamps. | `VARCHAR` | (empty) |
 | `timestamp_format` | Alias for `timestampformat`; only available in the `COPY` statement. | `VARCHAR` | (empty) |
 | `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). See [example]({% link docs/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
