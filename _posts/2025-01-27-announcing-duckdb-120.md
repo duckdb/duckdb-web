@@ -16,28 +16,28 @@ We are proud to release DuckDB 1.2.0. This release is codenamed “Histrionicus�
 
 ## What's New in 1.2.0
 
+There have been far too many changes to discuss them each in detail, but we would like to highlight several particularly important and exciting features!
+Below is a summary of those new features with examples.
+
 ### Breaking Changes
 
 [**The `random` function now uses a larger state.**](https://github.com/duckdb/duckdb/pull/13920)
-This means that it's even more random™ now. Due to this change fixed seeds will now produce different values than the previous versions of DuckDB.
+This means that it's _even more random_™ now. Due to this change fixed seeds will now produce different values than in the previous versions of DuckDB.
 
 [**`map['entry']` now returns a value, instead of a *list* of entries.**](https://github.com/duckdb/duckdb/pull/14175)
-For example, `map(['k'], ['v'])['k']` now returns `v`, while previously it returned `['v']`. We also introduced the `map_extract_value`, which is now the alias for the bracket operator `[]`.
-Note that [`map_extract`]({% link docs/sql/functions/map.md %}#map_extractmap-key) still returns a list: `map(['k'], ['v']), 'k' = ['v']`.
+For example, `map(['k'], ['v'])['k']` now returns `'v'`, while previously it returned `['v']`. We also introduced the `map_extract_value` function, which is now the alias for the bracket operator `[]`.
+If you would like to return a list, use the [`map_extract` function]({% link docs/sql/functions/map.md %}#map_extractmap-key): `map_extract(map(['k'], ['v']), 'k') = ['v']`.
 
-[**The indexing of `list_reduce` was fixed.**](https://github.com/duckdb/duckdb/pull/15614)
-The indexing starts from 1 now.
-
-There have been far too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
-Below is a summary of those new features with examples.
+[**The indexing of `list_reduce` is fixed.**](https://github.com/duckdb/duckdb/pull/15614) When indexing is applied in `list_reduce`, the index points to the [last parameter of the lambda function]({% link docs/sql/functions/lambda.md %}#reduce) and indexing starts from 1. Therefore, `list_reduce(['a', 'b'], (x, y, i) -> x || y || i)` returns `ab2`.
 
 ### Explicit Storage Versions
 
-DuckDB v1.2.0 ships new compression methods but *they are not yet enabled by default* to enable older DuckDB versions to read files.
+DuckDB v1.2.0 ships new compression methods but *they are not yet enabled by default* to ensure that older DuckDB versions can read files produced by DuckDB v1.2.0.
 
-In practice, this means the following: DuckDB v1.2.0 can read database files written by past stable DuckDB versions such as v1.1.3. When using DuckDB v1.2.0 with default settings, older versions can read files written by DuckDB v1.2.0.
+In practice, this means that DuckDB v1.2.0 can read database files written by past stable DuckDB versions such as v1.0.0.
+When using DuckDB v1.2.0 with default settings, older versions can read files written by DuckDB v1.2.0.
 
-Users can *opt-in to newer forwards incompatible features* using the following syntax:
+You can *opt-in to newer forwards-incompatible features* using the following syntax:
 
 ```sql
 ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
@@ -45,31 +45,38 @@ ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
 
 This setting specifies the minimum DuckDB version that should be able to read the database file. When database files are written with this option, the resulting files cannot be opened by older DuckDB released versions than the specified version. They can be read by the specified version and all newer versions of DuckDB.
 
+If you attach to DuckDB databases, you can query the storage versions using the following command:
+
 ```sql
-SELECT database_name, tags
-FROM duckdb_databases();
+SELECT database_name, tags FROM duckdb_databases();
 ```
 
 This shows the storage versions:
 
 ```text
-file1  │ {storage_version=v1.0.0 - v1.1.3}
-file2  │ {storage_version=v1.2.0}
+┌───────────────┬───────────────────────────────────┐
+│ database_name │               tags                │
+│    varchar    │       map(varchar, varchar)       │
+├───────────────┼───────────────────────────────────┤
+│ file1         │ {storage_version=v1.2.0}          │
+│ file2         │ {storage_version=v1.0.0 - v1.1.3} │
+│ ...           │ ...                               │
+└───────────────┴───────────────────────────────────┘
 ```
 
-Meaning `file1` can be opened by past DuckDB versions while `file2` is compatible only with `v1.2.0` (or future versions).
+This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
 
 To convert from the new format to the old format, use the following sequence in DuckDB v1.2.0:
 
 ```sql
 ATTACH 'file1.db';
-ATTACH 'file2.db' (STORAGE_VERSION 'v1.0.0');
-COPY FROM DATABASE file1 TO file2;
+ATTACH 'converted_file.db' (STORAGE_VERSION 'v1.0.0');
+COPY FROM DATABASE file1 TO converted_file;
 ```
 
 ### Indexing
 
-[**`ALTER TABLE ... ADD PRIMARY KEY`.**] (https://github.com/duckdb/duckdb/pull/14419)
+[**`ALTER TABLE ... ADD PRIMARY KEY`.**](https://github.com/duckdb/duckdb/pull/14419)
 After a long while, DuckDB is finally able to add a primary key to an existing table 🎉. So it is now possible to run this:
 
 ```sql
@@ -79,7 +86,6 @@ ALTER TABLE tbl ADD PRIMARY KEY (id);
 ```
 
 [**Over-eager constraint checking addressed.**](https://github.com/duckdb/duckdb/pull/15092)
-
 We also resolved a long-standing issue with [over-eager unique constraint checking]({% link docs/archive/1.0/sql/indexes.md %}#over-eager-unique-constraint-checking). For example, the following sequence of commands used to throw an error but now works:
 
 ```sql
@@ -108,11 +114,12 @@ a🦆b
 hello🦆world
 ```
 
-```plsql
+```sql
 FROM read_csv('example.dsv', sep = '🦆');
 ```
+
 [**Strict CSV parsing.**](https://github.com/duckdb/duckdb/pull/14464)
-[RFC 4180](https://www.ietf.org/rfc/rfc4180.txt) defines requirements for well-formed CSV files, e.g., having a single line delimiter.
+The [RFC 4180 specification](https://www.ietf.org/rfc/rfc4180.txt) defines requirements for well-formed CSV files, e.g., having a single line delimiter.
 DuckDB can parse CSVs in so-called strict mode, just set the `strict_mode` flag to `true`. For example, the following CSV file gets rejected because of mixed newline characters:
 
 ```bash
@@ -129,7 +136,7 @@ Error when sniffing file "rfc_4180-defiant.csv".
 It was not possible to automatically detect the CSV Parsing dialect/types
 ```
 
-But it's parsed with the more lenient option, which is also the default:
+But it's parsed with the more lenient option `strict_mode = false`, which is also the default:
 
 ```sql
 FROM read_csv('rfc_4180-defiant.csv');
@@ -164,7 +171,7 @@ DuckDB now supports the `DELTA_BINARY_PACKED` compression as well as the `DELTA_
 ### CLI Improvements
 
 [**Safe mode.**](https://github.com/duckdb/duckdb/pull/14509)
-The CLI now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/api/cli/dot_commands.md %). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/operations_manual/securing_duckdb/overview.md %}.
+The CLI now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/api/cli/dot_commands.md %}). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/operations_manual/securing_duckdb/overview.md %}).
 
 [**Better autocomplete.**](https://github.com/duckdb/duckdb/pull/15003)
 The autocomplete in CLI now uses a [Parsing Expression Grammar (PEG)]({% post_url 2024-11-22-runtime-extensible-parsers %}) for better autocomplete, as well as improved error messages and suggestions.
@@ -186,7 +193,7 @@ SELECT 100_000_000 AS x, pi() * 1e9 AS y;
 └──────────────────┴───────────────────┘
 ```
 
-## Friendly SQL
+### Friendly SQL
 
 [**Prefix aliases.**](https://github.com/duckdb/duckdb/pull/14436)
 SQL Expression and table aliases can now be specified before the thing they are referring to (instead of using the well-known `AS`s syntax. This can improve readability in some cases, for example:
@@ -202,7 +209,7 @@ FROM
 
 Credit for this idea goes to [Michael Toy](https://www.linkedin.com/in/michael-toy-27b3407/). A separate blog post will follow soon.
 [**RENAME clause**.](https://github.com/duckdb/duckdb/pull/14650)
-DuckDB now supports the `RENAME` clause in `SELECT`. This allows renaming fields emitted by the [`*` expression]({% link %}):
+DuckDB now supports the `RENAME` clause in `SELECT`. This allows renaming fields emitted by the [`*` expression]({% link docs/sql/expressions/star.md %}):
 
 ```sql
 CREATE TABLE integers(col1 INT, col2 INT);
