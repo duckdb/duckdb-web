@@ -15,6 +15,7 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 ## Data Import and Export
 
 * [Data import overview]({% link docs/guides/file_formats/overview.md %})
+* [File Access with the file: Protocol]({% link docs/guides/file_formats/file_access.md %})
 
 ### CSV Files
 
