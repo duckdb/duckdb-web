@@ -147,8 +147,7 @@ extension:
   version: 1.0.0
 repo:
   github: rustyconover/duckdb-shellfs-extension
-  ref: 651981d540027681c06252d433e5590370131444
-  ref_next: c44c69ab61cc6c11391e4e15f76a1ceb32ff9547
+  ref: c44c69ab61cc6c11391e4e15f76a1ceb32ff9547
 
 extension_star_count: 59
 extension_star_count_pretty: 59

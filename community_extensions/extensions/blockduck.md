@@ -48,21 +48,4 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|            function_name            | function_type | description | comment | example |
-|-------------------------------------|---------------|-------------|---------|---------|
-| blockduck_create_contract_event_rpc | pragma        |             |         |         |
-| blockduck_create_contract_view_rpc  | pragma        |             |         |         |
-| blockduck_set_configs               | pragma        |             |         |         |
-| blockduck_set_verbose               | pragma        |             |         |         |
-| blockduck_version                   | table         |             |         |         |
-| eth_blocks_rpc                      | table         |             |         |         |
-| eth_latest_block_rpc                | table         |             |         |         |
-| eth_logs_rpc                        | table         |             |         |         |
-| eth_traces_rpc                      | table         |             |         |         |
-| eth_transactions_rpc                | table         |             |         |         |
-
 

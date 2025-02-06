@@ -129,16 +129,4 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|  function_name  | function_type | description | comment | example |
-|-----------------|---------------|-------------|---------|---------|
-| open_prompt     | scalar        |             |         |         |
-| set_api_timeout | scalar        |             |         |         |
-| set_api_token   | scalar        |             |         |         |
-| set_api_url     | scalar        |             |         |         |
-| set_model_name  | scalar        |             |         |         |
-
 

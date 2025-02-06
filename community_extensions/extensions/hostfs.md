@@ -83,30 +83,4 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|   function_name    | function_type | description | comment | example |
-|--------------------|---------------|-------------|---------|---------|
-| absolute_path      | scalar        |             |         |         |
-| cd                 | pragma        |             |         |         |
-| cd                 | table         |             |         |         |
-| file_extension     | scalar        |             |         |         |
-| file_last_modified | scalar        |             |         |         |
-| file_name          | scalar        |             |         |         |
-| file_size          | scalar        |             |         |         |
-| hostfs             | scalar        |             |         |         |
-| hsize              | scalar        |             |         |         |
-| is_dir             | scalar        |             |         |         |
-| is_file            | scalar        |             |         |         |
-| ls                 | pragma        |             |         |         |
-| ls                 | table         |             |         |         |
-| lsr                | pragma        |             |         |         |
-| lsr                | table         |             |         |         |
-| path_exists        | scalar        |             |         |         |
-| path_type          | scalar        |             |         |         |
-| pwd                | pragma        |             |         |         |
-| pwd                | scalar        |             |         |         |
-
 

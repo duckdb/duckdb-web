@@ -50,30 +50,4 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|        function_name        | function_type | description | comment | example |
-|-----------------------------|---------------|-------------|---------|---------|
-| build_my_enum               | table_macro   |             |         |         |
-| columns_values_axis_columns | macro         |             |         |         |
-| columns_values_axis_rows    | macro         |             |         |         |
-| dq                          | macro         |             |         |         |
-| dq_concat                   | macro         |             |         |         |
-| dq_list                     | macro         |             |         |         |
-| no_columns                  | macro         |             |         |         |
-| nq                          | macro         |             |         |         |
-| nq_concat                   | macro         |             |         |         |
-| nq_list                     | macro         |             |         |         |
-| pivot_table                 | scalar        |             |         |         |
-| pivot_table                 | table_macro   |             |         |         |
-| pivot_table_openssl_version | scalar        |             |         |         |
-| pivot_table_show_sql        | table_macro   |             |         |         |
-| replace_zzz                 | macro         |             |         |         |
-| sq                          | macro         |             |         |         |
-| sq_concat                   | macro         |             |         |         |
-| sq_list                     | macro         |             |         |         |
-| totals_list                 | macro         |             |         |         |
-
 

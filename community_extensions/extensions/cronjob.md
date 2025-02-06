@@ -82,14 +82,4 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| cron          | scalar        |             |         |         |
-| cron_delete   | scalar        |             |         |         |
-| cron_jobs     | table         |             |         |         |
-
 
