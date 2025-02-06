@@ -7,6 +7,7 @@ function GenerateCreateIndex(options = {}) {
 				Keyword("CREATE"),
 				Optional(Keyword("UNIQUE"), "skip"),
 				Keyword("INDEX"),
+				GenerateIfNotExists(),
 				Expression("name"),
 				Keyword("ON"),
 				Expression("table"),
