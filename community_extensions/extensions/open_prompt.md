@@ -104,10 +104,10 @@ docs:
     ```
 
 
-extension_star_count: 33
-extension_star_count_pretty: 33
-extension_download_count: 389
-extension_download_count_pretty: 389
+extension_star_count: 34
+extension_star_count_pretty: 34
+extension_download_count: 439
+extension_download_count_pretty: 439
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
@@ -128,17 +128,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|  function_name  | function_type | description | comment | example |
-|-----------------|---------------|-------------|---------|---------|
-| open_prompt     | scalar        |             |         |         |
-| set_api_timeout | scalar        |             |         |         |
-| set_api_token   | scalar        |             |         |         |
-| set_api_url     | scalar        |             |         |         |
-| set_model_name  | scalar        |             |         |         |
 
 

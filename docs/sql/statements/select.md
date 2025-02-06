@@ -153,7 +153,23 @@ SELECT rowid, id, content FROM t;
 | 0     | 42 | hello   |
 | 1     | 43 | world   |
 
-In the current storage, these identifiers are contiguous unsigned integers (0, 1, ...) if no rows were deleted. Deletions introduce gaps in the rowids which may be reclaimed later. Therefore, it is strongly recommended *not to use rowids as identifiers*.
+In the current storage, these identifiers are contiguous unsigned integers (0, 1, ...) if no rows were deleted. Deletions introduce gaps in the rowids which may be reclaimed later:
+
+```sql
+CREATE OR REPLACE TABLE t AS (FROM range(10) r(i));
+DELETE FROM t WHERE i % 2 = 0;
+SELECT rowid FROM t;
+```
+
+| rowid |
+|------:|
+| 1     |
+| 3     |
+| 5     |
+| 7     |
+| 9     |
+
+It is strongly to *avoid using rowids as identifiers*.
 
 > Tip The `rowid` values are stable within a transaction.
 

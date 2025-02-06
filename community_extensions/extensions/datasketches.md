@@ -81,13 +81,13 @@ extension:
   version: 0.0.2
 repo:
   github: rustyconover/duckdb-datasketches
-  ref: 2e02577641aa1e5acee11d7c0c6ff4d4d2be0589
-  ref_next: 97ece9c4a4f5e2763de98b48f900e57dfafd895b
+  ref: 97ece9c4a4f5e2763de98b48f900e57dfafd895b
   
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 468
-extension_download_count_pretty: 468
+
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 448
+extension_download_count_pretty: 448
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---
@@ -109,118 +109,45 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|               function_name                | function_type | description | comment | example |
-|--------------------------------------------|---------------|-------------|---------|---------|
-| datasketch_cpc                             | aggregate     |             |         |         |
-| datasketch_cpc_describe                    | scalar        |             |         |         |
-| datasketch_cpc_estimate                    | scalar        |             |         |         |
-| datasketch_cpc_is_empty                    | scalar        |             |         |         |
-| datasketch_cpc_lower_bound                 | scalar        |             |         |         |
-| datasketch_cpc_union                       | aggregate     |             |         |         |
-| datasketch_cpc_upper_bound                 | scalar        |             |         |         |
-| datasketch_hll                             | aggregate     |             |         |         |
-| datasketch_hll_describe                    | scalar        |             |         |         |
-| datasketch_hll_estimate                    | scalar        |             |         |         |
-| datasketch_hll_is_compact                  | scalar        |             |         |         |
-| datasketch_hll_is_empty                    | scalar        |             |         |         |
-| datasketch_hll_lg_config_k                 | scalar        |             |         |         |
-| datasketch_hll_lower_bound                 | scalar        |             |         |         |
-| datasketch_hll_union                       | aggregate     |             |         |         |
-| datasketch_hll_upper_bound                 | scalar        |             |         |         |
-| datasketch_kll                             | aggregate     |             |         |         |
-| datasketch_kll_cdf                         | scalar        |             |         |         |
-| datasketch_kll_describe                    | scalar        |             |         |         |
-| datasketch_kll_is_empty                    | scalar        |             |         |         |
-| datasketch_kll_is_estimation_mode          | scalar        |             |         |         |
-| datasketch_kll_k                           | scalar        |             |         |         |
-| datasketch_kll_max_item                    | scalar        |             |         |         |
-| datasketch_kll_min_item                    | scalar        |             |         |         |
-| datasketch_kll_n                           | scalar        |             |         |         |
-| datasketch_kll_normalized_rank_error       | scalar        |             |         |         |
-| datasketch_kll_num_retained                | scalar        |             |         |         |
-| datasketch_kll_pmf                         | scalar        |             |         |         |
-| datasketch_kll_quantile                    | scalar        |             |         |         |
-| datasketch_kll_rank                        | scalar        |             |         |         |
-| datasketch_quantiles                       | aggregate     |             |         |         |
-| datasketch_quantiles_cdf                   | scalar        |             |         |         |
-| datasketch_quantiles_describe              | scalar        |             |         |         |
-| datasketch_quantiles_is_empty              | scalar        |             |         |         |
-| datasketch_quantiles_is_estimation_mode    | scalar        |             |         |         |
-| datasketch_quantiles_k                     | scalar        |             |         |         |
-| datasketch_quantiles_max_item              | scalar        |             |         |         |
-| datasketch_quantiles_min_item              | scalar        |             |         |         |
-| datasketch_quantiles_n                     | scalar        |             |         |         |
-| datasketch_quantiles_normalized_rank_error | scalar        |             |         |         |
-| datasketch_quantiles_num_retained          | scalar        |             |         |         |
-| datasketch_quantiles_pmf                   | scalar        |             |         |         |
-| datasketch_quantiles_quantile              | scalar        |             |         |         |
-| datasketch_quantiles_rank                  | scalar        |             |         |         |
-| datasketch_req                             | aggregate     |             |         |         |
-| datasketch_req_cdf                         | scalar        |             |         |         |
-| datasketch_req_describe                    | scalar        |             |         |         |
-| datasketch_req_is_empty                    | scalar        |             |         |         |
-| datasketch_req_is_estimation_mode          | scalar        |             |         |         |
-| datasketch_req_k                           | scalar        |             |         |         |
-| datasketch_req_max_item                    | scalar        |             |         |         |
-| datasketch_req_min_item                    | scalar        |             |         |         |
-| datasketch_req_n                           | scalar        |             |         |         |
-| datasketch_req_num_retained                | scalar        |             |         |         |
-| datasketch_req_pmf                         | scalar        |             |         |         |
-| datasketch_req_quantile                    | scalar        |             |         |         |
-| datasketch_req_rank                        | scalar        |             |         |         |
-| datasketch_tdigest                         | aggregate     |             |         |         |
-| datasketch_tdigest_cdf                     | scalar        |             |         |         |
-| datasketch_tdigest_describe                | scalar        |             |         |         |
-| datasketch_tdigest_is_empty                | scalar        |             |         |         |
-| datasketch_tdigest_k                       | scalar        |             |         |         |
-| datasketch_tdigest_pmf                     | scalar        |             |         |         |
-| datasketch_tdigest_quantile                | scalar        |             |         |         |
-| datasketch_tdigest_rank                    | scalar        |             |         |         |
-| datasketch_tdigest_total_weight            | scalar        |             |         |         |
-
 ### Added Types
 
 <div class="extension_types_table"></div>
 
 |         type_name          | type_size | logical_type | type_category | internal |
 |----------------------------|----------:|--------------|---------------|---------:|
-| sketch_cpc                 | 16        | BLOB         |               | true     |
-| sketch_hll                 | 16        | BLOB         |               | true     |
-| sketch_kll_bigint          | 16        | BLOB         |               | true     |
-| sketch_kll_double          | 16        | BLOB         |               | true     |
-| sketch_kll_float           | 16        | BLOB         |               | true     |
-| sketch_kll_integer         | 16        | BLOB         |               | true     |
-| sketch_kll_smallint        | 16        | BLOB         |               | true     |
-| sketch_kll_tinyint         | 16        | BLOB         |               | true     |
-| sketch_kll_ubigint         | 16        | BLOB         |               | true     |
-| sketch_kll_uinteger        | 16        | BLOB         |               | true     |
-| sketch_kll_usmallint       | 16        | BLOB         |               | true     |
-| sketch_kll_utinyint        | 16        | BLOB         |               | true     |
-| sketch_quantiles_bigint    | 16        | BLOB         |               | true     |
-| sketch_quantiles_double    | 16        | BLOB         |               | true     |
-| sketch_quantiles_float     | 16        | BLOB         |               | true     |
-| sketch_quantiles_integer   | 16        | BLOB         |               | true     |
-| sketch_quantiles_smallint  | 16        | BLOB         |               | true     |
-| sketch_quantiles_tinyint   | 16        | BLOB         |               | true     |
-| sketch_quantiles_ubigint   | 16        | BLOB         |               | true     |
-| sketch_quantiles_uinteger  | 16        | BLOB         |               | true     |
-| sketch_quantiles_usmallint | 16        | BLOB         |               | true     |
-| sketch_quantiles_utinyint  | 16        | BLOB         |               | true     |
-| sketch_req_bigint          | 16        | BLOB         |               | true     |
-| sketch_req_double          | 16        | BLOB         |               | true     |
-| sketch_req_float           | 16        | BLOB         |               | true     |
-| sketch_req_integer         | 16        | BLOB         |               | true     |
-| sketch_req_smallint        | 16        | BLOB         |               | true     |
-| sketch_req_tinyint         | 16        | BLOB         |               | true     |
-| sketch_req_ubigint         | 16        | BLOB         |               | true     |
-| sketch_req_uinteger        | 16        | BLOB         |               | true     |
-| sketch_req_usmallint       | 16        | BLOB         |               | true     |
-| sketch_req_utinyint        | 16        | BLOB         |               | true     |
-| sketch_tdigest_double      | 16        | BLOB         |               | true     |
-| sketch_tdigest_float       | 16        | BLOB         |               | true     |
+| sketch_cpc                 | 16        | BLOB         | NULL          | true     |
+| sketch_hll                 | 16        | BLOB         | NULL          | true     |
+| sketch_kll_bigint          | 16        | BLOB         | NULL          | true     |
+| sketch_kll_double          | 16        | BLOB         | NULL          | true     |
+| sketch_kll_float           | 16        | BLOB         | NULL          | true     |
+| sketch_kll_integer         | 16        | BLOB         | NULL          | true     |
+| sketch_kll_smallint        | 16        | BLOB         | NULL          | true     |
+| sketch_kll_tinyint         | 16        | BLOB         | NULL          | true     |
+| sketch_kll_ubigint         | 16        | BLOB         | NULL          | true     |
+| sketch_kll_uinteger        | 16        | BLOB         | NULL          | true     |
+| sketch_kll_usmallint       | 16        | BLOB         | NULL          | true     |
+| sketch_kll_utinyint        | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_bigint    | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_double    | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_float     | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_integer   | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_smallint  | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_tinyint   | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_ubigint   | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_uinteger  | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_usmallint | 16        | BLOB         | NULL          | true     |
+| sketch_quantiles_utinyint  | 16        | BLOB         | NULL          | true     |
+| sketch_req_bigint          | 16        | BLOB         | NULL          | true     |
+| sketch_req_double          | 16        | BLOB         | NULL          | true     |
+| sketch_req_float           | 16        | BLOB         | NULL          | true     |
+| sketch_req_integer         | 16        | BLOB         | NULL          | true     |
+| sketch_req_smallint        | 16        | BLOB         | NULL          | true     |
+| sketch_req_tinyint         | 16        | BLOB         | NULL          | true     |
+| sketch_req_ubigint         | 16        | BLOB         | NULL          | true     |
+| sketch_req_uinteger        | 16        | BLOB         | NULL          | true     |
+| sketch_req_usmallint       | 16        | BLOB         | NULL          | true     |
+| sketch_req_utinyint        | 16        | BLOB         | NULL          | true     |
+| sketch_tdigest_double      | 16        | BLOB         | NULL          | true     |
+| sketch_tdigest_float       | 16        | BLOB         | NULL          | true     |
 
 

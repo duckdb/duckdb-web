@@ -58,10 +58,10 @@ docs:
 extended_description: |
     The TSID Extension is experimental, use at your own risk!
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 379
-extension_download_count_pretty: 379
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 439
+extension_download_count_pretty: 439
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---
@@ -82,14 +82,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|   function_name   | function_type | description | comment | example |
-|-------------------|---------------|-------------|---------|---------|
-| tsid              | scalar        |             |         |         |
-| tsid_to_timestamp | scalar        |             |         |         |
 
 

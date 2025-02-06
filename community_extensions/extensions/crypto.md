@@ -64,8 +64,8 @@ repo:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 406
-extension_download_count_pretty: 406
+extension_download_count: 489
+extension_download_count_pretty: 489
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---
@@ -86,14 +86,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-| function_name | function_type |                                                   description                                                    | comment |                             example                             |
-|---------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------|
-| crypto_hash   | scalar        | Apply a cryptographic hash function specified as the first argument to the data supplied as the second argument. |         | SELECT crypto_hash('md5', 'test');                              |
-| crypto_hmac   | scalar        | Calculate a HMAC value                                                                                           |         | SELECT crypto_hmac('sha2-256', 'secret key', 'secret message'); |
 
 

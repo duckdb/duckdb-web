@@ -120,10 +120,10 @@ repo:
   github: rustyconover/duckdb-lindel-extension
   ref: a9cebd1973202afa4357f99e6ed790ea890c65ae
 
-extension_star_count: 39
-extension_star_count_pretty: 39
-extension_download_count: 425
-extension_download_count_pretty: 425
+extension_star_count: 38
+extension_star_count_pretty: 38
+extension_download_count: 473
+extension_download_count_pretty: 473
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---
@@ -144,16 +144,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-| function_name  | function_type |                           description                           | comment |                           example                           |
-|----------------|---------------|-----------------------------------------------------------------|---------|-------------------------------------------------------------|
-| hilbert_encode | scalar        | Encode an array of values using the Hilbert space filling curve |         | select hilbert_encode([43, 3]::integer[2]);                 |
-| hilbert_decode | scalar        | Decode a Hilbert encoded set of values                          |         | select hilbert_decode(7::uint16, 2, false, true) as values; |
-| morton_encode  | scalar        | Encode an array of values using Morton encoding                 |         | select morton_encode([43, 3]::integer[2]);                  |
-| morton_decode  | scalar        | Decode an array of values using Morton encoding                 |         | select morton_decode(7::uint16, 2, false, true) as values;  |
 
 

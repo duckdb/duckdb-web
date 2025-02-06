@@ -27,8 +27,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 449
-extension_download_count_pretty: 449
+extension_download_count: 505
+extension_download_count_pretty: 505
 image: '/images/community_extensions/social_preview/preview_community_extension_pivot_table.png'
 layout: community_extension_doc
 ---
@@ -49,31 +49,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|        function_name        | function_type | description | comment | example |
-|-----------------------------|---------------|-------------|---------|---------|
-| build_my_enum               | table_macro   |             |         |         |
-| columns_values_axis_columns | macro         |             |         |         |
-| columns_values_axis_rows    | macro         |             |         |         |
-| dq                          | macro         |             |         |         |
-| dq_concat                   | macro         |             |         |         |
-| dq_list                     | macro         |             |         |         |
-| no_columns                  | macro         |             |         |         |
-| nq                          | macro         |             |         |         |
-| nq_concat                   | macro         |             |         |         |
-| nq_list                     | macro         |             |         |         |
-| pivot_table                 | scalar        |             |         |         |
-| pivot_table                 | table_macro   |             |         |         |
-| pivot_table_openssl_version | scalar        |             |         |         |
-| pivot_table_show_sql        | table_macro   |             |         |         |
-| replace_zzz                 | macro         |             |         |         |
-| sq                          | macro         |             |         |         |
-| sq_concat                   | macro         |             |         |         |
-| sq_list                     | macro         |             |         |         |
-| totals_list                 | macro         |             |         |         |
 
 

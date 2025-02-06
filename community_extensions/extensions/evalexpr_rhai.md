@@ -98,8 +98,8 @@ repo:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 426
-extension_download_count_pretty: 426
+extension_download_count: 452
+extension_download_count_pretty: 452
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
@@ -120,13 +120,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| evalexpr_rhai | scalar        |             |         |         |
 
 

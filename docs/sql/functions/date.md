@@ -216,7 +216,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a date to a string according to the [format string]({% link docs/sql/functions/dateformat.md %}). |
-| **Example** | `strftime(date '1992-01-01', '%a, %-d %B %Y')` |
+| **Example** | `strftime(DATE '1992-01-01', '%a, %-d %B %Y')` |
 | **Result** | `Wed, 1 January 1992` |
 
 #### `time_bucket(bucket_width, date[, offset])`

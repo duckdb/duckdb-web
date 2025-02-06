@@ -42,10 +42,10 @@ docs:
   extended_description: |
     The FAISS extension allows DuckDB users to store vector data in faiss, and query this data, making reliable vector search more accessible.
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 380
-extension_download_count_pretty: 380
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 439
+extension_download_count_pretty: 439
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---

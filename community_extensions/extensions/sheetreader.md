@@ -83,8 +83,8 @@ docs:
 
 extension_star_count: 46
 extension_star_count_pretty: 46
-extension_download_count: 403
-extension_download_count_pretty: 403
+extension_download_count: 510
+extension_download_count_pretty: 510
 image: '/images/community_extensions/social_preview/preview_community_extension_sheetreader.png'
 layout: community_extension_doc
 ---
@@ -105,13 +105,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| sheetreader   | table         |             |         |         |
 
 

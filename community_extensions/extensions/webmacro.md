@@ -53,10 +53,10 @@ docs:
   extended_description: |
     The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 379
-extension_download_count_pretty: 379
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 435
+extension_download_count_pretty: 435
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---
@@ -77,13 +77,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|    function_name    | function_type | description | comment | example |
-|---------------------|---------------|-------------|---------|---------|
-| load_macro_from_url | scalar        |             |         |         |
 
 

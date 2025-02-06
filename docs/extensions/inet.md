@@ -85,6 +85,102 @@ SELECT cidr, host(cidr) FROM tbl;
 | 127.0.0.1                      | 127.0.0.1                   |
 | 2001:db8:3c4d:15::1a2f:1a2b/96 | 2001:db8:3c4d:15::1a2f:1a2b |
 
+
+## `netmask` Function
+
+Computes the network mask for the address's network.
+
+```sql
+CREATE TABLE tbl (cidr INET);
+INSERT INTO tbl VALUES
+    ('192.168.1.5/24'),
+    ('127.0.0.1'),
+    ('2001:db8:3c4d:15::1a2f:1a2b/96');
+SELECT cidr, netmask(cidr) FROM tbl;
+```
+
+|              cidr              |              netmask(cidr)         |
+|--------------------------------|------------------------------------|
+| 192.168.1.5/24                 | 255.255.255.0/24                   |
+| 127.0.0.1                      | 255.255.255.255                    |
+| 2001:db8:3c4d:15::1a2f:1a2b/96 | ffff:ffff:ffff:ffff:ffff:ffff::/96 |
+
+## `network` Function
+
+Returns the network part of the address, zeroing out whatever is to the right of the netmask.
+
+```sql
+CREATE TABLE tbl (cidr INET);
+INSERT INTO tbl VALUES
+    ('192.168.1.5/24'),
+    ('127.0.0.1'),
+    ('2001:db8:3c4d:15::1a2f:1a2b/96');
+SELECT cidr, network(cidr) FROM tbl;
+```
+
+|              cidr              |              network(cidr)         |
+|--------------------------------|------------------------------------|
+| 192.168.1.5/24                 | 192.168.1.0/24                     |
+| 127.0.0.1                      | 255.255.255.255                    |
+| 2001:db8:3c4d:15::1a2f:1a2b/96 | ffff:ffff:ffff:ffff:ffff:ffff::/96 |
+
+## `broadcast` Function
+
+Computes the broadcast address for the address's network.
+
+```sql
+CREATE TABLE tbl (cidr INET);
+INSERT INTO tbl VALUES
+    ('192.168.1.5/24'),
+    ('127.0.0.1'),
+    ('2001:db8:3c4d:15::1a2f:1a2b/96');
+SELECT cidr, broadcast(cidr) FROM tbl;
+```
+
+|              cidr              |            broadcast(cidr)         |
+|--------------------------------|------------------------------------|
+| 192.168.1.5/24                 | 192.168.1.0/24                     |
+| 127.0.0.1                      | 127.0.0.1                          |
+| 2001:db8:3c4d:15::1a2f:1a2b/96 | 2001:db8:3c4d:15::/96              |
+
+## `<<=` Predicate 
+
+Is subnet contained by or equal to subnet?
+
+```sql
+CREATE TABLE tbl (cidr INET);
+INSERT INTO tbl VALUES
+    ('192.168.1.0/24'),
+    ('127.0.0.1'),
+    ('2001:db8:3c4d:15::1a2f:1a2b/96');
+SELECT cidr, INET '192.168.1.5/32' <<= cidr FROM tbl;
+```
+
+|              cidr              | (CAST('192.168.1.5/32' AS INET) <<= cidr)   |
+|--------------------------------|---------------------------------------------|
+| 192.168.1.5/24                 | true                                        |
+| 127.0.0.1                      | false                                       |
+| 2001:db8:3c4d:15::1a2f:1a2b/96 | false                                       |
+
+## `>>=` Predicate 
+
+Does subnet contain or equal subnet?
+
+```sql
+CREATE TABLE tbl (cidr INET);
+INSERT INTO tbl VALUES
+    ('192.168.1.0/24'),
+    ('127.0.0.1'),
+    ('2001:db8:3c4d:15::1a2f:1a2b/96');
+SELECT cidr, INET '192.168.0.0/16' >>= cidr FROM tbl;
+```
+
+|              cidr              | (CAST('192.168.0.0/16' AS INET) >>= cidr)   |
+|--------------------------------|---------------------------------------------|
+| 192.168.1.5/24                 | true                                        |
+| 127.0.0.1                      | false                                       |
+| 2001:db8:3c4d:15::1a2f:1a2b/96 | false                                       |
+
 ## HTML Escape and Unescape Functions
 
 ```sql

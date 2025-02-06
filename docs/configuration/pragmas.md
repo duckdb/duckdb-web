@@ -500,6 +500,27 @@ PRAGMA disable_object_cache;
 
 ## Checkpointing
 
+#### Compression
+
+During checkpointing, the existing column data + any new changes get compressed.
+There exist a couple pragmas to influence which compression functions are considered.
+
+##### Force Compression
+
+Prefer using this compression method over any other method if possible:
+
+```sql
+PRAGMA force_compression = 'bitpacking';
+```
+
+##### Disabled Compression Methods
+
+Avoid using any of the listed compression methods from the comma separated list:
+
+```sql
+PRAGMA disabled_compression_methods = 'fsst,rle';
+```
+
 #### Force Checkpoint
 
 When [`CHECKPOINT`]({% link docs/sql/statements/checkpoint.md %}) is called when no changes are made, force a checkpoint regardless:
