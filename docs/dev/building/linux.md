@@ -27,7 +27,19 @@ apk add g++ git make cmake ninja
 ```
 
 Note that Alpine Linux uses the musl libc as its C standard library.
-There are no official binaries distributed for musl libc but DuckDB can be build with it manually following the instructions on this page.
+There are no official DuckDB binaries distributed for musl libc but it can be build with it manually following the instructions on this page.
+Note that starting with DuckDB v1.2.0, [extensions are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions).
+
+#### Python Client on Alpine Linux
+
+To install the Python client on Alpine Linux, run:
+
+```batch
+apk add g++ py3-pip
+pip3 install duckdb
+```
+
+This will compile DuckDB from source.
 
 ## Building DuckDB
 
@@ -47,7 +59,7 @@ build/release/duckdb
 
 For different build configurations (`debug`, `relassert`, etc.), please consult the [Build Configurations page]({% link docs/dev/building/build_configuration.md %}).
 
-### Building Using Extension Flags
+## Building Using Extension Flags
 
 To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
 
