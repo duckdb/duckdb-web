@@ -47,7 +47,7 @@ build/release/duckdb
 
 For different build configurations (`debug`, `relassert`, etc.), please consult the [Build Configurations page]({% link docs/dev/building/build_configuration.md %}).
 
-### Building Using Extension Flags
+## Building Using Extension Flags
 
 To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
 
