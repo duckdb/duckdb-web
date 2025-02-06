@@ -36,7 +36,7 @@ To install the Python client on Alpine Linux, run:
 
 ```batch
 apk add g++ py3-pip
-pip3 install duckdb
+pip install duckdb
 ```
 
 This will compile DuckDB from source.
