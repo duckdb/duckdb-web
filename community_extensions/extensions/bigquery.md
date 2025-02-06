@@ -20,8 +20,7 @@ extension:
 
 repo:
   github: hafenkran/duckdb-bigquery
-  ref: f19e01bb639c8941ea9588b67c27be018f6fcff0
-  ref_next: 952b077c1c21e493a4115ddbbde71b6ef6b103c9
+  ref: 952b077c1c21e493a4115ddbbde71b6ef6b103c9
 
 docs:
   hello_world: |
@@ -76,19 +75,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|    function_name     | function_type |                                       description                                        | comment |                                                         example                                                         |
-|----------------------|---------------|------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------|
-| bigquery_attach      | table         | Attach to a BigQuery project.                                                            |         | ATTACH 'project=my_gcp_project' as bq (TYPE bigquery);                                                                  |
-| bigquery_scan        | table         | Scan a single table directly from BigQuery.                                              |         | SELECT * FROM bigquery_scan('my_gcp_project.quacking_dataset.duck_tbl');                                                |
-| bigquery_query       | table         | Run a custom GoogleSQL query in BigQuery and read the results.                           |         | SELECT * FROM bigquery_query('bq', 'SELECT * FROM quacking_dataset.duck_tbl WHERE duck_id = 123');                      |
-| bigquery_execute     | table         | Execute an arbitrary GoogleSQL query in BigQuery.                                        |         | CALL bigquery_execute('bq', 'CREATE SCHEMA deluxe_dataset OPTIONS(location="us", default_table_expiration_days=3.75);') |
-| bigquery_jobs        | table         | List jobs in a BigQuery project.                                                         |         | SELECT * FROM bigquery_jobs('bq');                                                                                      |
-| bigquery_clear_cache | table         | Clear the internal caches to refetch the most current project information from BigQuery. |         | CALL bigquery_clear_cache();                                                                                            |
 
 ### Added Settings
 

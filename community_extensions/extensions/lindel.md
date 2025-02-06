@@ -145,15 +145,4 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-| function_name  | function_type |                           description                           | comment |                           example                           |
-|----------------|---------------|-----------------------------------------------------------------|---------|-------------------------------------------------------------|
-| hilbert_encode | scalar        | Encode an array of values using the Hilbert space filling curve |         | select hilbert_encode([43, 3]::integer[2]);                 |
-| hilbert_decode | scalar        | Decode a Hilbert encoded set of values                          |         | select hilbert_decode(7::uint16, 2, false, true) as values; |
-| morton_encode  | scalar        | Encode an array of values using Morton encoding                 |         | select morton_encode([43, 3]::integer[2]);                  |
-| morton_decode  | scalar        | Decode an array of values using Morton encoding                 |         | select morton_decode(7::uint16, 2, false, true) as values;  |
-
 
