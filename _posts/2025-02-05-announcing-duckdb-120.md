@@ -252,7 +252,7 @@ Currently, DuckDB extensions use DuckDB’s internal C++ structures. This – al
 ### musl Extensions
 
 [**Distributing extensions for musl.**](https://github.com/duckdb/duckdb/pull/15607)
-The [`musl` C library](https://musl.libc.org/) is often used in lightweight setups such as Docker setups running Alpine Linux. Starting with this release, we officially support musl and we distribute extensions for the `linux_amd64_musl` platform (but not yet for `linux_arm64_musl`). Note that DuckDB binaries (e.g., the CLI client) are not yet distributed for musl platforms, so you have to [compile them from source]({% link docs/dev/building/linux.md %}).
+The [`musl` C library](https://musl.libc.org/) is often used in lightweight setups such as Docker setups running Alpine Linux. Starting with this release, we officially support musl and we distribute extensions for the `linux_amd64_musl` platform (but not yet for `linux_arm64_musl`). Note that DuckDB binaries (e.g., the CLI client) are not yet distributed for musl platforms, so you have to [build them from source]({% link docs/dev/building/linux.md %}).
 
 ## Final Thoughts
 
