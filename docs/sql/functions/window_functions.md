@@ -56,7 +56,7 @@ FROM sales;
 
 <div id="rrdiagram"></div>
 
-Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER ⟨window-name⟩` syntax.
+Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's [`WINDOW` clause]({% link docs/sql/query_syntax/window.md %}) and use the `OVER ⟨window-name⟩` syntax.
 
 ## General-Purpose Window Functions
 
@@ -238,13 +238,14 @@ and then computing a new column for each row as a function of the nearby values.
 Some window functions depend only on the partition boundary and the ordering,
 but a few (including all the aggregates) also use a *frame*.
 Frames are specified as a number of rows on either side (*preceding* or *following*) of the *current row*.
-The distance can either be specified as a number of *rows* or a *range* of values
-using the partition's ordering value and a distance.
+The distance can be specified as a number of *rows*, 
+as a *range* of values using the partition's ordering value and a distance, 
+or as a number of *groups* (sets of rows with the same sort value). 
 
 The full syntax is shown in the diagram at the top of the page,
 and this diagram visually illustrates computation environment:
 
-<img src="/images/blog/windowing/framing.svg" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
+<img src="/images/framing.png" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
 
 ### Partition and Ordering
 
@@ -389,6 +390,41 @@ This is the result:
 | Worcester | 2019-01-03 | 102713.00 |
 | Worcester | 2019-01-04 | 102249.50 |
 | ... | ... | ... |
+
+#### `GROUPS` Framing
+
+The third type of framing counts *groups* of rows relative the current row.
+A *group* in this framing is a set of values with identical `ORDER BY` values.
+If we assume that power is being generated on every day,
+we can use `GROUPS` framing to compute the moving average of all power generated in the system
+without having to resort to date arithmetic:
+
+```sql
+SELECT "Date", "Plant",
+    avg("MWh") OVER (
+        ORDER BY "Date" ASC
+        GROUPS BETWEEN 3 PRECEDING
+                   AND 3 FOLLOWING)
+        AS "MWh 7-day Moving Average"
+FROM "Generation History"
+ORDER BY 1, 2;
+```
+
+|    Date    |   Plant   | MWh 7-day Moving Average |
+|------------|-----------|-------------------------:|
+| 2019-01-02 | Boston    | 311109.500               |
+| 2019-01-02 | Worcester | 311109.500               |
+| 2019-01-03 | Boston    | 305753.100               |
+| 2019-01-03 | Worcester | 305753.100               |
+| 2019-01-04 | Boston    | 305389.667               |
+| 2019-01-04 | Worcester | 305389.667               |
+| ... | ... | ... |
+| 2019-01-12 | Boston    | 309184.900               |
+| 2019-01-12 | Worcester | 309184.900               |
+| 2019-01-13 | Boston    | 299469.375               |
+| 2019-01-13 | Worcester | 299469.375               |
+
+Notice how the values for each date are the same.
 
 #### `EXCLUDE` Clause
 
