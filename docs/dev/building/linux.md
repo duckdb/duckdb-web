@@ -35,7 +35,7 @@ Note that starting with DuckDB v1.2.0, [extensions are distributed for the `linu
 To install the Python client on Alpine Linux, run:
 
 ```batch
-apk add g++ py3-pip
+apk add g++ py3-pip python3-dev
 pip install duckdb
 ```
 
