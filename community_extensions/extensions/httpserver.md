@@ -76,8 +76,8 @@ docs:
 
 extension_star_count: 149
 extension_star_count_pretty: 149
-extension_download_count: 514
-extension_download_count_pretty: 514
+extension_download_count: 518
+extension_download_count_pretty: 518
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---
