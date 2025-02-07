@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: httpserver
   description: DuckDB HTTP API Server Extension
-  version: 0.1.4
+  version: 0.1.5
   language: SQL & C++
   build: cmake
   license: MIT
@@ -16,10 +16,12 @@ extension:
   maintainers:
     - lmangani
     - akvlad
+    - niclashaderer
+    - gropaul
 
 repo:
   github: quackscience/duckdb-extension-httpserver
-  ref: be1356be703f9fc088c9cd863bf177e4f8b25265
+  ref: 1468e965565370fa3fae7780d99dd4821cf23dee
 
 docs:
   hello_world: |
@@ -57,12 +59,25 @@ docs:
 
 
   extended_description: |
-    This extension is experimental and potentially unstable. Do not use it in production.
+    <img src="https://github.com/user-attachments/assets/46a5c546-7e9b-42c7-87f4-bc8defe674e0" width=250 />
+
+    # DuckDB HTTP Server Extension
+    This extension transforms **DuckDB** instances into tiny multi-player **HTTP OLAP API** services.<br>
+    Supports Authentication _(Basic Auth or X-Token)_ and includes the _play_ SQL user interface.
+        
+    ### Features
+    
+    - Turn any [DuckDB](https://duckdb.org) instance into an **HTTP OLAP API** Server
+    - Use the embedded **Web User Interface** to query and visualize data 
+    - Work with local and remote datasets including [MotherDuck](https://motherduck.com) 🐤
+    - _100% Opensource, ready to use and extend by the Community!_
+  
+    > This extension is experimental and potentially unstable. Do not use it in production.
 
 extension_star_count: 149
 extension_star_count_pretty: 149
-extension_download_count: 506
-extension_download_count_pretty: 506
+extension_download_count: 514
+extension_download_count_pretty: 514
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---
