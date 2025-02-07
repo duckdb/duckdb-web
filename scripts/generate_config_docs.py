@@ -111,7 +111,10 @@ WHERE Scope = 'LOCAL';
 '''
 
 global_configuration_flags = run_duckdb_script(script + get_global_flags)
-local_configuration_flags = run_duckdb_script(script + get_local_flags)
+
+local_config_script = script + get_local_flags
+
+local_configuration_flags = run_duckdb_script(local_config_script)
 
 option_split = '## Configuration Reference'
 doc_file = 'docs/configuration/overview.md'
