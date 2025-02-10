@@ -386,8 +386,6 @@ Please check the [release calendar]({% link docs/dev/release_calendar.md %}) for
 <div class="answer" markdown="1">
 
 Currently, we do not maintain a public development roadmap.
-We discuss planned developments at DuckCon events (typically held twice a year).
-See the most recent [overview talk at DuckCon #5](https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf).
 
 </div>
 
