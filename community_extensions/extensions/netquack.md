@@ -25,18 +25,7 @@ docs:
 
     With Netquack, you can unlock deeper insights from your web-related datasets without the need for external tools or complex workflows.
 
-    ### Functions
-
-    - `extract_domain`: Extracting The Main Domain From A URL
-    - `extract_path`: Extracting The Path From A URL
-    - `extract_host`: Extracting The Hostname From A URL
-    - `extract_schema`: Extracting The Schema From A URL
-    - `extract_query_string`: Extracting The Query String From A URL
-    - `extract_tld`: Extracting The Top-Level Domain From A URL
-    - `extract_subdomain`: Extracting The Subdomain From A URL
-    - `get_tranco_rank`: Getting The Tranco Rank Of A Domain
-
-    Check the [documentation](https://github.com/hatamiarash7/duckdb-netquack) for more details on each function.
+    Check the [documentation](https://github.com/hatamiarash7/duckdb-netquack) for more details and examples on each function.
 
 extension_star_count: 1
 extension_star_count_pretty: 1
@@ -67,17 +56,17 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type | description | comment | examples |
-|----------------------|---------------|-------------|---------|----------|
-| extract_domain       | scalar        | NULL        | NULL    | []       |
-| extract_host         | scalar        | NULL        | NULL    | []       |
-| extract_path         | scalar        | NULL        | NULL    | []       |
-| extract_query_string | scalar        | NULL        | NULL    | []       |
-| extract_schema       | scalar        | NULL        | NULL    | []       |
-| extract_subdomain    | scalar        | NULL        | NULL    | []       |
-| extract_tld          | scalar        | NULL        | NULL    | []       |
-| get_tranco_rank      | scalar        | NULL        | NULL    | []       |
-| update_suffixes      | scalar        | NULL        | NULL    | []       |
-| update_tranco        | scalar        | NULL        | NULL    | []       |
+|    function_name     | function_type |                description                 | comment |                              examples                               |
+|----------------------|---------------|--------------------------------------------|---------|---------------------------------------------------------------------|
+| extract_domain       | scalar        | Extracting the main domain from a URL      | NULL    | [SELECT extract_domain('a.example.com') as domain;]                 |
+| extract_host         | scalar        | Extracting the hostname from a URL         | NULL    | [SELECT extract_host('https://b.a.example.com/path/path') as host;] |
+| extract_path         | scalar        | Extracting the path from a URL             | NULL    | [SELECT extract_path('example.com/path/path/image.png') as path;]   |
+| extract_query_string | scalar        | Extracting the query string from a URL     | NULL    | [SELECT extract_query_string('example.com?key=value') as query;]    |
+| extract_schema       | scalar        | Extracting the schema from a URL           | NULL    | [SELECT extract_schema('mailto:someone@example.com') as schema;]    |
+| extract_subdomain    | scalar        | Extracting the subdomain from a URL        | NULL    | [SELECT extract_subdomain('test.example.com.ac') as dns_record;]    |
+| extract_tld          | scalar        | Extracting the top-level domain from a URL | NULL    | [SELECT extract_tld('a.example.com') as tld;]                       |
+| get_tranco_rank      | scalar        | Getting the Tranco rank of a domain        | NULL    | [SELECT get_tranco_rank('cloudflare.com') as rank;]                 |
+| update_suffixes      | scalar        | Update public suffixes                     | NULL    | [SELECT update_suffixes();]                                         |
+| update_tranco        | scalar        | Update tranco data                         | NULL    | [SELECT update_tranco(true);]                                       |
 
 
