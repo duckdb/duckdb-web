@@ -3,7 +3,7 @@ layout: docu
 title: Client APIs Overview
 ---
 
-DuckDB is an in-process database system and offers client APIs for several languages. These clients support the same DuckDB file format and SQL syntax. Note: DuckDB database files are portable between different clients.
+DuckDB is an in-process database system and offers client APIs (also known as “drivers”) for several languages.
 
 | Client API | Maintainer | Support tier | Latest version |
 |------------|------------|--------------|---------------:|
@@ -42,3 +42,8 @@ Finally, all tertiary clients are maintained by third parties, so there are no f
 > The DuckDB clients listed above are open-source and we welcome community contributions to these libraries.
 > All primary and secondary clients are available for the MIT license.
 > For tertiary clients, please consult the repository for the license.
+
+## Compatibility
+
+All DuckDB clients support the same DuckDB SQL syntax and use the same on-disk [database format]({% link docs/internals/storage.md %}).
+[DuckDB extensions]({% link docs/extensions/overview.md %}) are also portable between clients with some exceptions (see [Wasm extensions]({% link docs/api/wasm/extensions.md %}#list-of-officially-available-extensions)).
