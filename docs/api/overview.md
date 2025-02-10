@@ -21,8 +21,8 @@ DuckDB is an in-process database system and offers client APIs (also known as â€
 | [Dart]({% link docs/api/dart.md %})                                 | [TigerEye](https://www.tigereye.com/)                                      | Secondary     | 1.1.3 |
 | [ODBC]({% link docs/api/odbc/overview.md %})                        | DuckDB team                                                                | Secondary     | 1.1.0 |
 | [Node.js (deprecated)]({% link docs/api/nodejs/overview.md %})      | DuckDB team                                                                | Secondary     | 1.1.3 |
-| [Rust]({% link docs/api/rust.md %})                                 | DuckDB team                                                                | Secondary     | 1.2.0 |
-| [Julia]({% link docs/api/julia.md %})                               | DuckDB team                                                                | Secondary     | 1.1.3 |
+| [Rust]({% link docs/api/rust.md %})                                 | DuckDB team                                                                | Secondary     | 1.1.3 |
+| [Julia]({% link docs/api/julia.md %})                               | DuckDB team                                                                | Secondary     | 1.1.0 |
 | [Swift]({% link docs/api/swift.md %})                               | DuckDB team                                                                | Secondary     | 1.1.3 |
 | [Common Lisp](https://github.com/ak-coram/cl-duckdb)                | [ak-coram](https://github.com/ak-coram)                                    | Tertiary      | |
 | [Crystal](https://github.com/amauryt/crystal-duckdb)                | [amauryt](https://github.com/amauryt)                                      | Tertiary      | |
