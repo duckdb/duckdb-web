@@ -6,7 +6,7 @@ title: Client APIs Overview
 DuckDB is an in-process database system and offers client APIs for several languages. These clients support the same DuckDB file format and SQL syntax. Note: DuckDB database files are portable between different clients.
 
 | Client API | Maintainer | Support tier | Latest version |
-|------------|------------|--------------|----------------|
+|------------|------------|--------------|---------------:|
 | [C]({% link docs/api/c/overview.md %})                              | DuckDB team                                                                | Primary       | 1.2.0 |
 | [Command Line Interface (CLI)]({% link docs/api/cli/overview.md %}) | DuckDB team                                                                | Primary       | 1.2.0 |
 | [Java]({% link docs/api/java.md %})                                 | DuckDB team                                                                | Primary       | 1.1.3 |

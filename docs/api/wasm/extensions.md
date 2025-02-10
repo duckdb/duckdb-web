@@ -37,7 +37,6 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 | [parquet]({% link docs/data/parquet/overview.md %})        | Adds support for reading and writing Parquet files               |                 |
 | [sqlite]({% link docs/extensions/sqlite.md %})             | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
 | [sqlsmith]({% link docs/extensions/sqlsmith.md %})         |                                                                  |                 |
-| [substrait]({% link docs/extensions/substrait.md %})       | Adds support for the Substrait integration                       |                 |
 | [tpcds]({% link docs/extensions/tpcds.md %})               | Adds TPC-DS data generation and query support                    |                 |
 | [tpch]({% link docs/extensions/tpch.md %})                 | Adds TPC-H data generation and query support                     |                 |
 
