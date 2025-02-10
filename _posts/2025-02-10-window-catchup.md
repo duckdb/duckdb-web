@@ -4,7 +4,7 @@ title: "Catching up with Windowing"
 author: "Richard Wesley"
 thumb: "/images/blog/thumbs/windowing-features.svg"
 image: "/images/blog/thumbs/windowing-features.png"
-excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard."
+excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard. In version 1.2.0, we introduced GROUPS framing as well as aggregate and function modifiers."
 tags: ["deep dive"]
 ---
 
@@ -26,7 +26,7 @@ DuckDB has had support for window functions since the early days,
 but if they are new to you, you might want to start with my earlier blog posts
 on [Windowing in DuckDB]({% post_url 2021-10-13-windowing %})
 and [Fast Moving Holistic Aggregates]({% post_url 2021-11-12-moving-holistic %}),
-or just [the window function documentation]({% link docs/sql/functions/window_functions.md %}).
+or just the [window function documentation]({% link docs/sql/functions/window_functions.md %}).
 In this post, I will start by introducing the more recent functionality additions.
 In a follow-up post, I will spelunk into the internals to talk about some performance and scaling improvements.
 
@@ -39,12 +39,12 @@ For the examples in this post, I will mostly stick to using a table of athletic 
 | `date`    | `TIMESTAMP`      | The start time of the event.                       |
 | `time`    | `DECIMAL(18, 3)` | The athlete's time in that event (in seconds).     |
 
-## GROUPS Framing
+## `GROUPS` Framing
 
 In addition to the `ROWS` and `RANGE` frame boundary types (which we have supported for a while now),
 the standard also defines `GROUPS` as a boundary type.
 `ROWS` is pretty simple: it just counts the number of rows.
-`RANGE` is trickier: it treats its counts as distances from 
+`RANGE` is trickier: it treats its counts as distances from
 the value of the `ORDER BY` expression at the current row.
 This means that there can only be one such expression
 and you have to be able to do arithmetic on it.
@@ -55,7 +55,7 @@ which are all the rows with the same
 value of the `ORDER BY` expression at the current row.
 In the original windowing code, this was not easy to implement,
 but after several years of work, the infrastructure has evolved,
-and as of 1.2 we now support this last type of framing.
+and as of v1.2.0 we now support this last type of framing.
 
 ## Frame Exclusion
 
@@ -92,11 +92,11 @@ There are four options for `EXCLUDE` that specify how to treat the current row:
 * `TIES` – exclude all peer rows, but _not_ the current row (this makes a hole on either side)
 * `NO OTHERS` – don't exclude anything (the default)
 
-Exclusion is implemented for both windowed aggregates and for the `FIRST/LAST/NTH_VALUE` functions.
+Exclusion is implemented for both windowed aggregates and for the `first`, `last` and `nth_value` functions.
 
-## Qualify
+## `QUALIFY` Clause
 
-It may not be immediately obvious, but the SQL language 
+It may not be immediately obvious, but the SQL language
 has rules for the order in which various expressions are computed.
 For example, aggregates (like `sum`) are computed after row-level expressions (like `+`).
 This is why SQL has two filtering clauses: `WHERE` and `HAVING`:
@@ -111,15 +111,15 @@ which is defined by a `WITH` clause:
 ```sql
 -- Find the third fastest times in each event
 WITH windowed AS (
-    SELECT 
-        event, 
+    SELECT
+        event,
         athlete,
         time,
         row_number() OVER w AS r
     FROM results
     WINDOW w AS (
         PARTITION BY event
-        ORDER BY time 
+        ORDER BY time
     )
 )
 SELECT event, athlete, time
@@ -136,7 +136,7 @@ SELECT event, athlete, time
 FROM results
 WINDOW w AS (
     PARTITION BY event
-    ORDER BY time 
+    ORDER BY time
 )
 QUALIFY row_number() OVER w = 3;
 ```
@@ -154,9 +154,9 @@ They can of course be implemented naïvely (academic-speak for “slow”!) by j
 * filter out the ones we don't want,
 * stick them into a hash table to remove duplicates,
 * sort the results,
-* send them off to the aggregate function to get the result
+* send them off to the aggregate function to get the result.
 
-We have an implementation that does this (which you can access by turning off the optimiser)
+We have an implementation that does this (which you can access by turning off the optimizer)
 and we use it to check fancier implementations, but it is horribly slow.
 
 Fortunately, these last two modifiers have been the subject of
@@ -176,7 +176,7 @@ SELECT list(DISTINCT athlete) OVER (ORDER BY date) FROM results;
 We can also use the `ORDER BY` modifier with order-sensitive aggregates to get sorted results:
 
 ```sql
--- Return an alphabetised list of athletes who made or beat a time
+-- Return an alphabetized list of athletes who made or beat a time
 SELECT list(athlete ORDER BY athlete) OVER (
     PARTITION BY event, date
     ORDER BY time DESC
@@ -189,7 +189,7 @@ and combining them will often force us to use the naïve implementation.
 So for example, if we wished to exclude the athlete who made the time in the previous example:
 
 ```sql
--- Return an alphabetised list athletes who beat the each time
+-- Return an alphabetized list athletes who beat the each time
 SELECT list(athlete ORDER BY athlete) OVER (
     PARTITION BY event, date
     ORDER BY time DESC
@@ -198,7 +198,7 @@ SELECT list(athlete ORDER BY athlete) OVER (
 FROM results;
 ```
 
-DuckDB will still compute this for you, but it may be horribly slow.
+DuckDB will still compute this for you, but it may be very slow.
 
 ## Function Modifiers
 
@@ -221,23 +221,21 @@ WINDOW w AS (
 ORDER BY event, date;
 ```
 
-All of the non-aggregate window functions (except `DENSE_RANK`) now support ordering arguments
+All of the non-aggregate window functions (except `dense_rank`) now support ordering arguments
 and will use the frame instead of the entire partition when an ordering argument is supplied.
 
 > Tip If you wish to use the entire frame with an ordering argument, then you will need to be explicit and use `RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`.
 
-> Note If you wish to use the frame ordering _and_ the frame boundaries with a non-aggregate function, you will need to specify the `ORDER BY` _twice_ (once in the frame specification and once in the argument list). This has not yet been optimised, but it will be in the next major release. 
+> Note If you wish to use the frame ordering _and_ the frame boundaries with a non-aggregate function, you will need to specify the `ORDER BY` _twice_ (once in the frame specification and once in the argument list). This has not yet been optimized, but it will be in the v1.3.0 release.
 
 ## Conclusion
 
 Windowing is a very natural way to think about order-dependent analysis,
 but it is at odds with traditional unordered query processing.
 Nevertheless, since 2003 the SQL language has provided syntax for expressing a wide range of such queries.
-In recent years, the community has also considered further extensions to the language 
+In recent years, the community has also considered further extensions to the language
 (such as `QUALIFY` and argument modifiers like `DISTINCT` and `ORDER BY`) to improve expressivity.
-Here at DuckDB we love providing this kind of expressiveness as part of our "friendly-SQL" work.
+Here at DuckDB we love providing this kind of expressiveness as part of our [“friendly SQL”]({% link docs/sql/dialect/friendly_sql.md %}) work.
 What may  be less obvious is that when we enable users to express their problem more naturally,
 it helps us provide more performant solutions!
-In my next post, I will go deeper into recent improvements in windowing's performance and resource utilisation.
-
-
+In my next post, I will go deeper into recent improvements in windowing's performance and resource utilization.
