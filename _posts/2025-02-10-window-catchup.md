@@ -4,7 +4,7 @@ title: "Catching up with Windowing"
 author: "Richard Wesley"
 thumb: "/images/blog/thumbs/windowing-features.svg"
 image: "/images/blog/thumbs/windowing-features.png"
-excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard. In version 1.2.0, we introduced GROUPS framing as well as aggregate and function modifiers."
+excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard. This posts presents a few of these features, including GROUPS framing, QUALIFY and aggregate/function modifiers."
 tags: ["deep dive"]
 ---
 
@@ -128,7 +128,7 @@ WHERE r = 3;
 ```
 
 This was kind of clunky, so eventually the `QUALIFY` clause was proposed for filtering window functions.
-DuckDB now supports this, making it easier to filter the results of window functions:
+DuckDB supports this, making it easier to filter the results of window functions:
 
 ```sql
 -- Find the third fastest times in each event
