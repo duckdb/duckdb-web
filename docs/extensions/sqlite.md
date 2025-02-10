@@ -185,8 +185,7 @@ The extension exposes the following configuration parameters.
 
 | Name                              | Description                                                                  | Default |
 | --------------------------------- | ---------------------------------------------------------------------------- | ------- |
-|`sqlite_debug_show_queries`           | DEBUG SETTING: print all queries sent to SQLite to stdout                | `false` |
-
+| `sqlite_debug_show_queries`       | DEBUG SETTING: print all queries sent to SQLite to stdout                    | `false` |
 
 ## Supported Operations
 
