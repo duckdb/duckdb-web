@@ -110,7 +110,6 @@ extension:
   description: Linearization/Delinearization, Z-Order, Hilbert and Morton Curves
   language: C++
   license: Apache-2.0
-  excluded_platforms: "linux_amd64_musl"
   maintainers:
     - rustyconover
   name: lindel
@@ -118,12 +117,12 @@ extension:
   version: 1.0.1
 repo:
   github: rustyconover/duckdb-lindel-extension
-  ref: a9cebd1973202afa4357f99e6ed790ea890c65ae
+  ref: 10f1dbe43e100e6800e2ddfbe40a54bea3d7ea7e
 
 extension_star_count: 39
 extension_star_count_pretty: 39
-extension_download_count: 473
-extension_download_count_pretty: 473
+extension_download_count: 465
+extension_download_count_pretty: 465
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---
