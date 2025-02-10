@@ -43,6 +43,8 @@ Finally, all tertiary clients are maintained by third parties, so there are no f
 > All primary and secondary clients are available for the MIT license.
 > For tertiary clients, please consult the repository for the license.
 
+We report the latest stable version for the clients in the primary and secondary support tiers.
+
 ## Compatibility
 
 All DuckDB clients support the same DuckDB SQL syntax and use the same on-disk [database format]({% link docs/internals/storage.md %}).
