@@ -237,9 +237,7 @@ $(document).ready(function(){
 		
 		// Check if SHA512 is available
 		function sha512Exists(config) {
-		  return config.has_sha_512_hash &&
-				 config.has_sha_512_hash.toLowerCase() === 'yes' &&
-				 config.sha_512;
+		  return config.sha_512;
 		}
 	
 		// If platform.select has .hide class, then show .info in it, otherwise hide .info
