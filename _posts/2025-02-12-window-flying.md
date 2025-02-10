@@ -10,28 +10,28 @@ tags: ["deep dive"]
 
 Last week I went into some new windowing functionality in DuckDB available through SQL.
 But there are other changes that improve our use of resources (such as memory) without adding new functionality.
-So let's get "under the feathers" and look at these changes.
+So let's get “under the feathers” and look at these changes.
 
 ## Segment Tree Vectorisation
 
 One important improvement that was made in the summer of 2023 was converting the segment tree evaluation code
 to vectorised evaluation from single-value evaluation.
-You might wonder why it wasn't that way to begin with in a "vectorised relational database"(!), 
+You might wonder why it wasn't that way to begin with in a “vectorised relational database” (!),
 but the answer is lost in the mists of time.
-My best guess is either that the published algorithm was written for values 
+My best guess is either that the published algorithm was written for values
 or that the aggregation API had not been nailed down yet (or both).
 
-In the old version, we used the aggregate's `update` or `combine` APIs, 
+In the old version, we used the aggregate's `update` or `combine` APIs,
 but with only the values and tree states for a single row.
 To vectorise the segment tree aggregation, we accumulate _vectors_ of leaf values and tree states
 and flush them into each output row's state when we reach the vector capacity of 2048 rows..
 Some care needed to be taken to handle order-sensitive aggregates by accumulating values in the correct order.
 `FILTER` and `EXCLUDE` clauses also provided some entertainment, but the segment trees are now fully vectorised.
-The performance gains here were about 
+The performance gains here were about
 [a factor of four](https://github.com/duckdb/duckdb/issues/7809#issuecomment-1679387022)
-(from "Baseline" to "Fan Out").
+(from “Baseline” to “Fan Out”).
 
-Once segment trees were vectorised, 
+Once segment trees were vectorised,
 we could use the same approach when implementing `DISTINCT` aggregates with merge sort trees.
 It may be worth updating the custom window API to handle vectorisation at some point,
 because although most custom window aggregates are quite slow (e.g., `quantile`, `mad` and `mode`),
@@ -45,7 +45,7 @@ to the same aggregate over _the entire partition_.
 Computing this value repeatedly is expensive and potentially wasteful of memory
 (e.g, the old implementation would construct a segment tree even though only one value was needed.)
 
-The previous performance workaround for this was 
+The previous performance workaround for this was
 to compute the aggregate in a subquery and join it in on the partition keys, but that was, well, unfriendly.
 Instead, we have added an optimisation that checks for _partition-wide aggregates_
 and computes that value once per partition.
@@ -66,19 +66,19 @@ The entire relation has to be materialised,
 broken up into partitions, and each partition needs to be sorted.
 
 But what if there is no partitioning or ordering?
-This just means that the window function is computed over the entire relation, in the "natural order",
+This just means that the window function is computed over the entire relation, in the “natural order”,
 using a frame that starts with the first row and continues to the current row.
 Examples might be assigning row numbers or computing a running sum.
 This is simple enough that we can _stream_ the evaluation of the function on a single thread.
 
 First, let's step back a bit and talk about the window _operator_.
 During parsing and optimisation of a query, all the window functions are attached to a single _logical_ window operator.
-When it comes time to plan the query, we group the functions that have common partitions and "compatible" orderings
+When it comes time to plan the query, we group the functions that have common partitions and “compatible” orderings
 (see Cao et. al.,
 [_Optimization of Analytic Window Functions_](https://www.vldb.org/pvldb/vol5/p1244_yucao_vldb2012.pdf)
 for more information)
 and hand each group off to a separate _physical_ window operator that handles that partitioning and ordering.
-In order to use the "natural order" we have to group those functions that can be streamed and execute them first
+In order to use the “natural order” we have to group those functions that can be streamed and execute them first
 (or the order will have been destroyed!) and hand them off to the _streaming_ physical window operator.
 
 So what functions can we stream? It turns out there are quite a few:
@@ -140,7 +140,7 @@ This further reduces memory pressure during evaluation of large partitions.
 
 Windowing is so complex, however, that there are still some remaining large data structures.
 The [segment trees](https://www.vldb.org/pvldb/vol8/p1058-leis.pdf)
-and [merge sort trees](https://dl.acm.org/doi/10.1145/3514221.3526184) 
+and [merge sort trees](https://dl.acm.org/doi/10.1145/3514221.3526184)
 used for accelerating aggregation are still in memory,
 especially the intermediate aggregate states in the middle of the trees.
 Solving this completely, will require a general method of serialising aggregate states to disk,
@@ -179,7 +179,7 @@ This not only reduces memory, but in this example we will also reduce disk pagin
 because all three functions will be accessing the same values.
 
 There are a number of places where we are sharing expressions, including `ORDER BY` arguments,
-`RANGE` expressions and "value" functions like `LEAD`, `LAG` and `NTH_VALUE`,
+`RANGE` expressions and “value” functions like `LEAD`, `LAG` and `NTH_VALUE`,
 and we are always on the lookout for more (such as frame boundaries - or even segment trees).
 
 ## Future Work
