@@ -34,15 +34,6 @@ title: Python Client API
 </dd>
 </dl>
 
-<dl class="py data">
-<dt class="sig sig-object py" id="duckdb.default_connection">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">default_connection</span></span><em class="property"><span class="w"> </span><span class="pre">duckdb.DuckDBPyConnection</span></em><a class="headerlink" href="#duckdb.default_connection" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>The connection that is used by default if you don&#8217;t explicitly pass one to the root methods in this module</p>
-</dd>
-</dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="duckdb.BinaryValue">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">BinaryValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.BinaryValue" title="Link to this definition">&#182;</a>
@@ -2697,8 +2688,8 @@ value: The value to use if the condition is met.</p>
 </dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">default_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#id0" title="Link to this definition">&#182;</a>
+<dt class="sig sig-object py" id="duckdb.default_connection">
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">default_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.default_connection" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Retrieve the connection currently registered as the default to be used by the module</p>
