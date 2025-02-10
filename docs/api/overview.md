@@ -11,7 +11,7 @@ DuckDB is an in-process database system and offers client APIs (also known as â€
 | [Command Line Interface (CLI)]({% link docs/api/cli/overview.md %}) | DuckDB team                                                                | Primary       | 1.2.0 |
 | [Java]({% link docs/api/java.md %})                                 | DuckDB team                                                                | Primary       | 1.1.3 |
 | [Go]({% link docs/api/go.md %})                                     | DuckDB team and [Mark Boeker](https://github.com/marcboeker)               | Primary       | 1.1.3 |
-| [Node.js (node-neo)]({% link docs/api/node_neo/overview.md %})      | Jeff Raymakers and Antony Courtney ([MotherDuck](https://motherduck.com/)) | Primary       | 1.1.3 |
+| [Node.js (node-neo)]({% link docs/api/node_neo/overview.md %})      | Jeff Raymakers and Antony Courtney ([MotherDuck](https://motherduck.com/)) | Primary       | 1.2.0 |
 | [Python]({% link docs/api/python/overview.md %})                    | DuckDB team                                                                | Primary       | 1.2.0 |
 | [R]({% link docs/api/r.md %})                                       | DuckDB team and [Kirill MÃ¼ller](https://github.com/krlmlr)                 | Primary       | 1.1.3 |
 | [WebAssembly (Wasm)]({% link docs/api/wasm/overview.md %})          | DuckDB team                                                                | Primary       | 1.2.0 |
@@ -21,9 +21,9 @@ DuckDB is an in-process database system and offers client APIs (also known as â€
 | [Dart]({% link docs/api/dart.md %})                                 | [TigerEye](https://www.tigereye.com/)                                      | Secondary     | 1.1.3 |
 | [ODBC]({% link docs/api/odbc/overview.md %})                        | DuckDB team                                                                | Secondary     | 1.1.0 |
 | [Node.js (deprecated)]({% link docs/api/nodejs/overview.md %})      | DuckDB team                                                                | Secondary     | 1.1.3 |
-| [Rust]({% link docs/api/rust.md %})                                 | DuckDB team                                                                | Secondary     | |
-| [Julia]({% link docs/api/julia.md %})                               | DuckDB team                                                                | Secondary     | |
-| [Swift]({% link docs/api/swift.md %})                               | DuckDB team                                                                | Secondary     | |
+| [Rust]({% link docs/api/rust.md %})                                 | DuckDB team                                                                | Secondary     | 1.2.0 |
+| [Julia]({% link docs/api/julia.md %})                               | DuckDB team                                                                | Secondary     | 1.1.3 |
+| [Swift]({% link docs/api/swift.md %})                               | DuckDB team                                                                | Secondary     | 1.1.3 |
 | [Common Lisp](https://github.com/ak-coram/cl-duckdb)                | [ak-coram](https://github.com/ak-coram)                                    | Tertiary      | |
 | [Crystal](https://github.com/amauryt/crystal-duckdb)                | [amauryt](https://github.com/amauryt)                                      | Tertiary      | |
 | [Elixir](https://github.com/AlexR2D2/duckdbex)                      | [AlexR2D2](https://github.com/AlexR2D2/duckdbex)                           | Tertiary      | |
