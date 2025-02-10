@@ -63,4 +63,21 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|    function_name     | function_type | description | comment | examples |
+|----------------------|---------------|-------------|---------|----------|
+| extract_domain       | scalar        | NULL        | NULL    | []       |
+| extract_host         | scalar        | NULL        | NULL    | []       |
+| extract_path         | scalar        | NULL        | NULL    | []       |
+| extract_query_string | scalar        | NULL        | NULL    | []       |
+| extract_schema       | scalar        | NULL        | NULL    | []       |
+| extract_subdomain    | scalar        | NULL        | NULL    | []       |
+| extract_tld          | scalar        | NULL        | NULL    | []       |
+| get_tranco_rank      | scalar        | NULL        | NULL    | []       |
+| update_suffixes      | scalar        | NULL        | NULL    | []       |
+| update_tranco        | scalar        | NULL        | NULL    | []       |
+
 

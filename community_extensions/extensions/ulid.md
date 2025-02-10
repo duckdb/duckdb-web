@@ -52,6 +52,16 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name  | function_type | description | comment | examples |
+|----------------|---------------|-------------|---------|----------|
+| ulid           | scalar        | NULL        | NULL    | []       |
+| ulid_epoch_ms  | scalar        | NULL        | NULL    | []       |
+| ulid_timestamp | scalar        | NULL        | NULL    | []       |
+
 ### Added Types
 
 <div class="extension_types_table"></div>
