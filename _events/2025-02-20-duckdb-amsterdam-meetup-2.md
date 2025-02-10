@@ -17,6 +17,10 @@ venue: "Xebia, Amsterdam"
 
 We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/304415344/), co-organized by [DuckDB Labs](https://duckdblabs.com/) and [Xebia](https://xebia.com/).
 
+## Registration Process
+
+Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/304415344/).
+
 ## Timetable
 
 | Time  | Title   | Presenter(s) |
@@ -29,10 +33,6 @@ We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meet
 
 The event will be held at Xebia at Wibautstraat 200, 1091 GS Amsterdam ([Apple Maps](https://maps.apple.com/?address=Wibautstraat%20200,%201091%20GS%20Amsterdam,%20Netherlands&auid=2043309577279080291&ll=52.352271,4.912916&lsp=9902&q=Xebia%20Netherlands%20BV&t=m), [Google Maps](https://maps.app.goo.gl/oA4HEGG6E21yXXKi6)).
 The catering is provided by Xebia.
-
-## Registration Process
-
-Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/304415344/).
 
 ## Inquiries
 
