@@ -12,7 +12,7 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: duckdb
+  usage_example: duckdb.exe
 - variant: stable
   environment: Command line
   platform: Windows
@@ -27,7 +27,7 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: ./duckdb
+  usage_example: duckdb.exe
 - variant: stable
   environment: Command line
   platform: Windows
@@ -42,7 +42,7 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: ./duckdb
+  usage_example: duckdb.exe
 - variant: stable
   environment: Command line
   platform: macOS
@@ -214,7 +214,7 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: ./duckdb
+  usage_example: duckdb.exe
 - variant: nightly
   environment: Command line
   platform: macOS
