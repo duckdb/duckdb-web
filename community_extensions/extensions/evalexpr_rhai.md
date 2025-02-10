@@ -84,7 +84,7 @@ docs:
 extension:
   build: cmake
   description: Evaluate the Rhai scripting language in DuckDB
-  excluded_platforms: windows_amd64_rtools;windows_amd64_mingw;windows_amd64;linux_amd64_musl
+  excluded_platforms: windows_amd64_rtools;windows_amd64_mingw;windows_amd64
   language: C++
   license: Apache-2.0
   maintainers:
@@ -94,12 +94,12 @@ extension:
   version: 1.0.2
 repo:
   github: rustyconover/duckdb-evalexpr-rhai-extension
-  ref: da8f1e85b8a85ba80c8f616687f7445fc051ac24
+  ref: 780f14cd20c94e4f06c8d351f6f7ec6c51928155
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 452
-extension_download_count_pretty: 452
+extension_download_count: 441
+extension_download_count_pretty: 441
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
@@ -120,5 +120,13 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| evalexpr_rhai | scalar        | NULL        | NULL    | []       |
 
 

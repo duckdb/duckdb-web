@@ -445,8 +445,8 @@ In version 0.5.1, released September 2022, DuckDB's performance when writing to 
 As a result, versions 0.2.7 to 0.4.0 use Pandas, and 0.5.1 onward uses Arrow.
 
 On the import side, replacement scans allow DuckDB to read those same formats without a prior import step.
-In the replacement scan benchmark, the data that is scanned is the output of the final H20.ai group by benchmark query.
-At the 5GB scale it is a 10 million row dataset.
+In the replacement scan benchmark, the data that is scanned is the output of the final H2O.ai group by benchmark query.
+At the 5GB scale it is a 100 million row dataset.
 Only one column is read, and a single aggregate is calculated.
 This focuses the benchmark on the speed of scanning the data rather than DuckDB's aggregation algorithms or speed of outputting results.
 The query used follows the format:
@@ -454,7 +454,7 @@ The query used follows the format:
 ```sql
 SELECT 
     sum(v3) AS v3 
-FROM ⟨dataframe or Parquet file⟩
+FROM ⟨dataframe or Parquet file⟩;
 ```
 
 #### Window Functions

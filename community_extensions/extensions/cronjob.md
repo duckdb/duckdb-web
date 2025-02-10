@@ -59,8 +59,8 @@ docs:
 
 extension_star_count: 28
 extension_star_count_pretty: 28
-extension_download_count: 436
-extension_download_count_pretty: 436
+extension_download_count: 433
+extension_download_count_pretty: 433
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---
@@ -81,5 +81,15 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| cron          | scalar        | NULL        | NULL    | []       |
+| cron_delete   | scalar        | NULL        | NULL    | []       |
+| cron_jobs     | table         | NULL        | NULL    | []       |
 
 

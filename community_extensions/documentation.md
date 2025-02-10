@@ -49,7 +49,7 @@ The process is roughly as follows:
 CREATE TABLE functions_pre AS SELECT ... FROM duckdb_functions();
 LOAD extension_name;
 CREATE TABLE functions_post AS SELECT ... FROM duckdb_functions();
-SELECT * FROM functions_pre EXCEPT (FROM functions_post) ORDER BY ...;
+SELECT * FROM functions_post EXCEPT (FROM functions_pre) ORDER BY ...;
 ```
 
 This works well for detecting new functions, functions overload, new settings, and new types.

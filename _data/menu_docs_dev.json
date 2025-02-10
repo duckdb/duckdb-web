@@ -1099,10 +1099,6 @@
               "url": "sqlite"
             },
             {
-              "page": "Substrait",
-              "url": "substrait"
-            },
-            {
               "page": "TPC-DS",
               "url": "tpcds"
             },

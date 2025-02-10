@@ -54,5 +54,3 @@ SELECT pretty_print_integer(42_123) AS x;
 │ 42k     │
 └─────────┘
 ```
-
-> Warning Currently, sharing table macros via attaching is not supported.

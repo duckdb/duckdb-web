@@ -32,10 +32,10 @@ docs:
   extended_description: |
     The quack extension is based on DuckDB's [Extension Template](https://github.com/duckdb/extension-template/), and it's a great starting point to get started building more advanced extensions.
 
-extension_star_count: 160
-extension_star_count_pretty: 160
-extension_download_count: 435
-extension_download_count_pretty: 435
+extension_star_count: 162
+extension_star_count_pretty: 162
+extension_download_count: 514
+extension_download_count_pretty: 514
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---
@@ -56,5 +56,14 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|     function_name     | function_type | description | comment | examples |
+|-----------------------|---------------|-------------|---------|----------|
+| quack                 | scalar        | NULL        | NULL    | []       |
+| quack_openssl_version | scalar        | NULL        | NULL    | []       |
 
 

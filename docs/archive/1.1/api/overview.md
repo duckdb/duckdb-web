@@ -10,7 +10,7 @@ DuckDB is an in-process database system and offers client APIs for several langu
 | [C]({% link docs/archive/1.1/api/c/overview.md %})                              | DuckDB team                                                                | Primary       |
 | [Command Line Interface (CLI)]({% link docs/archive/1.1/api/cli/overview.md %}) | DuckDB team                                                                | Primary       |
 | [Java]({% link docs/archive/1.1/api/java.md %})                                 | DuckDB team                                                                | Primary       |
-| [Go]({% link docs/archive/1.1/api/go.md %})                                     | DuckDB team and [Mark Boeker](https://github.com/marcboeker)               | Primary       |
+| [Go]({% link docs/archive/1.1/api/go.md %})                                     | DuckDB team and [Marc Boeker](https://github.com/marcboeker)               | Primary       |
 | [Node.js (deprecated)]({% link docs/archive/1.1/api/nodejs/overview.md %})      | DuckDB team                                                                | Primary       |
 | [Node.js (node-neo)]({% link docs/archive/1.1/api/node_neo/overview.md %})      | Jeff Raymakers and Antony Courtney ([MotherDuck](https://motherduck.com/)) | Primary       |
 | [Python]({% link docs/archive/1.1/api/python/overview.md %})                    | DuckDB team                                                                | Primary       |

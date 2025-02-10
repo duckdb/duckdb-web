@@ -17,8 +17,3 @@
         :annotation: str
 
         Indicates which parameter style duckdb supports
-
-    .. data:: default_connection
-        :annotation: duckdb.DuckDBPyConnection
-
-        The connection that is used by default if you don't explicitly pass one to the root methods in this module

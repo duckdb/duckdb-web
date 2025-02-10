@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 435
-extension_download_count_pretty: 435
+extension_download_count: 429
+extension_download_count_pretty: 429
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---
@@ -77,5 +77,13 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|    function_name    | function_type | description | comment | examples |
+|---------------------|---------------|-------------|---------|----------|
+| load_macro_from_url | scalar        | NULL        | NULL    | []       |
 
 
