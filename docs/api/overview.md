@@ -5,31 +5,31 @@ title: Client APIs Overview
 
 DuckDB is an in-process database system and offers client APIs for several languages. These clients support the same DuckDB file format and SQL syntax. Note: DuckDB database files are portable between different clients.
 
-| Client API | Maintainer | Support tier |
-|------------|------------|--------------|
-| [C]({% link docs/api/c/overview.md %})                              | DuckDB team                                                                | Primary       |
-| [Command Line Interface (CLI)]({% link docs/api/cli/overview.md %}) | DuckDB team                                                                | Primary       |
-| [Java]({% link docs/api/java.md %})                                 | DuckDB team                                                                | Primary       |
-| [Go]({% link docs/api/go.md %})                                     | DuckDB team and [Mark Boeker](https://github.com/marcboeker)               | Primary       |
-| [Node.js (node-neo)]({% link docs/api/node_neo/overview.md %})      | Jeff Raymakers and Antony Courtney ([MotherDuck](https://motherduck.com/)) | Primary       |
-| [Python]({% link docs/api/python/overview.md %})                    | DuckDB team                                                                | Primary       |
-| [R]({% link docs/api/r.md %})                                       | DuckDB team and [Kirill Müller](https://github.com/krlmlr)                 | Primary       |
-| [WebAssembly (Wasm)]({% link docs/api/wasm/overview.md %})          | DuckDB team                                                                | Primary       |
-| [ADBC (Arrow)]({% link docs/api/adbc.md %})                         | DuckDB team                                                                | Secondary     |
-| [C++]({% link docs/api/cpp.md %})                                   | DuckDB team                                                                | Secondary     |
-| [C# (.NET)](https://duckdb.net/)                                    | [Giorgi](https://github.com/Giorgi)                                        | Secondary     |
-| [Dart]({% link docs/api/dart.md %})                                 | [TigerEye](https://www.tigereye.com/)                                      | Secondary     |
-| [ODBC]({% link docs/api/odbc/overview.md %})                        | DuckDB team                                                                | Secondary     |
-| [Node.js (deprecated)]({% link docs/api/nodejs/overview.md %})      | DuckDB team                                                                | Secondary     |
-| [Rust]({% link docs/api/rust.md %})                                 | DuckDB team                                                                | Secondary     |
-| [Julia]({% link docs/api/julia.md %})                               | DuckDB team                                                                | Secondary     |
-| [Swift]({% link docs/api/swift.md %})                               | DuckDB team                                                                | Secondary     |
-| [Common Lisp](https://github.com/ak-coram/cl-duckdb)                | [ak-coram](https://github.com/ak-coram)                                    | Tertiary      |
-| [Crystal](https://github.com/amauryt/crystal-duckdb)                | [amauryt](https://github.com/amauryt)                                      | Tertiary      |
-| [Elixir](https://github.com/AlexR2D2/duckdbex)                      | [AlexR2D2](https://github.com/AlexR2D2/duckdbex)                           | Tertiary      |
-| [Erlang](https://github.com/mmzeeman/educkdb)                       | [MM Zeeman](https://github.com/mmzeeman)                                   | Tertiary      |
-| [Ruby](https://github.com/suketa/ruby-duckdb)                       | [suketa](https://github.com/suketa)                                        | Tertiary      |
-| [Zig](https://github.com/karlseguin/zuckdb.zig)                     | [karlseguin](https://github.com/karlseguin)                                | Tertiary      |
+| Client API | Maintainer | Support tier | Latest version |
+|------------|------------|--------------|----------------|
+| [C]({% link docs/api/c/overview.md %})                              | DuckDB team                                                                | Primary       | 1.2.0 |
+| [Command Line Interface (CLI)]({% link docs/api/cli/overview.md %}) | DuckDB team                                                                | Primary       | 1.2.0 |
+| [Java]({% link docs/api/java.md %})                                 | DuckDB team                                                                | Primary       | 1.1.3 |
+| [Go]({% link docs/api/go.md %})                                     | DuckDB team and [Mark Boeker](https://github.com/marcboeker)               | Primary       | 1.1.3 |
+| [Node.js (node-neo)]({% link docs/api/node_neo/overview.md %})      | Jeff Raymakers and Antony Courtney ([MotherDuck](https://motherduck.com/)) | Primary       | 1.1.3 |
+| [Python]({% link docs/api/python/overview.md %})                    | DuckDB team                                                                | Primary       | 1.2.0 |
+| [R]({% link docs/api/r.md %})                                       | DuckDB team and [Kirill Müller](https://github.com/krlmlr)                 | Primary       | 1.1.3 |
+| [WebAssembly (Wasm)]({% link docs/api/wasm/overview.md %})          | DuckDB team                                                                | Primary       | 1.2.0 |
+| [ADBC (Arrow)]({% link docs/api/adbc.md %})                         | DuckDB team                                                                | Secondary     | 1.2.0 |
+| [C++]({% link docs/api/cpp.md %})                                   | DuckDB team                                                                | Secondary     | 1.2.0 |
+| [C# (.NET)](https://duckdb.net/)                                    | [Giorgi](https://github.com/Giorgi)                                        | Secondary     | 1.2.0 |
+| [Dart]({% link docs/api/dart.md %})                                 | [TigerEye](https://www.tigereye.com/)                                      | Secondary     | 1.1.3 |
+| [ODBC]({% link docs/api/odbc/overview.md %})                        | DuckDB team                                                                | Secondary     | 1.1.0 |
+| [Node.js (deprecated)]({% link docs/api/nodejs/overview.md %})      | DuckDB team                                                                | Secondary     | 1.1.3 |
+| [Rust]({% link docs/api/rust.md %})                                 | DuckDB team                                                                | Secondary     | |
+| [Julia]({% link docs/api/julia.md %})                               | DuckDB team                                                                | Secondary     | |
+| [Swift]({% link docs/api/swift.md %})                               | DuckDB team                                                                | Secondary     | |
+| [Common Lisp](https://github.com/ak-coram/cl-duckdb)                | [ak-coram](https://github.com/ak-coram)                                    | Tertiary      | |
+| [Crystal](https://github.com/amauryt/crystal-duckdb)                | [amauryt](https://github.com/amauryt)                                      | Tertiary      | |
+| [Elixir](https://github.com/AlexR2D2/duckdbex)                      | [AlexR2D2](https://github.com/AlexR2D2/duckdbex)                           | Tertiary      | |
+| [Erlang](https://github.com/mmzeeman/educkdb)                       | [MM Zeeman](https://github.com/mmzeeman)                                   | Tertiary      | |
+| [Ruby](https://github.com/suketa/ruby-duckdb)                       | [suketa](https://github.com/suketa)                                        | Tertiary      | |
+| [Zig](https://github.com/karlseguin/zuckdb.zig)                     | [karlseguin](https://github.com/karlseguin)                                | Tertiary      | |
 
 ## Support Tiers
 
