@@ -51,10 +51,10 @@ docs:
     The DuckDB BigQuery Extension integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/hafenkran/duckdb-bigquery).
 
-extension_star_count: 86
-extension_star_count_pretty: 86
-extension_download_count: 1344
-extension_download_count_pretty: 1.3k
+extension_star_count: 88
+extension_star_count_pretty: 88
+extension_download_count: 1358
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -84,7 +84,9 @@ LOAD {{ page.extension.name }};
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
 | bq_curl_ca_bundle_path          | Path to the CA bundle for curl                                                                                                             | VARCHAR    | GLOBAL |
 | bq_debug_show_queries           | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                | BOOLEAN    | GLOBAL |
+| bq_default_location             | Default location for BigQuery queries                                                                                                      | VARCHAR    | GLOBAL |
 | bq_experimental_filter_pushdown | Whether to use filter pushdown (currently experimental)                                                                                    | BOOLEAN    | GLOBAL |
 | bq_experimental_use_info_schema | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API. | BOOLEAN    | GLOBAL |
+| bq_query_timeout_ms             | Timeout for BigQuery queries in milliseconds                                                                                               | BIGINT     | GLOBAL |
 
 
