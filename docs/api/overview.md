@@ -11,7 +11,6 @@ DuckDB is an in-process database system and offers client APIs for several langu
 | [Command Line Interface (CLI)]({% link docs/api/cli/overview.md %}) | DuckDB team                                                                | Primary       |
 | [Java]({% link docs/api/java.md %})                                 | DuckDB team                                                                | Primary       |
 | [Go]({% link docs/api/go.md %})                                     | DuckDB team and [Mark Boeker](https://github.com/marcboeker)               | Primary       |
-| [Node.js (deprecated)]({% link docs/api/nodejs/overview.md %})      | DuckDB team                                                                | Primary       |
 | [Node.js (node-neo)]({% link docs/api/node_neo/overview.md %})      | Jeff Raymakers and Antony Courtney ([MotherDuck](https://motherduck.com/)) | Primary       |
 | [Python]({% link docs/api/python/overview.md %})                    | DuckDB team                                                                | Primary       |
 | [R]({% link docs/api/r.md %})                                       | DuckDB team and [Kirill Müller](https://github.com/krlmlr)                 | Primary       |
@@ -21,6 +20,7 @@ DuckDB is an in-process database system and offers client APIs for several langu
 | [C# (.NET)](https://duckdb.net/)                                    | [Giorgi](https://github.com/Giorgi)                                        | Secondary     |
 | [Dart]({% link docs/api/dart.md %})                                 | [TigerEye](https://www.tigereye.com/)                                      | Secondary     |
 | [ODBC]({% link docs/api/odbc/overview.md %})                        | DuckDB team                                                                | Secondary     |
+| [Node.js (deprecated)]({% link docs/api/nodejs/overview.md %})      | DuckDB team                                                                | Secondary     |
 | [Rust]({% link docs/api/rust.md %})                                 | DuckDB team                                                                | Secondary     |
 | [Julia]({% link docs/api/julia.md %})                               | DuckDB team                                                                | Secondary     |
 | [Swift]({% link docs/api/swift.md %})                               | DuckDB team                                                                | Secondary     |
