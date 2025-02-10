@@ -83,4 +83,30 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|   function_name    | function_type | description | comment | examples |
+|--------------------|---------------|-------------|---------|----------|
+| absolute_path      | scalar        | NULL        | NULL    | []       |
+| cd                 | pragma        | NULL        | NULL    | []       |
+| cd                 | table         | NULL        | NULL    | []       |
+| file_extension     | scalar        | NULL        | NULL    | []       |
+| file_last_modified | scalar        | NULL        | NULL    | []       |
+| file_name          | scalar        | NULL        | NULL    | []       |
+| file_size          | scalar        | NULL        | NULL    | []       |
+| hostfs             | scalar        | NULL        | NULL    | []       |
+| hsize              | scalar        | NULL        | NULL    | []       |
+| is_dir             | scalar        | NULL        | NULL    | []       |
+| is_file            | scalar        | NULL        | NULL    | []       |
+| ls                 | pragma        | NULL        | NULL    | []       |
+| ls                 | table         | NULL        | NULL    | []       |
+| lsr                | pragma        | NULL        | NULL    | []       |
+| lsr                | table         | NULL        | NULL    | []       |
+| path_exists        | scalar        | NULL        | NULL    | []       |
+| path_type          | scalar        | NULL        | NULL    | []       |
+| pwd                | pragma        | NULL        | NULL    | []       |
+| pwd                | scalar        | NULL        | NULL    | []       |
+
 

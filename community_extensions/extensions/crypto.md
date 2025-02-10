@@ -87,4 +87,13 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type |                                                   description                                                    | comment |                             examples                              |
+|---------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------|
+| crypto_hash   | scalar        | Apply a cryptographic hash function specified as the first argument to the data supplied as the second argument. | NULL    | [SELECT crypto_hash('md5', 'test');]                              |
+| crypto_hmac   | scalar        | Calculate a HMAC value                                                                                           | NULL    | [SELECT crypto_hmac('sha2-256', 'secret key', 'secret message');] |
+
 

@@ -99,4 +99,13 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|  function_name  | function_type | description | comment | examples |
+|-----------------|---------------|-------------|---------|----------|
+| httpserve_start | scalar        | NULL        | NULL    | []       |
+| httpserve_stop  | scalar        | NULL        | NULL    | []       |
+
 
