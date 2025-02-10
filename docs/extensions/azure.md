@@ -271,7 +271,7 @@ duckdb.sql("SELECT count(*) FROM 'az://myaccount.blob.core.windows.net/path/to/b
 
 Even though ADLS implements similar functionality as the Blob storage, there are some important performance benefits to using the ADLS endpoints for globbing, especially when using (complex) glob patterns.
 
-To demonstrate, lets look at an example of how the a glob is performed internally using respectively the Glob and ADLS endpoints.
+To demonstrate, lets look at an example of how the a glob is performed internally using respectively the Blob and ADLS endpoints.
 
 Using the following filesystem:
 
