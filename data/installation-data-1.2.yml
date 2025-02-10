@@ -3,7 +3,6 @@
   platform: Windows
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: 'no'
   installation_code: winget install DuckDB.cli
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
@@ -18,7 +17,7 @@
   platform: Windows
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: 'yes'
+  sha_512: 89d85ff968a89abcfa37d3dad0a10179ce1570f626e21a78d7e8e0c734e4f60a30a596c6ed6b2deb855ece20ef9f09ef2366c35364dca7ed7e52c4122731c8c9
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-windows-amd64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
@@ -33,7 +32,7 @@
   platform: Windows
   download_method: Direct download
   architecture: arm64
-  has_sha_512_hash: 'yes'
+  sha_512: 780253cd359bf0252e342ce3a84d03a00782615f810436e1e92668c56884ed08f0416dfc38e1f35e235219f23ca4940347307b2dd06a67ba6068cf74596574f6
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-windows-arm64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
@@ -48,7 +47,6 @@
   platform: macOS
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: 'no'
   installation_code: brew install duckdb
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
@@ -63,7 +61,7 @@
   platform: macOS
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: 'yes'
+  sha_512: 3aaa20ddc68a33b61aa6d823011641f4bf565a0180e1c32c501fc303f19f702eca99ce256280cb6ce5bcd53876f2836eb3226fdc312b9d1e1fa6413e5664f04e
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-osx-universal.zip
   installation_code: >-
     curl --fail --location --progress-bar --output duckdb_cli-osx-universal.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-osx-universal.zip &&
@@ -74,7 +72,7 @@
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  has_sha_512_hash: 'yes'
+  sha_512: d94b4497338b628dd9de64d242f4977058aa1a84a2fba2436e84adf4a8fd0716b3ab60eba53525dc16d3aa28c443271f1a12984637301ed51377dad8ea867843
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip
   installation_code: >-
     curl --fail --location --progress-bar --output duckdb_cli-linux-amd64.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip &&
@@ -85,7 +83,7 @@
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  has_sha_512_hash: 'yes'
+  sha_512: 64d84b5d468ae544251d567cadd8504472f5f2a6df1f6fa390bf1ed96b9d00d6f31a007729de92f1799520161235de5d7da44c0e18800da38fbd026d9c439973
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-aarch64.zip
   installation_code: >-
     curl --fail --location --progress-bar --output duckdb_cli-linux-aarch64.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-aarch64.zip &&
@@ -96,7 +94,6 @@
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: 'no'
   installation_code: pip install duckdb --upgrade
   note: >-
     The DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
@@ -105,7 +102,6 @@
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: 'no'
   installation_code: install.packages("duckdb")
   note: >-
     On aarch64, if the DuckDB R package does not successfully compile, you
@@ -115,7 +111,6 @@
   platform: all
   download_method: Package manager
   architecture: universal
-  has_sha_512_hash: 'no'
   installation_code: >-
     <dependency>
         <groupId>org.duckdb</groupId>
@@ -127,7 +122,6 @@
   platform: all
   download_method: Direct download
   architecture: universal
-  has_sha_512_hash: 'yes'
   link: https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/1.1.3/duckdb_jdbc-1.1.3.jar
 - variant: stable
   environment: Node.js
@@ -153,30 +147,35 @@
   download_method: Direct download
   architecture: x86_64
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-windows-amd64.zip
+  sha_512: 51adb4f540147bd5c6bc9d719d4469363fbe17029ea1fe9b42cdf956e84dab0eb5a0a2821a29d7ac8d3cb64ddf010e5486cd9be0737ef3a4275b5e96de6d9cce
 - variant: stable
   environment: C/C++
   platform: Windows
   download_method: Direct download
   architecture: arm64
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-windows-arm64.zip
+  sha_512: 3e45110f1abd80a22f797d21966c49559d45fe8cd996cffec217741a600d33827b04af698a55e840d47764039b73935274d6814aae0d2e0726b67f1aa79e4532
 - variant: stable
   environment: C/C++
   platform: macOS
   download_method: Direct download
   architecture: universal
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-osx-universal.zip
+  sha_512: 4f6c9e593c0b5c579a829dbe1e669610be6db3039a627d1c2c5747568e2d673bf9841548d38bcaf42eb4c827047c16161eeb52351467f46bf16e80c876ef2877
 - variant: stable
   environment: C/C++
   platform: Linux
   download_method: Direct download
   architecture: x86_64
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-amd64.zip
+  sha_512: e04714201918bc198f7c6e08326eb51e5a700e7baa630229995f44707a82f193647aa537a7f54db602588725aad272a49db701bc5e4343b3083332751b756fc9
 - variant: stable
   environment: C/C++
   platform: Linux
   download_method: Direct download
   architecture: arm64
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/libduckdb-linux-aarch64.zip
+  sha_512: f150ef87e7a56ec86e8983f5f1e0600a7c258c6a4596122c55572a338bc1c2baabce4c469d8b5dbc703073a3efc0e7a039d605898f436005f48ada8ee6646588
 - variant: stable
   environment: ODBC
   platform: Windows
