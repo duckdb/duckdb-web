@@ -1369,6 +1369,28 @@ body.installation{
 			}
 		}
 	}
+	.sha512_btn{
+		border-radius: 40px;
+		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+		background: var(--main-codebox-sub-background-color, rgba(230, 230, 230, 0.60));
+		cursor: pointer;
+		font-family: $fontMono;
+		padding: 1px 6px;
+		font-weight: 600;
+		font-size: 11px;
+		vertical-align: bottom;
+		margin-left: 5px;
+		&.active{
+			color: var(--doc-menu-info-deprecated-border-color, #A899FF);
+		}
+	}
+	.sha512.output{
+		padding-top: 0;
+		display: none;
+		.result{
+			word-break: break-all;
+		}
+	}
 	.note.output{
 		padding-top: 0px;
 		.result{
