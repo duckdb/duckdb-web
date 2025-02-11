@@ -1375,11 +1375,12 @@ body.installation{
 		background: var(--main-codebox-sub-background-color, rgba(230, 230, 230, 0.60));
 		cursor: pointer;
 		font-family: $fontMono;
-		padding: 1px 6px;
+		padding: 3px 6px;
 		font-weight: 600;
 		font-size: 11px;
 		vertical-align: bottom;
-		margin-left: 5px;
+		display: inline-block;
+		margin-top: 10px;
 		&.active{
 			color: var(--doc-menu-info-deprecated-border-color, #A899FF);
 		}
@@ -1389,6 +1390,11 @@ body.installation{
 		display: none;
 		.result{
 			word-break: break-all;
+		}
+	}
+	.link.output{
+		.result a{
+			display: block;
 		}
 	}
 	.note.output{
