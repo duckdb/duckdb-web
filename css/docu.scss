@@ -875,6 +875,9 @@ table {
 	tbody tr:last-child{
 		border-bottom: 0;
 	}
+	> tbody > tr:hover{
+		background: var(--doc-codebox-border-color, #E6E6E6);
+	}
 	a{
 		text-decoration: underline;
 		word-wrap: normal;
