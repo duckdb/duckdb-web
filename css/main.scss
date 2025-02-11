@@ -1387,6 +1387,9 @@ body.installation{
 	.sha512.output{
 		padding-top: 0;
 		display: none;
+		.result{
+			word-break: break-all;
+		}
 	}
 	.note.output{
 		padding-top: 0px;
