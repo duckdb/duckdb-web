@@ -300,14 +300,14 @@ root
         └── data_0.csv
 ```
 
-The following query performed through the blob endpoint
+The following query is performed through the Blob endpoint:
 
 ```sql
 SELECT count(*)
 FROM 'az://root/l_receipmonth=1997-*/l_shipmode=SHIP/*.csv';
 ```
 
-will perform the following steps:
+It will perform the following steps:
 
 * List all the files with the prefix `root/l_receipmonth=1997-`
     * `root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv`
@@ -324,14 +324,14 @@ will perform the following steps:
     * `root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv`
     * `root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv`
 
-Meanwhile, the same query performed through the datalake endpoint,
+Meanwhile, the same query can be performed through the datalake endpoint as follows:
 
 ```sql
 SELECT count(*)
 FROM 'abfss://root/l_receipmonth=1997-*/l_shipmode=SHIP/*.csv';
 ```
 
-will perform the following steps:
+This will perform the following steps:
 
 * List all directories in `root/`
     * `root/l_receipmonth=1997-10`
