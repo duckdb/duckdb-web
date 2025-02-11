@@ -120,7 +120,7 @@
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        <version>1.1.3</version>
+        <version>1.2.0</version>
     </dependency>
 - variant: stable
   environment: Java
@@ -128,7 +128,7 @@
   download_method: Direct download
   architecture: universal
   has_sha_512_hash: 'yes'
-  link: https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/1.1.3/duckdb_jdbc-1.1.3.jar
+  link: https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/1.2.0/duckdb_jdbc-1.2.0.jar
 - variant: stable
   environment: Node.js
   platform: all
