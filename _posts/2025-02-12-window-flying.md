@@ -14,6 +14,9 @@ In the previous post I went into some new windowing functionality in DuckDB avai
 But there are other changes that improve our use of resources (such as memory) without adding new functionality.
 So let's get “under the feathers” and look at these changes.
 
+> We previously [benchmarked ourselves on a window function-heavy workload]({% post_url 2024-06-26-benchmarks-over-time %}), which showed great performance improvements over time.
+> The optimizations presented in this blog post further push the performance of DuckDB's window operator even further.
+
 ## Segment Tree Vectorization
 
 One important improvement that was made in the summer of 2023 was converting the segment tree evaluation code
