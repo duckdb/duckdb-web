@@ -66,8 +66,7 @@
   has_sha_512_hash: 'yes'
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-osx-universal.zip
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb_cli-osx-universal.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-osx-universal.zip &&
-    unzip duckdb_cli-osx-universal.zip
+    curl https://install.duckdb.org | sh
   usage_example: ./duckdb
 - variant: stable
   environment: Command line
@@ -77,8 +76,7 @@
   has_sha_512_hash: 'yes'
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb_cli-linux-amd64.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip &&
-    unzip duckdb_cli-linux-amd64.zip
+    curl https://install.duckdb.org | sh
   usage_example: ./duckdb
 - variant: stable
   environment: Command line
@@ -88,8 +86,7 @@
   has_sha_512_hash: 'yes'
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-aarch64.zip
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb_cli-linux-aarch64.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-aarch64.zip &&
-    unzip duckdb_cli-linux-aarch64.zip
+    curl https://install.duckdb.org | sh
   usage_example: ./duckdb
 - variant: stable
   environment: Python
