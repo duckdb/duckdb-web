@@ -15,7 +15,7 @@ But there are other changes that improve our use of resources (such as memory) w
 So let's get “under the feathers” and look at these changes.
 
 > We previously [benchmarked ourselves on a window function-heavy workload]({% post_url 2024-06-26-benchmarks-over-time %}), which showed great performance improvements over time.
-> The optimizations presented in this blog post further push the performance of DuckDB's window operator even further.
+> The optimizations presented in this blog post push the performance of DuckDB's window operator even further.
 
 ## Segment Tree Vectorization
 
@@ -32,9 +32,11 @@ To vectorize the segment tree aggregation, we accumulate _vectors_ of leaf value
 and flush them into each output row's state when we reach the vector capacity of 2048 rows..
 Some care needed to be taken to handle order-sensitive aggregates by accumulating values in the correct order.
 `FILTER` and `EXCLUDE` clauses also provided some entertainment, but the segment trees are now fully vectorized.
-The performance gains here were about
-[a factor of four](https://github.com/duckdb/duckdb/issues/7809#issuecomment-1679387022)
-(from “Baseline” to “Fan Out”).
+The performance gains here were about a factor of four (from “Baseline” to “Fan Out”).
+
+<div align="center">
+<img src="/images/blog/windowing/vectorization-improvements.png" alt="Vectorization Improvements" title="Vectorization Improvements" style="max-width:100%;width:100%;height:auto"/>
+</div>
 
 Once segment trees were vectorized,
 we could use the same approach when implementing `DISTINCT` aggregates with merge sort trees.
@@ -101,6 +103,38 @@ There are a few more restrictions:
 
 * `IGNORE NULLS`, `EXCLUDE` and `ORDER BY` arguments are not allowed
 * `lead` and `lag` distances are restricted to a constant within ±2048 (one vector). this is not really a big deal because the distance is usually 1.
+
+The improvements for streaming `LEAD` were quite dramatic:
+
+```sql
+SELECT SETSEED(0.8675309);
+CREATE OR REPLACE TABLE df AS
+	SELECT 
+		RANDOM() AS a,
+		RANDOM() AS b,
+		RANDOM() AS c,
+	FROM range(10_000_000);
+
+run
+SELECT sum(a_1 + a_2 + b_1 + b_2)
+FROM (
+	SELECT
+	  LEAD(a, 1) OVER () AS a_1,
+	  LEAD(a, 2) OVER () AS a_2,
+	  LEAD(b, 1) OVER () AS b_1,
+	  LEAD(b, 2) OVER () AS b_2
+	FROM df
+) t;
+```
+
+<div align="center">
+<img src="/images/blog/windowing/streaming-lead.png" alt="Streaming Lead Performance" title="Streaming Lead Performance" style="max-width:100%;width:100%;height:auto"/>
+</div>
+
+* Baseline - Where we started
+* Shift - Copying blocks of rows inside the non-streaming implementation, instead of one at a time
+* Streaming - First implementation of streaming `LEAD`
+* Partials - Avoid copying when the entire chunk can just be referenced.
 
 In the future we may be able to relax the end of the frame to a constant distance from the current row
 that fits inside the buffer length (e.g., `BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING`)
