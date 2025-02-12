@@ -34,7 +34,7 @@ redirect_from:
    > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
    > the one passed to `SQLDriverConnect` will take precedence.
 
-   For the details of the configuration parameters, see the [ODBC configuration page]({% link docs/api/odbc/configuration.md %}).
+   For the details of the configuration parameters, see the [ODBC configuration page]({% link docs/clients/odbc/configuration.md %}).
 
 5. After the configuration, to validate the installation, it is possible to use an ODBC client. unixODBC uses a command line tool called `isql`.
 

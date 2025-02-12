@@ -87,4 +87,4 @@ sudo yum install unixODBC
    These files can be placed to the user home directory `/home/⟨username⟩` or in the system `/etc` directory.
    The Driver Manager prioritizes the user configuration files over the system files.
 
-   For the details of the configuration parameters, see the [ODBC configuration page]({% link docs/api/odbc/configuration.md %}).
+   For the details of the configuration parameters, see the [ODBC configuration page]({% link docs/clients/odbc/configuration.md %}).

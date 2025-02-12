@@ -15,9 +15,9 @@ For DuckDB, there is no DBMS server software to install, update and maintain. Du
 
 ## Portable
 
-Thanks to having no dependencies, DuckDB is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DuckDB-Wasm]({% link docs/api/wasm/overview.md %}), DuckDB can also run in web browsers and even on mobile phones.
+Thanks to having no dependencies, DuckDB is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DuckDB-Wasm]({% link docs/clients/wasm/overview.md %}), DuckDB can also run in web browsers and even on mobile phones.
 
-DuckDB provides [APIs for Java, C, C++, Go, Node.js and other languages]({% link docs/api/overview.md %}).
+DuckDB provides [APIs for Java, C, C++, Go, Node.js and other languages]({% link docs/clients/overview.md %}).
 
 ## Feature-Rich
 

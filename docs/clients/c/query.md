@@ -41,7 +41,7 @@ duckdb_destroy_result(&result);
 
 Values can be extracted using either the `duckdb_fetch_chunk` function, or using the `duckdb_value` convenience functions. The `duckdb_fetch_chunk` function directly hands you data chunks in DuckDB's native array format and can therefore be very fast. The `duckdb_value` functions perform bounds- and type-checking, and will automatically cast values to the desired type. This makes them more convenient and easier to use, at the expense of being slower.
 
-See the [Types]({% link docs/api/c/types.md %}) page for more information.
+See the [Types]({% link docs/clients/c/types.md %}) page for more information.
 
 > For optimal performance, use `duckdb_fetch_chunk` to extract data from the query result.
 > The `duckdb_value` functions perform internal type-checking, bounds-checking and casting which makes them slower.

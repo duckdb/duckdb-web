@@ -37,7 +37,7 @@ duckdb.sql("SELECT i * 2 AS k FROM r1").show()
 
 ## Data Input
 
-DuckDB can ingest data from a wide variety of formats – both on-disk and in-memory. See the [data ingestion page]({% link docs/api/python/data_ingestion.md %}) for more information.
+DuckDB can ingest data from a wide variety of formats – both on-disk and in-memory. See the [data ingestion page]({% link docs/clients/python/data_ingestion.md %}) for more information.
 
 ```python
 import duckdb
@@ -121,7 +121,7 @@ duckdb.sql("SELECT * FROM arrow_table")
 
 ## Result Conversion
 
-DuckDB supports converting query results efficiently to a variety of formats. See the [result conversion page]({% link docs/api/python/conversion.md %}) for more information.
+DuckDB supports converting query results efficiently to a variety of formats. See the [result conversion page]({% link docs/clients/python/conversion.md %}) for more information.
 
 ```python
 import duckdb
@@ -211,7 +211,7 @@ The connection object and the `duckdb` module can be used interchangeably – th
 
 ### Using Connections in Parallel Python Programs
 
-The `DuckDBPyConnection` object is not thread-safe. If you would like to write to the same database from multiple threads, create a cursor for each thread with the [`DuckDBPyConnection.cursor()` method]({% link docs/api/python/reference/index.md %}#duckdb.DuckDBPyConnection.cursor).
+The `DuckDBPyConnection` object is not thread-safe. If you would like to write to the same database from multiple threads, create a cursor for each thread with the [`DuckDBPyConnection.cursor()` method]({% link docs/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.cursor).
 
 ## Loading and Installing Extensions
 

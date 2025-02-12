@@ -180,7 +180,7 @@ We have now a table with all the data from January to October, amounting to almo
 
 Suppose we want to analyze the average delay of the [Intercity Direct trains](https://en.wikipedia.org/wiki/Intercity_Direct) operated by the [Nederlandse Spoorwegen (NS)](https://en.wikipedia.org/wiki/Nederlandse_Spoorwegen), measured at the final destination of the train service.
 While we can run this analysis directly on the `.csv` files, the lack of metadata (such as schema and min-max indexes) will limit the performance.
-Let's measure this in the CLI client by turning on the [timer]({% link docs/api/cli/dot_commands.md %}):
+Let's measure this in the CLI client by turning on the [timer]({% link docs/clients/cli/dot_commands.md %}):
 
 ```plsql
 .timer on
@@ -246,7 +246,7 @@ TO 'services-parquet-hive'
 (FORMAT PARQUET, PARTITION_BY (Service_Company, Service_Type));
 ```
 
-Let's peek into the directory from DuckDB's CLI using the [`.sh` dot command]({% link docs/api/cli/dot_commands.md %}):
+Let's peek into the directory from DuckDB's CLI using the [`.sh` dot command]({% link docs/clients/cli/dot_commands.md %}):
 
 ```plsql
 .sh tree services-parquet-hive

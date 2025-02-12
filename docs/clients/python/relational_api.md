@@ -70,7 +70,7 @@ Outside of SQL queries, the following methods are provided to construct relation
 
 ## SQL Queries
 
-Relation objects can be queried through SQL through [replacement scans]({% link docs/api/c/replacement_scans.md %}). If you have a relation object stored in a variable, you can refer to that variable as if it was a SQL table (in the `FROM` clause). This allows you to incrementally build queries using relation objects.
+Relation objects can be queried through SQL through [replacement scans]({% link docs/clients/c/replacement_scans.md %}). If you have a relation object stored in a variable, you can refer to that variable as if it was a SQL table (in the `FROM` clause). This allows you to incrementally build queries using relation objects.
 
 ```python
 import duckdb
@@ -308,9 +308,9 @@ r1.union(r2).show()
 
 ## Result Output
 
-The result of relations can be converted to various types of Python structures, see the [result conversion page]({% link docs/api/python/conversion.md %}) for more information.
+The result of relations can be converted to various types of Python structures, see the [result conversion page]({% link docs/clients/python/conversion.md %}) for more information.
 
 The result of relations can also be directly written to files using the below methods.
 
-* [`write_csv`]({% link docs/api/python/reference/index.md %}#duckdb.DuckDBPyRelation.write_csv)
-* [`write_parquet`]({% link docs/api/python/reference/index.md %}#duckdb.DuckDBPyRelation.write_parquet)
+* [`write_csv`]({% link docs/clients/python/reference/index.md %}#duckdb.DuckDBPyRelation.write_csv)
+* [`write_parquet`]({% link docs/clients/python/reference/index.md %}#duckdb.DuckDBPyRelation.write_parquet)

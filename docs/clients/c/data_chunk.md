@@ -5,16 +5,16 @@ redirect_from:
   - /docs/api/c/data_chunk
 ---
 
-Data chunks represent a horizontal slice of a table. They hold a number of [vectors]({% link docs/api/c/vector.md %}), that can each hold up to the `VECTOR_SIZE` rows. The vector size can be obtained through the `duckdb_vector_size` function and is configurable, but is usually set to `2048`.
+Data chunks represent a horizontal slice of a table. They hold a number of [vectors]({% link docs/clients/c/vector.md %}), that can each hold up to the `VECTOR_SIZE` rows. The vector size can be obtained through the `duckdb_vector_size` function and is configurable, but is usually set to `2048`.
 
 Data chunks and vectors are what DuckDB uses natively to store and represent data. For this reason, the data chunk interface is the most efficient way of interfacing with DuckDB. Be aware, however, that correctly interfacing with DuckDB using the data chunk API does require knowledge of DuckDB's internal vector format.
 
 Data chunks can be used in two manners:
 
-* **Reading Data**: Data chunks can be obtained from query results using the `duckdb_fetch_chunk` method, or as input to a user-defined function. In this case, the [vector methods]({% link docs/api/c/vector.md %}) can be used to read individual values.
+* **Reading Data**: Data chunks can be obtained from query results using the `duckdb_fetch_chunk` method, or as input to a user-defined function. In this case, the [vector methods]({% link docs/clients/c/vector.md %}) can be used to read individual values.
 * **Writing Data**: Data chunks can be created using `duckdb_create_data_chunk`. The data chunk can then be filled with values and used in `duckdb_append_data_chunk` to write data to the database.
 
-The primary manner of interfacing with data chunks is by obtaining the internal vectors of the data chunk using the `duckdb_data_chunk_get_vector` method. Afterwards, the [vector methods]({% link docs/api/c/vector.md %}) can be used to read from or write to the individual vectors.
+The primary manner of interfacing with data chunks is by obtaining the internal vectors of the data chunk using the `duckdb_data_chunk_get_vector` method. Afterwards, the [vector methods]({% link docs/clients/c/vector.md %}) can be used to read from or write to the individual vectors.
 
 ## API Reference Overview
 

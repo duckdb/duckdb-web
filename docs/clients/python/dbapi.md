@@ -10,7 +10,7 @@ The standard DuckDB Python API provides a SQL interface compliant with the [DB-A
 ## Connection
 
 To use the module, you must first create a `DuckDBPyConnection` object that represents a connection to a database.
-This is done through the [`duckdb.connect`]({% link docs/api/python/reference/index.md %}#duckdb.connect) method.
+This is done through the [`duckdb.connect`]({% link docs/clients/python/reference/index.md %}#duckdb.connect) method.
 
 The 'config' keyword argument can be used to provide a `dict` that contains key->value pairs referencing [settings]({% link docs/configuration/overview.md %}#configuration-reference) understood by DuckDB.
 
@@ -107,7 +107,7 @@ The `description` property of the connection object contains the column names as
 
 ### Prepared Statements
 
-DuckDB also supports [prepared statements]({% link docs/sql/query_syntax/prepared_statements.md %}) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter. Values are converted according to the [conversion rules]({% link docs/api/python/conversion.md %}#object-conversion-python-object-to-duckdb).
+DuckDB also supports [prepared statements]({% link docs/sql/query_syntax/prepared_statements.md %}) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter. Values are converted according to the [conversion rules]({% link docs/clients/python/conversion.md %}#object-conversion-python-object-to-duckdb).
 
 Here are some examples. First, insert a row using a [prepared statement]({% link docs/sql/query_syntax/prepared_statements.md %}):
 
@@ -143,7 +143,7 @@ print(con.fetchall())
 [('duck', 'duck', 'goose')]
 ```
 
-> Warning Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page]({% link docs/api/python/data_ingestion.md %}) for better options.
+> Warning Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page]({% link docs/clients/python/data_ingestion.md %}) for better options.
 
 ## Named Parameters
 

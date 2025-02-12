@@ -128,10 +128,10 @@ duckdb.sql("SELECT * FROM read_json_auto('example.json')")
 ## Directly Accessing DataFrames and Arrow Objects
 
 DuckDB is automatically able to query certain Python variables by referring to their variable name (as if it was a table).
-These types include the following: Pandas DataFrame, Polars DataFrame, Polars LazyFrame, NumPy arrays, [relations]({% link docs/api/python/relational_api.md %}), and Arrow objects.
+These types include the following: Pandas DataFrame, Polars DataFrame, Polars LazyFrame, NumPy arrays, [relations]({% link docs/clients/python/relational_api.md %}), and Arrow objects.
 
 Only variables that are visible to Python code at the location of the `sql()` or `execute()` call can be used in this manner.
-Accessing these variables is made possible by [replacement scans]({% link docs/api/c/replacement_scans.md %}). To disable replacement scans entirely, use:
+Accessing these variables is made possible by [replacement scans]({% link docs/clients/c/replacement_scans.md %}). To disable replacement scans entirely, use:
 
 ```sql
 SET python_enable_replacements = false;
@@ -194,10 +194,10 @@ duckdb.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 
 ### Registering Objects
 
-You can register Python objects as DuckDB tables using the [`DuckDBPyConnection.register()` function]({% link docs/api/python/reference/index.md %}#duckdb.DuckDBPyConnection.register).
+You can register Python objects as DuckDB tables using the [`DuckDBPyConnection.register()` function]({% link docs/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.register).
 
 The precedence of objects with the same name is as follows:
 
 * Objects explicitly registered via `DuckDBPyConnection.register()`
 * Native DuckDB tables and views
-* [Replacement scans]({% link docs/api/c/replacement_scans.md %})
+* [Replacement scans]({% link docs/clients/c/replacement_scans.md %})

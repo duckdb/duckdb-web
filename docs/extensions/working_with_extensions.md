@@ -27,7 +27,7 @@ All official extensions are distributed for the following platforms.
 Some extensions are distributed for the following platforms:
 
 * `windows_amd64_mingw`
-* `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/api/wasm/extensions.md %}))
+* `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/clients/wasm/extensions.md %}))
 
 For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`, `linux_arm64_gcc4`).
 

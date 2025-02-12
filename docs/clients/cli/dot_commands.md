@@ -37,9 +37,9 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.keywordcode ?CODE?`    | Sets the syntax highlighting terminal code used for keywords                                                                           |
 | `.lint OPTIONS`          | Report potential schema issues.                                                                                                        |
 | `.log FILE|off`          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                          |
-| `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %})                        |
-| `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/api/cli/output_formats.md %}) |
-| `.mode MODE ?TABLE?`     | Set [output mode]({% link docs/api/cli/output_formats.md %})                                                                           |
+| `.maxrows COUNT`         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/clients/cli/output_formats.md %})                        |
+| `.maxwidth COUNT`        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/clients/cli/output_formats.md %}) |
+| `.mode MODE ?TABLE?`     | Set [output mode]({% link docs/clients/cli/output_formats.md %})                                                                           |
 | `.multiline`             | Set multi-line mode (default)                                                                                                          |
 | `.nullvalue STRING`      | Use `STRING` in place of `NULL` values                                                                                                 |
 | `.once ?OPTIONS? ?FILE?` | Output for the next SQL command only to `FILE`                                                                                         |
@@ -138,7 +138,7 @@ The results then open in the default text file editor of the system, for example
 
 ## Querying the Database Schema
 
-All DuckDB clients support [querying the database schema with SQL]({% link docs/sql/meta/information_schema.md %}), but the CLI has additional [dot commands]({% link docs/api/cli/dot_commands.md %}) that can make it easier to understand the contents of a database.
+All DuckDB clients support [querying the database schema with SQL]({% link docs/sql/meta/information_schema.md %}), but the CLI has additional [dot commands]({% link docs/clients/cli/dot_commands.md %}) that can make it easier to understand the contents of a database.
 The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern]({% link docs/sql/functions/pattern_matching.md %}#like).
 
 ```sql

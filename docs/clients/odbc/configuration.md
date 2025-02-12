@@ -8,7 +8,7 @@ redirect_from:
 
 This page documents the files using the ODBC configuration, [`odbc.ini`](#odbcini-and-odbcini) and [`odbcinst.ini`](#odbcinstini-and-odbcinstini).
 These are either placed in the home directory as dotfiles (`.odbc.ini` and `.odbcinst.ini`, respectively) or in a system directory.
-For platform-specific details, see the pages for [Linux]({% link docs/api/odbc/linux.md %}), [macOS]({% link docs/api/odbc/macos.md %}), and [Windows]({% link docs/api/odbc/windows.md %}).
+For platform-specific details, see the pages for [Linux]({% link docs/clients/odbc/linux.md %}), [macOS]({% link docs/clients/odbc/macos.md %}), and [Windows]({% link docs/clients/odbc/windows.md %}).
 
 ## `odbc.ini` and `.odbc.ini`
 

@@ -68,7 +68,7 @@ included in DuckDB.
 > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
 > the one passed to `SQLDriverConnect` will take precedence.
 
-For the details of the configuration parameters, see the [ODBC configuration page]({% link docs/api/odbc/configuration.md %}).
+For the details of the configuration parameters, see the [ODBC configuration page]({% link docs/clients/odbc/configuration.md %}).
 
 ### Registry Keys
 

@@ -32,13 +32,13 @@ duckdb [OPTIONS] [FILENAME]
 
 ### Options
 
-The `[OPTIONS]` part encodes [arguments for the CLI client]({% link docs/api/cli/arguments.md %}). Common options include:
+The `[OPTIONS]` part encodes [arguments for the CLI client]({% link docs/clients/cli/arguments.md %}). Common options include:
 
 * `-csv`: sets the output mode to CSV
 * `-json`: sets the output mode to JSON
 * `-readonly`: open the database in read-only mode (see [concurrency in DuckDB]({% link docs/connect/concurrency.md %}#handling-concurrency))
 
-For a full list of options, see the [command line arguments page]({% link docs/api/cli/arguments.md %}).
+For a full list of options, see the [command line arguments page]({% link docs/clients/cli/arguments.md %}).
 
 ### In-Memory vs. Persistent Database
 
@@ -79,7 +79,7 @@ The CLI supports all of DuckDB's rich [SQL syntax]({% link docs/sql/introduction
 
 ### Editor Features
 
-The CLI supports [autocompletion]({% link docs/api/cli/autocomplete.md %}), and has sophisticated [editor features]({% link docs/api/cli/editing.md %}) and [syntax highlighting]({% link docs/api/cli/syntax_highlighting.md %}) on certain platforms.
+The CLI supports [autocompletion]({% link docs/clients/cli/autocomplete.md %}), and has sophisticated [editor features]({% link docs/clients/cli/editing.md %}) and [syntax highlighting]({% link docs/clients/cli/syntax_highlighting.md %}) on certain platforms.
 
 ### Exiting the CLI
 
@@ -87,11 +87,11 @@ To exit the CLI, press `Ctrl`+`D` if your platform supports it. Otherwise, press
 
 ### Dot Commands
 
-In addition to SQL syntax, special [dot commands]({% link docs/api/cli/dot_commands.md %}) may be entered into the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line.
+In addition to SQL syntax, special [dot commands]({% link docs/clients/cli/dot_commands.md %}) may be entered into the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line.
 
 Frequently-used configurations can be stored in the file `~/.duckdbrc`, which will be loaded when starting the CLI client. See the [Configuring the CLI](#configuring-the-cli) section below for further information on these options.
 
-Below, we summarize a few important dot commands. To see all available commands, see the [dot commands page]({% link docs/api/cli/dot_commands.md %}) or use the `.help` command.
+Below, we summarize a few important dot commands. To see all available commands, see the [dot commands page]({% link docs/clients/cli/dot_commands.md %}) or use the `.help` command.
 
 #### Opening Database Files
 
@@ -118,13 +118,13 @@ One important option accepted by `.open` is the `--readonly` flag. This disallow
 
 #### Output Formats
 
-The `.mode` [dot command]({% link docs/api/cli/dot_commands.md %}#mode) may be used to change the appearance of the tables returned in the terminal output.
+The `.mode` [dot command]({% link docs/clients/cli/dot_commands.md %}#mode) may be used to change the appearance of the tables returned in the terminal output.
 These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents, and `insert` mode for generating SQL statements.
 
 #### Writing Results to a File
 
 By default, the DuckDB CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands.
-For details, see the documentation for the [output dot command]({% link docs/api/cli/dot_commands.md %}#output-writing-results-to-a-file).
+For details, see the documentation for the [output dot command]({% link docs/clients/cli/dot_commands.md %}#output-writing-results-to-a-file).
 
 #### Reading SQL from a File
 

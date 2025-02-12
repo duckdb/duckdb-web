@@ -7,7 +7,7 @@ redirect_from:
 
 > Warning DuckDB's C++ API is internal.
 > It is not guaranteed to be stable and can change without notice.
-> If you would like to build an application on DuckDB, we recommend using the [C API]({% link docs/api/c/overview.md %}).
+> If you would like to build an application on DuckDB, we recommend using the [C API]({% link docs/clients/c/overview.md %}).
 
 ## Installation
 
