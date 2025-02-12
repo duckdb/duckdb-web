@@ -8,7 +8,7 @@ tags: ["deep dive"]
 
 ## Introduction
 
-Last week I went into some new windowing functionality in DuckDB available through SQL.
+In the previous post I went into some new windowing functionality in DuckDB available through SQL.
 But there are other changes that improve our use of resources (such as memory) without adding new functionality.
 So let's get “under the feathers” and look at these changes.
 
