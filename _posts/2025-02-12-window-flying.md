@@ -74,7 +74,7 @@ This is simple enough that we can _stream_ the evaluation of the function on a s
 First, let's step back a bit and talk about the window _operator_.
 During parsing and optimisation of a query, all the window functions are attached to a single _logical_ window operator.
 When it comes time to plan the query, we group the functions that have common partitions and “compatible” orderings
-(see Cao et. al.,
+(see Cao et al.,
 [_Optimization of Analytic Window Functions_](https://www.vldb.org/pvldb/vol5/p1244_yucao_vldb2012.pdf)
 for more information)
 and hand each group off to a separate _physical_ window operator that handles that partitioning and ordering.
@@ -84,17 +84,17 @@ In order to use the “natural order” we have to group those functions that ca
 So what functions can we stream? It turns out there are quite a few:
 
 * Aggregates `BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` (we just update the aggregate)
-* `FIRST_VALUE` - it's always the same
-* `PERCENT RANK` - it's always 0
-* `RANK` - it's always 0
-* `DENSE_RANK` - it's always 0
-* `ROW_NUMBER` - we just count the rows
-* `LEAD` and `LAG` - we just keep a buffer
+* `first_value` – it's always the same
+* `percent rank` – it's always 0
+* `rank` – it's always 0
+* `dense_rank` – it's always 0
+* `row_number` – we just count the rows
+* `lead` and `lag` – we just keep a buffer
 
 There are a few more restrictions:
 
 * `IGNORE NULLS`, `EXCLUDE` and `ORDER BY` arguments are not allowed
-* `LEAD` and `LAG` distances are restricted to a constant within ±2048 (one vector). This is not really a big deal because the distance is usually 1.
+* `lead` and `lag` distances are restricted to a constant within ±2048 (one vector). this is not really a big deal because the distance is usually 1.
 
 In the future we may be able to relax the end of the frame to a constant distance from the current row
 that fits inside the buffer length (e.g., `BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING`)
@@ -127,10 +127,10 @@ As a side benefit, we were able to reduce the memory footprint because fewer par
 One remaining issue is the coarseness of the sub-partitions.
 At the moment to avoid copying they use the blocks produced by the sorting code,
 which are often larger than we would like.
-Reducing the size of these chunks is future work, 
+Reducing the size of these chunks is future work,
 but hopefully we will get to it as part of some proposed changes to the sorting code.
 
-## Out Of Memory Operation
+## Out of Memory Operation
 
 Because windowing materialises the entire relation, it was very easy to blow out the memory budget of a query.
 For v1.2 we have switched from materialising active partitions in memory to using a pageable collection.
@@ -161,26 +161,26 @@ This could result in computing and materialising the same values multiple times:
 -- Compute the moving average and range of x over a large window
 SELECT
     x,
-    MIN(x) OVER w AS min_x,
-    AVG(x) OVER w AS avg_x,
-    MAX(x) OVER w AS max_x,
+    min(x) OVER w AS min_x,
+    avg(x) OVER w AS avg_x,
+    max(x) OVER w AS max_x,
 FROM data
 WINDOW w AS (
     PARTITION BY p
     ORDER BY s
     ROWS BETWEEN 1_000_000 PRECEDING and 1_000_000 FOLLOWING
-)
+);
 ```
 
 Paging the data for `x` reduces the memory footprint, but the segment trees used to evaluate the three aggregates
-will contain duplicate copies of `x` - along with the with operator itself (which has to return `x`).
+will contain duplicate copies of `x` – along with the with operator itself (which has to return `x`).
 With v1.2 we have added a mechanism for sharing evaluation of expressions like these between functions.
 This not only reduces memory, but in this example we will also reduce disk paging
 because all three functions will be accessing the same values.
 
 There are a number of places where we are sharing expressions, including `ORDER BY` arguments,
-`RANGE` expressions and “value” functions like `LEAD`, `LAG` and `NTH_VALUE`,
-and we are always on the lookout for more (such as frame boundaries - or even segment trees).
+`range` expressions and “value” functions like `lead`, `lag` and `nth_value`,
+and we are always on the lookout for more (such as frame boundaries – or even segment trees).
 
 ## Future Work
 
