@@ -169,10 +169,10 @@ the longer it will take.
 
 Speaking of memory, how much memory does the standard operator use for the larger options?
 
-| Price Rows | AsOf Memory |
-| ---: | ----: |
-| 1B | 40GB |
-| 100M |  13GB|
+| Price Rows | AsOf Memory | Loop Join Memory |
+| ---: | ----: | ---: |
+| 1B | 40GB | 6GB |
+| 100M |  13GB| 6GB |
 
 So if the table is large and you have limited memory, the loop join plan be the best option,
 even if it is painfully slow.
