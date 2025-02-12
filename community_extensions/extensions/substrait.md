@@ -26,8 +26,9 @@ docs:
   hello_world: |
     .mode line
     CALL get_substrait('SELECT count(exercise) AS exercise FROM crossfit WHERE difficulty_level <= 5');
-  extended_description: |
-    DuckDB has extensive documentation for the [Substrait extension on their website](https://duckdb.org/docs/extensions/substrait.html).
+
+redirect_from:
+  - /docs/extensions/substrait
 
 extension_star_count: 32
 extension_star_count_pretty: 32
