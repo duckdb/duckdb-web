@@ -169,7 +169,7 @@ DuckDB now supports the `DELTA_BINARY_PACKED` compression as well as the `DELTA_
 ### CLI Improvements
 
 [**Safe mode.**](https://github.com/duckdb/duckdb/pull/14509)
-The DuckDB command line client now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/api/cli/dot_commands.md %}). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/operations_manual/securing_duckdb/overview.md %}).
+The DuckDB command line client now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/clients/cli/dot_commands.md %}). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/operations_manual/securing_duckdb/overview.md %}).
 
 [**Better autocomplete.**](https://github.com/duckdb/duckdb/pull/15003)
 The autocomplete in CLI now uses a [Parsing Expression Grammar (PEG)]({% post_url 2024-11-22-runtime-extensible-parsers %}) for better autocomplete, as well as improved error messages and suggestions.

@@ -27,8 +27,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 505
-extension_download_count_pretty: 505
+extension_download_count: 482
+extension_download_count_pretty: 482
 image: '/images/community_extensions/social_preview/preview_community_extension_pivot_table.png'
 layout: community_extension_doc
 ---
@@ -49,5 +49,31 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|        function_name        | function_type | description | comment | examples |
+|-----------------------------|---------------|-------------|---------|----------|
+| build_my_enum               | table_macro   | NULL        | NULL    | []       |
+| columns_values_axis_columns | macro         | NULL        | NULL    | []       |
+| columns_values_axis_rows    | macro         | NULL        | NULL    | []       |
+| dq                          | macro         | NULL        | NULL    | []       |
+| dq_concat                   | macro         | NULL        | NULL    | []       |
+| dq_list                     | macro         | NULL        | NULL    | []       |
+| no_columns                  | macro         | NULL        | NULL    | []       |
+| nq                          | macro         | NULL        | NULL    | []       |
+| nq_concat                   | macro         | NULL        | NULL    | []       |
+| nq_list                     | macro         | NULL        | NULL    | []       |
+| pivot_table                 | scalar        | NULL        | NULL    | []       |
+| pivot_table                 | table_macro   | NULL        | NULL    | []       |
+| pivot_table_openssl_version | scalar        | NULL        | NULL    | []       |
+| pivot_table_show_sql        | table_macro   | NULL        | NULL    | []       |
+| replace_zzz                 | macro         | NULL        | NULL    | []       |
+| sq                          | macro         | NULL        | NULL    | []       |
+| sq_concat                   | macro         | NULL        | NULL    | []       |
+| sq_list                     | macro         | NULL        | NULL    | []       |
+| totals_list                 | macro         | NULL        | NULL    | []       |
 
 

@@ -25,8 +25,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 192
-extension_download_count_pretty: 192
+extension_download_count: 436
+extension_download_count_pretty: 436
 image: '/images/community_extensions/social_preview/preview_community_extension_blockduck.png'
 layout: community_extension_doc
 ---
@@ -47,5 +47,22 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|            function_name            | function_type | description | comment | examples |
+|-------------------------------------|---------------|-------------|---------|----------|
+| blockduck_create_contract_event_rpc | pragma        | NULL        | NULL    | []       |
+| blockduck_create_contract_view_rpc  | pragma        | NULL        | NULL    | []       |
+| blockduck_set_configs               | pragma        | NULL        | NULL    | []       |
+| blockduck_set_verbose               | pragma        | NULL        | NULL    | []       |
+| blockduck_version                   | table         | NULL        | NULL    | []       |
+| eth_blocks_rpc                      | table         | NULL        | NULL    | []       |
+| eth_latest_block_rpc                | table         | NULL        | NULL    | []       |
+| eth_logs_rpc                        | table         | NULL        | NULL    | []       |
+| eth_traces_rpc                      | table         | NULL        | NULL    | []       |
+| eth_transactions_rpc                | table         | NULL        | NULL    | []       |
 
 

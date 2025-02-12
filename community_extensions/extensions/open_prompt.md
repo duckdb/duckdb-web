@@ -106,8 +106,8 @@ docs:
 
 extension_star_count: 34
 extension_star_count_pretty: 34
-extension_download_count: 439
-extension_download_count_pretty: 439
+extension_download_count: 445
+extension_download_count_pretty: 445
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
@@ -128,5 +128,17 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|  function_name  | function_type | description | comment | examples |
+|-----------------|---------------|-------------|---------|----------|
+| open_prompt     | scalar        | NULL        | NULL    | []       |
+| set_api_timeout | scalar        | NULL        | NULL    | []       |
+| set_api_token   | scalar        | NULL        | NULL    | []       |
+| set_api_url     | scalar        | NULL        | NULL    | []       |
+| set_model_name  | scalar        | NULL        | NULL    | []       |
 
 

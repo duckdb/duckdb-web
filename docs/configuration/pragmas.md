@@ -209,7 +209,7 @@ SET old_implicit_casting = true;
 
 ## Python: Scan All Dataframes
 
-Prior to version 1.1.0, DuckDB's [replacement scan mechanism]({% link docs/api/c/replacement_scans.md %}) in Python scanned the global Python namespace. To revert to this old behavior, use the following setting:
+Prior to version 1.1.0, DuckDB's [replacement scan mechanism]({% link docs/clients/c/replacement_scans.md %}) in Python scanned the global Python namespace. To revert to this old behavior, use the following setting:
 
 ```sql
 SET python_scan_all_frames = true;

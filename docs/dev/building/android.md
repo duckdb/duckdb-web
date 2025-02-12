@@ -73,7 +73,7 @@ We provide build instructions for setups using macOS and Android Studio. For oth
 
 ## Building the CLI in Termux
 
-1. To build the [command line client]({% link docs/api/cli/overview.md %}) in the [Termux application](https://termux.dev/), install the following packages:
+1. To build the [command line client]({% link docs/clients/cli/overview.md %}) in the [Termux application](https://termux.dev/), install the following packages:
 
    ```batch
    pkg install -y git ninja clang cmake python3

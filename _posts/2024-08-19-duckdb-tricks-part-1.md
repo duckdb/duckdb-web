@@ -127,7 +127,7 @@ DESCRIBE tbl;
 └─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
 ```
 
-Alternatively, in the CLI client, we can run the `.schema` [dot command]({% link docs/api/cli/dot_commands.md %}):
+Alternatively, in the CLI client, we can run the `.schema` [dot command]({% link docs/clients/cli/dot_commands.md %}):
 
 ```plsql
 .schema

@@ -60,10 +60,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 132
-extension_star_count_pretty: 132
-extension_download_count: 3156
-extension_download_count_pretty: 3.2k
+extension_star_count: 139
+extension_star_count_pretty: 139
+extension_download_count: 3450
+extension_download_count_pretty: 3.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -84,5 +84,41 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|        function_name         | function_type | description | comment | examples |
+|------------------------------|---------------|-------------|---------|----------|
+| cheapest_path_length         | scalar        | NULL        | NULL    | []       |
+| create_csr_edge              | scalar        | NULL        | NULL    | []       |
+| create_csr_vertex            | scalar        | NULL        | NULL    | []       |
+| create_property_graph        | table         | NULL        | NULL    | []       |
+| csr_get_w_type               | scalar        | NULL        | NULL    | []       |
+| delete_csr                   | scalar        | NULL        | NULL    | []       |
+| describe_property_graph      | table         | NULL        | NULL    | []       |
+| drop_property_graph          | table         | NULL        | NULL    | []       |
+| duckpgq_match                | table         | NULL        | NULL    | []       |
+| get_csr_e                    | table         | NULL        | NULL    | []       |
+| get_csr_ptr                  | table         | NULL        | NULL    | []       |
+| get_csr_v                    | table         | NULL        | NULL    | []       |
+| get_csr_w                    | table         | NULL        | NULL    | []       |
+| get_pg_ecolnames             | table         | NULL        | NULL    | []       |
+| get_pg_etablenames           | table         | NULL        | NULL    | []       |
+| get_pg_vcolnames             | table         | NULL        | NULL    | []       |
+| get_pg_vtablenames           | table         | NULL        | NULL    | []       |
+| iterativelength              | scalar        | NULL        | NULL    | []       |
+| iterativelength2             | scalar        | NULL        | NULL    | []       |
+| iterativelengthbidirectional | scalar        | NULL        | NULL    | []       |
+| local_clustering_coefficient | scalar        | NULL        | NULL    | []       |
+| local_clustering_coefficient | table         | NULL        | NULL    | []       |
+| pagerank                     | scalar        | NULL        | NULL    | []       |
+| pagerank                     | table         | NULL        | NULL    | []       |
+| reachability                 | scalar        | NULL        | NULL    | []       |
+| shortestpath                 | scalar        | NULL        | NULL    | []       |
+| show_property_graphs         | pragma        | NULL        | NULL    | []       |
+| weakly_connected_component   | scalar        | NULL        | NULL    | []       |
+| weakly_connected_component   | table         | NULL        | NULL    | []       |
 
 

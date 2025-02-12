@@ -170,7 +170,7 @@
         },
         {
           "page": "Client APIs",
-          "slug": "api",
+          "slug": "clients",
           "subfolderitems": [
             {
               "page": "Overview",
@@ -1097,10 +1097,6 @@
             {
               "page": "SQLite",
               "url": "sqlite"
-            },
-            {
-              "page": "Substrait",
-              "url": "substrait"
             },
             {
               "page": "TPC-DS",

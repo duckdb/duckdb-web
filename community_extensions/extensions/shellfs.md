@@ -149,10 +149,10 @@ repo:
   github: rustyconover/duckdb-shellfs-extension
   ref: c44c69ab61cc6c11391e4e15f76a1ceb32ff9547
 
-extension_star_count: 59
-extension_star_count_pretty: 59
-extension_download_count: 482
-extension_download_count_pretty: 482
+extension_star_count: 61
+extension_star_count_pretty: 61
+extension_download_count: 497
+extension_download_count_pretty: 497
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
 layout: community_extension_doc
 ---

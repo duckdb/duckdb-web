@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: avro
   description: Read Apache Avro (TM) files from DuckDB
-  version: 1.1.0
+  version: 1.1.1
   language: C++
   build: cmake
   license: MIT
@@ -19,8 +19,7 @@ extension:
 
 repo:
   github: hannes/duckdb_avro
-  ref: 8796f4979532a3946b850dcc3a85cc52bd708652
-  ref_next: c8941c92ec103f7825eb88207c04512f8a714b23
+  ref: 80fee540409f85fdb9473700bec0d5ca95eb74de
 
 docs:
   hello_world: |
@@ -29,10 +28,10 @@ docs:
     This extension provides a scan function for Apache Avro files.
     For more information and information regarding usage, limitations and performance, see the [README](https://github.com/hannes/duckdb_avro) and the [announcement blog post](https://duckdb.org/2024/12/09/duckdb-avro-extension).
 
-extension_star_count: 21
-extension_star_count_pretty: 21
-extension_download_count: 10571
-extension_download_count_pretty: 10.6k
+extension_star_count: 22
+extension_star_count_pretty: 22
+extension_download_count: 10503
+extension_download_count_pretty: 10.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_avro.png'
 layout: community_extension_doc
 ---
@@ -58,8 +57,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| read_avro     | table         |             |         |         |
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| read_avro     | table         | NULL        | NULL    | []       |
 
 

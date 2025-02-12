@@ -18,7 +18,7 @@ To accommodate this, DuckDB has an extension mechanism for installing and loadin
 
 ### Running DuckDB Extensions Locally
 
-For DuckDB, here is a simple end-to-end example using the [command line interface]({% link docs/api/cli/overview.md %}):
+For DuckDB, here is a simple end-to-end example using the [command line interface]({% link docs/clients/cli/overview.md %}):
 
 ```sql
 INSTALL tpch;
@@ -37,15 +37,15 @@ Currently, DuckDB has [several extensions]({% link docs/extensions/core_extensio
 
 In an effort spearheaded by André Kohn, [DuckDB was ported to the WebAssembly platform]({% post_url 2021-10-29-duckdb-wasm %}) in 2021. [WebAssembly](https://webassembly.org/), also known as Wasm, is a W3C standard language developed in recent years. Think of it as a machine-independent binary format that you can execute from within the sandbox of a web browser.
 
-Thanks to DuckDB-Wasm, anyone has access to a DuckDB instance only a browser tab away, with all computation being executed locally within your browser and no data leaving your device. DuckDB-Wasm is a library that can be used in various deployments (e.g., [notebooks that run inside your browser without a server](https://observablehq.com/@cmudig/duckdb)). In this post, we will use the Web shell, where SQL statements are entered by the user line by line, with the behavior modeled after the DuckDB [CLI shell]({% link docs/api/cli/overview.md %}).
+Thanks to DuckDB-Wasm, anyone has access to a DuckDB instance only a browser tab away, with all computation being executed locally within your browser and no data leaving your device. DuckDB-Wasm is a library that can be used in various deployments (e.g., [notebooks that run inside your browser without a server](https://observablehq.com/@cmudig/duckdb)). In this post, we will use the Web shell, where SQL statements are entered by the user line by line, with the behavior modeled after the DuckDB [CLI shell]({% link docs/clients/cli/overview.md %}).
 
 ## DuckDB Extensions, in DuckDB-Wasm!
 
-DuckDB-Wasm [now supports DuckDB extensions]({% link docs/api/wasm/extensions.md %}). This support comes with four new key features.
+DuckDB-Wasm [now supports DuckDB extensions]({% link docs/clients/wasm/extensions.md %}). This support comes with four new key features.
 First, the DuckDB-Wasm library can be compiled with dynamic extension support.
 Second, DuckDB extensions can be compiled to a single WebAssembly module.
 Third, users and developers working with DuckDB-Wasm can now select the set of extensions they load.
-Finally, the DuckDB-Wasm shell's features are now much closer to the native [CLI functionality]({% link docs/api/cli/overview.md %}).
+Finally, the DuckDB-Wasm shell's features are now much closer to the native [CLI functionality]({% link docs/clients/cli/overview.md %}).
 
 ### Using the TPC-H Extension in DuckDB-Wasm
 
@@ -176,7 +176,7 @@ We see two main groups of developers using extensions with DuckDB-Wasm.
 ## Limitations
 
 DuckDB-Wasm extensions have a few inherent limitations. For example, it is not possible to communicate with native executables living on your machine, which is required by some extensions, such as the [`postgres` scanner extension]({% link docs/extensions/postgres.md %}).
-Moreover, compilation to Wasm may not be currently supported for some libraries you are relying on, or capabilities might not be one-to-one with local executables due to additional requirements imposed on the browser, in particular around [non-secure HTTP requests]({% link docs/api/wasm/extensions.md %}#httpfs).
+Moreover, compilation to Wasm may not be currently supported for some libraries you are relying on, or capabilities might not be one-to-one with local executables due to additional requirements imposed on the browser, in particular around [non-secure HTTP requests]({% link docs/clients/wasm/extensions.md %}#httpfs).
 
 ## Conclusions
 

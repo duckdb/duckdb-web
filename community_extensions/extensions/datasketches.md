@@ -81,13 +81,12 @@ extension:
   version: 0.0.2
 repo:
   github: rustyconover/duckdb-datasketches
-  ref: 97ece9c4a4f5e2763de98b48f900e57dfafd895b
-  
+  ref: e6ee0e814a41e15e38536292bc85ff71b33fbcda
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 448
-extension_download_count_pretty: 448
+extension_download_count: 462
+extension_download_count_pretty: 462
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---
@@ -108,6 +107,79 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|               function_name                | function_type | description | comment | examples |
+|--------------------------------------------|---------------|-------------|---------|----------|
+| datasketch_cpc                             | aggregate     | NULL        | NULL    | [NULL]   |
+| datasketch_cpc_describe                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_cpc_estimate                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_cpc_is_empty                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_cpc_lower_bound                 | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_cpc_union                       | aggregate     | NULL        | NULL    | [NULL]   |
+| datasketch_cpc_upper_bound                 | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_hll                             | aggregate     | NULL        | NULL    | [NULL]   |
+| datasketch_hll_describe                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_hll_estimate                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_hll_is_compact                  | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_hll_is_empty                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_hll_lg_config_k                 | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_hll_lower_bound                 | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_hll_union                       | aggregate     | NULL        | NULL    | [NULL]   |
+| datasketch_hll_upper_bound                 | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll                             | aggregate     | NULL        | NULL    | [NULL]   |
+| datasketch_kll_cdf                         | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_describe                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_is_empty                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_is_estimation_mode          | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_k                           | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_max_item                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_min_item                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_n                           | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_normalized_rank_error       | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_num_retained                | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_pmf                         | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_quantile                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_kll_rank                        | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles                       | aggregate     | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_cdf                   | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_describe              | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_is_empty              | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_is_estimation_mode    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_k                     | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_max_item              | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_min_item              | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_n                     | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_normalized_rank_error | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_num_retained          | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_pmf                   | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_quantile              | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_quantiles_rank                  | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req                             | aggregate     | NULL        | NULL    | [NULL]   |
+| datasketch_req_cdf                         | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_describe                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_is_empty                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_is_estimation_mode          | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_k                           | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_max_item                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_min_item                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_n                           | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_num_retained                | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_pmf                         | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_quantile                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_req_rank                        | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_tdigest                         | aggregate     | NULL        | NULL    | [NULL]   |
+| datasketch_tdigest_cdf                     | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_tdigest_describe                | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_tdigest_is_empty                | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_tdigest_k                       | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_tdigest_pmf                     | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_tdigest_quantile                | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_tdigest_rank                    | scalar        | NULL        | NULL    | [NULL]   |
+| datasketch_tdigest_total_weight            | scalar        | NULL        | NULL    | [NULL]   |
 
 ### Added Types
 
