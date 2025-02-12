@@ -19,7 +19,7 @@ DuckDB works efficiently on both AMD64 (x86_64) and ARM64 (AArch64) CPU architec
 
 As a rule of thumb, DuckDB requires a _minimum_ of 125 MB of memory per thread.
 For example, if you use 8 threads, you need at least 1 GB of memory.
-If you are working in a memory-constained environment, consider [limiting the number of threads]({% link docs/configuration/pragmas.md %}#threads), e.g., by issuing:
+If you are working in a memory-constrained environment, consider [limiting the number of threads]({% link docs/configuration/pragmas.md %}#threads), e.g., by issuing:
 
 ```sql
 SET threads = 4;
