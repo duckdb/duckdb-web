@@ -344,14 +344,14 @@ As a user, you don't have to do anything to make use of the new ALP compression 
 
 ## CLI Improvements
 
-The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/api/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/api/cli/editing.md %}).
+The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/clients/cli/editing.md %}).
 
 <img src="/images/syntax_highlighting_screenshot.png"
      alt="Image showing syntax highlighting in the shell"
      width="700px"
      />
 
-See the [extended CLI docs for more information]({% link docs/api/cli/overview.md %}).
+See the [extended CLI docs for more information]({% link docs/clients/cli/overview.md %}).
 
 ## Final Thoughts
 

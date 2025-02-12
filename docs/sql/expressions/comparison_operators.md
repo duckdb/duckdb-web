@@ -38,7 +38,7 @@ SELECT 1 = true;
 SELECT 1 = '1.1';
 ```
 
-> It is not possible to enforce stricter type-checking for DuckDB's comparison operators. If you require stricter type-checking, we recommend creating a [macro]({% link docs/sql/statements/create_macro.md %}) with the [`typeof` function]({% link docs/sql/functions/utility.md %}#typeofexpression) or implementing a [user-defined function]({% link docs/api/python/function.md %}).
+> It is not possible to enforce stricter type-checking for DuckDB's comparison operators. If you require stricter type-checking, we recommend creating a [macro]({% link docs/sql/statements/create_macro.md %}) with the [`typeof` function]({% link docs/sql/functions/utility.md %}#typeofexpression) or implementing a [user-defined function]({% link docs/clients/python/function.md %}).
 
 ## `BETWEEN` and `IS [NOT] NULL`
 

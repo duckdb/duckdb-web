@@ -26,7 +26,7 @@ Some of the queries explained in this blog post are shown in simplified form on 
 For our initial queries, we'll use the 2023 [railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive).
 To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.duckdb.org/nl-railway/services-2023.csv.gz) (330 MB) and load it into DuckDB.
 
-First, start the [DuckDB command line client]({% link docs/api/cli/overview.md %}) on a persistent database:
+First, start the [DuckDB command line client]({% link docs/clients/cli/overview.md %}) on a persistent database:
 
 ```bash
 duckdb railway.db
@@ -277,7 +277,7 @@ CREATE TABLE distances AS
     );
 ```
 
-To make the `NULL` values visible in the command line output, we set the [`.nullvalue` dot command]({% link docs/api/cli/dot_commands.md %}) to `NULL`:
+To make the `NULL` values visible in the command line output, we set the [`.nullvalue` dot command]({% link docs/clients/cli/dot_commands.md %}) to `NULL`:
 
 ```sql
 .nullvalue NULL

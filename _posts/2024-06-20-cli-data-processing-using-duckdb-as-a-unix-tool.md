@@ -30,7 +30,7 @@ are ubiquitious and widely used in [shell scripts](https://en.wikipedia.org/wiki
 
 As a purpose-built data processing tool, DuckDB fits the Unix philosophy quite well.
 First, it was designed to be a fast in-process analytical SQL database system _(do one thing and do it well)._
-Second, it has a standalone [command line client]({% link docs/api/cli/overview.md %}), which can consume and produce CSV files _(work together),_
+Second, it has a standalone [command line client]({% link docs/clients/cli/overview.md %}), which can consume and produce CSV files _(work together),_
 and also supports reading and writing text streams _(handle text streams)_.
 Thanks to these, DuckDB works well in the ecosystem of Unix CLI tools, as
 shown
@@ -47,7 +47,7 @@ While there are shells specialized specifically for dataframe processing, such a
 
 At the same time, we have DuckDB, an extremely portable database system which uses the same SQL syntax on all platforms.
 With [version 1.0.0 released recently]({% post_url 2024-06-03-announcing-duckdb-100 %}), DuckDB's syntax – based on the proven and widely used PostgeSQL dialect – is now in a stable state.
-Another attractive feature of DuckDB is that it offers an interactive shell, which aids quick debugging. Moreover, DuckDB is available in [several host languages]({% link docs/api/overview.md %}) as well as in the browser [via WebAssembly](https://shell.duckdb.org/), so if you ever decide to use your SQL scripts outside of the shell, DuckDB SQL scripts can be ported to a wide variety of environments without any changes.
+Another attractive feature of DuckDB is that it offers an interactive shell, which aids quick debugging. Moreover, DuckDB is available in [several host languages]({% link docs/clients/overview.md %}) as well as in the browser [via WebAssembly](https://shell.duckdb.org/), so if you ever decide to use your SQL scripts outside of the shell, DuckDB SQL scripts can be ported to a wide variety of environments without any changes.
 
 ## Data Processing with Unix Tools and DuckDB
 

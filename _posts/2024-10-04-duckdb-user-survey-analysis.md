@@ -42,7 +42,7 @@ This is in line with the vision that originally drove the creation of DuckDB: cr
 
 ### Clients
 
-[Unsurprisingly](https://www.tiobe.com/tiobe-index/python/), DuckDB is most often used from Python (73%), followed by the [standalone command-line application]({% link docs/api/cli/overview.md %}) (47%).
+[Unsurprisingly](https://www.tiobe.com/tiobe-index/python/), DuckDB is most often used from Python (73%), followed by the [standalone command-line application]({% link docs/clients/cli/overview.md %}) (47%).
 The third spot is hotly contested with R, WebAssembly (!) and Java all achieving around 14%, followed by Node.js (Javascript) at 9%
 
 ![DuckDB clients](/images/blog/survey/clients.svg)
