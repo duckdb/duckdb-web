@@ -346,7 +346,7 @@ Namely, DuckDB can be used
 for interactive data analysis by a user (“data science”) and
 as pipeline component for automated data processing (“data enginereering”).
 DuckDB can also be deployed in novel architectures, where one traditionally couldn't run an analytical database management system but DuckDB is available thanks to its portability.
-These architectures include running DuckDB in browsers (using the <a href="{% link docs/api/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
+These architectures include running DuckDB in browsers (using the <a href="{% link docs/clients/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
 Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
 <a href="{% link docs/extensions/mysql.md %}">other</a>
 <a href="{% link docs/extensions/postgres.md %}">database</a>
@@ -386,8 +386,6 @@ Please check the [release calendar]({% link docs/dev/release_calendar.md %}) for
 <div class="answer" markdown="1">
 
 Currently, we do not maintain a public development roadmap.
-We discuss planned developments at DuckCon events (typically held twice a year).
-See the most recent [overview talk at DuckCon #5](https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf).
 
 </div>
 
@@ -401,7 +399,7 @@ See the most recent [overview talk at DuckCon #5](https://blobs.duckdb.org/event
 
 <div class="answer" markdown="1">
 
-The DuckDB Website is hosted by GitHub Pages, its repository is at [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web).
+The DuckDB website is hosted by GitHub Pages and is deployed from the repository at [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web).
 When the documentation is browsed from a desktop computer, every page has a “Page Source” button on the top that navigates you to its Markdown source file.
 Pull requests to fix issues or to expand the documentation section on DuckDB's features are very welcome.
 Before opening a pull request, please consult our [Contributor Guide](https://github.com/duckdb/duckdb-web/blob/main/CONTRIBUTING.md).

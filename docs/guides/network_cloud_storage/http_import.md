@@ -35,7 +35,7 @@ The function `read_parquet` can be omitted if the URL ends with `.parquet`:
 SELECT * FROM read_parquet('https://duckdb.org/data/holdings.parquet');
 ```
 
-Moreover, the `read_parquet` function itself can also be omitted thanks to DuckDB's [replacement scan mechanism]({% link docs/api/c/replacement_scans.md %}):
+Moreover, the `read_parquet` function itself can also be omitted thanks to DuckDB's [replacement scan mechanism]({% link docs/clients/c/replacement_scans.md %}):
 
 ```sql
 SELECT * FROM 'https://duckdb.org/data/holdings.parquet';

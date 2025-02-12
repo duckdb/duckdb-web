@@ -235,6 +235,10 @@ $(document).ready(function(){
 		
 		hideSections( sectionsToHide.join(',') );
 		
+		// Check if SHA512 is available
+		function sha512Exists(config) {
+		  return config.sha_512;
+		}
 	
 		// If platform.select has .hide class, then show .info in it, otherwise hide .info
 		if ( $( '.yourselection .platform.select.hide').length > 0 ) {
@@ -258,11 +262,21 @@ $(document).ready(function(){
 			$( '.example.output' ).hide();
 		}
 	
-		if ( configurables[0].link ) {
-			$( '.link.output' ).show()
-			$( '.link.output .result' ).html( '<a href="' + configurables[0].link + '">' + configurables[0].link + '</a>' );
+		if (configurables[0].link) {
+			$('.link.output').show();
+			let linkHtml = '<a href="' + configurables[0].link + '">' + configurables[0].link + '</a>';
+			if (sha512Exists(configurables[0])) {
+				linkHtml += ' <span class="sha512_btn">SHA-512</span>';
+			}
+			$('.link.output .result').html(linkHtml);
 		} else {
-			$( '.link.output' ).hide();
+			$('.link.output').hide();
+		}
+		
+		if (sha512Exists(configurables[0])) {
+			$('.sha512.output .result').html(configurables[0].sha_512);
+		} else {
+			$('.sha512.output').hide();
 		}
 	
 		if ( configurables[0].note ) {
@@ -271,6 +285,8 @@ $(document).ready(function(){
 		} else {
 			$( '.note.output' ).hide();
 		}
+		
+		
 	}
 	
 	evaluation();
@@ -337,4 +353,14 @@ $(document).ready(function(){
 		evaluation();
 	}, 100);
 
+});
+
+$(document).on('click', '.sha512_btn', function(e) {
+	e.preventDefault();
+	$(this).toggleClass('active');
+	if ($(this).hasClass('active')) {
+		$('.sha512.output').css('display', 'flex');
+	} else {
+		$('.sha512.output').hide();
+	}
 });

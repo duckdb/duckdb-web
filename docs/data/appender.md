@@ -5,7 +5,7 @@ title: Appender
 
 The Appender can be used to load bulk data into a DuckDB database. It is currently available in the [C, C++, Go, Java, and Rust APIs](#appender-support-in-other-clients). The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
 
-In the [C++ API]({% link docs/api/cpp.md %}), the Appender works as follows:
+In the [C++ API]({% link docs/clients/cpp.md %}), the Appender works as follows:
 
 ```cpp
 DuckDB db;
@@ -78,8 +78,8 @@ In this case, the entire append operation fails and no rows are inserted.
 
 The Appender is also available in the following client APIs:
 
-* [C]({% link docs/api/c/appender.md %})
-* [Go]({% link docs/api/go.md %}#appender)
-* [Java (JDBC)]({% link docs/api/java.md %}#appender)
-* [Julia]({% link docs/api/julia.md %}#appender-api)
-* [Rust]({% link docs/api/rust.md %}#appender)
+* [C]({% link docs/clients/c/appender.md %})
+* [Go]({% link docs/clients/go.md %}#appender)
+* [Java (JDBC)]({% link docs/clients/java.md %}#appender)
+* [Julia]({% link docs/clients/julia.md %}#appender-api)
+* [Rust]({% link docs/clients/rust.md %}#appender)

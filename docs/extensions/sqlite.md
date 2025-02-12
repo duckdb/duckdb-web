@@ -179,6 +179,14 @@ DuckDB can read or modify a SQLite database while DuckDB or SQLite reads or modi
 
 > Warning Linking multiple copies of the SQLite library into the same application can lead to application errors. See [sqlite_scanner Issue #82](https://github.com/duckdb/sqlite_scanner/issues/82) for more information.
 
+## Settings
+
+The extension exposes the following configuration parameters.
+
+| Name                              | Description                                                                  | Default |
+| --------------------------------- | ---------------------------------------------------------------------------- | ------- |
+| `sqlite_debug_show_queries`       | DEBUG SETTING: print all queries sent to SQLite to stdout                    | `false` |
+
 ## Supported Operations
 
 Below is a list of supported operations.

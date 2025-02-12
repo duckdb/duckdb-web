@@ -8,9 +8,9 @@ excerpt: "The new DuckDB Node client, “Neo”, provides a powerful and friendl
 tags: ["using DuckDB"]
 ---
 
-Meet the newest DuckDB client API: [DuckDB Node “Neo”]({% link docs/api/node_neo/overview.md %})!
+Meet the newest DuckDB client API: [DuckDB Node “Neo”]({% link docs/clients/node_neo/overview.md %})!
 
-You may be familiar with DuckDB’s [old Node client]({% link docs/api/nodejs/overview.md %}). While it has served the community well over the years, “Neo” aims to learn from and improve upon its predecessor. It presents a friendlier API, supports more features, and uses a more robust and maintainable architecture. It provides both high-level conveniences and low-level access. Let’s take a tour!
+You may be familiar with DuckDB’s [old Node client]({% link docs/clients/nodejs/overview.md %}). While it has served the community well over the years, “Neo” aims to learn from and improve upon its predecessor. It presents a friendlier API, supports more features, and uses a more robust and maintainable architecture. It provides both high-level conveniences and low-level access. Let’s take a tour!
 
 ## What Does It Offer?
 
@@ -81,7 +81,7 @@ if (columnType.typeId === DuckDBTypeId.TIMESTAMP) {
 
 ### Advanced Features
 
-Need to bind specific types of values to [prepared statements]({% link docs/sql/query_syntax/prepared_statements.md %}), or precisely [control SQL execution]({% link docs/api/c/api.md %}#pending-result-interface)? Perhaps you want to leverage DuckDB’s parser to [extract statements]({% link docs/api/c/api.md %}#extract-statements), or efficiently [append data to a table]({% link docs/api/c/appender.md %}). Neo has you covered, providing full access to these powerful features of DuckDB.
+Need to bind specific types of values to [prepared statements]({% link docs/sql/query_syntax/prepared_statements.md %}), or precisely [control SQL execution]({% link docs/clients/c/api.md %}#pending-result-interface)? Perhaps you want to leverage DuckDB’s parser to [extract statements]({% link docs/clients/c/api.md %}#extract-statements), or efficiently [append data to a table]({% link docs/clients/c/appender.md %}). Neo has you covered, providing full access to these powerful features of DuckDB.
 
 #### Binding Values to Prepared Statements
 
@@ -96,7 +96,7 @@ const result = await prepared.run();
 
 #### Controlling Task Execution
 
-Using [pending results]({% link docs/api/c/api.md %}#pending-result-interface) allows pausing or stopping SQL execution at any point, even before the result is ready.
+Using [pending results]({% link docs/clients/c/api.md %}#pending-result-interface) allows pausing or stopping SQL execution at any point, even before the result is ready.
 
 ```ts
 import { DuckDBPendingResultState } from '@duckdb/node-api';
@@ -124,7 +124,7 @@ const result = await pending.getResult();
 
 #### Extracting Statements and Running Them with Parameters
 
-You can run multi-statement SQL containing parameters using the [extract statements API]({% link docs/api/c/api.md %}#extract-statements).
+You can run multi-statement SQL containing parameters using the [extract statements API]({% link docs/clients/c/api.md %}#extract-statements).
 
 ```ts
 // Parse this multi-statement input into separate statements.
@@ -149,7 +149,7 @@ for (let stmtIndex = 0; stmtIndex < stmtCount; stmtIndex++) {
 
 #### Appending Data to a Table
 
-The [appender API]({% link docs/api/c/appender.md %}) is the most efficient way to bulk insert data into a table.
+The [appender API]({% link docs/clients/c/appender.md %}) is the most efficient way to bulk insert data into a table.
 
 ```ts
 await connection.run(
@@ -177,7 +177,7 @@ appender.close();
 
 ### Dependencies
 
-Neo uses a different implementation approach from most other DuckDB client APIs, including the old Node client. It binds to DuckDB’s [C API]({% link docs/api/c/overview.md %}) instead of the C++ API.
+Neo uses a different implementation approach from most other DuckDB client APIs, including the old Node client. It binds to DuckDB’s [C API]({% link docs/clients/c/overview.md %}) instead of the C++ API.
 
 Why should you care? Using DuckDB’s C++ API means building all of DuckDB from scratch. Each client API using this approach ships with a slightly different build of DuckDB. This can create headaches for both library maintainers and consumers.
 

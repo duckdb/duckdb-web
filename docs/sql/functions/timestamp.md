@@ -66,7 +66,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 There are also dedicated extraction functions to get the [subfields]({% link docs/sql/functions/datepart.md %}).
 
 Functions applied to infinite dates will either return the same infinite dates
-(e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what “makes sense”.
+(e.g., `greatest`) or `NULL` (e.g., `date_part`) depending on what “makes sense”.
 In general, if the function needs to examine the parts of the infinite date, the result will be `NULL`.
 
 #### `age(timestamp, timestamp)`
