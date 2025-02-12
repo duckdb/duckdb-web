@@ -12,30 +12,30 @@ In the previous post I went into some new windowing functionality in DuckDB avai
 But there are other changes that improve our use of resources (such as memory) without adding new functionality.
 So let's get “under the feathers” and look at these changes.
 
-## Segment Tree Vectorisation
+## Segment Tree Vectorization
 
 One important improvement that was made in the summer of 2023 was converting the segment tree evaluation code
-to vectorised evaluation from single-value evaluation.
-You might wonder why it wasn't that way to begin with in a “vectorised relational database” (!),
+to vectorized evaluation from single-value evaluation.
+You might wonder why it wasn't that way to begin with in a “vectorized relational database” (!),
 but the answer is lost in the mists of time.
 My best guess is either that the published algorithm was written for values
 or that the aggregation API had not been nailed down yet (or both).
 
 In the old version, we used the aggregate's `update` or `combine` APIs,
 but with only the values and tree states for a single row.
-To vectorise the segment tree aggregation, we accumulate _vectors_ of leaf values and tree states
+To vectorize the segment tree aggregation, we accumulate _vectors_ of leaf values and tree states
 and flush them into each output row's state when we reach the vector capacity of 2048 rows..
 Some care needed to be taken to handle order-sensitive aggregates by accumulating values in the correct order.
-`FILTER` and `EXCLUDE` clauses also provided some entertainment, but the segment trees are now fully vectorised.
+`FILTER` and `EXCLUDE` clauses also provided some entertainment, but the segment trees are now fully vectorized.
 The performance gains here were about
 [a factor of four](https://github.com/duckdb/duckdb/issues/7809#issuecomment-1679387022)
 (from “Baseline” to “Fan Out”).
 
-Once segment trees were vectorised,
+Once segment trees were vectorized,
 we could use the same approach when implementing `DISTINCT` aggregates with merge sort trees.
-It may be worth updating the custom window API to handle vectorisation at some point,
+It may be worth updating the custom window API to handle vectorization at some point,
 because although most custom window aggregates are quite slow (e.g., `quantile`, `mad` and `mode`),
-`count(*)` is also implemented as a custom aggregate and would likely benefit from a vectorised implementation.
+`count(*)` is also implemented as a custom aggregate and would likely benefit from a vectorized implementation.
 
 ## Constant Aggregation
 
@@ -47,7 +47,7 @@ Computing this value repeatedly is expensive and potentially wasteful of memory
 
 The previous performance workaround for this was
 to compute the aggregate in a subquery and join it in on the partition keys, but that was, well, unfriendly.
-Instead, we have added an optimisation that checks for _partition-wide aggregates_
+Instead, we have added an optimization that checks for _partition-wide aggregates_
 and computes that value once per partition.
 This not only reduces memory and compute time for the aggregate itself,
 but we can often return a constant vector that shares the values across all rows in a chunk,
@@ -62,7 +62,7 @@ instead of once per row!
 ## Streaming Windows
 
 Computing window functions is usually quite expensive!
-The entire relation has to be materialised,
+The entire relation has to be materialized,
 broken up into partitions, and each partition needs to be sorted.
 
 But what if there is no partitioning or ordering?
@@ -72,7 +72,7 @@ Examples might be assigning row numbers or computing a running sum.
 This is simple enough that we can _stream_ the evaluation of the function on a single thread.
 
 First, let's step back a bit and talk about the window _operator_.
-During parsing and optimisation of a query, all the window functions are attached to a single _logical_ window operator.
+During parsing and optimization of a query, all the window functions are attached to a single _logical_ window operator.
 When it comes time to plan the query, we group the functions that have common partitions and “compatible” orderings
 (see Cao et al.,
 [_Optimization of Analytic Window Functions_](https://www.vldb.org/pvldb/vol5/p1244_yucao_vldb2012.pdf)
@@ -113,12 +113,12 @@ then most of the cores will be idle, reducing throughput.
 <img src="/images/blog/windowing/parallel-partitions.png" alt="Thread Partition Evaluation" title="Thread Partition Evaluation" style="max-width:50%;width:50%;height:auto"/>
 </div>
 
-To improve the CPU utilisation, we changed the execution model for v1.1 to evaluate partitions in parallel.
+To improve the CPU utilization, we changed the execution model for v1.1 to evaluate partitions in parallel.
 The partitions are evaluated from largest to smallest and
-we then distribute each partition across as many cores as we can, while synchronising access to shared data structures.
+we then distribute each partition across as many cores as we can, while synchronizing access to shared data structures.
 This was a lot more challenging than independent single-threaded evaluation of partitions,
-and we had some synchronisation issues (hopefully all sorted now!) that were dealt with in the v1.1.x releases.
-But we now have much better core utilisation, especially for unpartitioned data.
+and we had some synchronization issues (hopefully all sorted now!) that were dealt with in the v1.1.x releases.
+But we now have much better core utilization, especially for unpartitioned data.
 As a side benefit, we were able to reduce the memory footprint because fewer partitions were in memory at a time.
 
 <div align="center">
@@ -133,8 +133,8 @@ but hopefully we will get to it as part of some proposed changes to the sorting 
 
 ## Out of Memory Operation
 
-Because windowing materialises the entire relation, it was very easy to blow out the memory budget of a query.
-For v1.2 we have switched from materialising active partitions in memory to using a pageable collection.
+Because windowing materializes the entire relation, it was very easy to blow out the memory budget of a query.
+For v1.2 we have switched from materializing active partitions in memory to using a pageable collection.
 So now not only do we have fewer active partitions (due to partition major evaluation above),
 but those partitions themselves can now spool to disk.
 This further reduces memory pressure during evaluation of large partitions.
@@ -144,19 +144,19 @@ The [segment trees](https://www.vldb.org/pvldb/vol8/p1058-leis.pdf)
 and [merge sort trees](https://dl.acm.org/doi/10.1145/3514221.3526184)
 used for accelerating aggregation are still in memory,
 especially the intermediate aggregate states in the middle of the trees.
-Solving this completely, will require a general method of serialising aggregate states to disk,
+Solving this completely, will require a general method of serializing aggregate states to disk,
 which we do not yet have.
-Still, most aggregates can be serialised as binary data without special handling,
+Still, most aggregates can be serialized as binary data without special handling,
 so in the short term we can probably cover a lot of cases with the current aggregation infrastructure,
 just as we do for `GROUP BY`.
 
 ## Shared Expressions
 
 Window expressions are evaluated independently, but they often share expressions.
-Some of those expressions can be expensive to evaluate and others need to be materialised
+Some of those expressions can be expensive to evaluate and others need to be materialized
 over the entire partition.
 As an example of the latter, aggregate functions can reference values anywhere in the partition.
-This could result in computing and materialising the same values multiple times:
+This could result in computing and materializing the same values multiple times:
 
 ```sql
 -- Compute the moving average and range of x over a large window
