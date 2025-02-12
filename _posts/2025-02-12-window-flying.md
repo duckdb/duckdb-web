@@ -4,6 +4,8 @@ title: "Flying Through Windows"
 author: "Richard Wesley"
 excerpt: "Dive into the details of recent DuckDB windowing performance improvements."
 tags: ["deep dive"]
+thumb: "/images/blog/thumbs/windowing-features.svg"
+image: "/images/blog/thumbs/windowing-features.png"
 ---
 
 ## Introduction
