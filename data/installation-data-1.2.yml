@@ -11,7 +11,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: duckdb.exe
 - variant: stable
   environment: Command line
   platform: Windows
@@ -26,7 +25,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: duckdb.exe
 - variant: stable
   environment: Command line
   platform: Windows
@@ -41,7 +39,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: duckdb.exe
 - variant: stable
   environment: Command line
   platform: macOS
@@ -55,7 +52,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: duckdb
 - variant: stable
   environment: Command line
   platform: macOS
@@ -64,9 +60,7 @@
   sha_512: 3aaa20ddc68a33b61aa6d823011641f4bf565a0180e1c32c501fc303f19f702eca99ce256280cb6ce5bcd53876f2836eb3226fdc312b9d1e1fa6413e5664f04e
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-osx-universal.zip
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb_cli-osx-universal.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-osx-universal.zip &&
-    unzip duckdb_cli-osx-universal.zip
-  usage_example: ./duckdb
+    curl https://install.duckdb.org | sh
 - variant: stable
   environment: Command line
   platform: Linux
@@ -75,9 +69,7 @@
   sha_512: d94b4497338b628dd9de64d242f4977058aa1a84a2fba2436e84adf4a8fd0716b3ab60eba53525dc16d3aa28c443271f1a12984637301ed51377dad8ea867843
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb_cli-linux-amd64.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip &&
-    unzip duckdb_cli-linux-amd64.zip
-  usage_example: ./duckdb
+    curl https://install.duckdb.org | sh
 - variant: stable
   environment: Command line
   platform: Linux
@@ -86,9 +78,7 @@
   sha_512: 64d84b5d468ae544251d567cadd8504472f5f2a6df1f6fa390bf1ed96b9d00d6f31a007729de92f1799520161235de5d7da44c0e18800da38fbd026d9c439973
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-aarch64.zip
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb_cli-linux-aarch64.zip https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-aarch64.zip &&
-    unzip duckdb_cli-linux-aarch64.zip
-  usage_example: ./duckdb
+    curl https://install.duckdb.org | sh
 - variant: stable
   environment: Python
   platform: all
@@ -213,7 +203,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: duckdb.exe
 - variant: nightly
   environment: Command line
   platform: macOS
@@ -224,7 +213,6 @@
     curl --fail --location --progress-bar --output duckdb-binaries-osx.zip https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip &&
     unzip duckdb-binaries-osx.zip &&
     unzip duckdb_cli-osx-universal.zip
-  usage_example: ./duckdb
 - variant: nightly
   environment: Command line
   platform: Linux
@@ -235,7 +223,6 @@
     curl --fail --location --progress-bar --output duckdb-binaries-linux.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip &&
     unzip duckdb-binaries-linux.zip &&
     unzip duckdb_cli-linux-amd64.zip
-  usage_example: ./duckdb
 - variant: nightly
   environment: Command line
   platform: Linux
@@ -246,7 +233,6 @@
     curl --fail --location --progress-bar --output duckdb-binaries-linux-aarch64.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip &&
     unzip duckdb-binaries-linux-aarch64.zip &&
     unzip duckdb_cli-linux-aarch64.zip
-  usage_example: ./duckdb
 - variant: nightly
   environment: Python
   platform: all
