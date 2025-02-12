@@ -75,7 +75,7 @@ There are two streaming physical join operators we could use for this:
 * _Piecewise Merge Join_ - A tricky join for one inequality condition that sorts the right side and each left block before merging to find matches;
 
 We can try both of these once we have a way to eliminate the duplicates.
-One thing to we aware of, though, is that they are both `N^2` algorithms,
+One thing to be aware of, though, is that they are both `N^2` algorithms,
 so there will be a limit on how big "small" can be.
 
 ### Grouping
@@ -155,7 +155,7 @@ Here are the results:
 </div>
 
 As you can see, the quadratic nature of the joins means that "small" means "<= 64".
-That is pretty small, but table in the original issue had only 21 values.
+That is pretty small, but the table in the original user issue had only 21 values.
 
 We can also see that the sorting provided by piecewise merge join does not seem to help much,
 so plain old nested loop join is the best choice.
@@ -164,6 +164,10 @@ It is clear that the performance of the standard operator is stable at this size
 but increases slowly as the number of threads decreases.
 This makes sense because sorting is compute-intensive and the fewer cores we can assign,
 the longer it will take.
+
+If you want to play with the data more, you can find 
+the [interactive viz](https://public.tableau.com/app/profile/duckdb.labs/viz/AsOfLoopJoin/Tuning) 
+on our [Tableau Public site](https://public.tableau.com/app/profile/duckdb.labs/vizzes).
 
 ### Memory
 
