@@ -12,7 +12,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: duckdb
 - variant: stable
   environment: Command line
   platform: Windows
@@ -27,7 +26,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: ./duckdb
 - variant: stable
   environment: Command line
   platform: Windows
@@ -42,7 +40,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: ./duckdb
 - variant: stable
   environment: Command line
   platform: macOS
@@ -57,7 +54,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: duckdb
 - variant: stable
   environment: Command line
   platform: macOS
@@ -67,7 +63,6 @@
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-osx-universal.zip
   installation_code: >-
     curl https://install.duckdb.org | sh
-  usage_example: ./duckdb
 - variant: stable
   environment: Command line
   platform: Linux
@@ -77,7 +72,6 @@
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip
   installation_code: >-
     curl https://install.duckdb.org | sh
-  usage_example: ./duckdb
 - variant: stable
   environment: Command line
   platform: Linux
@@ -87,7 +81,6 @@
   link: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-aarch64.zip
   installation_code: >-
     curl https://install.duckdb.org | sh
-  usage_example: ./duckdb
 - variant: stable
   environment: Python
   platform: all
@@ -211,7 +204,6 @@
     client.
 
     Therefore, they need to be updated separately.
-  usage_example: ./duckdb
 - variant: nightly
   environment: Command line
   platform: macOS
@@ -222,7 +214,6 @@
     curl --fail --location --progress-bar --output duckdb-binaries-osx.zip https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip &&
     unzip duckdb-binaries-osx.zip &&
     unzip duckdb_cli-osx-universal.zip
-  usage_example: ./duckdb
 - variant: nightly
   environment: Command line
   platform: Linux
@@ -233,7 +224,6 @@
     curl --fail --location --progress-bar --output duckdb-binaries-linux.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip &&
     unzip duckdb-binaries-linux.zip &&
     unzip duckdb_cli-linux-amd64.zip
-  usage_example: ./duckdb
 - variant: nightly
   environment: Command line
   platform: Linux
@@ -244,7 +234,6 @@
     curl --fail --location --progress-bar --output duckdb-binaries-linux-aarch64.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip &&
     unzip duckdb-binaries-linux-aarch64.zip &&
     unzip duckdb_cli-linux-aarch64.zip
-  usage_example: ./duckdb
 - variant: nightly
   environment: Python
   platform: all
