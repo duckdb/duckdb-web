@@ -54,7 +54,7 @@ but we can often return a constant vector that shares the values across all rows
 reducing copy costs and potentially even downstream evaluation costs.
 
 Returning a constant vector can yield surprisingly large memory and performance benefits.
-In the issue that drove this improvement, the user was constructing a constant 100K element list(!)
+In the issue that drove this improvement, the user was constructing a constant 100k element list (!)
 and then computing the median with a list aggregation lambda.
 By returning a single constant list, we build and reduce that list only once
 instead of once per row!
