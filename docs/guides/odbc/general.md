@@ -96,7 +96,7 @@ A buffer is a block of memory used to store data. Buffers are used to store data
 
 The following is a step-by-step guide to setting up an application that uses ODBC to connect to a database, execute a query, and fetch the results in `C++`.
 
-> To install the driver as well as anything else you will need follow these [instructions]({% link docs/api/odbc/overview.md %}).
+> To install the driver as well as anything else you will need follow these [instructions]({% link docs/clients/odbc/overview.md %}).
 
 ### 1. Include the SQL Header Files
 

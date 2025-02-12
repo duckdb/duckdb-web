@@ -209,7 +209,7 @@ SELECT * FROM 'azure://<my_container>/*.csv';
 
 ## Clients
 
-[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API]({% link docs/api/python/relational_api.md %}) and executed using DuckDB's query engine.
+[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API]({% link docs/clients/python/relational_api.md %}) and executed using DuckDB's query engine.
 
 ```python
 from duckdb.experimental.spark.sql import SparkSession as session

@@ -103,9 +103,9 @@ These are contributed by community members but they are built, signed, and distr
 ### Installing Extensions through Client APIs
 
 For many clients, using SQL to load and install extensions is the preferred method. However, some clients have a dedicated
-API to install and load extensions. For example the [Python API client]({% link docs/api/python/overview.md %}#loading-and-installing-extensions),
+API to install and load extensions. For example the [Python API client]({% link docs/clients/python/overview.md %}#loading-and-installing-extensions),
 which has dedicated `install_extension(name: str)` and `load_extension(name: str)` methods. For more details on a specific Client API, refer
-to the [Client API docs]({% link docs/api/overview.md %})
+to the [Client API docs]({% link docs/clients/overview.md %})
 
 ## Updating Extensions
 
@@ -160,7 +160,7 @@ All extensions provided by the DuckDB core team are signed.
 > Warning Only load unsigned extensions from sources you trust. Also, avoid loading them over HTTP.
 
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
-To load unsigned extensions using the [CLI client]({% link docs/api/cli/overview.md %}), pass the `-unsigned` flag to it on startup:
+To load unsigned extensions using the [CLI client]({% link docs/clients/cli/overview.md %}), pass the `-unsigned` flag to it on startup:
 
 ```bash
 duckdb -unsigned
@@ -172,8 +172,8 @@ Now any extension can be loaded, signed or not:
 LOAD './some/local/ext.duckdb_extension';
 ```
 
-For Client APIs, the `allow_unsigned_extensions` database configuration options needs to be set, see the respective [Client API docs]({% link docs/api/overview.md %}).
-For example, for the Python client, see the [Loading and Installing Extensions section in the Python API documentation]({% link docs/api/python/overview.md %}#loading-and-installing-extensions).
+For Client APIs, the `allow_unsigned_extensions` database configuration options needs to be set, see the respective [Client API docs]({% link docs/clients/overview.md %}).
+For example, for the Python client, see the [Loading and Installing Extensions section in the Python API documentation]({% link docs/clients/python/overview.md %}#loading-and-installing-extensions).
 
 ## Working with Extensions
 

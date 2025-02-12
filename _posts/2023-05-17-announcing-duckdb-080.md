@@ -172,7 +172,7 @@ print(res)
 # [(datetime.date(2019, 5, 15),)]
 ```
 
-See the [documentation]({% link docs/api/python/function.md %}) for more information.
+See the [documentation]({% link docs/clients/python/function.md %}) for more information.
 
 [**Arrow Database Connectivity Support (ADBC)**](https://github.com/duckdb/duckdb/pull/7086). ADBC is a database API standard for database access libraries that uses Apache Arrow to transfer query result sets and to ingest data. Using Arrow for this is particularly beneficial for columnar data management systems which traditionally suffered a performance hit by emulating row-based APIs such as JDBC/ODBC. From this release, DuckDB natively supports ADBC. We’re happy to be one of the first systems to offer native support, and DuckDB’s in-process design fits nicely with ADBC.
 

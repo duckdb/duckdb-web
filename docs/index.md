@@ -18,37 +18,37 @@ title: Documentation
 
 <div class="box-link-wrapper">
     <div class="box-link half-width">
-        <a href="{% link docs/api/cli/overview.md %}"></a>
+        <a href="{% link docs/clients/cli/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/cli.svg %}"></span>
         <span>CLI (command line interface)</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
-        <a href="{% link docs/api/java.md %}"></a>
+        <a href="{% link docs/clients/java.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/java.svg %}"></span>
         <span>Java</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
-        <a href="{% link docs/api/python/overview.md %}"></a>
+        <a href="{% link docs/clients/python/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/python.svg %}"></span>
         <span>Python</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
-        <a href="{% link docs/api/r.md %}"></a>
+        <a href="{% link docs/clients/r.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/r.svg %}"></span>
         <span>R</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
-        <a href="{% link docs/api/wasm/overview.md %}"></a>
+        <a href="{% link docs/clients/wasm/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/webassembly.svg %}"></span>
         <span>WebAssembly</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
-        <a href="{% link docs/api/overview.md %}"></a>
+        <a href="{% link docs/clients/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/doc.svg %}"></span>
         <span>All client APIs</span>
         <span class="chevron"></span>
