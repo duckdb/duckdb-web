@@ -91,6 +91,11 @@ In addition to SQL syntax, special [dot commands]({% link docs/clients/cli/dot_c
 
 Frequently-used configurations can be stored in the file `~/.duckdbrc`, which will be loaded when starting the CLI client. See the [Configuring the CLI](#configuring-the-cli) section below for further information on these options.
 
+> Tip To prevent the DuckDB CLI client from reading the `~/.duckdbrc` file, start it as follows:
+> ```bash
+> duckdb -init /dev/null
+> ```
+
 Below, we summarize a few important dot commands. To see all available commands, see the [dot commands page]({% link docs/clients/cli/dot_commands.md %}) or use the `.help` command.
 
 #### Opening Database Files
