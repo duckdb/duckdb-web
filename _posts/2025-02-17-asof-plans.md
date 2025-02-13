@@ -105,7 +105,7 @@ We then group on this row number.
 ## Coming Together
 
 This all sounds good, but how does it work in practice?
-How big can 'small" get?
+How big can "small" get?
 To answer that I ran a number of benchmarks joining small tables against large ones.
 The tables are called `prices` and `times`:
 
@@ -158,29 +158,35 @@ As you can see, the quadratic nature of the joins means that "small" means "<= 6
 That is pretty small, but the table in the original user issue had only 21 values.
 
 We can also see that the sorting provided by piecewise merge join does not seem to help much,
-so plain old nested loop join is the best choice.
+so plain old nested Loop Join is the best choice.
 
 It is clear that the performance of the standard operator is stable at this size,
-but increases slowly as the number of threads decreases.
+but decreases slowly as the number of threads increases.
 This makes sense because sorting is compute-intensive and the fewer cores we can assign,
 the longer it will take.
 
-If you want to play with the data more, you can find 
-the [interactive viz](https://public.tableau.com/app/profile/duckdb.labs/viz/AsOfLoopJoin/Tuning) 
+If you want to play with the data more, you can find
+the [interactive viz](https://public.tableau.com/app/profile/duckdb.labs/viz/AsOfLoopJoin/Tuning)
 on our [Tableau Public site](https://public.tableau.com/app/profile/duckdb.labs/vizzes).
 
 ### Memory
 
-Speaking of memory, how much memory does the standard operator use for the larger options?
+The Loop Join plan is clearly faster at small sizes,
+but how much memory do the two plans use?
+These are the rough amounts of memory needed before excessive paging or allocation failures occur:
 
 | Price Rows | AsOf Memory | Loop Join Memory |
 | ---------: | ----------: | ---------------: |
-|         1B |       40 GB |             6 GB |
-|       100M |       13 GB |             6 GB |
+|         1B |       48 GB |            64 MB |
+|       100M |        6 GB |            64 MB |
+|        10M |      256 MB |            64 MB |
+|         1M |       32 MB |            64 MB |
+|       100K |       32 MB |            64 MB |
 
-So if the table is large and you have limited memory, the loop join plan be the best option,
+In other words, the Loop Join plan only needs enough memory to page in the lookup table!
+So if the table is large and you have limited memory, the Loop Join plan be the best option,
 even if it is painfully slow.
-Just remember that the loop join plan has to compete with the speed of the standard operator
+Just remember that the Loop Join plan has to compete with the speed of the standard operator
 under paging, and that may still be faster past a certain point.
 
 ### Backup Plans
@@ -198,16 +204,16 @@ Note that the Y-axis is a log scale here!
 ### Setting
 
 While it is nice that we provide a default value for making plan choices like this, your mileage may vary as they say.
-If you have more time than memory, it might be worth it to you to bump up the loop join threshold a bit.
+If you have more time than memory, it might be worth it to you to bump up the Loop Join threshold a bit.
 The threshold is a new setting called `asof_loop_join_threshold` with a default value of `64`,
 and you can change it using a `PRAGMA` statement:
 
 ```sql
-PRAGMA asof_loop_join_threshol = 128;
+PRAGMA asof_loop_join_threshold = 128;
 ```
 
-Remember, though, this is a quadratic operation, and pushing it up too high might take a Very Long Time.
-(Especially if you express it in [Old Entish](https://tolkiengateway.net/wiki/Entish)!)
+Remember, though, this is a quadratic operation, and pushing it up too high might take a Very Long Time
+(especially if you express it in [Old Entish](https://tolkiengateway.net/wiki/Entish)!)
 
 If you wish to disable the feature, you can just set
 
@@ -217,7 +223,7 @@ PRAGMA asof_loop_join_threshold = 0;
 
 ## Roll Your Own
 
-This new plan option will not ship until v1.3, but if you are having problems today,
+This Loop Join plan optimization will not ship until v1.3, but if you are having problems today,
 you can always write your own version like this:
 
 ```sql
@@ -251,7 +257,7 @@ ORDER BY 1;
 
 ## Future Work
 
-The new AsOf plan feature only covers a common but very specific situation,
+The new AsOf Loop Join plan feature only covers a common but very specific situation,
 and the standard operator could be made a lot more efficient if it knew that the data was already sorted.
 This is often the case, but we do not yet have the ability to track partitioning and ordering between operators.
 Tracking that kind of metadata would be very useful for speeding up a large number of operations,
@@ -265,3 +271,9 @@ but each way may have radically different performance characteristics.
 One of the jobs of a relational database with a declarative query language like SQL
 is to make intelligent choices between the options so you the user can focus on the result.
 Here at DuckDB we look forward to finding more ways to plan your queries so you can focus on what you do best!
+
+## Notes
+
+* The tests were all run on an iMac Pro with a 2.3 GHz 18-Core Intel Xeon W CPU and 128 GB of RAM
+* The [raw test data and visualisations](https://public.tableau.com/views/AsOfLoopJoin/Tuning?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) are available on our [Tableau Public repository](https://public.tableau.com/app/profile/duckdb.labs/vizzes).
+* The script to generate the data is in my [public DuckDB tools repository](https://github.com/hawkfish/feathers/blob/main/joins/asof-plans.py).
