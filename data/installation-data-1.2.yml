@@ -97,7 +97,7 @@
     On aarch64, if the DuckDB R package does not successfully compile, you
     may need to change your R environment's Make variables.
 - variant: stable
-  environment: Java
+  environment: Java (JDBC)
   platform: all
   download_method: Package manager
   architecture: universal
@@ -108,7 +108,7 @@
         <version>1.2.0</version>
     </dependency>
 - variant: stable
-  environment: Java
+  environment: Java (JDBC)
   platform: all
   download_method: Direct download
   architecture: universal
@@ -253,7 +253,7 @@
     On aarch64, if the DuckDB R package does not successfully compile, you
     may need to change your R environment's Make variables.
 - variant: nightly
-  environment: Java
+  environment: Java (JDBC)
   platform: all
   download_method: Package manager
   architecture: universal
@@ -276,7 +276,7 @@
     </repositories>
   note: 'Nightly Java builds are served through the Sonatype snapshots repository.'
 - variant: nightly
-  environment: Java
+  environment: Java (JDBC)
   platform: all
   download_method: Direct download
   architecture: universal
