@@ -1903,6 +1903,28 @@ SELECT ST_AsText(
 POINT (544615.0239773799 6867874.103539125)
 ```
 
+#### Example: Improve accuracy by using a local NTv2 grid file 
+```sql
+-- Transform a geometry from OSG36 British National Grid EPSG:27700 to EPSG:4326 WGS84
+-- Standard transform is often fine for the first few decimal places before being wrong
+-- which could result in an error starting at about 10m and possibly much more
+SELECT ST_TRANSFORM(bng, 'EPSG:27700', 'EPSG:4326', xy:=true) AS without_grid_file
+FROM (SELECT ST_GeomFromText('POINT( 170370.718 11572.405 )') AS bng);
+----
+POINT (-5.202992651563592 49.96007490162923)
+
+-- By using an official NTv2 grid file, we can reduce the error down around the 9th decimal place
+-- which in theory is below a millimetre, and in practise unlikely that your coordinates are that precise
+-- British National Grid "NTv2 format files" download available here:
+-- https://www.ordnancesurvey.co.uk/products/os-net/for-developers
+SELECT ST_TRANSFORM(bng
+    , '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +units=m +no_defs +nadgrids=/full/path/to/OSTN15-NTv2/OSTN15_NTv2_OSGBtoETRS.gsb +type=crs'
+    , 'EPSG:4326', xy:=true) AS with_grid_file
+FROM (SELECT ST_GeomFromText('POINT( 170370.718 11572.405 )') AS bng) t;
+----
+POINT (-5.203046090608746 49.96006137018598)
+```
+
 ----
 
 ### ST_Union
