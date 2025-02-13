@@ -151,7 +151,7 @@ for a matrix of the following values:
 Here are the results:
 
 <div align="center">
-<img src="/images/blog/asof/asof-plans.png" alt="Vectorization Improvements" title="Vectorization Improvements" style="max-width:100%;width:100%;height:auto"/>
+<img src="/images/blog/asof/asof-plans.png" alt="AsOf Plan Matrix" title="AsOf Plan Matrix" style="max-width:100%;width:100%;height:auto"/>
 </div>
 
 As you can see, the quadratic nature of the joins means that "small" means "<= 64".
@@ -196,7 +196,7 @@ and it did not fare well.
 At the 1B row level I had to cut it off after one run to avoid wasting time:
 
 <div align="center">
-<img src="/images/blog/asof/asof-debug.png" alt="Vectorization Improvements" title="Vectorization Improvements" style="max-width:100%;width:100%;height:auto"/>
+<img src="/images/blog/asof/asof-debug.png" alt="AsOf SQL Implementation" title="AsOf SQL Implementation" style="max-width:100%;width:100%;height:auto"/>
 </div>
 
 Note that the Y-axis is a log scale here!
