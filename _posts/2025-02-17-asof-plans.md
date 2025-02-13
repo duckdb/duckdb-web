@@ -8,7 +8,7 @@ thumb: "/images/blog/thumbs/asof-join.svg"
 image: "/images/blog/thumbs/asof-join.png"
 ---
 
->I love it when a plan comes together.
+> I love it when a plan comes together.
 > -- Hannibal Smith, _The A-Team_
 
 ## Introduction
@@ -123,7 +123,7 @@ CREATE OR REPLACE TABLE times_{times_size} AS
 SELECT
     r AS id,
     '2021-01-01'::TIMESTAMP
-        + INTERVAL ((365 * 24 * 60 * 60 * RANDOM())::INTEGER) SECONDS
+        + INTERVAL ((365 * 24 * 60 * 60 * random())::INTEGER) SECONDS
         AS probe
 FROM range({times_size}) tbl(r);
 ```
@@ -131,15 +131,15 @@ FROM range({times_size}) tbl(r);
 I then ran a benchmark query:
 
 ```sql
-SELECT COUNT(*)
+SELECT count(*)
 FROM (
     SELECT
-      t.probe,
-      p.price
+        t.probe,
+        p.price
     FROM times_{times_size} t
-      ASOF JOIN prices_{prices_size} p
-      ON t.probe >= p.time
-    ) t
+        ASOF JOIN prices_{prices_size} p
+        ON t.probe >= p.time
+    ) t;
 ```
 
 for a matrix of the following values:
@@ -170,9 +170,9 @@ the longer it will take.
 Speaking of memory, how much memory does the standard operator use for the larger options?
 
 | Price Rows | AsOf Memory | Loop Join Memory |
-| ---: | ----: | ---: |
-| 1B | 40GB | 6GB |
-| 100M |  13GB| 6GB |
+| ---------: | ----------: | ---------------: |
+|         1B |       40 GB |             6 GB |
+|       100M |       13 GB |             6 GB |
 
 So if the table is large and you have limited memory, the loop join plan be the best option,
 even if it is painfully slow.
@@ -199,16 +199,16 @@ The threshold is a new setting called `asof_loop_join_threshold` with a default 
 and you can change it using a `PRAGMA` statement:
 
 ```sql
-PRAGMA asof_loop_join_threshold=128;
+PRAGMA asof_loop_join_threshol = 128;
 ```
 
 Remember, though, this is a quadratic operation, and pushing it up too high might take a Very Long Time.
-(Especially if you express it in Old Entish!)
+(Especially if you express it in [Old Entish](https://tolkiengateway.net/wiki/Entish)!)
 
 If you wish to disable the feature, you can just set
 
 ```sql
-PRAGMA asof_loop_join_threshold=0;
+PRAGMA asof_loop_join_threshold = 0;
 ```
 
 ## Roll Your Own
@@ -224,7 +224,7 @@ FROM prices p
 INNER JOIN (
     SELECT
         *,
-        ROW_NUMBER() OVER () AS pk
+        row_number() OVER () AS pk
     FROM times
 ) t
 ON t.probe >= p.time
@@ -251,12 +251,12 @@ The new AsOf plan feature only covers a common but very specific situation,
 and the standard operator could be made a lot more efficient if it knew that the data was already sorted.
 This is often the case, but we do not yet have the ability to track partitioning and ordering between operators.
 Tracking that kind of metadata would be very useful for speeding up a large number of operations,
-including sorting(!), partitioned aggregation, windowing, AsOf joins and merge joins.
+including sorting (!), partitioned aggregation, windowing, AsOf joins and merge joins.
 This is work we are very interested in, so stay tuned!
 
 ## Conclusion
 
-With apologies to Guido von Rossum, there is usually more than one way to do something,
+With apologies to [Guido von Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum), there is usually more than one way to do something,
 but each way may have radically different performance characteristics.
 One of the jobs of a relational database with a declarative query language like SQL
 is to make intelligent choices between the options so you the user can focus on the result.
