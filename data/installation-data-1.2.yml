@@ -218,10 +218,10 @@
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip'
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip'
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb-binaries-linux.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip &&
-    unzip duckdb-binaries-linux.zip &&
+    curl --fail --location --progress-bar --output duckdb-binaries-linux-amd64.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip &&
+    unzip duckdb-binaries-linux-amd64.zip &&
     unzip duckdb_cli-linux-amd64.zip
 - variant: nightly
   environment: Command line
@@ -305,7 +305,7 @@
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip'
+  link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip'
 - variant: nightly
   environment: C/C++
   platform: Linux
