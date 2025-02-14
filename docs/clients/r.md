@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: R API
+title: R Client
 github_repository: https://github.com/duckdb/duckdb-r
 redirect_from:
   - /docs/api/r
@@ -8,9 +8,9 @@ redirect_from:
 
 ## Installation
 
-### `duckdb`: R API
+### `duckdb`: R Client
 
-The DuckDB R API can be installed using the following command:
+The DuckDB R client can be installed using the following command:
 
 ```r
 install.packages("duckdb")
@@ -18,17 +18,17 @@ install.packages("duckdb")
 
 Please see the [installation page]({% link docs/installation/index.html %}?environment=r) for details.
 
-### `duckplyr`: dplyr API
+### `duckplyr`: dplyr Client
 
 DuckDB offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://tidyverse.github.io/duckplyr/).
 
 ## Reference Manual
 
-The reference manual for the DuckDB R API is available at [R.duckdb.org](https://r.duckdb.org).
+The reference manual for the DuckDB R client is available at [r.duckdb.org](https://r.duckdb.org).
 
-## Basic API Usage
+## Basic Client Usage
 
-The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see the [Using DBI page](https://solutions.rstudio.com/db/r-packages/DBI/) for an introduction.
+The standard DuckDB R client implements the [DBI interface](https://cran.r-project.org/package=DBI) for R. If you are not familiar with DBI yet, see the [Using DBI page](https://solutions.rstudio.com/db/r-packages/DBI/) for an introduction.
 
 ### Startup & Shutdown
 
@@ -66,7 +66,7 @@ print(res)
 # 2 hammer  42.2     2
 ```
 
-DuckDB also supports prepared statements in the R API with the `dbExecute` and `dbGetQuery` methods. Here is an example:
+DuckDB also supports prepared statements in the R client with the `dbExecute` and `dbGetQuery` methods. Here is an example:
 
 ```r
 # prepared statement parameters are given as a list

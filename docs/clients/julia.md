@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Julia Package
+title: Julia Client
 redirect_from:
   - /docs/api/julia
 ---
