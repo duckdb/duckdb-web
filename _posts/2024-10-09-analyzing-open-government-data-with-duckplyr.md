@@ -8,6 +8,8 @@ excerpt: "We use the duckplyr R library to clean and analyze an Open Data set pu
 tags: ["using DuckDB"]
 ---
 
+> For the duckplyr documentation, visit [`duckplyr.tidyverse.org`](https://duckplyr.tidyverse.org/).
+
 <img src="/images/blog/duckplyr/duckplyr-logo.svg"
      width="400"
      />
