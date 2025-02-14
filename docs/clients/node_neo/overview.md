@@ -15,30 +15,30 @@ available separately as [@duckdb/node-bindings](https://www.npmjs.com/package/@d
 
 ### Main Differences from [duckdb-node](https://www.npmjs.com/package/duckdb)
 
-- Native support for Promises; no need for separate [duckdb-async](https://www.npmjs.com/package/duckdb-async) wrapper.
-- DuckDB-specific API; not based on the [SQLite Node API](https://www.npmjs.com/package/sqlite3).
-- Lossless & efficent support for values of all [DuckDB data types]({% link docs/sql/data_types/overview.md %}).
-- Wraps [released DuckDB binaries](https://github.com/duckdb/duckdb/releases) instead of rebuilding DuckDB.
-- Built on [DuckDB's C API]({% link docs/clients/c/overview.md %}); exposes more functionality.
+* Native support for Promises; no need for separate [duckdb-async](https://www.npmjs.com/package/duckdb-async) wrapper.
+* DuckDB-specific API; not based on the [SQLite Node API](https://www.npmjs.com/package/sqlite3).
+* Lossless & efficent support for values of all [DuckDB data types]({% link docs/sql/data_types/overview.md %}).
+* Wraps [released DuckDB binaries](https://github.com/duckdb/duckdb/releases) instead of rebuilding DuckDB.
+* Built on [DuckDB's C API]({% link docs/clients/c/overview.md %}); exposes more functionality.
 
 ### Roadmap
 
 Some features are not yet complete:
 
-- Appending and binding advanced data types. (Additional DuckDB C API support needed.)
-- Writing to data chunk vectors. (Needs special handling in Node.)
-- User-defined types & functions. (Support for this was added to the DuckDB C API in v1.1.0.)
-- Profiling info (Added in v1.1.0)
-- Table description (Added in v1.1.0)
-- APIs for Arrow. (This part of the DuckDB C API is [deprecated](https://github.com/duckdb/duckdb/blob/e791508e9bc2eb84bc87eb794074f4893093b743/src/include/duckdb.h#L3760).)
+* Appending and binding advanced data types. (Additional DuckDB C API support needed.)
+* Writing to data chunk vectors. (Needs special handling in Node.)
+* User-defined types & functions. (Support for this was added to the DuckDB C API in v1.1.0.)
+* Profiling info. (Added in v1.1.0)
+* Table description. (Added in v1.1.0)
+* APIs for Arrow. (This part of the DuckDB C API is [deprecated](https://github.com/duckdb/duckdb/blob/e791508e9bc2eb84bc87eb794074f4893093b743/src/include/duckdb.h#L3760).)
 
 ### Supported Platforms
 
-- Linux arm64 (experimental)
-- Linux x64
-- Mac OS X (Darwin) arm64 (Apple Silicon)
-- Mac OS X (Darwin) x64 (Intel)
-- Windows (Win32) x64
+* Linux ARM64 (experimental)
+* Linux AMD64
+* macOS (Darwin) ARM64 (Apple Silicon)
+* macOS (Darwin) AMD64 (Intel)
+* Windows (Win32) AMD64
 
 ## Examples
 
