@@ -8,8 +8,8 @@ thumb: "/images/blog/thumbs/asof-join.svg"
 image: "/images/blog/thumbs/asof-join.png"
 ---
 
-> I love it when a plan comes together.
-> -- Hannibal Smith, _The A-Team_
+<p>I love it when a plan comes together.<br/>
+  —- Hannibal Smith, <cite>The A-Team</cite></p>
 
 ## Introduction
 
@@ -98,7 +98,7 @@ but that could be problematic if there are duplicate lookup times
 (only one of the rows would be returned!)
 Instead, we need to have a unique identifier for each row being looked up.
 The simplest way to do this is to use the
-[_streaming window operator_]({% post_url 2025-02-12-window-flying %})
+[_streaming window operator_]({% post_url 2025-02-14-window-flying %})
 with the `ROW_NUMBER()` window function.
 We then group on this row number.
 
