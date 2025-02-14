@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: ADBC API
+title: ADBC Client
 redirect_from:
   - /docs/api/adbc
 ---

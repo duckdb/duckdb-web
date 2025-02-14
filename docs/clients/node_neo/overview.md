@@ -1,14 +1,14 @@
 ---
 layout: docu
-title: Node.js API (Neo)
+title: Node.js Client (Neo)
 redirect_from:
   - /docs/api/node_neo/overview
 ---
 
-An API for using [DuckDB](https://duckdb.org/) in [Node.js](https://nodejs.org/).
+An API for using [DuckDB]({% link index.html %}) in [Node.js](https://nodejs.org/).
 
 The primary package, [@duckdb/node-api](https://www.npmjs.com/package/@duckdb/node-api), is a high-level API meant for applications.
-It depends on low-level bindings that adhere closely to [DuckDB's C API](https://duckdb.org/docs/api/c/overview),
+It depends on low-level bindings that adhere closely to [DuckDB's C API]({% link docs/clients/c/overview.md %}),
 available separately as [@duckdb/node-bindings](https://www.npmjs.com/package/@duckdb/node-bindings).
 
 ## Features
@@ -17,9 +17,9 @@ available separately as [@duckdb/node-bindings](https://www.npmjs.com/package/@d
 
 - Native support for Promises; no need for separate [duckdb-async](https://www.npmjs.com/package/duckdb-async) wrapper.
 - DuckDB-specific API; not based on the [SQLite Node API](https://www.npmjs.com/package/sqlite3).
-- Lossless & efficent support for values of all [DuckDB data types](https://duckdb.org/docs/sql/data_types/overview).
+- Lossless & efficent support for values of all [DuckDB data types]({% link docs/sql/data_types/overview.md %}).
 - Wraps [released DuckDB binaries](https://github.com/duckdb/duckdb/releases) instead of rebuilding DuckDB.
-- Built on [DuckDB's C API](https://duckdb.org/docs/api/c/overview); exposes more functionality.
+- Built on [DuckDB's C API]({% link docs/clients/c/overview.md %}); exposes more functionality.
 
 ### Roadmap
 

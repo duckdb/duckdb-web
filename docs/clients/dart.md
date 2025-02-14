@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Dart API
+title: Dart Client
 github_repository: https://github.com/TigerEyeLabs/duckdb-dart
 redirect_from:
   - /docs/api/dart
