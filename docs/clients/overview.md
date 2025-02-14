@@ -20,9 +20,9 @@ DuckDB is an in-process database system and offers client APIs (also known as â€
 | [C++]({% link docs/clients/cpp.md %})                                   | DuckDB team                                                                | Secondary    |                         1.2.0 |
 | [Dart]({% link docs/clients/dart.md %})                                 | [TigerEye](https://www.tigereye.com/)                                      | Secondary    |                         1.1.3 |
 | [Julia]({% link docs/clients/julia.md %})                               | DuckDB team                                                                | Secondary    |                         1.1.0 |
-| [Node.js (deprecated)]({% link docs/clients/nodejs/overview.md %})      | DuckDB team                                                                | Secondary    |                         1.1.3 |
+| [Node.js (deprecated)]({% link docs/clients/nodejs/overview.md %})      | DuckDB team                                                                | Secondary    |                         1.2.0 |
 | [ODBC]({% link docs/clients/odbc/overview.md %})                        | DuckDB team                                                                | Secondary    |                         1.1.0 |
-| [Rust]({% link docs/clients/rust.md %})                                 | DuckDB team                                                                | Secondary    |                         1.1.3 |
+| [Rust]({% link docs/clients/rust.md %})                                 | DuckDB team                                                                | Secondary    |                         1.2.0 |
 | [Swift]({% link docs/clients/swift.md %})                               | DuckDB team                                                                | Secondary    |                         1.1.3 |
 | [Common Lisp](https://github.com/ak-coram/cl-duckdb)                    | [ak-coram](https://github.com/ak-coram)                                    | Tertiary     |                               |
 | [Crystal](https://github.com/amauryt/crystal-duckdb)                    | [amauryt](https://github.com/amauryt)                                      | Tertiary     |                               |
