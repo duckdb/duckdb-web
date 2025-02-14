@@ -1,44 +1,44 @@
 ---
 layout: docu
-title: Node.js API (Neo)
+title: Node.js Client (Neo)
 redirect_from:
   - /docs/api/node_neo/overview
 ---
 
-An API for using [DuckDB](https://duckdb.org/) in [Node.js](https://nodejs.org/).
+An API for using [DuckDB]({% link index.html %}) in [Node.js](https://nodejs.org/).
 
 The primary package, [@duckdb/node-api](https://www.npmjs.com/package/@duckdb/node-api), is a high-level API meant for applications.
-It depends on low-level bindings that adhere closely to [DuckDB's C API](https://duckdb.org/docs/api/c/overview),
+It depends on low-level bindings that adhere closely to [DuckDB's C API]({% link docs/clients/c/overview.md %}),
 available separately as [@duckdb/node-bindings](https://www.npmjs.com/package/@duckdb/node-bindings).
 
 ## Features
 
 ### Main Differences from [duckdb-node](https://www.npmjs.com/package/duckdb)
 
-- Native support for Promises; no need for separate [duckdb-async](https://www.npmjs.com/package/duckdb-async) wrapper.
-- DuckDB-specific API; not based on the [SQLite Node API](https://www.npmjs.com/package/sqlite3).
-- Lossless & efficent support for values of all [DuckDB data types](https://duckdb.org/docs/sql/data_types/overview).
-- Wraps [released DuckDB binaries](https://github.com/duckdb/duckdb/releases) instead of rebuilding DuckDB.
-- Built on [DuckDB's C API](https://duckdb.org/docs/api/c/overview); exposes more functionality.
+* Native support for Promises; no need for separate [duckdb-async](https://www.npmjs.com/package/duckdb-async) wrapper.
+* DuckDB-specific API; not based on the [SQLite Node API](https://www.npmjs.com/package/sqlite3).
+* Lossless & efficent support for values of all [DuckDB data types]({% link docs/sql/data_types/overview.md %}).
+* Wraps [released DuckDB binaries](https://github.com/duckdb/duckdb/releases) instead of rebuilding DuckDB.
+* Built on [DuckDB's C API]({% link docs/clients/c/overview.md %}); exposes more functionality.
 
 ### Roadmap
 
 Some features are not yet complete:
 
-- Appending and binding advanced data types. (Additional DuckDB C API support needed.)
-- Writing to data chunk vectors. (Needs special handling in Node.)
-- User-defined types & functions. (Support for this was added to the DuckDB C API in v1.1.0.)
-- Profiling info (Added in v1.1.0)
-- Table description (Added in v1.1.0)
-- APIs for Arrow. (This part of the DuckDB C API is [deprecated](https://github.com/duckdb/duckdb/blob/e791508e9bc2eb84bc87eb794074f4893093b743/src/include/duckdb.h#L3760).)
+* Appending and binding advanced data types. (Additional DuckDB C API support needed.)
+* Writing to data chunk vectors. (Needs special handling in Node.)
+* User-defined types & functions. (Support for this was added to the DuckDB C API in v1.1.0.)
+* Profiling info. (Added in v1.1.0)
+* Table description. (Added in v1.1.0)
+* APIs for Arrow. (This part of the DuckDB C API is [deprecated](https://github.com/duckdb/duckdb/blob/e791508e9bc2eb84bc87eb794074f4893093b743/src/include/duckdb.h#L3760).)
 
 ### Supported Platforms
 
-- Linux arm64 (experimental)
-- Linux x64
-- Mac OS X (Darwin) arm64 (Apple Silicon)
-- Mac OS X (Darwin) x64 (Intel)
-- Windows (Win32) x64
+* Linux ARM64 (experimental)
+* Linux AMD64
+* macOS (Darwin) ARM64 (Apple Silicon)
+* macOS (Darwin) AMD64 (Intel)
+* Windows (Win32) AMD64
 
 ## Examples
 
@@ -170,7 +170,7 @@ for (let columnIndex = 0; columnIndex < columnCount; columnIndex++) {
 Run and read all data:
 
 ```ts
-const reader = await connection.runAndReadAll('from test_all_types()');
+const reader = await connection.runAndReadAll('FROM test_all_types()');
 const rows = reader.getRows();
 // OR: const columns = reader.getColumns();
 ```
@@ -178,7 +178,7 @@ const rows = reader.getRows();
 Run and read up to (at least) some number of rows:
 
 ```ts
-const reader = await connection.runAndReadUtil('from range(5000)', 1000);
+const reader = await connection.runAndReadUtil('FROM range(5000)', 1000);
 const rows = reader.getRows();
 // rows.length === 2048. (Rows are read in chunks of 2048.)
 ```
@@ -186,7 +186,7 @@ const rows = reader.getRows();
 Read rows incrementally:
 
 ```ts
-const reader = await connection.runAndRead('from range(5000)');
+const reader = await connection.runAndRead('FROM range(5000)');
 reader.readUntil(2000);
 // reader.currentRowCount === 2048 (Rows are read in chunks of 2048.)
 // reader.done === false
@@ -429,7 +429,7 @@ async function sleep(ms) {
   });
 }
 
-const prepared = await connection.prepare('from range(10_000_000)');
+const prepared = await connection.prepare('FROM range(10_000_000)');
 const pending = prepared.start();
 while (pending.runTask() !== DuckDBPendingResultState.RESULT_READY) {
   console.log('not ready');

@@ -2,7 +2,8 @@
 DuckDBConnection conn = (DuckDBConnection)
     DriverManager.getConnection("jdbc:duckdb:");
 Statement st = conn.createStatement();
-st.execute("CREATE TABLE person (name VARCHAR, age INT)");
+st.execute("CREATE TABLE person " +
+    "(name VARCHAR, age INT)");
 
 var appender = conn.createAppender(
     DuckDBConnection.DEFAULT_SCHEMA, "person");

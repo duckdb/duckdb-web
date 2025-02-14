@@ -1,15 +1,12 @@
 # Find the largest sepals/petals in the Iris data set
-# using dplyr
-library("duckdb")
-library("dplyr")
+# using duckplyr
+library("duckplyr")
 
-con <- dbConnect(duckdb())
-duckdb_register(con, "iris", iris)
-tbl(con, "iris") |>
+iris |>
     filter(Sepal.Length > 5) |>
     group_by(Species) |>
     summarize(
-        num_observations = count(),
+        num_observations = n(),
         max_width = max(Sepal.Width),
         max_petal_length = max(Petal.Length),
         na.rm = TRUE) |>

@@ -500,7 +500,7 @@ Not implemented Error: Unknown TimeZone '0200'
 ## Infinities
 
 Functions applied to infinite dates will either return the same infinite dates
-(e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what “makes sense”.
+(e.g., `greatest`) or `NULL` (e.g., `date_part`) depending on what “makes sense”.
 In general, if the function needs to examine the parts of the infinite temporal value,
 the result will be `NULL`.
 

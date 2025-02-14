@@ -136,6 +136,10 @@ The results then open in the default text file editor of the system, for example
 
 <img src="/images/cli_docs_output_to_text_editor.jpg" alt="cli_docs_output_to_text_editor" title="Output to text editor" style="width:293px;"/>
 
+> Tip macOS users can copy the results to their clipboards using [`pbcopy`](https://ss64.com/mac/pbcopy.html) by using `.once` to output to `pbcopy` via a pipe: `.once |pbcopy`
+>
+> Combining this with the `.headers off` and `.mode lines` options can be particularly effective.
+
 ## Querying the Database Schema
 
 All DuckDB clients support [querying the database schema with SQL]({% link docs/sql/meta/information_schema.md %}), but the CLI has additional [dot commands]({% link docs/clients/cli/dot_commands.md %}) that can make it easier to understand the contents of a database.

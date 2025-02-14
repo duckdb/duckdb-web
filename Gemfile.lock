@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: a867ab46a057b48579e1c840a8bd23df54cd9456
+  revision: 4b1c42d03fd67df4de80082fb542ba2e01dc07b2
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -167,7 +167,7 @@ GEM
       nokogiri (~> 1.12)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.9.1)
+    json (2.10.1)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
     kramdown-parser-gfm (1.1.0)
