@@ -29,13 +29,17 @@ or that the aggregation API had not been nailed down yet (or both).
 In the old version, we used the aggregate's `update` or `combine` APIs,
 but with only the values and tree states for a single row.
 To vectorize the segment tree aggregation, we accumulate _vectors_ of leaf values and tree states
-and flush them into each output row's state when we reach the vector capacity of 2048 rows..
+and flush them into each output row's state when we reach the vector capacity of 2048 rows.
 Some care needed to be taken to handle order-sensitive aggregates by accumulating values in the correct order.
 `FILTER` and `EXCLUDE` clauses also provided some entertainment, but the segment trees are now fully vectorized.
 The performance gains here were about a factor of four (from “Baseline” to “Fan Out”).
 
+The chart below shows the speedups achieved by the vectorization improvements:
+
 <div align="center">
-<img src="/images/blog/windowing/vectorization-improvements.png" alt="Vectorization Improvements" title="Vectorization Improvements" style="max-width:100%;width:100%;height:auto"/>
+<a href="/images/blog/windowing/vectorization-improvements.png">
+<img src="/images/blog/windowing/vectorization-improvements.png" alt="Vectorization Improvements" title="Vectorization Improvements" style="width: 950px" />
+</a>
 </div>
 
 Once segment trees were vectorized,
@@ -107,34 +111,39 @@ There are a few more restrictions:
 The improvements for streaming `LEAD` were quite dramatic:
 
 ```sql
-SELECT SETSEED(0.8675309);
+SELECT setseed(0.8675309);
 CREATE OR REPLACE TABLE df AS
-	SELECT 
-		RANDOM() AS a,
-		RANDOM() AS b,
-		RANDOM() AS c,
-	FROM range(10_000_000);
+    SELECT 
+        random() AS a,
+        random() AS b,
+        random() AS c,
+    FROM range(10_000_000);
 
-run
 SELECT sum(a_1 + a_2 + b_1 + b_2)
 FROM (
-	SELECT
-	  LEAD(a, 1) OVER () AS a_1,
-	  LEAD(a, 2) OVER () AS a_2,
-	  LEAD(b, 1) OVER () AS b_1,
-	  LEAD(b, 2) OVER () AS b_2
-	FROM df
+    SELECT
+        lead(a, 1) OVER () AS a_1,
+        lead(a, 2) OVER () AS a_2,
+        lead(b, 1) OVER () AS b_1,
+        lead(b, 2) OVER () AS b_2
+    FROM df
 ) t;
 ```
 
-<div align="center">
-<img src="/images/blog/windowing/streaming-lead.png" alt="Streaming Lead Performance" title="Streaming Lead Performance" style="max-width:100%;width:100%;height:auto"/>
-</div>
+The chart below shows the performance improvements.
 
-* Baseline - Where we started
-* Shift - Copying blocks of rows inside the non-streaming implementation, instead of one at a time
-* Streaming - First implementation of streaming `LEAD`
-* Partials - Avoid copying when the entire chunk can just be referenced.
+* Baseline – Where we started
+* Shift – Copying blocks of rows inside the non-streaming implementation, instead of one at a time
+* Streaming – First implementation of streaming `LEAD`
+* Partials – Avoid copying when the entire chunk can just be referenced
+
+Note that the _x_ axis shows the speedups compared to the baseline (1×) and the absolute runtimes (in seconds) are shown as labels.
+
+<div align="center">
+<a href="/images/blog/windowing/streaming-lead.png">
+<img src="/images/blog/windowing/streaming-lead.png" alt="Streaming Lead Performance" title="Streaming Lead Performance" style="width: 800px" />
+</a>
+</div>
 
 In the future we may be able to relax the end of the frame to a constant distance from the current row
 that fits inside the buffer length (e.g., `BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING`)
@@ -149,7 +158,9 @@ but if the partition sizes are skewed or if there is only one partition (a commo
 then most of the cores will be idle, reducing throughput.
 
 <div align="center">
-<img src="/images/blog/windowing/parallel-partitions.png" alt="Thread Partition Evaluation" title="Thread Partition Evaluation" style="max-width:50%;width:50%;height:auto"/>
+<a href="/images/blog/windowing/parallel-partitions.png">
+<img src="/images/blog/windowing/parallel-partitions.png" alt="Thread Partition Evaluation" title="Thread Partition Evaluation" style="width: 400px;" />
+</a>
 </div>
 
 To improve the CPU utilization, we changed the execution model for v1.1 to evaluate partitions in parallel.
@@ -161,7 +172,9 @@ But we now have much better core utilization, especially for unpartitioned data.
 As a side benefit, we were able to reduce the memory footprint because fewer partitions were in memory at a time.
 
 <div align="center">
-<img src="/images/blog/windowing/partition-major.png" alt="Partition Major Evaluation" title="Partition Major Evaluation" style="max-width:50%;width:50%;height:auto"/>
+<a href="/images/blog/windowing/partition-major.png">
+<img src="/images/blog/windowing/partition-major.png" alt="Partition Major Evaluation" title="Partition Major Evaluation" style="width: 400px;" />
+</a>
 </div>
 
 One remaining issue is the coarseness of the sub-partitions.
