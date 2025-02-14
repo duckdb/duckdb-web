@@ -170,7 +170,7 @@ for (let columnIndex = 0; columnIndex < columnCount; columnIndex++) {
 Run and read all data:
 
 ```ts
-const reader = await connection.runAndReadAll('from test_all_types()');
+const reader = await connection.runAndReadAll('FROM test_all_types()');
 const rows = reader.getRows();
 // OR: const columns = reader.getColumns();
 ```
@@ -178,7 +178,7 @@ const rows = reader.getRows();
 Run and read up to (at least) some number of rows:
 
 ```ts
-const reader = await connection.runAndReadUtil('from range(5000)', 1000);
+const reader = await connection.runAndReadUtil('FROM range(5000)', 1000);
 const rows = reader.getRows();
 // rows.length === 2048. (Rows are read in chunks of 2048.)
 ```
@@ -186,7 +186,7 @@ const rows = reader.getRows();
 Read rows incrementally:
 
 ```ts
-const reader = await connection.runAndRead('from range(5000)');
+const reader = await connection.runAndRead('FROM range(5000)');
 reader.readUntil(2000);
 // reader.currentRowCount === 2048 (Rows are read in chunks of 2048.)
 // reader.done === false
@@ -429,7 +429,7 @@ async function sleep(ms) {
   });
 }
 
-const prepared = await connection.prepare('from range(10_000_000)');
+const prepared = await connection.prepare('FROM range(10_000_000)');
 const pending = prepared.start();
 while (pending.runTask() !== DuckDBPendingResultState.RESULT_READY) {
   console.log('not ready');
