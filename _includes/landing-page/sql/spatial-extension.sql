@@ -1,5 +1,4 @@
--- What are the top-3 closest Intercity stations
--- using aerial distance?
+-- List the closest IC stations (as the crow flies)
 SELECT
     s1.name_long AS station1,
     s2.name_long AS station2,
