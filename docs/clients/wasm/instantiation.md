@@ -3,6 +3,7 @@ layout: docu
 title: Instantiation
 redirect_from:
   - /docs/api/wasm/instantiation
+  - /docs/api/wasm/instantiation/
 ---
 
 DuckDB-Wasm has multiple ways to be instantiated depending on the use case.

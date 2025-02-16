@@ -3,6 +3,7 @@ layout: docu
 title: CSV Export
 redirect_from:
   - /docs/guides/import/csv_export
+  - /docs/guides/import/csv_export/
 ---
 
 To export the data from a table to a CSV file, use the `COPY` statement:

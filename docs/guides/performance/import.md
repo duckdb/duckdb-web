@@ -3,6 +3,7 @@ layout: docu
 title: Data Import
 redirect_from:
   - /docs/guides/import/overview
+  - /docs/guides/import/overview/
 ---
 
 ## Recommended Import Methods

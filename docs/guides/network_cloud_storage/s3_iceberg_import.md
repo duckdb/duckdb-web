@@ -4,6 +4,7 @@ title: S3 Iceberg Import
 selected: S3 Iceberg Import
 redirect_from:
   - /docs/guides/import/s3_iceberg_import
+  - /docs/guides/import/s3_iceberg_import/
 ---
 
 ## Prerequisites

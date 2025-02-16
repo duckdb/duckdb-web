@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Reading Faulty CSV Files
-redirect_from:
 ---
 
 CSV files can come in all shapes and forms, with some presenting many errors that make the process of cleanly reading them inherently difficult. To help users read these files, DuckDB supports detailed error messages, the ability to skip faulty lines, and the possibility of storing faulty lines in a temporary table to assist users with a data cleaning step.

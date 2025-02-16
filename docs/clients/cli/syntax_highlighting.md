@@ -3,6 +3,7 @@ layout: docu
 title: Syntax Highlighting
 redirect_from:
   - /docs/api/cli/syntax_highlighting
+  - /docs/api/cli/syntax_highlighting/
 ---
 
 > Syntax highlighting in the CLI is currently only available for macOS and Linux.

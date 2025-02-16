@@ -3,6 +3,7 @@ layout: docu
 title: Configuration
 redirect_from:
   - /docs/api/c/config
+  - /docs/api/c/config/
 ---
 
 Configuration options can be provided to change different settings of the database system. Note that many of these

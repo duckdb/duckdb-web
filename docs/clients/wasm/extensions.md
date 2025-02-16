@@ -3,6 +3,7 @@ layout: docu
 title: Extensions
 redirect_from:
   - /docs/api/wasm/extensions
+  - /docs/api/wasm/extensions/
 ---
 
 DuckDB-Wasm's (dynamic) extension loading is modeled after the regular DuckDB's extension loading, with a few relevant differences due to the difference in platform.

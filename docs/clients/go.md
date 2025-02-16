@@ -4,6 +4,7 @@ title: Go Client
 github_repository: https://github.com/marcboeker/go-duckdb
 redirect_from:
   - /docs/api/go
+  - /docs/api/go/
 ---
 
 The DuckDB Go driver, `go-duckdb`, allows using DuckDB via the `database/sql` interface.

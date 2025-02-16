@@ -4,6 +4,7 @@ title: Window Functions
 railroad: expressions/window.js
 redirect_from:
   - docs/sql/window_functions
+  - docs/sql/window_functions/
 ---
 
 <!-- markdownlint-disable MD001 -->

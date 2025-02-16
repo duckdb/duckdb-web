@@ -3,6 +3,7 @@ layout: docu
 title: Excel Import
 redirect_from:
   - /docs/guides/import/excel_import
+  - /docs/guides/import/excel_import/
 ---
 
 DuckDB supports reading Excel `.xlsx` files, however, `.xls` files are not supported.

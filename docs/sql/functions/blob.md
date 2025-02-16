@@ -3,6 +3,7 @@ layout: docu
 title: Blob Functions
 redirect_from:
   - docs/test/functions/blob
+  - docs/test/functions/blob/
 ---
 
 <!-- markdownlint-disable MD001 -->

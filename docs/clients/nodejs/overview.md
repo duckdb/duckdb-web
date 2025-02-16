@@ -5,6 +5,7 @@ redirect_from:
   - /docs/api/nodejs
   - /docs/api/nodejs/
   - /docs/api/nodejs/overview
+  - /docs/api/nodejs/overview/
 ---
 
 > Deprecated The old DuckDB Node.js package is deprecated.

@@ -3,7 +3,7 @@ layout: docu
 title: Connect
 redirect_from:
   - /docs/connect
-  - /docs/connect.html
+  - /docs/connect/
 ---
 
 ## Connect or Create a Database

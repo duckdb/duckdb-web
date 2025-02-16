@@ -3,6 +3,7 @@ layout: docu
 title: Rust Client
 redirect_from:
   - /docs/api/rust
+  - /docs/api/rust/
 ---
 
 ## Installation

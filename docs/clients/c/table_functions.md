@@ -3,6 +3,7 @@ layout: docu
 title: Table Functions
 redirect_from:
   - /docs/api/c/table_functions
+  - /docs/api/c/table_functions/
 ---
 
 The table function API can be used to define a table function that can then be called from within DuckDB in the `FROM` clause of a query.

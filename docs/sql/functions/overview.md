@@ -4,6 +4,7 @@ title: Functions
 railroad: expressions/function.js
 redirect_from:
   - docs/test/functions/overview
+  - docs/test/functions/overview/
 ---
 
 ## Function Syntax

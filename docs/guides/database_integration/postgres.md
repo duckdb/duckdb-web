@@ -3,6 +3,7 @@ layout: docu
 title: PostgreSQL Import
 redirect_from:
   - /docs/guides/import/query_postgres
+  - /docs/guides/import/query_postgres/
 ---
 
 To run a query directly on a running PostgreSQL database, the [`postgres` extension]({% link docs/extensions/postgres.md %}) is required.

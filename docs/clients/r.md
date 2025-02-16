@@ -4,6 +4,7 @@ title: R Client
 github_repository: https://github.com/duckdb/duckdb-r
 redirect_from:
   - /docs/api/r
+  - /docs/api/r/
 ---
 
 ## Installation

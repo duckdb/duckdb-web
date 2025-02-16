@@ -4,6 +4,7 @@ title: Aggregate Functions
 railroad: expressions/aggregate.js
 redirect_from:
   - docs/sql/aggregates
+  - docs/sql/aggregates/
 ---
 
 <!-- markdownlint-disable MD001 -->

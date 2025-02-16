@@ -3,6 +3,7 @@ layout: docu
 title: Nested Functions
 redirect_from:
   - docs/test/functions/nested
+  - docs/test/functions/nested/
 ---
 
 There are five [nested data types]({% link docs/sql/data_types/overview.md %}#nested--composite-types):

@@ -4,7 +4,7 @@ title: Pattern Matching
 railroad: expressions/like.js
 redirect_from:
   - docs/sql/functions/patternmatching
-  - docs/sql/functions/patternmatching.html
+  - docs/sql/functions/patternmatching/
 ---
 
 There are four separate approaches to pattern matching provided by DuckDB:

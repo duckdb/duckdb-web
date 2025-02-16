@@ -2,7 +2,8 @@
 layout: docu
 title: Overview of DuckDB Internals
 redirect_from:
-   - /internals/overview
+  - /internals/overview
+  - /internals/overview/
 ---
 On this page is a brief description of the internals of the DuckDB engine.
 

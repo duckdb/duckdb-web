@@ -3,6 +3,7 @@ layout: docu
 title: JSON Import
 redirect_from:
   - /docs/guides/import/json_import
+  - /docs/guides/import/json_import/
 ---
 
 To read data from a JSON file, use the `read_json_auto` function in the `FROM` clause of a query:

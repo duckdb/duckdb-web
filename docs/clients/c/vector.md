@@ -3,6 +3,7 @@ layout: docu
 title: Vectors
 redirect_from:
   - /docs/api/c/vector
+  - /docs/api/c/vector/
 ---
 
 Vectors represent a horizontal slice of a column. They hold a number of values of a specific type, similar to an array. Vectors are the core data representation used in DuckDB. Vectors are typically stored within [data chunks]({% link docs/clients/c/data_chunk.md %}).

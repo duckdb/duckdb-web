@@ -3,6 +3,7 @@ layout: docu
 title: Julia Client
 redirect_from:
   - /docs/api/julia
+  - /docs/api/julia/
 ---
 
 The DuckDB Julia package provides a high-performance front-end for DuckDB. Much like SQLite, DuckDB runs in-process within the Julia client, and provides a DBInterface front-end.

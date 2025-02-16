@@ -3,8 +3,10 @@ layout: docu
 title: Java JDBC Client
 github_repository: https://github.com/duckdb/duckdb-java
 redirect_from:
-  - /docs/api/scala
   - /docs/api/java
+  - /docs/api/java/
+  - /docs/api/scala
+  - /docs/api/scala/
 ---
 
 ## Installation
