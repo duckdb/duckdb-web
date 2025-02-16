@@ -32,7 +32,7 @@ dependencies:
   dart_duckdb: ^1.1.3
 ```
 
-Alternatively, your editor might support `flutter pub get.` Check the docs for your editor to learn more.
+Alternatively, your editor might support `flutter pub get`. Check the docs for your editor to learn more.
 
 #### Import It
 
