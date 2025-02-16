@@ -2,8 +2,8 @@
 layout: docu
 title: Information Schema
 redirect_from:
-  - docs/sql/information_schema
-  - docs/sql/information_schema/
+  - /docs/sql/information_schema
+  - /docs/sql/information_schema/
 ---
 
 The views in the `information_schema` are SQL-standard views that describe the catalog entries of the database. These views can be filtered to obtain information about a specific column or table.

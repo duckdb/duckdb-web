@@ -2,8 +2,8 @@
 layout: docu
 title: Numeric Functions
 redirect_from:
-  - docs/test/functions/math
-  - docs/test/functions/math/
+  - /docs/test/functions/math
+  - /docs/test/functions/math/
 ---
 
 <!-- markdownlint-disable MD001 -->

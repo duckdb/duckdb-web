@@ -2,8 +2,8 @@
 layout: docu
 title: Utility Functions
 redirect_from:
-  - docs/test/functions/utility
-  - docs/test/functions/utility/
+  - /docs/test/functions/utility
+  - /docs/test/functions/utility/
 ---
 
 <!-- markdownlint-disable MD001 -->
