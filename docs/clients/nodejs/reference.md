@@ -3,6 +3,7 @@ layout: docu
 title: Node.js API
 redirect_from:
   - /docs/api/nodejs/reference
+  - /docs/api/nodejs/reference/
 ---
 
 ## Modules

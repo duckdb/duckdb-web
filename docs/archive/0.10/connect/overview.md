@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/0.10/connect
-- /docs/archive/0.10/connect.html
 title: Connect
 ---
 

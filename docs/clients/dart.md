@@ -4,6 +4,7 @@ title: Dart Client
 github_repository: https://github.com/TigerEyeLabs/duckdb-dart
 redirect_from:
   - /docs/api/dart
+  - /docs/api/dart/
 ---
 
 DuckDB.Dart is the native Dart API for [DuckDB](https://duckdb.org/).
@@ -16,9 +17,7 @@ DuckDB.Dart can be installed from [pub.dev](https://pub.dev/packages/dart_duckdb
 
 #### Depend on It
 
-Run this command:
-
-With Flutter:
+Add the dependency with Flutter:
 
 ```bash
 flutter pub add dart_duckdb
@@ -31,7 +30,7 @@ dependencies:
   dart_duckdb: ^1.1.3
 ```
 
-Alternatively, your editor might support `flutter pub get.` Check the docs for your editor to learn more.
+Alternatively, your editor might support `flutter pub get`. Check the docs for your editor to learn more.
 
 #### Import It
 

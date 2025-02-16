@@ -2,7 +2,8 @@
 layout: docu
 title: Text Functions
 redirect_from:
-  - docs/test/functions/char
+  - /docs/test/functions/char
+  - /docs/test/functions/char/
 ---
 
 <!-- markdownlint-disable MD001 -->

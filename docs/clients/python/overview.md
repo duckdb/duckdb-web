@@ -5,6 +5,7 @@ redirect_from:
   - /docs/api/python
   - /docs/api/python/
   - /docs/api/python/overview
+  - /docs/api/python/overview/
 ---
 
 ## Installation

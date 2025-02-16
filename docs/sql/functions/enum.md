@@ -2,7 +2,8 @@
 layout: docu
 title: Enum Functions
 redirect_from:
-  - docs/test/functions/enum
+  - /docs/test/functions/enum
+  - /docs/test/functions/enum/
 ---
 
 <!-- markdownlint-disable MD001 -->

@@ -5,6 +5,7 @@ redirect_from:
   - /docs/api/cli
   - /docs/api/cli/
   - /docs/api/cli/overview
+  - /docs/api/cli/overview/
 ---
 
 ## Installation

@@ -4,6 +4,7 @@ title: ODBC API on Linux
 github_repository: https://github.com/duckdb/duckdb-odbc
 redirect_from:
   - /docs/api/odbc/linux
+  - /docs/api/odbc/linux/
 ---
 
 ## Driver Manager

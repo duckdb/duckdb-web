@@ -6,6 +6,7 @@ redirect_from:
   - /docs/api/wasm
   - /docs/api/wasm/
   - /docs/api/wasm/overview
+  - /docs/api/wasm/overview/
 ---
 
 DuckDB has been compiled to WebAssembly, so it can run inside any browser on any device.

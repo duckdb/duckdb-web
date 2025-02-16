@@ -3,7 +3,8 @@ layout: docu
 title: SQLite Extension
 github_repository: https://github.com/duckdb/duckdb-sqlite
 redirect_from:
-  - docs/extensions/sqlite_scanner
+  - /docs/extensions/sqlite_scanner
+  - /docs/extensions/sqlite_scanner/
 ---
 
 The SQLite extension allows DuckDB to directly read and write data from a SQLite database file. The data can be queried directly from the underlying SQLite tables. Data can be loaded from SQLite tables into DuckDB tables, or vice versa.

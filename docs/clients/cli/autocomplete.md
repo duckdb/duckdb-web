@@ -3,6 +3,7 @@ layout: docu
 title: Autocomplete
 redirect_from:
   - /docs/api/cli/autocomplete
+  - /docs/api/cli/autocomplete/
 ---
 
 The shell offers context-aware autocomplete of SQL queries through the [`autocomplete` extension]({% link docs/extensions/autocomplete.md %}). autocomplete is triggered by pressing `Tab`.

@@ -3,6 +3,7 @@ layout: docu
 title: Profiling
 redirect_from:
   - /dev/profiling
+  - /dev/profiling/
 ---
 
 Profiling is essential to help understand why certain queries exhibit specific performance characteristics.

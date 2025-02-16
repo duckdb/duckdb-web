@@ -2,7 +2,8 @@
 layout: docu
 title: Bitstring Functions
 redirect_from:
-  - docs/test/functions/bitstring
+  - /docs/test/functions/bitstring
+  - /docs/test/functions/bitstring/
 ---
 
 <!-- markdownlint-disable MD001 -->

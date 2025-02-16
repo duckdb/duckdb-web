@@ -2,8 +2,10 @@
 layout: docu
 title: Conversion between DuckDB and Python
 redirect_from:
-  - /docs/api/python/result_conversion
   - /docs/api/python/conversion
+  - /docs/api/python/conversion/
+  - /docs/api/python/result_conversion
+  - /docs/api/python/result_conversion/
 ---
 
 This page documents the rules for converting [Python objects to DuckDB](#object-conversion-python-object-to-duckdb) and [DuckDB results to Python](#result-conversion-duckdb-results-to-python).

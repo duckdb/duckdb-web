@@ -2,7 +2,8 @@
 layout: docu
 title: Execution Format
 redirect_from:
-   - /internals/vector
+  - /internals/vector
+  - /internals/vector/
 ---
 
 `Vector` is the container format used to store in-memory data during execution.

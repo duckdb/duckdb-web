@@ -3,7 +3,9 @@ layout: docu
 title: Output Formats
 redirect_from:
   - /docs/api/cli/output-formats
+  - /docs/api/cli/output-formats/
   - /docs/api/cli/output_formats
+  - /docs/api/cli/output_formats/
 ---
 
 The `.mode` [dot command]({% link docs/clients/cli/dot_commands.md %}) may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal [output to a file]({% link docs/clients/cli/dot_commands.md %}#output-writing-results-to-a-file). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point.

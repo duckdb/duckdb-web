@@ -6,6 +6,7 @@ redirect_from:
   - /docs/api/odbc
   - /docs/api/odbc/
   - /docs/api/odbc/overview
+  - /docs/api/odbc/overview/
 ---
 
 The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of Database Management Systems (DBMSs).

@@ -3,6 +3,7 @@ layout: docu
 title: CSV Import
 redirect_from:
   - /docs/data/csv
+  - /docs/data/csv/
 ---
 
 ## Examples

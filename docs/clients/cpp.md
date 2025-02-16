@@ -3,6 +3,7 @@ layout: docu
 title: C++ API
 redirect_from:
   - /docs/api/cpp
+  - /docs/api/cpp/
 ---
 
 > Warning DuckDB's C++ API is internal.

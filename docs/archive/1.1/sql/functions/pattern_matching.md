@@ -2,8 +2,7 @@
 layout: docu
 railroad: expressions/like.js
 redirect_from:
-- docs/archive/1.1/sql/functions/patternmatching
-- docs/archive/1.1/sql/functions/patternmatching.html
+- /docs/archive/1.1/sql/functions/patternmatching
 title: Pattern Matching
 ---
 

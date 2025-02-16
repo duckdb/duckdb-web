@@ -3,6 +3,7 @@ layout: docu
 title: Spark API
 redirect_from:
   - /docs/api/python/spark_api
+  - /docs/api/python/spark_api/
 ---
 
 The DuckDB Spark API implements the [PySpark API](https://spark.apache.org/docs/3.5.0/api/python/reference/index.html), allowing you to use the familiar Spark API to interact with DuckDB.

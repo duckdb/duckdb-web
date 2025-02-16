@@ -3,6 +3,7 @@ layout: docu
 title: Writing Tests
 redirect_from:
   - /dev/writing_tests
+  - /dev/writing_tests/
 ---
 
 ## Development and Testing

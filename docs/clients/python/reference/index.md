@@ -4,6 +4,7 @@ layout: docu
 title: Python Client API
 redirect_from:
   - /docs/api/python/reference/index
+  - /docs/api/python/reference/index/
 ---
 <div class="documentwrapper">
 <div class="bodywrapper">

@@ -2,7 +2,8 @@
 layout: docu
 title: DuckDB_% Metadata Functions
 redirect_from:
-  - docs/sql/duckdb_table_functions
+  - /docs/sql/duckdb_table_functions
+  - /docs/sql/duckdb_table_functions/
 ---
 
 DuckDB offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`.

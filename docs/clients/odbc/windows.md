@@ -4,6 +4,7 @@ title: ODBC API on Windows
 github_repository: https://github.com/duckdb/duckdb-odbc
 redirect_from:
   - /docs/api/odbc/windows
+  - /docs/api/odbc/windows/
 ---
 
 Using the DuckDB ODBC API on Windows requires the following steps:
