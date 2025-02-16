@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: blockduck
   description: Live SQL Queries on Blockchain
-  version: 0.5.0
+  version: 0.6.0
   language: C++
   build: cmake
   license: MIT
@@ -18,15 +18,15 @@ extension:
 
 repo:
   github: luohaha/BlockDuck
-  ref: b7d432f8d9145d6228043c30487c77c8b2d1714a
+  ref: a3b9dd692ff06488e1b85c1f74220d21bda9ab67
 
 docs:
   https://yixins-organization.gitbook.io/blockduck-docs
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 435
-extension_download_count_pretty: 435
+extension_download_count: 422
+extension_download_count_pretty: 422
 image: '/images/community_extensions/social_preview/preview_community_extension_blockduck.png'
 layout: community_extension_doc
 ---
@@ -63,6 +63,7 @@ LOAD {{ page.extension.name }};
 | eth_latest_block_rpc                | table         | NULL        | NULL    | []       |
 | eth_logs_rpc                        | table         | NULL        | NULL    | []       |
 | eth_traces_rpc                      | table         | NULL        | NULL    | []       |
+| eth_traces_v2_rpc                   | table         | NULL        | NULL    | []       |
 | eth_transactions_rpc                | table         | NULL        | NULL    | []       |
 
 
