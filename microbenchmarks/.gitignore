@@ -1,4 +1,5 @@
 *.duckdb*
+*.db*
 ldbc-sf*
 results.csv
 *.csv
