@@ -5,6 +5,8 @@ set -Eeuo pipefail
 DUCKDB="/opt/homebrew/bin/duckdb ldbc_comment_pk.db -init ub-init.sql"
 TIMEFORMAT="%3R"
 
+echo "Running microbenchmark for SF${SF}"
+
 if [ ! -d "ldbc-sf${SF}-comments" ]; then
     echo "'ldbc-sf${SF}-comments' directory does not exist, exiting"
     exit 1
