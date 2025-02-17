@@ -27,10 +27,10 @@ docs:
     A [ULID](https://github.com/ulid/spec) is similar to a UUID except that it also contains a timestamp component, which makes it more suitable for use cases where the order of creation is important. 
     Additionally, the string representation is lexicographically sortable while preserving the sort order of the timestamps.
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 484
-extension_download_count_pretty: 484
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 480
+extension_download_count_pretty: 480
 image: '/images/community_extensions/social_preview/preview_community_extension_ulid.png'
 layout: community_extension_doc
 ---
