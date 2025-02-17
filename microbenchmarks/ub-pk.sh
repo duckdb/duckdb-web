@@ -7,7 +7,6 @@ TIMEFORMAT='%3R'
 
 echo "operation,iteration,time" > pk.csv
 
-
 for I in `seq 1 5`; do
 
     echo "Load the table without PK constraint (dry run to fill caches)"
@@ -18,6 +17,8 @@ for I in `seq 1 5`; do
     TIME=$( { time ${DUCKDB} ldbc_comment_pk.db -c "COPY Comment FROM 'Comment/part-*.csv.gz' (HEADER true, DELIMITER '|');" 1>&3 2>&4; } 2>&1)
     exec 3>&- 4>&-
 
+    # ---
+
     echo "Load the table without PK constraint (actual run)"
     rm -rf *.db*
     ${DUCKDB} ldbc_comment_pk.db -c ".read schema-without-pk.sql"
@@ -25,19 +26,21 @@ for I in `seq 1 5`; do
     exec 3>&1 4>&2
     TIME=$( { time ${DUCKDB} ldbc_comment_pk.db -c "COPY Comment FROM 'Comment/part-*.csv.gz' (HEADER true, DELIMITER '|');" 1>&3 2>&4; } 2>&1)
     exec 3>&- 4>&-
-    echo "Creating a unique key index on id"
     if [ $? == 0 ]; then
         echo "load without pk,${I},${TIME}" >> pk.csv
     fi
 
+    echo "Add PK constraint"
     exec 3>&1 4>&2
-    TIME=$( { time ${DUCKDB} ldbc_comment_pk.db -c "CREATE UNIQUE INDEX comment_id ON Comment(id);" 1>&3 2>&4; } 2>&1)
+    TIME=$( { time ${DUCKDB} ldbc_comment_pk.db -c "ALTER TABLE Comment ADD PRIMARY KEY(id);" 1>&3 2>&4; } 2>&1)
     exec 3>&- 4>&-
     if [ $? == 0 ]; then
-        echo "create unique index,${I},${TIME}" >> pk.csv
+        echo "add primary key,${I},${TIME}" >> pk.csv
     fi
 
-    echo "Load the table with PK constraint:"
+    # ---
+
+    echo "Load the table with PK constraint"
     rm -rf *.db*
     ${DUCKDB} ldbc_comment_pk.db -c ".read schema-with-pk.sql"
 
