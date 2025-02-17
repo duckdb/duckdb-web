@@ -33,8 +33,8 @@ The results of the microbenchmark are as follows:
 
 | Column type | Storage size | Query time |
 | ----------- | -----------: | ---------: |
-| `DATETIME`  | 3.3 GB       | 0.9 s      |
-| `VARCHAR`   | 5.2 GB       | 3.9 s      |
+| `DATETIME`  |       3.3 GB |      0.9 s |
+| `VARCHAR`   |       5.2 GB |      3.9 s |
 
 The results show that using the `DATETIME` value yields smaller storage sizes and faster processing.
 
@@ -53,10 +53,10 @@ In the second experiment, we define all columns with the `VARCHAR` type.
 While the results of the queries are the same for all both experiments, their runtime vary significantly.
 The results below show that joining on `BIGINT` columns is approx. 1.8× faster than performing the same join on `VARCHAR`-typed columns encoding the same value.
 
-| Join column payload type | Join column schema type | Example value                            | Query time |
-| ------------------------ | ----------------------- | ---------------------------------------- | ---------: |
-| `BIGINT`                 | `BIGINT`                | `70368755640078`                         | 1.2 s      |
-| `BIGINT`                 | `VARCHAR`               | `'70368755640078'`                       | 2.1 s      |
+| Join column payload type | Join column schema type | Example value      | Query time |
+| ------------------------ | ----------------------- | ------------------ | ---------: |
+| `BIGINT`                 | `BIGINT`                | `70368755640078`   |      1.2 s |
+| `BIGINT`                 | `VARCHAR`               | `'70368755640078'` |      2.1 s |
 
 > Bestpractice Avoid representing numeric values as strings, especially if you intend to perform e.g., join operations on them.
 
@@ -68,13 +68,21 @@ DuckDB allows defining [constraints]({% link docs/sql/constraints.md %}) such as
 
 ### Microbenchmark: The Effect of Primary Keys
 
-We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst). This table has approx. 554 million entries. We first create the schema without a primary key, then load the data. In the second experiment, we create the schema with a primary key, then load the data. In both cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
+We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst).
+This table has approx. 554 million entries.
+In the first experiments, we create the schema *without* a primary key, then load the data.
+In the second experiment, we create the schema *with* a primary key, then load the data.
+In the third case, we create the schema *without* a primary key, load the data and then add the primary key constraint.
+In all cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
 
-| Operation                | Execution time |
-| ------------------------ | -------------: |
-| Load without primary key | 92.2 s         |
-| Load with primary key    | 286.8 s        |
+|                  Operation                    | Execution Time |
+|-----------------------------------------------|---------------:|
+| Load with primary key                         |        461.6 s |
+| Load without primary key                      |        121.0 s |
+| Load without primary key then add primary key |        242.0 s |
 
-In this case, primary keys will only have a (small) positive effect on highly selective queries such as when filtering on a single identifier. They do not have an effect on join and aggregation operators.
+For this data set, primary keys will only have a (small) positive effect on highly selective queries such as when filtering on a single identifier.
+Definining primary keys (or indexes) will not have an effect on join and aggregation operators.
 
-> Bestpractice For best bulk load performance, avoid defining primary key constraints if possible.
+> Bestpractice For best bulk load performance, avoid primary key constraints.
+> If they are required, define them after the bulk loading step.

@@ -35,7 +35,7 @@ It also allows the computation to be 1.5× faster.
 ### Ordered Integers
 
 Another practical way to exploit ordering is to use the `INTEGER` type with automatic increments rather than `UUID` for columns queried using selective filters.
-In a scenario where a table contains out-of-order `UUID`s,  DuckDB has to scan many row groups to find a specific `UUID` value. 
+In a scenario where a table contains out-of-order `UUID`s,  DuckDB has to scan many row groups to find a specific `UUID` value.
 An ordered `INTEGER` column allows skipping all row groups except those containing the value.
 
 ## ART Indexes
@@ -67,7 +67,7 @@ E.g. the following index is eligible for index scans:
 CREATE INDEX idx ON tbl (col1);
 ```
 
-E.g. the following two indexes are **NOT** eligible for index scans: 
+E.g. the following two indexes are **NOT** eligible for index scans:
 
 ```sql
 CREATE INDEX idx_multi_column ON tbl (col1, col2);
@@ -80,7 +80,7 @@ When in doubt, use [`EXPLAIN ANALYZE`]({% link docs/guides/meta/explain_analyze.
 
 ### Indexes and Memory
 
-DuckDB registers index memory through its buffer manager. 
+DuckDB registers index memory through its buffer manager.
 However, these index buffers are not yet buffer-managed.
 That means DuckDB does not yet destroy any index buffers if it has to evict memory.
 Thus, indexes can take up a significant portion of DuckDB's available memory, potentially affecting the performance of memory-intensive queries.
@@ -90,7 +90,7 @@ Disabling index scans and re-attaching after changes can further decrease the im
 ### Indexes and Opening Databases
 
 Indexes are serialized to disk and deserialized lazily, i.e., when reopening the database.
-Operations using the index will only load the required parts of the index. 
+Operations using the index will only load the required parts of the index.
 Therefore, having an index will not cause any slowdowns when opening an existing database.
 
 > Bestpractice We recommend following these guidelines:
