@@ -37,7 +37,7 @@ Namely:
 * Partition it on any equality conditions
 * Sort it on the inequality condition
 * Repeat the process for the left side (probe) table
-* Do a merge join on the two tables that only returns the “most recent” value.
+* Do a merge join on the two tables that only returns the “most recent” value
 
 That's a lot of data movement!
 Plus, if any of the tables are large, we may end up exceeding memory and spilling to disk,
