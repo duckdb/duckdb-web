@@ -37,7 +37,7 @@ Namely:
 * Partition it on any equality conditions
 * Sort it on the inequality condition
 * Repeat the process for the left side (probe) table
-* Do a merge join on the two tables that only returns the "most recent" value.
+* Do a merge join on the two tables that only returns the “most recent” value.
 
 That's a lot of data movement!
 Plus, if any of the tables are large, we may end up exceeding memory and spilling to disk,
@@ -46,7 +46,7 @@ Still, as we will see, it is much faster than the plain SQL implementation.
 
 This is such a burden, that many databases that support AsOf joins
 require the right side table to be partitioned and ordered on any keys you might want to join on.
-That doesn't fit well with DuckDB's "friendly SQL" approach,
+That doesn't fit well with DuckDB's “friendly SQL” approach,
 so (for now) we have to do it every time.
 
 ### Let's Get Small
@@ -76,14 +76,14 @@ There are two streaming physical join operators we could use for this:
 
 We can try both of these once we have a way to eliminate the duplicates.
 One thing to be aware of, though, is that they are both `N^2` algorithms,
-so there will be a limit on how big "small" can be.
+so there will be a limit on how big “small” can be.
 
 ### Grouping
 
 If you have been around databases long enough,
-you know that the phrase "eliminate the duplicates" means `GROUP BY`!
+you know that the phrase “eliminate the duplicates” means `GROUP BY`!
 So to eliminate the duplicates, we want to add an aggregation operator onto the output.
-The tricky part is that we want to keep only the matched values that have the "largest" times.
+The tricky part is that we want to keep only the matched values that have the “largest” times.
 Fortunately, DuckDB has a pair of aggregate functions that do just that:
 [`arg_max`]({% link docs/sql/functions/aggregates.md %}#arg_maxarg-val) and
 [`arg_min`]({% link docs/sql/functions/aggregates.md %}#arg_minarg-val)
@@ -107,7 +107,7 @@ We then group on this row number.
 ## Coming Together
 
 This all sounds good, but how does it work in practice?
-How big can "small" get?
+How big can “small” get?
 To answer that I ran a number of benchmarks joining small tables against large ones.
 The tables are called `prices` and `times`:
 
@@ -156,7 +156,7 @@ Here are the results:
 <img src="/images/blog/asof/asof-plans.png" alt="AsOf Plan Matrix" title="AsOf Plan Matrix" style="max-width:100%;width:100%;height:auto"/>
 </div>
 
-As you can see, the quadratic nature of the joins means that "small" means "<= 64".
+As you can see, the quadratic nature of the joins means that “small” means “<= 64”.
 That is pretty small, but the table in the original user issue had only 21 values.
 
 We can also see that the sorting provided by piecewise merge join does not seem to help much,
