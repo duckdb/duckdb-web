@@ -67,9 +67,9 @@ def replace_html_code_blocks(doc_body):
         # strip html elements
         code_without_html_elements = re.sub("<[^>]*?>", "", match)
         # add Markdown code block
-        code_as_markdown_block = f"""```c
-{code_without_html_elements}```
-"""
+        code_as_markdown_block = textwrap.dedent(f"""```c
+            {code_without_html_elements}```
+            """)
         doc_body = doc_body.replace(match, code_as_markdown_block)
 
     return doc_body
