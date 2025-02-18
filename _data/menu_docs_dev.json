@@ -289,17 +289,7 @@
               "url": "julia"
             },
             {
-              "page": "Node.js (Neo)",
-              "slug": "node_neo",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                }
-              ]
-            },
-            {
-              "page": "Node.js",
+              "page": "Node.js (deprecated)",
               "slug": "nodejs",
               "subsubfolderitems": [
                 {
@@ -309,6 +299,16 @@
                 {
                   "page": "API Reference",
                   "url": "reference"
+                }
+              ]
+            },
+            {
+              "page": "Node.js (node-neo)",
+              "slug": "node_neo",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
                 }
               ]
             },
