@@ -8,8 +8,8 @@ thumb: "/images/blog/thumbs/asof-join.svg"
 image: "/images/blog/thumbs/asof-join.png"
 ---
 
-<p>I love it when a plan comes together.<br/>
-  —- Hannibal Smith, <cite>The A-Team</cite></p>
+<p>“I love it when a plan comes together.”<br/>
+  — Hannibal Smith, <cite>The A-Team</cite></p>
 
 ## Introduction
 
@@ -17,26 +17,26 @@ AsOf joins are a very useful kind of operation for temporal analytics.
 As the name suggests, they are a kind of lookup for when you have a
 table of values that change over time, and you want to look up the most recent value
 at another set of times.
-Put another way, they let you ask _What was the value of the property **as of this time?**_
+Put another way, they let you ask _“What was the value of the property **as of this time**?”_
 
-DuckDB added them [about 18 months ago]({% post_url 2023-09-15-asof-joins-fuzzy-temporal-lookups %})
+DuckDB [added AsOf joins about 18 months ago]({% post_url 2023-09-15-asof-joins-fuzzy-temporal-lookups %})
 and you can read that post to learn about their semantics.
 
 ## What's the Plan?
 
-In that earlier post, I explained why we have a custom operator and syntax for AsOf joins
+In that [earlier post](({% post_url 2023-09-15-asof-joins-fuzzy-temporal-lookups %})), I explained why we have a custom operator and syntax for AsOf joins
 when you can implement them in traditional SQL.
-The superpower of SQL is that it _declarative_:
-you tell us _what_ you want and we figure out an efficient _how_.
+The superpower of SQL is that it _declarative:_
+you tell us _what_ you want and we figure out an efficient _how._
 By allowing you to say you want an AsOf join, we can think about how to get you results faster!
 
-Still, the AsOf operator has to do a lot of work.
-It has to:
+Still, the [AsOf operator]({% link docs/sql/query_syntax/from.md %}#as-of-joins) has to do a lot of work.
+Namely:
 
-* Read all the data in the right side (lookup) table,
+* Read all the data in the right side (lookup) table
 * Partition it on any equality conditions
 * Sort it on the inequality condition
-* Repeat the process for the left side (probe) table.
+* Repeat the process for the left side (probe) table
 * Do a merge join on the two tables that only returns the "most recent" value.
 
 That's a lot of data movement!
@@ -59,20 +59,20 @@ but you only want to look up a small number (say 20) values that are the times y
 The price table could run to hundreds of millions, if not billions of rows,
 and just sorting that will take a lot of time and memory.
 Given how expensive that is, one might wonder if there is a way to avoid all that sorting?
-Happily the answer is _yes_!
+Happily the answer is _yes!_
 
 ### Simple Joins
 
 Suppose we were to swap the sides of the join, build the old left side as a small right side table,
-and stream the huge table through the left side of the join?
+and stream the huge table through the left side of the join.
 We could use the AsOf conditions for the join, and hopefully find a way to throw out the older matches
-(we only want to keep the latest match.)
+(we only want to keep the latest match).
 This would use very little memory, and the streaming could be highly parallelized.
 
 There are two streaming physical join operators we could use for this:
 
-* _Nested Loop Join_ - Literally what it sounds like: Loop over each left block and the right side table, checking for matches;
-* _Piecewise Merge Join_ - A tricky join for one inequality condition that sorts the right side and each left block before merging to find matches;
+* _Nested Loop Join_ – Literally what it sounds like: loop over each left block and the right side table, checking for matches;
+* _Piecewise Merge Join_ – A tricky join for one inequality condition that sorts the right side and each left block before merging to find matches;
 
 We can try both of these once we have a way to eliminate the duplicates.
 One thing to be aware of, though, is that they are both `N^2` algorithms,
@@ -85,7 +85,9 @@ you know that the phrase "eliminate the duplicates" means `GROUP BY`!
 So to eliminate the duplicates, we want to add an aggregation operator onto the output.
 The tricky part is that we want to keep only the matched values that have the "largest" times.
 Fortunately, DuckDB has a pair of aggregate functions that do just that:
-`arg_max` and `arg_min` (also called `max_by` and `min_by`).
+[`arg_max`]({% link docs/sql/functions/aggregates.md %}#arg_maxarg-val) and
+[`arg_min`]({% link docs/sql/functions/aggregates.md %}#arg_minarg-val)
+(also called `max_by` and `min_by`).
 
 That takes care of the fields from the lookup table, but what about the fields from the small table?
 Well, those values will all be the same, so we can just use the `first` aggregate function for them.
@@ -95,11 +97,11 @@ Well, those values will all be the same, so we can just use the `first` aggregat
 But what should we group on?
 One might be tempted to group on the times that are being looked up,
 but that could be problematic if there are duplicate lookup times
-(only one of the rows would be returned!)
+(only one of the rows would be returned!).
 Instead, we need to have a unique identifier for each row being looked up.
 The simplest way to do this is to use the
 [_streaming window operator_]({% post_url 2025-02-14-window-flying %})
-with the `ROW_NUMBER()` window function.
+with the [`row_number()` window function]({% link docs/sql/functions/window_functions.md %}#row_numberorder-by-ordering).
 We then group on this row number.
 
 ## Coming Together
@@ -111,21 +113,21 @@ The tables are called `prices` and `times`:
 
 ```sql
 CREATE OR REPLACE TABLE prices_{prices_size} AS
-SELECT
-    r AS id,
-    '2021-01-01T00:00:00'::TIMESTAMP
-        + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND
-        AS time,
-    (random() * 100000)::INTEGER AS price,
-FROM range({price_size}) tbl(r);
+    SELECT
+        r AS id,
+        '2021-01-01T00:00:00'::TIMESTAMP +
+            INTERVAL (random() * 365 * 24 * 60 * 60) SECOND
+            AS time,
+        (random() * 100000)::INTEGER AS price,
+    FROM range({price_size}) tbl(r);
 
 CREATE OR REPLACE TABLE times_{times_size} AS
-SELECT
-    r AS id,
-    '2021-01-01'::TIMESTAMP
-        + INTERVAL ((365 * 24 * 60 * 60 * random())::INTEGER) SECONDS
-        AS probe
-FROM range({times_size}) tbl(r);
+    SELECT
+        r AS id,
+        '2021-01-01'::TIMESTAMP +
+            INTERVAL ((random() * 365 * 24 * 60 * 60)::INTEGER) SECONDS
+            AS probe
+    FROM range({times_size}) tbl(r);
 ```
 
 I then ran a benchmark query:
@@ -144,9 +146,9 @@ FROM (
 
 for a matrix of the following values:
 
-* Prices - 100K to 1B rows in steps of 10x;
-* Time - 1 to 2048 rows in steps of 2x (until it got too slow);
-* Threads - 36, 18 and 9;
+* Prices – 100K to 1B rows in steps of 10x;
+* Time – 1 to 2048 rows in steps of 2x (until it got too slow);
+* Threads – 36, 18 and 9;
 
 Here are the results:
 
@@ -158,7 +160,7 @@ As you can see, the quadratic nature of the joins means that "small" means "<= 6
 That is pretty small, but the table in the original user issue had only 21 values.
 
 We can also see that the sorting provided by piecewise merge join does not seem to help much,
-so plain old nested Loop Join is the best choice.
+so plain old Nested Loop Join is the best choice.
 
 It is clear that the performance of the standard operator is stable at this size,
 but decreases slowly as the number of threads increases.
@@ -166,7 +168,7 @@ This makes sense because sorting is compute-intensive and the fewer cores we can
 the longer it will take.
 
 If you want to play with the data more, you can find
-the [interactive viz](https://public.tableau.com/app/profile/duckdb.labs/viz/AsOfLoopJoin/Tuning)
+the [interactive vizualization](https://public.tableau.com/app/profile/duckdb.labs/viz/AsOfLoopJoin/Tuning)
 on our [Tableau Public site](https://public.tableau.com/app/profile/duckdb.labs/vizzes).
 
 ### Memory
@@ -213,9 +215,9 @@ PRAGMA asof_loop_join_threshold = 128;
 ```
 
 Remember, though, this is a quadratic operation, and pushing it up too high might take a Very Long Time
-(especially if you express it in [Old Entish](https://tolkiengateway.net/wiki/Entish)!)
+(especially if you express it in [Old Entish](https://tolkiengateway.net/wiki/Entish)!).
 
-If you wish to disable the feature, you can just set
+If you wish to disable the feature, you can just set it to zero:
 
 ```sql
 PRAGMA asof_loop_join_threshold = 0;
@@ -266,7 +268,7 @@ This is work we are very interested in, so stay tuned!
 
 ## Conclusion
 
-With apologies to [Guido von Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum), there is usually more than one way to do something,
+With apologies to [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum), there is usually more than one way to do something,
 but each way may have radically different performance characteristics.
 One of the jobs of a relational database with a declarative query language like SQL
 is to make intelligent choices between the options so you the user can focus on the result.
@@ -274,6 +276,6 @@ Here at DuckDB we look forward to finding more ways to plan your queries so you 
 
 ## Notes
 
-* The tests were all run on an iMac Pro with a 2.3 GHz 18-Core Intel Xeon W CPU and 128 GB of RAM
-* The [raw test data and visualisations](https://public.tableau.com/views/AsOfLoopJoin/Tuning?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) are available on our [Tableau Public repository](https://public.tableau.com/app/profile/duckdb.labs/vizzes).
+* The tests were all run on an iMac Pro with a 2.3 GHz 18-core Intel Xeon W CPU and 128 GB of RAM.
+* The [raw test data and visualizations](https://public.tableau.com/views/AsOfLoopJoin/Tuning?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) are available on our [Tableau Public repository](https://public.tableau.com/app/profile/duckdb.labs/vizzes).
 * The script to generate the data is in my [public DuckDB tools repository](https://github.com/hawkfish/feathers/blob/main/joins/asof-plans.py).
