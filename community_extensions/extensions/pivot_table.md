@@ -27,8 +27,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 467
-extension_download_count_pretty: 467
+extension_download_count: 456
+extension_download_count_pretty: 456
 image: '/images/community_extensions/social_preview/preview_community_extension_pivot_table.png'
 layout: community_extension_doc
 ---
