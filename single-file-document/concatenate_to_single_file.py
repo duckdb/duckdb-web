@@ -35,6 +35,15 @@ def reduce_clutter_in_doc(doc_body):
     return doc_body
 
 
+def replace_jekyll_tags_for_variables(doc_body, config):
+    doc_body = doc_body.replace("{{ site.currentduckdbhash }}",         config["currentduckdbhash"])
+    doc_body = doc_body.replace("{{ site.currentduckdbodbcversion }}",  config["currentduckdbodbcversion"])
+    doc_body = doc_body.replace("{{ site.currentduckdbversion }}",      config["currentduckdbversion"])
+    doc_body = doc_body.replace("{{ site.currentjavaversion }}",        config["currentjavaversion"])
+    doc_body = doc_body.replace("{{ site.currentshortduckdbversion }}", config["currentshortduckdbversion"])
+    return doc_body
+
+
 def replace_box_names(doc_body):
     doc_body = doc_body.replace("> Bestpractice", "> **Best practice.**")
     doc_body = doc_body.replace("> Note",         "> **Note.**")
@@ -67,9 +76,9 @@ def replace_html_code_blocks(doc_body):
         # strip html elements
         code_without_html_elements = re.sub("<[^>]*?>", "", match)
         # add Markdown code block
-        code_as_markdown_block = f"""```c
-{code_without_html_elements}```
-"""
+        code_as_markdown_block = textwrap.dedent(f"""```c
+            {code_without_html_elements}```
+            """)
         doc_body = doc_body.replace(match, code_as_markdown_block)
 
     return doc_body
@@ -235,7 +244,7 @@ def change_function_table_headers(doc_body):
     return doc_body
 
 
-def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
+def concatenate_page_to_output(config, of, header_level, docs_root, doc_file_path):
     # skip index files
     if doc_file_path.endswith("index"):
         return
@@ -262,6 +271,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
 
         # process document body
         doc_body = reduce_clutter_in_doc(doc_body)
+        doc_body = replace_jekyll_tags_for_variables(doc_body, config)
         doc_body = replace_box_names(doc_body)
         doc_body = move_headers_down(doc_body)
         doc_body = replace_html_code_blocks(doc_body)
@@ -276,7 +286,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         of.write("\n")
 
 
-def add_main_documentation(docs_root, menu, of):
+def add_main_documentation(docs_root, menu, config, of):
     chapter_json = [x for x in menu["docsmenu"] if x["page"] == "Documentation"][0]
     chapter_slug = chapter_json["slug"]
     main_level_pages = chapter_json["mainfolderitems"]
@@ -288,7 +298,7 @@ def add_main_documentation(docs_root, menu, of):
 
         if main_url:
             logging.info(f"- {main_url}")
-            concatenate_page_to_output(of, 1, docs_root, f"{chapter_slug}{main_url}")
+            concatenate_page_to_output(config, of, 1, docs_root, f"{chapter_slug}{main_url}")
 
         if main_slug:
             # e.g., "# SQL Features {#guides:sql_features}"
@@ -304,7 +314,7 @@ def add_main_documentation(docs_root, menu, of):
 
             if subfolder_url:
                 logging.info(f"  - {main_slug}/{subfolder_url}")
-                concatenate_page_to_output(of, 2, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
+                concatenate_page_to_output(config, of, 2, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
 
             if subfolder_slug:
                 of.write(f"## {subfolder_page_title} {{#{ linked_path_to_label(f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
@@ -316,7 +326,7 @@ def add_main_documentation(docs_root, menu, of):
                 subsubfolder_url = subsubfolder_page.get("url")
 
                 logging.info(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
-                concatenate_page_to_output(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                concatenate_page_to_output(config, of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
 
 def add_blog_posts(blog_root, of):
@@ -381,7 +391,7 @@ with open(f"duckdb-docs.md", "w") as of:
 
     with open("../_data/menu_docs_dev.json") as menu_docs_file:
         menu = json.load(menu_docs_file)
-        add_main_documentation("../docs", menu, of)
+        add_main_documentation("../docs", menu, config, of)
 
     add_blog_posts("../_posts", of)
 
