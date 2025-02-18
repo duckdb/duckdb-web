@@ -162,7 +162,7 @@ That is pretty small, but the table in the original user issue had only 21 value
 We can also see that the sorting provided by piecewise merge join does not seem to help much,
 so plain old Nested Loop Join is the best choice.
 
-It is clear that the performance of the standard operator is stable at this size,
+It is clear that the performance of the standard operator is stable at each size,
 but decreases slowly as the number of threads increases.
 This makes sense because sorting is compute-intensive and the fewer cores we can assign,
 the longer it will take.
