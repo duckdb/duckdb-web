@@ -186,7 +186,7 @@ These are the rough amounts of memory needed before excessive paging or allocati
 |       100K |       32 MB |            64 MB |
 
 In other words, the Loop Join plan only needs enough memory to page in the lookup table!
-So if the table is large and you have limited memory, the Loop Join plan be the best option,
+So if the table is large and you have limited memory, the Loop Join plan is the best option,
 even if it is painfully slow.
 Just remember that the Loop Join plan has to compete with the speed of the standard operator
 under paging, and that may still be faster past a certain point.
