@@ -4,6 +4,8 @@ title: CLI API
 redirect_from:
   - /docs/api/cli
   - /docs/api/cli/
+  - /docs/clients/cli
+  - /docs/clients/cli/
   - /docs/api/cli/overview
   - /docs/api/cli/overview/
 ---
