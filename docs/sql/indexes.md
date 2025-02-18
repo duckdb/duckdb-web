@@ -10,13 +10,13 @@ DuckDB has two built-in index types. Indexes can also be defined via [extensions
 
 ### Min-Max Index (Zonemap)
 
-A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as zonemap and block range index) is automatically created for columns of all [general-purpose data types]({% link docs/sql/data_types/overview.md %}).
+A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as zonemap or block range index) is automatically created for columns of all [general-purpose data types]({% link docs/sql/data_types/overview.md %}).
 
 ### Adaptive Radix Tree (ART)
 
 An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. ART indexes are automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
 
-> Warning ART indexes must currently be able to fit in-memory during index creation. Avoid creating ART indexes if the index does not fit in memory during index creation.
+> Warning ART indexes must currently be able to fit in memory during index creation. Avoid creating ART indexes if the index does not fit in memory during index creation.
 
 ### Indexes Defined by Extensions
 
@@ -42,7 +42,7 @@ ART indexes create a secondary copy of the data in a second location – this co
 `UPDATE` statements on indexed columns are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
 This rewrite has performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
-Additionally, it causes the following constraint checking limitation of `UPDATE` statements. The same limitation exists in other DBMSs, like postgres.
+Additionally, it causes the following constraint-checking limitation of `UPDATE` statements. The same limitation exists in other DBMSs, like Postgres.
 
 In the example below, note how the number of rows exceeds DuckDB's standard vector size, which is 2048.
 The `UPDATE` statement is rewritten into a `DELETE`, followed by an `INSERT`.
