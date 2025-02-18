@@ -119,7 +119,7 @@ CREATE OR REPLACE TABLE prices_{prices_size} AS
             INTERVAL (random() * 365 * 24 * 60 * 60) SECOND
             AS time,
         (random() * 100000)::INTEGER AS price,
-    FROM range({price_size}) tbl(r);
+    FROM range({prices_size}) tbl(r);
 
 CREATE OR REPLACE TABLE times_{times_size} AS
     SELECT
