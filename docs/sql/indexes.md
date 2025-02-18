@@ -42,7 +42,7 @@ ART indexes create a secondary copy of the data in a second location – this co
 `UPDATE` statements on indexed columns are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
 This rewrite has performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
-Additionally, it causes the following constraint-checking limitation of `UPDATE` statements. The same limitation exists in other DBMSs, like Postgres.
+Additionally, it causes the following constraint-checking limitation of `UPDATE` statements. The same limitation exists in other DBMSs, like PostgreSQL.
 
 In the example below, note how the number of rows exceeds DuckDB's standard vector size, which is 2048.
 The `UPDATE` statement is rewritten into a `DELETE`, followed by an `INSERT`.
