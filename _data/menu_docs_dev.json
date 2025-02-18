@@ -1619,6 +1619,10 @@
                 {
                   "page": "Troubleshooting",
                   "url": "troubleshooting"
+                },
+                {
+                  "page": "Unsupported Platforms",
+                  "url": "unsupported_platforms"
                 }
               ]
             },

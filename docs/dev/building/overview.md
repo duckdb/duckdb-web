@@ -79,9 +79,9 @@ Below, we provide detailed build instructions for some platforms:
 
 DuckDB can be built for end-of-life platforms such as [macOS 11](https://endoflife.date/macos) and [CentOS 7/8](https://endoflife.date/centos) using the instructions provided for macOS and Linux.
 
-### 32-bit Architectures
+### Unsupported Platforms
 
-32-bit architectures are officially not supported but it is possible to build DuckDB manually for some of these platforms, e.g., for [Raspberry Pi boards]({% link docs/dev/building/raspberry_pi.md %}).
+The [“Unsupported Platforms” page]({% link docs/dev/building/unsupported_platforms.md %}).
 
 ## Troubleshooting Guides
 
