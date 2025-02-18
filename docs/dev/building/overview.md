@@ -81,7 +81,7 @@ DuckDB can be built for end-of-life platforms such as [macOS 11](https://endofli
 
 ### Unsupported Platforms
 
-The [“Unsupported Platforms” page]({% link docs/dev/building/unsupported_platforms.md %}).
+See the [“Unsupported Platforms” page]({% link docs/dev/building/unsupported_platforms.md %}).
 
 ## Troubleshooting Guides
 
