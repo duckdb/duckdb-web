@@ -33,8 +33,8 @@ SELECT * FROM postgres_scan('host=localhost port=5432 dbname=mydb', 'public', 'm
 
 The first parameter to the `postgres_scan` function is the [PostgreSQL connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), a list of connection arguments provided in `{key}={value}` format. Below is a list of valid arguments.
 
-|    Name    |             Description              |    Default     |
-|------------|--------------------------------------|----------------|
+| Name       | Description                          | Default        |
+| ---------- | ------------------------------------ | -------------- |
 | `host`     | Name of host to connect to           | `localhost`    |
 | `hostaddr` | Host IP address                      | `localhost`    |
 | `port`     | Port number                          | `5432`         |
@@ -47,7 +47,7 @@ Alternatively, the entire database can be attached using the `ATTACH` command. T
 
 ```sql
 -- Attach the PostgreSQL database using the given connection string
-ATTACH 'host=localhost port=5432 dbname=mydb' AS test (TYPE postgres);
+ATTACH 'host=localhost port=5432 dbname=mydb' AS test (TYPE POSTGRES);
 -- The table "tbl_name" can now be queried as if it is a regular table
 SELECT * FROM test.tbl_name;
 -- Switch the active database to "test"
