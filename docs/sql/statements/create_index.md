@@ -24,6 +24,14 @@ Create index `s_idx` that allows for duplicate values on column `revenue` of tab
 CREATE INDEX s_idx ON films (revenue);
 ```
 
+Create index if it does not yet exist:
+
+```sql
+CREATE INDEX IF NOT EXISTS s_idx ON films (revenue);
+```
+
+> The `CREATE INDEX IF NOT EXISTS` statement does not have an “early exit” at the moment, instead, it will attempt to create the index and only check its existence before committing it to storage. Therefore, it may run for a longer time compared to other `IF NOT EXISTS` statements, which terminate early.
+
 Create compound index `gy_idx` on `genre` and `year` columns:
 
 ```sql
