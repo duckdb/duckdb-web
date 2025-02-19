@@ -63,18 +63,6 @@ CREATE TABLE ontime AS
     FROM 'flights.csv';
 ```
 
-Write the result of a query to a CSV file.
-
-```sql
-COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER, DELIMITER '|');
-```
-
-If we serialize the entire table, we can simply refer to it with its name.
-
-```sql
-COPY ontime TO 'flights.csv' WITH (HEADER, DELIMITER '|');
-```
-
 ## CSV Loading
 
 CSV loading, i.e., importing CSV files to the database, is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a challenge. CSV files come in many different varieties, are often corrupt, and do not have a schema. The CSV reader needs to cope with all of these different situations.
@@ -225,3 +213,7 @@ DuckDB supports reading erroneous CSV files. For details, see the [Reading Fault
 The CSV reader respects the `preserve_insertion_order` [configuration option]({% link docs/configuration/overview.md %}) to [preserve insertion order]({% link docs/sql/dialect/order_preservation.md %}).
 When `true` (the default), the order of the rows in the result set returned by the CSV reader is the same as the order of the corresponding lines read from the file(s).
 When `false`, there is no guarantee that the order is preserved.
+
+## Writing CSV Files
+
+DuckDB can write CSV files using the [`COPY ... TO` statement]({% link docs/sql/statements/copy.md %}#copy--to).
