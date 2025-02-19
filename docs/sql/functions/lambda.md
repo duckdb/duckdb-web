@@ -270,3 +270,16 @@ SELECT list_reduce(['DuckDB', 'is', 'awesome'], (acc, x) -> concat(acc, ' ', x))
 ```text
 DuckDB is awesome
 ```
+
+## Limitations
+
+Subqueries in lambda expressions are not supported. For example:
+
+```sql
+SELECT list_apply([1, 2, 3], x -> (SELECT 42) + x);
+```
+
+```console
+Binder Error:
+subqueries in lambda expressions are not supported
+```
