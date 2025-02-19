@@ -32,7 +32,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 
 | Name | Description |
 |:--|:-------|
-| [`current_date`](#current_date) | Current date (at start of current transaction) in UTC. |
+| [`current_date`](#current_date) | Current date (at start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
 | [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date. |
 | [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the dates. |
 | [`date_part(part, date)`](#date_partpart-date) | Get the [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
@@ -60,7 +60,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/sql/fu
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current date (at start of current transaction) in UTC. |
+| **Description** | Current date (at start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
 | **Example** | `current_date` |
 | **Result** | `2022-10-08` |
 

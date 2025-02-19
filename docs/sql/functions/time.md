@@ -22,7 +22,7 @@ The table below shows the available scalar functions for `TIME` types.
 
 | Name | Description |
 |:--|:-------|
-| [`current_time`](#current_time) | Current time (start of current transaction) in UTC. |
+| [`current_time`](#current_time) | Current time (start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
 | [`date_diff(part, starttime, endtime)`](#date_diffpart-starttime-endtime) | The number of [partition]({% link docs/sql/functions/datepart.md %}) boundaries between the times. |
 | [`date_part(part, time)`](#date_partpart-time) | Get [subfield]({% link docs/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, starttime, endtime)`](#date_subpart-starttime-endtime) | The number of complete [partitions]({% link docs/sql/functions/datepart.md %}) between the times. |
@@ -39,7 +39,7 @@ The only [date parts]({% link docs/sql/functions/datepart.md %}) that are define
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current time (start of current transaction) in UTC. Note that parentheses should be omitted. |
+| **Description** | Current time (start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
 | **Example** | `current_time` |
 | **Result** | `10:31:58.578` |
 | **Alias** | `get_current_time()` |
