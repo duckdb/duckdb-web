@@ -237,7 +237,6 @@ SELECT
 FROM 'https://raw.githubusercontent.com/vlad-saling/star-trek-ipsum/master/src/content/content.json';
 ```
 
-
 |                                                                            starship                                                                            |
 |:---|
 | USS Farragut - NCC-1647 - Ship on which James Kirk served as a phaser station operator. Attacked by the Dikironium Cloud Creature, killing half the crew. ad.  |

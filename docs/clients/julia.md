@@ -49,7 +49,7 @@ Some SQL statements, such as PIVOT and IMPORT DATABASE are executed as multiple 
 
 ## Scanning DataFrames
 
-The DuckDB Julia package also provides support for querying Julia DataFrames. Note that the DataFrames are directly read by DuckDB - they are not inserted or copied into the database itself.
+The DuckDB Julia package also provides support for querying Julia DataFrames. Note that the DataFrames are directly read by DuckDB – they are not inserted or copied into the database itself.
 
 If you wish to load data from a DataFrame into a DuckDB table you can run a `CREATE TABLE ... AS` or `INSERT INTO` query.
 

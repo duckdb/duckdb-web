@@ -434,7 +434,6 @@ CREATE OR REPLACE TABLE probe AS (
 
 The `build` table looks like this:
 
-
 | k |          t          | v |
 |---|---------------------|---|
 | 0 | 2001-01-01 00:00:00 | 0 |
@@ -444,7 +443,6 @@ The `build` table looks like this:
 | ... | ... | ... |
 
 and the probe table looks like this (with only even values for k):
-
 
 | k |          t          |
 |---|---------------------|
