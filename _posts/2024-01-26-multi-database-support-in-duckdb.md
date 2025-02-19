@@ -37,7 +37,7 @@ The [`ATTACH` statement]({% link docs/sql/statements/attach.md %}) can be used t
 For example, using the SQLite extension, we can open [a SQLite database file](https://github.com/duckdb/duckdb-sqlite/raw/main/data/db/sakila.db) and query it as we would query a DuckDB database.
 
 ```sql
-ATTACH 'sakila.db' AS sakila (TYPE sqlite);
+ATTACH 'sakila.db' AS sakila (TYPE SQLITE);
 SELECT title, release_year, length FROM sakila.film LIMIT 5;
 ```
 

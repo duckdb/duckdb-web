@@ -84,7 +84,7 @@ See the [documentation for more information]({% link docs/sql/statements/attach.
 **SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/duckdb-sqlite) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
-ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
+ATTACH 'sqlite_file.db' AS sqlite (TYPE SQLITE);
 CREATE TABLE sqlite.tbl (i INTEGER);
 INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;
