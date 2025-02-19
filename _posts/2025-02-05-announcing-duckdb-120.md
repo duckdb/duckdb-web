@@ -80,7 +80,7 @@ COPY FROM DATABASE file1 TO converted_file;
 After a long while, DuckDB is finally able to add a primary key to an existing table 🎉. So it is now possible to run this:
 
 ```sql
-CREATE TABLE tbl(id INTEGER);
+CREATE TABLE tbl (id INTEGER);
 INSERT INTO tbl VALUES (42);
 ALTER TABLE tbl ADD PRIMARY KEY (id);
 ```
@@ -211,7 +211,7 @@ Credit for this idea goes to [Michael Toy](https://www.linkedin.com/in/michael-t
 DuckDB now supports the `RENAME` clause in `SELECT`. This allows renaming fields emitted by the [`*` expression]({% link docs/sql/expressions/star.md %}):
 
 ```sql
-CREATE TABLE integers(col1 INT, col2 INT);
+CREATE TABLE integers (col1 INTEGER, col2 INTEGER);
 INSERT INTO integers VALUES (42, 84);
 SELECT * RENAME (col1 AS new_col1) FROM integers;
 ```
@@ -219,7 +219,7 @@ SELECT * RENAME (col1 AS new_col1) FROM integers;
 [**Star `LIKE`**.](https://github.com/duckdb/duckdb/pull/14662) The `LIKE` and `SIMILAR TO` clauses can now be used on `*` expressions as a short-hand for the `COLUMNS` syntax.
 
 ```sql
-CREATE TABLE key_val(key VARCHAR, val1 INT, val2 INT);
+CREATE TABLE key_val (key VARCHAR, val1 INTEGER, val2 INTEGER);
 INSERT INTO key_val VALUES ('v', 42, 84);
 SELECT * LIKE 'val%' FROM key_val;
 ```

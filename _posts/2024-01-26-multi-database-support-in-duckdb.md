@@ -40,6 +40,7 @@ For example, using the SQLite extension, we can open [a SQLite database file](ht
 ATTACH 'sakila.db' AS sakila (TYPE sqlite);
 SELECT title, release_year, length FROM sakila.film LIMIT 5;
 ```
+
 ```text
 ┌──────────────────┬──────────────┬────────┐
 │      title       │ release_year │ length │
@@ -59,6 +60,7 @@ The `USE` command switches the main database.
 USE sakila;
 SELECT first_name, last_name FROM actor LIMIT 5;
 ```
+
 ```text
 ┌────────────┬──────────────┐
 │ first_name │  last_name   │
@@ -85,6 +87,7 @@ The `duckdb_databases` table contains a list of all attached databases and their
 ```sql
 SELECT database_name, path, type FROM duckdb_databases;
 ```
+
 ```text
 ┌───────────────┬───────────┬─────────┐
 │ database_name │   path    │  type   │
@@ -121,6 +124,7 @@ JOIN sqlite.film_actor ON (film.film_id = film_actor.film_id)
 JOIN postgres.actor ON (actor.actor_id = film_actor.actor_id)
 WHERE title = 'ACE GOLDFINGER';
 ```
+
 ```text
 ┌────────────┬───────────┐
 │ first_name │ last_name │
@@ -176,6 +180,7 @@ BEGIN;
 TRUNCATE film;
 SELECT title, release_year, length FROM film;
 ```
+
 ```text
 ┌─────────┬──────────────┬────────┐
 │  title  │ release_year │ length │
@@ -184,10 +189,12 @@ SELECT title, release_year, length FROM film;
 │             0 rows              │
 └─────────────────────────────────┘
 ```
+
 ```sql
 ROLLBACK;
 SELECT title, release_year, length FROM film LIMIT 5;
 ```
+
 ```text
 ┌──────────────────┬──────────────┬────────┐
 │      title       │ release_year │ length │
@@ -213,9 +220,10 @@ For that reason, it is currently not supported to **write** to multiple attached
 
 ```sql
 BEGIN;
-CREATE TABLE postgres.new_table(i INTEGER);
-CREATE TABLE mysql.new_table(i INTEGER);
+CREATE TABLE postgres.new_table (i INTEGER);
+CREATE TABLE mysql.new_table (i INTEGER);
 ```
+
 ```console
 Error: Attempting to write to database "mysql" in a transaction that has
 already modified database "postgres" – a single transaction can only write

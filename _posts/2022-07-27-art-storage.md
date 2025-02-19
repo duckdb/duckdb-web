@@ -135,13 +135,13 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
 1. Data Constraints. Primary key, Foreign Keys, and Unique constraints are all maintained by an ART Index. When inserting data in a tuple with a constraint, this will effectively try to perform an insertion in the ART index and fail if the tuple already exists.
 
    ```sql
-   CREATE TABLE integers(i INTEGER PRIMARY KEY);
+   CREATE TABLE integers (i INTEGER PRIMARY KEY);
    -- Insert unique values into ART
    INSERT INTO integers VALUES (3), (2);
    -- Insert conflicting value in ART will fail
    INSERT INTO integers VALUES (3);
 
-   CREATE TABLE fk_integers(j INTEGER, FOREIGN KEY (j) REFERENCES integers(i));
+   CREATE TABLE fk_integers (j INTEGER, FOREIGN KEY (j) REFERENCES integers(i));
    -- This insert works normally
    INSERT INTO fk_integers VALUES (2), (3);
    -- This fails after checking the ART in integers
@@ -151,7 +151,7 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
 2. Range Queries. Highly selective range queries on indexed columns will also use the ART index underneath.
 
    ```sql
-   CREATE TABLE integers(i INTEGER PRIMARY KEY);
+   CREATE TABLE integers (i INTEGER PRIMARY KEY);
    -- Insert unique values into ART
    INSERT INTO integers VALUES (3), (2), (1), (8) , (10);
    -- Range queries (if highly selective) will also use the ART index
@@ -164,8 +164,8 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
    -- Optionally you can always force index joins with the following pragma
    PRAGMA force_index_join;
 
-   CREATE TABLE t1(i INTEGER PRIMARY KEY);
-   CREATE TABLE t2(i INTEGER PRIMARY KEY);
+   CREATE TABLE t1 (i INTEGER PRIMARY KEY);
+   CREATE TABLE t2 (i INTEGER PRIMARY KEY);
    -- Insert unique values into ART
    INSERT INTO t1 VALUES (3), (2), (1), (8), (10);
    INSERT INTO t2 VALUES (3), (2), (1), (8), (10);
@@ -176,7 +176,7 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
 4. Indexes over expressions. ART indexes can also be used to quickly look up expressions.
 
    ```sql
-   CREATE TABLE integers(i INTEGER, j INTEGER);
+   CREATE TABLE integers (i INTEGER, j INTEGER);
 
    INSERT INTO integers VALUES (1, 1), (2, 2), (3, 3);
 

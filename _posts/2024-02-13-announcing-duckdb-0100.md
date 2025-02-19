@@ -206,7 +206,7 @@ Furthermore, many optimizations have been done that make running queries over CS
 **[Fixed-Length Arrays](https://github.com/duckdb/duckdb/pull/8983).** This release introduces the fixed-length array type. Fixed-length arrays are similar to lists, however, every value must have the same fixed number of elements in them.
 
 ```sql
-CREATE TABLE vectors(v DOUBLE[3]);
+CREATE TABLE vectors (v DOUBLE[3]);
 INSERT INTO vectors VALUES ([1, 2, 3]);
 ```
 
