@@ -10,26 +10,26 @@ DuckDB has two built-in index types. Indexes can also be defined via [extensions
 
 ### Min-Max Index (Zonemap)
 
-A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as zonemap or block range index) is automatically created for columns of all [general-purpose data types]({% link docs/sql/data_types/overview.md %}).
+A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as zonemap or block range index) is _automatically created_ for columns of all [general-purpose data types]({% link docs/sql/data_types/overview.md %}).
 
 ### Adaptive Radix Tree (ART)
 
-An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. ART indexes are automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
+An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. ART indexes can be created manually using `CREATE INDEX` clause and they are automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint.
 
 > Warning ART indexes must currently be able to fit in memory during index creation. Avoid creating ART indexes if the index does not fit in memory during index creation.
 
 ### Indexes Defined by Extensions
 
-[Starting with version 1.1.0]({% post_url 2024-09-09-announcing-duckdb-110 %}#r-tree), DuckDB supports [R-trees for spatial indexing]({% link docs/extensions/spatial/r-tree_indexes.md %}) via the `spatial` extension.
+DuckDB supports [R-trees for spatial indexing]({% link docs/extensions/spatial/r-tree_indexes.md %}) via the `spatial` extension.
 
 ## Persistence
 
 Both min-max indexes and ART indexes are persisted on disk.
 
-## `CREATE INDEX` and `DROP INDEX`
+## `CREATE INDEX` and `DROP INDEX` Statements
 
-To create an index, use the [`CREATE INDEX` statement]({% link docs/sql/statements/create_index.md %}#create-index).
-To drop an index, use the [`DROP INDEX` statement]({% link docs/sql/statements/create_index.md %}#drop-index).
+To create an [ART index](#adaptive-radix-tree-art), use the [`CREATE INDEX` statement]({% link docs/sql/statements/create_index.md %}#create-index).
+To drop an [ART index](#adaptive-radix-tree-art), use the [`DROP INDEX` statement]({% link docs/sql/statements/create_index.md %}#drop-index).
 
 ## Limitations of ART Indexes
 
