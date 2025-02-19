@@ -97,7 +97,7 @@ Because Excel itself only really stores numbers or strings in cells, and dont en
 
 If the `all_varchar` option is set to `true`, none of the above applies and all cells are read as `VARCHAR`.
 
-When no types are specified explicitly, (e.g., when using the `read_xlsx` function instead of `COPY TO ... FROM '<file>.xlsx'`)
+When no types are specified explicitly, (e.g., when using the `read_xlsx` function instead of `COPY TO ... FROM '⟨file⟩.xlsx'`)
 the types of the resulting columns are inferred based on the first "data" row in the sheet, that is:
 
 * If no explicit range is given
@@ -109,7 +109,7 @@ the types of the resulting columns are inferred based on the first "data" row in
 
 This can sometimes lead to issues if the first "data row" is not representative of the rest of the sheet (e.g., it contains empty cells) in which case the `ignore_errors` or `empty_as_varchar` options can be used to work around this.
 
-However, when the `COPY TO ... FROM '<file>.xlsx'` syntax is used, no type inference is done and the types of the resulting columns are determined by the types of the columns in the table being copied to. All cells will simply be converted by casting from `DOUBLE` or `VARCHAR` to the target column type.
+However, when the `COPY TO ... FROM '⟨file⟩.xlsx'` syntax is used, no type inference is done and the types of the resulting columns are determined by the types of the columns in the table being copied to. All cells will simply be converted by casting from `DOUBLE` or `VARCHAR` to the target column type.
 
 ## Writing XLSX Files
 
