@@ -46,12 +46,12 @@ The CI will also run this check, causing it to fail if this check fails.
 
 ## Extension Selection
 
-[Core DuckDB extensions]({% link docs/extensions/core_extensions.md %}) are the ones maintaned by the DuckDB team. These are hosted in the `duckdb` GitHub organization and are served by the `core` extension repository.
+[Core DuckDB extensions]({% link docs/extensions/core_extensions.md %}) are the ones maintained by the DuckDB team. These are hosted in the `duckdb` GitHub organization and are served by the `core` extension repository.
 
-Core extensions can be built as part of DuckDB via the `CORE_EXTENSION` flag, then listing the names of the extensions that are to be built.
+Core extensions can be built as part of DuckDB via the `CORE_EXTENSIONS` flag, then listing the names of the extensions that are to be built.
 
 ```bash
-CORE_EXTENSION='tpcd;httpfs;fts;json;parquet' make
+CORE_EXTENSIONS='tpch;httpfs;fts;json;parquet' make
 ```
 
 More on this topic at [building duckdb extensions]({% link docs/dev/building/building_extensions.md %}).
