@@ -206,7 +206,7 @@ aggregates, this clause is parsed and ignored.
 
 ```sql
 -- Compute the modal value up to each time, breaking ties in favour of the most recent value.
-SELECT MODE(value ORDER BY time DESC) OVER (ORDER BY time) FROM sales;
+SELECT mode(value ORDER BY time DESC) OVER (ORDER BY time) FROM sales;
 ```
 
 The SQL standard does not provide for using `ORDER BY` with general-purpose window functions, but we have extended all
@@ -239,9 +239,9 @@ and then computing a new column for each row as a function of the nearby values.
 Some window functions depend only on the partition boundary and the ordering,
 but a few (including all the aggregates) also use a *frame*.
 Frames are specified as a number of rows on either side (*preceding* or *following*) of the *current row*.
-The distance can be specified as a number of *rows*, 
-as a *range* of values using the partition's ordering value and a distance, 
-or as a number of *groups* (sets of rows with the same sort value). 
+The distance can be specified as a number of *rows*,
+as a *range* of values using the partition's ordering value and a distance,
+or as a number of *groups* (sets of rows with the same sort value).
 
 The full syntax is shown in the diagram at the top of the page,
 and this diagram visually illustrates computation environment:
