@@ -222,17 +222,17 @@ COPY metrics TO '⟨s3_path⟩/results/results.csv';
 ```
 
 When using a 4 GB instance and an older version of DuckDB (1.0.0), I am able to replicate the out of memory errors that Daniel encountered.
-If I upgrade to DuckDB 1.1.3, the queries run successfully! However, they required about 5.8 minutes to complete. 
+If I upgrade to DuckDB 1.1.3, the queries run successfully! However, they required about 5.8 minutes to complete.
 
-As I dug more deeply into the dataset, I discovered that the columns selected in the benchmark query are present in each file. 
+As I dug more deeply into the dataset, I discovered that the columns selected in the benchmark query are present in each file.
 In prior versions of DuckDB, just having files with different sets of columns would require the `union_by_name = True` flag, even if the inconsistent or new columns were not used in the query.
 However, between the original post and version 1.1.3, DuckDB added the capability to do projection pushdown into CSV files!
-This means that only the columns used in the query are actually read from the CSV, not all columns. 
-As a result, we can actually remove the `union_by_name = true` for the benchmark query and run successfully. 
-This requires less overhead (since we do not need to invest time checking if all schemas match - we can rely on the first schema that is read). 
-The simplified query runs in only 4 minutes, but it fails to exercise the capability we discussed - handling schema evolution!
+This means that only the columns used in the query are actually read from the CSV, not all columns.
+As a result, we can actually remove the `union_by_name = true` for the benchmark query and run successfully.
+This requires less overhead (since we do not need to invest time checking if all schemas match – we can rely on the first schema that is read).
+The simplified query runs in only 4 minutes, but it fails to exercise the capability we discussed – handling schema evolution!
 
-To exercise the `BY NAME` capability, we add a column to the SQL query that is present only in some of the files. 
+To exercise the `BY NAME` capability, we add a column to the SQL query that is present only in some of the files.
 
 ```sql
 CREATE OR REPLACE VIEW metrics AS 

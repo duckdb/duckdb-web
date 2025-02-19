@@ -40,7 +40,7 @@ DELETE FROM t2
 endloop
 ```
 
-One caveat with `concurrentloop` is that results are often unpredictable - as multiple clients can hammer the database at the same time we might end up with (expected) transaction conflicts. `statement maybe` can be used to deal with these situations. `statement maybe` essentially accepts both a success, and a failure with a specific error message.
+One caveat with `concurrentloop` is that results are often unpredictable – as multiple clients can hammer the database at the same time we might end up with (expected) transaction conflicts. `statement maybe` can be used to deal with these situations. `statement maybe` essentially accepts both a success, and a failure with a specific error message.
 
 ```sql
 concurrentloop i 1 10

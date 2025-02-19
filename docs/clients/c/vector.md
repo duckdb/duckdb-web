@@ -111,7 +111,7 @@ Enums are stored as unsigned integer values internally. The exact native type de
 
 The `duckdb_enum_internal_type` can be used to obtain the internal type of the enum.
 
-In order to obtain the actual string value of the enum, the `duckdb_enum_dictionary_value` function must be used to obtain the enum value that corresponds to the given dictionary entry. Note that the enum dictionary is the same for the entire column - and so only needs to be constructed once.
+In order to obtain the actual string value of the enum, the `duckdb_enum_dictionary_value` function must be used to obtain the enum value that corresponds to the given dictionary entry. Note that the enum dictionary is the same for the entire column – and so only needs to be constructed once.
 
 ### Structs
 
