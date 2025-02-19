@@ -166,7 +166,7 @@ title: List Functions
 
 | **Description** | Compute the cosine distance between two lists. Equivalent to `1.0 - list_cosine_similarity` |
 | **Example** | `list_cosine_distance([1, 2, 3], [1, 2, 5])` |
-| **Result** | `0.007416606` |
+| **Result** | `0.024099927051466796` |
 
 #### `list_distance(list1, list2)`
 
