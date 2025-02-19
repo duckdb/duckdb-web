@@ -142,6 +142,7 @@ CREATE TABLE obs (id INTEGER, val1 INTEGER, val2 INTEGER);
 INSERT INTO obs VALUES (1, 10, 100), (2, 20, NULL), (3, NULL, 300);
 SELECT min(COLUMNS(*)), count(*) FROM obs;
 ```
+
 ```text
 ┌─────────────┬───────────────┬───────────────┬──────────────┐
 │ min(obs.id) │ min(obs.val1) │ min(obs.val2) │ count_star() │
@@ -155,6 +156,7 @@ The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE`
 ```sql
 SELECT COLUMNS('val[0-9]+') FROM obs;
 ```
+
 ```text
 ┌──────┬──────┐
 │ val1 │ val2 │
@@ -170,6 +172,7 @@ SELECT COLUMNS('val[0-9]+') FROM obs;
 ```sql
 SELECT [x + 1 for x in [1, 2, 3]] AS l;
 ```
+
 ```text
 ┌───────────┐
 │     l     │
@@ -271,6 +274,7 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 ```sql
 COPY lineitem TO 'lineitem-big.parquet';
 ```
+
 ```text
    32% ▕███████████████████▏                                        ▏ 
 ```

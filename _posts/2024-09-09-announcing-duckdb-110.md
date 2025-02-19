@@ -85,6 +85,7 @@ The `scalar_subquery_error_on_multiple_rows` setting can be set to `false` to re
 SET scalar_subquery_error_on_multiple_rows = false;
 SELECT (SELECT unnest(range(10))) AS result;
 ```
+
 ```text
 ┌────────┐
 │ result │
