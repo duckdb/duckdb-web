@@ -279,7 +279,7 @@ The functions below are difficult to categorize into specific function types and
 <div class="nostroke_table"></div>
 
 | **Description** | Table function that returns the table given in `tbl_name`. |
-| **Example** | `query('t1')` |
+| **Example** | `query_table('t1')` |
 | **Result** | (the rows of `t1`) |
 
 #### `query_table(tbl_names, [by_name])`
@@ -287,7 +287,7 @@ The functions below are difficult to categorize into specific function types and
 <div class="nostroke_table"></div>
 
 | **Description** | Table function that returns the union of tables given in `tbl_names`. If the optional `by_name` parameter is set to `true`, it uses [`UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name) semantics. |
-| **Example** | `query(['t1', 't2'])` |
+| **Example** | `query_table(['t1', 't2'])` |
 | **Result** | (the union of the two tables) |
 
 #### `read_blob(source)`
