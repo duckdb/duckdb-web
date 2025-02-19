@@ -6,7 +6,7 @@ github_repository: https://github.com/duckdb/duckdb-excel
 
 The `excel` extension provides functions to format numbers per Excel's formatting rules by wrapping the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), but as of DuckDB 1.2 also provides functionality to read and write Excel (`.xlsx`) files. However, `.xls` files are not supported.
 
-Previously, reading and writing Excel files was handled through the [`spatial` extension]({% link docs/extensions/spatial/overview.md %}), which coincidentally included support for xlsx files through one of its dependencies, but this capability may be removed from the spatial extension in the future. Additionally, the `excel` extension is more efficient and provides more control over the import/export process. See the [Excel Import]({% link docs/guides/file_formats/excel_import.md %}) and [Excel Export]({% link docs/guides/file_formats/excel_export.md %}) pages for instructions.
+Previously, reading and writing Excel files was handled through the [`spatial` extension]({% link docs/extensions/spatial/overview.md %}), which coincidentally included support for XLSX files through one of its dependencies, but this capability may be removed from the spatial extension in the future. Additionally, the `excel` extension is more efficient and provides more control over the import/export process. See the [Excel Import]({% link docs/guides/file_formats/excel_import.md %}) and [Excel Export]({% link docs/guides/file_formats/excel_export.md %}) pages for instructions.
 
 ## Installing and Loading
 
@@ -45,10 +45,11 @@ SELECT excel_text(1_234_567.897, 'h AM/PM') AS timestamp;
 
 ## Reading XLSX Files
 
-Reading a `.xlsx` file is as simple as just `SELECT`:ing from it immediately, e.g.:
+Reading a `.xlsx` file is as simple as just `SELECT`ing from it immediately, e.g.:
 
 ```sql
-SELECT * FROM 'test.xlsx';
+SELECT *
+FROM 'test.xlsx';
 ```
 
 |   a |   b |
@@ -69,7 +70,8 @@ However, if you want to set additional options to control the import process, yo
 | `empty_as_varchar` | `BOOLEAN` | `false`                  | Whether to treat empty cells as `VARCHAR` instead of `DOUBLE` when trying to automatically infer column types.                                                                                                                                                                                        |
 
 ```sql
-SELECT * FROM read_xlsx('test.xlsx', header = 'true');
+SELECT *
+FROM read_xlsx('test.xlsx', header = true);
 ```
 
 |   a |   b |
@@ -80,8 +82,8 @@ SELECT * FROM read_xlsx('test.xlsx', header = 'true');
 Alternatively, the `COPY` statement with the `XLSX` format option can be used to import an Excel file into an existing table, in which case the types of the columns in the target table will be used to coerce the types of the cells in the Excel file.
 
 ```sql
-CREATE TABLE test(a DOUBLE, b DOUBLE);
-COPY test FROM 'test.xlsx' WITH (FORMAT 'xlsx', header 'true');
+CREATE TABLE test (a DOUBLE, b DOUBLE);
+COPY test FROM 'test.xlsx' WITH (FORMAT 'xlsx', HEADER);
 SELECT * FROM test;
 ```
 
@@ -124,7 +126,9 @@ Writing `.xlsx` files is supported using the `COPY` statement with `XLSX` given 
 These are passed as options to the `COPY` statement after the `FORMAT`, e.g.:
 
 ```sql
-CREATE TABLE test AS SELECT * FROM (VALUES (1, 2), (3, 4)) AS t(a, b);
+CREATE TABLE test AS
+    SELECT *
+    FROM (VALUES (1, 2), (3, 4)) AS t(a, b);
 COPY test TO 'test.xlsx' WITH (FORMAT 'xlsx', HEADER true);
 ```
 

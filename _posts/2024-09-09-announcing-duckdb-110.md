@@ -153,7 +153,7 @@ This release expands this capability by [allowing the `COLUMNS` expression to be
 This is especially useful when combined with nested functions like `struct_pack` or `list_value`.
 
 ```sql
-CREATE TABLE many_measurements(
+CREATE TABLE many_measurements (
     id INTEGER, m1 INTEGER, m2 INTEGER, m3 INTEGER
 );
 INSERT INTO many_measurements VALUES (1, 10, 100, 20);
@@ -178,7 +178,7 @@ The [`query` and `query_table` functions](https://github.com/duckdb/duckdb/pull/
 These functions are conceptually simple, but enable powerful and more dynamic SQL. For example, they allow passing in a table name as a prepared statement parameter:
 
 ```sql
-CREATE TABLE my_table(i INTEGER);
+CREATE TABLE my_table (i INTEGER);
 INSERT INTO my_table VALUES (42);
 
 PREPARE select_from_table AS SELECT * FROM query_table($1);

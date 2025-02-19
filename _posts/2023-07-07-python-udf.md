@@ -17,7 +17,7 @@ User Defined Functions (UDFs) enable users to extend the functionality of a Data
 
 2) **Easy Use.** UDFs can be seamlessly integrated into SQL queries, allowing users to leverage the power of SQL to call the functions. This eliminates the need for passing data through a separate database connector and executing external code. The functions can be utilized in various SQL contexts (e.g., subqueries, join conditions).
 
-3) **Safety.** The sensitive data never leaves the DBMS process. 
+3) **Safety.** The sensitive data never leaves the DBMS process.
 
 There are two main reasons users often refrain from implementing UDFs. 1) There are security concerns associated with UDFs. Since UDFs are custom code created by users and executed within the DBMS process, there is a potential risk of crashing the server. However, when it comes to DuckDB, an embedded database, this concern is mitigated as each analyst runs their own DuckDB process separately. Therefore, the impact on server stability is not a significant worry. 2) The difficulty of implementation is a common deterrent for users. High-Performance UDFs are typically only supported in low-level languages. UDFs in higher-level languages like Python incur significant performance costs. Consequently many users cannot quickly implement their UDFs without investing a significant amount of time in learning a low-level language and understanding the internal details of the DBMS.
 
@@ -73,7 +73,7 @@ That's it, the function is then registered and ready to be called through SQL.
 
 ```python
 # Let's create an example countries table with the countries we are interested in using
-con.execute("CREATE TABLE countries(country VARCHAR)")
+con.execute("CREATE TABLE countries (country VARCHAR)")
 con.execute("INSERT INTO countries VALUES ('Brazil'), ('Germany'), ('Italy'), ('Argentina'), ('Uruguay'), ('France'), ('England'), ('Spain'), ('Netherlands')")
 # We can simply call the function through SQL, and even use the function return to eliminate the countries that never won a world cup
 con.sql("SELECT country, wc_titles(country) AS world_cups FROM countries").fetchall()

@@ -136,7 +136,7 @@ Alternatively, in the CLI client, we can run the `.schema` [dot command]({% link
 This will return the schema of the table.
 
 ```sql
-CREATE TABLE example(s VARCHAR, x DOUBLE);
+CREATE TABLE example (s VARCHAR, x DOUBLE);
 ```
 
 After editing the table’s name (e.g., `example` to `tbl`), this query can be used to create a new table with the same schema.

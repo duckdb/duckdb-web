@@ -47,7 +47,7 @@ COPY (SELECT 42 AS a) TO 'test1.csv';
 COPY (SELECT 84 AS a) TO 'test2.csv';
 
 -- add a list of CSV files to a table
-CREATE TABLE csv_files(file VARCHAR);
+CREATE TABLE csv_files (file VARCHAR);
 INSERT INTO csv_files VALUES ('test1.csv'), ('test2.csv');
 
 -- initialize a variable with the list of csv files

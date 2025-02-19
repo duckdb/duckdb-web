@@ -38,7 +38,7 @@ Below is a summary of those new features with examples, starting with a change i
 [**Struct Auto-Casting**](https://github.com/duckdb/duckdb/pull/8942). Previously the names of struct entries were ignored when determining auto-casting rules. As a result, struct field names could be silently renamed. Starting with this release, this will result in an error instead.
 
 ```sql
-CREATE TABLE structs(s STRUCT(i INTEGER));
+CREATE TABLE structs (s STRUCT(i INTEGER));
 INSERT INTO structs VALUES ({'k': 42});
 ```
 
@@ -147,7 +147,7 @@ FROM tripdata;
 **Index Storage Improvements ([#7930](https://github.com/duckdb/duckdb/pull/7930), [#8112](https://github.com/duckdb/duckdb/pull/8112), [#8437](https://github.com/duckdb/duckdb/pull/8437), [#8703](https://github.com/duckdb/duckdb/pull/8703))**. Many improvements have been made to both the in-memory footprint, and the on-disk footprint of ART indexes. In particular for indexes created to maintain `PRIMARY KEY`, `UNIQUE` or `FOREIGN KEY` constraints the storage and in-memory footprint is drastically reduced.
 
 ```sql
-CREATE TABLE integers(i INTEGER PRIMARY KEY);
+CREATE TABLE integers (i INTEGER PRIMARY KEY);
 INSERT INTO integers FROM range(10000000);
 ```
 

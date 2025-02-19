@@ -55,7 +55,7 @@ SELECT 42 / 5, 42 // 5;
 [**Default Null Sort Order**](https://github.com/duckdb/duckdb/pull/7174). The default null sort order is changed from `NULLS FIRST` to `NULLS LAST`. The reason for this change is that `NULLS LAST` sort-order is more intuitive when combined with `LIMIT`. With `NULLS FIRST`, Top-N queries always return the `NULL` values first. With `NULLS LAST`, the actual Top-N values are returned instead.
 
 ```sql
-CREATE TABLE bigdata(col INTEGER);
+CREATE TABLE bigdata (col INTEGER);
 INSERT INTO bigdata VALUES (NULL), (42), (NULL), (43);
 FROM bigdata ORDER BY col DESC LIMIT 3;
 ```
@@ -71,7 +71,7 @@ FROM bigdata ORDER BY col DESC LIMIT 3;
 [**Pivot and Unpivot**](https://github.com/duckdb/duckdb/pull/6387). There are many shapes and sizes of data, and we do not always have control over the process in which data is generated. While SQL is well-suited for reshaping datasets, turning columns into rows or rows into columns is tedious in vanilla SQL. With this release, DuckDB introduces the `PIVOT` and `UNPIVOT` statements that allow reshaping data sets so that rows are turned into columns or vice versa. A key advantage of DuckDB's syntax is that the column names to pivot or unpivot can be automatically deduced. Here is a short example:
 
 ```sql
-CREATE TABLE sales(year INTEGER, amount INTEGER);
+CREATE TABLE sales (year INTEGER, amount INTEGER);
 INSERT INTO sales VALUES (2021, 42), (2022, 100), (2021, 42);
 PIVOT sales ON year USING sum(amount);
 ```
@@ -82,13 +82,11 @@ PIVOT sales ON year USING sum(amount);
 
 The [documentation contains more examples]({% link docs/sql/statements/pivot.md %}).
 
-
 [**ASOF Joins for Time Series**](https://github.com/duckdb/duckdb/pull/6719). When joining time series data with background fact tables, the timestamps often do not exactly match. In this case it is often desirable to join rows so that the timestamp is joined with the *nearest timestamp*. The ASOF join can be used for this purpose – it performs a fuzzy join to find the closest join partner for each row instead of requiring an exact match.
 
-
 ```sql
-CREATE TABLE a(ts TIMESTAMP);
-CREATE TABLE b(ts TIMESTAMP);
+CREATE TABLE a (ts TIMESTAMP);
+CREATE TABLE b (ts TIMESTAMP);
 INSERT INTO a VALUES (TIMESTAMP '2023-05-15 10:31:00'), (TIMESTAMP '2023-05-15 11:31:00');
 INSERT INTO b VALUES (TIMESTAMP '2023-05-15 10:30:00'), (TIMESTAMP '2023-05-15 11:30:00');
 

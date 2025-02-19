@@ -488,7 +488,7 @@ DuckDB allows self-joins for all types of joins.
 Note that tables need to be aliased, using the same table name without aliases will result in an error:
 
 ```sql
-CREATE TABLE t(x int);
+CREATE TABLE t (x int);
 SELECT * FROM t JOIN t USING(x);
 ```
 

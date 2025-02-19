@@ -22,7 +22,7 @@ Since [version 0.3.2](https://github.com/duckdb/duckdb/releases/tag/v0.3.2), we 
 
 ```sql
 INSTALL spatial; -- once
-LOAD    spatial; -- on each use
+LOAD spatial;    -- on each use
 ```
 
 What happens behind the scenes is that DuckDB downloads an extension binary suitable to the current operating system and processor architecture (e.g., macOS on ARM64) and stores it in the `~/.duckdb` folder. On each `LOAD`, this file is loaded into the running DuckDB instance, and things happily continue from there. Of course, for this to work, we compile, sign and host the extensions for a rather large and growing list of processor architecture – operating system combinations. This mechanism is already heavily used, currently, we see around six million extension downloads *each week* with a corresponding data transfer volume of around 40 terabytes!

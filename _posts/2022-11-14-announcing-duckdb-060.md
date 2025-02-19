@@ -102,7 +102,7 @@ SQL is the primary way of interfacing with DuckDB – and DuckDB [tries to have 
 **UNION Type**. This release introduces the [UNION type](https://github.com/duckdb/duckdb/pull/4966), which allows sum types to be stored and queried in DuckDB. For example:
 
 ```sql
-CREATE TABLE messages(u UNION(num INTEGER, error VARCHAR));
+CREATE TABLE messages (u UNION(num INTEGER, error VARCHAR));
 INSERT INTO messages VALUES (42);
 INSERT INTO messages VALUES ('oh my globs');
 SELECT * FROM messages;
@@ -138,7 +138,7 @@ INSERT INTO tbl2 FROM tbl1;
 **COLUMNS Expression**. This release adds support for [the `COLUMNS` expression](https://github.com/duckdb/duckdb/pull/5120), inspired by [the ClickHouse syntax](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression). The `COLUMNS` expression allows you to execute expressions or functions on multiple columns without having to duplicate the full expression.
 
 ```sql
-CREATE TABLE obs(id INTEGER, val1 INTEGER, val2 INTEGER);
+CREATE TABLE obs (id INTEGER, val1 INTEGER, val2 INTEGER);
 INSERT INTO obs VALUES (1, 10, 100), (2, 20, NULL), (3, NULL, 300);
 SELECT min(COLUMNS(*)), count(*) FROM obs;
 ```

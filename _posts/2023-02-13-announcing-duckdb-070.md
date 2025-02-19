@@ -74,7 +74,7 @@ Note that currently the parallel writing is currently limited to non-insertion o
 
 ```sql
 ATTACH 'new_db.db';
-CREATE TABLE new_db.tbl(i INTEGER);
+CREATE TABLE new_db.tbl (i INTEGER);
 INSERT INTO new_db.tbl SELECT * FROM range(1000);
 DETACH new_db;
 ```
@@ -85,7 +85,7 @@ See the [documentation for more information]({% link docs/sql/statements/attach.
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
-CREATE TABLE sqlite.tbl(i INTEGER);
+CREATE TABLE sqlite.tbl (i INTEGER);
 INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;
 ```
@@ -97,7 +97,7 @@ Using this, SQLite database files can be attached, queried and modified as if th
 **Upsert Support.** [Upsert support](https://github.com/duckdb/duckdb/pull/5866) is added with this release using the `ON CONFLICT` clause, as well as the `SQLite` compatible `INSERT OR REPLACE`/`INSERT OR IGNORE` syntax.
 
 ```sql
-CREATE TABLE movies(id INTEGER PRIMARY KEY, name VARCHAR);
+CREATE TABLE movies (id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO movies VALUES (1, 'A New Hope');
 FROM movies;
 ```

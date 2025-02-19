@@ -52,7 +52,7 @@ That is because we have not yet seen that chunk.
 Thus, we throw a constraint violation.
 
 ```sql
-CREATE TABLE my_table (i INT PRIMARY KEY);
+CREATE TABLE my_table (i INTEGER PRIMARY KEY);
 INSERT INTO my_table SELECT range FROM range(3_000);
 UPDATE my_table SET i = i + 1;
 ```
