@@ -219,6 +219,24 @@ To configure the color used to highlight keywords:
 .keywordcode [terminal_code]
 ```
 
+## Shorthands
+
+DuckDB's CLI allows using shorthands for dot commands.
+Once a sequence of characters can unambiguously completed to a dot command or an argument, the CLI (silently) autocompletes them.
+For example:
+
+```text
+.mo ma
+```
+
+Is equivalent to:
+
+```text
+.mode markdown
+```
+
+> Tip Avoid using shorthands in SQL scripts to improve readability and ensure that the scripts and futureproof.
+
 ## Importing Data from CSV
 
 > Deprecated This feature is only included for compatibility reasons and may be removed in the future.
