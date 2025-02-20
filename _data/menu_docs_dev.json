@@ -263,6 +263,10 @@
                   "url": "editing"
                 },
                 {
+                  "page": "Safe Mode",
+                  "url": "safe_mode"
+                },
+                {
                   "page": "Autocomplete",
                   "url": "autocomplete"
                 },

@@ -54,9 +54,9 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.quit`                                  | Exit this program                                                                                                                          |
 | `.read FILE`                             | Read input from `FILE`                                                                                                                     |
 | `.rows`                                  | Row-wise rendering of query results (default)                                                                                              |
+| `.safe_mode`                             | Activates [safe mode]({% link docs/clients/cli/safe_mode.md %})                                                                            |
 | `.schema ?PATTERN?`                      | Show the `CREATE` statements matching `PATTERN`                                                                                            |
 | `.separator COL ?ROW?`                   | Change the column and row separators                                                                                                       |
-| `.sha3sum ...`                           | Compute a SHA3 hash of database content                                                                                                    |
 | `.shell CMD ARGS...`                     | Run `CMD ARGS...` in a system shell                                                                                                        |
 | `.show`                                  | Show the current values for various settings                                                                                               |
 | `.singleline`                            | Set single-line mode                                                                                                                       |
@@ -217,6 +217,24 @@ To configure the color used to highlight keywords:
 ```text
 .keywordcode [terminal_code]
 ```
+
+## Shorthands
+
+DuckDB's CLI allows using shorthands for dot commands.
+Once a sequence of characters can unambiguously completed to a dot command or an argument, the CLI (silently) autocompletes them.
+For example:
+
+```text
+.mo ma
+```
+
+Is equivalent to:
+
+```text
+.mode markdown
+```
+
+> Tip Avoid using shorthands in SQL scripts to improve readability and ensure that the scripts and futureproof.
 
 ## Importing Data from CSV
 

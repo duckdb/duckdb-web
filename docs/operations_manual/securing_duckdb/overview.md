@@ -15,6 +15,19 @@ If you plan to embed DuckDB in your application, please consult the [“Embeddin
 
 If you discover a potential vulnerability, please [report it confidentially via GitHub](https://github.com/duckdb/duckdb/security/advisories/new).
 
+## Safe Mode (CLI)
+
+DuckDB's CLI client supports [“safe mode”]({% link docs/clients/cli/safe_mode.md %}), which prevents DuckDB from accessing external files other than the database file.
+This can be activated via a command line argument or a [dot command]({% link docs/clients/cli/dot_commands.md %}):
+
+```bash
+duckdb -safe ...
+```
+
+```plsql
+.safe_mode
+```
+
 ## Disabling File Access
 
 DuckDB can list directories and read arbitrary files via its CSV parser’s [`read_csv` function]({% link docs/data/csv/overview.md %}) or read text via the [`read_text` function]({% link docs/sql/functions/char.md %}#read_textsource). For example:
