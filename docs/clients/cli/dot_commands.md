@@ -57,7 +57,6 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.safe_mode`                             |
 | `.schema ?PATTERN?`                      | Show the `CREATE` statements matching `PATTERN`                                                                                            |
 | `.separator COL ?ROW?`                   | Change the column and row separators                                                                                                       |
-| `.sha3sum ...`                           | Compute a SHA3 hash of database content                                                                                                    |
 | `.shell CMD ARGS...`                     | Run `CMD ARGS...` in a system shell                                                                                                        |
 | `.show`                                  | Show the current values for various settings                                                                                               |
 | `.singleline`                            | Set single-line mode                                                                                                                       |
