@@ -15,6 +15,10 @@ If you plan to embed DuckDB in your application, please consult the [“Embeddin
 
 If you discover a potential vulnerability, please [report it confidentially via GitHub](https://github.com/duckdb/duckdb/security/advisories/new).
 
+## Safe Mode (CLI)
+
+
+
 ## Disabling File Access
 
 DuckDB can list directories and read arbitrary files via its CSV parser’s [`read_csv` function]({% link docs/data/csv/overview.md %}) or read text via the [`read_text` function]({% link docs/sql/functions/char.md %}#read_textsource). For example:

@@ -54,6 +54,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.quit`                                  | Exit this program                                                                                                                          |
 | `.read FILE`                             | Read input from `FILE`                                                                                                                     |
 | `.rows`                                  | Row-wise rendering of query results (default)                                                                                              |
+| `.safe_mode`                             |
 | `.schema ?PATTERN?`                      | Show the `CREATE` statements matching `PATTERN`                                                                                            |
 | `.separator COL ?ROW?`                   | Change the column and row separators                                                                                                       |
 | `.sha3sum ...`                           | Compute a SHA3 hash of database content                                                                                                    |
