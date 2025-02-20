@@ -8,11 +8,11 @@ excerpt: |
 extension:
   name: pyroscope
   description: DuckDB Pyroscope Extension for Continuous Profiling
-  version: 0.0.1
+  version: 0.0.2
   language: Rust
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64;wasm_threads;wasm_eh;wasm_mvp"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64;wasm_threads;wasm_eh;wasm_mvp;linux_amd64_musl;"
   requires_toolchains: "rust;python3"
   maintainers:
     - lmangani
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-pyroscope
-  ref: 5b727e408b78cd725e6312f1bb8fd2aa84e7f8f8
+  ref: 397556c066614614cf346b0c4fb2d21740c31f29
 
 docs:
   hello_world: |
@@ -31,12 +31,30 @@ docs:
     D SELECT * FROM trace_stop();
     
   extended_description: |
-    The Pyroscope Extension is experimental, use at your own risk!
+    ### Pyroscope Continuous Profiling
+    This experimental community extension adds pyroscope continuous profiling features to DuckDB
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 436
-extension_download_count_pretty: 436
+    #### Grafana
+    Create a `Free` account on [Grafana Cloud](https://grafana.com/auth/sign-up/create-user?pg=prod-cloud&plcmt=hero-btn-1) create a Token for Pyroscope profile sending and use the extension:
+    ```sql
+    ---- Start the tracer to Grafana Cloud Pyroscope
+    D SELECT * FROM trace_start('https://user:token@profiles-prod-xxx.grafana.net');
+    ```
+
+    #### Gigapipe
+    Create a `Free` account on [Gigapipe](https://gigapipe.com) create a Token for Pyroscope profile sending and use the extension:
+    ```sql
+    ---- Start the tracer to Grafana Cloud Pyroscope
+    D SELECT * FROM trace_start('https://user:token@your-account.gigapipe.com');
+    ```
+        
+    ![pyroscope_duckdb_large](https://github.com/user-attachments/assets/74fad3ec-3bc3-4880-be4b-8149c5431115)
+
+
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_pyroscope.png'
 layout: community_extension_doc
 ---
@@ -62,9 +80,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| trace_start   | table         |             |         |         |
-| trace_stop    | table         |             |         |         |
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| trace_start   | table         | NULL        | NULL    | []       |
+| trace_stop    | table         | NULL        | NULL    | []       |
 
 
