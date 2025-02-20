@@ -202,7 +202,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the total number of milliseconds since the epoch. |
-| **Example** | `epoch_ms(timestamp '2021-08-03 11:59:44.123456')` |
+| **Example** | `epoch_ms(TIMESTAMP '2021-08-03 11:59:44.123456')` |
 | **Result** | `1627991984123` |
 
 #### `epoch_ns(timestamp)`
@@ -210,7 +210,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 <div class="nostroke_table"></div>
 
 | **Description** | Return the total number of nanoseconds since the epoch. |
-| **Example** | `epoch_ns(timestamp '2021-08-03 11:59:44.123456')` |
+| **Example** | `epoch_ns(TIMESTAMP '2021-08-03 11:59:44.123456')` |
 | **Result** | `1627991984123456000` |
 
 #### `epoch_us(timestamp)`
@@ -218,7 +218,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the total number of microseconds since the epoch. |
-| **Example** | `epoch_us(timestamp '2021-08-03 11:59:44.123456')` |
+| **Example** | `epoch_us(TIMESTAMP '2021-08-03 11:59:44.123456')` |
 | **Result** | `1627991984123456` |
 
 #### `epoch(timestamp)`

@@ -97,7 +97,7 @@ SELECT
 <div class="monospace_table"></div>
 
 | `(sqrt(2) > '-inf')` | `('nan' > sqrt(2))` |
-|---------------------:|----------------- -: |
+|---------------------:|--------------------:|
 |                 true |                true |
 
 ## Universally Unique Identifiers (`UUID`s)
