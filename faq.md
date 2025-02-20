@@ -381,6 +381,22 @@ Please check the [release calendar]({% link docs/dev/release_calendar.md %}) for
 
 <div class="qa-wrap" markdown="1">
 
+### How frequently are new DuckDB versions released?
+
+<div class="answer" markdown="1">
+
+New feature releases (e.g., v1.2.0) are released every 3–5 months.
+Bugfix releases (e.g., v1.1.3) are released every 2–4 weeks after a feature release.
+You can find the recent releases in the [release calendar]({% link docs/dev/release_calendar.md %}).
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Is there a development roadmap for DuckDB?
 
 <div class="answer" markdown="1">
