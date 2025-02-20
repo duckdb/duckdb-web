@@ -8,11 +8,11 @@ excerpt: |
 extension:
   name: chsql_native
   description: ClickHouse Native Client & File Reader for chsql
-  version: 0.0.2
+  version: 0.0.3
   language: Rust
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64;wasm_threads;wasm_eh;wasm_mvp"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64;wasm_threads;wasm_eh;wasm_mvp;linux_amd64_musl;"
   requires_toolchains: "rust;python3"
   maintainers:
     - lmangani
@@ -20,15 +20,13 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-clickhouse-native
-  ref: f2e3b6d0c327d71e0989f078b7fc6d13dbac52b9
+  ref: 11eba744ac579b7fccd06217bb71218299f749b9
 
 docs:
   hello_world: |
-    --- This experimental rust extension implements Native Clickhouse formats for DuckDB.
-    --- ClickHouse Native Binary Client for chsql
-    --- export CLICKHOUSE_URL="tcp://localhost:9000"
-    --- export CLICKHOUSE_URL="tcp://user:pass@remote:9440/?secure=true&skip_verify=true"
+    
     --- Simple Query Example
+    --- export CLICKHOUSE_URL="tcp://user:pass@remote:9440/?secure=true&skip_verify=true"
     D SELECT * FROM clickhouse_scan("SELECT version(), 'hello', 123");
     ┌────────────┬─────────┬────────┐
     │ version()  │ 'hello' │  123   │
@@ -100,12 +98,30 @@ docs:
     └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
     
   extended_description: |
-    This extension is highly experimental and potentially unstable. Do not use in production. See README for full examples.
+    ## chsql_native
+    This experimental community extension implements a Native Clickhouse client for DuckDB.
+    
+    ### Client Configuration
+    The extension can be configured the following using ENV variables
+    ```
+    CLICKHOUSE_URL
+    CLICKHOUSE_USER
+    CLICKHOUSE_PASSWORD
+    ```
+
+    Authentication and connection parameters can be included in the URL
+    ```
+    export CLICKHOUSE_URL="tcp://user:pass@remote:9440/?secure=true&skip_verify=true"
+    ```
+    
+    --- export CLICKHOUSE_URL="tcp://localhost:9000"
+    
+    > This extension is experimental and potentially unstable. Do not use in production. See README for full examples.
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 448
-extension_download_count_pretty: 448
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql_native.png'
 layout: community_extension_doc
 ---
@@ -131,9 +147,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | example |
-|-------------------|---------------|-------------|---------|---------|
-| clickhouse_native | table         |             |         |         |
-| clickhouse_scan   | table         |             |         |         |
+|   function_name   | function_type | description | comment | examples |
+|-------------------|---------------|-------------|---------|----------|
+| clickhouse_native | table         | NULL        | NULL    | []       |
+| clickhouse_scan   | table         | NULL        | NULL    | []       |
 
 
