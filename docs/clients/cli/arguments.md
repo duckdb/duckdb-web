@@ -54,3 +54,20 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-version`        | Show DuckDB version                                                                                           |
 
 <!-- markdownlint-enable MD056 -->
+
+## Passing a Sequence of Arguments
+
+Note that the CLI arguments are processed in order, similarly to the behavior of the SQLite CLI.
+For example:
+
+```bash
+duckdb -csv -c 'SELECT 42 AS hello' -json -c 'SELECT 84 AS world'
+```
+
+Returns the following:
+
+```text
+hello
+42
+[{"world":84}]
+```
