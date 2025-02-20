@@ -162,3 +162,30 @@ After a sequence is created, you use the function `nextval` to operate on the se
 | `TEMPORARY` or `TEMP` | If specified, the sequence object is created only for this session, and is automatically dropped on session exit. Existing permanent sequences with the same name are not visible (in this session) while the temporary sequence exists, unless they are referenced with schema-qualified names. |
 
 > Sequences are based on `BIGINT` arithmetic, so the range cannot exceed the range of an eight-byte integer (-9223372036854775808 to 9223372036854775807).
+
+## Limitations
+
+Due to limitations in DuckDB's dependency manager, `DROP SEQUENCE` will fail in some corner cases.
+For example, deleting a column that uses a sequence should allow the sequence to be dropped but this currently returns an error:
+
+```sql
+CREATE SEQUENCE id_sequence START 1;
+CREATE TABLE tbl (id INTEGER DEFAULT nextval('id_sequence'), s VARCHAR);
+
+ALTER TABLE tbl DROP COLUMN id;
+DROP SEQUENCE id_sequence;
+```
+
+```console
+Dependency Error:
+Cannot drop entry "id_sequence" because there are entries that depend on it.
+table "tbl" depends on index "id_sequence".
+Use DROP...CASCADE to drop all dependents.
+```
+
+This can be worked around by using the `CASCADE` modifier.
+The following command drops the sequence:
+
+```sql
+DROP SEQUENCE id_sequence CASCADE;
+```

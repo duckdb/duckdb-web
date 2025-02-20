@@ -12,7 +12,19 @@ This step is necessary because CSV files are not self-describing and come in man
 
 By default the system will try to auto-detect all options. However, options can be individually overridden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv` with an explicit delimiter (e.g., `read_csv('file.csv', delim = '|')`).
 
-The detection works by operating on a sample of the file. The size of the sample can be modified by setting the `sample_size` parameter. The default sample size is `20480` rows. Setting the `sample_size` parameter to `-1` means the entire file is read for sampling. The way sampling is performed depends on the type of file. If we are reading from a regular file on disk, we will jump into the file and try to sample from different locations in the file. If we are reading from a file in which we cannot jump – such as a `.gz` compressed CSV file or `stdin` – samples are taken only from the beginning of the file.
+## Sample Size
+
+The type detection works by operating on a sample of the file.
+The size of the sample can be modified by setting the `sample_size` parameter.
+The default sample size is 20,480 rows.
+Setting the `sample_size` parameter to `-1` means the entire file is read for sampling:
+
+```sql
+SELECT * FROM read_csv('my_csv_file.csv', sample_size = -1);
+```
+
+The way sampling is performed depends on the type of file. If we are reading from a regular file on disk, we will jump into the file and try to sample from different locations in the file.
+If we are reading from a file in which we cannot jump – such as a `.gz` compressed CSV file or `stdin` – samples are taken only from the beginning of the file.
 
 ## `sniff_csv` Function
 
@@ -107,7 +119,8 @@ The type detection works by attempting to convert the values in each column to t
 | TIMESTAMP |
 | VARCHAR   |
 
-Note everything can be cast to `VARCHAR`. This type has the lowest priority, i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
+Everything can be cast to `VARCHAR`, therefore, this type has the lowest priority meaning that all columns are converted to `VARCHAR` if they cannot be cast to anything else.
+In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
 The set of candidate types that should be considered by the CSV reader can be explicitly specified using the [`auto_type_candidates`]({% link docs/data/csv/overview.md %}#auto_type_candidates-details) option.
 
@@ -126,6 +139,9 @@ In addition to the default set of candidate types, other types that may be speci
 Even though the set of data types that can be automatically detected may appear quite limited, the CSV reader can configured to read arbitrarily complex types by using the `types`-option described in the next section.
 
 Type detection can be entirely disabled by using the `all_varchar` option. If this is set all columns will remain as `VARCHAR` (as they originally occur in the CSV file).
+
+Note that using quote characters vs. no quote characters (e.g., `"42"` and `42`) does not make a difference for type detection.
+Quoted fields will not be converted to `VARCHAR`, instead, the sniffer will try to find the type candidate with the highest priority.
 
 #### Overriding Type Detection
 

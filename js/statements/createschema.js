@@ -2,7 +2,9 @@ function GenerateCreateSchema(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Sequence([
-				Keyword("CREATE SCHEMA"),
+				Keyword("CREATE"),
+				GenerateOrReplace(),
+				Keyword("SCHEMA"),
 				GenerateIfNotExists(),
 				Expression("schema-name")
 			]),
@@ -22,4 +24,3 @@ function Refresh(node_name, set_node) {
 
 options = {}
 Initialize()
-

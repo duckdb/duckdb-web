@@ -152,7 +152,7 @@ However, the case insensitive matching in the system for identifiers cannot be t
 
 ## Using Double Equality Sign for Comparison
 
-DuckDB supports both `=` and `==` for quality comparison, while Postgres only supports `=`.
+DuckDB supports both `=` and `==` for quality comparison, while PostgreSQL only supports `=`.
 
 ```sql
 SELECT 1 == 1 AS t;
@@ -166,7 +166,7 @@ DuckDB returns:
 |-----:|
 | true |
 
-Postgres returns:
+PostgreSQL returns:
 
 ```console
 postgres=# SELECT 1 == 1 AS t;

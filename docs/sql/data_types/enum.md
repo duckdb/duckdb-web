@@ -17,7 +17,7 @@ Enum types are created from either a hardcoded set of values or from a select st
 Create enum using hardcoded values:
 
 ```sql
-CREATE TYPE ⟨enum_name⟩ AS ENUM ([⟨value_1⟩, ⟨value_2⟩,...]);
+CREATE TYPE ⟨enum_name⟩ AS ENUM ([⟨value_1⟩, ⟨value_2⟩, ...]);
 ```
 
 Create enum using a `SELECT` statement that returns a single column of `VARCHAR`s:
@@ -26,30 +26,18 @@ Create enum using a `SELECT` statement that returns a single column of `VARCHAR`
 CREATE TYPE ⟨enum_name⟩ AS ENUM (select_expression⟩);
 ```
 
-For example:
+Enums can also be created on the fly during [casting]({% link docs/sql/expressions/cast.md %}):
 
-Creates new user defined type 'mood' as an enum:
+```sql
+SELECT 'some_string'::ENUM ([⟨value_1⟩, ⟨value_2⟩, ...]);
+```
+
+### Exaples
+
+Creates new user defined type `mood` as an enum:
 
 ```sql
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
-```
-
-This will fail since the `mood` type already exists:
-
-```sql
-CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy', 'anxious');
-```
-
-This will fail since enums cannot hold `NULL` values:
-
-```sql
-CREATE TYPE breed AS ENUM ('maltese', NULL);
-```
-
-This will fail since enum values must be unique:
-
-```sql
-CREATE TYPE breed AS ENUM ('maltese', 'maltese');
 ```
 
 Create an enum from a select statement. First create an example table of values:
@@ -57,6 +45,24 @@ Create an enum from a select statement. First create an example table of values:
 ```sql
 CREATE TABLE my_inputs AS
     FROM (VALUES ('duck'), ('duck'), ('goose')) t(my_varchar);
+```
+
+Create an anonymous enum value on the fly:
+
+```sql
+SELECT 'happy'::ENUM ('sad', 'ok', 'happy');
+```
+
+This statement will fail since enums cannot hold `NULL` values:
+
+```sql
+CREATE TYPE breed AS ENUM ('maltese', NULL);
+```
+
+This statement will fail since enum values must be unique:
+
+```sql
+CREATE TYPE breed AS ENUM ('maltese', 'maltese');
 ```
 
 Create an enum using the unique string values in the `my_varchar` column:
