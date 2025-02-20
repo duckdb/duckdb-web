@@ -263,7 +263,7 @@ COPY
     (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100_000);
 ```
 
-Write a CSV file to an `LZ4_RAW`-compressed Parquet file:
+Write data to an `LZ4_RAW`-compressed Parquet file:
 
 ```sql
 COPY
@@ -272,7 +272,7 @@ COPY
     (FORMAT PARQUET, COMPRESSION LZ4);
 ```
 
-Or:
+Or, equivalently:
 
 ```sql
 COPY
@@ -281,7 +281,16 @@ COPY
     (FORMAT PARQUET, COMPRESSION LZ4_RAW);
 ```
 
-DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation]({% link docs/sql/statements/export.md %}) for more details:
+Write data to a `BROTLI`-compressed Parquet file:
+
+```sql
+COPY
+    (FROM generate_series(100_000))
+    TO 'result-brotli.parquet'
+    (FORMAT PARQUET, COMPRESSION BROTLI);
+```
+
+DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [“`EXPORT` statement” page]({% link docs/sql/statements/export.md %}) for more details:
 
 Export the table contents of the entire database as Parquet:
 
