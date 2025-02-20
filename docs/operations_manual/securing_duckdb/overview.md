@@ -17,7 +17,16 @@ If you discover a potential vulnerability, please [report it confidentially via 
 
 ## Safe Mode (CLI)
 
+DuckDB's CLI client supports [“safe mode”]({% link docs/clients/cli/safe_mode.md %}), which prevents DuckDB from accessing external files other than the database file.
+This can be activated via a command line argument or a [dot command]({% link docs/clients/cli/dot_commands.md %}):
 
+```bash
+duckdb -safe ...
+```
+
+```plsql
+.safe_mode
+```
 
 ## Disabling File Access
 

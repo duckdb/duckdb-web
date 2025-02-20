@@ -54,7 +54,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.quit`                                  | Exit this program                                                                                                                          |
 | `.read FILE`                             | Read input from `FILE`                                                                                                                     |
 | `.rows`                                  | Row-wise rendering of query results (default)                                                                                              |
-| `.safe_mode`                             |
+| `.safe_mode`                             | Activates [safe mode]({% link docs/clients/cli/safe_mode.md %})                                                                            |
 | `.schema ?PATTERN?`                      | Show the `CREATE` statements matching `PATTERN`                                                                                            |
 | `.separator COL ?ROW?`                   | Change the column and row separators                                                                                                       |
 | `.shell CMD ARGS...`                     | Run `CMD ARGS...` in a system shell                                                                                                        |
