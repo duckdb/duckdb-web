@@ -82,3 +82,7 @@ DROP INDEX title_idx;
 ### Syntax
 
 <div id="rrdiagram2"></div>
+
+## Limitations
+
+The `CREATE INDEX` clause does not support the `OR REPLACE` modifier.

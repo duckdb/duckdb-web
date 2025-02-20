@@ -20,6 +20,12 @@ Create a schema if it does not exist yet:
 CREATE SCHEMA IF NOT EXISTS s2;
 ```
 
+Create a schema or replace a schema if it exists:
+
+```sql
+CREATE OR REPLACE SCHEMA s2;
+```
+
 Create table in the schemas:
 
 ```sql
