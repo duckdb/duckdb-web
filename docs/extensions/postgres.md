@@ -82,13 +82,13 @@ CREATE SECRET (
 );
 ```
 
-The information from the secret will be used when `ATTACH` is called. We can leave the Postgres connection string empty to use all of the information stored in the secret.
+The information from the secret will be used when `ATTACH` is called. We can leave the PostgreSQL connection string empty to use all of the information stored in the secret.
 
 ```sql
 ATTACH '' AS postgres_db (TYPE POSTGRES);
 ```
 
-We can use the Postgres connection string to override individual options. For example, to connect to a different database while still using the same credentials, we can override only the database name in the following manner.
+We can use the PostgreSQL connection string to override individual options. For example, to connect to a different database while still using the same credentials, we can override only the database name in the following manner.
 
 ```sql
 ATTACH 'dbname=my_other_db' AS postgres_db (TYPE POSTGRES);
@@ -98,7 +98,7 @@ By default, created secrets are temporary. Secrets can be persisted using the [`
 
 #### Managing Multiple Secrets
 
-Named secrets can be used to manage connections to multiple Postgres database instances. Secrets can be given a name upon creation.
+Named secrets can be used to manage connections to multiple PostgreSQL database instances. Secrets can be given a name upon creation.
 
 ```sql
 CREATE SECRET postgres_secret_one (
