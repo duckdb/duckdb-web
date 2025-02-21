@@ -37,3 +37,30 @@ The default `python3-pip` on your OS may not be modern, so you may need to updat
 ```batch
 python3 -m pip install pip -U
 ```
+
+## `No module named 'duckdb.duckdb'` Build Error
+
+**Problem:**
+Building the Python package succeeds but the package cannot be imported:
+
+```batch
+cd tools/pythonpkg/
+python3 -m pip install .
+python3 -c "import duckdb"
+```
+
+This returns the following error message:
+
+```console
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/duckdb/tools/pythonpkg/duckdb/__init__.py", line 4, in <module>
+    import duckdb.functional as functional
+  File "/duckdb/tools/pythonpkg/duckdb/functional/__init__.py", line 1, in <module>
+    from duckdb.duckdb.functional import (
+ModuleNotFoundError: No module named 'duckdb.duckdb'
+```
+
+**Solution:**
+The problem is caused by Python trying to import from the current working directory.
+To work around this, navigate to a different directory (e.g., `cd ..`) and try running Python import again.
