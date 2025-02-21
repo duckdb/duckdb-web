@@ -24,7 +24,7 @@ and you can read that post to learn about their semantics.
 
 ## What's the Plan?
 
-In that [earlier post](({% post_url 2023-09-15-asof-joins-fuzzy-temporal-lookups %})), I explained why we have a custom operator and syntax for AsOf joins
+In that [earlier post]({% post_url 2023-09-15-asof-joins-fuzzy-temporal-lookups %}), I explained why we have a custom operator and syntax for AsOf joins
 when you can implement them in traditional SQL.
 The superpower of SQL is that it is _declarative:_
 you tell us _what_ you want and we figure out an efficient _how._
