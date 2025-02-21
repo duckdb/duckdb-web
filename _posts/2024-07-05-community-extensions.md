@@ -112,7 +112,7 @@ DuckDB Labs and the DuckDB Foundation do not vet the code within community exten
 SET allow_community_extensions = false;
 ```
 
-For more details, see the documentation’s [Securing DuckDB page]({% link docs/operations_manual/securing_duckdb/securing_extensions.md %}#community-extension).
+For more details, see the documentation’s [Securing DuckDB page]({% link docs/operations_manual/securing_duckdb/securing_extensions.md %}#community-extensions).
 
 ## Summary and Looking Ahead
 

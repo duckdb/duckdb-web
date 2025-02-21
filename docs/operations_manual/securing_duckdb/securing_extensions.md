@@ -75,4 +75,6 @@ SET lock_configuration = true;
 
 ## Always Require Signed Extensions
 
-By default, DuckDB requires extensions to be either signed as core extensions (created by the DuckDB developers) or community extensions (created by third-party developers but distributed by the DuckDB developers). The `allow_unsigned_extensions` setting can be enabled on start-up to allow running extensions that are not signed at all. While useful for extension development, enabling this setting will allow DuckDB to load any extensions, which means more care must be taken to ensure malicious extensions are not loaded.
+By default, DuckDB requires extensions to be either signed as core extensions (created by the DuckDB developers) or community extensions (created by third-party developers but distributed by the DuckDB developers).
+The [`allow_unsigned_extensions` setting]({% link docs/extensions/overview.md %}#unsigned-extensions) can be enabled on start-up to allow loading unsigned extensions.
+While this setting is useful for extension development, enabling it will allow DuckDB to load _any extensions,_ which means more care must be taken to ensure malicious extensions are not loaded.
