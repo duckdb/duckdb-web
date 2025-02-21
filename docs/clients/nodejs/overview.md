@@ -172,7 +172,7 @@ db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
 
 ## Loading Unsigned Extensions
 
-To load [unsigned extensions]({% link docs/extensions/overview.md %}#ensuring-the-integrity-of-extensions), instantiate the database as follows:
+To load [unsigned extensions]({% link docs/extensions/overview.md %}#unsigned-extensions), instantiate the database as follows:
 
 ```js
 db = new duckdb.Database(':memory:', {"allow_unsigned_extensions": "true"});

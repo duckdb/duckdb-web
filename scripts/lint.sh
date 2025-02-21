@@ -12,9 +12,9 @@ while getopts "f" opt; do
     esac
 done
 
-npx markdownlint-cli docs/ dev/ _posts/ --config .markdownlint.jsonc --ignore docs/archive $fix || echo 'mdlit failed'
+npx markdownlint-cli docs/ dev/ _posts/ --config .markdownlint.jsonc --ignore docs/archive $fix || echo 'markdownlint failed'
 
-black scripts --skip-string-normalization $check  || echo 'black failed'
+black scripts --skip-string-normalization $check || echo 'black failed'
 
 if ! $(which vale); then
     echo "Vale binary not found, please install it from https://vale.sh/docs/vale-cli/installation/"

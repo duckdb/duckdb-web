@@ -197,7 +197,7 @@ SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
 
 SQLCHAR str[1024];
 SQLSMALLINT strl;
-std::string dsn = "DSN=DuckDB;allow_unsigned_extensions=true;access_mode=READ_ONLY"
+std::string dsn = "DSN=DuckDB;access_mode=READ_ONLY"
 SQLDriverConnect(dbc, nullptr, (SQLCHAR*)dsn.c_str(), SQL_NTS, str, sizeof(str), &strl, SQL_DRIVER_COMPLETE)
 
 std::cout << "Connected!" << std::endl;
