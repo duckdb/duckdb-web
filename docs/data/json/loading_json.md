@@ -90,7 +90,7 @@ These functions have the following parameters:
 | `maximum_object_size` | The maximum size of a JSON object (in bytes). | `UINTEGER` | `16777216` |
 
 The `format` parameter specifies how to read the JSON from a file.
-With `'unstructured'`, the top-level JSON is read, e.g. for `birds.json`:
+With `'unstructured'`, the top-level JSON is read, e.g., for `birds.json`:
 
 ```json
 {

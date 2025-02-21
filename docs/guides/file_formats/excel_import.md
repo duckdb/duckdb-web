@@ -47,6 +47,7 @@ SELECT * FROM read_xlsx('test_excel.xlsx', range = 'A5:Z');
 ```
 
 Or skip the first 5 columns
+
 ```sql
 SELECT * FROM read_xlsx('test_excel.xlsx', range = 'E:Z');
 ```

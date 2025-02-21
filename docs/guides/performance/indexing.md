@@ -61,13 +61,13 @@ DuckDB will try to use an index scan for equality and `IN(...)` conditions.
 It also pushes dynamic filters, e.g., from hash joins, into the scan, allowing dynamic index scans on these filters.
 
 Indexes are only eligible for index scans if they index a single column without expressions.
-E.g. the following index is eligible for index scans:
+E.g., the following index is eligible for index scans:
 
 ```sql
 CREATE INDEX idx ON tbl (col1);
 ```
 
-E.g. the following two indexes are **NOT** eligible for index scans:
+E.g., the following two indexes are **NOT** eligible for index scans:
 
 ```sql
 CREATE INDEX idx_multi_column ON tbl (col1, col2);
