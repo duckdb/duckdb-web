@@ -790,6 +790,7 @@ SELECT list_sort([1, 3, NULL, 2], 'ASC');
 ```
 
 This query provides both the sort order and the `NULL` order.
+
 ```sql
 SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 ```
