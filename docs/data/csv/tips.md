@@ -47,7 +47,7 @@ SELECT * FROM read_csv('flights*.csv', union_by_name = true);
 
 ## Sample Size
 
-If the [CSV sniffer](({% post_url 2023-10-27-csv-sniffer %})) is not detecting the correct type, try increasing the sample size.
+If the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}) is not detecting the correct type, try increasing the sample size.
 The option `sample_size = -1` forces the sniffer to read the entire file:
 
 ```sql
