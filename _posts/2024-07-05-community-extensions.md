@@ -96,7 +96,6 @@ For the [maintainer of `h3`](https://github.com/isaacbrodsky/), the publication 
 
 To show that it’s feasible to publish extensions, we reached out to a few developers of key extensions. At the time of the publication of this blog post, the DuckDB Community Extensions repository already contains the following extensions.
 
-
 | Name | Description |
 |----|------------|
 | [crypto](https://github.com/rustyconover/duckdb-crypto-extension) | Adds cryptographic hash functions and [HMAC](https://en.wikipedia.org/wiki/HMAC). |

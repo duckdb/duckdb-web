@@ -80,14 +80,12 @@ warning: too many GOT entries for -fpic, please recompile with -fPIC
 ```
 
 **Solution:**
-Create or edit the `~/.R/Makevars` file. This example also contains the [flag to parallelize the build](#r-package-the-build-only-uses-a-single-thread):
+Create or edit the `~/.R/Makevars` file. This example also contains the [`MAKEFLAGS` setting to parallelize the build]({% link docs/dev/building/r.md %}#the-build-only-uses-a-single-thread ):
 
 ```ini
 ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 MAKEFLAGS = -j$(nproc)
 ```
-
-When making this change, also consider [making the build parallel](#r-package-the-build-only-uses-a-single-thread).
 
 ### Building the httpfs Extension Fails
 
