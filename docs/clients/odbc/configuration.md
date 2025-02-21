@@ -21,7 +21,6 @@ An example of `odbc.ini` with DuckDB:
 Driver = DuckDB Driver
 Database = :memory:
 access_mode = read_only
-allow_unsigned_extensions = true
 ```
 
 The lines correspond to the following parameters:
@@ -30,7 +29,6 @@ The lines correspond to the following parameters:
 * `Driver`: Describes the driver's name, as well as where to find the configurations in the `odbcinst.ini`.
 * `Database`: Describes the database name used by DuckDB, can also be a file path to a `.db` in the system.
 * `access_mode`: The mode in which to connect to the database.
-* `allow_unsigned_extensions`: Allow the use of [unsigned extensions]({% link docs/extensions/overview.md %}#unsigned-extensions).
 
 ## `odbcinst.ini` and `.odbcinst.ini`
 
