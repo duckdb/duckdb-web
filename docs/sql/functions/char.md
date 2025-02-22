@@ -886,13 +886,13 @@ SELECT format('I''d rather be {1} than {0}.', 'right', 'happy'); -- I'd rather b
 
 | Specifier | Description | Example |
 |:-|:------|:---|
-| `{:d}`   | integer                                | `123456`       |
+| `{:d}`   | integer                                | `654321`       |
 | `{:E}`   | scientific notation                    | `3.141593E+00` |
 | `{:f}`   | float                                  | `4.560000`     |
-| `{:o}`   | octal                                  | `361100`       |
+| `{:o}`   | octal                                  | `2375761`      |
 | `{:s}`   | string                                 | `asd`          |
-| `{:x}`   | hexadecimal                            | `1e240`        |
-| `{:tX}`  | integer, `X` is the thousand separator | `123 456`      |
+| `{:x}`   | hexadecimal                            | `9fbf1`        |
+| `{:tX}`  | integer, `X` is the thousand separator | `654 321`      |
 
 #### Formatting Types
 
@@ -1006,16 +1006,16 @@ I'd rather be happy than right.
 | Specifier | Description | Example |
 |:-|:------|:---|
 | `%c`   | character code to character                                    | `a`            |
-| `%d`   | integer                                                        | `123456`       |
-| `%Xd`  | integer with thousand seperarator `X` from `,`, `.`, `''`, `_` | `123_456`      |
+| `%d`   | integer                                                        | `654321`       |
+| `%Xd`  | integer with thousand seperarator `X` from `,`, `.`, `''`, `_` | `654_321`      |
 | `%E`   | scientific notation                                            | `3.141593E+00` |
 | `%f`   | float                                                          | `4.560000`     |
-| `%hd`  | integer                                                        | `123456`       |
-| `%hhd` | integer                                                        | `123456`       |
-| `%lld` | integer                                                        | `123456`       |
-| `%o`   | octal                                                          | `361100`       |
+| `%hd`  | integer                                                        | `654321`       |
+| `%hhd` | integer                                                        | `654321`       |
+| `%lld` | integer                                                        | `654321`       |
+| `%o`   | octal                                                          | `2375761`      |
 | `%s`   | string                                                         | `asd`          |
-| `%x`   | hexadecimal                                                    | `1e240`        |
+| `%x`   | hexadecimal                                                    | `9fbf1`        |
 
 #### Formatting Types
 
