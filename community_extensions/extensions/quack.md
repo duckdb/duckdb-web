@@ -18,7 +18,7 @@ extension:
   # (Optional) param that specifies required extra toolchains
   requires_toolchains: "rust"
   # (Optional) param that specifies a precise vcpkg commit to use
-  vcpkg_commit: "a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6"
+  vcpkg_commit: "5e5d0e1cd7785623065e77eff011afdeec1a3574"
   # (Optional) this extension requires additional custom toolchain setup
   custom_toolchain_script: true
 
@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 169
 extension_star_count_pretty: 169
-extension_download_count: 419
-extension_download_count_pretty: 419
+extension_download_count: 421
+extension_download_count_pretty: 421
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---
