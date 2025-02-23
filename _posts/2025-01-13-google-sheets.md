@@ -19,7 +19,7 @@ It is estimated that there are over [750 million spreadsheet users](https://then
 Now, you can use DuckDB to seamlessly bridge the gap between data-y folks and business-y folks!
 With a simple in-browser authentication flow, or an automateable private key file flow, you can both query from and load into Google Sheets.
 
-Feel free to jump to [the examples](#getting-started-with-the-gsheets-extension)!
+Feel free to have a look at the [GSheets extension repo](https://github.com/evidence-dev/duckdb_gsheets) or jump to [the examples](#getting-started-with-the-gsheets-extension)!
 
 ## Benefits
 
@@ -73,11 +73,10 @@ CREATE SECRET (TYPE gsheet);
 
 As a part of the `CREATE SECRET` command, a browser window will open and allow for a login and copying a temporary token to then paste back into DuckDB.
 
-<!-- 
-
-TODO: SCREENSHOTS 
-
--->
+<img src="/images/blog/gsheets_oauth_browser_screenshot.png"
+     alt="In-browser OAuth flow to generate token."
+     width="680"
+     />
 
 ## Examples of Reading from Sheets
 
@@ -149,6 +148,7 @@ Columns will be given default names and can be renamed in SQL.
 Another key capability of the GSheets extension is to write the results of any DuckDB query to a Google Sheet!
 
 > By default, the entire Sheet will be replaced with the output of the query (including a header row for column names), starting in cell A1 of the first sheet.
+> See below for examples that adjust this behavior!
 
 
 ```sql
@@ -156,43 +156,31 @@ Another key capability of the GSheets extension is to write the results of any D
 -- (We can't predict what folks would write to a public Sheet...
 -- Probably just memes, but there is always that one person, you know?)
 COPY (FROM range(10))
-TO 'https://docs.google.com/spreadsheets/d/...' 
-(FORMAT gsheet);
+TO 'https://docs.google.com/spreadsheets/d/...'  (
+    FORMAT gsheet
+);
 ```
 
 ### Writing to a Specific Sheet and Range
 
-
-
-<!-- 
-
-TODO: Put in an example for the Sheet and range parameters. 
-
-Also mention the header parameter
-
-
- -->
-
-
-
-
-To direct the output to another Sheet, include a `gid` parameter on the query string. 
-Specifying a `range` as a query string parameter will direct the output of a query to a different location within that sheet.
+As with reading, both query string parameters and SQL parameters can be used to write to a specific `sheet` or `range`. 
+Similarly, the SQL parameters take precedence. These examples are equivalent:
 
 ```sql
 COPY (FROM range(10))
-TO 'https://docs.google.com/spreadsheets/d/...?gid=123#gid=123&range=A2:Z10000' 
-(FORMAT gsheet);
+TO 'https://docs.google.com/spreadsheets/d/...?' (
+    FORMAT gsheet,
+    sheet 'The sheet name!',
+    range 'A2:Z10000'
+);
+
+COPY (FROM range(10))
+TO 'https://docs.google.com/spreadsheets/d/...?gid=123#gid=123&range=A2:Z10000' (
+    FORMAT gsheet
+);
 ```
 
-<!-- 
-
-
-TODO: Run the tests for sheet, range, and header as COPY parameters!
-
-
- -->
-
+The `header` boolean parameter can also be used to determine if the column names should be written out or not. 
 
 ### Overwriting or Appending
 
@@ -212,8 +200,12 @@ Helpfully, the `header` parameter defaults to `false` in the append case, but it
 ```sql
 -- To append, set both flags to false.
 COPY (FROM range(10))
-TO 'https://docs.google.com/spreadsheets/d/...?gid=123#gid=123&range=A2:Z10000' 
-(FORMAT gsheet, OVERWRITE_SHEET = false, OVERWRITE_RANGE = false);
+TO 'https://docs.google.com/spreadsheets/d/...?gid=123#gid=123&range=A2:Z10000' (
+    FORMAT gsheet,
+    OVERWRITE_SHEET = false,
+    OVERWRITE_RANGE = false
+    -- header = false is the default in this case!
+);
 ```
 
 ## Automated Workflows
@@ -259,19 +251,12 @@ The temporary token is cached within the `SECRET` as well and is recreated if it
 
 This unlocks the use of the GSheets extension within pipelines, like GitHub Actions (GHA) or other orchestrators like dbt.
 The best practice is to store the `credentials.json` file as a secret within your orchestrator and write it out to a temporary file.
-An example GHA workflow is here.
-
-<!-- 
-
-TODO: Link to the example GHA workflow 
-
--->
-
+An [example GHA workflow is here](https://github.com/Alex-Monahan/duckdb-gsheets/blob/main/.github/workflows/python-app.yml), which uses [this Python script to query a Sheet](https://github.com/Alex-Monahan/duckdb-gsheets/blob/main/ci_scripts/set_env_vars_for_tests.py).
 
 ## Developing the Extension
 
 The Google Sheets extension is a good example of how DuckDB's extension GitHub template and CI/CD workflows can let even non-C++ experts contribute to the community!
-None of the folks who have contributed thus far (thank you!!) would be considered "C++ programmers", but the combination of a great template, examples from other extensions, and a little help from some LLM-powered "junior devs" made it possible.
+Several of the folks who have contributed thus far (thank you!!) would not be considered "C++ programmers", but the combination of a great template, examples from other extensions, and a little help from some LLM-powered "junior devs" made it possible.
 We encourage you to give your extension idea a shot and reach out on Discord if you need some help!
 
 ## Roadmap
