@@ -78,3 +78,20 @@ FROM read_csv(
     'sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" duckbox.csv) |',
     delim = '│');
 ```
+
+We can also create a [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros):
+
+```sql
+CREATE MACRO read_duckbox(path) AS TABLE
+    FROM read_csv(
+        printf('(sed -n "2s/^│ *//;s/ *│$//;s/ *│ */│/p;2q" %s; ' ||
+               'sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" %s) |',
+               path, path),
+        delim = '│');
+```
+
+Then, reading a duckbox table is as simple as:
+
+```sql
+FROM read_duckbox('duckbox.csv');
+```
