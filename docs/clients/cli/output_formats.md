@@ -16,7 +16,7 @@ The `markdown` mode is particularly useful for building documentation and the `l
 | `ascii`      | Columns/rows delimited by 0x1F and 0x1E     |
 | `box`        | Tables using unicode box-drawing characters |
 | `csv`        | Comma-separated values                      |
-| `column`     | Output in columns. (See .width)             |
+| `column`     | Output in columns (See `.width`)            |
 | `duckbox`    | Tables with extensive features (default)    |
 | `html`       | HTML `<table>` code                         |
 | `insert`     | SQL insert statements for TABLE             |

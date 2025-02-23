@@ -1209,6 +1209,10 @@
                   "url": "query_parquet"
                 },
                 {
+                  "page": "Duckbox Import",
+                  "url": "duckbox"
+                },
+                {
                   "page": "File Access with the file: Protocol",
                   "url": "file_access"
                 }
