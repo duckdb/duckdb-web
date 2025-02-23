@@ -93,7 +93,7 @@ FROM 'https://docs.google.com/spreadsheets/d/1B4RFuOnZ4ITZ-nR9givZ7vWVOTVddC3VTK
 | or live long enough to query from spreadsheets |
 
 Copy the URL of the Sheet to query when viewing the sheet of interest within the workbook.
-The 'gid' query string parameter is the id that specific sheet.
+The 'gid' query string parameter is the id of that specific sheet.
 
 There are 2 ways to pass in additional parameters.
 You may either add them to the end of the URL as query string parameters, or use the `read_gsheet` table function and specify them as separate SQL parameters.
