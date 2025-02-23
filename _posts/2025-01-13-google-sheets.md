@@ -279,11 +279,7 @@ At MotherDuck (where Alex works), we have this extension running in production f
 We have automated exports of forecasts from our warehouse into Sheets and continually load manually collected customer support data into our (MotherDuck powered) data warehouse.
 As a result, our KPI dashboards include context from folks talking directly to customers!
 
-<!-- 
-
-TODO: Does Definite want a shout out here?
-
- -->
+[Michael Harris](https://www.linkedin.com/in/mharrisb1/) has also contributed to the extension (thank you!), and Definite has deployed GSheets scheduled jobs into production for multiple customers!
 
 Thanks to the GSheets DuckDB extension, it is easier than ever to use spreadsheets and DuckDB together.
-Now go automate that spreadsheet with some SQL!
+Now go automate that Sheet with some SQL!
