@@ -15,4 +15,4 @@ DuckDB officially supports the following platforms:
 
 DuckDB can be [built from source]({% link docs/archive/1.0/dev/building/build_instructions.md %}) for several other platforms such as Windows with ARM64 CPUs (Qualcomm, Snapdragon, etc.) and macOS 11.
 
-For details on free and commercial support, see the [support policy blog post](https://duckdblabs.com/news/2023/10/02/support-policy#platforms).
+For details on free and commercial support, see the [support policy page](https://duckdblabs.com/community_support_policy#platforms).

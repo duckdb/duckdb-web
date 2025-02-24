@@ -21,7 +21,7 @@ Note that 32-bit platforms are limited to using 4 GiB RAM due to the amount of a
 
 ## Big-Endian Architectures
 
-[Big-endian architectures](https://en.wikipedia.org/wiki/Endianness) (such as PowerPC) are [not supported](https://duckdblabs.com/news/2023/10/02/support-policy#architectures) by DuckDB.
+[Big-endian architectures](https://en.wikipedia.org/wiki/Endianness) (such as PowerPC) are [not supported](https://duckdblabs.com/community_support_policy#architectures) by DuckDB.
 While DuckDB can likely be built on such architectures,
 the resulting binary may exhibit [correctness](https://github.com/duckdb/duckdb/issues/5548) [errors](https://github.com/duckdb/duckdb/issues/9714) on certain operations.
 Therefore, it's use is not recommended.
