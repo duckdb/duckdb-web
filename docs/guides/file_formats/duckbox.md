@@ -70,9 +70,10 @@ To parse duckbox tables with a single `read_csv` call – and without creating a
 INSTALL shellfs FROM community;
 LOAD shellfs;
 FROM read_csv(
-    '(sed -n "2s/^│ *//;s/ *│$//;s/ *│ */│/p;2q" duckbox.csv; ' ||
-    'sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" duckbox.csv) |',
-    delim = '│');
+        '(sed -n "2s/^│ *//;s/ *│$//;s/ *│ */│/p;2q" duckbox.csv; ' ||
+        'sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" duckbox.csv) |',
+        delim = '│'
+    );
 ```
 
 We can also create a [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros):
@@ -80,10 +81,11 @@ We can also create a [table macro]({% link docs/sql/statements/create_macro.md %
 ```sql
 CREATE MACRO read_duckbox(path) AS TABLE
     FROM read_csv(
-        printf('(sed -n "2s/^│ *//;s/ *│$//;s/ *│ */│/p;2q" %s; ' ||
-               'sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" %s) |',
-               path, path),
-        delim = '│');
+            printf('(sed -n "2s/^│ *//;s/ *│$//;s/ *│ */│/p;2q" %s; ' ||
+                  'sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" %s) |',
+                  path, path),
+            delim = '│'
+        );
 ```
 
 Then, reading a duckbox table is as simple as:
