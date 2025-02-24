@@ -253,3 +253,5 @@ Join operators in the query plan show the join type used:
 * Inner joins are denoted as `INNER`.
 * Left outer joins and right outer joins are denoted as `LEFT` and `RIGHT`, respectively.
 * Full outer joins are denoted as `FULL`.
+
+> Tip To visualize query plans, consider using the [DuckDB execution plan visualizer](https://db.cs.uni-tuebingen.de/explain/) developed by the [Database Systems Research Group at the University of Tübingen](https://github.com/DBatUTuebingen).
