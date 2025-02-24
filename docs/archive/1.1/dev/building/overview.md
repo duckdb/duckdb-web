@@ -60,7 +60,7 @@ For some platforms, DuckDB binaries and extensions (or a [subset of extensions](
 | `windows_amd64_rtools` | Windows 10+ AMD64 (x86_64) for [RTools](https://cran.r-project.org/bin/windows/Rtools/) (deprecated) |
 | `windows_arm64_mingw`  | Windows 10+ ARM64 (AArch64) with MinGW                                                               |
 
-> These platforms are not covered by DuckDB's community support. For details on commercial support, see the [support policy blog post](https://duckdblabs.com/news/2023/10/02/support-policy#platforms).
+> These platforms are not covered by DuckDB's community support. For details on commercial support, see the [support policy page](https://duckdblabs.com/community_support_policy#platforms).
 
 Below, we provide detailed build instructions for some platforms:
 

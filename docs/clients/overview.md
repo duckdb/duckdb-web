@@ -40,7 +40,7 @@ DuckDB is an in-process database system and offers client APIs (also known as â€
 
 Since there is such a wide variety of clients, the DuckDB team focuses their development effort on the most popular clients.
 To reflect this, we distinguish three tiers of support for clients.
-Primary clients are the first to receive new features and are covered by [community support](https://duckdblabs.com/news/2023/10/02/support-policy).
+Primary clients are the first to receive new features and are covered by [community support](https://duckdblabs.com/community_support_policy).
 Secondary clients receive new features but are not covered by community support.
 Finally, all tertiary clients are maintained by third parties, so there are no feature or support guarantees for them.
 
