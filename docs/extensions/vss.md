@@ -23,7 +23,7 @@ INSERT INTO my_vector_table
 CREATE INDEX my_hnsw_index ON my_vector_table USING HNSW (vec);
 ```
 
-The index will then be used to accelerate queries that use a `ORDER BY` clause evaluating one of the supported distance metric functions against the indexed columns and a constant vector, followed by a `LIMIT` clause. For example:
+The index will then be used to accelerate queries that use an `ORDER BY` clause evaluating one of the supported distance metric functions against the indexed columns and a constant vector, followed by a `LIMIT` clause. For example:
 
 ```sql
 SELECT *
@@ -35,12 +35,15 @@ LIMIT 3;
 Additionally, the overloaded `min_by(col, arg, n)` can also be accelerated with the `HNSW` index if the `arg` argument is a matching distance metric function. This can be used to do quick one-shot nearest neighbor searches. For example, to get the top 3 rows with the closest vectors to `[1, 2, 3]`:
 
 ```sql
-SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3) AS result
+SELECT min_by(my_vector_table, array_distance(vec, [1, 2, 3]::FLOAT[3]), 3 ORDER BY vec) AS result
 FROM my_vector_table;
----- [{'vec': [1.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}, {'vec': [2.0, 2.0, 3.0]}]
 ```
 
-Note how we pass the table name as the first argument to `min_by` to return a struct containing the entire matched row.
+```text
+[{'vec': [1.0, 2.0, 3.0]}, {'vec': [2.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}]
+```
+
+Note how we pass the table name as the first argument to [`min_by`]({% link docs/sql/functions/aggregates.md %}#min_byarg-val-n) to return a struct containing the entire matched row.
 
 We can verify that the index is being used by checking the `EXPLAIN` output and looking for the `HNSW_INDEX_SCAN` node in the plan:
 
@@ -168,12 +171,11 @@ FROM vss_join(needle, haystack, search_vec, vec, 3) res;
 └───────┴─────────────────────────────────┴─────────────────────────────────────┘
 ```
 
+Alternatively, we can use the `vss_match` macro as a “lateral join” to get the matches already grouped by the left table.
+Note that this requires us to specify the left table first, and then the `vss_match` macro which references the search column from the left
+table (in this case, `search_vec`):
+
 ```sql
--- Alternatively, we can use the vss_match macro as a "lateral join"
--- to get the matches already grouped by the left table.
--- Note that this requires us to specify the left table first, and then
--- the vss_match macro which references the search column from the left
--- table (in this case, `search_vec`).
 SELECT *
 FROM needle, vss_match(haystack, search_vec, vec, 3) res;
 ```
