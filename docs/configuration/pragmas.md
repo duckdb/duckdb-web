@@ -312,7 +312,7 @@ PRAGMA enable_profiling;
 PRAGMA enable_profile;
 ```
 
-##### Profiling Format
+### Profiling Format
 
 The format of `enable_profiling` can be specified as `query_tree`, `json`, `query_tree_optimizer`, or `no_output`.
 Each format prints its output to the configured output, except `no_output`.
@@ -329,6 +329,8 @@ Alternatively, `json` returns the physical query plan as JSON:
 ```sql
 SET enable_profiling = 'json';
 ```
+
+> Tip To visualize query plans, consider using the [DuckDB execution plan visualizer](https://db.cs.uni-tuebingen.de/explain/) developed by the [Database Systems Research Group at the University of Tübingen](https://github.com/DBatUTuebingen).
 
 To return the physical query plan, including optimizer and planner metrics:
 
