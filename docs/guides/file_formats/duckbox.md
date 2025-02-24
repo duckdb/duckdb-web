@@ -64,7 +64,7 @@ world,84
 
 ## Using `shellfs`
 
-To implement this in a single `read_csv` without any temporary files, we can use the [`shellfs` Community Extension]({% link community_extensions/extensions/shellfs.md %}):
+To parse duckbox tables with a single `read_csv` call – and without creating any temporary files –, we can use the [`shellfs` Community Extension]({% link community_extensions/extensions/shellfs.md %}):
 
 ```sql
 INSTALL shellfs FROM community;
@@ -91,6 +91,10 @@ Then, reading a duckbox table is as simple as:
 ```sql
 FROM read_duckbox('duckbox.csv');
 ```
+
+> `shellfs` is a Community Extension and it comes without any support or guarantees.
+> Only use it if you can ensure that its inputs are appropriately sanitized.
+> Please consult the [Securing DuckDB page]({% link docs/operations_manual/securing_duckdb/overview.md %}) for more details.
 
 ## Limitations
 
