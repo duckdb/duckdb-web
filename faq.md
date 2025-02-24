@@ -51,7 +51,7 @@ DuckDB is fully open-source under the MIT license and its development takes plac
 All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
 
 Most of the intellectual property of DuckDB has been purposefully moved to a non-profit entity to disconnect the licensing of the project from the commercial company, DuckDB Labs.
-The DuckDB Foundation's statutes also ensure DuckDB remains open-source under the MIT license in perpetuity.
+The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf %}) also ensure DuckDB remains open-source under the MIT license in perpetuity.
 The [CWI (Centrum Wiskunde & Informatica)](https://cwi.nl/) has a seat on the board of the DuckDB Foundation
 and donations to the DuckDB Foundation directly fund DuckDB development.
 
