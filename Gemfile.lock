@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: d08b4d0e4336d617b19a7df8ce89c9c375d1869b
+  revision: 57741a813d90927783e4e82c91ae36e945c395b8
   branch: duckdb
   specs:
     rouge (3.3823.1)
