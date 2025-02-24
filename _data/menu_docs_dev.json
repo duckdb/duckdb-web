@@ -1257,6 +1257,10 @@
                 {
                   "page": "DuckDB over HTTPS / S3",
                   "url": "duckdb_over_https_or_s3"
+                },
+                {
+                  "page": "Fastly Object Storage Import",
+                  "url": "fastly_object_storage_import"
                 }
               ]
             },
