@@ -182,7 +182,7 @@ The location of the storage varies greatly depending the workload:
 * _For read-only workloads,_ the DuckDB database can be stored on local disks and remote endpoints such as [HTTPS]({% link docs/extensions/httpfs/https.md %}) and cloud object storage such as [AWS S3]({% link docs/extensions/httpfs/s3api.md %}) and similar providers.
 * _For read-write workloads,_ storing the database on instance-attached storage yields the best performance.
 Network-attached cloud storage such as [AWS EBS](https://aws.amazon.com/ebs/) also works and its performance can be fine-tuned with the guaranteed IOPS settings.
-Based on our experience, we **advise against running read-write DuckDB workloads on on-premises [network-attached storage (NAS)](https://en.wikipedia.org/wiki/Network-attached_storage).**
+Based on our experience, we **strongly advise against running DuckDB – or any other database management system – for read-write workloads on [network-attached storage (NAS)](https://en.wikipedia.org/wiki/Network-attached_storage).**
 These setups are often slow and result in spurious failures that are difficult to troubleshoot.
 
 </div>
