@@ -30,13 +30,11 @@ Note that the separator is not the pipe character `|`, instead it is the [“Box
 First, we save the table above as `duckbox.csv`.
 Then, we clean it using `sed`:
 
-```bash
+```batch
 echo -n > duckbox-cleaned.csv
 sed -n "2s/^│ *//;s/ *│$//;s/ *│ */│/p;2q" duckbox.csv >> duckbox-cleaned.csv
 sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" duckbox.csv >> duckbox-cleaned.csv
 ```
-
-> The script is compatible with both BSD `sed` (which is the default on macOS) and GNU `sed` (which is the default on Linux and available on macOS as `gsed`).
 
 The `duckbox-cleaned.csv` file looks as follows:
 
@@ -63,8 +61,6 @@ a,b
 hello,42
 world,84
 ```
-
-> This approach only works if the table does not have long pipe `│` characters.
 
 ## Using `shellfs`
 
@@ -95,3 +91,13 @@ Then, reading a duckbox table is as simple as:
 ```sql
 FROM read_duckbox('duckbox.csv');
 ```
+
+## Notes
+
+Please consider the following points when running this script:
+
+* This approach only works if the table does not have long pipe `│` characters.
+  It also trims spaces from the table cell values.
+  Make sure to factor in these assumptions when running the script.
+
+* The script is compatible with both BSD `sed` (which is the default on macOS) and GNU `sed` (which is the default on Linux and available on macOS as `gsed`).
