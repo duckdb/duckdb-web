@@ -92,12 +92,14 @@ Then, reading a duckbox table is as simple as:
 FROM read_duckbox('duckbox.csv');
 ```
 
-## Notes
+## Limitations
 
-Please consider the following points when running this script:
+Please consider the following limitations when running this script:
 
 * This approach only works if the table does not have long pipe `│` characters.
   It also trims spaces from the table cell values.
   Make sure to factor in these assumptions when running the script.
 
 * The script is compatible with both BSD `sed` (which is the default on macOS) and GNU `sed` (which is the default on Linux and available on macOS as `gsed`).
+
+* Only the data types [supported by the CSV sniffer]({% link docs/data/csv/auto_detection.md %}#type-detection) are parsed correctly. Values containing nested data will be parsed as a `VARCHAR`.
