@@ -61,7 +61,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.show`                                  | Show the current values for various settings                                                                                               |
 | `.singleline`                            | Set single-line mode                                                                                                                       |
 | `.system CMD ARGS...`                    | Run `CMD ARGS...` in a system shell                                                                                                        |
-| `.tables ?TABLE?`                        | List names of tables [matching LIKE pattern]({% link docs/sql/functions/pattern_matching.md %}) `TABLE`                                    |
+| `.tables ?TABLE?`                        | List names of tables [matching `LIKE` pattern]({% link docs/sql/functions/pattern_matching.md %}) `TABLE`                                  |
 | `.testcase NAME`                         | Begin redirecting output to `NAME`                                                                                                         |
 | `.timer on|off`                          | Turn SQL timer `on` or `off`. SQL statements separated by `;` but *not* separated via newline are measured together                        |
 | `.width NUM1 NUM2 ...`                   | Set minimum column widths for columnar output                                                                                              |
