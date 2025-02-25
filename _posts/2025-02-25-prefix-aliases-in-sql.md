@@ -2,7 +2,7 @@
 layout: post
 title: "Prefix Aliases in SQL"
 author: "Hannes Mühleisen"
-excerpt: "You can now put your aliases first in DuckDB's SQL dialect with a colon, e.g., `SELECT a : 42;`"
+excerpt: "You can now put your aliases first in DuckDB's SQL dialect with a colon, e.g., `SELECT a: 42;`"
 thumb: "/images/blog/thumbs/prefix-aliases.svg"
 image: "/images/blog/thumbs/prefix-aliases.png"
 tags: ["using DuckDB"]
@@ -89,7 +89,7 @@ They can also apply to function calls and subqueries in the `FROM clause`, e.g.:
 SELECT *
 FROM
     r: range(10),
-    v: (VALUES(42)),
+    v: (VALUES (42)),
     s: (FROM range(10))
 ```
 
