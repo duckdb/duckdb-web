@@ -1453,12 +1453,16 @@
               "slug": "snippets",
               "subsubfolderitems": [
                 {
-                  "page": "Create Synthetic Data",
+                  "page": "Creating Synthetic Data",
                   "url": "create_synthetic_data"
                 },
                 {
                   "page": "Sharing Macros",
                   "url": "sharing_macros"
+                },
+                {
+                  "page": "Analyzing a Git Repository",
+                  "url": "analyze_git_repository"
                 }
               ]
             },
