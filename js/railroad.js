@@ -1968,6 +1968,7 @@ function GenerateSelectClause(options) {
 		Expandable("distinct-clause", options, "distinct-clause", GenerateDistinctClause),
 		OneOrMore(Choice(0, [
 			Sequence([Expression(), Optional(Sequence([Optional(Keyword("AS")), Expression("alias")]), "skip")]),
+			Sequence([Expression("alias"), Keyword(":"), Expression()]),
 			Sequence(GenerateStarClause(options))
 		]), ",")
 	]

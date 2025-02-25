@@ -21,6 +21,15 @@ Perform arithmetic on the columns in a table, and provide an alias:
 SELECT col1 + col2 AS res, sqrt(col1) AS root FROM table_name;
 ```
 
+Use prefix aliases:
+
+```sql
+SELECT
+    res: col1 + col2,
+    root: sqrt(col1)
+FROM table_name;
+```
+
 Select all unique cities from the `addresses` table:
 
 ```sql

@@ -17,7 +17,7 @@ Create a table with a `UNION` column:
 
 ```sql
 CREATE TABLE tbl1 (u UNION(num INTEGER, str VARCHAR));
-INSERT INTO tbl1 values (1), ('two'), (union_value(str := 'three'));
+INSERT INTO tbl1 VALUES (1), ('two'), (union_value(str := 'three'));
 ```
 
 Any type can be implicitly cast to a `UNION` containing the type. Any `UNION` can also be implicitly cast to another `UNION` if the source `UNION` members are a subset of the target's (if the cast is unambiguous).
