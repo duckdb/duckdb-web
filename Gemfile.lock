@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 57741a813d90927783e4e82c91ae36e945c395b8
+  revision: 07100241807e3cb41c880994eef4c9afc73b2759
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -199,7 +199,7 @@ GEM
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
-    sass-embedded (1.85.0)
+    sass-embedded (1.85.1)
       google-protobuf (~> 4.29)
       rake (>= 13)
     sass-listen (4.0.0)

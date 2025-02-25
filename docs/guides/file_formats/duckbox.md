@@ -81,9 +81,11 @@ We can also create a [table macro]({% link docs/sql/statements/create_macro.md %
 ```sql
 CREATE MACRO read_duckbox(path) AS TABLE
     FROM read_csv(
-            printf('(sed -n "2s/^│ *//;s/ *│$//;s/ *│ */│/p;2q" %s; ' ||
-                  'sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" %s) |',
-                  path, path),
+            printf(
+                '(sed -n "2s/^│ *//;s/ *│$//;s/ *│ */│/p;2q" %s; ' ||
+                'sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" %s) |',
+                path, path
+            ),
             delim = '│'
         );
 ```
