@@ -179,7 +179,7 @@ const rows = reader.getRows();
 Run and read up to (at least) some number of rows:
 
 ```ts
-const reader = await connection.runAndReadUtil('FROM range(5000)', 1000);
+const reader = await connection.runAndReadUntil('FROM range(5000)', 1000);
 const rows = reader.getRows();
 // rows.length === 2048. (Rows are read in chunks of 2048.)
 ```
