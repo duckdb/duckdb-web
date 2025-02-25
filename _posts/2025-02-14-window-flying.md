@@ -2,10 +2,10 @@
 layout: post
 title: "Flying Through Windows"
 author: "Richard Wesley"
+thumb: "/images/blog/thumbs/window-functions-2.svg"
+image: "/images/blog/thumbs/window-functions-2.png"
 excerpt: "Dive into the details of recent DuckDB windowing performance improvements."
 tags: ["deep dive"]
-thumb: "/images/blog/thumbs/windowing-features.svg"
-image: "/images/blog/thumbs/windowing-features.png"
 ---
 
 ## Introduction
