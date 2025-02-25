@@ -398,7 +398,7 @@ The table below shows the available general aggregate functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
-| **Example** | `max_by_n(A, B, 2)` |
+| **Example** | `max_by(A, B, 2)` |
 | **Alias(es)** | `argMax(arg, val, n)`, `arg_max(arg, val, n)` |
 
 #### `min(arg)`
