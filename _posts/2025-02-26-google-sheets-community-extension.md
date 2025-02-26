@@ -236,7 +236,7 @@ The GSheets extension will use it to generate an access token periodically.
 </details>
 
 After aquiring this key file, the persistent private key must be converted to a temporary token once every 30 minutes.
-That process is now automated with the `key_file` `SECRET` `provider`.
+That process is now automated with the `key_file` secret provider.
 Create the [secret]({% link docs/configuration/secrets_manager.md %}) with a command like below, pointing to the JSON file exported from Google.
 
 ```sql
