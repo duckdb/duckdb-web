@@ -10,28 +10,28 @@ DuckDB supports exporting data to Excel `.xlsx` files. However, `.xls` files are
 
 ## Exporting Excel Sheets
 
-To export a table to an Excel file, use the `COPY` statement with the `FORMAT XLSX` option:
+To export a table to an Excel file, use the `COPY` statement with the `FORMAT xlsx` option:
 
 ```sql
-COPY tbl TO 'output.xlsx' WITH (FORMAT XLSX);
+COPY tbl TO 'output.xlsx' WITH (FORMAT xlsx);
 ```
 
 The result of a query can also be directly exported to an Excel file:
 
 ```sql
-COPY (SELECT * FROM tbl) TO 'output.xlsx' WITH (FORMAT XLSX);
+COPY (SELECT * FROM tbl) TO 'output.xlsx' WITH (FORMAT xlsx);
 ```
 
 To write the column names as the first row in the Excel file, use the `HEADER` option:
 
 ```sql
-COPY tbl TO 'output.xlsx' WITH (FORMAT XLSX, HEADER TRUE);
+COPY tbl TO 'output.xlsx' WITH (FORMAT xlsx, HEADER true);
 ```
 
 To name the worksheet in the resulting Excel file, use the `SHEET` option:
 
 ```sql
-COPY tbl TO 'output.xlsx' WITH (FORMAT XLSX, SHEET 'Sheet1');
+COPY tbl TO 'output.xlsx' WITH (FORMAT xlsx, SHEET 'Sheet1');
 ```
 
 ## Type Conversions
@@ -47,7 +47,7 @@ Because Excel only really supports storing numbers or strings – the equivalent
 But you can of course also explicitly cast columns to a different type before exporting them to Excel:
 
 ```sql
-COPY (SELECT CAST(a AS VARCHAR), b FROM tbl) TO 'output.xlsx' WITH (FORMAT XLSX);
+COPY (SELECT CAST(a AS VARCHAR), b FROM tbl) TO 'output.xlsx' WITH (FORMAT xlsx);
 ```
 
 ## See Also

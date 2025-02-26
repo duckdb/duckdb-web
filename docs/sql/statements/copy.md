@@ -21,13 +21,13 @@ COPY lineitem FROM 'lineitem.csv' (DELIMITER '|');
 Read a Parquet file into the `lineitem` table:
 
 ```sql
-COPY lineitem FROM 'lineitem.pq' (FORMAT PARQUET);
+COPY lineitem FROM 'lineitem.pq' (FORMAT parquet);
 ```
 
 Read a JSON file into the `lineitem` table, using auto-detected options:
 
 ```sql
-COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT true);
+COPY lineitem FROM 'lineitem.json' (FORMAT json, AUTO_DETECT true);
 ```
 
 Read a CSV file into the `lineitem` table, using double quotes:
@@ -45,7 +45,7 @@ COPY lineitem FROM lineitem.csv;
 Write a table to a CSV file:
 
 ```sql
-COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);
+COPY lineitem TO 'lineitem.csv' (FORMAT csv, DELIMITER '|', HEADER);
 ```
 
 Write a table to a CSV file, using double quotes:
@@ -63,7 +63,7 @@ COPY lineitem TO lineitem.csv;
 Write the result of a query to a Parquet file:
 
 ```sql
-COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRESSION ZSTD);
+COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRESSION zstd);
 ```
 
 Copy the entire content of database `db1` to database `db2`:
@@ -121,19 +121,19 @@ COPY category(name) FROM 'names.csv';
 Read the contents of a Parquet file `lineitem.parquet` into the `lineitem` table:
 
 ```sql
-COPY lineitem FROM 'lineitem.parquet' (FORMAT PARQUET);
+COPY lineitem FROM 'lineitem.parquet' (FORMAT parquet);
 ```
 
 Read the contents of a newline-delimited JSON file `lineitem.ndjson` into the `lineitem` table:
 
 ```sql
-COPY lineitem FROM 'lineitem.ndjson' (FORMAT JSON);
+COPY lineitem FROM 'lineitem.ndjson' (FORMAT json);
 ```
 
 Read the contents of a JSON file `lineitem.json` into the `lineitem` table:
 
 ```sql
-COPY lineitem FROM 'lineitem.json' (FORMAT JSON, ARRAY true);
+COPY lineitem FROM 'lineitem.json' (FORMAT json, ARRAY true);
 ```
 
 ### Syntax
@@ -185,19 +185,19 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' (DELIMITER ',');
 Copy the result of a query to the Parquet file `query.parquet`:
 
 ```sql
-COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.parquet' (FORMAT PARQUET);
+COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.parquet' (FORMAT parquet);
 ```
 
 Copy the result of a query to the newline-delimited JSON file `query.ndjson`:
 
 ```sql
-COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.ndjson' (FORMAT JSON);
+COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.ndjson' (FORMAT json);
 ```
 
 Copy the result of a query to the JSON file `query.json`:
 
 ```sql
-COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY true);
+COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT json, ARRAY true);
 ```
 
 ### `COPY ... TO` Options

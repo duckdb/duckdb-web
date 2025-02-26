@@ -38,7 +38,7 @@ FROM 'data/json/with_list.json';
 **Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [Hive-partitioned Parquet and CSV files]({% link docs/extensions/httpfs/overview.md %}#hive-partitioning) for a while. After this release [DuckDB will also be able to *write* Hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
 
 ```sql
-COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
+COPY orders TO 'orders' (FORMAT parquet, PARTITION_BY (year, month));
 ```
 
 This will cause the Parquet files to be written in the following directory structure:
@@ -84,7 +84,7 @@ See the [documentation for more information]({% link docs/sql/statements/attach.
 **SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/duckdb-sqlite) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
-ATTACH 'sqlite_file.db' AS sqlite (TYPE SQLITE);
+ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
 CREATE TABLE sqlite.tbl (i INTEGER);
 INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;

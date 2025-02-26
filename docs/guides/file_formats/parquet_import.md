@@ -35,7 +35,7 @@ INSERT INTO tbl
 Alternatively, the `COPY` statement can also be used to load data from a Parquet file into an existing table:
 
 ```sql
-COPY tbl FROM 'input.parquet' (FORMAT PARQUET);
+COPY tbl FROM 'input.parquet' (FORMAT parquet);
 ```
 
 For additional options, see the [Parquet loading reference]({% link docs/data/parquet/overview.md %}).

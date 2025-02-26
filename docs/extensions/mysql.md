@@ -22,10 +22,10 @@ LOAD mysql;
 
 ## Reading Data from MySQL
 
-To make a MySQL database accessible to DuckDB use the `ATTACH` command with the `MYSQL` or the `MYSQL_SCANNER` type:
+To make a MySQL database accessible to DuckDB use the `ATTACH` command with the `mysql` or the `mysql_scanner` type:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE MYSQL);
+ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql);
 USE mysqldb;
 ```
 
@@ -58,7 +58,7 @@ MySQL connection information can also be specified with [secrets](/docs/configur
 
 ```sql
 CREATE SECRET (
-    TYPE MYSQL,
+    TYPE mysql,
     HOST '127.0.0.1',
     PORT 0,
     DATABASE mysql,
@@ -70,13 +70,13 @@ CREATE SECRET (
 The information from the secret will be used when `ATTACH` is called. We can leave the connection string empty to use all of the information stored in the secret.
 
 ```sql
-ATTACH '' AS mysql_db (TYPE MYSQL);
+ATTACH '' AS mysql_db (TYPE mysql);
 ```
 
 We can use the connection string to override individual options. For example, to connect to a different database while still using the same credentials, we can override only the database name in the following manner.
 
 ```sql
-ATTACH 'database=my_other_db' AS mysql_db (TYPE MYSQL);
+ATTACH 'database=my_other_db' AS mysql_db (TYPE mysql);
 ```
 
 By default, created secrets are temporary. Secrets can be persisted using the [`CREATE PERSISTENT SECRET` command]({% link docs/configuration/secrets_manager.md %}#persistent-secrets). Persistent secrets can be used across sessions.
@@ -87,7 +87,7 @@ Named secrets can be used to manage connections to multiple MySQL database insta
 
 ```sql
 CREATE SECRET mysql_secret_one (
-    TYPE MYSQL,
+    TYPE mysql,
     HOST '127.0.0.1',
     PORT 0,
     DATABASE mysql,
@@ -99,7 +99,7 @@ CREATE SECRET mysql_secret_one (
 The secret can then be explicitly referenced using the `SECRET` parameter in the `ATTACH`.
 
 ```sql
-ATTACH '' AS mysql_db_one (TYPE MYSQL, SECRET mysql_secret_one);
+ATTACH '' AS mysql_db_one (TYPE mysql, SECRET mysql_secret_one);
 ```
 
 ### SSL Connections
@@ -160,7 +160,7 @@ This allows you to use DuckDB to, for example, export data that is stored in a M
 Below is a brief example of how to create a new table in MySQL and load data into it.
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql);
 CREATE TABLE mysql_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
 ```
@@ -169,7 +169,7 @@ Many operations on MySQL tables are supported. All these operations directly mod
 Note that if modifications are not desired, `ATTACH` can be run with the `READ_ONLY` property which prevents making modifications to the underlying database. For example:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL, READ_ONLY);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql, READ_ONLY);
 ```
 
 ## Supported Operations
@@ -299,7 +299,7 @@ mysql_query(attached_database::VARCHAR, query::VARCHAR)
 For example:
 
 ```sql
-ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
+ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
 SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
 ```
 
@@ -308,7 +308,7 @@ SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
 The `mysql_execute` function allows running arbitrary queries within MySQL, including statements that update the schema and content of the database.
 
 ```sql
-ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
+ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
 CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 ```
 

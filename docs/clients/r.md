@@ -145,7 +145,7 @@ tbl(con, "mtcars.csv") |>
 
 ```r
 # Establish a set of Parquet files
-dbExecute(con, "COPY flights TO 'dataset' (FORMAT PARQUET, PARTITION_BY (year, month))")
+dbExecute(con, "COPY flights TO 'dataset' (FORMAT parquet, PARTITION_BY (year, month))")
 
 # Summarize the dataset in DuckDB to avoid reading 12 Parquet files into R's memory
 tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning = true)") |>

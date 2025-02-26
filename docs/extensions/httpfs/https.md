@@ -45,7 +45,7 @@ To authenticate for an HTTP(S) endpoint, create an `HTTP` secret using the [Secr
 
 ```sql
 CREATE SECRET http_auth (
-    TYPE HTTP,
+    TYPE http,
     BEARER_TOKEN '⟨token⟩'
 );
 
@@ -55,7 +55,7 @@ Or:
 
 ```sql
 CREATE SECRET http_auth (
-    TYPE HTTP,
+    TYPE http,
     EXTRA_HTTP_HEADERS MAP {
         'Authorization': 'Bearer ⟨token⟩'
     }
@@ -70,7 +70,7 @@ You can add an HTTP proxy using the [Secrets Manager]({% link docs/configuration
 
 ```sql
 CREATE SECRET http_proxy (
-    TYPE HTTP,
+    TYPE http,
     HTTP_PROXY '⟨http_proxy_url⟩',
     HTTP_PROXY_USERNAME '⟨username⟩',
     HTTP_PROXY_PASSWORD '⟨password⟩'

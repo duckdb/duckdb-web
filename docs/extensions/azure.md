@@ -132,7 +132,7 @@ The default provider, `CONFIG` (i.e., user-configured), allows access to the sto
 
 ```sql
 CREATE SECRET secret1 (
-    TYPE AZURE,
+    TYPE azure,
     CONNECTION_STRING '⟨value⟩'
 );
 ```
@@ -141,8 +141,8 @@ If you do not use authentication, you still need to specify the storage account 
 
 ```sql
 CREATE SECRET secret2 (
-    TYPE AZURE,
-    PROVIDER CONFIG,
+    TYPE azure,
+    PROVIDER config,
     ACCOUNT_NAME '⟨storage account name⟩'
 );
 ```
@@ -157,8 +157,8 @@ For example:
 
 ```sql
 CREATE SECRET secret3 (
-    TYPE AZURE,
-    PROVIDER CREDENTIAL_CHAIN,
+    TYPE azure,
+    PROVIDER credential_chain,
     ACCOUNT_NAME '⟨storage account name⟩'
 );
 ```
@@ -167,8 +167,8 @@ DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This t
 
 ```sql
 CREATE SECRET secret4 (
-    TYPE AZURE,
-    PROVIDER CREDENTIAL_CHAIN,
+    TYPE azure,
+    PROVIDER credential_chain,
     CHAIN 'cli;env',
     ACCOUNT_NAME '⟨storage account name⟩'
 );
@@ -190,8 +190,8 @@ Either with a secret:
 
 ```sql
 CREATE SECRET azure_spn (
-    TYPE AZURE,
-    PROVIDER SERVICE_PRINCIPAL,
+    TYPE azure,
+    PROVIDER service_principal,
     TENANT_ID '⟨tenant id⟩',
     CLIENT_ID '⟨client id⟩',
     CLIENT_SECRET '⟨client secret⟩',
@@ -203,8 +203,8 @@ Or with a certificate:
 
 ```sql
 CREATE SECRET azure_spn_cert (
-    TYPE AZURE,
-    PROVIDER SERVICE_PRINCIPAL,
+    TYPE azure,
+    PROVIDER service_principal,
     TENANT_ID '⟨tenant id⟩',
     CLIENT_ID '⟨client id⟩',
     CLIENT_CERTIFICATE_PATH '⟨client cert path⟩',
@@ -218,7 +218,7 @@ To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PR
 
 ```sql
 CREATE SECRET secret5 (
-    TYPE AZURE,
+    TYPE azure,
     CONNECTION_STRING '⟨value⟩',
     HTTP_PROXY 'http://localhost:3128',
     PROXY_USER_NAME 'john',
@@ -263,7 +263,7 @@ import duckdb
 
 os.environ["AZURE_LOG_LEVEL"] = "verbose"
 
-duckdb.sql("CREATE SECRET myaccount (TYPE AZURE, PROVIDER CREDENTIAL_CHAIN, SCOPE 'az://myaccount.blob.core.windows.net/')")
+duckdb.sql("CREATE SECRET myaccount (TYPE azure, PROVIDER credential_chain, SCOPE 'az://myaccount.blob.core.windows.net/')")
 duckdb.sql("SELECT count(*) FROM 'az://myaccount.blob.core.windows.net/path/to/blob.parquet'")
 ```
 

@@ -209,7 +209,7 @@ The run time is about 35 milliseconds.
 If we would like to use an external binary file format, we can also export the database to a single Parquet file:
 
 ```sql
-EXPORT DATABASE 'railway' (FORMAT PARQUET);
+EXPORT DATABASE 'railway' (FORMAT parquet);
 ```
 
 We can then directly query it as follows:
@@ -243,7 +243,7 @@ To speed up queries even further, we can use [Hive partitioning]({% link docs/da
 ```sql
 COPY services
 TO 'services-parquet-hive'
-(FORMAT PARQUET, PARTITION_BY (Service_Company, Service_Type));
+(FORMAT parquet, PARTITION_BY (Service_Company, Service_Type));
 ```
 
 Let's peek into the directory from DuckDB's CLI using the [`.sh` dot command]({% link docs/clients/cli/dot_commands.md %}):
@@ -294,7 +294,7 @@ And the neat thing about Hive partitioning is that it even works with CSV files!
 ```sql
 COPY services
 TO 'services-csv-hive'
-(FORMAT CSV, PARTITION_BY (Service_Company, Service_Type));
+(FORMAT csv, PARTITION_BY (Service_Company, Service_Type));
 
 SELECT avg(Stop_Arrival_delay)
 FROM read_csv('services-csv-hive/**/*.csv', hive_partitioning = true)

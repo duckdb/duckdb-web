@@ -21,12 +21,12 @@ LOAD sqlite;
 
 ## Usage
 
-To make a SQLite file accessible to DuckDB, use the `ATTACH` statement with the `SQLITE` or `SQLITE_SCANNER` type. Attached SQLite databases support both read and write operations.
+To make a SQLite file accessible to DuckDB, use the `ATTACH` statement with the `sqlite` or `sqlite_scanner` type. Attached SQLite databases support both read and write operations.
 
 For example, to attach to the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/raw/main/data/db/sakila.db), run:
 
 ```sql
-ATTACH 'sakila.db' (TYPE SQLITE);
+ATTACH 'sakila.db' (TYPE sqlite);
 USE sakila;
 ```
 
@@ -150,7 +150,7 @@ This allows you to use DuckDB to, for example, export data that is stored in a S
 Below is a brief example of how to create a new SQLite database and load data into it.
 
 ```sql
-ATTACH 'new_sqlite_database.db' AS sqlite_db (TYPE SQLITE);
+ATTACH 'new_sqlite_database.db' AS sqlite_db (TYPE sqlite);
 CREATE TABLE sqlite_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 ```

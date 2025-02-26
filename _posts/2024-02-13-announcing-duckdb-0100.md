@@ -252,7 +252,7 @@ For example, to create a temporary unscoped secret to access S3, we can now use 
 
 ```sql
 CREATE SECRET (
-    TYPE S3,
+    TYPE s3,
     KEY_ID 'mykey',
     SECRET 'mysecret',
     REGION 'myregion'
@@ -263,14 +263,14 @@ If two secrets exist for a service type, the scope can be used to decide which o
 
 ```sql
 CREATE SECRET secret1 (
-    TYPE S3,
+    TYPE s3,
     KEY_ID 'my_key1',
     SECRET 'my_secret1',
     SCOPE 's3://my-bucket'
 );
 
 CREATE SECRET secret2 (
-    TYPE S3,
+    TYPE s3,
     KEY_ID 'my_key2',
     SECRET 'my_secret2',
     SCOPE 's3://my-other-bucket'
@@ -285,7 +285,7 @@ In order to persist secrets between DuckDB database instances, we can now use th
 
 ```sql
 CREATE PERSISTENT SECRET my_persistent_secret (
-    TYPE S3,
+    TYPE s3,
     KEY_ID 'key',
     SECRET 'secret'
 );

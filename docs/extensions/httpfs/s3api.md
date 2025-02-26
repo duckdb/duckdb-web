@@ -30,7 +30,7 @@ The default provider, `CONFIG` (i.e., user-configured), allows access to the S3 
 
 ```sql
 CREATE SECRET secret1 (
-    TYPE S3,
+    TYPE s3,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
     REGION 'us-east-1'
@@ -52,8 +52,8 @@ The `CREDENTIAL_CHAIN` provider allows automatically fetching credentials using 
 
 ```sql
 CREATE SECRET secret2 (
-    TYPE S3,
-    PROVIDER CREDENTIAL_CHAIN
+    TYPE s3,
+    PROVIDER credential_chain
 );
 ```
 
@@ -63,8 +63,8 @@ DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This t
 
 ```sql
 CREATE SECRET secret3 (
-    TYPE S3,
-    PROVIDER CREDENTIAL_CHAIN,
+    TYPE s3,
+    PROVIDER credential_chain,
     CHAIN 'env;config'
 );
 ```
@@ -82,8 +82,8 @@ The `CREDENTIAL_CHAIN` provider also allows overriding the automatically fetched
 
 ```sql
 CREATE SECRET secret4 (
-    TYPE S3,
-    PROVIDER CREDENTIAL_CHAIN,
+    TYPE s3,
+    PROVIDER credential_chain,
     CHAIN 'config',
     REGION 'eu-west-1'
 );
@@ -113,7 +113,7 @@ While [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2) uses the
 
 ```sql
 CREATE SECRET secret5 (
-    TYPE R2,
+    TYPE r2,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
     ACCOUNT_ID 'my_account_id'
@@ -133,7 +133,7 @@ While [Google Cloud Storage](https://cloud.google.com/storage) is accessed by Du
 
 ```sql
 CREATE SECRET secret6 (
-    TYPE GCS,
+    TYPE gcs,
     KEY_ID 'my_key',
     SECRET 'my_secret'
 );
@@ -218,7 +218,7 @@ Partitioned copy to S3 also works:
 
 ```sql
 COPY table TO 's3://my-bucket/partitioned' (
-    FORMAT PARQUET,
+    FORMAT parquet,
     PARTITION_BY (part_col_a, part_col_b)
 );
 ```
@@ -227,7 +227,7 @@ An automatic check is performed for existing files/directories, which is current
 
 ```sql
 COPY table TO 's3://my-bucket/partitioned' (
-    FORMAT PARQUET,
+    FORMAT parquet,
     PARTITION_BY (part_col_a, part_col_b),
     OVERWRITE_OR_IGNORE true
 );

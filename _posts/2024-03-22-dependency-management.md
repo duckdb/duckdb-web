@@ -122,7 +122,7 @@ used to easily query from authenticated Azure containers:
 
 ```sql
 CREATE SECRET az1 (
-    TYPE AZURE,
+    TYPE azure,
     CONNECTION_STRING '⟨redacted⟩'
 );
 SELECT column_a, column_b

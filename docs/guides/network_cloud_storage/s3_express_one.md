@@ -24,7 +24,7 @@ For example, to allow DuckDB to use an S3 Express One bucket, configure the [Sec
 
 ```sql
 CREATE SECRET (
-    TYPE S3,
+    TYPE s3,
     REGION 'us-east-1',
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',

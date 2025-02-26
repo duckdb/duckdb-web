@@ -35,7 +35,7 @@ Alternatively, the entire file can be attached using the `ATTACH` command. This 
 
 ```sql
 -- Attach the SQLite file "test.db"
-ATTACH 'test.db' AS test (TYPE SQLITE);
+ATTACH 'test.db' AS test (TYPE sqlite);
 -- The table "tbl_name" can now be queried as if it is a regular table
 SELECT * FROM test.tbl_name;
 -- Switch the active database to "test"

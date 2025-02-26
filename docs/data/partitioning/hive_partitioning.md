@@ -16,7 +16,7 @@ Write a table to a Hive partitioned data set:
 
 ```sql
 COPY orders
-TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
+TO 'orders' (FORMAT parquet, PARTITION_BY (year, month));
 ```
 
 Note that the `PARTITION_BY` options cannot use expressions. You can produce columns on the fly using the following syntax:
