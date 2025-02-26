@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB Quacks Arrow: A Zero-copy Data Integration between Apache Arrow and DuckDB"
+title: "DuckDB Quacks Arrow: A Zero-Copy Data Integration between Apache Arrow and DuckDB"
 author: Pedro Holanda and Jonathan Keane
 excerpt: The zero-copy integration between DuckDB and Apache Arrow allows for rapid analysis of larger than memory datasets in Python and R using either SQL or relational APIs.
 tags: ["using DuckDB"]
