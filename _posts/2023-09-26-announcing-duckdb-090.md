@@ -184,7 +184,7 @@ SELECT '127.0.0.1'::INET;
 
 ```sql
 CALL load_aws_credentials();
-SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
+SELECT * FROM 's3://some-bucket/that/requires/authentication.parquet';
 ```
 
 [See the documentation for more information]({% link docs/extensions/aws.md %}).

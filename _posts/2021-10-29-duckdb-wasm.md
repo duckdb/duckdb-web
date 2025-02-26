@@ -102,7 +102,7 @@ await db.registerFileURL("remote.parquet", "https://origin/remote.parquet");
 // ..., by specifying URLs in the SQL text
 await c.query(`
     CREATE TABLE direct AS
-        SELECT * FROM "https://origin/remote.parquet"
+        SELECT * FROM 'https://origin/remote.parquet'
 `);
 // ..., or by executing raw insert statements
 await c.query(`INSERT INTO existing_table
