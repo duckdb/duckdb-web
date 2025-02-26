@@ -10,11 +10,11 @@ tags: ["using DuckDB"]
 
 ## Spreadsheets Are Everywhere
 
-Is anything more polarizing for data folks than spreadsheets? 
+Is anything more polarizing for data folks than spreadsheets?
 Wait, don't answer that, we don't have time to talk about leading and trailing commas again...
 
-The fact is that spreadsheets are everywhere. 
-It is estimated that there are over [750 million spreadsheet users](https://thenewstack.io/microsoft-excel-becomes-a-programming-language/), compared to just [20](https://www.jetbrains.com/lp/devecosystem-data-playground/#global_population) to [30 million programmers](https://www.statista.com/statistics/627312/worldwide-developer-population/) (that's all languages put together). 
+The fact is that spreadsheets are everywhere.
+It is estimated that there are over [750 million spreadsheet users](https://thenewstack.io/microsoft-excel-becomes-a-programming-language/), compared to just [20](https://www.jetbrains.com/lp/devecosystem-data-playground/#global_population) to [30 million programmers](https://www.statista.com/statistics/627312/worldwide-developer-population/) (that's all languages put together).
 
 Now, you can use DuckDB to seamlessly bridge the gap between data-y folks and business-y folks!
 With a simple in-browser authentication flow, or an automateable private key file flow, you can both query from and load into Google Sheets.
@@ -24,7 +24,7 @@ Feel free to have a look at the [GSheets extension repo](https://github.com/evid
 ## Benefits
 
 There are a number of ways that using a spreadsheet can improve a data workflow.
-Blasphemy you say! 
+Blasphemy you say!
 Well, imagine if your database could actually read those spreadsheets.
 
 ### Reading from Sheets
@@ -48,7 +48,7 @@ The benefits quickly accumulate once those teams' data can be ingested into exis
 Dashboards begin to actually reflect the reality of the business.
 Business processes that used to require days of error-prone manual spreadsheet manipulation can become scheduled SQL or dbt scripts in source control. 
 
-### Writing to Sheets 
+### Writing to Sheets
 
 Often, the output of a data workflow is used to inform business decision making.
 This is especially true with machine learning or forecasting processes (oh, sorry, I seem to have misspelled AI).
@@ -57,11 +57,11 @@ Good luck getting that insight into your model without a spreadsheet!
 Those decisions could even be re-ingested into DuckDB so that the forecast can be improved over time.
 
 There are many simpler use cases as well: data validation, data annotation, checklists, communication with external teams, dummy dataset generation, and more.
-Maybe pushing directly to Google Sheets will get folks to stop having to click "export to csv" on your team's dashboards!
+Maybe pushing directly to Google Sheets will get folks to stop having to click "export to CSV" on your team's dashboards!
 
 ## Getting Started with the GSheets Extension
 
-The first few steps are to install the extension and authenticate with Google.
+The first few steps are to install the [gsheets community extension]({% link community_extensions/extensions/gsheets.md %}) and authenticate with Google.
 
 ```sql
 INSTALL gsheets FROM community;
@@ -93,11 +93,14 @@ FROM 'https://docs.google.com/spreadsheets/d/1B4RFuOnZ4ITZ-nR9givZ7vWVOTVddC3VTK
 | or live long enough to query from spreadsheets |
 
 Copy the URL of the Sheet to query when viewing the sheet of interest within the workbook.
-The 'gid' query string parameter is the id of that specific sheet.
+The `gid` query string parameter is the id of that specific sheet.
 
-There are 2 ways to pass in additional parameters.
-You may either add them to the end of the URL as query string parameters, or use the `read_gsheet` table function and specify them as separate SQL parameters.
-The repo README has a variety of examples and some are included below!
+There are two ways to pass in additional parameters:
+
+1. you can add them to the end of the URL as query string parameters or
+2. you can use the `read_gsheet` table function and specify them as separate SQL parameters.
+
+The [repository README](https://github.com/evidence-dev/duckdb_gsheets/blob/main/docs/pages/index.md) has a variety of examples and some are included below!
 
 > Query string parameters must be placed after a `?`.
 > Each parameter is formatted as a `key=value` pair, and multiple are separated with `&`.
@@ -127,9 +130,9 @@ Additionally, the `range` can be specified as a set of columns (e.g. `D:X`) to b
 ### Data Types
 
 The extension will sample the first row of data in the sheet to attempt to determine the data types of the columns.
-(We have plans to improve this sampling and are open to contributions!) 
+(We have plans to improve this sampling and are open to contributions!)
 To skip this step and define the data types within SQL, set the `all_varchar` parameter to `true`.
-The example below also demonstrates that the full URL is not needed - only the Google Workbook identifier.
+The example below also demonstrates that the full URL is not needed – only the Google Workbook identifier.
 
 ```sql
 FROM read_gsheet(
@@ -150,7 +153,6 @@ Another key capability of the GSheets extension is to write the results of any D
 > By default, the entire Sheet will be replaced with the output of the query (including a header row for column names), starting in cell A1 of the first sheet.
 > See below for examples that adjust this behavior!
 
-
 ```sql
 -- Here you will need to specify your own Sheet to experiment with!
 -- (We can't predict what folks would write to a public Sheet...
@@ -163,7 +165,7 @@ TO 'https://docs.google.com/spreadsheets/d/...'  (
 
 ### Writing to a Specific Sheet and Range
 
-As with reading, both query string parameters and SQL parameters can be used to write to a specific `sheet` or `range`. 
+As with reading, both query string parameters and SQL parameters can be used to write to a specific `sheet` or `range`.
 Similarly, the SQL parameters take precedence. These examples are equivalent:
 
 ```sql
@@ -202,23 +204,23 @@ Helpfully, the `header` parameter defaults to `false` in the append case, but it
 COPY (FROM range(10))
 TO 'https://docs.google.com/spreadsheets/d/...?gid=123#gid=123&range=A2:Z10000' (
     FORMAT gsheet,
-    OVERWRITE_SHEET = false,
-    OVERWRITE_RANGE = false
-    -- header = false is the default in this case!
+    OVERWRITE_SHEET false,
+    OVERWRITE_RANGE false
+    -- HEADER false is the default in this case!
 );
 ```
 
 ## Automated Workflows
 
 Working with spreadsheets is great for ad hoc work, but it can also be powerful when ingrained in automated processes.
-If you want to schedule an interaction with Google Sheets, a key file containing a private key will be needed instead of the in browser authentication method.
+If you want to schedule an interaction with Google Sheets, a key file containing a private key will be needed instead of the in-browser authentication method.
 
 <details markdown='1'>
 <summary markdown='span'>
     The process to acquire this key file has a number of steps, outlined below. Luckily they only need to be done once! This is also available in the repo README.
 </summary>
 
-To connect DuckDB to Google Sheets via an access token, you’ll need to create a Service Account through the Google API Console. 
+To connect DuckDB to Google Sheets via an access token, you’ll need to create a Service Account through the Google API Console.
 The GSheets extension will use it to generate an access token periodically.
 
 1. Navigate to the [Google API Console](https://console.developers.google.com/apis/library).
@@ -235,7 +237,7 @@ The GSheets extension will use it to generate an access token periodically.
 
 After aquiring this key file, the persistent private key must be converted to a temporary token once every 30 minutes.
 That process is now automated with the `key_file` `SECRET` `provider`.
-Create the secret with a command like below, pointing to the JSON file exported from Google. 
+Create the [secret]({% link docs/configuration/secrets_manager.md %}) with a command like below, pointing to the JSON file exported from Google.
 
 ```sql
 CREATE OR REPLACE PERSISTENT SECRET my_secret (
@@ -246,7 +248,7 @@ CREATE OR REPLACE PERSISTENT SECRET my_secret (
 ```
 
 As the secret is created, the private key is stored in DuckDB and a temporary token is created.
-The secret can be stored in memory or optionally persisted to disk (unencrypted) using the `PERSISTENT` keyword.
+The secret can be stored in memory or optionally persisted to disk (unencrypted) using the [`PERSISTENT` keyword]({% link docs/configuration/secrets_manager.md %}#persistent-secrets).
 The temporary token is cached within the `SECRET` as well and is recreated if it is over 30 minutes old.
 
 This unlocks the use of the GSheets extension within pipelines, like GitHub Actions (GHA) or other orchestrators like dbt.
@@ -261,12 +263,12 @@ We encourage you to give your extension idea a shot and reach out on Discord if 
 
 ## Roadmap
 
-There are a few more fun features we are thinking about for the extension - we are open to PRs and collaborators!
+There are a few more fun features we are thinking about for the extension – we are open to PRs and collaborators!
 
 We would like to use a better heuristic for detecting data types when reading from a Sheet.
 The DuckDB type system is more advanced than Sheets, so it would be beneficial to be more precise.
 
-Enabling the GSheets extension to work in Wasm would allow in-browser applications to query Sheets directly - no server needed! 
+Enabling the GSheets extension to work in [DuckDB-Wasm]({% link docs/api/wasm/overview.md %}) would allow in-browser applications to query Sheets directly – no server needed!
 Several `http` functions need some modification to work in a browser environment.
 
 The OAuth flow that powers the browser-based login may be useful for authenticating to other APIs.
@@ -276,7 +278,7 @@ There are no concrete plans for this at the moment, but if anyone is interested,
 ## Closing Thoughts
 
 At MotherDuck (where Alex works), we have this extension running in production for several internal data pipelines!
-We have automated exports of forecasts from our warehouse into Sheets and continually load manually collected customer support data into our (MotherDuck powered) data warehouse.
+We have automated exports of forecasts from our warehouse into Sheets and continually load manually collected customer support data into our (MotherDuck-powered) data warehouse.
 As a result, our KPI dashboards include context from folks talking directly to customers!
 
 [Michael Harris](https://www.linkedin.com/in/mharrisb1/) has also contributed to the extension (thank you!), and [Definite](https://www.definite.app/) has deployed GSheets scheduled jobs into production for multiple customers!
