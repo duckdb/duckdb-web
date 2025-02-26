@@ -1,6 +1,8 @@
 ---
 layout: docu
-title: Loading Duckbox Tables
+title: Importing Duckbox Tables
+redirect_from:
+  - /docs/guides/file_formats/duckbox
 ---
 
 > The scripts provided in this page work on Linux, macOS, and WSL.

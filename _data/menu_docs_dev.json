@@ -1209,10 +1209,6 @@
                   "url": "query_parquet"
                 },
                 {
-                  "page": "Duckbox Import",
-                  "url": "duckbox"
-                },
-                {
                   "page": "File Access with the file: Protocol",
                   "url": "file_access"
                 }
@@ -1463,6 +1459,14 @@
                 {
                   "page": "Analyzing a Git Repository",
                   "url": "analyze_git_repository"
+                },
+                {
+                  "page": "Importing Duckbox Tables",
+                  "url": "importing_duckbox_tables"
+                },
+                {
+                  "page": "Copying an In-Memory Database to a File",
+                  "url": "copy_in-memory_database_to_file"
                 }
               ]
             },
