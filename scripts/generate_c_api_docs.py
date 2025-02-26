@@ -18,29 +18,29 @@ with open(duckdb_h_path, 'r') as f:
     text = f.read()
 
 docs_map = {
-    'Open Connect': 'docs/api/c/connect.md',
-    'Query Execution': 'docs/api/c/query.md',
-    'Configuration': 'docs/api/c/config.md',
-    'Result Functions': 'docs/api/c/types.md',
+    'Open Connect': 'docs/clients/c/connect.md',
+    'Query Execution': 'docs/clients/c/query.md',
+    'Configuration': 'docs/clients/c/config.md',
+    'Result Functions': 'docs/clients/c/types.md',
     'Helpers': None,
-    'Date Time Timestamp Helpers': 'docs/api/c/types.md',
-    'Hugeint Helpers': 'docs/api/c/types.md',
-    'Decimal Helpers': 'docs/api/c/types.md',
-    'Value Interface': 'docs/api/c/value.md',
-    'Logical Type Interface': 'docs/api/c/types.md',
-    'Data Chunk Interface': 'docs/api/c/data_chunk.md',
-    'Vector Interface': 'docs/api/c/vector.md',
-    'Validity Mask Functions': 'docs/api/c/vector.md',
-    'Table Functions': 'docs/api/c/table_functions.md',
-    'Table Function Bind': 'docs/api/c/table_functions.md',
-    'Table Function Init': 'docs/api/c/table_functions.md',
-    'Table Function': 'docs/api/c/table_functions.md',
-    'Replacement Scans': 'docs/api/c/replacement_scans.md',
-    'Prepared Statements': 'docs/api/c/prepared.md',
-    'Appender': 'docs/api/c/appender.md',
+    'Date Time Timestamp Helpers': 'docs/clients/c/types.md',
+    'Hugeint Helpers': 'docs/clients/c/types.md',
+    'Decimal Helpers': 'docs/clients/c/types.md',
+    'Value Interface': 'docs/clients/c/value.md',
+    'Logical Type Interface': 'docs/clients/c/types.md',
+    'Data Chunk Interface': 'docs/clients/c/data_chunk.md',
+    'Vector Interface': 'docs/clients/c/vector.md',
+    'Validity Mask Functions': 'docs/clients/c/vector.md',
+    'Table Functions': 'docs/clients/c/table_functions.md',
+    'Table Function Bind': 'docs/clients/c/table_functions.md',
+    'Table Function Init': 'docs/clients/c/table_functions.md',
+    'Table Function': 'docs/clients/c/table_functions.md',
+    'Replacement Scans': 'docs/clients/c/replacement_scans.md',
+    'Prepared Statements': 'docs/clients/c/prepared.md',
+    'Appender': 'docs/clients/c/appender.md',
     'Arrow Interface': None,
 }
-all_api_functions = 'docs/api/c/api.md'
+all_api_functions = 'docs/clients/c/api.md'
 
 
 def is_line_separator(l):

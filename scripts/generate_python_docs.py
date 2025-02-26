@@ -56,7 +56,7 @@ def main():
         version('pandas'),
     )
 
-    destdir = join(dirname(__file__), "../docs/api/python/reference/")
+    destdir = join(dirname(__file__), "../docs/clients/python/reference/")
     app = Sphinx(
         srcdir=destdir + "templates",
         confdir=None,
