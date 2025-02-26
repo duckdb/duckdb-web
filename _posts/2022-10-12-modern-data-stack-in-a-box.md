@@ -50,6 +50,7 @@ Given that the NBA season is starting soon, a monte carlo type simulation of the
 ## Building the Environment
 
 The detailed steps to build the project can be found in the repo, but the high-level steps will be repeated here. As a note, Windows Subsystem for Linux (WSL) was chosen to support Apache Superset, but the other components of this stack can run directly on any operating system. Thankfully, using Linux on Windows has become very straightforward.
+
 1. Install Ubuntu 20.04 on WSL.
 1. Upgrade your packages (`sudo apt update`).
 1. Install python.
@@ -60,7 +61,8 @@ The detailed steps to build the project can be found in the repo, but the high-l
 
 ## Meltano as a Wrapper for Pipeline Plugins
 
-In this example, [Meltano](https://meltano.com/) pulls together multiple bits and pieces to allow the pipeline to be run with a single statement. The first part is the tap (extractor) which is '[tap-spreadsheets-anywhere](https://hub.meltano.com/extractors/tap-spreadsheets-anywhere/)'. This tap allows us to get flat data files from various sources. It should be noted that DuckDB can consume directly from flat files (locally and over the network), or SQLite and PostgreSQL databases. However, this tap was chosen to provide a clear example of getting static data into your database that can easily be configured in the meltano.yml file. Meltano also becomes more beneficial as the complexity of your data sources increases. 
+In this example, [Meltano](https://meltano.com/) pulls together multiple bits and pieces to allow the pipeline to be run with a single statement. The first part is the tap (extractor) which is '[tap-spreadsheets-anywhere](https://hub.meltano.com/extractors/tap-spreadsheets-anywhere/)'. This tap allows us to get flat data files from various sources. It should be noted that DuckDB can consume directly from flat files (locally and over the network), or SQLite and PostgreSQL databases. However, this tap was chosen to provide a clear example of getting static data into your database that can easily be configured in the meltano.yml file. Meltano also becomes more beneficial as the complexity of your data sources increases.
+
 ```yaml
 plugins:
   extractors:
@@ -71,6 +73,7 @@ plugins:
 ```
 
 The next bit is the target (loader), '[target-duckdb](https://github.com/jwills/target-duckdb)'. This target can take data from any Meltano tap and load it into DuckDB. Part of the beauty of this approach is that you don't have to mess with all the extra complexity that comes with a typical database. DuckDB can be dropped in and is ready to go with zero configuration or ongoing maintenance. Furthermore, because the components and the data are co-located, networking is not a consideration and further reduces complexity.
+
 ```yaml
   loaders:
   - name: target-duckdb
@@ -82,6 +85,7 @@ The next bit is the target (loader), '[target-duckdb](https://github.com/jwills/
 ```
 
 Next is the transformer: '[dbt-duckdb](https://github.com/jwills/dbt-duckdb)'. dbt enables transformations using a combination of SQL and Jinja templating for approachable SQL-based analytics engineering. The dbt adapter for DuckDB now supports parallel execution across threads, which makes the MDS-in-a-box run even faster. Since the bulk of the work is happening inside of dbt, this portion will be described in detail later in the post.
+
 ```yaml
   transformers:
   - name: dbt-duckdb
@@ -92,6 +96,7 @@ Next is the transformer: '[dbt-duckdb](https://github.com/jwills/dbt-duckdb)'. d
 ```
 
 Lastly, [Apache Superset](https://superset.apache.org/) is included as a [Meltano utility](https://hub.meltano.com/utilities/superset/) to enable some data querying and visualization. Superset leverages DuckDB's SQLAlchemy driver, [duckdb_engine](https://github.com/Mause/duckdb_engine), so it can query DuckDB directly as well. 
+
 ```yaml
   utilities:
   - name: superset
