@@ -67,6 +67,8 @@ CREATE TABLE t1 AS
     LIMIT 0;
 ```
 
+Note that only the column names and types are copied to `t2`, other pieces of information (indexes, constraints, default values, etc.) are not copied.
+
 ## Temporary Tables
 
 Temporary tables can be created using the `CREATE TEMP TABLE` or the `CREATE TEMPORARY TABLE` statement (see diagram below).
