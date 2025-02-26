@@ -180,7 +180,7 @@ TO 'https://docs.google.com/spreadsheets/d/...?gid=123#gid=123&range=A2:Z10000' 
 );
 ```
 
-The `header` boolean parameter can also be used to determine if the column names should be written out or not. 
+The `header` boolean parameter can also be used to determine whether the column names should be written out or not. 
 
 ### Overwriting or Appending
 
