@@ -49,7 +49,7 @@ For instructions to build from source, see:
 * [macOS]({% link docs/dev/building/macos.md %})
 * [Windows]({% link docs/dev/building/windows.md %})
 
-### Experimental Platforms
+### Legacy and Experimental Platforms
 
 There are several additional platforms with varying levels of support.
 For some platforms, DuckDB binaries and extensions (or a [subset of extensions]({% link docs/extensions/working_with_extensions.md %}#platforms)) are distributed. For others, building from source is possible.
@@ -58,6 +58,7 @@ For some platforms, DuckDB binaries and extensions (or a [subset of extensions](
 |------------------------|------------------------------------------------------------------------------------------------------|
 | `freebsd_amd64`        | FreeBSD AMD64 (x86_64)                                                                               |
 | `freebsd_arm64`        | FreeBSD ARM64 (AArch64)                                                                              |
+| `linux_amd64_gcc4`     | Linux AMD64 (x86_64) with GCC 4, e.g., CentOS 7 (deprecated)                                         |
 | `linux_amd64_musl`     | Linux AMD64 (x86_64) with musl libc, e.g., Alpine Linux                                              |
 | `linux_arm64_android`  | Android ARM64 (AArch64)                                                                              |
 | `linux_arm64_gcc4`     | Linux ARM64 (AArch64) with GCC 4, e.g., CentOS 7                                                     |

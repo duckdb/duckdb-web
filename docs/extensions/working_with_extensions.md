@@ -13,23 +13,20 @@ For platforms where packages for certain extensions are not available, users can
 
 All official extensions are distributed for the following platforms.
 
-| Platform name      | Operating system | Architecture    | CPU types                      | Used by                    |
-|--------------------|------------------|-----------------|--------------------------------|----------------------------|
-| `linux_amd64`      | Linux            | x86_64  (AMD64) |                                | Node.js packages, etc.     |
-| `linux_amd64_gcc4` | Linux            | x86_64  (AMD64) |                                | Python packages, CLI, etc. |
-| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. | All packages               |
-| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          | All packages               |
-| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     | All packages               |
-| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               | All packages               |
-
-> For some Linux ARM distributions (e.g., Python), two different binaries are distributed. These target either the `linux_arm64` or `linux_arm64_gcc4` platforms. Note that extension binaries are distributed for the first, but not the second. Effectively that means that on these platforms your glibc version needs to be 2.28 or higher to use the distributed extension binaries.
+| Platform name      | Operating system | Architecture    | CPU types                      |
+|--------------------|------------------|-----------------|--------------------------------|
+| `linux_amd64`      | Linux            | x86_64  (AMD64) |                                |
+| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. |
+| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          |
+| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     |
+| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               |
 
 Some extensions are distributed for the following platforms:
 
 * `windows_amd64_mingw`
 * `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/clients/wasm/extensions.md %}))
 
-For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`, `linux_arm64_gcc4`).
+For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`).
 
 ### Sharing Extensions between Clients
 
