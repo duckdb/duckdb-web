@@ -17,6 +17,14 @@ html.darkmode ::selection {
 	color: #fff; 
 }
 
+@supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
+	html.darkmode ::selection {
+		background: #919191;
+		color: #fff; 
+	}
+}
+
+
 html.darkmode body{
 	
 	#duckdb_logo,
