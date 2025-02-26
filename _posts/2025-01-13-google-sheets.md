@@ -52,12 +52,12 @@ Business processes that used to require days of error-prone manual spreadsheet m
 
 Often, the output of a data workflow is used to inform business decision making.
 This is especially true with machine learning or forecasting processes (oh, sorry, I seem to have misspelled AI).
-"I talked with the CEO of that company last week and they are changing their strategy in this way."
+“I talked with the CEO of that company last week and they are changing their strategy in this way.”
 Good luck getting that insight into your model without a spreadsheet!
 Those decisions could even be re-ingested into DuckDB so that the forecast can be improved over time.
 
 There are many simpler use cases as well: data validation, data annotation, checklists, communication with external teams, dummy dataset generation, and more.
-Maybe pushing directly to Google Sheets will get folks to stop having to click "export to CSV" on your team's dashboards!
+Maybe pushing directly to Google Sheets will get folks to stop having to click “export to CSV” on your team's dashboards!
 
 ## Getting Started with the GSheets Extension
 
@@ -258,7 +258,7 @@ An [example GHA workflow is here](https://github.com/Alex-Monahan/duckdb-gsheets
 ## Developing the Extension
 
 The Google Sheets extension is a good example of how DuckDB's extension GitHub template and CI/CD workflows can let even non-C++ experts contribute to the community!
-Several of the folks who have contributed thus far (thank you!!) would not be considered "C++ programmers", but the combination of a great template, examples from other extensions, and a little help from some LLM-powered "junior devs" made it possible.
+Several of the folks who have contributed thus far (thank you!!) would not be considered “C++ programmers”, but the combination of a great template, examples from other extensions, and a little help from some LLM-powered “junior devs” made it possible.
 We encourage you to give your extension idea a shot and reach out on Discord if you need some help!
 
 ## Roadmap
