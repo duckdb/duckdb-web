@@ -32,7 +32,7 @@ SELECT * FROM read_xlsx('test_excel.xlsx', sheet = 'Sheet1');
 
 By default, the first sheet is loaded if no sheet is specified.
 
-## Importing a specific range
+## Importing a Specific Range
 
 To select a specific range of cells, use the `range` parameter with a string in the format `A1:B2`, where `A1` is the top-left cell and `B2` is the bottom-right cell:
 
@@ -85,7 +85,7 @@ INSERT INTO tbl
 Alternatively, you can use the `COPY` statement with the `XLSX` format option to import an Excel file into an existing table:
 
 ```sql
-COPY tbl FROM 'test_excel.xlsx' (FORMAT XLSX, sheet 'Sheet1');
+COPY tbl FROM 'test_excel.xlsx' (FORMAT XLSX, SHEET 'Sheet1');
 ```
 
 When using the `COPY` statement to load an excel file into a existing table, the types of the columns in the target table will be used to coerce the types of the cells in the Excel sheet.
