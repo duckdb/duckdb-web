@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: a7df10a2d16862e86087cd51bdf6312c6e7773c2
+  revision: 764359d57d8d41da8836d2b782c70dc29710e6d7
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -214,7 +214,7 @@ GEM
     typhoeus (1.4.1)
       ethon (>= 0.9.0)
     unicode-display_width (2.6.0)
-    uri (1.0.2)
+    uri (1.0.3)
     webrick (1.9.1)
     word_wrap (1.0.0)
 
