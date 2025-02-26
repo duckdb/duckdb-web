@@ -205,7 +205,9 @@ FROM
     t2: short_s.tbl;
 ```
 
-Credit for this idea goes to [Michael Toy](https://www.linkedin.com/in/michael-toy-27b3407/). A separate blog post will follow soon.
+Credit for this idea goes to [Michael Toy](https://www.linkedin.com/in/michael-toy-27b3407/).
+A separate blog post will follow soon.
+**Update:** the [blog post on prefix aliases]({% post_url 2025-02-25-prefix-aliases-in-sql %}) is out.
 
 [**`RENAME` clause**.](https://github.com/duckdb/duckdb/pull/14650)
 DuckDB now supports the `RENAME` clause in `SELECT`. This allows renaming fields emitted by the [`*` expression]({% link docs/sql/expressions/star.md %}):

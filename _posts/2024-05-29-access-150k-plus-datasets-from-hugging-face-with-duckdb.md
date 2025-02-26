@@ -189,7 +189,7 @@ Second, set it in your DuckDB session using DuckDB’s [Secrets Manager]({% link
 
   ```sql
   CREATE SECRET hf_token (
-     TYPE HUGGINGFACE,
+     TYPE huggingface,
      TOKEN 'your_hf_token'
   );
   ```
@@ -198,8 +198,8 @@ Second, set it in your DuckDB session using DuckDB’s [Secrets Manager]({% link
 
   ```sql
   CREATE SECRET hf_token (
-     TYPE HUGGINGFACE,
-     PROVIDER CREDENTIAL_CHAIN
+     TYPE huggingface,
+     PROVIDER credential_chain
   );
   ```
 

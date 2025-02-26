@@ -288,9 +288,9 @@ You can read the same file with `records` set to `'false'`, to get a single colu
 
 For additional examples reading more complex data, please see the [“Shredding Deeply Nested JSON, One Vector at a Time” blog post]({% post_url 2023-03-03-json %}).
 
-## Loading with the `COPY` Statement Using `FORMAT JSON`
+## Loading with the `COPY` Statement Using `FORMAT json`
 
-When the `json` extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `IMPORT DATABASE`, as well as `COPY TO`, and `EXPORT DATABASE`. See the [`COPY` statement]({% link docs/sql/statements/copy.md %}) and the [`IMPORT` / `EXPORT` clauses]({% link docs/sql/statements/export.md %}).
+When the `json` extension is installed, `FORMAT json` is supported for `COPY FROM`, `IMPORT DATABASE`, as well as `COPY TO`, and `EXPORT DATABASE`. See the [`COPY` statement]({% link docs/sql/statements/copy.md %}) and the [`IMPORT` / `EXPORT` clauses]({% link docs/sql/statements/export.md %}).
 
 By default, `COPY` expects newline-delimited JSON. If you prefer copying data to/from a JSON array, you can specify `ARRAY true`, e.g.,
 

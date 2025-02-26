@@ -85,7 +85,7 @@ INSERT INTO tbl
 Alternatively, you can use the `COPY` statement with the `XLSX` format option to import an Excel file into an existing table:
 
 ```sql
-COPY tbl FROM 'test_excel.xlsx' (FORMAT XLSX, SHEET 'Sheet1');
+COPY tbl FROM 'test_excel.xlsx' (FORMAT xlsx, SHEET 'Sheet1');
 ```
 
 When using the `COPY` statement to load an excel file into a existing table, the types of the columns in the target table will be used to coerce the types of the cells in the Excel sheet.

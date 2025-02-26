@@ -23,24 +23,24 @@ LOAD postgres;
 
 ## Connecting
 
-To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command with the `POSTGRES` or `POSTGRES_SCANNER` type.
+To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command with the `postgres` or `postgres_scanner` type.
 
 To connect to the `public` schema of the PostgreSQL instance running on localhost in read-write mode, run:
 
 ```sql
-ATTACH '' AS postgres_db (TYPE POSTGRES);
+ATTACH '' AS postgres_db (TYPE postgres);
 ```
 
 To connect to the PostgreSQL instance with the given parameters in read-only mode, run:
 
 ```sql
-ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, READ_ONLY);
+ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, READ_ONLY);
 ```
 
 By default, all schemas are attached. When working with large instances, it can be useful to only attach a specific schema. This can be accomplished using the `SCHEMA` command.
 
 ```sql
-ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE POSTGRES, SCHEMA 'public');
+ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, SCHEMA 'public');
 ```
 
 ### Configuration
@@ -73,7 +73,7 @@ PostgreSQL connection information can also be specified with [secrets](/docs/con
 
 ```sql
 CREATE SECRET (
-    TYPE POSTGRES,
+    TYPE postgres,
     HOST '127.0.0.1',
     PORT 5432,
     DATABASE postgres,
@@ -85,13 +85,13 @@ CREATE SECRET (
 The information from the secret will be used when `ATTACH` is called. We can leave the PostgreSQL connection string empty to use all of the information stored in the secret.
 
 ```sql
-ATTACH '' AS postgres_db (TYPE POSTGRES);
+ATTACH '' AS postgres_db (TYPE postgres);
 ```
 
 We can use the PostgreSQL connection string to override individual options. For example, to connect to a different database while still using the same credentials, we can override only the database name in the following manner.
 
 ```sql
-ATTACH 'dbname=my_other_db' AS postgres_db (TYPE POSTGRES);
+ATTACH 'dbname=my_other_db' AS postgres_db (TYPE postgres);
 ```
 
 By default, created secrets are temporary. Secrets can be persisted using the [`CREATE PERSISTENT SECRET` command]({% link docs/configuration/secrets_manager.md %}#persistent-secrets). Persistent secrets can be used across sessions.
@@ -102,7 +102,7 @@ Named secrets can be used to manage connections to multiple PostgreSQL database 
 
 ```sql
 CREATE SECRET postgres_secret_one (
-    TYPE POSTGRES,
+    TYPE postgres,
     HOST '127.0.0.1',
     PORT 5432,
     DATABASE postgres,
@@ -114,7 +114,7 @@ CREATE SECRET postgres_secret_one (
 The secret can then be explicitly referenced using the `SECRET` parameter in the `ATTACH`.
 
 ```sql
-ATTACH '' AS postgres_db_one (TYPE POSTGRES, SECRET postgres_secret_one);
+ATTACH '' AS postgres_db_one (TYPE postgres, SECRET postgres_secret_one);
 ```
 
 ### Configuring via Environment Variables
@@ -133,7 +133,7 @@ export PGDATABASE=mydatabase
 Then, to connect, start the `duckdb` process and run:
 
 ```sql
-ATTACH '' AS p (TYPE POSTGRES);
+ATTACH '' AS p (TYPE postgres);
 ```
 
 ## Usage
@@ -180,7 +180,7 @@ This allows you to use DuckDB to, for example, export data that is stored in a P
 Below is a brief example of how to create a new table in PostgreSQL and load data into it.
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
 CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
 INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
 ```
@@ -189,7 +189,7 @@ Many operations on PostgreSQL tables are supported. All these operations directl
 Note that if modifications are not desired, `ATTACH` can be run with the `READ_ONLY` property which prevents making modifications to the underlying database. For example:
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES, READ_ONLY);
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres, READ_ONLY);
 ```
 
 Below is a list of supported operations.
@@ -229,7 +229,7 @@ These copies use [PostgreSQL binary wire encoding](https://www.postgresql.org/do
 DuckDB can also write data using this encoding to a file which you can then load into PostgreSQL using a client of your choosing if you would like to do your own connection management:
 
 ```sql
-COPY 'data.parquet' TO 'pg.bin' WITH (FORMAT POSTGRES_BINARY);
+COPY 'data.parquet' TO 'pg.bin' WITH (FORMAT postgres_binary);
 ```
 
 The file produced will be the equivalent of copying the file to PostgreSQL using DuckDB and then dumping it from PostgreSQL using `psql` or another client:
@@ -344,7 +344,7 @@ postgres_query(attached_database::VARCHAR, query::VARCHAR)
 For example:
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
 SELECT * FROM postgres_query('postgres_db', 'SELECT * FROM cars LIMIT 3');
 ```
 
@@ -368,7 +368,7 @@ SELECT * FROM postgres_query('postgres_db', 'SELECT * FROM cars LIMIT 3');
 The `postgres_execute` function allows running arbitrary queries within PostgreSQL, including statements that update the schema and content of the database.
 
 ```sql
-ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
+ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
 CALL postgres_execute('postgres_db', 'CREATE TABLE my_table (i INTEGER)');
 ```
 

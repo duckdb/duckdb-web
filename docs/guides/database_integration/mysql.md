@@ -27,7 +27,7 @@ LOAD mysql;
 After the `mysql` extension is installed, you can attach to a MySQL database using the following command:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL, READ_ONLY);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql, READ_ONLY);
 USE mysql_db;
 ```
 

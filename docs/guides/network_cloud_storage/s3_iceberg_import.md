@@ -29,7 +29,7 @@ After loading the extensions, set up the credentials and S3 region to read data.
 
 ```sql
 CREATE SECRET (
-    TYPE S3,
+    TYPE s3,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
     REGION 'us-east-1'
@@ -40,8 +40,8 @@ Alternatively, use the [`aws` extension]({% link docs/extensions/aws.md %}) to r
 
 ```sql
 CREATE SECRET (
-    TYPE S3,
-    PROVIDER CREDENTIAL_CHAIN
+    TYPE s3,
+    PROVIDER credential_chain
 );
 ```
 

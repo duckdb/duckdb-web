@@ -17,21 +17,21 @@ EXPORT DATABASE 'target_directory';
 Export to directory 'target_directory', using the given options for the CSV serialization:
 
 ```sql
-EXPORT DATABASE 'target_directory' (FORMAT CSV, DELIMITER '|');
+EXPORT DATABASE 'target_directory' (FORMAT csv, DELIMITER '|');
 ```
 
 Export to directory 'target_directory', tables serialized as Parquet:
 
 ```sql
-EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
+EXPORT DATABASE 'target_directory' (FORMAT parquet);
 ```
 
 Export to directory 'target_directory', tables serialized as Parquet, compressed with ZSTD, with a row_group_size of 100,000:
 
 ```sql
 EXPORT DATABASE 'target_directory' (
-    FORMAT PARQUET,
-    COMPRESSION ZSTD,
+    FORMAT parquet,
+    COMPRESSION zstd,
     ROW_GROUP_SIZE 100_000
 );
 ```

@@ -47,7 +47,7 @@ Alternatively, the entire database can be attached using the `ATTACH` command. T
 
 ```sql
 -- Attach the PostgreSQL database using the given connection string
-ATTACH 'host=localhost port=5432 dbname=mydb' AS test (TYPE POSTGRES);
+ATTACH 'host=localhost port=5432 dbname=mydb' AS test (TYPE postgres);
 -- The table "tbl_name" can now be queried as if it is a regular table
 SELECT * FROM test.tbl_name;
 -- Switch the active database to "test"

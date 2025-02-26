@@ -66,7 +66,7 @@ For some tests (e.g., CSV/Parquet file format tests) it is necessary to create t
 
 ```sql
 statement ok
-COPY csv_data TO '__TEST_DIR__/output_file.csv.gz' (COMPRESSION GZIP);
+COPY csv_data TO '__TEST_DIR__/output_file.csv.gz' (COMPRESSION gzip);
 ```
 
 ### Require & Extensions

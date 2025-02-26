@@ -15,7 +15,7 @@ For example, to export a table to a GeoJSON file, with generated bounding boxes,
 
 ```sql
 COPY ⟨table⟩ TO 'some/file/path/filename.geojson'
-WITH (FORMAT GDAL, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
+WITH (FORMAT gdal, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
 ```
 
 Available options:

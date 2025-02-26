@@ -22,7 +22,7 @@ After loading the `httpfs` extension, set up the credentials to write data. Note
 
 ```sql
 CREATE SECRET (
-    TYPE S3,
+    TYPE s3,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
     REGION 'us-east-1'
@@ -35,8 +35,8 @@ Alternatively, use the [`aws` extension]({% link docs/extensions/aws.md %}) to r
 
 ```sql
 CREATE SECRET (
-    TYPE S3,
-    PROVIDER CREDENTIAL_CHAIN
+    TYPE s3,
+    PROVIDER credential_chain
 );
 ```
 
@@ -50,7 +50,7 @@ Similarly, Google Cloud Storage (GCS) is supported through the Interoperability 
 
 ```sql
 CREATE SECRET (
-    TYPE GCS,
+    TYPE gcs,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
 );

@@ -17,7 +17,7 @@ You will need to [generate an S3 auth token](https://docs.fastly.com/en/guides/w
 
 ```sql
 CREATE SECRET my_secret (
-    TYPE S3,
+    TYPE s3,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
 	URL_STYLE 'path',

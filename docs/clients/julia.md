@@ -80,7 +80,7 @@ using DuckDB, DataFrames, Dates
 db = DuckDB.DB()
 # create a table
 DBInterface.execute(db,
-    "CREATE OR REPLACE TABLE data(id INTEGER PRIMARY KEY, value FLOAT, timestamp TIMESTAMP, date DATE)")
+    "CREATE OR REPLACE TABLE data (id INTEGER PRIMARY KEY, value FLOAT, timestamp TIMESTAMP, date DATE)")
 # create data to insert
 len = 100
 df = DataFrames.DataFrame(

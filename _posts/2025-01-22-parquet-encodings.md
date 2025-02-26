@@ -57,9 +57,9 @@ However, despite these new encodings being available in 1.2.0, DuckDB will not w
 If DuckDB did this, many of our users would have a frustrating experience because some mainstream query engines still do not support reading these encodings.
 Having a good compression ratio does not help users if their downstream application cannot read the file.
 Therefore, we had to disable writing these encodings by default.
-They are only used when setting `PARQUET_VERSION V2` in a `COPY` command.
+They are only used when setting `PARQUET_VERSION v2` in a `COPY` command.
 
-> DuckDB versions as old as 0.9.1 (released in late 2023) can already read files serialized with the setting `PARQUET_VERSION V2`.
+> DuckDB versions as old as 0.9.1 (released in late 2023) can already read files serialized with the setting `PARQUET_VERSION v2`.
 
 Compressing data is almost always a trade-off between file size and the time it takes to write.
 Let's take a look at the following example (ran on a MacBook Pro with an M1 Max):
@@ -72,15 +72,15 @@ CALL dbgen(sf = 1);
 
 -- Export to Parquet using Snappy compression
 COPY lineitem TO 'snappy_v1.parquet'
-    (COMPRESSION snappy, PARQUET_VERSION V1); -- 244 MB, ~0.46s
+    (COMPRESSION snappy, PARQUET_VERSION v1); -- 244 MB, ~0.46s
 COPY lineitem TO 'snappy_v2.parquet'
-    (COMPRESSION snappy, PARQUET_VERSION V2); -- 170 MB, ~0.39s
+    (COMPRESSION snappy, PARQUET_VERSION v2); -- 170 MB, ~0.39s
 
 -- Export to Parquet using zstd compression
 COPY lineitem TO 'zstd_v1.parquet'
-    (COMPRESSION zstd, PARQUET_VERSION V1); -- 152 MB, ~0.58s
+    (COMPRESSION zstd, PARQUET_VERSION v1); -- 152 MB, ~0.58s
 COPY lineitem TO 'zstd_v2.parquet'
-    (COMPRESSION zstd, PARQUET_VERSION V2); -- 135 MB, ~0.44s
+    (COMPRESSION zstd, PARQUET_VERSION v2); -- 135 MB, ~0.44s
 ```
 
 When using [Snappy](https://github.com/google/snappy), DuckDB's default page compression algorithm for Parquet, which focuses mostly on speed, not compression ratio, the file is ~30% smaller and writing is ~15% faster with the encodings enabled.
@@ -91,8 +91,8 @@ Here are some more extreme examples:
 
 ```sql
 CREATE TABLE range AS FROM range(1e9::BIGINT);
-COPY range TO 'v1.parquet' (PARQUET_VERSION V1); -- 3.7 GB, ~2.96s
-COPY range TO 'v2.parquet' (PARQUET_VERSION V2); -- 1.3 MB, ~1.68s
+COPY range TO 'v1.parquet' (PARQUET_VERSION v1); -- 3.7 GB, ~2.96s
+COPY range TO 'v2.parquet' (PARQUET_VERSION v2); -- 1.3 MB, ~1.68s
 ```
 
 The integer sequence 0, 1, 2, ... compresses extremely well with `DELTA_BINARY_PACKED`.
@@ -103,8 +103,8 @@ Nonetheless, if there is a pattern, the data will compress quite well:
 
 ```sql
 CREATE TABLE range AS SELECT range / 1e9 FROM range(1e9::BIGINT);
-COPY range TO 'v1.parquet' (PARQUET_VERSION V1); -- 6.3 GB, ~3.83s
-COPY range TO 'v2.parquet' (PARQUET_VERSION V2); -- 610 MB, ~2.63s
+COPY range TO 'v1.parquet' (PARQUET_VERSION v1); -- 6.3 GB, ~3.83s
+COPY range TO 'v2.parquet' (PARQUET_VERSION v2); -- 610 MB, ~2.63s
 ```
 
 This sequence compresses really well with `BYTE_STREAM_SPLIT`.

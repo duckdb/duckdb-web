@@ -35,7 +35,7 @@ ATTACH 'file.db' (BLOCK_SIZE 16384);
 Attach a SQLite database for reading and writing (see the [`sqlite` extension]({% link docs/extensions/sqlite.md %}) for more information):
 
 ```sql
-ATTACH 'sqlite_file.db' AS sqlite_db (TYPE SQLITE);
+ATTACH 'sqlite_file.db' AS sqlite_db (TYPE sqlite);
 ```
 
 Attach the database `file.db` if inferred database alias `file` does not yet exist:

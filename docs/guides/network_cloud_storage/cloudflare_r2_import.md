@@ -18,7 +18,7 @@ You will need to [generate an S3 auth token](https://developers.cloudflare.com/r
 
 ```sql
 CREATE SECRET (
-    TYPE R2,
+    TYPE r2,
     KEY_ID 'AKIAIOSFODNN7EXAMPLE',
     SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
     ACCOUNT_ID 'your-account-id-here' -- your 33 character hexadecimal account ID

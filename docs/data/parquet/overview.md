@@ -107,7 +107,7 @@ Write the results of a query to a Parquet file using the default compression (Sn
 COPY
     (SELECT * FROM tbl)
     TO 'result-snappy.parquet'
-    (FORMAT 'parquet');
+    (FORMAT parquet);
 ```
 
 Write the results from a query to a Parquet file with specific compression and row group size:
@@ -116,13 +116,13 @@ Write the results from a query to a Parquet file with specific compression and r
 COPY
     (FROM generate_series(100_000))
     TO 'test.parquet'
-    (FORMAT 'parquet', COMPRESSION 'zstd', ROW_GROUP_SIZE 100_000);
+    (FORMAT parquet, COMPRESSION zstd, ROW_GROUP_SIZE 100_000);
 ```
 
 Export the table contents of the entire database as parquet:
 
 ```sql
-EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
+EXPORT DATABASE 'target_directory' (FORMAT parquet);
 ```
 
 ## Parquet Files
@@ -210,7 +210,7 @@ Write a query to a snappy compressed Parquet file:
 COPY
     (SELECT * FROM tbl)
     TO 'result-snappy.parquet'
-    (FORMAT 'parquet');
+    (FORMAT parquet);
 ```
 
 Write `tbl` to a zstd-compressed Parquet file:
@@ -218,7 +218,7 @@ Write `tbl` to a zstd-compressed Parquet file:
 ```sql
 COPY tbl
     TO 'result-zstd.parquet'
-    (FORMAT 'parquet', CODEC 'zstd');
+    (FORMAT parquet, COMPRESSION zstd);
 ```
 
 Write `tbl` to a zstd-compressed Parquet file with the lowest compression level yielding the fastest compression:
@@ -226,7 +226,7 @@ Write `tbl` to a zstd-compressed Parquet file with the lowest compression level 
 ```sql
 COPY tbl
     TO 'result-zstd.parquet'
-    (FORMAT 'parquet', CODEC 'zstd', COMPRESSION_LEVEL 1);
+    (FORMAT parquet, COMPRESSION zstd, COMPRESSION_LEVEL 1);
 ```
 
 Write to Parquet file with [key-value metadata]({% link docs/data/parquet/metadata.md %}):
@@ -237,7 +237,7 @@ COPY (
         42 AS number,
         true AS is_even
 ) TO 'kv_metadata.parquet' (
-    FORMAT PARQUET,
+    FORMAT parquet,
     KV_METADATA {
         number: 'Answer to life, universe, and everything',
         is_even: 'not ''odd''' -- single quotes in values must be escaped
@@ -251,16 +251,16 @@ Write a CSV file to an uncompressed Parquet file:
 COPY
     'test.csv'
     TO 'result-uncompressed.parquet'
-    (FORMAT 'parquet', CODEC 'uncompressed');
+    (FORMAT parquet, COMPRESSION uncompressed);
 ```
 
-Write a query to a Parquet file with zstd-compression (same as `CODEC`) and row group size:
+Write a query to a Parquet file with zstd-compression and row group size:
 
 ```sql
 COPY
     (FROM generate_series(100_000))
     TO 'row-groups-zstd.parquet'
-    (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100_000);
+    (FORMAT parquet, COMPRESSION zstd, ROW_GROUP_SIZE 100_000);
 ```
 
 Write data to an `LZ4_RAW`-compressed Parquet file:
@@ -269,7 +269,7 @@ Write data to an `LZ4_RAW`-compressed Parquet file:
 COPY
     (FROM generate_series(100_000))
     TO 'result-lz4.parquet'
-    (FORMAT PARQUET, COMPRESSION LZ4);
+    (FORMAT parquet, COMPRESSION lz4);
 ```
 
 Or, equivalently:
@@ -278,7 +278,7 @@ Or, equivalently:
 COPY
     (FROM generate_series(100_000))
     TO 'result-lz4.parquet'
-    (FORMAT PARQUET, COMPRESSION LZ4_RAW);
+    (FORMAT parquet, COMPRESSION lz4_RAW);
 ```
 
 Write data to a `BROTLI`-compressed Parquet file:
@@ -287,7 +287,7 @@ Write data to a `BROTLI`-compressed Parquet file:
 COPY
     (FROM generate_series(100_000))
     TO 'result-brotli.parquet'
-    (FORMAT PARQUET, COMPRESSION BROTLI);
+    (FORMAT parquet, COMPRESSION brotli);
 ```
 
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [“`EXPORT` statement” page]({% link docs/sql/statements/export.md %}) for more details:
@@ -295,7 +295,7 @@ DuckDB's `EXPORT` command can be used to export an entire database to a series o
 Export the table contents of the entire database as Parquet:
 
 ```sql
-EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
+EXPORT DATABASE 'target_directory' (FORMAT parquet);
 ```
 
 ## Encryption

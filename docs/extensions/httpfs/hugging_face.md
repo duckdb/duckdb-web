@@ -133,7 +133,7 @@ The user must pass all configuration information into the `CREATE SECRET` statem
 
 ```sql
 CREATE SECRET hf_token (
-    TYPE HUGGINGFACE,
+    TYPE huggingface,
     TOKEN 'your_hf_token'
 );
 ```
@@ -144,7 +144,7 @@ Automatically tries to fetch credentials. For the Hugging Face token, it will tr
 
 ```sql
 CREATE SECRET hf_token (
-    TYPE HUGGINGFACE,
-    PROVIDER CREDENTIAL_CHAIN
+    TYPE huggingface,
+    PROVIDER credential_chain
 );
 ```

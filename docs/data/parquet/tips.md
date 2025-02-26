@@ -28,7 +28,7 @@ If the final number of Parquet files is not important, writing one file per thre
 COPY
     (FROM generate_series(10_000_000))
     TO 'test.parquet'
-    (FORMAT PARQUET, PER_THREAD_OUTPUT);
+    (FORMAT parquet, PER_THREAD_OUTPUT);
 ```
 
 ### Selecting a `ROW_GROUP_SIZE`
@@ -48,7 +48,7 @@ To write a query to a Parquet file with a different row group size, run:
 COPY
     (FROM generate_series(100_000))
     TO 'row-groups.parquet'
-    (FORMAT PARQUET, ROW_GROUP_SIZE 100_000);
+    (FORMAT parquet, ROW_GROUP_SIZE 100_000);
 ```
 
 ### The `ROW_GROUPS_PER_FILE` Option
@@ -59,7 +59,7 @@ The `ROW_GROUPS_PER_FILE` parameter creates a new Parquet file if the current on
 COPY
     (FROM generate_series(100_000))
     TO 'output-directory'
-    (FORMAT PARQUET, ROW_GROUP_SIZE 20_000, ROW_GROUPS_PER_FILE 2);
+    (FORMAT parquet, ROW_GROUP_SIZE 20_000, ROW_GROUPS_PER_FILE 2);
 ```
 
 > If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behaviour of [`FILE_SIZE_BYTES`](../../sql/statements/copy#copy--to-options).

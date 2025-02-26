@@ -42,8 +42,8 @@ For authenticating to S3 buckets, DuckDB [Secrets]({% link docs/configuration/se
 
 ```sql
 CREATE SECRET (
-    TYPE S3,
-    PROVIDER CREDENTIAL_CHAIN
+    TYPE s3,
+    PROVIDER credential_chain
 );
 SELECT *
 FROM delta_scan('s3://some/delta/table/with/auth');
@@ -53,7 +53,7 @@ To scan public buckets on S3, you may need to pass the correct region by creatin
 
 ```sql
 CREATE SECRET (
-    TYPE S3,
+    TYPE s3,
     REGION 'my-region'
 );
 SELECT *
@@ -73,8 +73,8 @@ For authenticating to Azure Blob Storage, DuckDB [Secrets]({% link docs/configur
 
 ```sql
 CREATE SECRET (
-    TYPE AZURE,
-    PROVIDER CREDENTIAL_CHAIN
+    TYPE azure,
+    PROVIDER credential_chain
 );
 SELECT *
 FROM delta_scan('az://my-container/my-table-with-auth');
