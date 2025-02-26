@@ -27,10 +27,10 @@ docs:
   extended_description: |
     This extension provides a read function for HDF5 files.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 274
-extension_download_count_pretty: 274
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 324
+extension_download_count_pretty: 324
 image: '/images/community_extensions/social_preview/preview_community_extension_hdf5.png'
 layout: community_extension_doc
 ---

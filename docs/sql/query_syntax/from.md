@@ -36,6 +36,13 @@ SELECT tn.*
 FROM table_name tn;
 ```
 
+Use a prefix alias:
+
+```sql
+SELECT tn.*
+FROM tn: table_name;
+```
+
 Select all columns from the table `table_name` in the schema `schema_name`:
 
 ```sql

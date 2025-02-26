@@ -2,8 +2,8 @@
 layout: post
 title: "Catching up with Windowing"
 author: "Richard Wesley"
-thumb: "/images/blog/thumbs/windowing-features.svg"
-image: "/images/blog/thumbs/windowing-features.png"
+thumb: "/images/blog/thumbs/window-functions-1.svg"
+image: "/images/blog/thumbs/window-functions-1.png"
 excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard. This posts presents a few of these features, including GROUPS framing, QUALIFY and aggregate/function modifiers."
 tags: ["using DuckDB"]
 ---

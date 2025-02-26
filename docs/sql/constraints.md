@@ -73,7 +73,7 @@ Primary key constraints and unique constraints are identical except for two poin
 ```sql
 CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR, email VARCHAR UNIQUE);
 INSERT INTO students VALUES (1, 'Student 1', 'student1@uni.com');
-INSERT INTO students values (2, 'Student 2', 'student1@uni.com');
+INSERT INTO students VALUES (2, 'Student 2', 'student1@uni.com');
 ```
 
 ```console
