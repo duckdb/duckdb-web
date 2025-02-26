@@ -8,20 +8,16 @@ html.disable-transitions * {
 }
 
 html.darkmode ::-moz-selection {
-  background: var(--doc-codebox-border-color, #333);
+	background: #333;
+	color: #fff;
 }
 
 html.darkmode ::selection {
-  background: var(--doc-codebox-border-color, #333);
+	background: #333;
+	color: #fff; 
 }
 
 html.darkmode body{
-	::-moz-selection {
-	  background: var(--doc-codebox-border-color, #333);
-	}
-	::selection {
-	  background: var(--doc-codebox-border-color, #333);
-	}
 	
 	#duckdb_logo,
 	.duckdb_logo{
@@ -73,6 +69,9 @@ html.darkmode body{
 		&.documentation #duckdb_logo{
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='39' height='38' fill='none' viewBox='0 0 39 38'%3E%3Cpath fill='%23FFF100' d='M19.318 38c-10.511 0-19-8.489-19-19s8.489-19 19-19c10.512 0 19 8.489 19 19s-8.488 19-19 19Z'/%3E%3Cpath fill='%230D0D0D' d='M29.477 16.182H25.75v5.625h3.727a2.852 2.852 0 0 0 2.83-2.83c0-1.556-1.284-2.795-2.83-2.795ZM7.49 19c0 4.34 3.534 7.875 7.875 7.875S23.24 23.34 23.24 19c0-4.341-3.534-7.876-7.875-7.876-4.34 0-7.875 3.535-7.875 7.876Z'/%3E%3C/svg%3E");
 		}
+	}
+	#main_content_wrap a.externallink::after, .singleentry .content a.externallink::after{
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath fill='%23FFFFFF' fill-rule='evenodd' d='M11.8 0H6.613v1.514h2.603L3.804 6.926l1.07 1.07 5.412-5.412v2.603H11.8V0ZM5.922 1.286H0V11.8h10.33V5.878H8.815v4.408H1.514V2.8h4.408V1.286Z' clip-rule='evenodd'/%3E%3C/svg%3E");
 	}
 	
 
