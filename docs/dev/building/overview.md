@@ -84,6 +84,11 @@ DuckDB can be built for end-of-life platforms such as [macOS 11](https://endofli
 Several platforms are not supported or supported on a best-effort basis.
 See the [“Unofficial and Unsupported Platforms” page]({% link docs/dev/building/unofficial_and_unsupported_platforms.md %}) for details.
 
+## Limitations
+
+Currently, the DuckDB codebase is not compatible with C++23.
+Therefore, trying to compile DuckDB with `-std=c++23` will fail.
+
 ## Troubleshooting Guides
 
 We provide troubleshooting guides for building DuckDB:
