@@ -4,8 +4,11 @@ title: VACUUM Statement
 railroad: statements/vacuum.js
 ---
 
-The `VACUUM` statement alone does nothing and is at present provided for PostgreSQL-compatibility.
-The `VACUUM ANALYZE` statement recomputes table statistics if they have become stale due to table updates or deletions.
+The `VACUUM` statement only has basic support in DuckDB and is mostly provided for PostgreSQL-compatibility.
+
+Some variants of it, such as when calling for a given column, recompute the distinct statistics (the amount if distinct entities) if they have become stale due to updates.
+
+> Warning The behavior of `VACUUM` is not consistent with PostgreSQL semantics and it is likely going to change in the future.
 
 ## Examples
 
@@ -15,22 +18,33 @@ No-op:
 VACUUM;
 ```
 
-Rebuild database statistics:
+No-op:
 
 ```sql
 VACUUM ANALYZE;
 ```
 
+Calling `VACUUM` on a given table-column pair rebuilds statistics for the table and column:
+
+```sql
+VACUUM my_table(my_column);
+```
+
 Rebuild statistics for the table and column:
 
 ```sql
-VACUUM ANALYZE memory.main.my_table(my_column);
+VACUUM ANALYZE my_table(my_column);
 ```
 
-Not supported:
+The following operation is not supported:
 
 ```sql
-VACUUM FULL; -- error
+VACUUM FULL;
+```
+
+```console
+Not implemented Error:
+Full vacuum option
 ```
 
 ## Reclaiming Space
