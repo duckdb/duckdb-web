@@ -302,6 +302,10 @@ EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 
 DuckDB supports reading and writing [encrypted Parquet files]({% link docs/data/parquet/encryption.md %}).
 
+## Supported Features
+
+The list of supported Parquet features is available in the [Parquet documentation's “Implementation status” page](https://parquet.apache.org/docs/file-format/implementationstatus/).
+
 ## Installing and Loading the Parquet Extension
 
 The support for Parquet files is enabled via extension. The `parquet` extension is bundled with almost all clients. However, if your client does not bundle the `parquet` extension, the extension must be installed separately:
