@@ -114,4 +114,7 @@ There is no semantic difference between using `:` or `AS`, they lead to the same
 
 ## Credits
 
-Credit for this idea go to Looker veteran [Michael Toy](https://www.linkedin.com/in/michael-toy-27b3407/), now at Google. We're grateful for his suggestion. We also would like to thank the legendary [Lloyd Tabb](https://www.linkedin.com/in/lloydtabb/) for recommending Michael's idea to us. Also check out Mark Needham's [video on DuckDB's prefix aliases](https://youtu.be/rwIiw7HZa1M?si=yRzsHfpd62d0pp7u&t=215).
+Credit for this idea goes to Looker veteran [Michael Toy](https://www.linkedin.com/in/michael-toy-27b3407/).
+We're grateful for his suggestion.
+We also would like to thank the legendary [Lloyd Tabb](https://www.linkedin.com/in/lloydtabb/) for recommending Michael's idea to us.
+Also check out Mark Needham's [video on DuckDB's prefix aliases](https://youtu.be/rwIiw7HZa1M?si=yRzsHfpd62d0pp7u&t=215).
