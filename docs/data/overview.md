@@ -17,6 +17,11 @@ INSERT INTO people VALUES (1, 'Mark');
 
 For a more detailed description, see the [page on the `INSERT statement`]({% link docs/data/insert.md %}).
 
+## File Loading: Relative Paths
+
+Use the configuration option [`file_search_path`]({% link docs/configuration/overview.html %}#local-configuration-options) to configure to which "root directories" relative paths are expanded.   
+If `file_search_path` is not set, the working directory is used as root directory for relative paths. In CLI, use `.shell echo $(pwd)` to double check the working directory location.
+
 ## CSV Loading
 
 Data can be efficiently loaded from CSV files using several methods. The simplest is to use the CSV file's name:
