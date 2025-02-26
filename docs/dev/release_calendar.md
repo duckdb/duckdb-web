@@ -38,7 +38,7 @@ In the following, we list DuckDB's past releases along with their codename where
 Between versions 0.2.2 and 0.3.3, all releases (including patch versions) received a codename.
 Since version 0.4.0, only major and minor versions get a codename.
 
-<!-- markdownlint-disable MD055 MD056 MD058 -->
+<!-- markdownlint-disable MD034 MD055 MD056 MD058 -->
 
 | Date | Version | Codename | Named after |      |
 |:-----|--------:|----------|-------------|------|
@@ -48,7 +48,7 @@ Since version 0.4.0, only major and minor versions get a codename.
   | {{ row.release_date }} | [{{ row.version_number }}](https://github.com/duckdb/duckdb/releases/tag/v{{ row.version_number }}) | {% if row.blog_post %}[{{ row.codename }}]({{ row.blog_post }}){% else %}{{ row.codename | default: "–" }}{% endif %} | {% if row.duck_wikipage %}<a href="{{ row.duck_wikipage }}">{% endif %}{{ row.duck_species_primary | default: "–" }}{% if row.duck_wikipage %}</a>{% endif %} {% if row.duck_species_secondary != nil %}_({{ row.duck_species_secondary }})_{% endif %} | {% if logo_exists == "true" %}![Logo of version {{ row.version_number }}](/{{ logo_filename }}){% endif %} |
 {% endfor %}
 
-<!-- markdownlint-enable MD055 MD056 MD058 -->
+<!-- markdownlint-enable MD034 MD055 MD056 MD058 -->
 
 ## Release Calendar as a CSV File
 
