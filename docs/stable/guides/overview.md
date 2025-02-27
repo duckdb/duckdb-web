@@ -9,9 +9,11 @@ redirect_from:
 title: Guides
 ---
 
-The guides section contains compact how-to guides that are focused on achieving a single goal. For an API references and examples, see the rest of the documentation.
+The guides section contains compact how-to guides that are focused on achieving a single goal.
+For API references and examples, see the rest of the documentation.
 
-Note that there are many tools using DuckDB, which are not covered in the official guides. To find a list of these tools, check out the [Awesome DuckDB repository](https://github.com/davidgasquez/awesome-duckdb).
+Note that there are many tools using DuckDB, which are not covered in the official guides.
+To find a list of these tools, check out the [Awesome DuckDB repository](https://github.com/davidgasquez/awesome-duckdb).
 
 > Tip For a short introductory tutorial, check out the [“Analyzing Railway Traffic in the Netherlands”]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}) tutorial.
 
