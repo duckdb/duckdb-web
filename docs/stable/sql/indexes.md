@@ -41,7 +41,7 @@ ART indexes create a secondary copy of the data in a second location – this co
 
 ### Constraint Checking in `UPDATE` Statements
 
-`UPDATE` statements on indexed columns are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
+`UPDATE` statements on indexed columns and columns that cannot be updated in place are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
 This rewrite has performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
 Additionally, it causes the following constraint-checking limitation of `UPDATE` statements. The same limitation exists in other DBMSs, like PostgreSQL.
@@ -66,3 +66,29 @@ Duplicate key "i: 2048" violates primary key constraint.
 
 A workaround is to split the `UPDATE` into a `DELETE ... RETURNING ...` followed by an `INSERT`.
 Both statements should be run inside a transaction via `BEGIN`, and eventually `COMMIT`.
+
+### Over-eager Constraint Checking in Foreign Keys
+
+This limitation occurs if you meet the following conditions:
+
+* A table has a `FOREIGN KEY` constraint.
+* There is an `UPDATE` on the corresponding `PRIMARY KEY` table, which DuckDB rewrites into a `DELETE` followed by an `INSERT`.
+
+    * The to-be-deleted row must exist in the foreign key table.
+
+You'll encounter an unexpected constraint violation.
+That is because DuckDB does not yet support 'looking ahead'.
+During the `INSERT`, it is unaware it will reinsert the foreign key value as part of the `UPDATE` rewrite.
+
+```sql
+CREATE TABLE pk_table (id INT PRIMARY KEY, payload VARCHAR[]);
+INSERT INTO pk_table VALUES (1, ['hello']);
+CREATE TABLE fk_table (id INT REFERENCES pk_table(id));
+INSERT INTO fk_table VALUES (1);
+UPDATE pk_table SET payload = ['world'] WHERE id = 1;
+```
+
+```console
+Constraint Error:
+Violates foreign key constraint because key "id: 1" is still referenced by a foreign key in a different table. If this is an unexpected constraint violation, please refer to our foreign key limitations in the documentation
+```
