@@ -79,7 +79,7 @@ def check_section(docs_root, data, section_title):
 
 docs_root = "../docs"
 
-with open("../_data/menu_docs_dev.json") as menu_docs_file:
+with open("../_data/menu_docs_stable.json") as menu_docs_file:
     data = json.load(menu_docs_file)
     check_section(docs_root, data, "Documentation")
     check_section(docs_root, data, "Guides")

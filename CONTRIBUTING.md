@@ -38,7 +38,7 @@ Thank you for contributing to the DuckDB documentation!
 Each new page requires at least 2 edits:
 
 * Create new Markdown file (using the `snake_case` naming convention). Please follow the format of another `.md` file in the `docs` folder.
-* Add a link to the new page within `_data/menu_docs_dev.json`. This populates the dropdown menus.
+* Add a link to the new page within `_data/menu_docs_stable.json`. This populates the dropdown menus.
 
 The addition of a new guide requires one additional edit:
 

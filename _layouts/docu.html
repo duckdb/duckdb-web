@@ -43,7 +43,13 @@
 Page URL: <https://duckdb.org{{ page.url }}>
 {% endcapture %}
 
+{% assign url_version_parts = page.url | split: "/docs/" %}
+{% assign url_version_parts = url_version_parts[1] | split: "/" %}
+{% assign version_viewed = url_version_parts[0] %}
+
 <body class="documentation{% if page.body_class %} {{ page.body_class }} {% endif %}">
+
+	version_viewed = {{ version_viewed }}
 
 	<header>
 		<div class="headerline">
@@ -74,12 +80,18 @@ Page URL: <https://duckdb.org{{ page.url }}>
 
 					<div class="versionselect">
 						<div class="version">
-							<div><span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span><span class="arrow"></div>
+							{% if version_viewed == "stable" %}
+								{% assign version_viewed_pretty = site.currentduckdbversion | append: " (stable)" %}
+							{% else %}
+								{% assign version_viewed_pretty = version_viewed %}
+							{% endif %}
+
+							<div><span class="selectedversion" data-current="{{ version_viewed }}">{{ version_viewed_pretty }}</span><span class="arrow"></div>
 							<div class="versionsidebar">
 								<ul>
-									<!-- remove the leading part, e.g., "docs/stable" or "docs/1.0" (version number) -->
+									{% comment %} Remove the leading part, e.g., "docs/stable" or "docs/1.0" (version number) {% endcomment %}
 
-									<!-- try the basename with different versions and see whether it exists -->
+									{% comment %} Try the basename with different versions and see whether it exists {% endcomment %}
 									{% assign basename = page.path | regex_replace: "docs/(stable|\d*.\d*)/", "" %}
 
 									{% for item in site.data.versions %}
@@ -169,9 +181,9 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}" defer></script>
 	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}" defer></script>
 
-	{% assign startingUrlParts = startingUrl | split: "/"  %}
-	{% if startingUrlParts[1] == "archive" %}
-		{% capture version_url %}/{{ startingUrlParts[1] }}/{{ startingUrlParts[2] }}{% endcapture %}
+	{% assign starting_url_parts = starting_url | split: "/"  %}
+	{% if starting_url_parts[1] != "stable" %}
+		{% capture version_url %}/{{ starting_url_parts[1] }}/{{ starting_url_parts[2] }}{% endcapture %}
 	{% else %}
 		{% assign version_url = "" %}
 	{% endif %}

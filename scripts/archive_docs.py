@@ -169,7 +169,7 @@ def archive_installation_page(version):
 
 recursive_copy('docs', folder, version)
 copy_file(
-    '_data/menu_docs_dev.json',
+    '_data/menu_docs_stable.json',
     '_data/menu_docs_%s.json' % (version.replace('.', ''),),
     version,
 )

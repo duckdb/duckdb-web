@@ -389,7 +389,7 @@ with open(f"duckdb-docs.md", "w") as of:
     with open("cover-page.md") as cover_page_file:
         of.write(cover_page_file.read())
 
-    with open("../_data/menu_docs_dev.json") as menu_docs_file:
+    with open("../_data/menu_docs_stable.json") as menu_docs_file:
         menu = json.load(menu_docs_file)
         add_main_documentation("../docs/stable", menu, config, of)
 
