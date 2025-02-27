@@ -8,6 +8,10 @@ excerpt: "Read from and write to Google Sheets directly in DuckDB using the GShe
 tags: ["using DuckDB"]
 ---
 
+<video muted controls autoplay loop width="720">
+  <source src="/images/blog/gsheets_end_to_end_demo.mp4" type="video/mp4" />
+</video>
+
 ## Spreadsheets Are Everywhere
 
 Is anything more polarizing for data folks than spreadsheets?
