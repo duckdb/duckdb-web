@@ -23,7 +23,7 @@ The TPC data sets used in the benchmark are generated with the DuckDB [tpch exte
 ## A Note on Benchmarks
 
 Running [fair benchmarks is difficult](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf), especially when performing system-to-system comparison.
-When running benchmarks on DuckDB, please make sure you are using the latest version (preferably the [nightly build]({% link docs/stable/installation/index.html %}?version=main)).
+When running benchmarks on DuckDB, please make sure you are using the latest version (preferably the [nightly build]({% link docs/installation/index.html %}?version=main)).
 If in doubt about your benchmark results, feel free to contact us at `gabor@duckdb.org`.
 
 ## Disclaimer on Benchmarks

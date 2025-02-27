@@ -8,7 +8,7 @@ title: Java JDBC API
 
 ## Installation
 
-The DuckDB Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page]({% link docs/1.1/installation/index.html %}?environment=java) for details.
+The DuckDB Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page]({% link docs/installation/index.html %}?environment=java) for details.
 
 ## Basic API Usage
 

@@ -13,7 +13,7 @@ title: C++ API
 
 ## Installation
 
-The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link docs/stable/installation/index.html %}?environment=cplusplus) for details.
+The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link docs/installation/index.html %}?environment=cplusplus) for details.
 
 ## Basic API Usage
 

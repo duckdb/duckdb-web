@@ -14,7 +14,7 @@ The DuckDB R API can be installed using the following command:
 install.packages("duckdb")
 ```
 
-Please see the [installation page]({% link docs/1.1/installation/index.html %}?environment=r) for details.
+Please see the [installation page]({% link docs/installation/index.html %}?environment=r) for details.
 
 ### `duckplyr`: dplyr API
 

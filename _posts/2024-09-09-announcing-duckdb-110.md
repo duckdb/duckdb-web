@@ -8,7 +8,7 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tags: ["release"]
 ---
 
-To install the new version, please visit the [installation guide]({% link docs/stable/installation/index.html %}).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.1.0).
 
 > Some packages (R, Java) take a few extra days to release due to the reviews required in the release pipelines.

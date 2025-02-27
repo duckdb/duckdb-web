@@ -7,7 +7,7 @@ image: "/images/blog/thumbs/duckdb-release-1-2-0.png"
 excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 1.2.0, codenamed “Histrionicus”."
 ---
 
-To install the new version, please visit the [installation guide]({% link docs/stable/installation/index.html %}).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
 
 > Some packages (Go, R, Java) take a few extra days to release due to the reviews required in the release pipelines.

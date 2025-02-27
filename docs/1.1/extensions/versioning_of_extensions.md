@@ -86,7 +86,7 @@ feature while limiting the exposure to unstable code.
 
 To achieve this, Core Extensions tend to regularly push builds to the [`core_nightly` repository]({% link docs/1.1/extensions/working_with_extensions.md %}#extension-repositories). Let's look at an example:
 
-First we install a [**stable DuckDB build**]({% link docs/1.1/installation/index.html %}).
+First we install a [**stable DuckDB build**]({% link docs/installation/index.html %}).
 
 Then we can install and load a **nightly** extension like this:
 
@@ -101,7 +101,7 @@ In this example we are using the latest **nightly** build of the aws extension w
 
 When DuckDB CI produces a nightly binary of DuckDB itself, the binaries are distributed with a set of extensions that are pinned at a specific version. This extension version will be tested for that specific build of DuckDB, but might not be the latest dev build. Let's look at an example:
 
-First, we install a [**nightly DuckDB build**]({% link docs/1.1/installation/index.html %}). Then, we can install and load the `aws` extension as expected:
+First, we install a [**nightly DuckDB build**]({% link docs/installation/index.html %}). Then, we can install and load the `aws` extension as expected:
 
 ```sql
 INSTALL aws;

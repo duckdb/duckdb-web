@@ -51,7 +51,7 @@ Hence, the SQL statement `FROM 'services-2023.csv.gz';` is a shorthand for `SELE
 
 * Third, the query creates a table called `services` and populates it with the result from the CSV reader. This is achieved using a [`CREATE TABLE ... AS` statement]({% link docs/stable/sql/statements/create_table.md %}#create-table--as-select-ctas).
 
-Using [DuckDB v0.10.3]({% link docs/stable/installation/index.html %}), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints]({% link docs/stable/sql/functions/char.md %}#print-numbers-with-thousand-separators) the number of rows in the `services` table:
+Using [DuckDB v0.10.3]({% link docs/installation/index.html %}), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints]({% link docs/stable/sql/functions/char.md %}#print-numbers-with-thousand-separators) the number of rows in the `services` table:
 
 ```sql
 SELECT format('{:,}', count(*)) AS num_services

@@ -17,6 +17,6 @@ Welcome to the DuckDB documentation!
     * [Introduction]({% link docs/1.0/sql/introduction.md %})
     * [Statements]({% link docs/1.0/sql/statements/overview.md %})
 * [Guides]({% link docs/1.0/guides/overview.md %})
-* [Installation]({% link docs/1.0/installation/index.html %})
+* [Installation]({% link docs/installation/index.html %})
 
 You can also [browse the DuckDB documentation offline]({% link docs/1.0/guides/offline-copy.md %}).

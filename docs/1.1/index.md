@@ -82,7 +82,7 @@ title: Documentation
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
-        <a href="{% link docs/1.1/installation/index.html %}"></a>
+        <a href="{% link docs/installation/index.html %}"></a>
         <span class="symbol"><img src="{% link images/icons/database.svg %}"></span>
         <span>Installation</span>
         <span class="chevron"></span>
