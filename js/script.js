@@ -317,10 +317,9 @@ $(document).ready(function(){
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
 	}).addClass("externallink").attr('target','_blank');
-	$('.headercontent a.externallink, .mainlinks a.externallink').removeClass('externallink'); // Remove Class from header elements
-	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
-	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
-	$('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
+	$('.headercontent a, .mainlinks a, .box-link a, .footercontent a').removeClass('externallink'); 
+	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
+	$('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
 	
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){
