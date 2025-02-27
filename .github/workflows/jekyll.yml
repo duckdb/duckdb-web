@@ -42,7 +42,7 @@ jobs:
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
           # add the update time to the index page of the documentation.
           CURRENT_DATE=$(date +"%Y-%m-%d")
-          sed -i "s/You can also /The documentation was last updated on ${CURRENT_DATE}.\n\nYou can also /" docs/index.md
+          sed -i "s/You can also /The documentation was last updated on ${CURRENT_DATE}.\n\nYou can also /" docs/stable/index.md
       - name: Install Python requirements
         run: pip install -r requirements.txt --break-system-packages
       - name: Install zip
@@ -162,7 +162,7 @@ jobs:
 
       - name: Link Checker on stable
         run: |
-          linkchecker https://duckdb.org/ --ignore-url 'https?://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
+          linkchecker https://duckdb.org/ --ignore-url 'https?://duckdb\.org/docs/[0-9]*.[0-9]*/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
           echo $?
 
       - run: cat report.html >> ${GITHUB_STEP_SUMMARY}
