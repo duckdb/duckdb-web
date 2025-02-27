@@ -26,9 +26,21 @@ title: Documentation
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
+        <a href="{% link docs/stable/clients/go.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/go.svg %}"></span>
+        <span>Go</span>
+        <span class="chevron"></span>
+    </div>
+    <div class="box-link half-width">
         <a href="{% link docs/stable/clients/java.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/java.svg %}"></span>
-        <span>Java</span>
+        <span>Java (JDBC)</span>
+        <span class="chevron"></span>
+    </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/stable/clients/node_neo/overview.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/nodejs.svg %}"></span>
+        <span>Node.js</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
