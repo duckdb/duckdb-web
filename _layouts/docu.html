@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/railroad.css?{{ site.data['hash'] }}">
 	{% endif %}
 
-	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">	
 	<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/images/favicon/favicon-16x16.png">
 	<link rel="manifest" href="{{ site.baseurl }}/images/favicon/site.webmanifest">
@@ -43,13 +43,21 @@
 Page URL: <https://duckdb.org{{ page.url }}>
 {% endcapture %}
 
+{% comment %} By default, we assume that the users is interested in the stable version. {% endcomment %}
+{% assign version_viewed = "stable" %}
+
 {% assign url_version_parts = page.url | split: "/docs/" %}
 {% assign url_version_parts = url_version_parts[1] | split: "/" %}
-{% assign version_viewed = url_version_parts[0] %}
+{% comment %} Liquid doesn't have an is_digit check, so we check for concrete values. {% endcomment %}
+{% assign c = url_version_parts[0] | slice: 0 %}
+{% if c == "0" or c == "1" or c == "2" %}
+	{% assign version_viewed = url_version_parts[0] %}
+{% endif %}
+
+version_viewed = {{ version_viewed }}
+
 
 <body class="documentation{% if page.body_class %} {{ page.body_class }} {% endif %}">
-
-	version_viewed = {{ version_viewed }}
 
 	<header>
 		<div class="headerline">
@@ -167,7 +175,6 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				{% endif %}
 			</div>
 			
-			
 		</div>
 
 	</main>
@@ -181,20 +188,13 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}" defer></script>
 	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}" defer></script>
 
-	{% assign starting_url_parts = starting_url | split: "/"  %}
-	{% if starting_url_parts[1] != "stable" %}
-		{% capture version_url %}/{{ starting_url_parts[1] }}/{{ starting_url_parts[2] }}{% endcapture %}
-	{% else %}
-		{% assign version_url = "" %}
-	{% endif %}
-
 	{% if page.body_class == "installation" %}
 		<script src="{{ site.baseurl }}/js/js-yaml.min.js" defer></script>
-		<script src="{{ site.baseurl }}/js{{ version_url }}/installation.js?{{ site.data['hash'] }}" defer></script>
+		<script src="{{ site.baseurl }}/js/installation.js?{{ site.data['hash'] }}" defer></script>
 	{% endif %}
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-		<script src="{{ site.baseurl }}/js{{ version_url }}/railroad.js" defer></script>
-		<script src="{{ site.baseurl }}/js{{ version_url }}/{{ page.railroad }}" defer></script>
+		<script src="{{ site.baseurl }}/js/{{ version_viewed }}/railroad.js" defer></script>
+		<script src="{{ site.baseurl }}/js/{{ version_viewed }}/{{ page.railroad }}" defer></script>
 	{% endif %}
 
 </body>
