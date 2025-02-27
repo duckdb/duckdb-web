@@ -83,7 +83,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 							{% endif %}
 						{% endfor %}
 					{% else %}
-						{% assign basename = page.path | replace: "docs/", "" %}
+						{% assign basename = page.path | replace: "docs/stable/", "" %}
 					{% endif %}
 					
 					<div class="versionselect">
@@ -98,7 +98,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 									{% endif %}
 								{% endfor %}
 								<!-- check the current page -->
-								{% assign filename = "docs/" | append: basename %}
+								{% assign filename = "docs/stable/" | append: basename %}
 								{% assign exists = "false" %}
 								{% for page_name in candidate_pages %}
 									{% if page_name == filename %}

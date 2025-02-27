@@ -8,7 +8,7 @@
   {% assign startingUrl = startingUrl | append: "/" %}
 {% else %}
   {% assign versionviewed = site.currentshortduckdbversion | append: " (stable)" %}
-  {% assign startingUrl = "docs/" %}
+  {% assign startingUrl = "docs/stable/" %}
   {% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 {% endif %}
 {% if versionviewed contains 'stable' %}
