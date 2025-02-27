@@ -52,7 +52,7 @@ Once the files have been prepared, you can run the benchmark by running [`python
 
 The loading phase of the benchmark runs six times for each benchmark setting. From the first five runs, we take the median loading time. During the sixth run, we collect resource usage data (e.g., CPU usage and disk reads/writes).
 
-Loading is performed using an in-memory DuckDB instance, meaning the data is not persisted to DuckDB storage and only exists while the connection is active. This is important to note because, as the dataset does not fit in memory and is spilled into a temporary space on disk. The decision to not persist the data has a substantial impact on performance: it makes loading the dataset significantly faster, while querying it will be somewhat slower as [DuckDB will use an uncompressed representation]({% link docs/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables). We made this choice for the benchmark since our primary focus is on testing the CSV loader rather than the queries.
+Loading is performed using an in-memory DuckDB instance, meaning the data is not persisted to DuckDB storage and only exists while the connection is active. This is important to note because, as the dataset does not fit in memory and is spilled into a temporary space on disk. The decision to not persist the data has a substantial impact on performance: it makes loading the dataset significantly faster, while querying it will be somewhat slower as [DuckDB will use an uncompressed representation]({% link docs/stable/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables). We made this choice for the benchmark since our primary focus is on testing the CSV loader rather than the queries.
 
 Our table schema is defined in [`schema.sql`](https://github.com/pdet/taxi-benchmark/blob/0.1/sql/schema.sql).
 
@@ -183,7 +183,7 @@ For completeness, we also provide the results of the four queries on a MacBook P
 | Q 03 | 5.21                        | 2.20                    |
 | Q 04 | 11.2                        | 3.12                    |
 
-The main difference between these times is that when DuckDB uses a storage file, the data is [highly compressed]({% post_url 2022-10-28-lightweight-compression %}), resulting in [much faster access when querying the dataset]({% link docs/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
+The main difference between these times is that when DuckDB uses a storage file, the data is [highly compressed]({% post_url 2022-10-28-lightweight-compression %}), resulting in [much faster access when querying the dataset]({% link docs/stable/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
 In contrast, when we do not use persistent storage, our in-memory database temporarily stores data in an uncompressed `.tmp` file to allow for memory overflow, which increases disk I/O and leads to slower query results. This observation raises a potential area for exploration: determining whether applying compression to temporary data would be beneficial.
 
 ## How This Dataset Was Generated

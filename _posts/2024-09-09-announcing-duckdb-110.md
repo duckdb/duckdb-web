@@ -8,7 +8,7 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tags: ["release"]
 ---
 
-To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).
+To install the new version, please visit the [installation guide]({% link docs/stable/installation/index.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.1.0).
 
 > Some packages (R, Java) take a few extra days to release due to the reviews required in the release pipelines.
@@ -148,7 +148,7 @@ SELECT * FROM read_csv(getvariable('list_of_files'), filename := true);
 
 ### Unpacked Columns
 
-The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) allows users to write dynamic SQL over a set of columns without needing to explicitly list the columns in the SQL string. Instead, the columns can be selected through either a regex or computed with a [lambda function]({% post_url 2024-08-08-friendly-lists-and-their-buddies-the-lambdas %}).
+The [`COLUMNS` expression]({% link docs/stable/sql/expressions/star.md %}#columns-expression) allows users to write dynamic SQL over a set of columns without needing to explicitly list the columns in the SQL string. Instead, the columns can be selected through either a regex or computed with a [lambda function]({% post_url 2024-08-08-friendly-lists-and-their-buddies-the-lambdas %}).
 
 This release expands this capability by [allowing the `COLUMNS` expression to be *unpacked* into a function](https://github.com/duckdb/duckdb/pull/11872).
 This is especially useful when combined with nested functions like `struct_pack` or `list_value`.
@@ -259,7 +259,7 @@ WITH my_cte AS (SELECT range AS i FROM range(10))
 SELECT i FROM my_cte WHERE i > 5;
 ```
 
-Sometimes, the same CTE is referenced multiple times in the same query. Previously, the CTE would be “copied” wherever it appeared. This creates a potential performance problem: if computing the CTE is computationally expensive, it would be better to cache (“materialize”) its results instead of computing the result multiple times in different places within the same query. However, different filter conditions might apply for different instantiations of the CTE, which could drastically reduce their computation cost. A classical no-win scenario in databases. It was [already possible]({% link docs/sql/query_syntax/with.md %}) to explicitly mark a CTE as materialized using the `MATERIALIZED` keyword, but that required manual intervention.
+Sometimes, the same CTE is referenced multiple times in the same query. Previously, the CTE would be “copied” wherever it appeared. This creates a potential performance problem: if computing the CTE is computationally expensive, it would be better to cache (“materialize”) its results instead of computing the result multiple times in different places within the same query. However, different filter conditions might apply for different instantiations of the CTE, which could drastically reduce their computation cost. A classical no-win scenario in databases. It was [already possible]({% link docs/stable/sql/query_syntax/with.md %}) to explicitly mark a CTE as materialized using the `MATERIALIZED` keyword, but that required manual intervention.
 
 This release adds a feature where DuckDB [automatically decides](https://github.com/duckdb/duckdb/pull/12290) whether a CTE result should be materialized or not using a heuristic. The heuristic currently is that if the CTE performs aggregation and is queried more than once, it should be materialized. We plan to expand that heuristic in the future.
 
@@ -361,7 +361,7 @@ See also [Richard's talk on the topic](https://www.youtube.com/watch?v=QubE0u8Kq
 
 ### GeoParquet
 
-GeoParquet is an extension format of the ubiquitous Parquet format that standardizes how to encode vector geometries and their metadata in Parquet files. This can be used to store geographic data sets in Parquet files efficiently. When the [`spatial` extension]({% link docs/extensions/spatial/overview.md %}) is installed and loaded, reading from a GeoParquet file through DuckDB's normal Parquet reader will now [automatically convert geometry columns to the `GEOMETRY` type](https://github.com/duckdb/duckdb/pull/12503), for example:
+GeoParquet is an extension format of the ubiquitous Parquet format that standardizes how to encode vector geometries and their metadata in Parquet files. This can be used to store geographic data sets in Parquet files efficiently. When the [`spatial` extension]({% link docs/stable/extensions/spatial/overview.md %}) is installed and loaded, reading from a GeoParquet file through DuckDB's normal Parquet reader will now [automatically convert geometry columns to the `GEOMETRY` type](https://github.com/duckdb/duckdb/pull/12503), for example:
 
 ```sql
 INSTALL spatial;

@@ -31,7 +31,7 @@ The last few weeks since the release were quite eventful:
 2. We added support to DuckDB for [Delta Lake](https://delta.io/), an open-source lakehouse framework.
     This feature was described in Sam Ansmink's [blog post]({% post_url 2024-06-10-delta %}) and Hannes Mühleisen's [keynote segment at the DATA+AI summit](https://www.youtube.com/watch?v=wuP6iEYH11E).
 
-    With extensions for both [Delta Lake]({% link docs/extensions/delta.md %}) and [Iceberg]({% link docs/extensions/iceberg.md %}),
+    With extensions for both [Delta Lake]({% link docs/stable/extensions/delta.md %}) and [Iceberg]({% link docs/stable/extensions/iceberg.md %}),
     DuckDB can now read the two most popular data lake formats.
 
 3. We ran a poster campaign for DuckDB in Amsterdam:
@@ -41,7 +41,7 @@ The last few weeks since the release were quite eventful:
         <br/>
     </div>
 
-4. [DuckDB Labs](https://duckdblabs.com) sponsored the [Hack4Her event](https://hack4her.github.io/), a female-focused student hackathon in the Netherlands. During the DuckDB Challenge of the event, teams built a community-driven app providing safe walking routes in Amsterdam using DuckDB and its [geospatial library]({% link docs/extensions/spatial/overview.md %}).
+4. [DuckDB Labs](https://duckdblabs.com) sponsored the [Hack4Her event](https://hack4her.github.io/), a female-focused student hackathon in the Netherlands. During the DuckDB Challenge of the event, teams built a community-driven app providing safe walking routes in Amsterdam using DuckDB and its [geospatial library]({% link docs/stable/extensions/spatial/overview.md %}).
 
     <div align="center">
         <img src="/images/blog/hack4her-duckdb-amsterdam.jpg" alt="Hack4Her Event" width="700"/>

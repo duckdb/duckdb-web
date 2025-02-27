@@ -19,7 +19,7 @@ DuckDB supports advanced operations on its own native storage format – such as
 
 DuckDB now has a pluggable storage and transactional layer. This flexible layer allows new storage back-ends to be created by DuckDB extensions. These storage back-ends can support all database operations in the same way that DuckDB supports them, including inserting data and even modifying schemas.
 
-The [MySQL]({% link docs/extensions/mysql.md %}), [Postgres]({% link docs/extensions/postgres.md %}), and [SQLite]({% link docs/extensions/sqlite.md %}) extensions implement this new pluggable storage and transactional layer, allowing DuckDB to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
+The [MySQL]({% link docs/stable/extensions/mysql.md %}), [Postgres]({% link docs/stable/extensions/postgres.md %}), and [SQLite]({% link docs/stable/extensions/sqlite.md %}) extensions implement this new pluggable storage and transactional layer, allowing DuckDB to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
 
 These extensions enable a number of useful features. For example, using these extensions you can:
 
@@ -32,7 +32,7 @@ These extensions enable a number of useful features. For example, using these ex
 
 ## Attaching Databases
 
-The [`ATTACH` statement]({% link docs/sql/statements/attach.md %}) can be used to attach a new database to the system. By default, a native DuckDB file will be attached. The `TYPE` parameter can be used to specify a different storage type. Alternatively, the `{type}:` prefix can be used.
+The [`ATTACH` statement]({% link docs/stable/sql/statements/attach.md %}) can be used to attach a new database to the system. By default, a native DuckDB file will be attached. The `TYPE` parameter can be used to specify a different storage type. Alternatively, the `{type}:` prefix can be used.
 
 For example, using the SQLite extension, we can open [a SQLite database file](https://github.com/duckdb/duckdb-sqlite/raw/main/data/db/sakila.db) and query it as we would query a DuckDB database.
 
@@ -232,7 +232,7 @@ to a single attached database.
 
 ## Copying Data Between Databases
 
-`CREATE TABLE AS`, `INSERT INTO` and `COPY` can be used to copy data between different attached databases. The dedicated [`COPY FROM DATABASE ... TO`]({% link docs/sql/statements/copy.md %}#copy-from-database--to) can be used to copy all data from one database to another. This includes all tables and views that are stored in the source database.
+`CREATE TABLE AS`, `INSERT INTO` and `COPY` can be used to copy data between different attached databases. The dedicated [`COPY FROM DATABASE ... TO`]({% link docs/stable/sql/statements/copy.md %}#copy-from-database--to) can be used to copy all data from one database to another. This includes all tables and views that are stored in the source database.
 
 ```sql
 -- attach a Postgres database

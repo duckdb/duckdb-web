@@ -76,7 +76,7 @@ Databases typically prefer strictness in column definitions and flexibility in t
 
 No longer do you need to know all of your column names up front! DuckDB can select and even modify columns based on regular expression pattern matching, `EXCLUDE` or `REPLACE` modifiers, and even lambda functions (see the [section on lambda functions below](#list-lambda-functions) for details!).
 
-Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), we can query a CSV dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
+Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}), we can query a CSV dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
 
 ```sql
 INSTALL httpfs;
@@ -199,7 +199,7 @@ FROM trek_facts;
 
 ### `COLUMNS()` with Lambda Functions
 
-The most flexible way to query a dynamic set of columns is through a [lambda function]({% link docs/sql/functions/nested.md %}#lambda-functions). This allows for any matching criteria to be applied to the names of the columns, not just regular expressions. See more details about lambda functions below. 
+The most flexible way to query a dynamic set of columns is through a [lambda function]({% link docs/stable/sql/functions/nested.md %}#lambda-functions). This allows for any matching criteria to be applied to the names of the columns, not just regular expressions. See more details about lambda functions below. 
 
 For example, if using the `LIKE` syntax is more comfortable, we can select columns matching a `LIKE` pattern rather than with a regular expression.
 
@@ -330,7 +330,7 @@ FROM proverbs;
 | Revenge is a dish best served cold           | NULL                    |
 | If winning is not important, why keep score? | You will be assimilated |
 
-This approach has additional benefits. As seen above, not only can tables with different column orders be combined, but so can tables with different numbers of columns entirely. This is helpful as schemas migrate, and is particularly useful for DuckDB’s [multi-file reading capabilities]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name).
+This approach has additional benefits. As seen above, not only can tables with different column orders be combined, but so can tables with different numbers of columns entirely. This is helpful as schemas migrate, and is particularly useful for DuckDB’s [multi-file reading capabilities]({% link docs/stable/data/multiple_files/combining_schemas.md %}#union-by-name).
 
 ## Insert by Name
 
@@ -424,7 +424,7 @@ UNPIVOT pivoted_purchases
 | photon torpedoes | 2156 | 17899 |
 | photon torpedoes | 2157 | 87492 |
 
-More examples are included as a part of our [DuckDB 0.8.0 announcement post]({% post_url 2023-05-17-announcing-duckdb-080 %}#new-sql-features), and the [`PIVOT`]({% link docs/sql/statements/pivot.md %}) and [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) documentation pages highlight more complex queries.
+More examples are included as a part of our [DuckDB 0.8.0 announcement post]({% post_url 2023-05-17-announcing-duckdb-080 %}#new-sql-features), and the [`PIVOT`]({% link docs/stable/sql/statements/pivot.md %}) and [`UNPIVOT`]({% link docs/stable/sql/statements/unpivot.md %}) documentation pages highlight more complex queries.
 
 Stay tuned for a future post to cover what is happening behind the scenes!
 
@@ -578,7 +578,7 @@ DuckDB takes a nod from the [`describe` function in Pandas](https://pandas.pydat
 
 Have a look at the [correlated subqueries post]({% post_url 2023-05-26-correlated-subqueries-in-sql %}) to see how to use subqueries that refer to each others’ columns. DuckDB’s advanced optimizer improves correlated subquery performance by orders of magnitude, allowing for queries to be expressed as naturally as possible. What was once an anti-pattern for performance reasons can now be used freely!
 
-DuckDB has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DuckDB also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation]({% link docs/sql/query_syntax/from.md %}) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
+DuckDB has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DuckDB also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation]({% link docs/stable/sql/query_syntax/from.md %}) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
 
 ## Summary and Future Work
 

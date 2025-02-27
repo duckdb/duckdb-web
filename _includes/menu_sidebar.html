@@ -12,7 +12,7 @@
 		<!-- todo -->
 	{% else %}
 		{% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
-		{% assign startingUrl = "docs/" %}
+		{% assign startingUrl = "docs/stable/" %}
 		{% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 	{% endif %}
 

@@ -27,14 +27,14 @@ With DuckDB's Community Extensions being a [relatively new]({% post_url 2024-07-
 * [extension template](https://github.com/duckdb/extension-template)
 * [Community Extensions Repository](https://github.com/duckdb/community-extensions)
 
-However, because of the batteries-included nature of the extension template and the [large]({% link community_extensions/index.md %}) [amount]({% link docs/extensions/core_extensions.md %}) or example extensions, extension development should be relatively straightforward.
+However, because of the batteries-included nature of the extension template and the [large]({% link community_extensions/index.md %}) [amount]({% link docs/stable/extensions/core_extensions.md %}) or example extensions, extension development should be relatively straightforward.
 
 ## How to Maintain an Extension Through DuckDB Releases
 
 At this moment, community extensions aim to be built and distributed only for latest stable DuckDB release.
 This means that users on any but the latest stable release will see community extensions as frozen in time, with no more updates being served.
 
-When the next DuckDB release is near (see the [release calendar]({% link docs/dev/release_calendar.md %})), the [`duckdb/community-extensions` repository](https://github.com/duckdb/community-extensions/) switches to test extensions both versus the latest stable release *and* the current `main` branch.
+When the next DuckDB release is near (see the [release calendar]({% link docs/stable/dev/release_calendar.md %})), the [`duckdb/community-extensions` repository](https://github.com/duckdb/community-extensions/) switches to test extensions both versus the latest stable release *and* the current `main` branch.
 If an extension is compatible both the latest stable release *and* the current `main` branch, the extension should not be impacted by new release.
 This is the hopefully common case.
 

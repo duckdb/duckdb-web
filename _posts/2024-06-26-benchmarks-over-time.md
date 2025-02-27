@@ -51,7 +51,7 @@ There are some limitations when looking at the performance of a system over time
 If a feature is brand new, there is no prior performance to compare to!
 As a result, this post focuses on fundamental workloads rather than DuckDB's ever-increasing set of integrations with different lakehouse data formats, cloud services, and more.
 
-The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]({% link docs/sql/dialect/friendly_sql.md %}) additions, as those have also been added more recently.
+The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]({% link docs/stable/sql/dialect/friendly_sql.md %}) additions, as those have also been added more recently.
 (When writing these queries, it felt like going back in time!)
 
 ## Benchmark Design Summary
@@ -136,7 +136,7 @@ It is worth noting that the boost from moving to multi-threading will only occur
 
 We can also recreate the overall plot by version rather than by time.
 This demonstrates that DuckDB has been doing more frequent releases recently.
-See [DuckDB's release calendar]({% link docs/dev/release_calendar.md %}) for the full version history.
+See [DuckDB's release calendar]({% link docs/stable/dev/release_calendar.md %}) for the full version history.
 
 <div id="overall_results_by_version" style="width:100%;height:400px;"></div>
 <script>
@@ -525,7 +525,7 @@ CREATE TABLE windowing_results AS
 
 The various window functions that replace the placeholder are below and are labelled to match the result graphs.
 These were selected to showcase the variety of use cases for window functions, as well as the variety of algorithms required to support the full range of the syntax.
-The DuckDB documentation contains a [full railroad diagram of the available syntax]({% link docs/sql/functions/window_functions.md %}#syntax).
+The DuckDB documentation contains a [full railroad diagram of the available syntax]({% link docs/stable/sql/functions/window_functions.md %}#syntax).
 If there are common use cases for window functions that are not well-covered in this benchmark, please let us know!
 
 ```sql

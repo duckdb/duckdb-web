@@ -7,7 +7,7 @@ image: "/images/blog/thumbs/duckdb-release-1-2-0.png"
 excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 1.2.0, codenamed “Histrionicus”."
 ---
 
-To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).
+To install the new version, please visit the [installation guide]({% link docs/stable/installation/index.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
 
 > Some packages (Go, R, Java) take a few extra days to release due to the reviews required in the release pipelines.
@@ -26,9 +26,9 @@ This means that it's _even more random_™ now. Due to this change fixed seeds w
 
 [**`map['entry']` now returns a value, instead of a *list* of entries.**](https://github.com/duckdb/duckdb/pull/14175)
 For example, `map(['k'], ['v'])['k']` now returns `'v'`, while previously it returned `['v']`. We also introduced the `map_extract_value` function, which is now the alias for the bracket operator `[]`.
-If you would like to return a list, use the [`map_extract` function]({% link docs/sql/functions/map.md %}#map_extractmap-key): `map_extract(map(['k'], ['v']), 'k') = ['v']`.
+If you would like to return a list, use the [`map_extract` function]({% link docs/stable/sql/functions/map.md %}#map_extractmap-key): `map_extract(map(['k'], ['v']), 'k') = ['v']`.
 
-[**The indexing of `list_reduce` is fixed.**](https://github.com/duckdb/duckdb/pull/15614) When indexing is applied in `list_reduce`, the index points to the [last parameter of the lambda function]({% link docs/sql/functions/lambda.md %}#reduce) and indexing starts from 1. Therefore, `list_reduce(['a', 'b'], (x, y, i) -> x || y || i)` returns `ab2`.
+[**The indexing of `list_reduce` is fixed.**](https://github.com/duckdb/duckdb/pull/15614) When indexing is applied in `list_reduce`, the index points to the [last parameter of the lambda function]({% link docs/stable/sql/functions/lambda.md %}#reduce) and indexing starts from 1. Therefore, `list_reduce(['a', 'b'], (x, y, i) -> x || y || i)` returns `ab2`.
 
 ### Explicit Storage Versions
 
@@ -169,7 +169,7 @@ DuckDB now supports the `DELTA_BINARY_PACKED` compression as well as the `DELTA_
 ### CLI Improvements
 
 [**Safe mode.**](https://github.com/duckdb/duckdb/pull/14509)
-The DuckDB command line client now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/clients/cli/dot_commands.md %}). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/operations_manual/securing_duckdb/overview.md %}).
+The DuckDB command line client now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/stable/clients/cli/dot_commands.md %}). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/stable/operations_manual/securing_duckdb/overview.md %}).
 
 [**Better autocomplete.**](https://github.com/duckdb/duckdb/pull/15003)
 The autocomplete in CLI now uses a [Parsing Expression Grammar (PEG)]({% post_url 2024-11-22-runtime-extensible-parsers %}) for better autocomplete, as well as improved error messages and suggestions.
@@ -210,7 +210,7 @@ A separate blog post will follow soon.
 **Update:** the [blog post on prefix aliases]({% post_url 2025-02-25-prefix-aliases-in-sql %}) is out.
 
 [**`RENAME` clause**.](https://github.com/duckdb/duckdb/pull/14650)
-DuckDB now supports the `RENAME` clause in `SELECT`. This allows renaming fields emitted by the [`*` expression]({% link docs/sql/expressions/star.md %}):
+DuckDB now supports the `RENAME` clause in `SELECT`. This allows renaming fields emitted by the [`*` expression]({% link docs/stable/sql/expressions/star.md %}):
 
 ```sql
 CREATE TABLE integers (col1 INTEGER, col2 INTEGER);
@@ -254,7 +254,7 @@ Currently, DuckDB extensions use DuckDB’s internal C++ structures. This – al
 ### musl Extensions
 
 [**Distributing extensions for musl.**](https://github.com/duckdb/duckdb/pull/15607)
-The [`musl` C library](https://musl.libc.org/) is often used in lightweight setups such as Docker setups running Alpine Linux. Starting with this release, we officially support musl and we distribute extensions for the `linux_amd64_musl` platform (but not yet for `linux_arm64_musl`). Note that DuckDB binaries (e.g., the CLI client) are not yet distributed for musl platforms, so you have to [build them from source]({% link docs/dev/building/linux.md %}).
+The [`musl` C library](https://musl.libc.org/) is often used in lightweight setups such as Docker setups running Alpine Linux. Starting with this release, we officially support musl and we distribute extensions for the `linux_amd64_musl` platform (but not yet for `linux_arm64_musl`). Note that DuckDB binaries (e.g., the CLI client) are not yet distributed for musl platforms, so you have to [build them from source]({% link docs/stable/dev/building/linux.md %}).
 
 ## Final Thoughts
 

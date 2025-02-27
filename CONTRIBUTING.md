@@ -131,17 +131,17 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
 * Use Jekyll's [link tags](https://jekyllrb.com/docs/liquid/tags/#link) to link to pages.
-    * For example, to link to the Example section on the `SELECT` statement's page, use `{% link docs/sql/statements/select.md %}#examples`.
+    * For example, to link to the Example section on the `SELECT` statement's page, use `{% link docs/stable/sql/statements/select.md %}#examples`.
     * Link tags ensure that the documentation is only compiled and deployed if links point to existing pages.
     * Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
     * :x: ```see [the `SELECT` statement](../../sql/statements/select)```
-    * :white_check_mark: ```see [the `SELECT` statement]({% link docs/sql/statements/select.md %})```
+    * :white_check_mark: ```see [the `SELECT` statement]({% link docs/stable/sql/statements/select.md %})```
 * Avoid using the term "here" for links. For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
-    * :x: `see [here]({% link docs/sql/statements/copy.md %}#copy-from)`
-    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
+    * :x: `see [here]({% link docs/stable/sql/statements/copy.md %}#copy-from)`
+    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/stable/sql/statements/copy.md %}#copy-from)```
 * Reference a specific section when possible:
-    * :x: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %})```
-    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy-from)```
+    * :x: ```see the [`COPY ... FROM` statement]({% link docs/stable/sql/statements/copy.md %})```
+    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/stable/sql/statements/copy.md %}#copy-from)```
 * In most cases, linking related GitHub issues/discussions is discouraged. This allows the documentation to be self-contained.
 
 ## Latest and Stable Pages

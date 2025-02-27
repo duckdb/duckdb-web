@@ -8,7 +8,7 @@ excerpt: "The DuckDB team is <i>very happy</i> to announce that today we’re re
 tags: ["release"]
 ---
 
-To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).
+To install the new version, please visit the [installation guide]({% link docs/stable/installation/index.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.0.0).
 
 <img src="/images/blog/paddling-of-ducks.svg"

@@ -12,7 +12,7 @@ Our [GitHub repository](https://github.com/duckdb/duckdb) has just passed 25,000
 
 We would like to highlight two main events that have happened this year:
 
-* We [released DuckDB 1.0.0]({% post_url 2024-06-03-announcing-duckdb-100 %}). This version introduced a stable storage format which guarantees [backwards compatibility and limited forward compatibility]({% link docs/internals/storage.md %}#compatibility).
+* We [released DuckDB 1.0.0]({% post_url 2024-06-03-announcing-duckdb-100 %}). This version introduced a stable storage format which guarantees [backwards compatibility and limited forward compatibility]({% link docs/stable/internals/storage.md %}#compatibility).
 * We started the [DuckDB Community Extensions project]({% post_url 2024-07-05-community-extensions %}). Community extensions allow developers to contribute packages to DuckDB and users to easily install these extensions using the simple command `INSTALL xyz FROM community`.
 
 Besides the GitHub stars we have also observed a lot of growth in various metrics.

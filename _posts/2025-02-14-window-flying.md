@@ -92,7 +92,7 @@ and hand each group off to a separate _physical_ window operator that handles th
 In order to use the “natural order” we have to group those functions that can be streamed and execute them first
 (or the order will have been destroyed!) and hand them off to the _streaming_ physical window operator.
 
-So which [window functions]({% link docs/sql/functions/window_functions.md %}) can we stream?
+So which [window functions]({% link docs/stable/sql/functions/window_functions.md %}) can we stream?
 It turns out there are quite a few:
 
 * Aggregates `BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` (we just update the aggregate)
