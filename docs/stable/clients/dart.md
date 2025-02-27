@@ -1,10 +1,11 @@
 ---
-layout: docu
-title: Dart Client
 github_repository: https://github.com/TigerEyeLabs/duckdb-dart
+layout: docu
 redirect_from:
-  - /docs/api/dart
-  - /docs/api/dart/
+- /docs/api/dart
+- /docs/api/dart/
+- /docs/clients/dart
+title: Dart Client
 ---
 
 DuckDB.Dart is the native Dart API for [DuckDB](https://duckdb.org/).

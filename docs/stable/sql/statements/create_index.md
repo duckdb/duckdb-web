@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CREATE INDEX Statement
 railroad: statements/indexes.js
+redirect_from:
+- /docs/sql/statements/create_index
+title: CREATE INDEX Statement
 ---
 
 ## `CREATE INDEX`

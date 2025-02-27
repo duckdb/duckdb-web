@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Set Operations
 railroad: query_syntax/setops.js
+redirect_from:
+- /docs/sql/query_syntax/setops
+title: Set Operations
 ---
 
 Set operations allow queries to be combined according to [set operation semantics](https://en.wikipedia.org/wiki/Set_(mathematics)#Basic_operations). Set operations refer to the [`UNION [ALL]`](#union), [`INTERSECT [ALL]`](#intersect) and [`EXCEPT [ALL]`](#except) clauses. The vanilla variants use set semantics, i.e., they eliminate duplicates, while the variants with `ALL` use bag semantics.

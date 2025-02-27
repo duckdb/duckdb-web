@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: IN Operator
 railroad: expressions/in.js
+redirect_from:
+- /docs/sql/expressions/in
+title: IN Operator
 ---
 
 <div id="rrdiagram"></div>

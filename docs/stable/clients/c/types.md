@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Types
 redirect_from:
-  - /docs/api/c/types
-  - /docs/api/c/types/
+- /docs/api/c/types
+- /docs/api/c/types/
+- /docs/clients/c/types
+title: Types
 ---
 
 DuckDB is a strongly typed database system. As such, every column has a single type specified. This type is constant

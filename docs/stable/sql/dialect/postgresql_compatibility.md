@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: PostgreSQL Compatibility
 redirect_from:
-  - /docs/sql/postgresl_compatibility
-  - /docs/sql/postgresl_compatibility/
+- /docs/sql/postgresl_compatibility
+- /docs/sql/postgresl_compatibility/
+- /docs/sql/dialect/postgresql_compatibility
+title: PostgreSQL Compatibility
 ---
 
 DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.

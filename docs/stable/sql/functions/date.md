@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Date Functions
 redirect_from:
-  - /docs/test/functions/date
-  - /docs/test/functions/date/
+- /docs/test/functions/date
+- /docs/test/functions/date/
+- /docs/sql/functions/date
+title: Date Functions
 ---
 
 <!-- markdownlint-disable MD001 -->

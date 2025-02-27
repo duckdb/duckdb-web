@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Complete API
 redirect_from:
-  - /docs/api/c/api
-  - /docs/api/c/api/
+- /docs/api/c/api
+- /docs/api/c/api/
+- /docs/clients/c/api
+title: Complete API
 ---
 
 <!-- markdownlint-disable MD001 -->

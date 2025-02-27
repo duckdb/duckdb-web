@@ -1,10 +1,11 @@
 ---
-layout: docu
-title: Spatial Extension
 github_repository: https://github.com/duckdb/duckdb_spatial
+layout: docu
 redirect_from:
-  - /docs/extensions/spatial
-  - /docs/extensions/spatial/
+- /docs/extensions/spatial
+- /docs/extensions/spatial/
+- /docs/extensions/spatial/overview
+title: Spatial Extension
 ---
 
 The `spatial` extension provides support for geospatial data processing in DuckDB.

@@ -1,6 +1,8 @@
 ---
 layout: docu
-title: "EXPLAIN: Inspect Query Plans"
+redirect_from:
+- /docs/guides/meta/explain
+title: 'EXPLAIN: Inspect Query Plans'
 ---
 
 ```sql

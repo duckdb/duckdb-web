@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: DuckDB Repositories
 redirect_from:
-  - /internals/repositories
-  - /internals/repositories/
+- /internals/repositories
+- /internals/repositories/
+- /docs/dev/repositories
+title: DuckDB Repositories
 ---
 
 Several components of DuckDB are maintained in separate repositories.

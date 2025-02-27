@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: DROP Statement
 railroad: statements/drop.js
+redirect_from:
+- /docs/sql/statements/drop
+title: DROP Statement
 ---
 
 The `DROP` statement removes a catalog entry added previously with the `CREATE` command.

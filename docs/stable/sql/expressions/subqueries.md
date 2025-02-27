@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Subqueries
 railroad: expressions/subqueries.js
+redirect_from:
+- /docs/sql/expressions/subqueries
+title: Subqueries
 ---
 
 Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT ... FROM`, but in DuckDB other query constructs such as [`PIVOT`]({% link docs/stable/sql/statements/pivot.md %}) can also appear as a subquery.

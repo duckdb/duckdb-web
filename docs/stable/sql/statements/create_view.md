@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CREATE VIEW Statement
 railroad: statements/createview.js
+redirect_from:
+- /docs/sql/statements/create_view
+title: CREATE VIEW Statement
 ---
 
 The `CREATE VIEW` statement defines a new view in the catalog.

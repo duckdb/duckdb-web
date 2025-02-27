@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: DELETE Statement
 railroad: statements/delete.js
+redirect_from:
+- /docs/sql/statements/delete
+title: DELETE Statement
 ---
 
 The `DELETE` statement removes rows from the table identified by the table-name.

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Indexes
 railroad: statements/indexes.js
+redirect_from:
+- /docs/sql/indexes
+title: Indexes
 ---
 
 ## Index Types

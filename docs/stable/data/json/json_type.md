@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: JSON Type
 redirect_from:
-  - /docs/sql/data_types/json
-  - /docs/sql/data_types/json/
+- /docs/sql/data_types/json
+- /docs/sql/data_types/json/
+- /docs/data/json/json_type
+title: JSON Type
 ---
 
 DuckDB supports `json` via the `JSON` logical type.

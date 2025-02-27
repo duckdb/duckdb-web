@@ -1,11 +1,12 @@
 ---
-# this file is GENERATED, regenerate it with scripts/generate_python_docs.py
 layout: docu
-title: Python Client API
 redirect_from:
-  - /docs/api/python/reference/index
-  - /docs/api/python/reference/index/
+- /docs/api/python/reference/index
+- /docs/api/python/reference/index/
+- /docs/clients/python/reference/index
+title: Python Client API
 ---
+
 <div class="documentwrapper">
 <div class="bodywrapper">
 <div class="body" role="main">

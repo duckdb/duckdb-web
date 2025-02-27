@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Query
 redirect_from:
-  - /docs/api/wasm/query
-  - /docs/api/wasm/query/
+- /docs/api/wasm/query
+- /docs/api/wasm/query/
+- /docs/clients/wasm/query
+title: Query
 ---
 
 DuckDB-Wasm provides functions for querying data. Queries are run sequentially.

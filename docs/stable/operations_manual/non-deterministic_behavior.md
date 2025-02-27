@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/operations_manual/non-deterministic_behavior
 title: Non-Deterministic Behavior
 ---
 

@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Friendly SQL
 redirect_from:
-  - /docs/guides/sql_features/friendly_sql
-  - /docs/guides/sql_features/friendly_sql/
+- /docs/guides/sql_features/friendly_sql
+- /docs/guides/sql_features/friendly_sql/
+- /docs/sql/dialect/friendly_sql
+title: Friendly SQL
 ---
 
 DuckDB offers several advanced SQL features and syntactic sugar to make SQL queries more concise. We refer to these colloquially as “friendly SQL”.

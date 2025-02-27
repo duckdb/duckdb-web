@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Overview
 redirect_from:
-  - /dev/testing
-  - /dev/testing/
+- /dev/testing
+- /dev/testing/
+- /docs/dev/sqllogictest/overview
+title: Overview
 ---
 
 ## How is DuckDB Tested?

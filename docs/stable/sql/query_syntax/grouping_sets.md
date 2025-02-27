@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: GROUPING SETS
 railroad: query_syntax/groupby.js
+redirect_from:
+- /docs/sql/query_syntax/grouping_sets
+title: GROUPING SETS
 ---
 
 `GROUPING SETS`, `ROLLUP` and `CUBE` can be used in the `GROUP BY` clause to perform a grouping over multiple dimensions within the same query.

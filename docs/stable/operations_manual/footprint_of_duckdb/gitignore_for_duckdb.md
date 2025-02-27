@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/operations_manual/footprint_of_duckdb/gitignore_for_duckdb
 title: Gitignore for DuckDB
 ---
 

@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Connect
 redirect_from:
-  - /docs/connect
-  - /docs/connect/
+- /docs/connect
+- /docs/connect/
+- /docs/connect/overview
+title: Connect
 ---
 
 ## Connect or Create a Database

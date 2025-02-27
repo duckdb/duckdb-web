@@ -1,7 +1,9 @@
 ---
-layout: docu
-title: Azure Extension
 github_repository: https://github.com/duckdb/duckdb_azure
+layout: docu
+redirect_from:
+- /docs/extensions/azure
+title: Azure Extension
 ---
 
 The `azure` extension is a loadable extension that adds a filesystem abstraction for the [Azure Blob storage](https://azure.microsoft.com/en-us/products/storage/blobs) to DuckDB.

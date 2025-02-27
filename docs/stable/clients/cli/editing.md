@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Editing
 redirect_from:
-  - /docs/api/cli/editing
-  - /docs/api/cli/editing/
+- /docs/api/cli/editing
+- /docs/api/cli/editing/
+- /docs/clients/cli/editing
+title: Editing
 ---
 
 > The linenoise-based CLI editor is currently only available for macOS and Linux.

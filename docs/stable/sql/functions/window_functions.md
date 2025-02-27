@@ -1,10 +1,11 @@
 ---
 layout: docu
-title: Window Functions
 railroad: expressions/window.js
 redirect_from:
-  - /docs/sql/window_functions
-  - /docs/sql/window_functions/
+- /docs/sql/window_functions
+- /docs/sql/window_functions/
+- /docs/sql/functions/window_functions
+title: Window Functions
 ---
 
 <!-- markdownlint-disable MD001 -->

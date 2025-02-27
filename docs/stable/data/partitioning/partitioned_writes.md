@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/data/partitioning/partitioned_writes
 title: Partitioned Writes
 ---
 

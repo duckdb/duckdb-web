@@ -1,11 +1,12 @@
 ---
 layout: docu
-title: Python API
 redirect_from:
-  - /docs/api/python
-  - /docs/api/python/
-  - /docs/api/python/overview
-  - /docs/api/python/overview/
+- /docs/api/python
+- /docs/api/python/
+- /docs/api/python/overview
+- /docs/api/python/overview/
+- /docs/clients/python/overview
+title: Python API
 ---
 
 ## Installation

@@ -1,10 +1,11 @@
 ---
-layout: docu
-title: ODBC Configuration
 github_repository: https://github.com/duckdb/duckdb-odbc
+layout: docu
 redirect_from:
-  - /docs/api/odbc/configuration
-  - /docs/api/odbc/configuration/
+- /docs/api/odbc/configuration
+- /docs/api/odbc/configuration/
+- /docs/clients/odbc/configuration
+title: ODBC Configuration
 ---
 
 This page documents the files using the ODBC configuration, [`odbc.ini`](#odbcini-and-odbcini) and [`odbcinst.ini`](#odbcinstini-and-odbcinstini).

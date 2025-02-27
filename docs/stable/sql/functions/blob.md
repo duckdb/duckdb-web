@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Blob Functions
 redirect_from:
-  - /docs/test/functions/blob
-  - /docs/test/functions/blob/
+- /docs/test/functions/blob
+- /docs/test/functions/blob/
+- /docs/sql/functions/blob
+title: Blob Functions
 ---
 
 <!-- markdownlint-disable MD001 -->

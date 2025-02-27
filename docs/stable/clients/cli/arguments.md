@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Command Line Arguments
 redirect_from:
-  - /docs/cli/arguments
-  - /docs/cli/arguments/
+- /docs/cli/arguments
+- /docs/cli/arguments/
+- /docs/clients/cli/arguments
+title: Command Line Arguments
 ---
 
 The table below summarizes DuckDB's command line options.

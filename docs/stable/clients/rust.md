@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Rust Client
 redirect_from:
-  - /docs/api/rust
-  - /docs/api/rust/
+- /docs/api/rust
+- /docs/api/rust/
+- /docs/clients/rust
+title: Rust Client
 ---
 
 ## Installation

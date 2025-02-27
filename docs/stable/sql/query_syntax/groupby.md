@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: GROUP BY Clause
 railroad: query_syntax/groupby.js
+redirect_from:
+- /docs/sql/query_syntax/groupby
+title: GROUP BY Clause
 ---
 
 The `GROUP BY` clause specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause.

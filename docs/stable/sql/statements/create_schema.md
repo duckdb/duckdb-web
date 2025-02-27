@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CREATE SCHEMA Statement
 railroad: statements/createschema.js
+redirect_from:
+- /docs/sql/statements/create_schema
+title: CREATE SCHEMA Statement
 ---
 
 The `CREATE SCHEMA` statement creates a schema in the catalog. The default schema is `main`.

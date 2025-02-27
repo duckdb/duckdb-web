@@ -1,8 +1,11 @@
 ---
+blurb: The UNPIVOT statement allows columns to be stacked into rows that indicate
+  the prior column name and value.
 layout: docu
-title: UNPIVOT Statement
 railroad: statements/unpivot.js
-blurb: The UNPIVOT statement allows columns to be stacked into rows that indicate the prior column name and value.
+redirect_from:
+- /docs/sql/statements/unpivot
+title: UNPIVOT Statement
 ---
 
 The `UNPIVOT` statement allows multiple columns to be stacked into fewer columns.

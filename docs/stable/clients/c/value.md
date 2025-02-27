@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Values
 redirect_from:
-  - /docs/api/c/value
-  - /docs/api/c/value/
+- /docs/api/c/value
+- /docs/api/c/value/
+- /docs/clients/c/value
+title: Values
 ---
 
 The value class represents a single value of any type.

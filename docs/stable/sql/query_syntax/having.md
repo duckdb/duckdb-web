@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: HAVING Clause
 railroad: query_syntax/groupby.js
+redirect_from:
+- /docs/sql/query_syntax/having
+title: HAVING Clause
 ---
 
 The `HAVING` clause can be used after the `GROUP BY` clause to provide filter criteria *after* the grouping has been completed. In terms of syntax the `HAVING` clause is identical to the `WHERE` clause, but while the `WHERE` clause occurs before the grouping, the `HAVING` clause occurs after the grouping.

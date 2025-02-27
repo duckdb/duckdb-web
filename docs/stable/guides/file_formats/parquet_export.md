@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Parquet Export
 redirect_from:
-  - /docs/guides/import/parquet_export
-  - /docs/guides/import/parquet_export/
+- /docs/guides/import/parquet_export
+- /docs/guides/import/parquet_export/
+- /docs/guides/file_formats/parquet_export
+title: Parquet Export
 ---
 
 To export the data from a table to a Parquet file, use the `COPY` statement:

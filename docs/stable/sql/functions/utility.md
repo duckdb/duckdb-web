@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Utility Functions
 redirect_from:
-  - /docs/test/functions/utility
-  - /docs/test/functions/utility/
+- /docs/test/functions/utility
+- /docs/test/functions/utility/
+- /docs/sql/functions/utility
+title: Utility Functions
 ---
 
 <!-- markdownlint-disable MD001 -->

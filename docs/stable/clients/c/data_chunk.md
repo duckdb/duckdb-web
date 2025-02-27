@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Data Chunks
 redirect_from:
-  - /docs/api/c/data_chunk
-  - /docs/api/c/data_chunk/
+- /docs/api/c/data_chunk
+- /docs/api/c/data_chunk/
+- /docs/clients/c/data_chunk
+title: Data Chunks
 ---
 
 Data chunks represent a horizontal slice of a table. They hold a number of [vectors]({% link docs/stable/clients/c/vector.md %}), that can each hold up to the `VECTOR_SIZE` rows. The vector size can be obtained through the `duckdb_vector_size` function and is configurable, but is usually set to `2048`.

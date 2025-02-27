@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Expression API
 redirect_from:
-  - /docs/api/python/expression
-  - /docs/api/python/expression/
+- /docs/api/python/expression
+- /docs/api/python/expression/
+- /docs/clients/python/expression
+title: Expression API
 ---
 
 The `Expression` class represents an instance of an [expression]({% link docs/stable/sql/expressions/overview.md %}).

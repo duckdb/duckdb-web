@@ -1,7 +1,9 @@
 ---
-layout: docu
-title: jemalloc Extension
 github_directory: https://github.com/duckdb/duckdb/tree/main/extension/jemalloc
+layout: docu
+redirect_from:
+- /docs/extensions/jemalloc
+title: jemalloc Extension
 ---
 
 The `jemalloc` extension replaces the system's memory allocator with [jemalloc](https://jemalloc.net/).

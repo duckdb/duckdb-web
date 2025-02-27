@@ -1,17 +1,18 @@
 ---
 layout: docu
-title: Building DuckDB from Source
 redirect_from:
-  - /dev/building
-  - /dev/building/
-  - /docs/dev/building
-  - /docs/dev/building/
-  - /docs/dev/building/build_instructions
-  - /docs/dev/building/build_instructions/
-  - /docs/dev/building/platforms
-  - /docs/dev/building/platforms/
-  - /docs/dev/building/supported_platforms
-  - /docs/dev/building/supported_platforms/
+- /dev/building
+- /dev/building/
+- /docs/dev/building
+- /docs/dev/building/
+- /docs/dev/building/build_instructions
+- /docs/dev/building/build_instructions/
+- /docs/dev/building/platforms
+- /docs/dev/building/platforms/
+- /docs/dev/building/supported_platforms
+- /docs/dev/building/supported_platforms/
+- /docs/dev/building/overview
+title: Building DuckDB from Source
 ---
 
 ## When Should You Build DuckDB?

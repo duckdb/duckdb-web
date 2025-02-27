@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: ORDER BY Clause
 railroad: query_syntax/orderby.js
+redirect_from:
+- /docs/sql/query_syntax/orderby
+title: ORDER BY Clause
 ---
 
 `ORDER BY` is an output modifier. Logically it is applied near the very end of the query (just prior to [`LIMIT`]({% link docs/stable/sql/query_syntax/limit.md %}) or [`OFFSET`]({% link docs/stable/sql/query_syntax/limit.md %}), if present).

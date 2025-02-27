@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: WITH Clause
 railroad: query_syntax/with.js
+redirect_from:
+- /docs/sql/query_syntax/with
+title: WITH Clause
 ---
 
 The `WITH` clause allows you to specify common table expressions (CTEs).

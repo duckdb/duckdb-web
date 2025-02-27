@@ -1,8 +1,9 @@
 ---
 layout: docu
-title: Fastly Object Storage Import
 redirect_from:
-  - /docs/guides/import/fastly_object_storage_import
+- /docs/guides/import/fastly_object_storage_import
+- /docs/guides/network_cloud_storage/fastly_object_storage_import
+title: Fastly Object Storage Import
 ---
 
 ## Prerequisites
@@ -38,5 +39,3 @@ After setting up the Fastly Object Storage credentials, you can query the data t
 SELECT * FROM 's3://⟨fastly_bucket_name⟩/(file).csv';
 SELECT * FROM read_parquet('s3://⟨fastly_bucket_name⟩/⟨file⟩.parquet');
 ```
-
-

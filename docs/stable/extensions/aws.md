@@ -1,7 +1,9 @@
 ---
-layout: docu
-title: AWS Extension
 github_repository: https://github.com/duckdb/duckdb_aws
+layout: docu
+redirect_from:
+- /docs/extensions/aws
+title: AWS Extension
 ---
 
 The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities]({% link docs/stable/extensions/httpfs/overview.md %}#s3-api), using the AWS SDK.

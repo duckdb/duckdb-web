@@ -1,6 +1,8 @@
 ---
 layout: docu
-title: "ODBC 101: A Duck Themed Guide to ODBC"
+redirect_from:
+- /docs/guides/odbc/general
+title: 'ODBC 101: A Duck Themed Guide to ODBC'
 ---
 
 ## What is ODBC?

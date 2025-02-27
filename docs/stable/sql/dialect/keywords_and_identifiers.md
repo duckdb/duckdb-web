@@ -1,13 +1,14 @@
 ---
 layout: docu
-title: Keywords and Identifiers
 redirect_from:
-  - /docs/sql/case_sensitivity
-  - /docs/sql/case_sensitivity/
-  - /docs/sql/keywords-and-identifiers
-  - /docs/sql/keywords-and-identifiers/
-  - /docs/sql/dialect/keywords-and-identifiers
-  - /docs/sql/dialect/keywords-and-identifiers/
+- /docs/sql/case_sensitivity
+- /docs/sql/case_sensitivity/
+- /docs/sql/keywords-and-identifiers
+- /docs/sql/keywords-and-identifiers/
+- /docs/sql/dialect/keywords-and-identifiers
+- /docs/sql/dialect/keywords-and-identifiers/
+- /docs/sql/dialect/keywords_and_identifiers
+title: Keywords and Identifiers
 ---
 
 ## Identifiers

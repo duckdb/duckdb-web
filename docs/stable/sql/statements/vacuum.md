@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: VACUUM Statement
 railroad: statements/vacuum.js
+redirect_from:
+- /docs/sql/statements/vacuum
+title: VACUUM Statement
 ---
 
 The `VACUUM` statement only has basic support in DuckDB and is mostly provided for PostgreSQL-compatibility.

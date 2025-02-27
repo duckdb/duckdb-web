@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CREATE MACRO Statement
 railroad: statements/createmacro.js
+redirect_from:
+- /docs/sql/statements/create_macro
+title: CREATE MACRO Statement
 ---
 
 The `CREATE MACRO` statement can create a scalar or table macro (function) in the catalog.

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CASE Statement
 railroad: expressions/case.js
+redirect_from:
+- /docs/sql/expressions/case
+title: CASE Statement
 ---
 
 <div id="rrdiagram"></div>

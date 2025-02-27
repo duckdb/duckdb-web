@@ -1,10 +1,11 @@
 ---
-layout: docu
-title: Swift Client
 github_repository: https://github.com/duckdb/duckdb-swift
+layout: docu
 redirect_from:
-  - /docs/api/swift
-  - /docs/api/swift/
+- /docs/api/swift
+- /docs/api/swift/
+- /docs/clients/swift
+title: Swift Client
 ---
 
 DuckDB has a Swift client. See the [announcement post]({% post_url 2023-04-21-swift %}) for details.

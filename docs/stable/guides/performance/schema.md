@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/guides/performance/schema
 title: Schema
 ---
 

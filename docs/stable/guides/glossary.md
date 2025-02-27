@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/guides/glossary
 title: Glossary of Terms
 ---
 

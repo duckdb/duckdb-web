@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CREATE TABLE Statement
 railroad: statements/createtable.js
+redirect_from:
+- /docs/sql/statements/create_table
+title: CREATE TABLE Statement
 ---
 
 The `CREATE TABLE` statement creates a table in the catalog.

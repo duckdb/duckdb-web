@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/data/appender
 title: Appender
 ---
 

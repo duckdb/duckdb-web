@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: ATTACH and DETACH Statements
 railroad: statements/attach.js
+redirect_from:
+- /docs/sql/statements/attach
+title: ATTACH and DETACH Statements
 ---
 
 DuckDB allows attaching to and detaching from database files.

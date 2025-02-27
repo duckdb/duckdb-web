@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CREATE SEQUENCE Statement
 railroad: statements/createsequence.js
+redirect_from:
+- /docs/sql/statements/create_sequence
+title: CREATE SEQUENCE Statement
 ---
 
 The `CREATE SEQUENCE` statement creates a new sequence number generator.

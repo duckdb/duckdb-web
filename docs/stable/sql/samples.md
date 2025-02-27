@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Samples
 railroad: statements/samples.js
+redirect_from:
+- /docs/sql/samples
+title: Samples
 ---
 
 Samples are used to randomly select a subset of a dataset.

@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Parquet Import
 redirect_from:
-  - /docs/guides/import/parquet_import
-  - /docs/guides/import/parquet_import/
+- /docs/guides/import/parquet_import
+- /docs/guides/import/parquet_import/
+- /docs/guides/file_formats/parquet_import
+title: Parquet Import
 ---
 
 To read data from a Parquet file, use the `read_parquet` function in the `FROM` clause of a query:

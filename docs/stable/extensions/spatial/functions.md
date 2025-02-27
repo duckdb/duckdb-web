@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/extensions/spatial/functions
 title: Spatial Functions
 ---
 

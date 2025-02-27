@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Known Python Issues
 redirect_from:
-  - /docs/api/python/known_issues
-  - /docs/api/python/known_issues/
+- /docs/api/python/known_issues
+- /docs/api/python/known_issues/
+- /docs/clients/python/known_issues
+title: Known Python Issues
 ---
 
 Unfortunately there are some issues that are either beyond our control or are very elusive / hard to track down.

@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/dev/building/troubleshooting
 title: Troubleshooting
 ---
 

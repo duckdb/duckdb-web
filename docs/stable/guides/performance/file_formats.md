@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: File Formats
 redirect_from:
-  - /docs/guides/performance/file-formats
-  - /docs/guides/performance/file-formats/
+- /docs/guides/performance/file-formats
+- /docs/guides/performance/file-formats/
+- /docs/guides/performance/file_formats
+title: File Formats
 ---
 
 ## Handling Parquet Files

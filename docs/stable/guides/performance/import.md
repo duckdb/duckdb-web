@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Data Import
 redirect_from:
-  - /docs/guides/import/overview
-  - /docs/guides/import/overview/
+- /docs/guides/import/overview
+- /docs/guides/import/overview/
+- /docs/guides/performance/import
+title: Data Import
 ---
 
 ## Recommended Import Methods

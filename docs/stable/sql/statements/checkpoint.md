@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: CHECKPOINT Statement
 railroad: statements/checkpoint.js
+redirect_from:
+- /docs/sql/statements/checkpoint
+title: CHECKPOINT Statement
 ---
 
 The `CHECKPOINT` statement synchronizes data in the write-ahead log (WAL) to the database data file. For in-memory

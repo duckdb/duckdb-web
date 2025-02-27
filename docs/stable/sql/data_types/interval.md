@@ -1,7 +1,10 @@
 ---
+blurb: Intervals represent periods of time measured in months, days, microseconds,
+  or a combination thereof.
 layout: docu
+redirect_from:
+- /docs/sql/data_types/interval
 title: Interval Type
-blurb: Intervals represent periods of time measured in months, days, microseconds, or a combination thereof.
 ---
 
 `INTERVAL`s represent periods of time that can be added to or subtracted from `DATE`, `TIMESTAMP`, `TIMESTAMPTZ`, or `TIME` values.

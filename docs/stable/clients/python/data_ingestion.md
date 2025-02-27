@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Data Ingestion
 redirect_from:
-  - /docs/api/python/data_ingestion
-  - /docs/api/python/data_ingestion/
+- /docs/api/python/data_ingestion
+- /docs/api/python/data_ingestion/
+- /docs/clients/python/data_ingestion
+title: Data Ingestion
 ---
 
 This page contains examples for data ingestion to Python using DuckDB. First, import the DuckDB page:

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: EXPORT and IMPORT DATABASE Statements
 railroad: statements/export.js
+redirect_from:
+- /docs/sql/statements/export
+title: EXPORT and IMPORT DATABASE Statements
 ---
 
 The `EXPORT DATABASE` command allows you to export the contents of the database to a specific directory. The `IMPORT DATABASE` command allows you to then read the contents again.

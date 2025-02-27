@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Directly Reading Files
 redirect_from:
-  - /docs/guides/import/read_file
-  - /docs/guides/import/read_file/
+- /docs/guides/import/read_file
+- /docs/guides/import/read_file/
+- /docs/guides/file_formats/read_file
+title: Directly Reading Files
 ---
 
 DuckDB allows directly reading files via the [`read_text`](#read_text) and [`read_blob`](#read_blob) functions.

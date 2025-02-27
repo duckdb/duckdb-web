@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Working with Extensions
 redirect_from:
-  - /docs/extensions/troubleshooting
-  - /docs/extensions/troubleshooting/
+- /docs/extensions/troubleshooting
+- /docs/extensions/troubleshooting/
+- /docs/extensions/working_with_extensions
+title: Working with Extensions
 ---
 
 ## Platforms

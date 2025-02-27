@@ -1,11 +1,12 @@
 ---
 layout: docu
-title: Overview
 redirect_from:
-  - /docs/api/c
-  - /docs/api/c/
-  - /docs/api/c/overview
-  - /docs/api/c/overview/
+- /docs/api/c
+- /docs/api/c/
+- /docs/api/c/overview
+- /docs/api/c/overview/
+- /docs/clients/c/overview
+title: Overview
 ---
 
 DuckDB implements a custom C API modelled somewhat following the SQLite C API. The API is contained in the `duckdb.h` header. Continue to [Startup & Shutdown]({% link docs/stable/clients/c/connect.md %}) to get started, or check out the [Full API overview]({% link docs/stable/clients/c/api.md %}).

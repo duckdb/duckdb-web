@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: UPDATE Statement
 railroad: statements/update.js
+redirect_from:
+- /docs/sql/statements/update
+title: UPDATE Statement
 ---
 
 The `UPDATE` statement modifies the values of rows in a table.

@@ -1,13 +1,14 @@
 ---
 layout: docu
-title: Release Calendar
 redirect_from:
-  - /dev/release-dates
-  - /dev/release-dates/
-  - /dev/release-calendar
-  - /dev/release-calendar/
-  - /dev/docs/dev/release_calendar
-  - /dev/docs/dev/release_calendar/
+- /dev/release-dates
+- /dev/release-dates/
+- /dev/release-calendar
+- /dev/release-calendar/
+- /dev/docs/dev/release_calendar
+- /dev/docs/dev/release_calendar/
+- /docs/dev/release_calendar
+title: Release Calendar
 ---
 
 DuckDB follows [semantic versioning](https://semver.org/spec/v2.0.0.html).

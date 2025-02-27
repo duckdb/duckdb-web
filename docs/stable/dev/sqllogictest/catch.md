@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Catch C/C++ Tests
 redirect_from:
-  - /dev/sqllogictest/catch
-  - /dev/sqllogictest/catch/
+- /dev/sqllogictest/catch
+- /dev/sqllogictest/catch/
+- /docs/dev/sqllogictest/catch
+title: Catch C/C++ Tests
 ---
 
 While we prefer the sqllogic tests for testing most functionality, for certain tests only SQL is not sufficient. This typically happens when you want to test the C++ API. When using pure SQL is really not an option it might be necessary to make a C++ test using Catch.

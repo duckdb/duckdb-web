@@ -1,8 +1,11 @@
 ---
+blurb: The PIVOT statement allows values within a column to be separated into their
+  own columns.
 layout: docu
-title: PIVOT Statement
 railroad: statements/pivot.js
-blurb: The PIVOT statement allows values within a column to be separated into their own columns.
+redirect_from:
+- /docs/sql/statements/pivot
+title: PIVOT Statement
 ---
 
 The `PIVOT` statement allows distinct values within a column to be separated into their own columns.

@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Casting
 railroad: expressions/cast.js
+redirect_from:
+- /docs/sql/expressions/cast
+title: Casting
 ---
 
 <div id="rrdiagram"></div>

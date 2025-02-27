@@ -1,7 +1,9 @@
 ---
-layout: docu
-title: Arrow Extension
 github_repository: https://github.com/duckdb/arrow
+layout: docu
+redirect_from:
+- /docs/extensions/arrow
+title: Arrow Extension
 ---
 
 The `arrow` extension implements features for using [Apache Arrow](https://arrow.apache.org/), a cross-language development platform for in-memory analytics.

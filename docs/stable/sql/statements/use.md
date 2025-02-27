@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: USE Statement
 railroad: statements/use.js
+redirect_from:
+- /docs/sql/statements/use
+title: USE Statement
 ---
 
 The `USE` statement selects a database and optional schema to use as the default.

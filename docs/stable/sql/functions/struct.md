@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/sql/functions/struct
 title: Struct Functions
 ---
 
@@ -79,4 +81,3 @@ title: Struct Functions
 | **Description** | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
 | **Example** | `struct_pack(i := 4, s := 'string')` |
 | **Result** | `{'i': 4, 's': string}` |
-

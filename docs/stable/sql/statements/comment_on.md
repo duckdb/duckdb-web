@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: COMMENT ON Statement
 railroad: statements/comment.js
+redirect_from:
+- /docs/sql/statements/comment_on
+title: COMMENT ON Statement
 ---
 
 The `COMMENT ON` statement allows adding metadata to catalog entries (tables, columns, etc.).

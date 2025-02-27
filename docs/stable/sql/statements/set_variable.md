@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: SET VARIABLE and RESET VARIABLE Statements
 railroad: statements/setvariable.js
+redirect_from:
+- /docs/sql/statements/set_variable
+title: SET VARIABLE and RESET VARIABLE Statements
 ---
 
 DuckDB supports the definition of SQL-level variables using the `SET VARIABLE` and `RESET VARIABLE` statements.

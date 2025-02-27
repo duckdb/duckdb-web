@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/guides/snippets/copy_in-memory_database_to_file
 title: Copying an In-Memory Database to a File
 ---
 

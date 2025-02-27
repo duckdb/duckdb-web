@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: ALTER TABLE Statement
 railroad: statements/alter.js
+redirect_from:
+- /docs/sql/statements/alter_table
+title: ALTER TABLE Statement
 ---
 
 The `ALTER TABLE` statement changes the schema of an existing table in the catalog.

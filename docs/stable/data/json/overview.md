@@ -1,11 +1,12 @@
 ---
 layout: docu
-title: JSON Overview
 redirect_from:
-  - /docs/data/json
-  - /docs/data/json/
-  - /docs/extensions/json
-  - /docs/extensions/json/
+- /docs/data/json
+- /docs/data/json/
+- /docs/extensions/json
+- /docs/extensions/json/
+- /docs/data/json/overview
+title: JSON Overview
 ---
 
 DuckDB supports SQL functions that are useful for reading values from existing JSON and creating new JSON data.

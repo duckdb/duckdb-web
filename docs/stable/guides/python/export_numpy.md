@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/guides/python/export_numpy
 title: Export to Numpy
 ---
 

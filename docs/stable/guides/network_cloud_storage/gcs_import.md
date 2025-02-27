@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Google Cloud Storage Import
 redirect_from:
-  - /docs/guides/import/gcs_import
-  - /docs/guides/import/gcs_import/
+- /docs/guides/import/gcs_import
+- /docs/guides/import/gcs_import/
+- /docs/guides/network_cloud_storage/gcs_import
+title: Google Cloud Storage Import
 ---
 
 ## Prerequisites

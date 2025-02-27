@@ -1,6 +1,8 @@
 ---
 layout: docu
-title: "File Access with the file: Protocol"
+redirect_from:
+- /docs/guides/file_formats/file_access
+title: 'File Access with the file: Protocol'
 ---
 
 DuckDB supports using the `file:` protocol. It currently supports the following formats:

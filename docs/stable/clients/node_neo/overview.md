@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Node.js Client (Neo)
 redirect_from:
-  - /docs/api/node_neo/overview
-  - /docs/api/node_neo/overview/
+- /docs/api/node_neo/overview
+- /docs/api/node_neo/overview/
+- /docs/clients/node_neo/overview
+title: Node.js Client (Neo)
 ---
 
 An API for using [DuckDB]({% link index.html %}) in [Node.js](https://nodejs.org/).

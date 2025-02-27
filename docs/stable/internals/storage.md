@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Storage Versions and Format
 redirect_from:
-  - /internals/storage
-  - /internals/storage/
+- /internals/storage
+- /internals/storage/
+- /docs/internals/storage
+title: Storage Versions and Format
 ---
 
 ## Compatibility

@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Pragmas
 redirect_from:
-  - /docs/sql/pragmas
-  - /docs/sql/pragmas/
+- /docs/sql/pragmas
+- /docs/sql/pragmas/
+- /docs/configuration/pragmas
+title: Pragmas
 ---
 
 <!-- markdownlint-disable MD001 -->

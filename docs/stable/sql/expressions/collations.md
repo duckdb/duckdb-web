@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Collations
 railroad: expressions/collate.js
+redirect_from:
+- /docs/sql/expressions/collations
+title: Collations
 ---
 
 <div id="rrdiagram"></div>

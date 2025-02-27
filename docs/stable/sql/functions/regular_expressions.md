@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Regular Expressions
 railroad: expressions/like.js
+redirect_from:
+- /docs/sql/functions/regular_expressions
+title: Regular Expressions
 ---
 
 <!-- markdownlint-disable MD001 -->

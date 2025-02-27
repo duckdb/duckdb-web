@@ -1,7 +1,9 @@
 ---
-layout: docu
-title: NULL Values
 blurb: The NULL value represents a missing value.
+layout: docu
+redirect_from:
+- /docs/sql/data_types/nulls
+title: NULL Values
 ---
 
 `NULL` values are special values that are used to represent missing data in SQL. Columns of any type can contain `NULL` values. Logically, a `NULL` value can be seen as “the value of this field is unknown”.

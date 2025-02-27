@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Python Function API
 redirect_from:
-  - /docs/api/python/function
-  - /docs/api/python/function/
+- /docs/api/python/function
+- /docs/api/python/function/
+- /docs/clients/python/function
+title: Python Function API
 ---
 
 You can create a DuckDB user-defined function (UDF) from a Python function so it can be used in SQL queries.

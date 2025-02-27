@@ -1,6 +1,8 @@
 ---
-title: Union Functions
 layout: docu
+redirect_from:
+- /docs/sql/functions/union
+title: Union Functions
 ---
 
 <!-- markdownlint-disable MD001 -->

@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Reading Multiple Files
 redirect_from:
-  - /docs/data/csv/multiple_files
-  - /docs/data/csv/multiple_files/
+- /docs/data/csv/multiple_files
+- /docs/data/csv/multiple_files/
+- /docs/data/multiple_files/overview
+title: Reading Multiple Files
 ---
 
 DuckDB can read multiple files of different types (CSV, Parquet, JSON files) at the same time using either the glob syntax, or by providing a list of files to read.

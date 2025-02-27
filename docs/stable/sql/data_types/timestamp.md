@@ -1,7 +1,9 @@
 ---
-layout: docu
-title: Timestamp Types
 blurb: Timestamps represent points in time.
+layout: docu
+redirect_from:
+- /docs/sql/data_types/timestamp
+title: Timestamp Types
 ---
 
 Timestamps represent points in time. As such, they combine [`DATE`]({% link docs/stable/sql/data_types/date.md %}) and [`TIME`]({% link docs/stable/sql/data_types/time.md %}) information.

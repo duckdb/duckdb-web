@@ -1,11 +1,12 @@
 ---
 layout: docu
-title: Client Overview
 redirect_from:
-  - /docs/clients
-  - /docs/clients/
-  - /docs/api/overview
-  - /docs/api/overview/
+- /docs/clients
+- /docs/clients/
+- /docs/api/overview
+- /docs/api/overview/
+- /docs/clients/overview
+title: Client Overview
 ---
 
 DuckDB is an in-process database system and offers client APIs (also known as “drivers”) for several languages.

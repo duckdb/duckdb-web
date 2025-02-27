@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Node.js API
 redirect_from:
-  - /docs/api/nodejs/reference
-  - /docs/api/nodejs/reference/
+- /docs/api/nodejs/reference
+- /docs/api/nodejs/reference/
+- /docs/clients/nodejs/reference
+title: Node.js API
 ---
 
 ## Modules
@@ -891,4 +892,3 @@ Currently ignored
 | reason | <code>string</code> | HTTP response reason |
 | response | <code>string</code> | HTTP response body |
 | headers | <code>object</code> | HTTP headers |
-

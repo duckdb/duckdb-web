@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/extensions/httpfs/s3api_legacy_authentication
 title: Legacy Authentication Scheme for S3 API
 ---
 

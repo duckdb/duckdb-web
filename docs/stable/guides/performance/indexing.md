@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/guides/performance/indexing
 title: Indexing
 ---
 

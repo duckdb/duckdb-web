@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: Profiling
 redirect_from:
-  - /dev/profiling
-  - /dev/profiling/
+- /dev/profiling
+- /dev/profiling/
+- /docs/dev/profiling
+title: Profiling
 ---
 
 Profiling is essential to help understand why certain queries exhibit specific performance characteristics.

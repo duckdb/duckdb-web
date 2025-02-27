@@ -1,7 +1,9 @@
 ---
 layout: docu
-title: Comparisons
 railroad: expressions/comparison.js
+redirect_from:
+- /docs/sql/expressions/comparison_operators
+title: Comparisons
 ---
 
 ## Comparison Operators

@@ -1,6 +1,8 @@
 ---
 layout: docu
-title: "EXPLAIN ANALYZE: Profile Queries"
+redirect_from:
+- /docs/guides/meta/explain_analyze
+title: 'EXPLAIN ANALYZE: Profile Queries'
 ---
 
 Prepending a query with `EXPLAIN ANALYZE` both pretty-prints the query plan,

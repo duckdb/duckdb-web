@@ -1,9 +1,10 @@
 ---
 layout: docu
-title: CSV Import
 redirect_from:
-  - /docs/guides/import/csv_import
-  - /docs/guides/import/csv_import/
+- /docs/guides/import/csv_import
+- /docs/guides/import/csv_import/
+- /docs/guides/file_formats/csv_import
+title: CSV Import
 ---
 
 To read data from a CSV file, use the `read_csv` function in the `FROM` clause of a query:

@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/guides/network_cloud_storage/duckdb_over_https_or_s3
 title: Attach to a DuckDB Database over HTTPS or S3
 ---
 
