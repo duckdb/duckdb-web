@@ -28,7 +28,7 @@ As an aside, we have recently opened a [Bluesky account](https://bsky.app/profil
 
 Following our ancient two-year tradition, we hosted two DuckCon events, one in [Amsterdam]({% link _events/2023-10-06-duckcon4.md %}) and another in [Seattle]({% link _events/2024-08-15-duckcon5.md %}). We also organized the first [DuckDB Amsterdam Meetup]({% link _events/2024-10-17-duckdb-amsterdam-meetup-1.md %}).
 
-Early next year, we are going to host [DuckCon in Amsterdam]({% link _events/2025-01-31-duckcon6.md %}), which is going to be the first event that we live stream in order to be more accessible to the growing DuckDB users in e.g. Asia.
+Early next year, we are going to host [DuckCon in Amsterdam]({% link _events/2025-01-31-duckcon6.md %}), which is going to be the first event that we live stream in order to be more accessible to the growing DuckDB users in, e.g., Asia.
 But for now, let’s sit around the syntax tree and be merry thinking about what’s to come.
 
 <div align="center">
