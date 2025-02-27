@@ -1,5 +1,5 @@
 <p>This page contains installation options for DuckDB. For production use, we recommend the stable release.</p>
-<p>Binaries are available for major programming languages and <a href="https://duckdb.org/docs/dev/building/supported_platforms.html">platforms</a>. If there are no pre-packaged binaries available, consider <a href="https://duckdb.org/docs/dev/building/build_instructions.html">building DuckDB from source</a>.</p>
+<p>Binaries are available for major programming languages and <a href="{% link docs/stable/dev/building/overview.md %}#supported-platforms">platforms</a>. If there are no pre-packaged binaries available, consider <a href="{% link docs/stable/dev/building/overview.md %}">building DuckDB from source</a>.</p>
 <div class="yourselection">
 	<div class="version select" data-select="version">
 		<h3>
@@ -10,7 +10,7 @@
 				<div>Stable release <span class="versioninfo">(v{{ site.currentduckdbversion }})</span></div>
 			</li>
 			<li data-id=".main">
-				<div>Nightly build <span class="versioninfo">(bleeding edge)</span></div>
+				<div>Preview release <span class="versioninfo">(nightly build)</span></div>
 			</li>
 		</ul>
 	</div>
@@ -22,7 +22,7 @@
 			<li data-id=".cli" class="selected">Command line</li>
 			<li data-id=".python">Python</li>
 			<li data-id=".r">R</li>
-			<li data-id=".java">Java</li>
+			<li data-id=".java">Java (JDBC)</li>
 			<li data-id=".js">Node.js</li>
 			<li data-id=".rust">Rust</li>
 			<li data-id=".go">Go</li>
@@ -35,9 +35,9 @@
 			Platform
 		</h3>
 		<ul class="platform">
-			<li data-id=".win">Windows</li>
-			<li data-id=".macos" class="selected">macOS</li>
 			<li data-id=".linux">Linux</li>
+			<li data-id=".macos" class="selected">macOS</li>
+			<li data-id=".win">Windows</li>
 		</ul>
 		<div class="info">The package is available for all platforms.</div>
 	</div>
@@ -46,8 +46,8 @@
 			Download method
 		</h3>
 		<ul class="download_method">
-			<li data-id=".package_manager" class="selected">Package manager</li>
-			<li data-id=".direct">Direct download</li>
+			<li data-id=".direct" class="selected">Direct download</li>
+			<li data-id=".package_manager">Package manager</li>
 		</ul>
 	</div>
 	<div class="architecture select hide" data-select="architecture">
@@ -60,8 +60,7 @@
 		</ul>
 		<div class="info">The package supports both architectures.</div>
 	</div>
-	
-	
+
 	<div class="installation output">
 		<h3>
 			Installation
@@ -72,22 +71,29 @@
 			</figure>
 		</div>
 	</div>
-	
+
 	<div class="link output">
 		<h3>
 			Link
 		</h3>
 		<div class="result">
-			
+
 		</div>
 	</div>
 	
-	<div class="note output">
-		<h3>
-			
-		</h3>
+	<div class="sha512 output">
+		<h3></h3>
 		<div class="result">
 			
+		</div>
+	</div>
+
+	<div class="note output">
+		<h3>
+
+		</h3>
+		<div class="result">
+
 		</div>
 	</div>
 

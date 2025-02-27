@@ -13,6 +13,7 @@ extension:
   build: cmake
   requires_toolchains: "rust"
   license: MIT
+  excluded_platforms: "linux_amd64_musl"
   maintainers:
     - ywelsch
 
@@ -49,10 +50,10 @@ docs:
   extended_description: |
     The PRQL extension adds support for the [Pipelined Relational Query Language](https://prql-lang.org).
 
-extension_star_count: 262
-extension_star_count_pretty: 262
-extension_download_count: 208
-extension_download_count_pretty: 208
+extension_star_count: 275
+extension_star_count_pretty: 275
+extension_download_count: 418
+extension_download_count_pretty: 418
 image: '/images/community_extensions/social_preview/preview_community_extension_prql.png'
 layout: community_extension_doc
 ---
@@ -74,7 +75,4 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-
-
----
 

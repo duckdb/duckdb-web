@@ -11,11 +11,11 @@
 		</h1>
 		<div class="newstileswrap">
 			{% if page.collection == "events" %}
-				{% assign items = site.events %}
+				{% assign items = site.events | sort: "date" | reverse %}
 			{% elsif page.collection == "media" %}
-				{% assign items = site.media %}
+				{% assign items = site.media | sort: "date" | reverse %}
 			{% else %}
-				{% assign items = site.posts %}
+				{% assign items = site.posts | sort: "date" | reverse %}
 			{% endif %}
 			
 			{% assign recent_count = 0 %}
@@ -89,7 +89,7 @@
 				{% endif %}
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}{{ site.baseurl }}{% if page.collection == "events" %}/events{% elsif page.collection == "media" %}/media{% else %}/news{% endif %}" class="button transparent arrow-right">
+		<a href="{{ site.url }}{{ site.baseurl }}{% if page.collection == "events" %}/events/{% elsif page.collection == "media" %}/media/{% else %}/news/{% endif %}" class="button transparent arrow-right">
 			All {% if page.collection == "events" %}events{% elsif page.collection == "media" %}media{% else %}blog posts{% endif %} <span></span>
 		</a>
 	</div>

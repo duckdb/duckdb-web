@@ -104,7 +104,7 @@ WHERE distance = (
 
 Notice how the column from the *outer* relation (`ontime_outer`) is used *inside* the query. This is what turns the subquery into a *correlated subquery*. The column from the outer relation (`ontime_outer.uniquecarrier`) is a *parameter* for the subquery. Logically the subquery is executed once for every row that is present in `ontime`, where the value for the column at that row is substituted as a parameter.
 
-In order to make it more clear that the correlated subquery is in essence a *parameterized query*, we can create a scalar macro that contains the query using DuckDB's [macros]({% link docs/sql/statements/create_macro.md %}).
+In order to make it more clear that the correlated subquery is in essence a *parameterized query*, we can create a scalar macro that contains the query using DuckDB's [macros]({% link docs/stable/sql/statements/create_macro.md %}).
 
 ```sql
 CREATE MACRO min_distance_per_carrier(param) AS (
@@ -134,7 +134,7 @@ We can obtain a list of all flights on a given route past a certain date using t
 PREPARE flights_after_date AS
 SELECT uniquecarrier, origincityname, destcityname, flightdate, distance
 FROM ontime
-WHERE origin = ? AND dest = ? AND flightdate>?;
+WHERE origin = ? AND dest = ? AND flightdate > ?;
 ```
 
 ```sql
@@ -259,7 +259,7 @@ WHERE distance = (
                              │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
                              │           ontime          │
                              └───────────────────────────┘
-                             
+
 ```
 
 We can see the drastic performance difference that subquery decorrelation has when we compare the run-time of this query in DuckDB with the run-time in Postgres and SQLite. When running the above query on the [`ontime` dataset](https://www.transtats.bts.gov/Homepage.asp) for `2017` with roughly `~4 million` rows, we get the following performance results:

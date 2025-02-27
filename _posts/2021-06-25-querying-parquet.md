@@ -8,9 +8,7 @@ tags: ["using DuckDB"]
 
 Apache Parquet is the most common "Big Data" storage format for analytics. In Parquet files, data is stored in a columnar-compressed binary format. Each Parquet file stores a single table. The table is partitioned into row groups, which each contain a subset of the rows of the table. Within a row group, the table data is stored in a columnar fashion.
 
-<!--more-->
-
-<img src="/images/blog/parquet.svg" alt="Example parquet file shown visually. The parquet file (taxi.parquet) is divided into row-groups that each have two columns (pickup_at and dropoff_at)" title="Taxi Parquet File" style="max-width:30%"/>
+<img src="/images/blog/parquet.svg" alt="Example parquet file shown visually. The parquet file (taxi.parquet) is divided into row groups that each have two columns (pickup_at and dropoff_at)" title="Taxi Parquet File" style="max-width:30%"/>
 
 The Parquet format has a number of properties that make it suitable for analytical use cases:
 
@@ -82,7 +80,7 @@ The examples are available [here as an interactive notebook over at Google Colab
 
 ## Reading Multiple Parquet Files
 
-First we look at some rows in the dataset. There are three Parquet files in the `taxi/` folder. [DuckDB supports the globbing syntax]({% link docs/data/parquet/overview.md %}), which allows it to query all three files simultaneously.
+First we look at some rows in the dataset. There are three Parquet files in the `taxi/` folder. [DuckDB supports the globbing syntax]({% link docs/stable/data/parquet/overview.md %}), which allows it to query all three files simultaneously.
 
 ```python
 con.execute("""
@@ -133,7 +131,7 @@ import pyarrow.parquet as pq
 pq.write_table(pq.ParquetDataset('taxi/').read(), 'alltaxi.parquet', row_group_size=100000)
 ```
 
-Note that [DuckDB also has support for writing Parquet files]({% link docs/data/parquet/overview.md %}#writing-to-parquet-files) using the COPY statement.
+Note that [DuckDB also has support for writing Parquet files]({% link docs/stable/data/parquet/overview.md %}#writing-to-parquet-files) using the COPY statement.
 
 ## Querying the Large File
 

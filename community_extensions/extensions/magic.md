@@ -11,14 +11,14 @@ extension:
   version: 0.0.1
   language: C++
   build: cmake
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64"
+  excluded_platforms: "linux_amd64_musl;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;windows_amd64"
   license: MIT
   maintainers:
     - carlopi
 
 repo:
   github: carlopi/duckdb_magic
-  ref: 134b696cb04e2d9cc106dccf2301e415442a1524
+  ref: 63f6e5f30220a3a65cfe168099c3fdbd2d5af4bd
 
 docs:
   hello_world: |
@@ -38,10 +38,10 @@ docs:
     Packaged with version 5.45 of the magic library. The magic.mgc database is at the moment statically compiled in the library, so it's the same across platforms but immutable.
     Currently not available in Windows and Wasm, due to different but likely solvable vc-packaging issue, to be sorted out independently.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 191
-extension_download_count_pretty: 191
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 505
+extension_download_count_pretty: 505
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'
 layout: community_extension_doc
 ---
@@ -67,13 +67,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| magic_mime    | scalar        |             |         |         |
-| magic_type    | scalar        |             |         |         |
-| read_any      | table_macro   |             |         |         |
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| magic_mime    | scalar        | NULL        | NULL    | []       |
+| magic_type    | scalar        | NULL        | NULL    | []       |
+| read_any      | table_macro   | NULL        | NULL    | []       |
 
-
-
----
 

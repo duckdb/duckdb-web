@@ -25,11 +25,11 @@ But the design space is not as black and white as it seems. For example, the OLA
 
  To allow for fast and consistent analytical reads of Postgres databases, we designed and implemented the "Postgres Scanner". This scanner leverages the *binary transfer mode* of the Postgres client-server protocol (See the [Implementation Section](#implementation) for more details.), allowing us to efficiently transform and use the data directly in DuckDB.
 
-Among other things, DuckDB's design is different from conventional data management systems because DuckDB's query processing engine can run on nearly arbitrary data sources without needing to copy the data into its own storage format. For example, DuckDB can currently directly run queries on [Parquet files]({% link docs/data/parquet/overview.md %}), [CSV files]({% link docs/data/csv/overview.md %}), [SQLite files](https://github.com/duckdb/sqlite_scanner), [Pandas]({% link docs/guides/python/sql_on_pandas.md %}), [R]({% link docs/api/r.md %}#efficient-transfer) and [Julia]({% link docs/api/julia.md %}#scanning-dataframes) data frames as well as [Apache Arrow sources]({% link docs/guides/python/sql_on_arrow.md %}). This new extension adds the capability to directly query PostgreSQL tables from DuckDB.
+Among other things, DuckDB's design is different from conventional data management systems because DuckDB's query processing engine can run on nearly arbitrary data sources without needing to copy the data into its own storage format. For example, DuckDB can currently directly run queries on [Parquet files]({% link docs/stable/data/parquet/overview.md %}), [CSV files]({% link docs/stable/data/csv/overview.md %}), [SQLite files](https://github.com/duckdb/duckdb-sqlite), [Pandas]({% link docs/stable/guides/python/sql_on_pandas.md %}), [R]({% link docs/stable/clients/r.md %}#efficient-transfer) and [Julia]({% link docs/stable/clients/julia.md %}#scanning-dataframes) data frames as well as [Apache Arrow sources]({% link docs/stable/guides/python/sql_on_arrow.md %}). This new extension adds the capability to directly query PostgreSQL tables from DuckDB.
 
 ## Usage
 
-The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdb/postgres_scanner), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
+The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdb/duckdb-postgres), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
 
 ```sql
 INSTALL postgres_scanner;
@@ -179,10 +179,10 @@ This provides faster query performance with fully up to date query results, at t
 DuckDB has built-in support to write query results to Parquet files. The Postgres scanner provides a rather simple way to write Postgres tables to Parquet files, it can even directly write to S3 if desired. For example,
 
 ```sql
-COPY (SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'lineitem')) TO 'lineitem.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'lineitem')) TO 'lineitem.parquet' (FORMAT parquet);
 ```
 
 ## Conclusion
 
 DuckDB's new Postgres Scanner extension can read PostgreSQL's tables while PostgreSQL is running and compute the answers to complex OLAP SQL queries often faster than PostgreSQL itself can without the need to duplicate data. The Postgres Scanner is currently in preview and we are curious to hear what you think.
-If you find any issues with the Postgres Scanner, please [report them](https://github.com/duckdb/postgres_scanner/issues).
+If you find any issues with the Postgres Scanner, please [report them](https://github.com/duckdb/duckdb-postgres/issues).

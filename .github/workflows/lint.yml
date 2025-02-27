@@ -6,19 +6,16 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - name: Remove archive docs
-        run: |
-          rm -rf docs/archive
       - uses: errata-ai/vale-action@reviewdog
         with:
-          files: 'docs/,_posts/'
+          files: '_posts/,docs/stable/'
           separator: ","
           filter_mode: added
           fail_on_error: false
       - uses: articulate/actions-markdownlint@main
         with:
           config: .markdownlint.jsonc
-          files: 'docs/**/*.md _posts/*.md'
+          files: 'docs/stable/**/*.md _posts/*.md'
 
   python:
     runs-on: ubuntu-22.04
@@ -28,4 +25,4 @@ jobs:
       with:
         options: "--check --skip-string-normalization --verbose --diff --color"
         src: "./scripts"
-        version: "23.7.0"
+        version: "24.8.0"

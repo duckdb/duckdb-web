@@ -37,7 +37,7 @@ ignored_functions = {
     "arrow_scan",
 }
 
-functions = duckdb.default_connection.execute(
+functions = duckdb.execute(
     "select distinct function_name from duckdb_functions() where schema_name != 'pg_catalog'",
 ).fetchall()
 

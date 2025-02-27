@@ -30,14 +30,17 @@ PIVOT (
     UNPIVOT (
         FROM read_json([
             printf('https://community-extensions.duckdb.org/download-stats-weekly/%s.json',
-                strftime(x, '%Y/%W'))
-            FOR x IN range(TIMESTAMP '2024-10-01', now()::TIMESTAMP, INTERVAL 1 WEEK)
+                strftime(x, '%Y/%W')
+            )
+            FOR x
+            IN range(TIMESTAMP '2024-10-01', now()::TIMESTAMP, INTERVAL 1 WEEK)
+            IF strftime(x, '%W') != '53'
         ])
     )
     ON COLUMNS(* EXCLUDE _last_update)
-    INTO NAME extension VALUE tot
+    INTO NAME extension VALUE downloads
 )
-ON date_trunc('day',_last_update)
-USING any_value(tot)
+ON date_trunc('day', _last_update)
+USING any_value(downloads)
 ORDER BY extension;
 ```

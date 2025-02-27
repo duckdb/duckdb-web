@@ -50,7 +50,7 @@ docs:
 extension:
   build: cmake
   description: Cryptographic hash functions and HMAC
-  excluded_platforms: windows_amd64_rtools;windows_amd64
+  excluded_platforms: windows_amd64_rtools;windows_amd64_mingw;windows_amd64;linux_amd64_musl
   language: C++
   license: MIT
   maintainers:
@@ -64,8 +64,8 @@ repo:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 213
-extension_download_count_pretty: 213
+extension_download_count: 453
+extension_download_count_pretty: 453
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---
@@ -91,12 +91,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                                   description                                                    | comment |                             example                             |
-|---------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------|
-| crypto_hash   | scalar        | Apply a cryptographic hash function specified as the first argument to the data supplied as the second argument. |         | SELECT crypto_hash('md5', 'test');                              |
-| crypto_hmac   | scalar        | Calculate a HMAC value                                                                                           |         | SELECT crypto_hmac('sha2-256', 'secret key', 'secret message'); |
+| function_name | function_type |                                                   description                                                    | comment |                             examples                              |
+|---------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------|
+| crypto_hash   | scalar        | Apply a cryptographic hash function specified as the first argument to the data supplied as the second argument. | NULL    | [SELECT crypto_hash('md5', 'test');]                              |
+| crypto_hmac   | scalar        | Calculate a HMAC value                                                                                           | NULL    | [SELECT crypto_hmac('sha2-256', 'secret key', 'secret message');] |
 
-
-
----
 

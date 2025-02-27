@@ -26,7 +26,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
 ### Prerequisites
 
-1. The site is built using [Jekyll](https://jekyllrb.com/). For instructions on setting up Ruby for Jekyll, please visit the [Installation page of Jekyll](https://jekyllrb.com/docs/installation/macos/).
+1. The site is built using [Jekyll](https://jekyllrb.com/). For instructions on setting up Ruby for Jekyll, please visit the [Installation page of Jekyll](https://jekyllrb.com/docs/installation/macos/). Note that as of January 2025, the latest Ruby (3.4.x) is not supported by Jekyll. Instead, you need Ruby 3.3.x, which can be installed via [chruby](https://jekyllrb.com/docs/installation/macos/#step-2-install-chruby-and-the-latest-ruby-with-ruby-install).
 
 2. Install Jekyll and the other required Ruby dependencies using Bundler:
 
@@ -46,7 +46,7 @@ scripts/serve-latest.sh
 
 Visit <http://localhost:4000/docs/> to browse the website.
 
-Note that to save time on building, the `serve-latest.sh` script only deploys the latest stable version and exclude the archives. To serve the full website with old versions included, run:
+Note that to save time on building, the `serve-latest.sh` script only deploys the latest stable version and excludes the archives. To serve the full website with old versions included, run:
 
 ```bash
 scripts/serve.sh

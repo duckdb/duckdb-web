@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	{% if page.title == "DuckDB" %}
 	<title>{{ page.title }}</title>
 	{% else %}
@@ -36,15 +36,7 @@
 		{% seo title=false %}
 	{% endif %}
 	
-	<script>
-		var userPrefersDark = localStorage.getItem('mode') === 'dark';
-		var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-		if (userPrefersDark || systemPrefersDark) {
-			document.documentElement.classList.add('darkmode');
-			document.documentElement.classList.add('disable-transitions');
-		}
-	</script>
-
+	<script src="{{ site.baseurl }}/js/determine_color_scheme.js?{{ site.data['hash'] }}"></script>
 </head>
 <body {% if page.body_class %} class="{{ page.body_class }}" {% endif %}>
 	

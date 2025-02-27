@@ -1,14 +1,15 @@
-// Using the appender for bulk inserts
-DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
-Statement stmt = conn.createStatement();
-stmt.execute("CREATE TABLE person (first_name VARCHAR, last_name VARCHAR, age INT)");
+// Perform bulk inserts using the Appender API
+DuckDBConnection conn = (DuckDBConnection)
+    DriverManager.getConnection("jdbc:duckdb:");
+Statement st = conn.createStatement();
+st.execute("CREATE TABLE person " +
+    "(name VARCHAR, age INT)");
 
-try (var appender = conn.createAppender(
-        DuckDBConnection.DEFAULT_SCHEMA, "tbl"
-    )) {
-    appender.beginRow();
-    appender.append("John");
-    appender.append("Smith");
-    appender.append(42);
-    appender.endRow();
-}
+var appender = conn.createAppender(
+    DuckDBConnection.DEFAULT_SCHEMA, "person");
+
+appender.beginRow();
+appender.append("MC Ducky");
+appender.append(49);
+appender.endRow();
+appender.close();

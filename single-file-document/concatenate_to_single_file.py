@@ -35,6 +35,15 @@ def reduce_clutter_in_doc(doc_body):
     return doc_body
 
 
+def replace_jekyll_tags_for_variables(doc_body, config):
+    doc_body = doc_body.replace("{{ site.currentduckdbhash }}",         config["currentduckdbhash"])
+    doc_body = doc_body.replace("{{ site.currentduckdbodbcversion }}",  config["currentduckdbodbcversion"])
+    doc_body = doc_body.replace("{{ site.currentduckdbversion }}",      config["currentduckdbversion"])
+    doc_body = doc_body.replace("{{ site.currentjavaversion }}",        config["currentjavaversion"])
+    doc_body = doc_body.replace("{{ site.currentshortduckdbversion }}", config["currentshortduckdbversion"])
+    return doc_body
+
+
 def replace_box_names(doc_body):
     doc_body = doc_body.replace("> Bestpractice", "> **Best practice.**")
     doc_body = doc_body.replace("> Note",         "> **Note.**")
@@ -67,9 +76,9 @@ def replace_html_code_blocks(doc_body):
         # strip html elements
         code_without_html_elements = re.sub("<[^>]*?>", "", match)
         # add Markdown code block
-        code_as_markdown_block = f"""```c
-{code_without_html_elements}```
-"""
+        code_as_markdown_block = textwrap.dedent(f"""```c
+            {code_without_html_elements}```
+            """)
         doc_body = doc_body.replace(match, code_as_markdown_block)
 
     return doc_body
@@ -77,7 +86,7 @@ def replace_html_code_blocks(doc_body):
 
 def doc_path_to_page_header_header_label(doc_file_full_path):
     return doc_file_full_path \
-        .replace("../docs/", "docs/") \
+        .replace("../docs/stable/", "docs/stable/") \
         .replace(".md", "") \
         .replace("../", "") \
         .replace("/", ":")
@@ -101,11 +110,11 @@ def adjust_links_in_doc_body(doc_body):
     # replace link to the Python guides index page
     # with a link to the Python guides section
     doc_body = doc_body.replace(
-        "]({% link docs/guides/overview.md %}#python-client)",
-        "]({% link docs/python/overview.md %})"
+        "]({% link docs/stable/guides/overview.md %}#python-client)",
+        "]({% link docs/stable/python/overview.md %})"
     )
 
-    # replace "`, `" (with its typical surroundings) with "`,` " to allow line breaking
+    # replace "`, `" (with the surrounding characters used for emphasis) with "`,` " to allow line breaking
     # see https://stackoverflow.com/questions/76951040/pandoc-preserve-whitespace-in-inline-code
     doc_body = doc_body.replace("`*`, `*`", "`*`,` *`")
 
@@ -115,11 +124,14 @@ def adjust_links_in_doc_body(doc_body):
     # replace links to data sets to point to the website
     doc_body = doc_body.replace("](/data/", "](https://duckdb.org/data/")
 
+    # remove '<div>' HTML tags
+    doc_body = re.sub(r'<div[^>]*?>[\n ]*([^§]*?)[\n ]*</div>', r'\1', doc_body, flags=re.MULTILINE)
+
+    # replace '<img>' HTML tags with Markdown's '![]()' construct
+    doc_body = re.sub(r'<img src="([^"]*)"[^§]*?/>', r'![](\1)\n', doc_body, flags=re.MULTILINE)
+
     # use relative path for images in Markdown
     doc_body = doc_body.replace("](/images", "](../images")
-    # replace <img> tags with Markdown
-    doc_body = doc_body.replace('"/images', '"../images')
-    doc_body = re.sub(r'<img src="([^"]*)"[^§]*/>', r'![](\1)', doc_body, flags=re.MULTILINE)
 
     # express HUGEINT limits as powers of two (upper and lower limits are ±2^127-1)
     doc_body = doc_body.replace("-170141183460469231731687303715884105727", "$-2^{127}-1$")
@@ -232,7 +244,7 @@ def change_function_table_headers(doc_body):
     return doc_body
 
 
-def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
+def concatenate_page_to_output(config, of, header_level, docs_root, doc_file_path):
     # skip index files
     if doc_file_path.endswith("index"):
         return
@@ -259,6 +271,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
 
         # process document body
         doc_body = reduce_clutter_in_doc(doc_body)
+        doc_body = replace_jekyll_tags_for_variables(doc_body, config)
         doc_body = replace_box_names(doc_body)
         doc_body = move_headers_down(doc_body)
         doc_body = replace_html_code_blocks(doc_body)
@@ -273,7 +286,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         of.write("\n")
 
 
-def add_main_documentation(docs_root, menu, of):
+def add_main_documentation(docs_root, menu, config, of):
     chapter_json = [x for x in menu["docsmenu"] if x["page"] == "Documentation"][0]
     chapter_slug = chapter_json["slug"]
     main_level_pages = chapter_json["mainfolderitems"]
@@ -285,7 +298,7 @@ def add_main_documentation(docs_root, menu, of):
 
         if main_url:
             logging.info(f"- {main_url}")
-            concatenate_page_to_output(of, 1, docs_root, f"{chapter_slug}{main_url}")
+            concatenate_page_to_output(config, of, 1, docs_root, f"{chapter_slug}{main_url}")
 
         if main_slug:
             # e.g., "# SQL Features {#guides:sql_features}"
@@ -301,7 +314,7 @@ def add_main_documentation(docs_root, menu, of):
 
             if subfolder_url:
                 logging.info(f"  - {main_slug}/{subfolder_url}")
-                concatenate_page_to_output(of, 2, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
+                concatenate_page_to_output(config, of, 2, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
 
             if subfolder_slug:
                 of.write(f"## {subfolder_page_title} {{#{ linked_path_to_label(f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
@@ -313,7 +326,7 @@ def add_main_documentation(docs_root, menu, of):
                 subsubfolder_url = subsubfolder_page.get("url")
 
                 logging.info(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
-                concatenate_page_to_output(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                concatenate_page_to_output(config, of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
 
 def add_blog_posts(blog_root, of):
@@ -376,9 +389,9 @@ with open(f"duckdb-docs.md", "w") as of:
     with open("cover-page.md") as cover_page_file:
         of.write(cover_page_file.read())
 
-    with open("../_data/menu_docs_dev.json") as menu_docs_file:
+    with open("../_data/menu_docs_stable.json") as menu_docs_file:
         menu = json.load(menu_docs_file)
-        add_main_documentation("../docs", menu, of)
+        add_main_documentation("../docs/stable", menu, config, of)
 
     add_blog_posts("../_posts", of)
 

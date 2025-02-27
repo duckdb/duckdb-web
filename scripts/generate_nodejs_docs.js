@@ -27,7 +27,7 @@ title: Node.js API
 
 ` + docs;
 
-  await fs.writeFile(__dirname + "/../docs/api/nodejs/reference.md", docs);
+  await fs.writeFile(__dirname + "/../docs/clients/nodejs/reference.md", docs);
 }
 
 generate_docs().catch((e) => {

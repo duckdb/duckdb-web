@@ -27,10 +27,10 @@ docs:
     A [ULID](https://github.com/ulid/spec) is similar to a UUID except that it also contains a timestamp component, which makes it more suitable for use cases where the order of creation is important. 
     Additionally, the string representation is lexicographically sortable while preserving the sort order of the timestamps.
 
-extension_star_count: 16
-extension_star_count_pretty: 16
-extension_download_count: 237
-extension_download_count_pretty: 237
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 461
+extension_download_count_pretty: 461
 image: '/images/community_extensions/social_preview/preview_community_extension_ulid.png'
 layout: community_extension_doc
 ---
@@ -56,11 +56,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | example |
-|----------------|---------------|-------------|---------|---------|
-| ulid           | scalar        |             |         |         |
-| ulid_epoch_ms  | scalar        |             |         |         |
-| ulid_timestamp | scalar        |             |         |         |
+| function_name  | function_type | description | comment | examples |
+|----------------|---------------|-------------|---------|----------|
+| ulid           | scalar        | NULL        | NULL    | []       |
+| ulid_epoch_ms  | scalar        | NULL        | NULL    | []       |
+| ulid_timestamp | scalar        | NULL        | NULL    | []       |
 
 ### Added Types
 
@@ -70,7 +70,4 @@ LOAD {{ page.extension.name }};
 |-----------|----------:|--------------|---------------|---------:|
 | ULID      | 16        | UHUGEINT     | NUMERIC       | true     |
 
-
-
----
 

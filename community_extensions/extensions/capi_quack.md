@@ -18,17 +18,17 @@ extension:
 
 repo:
   github: duckdb/extension-template-c
-  ref: 6764e0901a2ac9e907ecb0937ccf1ee878615388
+  ref: 7463f669f6ea6705876dee047114f6484ba6ef6f
 
 docs:
   extended_description: |
     The capi_quack extension is based on DuckDB's [C/C++ C API template](https://github.com/duckdb/extension-template-c/).
 
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 188
-extension_download_count_pretty: 188
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 415
+extension_download_count_pretty: 415
 image: '/images/community_extensions/social_preview/preview_community_extension_capi_quack.png'
 layout: community_extension_doc
 ---
@@ -54,11 +54,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name       | function_type | description | comment | example |
-|---------------------------|---------------|-------------|---------|---------|
-| multiply_numbers_together | scalar        |             |         |         |
+|       function_name       | function_type | description | comment | examples |
+|---------------------------|---------------|-------------|---------|----------|
+| multiply_numbers_together | scalar        | NULL        | NULL    | []       |
 
-
-
----
 

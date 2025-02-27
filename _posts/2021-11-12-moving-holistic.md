@@ -12,8 +12,6 @@ some advanced moving aggregates.
 In this post, we will compare the performance various possible moving implementations of these functions
 and explain how DuckDB's performant implementations work.
 
-<!--more-->
-
 ## What Is an Aggregate Function?
 
 When people think of aggregate functions, they typically have something simple in mind such as `SUM` or `AVG`.

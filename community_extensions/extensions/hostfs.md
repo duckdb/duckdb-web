@@ -58,10 +58,10 @@ docs:
   extended_description: >
     The HostFS extension allows you to navigate and explore the filesystem using SQL. It provides a set of functions to list files, get file metadata, and more. 
     For more information, please see the [HostFS documentation](https://github.com/gropaul/hostFS).
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 208
-extension_download_count_pretty: 208
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 428
+extension_download_count_pretty: 428
 image: '/images/community_extensions/social_preview/preview_community_extension_hostfs.png'
 layout: community_extension_doc
 ---
@@ -87,29 +87,26 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | example |
-|--------------------|---------------|-------------|---------|---------|
-| absolute_path      | scalar        |             |         |         |
-| cd                 | pragma        |             |         |         |
-| cd                 | table         |             |         |         |
-| file_extension     | scalar        |             |         |         |
-| file_last_modified | scalar        |             |         |         |
-| file_name          | scalar        |             |         |         |
-| file_size          | scalar        |             |         |         |
-| hostfs             | scalar        |             |         |         |
-| hsize              | scalar        |             |         |         |
-| is_dir             | scalar        |             |         |         |
-| is_file            | scalar        |             |         |         |
-| ls                 | pragma        |             |         |         |
-| ls                 | table         |             |         |         |
-| lsr                | pragma        |             |         |         |
-| lsr                | table         |             |         |         |
-| path_exists        | scalar        |             |         |         |
-| path_type          | scalar        |             |         |         |
-| pwd                | pragma        |             |         |         |
-| pwd                | scalar        |             |         |         |
+|   function_name    | function_type | description | comment | examples |
+|--------------------|---------------|-------------|---------|----------|
+| absolute_path      | scalar        | NULL        | NULL    | []       |
+| cd                 | pragma        | NULL        | NULL    | []       |
+| cd                 | table         | NULL        | NULL    | []       |
+| file_extension     | scalar        | NULL        | NULL    | []       |
+| file_last_modified | scalar        | NULL        | NULL    | []       |
+| file_name          | scalar        | NULL        | NULL    | []       |
+| file_size          | scalar        | NULL        | NULL    | []       |
+| hostfs             | scalar        | NULL        | NULL    | []       |
+| hsize              | scalar        | NULL        | NULL    | []       |
+| is_dir             | scalar        | NULL        | NULL    | []       |
+| is_file            | scalar        | NULL        | NULL    | []       |
+| ls                 | pragma        | NULL        | NULL    | []       |
+| ls                 | table         | NULL        | NULL    | []       |
+| lsr                | pragma        | NULL        | NULL    | []       |
+| lsr                | table         | NULL        | NULL    | []       |
+| path_exists        | scalar        | NULL        | NULL    | []       |
+| path_type          | scalar        | NULL        | NULL    | []       |
+| pwd                | pragma        | NULL        | NULL    | []       |
+| pwd                | scalar        | NULL        | NULL    | []       |
 
-
-
----
 

@@ -12,8 +12,6 @@ In this post, we will take a look at how DuckDB implements windowing.
 We will also see how DuckDB can leverage its aggregate function architecture
 to compute useful moving aggregates such as moving inter-quartile ranges (IQRs).
 
-<!--more-->
-
 ## Beyond Sets
 
 The original relational model as developed by Codd in the 1970s treated relations as *unordered sets* of tuples.
@@ -32,7 +30,7 @@ To help answer such questions, SQL introduced *analytic* (or *window*) functions
 ### Window Functions
 
 Windowing works by breaking a relation up into independent *partitions*, *ordering* those partitions,
-and then defining [various functions]({% link docs/sql/functions/window_functions.md %}) that can be computed for each row
+and then defining [various functions]({% link docs/stable/sql/functions/window_functions.md %}) that can be computed for each row
 using the nearby values.
 These functions include all the aggregate functions (such as `sum` and `avg`)
 as well as some window-specific functions (such as `rank()` and `nth_value(<expression>, <N>)`).
@@ -244,7 +242,7 @@ and share the data layout between those functions.
 
 ### Aggregation
 
-Most of the [general-purpose window functions]({% link docs/sql/functions/window_functions.md %}) are straightforward to compute,
+Most of the [general-purpose window functions]({% link docs/stable/sql/functions/window_functions.md %}) are straightforward to compute,
 but windowed aggregate functions can be expensive because they need to look at multiple values for each row.
 They often need to look at the same value multiple times, or repeatedly look at a large number of values,
 so over the years several approaches have been taken to improve performance.

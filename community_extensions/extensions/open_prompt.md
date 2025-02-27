@@ -8,24 +8,30 @@ excerpt: |
 extension:
   name: open_prompt
   description: Interact with LLMs with a simple DuckDB Extension
-  version: 0.0.3
+  version: 0.0.5
   language: C++
   build: cmake
   license: MIT
+  excluded_platforms: "windows_amd64_rtools"
   maintainers:
     - lmangani
     - akvlad
 
 repo:
   github: quackscience/duckdb-extension-openprompt
-  ref: 616bdfc4e7b01c4095a2dda8d4104c179922efd6
+  ref: 846b35872916cbcd866f992521a108d47393737d
 
 docs:
   hello_world: |
-    -- Configure the required extension parameters
-    SET VARIABLE openprompt_api_url = 'http://localhost:11434/v1/chat/completions';
-    SET VARIABLE openprompt_api_token = 'optional_api_token_here';
-    SET VARIABLE openprompt_model_name = 'qwen2.5:0.5b';
+    -- Configure the required parameters to access OpenAI Completions compatible APIs
+    D CREATE SECRET IF NOT EXISTS open_prompt (
+          TYPE open_prompt,
+          PROVIDER config,
+          api_token 'your-api-token',
+          api_url 'http://localhost:11434/v1/chat/completions',
+          model_name 'qwen2.5:0.5b',
+          api_timeout '30'
+      );
     
     -- Prompt any OpenAI Completions API form your query
     D SELECT open_prompt('Write a one-line poem about ducks') AS response;
@@ -60,13 +66,48 @@ docs:
            "additionalProperties": false
          }');
 
-  extended_description: |      
-    For examples and instructions check out the `open_prompt` [README](https://github.com/quackscience/duckdb-extension-openprompt)
+  extended_description: |
+    ## Open Prompt Extension
+    The `open_prompt()` community extension is shamelessly inspired by the Motherduck `prompt()` but focused on self-hosted usage.
+    
+    > For examples and instructions check out the `open_prompt()` [README](https://github.com/quackscience/duckdb-extension-openprompt)
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 192
-extension_download_count_pretty: 192
+    ### Configuration
+    Setup the completions API URL configuration w/ optional auth token and model name
+
+    ```
+    SET VARIABLE openprompt_api_url = 'http://localhost:11434/v1/chat/completions';
+    SET VARIABLE openprompt_api_token = 'your_api_key_here';
+    SET VARIABLE openprompt_model_name = 'qwen2.5:0.5b';
+    ```
+    
+    Alternatively the following ENV variables can be used at runtime
+
+    ```
+    OPEN_PROMPT_API_URL='http://localhost:11434/v1/chat/completions'
+    OPEN_PROMPT_API_TOKEN='your_api_key_here'
+    OPEN_PROMPT_MODEL_NAME='qwen2.5:0.5b'
+    OPEN_PROMPT_API_TIMEOUT='30'
+    ```
+    
+    For persistent usage, configure parameters using DuckDB `SECRETS`
+
+    ```sql
+    CREATE PERSISTENT SECRET IF NOT EXISTS open_prompt (
+          TYPE open_prompt,
+          PROVIDER config,
+          api_token 'your-api-token',
+          api_url 'http://localhost:11434/v1/chat/completions',
+          model_name 'qwen2.5:0.5b',
+          api_timeout '30'
+      );
+    ```
+
+
+extension_star_count: 42
+extension_star_count_pretty: 42
+extension_download_count: 408
+extension_download_count_pretty: 408
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
@@ -92,14 +133,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | example |
-|----------------|---------------|-------------|---------|---------|
-| open_prompt    | scalar        |             |         |         |
-| set_api_token  | scalar        |             |         |         |
-| set_api_url    | scalar        |             |         |         |
-| set_model_name | scalar        |             |         |         |
+|  function_name  | function_type | description | comment | examples |
+|-----------------|---------------|-------------|---------|----------|
+| open_prompt     | scalar        | NULL        | NULL    | []       |
+| set_api_timeout | scalar        | NULL        | NULL    | []       |
+| set_api_token   | scalar        | NULL        | NULL    | []       |
+| set_api_url     | scalar        | NULL        | NULL    | []       |
+| set_model_name  | scalar        | NULL        | NULL    | []       |
 
-
-
----
 

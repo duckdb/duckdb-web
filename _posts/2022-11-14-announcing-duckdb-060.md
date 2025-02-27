@@ -15,8 +15,6 @@ The DuckDB team is happy to announce the latest DuckDB version (0.6.0) has been 
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.6.0).
 
-<!--more-->
-
 ## What's in 0.6.0
 
 The new release contains many improvements to the storage system, general performance improvements, memory management improvements and new features. Below is a summary of the most impactful changes, together with the linked PRs that implement the features.
@@ -104,7 +102,7 @@ SQL is the primary way of interfacing with DuckDB – and DuckDB [tries to have 
 **UNION Type**. This release introduces the [UNION type](https://github.com/duckdb/duckdb/pull/4966), which allows sum types to be stored and queried in DuckDB. For example:
 
 ```sql
-CREATE TABLE messages(u UNION(num INTEGER, error VARCHAR));
+CREATE TABLE messages (u UNION(num INTEGER, error VARCHAR));
 INSERT INTO messages VALUES (42);
 INSERT INTO messages VALUES ('oh my globs');
 SELECT * FROM messages;
@@ -119,7 +117,7 @@ SELECT * FROM messages;
 └─────────────┘
 ```
 
-Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page]({% link docs/sql/data_types/union.md %}) in the documentation contains more information on how to use this new composite type.
+Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page]({% link docs/stable/sql/data_types/union.md %}) in the documentation contains more information on how to use this new composite type.
 
 **FROM-first**. Starting with this release, DuckDB supports starting queries with the [`FROM` clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
 
@@ -140,10 +138,11 @@ INSERT INTO tbl2 FROM tbl1;
 **COLUMNS Expression**. This release adds support for [the `COLUMNS` expression](https://github.com/duckdb/duckdb/pull/5120), inspired by [the ClickHouse syntax](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression). The `COLUMNS` expression allows you to execute expressions or functions on multiple columns without having to duplicate the full expression.
 
 ```sql
-CREATE TABLE obs(id INTEGER, val1 INTEGER, val2 INTEGER);
+CREATE TABLE obs (id INTEGER, val1 INTEGER, val2 INTEGER);
 INSERT INTO obs VALUES (1, 10, 100), (2, 20, NULL), (3, NULL, 300);
 SELECT min(COLUMNS(*)), count(*) FROM obs;
 ```
+
 ```text
 ┌─────────────┬───────────────┬───────────────┬──────────────┐
 │ min(obs.id) │ min(obs.val1) │ min(obs.val2) │ count_star() │
@@ -152,11 +151,12 @@ SELECT min(COLUMNS(*)), count(*) FROM obs;
 └─────────────┴───────────────┴───────────────┴──────────────┘
 ```
 
-The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
+The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/stable/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
 
 ```sql
 SELECT COLUMNS('val[0-9]+') FROM obs;
 ```
+
 ```text
 ┌──────┬──────┐
 │ val1 │ val2 │
@@ -172,6 +172,7 @@ SELECT COLUMNS('val[0-9]+') FROM obs;
 ```sql
 SELECT [x + 1 for x in [1, 2, 3]] AS l;
 ```
+
 ```text
 ┌───────────┐
 │     l     │
@@ -213,7 +214,7 @@ The DuckDB shell also offers several improvements over the SQLite shell, such as
 
 The number of rows that are rendered can be changed by using the `.maxrows X` setting, and you can switch back to the old rendering using the `.mode box` command.
 
-```plsql
+```sql
 SELECT * FROM '~/Data/nyctaxi/nyc-taxi/2014/04/data.parquet';
 ```
 
@@ -270,8 +271,11 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 
 **Progress Bars**. DuckDB has [supported progress bars in queries for a while now](https://github.com/duckdb/duckdb/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/duckdb/duckdb/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
 
-```plsql
+```sql
 COPY lineitem TO 'lineitem-big.parquet';
+```
+
+```text
    32% ▕███████████████████▏                                        ▏ 
 ```
 

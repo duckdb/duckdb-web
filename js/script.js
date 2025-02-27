@@ -7,7 +7,6 @@ $(document).ready(function(){
 				scrollTop: $(hash).offset().top-90
 			}, 300, 'swing');
 			if( $('.frequentlyaskedquestions').length ){
-				//console.log($('h3'+hash).parent('.qa-wrap'))
 				$('h3'+hash).parent('.qa-wrap').addClass('open');
 				$('h3'+hash).parent('.qa-wrap').find('.answer').slideToggle(300);
 			}
@@ -66,12 +65,17 @@ $(document).ready(function(){
 	
 	
 	/** FILTER LINE  */
-	if ($('.filterbar').length !== 0) { 
+	if ($('.filterbar').length !== 0) {
+		
+		/* CUSTOM FITROWS FUNCTION FOR ISOTOPE TO GET EQUAL HEIGHT TILES */
+		!function(t){"use strict";function i(t){var i=t.create("fitRows");return i.prototype._resetLayout=function(){if(this.x=0,this.y=0,this.maxY=0,this.row=0,this.rows=[],this._getMeasurement("gutter","outerWidth"),this.options.equalheight)for(var t=0;t<this.isotope.items.length;t++)this.isotope.items[t].css({height:"auto"})},i.prototype._getItemLayoutPosition=function(t){t.getSize();var i=this.gutter||0,s=t.size.outerWidth,o=Math.ceil(this.isotope.size.innerWidth+i);0!==this.x&&s+this.x+i>o&&(this.x=0,this.y=this.maxY+i),0===this.x&&0!==this.y&&this.row++;var e={x:this.x,y:this.y};return this.maxY=Math.max(this.maxY,this.y+t.size.outerHeight),this.x+=s+i,void 0===this.rows[this.row]?(this.rows[this.row]=[],this.rows[this.row].start=this.y,this.rows[this.row].end=this.maxY):this.rows[this.row].end=Math.max(this.rows[this.row].end,this.maxY),t.row=this.row,e},i.prototype._equalHeight=function(){for(var t=0;t<this.isotope.items.length;t++){var i=this.isotope.items[t].row,s=this.rows[i];if(s){var o=s.end-s.start;o-=this.isotope.items[t].size.borderTopWidth+this.isotope.items[t].size.borderBottomWidth,o-=this.isotope.items[t].size.marginTop+this.isotope.items[t].size.marginBottom,o-=this.gutter.height||0,!1==this.isotope.items[t].size.isBorderBox&&(o-=this.isotope.items[t].size.paddingTop+this.isotope.items[t].size.paddingBottom),this.isotope.items[t].size.height=o,this.isotope.items[t].css({height:o.toString()+"px"})}}},i.prototype._getContainerSize=function(){return this.options.equalheight&&this._equalHeight(),{height:this.maxY}},i}"function"==typeof define&&define.amd?define(["../layout-mode"],i):"object"==typeof exports?module.exports=i(require("../layout-mode")):i(t.Isotope.LayoutMode)}(window);
+		
 		var $grid = $('.newstiles').isotope({
 			itemSelector: '.postpreview',
 			layoutMode: 'fitRows',
 			fitRows: {
-				gutter: 20
+				gutter: 20,
+				equalheight: true
 			},
 			getSortData: {
 				title: '[data-title]'
@@ -79,10 +83,13 @@ $(document).ready(function(){
 		});
 	
 		function updateFilterHighlight($button) {
-			$('.filter-highlight').css({
-				left: $button.position().left,
-				width: $button.outerWidth()
-			});
+			var $highlight = $('.filter-highlight');
+			if ($highlight.length) {
+				$highlight.css({
+					left: $button.position().left,
+					width: $button.outerWidth()
+				});
+			}
 		}
 	
 		var $activeBtn = $('.filter-btn.active');
@@ -91,10 +98,8 @@ $(document).ready(function(){
 		$('.filterbar').on('click', 'button.filter-btn', function() {
 			var filterValue = $(this).attr('data-filter');
 			$grid.isotope({ filter: filterValue });
-	
 			$('.filter-btn').removeClass('active');
 			$(this).addClass('active');
-	
 			updateFilterHighlight($(this));
 		});
 	
@@ -147,11 +152,15 @@ $(document).ready(function(){
     
     // FAQs
 	$('.qa-wrap').click(function(event) {
-		if ($(event.target).is('a') && !$(event.target).parent().is('h3')) {
-			return;
+		var $qaWrap = $(this);
+		if ($(event.target).is('h3') || $(event.target).closest('h3').length) {
+			$qaWrap.toggleClass('open');
+			$qaWrap.find('.answer').slideToggle(400);
+		} 
+		else if (!$qaWrap.hasClass('open')) {
+			$qaWrap.addClass('open');
+			$qaWrap.find('.answer').slideDown(400);
 		}
-		$(this).toggleClass('open');
-		$(this).find('.answer').slideToggle(400);
 	});
 	$('.qa-wrap .answer a').click(function(event) {
 		event.stopPropagation();
@@ -199,7 +208,7 @@ $(document).ready(function(){
 		});
 
 		// Menu 1 Open Submenu
-		if ($landingMenu.length > 0) {
+		if ($landingMenu.length > 0 && $hamburger.is(":visible")) {
 			$landingMenu.on("click", ".hasSub", function(e) {
 				e.preventDefault();
 				const $submenu = $(this).next(".submenuwrap");
@@ -308,10 +317,9 @@ $(document).ready(function(){
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
 	}).addClass("externallink").attr('target','_blank');
-	$('.headercontent a.externallink, .mainlinks a.externallink').removeClass('externallink'); // Remove Class from header elements
-	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
-	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
-	$('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
+	$('.headercontent a, .mainlinks a, .box-link a, .footercontent a').removeClass('externallink'); 
+	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
+	$('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
 	
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){
@@ -706,7 +714,7 @@ $(document).ready(function(){
 	
 	/** HIGHLIGHT TOC MENU **/
 	if ( $('body').hasClass('documentation') ) {
-		var headings = $('#main_content_wrap h1, #main_content_wrap h2');
+		var headings = $('#main_content_wrap h1, #main_content_wrap h2, #main_content_wrap h3');
 		var tocEntries = $('.toc-entry');
 	
 		$(window).on('scroll', function() {

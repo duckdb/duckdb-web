@@ -11,8 +11,6 @@ Sorting is also used within operators, such as window functions.
 DuckDB recently improved its sorting implementation, which is now able to sort data in parallel and sort more data than fits in memory.
 In this post, we will take a look at how DuckDB sorts, and how this compares to other data management systems.
 
-<!--more-->
-
 Not interested in the implementation? [Jump straight to the experiments!](#comparison)
 
 ## Sorting Relational Data
@@ -34,12 +32,12 @@ ORDER BY c_birth_country DESC,
 Which yields:
 
 | c_customer_sk | c_birth_country | c_birth_year |
-|---------------|-----------------|--------------|
-| 64760         | NETHERLANDS     | 1991         |
-| 75011         | NETHERLANDS     | 1992         |
-| 89949         | NETHERLANDS     | 1992         |
-| 90766         | NETHERLANDS     | NULL         |
-| 42927         | GERMANY         | 1924         |
+| ------------: | --------------- | -----------: |
+|         64760 | NETHERLANDS     |         1991 |
+|         75011 | NETHERLANDS     |         1992 |
+|         89949 | NETHERLANDS     |         1992 |
+|         90766 | NETHERLANDS     |         NULL |
+|         42927 | GERMANY         |         1924 |
 
 In other words: `c_birth_country` is ordered descendingly, and where `c_birth_country` is equal, we sort on `c_birth_year` ascendingly.
 By specifying `NULLS LAST`, null values are treated as the lowest value in the `c_birth_year` column.
@@ -72,7 +70,7 @@ The binary string comparison technique improves sorting performance by simplifyi
 Let us take another look at 3 rows of the example:
 
 | c_birth_country | c_birth_year |
-|-----------------|--------------|
+|-----------------|-------------:|
 | NETHERLANDS     | 1991         |
 | NETHERLANDS     | 1992         |
 | GERMANY         | 1924         |
@@ -96,6 +94,7 @@ c_birth_year
 ```
 
 The trick is to convert these to a binary string that encodes the sorting order:
+
 ```sql
 -- NETHERLANDS | 1991
 10110001 10111010 10101011 10110111 10111010 10101101 10110011 10111110 10110001 10111011 10101100 11111111
@@ -270,12 +269,14 @@ Ideally, we would like to measure only the time it takes to sort the data, not t
 Not every system has a profiler to measure the time of the sorting operator exactly, so this is not an option.
 
 To approach a fair comparison, we will measure the end-to-end time of queries that sort the data and write the result to a temporary table, i.e.:
+
 ```sql
 CREATE TEMPORARY TABLE output AS
 SELECT ...
 FROM ...
 ORDER BY ...;
 ```
+
 There is no perfect solution to this problem, but this should give us a good comparison because the end-to-end time of this query should be dominated by sorting.
 For Pandas we will use `sort_values` with `inplace=False` to mimic this query.
 
@@ -347,18 +348,18 @@ The tables used here are `catalog_sales` and `customer`.
 `customer` has 18 columns (10 integers, and 8 strings), and a decent amount of rows as the scale factor increases.
 The row counts of both tables at each scale factor are shown in the table below.
 
-| SF  | customer  | catalog_sales |
-|-----|-----------|---------------|
-| 1   | 100.000   | 1.441.548     |
-| 10  | 500.000   | 14.401.261    |
-| 100 | 2.000.000 | 143.997.065   |
-| 300 | 5.000.000 | 260.014.080   |
+|   SF |  customer | catalog_sales |
+| ---: | --------: | ------------: |
+|    1 |   100,000 |     1,441,548 |
+|   10 |   500,000 |    14,401,261 |
+|  100 | 2,000,000 |   143,997,065 |
+|  300 | 5,000,000 |   260,014,080 |
 
 We will use `customer` at SF100 and SF300, which fits in memory at every scale factor.
 We will use `catalog_sales` table at SF10 and SF100, which does not fit in memory anymore at SF100.
 
 The data was generated using DuckDB's TPC-DS extension, then exported to CSV in a random order to undo any ordering patterns that could have been in the generated data.
- 
+
 ## Catalog Sales (Numeric Types)
 
 Our first experiment on the `catalog_sales` table is selecting 1 column, then 2 columns, ..., up to all 34, always ordering by `cs_quantity` and `cs_item_sk`.
@@ -441,6 +442,7 @@ DuckDB is a free and open-source database management system (MIT licensed). It a
 [Read our paper on sorting at ICDE '23](https://hannes.muehleisen.org/publications/ICDE2023-sorting.pdf)
 
 Listen to Laurens' appearance on the Disseminate podcast:
+
 * [Spotify](https://open.spotify.com/show/6IQIF9oRSf0FPjBUj0AkYA)
 * [Google](https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5hY2FzdC5jb20vcHVibGljL3Nob3dzL2Rpc3NlbWluYXRl)
 * [Apple](https://podcasts.apple.com/us/podcast/disseminate-the-computer-science-research-podcast/id1631350873)

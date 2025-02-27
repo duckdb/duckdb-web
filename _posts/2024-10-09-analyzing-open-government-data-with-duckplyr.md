@@ -8,6 +8,8 @@ excerpt: "We use the duckplyr R library to clean and analyze an Open Data set pu
 tags: ["using DuckDB"]
 ---
 
+> For the duckplyr documentation, visit [`duckplyr.tidyverse.org`](https://duckplyr.tidyverse.org/).
+
 <img src="/images/blog/duckplyr/duckplyr-logo.svg"
      width="400"
      />
@@ -147,12 +149,12 @@ Next, we use the `SELECT` projection to perform some basic renames and data clea
 
 ```sql
 SELECT
-    year.Description year_,
-    area.Description area_,
-    ethnic.Description ethnic_,
-    sex.Description sex_,
-    try_cast(replace(age.Description, ' years', '') AS INTEGER) age_,
-    try_cast(data.count AS INTEGER) count_
+    year.Description AS year_,
+    area.Description AS area_,
+    ethnic.Description AS ethnic_,
+    sex.Description AS sex_,
+    try_cast(replace(age.Description, ' years', '') AS INTEGER) AS age_,
+    try_cast(data.count AS INTEGER) AS count_
 ```
 
 The data set contains various totals, so we remove them before proceeding:
@@ -168,7 +170,7 @@ WHERE count_ > 0
 We wrap the previous statements as a common-table-expression `expanded_cleaned_data`, and we can then compute the actual aggregation using DuckDB
 
 ```sql
-SELECT sex_, sum(count_) group_count
+SELECT sex_, sum(count_) AS group_count
 FROM expanded_cleaned_data
 WHERE age_ BETWEEN 20 AND 40
   AND area_ LIKE 'Auckland%'

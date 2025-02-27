@@ -10,7 +10,7 @@ tags: ["using DuckDB"]
 
 In this blog post, we dive into the terminal to compare DuckDB with traditional tools used in Unix shells (Bash, Zsh, etc.).
 We solve several problems requiring operations such as projection and filtering to demonstrate the differences between using SQL queries in DuckDB versus specialized command line tools.
-In the process, we will show off some cool features such as DuckDB's [powerful CSV reader]({% link docs/data/csv/overview.md %}) and the [positional join operator](#duckdb-positional-join).
+In the process, we will show off some cool features such as DuckDB's [powerful CSV reader]({% link docs/stable/data/csv/overview.md %}) and the [positional join operator](#duckdb-positional-join).
 Let's get started!
 
 ## The Unix Philosophy
@@ -30,7 +30,7 @@ are ubiquitious and widely used in [shell scripts](https://en.wikipedia.org/wiki
 
 As a purpose-built data processing tool, DuckDB fits the Unix philosophy quite well.
 First, it was designed to be a fast in-process analytical SQL database system _(do one thing and do it well)._
-Second, it has a standalone [command line client]({% link docs/api/cli/overview.md %}), which can consume and produce CSV files _(work together),_
+Second, it has a standalone [command line client]({% link docs/stable/clients/cli/overview.md %}), which can consume and produce CSV files _(work together),_
 and also supports reading and writing text streams _(handle text streams)_.
 Thanks to these, DuckDB works well in the ecosystem of Unix CLI tools, as
 shown
@@ -47,12 +47,12 @@ While there are shells specialized specifically for dataframe processing, such a
 
 At the same time, we have DuckDB, an extremely portable database system which uses the same SQL syntax on all platforms.
 With [version 1.0.0 released recently]({% post_url 2024-06-03-announcing-duckdb-100 %}), DuckDB's syntax – based on the proven and widely used PostgeSQL dialect – is now in a stable state.
-Another attractive feature of DuckDB is that it offers an interactive shell, which aids quick debugging. Moreover, DuckDB is available in [several host languages]({% link docs/api/overview.md %}) as well as in the browser [via WebAssembly](https://shell.duckdb.org/), so if you ever decide to use your SQL scripts outside of the shell, DuckDB SQL scripts can be ported to a wide variety of environments without any changes.
+Another attractive feature of DuckDB is that it offers an interactive shell, which aids quick debugging. Moreover, DuckDB is available in [several host languages]({% link docs/stable/clients/overview.md %}) as well as in the browser [via WebAssembly](https://shell.duckdb.org/), so if you ever decide to use your SQL scripts outside of the shell, DuckDB SQL scripts can be ported to a wide variety of environments without any changes.
 
 ## Data Processing with Unix Tools and DuckDB
 
 In the following, we give examples for implementing simple data processing tasks using the CLI tools provided in most Unix shells and using DuckDB SQL queries.
-We use DuckDB v1.0.0 and run it in [in-memory mode]({% link docs/connect/overview.md %}#in-memory-database).
+We use DuckDB v1.0.0 and run it in [in-memory mode]({% link docs/stable/connect/overview.md %}#in-memory-database).
 This mode makes sense for the problems we are tackling, as we do not create any tables and the operations are not memory-intensive, so there is no data to persist or to spill on disk.
 
 ### Datasets
@@ -169,11 +169,11 @@ SELECT #1, #3 FROM 'pop.csv';
 
 Note that we did not have to define any schema or load the data to a table.
 Instead, we simply used `'pop.csv'` in the `FROM` clause as we would do with a regular table.
-DuckDB detects that this is a CSV file and invokes the [`read_csv` function]({% link docs/data/csv/overview.md %}#csv-functions), which automatically infers the CSV file's dialect (delimiter, presence of quotes, etc.) as well as the schema of the table.
+DuckDB detects that this is a CSV file and invokes the [`read_csv` function]({% link docs/stable/data/csv/overview.md %}#csv-functions), which automatically infers the CSV file's dialect (delimiter, presence of quotes, etc.) as well as the schema of the table.
 This allows us to simply project columns using `SELECT #1, #3`.
 We could also use the more readable syntax `SELECT city, population`.
 
-To make the output of the solutions using Unix tools and DuckDB equivalent, we wrap the query into a [`COPY ... TO` statement]({% link docs/sql/statements/copy.md %}#copy--to):
+To make the output of the solutions using Unix tools and DuckDB equivalent, we wrap the query into a [`COPY ... TO` statement]({% link docs/stable/sql/statements/copy.md %}#copy--to):
 
 ```plsql
 COPY (
@@ -277,7 +277,7 @@ The Hague
 
 #### DuckDB: `INTERSECT ALL`
 
-The DuckDB solution reads the CSV files, projects the `city` fields and applies the [`INTERSECT ALL` clause]({% link docs/sql/query_syntax/setops.md %}#intersect-all-bag-semantics) to calculate the intersection:
+The DuckDB solution reads the CSV files, projects the `city` fields and applies the [`INTERSECT ALL` clause]({% link docs/stable/sql/query_syntax/setops.md %}#intersect-all-bag-semantics) to calculate the intersection:
 
 ```plsql
 COPY (
@@ -318,9 +318,9 @@ Nijmegen,Gelderland,179073,57.63
 
 #### DuckDB: `POSITIONAL JOIN`
 
-In DuckDB, we can use a [`POSITIONAL JOIN`]({% link docs/sql/query_syntax/from.md %}#positional-joins).
-This join type is one of DuckDB's [SQL extensions]({% link docs/sql/dialect/friendly_sql.md %}) and it provides a concise syntax to combine tables row-by-row based on each row's position in the table.
-Joining the two tables together using `POSITIONAL JOIN` results in two `city` columns – we use the [`EXCLUDE` clause]({% link docs/sql/expressions/star.md %}#exclude-clause) to remove the duplicate column:
+In DuckDB, we can use a [`POSITIONAL JOIN`]({% link docs/stable/sql/query_syntax/from.md %}#positional-joins).
+This join type is one of DuckDB's [SQL extensions]({% link docs/stable/sql/dialect/friendly_sql.md %}) and it provides a concise syntax to combine tables row-by-row based on each row's position in the table.
+Joining the two tables together using `POSITIONAL JOIN` results in two `city` columns – we use the [`EXCLUDE` clause]({% link docs/stable/sql/expressions/star.md %}#exclude-clause) to remove the duplicate column:
 
 ```plsql
 COPY (
@@ -389,7 +389,7 @@ Eindhoven,EIN
 #### DuckDB: `WHERE ... LIKE`
 
 Let's answer the questions now in DuckDB.
-To answer the first question, we can use [`LIKE` for pattern matching]({% link docs/sql/functions/pattern_matching.md %}).
+To answer the first question, we can use [`LIKE` for pattern matching]({% link docs/stable/sql/functions/pattern_matching.md %}).
 The header should not be part of the output, so we disable it with `HEADER false`.
 The complete query looks like follows:
 
@@ -400,7 +400,7 @@ COPY (
   ) TO '/dev/stdout/' (HEADER false);
 ```
 
-For the second question, we use [string slicing]({% link docs/sql/functions/char.md %}#stringbeginend) to extract the first three characters, [`upper`]({% link docs/sql/functions/char.md %}#upperstring) to ensure case-insensitivity, and `NOT LIKE` for the negative condition:
+For the second question, we use [string slicing]({% link docs/stable/sql/functions/char.md %}#stringbeginend) to extract the first three characters, [`upper`]({% link docs/stable/sql/functions/char.md %}#upperstring) to ensure case-insensitivity, and `NOT LIKE` for the negative condition:
 
 ```plsql
 COPY (
@@ -412,7 +412,7 @@ COPY (
 
 These queries return exactly the same results as the solutions using `grep` and `pcregrep`.
 
-In both of these queries, we used the [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %}#from-first-syntax).
+In both of these queries, we used the [`FROM`-first syntax]({% link docs/stable/sql/query_syntax/from.md %}#from-first-syntax).
 If the `SELECT` clause is omitted, the query is executed as if `SELECT *` was used, i.e., it returns all columns.
 
 ### Joining Files
@@ -450,8 +450,8 @@ RTM,The Hague,Rotterdam The Hague Airport
 
 #### DuckDB
 
-In DuckDB, we load the CSV files and connect them using the [`NATURAL JOIN` clause]({% link docs/sql/query_syntax/from.md %}#natural-joins), which joins on column(s) with the same name.
-To ensure that the result matches with that of the Unix solution, we use the [`ORDER BY ALL` clause]({% link docs/sql/query_syntax/orderby.md %}#order-by-all), which sorts the result on all columns, starting from the first one, and stepping through them for tie-breaking to the last column.
+In DuckDB, we load the CSV files and connect them using the [`NATURAL JOIN` clause]({% link docs/stable/sql/query_syntax/from.md %}#natural-joins), which joins on column(s) with the same name.
+To ensure that the result matches with that of the Unix solution, we use the [`ORDER BY ALL` clause]({% link docs/stable/sql/query_syntax/orderby.md %}#order-by-all), which sorts the result on all columns, starting from the first one, and stepping through them for tie-breaking to the last column.
 
 ```plsql
 COPY (
@@ -516,10 +516,10 @@ COPY (
 ```
 
 Note that the `FROM` clause now has an HTTPS URL instead of a simple CSV file.
-The presence of the `https://` prefix triggers DuckDB to load the [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}) and use it to fetch the JSON document.
-We use the [`replace` function]({% link docs/sql/functions/char.md %}#replacestring-source-target) to substitute the spaces with underscores,
-and the [`regexp_replace` function]({% link docs/sql/functions/char.md %}#regexp_replacestring-pattern-replacement) for the replacement using a regular expression.
-(We could have also used string formatting functions such as [`format`]({% link docs/sql/functions/char.md %}#fmt-syntax) and [`printf`]({% link docs/sql/functions/char.md %}#printf-syntax)).
+The presence of the `https://` prefix triggers DuckDB to load the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) and use it to fetch the JSON document.
+We use the [`replace` function]({% link docs/stable/sql/functions/char.md %}#replacestring-source-target) to substitute the spaces with underscores,
+and the [`regexp_replace` function]({% link docs/stable/sql/functions/char.md %}#regexp_replacestring-pattern-replacement) for the replacement using a regular expression.
+(We could have also used string formatting functions such as [`format`]({% link docs/stable/sql/functions/char.md %}#fmt-syntax) and [`printf`]({% link docs/stable/sql/functions/char.md %}#printf-syntax)).
 To change the separator to a semicolon, we serialize the file using the `COPY` statement with the `DELIMITER ';'` option.
 
 ### Reading JSON
@@ -537,7 +537,7 @@ curl -s https://api.github.com/repos/duckdb/duckdb \
 
 #### DuckDB: `read_json`
 
-In DuckDB, we use the [`read_json` function]({% link docs/data/json/overview.md %}), invoking it with the remote HTTPS endpoint's URL.
+In DuckDB, we use the [`read_json` function]({% link docs/stable/data/json/overview.md %}), invoking it with the remote HTTPS endpoint's URL.
 The schema of the JSON file is detected automatically, so we can simply use `SELECT` to return the required field.
 
 ```plsql
@@ -558,7 +558,7 @@ So, let's switch to the Dutch railway services dataset that we used in a [previo
 We'll use the [2023 railway services file (`services-2023.csv.gz`)](https://blobs.duckdb.org/nl-railway/services-2023.csv.gz) and count the number of Intercity services that operated in that year.
 
 In Unix, we can use the [`gzcat`](https://man7.org/linux/man-pages/man1/zcat.1p.html) command to decompress the `csv.gz` file into a pipeline. Then, we can use `grep` or `pcregrep` (which is more performant), and top it off with the [`wc`](https://man7.org/linux/man-pages/man1/wc.1.html) command to count the number of lines (`-l`).
-In DuckDB, the built-in CSV reader also supports [compressed CSV files]({% link docs/data/csv/overview.md %}#parameters), so we can use that without any extra configuration.
+In DuckDB, the built-in CSV reader also supports [compressed CSV files]({% link docs/stable/data/csv/overview.md %}#parameters), so we can use that without any extra configuration.
 
 ```batch
 gzcat services-2023.csv.gz | grep '^[^,]*,[^,]*,Intercity,' | wc -l

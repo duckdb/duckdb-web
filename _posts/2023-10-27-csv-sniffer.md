@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title: "DuckDB's CSV Sniffer: Automatic Detection of Types and Dialects"
 author: Pedro Holanda
@@ -14,11 +13,11 @@ tags: ["using DuckDB"]
      width="300"
      />
 
-There are many different file formats that users can choose from when storing their data. For example, there are performance-oriented binary formats like Parquet, where data is stored in a columnar format, partitioned into row-groups, and heavily compressed. However, Parquet is known for its rigidity, requiring specialized systems to read and write these files.
+There are many different file formats that users can choose from when storing their data. For example, there are performance-oriented binary formats like Parquet, where data is stored in a columnar format, partitioned into row groups, and heavily compressed. However, Parquet is known for its rigidity, requiring specialized systems to read and write these files.
 
 On the other side of the spectrum, there are files with the CSV (comma-separated values) format, which I like to refer to as the 'Woodstock of data'. CSV files offer the advantage of flexibility; they are structured as text files, allowing users to manipulate them with any text editor, and nearly any data system can read and execute queries on them.
 
-However, this flexibility comes at a cost. Reading a CSV file is not a trivial task, as users need a significant amount of prior knowledge about the file. For instance, [DuckDB's CSV reader]({% link docs/data/csv/overview.md %}) offers more than 25 configuration options. I've found that people tend to think I'm not working hard enough if I don't introduce at least three new options with each release. *Just kidding.* These options include specifying the delimiter, quote and escape characters, determining the number of columns in the CSV file, and identifying whether a header is present while also defining column types. This can slow down an interactive data exploration process, and make analyzing new datasets a cumbersome and less enjoyable task.
+However, this flexibility comes at a cost. Reading a CSV file is not a trivial task, as users need a significant amount of prior knowledge about the file. For instance, [DuckDB's CSV reader]({% link docs/stable/data/csv/overview.md %}) offers more than 25 configuration options. I've found that people tend to think I'm not working hard enough if I don't introduce at least three new options with each release. *Just kidding.* These options include specifying the delimiter, quote and escape characters, determining the number of columns in the CSV file, and identifying whether a header is present while also defining column types. This can slow down an interactive data exploration process, and make analyzing new datasets a cumbersome and less enjoyable task.
 
 One of the raison d'être of DuckDB is to be pleasant and easy to use, so we don't want our users to have to fiddle with CSV files and input options manually. Manual input should be reserved only for files with rather unusual choices for their CSV dialect (where a dialect comprises the combination of the delimiter, quote, escape, and newline values used to create that file) or for specifying column types.
 
@@ -83,6 +82,7 @@ A,B,C
 ```
 
 Here the sniffer would detect that with the delimiter set to `,` the first row has one column, the second has two, but the remaining rows have 3 columns. Hence, if `null_padding` is set to false, it would still select `,` as a delimiter candidate, by assuming the top rows are dirty notes. (Believe me, CSV notes are a thing!). Resulting in the following table:
+
 ```csv
 A,B,C
 1, 2, 3
@@ -90,6 +90,7 @@ A,B,C
 ```
 
 If `null_padding` is set to true, all lines would be accepted, resulting in the following table:
+
 ```csv
 'I like my csv files to have notes to make dialect detection harder', None, None
 'I also like commas like this one : ', None, None
@@ -174,7 +175,6 @@ To analyze the impact of running DuckDB's automatic detection, we execute the sn
 
 The cost of sniffing the dialect column names and types is approximately 4% of the total cost of loading the data. 
 
-<div class="narrow_table"></div>
 
 |    Name     | Time (s) |
 |-------------|----------|

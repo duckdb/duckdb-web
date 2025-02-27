@@ -74,7 +74,7 @@ We should also note that in DuckDB *schema changes are also transactional*. This
 
 ### Consistency
 
-**Consistency** means that all of [the constraints that are defined in the database]({% link docs/sql/constraints.md %}) must always hold, both before and after a transaction. The constraints can never be violated. Examples of constraints are `PRIMARY KEY` or `FOREIGN KEY` constraints.
+**Consistency** means that all of [the constraints that are defined in the database]({% link docs/stable/sql/constraints.md %}) must always hold, both before and after a transaction. The constraints can never be violated. Examples of constraints are `PRIMARY KEY` or `FOREIGN KEY` constraints.
 
 ```sql
 CREATE TABLE customer (id INTEGER, name VARCHAR, PRIMARY KEY (id));
@@ -98,7 +98,7 @@ Having these kinds of constraints in place is a great way to make sure data *rem
 
 To avoid this problem, transactions are typically executed *interleaved*. However, as those transactions change data, one must ensure that each transaction is logically *isolated* – it only ever sees a consistent state of the database and can – for example – never read data from a transaction that has not yet committed.
 
-DuckDB does not have connections in the typical sense – as it is not a client/server database that allows separate applications to connect to it. However, DuckDB has [full multi-client support]({% link docs/connect/concurrency.md %}) within a single application. The user can create multiple clients that all connect to the same DuckDB instance. The transactions can be run concurrently and they are isolated using [Snapshot Isolation](https://jepsen.io/consistency/models/snapshot-isolation).
+DuckDB does not have connections in the typical sense – as it is not a client/server database that allows separate applications to connect to it. However, DuckDB has [full multi-client support]({% link docs/stable/connect/concurrency.md %}) within a single application. The user can create multiple clients that all connect to the same DuckDB instance. The transactions can be run concurrently and they are isolated using [Snapshot Isolation](https://jepsen.io/consistency/models/snapshot-isolation).
 
 The way that multiple connections are created differs per client. Below is an example where we showcase the transactionality of the system using the Python client.
 
@@ -169,6 +169,7 @@ After restarting, we can check the `customer` table:
 
 ```python
 import duckdb
+
 con = duckdb.connect("mydb.duckdb")
 con.sql("SELECT name FROM customer").show()
 ```
@@ -188,7 +189,7 @@ In this example, we first create the customer table in the database file `mydb.d
 
 There are two main classes of data management systems, transactional systems (OLTP) and analytical systems (OLAP). As the name implies, transactional systems are far more concerned with guaranteeing the ACID properties than analytical ones. Systems like the venerable PostgreSQL deservedly pride themselves on doing the “right thing” with regard to providing transactional guarantees by default. Even NoSQL transactional systems such as MongoDB that swore off guaranteeing the ACID principles “for performance” early on had to eventually [“roll back” to offering ACID guarantees](https://www.mongodb.com/resources/basics/databases/acid-transactions) with [one or two hurdles along the way](https://jepsen.io/analyses/mongodb-4.2.6).
 
-Analytical systems such as DuckDB – in principle – have less of a imperative to provide strong transactional guarantees. They are often not the so-called “system of record”, which is the data management system that is considered the source truth. In fact, DuckDB offers various connectors to load data from systems of record, like the [PostgreSQL scanner]({% link docs/extensions/postgres.md %}). If an OLAP database would become corrupted, it is often possible to recover from that source of truth. Of course, that first requires that users notice that something has gone wrong, which is not always simple to detect. For example, a common mistake is ingesting data from the same CSV file twice into a database because the first attempt went wrong at some point. This can lead to duplicate rows causing incorrect aggregate results. ACID prevents these kinds of problems. ACID properties enable  useful functionality in OLAP systems. For example:
+Analytical systems such as DuckDB – in principle – have less of a imperative to provide strong transactional guarantees. They are often not the so-called “system of record”, which is the data management system that is considered the source truth. In fact, DuckDB offers various connectors to load data from systems of record, like the [PostgreSQL scanner]({% link docs/stable/extensions/postgres.md %}). If an OLAP database would become corrupted, it is often possible to recover from that source of truth. Of course, that first requires that users notice that something has gone wrong, which is not always simple to detect. For example, a common mistake is ingesting data from the same CSV file twice into a database because the first attempt went wrong at some point. This can lead to duplicate rows causing incorrect aggregate results. ACID prevents these kinds of problems. ACID properties enable  useful functionality in OLAP systems. For example:
 
 **Concurrent Ingestion and Reporting.** As change is continuous, we often have data ingestion streams adding new data to a database system. In analytical systems, it is common to have a single connection append new data to a database, while other connections read from the database in order to e.g., generate graphs and reports. If these connections are isolated, then the generated graphs and aggregates will always be executed over a complete and consistent snapshot of the database, ensuring that the generated graphs and aggregates are correct.
 

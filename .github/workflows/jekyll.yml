@@ -41,8 +41,8 @@ jobs:
           echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
           echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
           # add the update time to the index page of the documentation.
-          CURRENT_TIME=$(date +"%Y-%m-%d %H:%M:%S")
-          sed -i "s/You can also /This documentation was last updated at ${CURRENT_TIME}.\n\nYou can also /" docs/index.md
+          CURRENT_DATE=$(date +"%Y-%m-%d")
+          sed -i "s/You can also /The documentation was last updated on ${CURRENT_DATE}.\n\nYou can also /" docs/stable/index.md
       - name: Install Python requirements
         run: pip install -r requirements.txt --break-system-packages
       - name: Install zip
@@ -83,7 +83,7 @@ jobs:
   build_pdf:
     runs-on: ubuntu-24.04
     container:
-      image: docker://pandoc/extra:3.1.1.0
+      image: docker://pandoc/extra:3.5
       options: --entrypoint=sh
     defaults:
       run:
@@ -94,10 +94,9 @@ jobs:
       - name: Setup Python
         run: |
           PYTHONUNBUFFERED=1
-          apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-          python3 -m ensurepip
+          apk add --update --no-cache python3 py3-pip
       - name: Install dependencies
-        run: pip3 install -r requirements.txt
+        run: pip3 install -r requirements.txt --break-system-packages
       - name: Concatenate files
         run: python3 concatenate_to_single_file.py
       - name: Convert with pandoc
@@ -163,7 +162,7 @@ jobs:
 
       - name: Link Checker on stable
         run: |
-          linkchecker https://duckdb.org/ --ignore-url 'https?://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
+          linkchecker https://duckdb.org/ --ignore-url 'https?://duckdb\.org/docs/[0-9]*.[0-9]*/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
           echo $?
 
       - run: cat report.html >> ${GITHUB_STEP_SUMMARY}

@@ -14,6 +14,6 @@ length: "20 min"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/5ddoZR6PYNU?si=7nUCLymvtVwG51nc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-Speaker: Hannes Mühleisen (DuckDB Labs)
-
 Event: [PyData Amsterdam 2023](https://amsterdam.pydata.org/)
+
+Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

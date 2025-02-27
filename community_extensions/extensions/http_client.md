@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: http_client
   description: DuckDB HTTP Client Extension
-  version: 0.0.5
+  version: 0.0.6
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-httpclient
-  ref: 4790bc7255e18dfb4db1a383214ff49c0719919b
+  ref: 7d18911529f3240c2eb89f2f1de824e429118425
 
 docs:
   hello_world: |
@@ -97,10 +97,10 @@ docs:
   extended_description: |
     The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 43
-extension_star_count_pretty: 43
-extension_download_count: 205
-extension_download_count_pretty: 205
+extension_star_count: 51
+extension_star_count_pretty: 51
+extension_download_count: 610
+extension_download_count_pretty: 610
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---
@@ -126,12 +126,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| http_get      | scalar        |             |         |         |
-| http_post     | scalar        |             |         |         |
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| http_get      | scalar        | NULL        | NULL    | []       |
+| http_post     | scalar        | NULL        | NULL    | []       |
 
-
-
----
 

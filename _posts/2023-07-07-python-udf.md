@@ -17,13 +17,13 @@ User Defined Functions (UDFs) enable users to extend the functionality of a Data
 
 2) **Easy Use.** UDFs can be seamlessly integrated into SQL queries, allowing users to leverage the power of SQL to call the functions. This eliminates the need for passing data through a separate database connector and executing external code. The functions can be utilized in various SQL contexts (e.g., subqueries, join conditions).
 
-3) **Safety.** The sensitive data never leaves the DBMS process. 
+3) **Safety.** The sensitive data never leaves the DBMS process.
 
 There are two main reasons users often refrain from implementing UDFs. 1) There are security concerns associated with UDFs. Since UDFs are custom code created by users and executed within the DBMS process, there is a potential risk of crashing the server. However, when it comes to DuckDB, an embedded database, this concern is mitigated as each analyst runs their own DuckDB process separately. Therefore, the impact on server stability is not a significant worry. 2) The difficulty of implementation is a common deterrent for users. High-Performance UDFs are typically only supported in low-level languages. UDFs in higher-level languages like Python incur significant performance costs. Consequently many users cannot quickly implement their UDFs without investing a significant amount of time in learning a low-level language and understanding the internal details of the DBMS.
 
 DuckDB followed a similar approach. As a DBMS tailored for analytical tasks, performance is a key consideration, leading to the implementation of its core in C++. Consequently, the initial focus of extensibility efforts [was centered around C++](https://www.youtube.com/watch?v=UKo_LQyLTko&ab_channel=DuckDBLabs). However, this  duck is not limited to just waddling; it can also fly. So we are delighted to announce the [recent addition](https://github.com/duckdb/duckdb/pull/7171) of Scalar Python UDFs to DuckDB.
 
-DuckDB provides support for two distinct types of Python UDFs, differing in the Python object used for communication between [DuckDB's native data types]({% link docs/sql/data_types/overview.md %}) and the Python process. These communication layers include support for [Python built-in types]({% link docs/sql/data_types/overview.md %}) and [PyArrow Tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html).
+DuckDB provides support for two distinct types of Python UDFs, differing in the Python object used for communication between [DuckDB's native data types]({% link docs/stable/sql/data_types/overview.md %}) and the Python process. These communication layers include support for [Python built-in types]({% link docs/stable/sql/data_types/overview.md %}) and [PyArrow Tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html).
 
 The two approaches exhibit two key differences:
 
@@ -31,7 +31,7 @@ The two approaches exhibit two key differences:
 
 2) **Vectorization.** PyArrow Table functions operate on a chunk level, processing chunks of data containing up to 2048 rows. This approach maximizes cache locality and leverages vectorization. On the other hand, the built-in types UDF implementation operates on a per-row basis.
 
-This blog post aims to demonstrate how you can extend DuckDB using Python UDFs, with a particular emphasis on PyArrow-powered UDFs. In our quick-tour section, we will provide examples using the PyArrow UDF types. For those interested in benchmarks, you can jump ahead to the [benchmark section below](#benchmarks). If you want to see a detailed description of the Python UDF API, please refer to our [documentation]({% link docs/api/python/function.md %}).
+This blog post aims to demonstrate how you can extend DuckDB using Python UDFs, with a particular emphasis on PyArrow-powered UDFs. In our quick-tour section, we will provide examples using the PyArrow UDF types. For those interested in benchmarks, you can jump ahead to the [benchmark section below](#benchmarks). If you want to see a detailed description of the Python UDF API, please refer to our [documentation]({% link docs/stable/clients/python/function.md %}).
 
 ## Python UDFs
 
@@ -73,7 +73,7 @@ That's it, the function is then registered and ready to be called through SQL.
 
 ```python
 # Let's create an example countries table with the countries we are interested in using
-con.execute("CREATE TABLE countries(country VARCHAR)")
+con.execute("CREATE TABLE countries (country VARCHAR)")
 con.execute("INSERT INTO countries VALUES ('Brazil'), ('Germany'), ('Italy'), ('Argentina'), ('Uruguay'), ('France'), ('England'), ('Spain'), ('Netherlands')")
 # We can simply call the function through SQL, and even use the function return to eliminate the countries that never won a world cup
 con.sql("SELECT country, wc_titles(country) AS world_cups FROM countries").fetchall()
@@ -236,7 +236,6 @@ native_res = con.sql("SELECT sum(add_built_in_type(i)) FROM numbers").fetchall()
 arrow_res = con.sql("SELECT sum(add_arrow_type(i)) FROM numbers").fetchall()
 ```
 
-<div class="narrow_table"></div>
 
 |    Name     | Time (s) |
 |-------------|---------:|
@@ -295,7 +294,6 @@ con.sql("SELECT sum(strlen_arrow(i)) FROM strings tbl(i)").fetchall()
 exec_external(con)
 ```
 
-<div class="narrow_table"></div>
 
 |    Name     | Time (s) | Peak memory consumption (MB) |
 |-------------|---------:|-----------------------------:|

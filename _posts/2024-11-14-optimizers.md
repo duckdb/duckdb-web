@@ -234,7 +234,7 @@ CREATE TABLE parts AS
 SELECT
     parts.p_id,
     parts.part_name,
-    count(*) as ordered_amount
+    count(*) AS ordered_amount
 FROM parts
 INNER JOIN orders 
     ON orders.pid = parts.p_id

@@ -1,31 +1,10 @@
-{% if page.url contains '/docs/archive/' %}
-  {% assign urlVersionParts = page.url | split: "/docs/archive/" %}
-  {% assign urlVersionParts = urlVersionParts[1] | split: "/" %}
-  {% assign versionviewed = urlVersionParts[0] %}
-  {% assign startingUrl = "docs/archive/" | append: versionviewed %}
-  {% assign urlString = page.url | replace: ".html", "" | replace: startingUrl, "" %}
-  {% assign urlParts = urlString | split: "/"  %}
-  {% assign startingUrl = startingUrl | append: "/" %}
-{% else %}
-  {% assign versionviewed = site.currentshortduckdbversion | append: " (stable)" %}
-  {% assign startingUrl = "docs/" %}
-  {% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
-{% endif %}
-{% if versionviewed contains 'stable' %}
-  {%- assign menudocfile = "menu_docs_dev" -%}
-{% else %}
-  {%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
-{% endif %}
+{%- assign menudocfile = "menu_docs_" | append: version_viewed | replace: ".", "" -%}
 
 {% assign menudocfile = site.data[menudocfile].docsmenu %}
 
 <div id="breadcrumbs">
-  {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
-  
-  {% assign offset = 2 %}
-  {% if crumbs[offset] == "archive" %}
-    {% assign offset = offset | plus:2 %}
-  {% endif %}
+  {% assign crumbs = page.url | remove: '/index.html' | split: '/' %}
+  {% assign offset = 3 %}
 
   <span>Documentation</span>
 

@@ -13,8 +13,6 @@ However, even if the aggregation does not fit in memory, DuckDB can still comple
 
 Not interested in the implementation? [Jump straight to the experiments!](#experiments)
 
-<!--more-->
-
 ## Introduction
 
 Around two years ago, we published our first blog post on DuckDB’s hash aggregation, titled [“Parallel Grouped Aggregation in DuckDB”]({% post_url 2022-03-07-aggregate-hashtable %}).
@@ -196,24 +194,26 @@ The source code for the H2O.ai benchmark can be found [here](https://github.com/
 You can download the file yourself from <https://blobs.duckdb.org/data/G1_1e9_2e0_0_0.csv.zst> (18.8 GB compressed).
 
 We use the following queries from the benchmark to load the data:
+
 ```sql
 SET preserve_insertion_order = false;
 CREATE TABLE y (
     id1 VARCHAR, id2 VARCHAR, id3 VARCHAR,
-    id4 INTEGER, id5 INTEGER, id6 INTEGER, v1 INTEGER, v2 INTEGER,
-    v3 FLOAT);
-COPY y FROM 'G1_1e9_2e0_0_0.csv.zst' (FORMAT CSV, AUTO_DETECT true);
+    id4 INTEGER, id5 INTEGER, id6 INTEGER,
+    v1 INTEGER, v2 INTEGER, v3 FLOAT);
+COPY y FROM 'G1_1e9_2e0_0_0.csv.zst' (FORMAT csv, AUTO_DETECT true);
 CREATE TYPE id1ENUM AS ENUM (SELECT id1 FROM y);
 CREATE TYPE id2ENUM AS ENUM (SELECT id2 FROM y);
 CREATE TABLE x (
     id1 id1ENUM, id2 id2ENUM, id3 VARCHAR,
-    id4 INTEGER, id5 INTEGER, id6 INTEGER, v1 INTEGER, v2 INTEGER,
-    v3 FLOAT);
+    id4 INTEGER, id5 INTEGER, id6 INTEGER,
+    v1 INTEGER, v2 INTEGER, v3 FLOAT);
 INSERT INTO x (SELECT * FROM y);
 DROP TABLE IF EXISTS y;
 ```
 
 The H2O.ai aggregation benchmark consists of 10 queries, which vary in the number of unique groups:
+
 ```sql
 -- Query 1: ~100 unique groups
 CREATE OR REPLACE TABLE ans AS
@@ -221,6 +221,7 @@ SELECT id1, sum(v1) AS v1
 FROM x
 GROUP BY id1;
 ```
+
 ```sql
 -- Query 2: ~10,000 unique groups
 CREATE OR REPLACE TABLE ans AS
@@ -228,6 +229,7 @@ SELECT id1, id2, sum(v1) AS v1
 FROM x
 GROUP BY id1, id2;
 ```
+
 ```sql
 -- Query 3: ~10,000,000 unique groups
 CREATE OR REPLACE TABLE ans AS
@@ -235,6 +237,7 @@ SELECT id3, sum(v1) AS v1, avg(v3) AS v3
 FROM x
 GROUP BY id3;
 ```
+
 ```sql
 -- Query 4: ~100 unique groups
 CREATE OR REPLACE TABLE ans AS
@@ -242,6 +245,7 @@ SELECT id4, avg(v1) AS v1, avg(v2) AS v2, avg(v3) AS v3
 FROM x
 GROUP BY id4;
 ```
+
 ```sql
 -- Query 5: ~1,000,000 unique groups
 CREATE OR REPLACE TABLE ans AS
@@ -249,6 +253,7 @@ SELECT id6, sum(v1) AS v1, sum(v2) AS v2, sum(v3) AS v3
 FROM x
 GROUP BY id6;
 ```
+
 ```sql
 -- Query 6: ~10,000 unique groups
 CREATE OR REPLACE TABLE ans AS
@@ -260,13 +265,15 @@ SELECT
 FROM x
 GROUP BY id4, id5;
 ```
+
 ```sql
 -- Query 7: ~10,000,000 unique groups
 CREATE OR REPLACE TABLE ans AS
-SELECT id3, max(v1)-min(v2) AS range_v1_v2
+SELECT id3, max(v1) - min(v2) AS range_v1_v2
 FROM x
 GROUP BY id3;
 ```
+
 ```sql
 -- Query 8: ~10,000,000 unique groups
 CREATE OR REPLACE TABLE ans AS
@@ -279,6 +286,7 @@ FROM (
     WHERE v3 IS NOT NULL) sub_query
 WHERE order_v3 <= 2;
 ```
+
 ```sql
 -- Query 9: ~10,000 unique groups
 CREATE OR REPLACE TABLE ans AS
@@ -286,6 +294,7 @@ SELECT id2, id4, pow(corr(v1, v2), 2) AS r2
 FROM x
 GROUP BY id2, id4;
 ```
+
 ```sql
 -- Query 10: ~1,000,000,000 unique groups
 CREATE OR REPLACE TABLE ans AS

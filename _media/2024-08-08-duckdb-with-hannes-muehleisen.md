@@ -12,4 +12,6 @@ length: "45 min"
 
 <a href="https://softwareengineeringdaily.com/2024/08/08/duckdb-with-hannes-muhleisen/">Podcast episode</a>
 
-Guest: Hannes Mühleisen (DuckDB Labs)
+Podcast: [Software Engineering Daily](https://softwareengineeringdaily.com/category/all-episodes/exclusive-content/Podcast/)
+
+Guest: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)

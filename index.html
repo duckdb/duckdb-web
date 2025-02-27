@@ -207,6 +207,7 @@ body_class: landing nowrap
 <!-- specific example list for R -->	
 <div data-language="r">
 	<option value="r-sql-query">SQL query</option>
+	<option value="r-duckplyr">duckplyr</option>
 	<option value="r-dplyr-integration">dplyr integration</option>
 </div>
 
@@ -286,6 +287,12 @@ body_class: landing nowrap
 {% endhighlight %}
 </div>
 
+<div data-language="r" data-example="r-duckplyr" data-buttontxt="R documentation" data-buttonurl="/docs/api/r">
+{% highlight r %}
+{% include landing-page/r/duckplyr.r %}
+{% endhighlight %}
+</div>
+
 <div data-language="r" data-example="r-dplyr-integration" data-buttontxt="R documentation" data-buttonurl="/docs/api/r">
 {% highlight r %}
 {% include landing-page/r/dplyr-integration.r %}
@@ -309,15 +316,15 @@ body_class: landing nowrap
 
 <!-- ------------------- Node.js -------------------- -->
 
-<div data-language="nodejs" data-example="nodejs-sql-query" data-buttontxt="Node.js documentation" data-buttonurl="/docs/api/nodejs/overview">
+<div data-language="nodejs" data-example="nodejs-sql-query" data-buttontxt="Node.js documentation" data-buttonurl="/docs/api/node_neo/overview">
 {% highlight javascript %}
-{% include landing-page/nodejs/sql-query.js %}
+{% include landing-page/nodejs/sql-query.mjs %}
 {% endhighlight %}
 </div>
 
-<div data-language="nodejs" data-example="nodejs-web-service-integration" data-buttontxt="Node.js documentation" data-buttonurl="/docs/api/nodejs/overview">
+<div data-language="nodejs" data-example="nodejs-web-service-integration" data-buttontxt="Node.js documentation" data-buttonurl="/docs/api/node_neo/overview">
 {% highlight javascript %}
-{% include landing-page/nodejs/web-service-integration.js %}
+{% include landing-page/nodejs/web-service-integration.mjs %}
 {% endhighlight %}
 </div>
 

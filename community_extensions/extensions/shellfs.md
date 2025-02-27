@@ -6,7 +6,8 @@ excerpt: |
   Allow shell commands to be used for input and output
 
 docs:
-  extended_description: "The `shellfs` extension for DuckDB enables the use of Unix\
+  extended_description:
+    "The `shellfs` extension for DuckDB enables the use of Unix\
     \ pipes for input and output.\n\nBy appending a pipe character `|` to a filename,\
     \ DuckDB will treat it as a series of commands to execute and capture the output.\
     \ Conversely, if you prefix a filename with `|`, DuckDB will treat it as an output\
@@ -140,18 +141,18 @@ extension:
   language: C++
   license: MIT
   maintainers:
-  - rustyconover
+    - rustyconover
   name: shellfs
   requires_toolchains: python3
   version: 1.0.0
 repo:
   github: rustyconover/duckdb-shellfs-extension
-  ref: 651981d540027681c06252d433e5590370131444
+  ref: c44c69ab61cc6c11391e4e15f76a1ceb32ff9547
 
-extension_star_count: 57
-extension_star_count_pretty: 57
-extension_download_count: 239
-extension_download_count_pretty: 239
+extension_star_count: 62
+extension_star_count_pretty: 62
+extension_download_count: 44340
+extension_download_count_pretty: 44.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
 layout: community_extension_doc
 ---
@@ -181,7 +182,4 @@ LOAD {{ page.extension.name }};
 |----------------|----------------|------------|--------|
 | ignore_sigpipe | Ignore SIGPIPE | BOOLEAN    | GLOBAL |
 
-
-
----
 

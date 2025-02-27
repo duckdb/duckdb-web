@@ -17,13 +17,11 @@ The DuckDB team is happy to announce the latest DuckDB release (0.9.0). This rel
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
 
-<!--more-->
-
 ## What's New in 0.9.0
 
-There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features! 
+There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features!
 
-* Out-Of-Core Hash Aggregate
+* Out-of-Core Hash Aggregate
 * Storage Improvements
 * Index Improvements
 * DuckDB-WASM Extensions
@@ -40,7 +38,7 @@ Below is a summary of those new features with examples, starting with a change i
 [**Struct Auto-Casting**](https://github.com/duckdb/duckdb/pull/8942). Previously the names of struct entries were ignored when determining auto-casting rules. As a result, struct field names could be silently renamed. Starting with this release, this will result in an error instead.
 
 ```sql
-CREATE TABLE structs(s STRUCT(i INTEGER));
+CREATE TABLE structs (s STRUCT(i INTEGER));
 INSERT INTO structs VALUES ({'k': 42});
 ```
 
@@ -56,7 +54,7 @@ INSERT INTO structs VALUES (ROW(42));
 
 ## Core System Improvements
 
-**[Out-Of-Core Hash Aggregates](https://github.com/duckdb/duckdb/pull/7931)** and **[Hash Aggregate Performance Improvements.](https://github.com/duckdb/duckdb/pull/8475)** When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques.
+**[Out-of-Core Hash Aggregates](https://github.com/duckdb/duckdb/pull/7931)** and **[Hash Aggregate Performance Improvements.](https://github.com/duckdb/duckdb/pull/8475)** When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques.
 
 In this release, support for disk-spilling techniques is further extended through the support for out-of-core hash aggregates. Now, hash tables constructed during `GROUP BY` queries or `DISTINCT` operations that do not fit in memory due to a large number of unique groups will spill data to disk instead of throwing an out-of-memory exception. Due to the clever use of radix partitioning, performance degradation is gradual, and performance cliffs are avoided. Only the subset of the table that does not fit into memory will be spilled to disk.
 
@@ -65,22 +63,22 @@ The performance of our hash aggregate has also improved in general, especially w
 ```sql
 SELECT count(*) FROM (SELECT DISTINCT * FROM tbl);
 ```
+
 If we keep all the data in memory, the query should use around 6GB. However, we can still complete the query if less memory is available. In the table below, we can see how the runtime is affected by lowering the memory limit:
 
-<div class="narrow_table"></div>
 
 |  memory limit |  v0.8.1  |  v0.9.0  |
-|:-------------:|:--------:|:--------:|
-| 10.0GB        | 8.52s    | 2.91s    |
-| 9.0GB         | 8.52s    | 3.45s    |
-| 8.0GB         | 8.52s    | 3.45s    |
-| 7.0GB         | 8.52s    | 3.47s    |
-| 6.0GB         | OOM      | 3.41s    |
-| 5.0GB         | OOM      | 3.67s    |
-| 4.0GB         | OOM      | 3.87s    |
-| 3.0GB         | OOM      | 4.20s    |
-| 2.0GB         | OOM      | 4.39s    |
-| 1.0GB         | OOM      | 4.91s    |
+|--------------:|---------:|---------:|
+|         10 GB |   8.52 s |   2.91 s |
+|          9 GB |   8.52 s |   3.45 s |
+|          8 GB |   8.52 s |   3.45 s |
+|          7 GB |   8.52 s |   3.47 s |
+|          6 GB |      OOM |   3.41 s |
+|          5 GB |      OOM |   3.67 s |
+|          4 GB |      OOM |   3.87 s |
+|          3 GB |      OOM |   4.20 s |
+|          2 GB |      OOM |   4.39 s |
+|          1 GB |      OOM |   4.91 s |
 
 **[Compressed Materialization.](https://github.com/duckdb/duckdb/pull/7644)** DuckDB's streaming execution engine has a low memory footprint, but more memory is required for operations such as grouped aggregation. The memory footprint of these operations can be reduced by compression. DuckDB already uses [many compression techniques in its storage format]({% post_url 2022-10-28-lightweight-compression %}), but many of these techniques are too costly to use during query execution. However, certain lightweight compression techniques are so cheap that the benefit of the reducing memory footprint outweight the cost of (de)compression.
 
@@ -136,12 +134,11 @@ SELECT
 FROM tripdata;
 ```
 
-<div class="narrow_table"></div>
 
-| Version | Time (s) |
-| -- | --: |
-| v0.8.0 | 33.8 |
-| v0.9.0 | 3.8 |
+| Version | Run time |
+|--------:|---------:|
+|  v0.8.0 |   33.8 s |
+|  v0.9.0 |    3.8 s |
 
 ## Storage Improvements
 
@@ -150,19 +147,17 @@ FROM tripdata;
 **Index Storage Improvements ([#7930](https://github.com/duckdb/duckdb/pull/7930), [#8112](https://github.com/duckdb/duckdb/pull/8112), [#8437](https://github.com/duckdb/duckdb/pull/8437), [#8703](https://github.com/duckdb/duckdb/pull/8703))**. Many improvements have been made to both the in-memory footprint, and the on-disk footprint of ART indexes. In particular for indexes created to maintain `PRIMARY KEY`, `UNIQUE` or `FOREIGN KEY` constraints the storage and in-memory footprint is drastically reduced.
 
 ```sql
-CREATE TABLE integers(i INTEGER PRIMARY KEY);
+CREATE TABLE integers (i INTEGER PRIMARY KEY);
 INSERT INTO integers FROM range(10000000);
 ```
 
-<div class="narrow_table"></div>
 
 | Version | Size |
 | -- | --: |
-| v0.8.0 | 278MB |
-| v0.9.0 | 78MB |
+| v0.8.0 | 278 MB |
+| v0.9.0 | 78 MB |
 
 In addition, due to improvements in the manner in which indexes are stored on disk they can now be written to disk incrementally instead of always requiring a full rewrite. This allows for much quicker checkpointing for tables that have indexes.
-
 
 ## Extensions
 
@@ -176,7 +171,7 @@ import duckdb
 duckdb.sql("FROM 'https://raw.githubusercontent.com/duckdb/duckdb/main/data/json/example_n.ndjson'")
 ```
 
-The set of autoloadable extensions is limited to official extensions distributed by DuckDB Labs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options]({% link docs/configuration/overview.md %}).
+The set of autoloadable extensions is limited to official extensions distributed by DuckDB Labs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options]({% link docs/stable/configuration/overview.md %}).
 
 [**DuckDB-WASM Extensions**](https://github.com/duckdb/duckdb-wasm/pull/1403). This release adds support for loadable extensions to DuckDB-WASM. Previously, any extensions that you wanted to use with the WASM client had to be baked in. With this release, extensions can be loaded dynamically instead. When an extension is loaded, the WASM bundle is downloaded and the functionality of the extension is enabled. Give it a try in our [WASM shell](https://shell.duckdb.org).
 
@@ -185,37 +180,36 @@ LOAD inet;
 SELECT '127.0.0.1'::INET;
 ```
 
-[**AWS Extension**](https://github.com/duckdb/duckdb_aws). This release marks the launch of the DuckDB AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
+[**AWS Extension**](https://github.com/duckdb/duckdb-aws). This release marks the launch of the DuckDB AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
 
 ```sql
 CALL load_aws_credentials();
-SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
+SELECT * FROM 's3://some-bucket/that/requires/authentication.parquet';
 ```
 
-[See the documentation for more information]({% link docs/extensions/aws.md %}).
+[See the documentation for more information]({% link docs/stable/extensions/aws.md %}).
 
-[**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
+[**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb-iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
 ```sql
 SELECT count(*)
 FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 ```
 
-[See the documentation for more information]({% link docs/extensions/iceberg.md %}).
+[See the documentation for more information]({% link docs/stable/extensions/iceberg.md %}).
 
-[**Experimental Azure Extension**](https://github.com/duckdb/duckdb_azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
+[**Experimental Azure Extension**](https://github.com/duckdb/duckdb-azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 
 ```sql
 SET azure_storage_connection_string = '<your_connection_string>';
 SELECT * FROM 'azure://<my_container>/*.csv';
 ```
 
-[See the documentation for more information]({% link docs/extensions/azure.md %}).
-
+[See the documentation for more information]({% link docs/stable/extensions/azure.md %}).
 
 ## Clients
 
-[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API]({% link docs/api/python/relational_api.md %}) and executed using DuckDB's query engine.
+[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API]({% link docs/stable/clients/python/relational_api.md %}) and executed using DuckDB's query engine.
 
 ```python
 from duckdb.experimental.spark.sql import SparkSession as session

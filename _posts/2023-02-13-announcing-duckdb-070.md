@@ -15,15 +15,13 @@ The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been 
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
 
-<!--more-->
-
 ## What's in 0.7.0
 
 The new release contains many improvements to the JSON support, new SQL features, improvements to data ingestion and export, and other new features. Below is a summary of the most impactful changes, together with the linked PRs that implement the features.
 
 ## Data Ingestion/Export Improvements
 
-**JSON Ingestion.** This version introduces the [`read_json` and `read_json_auto`](https://github.com/duckdb/duckdb/pull/5992) methods. These can be used to ingest JSON files into a tabular format. Similar to `read_csv`, the `read_json` method requires a schema to be specified, while the `read_json_auto` automatically infers the schema of the JSON from the file using sampling. Both [new-line delimited JSON](http://ndjson.org) and regular JSON are supported.
+**JSON Ingestion.** This version introduces the [`read_json` and `read_json_auto`](https://github.com/duckdb/duckdb/pull/5992) methods. These can be used to ingest JSON files into a tabular format. Similar to `read_csv`, the `read_json` method requires a schema to be specified, while the `read_json_auto` automatically infers the schema of the JSON from the file using sampling. Both [new-line delimited JSON](https://github.com/ndjson/ndjson-spec) and regular JSON are supported.
 
 ```sql
 FROM 'data/json/with_list.json';
@@ -37,10 +35,10 @@ FROM 'data/json/with_list.json';
 | 4  | [Broadcast, News]                |
 | 5  | [Raising, Arizona]               |
 
-**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [Hive-partitioned Parquet and CSV files]({% link docs/extensions/httpfs/overview.md %}#hive-partitioning) for a while. After this release [DuckDB will also be able to *write* Hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
+**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [Hive-partitioned Parquet and CSV files]({% link docs/stable/extensions/httpfs/overview.md %}#hive-partitioning) for a while. After this release [DuckDB will also be able to *write* Hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
 
 ```sql
-COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
+COPY orders TO 'orders' (FORMAT parquet, PARTITION_BY (year, month));
 ```
 
 This will cause the Parquet files to be written in the following directory structure:
@@ -76,18 +74,18 @@ Note that currently the parallel writing is currently limited to non-insertion o
 
 ```sql
 ATTACH 'new_db.db';
-CREATE TABLE new_db.tbl(i INTEGER);
+CREATE TABLE new_db.tbl (i INTEGER);
 INSERT INTO new_db.tbl SELECT * FROM range(1000);
 DETACH new_db;
 ```
 
-See the [documentation for more information]({% link docs/sql/statements/attach.md %}).
+See the [documentation for more information]({% link docs/stable/sql/statements/attach.md %}).
 
-**SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
+**SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/duckdb-sqlite) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
-CREATE TABLE sqlite.tbl(i INTEGER);
+CREATE TABLE sqlite.tbl (i INTEGER);
 INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;
 ```
@@ -99,7 +97,7 @@ Using this, SQLite database files can be attached, queried and modified as if th
 **Upsert Support.** [Upsert support](https://github.com/duckdb/duckdb/pull/5866) is added with this release using the `ON CONFLICT` clause, as well as the `SQLite` compatible `INSERT OR REPLACE`/`INSERT OR IGNORE` syntax.
 
 ```sql
-CREATE TABLE movies(id INTEGER PRIMARY KEY, name VARCHAR);
+CREATE TABLE movies (id INTEGER PRIMARY KEY, name VARCHAR);
 INSERT INTO movies VALUES (1, 'A New Hope');
 FROM movies;
 ```
@@ -117,7 +115,7 @@ FROM movies;
 |----|--------------------|
 | 1  | The Phantom Menace |
 
-See the [documentation for more information]({% link docs/sql/statements/insert.md %}#on-conflict-clause).
+See the [documentation for more information]({% link docs/stable/sql/statements/insert.md %}#on-conflict-clause).
 
 **Lateral Joins.** Support for [lateral joins](https://github.com/duckdb/duckdb/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/duckdb/duckdb/pull/5485) of nested data.
 
@@ -275,7 +273,7 @@ duckdb.register_filesystem(filesystem('gcs'))
 data = duckdb.query("SELECT * FROM read_csv_auto('gcs:///bucket/file.csv')").fetchall()
 ```
 
-Have a look at the [guide]({% link docs/guides/python/filesystems.md %}) for more information
+Have a look at the [guide]({% link docs/stable/guides/python/filesystems.md %}) for more information
 
 ## Storage Improvements
 

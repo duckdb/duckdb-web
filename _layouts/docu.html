@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	{% if page.title == "DuckDB" %}
 	<title>{{ page.title }}</title>
 	{% else %}
@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/railroad.css?{{ site.data['hash'] }}">
 	{% endif %}
 
-	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">	
 	<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/images/favicon/favicon-16x16.png">
 	<link rel="manifest" href="{{ site.baseurl }}/images/favicon/site.webmanifest">
@@ -31,16 +31,8 @@
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
 	{% seo title=false %}
-	
-	<script>
-		var userPrefersDark = localStorage.getItem('mode') === 'dark';
-		var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-		if (userPrefersDark || systemPrefersDark) {
-			document.documentElement.classList.add('darkmode');
-			document.documentElement.classList.add('disable-transitions');
-		}
-	</script>
 
+	<script src="{{ site.baseurl }}/js/determine_color_scheme.js?{{ site.data['hash'] }}"></script>
 </head>
 
 {% capture issue_title %}Issue found on page '{{ page.title }}'{% endcapture %}
@@ -50,6 +42,18 @@
 
 Page URL: <https://duckdb.org{{ page.url }}>
 {% endcapture %}
+
+{% comment %} By default, we assume that the users is interested in the stable version. {% endcomment %}
+{% assign version_viewed = "stable" %}
+
+{% assign url_version_parts = page.url | split: "/docs/" %}
+{% assign url_version_parts = url_version_parts[1] | split: "/" %}
+{% comment %} Liquid doesn't have an is_digit-style function, so we check the first character for concrete values. {% endcomment %}
+{% assign c = url_version_parts[0] | slice: 0 %}
+{% if c == "0" or c == "1" or c == "2" %}
+	{% assign version_viewed = url_version_parts[0] %}
+{% endif %}
+
 
 <body class="documentation{% if page.body_class %} {{ page.body_class }} {% endif %}">
 
@@ -76,64 +80,39 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					</div>
 					
 					{% if page.url contains '/docs/' %}
-					
+					{% unless page.url contains '/docs/installation/' %}
+
 					{% include banner_docversion.html %}
-					
-			
-					
-					{% assign current_url = page.url | split:'/docs/' %}
-					{% if page.path contains "archive/" %}
-						{% for item in site.data.versions %}
-							{% if page.path contains item.version %}
-								{% assign versionviewed = item.version %}
-								{% assign pathtoreplace = "docs/archive/" | append: item.version | append: "/" %}
-								{% assign basename = page.path | replace: pathtoreplace , "" %}
-							{% endif %}
-						{% endfor %}
-					{% else %}
-						{% assign basename = page.path | replace: "docs/", "" %}
-					{% endif %}
-					
+
 					<div class="versionselect">
 						<div class="version">
-							<div><span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span><span class="arrow"></div>
+							{% if version_viewed == "stable" %}
+								{% assign version_viewed_pretty = site.currentduckdbversion | append: " (stable)" %}
+							{% else %}
+								{% assign version_viewed_pretty = version_viewed %}
+							{% endif %}
+
+							<div><span class="selectedversion" data-current="{{ version_viewed }}">{{ version_viewed_pretty }}</span><span class="arrow"></div>
 							<div class="versionsidebar">
 								<ul>
-								{% assign candidate_pages = "" | split: ','  %}
-								{% for site_page in site.pages %}
-									{% if site_page.name == page.name %}
-										{% assign candidate_pages = candidate_pages | push: site_page.path %}
-									{% endif %}
-								{% endfor %}
-								<!-- check the current page -->
-								{% assign filename = "docs/" | append: basename %}
-								{% assign exists = "false" %}
-								{% for page_name in candidate_pages %}
-									{% if page_name == filename %}
-										{% assign exists = true %}
-									{% endif %}
-								{% endfor %}
-							
-								{% if exists == true %}
-									<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>{{ site.currentshortduckdbversion }} (stable)</a></li>
-								{% endif %}
-								<!-- check the archived pages -->
-								{% for item in site.data.versions %}
-									{% assign filename = "docs/archive/" | append: item.version | append: "/" | append: basename %}
-									{% assign exists = "false" %}
-									{% for page_name in candidate_pages %}
-										{% if page_name == filename %}
-											{% assign exists = true %}
+									{% comment %} Remove the leading part, e.g., "docs/stable" or "docs/1.0" (version number) {% endcomment %}
+
+									{% comment %} Try the basename with different versions and see whether it exists {% endcomment %}
+									{% assign basename = page.path | regex_replace: "docs/(stable|\d*.\d*)/", "" %}
+
+									{% for item in site.data.versions %}
+										{% assign filename = "docs/" | append: item.version | append: "/" | append: basename %}
+										{% capture old_version_of_page_exists %}{% file_exists {{ filename }} %}{% endcapture %}
+										{% if old_version_of_page_exists == "true" %}
+											<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
 										{% endif %}
 									{% endfor %}
-									{% if exists == true %}
-										<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
-									{% endif %}
-								{% endfor %}
 								</ul>
 							</div>
 						</div>
 					</div>
+
+					{% endunless %}
 					{% endif %}
 					<button class="mode" data-mode="dark"></button>
 				</div>
@@ -194,7 +173,6 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				{% endif %}
 			</div>
 			
-			
 		</div>
 
 	</main>
@@ -208,20 +186,13 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="{{ site.baseurl }}/js/copy_button.js?{{ site.data['hash'] }}" defer></script>
 	<script src="{{ site.baseurl }}/js/noteboxes.js?{{ site.data['hash'] }}" defer></script>
 
-	{% assign startingUrlParts = startingUrl | split: "/"  %}
-	{% if startingUrlParts[1] == "archive" %}
-		{% capture version_url %}/{{ startingUrlParts[1] }}/{{ startingUrlParts[2] }}{% endcapture %}
-	{% else %}
-		{% assign version_url = "" %}
-	{% endif %}
-
 	{% if page.body_class == "installation" %}
 		<script src="{{ site.baseurl }}/js/js-yaml.min.js" defer></script>
-		<script src="{{ site.baseurl }}/js{{ version_url }}/installation.js?{{ site.data['hash'] }}" defer></script>
+		<script src="{{ site.baseurl }}/js/installation.js?{{ site.data['hash'] }}" defer></script>
 	{% endif %}
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-		<script src="{{ site.baseurl }}/js{{ version_url }}/railroad.js" defer></script>
-		<script src="{{ site.baseurl }}/js{{ version_url }}/{{ page.railroad }}" defer></script>
+		<script src="{{ site.baseurl }}/js/{{ version_viewed }}/railroad.js" defer></script>
+		<script src="{{ site.baseurl }}/js/{{ version_viewed }}/{{ page.railroad }}" defer></script>
 	{% endif %}
 
 </body>

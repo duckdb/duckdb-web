@@ -12,14 +12,14 @@ extension:
   language: Rust
   build: cargo
   license: MIT
-  excluded_platforms: "windows_amd64_rtools"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;linux_amd64_musl"
   requires_toolchains: "rust;python3"
   maintainers:
     - samansmink
 
 repo:
   github: duckdb/extension-template-rs
-  ref: f36762f8703f8db63d206c6376b0793f51c6c864
+  ref: 9ce399c26a57e3fbb6d10020dbb56552a7459f58
 
 docs:
   hello_world: |
@@ -28,10 +28,10 @@ docs:
     The quack extension is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/), and it's a great starting point to get started building DuckDB extensions in Rust.
 
 
-extension_star_count: 19
-extension_star_count_pretty: 19
-extension_download_count: 188
-extension_download_count_pretty: 188
+extension_star_count: 37
+extension_star_count_pretty: 37
+extension_download_count: 408
+extension_download_count_pretty: 408
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_quack.png'
 layout: community_extension_doc
 ---
@@ -57,11 +57,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| rusty_quack   | table         |             |         |         |
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| rusty_quack   | table         | NULL        | NULL    | []       |
 
-
-
----
 

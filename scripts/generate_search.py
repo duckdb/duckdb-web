@@ -9,7 +9,11 @@ base_dir = 'docs'
 skipped_files = [
     'docs/search.md',
     'docs/twitter_wall.md',
-    'docs/archive',
+    'docs/1.1',
+    'docs/1.0',
+    'docs/0.10',
+    'docs/0.9',
+    'docs/0.8',
     'docs/test',
 ]
 
@@ -181,7 +185,7 @@ def extract_functions(text, full_path):
         }
 
 
-function_dir = os.path.sep.join('docs/sql/functions'.split('/'))
+function_dir = os.path.sep.join('docs/stable/sql/functions'.split('/'))
 files = os.listdir(function_dir)
 files.sort()
 for file in files:

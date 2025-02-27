@@ -157,7 +157,8 @@ a, a:active, a:focus, button, button:active, button:focus {
   outline: none;
 }
 
-p a{
+p a,
+li a{
 	color: inherit;
 	text-decoration: underline;
 	-webkit-transition: color .3s;
@@ -184,67 +185,34 @@ strong{
 }
 
 /** External Links in Fließtext **/
-/*
-a.externallink:hover{
-	background-color: $duckDBblue!important;
-}
-a.externallink:hover::after{
-	opacity: 1;
-	-webkit-transform: translate(0px, 0px);
-		-ms-transform: translate(0px, 0px);
-			transform: translate(0px, 0px);
-}
-a.externallink::after {
-  content: " \2197";
-  font-family: "DuckDB-Symbol";
-  position: absolute;
-  margin-left: -1px;
-  font-size: 10px;
-  opacity: 0;
-  -webkit-transform: translate(-10px, 5px);
-	  -ms-transform: translate(-10px, 5px);
-		  transform: translate(-10px, 5px);
-  -webkit-transition: all .3s;
-  -o-transition: all .3s;
-  transition: all .3s;
-}
-a.externallink{
-	margin-right: 3px;
-}
-
-a.externallink:hover{
-	cursor: url("data:image/svg+xml,%3Csvg version='1.1' id='Ebene_1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='17' height='17' viewBox='0 0 28.3 28.3' style='enable-background:new 0 0 28.3 28.3' xml:space='preserve'%3E%3Cstyle%3E.st0%7Bfill:%23fff%7D%3C/style%3E%3Cpath d='M1.2 27.2V4.5h10.9v3.9h-7v14.9h14.8v-7h3.9v10.9z'/%3E%3Cpath class='st0' d='M11.5 5.2v2.6h-7v16.1h16.1v-7h2.6v9.6H1.8V5.2h9.7m1.2-1.3H.6V27.7H24.4V15.6h-5v7H5.7V9h7V3.9z'/%3E%3Cg%3E%3Cpath d='m11.6 14 9-9h-5.9V1.2h12.5v12.4h-3.9V7.8l-9 8.9z'/%3E%3Cpath class='st0' d='M26.6 1.8V13H24V6.3l-9.6 9.6-1.9-1.9 9.6-9.6h-6.8V1.8h11.3M27.8.5H14.1v5H19L11.5 13l-.8 1 .9.9 1.9 1.9.9.9.9-.9 7.5-7.5v4.9h5V.5z'/%3E%3C/g%3E%3C/svg%3E") 2 2, alias;
-	background-color: $duckDBblue!important;
+#main_content_wrap a.externallink,
+.singleentry .content a.externallink{
+	display: inline;
+	word-break: break-word;
+	&::after{
+		content: "";
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M11.8 0H6.613v1.514h2.603L3.804 6.926l1.07 1.07 5.412-5.412v2.603H11.8V0ZM5.922 1.286H0V11.8h10.33V5.878H8.815v4.408H1.514V2.8h4.408V1.286Z' clip-rule='evenodd'/%3E%3C/svg%3E");
+		display: inline-block;
+		-webkit-transition: all .3s;
+		-o-transition: all .3s;
+		transition: all .3s;
+		width: .80em;
+		height: .80em;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;
+		margin-left: .25em;
+		margin-right: 1px;
+		transform: translateY(.1em);
+	}
+	&:hover::after{
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath fill='%234396D7' fill-rule='evenodd' d='M11.8 0H6.613v1.514h2.603L3.804 6.926l1.07 1.07 5.412-5.412v2.603H11.8V0ZM5.922 1.286H0V11.8h10.33V5.878H8.815v4.408H1.514V2.8h4.408V1.286Z' clip-rule='evenodd'/%3E%3C/svg%3E");
+	}
 }
 
 
-.external a::after{
-	content: "\E000";
-	font-family: "DuckDB-Symbol";
-	font-size: 90%;
-	top: -1px;
-	-webkit-transform: translateX(1px);
-		-ms-transform: translateX(1px);
-			transform: translateX(1px);
-	display: inline-block;
-	-webkit-transition: all .3s;
-	-o-transition: all .3s;
-	transition: all .3s;
-	opacity: 0;
-	color: white;
-	position: absolute;
-}
-.external a:hover::after{
-	-webkit-transform: translateX(5px);
-		-ms-transform: translateX(5px);
-			transform: translateX(5px);
-	opacity: 1;
-	color: $duckDByellow;
-}
-.external a:hover{
-	background-color: transparent!important;
-}
-*/
+
+
 
 .duckdbsymbol{
 	font-family: "DuckDB-Symbol";
@@ -540,7 +508,7 @@ header .headerline{
 			gap: 15px;
 			button.mode{
 				border-radius: 10px;
-				border: 1px solid var(--menu-topmenu-searchbar-border-color, #E6E6E6);
+				border: 1px solid var(--menu-dropdown-border-color, #333);
 				background-color: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.60));
 				background-repeat: no-repeat;
 				background-position: center center;
@@ -569,7 +537,7 @@ header .headerline{
 				}
 			}
 			.banner{
-				border: 1px solid var(--menu-topmenu-searchbar-border-color, #E6E6E6);
+				border: 1px solid var(--menu-dropdown-border-color, #333);
 				border-radius: 10px;
 				background: transparent;
 				padding: 8px;
@@ -1143,6 +1111,7 @@ section.upcoming-events,
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='none' viewBox='0 0 15 15'%3E%3Cpath stroke='%23727272' stroke-width='1.5' d='M10.073 9.692 14 13.62'/%3E%3Ccircle cx='5.923' cy='6.303' r='5.173' stroke='%23727272' stroke-width='1.5'/%3E%3C/svg%3E");
 		background-repeat: no-repeat;
 		background-position: 18px 18px;
+		color: var(--main-text-primary-color, #F2F2F2);
 		&:focus{
 			outline: var(--interactive-filter-selected-background-color, #D9D9D9);
 		}
@@ -1365,6 +1334,34 @@ body.installation{
 			a.externallink{
 				line-height: 1.6;
 			}
+		}
+	}
+	.sha512_btn{
+		border-radius: 40px;
+		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+		background: var(--main-codebox-sub-background-color, rgba(230, 230, 230, 0.60));
+		cursor: pointer;
+		font-family: $fontMono;
+		padding: 3px 8px;
+		font-weight: 600;
+		font-size: 11px;
+		vertical-align: bottom;
+		display: inline-block;
+		margin-top: 10px;
+		&.active{
+			color: var(--doc-menu-info-deprecated-border-color, #A899FF);
+		}
+	}
+	.sha512.output{
+		padding-top: 0;
+		display: none;
+		.result{
+			word-break: break-all;
+		}
+	}
+	.link.output{
+		.result a{
+			display: block;
 		}
 	}
 	.note.output{

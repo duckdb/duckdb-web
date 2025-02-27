@@ -6,7 +6,8 @@ excerpt: |
   Linearization/Delinearization, Z-Order, Hilbert and Morton Curves
 
 docs:
-  extended_description: "This `lindel` extension adds functions for the linearization\
+  extended_description:
+    "This `lindel` extension adds functions for the linearization\
     \ and\ndelinearization of numeric arrays in DuckDB. It allows you to order\nmulti-dimensional\
     \ data using space-filling curves.\n\n## What is linearization?\n\n[Linearization](https://en.wikipedia.org/wiki/Linearization)\
     \ maps multi-dimensional data into a one-dimensional sequence while [preserving\
@@ -64,7 +65,8 @@ docs:
     \ |\n| `UBIGINT`    | 2 | 1: `UBIGINT`<br/>2: `UHUGEINT` |\n| `FLOAT`      | 4\
     \ | 1: `UINTEGER`<br/>2: `UBIGINT`<br/>3-4: `UHUGEINT` |\n| `DOUBLE`     | 2 |\
     \ 1: `UBIGINT`<br/>2: `UHUGEINT` |\n"
-  hello_world: "WITH elements AS (\n  SELECT * AS id FROM range(3)\n)\nSELECT\n  a.id\
+  hello_world:
+    "WITH elements AS (\n  SELECT * AS id FROM range(3)\n)\nSELECT\n  a.id\
     \ AS a,\n  b.id AS b,\n  hilbert_encode([a.id, b.id]::tinyint[2]) AS hilbert,\n\
     \  morton_encode([a.id, b.id]::tinyint[2]) AS morton\nFROM\n  elements AS a CROSS\
     \ JOIN elements AS b;\n┌───────┬───────┬─────────┬────────┐\n│   a   │   b   │\
@@ -109,18 +111,18 @@ extension:
   language: C++
   license: Apache-2.0
   maintainers:
-  - rustyconover
+    - rustyconover
   name: lindel
   requires_toolchains: rust
-  version: 1.0.0
+  version: 1.0.1
 repo:
   github: rustyconover/duckdb-lindel-extension
-  ref: a45b2840e748f4aa0552c599b48c19eba53bdc27
+  ref: 10f1dbe43e100e6800e2ddfbe40a54bea3d7ea7e
 
-extension_star_count: 36
-extension_star_count_pretty: 36
-extension_download_count: 216
-extension_download_count_pretty: 216
+extension_star_count: 39
+extension_star_count_pretty: 39
+extension_download_count: 423
+extension_download_count_pretty: 423
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---
@@ -146,14 +148,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type |                           description                           | comment |                           example                           |
-|----------------|---------------|-----------------------------------------------------------------|---------|-------------------------------------------------------------|
-| hilbert_encode | scalar        | Encode an array of values using the Hilbert space filling curve |         | select hilbert_encode([43, 3]::integer[2]);                 |
-| hilbert_decode | scalar        | Decode a Hilbert encoded set of values                          |         | select hilbert_decode(7::uint16, 2, false, true) as values; |
-| morton_encode  | scalar        | Encode an array of values using Morton encoding                 |         | select morton_encode([43, 3]::integer[2]);                  |
-| morton_decode  | scalar        | Decode an array of values using Morton encoding                 |         | select morton_decode(7::uint16, 2, false, true) as values;  |
+| function_name  | function_type |                           description                           | comment |                           examples                            |
+|----------------|---------------|-----------------------------------------------------------------|---------|---------------------------------------------------------------|
+| hilbert_encode | scalar        | Encode an array of values using the Hilbert space filling curve | NULL    | [select hilbert_encode([43, 3]::integer[2]);]                 |
+| hilbert_decode | scalar        | Decode a Hilbert encoded set of values                          | NULL    | [select hilbert_decode(7::uint16, 2, false, true) as values;] |
+| morton_encode  | scalar        | Encode an array of values using Morton encoding                 | NULL    | [select morton_encode([43, 3]::integer[2]);]                  |
+| morton_decode  | scalar        | Decode an array of values using Morton encoding                 | NULL    | [select morton_decode(7::uint16, 2, false, true) as values;]  |
 
-
-
----
 

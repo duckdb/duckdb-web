@@ -11,7 +11,7 @@ extension:
   version: 0.1.0
   language: C++
   build: cmake
-  excluded_platforms: windows_amd64_rtools
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
   license: MIT
   maintainers:
     - freddie-freeloader
@@ -81,10 +81,10 @@ docs:
     }
     ```
 
-extension_star_count: 44
-extension_star_count_pretty: 44
-extension_download_count: 207
-extension_download_count_pretty: 207
+extension_star_count: 47
+extension_star_count_pretty: 47
+extension_download_count: 423
+extension_download_count_pretty: 423
 image: '/images/community_extensions/social_preview/preview_community_extension_sheetreader.png'
 layout: community_extension_doc
 ---
@@ -110,11 +110,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| sheetreader   | table         |             |         |         |
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| sheetreader   | table         | NULL        | NULL    | []       |
 
-
-
----
 

@@ -65,7 +65,6 @@ SELECT
      substr(intro, starship_loc + len('starship') + 1) AS trimmed_intro;
 ```
 
-<div class="narrow_table"></div>
 
 |                        intro                        | starship_loc | trimmed_intro |
 |:---|:---|:---|
@@ -77,7 +76,7 @@ Databases typically prefer strictness in column definitions and flexibility in t
 
 No longer do you need to know all of your column names up front! DuckDB can select and even modify columns based on regular expression pattern matching, `EXCLUDE` or `REPLACE` modifiers, and even lambda functions (see the [section on lambda functions below](#list-lambda-functions) for details!).
 
-Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension]({% link docs/extensions/httpfs/overview.md %}), we can query a CSV dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
+Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}), we can query a CSV dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
 
 ```sql
 INSTALL httpfs;
@@ -90,7 +89,6 @@ CREATE TABLE trek_facts AS
 DESCRIBE trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 |               column_name               | column_type | null | key  | default | extra |
 |:---|:---|:---|:---|:---|:---|
@@ -124,7 +122,6 @@ SELECT
 FROM trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 | episode_num | cnt_warp_speed_orders | highest_warp_speed_issued |
 |:---|:---|:---|
@@ -145,7 +142,6 @@ SELECT
 FROM trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 | max(trek_facts.cnt_warp_speed_orders) | max(trek_facts.highest_warp_speed_issued) |
 |:---|:---|
@@ -165,7 +161,6 @@ WHERE
     -- highest_warp_speed_issued >= 2
 ```
 
-<div class="narrow_table"></div>
 
 | episode_num | cnt_warp_speed_orders | highest_warp_speed_issued |
 |:---|:---|:---|
@@ -184,7 +179,6 @@ SELECT
 FROM trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 | max(trek_facts.<br>episode_num) | max(trek_facts.<br>aired_date) | max(trek_facts.<br>cnt_kirk_hookups) | ... | max(trek_facts.<br>bool_enterprise_saved_the_day) |
 |:---|:---|:---|:---|:---|
@@ -198,7 +192,6 @@ SELECT
 FROM trek_facts;
 ```
 
-<div class="narrow_table"></div>
 
 | max(trek_facts.<br>season_num) | max(trek_facts.<br>episode_num) | max(aired_date := <br>CAST(aired_date AS TIMESTAMP)) | ... | max(trek_facts.<br>bool_enterprise_saved_the_day) |
 |:---|:---|:---|:---|:---|
@@ -206,7 +199,7 @@ FROM trek_facts;
 
 ### `COLUMNS()` with Lambda Functions
 
-The most flexible way to query a dynamic set of columns is through a [lambda function]({% link docs/sql/functions/nested.md %}#lambda-functions). This allows for any matching criteria to be applied to the names of the columns, not just regular expressions. See more details about lambda functions below. 
+The most flexible way to query a dynamic set of columns is through a [lambda function]({% link docs/stable/sql/functions/nested.md %}#lambda-functions). This allows for any matching criteria to be applied to the names of the columns, not just regular expressions. See more details about lambda functions below. 
 
 For example, if using the `LIKE` syntax is more comfortable, we can select columns matching a `LIKE` pattern rather than with a regular expression.
 
@@ -219,7 +212,6 @@ WHERE
     COLUMNS(col -> col LIKE '%warp%') >= 2;
 ```
 
-<div class="narrow_table"></div>
 
 | episode_num | cnt_warp_speed_orders | highest_warp_speed_issued |
 |:---|:---|:---|
@@ -244,8 +236,6 @@ SELECT
      starfleet[10].model AS starship 
 FROM 'https://raw.githubusercontent.com/vlad-saling/star-trek-ipsum/master/src/content/content.json';
 ```
-
-<div class="narrow_table"></div>
 
 |                                                                            starship                                                                            |
 |:---|
@@ -293,7 +283,6 @@ SELECT
           .concat('.') AS im_not_messing_around_number_one;
 ```
 
-<div class="narrow_table"></div>
 
 | im_not_messing_around_number_one |
 |:---|
@@ -312,7 +301,6 @@ SELECT
      '.') AS oof;
 ```
 
-<div class="narrow_table"></div>
 
 |      oof      |
 |:---|
@@ -336,14 +324,13 @@ CREATE TABLE proverbs AS
 FROM proverbs;
 ```
 
-<div class="narrow_table"></div>
 
 |               klingon_proverb                |      borg_proverb       |
 |:---|:---|
 | Revenge is a dish best served cold           | NULL                    |
 | If winning is not important, why keep score? | You will be assimilated |
 
-This approach has additional benefits. As seen above, not only can tables with different column orders be combined, but so can tables with different numbers of columns entirely. This is helpful as schemas migrate, and is particularly useful for DuckDB’s [multi-file reading capabilities]({% link docs/data/multiple_files/combining_schemas.md %}#union-by-name).
+This approach has additional benefits. As seen above, not only can tables with different column orders be combined, but so can tables with different numbers of columns entirely. This is helpful as schemas migrate, and is particularly useful for DuckDB’s [multi-file reading capabilities]({% link docs/stable/data/multiple_files/combining_schemas.md %}#union-by-name).
 
 ## Insert by Name
 
@@ -358,7 +345,6 @@ INSERT INTO proverbs BY NAME
 SELECT * FROM proverbs;
 ```
 
-<div class="narrow_table"></div>
 
 |               klingon_proverb                |      borg_proverb       |
 |:---|:---|
@@ -386,7 +372,6 @@ INSERT INTO purchases
 FROM purchases;
 ```
 
-<div class="narrow_table"></div>
 
 |       item       | year | count |
 |:---|:---|:---|
@@ -409,7 +394,6 @@ CREATE TABLE pivoted_purchases AS
 FROM pivoted_purchases;
 ```
 
-<div class="narrow_table"></div>
 
 |       item       | 2155 | 2156  | 2157  |
 |:---|:---|:---|:---|
@@ -430,7 +414,6 @@ UNPIVOT pivoted_purchases
           VALUE count;
 ```
 
-<div class="narrow_table"></div>
 
 |       item       | year | count |
 |:---|:---|:---|
@@ -441,7 +424,7 @@ UNPIVOT pivoted_purchases
 | photon torpedoes | 2156 | 17899 |
 | photon torpedoes | 2157 | 87492 |
 
-More examples are included as a part of our [DuckDB 0.8.0 announcement post]({% post_url 2023-05-17-announcing-duckdb-080 %}#new-sql-features), and the [`PIVOT`]({% link docs/sql/statements/pivot.md %}) and [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) documentation pages highlight more complex queries.
+More examples are included as a part of our [DuckDB 0.8.0 announcement post]({% post_url 2023-05-17-announcing-duckdb-080 %}#new-sql-features), and the [`PIVOT`]({% link docs/stable/sql/statements/pivot.md %}) and [`UNPIVOT`]({% link docs/stable/sql/statements/unpivot.md %}) documentation pages highlight more complex queries.
 
 Stay tuned for a future post to cover what is happening behind the scenes!
 
@@ -457,7 +440,6 @@ SELECT
           .list_transform(x -> x.string_split(' ')[1]) AS short_name;
 ```
 
-<div class="narrow_table"></div>
 
 |            ship_name             |
 |:---|
@@ -471,7 +453,6 @@ SELECT
           .list_filter(x -> x.contains('1701')) AS the_original;
 ```
 
-<div class="narrow_table"></div>
 
 |     the_original      |
 |:---|
@@ -490,7 +471,6 @@ SELECT
      IF x.contains('1701')] AS ready_to_boldly_go;
 ```
 
-<div class="narrow_table"></div>
 
 | ready_to_boldly_go |
 |:---|
@@ -509,7 +489,6 @@ SELECT
      casualties.*;
 ```
 
-<div class="narrow_table"></div>
 
 | gold_casualties | blue_casualties | red_casualties |
 |:---|:---|:---|
@@ -529,7 +508,6 @@ FROM officers
 SELECT officers;
 ```
 
-<div class="narrow_table"></div>
 
 |                   officers                   |
 |:---|
@@ -546,15 +524,14 @@ By default DuckDB will seek the common denominator of data types when combining 
 
 ```sql
 SELECT 'The Motion Picture' AS movie UNION ALL 
-SELECT 2 UNION ALL 
-SELECT 3 UNION ALL 
-SELECT 4 UNION ALL 
-SELECT 5 UNION ALL 
-SELECT 6 UNION ALL 
+SELECT 2 UNION ALL
+SELECT 3 UNION ALL
+SELECT 4 UNION ALL
+SELECT 5 UNION ALL
+SELECT 6 UNION ALL
 SELECT 'First Contact';
 ```
 
-<div class="narrow_table"></div>
 
 |       movie        |
 |:---|
@@ -567,6 +544,7 @@ SELECT 'First Contact';
 | 2                  |
 
 However, if a `UNION` type is used, each individual row retains its original data type. A `UNION` is defined using key-value pairs with the key as a name and the value as the data type. This also allows the specific data types to be pulled out as individual columns:
+
 ```sql
 CREATE TABLE movies (
      movie UNION(num INTEGER, name VARCHAR)
@@ -582,7 +560,6 @@ SELECT
      movie.num;
 ```
 
-<div class="narrow_table"></div>
 
 |       movie        | type |        name        | num |
 |:---|:---|:---|:---|
@@ -602,7 +579,7 @@ DuckDB takes a nod from the [`describe` function in Pandas](https://pandas.pydat
 
 Have a look at the [correlated subqueries post]({% post_url 2023-05-26-correlated-subqueries-in-sql %}) to see how to use subqueries that refer to each others’ columns. DuckDB’s advanced optimizer improves correlated subquery performance by orders of magnitude, allowing for queries to be expressed as naturally as possible. What was once an anti-pattern for performance reasons can now be used freely!
 
-DuckDB has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DuckDB also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation]({% link docs/sql/query_syntax/from.md %}) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
+DuckDB has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DuckDB also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation]({% link docs/stable/sql/query_syntax/from.md %}) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
 
 ## Summary and Future Work
 

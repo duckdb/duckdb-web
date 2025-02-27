@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckpgq
   description: Extension that adds support for SQL/PGQ and graph algorithms
-  version: 0.1.0
+  version: 0.2.2
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: cwida/duckpgq-extension
-  ref: 5dcec704050b15b12a7894172089dd4a79ca1435
+  ref: ef2409adc75c6df67ef3d457abacc06d84cb9740
 
 docs:
   hello_world: |
@@ -28,11 +28,11 @@ docs:
       VERTEX TABLES (
         Person
       )
-    EDGE TABLES (
-      Person_knows_person 	SOURCE KEY (Person1Id) REFERENCES Person (id)
+      EDGE TABLES (
+        Person_knows_person SOURCE KEY (Person1Id) REFERENCES Person (id)
                             DESTINATION KEY (Person2Id) REFERENCES Person (id)
-      LABEL knows
-    );
+        LABEL knows
+      );
 
     FROM GRAPH_TABLE (snb
       MATCH (a:Person)-[k:knows]->(b:Person)
@@ -55,15 +55,15 @@ docs:
     
     
     It introduces visual graph pattern matching and a more concise syntax for path-finding.
-    For more information, please see the [DuckPGQ documentation](https://www.notion.so/duckpgq/b8ac652667964f958bfada1c3e53f1bb?v=3b47a8d44bdf4e0c8b503bf23f1b76f2).
+    For more information, please see the [DuckPGQ documentation](https://duckpgq.org).
     
 
-    *Disclaimer*: As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
+    *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 88
-extension_star_count_pretty: 88
-extension_download_count: 2200
-extension_download_count_pretty: 2.2k
+extension_star_count: 156
+extension_star_count_pretty: 156
+extension_download_count: 3543
+extension_download_count_pretty: 3.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -89,38 +89,36 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name         | function_type | description | comment | example |
-|------------------------------|---------------|-------------|---------|---------|
-| cheapest_path_length         | scalar        |             |         |         |
-| create_csr_edge              | scalar        |             |         |         |
-| create_csr_vertex            | scalar        |             |         |         |
-| create_property_graph        | table         |             |         |         |
-| csr_get_w_type               | scalar        |             |         |         |
-| delete_csr                   | scalar        |             |         |         |
-| describe_property_graph      | table         |             |         |         |
-| drop_property_graph          | table         |             |         |         |
-| duckpgq_match                | table         |             |         |         |
-| get_csr_e                    | table         |             |         |         |
-| get_csr_ptr                  | table         |             |         |         |
-| get_csr_v                    | table         |             |         |         |
-| get_csr_w                    | table         |             |         |         |
-| get_pg_ecolnames             | table         |             |         |         |
-| get_pg_etablenames           | table         |             |         |         |
-| get_pg_vcolnames             | table         |             |         |         |
-| get_pg_vtablenames           | table         |             |         |         |
-| iterativelength              | scalar        |             |         |         |
-| iterativelength2             | scalar        |             |         |         |
-| iterativelengthbidirectional | scalar        |             |         |         |
-| local_clustering_coefficient | scalar        |             |         |         |
-| local_clustering_coefficient | table         |             |         |         |
-| pagerank                     | scalar        |             |         |         |
-| pagerank                     | table         |             |         |         |
-| reachability                 | scalar        |             |         |         |
-| shortestpath                 | scalar        |             |         |         |
-| weakly_connected_component   | scalar        |             |         |         |
-| weakly_connected_component   | table         |             |         |         |
+|        function_name         | function_type | description | comment | examples |
+|------------------------------|---------------|-------------|---------|----------|
+| cheapest_path_length         | scalar        | NULL        | NULL    | []       |
+| create_csr_edge              | scalar        | NULL        | NULL    | []       |
+| create_csr_vertex            | scalar        | NULL        | NULL    | []       |
+| create_property_graph        | table         | NULL        | NULL    | []       |
+| csr_get_w_type               | scalar        | NULL        | NULL    | []       |
+| delete_csr                   | scalar        | NULL        | NULL    | []       |
+| describe_property_graph      | table         | NULL        | NULL    | []       |
+| drop_property_graph          | table         | NULL        | NULL    | []       |
+| duckpgq_match                | table         | NULL        | NULL    | []       |
+| get_csr_e                    | table         | NULL        | NULL    | []       |
+| get_csr_ptr                  | table         | NULL        | NULL    | []       |
+| get_csr_v                    | table         | NULL        | NULL    | []       |
+| get_csr_w                    | table         | NULL        | NULL    | []       |
+| get_pg_ecolnames             | table         | NULL        | NULL    | []       |
+| get_pg_etablenames           | table         | NULL        | NULL    | []       |
+| get_pg_vcolnames             | table         | NULL        | NULL    | []       |
+| get_pg_vtablenames           | table         | NULL        | NULL    | []       |
+| iterativelength              | scalar        | NULL        | NULL    | []       |
+| iterativelength2             | scalar        | NULL        | NULL    | []       |
+| iterativelengthbidirectional | scalar        | NULL        | NULL    | []       |
+| local_clustering_coefficient | scalar        | NULL        | NULL    | []       |
+| local_clustering_coefficient | table         | NULL        | NULL    | []       |
+| pagerank                     | scalar        | NULL        | NULL    | []       |
+| pagerank                     | table         | NULL        | NULL    | []       |
+| reachability                 | scalar        | NULL        | NULL    | []       |
+| shortestpath                 | scalar        | NULL        | NULL    | []       |
+| show_property_graphs         | pragma        | NULL        | NULL    | []       |
+| weakly_connected_component   | scalar        | NULL        | NULL    | []       |
+| weakly_connected_component   | table         | NULL        | NULL    | []       |
 
-
-
----
 

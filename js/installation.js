@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	let installationData = [];
 
-	$.get('/data/installation-data-1.1.yml', function(data) {
+	$.get('/data/installation-data-1.2.yml', function(data) {
 		// console.log(data)
 		installationData = jsyaml.load(data);
 		evaluation();
@@ -46,7 +46,7 @@ $(document).ready(function(){
 		markup = markup.replace( 'npm install', '<span class="nb">npm install</span>' );
 		markup = markup.replace( 'pip install', '<span class="nb">pip install</span>' );
 		markup = markup.replace( 'winget install', '<span class="nb">winget install</span>' );
-		markup = markup.replace( /([^."/])duckdb([^_])([^-])/, '$1<span class="nb">duckdb</span>$2$3' );
+		markup = markup.replace( /([^-._'"/])duckdb([^-._'"/])/, '$1<span class="nb">duckdb</span>$2' );
 		markup = markup.replace( /^duckdb$/, '<span class="nb">duckdb</span>' );
 		markup = markup.replace( 'go get', '<span class="nb">go get</span>' );
 		markup = markup.replace( '--upgrade', '<span class="nt">--upgrade</span>' );
@@ -138,28 +138,8 @@ $(document).ready(function(){
 		}
 		
 	
+
 		
-		// Check if we have multiple options for architecture
-		var hasArchitectures = false;
-		for ( var i in configurables ) {
-			if ( configurables[i].architecture != 'universal' ) {
-				hasArchitectures = true;
-				$( '.architecture .info' ).hide();
-			} else {
-				$( '.architecture .info' ).show();
-			}
-		}
-	
-		if ( ! hasArchitectures ) {
-			sectionsToHide.push( 'architecture' );
-		} else {
-			configurables = configurables.filter( function ( item ) {
-				return item.architecture.toLowerCase() == architecture.toLowerCase();
-			} );
-		}
-	
-		
-		hideSections( sectionsToHide.join(',') );
 	
 		// Check if we have multiple download_method across different configurables
 		var download_methods = configurables.map( function ( item ) {
@@ -185,11 +165,12 @@ $(document).ready(function(){
 		$( '.download_method li' ).addClass( 'disabled-choice' );
 	
 		// Add disabled-choice to all applicable download_methods
-		$( '.download_method li' ).each( function() {
-			if ( download_methods.includes( $( this ).text().toLowerCase() ) ) {
-				$(this).removeClass( 'disabled-choice' );
+		$('.download_method li').each(function() {
+			const liText = $(this).text().toLowerCase().trim(); 
+			if ( download_methods.includes(liText) ) {
+				$(this).removeClass('disabled-choice');
 			}
-		} );
+		});
 	
 		$( '.download_method li.disabled-choice' ).removeClass( 'selected' );
 	
@@ -204,7 +185,6 @@ $(document).ready(function(){
 			configurables = configurables.filter( function ( item ) {
 				return item.download_method.toLowerCase() == download_method.toLowerCase();
 			});
-	
 			configurablesMinusArchitecture = configurablesMinusArchitecture.filter( function ( item ) {
 				return item.download_method.toLowerCase() == download_method.toLowerCase();
 			});
@@ -232,6 +212,33 @@ $(document).ready(function(){
 			}
 			
 		}
+		
+		// Check architecture options and if current selection is universal
+		const allAreUniversal = configurables.length > 0 && configurables.every(item => item.architecture.toLowerCase() === 'universal');
+		if (allAreUniversal) {
+			
+			sectionsToHide.push('architecture');
+			$('.architecture .info').show();
+			
+		} else {
+			
+			configurables = configurables.filter(function(item) {
+				return (
+				  item.architecture.toLowerCase() === architecture.toLowerCase()
+				  || item.architecture.toLowerCase() === 'universal'
+				);
+				
+			});
+			
+			$('.architecture .info').hide();
+		}
+		
+		hideSections( sectionsToHide.join(',') );
+		
+		// Check if SHA512 is available
+		function sha512Exists(config) {
+		  return config.sha_512;
+		}
 	
 		// If platform.select has .hide class, then show .info in it, otherwise hide .info
 		if ( $( '.yourselection .platform.select.hide').length > 0 ) {
@@ -255,11 +262,21 @@ $(document).ready(function(){
 			$( '.example.output' ).hide();
 		}
 	
-		if ( configurables[0].link ) {
-			$( '.link.output' ).show()
-			$( '.link.output .result' ).html( '<a href="' + configurables[0].link + '">' + configurables[0].link + '</a>' );
+		if (configurables[0].link) {
+			$('.link.output').show();
+			let linkHtml = '<a href="' + configurables[0].link + '">' + configurables[0].link + '</a>';
+			if (sha512Exists(configurables[0])) {
+				linkHtml += ' <span class="sha512_btn">SHA-512</span>';
+			}
+			$('.link.output .result').html(linkHtml);
 		} else {
-			$( '.link.output' ).hide();
+			$('.link.output').hide();
+		}
+		
+		if (sha512Exists(configurables[0])) {
+			$('.sha512.output .result').html(configurables[0].sha_512);
+		} else {
+			$('.sha512.output').hide();
 		}
 	
 		if ( configurables[0].note ) {
@@ -268,6 +285,8 @@ $(document).ready(function(){
 		} else {
 			$( '.note.output' ).hide();
 		}
+		
+		
 	}
 	
 	evaluation();
@@ -334,4 +353,14 @@ $(document).ready(function(){
 		evaluation();
 	}, 100);
 
+});
+
+$(document).on('click', '.sha512_btn', function(e) {
+	e.preventDefault();
+	$(this).toggleClass('active');
+	if ($(this).hasClass('active')) {
+		$('.sha512.output').css('display', 'flex');
+	} else {
+		$('.sha512.output').hide();
+	}
 });

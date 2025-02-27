@@ -85,6 +85,7 @@ The `scalar_subquery_error_on_multiple_rows` setting can be set to `false` to re
 SET scalar_subquery_error_on_multiple_rows = false;
 SELECT (SELECT unnest(range(10))) AS result;
 ```
+
 ```text
 ┌────────┐
 │ result │
@@ -147,13 +148,13 @@ SELECT * FROM read_csv(getvariable('list_of_files'), filename := true);
 
 ### Unpacked Columns
 
-The [`COLUMNS` expression]({% link docs/sql/expressions/star.md %}#columns-expression) allows users to write dynamic SQL over a set of columns without needing to explicitly list the columns in the SQL string. Instead, the columns can be selected through either a regex or computed with a [lambda function]({% post_url 2024-08-08-friendly-lists-and-their-buddies-the-lambdas %}).
+The [`COLUMNS` expression]({% link docs/stable/sql/expressions/star.md %}#columns-expression) allows users to write dynamic SQL over a set of columns without needing to explicitly list the columns in the SQL string. Instead, the columns can be selected through either a regex or computed with a [lambda function]({% post_url 2024-08-08-friendly-lists-and-their-buddies-the-lambdas %}).
 
 This release expands this capability by [allowing the `COLUMNS` expression to be *unpacked* into a function](https://github.com/duckdb/duckdb/pull/11872).
 This is especially useful when combined with nested functions like `struct_pack` or `list_value`.
 
 ```sql
-CREATE TABLE many_measurements(
+CREATE TABLE many_measurements (
     id INTEGER, m1 INTEGER, m2 INTEGER, m3 INTEGER
 );
 INSERT INTO many_measurements VALUES (1, 10, 100, 20);
@@ -178,7 +179,7 @@ The [`query` and `query_table` functions](https://github.com/duckdb/duckdb/pull/
 These functions are conceptually simple, but enable powerful and more dynamic SQL. For example, they allow passing in a table name as a prepared statement parameter:
 
 ```sql
-CREATE TABLE my_table(i INTEGER);
+CREATE TABLE my_table (i INTEGER);
 INSERT INTO my_table VALUES (42);
 
 PREPARE select_from_table AS SELECT * FROM query_table($1);
@@ -233,9 +234,18 @@ LIMIT 3;
 This release adds a *very cool* optimization for joins: DuckDB now [automatically creates filters](https://github.com/duckdb/duckdb/pull/12908) for the larger table in the join during execution. Say we are joining two tables `A` and `B`. `A` has 100 rows, and `B` has one million rows. We are joining on a shared key `i`. If there were any filter on `i`, DuckDB would already push that filter into the scan, greatly reducing the cost to complete the query. But we are now filtering on another column from `A`, namely `j`:
 
 ```sql
-CREATE TABLE A AS SELECT range i, range j FROM range(100);
-CREATE TABLE B AS SELECT a.range i FROM range(100) a, range(10_000) b;
-SELECT count(*) FROM A JOIN B USING (i) WHERE j > 90;
+CREATE TABLE A AS
+    SELECT range AS i, range AS j
+    FROM range(100);
+
+CREATE TABLE B AS
+    SELECT t1.range AS i
+    FROM range(100) t1, range(10_000) t2;
+
+SELECT count(*)
+FROM A
+JOIN B
+USING (i) WHERE j > 90;
 ```
 
 DuckDB will execute this join by building a hash table on the smaller table `A`, and then probe said hash table with the contents of `B`. DuckDB will now observe the values of `i` during construction of the hash table on `A`. It will then create a min-max range filter of those values of `i` and then *automatically* apply that filter to the values of `i` in `B`! That way, we early remove (in this case) 90% of data from the large table before even looking at the hash table. In this example, this leads to a roughly 10× improvement in query performance. The optimization can also be observed in the output of `EXPLAIN ANALYZE`.
@@ -249,7 +259,7 @@ WITH my_cte AS (SELECT range AS i FROM range(10))
 SELECT i FROM my_cte WHERE i > 5;
 ```
 
-Sometimes, the same CTE is referenced multiple times in the same query. Previously, the CTE would be “copied” wherever it appeared. This creates a potential performance problem: if computing the CTE is computationally expensive, it would be better to cache (“materialize”) its results instead of computing the result multiple times in different places within the same query. However, different filter conditions might apply for different instantiations of the CTE, which could drastically reduce their computation cost. A classical no-win scenario in databases. It was [already possible]({% link docs/sql/query_syntax/with.md %}) to explicitly mark a CTE as materialized using the `MATERIALIZED` keyword, but that required manual intervention.
+Sometimes, the same CTE is referenced multiple times in the same query. Previously, the CTE would be “copied” wherever it appeared. This creates a potential performance problem: if computing the CTE is computationally expensive, it would be better to cache (“materialize”) its results instead of computing the result multiple times in different places within the same query. However, different filter conditions might apply for different instantiations of the CTE, which could drastically reduce their computation cost. A classical no-win scenario in databases. It was [already possible]({% link docs/stable/sql/query_syntax/with.md %}) to explicitly mark a CTE as materialized using the `MATERIALIZED` keyword, but that required manual intervention.
 
 This release adds a feature where DuckDB [automatically decides](https://github.com/duckdb/duckdb/pull/12290) whether a CTE result should be materialized or not using a heuristic. The heuristic currently is that if the CTE performs aggregation and is queried more than once, it should be materialized. We plan to expand that heuristic in the future.
 
@@ -270,7 +280,7 @@ duckdb.sql("SELECT * FROM 'ontime.parquet' WHERE flightnum = 6805;").fetchone()
 |-------:|-------:|
 | 1.17 s | 0.12 s |
 
-### Parallel Union By Name
+### Parallel `union_by_name`
 
 The `union_by_name` parameter allows combination of – for example – CSV files that have the same columns in them but not in the same order. This release [adds support for parallelism](https://github.com/duckdb/duckdb/pull/12957) when using `union_by_name`. This greatly improves reading performance when using the union by name feature on multiple files.
 
@@ -351,7 +361,7 @@ See also [Richard's talk on the topic](https://www.youtube.com/watch?v=QubE0u8Kq
 
 ### GeoParquet
 
-GeoParquet is an extension format of the ubiquitous Parquet format that standardizes how to encode vector geometries and their metadata in Parquet files. This can be used to store geographic data sets in Parquet files efficiently. When the [`spatial` extension]({% link docs/extensions/spatial/overview.md %}) is installed and loaded, reading from a GeoParquet file through DuckDB's normal Parquet reader will now [automatically convert geometry columns to the `GEOMETRY` type](https://github.com/duckdb/duckdb/pull/12503), for example:
+GeoParquet is an extension format of the ubiquitous Parquet format that standardizes how to encode vector geometries and their metadata in Parquet files. This can be used to store geographic data sets in Parquet files efficiently. When the [`spatial` extension]({% link docs/stable/extensions/spatial/overview.md %}) is installed and loaded, reading from a GeoParquet file through DuckDB's normal Parquet reader will now [automatically convert geometry columns to the `GEOMETRY` type](https://github.com/duckdb/duckdb/pull/12503), for example:
 
 ```sql
 INSTALL spatial;

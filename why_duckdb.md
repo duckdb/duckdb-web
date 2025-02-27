@@ -15,9 +15,9 @@ For DuckDB, there is no DBMS server software to install, update and maintain. Du
 
 ## Portable
 
-Thanks to having no dependencies, DuckDB is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DuckDB-Wasm]({% link docs/api/wasm/overview.md %}), DuckDB can also run in web browsers and even on mobile phones.
+Thanks to having no dependencies, DuckDB is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DuckDB-Wasm]({% link docs/stable/clients/wasm/overview.md %}), DuckDB can also run in web browsers and even on mobile phones.
 
-DuckDB provides [APIs for Java, C, C++, Go, Node.js and other languages]({% link docs/api/overview.md %}).
+DuckDB provides [APIs for Java, C, C++, Go, Node.js and other languages]({% link docs/stable/clients/overview.md %}).
 
 ## Feature-Rich
 
@@ -33,7 +33,7 @@ To efficiently support this workload, it is critical to reduce the amount of CPU
 
 ## Extensible
 
-DuckDB offers a [flexible extension mechanism]({% link docs/extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/data/parquet/overview.md %}), [JSON]({% link docs/data/json/overview.md %}), [time zones]({% link docs/extensions/icu.md %}), and supports for the [HTTP(S) and S3 protocols]({% link docs/extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2021-10-29-duckdb-wasm %}).
+DuckDB offers a [flexible extension mechanism]({% link docs/stable/extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/stable/data/parquet/overview.md %}), [JSON]({% link docs/stable/data/json/overview.md %}), [time zones]({% link docs/stable/extensions/icu.md %}), and supports for the [HTTP(S) and S3 protocols]({% link docs/stable/extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2021-10-29-duckdb-wasm %}).
 
 ## Free
 
@@ -83,5 +83,5 @@ Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorg
 * **Test framework:** DuckDB uses the [Catch2](https://github.com/catchorg/Catch2) unit test framework.
 * **Test cases:** We use the [SQL Logic Tests from SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki) to test DuckDB.
 * **Result validation:** [Manuel Rigger](https://www.manuelrigger.at) used his excellent [SQLancer](https://github.com/sqlancer/sqlancer) tool to verify DuckDB result correctness.
-* **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) via the [`sqlsmith` extension]({% link docs/extensions/sqlsmith.md %}) to generate random queries for additional testing.
-* **JSON parser:** We use [yyjson](https://github.com/ibireme/yyjson), a high performance JSON library written in ANSI C, to parse JSON in DuckDB's [JSON Extension]({% link docs/data/json/overview.md %}).
+* **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) via the [`sqlsmith` extension]({% link docs/stable/extensions/sqlsmith.md %}) to generate random queries for additional testing.
+* **JSON parser:** We use [yyjson](https://github.com/ibireme/yyjson), a high performance JSON library written in ANSI C, to parse JSON in DuckDB's [JSON Extension]({% link docs/stable/data/json/overview.md %}).
