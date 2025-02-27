@@ -45,3 +45,32 @@ Once the build finishes successfully, you can find the `duckdb.exe` binary in th
 ```batch
 ./duckdb.exe
 ```
+
+## Building the Go Client
+
+Building on Windows may result in the following error:
+
+```bash
+go build
+```
+
+```console
+collect2.exe: error: ld returned 5 exit status
+```
+
+GitHub user [vdmitriyev](https://github.com/vdmitriyev) shared instructions for [building the DuckDB Go client on Windows](https://github.com/marcboeker/go-duckdb/issues/4#issuecomment-2176409066):
+
+1. Get four files (`.dll, .lib, .hpp, .h`) from the `libduckdb-windows-amd64.zip` archive.
+
+2. Place them to, e.g.,: `C:\DuckDB-Go\libs\`.
+
+3. Install the dependencies following the [`go-duckdb` project](https://github.com/marcboeker/go-duckdb).
+
+4. Build your project using the following instructions:
+
+   ```batch
+   set PATH=C:\DuckDB-Go\libs\;%PATH%
+   set CGO_CFLAGS=-IC:\DuckDB-Go\libs\
+   set CGO_LDFLAGS=-LC:\DuckDB-Go\libs\ -lduckdb
+   go build
+   ```
