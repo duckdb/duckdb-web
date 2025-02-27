@@ -8,19 +8,20 @@ excerpt: |
 extension:
   name: pcap_reader
   description: Read PCAP files from DuckDB
-  version: 0.0.3
+  version: 0.0.5
   language: Rust
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;linux_amd64_musl"
   requires_toolchains: "rust;python3"
   maintainers:
     - lmangani
     - glongo
+    - kYroL01
 
 repo:
   github: quackscience/duckdb-extension-pcap
-  ref: 97240fcdc125f2a4b364ede587a91e32d0209f25
+  ref: 82e6caf23eef9fba4a747c05b00b04b31544675e
 
 docs:
   hello_world: |
@@ -38,12 +39,21 @@ docs:
     └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
   extended_description: |
-    The PCAP Reader Extension is experimental, use at your own risk!
+    ## DuckDB PCAP Reader
+    `pcap_reader` is a DuckDB community extension that empowers network analysts to directly query and analyze IPv4 and IPv6 PCAP files using SQL. 
+    
+    Built with Rust for performance and safety, it leverages the `pcap-parser` crate to efficiently process packet capture data.
+
+    #### Features
+    - Direct PCAP Access: Load PCAP files directly into DuckDB without external tools.
+    - SQL-PCAP Analysis: Use DuckDB to filter, aggregate, and analyze IPv4/IPv6 network traffic.
+    
+    > The PCAP Reader Extension is experimental, use at your own risk!
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 439
-extension_download_count_pretty: 439
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_pcap_reader.png'
 layout: community_extension_doc
 ---
@@ -69,8 +79,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| pcap_reader   | table         |             |         |         |
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| pcap_reader   | table         | NULL        | NULL    | []       |
 
 
