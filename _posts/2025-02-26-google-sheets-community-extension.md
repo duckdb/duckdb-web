@@ -4,7 +4,7 @@ title: "Reading and Writing Google Sheets in DuckDB"
 author: "Alex Monahan and Archie Wood"
 thumb: "/images/blog/thumbs/gsheets.svg"
 image: "/images/blog/thumbs/gsheets.png"
-excerpt: "Read from and write to Google Sheets directly in DuckDB! For ad hoc querying, authentication is as easy as logging into Google from a browser. Scheduled workflows can use persistent DuckDB Secrets. SQL-on-Sheets has arrived!"
+excerpt: "Read from and write to Google Sheets directly in DuckDB using the GSheets community extension! For ad hoc querying, authentication is as easy as logging into Google from a browser. Scheduled workflows can use persistent DuckDB Secrets. SQL-on-Sheets has arrived!"
 tags: ["using DuckDB"]
 ---
 
@@ -14,50 +14,18 @@ Is anything more polarizing for data folks than spreadsheets?
 Wait, don't answer that, we don't have time to talk about leading and trailing commas again...
 
 The fact is that spreadsheets are everywhere.
-It is estimated that there are over [750 million spreadsheet users](https://thenewstack.io/microsoft-excel-becomes-a-programming-language/), compared to just [20](https://www.jetbrains.com/lp/devecosystem-data-playground/#global_population) to [30 million programmers](https://www.statista.com/statistics/627312/worldwide-developer-population/) (that's all languages put together).
+It is estimated that there are over [750 million spreadsheet users](https://thenewstack.io/microsoft-excel-becomes-a-programming-language/), compared to just [20](https://www.jetbrains.com/lp/devecosystem-data-playground/#global_population) to [30 million programmers](https://www.statista.com/statistics/627312/worldwide-developer-population/). 
+That includes all languages put together!
+
+There are a number of ways that using a spreadsheet can improve a data workflow.
+Blasphemy you say!
+Well, imagine if your database could actually read and write those spreadsheets.
+Spreadsheets are often the best place to manually edit data and they also provide highly customizable pivoting for self-serve analytics.
 
 Now, you can use DuckDB to seamlessly bridge the gap between data-y folks and business-y folks!
 With a simple in-browser authentication flow, or an automateable private key file flow, you can both query from and load into Google Sheets.
 
-Feel free to have a look at the [GSheets extension repo](https://github.com/evidence-dev/duckdb_gsheets) or jump to [the examples](#getting-started-with-the-gsheets-extension)!
-
-## Benefits
-
-There are a number of ways that using a spreadsheet can improve a data workflow.
-Blasphemy you say!
-Well, imagine if your database could actually read those spreadsheets.
-
-### Reading from Sheets
-
-#### Manual Data Entry
-
-Spreadsheets are often the best place to manually edit data.
-Marketing may have a custom-built list of users that need to be enrolled in a specific campaign.
-Don't forget the custom calculations from the finance team that need to be accounted for in the automated dashboards owned by the data team.
-Pulling from a Google Sheet is likely much easier than granting access to S3 or another central shared file location.
-
-#### Config Files Without Git
-
-Storing configuration information in a Google Sheet might be much easier and faster to edit than a file in git (and the history is still saved!).
-This is especially true if the configuration needs to be edited by multiple people at once.
-Do you really want to have to teach all of your stakeholders how to handle git merge conflicts?
-
-#### Dashboards that Reflect Reality
-
-The benefits quickly accumulate once those teams' data can be ingested into existing data engineering or data science workflows.
-Dashboards begin to actually reflect the reality of the business.
-Business processes that used to require days of error-prone manual spreadsheet manipulation can become scheduled SQL or dbt scripts in source control. 
-
-### Writing to Sheets
-
-Often, the output of a data workflow is used to inform business decision making.
-This is especially true with machine learning or forecasting processes (oh, sorry, I seem to have misspelled AI).
-“I talked with the CEO of that company last week and they are changing their strategy in this way.”
-Good luck getting that insight into your model without a spreadsheet!
-Those decisions could even be re-ingested into DuckDB so that the forecast can be improved over time.
-
-There are many simpler use cases as well: data validation, data annotation, checklists, communication with external teams, dummy dataset generation, and more.
-Maybe pushing directly to Google Sheets will get folks to stop having to click “export to CSV” on your team's dashboards!
+The [GSheets extension](https://github.com/evidence-dev/duckdb_gsheets) was originally authored by Archie from the team at [Evidence](http://evidence.dev/), but has since had significant contributions from Alex and [Michael](https://www.linkedin.com/in/mharrisb1/).
 
 ## Getting Started with the GSheets Extension
 
@@ -97,8 +65,8 @@ The `gid` query string parameter is the id of that specific sheet.
 
 There are two ways to pass in additional parameters:
 
-1. you can add them to the end of the URL as query string parameters or
-2. you can use the `read_gsheet` table function and specify them as separate SQL parameters.
+1. Add them to the end of the URL as query string parameters or
+2. Use the `read_gsheet` table function and specify them as separate SQL parameters.
 
 The [repository README](https://github.com/evidence-dev/duckdb_gsheets/blob/main/docs/pages/index.md) has a variety of examples and some are included below!
 
@@ -217,7 +185,7 @@ If you want to schedule an interaction with Google Sheets, a key file containing
 
 <details markdown='1'>
 <summary markdown='span'>
-    The process to acquire this key file has a number of steps, outlined below. Luckily they only need to be done once! This is also available in the repo README.
+    The process to acquire this key file has a number of steps, outlined below. Luckily they only need to be done once! This is also available in the [repo README](https://github.com/evidence-dev/duckdb_gsheets/blob/main/docs/pages/index.md).
 </summary>
 
 To connect DuckDB to Google Sheets via an access token, you’ll need to create a Service Account through the Google API Console.
@@ -258,7 +226,8 @@ An [example GHA workflow is here](https://github.com/Alex-Monahan/duckdb-gsheets
 ## Developing the Extension
 
 The Google Sheets extension is a good example of how DuckDB's extension GitHub template and CI/CD workflows can let even non-C++ experts contribute to the community!
-Several of the folks who have contributed thus far (thank you!!) would not be considered “C++ programmers”, but the combination of a great template, examples from other extensions, and a little help from some LLM-powered “junior devs” made it possible.
+Several of the folks who have contributed thus far (thank you!!), including the authors of this post, are not traditional C++ programmers.
+The combination of a great template, examples from other extensions, and a little help from some LLM-powered “junior devs” made it possible.
 We encourage you to give your extension idea a shot and reach out on Discord if you need some help!
 
 ## Roadmap
@@ -272,7 +241,7 @@ Enabling the GSheets extension to work in [DuckDB-Wasm]({% link docs/api/wasm/ov
 Several `http` functions need some modification to work in a browser environment.
 
 The OAuth flow that powers the browser-based login may be useful for authenticating to other APIs.
-We are wondering if maybe it would be possible to have a generic OAuth extension for DuckDB.
+We are wondering if maybe it would be possible to have a generic OAuth community extension.
 There are no concrete plans for this at the moment, but if anyone is interested, please reach out!
 
 ## Closing Thoughts
@@ -283,5 +252,7 @@ As a result, our KPI dashboards include context from folks talking directly to c
 
 [Michael Harris](https://www.linkedin.com/in/mharrisb1/) has also contributed to the extension (thank you!), and [Definite](https://www.definite.app/) has deployed GSheets scheduled jobs into production for multiple customers!
 
-Thanks to the GSheets DuckDB extension, it is easier than ever to use spreadsheets and DuckDB together.
+How do you use Google Sheets in your data analysis workflow and how can DuckDB help?
+We would love to hear your ideas on [BlueSky](https://bsky.app/profile/duckdb.org), [LinkedIn](https://www.linkedin.com/company/duckdb/), or [X / Twitter](https://x.com/duckdb)!
+
 Now go automate that Sheet with some SQL!
