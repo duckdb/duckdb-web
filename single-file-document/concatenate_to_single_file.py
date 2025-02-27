@@ -86,7 +86,7 @@ def replace_html_code_blocks(doc_body):
 
 def doc_path_to_page_header_header_label(doc_file_full_path):
     return doc_file_full_path \
-        .replace("../docs/", "docs/") \
+        .replace("../docs/stable/", "docs/stable/") \
         .replace(".md", "") \
         .replace("../", "") \
         .replace("/", ":")
@@ -110,8 +110,8 @@ def adjust_links_in_doc_body(doc_body):
     # replace link to the Python guides index page
     # with a link to the Python guides section
     doc_body = doc_body.replace(
-        "]({% link docs/guides/overview.md %}#python-client)",
-        "]({% link docs/python/overview.md %})"
+        "]({% link docs/stable/guides/overview.md %}#python-client)",
+        "]({% link docs/stable/python/overview.md %})"
     )
 
     # replace "`, `" (with the surrounding characters used for emphasis) with "`,` " to allow line breaking
@@ -391,7 +391,7 @@ with open(f"duckdb-docs.md", "w") as of:
 
     with open("../_data/menu_docs_dev.json") as menu_docs_file:
         menu = json.load(menu_docs_file)
-        add_main_documentation("../docs", menu, config, of)
+        add_main_documentation("../docs/stable", menu, config, of)
 
     add_blog_posts("../_posts", of)
 
