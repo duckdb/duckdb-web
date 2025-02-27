@@ -196,3 +196,26 @@ ALTER TABLE integers ADD PRIMARY KEY (i, j);
 ## `ADD` / `DROP CONSTRAINT`
 
 > `ADD CONSTRAINT` and `DROP CONSTRAINT` clauses are not yet supported in DuckDB.
+
+## Limitations
+
+`ALTER COLUMN` fails if values of conflicting types have occurred in the table at any point, even if they have been deleted:
+
+```sql
+CREATE TABLE tbl (col VARCHAR);
+INSERT INTO tbl VALUES ('asdf'), ('42');
+DELETE FROM tbl WHERE col = 'asdf';
+ALTER TABLE tbl ALTER COLUMN col TYPE INTEGER;
+```
+
+```console
+Conversion Error:
+Could not convert string 'asdf' to INT32
+```
+
+Currently, this is expect behavior.
+As a workaround, you can create a copy of the table:
+
+```sql
+CREATE OR REPLACE TABLE tbl AS (FROM tbl);
+```
