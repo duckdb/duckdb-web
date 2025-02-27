@@ -41,7 +41,7 @@ To select a specific range of cells, use the `range` parameter with a string in 
 SELECT * FROM read_xlsx('test_excel.xlsx', range = 'A1:B2');
 ```
 
-This can also be used to e.g. skip the first 5 of rows:
+This can also be used to, e.g., skip the first 5 of rows:
 
 ```sql
 SELECT * FROM read_xlsx('test_excel.xlsx', range = 'A5:Z');

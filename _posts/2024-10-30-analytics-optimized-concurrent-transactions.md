@@ -45,7 +45,7 @@ When reading a row, a transaction will first check if there is version informati
 
 ## Efficient MVCC for Analytics
 
-The above approach works well for transactional workloads where individual rows are changed frequently. For *analytical* use cases, we observe a very different usage pattern: changes are much more “bulky” and they often only affect a subset of columns. For example, we do not usually delete individual rows but instead delete all rows matching a pattern, e.g.
+The above approach works well for transactional workloads where individual rows are changed frequently. For *analytical* use cases, we observe a very different usage pattern: changes are much more “bulky” and they often only affect a subset of columns. For example, we do not usually delete individual rows but instead delete all rows matching a pattern, e.g.:
 
 ```sql
 DELETE FROM orders WHERE order_time < DATE '2010-01-01';
@@ -140,7 +140,7 @@ After some amount of changes, the changes in the WAL need to be physically appli
 
 DuckDB implements write-ahead logging and you may have seen a `.wal` file appearing here and there. Checkpointing normally happens *automatically* whenever the WAL file reached a limit, by default 16 MB but this can be adjusted with the `checkpoint_threshold` setting. Checkpoints also automatically happen at database shutdown. Checkpoints can also be [explicitly triggered]({% link docs/stable/sql/statements/checkpoint.md %}) with the `CHECKPOINT` and `FORCE CHECKPOINT` commands, the difference being that the latter will abort (rollback) any active transactions to ensure the checkpoing is happening *right now* while the former will wait.
 
-DuckDB explicitly calls the [`fsync()` system call](https://pubs.opengroup.org/onlinepubs/009695399/functions/fsync.html) to make sure any WAL entries will be forced to be written to persistent storage, ignoring the many caches on the way. This is *necessary* because those caches may also be lost in the event of e.g. power failure, so it's no use to only write log entries to the WAL if they end up not being actually written to storage because the operating system or the disk decided that it was better to wait for performance reasons. However, `fsync()` does take some time, and while it's generally considered bad practice, there are systems out there that don't do this at all or not by default in order to boast about more transactions per second.
+DuckDB explicitly calls the [`fsync()` system call](https://pubs.opengroup.org/onlinepubs/009695399/functions/fsync.html) to make sure any WAL entries will be forced to be written to persistent storage, ignoring the many caches on the way. This is *necessary* because those caches may also be lost in the event of, e.g., power failure, so it's no use to only write log entries to the WAL if they end up not being actually written to storage because the operating system or the disk decided that it was better to wait for performance reasons. However, `fsync()` does take some time, and while it's generally considered bad practice, there are systems out there that don't do this at all or not by default in order to boast about more transactions per second.
 
 In DuckDB, even bulk loads such as loading large files into tables (e.g., using the [`COPY` statement]({% link docs/stable/sql/statements/copy.md %})) are fully transactional. This means you can do something like this:
 
