@@ -54,7 +54,7 @@ DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `U
 ### Updating Values of Nested Types
 
 When performing _updates_ on values of nested types, DuckDB performs a _delete_ operation followed by an _insert_ operation.
-When used in a table with ART indexes (either via explicit indexes or primary keys/unique constraints), this can lead to [unexpected constraint violations]({% link docs/stable/sql/indexes.md %}#over-eager-unique-constraint-checking).
+When used in a table with ART indexes (either via explicit indexes or primary keys/unique constraints), this can lead to [unexpected constraint violations]({% link docs/stable/sql/indexes.md %}#constraint-checking-in-update-statements).
 For example:
 
 ```sql
