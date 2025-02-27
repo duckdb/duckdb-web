@@ -544,6 +544,7 @@ SELECT 'First Contact';
 | 2                  |
 
 However, if a `UNION` type is used, each individual row retains its original data type. A `UNION` is defined using key-value pairs with the key as a name and the value as the data type. This also allows the specific data types to be pulled out as individual columns:
+
 ```sql
 CREATE TABLE movies (
      movie UNION(num INTEGER, name VARCHAR)

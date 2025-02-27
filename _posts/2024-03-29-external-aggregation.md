@@ -194,6 +194,7 @@ The source code for the H2O.ai benchmark can be found [here](https://github.com/
 You can download the file yourself from <https://blobs.duckdb.org/data/G1_1e9_2e0_0_0.csv.zst> (18.8 GB compressed).
 
 We use the following queries from the benchmark to load the data:
+
 ```sql
 SET preserve_insertion_order = false;
 CREATE TABLE y (
