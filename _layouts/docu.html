@@ -68,64 +68,33 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					</div>
 					
 					{% if page.url contains '/docs/' %}
-					
+					{% unless page.url contains '/docs/installation/' %}
+
 					{% include banner_docversion.html %}
-					
-			
-					
-					{% assign current_url = page.url | split:'/docs/' %}
-					{% if page.path contains "archive/" %}
-						{% for item in site.data.versions %}
-							{% if page.path contains item.version %}
-								{% assign versionviewed = item.version %}
-								{% assign pathtoreplace = "docs/archive/" | append: item.version | append: "/" %}
-								{% assign basename = page.path | replace: pathtoreplace , "" %}
-							{% endif %}
-						{% endfor %}
-					{% else %}
-						{% assign basename = page.path | replace: "docs/stable/", "" %}
-					{% endif %}
-					
+
 					<div class="versionselect">
 						<div class="version">
 							<div><span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span><span class="arrow"></div>
 							<div class="versionsidebar">
 								<ul>
-								{% assign candidate_pages = "" | split: ','  %}
-								{% for site_page in site.pages %}
-									{% if site_page.name == page.name %}
-										{% assign candidate_pages = candidate_pages | push: site_page.path %}
-									{% endif %}
-								{% endfor %}
-								<!-- check the current page -->
-								{% assign filename = "docs/stable/" | append: basename %}
-								{% assign exists = "false" %}
-								{% for page_name in candidate_pages %}
-									{% if page_name == filename %}
-										{% assign exists = true %}
-									{% endif %}
-								{% endfor %}
-							
-								{% if exists == true %}
-									<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>{{ site.currentshortduckdbversion }} (stable)</a></li>
-								{% endif %}
-								<!-- check the archived pages -->
-								{% for item in site.data.versions %}
-									{% assign filename = "docs/archive/" | append: item.version | append: "/" | append: basename %}
-									{% assign exists = "false" %}
-									{% for page_name in candidate_pages %}
-										{% if page_name == filename %}
-											{% assign exists = true %}
+									<!-- remove the leading part, e.g., "docs/stable" or "docs/1.0" (version number) -->
+
+									<!-- try the basename with different versions and see whether it exists -->
+									{% assign basename = page.path | regex_replace: "docs/(stable|\d*.\d*)/", "" %}
+
+									{% for item in site.data.versions %}
+										{% assign filename = "docs/" | append: item.version | append: "/" | append: basename %}
+										{% capture old_version_of_page_exists %}{% file_exists {{ filename }} %}{% endcapture %}
+										{% if old_version_of_page_exists == "true" %}
+											<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
 										{% endif %}
 									{% endfor %}
-									{% if exists == true %}
-										<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
-									{% endif %}
-								{% endfor %}
 								</ul>
 							</div>
 						</div>
 					</div>
+
+					{% endunless %}
 					{% endif %}
 					<button class="mode" data-mode="dark"></button>
 				</div>
