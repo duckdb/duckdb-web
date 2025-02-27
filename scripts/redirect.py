@@ -26,9 +26,7 @@ for path in source.glob("**/*.md"):
     filename = str(path)
     filename = re.sub(r"\.md$", "", filename)
 
-    new_redirect_entries = [
-        "/" + str(filename).replace(to_directory, from_directory)
-    ]
+    new_redirect_entries = ["/" + str(filename).replace(to_directory, from_directory)]
 
     doc["redirect_from"] = doc.get("redirect_from", []) + new_redirect_entries
 
