@@ -16,7 +16,7 @@ Some aggregate functions also do not filter out `NULL` values, so using a `FILTE
 
 Return the following:
 
-* The total number of rows.
+* The total number of rows
 * The number of rows where `i <= 5`
 * The number of rows where `i` is odd
 
