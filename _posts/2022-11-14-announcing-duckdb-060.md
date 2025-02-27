@@ -117,7 +117,7 @@ SELECT * FROM messages;
 └─────────────┘
 ```
 
-Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page]({% link docs/sql/data_types/union.md %}) in the documentation contains more information on how to use this new composite type.
+Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page]({% link docs/stable/sql/data_types/union.md %}) in the documentation contains more information on how to use this new composite type.
 
 **FROM-first**. Starting with this release, DuckDB supports starting queries with the [`FROM` clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
 
@@ -151,7 +151,7 @@ SELECT min(COLUMNS(*)), count(*) FROM obs;
 └─────────────┴───────────────┴───────────────┴──────────────┘
 ```
 
-The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
+The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/stable/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
 
 ```sql
 SELECT COLUMNS('val[0-9]+') FROM obs;

@@ -26,7 +26,7 @@ Some of the queries explained in this blog post are shown in simplified form on 
 For our initial queries, we'll use the 2023 [railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive).
 To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.duckdb.org/nl-railway/services-2023.csv.gz) (330 MB) and load it into DuckDB.
 
-First, start the [DuckDB command line client]({% link docs/clients/cli/overview.md %}) on a persistent database:
+First, start the [DuckDB command line client]({% link docs/stable/clients/cli/overview.md %}) on a persistent database:
 
 ```bash
 duckdb railway.db
@@ -42,16 +42,16 @@ CREATE TABLE services AS
 Despite the seemingly simple query, there is quite a lot going on here.
 Let's deconstruct the query:
 
-* First, there is no need to explicitly define a schema for our `services` table, nor is it necessary to use a [`COPY ... FROM` statement]({% link docs/sql/statements/copy.md %}#copy--from).
-DuckDB automatically detects that the `'services-2023.csv.gz'` refers to a gzip-compressed CSV file, so it calls the [`read_csv` function]({% link docs/data/csv/overview.md %}#csv-functions),
-which decompresses the file and infers its schema from its content using the [CSV sniffer]({% link docs/data/csv/auto_detection.md %}).
+* First, there is no need to explicitly define a schema for our `services` table, nor is it necessary to use a [`COPY ... FROM` statement]({% link docs/stable/sql/statements/copy.md %}#copy--from).
+DuckDB automatically detects that the `'services-2023.csv.gz'` refers to a gzip-compressed CSV file, so it calls the [`read_csv` function]({% link docs/stable/data/csv/overview.md %}#csv-functions),
+which decompresses the file and infers its schema from its content using the [CSV sniffer]({% link docs/stable/data/csv/auto_detection.md %}).
 
-* Second, the query makes use of DuckDB's [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %}#from-first-syntax), which allows users to omit the `SELECT *` clause.
+* Second, the query makes use of DuckDB's [`FROM`-first syntax]({% link docs/stable/sql/query_syntax/from.md %}#from-first-syntax), which allows users to omit the `SELECT *` clause.
 Hence, the SQL statement `FROM 'services-2023.csv.gz';` is a shorthand for `SELECT * FROM 'services-2023.csv.gz';`.
 
-* Third, the query creates a table called `services` and populates it with the result from the CSV reader. This is achieved using a [`CREATE TABLE ... AS` statement]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas).
+* Third, the query creates a table called `services` and populates it with the result from the CSV reader. This is achieved using a [`CREATE TABLE ... AS` statement]({% link docs/stable/sql/statements/create_table.md %}#create-table--as-select-ctas).
 
-Using [DuckDB v0.10.3]({% link docs/installation/index.html %}), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints]({% link docs/sql/functions/char.md %}#print-numbers-with-thousand-separators) the number of rows in the `services` table:
+Using [DuckDB v0.10.3]({% link docs/installation/index.html %}), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints]({% link docs/stable/sql/functions/char.md %}#print-numbers-with-thousand-separators) the number of rows in the `services` table:
 
 ```sql
 SELECT format('{:,}', count(*)) AS num_services
@@ -69,7 +69,7 @@ We can see that more than 21&nbsp;million train services ran in the Netherlands 
 Let's ask a simple query first: _What were the busiest railway stations in the Netherlands in the first 6 months of 2023?_
 
 First, for every month, let's compute the number of services passing through each station.
-To do so, we extract the month from the service's date using the [`month` function]({% link docs/sql/functions/datepart.md %}#monthdate),
+To do so, we extract the month from the service's date using the [`month` function]({% link docs/stable/sql/functions/datepart.md %}#monthdate),
 then perform a group-by aggregation with a `count(*)`:
 
 ```sql
@@ -83,7 +83,7 @@ LIMIT 5;
 ```
 
 Note that this query showcases a common redundancy in SQL: we list the names of non-aggregated columns in both the `SELECT` and the `GROUP BY` clauses.
-Using DuckDB's [`GROUP BY ALL` feature]({% link docs/sql/query_syntax/groupby.md %}#group-by-all), we can eliminate this.
+Using DuckDB's [`GROUP BY ALL` feature]({% link docs/stable/sql/query_syntax/groupby.md %}#group-by-all), we can eliminate this.
 At the same time, let's also turn this result into an intermediate table called `services_per_month` using a `CREATE TABLE ...  AS` statement:
 
 ```sql
@@ -96,7 +96,7 @@ CREATE TABLE services_per_month AS
     GROUP BY ALL;
 ```
 
-To answer the question, we can use the [`arg_max(arg, val)` aggregation function]({% link docs/sql/functions/aggregates.md %}#arg_maxarg-val),
+To answer the question, we can use the [`arg_max(arg, val)` aggregation function]({% link docs/stable/sql/functions/aggregates.md %}#arg_maxarg-val),
 which returns the column `arg` in the row with the maximum value `val`.
 We filter on the month and return the results:
 
@@ -125,8 +125,8 @@ Maybe surprisingly, in most months, the busiest railway station is not in Amster
 
 Let's change the question to: _Which are the top-3 busiest stations for each summer month?_
 The `arg_max()` function only helps us find the top-1 value but it is not sufficient for finding top-k results.
-Luckily, DuckDB has extensive support for SQL features, including [window functions]({% link docs/sql/functions/window_functions.md %}) and we can use the [`rank()` function]({% link docs/sql/functions/window_functions.md %}#rank) to find top-k values.
-Addtionally, we use [`make_date`]({% link docs/sql/functions/date.md %}#make_dateyear-month-day) to reconstruct the date, [`strftime`]({% link docs/sql/functions/timestamptz.md %}#strftimetimestamptz-format) to turn it into the month's name and [`array_agg`]({% link docs/sql/functions/aggregates.md %}#array_aggarg):
+Luckily, DuckDB has extensive support for SQL features, including [window functions]({% link docs/stable/sql/functions/window_functions.md %}) and we can use the [`rank()` function]({% link docs/stable/sql/functions/window_functions.md %}#rank) to find top-k values.
+Addtionally, we use [`make_date`]({% link docs/stable/sql/functions/date.md %}#make_dateyear-month-day) to reconstruct the date, [`strftime`]({% link docs/stable/sql/functions/timestamptz.md %}#strftimetimestamptz-format) to turn it into the month's name and [`array_agg`]({% link docs/stable/sql/functions/aggregates.md %}#array_aggarg):
 
 ```sql
 SELECT month, month_name, array_agg(station) AS top3_stations
@@ -158,7 +158,7 @@ We can see that the top 3 spots are shared between four stations: Utrecht Centra
 
 ### Directly Querying Parquet Files through HTTPS or S3
 
-DuckDB supports querying remote files, including CSV and Parquet, via [the HTTP(S) protocol and the S3 API]({% link docs/extensions/httpfs/overview.md %}).
+DuckDB supports querying remote files, including CSV and Parquet, via [the HTTP(S) protocol and the S3 API]({% link docs/stable/extensions/httpfs/overview.md %}).
 For example, we can run the following query:
 
 ```sql
@@ -176,7 +176,7 @@ It returns the following result:
 | 2023-01-01   | Den Haag HS        |
 
 Using the remote Parquet file, the query for answering [_Which are the top-3 busiest stations for each summer month?_](#finding-the-top-3-busiest-stations-for-each-summer-month) can be run directly on a remote Parquet file without creating any local tables.
-To do this, we can define the `services_per_month` table as a [common table expression in the `WITH` clause]({% link docs/sql/query_syntax/with.md %}).
+To do this, we can define the `services_per_month` table as a [common table expression in the `WITH` clause]({% link docs/stable/sql/query_syntax/with.md %}).
 The rest of the query remains the same:
 
 ```sql
@@ -209,9 +209,9 @@ This query yields the same result as the query above, and completes (depending o
 This speed is possible because DuckDB doesn't need to download the whole Parquet file to evaluate the query:
 while the file size is 309&nbsp;MB, it only uses about 20&nbsp;MB of network traffic, approximately 6% of the total file size.
 
-The reduction in network traffic is possible because of [partial reading]({% link docs/data/parquet/overview.md %}#partial-reading) along both the columns and the rows of the data.
+The reduction in network traffic is possible because of [partial reading]({% link docs/stable/data/parquet/overview.md %}#partial-reading) along both the columns and the rows of the data.
 First, Parquet's columnar layout allows the reader to only access the required columns.
-Second, the [zonemaps]({% link docs/guides/performance/indexing.md %}#zonemaps) available in the Parquet file's metadata allow the filter pushdown optimization (e.g., the reader only fetches [row groups]({% link docs/internals/storage.md %}#row-groups) with dates in the summer months).
+Second, the [zonemaps]({% link docs/stable/guides/performance/indexing.md %}#zonemaps) available in the Parquet file's metadata allow the filter pushdown optimization (e.g., the reader only fetches [row groups]({% link docs/stable/internals/storage.md %}#row-groups) with dates in the summer months).
 Both of these optimizations are implemented via [HTTP range requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests),
 saving considerable traffic and time when running queries on remote Parquet files.
 
@@ -267,7 +267,7 @@ We can see that the distances are encoded as a matrix with the diagonal entries 
 As explained in the [dataset's description](https://www.rijdendetreinen.nl/en/open-data/station-distances#description), this string implies that the two stations are the same station.
 If we just load the values as `XXX`, the CSV reader will assume that all columns have the type `VARCHAR` instead of numeric values.
 While this can be cleaned up later, it's a lot easier to avoid this problem altogether.
-To do so, we use the `read_csv` function and set the [`nullstr` parameter]({% link docs/data/csv/overview.md %}#parameters) to `XXX`:
+To do so, we use the `read_csv` function and set the [`nullstr` parameter]({% link docs/stable/data/csv/overview.md %}#parameters) to `XXX`:
 
 ```sql
 CREATE TABLE distances AS
@@ -277,13 +277,13 @@ CREATE TABLE distances AS
     );
 ```
 
-To make the `NULL` values visible in the command line output, we set the [`.nullvalue` dot command]({% link docs/clients/cli/dot_commands.md %}) to `NULL`:
+To make the `NULL` values visible in the command line output, we set the [`.nullvalue` dot command]({% link docs/stable/clients/cli/dot_commands.md %}) to `NULL`:
 
 ```sql
 .nullvalue NULL
 ```
 
-Then, using the [`DESCRIBE` statement]({% link docs/guides/meta/describe.md %}), we can confirm that DuckDB has inferred the column correctly as `BIGINT`:
+Then, using the [`DESCRIBE` statement]({% link docs/stable/guides/meta/describe.md %}), we can confirm that DuckDB has inferred the column correctly as `BIGINT`:
 
 ```sql
 FROM (DESCRIBE distances)
@@ -298,7 +298,7 @@ LIMIT 5;
 | AHP         | BIGINT      | YES  | NULL | NULL    | NULL  |
 | AHPR        | BIGINT      | YES  | NULL | NULL    | NULL  |
 
-To show the first 9 columns, we can run the following query with the [`#1`, `#2`, etc. column indexes in the `SELECT` statement]({% link docs/sql/statements/select.md %}):
+To show the first 9 columns, we can run the following query with the [`#1`, `#2`, etc. column indexes in the `SELECT` statement]({% link docs/stable/sql/statements/select.md %}):
 
 ```sql
 SELECT #1, #2, #3, #4, #5, #6, #7, #8, #9
@@ -318,7 +318,7 @@ LIMIT 8;
 | ALM     | 32   | 98   | 99   | 101  | 106  | 96   | 158  | NULL |
 
 We can see that the data was loaded correctly but the wide table format is a bit unwieldy for further processing:
-to query for pairs of stations, we need to first turn it into a long table using the [`UNPIVOT`]({% link docs/sql/statements/unpivot.md %}) statement.
+to query for pairs of stations, we need to first turn it into a long table using the [`UNPIVOT`]({% link docs/stable/sql/statements/unpivot.md %}) statement.
 Naïvely, we would write something like the following:
 
 ```sql
@@ -329,7 +329,7 @@ CREATE TABLE distances_long AS
 
 However, we have almost 400 stations, so spelling out their names would be quite tedious.
 Fortunately, DuckDB has a trick to help with this:
-the [`COLUMNS(*)` expression]({% link docs/sql/expressions/star.md %}#columns-expression) lists all columns
+the [`COLUMNS(*)` expression]({% link docs/stable/sql/expressions/star.md %}#columns-expression) lists all columns
 and its optional `EXCLUDE` clause can remove given column names from the list.
 Therefore, the expression `COLUMNS(* EXCLUDE station)` lists all column names except `station`, precisely what we need for the `UNPIVOT` command:
 
@@ -386,13 +386,13 @@ The results show that there are pairs of train stations, which are at least 425 
 
 In this post, we demonstrated some of DuckDB's key features,
 including
-[automatic detection of formats based on filenames]({% link docs/data/overview.md %}),
+[automatic detection of formats based on filenames]({% link docs/stable/data/overview.md %}),
 [auto-inferencing the schema of CSV files]({% post_url 2023-10-27-csv-sniffer %}),
 [direct Parquet querying]({% post_url 2021-06-25-querying-parquet %}),
-[remote querying]({% link docs/extensions/httpfs/overview.md %}),
+[remote querying]({% link docs/stable/extensions/httpfs/overview.md %}),
 [window functions]({% post_url 2021-10-13-windowing %}),
-[unpivot]({% link docs/sql/statements/unpivot.md %}),
-[several friendly SQL features]({% link docs/sql/dialect/friendly_sql.md %}) (such as `FROM`-first, `GROUP BY ALL`, and `COLUMNS(*)`),
+[unpivot]({% link docs/stable/sql/statements/unpivot.md %}),
+[several friendly SQL features]({% link docs/stable/sql/dialect/friendly_sql.md %}) (such as `FROM`-first, `GROUP BY ALL`, and `COLUMNS(*)`),
 and so on.
 The combination of these allows for formulating queries using different file formats (CSV, Parquet), data sources (local, HTTPS, S3), and SQL features.
 This helps users answer queries quickly and efficiently.

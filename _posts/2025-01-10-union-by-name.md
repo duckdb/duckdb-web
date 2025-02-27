@@ -46,7 +46,7 @@ Fast forward just a couple of decades, and DuckDB is making stacking in SQL tota
 
 ## Making Vertical Stacking Groovy Again
 
-In addition to the traditional [`UNION`]({% link docs/sql/query_syntax/setops.md %}#union) and [`UNION ALL`]({% link docs/sql/query_syntax/setops.md %}#union-all-bag-semantics) operators, DuckDB adds both [`UNION BY NAME` and `UNION ALL BY NAME`]({% link docs/sql/query_syntax/setops.md %}#union-all-by-name).
+In addition to the traditional [`UNION`]({% link docs/stable/sql/query_syntax/setops.md %}#union) and [`UNION ALL`]({% link docs/stable/sql/query_syntax/setops.md %}#union-all-bag-semantics) operators, DuckDB adds both [`UNION BY NAME` and `UNION ALL BY NAME`]({% link docs/stable/sql/query_syntax/setops.md %}#union-all-by-name).
 These will vertically stack multiple relations (e.g., `SELECT` statements) by matching on the names of columns independent of their order.
 As an example, we provide columns `a` and `b` out of order, and even introduce the entirely new column `c` and stacking will still succeed:
 
@@ -90,16 +90,16 @@ Unfortunately we have Codd to thank for this confusing bit!
 If only `UNION ALL` were the default...
 Typically, `UNION ALL` (and its new counterpart `UNION ALL BY NAME`!) are the desired behavior as they faithfully reproduce the input relations, just stacked together.
 This is higher performance as well, since the deduplication that occurs with `UNION` can be quite time intensive with large datasets.
-And finally, `UNION ALL` [preserves the original row order]({% link docs/sql/dialect/order_preservation.md %}).
+And finally, `UNION ALL` [preserves the original row order]({% link docs/stable/sql/dialect/order_preservation.md %}).
 
 ### Reading Multiple Files
 
 This column matching functionality becomes particularly useful when querying data from multiple files with different schemas.
 DuckDB provides a `union_by_name` boolean parameter in the table functions used to pull external flat files:
 
-* [`read_csv`]({% link docs/data/csv/overview.md %}#parameters)
-* [`read_json`]({% link docs/data/json/loading_json.md %}#parameters)
-* [`read_parquet`]({% link docs/data/parquet/overview.md %}#parameters)
+* [`read_csv`]({% link docs/stable/data/csv/overview.md %}#parameters)
+* [`read_json`]({% link docs/stable/data/json/loading_json.md %}#parameters)
+* [`read_parquet`]({% link docs/stable/data/parquet/overview.md %}#parameters)
 
 To read multiple files, DuckDB can use glob patterns within the file path parameter (or a list of files, or a list of glob patterns!).
 If those files could have different schemas, adding `union_by_name=True` will allow them to be read and stacked!
@@ -131,12 +131,12 @@ It is very common to have schema changes over time in data lakes, so this unlock
 The secondary effect of this feature is that you may now feel free to change your data lake schemas freely!
 Now it is painless to add more attributes to your data lake over time – DuckDB will be ready to handle the analysis!
 
-> DuckDB's extensions to read lakehouse table formats like [Delta]({% link docs/extensions/delta.md %}) and [Iceberg]({% link docs/extensions/iceberg.md %}) handle schema evolution within the formats' own metadata, so `union_by_name` is not needed.
+> DuckDB's extensions to read lakehouse table formats like [Delta]({% link docs/stable/extensions/delta.md %}) and [Iceberg]({% link docs/stable/extensions/iceberg.md %}) handle schema evolution within the formats' own metadata, so `union_by_name` is not needed.
 
 ## Inserting Data by Name
 
 Another use case for vertically stacking data is when inserting into an existing table.
-The DuckDB syntax of [`INSERT INTO ⟨my_table⟩ BY NAME`]({% link docs/sql/statements/insert.md %}#insert-into--by-name) offers the same flexibility of referring to columns by name rather than by position.
+The DuckDB syntax of [`INSERT INTO ⟨my_table⟩ BY NAME`]({% link docs/stable/sql/statements/insert.md %}#insert-into--by-name) offers the same flexibility of referring to columns by name rather than by position.
 This allows you to provide the data to insert with any column order and even including only a subset of columns.
 For example:
 

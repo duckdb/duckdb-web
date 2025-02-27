@@ -1,19 +1,15 @@
-{% if page.url contains '/docs/archive/' %}
-	{% assign versionviewed = urlVersionParts[0] %}
-{% else %}
-	{% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
-{% endif %}
-
-{% if versionviewed contains "stable" %}
-
-{% elsif page.path contains "latest" %}
+{% if version_viewed == "stable" %}
+	<!-- this is the default and recommended version - do not show any extra warning -->
+{% elsif version_viewed == "preview" %}
+	<!-- show nightly banner -->
 	<div class="banner nightly">
 		<div class="content">
 			<span class="icon_nightly"></span>
-			<span title="The page is for the github main (nightly) version of DuckDB, the features shown in the documentation may not yet be available in the stable version.">GitHub nightly version</span>
+			<span title="The page is for the preview version of DuckDB, available in the nightly builds. The features shown in the documentation may not yet be available in the stable version.">Preview version</span>
 		</div>
 	</div>
 {% else %}
+	<!-- show 'outdated' banner -->
 	{% assign url_parts = page.url | split: '/' %}
 	{% assign new_url = '' %}
 	{% assign skip_next = false %}
@@ -37,9 +33,9 @@
 			{% assign new_filename = new_url | replace: ".html", ".md" %}
 			{% capture url_exists %}{% file_exists {{ new_filename }} %}{% endcapture %}
 			{% if url_exists == "true" %}
-				<span title="Outdated documentation. Please select latest version.">Outdated documentation</span>
+				<span title="Outdated documentation. Please select the stable version.">Outdated documentation</span>
 			{% else %}
-				<span title="This page is not available in the latest version of the documentation.">Outdated documentation</span>
+				<span title="This page is not available in the stable version of the documentation.">Outdated documentation</span>
 			{% endif %}
 		</div>
 	</div>

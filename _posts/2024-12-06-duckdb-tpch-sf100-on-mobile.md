@@ -22,7 +22,7 @@ Read on to find out more.
 Our first attempt was to use an iPhone, namely an [iPhone 16 Pro](https://www.gsmarena.com/apple_iphone_16_pro-13315.php).
 This phone has 8 GB memory and a 6-core CPU with 2 performance cores (running at 4.05 GHz) and 4 efficiency cores (running at 2.42 GHz).
 
-We implemented the application using the [DuckDB Swift client]({% link docs/clients/swift.md %}) and loaded the benchmark on the phone, all 30 GB of it.
+We implemented the application using the [DuckDB Swift client]({% link docs/stable/clients/swift.md %}) and loaded the benchmark on the phone, all 30 GB of it.
 We quickly found that the iPhone can indeed run the workload without any problems – except that it heated up during the workload. This prompted the phone to perform thermal throttling, slowing down the CPU to reduce heat production. Due to this, DuckDB took 615.1 seconds. Not bad but not enough to reach our goal.
 
 The results got us thinking: what if we improve the cooling of the phone? To this end, we purchased a box of dry ice, which has a temperature below -50 degrees Celsius, and put the phone in the box for the duration of the experiments.
@@ -47,7 +47,7 @@ This helped a lot: DuckDB completed in 478.2 seconds. This is a more than 20% im
 
 In our next experiment, we picked up a [Samsung Galaxy S24 Ultra phone](https://www.gsmarena.com/samsung_galaxy_s24_ultra-12771.php), which runs Android 14. This phone is full of interesting hardware. First, it has an 8-core CPU with 4 different core types (1×3.39 GHz, 3×3.10 GHz, 2×2.90 GHz and 2×2.20 GHz). Second, it has a huge amount of RAM – 12 GB to be precise. Finally, its cooling system includes a [vapor chamber](https://www.sammobile.com/news/galaxy-s24-sustain-performance-bigger-vapor-chamber/) for improved heat dissipation.
 
-We ran DuckDB in the [Termux terminal emulator](https://termux.dev/en/). We compiled DuckDB [CLI client]({% link docs/clients/cli/overview.md %}) from source following the [Android build instructions]({% link docs/dev/building/android.md %}) and ran the experiments from the command line.
+We ran DuckDB in the [Termux terminal emulator](https://termux.dev/en/). We compiled DuckDB [CLI client]({% link docs/stable/clients/cli/overview.md %}) from source following the [Android build instructions]({% link docs/stable/dev/building/android.md %}) and ran the experiments from the command line.
 
 <div align="center">
     <img src="/images/blog/tpch-mobile/duckdb-termux-android-emulator.png"

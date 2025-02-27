@@ -80,7 +80,7 @@ PIVOT sales ON year USING sum(amount);
 |------|------|
 | 84   | 100  |
 
-The [documentation contains more examples]({% link docs/sql/statements/pivot.md %}).
+The [documentation contains more examples]({% link docs/stable/sql/statements/pivot.md %}).
 
 [**ASOF Joins for Time Series**](https://github.com/duckdb/duckdb/pull/6719). When joining time series data with background fact tables, the timestamps often do not exactly match. In this case it is often desirable to join rows so that the timestamp is joined with the *nearest timestamp*. The ASOF join can be used for this purpose – it performs a fuzzy join to find the closest join partner for each row instead of requiring an exact match.
 
@@ -99,7 +99,7 @@ FROM a ASOF JOIN b ON a.ts >= b.ts;
 | 2023-05-15 11:31:00 | 2023-05-15 11:30:00 |
 
 
-Please [refer to the documentation]({% link docs/guides/sql_features/asof_join.md %}) for a more in-depth explanation.
+Please [refer to the documentation]({% link docs/stable/guides/sql_features/asof_join.md %}) for a more in-depth explanation.
 
 
 
@@ -137,7 +137,7 @@ COPY lineitem TO 'lineitem.json';
 FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 ```
 
-[The documentation has been updated]({% link docs/data/multiple_files/overview.md %}) with various examples of this syntax.
+[The documentation has been updated]({% link docs/stable/data/multiple_files/overview.md %}) with various examples of this syntax.
 
 
 ## Storage Improvements
@@ -170,7 +170,7 @@ print(res)
 # [(datetime.date(2019, 5, 15),)]
 ```
 
-See the [documentation]({% link docs/clients/python/function.md %}) for more information.
+See the [documentation]({% link docs/stable/clients/python/function.md %}) for more information.
 
 [**Arrow Database Connectivity Support (ADBC)**](https://github.com/duckdb/duckdb/pull/7086). ADBC is a database API standard for database access libraries that uses Apache Arrow to transfer query result sets and to ingest data. Using Arrow for this is particularly beneficial for columnar data management systems which traditionally suffered a performance hit by emulating row-based APIs such as JDBC/ODBC. From this release, DuckDB natively supports ADBC. We’re happy to be one of the first systems to offer native support, and DuckDB’s in-process design fits nicely with ADBC.
 

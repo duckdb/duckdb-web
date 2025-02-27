@@ -39,6 +39,7 @@ kramdown:
   smart_quotes: ["apos", "apos", "quot", "quot"]
 theme: minima
 plugins:
+  - jekyll-regex-replace
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-redirect-from

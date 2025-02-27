@@ -226,7 +226,7 @@ FROM vectors;
 └───────────────────┘
 ```
 
-See the [Array Type page]({% link docs/sql/data_types/array.md %}) in the documentation for more information.
+See the [Array Type page]({% link docs/stable/sql/data_types/array.md %}) in the documentation for more information.
 
 ## Multi-Database Support
 
@@ -293,7 +293,7 @@ CREATE PERSISTENT SECRET my_persistent_secret (
 
 As mentioned, this will write the secret (unencrypted, so beware) to the `~/.duckdb/stored_secrets` directory.
 
-See the [Create Secret page]({% link docs/sql/statements/create_secret.md %}) in the documentation for more information.
+See the [Create Secret page]({% link docs/stable/sql/statements/create_secret.md %}) in the documentation for more information.
 
 ## Temporary Memory Manager
 
@@ -344,14 +344,14 @@ As a user, you don't have to do anything to make use of the new ALP compression 
 
 ## CLI Improvements
 
-The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/clients/cli/editing.md %}).
+The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/stable/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/stable/clients/cli/editing.md %}).
 
 <img src="/images/syntax_highlighting_screenshot.png"
      alt="Image showing syntax highlighting in the shell"
      width="700px"
      />
 
-See the [extended CLI docs for more information]({% link docs/clients/cli/overview.md %}).
+See the [extended CLI docs for more information]({% link docs/stable/clients/cli/overview.md %}).
 
 ## Final Thoughts
 

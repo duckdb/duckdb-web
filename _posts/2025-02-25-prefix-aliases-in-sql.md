@@ -10,12 +10,12 @@ tags: ["using DuckDB"]
 
 ## Syntax
 
-<p><i>“Perhaps we <a href="https://www.youtube.com/watch?v=TBAf5l1RmcA">should just leave nature alone</a>, to its simple one assed schematics.”</i><br/>
+<p><i>“Perhaps we <a href="https://www.youtube.com/watch?v=TBAf5l1RmcA">should just leave nature alone</a>, to its simple one-assed schematics.”</i><br/>
    — Dr. Alphonse Mephesto, South Park Episode #5</p>
 
-There is often more than one way to do things in our beloved SQL. For example, you can define join conditions *implicitly* (and dangerously) in the `WHERE` clause or use the (better) `JOIN ... ON (...)` syntax. Generally, having “more than one way to do things” can be confusing and even outright [dangerous sometimes](https://www.youtube.com/watch?v=noQcWra6sbU).
+There is often more than one way to do things in our beloved SQL. For example, you can define join conditions *implicitly* (and dangerously) in the `WHERE` clause or use the (better) `JOIN ... ON ...` syntax. Generally, having “more than one way to do things” can be confusing and even outright [dangerous sometimes](https://www.youtube.com/watch?v=noQcWra6sbU).
 
-Having said that we here at DuckDB [pride]({% post_url 2022-05-04-friendlier-sql %}) [ourselves]({% post_url 2023-08-23-even-friendlier-sql %}) [in]({% link docs/sql/dialect/friendly_sql.md %}) *friendlier* SQL. There are just too many people typing this stuff by hand, especially in the more ad-hoc world of analytics.  
+Having said that we here at DuckDB [pride]({% post_url 2022-05-04-friendlier-sql %}) [ourselves]({% post_url 2023-08-23-even-friendlier-sql %}) [in]({% link docs/stable/sql/dialect/friendly_sql.md %}) *friendlier* SQL. There are just too many people typing this stuff by hand, especially in the more ad-hoc world of analytics.  
 
 If there is a *good* reason to expand the SQL syntax with something useful we are at least considering it. Others seem to be watching closely. For example, our `GROUP BY ALL` syntax has by now been picked up by [almost](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) [every](https://docs.snowflake.com/en/sql-reference/constructs/group-by#label-group-by-all-columns) [SQL](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-qry-select-groupby) [system](https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql?view=sql-server-ver16#group-by-all-column-expression--n-) out there (and their little brothers).
 

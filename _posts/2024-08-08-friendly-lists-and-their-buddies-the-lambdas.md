@@ -24,7 +24,7 @@ Feel free to skip ahead if you're already familiar with lists and lambdas and ar
 
 ## Lists
 
-Before jumping into lambdas, let's take a quick detour into DuckDB's [`LIST` type]({% link docs/sql/data_types/list.md %}).
+Before jumping into lambdas, let's take a quick detour into DuckDB's [`LIST` type]({% link docs/stable/sql/data_types/list.md %}).
 A list contains any number of elements with the same data type.
 Below is a table containing two columns, `l` and `n`.
 `l` contains lists of integers, and `n` contains integers.
@@ -47,7 +47,7 @@ FROM my_lists;
 ```
 
 Internally, all data moves through DuckDB's execution engine in `Vectors`.
-For more details on `Vectors` and vectorized execution, please refer to the [documentation]({% link docs/internals/vector.md %}) and respective research papers ([1](https://15721.courses.cs.cmu.edu/spring2016/papers/p5-sompolski.pdf) and [2](https://drive.google.com/file/d/1LJeys01Ho9DREfRJhb9wHu3ssSC22Lll/view)).
+For more details on `Vectors` and vectorized execution, please refer to the [documentation]({% link docs/stable/internals/vector.md %}) and respective research papers ([1](https://15721.courses.cs.cmu.edu/spring2016/papers/p5-sompolski.pdf) and [2](https://drive.google.com/file/d/1LJeys01Ho9DREfRJhb9wHu3ssSC22Lll/view)).
 In this case, we get two vectors, as depicted below.
 This representation is mostly similar to [Arrow's](https://arrow.apache.org) physical list representation.
 
@@ -66,10 +66,10 @@ In DuckDB, a lambda function's syntax is `(param1, param2, ...) -> expression`.
 The parameters can have any name, and the `expression` can be any SQL expression.
 
 Currently, DuckDB has three scalar functions for working with lambdas:
-[`list_transform`]({% link docs/sql/functions/lambda.md %}#list_transformlist-lambda),
-[`list_filter`]({% link docs/sql/functions/lambda.md %}#list_filterlist-lambda),
+[`list_transform`]({% link docs/stable/sql/functions/lambda.md %}#list_transformlist-lambda),
+[`list_filter`]({% link docs/stable/sql/functions/lambda.md %}#list_filterlist-lambda),
 and
-[`list_reduce`]({% link docs/sql/functions/lambda.md %}#list_reducelist-lambda),
+[`list_reduce`]({% link docs/stable/sql/functions/lambda.md %}#list_reducelist-lambda),
 along with their aliases.
 Each accepts a `LIST` as its first argument and a lambda function as its second argument.
 
@@ -85,7 +85,7 @@ To return to our previous example, let's say we want to add `n` to each element 
 Using pure relational operators, i.e., avoiding list-native functions, we would need to perform the following steps:
 
 1. Unnest the lists while keeping the connection to their respective rows.
-   We can achieve this by inventing a temporary unique identifier, such as a [`rowid`]({% link docs/sql/statements/select.md %}#row-ids) or a [`UUID`]({% link docs/sql/data_types/numeric.md %}#universally-unique-identifiers-uuids).
+   We can achieve this by inventing a temporary unique identifier, such as a [`rowid`]({% link docs/stable/sql/statements/select.md %}#row-ids) or a [`UUID`]({% link docs/stable/sql/data_types/numeric.md %}#universally-unique-identifiers-uuids).
 2. Transform each element by adding `n`.
 3. Using our temporary identifier `rowid`, we can reaggregate the transformed elements by grouping them into lists.
 
@@ -190,7 +190,7 @@ To better present what's possible by combining our `LIST` type and lambda functi
 
 ### `list_transform`
 
-As established earlier, [`list_transform`]({% link docs/sql/functions/lambda.md %}#list_transformlist-lambda) applies a lambda function to each element of the input list and returns a new list with the transformed elements.
+As established earlier, [`list_transform`]({% link docs/stable/sql/functions/lambda.md %}#list_transformlist-lambda) applies a lambda function to each element of the input list and returns a new list with the transformed elements.
 Here, one of our [users](https://discord.com/channels/909674491309850675/1032659480539824208/1248004651983573162) implemented a `list_shuffle` function by nesting different `LIST` native functions.
 
 ```sql
@@ -217,7 +217,7 @@ FROM read_parquet(
 
 ### `list_filter`
 
-The [`list_filter` function]({% link docs/sql/functions/lambda.md %}#list_filterlist-lambda) filters all elements of the input list for which the lambda function returns `true`.
+The [`list_filter` function]({% link docs/stable/sql/functions/lambda.md %}#list_filterlist-lambda) filters all elements of the input list for which the lambda function returns `true`.
 
 Here is an example using `list_filter` from a [discussion on our Discord](https://discord.com/channels/909674491309850675/921073327009853451/1235818484047544371) where the user wanted to remove the element at index `idx` from each list.
 
@@ -230,7 +230,7 @@ CREATE OR REPLACE MACRO remove_idx(l, idx) AS (
 So far, we've primarily focused on showcasing our lambda function support in this blog post.
 Yet, there are often many possible paths with SQL and its rich dialects.
 We couldn't help but show how we can achieve the same functionality with some of our other native list functions.
-In this case, we used [`list_slice`]({% link docs/sql/functions/list.md %}#list_slicelist-begin-end) and [`list_concat`]({% link docs/sql/functions/list.md %}#list_concatlist1-list2).
+In this case, we used [`list_slice`]({% link docs/stable/sql/functions/list.md %}#list_slicelist-begin-end) and [`list_concat`]({% link docs/stable/sql/functions/list.md %}#list_concatlist1-list2).
 
 ```sql
 CREATE OR REPLACE MACRO remove_idx(l, idx) AS (
@@ -240,7 +240,7 @@ CREATE OR REPLACE MACRO remove_idx(l, idx) AS (
 
 ### `list_reduce`
 
-Most recently, we've added [`list_reduce`]({% link docs/sql/functions/lambda.md %}#list_reducelist-lambda), which applies a lambda function to an accumulator value.
+Most recently, we've added [`list_reduce`]({% link docs/stable/sql/functions/lambda.md %}#list_reducelist-lambda), which applies a lambda function to an accumulator value.
 The accumulator is the result of the previous lambda function and is also what the function ultimately returns.
 
 We took the following example from a [discussion on GitHub](https://github.com/duckdb/duckdb/discussions/9752).

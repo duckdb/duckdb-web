@@ -59,7 +59,7 @@ SELECT * FROM schedule_raw;
 └────────────────────┴──────────────┴──────────────────┘
 ```
 
-Ideally, we would like the `timeslot` column to have the type `TIMESTAMP` so we can treat it as a timestamp in the queries later. To achieve this, we can use the table we just loaded and fix the problematic entities by using a regular expression-based search and replace operation, which unifies the format to `hours.minutes` followed by `am` or `pm`. Then, we convert the string to timestamps using [`strptime`]({% link docs/sql/functions/dateformat.md %}#strptime-examples) with the `%p` format specifier capturing the `am`/`pm` part of the string.
+Ideally, we would like the `timeslot` column to have the type `TIMESTAMP` so we can treat it as a timestamp in the queries later. To achieve this, we can use the table we just loaded and fix the problematic entities by using a regular expression-based search and replace operation, which unifies the format to `hours.minutes` followed by `am` or `pm`. Then, we convert the string to timestamps using [`strptime`]({% link docs/stable/sql/functions/dateformat.md %}#strptime-examples) with the `%p` format specifier capturing the `am`/`pm` part of the string.
 
 ```sql
 CREATE TABLE schedule_cleaned AS
@@ -72,7 +72,7 @@ CREATE TABLE schedule_cleaned AS
     FROM schedule_raw;
 ```
 
-Note that we use the [dot operator for function chaining]({% link docs/sql/functions/overview.md %}#function-chaining-via-the-dot-operator) to improve readability. For example, `regexp_replace(string, pattern, replacement)` is formulated as `string.regexp_replace(pattern, replacement)`. The result is the following table:
+Note that we use the [dot operator for function chaining]({% link docs/stable/sql/functions/overview.md %}#function-chaining-via-the-dot-operator) to improve readability. For example, `regexp_replace(string, pattern, replacement)` is formulated as `string.regexp_replace(pattern, replacement)`. The result is the following table:
 
 ```text
 ┌─────────────────────┬──────────────┬──────────────────┐
@@ -91,7 +91,7 @@ Note that we use the [dot operator for function chaining]({% link docs/sql/funct
 
 Next, we would like to derive a schedule that includes the full picture: *every timeslot* for *every location* should have its line in the table. For the timeslot-location combinations, where there is no event specified, we would like to explicitly add a string that says `<empty>`.
 
-To achieve this, we first create a table `timeslot_location_combinations` containing all possible combinations using a `CROSS JOIN`. Then, we can connect the original table on the combinations using a `LEFT JOIN`. Finally, we replace `NULL` values with the `<empty>` string using the [`coalesce` function]({% link docs/sql/functions/utility.md %}#coalesceexpr-).
+To achieve this, we first create a table `timeslot_location_combinations` containing all possible combinations using a `CROSS JOIN`. Then, we can connect the original table on the combinations using a `LEFT JOIN`. Finally, we replace `NULL` values with the `<empty>` string using the [`coalesce` function]({% link docs/stable/sql/functions/utility.md %}#coalesceexpr-).
 
 > The `CROSS JOIN` clause is equivalent to simply listing the tables in the `FROM` clause without specifying join conditions. By explicitly spelling out `CROSS JOIN`, we communicate that we intend to compute a Cartesian product – which is an expensive operation on large tables and should be avoided in most use cases.
 
@@ -133,7 +133,7 @@ SELECT * FROM schedule_filled;
 └───────────────────────────────────────────────────────┘
 ```
 
-We can also put everything together in a single query using a [`WITH` clause]({% link docs/sql/query_syntax/with.md %}):
+We can also put everything together in a single query using a [`WITH` clause]({% link docs/stable/sql/query_syntax/with.md %}):
 
 ```sql
 WITH timeslot_location_combinations AS (
@@ -151,11 +151,11 @@ ORDER BY ALL;
 ## Repeated Data Transformation Steps
 
 Data cleaning and transformation usually happens as a sequence of transformations that shape the data into a form that’s best fitted to later analysis.
-These transformations are often done by defining newer and newer tables using [`CREATE TABLE … AS SELECT` statements]({% link docs/sql/statements/create_table.md %}#create-table--as-select-ctas).
+These transformations are often done by defining newer and newer tables using [`CREATE TABLE … AS SELECT` statements]({% link docs/stable/sql/statements/create_table.md %}#create-table--as-select-ctas).
 
 For example, in the sections above, we created `schedule_raw`, `schedule_cleaned`, and `schedule_filled`. If, for some reason, we want to skip the cleaning steps for the timestamps, we have to reformulate the query computing `schedule_filled` to use `schedule_raw` instead of `schedule_cleaned`. This can be tedious and error-prone, and it results in a lot of unused temporary data – data that may accidentally get picked up by queries that we forgot to update!
 
-In interactive analysis, it’s often better to use the same table name by running [`CREATE OR REPLACE` statements]({% link docs/sql/statements/create_table.md %}#create-or-replace):
+In interactive analysis, it’s often better to use the same table name by running [`CREATE OR REPLACE` statements]({% link docs/stable/sql/statements/create_table.md %}#create-or-replace):
 
 ```sql
 CREATE OR REPLACE TABLE ⟨table_name⟩ AS
@@ -209,8 +209,8 @@ FROM schedule;
 ```
 
 What’s going on here?
-We first list columns ([`COLUMNS(*)`]({% link docs/sql/expressions/star.md %}#columns-expression)) and cast all of them to `VARCHAR` values.
-Then, we compute the numeric MD5 hashes with the [`md5_number` function]({% link docs/sql/functions/utility.md %}#md5_numberstring) and aggregate them using the [`bit_xor` aggregate function]({% link docs/sql/functions/aggregates.md %}#bit_xorarg).
+We first list columns ([`COLUMNS(*)`]({% link docs/stable/sql/expressions/star.md %}#columns-expression)) and cast all of them to `VARCHAR` values.
+Then, we compute the numeric MD5 hashes with the [`md5_number` function]({% link docs/stable/sql/functions/utility.md %}#md5_numberstring) and aggregate them using the [`bit_xor` aggregate function]({% link docs/stable/sql/functions/aggregates.md %}#bit_xorarg).
 This produces a single `HUGEINT` (`INT128`) value per column that can be used to compare the content of tables.
 
 If we run this query in the script above, we get the following results:
@@ -244,7 +244,7 @@ If we run this query in the script above, we get the following results:
 
 ## Creating a Macro for the Checksum Query
 
-We can turn the [checksum query](#computing-checksums-for-columns) into a [table macro]({% link docs/sql/statements/create_macro.md %}#table-macros) with the new [`query_table` function]({% link docs/guides/sql_features/query_and_query_table_functions.md %}):
+We can turn the [checksum query](#computing-checksums-for-columns) into a [table macro]({% link docs/stable/sql/statements/create_macro.md %}#table-macros) with the new [`query_table` function]({% link docs/stable/guides/sql_features/query_and_query_table_functions.md %}):
 
 ```sql
 CREATE MACRO checksum(table_name) AS TABLE
@@ -252,7 +252,7 @@ CREATE MACRO checksum(table_name) AS TABLE
     FROM query_table(table_name);
 ```
 
-This way, we can simply invoke it on the `schedule` table as follows (also leveraging DuckDB’s [`FROM`-first syntax]({% link docs/sql/query_syntax/from.md %})):
+This way, we can simply invoke it on the `schedule` table as follows (also leveraging DuckDB’s [`FROM`-first syntax]({% link docs/stable/sql/query_syntax/from.md %})):
 
 ```sql
 FROM checksum('schedule');

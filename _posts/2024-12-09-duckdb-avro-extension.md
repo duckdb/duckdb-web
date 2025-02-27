@@ -33,7 +33,7 @@ Avro “object container” files are encoded using a comparatively simple binar
 }
 ```
 
-The Avro schema defines a record structure. Records can contain scalar data fields (like `int`, `double`, `string`, etc.) but also more complex types like records (similar to [DuckDB `STRUCT`s]({% link docs/sql/data_types/struct.md %})), unions and lists. As a sidenote, it is quite strange that a data format for the definition of record structures would fall back to another format like JSON to describe itself, but such are the oddities of Avro.
+The Avro schema defines a record structure. Records can contain scalar data fields (like `int`, `double`, `string`, etc.) but also more complex types like records (similar to [DuckDB `STRUCT`s]({% link docs/stable/sql/data_types/struct.md %})), unions and lists. As a sidenote, it is quite strange that a data format for the definition of record structures would fall back to another format like JSON to describe itself, but such are the oddities of Avro.
 
 ### Data Blocks
 
@@ -79,7 +79,7 @@ FROM read_avro('s3://my-example-bucket/some_example_file.avro');
 
 should “just” work.
 
-You can also [*glob* multiple files]({% link docs/sql/functions/pattern_matching.md %}#globbing) in a single read call or pass a list of files to the functions:
+You can also [*glob* multiple files]({% link docs/stable/sql/functions/pattern_matching.md %}#globbing) in a single read call or pass a list of files to the functions:
 
 ```sql
 FROM read_avro('some_example_file_*.avro');

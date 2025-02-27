@@ -79,9 +79,9 @@ FROM 'path/to/file.csv';
 FROM 'path/to/file.parquet';
 ```
 
-Things can differ drastically for wild, rule-breaking [Arthur Morgan](https://reddead.fandom.com/wiki/Arthur_Morgan)-like CSV files. This is evident from the number of parameters that can be set for each scanner. The [Parquet]({% link docs/data/parquet/overview.md %}) scanner has a total of six parameters that can alter how the file is read. For the majority of cases, the user will never need to manually adjust any of them.
+Things can differ drastically for wild, rule-breaking [Arthur Morgan](https://reddead.fandom.com/wiki/Arthur_Morgan)-like CSV files. This is evident from the number of parameters that can be set for each scanner. The [Parquet]({% link docs/stable/data/parquet/overview.md %}) scanner has a total of six parameters that can alter how the file is read. For the majority of cases, the user will never need to manually adjust any of them.
 
-The CSV reader, on the other hand, depends on the sniffer being able to automatically detect many different configuration options. For example: What is the delimiter? How many rows should it skip from the top of the file? Are there any comments? And so on. This results in over [30 configuration options]({% link docs/data/csv/overview.md %}) that the user might have to manually adjust to properly parse their CSV file. Again, this number of options is necessary due to the lack of a widely adopted standard. However, in most scenarios, users can rely on the sniffer or, at most, change one or two options.
+The CSV reader, on the other hand, depends on the sniffer being able to automatically detect many different configuration options. For example: What is the delimiter? How many rows should it skip from the top of the file? Are there any comments? And so on. This results in over [30 configuration options]({% link docs/stable/data/csv/overview.md %}) that the user might have to manually adjust to properly parse their CSV file. Again, this number of options is necessary due to the lack of a widely adopted standard. However, in most scenarios, users can rely on the sniffer or, at most, change one or two options.
 
 The CSV reader also has an extensive error-handling system and will always provide suggestions for options to review if something goes wrong.
 
@@ -162,7 +162,7 @@ We will run two different TPC-H queries on our files.
 
 **Query 01.** First, we run TPC-H Q01. This query operates solely on the `lineitem` table, performing an aggregation and grouping with a filter. It filters on one column and projects 7 out of the 16 columns from `lineitem`.
 
-Therefore, this query will stress the filter pushdown, which is [supported by the Parquet reader]({% link docs/data/parquet/overview.md %}#partial-reading) but not the CSV reader, and the projection pushdown, which is supported by both.
+Therefore, this query will stress the filter pushdown, which is [supported by the Parquet reader]({% link docs/stable/data/parquet/overview.md %}#partial-reading) but not the CSV reader, and the projection pushdown, which is supported by both.
 
 ```sql
 SELECT
