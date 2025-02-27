@@ -4,11 +4,7 @@
 
 <div id="breadcrumbs">
   {% assign crumbs = page.url | remove: '/index.html' | split: '/' %}
-  
-  {% assign offset = 2 %}
-  {% if crumbs[offset] == "archive" %}
-    {% assign offset = offset | plus: 2 %}
-  {% endif %}
+  {% assign offset = 3 %}
 
   <span>Documentation</span>
 
