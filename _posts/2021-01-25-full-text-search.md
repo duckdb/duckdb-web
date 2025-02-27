@@ -16,10 +16,9 @@ Alright, enough about the "why", let's get to the "how".
 
 ## Preparing the Data
 
-The TREC 2004 Robust Retrieval Track has 250 "topics" (search queries) over TREC disks 4 and 5. The data consist of many text files stored in SGML format, along with a corresponding DTD (document type definition) file. This format is rarely used anymore, but it is similar to XML. We will use OpenSP's command line tool `osx` to convert it to XML. Because there are many files, I wrote a bash script:
+The TREC 2004 Robust Retrieval Track has 250 "topics" (search queries) over TREC disks 4 and 5. The data consist of many text files stored in SGML format, along with a corresponding DTD (document type definition) file. This format is rarely used anymore, but it is similar to XML. We will use OpenSP's command line tool `osx` to convert it to XML. Because there are many files, I wrote a Bash script:
 
-```text
-#!/bin/bash
+```bash
 mkdir -p latimes/xml
 for i in $(seq -w 1 9); do
     cat dtds/la.dtd latimes-$i | osx > latimes/xml/latimes-$i.xml
@@ -66,6 +65,7 @@ documents_df = pd.DataFrame([x for sublist in list_of_dict_lists for x in sublis
 ```
 
 Now that we have a dataframe, we can register it in DuckDB.
+
 ```python
 # create database connection and register the dataframe
 con = duckdb.connect(database='db/trec04_05.db', read_only=False)
@@ -75,11 +75,17 @@ con.register('documents_df', documents_df)
 con.execute("CREATE TABLE documents AS (SELECT * FROM documents_df)")
 con.close()
 ```
+
 This is the end of my preparation script, so I closed the database connection.
 
 ## Building the Search Engine
 
-We can now build the inverted index and the retrieval model using a `PRAGMA` statement. The extension is [documented here]({% link docs/stable/extensions/full_text_search.md %}). We create an index table on table `documents` or `main.documents` that we created with our script. The column that identifies our documents is called `docno`, and we wish to create an inverted index on the fields supplied. I supplied all fields by using the '\*' shortcut.
+We can now build the inverted index and the retrieval model using a `PRAGMA` statement.
+The extension is [documented here]({% link docs/stable/extensions/full_text_search.md %}).
+We create an index table on table `documents` or `main.documents` that we created with our script.
+The column that identifies our documents is called `docno`, and we wish to create an inverted index on the fields supplied.
+I supplied all fields by using the '\*' shortcut.
+
 ```python
 con = duckdb.connect(database='db/trec04_05.db', read_only=False)
 con.execute("PRAGMA create_fts_index('documents', 'docno', '*', stopwords='english')")
@@ -90,6 +96,7 @@ Under the hood, a parameterized SQL script is called. The schema `fts_main_docum
 ## Running the Benchmark
 
 The data is now fully prepared. Now we want to run the queries in the benchmark, one by one. We load the topics file as follows:
+
 ```python
 # the 'topics' file is not structured nicely, therefore we need parse some of it using regex
 def after_tag(s, tag):
@@ -106,9 +113,11 @@ with open('../../trec/topics', 'r') as f:
         title = after_tag(str(top), 'title')
         topic_dict[num] = title
 ```
+
 This gives us a dictionary that has query number as keys, and query strings as values, e.g. `301 -> 'International Organized Crime'`.
 
 We want to store the results in a specific format, so that they can be evaluated by [trec eval](https://github.com/usnistgov/trec_eval.git):
+
 ```python
 # create a prepared statement to make querying our document collection easier
 con.execute("""
