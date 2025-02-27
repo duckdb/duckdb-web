@@ -33,10 +33,11 @@
 				{% if item.mainfolderitems[0] %}
 					<ul style="display: {% if url_contains %}block;{% else %}none{% endif %}">
 						{% for mainentry in item.mainfolderitems %}
+
 						<li class="mainentry-menu
-								{%- if url_parts[2] == mainentry.url %} active{% endif -%}
+								{%- if url_parts[3] == mainentry.url %} active{% endif -%}
 								{%- if mainentry.url %} {{ mainentry.url }}{% endif -%}
-								{%- if url_parts[2] %} {{ url_parts[2]}}{% endif -%}
+								{%- if url_parts[3] %} {{ url_parts[3]}}{% endif -%}
 								{%- if mainentry.subfolderitems[0] %} hasSub{% endif -%}
 								{%- if mainentry.open or url_parts contains mainentry.url or url_parts contains mainentry.slug %} opened{% endif -%}
 							">
@@ -46,7 +47,7 @@
 							{% for entry in mainentry.subfolderitems %}
 							{% if mainentry.subfolderitems %}
 							<li class="entry-menu
-									{%- if url_parts[2] == mainentry.slug and url_parts[3] == entry.url %} active{% endif -%}
+									{%- if url_parts[3] == mainentry.slug and url_parts[4] == entry.url %} active{% endif -%}
 									{%- if entry.subsubfolderitems[0] %} hasSub{% endif -%}
 									{%- if entry.open or url_parts contains entry.url or url_parts contains entry.slug %} opened{% endif -%}
 								">
@@ -58,7 +59,7 @@
 								{% for subentry in entry.subsubfolderitems %}
 								{% if entry.subsubfolderitems %}
 								<li class="subentry-menu
-									{%- if url_parts[3] == entry.slug and url_parts[4] == subentry.url %} active{% endif -%}
+									{%- if url_parts[4] == entry.slug and url_parts[5] == subentry.url %} active{% endif -%}
 									{%- if subentry.open or url_parts contains subentry.url or url_parts contains subentry.slug %} opened{% endif -%}
 								">
 									{% if subentry.url %} <a href="{{ site.baseurl }}/{{starting_url}}{{item.slug}}{{mainentry.slug}}/{{ entry.slug }}/{{ subentry.url }}"> {{ subentry.page }} </a> {% else %} {{ subentry.page }} {% endif %}

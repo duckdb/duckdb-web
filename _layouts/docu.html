@@ -48,13 +48,11 @@ Page URL: <https://duckdb.org{{ page.url }}>
 
 {% assign url_version_parts = page.url | split: "/docs/" %}
 {% assign url_version_parts = url_version_parts[1] | split: "/" %}
-{% comment %} Liquid doesn't have an is_digit check, so we check for concrete values. {% endcomment %}
+{% comment %} Liquid doesn't have an is_digit-style function, so we check the first character for concrete values. {% endcomment %}
 {% assign c = url_version_parts[0] | slice: 0 %}
 {% if c == "0" or c == "1" or c == "2" %}
 	{% assign version_viewed = url_version_parts[0] %}
 {% endif %}
-
-version_viewed = {{ version_viewed }}
 
 
 <body class="documentation{% if page.body_class %} {{ page.body_class }} {% endif %}">
