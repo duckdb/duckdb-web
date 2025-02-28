@@ -4,12 +4,12 @@ title: "Reading and Writing Google Sheets in DuckDB"
 author: "Alex Monahan and Archie Wood"
 thumb: "/images/blog/thumbs/gsheets.svg"
 image: "/images/blog/thumbs/gsheets.png"
-excerpt: "Read from and write to Google Sheets directly in DuckDB using the GSheets community extension! For ad hoc querying, authentication is as easy as logging into Google from a browser. Scheduled workflows can use persistent DuckDB Secrets. SQL-on-Sheets has arrived!"
+excerpt: "Securely read from and write to Google Sheets directly in DuckDB using the GSheets community extension! For ad hoc querying, authentication is as easy as logging into Google from a browser. Scheduled workflows can use persistent DuckDB Secrets. SQL-on-Sheets has arrived!"
 tags: ["using DuckDB"]
 ---
 
 <video muted controls autoplay loop width="720">
-  <source src="/images/blog/gsheets_end_to_end_demo.mp4" type="video/mp4" />
+  <source src="http://blobs.duckdb.org/videos/gsheets-demo.mp4" type="video/mp4" />
 </video>
 
 ## Spreadsheets Are Everywhere
