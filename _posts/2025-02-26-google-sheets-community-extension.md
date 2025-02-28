@@ -9,7 +9,7 @@ tags: ["using DuckDB"]
 ---
 
 <video muted controls autoplay loop width="900">
-  <source src="http://blobs.duckdb.org/videos/gsheets-demo.mp4" type="video/mp4" />
+  <source src="https://blobs.duckdb.org/videos/gsheets-demo.mp4" type="video/mp4" />
 </video>
 
 ## Spreadsheets Are Everywhere
@@ -29,7 +29,7 @@ Spreadsheets are often the best place to manually edit data and they also provid
 Now, you can use DuckDB to seamlessly bridge the gap between data-y folks and business-y folks!
 With a simple in-browser authentication flow, or an automateable private key file flow, you can both query from and load into Google Sheets.
 
-The [GSheets extension](https://github.com/evidence-dev/duckdb_gsheets) was originally authored by Archie from the team at [Evidence](http://evidence.dev/), but has since had significant contributions from Alex and [Michael](https://www.linkedin.com/in/mharrisb1/).
+The [GSheets extension](https://github.com/evidence-dev/duckdb_gsheets) was originally authored by Archie from the team at [Evidence](https://evidence.dev/), but has since had significant contributions from Alex and [Michael](https://www.linkedin.com/in/mharrisb1/).
 
 ## Getting Started with the GSheets Extension
 
