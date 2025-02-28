@@ -53,8 +53,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 366
-extension_download_count_pretty: 366
+extension_download_count: 413
+extension_download_count_pretty: 413
 image: '/images/community_extensions/social_preview/preview_community_extension_pyroscope.png'
 layout: community_extension_doc
 ---
