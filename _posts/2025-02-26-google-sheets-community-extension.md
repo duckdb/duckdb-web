@@ -8,7 +8,7 @@ excerpt: "Securely read from and write to Google Sheets directly in DuckDB using
 tags: ["using DuckDB"]
 ---
 
-<video muted controls autoplay loop width="720">
+<video muted controls autoplay loop width="900">
   <source src="http://blobs.duckdb.org/videos/gsheets-demo.mp4" type="video/mp4" />
 </video>
 
