@@ -10,7 +10,7 @@ tags: ["release"]
 
 <img src="/images/blog/velvet-scoter-duck.jpg"
      alt="Image of the Velvet Scoter"
-     width="200px"
+     width="200"
      />
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
@@ -348,7 +348,7 @@ The command-line client has seen a lot of work this release. In particular, mult
 
 <img src="/images/syntax_highlighting_screenshot.png"
      alt="Image showing syntax highlighting in the shell"
-     width="700px"
+     width="700"
      />
 
 See the [extended CLI docs for more information]({% link docs/stable/clients/cli/overview.md %}).

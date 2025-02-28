@@ -8,7 +8,7 @@ tags: ["release"]
 
 <img src="/images/blog/labrador_duck.png"
      alt="Image of the labrador duck"
-     width=200px
+     width="200"
      />
 
 The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been released. This release of DuckDB is named "Labradorius" after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) that was native to North America.

@@ -58,7 +58,7 @@ Furthermore, the reader became one of the fastest CSV readers in analytical syst
 <div align="center">
     <img src="/images/blog/csv-vs-parquet-clickbench.png"
     alt="Image showing the ClickBench result 2024-12-05"
-    width="800px"
+    width="800"
     /></div>
 <div align="center">ClickBench CSV loading times (2024-12-05)</div>
 

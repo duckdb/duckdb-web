@@ -8,7 +8,7 @@ tags: ["deep dive"]
 
 <img src="/images/compression/matroshka-duck.png"
      alt="Matroshka Ducks (ducks going from big to small)"
-     width=200px
+     width="200"
      />
 
 When working with large amounts of data, compression is critical for reducing storage size and egress costs. Compression algorithms typically reduce data set size by **75-95%**, depending on how compressible the data is. Compression not only reduces the storage footprint of a data set, but also often **improves performance** as less data has to be read from disk or over a network connection.

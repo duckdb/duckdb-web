@@ -10,7 +10,7 @@ tags: ["release"]
 
 <img src="/images/blog/mottled_duck.jpg"
      alt="Image of the Mottled Duck"
-     width=200px
+     width="200"
      />
 
 The DuckDB team is happy to announce the latest DuckDB release (0.8.0). This release is named “Fulvigula” after the [Mottled Duck](https://en.wikipedia.org/wiki/Mottled_duck) (Anas Fulvigula) native to the Gulf of Mexico.

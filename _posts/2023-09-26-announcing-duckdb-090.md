@@ -10,7 +10,7 @@ tags: ["release"]
 
 <img src="/images/blog/yellow-billed-duck.jpg"
      alt="Image of the Yellow Billed Duck"
-     width=200px
+     width="200"
      />
 
 The DuckDB team is happy to announce the latest DuckDB release (0.9.0). This release is named Undulata after the [Yellow-billed duck](https://en.wikipedia.org/wiki/Yellow-billed_duck) native to Africa.
