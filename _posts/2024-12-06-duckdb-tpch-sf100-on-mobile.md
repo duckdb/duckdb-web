@@ -30,7 +30,7 @@ The results got us thinking: what if we improve the cooling of the phone? To thi
 <div align="center">
     <img src="/images/blog/tpch-mobile/ice-cooled-iphone-1.jpg"
     alt="iPhone in a box of dry ice, running TPC-H"
-    width="600px"
+    width="600"
     /></div>
 <div align="center">iPhone in a box of dry ice, running TPC-H. Don't try this at home.</div>
 
@@ -39,7 +39,7 @@ This helped a lot: DuckDB completed in 478.2 seconds. This is a more than 20% im
 <div align="center">
     <img src="/images/blog/tpch-mobile/ice-cooled-iphone-2.jpg"
     alt="The phone with icing on it, a few minutes after finishing the benchmark"
-    width="300px"
+    width="300"
     /></div>
 <div align="center">The phone a few minutes after finishing the benchmark. It no longer booted because the battery was too cold!</div>
 
@@ -52,7 +52,7 @@ We ran DuckDB in the [Termux terminal emulator](https://termux.dev/en/). We comp
 <div align="center">
     <img src="/images/blog/tpch-mobile/duckdb-termux-android-emulator.png"
     alt="Screenshot of DuckDB in Termux, running in the Android emulator"
-    width="600px"
+    width="600"
     /></div>
 <div align="center">DuckDB in Termux, running in the Android emulator</div>
 
@@ -96,7 +96,7 @@ It also had an Itanium CPU and looked like this:
 <div align="center">
     <img src="/images/blog/tpch-mobile/hp-itanium-workstation.jpg"
     alt="The Itanium2 workstation used in original the experiments"
-    width="600px"
+    width="600"
     /></div>
 <div align="center">The Itanium2 workstation used in original the experiments (source: <a href="https://commons.wikimedia.org/wiki/File:HP-HP9000-ZX6000-Itanium2-Workstation_11.jpg">Wikimedia</a>)</div>
 
@@ -107,7 +107,7 @@ The paper provides a detailed breakdown of the runtimes:
 <div align="center">
     <img src="/images/blog/tpch-mobile/cidr2005-monetdb-x100-results.png"
     alt="Benchmark results from the CIDR 2005 paper “MonetDB/X100: Hyper-Pipelining Query Execution”"
-    width="450px"
+    width="450"
     /></div>
 <div align="center">Benchmark results from the paper “MonetDB/X100: Hyper-Pipelining Query Execution”</div>
 
@@ -123,7 +123,7 @@ And here are all results visualized on a plot:
 <div align="center">
     <img src="/images/blog/tpch-mobile/tpch-mobile-experiment-runtimes.svg"
     alt="Plot with the TPC-H SF100 experiment results for MonetDB/X100 and DuckDB"
-    width="750px"
+    width="750"
     /></div>
 <div align="center">TPC-H SF100 total query runtimes for MonetDB/X100 and DuckDB</div>
 

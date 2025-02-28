@@ -8,7 +8,7 @@ tags: ["release"]
 
 <img src="/images/blog/white-headed-duck.jpeg"
      alt="Image of white-headed duck"
-     width=200px
+     width="200"
      />
 
 The DuckDB team is happy to announce the latest DuckDB version (0.6.0) has been released. This release of DuckDB is named "Oxyura" after the [White-headed duck (Oxyura leucocephala)](https://en.wikipedia.org/wiki/White-headed_duck) which is an endangered species native to Eurasia.

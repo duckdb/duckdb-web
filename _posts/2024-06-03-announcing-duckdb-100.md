@@ -13,7 +13,7 @@ For the release notes, see the [release page](https://github.com/duckdb/duckdb/r
 
 <img src="/images/blog/paddling-of-ducks.svg"
      alt="Logos of DuckDB releases"
-     width="800px"
+     width="800"
      />
 
 It has been almost six years since the first source code was written for the project back in 2018, and a _lot_ has happened since: There are now over 300&nbsp;000 lines of C++ engine code, over 42&nbsp;000 commits and almost 4&nbsp;000 issues were opened and closed again. DuckDB has also gained significant popularity: the project has attracted tens of thousands of stars and followers on GitHub and social media platforms. Download counts are in the millions each month, and download traffic just for extensions is upwards of four terabytes _each day_. There are even [books](https://www.manning.com/books/duckdb-in-action) [being](https://www.amazon.com/Getting-Started-DuckDB-practical-efficiently/dp/1803241004) [written](https://www.oreilly.com/library/view/duckdb-up-and/9781098159689/) about DuckDB, and – most importantly – now even [Wikipedia considers DuckDB notable](https://en.wikipedia.org/wiki/DuckDB), albeit barely.

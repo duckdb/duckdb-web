@@ -34,5 +34,5 @@ But for now, let’s sit around the syntax tree and be merry thinking about what
 <div align="center">
     <img src="/images/blog/duckdb-syntax-tree.jpg"
     alt="Christmas tree with SQL syntax decorations"
-    width="800px"
+    width="800"
     /></div>
