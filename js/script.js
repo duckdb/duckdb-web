@@ -564,16 +564,7 @@ $(document).ready(function(){
 		}
 	}
 
-	// STARTPAGE INSTALLATION WINDOW
-	var updateInstallation = function(){
-		var exampleSelection = $('#example-select').find(":selected").val();
-		var languageSelection = $('.demo.window ul.lang li.active').attr('data-language');
-		var exampleCode = $('.examples.hero-demo').find('div[data-install='+languageSelection+'][data-install='+exampleSelection+']').html();
-		var buttonTxt = $('.examples.hero-demo').find('div[data-install='+languageSelection+'][data-install='+exampleSelection+']').attr('data-buttontxt');
-		var buttonUrl = $('.examples.hero-demo').find('div[data-install='+languageSelection+'][data-install='+exampleSelection+']').attr('data-buttonurl');
-		$('.demo.window .content .code').html(exampleCode);
-	}
-		
+			
 	// UPDATE HIGHLIGHT ELEMENT
 	function updateHighlight($container, $item) {
 		const $highlight = $container.find(".select-highlight");
@@ -614,30 +605,32 @@ $(document).ready(function(){
 		});
 	}
 	
-	// QUICK INSTALLATION ON HOME PAGE
+	// QUICK INSTALLATION ON LANDING/HOME PAGE
 	if ($(".install .environment").length) {
 		const $envTopbar = $(".install .environment");
 		const $envItems = $envTopbar.find("> ul > li");
 		const $activeEnvItem = $envItems.filter(".active");
-	
-		updateHighlight($envTopbar, $activeEnvItem);
+		
+		function updateInstallation($item) {
+			updateHighlight($envTopbar, $item);
+			const activeClient = $item.attr("data-client");
+			let installation = $(
+				`#quick-installation div[data-install='${activeClient} ${OSdatid}']`
+			).html();
+			if (!installation) {
+				installation = $(
+					`#quick-installation div[data-install='${activeClient}']`
+				).html();
+			}
+			$(".result").html(installation);
+		}
+		
+		updateInstallation($activeEnvItem);
 	
 		$envItems.click(function () {
 			$envItems.removeClass("active");
 			$(this).addClass("active");
-	
-			updateHighlight($envTopbar, $(this));
-	
-			const activeClient = $(this).attr("data-client");
-			let installation = $(
-				`#quick-installation div[data-install='${activeClient} ${OSdatid}']`
-			).html();
-	
-			if (!installation) {
-				installation = $(`#quick-installation div[data-install='${activeClient}']`).html();
-			}
-	
-			$(".result").html(installation);
+			updateInstallation($(this));
 		});
 	}
 	
