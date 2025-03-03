@@ -27,8 +27,8 @@ docs:
 
     Check the [documentation](https://github.com/hatamiarash7/duckdb-netquack) for more details and examples on each function.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
+extension_star_count: 7
+extension_star_count_pretty: 7
 extension_download_count: 358
 extension_download_count_pretty: 358
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
