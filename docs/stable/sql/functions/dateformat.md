@@ -115,7 +115,7 @@ Below is a full list of all available format specifiers.
 | `%-S` | Second as a decimal number. | 0, 1, ..., 59 |
 | `%u` | ISO 8601 weekday as a decimal number where 1 is Monday. | 1, 2, ..., 7 |
 | `%U` | Week number of the year. Week 01 starts on the first Sunday of the year, so there can be week 00. Note that this is not compliant with the week date standard in ISO-8601. | 00, 01, ..., 53 |
-| `%V` | ISO 8601 week as a decimal number with Monday as the first day of the week. Week 01 is the week containing Jan 4. | 01, ..., 53 |
+| `%V` | ISO 8601 week as a decimal number with Monday as the first day of the week. Week 01 is the week containing Jan 4. Note that `%V` is incompatible with year directive `%Y`. Use the ISO year `%G` instead. | 01, ..., 53 |
 | `%w` | Weekday as a decimal number. | 0, 1, ..., 6 |
 | `%W` | Week number of the year. Week 01 starts on the first Monday of the year, so there can be week 00. Note that this is not compliant with the week date standard in ISO-8601. | 00, 01, ..., 53 |
 | `%x` | ISO date representation | 1992-03-02 |
