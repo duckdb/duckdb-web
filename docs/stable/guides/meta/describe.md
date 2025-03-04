@@ -49,6 +49,7 @@ It is possible to describe remote tables via the [`httpfs` extension]({% link do
 
 ```sql
 DESCRIBE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
+```
 
 |               column_name               | column_type | null | key  | default | extra |
 |-----------------------------------------|-------------|------|------|---------|-------|
