@@ -130,7 +130,7 @@ To remedy the last point, you can call the `PRAGMA hnsw_compact_index('⟨index 
 
 ## Bonus: Vector Similarity Search Joins
 
-The `vss` extension also provides a couple of table macros to simplify matching multiple vectors against eachother, so called "fuzzy joins". These are:
+The `vss` extension also provides a couple of table macros to simplify matching multiple vectors against each other, so called "fuzzy joins". These are:
 
 * `vss_join(left_table, right_table, left_col, right_col, k, metric := 'l2sq')`
 * `vss_match(right_table", left_col, right_col, k, metric := 'l2sq')`
