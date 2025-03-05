@@ -20,6 +20,7 @@ Several components of DuckDB are maintained in separate repositories.
 * [`duckdb-node`](https://github.com/duckdb/duckdb-node): Node.js client, first iteration
 * [`duckdb-node-neo`](https://github.com/duckdb/duckdb-node-neo): Node.js client, second iteration
 * [`duckdb-odbc`](https://github.com/duckdb/duckdb-odbc): ODBC client
+* [`duckdb-pyodide`](https://github.com/duckdb/duckdb-pyodide): Pyodide port
 * [`duckdb-r`](https://github.com/duckdb/duckdb-r): R client
 * [`duckdb-rs`](https://github.com/duckdb/duckdb-rs): Rust client
 * [`duckdb-swift`](https://github.com/duckdb/duckdb-swift): Swift client
