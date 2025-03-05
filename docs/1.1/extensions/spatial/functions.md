@@ -93,7 +93,7 @@ title: Spatial Functions
 | [`ST_Points`](#st_points)                                     | Collects all the vertices in the geometry into a multipoint                                                                                  |
 | [`ST_QuadKey`](#st_quadkey)                                   | Compute the [quadkey](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system) for a given lon/lat point at a given level. |
 | [`ST_ReducePrecision`](#st_reduceprecision)                   | Returns the geometry with all vertices reduced to the target precision                                                                       |
-| [`ST_RemoveRepeatedPoints`](#st_removerepeatedpoints)         | Returns a new geometry with repeated points removed, optionally within a target distance of eachother.                                       |
+| [`ST_RemoveRepeatedPoints`](#st_removerepeatedpoints)         | Returns a new geometry with repeated points removed, optionally within a target distance of each other.                                       |
 | [`ST_Reverse`](#st_reverse)                                   | Returns a new version of the input geometry with the order of its vertices reversed                                                          |
 | [`ST_ShortestLine`](#st_shortestline)                         | Returns the line between the two closest points between geom1 and geom2                                                                      |
 | [`ST_Simplify`](#st_simplify)                                 | Simplifies the input geometry by collapsing edges smaller than 'distance'                                                                    |
@@ -1746,7 +1746,7 @@ GEOMETRY ST_RemoveRepeatedPoints (col0 GEOMETRY, col1 DOUBLE)
 
 #### Description
 
-Returns a new geometry with repeated points removed, optionally within a target distance of eachother.
+Returns a new geometry with repeated points removed, optionally within a target distance of each other.
 
 ----
 
