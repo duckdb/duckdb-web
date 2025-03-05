@@ -15,7 +15,7 @@ DuckDB works efficiently on both AMD64 (x86_64) and ARM64 (AArch64) CPU architec
 
 ### Memory
 
-> Bestpractice Aim for 5-10 GB memory per thread.
+> Bestpractice Aim for 1-4 GB memory per thread.
 
 #### Minimum Required Memory
 
@@ -32,7 +32,7 @@ SET threads = 4;
 The amount of memory required for ideal performance depends on several factors, including the data set size and the queries to execute.
 Maybe surprisingly, the _queries_ have a larger effect on the memory requirement.
 Workloads containing large joins over many-to-many tables yield large intermediate datasets and thus require more memory for their evaluation to fully fit into the memory.
-As an approximation, aggregation-heavy workloads require 5 GB memory per thread and join-heavy workloads require 10 GB memory per thread.
+As an approximation, aggregation-heavy workloads require 1-2 GB memory per thread and join-heavy workloads require 3-4 GB memory per thread.
 
 #### Larger-than-Memory Workloads
 
