@@ -36,6 +36,13 @@ The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
     For more details on setting up Jekyll, consult [GitHub's instructions](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll).
 
+3. Create a Python virtual env and install requirements
+  ```
+  python3 -m venv venv
+  source venv/bin/activate
+  pip install -r requirements.txt
+  ```
+
 ### Serving the site using a local Jekyll installation
 
 To serve this website, run:
