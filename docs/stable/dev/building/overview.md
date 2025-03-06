@@ -28,6 +28,8 @@ This page explains the steps for building DuckDB.
 DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
 Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
 
+Currently, building DuckDB with the `-march=native` flag is not supported.
+
 ## Platforms
 
 ### Supported Platforms
