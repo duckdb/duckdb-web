@@ -8,7 +8,7 @@ excerpt: "We highlight a few exciting features that were introduced in DuckDB 1.
 tags: ["releases"]
 ---
 
-We published the DuckDB 1.2.1 bugfix release yesterday. As usual, please consult the [release notes](https://github.com/duckdb/duckdb/releases/tag/v1.2.1) for the full list of changes and the [installation page](({% link  docs/installation/index.html %})) for instructions on installing or upgrading. In this post, we'll highlight a few features that were recently added to DuckDB and improvements that have been made in its ecosystem.
+We published the DuckDB 1.2.1 bugfix release yesterday. As usual, please consult the [release notes](https://github.com/duckdb/duckdb/releases/tag/v1.2.1) for the full list of changes and the [installation page]({% link  docs/installation/index.html %}) for instructions on installing or upgrading. In this post, we'll highlight a few features that were recently added to DuckDB and improvements that have been made in its ecosystem.
 
 ## New Clients Page
 
@@ -95,7 +95,7 @@ SELECT sum(CASE WHEN l_extendedprice > 500 THEN 1 END) FROM lineitem;
 ### Excel Extension
 
 Prior to DuckDB 1.2, Excel files were only supported by the [`spatial` extension]({% link docs/stable/extensions/spatial/overview.md %}), which is a heavyweight extension with several dependencies.
-Starting with 1.2, the [`excel` extension](({% link docs/stable/extensions/excel.md %})) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
+Starting with 1.2, the [`excel` extension]({% link docs/stable/extensions/excel.md %}) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
 
 ```sql
 FROM read_xlsx('test.xlsx', header = true);  
@@ -115,3 +115,8 @@ The ecosystem around DuckDB keeps growing: many projects are built both with Duc
 ### DuckDB File Signature
 
 DuckDB's [file signature]({% link docs/stable/internals/storage.md %}#storage-header), `DUCK` (hex: `44 55 43 4B`), is now listed on [Wikipedia](https://en.wikipedia.org/wiki/List_of_file_signatures).
+
+### Parquet Information Sheet
+
+We added DuckDB to the [“Implementation status” page of the Parquet documentation](https://parquet.apache.org/docs/file-format/implementationstatus/).
+In the process, we also improved DuckDB's Parquet support, e.g., by adding the [`FLOAT16` logical type](https://github.com/duckdb/duckdb/pull/16395).
