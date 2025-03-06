@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: ceffd71d91b57c47614016c06a33736426833ddb
+  revision: 7be9cd0567cecbb3ae2245e4e45959b15572b081
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -29,8 +29,9 @@ GEM
     colorator (1.1.0)
     concurrent-ruby (1.3.5)
     csv (3.3.2)
-    dnsruby (1.72.3)
+    dnsruby (1.72.4)
       base64 (~> 0.2.0)
+      logger (~> 1.6.5)
       simpleidn (~> 0.2.1)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
@@ -53,13 +54,13 @@ GEM
       octokit (>= 4, < 10)
       public_suffix (>= 3.0, < 7.0)
       typhoeus (~> 1.3)
-    google-protobuf (4.29.3-arm64-darwin)
+    google-protobuf (4.30.0-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.3-x86_64-darwin)
+    google-protobuf (4.30.0-x86_64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.3-x86_64-linux)
+    google-protobuf (4.30.0-x86_64-linux)
       bigdecimal
       rake (>= 13)
     http_parser.rb (0.8.0)
