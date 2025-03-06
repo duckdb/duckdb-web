@@ -115,3 +115,8 @@ The ecosystem around DuckDB keeps growing: many projects are built both with Duc
 ### DuckDB File Signature
 
 DuckDB's [file signature]({% link docs/stable/internals/storage.md %}#storage-header), `DUCK` (hex: `44 55 43 4B`), is now listed on [Wikipedia](https://en.wikipedia.org/wiki/List_of_file_signatures).
+
+### Parquet Information Sheet
+
+We added DuckDB to the [“Implementation status” page of the Parquet documentation](https://parquet.apache.org/docs/file-format/implementationstatus/).
+In the process, we also improved DuckDB's Parquet support, e.g., by adding the [`FLOAT16` logical type](https://github.com/duckdb/duckdb/pull/16395).
