@@ -37,7 +37,7 @@ Starting with v1.2.1, we ship digitally signed binaries for the DuckDB Windows c
 
 ## Unsung DuckDB 1.2 Features
 
-Further to the [“What's New in 1.2.0” section of the announcement blog post]({% post_url 2025-02-05-announcing-duckdb-120 %}#whats-new-in-120), we collected five new features that were introduced in v1.2.0:
+Further to the [“What's New in 1.2.0” section of the announcement blog post]({% post_url 2025-02-05-announcing-duckdb-120 %}#whats-new-in-120), we collected five new features that were introduced in v1.2.0.
 
 ### `OR` / `IN` Filter Pushdown
 
