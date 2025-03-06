@@ -99,7 +99,7 @@ The top level catalog view is `information_schema.schemata`. It lists the catalo
 | `default_character_set_catalog` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
 | `default_character_set_schema` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
 | `default_character_set_name` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
-| `sql_path` | The file system location of the database. Currently unimplemented. | `VARCHAR` | `NULL` |
+| `sql_path` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
 
 ### `tables`: Tables and Views
 
