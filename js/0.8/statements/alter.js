@@ -27,6 +27,12 @@ function GenerateAlterColumnOptions(options) {
 			]),
 			Sequence([
 				Keyword("DROP DEFAULT")
+			]),
+			Sequence([
+				Keyword("SET NOT NULL"),
+			]),
+			Sequence([
+				Keyword("DROP NOT NULL")
 			])
 		])
 	]
