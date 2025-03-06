@@ -177,6 +177,10 @@
               "url": "overview"
             },
             {
+              "page": "ADBC",
+              "url": "adbc"
+            },
+            {
               "page": "C",
               "slug": "c",
               "subsubfolderitems": [
@@ -317,6 +321,32 @@
               ]
             },
             {
+              "page": "ODBC",
+              "slug": "odbc",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Linux Setup",
+                  "url": "linux"
+                },
+                {
+                  "page": "Windows Setup",
+                  "url": "windows"
+                },
+                {
+                  "page": "macOS Setup",
+                  "url": "macos"
+                },
+                {
+                  "page": "Configuration",
+                  "url": "configuration"
+                }
+              ]
+            },
+            {
               "page": "Python",
               "slug": "python",
               "subsubfolderitems": [
@@ -401,36 +431,6 @@
                 {
                   "page": "Extensions",
                   "url": "extensions"
-                }
-              ]
-            },
-            {
-              "page": "ADBC",
-              "url": "adbc"
-            },
-            {
-              "page": "ODBC",
-              "slug": "odbc",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Linux Setup",
-                  "url": "linux"
-                },
-                {
-                  "page": "Windows Setup",
-                  "url": "windows"
-                },
-                {
-                  "page": "macOS Setup",
-                  "url": "macos"
-                },
-                {
-                  "page": "Configuration",
-                  "url": "configuration"
                 }
               ]
             }
