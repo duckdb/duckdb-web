@@ -11,47 +11,59 @@ On Linux, install the required packages with the package manager of your distrib
 
 ### Ubuntu and Debian
 
+#### CLI Client
+
+On Ubuntu and Debian (and also MX Linux, Linux Mint, etc.), tthe requirements for building the DuckDB CLI client are the following:
+
 ```batch
 sudo apt-get update
 sudo apt-get install -y git g++ cmake ninja-build libssl-dev
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+GEN=ninja make
 ```
 
-### Fedora, CentOS, and Red Hat
+### Fedora, CentOS and Red Hat
+
+#### CLI Client
+
+The requirements for building the DuckDB CLI client on Fedora, CentOS, Red Hat, AlmaLinux, Rocky Linux, etc. are the following:
 
 ```batch
 sudo yum install -y git g++ cmake ninja-build openssl-devel
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+GEN=ninja make
 ```
 
 ### Alpine Linux
 
+#### CLI Client
+
+The requirements for building the DuckDB CLI client on Alpine Linux are the following:
+
 ```batch
 apk add g++ git make cmake ninja
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+GEN=ninja make
 ```
 
-Note that Alpine Linux uses the musl libc as its C standard library.
-There are no official DuckDB binaries distributed for musl libc but it can be build with it manually following the instructions on this page.
+Note that Alpine Linux uses [musl libc](https://musl.libc.org/) as its C standard library.
+Currently, there are no official DuckDB binaries distributed for musl libc but it can be build with it manually following the instructions on this page.
 Note that starting with DuckDB v1.2.0, [extensions are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions).
 
 #### Python Client on Alpine Linux
 
-To install the Python client on Alpine Linux, run:
+Currently, installing the DuckDB Python on Alpine Linux requires compilation from source.
+To do so, install the required packages before running `pip`:
 
 ```batch
 apk add g++ py3-pip python3-dev
 pip install duckdb
 ```
 
-This will compile DuckDB from source.
-
-## Building DuckDB
-
-Clone and build DuckDB as follows:
-
-```batch
-git clone https://github.com/duckdb/duckdb
-cd duckdb
-GEN=ninja make
-```
+## Using the DuckDB CLI Client on Linux
 
 Once the build finishes successfully, you can find the `duckdb` binary in the `build` directory:
 
@@ -59,7 +71,7 @@ Once the build finishes successfully, you can find the `duckdb` binary in the `b
 build/release/duckdb
 ```
 
-For different build configurations (`debug`, `relassert`, etc.), please consult the [Build Configurations page]({% link docs/stable/dev/building/build_configuration.md %}).
+For different build configurations (`debug`, `relassert`, etc.), please consult the [“Build Configurations” page]({% link docs/stable/dev/building/build_configuration.md %}).
 
 ## Building Using Extension Flags
 
