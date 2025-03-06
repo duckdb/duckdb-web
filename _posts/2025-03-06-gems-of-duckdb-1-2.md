@@ -55,7 +55,7 @@ duckdb -f script.sql
 This is equivalent to:
 
 ```bash
-duckdb -c ".read scripts.sql"
+duckdb -c ".read script.sql"
 ```
 
 This feature is documented in the [DuckDB tldr page](https://tldr.inbrowser.app/pages/common/duckdb). If you have [tldr](https://tldr.sh/) installed, you can get this page in the CLI via `tldr duckdb`.
