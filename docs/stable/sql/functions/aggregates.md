@@ -104,7 +104,7 @@ FROM tbl;
 
 ### Handling `NULL` Values
 
-All general aggregate functions except for [`list`](#listarg) and [`first`](#firstarg) (and their aliases [`array_agg`](#array_aggarg) and [`arbitrary`](#arbitraryarg), respectively) ignore `NULL`s.
+All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#array_aggarg)), [`first`](#firstarg) ([`arbitrary`](#arbitraryarg)) and [`last`](#lastarg).
 To exclude `NULL`s from `list`, you can use a [`FILTER` clause]({% link docs/stable/sql/query_syntax/filter.md %}).
 To ignore `NULL`s from `first`, you can use the [`any_value` aggregate](#any_valuearg).
 
