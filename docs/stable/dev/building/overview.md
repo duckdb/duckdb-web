@@ -38,7 +38,7 @@ DuckDB fully supports Linux, macOS and Windows. Both AMD64 (x86_64) and ARM64 (A
 |--------------------|------------------------------------------------------------------------|
 | `linux_amd64`      | Linux AMD64 (x86_64) with [glibc](https://www.gnu.org/software/libc/)  |
 | `linux_arm64`      | Linux ARM64 (AArch64) with [glibc](https://www.gnu.org/software/libc/) |
-| `linux_amd64_musl` | Linux AMD64 (x86_64) with [musl libc](https://www.musl-libc.org/)      |
+| `linux_amd64_musl` | Linux AMD64 (x86_64) with [musl libc](https://musl.libc.org/)          |
 | `osx_amd64`        | macOS 12+ AMD64 (Intel CPUs)                                           |
 | `osx_arm64`        | macOS 12+ ARM64 (Apple Silicon CPUs)                                   |
 | `windows_amd64`    | Windows 10+ AMD64 (x86_64)                                             |
