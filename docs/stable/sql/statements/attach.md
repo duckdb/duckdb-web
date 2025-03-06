@@ -31,7 +31,7 @@ ATTACH 'file.db' (READ_ONLY);
 Attach the database `file.db` with a block size of 16KB:
 
 ```sql
-ATTACH 'file.db' (BLOCK_SIZE 16384);
+ATTACH 'file.db' (BLOCK_SIZE 16_384);
 ```
 
 Attach a SQLite database for reading and writing (see the [`sqlite` extension]({% link docs/stable/extensions/sqlite.md %}) for more information):
@@ -76,7 +76,7 @@ Change the default database that is used to the database `file`:
 USE file;
 ```
 
-## Attach
+## `ATTACH`
 
 The `ATTACH` statement adds a new database file to the catalog that can be read from and written to.
 Note that attachment definitions are not persisted between sessions: when a new session is launched, you have to re-attach to all databases.
@@ -104,7 +104,20 @@ ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
 
 > Prior to DuckDB version 1.1.0, it was necessary to specify the `READ_ONLY` flag for HTTP and S3 endpoints.
 
-## Detach
+### Explicit Storage Versions
+
+[DuckDB v1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicilty specifying the storage version.
+Using this, you can opt-in to newer forwards-incompatible features:
+
+```sql
+ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
+```
+
+This setting specifies the minimum DuckDB version that should be able to read the database file. When database files are written with this option, the resulting files cannot be opened by older DuckDB released versions than the specified version. They can be read by the specified version and all newer versions of DuckDB.
+
+For more details, see the [“Storage” page]({% link docs/stable/internals/storage.md %}#explicit-storage-versions).
+
+## `DETACH`
 
 The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file.
 
