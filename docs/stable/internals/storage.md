@@ -39,6 +39,48 @@ After this, `mydata.db` will remain in the old format, `mydata.new.db` will cont
 
 Check [`EXPORT` documentation]({% link docs/stable/sql/statements/export.md %}) for more details on the syntax.
 
+### Explicit Storage Versions
+
+[DuckDB v1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicilty specifying the storage version.
+Using this, you can opt-in to newer forwards-incompatible features:
+
+```sql
+ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
+```
+
+This setting specifies the minimum DuckDB version that should be able to read the database file. When database files are written with this option, the resulting files cannot be opened by older DuckDB released versions than the specified version. They can be read by the specified version and all newer versions of DuckDB.
+
+If you attach to DuckDB databases, you can query the storage versions using the following command:
+
+```sql
+SELECT database_name, tags FROM duckdb_databases();
+```
+
+This shows the storage versions:
+
+```text
+┌───────────────┬───────────────────────────────────┐
+│ database_name │               tags                │
+│    varchar    │       map(varchar, varchar)       │
+├───────────────┼───────────────────────────────────┤
+│ file1         │ {storage_version=v1.2.0}          │
+│ file2         │ {storage_version=v1.0.0 - v1.1.3} │
+│ ...           │ ...                               │
+└───────────────┴───────────────────────────────────┘
+```
+
+This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
+
+### Converting Between Storage Versions
+
+To convert from the new format to the old format for compatibility, use the following sequence in DuckDB v1.2.0+:
+
+```sql
+ATTACH 'file1.db';
+ATTACH 'converted_file.db' (STORAGE_VERSION 'v1.0.0');
+COPY FROM DATABASE file1 TO converted_file;
+```
+
 ## Storage Header
 
 DuckDB files start with a `uint64_t` which contains a checksum for the main header, followed by four magic bytes (`DUCK`), followed by the storage version number in a `uint64_t`.
