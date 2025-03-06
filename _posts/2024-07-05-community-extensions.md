@@ -33,7 +33,7 @@ Until now, publishing third-party extensions has been a *difficult process* whic
 
 Distributing software in a safe way has never been easier, allowing us to reach a wide base of users across pip, conda, cran, npm, brew, etc. We want to provide a similar experience both to users who can easily grab the extension they will want to use, and developers who should not be burdened with distribution details. We are also interested in lowering the bar to package utilities and scripts as a DuckDB extension, empowering users to package useful functionality connected to their area of expertise (or pain points).
 
-We believe that fostering a community extension ecosystem is the next logical step for DuckDB. That’s why we’re very excited about launching our [Community Extension repository](https://github.com/duckdb/community-extensions/) which was [announced at the Data + AI Summit](https://youtu.be/wuP6iEYH11E?t=275).
+We believe that fostering a community extension ecosystem is the next logical step for DuckDB. That’s why we’re very excited about launching our [Community Extensions repository](https://github.com/duckdb/community-extensions/) which was [announced at the Data + AI Summit](https://youtu.be/wuP6iEYH11E?t=275).
 
 For users, this repository allows for easy discovery, installation and maintenance of community extensions directly from the DuckDB SQL prompt. For developers, it greatly streamlines the publication process of extensions. In the following, we’ll discuss how the new extension repository enhances the experiences of these groups.
 
@@ -60,7 +60,7 @@ GROUP BY cell_id
 HAVING cnt > 10;
 ```
 
-On load, the extension’s signature is checked, both to ensure platform and versions are compatible, and to verify that the source of the binary is the community extensions repository. Extensions are built, signed and distributed for Linux, macOS, Windows, and WebAssembly. This allows extensions to be available to any DuckDB client using version 1.0.0 and upcoming versions.
+On load, the extension’s signature is checked, both to ensure platform and versions are compatible, and to verify that the source of the binary is the Community Extensions repository. Extensions are built, signed and distributed for Linux, macOS, Windows, and WebAssembly. This allows extensions to be available to any DuckDB client using version 1.0.0 and upcoming versions.
 
 The `h3` extension’s documentation is available at <https://duckdb.org/community_extensions/extensions/h3>.
 
@@ -90,7 +90,7 @@ For the [maintainer of `h3`](https://github.com/isaacbrodsky/), the publication 
 
 2. The CI will build and test the extension. The checks performed by the CI are aligned with the [`extension-template` repository](https://github.com/duckdb/extension-template), so iterations can be done independently.
 
-3. Wait for approval from the DuckDB Community Extension repository’s maintainers and for the build process to complete.
+3. Wait for approval from the DuckDB Community Extensions repository’s maintainers and for the build process to complete.
 
 ## Published Extensions
 
@@ -120,4 +120,4 @@ In this blog post, we introduced the DuckDB Community Extensions repository, whi
 We are looking forward to continuously extending this repository. If you have an idea for creating an extension, take a look at the already published extension source codes, which provide good examples of how to package community extensions, and join the `#extensions` channel on our [Discord](https://discord.duckdb.org/).
 Once you have an extension, please contribute it via a [pull request](https://github.com/duckdb/community-extensions/pulls).
 
-Finally, we would like to thank the early adopters of DuckDB’s extension mechanism and Community Extension repository. Thanks for iterating with us and providing feedback to us.
+Finally, we would like to thank the early adopters of DuckDB’s extension mechanism and Community Extensions repository. Thanks for iterating with us and providing feedback to us.

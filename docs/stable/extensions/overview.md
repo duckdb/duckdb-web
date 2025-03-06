@@ -98,7 +98,7 @@ To see which extensions can be autoloaded, check the [core extensions list]({% l
 
 ### Community Extensions
 
-DuckDB supports installing third-party [Community Extensions]({% link community_extensions/index.md %}).
+DuckDB supports installing third-party [community extensions]({% link community_extensions/index.md %}).
 These are contributed by community members but they are built, signed, and distributed in a centralized repository.
 
 ### Installing Extensions through Client APIs

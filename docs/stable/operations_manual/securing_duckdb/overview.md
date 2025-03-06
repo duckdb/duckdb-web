@@ -55,7 +55,7 @@ Queries can access the secrets defined in the Secrets Manager. For example, if t
 
 ## Locking Configurations
 
-Security-related configuration settings generally lock themselves for safety reasons. For example, while we can disable [Community Extensions]({% link community_extensions/index.md %}) using the `SET allow_community_extensions = false`, we cannot re-enable them again after the fact without restarting the database. Trying to do so will result in an error:
+Security-related configuration settings generally lock themselves for safety reasons. For example, while we can disable [community extensions]({% link community_extensions/index.md %}) using the `SET allow_community_extensions = false`, we cannot re-enable them again after the fact without restarting the database. Trying to do so will result in an error:
 
 ```console
 Invalid Input Error: Cannot upgrade allow_community_extensions setting while database is running

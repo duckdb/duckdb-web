@@ -18,7 +18,7 @@ Install the [`httpfs`]({% link docs/stable/extensions/httpfs/overview.md %}) ext
 INSTALL httpfs;
 ```
 
-Install the [`h3` Community Extension]({% link community_extensions/extensions/h3.md %}):
+Install the [`h3` community extension]({% link community_extensions/extensions/h3.md %}):
 
 ```sql
 INSTALL h3 FROM community;
