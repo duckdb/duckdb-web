@@ -1489,18 +1489,6 @@
               "url": "overview"
             },
             {
-              "page": "Limits",
-              "url": "limits"
-            },
-            {
-              "page": "Non-Deterministic Behavior",
-              "url": "non-deterministic_behavior"
-            },
-            {
-              "page": "Embedding DuckDB",
-              "url": "embedding_duckdb"
-            },
-            {
               "page": "DuckDB's Footprint",
               "slug": "footprint_of_duckdb",
               "subsubfolderitems": [
@@ -1527,10 +1515,22 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Embedding DuckDB",
+                  "url": "embedding_duckdb"
+                },
+                {
                   "page": "Securing Extensions",
                   "url": "securing_extensions"
                 }
               ]
+            },
+            {
+              "page": "Non-Deterministic Behavior",
+              "url": "non-deterministic_behavior"
+            },
+            {
+              "page": "Limits",
+              "url": "limits"
             }
           ]
         },
