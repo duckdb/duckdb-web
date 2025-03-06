@@ -115,7 +115,7 @@ ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
 
 This setting specifies the minimum DuckDB version that should be able to read the database file. When database files are written with this option, the resulting files cannot be opened by older DuckDB released versions than the specified version. They can be read by the specified version and all newer versions of DuckDB.
 
-For more details, see the [“Storage” page]({% link docs/stable/internals/storage.md }#explicit-storage-versions).
+For more details, see the [“Storage” page]({% link docs/stable/internals/storage.md %}#explicit-storage-versions).
 
 ## `DETACH`
 
