@@ -26,10 +26,9 @@ DuckDB can now be installed on UNIX-like systems with an installation script:
 curl https://install.duckdb.org | sh
 ```
 
-The script determines your operating system and architecture, and downloads the latest available DuckDB binary.
-Running the script does not require root (sudo) privileges, and it only uses the `curl` and `zcat` tools, which are widely available.
+The script determines your operating system and architecture, fetches the tag of latest release, and if not present downloads the latest available DuckDB binary to `~/.duckdb/cli` (the `~/.duckdb` folder is already used to store extensions.)
 
-> You can inspect the shell script by visiting [`install.duckdb.org`](https://install.duckdb.org) in your browser.
+Running the script does not require root (sudo) privileges, and it only uses the `curl` and `zcat` tools, which are widely available. You can inspect the shell script by visiting [`install.duckdb.org`](https://install.duckdb.org) in your browser.
 
 ### Signed Binaries on Windows
 
