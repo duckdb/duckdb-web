@@ -11,7 +11,7 @@ This page lists some options to restrict the potential fallout from malicious SQ
 The approach to securing DuckDB varies depending on your use case, environment, and potential attack models.
 Therefore, consider the security-related configuration options carefully, especially when working with confidential data sets.
 
-If you plan to embed DuckDB in your application, please consult the [“Embedding DuckDB”]({% link docs/stable/operations_manual/embedding_duckdb.md %}) page.
+If you plan to embed DuckDB in your application, please consult the [“Embedding DuckDB”]({% link docs/stable/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
 
 ## Reporting Vulnerabilities
 
