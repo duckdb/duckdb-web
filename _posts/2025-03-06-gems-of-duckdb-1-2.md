@@ -8,7 +8,7 @@ excerpt: "We highlight a few exciting features that were introduced in DuckDB 1.
 tags: ["releases"]
 ---
 
-We published the DuckDB 1.2.1 bugfix release yesterday. As usual, please consult the [release notes](https://github.com/duckdb/duckdb/releases/tag/v1.2.1) for the full list of changes and the [installation page](({% link  docs/installation/index.html %})) for instructions on installing or upgrading. In this post, we'll highlight a few features that were recently added to DuckDB and improvements that have been made in its ecosystem.
+We published the DuckDB 1.2.1 bugfix release yesterday. As usual, please consult the [release notes](https://github.com/duckdb/duckdb/releases/tag/v1.2.1) for the full list of changes and the [installation page]({% link  docs/installation/index.html %}) for instructions on installing or upgrading. In this post, we'll highlight a few features that were recently added to DuckDB and improvements that have been made in its ecosystem.
 
 ## New Clients Page
 
@@ -95,7 +95,7 @@ SELECT sum(CASE WHEN l_extendedprice > 500 THEN 1 END) FROM lineitem;
 ### Excel Extension
 
 Prior to DuckDB 1.2, Excel files were only supported by the [`spatial` extension]({% link docs/stable/extensions/spatial/overview.md %}), which is a heavyweight extension with several dependencies.
-Starting with 1.2, the [`excel` extension](({% link docs/stable/extensions/excel.md %})) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
+Starting with 1.2, the [`excel` extension]({% link docs/stable/extensions/excel.md %}) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
 
 ```sql
 FROM read_xlsx('test.xlsx', header = true);  
