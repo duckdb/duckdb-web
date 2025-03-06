@@ -217,10 +217,10 @@ If you would like to do further ad-hoc testing of your extension, you can downlo
 ### Uploading to the Community Extensions Repository
 
 Once you are happy with your extension, it's time to share it with the DuckDB community!
-Follow the steps in [the Community Extensions post]({% post_url 2024-07-05-community-extensions %}#developer-experience).
+Follow the steps in the [Community Extensions post]({% post_url 2024-07-05-community-extensions %}#developer-experience).
 A summary of those steps is:
 
-1. Send a PR with a metadata file `description.yml` that contains the description of the extension. For example, the [`h3` Community Extension]({% link community_extensions/extensions/h3.md %}) uses the following YAML configuration:
+1. Send a PR with a metadata file `description.yml` that contains the description of the extension. For example, the [`h3` community extension]({% link community_extensions/extensions/h3.md %}) uses the following YAML configuration:
 
    ```yaml
    extension:
@@ -241,7 +241,7 @@ A summary of those steps is:
 2. Wait for approval from the maintainers.
 
 And there you have it!
-You have created a shareable DuckDB Community Extension.
+You have created a shareable DuckDB community extension.
 Now let's have a look at the `pivot_table` extension as an example of just how powerful a SQL-only extension can be.
 
 ## Capabilities of the `pivot_table` Extension

@@ -4,7 +4,7 @@ title: "The DuckDB Avro Extension"
 author: "Hannes Mühleisen"
 thumb: "/images/blog/thumbs/avro.svg"
 image: "/images/blog/thumbs/avro.png"
-excerpt: "DuckDB now supports reading Avro files through the `avro` Community Extension."
+excerpt: "DuckDB now supports reading Avro files through the `avro` community extension."
 tags: ["extensions"]
 ---
 
@@ -43,13 +43,13 @@ The data bytes can only be decoded using the schema. The [object file specificat
 
 ## The DuckDB `avro` Community Extension
 
-We have developed a DuckDB Community Extension that enables DuckDB to *read* [Apache Avro™](https://avro.apache.org) files.
+We have developed a DuckDB community extension that enables DuckDB to *read* [Apache Avro™](https://avro.apache.org) files.
 
 The extension does not contain Avro *write* functionality. This is on purpose, by not providing a writer we hope to decrease the amount of Avro files in the world over time.
 
 ### Installation & Loading
 
-Installation is simple through the DuckDB Community Extension repository, just type
+Installation is simple through the DuckDB community extension repository, just type
 
 ```sql
 INSTALL avro FROM community;
@@ -126,4 +126,4 @@ In the following, we disclose the limitations of the `avro` DuckDB extension alo
 
 ## Conclusion
 
-The new `avro` Community Extension for DuckDB enables DuckDB to read Avro files directly as if they were tables. If you have a bunch of Avro files, go ahead and try it out! We'd love to [hear from you](https://github.com/hannes/duckdb_avro/issues) if you run into any issues.
+The new `avro` community extension for DuckDB enables DuckDB to read Avro files directly as if they were tables. If you have a bunch of Avro files, go ahead and try it out! We'd love to [hear from you](https://github.com/hannes/duckdb_avro/issues) if you run into any issues.
