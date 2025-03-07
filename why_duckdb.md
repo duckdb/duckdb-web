@@ -33,17 +33,18 @@ To efficiently support this workload, it is critical to reduce the amount of CPU
 
 ## Extensible
 
-DuckDB offers a [flexible extension mechanism]({% link docs/stable/extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/stable/data/parquet/overview.md %}), [JSON]({% link docs/stable/data/json/overview.md %}), [time zones]({% link docs/stable/extensions/icu.md %}), and supports for the [HTTP(S) and S3 protocols]({% link docs/stable/extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2021-10-29-duckdb-wasm %}).
+DuckDB offers a [flexible extension mechanism]({% link docs/stable/extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/stable/data/parquet/overview.md %}), [JSON]({% link docs/stable/data/json/overview.md %}), [time zones]({% link docs/stable/extensions/icu.md %}), and support for the [HTTP(S) and S3 protocols]({% link docs/stable/extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
+User contributions are available as [community extensions]({% link community_extensions/index.md %}).
 
 ## Free
 
-DuckDB's development started while the main developers were public servants in the Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in the Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License). DuckDB is open-source, the entire source code is freely available on GitHub. We invite contributions from anyone provided they adhere to our [Code of Conduct]({% link code_of_conduct.md %}).
+DuckDB's development started while the main developers were public servants in the Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in the Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License) and the project's intellectual property is held by the [DuckDB Foundation]({% link foundation/index.html %}). We invite contributions from anyone provided they adhere to our [Code of Conduct]({% link code_of_conduct.md %}).
 
 ## Thorough Testing
 
 While DuckDB was originally created by a research group, it was never intended to be a research prototype. Instead, it was intended to become a stable and mature database system. To facilitate this stability, DuckDB is intensively tested using [Continuous Integration](https://github.com/duckdb/duckdb/actions). DuckDB's test suite currently contains millions of queries, and includes queries adapted from the test suites of SQLite, PostgreSQL, and MonetDB. Tests are repeated on a wide variety of platforms and compilers. Every pull request is checked against the full test setup and only merged if it passes.
 
-In addition to this test suite, we run various tests that stress DuckDB under heavy loads. We run the TPC-H and TPC-DS benchmarks, and run various tests where DuckDB is used by many clients in parallel.
+In addition to this test suite, we run various tests that stress DuckDB under heavy loads. We run the [TPC-H]({% link docs/stable/extensions/tpch.md %}) and [TPC-DS]({% link docs/stable/extensions/tpcds.md %}) benchmarks, and run various tests where DuckDB is used by many clients in parallel.
 
 ## Peer-Reviewed Papers and Thesis Works
 
