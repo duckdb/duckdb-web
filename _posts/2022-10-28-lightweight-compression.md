@@ -17,22 +17,22 @@ Column store formats, such as DuckDB's native file format or [Parquet]({% post_u
 
 DuckDB added support for compression [at the end of last year](https://github.com/duckdb/duckdb/pull/2099). As shown in the table below, the compression ratio of DuckDB has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DuckDB works, and the design choices and various trade-offs that we have made while implementing compression for DuckDB's storage format.
 
-|        Version         |  Taxi  | On&nbsp;Time | `lineitem` |     Notes      |      Date      |
-|:-----------------------|-------:|-------------:|-----------:|:---------------|:---------------|
-| DuckDB v0.2.8          | 15.3GB | 1.73GB       | 0.85GB     | Uncompressed   | July 2021      |
-| DuckDB v0.2.9          | 11.2GB | 1.25GB       | 0.79GB     | RLE + Constant | September 2021 |
-| DuckDB v0.3.2          | 10.8GB | 0.98GB       | 0.56GB     | Bitpacking     | February 2022  |
-| DuckDB v0.3.3          | 6.9GB  | 0.23GB       | 0.32GB     | Dictionary     | April 2022     |
-| DuckDB v0.5.0          | 6.6GB  | 0.21GB       | 0.29GB     | FOR            | September 2022 |
-| DuckDB dev             | 4.8GB  | 0.21GB       | 0.17GB     | FSST + Chimp   | `now()`        |
-| CSV                    | 17.0GB | 1.11GB       | 0.72GB     |                |                |
-| Parquet (Uncompressed) | 4.5GB  | 0.12GB       | 0.31GB     |                |                |
-| Parquet (Snappy)       | 3.2GB  | 0.11GB       | 0.18GB     |                |                |
-| Parquet (ZSTD)         | 2.6GB  | 0.08GB       | 0.15GB     |                |                |
+| Version                |    Taxi | On&nbsp;Time | `lineitem` | Notes          | Date           |
+| :--------------------- | ------: | -----------: | ---------: | :------------- | :------------- |
+| DuckDB v0.2.8          | 15.3 GB |      1.73 GB |    0.85 GB | Uncompressed   | July 2021      |
+| DuckDB v0.2.9          | 11.2 GB |      1.25 GB |    0.79 GB | RLE + Constant | September 2021 |
+| DuckDB v0.3.2          | 10.8 GB |      0.98 GB |    0.56 GB | Bitpacking     | February 2022  |
+| DuckDB v0.3.3          |  6.9 GB |      0.23 GB |    0.32 GB | Dictionary     | April 2022     |
+| DuckDB v0.5.0          |  6.6 GB |      0.21 GB |    0.29 GB | FOR            | September 2022 |
+| DuckDB dev             |  4.8 GB |      0.21 GB |    0.17 GB | FSST + Chimp   | `now()`        |
+| CSV                    | 17.0 GB |      1.11 GB |    0.72 GB |                |                |
+| Parquet (Uncompressed) |  4.5 GB |      0.12 GB |    0.31 GB |                |                |
+| Parquet (Snappy)       |  3.2 GB |      0.11 GB |    0.18 GB |                |                |
+| Parquet (ZSTD)         |  2.6 GB |      0.08 GB |    0.15 GB |                |                |
 
 ## Compression Intro
 
-At its core, compression algorithms try to find patterns in a data set in order to store it more cleverly. **Compressibility** of a data set is therefore dependent on whether or not such patterns can be found, and whether they exist in the first place. Data that follows a fixed pattern can be compressed significantly. Data that does not have any patterns, such as random noise, cannot be compressed. Formally, the compressibility of a dataset is known as its [entropy](https://en.wikipedia.org/wiki/Entropy_(information_theory)).
+At its core, compression algorithms try to find patterns in a data set in order to store it more cleverly. **Compressibility** of a data set is therefore dependent on whether or not such patterns can be found, and whether they exist in the first place. Data that follows a fixed pattern can be compressed significantly. Data that does not have any patterns, such as random noise, cannot be compressed. Formally, the compressibility of a dataset is known as its [entropy](<https://en.wikipedia.org/wiki/Entropy_(information_theory)>).
 
 As an example of this concept, let us consider the following two data sets.
 
@@ -45,23 +45,23 @@ The constant data set can be compressed by simply storing the value of the patte
 
 ## General Purpose Compression Algorithms
 
-The compression algorithms that most people are familiar with are *general purpose compression algorithms*, such as *zip*, *gzip* or *zstd*. General purpose compression algorithms work by finding patterns in bits. They are therefore agnostic to data types, and can be used on any stream of bits. They can be used to compress files, but they can also be applied to arbitrary data sent over a socket connection.
+The compression algorithms that most people are familiar with are _general purpose compression algorithms_, such as _zip_, _gzip_ or _zstd_. General purpose compression algorithms work by finding patterns in bits. They are therefore agnostic to data types, and can be used on any stream of bits. They can be used to compress files, but they can also be applied to arbitrary data sent over a socket connection.
 
 General purpose compression is flexible and very easy to set up. There are a number of high quality libraries available (such as zstd, snappy or lz4) that provide compression, and they can be applied to any data set stored in any manner.
 
 The downside of general purpose compression is that (de)compression is generally expensive. While this does not matter if we are reading and writing from a hard disk or over a slow internet connection, the speed of (de)compression can become a bottleneck when data is stored in RAM.
 
-Another downside is that these libraries operate as a *black box*. They operate on streams of bits, and do not reveal information of their internal state to the user. While that is not a problem if you are only looking to decrease the size of your data, it prevents the system from taking advantage of the patterns found by the compression algorithm during execution.
+Another downside is that these libraries operate as a _black box_. They operate on streams of bits, and do not reveal information of their internal state to the user. While that is not a problem if you are only looking to decrease the size of your data, it prevents the system from taking advantage of the patterns found by the compression algorithm during execution.
 
-Finally, general purpose compression algorithms work better when compressing large chunks of data. As illustrated in the table below, compression ratios suffer significantly when compressing small amounts of data. To achieve a good compression ratio, blocks of at least **256KB** must be used.
+Finally, general purpose compression algorithms work better when compressing large chunks of data. As illustrated in the table below, compression ratios suffer significantly when compressing small amounts of data. To achieve a good compression ratio, blocks of at least **256 kB** must be used.
 
-| Compression | 1KB  | 4KB  | 16KB | 64KB | 256KB | 1MB  |
-|-------------|-----:|-----:|-----:|-----:|------:|-----:|
-| zstd        | 1.72 | 2.1  | 2.21 | 2.41 | 2.54  | 2.73 |
-| lz4         | 1.29 | 1.5  | 1.52 | 1.58 | 1.62  | 1.64 |
-| gzip        | 1.7  | 2.13 | 2.28 | 2.49 | 2.62  | 2.67 |
+| Compression | 1 kB | 4 kB | 16 kB | 64 kB | 256 kB | 1 MB |
+| ----------- | ---: | ---: | ----: | ----: | -----: | ---: |
+| zstd        | 1.72 |  2.1 |  2.21 |  2.41 |   2.54 | 2.73 |
+| lz4         | 1.29 |  1.5 |  1.52 |  1.58 |   1.62 | 1.64 |
+| gzip        |  1.7 | 2.13 |  2.28 |  2.49 |   2.62 | 2.67 |
 
-This is relevant because the block size is the minimum amount of data that must be decompressed when reading a single row from disk. Worse, as DuckDB compresses data on a per-column basis, the block size would be the minimum amount of data that must be decompressed per column. With a block size of 256KB, fetching a single row could require decompressing multiple megabytes of data. This can cause queries that fetch a low number of rows, such as `SELECT * FROM tbl LIMIT 5` or `SELECT * FROM tbl WHERE id = 42` to incur significant costs, despite appearing to be very cheap on the surface.
+This is relevant because the block size is the minimum amount of data that must be decompressed when reading a single row from disk. Worse, as DuckDB compresses data on a per-column basis, the block size would be the minimum amount of data that must be decompressed per column. With a block size of 256 kB, fetching a single row could require decompressing multiple megabytes of data. This can cause queries that fetch a low number of rows, such as `SELECT * FROM tbl LIMIT 5` or `SELECT * FROM tbl WHERE id = 42` to incur significant costs, despite appearing to be very cheap on the surface.
 
 ## Lightweight Compression Algorithms
 
@@ -77,14 +77,14 @@ On the flip side, these algorithms are ineffective if the specific patterns they
 
 Because of the advantages described above, DuckDB uses only specialized lightweight compression algorithms. As each of these algorithms work optimally on different patterns in the data, DuckDB's compression framework must first decide on which algorithm to use to store the data of each column.
 
-DuckDB's storage splits tables into *Row Groups*. These are groups of `120K` rows, stored in columnar chunks called *Column Segments*. This storage layout is similar to [Parquet]({% post_url 2021-06-25-querying-parquet %}) – but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DuckDB's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
+DuckDB's storage splits tables into _Row Groups_. These are groups of `120K` rows, stored in columnar chunks called _Column Segments_. This storage layout is similar to [Parquet]({% post_url 2021-06-25-querying-parquet %}) – but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DuckDB's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
 
 <img src="/images/compression/storageformat.png"
      alt="Visualization of the storage format of DuckDB"
      width="100%"
      />
 
-The compression framework operates within the context of the individual *Column Segments*. It operates in two phases. First, the data in the column segment is *analyzed*. In this phase, we scan the data in the segment and find out the best compression algorithm for that particular segment. After that, the *compression* is performed, and the compressed data is written to the blocks on disk.
+The compression framework operates within the context of the individual _Column Segments_. It operates in two phases. First, the data in the column segment is _analyzed_. In this phase, we scan the data in the segment and find out the best compression algorithm for that particular segment. After that, the _compression_ is performed, and the compressed data is written to the blocks on disk.
 
 While this approach requires two passes over the data within a segment, this does not incur a significant cost, as the amount of data stored in one segment is generally small enough to fit in the CPU caches. A sampling approach for the analyze step could also be considered, but in general we value choosing the best compression algorithm and reducing file size over a minor increase in compression speed.
 
@@ -151,7 +151,7 @@ Dictionary encoding is particularly efficient when storing text columns with man
 
 ### FSST
 
-[Fast Static Symbol Table](https://www.vldb.org/pvldb/vol13/p2649-boncz.pdf) compression is an extension to dictionary compression, that not only extracts repetitions of entire strings, but also extracts repetitions *within* strings. This is effective when storing strings that are themselves unique, but have a lot of repetition within the strings, such as URLs or e-mail addresses. An image illustrating how this works is shown below.
+[Fast Static Symbol Table](https://www.vldb.org/pvldb/vol13/p2649-boncz.pdf) compression is an extension to dictionary compression, that not only extracts repetitions of entire strings, but also extracts repetitions _within_ strings. This is effective when storing strings that are themselves unique, but have a lot of repetition within the strings, such as URLs or e-mail addresses. An image illustrating how this works is shown below.
 
 <img src="/images/compression/fsst.png"
      alt="Data set stored both uncompressed and with FSST compression"
@@ -177,18 +177,18 @@ USING SAMPLE 10 ROWS
 ORDER BY row_group_id;
 ```
 
-| row_group_id |    column_name     | column_id | segment_type | count | compression  |
-|-------------:|:-------------------|----------:|:-------------|------:|:-------------|
-| 4            | extra              | 13        | FLOAT        | 65536 | Chimp        |
-| 20           | tip_amount         | 15        | FLOAT        | 65536 | Chimp        |
-| 26           | pickup_latitude    | 6         | VALIDITY     | 65536 | Constant     |
-| 46           | tolls_amount       | 16        | FLOAT        | 65536 | RLE          |
-| 73           | store_and_fwd_flag | 8         | VALIDITY     | 65536 | Uncompressed |
-| 96           | total_amount       | 17        | VALIDITY     | 65536 | Constant     |
-| 111          | total_amount       | 17        | VALIDITY     | 65536 | Constant     |
-| 141          | pickup_at          | 1         | TIMESTAMP    | 52224 | BitPacking   |
-| 201          | pickup_longitude   | 5         | VALIDITY     | 65536 | Constant     |
-| 209          | passenger_count    | 3         | TINYINT      | 65536 | BitPacking   |
+| row_group_id | column_name        | column_id | segment_type | count | compression  |
+| -----------: | :----------------- | --------: | :----------- | ----: | :----------- |
+|            4 | extra              |        13 | FLOAT        | 65536 | Chimp        |
+|           20 | tip_amount         |        15 | FLOAT        | 65536 | Chimp        |
+|           26 | pickup_latitude    |         6 | VALIDITY     | 65536 | Constant     |
+|           46 | tolls_amount       |        16 | FLOAT        | 65536 | RLE          |
+|           73 | store_and_fwd_flag |         8 | VALIDITY     | 65536 | Uncompressed |
+|           96 | total_amount       |        17 | VALIDITY     | 65536 | Constant     |
+|          111 | total_amount       |        17 | VALIDITY     | 65536 | Constant     |
+|          141 | pickup_at          |         1 | TIMESTAMP    | 52224 | BitPacking   |
+|          201 | pickup_longitude   |         5 | VALIDITY     | 65536 | Constant     |
+|          209 | passenger_count    |         3 | TINYINT      | 65536 | BitPacking   |
 
 ## Conclusion & Future Goals
 

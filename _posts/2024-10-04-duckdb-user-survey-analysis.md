@@ -70,7 +70,7 @@ who often use Linux desktop due to its customizability and similarity to the Lin
 As we discussed in the [“Environments” section](#environments), DuckDB is often run on servers.
 But how big are these servers, and where are they operated?
 Both small servers (less than 16 GB of memory) and medium-sized servers (16-512 GB of memory) are popular, with 56% and 61% of users reporting that they run DuckDB on these.
-About 14% of respondents run DuckDB on servers with more than 0.5TB of memory.
+About 14% of respondents run DuckDB on servers with more than 0.5 TB of memory.
 
 ![Server size](/images/blog/survey/server-sizes.svg)
 

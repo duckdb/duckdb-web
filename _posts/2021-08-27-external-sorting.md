@@ -243,7 +243,7 @@ In this setting, people are usually running on laptops or PCs, therefore we will
 This laptop has an [Apple M1 CPU](https://en.wikipedia.org/wiki/Apple_M1), which is [ARM](https://en.wikipedia.org/wiki/ARM_architecture)-based.
 The M1 processor has 8 cores: 4 high-performance (Firestorm) cores, and 4 energy-efficient (Icestorm) cores.
 The Firestorm cores have very, very fast single-thread performance, so this should level the playing field between single- and multi-threaded sorting implementations somewhat.
-The MacBook has 16GB of memory, and [one of the fastest SSDs found in a laptop](https://eclecticlight.co/2020/12/12/how-fast-is-the-ssd-inside-an-m1-mac/).
+The MacBook has 16 GB of memory, and [one of the fastest SSDs found in a laptop](https://eclecticlight.co/2020/12/12/how-fast-is-the-ssd-inside-an-m1-mac/).
 
 We will be comparing against the following systems:
 1. [ClickHouse](https://clickhouse.tech), version 21.7.5
@@ -257,7 +257,7 @@ Pandas operates fully in memory, whereas SQLite is a more traditional disk-based
 This list of systems should give us a good mix of single-/multi-threaded, and in-memory/external sorting.
 
 ClickHouse was built for M1 using [this guide](https://clickhouse.tech/docs/en/development/build-osx/).
-We have set the memory limit to 12GB, and `max_bytes_before_external_sort` to 10GB, following [this suggestion](https://clickhouse.tech/docs/en/sql-reference/statements/select/order-by/#implementation-details).
+We have set the memory limit to 12 GB, and `max_bytes_before_external_sort` to 10 GB, following [this suggestion](https://clickhouse.tech/docs/en/sql-reference/statements/select/order-by/#implementation-details).
 
 HyPer is [Tableau's data engine](https://www.tableau.com/products/new-features/hyper), created by the [database group at the University of Munich](http://db.in.tum.de).
 It does not run natively (yet) on ARM-based processors like the M1.

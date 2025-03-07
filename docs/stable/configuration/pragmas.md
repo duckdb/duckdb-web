@@ -621,14 +621,14 @@ PRAGMA disable_verify_parallelism;
 ## Block Sizes
 
 When persisting a database to disk, DuckDB writes to a dedicated file containing a list of blocks holding the data.
-In the case of a file that only holds very little data, e.g., a small table, the default block size of 256KB might not be ideal.
+In the case of a file that only holds very little data, e.g., a small table, the default block size of 256 kB might not be ideal.
 Therefore, DuckDB's storage format supports different block sizes.
 
 There are a few constraints on possible block size values.
 
 * Must be a power of two.
-* Must be greater or equal to 16384 (16 KB).
-* Must be lesser or equal to 262144 (256 KB).
+* Must be greater or equal to 16384 (16 kB).
+* Must be lesser or equal to 262144 (256 kB).
 
 You can set the default block size for all new DuckDB files created by an instance like so:
 
