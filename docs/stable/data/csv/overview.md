@@ -117,7 +117,9 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). See [example]({% link docs/stable/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
 | `union_by_name` | Align columns from different files [by column name]({% link docs/stable/data/multiple_files/combining_schemas.md %}#union-by-name) instead of position. Using this option increases memory consumption. | `BOOL` | `false` |
 
-> Tip We recommend the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert files with encodings not supported by `read_csv` to UTF-8. For example:
+> Tip DuckDB's CSV reader supports UTF-8 (default), UTF-16 and Latin-1 encordings (see the `encoding` option).
+> To convert files with different encodings, we recommend using the [`iconv` command-line tool](https://linux.die.net/man/1/iconv).
+>
 > ```bash
 > iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
 > ```
