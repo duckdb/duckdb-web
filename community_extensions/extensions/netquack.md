@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 365
-extension_download_count_pretty: 365
+extension_download_count: 355
+extension_download_count_pretty: 355
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---
