@@ -122,8 +122,8 @@ The following table gives an estimate on the resources required to produce DuckD
 |-------------:|--------------:|---------------------:|-------------------------:|
 |          100 |         26 GB | 17 minutes           |                    71 GB |
 |          300 |         78 GB | 51 minutes           |                   211 GB |
-|         1000 |        265 GB | 2h 53 minutes        |                   647 GB |
-|         3000 |        796 GB | 8h 30 minutes        |                  1799 GB |
+|        1,000 |        265 GB | 2 h 53 minutes       |                   647 GB |
+|        3,000 |        796 GB | 8 h 30 minutes       |                  1799 GB |
 
 The numbers shown above were achieved by running the `dbgen` function in a single step, for example:
 
