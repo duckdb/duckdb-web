@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/postgresl_compatibility
-- /docs/sql/postgresl_compatibility/
-- /docs/sql/dialect/postgresql_compatibility
+  - /docs/sql/postgresl_compatibility
+  - /docs/sql/postgresl_compatibility/
+  - /docs/sql/dialect/postgresql_compatibility
 title: PostgreSQL Compatibility
 ---
 
@@ -27,7 +27,7 @@ SELECT 'Infinity'::FLOAT - 1.0 AS x;
 <div class="monospace_table"></div>
 
 | Expression              | PostgreSQL |    DuckDB |  IEEE 754 |
-|:------------------------|-----------:|----------:|----------:|
+| :---------------------- | ---------: | --------: | --------: |
 | 1.0 / 0.0               |      error |  Infinity |  Infinity |
 | 0.0 / 0.0               |      error |       NaN |       NaN |
 | -1.0 / 0.0              |      error | -Infinity | -Infinity |
@@ -44,17 +44,7 @@ When computing division on integers, PostgreSQL performs integer division, while
 SELECT 1 / 2 AS x;
 ```
 
-PostgreSQL returns:
-
-|    x |
-| ---: |
-|    0 |
-
-DuckDB returns:
-
-|    x |
-| ---: |
-|  0.5 |
+PostgreSQL returns `0`, while DuckDB returns `0.5`.
 
 To perform integer division in DuckDB, use the `//` operator:
 
@@ -62,9 +52,7 @@ To perform integer division in DuckDB, use the `//` operator:
 SELECT 1 // 2 AS x;
 ```
 
-|    x |
-| ---: |
-|    0 |
+This returns `0`.
 
 ## `UNION` of Boolean and Integer Values
 
@@ -84,10 +72,10 @@ ERROR:  UNION types boolean and integer cannot be matched
 
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
-|   x|
-|---:|
-|   1|
-|   2|
+|   x |
+| --: |
+|   1 |
+|   2 |
 
 ## Case Sensitivity for Quoted Identifiers
 
@@ -130,8 +118,8 @@ SELECT table_name FROM duckdb_tables();
 
 <div class="monospace_table"></div>
 
-|  table_name   |
-|---------------|
+| table_name    |
+| ------------- |
 | MyTaBLe       |
 | PreservedCase |
 
@@ -146,7 +134,7 @@ SELECT table_name FROM duckdb_tables();
 <div class="monospace_table"></div>
 
 | table_name |
-|------------|
+| ---------- |
 | mytable    |
 
 However, the case insensitive matching in the system for identifiers cannot be turned off.
@@ -159,15 +147,7 @@ DuckDB supports both `=` and `==` for quality comparison, while PostgreSQL only 
 SELECT 1 == 1 AS t;
 ```
 
-DuckDB returns:
-
-<div class="monospace_table"></div>
-
-|  t   |
-|-----:|
-| true |
-
-PostgreSQL returns:
+DuckDB returns `true`, while PostgreSQL returns:
 
 ```console
 postgres=# SELECT 1 == 1 AS t;
@@ -187,7 +167,7 @@ For instruction on reclaiming space, refer to the [“Reclaiming space” page](
 
 ### `regexp_extract` Function
 
-Unlike PostgreSQL's `regexp_substr` function, DuckDB's `regexp_extract` returns empty strings instead of `NULL`s when there is no match. 
+Unlike PostgreSQL's `regexp_substr` function, DuckDB's `regexp_extract` returns empty strings instead of `NULL`s when there is no match.
 
 ### `to_date` Function
 
@@ -229,6 +209,6 @@ DESCRIBE myschema.mytable;
 
 <div class="monospace_table"></div>
 
-| column_name |   column_type    | null | key  | default | extra |
-|-------------|------------------|------|------|---------|-------|
+| column_name | column_type      | null | key  | default | extra |
+| ----------- | ---------------- | ---- | ---- | ------- | ----- |
 | v           | ENUM('as', 'df') | YES  | NULL | NULL    | NULL  |
