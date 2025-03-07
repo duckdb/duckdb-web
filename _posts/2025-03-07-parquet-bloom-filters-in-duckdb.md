@@ -4,7 +4,7 @@ title: "Parquet Bloom Filters in DuckDB"
 author: "Hannes Mühleisen"
 thumb: "/images/blog/thumbs/bloom-filters.svg"
 image: "/images/blog/thumbs/bloom-filters.png"
-excerpt: "DuckDB now supports reading and writing Parquet Bloom Filters."
+excerpt: "DuckDB now supports reading and writing Parquet Bloom filters."
 tags: ["deep dive"]
 ---
 
@@ -16,7 +16,7 @@ Obscure sidenote: Again, in theory the column metadata contains the list of enco
 
 ## Parquet Bloom Filters
 
-The good people over at the [Parquet PMC](https://projects.apache.org/committee.html?parquet) have recognized that there is room for improvement here and added [Bloom filters](https://github.com/apache/parquet-format/blob/master/BloomFilter.md) for Parquet back in 2018. In a nutshell, [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) are compact but approximate index structures for a set of values. For a given value, they can either say with certainty that a value is *not* in the set or that it *may be* in the set, with a false positive ratio depending on the size of the Bloom filter and the amount of distinct values added to it. For now, we can just treat a Bloom filter like an opaque series of bytes with magic properties. 
+The good people over at the [Parquet PMC](https://projects.apache.org/committee.html?parquet) have recognized that there is room for improvement here and added [Bloom filters](https://github.com/apache/parquet-format/blob/master/BloomFilter.md) for Parquet back in 2018. In a nutshell, [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) are compact but approximate index structures for a set of values. For a given value, they can either say with certainty that a value is *not* in the set or that it *may be* in the set, with a false positive ratio depending on the size of the Bloom filter and the amount of distinct values added to it. For now, we can just treat a Bloom filter like an opaque series of bytes with magic properties.
 
 When used, Parquet files can contain a Bloom filter for each column in each row group. Each Bloom filter can be at an arbitrary location in the file (`bloom_filter_offset`). At the offset in the file, we find another Thrift-encoded structure, the `BloomFilterHeader`. This structure has a field for the length of the filter, and some algorithmic settings which are currently redundant because there is only one valid setting for all of them. But decode the header you must to find out where the header ends and where the filter bytes begin. Finally, we have arrived at the precious magic bytes of the Bloom filter. We can now test the filter against any query predicates and see if we can skip the row group entirely.
 
