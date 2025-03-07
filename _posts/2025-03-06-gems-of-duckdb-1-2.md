@@ -61,7 +61,7 @@ This feature is documented in the [DuckDB tldr page](https://tldr.inbrowser.app/
 
 ### `allowed_directories` / `allowed_paths` Options
 
-We continue adding support for [operating DuckDB in secure environments]({% link docs/stable/operations_manual/securing_duckdb/overview.md %}). The [`allowed_directories` and `allowed_paths` options](https://github.com/duckdb/duckdb/pull/14568) allow restricting DuckDB's access to certain directories or files (resp.).
+We continue to improve support for [operating DuckDB in secure environments]({% link docs/stable/operations_manual/securing_duckdb/overview.md %}). The [`allowed_directories` and `allowed_paths` options](https://github.com/duckdb/duckdb/pull/14568) allow restricting DuckDB's access to certain directories or files (resp.).
 These options allows fine-grained access control for the file system.
 For example, you can set DuckDB to only use the `/tmp` directory.
 
