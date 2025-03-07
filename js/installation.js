@@ -349,10 +349,11 @@ $(document).ready(function(){
 	}
 	
 	setTimeout(function() {
-		// Activate the users system
-		$('.platform li').removeClass('selected');
-		$(`.platform li[data-id=".${OSdatid}"]`).addClass('selected');
-		evaluation();
+		if (!window.location.search.length) {
+			$('.platform li').removeClass('selected');
+			$(`.platform li[data-id=".${OSdatid}"]`).addClass('selected');
+			evaluation();
+		}
 	}, 100);
 
 });
