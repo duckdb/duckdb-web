@@ -122,6 +122,7 @@ body.landing{
 					-o-transition: background 0.2s, color 0.2s;
 					transition: background 0.2s, color 0.2s;
 					font-weight: 500;
+					white-space: nowrap;
 					&:hover, &.active {
 						color: var(--interactive-filter-selected-text-color, #1A1A1A);
 					}
