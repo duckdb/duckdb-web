@@ -87,7 +87,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `dateformat` | [Date format]({% link docs/stable/sql/functions/dateformat.md %}) used when parsing and writing dates. | `VARCHAR` | (empty) |
 | `date_format` | Alias for `dateformat`; only available in the `COPY` statement. | `VARCHAR` | (empty) |
 | `decimal_separator` | Decimal separator for numbers. | `VARCHAR` | `.` |
-| `delim` | Delimiter character used to separate columns within each line. Alias for `sep`. | `VARCHAR` | `,` |
+| `delim` | Delimiter character used to separate columns within each line, e.g., `,` `;` `\t`. The delimiter character can be up to 4 bytes, e.g., 🦆. Alias for `sep`. | `VARCHAR` | `,` |
 | `delimiter` | Alias for `delim`; only available in the `COPY` statement. | `VARCHAR` | `,` |
 | `escape` | String used to escape the `quote` character within quoted values. | `VARCHAR` | `"` |
 | `encoding` | Encoding used by the CSV file. Options are `utf-8`, `utf-16`, `latin-1`. Not available in the `COPY` statement (which always uses `utf-8`). | `VARCHAR` | `utf-8` |
@@ -108,7 +108,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `rejects_table` | Name of the [temporary table where information on faulty lines is stored]({% link docs/stable/data/csv/reading_faulty_csv_files.md %}#reject-errors). | `VARCHAR` | `reject_errors` |
 | `rejects_limit` | Upper limit on the number of faulty lines per file that are recorded in the rejects table. Setting this to `0` means that no limit is applied. | `BIGINT` | `0` |
 | `sample_size` | Number of sample lines for [auto detection of parameters]({% link docs/stable/data/csv/auto_detection.md %}). | `BIGINT` | 20480 |
-| `sep` | Delimiter character used to separate columns within each line. Alias for `delim`. | `VARCHAR` | `,` |
+| `sep` | Delimiter character used to separate columns within each line, e.g., `,` `;` `\t`. The delimiter character can be up to 4 bytes, e.g., 🦆. Alias for `delim`. | `VARCHAR` | `,` |
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
 | `store_rejects` | Skip any lines with errors and store them in the rejects table. | `BOOL` | `false` |
 | `strict_mode` | Enforces the strictness level of the CSV Reader. When set to `true`, the parser will throw an error upon encountering any issues. When set to `false`, the parser will attempt to read structurally incorrect files. It is important to note that reading structurally incorrect files can cause ambiguity; therefore, this option should be used with caution. | `BOOL` | `true` |
