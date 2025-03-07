@@ -28,7 +28,7 @@ Attach the database `file.db` in read only mode:
 ATTACH 'file.db' (READ_ONLY);
 ```
 
-Attach the database `file.db` with a block size of 16KB:
+Attach the database `file.db` with a block size of 16 kB:
 
 ```sql
 ATTACH 'file.db' (BLOCK_SIZE 16_384);

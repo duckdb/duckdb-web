@@ -205,7 +205,7 @@ The post-order traversal is shown in the figure below. The circles in red repres
      width=600
  />
 
-The figure below shows an actual representation of what this would look like in DuckDB's block format. In DuckDB, data is stored in 256kb contiguous blocks, with some blocks reserved for metadata and some for actual data. Each block is represented by an `id`. To allow for navigation within a block, they are partitioned by byte offsets hence each block contains 256,000 different offsets
+The figure below shows an actual representation of what this would look like in DuckDB's block format. In DuckDB, data is stored in 256 kB contiguous blocks, with some blocks reserved for metadata and some for actual data. Each block is represented by an `id`. To allow for navigation within a block, they are partitioned by byte offsets hence each block contains 256,000 different offsets
 
 <img src="/images/blog/ART/block-storage.png"
      alt="DuckDB Block Serialization"

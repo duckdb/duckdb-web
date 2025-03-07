@@ -199,7 +199,7 @@ By utilizing Python UDFs in DuckDB with Ibis, you can seamlessly incorporate mac
 
 ## Benchmarks
 
-In this section, we will perform simple benchmark comparisons to demonstrate the performance differences between two different types of Python UDFs. The benchmark will measure the execution time, and peak memory consumption. The benchmarks are executed 5 times, and the median value is considered. The benchmark is conducted on a Mac Apple M1 with 16GB of RAM.
+In this section, we will perform simple benchmark comparisons to demonstrate the performance differences between two different types of Python UDFs. The benchmark will measure the execution time, and peak memory consumption. The benchmarks are executed 5 times, and the median value is considered. The benchmark is conducted on a Mac Apple M1 with 16 GB of RAM.
 
 
 ### Built-In Python vs. PyArrow

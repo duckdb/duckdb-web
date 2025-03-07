@@ -61,10 +61,10 @@ Please see our previous [blog]({% post_url 2023-04-14-h2oai %}) [posts]({% post_
 
 * H2O.ai, plus import/export and window function tests
 * Python instead of R
-* 5GB scale for everything, plus 50GB scale for group bys and joins
+* 5 GB scale for everything, plus 50 GB scale for group bys and joins
 * Median of 3 runs
-* Using a MacBook Pro M1 with 16GB RAM
-* DuckDB Versions 0.2.7 through 1.0.0
+* Using a MacBook Pro M1 with 16 GB RAM
+* DuckDB versions 0.2.7 through 1.0.0
     * Nearly 3 years, from 2021-06-14 to 2024-06-03
 * Default settings
 * Pandas pre-version 0.5.1, Apache Arrow 0.5.1+
@@ -356,7 +356,7 @@ Analyzing larger-than-memory data is a superpower for DuckDB, allowing it to be 
 
 In version 0.9.0, launched in September 2023, [DuckDB's hash aggregate was enhanced to handle out-of-core (larger than memory) intermediates](https://github.com/duckdb/duckdb/pull/7931).
 The details of the algorithm, along with some benchmarks, are available in [this blog post]({% post_url 2024-03-29-external-aggregation %}).
-This allows for DuckDB to aggregate one billion rows of data (50GB in size) on a MacBook Pro with only 16GB of RAM, even when the number of unique groups in the group by is large.
+This allows for DuckDB to aggregate one billion rows of data (50 GB in size) on a MacBook Pro with only 16 GB of RAM, even when the number of unique groups in the group by is large.
 This represents at least a 10× improvement in aggregate processing scale over the course of the 3 years of the benchmark.
 
 DuckDB's hash join operator has supported larger-than-memory joins since version 0.6.1 in December 2022.
@@ -446,7 +446,7 @@ As a result, versions 0.2.7 to 0.4.0 use Pandas, and 0.5.1 onward uses Arrow.
 
 On the import side, replacement scans allow DuckDB to read those same formats without a prior import step.
 In the replacement scan benchmark, the data that is scanned is the output of the final H2O.ai group by benchmark query.
-At the 5GB scale it is a 100 million row dataset.
+At the 5 GB scale it is a 100 million row dataset.
 Only one column is read, and a single aggregate is calculated.
 This focuses the benchmark on the speed of scanning the data rather than DuckDB's aggregation algorithms or speed of outputting results.
 The query used follows the format:
@@ -472,14 +472,14 @@ Since the window functions benchmark is new, the window functions from each of t
 
 #### Workload Size
 
-We test only the middle 5GB dataset size for the workloads mentioned thus far, primarily because some import and export operations to external formats like Pandas must fit in memory (and we used a MacBook Pro M1 with only 16GB of RAM).
+We test only the middle 5 GB dataset size for the workloads mentioned thus far, primarily because some import and export operations to external formats like Pandas must fit in memory (and we used a MacBook Pro M1 with only 16 GB of RAM).
 Additionally, running the tests for 21 DuckDB versions was time-intensive even at that scale, due to the performance of older versions.
 
 #### Scale Tests
 
-Using only 5GB of data does not answer our second key question: “What scale of data can it handle?”!
-We also ran only the group by and join related operations (avoiding in-memory imports and exports) at the 5GB and the 50GB scale.
-Older versions of DuckDB could not handle the 50GB dataset when joining or aggregating, but modern versions can handle both, even on a memory-constrained 16GB RAM laptop.
+Using only 5 GB of data does not answer our second key question: “What scale of data can it handle?”!
+We also ran only the group by and join related operations (avoiding in-memory imports and exports) at the 5 GB and the 50 GB scale.
+Older versions of DuckDB could not handle the 50 GB dataset when joining or aggregating, but modern versions can handle both, even on a memory-constrained 16 GB RAM laptop.
 Instead of measuring performance, we measure the size of the benchmark that was able to complete on a given version.
 
 #### Summary Metrics
@@ -490,8 +490,8 @@ As older versions would not fail gracefully, the scale metrics were accumulated 
 
 #### Computing Resources
 
-All tests use a MacBook Pro M1 with 16GB of RAM.
-In 2024, this is far from state of the art! 
+All tests use a MacBook Pro M1 with 16 GB of RAM.
+In 2024, this is far from state of the art!
 If you have more powerful hardware, you will see both improved performance and scalability.
 
 #### DuckDB Versions
@@ -504,11 +504,10 @@ Version 1.0.0 is the latest available at the time of publication (June 2024), al
 All versions were run with the default settings.
 As a result, improvements from a new feature only appear in these results once that feature became the default and was therefore ready for production workloads.
 
-
 ### Window Functions Benchmark
 
 Each benchmark query follows the format below, but with different sets of window functions in the `⟨window function(s)⟩` placeholder.
-The table in use is the largest table from the H2O.ai join benchmark, and in this case the 5GB scale was used.
+The table in use is the largest table from the H2O.ai join benchmark, and in this case the 5 GB scale was used.
 
 ```sql
 DROP TABLE IF EXISTS windowing_results;

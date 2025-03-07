@@ -64,8 +64,7 @@ The performance of our hash aggregate has also improved in general, especially w
 SELECT count(*) FROM (SELECT DISTINCT * FROM tbl);
 ```
 
-If we keep all the data in memory, the query should use around 6GB. However, we can still complete the query if less memory is available. In the table below, we can see how the runtime is affected by lowering the memory limit:
-
+If we keep all the data in memory, the query should use around 6 GB. However, we can still complete the query if less memory is available. In the table below, we can see how the runtime is affected by lowering the memory limit:
 
 |  memory limit |  v0.8.1  |  v0.9.0  |
 |--------------:|---------:|---------:|
