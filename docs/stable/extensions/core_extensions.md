@@ -39,7 +39,7 @@ Different DuckDB clients ship a different set of extensions.
 We summarize the main distributions in the table below.
 
 | Name                                                              | CLI | Python | R   | Java | Node.js |
-| ----------------------------------------------------------------- | --- | ------ | --- | ---- | ------- |  |
+| ----------------------------------------------------------------- | --- | ------ | --- | ---- | ------- |
 | [autocomplete]({% link docs/stable/extensions/autocomplete.md %}) | yes |        |     |      |         |
 | [excel]({% link docs/stable/extensions/excel.md %})               |     |        |     |      |         |
 | [fts]({% link docs/stable/extensions/full_text_search.md %})      |     | yes    |     |      |         |
