@@ -38,17 +38,17 @@ title: Core Extensions
 Different DuckDB clients ship a different set of extensions.
 We summarize the main distributions in the table below.
 
-| Name | CLI (duckdb.org) | CLI (Homebrew) | Python | R | Java | Node.js |
-|------|------|------|---|---|---|---|---|
-| [autocomplete]({% link docs/stable/extensions/autocomplete.md %}) | yes | yes |     |     |     |     |
-| [excel]({% link docs/stable/extensions/excel.md %})               | yes |     |     |     |     |     |
-| [fts]({% link docs/stable/extensions/full_text_search.md %})      | yes |     | yes |     |     |     |
-| [httpfs]({% link docs/stable/extensions/httpfs/overview.md %})    |     |     |     |     |     |     |
-| [icu]({% link docs/stable/extensions/icu.md %})                   | yes | yes | yes |     | yes | yes |
-| [json]({% link docs/stable/data/json/overview.md %})              | yes | yes | yes |     | yes | yes |
-| [parquet]({% link docs/stable/data/parquet/overview.md %})        | yes | yes | yes | yes | yes | yes |
-| [tpcds]({% link docs/stable/extensions/tpcds.md %})               |     |     | yes |     |     |     |
-| [tpch]({% link docs/stable/extensions/tpch.md %})                 | yes |     | yes |     |     |     |
+| Name | CLI  | Python | R | Java | Node.js |
+|------|------|---|---|---|---|---|
+| [autocomplete]({% link docs/stable/extensions/autocomplete.md %}) | yes |     |     |     |     |
+| [excel]({% link docs/stable/extensions/excel.md %})               |     |     |     |     |     |
+| [fts]({% link docs/stable/extensions/full_text_search.md %})      |     | yes |     |     |     |
+| [httpfs]({% link docs/stable/extensions/httpfs/overview.md %})    |     |     |     |     |     |
+| [icu]({% link docs/stable/extensions/icu.md %})                   | yes | yes |     | yes | yes |
+| [json]({% link docs/stable/data/json/overview.md %})              | yes | yes |     | yes | yes |
+| [parquet]({% link docs/stable/data/parquet/overview.md %})        | yes | yes | yes | yes | yes |
+| [tpcds]({% link docs/stable/extensions/tpcds.md %})               |     | yes |     |     |     |
+| [tpch]({% link docs/stable/extensions/tpch.md %})                 |     | yes |     |     |     |
 
 The [jemalloc]({% link docs/stable/extensions/jemalloc.md %}) extension's availability is based on the operating system.
 Starting with version 0.10.1, `jemalloc` is a built-in extension on Linux x86_64 (AMD64) distributions, while it will be optionally available on Linux ARM64 distributions and on macOS (via compiling from source).
