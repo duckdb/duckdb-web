@@ -94,8 +94,8 @@
   architecture: universal
   installation_code: install.packages("duckdb")
   note: >-
-    On aarch64, if the DuckDB R package does not successfully compile, you
-    may need to change your R environment's Make variables.
+    On certain platforms, such as Linux AArch64 (arm64), the DuckDB R package needs to be compiled from source.
+    To speed up this process, follow the instructions on the <a href="/docs/stable/dev/building/r">R build page</a>.
 - variant: stable
   environment: Java (JDBC)
   platform: all
@@ -241,11 +241,10 @@
   download_method: Package manager
   architecture: universal
   installation_code: >-
-    install.packages("duckdb", repos=c("https://duckdb.r-universe.dev",
-    "https://cloud.r-project.org"))
+    install.packages("pak"); pak::pak("duckdb/duckdb-r")
   note: >-
-    On aarch64, if the DuckDB R package does not successfully compile, you
-    may need to change your R environment's Make variables.
+    On certain platforms, such as Linux AArch64 (arm64), the DuckDB R package needs to be compiled from source.
+    To speed up this process, follow the instructions on the <a href="/docs/stable/dev/building/r">R build page</a>.
 - variant: nightly
   environment: Java (JDBC)
   platform: all
