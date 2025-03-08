@@ -41,13 +41,9 @@ We summarize the main distributions in the table below.
 | Name                                                              | CLI | Python | R   | Java | Node.js |
 | ----------------------------------------------------------------- | --- | ------ | --- | ---- | ------- |
 | [autocomplete]({% link docs/stable/extensions/autocomplete.md %}) | yes |        |     |      |         |
-| [excel]({% link docs/stable/extensions/excel.md %})               |     |        |     |      |         |
-| [fts]({% link docs/stable/extensions/full_text_search.md %})      |     | yes    |     |      |         |
-| [httpfs]({% link docs/stable/extensions/httpfs/overview.md %})    |     |        |     |      |         |
 | [icu]({% link docs/stable/extensions/icu.md %})                   | yes | yes    |     | yes  | yes     |
 | [json]({% link docs/stable/data/json/overview.md %})              | yes | yes    |     | yes  | yes     |
 | [parquet]({% link docs/stable/data/parquet/overview.md %})        | yes | yes    | yes | yes  | yes     |
-| [tpcds]({% link docs/stable/extensions/tpcds.md %})               |     | yes    |     |      |         |
 | [tpch]({% link docs/stable/extensions/tpch.md %})                 |     | yes    |     |      |         |
 
 The [jemalloc]({% link docs/stable/extensions/jemalloc.md %}) extension's availability is based on the operating system.
