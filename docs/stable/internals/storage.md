@@ -29,10 +29,11 @@ To move your database(s) to newer format you only need the older and the newer D
 Open your database file with the older DuckDB and run the SQL statement `EXPORT DATABASE 'tmp'`. This allows you to save the whole state of the current database in use inside folder `tmp`.
 The content of the `tmp` folder will be overridden, so choose an empty/non yet existing location. Then, start the newer DuckDB and execute `IMPORT DATABASE 'tmp'` (pointing to the previously populated folder) to load the database, which can be then saved to the file you pointed DuckDB to.
 
-A bash one-liner (to be adapted with the file names and executable locations) is:
+A Bash script to achieve this (to be adapted with the file names and executable locations) is the following
 
 ```bash
-/older/version/duckdb mydata.db -c "EXPORT DATABASE 'tmp'" && /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
+/older/duckdb mydata.old.db -c "EXPORT DATABASE 'tmp'"
+/newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 ```
 
 After this, `mydata.db` will remain in the old format, `mydata.new.db` will contain the same data but in a format accessible by the more recent DuckDB version, and the folder `tmp` will hold the same data in a universal format as different files.
@@ -41,7 +42,7 @@ Check [`EXPORT` documentation]({% link docs/stable/sql/statements/export.md %}) 
 
 ### Explicit Storage Versions
 
-[DuckDB v1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicilty specifying the storage version.
+[DuckDB v1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicitly specifying the storage version.
 Using this, you can opt-in to newer forwards-incompatible features:
 
 ```sql
