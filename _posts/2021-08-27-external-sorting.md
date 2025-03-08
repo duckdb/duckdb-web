@@ -518,7 +518,7 @@ Those blocks are likely still in memory, saving us some precious read/write oper
 ## Appendix C: x86 Experiment
 
 We also ran the `catalog_sales` SF100 experiment on a machine with x86 CPU architecture, to get a more fair comparison with HyPer (without Rosetta 2 emulation).
-The machine has an Intel(R) Xeon(R) W-2145 CPU @ 3.70GHz, which has 8 cores (up to 16 virtual threads), and 128 GB of RAM, so this time the data fits fully in memory.
+The machine has an Intel(R) Xeon(R) W-2145 CPU @ 3.70 GHz, which has 8 cores (up to 16 virtual threads), and 128 GB of RAM, so this time the data fits fully in memory.
 We have set the number of threads that DuckDB and ClickHouse use to 8 because we saw no visibly improved performance past 8.
 
 <img src="/images/blog/sorting/jewels_payload.svg" alt="Increasing the number of payload columns for the catalog_sales table (jewels)" title="Catalog Sales Payload Experiment (on bigger machine)" style="max-width:90%"/>
