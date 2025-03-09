@@ -47,6 +47,7 @@ The functions below are difficult to categorize into specific function types and
 | [`query_table(`*`tbl_names`*`, [`*`by_name`*`])`](#query_tabletbl_names-by_name) | Table function that returns the union of tables given in *`tbl_names`*. If the optional *`by_name`* parameter is set to `true`, it uses [`UNION ALL BY NAME`]({% link docs/stable/sql/query_syntax/setops.md %}#union-all-by-name) semantics. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/stable/guides/file_formats/read_file.md %}#read_blob) for more details. |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/stable/guides/file_formats/read_file.md %}#read_text) for more details. |
+| [`sha1(string)`](#sha1string) | Returns a `VARCHAR` with the SHA-1 hash of the `string`. |
 | [`sha256(string)`](#sha256string) | Returns a `VARCHAR` with the SHA-256 hash of the `string`. |
 | [`stats(expression)`](#statsexpression) | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression. |
 | [`txid_current()`](#txid_current) | Returns the current transaction's identifier, a `BIGINT` value. It will assign a new one if the current transaction does not have one already. |
@@ -306,6 +307,14 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/stable/guides/file_formats/read_file.md %}#read_text) for more details. |
 | **Example** | `read_text('hello.txt')` |
 | **Result** | `hello\n` |
+
+#### `sha1(string)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a `VARCHAR` with the SHA-1 hash of the `string`. |
+| **Example** | `sha1('🦆')` |
+| **Result** | `949bf843dc338be348fb9525d1eb535d31241d76` |
 
 #### `sha256(string)`
 
