@@ -58,7 +58,7 @@ Read a JSON file into a table:
 
 ```sql
 CREATE TABLE todos (userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN);
-COPY todos FROM 'todos.json';
+COPY todos FROM 'todos.json' (AUTO_DETECT true);
 ```
 
 Alternatively, create a table without specifying the schema manually with a [`CREATE TABLE ... AS SELECT` clause]({% link docs/stable/sql/statements/create_table.md %}#create-table--as-select-ctas):
