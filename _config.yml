@@ -26,7 +26,7 @@ currentduckdbhash: "8e52ec4395"
 currentsnapshotversion: 1.2.0-dev
 currentduckdbodbcversion: 1.1.0
 # Java
-currentjavaversion: 1.2.0
+currentjavaversion: 1.2.1
 nextjavaversion: 1.3.0  # for java snapshots, should always be the next minor version with a patch version of 0
 livereload: true
 highlighter: rouge
