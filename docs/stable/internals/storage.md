@@ -31,7 +31,7 @@ The content of the `tmp` folder will be overridden, so choose an empty/non yet e
 
 A Bash script to achieve this (to be adapted with the file names and executable locations) is the following
 
-```bash
+```batch
 /older/duckdb mydata.old.db -c "EXPORT DATABASE 'tmp'"
 /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 ```

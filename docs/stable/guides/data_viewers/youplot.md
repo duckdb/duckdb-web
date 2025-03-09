@@ -9,7 +9,7 @@ DuckDB can be used with CLI graphing tools to quickly pipe input to stdout to gr
 
 [YouPlot](https://github.com/red-data-tools/YouPlot) is a Ruby-based CLI tool for drawing visually pleasing plots on the terminal. It can accept input from other programs by piping data from `stdin`. It takes tab-separated (or delimiter of your choice) data and can easily generate various types of plots including bar, line, histogram and scatter.
 
-With DuckDB, you can write to the console (`stdout`) by using the `TO '/dev/stdout'` command. And you can also write comma-separated values by using `WITH (FORMAT 'csv', HEADER)`.
+With DuckDB, you can write to the console (`stdout`) by using the `TO '/dev/stdout'` command. And you can also write comma-separated values by using `WITH (FORMAT csv, HEADER)`.
 
 ## Installing YouPlot
 
@@ -42,13 +42,13 @@ By combining the [`COPY...TO`]({% link docs/stable/sql/statements/copy.md %}#cop
    The syntax looks like this:
 
    ```sql
-   COPY (⟨query⟩) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER);
+   COPY (⟨query⟩) TO '/dev/stdout' WITH (FORMAT csv, HEADER);
    ```
 
    The full DuckDB command below outputs the query in CSV format with a header:
 
    ```bash
-   duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
+   duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)"
    ```
 
 ## Connecting DuckDB to YouPlot
@@ -56,7 +56,7 @@ By combining the [`COPY...TO`]({% link docs/stable/sql/statements/copy.md %}#cop
 Finally, the data can now be piped to YouPlot! Let's assume we have an `input.json` file with dates and number of purchases made by somebody on that date. Using the query above, we'll pipe the data to the `uplot` command to draw a plot of the Top 10 Purchase Dates
 
 ```bash
-duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" \
+duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)" \
      | uplot bar -d, -H -t "Top 10 Purchase Dates"
 ```
 
@@ -72,7 +72,7 @@ Let's combine this with a quick `curl` from GitHub to see what a certain user ha
 
 ```bash
 curl -sL "https://api.github.com/users/dacort/events?per_page=100" \
-     | duckdb -s "COPY (SELECT type, count(*) AS event_count FROM read_json_auto('/dev/stdin') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" \
+     | duckdb -s "COPY (SELECT type, count(*) AS event_count FROM read_json_auto('/dev/stdin') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)" \
      | uplot bar -d, -H -t "GitHub Events for @dacort"
 ```
 

@@ -281,7 +281,7 @@ To write back to stdout, the copy command can be used with the `/dev/stdout` fil
 
 ```bash
 cat test.csv | \
-    duckdb -c "COPY (SELECT * FROM read_csv('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
+    duckdb -c "COPY (SELECT * FROM read_csv('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT csv, HEADER)"
 ```
 
 ```csv
