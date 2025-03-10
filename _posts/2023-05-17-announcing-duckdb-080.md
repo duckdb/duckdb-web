@@ -37,8 +37,8 @@ Below is a summary of those new features with examples, starting with two breaki
 This release includes two breaking changes to the SQL dialect: The [division operator uses floating point division by default](https://github.com/duckdb/duckdb/pull/7082), and the [default null sort order is changed from `NULLS FIRST` to `NULLS LAST`](https://github.com/duckdb/duckdb/pull/7174). While DuckDB is stil in Beta, we recognize that many DuckDB queries are already used in production. So, the old behavior can be restored using the following settings:
 
 ```sql
-SET integer_division=true;
-SET default_null_order='nulls_first';
+SET integer_division = true;
+SET default_null_order = 'nulls_first';
 ```
 
 [**Division Operator**](https://github.com/duckdb/duckdb/pull/7082). The division operator `/` will now always perform a floating point division even with integer parameters. The new operator `//` retains the old semantics and can be used to perform integer division. This makes DuckDB's division operator less error prone for beginners, and consistent with the division operator in Python 3 and other systems in the OLAP space like Spark, Snowflake and BigQuery.

@@ -192,7 +192,7 @@ SELECT * FROM 's3://some-bucket/that/requires/authentication.parquet';
 
 ```sql
 SELECT count(*)
-FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
 [See the documentation for more information]({% link docs/stable/extensions/iceberg/overview.md %}).
