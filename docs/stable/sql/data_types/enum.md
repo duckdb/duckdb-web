@@ -35,7 +35,7 @@ Enums can also be created on the fly during [casting]({% link docs/stable/sql/ex
 SELECT 'some_string'::ENUM ([⟨value_1⟩, ⟨value_2⟩, ...]);
 ```
 
-### Exaples
+### Examples
 
 Creates new user defined type `mood` as an enum:
 
