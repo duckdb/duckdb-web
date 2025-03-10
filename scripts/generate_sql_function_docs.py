@@ -2,7 +2,7 @@
 
 import duckdb
 
-DOC_CATEGORY_MAP = {'docs/sql/functions/blob.md': 'blob'}
+DOC_CATEGORY_MAP = {'docs/stable/sql/functions/blob.md': 'blob'}
 
 # 'functions' that are binary operators are listed between the arguments
 BINARY_OPERATORS = ['||']
