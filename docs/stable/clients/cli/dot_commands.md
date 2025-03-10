@@ -184,7 +184,11 @@ CREATE TABLE swimmers (animal VARCHAR);
 CREATE TABLE walkers (animal VARCHAR);
 ```
 
-## Configuring the Syntax Highlighter
+## Syntax Highlighters
+
+The DuckDB CLI client has a syntax highlighter for the SQL queries and another for the duckbox-formatted result tables.
+
+## Configuring the Query Syntax Highlighter
 
 By default the shell includes support for syntax highlighting.
 The CLI's syntax highlighter can be configured using the following commands.
@@ -220,6 +224,29 @@ To configure the color used to highlight keywords:
 ```text
 .keywordcode [terminal_code]
 ```
+
+## Configuring the Result Syntax Highlighter
+
+By default, the result highlighting makes a few small modifications:
+
+* Bold column names
+* `NULL` values are greyed out
+* Layout elements are grayed out
+
+The highlighting of each of the components can be customized using the `.highlight_colors` command.
+For example:
+
+```sql
+.highlight_colors layout red
+.highlight_colors column_type yellow
+.highlight_colors column_name yellow bold_underline
+.highlight_colors numeric_value cyan underline
+.highlight_colors temporal_value red bold
+.highlight_colors string_value green bold
+.highlight_colors footer gray
+```
+
+The result highlighting can be disabled using `.highlight_results off`.
 
 ## Shorthands
 
