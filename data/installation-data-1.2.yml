@@ -97,7 +97,7 @@
     On certain platforms, such as Linux AArch64 (arm64), the DuckDB R package needs to be compiled from source.
     To speed up this process, follow the instructions on the <a href="/docs/stable/dev/building/r">R build page</a>.
 - variant: stable
-  environment: Java (JDBC)
+  environment: Java
   platform: all
   download_method: Package manager
   architecture: universal
@@ -108,7 +108,7 @@
         <version>1.2.1</version>
     </dependency>
 - variant: stable
-  environment: Java (JDBC)
+  environment: Java
   platform: all
   download_method: Direct download
   architecture: universal
@@ -246,7 +246,7 @@
     On certain platforms, such as Linux AArch64 (arm64), the DuckDB R package needs to be compiled from source.
     To speed up this process, follow the instructions on the <a href="/docs/stable/dev/building/r">R build page</a>.
 - variant: nightly
-  environment: Java (JDBC)
+  environment: Java
   platform: all
   download_method: Package manager
   architecture: universal
@@ -269,7 +269,7 @@
     </repositories>
   note: 'Nightly Java builds are served through the Sonatype snapshots repository.'
 - variant: nightly
-  environment: Java (JDBC)
+  environment: Java
   platform: all
   download_method: Direct download
   architecture: universal
