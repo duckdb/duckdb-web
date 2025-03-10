@@ -84,7 +84,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. If an `ORDER BY` clause is specified, the distribution is computed within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | `DOUBLE` |
+| **Return type** | `DOUBLE` |
 | **Example** | `cume_dist()` |
 
 #### `dense_rank()`
@@ -92,7 +92,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | The rank of the current row *without gaps;* this function counts peer groups. |
-| **Return Type** | `BIGINT` |
+| **Return type** | `BIGINT` |
 | **Example** | `dense_rank()` |
 | **Aliases** | `rank_dense()` |
 
@@ -101,7 +101,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. If an `ORDER BY` clause is specified, the first row number is computed within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | Same type as `expr` |
+| **Return type** | Same type as `expr` |
 | **Example** | `first_value(column)` |
 
 #### `lag(expr[, offset[, default]][ ORDER BY ordering][ IGNORE NULLS])`
@@ -109,7 +109,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. If an `ORDER BY` clause is specified, the lagged row number is computed within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | Same type as `expr` |
+| **Return type** | Same type as `expr` |
 | **Aliases** | `lag(column, 3, 0)` |
 
 #### `last_value(expr[ ORDER BY ordering][ IGNORE NULLS])`
@@ -117,7 +117,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `expr` evaluated at the row that is the last row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. If omitted, `offset` defaults to `1` and default to `NULL`. If an `ORDER BY` clause is specified, the last row is determined within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | Same type as `expr` |
+| **Return type** | Same type as `expr` |
 | **Example** | `last_value(column)` |
 
 #### `lead(expr[, offset[, default]][ ORDER BY ordering][ IGNORE NULLS])`
@@ -125,7 +125,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `expr` evaluated at the row that is `offset` rows after the current row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. If an `ORDER BY` clause is specified, the leading row number is computed within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | Same type as `expr` |
+| **Return type** | Same type as `expr` |
 | **Aliases** | `lead(column, 3, 0)` |
 
 #### `nth_value(expr, nth[ ORDER BY ordering][ IGNORE NULLS])`
@@ -133,7 +133,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); `NULL` if no such row. If an `ORDER BY` clause is specified, the nth row number is computed within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | Same type as `expr` |
+| **Return type** | Same type as `expr` |
 | **Aliases** | `nth_value(column, 2)` |
 
 #### `ntile(num_buckets[ ORDER BY ordering])`
@@ -141,7 +141,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. If an `ORDER BY` clause is specified, the ntile is computed within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | `BIGINT` |
+| **Return type** | `BIGINT` |
 | **Example** | `ntile(4)` |
 
 #### `percent_rank([ORDER BY ordering])`
@@ -149,7 +149,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. If an `ORDER BY` clause is specified, the relative rank is computed within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | `DOUBLE` |
+| **Return type** | `DOUBLE` |
 | **Example** | `percent_rank()` |
 
 #### `rank_dense()`
@@ -157,7 +157,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | The rank of the current row *without gaps*. |
-| **Return Type** | `BIGINT` |
+| **Return type** | `BIGINT` |
 | **Example** | `rank_dense()` |
 | **Aliases** | `dense_rank()` |
 
@@ -166,7 +166,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | The rank of the current row *with gaps*; same as `row_number` of its first peer. If an `ORDER BY` clause is specified, the rank is computed within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | `BIGINT` |
+| **Return type** | `BIGINT` |
 | **Example** | `rank()` |
 
 #### `row_number([ORDER BY ordering])`
@@ -174,7 +174,7 @@ The table below shows the available general window functions.
 <div class="nostroke_table"></div>
 
 | **Description** | The number of the current row within the partition, counting from 1. If an `ORDER BY` clause is specified, the row number is computed within the frame using the provided ordering instead of the frame ordering. |
-| **Return Type** | `BIGINT` |
+| **Return type** | `BIGINT` |
 | **Example** | `row_number()` |
 
 ## Aggregate Window Functions
