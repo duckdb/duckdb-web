@@ -33,7 +33,8 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.fullschema ?--indent?`                 | Show schema and the content of `sqlite_stat` tables                                                                                        |
 | `.headers on|off`                        | Turn display of headers `on` or `off`                                                                                                      |
 | `.help ?-all? ?PATTERN?`                 | Show help text for `PATTERN`                                                                                                               |
-| `.highlight [on|off]`                    | Toggle syntax highlighting in the shell `on` / `off`                                                                                       |
+| `.highlight on|off`                      | Toggle syntax highlighting in the shell `on` / `off`                                                                                       |
+| `.highlight_results on|off`              | Toggle highlighting in result tables `on` / `off` (duckbox only)                                                                           |
 | `.import FILE TABLE`                     | Import data from `FILE` into `TABLE`                                                                                                       |
 | `.indexes ?TABLE?`                       | Show names of indexes                                                                                                                      |
 | `.keyword ?COLOR?`                       | Sets the syntax highlighting color used for keywords                                                                                       |
