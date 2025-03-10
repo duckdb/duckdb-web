@@ -12,7 +12,7 @@ We published the DuckDB 1.2.1 bugfix release yesterday. As usual, please consult
 
 ## New Clients Page
 
-DuckDB's client APIs (or “drivers”) are distributed through several centralized repositories, such as [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) for R and [Maven](https://mvnrepository.com/artifact/org.duckdb/duckdb_jdbc) for Java. To help users keep track of the rollout of a new DuckDB release, we reworked our [“Clients” page]({% link docs/stable/clients/overview.md %}) to show the latest version for each client. The page also clarifies the support tiers that apply to clients.
+DuckDB's client APIs (or “drivers”) are distributed through several centralized repositories, such as [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) for R and [Maven](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc) for Java. To help users keep track of the rollout of a new DuckDB release, we reworked our [“Clients” page]({% link docs/stable/clients/overview.md %}) to show the latest version for each client. The page also clarifies the support tiers that apply to clients.
 
 ## Simpler Installation
 
