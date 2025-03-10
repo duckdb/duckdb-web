@@ -195,7 +195,7 @@ SELECT count(*)
 FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 ```
 
-[See the documentation for more information]({% link docs/stable/extensions/iceberg.md %}).
+[See the documentation for more information]({% link docs/stable/extensions/iceberg/overview.md %}).
 
 [**Experimental Azure Extension**](https://github.com/duckdb/duckdb-azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 

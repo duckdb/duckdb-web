@@ -14,7 +14,7 @@ DuckDB sources several data sources, including file formats, network protocols, 
 * [Delta Lake]({% link docs/stable/extensions/delta.md %})
 * [Excel]({% link docs/stable/extensions/excel.md %})
 * [httpfs]({% link docs/stable/extensions/httpfs/https.md %})
-* [Iceberg]({% link docs/stable/extensions/iceberg.md %})
+* [Iceberg]({% link docs/stable/extensions/iceberg/overview.md %})
 * [JSON]({% link docs/stable/data/json/overview.md %})
 * [MySQL]({% link docs/stable/extensions/mysql.md %})
 * [Parquet]({% link docs/stable/data/parquet/overview.md %})

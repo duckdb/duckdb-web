@@ -131,7 +131,7 @@ It is very common to have schema changes over time in data lakes, so this unlock
 The secondary effect of this feature is that you may now feel free to change your data lake schemas freely!
 Now it is painless to add more attributes to your data lake over time – DuckDB will be ready to handle the analysis!
 
-> DuckDB's extensions to read lakehouse table formats like [Delta]({% link docs/stable/extensions/delta.md %}) and [Iceberg]({% link docs/stable/extensions/iceberg.md %}) handle schema evolution within the formats' own metadata, so `union_by_name` is not needed.
+> DuckDB's extensions to read lakehouse table formats like [Delta]({% link docs/stable/extensions/delta.md %}) and [Iceberg]({% link docs/stable/extensions/iceberg/overview.md %}) handle schema evolution within the formats' own metadata, so `union_by_name` is not needed.
 
 ## Inserting Data by Name
 

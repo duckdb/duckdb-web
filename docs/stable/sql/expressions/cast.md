@@ -16,7 +16,8 @@ Casting can occur either implicitly or explicitly. The syntax described here per
 The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types]({% link docs/stable/sql/data_types/overview.md %}). DuckDB also supports the shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
 
 ```sql
-SELECT CAST(i AS VARCHAR) AS i FROM generate_series(1, 3) tbl(i);
+SELECT CAST(i AS VARCHAR) AS i
+FROM generate_series(1, 3) tbl(i);
 ```
 
 | i |
@@ -26,7 +27,8 @@ SELECT CAST(i AS VARCHAR) AS i FROM generate_series(1, 3) tbl(i);
 | 3 |
 
 ```sql
-SELECT i::DOUBLE AS i FROM generate_series(1, 3) tbl(i);
+SELECT i::DOUBLE AS i
+FROM generate_series(1, 3) tbl(i);
 ```
 
 |  i  |
