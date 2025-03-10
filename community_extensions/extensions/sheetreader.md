@@ -83,8 +83,8 @@ docs:
 
 extension_star_count: 47
 extension_star_count_pretty: 47
-extension_download_count: 428
-extension_download_count_pretty: 428
+extension_download_count: 430
+extension_download_count_pretty: 430
 image: '/images/community_extensions/social_preview/preview_community_extension_sheetreader.png'
 layout: community_extension_doc
 ---
