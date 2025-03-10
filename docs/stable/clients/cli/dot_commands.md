@@ -21,53 +21,46 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.binary on|off`                         | Turn binary output `on` or `off`. Default: `off`                                                                                                                             |
 | `.cd DIRECTORY`                          | Change the working directory to `DIRECTORY`                                                                                                                                  |
 | `.changes on|off`                        | Show number of rows changed by SQL                                                                                                                                           |
-| `.check GLOB`                            | Fail if output since `.testcase` does not match                                                                                                                              |
 | `.columns`                               | Column-wise rendering of query results                                                                                                                                       |
-| `.constant ?COLOR?`                      | Sets the syntax highlighting color used for constant values                                                                                                                  |
-| `.constantcode ?CODE?`                   | Sets the syntax highlighting terminal code used for constant values                                                                                                          |
+| `.constant ⟨COLOR⟩`                      | Sets the syntax highlighting color used for constant values                                                                                                                  |
+| `.constantcode ⟨CODE⟩`                   | Sets the syntax highlighting terminal code used for constant values                                                                                                          |
 | `.databases`                             | List names and files of attached databases                                                                                                                                   |
 | `.echo on|off`                           | Turn command echo `on` or `off`                                                                                                                                              |
-| `.excel`                                 | Display the output of next command in spreadsheet                                                                                                                            |
-| `.exit ?CODE?`                           | Exit this program with return-code `CODE`                                                                                                                                    |
-| `.explain ?on|off|auto?`                 | Change the `EXPLAIN` formatting mode. Default: `auto`                                                                                                                        |
-| `.fullschema ?--indent?`                 | Show schema and the content of `sqlite_stat` tables                                                                                                                          |
-| `.headers on|off`                        | Turn display of headers `on` or `off`                                                                                                                                        |
-| `.help ?-all? ?PATTERN?`                 | Show help text for `PATTERN`                                                                                                                                                 |
+| `.exit ⟨CODE⟩`                           | Exit this program with return-code `CODE`                                                                                                                                    |
+| `.headers on|off`                        | Turn display of headers `on` or `off`. Does not apply to duckbox mode                                                                                                        |
+| `.help ⟨-all⟩ ⟨PATTERN⟩`                 | Show help text for `PATTERN`                                                                                                                                                 |
 | `.highlight on|off`                      | Toggle syntax highlighting in the shell `on` / `off`. See the [query syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details                |
-| `.highlight_colors ?COMPONENT? ?COLOR?`  | Configure the color of each component in (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details            |
+| `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`  | Configure the color of each component in (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details            |
 | `.highlight_results on|off`              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntaxx highlighting section](#configuring-the-query-syntax-highlighter) for more details  |
 | `.import FILE TABLE`                     | Import data from `FILE` into `TABLE`                                                                                                                                         |
-| `.indexes ?TABLE?`                       | Show names of indexes                                                                                                                                                        |
-| `.keyword ?COLOR?`                       | Sets the syntax highlighting color used for keywords                                                                                                                         |
-| `.keywordcode ?CODE?`                    | Sets the syntax highlighting terminal code used for keywords                                                                                                                 |
+| `.indexes ⟨TABLE⟩`                       | Show names of indexes                                                                                                                                                        |
+| `.keyword ⟨COLOR⟩`                       | Sets the syntax highlighting color used for keywords                                                                                                                         |
+| `.keywordcode ⟨CODE⟩`                    | Sets the syntax highlighting terminal code used for keywords                                                                                                                 |
 | `.large_number_rendering all|footer|off` | Toggle readable rendering of large numbers (duckbox only)                                                                                                                    |
-| `.lint OPTIONS`                          | Report potential schema issues                                                                                                                                               |
 | `.log FILE|off`                          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                                                                |
 | `.maxrows COUNT`                         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                                                   |
 | `.maxwidth COUNT`                        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                            |
-| `.mode MODE ?TABLE?`                     | Set [output mode]({% link docs/stable/clients/cli/output_formats.md %})                                                                                                      |
+| `.mode MODE ⟨TABLE⟩`                     | Set [output mode]({% link docs/stable/clients/cli/output_formats.md %})                                                                                                      |
 | `.multiline`                             | Set multi-line mode (default)                                                                                                                                                |
 | `.nullvalue STRING`                      | Use `STRING` in place of `NULL` values. Default: `NULL`                                                                                                                      |
-| `.once ?OPTIONS? ?FILE?`                 | Output for the next SQL command only to `FILE`                                                                                                                               |
-| `.open ?OPTIONS? ?FILE?`                 | Close existing database and reopen `FILE`                                                                                                                                    |
-| `.output ?FILE?`                         | Send output to `FILE` or `stdout` if `FILE` is omitted                                                                                                                       |
-| `.parameter CMD ...`                     | Manage SQL parameter bindings                                                                                                                                                |
+| `.once ⟨OPTIONS⟩ ⟨FILE⟩`                 | Output for the next SQL command only to `FILE`                                                                                                                               |
+| `.open ⟨OPTIONS⟩ ⟨FILE⟩`                 | Close existing database and reopen `FILE`                                                                                                                                    |
+| `.output ⟨FILE⟩`                         | Send output to `FILE` or `stdout` if `FILE` is omitted                                                                                                                       |
 | `.print STRING...`                       | Print literal `STRING`                                                                                                                                                       |
 | `.prompt MAIN CONTINUE`                  | Replace the standard prompts                                                                                                                                                 |
 | `.quit`                                  | Exit this program                                                                                                                                                            |
 | `.read FILE`                             | Read input from `FILE`                                                                                                                                                       |
 | `.rows`                                  | Row-wise rendering of query results (default)                                                                                                                                |
 | `.safe_mode`                             | Activates [safe mode]({% link docs/stable/clients/cli/safe_mode.md %})                                                                                                       |
-| `.schema ?PATTERN?`                      | Show the `CREATE` statements matching `PATTERN`                                                                                                                              |
-| `.separator COL ?ROW?`                   | Change the column and row separators                                                                                                                                         |
-| `.shell CMD ARGS...`                     | Run `CMD ARGS...` in a system shell                                                                                                                                          |
+| `.schema ⟨PATTERN⟩`                      | Show the `CREATE` statements matching `PATTERN`                                                                                                                              |
+| `.separator ⟨COL⟩ ⟨ROW⟩`                 | Change the column and row separators                                                                                                                                         |
+| `.shell ⟨CMD⟩ ⟨ARGS...⟩`                 | Run `⟨CMD⟩` with `⟨ARGS...⟩` in a system shell                                                                                                                               |
 | `.show`                                  | Show the current values for various settings                                                                                                                                 |
 | `.singleline`                            | Set single-line mode                                                                                                                                                         |
-| `.system CMD ARGS...`                    | Run `CMD ARGS...` in a system shell                                                                                                                                          |
-| `.tables ?TABLE?`                        | List names of tables [matching `LIKE` pattern]({% link docs/stable/sql/functions/pattern_matching.md %}) `TABLE`                                                             |
-| `.testcase NAME`                         | Begin redirecting output to `NAME`                                                                                                                                           |
+| `.system ⟨CMD⟩ ⟨ARGS...⟩`                | Run `⟨CMD⟩` with `⟨ARGS...⟩` in a system shell                                                                                                                               |
+| `.tables ⟨TABLE⟩`                        | List names of tables [matching `LIKE` pattern]({% link docs/stable/sql/functions/pattern_matching.md %}) `TABLE`                                                             |
 | `.timer on|off`                          | Turn SQL timer `on` or `off`. SQL statements separated by `;` but *not* separated via newline are measured together                                                          |
-| `.width NUM1 NUM2 ...`                   | Set minimum column widths for columnar output                                                                                                                                |
+| `.width ⟨NUM1⟩ ⟨NUM2⟩ ...`               | Set minimum column widths for columnar output                                                                                                                                |
 
 ## Using the `.help` Command
 
@@ -80,7 +73,7 @@ The `.help` text may be filtered by passing in a text string as the second argum
 ```text
 .maxrows COUNT      Sets the maximum number of rows for display (default: 40). Only for duckbox mode.
 .maxwidth COUNT     Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
-.mode MODE ?TABLE?  Set output mode
+.mode MODE ⟨TABLE⟩  Set output mode
 ```
 
 ### `.output`: Writing Results to a File
@@ -212,7 +205,13 @@ To configure the color used to highlight constants:
 ```
 
 ```text
-.constantcode [terminal_code]
+.constantcode ⟨terminal_code⟩
+```
+
+For example:
+
+```text
+.constantcode 033[31m
 ```
 
 To configure the color used to highlight keywords:
@@ -222,7 +221,13 @@ To configure the color used to highlight keywords:
 ```
 
 ```text
-.keywordcode [terminal_code]
+.keywordcode ⟨terminal_code⟩
+```
+
+For example:
+
+```text
+.keywordcode 033[31m
 ```
 
 ## Configuring the Result Syntax Highlighter
