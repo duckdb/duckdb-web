@@ -335,9 +335,9 @@ or as a `RANGE` delta expression. It is invalid for a frame to start after it en
 For a `RANGE` specification, there must  be only one ordering expression and it must support subtraction unless only the sentinel boundary values `UNBOUNDED PRECEDING` / `UNBOUNDED FOLLOWING` / `CURRENT ROW` are used.
 Using the [`EXCLUDE` clause](#exclude-clause), rows comparing equal to the current row in the specified ordering expression (so-called peers) can be excluded from the frame.
 
-The default frame is unbounded (i.e., the entire partition) when no `ORDER BY` clause is present and `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` when an `ORDER BY` clause is present. By default, the `CURRENT ROW` boundary value (but not the `CURRENT ROW` in the `EXCLUDE` clause) means the current row when `ROWS` framing is used, but it means the current row and all its peers when `RANGE` or `GROUP` framing are used.
+The default frame is unbounded (i.e., the entire partition) when no `ORDER BY` clause is present and `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` when an `ORDER BY` clause is present. By default, the `CURRENT ROW` boundary value (but not the `CURRENT ROW` in the `EXCLUDE` clause) means the current row and all its peers when `RANGE` or `GROUP` framing are used but it means only the current row when `ROWS` framing is used.
 
-#### `ROW` Framing
+#### `ROWS` Framing
 
 Here is a simple `ROW` frame query, using an aggregate function:
 
