@@ -330,11 +330,11 @@ so the `SELECT` also needs to be explicitly sorted if that is desired.
 
 Framing specifies a set of rows relative to each row where the function is evaluated.
 The distance from the current row is given as an expression either `PRECEDING` or `FOLLOWING` the current row in the order specified by the `ORDER BY` clause in the `OVER` specification.
-This distance can either be specified as an integral number of `ROWS`
+This distance can either be specified as an integral number of `ROWS` or `GROUPS`,
 or as a `RANGE` delta expression.
 For a `RANGE` specification, there must  be only one ordering expression,
-and it has to support addition and subtraction (i.e., numbers or `INTERVAL`s).
-The default frame is from `UNBOUNDED PRECEDING` to `UNBOUNDED FOLLOWING` when no `ORDER BY` clause is present and from `UNBOUNDED PRECEDING` to `CURRENT ROW` when an `ORDER BY` clause is present.
+and it has to support addition and subtraction (i.e., be a number or an `INTERVAL`) unless only the sentinel boundary values `UNBOUNDED PRECEDING` / `UNBOUNDED FOLLOWING` / `CURRENT ROW` are used.
+The default frame is unbounded (i.e., the entire partition) when no `ORDER BY` clause is present and `RANGE BETWWEN UNBOUNDED PRECEDING AND CURRENT ROW` when an `ORDER BY` clause is present.
 It is invalid for a frame to start after it ends.
 Using the [`EXCLUDE` clause](#exclude-clause), rows around the current row can be excluded from the frame.
 
