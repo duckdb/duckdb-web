@@ -137,7 +137,17 @@ CREATE OR REPLACE TABLE flights AS
     FROM 'https://duckdb.org/data/flights.csv';
 ```
 
-Note that it is not possible to create tables using CTAS statements with constraints (primary keys, check constraints, etc.).
+### Limitations
+
+Is not possible to create tables using CTAS statements with constraints (primary keys, check constraints, etc.).
+As of DuckDB v1.2.1, the `WITH NO DATA` modifier in `CREATE TABLE ... AS ... SELECT ... WITH NO DATA` does not work as expected. Avoid using this clause.
+You can create a copy of the data as follows:
+
+```sql
+CREATE TABLE t1 AS
+    FROM t2
+    LIMIT 0;
+```
 
 ## Check Constraints
 

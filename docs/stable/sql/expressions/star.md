@@ -37,8 +37,6 @@ For example:
 SELECT st.* FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS st);
 ```
 
-<div class="narrow_table"></div>
-
 | x | y | z |
 |--:|--:|--:|
 | 1 | 2 | 3 |
@@ -209,8 +207,6 @@ SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 ```sql
 SELECT COLUMNS(['id', 'num']) FROM numbers;
 ```
-
-<div class="narrow_table"></div>
 
 | id | num  |
 |---:|-----:|

@@ -24,7 +24,7 @@ There have been too many changes to discuss them each in detail, but we would li
 * Out-of-Core Hash Aggregate
 * Storage Improvements
 * Index Improvements
-* DuckDB-WASM Extensions
+* DuckDB-Wasm Extensions
 * Extension Auto-Loading
 * Improved AWS Support
 * Iceberg Support
@@ -172,7 +172,7 @@ duckdb.sql("FROM 'https://raw.githubusercontent.com/duckdb/duckdb/main/data/json
 
 The set of autoloadable extensions is limited to official extensions distributed by DuckDB Labs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options]({% link docs/stable/configuration/overview.md %}).
 
-[**DuckDB-WASM Extensions**](https://github.com/duckdb/duckdb-wasm/pull/1403). This release adds support for loadable extensions to DuckDB-WASM. Previously, any extensions that you wanted to use with the WASM client had to be baked in. With this release, extensions can be loaded dynamically instead. When an extension is loaded, the WASM bundle is downloaded and the functionality of the extension is enabled. Give it a try in our [WASM shell](https://shell.duckdb.org).
+[**DuckDB-Wasm Extensions**](https://github.com/duckdb/duckdb-wasm/pull/1403). This release adds support for loadable extensions to DuckDB-Wasm. Previously, any extensions that you wanted to use with the Wasm client had to be baked in. With this release, extensions can be loaded dynamically instead. When an extension is loaded, the Wasm bundle is downloaded and the functionality of the extension is enabled. Give it a try in our [Wasm shell](https://shell.duckdb.org).
 
 ```sql
 LOAD inet;
@@ -192,10 +192,10 @@ SELECT * FROM 's3://some-bucket/that/requires/authentication.parquet';
 
 ```sql
 SELECT count(*)
-FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
-[See the documentation for more information]({% link docs/stable/extensions/iceberg.md %}).
+[See the documentation for more information]({% link docs/stable/extensions/iceberg/overview.md %}).
 
 [**Experimental Azure Extension**](https://github.com/duckdb/duckdb-azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 

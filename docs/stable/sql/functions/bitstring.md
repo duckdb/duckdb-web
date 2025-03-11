@@ -19,7 +19,7 @@ The table below shows the available mathematical operators for `BIT` type.
 <!-- markdownlint-disable MD056 -->
 
 | Operator | Description | Example | Result |
-|:---|:---|:---|:---|
+|:---|:---|:---|---:|
 | `&` | Bitwise AND | `'10101'::BITSTRING & '10001'::BITSTRING` | `10001` |
 | `|` | Bitwise OR | `'1011'::BITSTRING | '0001'::BITSTRING` | `1011` |
 | `xor` | Bitwise XOR | `xor('101'::BITSTRING, '001'::BITSTRING)` | `100` |

@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	let installationData = [];
 
-	$.get('/data/installation-data-1.2.yml?121', function(data) {
+	$.get('/data/installation-data-1.2.yml?121a', function(data) {
 		// console.log(data)
 		installationData = jsyaml.load(data);
 		evaluation();
@@ -35,7 +35,10 @@ $(document).ready(function(){
 	$('.systemdetected').html('System detected: '+OSName);
 	
 	function replaceHtmlEntities( markup ) {
-		return markup.replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
+		markup = markup.replace( /&/g, '&amp;' );
+		markup = markup.replace( /</g, '&lt;' );
+		markup = markup.replace( />/g, '&gt;' );
+		return markup
 	}
 	
 	function simpleCodeHighlight( markup ) {
@@ -199,7 +202,7 @@ $(document).ready(function(){
 			return;
 		}
 	
-		// Make only possible archictures selectable
+		// Make only possible architectures selectable
 		if ( $( '.architecture.hide' ).length == 0 ) {
 	
 			

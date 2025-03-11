@@ -14,7 +14,7 @@ tags: ["using DuckDB"]
      width="400"
      />
 
-Wrangling data by throwing SQL strings at it is not the most ergonomic way to perform interactive data analysis in R. For a while now, we have been working with the dplyr project team at [Posit](https://posit.co/) (formerly RStudio) and Kirill Müller to develop *duckplyr*. [duckplyr](https://duckplyr.tidyverse.org) is a high-performance drop-in replacement for dplyr, powered by DuckDB. You can read more about duckplyr in the [announcement blog post]({% post_url 2024-04-02-duckplyr %}). In this post, we are going to walk through a challenging real-world use case with duckplyr. For those of you wishing to follow along, we have prepared a [Google Colab notebook](https://colab.research.google.com/drive/1PxvkZ4FpMNtP-CpKpz5hvH-xKgaYC3-S) with all the code snippets in this post. Timings reported below are also from Colab.
+Wrangling data by throwing SQL strings at it is not the most ergonomic way to perform interactive data analysis in R. For a while now, we have been working with the dplyr project team at [Posit](https://posit.co/) (formerly RStudio) and Kirill Müller to develop _duckplyr_. [duckplyr](https://duckplyr.tidyverse.org) is a high-performance drop-in replacement for dplyr, powered by DuckDB. You can read more about duckplyr in the [announcement blog post]({% post_url 2024-04-02-duckplyr %}). In this post, we are going to walk through a challenging real-world use case with duckplyr. For those of you wishing to follow along, we have prepared a [Google Colab notebook](https://colab.research.google.com/drive/1PxvkZ4FpMNtP-CpKpz5hvH-xKgaYC3-S) with all the code snippets in this post. Timings reported below are also from Colab.
 
 Like many government statistics agencies, New Zealand's “Stats NZ Tatauranga Aotearoa” thankfully provides some of the datasets they maintain as [Open Data for download](https://www.stats.govt.nz/large-datasets/csv-files-for-download/). The largest file available for download on that page contains “Age and sex by ethnic group (grouped total responses), for census usually resident population counts, 2006, 2013, and 2018 Censuses”, [CSV zipped file](https://www3.stats.govt.nz/2018census/Age-sex-by-ethnic-group-grouped-total-responses-census-usually-resident-population-counts-2006-2013-2018-Censuses-RC-TA-SA2-DHB.zip).
 
@@ -119,14 +119,14 @@ This will take a little bit longer, but the results are very interesting:
 
 ```text
 # A tibble: 6 × 12
-  column_name column_type min   max     approx_unique avg      std   q25   q50  
+  column_name column_type min   max     approx_unique avg      std   q25   q50
   <chr>       <chr>       <chr> <chr>           <dbl> <chr>    <chr> <chr> <chr>
-1 Year        BIGINT      2006  2018                3 2012.33… 4.92… 2006  2013 
-2 Age         VARCHAR     000   999999            149 NA       NA    NA    NA   
-3 Ethnic      BIGINT      1     9999               11 930.545… 2867… 3     6    
-4 Sex         BIGINT      1     9                   3 4.0      3.55… 1     2    
-5 Area        VARCHAR     001   DHB9999          2048 NA       NA    NA    NA   
-6 count       VARCHAR     ..C   9999            16825 NA       NA    NA    NA   
+1 Year        BIGINT      2006  2018                3 2012.33… 4.92… 2006  2013
+2 Age         VARCHAR     000   999999            149 NA       NA    NA    NA
+3 Ethnic      BIGINT      1     9999               11 930.545… 2867… 3     6
+4 Sex         BIGINT      1     9                   3 4.0      3.55… 1     2
+5 Area        VARCHAR     001   DHB9999          2048 NA       NA    NA    NA
+6 count       VARCHAR     ..C   9999            16825 NA       NA    NA    NA
 # ℹ 3 more variables: q75 <chr>, count <dbl>, null_percentage <dbl>
 ```
 
@@ -153,8 +153,8 @@ SELECT
     area.Description AS area_,
     ethnic.Description AS ethnic_,
     sex.Description AS sex_,
-    try_cast(replace(age.Description, ' years', '') AS INTEGER) AS age_,
-    try_cast(data.count AS INTEGER) AS count_
+    TRY_CAST(replace(age.Description, ' years', '') AS INTEGER) AS age_,
+    TRY_CAST(data.count AS INTEGER) AS count_
 ```
 
 The data set contains various totals, so we remove them before proceeding:
@@ -235,7 +235,7 @@ twenty_till_fourty_non_european_in_auckland_area <-
 print(twenty_till_fourty_non_european_in_auckland_area)
 ```
 
-This looks nicer and completes in ca. one minute, but there are several hidden issues. First, we read the *entire* dataset into RAM. While for this dataset this is likely possible because most computers have more than 1 GB of RAM, this will of course not work for larger datasets. Then, we execute a series of dplyr verbs. However, dplyr executes those eagerly, meaning it does not holistically optimize the sequence of verbs. For example, it cannot see that we are filtering out all non-European ethnicities in the last step and happily computes all of those for the intermediate result. The same happens with survey years that are not 2018, only in the last step we filter those out. We have computed an expensive join on all other years for nothing. Depending on data distributions, this can be extremely wasteful. And yes, it is possible to manually move the filters around but this is tedious and error-prone. At least the result is exactly the same as the SQL version above:
+This looks nicer and completes in ca. one minute, but there are several hidden issues. First, we read the _entire_ dataset into RAM. While for this dataset this is likely possible because most computers have more than 1 GB of RAM, this will of course not work for larger datasets. Then, we execute a series of dplyr verbs. However, dplyr executes those eagerly, meaning it does not holistically optimize the sequence of verbs. For example, it cannot see that we are filtering out all non-European ethnicities in the last step and happily computes all of those for the intermediate result. The same happens with survey years that are not 2018, only in the last step we filter those out. We have computed an expensive join on all other years for nothing. Depending on data distributions, this can be extremely wasteful. And yes, it is possible to manually move the filters around but this is tedious and error-prone. At least the result is exactly the same as the SQL version above:
 
 ```text
 # A tibble: 2 × 2
@@ -258,9 +258,9 @@ sex    <- duckplyr_df_from_csv("DimenLookupSex8277.csv")
 year   <- duckplyr_df_from_csv("DimenLookupYear8277.csv")
 ```
 
-This takes exactly 0 seconds, because duckplyr is not actually doing much. We detect the schema of the CSV files using our award-winning “sniffer”, and create the six placeholder objects for each of those files. Part of the unique design of duckplyr is that those objects are “Heisenbergian”, they behave like completely normal R `data.frame`s once they are treated as such, but they can *also* act as lazy evaluation placeholders when they are passed to downstream analysis steps. This is made possible by a little-known R feature known as `ALTREP` which allows R vectors to be computed on-demand among other things.
+This takes exactly 0 seconds, because duckplyr is not actually doing much. We detect the schema of the CSV files using our award-winning “sniffer”, and create the six placeholder objects for each of those files. Part of the unique design of duckplyr is that those objects are “Heisenbergian”, they behave like completely normal R `data.frame`s once they are treated as such, but they can _also_ act as lazy evaluation placeholders when they are passed to downstream analysis steps. This is made possible by a little-known R feature known as `ALTREP` which allows R vectors to be computed on-demand among other things.
 
-Now we re-run the exact same dplyr pipeline as above. Only this time we are “done” in less than a second. This is because all we have done is *lazily* constructing a so-called relation tree which encapsulates the entirety of the transformations. This allows *holistic* optimization, for example pushing the year and ethnicity all the way down to the reading of the CSV file *before* joining. We can also eliminate the reading of columns that are not used in the query at all.
+Now we re-run the exact same dplyr pipeline as above. Only this time we are “done” in less than a second. This is because all we have done is _lazily_ constructing a so-called relation tree which encapsulates the entirety of the transformations. This allows _holistic_ optimization, for example pushing the year and ethnicity all the way down to the reading of the CSV file _before_ joining. We can also eliminate the reading of columns that are not used in the query at all.
 
 Only when we finally print the result
 

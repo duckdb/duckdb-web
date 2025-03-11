@@ -144,7 +144,7 @@ await c.query(`
     VALUES (1, 'foo'), (2, 'bar')`);
 ```
 
-### httpfs (Wasm-flavored)
+### httpfs (Wasm-Flavored)
 
 ```ts
 // ..., by specifying URLs in the SQL text

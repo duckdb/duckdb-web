@@ -30,8 +30,8 @@ Some features are not yet complete:
 * Appending and binding advanced data types. (Additional DuckDB C API support needed.)
 * Writing to data chunk vectors. (Needs special handling in Node.)
 * User-defined types & functions. (Support for this was added to the DuckDB C API in v1.1.0.)
-* Profiling info. (Added in v1.1.0)
-* Table description. (Added in v1.1.0)
+* Profiling info. (Added in v1.1.0.)
+* Table description. (Added in v1.1.0.)
 * APIs for Arrow. (This part of the DuckDB C API is [deprecated](https://github.com/duckdb/duckdb/blob/e791508e9bc2eb84bc87eb794074f4893093b743/src/include/duckdb.h#L3760).)
 
 ### Supported Platforms

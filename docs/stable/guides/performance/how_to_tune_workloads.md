@@ -19,7 +19,7 @@ Parallelism starts at the level of row groups, therefore, for a query to run on 
 
 Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`]({% link docs/stable/configuration/pragmas.md %}#threads).
 
-## Larger-Than-Memory Workloads (Out-of-Core Processing)
+## Larger-than-Memory Workloads (Out-of-Core Processing)
 
 A key strength of DuckDB is support for larger-than-memory workloads, i.e., it is able to process data sets that are larger than the available system memory (also known as _out-of-core processing_).
 It can also run queries where the intermediate results cannot fit into memory.

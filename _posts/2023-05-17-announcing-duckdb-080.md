@@ -37,19 +37,18 @@ Below is a summary of those new features with examples, starting with two breaki
 This release includes two breaking changes to the SQL dialect: The [division operator uses floating point division by default](https://github.com/duckdb/duckdb/pull/7082), and the [default null sort order is changed from `NULLS FIRST` to `NULLS LAST`](https://github.com/duckdb/duckdb/pull/7174). While DuckDB is stil in Beta, we recognize that many DuckDB queries are already used in production. So, the old behavior can be restored using the following settings:
 
 ```sql
-SET integer_division=true;
-SET default_null_order='nulls_first';
+SET integer_division = true;
+SET default_null_order = 'NULLS_FIRST';
 ```
 
 [**Division Operator**](https://github.com/duckdb/duckdb/pull/7082). The division operator `/` will now always perform a floating point division even with integer parameters. The new operator `//` retains the old semantics and can be used to perform integer division. This makes DuckDB's division operator less error prone for beginners, and consistent with the division operator in Python 3 and other systems in the OLAP space like Spark, Snowflake and BigQuery.
-
 
 ```sql
 SELECT 42 / 5, 42 // 5;
 ```
 
 | (42 / 5) | (42 // 5) |
-|----------|-----------|
+|---------:|----------:|
 | 8.4      | 8         |
 
 [**Default Null Sort Order**](https://github.com/duckdb/duckdb/pull/7174). The default null sort order is changed from `NULLS FIRST` to `NULLS LAST`. The reason for this change is that `NULLS LAST` sort-order is more intuitive when combined with `LIMIT`. With `NULLS FIRST`, Top-N queries always return the `NULL` values first. With `NULLS LAST`, the actual Top-N values are returned instead.
@@ -61,7 +60,7 @@ FROM bigdata ORDER BY col DESC LIMIT 3;
 ```
 
 | v0.7.1 | v0.8.0 |
-|--------|--------|
+|-------:|-------:|
 | NULL   | 43     |
 | NULL   | 42     |
 | 43     | NULL   |
@@ -77,7 +76,7 @@ PIVOT sales ON year USING sum(amount);
 ```
 
 | 2021 | 2022 |
-|------|------|
+|-----:|-----:|
 | 84   | 100  |
 
 The [documentation contains more examples]({% link docs/stable/sql/statements/pivot.md %}).
@@ -98,14 +97,11 @@ FROM a ASOF JOIN b ON a.ts >= b.ts;
 | 2023-05-15 10:31:00 | 2023-05-15 10:30:00 |
 | 2023-05-15 11:31:00 | 2023-05-15 11:30:00 |
 
-
 Please [refer to the documentation]({% link docs/stable/guides/sql_features/asof_join.md %}) for a more in-depth explanation.
-
-
 
 ## Data Integration Improvements
 
-[**Default Parallel CSV Reader**](https://github.com/duckdb/duckdb/pull/6977). In this release, the parallel CSV reader has been vastly improved and is now the default CSV reader. We would like to thank everyone that has tried out the experimental reader for their valuable feedback and reports. The `experimental_parallel_csv` flag has been deprecated and is no longer required. The parallel CSV reader enables much more efficient reading of large CSV files. 
+[**Default Parallel CSV Reader**](https://github.com/duckdb/duckdb/pull/6977). In this release, the parallel CSV reader has been vastly improved and is now the default CSV reader. We would like to thank everyone that has tried out the experimental reader for their valuable feedback and reports. The `experimental_parallel_csv` flag has been deprecated and is no longer required. The parallel CSV reader enables much more efficient reading of large CSV files.
 
 <!-- Would it be possible to include the data size and hardware used? -->
 
@@ -114,8 +110,8 @@ CREATE TABLE lineitem AS FROM lineitem.csv;
 ```
 
 | v0.7.1 | v0.8.0 |
-|--------|--------|
-| 4.1s   | 1.2s   |
+|-------:|-------:|
+|  4.1 s | 1.2 s  |
 
 **Parallel [Parquet](https://github.com/duckdb/duckdb/pull/7375), [CSV and JSON Writing](https://github.com/duckdb/duckdb/pull/7368)**. This release includes support for parallel *order-preserving* writing of Parquet, CSV and JSON files. As a result, writing to these file formats is parallel by default, also without disabling insertion order preservation, and writing to these formats is greatly sped up.
 
@@ -126,10 +122,10 @@ COPY lineitem TO 'lineitem.json';
 ```
 
 | Format  | v0.7.1 | v0.8.0 |
-|---------|--------|--------|
-| CSV     | 3.9s   | 0.6s   |
-| Parquet | 8.1s   | 1.2s   |
-| JSON    | 4.4s   | 1.1s   |
+|---------|-------:|-------:|
+| CSV     | 3.9 s  | 0.6 s  |
+| Parquet | 8.1 s  | 1.2 s  |
+| JSON    | 4.4 s  | 1.1 s  |
 
 [**Recursive File Globbing using `**`**](https://github.com/duckdb/duckdb/pull/6627). This release adds support for recursive globbing where an arbitrary number of subdirectories can be matched using the `**` operator (double-star).
 
@@ -139,16 +135,14 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 
 [The documentation has been updated]({% link docs/stable/data/multiple_files/overview.md %}) with various examples of this syntax.
 
-
 ## Storage Improvements
 
 [**Lazy-Loading Table Metadata**](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indexes and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120× SF1) with ~770 million rows and 16 columns:
 
 |         Query           | v0.6.1 | v0.7.1 | v0.8.0  | Parquet |
 |-------------------------|-------:|-------:|--------:|--------:|
-| `SELECT 42`             |  1.60s | 0.31s  |   0.02s |       - |
-| `FROM lineitem LIMIT 1` |  1.62s | 0.32s  |   0.03s |   0.27s |
-
+| `SELECT 42`             | 1.60 s | 0.31 s |  0.02 s |       - |
+| `FROM lineitem LIMIT 1` | 1.62 s | 0.32 s |  0.03 s |  0.27 s |
 
 ## Clients
 

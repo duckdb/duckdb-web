@@ -14,7 +14,7 @@ The `DuckDBPyType` class represents a type instance of our [data types]({% link 
 To make the API as easy to use as possible, we have added implicit conversions from existing type objects to a DuckDBPyType instance.
 This means that wherever a DuckDBPyType object is expected, it is also possible to provide any of the options listed below.
 
-### Python Built-ins
+### Python Built-Ins
 
 The table below shows the mapping of Python Built-in types to DuckDB type.
 

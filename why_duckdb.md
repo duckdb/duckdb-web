@@ -5,7 +5,9 @@ title: Why DuckDB
 
 There are many database management systems (DBMS) out there. But there is [no one-size-fits all database system](https://blobs.duckdb.org/papers/stonebraker-centintemel-one-size-fits-all-icde-2015.pdf). All take different trade-offs to better adjust to specific use cases. DuckDB is no different. Here, we try to explain what goals DuckDB has and why and how we try to achieve those goals through technical means. To start with, DuckDB is a [relational (table-oriented) DBMS](https://en.wikipedia.org/wiki/Relational_database) that supports the [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL).
 
-## Simple
+## Key Characteristics of DuckDB
+
+### Simple
 
 SQLite is the [world's most widely deployed DBMS](https://www.sqlite.org/mostdeployed.html). Simplicity in installation, and embedded in-process operation are central to its success. DuckDB adopts these ideas of simplicity and embedded operation.
 
@@ -13,34 +15,34 @@ DuckDB has **no external dependencies**, neither for compilation nor during run-
 
 For DuckDB, there is no DBMS server software to install, update and maintain. DuckDB does not run as a separate process, but completely **embedded within a host process**. For the analytical use cases that DuckDB targets, this has the additional advantage of **high-speed data transfer** to and from the database. In some cases, DuckDB can process foreign data without copying. For example, the DuckDB Python package can run queries directly on Pandas data without ever importing or copying any data.
 
-## Portable
+### Portable
 
 Thanks to having no dependencies, DuckDB is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DuckDB-Wasm]({% link docs/stable/clients/wasm/overview.md %}), DuckDB can also run in web browsers and even on mobile phones.
 
 DuckDB provides [APIs for Java, C, C++, Go, Node.js and other languages]({% link docs/stable/clients/overview.md %}).
 
-## Feature-Rich
+### Feature-Rich
 
 DuckDB provides serious data management features. There is extensive support for **complex queries** in SQL with a large function library, window functions, etc. DuckDB provides **transactional guarantees** (ACID properties) through our custom, bulk-optimized [Multi-Version Concurrency Control (MVCC)](https://en.wikipedia.org/wiki/Multiversion_concurrency_control). Data can be stored in persistent, **single-file databases**. DuckDB supports secondary indexes to speed up queries trying to find a single table entry.
 
 DuckDB is deeply integrated into Python and R for efficient interactive data analysis.
 
-## Fast
+### Fast
 
 DuckDB is designed to support **analytical query workloads**, also known as [online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing). These workloads are characterized by complex, relatively long-running queries that process significant portions of the stored dataset, for example aggregations over entire tables or joins between several large tables. Changes to the data are expected to be rather large-scale as well, with several rows being appended, or large portions of tables being changed or added at the same time.
 
 To efficiently support this workload, it is critical to reduce the amount of CPU cycles that are expended per individual value. The state of the art in data management to achieve this are either [vectorized or just-in-time query execution engines](https://www.vldb.org/pvldb/vol11/p2209-kersten.pdf). DuckDB uses a **columnar-vectorized query execution engine**, where queries are still interpreted, but a large batch of values (a "vector") are processed in one operation. This greatly reduces overhead present in traditional systems such as PostgreSQL, MySQL or SQLite which process each row sequentially. Vectorized query execution leads to far better performance in OLAP queries.
 
-## Extensible
+### Extensible
 
 DuckDB offers a [flexible extension mechanism]({% link docs/stable/extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/stable/data/parquet/overview.md %}), [JSON]({% link docs/stable/data/json/overview.md %}), [time zones]({% link docs/stable/extensions/icu.md %}), and support for the [HTTP(S) and S3 protocols]({% link docs/stable/extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
 User contributions are available as [community extensions]({% link community_extensions/index.md %}).
 
-## Free
+### Free
 
 DuckDB's development started while the main developers were public servants in the Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in the Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License) and the project's intellectual property is held by the [DuckDB Foundation]({% link foundation/index.html %}). We invite contributions from anyone provided they adhere to our [Code of Conduct]({% link code_of_conduct.md %}).
 
-## Thorough Testing
+### Thoroughly Tested
 
 While DuckDB was originally created by a research group, it was never intended to be a research prototype. Instead, it was intended to become a stable and mature database system. To facilitate this stability, DuckDB is intensively tested using [Continuous Integration](https://github.com/duckdb/duckdb/actions). DuckDB's test suite currently contains millions of queries, and includes queries adapted from the test suites of SQLite, PostgreSQL, and MonetDB. Tests are repeated on a wide variety of platforms and compilers. Every pull request is checked against the full test setup and only merged if it passes.
 
@@ -56,7 +58,7 @@ In addition to this test suite, we run various tests that stress DuckDB under he
 * [Data Management for Data Science - Towards Embedded Analytics]({% link pdf/CIDR2020-raasveldt-muehleisen-duckdb.pdf %}) (CIDR 2020)
 * [DuckDB: an Embeddable Analytical Database]({% link pdf/SIGMOD2019-demo-duckdb.pdf %}) (SIGMOD 2019 Demo)
 
-## Other Projects
+## Projects Built with/for DuckDB
 
 To learn about projects using DuckDB, visit the [Awesome DuckDB repository](https://github.com/davidgasquez/awesome-duckdb).
 
@@ -73,8 +75,8 @@ DuckDB uses some components from various open-source projects and draws inspirat
 Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorge-Arnulfo Quiané-Ruiz, Nan Tang and Panos Kalnis.
 * **Compression of floating-point values:** DuckDB supports the multiple algorithms for compressing floating-point values:
     * [Chimp](https://vldb.org/pvldb/vol15/p3058-liakos.pdf) by Panagiotis Liakos, Katia Papakonstantinopoulou and Yannis Kotidi
-    * [Patas](https://github.com/duckdb/duckdb/pull/5044), an in-house development, and
-    * [ALP (adaptive lossless floating-point compression)](https://dl.acm.org/doi/pdf/10.1145/3626717) by Azim Afroozeh, Leonard Kuffo and Peter Boncz, who also [contributed their implementation](https://github.com/duckdb/duckdb/pull/9635).
+    * [Patas](https://github.com/duckdb/duckdb/pull/5044), an in-house development
+    * [ALP (adaptive lossless floating-point compression)](https://dl.acm.org/doi/pdf/10.1145/3626717) by Azim Afroozeh, Leonard Kuffo and Peter Boncz, who also [contributed their implementation](https://github.com/duckdb/duckdb/pull/9635)
 * **SQL Parser:** We use the PostgreSQL parser that was [repackaged as a stand-alone library](https://github.com/lfittl/libpg_query). The translation to our own parse tree is inspired by [Peloton](https://pelotondb.io).
 * **Shell:** We use the [SQLite shell](https://sqlite.org/cli.html) to work with DuckDB.
 * **Regular expressions:** DuckDB uses Google's [RE2](https://github.com/google/re2) regular expression engine.

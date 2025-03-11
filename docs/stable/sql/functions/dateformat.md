@@ -80,7 +80,7 @@ In a `read_csv` function:
 
 ```sql
 SELECT *
-FROM read_csv('test.csv', dateformat = '%m/%d/%Y');
+FROM read_csv('test.csv', dateformat = '%m/%d/%Y', timestampformat = '%A, %-d %B %Y - %I:%M:%S %p');
 ```
 
 ## Format Specifiers

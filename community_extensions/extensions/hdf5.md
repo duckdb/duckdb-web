@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 361
-extension_download_count_pretty: 361
+extension_download_count: 357
+extension_download_count_pretty: 357
 image: '/images/community_extensions/social_preview/preview_community_extension_hdf5.png'
 layout: community_extension_doc
 ---

@@ -21,10 +21,10 @@ This disables both the join order optimizer and left/right swapping for joins.
 This way, DuckDB builds a left-deep join tree following the order of `JOIN` clauses.
 
 ```sql
-SELECT …
-FROM …
-JOIN …  -- this join is performed first
-JOIN …; -- this join is performed second
+SELECT ...
+FROM ...
+JOIN ...  -- this join is performed first
+JOIN ...; -- this join is performed second
 
 ```
 
@@ -40,14 +40,14 @@ To force a particular join order, you can break up the query into multiple queri
 
 ```sql
 CREATE OR REPLACE TEMPORARY TABLE t1 AS
-    …;
+    ...;
 
 -- join on the result of the first query, t1
 CREATE OR REPLACE TEMPORARY TABLE t2 AS
-    SELECT * FROM t1 …;
+    SELECT * FROM t1 ...;
 
 -- compute the final result using t2
-SELECT * FROM t1 …
+SELECT * FROM t1 ...
 ```
 
 To clean up, drop the interim tables:

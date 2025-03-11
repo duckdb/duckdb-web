@@ -85,7 +85,7 @@ Alternatively, the `COPY` statement with the `XLSX` format option can be used to
 
 ```sql
 CREATE TABLE test (a DOUBLE, b DOUBLE);
-COPY test FROM 'test.xlsx' WITH (FORMAT 'xlsx', HEADER);
+COPY test FROM 'test.xlsx' WITH (FORMAT xlsx, HEADER);
 SELECT * FROM test;
 ```
 
@@ -131,10 +131,10 @@ These are passed as options to the `COPY` statement after the `FORMAT`, e.g.:
 CREATE TABLE test AS
     SELECT *
     FROM (VALUES (1, 2), (3, 4)) AS t(a, b);
-COPY test TO 'test.xlsx' WITH (FORMAT 'xlsx', HEADER true);
+COPY test TO 'test.xlsx' WITH (FORMAT xlsx, HEADER true);
 ```
 
-### Type conversions
+### Type Conversions
 
 Because XLSX files only really support storing numbers or strings – the equivalent of `VARCHAR` and `DOUBLE`, the following type conversions are applied when writing XLSX files.
 
