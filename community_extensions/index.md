@@ -48,7 +48,7 @@ DuckDB Community extensions are conceptually similar to a package manager such a
 
 DuckDB Community Extensions are signed, so that on LOAD a check is performed to prove a given extensions has been built by the Community Extension CI.
 
-For more information on extensions and how to use them, check the [“Securing Extensions”]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}) and [“Working with Extensions”]({% link docs/stable/extensions/working_with_extensions.md %}) pages.
+For more information on extensions and how to use them, check the [“Securing Extensions”]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}) and [“Installing Extensions”]({% link docs/stable/extensions/installing_extensions.md %}) pages.
 
 In particular if you want to forbid `LOAD` of Community Extensions, run:
 

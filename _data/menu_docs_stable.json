@@ -991,8 +991,16 @@
               "url": "community_extensions"
             },
             {
-              "page": "Working with Extensions",
-              "url": "working_with_extensions"
+              "page": "Installing Extensions",
+              "url": "installing_extensions"
+            },
+            {
+              "page": "Advanced Installation Methods",
+              "url": "advanced_installation_methods"
+            },
+            {
+              "page": "Distributing Extensions",
+              "url": "extension_distribution"
             },
             {
               "page": "Versioning of Extensions",

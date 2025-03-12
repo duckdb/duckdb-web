@@ -68,7 +68,7 @@ extensions follow their own release cycle. These may or may not coincide with Du
 extension, refer to the documentation or GitHub page of the respective extension. Generally, **pre-release** and **stable** extensions will document
 their releases as GitHub releases, an example of which you can see in the [`delta` extension](https://github.com/duckdb/duckdb-delta/releases).
 
-Finally, there is a small exception: All [in-tree]({% link docs/stable/extensions/working_with_extensions.md %}#in-tree-vs-out-of-tree) extensions simply
+Finally, there is a small exception: All [in-tree]({% link docs/stable/extensions/advanced_installation_methods.md %}#in-tree-vs-out-of-tree) extensions simply
 follow DuckDB's release cycle.
 
 ## Nightly Builds
@@ -86,7 +86,7 @@ In general, there are 2 ways of using nightly builds: using a nightly DuckDB bui
 In most cases, user's will be interested in a nightly build of a specific extension, but don't necessarily want to switch to using the nightly build of DuckDB itself. This allows using a specific bleeding-edge
 feature while limiting the exposure to unstable code.
 
-To achieve this, Core Extensions tend to regularly push builds to the [`core_nightly` repository]({% link docs/stable/extensions/working_with_extensions.md %}#extension-repositories). Let's look at an example:
+To achieve this, Core Extensions tend to regularly push builds to the [`core_nightly` repository]({% link docs/stable/extensions/installing_extensions.md %}#extension-repositories). Let's look at an example:
 
 First we install a [**stable DuckDB build**]({% link docs/installation/index.html %}).
 
@@ -142,4 +142,15 @@ UPDATE EXTENSIONS (httpfs, azure);
 
 ## Target DuckDB Version
 
-Currently, when extensions are compiled, they are tied to a specific version of DuckDB. What this means is that, for example, an extension binary compiled for v0.10.3 does not work for v1.0.0. In most cases, this will not cause any issues and is fully transparent; DuckDB will automatically ensure it installs the correct binary for its version. For extension developers, this means that they must ensure that new binaries are created whenever a new version of DuckDB is released. However, note that DuckDB provides an [extension template](https://github.com/duckdb/extension-template) that makes this fairly simple.
+Currently, when extensions are compiled, they are tied to a specific version of DuckDB. What this means is that, for example, an extension binary compiled for version 0.10.3 does not work for version 1.0.0. In most cases, this will not cause any issues and is fully transparent; DuckDB will automatically ensure it installs the correct binary for its version. For extension developers, this means that they must ensure that new binaries are created whenever a new version of DuckDB is released. However, note that DuckDB provides an [extension template](https://github.com/duckdb/extension-template) that makes this fairly simple.
+
+## In-Tree vs. Out-of-Tree
+
+Originally, DuckDB extensions lived exclusively in the DuckDB main repository, `github.com/duckdb/duckdb`. These extensions are called in-tree. Later, the concept
+of out-of-tree extensions was added, where extensions were separated into their own repository, which we call out-of-tree.
+
+While from a user's perspective, there are generally no noticeable differences, there are some minor differences related to versioning:
+
+* in-tree extensions use the version of DuckDB instead of having their own version
+* in-tree extensions do not have dedicated release notes, their changes are reflected in the regular [DuckDB release notes](https://github.com/duckdb/duckdb/releases)
+* core out-of tree extensions tend to live in a repository in `github.com/duckdb/duckdb_⟨ext_name⟩` but the name may vary. See the [full list]({% link docs/stable/extensions/core_extensions.md %}) of core extensions for details.

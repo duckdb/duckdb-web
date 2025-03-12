@@ -55,7 +55,7 @@ For instructions to build from source, see:
 ### Experimental Platforms
 
 There are several additional platforms with varying levels of support.
-For some platforms, DuckDB binaries and extensions (or a [subset of extensions]({% link docs/stable/extensions/working_with_extensions.md %}#platforms)) are distributed. For others, building from source is possible.
+For some platforms, DuckDB binaries and extensions (or a [subset of extensions]({% link docs/stable/extensions/extension_distribution.md %}#platforms)) are distributed. For others, building from source is possible.
 
 | Platform name          | Description                                                                                          |
 |------------------------|------------------------------------------------------------------------------------------------------|
