@@ -36,7 +36,7 @@ PRAGMA version;
 ## Platform
 
 The platform information consists of the operating system, system architecture, and, optionally, the compiler.
-The platform is used when [installing extensions]({% link docs/stable/extensions/working_with_extensions.md %}#platforms).
+The platform is used when [installing extensions]({% link docs/stable/extensions/extension_distribution.md %}#platforms).
 To retrieve the platform, use the following `PRAGMA`:
 
 ```sql

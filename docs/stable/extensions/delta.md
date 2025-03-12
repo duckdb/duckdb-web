@@ -108,4 +108,4 @@ The `delta` extension currently only supports the following platforms:
 * macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
 * Windows AMD64: `windows_amd64`
 
-Support for the [other DuckDB platforms]({% link docs/stable/extensions/working_with_extensions.md %}#platforms) is work-in-progress.
+Support for the [other DuckDB platforms]({% link docs/stable/extensions/extension_distribution.md %}#platforms) is work-in-progress.

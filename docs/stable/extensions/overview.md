@@ -7,17 +7,15 @@ redirect_from:
 title: Extensions
 ---
 
-## Overview
-
 DuckDB has a flexible extension mechanism that allows for dynamically loading extensions.
-These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
+Extensions can enhance DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
 
 > Extensions are loadable on all clients (e.g., Python and R).
 > Extensions distributed via the Core and Community repositories are built and tested on macOS, Windows and Linux. All operating systems are supported for both the AMD64 and the ARM64 architectures.
 
 ## Listing Extensions
 
-To get a list of extensions, use `duckdb_extensions`:
+To get a list of extensions, use the `duckdb_extensions` function:
 
 ```sql
 SELECT extension_name, installed, description
@@ -55,7 +53,7 @@ To make an extension that is not built-in available in DuckDB, two steps need to
 directory for the installed extension, then load it to make its features available. This means that every time DuckDB is restarted, all
 extensions that are used need to be (re)loaded
 
-> Extension installation and loading are subject to a few [limitations]({% link docs/stable/extensions/working_with_extensions.md %}#limitations).
+> Extension installation and loading are subject to a few [limitations]({% link docs/stable/extensions/installing_extensions.md %}#limitations).
 
 There are two main methods of making DuckDB perform the **installation** and **loading** steps for an installable extension: **explicitly** and through **autoloading**.
 
@@ -98,15 +96,13 @@ To see which extensions can be autoloaded, check the [core extensions list]({% l
 
 ### Community Extensions
 
-DuckDB supports installing third-party [community extensions]({% link community_extensions/index.md %}).
-These are contributed by community members but they are built, signed, and distributed in a centralized repository.
+DuckDB supports installing third-party [community extensions]({% link community_extensions/index.md %}). For example, you can install the [`avro` community extension]({% link community_extensions/extensions/avro.md %}) via:
 
-### Installing Extensions through Client APIs
+```sql
+INSTALL avro FROM community;
+```
 
-For many clients, using SQL to load and install extensions is the preferred method. However, some clients have a dedicated
-API to install and load extensions. For example the [Python API client]({% link docs/stable/clients/python/overview.md %}#loading-and-installing-extensions),
-which has dedicated `install_extension(name: str)` and `load_extension(name: str)` methods. For more details on a specific Client API, refer
-to the [Client API docs]({% link docs/stable/clients/overview.md %})
+Community extensions are contributed by community members but they are built, [signed]({% link docs/stable/extensions/extension_distribution.md %}#signed-extensions), and distributed in a centralized repository.
 
 ## Updating Extensions
 
@@ -117,68 +113,13 @@ can and do receive updates. To ensure all currently installed extensions are on 
 UPDATE EXTENSIONS;
 ```
 
-For more details on extension version refer to [Extension Versioning]({% link docs/stable/extensions/versioning_of_extensions.md %}).
-
-## Installation Location
-
-By default, extensions are installed under the user's home directory:
-
-```text
-~/.duckdb/extensions/⟨duckdb_version⟩/⟨platform_name⟩/
-```
-
-For stable DuckDB releases, the `⟨duckdb_version⟩` will be equal to the version tag of that release. For nightly DuckDB builds, it will be equal
-to the short git hash of the build. So for example, the extensions for DuckDB version v0.10.3 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.3/osx_arm64/`.
-An example installation path for a nightly DuckDB build could be `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
-
-To change the default location where DuckDB stores its extensions, use the `extension_directory` configuration option:
-
-```sql
-SET extension_directory = '/path/to/your/extension/directory';
-```
-
-Note that setting the value of the `home_directory` configuration option has no effect on the location of the extensions.
-
-## Binary Compatibility
-
-To avoid binary compatibility issues, the binary extensions distributed by DuckDB are tied both to a specific DuckDB version and a platform. This means that DuckDB can automatically detect binary compatibility between it and a loadable extension. When trying to load an extension that was compiled for a different version or platform, DuckDB will throw an error and refuse to load the extension.
-
-See the [Working with Extensions page]({% link docs/stable/extensions/working_with_extensions.md %}#platforms) for details on available platforms.
+For more details on extension version refer to the [Extension Versioning page]({% link docs/stable/extensions/versioning_of_extensions.md %}).
 
 ## Developing Extensions
 
 The same API that the core extensions use is available for developing extensions. This allows users to extend the functionality of DuckDB such that it suits their domain the best.
 A template for creating extensions is available in the [`extension-template` repository](https://github.com/duckdb/extension-template/). This template also holds some documentation on how to get started building your own extension.
 
-## Extension Signing
-
-Extensions are signed with a cryptographic key, which also simplifies distribution (this is why they are served over HTTP and not HTTPS).
-By default, DuckDB uses its built-in public keys to verify the integrity of extension before loading them.
-All extensions provided by the DuckDB core team are signed.
-
-### Unsigned Extensions
-
-> Warning
-> Only load unsigned extensions from sources you trust.
-> Avoid loading unsigned extensions over HTTP.
-> Consult the [Securing DuckDB page]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how set up DuckDB in a secure manner.
-
-If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
-To load unsigned extensions using the [CLI client]({% link docs/stable/clients/cli/overview.md %}), pass the `-unsigned` flag to it on startup:
-
-```bash
-duckdb -unsigned
-```
-
-Now any extension can be loaded, signed or not:
-
-```sql
-LOAD './some/local/ext.duckdb_extension';
-```
-
-For client APIs, the `allow_unsigned_extensions` database configuration options needs to be set, see the respective [Client API docs]({% link docs/stable/clients/overview.md %}).
-For example, for the Python client, see the [Loading and Installing Extensions section in the Python API documentation]({% link docs/stable/clients/python/overview.md %}#loading-and-installing-extensions).
-
 ## Working with Extensions
 
-For advanced installation instructions and more details on extensions, see the [Working with Extensions page]({% link docs/stable/extensions/working_with_extensions.md %}).
+See the [installation instructions]({% link docs/stable/extensions/installing_extensions.md %}) and the [advanced installation methods page]({% link docs/stable/extensions/advanced_installation_methods.md %}).
