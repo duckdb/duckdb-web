@@ -1700,7 +1700,7 @@ function GenerateJoinType(options) {
 		Optional(Choice(0,[
 			Keyword("INNER"),
 			Sequence([
-				Choice(0, [Keyword("LEFT"), Keyword("RIGHT"), Keyword("FULL")]), 
+				Choice(0, [Keyword("LEFT"), Keyword("RIGHT"), Keyword("FULL")]),
 				Optional(Keyword("OUTER"), "skip")
 			])
 		]), "skip")
@@ -1735,11 +1735,11 @@ function GenerateJoinClause(options) {
 							Choice(0,[
 								Keyword("NATURAL"),
 								Keyword("ASOF")
-							]), 
+							]),
 							"skip"),
 						Expandable("join-type", options, "join-type", GenerateJoinType),
 					]),
-					Keyword("CROSS"), 
+					Keyword("CROSS"),
 					Keyword("POSITIONAL")
 				]),
 				Keyword("JOIN"),
@@ -1867,8 +1867,16 @@ function GenerateCommonTableExpression(options) {
 			OneOrMore(Expression("column-name"), Keyword(",")),
 			Keyword(")")
 		]), "skip"),
-		Keyword("AS"),
-		Optional(Sequence([Optional(Keyword("NOT")), Keyword("MATERIALIZED")])),
+		Optional(
+			Sequence([
+				Keyword("USING KEY"),
+				Keyword("("),
+				OneOrMore(Expression("column-name"), Keyword(",")),
+				Keyword(")")]), "skip"),
+		Sequence([
+			Keyword("AS"),
+			Optional(Sequence([Optional(Keyword("NOT")), Keyword("MATERIALIZED")])),
+		]),
 		Choice(0, [
 			Expression("select-node"),
 			Sequence([Keyword("("), Expression("select-node"), Keyword(")")])
@@ -1925,7 +1933,7 @@ function GenerateStarOptions(options) {
 				]),
 			]),
 			"skip"
-		)	
+		)
 	]
 }
 

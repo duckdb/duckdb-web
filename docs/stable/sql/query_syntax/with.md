@@ -135,7 +135,7 @@ FROM
 
 `WITH RECURSIVE` can be used to traverse trees. For example, take a hierarchy of tags:
 
-<img alt="Example tree" src="/images/examples/with-recursive-tree-example.svg" style="width: 700px; text-align: center">
+<img id="tree-example" alt="Example tree" style="width: 700px; text-align: center">
 
 ```sql
 CREATE TABLE tag (id INTEGER, name VARCHAR, subclassof INTEGER);
@@ -179,7 +179,7 @@ One way to achieve this is to store the path of a traversal in a [list]({% link 
 
 Take the following directed graph from the [LDBC Graphalytics benchmark](https://arxiv.org/pdf/2011.15028.pdf):
 
-<img alt="Example graph" src="/images/examples/with-recursive-graph-example.svg" style="width: 700px; text-align: center">
+<img id="graph-example" alt="Example graph" style="width: 700px; text-align: center">
 
 ```sql
 CREATE TABLE edge (node1id INTEGER, node2id INTEGER);
@@ -318,6 +318,97 @@ ORDER BY length(path), path;
 |----------:|--------:|-----------|
 | 1         | 8       | [1, 3, 8] |
 | 1         | 8       | [1, 5, 8] |
+
+## Recursive CTEs With `USING KEY`
+
+`USING KEY` alters the behavior of a regular recursive CTE.
+
+In each iteration, a regular recursive CTE appends results rows to the union
+table which, ultimately defines the overall result of the CTE.
+In contrast, a CTE with `USING KEY` has the ability to update rows that
+have been placed in the union table in an earlier iteration: if the
+current iteration produces a row with key `k`, it replaces a row with the
+same key `k` in the union table (like a dictionary). If no such row exists in the union table
+yet, the new row is appended to the union table as usual.
+
+This allows a CTE to exercise fine-grained control over the union table
+contents. Avoiding the append-only behavior can lead to significantly
+smaller union table sizes. This helps query runtime, memory consumption,
+and makes it feasible to access the union table while the iteration is
+still ongoing (this is impossible for regular recursive CTEs): in a
+CTE `WITH RECURSIVE T(...) USING KEY ...`, table `T` denotes the
+rows added by the last iteration (as is usual for recursive CTEs), while
+table `recurring.T` denotes the union table built so far. References
+to `recurring.T` allow for the elegant and idiomatic translation of rather
+complex algorithms into readable SQL code.
+
+### Example: `USING KEY`
+This is a recursive CTE where `USING KEY` has a key column (`a`) and a payload column (`b`).
+The payload columns correspond to the columns to be overwritten.
+In the first iteration we have two different keys, `1` and `2`.
+These two keys will generate two new rows, `(1, 3)` and `(2, 4)`. In the next iteration we produce a new key, `3`, which generates a new row. We also generate the row `(2,3)`, where `2` is a key that already exists from the previous iteration. This will overwrite the old payload `4` with the new payload `3`.
+
+```sql
+WITH RECURSIVE tbl(a,b) USING KEY (a) AS (
+    SELECT a, b
+    FROM (VALUES (1, 3), (2, 4)) t(a, b)
+	    UNION
+    SELECT a+1, b
+    FROM tbl
+    WHERE a < 3)
+SELECT *
+FROM tbl
+```
+
+
+| a | b |
+|--:|--:|
+| 1 | 3 |
+| 2 | 3 |
+| 3 | 3 |
+
+### Example: `USING KEY` References Union Table
+As well as using the union table as a dictionary, we can now reference it in queries. This allows us to use results from not just the previous iteration, but also earlier ones. This new feature makes certain algorithms easier to implement.
+
+One example is the connected components algorithm. For each node, the algorithm determines the node with the lowest ID to which it is connected. To achieve this, we use the entries in the union table to track the lowest ID found for a node. If a new incoming row contains a lower ID, we update this value.
+<img  id="uk-example" alt="Example graph" style="width: 700px; text-align: center">
+
+```sql
+CREATE TABLE nodes (id INTEGER);
+INSERT INTO nodes VALUES (1), (2), (3), (4), (5), (6), (7), (8);
+CREATE TABLE edges (node1id INTEGER, node2id INTEGER);
+INSERT INTO edges VALUES
+    (1, 3), (2, 3), (3, 7), (7, 8), (5, 4),
+    (6, 4);
+```
+
+```sql
+WITH RECURSIVE cc(id, comp) USING KEY (id) AS (
+  SELECT n.id, n.id AS comp
+  FROM   nodes AS n
+    UNION
+  (SELECT DISTINCT ON (u.id) u.id, v.comp
+  FROM   recurring.cc AS u, cc AS v, edges AS e
+  WHERE  ((e.node1id, e.node2id) = (u.id, v.id)
+    OR (e.node2id, e.node1id) = (u.id, v.id))
+    AND    v.comp < u.comp
+  ORDER  BY u.id ASC, v.comp ASC)
+)
+TABLE cc
+ORDER BY id;
+```
+
+
+| id | comp |
+|---:|-----:|
+| 1  | 1    |
+| 2  | 1    |
+| 3  | 1    |
+| 4  | 4    |
+| 5  | 4    |
+| 6  | 4    |
+| 7  | 1    |
+| 8  | 1    |
 
 ## Limitations
 
