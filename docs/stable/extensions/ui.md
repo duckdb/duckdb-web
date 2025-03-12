@@ -27,7 +27,7 @@ duckdb -ui
 
 To start the UI from SQL:
 
-```plsql
+```sql
 CALL start_ui();
 ```
 
@@ -42,7 +42,7 @@ Closing this instance will cause the UI to stop working.
 The UI is served from an HTTP server embedded in DuckDB.
 To start this server without launching the browser, run:
 
-```plsql
+```sql
 CALL start_ui_server();
 ```
 
@@ -51,7 +51,7 @@ You can then load the UI in your browser by navigating to
 
 To stop the HTTP server, run:
 
-```plsql
+```sql
 CALL stop_ui_server();
 ```
 
@@ -83,7 +83,7 @@ The default URL for the remote server is <https://ui.duckdb.org>.
 
 An alternate remote URL can be configured with a SQL command like:
 
-```plsql
+```sql
 SET ui_remote_url = 'https://ui.duckdb.org';
 ```
 
@@ -107,7 +107,7 @@ These checks take very little time to complete, so the default polling
 interval is short (284 milliseconds).
 You can configure it with a SQL command like:
 
-```plsql
+```sql
 SET ui_polling_interval = 284;
 ```
 
