@@ -31,6 +31,7 @@ title: Core Extensions
 | [sqlite]({% link docs/stable/extensions/sqlite.md %})             | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb-sqlite)   | Adds support for reading from and writing to SQLite database files                 | yes          | sqlite_scanner, sqlite3 |
 | [tpcds]({% link docs/stable/extensions/tpcds.md %})               |                                                                                 | Adds TPC-DS data generation and query support                                      | yes          |                         |
 | [tpch]({% link docs/stable/extensions/tpch.md %})                 |                                                                                 | Adds TPC-H data generation and query support                                       | yes          |                         |
+| [ui]({% link docs/stable/extensions/ui.md %})                     | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb-ui)       | Adds local UI for DuckDB                                                           | yes          |                         |
 | [vss]({% link docs/stable/extensions/vss.md %})                   | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb-vss)      | Adds support for vector similarity search queries                                  | no           |                         |
 
 ## Default Extensions
