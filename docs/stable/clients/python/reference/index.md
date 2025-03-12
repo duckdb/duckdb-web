@@ -7,3378 +7,7716 @@ redirect_from:
 title: Python Client API
 ---
 
-<div class="documentwrapper">
-<div class="bodywrapper">
-<div class="body" role="main">
-
-<dl class="py data" id="module-duckdb">
-<dt class="sig sig-object py" id="duckdb.threadsafety">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">threadsafety</span></span><em class="property"><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#duckdb.threadsafety" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Indicates that this package is threadsafe</p>
-</dd>
-</dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="duckdb.apilevel">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">apilevel</span></span><em class="property"><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#duckdb.apilevel" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Indicates which Python DBAPI version this package implements</p>
-</dd>
-</dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="duckdb.paramstyle">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">paramstyle</span></span><em class="property"><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#duckdb.paramstyle" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Indicates which parameter style duckdb supports</p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.BinaryValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">BinaryValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.BinaryValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.BinderException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">BinderException</span></span><a class="headerlink" href="#duckdb.BinderException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.ProgrammingError" title="duckdb.duckdb.ProgrammingError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgrammingError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.BitValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">BitValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.BitValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.BlobValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">BlobValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.BlobValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.BooleanValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">BooleanValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.BooleanValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.CaseExpression">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">CaseExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.CaseExpression" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.CatalogException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">CatalogException</span></span><a class="headerlink" href="#duckdb.CatalogException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.ProgrammingError" title="duckdb.duckdb.ProgrammingError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgrammingError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.CoalesceOperator">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">CoalesceOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.CoalesceOperator" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.ColumnExpression">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ColumnExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.ColumnExpression" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a column reference from the provided column name</p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.ConnectionException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ConnectionException</span></span><a class="headerlink" href="#duckdb.ConnectionException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.OperationalError" title="duckdb.duckdb.OperationalError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OperationalError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.ConstantExpression">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ConstantExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.ConstantExpression" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a constant expression from the provided value</p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.ConstraintException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ConstraintException</span></span><a class="headerlink" href="#duckdb.ConstraintException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.IntegrityError" title="duckdb.duckdb.IntegrityError"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegrityError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.ConversionException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ConversionException</span></span><a class="headerlink" href="#duckdb.ConversionException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.DataError" title="duckdb.duckdb.DataError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.DataError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">DataError</span></span><a class="headerlink" href="#duckdb.DataError" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.DateValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">DateValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.DateValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.DecimalValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">DecimalValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.DecimalValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.DefaultExpression">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">DefaultExpression</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.DefaultExpression" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.DoubleValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">DoubleValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.DoubleValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">DuckDBPyConnection</span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.append">
-<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.append" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Append the passed DataFrame to the named table</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.array_type">
-<span class="sig-name descname"><span class="pre">array_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.array_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create an array type object of &#8216;type&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.arrow">
-<span class="sig-name descname"><span class="pre">arrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows_per_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.Table.html#pyarrow.Table" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.Table</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.arrow" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as Arrow table following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.begin">
-<span class="sig-name descname"><span class="pre">begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.begin" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Start a new transaction</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.checkpoint">
-<span class="sig-name descname"><span class="pre">checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.checkpoint" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Synchronizes data in the write-ahead log (WAL) to the database data file (no-op for in-memory connections)</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.close">
-<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.close" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Close the connection</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.commit">
-<span class="sig-name descname"><span class="pre">commit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.commit" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Commit changes performed within a transaction</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.create_function">
-<span class="sig-name descname"><span class="pre">create_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self:</span> <span class="pre">duckdb.duckdb.DuckDBPyConnection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function:</span> <span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters:</span> <span class="pre">object</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type:</span> <span class="pre">duckdb.duckdb.typing.DuckDBPyType</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type:</span> <span class="pre">duckdb.duckdb.functional.PythonUDFType</span> <span class="pre">=</span> <span class="pre">&lt;PythonUDFType.NATIVE:</span> <span class="pre">0&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">null_handling:</span> <span class="pre">duckdb.duckdb.functional.FunctionNullHandling</span> <span class="pre">=</span> <span class="pre">&lt;FunctionNullHandling.DEFAULT:</span> <span class="pre">0&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception_handling:</span> <span class="pre">duckdb.duckdb.PythonExceptionHandling</span> <span class="pre">=</span> <span class="pre">&lt;PythonExceptionHandling.DEFAULT:</span> <span class="pre">0&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side_effects:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.create_function" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a DuckDB function out of the passing in Python function so it can be used in queries</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.cursor">
-<span class="sig-name descname"><span class="pre">cursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.cursor" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a duplicate of the current connection</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.decimal_type">
-<span class="sig-name descname"><span class="pre">decimal_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.decimal_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a decimal type with &#8216;width&#8217; and &#8216;scale&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.description">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.description" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Get result set attributes, mainly column names</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.df">
-<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.df" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as DataFrame following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.dtype">
-<span class="sig-name descname"><span class="pre">dtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.dtype" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a type object by parsing the &#8216;type_str&#8217; string</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.duplicate">
-<span class="sig-name descname"><span class="pre">duplicate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.duplicate" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a duplicate of the current connection</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.enum_type">
-<span class="sig-name descname"><span class="pre">enum_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.enum_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create an enum type of underlying &#8216;type&#8217;, consisting of the list of &#8216;values&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.execute">
-<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.execute" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute the given SQL query, optionally using prepared statements with parameters set</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.executemany">
-<span class="sig-name descname"><span class="pre">executemany</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.executemany" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute the given prepared statement multiple times using the list of parameter sets in parameters</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.extract_statements">
-<span class="sig-name descname"><span class="pre">extract_statements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.extract_statements" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Parse the query string and extract the Statement object(s) produced</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetch_arrow_table">
-<span class="sig-name descname"><span class="pre">fetch_arrow_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows_per_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.Table.html#pyarrow.Table" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.Table</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_arrow_table" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as Arrow table following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetch_df">
-<span class="sig-name descname"><span class="pre">fetch_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_df" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as DataFrame following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetch_df_chunk">
-<span class="sig-name descname"><span class="pre">fetch_df_chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">vectors_per_chunk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_df_chunk" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a chunk of the result as DataFrame following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetch_record_batch">
-<span class="sig-name descname"><span class="pre">fetch_record_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows_per_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.RecordBatchReader.html#pyarrow.RecordBatchReader" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.RecordBatchReader</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_record_batch" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch an Arrow RecordBatchReader following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetchall">
-<span class="sig-name descname"><span class="pre">fetchall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetchall" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch all rows from a result following execute</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetchdf">
-<span class="sig-name descname"><span class="pre">fetchdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetchdf" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as DataFrame following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetchmany">
-<span class="sig-name descname"><span class="pre">fetchmany</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetchmany" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch the next set of rows from a result following execute</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetchnumpy">
-<span class="sig-name descname"><span class="pre">fetchnumpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetchnumpy" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as list of NumPy arrays following execute</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetchone">
-<span class="sig-name descname"><span class="pre">fetchone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetchone" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a single row from a result following execute</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.filesystem_is_registered">
-<span class="sig-name descname"><span class="pre">filesystem_is_registered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.filesystem_is_registered" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Check if a filesystem with the provided name is currently registered</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.from_arrow">
-<span class="sig-name descname"><span class="pre">from_arrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrow_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.from_arrow" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from an Arrow object</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.from_csv_auto">
-<span class="sig-name descname"><span class="pre">from_csv_auto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_or_buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.from_csv_auto" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the CSV file in &#8216;name&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.from_df">
-<span class="sig-name descname"><span class="pre">from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.from_df" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the DataFrame in df</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.from_parquet">
-<span class="sig-name descname"><span class="pre">from_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.DuckDBPyConnection.from_parquet" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, <a href="#id1"><span class="problematic" id="id2">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the Parquet files in file_glob</p>
-<ol class="arabic simple" start="2">
-<li><p>from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, <a href="#id3"><span class="problematic" id="id4">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the Parquet files in file_globs</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.from_query">
-<span class="sig-name descname"><span class="pre">from_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.from_query" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.get_table_names">
-<span class="sig-name descname"><span class="pre">get_table_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.get_table_names" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Extract the required table names from a query</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.install_extension">
-<span class="sig-name descname"><span class="pre">install_extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_install</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.install_extension" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Install an extension by name, with an optional version and/or repository to get the extension from</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.interrupt">
-<span class="sig-name descname"><span class="pre">interrupt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.interrupt" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Interrupt pending operations</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.list_filesystems">
-<span class="sig-name descname"><span class="pre">list_filesystems</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.list_filesystems" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>List registered filesystems, including builtin ones</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.list_type">
-<span class="sig-name descname"><span class="pre">list_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.list_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a list type object of &#8216;type&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.load_extension">
-<span class="sig-name descname"><span class="pre">load_extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.load_extension" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Load an installed extension</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.map_type">
-<span class="sig-name descname"><span class="pre">map_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.map_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a map type object from &#8216;key_type&#8217; and &#8216;value_type&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.pl">
-<span class="sig-name descname"><span class="pre">pl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows_per_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb::PolarsDataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.pl" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as Polars DataFrame following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.query">
-<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.query" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.read_csv">
-<span class="sig-name descname"><span class="pre">read_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_or_buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.read_csv" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the CSV file in &#8216;name&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.read_json">
-<span class="sig-name descname"><span class="pre">read_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_or_buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">records</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_object_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convert_strings_to_integers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_appearance_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_inference_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_sample_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hive_partitioning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">union_by_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hive_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hive_types_autocast</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.read_json" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the JSON file in &#8216;name&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.read_parquet">
-<span class="sig-name descname"><span class="pre">read_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.DuckDBPyConnection.read_parquet" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, <a href="#id5"><span class="problematic" id="id6">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the Parquet files in file_glob</p>
-<ol class="arabic simple" start="2">
-<li><p>read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, <a href="#id7"><span class="problematic" id="id8">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the Parquet files in file_globs</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.register">
-<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.register" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Register the passed Python Object value for querying with a view</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.register_filesystem">
-<span class="sig-name descname"><span class="pre">register_filesystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">fsspec.AbstractFileSystem</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.register_filesystem" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Register a fsspec compliant filesystem</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.remove_function">
-<span class="sig-name descname"><span class="pre">remove_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.remove_function" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Remove a previously created function</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.rollback">
-<span class="sig-name descname"><span class="pre">rollback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.rollback" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Roll back changes performed within a transaction</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.row_type">
-<span class="sig-name descname"><span class="pre">row_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.row_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a struct type object from &#8216;fields&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.rowcount">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rowcount</span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.rowcount" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Get result set row count</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.sql">
-<span class="sig-name descname"><span class="pre">sql</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.sql" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.sqltype">
-<span class="sig-name descname"><span class="pre">sqltype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.sqltype" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a type object by parsing the &#8216;type_str&#8217; string</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.string_type">
-<span class="sig-name descname"><span class="pre">string_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">collation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.string_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a string type with an optional collation</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.struct_type">
-<span class="sig-name descname"><span class="pre">struct_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.struct_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a struct type object from &#8216;fields&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.table">
-<span class="sig-name descname"><span class="pre">table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.table" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object for the named table</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.table_function">
-<span class="sig-name descname"><span class="pre">table_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.table_function" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the named table function with given parameters</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.tf">
-<span class="sig-name descname"><span class="pre">tf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.tf" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as dict of TensorFlow Tensors following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.torch">
-<span class="sig-name descname"><span class="pre">torch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.torch" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as dict of PyTorch Tensors following execute()</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.type">
-<span class="sig-name descname"><span class="pre">type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a type object by parsing the &#8216;type_str&#8217; string</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.union_type">
-<span class="sig-name descname"><span class="pre">union_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">members</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.union_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a union type object from &#8216;members&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.unregister">
-<span class="sig-name descname"><span class="pre">unregister</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.unregister" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Unregister the view name</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.unregister_filesystem">
-<span class="sig-name descname"><span class="pre">unregister_filesystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.unregister_filesystem" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Unregister a filesystem</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.values">
-<span class="sig-name descname"><span class="pre">values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.values" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the passed values</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.view">
-<span class="sig-name descname"><span class="pre">view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.view" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object for the named view</p>
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">DuckDBPyRelation</span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.aggregate">
-<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.aggregate" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Compute the aggregate aggr_expr by the optional groups group_expr on the relation</p>
-</dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.alias">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alias</span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.alias" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Get the name of the current alias</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.any_value">
-<span class="sig-name descname"><span class="pre">any_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.any_value" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Returns the first non-null value from a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">function_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function_aggr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function_parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.apply" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Compute the function of a single column or a list of columns by the optional groups on the relation</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.arg_max">
-<span class="sig-name descname"><span class="pre">arg_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.arg_max" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Finds the row with the maximum value for a value column and returns the value of that row for an argument column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.arg_min">
-<span class="sig-name descname"><span class="pre">arg_min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.arg_min" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Finds the row with the minimum value for a value column and returns the value of that row for an argument column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.arrow">
-<span class="sig-name descname"><span class="pre">arrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.Table.html#pyarrow.Table" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.Table</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.arrow" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch all rows as an Arrow Table</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.avg">
-<span class="sig-name descname"><span class="pre">avg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.avg" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the average on a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.bit_and">
-<span class="sig-name descname"><span class="pre">bit_and</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.bit_and" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the bitwise AND of all bits present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.bit_or">
-<span class="sig-name descname"><span class="pre">bit_or</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.bit_or" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the bitwise OR of all bits present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.bit_xor">
-<span class="sig-name descname"><span class="pre">bit_xor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.bit_xor" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the bitwise XOR of all bits present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.bitstring_agg">
-<span class="sig-name descname"><span class="pre">bitstring_agg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.bitstring_agg" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes a bitstring with bits set for each distinct value in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.bool_and">
-<span class="sig-name descname"><span class="pre">bool_and</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.bool_and" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the logical AND of all values present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.bool_or">
-<span class="sig-name descname"><span class="pre">bool_or</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.bool_or" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the logical OR of all values present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.close">
-<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.close" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Closes the result</p>
-</dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.columns">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">columns</span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.columns" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Return a list containing the names of the columns of the relation.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.count">
-<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.count" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the number of elements present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.create" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Creates a new table named table_name with the contents of the relation object</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.create_view">
-<span class="sig-name descname"><span class="pre">create_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.create_view" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Creates a view named view_name that refers to the relation object</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.cross">
-<span class="sig-name descname"><span class="pre">cross</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_rel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.cross" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create cross/cartesian product of two relational objects</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.cume_dist">
-<span class="sig-name descname"><span class="pre">cume_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.cume_dist" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the cumulative distribution within the partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.dense_rank">
-<span class="sig-name descname"><span class="pre">dense_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.dense_rank" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the dense rank within the partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.describe">
-<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.describe" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Gives basic statistics (e.g., min, max) and if NULL exists for each column of the relation.</p>
-</dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.description">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.description" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Return the description of the result</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.df">
-<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.df" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch all rows as a pandas DataFrame</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.distinct">
-<span class="sig-name descname"><span class="pre">distinct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.distinct" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Retrieve distinct rows from this relation object</p>
-</dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.dtypes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dtypes</span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.dtypes" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Return a list containing the types of the columns of the relation.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.except_">
-<span class="sig-name descname"><span class="pre">except_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_rel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.except_" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create the set except of this relation object with another relation object in other_rel</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.execute">
-<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.execute" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Transform the relation into a result set</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.explain">
-<span class="sig-name descname"><span class="pre">explain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.ExplainType" title="duckdb.duckdb.ExplainType"><span class="pre">duckdb.duckdb.ExplainType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'standard'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.explain" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.favg">
-<span class="sig-name descname"><span class="pre">favg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.favg" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the average of all values present in a given column using a more accurate floating point summation (Kahan Sum)</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetch_arrow_reader">
-<span class="sig-name descname"><span class="pre">fetch_arrow_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.RecordBatchReader.html#pyarrow.RecordBatchReader" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.RecordBatchReader</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetch_arrow_reader" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and return an Arrow Record Batch Reader that yields all rows</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetch_arrow_table">
-<span class="sig-name descname"><span class="pre">fetch_arrow_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.Table.html#pyarrow.Table" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.Table</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetch_arrow_table" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch all rows as an Arrow Table</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetch_df_chunk">
-<span class="sig-name descname"><span class="pre">fetch_df_chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">vectors_per_chunk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetch_df_chunk" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch a chunk of the rows</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetchall">
-<span class="sig-name descname"><span class="pre">fetchall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetchall" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch all rows as a list of tuples</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetchdf">
-<span class="sig-name descname"><span class="pre">fetchdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetchdf" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch all rows as a pandas DataFrame</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetchmany">
-<span class="sig-name descname"><span class="pre">fetchmany</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetchmany" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch the next set of rows as a list of tuples</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetchnumpy">
-<span class="sig-name descname"><span class="pre">fetchnumpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetchnumpy" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch all rows as a Python dict mapping each column to one numpy arrays</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetchone">
-<span class="sig-name descname"><span class="pre">fetchone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetchone" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch a single row as a tuple</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.filter">
-<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.filter" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Filter the relation object by the filter in filter_expr</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.first">
-<span class="sig-name descname"><span class="pre">first</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.first" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Returns the first value of a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.first_value">
-<span class="sig-name descname"><span class="pre">first_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.first_value" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the first value within the group or partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fsum">
-<span class="sig-name descname"><span class="pre">fsum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fsum" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the sum of all values present in a given column using a more accurate floating point summation (Kahan Sum)</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.geomean">
-<span class="sig-name descname"><span class="pre">geomean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.geomean" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the geometric mean over all values present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.histogram">
-<span class="sig-name descname"><span class="pre">histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.histogram" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the histogram over all values present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.insert">
-<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.insert" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Inserts the given values into the relation</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.insert_into">
-<span class="sig-name descname"><span class="pre">insert_into</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.insert_into" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Inserts the relation object into an existing table named table_name</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.intersect">
-<span class="sig-name descname"><span class="pre">intersect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_rel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.intersect" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create the set intersection of this relation object with another relation object in other_rel</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.join">
-<span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_rel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">how</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'inner'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.join" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Join the relation object with another relation object in other_rel using the join condition expression in join_condition. Types supported are &#8216;inner&#8217; and &#8216;left&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.lag">
-<span class="sig-name descname"><span class="pre">lag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'NULL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_nulls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.lag" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the lag within the partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.last">
-<span class="sig-name descname"><span class="pre">last</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.last" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Returns the last value of a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.last_value">
-<span class="sig-name descname"><span class="pre">last_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.last_value" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the last value within the group or partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.lead">
-<span class="sig-name descname"><span class="pre">lead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'NULL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_nulls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.lead" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the lead within the partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.limit">
-<span class="sig-name descname"><span class="pre">limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.limit" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Only retrieve the first n rows from this relation object, starting at offset</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.list">
-<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.list" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Returns a list containing all values present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.map">
-<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.map" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Calls the passed function on the relation</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.max">
-<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.max" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Returns the maximum value present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.mean">
-<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.mean" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the average on a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.median">
-<span class="sig-name descname"><span class="pre">median</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.median" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the median over all values present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.min">
-<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.min" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Returns the minimum value present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.mode">
-<span class="sig-name descname"><span class="pre">mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.mode" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the mode over all values present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.n_tile">
-<span class="sig-name descname"><span class="pre">n_tile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_buckets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.n_tile" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Divides the partition as equally as possible into num_buckets</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.nth_value">
-<span class="sig-name descname"><span class="pre">nth_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_nulls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.nth_value" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the nth value within the partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.order">
-<span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.order" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Reorder the relation object by order_expr</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.percent_rank">
-<span class="sig-name descname"><span class="pre">percent_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.percent_rank" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the relative rank within the partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.pl">
-<span class="sig-name descname"><span class="pre">pl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb::PolarsDataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.pl" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch all rows as a Polars DataFrame</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.product">
-<span class="sig-name descname"><span class="pre">product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.product" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Returns the product of all values present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.project">
-<span class="sig-name descname"><span class="pre">project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.project" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Project the relation object by the projection in project_expr</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.quantile">
-<span class="sig-name descname"><span class="pre">quantile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.quantile" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the exact quantile value for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.quantile_cont">
-<span class="sig-name descname"><span class="pre">quantile_cont</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.quantile_cont" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the interpolated quantile value for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.quantile_disc">
-<span class="sig-name descname"><span class="pre">quantile_disc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.quantile_disc" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the exact quantile value for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.query">
-<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">virtual_table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.query" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Run the given SQL query in sql_query on the view named virtual_table_name that refers to the relation object</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.rank">
-<span class="sig-name descname"><span class="pre">rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.rank" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the rank within the partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.rank_dense">
-<span class="sig-name descname"><span class="pre">rank_dense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.rank_dense" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the dense rank within the partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.record_batch">
-<span class="sig-name descname"><span class="pre">record_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.RecordBatchReader.html#pyarrow.RecordBatchReader" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.RecordBatchReader</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.record_batch" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and return an Arrow Record Batch Reader that yields all rows</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.row_number">
-<span class="sig-name descname"><span class="pre">row_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.row_number" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the row number within the partition</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.select">
-<span class="sig-name descname"><span class="pre">select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.select" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Project the relation object by the projection in project_expr</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.select_dtypes">
-<span class="sig-name descname"><span class="pre">select_dtypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.select_dtypes" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Select columns from the relation, by filtering based on type(s)</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.select_types">
-<span class="sig-name descname"><span class="pre">select_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.select_types" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Select columns from the relation, by filtering based on type(s)</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.set_alias">
-<span class="sig-name descname"><span class="pre">set_alias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.set_alias" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Rename the relation object to new alias</p>
-</dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.shape">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.shape" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Tuple of # of rows, # of columns in relation.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.show">
-<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rows</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_col_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">null_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.show" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Display a summary of the data</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.sort">
-<span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.sort" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Reorder the relation object by the provided expressions</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.sql_query">
-<span class="sig-name descname"><span class="pre">sql_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.sql_query" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Get the SQL query that is equivalent to the relation</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.std">
-<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.std" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the sample standard deviation for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.stddev">
-<span class="sig-name descname"><span class="pre">stddev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.stddev" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the sample standard deviation for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.stddev_pop">
-<span class="sig-name descname"><span class="pre">stddev_pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.stddev_pop" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the population standard deviation for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.stddev_samp">
-<span class="sig-name descname"><span class="pre">stddev_samp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.stddev_samp" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the sample standard deviation for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.string_agg">
-<span class="sig-name descname"><span class="pre">string_agg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.string_agg" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Concatenates the values present in a given column with a separator</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.sum">
-<span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.sum" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the sum of all values present in a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.tf">
-<span class="sig-name descname"><span class="pre">tf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.tf" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as dict of TensorFlow Tensors</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_arrow_table">
-<span class="sig-name descname"><span class="pre">to_arrow_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.Table.html#pyarrow.Table" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.Table</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_arrow_table" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch all rows as an Arrow Table</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_csv">
-<span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">na_rep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quotechar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">escapechar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quoting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_thread_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tmp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_partition_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_csv" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Write the relation object to a CSV file in &#8216;file_name&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_df">
-<span class="sig-name descname"><span class="pre">to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_df" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute and fetch all rows as a pandas DataFrame</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_parquet">
-<span class="sig-name descname"><span class="pre">to_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_group_size_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_thread_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tmp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_partition_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_parquet" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Write the relation object to a Parquet file in &#8216;file_name&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_table">
-<span class="sig-name descname"><span class="pre">to_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_table" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Creates a new table named table_name with the contents of the relation object</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_view">
-<span class="sig-name descname"><span class="pre">to_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_view" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Creates a view named view_name that refers to the relation object</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.torch">
-<span class="sig-name descname"><span class="pre">torch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.torch" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as dict of PyTorch Tensors</p>
-</dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.type">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Get the type of the relation.</p>
-</dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.types">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">types</span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.types" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Return a list containing the types of the columns of the relation.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.union">
-<span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">union_rel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.union" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create the set union of this relation object with another relation object in other_rel</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.unique">
-<span class="sig-name descname"><span class="pre">unique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_aggr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.unique" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Number of distinct values in a column.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.update" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Update the given relation with the provided expressions</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.value_counts">
-<span class="sig-name descname"><span class="pre">value_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.value_counts" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the number of elements present in a given column, also projecting the original column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.var">
-<span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.var" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the sample variance for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.var_pop">
-<span class="sig-name descname"><span class="pre">var_pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.var_pop" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the population variance for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.var_samp">
-<span class="sig-name descname"><span class="pre">var_samp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.var_samp" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the sample variance for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.variance">
-<span class="sig-name descname"><span class="pre">variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.variance" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Computes the sample variance for a given column</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.write_csv">
-<span class="sig-name descname"><span class="pre">write_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">na_rep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quotechar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">escapechar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quoting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_thread_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tmp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_partition_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.write_csv" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Write the relation object to a CSV file in &#8216;file_name&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.write_parquet">
-<span class="sig-name descname"><span class="pre">write_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_group_size_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_group_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_thread_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tmp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_partition_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.write_parquet" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Write the relation object to a Parquet file in &#8216;file_name&#8217;</p>
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.Error">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><a class="headerlink" href="#duckdb.Error" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.ExplainType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ExplainType</span></span><a class="headerlink" href="#duckdb.ExplainType" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
-<p>Members:</p>
-<p>STANDARD</p>
-<p>ANALYZE</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.ExplainType.ANALYZE">
-<span class="sig-name descname"><span class="pre">ANALYZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ExplainType.ANALYZE:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#duckdb.ExplainType.ANALYZE" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.ExplainType.STANDARD">
-<span class="sig-name descname"><span class="pre">STANDARD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ExplainType.STANDARD:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#duckdb.ExplainType.STANDARD" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.ExplainType.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#duckdb.ExplainType.name" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.ExplainType.value">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#duckdb.ExplainType.value" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.Expression">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">Expression</span></span><a class="headerlink" href="#duckdb.Expression" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.alias">
-<span class="sig-name descname"><span class="pre">alias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.alias" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a copy of this expression with the given alias.</p>
-<dl class="simple">
-<dt>Parameters:</dt>
-<dd>
-<p>name: The alias to use for the expression, this will affect how it can be referenced.</p>
-</dd>
-<dt>Returns:</dt>
-<dd>
-<p>Expression: self with an alias.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.asc">
-<span class="sig-name descname"><span class="pre">asc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.asc" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Set the order by modifier to ASCENDING.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.between">
-<span class="sig-name descname"><span class="pre">between</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.between" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.cast">
-<span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.cast" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a CastExpression to type from self</p>
-<dl class="simple">
-<dt>Parameters:</dt>
-<dd>
-<p>type: The type to cast to</p>
-</dd>
-<dt>Returns:</dt>
-<dd>
-<p>CastExpression: self::type</p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.collate">
-<span class="sig-name descname"><span class="pre">collate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">collation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.collate" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.desc">
-<span class="sig-name descname"><span class="pre">desc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.desc" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Set the order by modifier to DESCENDING.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.get_name">
-<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#duckdb.Expression.get_name" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Return the stringified version of the expression.</p>
-<dl class="simple">
-<dt>Returns:</dt>
-<dd>
-<p>str: The string representation.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.isin">
-<span class="sig-name descname"><span class="pre">isin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.isin" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Return an IN expression comparing self to the input arguments.</p>
-<dl class="simple">
-<dt>Returns:</dt>
-<dd>
-<p>DuckDBPyExpression: The compare IN expression</p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.isnotin">
-<span class="sig-name descname"><span class="pre">isnotin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.isnotin" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Return a NOT IN expression comparing self to the input arguments.</p>
-<dl class="simple">
-<dt>Returns:</dt>
-<dd>
-<p>DuckDBPyExpression: The compare NOT IN expression</p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.isnotnull">
-<span class="sig-name descname"><span class="pre">isnotnull</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.isnotnull" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a binary IS NOT NULL expression from self</p>
-<dl class="simple">
-<dt>Returns:</dt>
-<dd>
-<p>DuckDBPyExpression: self IS NOT NULL</p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.isnull">
-<span class="sig-name descname"><span class="pre">isnull</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.isnull" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a binary IS NULL expression from self</p>
-<dl class="simple">
-<dt>Returns:</dt>
-<dd>
-<p>DuckDBPyExpression: self IS NULL</p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.nulls_first">
-<span class="sig-name descname"><span class="pre">nulls_first</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.nulls_first" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Set the NULL order by modifier to NULLS FIRST.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.nulls_last">
-<span class="sig-name descname"><span class="pre">nulls_last</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.nulls_last" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Set the NULL order by modifier to NULLS LAST.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.otherwise">
-<span class="sig-name descname"><span class="pre">otherwise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.otherwise" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Add an ELSE &lt;value&gt; clause to the CaseExpression.</p>
-<dl class="simple">
-<dt>Parameters:</dt>
-<dd>
-<p>value: The value to use if none of the WHEN conditions are met.</p>
-</dd>
-<dt>Returns:</dt>
-<dd>
-<p>CaseExpression: self with an ELSE clause.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.show">
-<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.Expression.show" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Print the stringified version of the expression.</p>
-</dd>
-</dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="duckdb.Expression.when">
-<span class="sig-name descname"><span class="pre">when</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.Expression.when" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Add an additional WHEN &lt;condition&gt; THEN &lt;value&gt; clause to the CaseExpression.</p>
-<dl class="simple">
-<dt>Parameters:</dt>
-<dd>
-<p>condition: The condition that must be met.
-value: The value to use if the condition is met.</p>
-</dd>
-<dt>Returns:</dt>
-<dd>
-<p>CaseExpression: self with an additional WHEN clause.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.FatalException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">FatalException</span></span><a class="headerlink" href="#duckdb.FatalException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.FloatValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">FloatValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.FloatValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.FunctionExpression">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">FunctionExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.FunctionExpression" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.HTTPException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">HTTPException</span></span><a class="headerlink" href="#duckdb.HTTPException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.IOException" title="duckdb.duckdb.IOException"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOException</span></code></a></p>
-<p>Thrown when an error occurs in the httpfs extension, or whilst downloading an extension.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.HTTPException.body">
-<span class="sig-name descname"><span class="pre">body</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#duckdb.HTTPException.body" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.HTTPException.headers">
-<span class="sig-name descname"><span class="pre">headers</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#duckdb.HTTPException.headers" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.HTTPException.reason">
-<span class="sig-name descname"><span class="pre">reason</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#duckdb.HTTPException.reason" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.HTTPException.status_code">
-<span class="sig-name descname"><span class="pre">status_code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#duckdb.HTTPException.status_code" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.HugeIntegerValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">HugeIntegerValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.HugeIntegerValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.IOException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">IOException</span></span><a class="headerlink" href="#duckdb.IOException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.OperationalError" title="duckdb.duckdb.OperationalError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OperationalError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.IntegerValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">IntegerValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.IntegerValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.IntegrityError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">IntegrityError</span></span><a class="headerlink" href="#duckdb.IntegrityError" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.InternalError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">InternalError</span></span><a class="headerlink" href="#duckdb.InternalError" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.InternalException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">InternalException</span></span><a class="headerlink" href="#duckdb.InternalException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.InternalError" title="duckdb.duckdb.InternalError"><code class="xref py py-class docutils literal notranslate"><span class="pre">InternalError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.InterruptException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">InterruptException</span></span><a class="headerlink" href="#duckdb.InterruptException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.IntervalValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">IntervalValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.IntervalValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.InvalidInputException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">InvalidInputException</span></span><a class="headerlink" href="#duckdb.InvalidInputException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.ProgrammingError" title="duckdb.duckdb.ProgrammingError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgrammingError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.InvalidTypeException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">InvalidTypeException</span></span><a class="headerlink" href="#duckdb.InvalidTypeException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.ProgrammingError" title="duckdb.duckdb.ProgrammingError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgrammingError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.LambdaExpression">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">LambdaExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.Expression" title="duckdb.duckdb.Expression"><span class="pre">duckdb.duckdb.Expression</span></a></span></span><a class="headerlink" href="#duckdb.LambdaExpression" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.LongValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">LongValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.LongValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.NotImplementedException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">NotImplementedException</span></span><a class="headerlink" href="#duckdb.NotImplementedException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.NotSupportedError" title="duckdb.duckdb.NotSupportedError"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotSupportedError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.NotSupportedError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">NotSupportedError</span></span><a class="headerlink" href="#duckdb.NotSupportedError" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.NullValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">NullValue</span></span><a class="headerlink" href="#duckdb.NullValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.OperationalError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">OperationalError</span></span><a class="headerlink" href="#duckdb.OperationalError" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.OutOfMemoryException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">OutOfMemoryException</span></span><a class="headerlink" href="#duckdb.OutOfMemoryException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.OperationalError" title="duckdb.duckdb.OperationalError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OperationalError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.OutOfRangeException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">OutOfRangeException</span></span><a class="headerlink" href="#duckdb.OutOfRangeException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.DataError" title="duckdb.duckdb.DataError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.ParserException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ParserException</span></span><a class="headerlink" href="#duckdb.ParserException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.ProgrammingError" title="duckdb.duckdb.ProgrammingError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgrammingError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.PermissionException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">PermissionException</span></span><a class="headerlink" href="#duckdb.PermissionException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.ProgrammingError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ProgrammingError</span></span><a class="headerlink" href="#duckdb.ProgrammingError" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.PythonExceptionHandling">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">PythonExceptionHandling</span></span><a class="headerlink" href="#duckdb.PythonExceptionHandling" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
-<p>Members:</p>
-<p>DEFAULT</p>
-<p>RETURN_NULL</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.PythonExceptionHandling.DEFAULT">
-<span class="sig-name descname"><span class="pre">DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;PythonExceptionHandling.DEFAULT:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#duckdb.PythonExceptionHandling.DEFAULT" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.PythonExceptionHandling.RETURN_NULL">
-<span class="sig-name descname"><span class="pre">RETURN_NULL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;PythonExceptionHandling.RETURN_NULL:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#duckdb.PythonExceptionHandling.RETURN_NULL" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.PythonExceptionHandling.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#duckdb.PythonExceptionHandling.name" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.PythonExceptionHandling.value">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#duckdb.PythonExceptionHandling.value" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.SequenceException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">SequenceException</span></span><a class="headerlink" href="#duckdb.SequenceException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.SerializationException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">SerializationException</span></span><a class="headerlink" href="#duckdb.SerializationException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.OperationalError" title="duckdb.duckdb.OperationalError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OperationalError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.ShortValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ShortValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.ShortValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.StarExpression">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">StarExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.StarExpression" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>StarExpression(<a href="#id9"><span class="problematic" id="id10">*</span></a>, exclude: object = None) -&gt; duckdb.duckdb.Expression</p></li>
-<li><p>StarExpression() -&gt; duckdb.duckdb.Expression</p></li>
-</ol>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.StringValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">StringValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.StringValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.SyntaxException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">SyntaxException</span></span><a class="headerlink" href="#duckdb.SyntaxException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.ProgrammingError" title="duckdb.duckdb.ProgrammingError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgrammingError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.TimeTimeZoneValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">TimeTimeZoneValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.TimeTimeZoneValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.TimeValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">TimeValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.TimeValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.TimestampMilisecondValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">TimestampMilisecondValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.TimestampMilisecondValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.TimestampNanosecondValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">TimestampNanosecondValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.TimestampNanosecondValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.TimestampSecondValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">TimestampSecondValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.TimestampSecondValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.TimestampTimeZoneValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">TimestampTimeZoneValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.TimestampTimeZoneValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.TimestampValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">TimestampValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.TimestampValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.TransactionException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">TransactionException</span></span><a class="headerlink" href="#duckdb.TransactionException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.OperationalError" title="duckdb.duckdb.OperationalError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OperationalError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.TypeMismatchException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">TypeMismatchException</span></span><a class="headerlink" href="#duckdb.TypeMismatchException" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.DataError" title="duckdb.duckdb.DataError"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataError</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.UUIDValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">UUIDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.UUIDValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.UnsignedBinaryValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">UnsignedBinaryValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.UnsignedBinaryValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.UnsignedIntegerValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">UnsignedIntegerValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.UnsignedIntegerValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.UnsignedLongValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">UnsignedLongValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.UnsignedLongValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.UnsignedShortValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">UnsignedShortValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.UnsignedShortValue" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <a class="reference internal" href="#duckdb.Value" title="duckdb.value.constant.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.Value">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">Value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DuckDBPyType</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.Value" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd>
-</dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="duckdb.Warning">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">Warning</span></span><a class="headerlink" href="#duckdb.Warning" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.aggregate">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.aggregate" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Compute the aggregate aggr_expr by the optional groups group_expr on the relation</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.alias">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">alias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.alias" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Rename the relation object to new alias</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.append">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.append" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Append the passed DataFrame to the named table</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.array_type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">array_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.array_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create an array type object of &#8216;type&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.arrow">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">arrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.arrow" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>arrow(rows_per_batch: int = 1000000, <a href="#id11"><span class="problematic" id="id12">*</span></a>, connection: duckdb.DuckDBPyConnection = None) -&gt; pyarrow.lib.Table</p></li>
-</ol>
-<p>Fetch a result as Arrow table following execute()</p>
-<ol class="arabic simple" start="2">
-<li><p>arrow(rows_per_batch: int = 1000000, <a href="#id13"><span class="problematic" id="id14">*</span></a>, connection: duckdb.DuckDBPyConnection = None) -&gt; pyarrow.lib.Table</p></li>
-</ol>
-<p>Fetch a result as Arrow table following execute()</p>
-<ol class="arabic simple" start="3">
-<li><p>arrow(arrow_object: object, <a href="#id15"><span class="problematic" id="id16">*</span></a>, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from an Arrow object</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.begin">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.begin" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Start a new transaction</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.checkpoint">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.checkpoint" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Synchronizes data in the write-ahead log (WAL) to the database data file (no-op for in-memory connections)</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.close">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.close" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Close the connection</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.commit">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">commit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.commit" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Commit changes performed within a transaction</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.connect">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">':memory:'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.connect" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a DuckDB database instance. Can take a database file name to read/write persistent data and a read_only flag if no changes are desired</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.create_function">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">create_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function:</span> <span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters:</span> <span class="pre">object</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type:</span> <span class="pre">duckdb.duckdb.typing.DuckDBPyType</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type:</span> <span class="pre">duckdb.duckdb.functional.PythonUDFType</span> <span class="pre">=</span> <span class="pre">&lt;PythonUDFType.NATIVE:</span> <span class="pre">0&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">null_handling:</span> <span class="pre">duckdb.duckdb.functional.FunctionNullHandling</span> <span class="pre">=</span> <span class="pre">&lt;FunctionNullHandling.DEFAULT:</span> <span class="pre">0&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception_handling:</span> <span class="pre">duckdb.duckdb.PythonExceptionHandling</span> <span class="pre">=</span> <span class="pre">&lt;PythonExceptionHandling.DEFAULT:</span> <span class="pre">0&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side_effects:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection:</span> <span class="pre">duckdb.DuckDBPyConnection</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.create_function" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a DuckDB function out of the passing in Python function so it can be used in queries</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.cursor">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">cursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.cursor" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a duplicate of the current connection</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.decimal_type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">decimal_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.decimal_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a decimal type with &#8216;width&#8217; and &#8216;scale&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.default_connection">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">default_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.default_connection" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Retrieve the connection currently registered as the default to be used by the module</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.description">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#duckdb.description" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Get result set attributes, mainly column names</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.df">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.df" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>df(<a href="#id17"><span class="problematic" id="id18">*</span></a>, date_as_object: bool = False, connection: duckdb.DuckDBPyConnection = None) -&gt; pandas.DataFrame</p></li>
-</ol>
-<p>Fetch a result as DataFrame following execute()</p>
-<ol class="arabic simple" start="2">
-<li><p>df(<a href="#id19"><span class="problematic" id="id20">*</span></a>, date_as_object: bool = False, connection: duckdb.DuckDBPyConnection = None) -&gt; pandas.DataFrame</p></li>
-</ol>
-<p>Fetch a result as DataFrame following execute()</p>
-<ol class="arabic simple" start="3">
-<li><p>df(df: pandas.DataFrame, <a href="#id21"><span class="problematic" id="id22">*</span></a>, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the DataFrame df</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.distinct">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">distinct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.distinct" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Retrieve distinct rows from this relation object</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.dtype">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">dtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.dtype" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a type object by parsing the &#8216;type_str&#8217; string</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.duplicate">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">duplicate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.duplicate" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a duplicate of the current connection</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.enum_type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">enum_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.enum_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create an enum type of underlying &#8216;type&#8217;, consisting of the list of &#8216;values&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.execute">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.execute" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute the given SQL query, optionally using prepared statements with parameters set</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.executemany">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">executemany</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.executemany" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Execute the given prepared statement multiple times using the list of parameter sets in parameters</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.extract_statements">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">extract_statements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.extract_statements" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Parse the query string and extract the Statement object(s) produced</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.fetch_arrow_table">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">fetch_arrow_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows_per_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.Table.html#pyarrow.Table" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.Table</span></a></span></span><a class="headerlink" href="#duckdb.fetch_arrow_table" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as Arrow table following execute()</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.fetch_df">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">fetch_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.fetch_df" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as DataFrame following execute()</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.fetch_df_chunk">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">fetch_df_chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vectors_per_chunk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.fetch_df_chunk" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a chunk of the result as DataFrame following execute()</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.fetch_record_batch">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">fetch_record_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows_per_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://arrow.apache.org/docs/9.0/python/generated/pyarrow.RecordBatchReader.html#pyarrow.RecordBatchReader" title="(in Apache Arrow v9.0.0)"><span class="pre">pyarrow.lib.RecordBatchReader</span></a></span></span><a class="headerlink" href="#duckdb.fetch_record_batch" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch an Arrow RecordBatchReader following execute()</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.fetchall">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">fetchall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.fetchall" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch all rows from a result following execute</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.fetchdf">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">fetchdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.fetchdf" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as DataFrame following execute()</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.fetchmany">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">fetchmany</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.fetchmany" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch the next set of rows from a result following execute</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.fetchnumpy">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">fetchnumpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.fetchnumpy" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as list of NumPy arrays following execute</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.fetchone">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">fetchone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#duckdb.fetchone" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a single row from a result following execute</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.filesystem_is_registered">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">filesystem_is_registered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#duckdb.filesystem_is_registered" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Check if a filesystem with the provided name is currently registered</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.filter">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.filter" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Filter the relation object by the filter in filter_expr</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.from_arrow">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_arrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arrow_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.from_arrow" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from an Arrow object</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.from_csv_auto">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_csv_auto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_or_buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.from_csv_auto" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the CSV file in &#8216;name&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.from_df">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.from_df" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the DataFrame in df</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.from_parquet">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.from_parquet" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>from_parquet(file_glob: str, binary_as_string: bool = False, <a href="#id23"><span class="problematic" id="id24">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the Parquet files in file_glob</p>
-<ol class="arabic simple" start="2">
-<li><p>from_parquet(file_globs: list[str], binary_as_string: bool = False, <a href="#id25"><span class="problematic" id="id26">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the Parquet files in file_globs</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.from_query">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.from_query" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.get_table_names">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">get_table_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#duckdb.get_table_names" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Extract the required table names from a query</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.install_extension">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">install_extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_install</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.install_extension" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Install an extension by name, with an optional version and/or repository to get the extension from</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.interrupt">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">interrupt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.interrupt" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Interrupt pending operations</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.limit">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.limit" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Only retrieve the first n rows from this relation object, starting at offset</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.list_filesystems">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">list_filesystems</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.list_filesystems" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>List registered filesystems, including builtin ones</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.list_type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">list_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.list_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a list type object of &#8216;type&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.load_extension">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">load_extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.load_extension" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Load an installed extension</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.map_type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">map_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.map_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a map type object from &#8216;key_type&#8217; and &#8216;value_type&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.order">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.order" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Reorder the relation object by order_expr</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.pl">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">pl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows_per_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb::PolarsDataFrame</span></span></span><a class="headerlink" href="#duckdb.pl" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as Polars DataFrame following execute()</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.project">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.project" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Project the relation object by the projection in project_expr</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.query">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.query" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.query_df">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">query_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">virtual_table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.query_df" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Run the given SQL query in sql_query on the view named virtual_table_name that refers to the relation object</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.read_csv">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">read_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_or_buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.read_csv" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the CSV file in &#8216;name&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.read_json">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">read_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_or_buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">records</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_object_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convert_strings_to_integers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_appearance_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_inference_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_sample_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hive_partitioning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">union_by_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hive_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hive_types_autocast</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.read_json" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the JSON file in &#8216;name&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.read_parquet">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">read_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.read_parquet" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>read_parquet(file_glob: str, binary_as_string: bool = False, <a href="#id27"><span class="problematic" id="id28">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the Parquet files in file_glob</p>
-<ol class="arabic simple" start="2">
-<li><p>read_parquet(file_globs: list[str], binary_as_string: bool = False, <a href="#id29"><span class="problematic" id="id30">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the Parquet files in file_globs</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.register">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.register" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Register the passed Python Object value for querying with a view</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.register_filesystem">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">register_filesystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">fsspec.AbstractFileSystem</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.register_filesystem" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Register a fsspec compliant filesystem</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.remove_function">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">remove_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.remove_function" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Remove a previously created function</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.rollback">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">rollback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.rollback" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Roll back changes performed within a transaction</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.row_type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">row_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.row_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a struct type object from &#8216;fields&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.rowcount">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">rowcount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#duckdb.rowcount" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Get result set row count</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.set_default_connection">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">set_default_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.set_default_connection" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Register the provided connection as the default to be used by the module</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.sql">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">sql</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.sql" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.sqltype">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">sqltype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.sqltype" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a type object by parsing the &#8216;type_str&#8217; string</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.string_type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">string_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.string_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a string type with an optional collation</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.struct_type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">struct_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.struct_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a struct type object from &#8216;fields&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.table">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.table" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object for the named table</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.table_function">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">table_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.table_function" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the named table function with given parameters</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.tf">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">tf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.tf" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as dict of TensorFlow Tensors following execute()</p>
-</dd>
-</dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="duckdb.token_type">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">token_type</span></span><a class="headerlink" href="#duckdb.token_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
-<p>Members:</p>
-<p>identifier</p>
-<p>numeric_const</p>
-<p>string_const</p>
-<p>operator</p>
-<p>keyword</p>
-<p>comment</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.token_type.comment">
-<span class="sig-name descname"><span class="pre">comment</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;token_type.comment:</span> <span class="pre">5&gt;</span></em><a class="headerlink" href="#duckdb.token_type.comment" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.token_type.identifier">
-<span class="sig-name descname"><span class="pre">identifier</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;token_type.identifier:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#duckdb.token_type.identifier" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.token_type.keyword">
-<span class="sig-name descname"><span class="pre">keyword</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;token_type.keyword:</span> <span class="pre">4&gt;</span></em><a class="headerlink" href="#duckdb.token_type.keyword" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.token_type.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#duckdb.token_type.name" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.token_type.numeric_const">
-<span class="sig-name descname"><span class="pre">numeric_const</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;token_type.numeric_const:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#duckdb.token_type.numeric_const" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.token_type.operator">
-<span class="sig-name descname"><span class="pre">operator</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;token_type.operator:</span> <span class="pre">3&gt;</span></em><a class="headerlink" href="#duckdb.token_type.operator" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="duckdb.token_type.string_const">
-<span class="sig-name descname"><span class="pre">string_const</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;token_type.string_const:</span> <span class="pre">2&gt;</span></em><a class="headerlink" href="#duckdb.token_type.string_const" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="duckdb.token_type.value">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#duckdb.token_type.value" title="Link to this definition">&#182;</a>
-</dt>
-<dd></dd>
-</dl>
-
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.tokenize">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.tokenize" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Tokenizes a SQL string, returning a list of (position, type) tuples that can be used for e.g., syntax highlighting</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.torch">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">torch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.torch" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Fetch a result as dict of PyTorch Tensors following execute()</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a type object by parsing the &#8216;type_str&#8217; string</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.union_type">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">union_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">members</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">duckdb.duckdb.typing.DuckDBPyType</span></span></span><a class="headerlink" href="#duckdb.union_type" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a union type object from &#8216;members&#8217;</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.unregister">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">unregister</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.unregister" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Unregister the view name</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.unregister_filesystem">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">unregister_filesystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.unregister_filesystem" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Unregister a filesystem</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.values">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.values" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object from the passed values</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.view">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.view" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Create a relation object for the named view</p>
-</dd>
-</dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="duckdb.write_csv">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">write_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">na_rep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quotechar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">escapechar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quoting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_thread_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tmp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_partition_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.write_csv" title="Link to this definition">&#182;</a>
-</dt>
-<dd>
-<p>Write the relation object to a CSV file in &#8216;file_name&#8217;</p>
-</dd>
-</dl>
-
-
-
-<div class="clearer"></div>
-</div>
-</div>
-</div>
+The API reference documentations is structured as follows:
+
+1. [DuckDB Class Methods](#class-duckdb)
+2. [DuckDBPyConnection](#duckdbpyconnection)
+3. [DuckDBPyRelation](#duckdbpyrelation)
+4. [Expressions](#expressions)
+5. [Values](#values)
+6. [Exceptions](#exceptions)
+
+
+
+## Class duckdb
+
+
+### aggregate
+
+aggregate(df: pandas.DataFrame, aggr_expr: object, group_expr: str = '', *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Compute the aggregate aggr_expr by the optional groups group_expr on the relation
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### alias
+
+alias(df: pandas.DataFrame, alias: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Rename the relation object to new alias
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### append
+
+append(table_name: str, df: pandas.DataFrame, *, by_name: bool = False, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Append the passed DataFrame to the named table
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### array_type
+
+array_type(type: duckdb.duckdb.typing.DuckDBPyType, size: int, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create an array type object of 'type'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### arrow
+
+arrow(*args, **kwargs)
+Overloaded function.
+
+1. arrow(rows_per_batch: int = 1000000, *, connection: duckdb.DuckDBPyConnection = None) -> pyarrow.lib.Table
+
+Fetch a result as Arrow table following execute()
+
+2. arrow(rows_per_batch: int = 1000000, *, connection: duckdb.DuckDBPyConnection = None) -> pyarrow.lib.Table
+
+Fetch a result as Arrow table following execute()
+
+3. arrow(arrow_object: object, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from an Arrow object
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### begin
+
+begin(*, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Start a new transaction
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### checkpoint
+
+checkpoint(*, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Synchronizes data in the write-ahead log (WAL) to the database data file (no-op for in-memory connections)
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### close
+
+close(*, connection: duckdb.DuckDBPyConnection = None) -> None
+
+Close the connection
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### commit
+
+commit(*, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Commit changes performed within a transaction
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### connect
+
+connect(database: object = ':memory:', read_only: bool = False, config: dict = None) -> duckdb.DuckDBPyConnection
+
+Create a DuckDB database instance. Can take a database file name to read/write persistent data and a read_only flag if no changes are desired
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### create_function
+
+create_function(name: str, function: Callable, parameters: object = None, return_type: duckdb.duckdb.typing.DuckDBPyType = None, *, type: duckdb.duckdb.functional.PythonUDFType = <PythonUDFType.NATIVE: 0>, null_handling: duckdb.duckdb.functional.FunctionNullHandling = <FunctionNullHandling.DEFAULT: 0>, exception_handling: duckdb.duckdb.PythonExceptionHandling = <PythonExceptionHandling.DEFAULT: 0>, side_effects: bool = False, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Create a DuckDB function out of the passing in Python function so it can be used in queries
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### cursor
+
+cursor(*, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Create a duplicate of the current connection
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### decimal_type
+
+decimal_type(width: int, scale: int, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a decimal type with 'width' and 'scale'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### default_connection
+
+default_connection() -> duckdb.DuckDBPyConnection
+
+Retrieve the connection currently registered as the default to be used by the module
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### description
+
+description(*, connection: duckdb.DuckDBPyConnection = None) -> typing.Optional[list]
+
+Get result set attributes, mainly column names
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### df
+
+df(*args, **kwargs)
+Overloaded function.
+
+1. df(*, date_as_object: bool = False, connection: duckdb.DuckDBPyConnection = None) -> pandas.DataFrame
+
+Fetch a result as DataFrame following execute()
+
+2. df(*, date_as_object: bool = False, connection: duckdb.DuckDBPyConnection = None) -> pandas.DataFrame
+
+Fetch a result as DataFrame following execute()
+
+3. df(df: pandas.DataFrame, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the DataFrame df
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### distinct
+
+distinct(df: pandas.DataFrame, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Retrieve distinct rows from this relation object
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### dtype
+
+dtype(type_str: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a type object by parsing the 'type_str' string
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### duplicate
+
+duplicate(*, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Create a duplicate of the current connection
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### enum_type
+
+enum_type(name: str, type: duckdb.duckdb.typing.DuckDBPyType, values: list, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create an enum type of underlying 'type', consisting of the list of 'values'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### execute
+
+execute(query: object, parameters: object = None, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Execute the given SQL query, optionally using prepared statements with parameters set
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### executemany
+
+executemany(query: object, parameters: object = None, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Execute the given prepared statement multiple times using the list of parameter sets in parameters
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### extract_statements
+
+extract_statements(query: str, *, connection: duckdb.DuckDBPyConnection = None) -> list
+
+Parse the query string and extract the Statement object(s) produced
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### fetch_arrow_table
+
+fetch_arrow_table(rows_per_batch: int = 1000000, *, connection: duckdb.DuckDBPyConnection = None) -> pyarrow.lib.Table
+
+Fetch a result as Arrow table following execute()
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### fetch_df
+
+fetch_df(*, date_as_object: bool = False, connection: duckdb.DuckDBPyConnection = None) -> pandas.DataFrame
+
+Fetch a result as DataFrame following execute()
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### fetch_df_chunk
+
+fetch_df_chunk(vectors_per_chunk: int = 1, *, date_as_object: bool = False, connection: duckdb.DuckDBPyConnection = None) -> pandas.DataFrame
+
+Fetch a chunk of the result as DataFrame following execute()
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### fetch_record_batch
+
+fetch_record_batch(rows_per_batch: int = 1000000, *, connection: duckdb.DuckDBPyConnection = None) -> pyarrow.lib.RecordBatchReader
+
+Fetch an Arrow RecordBatchReader following execute()
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### fetchall
+
+fetchall(*, connection: duckdb.DuckDBPyConnection = None) -> list
+
+Fetch all rows from a result following execute
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### fetchdf
+
+fetchdf(*, date_as_object: bool = False, connection: duckdb.DuckDBPyConnection = None) -> pandas.DataFrame
+
+Fetch a result as DataFrame following execute()
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### fetchmany
+
+fetchmany(size: int = 1, *, connection: duckdb.DuckDBPyConnection = None) -> list
+
+Fetch the next set of rows from a result following execute
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### fetchnumpy
+
+fetchnumpy(*, connection: duckdb.DuckDBPyConnection = None) -> dict
+
+Fetch a result as list of NumPy arrays following execute
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### fetchone
+
+fetchone(*, connection: duckdb.DuckDBPyConnection = None) -> typing.Optional[tuple]
+
+Fetch a single row from a result following execute
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### filesystem_is_registered
+
+filesystem_is_registered(name: str, *, connection: duckdb.DuckDBPyConnection = None) -> bool
+
+Check if a filesystem with the provided name is currently registered
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### filter
+
+filter(df: pandas.DataFrame, filter_expr: object, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Filter the relation object by the filter in filter_expr
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### from_arrow
+
+from_arrow(arrow_object: object, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from an Arrow object
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### from_csv_auto
+
+from_csv_auto(path_or_buffer: object, **kwargs) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the CSV file in 'name'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### from_df
+
+from_df(df: pandas.DataFrame, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the DataFrame in df
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### from_parquet
+
+from_parquet(*args, **kwargs)
+Overloaded function.
+
+1. from_parquet(file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_glob
+
+2. from_parquet(file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_globs
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### from_query
+
+from_query(query: object, *, alias: str = '', params: object = None, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### get_table_names
+
+get_table_names(query: str, *, connection: duckdb.DuckDBPyConnection = None) -> set[str]
+
+Extract the required table names from a query
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### install_extension
+
+install_extension(extension: str, *, force_install: bool = False, repository: object = None, repository_url: object = None, version: object = None, connection: duckdb.DuckDBPyConnection = None) -> None
+
+Install an extension by name, with an optional version and/or repository to get the extension from
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### interrupt
+
+interrupt(*, connection: duckdb.DuckDBPyConnection = None) -> None
+
+Interrupt pending operations
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### limit
+
+limit(df: pandas.DataFrame, n: int, offset: int = 0, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Only retrieve the first n rows from this relation object, starting at offset
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### list_filesystems
+
+list_filesystems(*, connection: duckdb.DuckDBPyConnection = None) -> list
+
+List registered filesystems, including builtin ones
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### list_type
+
+list_type(type: duckdb.duckdb.typing.DuckDBPyType, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a list type object of 'type'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### load_extension
+
+load_extension(extension: str, *, connection: duckdb.DuckDBPyConnection = None) -> None
+
+Load an installed extension
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### map_type
+
+map_type(key: duckdb.duckdb.typing.DuckDBPyType, value: duckdb.duckdb.typing.DuckDBPyType, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a map type object from 'key_type' and 'value_type'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### order
+
+order(df: pandas.DataFrame, order_expr: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Reorder the relation object by order_expr
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### pl
+
+pl(rows_per_batch: int = 1000000, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb::PolarsDataFrame
+
+Fetch a result as Polars DataFrame following execute()
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### project
+
+project(df: pandas.DataFrame, *args, groups: str = '', connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Project the relation object by the projection in project_expr
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### query
+
+query(query: object, *, alias: str = '', params: object = None, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### query_df
+
+query_df(df: pandas.DataFrame, virtual_table_name: str, sql_query: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Run the given SQL query in sql_query on the view named virtual_table_name that refers to the relation object
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### read_csv
+
+read_csv(path_or_buffer: object, **kwargs) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the CSV file in 'name'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### read_json
+
+read_json(path_or_buffer: object, *, columns: typing.Optional[object] = None, sample_size: typing.Optional[object] = None, maximum_depth: typing.Optional[object] = None, records: typing.Optional[str] = None, format: typing.Optional[str] = None, date_format: typing.Optional[object] = None, timestamp_format: typing.Optional[object] = None, compression: typing.Optional[object] = None, maximum_object_size: typing.Optional[object] = None, ignore_errors: typing.Optional[object] = None, convert_strings_to_integers: typing.Optional[object] = None, field_appearance_threshold: typing.Optional[object] = None, map_inference_threshold: typing.Optional[object] = None, maximum_sample_files: typing.Optional[object] = None, filename: typing.Optional[object] = None, hive_partitioning: typing.Optional[object] = None, union_by_name: typing.Optional[object] = None, hive_types: typing.Optional[object] = None, hive_types_autocast: typing.Optional[object] = None, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the JSON file in 'name'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### read_parquet
+
+read_parquet(*args, **kwargs)
+Overloaded function.
+
+1. read_parquet(file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_glob
+
+2. read_parquet(file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_globs
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### register
+
+register(view_name: str, python_object: object, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Register the passed Python Object value for querying with a view
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### register_filesystem
+
+register_filesystem(filesystem: fsspec.AbstractFileSystem, *, connection: duckdb.DuckDBPyConnection = None) -> None
+
+Register a fsspec compliant filesystem
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### remove_function
+
+remove_function(name: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Remove a previously created function
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### rollback
+
+rollback(*, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Roll back changes performed within a transaction
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### row_type
+
+row_type(fields: object, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a struct type object from 'fields'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### rowcount
+
+rowcount(*, connection: duckdb.DuckDBPyConnection = None) -> int
+
+Get result set row count
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### set_default_connection
+
+set_default_connection(connection: duckdb.DuckDBPyConnection) -> None
+
+Register the provided connection as the default to be used by the module
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### sql
+
+sql(query: object, *, alias: str = '', params: object = None, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### sqltype
+
+sqltype(type_str: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a type object by parsing the 'type_str' string
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### string_type
+
+string_type(collation: str = '', *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a string type with an optional collation
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### struct_type
+
+struct_type(fields: object, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a struct type object from 'fields'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### table
+
+table(table_name: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object for the named table
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### table_function
+
+table_function(name: str, parameters: object = None, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the named table function with given parameters
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### tf
+
+tf(*, connection: duckdb.DuckDBPyConnection = None) -> dict
+
+Fetch a result as dict of TensorFlow Tensors following execute()
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### tokenize
+
+tokenize(query: str) -> list
+
+Tokenizes a SQL string, returning a list of (position, type) tuples that can be used for e.g., syntax highlighting
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### torch
+
+torch(*, connection: duckdb.DuckDBPyConnection = None) -> dict
+
+Fetch a result as dict of PyTorch Tensors following execute()
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### type
+
+type(type_str: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a type object by parsing the 'type_str' string
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### union_type
+
+union_type(members: object, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a union type object from 'members'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### unregister
+
+unregister(view_name: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.DuckDBPyConnection
+
+Unregister the view name
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### unregister_filesystem
+
+unregister_filesystem(name: str, *, connection: duckdb.DuckDBPyConnection = None) -> None
+
+Unregister a filesystem
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### values
+
+values(*args, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the passed values
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### view
+
+view(view_name: str, *, connection: duckdb.DuckDBPyConnection = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object for the named view
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### write_csv
+
+write_csv(df: pandas.DataFrame, filename: str, *, sep: object = None, na_rep: object = None, header: object = None, quotechar: object = None, escapechar: object = None, date_format: object = None, timestamp_format: object = None, quoting: object = None, encoding: object = None, compression: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, connection: duckdb.DuckDBPyConnection = None) -> None
+
+Write the relation object to a CSV file in 'file_name'
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+## ANALYZE
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+## COLUMNS
+
+Members:
+
+ROWS
+
+COLUMNS
+
+**Type**: RenderMode
+
+
+
+
+
+## CSVLineTerminator
+
+Members:
+
+LINE_FEED
+
+CARRIAGE_RETURN_LINE_FEED
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+### CARRIAGE_RETURN_LINE_FEED
+
+Members:
+
+LINE_FEED
+
+CARRIAGE_RETURN_LINE_FEED
+
+**Type**: CSVLineTerminator
+
+
+
+
+
+### LINE_FEED
+
+Members:
+
+LINE_FEED
+
+CARRIAGE_RETURN_LINE_FEED
+
+**Type**: CSVLineTerminator
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### name
+
+name(self: object) -> str
+
+**Type**: property
+
+
+
+
+
+### value
+
+
+
+**Type**: property
+
+
+
+
+
+## DEFAULT
+
+Members:
+
+DEFAULT
+
+RETURN_NULL
+
+**Type**: PythonExceptionHandling
+
+
+
+
+
+## DuckDBPyConnection
+
+
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### append
+
+append(self: duckdb.duckdb.DuckDBPyConnection, table_name: str, df: pandas.DataFrame, *, by_name: bool = False) -> duckdb.duckdb.DuckDBPyConnection
+
+Append the passed DataFrame to the named table
+
+**Type**: instancemethod
+
+
+
+
+
+### array_type
+
+array_type(self: duckdb.duckdb.DuckDBPyConnection, type: duckdb.duckdb.typing.DuckDBPyType, size: int) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create an array type object of 'type'
+
+**Type**: instancemethod
+
+
+
+
+
+### arrow
+
+arrow(self: duckdb.duckdb.DuckDBPyConnection, rows_per_batch: int = 1000000) -> pyarrow.lib.Table
+
+Fetch a result as Arrow table following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### begin
+
+begin(self: duckdb.duckdb.DuckDBPyConnection) -> duckdb.duckdb.DuckDBPyConnection
+
+Start a new transaction
+
+**Type**: instancemethod
+
+
+
+
+
+### checkpoint
+
+checkpoint(self: duckdb.duckdb.DuckDBPyConnection) -> duckdb.duckdb.DuckDBPyConnection
+
+Synchronizes data in the write-ahead log (WAL) to the database data file (no-op for in-memory connections)
+
+**Type**: instancemethod
+
+
+
+
+
+### close
+
+close(self: duckdb.duckdb.DuckDBPyConnection) -> None
+
+Close the connection
+
+**Type**: instancemethod
+
+
+
+
+
+### commit
+
+commit(self: duckdb.duckdb.DuckDBPyConnection) -> duckdb.duckdb.DuckDBPyConnection
+
+Commit changes performed within a transaction
+
+**Type**: instancemethod
+
+
+
+
+
+### create_function
+
+create_function(self: duckdb.duckdb.DuckDBPyConnection, name: str, function: Callable, parameters: object = None, return_type: duckdb.duckdb.typing.DuckDBPyType = None, *, type: duckdb.duckdb.functional.PythonUDFType = <PythonUDFType.NATIVE: 0>, null_handling: duckdb.duckdb.functional.FunctionNullHandling = <FunctionNullHandling.DEFAULT: 0>, exception_handling: duckdb.duckdb.PythonExceptionHandling = <PythonExceptionHandling.DEFAULT: 0>, side_effects: bool = False) -> duckdb.duckdb.DuckDBPyConnection
+
+Create a DuckDB function out of the passing in Python function so it can be used in queries
+
+**Type**: instancemethod
+
+
+
+
+
+### cursor
+
+cursor(self: duckdb.duckdb.DuckDBPyConnection) -> duckdb.duckdb.DuckDBPyConnection
+
+Create a duplicate of the current connection
+
+**Type**: instancemethod
+
+
+
+
+
+### decimal_type
+
+decimal_type(self: duckdb.duckdb.DuckDBPyConnection, width: int, scale: int) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a decimal type with 'width' and 'scale'
+
+**Type**: instancemethod
+
+
+
+
+
+### description
+
+Get result set attributes, mainly column names
+
+**Type**: property
+
+
+
+
+
+### df
+
+df(self: duckdb.duckdb.DuckDBPyConnection, *, date_as_object: bool = False) -> pandas.DataFrame
+
+Fetch a result as DataFrame following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### dtype
+
+dtype(self: duckdb.duckdb.DuckDBPyConnection, type_str: str) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a type object by parsing the 'type_str' string
+
+**Type**: instancemethod
+
+
+
+
+
+### duplicate
+
+duplicate(self: duckdb.duckdb.DuckDBPyConnection) -> duckdb.duckdb.DuckDBPyConnection
+
+Create a duplicate of the current connection
+
+**Type**: instancemethod
+
+
+
+
+
+### enum_type
+
+enum_type(self: duckdb.duckdb.DuckDBPyConnection, name: str, type: duckdb.duckdb.typing.DuckDBPyType, values: list) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create an enum type of underlying 'type', consisting of the list of 'values'
+
+**Type**: instancemethod
+
+
+
+
+
+### execute
+
+execute(self: duckdb.duckdb.DuckDBPyConnection, query: object, parameters: object = None) -> duckdb.duckdb.DuckDBPyConnection
+
+Execute the given SQL query, optionally using prepared statements with parameters set
+
+**Type**: instancemethod
+
+
+
+
+
+### executemany
+
+executemany(self: duckdb.duckdb.DuckDBPyConnection, query: object, parameters: object = None) -> duckdb.duckdb.DuckDBPyConnection
+
+Execute the given prepared statement multiple times using the list of parameter sets in parameters
+
+**Type**: instancemethod
+
+
+
+
+
+### extract_statements
+
+extract_statements(self: duckdb.duckdb.DuckDBPyConnection, query: str) -> list
+
+Parse the query string and extract the Statement object(s) produced
+
+**Type**: instancemethod
+
+
+
+
+
+### fetch_arrow_table
+
+fetch_arrow_table(self: duckdb.duckdb.DuckDBPyConnection, rows_per_batch: int = 1000000) -> pyarrow.lib.Table
+
+Fetch a result as Arrow table following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### fetch_df
+
+fetch_df(self: duckdb.duckdb.DuckDBPyConnection, *, date_as_object: bool = False) -> pandas.DataFrame
+
+Fetch a result as DataFrame following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### fetch_df_chunk
+
+fetch_df_chunk(self: duckdb.duckdb.DuckDBPyConnection, vectors_per_chunk: int = 1, *, date_as_object: bool = False) -> pandas.DataFrame
+
+Fetch a chunk of the result as DataFrame following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### fetch_record_batch
+
+fetch_record_batch(self: duckdb.duckdb.DuckDBPyConnection, rows_per_batch: int = 1000000) -> pyarrow.lib.RecordBatchReader
+
+Fetch an Arrow RecordBatchReader following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchall
+
+fetchall(self: duckdb.duckdb.DuckDBPyConnection) -> list
+
+Fetch all rows from a result following execute
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchdf
+
+fetchdf(self: duckdb.duckdb.DuckDBPyConnection, *, date_as_object: bool = False) -> pandas.DataFrame
+
+Fetch a result as DataFrame following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchmany
+
+fetchmany(self: duckdb.duckdb.DuckDBPyConnection, size: int = 1) -> list
+
+Fetch the next set of rows from a result following execute
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchnumpy
+
+fetchnumpy(self: duckdb.duckdb.DuckDBPyConnection) -> dict
+
+Fetch a result as list of NumPy arrays following execute
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchone
+
+fetchone(self: duckdb.duckdb.DuckDBPyConnection) -> typing.Optional[tuple]
+
+Fetch a single row from a result following execute
+
+**Type**: instancemethod
+
+
+
+
+
+### filesystem_is_registered
+
+filesystem_is_registered(self: duckdb.duckdb.DuckDBPyConnection, name: str) -> bool
+
+Check if a filesystem with the provided name is currently registered
+
+**Type**: instancemethod
+
+
+
+
+
+### from_arrow
+
+from_arrow(self: duckdb.duckdb.DuckDBPyConnection, arrow_object: object) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from an Arrow object
+
+**Type**: instancemethod
+
+
+
+
+
+### from_csv_auto
+
+from_csv_auto(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **kwargs) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the CSV file in 'name'
+
+**Type**: instancemethod
+
+
+
+
+
+### from_df
+
+from_df(self: duckdb.duckdb.DuckDBPyConnection, df: pandas.DataFrame) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the DataFrame in df
+
+**Type**: instancemethod
+
+
+
+
+
+### from_parquet
+
+from_parquet(*args, **kwargs)
+Overloaded function.
+
+1. from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_glob
+
+2. from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_globs
+
+**Type**: instancemethod
+
+
+
+
+
+### from_query
+
+from_query(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
+
+**Type**: instancemethod
+
+
+
+
+
+### get_table_names
+
+get_table_names(self: duckdb.duckdb.DuckDBPyConnection, query: str) -> set[str]
+
+Extract the required table names from a query
+
+**Type**: instancemethod
+
+
+
+
+
+### install_extension
+
+install_extension(self: duckdb.duckdb.DuckDBPyConnection, extension: str, *, force_install: bool = False, repository: object = None, repository_url: object = None, version: object = None) -> None
+
+Install an extension by name, with an optional version and/or repository to get the extension from
+
+**Type**: instancemethod
+
+
+
+
+
+### interrupt
+
+interrupt(self: duckdb.duckdb.DuckDBPyConnection) -> None
+
+Interrupt pending operations
+
+**Type**: instancemethod
+
+
+
+
+
+### list_filesystems
+
+list_filesystems(self: duckdb.duckdb.DuckDBPyConnection) -> list
+
+List registered filesystems, including builtin ones
+
+**Type**: instancemethod
+
+
+
+
+
+### list_type
+
+list_type(self: duckdb.duckdb.DuckDBPyConnection, type: duckdb.duckdb.typing.DuckDBPyType) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a list type object of 'type'
+
+**Type**: instancemethod
+
+
+
+
+
+### load_extension
+
+load_extension(self: duckdb.duckdb.DuckDBPyConnection, extension: str) -> None
+
+Load an installed extension
+
+**Type**: instancemethod
+
+
+
+
+
+### map_type
+
+map_type(self: duckdb.duckdb.DuckDBPyConnection, key: duckdb.duckdb.typing.DuckDBPyType, value: duckdb.duckdb.typing.DuckDBPyType) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a map type object from 'key_type' and 'value_type'
+
+**Type**: instancemethod
+
+
+
+
+
+### pl
+
+pl(self: duckdb.duckdb.DuckDBPyConnection, rows_per_batch: int = 1000000) -> duckdb::PolarsDataFrame
+
+Fetch a result as Polars DataFrame following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### query
+
+query(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
+
+**Type**: instancemethod
+
+
+
+
+
+### read_csv
+
+read_csv(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **kwargs) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the CSV file in 'name'
+
+**Type**: instancemethod
+
+
+
+
+
+### read_json
+
+read_json(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, *, columns: typing.Optional[object] = None, sample_size: typing.Optional[object] = None, maximum_depth: typing.Optional[object] = None, records: typing.Optional[str] = None, format: typing.Optional[str] = None, date_format: typing.Optional[object] = None, timestamp_format: typing.Optional[object] = None, compression: typing.Optional[object] = None, maximum_object_size: typing.Optional[object] = None, ignore_errors: typing.Optional[object] = None, convert_strings_to_integers: typing.Optional[object] = None, field_appearance_threshold: typing.Optional[object] = None, map_inference_threshold: typing.Optional[object] = None, maximum_sample_files: typing.Optional[object] = None, filename: typing.Optional[object] = None, hive_partitioning: typing.Optional[object] = None, union_by_name: typing.Optional[object] = None, hive_types: typing.Optional[object] = None, hive_types_autocast: typing.Optional[object] = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the JSON file in 'name'
+
+**Type**: instancemethod
+
+
+
+
+
+### read_parquet
+
+read_parquet(*args, **kwargs)
+Overloaded function.
+
+1. read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_glob
+
+2. read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_globs
+
+**Type**: instancemethod
+
+
+
+
+
+### register
+
+register(self: duckdb.duckdb.DuckDBPyConnection, view_name: str, python_object: object) -> duckdb.duckdb.DuckDBPyConnection
+
+Register the passed Python Object value for querying with a view
+
+**Type**: instancemethod
+
+
+
+
+
+### register_filesystem
+
+register_filesystem(self: duckdb.duckdb.DuckDBPyConnection, filesystem: fsspec.AbstractFileSystem) -> None
+
+Register a fsspec compliant filesystem
+
+**Type**: instancemethod
+
+
+
+
+
+### remove_function
+
+remove_function(self: duckdb.duckdb.DuckDBPyConnection, name: str) -> duckdb.duckdb.DuckDBPyConnection
+
+Remove a previously created function
+
+**Type**: instancemethod
+
+
+
+
+
+### rollback
+
+rollback(self: duckdb.duckdb.DuckDBPyConnection) -> duckdb.duckdb.DuckDBPyConnection
+
+Roll back changes performed within a transaction
+
+**Type**: instancemethod
+
+
+
+
+
+### row_type
+
+row_type(self: duckdb.duckdb.DuckDBPyConnection, fields: object) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a struct type object from 'fields'
+
+**Type**: instancemethod
+
+
+
+
+
+### rowcount
+
+Get result set row count
+
+**Type**: property
+
+
+
+
+
+### sql
+
+sql(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
+
+**Type**: instancemethod
+
+
+
+
+
+### sqltype
+
+sqltype(self: duckdb.duckdb.DuckDBPyConnection, type_str: str) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a type object by parsing the 'type_str' string
+
+**Type**: instancemethod
+
+
+
+
+
+### string_type
+
+string_type(self: duckdb.duckdb.DuckDBPyConnection, collation: str = '') -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a string type with an optional collation
+
+**Type**: instancemethod
+
+
+
+
+
+### struct_type
+
+struct_type(self: duckdb.duckdb.DuckDBPyConnection, fields: object) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a struct type object from 'fields'
+
+**Type**: instancemethod
+
+
+
+
+
+### table
+
+table(self: duckdb.duckdb.DuckDBPyConnection, table_name: str) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object for the named table
+
+**Type**: instancemethod
+
+
+
+
+
+### table_function
+
+table_function(self: duckdb.duckdb.DuckDBPyConnection, name: str, parameters: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the named table function with given parameters
+
+**Type**: instancemethod
+
+
+
+
+
+### tf
+
+tf(self: duckdb.duckdb.DuckDBPyConnection) -> dict
+
+Fetch a result as dict of TensorFlow Tensors following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### torch
+
+torch(self: duckdb.duckdb.DuckDBPyConnection) -> dict
+
+Fetch a result as dict of PyTorch Tensors following execute()
+
+**Type**: instancemethod
+
+
+
+
+
+### type
+
+type(self: duckdb.duckdb.DuckDBPyConnection, type_str: str) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a type object by parsing the 'type_str' string
+
+**Type**: instancemethod
+
+
+
+
+
+### union_type
+
+union_type(self: duckdb.duckdb.DuckDBPyConnection, members: object) -> duckdb.duckdb.typing.DuckDBPyType
+
+Create a union type object from 'members'
+
+**Type**: instancemethod
+
+
+
+
+
+### unregister
+
+unregister(self: duckdb.duckdb.DuckDBPyConnection, view_name: str) -> duckdb.duckdb.DuckDBPyConnection
+
+Unregister the view name
+
+**Type**: instancemethod
+
+
+
+
+
+### unregister_filesystem
+
+unregister_filesystem(self: duckdb.duckdb.DuckDBPyConnection, name: str) -> None
+
+Unregister a filesystem
+
+**Type**: instancemethod
+
+
+
+
+
+### values
+
+values(self: duckdb.duckdb.DuckDBPyConnection, *args) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the passed values
+
+**Type**: instancemethod
+
+
+
+
+
+### view
+
+view(self: duckdb.duckdb.DuckDBPyConnection, view_name: str) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object for the named view
+
+**Type**: instancemethod
+
+
+
+
+
+## DuckDBPyRelation
+
+
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### aggregate
+
+aggregate(self: duckdb.duckdb.DuckDBPyRelation, aggr_expr: object, group_expr: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Compute the aggregate aggr_expr by the optional groups group_expr on the relation
+
+**Type**: instancemethod
+
+
+
+
+
+### alias
+
+Get the name of the current alias
+
+**Type**: property
+
+
+
+
+
+### any_value
+
+any_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Returns the first non-null value from a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### apply
+
+apply(self: duckdb.duckdb.DuckDBPyRelation, function_name: str, function_aggr: str, group_expr: str = '', function_parameter: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Compute the function of a single column or a list of columns by the optional groups on the relation
+
+**Type**: instancemethod
+
+
+
+
+
+### arg_max
+
+arg_max(self: duckdb.duckdb.DuckDBPyRelation, arg_column: str, value_column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Finds the row with the maximum value for a value column and returns the value of that row for an argument column
+
+**Type**: instancemethod
+
+
+
+
+
+### arg_min
+
+arg_min(self: duckdb.duckdb.DuckDBPyRelation, arg_column: str, value_column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Finds the row with the minimum value for a value column and returns the value of that row for an argument column
+
+**Type**: instancemethod
+
+
+
+
+
+### arrow
+
+arrow(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.Table
+
+Execute and fetch all rows as an Arrow Table
+
+**Type**: instancemethod
+
+
+
+
+
+### avg
+
+avg(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the average on a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### bit_and
+
+bit_and(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the bitwise AND of all bits present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### bit_or
+
+bit_or(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the bitwise OR of all bits present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### bit_xor
+
+bit_xor(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the bitwise XOR of all bits present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### bitstring_agg
+
+bitstring_agg(self: duckdb.duckdb.DuckDBPyRelation, column: str, min: typing.Optional[object] = None, max: typing.Optional[object] = None, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes a bitstring with bits set for each distinct value in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### bool_and
+
+bool_and(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the logical AND of all values present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### bool_or
+
+bool_or(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the logical OR of all values present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### close
+
+close(self: duckdb.duckdb.DuckDBPyRelation) -> None
+
+Closes the result
+
+**Type**: instancemethod
+
+
+
+
+
+### columns
+
+Return a list containing the names of the columns of the relation.
+
+**Type**: property
+
+
+
+
+
+### count
+
+count(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the number of elements present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### create
+
+create(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
+
+Creates a new table named table_name with the contents of the relation object
+
+**Type**: instancemethod
+
+
+
+
+
+### create_view
+
+create_view(self: duckdb.duckdb.DuckDBPyRelation, view_name: str, replace: bool = True) -> duckdb.duckdb.DuckDBPyRelation
+
+Creates a view named view_name that refers to the relation object
+
+**Type**: instancemethod
+
+
+
+
+
+### cross
+
+cross(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+
+Create cross/cartesian product of two relational objects
+
+**Type**: instancemethod
+
+
+
+
+
+### cume_dist
+
+cume_dist(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the cumulative distribution within the partition
+
+**Type**: instancemethod
+
+
+
+
+
+### dense_rank
+
+dense_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the dense rank within the partition
+
+**Type**: instancemethod
+
+
+
+
+
+### describe
+
+describe(self: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+
+Gives basic statistics (e.g., min, max) and if NULL exists for each column of the relation.
+
+**Type**: instancemethod
+
+
+
+
+
+### description
+
+Return the description of the result
+
+**Type**: property
+
+
+
+
+
+### df
+
+df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
+
+Execute and fetch all rows as a pandas DataFrame
+
+**Type**: instancemethod
+
+
+
+
+
+### distinct
+
+distinct(self: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+
+Retrieve distinct rows from this relation object
+
+**Type**: instancemethod
+
+
+
+
+
+### dtypes
+
+Return a list containing the types of the columns of the relation.
+
+**Type**: property
+
+
+
+
+
+### except_
+
+except_(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+
+Create the set except of this relation object with another relation object in other_rel
+
+**Type**: instancemethod
+
+
+
+
+
+### execute
+
+execute(self: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+
+Transform the relation into a result set
+
+**Type**: instancemethod
+
+
+
+
+
+### explain
+
+explain(self: duckdb.duckdb.DuckDBPyRelation, type: duckdb.duckdb.ExplainType = 'standard') -> str
+
+**Type**: instancemethod
+
+
+
+
+
+### favg
+
+favg(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the average of all values present in a given column using a more accurate floating point summation (Kahan Sum)
+
+**Type**: instancemethod
+
+
+
+
+
+### fetch_arrow_reader
+
+fetch_arrow_reader(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.RecordBatchReader
+
+Execute and return an Arrow Record Batch Reader that yields all rows
+
+**Type**: instancemethod
+
+
+
+
+
+### fetch_arrow_table
+
+fetch_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.Table
+
+Execute and fetch all rows as an Arrow Table
+
+**Type**: instancemethod
+
+
+
+
+
+### fetch_df_chunk
+
+fetch_df_chunk(self: duckdb.duckdb.DuckDBPyRelation, vectors_per_chunk: int = 1, *, date_as_object: bool = False) -> pandas.DataFrame
+
+Execute and fetch a chunk of the rows
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchall
+
+fetchall(self: duckdb.duckdb.DuckDBPyRelation) -> list
+
+Execute and fetch all rows as a list of tuples
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchdf
+
+fetchdf(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
+
+Execute and fetch all rows as a pandas DataFrame
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchmany
+
+fetchmany(self: duckdb.duckdb.DuckDBPyRelation, size: int = 1) -> list
+
+Execute and fetch the next set of rows as a list of tuples
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchnumpy
+
+fetchnumpy(self: duckdb.duckdb.DuckDBPyRelation) -> dict
+
+Execute and fetch all rows as a Python dict mapping each column to one numpy arrays
+
+**Type**: instancemethod
+
+
+
+
+
+### fetchone
+
+fetchone(self: duckdb.duckdb.DuckDBPyRelation) -> typing.Optional[tuple]
+
+Execute and fetch a single row as a tuple
+
+**Type**: instancemethod
+
+
+
+
+
+### filter
+
+filter(self: duckdb.duckdb.DuckDBPyRelation, filter_expr: object) -> duckdb.duckdb.DuckDBPyRelation
+
+Filter the relation object by the filter in filter_expr
+
+**Type**: instancemethod
+
+
+
+
+
+### first
+
+first(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Returns the first value of a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### first_value
+
+first_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the first value within the group or partition
+
+**Type**: instancemethod
+
+
+
+
+
+### fsum
+
+fsum(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the sum of all values present in a given column using a more accurate floating point summation (Kahan Sum)
+
+**Type**: instancemethod
+
+
+
+
+
+### geomean
+
+geomean(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the geometric mean over all values present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### histogram
+
+histogram(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the histogram over all values present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### insert
+
+insert(self: duckdb.duckdb.DuckDBPyRelation, values: object) -> None
+
+Inserts the given values into the relation
+
+**Type**: instancemethod
+
+
+
+
+
+### insert_into
+
+insert_into(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
+
+Inserts the relation object into an existing table named table_name
+
+**Type**: instancemethod
+
+
+
+
+
+### intersect
+
+intersect(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+
+Create the set intersection of this relation object with another relation object in other_rel
+
+**Type**: instancemethod
+
+
+
+
+
+### join
+
+join(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation, condition: object, how: str = 'inner') -> duckdb.duckdb.DuckDBPyRelation
+
+Join the relation object with another relation object in other_rel using the join condition expression in join_condition. Types supported are 'inner' and 'left'
+
+**Type**: instancemethod
+
+
+
+
+
+### lag
+
+lag(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: int = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the lag within the partition
+
+**Type**: instancemethod
+
+
+
+
+
+### last
+
+last(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Returns the last value of a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### last_value
+
+last_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the last value within the group or partition
+
+**Type**: instancemethod
+
+
+
+
+
+### lead
+
+lead(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: int = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the lead within the partition
+
+**Type**: instancemethod
+
+
+
+
+
+### limit
+
+limit(self: duckdb.duckdb.DuckDBPyRelation, n: int, offset: int = 0) -> duckdb.duckdb.DuckDBPyRelation
+
+Only retrieve the first n rows from this relation object, starting at offset
+
+**Type**: instancemethod
+
+
+
+
+
+### list
+
+list(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Returns a list containing all values present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### map
+
+map(self: duckdb.duckdb.DuckDBPyRelation, map_function: Callable, *, schema: typing.Optional[object] = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Calls the passed function on the relation
+
+**Type**: instancemethod
+
+
+
+
+
+### max
+
+max(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Returns the maximum value present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### mean
+
+mean(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the average on a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### median
+
+median(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the median over all values present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### min
+
+min(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Returns the minimum value present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### mode
+
+mode(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the mode over all values present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### n_tile
+
+n_tile(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, num_buckets: int, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Divides the partition as equally as possible into num_buckets
+
+**Type**: instancemethod
+
+
+
+
+
+### nth_value
+
+nth_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: int, ignore_nulls: bool = False, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the nth value within the partition
+
+**Type**: instancemethod
+
+
+
+
+
+### order
+
+order(self: duckdb.duckdb.DuckDBPyRelation, order_expr: str) -> duckdb.duckdb.DuckDBPyRelation
+
+Reorder the relation object by order_expr
+
+**Type**: instancemethod
+
+
+
+
+
+### percent_rank
+
+percent_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the relative rank within the partition
+
+**Type**: instancemethod
+
+
+
+
+
+### pl
+
+pl(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> duckdb::PolarsDataFrame
+
+Execute and fetch all rows as a Polars DataFrame
+
+**Type**: instancemethod
+
+
+
+
+
+### product
+
+product(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Returns the product of all values present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### project
+
+project(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Project the relation object by the projection in project_expr
+
+**Type**: instancemethod
+
+
+
+
+
+### quantile
+
+quantile(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the exact quantile value for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### quantile_cont
+
+quantile_cont(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the interpolated quantile value for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### quantile_disc
+
+quantile_disc(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the exact quantile value for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### query
+
+query(self: duckdb.duckdb.DuckDBPyRelation, virtual_table_name: str, sql_query: str) -> duckdb.duckdb.DuckDBPyRelation
+
+Run the given SQL query in sql_query on the view named virtual_table_name that refers to the relation object
+
+**Type**: instancemethod
+
+
+
+
+
+### rank
+
+rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the rank within the partition
+
+**Type**: instancemethod
+
+
+
+
+
+### rank_dense
+
+rank_dense(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the dense rank within the partition
+
+**Type**: instancemethod
+
+
+
+
+
+### record_batch
+
+record_batch(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.RecordBatchReader
+
+Execute and return an Arrow Record Batch Reader that yields all rows
+
+**Type**: instancemethod
+
+
+
+
+
+### row_number
+
+row_number(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the row number within the partition
+
+**Type**: instancemethod
+
+
+
+
+
+### select
+
+select(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Project the relation object by the projection in project_expr
+
+**Type**: instancemethod
+
+
+
+
+
+### select_dtypes
+
+select_dtypes(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duckdb.DuckDBPyRelation
+
+Select columns from the relation, by filtering based on type(s)
+
+**Type**: instancemethod
+
+
+
+
+
+### select_types
+
+select_types(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duckdb.DuckDBPyRelation
+
+Select columns from the relation, by filtering based on type(s)
+
+**Type**: instancemethod
+
+
+
+
+
+### set_alias
+
+set_alias(self: duckdb.duckdb.DuckDBPyRelation, alias: str) -> duckdb.duckdb.DuckDBPyRelation
+
+Rename the relation object to new alias
+
+**Type**: instancemethod
+
+
+
+
+
+### shape
+
+Tuple of # of rows, # of columns in relation.
+
+**Type**: property
+
+
+
+
+
+### show
+
+show(self: duckdb.duckdb.DuckDBPyRelation, *, max_width: typing.Optional[int] = None, max_rows: typing.Optional[int] = None, max_col_width: typing.Optional[int] = None, null_value: typing.Optional[str] = None, render_mode: object = None) -> None
+
+Display a summary of the data
+
+**Type**: instancemethod
+
+
+
+
+
+### sort
+
+sort(self: duckdb.duckdb.DuckDBPyRelation, *args) -> duckdb.duckdb.DuckDBPyRelation
+
+Reorder the relation object by the provided expressions
+
+**Type**: instancemethod
+
+
+
+
+
+### sql_query
+
+sql_query(self: duckdb.duckdb.DuckDBPyRelation) -> str
+
+Get the SQL query that is equivalent to the relation
+
+**Type**: instancemethod
+
+
+
+
+
+### std
+
+std(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the sample standard deviation for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### stddev
+
+stddev(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the sample standard deviation for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### stddev_pop
+
+stddev_pop(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the population standard deviation for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### stddev_samp
+
+stddev_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the sample standard deviation for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### string_agg
+
+string_agg(self: duckdb.duckdb.DuckDBPyRelation, column: str, sep: str = ',', groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Concatenates the values present in a given column with a separator
+
+**Type**: instancemethod
+
+
+
+
+
+### sum
+
+sum(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the sum of all values present in a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### tf
+
+tf(self: duckdb.duckdb.DuckDBPyRelation) -> dict
+
+Fetch a result as dict of TensorFlow Tensors
+
+**Type**: instancemethod
+
+
+
+
+
+### to_arrow_table
+
+to_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.Table
+
+Execute and fetch all rows as an Arrow Table
+
+**Type**: instancemethod
+
+
+
+
+
+### to_csv
+
+to_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object = None, na_rep: object = None, header: object = None, quotechar: object = None, escapechar: object = None, date_format: object = None, timestamp_format: object = None, quoting: object = None, encoding: object = None, compression: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None) -> None
+
+Write the relation object to a CSV file in 'file_name'
+
+**Type**: instancemethod
+
+
+
+
+
+### to_df
+
+to_df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
+
+Execute and fetch all rows as a pandas DataFrame
+
+**Type**: instancemethod
+
+
+
+
+
+### to_parquet
+
+to_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
+
+Write the relation object to a Parquet file in 'file_name'
+
+**Type**: instancemethod
+
+
+
+
+
+### to_table
+
+to_table(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
+
+Creates a new table named table_name with the contents of the relation object
+
+**Type**: instancemethod
+
+
+
+
+
+### to_view
+
+to_view(self: duckdb.duckdb.DuckDBPyRelation, view_name: str, replace: bool = True) -> duckdb.duckdb.DuckDBPyRelation
+
+Creates a view named view_name that refers to the relation object
+
+**Type**: instancemethod
+
+
+
+
+
+### torch
+
+torch(self: duckdb.duckdb.DuckDBPyRelation) -> dict
+
+Fetch a result as dict of PyTorch Tensors
+
+**Type**: instancemethod
+
+
+
+
+
+### type
+
+Get the type of the relation.
+
+**Type**: property
+
+
+
+
+
+### types
+
+Return a list containing the types of the columns of the relation.
+
+**Type**: property
+
+
+
+
+
+### union
+
+union(self: duckdb.duckdb.DuckDBPyRelation, union_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+
+Create the set union of this relation object with another relation object in other_rel
+
+**Type**: instancemethod
+
+
+
+
+
+### unique
+
+unique(self: duckdb.duckdb.DuckDBPyRelation, unique_aggr: str) -> duckdb.duckdb.DuckDBPyRelation
+
+Number of distinct values in a column.
+
+**Type**: instancemethod
+
+
+
+
+
+### update
+
+update(self: duckdb.duckdb.DuckDBPyRelation, set: object, *, condition: object = None) -> None
+
+Update the given relation with the provided expressions
+
+**Type**: instancemethod
+
+
+
+
+
+### value_counts
+
+value_counts(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the number of elements present in a given column, also projecting the original column
+
+**Type**: instancemethod
+
+
+
+
+
+### var
+
+var(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the sample variance for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### var_pop
+
+var_pop(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the population variance for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### var_samp
+
+var_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the sample variance for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### variance
+
+variance(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+
+Computes the sample variance for a given column
+
+**Type**: instancemethod
+
+
+
+
+
+### write_csv
+
+write_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object = None, na_rep: object = None, header: object = None, quotechar: object = None, escapechar: object = None, date_format: object = None, timestamp_format: object = None, quoting: object = None, encoding: object = None, compression: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None) -> None
+
+Write the relation object to a CSV file in 'file_name'
+
+**Type**: instancemethod
+
+
+
+
+
+### write_parquet
+
+write_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
+
+Write the relation object to a Parquet file in 'file_name'
+
+**Type**: instancemethod
+
+
+
+
+
+## ExpectedResultType
+
+Members:
+
+QUERY_RESULT
+
+CHANGED_ROWS
+
+NOTHING
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+### CHANGED_ROWS
+
+Members:
+
+QUERY_RESULT
+
+CHANGED_ROWS
+
+NOTHING
+
+**Type**: ExpectedResultType
+
+
+
+
+
+### NOTHING
+
+Members:
+
+QUERY_RESULT
+
+CHANGED_ROWS
+
+NOTHING
+
+**Type**: ExpectedResultType
+
+
+
+
+
+### QUERY_RESULT
+
+Members:
+
+QUERY_RESULT
+
+CHANGED_ROWS
+
+NOTHING
+
+**Type**: ExpectedResultType
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### name
+
+name(self: object) -> str
+
+**Type**: property
+
+
+
+
+
+### value
+
+
+
+**Type**: property
+
+
+
+
+
+## ExplainType
+
+Members:
+
+STANDARD
+
+ANALYZE
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+### ANALYZE
+
+Members:
+
+STANDARD
+
+ANALYZE
+
+**Type**: ExplainType
+
+
+
+
+
+### STANDARD
+
+Members:
+
+STANDARD
+
+ANALYZE
+
+**Type**: ExplainType
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### name
+
+name(self: object) -> str
+
+**Type**: property
+
+
+
+
+
+### value
+
+
+
+**Type**: property
+
+
+
+
+
+## Expression
+
+
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### alias
+
+alias(self: duckdb.duckdb.Expression, arg0: str) -> duckdb.duckdb.Expression
+
+
+Create a copy of this expression with the given alias.
+
+Parameters:
+        name: The alias to use for the expression, this will affect how it can be referenced.
+
+Returns:
+        Expression: self with an alias.
+
+**Type**: instancemethod
+
+
+
+
+
+### asc
+
+asc(self: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+
+Set the order by modifier to ASCENDING.
+
+**Type**: instancemethod
+
+
+
+
+
+### between
+
+between(self: duckdb.duckdb.Expression, lower: duckdb.duckdb.Expression, upper: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+**Type**: instancemethod
+
+
+
+
+
+### cast
+
+cast(self: duckdb.duckdb.Expression, type: duckdb.duckdb.typing.DuckDBPyType) -> duckdb.duckdb.Expression
+
+
+Create a CastExpression to type from self
+
+Parameters:
+        type: The type to cast to
+
+Returns:
+        CastExpression: self::type
+
+**Type**: instancemethod
+
+
+
+
+
+### collate
+
+collate(self: duckdb.duckdb.Expression, collation: str) -> duckdb.duckdb.Expression
+
+**Type**: instancemethod
+
+
+
+
+
+### desc
+
+desc(self: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+
+Set the order by modifier to DESCENDING.
+
+**Type**: instancemethod
+
+
+
+
+
+### get_name
+
+get_name(self: duckdb.duckdb.Expression) -> str
+
+
+Return the stringified version of the expression.
+
+Returns:
+        str: The string representation.
+
+**Type**: instancemethod
+
+
+
+
+
+### isin
+
+isin(self: duckdb.duckdb.Expression, *args) -> duckdb.duckdb.Expression
+
+
+Return an IN expression comparing self to the input arguments.
+
+Returns:
+        DuckDBPyExpression: The compare IN expression
+
+**Type**: instancemethod
+
+
+
+
+
+### isnotin
+
+isnotin(self: duckdb.duckdb.Expression, *args) -> duckdb.duckdb.Expression
+
+
+Return a NOT IN expression comparing self to the input arguments.
+
+Returns:
+        DuckDBPyExpression: The compare NOT IN expression
+
+**Type**: instancemethod
+
+
+
+
+
+### isnotnull
+
+isnotnull(self: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+
+Create a binary IS NOT NULL expression from self
+
+Returns:
+        DuckDBPyExpression: self IS NOT NULL
+
+**Type**: instancemethod
+
+
+
+
+
+### isnull
+
+isnull(self: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+
+Create a binary IS NULL expression from self
+
+Returns:
+        DuckDBPyExpression: self IS NULL
+
+**Type**: instancemethod
+
+
+
+
+
+### nulls_first
+
+nulls_first(self: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+
+Set the NULL order by modifier to NULLS FIRST.
+
+**Type**: instancemethod
+
+
+
+
+
+### nulls_last
+
+nulls_last(self: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+
+Set the NULL order by modifier to NULLS LAST.
+
+**Type**: instancemethod
+
+
+
+
+
+### otherwise
+
+otherwise(self: duckdb.duckdb.Expression, value: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+
+Add an ELSE <value> clause to the CaseExpression.
+
+Parameters:
+        value: The value to use if none of the WHEN conditions are met.
+
+Returns:
+        CaseExpression: self with an ELSE clause.
+
+**Type**: instancemethod
+
+
+
+
+
+### show
+
+show(self: duckdb.duckdb.Expression) -> None
+
+
+Print the stringified version of the expression.
+
+**Type**: instancemethod
+
+
+
+
+
+### when
+
+when(self: duckdb.duckdb.Expression, condition: duckdb.duckdb.Expression, value: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+
+Add an additional WHEN <condition> THEN <value> clause to the CaseExpression.
+
+Parameters:
+        condition: The condition that must be met.
+        value: The value to use if the condition is met.
+
+Returns:
+        CaseExpression: self with an additional WHEN clause.
+
+**Type**: instancemethod
+
+
+
+
+
+## PythonExceptionHandling
+
+Members:
+
+DEFAULT
+
+RETURN_NULL
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+### DEFAULT
+
+Members:
+
+DEFAULT
+
+RETURN_NULL
+
+**Type**: PythonExceptionHandling
+
+
+
+
+
+### RETURN_NULL
+
+Members:
+
+DEFAULT
+
+RETURN_NULL
+
+**Type**: PythonExceptionHandling
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### name
+
+name(self: object) -> str
+
+**Type**: property
+
+
+
+
+
+### value
+
+
+
+**Type**: property
+
+
+
+
+
+## RETURN_NULL
+
+Members:
+
+DEFAULT
+
+RETURN_NULL
+
+**Type**: PythonExceptionHandling
+
+
+
+
+
+## ROWS
+
+Members:
+
+ROWS
+
+COLUMNS
+
+**Type**: RenderMode
+
+
+
+
+
+## RenderMode
+
+Members:
+
+ROWS
+
+COLUMNS
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+### COLUMNS
+
+Members:
+
+ROWS
+
+COLUMNS
+
+**Type**: RenderMode
+
+
+
+
+
+### ROWS
+
+Members:
+
+ROWS
+
+COLUMNS
+
+**Type**: RenderMode
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### name
+
+name(self: object) -> str
+
+**Type**: property
+
+
+
+
+
+### value
+
+
+
+**Type**: property
+
+
+
+
+
+## STANDARD
+
+Members:
+
+STANDARD
+
+ANALYZE
+
+**Type**: ExplainType
+
+
+
+
+
+## Statement
+
+
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### expected_result_type
+
+Get the expected type of result produced by this statement, actual type may vary depending on the statement.
+
+**Type**: property
+
+
+
+
+
+### named_parameters
+
+Get the map of named parameters this statement has.
+
+**Type**: property
+
+
+
+
+
+### query
+
+Get the query equivalent to this statement.
+
+**Type**: property
+
+
+
+
+
+### type
+
+Get the type of the statement.
+
+**Type**: property
+
+
+
+
+
+## StatementType
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+### ALTER
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### ANALYZE
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### ATTACH
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### CALL
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### COPY
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### COPY_DATABASE
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### CREATE
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### CREATE_FUNC
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### DELETE
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### DETACH
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### DROP
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### EXECUTE
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### EXPLAIN
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### EXPORT
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### EXTENSION
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### INSERT
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### INVALID
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### LOAD
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### LOGICAL_PLAN
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### MULTI
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### PRAGMA
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### PREPARE
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### RELATION
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### SELECT
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### SET
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### TRANSACTION
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### UPDATE
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### VACUUM
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+### VARIABLE_SET
+
+Members:
+
+INVALID
+
+SELECT
+
+INSERT
+
+UPDATE
+
+CREATE
+
+DELETE
+
+PREPARE
+
+EXECUTE
+
+ALTER
+
+TRANSACTION
+
+COPY
+
+ANALYZE
+
+VARIABLE_SET
+
+CREATE_FUNC
+
+EXPLAIN
+
+DROP
+
+EXPORT
+
+PRAGMA
+
+VACUUM
+
+CALL
+
+SET
+
+LOAD
+
+RELATION
+
+EXTENSION
+
+LOGICAL_PLAN
+
+ATTACH
+
+DETACH
+
+MULTI
+
+COPY_DATABASE
+
+**Type**: StatementType
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### name
+
+name(self: object) -> str
+
+**Type**: property
+
+
+
+
+
+### value
+
+
+
+**Type**: property
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## apilevel
+
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+**Type**: str
+
+
+
+
+
+## comment
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+## identifier
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+## keyword
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+## numeric_const
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+## operator
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+## paramstyle
+
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+**Type**: str
+
+
+
+
+
+## string_const
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+## threadsafety
+
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is a number, return x.__int__().  For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base.  The literal can be preceded by '+' or '-' and be surrounded
+by whitespace.  The base defaults to 10.  Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+**Type**: int
+
+
+
+
+
+## token_type
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: pybind11_type
+
+**Bases**: pybind11_object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### comment
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+### identifier
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+### keyword
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+### name
+
+name(self: object) -> str
+
+**Type**: property
+
+
+
+
+
+### numeric_const
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+### operator
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+### string_const
+
+Members:
+
+identifier
+
+numeric_const
+
+string_const
+
+operator
+
+keyword
+
+comment
+
+**Type**: token_type
+
+
+
+
+
+### value
+
+
+
+**Type**: property
+
+
+
+
+## Expressions
+
+
+### CaseExpression
+
+CaseExpression(condition: duckdb.duckdb.Expression, value: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### CoalesceOperator
+
+CoalesceOperator(*args) -> duckdb.duckdb.Expression
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### ColumnExpression
+
+ColumnExpression(*args) -> duckdb.duckdb.Expression
+
+Create a column reference from the provided column name
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### ConstantExpression
+
+ConstantExpression(value: object) -> duckdb.duckdb.Expression
+
+Create a constant expression from the provided value
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### DefaultExpression
+
+DefaultExpression() -> duckdb.duckdb.Expression
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### FunctionExpression
+
+FunctionExpression(function_name: str, *args) -> duckdb.duckdb.Expression
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### LambdaExpression
+
+LambdaExpression(lhs: object, rhs: duckdb.duckdb.Expression) -> duckdb.duckdb.Expression
+
+**Type**: builtin_function_or_method
+
+
+
+
+
+### StarExpression
+
+StarExpression(*args, **kwargs)
+Overloaded function.
+
+1. StarExpression(*, exclude: object = None) -> duckdb.duckdb.Expression
+
+2. StarExpression() -> duckdb.duckdb.Expression
+
+**Type**: builtin_function_or_method
+
+
+
+
+## Values
+
+
+### BinaryValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### BitValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### BlobValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### BooleanValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### DateValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### DecimalValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### DoubleValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### FloatValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### HugeIntegerValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### IntegerValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### IntervalValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### LongValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### NullValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### ShortValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### StringValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### TimeTimeZoneValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### TimeValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### TimestampMilisecondValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### TimestampNanosecondValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### TimestampSecondValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### TimestampTimeZoneValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### TimestampValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### UUIDValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### UnsignedBinaryValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### UnsignedIntegerValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### UnsignedLongValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### UnsignedShortValue
+
+
+
+**Type**: type
+
+**Bases**: Value
+
+
+
+### Value
+
+
+
+**Type**: type
+
+**Bases**: object
+
+
+## Exceptions
+
+
+### BinderException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: ProgrammingError
+
+
+
+### CatalogException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: ProgrammingError
+
+
+
+### ConnectionException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: OperationalError
+
+
+
+### ConstraintException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: IntegrityError
+
+
+
+### ConversionException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DataError
+
+
+
+### DataError
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### Error
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: Exception
+
+
+
+### FatalException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### HTTPException
+
+Thrown when an error occurs in the httpfs extension, or whilst downloading an extension.
+
+**Type**: type
+
+**Bases**: IOException
+
+
+
+### IOException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: OperationalError
+
+
+
+### IntegrityError
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### InternalError
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### InternalException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: InternalError
+
+
+
+### InterruptException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### InvalidInputException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: ProgrammingError
+
+
+
+### InvalidTypeException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: ProgrammingError
+
+
+
+### NotImplementedException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: NotSupportedError
+
+
+
+### NotSupportedError
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### OperationalError
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### OutOfMemoryException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: OperationalError
+
+
+
+### OutOfRangeException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DataError
+
+
+
+### ParserException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: ProgrammingError
+
+
+
+### PermissionException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### ProgrammingError
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### SequenceException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DatabaseError
+
+
+
+### SerializationException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: OperationalError
+
+
+
+### SyntaxException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: ProgrammingError
+
+
+
+### TransactionException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: OperationalError
+
+
+
+### TypeMismatchException
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: DataError
+
+
+
+### Warning
+
+Common base class for all non-exit exceptions.
+
+**Type**: type
+
+**Bases**: Exception
