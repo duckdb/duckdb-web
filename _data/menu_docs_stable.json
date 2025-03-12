@@ -1117,6 +1117,10 @@
               "url": "tpch"
             },
             {
+              "page": "UI",
+              "url": "ui"
+            },
+            {
               "page": "VSS",
               "url": "vss"
             }
