@@ -50,7 +50,7 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-s COMMAND`      | Run `COMMAND` and exit                                                                                        |
 | `-separator SEP`  | Set output column separator to `SEP`. Default: `|`                                                            |
 | `-table`          | Set [output mode]({% link docs/stable/clients/cli/output_formats.md %}) to `table`                            |
-| `-ui`             | Loads and starts the [DuckDB UI]({% link docs/stable/extensions/ui.md %}). If the UI is not yet installed, it installs the `ui` extension.                                  |
+| `-ui`             | Loads and starts the [DuckDB UI]({% link docs/stable/extensions/ui.md %}). If the UI is not yet installed, it installs the `ui` extension |
 | `-unsigned`       | Allow loading of [unsigned extensions]({% link docs/stable/extensions/overview.md %}#unsigned-extensions). This option is intended to be used for developing extensions. Consult the [Securing DuckDB page]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how set up DuckDB in a secure manner |
 | `-version`        | Show DuckDB version                                                                                           |
 
