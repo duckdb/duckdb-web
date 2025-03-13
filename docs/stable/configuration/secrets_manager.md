@@ -17,14 +17,14 @@ Currently, the following secret types are available:
 
 | Secret type   | Service / protocol    | Extension                                                     |
 |---------------|-----------------------|---------------------------------------------------------------|
-| `AZURE`       | Azure Blob Storage    | [`azure`]({% link docs/stable/extensions/azure.md %})                |
-| `GCS`         | Google Cloud Storage  | [`httpfs`]({% link docs/stable/extensions/httpfs/s3api.md %})        |
-| `HTTP`        | HTTP and HTTPS        | [`httpfs`]({% link docs/stable/extensions/httpfs/https.md %})        |
-| `HUGGINGFACE` | Hugging Face          | [`httpfs`]({% link docs/stable/extensions/httpfs/hugging_face.md %}) |
-| `MYSQL`       | MySQL                 | [`mysql`]({% link docs/stable/extensions/mysql.md %})                |
-| `POSTGRES`    | PostgreSQL            | [`postgres`]({% link docs/stable/extensions/postgres.md %})          |
-| `R2`          | Cloudflare R2         | [`httpfs`]({% link docs/stable/extensions/httpfs/s3api.md %})        |
-| `S3`          | AWS S3                | [`httpfs`]({% link docs/stable/extensions/httpfs/s3api.md %})        |
+| `azure`       | Azure Blob Storage    | [`azure`]({% link docs/stable/extensions/azure.md %})                |
+| `gcs`         | Google Cloud Storage  | [`httpfs`]({% link docs/stable/extensions/httpfs/s3api.md %})        |
+| `http`        | HTTP and HTTPS        | [`httpfs`]({% link docs/stable/extensions/httpfs/https.md %})        |
+| `huggingface` | Hugging Face          | [`httpfs`]({% link docs/stable/extensions/httpfs/hugging_face.md %}) |
+| `mysql`       | MySQL                 | [`mysql`]({% link docs/stable/extensions/mysql.md %})                |
+| `postgres`    | PostgreSQL            | [`postgres`]({% link docs/stable/extensions/postgres.md %})          |
+| `r2`          | Cloudflare R2         | [`httpfs`]({% link docs/stable/extensions/httpfs/s3api.md %})        |
+| `s3`          | AWS S3                | [`httpfs`]({% link docs/stable/extensions/httpfs/s3api.md %})        |
 
 For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
