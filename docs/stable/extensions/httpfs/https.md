@@ -50,7 +50,6 @@ CREATE SECRET http_auth (
     TYPE http,
     BEARER_TOKEN '⟨token⟩'
 );
-
 ```
 
 Or:

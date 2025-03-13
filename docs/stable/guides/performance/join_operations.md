@@ -25,7 +25,6 @@ SELECT ...
 FROM ...
 JOIN ...  -- this join is performed first
 JOIN ...; -- this join is performed second
-
 ```
 
 Once the query in question has been executed, turn back the optimizers with the following command:

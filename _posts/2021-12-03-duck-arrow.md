@@ -235,7 +235,6 @@ con = duckdb.connect()
 con.execute("""SELECT sum(l_extendedprice * l_discount) AS revenue
                 FROM
                 lineitem;""").fetch_arrow_table()
-
 ```
 
 ``` python
@@ -250,7 +249,6 @@ res =  pd.DataFrame({'sum': [(df.l_extendedprice * df.l_discount).sum()]})
 
 # Creates an Arrow Table from a Dataframe
 new_table = pa.Table.from_pandas(res)
-
 ```
 
 |    Name     | Time (s) |
@@ -281,7 +279,6 @@ con.execute("""SELECT sum(l_extendedprice * l_discount) AS revenue
             AND l_discount BETWEEN 0.05
             AND 0.07
             AND l_quantity < 24; """).fetch_arrow_table()
-
 ```
 
 ``` python
