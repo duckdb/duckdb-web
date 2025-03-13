@@ -48,9 +48,9 @@ SELECT *
 FROM 's3://my-bucket/file.parquet';
 ```
 
-### `CREDENTIAL_CHAIN` Provider
+### `credential_chain` Provider
 
-The `CREDENTIAL_CHAIN` provider allows automatically fetching credentials using mechanisms provided by the AWS SDK. For example, to use the AWS SDK default provider:
+The `credential_chain` provider allows automatically fetching credentials using mechanisms provided by the AWS SDK. For example, to use the AWS SDK default provider:
 
 ```sql
 CREATE SECRET secret2 (
@@ -80,7 +80,7 @@ The possible values for `CHAIN` are the following:
 * [`instance`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_instance_profile_credentials_provider.html)
 * [`process`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_process_credentials_provider.html)
 
-The `CREDENTIAL_CHAIN` provider also allows overriding the automatically fetched config. For example, to automatically load credentials, and then override the region, run:
+The `credential_chain` provider also allows overriding the automatically fetched config. For example, to automatically load credentials, and then override the region, run:
 
 ```sql
 CREATE SECRET secret4 (
@@ -93,7 +93,7 @@ CREATE SECRET secret4 (
 
 ### Overview of S3 Secret Parameters
 
-Below is a complete list of the supported parameters that can be used for both the `CONFIG` and `CREDENTIAL_CHAIN` providers:
+Below is a complete list of the supported parameters that can be used for both the `CONFIG` and `credential_chain` providers:
 
 | Name                          | Description                                                                           | Secret            | Type      | Default                                     |
 |:------------------------------|:--------------------------------------------------------------------------------------|:------------------|:----------|:--------------------------------------------|
@@ -122,7 +122,7 @@ CREATE SECRET secret5 (
 );
 ```
 
-Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpoint URL for you. Also note that for `R2` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `R2` secrets are only available when using URLs starting with `r2://`, for example:
+Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpoint URL for you. Also note that for `R2` Secrets can also use both the `CONFIG` and `credential_chain` providers. Finally, `R2` secrets are only available when using URLs starting with `r2://`, for example:
 
 ```sql
 SELECT *
@@ -141,7 +141,7 @@ CREATE SECRET secret6 (
 );
 ```
 
-Note that the above secret, will automatically have the correct Google Cloud Storage endpoint configured. Also note that for `GCS` Secrets can also use both the `CONFIG` and `CREDENTIAL_CHAIN` providers. Finally, `GCS` secrets are only available when using URLs starting with `gcs://` or `gs://`, for example:
+Note that the above secret, will automatically have the correct Google Cloud Storage endpoint configured. Also note that for `GCS` Secrets can also use both the `CONFIG` and `credential_chain` providers. Finally, `GCS` secrets are only available when using URLs starting with `gcs://` or `gs://`, for example:
 
 ```sql
 SELECT *

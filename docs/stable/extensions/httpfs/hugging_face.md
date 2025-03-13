@@ -140,9 +140,9 @@ CREATE SECRET hf_token (
 );
 ```
 
-### `CREDENTIAL_CHAIN`
+### `credential_chain`
 
-Automatically tries to fetch credentials. For the Hugging Face token, it will try to get it from `~/.cache/huggingface/token`. To create a secret using the `CREDENTIAL_CHAIN` provider, use the following command:
+Automatically tries to fetch credentials. For the Hugging Face token, it will try to get it from `~/.cache/huggingface/token`. To create a secret using the `credential_chain` provider, use the following command:
 
 ```sql
 CREATE SECRET hf_token (

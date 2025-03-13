@@ -151,9 +151,9 @@ CREATE SECRET secret2 (
 
 The default `PROVIDER` is `CONFIG`.
 
-#### `CREDENTIAL_CHAIN` Provider
+#### `credential_chain` Provider
 
-The `CREDENTIAL_CHAIN` provider allows connecting using credentials automatically fetched by the Azure SDK via the Azure credential chain.
+The `credential_chain` provider allows connecting using credentials automatically fetched by the Azure SDK via the Azure credential chain.
 By default, the `DefaultAzureCredential` chain used, which tries credentials according to the order specified by the [Azure documentation](https://learn.microsoft.com/en-us/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest#@azure-identity-defaultazurecredential-constructor).
 For example:
 
@@ -230,7 +230,7 @@ CREATE SECRET secret5 (
 
 > * When using secrets, the `HTTP_PROXY` environment variable will still be honored except if you provide an explicit value for it.
 > * When using secrets, the `SET` variable of the *Authentication with variables* session will be ignored.
-> * The Azure `CREDENTIAL_CHAIN` provider, the actual token is fetched at query time, not at the time of creating the secret.
+> * The Azure `credential_chain` provider, the actual token is fetched at query time, not at the time of creating the secret.
 
 ### Authentication with Variables (Deprecated)
 
@@ -245,7 +245,7 @@ Where `variable_name` can be one of the following:
 | `azure_storage_connection_string` | Azure connection string, used for authenticating and configuring Azure requests. | `STRING` | - |
 | `azure_account_name` | Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string). | `STRING` | - |
 | `azure_endpoint` | Override the Azure endpoint for when the Azure credential providers are used. | `STRING` | `blob.core.windows.net` |
-| `azure_credential_chain`| Ordered list of Azure credential providers, in string format separated by `;`. For example: `'cli;managed_identity;env'`. See the list of possible values in the [`CREDENTIAL_CHAIN` provider section](#credential_chain-provider). Not used if you pass the connection string. | `STRING` | - |
+| `azure_credential_chain`| Ordered list of Azure credential providers, in string format separated by `;`. For example: `'cli;managed_identity;env'`. See the list of possible values in the [`credential_chain` provider section](#credential_chain-provider). Not used if you pass the connection string. | `STRING` | - |
 | `azure_http_proxy`| Proxy to use when login & performing request to Azure. | `STRING` | `HTTP_PROXY` environment variable (if set). |
 | `azure_proxy_user_name`| Http proxy username if needed. | `STRING` | - |
 | `azure_proxy_password`| Http proxy password if needed. | `STRING` | - |
