@@ -118,7 +118,6 @@ The table below shows the available general aggregate functions.
 | Function | Description |
 |:--|:--------|
 | [`any_value(arg)`](#any_valuearg) | Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`approx_top_k(arg, k)`](#approx_top_karg-k) | Returns a list of the `k` approximately most frequent values of `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arbitrary(arg)`](#arbitraryarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val)`](#arg_maxarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val, n)`](#arg_maxarg-val-n) | The generalized case of [`arg_max`](#arg_maxarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
@@ -164,14 +163,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the first non-`NULL` value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `any_value(A)` |
-| **Alias(es)** | - |
-
-#### `approx_top_k(arg, k)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns a list of the `k` approximately most frequent values of `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| **Example** | `approx_top_k(A, 3)` |
 | **Alias(es)** | - |
 
 #### `arbitrary(arg)`
@@ -484,9 +475,10 @@ The table below shows the available approximate aggregate functions.
 
 | Function | Description | Example |
 |:---|:---|:---|
-| `approx_count_distinct(x)` | Gives the approximate count of distinct elements using HyperLogLog. | `approx_count_distinct(A)` |
-| `approx_quantile(x, pos)` | Gives the approximate quantile using T-Digest. | `approx_quantile(A, 0.5)` |
-| `reservoir_quantile(x, quantile, sample_size = 8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A, 0.5, 1024)` |
+| `approx_count_distinct(x)` | Calculates the approximate count of distinct elements using HyperLogLog. | `approx_count_distinct(A)` |
+| `approx_quantile(x, pos)` | Calculates the approximate quantile using T-Digest. | `approx_quantile(A, 0.5)` |
+| `approx_top_k(arg, k)` | Calculates a `LIST` of the `k` approximately most frequent values of `arg` using Filtered Space-Saving. |
+| `reservoir_quantile(x, quantile, sample_size = 8192)` | Calculates the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A, 0.5, 1024)` |
 
 ## Statistical Aggregates
 
