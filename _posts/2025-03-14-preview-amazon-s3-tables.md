@@ -50,13 +50,12 @@ Let's find some data.
 
 ### Setting up an Amazon S3 Table Bucket
 
-> If you already have Iceberg tables in Amazon S3 Tables, you can skip to the [“Reading Iceberg Catalogs with DuckDB” section](#reading-amazon-s3-tables-with-duckdb).
+(If you already have Iceberg tables in Amazon S3 Tables, you can skip to the [“Reading Iceberg Catalogs with DuckDB” section](#reading-amazon-s3-tables-with-duckdb).)
 
 In this post, we demonstrate how to read data from Amazon S3 Tables.
 To follow along, make sure that your account has [`s3tables` permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-setting-up.html)
 and create a new [S3 table bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html).
-
-> Amazon S3 Tables is currently only supported in [selected AWS regions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-regions-quotas.html).
+Note that Amazon S3 Tables is currently only supported in [selected AWS regions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-regions-quotas.html).
 
 ### Populating an Amazon S3 Table Bucket
 
