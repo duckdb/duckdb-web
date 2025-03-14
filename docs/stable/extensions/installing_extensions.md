@@ -100,7 +100,8 @@ This outputs:
 ## Force Installing to Upgrade Extensions
 
 When DuckDB installs an extension, it is copied to a local directory to be cached and avoid future network traffic.
-Any subsequent calls to `INSTALL ⟨extension_name⟩` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
+Any subsequent calls to `INSTALL ⟨extension_name⟩` will use the local version instead of downloading the extension again.
+To force re-downloading the extension, run:
 
 ```sql
 FORCE INSTALL extension_name;
@@ -173,5 +174,5 @@ The shared installation location allows extensions to be shared between the clie
 
 DuckDB's extension mechanism has the following limitations:
 
-* Once loaded, an extension cannot be reinstalled.
 * Extensions cannot be unloaded.
+* Extensions cannot be reloaded. If you [update extensions]({% link docs/stable/sql/statements/update_extensions.md %}), restart the DuckDB process to use newer extensions.
