@@ -1067,6 +1067,18 @@
                 {
                   "page": "Overview",
                   "url": "overview"
+                },
+                {
+                  "page": "Amazon S3 Tables",
+                  "url": "amazon_s3_tables"
+                },
+                {
+                  "page": "Amazon SageMaker Lakehouse (AWS Glue)",
+                  "url": "amazon_sagemaker_lakehouse"
+                },
+                {
+                  "page": "Troubleshooting",
+                  "url": "troubleshooting"
                 }
               ]
             },

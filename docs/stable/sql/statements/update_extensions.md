@@ -5,25 +5,39 @@ redirect_from:
 title: UPDATE EXTENSIONS
 ---
 
-The `UPDATE EXTENSIONS` statement allows to sychronize the local installed extension state with the repository that published a given extension.
-
+The `UPDATE EXTENSIONS` statement allows to synchronize the local installed extension state with the repository that published a given extension.
 This statement is the recommended way to keep up to date with new feature or bug fixed being rolled out by extension developers.
+
+Note that DuckDB extensions cannot be reloaded during runtime, therefore `UPDATE EXTENSIONS` does not reload the updated extensions.
+To use the updated extensions, restart the process running DuckDB.
 
 ## Updating All Extensions
 
-Say you want to automatically check for updates for all extensions (for the current DuckDB version and platform) currently installed in the `extension_directory`.
+To update all extensions installed for DuckDB version of your client:
 
 ```sql
 UPDATE EXTENSIONS;
 ```
 
-This will iterate over the extensions, and inform user on which ones have been bumped.
+This will iterate over the extensions and return their repositories and the update result:
 
-`UPDATE EXTENSIONS` will use the information about where a given extension has been sourced, and try to fetch it only from there.
+```text
+┌────────────────┬──────────────┬─────────────────────┬──────────────────┬─────────────────┐
+│ extension_name │  repository  │    update_result    │ previous_version │ current_version │
+│    varchar     │   varchar    │       varchar       │     varchar      │     varchar     │
+├────────────────┼──────────────┼─────────────────────┼──────────────────┼─────────────────┤
+│ iceberg        │ core_nightly │ UPDATED             │ 6386ab5          │ b3ec51a         │
+│ icu            │ core         │ NO_UPDATE_AVAILABLE │ v1.2.1           │ v1.2.1          │
+│ autocomplete   │ core         │ NO_UPDATE_AVAILABLE │ v1.2.1           │ v1.2.1          │
+│ httpfs         │ core_nightly │ NO_UPDATE_AVAILABLE │ cf3584b          │ cf3584b         │
+│ json           │ core         │ NO_UPDATE_AVAILABLE │ v1.2.1           │ v1.2.1          │
+│ aws            │ core_nightly │ NO_UPDATE_AVAILABLE │ d3c5013          │ d3c5013         │
+└────────────────┴──────────────┴─────────────────────┴──────────────────┴─────────────────┘
+```
 
 ## Updating Selected Extensions
 
-You can provide a list of extension names to be updated. This allow more fine grained control:
+For more fine-grained control, you can also provide a list of extension names to be updated:
 
 ```sql
 UPDATE EXTENSIONS (name_a, name_b, name_c);
@@ -31,7 +45,8 @@ UPDATE EXTENSIONS (name_a, name_b, name_c);
 
 ## How It Works
 
-`UPDATE EXTENSIONS` is implemented by storing, if available, the [ETag](https://en.wikipedia.org/wiki/HTTP_ETag) information, and sending a GET request conditional on the fact that the remote extension is different (using the ETag as proxy) than the local available one. This ensures that `UPDATE EXTENSIONS` on consecutive instructions (if the remote state has not changed) is rather inexpensive.
+`UPDATE EXTENSIONS` is implemented by storing, if available, the [ETag](https://en.wikipedia.org/wiki/HTTP_ETag) information, and sending a GET request conditional on the fact that the remote extension is different (using the ETag as proxy) than the local available one.
+This ensures that subsequent `UPDATE EXTENSIONS` calls – if the remote state has not changed – are inexpensive.
 
 If a change is found for a given extension, DuckDB performs the following operation. For example, if `name_a` and `name_c` changed, then:
 
@@ -39,7 +54,7 @@ If a change is found for a given extension, DuckDB performs the following operat
 UPDATE EXTENSIONS (name_a, name_b, name_c);
 ```
 
-will result in the following commands:
+This will result in the following commands:
 
 ```sql
 FORCE INSTALL name_a;

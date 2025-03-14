@@ -477,7 +477,7 @@ The table below shows the available approximate aggregate functions.
 |:---|:---|:---|
 | `approx_count_distinct(x)` | Calculates the approximate count of distinct elements using HyperLogLog. | `approx_count_distinct(A)` |
 | `approx_quantile(x, pos)` | Calculates the approximate quantile using T-Digest. | `approx_quantile(A, 0.5)` |
-| `approx_top_k(arg, k)` | Calculates a `LIST` of the `k` approximately most frequent values of `arg` using Filtered Space-Saving. |
+| `approx_top_k(arg, k)` | Calculates a `LIST` of the `k` approximately most frequent values of `arg` using Filtered Space-Saving. | |
 | `reservoir_quantile(x, quantile, sample_size = 8192)` | Calculates the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A, 0.5, 1024)` |
 
 ## Statistical Aggregates
