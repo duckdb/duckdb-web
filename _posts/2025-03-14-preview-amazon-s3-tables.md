@@ -22,17 +22,20 @@ DuckDB has supported reading Iceberg tables [since September 2023]({% post_url 2
 
 > DuckDB's support for Iceberg REST Catalog endpoints in Amazon S3 Tables is the result of a collaboration between AWS and DuckDB Labs.
 
-## Attaching to Databases Using Apache Iceberg REST Catalogs
+## Using Apache Iceberg REST Catalogs in DuckDB
 
 ### Steps for Installing
 
-Make sure you are running the **latest stable** DuckDB release (version 1.2.1). In the following, we'll use the DuckDB [CLI client]({% link docs/stable/clients/overview.md %}). You can obtain it via the [installation page]({% link docs/installation/index.html %}) and start it with:
+To connect to Apache Iceberg REST Catalogs in DuckDB,
+make sure you are running the **latest stable** DuckDB release (version 1.2.1).
+For our example steps, we'll use the DuckDB [CLI client]({% link docs/stable/clients/overview.md %}).
+You can obtain this client from the [installation page]({% link docs/installation/index.html %}) and start it with:
 
 ```bash
 duckdb
 ```
 
-First, we need to install the “bleeding edge” versions of the required extensions from the [`core_nightly` repository]({% link docs/stable/extensions/installing_extensions.md %}#extension-repositories).
+Next, we need to install the “bleeding edge” versions of the required extensions from the [`core_nightly` repository]({% link docs/stable/extensions/installing_extensions.md %}#extension-repositories).
 
 ```sql
 FORCE INSTALL aws FROM core_nightly;
@@ -42,12 +45,16 @@ FORCE INSTALL iceberg FROM core_nightly;
 
 > For more information on using the `core_nightly` repository, please see the [notes](#footnotes) at the end of the post.
 
+With these extensions installed, your DuckDB is now capable of using Apache Iceberg REST Catalogs.
+Let's find some data.
+
 ### Setting up an Amazon S3 Table Bucket
 
-If you already have Iceberg tables in Amazon S3 Tables, you can skip to the [“Reading Iceberg Catalogs with DuckDB” section](#reading-amazon-s3-tables-with-duckdb).
+> If you already have Iceberg tables in Amazon S3 Tables, you can skip to the [“Reading Iceberg Catalogs with DuckDB” section](#reading-amazon-s3-tables-with-duckdb).
 
-If you don't have Iceberg tables in S3 Tables yet, you can set up an S3 table bucket to host Iceberg tables easily.
-Make sure that your account has [S3Table permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-setting-up.html) and create a new [S3 table bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html).
+In this post, we demonstrate how to read data from Amazon S3 Tables.
+To follow along, make sure that your account has [`s3tables` permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-setting-up.html)
+and create a new [S3 table bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html).
 
 > Amazon S3 Tables is currently only supported in [selected AWS regions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-regions-quotas.html).
 
@@ -188,6 +195,11 @@ As of today, the extension is in an experimental state and is under active devel
 We will publish a stable release later this year.
 
 ## Footnotes
+
+### Cleaning Up
+
+If you created a new S3 table bucket to follow the examples,
+don't forget to clean up by [deleting your S3 table bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-delete.html).
 
 ### Using the `core_nightly` Repository
 
