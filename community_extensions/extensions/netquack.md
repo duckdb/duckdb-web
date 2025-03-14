@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 377
-extension_download_count_pretty: 377
+extension_download_count: 384
+extension_download_count_pretty: 384
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---
@@ -68,5 +68,6 @@ LOAD {{ page.extension.name }};
 | get_tranco_rank      | scalar        | Getting the Tranco rank of a domain        | NULL    | [SELECT get_tranco_rank('cloudflare.com') as rank;]                 |
 | update_suffixes      | scalar        | Update public suffixes                     | NULL    | [SELECT update_suffixes();]                                         |
 | update_tranco        | scalar        | Update tranco data                         | NULL    | [SELECT update_tranco(true);]                                       |
+| netquack_version     | table         | NULL                                       | NULL    | [NULL]                                                              |
 
 
