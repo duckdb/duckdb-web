@@ -74,7 +74,6 @@ DuckDB contains the following predefined repositories:
 | `local_build_debug`   | `./build/debug/repository`               | Repository created when building DuckDB from source in debug mode (for development)    |
 | `local_build_release` | `./build/release/repository`             | Repository created when building DuckDB from source in release mode (for development)  |
 
-
 ## Working with Multiple Repositories
 
 When working with extensions from different repositories, especially mixing `core` and `core_nightly`, it is important to know the origins and version of the different extensions.
@@ -98,15 +97,6 @@ This outputs:
 | aws             | 42c78d3            | core_nightly   | REPOSITORY   |
 | ...             | ...                | ...            | ...          |
 
-### Switching between Repositories
-
-To switch repositories for an extension, use the `FORCE INSTALL` command.
-For example, if you have installed `httpfs` from `core_nightly` but would like to switch to `core`, run:
-
-```sql
-FORCE INSTALL httpfs FROM core;
-```
-
 ## Force Installing to Upgrade Extensions
 
 When DuckDB installs an extension, it is copied to a local directory to be cached and avoid future network traffic.
@@ -128,6 +118,15 @@ Then, to overwrite this installation with the `spatial` extension from the `core
 
 ```sql
 FORCE INSTALL spatial FROM core_nightly;
+```
+
+### Switching between Repositories
+
+To switch repositories for an extension, use the `FORCE INSTALL` command.
+For example, if you have installed `httpfs` from the `core_nightly` repository but would like to switch back to using `core`, run:
+
+```sql
+FORCE INSTALL httpfs FROM core;
 ```
 
 ## Installing Extensions through Client APIs
