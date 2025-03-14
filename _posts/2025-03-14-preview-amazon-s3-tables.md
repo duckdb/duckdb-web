@@ -18,7 +18,7 @@ and
 [AWS](https://aws.amazon.com/blogs/big-data/read-and-write-s3-iceberg-table-using-aws-glue-iceberg-rest-catalog-from-open-source-apache-spark/)
 have all announced or already implemented support for Iceberg tables. These platforms also support Iceberg [catalogs](https://iceberg.apache.org/terms/#catalog), which are responsible for tracking current metadata for a collection of Iceberg tables grouped by namespaces.
 
-DuckDB has supported reading Iceberg tables [since September 2023]({% post_url 2023-09-26-announcing-duckdb-090 %}) via the [`iceberg` extension]({% link docs/stable/extensions/iceberg/overview.md %}). Today, we are happy to introduce a new preview feature in this extension, which allows attaching to [Iceberg REST catalogs](https://www.tabular.io/apache-iceberg-cookbook/getting-started-catalog-background/). This preview release coincides with two AWS announcements yesterday: [support for Iceberg tables in Amazon S3 Tables](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-s3-tables-apache-iceberg-rest-catalog-apis/) and the [GA release of the integration between S3 Tables and SageMaker LakeHouse](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-sagemaker-lakehouse-integration-s3-tables-generally-available/). In practice, these developments mean that DuckDB now provides an end-to-end solution for reading Iceberg tables in [S3 Tables]({% link docs/stable/extensions/iceberg/amazon_s3_tables.md %}) and [SageMaker Lakehouse]({% link docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
+DuckDB has supported reading Iceberg tables [since September 2023]({% post_url 2023-09-26-announcing-duckdb-090 %}) via the [`iceberg` extension]({% link docs/stable/extensions/iceberg/overview.md %}). Today, we are happy to introduce a new preview feature in this extension, which allows attaching to [Iceberg REST catalogs](https://www.tabular.io/apache-iceberg-cookbook/getting-started-catalog-background/). This preview release coincides with two AWS announcements yesterday: [support for Iceberg tables in Amazon S3 Tables](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-s3-tables-apache-iceberg-rest-catalog-apis/) and the [GA release of the integration between S3 Tables and SageMaker Lakehouse (AWS Glue Data Catalog)](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-sagemaker-lakehouse-integration-s3-tables-generally-available/). In practice, these developments mean that DuckDB now provides an end-to-end solution for reading Iceberg tables in [S3 Tables]({% link docs/stable/extensions/iceberg/amazon_s3_tables.md %}) and [SageMaker Lakehouse]({% link docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
 
 > DuckDB's support for Iceberg REST Catalog endpoints in Amazon S3 Tables is the result of a collaboration between AWS and DuckDB Labs.
 
@@ -147,6 +147,20 @@ FROM s3_tables_db.ducks.duck_species;
 └───────┴──────────────┴────────────┘
 ```
 
+You also have an alternative option to connect to S3 Tables using the Amazon SageMaker Lakehouse (AWS Glue Data Catalog) Iceberg REST Catalog endpoint.
+To do so, run:
+
+```sql
+ATTACH '⟨account_id⟩:s3tablescatalog/⟨namespace_name⟩'
+AS (
+    TYPE iceberg,
+    ENDPOINT_TYPE glue
+);
+```
+ 
+> Tip If you need basic read access to tabular data in a single S3 table bucket, use the `s3_tables` endpoint type.
+> If you want a unified view across all of your tabular data in AWS use the `glue` endpoint type.
+
 ### Schema Evolution
 
 A key feature of the Iceberg format is [schema evolution](https://iceberg.apache.org/docs/1.7.1/evolution/),
@@ -189,7 +203,7 @@ The query now returns a table with the additional fourth column, which has a `NU
 ## Conclusion
 
 The latest preview release of the DuckDB `iceberg` extension enables directly reading tables using Iceberg REST endpoints.
-This allows you to query Amazon S3 Tables and Amazon SageMaker Lakehouse with ease.
+This allows you to query Amazon S3 Tables and Amazon SageMaker Lakehouse (AWS Glue Data Catalog) with ease.
 As of today, the extension is in an experimental state and is under active development.
 We will publish a stable release later this year.
 
