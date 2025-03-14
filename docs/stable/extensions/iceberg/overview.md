@@ -7,7 +7,7 @@ redirect_from:
 title: Iceberg Extension
 ---
 
-The `iceberg` extension is a loadable extension that implements support for the [Apache Iceberg format](https://iceberg.apache.org/).
+The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/).
 
 ## Installing and Loading
 
@@ -20,10 +20,11 @@ LOAD iceberg;
 
 ## Updating the Extension
 
-The `iceberg` extension often receives updates between DuckDB releases. To make sure that you have the latest version, run:
+The `iceberg` extension often receives updates between DuckDB releases.
+To make sure that you have the latest version, [update your extensions]({% link docs/stable/sql/statements/update_extensions.md %}):
 
 ```sql
-UPDATE EXTENSIONS (iceberg);
+UPDATE EXTENSIONS;
 ```
 
 ## Usage
@@ -50,7 +51,8 @@ FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 |-------------:|
 | 51793        |
 
-> The `allow_moved_paths` option ensures that some path resolution is performed, which allows scanning Iceberg tables that are moved.
+> The `allow_moved_paths` option ensures that some path resolution is performed, 
+> which allows scanning Iceberg tables that are moved.
 
 You can also address specify the current manifest directly in the query, this may be resolved from the catalog prior to the query, in this example the manifest version is a UUID.
 To do so, navigate to the `data/iceberg` directory and run:
@@ -64,7 +66,7 @@ FROM iceberg_scan('lineitem_iceberg/metadata/v1.metadata.json');
 |-------------:|
 | 60175        |
 
-The `iceberg` extension can be paired with the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) to access Iceberg tables in object stores such as S3.
+The `iceberg` works together with the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) to access Iceberg tables in object stores such as S3.
 
 ```sql
 SELECT count(*)
@@ -75,6 +77,8 @@ FROM iceberg_scan(
 ```
 
 ### Access Iceberg Metadata
+
+To access Iceberg Metadata, you can use the `iceberg_metadata` function:
 
 ```sql
 SELECT *
@@ -90,6 +94,8 @@ FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true)
 
 ### Visualizing Snapshots
 
+To visualize the snapshots in an Iceberg table, use the `iceberg_snapshots` function:
+
 ```sql
 SELECT *
 FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
@@ -102,13 +108,9 @@ FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 | 1               | 3776207205136740581 | 2023-02-15 15:07:54.504 | lineitem_iceberg/metadata/snap-3776207205136740581-1-cf3d0be5-cf70-453d-ad8f-48fdc412e608.avro |
 | 2               | 7635660646343998149 | 2023-02-15 15:08:14.73  | lineitem_iceberg/metadata/snap-7635660646343998149-1-10eaca8a-1e1c-421e-ad6d-b232e5ee23d3.avro |
 
-### Selecting Metadata versions
+### Selecting Metadata Versions
 
-By default, the `iceberg` extension will look for a `version-hint.text` file to identify the proper metadata version to use. This can be overridden by explicitly supplying a version number via the `version` parameter to iceberg table functions. By default, this will look for both `v{version}.metadata.json` and `{version}.metadata.json` files, or `v{version}.gz.metadata.json` and `{version}.gz.metadata.json` when `metadata_compression_codec = 'gzip'` is specified. Other compression codecs are not supported.
-
-Additionally, if any `.text` or `.txt` file is provided as a version, it is opened and treated as a version-hint file. The `iceberg` extension will open this file and use the **entire contents** of the file as a provided version number.
-
-> The entire contents of the `version-hint.txt` file will be treated as a literal version name, with no encoding, escaping or trimming. This includes any whitespace, or unsafe characters  which will be explicitly passed formatted into filenames in the logic described below.
+By default, the `iceberg` extension will look for a `version-hint.text` file to identify the proper metadata version to use. This can be overridden by explicitly supplying a version number via the `version` parameter to the functions of the `iceberg` extension:
 
 ```sql
 SELECT *
@@ -119,13 +121,27 @@ FROM iceberg_snapshots(
 );
 ```
 
-| count_star() |
-|-------------:|
-| 60175        |
+By default, `iceberg` functions will look for both `v{version}.metadata.json` and `{version}.metadata.json` files, or `v{version}.gz.metadata.json` and `{version}.gz.metadata.json` when `metadata_compression_codec = 'gzip'` is specified.
+Other compression codecs are not supported.
+
+If any text file is provided through the `version` parameter, it is opened and treated as a version hint file:
+
+```sql
+SELECT *
+FROM iceberg_snapshots(
+    'data/iceberg/lineitem_iceberg',
+    version = 'version-hint.txt',
+    allow_moved_paths = true
+);
+```
+
+The `iceberg` extension will open this file and use the **entire content** of the file as a provided version number.
+Note that the entire content of the `version-hint.txt` file will be treated as a literal version name, with no encoding, escaping or trimming. This includes any whitespace, or unsafe characters  which will be explicitly passed formatted into filenames in the logic described below.
 
 ### Working with Alternative Metadata Naming Conventions
 
-The `iceberg` extension can handle different metadata naming conventions by specifying them as a comma-delimited list of format strings via the `version_name_format` parameter. Each format string must take two `%s` parameters. The first is the location of the version number in the metadata filename and the second is the location of the `metadata_compression_codec` extension. The behavior described above is provided by the default value of `"v%s%s.metadata.gz,%s%smetadata.gz`. In the event you had an alternatively named metadata file with such as `rev-2.metadata.json.gz`, the table could be read via the follow statement.
+The `iceberg` extension can handle different metadata naming conventions by specifying them as a comma-delimited list of format strings via the `version_name_format` parameter. Each format string must contain two `%s` parameters. The first is the location of the version number in the metadata filename and the second is the location of the filename extension specified by the `metadata_compression_codec`. The behavior described above is provided by the default value of `"v%s%s.metadata.gz,%s%smetadata.gz`.
+If you had an alternatively named metadata file, e.g., `rev-2.metadata.json.gz`, the table can be read via the follow statement:
 
 ```sql
 SELECT *
@@ -138,29 +154,26 @@ FROM iceberg_snapshots(
 );
 ```
 
-| count_star() |
-|-------------:|
-| 60175        |
-
 ### “Guessing” Metadata Versions
 
-By default, either a table version number or a `version-hint.text` **must** be provided for the `iceberg` extension to read a table. This is typically provided by an external data catalog. In the event neither is present, the `iceberg` extension can attempt to guess the latest version by passing `?` as the table version. The “latest” version is assumed to be the filename that is lexicographically largest when sorting the filenames. Collations are not considered. This behavior is not enabled by default as it may potentially violate ACID constraints. It can be enabled by setting `unsafe_enable_version_guessing` to `true`. When this is set, `iceberg` functions will attempt to guess the latest version by default before failing.
+By default, either a table version number or a `version-hint.text` **must** be provided for the `iceberg` extension to read a table. This is typically provided by an external data catalog. In the event neither is present, the `iceberg` extension can attempt to guess the latest version by passing `?` as the `version` parameter:
+
+```sql
+SELECT count(*)
+FROM iceberg_scan(
+    'data/iceberg/lineitem_iceberg_no_hint',
+    version = '?',
+    allow_moved_paths = true
+);
+```
+
+The “latest” version is assumed to be the filename that is lexicographically largest when sorting the filenames. Collations are not considered. This behavior is not enabled by default as it may potentially violate ACID constraints. It can be enabled by setting `unsafe_enable_version_guessing` to `true`. When this is set, `iceberg` functions will attempt to guess the latest version by default before failing.
 
 ```sql
 SET unsafe_enable_version_guessing = true;
 SELECT count(*)
 FROM iceberg_scan('data/iceberg/lineitem_iceberg_no_hint', allow_moved_paths = true);
--- Or explicitly as:
--- FROM iceberg_scan(
---         'data/iceberg/lineitem_iceberg_no_hint',
---         version = '?',
---         allow_moved_paths = true
--- );
 ```
-
-| count_star() |
-|-------------:|
-| 51793        |
 
 ## Limitations
 
