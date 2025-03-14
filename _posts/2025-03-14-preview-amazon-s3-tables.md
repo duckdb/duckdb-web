@@ -159,7 +159,7 @@ AS (
 ```
  
 > Tip If you need basic read access to tabular data in a single S3 table bucket, use the `s3_tables` endpoint type.
-> If you want a unified view across all of your tabular data in AWS use the `glue` endpoint type.
+> If you want a unified view across all of your tabular data in AWS, use the `glue` endpoint type.
 
 ### Schema Evolution
 
