@@ -24,6 +24,18 @@ Create a macro that adds two expressions (`a` and `b`):
 CREATE MACRO add(a, b) AS a + b;
 ```
 
+Create a macro, replacing possible existing definitions:
+
+```sql
+CREATE OR REPLACE MACRO add(a, b) AS a + b;
+```
+
+Create a macro if it does not already exist, else do nothing:
+
+```sql
+CREATE MACRO IF NOT EXISTS add(a, b) AS a + b;
+```
+
 Create a macro for a `CASE` expression:
 
 ```sql
