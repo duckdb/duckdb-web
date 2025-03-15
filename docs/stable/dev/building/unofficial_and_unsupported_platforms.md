@@ -39,3 +39,15 @@ GEN=ninja \
     CORE_EXTENSIONS='fts' \
     make
 ```
+
+For those who do not have a RISC-V chip development environment, you can cross-compile DuckDB using latest [g++-riscv64-linux-gnu](https://github.com/riscv-collab/riscv-gnu-toolchain) :
+
+```bash
+GEN=ninja \
+    CC='riscv64-linux-gnu-gcc -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \
+    CXX='riscv64-linux-gnu-g++ -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \
+    make
+```
+
+For more reference information on DuckDB RISC-V cross-compiling, see the [mocusez/duckdb-riscv-ci](https://github.com/mocusez/duckdb-riscv-ci) and [DuckDB Pull Request #16549](https://github.com/duckdb/duckdb/pull/16549)
+
