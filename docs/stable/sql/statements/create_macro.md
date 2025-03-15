@@ -24,7 +24,7 @@ Create a macro that adds two expressions (`a` and `b`):
 CREATE MACRO add(a, b) AS a + b;
 ```
 
-Create a macro or replace it if it already exists:
+Create a macro, replacing possible existing definitions:
 
 ```sql
 CREATE OR REPLACE MACRO add(a, b) AS a + b;
