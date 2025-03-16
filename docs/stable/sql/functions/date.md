@@ -53,8 +53,8 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | [`make_date(year, month, day)`](#make_dateyear-month-day) | The date for the given parts. |
 | [`monthname(date)`](#monthnamedate) | The (English) name of the month. |
 | [`strftime(date, format)`](#strftimedate-format) | Converts a date to a string according to the [format string]({% link docs/stable/sql/functions/dateformat.md %}). |
-| [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
-| [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to 2000-01-03 for buckets that don't include a month or year interval, and to 2000-01-01 for month and year buckets. |
+| [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` to a grid of width `bucket_width`. The grid is anchored at `2000-01-01[ + offset]` when `bucket_width` is a number of months or coarser units, else `2000-01-03[ + offset]`. Note that `2000-01-03` is a Monday. |
+| [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01` when `bucket_width` is a number of months or coarser units, else `2000-01-03`. Note that `2000-01-03` is a Monday. |
 | [`today()`](#today) | Current date (start of current transaction) in UTC. |
 
 #### `current_date`
@@ -225,7 +225,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 
 <div class="nostroke_table"></div>
 
-| **Description** | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
+| **Description** | Truncate `date` to a grid of width `bucket_width`. The grid is anchored at `2000-01-01[ + offset]` when `bucket_width` is a number of months or coarser units, else `2000-01-03[ + offset]`. Note that `2000-01-03` is a Monday. |
 | **Example** | `time_bucket(INTERVAL '2 months', DATE '1992-04-20', INTERVAL '1 month')` |
 | **Result** | `1992-04-01` |
 
@@ -233,7 +233,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 
 <div class="nostroke_table"></div>
 
-| **Description** | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` date. `origin` defaults to `2000-01-03` for buckets that don't include a month or year interval, and to `2000-01-01` for month and year buckets. |
+| **Description** | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01` when `bucket_width` is a number of months or coarser units, else `2000-01-03`. Note that `2000-01-03` is a Monday. |
 | **Example** | `time_bucket(INTERVAL '2 weeks', DATE '1992-04-20', DATE '1992-04-01')` |
 | **Result** | `1992-04-15` |
 
