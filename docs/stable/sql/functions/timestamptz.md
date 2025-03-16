@@ -172,9 +172,11 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 | [`make_timestamptz(microseconds)`](#make_timestamptzmicroseconds) | The `TIMESTAMP WITH TIME ZONE` for the given µs since the epoch. |
 | [`strftime(timestamptz, format)`](#strftimetimestamptz-format) | Converts a `TIMESTAMP WITH TIME ZONE` value to string according to the [format string]({% link docs/stable/sql/functions/dateformat.md %}#format-specifiers). |
 | [`strptime(text, format)`](#strptimetext-format) | Converts string to `TIMESTAMP WITH TIME ZONE` according to the [format string]({% link docs/stable/sql/functions/dateformat.md %}#format-specifiers) if `%Z` is specified. |
-| [`time_bucket(bucket_width, timestamptz[, offset])`](#time_bucketbucket_width-timestamptz-offset) | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
-| [`time_bucket(bucket_width, timestamptz[, origin])`](#time_bucketbucket_width-timestamptz-origin) | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamptz. `origin` defaults to 2000-01-03 00:00:00+00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00+00 for month and year buckets. |
-| [`time_bucket(bucket_width, timestamptz[, timezone])`](#time_bucketbucket_width-timestamptz-timezone) | Truncate `timestamptz` by the specified interval `bucket_width`. Bucket starts and ends are calculated using `timezone`. `timezone` is a varchar and defaults to UTC. |
+| [`time_bucket(bucket_width, timestamptz[, offset])`](#time_bucketbucket_width-timestamptz-offset) | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at `2000-01-01 00:00:00+00:00 [+ offset]` when `bucket_width` is a number of months or coarser units, else `2000-01-03 00:00:00+00:00 [+ offset]`. Note that `2000-01-03` is a Monday. |
+| [`time_bucket(bucket_width, timestamptz[, origin])`](#time_bucketbucket_width-timestamptz-origin) | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01 00:00:00+00:00` when `bucket_width` is a number of months or coarser units, else `2000-01-03 00:00:00+00:00`. Note that `2000-01-03` is a Monday. |
+| [`time_bucket(bucket_width, timestamptz[, timezone])`](#time_bucketbucket_width-timestamptz-origin) | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01 00:00:00` in the provided `timezone` when `bucket_width` is a number of months or coarser units, else `2000-01-03 00:00:00` in the provided `timezone`. The default timezone is `'UTC'`. Note that `2000-01-03` is a Monday. |
+
+
 
 #### `age(timestamptz, timestamptz)`
 
@@ -356,7 +358,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 <div class="nostroke_table"></div>
 
-| **Description** | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. |
+| **Description** | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at `2000-01-01 00:00:00+00:00 [+ offset]` when `bucket_width` is a number of months or coarser units, else `2000-01-03 00:00:00+00:00 [+ offset]`. Note that `2000-01-03` is a Monday. |
 | **Example** | `time_bucket(INTERVAL '10 minutes', TIMESTAMPTZ '1992-04-20 15:26:00-07', INTERVAL '5 minutes')` |
 | **Result** | `1992-04-20 15:25:00-07` |
 
@@ -364,7 +366,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 <div class="nostroke_table"></div>
 
-| **Description** | Truncate `timestamptz` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamptz. `origin` defaults to 2000-01-03 00:00:00+00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00+00 for month and year buckets. |
+| **Description** | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01 00:00:00+00:00` when `bucket_width` is a number of months or coarser units, else `2000-01-03 00:00:00+00:00`. Note that `2000-01-03` is a Monday. |
 | **Example** | `time_bucket(INTERVAL '2 weeks', TIMESTAMPTZ '1992-04-20 15:26:00-07', TIMESTAMPTZ '1992-04-01 00:00:00-07')` |
 | **Result** | `1992-04-15 00:00:00-07` |
 
@@ -372,9 +374,9 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 <div class="nostroke_table"></div>
 
-| **Description** | Truncate `timestamptz` by the specified interval `bucket_width`. Bucket starts and ends are calculated using `timezone`. `timezone` is a varchar and defaults to UTC. |
+| **Description** | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01 00:00:00` in the provided `timezone` when `bucket_width` is a number of months or coarser units, else `2000-01-03 00:00:00` in the provided `timezone`. The default timezone is `'UTC'`. Note that `2000-01-03` is a Monday. |
 | **Example** | `time_bucket(INTERVAL '2 days', TIMESTAMPTZ '1992-04-20 15:26:00-07', 'Europe/Berlin')` |
-| **Result** | `1992-04-19 15:00:00-07` |
+| **Result** | `1992-04-19 15:00:00-07` (=`1992-04-20 00:00:00 Europe/Berlin`) |
 
 There are also dedicated extraction functions to get the [subfields]({% link docs/stable/sql/functions/datepart.md %}).
 
