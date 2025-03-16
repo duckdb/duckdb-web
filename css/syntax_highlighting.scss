@@ -47,7 +47,7 @@
 // attributes (used for placeholders)
 .highlight :is(.na){
 	color: #d52753;
-	font-family: $fontMonoBold;
+	font-family: $fontMonoItalicBold;
 }
 
 body.documentation .highlight code a{
@@ -148,7 +148,7 @@ html.darkmode,
 
 	.highlight :is(.na){
 		color: #ff6480;
-		font-family: $fontMonoBold;
+		font-family: $fontMonoItalicBold;
 	}
 	
 	// class names
