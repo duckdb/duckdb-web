@@ -110,7 +110,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
      * For example: `CREATE TABLE ⟨your_table_name⟩ AS FROM '⟨your_filename.parquet⟩'`.
      * Copy the characters from here: `⟨⟩`.
      * These characters are known in LaTeX code as `\langle` and `\rangle`.
-     * *Avoid* using artihmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
+     * *Avoid* using arithmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
 
 ### Python Style
 
