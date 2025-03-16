@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: substrait
   description: Allows conversion execution of Substrait query plans
-  version: 1.2.0
+  version: 1.2.1
   language: C++
   build: cmake
   license: Apache-2.0
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: substrait-io/duckdb-substrait-extension
-  ref: a1b341cc3df16c55535c12acce375040ffe50347
+  ref: 2a8739cdceb4b31f52319733acb3521f04274eb2
 
 docs:
   hello_world: |
@@ -32,8 +32,8 @@ redirect_from:
 
 extension_star_count: 37
 extension_star_count_pretty: 37
-extension_download_count: 457
-extension_download_count_pretty: 457
+extension_download_count: 494
+extension_download_count_pretty: 494
 image: '/images/community_extensions/social_preview/preview_community_extension_substrait.png'
 layout: community_extension_doc
 ---

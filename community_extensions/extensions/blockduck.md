@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: blockduck
   description: Live SQL Queries on Blockchain
-  version: 0.6.0
+  version: 0.7.0
   language: C++
   build: cmake
   license: MIT
@@ -18,15 +18,15 @@ extension:
 
 repo:
   github: luohaha/BlockDuck
-  ref: a3b9dd692ff06488e1b85c1f74220d21bda9ab67
+  ref: 074b7b1fe81fcc0464358636754cefc23d798cb5
 
 docs:
   https://yixins-organization.gitbook.io/blockduck-docs
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 421
-extension_download_count_pretty: 421
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_blockduck.png'
 layout: community_extension_doc
 ---
@@ -54,6 +54,10 @@ LOAD {{ page.extension.name }};
 
 |            function_name            | function_type | description | comment | examples |
 |-------------------------------------|---------------|-------------|---------|----------|
+| bitcoin_blocks_rpc                  | table         | NULL        | NULL    | []       |
+| bitcoin_inputs_rpc                  | table         | NULL        | NULL    | []       |
+| bitcoin_outputs_rpc                 | table         | NULL        | NULL    | []       |
+| bitcoin_transactions_rpc            | table         | NULL        | NULL    | []       |
 | blockduck_create_contract_event_rpc | pragma        | NULL        | NULL    | []       |
 | blockduck_create_contract_view_rpc  | pragma        | NULL        | NULL    | []       |
 | blockduck_set_configs               | pragma        | NULL        | NULL    | []       |
