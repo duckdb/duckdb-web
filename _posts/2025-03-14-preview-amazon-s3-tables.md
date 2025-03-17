@@ -92,14 +92,14 @@ CREATE SECRET (
 );
 ```
 
-Alternatively, you can set the AWS key, secret, and region values manually:
+Alternatively, you can set the AWS key, secret, and region values manually. For example:
 
 ```sql
 CREATE SECRET (
     TYPE s3,
-    KEY_ID '⟨your_access_key_id⟩',
-    SECRET '⟨your_secret_access_key⟩',
-    REGION '⟨your_region⟩'
+    KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
+    SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
+    REGION '⟨us-east-1⟩'
 );
 ```
 
