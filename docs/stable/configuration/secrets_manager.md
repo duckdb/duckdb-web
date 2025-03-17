@@ -89,7 +89,7 @@ CREATE SECRET secret1 (
     TYPE s3,
     KEY_ID 'my_secret_key1',
     SECRET 'my_secret_value1',
-    SCOPE 's3://my-bucket'
+    SCOPE 's3://my_bucket'
 );
 ```
 
@@ -98,7 +98,7 @@ CREATE SECRET secret2 (
     TYPE s3,
     KEY_ID 'my_secret_key2',
     SECRET 'my_secret_value2',
-    SCOPE 's3://my-other-bucket'
+    SCOPE 's3://my_other_bucket'
 );
 ```
 

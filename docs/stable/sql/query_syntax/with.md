@@ -63,7 +63,7 @@ FROM
     (⟨complex_query⟩) AS t3(x);
 ```
 
-If `⟨complex_query⟩` is expensive, materializing it with the `MATERIALIZED` keyword can improve performance. In this case, `⟨complex_query⟩` is evaluated only once.
+If `complex_query` is expensive, materializing it with the `MATERIALIZED` keyword can improve performance. In this case, `complex_query` is evaluated only once.
 
 ```sql
 WITH t(x) AS MATERIALIZED (⟨complex_query⟩)
@@ -94,7 +94,9 @@ FROM
 `WITH RECURSIVE` can be used to make recursive calculations. For example, here is how `WITH RECURSIVE` could be used to calculate the first ten Fibonacci numbers:
 
 ```sql
-WITH RECURSIVE FibonacciNumbers (RecursionDepth, FibonacciNumber, NextNumber) AS (
+WITH RECURSIVE FibonacciNumbers (
+    RecursionDepth, FibonacciNumber, NextNumber
+) AS (
         -- Base case
         SELECT
             0 AS RecursionDepth,
@@ -353,13 +355,12 @@ WITH RECURSIVE tbl(a,b) USING KEY (a) AS (
     SELECT a, b
     FROM (VALUES (1, 3), (2, 4)) t(a, b)
 	    UNION
-    SELECT a+1, b
+    SELECT a + 1, b
     FROM tbl
     WHERE a < 3)
 SELECT *
 FROM tbl
 ```
-
 
 | a | b |
 |--:|--:|
@@ -368,10 +369,12 @@ FROM tbl
 | 3 | 3 |
 
 ### Example: `USING KEY` References Union Table
+
 As well as using the union table as a dictionary, we can now reference it in queries. This allows us to use results from not just the previous iteration, but also earlier ones. This new feature makes certain algorithms easier to implement.
 
 One example is the connected components algorithm. For each node, the algorithm determines the node with the lowest ID to which it is connected. To achieve this, we use the entries in the union table to track the lowest ID found for a node. If a new incoming row contains a lower ID, we update this value.
-<img  id="uk-example" alt="Example graph" style="width: 700px; text-align: center">
+
+<img id="uk-example" alt="Example graph" style="width: 700px; text-align: center">
 
 ```sql
 CREATE TABLE nodes (id INTEGER);
@@ -384,15 +387,15 @@ INSERT INTO edges VALUES
 
 ```sql
 WITH RECURSIVE cc(id, comp) USING KEY (id) AS (
-  SELECT n.id, n.id AS comp
-  FROM   nodes AS n
-    UNION
-  (SELECT DISTINCT ON (u.id) u.id, v.comp
-  FROM   recurring.cc AS u, cc AS v, edges AS e
-  WHERE  ((e.node1id, e.node2id) = (u.id, v.id)
-    OR (e.node2id, e.node1id) = (u.id, v.id))
-    AND    v.comp < u.comp
-  ORDER  BY u.id ASC, v.comp ASC)
+    SELECT n.id, n.id AS comp
+    FROM nodes AS n
+        UNION
+    (SELECT DISTINCT ON (u.id) u.id, v.comp
+    FROM recurring.cc AS u, cc AS v, edges AS e
+    WHERE ((e.node1id, e.node2id) = (u.id, v.id)
+       OR (e.node2id, e.node1id) = (u.id, v.id))
+      AND v.comp < u.comp
+    ORDER BY u.id ASC, v.comp ASC)
 )
 TABLE cc
 ORDER BY id;

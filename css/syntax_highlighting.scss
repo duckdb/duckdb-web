@@ -18,7 +18,7 @@
 }
 
 // properties
-.highlight :is(.py) {
+.highlight :is(.py){
 	color: #976F4D;
 }
 
@@ -39,9 +39,15 @@
 }
 
 // functions
-.highlight :is(.nf, .na, .nt){
+.highlight :is(.nf, .nt){
 	color: #23974a;
 	font-family: $fontMonoBold;
+}
+
+// attributes (used for placeholders)
+.highlight :is(.na){
+	color: #d52753;
+	font-family: $fontMonoItalicBold;
 }
 
 body.documentation .highlight code a{
@@ -135,9 +141,14 @@ html.darkmode,
 	}
 	
 	// functions
-	.highlight :is(.nf, .na, .nt){
+	.highlight :is(.nf, .nt){
 		color: #3fc56b;
 		font-family: $fontMonoBold;
+	}
+
+	.highlight :is(.na){
+		color: #ff6480;
+		font-family: $fontMonoItalicBold;
 	}
 	
 	// class names

@@ -100,7 +100,7 @@ This outputs:
 ## Force Installing to Upgrade Extensions
 
 When DuckDB installs an extension, it is copied to a local directory to be cached and avoid future network traffic.
-Any subsequent calls to `INSTALL ⟨extension_name⟩` will use the local version instead of downloading the extension again.
+Any subsequent calls to `INSTALL ⟨extension_name⟩`{:.language-sql .highlight} will use the local version instead of downloading the extension again.
 To force re-downloading the extension, run:
 
 ```sql
@@ -140,11 +140,11 @@ to the [Client API documentation]({% link docs/stable/clients/overview.md %})
 
 By default, extensions are installed under the user's home directory:
 
-```text
+```{:.language-sql .highlight}
 ~/.duckdb/extensions/⟨duckdb_version⟩/⟨platform_name⟩/
 ```
 
-For stable DuckDB releases, the `⟨duckdb_version⟩` will be equal to the version tag of that release. For nightly DuckDB builds, it will be equal
+For stable DuckDB releases, the `⟨duckdb_version⟩`{:.language-sql .highlight} will be equal to the version tag of that release. For nightly DuckDB builds, it will be equal
 to the short git hash of the build. So for example, the extensions for DuckDB version v0.10.3 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.3/osx_arm64/`.
 An example installation path for a nightly DuckDB build could be `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
 

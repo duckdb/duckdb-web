@@ -15,27 +15,28 @@ DuckDB can read S3 Express One buckets using the [`httpfs` extension]({% link do
 The configuration of S3 Express One buckets is similar to [regular S3 buckets]({% link docs/stable/guides/network_cloud_storage/s3_import.md %}) with one exception:
 we have to specify the endpoint according to the following pattern:
 
-```text
-s3express-⟨availability zone⟩.⟨region⟩.amazonaws.com
+```sql
+s3express-⟨availability_zone⟩.⟨region⟩.amazonaws.com
 ```
 
-where the `⟨availability zone⟩` (e.g., `use-az5`) can be obtained from the S3 Express One bucket's configuration page and the `⟨region⟩` is the AWS region (e.g., `us-east-1`).
+where the `⟨availability_zone⟩`{:.language-sql .highlight} (e.g., `use-az5`) can be obtained from the S3 Express One bucket's configuration page and the `⟨region⟩`{:.language-sql .highlight} is the AWS region (e.g., `us-east-1`).
 
 For example, to allow DuckDB to use an S3 Express One bucket, configure the [Secrets manager]({% link docs/stable/sql/statements/create_secret.md %}) as follows:
 
 ```sql
 CREATE SECRET (
     TYPE s3,
-    REGION 'us-east-1',
-    KEY_ID 'AKIAIOSFODNN7EXAMPLE',
-    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-    ENDPOINT 's3express-use1-az5.us-east-1.amazonaws.com'
+    KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
+    SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
+    REGION '⟨us-east-1⟩',
+    ENDPOINT 's3express-⟨use1-az5⟩.⟨us-east-1⟩.amazonaws.com'
 );
 ```
 
 ## Instance Location
 
-For best performance, make sure that the EC2 instance is in the same availability zone as the S3 Express One bucket you are querying. To determine the mapping between zone names and zone IDs, use the `aws ec2 describe-availability-zones` command.
+For best performance, make sure that the EC2 instance is in the same availability zone as the S3 Express One bucket you are querying.
+To determine the mapping between zone names and zone IDs, use the `aws ec2 describe-availability-zones` command.
 
 * Zone name to zone ID mapping:
 

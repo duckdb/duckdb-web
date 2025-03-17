@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 6844985eff38523161e079728d36e4cfc874c51a
+  revision: 31d0bf71520f4815983b017f892e99e076daaa97
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -183,7 +183,7 @@ GEM
     mini_portile2 (2.8.8)
     net-http (0.6.0)
       uri
-    nokogiri (1.18.3)
+    nokogiri (1.18.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     octokit (4.25.1)

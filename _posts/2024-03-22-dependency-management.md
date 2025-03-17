@@ -183,7 +183,8 @@ template”.
 Now to clone your newly created extension repo (including its submodules) and initialize the template:
 
 ```batch
-git clone https://github.com/⟨your-username⟩/⟨your-extension-repo⟩ --recurse-submodules
+git clone --recurse-submodules \
+    https://github.com/⟨your_username⟩/⟨your_extension_repo⟩
 cd your-extension-repo
 ./scripts/bootstrap-template.py url_parser
 ```

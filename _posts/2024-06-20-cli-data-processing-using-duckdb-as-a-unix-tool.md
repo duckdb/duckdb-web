@@ -183,14 +183,14 @@ COPY (
 
 This query produces the same result as the Unix command's output shown [above](#unix-shell-cut).
 
-To turn this into a standalone CLI command, we can invoke the DuckDB command line client with the `-c ⟨query⟩` argument, which runs the SQL query and exits once it's finished.
+To turn this into a standalone CLI command, we can invoke the DuckDB command line client with the `-c ⟨query⟩`{:.language-sql .highlight} argument, which runs the SQL query and exits once it's finished.
 Using this technique, the query above can be turned into the following one-liner:
 
 ```bash
 duckdb -c "COPY (SELECT #1, #3 FROM 'pop.csv') TO '/dev/stdout/'"
 ```
 
-In the following, we'll omit the code blocks using the standalone `duckdb` command: all solutions can be executed in the `duckdb -c ⟨query⟩` template and yield the same result as the solutions using Unix tools.
+In the following, we'll omit the code blocks using the standalone `duckdb`{:.language-sql .highlight} command: all solutions can be executed in the `duckdb -c ⟨query⟩`{:.language-sql .highlight} template and yield the same result as the solutions using Unix tools.
 
 ### Sorting Files
 

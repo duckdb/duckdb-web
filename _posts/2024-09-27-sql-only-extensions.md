@@ -100,8 +100,9 @@ The first step is to create your own GitHub repo from the [DuckDB Extension Temp
 
 Then clone your new repository onto your local machine using the terminal:
 
-```batch
-git clone --recurse-submodules https://github.com/⟨you⟩/⟨your-new-extension-repo⟩.git
+```bash
+git clone --recurse-submodules \
+    https://github.com/⟨your_github_username⟩/⟨your_extension_repo⟩.git
 ```
 
 Note that `--recurse-submodules` will ensure DuckDB is pulled which is required to build the extension.

@@ -27,8 +27,8 @@ Similarly to other SQL dialects and programming languages, identifiers in DuckDB
 In some cases, duplicate identifiers can occur, e.g., column names may conflict when unnesting a nested data structure.
 In these cases, DuckDB automatically deduplicates column names by renaming them according to the following rules:
 
-* For a column named `⟨name⟩`, the first instance is not renamed.
-* Subsequent instances are renamed to `⟨name⟩_⟨count⟩`, where `⟨count⟩` starts at 1.
+* For a column named `⟨name⟩`{:.language-sql .highlight}, the first instance is not renamed.
+* Subsequent instances are renamed to `⟨name⟩_⟨count⟩`{:.language-sql .highlight}, where `⟨count⟩`{:.language-sql .highlight} starts at 1.
 
 For example:
 

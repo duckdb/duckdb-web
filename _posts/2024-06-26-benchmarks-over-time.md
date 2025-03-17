@@ -506,7 +506,7 @@ As a result, improvements from a new feature only appear in these results once t
 
 ### Window Functions Benchmark
 
-Each benchmark query follows the format below, but with different sets of window functions in the `⟨window function(s)⟩` placeholder.
+Each benchmark query follows the format below, but with different sets of window functions in the `⟨window_function(s)⟩`{:.language-sql .highlight} placeholder.
 The table in use is the largest table from the H2O.ai join benchmark, and in this case the 5 GB scale was used.
 
 ```sql
@@ -518,7 +518,7 @@ CREATE TABLE windowing_results AS
         id2,
         id3,
         v2,
-        ⟨window function(s)⟩
+        ⟨window_function(s)⟩
     FROM join_benchmark_largest_table;
 ```
 

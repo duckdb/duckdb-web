@@ -73,7 +73,7 @@ to `LOAD` the spatial extension (again ignoring the statement if it is already l
 
 #### Extension Repository
 
-Optionally a repository can be provided where the extension should be installed from, by appending `FROM ⟨repository⟩` to the `INSTALL` / `FORCE INSTALL` command.
+Optionally a repository can be provided where the extension should be installed from, by appending `FROM ⟨repository⟩`{:.language-sql .highlight} to the `INSTALL` / `FORCE INSTALL` command.
 This repository can either be an alias, such as [`community`]({% link community_extensions/index.md %}), or it can be a direct URL, provided as a single-quoted string.
 
 After installing/loading an extension, the [`duckdb_extensions` function](#listing-extensions) can be used to get more information.

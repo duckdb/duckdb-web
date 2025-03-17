@@ -8,7 +8,7 @@ title: Documentation
 Communinity Extensions must be public, open-source, and hosted on GitHub.
 Users of such extensions are encouraged to check the relevant extension repository for giving feedback, to look at the implementation, and to report issues.
 
-To submit a Community Extension, please open a pull request to the [Community Extensions Repository](https://github.com/duckdb/community-extensions) with a single `description.yml` file in the folder `extensions/⟨name_of_the_extension⟩`.
+To submit a Community Extension, please open a pull request to the [Community Extensions Repository](https://github.com/duckdb/community-extensions) with a single `description.yml` file in the folder `extensions/⟨name_of_the_extension⟩`{:.language-sql .highlight}.
 
 ### YAML Descriptor
 
@@ -39,7 +39,7 @@ Extensions maintainers are encouraged to provide two optional fields in the desc
 
 ### Hosted Extension Documentation Page
 
-Each Community Extension has a documentation page at `https://duckdb.org/community_extensions/extensions/⟨extension_name⟩`. For example, this is the page for [quack]({% link community_extensions/extensions/quack.md %}).
+Each Community Extension has a documentation page at `https://duckdb.org/community_extensions/extensions/⟨extension_name⟩`{:.language-sql .highlight}. For example, this is the page for [quack]({% link community_extensions/extensions/quack.md %}).
 
 Documentation pages are generated from the fields provided in the YAML descriptor file that is part of the [Community Extensions Repository](https://github.com/duckdb/community-extensions) and from the auto-detected changes that a given extension introduces in DuckDB.
 
