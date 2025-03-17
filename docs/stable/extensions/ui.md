@@ -66,7 +66,7 @@ If you would like to use [MotherDuck](https://motherduck.com/) through the UI, y
 
 The local port of the HTTP server can be configured with a SQL command like:
 
-```call
+```sql
 SET ui_local_port = 4213;
 ```
 
