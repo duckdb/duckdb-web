@@ -3,12 +3,12 @@ layout: docu
 railroad: expressions/case.js
 redirect_from:
 - /docs/sql/expressions/case
-title: CASE Statement
+title: CASE Expression
 ---
 
 <div id="rrdiagram"></div>
 
-The `CASE` statement performs a switch based on a condition. The basic form is identical to the ternary condition used in many programming languages (`CASE WHEN cond THEN a ELSE b END` is equivalent to `cond ? a : b`). With a single condition this can be expressed with `IF(cond, a, b)`.
+The `CASE` expression performs a switch based on a condition. The basic form is identical to the ternary condition used in many programming languages (`CASE WHEN cond THEN a ELSE b END` is equivalent to `cond ? a : b`). With a single condition this can be expressed with `IF(cond, a, b)`.
 
 ```sql
 CREATE OR REPLACE TABLE integers AS SELECT unnest([1, 2, 3]) AS i;
@@ -29,7 +29,7 @@ SELECT i, IF(i > 2, 1, 0) AS test
 FROM integers;
 ```
 
-The `WHEN cond THEN expr` part of the `CASE` statement can be chained, whenever any of the conditions returns true for a single tuple, the corresponding expression is evaluated and returned.
+The `WHEN cond THEN expr` part of the `CASE` expression can be chained, whenever any of the conditions returns true for a single tuple, the corresponding expression is evaluated and returned.
 
 ```sql
 CREATE OR REPLACE TABLE integers AS SELECT unnest([1, 2, 3]) AS i;
@@ -43,7 +43,7 @@ FROM integers;
 | 2 | 20   |
 | 3 | 0    |
 
-The `ELSE` part of the `CASE` statement is optional. If no else statement is provided and none of the conditions match, the `CASE` statement will return `NULL`.
+The `ELSE` clause of the `CASE` expression is optional. If no `ELSE` clause is provided and none of the conditions match, the `CASE` expression will return `NULL`.
 
 ```sql
 CREATE OR REPLACE TABLE integers AS SELECT unnest([1, 2, 3]) AS i;
@@ -57,7 +57,7 @@ FROM integers;
 | 2 | NULL |
 | 3 | NULL |
 
-It is also possible to provide an individual expression after the `CASE` but before the `WHEN`. When this is done, the `CASE` statement is effectively transformed into a switch statement.
+It is also possible to provide an individual expression after the `CASE` but before the `WHEN`. When this is done, the `CASE` expression is effectively transformed into a switch statement.
 
 ```sql
 CREATE OR REPLACE TABLE integers AS SELECT unnest([1, 2, 3]) AS i;
