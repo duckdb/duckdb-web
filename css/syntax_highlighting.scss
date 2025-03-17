@@ -39,13 +39,13 @@
 }
 
 // functions
-.highlight :is(.nf, .nt){
+.highlight :is(.nf, .nt, .na){
 	color: #23974a;
 	font-family: $fontMonoBold;
 }
 
 // attributes (used for placeholders)
-.highlight :is(.na){
+.highlight :is(.ge){
 	color: #d52753;
 	font-family: $fontMonoItalicBold;
 }
@@ -141,12 +141,12 @@ html.darkmode,
 	}
 	
 	// functions
-	.highlight :is(.nf, .nt){
+	.highlight :is(.nf, .nt, .na){
 		color: #3fc56b;
 		font-family: $fontMonoBold;
 	}
 
-	.highlight :is(.na){
+	.highlight :is(.ge){
 		color: #ff6480;
 		font-family: $fontMonoItalicBold;
 	}
