@@ -28,13 +28,13 @@ After loading the `httpfs` extension, set up the credentials and S3 region to re
 ```sql
 CREATE SECRET (
     TYPE s3,
-    KEY_ID 'AKIAIOSFODNN7EXAMPLE',
-    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-    REGION 'us-east-1'
+    KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
+    SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
+    REGION '⟨us-east-1⟩'
 );
 ```
 
-> Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your-region⟩.amazonaws.com'`.
+> Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your_region⟩.amazonaws.com'`{:.language-sql .highlight}.
 
 Alternatively, use the [`aws` extension]({% link docs/stable/extensions/aws.md %}) to retrieve the credentials automatically:
 

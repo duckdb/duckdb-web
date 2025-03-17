@@ -19,15 +19,15 @@ You will need to [generate an S3 auth token](https://docs.fastly.com/en/guides/w
 ```sql
 CREATE SECRET my_secret (
     TYPE s3,
-    KEY_ID 'AKIAIOSFODNN7EXAMPLE',
-    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+    KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
+    SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
 	URL_STYLE 'path',
-    REGION 'us-east',
-    ENDPOINT 'us-east.object.fastlystorage.app' -- see note below
+    REGION '⟨us-east⟩',
+    ENDPOINT '⟨us-east⟩.object.fastlystorage.app' -- see note below
 );
 ```
 
-* `ENDPOINT` needs to point to the [Fastly endpoint for the region](https://docs.fastly.com/en/guides/working-with-object-storage#working-with-the-s3-compatible-api) you want to use (e.g `eu-central.object.fastlystorage.app`).
+* The `ENDPOINT` needs to point to the [Fastly endpoint for the region](https://docs.fastly.com/en/guides/working-with-object-storage#working-with-the-s3-compatible-api) you want to use (e.g `eu-central.object.fastlystorage.app`).
 * `REGION` must use the same region mentioned in `ENDPOINT`.
 * `URL_STYLE` needs to use `path`.
 

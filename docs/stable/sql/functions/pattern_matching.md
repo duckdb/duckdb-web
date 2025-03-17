@@ -175,7 +175,7 @@ SELECT * FROM glob('*');
 ### Globbing Semantics
 
 DuckDB's globbing implementation follows the semantics of [Python's `glob`](https://docs.python.org/3/library/glob.html) and not the `glob` used in the shell.
-A notable difference is the behavior of the `**/` construct: `**/⟨filename⟩` will not return a file with `⟨filename⟩` in top-level directory.
+A notable difference is the behavior of the `**/` construct: `**/⟨filename⟩`{:.language-sql .highlight} will not return a file with `⟨filename⟩`{:.language-sql .highlight} in top-level directory.
 For example, with a `README.md` file present in the directory, the following query finds it:
 
 ```sql

@@ -253,9 +253,9 @@ For example, to create a temporary unscoped secret to access S3, we can now use 
 ```sql
 CREATE SECRET (
     TYPE s3,
-    KEY_ID 'mykey',
-    SECRET 'mysecret',
-    REGION 'myregion'
+    KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
+    SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
+    REGION '⟨us-east-1⟩'
 );
 ```
 
@@ -266,28 +266,28 @@ CREATE SECRET secret1 (
     TYPE s3,
     KEY_ID 'my_key1',
     SECRET 'my_secret1',
-    SCOPE 's3://my-bucket'
+    SCOPE 's3://⟨my_bucket⟩'
 );
 
 CREATE SECRET secret2 (
     TYPE s3,
     KEY_ID 'my_key2',
     SECRET 'my_secret2',
-    SCOPE 's3://my-other-bucket'
+    SCOPE 's3://⟨my_other_bucket⟩'
 );
 ```
 
-Now, if the user queries something from `s3://my-other-bucket/something`, secret `secret2` will be chosen automatically for that request.
+Now, if the user queries something from `s3://⟨my_other_bucket⟩/something`{:.language-sql .highlight}, `secret2` will be chosen automatically for that request.
 
-Secrets can be listed using the built-in table-producing function, e.g., by using `FROM duckdb_secrets();`. Sensitive information will be redacted.
+Secrets can be listed using the built-in table-producing function, e.g., by using `FROM duckdb_secrets();`{:.language-sql .highlight}. Sensitive information will be redacted.
 
 In order to persist secrets between DuckDB database instances, we can now use the `CREATE PERSISTENT SECRET` command, e.g.:
 
 ```sql
 CREATE PERSISTENT SECRET my_persistent_secret (
     TYPE s3,
-    KEY_ID 'key',
-    SECRET 'secret'
+    KEY_ID 'my_key',
+    SECRET 'my_secret'
 );
 ```
 

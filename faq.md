@@ -324,7 +324,7 @@ For data science users, who often run queries in an interactive fashion, DuckDB 
 For example, CSV files can be loaded by [auto-inferring their schema]({% link docs/stable/data/csv/auto_detection.md %}) using `CREATE TABLE tbl AS FROM 'input.csv'`.
 Moreover, there numerous SQL shorthands known as [“friendly SQL”]({% link docs/stable/sql/dialect/friendly_sql.md %}) for more concise expressions, e.g., the [`GROUP BY ALL` clause]({% link docs/stable/sql/query_syntax/groupby.md %}#group-by-all).
 
-For data engineering use cases, DuckDB allows full control over the loading process, so it is possible to define the precise schema using a `CREATE TABLE tbl ⟨schema⟩` statement and populate it using a [`COPY` statement]({% link docs/stable/sql/statements/copy.md %}) that specifies the CSV's dialect (delimiter, quotes, etc.).
+For data engineering use cases, DuckDB allows full control over the loading process, so it is possible to define the precise schema using a `CREATE TABLE tbl ⟨schema⟩`{:.language-sql .highlight} statement and populate it using a [`COPY` statement]({% link docs/stable/sql/statements/copy.md %}) that specifies the CSV's dialect (delimiter, quotes, etc.).
 Most friendly SQL extensions are simple to rewrite to SQL queries that are fully compatible with PostgreSQL.
 For example, the `GROUP BY ALL` clause can be replaced with a `GROUP BY` clause and an explicit list of columns.
 

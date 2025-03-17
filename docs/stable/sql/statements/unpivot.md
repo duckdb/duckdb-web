@@ -27,10 +27,10 @@ The full syntax diagram is below, but the simplified `UNPIVOT` syntax can be sum
 UNPIVOT ⟨dataset⟩
 ON ⟨column(s)⟩
 INTO
-    NAME ⟨name-column-name⟩
-    VALUE ⟨value-column-name(s)⟩
-ORDER BY ⟨column(s)-with-order-direction(s)⟩
-LIMIT ⟨number-of-rows⟩;
+    NAME ⟨name_column_name⟩
+    VALUE ⟨value_column_name(s)⟩
+ORDER BY ⟨column(s)_with_order_direction(s)⟩
+LIMIT ⟨number_of_rows⟩;
 ```
 
 ### Example Data

@@ -103,13 +103,13 @@ CREATE SECRET (
 );
 ```
 
-> Tip To see the secrets in your session, run `FROM duckdb_secrets();`
+> Tip To see the secrets in your session, run `FROM duckdb_secrets();`{:.language-sql .highlight}
 
 Next, point DuckDB to your S3 table bucket.
 You can do so by copy-pasting the S3 Tables ARN value directly from the AWS Management Console and using it in the `ATTACH` command:
 
 ```sql
-ATTACH '⟨arn:aws:s3tables:us-east-2:111122223333:bucket/my_bucket_name⟩'
+ATTACH 'arn:aws:s3tables:⟨us-east-2⟩:⟨111122223333⟩:bucket/⟨bucket_name⟩'
     AS s3_tables_db (
         TYPE iceberg,
         ENDPOINT_TYPE s3_tables

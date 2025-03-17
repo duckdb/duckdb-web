@@ -136,7 +136,7 @@ Now it is painless to add more attributes to your data lake over time – DuckDB
 ## Inserting Data by Name
 
 Another use case for vertically stacking data is when inserting into an existing table.
-The DuckDB syntax of [`INSERT INTO ⟨my_table⟩ BY NAME`]({% link docs/stable/sql/statements/insert.md %}#insert-into--by-name) offers the same flexibility of referring to columns by name rather than by position.
+The DuckDB syntax of [`INSERT INTO ⟨my_table⟩ BY NAME`{:.language-sql .highlight}]({% link docs/stable/sql/statements/insert.md %}#insert-into--by-name) offers the same flexibility of referring to columns by name rather than by position.
 This allows you to provide the data to insert with any column order and even including only a subset of columns.
 For example:
 

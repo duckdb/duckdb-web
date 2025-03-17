@@ -50,5 +50,5 @@ CALL dsdgen(sf = 0);
 
 ## Limitations
 
-The `tpchds(⟨query_id⟩)` function runs a fixed TPC-DS query with pre-defined bind parameters (a.k.a. substitution parameters).
+The `tpchds(⟨query_id⟩)`{:.language-sql .highlight} function runs a fixed TPC-DS query with pre-defined bind parameters (a.k.a. substitution parameters).
 It is not possible to change the query parameters using the `tpcds` extension.

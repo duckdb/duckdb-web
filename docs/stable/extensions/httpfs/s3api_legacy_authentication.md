@@ -35,7 +35,7 @@ Switching between [path-style](https://docs.aws.amazon.com/AmazonS3/latest/userg
 SET s3_url_style = 'path';
 ```
 
-However, note that this may also require updating the endpoint. For example for AWS S3 it is required to change the endpoint to `s3.⟨region⟩.amazonaws.com`.
+However, note that this may also require updating the endpoint. For example for AWS S3 it is required to change the endpoint to `s3.⟨region⟩.amazonaws.com`{:.language-sql .highlight}.
 
 After configuring the correct endpoint and region, public files can be read. To also read private files, authentication credentials can be added:
 

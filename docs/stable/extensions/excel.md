@@ -99,7 +99,7 @@ Because Excel itself only really stores numbers or strings in cells, and dont en
 
 If the `all_varchar` option is set to `true`, none of the above applies and all cells are read as `VARCHAR`.
 
-When no types are specified explicitly, (e.g., when using the `read_xlsx` function instead of `COPY TO ... FROM '⟨file⟩.xlsx'`)
+When no types are specified explicitly, (e.g., when using the `read_xlsx` function instead of `COPY TO ... FROM '⟨file⟩.xlsx'`{:.language-sql .highlight})
 the types of the resulting columns are inferred based on the first "data" row in the sheet, that is:
 
 * If no explicit range is given

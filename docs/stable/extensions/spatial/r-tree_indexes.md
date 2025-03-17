@@ -123,7 +123,7 @@ Depending on you specific workload, you might want to experiment with the `max_n
 
 ## Options
 
-The following options can be passed to the `WITH` clause when creating an R-tree index: (e.g., `CREATE INDEX my_idx ON my_table USING RTREE (geom) WITH (⟨option⟩ = ⟨value⟩);`)
+The following options can be passed to the `WITH` clause when creating an R-tree index: (e.g., `CREATE INDEX my_idx ON my_table USING RTREE (geom) WITH (⟨option⟩ = ⟨value⟩);`{:.language-sql .highlight})
 
 | Option              | Description                                          |  Default                  |
 |---------------------|------------------------------------------------------|---------------------------|

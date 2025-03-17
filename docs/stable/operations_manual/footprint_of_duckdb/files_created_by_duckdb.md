@@ -24,10 +24,10 @@ DuckDB creates the following files and directories in the working directory (for
 
 | Name | Description | Example |
 |-------|-------------------|---|
-| `⟨database_filename⟩` | Database file. Only created in on-disk mode. The file can have any extension with typical extensions being `.duckdb`, `.db`, and `.ddb`. | `weather.duckdb` |
+| `⟨database_filename⟩`{:.language-sql .highlight} | Database file. Only created in on-disk mode. The file can have any extension with typical extensions being `.duckdb`, `.db`, and `.ddb`. | `weather.duckdb` |
 | `.tmp/` | Temporary directory. Only created in in-memory mode. | `.tmp/` |
-| `⟨database_filename⟩.tmp/` | Temporary directory. Only created in on-disk mode. | `weather.tmp/` |
-| `⟨database_filename⟩.wal` | [Write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) file. If DuckDB exits normally, the WAL file is deleted upon exit. If DuckDB crashes, the WAL file is required to recover data. | `weather.wal` |
+| `⟨database_filename⟩.tmp/`{:.language-sql .highlight} | Temporary directory. Only created in on-disk mode. | `weather.tmp/` |
+| `⟨database_filename⟩.wal`{:.language-sql .highlight} | [Write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) file. If DuckDB exits normally, the WAL file is deleted upon exit. If DuckDB crashes, the WAL file is required to recover data. | `weather.wal` |
 
 If you are working in a Git repository and would like to disable tracking these files by Git,
 see the instructions on using [`.gitignore` for DuckDB]({% link docs/stable/operations_manual/footprint_of_duckdb/gitignore_for_duckdb.md %}).

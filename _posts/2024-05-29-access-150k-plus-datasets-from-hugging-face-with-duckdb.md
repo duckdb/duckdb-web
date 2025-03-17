@@ -159,8 +159,8 @@ In Hugging Face repositories, dataset versions or revisions are different datase
 
 You can query different dataset versions/revisions by using the following URL:
 
-```text
-hf://datasets/⟨my-username⟩/⟨my-dataset⟩@⟨my_branch⟩/⟨path_to_file⟩
+```sql
+hf://datasets/⟨my_username⟩/⟨my_dataset⟩@⟨my_branch⟩/⟨path_to_file⟩
 ```
 
 For example:

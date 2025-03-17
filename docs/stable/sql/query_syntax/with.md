@@ -63,7 +63,7 @@ FROM
     (⟨complex_query⟩) AS t3(x);
 ```
 
-If `⟨complex_query⟩` is expensive, materializing it with the `MATERIALIZED` keyword can improve performance. In this case, `⟨complex_query⟩` is evaluated only once.
+If `complex_query` is expensive, materializing it with the `MATERIALIZED` keyword can improve performance. In this case, `complex_query` is evaluated only once.
 
 ```sql
 WITH t(x) AS MATERIALIZED (⟨complex_query⟩)

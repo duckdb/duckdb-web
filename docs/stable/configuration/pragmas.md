@@ -548,7 +548,7 @@ PRAGMA disable_checkpoint_on_shutdown;
 
 ## Temp Directory for Spilling Data to Disk
 
-By default, DuckDB uses a temporary directory named `⟨database_file_name⟩.tmp` to spill to disk, located in the same directory as the database file. To change this, use:
+By default, DuckDB uses a temporary directory named `⟨database_file_name⟩.tmp`{:.language-sql .highlight} to spill to disk, located in the same directory as the database file. To change this, use:
 
 ```sql
 SET temp_directory = '/path/to/temp_dir.tmp/';
