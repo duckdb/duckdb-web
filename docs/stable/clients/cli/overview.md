@@ -87,7 +87,7 @@ The CLI supports [autocompletion]({% link docs/stable/clients/cli/autocomplete.m
 
 ### Exiting the CLI
 
-To exit the CLI, press `Ctrl`+`D` if your platform supports it. Otherwise, press `Ctrl`+`C` or use the `.exit` command. If used a persistent database, DuckDB will automatically checkpoint (save the latest edits to disk) and close. This will remove the `.wal` file (the [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging)) and consolidate all of your data into the single-file database.
+To exit the CLI, press `Ctrl`+`D` if your platform supports it. Otherwise, press `Ctrl`+`C` or use the `.exit` command. If you used a persistent database, DuckDB will automatically checkpoint (save the latest edits to disk) and close. This will remove the `.wal` file (the [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging)) and consolidate all of your data into the single-file database.
 
 ### Dot Commands
 
@@ -232,7 +232,7 @@ Use ".open FILENAME" to reopen on a persistent database.
 
 ## Non-Interactive Usage
 
-To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
+To read/process a file and exit immediately, redirect the file contents in to `duckdb`:
 
 ```bash
 duckdb < select_example.sql
@@ -314,7 +314,7 @@ SET default_null_order = getenv('DEFAULT_NULL_ORDER');
 
 ### Restrictions for Reading Environment Variables
 
-The `getenv` function can only be run when the [`enable_external_access`]({% link docs/stable/configuration/overview.md %}#configuration-reference) is set to `true` (the default setting).
+The `getenv` function can only be run when the [`enable_external_access`]({% link docs/stable/configuration/overview.md %}#configuration-reference) option is set to `true` (the default setting).
 It is only available in the CLI client and is not supported in other DuckDB clients.
 
 ## Prepared Statements
