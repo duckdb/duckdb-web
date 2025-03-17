@@ -7,6 +7,16 @@ redirect_from:
 title: Friendly SQL
 ---
 
+TODO
+• Specifying CTE column names with the CTE name
+• Using a VALUES statement in the anchor part of the recursive CTE
+• Using a VALUES statement in a join
+• Specifying column names in the join alias
+• Creating a LIST using square brackets (LIST is a data type in DuckDB)
+• Accessing the last item in a list with [-1] like in Python
+• Extending a list easily with LIST_APPEND
+• FROM-first syntax (where SELECT * is optional)
+
 DuckDB offers several advanced SQL features and syntactic sugar to make SQL queries more concise. We refer to these colloquially as “friendly SQL”.
 
 > Several of these features are also supported in other systems while some are (currently) exclusive to DuckDB.
