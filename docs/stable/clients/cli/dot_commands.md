@@ -18,11 +18,11 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | Command | Description |
 |---|------|
 | `.bail on|off`                           | Stop after hitting an error. Default: `off`                                                                                                                                  |
-| `.binary on|off`                         | Turn binary output `on` or `off`. Default: `off`                                                                                                                             |
-| `.cd DIRECTORY`                          | Change the working directory to `DIRECTORY`                                                                                                                                  |
+| `.binary ⟨on|off⟩`                         | Turn binary output `on` or `off`. Default: `off`                                                                                                                             |
+| `.cd ⟨DIRECTORY⟩`                          | Change the working directory to `DIRECTORY`                                                                                                                                  |
 | `.changes on|off`                        | Show number of rows changed by SQL                                                                                                                                           |
 | `.columns`                               | Column-wise rendering of query results                                                                                                                                       |
-| `.constant ⟨COLOR⟩`                      | Sets the syntax highlighting color used for constant values                                                                                                                  |
+| `.constant ⟨COLOR⟩`{:.language-sql .highlight}                      | Sets the syntax highlighting color used for constant values                                                                                                                  |
 | `.constantcode ⟨CODE⟩`                   | Sets the syntax highlighting terminal code used for constant values                                                                                                          |
 | `.databases`                             | List names and files of attached databases                                                                                                                                   |
 | `.echo on|off`                           | Turn command echo `on` or `off`                                                                                                                                              |
@@ -66,11 +66,11 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 
 The `.help` text may be filtered by passing in a text string as the second argument.
 
-```text
+```sql
 .help m
 ```
 
-```text
+```sql
 .maxrows COUNT      Sets the maximum number of rows for display (default: 40). Only for duckbox mode.
 .maxwidth COUNT     Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
 .mode MODE ⟨TABLE⟩  Set output mode
