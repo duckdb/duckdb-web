@@ -125,7 +125,10 @@ Maybe surprisingly, in most months, the busiest railway station is not in Amster
 
 Let's change the question to: _Which are the top-3 busiest stations for each summer month?_
 The `arg_max()` function only helps us find the top-1 value but it is not sufficient for finding top-k results.
-Luckily, DuckDB has extensive support for SQL features, including [window functions]({% link docs/stable/sql/functions/window_functions.md %}) and we can use the [`rank()` function]({% link docs/stable/sql/functions/window_functions.md %}#rank) to find top-k values.
+
+### Using a Window Function (`OVER`)
+
+DuckDB has extensive support for SQL features, including [window functions]({% link docs/stable/sql/functions/window_functions.md %}) and we can use the [`rank()` function]({% link docs/stable/sql/functions/window_functions.md %}#rank) to find top-k values.
 Addtionally, we use [`make_date`]({% link docs/stable/sql/functions/date.md %}#make_dateyear-month-day) to reconstruct the date, [`strftime`]({% link docs/stable/sql/functions/timestamptz.md %}#strftimetimestamptz-format) to turn it into the month's name and [`array_agg`]({% link docs/stable/sql/functions/aggregates.md %}#array_aggarg):
 
 ```sql
@@ -155,6 +158,22 @@ This gives the following result:
 | 8     | August     | [Utrecht Centraal, Amsterdam Centraal, Amsterdam Sloterdijk] |
 
 We can see that the top 3 spots are shared between four stations: Utrecht Centraal, Amsterdam Centraal, Schiphol Airport, and Amsterdam Sloterdijk.
+
+### Using the `max_by(arg, val, n)` Function
+
+Starting with DuckDB version 1.1.0, you can use a variant of the [`max_by` function]({% link docs/stable/sql/functions/aggregates.md %}#max_byarg-val-n) that accepts a third parameter, `n`, for the number of rows.
+The resulting code is more concise and faster than the one using a window function.
+
+```sql
+SELECT
+    month,
+    strftime(make_date(2023, month, 1), '%B') AS month_name,
+    max_by(station, num_services, 3) AS stations,
+FROM services_per_month
+WHERE month BETWEEN 6 AND 8
+GROUP BY ALL
+ORDER BY month;
+```
 
 ### Directly Querying Parquet Files through HTTPS or S3
 
