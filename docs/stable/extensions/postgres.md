@@ -383,7 +383,7 @@ The extension exposes the following configuration parameters.
 | `pg_connection_cache`             | Whether or not to use the connection cache                                   | `true`  |
 | `pg_connection_limit`             | The maximum amount of concurrent PostgreSQL connections                      | `64`    |
 | `pg_debug_show_queries`           | DEBUG SETTING: print all queries sent to PostgreSQL to stdout                | `false` |
-| `pg_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental)               | `false` |
+| `pg_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental)               | `true`  |
 | `pg_pages_per_task`               | The amount of pages per task                                                 | `1000`  |
 | `pg_use_binary_copy`              | Whether or not to use BINARY copy to read data                               | `true`  |
 | `pg_null_byte_replacement`        | When writing NULL bytes to Postgres, replace them with the given character   | `NULL`  |
