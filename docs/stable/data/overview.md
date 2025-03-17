@@ -6,7 +6,7 @@ title: Importing Data
 ---
 
 The first step to using a database system is to insert data into that system.
-DuckDB provides can directly connect to [many popular data sources]({% link docs/stable/data/data_sources.md %}) and offers several data ingestion methods that allow you to easily and efficiently fill up the database.
+DuckDB can directly connect to [many popular data sources]({% link docs/stable/data/data_sources.md %}) and offers several data ingestion methods that allow you to easily and efficiently fill up the database.
 On this page, we provide an overview of these methods so you can select which one is best suited for your use case.
 
 ## `INSERT` Statements
