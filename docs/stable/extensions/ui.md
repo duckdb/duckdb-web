@@ -118,6 +118,17 @@ This is not recommended, as the list of databases in the UI could get
 out of date, and some ways of connecting to MotherDuck will not work
 properly.
 
+## Tips
+
+### Opening a CSV File with the DuckDB UI
+
+Using the [DuckDB CLI client]({% link docs/stable/clients/cli/overview.md %}),
+you can start the UI with a CSV available as a view using the [`-cmd` argument]({% link docs/stable/clients/cli/arguments.md %}):
+
+```bash
+duckdb -cmd "CREATE VIEW ⟨view_name⟩ AS FROM '⟨filename⟩.csv';" -ui
+```
+
 ## Limitations
 
 The UI currently does not support the ARM-based Windows platforms (`windows_arm64` and `windows_arm64_mingw`).
