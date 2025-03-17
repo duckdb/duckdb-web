@@ -117,3 +117,7 @@ Setting the polling interval to 0 will disable polling entirely.
 This is not recommended, as the list of databases in the UI could get
 out of date, and some ways of connecting to MotherDuck will not work
 properly.
+
+## Limitations
+
+The UI currently does not support the ARM-based Windows platforms (`windows_arm64` and `windows_arm64_mingw`).
