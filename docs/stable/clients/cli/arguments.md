@@ -44,7 +44,7 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-nofollow`       | Refuse to open symbolic links to database files                                                               |
 | `-noheader`       | Turn headers off                                                                                              |
 | `-no-stdin`       | Exit after processing options instead of reading stdin                                                        |
-| `-nullvalue TEXT` | Set text string for `NULL` values. Default: empty string                                                      |
+| `-nullvalue TEXT` | Set text string for `NULL` values. Default: `NULL`                                                            |
 | `-quote`          | Set [output mode]({% link docs/stable/clients/cli/output_formats.md %}) to `quote`                            |
 | `-readonly`       | Open the database read-only                                                                                   |
 | `-s COMMAND`      | Run `COMMAND` and exit                                                                                        |
