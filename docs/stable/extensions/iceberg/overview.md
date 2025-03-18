@@ -70,10 +70,7 @@ The `iceberg` works together with the [`httpfs` extension]({% link docs/stable/e
 
 ```sql
 SELECT count(*)
-FROM iceberg_scan(
-    's3://bucketname/lineitem_iceberg/metadata/v1.metadata.json',
-    allow_moved_paths = true
-);
+FROM iceberg_scan('s3://bucketname/lineitem_iceberg/metadata/v1.metadata.json');
 ```
 
 ### Access Iceberg Metadata
