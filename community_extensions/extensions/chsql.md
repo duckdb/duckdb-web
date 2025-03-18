@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: chsql
   description: ClickHouse SQL Macros for DuckDB
-  version: 1.0.7
+  version: 1.0.8
   language: SQL & C++
   build: cmake
   license: MIT
@@ -18,11 +18,12 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-clickhouse-sql
-  ref: 16bcb5b0fda0ccca22f42695295f9bb4171190fb
+  ref: 88ee1abbad3b46a37f51941db8c15926364af8df
 
 docs:
   hello_world: |
-    -- Use boring ClickHouse SQL function macros in DuckDB SQL queries. Examples:
+    -- Use 100+ boring ClickHouse SQL function macros in DuckDB SQL queries.
+    
     D SELECT toString('world') AS hello, toInt8OrZero('world') AS zero;
     ┌─────────┬───────┐
     │  hello  │ zero  │
@@ -40,6 +41,7 @@ docs:
     └────────────────────────────┴─────────────────────────────┘
 
     -- Query a remote ClickHouse instance via HTTP/S API using multiple formats
+    
     D SELECT * FROM ch_scan("SELECT number * 100 FROM numbers(3)","https://play.clickhouse.com", format := 'Parquet');
     ┌───────────────────────┐
     │ multiply(number, 100) │
@@ -93,10 +95,10 @@ docs:
     #### Legal Disclaimer
     > DuckDB ® is a trademark of DuckDB Foundation. ClickHouse® is a trademark of ClickHouse Inc. All trademarks, service marks, and logos mentioned or depicted are the property of their respective owners. The use of any third-party trademarks, brand names, product names, and company names is purely informative or intended as parody and does not imply endorsement, affiliation, or association with the respective owners.
 
-extension_star_count: 50
-extension_star_count_pretty: 50
-extension_download_count: 561
-extension_download_count_pretty: 561
+extension_star_count: 51
+extension_star_count_pretty: 51
+extension_download_count: 592
+extension_download_count_pretty: 592
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql.png'
 layout: community_extension_doc
 ---

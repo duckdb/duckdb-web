@@ -28,10 +28,10 @@ docs:
     This extension provides a scan function for Apache Avro files.
     For more information and information regarding usage, limitations and performance, see the [README](https://github.com/hannes/duckdb_avro) and the [announcement blog post](https://duckdb.org/2024/12/09/duckdb-avro-extension).
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 10488
-extension_download_count_pretty: 10.5k
+extension_star_count: 26
+extension_star_count_pretty: 26
+extension_download_count: 10141
+extension_download_count_pretty: 10.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_avro.png'
 layout: community_extension_doc
 ---
