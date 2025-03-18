@@ -91,7 +91,7 @@ SELECT * FROM test;
 
 ### Type and Range Inference
 
-Because Excel itself only really stores numbers or strings in cells, and dont enforce that all cells in a column is of the same type, the `excel` extension has to do some guesswork to "infer" and decide the types of the columns when importing an Excel sheet. While almost all columns are inferred as either `DOUBLE` or `VARCHAR`, there are some caveats:
+Because Excel itself only really stores numbers or strings in cells, and does not enforce that all cells in a column are of the same type, the `excel` extension has to do some guesswork to "infer" and decide the types of the columns when importing an Excel sheet. While almost all columns are inferred as either `DOUBLE` or `VARCHAR`, there are some caveats:
 
 * `TIMESTAMP`, `TIME`, `DATE` and `BOOLEAN` types are inferred when possible based on the _format_ applied to the cell.
 * Text cells containing `TRUE` and `FALSE` are inferred as `BOOLEAN`.
