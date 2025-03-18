@@ -8,6 +8,8 @@ excerpt: "We are happy to announce a new preview feature that adds support for A
 tags: ["extensions"]
 ---
 
+> The AWS Storage Blog also published a post on this feature, see [Streamlining access to tabular datasets stored in Amazon S3 Tables with DuckDB](https://aws.amazon.com/blogs/storage/streamlining-access-to-tabular-datasets-stored-in-amazon-s3-tables-with-duckdb/).
+
 ## Iceberg Ahead!
 
 In recent years, the [Iceberg open table format](https://iceberg.apache.org/) has become increasingly popular. Major data warehouse platforms such as
