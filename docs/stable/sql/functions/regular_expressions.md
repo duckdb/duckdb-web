@@ -95,7 +95,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 | **Description** | Splits the `string` along the `regex` and returns a row for each part. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_split_to_table('hello world; 42', ';? ')` |
-| **Result** | Three rows: `'hello'`, `'world', '42'` |
+| **Result** | Three rows: `'hello'`, `'world'`, `'42'` |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `true` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
 
