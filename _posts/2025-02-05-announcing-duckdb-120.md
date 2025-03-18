@@ -5,6 +5,7 @@ author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-2-0.svg"
 image: "/images/blog/thumbs/duckdb-release-1-2-0.png"
 excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 1.2.0, codenamed “Histrionicus”."
+tags: ["release"]
 ---
 
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).
