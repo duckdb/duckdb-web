@@ -66,7 +66,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 
 ## Using the `.help` Command
 
-The `.help` text may be filtered by passing in a text string as the second argument.
+The `.help` text may be filtered by passing in a text string as the first argument.
 
 ```sql
 .help m
