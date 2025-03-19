@@ -17,7 +17,7 @@ extension:
     - pdet
 repo:
   github: paleolimbot/duckdb-nanoarrow
-  ref: 13cacb9ef80466f40769fa165269f451c11757a2
+  ref: 24a28a3484ec514757278ae121dce507550dd4a2
 
 docs:
   hello_world: |
@@ -31,7 +31,7 @@ docs:
     COPY arrow_libraries TO 'test.arrows' (FORMAT ARROWS, BATCH_SIZE 100);
 
     -- Write to buffers: This returns IPC message BLOBs and indicates which one is the header.
-    FROM to_arrow_ipc((FROM arrow_libraries);
+    FROM to_arrow_ipc((FROM arrow_libraries));
 
 
   extended_description: |
@@ -44,8 +44,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 37
+extension_download_count_pretty: 37
 image: '/images/community_extensions/social_preview/preview_community_extension_nanoarrow.png'
 layout: community_extension_doc
 ---
