@@ -51,9 +51,7 @@ SELECT *
 FROM 'test/*.parquet';
 ```
 
-Read all files that match the glob pattern, and include a `filename` column:
-
-That specifies which file each row came from:
+Read all files that match the glob pattern, and include a `filename` column that specifies which file each row came from:
 
 ```sql
 SELECT *
@@ -130,7 +128,7 @@ EXPORT DATABASE 'target_directory' (FORMAT parquet);
 
 Parquet files are compressed columnar files that are efficient to load and process. DuckDB provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
 
-> Parquet data sets differ based on the number of files, the size of individual files, the compression algorithm used row group size, etc. These have a significant effect on performance. Please consult the [Performance Guide]({% link docs/stable/guides/performance/file_formats.md %}) for details.
+> Parquet data sets differ based on the number of files, the size of individual files, the compression algorithm used, row group size, etc. These have a significant effect on performance. Please consult the [Performance Guide]({% link docs/stable/guides/performance/file_formats.md %}) for details.
 
 ## `read_parquet` Function
 
