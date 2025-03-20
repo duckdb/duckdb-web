@@ -71,6 +71,24 @@ SET lock_configuration = true;
 
 This prevents any configuration settings from being modified from that point onwards.
 
+## Prepared Statements to Prevent SQL Injection
+
+Similarly to other SQL databases, it's recommended to use [prepared statements]({% link docs/stable/sql/query_syntax/prepared_statements.md %}) in DuckDB to prevent [SQL injection](https://en.wikipedia.org/wiki/SQL_injection).
+
+**Therefore, avoid concatenating strings for queries:**
+
+```python
+import duckdb
+duckdb.execute("SELECT * FROM (VALUES (32, 'a'), (42, 'b')) t(x) WHERE x = " + str(42)).fetchall()
+```
+
+**Instead, use prepared statements:**
+
+```python
+import duckdb
+duckdb.execute("SELECT * FROM (VALUES (32, 'a'), (42, 'b')) t(x) WHERE x = ?", [42]).fetchall()
+```
+
 ## Constrain Resource Usage
 
 DuckDB can use quite a lot of CPU, RAM, and disk space. To avoid denial of service attacks, these resources can be limited.
