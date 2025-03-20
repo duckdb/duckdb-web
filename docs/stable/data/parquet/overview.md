@@ -279,7 +279,7 @@ Or, equivalently:
 COPY
     (FROM generate_series(100_000))
     TO 'result-lz4.parquet'
-    (FORMAT parquet, COMPRESSION lz4_RAW);
+    (FORMAT parquet, COMPRESSION lz4_raw);
 ```
 
 Write data to a `BROTLI`-compressed Parquet file:
