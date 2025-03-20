@@ -1015,6 +1015,10 @@
               "url": "autocomplete"
             },
             {
+              "page": "Avro",
+              "url": "avro"
+            },
+            {
               "page": "AWS",
               "url": "aws"
             },
