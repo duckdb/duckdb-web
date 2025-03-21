@@ -15,8 +15,6 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 
 <!-- markdownlint-disable MD056 -->
 
-{:.language-sql .highlight}
-
 | Command | Description |
 |---|------|
 | `.bail ⟨on|off⟩`{:.language-sql .highlight}                           | Stop after hitting an error. Default: `off`                                                                                                                                  |
