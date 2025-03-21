@@ -4,7 +4,7 @@ title: "Maximizing Your Delta Scan Performance"
 author: "Sam Ansmink"
 thumb: "/images/blog/thumbs/delta-lake-part-2.png"
 image: "/images/blog/thumbs/delta-lake-part-2.png"
-excerpt: "We released a new version of the [Delta extension]({% link docs/stable/extensions/delta.md %}), which includes several new features and performance improvements. In this blog post we’ll put the Delta extension through its paces with some benchmarks and take a deep dive into some of the new performance-related features."
+excerpt: "We released a new version of the Delta extension](/docs/stable/extensions/delta), which includes several new features and performance improvements. In this blog post we’ll put the Delta extension through its paces with some benchmarks and take a deep dive into some of the new performance-related features."
 tags: ["extensions"]
 ---
 
@@ -145,7 +145,7 @@ FROM delta_scan('...')
 WHERE col_a > (SELECT max(col_z) FROM other_tbl);
 ```
 
-In the previous benchmarks, file skipping has only a very limited effect. The overall data is simply not big enough and many queries actually touch large parts of the data anyway.  However, when only a relatively small part of the data is touched in a query, file skipping can have a huge impact on performance. To demonstrate this, we will first generate some test data. We’ll use the same [PySpark-based](https://github.com/duckdb/duckdb-delta/blob/v0.3.0/scripts/generate_test_data.py) test data generation script as before.
+In the previous benchmarks, file skipping has only a very limited effect. The overall data is simply not big enough and many queries actually touch large parts of the data anyway.  However, when only a relatively small part of the data is touched in a query, file skipping can have a huge impact on performance. To demonstrate this, we will first generate some test data. We’ll use the same [PySpark-based](https://github.com/duckdb/duckdb-delta/blob/026345b9cf9092e3dd5ae42cc501ec8ed45ca09b/scripts/data_generator/generate_test_data.py) test data generation script as before.
 
 The table has 100 million rows and has a very basic schema with an incrementing `id` column of `INTEGER` type and a `value` column of `VARCHAR` type. If we query the data using DuckDB we will see something like:
 
