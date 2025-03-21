@@ -187,7 +187,7 @@ CREATE OR REPLACE TABLE schedule AS
     )
     SELECT timeslot, location, coalesce(event, '<empty>') AS event
     FROM timeslot_location_combinations
-    LEFT JOIN schedule_cleaned
+    LEFT JOIN schedule
         USING (timeslot, location)
     ORDER BY ALL;
 
