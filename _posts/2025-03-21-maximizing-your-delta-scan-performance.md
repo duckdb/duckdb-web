@@ -4,7 +4,7 @@ title: "Maximizing Your Delta Scan Performance"
 author: "Sam Ansmink"
 thumb: "/images/blog/thumbs/delta-lake-part-2.png"
 image: "/images/blog/thumbs/delta-lake-part-2.png"
-excerpt: "We released a new version of the Delta extension](/docs/stable/extensions/delta), which includes several new features and performance improvements. In this blog post we’ll put the Delta extension through its paces with some benchmarks and take a deep dive into some of the new performance-related features."
+excerpt: "We released a new version of the [Delta extension](/docs/stable/extensions/delta), which includes several new features and performance improvements. In this blog post we’ll put the Delta extension through its paces with some benchmarks and take a deep dive into some of the new performance-related features."
 tags: ["extensions"]
 ---
 
