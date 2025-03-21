@@ -4,21 +4,21 @@ title: "Maximizing Your Delta Scan Performance"
 author: "Sam Ansmink"
 thumb: "/images/blog/thumbs/delta-lake-part-2.png"
 image: "/images/blog/thumbs/delta-lake-part-2.png"
-excerpt: "We released a new version of the [Delta extension](/docs/stable/extensions/delta), which includes several new features and performance improvements. In this blog post, we’ll put the Delta extension through its paces with some benchmarks and take a deep dive into some of the new performance-related features."
+excerpt: "We released a new version of the [`delta` extension](/docs/stable/extensions/delta), which includes several new features and performance improvements. In this blog post, we’ll put the `delta` extension through its paces with some benchmarks and take a deep dive into some of the new performance-related features."
 tags: ["extensions"]
 ---
 
 ## Overview
 
-In our [previous]({% post_url 2024-06-10-delta %}) post, we talked about what the Delta Lake table format is all about, and how DuckDB’s Delta extension leverages the [Delta Kernel](https://github.com/delta-io/delta-kernel-rs) library to offer native support. In this blog post, we will focus on how to get the most performance out of reading Delta tables from DuckDB. We’ll start with a small recap of Delta, then demonstrate the performance gains that were made over the past few releases. Finally, we demonstrate three key features available in the latest Delta release that will ensure you get the most out of your Delta reading performance: metadata caching, file skipping and partition information pushdown.
+In our [previous]({% post_url 2024-06-10-delta %}) post, we talked about what the Delta Lake table format is all about, and how DuckDB’s `delta` extension leverages the [Delta Kernel](https://github.com/delta-io/delta-kernel-rs) library to offer native support. In this blog post, we will focus on how to get the most performance out of reading Delta tables from DuckDB. We’ll start with a small recap of Delta, then demonstrate the performance gains that were made over the past few releases. Finally, we demonstrate three key features available in the latest Delta release that will ensure you get the most out of your Delta reading performance: metadata caching, file skipping and partition information pushdown.
 
 ## The Delta Open Table Format
 
 Let’s start off with a small recap of Delta to get back up to speed. [Delta Lake](https://delta.io/) is an [Open Table Format](https://delta.io/blog/open-table-formats/) similar to [Apache Iceberg](https://iceberg.apache.org/) and [Apache Hudi](https://hudi.apache.org/). Open Table Formats are best understood as “a collection of data and metadata files” that aim to provide the flexibility of data lakes while providing some of the consistency guarantees of traditional data warehouses. In the case of Delta, the format consists of Parquet files for data and a mix of Parquet, JSON and binary files for metadata. Besides providing an improved level of consistency, the additional metadata provided by Open Table Formats allows various types of performance optimizations through things like column statistics and file skipping. For a more in-depth explanation, we refer to the [previous Delta blog post]({% post_url 2024-06-10-delta %}).
 
-## The Delta Extension
+## The `delta` Extension
 
-DuckDB natively supports reading Delta Tables through the [Delta extension]({% link docs/stable/extensions/delta.md %}). This extension is one of the [core DuckDB extensions]({% link docs/stable/extensions/core_extensions.md %}) with >70k weekly downloads. Using this extension to read from a Delta Table is really simple. Since DuckDB v1.2.0, the Delta extension will be automatically installed upon first use and loaded when invoking the `delta_scan` function.
+DuckDB natively supports reading Delta Tables through the [`delta` extension]({% link docs/stable/extensions/delta.md %}). This extension is one of the [core DuckDB extensions]({% link docs/stable/extensions/core_extensions.md %}) with >70k weekly downloads. Using this extension to read from a Delta Table is really simple. Since DuckDB v1.2.0, the `delta` extension will be automatically installed upon first use and loaded when invoking the `delta_scan` function.
 
 So for example, to read a local Delta table, simply open any DuckDB client and run:
 
@@ -35,29 +35,29 @@ SELECT * FROM delta_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩');
 
 For other cloud providers such as Azure or Google Cloud, check the [extension’s documentation page]({% link docs/stable/extensions/delta.md %}#usage).
 
-## Delta Extension v0.1.0 vs. v0.3.0 Performance Improvements
+## Performance Improvements between `delta` v0.1.0 and 0.3.0
 
-While the first release (v0.1.0) of the Delta extension already came with various performance-related features such as projection pushdown and constant filter pushdown, the features added since then have massively improved the performance of `delta_scan`. To illustrate this, our first benchmark will use the industry standard [TPC-DS]({% link docs/stable/extensions/tpcds.md %}) benchmark with the scale factor 1 data set (SF1).
+While the first release (v0.1.0) of the `delta` extension already came with various performance-related features such as projection pushdown and constant filter pushdown, the features added since then have massively improved the performance of `delta_scan`. To illustrate this, our first benchmark will use the industry standard [TPC-DS]({% link docs/stable/extensions/tpcds.md %}) benchmark with the scale factor 1 data set (SF1).
 
 ### Benchmark Setup
 
 For this benchmark, we started up an [AWS c6id.4xlarge instance](https://instances.vantage.sh/aws/ec2/c6id.4xlarge) (16 vCPUs, 32 GB RAM) and wrote the TPC-DS SF1 dataset to an S3 bucket in the same region (eu-west-1) using [PySpark](https://github.com/duckdb/duckdb-delta/blob/main/scripts/generate_test_data.py).
 Each benchmark is run a total of 6 times with the result being the median runtime of the last 5 runs with the first being considered a cold run. The aggregated results are shown in the following table.
 
-|    Result    | Total runtime | Min runtime | Max runtime | Median runtime | Queries timed out |
-|--------------|--------------:|------------:|------------:|---------------:|------------------:|
-| Delta v0.1.0 | 444.76        | 0.48        | 21.31       | 3.63           | 4                 |
-| Delta v0.3.0 | 151.06        | 0.46        | 6.15        | 1.22           | 0                 |
+|                Result              | Total runtime | Min runtime | Max runtime | Median runtime | Queries timed out |
+|------------------------------------|--------------:|------------:|------------:|---------------:|------------------:|
+| `delta`&nbsp;extension&nbsp;v0.1.0 | 444.76        | 0.48        | 21.31       | 3.63           | 4                 |
+| `delta`&nbsp;extension&nbsp;v0.3.0 | 151.06        | 0.46        | 6.15        | 1.22           | 0                 |
 
 The detailed results of the benchmark are shown in the foldout:
 <details markdown='1'>
 <summary markdown='span'>
-    Detailed TPC-DS SF1 benchmark results, delta extension v0.1.0 vs. v0.3.0
+    Detailed TPC-DS SF1 benchmark results, `delta` extension v0.1.0 vs. v0.3.0
 </summary>
 
 <div align="center">
     <a href="/images/blog/delta-performance-fig1.svg"><img src="/images/blog/delta-performance-fig1.svg"
-    alt="Detailed TPC-DS SF1 benchmark results, delta extension v0.1.0 vs. v0.3.0"
+    alt="Detailed TPC-DS SF1 benchmark results, `delta` extension v0.1.0 vs. v0.3.0"
     width="900"
     /></a></div>
 <div align="center"></div>
@@ -73,7 +73,7 @@ Now, without going into too much detail, an important part of the speedup here c
 
 ### Attaching Delta Tables
 
-Besides the general performance improvements like cardinality information propagation, several performance-related features have been added to the Delta extension as well. One of those is the ability to attach Delta tables. Using `ATTACH` to query a Delta table has multiple advantages. For starters, by using `ATTACH`, your queries can look a little cleaner when querying the same table multiple times since you don’t have to repeat the full Delta table path every time it is queried. More importantly, though, using `ATTACH` will allow DuckDB to cache/reuse certain parts of the Delta metadata, which can improve query performance. To attach the local Delta table, run:
+Besides the general performance improvements like cardinality information propagation, several performance-related features have been added to the `delta` extension as well. One of those is the ability to attach Delta tables. Using `ATTACH` to query a Delta table has multiple advantages. For starters, by using `ATTACH`, your queries can look a little cleaner when querying the same table multiple times since you don’t have to repeat the full Delta table path every time it is queried. More importantly, though, using `ATTACH` will allow DuckDB to cache/reuse certain parts of the Delta metadata, which can improve query performance. To attach the local Delta table, run:
 
 ```sql
 ATTACH './⟨path_to_your_delta_table⟩' AS ⟨your_table⟩ (TYPE delta);
@@ -265,7 +265,7 @@ For the `delta_scan` function’s `EXPLAIN ANALYZE` output, we can see two new f
 
 ### Partition Information Pushdown
 
-The final DuckDB Delta performance feature is partition information pushdown. Partition information pushdown and the partition-aware aggregation operator are relatively [new](https://github.com/duckdb/duckdb/pull/14329) features introduced in DuckDB v1.2.0. In the v0.3.0 release of the Delta extension this feature was also added, which means that DuckDB can now use the partitioning information to create query plans that can utilize the fact that the data scanned is already partitioned.
+The final DuckDB Delta performance feature is partition information pushdown. Partition information pushdown and the partition-aware aggregation operator are relatively [new](https://github.com/duckdb/duckdb/pull/14329) features introduced in DuckDB v1.2.0. In the v0.3.0 release of the `delta` extension this feature was also added, which means that DuckDB can now use the partitioning information to create query plans that can utilize the fact that the data scanned is already partitioned.
 To show the performance benefit of partition information, we will, _surprise,_ run another benchmark! This time, we chose the [TPC-H dataset]({% link docs/stable/extensions/tpch.md %}) at scale factor 10 and ran the experiment on a 32 GB MacBook Pro M1 Max. We partitioned the `lineitem` table by the `l_returnflag` and `l_linestatus` columns. We then run [Q1](https://github.com/duckdb/duckdb/blob/v1.2.1/extension/tpch/dbgen/queries/q01.sql) which looks roughly like this:
 
 ```sql
@@ -383,11 +383,11 @@ ATTACH './⟨your_delta_table_directory⟩' AS dt (
 );
 ```
 
-This should be considered an advanced use case, though, and only relevant when optimizing for specific queries. The default settings of `ATTACH` should provide the best overall performance and are recommended for most cases. Furthermore, there is ongoing work in the [underlying `delta-kernel-rs` library used by DuckDB Delta](https://github.com/delta-io/delta-kernel-rs) that aims to reduce this effect by exposing mechanisms to cleverly refresh metadata objects held by DuckDB. As soon as these mechanisms are available, we will add them to the DuckDB Delta extension, likely making these flags obsolete for anything but testing.
+This should be considered an advanced use case, though, and only relevant when optimizing for specific queries. The default settings of `ATTACH` should provide the best overall performance and are recommended for most cases. Furthermore, there is ongoing work in the [underlying `delta-kernel-rs` library used by DuckDB Delta](https://github.com/delta-io/delta-kernel-rs) that aims to reduce this effect by exposing mechanisms to cleverly refresh metadata objects held by DuckDB. As soon as these mechanisms are available, we will add them to the DuckDB `delta` extension, likely making these flags obsolete for anything but testing.
 
 ## Conclusion
 
-In this blog post, we’ve taken a look at the latest version of the DuckDB Delta extension and put it to the test with some benchmarks. We’ve run queries from the industry standard TPC benchmarks to demonstrate the large performance improvements that were made over the past releases of the Delta extensions.
+In this blog post, we’ve taken a look at the latest version of the DuckDB `delta` extension and put it to the test with some benchmarks. We’ve run queries from the industry standard TPC benchmarks to demonstrate the large performance improvements that were made over the past releases of the `delta` extension.
 
 Furthermore, we’ve taken a look at three specific techniques that can be used while working with Delta tables to improve performance even further:
 
@@ -395,4 +395,4 @@ Furthermore, we’ve taken a look at three specific techniques that can be used 
 * Using filters and data layout to reduce the number of files that need to be scanned
 * Utilizing partitioning information to speed up aggregations
 
-All in all, we think with the v0.3.0 release of the Delta extension, DuckDB can read Delta tables with excellent performance for many different workloads and highly encourage everyone to give the latest version a shot!
+All in all, we think with the v0.3.0 release of the `delta` extension, DuckDB can read Delta tables with excellent performance for many different workloads and highly encourage everyone to give the latest version a shot!
