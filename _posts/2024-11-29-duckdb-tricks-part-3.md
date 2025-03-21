@@ -15,11 +15,11 @@ where we showcase [friendly SQL features]({% link docs/stable/sql/dialect/friend
 
 | Operation | SQL instructions |
 |-----------|------------------|
-| [Excluding columns from a table](#excluding-columns-from-a-table) | `EXCLUDE`/`COLUMNS(...)`, `NOT SIMILAR TO` |
-| [Renaming columns with pattern matching](#renaming-columns-with-pattern-matching) | `COLUMNS(...) AS ...` |
-| [Loading with globbing](#loading-with-globbing) | `FROM '*.csv'` |
-| [Reordering Parquet files](#reordering-parquet-files) | `COPY (FROM ... ORDER BY ...) TO ...` |
-| [Hive partitioning](#hive-partitioning) | `hive_partitioning = true`  |
+| [Excluding columns from a table](#excluding-columns-from-a-table) | `EXCLUDE`{:.language-sql .highlight}/`COLUMNS(...)`{:.language-sql .highlight}, `NOT SIMILAR TO`{:.language-sql .highlight} |
+| [Renaming columns with pattern matching](#renaming-columns-with-pattern-matching) | `COLUMNS(...) AS ...`{:.language-sql .highlight} |
+| [Loading with globbing](#loading-with-globbing) | `FROM '*.csv'`{:.language-sql .highlight} |
+| [Reordering Parquet files](#reordering-parquet-files) | `COPY (FROM ... ORDER BY ...) TO ...`{:.language-sql .highlight} |
+| [Hive partitioning](#hive-partitioning) | `hive_partitioning = true`{:.language-sql .highlight}  |
 
 ## Dataset
 

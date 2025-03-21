@@ -15,11 +15,11 @@ Here’s a summary of what we’re going to cover:
 
 | Operation | SQL instructions |
 |-----------|---------|
-| [Fixing timestamps in CSV files](#fixing-timestamps-in-csv-files) | `regexp_replace` and `strptime` |
-| [Filling in missing values](#filling-in-missing-values) | `CROSS JOIN`, `LEFT JOIN` and `coalesce` |
-| [Repeated data transformation steps](#repeated-data-transformation-steps) | `CREATE OR REPLACE TABLE t AS … FROM t …` |
-| [Computing checksums for columns](#computing-checksums-for-columns) | `bit_xor(md5_number(COLUMNS(*)::VARCHAR))` |
-| [Creating a macro for the checksum query](#creating-a-macro-for-the-checksum-query) | `CREATE MACRO checksum(tbl) AS TABLE …` |
+| [Fixing timestamps in CSV files](#fixing-timestamps-in-csv-files) | `regexp_replace()`{:.language-sql .highlight} and `strptime()`{:.language-sql .highlight} |
+| [Filling in missing values](#filling-in-missing-values) | `CROSS JOIN`{:.language-sql .highlight}, `LEFT JOIN`{:.language-sql .highlight} and `coalesce()`{:.language-sql .highlight} |
+| [Repeated transformation steps](#repeated-data-transformation-steps) | `CREATE OR REPLACE TABLE t AS ... FROM t ...`{:.language-sql .highlight} |
+| [Computing checksums for columns](#computing-checksums-for-columns) | `bit_xor(md5_number(COLUMNS(*)::VARCHAR))`{:.language-sql .highlight} |
+| [Creating a macro for checksum](#creating-a-macro-for-the-checksum-query) | `CREATE MACRO checksum(tbl) AS TABLE ...`{:.language-sql .highlight} |
 
 ## Dataset
 
@@ -151,7 +151,7 @@ ORDER BY ALL;
 ## Repeated Data Transformation Steps
 
 Data cleaning and transformation usually happens as a sequence of transformations that shape the data into a form that’s best fitted to later analysis.
-These transformations are often done by defining newer and newer tables using [`CREATE TABLE … AS SELECT` statements]({% link docs/stable/sql/statements/create_table.md %}#create-table--as-select-ctas).
+These transformations are often done by defining newer and newer tables using [`CREATE TABLE ... AS SELECT` statements]({% link docs/stable/sql/statements/create_table.md %}#create-table--as-select-ctas).
 
 For example, in the sections above, we created `schedule_raw`, `schedule_cleaned`, and `schedule_filled`. If, for some reason, we want to skip the cleaning steps for the timestamps, we have to reformulate the query computing `schedule_filled` to use `schedule_raw` instead of `schedule_cleaned`. This can be tedious and error-prone, and it results in a lot of unused temporary data – data that may accidentally get picked up by queries that we forgot to update!
 
@@ -159,9 +159,9 @@ In interactive analysis, it’s often better to use the same table name by runni
 
 ```sql
 CREATE OR REPLACE TABLE ⟨table_name⟩ AS
-    …
+    ...
     FROM ⟨table_name⟩
-    …;
+    ...;
 ```
 
 Using this trick, we can run our analysis as follows:
