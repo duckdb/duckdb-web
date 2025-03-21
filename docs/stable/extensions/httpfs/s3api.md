@@ -17,7 +17,7 @@ The following table shows which parts of the S3 API are required for each `httpf
 |:---|:---|
 | Public file reads | HTTP Range requests |
 | Private file reads | Secret key or session token authentication |
-| File glob | [ListObjectV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html) |
+| File glob | [ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html) |
 | File writes | [Multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html) |
 
 ## Configuration and Authentication
@@ -175,7 +175,7 @@ FROM read_parquet([
 
 ### Globbing
 
-File [globbing]({% link docs/stable/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
+File [globbing]({% link docs/stable/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectsV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
 
 ```sql
 SELECT *
