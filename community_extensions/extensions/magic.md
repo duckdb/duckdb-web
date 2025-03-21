@@ -11,14 +11,14 @@ extension:
   version: 0.0.1
   language: C++
   build: cmake
-  excluded_platforms: "linux_amd64_musl;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;windows_amd64"
+  excluded_platforms: "linux_amd64_musl;windows_amd64_rtools;windows_amd64_mingw;windows_amd64"
   license: MIT
   maintainers:
     - carlopi
 
 repo:
   github: carlopi/duckdb_magic
-  ref: 63f6e5f30220a3a65cfe168099c3fdbd2d5af4bd
+  ref: 4a6f9342814898609cb6a9f7dcad45904412680a
 
 docs:
   hello_world: |
@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 540
-extension_download_count_pretty: 540
+extension_download_count: 545
+extension_download_count_pretty: 545
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'
 layout: community_extension_doc
 ---
