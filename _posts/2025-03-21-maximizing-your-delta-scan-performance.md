@@ -395,4 +395,4 @@ Furthermore, we’ve taken a look at three specific techniques that can be used 
 * Using filters and data layout to reduce the number of files that need to be scanned
 * Utilizing partitioning information to speed up aggregations
 
-All in all, we think with the v0.3.0 release of the Delta extension DuckDB can read Delta tables with excellent performance for many different workloads and highly encourage everyone to give the latest version a shot!
+All in all, we think with the v0.3.0 release of the Delta extension, DuckDB can read Delta tables with excellent performance for many different workloads and highly encourage everyone to give the latest version a shot!
