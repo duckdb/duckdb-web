@@ -121,8 +121,8 @@ repo:
 
 extension_star_count: 40
 extension_star_count_pretty: 40
-extension_download_count: 482
-extension_download_count_pretty: 482
+extension_download_count: 487
+extension_download_count_pretty: 487
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---
