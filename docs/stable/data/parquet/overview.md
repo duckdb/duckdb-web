@@ -203,7 +203,7 @@ SELECT * FROM people;
 
 DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page]({% link docs/stable/sql/statements/copy.md %}) for details, including all possible parameters for the `COPY` statement.
 
-Write a query to a snappy compressed Parquet file:
+Write a query to a Snappy-compressed Parquet file:
 
 ```sql
 COPY
@@ -262,7 +262,7 @@ COPY
     (FORMAT parquet, COMPRESSION zstd, ROW_GROUP_SIZE 100_000);
 ```
 
-Write data to an `LZ4_RAW`-compressed Parquet file:
+Write data to an LZ4-compressed Parquet file:
 
 ```sql
 COPY
@@ -280,13 +280,22 @@ COPY
     (FORMAT parquet, COMPRESSION lz4_raw);
 ```
 
-Write data to a `BROTLI`-compressed Parquet file:
+Write data to a Brotli-compressed Parquet file:
 
 ```sql
 COPY
     (FROM generate_series(100_000))
     TO 'result-brotli.parquet'
     (FORMAT parquet, COMPRESSION brotli);
+```
+
+To configure the page size of Parquet file's dictionary pages, use the `STRING_DICTIONARY_PAGE_SIZE_LIMIT` option (default: 1 MB):
+
+```sql
+COPY
+    lineitem
+    TO 'lineitem-with-custom-dictionary-size.parquet'
+    (FORMAT parquet, STRING_DICTIONARY_PAGE_SIZE_LIMIT 100_000);
 ```
 
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [“`EXPORT` statement” page]({% link docs/stable/sql/statements/export.md %}) for more details:
