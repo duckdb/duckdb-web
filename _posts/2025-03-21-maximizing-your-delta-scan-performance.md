@@ -41,7 +41,7 @@ While the first release (v0.1.0) of the `delta` extension already came with vari
 
 ### Benchmark Setup
 
-For this benchmark, we started up an [AWS c6id.4xlarge instance](https://instances.vantage.sh/aws/ec2/c6id.4xlarge) (16 vCPUs, 32 GB RAM) and wrote the TPC-DS SF1 dataset to an S3 bucket in the same region (eu-west-1) using [PySpark](https://github.com/duckdb/duckdb-delta/blob/main/scripts/generate_test_data.py).
+For this benchmark, we started up an [AWS c6id.4xlarge instance](https://instances.vantage.sh/aws/ec2/c6id.4xlarge) (16 vCPUs, 32 GB RAM) and wrote the TPC-DS SF1 dataset to an S3 bucket in the same region (eu-west-1) using [PySpark](https://github.com/duckdb/duckdb-delta/blob/026345b9cf9092e3dd5ae42cc501ec8ed45ca09b/scripts/data_generator/generate_test_data.py).
 Each benchmark is run a total of 6 times with the result being the median runtime of the last 5 runs with the first being considered a cold run. The aggregated results are shown in the following table.
 
 |                Result              | Total runtime | Min runtime | Max runtime | Median runtime | Queries timed out |
