@@ -296,3 +296,23 @@ Binder Error: Table function cannot contain subqueries
 ### Overloads
 
 Overloads for macro functions have to be set at creation, it is not possible to define a macro by the same name twice without first removing the first definition.
+
+### Recursive Functions
+
+Defining recursive functions is not supported.
+For example, the following macro – supposed to compute the the _n_th number of the Fibonacci sequence – fails:
+
+```sql
+CREATE OR REPLACE FUNCTION f(n) AS (SELECT 1);
+CREATE OR REPLACE FUNCTION f(n) AS (
+    CASE WHEN n <= 1 THEN 1
+    ELSE f(n - 1)
+    END
+);
+SELECT f(3);
+```
+
+```console
+Binder Error:
+Max expression depth limit of 1000 exceeded. Use "SET max_expression_depth TO x" to increase the maximum expression depth.
+```
