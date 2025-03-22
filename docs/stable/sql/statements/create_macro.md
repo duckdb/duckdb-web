@@ -300,7 +300,7 @@ Overloads for macro functions have to be set at creation, it is not possible to 
 ### Recursive Functions
 
 Defining recursive functions is not supported.
-For example, the following macro – supposed to compute the the _n_th number of the Fibonacci sequence – fails:
+For example, the following macro – supposed to compute the _n_th number of the Fibonacci sequence – fails:
 
 ```sql
 CREATE OR REPLACE FUNCTION f(n) AS (SELECT 1);
