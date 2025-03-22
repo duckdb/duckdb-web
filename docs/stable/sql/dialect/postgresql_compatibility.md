@@ -212,3 +212,26 @@ DESCRIBE myschema.mytable;
 | column_name | column_type      | null | key  | default | extra |
 | ----------- | ---------------- | ---- | ---- | ------- | ----- |
 | v           | ENUM('as', 'df') | YES  | NULL | NULL    | NULL  |
+
+## Exploiting Functional Dependencies for `GROUP BY`
+
+PostgreSQL can exploit functional dependencies, such as `i -> j` in the following query:
+
+```sql
+CREATE TABLE tbl (i INTEGER, j INTEGER, PRIMARY KEY (i));
+SELECT j
+FROM tbl
+GROUP BY i;
+```
+
+PostgreSQL runs the query.
+
+DuckDB fails:
+
+```console
+Binder Error:
+column "j" must appear in the GROUP BY clause or must be part of an aggregate function.
+Either add it to the GROUP BY list, or use "ANY_VALUE(j)" if the exact value of "j" is not important.
+```
+
+To work around this, add the other attributes or use the [`GROUP BY ALL` clause](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all).
