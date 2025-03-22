@@ -1541,6 +1541,16 @@
               ]
             },
             {
+              "page": "Logging",
+              "slug": "logging",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                }
+              ]
+            },
+            {
               "page": "Securing DuckDB",
               "slug": "securing_duckdb",
               "subsubfolderitems": [
