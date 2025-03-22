@@ -92,15 +92,6 @@ SELECT 'abc' SIMILAR TO '(b|c).*';   -- false
 SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 ```
 
-There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
-
-<div class="monospace_table"></div>
-
-| `SIMILAR TO`-style | POSIX-style |
-|:-------------------|:------------|
-| `SIMILAR TO`       | `~`         |
-| `NOT SIMILAR TO`   | `!~`        |
-
 ## Globbing
 
 DuckDB supports file name expansion, also known as globbing, for discovering files.
