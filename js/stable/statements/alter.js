@@ -4,7 +4,8 @@ function GenerateAlterColumnOptions(options) {
 		Choice(0, [
 			Sequence([
 				Optional(Sequence([
-					Keyword("SET DATA")
+					Keyword("SET"),
+					Optional(Keyword("DATA"))
 				])),
 				Keyword("TYPE"),
 				Expression("data-type"),
