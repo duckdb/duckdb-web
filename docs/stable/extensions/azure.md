@@ -1,5 +1,5 @@
 ---
-github_repository: https://github.com/duckdb/duckdb_azure
+github_repository: https://github.com/duckdb/duckdb-azure
 layout: docu
 redirect_from:
 - /docs/extensions/azure
