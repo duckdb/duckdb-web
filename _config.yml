@@ -44,7 +44,6 @@ plugins:
   - jekyll-seo-tag
   - jekyll-redirect-from
   - jekyll-sitemap
-  - jekyll-github-metadata
   - jekyll-git-hash
   - jekyll-toc
 

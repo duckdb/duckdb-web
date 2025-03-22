@@ -232,7 +232,6 @@ DEPENDENCIES
   jekyll-feed (= 0.17.0)
   jekyll-gist (= 1.5.0)
   jekyll-git-hash
-  jekyll-github-metadata (= 2.16.1)
   jekyll-include-cache (= 0.2.1)
   jekyll-optional-front-matter (= 0.3.2)
   jekyll-paginate (= 1.1.0)
