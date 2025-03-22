@@ -72,10 +72,27 @@ ERROR:  UNION types boolean and integer cannot be matched
 
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
-|   x |
-| --: |
-|   1 |
-|   2 |
+|    x |
+| ---: |
+|    1 |
+|    2 |
+
+## Implicit Casting on Equality Checks
+
+DuckDB performs implicit casting on equality checks, e.g., converting strings to numeric and boolean values.
+Therefore, there are several instances, where PostgreSQL throws an error while DuckDB successfully computes the result:
+
+<div class="monospace_table"></div>
+
+| Expression    | PostgreSQL | DuckDB |
+| :------------ | ---------- | ------ |
+| '1.1' = 1     | error      | true   |
+| '1.1' = 1.1   | true       | true   |
+| 1 = 1.1       | false      | false  |
+| true = 'true' | true       | true   |
+| true = 1      | error      | true   |
+| 'true' = 1    | error      | error  |
+
 
 ## Case Sensitivity for Quoted Identifiers
 
