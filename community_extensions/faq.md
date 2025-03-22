@@ -64,7 +64,7 @@ Currently some C++ wrapper code is required, but this is possibly the simplest w
 
 <div class="answer" markdown="1">
 
-Writing a DuckDB extension in Rust is possible and [several](https://github.com/duckdb/community-extensions/blob/main/extensions/crypto/description.yml) [extensions](https://github.com/duckdb/community-extensions/blob/main/extensions/evalexpr_rhai/description.yml) [exist](https://github.com/duckdb/community-extensions/blob/main/extensions/prql/description.yml) [already](https://github.com/duckdb/duckdb_delta),
+Writing a DuckDB extension in Rust is possible and [several](https://github.com/duckdb/community-extensions/blob/main/extensions/crypto/description.yml) [extensions](https://github.com/duckdb/community-extensions/blob/main/extensions/evalexpr_rhai/description.yml) [exist](https://github.com/duckdb/community-extensions/blob/main/extensions/prql/description.yml) [already](https://github.com/duckdb/duckdb-delta),
 providing various examples to draw inspiration from.
 
 Currently, writing a Rust-based DuckDB extension requires writing glue code in C++ and will force you to build through DuckDB's CMake & C++ based extension template.

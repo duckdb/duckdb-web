@@ -1,5 +1,5 @@
 ---
-github_repository: https://github.com/duckdb/duckdb_spatial
+github_repository: https://github.com/duckdb/duckdb-spatial
 layout: docu
 redirect_from:
 - /docs/extensions/spatial
