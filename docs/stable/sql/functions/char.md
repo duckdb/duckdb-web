@@ -98,6 +98,8 @@ This section describes functions and operators for examining and manipulating [`
 | [`trim(string)`](#trimstring) | Removes any spaces from either side of the `string`. |
 | [`unicode(string)`](#unicodestring) | Returns the Unicode code of the first character of the `string`. |
 | [`upper(string)`](#upperstring) | Convert `string` to upper case. |
+| [`url_decode(string)`](#url_decodestring) | Decode a URL from a representation using [Percent-Encoding](https://datatracker.ietf.org/doc/html/rfc3986#section-2.1). |
+| [`url_encode(string)`](#url_encodestring) | Encode a URL to a representation using [Percent-Encoding](https://datatracker.ietf.org/doc/html/rfc3986#section-2.1). |
 
 <!-- markdownlint-enable MD056 -->
 
@@ -779,6 +781,22 @@ SELECT
 | **Example** | `upper('Hello')` |
 | **Result** | `HELLO` |
 | **Alias** | `ucase` |
+
+#### `url_decode(string)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Decode a URL from a representation using [Percent-Encoding](https://datatracker.ietf.org/doc/html/rfc3986#section-2.1). |
+| **Example** | `url_decode('https%3A%2F%2Fduckdb.org%2Fwhy_duckdb%23portable')` |
+| **Result** | `https://duckdb.org/why_duckdb#portable` |
+
+#### `url_encode(string)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Encode a URL to a representation using [Percent-Encoding](https://datatracker.ietf.org/doc/html/rfc3986#section-2.1). |
+| **Example** | `url_encode('https://duckdb.org/why_duckdb#portable')` |
+| **Result** | `https%3A%2F%2Fduckdb.org%2Fwhy_duckdb%23portable` |
 
 ## Text Similarity Functions
 
