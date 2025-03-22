@@ -85,4 +85,4 @@ COPY orders TO 'orders'
 
 ### Handling Slashes in Columns
 
-To handle slashes in column names, use Percent-Encoding implemented by the [`url_encode` function]({ link chardocs/stable/sql/functions/char.md }#url_encodestring).
+To handle slashes in column names, use Percent-Encoding implemented by the [`url_encode` function]({ link docs/stable/sql/functions/char.md }#url_encodestring).
