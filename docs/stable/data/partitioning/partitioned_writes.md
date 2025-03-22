@@ -48,7 +48,13 @@ orders
          └── data_1.parquet
 ```
 
-The values of the partitions are automatically extracted from the data. Note that it can be very expensive to write many partitions as many files will be created. The ideal partition count depends on how large your data set is.
+The values of the partitions are automatically extracted from the data. Note that it can be very expensive to write a larger number of partitions as many files will be created. The ideal partition count depends on how large your data set is.
+
+To limit the maximum number of files the system can keep open before flushing to disk when writing using `PARTITION_BY`, use the `partitioned_write_max_open_files` configuration option (default: 100):
+
+```bash
+SET partitioned_write_max_open_files = 10;
+```
 
 > Bestpractice Writing data into many small partitions is expensive. It is generally recommended to have at least `100 MB` of data per partition.
 
