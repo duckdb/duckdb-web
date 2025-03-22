@@ -32,8 +32,8 @@ When reading, the partition columns are read from the directory structure and
 can be included or excluded depending on the `hive_partitioning` parameter.
 
 ```sql
-FROM read_parquet('test/*/*/*.parquet', hive_partitioning = true);  -- will include year, month partition columns
 FROM read_parquet('test/*/*/*.parquet', hive_partitioning = false); -- will not include year, month columns
+FROM read_parquet('test/*/*/*.parquet', hive_partitioning = true);  -- will include year, month partition columns
 ```
 
 ## Hive Partitioning
