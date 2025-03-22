@@ -1634,7 +1634,11 @@
             },
             {
               "page": "Release Calendar",
-            "url": "release_calendar"
+              "url": "release_calendar"
+            },
+            {
+              "page": "Roadmap",
+              "url": "roadmap"
             },
             {
               "page": "Building DuckDB",
