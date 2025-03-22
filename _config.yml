@@ -46,7 +46,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-github-metadata
   - jekyll-git-hash
-  - jekyll-last-modified-at
   - jekyll-toc
 
 collections:
