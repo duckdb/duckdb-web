@@ -17,73 +17,85 @@ CREATE TABLE integers (i INTEGER, j INTEGER);
 Add a new column with name `k` to the table `integers`, it will be filled with the default value `NULL`:
 
 ```sql
-ALTER TABLE integers ADD COLUMN k INTEGER;
+ALTER TABLE integers
+ADD COLUMN k INTEGER;
 ```
 
 Add a new column with name `l` to the table integers, it will be filled with the default value 10:
 
 ```sql
-ALTER TABLE integers ADD COLUMN l INTEGER DEFAULT 10;
+ALTER TABLE integers
+ADD COLUMN l INTEGER DEFAULT 10;
 ```
 
 Drop the column `k` from the table integers:
 
 ```sql
-ALTER TABLE integers DROP k;
+ALTER TABLE integers
+DROP k;
 ```
 
 Change the type of the column `i` to the type `VARCHAR` using a standard cast:
 
 ```sql
-ALTER TABLE integers ALTER i TYPE VARCHAR;
+ALTER TABLE integers
+ALTER i TYPE VARCHAR;
 ```
 
 Change the type of the column `i` to the type `VARCHAR`, using the specified expression to convert the data for each row:
 
 ```sql
-ALTER TABLE integers ALTER i SET DATA TYPE VARCHAR USING concat(i, '_', j);
+ALTER TABLE integers
+ALTER i SET DATA TYPE VARCHAR USING concat(i, '_', j);
 ```
 
 Set the default value of a column:
 
 ```sql
-ALTER TABLE integers ALTER COLUMN i SET DEFAULT 10;
+ALTER TABLE integers
+ALTER COLUMN i SET DEFAULT 10;
 ```
 
 Drop the default value of a column:
 
 ```sql
-ALTER TABLE integers ALTER COLUMN i DROP DEFAULT;
+ALTER TABLE integers
+ALTER COLUMN i DROP DEFAULT;
 ```
 
 Make a column not nullable:
 
 ```sql
-ALTER TABLE integers ALTER COLUMN i SET NOT NULL;
+ALTER TABLE integers
+ALTER COLUMN i SET NOT NULL;
 ```
 
 Drop the not-`NULL` constraint:
 
 ```sql
-ALTER TABLE integers ALTER COLUMN i DROP NOT NULL;
+ALTER TABLE integers
+ALTER COLUMN i DROP NOT NULL;
 ```
 
 Rename a table:
 
 ```sql
-ALTER TABLE integers RENAME TO integers_old;
+ALTER TABLE integers
+RENAME TO integers_old;
 ```
 
 Rename a column of a table:
 
 ```sql
-ALTER TABLE integers RENAME i TO ii;
+ALTER TABLE integers
+RENAME i TO ii;
 ```
 
 Add a primary key to a column of a table:
 
 ```sql
-ALTER TABLE integers ADD PRIMARY KEY (i);
+ALTER TABLE integers
+ADD PRIMARY KEY (i);
 ```
 
 ## Syntax
@@ -98,7 +110,8 @@ All the changes made by `ALTER TABLE` fully respect the transactional semantics,
 Rename a table:
 
 ```sql
-ALTER TABLE integers RENAME TO integers_old;
+ALTER TABLE integers
+RENAME TO integers_old;
 ```
 
 The `RENAME TO` clause renames an entire table, changing its name in the schema. Note that any views that rely on the table are **not** automatically updated.
@@ -108,8 +121,13 @@ The `RENAME TO` clause renames an entire table, changing its name in the schema.
 Rename a column of a table:
 
 ```sql
-ALTER TABLE integers RENAME i TO j;
-ALTER TABLE integers RENAME COLUMN j TO k;
+ALTER TABLE integers 
+RENAME i TO j;
+```
+
+```sql
+ALTER TABLE integers
+RENAME COLUMN j TO k;
 ```
 
 The `RENAME COLUMN` clause renames a single column within a table. Any constraints that rely on this name (e.g., `CHECK` constraints) are automatically updated. However, note that any views that rely on this column name are **not** automatically updated.
@@ -119,13 +137,15 @@ The `RENAME COLUMN` clause renames a single column within a table. Any constrain
 Add a new column with name `k` to the table `integers`, it will be filled with the default value NULL:
 
 ```sql
-ALTER TABLE integers ADD COLUMN k INTEGER;
+ALTER TABLE integers
+ADD COLUMN k INTEGER;
 ```
 
 Add a new column with name `l` to the table integers, it will be filled with the default value 10:
 
 ```sql
-ALTER TABLE integers ADD COLUMN l INTEGER DEFAULT 10;
+ALTER TABLE integers
+ADD COLUMN l INTEGER DEFAULT 10;
 ```
 
 The `ADD COLUMN` clause can be used to add a new column of a specified type to a table. The new column will be filled with the specified default value, or `NULL` if none is specified.
@@ -135,7 +155,8 @@ The `ADD COLUMN` clause can be used to add a new column of a specified type to a
 Drop the column `k` from the table `integers`:
 
 ```sql
-ALTER TABLE integers DROP k;
+ALTER TABLE integers
+DROP k;
 ```
 
 The `DROP COLUMN` clause can be used to remove a column from a table. Note that columns can only be removed if they do not have any indexes that rely on them. This includes any indexes created as part of a `PRIMARY KEY` or `UNIQUE` constraint. Columns that are part of multi-column check constraints cannot be dropped either.
@@ -145,34 +166,52 @@ If you attempt to drop a column with an index on it, DuckDB will return the foll
 Dependency Error: Cannot alter entry "..." because there are entries that depend on it.
 ```
 
-## `ALTER TYPE`
+## `[SET [DATA]] TYPE`
 
 Change the type of the column `i` to the type `VARCHAR` using a standard cast:
 
 ```sql
-ALTER TABLE integers ALTER i TYPE VARCHAR;
+ALTER TABLE integers
+ALTER i TYPE VARCHAR;
 ```
+
+> Instead of 
+> `ALTER ⟨column_name⟩ TYPE ⟨type⟩`{:.language-sql .highlight}, you can also use the equivalent
+> `ALTER ⟨column_name⟩ SET TYPE ⟨type⟩`{:.language-sql .highlight} and the 
+> `ALTER ⟨column_name⟩ SET DATA TYPE ⟨type⟩`{:.language-sql .highlight} clauses.
 
 Change the type of the column `i` to the type `VARCHAR`, using the specified expression to convert the data for each row:
 
 ```sql
-ALTER TABLE integers ALTER i SET DATA TYPE VARCHAR USING concat(i, '_', j);
+ALTER TABLE integers
+ALTER i SET DATA TYPE VARCHAR USING concat(i, '_', j);
 ```
 
-The `SET DATA TYPE` clause changes the type of a column in a table. Any data present in the column is converted according to the provided expression in the `USING` clause, or, if the `USING` clause is absent, cast to the new data type. Note that columns can only have their type changed if they do not have any indexes that rely on them and are not part of any `CHECK` constraints.
+The `[SET [DATA]] TYPE` clause changes the type of a column in a table. Any data present in the column is converted according to the provided expression in the `USING` clause, or, if the `USING` clause is absent, cast to the new data type. Note that columns can only have their type changed if they do not have any indexes that rely on them and are not part of any `CHECK` constraints.
+
+To change the sub-schema of a [`STRUCT`]({% link docs/stable/sql/data_types/struct.md %})-typed column, use `ALTER TABLE` with the `struct_insert` function.
+For example:
+
+```sql
+CREATE TABLE tbl (col STRUCT(i INTEGER));
+ALTER TABLE tbl
+ALTER col TYPE USING struct_insert(col, a := 42, b := NULL::VARCHAR);
+```
 
 ## `SET` / `DROP DEFAULT`
 
 Set the default value of a column:
 
 ```sql
-ALTER TABLE integers ALTER COLUMN i SET DEFAULT 10;
+ALTER TABLE integers
+ALTER COLUMN i SET DEFAULT 10;
 ```
 
 Drop the default value of a column:
 
 ```sql
-ALTER TABLE integers ALTER COLUMN i DROP DEFAULT;
+ALTER TABLE integers
+ALTER COLUMN i DROP DEFAULT;
 ```
 
 The `SET/DROP DEFAULT` clause modifies the `DEFAULT` value of an existing column. Note that this does not modify any existing data in the column. Dropping the default is equivalent to setting the default value to NULL.
@@ -184,13 +223,15 @@ The `SET/DROP DEFAULT` clause modifies the `DEFAULT` value of an existing column
 Add a primary key to a column of a table:
 
 ```sql
-ALTER TABLE integers ADD PRIMARY KEY (i);
+ALTER TABLE integers
+ADD PRIMARY KEY (i);
 ```
 
 Add a primary key to multiple columns of a table:
 
 ```sql
-ALTER TABLE integers ADD PRIMARY KEY (i, j);
+ALTER TABLE integers
+ADD PRIMARY KEY (i, j);
 ```
 
 ## `ADD` / `DROP CONSTRAINT`
@@ -203,9 +244,15 @@ ALTER TABLE integers ADD PRIMARY KEY (i, j);
 
 ```sql
 CREATE TABLE tbl (col VARCHAR);
-INSERT INTO tbl VALUES ('asdf'), ('42');
-DELETE FROM tbl WHERE col = 'asdf';
-ALTER TABLE tbl ALTER COLUMN col TYPE INTEGER;
+
+INSERT INTO tbl
+VALUES ('asdf'), ('42');
+
+DELETE FROM tbl
+WHERE col = 'asdf';
+
+ALTER TABLE tbl
+ALTER COLUMN col TYPE INTEGER;
 ```
 
 ```console
@@ -217,5 +264,5 @@ Currently, this is expect behavior.
 As a workaround, you can create a copy of the table:
 
 ```sql
-CREATE OR REPLACE TABLE tbl AS (FROM tbl);
+CREATE OR REPLACE TABLE tbl AS FROM tbl;
 ```
