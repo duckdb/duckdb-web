@@ -11,10 +11,16 @@ The `iceberg` extension implements support for the [Apache Iceberg open table fo
 
 ## Installing and Loading
 
-To install and load the `iceberg` extension, run:
+To install the `iceberg` extension, run:
 
 ```sql
 INSTALL iceberg;
+```
+
+Note that the `iceberg` extension is not autoloadable.
+Therefore, you need to load it before using it:
+
+```sql
 LOAD iceberg;
 ```
 
