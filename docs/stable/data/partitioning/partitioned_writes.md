@@ -10,19 +10,22 @@ title: Partitioned Writes
 Write a table to a Hive partitioned data set of Parquet files:
 
 ```sql
-COPY orders TO 'orders' (FORMAT parquet, PARTITION_BY (year, month));
+COPY orders TO 'orders'
+(FORMAT parquet, PARTITION_BY (year, month));
 ```
 
 Write a table to a Hive partitioned data set of CSV files, allowing overwrites:
 
 ```sql
-COPY orders TO 'orders' (FORMAT csv, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE);
+COPY orders TO 'orders'
+(FORMAT csv, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE);
 ```
 
 Write a table to a Hive partitioned data set of GZIP-compressed CSV files, setting explicit data files' extension:
 
 ```sql
-COPY orders TO 'orders' (FORMAT csv, PARTITION_BY (year, month), COMPRESSION gzip, FILE_EXTENSION 'csv.gz');
+COPY orders TO 'orders'
+(FORMAT csv, PARTITION_BY (year, month), COMPRESSION gzip, FILE_EXTENSION 'csv.gz');
 ```
 
 ## Partitioned Writes
@@ -64,12 +67,16 @@ Write a table to a Hive partitioned data set of .parquet files, with an index in
 
 ```sql
 COPY orders TO 'orders'
-    (FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'orders_{i}');
+(FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'orders_{i}');
 ```
 
 Write a table to a Hive partitioned data set of .parquet files, with unique filenames:
 
 ```sql
 COPY orders TO 'orders'
-    (FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'file_{uuid}');
+(FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'file_{uuid}');
 ```
+
+### Handling Slashes in Columns
+
+To handle slashes in column names, use Percent-Encoding implemented by the [`url_encode` function]({ link chardocs/stable/sql/functions/char.md }#url_encodestring).
