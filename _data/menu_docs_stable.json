@@ -1587,54 +1587,16 @@
               "url": "repositories"
             },
             {
-              "page": "Testing",
-              "slug": "sqllogictest",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "sqllogictest Introduction",
-                  "url": "intro"
-                },
-                {
-                  "page": "Writing Tests",
-                  "url": "writing_tests"
-                },
-                {
-                  "page": "Debugging",
-                  "url": "debugging"
-                },
-                {
-                  "page": "Result Verification",
-                  "url": "result_verification"
-                },
-                {
-                  "page": "Persistent Testing",
-                  "url": "persistent_testing"
-                },
-                {
-                  "page": "Loops",
-                  "url": "loops"
-                },
-                {
-                  "page": "Multiple Connections",
-                  "url": "multiple_connections"
-                },
-                {
-                  "page": "Catch",
-                  "url": "catch"
-                }
-              ]
-            },
-            {
               "page": "Profiling",
               "url": "profiling"
             },
             {
               "page": "Release Calendar",
-            "url": "release_calendar"
+              "url": "release_calendar"
+            },
+            {
+              "page": "Roadmap",
+              "url": "roadmap"
             },
             {
               "page": "Building DuckDB",
@@ -1693,6 +1655,48 @@
             {
               "page": "Benchmark Suite",
               "url": "benchmark"
+            },
+            {
+              "page": "Testing",
+              "slug": "sqllogictest",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "sqllogictest Introduction",
+                  "url": "intro"
+                },
+                {
+                  "page": "Writing Tests",
+                  "url": "writing_tests"
+                },
+                {
+                  "page": "Debugging",
+                  "url": "debugging"
+                },
+                {
+                  "page": "Result Verification",
+                  "url": "result_verification"
+                },
+                {
+                  "page": "Persistent Testing",
+                  "url": "persistent_testing"
+                },
+                {
+                  "page": "Loops",
+                  "url": "loops"
+                },
+                {
+                  "page": "Multiple Connections",
+                  "url": "multiple_connections"
+                },
+                {
+                  "page": "Catch",
+                  "url": "catch"
+                }
+              ]
             }
           ]
         },
