@@ -93,21 +93,37 @@ CREATE SECRET secret4 (
 
 ### Overview of S3 Secret Parameters
 
-Below is a complete list of the supported parameters that can be used for both the `CONFIG` and `credential_chain` providers:
+Below is a complete list of the supported parameters that can be used for both the `config` and `credential_chain` providers:
 
 | Name                          | Description                                                                           | Secret            | Type      | Default                                     |
 |:------------------------------|:--------------------------------------------------------------------------------------|:------------------|:----------|:--------------------------------------------|
-| `KEY_ID`                      | The ID of the key to use                                                              | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
-| `SECRET`                      | The secret of the key to use                                                          | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
-| `REGION`                      | The region for which to authenticate (should match the region of the bucket to query) | `S3`, `GCS`, `R2` | `STRING`  | `us-east-1`                                 |
-| `SESSION_TOKEN`               | Optionally, a session token can be passed to use temporary credentials                | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
 | `ENDPOINT`                    | Specify a custom S3 endpoint                                                          | `S3`, `GCS`, `R2` | `STRING`  | `s3.amazonaws.com` for `S3`,                |
+| `KEY_ID`                      | The ID of the key to use                                                              | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
+| `REGION`                      | The region for which to authenticate (should match the region of the bucket to query) | `S3`, `GCS`, `R2` | `STRING`  | `us-east-1`                                 |
+| `SECRET`                      | The secret of the key to use                                                          | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
+| `SESSION_TOKEN`               | Optionally, a session token can be passed to use temporary credentials                | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
+| `URL_COMPATIBILITY_MODE`      | Can help when URLs contain problematic characters                                     | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `URL_STYLE`                   | Either `vhost` or `path`                                                              | `S3`, `GCS`, `R2` | `STRING`  | `vhost` for `S3`, `path` for `R2` and `GCS` |
 | `USE_SSL`                     | Whether to use HTTPS or HTTP                                                          | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
-| `URL_COMPATIBILITY_MODE`      | Can help when URLs contain problematic characters                                     | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint URL                              | `R2`              | `STRING`  | -                                           |
+| `KMS_KEY_ID`                  | AWS KMS (Key Management Service) key for Server Side Encryption S3                    | `S3`              | `STRING`  | -                                           |
 
 ### Platform-Specific Secret Types
+
+#### S3 Secrets
+
+The httpfs extension supports [Server Side Encryption via the AWS Key Management Service (KMS) on S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html) using the `KMS_KEY_ID` option:
+
+```sql
+CREATE SECRET encrypted (
+    TYPE S3,
+    PROVIDER credential_chain,
+    CHAIN 'config',
+    REGION '⟨eu-west-1⟩',
+    KMS_KEY_ID 'arn:aws:kms:⟨region⟩:⟨account_id⟩:⟨key⟩/⟨key_id⟩',
+    SCOPE 's3://⟨bucket_sub_path⟩'
+);
+```
 
 #### R2 Secrets
 
