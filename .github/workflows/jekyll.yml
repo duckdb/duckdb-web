@@ -101,13 +101,15 @@ jobs:
         run: python3 concatenate_to_single_file.py
       - name: Convert with pandoc
         run: pandoc --defaults pandoc-configuration.yaml
+      - name: Clean Markdown file
+        run: ./clean_markdown_file.sh
       - name: Move artifacts
         run: |
           mkdir -p ../_pdf
-          sed -i '1s/^.*$/# DuckDB Documentation/' duckdb-docs.md
-          cp duckdb-docs.md ../_pdf/llms.txt
-          mv duckdb-docs.md ../_pdf
-          mv duckdb-docs.pdf ../_pdf
+          sed -i '1s/^.*$/# DuckDB Documentation/' duckdb-docs-cleaned.md
+          cp duckdb-docs-cleaned.md ../_pdf/llms.txt
+          cp duckdb-docs-cleaned.md ../_pdf/duckdb-docs.md
+          cp duckdb-docs.pdf ../_pdf
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
