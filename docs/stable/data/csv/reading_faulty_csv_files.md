@@ -33,7 +33,8 @@ These errors are designed to provide as much information as possible to allow us
 This is an example for a full error message:
 
 ```console
-Conversion Error: CSV Error on Line: 5648
+Conversion Error:
+CSV Error on Line: 5648
 Original Line: Pedro,The 90s
 Error when converting column "birth_date". date field value out of range: "The 90s", expected format is (DD-MM-YYYY)
 
@@ -62,7 +63,8 @@ Possible solutions:
 The first block provides us with information regarding where the error occurred, including the line number, the original CSV line, and which field was problematic:
 
 ```console
-Conversion Error: CSV Error on Line: 5648
+Conversion Error:
+CSV Error on Line: 5648
 Original Line: Pedro,The 90s
 Error when converting column "birth_date". date field value out of range: "The 90s", expected format is (DD-MM-YYYY)
 ```

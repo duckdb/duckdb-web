@@ -503,7 +503,8 @@ SELECT * FROM t JOIN t USING(x);
 ```
 
 ```console
-Binder Error: Duplicate alias "t" in query!
+Binder Error:
+Duplicate alias "t" in query!
 ```
 
 Adding the aliases allows the query to parse successfully:

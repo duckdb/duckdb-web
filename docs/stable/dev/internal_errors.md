@@ -10,7 +10,8 @@ Internal errors signal an assertion failure within DuckDB. They usually occur du
 After encountering an internal error, DuckDB enters safe mode where any further operations will result in the following error message:
 
 ```console
-FATAL Error: Failed: database has been invalidated because of a previous fatal error.
+FATAL Error:
+Failed: database has been invalidated because of a previous fatal error.
 The database must be restarted prior to being used again.
 ```
 

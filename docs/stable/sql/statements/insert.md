@@ -140,7 +140,8 @@ INSERT INTO tbl
 This raises as an error:
 
 ```console
-Constraint Error: Duplicate key "i: 1" violates primary key constraint.
+Constraint Error:
+Duplicate key "i: 1" violates primary key constraint.
 ```
 
 The table will contain the row that was first inserted:
@@ -286,7 +287,8 @@ INSERT INTO t1 BY NAME (SELECT id, val1 FROM t2)
 This fails with the following error:
 
 ```console
-Constraint Error: NOT NULL constraint failed: t1.val2
+Constraint Error:
+NOT NULL constraint failed: t1.val2
 ```
 
 #### Composite Primary Key
@@ -345,48 +347,6 @@ INSERT INTO tbl
     VALUES (1, 40, 700)
     ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k WHERE k < 100;
 ```
-
-### Multiple Tuples Conflicting on the Same Key
-
-#### Limitations
-
-Currently, DuckDB’s `ON CONFLICT DO UPDATE` feature is limited to enforce constraints between committed and newly inserted (transaction-local) data.
-In other words, having multiple tuples conflicting on the same key is not supported.
-If the newly inserted data has duplicate rows, an error message will be thrown, or unexpected behavior can occur.
-This also includes conflicts **only** within the newly inserted data.
-
-```sql
-CREATE TABLE tbl (i INTEGER PRIMARY KEY, j INTEGER);
-INSERT INTO tbl
-    VALUES (1, 42);
-INSERT INTO tbl
-    VALUES (1, 84), (1, 168)
-    ON CONFLICT DO UPDATE SET j = j + EXCLUDED.j;
-```
-
-This returns the following message.
-
-```console
-Invalid Input Error: ON CONFLICT DO UPDATE can not update the same row twice in the same command.
-Ensure that no rows proposed for insertion within the same command have duplicate constrained values
-```
-
-To work around this, enforce uniqueness using [`DISTINCT ON`]({% link docs/stable/sql/query_syntax/select.md %}#distinct-on-clause). For example:
-
-```sql
-CREATE TABLE tbl (i INTEGER PRIMARY KEY, j INTEGER);
-INSERT INTO tbl
-    VALUES (1, 42);
-INSERT INTO tbl
-    SELECT DISTINCT ON(i) i, j
-    FROM VALUES (1, 84), (1, 168) AS t (i, j)
-    ON CONFLICT DO UPDATE SET j = j + EXCLUDED.j;
-SELECT * FROM tbl;
-```
-
-| i |  j  |
-|--:|----:|
-| 1 | 126 |
 
 ## `RETURNING` Clause
 

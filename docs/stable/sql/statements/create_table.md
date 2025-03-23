@@ -163,7 +163,8 @@ INSERT INTO t1 VALUES (2, -1);
 ```
 
 ```console
-Constraint Error: CHECK constraint failed: t1
+Constraint Error:
+CHECK constraint failed: t1
 ```
 
 ```sql
@@ -171,7 +172,8 @@ INSERT INTO t1 VALUES (3, 101);
 ```
 
 ```console
-Constraint Error: CHECK constraint failed: t1
+Constraint Error:
+CHECK constraint failed: t1
 ```
 
 ```sql
@@ -181,7 +183,8 @@ INSERT INTO t2 VALUES (2, 5, 3);
 ```
 
 ```console
-Constraint Error: CHECK constraint failed: t2
+Constraint Error:
+CHECK constraint failed: t2
 ```
 
 `CHECK` constraints can also be added as part of the `CONSTRAINTS` clause:
@@ -198,7 +201,8 @@ INSERT INTO t3 VALUES (2, 5, 3);
 ```
 
 ```console
-Constraint Error: CHECK constraint failed: t3
+Constraint Error:
+CHECK constraint failed: t3
 ```
 
 ## Foreign Key Constraints
@@ -223,7 +227,8 @@ INSERT INTO t2 VALUES (2, 2);
 ```
 
 ```console
-Constraint Error: Violates foreign key constraint because key "id: 2" does not exist in the referenced table
+Constraint Error:
+Violates foreign key constraint because key "id: 2" does not exist in the referenced table
 ```
 
 Foreign keys can be defined on composite primary keys:
@@ -245,7 +250,8 @@ INSERT INTO t4 VALUES (2, 1, 'b');
 ```
 
 ```console
-Constraint Error: Violates foreign key constraint because key "id: 1, j: b" does not exist in the referenced table
+Constraint Error:
+Violates foreign key constraint because key "id: 1, j: b" does not exist in the referenced table
 ```
 
 Foreign keys can also be defined on unique columns:
@@ -268,7 +274,8 @@ Foreign keys with cascading deletes (`FOREIGN KEY ... REFERENCES ... ON DELETE C
 Inserting into tables with self-referencing foreign keys is currently not supported and will result in the following error:
 
 ```console
-Constraint Error: Violates foreign key constraint because key "..." does not exist in the referenced table.
+Constraint Error:
+Violates foreign key constraint because key "..." does not exist in the referenced table.
 ```
 
 ## Generated Columns
