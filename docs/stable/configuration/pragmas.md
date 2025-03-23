@@ -47,6 +47,14 @@ To list all functions:
 PRAGMA functions;
 ```
 
+For queries targeting non-existing schemas, DuckDB generates “did you mean...” style error messages.
+When there are thousands of attached databases, these errors can take a long time to generate.
+To limit the number of schemas DuckDB looks through, use the `catalog_error_max_schemas` option:
+
+```sql
+SET catalog_error_max_schemas = 10;
+```
+
 #### Table Information
 
 Get info for a specific table:
