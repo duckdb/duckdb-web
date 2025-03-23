@@ -41,8 +41,8 @@ jekyll_marker = '\n---\n\n'
 
 if not args.execute:
     print('-----------------------------------------')
-    print('DRY RUN - NOT ACTUALLY PERFORMING RENAME')
-    print('Run with --execute to perform rename')
+    print('DRY RUN - NOT ACTUALLY PERFORMING RENAME ')
+    print('Run with --execute to perform rename     ')
     print('-----------------------------------------')
 
 
