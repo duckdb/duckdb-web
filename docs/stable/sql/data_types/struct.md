@@ -103,7 +103,7 @@ SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3}, 'x space');
 
 #### `unnest` / `STRUCT.*`
 
-Rather than retrieving a single key from a struct, the `unnest` pseudo-function can be used to retrieve all keys from a struct as separate columns.
+Rather than retrieving a single key from a struct, the `unnest` special function can be used to retrieve all keys from a struct as separate columns.
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys:
 
 ```sql
