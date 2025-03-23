@@ -30,6 +30,9 @@ def reduce_clutter_in_doc(doc_body):
     # drop "Pages in This Section" sections which are only used in HTML
     doc_body = doc_body.replace("## Pages in This Section", "")
 
+    # remove comments
+    doc_body = re.sub(r"<!--[^§]*?-->", "", doc_body, flags=re.MULTILINE)
+
     # drop lines containing "---", pandoc interprets these as h2 headers
     doc_body = re.sub(r"^---$", "", doc_body, flags=re.MULTILINE)
     return doc_body
@@ -343,6 +346,7 @@ def add_blog_posts(blog_root, of):
         doc_date = blog_post_file.split("/")[-1][0:10]
         doc_body = doc.content
 
+        doc_body = reduce_clutter_in_doc(doc_body)
         doc_body = fix_language_tags_for_syntax_highlighting(doc_body)
         doc_body = replace_box_names(doc_body)
         doc_body = move_headers_down(doc_body)
