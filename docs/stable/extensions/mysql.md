@@ -44,7 +44,7 @@ The connection string determines the parameters for how to connect to MySQL as a
 | password    |                | MYSQL_PWD            |
 | port        | 0              | MYSQL_TCP_PORT       |
 | socket      | NULL           | MYSQL_UNIX_PORT      |
-| user        | ⟨current user⟩ | MYSQL_USER           |
+| user        | _current user_ | MYSQL_USER           |
 | ssl_mode    | preferred      |                      |
 | ssl_ca      |                |                      |
 | ssl_capath  |                |                      |
