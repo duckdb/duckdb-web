@@ -40,14 +40,14 @@ However, note that this may also require updating the endpoint. For example for 
 After configuring the correct endpoint and region, public files can be read. To also read private files, authentication credentials can be added:
 
 ```sql
-SET s3_access_key_id = '⟨AWS access key id⟩';
-SET s3_secret_access_key = '⟨AWS secret access key⟩';
+SET s3_access_key_id = '⟨aws_access_key_id⟩';
+SET s3_secret_access_key = '⟨aws_secret_access_key⟩';
 ```
 
 Alternatively, temporary S3 credentials are also supported. They require setting an additional session token:
 
 ```sql
-SET s3_session_token = '⟨AWS session token⟩';
+SET s3_session_token = '⟨aws_session_token⟩';
 ```
 
 The [`aws` extension]({% link docs/stable/extensions/aws.md %}) allows for loading AWS credentials.

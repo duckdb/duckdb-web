@@ -145,7 +145,7 @@ If you do not use authentication, you still need to specify the storage account 
 CREATE SECRET secret2 (
     TYPE azure,
     PROVIDER config,
-    ACCOUNT_NAME '⟨storage account name⟩'
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 
@@ -161,7 +161,7 @@ For example:
 CREATE SECRET secret3 (
     TYPE azure,
     PROVIDER credential_chain,
-    ACCOUNT_NAME '⟨storage account name⟩'
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 
@@ -172,7 +172,7 @@ CREATE SECRET secret4 (
     TYPE azure,
     PROVIDER credential_chain,
     CHAIN 'cli;env',
-    ACCOUNT_NAME '⟨storage account name⟩'
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 
@@ -194,10 +194,10 @@ Either with a secret:
 CREATE SECRET azure_spn (
     TYPE azure,
     PROVIDER service_principal,
-    TENANT_ID '⟨tenant id⟩',
-    CLIENT_ID '⟨client id⟩',
-    CLIENT_SECRET '⟨client secret⟩',
-    ACCOUNT_NAME '⟨storage account name⟩'
+    TENANT_ID '⟨tenant_id⟩',
+    CLIENT_ID '⟨client_id⟩',
+    CLIENT_SECRET '⟨client_secret⟩',
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 
@@ -207,10 +207,10 @@ Or with a certificate:
 CREATE SECRET azure_spn_cert (
     TYPE azure,
     PROVIDER service_principal,
-    TENANT_ID '⟨tenant id⟩',
-    CLIENT_ID '⟨client id⟩',
-    CLIENT_CERTIFICATE_PATH '⟨client cert path⟩',
-    ACCOUNT_NAME '⟨storage account name⟩'
+    TENANT_ID '⟨tenant_id⟩',
+    CLIENT_ID '⟨client_id⟩',
+    CLIENT_CERTIFICATE_PATH '⟨client_cert_path⟩',
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 

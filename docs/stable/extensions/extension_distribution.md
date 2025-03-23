@@ -96,7 +96,7 @@ to set up a repository.
 When installing an extension from a custom repository, DuckDB will search for both a gzipped and non-gzipped version. For example:
 
 ```sql
-INSTALL icu FROM '⟨custom repository⟩';
+INSTALL icu FROM '⟨custom_repository⟩';
 ```
 
 The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.

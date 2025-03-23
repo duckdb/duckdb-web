@@ -454,7 +454,7 @@ The query used follows the format:
 ```sql
 SELECT 
     sum(v3) AS v3 
-FROM ⟨dataframe or Parquet file⟩;
+FROM ⟨dataframe_or_Parquet_file⟩;
 ```
 
 #### Window Functions
