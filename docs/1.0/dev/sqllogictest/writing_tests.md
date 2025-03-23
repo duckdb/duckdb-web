@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /dev/writing_tests
 title: Writing Tests
 ---
 

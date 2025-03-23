@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /dev/sqllogictest/loops
 title: Loops
 ---
 
