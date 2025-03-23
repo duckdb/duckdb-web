@@ -58,10 +58,6 @@ SET partitioned_write_max_open_files = 10;
 
 > Bestpractice Writing data into many small partitions is expensive. It is generally recommended to have at least `100 MB` of data per partition.
 
-### Overwriting
-
-By default the partitioned write will not allow overwriting existing directories. Use the `OVERWRITE_OR_IGNORE` option to allow overwriting an existing directory.
-
 ### Filename Pattern
 
 By default, files will be named `data_0.parquet` or `data_0.csv`. With the flag `FILENAME_PATTERN` a pattern with `{i}` or `{uuid}` can be defined to create specific filenames:
@@ -82,6 +78,23 @@ Write a table to a Hive partitioned data set of .parquet files, with unique file
 COPY orders TO 'orders'
 (FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'file_{uuid}');
 ```
+
+
+### Overwriting
+
+By default the partitioned write will not allow overwriting existing directories. Use the `OVERWRITE_OR_IGNORE` option to allow overwriting an existing directory.
+
+### Appending
+
+To append to an existing Hive partitioned directory structure, use the `APPEND` option:
+
+```sql
+COPY orders TO 'orders'
+(FORMAT PARQUET, PARTITION_BY (year, month), APPEND);
+```
+
+Using the `APPEND` option result in a behavior similar the `OVERWRITE_OR_IGNORE, FILENAME_PATTERN '{uuid}'` options,
+but DuckDB performs an extra check for whether the file already exists and then regenerates the UUID in the rare event that it does (to avoid clashes).
 
 ### Handling Slashes in Columns
 
