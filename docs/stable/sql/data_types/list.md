@@ -109,23 +109,6 @@ These queries return `NULL`.
 SELECT [1, 2] < [1, NULL, 4] AS result;
 ```
 
-## Updating Lists
-
-Updates on lists are internally represented as an insert and a delete operation.
-Therefore, updating list values may lead to a duplicate key error on primary/unique keys.
-See the following example:
-
-```sql
-CREATE TABLE tbl (id INTEGER PRIMARY KEY, lst INTEGER[], comment VARCHAR);
-INSERT INTO tbl VALUES (1, [12, 34], 'asd');
-UPDATE tbl SET lst = [56, 78] WHERE id = 1;
-```
-
-```console
-Constraint Error: Duplicate key "id: 1" violates primary key constraint.
-If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
-```
-
 ## Functions
 
 See [List Functions]({% link docs/stable/sql/functions/list.md %}).

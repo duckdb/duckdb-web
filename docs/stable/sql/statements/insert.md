@@ -348,49 +348,6 @@ INSERT INTO tbl
     ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k WHERE k < 100;
 ```
 
-### Multiple Tuples Conflicting on the Same Key
-
-#### Limitations
-
-Currently, DuckDB’s `ON CONFLICT DO UPDATE` feature is limited to enforce constraints between committed and newly inserted (transaction-local) data.
-In other words, having multiple tuples conflicting on the same key is not supported.
-If the newly inserted data has duplicate rows, an error message will be thrown, or unexpected behavior can occur.
-This also includes conflicts **only** within the newly inserted data.
-
-```sql
-CREATE TABLE tbl (i INTEGER PRIMARY KEY, j INTEGER);
-INSERT INTO tbl
-    VALUES (1, 42);
-INSERT INTO tbl
-    VALUES (1, 84), (1, 168)
-    ON CONFLICT DO UPDATE SET j = j + EXCLUDED.j;
-```
-
-This returns the following message.
-
-```console
-Invalid Input Error:
-ON CONFLICT DO UPDATE can not update the same row twice in the same command.
-Ensure that no rows proposed for insertion within the same command have duplicate constrained values
-```
-
-To work around this, enforce uniqueness using [`DISTINCT ON`]({% link docs/stable/sql/query_syntax/select.md %}#distinct-on-clause). For example:
-
-```sql
-CREATE TABLE tbl (i INTEGER PRIMARY KEY, j INTEGER);
-INSERT INTO tbl
-    VALUES (1, 42);
-INSERT INTO tbl
-    SELECT DISTINCT ON(i) i, j
-    FROM VALUES (1, 84), (1, 168) AS t (i, j)
-    ON CONFLICT DO UPDATE SET j = j + EXCLUDED.j;
-SELECT * FROM tbl;
-```
-
-| i |  j  |
-|--:|----:|
-| 1 | 126 |
-
 ## `RETURNING` Clause
 
 The `RETURNING` clause may be used to return the contents of the rows that were inserted. This can be useful if some columns are calculated upon insert. For example, if the table contains an automatically incrementing primary key, then the `RETURNING` clause will include the automatically created primary key. This is also useful in the case of generated columns.
