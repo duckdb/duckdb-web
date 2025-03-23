@@ -107,7 +107,6 @@ jobs:
         run: |
           mkdir -p ../_pdf
           sed -i '1s/^.*$/# DuckDB Documentation/' duckdb-docs-cleaned.md
-          cp duckdb-docs-cleaned.md ../_pdf/llms.txt
           cp duckdb-docs-cleaned.md ../_pdf/duckdb-docs.md
           cp duckdb-docs.pdf ../_pdf
       - name: Upload PDF artifact
