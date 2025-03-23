@@ -1473,6 +1473,7 @@ function GenerateOrderTerms(options) {
 function GenerateFrameSpec(options) {
 	return [
 		Choice(0, [
+			Keyword("GROUPS"),
 			Keyword("RANGE"),
 			Keyword("ROWS")
 		]),
