@@ -60,7 +60,8 @@ SELECT CAST(999 AS TINYINT);
 ```
 
 ```console
-Conversion Error: Type INT32 with value 999 can't be cast because the value is out of range for the destination type INT8
+Conversion Error:
+Type INT32 with value 999 can't be cast because the value is out of range for the destination type INT8
 ```
 
 So even though the cast operation from `INTEGER` to `TINYINT` is supported, it is not possible for this particular value. [TRY_CAST]({% link docs/stable/sql/expressions/cast.md %}) can be used to convert the value into `NULL` instead of throwing an error.

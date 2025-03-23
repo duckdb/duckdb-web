@@ -187,7 +187,8 @@ CREATE TABLE t2 AS SELECT row('a');
 ```
 
 ```console
-Invalid Input Error: A table cannot be created from an unnamed struct
+Invalid Input Error:
+A table cannot be created from an unnamed struct
 ```
 
 When casting between structs, the names of at least one field have to match. Therefore, the following query will fail:
@@ -199,7 +200,8 @@ FROM
 ```
 
 ```console
-Binder Error: STRUCT to STRUCT cast must have at least one matching member
+Binder Error:
+STRUCT to STRUCT cast must have at least one matching member
 ```
 
 A workaround for this is to use [`struct_pack`](#creating-structs) instead:

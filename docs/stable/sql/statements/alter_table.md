@@ -163,7 +163,8 @@ The `DROP COLUMN` clause can be used to remove a column from a table. Note that 
 If you attempt to drop a column with an index on it, DuckDB will return the following error message:
 
 ```console
-Dependency Error: Cannot alter entry "..." because there are entries that depend on it.
+Dependency Error:
+Cannot alter entry "..." because there are entries that depend on it.
 ```
 
 ## `[SET [DATA]] TYPE`

@@ -92,8 +92,8 @@ FROM (VALUES (DATE '1992-01-01')) t(d);
 ```
 
 ```console
-Binder Error: Cannot compare values of type DATE and type VARCHAR –
-an explicit cast is required
+Binder Error:
+Cannot compare values of type DATE and type VARCHAR – an explicit cast is required
 ```
 
 ## Backward Compatibility

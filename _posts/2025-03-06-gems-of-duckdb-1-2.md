@@ -74,7 +74,7 @@ FROM read_csv('test.csv');
 With the setting applied, DuckDB will refuse to read files in the current working directory:
 
 ```console
-Permission Error:  
+Permission Error:
 Cannot access file "test.csv" - file system operations are disabled by configuration  
 ```
 

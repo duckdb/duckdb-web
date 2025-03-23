@@ -140,7 +140,8 @@ INSERT INTO tbl
 This raises as an error:
 
 ```console
-Constraint Error: Duplicate key "i: 1" violates primary key constraint.
+Constraint Error:
+Duplicate key "i: 1" violates primary key constraint.
 ```
 
 The table will contain the row that was first inserted:
@@ -286,7 +287,8 @@ INSERT INTO t1 BY NAME (SELECT id, val1 FROM t2)
 This fails with the following error:
 
 ```console
-Constraint Error: NOT NULL constraint failed: t1.val2
+Constraint Error:
+NOT NULL constraint failed: t1.val2
 ```
 
 #### Composite Primary Key
@@ -367,7 +369,8 @@ INSERT INTO tbl
 This returns the following message.
 
 ```console
-Invalid Input Error: ON CONFLICT DO UPDATE can not update the same row twice in the same command.
+Invalid Input Error:
+ON CONFLICT DO UPDATE can not update the same row twice in the same command.
 Ensure that no rows proposed for insertion within the same command have duplicate constrained values
 ```
 

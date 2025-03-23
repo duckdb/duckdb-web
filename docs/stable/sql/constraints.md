@@ -24,7 +24,8 @@ INSERT INTO students VALUES ('this name contains spaces');
 ```
 
 ```console
-Constraint Error: CHECK constraint failed: students
+Constraint Error:
+CHECK constraint failed on table students with expression CHECK((NOT contains("name", ' ')))
 ```
 
 ## Not Null Constraint
@@ -37,7 +38,8 @@ INSERT INTO students VALUES (NULL);
 ```
 
 ```console
-Constraint Error: NOT NULL constraint failed: students.name
+Constraint Error:
+NOT NULL constraint failed: students.name
 ```
 
 ## Primary Key and Unique Constraint
@@ -51,7 +53,8 @@ INSERT INTO students VALUES (1, 'Student 2');
 ```
 
 ```console
-Constraint Error: Duplicate key "id: 1" violates primary key constraint
+Constraint Error:
+Duplicate key "id: 1" violates primary key constraint
 ```
 
 ```sql
@@ -62,7 +65,8 @@ INSERT INTO students VALUES (1, 'Student 1');
 ```
 
 ```console
-Constraint Error: Duplicate key "id: 1, name: Student 1" violates primary key constraint
+Constraint Error:
+Duplicate key "id: 1, name: Student 1" violates primary key constraint
 ```
 
 In order to enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every primary key or unique constraint that is defined in the table.
@@ -79,7 +83,8 @@ INSERT INTO students VALUES (2, 'Student 2', 'student1@uni.com');
 ```
 
 ```console
-Constraint Error: Duplicate key "email: student1@uni.com" violates unique constraint.
+Constraint Error:
+Duplicate key "email: student1@uni.com" violates unique constraint.
 ```
 
 ```sql
@@ -88,7 +93,8 @@ INSERT INTO students(name, email) VALUES ('Student 3', 'student3@uni.com');
 ```
 
 ```console
-Constraint Error: NOT NULL constraint failed: students.id
+Constraint Error:
+NOT NULL constraint failed: students.id
 ```
 
 > Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, leading to constraint errors such as `violates primary key constraint` and `violates unique constraint`. See the [indexes section for more details]({% link docs/stable/sql/indexes.md %}#index-limitations).
@@ -113,7 +119,8 @@ INSERT INTO exams VALUES (2, 1, 2, 10);
 ```
 
 ```console
-Constraint Error: Violates foreign key constraint because key "id: 2" does not exist in the referenced table
+Constraint Error:
+Violates foreign key constraint because key "id: 2" does not exist in the referenced table
 ```
 
 In order to enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every foreign key constraint that is defined in the table.

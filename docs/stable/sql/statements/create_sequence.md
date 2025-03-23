@@ -37,7 +37,8 @@ CREATE SEQUENCE serial START WITH 99 INCREMENT BY -1 MAXVALUE 99;
 By default, cycles are not allowed and will result in error, e.g.:
 
 ```console
-Sequence Error: nextval: reached maximum value of sequence "serial" (10)
+Sequence Error:
+nextval: reached maximum value of sequence "serial" (10)
 ```
 
 ```sql

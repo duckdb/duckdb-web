@@ -229,8 +229,8 @@ CREATE TABLE new_db.tbl (i INTEGER);
 ```
 
 ```console
-Binder Error: Ambiguous reference to catalog or schema "new_db" -
-use a fully qualified path like "memory.new_db"
+Binder Error:
+Ambiguous reference to catalog or schema "new_db" - use a fully qualified path like "memory.new_db"
 ```
 
 ### Changing the Catalog Search Path

@@ -195,7 +195,8 @@ SELECT regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'm
 ```
 
 ```console
-Binder Error: Not enough group names in regexp_extract
+Binder Error:
+Not enough group names in regexp_extract
 ```
 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.
