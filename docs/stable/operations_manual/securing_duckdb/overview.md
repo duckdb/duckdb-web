@@ -32,18 +32,31 @@ duckdb -safe ...
 
 ## Disabling File Access
 
-DuckDB can list directories and read arbitrary files via its CSV parser’s [`read_csv` function]({% link docs/stable/data/csv/overview.md %}) or read text via the [`read_text` function]({% link docs/stable/sql/functions/char.md %}#read_textsource). For example:
+DuckDB can list directories and read arbitrary files via its CSV parser’s [`read_csv` function]({% link docs/stable/data/csv/overview.md %}) or read text via the [`read_text` function]({% link docs/stable/sql/functions/char.md %}#read_textsource).
+This makes it possible to read from the local file system, for example:
 
 ```sql
 SELECT *
 FROM read_csv('/etc/passwd', sep = ':');
 ```
 
-This can be disabled either by disabling external access altogether (`enable_external_access`) or disabling individual file systems. For example:
+This can be disabled in two ways. First, you can disable individual file systems. For example:
 
 ```sql
 SET disabled_filesystems = 'LocalFileSystem';
 ```
+
+Second, you can also completely disable external access by setting the [`enable_external_access` option]({% link docs/stable/configuration/overview.md %}#configuration-reference) option to `false`.
+
+```sql
+SET enable_external_access = false;
+```
+
+This setting implies that:
+
+* `ATTACH` cannot attach to a database in a file.
+* `COPY` cannot read to or write from files.
+* Functions such as `read_csv`, `read_parquet`, `read_json`, etc. cannot read from an external source.
 
 ## Secrets
 
