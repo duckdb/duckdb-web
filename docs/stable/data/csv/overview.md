@@ -99,7 +99,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `max_line_size` or `maximum_line_size`. Not available in the `COPY` statement. | Maximum line size, in bytes. | `BIGINT` | 2000000 |
 | `names` or `column_names` | Column names, as a list. See [example]({% link docs/stable/data/csv/tips.md %}#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
 | `new_line` | New line character(s). Options are `'\r'`,`'\n'`, or `'\r\n'`. The CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
-| `normalize_names` | Normalize column names, removing any non-alphanumeric characters from them. | `BOOL` | `false` |
+| `normalize_names` | Normalize column names. This removes any non-alphanumeric characters from them. Column names that are reserved SQL keywords are prefixed with an underscore character (`_`). | `BOOL` | `false` |
 | `null_padding` | Pad the remaining columns on the right with `NULL` values when a line lacks columns. | `BOOL` | `false` |
 | `nullstr` or `null` | Strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
 | `parallel` | Use the parallel CSV reader. | `BOOL` | `true` |
