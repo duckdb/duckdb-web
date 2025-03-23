@@ -12,17 +12,34 @@ DuckDB contains several built-in features to enable query profiling, which this 
 For a high-level example of using `EXPLAIN`, see the [“Inspect Query Plans” page]({% link docs/stable/guides/meta/explain.md %}).
 For an in-depth explanation, see the [“Profiling” page]({% link docs/stable/dev/profiling.md %}) in the Developer Documentation.
 
-## `EXPLAIN` Statement
+## Statements
+
+### The `EXPLAIN` Statement
 
 The first step to profiling a query can include examining the query plan.
 The [`EXPLAIN`]({% link docs/stable/guides/meta/explain.md %}) statement shows the query plan and describes what is going on under the hood.
 
-## `EXPLAIN ANALYZE` Statement
+### The `EXPLAIN ANALYZE` Statement
 
 The query plan helps developers understand the performance characteristics of the query.
 However, it is often also necessary to examine the performance numbers of individual operators and the cardinalities that pass through them.
 The [`EXPLAIN ANALYZE`]({% link docs/stable/guides/meta/explain_analyze.md %}) statement enables obtaining these, as it pretty-prints the query plan and also executes the query.
 Thus, it provides the actual run-time performance numbers.
+
+### The `FORMAT` Option
+
+The `EXPLAIN [ANALYZE]` statement allows exporting to several formats:
+
+* `text` – default ASCII-art style output
+* `graphviz` – produces a DOT output, which can be rendered with [Graphviz](https://graphviz.org/)
+* `html` – produces an HTML output, which can rendered with [treeflex](https://dumptyd.github.io/treeflex/)
+* `json` – produces a JSON output
+
+To specify a format, use the `FORMAT` tag:
+
+```sql
+EXPLAIN (FORMAT html) SELECT 42 AS x;
+```
 
 ## Pragmas
 
