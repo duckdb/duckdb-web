@@ -101,21 +101,32 @@ The `struct_extract` function is also equivalent. This returns 1:
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3}, 'x space');
 ```
 
-#### `STRUCT.*`
+#### `unnest` / `STRUCT.*`
 
-Rather than retrieving a single key from a struct, star notation (`*`) can be used to retrieve all keys from a struct as separate columns.
-This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.
-
-All keys within a struct can be returned as separate columns using `*`:
+Rather than retrieving a single key from a struct, the `unnest` special function can be used to retrieve all keys from a struct as separate columns.
+This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys:
 
 ```sql
-SELECT a.*
+SELECT unnest(a)
 FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 ```
 
 | x | y | z |
 |--:|--:|--:|
 | 1 | 2 | 3 |
+
+The same can be achieved with the star notation (`*`), which additionally allows [modifications of the returned columns]({% link docs/stable/sql/expressions/star.md %}):
+
+```sql
+SELECT a.* EXCLUDE ('y')
+FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
+```
+
+| x | z |
+|--:|--:|
+| 1 | 3 |
+
+> Warning The star notation is currently limited to top-level struct columns and non-aggregate expressions.
 
 ### Dot Notation Order of Operations
 
