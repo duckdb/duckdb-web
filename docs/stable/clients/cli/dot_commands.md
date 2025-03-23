@@ -11,7 +11,7 @@ title: Dot Commands
 
 Dot commands are available in the DuckDB CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command.
 
-## Dot Commands
+## List of Dot Commands
 
 <!-- markdownlint-disable MD056 -->
 
@@ -36,7 +36,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.indexes ⟨TABLE⟩`{:.language-sql .highlight}                         | Show names of indexes                                                                                                                                                        |
 | `.keyword ⟨COLOR⟩`{:.language-sql .highlight}                         | Sets the syntax highlighting color used for keywords                                                                                                                         |
 | `.keywordcode ⟨CODE⟩`{:.language-sql .highlight}                      | Sets the syntax highlighting terminal code used for keywords                                                                                                                 |
-| `.large_number_rendering ⟨all|footer|off⟩`{:.language-sql .highlight} | Toggle readable rendering of large numbers (duckbox only)                                                                                                                    |
+| `.large_number_rendering ⟨all|footer|off⟩`{:.language-sql .highlight} | Toggle readable rendering of large numbers (duckbox only, default: `footer`)                                                                                                 |
 | `.log ⟨FILE|off⟩`{:.language-sql .highlight}                          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                                                                |
 | `.maxrows ⟨COUNT⟩`{:.language-sql .highlight}                         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                                                   |
 | `.maxwidth ⟨COUNT⟩`{:.language-sql .highlight}                        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                            |
@@ -71,12 +71,12 @@ The `.help` text may be filtered by passing in a text string as the first argume
 ```
 
 ```sql
-.maxrows COUNT      Sets the maximum number of rows for display (default: 40). Only for duckbox mode.
-.maxwidth COUNT     Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
-.mode MODE ⟨TABLE⟩  Set output mode
+.maxrows COUNT           Sets the maximum number of rows for display (default: 40). Only for duckbox mode.
+.maxwidth COUNT          Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
+.mode MODE ?TABLE?       Set output mode
 ```
 
-### `.output`: Writing Results to a File
+## `.output`: Writing Results to a File
 
 By default, the DuckDB CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands. Pass in the desired output file location as a parameter. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
 
