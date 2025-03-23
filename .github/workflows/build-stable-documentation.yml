@@ -41,3 +41,5 @@ jobs:
         run: pip3 install -r requirements.txt --break-system-packages
       - name: Concatenate files
         run: python3 concatenate_to_single_file.py
+      - name: Clean Markdown file
+        run: ./clean_markdown_file.sh
