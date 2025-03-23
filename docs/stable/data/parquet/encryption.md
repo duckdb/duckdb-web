@@ -16,6 +16,7 @@ Using the `PRAGMA add_parquet_key` function, named encryption keys of 128, 192, 
 PRAGMA add_parquet_key('key128', '0123456789112345');
 PRAGMA add_parquet_key('key192', '012345678911234501234567');
 PRAGMA add_parquet_key('key256', '01234567891123450123456789112345');
+PRAGMA add_parquet_key('key256base64', 'MDEyMzQ1Njc4OTExMjM0NTAxMjM0NTY3ODkxMTIzNDU=');
 ```
 
 ### Writing Encrypted Parquet Files
