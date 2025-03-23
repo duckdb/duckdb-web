@@ -44,6 +44,8 @@ Below is a table of the columns returned by `parquet_metadata`.
 | total_compressed_size   | BIGINT          |
 | total_uncompressed_size | BIGINT          |
 | key_value_metadata      | MAP(BLOB, BLOB) |
+| bloom_filter_offset     | BIGINT          |
+| bloom_filter_length     | BIGINT          |
 
 ## Parquet Schema
 
@@ -121,3 +123,25 @@ Below is a table of the columns returned by `parquet_kv_metadata`.
 | file_name | VARCHAR |
 | key       | BLOB    |
 | value     | BLOB    |
+
+## Bloom Filters
+
+DuckDB [supports Bloom filters]({% post_url 2025-03-07-parquet-bloom-filters-in-duckdb %}) for pruning the row groups that need to be read to answer highly selective queries.
+Currently, Bloom filters are supported for the following types:
+
+* Integer types (`TINYINT`, `UTINYINT`, `SMALLINT`, `USMALLINT`, `INTEGER`, `UINTEGER`, `BIGINT`, `UBIGINT`)
+* Floating point types (`FLOAT`, `DOUBLE`)
+* String types (`VARCHAR` and `BLOB`)
+
+The `parquet_bloom_probe(filename, column_name, value)` function shows which row groups can excluded when filtering for a given value of a given column using the Bloom filter.
+For example:
+
+```sql
+FROM parquet_bloom_probe('my_file.parquet', 'my_col', 500);
+```
+
+|   file_name     | row_group_id | bloom_filter_excludes |
+|-----------------|-------------:|----------------------:|
+| my_file.parquet | 0            | true                  |
+| ...             | ...          | ...                   |
+| my_file.parquet | 9            | false                 |
