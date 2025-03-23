@@ -1,9 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 set -xeuo pipefail
-
-# navigate to the directory of the script
-cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 pandoc \
     duckdb-docs.md \
