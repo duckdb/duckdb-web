@@ -115,7 +115,7 @@ FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 |--:|--:|--:|
 | 1 | 2 | 3 |
 
-The same can be schieved with the star notation (`*`), which additionally allows [modifications of the returned columns]({% link docs/stable/sql/expressions/star.md %})
+The same can be achieved with the star notation (`*`), which additionally allows [modifications of the returned columns]({% link docs/stable/sql/expressions/star.md %}):
 
 ```sql
 SELECT a.* EXCLUDE ('y')
@@ -126,8 +126,7 @@ FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 |--:|--:|
 | 1 | 3 |
 
-> Warning The star notation is currently limited to top level struct columns and non-aggregate expressions. 
-
+> Warning The star notation is currently limited to top-level struct columns and non-aggregate expressions.
 
 ### Dot Notation Order of Operations
 
