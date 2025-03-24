@@ -345,7 +345,7 @@ Here is a simple `ROW` frame query, using an aggregate function:
 SELECT points,
     sum(points) OVER (
         ROWS BETWEEN 1 PRECEDING
-                 AND 1 FOLLOWING) we
+                 AND 1 FOLLOWING) AS we
 FROM results;
 ```
 
