@@ -264,9 +264,13 @@ We recommend avoiding the POSIX regular expression matching operators in DuckDB.
 
 <div class="monospace_table"></div>
 
+<!-- markdownlint-disable MD056 -->
+
 | Expression          | PostgreSQL | DuckDB |
 | :------------------ | ---------- | ------ |
 | `'aaa' ~ '(a|b)'`   | true       | false  |
 | `'AAA' ~* '(a|b)'`  | true       | error  |
 | `'aaa' !~ '(a|b)'`  | false      | true   |
 | `'AAA' !~* '(a|b)'` | false      | error  |
+
+<!-- markdownlint-enable MD056 -->

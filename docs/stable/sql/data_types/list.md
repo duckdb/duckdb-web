@@ -53,6 +53,8 @@ Retrieving one or more values from a list can be accomplished using brackets and
 
 <div class="monospace_table"></div>
 
+<!-- markdownlint-disable MD052 -->
+
 | Example                                  | Result     |
 |:-----------------------------------------|:-----------|
 | SELECT ['a', 'b', 'c'][3]                | 'c'        |
@@ -63,6 +65,8 @@ Retrieving one or more values from a list can be accomplished using brackets and
 | SELECT ['a', 'b', 'c'][:2]               | ['a', 'b'] |
 | SELECT ['a', 'b', 'c'][-2:]              | ['b', 'c'] |
 | SELECT list_slice(['a', 'b', 'c'], 2, 3) | ['b', 'c'] |
+
+<!-- markdownlint-disable MD052 -->
 
 ## Comparison and Ordering
 

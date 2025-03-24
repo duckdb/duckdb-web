@@ -7,6 +7,8 @@ redirect_from:
 title: Values
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 The value class represents a single value of any type.
 
 ## API Reference Overview

@@ -7,6 +7,8 @@ redirect_from:
 title: Appender
 ---
 
+<!-- markdownlint-disable MD001 -->
+
 Appenders are the most efficient way of loading data into DuckDB from within the C interface, and are recommended for
 fast data loading. The appender is much faster than using prepared statements or individual `INSERT INTO` statements.
 
