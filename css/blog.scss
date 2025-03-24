@@ -217,6 +217,12 @@ h1, h2, h3, h4, h5{
 				code{
 					font-size: 15.5px;
 				}
+				code.highlight{
+					padding: 2px 6px;
+					border-radius: 6px !important;
+					margin-left: 0;
+					line-height: 27px;
+				}
 			}
 			table thead th{
 				font-weight: 700;
