@@ -74,6 +74,7 @@ def get_url(fname):
         url = fname
     return url
 
+
 def index_file(fname):
     if fname in skipped_files:
         return
@@ -89,8 +90,7 @@ def index_file(fname):
     text = ''
     blurb = ''
     category = ''
-    
-    
+
     if fname.startswith('docs/'):
         content_type = 'documentation'
     elif fname.startswith('_posts/'):
@@ -134,7 +134,7 @@ def index_file(fname):
             'category': category,
             'url': get_url(fname),
             'blurb': blurb,
-            'type': content_type, 
+            'type': content_type,
         }
     )
 
