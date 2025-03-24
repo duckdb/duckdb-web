@@ -51,7 +51,7 @@ duckdb.execute("CREATE TABLE tbl AS SELECT 42 a")
 con = duckdb.connect(":default:")
 con.sql("SELECT * FROM tbl")
 # or
-duckdb.default_connection.sql("SELECT * FROM tbl")
+duckdb.default_connection().sql("SELECT * FROM tbl")
 ```
 
 ```text
