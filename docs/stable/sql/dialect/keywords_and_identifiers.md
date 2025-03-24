@@ -91,6 +91,36 @@ SELECT cosineofpi FROM tbl;
 
 To change this behavior, set the `preserve_identifier_case` [configuration option]({% link docs/stable/configuration/overview.md %}#configuration-reference) to `false`.
 
+### Case-Sensitivity of Keys in Nested Data Structures
+
+The keys of `MAP`s are case-sensitive:
+
+```sql
+SELECT MAP(['key1'], [1]) = MAP(['KEY1'], [1]) AS equal;
+```
+
+```text
+false
+```
+
+The keys of `UNION`s and `STRUCT`s are case-insensitive:
+
+```sql
+SELECT {'key1': 1} = {'KEY1': 1} AS equal;
+```
+
+```text
+true
+```
+
+```sql
+SELECT union_value(key1 := 1) = union_value(KEY1 := 1) as equal;
+```
+
+```text
+true
+```
+
 #### Handling Conflicts
 
 In case of a conflict, when the same identifier is spelt with different cases, one will be selected randomly. For example:

@@ -55,6 +55,7 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `table_oid` | Internal identifier (name) of the table object that defines the column. | `BIGINT` |
 | `column_name` | The SQL name of the column. | `VARCHAR` |
 | `column_index` | The unique position of the column within its table. | `INTEGER` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
 | `internal` | `true` if this column built-in, `false` if it is user-defined. | `BOOLEAN` |
 | `column_default` | The default value of the column (expressed in SQL)| `VARCHAR` |
 | `is_nullable` | `true` if the column can hold `NULL` values; `false` if the column cannot hold `NULL`-values. | `BOOLEAN` |
@@ -85,6 +86,9 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 | `expression` | If constraint is a check constraint, the definition of the condition being checked, otherwise `NULL`. | `VARCHAR` |
 | `constraint_column_indexes` | An array of table column indexes referring to the columns that appear in the constraint definition. | `BIGINT[]` |
 | `constraint_column_names` | An array of table column names appearing in the constraint definition. | `VARCHAR[]` |
+| `constraint_name` | The naem of constraint. | `VARCHAR` |
+| `referenced_table` | The table referenced by the constraint. | `VARCHAR` |
+| `referenced_column_names` | The column names references the by the constraint. | `VARCHAR[]` |
 
 The [`information_schema.referential_constraints`]({% link docs/stable/sql/meta/information_schema.md %}#referential_constraints-referential-constraints) and [`information_schema.table_constraints`]({% link docs/stable/sql/meta/information_schema.md %}#table_constraints-table-constraints) system views provide a more standardized way to obtain metadata about constraints, but the `duckdb_constraints` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.referential_constraints` and `information_schema.table_constraints` are implemented as a query on top of `duckdb_constraints()`)
 
@@ -98,8 +102,11 @@ Apart from the database associated at startup, the list also includes databases 
 | `database_name` | The name of the database, or the alias if the database was attached using an ALIAS-clause. | `VARCHAR` |
 | `database_oid` | The internal identifier of the database. | `VARCHAR` |
 | `path` | The file path associated with the database. | `VARCHAR` |
-| `internal` | `true` indicates a system or built-in database. False indicates a user-defined database. | `BOOLEAN` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
+| `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
+| `internal` | `true` indicates a system or built-in database. `false` indicates a user-defined database. | `BOOLEAN` |
 | `type` | The type indicates the type of RDBMS implemented by the attached database. For DuckDB databases, that value is `duckdb`. | `VARCHAR` |
+| `readonly` | Denotes whether the database is read-only. | `BOOLEAN` |
 
 ## `duckdb_dependencies`
 
@@ -127,6 +134,9 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 | `install_path` | `(BUILT-IN)` if the extension is built-in, otherwise, the filesystem path where binary that implements the extension resides. | `VARCHAR` |
 | `description` | Human readable text that describes the extension's functionality. | `VARCHAR` |
 | `aliases` | List of alternative names for this extension. | `VARCHAR[]` |
+| `extension_version` | The version of the extension (`vX.Y.Z` for stable versions and 6-character hash for unstable versions). | `VARCHAR` |
+| `install_mode` | The installation mode that was used to install the extension: `UNKNOWN`, `REPOSITORY`, `CUSTOM_PATH`, `STATICALLY_LINKED`, `NOT_INSTALLED`, `NULL`. | `VARCHAR` |
+| `installed_from` | Name of the repository the extension was installed from, e.g., `community` or `core_nightly`. The empty string denotes the `core` repository. | `VARCHAR` |
 
 ## `duckdb_functions`
 
@@ -135,17 +145,23 @@ The `duckdb_functions()` function provides metadata about the functions (includi
 | Column | Description | Type |
 |:-|:---|:-|
 | `database_name` | The name of the database that contains this function. | `VARCHAR` |
+| `database_oid` | Internal identifier of the database containing the index. | `BIGINT` |
 | `schema_name` | The SQL name of the schema where the function resides. | `VARCHAR` |
 | `function_name` | The SQL name of the function. | `VARCHAR` |
 | `function_type` | The function kind. Value is one of: `table`,`scalar`,`aggregate`,`pragma`,`macro`| `VARCHAR` |
 | `description` | Description of this function (always `NULL`)| `VARCHAR` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
+| `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `return_type` | The logical data type name of the returned value. Applicable for scalar and aggregate functions. | `VARCHAR` |
 | `parameters` | If the function has parameters, the list of parameter names. | `VARCHAR[]` |
 | `parameter_types` | If the function has parameters, a list of logical data type names corresponding to the parameter list. | `VARCHAR[]` |
 | `varargs` | The name of the data type in case the function has a variable number of arguments, or `NULL` if the function does not have a variable number of arguments. | `VARCHAR` |
 | `macro_definition` | If this is a [macro]({% link docs/stable/sql/statements/create_macro.md %}), the SQL expression that defines it. | `VARCHAR` |
 | `has_side_effects` | `false` if this is a pure function. `true` if this function changes the database state (like sequence functions `nextval()` and `curval()`). | `BOOLEAN` |
-| `function_oid` | The internal identifier for this function | `BIGINT` |
+| `internal` | `true` if the function is built-in (defined by DuckDB or an extension), `false` if it was defined using the [`CREATE MACRO` statement]({% link docs/stable/sql/statements/create_macro.md %}). | `BOOLEAN` |
+| `function_oid` | The internal identifier for this function. | `BIGINT` |
+| `examples` | Examples of using the function. Used to generate the documentation. | `VARCHAR[]` |
+| `stability` | The stability of the function (`CONSISTENT`, `VOLATILE`, `CONSISTENT_WITHIN_QUERY` or `NULL`) | `VARCHAR` |
 
 ## `duckdb_indexes`
 
@@ -161,9 +177,11 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
 | `index_oid` | The object identifier of this index. | `BIGINT` |
 | `table_name` | The name of the table with the index. | `VARCHAR` |
 | `table_oid` | Internal identifier (name) of the table object. | `BIGINT` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
+| `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `is_unique` | `true` if the index was created with the `UNIQUE` modifier, `false` if it was not. | `BOOLEAN` |
-| `is_primary` | Always `false`| `BOOLEAN` |
-| `expressions` | Always `NULL`| `VARCHAR` |
+| `is_primary` | Always `false`. | `BOOLEAN` |
+| `expressions` | Always `NULL`. | `VARCHAR` |
 | `sql` | The definition of the index, expressed as a `CREATE INDEX` SQL statement. | `VARCHAR` |
 
 Note that `duckdb_indexes` only provides metadata about secondary indexes, i.e., those indexes created by explicit [`CREATE INDEX`]({% link docs/stable/sql/indexes.md %}#create-index) statements. Primary keys, foreign keys, and `UNIQUE` constraints are maintained using indexes, but their details are included in the `duckdb_constraints()` function.
@@ -206,6 +224,8 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 | `database_name` | The name of the database that contains this schema. | `VARCHAR` |
 | `database_oid` | Internal identifier of the database containing the schema. | `BIGINT` |
 | `schema_name` | The SQL name of the schema. | `VARCHAR` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
+| `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `internal` | `true` if this is an internal (built-in) schema, `false` if this is a user-defined schema. | `BOOLEAN` |
 | `sql` | Always `NULL`| `VARCHAR` |
 
@@ -237,6 +257,8 @@ The `duckdb_sequences()` function provides metadata about the sequences availabl
 | `schema_oid` | Internal identifier of the schema object that contains the sequence object. | `BIGINT` |
 | `sequence_name` | The SQL name that identifies the sequence within the schema. | `VARCHAR` |
 | `sequence_oid` | The internal identifier of this sequence object. | `BIGINT` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
+| `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `temporary` | Whether this sequence is temporary. Temporary sequences are transient and only visible within the current connection. | `BOOLEAN` |
 | `start_value` | The initial value of the sequence. This value will be returned when `nextval()` is called for the very first time on this sequence. | `BIGINT` |
 | `min_value` | The minimum value of the sequence. | `BIGINT` |
@@ -262,6 +284,7 @@ The `duckdb_settings()` function provides metadata about the settings available 
 | `value` | Current value of the setting. | `VARCHAR` |
 | `description` | A description of the setting. | `VARCHAR` |
 | `input_type` | The logical datatype of the setting's value. | `VARCHAR` |
+| `scope` | The scope of the setting (`LOCAL` or `GLOBAL`). | `VARCHAR` |
 
 The various settings are described in the [configuration page]({% link docs/stable/configuration/overview.md %}).
 
@@ -277,6 +300,8 @@ The `duckdb_tables()` function provides metadata about the base tables available
 | `schema_oid` | Internal identifier of the schema object that contains the base table. | `BIGINT` |
 | `table_name` | The SQL name of the base table. | `VARCHAR` |
 | `table_oid` | Internal identifier of the base table object. | `BIGINT` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
+| `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `internal` | `false` if this is a user-defined table. | `BOOLEAN` |
 | `temporary` | Whether this is a temporary table. Temporary tables are not persisted and only visible within the current connection. | `BOOLEAN` |
 | `has_primary_key` | `true` if this table object defines a `PRIMARY KEY`. | `BOOLEAN` |
@@ -312,7 +337,10 @@ The `duckdb_types()` function provides metadata about the data types available i
 | `type_size` | The number of bytes required to represent a value of this type in memory. | `BIGINT` |
 | `logical_type` | The 'canonical' name of this data type. The same `logical_type` may be referenced by several types having different `type_name`s. | `VARCHAR` |
 | `type_category` | The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expression. For example, the `NUMERIC` type_category includes integers, decimals, and floating point numbers. | `VARCHAR` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
+| `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `internal` | Whether this is an internal (built-in) or a user object. | `BOOLEAN` |
+| `labels` | Labels for categorizing types. Used for generating the documentation. | `VARCHAR[]` |
 
 ## `duckdb_variables`
 
@@ -336,6 +364,8 @@ The `duckdb_views()` function provides metadata about the views available in the
 | `schema_oid` | Internal identifier of the schema object that contains the view. | `BIGINT` |
 | `view_name` | The SQL name of the view object. | `VARCHAR` |
 | `view_oid` | The internal identifier of this view object. | `BIGINT` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
+| `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `internal` | `true` if this is an internal (built-in) view, `false` if this is a user-defined view. | `BOOLEAN` |
 | `temporary` | `true` if this is a temporary view. Temporary views are not persistent and are only visible within the current connection. | `BOOLEAN` |
 | `column_count` | The number of columns defined by this view object. | `BIGINT` |

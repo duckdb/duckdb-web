@@ -51,6 +51,11 @@ DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `U
 | [`STRUCT`]({% link docs/stable/sql/data_types/struct.md %}) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | `{'i': 42, 'j': 'a'}` | `STRUCT(i INTEGER, j VARCHAR)` |
 | [`UNION`]({% link docs/stable/sql/data_types/union.md %}) | A union of multiple alternative data types, storing one of them in each value at a time. A union also contains a discriminator “tag” value to inspect and access the currently set member type. | Rows may be set to different member types of the union. | `union_value(num := 2)` | `UNION(num INTEGER, text VARCHAR)` |
 
+### Rules for Case Sensitivity
+
+The keys of `MAP`s are case-sensitive, while keys of `UNION`s and `STRUCT`s are case-insensitive.
+For examples, see the [Rules for Case Sensitivity section]({% link docs/stable/sql/dialect/overview.md %}#case-sensitivity-of-keys-in-nested-data-structures).
+
 ### Updating Values of Nested Types
 
 When performing _updates_ on values of nested types, DuckDB performs a _delete_ operation followed by an _insert_ operation.

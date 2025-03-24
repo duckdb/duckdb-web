@@ -93,7 +93,6 @@ Therefore, there are several instances, where PostgreSQL throws an error while D
 | true = 1      | error      | true   |
 | 'true' = 1    | error      | error  |
 
-
 ## Case Sensitivity for Quoted Identifiers
 
 PostgreSQL is case-insensitive. The way PostgreSQL achieves case insensitivity is by lowercasing unquoted identifiers within SQL, whereas quoting preserves case, e.g., the following command creates a table named `mytable` but tries to query for `MyTaBLe` because quotes preserve the case.

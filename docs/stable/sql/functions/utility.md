@@ -31,7 +31,7 @@ The functions below are difficult to categorize into specific function types and
 | [`gen_random_uuid()`](#gen_random_uuid) | Alias of `uuid`. Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`getenv(var)`](#getenvvar) | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/stable/clients/cli/overview.md %}). |
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. |
-| [`icu_sort_key(string, collator)`](#icu_sort_keystring-collator) | Surrogate [sort key](https://unicode-org.github.io/icu/userguide/collation/architecture.html#sort-keys) used to sort special characters according to the specific locale. Collator parameter is optional. Only available when the ICU extension is installed.` |
+| [`icu_sort_key(string, collator)`](#icu_sort_keystring-collator) | Surrogate [sort key](https://unicode-org.github.io/icu/userguide/collation/architecture.html#sort-keys) used to sort special characters according to the specific locale. Collator parameter is optional. Only available when the ICU extension is installed. |
 | [`if(a, b, c)`](#ifa-b-c) | Ternary conditional operator. |
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
 | [`is_histogram_other_bin(arg)`](#is_histogram_other_binarg) | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/stable/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/stable/sql/functions/aggregates.md %}#histogramargboundaries) function. |
