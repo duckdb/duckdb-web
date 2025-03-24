@@ -62,6 +62,15 @@ def sanitize_category(category):
         return category.title()
 
 
+def get_url(fname):
+    fname = '/' + fname.replace('.md', '')
+    if fname.startswith('/_posts/'):
+        url = re.sub(r'/_posts/(\d+)-(\d+)-(\d+)-(.*)', r'/\1/\2/\3/\4', fname)
+    else:
+        url = fname
+    return url
+
+
 def index_file(fname):
     if fname in skipped_files:
         return
@@ -110,7 +119,7 @@ def index_file(fname):
             'title': title,
             'text': text,
             'category': category,
-            'url': '/' + fname.replace('.md', '.html'),
+            'url': get_url(fname),
             'blurb': blurb,
         }
     )
@@ -129,6 +138,7 @@ def index_dir(dirname):
 
 
 index_dir('docs')
+index_dir('_posts')
 
 
 # extract functions
