@@ -10,6 +10,14 @@ function GenerateDelete(options = {}) {
 			Optional(Sequence([
 				Keyword("WHERE"),
 				Expression()
+			])),
+			Optional(Sequence([
+				Keyword("RETURNING"),
+				OneOrMore(Choice(0, [
+					Sequence([Expression(), Optional(Sequence([Optional(Keyword("AS")), Expression("alias")]), "skip")]),
+					Sequence([Expression("alias"), Keyword(":"), Expression()]),
+					Sequence(GenerateStarClause(options))
+				]), ",")
 			]))
 		])
 	])
