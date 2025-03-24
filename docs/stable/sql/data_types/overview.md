@@ -54,7 +54,7 @@ DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `U
 ### Rules for Case Sensitivity
 
 The keys of `MAP`s are case-sensitive, while keys of `UNION`s and `STRUCT`s are case-insensitive.
-For examples, see the [Rules for Case Sensitivity section]({% link docs/stable/sql/dialect.md}#case-sensitivity-of-keys-in-nested-data-structures).
+For examples, see the [Rules for Case Sensitivity section]({% link docs/stable/sql/dialect/overview.md %}#case-sensitivity-of-keys-in-nested-data-structures).
 
 ### Updating Values of Nested Types
 
