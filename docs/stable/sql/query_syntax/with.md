@@ -345,6 +345,7 @@ to `recurring.T` allow for the elegant and idiomatic translation of rather
 complex algorithms into readable SQL code.
 
 ### Example: `USING KEY`
+
 This is a recursive CTE where `USING KEY` has a key column (`a`) and a payload column (`b`).
 The payload columns correspond to the columns to be overwritten.
 In the first iteration we have two different keys, `1` and `2`.

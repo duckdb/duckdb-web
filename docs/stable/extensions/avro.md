@@ -20,7 +20,7 @@ This function will expose the contents of the Avro file as a DuckDB table. You c
 
 ## File IO
 
-The `read_avro` function is integrated into DuckDB's file system abstraction, meaning you can read Avro files directly from e.g. HTTP or S3 sources. For example:
+The `read_avro` function is integrated into DuckDB's file system abstraction, meaning you can read Avro files directly from, e.g., HTTP or S3 sources. For example:
 
 ```sql
 FROM read_avro('http://blobs.duckdb.org/data/userdata1.avro');
