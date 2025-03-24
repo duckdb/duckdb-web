@@ -38,10 +38,12 @@ $(document).ready(function(){
 		markup = markup.replace( /&/g, '&amp;' );
 		markup = markup.replace( /</g, '&lt;' );
 		markup = markup.replace( />/g, '&gt;' );
+		markup = markup.replace( /\n/g, '<br>' );
 		return markup
 	}
 	
 	function simpleCodeHighlight( markup ) {
+		markup = markup.replace( /&amp;&amp;\s*/g, '&amp;&amp;<br>' );
 		markup = markup.replace( /("(.*?)")/g, '<span class="s2">$1</span>' );
 		markup = markup.replace( /^install\.packages\((.*)\)$/, '<span class="n">install.packages</span><span class="p">(</span>$1<span class="p">)</span>' );
 		markup = markup.replace( 'brew install', '<span class="nb">brew install</span>' );

@@ -1449,6 +1449,12 @@ div.singleentry {
 				background-size: 50%;
 			}
 		}
+		
+		&.default, &.note{
+			.content p:first-of-type{
+				margin-top: 0;
+			}
+		}
 
 		&.note .symbol,
 		&.default .symbol {
