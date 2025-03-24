@@ -109,6 +109,7 @@ def index_file(fname):
             continue
         if line_splits[0].strip().lower() == 'title':
             title = line_splits[1].strip()
+            title = re.sub(r'^"|"$', '', title)
         if line_splits[0].strip().lower() == 'blurb':
             blurb = sanitize_blurb(line_splits[1].strip())
         if line_splits[0].strip().lower() == 'category':
