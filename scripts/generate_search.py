@@ -15,7 +15,7 @@ skipped_files = [
 ]
 
 file_list = []
-skip_types = [marko.block.HTMLBlock, marko.inline.Image, marko.inline.Link, marko.inline.InlineHTML]
+skip_types = [marko.block.HTMLBlock, marko.inline.Image, marko.inline.InlineHTML]
 
 
 def normal_whitespace(desc: str) -> str:
