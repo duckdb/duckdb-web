@@ -4,17 +4,14 @@ import re
 import json
 from textwrap import shorten
 
-base_dir = 'docs'
 
 skipped_files = [
-    'docs/search.md',
-    'docs/twitter_wall.md',
+    'docs/stable/search.md',
     'docs/1.1',
     'docs/1.0',
     'docs/0.10',
     'docs/0.9',
     'docs/0.8',
-    'docs/test',
 ]
 
 file_list = []
@@ -131,7 +128,7 @@ def index_dir(dirname):
             index_dir(full_path)
 
 
-index_dir(base_dir)
+index_dir('docs')
 
 
 # extract functions
