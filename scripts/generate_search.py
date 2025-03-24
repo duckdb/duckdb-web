@@ -4,17 +4,14 @@ import re
 import json
 from textwrap import shorten
 
-base_dir = 'docs'
 
 skipped_files = [
-    'docs/search.md',
-    'docs/twitter_wall.md',
+    'docs/stable/search.md',
     'docs/1.1',
     'docs/1.0',
     'docs/0.10',
     'docs/0.9',
     'docs/0.8',
-    'docs/test',
 ]
 
 file_list = []
@@ -65,6 +62,15 @@ def sanitize_category(category):
         return category.title()
 
 
+def get_url(fname):
+    fname = '/' + fname.replace('.md', '')
+    if fname.startswith('/_posts/'):
+        url = re.sub(r'/_posts/(\d+)-(\d+)-(\d+)-(.*)', r'/\1/\2/\3/\4', fname)
+    else:
+        url = fname
+    return url
+
+
 def index_file(fname):
     if fname in skipped_files:
         return
@@ -113,7 +119,7 @@ def index_file(fname):
             'title': title,
             'text': text,
             'category': category,
-            'url': '/' + fname.replace('.md', '.html'),
+            'url': get_url(fname),
             'blurb': blurb,
         }
     )
@@ -131,7 +137,8 @@ def index_dir(dirname):
             index_dir(full_path)
 
 
-index_dir(base_dir)
+index_dir('docs')
+index_dir('_posts')
 
 
 # extract functions
