@@ -1,6 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /cal
+- /release-calendar
+- /release_calendar
 - /dev/release-dates
 - /dev/release-dates/
 - /dev/release-calendar

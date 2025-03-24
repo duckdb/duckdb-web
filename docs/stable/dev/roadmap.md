@@ -1,6 +1,8 @@
 ---
 layout: docu
 title: Development Roadmap
+redirect_from:
+- /roadmap
 ---
 
 ## Overview
