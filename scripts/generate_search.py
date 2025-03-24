@@ -15,7 +15,7 @@ skipped_files = [
 ]
 
 file_list = []
-skip_types = [marko.block.HTMLBlock]
+skip_types = [marko.block.HTMLBlock, marko.inline.Image, marko.inline.Link, marko.inline.InlineHTML]
 
 
 def normal_whitespace(desc: str) -> str:
@@ -38,6 +38,8 @@ def extract_text(parse_node):
 
 
 def sanitize_input(text):
+    text = re.sub(r'<.*?>', '', text)
+    text = re.sub(r'img\s+src\s+[^\s]+.*?(?=\s\w+\s|$)', ' ', text)
     return normal_whitespace(re.sub(r'[^\w\s_-]', ' ', text.lower())).strip()
 
 
@@ -50,6 +52,8 @@ def extract_blurb(parse_node):
 
 def sanitize_blurb(text):
     BLURB_THRESHOLD = 120
+    text = re.sub(r'<img\s+[^>]*>', '', text)
+    text = re.sub(r'<.*?>', '', text)
     text = text.replace('"', '').strip()
     return shorten(text, width=BLURB_THRESHOLD, placeholder='...')
 
@@ -70,7 +74,6 @@ def get_url(fname):
         url = fname
     return url
 
-
 def index_file(fname):
     if fname in skipped_files:
         return
@@ -85,6 +88,15 @@ def index_file(fname):
     title = ''
     text = ''
     blurb = ''
+    category = ''
+    
+    
+    if fname.startswith('docs/'):
+        content_type = 'documentation'
+    elif fname.startswith('_posts/'):
+        content_type = 'blog'
+    else:
+        content_type = 'other'
     category = ''
     # parse header info
     lines = splits[1].split('\n')
@@ -121,6 +133,7 @@ def index_file(fname):
             'category': category,
             'url': get_url(fname),
             'blurb': blurb,
+            'type': content_type, 
         }
     )
 
@@ -189,6 +202,7 @@ def extract_functions(text, full_path):
             + " Functions",
             'url': '/' + full_path.replace('.md', ''),
             'blurb': sanitize_blurb(desc),
+            'type': 'documentation',
         }
 
 
