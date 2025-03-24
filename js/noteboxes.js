@@ -43,7 +43,7 @@ $(document).ready(function(){
 		} else if (className !== "default") {
 			$blockquote.find('.content').prepend('<h4>' + firstWord + '</h4>');
 		} else {
-			$blockquote.find('.content').prepend('<h4>Note</h4>');
+			// do nothing (no additional "Note" label is needed)
 		}
 
 		$blockquote.prepend('<div class="symbol"></div>');
