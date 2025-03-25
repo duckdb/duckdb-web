@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Maximizing Your Delta Scan Performance"
+title: "Maximizing Your Delta Scan Performance in DuckDB"
 author: "Sam Ansmink"
 thumb: "/images/blog/thumbs/delta-lake-part-2.png"
 image: "/images/blog/thumbs/delta-lake-part-2.png"
