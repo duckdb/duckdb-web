@@ -23,7 +23,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`from_hex(value)`](#from_hexvalue) | Converts a value from hexadecimal representation to a blob. |
 | [`hex(blob)`](#hexblob) | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
 | [`octet_length(blob)`](#octet_lengthblob) | Number of bytes in `blob`. |
-| [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/guides/file_formats/read_file.md %}#read_blob) for more details. |
+| [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/stable/guides/file_formats/read_file.md %}#read_blob) for more details. |
 | [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded `string`. |
 | [`to_hex(blob)`](#to_hexblob) | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
 | [`unbin(value)`](#unbinvalue) | Converts a value from binary representation to a blob. |
