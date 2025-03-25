@@ -79,10 +79,9 @@ extension:
     - rustyconover
   name: datasketches
   version: 0.0.2
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
 repo:
   github: rustyconover/duckdb-datasketches
-  ref: fd19b6855cf6c24a76d382f65029b85bb7aa9a0f
+  ref: 30da391b41248f24daf23d905407c5faf32148ac
 
 extension_star_count: 17
 extension_star_count_pretty: 17
