@@ -85,11 +85,11 @@ SELECT j->'$.species'->0 FROM example;
 ```
 
 ```sql
-SELECT j->'species'->['0','1'] FROM example;
+SELECT j->'species'->['/0', '/1'] FROM example;
 ```
 
 ```text
-["duck", "goose"]
+['"duck"', '"goose"']
 ```
 
 ```sql
@@ -125,7 +125,7 @@ duck
 ```
 
 ```sql
-SELECT j->'species'->>['0','1'] FROM example;
+SELECT j->'species'->>['/0', '/1'] FROM example;
 ```
 
 ```text
