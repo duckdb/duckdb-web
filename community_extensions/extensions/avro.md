@@ -12,14 +12,14 @@ extension:
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
 
   maintainers:
     - hannes
 
 repo:
   github: hannes/duckdb_avro
-  ref: 80fee540409f85fdb9473700bec0d5ca95eb74de
+  ref: ed18629fa56a97e0796a3582110b51ddd125159d
 
 docs:
   hello_world: |
@@ -30,7 +30,7 @@ docs:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 10211
+extension_download_count: 10210
 extension_download_count_pretty: 10.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_avro.png'
 layout: community_extension_doc

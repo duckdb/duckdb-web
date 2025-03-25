@@ -97,8 +97,8 @@ docs:
 
 extension_star_count: 56
 extension_star_count_pretty: 56
-extension_download_count: 815
-extension_download_count_pretty: 815
+extension_download_count: 834
+extension_download_count_pretty: 834
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql.png'
 layout: community_extension_doc
 ---
