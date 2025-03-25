@@ -58,7 +58,7 @@ LOAD avro;
 
 in a DuckDB instance near you.
 
-> Since DuckDB v1.2.1, also Wasm is supported.
+> Since DuckDB v1.2.1, DuckDB's WebAssembly client is also supported.
 
 ### The `read_avro` Function
 
