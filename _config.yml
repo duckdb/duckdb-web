@@ -99,3 +99,6 @@ toc:
   ordered_list: false
 
 exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']
+
+include:
+  - docs/stable/clients/python/reference/objects.inv
