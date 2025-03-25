@@ -56,7 +56,9 @@ INSTALL avro FROM community;
 LOAD avro;
 ```
 
-in a DuckDB instance near you. There is currently no build for Wasm because of dependencies (sigh).
+in a DuckDB instance near you.
+
+> Since DuckDB v1.2.1, also Wasm is supported.
 
 ### The `read_avro` Function
 
@@ -116,7 +118,7 @@ In the following, we disclose the limitations of the `avro` DuckDB extension alo
 
 * There is currently no support for projection or filter **pushdown**, but this is also planned at a later stage.
 
-* There is currently no support for the Wasm or the Windows-MinGW builds of DuckDB due to issues with the Avro library dependency (sigh again). We plan to fix this eventually.
+* There is currently no support for ~~the Wasm or~~ the Windows-MinGW builds of DuckDB due to issues with the Avro library dependency (sigh again). We plan to fix this eventually.
 
 * As mentioned above, DuckDB cannot express recursive type definitions that Avro has. This is unlikely to ever change.
 
