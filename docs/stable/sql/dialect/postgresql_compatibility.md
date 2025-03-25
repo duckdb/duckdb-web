@@ -254,7 +254,7 @@ To work around this, add the other attributes or use the [`GROUP BY ALL` clause]
 
 ## Behavior of Regular Expression Match Operators
 
-PostgreSQL supports the [POSIX regular expression matching operators] `~` (case-sensitive partial regex matching) and `~*` (case-insensitive partial regex matching) as well as their negated variants, `!~` and `!~*`, respectively.
+PostgreSQL supports the [POSIX regular expression matching operators]({% link docs/stable/sql/functions/pattern_matching.md %}) `~` (case-sensitive partial regex matching) and `~*` (case-insensitive partial regex matching) as well as their negated variants, `!~` and `!~*`, respectively.
 
 In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/stable/sql/functions/char.md %}#regexp_full_matchstring-regex) and `!~` is equivalent to `NOT regexp_full_match`.
 The operators `~*` and `!~*` are not supported.
