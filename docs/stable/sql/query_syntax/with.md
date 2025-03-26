@@ -321,44 +321,33 @@ ORDER BY length(path), path;
 | 1         | 8       | [1, 3, 8] |
 | 1         | 8       | [1, 5, 8] |
 
-## Recursive CTEs With `USING KEY`
+## Recursive CTEs with `USING KEY`
 
 `USING KEY` alters the behavior of a regular recursive CTE.
 
-In each iteration, a regular recursive CTE appends results rows to the union
-table which, ultimately defines the overall result of the CTE.
-In contrast, a CTE with `USING KEY` has the ability to update rows that
-have been placed in the union table in an earlier iteration: if the
-current iteration produces a row with key `k`, it replaces a row with the
-same key `k` in the union table (like a dictionary). If no such row exists in the union table
-yet, the new row is appended to the union table as usual.
+In each iteration, a regular recursive CTE appends result rows to the union table, which ultimately defines the overall result of the CTE. In contrast, a CTE with `USING KEY` has the ability to update rows that have been placed in the union table in an earlier iteration: if the current iteration produces a row with key `k`, it replaces a row with the same key `k` in the union table (like a dictionary). If no such row exists in the union table yet, the new row is appended to the union table as usual.
 
-This allows a CTE to exercise fine-grained control over the union table
-contents. Avoiding the append-only behavior can lead to significantly
-smaller union table sizes. This helps query runtime, memory consumption,
-and makes it feasible to access the union table while the iteration is
-still ongoing (this is impossible for regular recursive CTEs): in a
-CTE `WITH RECURSIVE T(...) USING KEY ...`, table `T` denotes the
-rows added by the last iteration (as is usual for recursive CTEs), while
-table `recurring.T` denotes the union table built so far. References
-to `recurring.T` allow for the elegant and idiomatic translation of rather
-complex algorithms into readable SQL code.
+This allows a CTE to exercise fine-grained control over the union table contents. Avoiding the append-only behavior can lead to significantly smaller union table sizes. This helps query runtime, memory consumption, and makes it feasible to access the union table while the iteration is still ongoing (this is impossible for regular recursive CTEs): in a CTE `WITH RECURSIVE T(...) USING KEY ...`, table `T` denotes the rows added by the last iteration (as is usual for recursive CTEs), while table `recurring.T` denotes the union table built so far. References to `recurring.T` allow for the elegant and idiomatic translation of rather complex algorithms into readable SQL code.
 
 ### Example: `USING KEY`
 
 This is a recursive CTE where `USING KEY` has a key column (`a`) and a payload column (`b`).
 The payload columns correspond to the columns to be overwritten.
 In the first iteration we have two different keys, `1` and `2`.
-These two keys will generate two new rows, `(1, 3)` and `(2, 4)`. In the next iteration we produce a new key, `3`, which generates a new row. We also generate the row `(2,3)`, where `2` is a key that already exists from the previous iteration. This will overwrite the old payload `4` with the new payload `3`.
+These two keys will generate two new rows, `(1, 3)` and `(2, 4)`.
+In the next iteration we produce a new key, `3`, which generates a new row.
+We also generate the row `(2, 3)`, where `2` is a key that already exists from the previous iteration.
+This will overwrite the old payload `4` with the new payload `3`.
 
 ```sql
-WITH RECURSIVE tbl(a,b) USING KEY (a) AS (
+WITH RECURSIVE tbl(a, b) USING KEY (a) AS (
     SELECT a, b
     FROM (VALUES (1, 3), (2, 4)) t(a, b)
-	    UNION
+        UNION
     SELECT a + 1, b
     FROM tbl
-    WHERE a < 3)
+    WHERE a < 3
+)
 SELECT *
 FROM tbl
 ```

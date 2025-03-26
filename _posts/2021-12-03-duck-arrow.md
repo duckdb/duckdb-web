@@ -34,7 +34,7 @@ library(duckdb)
 library(arrow)
 library(dplyr)
 
-# Open dataset using year,month folder partition
+# Open dataset using year, month folder partition
 ds <- arrow::open_dataset("nyc-taxi", partitioning = c("year", "month"))
 
 ds %>%
@@ -80,21 +80,23 @@ In this section, we will look at some basic examples of the code needed to read 
 
 ### Setup
 
-First we need to install DuckDB and Arrow. The installation process for both libraries in Python and R is shown below.
+First we need to install DuckDB and Arrow. The installation process for both libraries is shown below.
+
+Python:
 
 ```batch
-# Python Install
 pip install duckdb
 pip install pyarrow
 ```
 
-``` R
-# R Install
+R:
+
+```R
 install.packages("duckdb")
 install.packages("arrow")
 ```
 
-To execute the sample-examples in this section, we need to download the following custom Parquet files:
+To execute the sample examples in this section, we need to download the following custom Parquet files:
 
 * [`integers.parquet`](/data/integers.parquet)
 * [`lineitemsf1.snappy.parquet`](https://blobs.duckdb.org/data/lineitemsf1.snappy.parquet)
@@ -310,14 +312,14 @@ As demonstrated before, DuckDB is capable of consuming and producing Arrow data 
 
 ``` python
 # DuckDB
-# Open dataset using year,month folder partition
+# Open dataset using year, month folder partition
 nyc = ds.dataset('nyc-taxi/', partitioning=["year", "month"])
 
 # Get database connection
 con = duckdb.connect()
 
 # Run query that selects part of the data
-query = con.execute("SELECT total_amount, passenger_count,year FROM nyc where total_amount > 100 and year > 2014")
+query = con.execute("SELECT total_amount, passenger_count, year FROM nyc where total_amount > 100 and year > 2014")
 
 # Create Record Batch Reader from Query Result.
 # "fetch_record_batch()" also accepts an extra parameter related to the desired produced chunk size.
@@ -336,7 +338,7 @@ working_columns = ["vendor_id","pickup_at","dropoff_at","passenger_count","trip_
     "pickup_latitude","store_and_fwd_flag","dropoff_longitude","dropoff_latitude","payment_type",
     "fare_amount","extra","mta_tax","tip_amount","tolls_amount","total_amount","year", "month"]
 
-# Open dataset using year,month folder partition
+# Open dataset using year, month folder partition
 nyc_dataset = ds.dataset(dir, partitioning=["year", "month"])
 # Generate a scanner to skip problematic column
 dataset_scanner = nyc_dataset.scanner(columns=working_columns)

@@ -217,7 +217,7 @@ def add_built_in_type(x):
 
 # Arrow UDF
 def add_arrow_type(x):
-    return pc.add(x,1)
+    return pc.add(x, 1)
 
 con = duckdb.connect()
 
