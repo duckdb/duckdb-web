@@ -36,6 +36,8 @@ _There are no upcoming releases announced at the moment. Please check back later
 
 <!-- markdownlint-enable MD055 MD056 MD058 -->
 
+For planned new features, see the [DuckDB Development Roadmap]({% link docs/stable/dev/roadmap.md %}).
+
 ## Past Releases
 
 In the following, we list DuckDB's past releases along with their codename where applicable.
