@@ -79,10 +79,11 @@ COPY orders TO 'orders'
 (FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'file_{uuid}');
 ```
 
-
 ### Overwriting
 
-By default the partitioned write will not allow overwriting existing directories. Use the `OVERWRITE_OR_IGNORE` option to allow overwriting an existing directory.
+By default the partitioned write will not allow overwriting existing directories.
+On a local file system, the `OVERWRITE` and `OVERWRITE_OR_IGNORE` options remove the existing directories.
+On remote file systems, overwriting is not supported.
 
 ### Appending
 
