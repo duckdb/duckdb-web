@@ -93,7 +93,7 @@ CREATE SECRET secret4 (
 
 #### Loading a Secret based on a profile
 
-> Equivalent of deprecated `load_aws_credentials('my-profile')`, 
+> Tip Equivalent of deprecated `load_aws_credentials('my-profile')`
 
 To load credentials based on a profile which is not defined as a default from AWS_PROFILE environment variable or as a default profile based on AWS SDK precedence, run: 
 
