@@ -149,7 +149,7 @@ CREATE TABLE haystack (id int, vec FLOAT[3]);
 CREATE TABLE needle (search_vec FLOAT[3]);
 
 INSERT INTO haystack
-    SELECT row_number() OVER (), array_value(a,b,c)
+    SELECT row_number() OVER (), array_value(a, b, c)
     FROM range(1, 10) ra(a), range(1, 10) rb(b), range(1, 10) rc(c);
 
 INSERT INTO needle
