@@ -92,6 +92,11 @@ SELECT 'abc' SIMILAR TO '(b|c).*';   -- false
 SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 ```
 
+> In PostgreSQL, `~` is equivalent to `SIMILAR TO`
+and `!~` is equivalent to `NOT SIMILAR TO`.
+In DuckDB, these equivalences do not hold currently,
+see the [PostgreSQL compatibility page]({% link docs/stable/sql/dialect/postgresql_compatibility.md %}).
+
 ## Globbing
 
 DuckDB supports file name expansion, also known as globbing, for discovering files.
