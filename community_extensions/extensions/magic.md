@@ -38,10 +38,10 @@ docs:
     Packaged with version 5.45 of the magic library. The magic.mgc database is at the moment statically compiled in the library, so it's the same across platforms but immutable.
     Currently not available in Windows and Wasm, due to different but likely solvable vc-packaging issue, to be sorted out independently.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 583
-extension_download_count_pretty: 583
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 603
+extension_download_count_pretty: 603
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'
 layout: community_extension_doc
 ---
