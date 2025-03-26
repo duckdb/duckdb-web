@@ -429,12 +429,37 @@ Notice how the values for each date are the same.
 
 #### `EXCLUDE` Clause
 
-The `EXCLUDE` clause allows rows around the current row to be excluded from the frame. It has the following options:
+`EXCLUDE` is an optional modifier to the frame clause for excluding rows around the `CURRENT ROW`.
+This is useful when you want to compute some aggregate value of nearby rows
+to see how the current row compares to it.
 
-* `EXCLUDE NO OTHERS`: exclude nothing (default)
-* `EXCLUDE CURRENT ROW`: exclude the current row from the window frame
-* `EXCLUDE GROUP`: exclude the current row and all its peers (according to the columns specified by `ORDER BY`) from the window frame
-* `EXCLUDE TIES`: exclude only the current row's peers from the window frame
+In the following example, we want to know how an athlete's time in an event compares to
+the average of all the times recorded for their event within ±10 days:
+
+```sql
+SELECT
+    event,
+    date,
+    athlete,
+    avg(time) OVER w AS recent,
+FROM results
+WINDOW w AS (
+    PARTITION BY event
+    ORDER BY date
+    RANGE BETWEEN INTERVAL 10 DAYS PRECEDING AND INTERVAL 10 DAYS FOLLOWING
+        EXCLUDE CURRENT ROW
+)
+ORDER BY event, date, athlete;
+```
+
+There are four options for `EXCLUDE` that specify how to treat the current row:
+
+* `CURRENT ROW` – exclude just the current row
+* `GROUP` – exclude the current row and all its “peers” (rows that have the same `ORDER BY` value)
+* `TIES` – exclude all peer rows, but _not_ the current row (this makes a hole on either side)
+* `NO OTHERS` – don't exclude anything (the default)
+
+Exclusion is implemented for both windowed aggregates as well as for the `first`, `last` and `nth_value` functions.
 
 ### `WINDOW` Clauses
 
