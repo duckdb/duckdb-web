@@ -13,7 +13,7 @@
     * [Spelling](#spelling)
   * [Example Code Snippets](#example-code-snippets)
   * [Cross-References](#cross-references)
-  * [Archive and Generated Pages](#archive-and-generated-pages)
+  * [Archive and Generated Pages](#latest-and-stable-pages)
   * [Notice](#notice)
 
 ## Code of Conduct
@@ -146,8 +146,9 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 ## Latest and Stable Pages
 
-* The latest page, <https://duckdb.org/docs/latest/> contains documentation for the latest `main` branch of DuckDB
-* The versioned pages (e.g., <https://duckdb.org/docs/v1.1/>) contain documentation for the stable versions of DuckDB. We generally only accept contributions to the latest stable version. Older pages are only maintained if they contain a critical error.
+* The latest page, <https://duckdb.org/docs/latest> page *will contain* documentation for the latest nightly release of DuckDB. This will be activated in April 2025.
+* The stable page, <https://duckdb.org/docs/stable> contains documentation for the latest stable release of DuckDB (e.g., v1.2).
+* The versioned pages (e.g., <https://duckdb.org/docs/v1.0/>) contain documentation for old stable versions of DuckDB. We generally only accept contributions to the latest stable version. Older pages are only maintained if they contain a critical error.
 
 ## Generated Pages
 
