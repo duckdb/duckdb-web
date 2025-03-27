@@ -24,6 +24,8 @@ The preferred way to configure and authenticate to S3 endpoints is to use [secre
 
 > Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/1.1/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API]({% link docs/1.1/extensions/httpfs/s3api_legacy_authentication.md %}).
 
+To migrate from previous, use a defined secret with a profile. See the [below CREDENTIAL_CHAIN section](#loading-a-secret-based-on-a-profile)
+
 ### `CONFIG` Provider
 
 The default provider, `CONFIG` (i.e., user-configured), allows access to the S3 bucket by manually providing a key. For example:
@@ -89,6 +91,21 @@ CREATE SECRET secret4 (
 );
 ```
 
+#### Loading a Secret based on a profile
+
+> Tip Equivalent of deprecated `load_aws_credentials('my-profile')`
+
+To load credentials based on a profile which is not defined as a default from AWS_PROFILE environment variable or as a default profile based on AWS SDK precedence, run: 
+
+```sql
+CREATE SECRET secret4 (
+    TYPE S3,
+    PROVIDER CREDENTIAL_CHAIN,
+    CHAIN 'config',
+    PROFILE 'my-profile'
+);
+```
+
 ### Overview of S3 Secret Parameters
 
 Below is a complete list of the supported parameters that can be used for both the `CONFIG` and `CREDENTIAL_CHAIN` providers:
@@ -97,6 +114,7 @@ Below is a complete list of the supported parameters that can be used for both t
 |:------------------------------|:--------------------------------------------------------------------------------------|:------------------|:----------|:--------------------------------------------|
 | `KEY_ID`                      | The ID of the key to use                                                              | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
 | `SECRET`                      | The secret of the key to use                                                          | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
+| `PROFILE`                     | The profile for which to authenticate                                                 | `S3`              | `STRING`  | -                                           |
 | `REGION`                      | The region for which to authenticate (should match the region of the bucket to query) | `S3`, `GCS`, `R2` | `STRING`  | `us-east-1`                                 |
 | `SESSION_TOKEN`               | Optionally, a session token can be passed to use temporary credentials                | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
 | `ENDPOINT`                    | Specify a custom S3 endpoint                                                          | `S3`, `GCS`, `R2` | `STRING`  | `s3.amazonaws.com` for `S3`,                |
