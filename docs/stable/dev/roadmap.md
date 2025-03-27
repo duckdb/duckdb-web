@@ -12,7 +12,7 @@ The Foundation and [DuckDB Labs](https://duckdblabs.com) are not funded by exter
 Instead, the Foundation is funded by contributions from its [members]({% link foundation/index.html %}#supporters),
 while DuckDB Labs' revenue is based on [commercial support and feature prioritization services](https://duckdblabs.com/#support).
 
-## Planned Features (March 2025)
+## Planned Features (Last Updated: March 2025)
 
 This section lists the features that the DuckDB team plans to work on **in the coming year**.
 
