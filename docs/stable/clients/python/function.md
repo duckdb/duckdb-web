@@ -57,6 +57,77 @@ To unregister a UDF, you can call the `remove_function` method with the UDF name
 con.remove_function(name)
 ```
 
+### Using Partial Functions
+
+DuckDB UDFs can also be created with [Python partial functions](https://docs.python.org/3/library/functools.html#functools.partial).
+
+In the below example, we show how a custom logger will return the concatenation of the execution datetime in ISO format, always followed by 
+argument passed at UDF creation and the input parameter provided to the function call:
+
+```python
+from datetime import datetime
+import duckdb
+import functools
+
+
+def get_datetime_iso_format() -> str:
+    return datetime.now().isoformat()
+
+
+def logger_udf(func, arg1: str, arg2: int) -> str:
+    return ' '.join([func(), arg1, str(arg2)])
+    
+    
+with duckdb.connect() as con:
+    con.sql("select * from range(10) tbl(id)").to_table("example_table")
+    
+    con.create_function('custom_logger', functools.partial(logger_udf, get_datetime_iso_format, 'logging data'))
+    rel = con.sql("SELECT custom_logger(id) from example_table;")
+    rel.show()
+
+    con.create_function('another_custom_logger', functools.partial(logger_udf, get_datetime_iso_format, ':'))
+    rel = con.sql("SELECT another_custom_logger(id) from example_table;")
+    rel.show()
+```
+
+```text
+┌───────────────────────────────────────────┐
+│             custom_logger(id)             │
+│                  varchar                  │
+├───────────────────────────────────────────┤
+│ 2025-03-27T12:07:56.811251 logging data 0 │
+│ 2025-03-27T12:07:56.811264 logging data 1 │
+│ 2025-03-27T12:07:56.811266 logging data 2 │
+│ 2025-03-27T12:07:56.811268 logging data 3 │
+│ 2025-03-27T12:07:56.811269 logging data 4 │
+│ 2025-03-27T12:07:56.811270 logging data 5 │
+│ 2025-03-27T12:07:56.811271 logging data 6 │
+│ 2025-03-27T12:07:56.811272 logging data 7 │
+│ 2025-03-27T12:07:56.811274 logging data 8 │
+│ 2025-03-27T12:07:56.811275 logging data 9 │
+├───────────────────────────────────────────┤
+│                  10 rows                  │
+└───────────────────────────────────────────┘
+
+┌────────────────────────────────┐
+│   another_custom_logger(id)    │
+│            varchar             │
+├────────────────────────────────┤
+│ 2025-03-27T12:07:56.812106 : 0 │
+│ 2025-03-27T12:07:56.812116 : 1 │
+│ 2025-03-27T12:07:56.812118 : 2 │
+│ 2025-03-27T12:07:56.812119 : 3 │
+│ 2025-03-27T12:07:56.812121 : 4 │
+│ 2025-03-27T12:07:56.812122 : 5 │
+│ 2025-03-27T12:07:56.812123 : 6 │
+│ 2025-03-27T12:07:56.812124 : 7 │
+│ 2025-03-27T12:07:56.812126 : 8 │
+│ 2025-03-27T12:07:56.812127 : 9 │
+├────────────────────────────────┤
+│            10 rows             │
+└────────────────────────────────┘
+```
+
 ## Type Annotation
 
 When the function has type annotation it's often possible to leave out all of the optional parameters.
@@ -121,6 +192,29 @@ print(res)
 
 ```text
 [(5,)]
+```
+
+> Always use `null_handling="special"` when the function can return NULL.
+
+
+```python
+import duckdb
+from duckdb.typing import VARCHAR
+
+
+def return_str_or_none(x: str) -> str | None:
+    if not x:
+        return None
+    
+    return x
+
+duckdb.create_function("return_str_or_none", return_str_or_none, [VARCHAR], VARCHAR, null_handling="special")
+res = duckdb.sql("SELECT return_str_or_none('')").fetchall()
+print(res)
+```
+
+```text
+[(None,)]
 ```
 
 ## Exception Handling
