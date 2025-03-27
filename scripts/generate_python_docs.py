@@ -1,18 +1,20 @@
-from sphinx.locale import __
+from importlib.metadata import version
 from os.path import join, dirname, splitext
-from lxml.html import fromstring, tostring
 from pathlib import Path
+
+from lxml.html import fromstring, tostring
 from sphinx.application import Sphinx
 from sphinx.builders.html import StandaloneHTMLBuilder
-from sphinx.writers.html5 import HTML5Translator
-from docutils.nodes import SkipChildren
-from importlib.metadata import version
-
+from sphinx.locale import __
 
 FRONTMATTER = """\
 ---
 # this file is GENERATED, regenerate it with scripts/generate_python_docs.py
 layout: docu
+redirect_from:
+- /docs/api/python/reference/index
+- /docs/api/python/reference/index/
+- /docs/clients/python/reference/index
 title: Python Client API
 ---
 """
@@ -56,7 +58,7 @@ def main():
         version('pandas'),
     )
 
-    destdir = join(dirname(__file__), "../docs/clients/python/reference/")
+    destdir = join(dirname(__file__), "../docs/stable/clients/python/reference/")
     app = Sphinx(
         srcdir=destdir + "templates",
         confdir=None,
@@ -91,6 +93,9 @@ def main():
     post_process(Path(destdir) / 'index.html')
     for filename in Path(destdir).glob("*.html"):
         filename.unlink()
+
+    # test objects.inv
+    # python -m sphinx.ext.intersphinx http://localhost:4000/docs/stable/clients/python/reference/objects.inv
 
 
 if __name__ == "__main__":
