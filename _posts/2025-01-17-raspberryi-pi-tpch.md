@@ -182,7 +182,7 @@ This is a great demonstration of what the continuous innovation in hardware and 
 
 ## Summary
 
-We showed that you can use DuckDB in a Raspberry Pi setup that costs less than $300 and
+We showed that you can use DuckDB in a Raspberry Pi setup that costs $300 and
 runs all queries on the TPC-H SF300 dataset in less than 30 minutes.
 
 We hope you enjoyed this blog post. If you have an interesting DuckDB setup, don't forget to share it with us!
