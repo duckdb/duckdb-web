@@ -26,6 +26,9 @@ The preferred way to configure and authenticate to S3 endpoints is to use [secre
 
 > Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/stable/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API]({% link docs/stable/extensions/httpfs/s3api_legacy_authentication.md %}).
 
+To migrate from the [deprecated S3 API]({% link docs/stable/extensions/httpfs/s3api_legacy_authentication.md %}), use a defined secret with a profile.
+See the [“Loading a Secret Based on a Profile” section](#loading-a-secret-based-on-a-profile).
+
 ### `CONFIG` Provider
 
 The default provider, `CONFIG` (i.e., user-configured), allows access to the S3 bucket by manually providing a key. For example:
