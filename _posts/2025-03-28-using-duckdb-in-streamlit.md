@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using DuckDB in Streamlit"
-author: Petrica Leuca and Gabor Szarnyas
+author: Petrica Leuca
 thumb: "/images/blog/thumbs/duckdb-streamlit.svg"
 image: "/images/blog/thumbs/duckdb-streamlit.png"
 excerpt: "We use a real-world railway dataset to demonstrate the integration of DuckDB and Streamlit, including the database connection management, the DuckDB Python relational API and responsiveness in interactive map charts."
@@ -10,7 +10,7 @@ tags: ["using DuckDB"]
 
 ## Introduction
 
-In the article [Analyzing Railway Traffic In The Netherlands]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}), Gabor has shown how to analyze data with SQL and reading remote files with DuckDB, by using open data from the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/about).
+In the article [Analyzing Railway Traffic in the Netherlands]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}), Gabor has shown how to analyze data with SQL and reading remote files with DuckDB, by using open data from the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/about).
 
 Using the above open data, in this post we will build an application, in which a user can:
 
@@ -51,7 +51,6 @@ Connecting to an in-memory database involves loading the data into memory, whene
 - caching the DuckDB connection as a global shared connection in the application;  
 - caching the DuckDB connection for the user session.
 
-
 ```python
 @st.cache_resource(ttl=datetime.timedelta(hours=1), max_entries=2)
 def get_duckdb_memory(session_id):
@@ -85,14 +84,12 @@ duckdb_conn = duckdb.connect(
 ### Attaching an External Database
 
 Another way to connect to DuckDB is to establish a **read only** connection to an instance over HTTPS or S3 compatible APIs,
-eg `DUCKDB_EXTERNAL_LOCATION = "https://blobs.duckdb.org/nl-railway/train_stations_and_services.duckdb"`:
+e.g. `DUCKDB_EXTERNAL_LOCATION = "https://blobs.duckdb.org/nl-railway/train_stations_and_services.duckdb"`:
 
 ```python
 duckdb_conn = duckdb.connect()
-
-duckdb_conn.execute(f"ATTACH '{DUCKDB_EXTERNAL_LOCATION}' as ext_db")
-
-duckdb_conn.execute("USE ext_db")
+duckdb_conn.execute(f"attach '{DUCKDB_EXTERNAL_LOCATION}' as ext_db")
+duckdb_conn.execute("use ext_db")
 ```
 
 More details about attaching an external database can be found in the [DuckDB documentation]({% link docs/stable/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}).
@@ -172,7 +169,6 @@ The query will be executed when one of the following methods is encountered:
 - `stations_query.write_to()` to export the data in a file;  
 - any other calculation method, such as `.sum`, `.row_number` etc. The relational methods can be found in the [DuckDB documentation]({% link docs/stable/clients/python/reference/index.md %}).
 
-
 <div align="center" style="margin:10px">
     <a href="/images/blog/duckdb-streamlit/top_5_busiest_stations.png">
         <img
@@ -186,6 +182,7 @@ The query will be executed when one of the following methods is encountered:
 ### Top 5 Busiest Train Stations per Month
 
 To extract the 5 busiest train stations per month, we start from the above query and add a `row_number` calculation with a final filter of the ranking to be less or equal to 5:
+
 ```python
 stations_query, _ = get_stations_services_query(get_duckdb_conn())
 
@@ -231,6 +228,7 @@ The data about the train rides through the train stations of The Netherlands, at
 </div>
 
 To analyze the network utilization across the country, we use `density_map` chart from Plotly, which will generate a heat map on a map chart. Because heat maps work best with pre-aggregated data, we first aggregate the number of train services and the geolocation of the station: 
+
 ```python
 stations_df = stations_query.aggregate(
     "geo_lat, geo_lng, num_services: sum(num_services)"
@@ -306,7 +304,6 @@ We have decided to create a function, in order to highlight [`cache_data` functi
 
 The code of implementing interactive maps with Plotly in Streamlit is available on [GitHub](https://github.com/duckdb/duckdb-web/blob/main/code_examples/duckdb_streamlit/pages/railway_network_utilization.py)
 
-
 ## Finding the Closest 5 Stations with Folium
 
 <div align="center" style="margin:10px">
@@ -324,7 +321,6 @@ One other use-case for the railway network data is to find the closest train sta
 To work with geo data in DuckDB we have to install and load the spatial extension:
 
 ```python
-
 duckdb_conn.sql("install spatial;")
 duckdb_conn.sql("load spatial;")
 ```
@@ -363,10 +359,11 @@ def get_closest_stations_query(duckdb_conn, lat, lng):
         .order("distance_in_km")
         .limit(5)
     )
-
 ```
-In the above query we use `st_point` to create a point type field and `st_distance_sphere` to get the distance, in meters, between two points. 
-> It is important to mention that while we usually refer to a geo point as `[latitude, longitude]`, when working with spatial extensions we usually create the point as `[longitude, latitude]`. This applies to PostGIS as well.
+
+In the above query we use `st_point` to create a point type field and `st_distance_sphere` to get the distance, in meters, between two points.
+
+> It is important to mention that while we usually refer to a geo point as `[latitude, longitude]`, when working with spatial extensions we usually create the point as `[longitude, latitude]`. This applies to [PostGIS](https://postgis.net/) as well.
 
  When a user clicks on the map, we store the clicks in the session state and rerun Streamlit to display the map with the new user selection. When rerun happens, Streamlit will rerun the entire application for the current session, therefore understanding the session state and caching mechanisms is essential when building Streamlit applications.
 
