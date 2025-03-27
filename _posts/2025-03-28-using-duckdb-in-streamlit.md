@@ -27,15 +27,15 @@ To load the railway traffic data, we write a function, which creates the two tab
 ```python
 def prepare_duckdb(duckdb_conn):  
 
-	duckdb_conn.sql("""
-    	create table if not exists services as 
-    	from 'https://blobs.duckdb.org/nl-railway/services-2024.csv.gz'  
-	""")
+    duckdb_conn.sql("""
+        create table if not exists services as
+        from 'https://blobs.duckdb.org/nl-railway/services-2024.csv.gz'
+    """)
 
-	duckdb_conn.sql("""  
-    	create table if not exists stations as 
-    	from 'https://blobs.duckdb.org/nl-railway/stations-2023-09.csv'  
-	""")
+    duckdb_conn.sql("""
+        create table if not exists stations as
+        from 'https://blobs.duckdb.org/nl-railway/stations-2023-09.csv'
+    """)
 ```
 
 From a Streamlit application there are three ways to connect to DuckDB:
