@@ -36,7 +36,7 @@ A Bash script to achieve this (to be adapted with the file names and executable 
 /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 ```
 
-After this, `mydata.db` will remain in the old format, `mydata.new.db` will contain the same data but in a format accessible by the more recent DuckDB version, and the folder `tmp` will hold the same data in a universal format as different files.
+After this, `mydata.old.db` will remain in the old format, `mydata.new.db` will contain the same data but in a format accessible by the more recent DuckDB version, and the folder `tmp` will hold the same data in a universal format as different files.
 
 Check [`EXPORT` documentation]({% link docs/stable/sql/statements/export.md %}) for more details on the syntax.
 
