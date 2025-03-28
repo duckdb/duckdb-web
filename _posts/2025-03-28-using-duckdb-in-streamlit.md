@@ -302,7 +302,7 @@ We have decided to create a function, in order to highlight [`cache_data` functi
 
 > It is important to notice that the order of columns and values matters in a heat map chart and that we need to reset the index of the pivoted data before plotting.
 
-The code of implementing interactive maps with Plotly in Streamlit is available on [GitHub](https://github.com/duckdb/duckdb-web/blob/main/code_examples/duckdb_streamlit/pages/railway_network_utilization.py)
+The code of implementing interactive maps with Plotly in Streamlit is available on [GitHub](https://github.com/duckdb/duckdb-web/blob/main/code_examples/duckdb_streamlit/pages/railway_network_utilization.py).
 
 ## Finding the Closest 5 Stations with Folium
 
@@ -367,7 +367,7 @@ In the above query we use `st_point` to create a point type field and `st_distan
 
  When a user clicks on the map, we store the clicks in the session state and rerun Streamlit to display the map with the new user selection. When rerun happens, Streamlit will rerun the entire application for the current session, therefore understanding the session state and caching mechanisms is essential when building Streamlit applications.
 
-The code of implementing interactive maps with Folium in Streamlit is available on [GitHub](https://github.com/duckdb/duckdb-web/blob/main/code_examples/duckdb_streamlit/pages/closest_train_stations.py)
+The code of implementing interactive maps with Folium in Streamlit is available on [GitHub](https://github.com/duckdb/duckdb-web/blob/main/code_examples/duckdb_streamlit/pages/closest_train_stations.py).
 
 ## Conclusion
 
