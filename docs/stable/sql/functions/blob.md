@@ -53,7 +53,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Convert `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
+| **Description** | Converts `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
 | **Example** | `decode('\xC3\xBC'::BLOB)` |
 | **Result** | `ü` |
 

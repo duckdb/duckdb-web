@@ -24,7 +24,7 @@ OVERRIDES_MAP = {
 }
 
 URL_CONVERSIONS = {
-    '`read_blob` guide': ('docs/guides/file_formats/read_file.md', '#read_blob')
+    '`read_blob` guide': ('docs/stable/guides/file_formats/read_file.md', '#read_blob')
 }
 
 # for these functions, we don't run the examples
