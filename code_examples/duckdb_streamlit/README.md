@@ -1,6 +1,6 @@
 # Introduction
 
-These are the scripts used in the [blog post]().
+These are the scripts used in the [Using DuckDB in Streamlit blog post](https://duckdb.org/2025/03/28/using-duckdb-in-streamlit.html).
 
 ## Local execution
 Go to `code_examples/duckdb_streamlit` and:

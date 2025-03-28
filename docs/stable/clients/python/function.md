@@ -81,11 +81,17 @@ def logger_udf(func, arg1: str, arg2: int) -> str:
 with duckdb.connect() as con:
     con.sql("select * from range(10) tbl(id)").to_table("example_table")
     
-    con.create_function('custom_logger', functools.partial(logger_udf, get_datetime_iso_format, 'logging data'))
+    con.create_function(
+        'custom_logger',
+        functools.partial(logger_udf, get_datetime_iso_format, 'logging data')
+    )
     rel = con.sql("SELECT custom_logger(id) from example_table;")
     rel.show()
 
-    con.create_function('another_custom_logger', functools.partial(logger_udf, get_datetime_iso_format, ':'))
+    con.create_function(
+        'another_custom_logger',
+        functools.partial(logger_udf, get_datetime_iso_format, ':')
+    )
     rel = con.sql("SELECT another_custom_logger(id) from example_table;")
     rel.show()
 ```
@@ -208,7 +214,13 @@ def return_str_or_none(x: str) -> str | None:
     
     return x
 
-duckdb.create_function("return_str_or_none", return_str_or_none, [VARCHAR], VARCHAR, null_handling="special")
+duckdb.create_function(
+    "return_str_or_none",
+    return_str_or_none,
+    [VARCHAR],
+    VARCHAR,
+    null_handling="special"
+)
 res = duckdb.sql("SELECT return_str_or_none('')").fetchall()
 print(res)
 ```
