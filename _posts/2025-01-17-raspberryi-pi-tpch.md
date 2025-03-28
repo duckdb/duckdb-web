@@ -8,6 +8,8 @@ excerpt: DuckDB can run all TPC-H SF300 queries on a Raspberry Pi board.
 tags: ["benchmark"]
 --- 
 
+> Update (March 2025): The configuration described in this post can now run all TPC-H queries on the SF1,000 data set with the latest version of DuckDB!
+
 ## Introduction
 
 The Raspberry Pi is an initiative to provide affordable and easy-to-program microcomputer boards.
