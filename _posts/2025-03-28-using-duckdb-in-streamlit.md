@@ -79,7 +79,7 @@ duckdb_conn = duckdb.connect(
     "train_stations_and_services.duckdb", 
     read_only=True
 )
-````
+```
 
 ### Attaching an External Database
 
@@ -108,7 +108,6 @@ Starting from this point, we will work with the external database.
 To analyze the data within Streamlit, we will make use of the Python [relational API]({% link docs/stable/clients/python/relational_api.md %}), by chaining queries. We start by defining a relation, which will select the needed data from `stations`:
 
 ```python
-
 stations_selection = duckdb_conn.sql("""
     select name_long as station_name, geo_lat, geo_lng, code 
     from stations
@@ -328,7 +327,6 @@ duckdb_conn.sql("load spatial;")
 We then define a function to retrieve the query, which returns the closest five train stations to a location, composed of latitude and longitude.
 
 ```python
-
 def get_closest_stations_query(duckdb_conn, lat, lng):
 
     stations_selection = duckdb_conn.sql("""
