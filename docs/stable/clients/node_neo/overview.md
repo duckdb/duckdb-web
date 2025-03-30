@@ -16,6 +16,7 @@ available separately as [@duckdb/node-bindings](https://www.npmjs.com/package/@d
 ## Features
 
 ### Main Differences from [duckdb-node](https://www.npmjs.com/package/duckdb)
+
 * Native support for Promises; no need for separate [duckdb-async](https://www.npmjs.com/package/duckdb-async) wrapper.
 * DuckDB-specific API; not based on the [SQLite Node API](https://www.npmjs.com/package/sqlite3).
 * Lossless & efficent support for values of all [DuckDB data types]({% link docs/stable/sql/data_types/overview.md %}).
