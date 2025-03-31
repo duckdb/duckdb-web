@@ -15,7 +15,8 @@ title: Release Calendar
 ---
 
 DuckDB follows [semantic versioning](https://semver.org/spec/v2.0.0.html).
-Patch versions only ship bugfixes, while minor versions also introduce new features.
+Larger new features are introduced in minor versions,
+while patch versions mostly contain bugfixes.
 
 ## Upcoming Releases
 
