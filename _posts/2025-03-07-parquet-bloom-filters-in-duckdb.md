@@ -45,7 +45,7 @@ Users can find out if a given Parquet file contains Bloom filters: the `parquet_
 
 ## Example Use Case
 
-Let's showcase the Parquet Bloom filters in DuckDB with an example. First, we create a example file `filter.parquet` that *will* contain Bloom filters:
+Let's showcase the Parquet Bloom filters in DuckDB with an example. First, we create an example file `filter.parquet` that *will* contain Bloom filters:
 
 ```sql
 COPY (
