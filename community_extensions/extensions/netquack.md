@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: netquack
   description: DuckDB extension for parsing, extracting, and analyzing domains, URIs, and paths with ease.
-  version: 1.1.0
+  version: 1.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,11 +17,11 @@ extension:
 
 repo:
   github: hatamiarash7/duckdb-netquack
-  ref: 665e0fef2550367d44ec9a88ba0343306fc48831
+  ref: 8094acb2ed43eb20e1ef56f54e91cc49c0788d62
 
 docs:
   extended_description: |
-    This extension designed to simplify working with domains, URIs, and web paths directly within your database queries. Whether you're extracting top-level domains (TLDs), parsing URI components, or analyzing web paths, Netquack provides a suite of intuitive functions to handle all your network tasks efficiently. Built for data engineers, analysts, and developers.
+    This extension designed to simplify working with domains, URIs, IPs, and web paths directly within your database queries. Whether you're extracting top-level domains (TLDs), parsing URI components, or analyzing web paths, Netquack provides a suite of intuitive functions to handle all your network tasks efficiently. Built for data engineers, analysts, and developers.
 
     With Netquack, you can unlock deeper insights from your web-related datasets without the need for external tools or complex workflows.
 
@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 502
-extension_download_count_pretty: 502
+extension_download_count: 510
+extension_download_count_pretty: 510
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---
@@ -56,18 +56,20 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type |                description                 | comment |                              examples                               |
-|----------------------|---------------|--------------------------------------------|---------|---------------------------------------------------------------------|
-| extract_domain       | scalar        | Extracting the main domain from a URL      | NULL    | [SELECT extract_domain('a.example.com') as domain;]                 |
-| extract_host         | scalar        | Extracting the hostname from a URL         | NULL    | [SELECT extract_host('https://b.a.example.com/path/path') as host;] |
-| extract_path         | scalar        | Extracting the path from a URL             | NULL    | [SELECT extract_path('example.com/path/path/image.png') as path;]   |
-| extract_query_string | scalar        | Extracting the query string from a URL     | NULL    | [SELECT extract_query_string('example.com?key=value') as query;]    |
-| extract_schema       | scalar        | Extracting the schema from a URL           | NULL    | [SELECT extract_schema('mailto:someone@example.com') as schema;]    |
-| extract_subdomain    | scalar        | Extracting the subdomain from a URL        | NULL    | [SELECT extract_subdomain('test.example.com.ac') as dns_record;]    |
-| extract_tld          | scalar        | Extracting the top-level domain from a URL | NULL    | [SELECT extract_tld('a.example.com') as tld;]                       |
-| get_tranco_rank      | scalar        | Getting the Tranco rank of a domain        | NULL    | [SELECT get_tranco_rank('cloudflare.com') as rank;]                 |
-| update_suffixes      | scalar        | Update public suffixes                     | NULL    | [SELECT update_suffixes();]                                         |
-| update_tranco        | scalar        | Update tranco data                         | NULL    | [SELECT update_tranco(true);]                                       |
-| netquack_version     | table         | NULL                                       | NULL    | [NULL]                                                              |
+|      function_name       | function_type |                description                 | comment |                              examples                               |
+|--------------------------|---------------|--------------------------------------------|---------|---------------------------------------------------------------------|
+| extract_domain           | scalar        | Extracting the main domain from a URL      | NULL    | [SELECT extract_domain('a.example.com') as domain;]                 |
+| extract_host             | scalar        | Extracting the hostname from a URL         | NULL    | [SELECT extract_host('https://b.a.example.com/path/path') as host;] |
+| extract_path             | scalar        | Extracting the path from a URL             | NULL    | [SELECT extract_path('example.com/path/path/image.png') as path;]   |
+| extract_query_string     | scalar        | Extracting the query string from a URL     | NULL    | [SELECT extract_query_string('example.com?key=value') as query;]    |
+| extract_schema           | scalar        | Extracting the schema from a URL           | NULL    | [SELECT extract_schema('mailto:someone@example.com') as schema;]    |
+| extract_subdomain        | scalar        | Extracting the subdomain from a URL        | NULL    | [SELECT extract_subdomain('test.example.com.ac') as dns_record;]    |
+| extract_tld              | scalar        | Extracting the top-level domain from a URL | NULL    | [SELECT extract_tld('a.example.com') as tld;]                       |
+| get_tranco_rank          | scalar        | Getting the Tranco rank of a domain        | NULL    | [SELECT get_tranco_rank('cloudflare.com') as rank;]                 |
+| update_suffixes          | scalar        | Update public suffixes                     | NULL    | [SELECT update_suffixes();]                                         |
+| update_tranco            | scalar        | Update tranco data                         | NULL    | [SELECT update_tranco(true);]                                       |
+| ipcalc                   | table         | NULL                                       | NULL    | [NULL]                                                              |
+| get_tranco_rank_category | scalar        | NULL                                       | NULL    | [NULL]                                                              |
+| netquack_version         | table         | NULL                                       | NULL    | [NULL]                                                              |
 
 

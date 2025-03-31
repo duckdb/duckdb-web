@@ -97,10 +97,10 @@ docs:
   extended_description: |
     The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 53
-extension_star_count_pretty: 53
-extension_download_count: 559
-extension_download_count_pretty: 559
+extension_star_count: 54
+extension_star_count_pretty: 54
+extension_download_count: 584
+extension_download_count_pretty: 584
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---
