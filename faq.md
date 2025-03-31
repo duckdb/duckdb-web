@@ -128,6 +128,30 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="qa-wrap" markdown="1">
 
+### I found a project with “duck” in its name. Is it officially affiliated with DuckDB?
+
+<div class="answer" markdown="1">
+
+The following projects are officially affiliated with DuckDB:
+
+* the [DuckDB project](https://github.com/duckdb/duckdb)
+* all primary [client libraries]({% link docs/stable/clients/overview.md %})
+* all [core DuckDB extensions]({% link docs/stable/extensions/core_extensions.md %})
+* the [DuckDB UI](https://github.com/duckdb/duckdb-ui)
+* [MotherDuck](https://motherduck.com)
+* [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb)
+* [`pg_duckdb`](https://github.com/duckdb/pg_duckdb)
+
+Other projects are likely _not affiliated_ with the DuckDB project. Please check their websites, READMEs and licenses for more details.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### I would like feature X to be implemented in DuckDB. How do I proceed?
 
 <div class="answer" markdown="1">
