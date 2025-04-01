@@ -118,27 +118,36 @@ The `RENAME TO` clause renames an entire table, changing its name in the schema.
 
 ## `RENAME COLUMN`
 
-Rename a column of a table:
+To rename a column of a table, use the `RENAME` or `RENAME COLUMN` clauses:
 
 ```sql
 ALTER TABLE integers 
-RENAME i TO j;
+RENAME COLUMN i TO j;
 ```
 
 ```sql
 ALTER TABLE integers
-RENAME COLUMN j TO k;
+RENAME i TO j;
 ```
 
-The `RENAME COLUMN` clause renames a single column within a table. Any constraints that rely on this name (e.g., `CHECK` constraints) are automatically updated. However, note that any views that rely on this column name are **not** automatically updated.
+The `RENAME [COLUMN]` clause renames a single column within a table. Any constraints that rely on this name (e.g., `CHECK` constraints) are automatically updated. However, note that any views that rely on this column name are **not** automatically updated.
 
 ## `ADD COLUMN`
 
-Add a new column with name `k` to the table `integers`, it will be filled with the default value NULL:
+To add a column of a table, use the `ADD` or `ADD COLUMN` clauses.
+
+E.g., to add a new column with name `k` to the table `integers`, it will be filled with the default value `NULL`:
 
 ```sql
 ALTER TABLE integers
 ADD COLUMN k INTEGER;
+```
+
+Or:
+
+```sql
+ALTER TABLE integers
+ADD k INTEGER;
 ```
 
 Add a new column with name `l` to the table integers, it will be filled with the default value 10:
@@ -148,18 +157,27 @@ ALTER TABLE integers
 ADD COLUMN l INTEGER DEFAULT 10;
 ```
 
-The `ADD COLUMN` clause can be used to add a new column of a specified type to a table. The new column will be filled with the specified default value, or `NULL` if none is specified.
+The `ADD [COLUMN]` clause can be used to add a new column of a specified type to a table. The new column will be filled with the specified default value, or `NULL` if none is specified.
 
 ## `DROP COLUMN`
 
-Drop the column `k` from the table `integers`:
+To drop a column of a table, use the `DROP` or `DROP COLUMN` clause:
+
+E.g., to drop the column `k` from the table `integers`:
+
+```sql
+ALTER TABLE integers
+DROP COLUMN k;
+```
+
+Or:
 
 ```sql
 ALTER TABLE integers
 DROP k;
 ```
 
-The `DROP COLUMN` clause can be used to remove a column from a table. Note that columns can only be removed if they do not have any indexes that rely on them. This includes any indexes created as part of a `PRIMARY KEY` or `UNIQUE` constraint. Columns that are part of multi-column check constraints cannot be dropped either.
+The `DROP [COLUMN]` clause can be used to remove a column from a table. Note that columns can only be removed if they do not have any indexes that rely on them. This includes any indexes created as part of a `PRIMARY KEY` or `UNIQUE` constraint. Columns that are part of multi-column check constraints cannot be dropped either.
 If you attempt to drop a column with an index on it, DuckDB will return the following error message:
 
 ```console
@@ -176,7 +194,7 @@ ALTER TABLE integers
 ALTER i TYPE VARCHAR;
 ```
 
-> Instead of 
+> Instead of
 > `ALTER ⟨column_name⟩ TYPE ⟨type⟩`{:.language-sql .highlight}, you can also use the equivalent
 > `ALTER ⟨column_name⟩ SET TYPE ⟨type⟩`{:.language-sql .highlight} and the 
 > `ALTER ⟨column_name⟩ SET DATA TYPE ⟨type⟩`{:.language-sql .highlight} clauses.
