@@ -47,6 +47,7 @@ The purpose of processing the train services and the Netherlands cartography dat
 ## Processing Data with DuckDB and dbt
 
 After we have [initialized](https://docs.getdbt.com/reference/commands/init) our project, we configure the connection details for DuckDB in the `profiles.yml` file. Along with specifying if the database should be in memory or persisted to disk, we also specify:
+
 - which extensions are required for the data processing, e.g., [spatial]({% link docs/stable/extensions/spatial/overview.md %});
 - external databases, attached from the local disk or other storage solutions.
 
@@ -113,11 +114,11 @@ To refresh the data in the `dim_nl_provinces` table, we use  the `st_read` spati
 {{ config(materialized='table') }}
 
 SELECT
-  {{ dbt_utils.generate_surrogate_key(['id']) }} AS province_sk,
-  id                               AS province_id,
-  statnaam                         AS province_name,
-  geom                             AS province_geometry,
-  {{ common_columns() }}
+    {{ dbt_utils.generate_surrogate_key(['id']) }} AS province_sk,
+    id                                             AS province_id,
+    statnaam                                       AS province_name,
+    geom                                           AS province_geometry,
+    {{ common_columns() }}
 FROM st_read({{ source("geojson_external", "nl_provinces") }}) AS src
 ```
 {% endraw %}
@@ -132,20 +133,20 @@ we use the `st_contains` spatial function, which returns `true` when a geometry 
 {{ config(materialized='table') }}
 
 SELECT
-  {{ dbt_utils.generate_surrogate_key(['tr_st.code']) }} AS station_sk,
-  tr_st.id                                               AS station_id,
-  tr_st.code                                             AS station_code,
-  tr_st.name_long                                        AS station_name,
-  tr_st.type                                             AS station_type,
-  st_point(tr_st.geo_lng, tr_st.geo_lat)                 AS station_geo_location,
-  coalesce(dim_mun.municipality_sk, 'unknown')           AS municipality_sk,
-  {{ common_columns() }}
+    {{ dbt_utils.generate_surrogate_key(['tr_st.code']) }} AS station_sk,
+    tr_st.id                                               AS station_id,
+    tr_st.code                                             AS station_code,
+    tr_st.name_long                                        AS station_name,
+    tr_st.type                                             AS station_type,
+    st_point(tr_st.geo_lng, tr_st.geo_lat)                 AS station_geo_location,
+    coalesce(dim_mun.municipality_sk, 'unknown')           AS municipality_sk,
+    {{ common_columns() }}
 FROM {{ source("external_db", "stations") }} AS tr_st
 LEFT JOIN {{ ref ("dim_nl_municipalities") }} AS dim_mun
-  ON st_contains(
-    dim_mun.municipality_geometry,
-    st_point(tr_st.geo_lng, tr_st.geo_lat)
-  )
+       ON st_contains(
+         dim_mun.municipality_geometry,
+         st_point(tr_st.geo_lng, tr_st.geo_lat)
+       )
 WHERE tr_st.country = 'NL'
 ```
 {% endraw %}
@@ -175,17 +176,17 @@ In the following processing step, we export aggregated train service data at mon
 }}
 
 SELECT
-  year(service_date) AS service_year,
-  month(service_date) AS service_month,
-  service_type,
-  service_company,
-  tr_st.station_sk,
-  tr_st.station_name,
-  m.municipality_sk,
-  m.municipality_name,
-  p.province_sk,
-  p.province_name,
-  count(*) AS number_of_rides
+    year(service_date) AS service_year,
+    month(service_date) AS service_month,
+    service_type,
+    service_company,
+    tr_st.station_sk,
+    tr_st.station_name,
+    m.municipality_sk,
+    m.municipality_name,
+    p.province_sk,
+    p.province_name,
+    count(*) AS number_of_rides
 FROM {{ ref ("fact_services") }} AS srv
 INNER JOIN {{ ref("dim_nl_train_stations") }} AS tr_st
         ON srv.station_sk = tr_st.station_sk
