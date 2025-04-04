@@ -27,7 +27,7 @@ SELECT
 ;
 ```
 
-> Warning Decimal values are truncated to integers when used with unit keywords (unless in units of `SECONDS` or `MILLISECONDS`).
+> Warning Decimal values are truncated to integers when used with unit keywords (unless the unit is `SECONDS` or `MILLISECONDS`).
 >
 > ```sql
 > SELECT INTERVAL '1.5' YEARS;
