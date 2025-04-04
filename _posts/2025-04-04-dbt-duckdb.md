@@ -246,7 +246,7 @@ INNER JOIN {{ ref("rep_dim_nl_train_stations") }} AS tr_st
         ON srv.station_sk = tr_st.station_sk
 INNER JOIN {{ ref("rep_dim_nl_municipalities") }} AS mn
         ON tr_st.municipality_sk = mn.municipality_sk
-WHERE NOT service_arrival_cancelled;
+WHERE NOT service_arrival_cancelled
 
   {% if is_incremental() %}
     AND srv.invocation_id = (
