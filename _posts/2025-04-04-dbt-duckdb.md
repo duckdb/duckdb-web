@@ -31,16 +31,16 @@ After doing an initial exploration of the above data, we can observe that a prov
 - a fact table, `fact_services`, to hold information about the train services, linked to `dim_nl_train_stations`.
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/dbt-duckdb/data_model.png">
+    <a href="/images/blog/dbt-duckdb/data_model.svg">
         <img
-          src="/images/blog/dbt-duckdb/data_model.png"
+          src="/images/blog/dbt-duckdb/data_model.svg"
           alt="Transformation Layer Data Model"
-          width=600
+          width=700
         />
     </a>
 </div>
 
-The purpose of processing the train services and the Netherlands cartography data is to organize the data in a structure which can easily be used in future railway data analysis use cases. We call such a structure a data mart, given its focus on the Dutch railway services subject area and its data model.
+The purpose of processing the train services and the Netherlands cartography data is to organize the data in a structure which can easily be used in future railway data analysis use cases. Such curated data structures are often called [_data marts_](https://en.wikipedia.org/wiki/Data_mart).
 
 > Tip The following code is available on [GitHub](https://github.com/duckdb/duckdb-blog-examples/tree/main/dbt_duckdb).
 
@@ -92,7 +92,7 @@ sources:
       - name: services
 ```
 
-> The `external_location` can be any CSV, JSON or Parquet [data source]({% link docs/stable/data/data_sources.md %}) DuckDB is able to read from.
+> The `external_location` can be any [DuckDB data source]({% link docs/stable/data/data_sources.md %}) (e.g., CSV or Parquet).
 
 With both the profile and source defined, we can now load the data.
 
@@ -100,10 +100,10 @@ With both the profile and source defined, we can now load the data.
 
 In `dbt` the way of storing the data in the target system is called `materialization`. The `dbt-duckdb` adapter provides the following materialization options:
 
-- table, replacing the target table at each run;
-- incremental, with `append` and `delete+insert` options, modifying the data in the table, but not the table itself (if it exists);
-- snapshot, implementing a [Slowly Changing Dimension Type 2](https://en.wikipedia.org/wiki/Slowly_changing_dimension) table with time validity intervals;
-- view, replacing the target view at each run.
+- `table`, replacing the target table at each run;
+- `incremental`, with `append` and `delete+insert` options, modifying the data in the table, but not the table itself (if it exists);
+- `snapshot`, implementing a [Slowly Changing Dimension Type 2](https://en.wikipedia.org/wiki/Slowly_changing_dimension) table with time validity intervals;
+- `view`, replacing the target view at each run.
 
 Another feature of using the above adapter is that the SQL dialect used in the data processing scripts has all the [friendly SQL extensions]({% link docs/stable/sql/dialect/friendly_sql.md %}) DuckDB has to offer.
 
@@ -115,11 +115,11 @@ To refresh the data in the `dim_nl_provinces` table, we use  the `st_read` spati
 
 SELECT
     {{ dbt_utils.generate_surrogate_key(['id']) }} AS province_sk,
-    id                                             AS province_id,
-    statnaam                                       AS province_name,
-    geom                                           AS province_geometry,
+    id AS province_id,
+    statnaam AS province_name,
+    geom AS province_geometry,
     {{ common_columns() }}
-FROM st_read({{ source("geojson_external", "nl_provinces") }}) AS src
+FROM st_read({{ source("geojson_external", "nl_provinces") }}) AS src;
 ```
 {% endraw %}
 
@@ -134,20 +134,20 @@ we use the `st_contains` spatial function, which returns `true` when a geometry 
 
 SELECT
     {{ dbt_utils.generate_surrogate_key(['tr_st.code']) }} AS station_sk,
-    tr_st.id                                               AS station_id,
-    tr_st.code                                             AS station_code,
-    tr_st.name_long                                        AS station_name,
-    tr_st.type                                             AS station_type,
-    st_point(tr_st.geo_lng, tr_st.geo_lat)                 AS station_geo_location,
-    coalesce(dim_mun.municipality_sk, 'unknown')           AS municipality_sk,
+    tr_st.id AS station_id,
+    tr_st.code AS station_code,
+    tr_st.name_long AS station_name,
+    tr_st.type AS station_type,
+    st_point(tr_st.geo_lng, tr_st.geo_lat) AS station_geo_location,
+    coalesce(dim_mun.municipality_sk, 'unknown') AS municipality_sk,
     {{ common_columns() }}
 FROM {{ source("external_db", "stations") }} AS tr_st
 LEFT JOIN {{ ref ("dim_nl_municipalities") }} AS dim_mun
        ON st_contains(
-         dim_mun.municipality_geometry,
-         st_point(tr_st.geo_lng, tr_st.geo_lat)
+           dim_mun.municipality_geometry,
+           st_point(tr_st.geo_lng, tr_st.geo_lat)
        )
-WHERE tr_st.country = 'NL'
+WHERE tr_st.country = 'NL';
 ```
 {% endraw %}
 
@@ -159,18 +159,19 @@ One major benefit of using DuckDB for data processing is the ability to export d
 
 ### External Files
 
-The feature of exporting data to files is enabled by the `dbt-duckdb` adapter with the [`external` materialization](https://github.com/duckdb/dbt-duckdb?tab=readme-ov-file#writing-to-external-files). With the `external` materialization, we are able to export data to CSV, JSON and Parquet file types, to a specified storage location (local or external). The load type is “full refresh”, therefore existing files are overwritten.
+The feature of exporting data to files is enabled by the `dbt-duckdb` adapter with the [`external` materialization](https://github.com/duckdb/dbt-duckdb?tab=readme-ov-file#writing-to-external-files). With the `external` materialization, we are able to export data to CSV, JSON and Parquet file types to a specified storage location (local or external). The load type is `full refresh`, therefore existing files are overwritten.
 
 In the following processing step, we export aggregated train service data at month level, to a Parquet file, partitioned by year and month:
 
 {% raw %}
 ```sql
-{{ config(
-    materialized='external',
-    location="data/exports/nl_train_services_aggregate",
-    options={
-        "partition_by": "service_year, service_month",
-        "overwrite": True
+{{
+    config(
+        materialized='external',
+        location="data/exports/nl_train_services_aggregate",
+        options={
+            "partition_by": "service_year, service_month",
+            "overwrite": True
         }
     )
 }}
@@ -199,7 +200,7 @@ GROUP BY ALL
 ```
 {% endraw %}
 
-The exported file has the following structure and, if stored in a data lake, can be used by data consumers:
+The exported files are placed in [Hive partitioned directory structure]({% link docs/stable/data/partitioning/hive_partitioning.md %}).
 
 ```text
 ./service_year=2024/service_month=1:
@@ -244,21 +245,24 @@ INNER JOIN {{ ref("rep_dim_nl_train_stations") }} AS tr_st
         ON srv.station_sk = tr_st.station_sk
 INNER JOIN {{ ref("rep_dim_nl_municipalities") }} AS mn
         ON tr_st.municipality_sk = mn.municipality_sk
-WHERE service_arrival_cancelled IS FALSE
+WHERE NOT service_arrival_cancelled;
 
   {% if is_incremental() %}
     AND srv.invocation_id = (
-        SELECT invocation_id FROM {{ ref("fact_services") }}
-        ORDER BY last_updated_dt DESC LIMIT 1
+        SELECT invocation_id
+        FROM {{ ref("fact_services") }}
+        ORDER BY last_updated_dt DESC
+        LIMIT 1
     )
   {% endif %}
 GROUP BY ALL
 ```
 {% endraw %}
 
-Due to DuckDB's ability to connect and write to a PostgreSQL database, we can add the above processing step to our `dbt` project, under the directory `models/reverse_etl`.
+Thanks to DuckDB's ability to connect and write to a PostgreSQL database, we can add the above processing step to our `dbt` project, under the directory `models/reverse_etl`.
 
 To connect to a PostgreSQL database, we need to specify in `profiles.yml`:
+
 - the [`postgres` extension]({% link docs/stable/extensions/postgres.md %});
 - the PostgreSQL connection string in the `attach` section.
 
@@ -299,9 +303,10 @@ models:
         node_color: '#d5b85a'
 ```
 
-With the above configuration, all the models from the `transformation` directory will be executed on the `main_main` schema, while the models from `reverse_etl` will be executed on the `main_public` schema. 
+With this configuration, all the models from the `transformation` directory will be executed on the `main_main` schema, while the models from `reverse_etl` will be executed on the `main_public` schema.
 
-After executing the models with `dbt run --model +reverse_etl`, the data is available on PostgreSQL:
+After executing the models with `dbt run --model +reverse_etl`, the data is available to query from PostgreSQL:
+
 ```bash
 psql -U postgres
 ```
@@ -321,7 +326,7 @@ FROM main_public.rep_fact_train_services_daily_agg;
 
 ## Execution Details
 
-The above implementation consists of 10 models and 20 data tests, processing 400 MB of data from the attached DuckDB database, together with small data organized in GeoJSON files. The total execution time, on a single thread and on a MacBook Pro of 12 GB, is between 40 and 45 seconds. From the total execution time, approximatively 30 seconds are spent to process the train services data and 4 seconds to process the aggregated data to PostgreSQL:
+The above implementation consists of 10 models and 20 data tests, processing 400 MB of data from the attached DuckDB database, together with small data organized in GeoJSON files. The total execution time, on a single thread and on a MacBook Pro of 12 GB, is between 40 and 45 seconds. From the total execution time, approximatively 30 seconds are spent to process the train services data and 4 seconds to write the aggregated data to PostgreSQL:
 
 ```text
 05:48:07  Running with dbt=1.9.3
