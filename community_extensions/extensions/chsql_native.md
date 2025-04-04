@@ -118,10 +118,10 @@ docs:
     
     > This extension is experimental and potentially unstable. Do not use in production. See README for full examples.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 455
-extension_download_count_pretty: 455
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 519
+extension_download_count_pretty: 519
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql_native.png'
 layout: community_extension_doc
 ---
