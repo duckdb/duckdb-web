@@ -92,7 +92,8 @@ sources:
       - name: services
 ```
 
-> The `external_location` can be any [DuckDB data source]({% link docs/stable/data/data_sources.md %}) (e.g., CSV or Parquet).
+> The `external_location` can point to CSV, Parquet or JSON files.
+> Both the local file system and remote endpoints (e.g., HTTP or S3) are supported.
 
 With both the profile and source defined, we can now load the data.
 
