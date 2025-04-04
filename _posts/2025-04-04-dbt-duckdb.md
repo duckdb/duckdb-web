@@ -19,7 +19,7 @@ In this article we will demonstrate how data can be processed with dbt and DuckD
 We use two open datasets in this post: railway services, provided by the team behind the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/about) and cartography information about the Netherlands provided by [cartomap](https://github.com/cartomap/nl).
 The datasets are organized into:
 
-- a persisted DuckDB database, in which we store the railway services data from 2024, hosted on Cloudfare;
+- a persisted DuckDB database, in which we store the railway services data from 2024, hosted on Cloudflare;
 - a provinces GeoJSON file, containing the geographic information about the Dutch provinces, hosted on GitHub;
 - a municipalities GeoJSON file, containing the geographic information about Dutch municipalities, stored together with the code.
 
