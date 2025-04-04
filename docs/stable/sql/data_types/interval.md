@@ -27,14 +27,14 @@ SELECT
 ;
 ```
 
-> Warning Decimal values can be used but are truncated to integers (unless in units of `SECONDS` or `MILLISECONDS`).
+> Warning Decimal values are truncated to integers when used with unit keywords (unless the unit is `SECONDS` or `MILLISECONDS`).
 >
 > ```sql
 > SELECT INTERVAL '1.5' YEARS;
 > -- Returns 12 months; equivalent to `to_years(CAST(trunc(1.5) AS INTEGER))`
 > ```
 >
-> For more precision, use a more granular unit; e.g., `18 MONTHS` instead of `'1.5' YEARS`.
+> For more precision, include the unit in the string or use a more granular unit; e.g., `INTERVAL '1.5 years'` or `INTERVAL 18 MONTHS`.
 
 Three basis units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and a day doesn't correspond to a fixed amount of microseconds.
 The division into components makes the `INTERVAL` class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
