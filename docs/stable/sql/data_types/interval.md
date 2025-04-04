@@ -27,7 +27,7 @@ SELECT
 ;
 ```
 
-> Warning Decimal values can be used in strings but are rounded to integers.
+> Warning Decimal values can be used but are truncated to integers (unless in units of `SECONDS` or `MILLISECONDS`).
 >
 > ```sql
 > SELECT INTERVAL '1.5' YEARS;
