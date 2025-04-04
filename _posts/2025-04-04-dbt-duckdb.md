@@ -4,22 +4,21 @@ title: "Transforming Data with DuckDB and dbt"
 author: Petrica Leuca
 thumb: "/images/blog/thumbs/duckdb-dbt.svg"
 image: "/images/blog/thumbs/duckdb-dbt.png"
-excerpt: "Implementing data transformation and reverse ETL pipelines with DuckDB and dbt, through the `dbt-duckdb` adapter."
+excerpt: "In this post, we implement data transformation and reverse ETL pipelines with DuckDB and dbt using the `dbt-duckdb` adapter."
 tags: ["using DuckDB"]
 ---
 
 ## Introduction
 
-[Data Build Tool](https://www.getdbt.com/), most known as`dbt`, is an open-source transformation framework, which enables data teams to adopt software engineering best practices in the code they deliver, such as git workflow and unit testing. Other notable features of `dbt` are data lineage, documentation and data testing as part of the execution pipeline.
+The [Data Build Tool](https://www.getdbt.com/), `dbt`, is an open-source transformation framework, which enables data teams to adopt software engineering best practices in the code they deliver, such as Git workflow and unit testing. Other notable features of `dbt` are data lineage, documentation and data testing as part of the execution pipeline.
 
-In this article we will demonstrate how data can be processed with dbt and DuckDB, by using the [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb) adapter. The `dbt-duckdb` adapter is the integration of `dbt` and DuckDB, therefore offering the means of implementing data transformation pipelines acording to the `dbt` standard and by making use of DuckDB's processing power.
-
-> **Acknowledgement of open data sources.** The data used in this demonstration is open data created by the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/about), along with country-level cartography information, made available by [cartomap](https://github.com/cartomap/nl).
-
+In this article we will demonstrate how data can be processed with dbt and DuckDB, by using the [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb) adapter. The `dbt-duckdb` adapter is the integration of `dbt` and DuckDB, offering the means of implementing data transformation pipelines according to the `dbt` standard and by making use of DuckDB's processing power.
 
 ### Data Model
 
-The above open data is organized into:
+We use two open datasets in this post: railway services, provided by the team behind the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/about) and cartography information about the Netherlands provided by [cartomap](https://github.com/cartomap/nl).
+The datasets are organized into:
+
 - a persisted DuckDB database, in which we store the railway services data from 2024, hosted on Cloudfare;
 - a provinces GeoJSON file, containing the geographic information about the Dutch provinces, hosted on GitHub;
 - a municipalities GeoJSON file, containing the geographic information about Dutch municipalities, stored together with the code.
@@ -31,7 +30,6 @@ After doing an initial exploration of the above data, we can observe that a prov
 - a dimension table, `dim_nl_train_stations`, to hold information about the train stations in the Netherlands, linked to `dim_nl_municipalities`;
 - a fact table, `fact_services`, to hold information about the train services, linked to `dim_nl_train_stations`.
 
-
 <div align="center" style="margin:10px">
     <a href="/images/blog/dbt-duckdb/data_model.png">
         <img
@@ -41,7 +39,6 @@ After doing an initial exploration of the above data, we can observe that a prov
         />
     </a>
 </div>
-
 
 The purpose of processing the train services and the Netherlands cartography data is to organize the data in a structure which can easily be used in future railway data analysis use cases. We call such a structure a data mart, given its focus on the Dutch railway services subject area and its data model.
 
@@ -93,6 +90,7 @@ sources:
       - name: stations
       - name: services
 ```
+
 > The `external_location` can be any CSV, JSON or Parquet [data source]({% link docs/stable/data/data_sources.md %}) DuckDB is able to read from.
 
 With both the profile and source defined, we can now load the data.
@@ -100,6 +98,7 @@ With both the profile and source defined, we can now load the data.
 ### Loading Data to DuckDB
 
 In `dbt` the way of storing the data in the target system is called `materialization`. The `dbt-duckdb` adapter provides the following materialization options:
+
 - table, replacing the target table at each run;
 - incremental, with `append` and `delete+insert` options, modifying the data in the table, but not the table itself (if it exists);
 - snapshot, implementing a [Slowly Changing Dimension Type 2](https://en.wikipedia.org/wiki/Slowly_changing_dimension) table with time validity intervals;
@@ -231,14 +230,14 @@ After we process the data into our railway services data mart, we can generate f
 }}
 
 SELECT
-  service_date,
-  service_type,
-  service_company,
-  srv.station_sk,
-  mn.municipality_sk,
-  province_sk,
-  count(*) AS number_of_rides,
-  {{ common_columns() }}
+    service_date,
+    service_type,
+    service_company,
+    srv.station_sk,
+    mn.municipality_sk,
+    province_sk,
+    count(*) AS number_of_rides,
+    {{ common_columns() }}
 FROM {{ ref ("fact_services") }} AS srv
 INNER JOIN {{ ref("rep_dim_nl_train_stations") }} AS tr_st
         ON srv.station_sk = tr_st.station_sk
@@ -248,8 +247,8 @@ WHERE service_arrival_cancelled IS FALSE
 
   {% if is_incremental() %}
     AND srv.invocation_id = (
-      SELECT invocation_id FROM {{ ref("fact_services") }}
-      ORDER BY last_updated_dt DESC LIMIT 1
+        SELECT invocation_id FROM {{ ref("fact_services") }}
+        ORDER BY last_updated_dt DESC LIMIT 1
     )
   {% endif %}
 GROUP BY ALL
