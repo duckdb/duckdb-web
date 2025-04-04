@@ -199,7 +199,7 @@ GEM
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
-    sass-embedded (1.86.2)
+    sass-embedded (1.86.3)
       google-protobuf (~> 4.30)
       rake (>= 13)
     sass-listen (4.0.0)
