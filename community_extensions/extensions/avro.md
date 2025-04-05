@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 10742
-extension_download_count_pretty: 10.7k
+extension_download_count: 10605
+extension_download_count_pretty: 10.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_avro.png'
 layout: community_extension_doc
 ---
