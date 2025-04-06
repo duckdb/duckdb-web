@@ -32,8 +32,8 @@ sudo yum install unixODBC
 
    <!-- markdownlint-disable MD034 -->
 
-   * [x86_64 (AMD64)](https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.currentduckdbodbcversion }}/duckdb_odbc-linux-amd64.zip)
-   * [arm64 (AArch64)](https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.currentduckdbodbcversion }}/duckdb_odbc-linux-aarch64.zip)
+   * [x86_64 (AMD64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbodbcversion }}/duckdb_odbc-linux-amd64.zip)
+   * [arm64 (AArch64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbodbcversion }}/duckdb_odbc-linux-aarch64.zip)
 
    <!-- markdownlint-enable MD034 -->
 

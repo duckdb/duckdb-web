@@ -18,7 +18,7 @@ Using the above open data, in this post we will build an application, in which a
 - Visualize the railway network traffic in 2024, by using Plotly;  
 - Visualize the five closest train stations on any point selected on the map, by using the Streamlit Folium component.
 
-The application will be developed with [Streamlit](https://streamlit.io/), an open source framework in which one can implement data applications easily with Python. The application code is available on [GitHub](https://github.com/duckdb/duckdb-web/tree/main/code_examples/duckdb_streamlit).
+The application will be developed with [Streamlit](https://streamlit.io/), an open source framework in which one can implement data applications easily with Python. The application code is available on [GitHub](https://github.com/duckdb/duckdb-blog-examples/tree/main/duckdb_streamlit).
 
 ## Connecting to DuckDB in Streamlit
 
@@ -301,7 +301,7 @@ We have decided to create a function, in order to highlight [`cache_data` functi
 
 > It is important to notice that the order of columns and values matters in a heat map chart and that we need to reset the index of the pivoted data before plotting.
 
-The code of implementing interactive maps with Plotly in Streamlit is available on [GitHub](https://github.com/duckdb/duckdb-web/blob/main/code_examples/duckdb_streamlit/pages/railway_network_utilization.py).
+The code of implementing interactive maps with Plotly in Streamlit is available on [GitHub](https://github.com/duckdb/duckdb-blog-examples/blob/main/duckdb_streamlit/pages/railway_network_utilization.py).
 
 ## Finding the Closest 5 Stations with Folium
 
@@ -365,7 +365,7 @@ In the above query we use `st_point` to create a point type field and `st_distan
 
  When a user clicks on the map, we store the clicks in the session state and rerun Streamlit to display the map with the new user selection. When rerun happens, Streamlit will rerun the entire application for the current session, therefore understanding the session state and caching mechanisms is essential when building Streamlit applications.
 
-The code of implementing interactive maps with Folium in Streamlit is available on [GitHub](https://github.com/duckdb/duckdb-web/blob/main/code_examples/duckdb_streamlit/pages/closest_train_stations.py).
+The code of implementing interactive maps with Folium in Streamlit is available on [GitHub](https://github.com/duckdb/duckdb-blog-examples/blob/main/duckdb_streamlit/pages/closest_train_stations.py).
 
 ## Conclusion
 

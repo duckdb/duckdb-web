@@ -1,9 +1,0 @@
-extends: substitution
-message: Use '%s' instead of '%s'
-level: error
-ignorecase: false
-swap:
-  'e\.g\. ': 'e.g., '
-  'E\.g\. ': 'e.g., '
-  'i\.e\. ': 'i.e., '
-  'I\.e\. ': 'i.e., '

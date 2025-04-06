@@ -140,7 +140,7 @@ to the [Client API documentation]({% link docs/stable/clients/overview.md %})
 
 By default, extensions are installed under the user's home directory:
 
-```{:.language-sql .highlight}
+```sql
 ~/.duckdb/extensions/⟨duckdb_version⟩/⟨platform_name⟩/
 ```
 

@@ -153,6 +153,7 @@ The table below shows the available general aggregate functions.
 | [`min_by(arg, val)`](#min_byarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`min_by(arg, val, n)`](#min_byarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
 | [`product(arg)`](#productarg) | Calculates the product of all non-null values in `arg`. |
+| [`string_agg(arg)`](#string_aggarg-sep) | Concatenates the column string values with a comma separator (`,`). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`sum(arg)`](#sumarg) | Calculates the sum of all non-null values in `arg` / counts `true` values when `arg` is boolean. |
 | [`weighted_avg(arg, weight)`](#weighted_avgarg-weight) | Calculates the weighted average all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the corresponding `arg` value will be skipped. |
@@ -444,6 +445,14 @@ The table below shows the available general aggregate functions.
 | **Description** | Calculates the product of all non-null values in `arg`. |
 | **Example** | `product(A)` |
 | **Alias(es)** | - |
+
+#### `string_agg(arg)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Concatenates the column string values with a comma separator (`,`). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Example** | `string_agg(S, ',')` |
+| **Alias(es)** | `group_concat(arg, sep)`, `listagg(arg, sep)` |
 
 #### `string_agg(arg, sep)`
 
