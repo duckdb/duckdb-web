@@ -24,7 +24,7 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * Remote file content caching using buffer manager (e.g., when querying Parquet files on S3)  
 
 This list was compiled by the DuckDB maintainers and is based on the long-term strategic vision for the DuckDB project and general interactions with users in the open-source community (GitHub Issues and Discussions, social media, etc.).
-For details on to request features in DuckDB, please refer to the FAQ item [“I would like feature X to be implemented in DuckDB”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed).
+For details on how to request features in DuckDB, please refer to the FAQ item [“I would like feature X to be implemented in DuckDB”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed).
 
 Please note that there are **no guarantees** that a particular feature will be released within the next year. Everything on this page is subject to change without notice.
 
