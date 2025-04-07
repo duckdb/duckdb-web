@@ -2,29 +2,40 @@
 
 import duckdb
 
-DOC_CATEGORY_MAP = {'docs/stable/sql/functions/blob.md': 'blob'}
+DOC_CATEGORY_MAP = {
+    'docs/stable/sql/functions/blob.md': 'blob',
+    'docs/stable/sql/functions/char.md': 'string'
+}
 
 # 'functions' that are binary operators are listed between the arguments
-BINARY_OPERATORS = ['||']
+BINARY_OPERATORS = ['||', '^@']
 
 # override/add to duckdb_functions() outputs:
 # - key: tuple: (category, function_name)
-# - value: tuple: (parameters, description, examples)
+# - value: tuple: (parameters, description, examples, aliases)
 OVERRIDES_MAP = {
     ('blob', '||'): (
         ['blob', 'blob'],
         '`BLOB` concatenation.',
         [r"'\xAA'::BLOB || '\xBB'::BLOB"],
+        []
     ),
     ('blob', 'read_blob'): (
         ['source'],
         'Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the `read_blob` guide for more details.',
         ["read_blob('hello.bin')"],
+        []
+    ),
+    ('string', '||'): (
+        ['string', 'string'],
+        'Concatenates two strings. Any `NULL` input results in `NULL`. See also `concat(string, ...)`.',
+        ["'Duck' || 'DB'"],
+        []
     ),
 }
 
 URL_CONVERSIONS = {
-    '`read_blob` guide': ('docs/stable/guides/file_formats/read_file.md', '#read_blob')
+    '`read_blob` guide': ('docs/stable/guides/file_formats/read_file.md', '#read_blob'),
 }
 
 # for these functions, we don't run the examples
@@ -33,11 +44,12 @@ FIXED_EXAMPLES = {('blob', 'read_blob'): r"hello\x0A"}
 
 def main():
     for doc_file, category in DOC_CATEGORY_MAP.items():
+        print(f"creating file {doc_file} ...")
         generate_doc_file(doc_file, category)
 
 
 def generate_doc_file(doc_file: str, category: str) -> None:
-    function_data: list[tuple[str, list[str], str, list[str]]] = get_function_data(
+    function_data: list[tuple[str, list[str], str, list[str], list[str]]] = get_function_data(
         category
     )
     startline = (
@@ -68,22 +80,27 @@ def generate_doc_file(doc_file: str, category: str) -> None:
             f.write(doc_text_new)
 
 
-def get_function_data(category: str) -> list[tuple[str, list[str], str, list[str]]]:
+def get_function_data(category: str) -> list[tuple[str, list[str], str, list[str], list[str]]]:
     query = f"""
-select
-    function_name,
-    parameters,
-    description,
-    examples,
+select distinct
+  f1.function_name,
+  f1.parameters,
+  f1.description,
+  f1.examples,
+  list_distinct(list(f2.function_name)) as aliases
 from
-    duckdb_functions()
+  duckdb_functions() f1
+  left join duckdb_functions() f2 on (
+    f1.alias_of = f2.function_name
+    or f1.function_name = f2.alias_of
+    or (f1.alias_of = f2.alias_of and f1.function_name != f2.function_name)
+  )
 where
-    list_contains(categories, '{category}')
-order by
-    function_name
-;
+  list_contains(f1.categories, '{category}')
+group by all
+order by all
 """
-    function_data: list[tuple[str, list[str], str, list[str]]] = duckdb.sql(
+    function_data: list[tuple[str, list[str], str, list[str], list[str]]] = duckdb.sql(
         query
     ).fetchall()
 
@@ -91,20 +108,22 @@ order by
     all_function_dict = {func[0]: idx for idx, func in enumerate(function_data)}
     for override_category, function_name in OVERRIDES_MAP:
         if override_category == category:
-            params, description, examples = OVERRIDES_MAP[(category, function_name)]
+            params, description, examples, aliases = OVERRIDES_MAP[(category, function_name)]
             if function_name in all_function_dict:
                 function_data[all_function_dict[function_name]] = (
                     function_name,
                     params,
                     description,
                     examples,
+                    aliases
                 )
             else:
-                function_data.append((function_name, params, description, examples))
-    function_data.sort()
+                function_data.append((function_name, params, description, examples, aliases))
+
 
     # rotate non-alphanumeric functions (i.e. operators) from bottom to top
     # (bit crude, because i don't want to add pip install icu dependency)
+    function_data.sort()
     idx = len(function_data) - 1
     operator_count = 0
     while idx >= 0:
@@ -129,16 +148,19 @@ order by
                     " %}"
                     f"{URL_CONVERSIONS[conversion][1]})",
                 )
-                function_name, parameters, _, examples = function_data[idx]
-                function_data[idx] = (function_name, parameters, url_desc, examples)
+                function_name, parameters, _, examples, aliases = function_data[idx]
+                function_data[idx] = (function_name, parameters, url_desc, examples, aliases)
     return function_data
 
 
-def generate_docs_table(function_data: list[tuple[str, list[str], str, list[str]]]):
+def generate_docs_table(function_data: list[tuple[str, list[str], str, list[str], list[str]]]):
     res = "<!-- markdownlint-disable MD056 -->\n\n"
     res += "| Name | Description |\n|:--|:-------|\n"
     for func in function_data:
-        function_name, params, description, _ = func
+        function_name, params, description, examples, _ = func
+        if not examples:
+            print(f"WARNING (skipping): '{function_name}' - no example is available")
+            continue
         if function_name in BINARY_OPERATORS and len(params) == 2:
             res += f"| [`{params[0]} {function_name} {params[1]}`](#{params[0]}--{params[1]}) | {description} |\n"
         else:
@@ -148,23 +170,37 @@ def generate_docs_table(function_data: list[tuple[str, list[str], str, list[str]
 
 
 def generate_docs_records(
-    function_data: list[tuple[str, list[str], str, list[str]]], category: str
+    function_data: list[tuple[str, list[str], str, list[str], list[str]]], category: str
 ):
     res = "\n"
     for func in function_data:
-        function_name, params, description, examples = func
+        function_name, params, description, examples, aliases = func
+        if not examples:
+            print(f"skipping {function_name}")
+            continue
+        if len(examples) > 1:
+            print(f"WARNING: '{function_name}' multiple examples available: {examples}")
+        example = examples[0]
         if function_name in BINARY_OPERATORS and len(params) == 2:
             res += f"#### `{params[0]} {function_name} {params[1]}`\n\n"
         else:
             res += f"#### `{function_name}({", ".join(params)})`\n\n"
         res += '<div class="nostroke_table"></div>\n\n'
         res += f"| **Description** | {description} |\n"
-        res += f"| **Example** | `{examples[0]}` |\n"
+        res += f"| **Example** | `{example}` |\n"
         if (category, function_name) in FIXED_EXAMPLES:
-            res += f"| **Result** | `{FIXED_EXAMPLES[(category, function_name)]}` |\n\n"
+            res += f"| **Result** | `{FIXED_EXAMPLES[(category, function_name)]}` |\n"
         else:
-            res += f"| **Result** | `{duckdb.sql(rf"select {examples[0]}::VARCHAR").fetchone()[0]}` |\n\n"
-    return res
+            example_result = ""
+            try:
+                example_result = duckdb.sql(rf"select {example}::VARCHAR").fetchone()[0]
+            except duckdb.ParserException as e:
+                print(f"Error for function '{function_name}', could not calculate example: '{example}'. Consider adding it to 'FIXED_EXAMPLES'. {e}")
+            res += f"| **Result** | `{example_result}` |\n"
+        if aliases:
+            res += f"| **Alias** | {','.join(f"`{alias}`" for alias in aliases)} |\n"
+        res += '\n'
+    return (res)
 
 
 if __name__ == "__main__":
