@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Transforming Data with DuckDB and dbt"
+title: "Fully Local Data Tranformation with dbt and DuckDB"
 author: Petrica Leuca
 thumb: "/images/blog/thumbs/duckdb-dbt.svg"
 image: "/images/blog/thumbs/duckdb-dbt.png"
