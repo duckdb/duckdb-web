@@ -54,8 +54,8 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 140
-extension_star_count_pretty: 140
+extension_star_count: 159
+extension_star_count_pretty: 159
 extension_download_count: 504
 extension_download_count_pretty: 504
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
