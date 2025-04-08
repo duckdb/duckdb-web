@@ -4,7 +4,7 @@ sphinx
 pandas
 pandas-stubs
 lxml
-ripgrepy~=2.0.0
+ripgrepy
 
 marko # for generating search index
 python-frontmatter
