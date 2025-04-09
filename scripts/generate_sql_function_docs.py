@@ -121,8 +121,9 @@ OVERRIDES_MAP = {
             [],
         )
     ],
-
 }
+
+EXCLUDES = [('string', 'list_slice')]
 
 URL_CONVERSIONS = {
     '`read_blob` guide': ('docs/stable/guides/file_formats/read_file.md', '#read_blob'),
@@ -132,7 +133,7 @@ URL_CONVERSIONS = {
 # for these functions, we don't run the examples
 FIXED_EXAMPLES = {
     ('blob', 'read_blob'): r"hello\x0A",
-    ('string', 'read_text'): r"hello\n"
+    ('string', 'read_text'): r"hello\n",
 }
 
 
@@ -197,13 +198,18 @@ where
 group by all
 order by all
 """
-    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]] = duckdb.sql(
-        query
-    ).fetchall()
+    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]] = (
+        duckdb.sql(query).fetchall()
+    )
 
     # apply overrides and add additional functions
     function_data = [
-        func for func in function_data if (category, func[0]) not in OVERRIDES_MAP
+        func
+        for func in function_data
+        if (
+            (category, func[0]) not in OVERRIDES_MAP
+            and (category, func[0]) not in EXCLUDES
+        )
     ]
     for k, v in OVERRIDES_MAP.items():
         override_category, function_name = k
@@ -241,7 +247,9 @@ order by all
                     " %}"
                     f"{URL_CONVERSIONS[conversion][1]})",
                 )
-                function_name, parameters, _, examples, is_variadic, aliases = function_data[idx]
+                function_name, parameters, _, examples, is_variadic, aliases = (
+                    function_data[idx]
+                )
                 function_data[idx] = (
                     function_name,
                     parameters,
@@ -274,7 +282,8 @@ def generate_docs_table(
 
 
 def generate_docs_records(
-    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]], category: str
+    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]],
+    category: str,
 ):
     res = "\n"
     for func in function_data:
