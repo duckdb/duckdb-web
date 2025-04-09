@@ -75,11 +75,11 @@ if date != None:
 
 ignored_files = ['.DS_Store', 'archive', 'faq.md', 'why_duckdb.md']
 
-source_version = arguments[1]
-folder = os.path.join('docs', source_version)
+version = arguments[1]
+folder = os.path.join('docs', 'archive', version)
 
 print(
-    f"Archiving current docs for version \"{source_version}\" to path \"{folder}\". Remember to update _config.yml and /_data/versions.csv also."
+    f"Archiving current docs for version \"{version}\" to path \"{folder}\". Remember to update _config.yml and /_data/versions.csv also."
 )
 if confirm:
     result = input("Continue with archival (y/n)?\n")
@@ -98,19 +98,25 @@ def list_tree(source):
         return output
 
 
-def copy_file(source_path, target_path, source_version):
+def copy_file(source_path, target_path, version):
     print(f"{source_path} -> {target_path}")
     if revision == None:
         if source_path.endswith(".md"):
             with open(source_path) as f, open(target_path, "w") as of:
                 # parse YAML metadata and adjust the "redirect_from" field
                 doc = frontmatter.load(f)
-                if (doc.get("redirect_from") is not None):
-                    del doc["redirect_from"]
+
+                redirect_from_field = doc.get("redirect_from")
+                if redirect_from_field:
+                    redirect_from_field_to_archive = [
+                        x.replace("docs/", f"docs/archive/{version}/")
+                        for x in redirect_from_field
+                    ]
+                    doc["redirect_from"] = redirect_from_field_to_archive
 
                 doc.content = doc.content.replace(
-                    f"{{% link docs/stable/",
-                    f"{{% link docs/preview/",
+                    f"{{% link docs/",
+                    f"{{% link docs/archive/{version}/",
                 )
 
                 of.write(frontmatter.dumps(doc))
@@ -123,24 +129,48 @@ def copy_file(source_path, target_path, source_version):
             f.write(file_content)
 
 
-def recursive_copy(source, target, source_version):
+def recursive_copy(source, target, version):
     if not os.path.exists(target):
         os.mkdir(target)
-
     for fname in list_tree(source):
         if fname in ignored_files:
             continue
         source_path = os.path.join(source, fname)
         target_path = os.path.join(target, fname)
         if os.path.isfile(source_path):
-            copy_file(source_path, target_path, source_version)
+            copy_file(source_path, target_path, version)
         elif os.path.isdir(source_path):
-            recursive_copy(source_path, target_path, source_version)
+            recursive_copy(source_path, target_path, version)
 
 
-recursive_copy('docs/stable', 'docs/preview', source_version)
+def archive_installation_page(version):
+    # get frontmatter of the proxy installation file (which includes the actual one)
+    with open(f"docs/installation/index.html") as current_installation_file:
+        current_installation_file_loaded = frontmatter.load(current_installation_file)
+        current_installation_file_loaded.content = ""
+
+    # adjust installation links to point to the old version in the archived page
+    with open(f"_includes/installation.html") as main_installation_file, open(
+        f"docs/archive/{version}/installation/index.html", "w"
+    ) as archived_installation_file:
+        installation_page = "\n" + main_installation_file.read()
+        installation_page = installation_page.replace(" (Latest Release)", "")
+        installation_page = installation_page.replace(
+            "{{ site.currentduckdbversion }}", version
+        )
+        # we leave the variable "{{ site.nextjavaversion }}" as is
+        # to allow the "GitHub main (Nightly Build)" to move with new versions
+
+        archived_installation_file.write(
+            frontmatter.dumps(current_installation_file_loaded)
+        )
+        archived_installation_file.write(installation_page)
+
+
+recursive_copy('docs', folder, version)
 copy_file(
     '_data/menu_docs_stable.json',
-    '_data/menu_docs_preview.json',
-    source_version,
+    '_data/menu_docs_%s.json' % (version.replace('.', ''),),
+    version,
 )
+archive_installation_page(version)
