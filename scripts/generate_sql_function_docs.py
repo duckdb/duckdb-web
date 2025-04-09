@@ -20,6 +20,7 @@ OVERRIDES_MAP = {
             ['blob', 'blob'],
             '`BLOB` concatenation.',
             [r"'\xAA'::BLOB || '\xBB'::BLOB"],
+            False,
             [],
         )
     ],
@@ -28,6 +29,7 @@ OVERRIDES_MAP = {
             ['source'],
             'Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the `read_blob` guide for more details.',
             ["read_blob('hello.bin')"],
+            False,
             [],
         )
     ],
@@ -36,6 +38,7 @@ OVERRIDES_MAP = {
             ['string', 'string'],
             'Concatenates two strings. Any `NULL` input results in `NULL`. See also `concat(string, ...)`.',
             ["'Duck' || 'DB'"],
+            False,
             [],
         )
     ],
@@ -44,12 +47,14 @@ OVERRIDES_MAP = {
             ['string', 'index'],
             'Extracts a single character using a (1-based) index.',
             ["'DuckDB'[4]"],
+            False,
             ['array_extract'],
         ),
         (
             ['string', 'begin', 'end'],
             'Extracts a string using slice conventions similar to Python. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted.',
             ["'DuckDB'[:4]"],
+            False,
             ['array_slice'],
         ),
     ],
@@ -58,6 +63,7 @@ OVERRIDES_MAP = {
             ['string', 'target'],
             'Returns `true` if the `string` matches the like specifier (see Pattern Matching).',
             ["'hello' LIKE '%lo'"],
+            False,
             [],
         )
     ],
@@ -66,9 +72,56 @@ OVERRIDES_MAP = {
             ['string', 'regex'],
             'Returns `true` if the `string` matches the `regex` (see Pattern Matching).',
             ["'hello' SIMILAR TO 'l+'"],
+            False,
             ['regexp_full_match'],
         )
     ],
+    ('string', 'md5_number_lower'): [
+        (
+            ['string'],
+            'Returns the lower 64-bit segment of the `MD5` hash of the `string` as a `BIGINT`.',
+            ["md5_number_lower('123')"],
+            False,
+            [],
+        )
+    ],
+    ('string', 'md5_number_upper'): [
+        (
+            ['string'],
+            'Returns the upper 64-bit segment of the `MD5` hash of the `string` as a `BIGINT`.',
+            ["md5_number_upper('123')"],
+            False,
+            [],
+        )
+    ],
+    ('regex', 'regexp_split_to_table'): [
+        (
+            ['string'],
+            'Splits the `string` along the `regex` and returns a row for each part.',
+            ["regexp_split_to_table('hello world; 42', ';? ')"],
+            False,
+            [],
+        )
+    ],
+    ('string', 'split_part'): [
+        (
+            ['string', 'separator', 'index'],
+            "Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior).",
+            ["split_part('a;b;c', ';', 2)"],
+            False,
+            [],
+        )
+    ],
+    ('string', 'read_text'): [
+        (
+            ['source'],
+            "Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the `read_text` guide for more details.",
+            ["read_text('hello.txt')"],
+            False,
+            [],
+        )
+    ],
+
 }
 
 URL_CONVERSIONS = {
@@ -77,7 +130,10 @@ URL_CONVERSIONS = {
 }
 
 # for these functions, we don't run the examples
-FIXED_EXAMPLES = {('blob', 'read_blob'): r"hello\x0A"}
+FIXED_EXAMPLES = {
+    ('blob', 'read_blob'): r"hello\x0A",
+    ('string', 'read_text'): r"hello\n"
+}
 
 
 def main():
@@ -87,7 +143,7 @@ def main():
 
 
 def generate_doc_file(doc_file: str, category: str) -> None:
-    function_data: list[tuple[str, list[str], str, list[str], list[str]]] = (
+    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]] = (
         get_function_data(category)
     )
     startline = (
@@ -120,13 +176,14 @@ def generate_doc_file(doc_file: str, category: str) -> None:
 
 def get_function_data(
     category: str,
-) -> list[tuple[str, list[str], str, list[str], list[str]]]:
+) -> list[tuple[str, list[str], str, list[str], bool, list[str]]]:
     query = f"""
 select distinct
   f1.function_name,
   f1.parameters,
   f1.description,
   f1.examples,
+  f1.varargs='ANY' as is_variadic,
   list_sort(list_distinct(list(f2.function_name))) as aliases
 from
   duckdb_functions() f1
@@ -140,7 +197,7 @@ where
 group by all
 order by all
 """
-    function_data: list[tuple[str, list[str], str, list[str], list[str]]] = duckdb.sql(
+    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]] = duckdb.sql(
         query
     ).fetchall()
 
@@ -184,24 +241,25 @@ order by all
                     " %}"
                     f"{URL_CONVERSIONS[conversion][1]})",
                 )
-                function_name, parameters, _, examples, aliases = function_data[idx]
+                function_name, parameters, _, examples, is_variadic, aliases = function_data[idx]
                 function_data[idx] = (
                     function_name,
                     parameters,
                     url_desc,
                     examples,
+                    is_variadic,
                     aliases,
                 )
     return function_data
 
 
 def generate_docs_table(
-    function_data: list[tuple[str, list[str], str, list[str], list[str]]]
+    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]]
 ):
     res = "<!-- markdownlint-disable MD056 -->\n\n"
     res += "| Name | Description |\n|:--|:-------|\n"
     for func in function_data:
-        function_name, params, description, examples, _ = func
+        function_name, params, description, examples, is_variadic, _ = func
         if not examples:
             print(f"WARNING (skipping): '{function_name}' - no example is available")
             continue
@@ -210,17 +268,17 @@ def generate_docs_table(
         elif function_name == EXTRACT_OPERATOR and len(params) >= 2:
             res += f"| [`{params[0]}[{":".join(params[1:])}]`](#{"".join(params)}) | {description} |\n"
         else:
-            res += f"| [`{function_name}({", ".join(params)})`](#{function_name.lstrip('@*!^')}{"-".join(params)}) | {description} |\n"
+            res += f"| [`{function_name}({", ".join(params)}{', ...' if (is_variadic) else ''})`](#{function_name.lstrip('@*!^')}{"-".join(params)}{'-' if (is_variadic) else ''}) | {description} |\n"
     res += "\n<!-- markdownlint-enable MD056 -->\n"
     return res
 
 
 def generate_docs_records(
-    function_data: list[tuple[str, list[str], str, list[str], list[str]]], category: str
+    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]], category: str
 ):
     res = "\n"
     for func in function_data:
-        function_name, params, description, examples, aliases = func
+        function_name, params, description, examples, is_variadic, aliases = func
         if not examples:
             print(f"skipping {function_name}")
             continue
@@ -232,7 +290,7 @@ def generate_docs_records(
         elif function_name == EXTRACT_OPERATOR and len(params) >= 2:
             res += f"#### `{params[0]}[{":".join(params)}]`\n\n"
         else:
-            res += f"#### `{function_name}({", ".join(params)})`\n\n"
+            res += f"#### `{function_name}({", ".join(params)}{', ...' if (is_variadic) else ''})`\n\n"
         res += '<div class="nostroke_table"></div>\n\n'
         res += f"| **Description** | {description} |\n"
         res += f"| **Example** | `{example}` |\n"
