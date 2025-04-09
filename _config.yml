@@ -33,7 +33,7 @@ currentduckdbnodejsversion: 1.2.1
 currentduckdbodbcversion: 1.2.1
 currentrversion: 1.2.1
 currentduckdbrustversion: 1.2.1
-currentduckdbwasmversion: 1.2.1
+currentduckdbwasmversion: 1.2.2
 currentduckdbcsharpversion: 1.2.1
 currentduckdbdartversion: 1.2.0
 # Java
