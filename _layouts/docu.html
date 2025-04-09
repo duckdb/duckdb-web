@@ -48,9 +48,12 @@ Page URL: <https://duckdb.org{{ page.url }}>
 
 {% assign url_version_parts = page.url | split: "/docs/" %}
 {% assign url_version_parts = url_version_parts[1] | split: "/" %}
-{% comment %} Liquid doesn't have an is_digit-style function, so we check the first character for concrete values. {% endcomment %}
+{% comment %}
+	Detect /docs/preview and docs/VERSION_NUMBER
+	Liquid doesn't have an is_digit-style function, so we check the first character for values 0, 1 and 2.
+{% endcomment %}
 {% assign c = url_version_parts[0] | slice: 0 %}
-{% if c == "0" or c == "1" or c == "2" %}
+{% if url_version_parts[0] == "preview" or c == "0" or c == "1" or c == "2" %}
 	{% assign version_viewed = url_version_parts[0] %}
 {% endif %}
 
@@ -86,8 +89,10 @@ Page URL: <https://duckdb.org{{ page.url }}>
 
 					<div class="versionselect">
 						<div class="version">
-							{% if version_viewed == "stable" %}
-								{% assign version_viewed_pretty = site.currentduckdbversion | append: " (stable)" %}
+							{% if version_viewed == "preview" %}
+								{% assign version_viewed_pretty = site.previewshortduckdbversion %}
+							{% elsif version_viewed == "stable" %}
+								{% assign version_viewed_pretty = site.currentshortduckdbversion | append: " (stable)" %}
 							{% else %}
 								{% assign version_viewed_pretty = version_viewed %}
 							{% endif %}
@@ -98,13 +103,21 @@ Page URL: <https://duckdb.org{{ page.url }}>
 									{% comment %} Remove the leading part, e.g., "docs/stable" or "docs/1.0" (version number) {% endcomment %}
 
 									{% comment %} Try the basename with different versions and see whether it exists {% endcomment %}
-									{% assign basename = page.path | regex_replace: "docs/(stable|\d*.\d*)/", "" %}
+									{% assign basename = page.path | regex_replace: "docs/(stable|preview|\d*.\d*)/", "" %}
 
 									{% for item in site.data.versions %}
 										{% assign filename = "docs/" | append: item.version | append: "/" | append: basename %}
-										{% capture old_version_of_page_exists %}{% file_exists {{ filename }} %}{% endcapture %}
-										{% if old_version_of_page_exists == "true" %}
-											<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
+										{% capture other_version_of_page_exists %}{% file_exists {{ filename }} %}{% endcapture %}
+										{% if other_version_of_page_exists == "true" %}
+											{% if item.version == "preview" %}
+												{% assign item_text = site.previewshortduckdbversion %}
+											{% elsif item.version == "stable" %}
+												{% assign item_text = site.currentshortduckdbversion %}
+											{% else %}
+												{% assign item_text = item.version %}
+											{% endif %}
+
+											<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item_text }}</a></li>
 										{% endif %}
 									{% endfor %}
 								</ul>
