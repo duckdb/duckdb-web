@@ -185,14 +185,19 @@ import duckdb
 
 duckdb_conn = duckdb.connect()
 
-rel = duckdb_conn.sql("""
-        SELECT 
+duckdb_conn.sql("drop table if exists code_example")
+
+duckdb_conn.sql("""
+        select 
             gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
             range as value, 
-            now() as created_timestamp
-        FROM range(1, 10)
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
     """
-)
+).to_table("code_example")
+
+rel = duckdb_conn.table("code_example")
 
 {code_example}
 ```
@@ -200,43 +205,44 @@ rel = duckdb_conn.sql("""
 
 DEFAULT_RESULT = "```text\n{result}\n```"
 
-DEFAULT_CODE_EXAMPLE_MAP = {
+DEFINITION_MEMBER_CODE_EXAMPLE_MAP = {
     'columns': {
         'example': 'rel.columns',
-        'result': "['id', 'value', 'created_timestamp']",
+        'result': " ['id', 'description', 'value', 'created_timestamp']",
     },
     'describe': {
         'example': 'rel.describe()',
         'result': """
-┌─────────┬──────────────────────────────────────┬────────────────────┬────────────────────────────┐
-│  aggr   │                  id                  │       value        │     created_timestamp      │
-│ varchar │               varchar                │       double       │          varchar           │
-├─────────┼──────────────────────────────────────┼────────────────────┼────────────────────────────┤
-│ count   │ 9                                    │                9.0 │ 9                          │
-│ mean    │ NULL                                 │                5.0 │ NULL                       │
-│ stddev  │ NULL                                 │ 2.7386127875258306 │ NULL                       │
-│ min     │ 15773c59-febd-4f63-b4e2-554d71dc6f33 │                1.0 │ 2025-04-09 13:42:27.506+02 │
-│ max     │ edc5c577-b5a1-4ce1-9011-f559ff7e5ee5 │                9.0 │ 2025-04-09 13:42:27.506+02 │
-│ median  │ NULL                                 │                5.0 │ NULL                       │
-└─────────┴──────────────────────────────────────┴────────────────────┴────────────────────────────┘    
+┌─────────┬──────────────────────────────────────┬─────────────────┬────────────────────┬────────────────────────────┐
+│  aggr   │                  id                  │   description   │       value        │     created_timestamp      │
+│ varchar │               varchar                │     varchar     │       double       │          varchar           │
+├─────────┼──────────────────────────────────────┼─────────────────┼────────────────────┼────────────────────────────┤
+│ count   │ 9                                    │ 9               │                9.0 │ 9                          │
+│ mean    │ NULL                                 │ NULL            │                5.0 │ NULL                       │
+│ stddev  │ NULL                                 │ NULL            │ 2.7386127875258306 │ NULL                       │
+│ min     │ 08fdcbf8-4e53-4290-9e81-423af263b518 │ value is even   │                1.0 │ 2025-04-09 15:41:20.642+02 │
+│ max     │ fb10390e-fad5-4694-91cb-e82728cb6f9f │ value is uneven │                9.0 │ 2025-04-09 15:49:20.642+02 │
+│ median  │ NULL                                 │ NULL            │                5.0 │ NULL                       │
+└─────────┴──────────────────────────────────────┴─────────────────┴────────────────────┴────────────────────────────┘ 
 """,
     },
     'description': {
         'example': 'rel.description',
         'result': """
 [('id', 'UUID', None, None, None, None, None),
+ ('description', 'STRING', None, None, None, None, None),
  ('value', 'NUMBER', None, None, None, None, None),
- ('created_timestamp', 'DATETIME', None, None, None, None, None)]    
+ ('created_timestamp', 'DATETIME', None, None, None, None, None)]  
 """,
     },
     'dtypes': {
         'example': 'rel.dtypes',
-        'result': '[UUID, BIGINT, TIMESTAMP WITH TIME ZONE]',
+        'result': ' [UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]',
     },
     'explain': {
         'example': 'rel.explain()',
         'result': """
-'┌───────────────────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             id            │\n│           value           │\n│     created_timestamp     │\n│                           │\n│          ~9 Rows          │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│           RANGE           │\n│    ────────────────────   │\n│      Function: RANGE      │\n│                           │\n│          ~9 Rows          │\n└───────────────────────────┘\n\n'
+┌───────────────────────────┐\n│         SEQ_SCAN          │\n│    ────────────────────   │\n│    Table: code_example    │\n│   Type: Sequential Scan   │\n│                           │\n│        Projections:       │\n│             id            │\n│        description        │\n│           value           │\n│     created_timestamp     │\n│                           │\n│          ~9 Rows          │\n└───────────────────────────┘\n\n
 """,
     },
     'set_alias': {
@@ -244,35 +250,223 @@ DEFAULT_CODE_EXAMPLE_MAP = {
         'result': 'In the SQL query, the alias will be `abc`',
     },
     'alias': {'example': 'rel.alias', 'result': 'unnamed_relation_43c808c247431be5'},
-    'shape': {'example': 'rel.shape', 'result': '(9, 3)'},
+    'shape': {'example': 'rel.shape', 'result': '(9, 4)'},
     'show': {
         'example': 'rel.show()',
         'result': """
-┌──────────────────────────────────────┬───────┬───────────────────────────┐
-│                  id                  │ value │     created_timestamp     │
-│                 uuid                 │ int64 │ timestamp with time zone  │
-├──────────────────────────────────────┼───────┼───────────────────────────┤
-│ 1481d107-30e1-47b4-a766-43b4c63abf55 │     1 │ 2025-04-09 13:42:21.35+02 │
-│ 7d7ce3e3-368f-4c17-b078-f2d88de99d31 │     2 │ 2025-04-09 13:42:21.35+02 │
-│ d581a6ac-fbdc-4ccf-9b6f-9dad7634b856 │     3 │ 2025-04-09 13:42:21.35+02 │
-│ d00cb553-a4e0-433d-b5cc-72fde3a6941c │     4 │ 2025-04-09 13:42:21.35+02 │
-│ 3cfceb8a-63c9-4fb3-ae25-cd7301be65dd │     5 │ 2025-04-09 13:42:21.35+02 │
-│ 17d8c119-43b3-4531-990f-55836f54386f │     6 │ 2025-04-09 13:42:21.35+02 │
-│ 665ef1c4-fa48-4fbd-b832-19734e37f1ef │     7 │ 2025-04-09 13:42:21.35+02 │
-│ af9c67fe-f67f-48b2-83f4-1e31d5dc1885 │     8 │ 2025-04-09 13:42:21.35+02 │
-│ 964af6cc-9da1-456d-bc81-10b486f8fbc6 │     9 │ 2025-04-09 13:42:21.35+02 │
-└──────────────────────────────────────┴───────┴───────────────────────────┘
+┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
+│                  id                  │   description   │ value │     created_timestamp      │
+│                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
+├──────────────────────────────────────┼─────────────────┼───────┼────────────────────────────┤
+│ 642ea3d7-793d-4867-a759-91c1226c25a0 │ value is uneven │     1 │ 2025-04-09 15:41:20.642+02 │
+│ 6817dd31-297c-40a8-8e40-8521f00b2d08 │ value is even   │     2 │ 2025-04-09 15:42:20.642+02 │
+│ 45143f9a-e16e-4e59-91b2-3a0800eed6d6 │ value is uneven │     3 │ 2025-04-09 15:43:20.642+02 │
+│ fb10390e-fad5-4694-91cb-e82728cb6f9f │ value is even   │     4 │ 2025-04-09 15:44:20.642+02 │
+│ 111ced5c-9155-418e-b087-c331b814db90 │ value is uneven │     5 │ 2025-04-09 15:45:20.642+02 │
+│ 66a870a6-aef0-4085-87d5-5d1b35d21c66 │ value is even   │     6 │ 2025-04-09 15:46:20.642+02 │
+│ a7e8e796-bca0-44cd-a269-1d71090fb5cc │ value is uneven │     7 │ 2025-04-09 15:47:20.642+02 │
+│ 74908d48-7f2d-4bdd-9c92-1e7920b115b5 │ value is even   │     8 │ 2025-04-09 15:48:20.642+02 │
+│ 08fdcbf8-4e53-4290-9e81-423af263b518 │ value is uneven │     9 │ 2025-04-09 15:49:20.642+02 │
+└──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
     },
     'sql_query': {
         'example': 'rel.sql_query()',
-        'result': 'SELECT gen_random_uuid() AS id, "range" AS "value", now() AS created_timestamp FROM "range"(1, 10)',
+        'result': 'SELECT * FROM main.code_example',
     },
     'type': {'example': 'rel.type', 'result': 'QUERY_RELATION'},
     'types': {
         'example': 'rel.types',
-        'result': '[UUID, BIGINT, TIMESTAMP WITH TIME ZONE]',
+        'result': '[UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]',
     },
+}
+
+FUNCTION_MEMBER_CODE_EXAMPLE_MAP = {
+    'any_value': {
+        'example': "rel.any_value('id')",
+        'result': """
+┌──────────────────────────────────────┐
+│            any_value(id)             │
+│                 uuid                 │
+├──────────────────────────────────────┤
+│ 642ea3d7-793d-4867-a759-91c1226c25a0 │
+└──────────────────────────────────────┘
+""",
+    },
+    'arg_max': {
+        'example': 'rel.arg_max(arg_column="value", value_column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬───────────────────────────┐
+│   description   │ arg_max("value", "value") │
+│     varchar     │           int64           │
+├─────────────────┼───────────────────────────┤
+│ value is uneven │                         9 │
+│ value is even   │                         8 │
+└─────────────────┴───────────────────────────┘
+""",
+    },
+    'arg_min': {
+        'example': 'rel.arg_min(arg_column="value", value_column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬───────────────────────────┐
+│   description   │ arg_min("value", "value") │
+│     varchar     │           int64           │
+├─────────────────┼───────────────────────────┤
+│ value is even   │                         2 │
+│ value is uneven │                         1 │
+└─────────────────┴───────────────────────────┘
+""",
+    },
+    'avg': {
+        'example': "rel.avg('value')",
+        'result': """
+┌──────────────┐
+│ avg("value") │
+│    double    │
+├──────────────┤
+│          5.0 │
+└──────────────┘
+ """,
+    },
+    'bit_and': {
+        'example': """
+rel = rel.select("description, value::bit as value_bit")
+
+rel.bit_and(column="value_bit", groups="description", projected_columns="description")
+""",
+        'result': """
+┌─────────────────┬──────────────────────────────────────────────────────────────────┐
+│   description   │                        bit_and(value_bit)                        │
+│     varchar     │                               bit                                │
+├─────────────────┼──────────────────────────────────────────────────────────────────┤
+│ value is uneven │ 0000000000000000000000000000000000000000000000000000000000000001 │
+│ value is even   │ 0000000000000000000000000000000000000000000000000000000000000000 │
+└─────────────────┴──────────────────────────────────────────────────────────────────┘    
+""",
+    },
+    'bit_or': {
+        'example': """
+rel = rel.select("description, value::bit as value_bit")
+
+rel.bit_or(column="value_bit", groups="description", projected_columns="description")
+""",
+        'result': """
+┌─────────────────┬──────────────────────────────────────────────────────────────────┐
+│   description   │                        bit_or(value_bit)                         │
+│     varchar     │                               bit                                │
+├─────────────────┼──────────────────────────────────────────────────────────────────┤
+│ value is uneven │ 0000000000000000000000000000000000000000000000000000000000001111 │
+│ value is even   │ 0000000000000000000000000000000000000000000000000000000000001110 │
+└─────────────────┴──────────────────────────────────────────────────────────────────┘    
+""",
+    },
+    'bit_xor': {
+        'example': """
+rel = rel.select("description, value::bit as value_bit")
+
+rel.bit_xor(column="value_bit", groups="description", projected_columns="description")
+""",
+        'result': """
+┌─────────────────┬──────────────────────────────────────────────────────────────────┐
+│   description   │                        bit_xor(value_bit)                        │
+│     varchar     │                               bit                                │
+├─────────────────┼──────────────────────────────────────────────────────────────────┤
+│ value is even   │ 0000000000000000000000000000000000000000000000000000000000001000 │
+│ value is uneven │ 0000000000000000000000000000000000000000000000000000000000001001 │
+└─────────────────┴──────────────────────────────────────────────────────────────────┘
+""",
+    },
+    'bitstring_agg': {
+        'example': 'rel.bitstring_agg(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬────────────────────────┐
+│   description   │ bitstring_agg("value") │
+│     varchar     │          bit           │
+├─────────────────┼────────────────────────┤
+│ value is uneven │ 101010101              │
+│ value is even   │ 010101010              │
+└─────────────────┴────────────────────────┘
+""",
+    },
+    'bool_and': {
+        'example': """
+rel = rel.select("description, mod(value,2)::boolean as uneven")
+
+rel.bool_and(column="uneven", groups="description", projected_columns="description")
+""",
+        'result': """
+┌─────────────────┬──────────────────┐
+│   description   │ bool_and(uneven) │
+│     varchar     │     boolean      │
+├─────────────────┼──────────────────┤
+│ value is even   │ false            │
+│ value is uneven │ true             │
+└─────────────────┴──────────────────┘
+""",
+    },
+    'bool_or': {
+        'example': """
+rel = rel.select("description, mod(value,2)::boolean as uneven")
+
+rel.bool_or(column="uneven", groups="description", projected_columns="description")
+""",
+        'result': """
+┌─────────────────┬─────────────────┐
+│   description   │ bool_or(uneven) │
+│     varchar     │     boolean     │
+├─────────────────┼─────────────────┤
+│ value is even   │ false           │
+│ value is uneven │ true            │
+└─────────────────┴─────────────────┘                
+""",
+    },
+    'count': {'example': 'rel.count()', 'result': ''},
+    'cume_dist': {'example': 'rel.cume_dist()', 'result': ''},
+    'dense_rank': {'example': 'rel.dense_rank()', 'result': ''},
+    'distinct': {'example': 'rel.distinct()', 'result': ''},
+    'favg': {'example': 'rel.favg()', 'result': ''},
+    'first': {'example': 'rel.first()', 'result': ''},
+    'first_value': {'example': 'rel.first_value()', 'result': ''},
+    'fsum': {'example': 'rel.fsum()', 'result': ''},
+    'geomean': {'example': 'rel.geomean()', 'result': ''},
+    'histogram': {'example': 'rel.histogram()', 'result': ''},
+    'lag': {'example': 'rel.lag()', 'result': ''},
+    'last': {'example': 'rel.last()', 'result': ''},
+    'last_value': {'example': 'rel.last_value()', 'result': ''},
+    'lead': {'example': 'rel.lead()', 'result': ''},
+    'list': {'example': 'rel.list()', 'result': ''},
+    'max': {'example': 'rel.max()', 'result': ''},
+    'mean': {'example': 'rel.mean()', 'result': ''},
+    'median': {'example': 'rel.median()', 'result': ''},
+    'min': {'example': 'rel.min()', 'result': ''},
+    'mode': {'example': 'rel.mode()', 'result': ''},
+    'n_tile': {'example': 'rel.n_tile()', 'result': ''},
+    'nth_value': {'example': 'rel.nth_value()', 'result': ''},
+    'percent_rank': {'example': 'rel.percent_rank()', 'result': ''},
+    'product': {'example': 'rel.product()', 'result': ''},
+    'quantile': {'example': 'rel.quantile()', 'result': ''},
+    'quantile_cont': {'example': 'rel.quantile_cont()', 'result': ''},
+    'quantile_disc': {'example': 'rel.quantile_disc()', 'result': ''},
+    'rank': {'example': 'rel.rank()', 'result': ''},
+    'rank_dense': {'example': 'rel.rank_dense()', 'result': ''},
+    'row_number': {'example': 'rel.row_number()', 'result': ''},
+    'select_dtypes': {'example': 'rel.select_dtypes()', 'result': ''},
+    'select_types': {'example': 'rel.select_types()', 'result': ''},
+    'std': {'example': 'rel.std()', 'result': ''},
+    'stddev': {'example': 'rel.stddev()', 'result': ''},
+    'stddev_pop': {'example': 'rel.stddev_pop()', 'result': ''},
+    'stddev_samp': {'example': 'rel.stddev_samp()', 'result': ''},
+    'string_agg': {'example': 'rel.string_agg()', 'result': ''},
+    'sum': {'example': 'rel.sum()', 'result': ''},
+    'unique': {'example': 'rel.unique()', 'result': ''},
+    'value_counts': {'example': 'rel.value_counts()', 'result': ''},
+    'var': {'example': 'rel.var()', 'result': ''},
+    'var_pop': {'example': 'rel.var_pop()', 'result': ''},
+    'var_samp': {'example': 'rel.var_samp()', 'result': ''},
+    'variance': {'example': 'rel.variance()', 'result': ''},
+}
+
+TRANSFORMATION_MEMBER_CODE_EXAMPLE_MAP = {
     "aggregate": {
         "example": "print(rel.aggregate('max(value)'))",
         "result": """
@@ -284,6 +478,12 @@ DEFAULT_CODE_EXAMPLE_MAP = {
 └──────────────┘
         """,
     },
+}
+
+CODE_EXAMPLE_MAP = {
+    **DEFINITION_MEMBER_CODE_EXAMPLE_MAP,
+    **FUNCTION_MEMBER_CODE_EXAMPLE_MAP,
+    **TRANSFORMATION_MEMBER_CODE_EXAMPLE_MAP,
 }
 
 
@@ -339,20 +539,23 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                 f"| [`{class_member_name}`](#{class_member_name}) | {member_description} |",
                 (
                     DEFAULT_EXAMPLE.format(
-                        code_example=DEFAULT_CODE_EXAMPLE_MAP.get(
-                            class_member_name
-                        ).get("example")
+                        code_example=CODE_EXAMPLE_MAP.get(class_member_name).get(
+                            "example"
+                        )
                     )
-                    if DEFAULT_CODE_EXAMPLE_MAP.get(class_member_name)
-                    else None
+                    if CODE_EXAMPLE_MAP.get(class_member_name)
+                    and CODE_EXAMPLE_MAP.get(class_member_name).get("default", True)
+                    else (
+                        CODE_EXAMPLE_MAP.get(class_member_name).get("example")
+                        if CODE_EXAMPLE_MAP.get(class_member_name)
+                        else None
+                    )
                 ),
                 (
                     DEFAULT_RESULT.format(
-                        result=DEFAULT_CODE_EXAMPLE_MAP.get(class_member_name).get(
-                            "result"
-                        )
+                        result=CODE_EXAMPLE_MAP.get(class_member_name).get("result")
                     )
-                    if DEFAULT_CODE_EXAMPLE_MAP.get(class_member_name)
+                    if CODE_EXAMPLE_MAP.get(class_member_name)
                     else None
                 ),
             ]
@@ -360,7 +563,7 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
 
 
 def generate_from_db(relational_api_table):
-    with open("docs/stable/clients/python/relational_api.md", "w") as f:
+    with open("docs/preview/clients/python/relational_api.md", "w") as f:
         f.write(FORMATTER_TEXT)
         f.write("\n")
 

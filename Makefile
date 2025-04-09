@@ -1,5 +1,5 @@
 
-.phony: initial-run local-run format-check format-fix
+.PHONY: initial-run local-run format-check format-fix venv-setup
 
 format-check:
 	black --check --skip-string-normalization --verbose --diff --color scripts/*.py
@@ -7,6 +7,11 @@ format-check:
 format-fix:
 	black --skip-string-normalization scripts/*.py
 
+
+venv-setup:
+	python3 -m venv venv && \
+	source venv/bin/activate && \
+	pip install -r requirements.txt
 
 initial-run:
 	python3 -m venv venv && \
