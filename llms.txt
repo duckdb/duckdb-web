@@ -1,0 +1,35 @@
+# DuckDB
+
+> DuckDB is an in-process analytical database management system. DuckDB supports SQL and offers clients in popular programming languages such as Python, Java, Node.js, Rust and Go. DuckDB is used as a universal data wrangling tool for data science and data engineering use cases. DuckDB is highly portable and it also runs in web browsers, on smartphones, etc.
+
+Things to remember when using DuckDB:
+
+- DuckDB uses a PostgreSQL-compatible SQL language. All DuckDB clients use the same SQL language.
+- DuckDB can load data from popular formats, including CSV, JSON and Parquet. DuckDB can also directly run queries on CSV, JSON and Parquet files.
+- DuckDB supports persistent storage but can also run in in-memory mode. The in-memory mode is useful when analyzing small data sets or doing data transformation steps.
+- When loading large chunks of data, use the [`SET preserve_insertion_order = false;` configuration setting](https://duckdb.org/docs/stable/sql/dialect/order_preservation) to speed up the loading process and reduce the memory load. When using DuckDB in combination with dataframe libraries such as pandas, turn this mode back on after loading by issuing `SET preserve_insertion_order = false;`.
+
+## Clients
+
+- [List of DuckDB clients](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/docs/stable/clients/overview.md)
+- [Command Line Interface](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/docs/stable/clients/cli/overview.md)
+- [Go](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/docs/stable/clients/go.md)
+- [Node.js](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/docs/stable/clients/node_neo/overview.md)
+- [Python](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/docs/stable/clients/python/overview.md)
+- [R](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/docs/stable/clients/r.md)
+- [Rust](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/docs/stable/clients/rust.md)
+
+## Extensions
+
+- DuckDB has a powerful [extension mechanism](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/docs/stable/extensions/overview.md) that allows loading additional features to DuckDB.
+
+## Examples
+
+- [Analyzing Railway Traffic in the Netherlands](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/_posts/2024-05-31-analyzing-railway-traffic-in-the-netherlands.md): Demonstrates some of DuckDB's key features, including querying different file formats, connecting to remote endpoints, and using advanced SQL features.
+- [Fully Local Data Transformation with dbt and DuckDB](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/_posts/2025-04-04-dbt-duckdb.md): Shows implementing data transformation and reverse ETL pipelines with DuckDB and dbt using the dbt-duckdb adapter.
+- [Using DuckDB in Streamlit](https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/_posts/2025-03-28-using-duckdb-in-streamlit.md): Demonstrates the integration of DuckDB and Streamlit, including the database connection management, the DuckDB Python relational API and responsiveness in interactive map charts.
+
+## Optional
+
+- [Awesome DuckDB](https://raw.githubusercontent.com/davidgasquez/awesome-duckdb/refs/heads/main/README.md): A curated list of projects using DuckDB, resources for using DuckDB.
+- [tldr pages entry for `duckdb`](https://raw.githubusercontent.com/tldr-pages/tldr/refs/heads/main/pages/common/duckdb.md): Short help page for the DuckDB command line client.
