@@ -42,10 +42,10 @@ docs:
   extended_description: |
     The FAISS extension allows DuckDB users to store vector data in faiss, and query this data, making reliable vector search more accessible. On all linux platforms, this platform also supports GPU indexes, you can move a supported index to the GPU using `CALL FAISS_MOVE_GPU({index_name}, {gpu number})`. Currently only CUDA is supported, note that GPU support may be split into a seperate extension in the future. 
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 423
-extension_download_count_pretty: 423
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 415
+extension_download_count_pretty: 415
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---

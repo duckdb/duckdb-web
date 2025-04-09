@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Transforming Data with DuckDB and dbt"
+title: "Fully Local Data Transformation with dbt and DuckDB"
 author: Petrica Leuca
 thumb: "/images/blog/thumbs/duckdb-dbt.svg"
 image: "/images/blog/thumbs/duckdb-dbt.png"
@@ -12,7 +12,8 @@ tags: ["using DuckDB"]
 
 The [Data Build Tool](https://www.getdbt.com/), `dbt`, is an open-source transformation framework, which enables data teams to adopt software engineering best practices in the code they deliver, such as Git workflow and unit testing. Other notable features of `dbt` are data lineage, documentation and data testing as part of the execution pipeline.
 
-In this article we will demonstrate how data can be processed with dbt and DuckDB, by using the [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb) adapter. The `dbt-duckdb` adapter is the integration of `dbt` and DuckDB, offering the means of implementing data transformation pipelines according to the `dbt` standard and by making use of DuckDB's processing power.
+In this article we will demonstrate how to perform fully local data transformations with dbt and DuckDB.
+To this end, we'll use the [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb) adapter, which integrates the `dbt` standard and with DuckDB's processing power.
 
 ### Data Model
 

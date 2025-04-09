@@ -44,7 +44,7 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
     * [with regular expressions]({% post_url 2023-08-23-even-friendlier-sql %}#columns-with-regular-expressions)
     * [with `EXCLUDE` and `REPLACE`]({% post_url 2023-08-23-even-friendlier-sql %}#columns-with-exclude-and-replace)
     * [with lambda functions]({% post_url 2023-08-23-even-friendlier-sql %}#columns-with-lambda-functions)
-* Reusable column aliases, e.g.: `SELECT i + 1 AS j, j + 2 AS k FROM range(0, 3) t(i)`
+* Reusable column aliases (also known as “lateral column aliases”), e.g.: `SELECT i + 1 AS j, j + 2 AS k FROM range(0, 3) t(i)`
 * Advanced aggregation features for analytical (OLAP) queries:
     * [`FILTER` clause]({% link docs/stable/sql/query_syntax/filter.md %})
     * [`GROUPING SETS`, `GROUP BY CUBE`, `GROUP BY ROLLUP` clauses]({% link docs/stable/sql/query_syntax/grouping_sets.md %})
