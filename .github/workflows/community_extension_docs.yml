@@ -28,7 +28,7 @@ jobs:
       run: |
             unzip generated_md.zip
             cp build/docs/*.md community_extensions/extensions/.
-            cp build/docs/extensions_list.md.tmp _includes/list_of_community_extensions.md
+            # TODO: re-enable this line cp build/docs/extensions_list.md.tmp _includes/list_of_community_extensions.md
             rm -r generated_md.zip
             rm -rf build
 
