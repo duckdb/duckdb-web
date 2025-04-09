@@ -103,3 +103,4 @@ exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/ca
 
 include:
   - docs/stable/clients/python/reference/objects.inv
+  - docs/preview/clients/python/reference/objects.inv
