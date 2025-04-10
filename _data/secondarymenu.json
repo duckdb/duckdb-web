@@ -17,19 +17,19 @@
             },
             {
               "page": "Guides",
-              "url": "/docs/guides/index"
+              "url": "/docs/stable/guides/index"
             },
             {
               "page": "Data Import",
-              "url": "/docs/data/overview"
+              "url": "/docs/stable/data/overview"
             },
             {
               "page": "Client APIs",
-              "url": "/docs/api/overview"
+              "url": "/docs/stable/api/overview"
             },
             {
               "page": "SQL Introduction",
-              "url": "/docs/sql/introduction"
+              "url": "/docs/stable/sql/introduction"
             },
             {
               "page": "Why DuckDB",
