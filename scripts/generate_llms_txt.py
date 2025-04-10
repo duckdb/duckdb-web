@@ -84,9 +84,7 @@ def generate_docs_llms_files():
         llms_content.append(f"## {section_title}\n")
 
         for file_info in sorted(files, key=lambda x: x['title']):
-            llms_content.append(f"- {file_info['title']}:")
-            llms_content.append(f"  - [Website]({file_info['website_url']})")
-            llms_content.append(f"  - [Markdown]({file_info['raw_url']})")
+            llms_content.append(f"- [{file_info['title']}]({file_info['website_url']})")
 
         llms_content.append("")
 
