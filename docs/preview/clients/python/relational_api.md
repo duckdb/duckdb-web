@@ -38,10 +38,11 @@ rel.to_table("example_rel")
 # 100% ▕████████████████████████████████████████████████████████████▏ 
 ```
 
-## Index
 
 
 **[Relation Creation](#relation-creation)**
+
+This section contains the details on how a relation is created.         The methods are [lazy evaluated](#lazy-evaluation).
 
 | Name | Description |
 |:--|:-------|
@@ -62,6 +63,8 @@ rel.to_table("example_rel")
 
 **[Relation Definition Details](#relation-definition-details)**
 
+This section contains the details on how to inspect a relation.
+
 | Name | Description |
 |:--|:-------|
 | [`alias`](#alias) | Get the name of the current alias |
@@ -79,6 +82,8 @@ rel.to_table("example_rel")
 | [`types`](#types) | Return a list containing the types of the columns of the relation. |
 
 **[Transformation](#transformation)**
+
+This section contains the methods which can be used to chain queries.        The methods are [lazy evaluated](#lazy-evaluation).
 
 | Name | Description |
 |:--|:-------|
@@ -101,6 +106,8 @@ rel.to_table("example_rel")
 | [`update`](#update) | Update the given relation with the provided expressions |
 
 **[Functions](#functions)**
+
+This section contains the functions which can be applied to an relation,         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
 
 | Name | Description |
 |:--|:-------|
@@ -161,6 +168,8 @@ rel.to_table("example_rel")
 
 **[Output](#output)**
 
+This section contains the functions which will trigger an SQL execution and retrieve the data.
+
 | Name | Description |
 |:--|:-------|
 | [`arrow`](#arrow) | Execute and fetch all rows as an Arrow Table |
@@ -194,7 +203,7 @@ rel.to_table("example_rel")
 
 ## Relation Creation 
 
-This section contains the details on how a relation is created.         The function methods are [lazy evaluated](#lazy-evaluation).
+This section contains the details on how a relation is created.         The methods are [lazy evaluated](#lazy-evaluation).
 
 ### from_arrow
 
@@ -1356,7 +1365,7 @@ rel.types
 
 ## Transformation 
 
-This section contains the methods which can be used to chain queries.        The transformation methods are [lazy evaluated](#lazy-evaluation).
+This section contains the methods which can be used to chain queries.        The methods are [lazy evaluated](#lazy-evaluation).
 
 ### aggregate
 
@@ -2080,7 +2089,7 @@ Update the given relation with the provided expressions
 
 ## Functions 
 
-This section contains the functions which can be applied to an relation,         in order to get a (scalar) result. The function methods are [lazy evaluated](#lazy-evaluation).
+This section contains the functions which can be applied to an relation,         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
 
 ### any_value
 

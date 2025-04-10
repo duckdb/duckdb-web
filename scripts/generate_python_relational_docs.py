@@ -195,7 +195,7 @@ SECTION_MAP = {
     "Relation Creation": {
         "id": 1,
         "description": "This section contains the details on how a relation is created. \
-        The function methods are [lazy evaluated](#lazy-evaluation).",
+        The methods are [lazy evaluated](#lazy-evaluation).",
     },
     "Relation Definition Details": {
         "id": 2,
@@ -204,12 +204,12 @@ SECTION_MAP = {
     "Transformation": {
         "id": 3,
         "description": "This section contains the methods which can be used to chain queries.\
-        The transformation methods are [lazy evaluated](#lazy-evaluation).",
+        The methods are [lazy evaluated](#lazy-evaluation).",
     },
     "Functions": {
         "id": 4,
         "description": "This section contains the functions which can be applied to an relation, \
-        in order to get a (scalar) result. The function methods are [lazy evaluated](#lazy-evaluation).",
+        in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).",
     },
     "Output": {
         "id": 5,
@@ -347,10 +347,6 @@ def generate_from_db(relational_api_table):
         f.write("\n")
 
         # write TOC
-
-        f.write("## Index")
-        f.write("\n")
-
         toc_section = (
             relational_api_table.select('section', "section_id", 'member_toc_line')
             .string_agg(
@@ -366,6 +362,8 @@ def generate_from_db(relational_api_table):
             f.write(
                 f"\n\n**[{section[0]}](#{section[0].lower().replace(" ", "-")})**\n\n"
             )
+            f.write(SECTION_MAP.get(section[0]).get("description"))
+            f.write("\n\n")
             f.write("| Name | Description |\n|:--|:-------|\n")
             f.write(section[2])
 
