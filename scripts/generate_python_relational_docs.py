@@ -5,13 +5,19 @@ import inspect
 import warnings
 
 from generate_python_relational_docs_examples import (
-    CREATION_MEMBER_CODE_EXAMPLE_MAP,
-    DEFINITION_MEMBER_CODE_EXAMPLE_MAP,
-    TRANSFORMATION_MEMBER_CODE_EXAMPLE_MAP,
-    FUNCTION_MEMBER_CODE_EXAMPLE_MAP,
-    OUTPUT_MEMBER_CODE_EXAMPLE_MAP,
+    CODE_EXAMPLE_MAP,
+    DEFAULT_EXAMPLE,
+    PLACEHOLDER_EXAMPLE,
+    PLACEHOLDER_RESULT,
 )
-
+from generate_python_relational_docs_methods import (
+    CREATION_MEMBER_LIST,
+    PY_RELATION_MEMBERS,
+    DEFINITION_MEMBER_LIST,
+    TRANSFORMATION_MEMBER_LIST,
+    FUNCTION_MEMBER_LIST,
+    OUTPUT_MEMBER_LIST,
+)
 
 FORMATTER_TEXT = """---
 layout: docu
@@ -55,197 +61,46 @@ rel.to_table("example_rel")
 ```
 """
 
-DEFINITION_MEMBER_LIST = [
-    "columns",
-    "describe",
-    "description",
-    "dtypes",
-    "explain",
-    "query",
-    "set_alias",
-    "alias",
-    "shape",
-    "show",
-    "sql_query",
-    "type",
-    "types",
-]
-TRANSFORMATION_MEMBER_LIST = [
-    "aggregate",
-    "apply",
-    "cross",
-    "except_",
-    "filter",
-    "insert",
-    "insert_into",
-    "intersect",
-    "join",
-    "limit",
-    "map",
-    "order",
-    "project",
-    "select",
-    "sort",
-    "union",
-    "update",
-]
-FUNCTION_MEMBER_LIST = [
-    "any_value",
-    "arg_max",
-    "arg_min",
-    "avg",
-    "bit_and",
-    "bit_or",
-    "bit_xor",
-    "bitstring_agg",
-    "bool_and",
-    "bool_or",
-    "count",
-    "cume_dist",
-    "dense_rank",
-    "distinct",
-    "favg",
-    "first",
-    "first_value",
-    "fsum",
-    "geomean",
-    "histogram",
-    "lag",
-    "last",
-    "last_value",
-    "lead",
-    "list",
-    "max",
-    "mean",
-    "median",
-    "min",
-    "mode",
-    "n_tile",
-    "nth_value",
-    "percent_rank",
-    "product",
-    "quantile",
-    "quantile_cont",
-    "quantile_disc",
-    "rank",
-    "rank_dense",
-    "row_number",
-    "select_dtypes",
-    "select_types",
-    "std",
-    "stddev",
-    "stddev_pop",
-    "stddev_samp",
-    "string_agg",
-    "sum",
-    "unique",
-    "value_counts",
-    "var",
-    "var_pop",
-    "var_samp",
-    "variance",
-]
-OUTPUT_MEMBER_LIST = [
-    "arrow",
-    "close",
-    "create",
-    "create_view",
-    "df",
-    "execute",
-    "fetch_arrow_reader",
-    "fetch_arrow_table",
-    "fetch_df_chunk",
-    "fetchall",
-    "fetchdf",
-    "fetchmany",
-    "fetchnumpy",
-    "fetchone",
-    "pl",
-    "record_batch",
-    "tf",
-    "to_arrow_table",
-    "to_csv",
-    "to_df",
-    "to_parquet",
-    "to_table",
-    "to_view",
-    "torch",
-    "write_csv",
-    "write_parquet",
-]
-
-CREATION_MEMBER_LIST = [
-    'from_arrow',
-    'from_csv_auto',
-    'from_df',
-    'from_parquet',
-    'from_query',
-    'query',
-    'read_csv',
-    'read_json',
-    'read_parquet',
-    'sql',
-    'table',
-    'table_function',
-    'values',
-    'view',
-]
-
 SECTION_MAP = {
     "Relation Creation": {
         "id": 1,
         "description": "This section contains the details on how a relation is created. \
         The methods are [lazy evaluated](#lazy-evaluation).",
+        "method_list": [
+            {"class": duckdb.DuckDBPyConnection, "members": CREATION_MEMBER_LIST}
+        ],
     },
     "Relation Definition Details": {
         "id": 2,
         "description": "This section contains the details on how to inspect a relation.",
+        "method_list": [
+            {"class": duckdb.DuckDBPyRelation, "members": DEFINITION_MEMBER_LIST}
+        ],
     },
     "Transformation": {
         "id": 3,
         "description": "This section contains the methods which can be used to chain queries.\
         The methods are [lazy evaluated](#lazy-evaluation).",
+        "method_list": [
+            {"class": duckdb.DuckDBPyRelation, "members": TRANSFORMATION_MEMBER_LIST}
+        ],
     },
     "Functions": {
         "id": 4,
         "description": "This section contains the functions which can be applied to an relation, \
         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).",
+        "method_list": [
+            {"class": duckdb.DuckDBPyRelation, "members": FUNCTION_MEMBER_LIST}
+        ],
     },
     "Output": {
         "id": 5,
         "description": "This section contains the functions which will trigger an SQL execution and retrieve the data.",
+        "method_list": [
+            {"class": duckdb.DuckDBPyRelation, "members": OUTPUT_MEMBER_LIST}
+        ],
     },
 }
-
-CODE_EXAMPLE_MAP = {
-    **CREATION_MEMBER_CODE_EXAMPLE_MAP,
-    **DEFINITION_MEMBER_CODE_EXAMPLE_MAP,
-    **TRANSFORMATION_MEMBER_CODE_EXAMPLE_MAP,
-    **FUNCTION_MEMBER_CODE_EXAMPLE_MAP,
-    **OUTPUT_MEMBER_CODE_EXAMPLE_MAP,
-}
-
-DEFAULT_EXAMPLE = '''```python
-import duckdb
-
-duckdb_conn = duckdb.connect()
-
-rel = duckdb_conn.sql("""
-        select 
-            gen_random_uuid() as id, 
-            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
-            range as value, 
-            now() + concat(range,' ', 'minutes')::interval as created_timestamp
-        from range(1, 10)
-    """
-)
-
-{code_example}
-```
-'''
-
-PLACEHOLDER_EXAMPLE = "```python\n{code_example}\n```"
-PLACEHOLDER_RESULT = "```{result_type}\n{result}\n```"
 
 
 def get_duckdb_conn():
@@ -270,6 +125,16 @@ def get_duckdb_conn():
 
 
 def populate_member_details(relational_api_table, class_name, member_list, section):
+    """
+
+    :param relational_api_table: the table to store docs info
+    :param class_name: the class to be inspected
+    :param member_list: the list of methods to be inspected
+    :param section: the section from the md file
+    :return:
+        For each method the doc is parsed into signature and description
+        and the examples are rendered under md code
+    """
 
     for class_member in inspect.getmembers(class_name):
         class_member_name = class_member[0]
@@ -306,7 +171,7 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                 section,
                 SECTION_MAP.get(section).get("id"),
                 f"```python\n {member_signature}\n```" if member_signature else None,
-                member_description,
+                f"{member_description}{CODE_EXAMPLE_MAP.get(member_anchor).get('additional_description', '') if CODE_EXAMPLE_MAP.get(member_anchor) else ''}",
                 f"| [`{class_member_name}`](#{member_anchor}) | {member_description} |",
                 (
                     DEFAULT_EXAMPLE.format(
@@ -435,12 +300,7 @@ def check_fully_documented(class_name, configured_in_script, class_members):
 def main():
     check_fully_documented(
         class_name="DuckDBPyRelation",
-        configured_in_script=(
-            DEFINITION_MEMBER_LIST
-            + TRANSFORMATION_MEMBER_LIST
-            + FUNCTION_MEMBER_LIST
-            + OUTPUT_MEMBER_LIST
-        ),
+        configured_in_script=PY_RELATION_MEMBERS,
         class_members=[
             member[0]
             for member in inspect.getmembers(duckdb.DuckDBPyRelation)
@@ -463,39 +323,14 @@ def main():
 
     relational_api_table = duckdb_conn.table("relational_api_members")
 
-    populate_member_details(
-        relational_api_table=relational_api_table,
-        class_name=duckdb.DuckDBPyConnection,
-        member_list=CREATION_MEMBER_LIST,
-        section="Relation Creation",
-    )
-
-    populate_member_details(
-        relational_api_table=relational_api_table,
-        class_name=duckdb.DuckDBPyRelation,
-        member_list=DEFINITION_MEMBER_LIST,
-        section="Relation Definition Details",
-    )
-
-    populate_member_details(
-        relational_api_table=relational_api_table,
-        class_name=duckdb.DuckDBPyRelation,
-        member_list=TRANSFORMATION_MEMBER_LIST,
-        section="Transformation",
-    )
-    populate_member_details(
-        relational_api_table=relational_api_table,
-        class_name=duckdb.DuckDBPyRelation,
-        member_list=FUNCTION_MEMBER_LIST,
-        section="Functions",
-    )
-
-    populate_member_details(
-        relational_api_table=relational_api_table,
-        class_name=duckdb.DuckDBPyRelation,
-        member_list=OUTPUT_MEMBER_LIST,
-        section="Output",
-    )
+    for section, section_details in SECTION_MAP.items():
+        for method_list in section_details.get("method_list"):
+            populate_member_details(
+                relational_api_table=relational_api_table,
+                class_name=method_list["class"],
+                member_list=method_list["members"],
+                section=section,
+            )
 
     generate_from_db(relational_api_table)
 

@@ -1696,6 +1696,57 @@ rel.filter("value = 10")
 
 Inserts the relation object into an existing table named table_name
 
+##### Example
+
+```python
+
+import duckdb
+
+from datetime import datetime
+from uuid import uuid4
+
+duckdb_conn = duckdb.connect()
+
+duckdb_conn.sql("drop table if exists code_example")
+
+duckdb_conn.sql("""
+        select
+            gen_random_uuid() as id,
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value,
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+).to_table("code_example")
+
+rel = duckdb_conn.values(
+    [
+        uuid4(),
+        'value is even',
+        10,
+        datetime.now()
+    ]
+)
+
+rel.insert_into("code_example")
+
+duckdb_conn.table("code_example").filter("value = 10")
+    
+```
+
+##### Result
+
+```text
+
+┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────────┐
+│                  id                  │  description  │ value │       created_timestamp       │
+│                 uuid                 │    varchar    │ int64 │   timestamp with time zone    │
+├──────────────────────────────────────┼───────────────┼───────┼───────────────────────────────┤
+│ 271c5ddd-c1d5-4638-b5a0-d8c7dc9e8220 │ value is even │    10 │ 2025-04-10 14:29:18.616379+02 │
+└──────────────────────────────────────┴───────────────┴───────┴───────────────────────────────┘
+
+```
+
 ----
 
 ### intersect
@@ -1760,6 +1811,63 @@ therefore generating different ids and timestamps:
 #### Description
 
 Join the relation object with another relation object in other_rel using the join condition expression in join_condition. Types supported are 'inner', 'left', 'right', 'outer', 'semi' and 'anti'
+
+Depending on how the `condition` parameter is provided, the JOIN clause generated is:
+- `USING`
+
+    ```python
+    import duckdb
+    
+    duckdb_conn = duckdb.connect()
+    
+    rel1 = duckdb_conn.sql("select range as id, concat('dummy 1', range) as text from range(1,10)")
+    rel2 = duckdb_conn.sql("select range as id, concat('dummy 2', range) as text from range(5,7)")
+    
+    rel1.join(rel2, condition="id", how="inner").sql_query()
+    ```
+    with following SQL:
+    ```sql
+    SELECT * 
+    FROM (
+            SELECT "range" AS id, 
+                concat('dummy 1', "range") AS "text" 
+            FROM "range"(1, 10)
+        ) AS unnamed_relation_41bc15e744037078 
+    INNER JOIN (
+            SELECT "range" AS id, 
+            concat('dummy 2', "range") AS "text" 
+            FROM "range"(5, 7)
+        ) AS unnamed_relation_307e245965aa2c2b 
+    USING (id)
+    ```
+- `ON`
+
+    ```python
+    import duckdb
+    
+    duckdb_conn = duckdb.connect()
+    
+    rel1 = duckdb_conn.sql("select range as id, concat('dummy 1', range) as text from range(1,10)")
+    rel2 = duckdb_conn.sql("select range as id, concat('dummy 2', range) as text from range(5,7)")
+    
+    rel1.join(rel2, condition=f"{rel1.alias}.id = {rel2.alias}.id", how="inner").sql_query()
+    ```
+    with the following SQL:
+    ```sql
+    SELECT * 
+    FROM (
+            SELECT "range" AS id, 
+                concat('dummy 1', "range") AS "text" 
+            FROM "range"(1, 10)
+        ) AS unnamed_relation_41bc15e744037078 
+    INNER JOIN (
+            SELECT "range" AS id, 
+            concat('dummy 2', "range") AS "text" 
+            FROM "range"(5, 7)
+        ) AS unnamed_relation_307e245965aa2c2b 
+    ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id))
+    ```
+
 
 ##### Example
 
