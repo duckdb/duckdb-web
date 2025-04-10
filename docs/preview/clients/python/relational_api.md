@@ -679,8 +679,6 @@ import duckdb
 
 duckdb_conn = duckdb.connect()
 
-duckdb_conn.sql("drop table if exists code_example")
-
 duckdb_conn.sql("create table code_example as select * from range(1,2) tbl(id)")
 
 rel = duckdb_conn.table("code_example")
@@ -762,6 +760,33 @@ rel.show()
 
 Create a relation object from the passed values
 
+##### Example
+
+```python
+
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.values([1, 'a'])
+
+rel.show()
+
+```
+
+##### Result
+
+```text
+
+┌───────┬─────────┐
+│ col0  │  col1   │
+│ int32 │ varchar │
+├───────┼─────────┤
+│     1 │ a       │
+└───────┴─────────┘
+
+```
+
 ----
 
 ### view
@@ -784,7 +809,6 @@ import duckdb
 
 duckdb_conn = duckdb.connect()
 
-duckdb_conn.sql("drop table if exists code_example")
 duckdb_conn.sql("create table code_example as select * from range(1,2) tbl(id)")
 
 rel = duckdb_conn.view("code_example")
@@ -1642,8 +1666,6 @@ from uuid import uuid4
 
 duckdb_conn = duckdb.connect()
 
-duckdb_conn.sql("drop table if exists code_example")
-
 duckdb_conn.sql("""
         select 
             gen_random_uuid() as id, 
@@ -1706,8 +1728,6 @@ from datetime import datetime
 from uuid import uuid4
 
 duckdb_conn = duckdb.connect()
-
-duckdb_conn.sql("drop table if exists code_example")
 
 duckdb_conn.sql("""
         select
@@ -1973,6 +1993,38 @@ rel.limit(1)
 
 Calls the passed function on the relation
 
+##### Example
+
+```python
+
+import duckdb
+from pandas import DataFrame
+
+def multiply_by_2(df: DataFrame):
+    df["id"] = df["id"] * 2
+    return df
+
+duckdb_conn = duckdb.connect()
+rel = duckdb_conn.sql("select range as id, 'dummy' as text from range(1,3)")
+
+rel.map(multiply_by_2, schema={"id": int, "text": str})
+
+```
+
+##### Result
+
+```text
+
+┌───────┬─────────┐
+│  id   │  text   │
+│ int64 │ varchar │
+├───────┼─────────┤
+│     2 │ dummy   │
+│     4 │ dummy   │
+└───────┴─────────┘
+
+```
+
 ----
 
 ### order
@@ -2131,6 +2183,41 @@ rel.select("description").limit(1)
 
 Reorder the relation object by the provided expressions
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.sort("description")
+```
+
+
+##### Result
+
+```text
+
+┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
+│                  id                  │   description   │ value │     created_timestamp      │
+│                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
+├──────────────────────────────────────┼─────────────────┼───────┼────────────────────────────┤
+│ 5e0dfa8c-de4d-4ccd-8cff-450dabb86bde │ value is even   │     6 │ 2025-04-10 16:52:15.605+02 │
+│ 95f1ad48-facf-4a84-a971-0a4fecce68c7 │ value is even   │     2 │ 2025-04-10 16:48:15.605+02 │
+...
+
+```
+
 ----
 
 ### union
@@ -2194,6 +2281,52 @@ rel.count("*")
 #### Description
 
 Update the given relation with the provided expressions
+
+##### Example
+
+```python
+
+import duckdb
+
+from duckdb import ColumnExpression
+
+duckdb_conn = duckdb.connect()
+
+duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+).to_table("code_example")
+
+rel = duckdb_conn.table("code_example")
+
+rel.update(set={"description":None}, condition=ColumnExpression("value") == 1)
+
+# the update is executed on the table, but not reflected on the relationship
+# the relationship has to be recreated to retrieve the modified data
+rel = duckdb_conn.table("code_example")
+
+rel.show()
+
+```
+
+##### Result
+
+```text
+
+┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
+│                  id                  │   description   │ value │     created_timestamp      │
+│                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
+├──────────────────────────────────────┼─────────────────┼───────┼────────────────────────────┤
+│ 66dcaa14-f4a6-4a55-af3b-7f6aa23ab4ad │ NULL            │     1 │ 2025-04-10 16:54:49.317+02 │
+│ c6a18a42-67fb-4c95-827b-c966f2f95b88 │ value is even   │     2 │ 2025-04-10 16:55:49.317+02 │
+...
+
+```
 
 ## Functions 
 
