@@ -9,3 +9,4 @@ ripgrepy
 marko # for generating search index
 python-frontmatter
 icalendar
+python-frontmatter # for parsing frontmatter markdown
