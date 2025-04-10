@@ -14,10 +14,6 @@ def generate_docs_llms_files():
     llms_content = []
     llms_full_content = []
 
-    # GitHub repository information
-    github_repo = "duckdb/duckdb-web"
-    github_branch = "main"
-
     # Group files by directory
     file_groups = {}
 
@@ -43,9 +39,6 @@ def generate_docs_llms_files():
             title = doc.get('title', '')
             content = doc.content.strip()
 
-            # Create URLs
-            raw_url = f"https://raw.githubusercontent.com/{github_repo}/{github_branch}/docs/stable/{relative_path}"
-
             # For website URL, remove the .md extension
             website_path = str(relative_path)
             if website_path.endswith('.md'):
@@ -59,7 +52,6 @@ def generate_docs_llms_files():
             file_groups[dir_name].append(
                 {
                     'title': title,
-                    'raw_url': raw_url,
                     'website_url': website_url,
                     'content': content,
                 }
@@ -67,7 +59,6 @@ def generate_docs_llms_files():
 
             # Add to llms-full.txt (titles, links, and content)
             llms_full_content.append(f"# {title}\n")
-            llms_full_content.append(f"Source: {raw_url}\n")
             llms_full_content.append(f"Website: {website_url}\n")
             llms_full_content.append("---\n")
             llms_full_content.append(content)
