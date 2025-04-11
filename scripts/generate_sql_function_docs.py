@@ -1,6 +1,21 @@
 #!/usr/bin/env python3
 
 import duckdb
+from dataclasses import dataclass, field
+from typing import Callable
+
+
+@dataclass
+class DocFunction:
+    category: str
+    name: str
+    parameters: list[str]
+    description: str
+    examples: list[str]
+    is_variadic: bool = False
+    aliases: list[str] = field(default_factory=list)
+    fixed_example_results: list[str] = field(default_factory=list)
+
 
 DOC_CATEGORY_MAP = {
     'docs/stable/sql/functions/blob.md': 'blob',
@@ -12,128 +27,103 @@ BINARY_OPERATORS = ['||', '^@', 'LIKE', 'SIMILAR TO']
 EXTRACT_OPERATOR = '[]'
 
 # override/add to duckdb_functions() outputs:
-# - key: tuple: (category, function_name)
-# - value: LIST[tuple: (parameters, description, examples, aliases)]
-OVERRIDES_MAP = {
-    ('blob', '||'): [
-        (
-            ['blob', 'blob'],
-            '`BLOB` concatenation.',
-            [r"'\xAA'::BLOB || '\xBB'::BLOB"],
-            False,
-            [],
-        )
-    ],
-    ('blob', 'read_blob'): [
-        (
-            ['source'],
-            'Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the `read_blob` guide for more details.',
-            ["read_blob('hello.bin')"],
-            False,
-            [],
-        )
-    ],
-    ('string', '||'): [
-        (
-            ['string', 'string'],
-            'Concatenates two strings. Any `NULL` input results in `NULL`. See also `concat(string, ...)`.',
-            ["'Duck' || 'DB'"],
-            False,
-            [],
-        )
-    ],
-    ('string', '[]'): [
-        (
-            ['string', 'index'],
-            'Extracts a single character using a (1-based) index.',
-            ["'DuckDB'[4]"],
-            False,
-            ['array_extract'],
-        ),
-        (
-            ['string', 'begin', 'end'],
-            'Extracts a string using slice conventions similar to Python. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted.',
-            ["'DuckDB'[:4]"],
-            False,
-            ['array_slice'],
-        ),
-    ],
-    ('string', 'LIKE'): [
-        (
-            ['string', 'target'],
-            'Returns `true` if the `string` matches the like specifier (see Pattern Matching).',
-            ["'hello' LIKE '%lo'"],
-            False,
-            [],
-        )
-    ],
-    ('string', 'SIMILAR TO'): [
-        (
-            ['string', 'regex'],
-            'Returns `true` if the `string` matches the `regex` (see Pattern Matching).',
-            ["'hello' SIMILAR TO 'l+'"],
-            False,
-            ['regexp_full_match'],
-        )
-    ],
-    ('string', 'md5_number_lower'): [
-        (
-            ['string'],
-            'Returns the lower 64-bit segment of the `MD5` hash of the `string` as a `BIGINT`.',
-            ["md5_number_lower('123')"],
-            False,
-            [],
-        )
-    ],
-    ('string', 'md5_number_upper'): [
-        (
-            ['string'],
-            'Returns the upper 64-bit segment of the `MD5` hash of the `string` as a `BIGINT`.',
-            ["md5_number_upper('123')"],
-            False,
-            [],
-        )
-    ],
-    ('regex', 'regexp_split_to_table'): [
-        (
-            ['string'],
-            'Splits the `string` along the `regex` and returns a row for each part.',
-            ["regexp_split_to_table('hello world; 42', ';? ')"],
-            False,
-            [],
-        )
-    ],
-    ('string', 'split_part'): [
-        (
-            ['string', 'separator', 'index'],
-            "Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior).",
-            ["split_part('a;b;c', ';', 2)"],
-            False,
-            [],
-        )
-    ],
-    ('string', 'read_text'): [
-        (
-            ['source'],
-            "Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the `read_text` guide for more details.",
-            ["read_text('hello.txt')"],
-            False,
-            [],
-        )
-    ],
-}
+OVERRIDES: list[DocFunction] = [
+    DocFunction(
+        category='blob',
+        name='||',
+        parameters=['blob', 'blob'],
+        description='Concatenates two blobs. Any `NULL` input results in `NULL`.',
+        examples=[r"'\xAA'::BLOB || '\xBB'::BLOB"],
+    ),
+    DocFunction(
+        category='blob',
+        name='read_blob',
+        parameters=['source'],
+        description="Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the `read_blob` guide for more details.",
+        examples=["read_blob('hello.bin')"],
+        fixed_example_results=[r"hello\x0A"],
+    ),
+    DocFunction(
+        category='string',
+        name='||',
+        parameters=['string', 'string'],
+        description="Concatenates two strings. Any `NULL` input results in `NULL`. See also `concat(string, ...)`.",
+        examples=["'Duck' || 'DB'"],
+    ),
+    DocFunction(
+        category='string',
+        name='[]',
+        parameters=['string', 'index'],
+        description="Extracts a single character using a (1-based) index.",
+        examples=["'DuckDB'[4]"],
+        aliases=['array_extract'],
+    ),
+    DocFunction(
+        category='string',
+        name='[]',
+        parameters=['string', 'begin', 'end'],
+        description='Extracts a string using slice conventions similar to Python. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted.',
+        examples=["'DuckDB'[:4]"],
+        aliases=['array_slice'],
+    ),
+    DocFunction(
+        category='string',
+        name='LIKE',
+        parameters=['string', 'target'],
+        description='Returns `true` if the `string` matches the like specifier (see Pattern Matching).',
+        examples=["'hello' LIKE '%lo'"],
+    ),
+    DocFunction(
+        category='string',
+        name='SIMILAR TO',
+        parameters=['string', 'regex'],
+        description="Returns `true` if the `string` matches the `regex` (see Pattern Matching).",
+        examples=["'hello' SIMILAR TO 'l+'"],
+        aliases=['regexp_full_match'],
+    ),
+    DocFunction(
+        category='string',
+        name='md5_number_lower',
+        parameters=['string'],
+        description="Returns the lower 64-bit segment of the `MD5` hash of the `string` as a `BIGINT`.",
+        examples=["md5_number_lower('123')"],
+    ),
+    DocFunction(
+        category='string',
+        name='md5_number_upper',
+        parameters=['string'],
+        description="Returns the upper 64-bit segment of the `MD5` hash of the `string` as a `BIGINT`.",
+        examples=["md5_number_upper('123')"],
+    ),
+    DocFunction(
+        category='regex',
+        name='regexp_split_to_table',
+        parameters=['string', 'regex'],
+        description="Splits the `string` along the `regex` and returns a row for each part.",
+        examples=["regexp_split_to_table('hello world; 42', ';? ')"],
+    ),
+    DocFunction(
+        category='string',
+        name='split_part',
+        parameters=['string', 'separator', 'index'],
+        description="Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior).",
+        examples=["split_part('a;b;c', ';', 2)"],
+    ),
+    DocFunction(
+        category='string',
+        name='read_text',
+        parameters=['source'],
+        description="Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the `read_text` guide for more details.",
+        examples=["read_text('hello.txt')"],
+        fixed_example_results=["hello\\n"],
+    ),
+]
 
 EXCLUDES = [('string', 'list_slice')]
 
 URL_CONVERSIONS = {
     '`read_blob` guide': ('docs/stable/guides/file_formats/read_file.md', '#read_blob'),
     '`concat(string, ...)`': ('', "#concatstring-"),
-}
-
-# for these functions, we don't run the examples
-FIXED_EXAMPLES = {
-    ('blob', 'read_blob'): r"hello\x0A",
-    ('string', 'read_text'): r"hello\n",
 }
 
 
@@ -144,9 +134,7 @@ def main():
 
 
 def generate_doc_file(doc_file: str, category: str) -> None:
-    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]] = (
-        get_function_data(category)
-    )
+    function_data: list[DocFunction] = get_function_data(category)
     startline = (
         "<!-- Start of section generated by scripts/generate_sql_function_docs.py -->\n"
     )
@@ -167,7 +155,7 @@ def generate_doc_file(doc_file: str, category: str) -> None:
             split_start[0]
             + startline
             + generate_docs_table(function_data)
-            + generate_docs_records(function_data, category)
+            + generate_docs_records(function_data)
             + endline
             + split_end[1]
         )
@@ -175,17 +163,17 @@ def generate_doc_file(doc_file: str, category: str) -> None:
             f.write(doc_text_new)
 
 
-def get_function_data(
-    category: str,
-) -> list[tuple[str, list[str], str, list[str], bool, list[str]]]:
+def get_function_data(category: str) -> list[DocFunction]:
     query = f"""
 select distinct
+  '{category}' category,
   f1.function_name,
   f1.parameters,
   f1.description,
   f1.examples,
   f1.varargs='ANY' as is_variadic,
-  list_sort(list_distinct(list(f2.function_name))) as aliases
+  list_sort(list_distinct(list(f2.function_name))) as aliases,
+  list_value() fixed_example_results
 from
   duckdb_functions() f1
   left join duckdb_functions() f2 on (
@@ -198,48 +186,46 @@ where
 group by all
 order by all
 """
-    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]] = (
-        duckdb.sql(query).fetchall()
-    )
-
+    function_data: list[DocFunction] = [
+        DocFunction(*func) for func in duckdb.sql(query).fetchall()
+    ]
     # apply overrides and add additional functions
     function_data = [
         func
         for func in function_data
-        if (
-            (category, func[0]) not in OVERRIDES_MAP
-            and (category, func[0]) not in EXCLUDES
+        if not any(
+            func.category == override.category and func.name == override.name
+            for override in OVERRIDES
         )
+        and (category, func.name) not in EXCLUDES
     ]
-    for k, v in OVERRIDES_MAP.items():
-        override_category, function_name = k
-        if override_category == category:
-            for override in v:
-                function_data.append((function_name, *override))
-
+    function_data += [
+        override for override in OVERRIDES if override.category == category
+    ]
     # sort on: function_name, nr of arguments, argument names
-    sorter = lambda func: f"{func[0]}-{len(func[1])}-{func[1]}"
+    sorter: Callable[[DocFunction], str] = (
+        lambda func: f"{func.name}-{len(func.parameters)}-{func.parameters}"
+    )
     function_data_1 = sorted(
-        [func for func in function_data if func[0] == EXTRACT_OPERATOR], key=sorter
+        [func for func in function_data if func.name == EXTRACT_OPERATOR], key=sorter
     )
     function_data_2 = sorted(
-        [func for func in function_data if func[0] in BINARY_OPERATORS], key=sorter
+        [func for func in function_data if func.name in BINARY_OPERATORS], key=sorter
     )
     function_data_3 = sorted(
         [
             func
             for func in function_data
-            if (func[0] not in BINARY_OPERATORS) and (func[0] != EXTRACT_OPERATOR)
+            if (func.name not in BINARY_OPERATORS) and (func.name != EXTRACT_OPERATOR)
         ],
         key=sorter,
     )
     function_data = function_data_1 + function_data_2 + function_data_3
-
     # apply url conversions
-    for conversion in URL_CONVERSIONS:
-        for idx, function in enumerate(function_data):
-            if conversion in function[2]:
-                url_desc = function[2].replace(
+    for function in function_data:
+        for conversion in URL_CONVERSIONS:
+            if conversion in function.description:
+                function.description = function.description.replace(
                     conversion,
                     f"[{conversion}]"
                     "({% "
@@ -247,75 +233,55 @@ order by all
                     " %}"
                     f"{URL_CONVERSIONS[conversion][1]})",
                 )
-                function_name, parameters, _, examples, is_variadic, aliases = (
-                    function_data[idx]
-                )
-                function_data[idx] = (
-                    function_name,
-                    parameters,
-                    url_desc,
-                    examples,
-                    is_variadic,
-                    aliases,
-                )
     return function_data
 
 
-def generate_docs_table(
-    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]]
-):
+def generate_docs_table(function_data: list[DocFunction]):
     res = "<!-- markdownlint-disable MD056 -->\n\n"
     res += "| Name | Description |\n|:--|:-------|\n"
-    for func in function_data:
-        function_name, params, description, examples, is_variadic, _ = func
-        if not examples:
-            print(f"WARNING (skipping): '{function_name}' - no example is available")
+    for f in function_data:
+        if not f.examples:
+            print(f"WARNING (skipping): '{f.name}' - no example is available")
             continue
-        if function_name in BINARY_OPERATORS and len(params) == 2:
-            res += f"| [`{params[0]} {function_name} {params[1]}`](#{params[0]}--{params[1]}) | {description} |\n"
-        elif function_name == EXTRACT_OPERATOR and len(params) >= 2:
-            res += f"| [`{params[0]}[{":".join(params[1:])}]`](#{"".join(params)}) | {description} |\n"
+        if f.name in BINARY_OPERATORS and len(f.parameters) == 2:
+            res += f"| [`{f.parameters[0]} {f.name} {f.parameters[1]}`](#{f.parameters[0]}--{f.parameters[1]}) | {f.description} |\n"
+        elif f.name == EXTRACT_OPERATOR and len(f.parameters) >= 2:
+            res += f"| [`{f.parameters[0]}[{":".join(f.parameters[1:])}]`](#{"".join(f.parameters)}) | {f.description} |\n"
         else:
-            res += f"| [`{function_name}({", ".join(params)}{', ...' if (is_variadic) else ''})`](#{function_name.lstrip('@*!^')}{"-".join(params)}{'-' if (is_variadic) else ''}) | {description} |\n"
+            res += f"| [`{f.name}({", ".join(f.parameters)}{', ...' if (f.is_variadic) else ''})`](#{f.name.lstrip('@*!^')}{"-".join(f.parameters)}{'-' if (f.is_variadic) else ''}) | {f.description} |\n"
     res += "\n<!-- markdownlint-enable MD056 -->\n"
     return res
 
 
-def generate_docs_records(
-    function_data: list[tuple[str, list[str], str, list[str], bool, list[str]]],
-    category: str,
-):
+def generate_docs_records(function_data: list[DocFunction]):
     res = "\n"
-    for func in function_data:
-        function_name, params, description, examples, is_variadic, aliases = func
-        if not examples:
-            print(f"skipping {function_name}")
+    for f in function_data:
+        if not f.examples:
+            print(f"skipping {f.name}")
             continue
-        if len(examples) > 1:
-            print(f"WARNING: '{function_name}' multiple examples available: {examples}")
-        example = examples[0]
-        if function_name in BINARY_OPERATORS and len(params) == 2:
-            res += f"#### `{params[0]} {function_name} {params[1]}`\n\n"
-        elif function_name == EXTRACT_OPERATOR and len(params) >= 2:
-            res += f"#### `{params[0]}[{":".join(params)}]`\n\n"
+        if len(f.examples) > 1:
+            print(f"WARNING: '{f.name}' multiple examples available: {f.examples}")
+        example = f.examples[0]
+        example_result = f.fixed_example_results[0] if f.fixed_example_results else ''
+        if f.name in BINARY_OPERATORS and len(f.parameters) == 2:
+            res += f"#### `{f.parameters[0]} {f.name} {f.parameters[1]}`\n\n"
+        elif f.name == EXTRACT_OPERATOR and len(f.parameters) >= 2:
+            res += f"#### `{f.parameters[0]}[{":".join(f.parameters)}]`\n\n"
         else:
-            res += f"#### `{function_name}({", ".join(params)}{', ...' if (is_variadic) else ''})`\n\n"
+            res += f"#### `{f.name}({", ".join(f.parameters)}{', ...' if (f.is_variadic) else ''})`\n\n"
         res += '<div class="nostroke_table"></div>\n\n'
-        res += f"| **Description** | {description} |\n"
+        res += f"| **Description** | {f.description} |\n"
         res += f"| **Example** | `{example}` |\n"
-        if (category, function_name) in FIXED_EXAMPLES:
-            res += f"| **Result** | `{FIXED_EXAMPLES[(category, function_name)]}` |\n"
-        else:
-            example_result = ""
+        if not example_result:
             try:
                 example_result = duckdb.sql(rf"select {example}::VARCHAR").fetchone()[0]
             except duckdb.ParserException as e:
                 print(
-                    f"Error for function '{function_name}', could not calculate example: '{example}'. Consider adding it to 'FIXED_EXAMPLES'. {e}"
+                    f"Error for function '{f.name}', could not calculate example: '{example}'. Consider adding it via OVERRIDES'. {e}"
                 )
-            res += f"| **Result** | `{example_result}` |\n"
-        if aliases:
-            res += f"| **Alias** | {','.join(f"`{alias}`" for alias in aliases)} |\n"
+        res += f"| **Result** | `{example_result}` |\n"
+        if f.aliases:
+            res += f"| **Alias** | {','.join(f"`{alias}`" for alias in f.aliases)} |\n"
         res += '\n'
     return res
 
