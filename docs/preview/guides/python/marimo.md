@@ -58,7 +58,7 @@ The SQL statement itself is an f-string, letting you interpolate Python values i
 > Warning Heads up!
 > If you have user-generated-content going into the SQL queries, be sure to santize your inputs to prevent SQL injection.
 
-## Connecting a custom DuckDB connection
+## Connecting a Custom DuckDB Connection
 
 To connect to a custom DuckDB connection instead of using the default global connection, create a cell and create a DuckDB connection as Python variable:
 
@@ -79,7 +79,7 @@ marimo automatically discovers the connection and lets you select it in the SQL 
 </div>
 
 
-## Database, schema, and table auto-discovery
+## Database, Schema, and Table Auto-Discovery
 
 marimo introspects connections and display the database, schemas, tables, and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
 
@@ -91,7 +91,7 @@ marimo introspects connections and display the database, schemas, tables, and co
 </div>
 
 
-## Reference a local dataframe
+## Reference a Local Dataframe
 
 Reference a local dataframe in your SQL cell by using the name of the
 Python variable that holds the dataframe. If you have a database connection
@@ -106,7 +106,7 @@ df = pl.DataFrame({"column": [1, 2, 3]})
 SELECT * FROM df WHERE column > 2
 ```
 
-## Reference the output of a SQL cell
+## Reference the Output of a SQL Cell
 
 Defining a non-private (non-underscored) output variable in the SQL cell allows you to reference the resulting dataframe in other Python and SQL cells.
 
@@ -117,7 +117,7 @@ Defining a non-private (non-underscored) output variable in the SQL cell allows 
   </figure>
 </div>
 
-## Reactive SQL cells
+## Reactive SQL Cells
 
 marimo allows you to create reactive SQL cells that automatically update when their dependencies change. **Working with expensive queries or large datasets?** You can configure marimo's runtime to be "lazy". By doing so, dependent cells are only marked as stale letting the user choose when they should be re-run.
 
@@ -144,7 +144,7 @@ Interacting with UI elements, like a slider, makes your data more tangible.
 </div>
 
 
-## Why marimo is well-suited to DuckDB-powered OLAP analytics
+## Why marimo is Well-suited to DuckDB-powered OLAP Analytics
 
 marimo is the only open-source Python notebook with native support for DuckDB.
 Moreover, marimo's reactive execution model keeps your cells in sync, letting
@@ -161,4 +161,4 @@ you focus on the task at hand instead of debugging hidden state.
 
 * Read the [marimo docs](https://docs.marimo.io/).
 * Try the SQL tutorial: `marimo tutorial sql`.
-* The code for this guide is [available on GitHub](https://github.com/marimo-team/marimo/examples/duckdb_example.py). Run it with `marimo edit <github-url>`.
+* The code for this guide is [available on GitHub](https://github.com/marimo-team/marimo/blob/main/examples/sql/duckdb_example.py). Run it with `marimo edit <github-url>`.
