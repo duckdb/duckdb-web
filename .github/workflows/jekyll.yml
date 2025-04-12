@@ -49,6 +49,8 @@ jobs:
         uses: montudor/action-zip@v1
       - name: Fetch release calendar
         run: python scripts/get_calendar.py
+      - name: Generate llms.txt files
+        run: python scripts/generate_llms_txt.py
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
