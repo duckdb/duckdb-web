@@ -5,7 +5,7 @@ redirect_from:
 title: marimo notebooks
 ---
 
-[marimo](https://github.com/marimo-team/marimo), a reactive notebook for Python and SQL, ships with tight integration with DuckDB's Python client giving you powerful SQL cells that allow you to mix and match Python and SQL in a single notebook. Unlike traditional notebooks, when you run a cell or interact with a UI element, marimo automatically runs affected cells (or marks them as stale), keeping code and outputs consistent and preventing bugs before they happen. Its tight integration with DuckDB makes it perfect for data exploration and analysis.
+[marimo](https://github.com/marimo-team/marimo), an open-source reactive notebook for Python and SQL, ships with tight integration with DuckDB's Python client giving you powerful SQL cells that allow you to mix and match Python and SQL in a single notebook. Unlike traditional notebooks, when you run a cell or interact with a UI element, marimo automatically runs affected cells (or marks them as stale), keeping code and outputs consistent and preventing bugs before they happen. Its tight integration with DuckDB makes it perfect for data exploration and analysis.
 
 ## Installation
 
