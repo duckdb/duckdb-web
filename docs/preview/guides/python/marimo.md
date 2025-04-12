@@ -25,7 +25,7 @@ pip install "marimo[sql]" # or uv add "marimo[sql]"
 Install supporting libraries:
 
 ```bash
-pip install polars pyarrow # or uv add "marimo[sql]"
+pip install "polars[pyarrow]" # or uv add "polars[pyarrow]"
 ```
 
 Run a tutorial:
