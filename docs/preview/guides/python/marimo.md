@@ -139,8 +139,8 @@ marimo's reactive execution model keeps your cells in sync, eliminating manual r
 ## Next Steps
 
 * Dive into the [marimo docs](https://docs.marimo.io/).
-* Try the SQL tutorial: `marimo tutorial sql`.
-* The code for this guide is [available on GitHub](https://github.com/marimo-team/marimo/examples/duckdb_example.py).
+* Run the SQL tutorial from your terminal: `marimo tutorial sql`.
+* Checkout the code for this guide is [available on GitHub](https://github.com/marimo-team/marimo/blob/main/examples/sql/duckdb_example.py).
 
 ## Wrapping Up
 
