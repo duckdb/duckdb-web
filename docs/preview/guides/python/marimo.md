@@ -40,7 +40,7 @@ The SQL statement itself is an f-string, letting you interpolate Python values i
 > Warning Heads up!
 > If you have user-generated-content going into the SQL queries, be sure to santize your inputs to prevent SQL injection.
 
-## Connecting a custom DuckDB connection
+## Connecting a Custom DuckDB Connection
 
 To connect to a custom DuckDB connection instead of using the default global connection, create a cell and create a DuckDB connection as Python variable:
 
@@ -61,7 +61,7 @@ marimo will automatically discover the connection and let you select it in the S
 </div>
 
 
-## Database, schema, and table auto-discovery
+## Database, Schema, and Table Auto-Discovery
 
 marimo will also automatically introspect connections and display the database, schemas, tables, and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
 
@@ -73,7 +73,7 @@ marimo will also automatically introspect connections and display the database, 
 </div>
 
 
-## Reference a local dataframe
+## Reference a Local Dataframe
 
 You can reference a local dataframe in your SQL cell by using the name of the
 Python variable that holds the dataframe. If you have a database connection
@@ -88,7 +88,7 @@ df = pl.DataFrame({"column": [1, 2, 3]})
 SELECT * FROM df WHERE column > 2
 ```
 
-## Reference the output of a SQL cell
+## Reference the Output of a SQL Cell
 
 Defining a non-private (non-underscored) output variable in the SQL cell allows you to reference the resulting dataframe in other Python and SQL cells.
 
@@ -99,7 +99,7 @@ Defining a non-private (non-underscored) output variable in the SQL cell allows 
   </figure>
 </div>
 
-## Reactive SQL cells
+## Reactive SQL Cells
 
 marimo allows you to create reactive SQL cells that automatically update when their dependencies change. **Working with expensive queries or large datasets?** You can configure marimo's runtime to be "lazy". By doing so, dependent cells are only marked as stale letting the user choose when they should be re-run.
 
