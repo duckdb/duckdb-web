@@ -5,21 +5,39 @@ redirect_from:
 title: marimo notebooks
 ---
 
-[marimo](https://github.com/marimo-team/marimo), an open-source reactive notebook for Python and SQL, ships with tight integration with DuckDB's Python client giving you powerful SQL cells that allow you to mix and match Python and SQL in a single notebook. Unlike traditional notebooks, when you run a cell or interact with a UI element, marimo automatically runs affected cells (or marks them as stale), keeping code and outputs consistent and preventing bugs before they happen. Its tight integration with DuckDB makes it perfect for data exploration and analysis.
+[marimo](https://github.com/marimo-team/marimo) is an open-source reactive
+notebook for Python and SQL that's tightly integrated with DuckDB's Python
+client, letting you mix and match Python and SQL in a single git-versionable
+notebook. Unlike traditional notebooks, when you run a cell or interact with a
+UI element, marimo automatically (or lazily) runs affected cells, keeping code
+and outputs consistent. Its integration with DuckDB makes it well-suited to
+interactively working with data, and its representation as a Python file makes
+it simple to run notebooks as scripts.
 
 ## Installation
 
 To get started, install marimo and duckdb from your terminal:
 
 ```bash
-pip install "marimo[sql]"
-# or
-uv add "marimo[sql]"
+pip install "marimo[sql]" # or uv add "marimo[sql]"
+```
+
+Install supporting libraries:
+
+```bash
+pip install polars pyarrow # or uv add "marimo[sql]"
+```
+
+Run a tutorial:
+
+```bash
+marimo tutorial sql
 ```
 
 ## SQL in marimo
 
-Start a new notebook from your terminal with `marimo edit <notebook-name>.py`. You can create SQL cells in one of three ways:
+Create a notebook from your terminal with `marimo edit notebook.py`. Create SQL
+cells in one of three ways:
 
 1. **Right-click** the "+" button and pick "SQL cell"
 2. Convert any empty cell to SQL via the cell menu
@@ -27,13 +45,13 @@ Start a new notebook from your terminal with `marimo edit <notebook-name>.py`. Y
 
 <img src="/images/guides/marimo/marimo-sql-button.png"/>
 
-Under the hood, marimo converts your SQL into clean Python:
+marimo does not have any "magic" SQL commands, serializing your cells as pure Python.
 
 ```python
 df = mo.sql(f"SELECT 'Off and flying!' AS a_duckdb_column")
 ```
 
-marimo does not have any "magic" SQL commands and serializes your cells as pure Python. This is because marimo stores your notebook as pure Python, [for many reasons](https://marimo.io/blog/python-not-json), such as git-friendly diffs and running notebooks as Python scripts.
+This is because marimo stores notebooks as pure Python, [for many reasons](https://marimo.io/blog/python-not-json), such as git-friendly diffs and running notebooks as Python scripts.
 
 The SQL statement itself is an f-string, letting you interpolate Python values into the query with `{}` (shown later). In particular, this means your SQL queries can depend on the values of UI elements or other Python values, all part of marimo's dataflow graph.
 
@@ -51,7 +69,7 @@ import duckdb
 conn = duckdb.connect("path/to/my/duckdb.db")
 ```
 
-marimo will automatically discover the connection and let you select it in the SQL cell's connection dropdown.
+marimo automatically discovers the connection and lets you select it in the SQL cell's connection dropdown.
 
 <div align="center">
   <figure>
@@ -63,7 +81,7 @@ marimo will automatically discover the connection and let you select it in the S
 
 ## Database, schema, and table auto-discovery
 
-marimo will also automatically introspect connections and display the database, schemas, tables, and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
+marimo introspects connections and display the database, schemas, tables, and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
 
 <div align="center">
   <figure>
@@ -75,7 +93,7 @@ marimo will also automatically introspect connections and display the database, 
 
 ## Reference a local dataframe
 
-You can reference a local dataframe in your SQL cell by using the name of the
+Reference a local dataframe in your SQL cell by using the name of the
 Python variable that holds the dataframe. If you have a database connection
 with a table of the same name, the database table will be used instead.
 
@@ -126,22 +144,21 @@ Interacting with UI elements, like a slider, makes your data more tangible.
 </div>
 
 
-## Why marimo + DuckDB?
+## Why marimo is well-suited to DuckDB-powered OLAP analytics
 
-marimo's reactive execution model keeps your cells in sync, eliminating manual refreshes and letting you focus on analysis instead of notebook management:
+marimo is the only open-source Python notebook with native support for DuckDB.
+Moreover, marimo's reactive execution model keeps your cells in sync, letting
+you focus on the task at hand instead of debugging hidden state.
 
-1. **Live Updates**: Change a slider or update a cell? Your dependent queries and charts update instantly.
-2. **Smart Execution**: Only cells that need to run do run.
-3. **Built-in UI**: Create interactive dashboards without leaving your notebook.
-4. **Python Native**: Mix Python and SQL naturally.
+1. **Python Native**: Mix Python and SQL naturally.
+2. **Live Updates**: Change a slider or update a cell? Your dependent queries and charts update instantly.
+3. **Smart Execution**: Only cells that need to run do run.
+4. **Built-in UI**: Create interactive dashboards without leaving your notebook.
 5. **Reusable**: marimo notebooks double as data apps and Python scripts.
+6. **Shareable**: Optionally run notebooks entirely in the browser, [with WebAssembly](https://docs.marimo.io/guides/wasm/).
 
 ## Next Steps
 
-* Dive into the [marimo docs](https://docs.marimo.io/).
+* Read the [marimo docs](https://docs.marimo.io/).
 * Try the SQL tutorial: `marimo tutorial sql`.
-* The code for this guide is [available on GitHub](https://github.com/marimo-team/marimo/examples/duckdb_example.py).
-
-## Wrapping Up
-
-marimo + DuckDB = a reactive data analysis powerhouse. Your queries and visualizations stay in sync automatically, and you can build interactive tools right in your notebook.
+* The code for this guide is [available on GitHub](https://github.com/marimo-team/marimo/examples/duckdb_example.py). Run it with `marimo edit <github-url>`.
