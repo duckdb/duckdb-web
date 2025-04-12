@@ -137,10 +137,7 @@ SELECT * FROM random_data;
 Interacting with UI elements, like a slider, makes your data more tangible.
 
 <div align="center">
-  <figure>
-    <img src="/images/guides/marimo/marimo-reactive-sql.gif"/>
-    <figcaption>Reactively run SQL from UI elements</figcaption>
-  </figure>
+  <img src="/images/guides/marimo/marimo-reactive-sql.gif"/>
 </div>
 
 
