@@ -46,7 +46,7 @@ COPY (FROM (VALUES (42, 43)) t(c1, c2))
 TO 'f.parquet';
 ```
 
-If want to add another column `c3` that is not present in the file, we can run:
+If we want to add another column `c3` that is not present in the file, we can run:
 
 ```sql
 FROM (VALUES(NULL::VARCHAR, NULL, NULL)) t(c1, c2, c3)
