@@ -43,7 +43,7 @@ cells in one of three ways:
 
 <img src="/images/guides/marimo/marimo-sql-button.png"/>
 
-Unlike other notebook environments, marimo does not have any “magic” SQL commands, serializing your cells as pure Python.
+In marimo, SQL cells give the appearance of writing SQL while being serialized as standard Python code using the `mo.sql()` function, which keeps your notebook as pure Python code without requiring special syntax or magic commands.
 
 ```python
 df = mo.sql(f"SELECT 'Off and flying!' AS a_duckdb_column")
@@ -139,18 +139,14 @@ Interacting with UI elements, like a slider, makes your data more tangible.
 </div>
 
 
-## Why marimo is Well-Suited to DuckDB-Powered OLAP Analytics
+## DuckDB-Powered OLAP Analytics in marimo
 
-marimo is the only open-source Python notebook with native support for DuckDB.
-Moreover, marimo's reactive execution model keeps your cells in sync, letting
-you focus on the task at hand instead of debugging hidden state.
+marimo provides several features that work well with DuckDB for analytical workflows:
 
-1. **Python Native**: Mix Python and SQL naturally.
-2. **Live Updates**: Change a slider or update a cell? Your dependent queries and charts update instantly.
-3. **Smart Execution**: Only cells that need to run do run.
-4. **Built-in UI**: Create interactive dashboards without leaving your notebook.
-5. **Reusable**: marimo notebooks double as data apps and Python scripts.
-6. **Shareable**: Optionally run notebooks entirely in the browser, [with WebAssembly](https://docs.marimo.io/guides/wasm/).
+* Seamless integration between Python and SQL
+* Reactive execution that automatically updates dependent cells when queries change
+* Interactive UI elements that can be used to parameterize SQL queries
+* Ability to export notebooks as standalone applications or Python scripts, or even run entirely in the browser [with WebAssembly](https://docs.marimo.io/guides/wasm/).
 
 ## Next Steps
 
