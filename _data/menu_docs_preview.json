@@ -1397,6 +1397,10 @@
                   "url": "jupyter"
                 },
                 {
+                  "page": "marimo Notebooks",
+                  "url": "marimo"
+                },
+                {
                   "page": "SQL on Pandas",
                   "url": "sql_on_pandas"
                 },
