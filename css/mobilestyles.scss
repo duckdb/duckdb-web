@@ -142,6 +142,8 @@
 			pointer-events: all;
 			opacity: 1;
 			transform: translateY(0);
+			max-height: calc(100svh - 110px);
+			overflow: auto;
 		}
 	
 		div {
@@ -231,6 +233,8 @@
 			transform: translateX(0);
 			opacity: 1;
 			pointer-events: all;
+			max-height: calc(100svh - 110px);
+			overflow: auto;
 		}
 		.sidenav {
 			overflow: auto;
