@@ -31,6 +31,13 @@ EXTRACT_OPERATOR = '[]'
 # override/add to duckdb_functions() outputs:
 OVERRIDES: list[DocFunction] = [
     DocFunction(
+        category='string',
+        name='||',
+        parameters=['string', 'string'],
+        description="Concatenates two strings. Any `NULL` input results in `NULL`. See also `concat(string, ...)`.",
+        examples=["'Duck' || 'DB'"],
+    ),
+    DocFunction(
         category='blob',
         name='||',
         parameters=['blob', 'blob'],
@@ -44,13 +51,6 @@ OVERRIDES: list[DocFunction] = [
         description="Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the `read_blob` guide for more details.",
         examples=["read_blob('hello.bin')"],
         fixed_example_results=[r"hello\x0A"],
-    ),
-    DocFunction(
-        category='string',
-        name='||',
-        parameters=['string', 'string'],
-        description="Concatenates two strings. Any `NULL` input results in `NULL`. See also `concat(string, ...)`.",
-        examples=["'Duck' || 'DB'"],
     ),
     DocFunction(
         category='string',
@@ -133,7 +133,7 @@ EXCLUDES = [('string', 'list_slice')]
 PAGE_LINKS = {
     # intra page links
     '`concat(string, ...)`': "#concatstring-",
-    '`string || string`': "#string--string)",
+    '`string || string`': "#string--string",
     'fmt syntax': "#fmt-syntax",
     'printf syntax': '#printf-syntax',
     # other page links
@@ -315,12 +315,22 @@ def generate_docs_records(function_data: list[DocFunction]):
         res += f"| **Example** | `{example}` |\n"
         if not example_result:
             try:
-                example_result = duckdb.sql(rf"select {example}::VARCHAR").fetchone()[0]
+                query_result = duckdb.sql(rf"select {example}::VARCHAR").fetchall()
+                if len(query_result) != 1:
+                    print(f"WARNING: example for '{f.name}' yields multiple rows!")
+                    example_result = 'Multiple rows: ' + ', '.join(
+                        f"`'{query_result[idx_res][0]}'`"
+                        for idx_res in range(len(query_result))
+                    )
+                else:
+                    example_result = f"`{query_result[0][0]}`"
             except duckdb.ParserException as e:
                 print(
                     f"Error for function '{f.name}', could not calculate example: '{example}'. Consider adding it via OVERRIDES'. {e}"
                 )
-        res += f"| **Result** | `{example_result}` |\n"
+        if '`' not in example_result:
+            example_result = f"`{example_result}`"
+        res += f"| **Result** | {example_result} |\n"
         if f.aliases:
             res += f"| **Alias** | {','.join(f"`{alias}`" for alias in f.aliases)} |\n"
         res += '\n'
