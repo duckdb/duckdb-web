@@ -1487,6 +1487,10 @@
                   "url": "create_synthetic_data"
                 },
                 {
+                  "page": "Dutch Railway Datasets",
+                  "url": "dutch_railway_datasets"
+                },
+                {
                   "page": "Sharing Macros",
                   "url": "sharing_macros"
                 },
