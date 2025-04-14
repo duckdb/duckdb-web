@@ -167,16 +167,12 @@ $(document).ready(function(){
 	});
 
 
-    /* SIDENAVIGATION Documentation */
+	/* SIDENAVIGATION Documentation */
 	$('.sidenavigation .hasSub').click(function(){
 		$(this).next('ul').slideToggle();
+		$(this).toggleClass('opened'); 
 	});
-	   
-	// arrows in menu 
-	$('.sidenavigation .hasSub').click(function(){
-	   $(this).toggleClass('opened'); 
-	});
-	// only docu or benchmarking can be opened at once
+
 	$('.sidenavigation li.benchmarking').click(function(){
 		$('.sidenavigation li.documentation.opened').toggleClass('opened').next('ul').slideToggle();
 	});
@@ -195,12 +191,12 @@ $(document).ready(function(){
 	if ($hamburger.length > 0) {
 		$hamburger.on("click", function() {
 			$(this).toggleClass("is-active");
-		
+
 			if ($landingMenu.length > 0) { // Menu 1: Landingmenu
 				$landingMenu.toggleClass("slidein");
 				$("body main").toggleClass("inactive");
 			}
-			
+
 			if ($sideNavigation.length > 0) { // Menu 2: Sidenavigation
 				$sideNavigation.toggleClass("slidein");
 				$("body.documentation main .wrap").toggleClass("inactive");
@@ -208,21 +204,32 @@ $(document).ready(function(){
 		});
 
 		// Menu 1 Open Submenu
-		if ($landingMenu.length > 0 && $hamburger.is(":visible")) {
-			$landingMenu.on("click", ".hasSub", function(e) {
-				e.preventDefault();
-				const $submenu = $(this).next(".submenuwrap");
-				if ($(this).hasClass("open")) {
-					$(this).removeClass("open");
-					$submenu.stop().slideUp();
-				} else {
-					$landingMenu.find(".hasSub").removeClass("open");
-					$landingMenu.find(".submenuwrap").slideUp();
-					$(this).addClass("open");
-					$submenu.stop().slideDown();
-				}
-			});
+		function setupMobileMenu() {
+			if ($landingMenu.length > 0 && window.innerWidth <= 900) {
+				$landingMenu.off("click", ".hasSub");
+				$landingMenu.on("click", ".hasSub", function(e) {
+					e.preventDefault();
+					const $submenu = $(this).next(".submenuwrap");
+					if ($(this).hasClass("open")) {
+						$(this).removeClass("open");
+						$submenu.stop().slideUp();
+					} else {
+						$landingMenu.find(".hasSub").removeClass("open");
+						$landingMenu.find(".submenuwrap").slideUp();
+						$(this).addClass("open");
+						$submenu.stop().slideDown();
+					}
+				});
+			} else {
+				$landingMenu.off("click", ".hasSub");
+			}
 		}
+
+		setupMobileMenu();
+
+		$(window).resize(function() {
+			setupMobileMenu();
+		});
 	}
 
 	
