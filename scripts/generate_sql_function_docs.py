@@ -29,21 +29,9 @@ BINARY_OPERATORS = ['||', '^@', 'LIKE', 'SIMILAR TO']
 EXTRACT_OPERATOR = '[]'
 
 # override/add to duckdb_functions() outputs:
+# NOTE: duckdb_functions() only contains sufficient information for scalar and aggregate functions.
 OVERRIDES: list[DocFunction] = [
-    DocFunction(
-        category='string',
-        name='||',
-        parameters=['string', 'string'],
-        description="Concatenates two strings. Any `NULL` input results in `NULL`. See also `concat(string, ...)`.",
-        examples=["'Duck' || 'DB'"],
-    ),
-    DocFunction(
-        category='blob',
-        name='||',
-        parameters=['blob', 'blob'],
-        description='Concatenates two blobs. Any `NULL` input results in `NULL`.',
-        examples=[r"'\xAA'::BLOB || '\xBB'::BLOB"],
-    ),
+    # table functions
     DocFunction(
         category='blob',
         name='read_blob',
@@ -52,6 +40,44 @@ OVERRIDES: list[DocFunction] = [
         examples=["read_blob('hello.bin')"],
         fixed_example_results=[r"hello\x0A"],
     ),
+    DocFunction(
+        category='string',
+        name='read_text',
+        parameters=['source'],
+        description="Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the `read_text` guide for more details.",
+        examples=["read_text('hello.txt')"],
+        fixed_example_results=["hello\\n"],
+    ),
+    # macros
+    DocFunction(
+        category='string',
+        name='md5_number_lower',
+        parameters=['string'],
+        description="Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`.",
+        examples=["md5_number_lower('123')"],
+    ),
+    DocFunction(
+        category='string',
+        name='md5_number_upper',
+        parameters=['string'],
+        description="Returns the upper 64-bit segment of the MD5 hash of the `string` as a `BIGINT`.",
+        examples=["md5_number_upper('123')"],
+    ),
+    DocFunction(
+        category='regex',
+        name='regexp_split_to_table',
+        parameters=['string', 'regex'],
+        description="Splits the `string` along the `regex` and returns a row for each part.",
+        examples=["regexp_split_to_table('hello world; 42', ';? ')"],
+    ),
+    DocFunction(
+        category='string',
+        name='split_part',
+        parameters=['string', 'separator', 'index'],
+        description="Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior).",
+        examples=["split_part('a;b;c', ';', 2)"],
+    ),
+    # others
     DocFunction(
         category='string',
         name='[]',
@@ -85,65 +111,33 @@ OVERRIDES: list[DocFunction] = [
     ),
     DocFunction(
         category='string',
-        name='md5_number_lower',
-        parameters=['string'],
-        description="Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`.",
-        examples=["md5_number_lower('123')"],
-    ),
-    DocFunction(
-        category='string',
-        name='md5_number_upper',
-        parameters=['string'],
-        description="Returns the upper 64-bit segment of the MD5 hash of the `string` as a `BIGINT`.",
-        examples=["md5_number_upper('123')"],
-    ),
-    DocFunction(
-        category='regex',
-        name='regexp_split_to_table',
-        parameters=['string', 'regex'],
-        description="Splits the `string` along the `regex` and returns a row for each part.",
-        examples=["regexp_split_to_table('hello world; 42', ';? ')"],
-    ),
-    DocFunction(
-        category='string',
-        name='split_part',
-        parameters=['string', 'separator', 'index'],
-        description="Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior).",
-        examples=["split_part('a;b;c', ';', 2)"],
-    ),
-    DocFunction(
-        category='string',
-        name='read_text',
-        parameters=['source'],
-        description="Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the `read_text` guide for more details.",
-        examples=["read_text('hello.txt')"],
-        fixed_example_results=["hello\\n"],
-    ),
-    DocFunction(
-        category='string',
-        name='position',  # non standard parsing with 'IN' as pseudo argument
+        name='position',  # non-standard parsing with 'IN' as pseudo argument
         parameters=['search_string IN string'],
         description="Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found.",
         examples=["position('b' IN 'abc')"],
+        aliases=['instr', 'strpos'],
     ),
 ]
 
+# NOTE: All function aliases are added, unless explicitly excluded. Format: (<category>, <function_name>)
 EXCLUDES = [('string', 'list_slice')]
 
 PAGE_LINKS = {
-    # intra page links
-    '`concat(string, ...)`': "#concatstring-",
-    '`string || string`': "#string--string",
+    # intra-page links:
+    '`concat(arg1, arg2, ...)`': "#concatvalue",
+    'operator `||`': "#arg1--arg2",
     'fmt syntax': "#fmt-syntax",
     'printf syntax': '#printf-syntax',
-    # other page links
+    # links to other doc pages:
+    '`list_concat(list1, list2)`': f'docs/{DOC_VERSION}/sql/functions/list#list_concatlist1-list2',
     '`read_blob` guide': f'docs/{DOC_VERSION}/guides/file_formats/read_file.md#read_blob',
+    '`read_text` guide': f'docs/{DOC_VERSION}/guides/file_formats/read_file.md#read_text',
     'slicing': f'docs/{DOC_VERSION}/sql/functions/list.md#slicing',
+    'slice conventions': f'docs/{DOC_VERSION}/sql/functions/list.md#slicing',
     'Pattern Matching': f'docs/{DOC_VERSION}/sql/functions/pattern_matching.md',
     'collations': f'docs/{DOC_VERSION}/sql/expressions/collations.md',
-    '`read_text` guide': f'docs/{DOC_VERSION}/guides/file_formats/read_file.md#read_text',
     'Regular Expressions': f'docs/{DOC_VERSION}/sql/functions/regular_expressions',
-    # external page links
+    # external page links:
     '`os.path.dirname`': 'https://docs.python.org/3.7/library/os.path.html#os.path.dirname',
     '`os.path.basename`': 'https://docs.python.org/3.7/library/os.path.html#os.path.basename',
     '`pathlib.parts`': 'https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts',
@@ -278,63 +272,81 @@ def get_function_data(categories: list[str]) -> list[DocFunction]:
 
 
 def generate_docs_table(function_data: list[DocFunction]):
-    res = "<!-- markdownlint-disable MD056 -->\n\n"
-    res += "| Name | Description |\n|:--|:-------|\n"
-    for f in function_data:
-        if not f.examples:
-            print(f"WARNING (skipping): '{f.name}' - no example is available")
+    table_str = "<!-- markdownlint-disable MD056 -->\n\n"
+    table_str += "| Name | Description |\n|:--|:-------|\n"
+    for func in function_data:
+        if not func.examples:
+            print(f"WARNING (skipping): '{func.name}' - no example is available")
             continue
-        if f.name in BINARY_OPERATORS and len(f.parameters) == 2:
-            res += f"| [`{f.parameters[0]} {f.name} {f.parameters[1]}`](#{f.parameters[0]}--{f.parameters[1]}) | {f.description} |\n"
-        elif f.name == EXTRACT_OPERATOR and len(f.parameters) >= 2:
-            res += f"| [`{f.parameters[0]}[{":".join(f.parameters[1:])}]`](#{"".join(f.parameters)}) | {f.description} |\n"
+        if func.name in BINARY_OPERATORS and len(func.parameters) == 2:
+            table_str += f"| [`{func.parameters[0]} {func.name} {func.parameters[1]}`](#{func.parameters[0]}-{func.name.lstrip('@*!^|pip3 list | grep duckdb').lower().replace(' ', '-')}-{func.parameters[1]}) | {func.description} |\n"
+        elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
+            table_str += f"| [`{func.parameters[0]}[{":".join(func.parameters[1:])}]`](#{"".join(func.parameters)}) | {func.description} |\n"
         else:
-            res += f"| [`{f.name}({", ".join(f.parameters)}{', ...' if (f.is_variadic) else ''})`](#{f.name.lstrip('@*!^')}{"-".join(f.parameters).lower().replace(' ', '-')}{'-' if (f.is_variadic) else ''}) | {f.description} |\n"
-    res += "\n<!-- markdownlint-enable MD056 -->\n"
-    return res
+            table_str += f"| [`{func.name}({", ".join(func.parameters)}{', ...' if (func.is_variadic) else ''})`](#{func.name.lstrip('@*!^')}{"-".join(func.parameters).lower().replace(' ', '-')}) | {func.description} |\n"
+    table_str += "\n<!-- markdownlint-enable MD056 -->\n"
+    return table_str
 
 
 def generate_docs_records(function_data: list[DocFunction]):
-    res = "\n"
-    for f in function_data:
-        if not f.examples:
-            print(f"skipping {f.name}")
+    record_str = "\n"
+    for func in function_data:
+        if not func.examples:
+            print(f"skipping {func.name}")
             continue
-        if len(f.examples) > 1:
-            print(f"WARNING: '{f.name}' multiple examples available: {f.examples}")
-        example = f.examples[0]
-        example_result = f.fixed_example_results[0] if f.fixed_example_results else ''
-        if f.name in BINARY_OPERATORS and len(f.parameters) == 2:
-            res += f"#### `{f.parameters[0]} {f.name} {f.parameters[1]}`\n\n"
-        elif f.name == EXTRACT_OPERATOR and len(f.parameters) >= 2:
-            res += f"#### `{f.parameters[0]}[{":".join(f.parameters)}]`\n\n"
+        if func.name in BINARY_OPERATORS and len(func.parameters) == 2:
+            record_str += (
+                f"#### `{func.parameters[0]} {func.name} {func.parameters[1]}`\n\n"
+            )
+        elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
+            record_str += (
+                f"#### `{func.parameters[0]}[{":".join(func.parameters[1:])}]`\n\n"
+            )
         else:
-            res += f"#### `{f.name}({", ".join(f.parameters)}{', ...' if (f.is_variadic) else ''})`\n\n"
-        res += '<div class="nostroke_table"></div>\n\n'
-        res += f"| **Description** | {f.description} |\n"
-        res += f"| **Example** | `{example}` |\n"
+            record_str += f"#### `{func.name}({", ".join(func.parameters)}{', ...' if (func.is_variadic) else ''})`\n\n"
+        record_str += '<div class="nostroke_table"></div>\n\n'
+        record_str += f"| **Description** | {func.description} |\n"
+        record_str += generate_example_rows(func)
+        if func.aliases:
+            record_str += f"| **{'Alias' if len(func.aliases) == 1 else 'Aliases'}** | {','.join(f"`{alias}`" for alias in func.aliases)} |\n"
+        record_str += '\n'
+    return record_str
+
+
+def generate_example_rows(func: DocFunction):
+    lines = ''
+    for idx, example in enumerate(func.examples):
+        example_result = (
+            func.fixed_example_results[idx] if func.fixed_example_results else ''
+        )
+        example_num = ' ' + str(idx + 1) if len(func.examples) > 1 else ''
+        lines += f"| **Example{example_num}** | `{example}` |\n"
         if not example_result:
             try:
+                if func.name in BINARY_OPERATORS:
+                    example = f"({example})"
                 query_result = duckdb.sql(rf"select {example}::VARCHAR").fetchall()
                 if len(query_result) != 1:
-                    print(f"WARNING: example for '{f.name}' yields multiple rows!")
                     example_result = 'Multiple rows: ' + ', '.join(
-                        f"`'{query_result[idx_res][0]}'`"
-                        for idx_res in range(len(query_result))
+                        (
+                            f"`'{query_result[idx_result][0]}'`"
+                            if query_result[idx_result][0]
+                            else "`NULL`"
+                        )
+                        for idx_result in range(len(query_result))
                     )
                 else:
-                    example_result = f"`{query_result[0][0]}`"
+                    example_result = (
+                        f"`{query_result[0][0]}`" if query_result[0][0] else "`NULL`"
+                    )
             except duckdb.ParserException as e:
                 print(
-                    f"Error for function '{f.name}', could not calculate example: '{example}'. Consider adding it via OVERRIDES'. {e}"
+                    f"Error for function '{func.name}', could not calculate example: '{example}'. Consider adding it via OVERRIDES'. {e}"
                 )
         if '`' not in example_result:
             example_result = f"`{example_result}`"
-        res += f"| **Result** | {example_result} |\n"
-        if f.aliases:
-            res += f"| **Alias** | {','.join(f"`{alias}`" for alias in f.aliases)} |\n"
-        res += '\n'
-    return res
+        lines += f"| **Result** | {example_result} |\n"
+    return lines
 
 
 if __name__ == "__main__":
