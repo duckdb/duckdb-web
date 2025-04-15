@@ -18,7 +18,7 @@ class DocFunction:
     fixed_example_results: list[str] = field(default_factory=list)
 
 
-DOC_VERSION = 'stable'
+DOC_VERSION = 'preview'
 DOC_FILES = [
     f'docs/{DOC_VERSION}/sql/functions/blob.md',
     f'docs/{DOC_VERSION}/sql/functions/char.md',
@@ -180,7 +180,7 @@ def get_function_blocks(
     if not function_blocks or any(
         len(block_groups) != 5 for block_groups in function_blocks
     ):
-        print(f"doc generation failed, start or end line missing in file")
+        print(f"ERROR: doc generation failed, start or end line missing in file")
         exit(1)
     function_blocks_info = []
     for block_groups in function_blocks:
