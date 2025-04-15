@@ -200,3 +200,15 @@ The system considers the following formats for timestamps (`timestampformat`). H
 | %m-%d-%y %I:%M:%S %p |
 | %m-%d-%Y %I:%M:%S %p |
 | %Y-%m-%d %H:%M:%S.%f |
+
+
+### Using `read_csv_auto` 
+
+The `read_csv_auto` function allows you to load CSV files with automatic schema detection.
+
+```sql
+SELECT * FROM read_csv_auto('data.csv');
+```
+This function automatically infers the column names and data types based on the contents of the CSV file. It is useful when working with large or unstructured data files where manual schema definition would be time-consuming. 
+
+Contribution by Deniz Altıntaş for educational purposes.
