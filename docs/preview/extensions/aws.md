@@ -20,15 +20,28 @@ INSTALL aws;
 LOAD aws;
 ```
 
-## Related Extensions
+## Usage
 
-`aws` depends on `httpfs` extension capabilities, and both will be autoloaded on the first call to `load_aws_credentials`.
-If autoinstall or autoload are disabled, you can always explicitly install and load `httpfs` as follows:
+The `credential_chain` provider allows automatically fetching credentials using mechanisms provided by the AWS SDK.
+For example, to use the AWS SDK default provider:
 
 ```sql
-INSTALL httpfs;
-LOAD httpfs;
+CREATE SECRET aws_credential_chain (
+    TYPE s3,
+    PROVIDER credential_chain
+);
 ```
+
+To persistent this secret between sessions, run:
+
+```sql
+CREATE PERSISTENT SECRET aws_credential_chain (
+    TYPE s3,
+    PROVIDER credential_chain
+);
+```
+
+For a full list of secrets available through this extensions, see the [`httpfs` extension's S3 secrets page]({% link docs/preview/extensions/httpfs/overview.md %}#s3).
 
 ## Legacy Features
 
@@ -78,3 +91,13 @@ CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret =
 | loaded_access_key_id | loaded_secret_access_key     | loaded_session_token | loaded_region |
 |----------------------|------------------------------|----------------------|---------------|
 | minio_duckdb_user_2  | minio_duckdb_user_password_2 | NULL                 | NULL          |
+
+## Related Extensions
+
+`aws` depends on `httpfs` extension capabilities, and both will be autoloaded on the first call to `load_aws_credentials`.
+If autoinstall or autoload are disabled, you can always explicitly install and load `httpfs` as follows:
+
+```sql
+INSTALL httpfs;
+LOAD httpfs;
+```
