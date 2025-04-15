@@ -63,10 +63,10 @@ repo:
   github: rustyconover/duckdb-crypto-extension
   ref: d73e47816d84e132019005411c3f2e5607326c2d
 
-extension_star_count: 16
-extension_star_count_pretty: 16
-extension_download_count: 571
-extension_download_count_pretty: 571
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 575
+extension_download_count_pretty: 575
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---

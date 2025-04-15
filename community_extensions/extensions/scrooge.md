@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: pdet/Scrooge-McDuck
-  ref: c97da6a4bf04352d9f9493df30ef90477bf250e7
+  ref: 222e094570f307208258b8faf90dd401fa152acd
 
 docs:
   hello_world: |
@@ -39,10 +39,10 @@ docs:
     More information on the supported scanners and functions can be found on Scrooge's [wiki page](https://github.com/pdet/Scrooge-McDuck/wiki).
     You can also find a ROI example of Ether on the [following blogpost](https://pdet-blog.github.io/2024/06/30/ethereum.html)
 
-extension_star_count: 136
-extension_star_count_pretty: 136
-extension_download_count: 437
-extension_download_count_pretty: 437
+extension_star_count: 140
+extension_star_count_pretty: 140
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_scrooge.png'
 layout: community_extension_doc
 ---
@@ -68,15 +68,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | example |
-|---------------|---------------|-------------|---------|---------|
-| first_s       | aggregate     |             |         |         |
-| last_s        | aggregate     |             |         |         |
-| read_eth      | table         |             |         |         |
-| sma           | aggregate     |             |         |         |
-| timebucket    | scalar        |             |         |         |
-| volatility    | aggregate     |             |         |         |
-| yahoo_finance | table         |             |         |         |
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| first_s       | aggregate     | NULL        | NULL    | []       |
+| last_s        | aggregate     | NULL        | NULL    | []       |
+| read_eth      | table         | NULL        | NULL    | []       |
+| sma           | aggregate     | NULL        | NULL    | []       |
+| timebucket    | scalar        | NULL        | NULL    | []       |
+| volatility    | aggregate     | NULL        | NULL    | []       |
+| yahoo_finance | table         | NULL        | NULL    | []       |
 
 ### Added Settings
 
