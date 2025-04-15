@@ -25,7 +25,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`ascii(string)`](#asciistring) | Returns an integer that represents the Unicode code point of the first character of the `string`. |
 | [`bar(x, min, max)`](#barx-min-max) | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
 | [`bar(x, min, max, width)`](#barx-min-max-width) | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
-| [`base64(blob)`](#base64blob) | Converts a `blob` to a base64 encoded `string`. |
+| [`base64(blob)`](#base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`bin(string)`](#binstring) | Converts the `string` to binary representation. |
 | [`bit_length(string)`](#bit_lengthstring) | Number of bits in a `string`. |
 | [`char_length(string)`](#char_lengthstring) | Number of characters in `string`. |
@@ -57,7 +57,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`like_escape(string, like_specifier, escape_character)`](#like_escapestring-like_specifier-escape_character) | Returns `true` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`lower(string)`](#lowerstring) | Converts `string` to lower case. |
 | [`lpad(string, count, character)`](#lpadstring-count-character) | Pads the `string` with the `character` on the left until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| [`ltrim(string)`](#ltrimstring) | Removes any spaces from the left side of the `string`. In the example, the ␣ symbol denotes a space character. |
+| [`ltrim(string)`](#ltrimstring) | Removes any spaces from the left side of the `string`. In the example, the `␣` symbol denotes a space character. |
 | [`ltrim(string, characters)`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
@@ -70,13 +70,13 @@ This section describes functions and operators for examining and manipulating [`
 | [`parse_dirname(path)`](#parse_dirnamepath) | Returns the top-level directory name from the given `path`, using both `forward_slash` and `backslash` as separators. |
 | [`parse_dirname(path, separator)`](#parse_dirnamepath-separator) | Returns the top-level directory name from the given `path`. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`parse_dirpath(path)`](#parse_dirpathpath) | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname), using both `forward_slash` and `backslash` as separators. |
-| [`parse_dirpath(path, separator)`](#parse_dirpathpath-separator) | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname). separator options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
+| [`parse_dirpath(path, separator)`](#parse_dirpathpath-separator) | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`parse_filename(path)`](#parse_filenamepath) | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function, using both `forward_slash` and `backslash` as separators. |
 | [`parse_filename(path, separator)`](#parse_filenamepath-separator) | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`parse_filename(path, trim_extension)`](#parse_filenamepath-trim_extension) | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function, using both `forward_slash` and `backslash` as separators. If `trim_extension` is `true`, the file extension will be removed (defaults to `false`). |
 | [`parse_filename(path, trim_extension, separator)`](#parse_filenamepath-trim_extension-separator) | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. If `trim_extension` is `true`, the file extension will be removed (defaults to `false`). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| [`parse_path(path)`](#parse_pathpath) | Returns a list of the components (directories and filename) in the `path` similarly to Python's pathlib.parts function, using both `forward_slash` and `backslash` as separators. |
-| [`parse_path(path, separator)`](#parse_pathpath-separator) | Returns a list of the components (directories and filename) in the `path` similarly to Python's pathlib.parts function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
+| [`parse_path(path)`](#parse_pathpath) | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function, using both `forward_slash` and `backslash` as separators. |
+| [`parse_path(path, separator)`](#parse_pathpath-separator) | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`position(search_string IN string)`](#positionsearch_string-in-string) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
 | [`prefix(string, search_string)`](#prefixstring-search_string) | Returns `true` if `string` starts with `search_string`. |
 | [`printf(format, ...)`](#printfformat) | Formats a `string` using [printf syntax](#printf-syntax). |
@@ -105,10 +105,10 @@ This section describes functions and operators for examining and manipulating [`
 | [`right(string, count)`](#rightstring-count) | Extract the right-most `count` characters. |
 | [`right_grapheme(string, count)`](#right_graphemestring-count) | Extracts the right-most `count` grapheme clusters. |
 | [`rpad(string, count, character)`](#rpadstring-count-character) | Pads the `string` with the `character` on the right until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| [`rtrim(string)`](#rtrimstring) | Removes any spaces from the right side of the `string`. In the example, the ␣ symbol denotes a space character. |
+| [`rtrim(string)`](#rtrimstring) | Removes any spaces from the right side of the `string`. In the example, the `␣` symbol denotes a space character. |
 | [`rtrim(string, characters)`](#rtrimstring-characters) | Removes any occurrences of any of the `characters` from the right side of the `string`. |
-| [`sha1(string)`](#sha1string) | Returns a `VARCHAR` with the SHA-1 hash of the `string`. |
-| [`sha256(string)`](#sha256string) | Returns a `VARCHAR` with the SHA-256 hash of the `string` |
+| [`sha1(value)`](#sha1value) | Returns a `VARCHAR` with the SHA-1 hash of the `value`. |
+| [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value` |
 | [`split(string, separator)`](#splitstring-separator) | Splits the `string` along the `separator`. |
 | [`split_part(string, separator, index)`](#split_partstring-separator-index) | Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). |
 | [`starts_with(string, search_string)`](#starts_withstring-search_string) | Returns `true` if `string` begins with `search_string`. |
@@ -126,10 +126,10 @@ This section describes functions and operators for examining and manipulating [`
 | [`substr(string, start, length)`](#substrstring-start-length) | Extracts substring of `length` characters starting from character `start`. Note that a `start` value of `1` refers to the first character of the `string`. |
 | [`substring(string, start)`](#substringstring-start) | Extracts substring starting from character `start` up to the end of the string. Note that a `start` value of `1` refers to the first character of the `string`. |
 | [`substring(string, start, length)`](#substringstring-start-length) | Extracts substring of `length` characters starting from character `start`. Note that a `start` value of `1` refers to the first character of the `string`. |
-| [`substring_grapheme(string, start)`](#substring_graphemestring-start) | Extracts substring starting from grapheme clusters `start` up to the end of the string. Note that a `start` value of `1` refers to the first character of the `string`. |
-| [`substring_grapheme(string, start, length)`](#substring_graphemestring-start-length) | Extracts substring of `length` grapheme clusters starting from character `start`. Note that a `start` value of `1` refers to the first character of the `string`. |
+| [`substring_grapheme(string, start)`](#substring_graphemestring-start) | Extracts substring starting from grapheme clusters `start` up to the end of the string. Note that a `start` value of `1` refers to the `first` character of the `string`. |
+| [`substring_grapheme(string, start, length)`](#substring_graphemestring-start-length) | Extracts substring of `length` grapheme clusters starting from character `start`. Note that a `start` value of `1` refers to the `first` character of the `string`. |
 | [`suffix(string, search_string)`](#suffixstring-search_string) | Returns `true` if `string` ends with `search_string`. |
-| [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded `string`. |
+| [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`to_binary(string)`](#to_binarystring) | Converts the `string` to binary representation. |
 | [`to_hex(string)`](#to_hexstring) | Converts the `string` to hexadecimal representation. |
 | [`translate(string, from, to)`](#translatestring-from-to) | Replaces each character in `string` that matches a character in the `from` set with the corresponding character in the `to` set. If `from` is longer than `to`, occurrences of the extra characters in `from` are deleted. |
@@ -250,7 +250,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts a `blob` to a base64 encoded `string`. |
+| **Description** | Converts a `blob` to a base64 encoded string. |
 | **Example** | `base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 | **Alias** | `to_base64` |
@@ -431,7 +431,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| **Example** | `instr('test test','es')` |
+| **Example** | `instr('test test', 'es')` |
 | **Result** | `2` |
 | **Aliases** | `position`,`strpos` |
 
@@ -518,14 +518,14 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Pads the `string` with the `character` on the left until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| **Example** | `lpad('hello', 10, '>')` |
-| **Result** | `>>>>>hello` |
+| **Example** | `lpad('hello', 8, '>')` |
+| **Result** | `>>>hello` |
 
 #### `ltrim(string)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any spaces from the left side of the `string`. In the example, the ␣ symbol denotes a space character. |
+| **Description** | Removes any spaces from the left side of the `string`. In the example, the `␣` symbol denotes a space character. |
 | **Example** | `ltrim('␣␣␣␣test␣␣')` |
 | **Result** | `␣␣␣␣test␣␣` |
 
@@ -542,8 +542,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the MD5 hash of the `string` as a `VARCHAR`. |
-| **Example** | `md5('abc')` |
-| **Result** | `900150983cd24fb0d6963f7d28e17f72` |
+| **Example** | `md5('123')` |
+| **Result** | `202cb962ac59075b964b07152d234b70` |
 
 #### `md5_number(string)`
 
@@ -574,7 +574,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `string` to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. |
-| **Example** | `nfc_normalize('ardèch')` |
+| **Example** | `nfc_normalize('ardèch')` |
 | **Result** | `ardèch` |
 
 #### `not_ilike_escape(string, like_specifier, escape_character)`
@@ -598,8 +598,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns an `INTEGER` representing the `unicode` codepoint of the first character in the `string`. |
-| **Example** | `ord('ü')` |
-| **Result** | `252` |
+| **Example** | `[unicode('âbcd'), unicode('â'), unicode(''), unicode(NULL)]` |
+| **Result** | `[226, 226, -1, NULL]` |
 | **Alias** | `unicode` |
 
 #### `parse_dirname(path)`
@@ -630,8 +630,8 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname). separator options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_dirpath('path/to/file.csv', 'system')` |
+| **Description** | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
+| **Example** | `parse_dirpath('path/to/file.csv', 'forward_slash')` |
 | **Result** | `path/to` |
 
 #### `parse_filename(path)`
@@ -663,14 +663,14 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. If `trim_extension` is `true`, the file extension will be removed (defaults to `false`). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_filename('path/to/file.csv', true, 'forward_slash')` |
+| **Example** | `parse_filename('path/to/file.csv', true, 'system')` |
 | **Result** | `file` |
 
 #### `parse_path(path)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a list of the components (directories and filename) in the `path` similarly to Python's pathlib.parts function, using both `forward_slash` and `backslash` as separators. |
+| **Description** | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function, using both `forward_slash` and `backslash` as separators. |
 | **Example** | `parse_path('path/to/file.csv')` |
 | **Result** | `[path, to, file.csv]` |
 
@@ -678,7 +678,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a list of the components (directories and filename) in the `path` similarly to Python's pathlib.parts function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
+| **Description** | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | **Example** | `parse_path('path/to/file.csv', 'system')` |
 | **Result** | `[path, to, file.csv]` |
 
@@ -913,7 +913,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any spaces from the right side of the `string`. In the example, the ␣ symbol denotes a space character. |
+| **Description** | Removes any spaces from the right side of the `string`. In the example, the `␣` symbol denotes a space character. |
 | **Example** | `rtrim('␣␣␣␣test␣␣')` |
 | **Result** | `␣␣␣␣test␣␣` |
 
@@ -925,19 +925,19 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 
-#### `sha1(string)`
+#### `sha1(value)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a `VARCHAR` with the SHA-1 hash of the `string`. |
+| **Description** | Returns a `VARCHAR` with the SHA-1 hash of the `value`. |
 | **Example** | `sha1('🦆')` |
 | **Result** | `949bf843dc338be348fb9525d1eb535d31241d76` |
 
-#### `sha256(string)`
+#### `sha256(value)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a `VARCHAR` with the SHA-256 hash of the `string` |
+| **Description** | Returns a `VARCHAR` with the SHA-256 hash of the `value` |
 | **Example** | `sha256('🦆')` |
 | **Result** | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
 
@@ -1051,7 +1051,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| **Example** | `strpos('test test','es')` |
+| **Example** | `strpos('test test', 'es')` |
 | **Result** | `2` |
 | **Aliases** | `instr`,`position` |
 
@@ -1095,7 +1095,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extracts substring starting from grapheme clusters `start` up to the end of the string. Note that a `start` value of `1` refers to the first character of the `string`. |
+| **Description** | Extracts substring starting from grapheme clusters `start` up to the end of the string. Note that a `start` value of `1` refers to the `first` character of the `string`. |
 | **Example** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3)` |
 | **Result** | `🤦🏽‍♀️🦆` |
 
@@ -1103,7 +1103,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extracts substring of `length` grapheme clusters starting from character `start`. Note that a `start` value of `1` refers to the first character of the `string`. |
+| **Description** | Extracts substring of `length` grapheme clusters starting from character `start`. Note that a `start` value of `1` refers to the `first` character of the `string`. |
 | **Example** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3, 2)` |
 | **Result** | `🤦🏽‍♀️🦆` |
 
@@ -1120,7 +1120,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts a `blob` to a base64 encoded `string`. |
+| **Description** | Converts a `blob` to a base64 encoded string. |
 | **Example** | `to_base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 | **Alias** | `base64` |
@@ -1156,7 +1156,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any spaces from either side of the `string`. |
-| **Example** | `trim(' test ')` |
+| **Example** | `trim('    test  ')` |
 | **Result** | `test` |
 
 #### `trim(string, characters)`
@@ -1199,8 +1199,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns an `INTEGER` representing the `unicode` codepoint of the first character in the `string`. |
-| **Example** | `unicode('ü')` |
-| **Result** | `252` |
+| **Example** | `[unicode('âbcd'), unicode('â'), unicode(''), unicode(NULL)]` |
+| **Result** | `[226, 226, -1, NULL]` |
 | **Alias** | `ord` |
 
 #### `upper(string)`
@@ -1217,8 +1217,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Decodes a URL from a representation using [Percent-Encoding](https://datatracker.ietf.org/doc/html/rfc3986#section-2.1). |
-| **Example** | `url_decode('this%20string%20is%2BFencoded')` |
-| **Result** | `this string is+Fencoded` |
+| **Example** | `url_decode('https%3A%2F%2Fduckdb.org%2Fwhy_duckdb%23portable')` |
+| **Result** | `https://duckdb.org/why_duckdb#portable` |
 
 #### `url_encode(string)`
 
@@ -1307,7 +1307,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
-| **Example** | `jaro_winkler_similarity('duck', 'duckdb', 0.5)` |
+| **Example** | `jaro_winkler_similarity('duck', 'duckdb')` |
 | **Result** | `0.9333333333333333` |
 
 #### `jaro_winkler_similarity(s1, s2, score_cutoff)`

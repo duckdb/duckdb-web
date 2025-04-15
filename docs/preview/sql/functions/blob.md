@@ -13,7 +13,7 @@ This section describes functions and operators for examining and manipulating [`
 | Name | Description |
 |:--|:-------|
 | [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list %}#list_concatlist1-list2). |
-| [`base64(blob)`](#base64blob) | Converts a `blob` to a base64 encoded `string`. |
+| [`base64(blob)`](#base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`concat(value, ...)`](#concatvalue) | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`decode(blob)`](#decodeblob) | Converts `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
 | [`encode(string)`](#encodestring) | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding. |
@@ -27,7 +27,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/preview/guides/file_formats/read_file.md %}#read_blob) for more details. |
 | [`sha1(blob)`](#sha1blob) | Returns a `VARCHAR` with the SHA-1 hash of the `blob`. |
 | [`sha256(blob)`](#sha256blob) | Returns a `VARCHAR` with the SHA-256 hash of the `blob`. |
-| [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded `string`. |
+| [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`to_hex(blob)`](#to_hexblob) | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
 | [`unbin(value)`](#unbinvalue) | Converts a `value` from binary representation to a blob. |
 | [`unhex(value)`](#unhexvalue) | Converts a `value` from hexadecimal representation to a blob. |
@@ -50,7 +50,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts a `blob` to a base64 encoded `string`. |
+| **Description** | Converts a `blob` to a base64 encoded string. |
 | **Example** | `base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 | **Alias** | `to_base64` |
@@ -166,7 +166,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts a `blob` to a base64 encoded `string`. |
+| **Description** | Converts a `blob` to a base64 encoded string. |
 | **Example** | `to_base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 | **Alias** | `base64` |
