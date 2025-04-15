@@ -48,13 +48,6 @@ Create a macro that does a subquery:
 CREATE MACRO one() AS (SELECT 1);
 ```
 
-Create a macro with a common table expression.
-Note that parameter names get priority over column names. To work around this, disambiguate using the table name.
-
-```sql
-CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM cte);
-```
-
 Macros are schema-dependent, and have an alias, `FUNCTION`:
 
 ```sql

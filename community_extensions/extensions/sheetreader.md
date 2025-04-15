@@ -81,10 +81,10 @@ docs:
     }
     ```
 
-extension_star_count: 47
-extension_star_count_pretty: 47
-extension_download_count: 515
-extension_download_count_pretty: 515
+extension_star_count: 48
+extension_star_count_pretty: 48
+extension_download_count: 519
+extension_download_count_pretty: 519
 image: '/images/community_extensions/social_preview/preview_community_extension_sheetreader.png'
 layout: community_extension_doc
 ---

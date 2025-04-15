@@ -34,7 +34,7 @@ However, because of the batteries-included nature of the extension template and 
 At this moment, community extensions aim to be built and distributed only for latest stable DuckDB release.
 This means that users on any but the latest stable release will see community extensions as frozen in time, with no more updates being served.
 
-When the next DuckDB release is near (see the [release calendar]({% link docs/stable/dev/release_calendar.md %})), the [`duckdb/community-extensions` repository](https://github.com/duckdb/community-extensions/) switches to test extensions both versus the latest stable release *and* the current `main` branch.
+When the next DuckDB release is near (see the [release calendar]({% link release_calendar.md %})), the [`duckdb/community-extensions` repository](https://github.com/duckdb/community-extensions/) switches to test extensions both versus the latest stable release *and* the current `main` branch.
 If an extension is compatible both the latest stable release *and* the current `main` branch, the extension should not be impacted by new release.
 This is the hopefully common case.
 

@@ -13,7 +13,7 @@
     * [Spelling](#spelling)
   * [Example Code Snippets](#example-code-snippets)
   * [Cross-References](#cross-references)
-  * [Archive and Generated Pages](#latest-and-stable-pages)
+  * [Preview, Stable and Versioned Pages](#preview-stable-and-versioned-pages)
   * [Notice](#notice)
 
 ## Code of Conduct
@@ -146,7 +146,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 ## Preview, Stable and Versioned Pages
 
-* The `preview` pages under <https://duckdb.org/docs/preview/> *will contain* documentation for the latest preview (nightly) release of DuckDB. This will be activated in April 2025.
+* The `preview` pages under <https://duckdb.org/docs/preview/> contains documentation for the latest preview (nightly) release of DuckDB. Most pull requests should target these pages. Pull requests documenting new features must target these pages.
 * The `stable` pages under <https://duckdb.org/docs/stable/> contain documentation for the latest stable release of DuckDB (e.g., v1.2).
 * The versioned pages (e.g., <https://duckdb.org/docs/v1.0/>) contain documentation for old stable versions of DuckDB. We generally only accept contributions to the latest stable version. Older pages are only maintained if they contain a critical error.
 

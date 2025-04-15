@@ -8,18 +8,19 @@ excerpt: |
 extension:
   name: flockmtl
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.2.3
+  version: 0.2.4
   language: SQL & C++
   build: cmake
   license: MIT
   excluded_platforms: "windows_amd64_rtools;wasm_mvp;wasm_eh;wasm_threads"
 
   maintainers:
-    - dorbanianas
+    - anasdorbani
+    - queryproc
 
 repo:
   github: dsg-polymtl/flockmtl
-  ref: 5c4d40bcd6e9918227a6b4e5b897c880e749355e
+  ref: 1bf8006b2a297ca9188acd78a5bcebd3c4a45adc
 
 docs:
   hello_world: |
@@ -53,10 +54,10 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 107
-extension_star_count_pretty: 107
-extension_download_count: 502
-extension_download_count_pretty: 502
+extension_star_count: 190
+extension_star_count_pretty: 190
+extension_download_count: 526
+extension_download_count_pretty: 526
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
 layout: community_extension_doc
 ---
@@ -84,7 +85,11 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
-| fusion_relative   | scalar        | NULL        | NULL    | []       |
+| fusion_combanz    | scalar        | NULL        | NULL    | []       |
+| fusion_combmed    | scalar        | NULL        | NULL    | []       |
+| fusion_combmnz    | scalar        | NULL        | NULL    | []       |
+| fusion_combsum    | scalar        | NULL        | NULL    | []       |
+| fusion_rrf        | scalar        | NULL        | NULL    | []       |
 | llm_complete      | scalar        | NULL        | NULL    | []       |
 | llm_complete_json | scalar        | NULL        | NULL    | []       |
 | llm_embedding     | scalar        | NULL        | NULL    | []       |

@@ -128,6 +128,30 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="qa-wrap" markdown="1">
 
+### I found a project with “duck” in its name. Is it officially affiliated with DuckDB?
+
+<div class="answer" markdown="1">
+
+The following projects are officially affiliated with DuckDB:
+
+* the [DuckDB project](https://github.com/duckdb/duckdb)
+* all primary [client libraries]({% link docs/stable/clients/overview.md %})
+* all [core DuckDB extensions]({% link docs/stable/extensions/core_extensions.md %})
+* the [DuckDB UI](https://github.com/duckdb/duckdb-ui)
+* [MotherDuck](https://motherduck.com)
+* [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb)
+* [`pg_duckdb`](https://github.com/duckdb/pg_duckdb)
+
+Other projects are likely _not affiliated_ with the DuckDB project. Please check their websites, READMEs and licenses for more details.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### I would like feature X to be implemented in DuckDB. How do I proceed?
 
 <div class="answer" markdown="1">
@@ -294,10 +318,10 @@ DuckDB does not use *explicit SIMD* (single instruction, multiple data) instruct
 
 We welcome experiments comparing DuckDB's performance to other systems.
 To ensure fair comparison, we have a few recommendations.
-First, try to use the [latest DuckDB version available as a nightly build]({% link docs/installation/index.html %}), which often has significant performance improvements compared to the last stable release.
+First, try to use the [latest DuckDB version available as a preview release]({% link docs/installation/index.html %}), which often has significant performance improvements compared to the last stable release.
 Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
 Third, study the DuckDB [Performance Guide]({% link docs/stable/guides/performance/overview.md %}), which has best practices for ensuring optimal performance.
-Finally, please report the DuckDB version (for stable verison, the version number, for nightly builds, the commit hash).
+Finally, please report the DuckDB version (for stable version, the version number, for nightly builds, the commit hash).
 
 </div>
 
@@ -371,7 +395,7 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 
 <div class="answer" markdown="1">
 
-Please check the [release calendar]({% link docs/stable/dev/release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
+Please check the [release calendar]({% link release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
 
 </div>
 
@@ -387,7 +411,7 @@ Please check the [release calendar]({% link docs/stable/dev/release_calendar.md 
 
 New feature releases (e.g., v1.2.0) are released every 3–5 months.
 Bugfix releases (e.g., v1.1.3) are released every 2–4 weeks after a feature release.
-You can find the recent releases in the [release calendar]({% link docs/stable/dev/release_calendar.md %}).
+You can find the recent releases in the [release calendar]({% link release_calendar.md %}).
 
 </div>
 

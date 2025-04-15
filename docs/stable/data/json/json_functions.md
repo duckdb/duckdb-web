@@ -17,9 +17,7 @@ These functions supports the same two location notations as [JSON Scalar functio
 | `json_extract_string(json, path)` | `json_extract_path_text` | `->>` | Extracts `VARCHAR` from `json` at the given `path`. If `path` is a `LIST`, the result will be a `LIST` of `VARCHAR`. |
 | `json_value(json, path)` | | | Extracts `JSON` from `json` at the given `path`. If the `json` at the supplied path is not a scalar value, it will return `NULL`. |
 
-Note that the arrow operator `->`, which is used for JSON extracts, has a low precedence as it is also used in [lambda functions]({% link docs/stable/sql/functions/lambda.md %}).
-
-Therefore, you need to surround the `->` operator with parentheses when expressing operations such as equality comparisons (`=`).
+Note that the arrow operator `->`, which is used for JSON extracts, has a low precedence as it is also used in [lambda functions]({% link docs/stable/sql/functions/lambda.md %}). Therefore, you need to surround the `->` operator with parentheses when expressing operations such as equality comparisons (`=`).
 For example:
 
 ```sql

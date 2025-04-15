@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckpgq
   description: Extension that adds support for SQL/PGQ and graph algorithms
-  version: 0.2.3
+  version: 0.2.4
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: cwida/duckpgq-extension
-  ref: 947eb8ddc91533d552e91b6d56a2a4a48aed7509
+  ref: 97a0c6532192c6ebf84733589e78bf8238b08b4b 
 
 docs:
   hello_world: |
@@ -60,10 +60,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 175
-extension_star_count_pretty: 175
-extension_download_count: 1304
-extension_download_count_pretty: 1.3k
+extension_star_count: 183
+extension_star_count_pretty: 183
+extension_download_count: 2266
+extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -95,6 +95,7 @@ LOAD {{ page.extension.name }};
 | create_csr_edge              | scalar        | NULL        | NULL    | []       |
 | create_csr_vertex            | scalar        | NULL        | NULL    | []       |
 | create_property_graph        | table         | NULL        | NULL    | []       |
+| create_vertex_table          | pragma        | NULL        | NULL    | []       |
 | csr_get_w_type               | scalar        | NULL        | NULL    | []       |
 | delete_csr                   | scalar        | NULL        | NULL    | []       |
 | describe_property_graph      | table         | NULL        | NULL    | []       |

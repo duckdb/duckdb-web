@@ -297,7 +297,7 @@
               "url": "julia"
             },
             {
-              "page": "Node.js (deprecated)",
+              "page": "Node.js (Deprecated)",
               "slug": "nodejs",
               "subsubfolderitems": [
                 {
@@ -1487,6 +1487,10 @@
                   "url": "create_synthetic_data"
                 },
                 {
+                  "page": "Dutch Railway Datasets",
+                  "url": "dutch_railway_datasets"
+                },
+                {
                   "page": "Sharing Macros",
                   "url": "sharing_macros"
                 },
@@ -1589,14 +1593,6 @@
             {
               "page": "Profiling",
               "url": "profiling"
-            },
-            {
-              "page": "Release Calendar",
-              "url": "release_calendar"
-            },
-            {
-              "page": "Roadmap",
-              "url": "roadmap"
             },
             {
               "page": "Building DuckDB",

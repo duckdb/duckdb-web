@@ -103,40 +103,40 @@ To execute the sample examples in this section, we need to download the followin
 
 #### Python
 
-There are two ways in Python of querying data from Arrow:
+There are two ways in Python of querying data from Arrow.
 
-1. Through the Relational API
+1. Through the Relational API:
 
-```python
-# Reads Parquet File to an Arrow Table
-arrow_table = pq.read_table('integers.parquet')
+    ```python
+    # Reads Parquet File to an Arrow Table
+    arrow_table = pq.read_table('integers.parquet')
 
-# Transforms Arrow Table -> DuckDB Relation
-rel_from_arrow = duckdb.arrow(arrow_table)
+    # Transforms Arrow Table -> DuckDB Relation
+    rel_from_arrow = duckdb.arrow(arrow_table)
 
-# we can run a SQL query on this and print the result
-print(rel_from_arrow.query('arrow_table', 'SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
+    # we can run a SQL query on this and print the result
+    print(rel_from_arrow.query('arrow_table', 'SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
 
-# Transforms DuckDB Relation -> Arrow Table
-arrow_table_from_duckdb = rel_from_arrow.arrow()
-```
+    # Transforms DuckDB Relation -> Arrow Table
+    arrow_table_from_duckdb = rel_from_arrow.arrow()
+    ```
 
 2. By using replacement scans and querying the object directly with SQL:
 
-```python
-# Reads Parquet File to an Arrow Table
-arrow_table = pq.read_table('integers.parquet')
+    ```python
+    # Reads Parquet File to an Arrow Table
+    arrow_table = pq.read_table('integers.parquet')
 
-# Gets Database Connection
-con = duckdb.connect()
+    # Gets Database Connection
+    con = duckdb.connect()
 
-# we can run a SQL query on this and print the result
-print(con.execute('SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
+    # we can run a SQL query on this and print the result
+    print(con.execute('SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
 
-# Transforms Query Result from DuckDB to Arrow Table
-# We can directly read the arrow object through DuckDB's replacement scans.
-con.execute("SELECT * FROM arrow_table").fetch_arrow_table()
-```
+    # Transforms Query Result from DuckDB to Arrow Table
+    # We can directly read the arrow object through DuckDB's replacement scans.
+    con.execute("SELECT * FROM arrow_table").fetch_arrow_table()
+    ```
 
 It is possible to transform both DuckDB Relations and Query Results back to Arrow.
 

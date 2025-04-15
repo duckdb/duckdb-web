@@ -11,9 +11,9 @@ npm install
 pip install -r requirements.txt
 ```
 
-### Using DuckDB Nightly Build
+### Using the DuckDB Preview Version
 
-Download the [Nightly DuckDB distribution](https://duckdb.org/docs/installation/?version=main), extract the `duckdb` file and move it to the directory expected by the scripts:
+Download the [Preview Version](https://duckdb.org/docs/installation/?version=main), extract the `duckdb` file and move it to the directory expected by the scripts:
 
 ```bash
 mkdir -p build/release
