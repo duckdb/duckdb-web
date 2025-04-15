@@ -283,6 +283,15 @@ COPY
     (FORMAT parquet, COMPRESSION brotli);
 ```
 
+To configure the page size of Parquet file's dictionary pages, use the `STRING_DICTIONARY_PAGE_SIZE_LIMIT` option (default: 1 MB):
+
+```sql
+COPY
+    lineitem
+    TO 'lineitem-with-custom-dictionary-size.parquet'
+    (FORMAT parquet, STRING_DICTIONARY_PAGE_SIZE_LIMIT 100_000);
+```
+
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [“`EXPORT` statement” page]({% link docs/preview/sql/statements/export.md %}) for more details:
 
 Export the table contents of the entire database as Parquet:
