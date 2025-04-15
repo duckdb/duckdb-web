@@ -117,6 +117,14 @@ OVERRIDES: list[DocFunction] = [
         examples=["position('b' IN 'abc')"],
         aliases=['instr', 'strpos'],
     ),
+    DocFunction(
+        category='string',
+        name='^@',  # edge case: alias between operator and regular function
+        parameters=['string', 'search_string'],
+        description="Returns `true` if `string` begins with `search_string`.",
+        examples=["'abc' ^@ 'a'"],
+        aliases=['starts_with'],
+    ),
 ]
 
 # NOTE: All function aliases are added, unless explicitly excluded. Format: (<category>, <function_name>)

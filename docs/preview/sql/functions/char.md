@@ -185,7 +185,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if `string` begins with `search_string`. |
-| **Example** | `starts_with('abc', 'a')` |
+| **Example** | `'abc' ^@ 'a'` |
 | **Result** | `true` |
 | **Alias** | `starts_with` |
 
