@@ -40,10 +40,18 @@ Note that larger-than-memory workloads can be processed both in persistent mode 
 
 ### Local Disk
 
+**Disk type.**
 DuckDB's disk-based mode is designed to work best with SSD and NVMe disks. While HDDs are supported, they will result in low performance, especially for write operations.
 
+**Disk-based vs. in-memory storage.**
 Counter-intuitively, using a disk-based DuckDB instance can be faster than an in-memory instance due to compression.
 Read more in the [“How to Tune Workloads” page]({% link docs/preview/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
+
+**File systems.**
+On Linux, we recommend using the ext4 or xfs file systems.
+On Windows, we recommend using NTFS and avoiding FAT32.
+
+> Note that DuckDB databases have built-in checksums, so integrity checks from the file system are not required to prevent data corruption.
 
 ### Network-Attached Disks
 
