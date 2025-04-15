@@ -15,7 +15,7 @@ The Foundation and [DuckDB Labs](https://duckdblabs.com) are not funded by exter
 Instead, the Foundation is funded by contributions from its [members]({% link foundation/index.html %}#supporters),
 while DuckDB Labs' revenue is based on [commercial support and feature prioritization services](https://duckdblabs.com/#support).
 
-## Planned Features (Last Updated: March 2025)
+## Planned Features (Last Updated: April 2025)
 
 This section lists the features that the DuckDB team plans to work on **in the coming year**.
 
@@ -26,6 +26,7 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * [`MATCH RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
 * Remote file content caching using buffer manager (e.g., when querying Parquet files on S3)
 * [Database file encryption](https://github.com/duckdb/duckdb/discussions/4512)
+* Distribution of musl libc binaries
 
 This list was compiled by the DuckDB maintainers and is based on the long-term strategic vision for the DuckDB project and general interactions with users in the open-source community (GitHub Issues and Discussions, social media, etc.).
 For details on how to request features in DuckDB, please refer to the FAQ item [“I would like feature X to be implemented in DuckDB”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed).
