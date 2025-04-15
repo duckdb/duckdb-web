@@ -395,7 +395,7 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 
 <div class="answer" markdown="1">
 
-Please check the [release calendar]({% link docs/stable/dev/release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
+Please check the [release calendar]({% link release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
 
 </div>
 
@@ -411,7 +411,7 @@ Please check the [release calendar]({% link docs/stable/dev/release_calendar.md 
 
 New feature releases (e.g., v1.2.0) are released every 3–5 months.
 Bugfix releases (e.g., v1.1.3) are released every 2–4 weeks after a feature release.
-You can find the recent releases in the [release calendar]({% link docs/stable/dev/release_calendar.md %}).
+You can find the recent releases in the [release calendar]({% link release_calendar.md %}).
 
 </div>
 

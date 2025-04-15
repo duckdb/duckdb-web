@@ -1599,14 +1599,6 @@
               "url": "profiling"
             },
             {
-              "page": "Release Calendar",
-              "url": "release_calendar"
-            },
-            {
-              "page": "Roadmap",
-              "url": "roadmap"
-            },
-            {
               "page": "Building DuckDB",
               "slug": "building",
               "subsubfolderitems": [

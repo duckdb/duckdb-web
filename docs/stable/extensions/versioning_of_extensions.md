@@ -16,7 +16,7 @@ Most software has some sort of version number. Version numbers serve a few impor
 * Allow determining chronological order of releases (e.g., version `v1.2.3` is older than `v1.2.4`)
 * Give an indication of expected stability (e.g., `v0.0.1` is likely not very stable, whereas `v13.11.0` probably is stable)
 
-Just like [DuckDB itself]({% link docs/stable/dev/release_calendar.md %}), DuckDB extensions have their own version number. To ensure consistent semantics
+Just like [DuckDB itself]({% link release_calendar.md %}), DuckDB extensions have their own version number. To ensure consistent semantics
 of these version numbers across the various extensions, DuckDB's [Core Extensions]({% link docs/stable/extensions/core_extensions.md %}) use
 a versioning scheme that prescribes how extensions should be versioned. The versioning scheme for Core Extensions is made up of 3 different stability levels: **unstable**, **pre-release**, and **stable**.
 Let's go over each of the 3 levels and describe their format:
