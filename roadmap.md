@@ -1,6 +1,11 @@
 ---
 layout: docu
 title: Development Roadmap
+redirect_from:
+- /docs/dev/stable/roadmap
+- /docs/dev/stable/roadmap/
+- /docs/dev/preview/roadmap
+- /docs/dev/preview/roadmap/
 ---
 
 ## Overview

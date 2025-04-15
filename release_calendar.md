@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /cal
 - /release-calendar
-- /release_calendar
 - /dev/release-dates
 - /dev/release-dates/
 - /dev/release-calendar
@@ -11,6 +10,10 @@ redirect_from:
 - /dev/docs/dev/release_calendar
 - /dev/docs/dev/release_calendar/
 - /docs/dev/release_calendar
+- /docs/dev/stable/release_calendar
+- /docs/dev/stable/release_calendar/
+- /docs/dev/preview/release_calendar
+- /docs/dev/preview/release_calendar/
 title: Release Calendar
 ---
 
@@ -37,7 +40,7 @@ _There are no upcoming releases announced at the moment. Please check back later
 
 <!-- markdownlint-enable MD055 MD056 MD058 -->
 
-For planned new features, see the [DuckDB Development Roadmap]({% link docs/stable/dev/roadmap.md %}).
+For planned new features, see the [DuckDB Development Roadmap]({% link roadmap.md %}).
 
 ## Past Releases
 
