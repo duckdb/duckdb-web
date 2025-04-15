@@ -17,7 +17,7 @@ title: List Functions
 | [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/preview/sql/functions/list.md %}#list-aggregates) section for more details. |
 | [`list_any_value(list)`](#list_any_valuelist) | Returns the first non-null value in the list. |
 | [`list_append(list, element)`](#list_appendlist-element) | Appends `element` to `list`. |
-| [`list_concat(list1, list2)`](#list_concatlist1-list2) | Concatenate two lists. NULL inputs are skipped. See also `||` |
+| [`list_concat(list1, ..., listn)`](#list_concatlist1--listn) | Concatenate lists. `NULL` inputs are skipped. See also `||` |
 | [`list_contains(list, element)`](#list_containslist-element) | Returns true if the list contains the element. |
 | [`list_cosine_similarity(list1, list2)`](#list_cosine_similaritylist1-list2) | Compute the cosine similarity between two lists. |
 | [`list_cosine_distance(list1, list2)`](#list_cosine_distancelist1-list2) | Compute the cosine distance between two lists. Equivalent to `1.0 - list_cosine_similarity`. |
@@ -135,13 +135,13 @@ title: List Functions
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `array_append`, `array_push_back` |
 
-#### `list_concat(list1, list2)`
+#### `list_concat(list1, ..., listn)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate two lists. `NULL` inputs are skipped. See also `||`  |
-| **Example** | `list_concat([2, 3], [4, 5, 6])` |
-| **Result** | `[2, 3, 4, 5, 6]` |
+| **Description** | Concatenates lists. `NULL` inputs are skipped. See also `||`  |
+| **Example** | `list_concat([2, 3], [4, 5, 6], [7])` |
+| **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `list_cat`, `array_concat`, `array_cat` |
 
 #### `list_contains(list, element)`
