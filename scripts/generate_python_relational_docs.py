@@ -195,7 +195,7 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                         result_type=CODE_EXAMPLE_MAP.get(member_anchor).get(
                             "result_type", "text"
                         ),
-                    )
+                    ).replace("\n\n", "\n")
                     if CODE_EXAMPLE_MAP.get(member_anchor)
                     else None
                 ),

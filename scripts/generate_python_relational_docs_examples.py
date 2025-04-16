@@ -20,6 +20,12 @@ rel = duckdb_conn.sql("""
 PLACEHOLDER_EXAMPLE = "```python\n{code_example}\n```"
 PLACEHOLDER_RESULT = "```{result_type}\n{result}\n```"
 
+# Configure examples for each section method
+# example: str = either an entire example code, either the code to be placed in DEFAULT_EXAMPLE
+# result: str = the result of the example code execution
+# default: bool = True if it the example should be used in DEFAULT_EXAMPLE
+# additional_description: str = text to be appended to the method description
+
 CREATION_MEMBER_CODE_EXAMPLE_MAP = {
     'from_arrow': {
         'example': """
@@ -797,6 +803,7 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 └──────────────┘
 """,
         'default': True,
+        "additional_description": "\n>The union is `union all`. In order to retrieve distinct values, apply [distinct](#distinct).",
     },
     'update': {
         'example': '''
@@ -978,50 +985,615 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 └─────────────────┴─────────────────┘                
 """,
     },
-    # 'count': {'example': 'rel.count()', 'result': ''},
-    # 'cume_dist': {'example': 'rel.cume_dist()', 'result': ''},
-    # 'dense_rank': {'example': 'rel.dense_rank()', 'result': ''},
-    # 'distinct': {'example': 'rel.distinct()', 'result': ''},
-    # 'favg': {'example': 'rel.favg()', 'result': ''},
-    # 'first': {'example': 'rel.first()', 'result': ''},
-    # 'first_value': {'example': 'rel.first_value()', 'result': ''},
-    # 'fsum': {'example': 'rel.fsum()', 'result': ''},
-    # 'geomean': {'example': 'rel.geomean()', 'result': ''},
-    # 'histogram': {'example': 'rel.histogram()', 'result': ''},
-    # 'lag': {'example': 'rel.lag()', 'result': ''},
-    # 'last': {'example': 'rel.last()', 'result': ''},
-    # 'last_value': {'example': 'rel.last_value()', 'result': ''},
-    # 'lead': {'example': 'rel.lead()', 'result': ''},
-    # 'list': {'example': 'rel.list()', 'result': ''},
-    # 'max': {'example': 'rel.max()', 'result': ''},
-    # 'mean': {'example': 'rel.mean()', 'result': ''},
-    # 'median': {'example': 'rel.median()', 'result': ''},
-    # 'min': {'example': 'rel.min()', 'result': ''},
-    # 'mode': {'example': 'rel.mode()', 'result': ''},
-    # 'n_tile': {'example': 'rel.n_tile()', 'result': ''},
-    # 'nth_value': {'example': 'rel.nth_value()', 'result': ''},
-    # 'percent_rank': {'example': 'rel.percent_rank()', 'result': ''},
-    # 'product': {'example': 'rel.product()', 'result': ''},
-    # 'quantile': {'example': 'rel.quantile()', 'result': ''},
-    # 'quantile_cont': {'example': 'rel.quantile_cont()', 'result': ''},
-    # 'quantile_disc': {'example': 'rel.quantile_disc()', 'result': ''},
-    # 'rank': {'example': 'rel.rank()', 'result': ''},
-    # 'rank_dense': {'example': 'rel.rank_dense()', 'result': ''},
-    # 'row_number': {'example': 'rel.row_number()', 'result': ''},
-    # 'select_dtypes': {'example': 'rel.select_dtypes()', 'result': ''},
-    # 'select_types': {'example': 'rel.select_types()', 'result': ''},
-    # 'std': {'example': 'rel.std()', 'result': ''},
-    # 'stddev': {'example': 'rel.stddev()', 'result': ''},
-    # 'stddev_pop': {'example': 'rel.stddev_pop()', 'result': ''},
-    # 'stddev_samp': {'example': 'rel.stddev_samp()', 'result': ''},
-    # 'string_agg': {'example': 'rel.string_agg()', 'result': ''},
-    # 'sum': {'example': 'rel.sum()', 'result': ''},
-    # 'unique': {'example': 'rel.unique()', 'result': ''},
-    # 'value_counts': {'example': 'rel.value_counts()', 'result': ''},
-    # 'var': {'example': 'rel.var()', 'result': ''},
-    # 'var_pop': {'example': 'rel.var_pop()', 'result': ''},
-    # 'var_samp': {'example': 'rel.var_samp()', 'result': ''},
-    # 'variance': {'example': 'rel.variance()', 'result': ''},
+    'count': {
+        'example': 'rel.count("id")',
+        'result': """
+┌───────────┐
+│ count(id) │
+│   int64   │
+├───────────┤
+│         9 │
+└───────────┘
+""",
+    },
+    'cume_dist': {
+        'example': 'rel.cume_dist(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        'result': """
+┌─────────────────┬───────┬──────────────────────────────────────────────────────────────┐
+│   description   │ value │ cume_dist() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                            double                            │
+├─────────────────┼───────┼──────────────────────────────────────────────────────────────┤
+│ value is uneven │     1 │                                                          0.2 │
+│ value is uneven │     3 │                                                          0.4 │
+│ value is uneven │     5 │                                                          0.6 │
+│ value is uneven │     7 │                                                          0.8 │
+│ value is uneven │     9 │                                                          1.0 │
+│ value is even   │     2 │                                                         0.25 │
+│ value is even   │     4 │                                                          0.5 │
+│ value is even   │     6 │                                                         0.75 │
+│ value is even   │     8 │                                                          1.0 │
+└─────────────────┴───────┴──────────────────────────────────────────────────────────────┘
+""",
+    },
+    'dense_rank': {
+        'example': ' rel.dense_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        'result': """
+┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
+│   description   │ value │ dense_rank() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                             int64                             │
+├─────────────────┼───────┼───────────────────────────────────────────────────────────────┤
+│ value is even   │     2 │                                                             1 │
+│ value is even   │     4 │                                                             2 │
+│ value is even   │     6 │                                                             3 │
+│ value is even   │     8 │                                                             4 │
+│ value is uneven │     1 │                                                             1 │
+│ value is uneven │     3 │                                                             2 │
+│ value is uneven │     5 │                                                             3 │
+│ value is uneven │     7 │                                                             4 │
+│ value is uneven │     9 │                                                             5 │
+└─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
+""",
+    },
+    'distinct': {
+        'example': """
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("select range from range(1,4)")
+
+rel = rel.union(union_rel=rel)
+
+rel.distinct().order("range")
+""",
+        'result': """
+┌───────┐
+│ range │
+│ int64 │
+├───────┤
+│     1 │
+│     2 │
+│     3 │
+└───────┘
+""",
+        "default": False,
+    },
+    'favg': {
+        'example': 'rel.favg(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬───────────────┐
+│   description   │ favg("value") │
+│     varchar     │    double     │
+├─────────────────┼───────────────┤
+│ value is uneven │           5.0 │
+│ value is even   │           5.0 │
+└─────────────────┴───────────────┘
+""",
+    },
+    'first': {
+        'example': 'rel.first(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────┐
+│   description   │ "first"("value") │
+│     varchar     │      int64       │
+├─────────────────┼──────────────────┤
+│ value is even   │                2 │
+│ value is uneven │                1 │
+└─────────────────┴──────────────────┘
+""",
+    },
+    'first_value': {
+        'example': 'rel.first_value(column="value", window_spec="over (partition by description order by value)", projected_columns="description").distinct()',
+        'result': """
+┌─────────────────┬───────────────────────────────────────────────────────────────────────┐
+│   description   │ first_value("value") OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │                                 int64                                 │
+├─────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ value is even   │                                                                     2 │
+│ value is uneven │                                                                     1 │
+└─────────────────┴───────────────────────────────────────────────────────────────────────┘
+""",
+    },
+    'fsum': {
+        'example': 'rel.fsum(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬───────────────┐
+│   description   │ fsum("value") │
+│     varchar     │    double     │
+├─────────────────┼───────────────┤
+│ value is even   │          20.0 │
+│ value is uneven │          25.0 │
+└─────────────────┴───────────────┘
+""",
+    },
+    'geomean': {
+        'example': 'rel.geomean(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬───────────────────┐
+│   description   │ geomean("value")  │
+│     varchar     │      double       │
+├─────────────────┼───────────────────┤
+│ value is uneven │ 3.936283427035351 │
+│ value is even   │ 4.426727678801287 │
+└─────────────────┴───────────────────┘
+""",
+    },
+    'histogram': {
+        'example': 'rel.histogram(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬───────────────────────────┐
+│   description   │    histogram("value")     │
+│     varchar     │   map(bigint, ubigint)    │
+├─────────────────┼───────────────────────────┤
+│ value is uneven │ {1=1, 3=1, 5=1, 7=1, 9=1} │
+│ value is even   │ {2=1, 4=1, 6=1, 8=1}      │
+└─────────────────┴───────────────────────────┘
+""",
+    },
+    'lag': {
+        'example': 'rel.lag(column="description", window_spec="over (order by value)", projected_columns="description, value")',
+        'result': """
+┌─────────────────┬───────┬───────────────────────────────────────────────────┐
+│   description   │ value │ lag(description, 1, NULL) OVER (ORDER BY "value") │
+│     varchar     │ int64 │                      varchar                      │
+├─────────────────┼───────┼───────────────────────────────────────────────────┤
+│ value is uneven │     1 │ NULL                                              │
+│ value is even   │     2 │ value is uneven                                   │
+│ value is uneven │     3 │ value is even                                     │
+│ value is even   │     4 │ value is uneven                                   │
+│ value is uneven │     5 │ value is even                                     │
+│ value is even   │     6 │ value is uneven                                   │
+│ value is uneven │     7 │ value is even                                     │
+│ value is even   │     8 │ value is uneven                                   │
+│ value is uneven │     9 │ value is even                                     │
+└─────────────────┴───────┴───────────────────────────────────────────────────┘
+""",
+    },
+    'last': {
+        'example': 'rel.last(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬─────────────────┐
+│   description   │ "last"("value") │
+│     varchar     │      int64      │
+├─────────────────┼─────────────────┤
+│ value is even   │               8 │
+│ value is uneven │               9 │
+└─────────────────┴─────────────────┘
+""",
+    },
+    'last_value': {
+        'example': 'rel.last_value(column="value", window_spec="over (order by description)", projected_columns="description").distinct()',
+        'result': """
+┌─────────────────┬─────────────────────────────────────────────────┐
+│   description   │ last_value("value") OVER (ORDER BY description) │
+│     varchar     │                      int64                      │
+├─────────────────┼─────────────────────────────────────────────────┤
+│ value is uneven │                                               9 │
+│ value is even   │                                               8 │
+└─────────────────┴─────────────────────────────────────────────────┘
+""",
+    },
+    'lead': {
+        'example': 'rel.lead(column="description", window_spec="over (order by value)", projected_columns="description, value")',
+        'result': """
+┌─────────────────┬───────┬────────────────────────────────────────────────────┐
+│   description   │ value │ lead(description, 1, NULL) OVER (ORDER BY "value") │
+│     varchar     │ int64 │                      varchar                       │
+├─────────────────┼───────┼────────────────────────────────────────────────────┤
+│ value is uneven │     1 │ value is even                                      │
+│ value is even   │     2 │ value is uneven                                    │
+│ value is uneven │     3 │ value is even                                      │
+│ value is even   │     4 │ value is uneven                                    │
+│ value is uneven │     5 │ value is even                                      │
+│ value is even   │     6 │ value is uneven                                    │
+│ value is uneven │     7 │ value is even                                      │
+│ value is even   │     8 │ value is uneven                                    │
+│ value is uneven │     9 │ NULL                                               │
+└─────────────────┴───────┴────────────────────────────────────────────────────┘
+""",
+    },
+    'list': {
+        'example': 'rel.list(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬─────────────────┐
+│   description   │  list("value")  │
+│     varchar     │     int64[]     │
+├─────────────────┼─────────────────┤
+│ value is even   │ [2, 4, 6, 8]    │
+│ value is uneven │ [1, 3, 5, 7, 9] │
+└─────────────────┴─────────────────┘
+""",
+    },
+    'max': {
+        'example': ' rel.max(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────┐
+│   description   │ max("value") │
+│     varchar     │    int64     │
+├─────────────────┼──────────────┤
+│ value is even   │            8 │
+│ value is uneven │            9 │
+└─────────────────┴──────────────┘
+""",
+    },
+    'mean': {
+        'example': 'rel.mean(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────┐
+│   description   │ avg("value") │
+│     varchar     │    double    │
+├─────────────────┼──────────────┤
+│ value is even   │          5.0 │
+│ value is uneven │          5.0 │
+└─────────────────┴──────────────┘
+""",
+    },
+    'median': {
+        'example': 'rel.median(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬─────────────────┐
+│   description   │ median("value") │
+│     varchar     │     double      │
+├─────────────────┼─────────────────┤
+│ value is even   │             5.0 │
+│ value is uneven │             5.0 │
+└─────────────────┴─────────────────┘
+""",
+    },
+    'min': {
+        'example': 'rel.min(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────┐
+│   description   │ min("value") │
+│     varchar     │    int64     │
+├─────────────────┼──────────────┤
+│ value is uneven │            1 │
+│ value is even   │            2 │
+└─────────────────┴──────────────┘
+""",
+    },
+    'mode': {
+        'example': 'rel.mode(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬─────────────────┐
+│   description   │ "mode"("value") │
+│     varchar     │      int64      │
+├─────────────────┼─────────────────┤
+│ value is uneven │               1 │
+│ value is even   │               2 │
+└─────────────────┴─────────────────┘
+""",
+    },
+    'n_tile': {
+        'example': 'rel.n_tile(window_spec="over (partition by description)", num_buckets=2, projected_columns="description, value")',
+        'result': """
+┌─────────────────┬───────┬──────────────────────────────────────────┐
+│   description   │ value │ ntile(2) OVER (PARTITION BY description) │
+│     varchar     │ int64 │                  int64                   │
+├─────────────────┼───────┼──────────────────────────────────────────┤
+│ value is uneven │     1 │                                        1 │
+│ value is uneven │     3 │                                        1 │
+│ value is uneven │     5 │                                        1 │
+│ value is uneven │     7 │                                        2 │
+│ value is uneven │     9 │                                        2 │
+│ value is even   │     2 │                                        1 │
+│ value is even   │     4 │                                        1 │
+│ value is even   │     6 │                                        2 │
+│ value is even   │     8 │                                        2 │
+└─────────────────┴───────┴──────────────────────────────────────────┘
+""",
+    },
+    'nth_value': {
+        'example': 'rel.nth_value(column="value", window_spec="over (partition by description)", projected_columns="description", offset=1)',
+        'result': """
+┌─────────────────┬───────────────────────────────────────────────────────┐
+│   description   │ nth_value("value", 1) OVER (PARTITION BY description) │
+│     varchar     │                         int64                         │
+├─────────────────┼───────────────────────────────────────────────────────┤
+│ value is even   │                                                     2 │
+│ value is even   │                                                     2 │
+│ value is even   │                                                     2 │
+│ value is even   │                                                     2 │
+│ value is uneven │                                                     1 │
+│ value is uneven │                                                     1 │
+│ value is uneven │                                                     1 │
+│ value is uneven │                                                     1 │
+│ value is uneven │                                                     1 │
+└─────────────────┴───────────────────────────────────────────────────────┘
+""",
+    },
+    'percent_rank': {
+        'example': 'rel.percent_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        'result': """
+┌─────────────────┬───────┬─────────────────────────────────────────────────────────────────┐
+│   description   │ value │ percent_rank() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                             double                              │
+├─────────────────┼───────┼─────────────────────────────────────────────────────────────────┤
+│ value is even   │     2 │                                                             0.0 │
+│ value is even   │     4 │                                              0.3333333333333333 │
+│ value is even   │     6 │                                              0.6666666666666666 │
+│ value is even   │     8 │                                                             1.0 │
+│ value is uneven │     1 │                                                             0.0 │
+│ value is uneven │     3 │                                                            0.25 │
+│ value is uneven │     5 │                                                             0.5 │
+│ value is uneven │     7 │                                                            0.75 │
+│ value is uneven │     9 │                                                             1.0 │
+└─────────────────┴───────┴─────────────────────────────────────────────────────────────────┘
+""",
+    },
+    'product': {
+        'example': 'rel.product(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────┐
+│   description   │ product("value") │
+│     varchar     │      double      │
+├─────────────────┼──────────────────┤
+│ value is uneven │            945.0 │
+│ value is even   │            384.0 │
+└─────────────────┴──────────────────┘
+""",
+    },
+    'quantile': {
+        'example': 'rel.quantile(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────────────────────┐
+│   description   │ quantile_disc("value", 0.500000) │
+│     varchar     │              int64               │
+├─────────────────┼──────────────────────────────────┤
+│ value is uneven │                                5 │
+│ value is even   │                                4 │
+└─────────────────┴──────────────────────────────────┘
+""",
+    },
+    'quantile_cont': {
+        'example': 'rel.quantile_cont(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────────────────────┐
+│   description   │ quantile_cont("value", 0.500000) │
+│     varchar     │              double              │
+├─────────────────┼──────────────────────────────────┤
+│ value is even   │                              5.0 │
+│ value is uneven │                              5.0 │
+└─────────────────┴──────────────────────────────────┘
+""",
+    },
+    'quantile_disc': {
+        'example': 'rel.quantile_disc(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────────────────────┐
+│   description   │ quantile_disc("value", 0.500000) │
+│     varchar     │              int64               │
+├─────────────────┼──────────────────────────────────┤
+│ value is even   │                                4 │
+│ value is uneven │                                5 │
+└─────────────────┴──────────────────────────────────┘
+""",
+    },
+    'rank': {
+        'example': 'rel.rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        'result': """
+┌─────────────────┬───────┬─────────────────────────────────────────────────────────┐
+│   description   │ value │ rank() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                          int64                          │
+├─────────────────┼───────┼─────────────────────────────────────────────────────────┤
+│ value is uneven │     1 │                                                       1 │
+│ value is uneven │     3 │                                                       2 │
+│ value is uneven │     5 │                                                       3 │
+│ value is uneven │     7 │                                                       4 │
+│ value is uneven │     9 │                                                       5 │
+│ value is even   │     2 │                                                       1 │
+│ value is even   │     4 │                                                       2 │
+│ value is even   │     6 │                                                       3 │
+│ value is even   │     8 │                                                       4 │
+└─────────────────┴───────┴─────────────────────────────────────────────────────────┘
+""",
+    },
+    'rank_dense': {
+        'example': ' rel.rank_dense(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        'result': """
+┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
+│   description   │ value │ dense_rank() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                             int64                             │
+├─────────────────┼───────┼───────────────────────────────────────────────────────────────┤
+│ value is uneven │     1 │                                                             1 │
+│ value is uneven │     3 │                                                             2 │
+│ value is uneven │     5 │                                                             3 │
+│ value is uneven │     7 │                                                             4 │
+│ value is uneven │     9 │                                                             5 │
+│ value is even   │     2 │                                                             1 │
+│ value is even   │     4 │                                                             2 │
+│ value is even   │     6 │                                                             3 │
+│ value is even   │     8 │                                                             4 │
+└─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
+""",
+    },
+    'row_number': {
+        'example': 'rel.row_number(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        'result': """
+┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
+│   description   │ value │ row_number() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                             int64                             │
+├─────────────────┼───────┼───────────────────────────────────────────────────────────────┤
+│ value is uneven │     1 │                                                             1 │
+│ value is uneven │     3 │                                                             2 │
+│ value is uneven │     5 │                                                             3 │
+│ value is uneven │     7 │                                                             4 │
+│ value is uneven │     9 │                                                             5 │
+│ value is even   │     2 │                                                             1 │
+│ value is even   │     4 │                                                             2 │
+│ value is even   │     6 │                                                             3 │
+│ value is even   │     8 │                                                             4 │
+└─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
+""",
+    },
+    'select_dtypes': {
+        'example': 'rel.select_dtypes(types=[duckdb.typing.VARCHAR]).distinct()',
+        'result': """
+┌─────────────────┐
+│   description   │
+│     varchar     │
+├─────────────────┤
+│ value is even   │
+│ value is uneven │
+└─────────────────┘
+""",
+    },
+    'select_types': {
+        'example': 'rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()',
+        'result': """
+┌─────────────────┐
+│   description   │
+│     varchar     │
+├─────────────────┤
+│ value is even   │
+│ value is uneven │
+└─────────────────┘
+""",
+    },
+    'std': {
+        'example': 'rel.std(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────────┐
+│   description   │ stddev_samp("value") │
+│     varchar     │        double        │
+├─────────────────┼──────────────────────┤
+│ value is uneven │   3.1622776601683795 │
+│ value is even   │    2.581988897471611 │
+└─────────────────┴──────────────────────┘
+""",
+    },
+    'stddev': {
+        'example': 'rel.stddev(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────────┐
+│   description   │ stddev_samp("value") │
+│     varchar     │        double        │
+├─────────────────┼──────────────────────┤
+│ value is even   │    2.581988897471611 │
+│ value is uneven │   3.1622776601683795 │
+└─────────────────┴──────────────────────┘
+""",
+    },
+    'stddev_pop': {
+        'example': 'rel.stddev_pop(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬─────────────────────┐
+│   description   │ stddev_pop("value") │
+│     varchar     │       double        │
+├─────────────────┼─────────────────────┤
+│ value is even   │    2.23606797749979 │
+│ value is uneven │  2.8284271247461903 │
+└─────────────────┴─────────────────────┘
+""",
+    },
+    'stddev_samp': {
+        'example': 'rel.stddev_samp(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────────┐
+│   description   │ stddev_samp("value") │
+│     varchar     │        double        │
+├─────────────────┼──────────────────────┤
+│ value is even   │    2.581988897471611 │
+│ value is uneven │   3.1622776601683795 │
+└─────────────────┴──────────────────────┘
+""",
+    },
+    'string_agg': {
+        'example': 'rel.string_agg(column="value", sep=",", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────────────┐
+│   description   │ string_agg("value", ',') │
+│     varchar     │         varchar          │
+├─────────────────┼──────────────────────────┤
+│ value is even   │ 2,4,6,8                  │
+│ value is uneven │ 1,3,5,7,9                │
+└─────────────────┴──────────────────────────┘
+""",
+    },
+    'sum': {
+        'example': 'rel.sum(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────┐
+│   description   │ sum("value") │
+│     varchar     │    int128    │
+├─────────────────┼──────────────┤
+│ value is even   │           20 │
+│ value is uneven │           25 │
+└─────────────────┴──────────────┘
+""",
+    },
+    'unique': {
+        'example': 'rel.unique(unique_aggr="description")',
+        'result': """
+┌─────────────────┐
+│   description   │
+│     varchar     │
+├─────────────────┤
+│ value is even   │
+│ value is uneven │
+└─────────────────┘
+""",
+    },
+    'value_counts': {
+        'example': 'rel.value_counts(column="description", groups="description")',
+        'result': """
+┌─────────────────┬────────────────────┐
+│   description   │ count(description) │
+│     varchar     │       int64        │
+├─────────────────┼────────────────────┤
+│ value is uneven │                  5 │
+│ value is even   │                  4 │
+└─────────────────┴────────────────────┘
+""",
+    },
+    'var': {
+        'example': 'rel.var(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬───────────────────┐
+│   description   │ var_samp("value") │
+│     varchar     │      double       │
+├─────────────────┼───────────────────┤
+│ value is even   │ 6.666666666666667 │
+│ value is uneven │              10.0 │
+└─────────────────┴───────────────────┘
+""",
+    },
+    'var_pop': {
+        'example': 'rel.var_pop(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬──────────────────┐
+│   description   │ var_pop("value") │
+│     varchar     │      double      │
+├─────────────────┼──────────────────┤
+│ value is even   │              5.0 │
+│ value is uneven │              8.0 │
+└─────────────────┴──────────────────┘
+""",
+    },
+    'var_samp': {
+        'example': 'rel.var_samp(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬───────────────────┐
+│   description   │ var_samp("value") │
+│     varchar     │      double       │
+├─────────────────┼───────────────────┤
+│ value is even   │ 6.666666666666667 │
+│ value is uneven │              10.0 │
+└─────────────────┴───────────────────┘
+""",
+    },
+    'variance': {
+        'example': 'rel.variance(column="value", groups="description", projected_columns="description")',
+        'result': """
+┌─────────────────┬───────────────────┐
+│   description   │ var_samp("value") │
+│     varchar     │      double       │
+├─────────────────┼───────────────────┤
+│ value is even   │ 6.666666666666667 │
+│ value is uneven │              10.0 │
+└─────────────────┴───────────────────┘
+""",
+    },
 }
 
 OUTPUT_MEMBER_CODE_EXAMPLE_MAP = {
@@ -1228,7 +1800,18 @@ created_timestamp: [2025-04-10 09:52:55.249000Z]
 """,
         'default': True,
     },
-    # 'tf': {'example': '', 'result': '', 'default': False},
+    'tf': {
+        'example': 'rel.select("description, value").tf()',
+        'result': """
+{'description': <tf.Tensor: shape=(9,), dtype=string, numpy=
+ array([b'value is uneven', b'value is even', b'value is uneven',
+        b'value is even', b'value is uneven', b'value is even',
+        b'value is uneven', b'value is even', b'value is uneven'],
+       dtype=object)>,
+ 'value': <tf.Tensor: shape=(9,), dtype=int64, numpy=array([1, 2, 3, 4, 5, 6, 7, 8, 9])>}
+""",
+        'default': True,
+    },
     'to_arrow_table': {
         'example': 'rel.to_arrow_table()',
         'result': """
@@ -1276,7 +1859,11 @@ created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,202
         'result': 'A view, named view_code_example, is created with the query definition of the relation',
         'default': True,
     },
-    # 'torch': {'example': '', 'result': '', 'default': True},
+    'torch': {
+        'example': 'rel.select("value").torch()',
+        'result': "{'value': tensor([1, 2, 3, 4, 5, 6, 7, 8, 9])}",
+        'default': True,
+    },
     'write_csv': {
         'example': 'rel.write_csv("code_example.csv")',
         'result': 'The data is exported to a CSV file, named code_example.csv',

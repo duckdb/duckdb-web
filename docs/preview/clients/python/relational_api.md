@@ -239,14 +239,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌──────┬─────────┐
 │  id  │  text   │
 │ int8 │ varchar │
 ├──────┼─────────┤
 │    1 │ a       │
 └──────┴─────────┘
-
 ```
 
 ----
@@ -287,14 +285,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
 ├───────┼─────────┤
 │     1 │ a       │
 └───────┴─────────┘
-
 ```
 
 ----
@@ -331,14 +327,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
 ├───────┼─────────┤
 │     1 │ a       │
 └───────┴─────────┘
-
 ```
 
 ----
@@ -381,14 +375,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌──────┬─────────┐
 │  id  │  text   │
 │ int8 │ varchar │
 ├──────┼─────────┤
 │    1 │ a       │
 └──────┴─────────┘
-
 ```
 
 ----
@@ -422,14 +414,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┐
 │  id   │
 │ int64 │
 ├───────┤
 │     1 │
 └───────┘
-
 ```
 
 ----
@@ -463,14 +453,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┐
 │  id   │
 │ int64 │
 ├───────┤
 │     1 │
 └───────┘
-
 ```
 
 ----
@@ -511,14 +499,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
 ├───────┼─────────┤
 │     1 │ a       │
 └───────┴─────────┘
-
 ```
 
 ----
@@ -556,14 +542,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
 ├───────┼─────────┤
 │     1 │ a       │
 └───────┴─────────┘
-
 ```
 
 ----
@@ -606,14 +590,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌──────┬─────────┐
 │  id  │  text   │
 │ int8 │ varchar │
 ├──────┼─────────┤
 │    1 │ a       │
 └──────┴─────────┘
-
 ```
 
 ----
@@ -647,14 +629,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┐
 │  id   │
 │ int64 │
 ├───────┤
 │     1 │
 └───────┘
-
 ```
 
 ----
@@ -690,14 +670,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┐
 │  id   │
 │ int64 │
 ├───────┤
 │     1 │
 └───────┘
-
 ```
 
 ----
@@ -736,14 +714,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────────────┐
 │ (1 * "range") │
 │     int64     │
 ├───────────────┤
 │             1 │
 └───────────────┘
-
 ```
 
 ----
@@ -777,14 +753,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┬─────────┐
 │ col0  │  col1   │
 │ int32 │ varchar │
 ├───────┼─────────┤
 │     1 │ a       │
 └───────┴─────────┘
-
 ```
 
 ----
@@ -820,14 +794,12 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌───────┐
 │  id   │
 │ int64 │
 ├───────┤
 │     1 │
 └───────┘
-
 ```
 
 ## Relation Definition Details 
@@ -940,7 +912,6 @@ rel.describe()
 ##### Result
 
 ```text
-
 ┌─────────┬──────────────────────────────────────┬─────────────────┬────────────────────┬────────────────────────────┐
 │  aggr   │                  id                  │   description   │       value        │     created_timestamp      │
 │ varchar │               varchar                │     varchar     │       double       │          varchar           │
@@ -952,7 +923,6 @@ rel.describe()
 │ max     │ fb10390e-fad5-4694-91cb-e82728cb6f9f │ value is uneven │                9.0 │ 2025-04-09 15:49:20.642+02 │
 │ median  │ NULL                                 │ NULL            │                5.0 │ NULL                       │
 └─────────┴──────────────────────────────────────┴─────────────────┴────────────────────┴────────────────────────────┘ 
-
 ```
 
 ----
@@ -987,12 +957,10 @@ rel.description
 ##### Result
 
 ```text
-
 [('id', 'UUID', None, None, None, None, None),
  ('description', 'STRING', None, None, None, None, None),
  ('value', 'NUMBER', None, None, None, None, None),
  ('created_timestamp', 'DATETIME', None, None, None, None, None)]  
-
 ```
 
 ----
@@ -1062,7 +1030,6 @@ rel.explain()
 ##### Result
 
 ```text
-
 ┌───────────────────────────┐
 │         PROJECTION        │
 │    ────────────────────   │
@@ -1080,8 +1047,6 @@ rel.explain()
 │                           │
 │          ~9 Rows          │
 └───────────────────────────┘
-
-
 
 ```
 
@@ -1125,7 +1090,6 @@ duckdb_conn.sql("show rel_view")
 ##### Result
 
 ```text
-
 ┌───────────────────┬──────────────────────────┬─────────┬─────────┬─────────┬─────────┐
 │    column_name    │       column_type        │  null   │   key   │ default │  extra  │
 │      varchar      │         varchar          │ varchar │ varchar │ varchar │ varchar │
@@ -1135,7 +1099,6 @@ duckdb_conn.sql("show rel_view")
 │ value             │ BIGINT                   │ YES     │ NULL    │ NULL    │ NULL    │
 │ created_timestamp │ TIMESTAMP WITH TIME ZONE │ YES     │ NULL    │ NULL    │ NULL    │
 └───────────────────┴──────────────────────────┴─────────┴─────────┴─────────┴─────────┘
-
 ```
 
 ----
@@ -1252,7 +1215,6 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -1267,7 +1229,6 @@ rel.show()
 │ 74908d48-7f2d-4bdd-9c92-1e7920b115b5 │ value is even   │     8 │ 2025-04-09 15:48:20.642+02 │
 │ 08fdcbf8-4e53-4290-9e81-423af263b518 │ value is uneven │     9 │ 2025-04-09 15:49:20.642+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
-
 ```
 
 ----
@@ -1314,7 +1275,6 @@ SELECT
     "range" AS "value", 
     (now() + CAST(concat("range", ' ', 'minutes') AS INTERVAL)) AS created_timestamp 
 FROM "range"(1, 10)
-
 ```
 
 ----
@@ -1427,7 +1387,6 @@ rel = rel.aggregate('max(value)')
 ##### Result
 
 ```text
-
 ┌──────────────┐
 │ max("value") │
 │    int64     │
@@ -1482,7 +1441,6 @@ rel.apply(
 ##### Result
 
 ```text
-
 ┌─────────────────┬───────────┐
 │   description   │ count(id) │
 │     varchar     │   int64   │
@@ -1490,7 +1448,6 @@ rel.apply(
 │ value is uneven │         5 │
 │ value is even   │         4 │
 └─────────────────┴───────────┘
-
 ```
 
 ----
@@ -1531,14 +1488,12 @@ rel.cross(other_rel=rel.set_alias("other_rel"))
 ##### Result
 
 ```text
-
 ┌─────────────────────────────┬─────────────────┬───────┬───────────────────────────┬──────────────────────────────────────┬─────────────────┬───────┬───────────────────────────┐
 │             id              │   description   │ value │     created_timestamp     │                  id                  │   description   │ value │     created_timestamp     │
 │            uuid             │     varchar     │ int64 │ timestamp with time zone  │                 uuid                 │     varchar     │ int64 │ timestamp with time zone  │
 ├─────────────────────────────┼─────────────────┼───────┼───────────────────────────┼──────────────────────────────────────┼─────────────────┼───────┼───────────────────────────┤
 │ cb2b453f-1a06-4f5e-abe1-b…  │ value is uneven │     1 │ 2025-04-10 09:53:29.78+02 │ cb2b453f-1a06-4f5e-abe1-bfd413581bcf │ value is uneven │     1 │ 2025-04-10 09:53:29.78+02 │
 ...
-
 ```
 
 ----
@@ -1579,10 +1534,8 @@ rel.except_(other_rel=rel.set_alias("other_rel"))
 ##### Result
 
 ```text
-
 The relation query is executed once with `rel` and once with `other_rel`,
 therefore generating different ids and timestamps:
-
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -1590,7 +1543,6 @@ therefore generating different ids and timestamps:
 │ f69ed6dd-a7fe-4de2-b6af-1c2418096d69 │ value is uneven │     3 │ 2025-04-10 11:43:05.711+02 │
 │ 08ad11dc-a9c2-4aaa-9272-760b27ad1f5d │ value is uneven │     7 │ 2025-04-10 11:47:05.711+02 │
 ...
-
 ```
 
 ----
@@ -1631,14 +1583,12 @@ rel.filter("value = 2")
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────┐
 │                  id                  │  description  │ value │     created_timestamp     │
 │                 uuid                 │    varchar    │ int64 │ timestamp with time zone  │
 ├──────────────────────────────────────┼───────────────┼───────┼───────────────────────────┤
 │ b0684ab7-fcbf-41c5-8e4a-a51bdde86926 │ value is even │     2 │ 2025-04-10 09:54:29.78+02 │
 └──────────────────────────────────────┴───────────────┴───────┴───────────────────────────┘
-
 ```
 
 ----
@@ -1694,14 +1644,12 @@ rel.filter("value = 10")
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────────┐
 │                  id                  │  description  │ value │       created_timestamp       │
 │                 uuid                 │    varchar    │ int64 │   timestamp with time zone    │
 ├──────────────────────────────────────┼───────────────┼───────┼───────────────────────────────┤
 │ c6dfab87-fae6-4213-8f76-1b96a8d179f6 │ value is even │    10 │ 2025-04-10 10:02:24.652218+02 │
 └──────────────────────────────────────┴───────────────┴───────┴───────────────────────────────┘
-
 ```
 
 ----
@@ -1757,14 +1705,12 @@ duckdb_conn.table("code_example").filter("value = 10")
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────────┐
 │                  id                  │  description  │ value │       created_timestamp       │
 │                 uuid                 │    varchar    │ int64 │   timestamp with time zone    │
 ├──────────────────────────────────────┼───────────────┼───────┼───────────────────────────────┤
 │ 271c5ddd-c1d5-4638-b5a0-d8c7dc9e8220 │ value is even │    10 │ 2025-04-10 14:29:18.616379+02 │
 └──────────────────────────────────────┴───────────────┴───────┴───────────────────────────────┘
-
 ```
 
 ----
@@ -1805,17 +1751,14 @@ rel.intersect(other_rel=rel.set_alias("other_rel"))
 ##### Result
 
 ```text
-
 The relation query is executed once with `rel` and once with `other_rel`,
 therefore generating different ids and timestamps:
-
 ┌──────┬─────────────┬───────┬──────────────────────────┐
 │  id  │ description │ value │    created_timestamp     │
 │ uuid │   varchar   │ int64 │ timestamp with time zone │
 ├──────┴─────────────┴───────┴──────────────────────────┤
 │                        0 rows                         │
 └───────────────────────────────────────────────────────┘
-
 ```
 
 ----
@@ -1921,14 +1864,12 @@ rel.count("*")
 ##### Result
 
 ```text
-
 ┌──────────────┐
 │ count_star() │
 │    int64     │
 ├──────────────┤
 │            9 │
 └──────────────┘
-
 ```
 
 ----
@@ -1969,14 +1910,12 @@ rel.limit(1)
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
 ├──────────────────────────────────────┼─────────────────┼───────┼────────────────────────────┤
 │ 4135597b-29e7-4cb9-a443-41f3d54f25df │ value is uneven │     1 │ 2025-04-10 10:52:03.678+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
-
 ```
 
 ----
@@ -2014,7 +1953,6 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 ##### Result
 
 ```text
-
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
@@ -2022,7 +1960,6 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 │     2 │ dummy   │
 │     4 │ dummy   │
 └───────┴─────────┘
-
 ```
 
 ----
@@ -2063,14 +2000,12 @@ rel.order("value desc").limit(1, offset=4)
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
 ├──────────────────────────────────────┼─────────────────┼───────┼────────────────────────────┤
 │ 55899131-e3d3-463c-a215-f65cb8aef3bf │ value is uneven │     5 │ 2025-04-10 10:56:03.678+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
-
 ```
 
 ----
@@ -2111,14 +2046,12 @@ rel.project("description").limit(1)
 ##### Result
 
 ```text
-
 ┌─────────────────┐
 │   description   │
 │     varchar     │
 ├─────────────────┤
 │ value is uneven │
 └─────────────────┘
-
 ```
 
 ----
@@ -2159,14 +2092,12 @@ rel.select("description").limit(1)
 ##### Result
 
 ```text
-
 ┌─────────────────┐
 │   description   │
 │     varchar     │
 ├─────────────────┤
 │ value is uneven │
 └─────────────────┘
-
 ```
 
 ----
@@ -2207,7 +2138,6 @@ rel.sort("description")
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -2215,7 +2145,6 @@ rel.sort("description")
 │ 5e0dfa8c-de4d-4ccd-8cff-450dabb86bde │ value is even   │     6 │ 2025-04-10 16:52:15.605+02 │
 │ 95f1ad48-facf-4a84-a971-0a4fecce68c7 │ value is even   │     2 │ 2025-04-10 16:48:15.605+02 │
 ...
-
 ```
 
 ----
@@ -2231,6 +2160,7 @@ rel.sort("description")
 #### Description
 
 Create the set union of this relation object with another relation object in other_rel
+>The union is `union all`. In order to retrieve distinct values, apply [distinct](#distinct).
 
 ##### Example
 
@@ -2258,14 +2188,12 @@ rel.count("*")
 ##### Result
 
 ```text
-
 ┌──────────────┐
 │ count_star() │
 │    int64     │
 ├──────────────┤
 │           18 │
 └──────────────┘
-
 ```
 
 ----
@@ -2317,7 +2245,6 @@ rel.show()
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -2325,7 +2252,6 @@ rel.show()
 │ 66dcaa14-f4a6-4a55-af3b-7f6aa23ab4ad │ NULL            │     1 │ 2025-04-10 16:54:49.317+02 │
 │ c6a18a42-67fb-4c95-827b-c966f2f95b88 │ value is even   │     2 │ 2025-04-10 16:55:49.317+02 │
 ...
-
 ```
 
 ## Functions 
@@ -2368,14 +2294,12 @@ rel.any_value('id')
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┐
 │            any_value(id)             │
 │                 uuid                 │
 ├──────────────────────────────────────┤
 │ 642ea3d7-793d-4867-a759-91c1226c25a0 │
 └──────────────────────────────────────┘
-
 ```
 
 ----
@@ -2416,7 +2340,6 @@ rel.arg_max(arg_column="value", value_column="value", groups="description", proj
 ##### Result
 
 ```text
-
 ┌─────────────────┬───────────────────────────┐
 │   description   │ arg_max("value", "value") │
 │     varchar     │           int64           │
@@ -2424,7 +2347,6 @@ rel.arg_max(arg_column="value", value_column="value", groups="description", proj
 │ value is uneven │                         9 │
 │ value is even   │                         8 │
 └─────────────────┴───────────────────────────┘
-
 ```
 
 ----
@@ -2465,7 +2387,6 @@ rel.arg_min(arg_column="value", value_column="value", groups="description", proj
 ##### Result
 
 ```text
-
 ┌─────────────────┬───────────────────────────┐
 │   description   │ arg_min("value", "value") │
 │     varchar     │           int64           │
@@ -2473,7 +2394,6 @@ rel.arg_min(arg_column="value", value_column="value", groups="description", proj
 │ value is even   │                         2 │
 │ value is uneven │                         1 │
 └─────────────────┴───────────────────────────┘
-
 ```
 
 ----
@@ -2514,7 +2434,6 @@ rel.avg('value')
 ##### Result
 
 ```text
-
 ┌──────────────┐
 │ avg("value") │
 │    double    │
@@ -2566,7 +2485,6 @@ rel.bit_and(column="value_bit", groups="description", projected_columns="descrip
 ##### Result
 
 ```text
-
 ┌─────────────────┬──────────────────────────────────────────────────────────────────┐
 │   description   │                        bit_and(value_bit)                        │
 │     varchar     │                               bit                                │
@@ -2574,7 +2492,6 @@ rel.bit_and(column="value_bit", groups="description", projected_columns="descrip
 │ value is uneven │ 0000000000000000000000000000000000000000000000000000000000000001 │
 │ value is even   │ 0000000000000000000000000000000000000000000000000000000000000000 │
 └─────────────────┴──────────────────────────────────────────────────────────────────┘    
-
 ```
 
 ----
@@ -2619,7 +2536,6 @@ rel.bit_or(column="value_bit", groups="description", projected_columns="descript
 ##### Result
 
 ```text
-
 ┌─────────────────┬──────────────────────────────────────────────────────────────────┐
 │   description   │                        bit_or(value_bit)                         │
 │     varchar     │                               bit                                │
@@ -2627,7 +2543,6 @@ rel.bit_or(column="value_bit", groups="description", projected_columns="descript
 │ value is uneven │ 0000000000000000000000000000000000000000000000000000000000001111 │
 │ value is even   │ 0000000000000000000000000000000000000000000000000000000000001110 │
 └─────────────────┴──────────────────────────────────────────────────────────────────┘    
-
 ```
 
 ----
@@ -2672,7 +2587,6 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 ##### Result
 
 ```text
-
 ┌─────────────────┬──────────────────────────────────────────────────────────────────┐
 │   description   │                        bit_xor(value_bit)                        │
 │     varchar     │                               bit                                │
@@ -2680,7 +2594,6 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 │ value is even   │ 0000000000000000000000000000000000000000000000000000000000001000 │
 │ value is uneven │ 0000000000000000000000000000000000000000000000000000000000001001 │
 └─────────────────┴──────────────────────────────────────────────────────────────────┘
-
 ```
 
 ----
@@ -2721,7 +2634,6 @@ rel.bitstring_agg(column="value", groups="description", projected_columns="descr
 ##### Result
 
 ```text
-
 ┌─────────────────┬────────────────────────┐
 │   description   │ bitstring_agg("value") │
 │     varchar     │          bit           │
@@ -2729,7 +2641,6 @@ rel.bitstring_agg(column="value", groups="description", projected_columns="descr
 │ value is uneven │ 101010101              │
 │ value is even   │ 010101010              │
 └─────────────────┴────────────────────────┘
-
 ```
 
 ----
@@ -2774,7 +2685,6 @@ rel.bool_and(column="uneven", groups="description", projected_columns="descripti
 ##### Result
 
 ```text
-
 ┌─────────────────┬──────────────────┐
 │   description   │ bool_and(uneven) │
 │     varchar     │     boolean      │
@@ -2782,7 +2692,6 @@ rel.bool_and(column="uneven", groups="description", projected_columns="descripti
 │ value is even   │ false            │
 │ value is uneven │ true             │
 └─────────────────┴──────────────────┘
-
 ```
 
 ----
@@ -2827,7 +2736,6 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 ##### Result
 
 ```text
-
 ┌─────────────────┬─────────────────┐
 │   description   │ bool_or(uneven) │
 │     varchar     │     boolean     │
@@ -2835,7 +2743,6 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 │ value is even   │ false           │
 │ value is uneven │ true            │
 └─────────────────┴─────────────────┘                
-
 ```
 
 ----
@@ -2852,6 +2759,38 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 
 Computes the number of elements present in a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.count("id")
+```
+
+
+##### Result
+
+```text
+┌───────────┐
+│ count(id) │
+│   int64   │
+├───────────┤
+│         9 │
+└───────────┘
+```
+
 ----
 
 ### cume_dist
@@ -2865,6 +2804,46 @@ Computes the number of elements present in a given column
 #### Description
 
 Computes the cumulative distribution within the partition
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.cume_dist(window_spec="over (partition by description order by value)", projected_columns="description, value")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────┬──────────────────────────────────────────────────────────────┐
+│   description   │ value │ cume_dist() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                            double                            │
+├─────────────────┼───────┼──────────────────────────────────────────────────────────────┤
+│ value is uneven │     1 │                                                          0.2 │
+│ value is uneven │     3 │                                                          0.4 │
+│ value is uneven │     5 │                                                          0.6 │
+│ value is uneven │     7 │                                                          0.8 │
+│ value is uneven │     9 │                                                          1.0 │
+│ value is even   │     2 │                                                         0.25 │
+│ value is even   │     4 │                                                          0.5 │
+│ value is even   │     6 │                                                         0.75 │
+│ value is even   │     8 │                                                          1.0 │
+└─────────────────┴───────┴──────────────────────────────────────────────────────────────┘
+```
 
 ----
 
@@ -2880,6 +2859,46 @@ Computes the cumulative distribution within the partition
 
 Computes the dense rank within the partition
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+ rel.dense_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
+│   description   │ value │ dense_rank() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                             int64                             │
+├─────────────────┼───────┼───────────────────────────────────────────────────────────────┤
+│ value is even   │     2 │                                                             1 │
+│ value is even   │     4 │                                                             2 │
+│ value is even   │     6 │                                                             3 │
+│ value is even   │     8 │                                                             4 │
+│ value is uneven │     1 │                                                             1 │
+│ value is uneven │     3 │                                                             2 │
+│ value is uneven │     5 │                                                             3 │
+│ value is uneven │     7 │                                                             4 │
+│ value is uneven │     9 │                                                             5 │
+└─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
+```
+
 ----
 
 ### distinct
@@ -2893,6 +2912,35 @@ Computes the dense rank within the partition
 #### Description
 
 Retrieve distinct rows from this relation object
+
+##### Example
+
+```python
+
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("select range from range(1,4)")
+
+rel = rel.union(union_rel=rel)
+
+rel.distinct().order("range")
+
+```
+
+##### Result
+
+```text
+┌───────┐
+│ range │
+│ int64 │
+├───────┤
+│     1 │
+│     2 │
+│     3 │
+└───────┘
+```
 
 ----
 
@@ -2908,6 +2956,39 @@ Retrieve distinct rows from this relation object
 
 Computes the average of all values present in a given column using a more accurate floating point summation (Kahan Sum)
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.favg(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────────────┐
+│   description   │ favg("value") │
+│     varchar     │    double     │
+├─────────────────┼───────────────┤
+│ value is uneven │           5.0 │
+│ value is even   │           5.0 │
+└─────────────────┴───────────────┘
+```
+
 ----
 
 ### first
@@ -2921,6 +3002,39 @@ Computes the average of all values present in a given column using a more accura
 #### Description
 
 Returns the first value of a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.first(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────┐
+│   description   │ "first"("value") │
+│     varchar     │      int64       │
+├─────────────────┼──────────────────┤
+│ value is even   │                2 │
+│ value is uneven │                1 │
+└─────────────────┴──────────────────┘
+```
 
 ----
 
@@ -2936,6 +3050,39 @@ Returns the first value of a given column
 
 Computes the first value within the group or partition
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.first_value(column="value", window_spec="over (partition by description order by value)", projected_columns="description").distinct()
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────────────────────────────────────────────────────────────────────┐
+│   description   │ first_value("value") OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │                                 int64                                 │
+├─────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ value is even   │                                                                     2 │
+│ value is uneven │                                                                     1 │
+└─────────────────┴───────────────────────────────────────────────────────────────────────┘
+```
+
 ----
 
 ### fsum
@@ -2949,6 +3096,39 @@ Computes the first value within the group or partition
 #### Description
 
 Computes the sum of all values present in a given column using a more accurate floating point summation (Kahan Sum)
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.fsum(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────────────┐
+│   description   │ fsum("value") │
+│     varchar     │    double     │
+├─────────────────┼───────────────┤
+│ value is even   │          20.0 │
+│ value is uneven │          25.0 │
+└─────────────────┴───────────────┘
+```
 
 ----
 
@@ -2964,6 +3144,39 @@ Computes the sum of all values present in a given column using a more accurate f
 
 Computes the geometric mean over all values present in a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.geomean(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────────────────┐
+│   description   │ geomean("value")  │
+│     varchar     │      double       │
+├─────────────────┼───────────────────┤
+│ value is uneven │ 3.936283427035351 │
+│ value is even   │ 4.426727678801287 │
+└─────────────────┴───────────────────┘
+```
+
 ----
 
 ### histogram
@@ -2977,6 +3190,39 @@ Computes the geometric mean over all values present in a given column
 #### Description
 
 Computes the histogram over all values present in a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.histogram(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────────────────────────┐
+│   description   │    histogram("value")     │
+│     varchar     │   map(bigint, ubigint)    │
+├─────────────────┼───────────────────────────┤
+│ value is uneven │ {1=1, 3=1, 5=1, 7=1, 9=1} │
+│ value is even   │ {2=1, 4=1, 6=1, 8=1}      │
+└─────────────────┴───────────────────────────┘
+```
 
 ----
 
@@ -2992,6 +3238,46 @@ Computes the histogram over all values present in a given column
 
 Computes the lag within the partition
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.lag(column="description", window_spec="over (order by value)", projected_columns="description, value")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────┬───────────────────────────────────────────────────┐
+│   description   │ value │ lag(description, 1, NULL) OVER (ORDER BY "value") │
+│     varchar     │ int64 │                      varchar                      │
+├─────────────────┼───────┼───────────────────────────────────────────────────┤
+│ value is uneven │     1 │ NULL                                              │
+│ value is even   │     2 │ value is uneven                                   │
+│ value is uneven │     3 │ value is even                                     │
+│ value is even   │     4 │ value is uneven                                   │
+│ value is uneven │     5 │ value is even                                     │
+│ value is even   │     6 │ value is uneven                                   │
+│ value is uneven │     7 │ value is even                                     │
+│ value is even   │     8 │ value is uneven                                   │
+│ value is uneven │     9 │ value is even                                     │
+└─────────────────┴───────┴───────────────────────────────────────────────────┘
+```
+
 ----
 
 ### last
@@ -3005,6 +3291,39 @@ Computes the lag within the partition
 #### Description
 
 Returns the last value of a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.last(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬─────────────────┐
+│   description   │ "last"("value") │
+│     varchar     │      int64      │
+├─────────────────┼─────────────────┤
+│ value is even   │               8 │
+│ value is uneven │               9 │
+└─────────────────┴─────────────────┘
+```
 
 ----
 
@@ -3020,6 +3339,39 @@ Returns the last value of a given column
 
 Computes the last value within the group or partition
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.last_value(column="value", window_spec="over (order by description)", projected_columns="description").distinct()
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬─────────────────────────────────────────────────┐
+│   description   │ last_value("value") OVER (ORDER BY description) │
+│     varchar     │                      int64                      │
+├─────────────────┼─────────────────────────────────────────────────┤
+│ value is uneven │                                               9 │
+│ value is even   │                                               8 │
+└─────────────────┴─────────────────────────────────────────────────┘
+```
+
 ----
 
 ### lead
@@ -3033,6 +3385,46 @@ Computes the last value within the group or partition
 #### Description
 
 Computes the lead within the partition
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.lead(column="description", window_spec="over (order by value)", projected_columns="description, value")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────┬────────────────────────────────────────────────────┐
+│   description   │ value │ lead(description, 1, NULL) OVER (ORDER BY "value") │
+│     varchar     │ int64 │                      varchar                       │
+├─────────────────┼───────┼────────────────────────────────────────────────────┤
+│ value is uneven │     1 │ value is even                                      │
+│ value is even   │     2 │ value is uneven                                    │
+│ value is uneven │     3 │ value is even                                      │
+│ value is even   │     4 │ value is uneven                                    │
+│ value is uneven │     5 │ value is even                                      │
+│ value is even   │     6 │ value is uneven                                    │
+│ value is uneven │     7 │ value is even                                      │
+│ value is even   │     8 │ value is uneven                                    │
+│ value is uneven │     9 │ NULL                                               │
+└─────────────────┴───────┴────────────────────────────────────────────────────┘
+```
 
 ----
 
@@ -3048,6 +3440,39 @@ Computes the lead within the partition
 
 Returns a list containing all values present in a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.list(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬─────────────────┐
+│   description   │  list("value")  │
+│     varchar     │     int64[]     │
+├─────────────────┼─────────────────┤
+│ value is even   │ [2, 4, 6, 8]    │
+│ value is uneven │ [1, 3, 5, 7, 9] │
+└─────────────────┴─────────────────┘
+```
+
 ----
 
 ### max
@@ -3061,6 +3486,39 @@ Returns a list containing all values present in a given column
 #### Description
 
 Returns the maximum value present in a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+ rel.max(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────┐
+│   description   │ max("value") │
+│     varchar     │    int64     │
+├─────────────────┼──────────────┤
+│ value is even   │            8 │
+│ value is uneven │            9 │
+└─────────────────┴──────────────┘
+```
 
 ----
 
@@ -3076,6 +3534,39 @@ Returns the maximum value present in a given column
 
 Computes the average on a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.mean(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────┐
+│   description   │ avg("value") │
+│     varchar     │    double    │
+├─────────────────┼──────────────┤
+│ value is even   │          5.0 │
+│ value is uneven │          5.0 │
+└─────────────────┴──────────────┘
+```
+
 ----
 
 ### median
@@ -3089,6 +3580,39 @@ Computes the average on a given column
 #### Description
 
 Computes the median over all values present in a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.median(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬─────────────────┐
+│   description   │ median("value") │
+│     varchar     │     double      │
+├─────────────────┼─────────────────┤
+│ value is even   │             5.0 │
+│ value is uneven │             5.0 │
+└─────────────────┴─────────────────┘
+```
 
 ----
 
@@ -3104,6 +3628,39 @@ Computes the median over all values present in a given column
 
 Returns the minimum value present in a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.min(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────┐
+│   description   │ min("value") │
+│     varchar     │    int64     │
+├─────────────────┼──────────────┤
+│ value is uneven │            1 │
+│ value is even   │            2 │
+└─────────────────┴──────────────┘
+```
+
 ----
 
 ### mode
@@ -3117,6 +3674,39 @@ Returns the minimum value present in a given column
 #### Description
 
 Computes the mode over all values present in a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.mode(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬─────────────────┐
+│   description   │ "mode"("value") │
+│     varchar     │      int64      │
+├─────────────────┼─────────────────┤
+│ value is uneven │               1 │
+│ value is even   │               2 │
+└─────────────────┴─────────────────┘
+```
 
 ----
 
@@ -3132,6 +3722,46 @@ Computes the mode over all values present in a given column
 
 Divides the partition as equally as possible into num_buckets
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.n_tile(window_spec="over (partition by description)", num_buckets=2, projected_columns="description, value")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────┬──────────────────────────────────────────┐
+│   description   │ value │ ntile(2) OVER (PARTITION BY description) │
+│     varchar     │ int64 │                  int64                   │
+├─────────────────┼───────┼──────────────────────────────────────────┤
+│ value is uneven │     1 │                                        1 │
+│ value is uneven │     3 │                                        1 │
+│ value is uneven │     5 │                                        1 │
+│ value is uneven │     7 │                                        2 │
+│ value is uneven │     9 │                                        2 │
+│ value is even   │     2 │                                        1 │
+│ value is even   │     4 │                                        1 │
+│ value is even   │     6 │                                        2 │
+│ value is even   │     8 │                                        2 │
+└─────────────────┴───────┴──────────────────────────────────────────┘
+```
+
 ----
 
 ### nth_value
@@ -3145,6 +3775,46 @@ Divides the partition as equally as possible into num_buckets
 #### Description
 
 Computes the nth value within the partition
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.nth_value(column="value", window_spec="over (partition by description)", projected_columns="description", offset=1)
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────────────────────────────────────────────────────┐
+│   description   │ nth_value("value", 1) OVER (PARTITION BY description) │
+│     varchar     │                         int64                         │
+├─────────────────┼───────────────────────────────────────────────────────┤
+│ value is even   │                                                     2 │
+│ value is even   │                                                     2 │
+│ value is even   │                                                     2 │
+│ value is even   │                                                     2 │
+│ value is uneven │                                                     1 │
+│ value is uneven │                                                     1 │
+│ value is uneven │                                                     1 │
+│ value is uneven │                                                     1 │
+│ value is uneven │                                                     1 │
+└─────────────────┴───────────────────────────────────────────────────────┘
+```
 
 ----
 
@@ -3160,6 +3830,46 @@ Computes the nth value within the partition
 
 Computes the relative rank within the partition
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.percent_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────┬─────────────────────────────────────────────────────────────────┐
+│   description   │ value │ percent_rank() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                             double                              │
+├─────────────────┼───────┼─────────────────────────────────────────────────────────────────┤
+│ value is even   │     2 │                                                             0.0 │
+│ value is even   │     4 │                                              0.3333333333333333 │
+│ value is even   │     6 │                                              0.6666666666666666 │
+│ value is even   │     8 │                                                             1.0 │
+│ value is uneven │     1 │                                                             0.0 │
+│ value is uneven │     3 │                                                            0.25 │
+│ value is uneven │     5 │                                                             0.5 │
+│ value is uneven │     7 │                                                            0.75 │
+│ value is uneven │     9 │                                                             1.0 │
+└─────────────────┴───────┴─────────────────────────────────────────────────────────────────┘
+```
+
 ----
 
 ### product
@@ -3173,6 +3883,39 @@ Computes the relative rank within the partition
 #### Description
 
 Returns the product of all values present in a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.product(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────┐
+│   description   │ product("value") │
+│     varchar     │      double      │
+├─────────────────┼──────────────────┤
+│ value is uneven │            945.0 │
+│ value is even   │            384.0 │
+└─────────────────┴──────────────────┘
+```
 
 ----
 
@@ -3188,6 +3931,39 @@ Returns the product of all values present in a given column
 
 Computes the exact quantile value for a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.quantile(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────────────────────┐
+│   description   │ quantile_disc("value", 0.500000) │
+│     varchar     │              int64               │
+├─────────────────┼──────────────────────────────────┤
+│ value is uneven │                                5 │
+│ value is even   │                                4 │
+└─────────────────┴──────────────────────────────────┘
+```
+
 ----
 
 ### quantile_cont
@@ -3201,6 +3977,39 @@ Computes the exact quantile value for a given column
 #### Description
 
 Computes the interpolated quantile value for a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.quantile_cont(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────────────────────┐
+│   description   │ quantile_cont("value", 0.500000) │
+│     varchar     │              double              │
+├─────────────────┼──────────────────────────────────┤
+│ value is even   │                              5.0 │
+│ value is uneven │                              5.0 │
+└─────────────────┴──────────────────────────────────┘
+```
 
 ----
 
@@ -3216,6 +4025,39 @@ Computes the interpolated quantile value for a given column
 
 Computes the exact quantile value for a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.quantile_disc(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────────────────────┐
+│   description   │ quantile_disc("value", 0.500000) │
+│     varchar     │              int64               │
+├─────────────────┼──────────────────────────────────┤
+│ value is even   │                                4 │
+│ value is uneven │                                5 │
+└─────────────────┴──────────────────────────────────┘
+```
+
 ----
 
 ### rank
@@ -3229,6 +4071,46 @@ Computes the exact quantile value for a given column
 #### Description
 
 Computes the rank within the partition
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.rank(window_spec="over (partition by description order by value)", projected_columns="description, value")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────┬─────────────────────────────────────────────────────────┐
+│   description   │ value │ rank() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                          int64                          │
+├─────────────────┼───────┼─────────────────────────────────────────────────────────┤
+│ value is uneven │     1 │                                                       1 │
+│ value is uneven │     3 │                                                       2 │
+│ value is uneven │     5 │                                                       3 │
+│ value is uneven │     7 │                                                       4 │
+│ value is uneven │     9 │                                                       5 │
+│ value is even   │     2 │                                                       1 │
+│ value is even   │     4 │                                                       2 │
+│ value is even   │     6 │                                                       3 │
+│ value is even   │     8 │                                                       4 │
+└─────────────────┴───────┴─────────────────────────────────────────────────────────┘
+```
 
 ----
 
@@ -3244,6 +4126,46 @@ Computes the rank within the partition
 
 Computes the dense rank within the partition
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+ rel.rank_dense(window_spec="over (partition by description order by value)", projected_columns="description, value")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
+│   description   │ value │ dense_rank() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                             int64                             │
+├─────────────────┼───────┼───────────────────────────────────────────────────────────────┤
+│ value is uneven │     1 │                                                             1 │
+│ value is uneven │     3 │                                                             2 │
+│ value is uneven │     5 │                                                             3 │
+│ value is uneven │     7 │                                                             4 │
+│ value is uneven │     9 │                                                             5 │
+│ value is even   │     2 │                                                             1 │
+│ value is even   │     4 │                                                             2 │
+│ value is even   │     6 │                                                             3 │
+│ value is even   │     8 │                                                             4 │
+└─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
+```
+
 ----
 
 ### row_number
@@ -3257,6 +4179,46 @@ Computes the dense rank within the partition
 #### Description
 
 Computes the row number within the partition
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.row_number(window_spec="over (partition by description order by value)", projected_columns="description, value")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
+│   description   │ value │ row_number() OVER (PARTITION BY description ORDER BY "value") │
+│     varchar     │ int64 │                             int64                             │
+├─────────────────┼───────┼───────────────────────────────────────────────────────────────┤
+│ value is uneven │     1 │                                                             1 │
+│ value is uneven │     3 │                                                             2 │
+│ value is uneven │     5 │                                                             3 │
+│ value is uneven │     7 │                                                             4 │
+│ value is uneven │     9 │                                                             5 │
+│ value is even   │     2 │                                                             1 │
+│ value is even   │     4 │                                                             2 │
+│ value is even   │     6 │                                                             3 │
+│ value is even   │     8 │                                                             4 │
+└─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
+```
 
 ----
 
@@ -3272,6 +4234,39 @@ Computes the row number within the partition
 
 Select columns from the relation, by filtering based on type(s)
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.select_dtypes(types=[duckdb.typing.VARCHAR]).distinct()
+```
+
+
+##### Result
+
+```text
+┌─────────────────┐
+│   description   │
+│     varchar     │
+├─────────────────┤
+│ value is even   │
+│ value is uneven │
+└─────────────────┘
+```
+
 ----
 
 ### select_types
@@ -3285,6 +4280,39 @@ Select columns from the relation, by filtering based on type(s)
 #### Description
 
 Select columns from the relation, by filtering based on type(s)
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()
+```
+
+
+##### Result
+
+```text
+┌─────────────────┐
+│   description   │
+│     varchar     │
+├─────────────────┤
+│ value is even   │
+│ value is uneven │
+└─────────────────┘
+```
 
 ----
 
@@ -3300,6 +4328,39 @@ Select columns from the relation, by filtering based on type(s)
 
 Computes the sample standard deviation for a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.std(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────────┐
+│   description   │ stddev_samp("value") │
+│     varchar     │        double        │
+├─────────────────┼──────────────────────┤
+│ value is uneven │   3.1622776601683795 │
+│ value is even   │    2.581988897471611 │
+└─────────────────┴──────────────────────┘
+```
+
 ----
 
 ### stddev
@@ -3313,6 +4374,39 @@ Computes the sample standard deviation for a given column
 #### Description
 
 Computes the sample standard deviation for a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.stddev(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────────┐
+│   description   │ stddev_samp("value") │
+│     varchar     │        double        │
+├─────────────────┼──────────────────────┤
+│ value is even   │    2.581988897471611 │
+│ value is uneven │   3.1622776601683795 │
+└─────────────────┴──────────────────────┘
+```
 
 ----
 
@@ -3328,6 +4422,39 @@ Computes the sample standard deviation for a given column
 
 Computes the population standard deviation for a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.stddev_pop(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬─────────────────────┐
+│   description   │ stddev_pop("value") │
+│     varchar     │       double        │
+├─────────────────┼─────────────────────┤
+│ value is even   │    2.23606797749979 │
+│ value is uneven │  2.8284271247461903 │
+└─────────────────┴─────────────────────┘
+```
+
 ----
 
 ### stddev_samp
@@ -3341,6 +4468,39 @@ Computes the population standard deviation for a given column
 #### Description
 
 Computes the sample standard deviation for a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.stddev_samp(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────────┐
+│   description   │ stddev_samp("value") │
+│     varchar     │        double        │
+├─────────────────┼──────────────────────┤
+│ value is even   │    2.581988897471611 │
+│ value is uneven │   3.1622776601683795 │
+└─────────────────┴──────────────────────┘
+```
 
 ----
 
@@ -3356,6 +4516,39 @@ Computes the sample standard deviation for a given column
 
 Concatenates the values present in a given column with a separator
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.string_agg(column="value", sep=",", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────────────┐
+│   description   │ string_agg("value", ',') │
+│     varchar     │         varchar          │
+├─────────────────┼──────────────────────────┤
+│ value is even   │ 2,4,6,8                  │
+│ value is uneven │ 1,3,5,7,9                │
+└─────────────────┴──────────────────────────┘
+```
+
 ----
 
 ### sum
@@ -3369,6 +4562,39 @@ Concatenates the values present in a given column with a separator
 #### Description
 
 Computes the sum of all values present in a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.sum(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────┐
+│   description   │ sum("value") │
+│     varchar     │    int128    │
+├─────────────────┼──────────────┤
+│ value is even   │           20 │
+│ value is uneven │           25 │
+└─────────────────┴──────────────┘
+```
 
 ----
 
@@ -3384,6 +4610,39 @@ Computes the sum of all values present in a given column
 
 Returns the distinct values in a column.
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.unique(unique_aggr="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┐
+│   description   │
+│     varchar     │
+├─────────────────┤
+│ value is even   │
+│ value is uneven │
+└─────────────────┘
+```
+
 ----
 
 ### value_counts
@@ -3397,6 +4656,39 @@ Returns the distinct values in a column.
 #### Description
 
 Computes the number of elements present in a given column, also projecting the original column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.value_counts(column="description", groups="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬────────────────────┐
+│   description   │ count(description) │
+│     varchar     │       int64        │
+├─────────────────┼────────────────────┤
+│ value is uneven │                  5 │
+│ value is even   │                  4 │
+└─────────────────┴────────────────────┘
+```
 
 ----
 
@@ -3412,6 +4704,39 @@ Computes the number of elements present in a given column, also projecting the o
 
 Computes the sample variance for a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.var(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────────────────┐
+│   description   │ var_samp("value") │
+│     varchar     │      double       │
+├─────────────────┼───────────────────┤
+│ value is even   │ 6.666666666666667 │
+│ value is uneven │              10.0 │
+└─────────────────┴───────────────────┘
+```
+
 ----
 
 ### var_pop
@@ -3425,6 +4750,39 @@ Computes the sample variance for a given column
 #### Description
 
 Computes the population variance for a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.var_pop(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬──────────────────┐
+│   description   │ var_pop("value") │
+│     varchar     │      double      │
+├─────────────────┼──────────────────┤
+│ value is even   │              5.0 │
+│ value is uneven │              8.0 │
+└─────────────────┴──────────────────┘
+```
 
 ----
 
@@ -3440,6 +4798,39 @@ Computes the population variance for a given column
 
 Computes the sample variance for a given column
 
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.var_samp(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────────────────┐
+│   description   │ var_samp("value") │
+│     varchar     │      double       │
+├─────────────────┼───────────────────┤
+│ value is even   │ 6.666666666666667 │
+│ value is uneven │              10.0 │
+└─────────────────┴───────────────────┘
+```
+
 ----
 
 ### variance
@@ -3453,6 +4844,39 @@ Computes the sample variance for a given column
 #### Description
 
 Computes the sample variance for a given column
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.variance(column="value", groups="description", projected_columns="description")
+```
+
+
+##### Result
+
+```text
+┌─────────────────┬───────────────────┐
+│   description   │ var_samp("value") │
+│     varchar     │      double       │
+├─────────────────┼───────────────────┤
+│ value is even   │ 6.666666666666667 │
+│ value is uneven │              10.0 │
+└─────────────────┴───────────────────┘
+```
 
 ## Output 
 
@@ -3496,7 +4920,6 @@ pa_table
 ##### Result
 
 ```text
-
 pyarrow.Table
 id: string
 description: string
@@ -3507,7 +4930,6 @@ id: [["3ac9e0ba-8390-4a02-ad72-33b1caea6354","8b844392-1404-4bbc-b731-120f42c8ca
 description: [["value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven"]]
 value: [[1,2,3,4,5,6,7,8,9]]
 created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,2025-04-10 09:09:12.614000Z,2025-04-10 09:10:12.614000Z,2025-04-10 09:11:12.614000Z,2025-04-10 09:12:12.614000Z,2025-04-10 09:13:12.614000Z,2025-04-10 09:14:12.614000Z,2025-04-10 09:15:12.614000Z]]
-
 ```
 
 ----
@@ -3564,14 +4986,12 @@ duckdb_conn.table("table_code_example").limit(1)
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
 ├──────────────────────────────────────┼─────────────────┼───────┼────────────────────────────┤
 │ 3ac9e0ba-8390-4a02-ad72-33b1caea6354 │ value is uneven │     1 │ 2025-04-10 11:07:12.614+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
-
 ```
 
 ----
@@ -3614,14 +5034,12 @@ duckdb_conn.table("view_code_example").limit(1)
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
 ├──────────────────────────────────────┼─────────────────┼───────┼────────────────────────────┤
 │ 3ac9e0ba-8390-4a02-ad72-33b1caea6354 │ value is uneven │     1 │ 2025-04-10 11:07:12.614+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
-
 ```
 
 ----
@@ -3662,13 +5080,11 @@ rel.df()
 ##### Result
 
 ```text
-
                                      id      description  value                created_timestamp
 0  3ac9e0ba-8390-4a02-ad72-33b1caea6354  value is uneven      1 2025-04-10 11:07:12.614000+02:00
 1  8b844392-1404-4bbc-b731-120f42c8ca27    value is even      2 2025-04-10 11:08:12.614000+02:00
 2  ca5584ca-8e97-4fca-a295-ae3c16c32f5b  value is uneven      3 2025-04-10 11:09:12.614000+02:00
 ...
-
 ```
 
 ----
@@ -3709,7 +5125,6 @@ rel.execute()
 ##### Result
 
 ```text
-
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -3717,7 +5132,6 @@ rel.execute()
 │ 3ac9e0ba-8390-4a02-ad72-33b1caea6354 │ value is uneven │     1 │ 2025-04-10 11:07:12.614+02 │
 │ 8b844392-1404-4bbc-b731-120f42c8ca27 │ value is even   │     2 │ 2025-04-10 11:08:12.614+02 │
 │ ca5584ca-8e97-4fca-a295-ae3c16c32f5b │ value is uneven │     3 │ 2025-04-10 11:09:12.614+02 │
-
 ```
 
 ----
@@ -3760,7 +5174,6 @@ pa_reader.read_next_batch()
 ##### Result
 
 ```text
-
 pyarrow.RecordBatch
 id: string
 description: string
@@ -3771,7 +5184,6 @@ id: ["e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd"]
 description: ["value is even"]
 value: [2]
 created_timestamp: [2025-04-10 09:25:51.259000Z]
-
 ```
 
 ----
@@ -3812,7 +5224,6 @@ rel.fetch_arrow_table()
 ##### Result
 
 ```text
-
 pyarrow.Table
 id: string
 description: string
@@ -3823,7 +5234,6 @@ id: [["1587b4b0-3023-49fe-82cf-06303ca136ac","e4ab8cb4-4609-40cb-ad7e-4304ed5ed4
 description: [["value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven"]]
 value: [[1,2,3,4,5,6,7,8,9]]
 created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,2025-04-10 09:26:51.259000Z,2025-04-10 09:27:51.259000Z,2025-04-10 09:28:51.259000Z,2025-04-10 09:29:51.259000Z,2025-04-10 09:30:51.259000Z,2025-04-10 09:31:51.259000Z,2025-04-10 09:32:51.259000Z]]
-
 ```
 
 ----
@@ -3864,13 +5274,11 @@ rel.fetch_df_chunk()
 ##### Result
 
 ```text
-
                                      id      description  value                created_timestamp
 0  1587b4b0-3023-49fe-82cf-06303ca136ac  value is uneven      1 2025-04-10 11:24:51.259000+02:00
 1  e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd    value is even      2 2025-04-10 11:25:51.259000+02:00
 2  3f8ad67a-290f-4a22-b41b-0173b8e45afa  value is uneven      3 2025-04-10 11:26:51.259000+02:00
 ...
-
 ```
 
 ----
@@ -3911,12 +5319,10 @@ rel.limit(1).fetchall()
 ##### Result
 
 ```text
-
 [(UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
   'value is uneven',
   1,
   datetime.datetime(2025, 4, 10, 11, 24, 51, 259000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
-
 ```
 
 ----
@@ -3957,13 +5363,11 @@ rel.fetchdf()
 ##### Result
 
 ```text
-
                                      id      description  value                created_timestamp
 0  1587b4b0-3023-49fe-82cf-06303ca136ac  value is uneven      1 2025-04-10 11:24:51.259000+02:00
 1  e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd    value is even      2 2025-04-10 11:25:51.259000+02:00
 2  3f8ad67a-290f-4a22-b41b-0173b8e45afa  value is uneven      3 2025-04-10 11:26:51.259000+02:00
 ...
-
 ```
 
 ----
@@ -4004,12 +5408,10 @@ rel.fetchmany(size=1)
 ##### Result
 
 ```text
-
 [(UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
   'value is uneven',
   1,
   datetime.datetime(2025, 4, 10, 11, 24, 51, 259000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
-
 ```
 
 ----
@@ -4050,7 +5452,6 @@ rel.fetchnumpy()
 ##### Result
 
 ```text
-
 {'id': array([UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
         UUID('e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd'),
         UUID('3f8ad67a-290f-4a22-b41b-0173b8e45afa'),
@@ -4070,7 +5471,6 @@ rel.fetchnumpy()
         '2025-04-10T09:28:51.259000', '2025-04-10T09:29:51.259000',
         '2025-04-10T09:30:51.259000', '2025-04-10T09:31:51.259000',
         '2025-04-10T09:32:51.259000'], dtype='datetime64[us]')}
-
 ```
 
 ----
@@ -4111,12 +5511,10 @@ rel.fetchone()
 ##### Result
 
 ```text
-
 (UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
  'value is uneven',
  1,
  datetime.datetime(2025, 4, 10, 11, 24, 51, 259000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
-
 ```
 
 ----
@@ -4157,7 +5555,6 @@ rel.pl(batch_size=1)
 ##### Result
 
 ```text
-
 shape: (9, 4)
 ┌─────────────────────────────────┬─────────────────┬───────┬────────────────────────────────┐
 │ id                              ┆ description     ┆ value ┆ created_timestamp              │
@@ -4165,7 +5562,6 @@ shape: (9, 4)
 │ str                             ┆ str             ┆ i64   ┆ datetime[μs, Europe/Amsterdam] │
 ╞═════════════════════════════════╪═════════════════╪═══════╪════════════════════════════════╡
 │ b2f92c3c-9372-49f3-897f-2c86fc… ┆ value is uneven ┆ 1     ┆ 2025-04-10 11:49:51.886 CEST   │
-
 ```
 
 ----
@@ -4208,7 +5604,6 @@ pa_batch.read_next_batch()
 ##### Result
 
 ```text
-
 pyarrow.RecordBatch
 id: string
 description: string
@@ -4219,7 +5614,6 @@ id: ["908cf67c-a086-4b94-9017-2089a83e4a6c"]
 description: ["value is uneven"]
 value: [1]
 created_timestamp: [2025-04-10 09:52:55.249000Z]
-
 ```
 
 ----
@@ -4235,6 +5629,38 @@ created_timestamp: [2025-04-10 09:52:55.249000Z]
 #### Description
 
 Fetch a result as dict of TensorFlow Tensors
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.select("description, value").tf()
+```
+
+
+##### Result
+
+```text
+{'description': <tf.Tensor: shape=(9,), dtype=string, numpy=
+ array([b'value is uneven', b'value is even', b'value is uneven',
+        b'value is even', b'value is uneven', b'value is even',
+        b'value is uneven', b'value is even', b'value is uneven'],
+       dtype=object)>,
+ 'value': <tf.Tensor: shape=(9,), dtype=int64, numpy=array([1, 2, 3, 4, 5, 6, 7, 8, 9])>}
+```
 
 ----
 
@@ -4274,7 +5700,6 @@ rel.to_arrow_table()
 ##### Result
 
 ```text
-
 pyarrow.Table
 id: string
 description: string
@@ -4285,7 +5710,6 @@ id: [["86b2011d-3818-426f-a41e-7cd5c7321f79","07fa4f89-0bba-4049-9acd-c933332a66
 description: [["value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven"]]
 value: [[1,2,3,4,5,6,7,8,9]]
 created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,2025-04-10 09:56:24.015000Z,2025-04-10 09:57:24.015000Z,2025-04-10 09:58:24.015000Z,2025-04-10 09:59:24.015000Z,2025-04-10 10:00:24.015000Z,2025-04-10 10:01:24.015000Z,2025-04-10 10:02:24.015000Z]]
-
 ```
 
 ----
@@ -4367,13 +5791,11 @@ rel.to_df()
 ##### Result
 
 ```text
-
                                      id      description  value                created_timestamp
 0  e1f79925-60fd-4ee2-ae67-5eff6b0543d1  value is uneven      1 2025-04-10 11:56:04.452000+02:00
 1  caa619d4-d79c-4c00-b82e-9319b086b6f8    value is even      2 2025-04-10 11:57:04.452000+02:00
 2  64c68032-99b9-4e8f-b4a3-6c522d5419b3  value is uneven      3 2025-04-10 11:58:04.452000+02:00
 ...
-
 ```
 
 ----
@@ -4512,6 +5934,33 @@ A view, named view_code_example, is created with the query definition of the rel
 #### Description
 
 Fetch a result as dict of PyTorch Tensors
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+rel.select("value").torch()
+```
+
+
+##### Result
+
+```text
+{'value': tensor([1, 2, 3, 4, 5, 6, 7, 8, 9])}
+```
 
 ----
 
