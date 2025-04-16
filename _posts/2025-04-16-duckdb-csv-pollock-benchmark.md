@@ -1,15 +1,15 @@
 ---
 layout: post
-title: "DuckDB's CSV Reader and the Pollock Robustness Benchmark – Reading Everything Everywhere All at Once"
-author: "Pedro Holanda (DuckDB Labs), Gabor Szarnyas (DuckDB Labs) and Gerardo Vitagliano (MIT)"
+title: "DuckDB's CSV Reader and the Pollock Robustness Benchmark: Into the CSV Abyss"
+author: "Pedro Holanda, Gabor Szarnyas (DuckDB Labs); Gerardo Vitagliano (MIT)"
 thumb: "/images/blog/thumbs/duckdb-csv-robustness.svg"
 image: "/images/blog/thumbs/duckdb-csv-robustness.png"
 excerpt: "DuckDB ships with a fast and robust CSV reader, which – we believe – can consume most CSV files found in the wild. To empirically evaluate this, we used the Pollock Benchmark, a state-of-the-art test suite designed to measure how well CSV readers can operate on non-standard files, and found that DuckDB ranks #1."
 tags: ["benchmark"]
 ---
 
-<img src="/images/blog/pollock/everywhere.png"
-     alt="Everywhere"
+<img src="/images/blog/pollock/pollock-duck.png"
+     alt="DuckDB art"
      width=400
 />
 
@@ -314,7 +314,7 @@ The benchmark includess a wide variety of systems being tested, such as CSV pars
 An important aspect of the benchmark is that it provides the dialect and schema for each file. Without this, systems that do not have a sniffer (e.g., PostgreSQL) would not be able to read the file. There is no specific rule or differentiation in how much each system utilizes that information. For example, Pandas only takes partial advantage of these settings.
 To incorporate these difference in our evaluation of DuckDB, we decided to add two different configurations:
 
-1. **DuckDB (default benchmark config).**
+1. **DuckDB (benchmark config).**
    Under this configuration, all the options in the configuration file that are relevant to DuckDB – such as CSV dialect and schema – are passed to the reader. In addition, we also set all the options described in the previous section (i.e., `null_padding = true, strict_mode = false, ignore_errors = true`). This essentially tells us how much we can read from these files if the users manually set the necessary options.
 
 2. **DuckDB (auto-detect only).**
@@ -330,7 +330,7 @@ Pollock scores sorted by weighted score (out of 10):
 
 | System under test                       | Pollock score (weighted) | Pollock score (simple) |
 | --------------------------------------- | -----------------------: | ---------------------: |
-| _DuckDB 1.2 (default benchmark config)_ |                    9.599 |                  9.961 |
+| _DuckDB 1.2 (benchmark config)_         |                    9.599 |                  9.961 |
 | “SpreadDesktop”                         |                    9.597 |                  9.929 |
 | Pandas 1.4.3                            |                    9.431 |                  9.895 |
 | “SpreadWeb”                             |                    9.431 |                  9.721 |
@@ -364,7 +364,7 @@ Click here to see the full result table
 </thead>
 <tbody>
 <tr>
-<td><em>DuckDB 1.2 (default benchmark config)</em></td>
+<td><em>DuckDB 1.2 (benchmark config)</em></td>
 <td style="text-align: right;">9.599</td>
 <td style="text-align: right;">9.961</td>
 </tr>
