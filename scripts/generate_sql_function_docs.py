@@ -137,14 +137,14 @@ PAGE_LINKS = {
     'fmt syntax': "#fmt-syntax",
     'printf syntax': '#printf-syntax',
     # links to other doc pages:
-    '`list_concat(list1, list2)`': f'docs/{DOC_VERSION}/sql/functions/list#list_concatlist1-list2',
+    '`list_concat(list1, list2)`': f'docs/{DOC_VERSION}/sql/functions/list.md#list_concatlist1-list2',
     '`read_blob` guide': f'docs/{DOC_VERSION}/guides/file_formats/read_file.md#read_blob',
     '`read_text` guide': f'docs/{DOC_VERSION}/guides/file_formats/read_file.md#read_text',
     'slicing': f'docs/{DOC_VERSION}/sql/functions/list.md#slicing',
     'slice conventions': f'docs/{DOC_VERSION}/sql/functions/list.md#slicing',
     'Pattern Matching': f'docs/{DOC_VERSION}/sql/functions/pattern_matching.md',
     'collations': f'docs/{DOC_VERSION}/sql/expressions/collations.md',
-    'Regular Expressions': f'docs/{DOC_VERSION}/sql/functions/regular_expressions',
+    'Regular Expressions': f'docs/{DOC_VERSION}/sql/functions/regular_expressions.md',
     # external page links:
     '`os.path.dirname`': 'https://docs.python.org/3.7/library/os.path.html#os.path.dirname',
     '`os.path.basename`': 'https://docs.python.org/3.7/library/os.path.html#os.path.basename',

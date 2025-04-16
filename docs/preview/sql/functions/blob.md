@@ -12,7 +12,7 @@ This section describes functions and operators for examining and manipulating [`
 
 | Name | Description |
 |:--|:-------|
-| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list %}#list_concatlist1-list2). |
+| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
 | [`base64(blob)`](#base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`concat(value, ...)`](#concatvalue) | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`decode(blob)`](#decodeblob) | Converts `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
@@ -38,7 +38,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list %}#list_concatlist1-list2). |
+| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
 | **Example 1** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
 | **Example 2** | `[1, 2, 3] || [4, 5, 6]` |

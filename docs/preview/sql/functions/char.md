@@ -19,7 +19,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`string LIKE target`](#string-like-target) | Returns `true` if the `string` matches the like specifier (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string SIMILAR TO regex`](#string-similar-to-regex) | Returns `true` if the `string` matches the `regex` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string ^@ search_string`](#string--search_string) | Returns `true` if `string` begins with `search_string`. |
-| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list %}#list_concatlist1-list2). |
+| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
 | [`array_extract(string, index)`](#array_extractstring-index) | Extracts a single character from a string using a (1-based) index. |
 | [`array_slice(list, begin, end)`](#array_slicelist-begin-end) | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | [`ascii(string)`](#asciistring) | Returns an integer that represents the Unicode code point of the first character of the `string`. |
@@ -82,20 +82,20 @@ This section describes functions and operators for examining and manipulating [`
 | [`printf(format, ...)`](#printfformat) | Formats a `string` using [printf syntax](#printf-syntax). |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/preview/guides/file_formats/read_file.md %}#read_text) for more details. |
 | [`regexp_escape(string)`](#regexp_escapestring) | Escapes special patterns to turn `string` into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape). |
-| [`regexp_extract(string, regex)`](#regexp_extractstring-regex) | If `string` contains the `regex`, returns the first match; otherwise, returns the empty string. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
-| [`regexp_extract(string, regex, group)`](#regexp_extractstring-regex-group) | If `string` contains the `regex`, returns the specified capturing `group`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
-| [`regexp_extract(string, regex, name_list)`](#regexp_extractstring-regex-name_list) | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
-| [`regexp_extract(string, regex, group, options)`](#regexp_extractstring-regex-group-options) | If `string` contains the `regex`, returns the specified capturing `group`, applying the set of regexp `options`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
-| [`regexp_extract(string, regex, name_list, options)`](#regexp_extractstring-regex-name_list-options) | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`, applying the set of regexp `options`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| [`regexp_extract(string, regex)`](#regexp_extractstring-regex) | If `string` contains the `regex`, returns the first match; otherwise, returns the empty string. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| [`regexp_extract(string, regex, group)`](#regexp_extractstring-regex-group) | If `string` contains the `regex`, returns the specified capturing `group`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| [`regexp_extract(string, regex, name_list)`](#regexp_extractstring-regex-name_list) | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| [`regexp_extract(string, regex, group, options)`](#regexp_extractstring-regex-group-options) | If `string` contains the `regex`, returns the specified capturing `group`, applying the set of regexp `options`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| [`regexp_extract(string, regex, name_list, options)`](#regexp_extractstring-regex-name_list-options) | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`, applying the set of regexp `options`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | [`regexp_extract_all(string, regex)`](#regexp_extract_allstring-regex) | Returns a list with the non-overlapping occurrences of the `regex` in the `string`. |
 | [`regexp_extract_all(string, regex, group)`](#regexp_extract_allstring-regex-group) | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. |
 | [`regexp_extract_all(string, regex, group, options)`](#regexp_extract_allstring-regex-group-options) | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`, applying the set of regexp `options`. |
 | [`regexp_full_match(string, regex)`](#regexp_full_matchstring-regex) | Returns `true` if the entire `string` matches the `regex`. |
 | [`regexp_full_match(string, regex, options)`](#regexp_full_matchstring-regex-options) | Returns `true` if the entire `string` matches the `regex`, applying the set of regexp `options`. |
-| [`regexp_matches(string, regex)`](#regexp_matchesstring-regex) | Returns `true` if `string` contains the `regex`, `false` otherwise. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
-| [`regexp_matches(string, regex, options)`](#regexp_matchesstring-regex-options) | Returns `true` if `string` contains the `regex`, `false` otherwise, applying the set of regexp `options`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
-| [`regexp_replace(string, regex, replacement)`](#regexp_replacestring-regex-replacement) | If `string` contains the `regex`, replaces the matching part with `replacement`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
-| [`regexp_replace(string, regex, replacement, options)`](#regexp_replacestring-regex-replacement-options) | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of regexp `options` is applied. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| [`regexp_matches(string, regex)`](#regexp_matchesstring-regex) | Returns `true` if `string` contains the `regex`, `false` otherwise. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| [`regexp_matches(string, regex, options)`](#regexp_matchesstring-regex-options) | Returns `true` if `string` contains the `regex`, `false` otherwise, applying the set of regexp `options`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| [`regexp_replace(string, regex, replacement)`](#regexp_replacestring-regex-replacement) | If `string` contains the `regex`, replaces the matching part with `replacement`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| [`regexp_replace(string, regex, replacement, options)`](#regexp_replacestring-regex-replacement-options) | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of regexp `options` is applied. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | [`regexp_split_to_array(string, regex)`](#regexp_split_to_arraystring-regex) | Splits the `string` along the `regex`. |
 | [`regexp_split_to_array(string, regex, options)`](#regexp_split_to_arraystring-regex-options) | Splits the `string` along the `regex`, applying the set of regexp `options`. |
 | [`regexp_split_to_table(string, regex)`](#regexp_split_to_tablestring-regex) | Splits the `string` along the `regex` and returns a row for each part. |
@@ -193,7 +193,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list %}#list_concatlist1-list2). |
+| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
 | **Example 1** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
 | **Example 2** | `[1, 2, 3] || [4, 5, 6]` |
@@ -727,7 +727,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, returns the first match; otherwise, returns the empty string. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| **Description** | If `string` contains the `regex`, returns the first match; otherwise, returns the empty string. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | **Example** | `regexp_extract('abcde', '[a-z]{3}')` |
 | **Result** | `abc` |
 
@@ -735,7 +735,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, returns the specified capturing `group`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| **Description** | If `string` contains the `regex`, returns the specified capturing `group`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | **Example** | `regexp_extract('abc', '([a-z])(b)', 1)` |
 | **Result** | `a` |
 
@@ -743,7 +743,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| **Description** | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
 | **Result** | `{'y': 2023, 'm': 04, 'd': 15}` |
 
@@ -751,7 +751,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, returns the specified capturing `group`, applying the set of regexp `options`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| **Description** | If `string` contains the `regex`, returns the specified capturing `group`, applying the set of regexp `options`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | **Example** | `regexp_extract('ABC', '([a-z])(b)', 1, 'i')` |
 | **Result** | `A` |
 
@@ -759,7 +759,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`, applying the set of regexp `options`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| **Description** | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`, applying the set of regexp `options`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | **Example** | `regexp_extract('John Doe', '([a-z]+) ([a-z]+)', ['first_name', 'last_name'], 'i')` |
 | **Result** | `{'first_name': John, 'last_name': Doe}` |
 
@@ -807,7 +807,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | **Example** | `regexp_matches('anabanana', '(an)*')` |
 | **Result** | `true` |
 
@@ -815,7 +815,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise, applying the set of regexp `options`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise, applying the set of regexp `options`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | **Example** | `regexp_matches('anabanana', '(AN)+', 'i')` |
 | **Result** | `true` |
 
@@ -823,7 +823,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
@@ -831,7 +831,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of regexp `options` is applied. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions %}) page for more details. |
+| **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of regexp `options` is applied. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
 | **Example** | `regexp_replace('hello', '[LO]', '-', 'i')` |
 | **Result** | `he-lo` |
 
