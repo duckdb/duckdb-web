@@ -25,7 +25,8 @@ previewshortduckdbversion: "1.3-dev"
 currentduckdbversion: 1.2.2
 currentduckdbhash: "7c039464e4"
 currentsnapshotversion: 1.2.3-dev
-currentduckdbodbcversion: 1.2.2
+currentduckdbodbcversion: 1.2.2.1
+currentduckdbodbcshortversion: 1.2.2
 currentduckdbgoversion: 1.2.2
 currentduckdbnodeneoversion: 1.2.2
 currentduckdbnodejsversion: 1.2.1
