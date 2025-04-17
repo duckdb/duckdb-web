@@ -11,3 +11,4 @@ find . -name '*.md' | xargs -I {} sed -E -i 's|\{% link ([^\}]*) %\}|https://duc
 find . -name '*.md' | xargs -I {} sed -E -i 's|\{% post_url ([^\}]*) %\}|https://duckdb.org/\1.md|g' {}
 cp *.md _site/
 cp -r docs/stable _site/docs
+cp -r _posts/* _site/
