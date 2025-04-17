@@ -36,8 +36,8 @@ This section describes functions and operators for examining and manipulating [`
 | [`contains(string, search_string)`](#containsstring-search_string) | Returns `true` if `search_string` is found within `string`. |
 | [`ends_with(string, search_string)`](#ends_withstring-search_string) | Returns `true` if `string` ends with `search_string`. |
 | [`format(format, ...)`](#formatformat-) | Formats a string using the [fmt syntax](#fmt-syntax). |
-| [`formatReadableDecimalSize(integer)`](#formatReadableDecimalSizeinteger) | Converts `integer` to a human-readable representation (e.g. 16000 -> 16.0 KB). |
-| [`formatReadableSize(integer)`](#formatReadableSizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
+| [`formatReadableDecimalSize(integer)`](#formatreadabledecimalsizeinteger) | Converts `integer` to a human-readable representation (e.g. 16000 -> 16.0 KB). |
+| [`formatReadableSize(integer)`](#formatreadablesizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`format_bytes(integer)`](#format_bytesinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`from_base64(string)`](#from_base64string) | Converts a base64 encoded `string` to a character string (`BLOB`). |
 | [`from_binary(value)`](#from_binaryvalue) | Converts a `value` from binary representation to a blob. |
