@@ -25,7 +25,7 @@ For example, Rabobank, one of the biggest banks in the Netherlands, exports the 
 />
 
 If a big financial institute cannot write proper CSV files, imagine the errors occurring in CSV files exported by decades-old legacy software, in hand-written CSV files, files exported from spreadsheet software, and so on!
-These sort of errors are so prevalent that spreadsheet software, [dataframe libraries](https://news.ycombinator.com/item?id=39665312) and specialized CSV tools go above and beyond to salvage these files and hammer them into tables that users can work with.
+These sorts of errors are so prevalent that spreadsheet software, [dataframe libraries](https://news.ycombinator.com/item?id=39665312) and specialized CSV tools go above and beyond to salvage these files and hammer them into tables that users can work with.
 
 ## DuckDB's CSV Parser
 
@@ -284,8 +284,9 @@ The [Pollock Benchmark](https://hpi.de/naumann/projects/data-preparation/pollock
 
 The authors of the Pollock benchmark analyzed over 245,000 public CSV datasets to understand the most common ways the RFC-4180 standard is violated in CSV files in the wild. After identifying the most common error types, they created a CSV file generator with a pollution mechanism, which inserts these errors. In total, the benchmark tool generates over 2,200 polluted files. It also generates the correct dialect configuration that should be used to read these files, along with a clean version of the file.
 
-To evaluate the robustness of systems, the benchmark tool reads the polluted file with the configuration set for a given system-under-test. It then uses the system to write a new file with the answer and compares it with the clean version.
-This comparison yields a score that reflects how accurately the system read the file.
+To evaluate the robustness of systems, the benchmark tool reads the polluted file with the configuration set for a given system-under-test.
+It then uses the system to write a new file with the answer and compares it with the clean version.
+This comparison yields a score that reflects how accurately the system has read the file.
 There are mainly two scores that the benchmark produces: the simple score and the weighted score, with the weighted score accounting for how commonly that type of error appears in real life.
 
 In this section, we will describe the most common errors depicted in the paper and share the results of the benchmark after adding DuckDB.
@@ -309,16 +310,16 @@ In this section, we will briefly discuss some of the most common errors, but ref
 
 ### Methodology
 
-The benchmark includess a wide variety of systems being tested, such as CSV parsing frameworks (e.g., CleverCSV), relational database systems (e.g., PostgreSQL), spreadsheet software (e.g., LibreOffice Calc), data visualization tools (e.g., Dataviz), and dataframe libraries (e.g., Pandas).
+The benchmark includes a wide variety of systems being tested, such as CSV parsing frameworks (e.g., CleverCSV), relational database systems (e.g., PostgreSQL), spreadsheet software (e.g., LibreOffice Calc), data visualization tools (e.g., Dataviz), and dataframe libraries (e.g., Pandas).
 
 An important aspect of the benchmark is that it provides the dialect and schema for each file. Without this, systems that do not have a sniffer (e.g., PostgreSQL) would not be able to read the file. There is no specific rule or differentiation in how much each system utilizes that information. For example, Pandas only takes partial advantage of these settings.
-To incorporate these difference in our evaluation of DuckDB, we decided to add two different configurations:
+To incorporate these differences in our evaluation of DuckDB, we decided to add two different configurations:
 
 1. **DuckDB (benchmark config).**
    Under this configuration, all the options in the configuration file that are relevant to DuckDB – such as CSV dialect and schema – are passed to the reader. In addition, we also set all the options described in the previous section (i.e., `null_padding = true, strict_mode = false, ignore_errors = true`). This essentially tells us how much we can read from these files if the users manually set the necessary options.
 
 2. **DuckDB (auto-detect only).**
-   Under this configuration, we do not take advantage of providing customer configurations files. The only options set are those that allow for non-standard file reading (i.e., `null_padding = true, strict_mode = false, ignore_errors = true`). Hence, this option also evaluates the full power of our sniffer in scenarios of uncertainty.
+   Under this configuration, we do not take advantage of providing custom configuration files. The only options set are those that allow for non-standard file reading (i.e., `null_padding = true, strict_mode = false, ignore_errors = true`). Hence, this option also evaluates the full power of our sniffer in scenarios of uncertainty.
 
 ### Pollock Scores
 
@@ -457,8 +458,8 @@ Click here to see the full result table
 </table>
 </details>
 
-As expected, running DuckDB in full auto mode scores lower, since the sniffer must detect dialects and schemas by itself. Some files even have a multibyte delimiter, which is supported by DuckDB but is not part of the sniffer's search space, yielding a lower score. In these cases, DuckDB still managed to read about `90.75%` of the data correctly, reaching in 9.075 as the total score and 8.439 as the total weighted score.
-Once again, this result comes from simply calling `read_csv('file_path', null_padding = true, strict_mode = false, ignore_errors = true)` with zero user input regarding the actual data configuration, demonstrating that DuckDB's CSV reader can indeed read most non-standard CSV files even with minimal configuration!
+As expected, running DuckDB in full auto mode scores lower, since the sniffer must detect dialects and schemas by itself. Some files even have a multibyte delimiter, which is supported by DuckDB, but is not part of the sniffer's search space, yielding a lower score. In these cases, DuckDB still managed to read about `90.75%` of the data correctly, reaching in 9.075 as the total score and 8.439 as the total weighted score.
+Once again, this result comes from simply calling `read_csv('file_path', null_padding = true, strict_mode = false, ignore_errors = true)` with zero user input regarding the actual data configuration, demonstrating that DuckDB's CSV reader can indeed read most non-standard CSV files, even with minimal configuration!
 
 ### Contributing to the Benchmark
 
@@ -466,6 +467,6 @@ It's entirely possible that your favorite CSV reader system is not yet included 
 DuckDB, for example, was initially not included, but we found that adding it was quite easy!
 We hope that the [DuckDB pull request](https://github.com/HPI-Information-Systems/Pollock/pull/6/) serves as inspiration for those who wish to add their favorite systems to it.
 The reproduction of the results is quite simple too.
-Unlike most benchmarks that focus on performance and correctness, the Pollock Benchmark measures _accuracy,_ making it is easy reproduce independently of the machine used.
+Unlike most benchmarks that focus on performance and correctness, the Pollock Benchmark measures _accuracy,_ making it easy to reproduce independently of the machine used.
 
 Happy hacking!
