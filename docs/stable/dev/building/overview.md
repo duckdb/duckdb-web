@@ -3,6 +3,8 @@ layout: docu
 redirect_from:
 - /dev/building
 - /dev/building/
+- /docs/stable/dev/building
+- /docs/stable/dev/building/
 - /docs/dev/building
 - /docs/dev/building/
 - /docs/dev/building/build_instructions
