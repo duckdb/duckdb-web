@@ -25,6 +25,7 @@ PLACEHOLDER_RESULT = "```{result_type}\n{result}\n```"
 # result: str = the result of the example code execution
 # default: bool = True if it the example should be used in DEFAULT_EXAMPLE
 # additional_description: str = text to be appended to the method description
+# result_type: str = how the result to be presented (default text)
 
 CREATION_MEMBER_CODE_EXAMPLE_MAP = {
     'from_arrow': {
@@ -504,9 +505,7 @@ rel.apply(
     'except_': {
         'example': 'rel.except_(other_rel=rel.set_alias("other_rel"))',
         'result': """
-The relation query is executed once with `rel` and once with `other_rel`,
-therefore generating different ids and timestamps:
-
+The relation query is executed twice, therefore generating different ids and timestamps:
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -652,58 +651,61 @@ rel.count("*")
 Depending on how the `condition` parameter is provided, the JOIN clause generated is:
 - `USING`
 
-    ```python
-    import duckdb
-    
-    duckdb_conn = duckdb.connect()
-    
-    rel1 = duckdb_conn.sql("select range as id, concat('dummy 1', range) as text from range(1,10)")
-    rel2 = duckdb_conn.sql("select range as id, concat('dummy 2', range) as text from range(5,7)")
-    
-    rel1.join(rel2, condition="id", how="inner").sql_query()
-    ```
-    with following SQL:
-    ```sql
-    SELECT * 
-    FROM (
-            SELECT "range" AS id, 
-                concat('dummy 1', "range") AS "text" 
-            FROM "range"(1, 10)
-        ) AS unnamed_relation_41bc15e744037078 
-    INNER JOIN (
-            SELECT "range" AS id, 
-            concat('dummy 2', "range") AS "text" 
-            FROM "range"(5, 7)
-        ) AS unnamed_relation_307e245965aa2c2b 
-    USING (id)
-    ```
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel1 = duckdb_conn.sql("select range as id, concat('dummy 1', range) as text from range(1,10)")
+rel2 = duckdb_conn.sql("select range as id, concat('dummy 2', range) as text from range(5,7)")
+
+rel1.join(rel2, condition="id", how="inner").sql_query()
+```
+with following SQL:
+
+```sql
+SELECT * 
+FROM (
+        SELECT "range" AS id, 
+            concat('dummy 1', "range") AS "text" 
+        FROM "range"(1, 10)
+    ) AS unnamed_relation_41bc15e744037078 
+INNER JOIN (
+        SELECT "range" AS id, 
+        concat('dummy 2', "range") AS "text" 
+        FROM "range"(5, 7)
+    ) AS unnamed_relation_307e245965aa2c2b 
+USING (id)
+```
 - `ON`
 
-    ```python
-    import duckdb
-    
-    duckdb_conn = duckdb.connect()
-    
-    rel1 = duckdb_conn.sql("select range as id, concat('dummy 1', range) as text from range(1,10)")
-    rel2 = duckdb_conn.sql("select range as id, concat('dummy 2', range) as text from range(5,7)")
-    
-    rel1.join(rel2, condition=f"{rel1.alias}.id = {rel2.alias}.id", how="inner").sql_query()
-    ```
-    with the following SQL:
-    ```sql
-    SELECT * 
-    FROM (
-            SELECT "range" AS id, 
-                concat('dummy 1', "range") AS "text" 
-            FROM "range"(1, 10)
-        ) AS unnamed_relation_41bc15e744037078 
-    INNER JOIN (
-            SELECT "range" AS id, 
-            concat('dummy 2', "range") AS "text" 
-            FROM "range"(5, 7)
-        ) AS unnamed_relation_307e245965aa2c2b 
-    ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id))
-    ```
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel1 = duckdb_conn.sql("select range as id, concat('dummy 1', range) as text from range(1,10)")
+rel2 = duckdb_conn.sql("select range as id, concat('dummy 2', range) as text from range(5,7)")
+
+rel1.join(rel2, condition=f"{rel1.alias}.id = {rel2.alias}.id", how="inner").sql_query()
+```
+
+with the following SQL:
+
+```sql
+SELECT * 
+FROM (
+        SELECT "range" AS id, 
+            concat('dummy 1', "range") AS "text" 
+        FROM "range"(1, 10)
+    ) AS unnamed_relation_41bc15e744037078 
+INNER JOIN (
+        SELECT "range" AS id, 
+        concat('dummy 2', "range") AS "text" 
+        FROM "range"(5, 7)
+    ) AS unnamed_relation_307e245965aa2c2b 
+ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id))
+```
 """,
     },
     'limit': {
