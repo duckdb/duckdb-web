@@ -30,7 +30,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/previe
 | Name | Description |
 |:--|:-------|
 | [`current_date`](#current_date) | Current date (at start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
-| [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date. |
+| [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date and return a `DATETIME` value. |
 | [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition]({% link docs/preview/sql/functions/datepart.md %}) boundaries between the dates. |
 | [`date_part(part, date)`](#date_partpart-date) | Get the [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The number of complete [partitions]({% link docs/preview/sql/functions/datepart.md %}) between the dates. |
@@ -65,9 +65,9 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/previe
 
 <div class="nostroke_table"></div>
 
-| **Description** | Add the interval to the date. |
+| **Description** | Add the interval to the date and return a `DATETIME` value. |
 | **Example** | `date_add(DATE '1992-09-15', INTERVAL 2 MONTH)` |
-| **Result** | `1992-11-15` |
+| **Result** | `1992-11-15 00:00:00` |
 
 #### `date_diff(part, startdate, enddate)`
 
