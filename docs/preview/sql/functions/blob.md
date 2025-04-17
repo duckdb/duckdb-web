@@ -14,7 +14,7 @@ This section describes functions and operators for examining and manipulating [`
 |:--|:-------|
 | [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
 | [`base64(blob)`](#base64blob) | Converts a `blob` to a base64 encoded string. |
-| [`concat(value, ...)`](#concatvalue) | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
+| [`concat(value, ...)`](#concatvalue-) | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`decode(blob)`](#decodeblob) | Converts `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
 | [`encode(string)`](#encodestring) | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding. |
 | [`from_base64(string)`](#from_base64string) | Converts a base64 encoded `string` to a character string (`BLOB`). |

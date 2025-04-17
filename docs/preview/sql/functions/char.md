@@ -31,24 +31,24 @@ This section describes functions and operators for examining and manipulating [`
 | [`char_length(string)`](#char_lengthstring) | Number of characters in `string`. |
 | [`character_length(string)`](#character_lengthstring) | Number of characters in `string`. |
 | [`chr(code_point)`](#chrcode_point) | Returns a character which is corresponding the ASCII code value or Unicode code point. |
-| [`concat(value, ...)`](#concatvalue) | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| [`concat_ws(separator, string, ...)`](#concat_wsseparator-string) | Concatenates many strings, separated by `separator`. `NULL` inputs are skipped. |
+| [`concat(value, ...)`](#concatvalue-) | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
+| [`concat_ws(separator, string, ...)`](#concat_wsseparator-string-) | Concatenates many strings, separated by `separator`. `NULL` inputs are skipped. |
 | [`contains(string, search_string)`](#containsstring-search_string) | Returns `true` if `search_string` is found within `string`. |
 | [`ends_with(string, search_string)`](#ends_withstring-search_string) | Returns `true` if `string` ends with `search_string`. |
-| [`format(format, ...)`](#formatformat) | Formats a string using the [fmt syntax](#fmt-syntax). |
+| [`format(format, ...)`](#formatformat-) | Formats a string using the [fmt syntax](#fmt-syntax). |
 | [`formatReadableDecimalSize(integer)`](#formatReadableDecimalSizeinteger) | Converts `integer` to a human-readable representation (e.g. 16000 -> 16.0 KB). |
 | [`formatReadableSize(integer)`](#formatReadableSizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`format_bytes(integer)`](#format_bytesinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`from_base64(string)`](#from_base64string) | Converts a base64 encoded `string` to a character string (`BLOB`). |
 | [`from_binary(value)`](#from_binaryvalue) | Converts a `value` from binary representation to a blob. |
 | [`from_hex(value)`](#from_hexvalue) | Converts a `value` from hexadecimal representation to a blob. |
-| [`greatest(arg1, ...)`](#greatestarg1) | Returns the largest value. For strings lexicographical ordering is used. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
-| [`hash(value, ...)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. Note that this is not a cryptographic hash. |
+| [`greatest(arg1, ...)`](#greatestarg1-) | Returns the largest value. For strings lexicographical ordering is used. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
+| [`hash(value, ...)`](#hashvalue-) | Returns a `UBIGINT` with the hash of the `value`. Note that this is not a cryptographic hash. |
 | [`hex(string)`](#hexstring) | Converts the `string` to hexadecimal representation. |
 | [`ilike_escape(string, like_specifier, escape_character)`](#ilike_escapestring-like_specifier-escape_character) | Returns `true` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`instr(string, search_string)`](#instrstring-search_string) | Returns location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
 | [`lcase(string)`](#lcasestring) | Converts `string` to lower case. |
-| [`least(arg1, ...)`](#leastarg1) | Returns the smallest value. For strings lexicographical ordering is used. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
+| [`least(arg1, ...)`](#leastarg1-) | Returns the smallest value. For strings lexicographical ordering is used. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
 | [`left(string, count)`](#leftstring-count) | Extracts the left-most count characters. |
 | [`left_grapheme(string, count)`](#left_graphemestring-count) | Extracts the left-most count grapheme clusters. |
 | [`len(string)`](#lenstring) | Number of characters in `string`. |
@@ -79,7 +79,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`parse_path(path, separator)`](#parse_pathpath-separator) | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`position(search_string IN string)`](#positionsearch_string-in-string) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
 | [`prefix(string, search_string)`](#prefixstring-search_string) | Returns `true` if `string` starts with `search_string`. |
-| [`printf(format, ...)`](#printfformat) | Formats a `string` using [printf syntax](#printf-syntax). |
+| [`printf(format, ...)`](#printfformat-) | Formats a `string` using [printf syntax](#printf-syntax). |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/preview/guides/file_formats/read_file.md %}#read_text) for more details. |
 | [`regexp_escape(string)`](#regexp_escapestring) | Escapes special patterns to turn `string` into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape). |
 | [`regexp_extract(string, regex)`](#regexp_extractstring-regex) | If `string` contains the `regex`, returns the first match; otherwise, returns the empty string. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
@@ -279,7 +279,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Number of characters in `string`. |
 | **Example** | `char_length('Hello🦆')` |
 | **Result** | `6` |
-| **Aliases** | `character_length`,`len`,`length` |
+| **Aliases** | `character_length`, `len`, `length` |
 
 #### `character_length(string)`
 
@@ -288,7 +288,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Number of characters in `string`. |
 | **Example** | `character_length('Hello🦆')` |
 | **Result** | `6` |
-| **Aliases** | `char_length`,`len`,`length` |
+| **Aliases** | `char_length`, `len`, `length` |
 
 #### `chr(code_point)`
 
@@ -433,7 +433,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Returns location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
 | **Example** | `instr('test test', 'es')` |
 | **Result** | `2` |
-| **Aliases** | `position`,`strpos` |
+| **Aliases** | `position`, `strpos` |
 
 #### `lcase(string)`
 
@@ -477,7 +477,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Number of characters in `string`. |
 | **Example** | `length('Hello🦆')` |
 | **Result** | `6` |
-| **Aliases** | `char_length`,`character_length`,`length` |
+| **Aliases** | `char_length`, `character_length`, `length` |
 
 #### `length(string)`
 
@@ -486,7 +486,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Number of characters in `string`. |
 | **Example** | `length('Hello🦆')` |
 | **Result** | `6` |
-| **Aliases** | `char_length`,`character_length`,`len` |
+| **Aliases** | `char_length`, `character_length`, `len` |
 
 #### `length_grapheme(string)`
 
@@ -689,7 +689,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
 | **Example** | `position('b' IN 'abc')` |
 | **Result** | `2` |
-| **Aliases** | `instr`,`strpos` |
+| **Aliases** | `instr`, `strpos` |
 
 #### `prefix(string, search_string)`
 
@@ -842,7 +842,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `regex`. |
 | **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
-| **Aliases** | `str_split_regex`,`string_split_regex` |
+| **Aliases** | `str_split_regex`, `string_split_regex` |
 
 #### `regexp_split_to_array(string, regex, options)`
 
@@ -851,7 +851,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `regex`, applying the set of regexp `options`. |
 | **Example** | `regexp_split_to_array('hello world; 42', ' ?WORLD; ?', 'i')` |
 | **Result** | `[hello, 42]` |
-| **Aliases** | `str_split_regex`,`string_split_regex` |
+| **Aliases** | `str_split_regex`, `string_split_regex` |
 
 #### `regexp_split_to_table(string, regex)`
 
@@ -948,7 +948,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `separator`. |
 | **Example** | `split('hello-world', '-')` |
 | **Result** | `[hello, world]` |
-| **Aliases** | `str_split`,`string_split`,`string_to_array` |
+| **Aliases** | `str_split`, `string_split`, `string_to_array` |
 
 #### `split_part(string, separator, index)`
 
@@ -974,7 +974,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `separator`. |
 | **Example** | `str_split('hello-world', '-')` |
 | **Result** | `[hello, world]` |
-| **Aliases** | `split`,`string_split`,`string_to_array` |
+| **Aliases** | `split`, `string_split`, `string_to_array` |
 
 #### `str_split_regex(string, regex)`
 
@@ -983,7 +983,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `regex`. |
 | **Example** | `str_split_regex('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
-| **Aliases** | `regexp_split_to_array`,`string_split_regex` |
+| **Aliases** | `regexp_split_to_array`, `string_split_regex` |
 
 #### `str_split_regex(string, regex, options)`
 
@@ -992,7 +992,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `regex`, applying the set of regexp `options`. |
 | **Example** | `str_split_regex('hello world; 42', ' ?WORLD; ?', 'i')` |
 | **Result** | `[hello, 42]` |
-| **Aliases** | `regexp_split_to_array`,`string_split_regex` |
+| **Aliases** | `regexp_split_to_array`, `string_split_regex` |
 
 #### `string_split(string, separator)`
 
@@ -1001,7 +1001,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `separator`. |
 | **Example** | `string_split('hello-world', '-')` |
 | **Result** | `[hello, world]` |
-| **Aliases** | `split`,`str_split`,`string_to_array` |
+| **Aliases** | `split`, `str_split`, `string_to_array` |
 
 #### `string_split_regex(string, regex)`
 
@@ -1010,7 +1010,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `regex`. |
 | **Example** | `string_split_regex('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
-| **Aliases** | `regexp_split_to_array`,`str_split_regex` |
+| **Aliases** | `regexp_split_to_array`, `str_split_regex` |
 
 #### `string_split_regex(string, regex, options)`
 
@@ -1019,7 +1019,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `regex`, applying the set of regexp `options`. |
 | **Example** | `string_split_regex('hello world; 42', ' ?WORLD; ?', 'i')` |
 | **Result** | `[hello, 42]` |
-| **Aliases** | `regexp_split_to_array`,`str_split_regex` |
+| **Aliases** | `regexp_split_to_array`, `str_split_regex` |
 
 #### `string_to_array(string, separator)`
 
@@ -1028,7 +1028,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Splits the `string` along the `separator`. |
 | **Example** | `string_to_array('hello-world', '-')` |
 | **Result** | `[hello, world]` |
-| **Aliases** | `split`,`str_split`,`string_split` |
+| **Aliases** | `split`, `str_split`, `string_split` |
 
 #### `strip_accents(string)`
 
@@ -1053,7 +1053,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Returns location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
 | **Example** | `strpos('test test', 'es')` |
 | **Result** | `2` |
-| **Aliases** | `instr`,`position` |
+| **Aliases** | `instr`, `position` |
 
 #### `substr(string, start)`
 
