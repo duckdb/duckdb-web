@@ -9,3 +9,6 @@ ripgrepy
 marko # for generating search index
 python-frontmatter
 icalendar
+
+ipython
+black
