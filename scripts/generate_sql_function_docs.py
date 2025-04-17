@@ -292,9 +292,14 @@ def generate_docs_table(function_data: list[DocFunction]):
         if func.name in BINARY_OPERATORS and len(func.parameters) == 2:
             table_str += f"| [`{func.parameters[0]} {func.name} {func.parameters[1]}`](#{func.parameters[0]}-{func.name.lstrip('@*!^|pip3 list | grep duckdb').lower().replace(' ', '-')}-{func.parameters[1]}) | {func.description} |\n"
         elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
-            table_str += f"| [`{func.parameters[0]}[{":".join(func.parameters[1:])}]`](#{"".join(func.parameters)}) | {func.description} |\n"
+            parameter_list = ":".join(func.parameters[1:])
+            parameter_list_anchor = "".join(func.parameters)
+            table_str += f"| [`{func.parameters[0]}[{parameter_list}]`](#{parameter_list_anchor}) | {func.description} |\n"
         else:
-            table_str += f"| [`{func.name}({", ".join(func.parameters)}{', ...' if (func.is_variadic) else ''})`](#{func.name.lstrip('@*!^')}{"-".join(func.parameters).lower().replace(' ', '-')}{'-' if (func.is_variadic) else ''}) | {func.description} |\n"
+            parameter_list = ", ".join(func.parameters)
+            function_name_anchor = func.name.lstrip('@*!^')
+            parameter_list_anchor = "-".join(func.parameters).lower().replace(' ', '-')
+            table_str += f"| [`{func.name}({parameter_list}{', ...' if (func.is_variadic) else ''})`](#{function_name_anchor}{parameter_list_anchor}{'-' if (func.is_variadic) else ''}) | {func.description} |\n"
     table_str += "\n<!-- markdownlint-enable MD056 -->\n"
     return table_str
 
@@ -310,16 +315,17 @@ def generate_docs_records(function_data: list[DocFunction]):
                 f"#### `{func.parameters[0]} {func.name} {func.parameters[1]}`\n\n"
             )
         elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
-            record_str += (
-                f"#### `{func.parameters[0]}[{":".join(func.parameters[1:])}]`\n\n"
-            )
+            parameter_list = ":".join(func.parameters[1:])
+            record_str += f"#### `{func.parameters[0]}[{parameter_list}]`\n\n"
         else:
-            record_str += f"#### `{func.name}({", ".join(func.parameters)}{', ...' if (func.is_variadic) else ''})`\n\n"
+            parameter_list = ", ".join(func.parameters)
+            record_str += f"#### `{func.name}({parameter_list}{', ...' if (func.is_variadic) else ''})`\n\n"
         record_str += '<div class="nostroke_table"></div>\n\n'
         record_str += f"| **Description** | {func.description} |\n"
         record_str += generate_example_rows(func)
         if func.aliases:
-            record_str += f"| **{'Alias' if len(func.aliases) == 1 else 'Aliases'}** | {', '.join(f"`{alias}`" for alias in func.aliases)} |\n"
+            aliases = ', '.join(f"`{alias}`" for alias in func.aliases)
+            record_str += f"| **{'Alias' if len(func.aliases) == 1 else 'Aliases'}** | {aliases} |\n"
         record_str += '\n'
     return record_str
 
