@@ -39,6 +39,7 @@ The API is centered around `DuckDBPyRelation` nodes. The relations can be seen a
 The relations do not hold any data – and nothing is executed – until [a method that triggers execution](#output) is called.
 
 For example, we create a relation, which loads 1 billion rows:
+
 ```python
 import duckdb
 
@@ -100,6 +101,17 @@ SECTION_MAP = {
         ],
     },
 }
+
+
+def trim_code_block(s):
+    lines = s.splitlines()
+    if not lines:
+        return ""
+    if lines[0].strip() == "":
+        lines = lines[1:]
+    if lines[-1].strip() == "":
+        lines = lines[:-1]
+    return "\n".join(lines)
 
 
 def get_duckdb_conn():
@@ -169,19 +181,21 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                 class_member_name,
                 section,
                 SECTION_MAP.get(section).get("id"),
-                f"```python\n {member_signature}\n```" if member_signature else None,
+                f"```python\n{member_signature}\n```" if member_signature else None,
                 f"{member_description}{CODE_EXAMPLE_MAP.get(member_anchor).get('additional_description', '') if CODE_EXAMPLE_MAP.get(member_anchor) else ''}",
                 f"| [`{class_member_name}`](#{member_anchor}) | {member_description} |",
                 (
                     DEFAULT_EXAMPLE.format(
-                        code_example=CODE_EXAMPLE_MAP.get(member_anchor).get("example")
+                        code_example=trim_code_block(
+                            CODE_EXAMPLE_MAP.get(member_anchor).get("example")
+                        )
                     )
                     if CODE_EXAMPLE_MAP.get(member_anchor)
                     and CODE_EXAMPLE_MAP.get(member_anchor).get("default", True)
                     else (
                         PLACEHOLDER_EXAMPLE.format(
-                            code_example=CODE_EXAMPLE_MAP.get(member_anchor).get(
-                                "example"
+                            code_example=trim_code_block(
+                                CODE_EXAMPLE_MAP.get(member_anchor).get("example")
                             )
                         )
                         if CODE_EXAMPLE_MAP.get(member_anchor)
