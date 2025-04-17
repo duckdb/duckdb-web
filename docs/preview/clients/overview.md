@@ -5,7 +5,7 @@ title: Client Overview
 
 DuckDB is an in-process database system and offers client APIs (also known as “drivers”) for several languages.
 
-| Client API                                                                      | Maintainer                                                                              | Support tier | Supported DuckDB version                                                                                                 |
+| Client API                                                                      | Maintainer                                                                              | Support tier | DuckDB version                                                                                                           |
 | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------ |
 | [C]({% link docs/preview/clients/c/overview.md %})                              | The DuckDB team                                                                         | Primary      | [{{ site.currentduckdbversion }}]({% link docs/installation/index.html %}?version=stable&environment=cplusplus)          |
 | [Command Line Interface (CLI)]({% link docs/preview/clients/cli/overview.md %}) | The DuckDB team                                                                         | Primary      | [{{ site.currentduckdbversion }}]({% link docs/installation/index.html %}?version=stable&environment=cli)                |
