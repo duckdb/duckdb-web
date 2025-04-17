@@ -1007,6 +1007,10 @@
               "url": "versioning_of_extensions"
             },
             {
+              "page": "Troubleshooting of Extensions",
+              "url": "troubleshooting"
+            },
+            {
               "page": "AutoComplete",
               "url": "autocomplete"
             },
