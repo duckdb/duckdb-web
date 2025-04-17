@@ -156,9 +156,9 @@ def archive_installation_page(version):
         installation_page = "\n" + main_installation_file.read()
         installation_page = installation_page.replace(" (Latest Release)", "")
         installation_page = installation_page.replace(
-            "{{ site.currentduckdbversion }}", version
+            "{{ site.current_duckdb_version }}", version
         )
-        # we leave the variable "{{ site.nextjavaversion }}" as is
+        # we leave the variable "{{ site.next_java_version }}" as is
         # to allow the "GitHub main (Nightly Build)" to move with new versions
 
         archived_installation_file.write(

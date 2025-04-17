@@ -39,11 +39,11 @@ def reduce_clutter_in_doc(doc_body):
 
 
 def replace_jekyll_tags_for_variables(doc_body, config):
-    doc_body = doc_body.replace("{{ site.currentduckdbhash }}",         config["currentduckdbhash"])
-    doc_body = doc_body.replace("{{ site.currentduckdbodbcversion }}",  config["currentduckdbodbcversion"])
-    doc_body = doc_body.replace("{{ site.currentduckdbversion }}",      config["currentduckdbversion"])
-    doc_body = doc_body.replace("{{ site.currentjavaversion }}",        config["currentjavaversion"])
-    doc_body = doc_body.replace("{{ site.currentshortduckdbversion }}", config["currentshortduckdbversion"])
+    doc_body = doc_body.replace("{{ site.current_duckdb_hash }}",         config["current_duckdb_hash"])
+    doc_body = doc_body.replace("{{ site.current_duckdb_odbc_version }}",  config["current_duckdb_odbc_version"])
+    doc_body = doc_body.replace("{{ site.current_duckdb_version }}",      config["current_duckdb_version"])
+    doc_body = doc_body.replace("{{ site.current_java_version }}",        config["current_java_version"])
+    doc_body = doc_body.replace("{{ site.current_short_duckdb_version }}", config["current_short_duckdb_version"])
     return doc_body
 
 
@@ -383,7 +383,7 @@ with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") 
           ---
           title: DuckDB Documentation
           subtitle: >-
-            DuckDB version {config["currentsnapshotversion"]}\\newline
+            DuckDB version {config["current_snapshot_version"]}\\newline
             Generated on {datetime.now(timezone.utc).strftime("%Y-%m-%d at %H:%M UTC")}
           ---
         """))
