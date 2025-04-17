@@ -294,7 +294,7 @@ def generate_docs_table(function_data: list[DocFunction]):
         elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
             table_str += f"| [`{func.parameters[0]}[{":".join(func.parameters[1:])}]`](#{"".join(func.parameters)}) | {func.description} |\n"
         else:
-            table_str += f"| [`{func.name}({", ".join(func.parameters)}{', ...' if (func.is_variadic) else ''})`](#{func.name.lstrip('@*!^')}{"-".join(func.parameters).lower().replace(' ', '-')}) | {func.description} |\n"
+            table_str += f"| [`{func.name}({", ".join(func.parameters)}{', ...' if (func.is_variadic) else ''})`](#{func.name.lstrip('@*!^')}{"-".join(func.parameters).lower().replace(' ', '-')}{'-' if (func.is_variadic) else ''}) | {func.description} |\n"
     table_str += "\n<!-- markdownlint-enable MD056 -->\n"
     return table_str
 
@@ -319,7 +319,7 @@ def generate_docs_records(function_data: list[DocFunction]):
         record_str += f"| **Description** | {func.description} |\n"
         record_str += generate_example_rows(func)
         if func.aliases:
-            record_str += f"| **{'Alias' if len(func.aliases) == 1 else 'Aliases'}** | {','.join(f"`{alias}`" for alias in func.aliases)} |\n"
+            record_str += f"| **{'Alias' if len(func.aliases) == 1 else 'Aliases'}** | {', '.join(f"`{alias}`" for alias in func.aliases)} |\n"
         record_str += '\n'
     return record_str
 
