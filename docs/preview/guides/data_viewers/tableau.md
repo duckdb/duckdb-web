@@ -46,7 +46,7 @@ you will need to make sure the file was created with a file-compatible version o
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
 <!-- markdownlint-disable MD034 -->
-Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentjavaversion }}/duckdb_jdbc-{{ site.currentjavaversion }}.jar).
+Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_java_version }}/duckdb_jdbc-{{ site.current_java_version }}.jar).
 <!-- markdownlint-enable MD034 -->
 
 * macOS: Copy it to `~/Library/Tableau/Drivers/`
