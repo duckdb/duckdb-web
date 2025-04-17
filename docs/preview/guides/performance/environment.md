@@ -72,7 +72,19 @@ as well as spurious errors cased by the underlying file system.
 
 ## Operating System
 
-We recommend using the latest stable version of operating systems: macOS, Windows, and Linux are all well-tested and DuckDB can run on them with high performance. Among Linux distributions, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
+We recommend using the latest stable version of operating systems: macOS, Windows, and Linux are all well-tested and DuckDB can run on them with high performance.
+
+### Linux
+
+DuckDB runs on all mainstream Linux distributions released in the last ≈5 years.
+If you don't have a particular preference, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
+
+#### glibc vs. musl libc
+
+DuckDB can be built with both [glibc](https://www.gnu.org/software/libc/) (default) and [musl libc](https://www.musl-libc.org/) (see the [build guide]({% link docs/preview/dev/building/linux.md %})).
+However, note that DuckDB binaries built with musl libc have lower performance.
+In practice, this can lead to a slowdown of more than 5× on compute-intensive workloads.
+Therefore, it's recommended to use a Linux distribution with glibc for performance-oriented workloads when running DuckDB.
 
 ## Memory Allocator
 

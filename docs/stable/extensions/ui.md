@@ -14,8 +14,8 @@ An overview of its features can be found
 
 ## Requirements
 
-- An environment with a browser.
-- Any DuckDB client except Wasm, v1.2.1 or later.
+* An environment with a browser.
+* Any DuckDB client except Wasm, v1.2.1 or later.
 
 ## Usage
 

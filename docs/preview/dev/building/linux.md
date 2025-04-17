@@ -11,7 +11,7 @@ On Linux, install the required packages with the package manager of your distrib
 
 #### CLI Client
 
-On Ubuntu and Debian (and also MX Linux, Linux Mint, etc.), tthe requirements for building the DuckDB CLI client are the following:
+On Ubuntu and Debian (and also MX Linux, Linux Mint, etc.), the requirements for building the DuckDB CLI client are the following:
 
 ```batch
 sudo apt-get update
@@ -47,9 +47,16 @@ cd duckdb
 GEN=ninja make
 ```
 
+#### Performance with musl libc
+
 Note that Alpine Linux uses [musl libc](https://musl.libc.org/) as its C standard library.
-Currently, there are no official DuckDB binaries distributed for musl libc but it can be build with it manually following the instructions on this page.
-Note that starting with DuckDB v1.2.0, [extensions are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions).
+DuckDB binaries built with musl libc have lower performance compared to the glibc variants: for some workloads, the slowdown can be more than 5×.
+Therefore, it's recommended to use glibc for performance-oriented workloads.
+
+#### Distribution for the `linux_*_musl` platforms
+
+Starting with DuckDB v1.2.0, [_extensions_ are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions) (but not yet for the `linux_amd64_musl` platform).
+However, there are no official _DuckDB binaries_ distributed for musl libc but it can be build with it manually following the instructions on this page.
 
 #### Python Client on Alpine Linux
 
