@@ -29,7 +29,7 @@ curl https://install.duckdb.org | sh
 				
 				<div class="bottombar">
 					<p class="system">
-						<span>Latest release: DuckDB {{ site.currentduckdbversion }} | </span>
+						<span>Latest release: DuckDB {{ site.current_duckdb_version }} | </span>
 						<span class="systemdetected">System detected: </span>
 					</p>
 				</div>	
@@ -57,7 +57,7 @@ install.packages("duckdb")
 <dependency>
 	<groupId>org.duckdb</groupId>
 	<artifactId>duckdb_jdbc</artifactId>
-	<version>{{ site.currentjavaversion }}</version>
+	<version>{{ site.current_java_version }}</version>
 </dependency>
 {% endhighlight %}
 </div>
@@ -81,19 +81,19 @@ curl https://install.duckdb.org | sh
 </div>
 
 <div data-install="cli win">
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a>
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.current_duckdb_version }}/duckdb_cli-windows-amd64.zip</a>
 </div>
 
 <div data-install="odbc macos">
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.currentduckdbodbcversion }}/duckdb_odbc-osx-universal.zip" target="_blank">duckdb_odbc-osx-universal.zip</a>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" target="_blank">duckdb_odbc-osx-universal.zip</a>
 </div>
 
 <div data-install="odbc linux">
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.currentduckdbodbcversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">duckdb_odbc-linux-amd64.zip</a>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" target="_blank">duckdb_odbc-linux-amd64.zip</a>
 </div>
 
 <div data-install="odbc win">
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.currentduckdbodbcversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">duckdb_odbc-windows-amd64.zip</a>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" target="_blank">duckdb_odbc-windows-amd64.zip</a>
 </div>
 
 <div data-install="rust">

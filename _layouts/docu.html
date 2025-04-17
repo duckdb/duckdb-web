@@ -90,9 +90,9 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					<div class="versionselect">
 						<div class="version">
 							{% if version_viewed == "preview" %}
-								{% assign version_viewed_pretty = site.previewshortduckdbversion %}
+								{% assign version_viewed_pretty = site.preview_short_duckdb_version %}
 							{% elsif version_viewed == "stable" %}
-								{% assign version_viewed_pretty = site.currentshortduckdbversion | append: " (stable)" %}
+								{% assign version_viewed_pretty = site.current_short_duckdb_version | append: " (stable)" %}
 							{% else %}
 								{% assign version_viewed_pretty = version_viewed %}
 							{% endif %}
@@ -110,9 +110,9 @@ Page URL: <https://duckdb.org{{ page.url }}>
 										{% capture other_version_of_page_exists %}{% file_exists {{ filename }} %}{% endcapture %}
 										{% if other_version_of_page_exists == "true" %}
 											{% if item.version == "preview" %}
-												{% assign item_text = site.previewshortduckdbversion %}
+												{% assign item_text = site.preview_short_duckdb_version %}
 											{% elsif item.version == "stable" %}
-												{% assign item_text = site.currentshortduckdbversion %}
+												{% assign item_text = site.current_short_duckdb_version %}
 											{% else %}
 												{% assign item_text = item.version %}
 											{% endif %}
