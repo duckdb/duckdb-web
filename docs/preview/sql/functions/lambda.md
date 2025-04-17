@@ -19,15 +19,15 @@ For example, the following are all valid lambda functions:
 
 | Name | Description |
 |:--|:-------|
-| [`list_transform(list, lambda)`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. |
-| [`list_filter(list, lambda)`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns `true`. |
-| [`list_reduce(list, lambda)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. The list must have at least one element – the use of an initial accumulator value is currently not supported. |
+| [`list_transform(list, lambda(x))`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. The return type is defined by the return type of the lambda function. See [`list_transform` examples](#list_transform-examples). |
+| [`list_filter(list, lambda(x))`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns `true`. DuckDB must be able to cast the lambda function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples](#list_filter-examples). |
+| [`list_reduce(list, lambda(x, y)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single scalar value by executing the lambda function on a running result and the next list element. The list must have at least one element – the use of an initial accumulator value is currently not supported. See [`list_reduce` examples](#list_reduce-examples). |
 
 ### `list_transform(list, lambda)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a list that is the result of applying the lambda function to each element of the input list. For more information, see [Transform](#transform). |
+| **Description** | Returns a list that is the result of applying the lambda function to each element of the input list. The return type is defined by the return type of the lambda function. See [`list_transform` examples](#list_transform-examples). |
 | **Example** | `list_transform([4, 5, 6], x -> x + 1)` |
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
@@ -36,7 +36,7 @@ For example, the following are all valid lambda functions:
 
 <div class="nostroke_table"></div>
 
-| **Description** | Constructs a list from those elements of the input list for which the lambda function returns `true`. For more information, see [Filter](#filter). |
+| **Description** | Constructs a list from those elements of the input list for which the lambda function returns `true`. DuckDB must be able to cast the lambda function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples](#list_filter-examples). |
 | **Example** | `list_filter([4, 5, 6], x -> x > 4)` |
 | **Result** | `[5, 6]` |
 | **Aliases** | `array_filter`, `filter` |
@@ -45,16 +45,14 @@ For example, the following are all valid lambda functions:
 
 <div class="nostroke_table"></div>
 
-| **Description** | Reduces all elements of the input list into a single value by executing the lambda function on a running result and the next list element. The list must have at least one element – the use of an initial accumulator value is currently not supported. For more information, see [Reduce](#reduce). |
+| **Description** | Reduces all elements of the input list into a single scalar value by executing the lambda function on a running result and the next list element. The list must have at least one element – the use of an initial accumulator value is currently not supported. See [`list_reduce` examples](#list_reduce-examples). |
 | **Example** | `list_reduce([4, 5, 6], (acc, x) -> acc + x)` |
 | **Result** | `15` |
 | **Aliases** | `array_reduce`, `reduce` |
 
-## Nesting
+## Nesting Lambda Functions
 
-All scalar functions can be arbitrarily nested.
-
-Nested lambda functions to get all squares of even list elements:
+All scalar functions can be arbitrarily nested. For example, nested lambda functions to get all squares of even list elements:
 
 ```sql
 SELECT list_transform(
@@ -114,24 +112,9 @@ SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 [3, 5]
 ```
 
-## Transform
+## Examples
 
-**Signature:** `list_transform(list, lambda)`
-
-**Description:** `list_transform` returns a list that is the result of applying the lambda function to each element of the input list.
-
-**Aliases:**
-
-* `array_transform`
-* `apply`
-* `list_apply`
-* `array_apply`
-
-**Number of parameters excluding indexes:** 1
-
-**Return type:** Defined by the return type of the lambda function
-
-### Examples
+### `list_transform` Examples
 
 Incrementing each list element by one:
 
@@ -163,24 +146,7 @@ SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
 [6, 1, 7]
 ```
 
-## Filter
-
-**Signature:** `list_filter(list, lambda)`
-
-**Description:**
-Constructs a list from those elements of the input list for which the lambda function returns `true`.
-DuckDB must be able to cast the lambda function's return type to `BOOL`.
-
-**Aliases:**
-
-* `array_filter`
-* `filter`
-
-**Number of parameters excluding indexes:** 1
-
-**Return type:** The same type as the input list
-
-### Examples
+### `list_filter` Examples
 
 Filter out negative values:
 
@@ -219,27 +185,7 @@ SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
 []
 ```
 
-## Reduce
-
-**Signature:** `list_reduce(list, lambda)`
-
-**Description:**
-The scalar function returns a single value
-that is the result of applying the lambda function to each element of the input list.
-Starting with the first element
-and then repeatedly applying the lambda function to the result of the previous application and the next element of the list.
-The list must have at least one element.
-
-**Aliases:**
-
-* `array_reduce`
-* `reduce`
-
-**Number of parameters excluding indexes:** 2
-
-**Return type:** The type of the input list's elements
-
-### Examples
+### `list_reduce` Examples
 
 Sum of all list elements:
 
