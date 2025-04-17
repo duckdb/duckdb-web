@@ -131,4 +131,5 @@ duckdb -cmd "CREATE VIEW ⟨view_name⟩ AS FROM '⟨filename⟩.csv';" -ui
 
 ## Limitations
 
-The UI currently does not support the ARM-based Windows platforms (`windows_arm64` and `windows_arm64_mingw`).
+* The UI currently does not support the ARM-based Windows platforms (`windows_arm64` and `windows_arm64_mingw`).
+* The UI uses DuckDB as a storage internally (e.g., for saving notebooks), therefore, it [does not support read-only mode](https://github.com/duckdb/duckdb-ui/issues/61).
