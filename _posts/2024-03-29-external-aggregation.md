@@ -110,7 +110,7 @@ The fixed-size rows are stored in “Row Pages”, and variable-size rows in “
 <p align="center">
     <img src="/images/external_aggregation/TupleDataCollection.svg"
         alt="DuckDB's spillable page layout"
-        width=600
+        width="600"
         />
 </p>
 
@@ -148,7 +148,7 @@ You’ll see this in the image below, which illustrates our new implementation.
 <p align="center">
     <img src="/images/external_aggregation/OOCHA.svg"
         alt="DuckDB's external hash aggregation"
-        width=600
+        width="600"
         />
 </p>
 

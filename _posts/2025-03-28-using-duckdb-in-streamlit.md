@@ -173,7 +173,7 @@ The query will be executed when one of the following methods is encountered:
         <img
           src="/images/blog/duckdb-streamlit/top_5_busiest_stations.png"
           alt="Top 5 Busiest Train Stations per Month"
-          width=600
+          width="600"
         />
     </a>
 </div>
@@ -221,7 +221,7 @@ The data about the train rides through the train stations of The Netherlands, at
         <img
           src="/images/blog/duckdb-streamlit/network_utilization_across_country.png"
           alt="Railway Network Utilization across the Country"
-          width=800
+          width="800"
         />
     </a>
 </div>
@@ -252,7 +252,7 @@ In our case, we generate an animation with the railway network utilization at se
         <img
           src="/images/blog/duckdb-streamlit/number_train_rides.png"
           alt="Railway Network Utilization during the Year"
-          width=667
+          width="667"
         />
     </a>
 </div>
@@ -310,7 +310,7 @@ The code of implementing interactive maps with Plotly in Streamlit is available 
         <img
           src="/images/blog/duckdb-streamlit/closest_train_stations.png"
           alt="Closest 5 train stations from user selection"
-          width=600
+          width="600"
         />
     </a>
 </div>

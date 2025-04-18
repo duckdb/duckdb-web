@@ -52,7 +52,7 @@ Temporal binning is just doing this to instants:
 
 <img src="/images/blog/timezones/tz-instants.svg"
      alt="Time Zone Instants at the Epoch"
-     width=600
+     width="600"
      />
 
 Temporal binning systems are often called *calendars*,
@@ -63,7 +63,7 @@ For example, here is what the binning for a second time zone looks like at the e
 
 <img src="/images/blog/timezones/tz-timezone.svg"
      alt="Two Time Zones at the Epoch"
-     width=600
+     width="600"
      />
 
 The most confusing thing about temporal binning is that there is more than one way to bin time,
@@ -81,7 +81,7 @@ To distinguish the two hours, we needed to include another bin containing the of
 
 <img src="/images/blog/timezones/tz-daylight.svg"
      alt="Two Time Zones at a Daylight Savings Time transition"
-     width=600
+     width="600"
      />
 
 As this example shows, in order to bin the instants correctly, we need to know the binning rules that apply.

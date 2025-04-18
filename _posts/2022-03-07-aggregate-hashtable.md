@@ -45,7 +45,7 @@ How should a query processing engine compute such an aggregation? There are many
 A better way is to use a hash table. Hash tables are a [foundational data structure in computing](https://en.wikipedia.org/wiki/Hash_table) that allow us to find entries with a computational complexity of `O(1)`. A full discussion on how hash tables work is far beyond the scope of this post. Below we try to focus on a very basic description and considerations related to aggregate computation.
 
 <div>
-<img src="/images/blog/aggregates/aggr-bench-nlogn.svg" width=500 />
+<img src="/images/blog/aggregates/aggr-bench-nlogn.svg" width="500" />
 <figcaption align="center"><b>O(n) plotted against O(nlogn) to illustrate scaling behavior</b></figcaption>
 </div>
 
@@ -61,35 +61,35 @@ There are two main approaches to [work around this problem](https://en.wikipedia
 Both chaining and linear probing will degrade in theoretical lookup performance from O(1) to O(n) wrt hash table size if there are too many collisions, i.e., too many groups hashing to the same hash table entry. A common solution to this problem is to resize the hash table once the “fill ratio” exceeds some threshold, e.g., 75% is the default for Java’s `HashMap`. This is particularly important as we do not know the amount of groups in the result before starting the aggregation. Neither do we assume to know the amount of rows in the input table. We thus start with a fairly small hash table and resize it once the fill ratio exceeds a threshold. The basic hash table structure is shown in the figure below, the table has four slots 0-4. There are already three groups in the table, with group keys 12, 5 and 2. Each group has aggregate values (e.g., from a `SUM`) of 43 etc. 
 
 <div>
-<img src="/images/blog/aggregates/aggr-ht-naive.png" width=500 />
+<img src="/images/blog/aggregates/aggr-ht-naive.png" width="500" />
 <figcaption align="center"><b>Basic Aggregate Hash Table Structure</b></figcaption>
 </div>
 
 A big challenge with the resize of a partially filled hash table after the resize, all the groups are in the wrong place and we would have to move everything, which will be very expensive. 
 
 <div>
-<img src="/images/blog/aggregates/aggr-ht-twopart.png" width=500 />
+<img src="/images/blog/aggregates/aggr-ht-twopart.png" width="500" />
 <figcaption align="center"><b>Two-Part Aggregate Hash Table</b></figcaption>
 </div>
 
 To support resize efficiently, we have implemented a two-part aggregate hash table consisting of a separately-allocated pointer array which points into payload blocks that contain grouping values and aggregate states for each group. The pointers are not actual pointers but symbolic, they refer to a block ID and a row offset within said block. This is shown in the figure above, the hash table entries are split over two payload blocks. On resize, we throw away the pointer array and allocate a bigger one. Then, we read all payload blocks again, hash the group values, and re-insert pointers to them into the new pointer array. The group data thus remains unchanged, which greatly reduces the cost of resizing the hash table. This can be seen in the figure below, where we double the pointer array size but the payload blocks remain unchanged. 
 
 <div>
-<img src="/images/blog/aggregates/aggr-ht-resize.png" width=500 />
+<img src="/images/blog/aggregates/aggr-ht-resize.png" width="500" />
 <figcaption align="center"><b>Resizing Two-Part Aggregate Hash Table</b></figcaption>
 </div>
 
 The naive two-part hash table design would require a re-hashing of *all* group values on resize, which can be quite expensive especially for string values. To speed this up, we also write the raw hash of the group values to the payload blocks for every group. Then, during resize, we don’t have to re-hash the groups but can just read them from the payload blocks, compute the new offset into the pointer array, and insert there. 
 
 <div>
-<img src="/images/blog/aggregates/aggr-ht-hashcache.png" width=500 />
+<img src="/images/blog/aggregates/aggr-ht-hashcache.png" width="500" />
 <figcaption align="center"><b>Optimization: Adding Hashes to Payload</b></figcaption>
 </div>
 
 The two-part hash table has a big drawback when looking up entries: There is no ordering between the pointer array and the group entries in the payload blocks. Hence, following the pointer creates random access in the memory hierarchy. This will lead to unnecessary stalls in the computation. To mitigate this issue, we extend the memory layout of the pointer array to include some (1 or 2) bytes from the group hash in addition to the pointer to the payload value. This way, linear probing can first compare the hash bits in the pointer array with the current group hash and decide whether it’s worth following the payload pointer or not. This can potentially continue for every group in the pointer chain. Only when the hash bits match we have to actually follow the pointer and compare the actual groups. This optimization greatly reduces the amount of times the pointer to the payload blocks has to be followed and thereby reduces the amount of random accesses into memory which are directly related to overall performance. It has the nice side-effect of also greatly reducing full group comparisons which can also be expensive, e.g., when aggregating on groups that contain strings.
 
 <div>
-<img src="/images/blog/aggregates/aggr-ht-salting.png" width=500 />
+<img src="/images/blog/aggregates/aggr-ht-salting.png" width="500" />
 <figcaption align="center"><b>Optimization: Adding Hash Bits to Pointer Array</b></figcaption>
 </div>
 
@@ -106,7 +106,7 @@ While we now have an aggregate hash table design that should do fairly well for 
 It is possible to let each thread read data from downstream operators and build individual, local hash tables and merge those together later from a single thread. This works quite nicely if there are few groups like in the example at the top of this post. If there are few groups, a single thread can merge many thread-local hash tables without creating a bottleneck. However, it’s entirely possible there are as many groups as there are input rows, for this tends to happen a lot when someone groups on a column that would be a candidate for a primary key, e.g., `observation_number`, `timestamp` etc. What is thus needed is a parallel merge of the parallel hash tables. We adopt a method from [Leis et al.](https://15721.courses.cs.cmu.edu/spring2016/papers/p743-leis.pdf): Each thread builds not one, but multiple *partitioned* hash tables based on a radix-partitioning on the group hash. 
 
 <div>
-<img src="/images/blog/aggregates/aggr-ht-parallel.png" width=500 />
+<img src="/images/blog/aggregates/aggr-ht-parallel.png" width="500" />
 <figcaption align="center"><b>Partitioning Hash Tables for Parallelized Merging</b></figcaption>
 </div>
 
@@ -135,7 +135,7 @@ Because we are not interested in measuring the result set materialization time w
 
 
 <div>
-<img src="/images/blog/aggregates/aggr-bench-rows-fewgroups.svg" width=500 />
+<img src="/images/blog/aggregates/aggr-bench-rows-fewgroups.svg" width="500" />
 <figcaption align="center"><b>Varying row count for 1000 groups</b></figcaption>
 </div>
 
@@ -143,14 +143,14 @@ We measure the elapsed wall clock time required to complete each aggregation. To
 
 
 <div>
-<img src="/images/blog/aggregates/aggr-bench-rows-manygroups.svg" width=500 />
+<img src="/images/blog/aggregates/aggr-bench-rows-manygroups.svg" width="500" />
 <figcaption align="center"><b>Varying both row count and group count</b></figcaption>
 </div>
 
 Now let's discuss some results. We start with varying the amount of rows in the table between one million and 100 millions. We repeat the experiment for both a fixed (small) group count of 1000 and when the amount of groups is equal to the amount of rows. Results are plotted as a *log-log plot*, we can see how DuckDB consistently outperforms the other systems, with the single-threaded Pandas being slowest, Polars and Arrow being generally similar.
 
 <div>
-<img src="/images/blog/aggregates/aggr-bench-groups.svg" width=500 />
+<img src="/images/blog/aggregates/aggr-bench-groups.svg" width="500" />
 <figcaption align="center"><b>Varying group count for 100M rows</b></figcaption>
 </div>
 

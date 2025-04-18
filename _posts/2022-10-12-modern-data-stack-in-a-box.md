@@ -9,7 +9,7 @@ tags: ["using DuckDB"]
 <!-- https://www.ebay.com/itm/185408133658 -->
 <img src="/images/blog/mds_in_a_box/rubber_duck_on_a_box.jpg"
      alt="Duck on a box"
-     width=200
+     width="200"
  />
 
 This post is a collaboration with Jacob Matson and cross-posted on [dataduel.co](https://www.dataduel.co/modern-data-stack-in-a-box-with-duckdb/).
@@ -132,12 +132,12 @@ Below is an example Superset dashboard containing several charts based on this d
 
 <img src="/images/blog/mds_in_a_box/mds_in_a_box_superset_1.png"
      alt="mds_in_a_box_superset_1"
-     width=680
+     width="680"
  />
 
 <img src="/images/blog/mds_in_a_box/mds_in_a_box_superset_2.png"
      alt="mds_in_a_box_superset_2"
-     width=680
+     width="680"
  />
 
 ## Conclusion

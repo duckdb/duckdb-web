@@ -10,7 +10,7 @@ tags: ["benchmark"]
 
 <img src="/images/blog/pollock/pollock-duck.png"
      alt="DuckDB art"
-     width=400
+     width="500"
 />
 
 ## The Sorry State of the CSV Landscape
@@ -21,7 +21,7 @@ For example, Rabobank, one of the biggest banks in the Netherlands, exports the 
 
 <img src="/images/blog/pollock/tweet.png"
      alt="Hannes' tweet reaching out to the bank"
-     width=400
+     width="500"
 />
 
 If a big financial institute cannot write proper CSV files, imagine the errors occurring in CSV files exported by decades-old legacy software, in hand-written CSV files, files exported from spreadsheet software, and so on!

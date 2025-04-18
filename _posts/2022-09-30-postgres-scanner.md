@@ -8,7 +8,7 @@ tags: ["extensions"]
 
 <img src="/images/blog/elephant-duck.jpg"
      alt="DuckDB goes Postgres"
-     width=200
+     width="200"
  />
 
 ## Introduction

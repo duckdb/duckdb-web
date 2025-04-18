@@ -36,7 +36,7 @@ After doing an initial exploration of the above data, we can observe that a prov
         <img
           src="/images/blog/dbt-duckdb/data_model.svg"
           alt="Transformation Layer Data Model"
-          width=700
+          width="700"
         />
     </a>
 </div>

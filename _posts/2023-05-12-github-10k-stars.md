@@ -18,4 +18,4 @@ For us, the maintainers of DuckDB, the past few years have also been quite event
 
 We are very much looking forward to what the future will hold for DuckDB. Things are looking bright!
 
-<img src="/images/blog/wilbur-the-duck.jpg" alt="Wilbur the duck approves of all those stars" width=400/>
+<img src="/images/blog/wilbur-the-duck.jpg" alt="Wilbur the duck approves of all those stars" width="400"/>

@@ -33,7 +33,7 @@ Instead of reading the entire CSV file at once, DuckDB reads data from the CSV f
 
 <img src="/images/blog/streamingexecution.png"
      alt="DuckDB Streaming Execution"
-     width=800
+     width="800"
 />
 
 In the above example we are only showing a single data stream. In practice, DuckDB uses multiple data streams to enable multi-threaded execution – each thread executes its own data stream. The aggregation results of the different threads are combined to compute the final result.

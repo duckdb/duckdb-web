@@ -53,4 +53,4 @@ The first results you see are the 50 GB group by results. The benchmark runs eve
 The team at DuckDB Labs has been hard at work improving the performance of the out-of-core hash aggregates and joins. The most notable improvement is the performance of query 5 in the advanced group by queries. The cold run is almost an order of magnitude better than every other solution! DuckDB is also one of only two solutions to finish the 50 GB join query. Some solutions are experiencing timeouts on the 50 GB datasets. Solutions running the 50 GB group by queries are killed after running for 180 minutes, meaning all 10 group by queries need to finish within the 180 minutes. Solutions running the 50 GB join queries are killed after running for 360 minutes.
 
 [Link to result page](https://DuckDBlabs.github.io/db-benchmark/)
-<iframe src="https://DuckDBlabs.github.io/db-benchmark/"  title="h2oai db benchmmark" height=500 width=600></iframe>
+<iframe src="https://DuckDBlabs.github.io/db-benchmark/"  title="h2oai db benchmmark" height="500" width="600"></iframe>

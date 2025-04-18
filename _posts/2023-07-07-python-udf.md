@@ -8,7 +8,7 @@ tags: ["using DuckDB"]
 
 <img src="/images/blog/bird-dance.gif"
      alt="DuckDB-Waddle-fly"
-     width=100
+     width="100"
      />
 
 User Defined Functions (UDFs) enable users to extend the functionality of a Database Management System (DBMS) to perform domain-specific tasks that are not implemented as built-in functions. For instance, users who frequently need to export private data can benefit from an anonymization function that masks the local part of an email while preserving the domain. Ideally, this function would be executed directly in the DBMS. This approach offers several advantages:

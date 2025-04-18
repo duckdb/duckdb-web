@@ -8,7 +8,7 @@ tags: ["using DuckDB"]
 
 <img src="/images/blog/duckdb_wasm.svg"
      alt="DuckDB-Wasm logo"
-     width=240
+     width="240"
      />
 
 *DuckDB-Wasm is fast! If you're here for performance numbers, head over to our benchmarks at [shell.duckdb.org/versus](https://shell.duckdb.org/versus).*
