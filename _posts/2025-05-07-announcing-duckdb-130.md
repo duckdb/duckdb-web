@@ -23,9 +23,13 @@ We are proud to release DuckDB 1.3.0. This release is codenamed “CODENAME” a
 [**The release is built using `manylinux_2_28`.**](https://github.com/duckdb/duckdb/pull/16956)
 Now that all mainstream distributions use [glibc 2.28](https://lists.gnu.org/archive/html/info-gnu/2018-08/msg00000.html) or newer, we can retire the `_gcc4` special case for Linux binary distributions.
 
+### New Extension Features
 
+* encoding extension
+* Iceberg (Amazon S3 Tables, etc.)
 
 ### New Feature 1
+
 
 
 ### New Feature 2
