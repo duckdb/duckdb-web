@@ -5,7 +5,7 @@ title: S3 Parquet Import
 
 ## Prerequisites
 
-To load a Parquet file from S3, the [`httpfs` extension]({% link docs/preview/extensions/httpfs/overview.md %}) is required. This can be installed using the `INSTALL` SQL command. This only needs to be run once.
+To load a Parquet file from S3, the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}) is required. This can be installed using the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL httpfs;
@@ -32,7 +32,7 @@ CREATE SECRET (
 
 > Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your_region⟩.amazonaws.com'`{:.language-sql .highlight}.
 
-Alternatively, use the [`aws` extension]({% link docs/preview/extensions/aws.md %}) to retrieve the credentials automatically:
+Alternatively, use the [`aws` extension]({% link docs/preview/core_extensions/aws.md %}) to retrieve the credentials automatically:
 
 ```sql
 CREATE SECRET (

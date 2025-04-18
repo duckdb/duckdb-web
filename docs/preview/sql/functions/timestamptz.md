@@ -8,7 +8,7 @@ title: Timestamp with Time Zone Functions
 This section describes functions and operators for examining and manipulating [`TIMESTAMP WITH TIME ZONE`
 (or `TIMESTAMPTZ`) values]({% link docs/preview/sql/data_types/timestamp.md %}). See also the related [`TIMESTAMP` functions]({% link docs/preview/sql/functions/timestamp.md %}).
 
-Time zone support is provided by the built-in [ICU extension]({% link docs/preview/extensions/icu.md %}).
+Time zone support is provided by the built-in [ICU extension]({% link docs/preview/core_extensions/icu.md %}).
 
 In the examples below, the current time zone is presumed to be `America/Los_Angeles`
 using the Gregorian calendar.

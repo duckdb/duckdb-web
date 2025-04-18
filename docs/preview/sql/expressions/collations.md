@@ -147,7 +147,7 @@ WHERE names.name COLLATE NOACCENT.NOCASE = other_names.name COLLATE NOACCENT.NOC
 
 ## ICU Collations
 
-The collations we have seen so far are not region-dependent, and do not follow any specific regional rules. If you wish to follow the rules of a specific region or language, you will need to use one of the ICU collations. For that, you need to [load the ICU extension]({% link docs/preview/extensions/icu.md %}#installing-and-loading).
+The collations we have seen so far are not region-dependent, and do not follow any specific regional rules. If you wish to follow the rules of a specific region or language, you will need to use one of the ICU collations. For that, you need to [load the ICU extension]({% link docs/preview/core_extensions/icu.md %}#installing-and-loading).
 
 Loading this extension will add a number of language and region specific collations to your database. These can be queried using `PRAGMA collations` command, or by querying the `pragma_collations` function.
 

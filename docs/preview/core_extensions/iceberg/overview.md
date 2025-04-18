@@ -69,7 +69,7 @@ FROM iceberg_scan('lineitem_iceberg/metadata/v1.metadata.json');
 |-------------:|
 | 60175        |
 
-The `iceberg` works together with the [`httpfs` extension]({% link docs/preview/extensions/httpfs/overview.md %}) to access Iceberg tables in object stores such as S3.
+The `iceberg` works together with the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}) to access Iceberg tables in object stores such as S3.
 
 ```sql
 SELECT count(*)

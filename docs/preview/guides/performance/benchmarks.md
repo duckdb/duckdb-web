@@ -3,7 +3,7 @@ layout: docu
 title: Benchmarks
 ---
 
-For several of the recommendations in our performance guide, we use microbenchmarks to back up our claims. For these benchmarks, we use data sets from the [TPC-H benchmark]({% link docs/preview/extensions/tpch.md %}) and the [LDBC Social Network Benchmark’s BI workload](https://github.com/ldbc/ldbc_snb_bi/blob/main/snb-bi-pre-generated-data-sets.md#compressed-csvs-in-the-composite-merged-fk-format).
+For several of the recommendations in our performance guide, we use microbenchmarks to back up our claims. For these benchmarks, we use data sets from the [TPC-H benchmark]({% link docs/preview/core_extensions/tpch.md %}) and the [LDBC Social Network Benchmark’s BI workload](https://github.com/ldbc/ldbc_snb_bi/blob/main/snb-bi-pre-generated-data-sets.md#compressed-csvs-in-the-composite-merged-fk-format).
 
 <!--
 ## Benchmark Environment
@@ -16,7 +16,7 @@ The benchmarks in the performance guide executed on a 2022 MacBook Pro with a 12
 We use the [LDBC BI SF300 data set's Comment table](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst) (20 GB `.tar.zst` archive, 21 GB when decompressed into `.csv.gz` files),
 while others use the same table's [`creationDate` column](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet) (4 GB `.parquet` file).
 
-The TPC data sets used in the benchmark are generated with the DuckDB [tpch extension]({% link docs/preview/extensions/tpch.md %}).
+The TPC data sets used in the benchmark are generated with the DuckDB [tpch extension]({% link docs/preview/core_extensions/tpch.md %}).
 
 ## A Note on Benchmarks
 

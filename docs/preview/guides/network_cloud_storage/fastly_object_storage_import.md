@@ -7,7 +7,7 @@ title: Fastly Object Storage Import
 
 For Fastly Object Storage, the [S3 Compatibility API](https://docs.fastly.com/products/object-storage) allows you to use DuckDB's S3 support to read and write from Fastly buckets.
 
-This requires the [`httpfs` extension]({% link docs/preview/extensions/httpfs/overview.md %}), which can be installed using the `INSTALL` SQL command. This only needs to be run once.
+This requires the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}), which can be installed using the `INSTALL` SQL command. This only needs to be run once.
 
 ## Credentials and Configuration
 

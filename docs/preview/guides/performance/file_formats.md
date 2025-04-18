@@ -26,7 +26,7 @@ When deciding on whether to query these files directly or to first load them to 
 
 #### Microbenchmark: Running TPC-H on a DuckDB Database vs. Parquet
 
-The queries on the [TPC-H benchmark]({% link docs/preview/extensions/tpch.md %}) run approximately 1.1-5.0× slower on Parquet files than on a DuckDB database.
+The queries on the [TPC-H benchmark]({% link docs/preview/core_extensions/tpch.md %}) run approximately 1.1-5.0× slower on Parquet files than on a DuckDB database.
 
 > Bestpractice If you have the storage space available, and have a join-heavy workload and/or plan to run many queries on the same dataset, load the Parquet files into the database first. The compression algorithm and the row group sizes in the Parquet files have a large effect on performance: study these using the [`parquet_metadata` function]({% link docs/preview/data/parquet/metadata.md %}#parquet-metadata).
 

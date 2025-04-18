@@ -31,7 +31,7 @@ FROM delta_scan('file:///some/path/on/local/machine');
 
 ### Reading from an S3 Bucket
 
-To scan a Delta table in an [S3 bucket]({% link docs/preview/extensions/httpfs/s3api.md %}), run:
+To scan a Delta table in an [S3 bucket]({% link docs/preview/core_extensions/httpfs/s3api.md %}), run:
 
 ```sql
 SELECT *
@@ -62,7 +62,7 @@ FROM delta_scan('s3://some/public/table/in/my-region');
 
 ### Reading from Azure Blob Storage
 
-To scan a Delta table in an [Azure Blob Storage bucket]({% link docs/preview/extensions/azure.md %}#azure-blob-storage), run:
+To scan a Delta table in an [Azure Blob Storage bucket]({% link docs/preview/core_extensions/azure.md %}#azure-blob-storage), run:
 
 ```sql
 SELECT *

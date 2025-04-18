@@ -69,7 +69,7 @@ Read multiple Parquet files from a folder:
 duckdb.read_parquet("folder/*.parquet")
 ```
 
-Read a Parquet file over [https]({% link docs/preview/extensions/httpfs/overview.md %}):
+Read a Parquet file over [https]({% link docs/preview/core_extensions/httpfs/overview.md %}):
 
 ```python
 duckdb.read_parquet("https://some.url/some_file.parquet")

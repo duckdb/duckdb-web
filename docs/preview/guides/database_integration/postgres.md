@@ -3,7 +3,7 @@ layout: docu
 title: PostgreSQL Import
 ---
 
-To run a query directly on a running PostgreSQL database, the [`postgres` extension]({% link docs/preview/extensions/postgres.md %}) is required.
+To run a query directly on a running PostgreSQL database, the [`postgres` extension]({% link docs/preview/core_extensions/postgres.md %}) is required.
 
 ## Installation and Loading
 
@@ -53,4 +53,4 @@ USE test;
 SHOW TABLES;
 ```
 
-For more information see the [PostgreSQL extension documentation]({% link docs/preview/extensions/postgres.md %}).
+For more information see the [PostgreSQL extension documentation]({% link docs/preview/core_extensions/postgres.md %}).
