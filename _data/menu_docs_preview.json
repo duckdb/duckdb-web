@@ -1031,6 +1031,10 @@
               "url": "delta"
             },
             {
+              "page": "Encodings",
+              "url": "encodings"
+            },
+            {
               "page": "Excel",
               "url": "excel"
             },
