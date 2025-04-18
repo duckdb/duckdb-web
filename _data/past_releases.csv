@@ -1,4 +1,5 @@
 release_date,version_number,codename,duck_species_primary,duck_species_secondary,duck_wikipage,blog_post
+2025-05-07,1.3.0,CODENAME,LATIN,ENGLISH,WIKI,https://duckdb.org/2025/05/07/announcing-duckdb-130
 2025-04-08,1.2.2,,,,,
 2025-03-05,1.2.1,,,,,
 2025-02-05,1.2.0,Histrionicus,Histrionicus histrionicus,Harlequin duck,https://en.wikipedia.org/wiki/Harlequin_duck,https://duckdb.org/2025/02/05/announcing-duckdb-120
