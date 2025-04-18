@@ -6,7 +6,7 @@ title: Excel Extension
 
 The `excel` extension provides functions to format numbers per Excel's formatting rules by wrapping the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), but as of DuckDB 1.2 also provides functionality to read and write Excel (`.xlsx`) files. However, `.xls` files are not supported.
 
-Previously, reading and writing Excel files was handled through the [`spatial` extension]({% link docs/preview/extensions/spatial/overview.md %}), which coincidentally included support for XLSX files through one of its dependencies, but this capability may be removed from the spatial extension in the future. Additionally, the `excel` extension is more efficient and provides more control over the import/export process. See the [Excel Import]({% link docs/preview/guides/file_formats/excel_import.md %}) and [Excel Export]({% link docs/preview/guides/file_formats/excel_export.md %}) pages for instructions.
+Previously, reading and writing Excel files was handled through the [`spatial` extension]({% link docs/preview/core_extensions/spatial/overview.md %}), which coincidentally included support for XLSX files through one of its dependencies, but this capability may be removed from the spatial extension in the future. Additionally, the `excel` extension is more efficient and provides more control over the import/export process. See the [Excel Import]({% link docs/preview/guides/file_formats/excel_import.md %}) and [Excel Export]({% link docs/preview/guides/file_formats/excel_export.md %}) pages for instructions.
 
 ## Installing and Loading
 

@@ -3,9 +3,9 @@ layout: docu
 title: GDAL Integration
 ---
 
-The spatial extension integrates the [GDAL](https://gdal.org/en/latest/) translator library to read and write spatial data from a variety of geospatial vector file formats. See the documentation for the [`st_read` table function]({% link docs/preview/extensions/spatial/functions.md %}#st_read) for how to make use of this in practice.
+The spatial extension integrates the [GDAL](https://gdal.org/en/latest/) translator library to read and write spatial data from a variety of geospatial vector file formats. See the documentation for the [`st_read` table function]({% link docs/preview/core_extensions/spatial/functions.md %}#st_read) for how to make use of this in practice.
 
-In order to spare users from having to setup and install additional dependencies on their system, the spatial extension bundles its own copy of the GDAL library. This also means that spatial's version of GDAL may not be the latest version available or provide support for all of the file formats that a system-wide GDAL installation otherwise would. Refer to the section on the [`st_drivers` table function]({% link docs/preview/extensions/spatial/functions.md %}#st_drivers) to inspect which GDAL drivers are currently available.
+In order to spare users from having to setup and install additional dependencies on their system, the spatial extension bundles its own copy of the GDAL library. This also means that spatial's version of GDAL may not be the latest version available or provide support for all of the file formats that a system-wide GDAL installation otherwise would. Refer to the section on the [`st_drivers` table function]({% link docs/preview/core_extensions/spatial/functions.md %}#st_drivers) to inspect which GDAL drivers are currently available.
 
 ## GDAL Based `COPY` Function
 

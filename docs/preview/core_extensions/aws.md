@@ -4,11 +4,11 @@ layout: docu
 title: AWS Extension
 ---
 
-The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities]({% link docs/preview/extensions/httpfs/overview.md %}#s3-api), using the AWS SDK.
+The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities]({% link docs/preview/core_extensions/httpfs/overview.md %}#s3-api), using the AWS SDK.
 
 > Warning In most cases, you will not need to explicitly interact with the `aws` extension.
 > It will automatically be invoked whenever you use DuckDB's [S3 Secret functionality]({% link docs/preview/sql/statements/create_secret.md %}).
-> See the [`httpfs` extension's S3 capabilities]({% link docs/preview/extensions/httpfs/overview.md %}#s3) for instructions.
+> See the [`httpfs` extension's S3 capabilities]({% link docs/preview/core_extensions/httpfs/overview.md %}#s3) for instructions.
 
 ## Installing and Loading
 
@@ -41,14 +41,14 @@ CREATE PERSISTENT SECRET aws_credential_chain (
 );
 ```
 
-For a full list of secrets available through this extensions, see the [`httpfs` extension's S3 secrets page]({% link docs/preview/extensions/httpfs/overview.md %}#s3).
+For a full list of secrets available through this extensions, see the [`httpfs` extension's S3 secrets page]({% link docs/preview/core_extensions/httpfs/overview.md %}#s3).
 
 ## Legacy Features
 
 > Deprecated The `load_aws_credentials` function is deprecated.
 
 Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/preview/sql/statements/create_secret.md %}), to load the credentials automatically, the AWS extension provided
-a special function to load the AWS credentials in the [legacy authentication method]({% link docs/preview/extensions/httpfs/s3api_legacy_authentication.md %}).
+a special function to load the AWS credentials in the [legacy authentication method]({% link docs/preview/core_extensions/httpfs/s3api_legacy_authentication.md %}).
 
 | Function | Type | Description |
 |---|---|-------|

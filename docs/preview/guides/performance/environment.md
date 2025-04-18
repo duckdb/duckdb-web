@@ -88,4 +88,4 @@ Therefore, it's recommended to use a Linux distribution with glibc for performan
 
 ## Memory Allocator
 
-If you have a many-core CPU running on a system where DuckDB ships with [`jemalloc`]({% link docs/preview/extensions/jemalloc.md %}) as the default memory allocator, consider [enabling the allocator's background threads]({% link docs/preview/extensions/jemalloc.md %}#background-threads).
+If you have a many-core CPU running on a system where DuckDB ships with [`jemalloc`]({% link docs/preview/core_extensions/jemalloc.md %}) as the default memory allocator, consider [enabling the allocator's background threads]({% link docs/preview/core_extensions/jemalloc.md %}#background-threads).

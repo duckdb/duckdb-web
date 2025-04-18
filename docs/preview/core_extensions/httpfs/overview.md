@@ -20,8 +20,8 @@ LOAD httpfs;
 
 ## HTTP(S)
 
-The `httpfs` extension supports connecting to [HTTP(S) endpoints]({% link docs/preview/extensions/httpfs/https.md %}).
+The `httpfs` extension supports connecting to [HTTP(S) endpoints]({% link docs/preview/core_extensions/httpfs/https.md %}).
 
 ## S3 API
 
-The `httpfs` extension supports connecting to [S3 API endpoints]({% link docs/preview/extensions/httpfs/s3api.md %}).
+The `httpfs` extension supports connecting to [S3 API endpoints]({% link docs/preview/core_extensions/httpfs/s3api.md %}).

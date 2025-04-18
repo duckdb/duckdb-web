@@ -4,7 +4,7 @@ title: S3 Express One
 ---
 
 In late 2023, AWS [announced](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-s3-express-one-zone-storage-class/) the [S3 Express One Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-one-zone.html), a high-speed variant of traditional S3 buckets.
-DuckDB can read S3 Express One buckets using the [`httpfs` extension]({% link docs/preview/extensions/httpfs/overview.md %}).
+DuckDB can read S3 Express One buckets using the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}).
 
 ## Credentials and Configuration
 

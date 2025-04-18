@@ -129,4 +129,4 @@ SELECT * FROM read_xlsx('test_excel.xlsx', ignore_errors = true);
 ## See Also
 
 DuckDB can also [export Excel files]({% link docs/preview/guides/file_formats/excel_export.md %}).
-For additional details on Excel support, see the [excel extension page]({% link docs/preview/extensions/excel.md %}).
+For additional details on Excel support, see the [excel extension page]({% link docs/preview/core_extensions/excel.md %}).

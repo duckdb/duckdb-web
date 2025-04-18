@@ -22,9 +22,9 @@ The following table shows which parts of the S3 API are required for each `httpf
 
 The preferred way to configure and authenticate to S3 endpoints is to use [secrets]({% link docs/preview/sql/statements/create_secret.md %}). Multiple secret providers are available.
 
-> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/preview/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API]({% link docs/preview/extensions/httpfs/s3api_legacy_authentication.md %}).
+> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/preview/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API]({% link docs/preview/core_extensions/httpfs/s3api_legacy_authentication.md %}).
 
-To migrate from the [deprecated S3 API]({% link docs/preview/extensions/httpfs/s3api_legacy_authentication.md %}), use a defined secret with a profile.
+To migrate from the [deprecated S3 API]({% link docs/preview/core_extensions/httpfs/s3api_legacy_authentication.md %}), use a defined secret with a profile.
 See the [“Loading a Secret Based on a Profile” section](#loading-a-secret-based-on-a-profile).
 
 ### `CONFIG` Provider
@@ -105,7 +105,7 @@ CREATE OR REPLACE SECRET secret (
 );
 ```
 
-This approach is equivalent to the [deprecated S3 API's]({% link docs/preview/extensions/httpfs/s3api_legacy_authentication.md %})'s method `load_aws_credentials('⟨my_profile⟩')`.
+This approach is equivalent to the [deprecated S3 API's]({% link docs/preview/core_extensions/httpfs/s3api_legacy_authentication.md %})'s method `load_aws_credentials('⟨my_profile⟩')`.
 
 ### Overview of S3 Secret Parameters
 
@@ -191,7 +191,7 @@ FROM 's3://⟨bucket_name⟩/⟨filename⟩.⟨extension⟩';
 
 ### Partial Reading
 
-The `httpfs` extension supports [partial reading]({% link docs/preview/extensions/httpfs/https.md %}#partial-reading) from S3 buckets.
+The `httpfs` extension supports [partial reading]({% link docs/preview/core_extensions/httpfs/https.md %}#partial-reading) from S3 buckets.
 
 ### Reading Multiple Files
 

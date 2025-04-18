@@ -8,7 +8,7 @@ Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/pr
 > Warning This page describes a legacy method to store secrets as DuckDB settings.
 > This increases the risk of accidentally leaking secrets (e.g., by printing their values).
 > Therefore, avoid using these methods for storing secrets.
-> The recommended way to configuration and authentication of S3 endpoints is to use [secrets]({% link docs/preview/extensions/httpfs/s3api.md %}#configuration-and-authentication).
+> The recommended way to configuration and authentication of S3 endpoints is to use [secrets]({% link docs/preview/core_extensions/httpfs/s3api.md %}#configuration-and-authentication).
 
 ## Legacy Authentication Scheme
 
@@ -51,7 +51,7 @@ Alternatively, temporary S3 credentials are also supported. They require setting
 SET s3_session_token = '⟨aws_session_token⟩';
 ```
 
-The [`aws` extension]({% link docs/preview/extensions/aws.md %}) allows for loading AWS credentials.
+The [`aws` extension]({% link docs/preview/core_extensions/aws.md %}) allows for loading AWS credentials.
 
 ## Per-Request Configuration
 

@@ -121,7 +121,7 @@ CREATE TABLE nums AS
     FROM range(0, 3) t(i);
 ```
 
-This syntax can be used in combination with the [CSV reader]({% link docs/preview/data/csv/overview.md %}), the shorthand to read directly from CSV files without specifying a function, the [`FROM`-first syntax]({% link docs/preview/sql/query_syntax/from.md %}), and the [HTTP(S) support]({% link docs/preview/extensions/httpfs/https.md %}), yielding concise SQL commands such as the following:
+This syntax can be used in combination with the [CSV reader]({% link docs/preview/data/csv/overview.md %}), the shorthand to read directly from CSV files without specifying a function, the [`FROM`-first syntax]({% link docs/preview/sql/query_syntax/from.md %}), and the [HTTP(S) support]({% link docs/preview/core_extensions/httpfs/https.md %}), yielding concise SQL commands such as the following:
 
 ```sql
 CREATE TABLE flights AS

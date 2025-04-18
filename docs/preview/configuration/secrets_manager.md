@@ -15,14 +15,14 @@ Currently, the following secret types are available:
 
 | Secret type   | Service / protocol    | Extension                                                     |
 |---------------|-----------------------|---------------------------------------------------------------|
-| `azure`       | Azure Blob Storage    | [`azure`]({% link docs/preview/extensions/azure.md %})                |
-| `gcs`         | Google Cloud Storage  | [`httpfs`]({% link docs/preview/extensions/httpfs/s3api.md %})        |
-| `http`        | HTTP and HTTPS        | [`httpfs`]({% link docs/preview/extensions/httpfs/https.md %})        |
-| `huggingface` | Hugging Face          | [`httpfs`]({% link docs/preview/extensions/httpfs/hugging_face.md %}) |
-| `mysql`       | MySQL                 | [`mysql`]({% link docs/preview/extensions/mysql.md %})                |
-| `postgres`    | PostgreSQL            | [`postgres`]({% link docs/preview/extensions/postgres.md %})          |
-| `r2`          | Cloudflare R2         | [`httpfs`]({% link docs/preview/extensions/httpfs/s3api.md %})        |
-| `s3`          | AWS S3                | [`httpfs`]({% link docs/preview/extensions/httpfs/s3api.md %})        |
+| `azure`       | Azure Blob Storage    | [`azure`]({% link docs/preview/core_extensions/azure.md %})                |
+| `gcs`         | Google Cloud Storage  | [`httpfs`]({% link docs/preview/core_extensions/httpfs/s3api.md %})        |
+| `http`        | HTTP and HTTPS        | [`httpfs`]({% link docs/preview/core_extensions/httpfs/https.md %})        |
+| `huggingface` | Hugging Face          | [`httpfs`]({% link docs/preview/core_extensions/httpfs/hugging_face.md %}) |
+| `mysql`       | MySQL                 | [`mysql`]({% link docs/preview/core_extensions/mysql.md %})                |
+| `postgres`    | PostgreSQL            | [`postgres`]({% link docs/preview/core_extensions/postgres.md %})          |
+| `r2`          | Cloudflare R2         | [`httpfs`]({% link docs/preview/core_extensions/httpfs/s3api.md %})        |
+| `s3`          | AWS S3                | [`httpfs`]({% link docs/preview/core_extensions/httpfs/s3api.md %})        |
 
 For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
@@ -33,7 +33,7 @@ Secrets can be **temporary** or **persistent**. Temporary secrets are used by de
 
 ### Secret Providers
 
-To create a secret, a **Secret Provider** needs to be used. A Secret Provider is a mechanism through which a secret is generated. To illustrate this, for the `S3`, `GCS`, `R2`, and `AZURE` secret types, DuckDB currently supports two providers: `CONFIG` and `credential_chain`. The `CONFIG` provider requires the user to pass all configuration information into the `CREATE SECRET`, whereas the `credential_chain` provider will automatically try to fetch credentials. When no Secret Provider is specified, the `CONFIG` provider is used. For more details on how to create secrets using different providers check out the respective pages on [httpfs]({% link docs/preview/extensions/httpfs/overview.md %}#configuration-and-authentication-using-secrets) and [azure]({% link docs/preview/extensions/azure.md %}#authentication-with-secret).
+To create a secret, a **Secret Provider** needs to be used. A Secret Provider is a mechanism through which a secret is generated. To illustrate this, for the `S3`, `GCS`, `R2`, and `AZURE` secret types, DuckDB currently supports two providers: `CONFIG` and `credential_chain`. The `CONFIG` provider requires the user to pass all configuration information into the `CREATE SECRET`, whereas the `credential_chain` provider will automatically try to fetch credentials. When no Secret Provider is specified, the `CONFIG` provider is used. For more details on how to create secrets using different providers check out the respective pages on [httpfs]({% link docs/preview/core_extensions/httpfs/overview.md %}#configuration-and-authentication-using-secrets) and [azure]({% link docs/preview/core_extensions/azure.md %}#authentication-with-secret).
 
 ### Temporary Secrets
 

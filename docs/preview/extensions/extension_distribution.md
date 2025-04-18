@@ -37,7 +37,7 @@ By default, DuckDB uses its built-in public keys to verify the integrity of exte
 All core and community extensions are signed by the DuckDB team.
 
 Signing the extension simplifies their distribution, this is why they can be distributed over HTTP without the need for HTTPS,
-which is itself is supported through an extension ([`httpfs`]({% link docs/preview/extensions/httpfs/overview.md %})).
+which is itself is supported through an extension ([`httpfs`]({% link docs/preview/core_extensions/httpfs/overview.md %})).
 
 ### Unsigned Extensions
 
@@ -101,5 +101,5 @@ INSTALL icu FROM '⟨custom_repository⟩';
 
 The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
 
-If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/preview/extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/preview/extensions/overview.md %}#autoloading-extensions)
+If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/preview/extensions/overview.md %}#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.

@@ -1009,7 +1009,13 @@
             {
               "page": "Troubleshooting of Extensions",
               "url": "troubleshooting"
-            },
+            }
+          ]
+        },
+        {
+          "page": "Core Extensions",
+          "slug": "core_extensions",
+          "subfolderitems": [
             {
               "page": "AutoComplete",
               "url": "autocomplete"
