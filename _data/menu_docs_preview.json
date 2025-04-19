@@ -983,14 +983,6 @@
               "url": "overview"
             },
             {
-              "page": "Core Extensions",
-              "url": "core_extensions"
-            },
-            {
-              "page": "Community Extensions",
-              "url": "community_extensions"
-            },
-            {
               "page": "Installing Extensions",
               "url": "installing_extensions"
             },
