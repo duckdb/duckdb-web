@@ -39,13 +39,9 @@ docs:
 
 
   extended_description: |
-    ## About SheetReader
-
     `sheetreader` is a DuckDB extension that allows reading XLSX files into DuckDB tables with SheetReader, our blazingly fast XLSX parser (https://github.com/polydbms/sheetreader-core).
 
-    ## Usage
-
-    ### Parameters
+    #### Parameters
 
     | Name | Description | Type | Default |
     |:----|:-----------|:----:|:-------|
@@ -58,7 +54,7 @@ docs:
     | `coerce_to_string` | Coerce all cells in column of type `VARCHAR` to string (i.e. `VARCHAR`). | `BOOLEAN` | `false` |
     | `force_types` | Use `types` even if they are not compatible with types determined by first/second row. <br> Cells, that are not of the column type, are set to `NULL` or coerced to string, if option is set. | `BOOLEAN` | `false` |
 
-    ## More Information
+    #### More Information
 
     SheetReader was published in the [Information Systems Journal](https://www.sciencedirect.com/science/article/abs/pii/S0306437923000194)
 
@@ -81,10 +77,10 @@ docs:
     }
     ```
 
-extension_star_count: 48
-extension_star_count_pretty: 48
-extension_download_count: 530
-extension_download_count_pretty: 530
+extension_star_count: 50
+extension_star_count_pretty: 50
+extension_download_count: 520
+extension_download_count_pretty: 520
 image: '/images/community_extensions/social_preview/preview_community_extension_sheetreader.png'
 layout: community_extension_doc
 ---
