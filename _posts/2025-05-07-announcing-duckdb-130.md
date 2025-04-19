@@ -30,6 +30,7 @@ Now that all mainstream distributions use [glibc 2.28](https://lists.gnu.org/arc
 
 ### New Feature 1
 
+[UUIDv7]({% link docs/preview/sql/data_types/numeric.md %}#uuidv7).
 
 
 ### New Feature 2
