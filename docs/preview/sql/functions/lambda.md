@@ -19,11 +19,11 @@ For example, the following are all valid lambda functions:
 
 | Name | Description |
 |:--|:-------|
-| [`list_transform(list, lambda(x))`](#list_transformlist-lambda) | Returns a list that is the result of applying the lambda function to each element of the input list. The return type is defined by the return type of the lambda function. See [`list_transform` examples](#list_transform-examples). |
-| [`list_filter(list, lambda(x))`](#list_filterlist-lambda) | Constructs a list from those elements of the input list for which the lambda function returns `true`. DuckDB must be able to cast the lambda function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples](#list_filter-examples). |
-| [`list_reduce(list, lambda(x, y)`](#list_reducelist-lambda) | Reduces all elements of the input list into a single scalar value by executing the lambda function on a running result and the next list element. The list must have at least one element – the use of an initial accumulator value is currently not supported. See [`list_reduce` examples](#list_reduce-examples). |
+| [`list_transform(list, lambda(x))`](#list_transformlist-lambdax) | Returns a list that is the result of applying the lambda function to each element of the input list. The return type is defined by the return type of the lambda function. See [`list_transform` examples](#list_transform-examples). |
+| [`list_filter(list, lambda(x))`](#list_filterlist-lambdax) | Constructs a list from those elements of the input list for which the lambda function returns `true`. DuckDB must be able to cast the lambda function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples](#list_filter-examples). |
+| [`list_reduce(list, lambda(x, y)[, initial_value]`](#list_reducelist-lambdax-y-initial_value) | Reduces all elements of the input list into a single scalar value by executing the lambda function on a running result and the next list element. The lambda function has an optional `initial_value` argument. See [`list_reduce` examples](#list_reduce-examples) or details. |
 
-### `list_transform(list, lambda)`
+### `list_transform(list, lambda(x))`
 
 <div class="nostroke_table"></div>
 
@@ -32,7 +32,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
 
-### `list_filter(list, lambda)`
+### `list_filter(list, lambda(x))`
 
 <div class="nostroke_table"></div>
 
@@ -41,13 +41,13 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5, 6]` |
 | **Aliases** | `array_filter`, `filter` |
 
-### `list_reduce(list, lambda)`
+### `list_reduce(list, lambda(x, y)[, initial_value]`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Reduces all elements of the input list into a single scalar value by executing the lambda function on a running result and the next list element. The list must have at least one element – the use of an initial accumulator value is currently not supported. See [`list_reduce` examples](#list_reduce-examples). |
-| **Example** | `list_reduce([4, 5, 6], (acc, x) -> acc + x)` |
-| **Result** | `15` |
+| **Description** | Reduces all elements of the input list into a single scalar value by executing the lambda function on a running result and the next list element. The lambda function has an optional `initial_value` argument. See [`list_reduce` examples](#list_reduce-examples) or details. |
+| **Example** | `list_reduce([1, 2, 3], (x, y) -> x + y, 100);` |
+| **Result** | `106` |
 | **Aliases** | `array_reduce`, `reduce` |
 
 ## Nesting Lambda Functions
@@ -215,6 +215,26 @@ SELECT list_reduce(['DuckDB', 'is', 'awesome'], (acc, x) -> concat(acc, ' ', x))
 
 ```text
 DuckDB is awesome
+```
+
+Concatenate elements with the index without an initial value:
+
+```sql
+SELECT list_reduce(['a', 'b', 'c', 'd'], (x, y, i) -> x || ' - ' || CAST(i AS VARCHAR) || ' - ' || y);
+```
+
+```text
+a - 2 - b - 3 - c - 4 - d
+```
+
+Concatenate elements with the index with an initial value:
+
+```sql
+SELECT list_reduce(['a', 'b', 'c', 'd'], (x, y, i) -> x || ' - ' || CAST(i AS VARCHAR) || ' - ' || y, 'INITIAL');
+```
+
+```text
+INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
 ```
 
 ## Limitations
