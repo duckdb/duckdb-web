@@ -74,10 +74,10 @@ docs:
   
     > This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 184
-extension_star_count_pretty: 184
-extension_download_count: 827
-extension_download_count_pretty: 827
+extension_star_count: 185
+extension_star_count_pretty: 185
+extension_download_count: 905
+extension_download_count_pretty: 905
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---
