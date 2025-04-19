@@ -24,7 +24,7 @@ The functions below are difficult to categorize into specific function types and
 | [`error(message)`](#errormessage) | Throws the given error `message`. |
 | [`equi_width_bins(min, max, bincount, nice := false)`](#equi_width_binsmin-max-bincount-nice--false) | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/preview/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max`, and `bincount` may be adjusted to produce more aesthetically pleasing results. |
 | [`force_checkpoint(database)`](#force_checkpointdatabase) | Synchronize WAL with file for (optional) database interrupting transactions. |
-| [`gen_random_uuid()`](#gen_random_uuid) | Alias of `uuid`. Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
+| [`gen_random_uuid()`](#gen_random_uuid) | Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`getenv(var)`](#getenvvar) | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/preview/clients/cli/overview.md %}). |
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. |
 | [`icu_sort_key(string, collator)`](#icu_sort_keystring-collator) | Surrogate [sort key](https://unicode-org.github.io/icu/userguide/collation/architecture.html#sort-keys) used to sort special characters according to the specific locale. Collator parameter is optional. Only available when the ICU extension is installed. |
@@ -48,7 +48,11 @@ The functions below are difficult to categorize into specific function types and
 | [`stats(expression)`](#statsexpression) | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression. |
 | [`txid_current()`](#txid_current) | Returns the current transaction's identifier, a `BIGINT` value. It will assign a new one if the current transaction does not have one already. |
 | [`typeof(expression)`](#typeofexpression) | Returns the name of the data type of the result of the expression. |
-| [`uuid()`](#uuid) | Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
+| [`uuid()`](#uuid) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
+| [`uuidv4()`](#uuidv4) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
+| [`uuidv7()`](#uuidv7) | Return a random UUIDv7 similar to this: `81964ebe-00b1-7e1d-b0f9-43c29b6fb8f5`. |
+| [`uuid_extract_timestamp(uuidv7)`](#uuid_extract_timestampuuidv7) | Extracts timestamp from a UUIDv7 value. |
+| [`uuid_extract_version(uuid)`](#uuid_extract_versionuuid) | Extracts UUID version (`4` or `7`). |
 | [`version()`](#version) | Return the currently active version of DuckDB in this format. |
 
 #### `alias(column)`
@@ -158,7 +162,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of `uuid`. Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
+| **Description** | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | **Example** | `gen_random_uuid()` |
 | **Result** | various |
 
@@ -348,9 +352,33 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
+| **Description** | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | **Example** | `uuid()` |
 | **Result** | various |
+
+#### `uuidv4()`
+
+| **Description** | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
+| **Example** | `uuidv4()` |
+| **Result** | various |
+
+#### `uuidv7()`
+
+| **Description** | Return a random UUIDv7 similar to this: `81964ebe-00b1-7e1d-b0f9-43c29b6fb8f5`. |
+| **Example** | `uuidv7()` |
+| **Result** | various |
+
+#### `uuid_extract_timestamp(uuidv7)`
+
+| **Description** | Extracts timestamp from a UUIDv7 value. |
+| **Example** | `uuid_extract_timestamp(uuidv7())` |
+| **Result** | `2025-04-19 15:51:20.07+00` |
+
+#### `uuid_extract_version(uuid)`
+
+| **Description** | Extracts UUID version (`4` or `7`). |
+| **Example** | `uuid_extract_version(uuidv7())` |
+| **Result** | `7` |
 
 #### `version()`
 
