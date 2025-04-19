@@ -88,6 +88,19 @@ CREATE OR REPLACE SECRET secret (
 );
 ```
 
+### Auto-Refresh
+
+Some AWS endpoints require periodic refreshing of the credentials.
+This can be specified with the `REFRESH auto` option:
+
+```sql
+CREATE SECRET env_test (
+    TYPE s3,
+    PROVIDER credential_chain,
+    REFRESH auto
+);
+```
+
 ## Legacy Features
 
 > Deprecated The `load_aws_credentials` function is deprecated.
