@@ -200,6 +200,18 @@ Copy the result of a query to the JSON file `query.json`:
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT json, ARRAY true);
 ```
 
+Return the files and their column statistics that were written as part of the `COPY` statement:
+
+```sql
+COPY (SELECT l_orderkey, l_comment FROM lineitem) TO 'lineitem_part.parquet' (RETURN_STATS);
+```
+
+|       filename        | count  | file_size_bytes | footer_size_bytes |                                                                                   column_statistics                                                                                    | partition_keys |
+|-----------------------|-------:|----------------:|------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| lineitem_part.parquet | 600572 | 8579141         | 1445              | {'"l_comment"'={column_size_bytes=7642227, max=zzle. slyly, min=' Tiresias above the blit', null_count=0}, '"l_orderkey"'={column_size_bytes=935457, max=600000, min=1, null_count=0}} | NULL           |
+
+Note: for nested columns (e.g. structs) the column statistics are defined for each part. For example, if we have a column `name STRUCT(field1 INTEGER, field2 INTEGER)` the column statistics will have stats for `name.field1` and `name.field2`.
+
 ### `COPY ... TO` Options
 
 Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes.
@@ -213,14 +225,15 @@ With few exceptions, the below options are applicable to all formats written wit
 | `FORMAT` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Vanilla DuckDB provides `CSV`, `PARQUET` and `JSON` but additional copy functions can be added by [`extensions`]({% link docs/preview/extensions/overview.md %}). | `VARCHAR` | `auto` |
 | `USE_TMP_FILE` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | `BOOL` | `auto` |
 | `OVERWRITE_OR_IGNORE` | Whether or not to allow overwriting files if they already exist. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
-| `OVERWRITE` | When set, all existing files inside targeted directories will be removed (not supported on remote filesystems). Only has an effect when used with `partition_by`. | `BOOL` | `false` |
-| `APPEND` | When set, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
+| `OVERWRITE` | When `true`, all existing files inside targeted directories will be removed (not supported on remote filesystems). Only has an effect when used with `partition_by`. | `BOOL` | `false` |
+| `APPEND` | When `true`, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
 | `FILENAME_PATTERN` | Set a pattern to use for the filename, can optionally contain `{uuid}` to be filled in with a generated UUID or `{id}` which is replaced by an incrementing index. Only has an effect when used with `partition_by`. | `VARCHAR` | `auto` |
 | `FILE_EXTENSION` | Set the file extension that should be assigned to the generated file(s). | `VARCHAR` | `auto` |
-| `PER_THREAD_OUTPUT` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
+| `PER_THREAD_OUTPUT` | When `true`, the `COPY` command generates one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
 | `FILE_SIZE_BYTES` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `PER_THREAD_OUTPUT`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `VARCHAR` or `BIGINT` | (empty) |
 | `PARTITION_BY` | The columns to partition by using a Hive partitioning scheme, see the [partitioned writes section]({% link docs/preview/data/partitioning/partitioned_writes.md %}). | `VARCHAR[]` | (empty) |
-| `RETURN_FILES` | Whether or not to include the created filepath(s) (as a `Files VARCHAR[]` column) in the query result. | `BOOL` | `false` |
+| `RETURN_FILES` | Whether or not to include the created filepath(s) (as a `files VARCHAR[]` column) in the query result. | `BOOL` | `false` |
+| `RETURN_STATS` | Whether or not to return the files and their column statistics that were written as part of the `COPY` statement. | `BOOL`| `false` |
 | `WRITE_PARTITION_COLUMNS` | Whether or not to write partition columns into files. Only has an effect when used with `partition_by`. | `BOOL` | `false` |
 
 ### Syntax
