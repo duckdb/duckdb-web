@@ -4,11 +4,11 @@ layout: docu
 title: AWS Extension
 ---
 
-The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities]({% link docs/preview/extensions/httpfs/overview.md %}#s3-api), using the AWS SDK.
+The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities]({% link docs/preview/core_extensions/httpfs/overview.md %}#s3-api), using the AWS SDK.
 
 ## Installing and Loading
 
-The `aws` extension will be transparently [autoloaded]({% link docs/preview/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+The `aws` extension will be transparently [autoloaded]({% link docs/preview/core_extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -16,7 +16,7 @@ INSTALL aws;
 LOAD aws;
 ```
 
-> In most cases, the `aws` extension works in conjunction with the [`httpfs` extension]({% link docs/preview/extensions/httpfs/overview.md %}.
+> In most cases, the `aws` extension works in conjunction with the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}.
 
 ## Configuration and Authentication
 
@@ -106,7 +106,7 @@ CREATE SECRET env_test (
 > Deprecated The `load_aws_credentials` function is deprecated.
 
 Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/preview/sql/statements/create_secret.md %}), to load the credentials automatically, the AWS extension provided
-a special function to load the AWS credentials in the [legacy authentication method]({% link docs/preview/extensions/httpfs/s3api_legacy_authentication.md %}).
+a special function to load the AWS credentials in the [legacy authentication method]({% link docs/preview/core_extensions/httpfs/s3api_legacy_authentication.md %}).
 
 | Function | Type | Description |
 |---|---|-------|
