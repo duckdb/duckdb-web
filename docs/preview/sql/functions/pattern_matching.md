@@ -23,12 +23,12 @@ If pattern does not contain percent signs or underscores, then the pattern only 
 Some examples:
 
 ```sql
-SELECT 'abc' LIKE 'abc'; -- true
-SELECT 'abc' LIKE 'a%' ; -- true
-SELECT 'abc' LIKE '_b_'; -- true
-SELECT 'abc' LIKE 'c';   -- false
-SELECT 'abc' LIKE 'c%' ; -- false
-SELECT 'abc' LIKE '%c';  -- true
+SELECT 'abc' LIKE 'abc';    -- true
+SELECT 'abc' LIKE 'a%' ;    -- true
+SELECT 'abc' LIKE '_b_';    -- true
+SELECT 'abc' LIKE 'c';      -- false
+SELECT 'abc' LIKE 'c%' ;    -- false
+SELECT 'abc' LIKE '%c';     -- true
 SELECT 'abc' NOT LIKE '%c'; -- false
 ```
 
@@ -63,12 +63,12 @@ There are also alternative characters that can be used as keywords in place of `
 
 <div class="monospace_table"></div>
 
-| `LIKE`-style | PostgreSQL-style |
-|:-------------|:-----------------|
-| `LIKE`       | `~~`             |
-| `NOT LIKE`   | `!~~`            |
-| `ILIKE`      | `~~*`            |
-| `NOT ILIKE`  | `!~~*`           |
+| PostgreSQL-style | `LIKE`-style |
+| :--------------- | :----------- |
+| `~~`             | `LIKE`       |
+| `!~~`            | `NOT LIKE`   |
+| `~~*`            | `ILIKE`      |
+| `!~~*`           | `NOT ILIKE`  |
 
 ## `SIMILAR TO`
 
@@ -89,9 +89,9 @@ SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 ```
 
 > In PostgreSQL, `~` is equivalent to `SIMILAR TO`
-and `!~` is equivalent to `NOT SIMILAR TO`.
-In DuckDB, these equivalences do not hold currently,
-see the [PostgreSQL compatibility page]({% link docs/preview/sql/dialect/postgresql_compatibility.md %}).
+> and `!~` is equivalent to `NOT SIMILAR TO`.
+> In DuckDB, these equivalences do not hold currently,
+> see the [PostgreSQL compatibility page]({% link docs/preview/sql/dialect/postgresql_compatibility.md %}).
 
 ## Globbing
 
@@ -138,7 +138,7 @@ SELECT NOT 'best.txt' GLOB '*.txt';        -- false
 Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 
 | GLOB-style | Symbolic-style |
-|:-----------|:---------------|
+| :--------- | :------------- |
 | `GLOB`     | `~~~`          |
 
 ### Glob Function to Find Filenames
@@ -154,8 +154,8 @@ SELECT * FROM glob('*');
 
 <div class="monospace_table"></div>
 
-|     file      |
-|---------------|
+| file          |
+| ------------- |
 | duckdb.exe    |
 | test.csv      |
 | test.json     |
@@ -176,8 +176,8 @@ SELECT * FROM glob('README.md');
 
 <div class="monospace_table"></div>
 
-|   file    |
-|-----------|
+| file      |
+| --------- |
 | README.md |
 
 However, the following query returns an empty result:
@@ -198,4 +198,12 @@ README.md
 
 ## Regular Expressions
 
-DuckDB's regex support is documented on the [Regular Expressions page]({% link docs/preview/sql/functions/regular_expressions.md %}).
+DuckDB's regular expression support is documented on the [Regular Expressions page]({% link docs/preview/sql/functions/regular_expressions.md %}).
+DuckDB supports some PostgreSQL-style operators for regular expression matching:
+
+| PostgreSQL-style | Equivalent expression                                                                                    |
+| :--------------- | :------------------------------------------------------------------------------------------------------- |
+| `~`              | [`regexp_full_match`]({% link docs/preview/sql/functions/char.md %}#regexp_full_matchstring-regex)       |
+| `!~`             | `NOT` [`regexp_full_match`]({% link docs/preview/sql/functions/char.md %}#regexp_full_matchstring-regex) |
+| `~*`             | (not supported)                                                                                          |
+| `!~*`            | (not supported)                                                                                          |
