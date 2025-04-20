@@ -1785,11 +1785,13 @@ function GenerateTableFunction(options) {
 function GenerateSubquery(options) {
 	return [
 		Sequence([
+			Optional(Keyword("LATERAL")),
 			Sequence([
 				Keyword("("),
 				Expression("select-node"),
 				Keyword(")")
-			])
+			]),
+			Optional(Expandable("table-alias", options, "table-alias", GenerateTableAlias), "skip")
 		])
 	]
 }
