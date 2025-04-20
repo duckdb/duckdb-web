@@ -49,12 +49,12 @@ PRAGMA tpch(4);
 ```
 
 | o_orderpriority | order_count |
-|-----------------|------------:|
-| 1-URGENT        | 10594       |
-| 2-HIGH          | 10476       |
-| 3-MEDIUM        | 10410       |
-| 4-NOT SPECIFIED | 10556       |
-| 5-LOW           | 10487       |
+| --------------- | ----------: |
+| 1-URGENT        |       10594 |
+| 2-HIGH          |       10476 |
+| 3-MEDIUM        |       10410 |
+| 4-NOT SPECIFIED |       10556 |
+| 5-LOW           |       10487 |
 
 ### Listing Queries
 
@@ -88,8 +88,8 @@ CALL dbgen(sf = 0);
 
 The data generator function `dbgen` has the following parameters:
 
-| Name | Type | Description |
-|--|--|------------|
+| Name        | Type       | Description                                                                                                                       |
+| ----------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `catalog`   | `VARCHAR`  | Target catalog                                                                                                                    |
 | `children`  | `UINTEGER` | Number of partitions                                                                                                              |
 | `overwrite` | `BOOLEAN`  | (Not used)                                                                                                                        |
@@ -113,15 +113,15 @@ Pre-generated DuckDB databases for TPC-H are available for download:
 ## Resource Usage of the Data Generator
 
 Generating TPC-H data sets for large scale factors takes a significant amount of time.
-Additionally, when the generation is done in a single step, it requires a large amount of memory.
+Additionally, _if the generation is performed in a single step,_ it requires a large amount of memory.
 The following table gives an estimate on the resources required to produce DuckDB database files containing the generated TPC-H data set using 128 threads.
 
-| Scale factor | Database size | Data generation time | Generator's memory usage |
-|-------------:|--------------:|---------------------:|-------------------------:|
-|          100 |         26 GB | 17 minutes           |                    71 GB |
-|          300 |         78 GB | 51 minutes           |                   211 GB |
-|        1,000 |        265 GB | 2 h 53 minutes       |                   647 GB |
-|        3,000 |        796 GB | 8 h 30 minutes       |                  1799 GB |
+| Scale factor | Database size | Generation time | Single-step generation's memory usage |
+| -----------: | ------------: | --------------: | ------------------------------------: |
+|          100 |         26 GB |      17 minutes |                                 71 GB |
+|          300 |         78 GB |      51 minutes |                                211 GB |
+|        1,000 |        265 GB |  2 h 53 minutes |                                647 GB |
+|        3,000 |        796 GB |  8 h 30 minutes |                               1799 GB |
 
 The numbers shown above were achieved by running the `dbgen` function in a single step, for example:
 
