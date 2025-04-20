@@ -167,7 +167,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 							{% if page.github_repository %}<li><a href="{{ page.github_repository }}">See the repository of this feature on GitHub</a></li>{% endif %}
 							{% if page.github_directory %}<li><a href="{{ page.github_directory }}">See the source code of this feature on GitHub</a></li>{% endif %}
 							<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&labels=issue%20found%20on%20page&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report content issue</a></li>
-							<li><a href="https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/{{ page.path }}" title="See Markdown">See this page as Markdown</a></li>
+							<li><a href="https://duckdb.org/{{ page.path }}" title="See Markdown">See this page as Markdown</a></li>
 							<li><a href="https://github.com/duckdb/duckdb-web/edit/main/{{ page.path }}" title="Go to GitHub">Edit this page on GitHub</a></li>
 						</ul>
 					</div>
