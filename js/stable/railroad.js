@@ -1702,7 +1702,6 @@ function GenerateJoinType(options) {
 			Keyword("INNER"),
 			Keyword("ANTI"),
 			Keyword("SEMI"),
-			Keyword("LATERAL"),
 			Sequence([
 				Choice(0, [Keyword("LEFT"), Keyword("RIGHT"), Keyword("FULL")]),
 				Optional(Keyword("OUTER"), "skip")
