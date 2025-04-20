@@ -304,7 +304,7 @@ where the value depends on all the values of the frame.
 Examples of such aggregates are `mode` and `quantile`,
 where each state may have to contain a copy of *all* the values seen so far.
 While segment trees *can* be used to implement moving versions of any combinable aggregate,
-this can be quite expensive for large, complex states -
+this can be quite expensive for large, complex states –
 and this was not the original goal of the algorithm.
 
 To solve this problem, we use the approach from Wesley and Xu's
@@ -353,7 +353,7 @@ Window functions are often closely associated with some special
 "[ordered set aggregates](https://www.postgresql.org/docs/current/functions-aggregate.html#FUNCTIONS-ORDEREDSET-TABLE)"
 defined by the SQL standard.
 Some databases implement these functions using the `Window` operator,
-but this is rather inefficient because sorting the data (an `O(N log N)` operation) is not required -
+but this is rather inefficient because sorting the data (an `O(N log N)` operation) is not required –
 it suffices to use
 Hoare's `O(N)`
 [`FIND`](https://courses.cs.vt.edu/~cs3114/Summer15/Notes/Supplemental/p321-hoare.pdf)
@@ -366,7 +366,7 @@ and `mode` regular aggregate functions, thereby avoiding using windowing entirel
 
 This architecture also means that any new aggregates we add
 can benefit from the existing windowing infrastructure.
-DuckDB is an open source project, and we welcome submissions of useful aggregate functions -
+DuckDB is an open source project, and we welcome submissions of useful aggregate functions –
 or you can create your own domain-specific ones in your own fork.
 At some point we hope to have a UDF architecture that will allow plug-in aggregates,
 and the simplicity and power of the interface will let these plugins leverage the notational

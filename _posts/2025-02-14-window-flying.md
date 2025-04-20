@@ -250,5 +250,5 @@ and we plan to investigate them.
 As you can see, windowing is a big hairy beast!
 There is also not a lot of published research on effective algorithms (I've linked to pretty much all of it),
 so we are often stuck making it up ourselves or falling back to extremely simple and slow approaches.
-But I hope that many of you will find something new and exciting in what we have been up to for the past 2-3 years -
+But I hope that many of you will find something new and exciting in what we have been up to for the past 2-3 years –
 and I will try to be more timely in blogging about future window improvements.
