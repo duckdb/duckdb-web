@@ -229,7 +229,13 @@ def get_function_data(categories: list[str]) -> list[DocFunction]:
     function_data: list[DocFunction] = [
         DocFunction(*func) for func in duckdb.sql(query).fetchall()
     ]
-    # apply overrides and add additional functions
+    function_data = apply_overrides(function_data, categories)
+    function_data = sort_function_data(function_data)
+    function_data = [apply_url_conversions(function) for function in function_data]
+    return function_data
+
+
+def apply_overrides(function_data: list[DocFunction], categories: list[str]):
     function_data = [
         func
         for func in function_data
@@ -242,7 +248,10 @@ def get_function_data(categories: list[str]) -> list[DocFunction]:
     function_data += [
         override for override in OVERRIDES if override.category in categories
     ]
-    # sort on: function_name, nr of arguments, argument names
+    return function_data
+
+
+def sort_function_data(function_data: list[DocFunction]):
     sorter: Callable[[DocFunction], str] = (
         lambda func: f"{func.name}-{len(func.parameters)}-{func.parameters}"
     )
@@ -260,26 +269,27 @@ def get_function_data(categories: list[str]) -> list[DocFunction]:
         ],
         key=sorter,
     )
-    function_data = function_data_1 + function_data_2 + function_data_3
-    # apply url conversions
-    for function in function_data:
-        for link_text in PAGE_LINKS:
-            if link_text in function.description:
-                if PAGE_LINKS[link_text].startswith('http'):
-                    # external link
-                    url = f"{PAGE_LINKS[link_text]}"
-                else:
-                    # internal link
-                    page, _, section = PAGE_LINKS[link_text].partition('#')
-                    url = ''
-                    if page:
-                        url = "{% " + f"link {page}" + " %}"
-                    if section:
-                        url += f"#{section}"
-                function.description = function.description.replace(
-                    link_text, f"[{link_text}]({url})"
-                )
-    return function_data
+    return function_data_1 + function_data_2 + function_data_3
+
+
+def apply_url_conversions(function: DocFunction):
+    for link_text in PAGE_LINKS:
+        if link_text in function.description:
+            if PAGE_LINKS[link_text].startswith('http'):
+                # external link
+                url = f"{PAGE_LINKS[link_text]}"
+            else:
+                # internal link
+                page, _, section = PAGE_LINKS[link_text].partition('#')
+                url = ''
+                if page:
+                    url = "{% " + f"link {page}" + " %}"
+                if section:
+                    url += f"#{section}"
+            function.description = function.description.replace(
+                link_text, f"[{link_text}]({url})"
+            )
+    return function
 
 
 def generate_docs_table(function_data: list[DocFunction]):
@@ -290,14 +300,15 @@ def generate_docs_table(function_data: list[DocFunction]):
             print(f"WARNING (skipping): '{func.name}' - no example is available")
             continue
         if func.name in BINARY_OPERATORS and len(func.parameters) == 2:
-            table_str += f"| [`{func.parameters[0]} {func.name} {func.parameters[1]}`](#{func.parameters[0]}-{func.name.lstrip('@*!^|pip3 list | grep duckdb').lower().replace(' ', '-')}-{func.parameters[1]}) | {func.description} |\n"
+            anchor = f"{func.parameters[0]}-{func.name.lstrip('@*!^|').lower().replace(' ', '-')}-{func.parameters[1]}"
+            table_str += f"| [`{func.parameters[0]} {func.name} {func.parameters[1]}`](#{anchor}) | {func.description} |\n"
         elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
             parameter_list = ":".join(func.parameters[1:])
             parameter_list_anchor = "".join(func.parameters)
             table_str += f"| [`{func.parameters[0]}[{parameter_list}]`](#{parameter_list_anchor}) | {func.description} |\n"
         else:
             parameter_list = ", ".join(func.parameters)
-            function_name_anchor = func.name.lstrip('@*!^')
+            function_name_anchor = func.name.lstrip('@*!^').lower()
             parameter_list_anchor = "-".join(func.parameters).lower().replace(' ', '-')
             table_str += f"| [`{func.name}({parameter_list}{', ...' if (func.is_variadic) else ''})`](#{function_name_anchor}{parameter_list_anchor}{'-' if (func.is_variadic) else ''}) | {func.description} |\n"
     table_str += "\n<!-- markdownlint-enable MD056 -->\n"
