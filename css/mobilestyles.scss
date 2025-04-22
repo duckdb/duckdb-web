@@ -287,6 +287,11 @@
 		}
 	}
 	
+	body.documentation.outdated main .wrap #main_content_wrap,
+	body.documentation.nightly main .wrap #main_content_wrap{
+		padding-top: 40px;
+	}
+	
 	header .headerline .headercontent .options .banner{
 		position: fixed;
 		width: auto;

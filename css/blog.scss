@@ -280,7 +280,7 @@ h1, h2, h3, h4, h5{
 					display: none;
 				}
 				.toc_menu{
-					height: calc(100vh - 100px);
+					height: auto;
 					overflow: auto;
 					-ms-overflow-style: none; 
 					scrollbar-width: none;
