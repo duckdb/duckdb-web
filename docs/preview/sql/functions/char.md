@@ -23,8 +23,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`array_extract(string, index)`](#array_extractstring-index) | Extracts a single character from a string using a (1-based) index. |
 | [`array_slice(list, begin, end)`](#array_slicelist-begin-end) | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | [`ascii(string)`](#asciistring) | Returns an integer that represents the Unicode code point of the first character of the `string`. |
-| [`bar(x, min, max)`](#barx-min-max) | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
-| [`bar(x, min, max, width)`](#barx-min-max-width) | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
+| [`bar(x, min, max[, width])`](#barx-min-max-width) | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
 | [`base64(blob)`](#base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`bin(string)`](#binstring) | Converts the `string` to binary representation. |
 | [`bit_length(string)`](#bit_lengthstring) | Number of bits in a `string`. |
@@ -230,15 +229,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `ascii('Ω')` |
 | **Result** | `937` |
 
-#### `bar(x, min, max)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
-| **Example** | `bar(5, 0, 20, 10)` |
-| **Result** | `██▌       ` |
-
-#### `bar(x, min, max, width)`
+#### `bar(x, min, max[, width])`
 
 <div class="nostroke_table"></div>
 

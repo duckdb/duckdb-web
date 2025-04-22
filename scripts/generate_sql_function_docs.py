@@ -16,6 +16,7 @@ class DocFunction:
     is_variadic: bool = False
     aliases: list[str] = field(default_factory=list)
     fixed_example_results: list[str] = field(default_factory=list)
+    nr_optional_arguments: int = 0
 
 
 DOC_VERSION = 'preview'
@@ -199,6 +200,18 @@ def get_function_blocks(
     return function_blocks_info
 
 
+def get_function_data(categories: list[str]) -> list[DocFunction]:
+    query = function_data_query(categories)
+    function_data: list[DocFunction] = [
+        DocFunction(*func) for func in duckdb.sql(query).fetchall()
+    ]
+    function_data = apply_overrides(function_data, categories)
+    function_data = sort_function_data(function_data)
+    function_data = prune_duplicates(function_data)
+    function_data = [apply_url_conversions(function) for function in function_data]
+    return function_data
+
+
 def function_data_query(categories: str) -> str:
     return f"""
 with categories as (select unnest({categories}) category)
@@ -222,17 +235,6 @@ from
 group by all
 order by all
 """
-
-
-def get_function_data(categories: list[str]) -> list[DocFunction]:
-    query = function_data_query(categories)
-    function_data: list[DocFunction] = [
-        DocFunction(*func) for func in duckdb.sql(query).fetchall()
-    ]
-    function_data = apply_overrides(function_data, categories)
-    function_data = sort_function_data(function_data)
-    function_data = [apply_url_conversions(function) for function in function_data]
-    return function_data
 
 
 def apply_overrides(function_data: list[DocFunction], categories: list[str]):
@@ -272,6 +274,23 @@ def sort_function_data(function_data: list[DocFunction]):
     return function_data_1 + function_data_2 + function_data_3
 
 
+# remove duplicates with optional parameters
+def prune_duplicates(function_data: list[DocFunction]):
+    for idx_func, func in enumerate(function_data):
+        if idx_func == 0:
+            continue
+        if (
+            func.name == function_data[idx_func - 1].name
+            and function_data[idx_func - 1].description == func.description
+            and function_data[idx_func - 1].parameters == func.parameters[:-1]
+        ):
+            func.nr_optional_arguments = (
+                function_data[idx_func - 1].nr_optional_arguments + 1
+            )
+            function_data[idx_func - 1].name = "DELETE_ME"
+    return [func for func in function_data if func.name != "DELETE_ME"]
+
+
 def apply_url_conversions(function: DocFunction):
     for link_text in PAGE_LINKS:
         if link_text in function.description:
@@ -299,18 +318,9 @@ def generate_docs_table(function_data: list[DocFunction]):
         if not func.examples:
             print(f"WARNING (skipping): '{func.name}' - no example is available")
             continue
-        if func.name in BINARY_OPERATORS and len(func.parameters) == 2:
-            anchor = f"{func.parameters[0]}-{func.name.lstrip('@*!^|').lower().replace(' ', '-')}-{func.parameters[1]}"
-            table_str += f"| [`{func.parameters[0]} {func.name} {func.parameters[1]}`](#{anchor}) | {func.description} |\n"
-        elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
-            parameter_list = ":".join(func.parameters[1:])
-            parameter_list_anchor = "".join(func.parameters)
-            table_str += f"| [`{func.parameters[0]}[{parameter_list}]`](#{parameter_list_anchor}) | {func.description} |\n"
-        else:
-            parameter_list = ", ".join(func.parameters)
-            function_name_anchor = func.name.lstrip('@*!^').lower()
-            parameter_list_anchor = "-".join(func.parameters).lower().replace(' ', '-')
-            table_str += f"| [`{func.name}({parameter_list}{', ...' if (func.is_variadic) else ''})`](#{function_name_anchor}{parameter_list_anchor}{'-' if (func.is_variadic) else ''}) | {func.description} |\n"
+        func_title = get_function_title(func)
+        anchor = get_anchor_from_title(func_title)
+        table_str += f"| [`{func_title}`](#{anchor}) | {func.description} |\n"
     table_str += "\n<!-- markdownlint-enable MD056 -->\n"
     return table_str
 
@@ -321,16 +331,7 @@ def generate_docs_records(function_data: list[DocFunction]):
         if not func.examples:
             print(f"skipping {func.name}")
             continue
-        if func.name in BINARY_OPERATORS and len(func.parameters) == 2:
-            record_str += (
-                f"#### `{func.parameters[0]} {func.name} {func.parameters[1]}`\n\n"
-            )
-        elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
-            parameter_list = ":".join(func.parameters[1:])
-            record_str += f"#### `{func.parameters[0]}[{parameter_list}]`\n\n"
-        else:
-            parameter_list = ", ".join(func.parameters)
-            record_str += f"#### `{func.name}({parameter_list}{', ...' if (func.is_variadic) else ''})`\n\n"
+        record_str += f"#### `{get_function_title(func)}`\n\n"
         record_str += '<div class="nostroke_table"></div>\n\n'
         record_str += f"| **Description** | {func.description} |\n"
         record_str += generate_example_rows(func)
@@ -339,6 +340,31 @@ def generate_docs_records(function_data: list[DocFunction]):
             record_str += f"| **{'Alias' if len(func.aliases) == 1 else 'Aliases'}** | {aliases} |\n"
         record_str += '\n'
     return record_str
+
+
+def get_function_title(func: DocFunction):
+    if func.name in BINARY_OPERATORS:
+        assert len(func.parameters) == 2
+        function_title = f"{func.parameters[0]} {func.name} {func.parameters[1]}"
+    elif func.name == EXTRACT_OPERATOR:
+        assert len(func.parameters) >= 2
+        parameter_str = ":".join(func.parameters[1:])
+        function_title = f"{func.parameters[0]}[{parameter_str}]"
+    else:
+        if func.nr_optional_arguments == 0:
+            parameter_str = (
+                f"{", ".join(func.parameters)}{', ...' if (func.is_variadic) else ''}"
+            )
+        else:
+            mandatory_args = func.parameters[: -1 * func.nr_optional_arguments]
+            optional_args = func.parameters[-1 * func.nr_optional_arguments :]
+            parameter_str = f"{", ".join(mandatory_args)}[, {", ".join(optional_args)}]"
+        function_title = f"{func.name}({parameter_str})"
+    return function_title
+
+
+def get_anchor_from_title(title: str):
+    return re.sub(r'[\(\)\[\]\.,$@|:^]+', '', title.lower().replace(' ', '-'))
 
 
 def generate_example_rows(func: DocFunction):
