@@ -74,13 +74,13 @@ This section describes functions and operators for examining and manipulating [`
 | [`printf(format, ...)`](#printfformat-) | Formats a `string` using [printf syntax](#printf-syntax). |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/preview/guides/file_formats/read_file.md %}#read_text) for more details. |
 | [`regexp_escape(string)`](#regexp_escapestring) | Escapes special patterns to turn `string` into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape). |
-| [`regexp_extract(string, regex[, group][, options])`](#regexp_extractstring-regex-group-options) | If `string` contains the `regex` pattern, returns the capturing group specified by optional parameter `group`; otherwise, returns the empty string. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
-| [`regexp_extract(string, regex, name_list[, options])`](#regexp_extractstring-regex-name_list-options) | If `string` contains the `regex` pattern, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
-| [`regexp_extract_all(string, regex[, group][, options])`](#regexp_extract_allstring-regex-group-options) | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
-| [`regexp_full_match(string, regex[, col2])`](#regexp_full_matchstring-regex-col2) | Returns `true` if the entire `string` matches the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
-| [`regexp_matches(string, regex[, options])`](#regexp_matchesstring-regex-options) | Returns `true` if `string` contains the `regex`, `false` otherwise. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
-| [`regexp_replace(string, regex, replacement[, options])`](#regexp_replacestring-regex-replacement-options) | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
-| [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex-options) | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_extract(string, regex[, group][, options])`](#regexp_extractstring-regex-group-options) | If `string` contains the `regex` pattern, returns the capturing group specified by optional parameter `group`; otherwise, returns the empty string. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_extract(string, regex, name_list[, options])`](#regexp_extractstring-regex-name_list-options) | If `string` contains the `regex` pattern, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_extract_all(string, regex[, group][, options])`](#regexp_extract_allstring-regex-group-options) | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_full_match(string, regex[, col2])`](#regexp_full_matchstring-regex-col2) | Returns `true` if the entire `string` matches the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_matches(string, regex[, options])`](#regexp_matchesstring-regex-options) | Returns `true` if `string` contains the `regex`, `false` otherwise. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_replace(string, regex, replacement[, options])`](#regexp_replacestring-regex-replacement-options) | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex-options) | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | [`regexp_split_to_table(string, regex)`](#regexp_split_to_tablestring-regex) | Splits the `string` along the `regex` and returns a row for each part. |
 | [`repeat(string, count)`](#repeatstring-count) | Repeats the `string` `count` number of times. |
 | [`replace(string, source, target)`](#replacestring-source-target) | Replaces any occurrences of the `source` with `target` in `string`. |
@@ -95,9 +95,9 @@ This section describes functions and operators for examining and manipulating [`
 | [`split_part(string, separator, index)`](#split_partstring-separator-index) | Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). |
 | [`starts_with(string, search_string)`](#starts_withstring-search_string) | Returns `true` if `string` begins with `search_string`. |
 | [`str_split(string, separator)`](#str_splitstring-separator) | Splits the `string` along the `separator`. |
-| [`str_split_regex(string, regex[, options])`](#str_split_regexstring-regex-options) | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| [`str_split_regex(string, regex[, options])`](#str_split_regexstring-regex-options) | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | [`string_split(string, separator)`](#string_splitstring-separator) | Splits the `string` along the `separator`. |
-| [`string_split_regex(string, regex[, options])`](#string_split_regexstring-regex-options) | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| [`string_split_regex(string, regex[, options])`](#string_split_regexstring-regex-options) | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | [`string_to_array(string, separator)`](#string_to_arraystring-separator) | Splits the `string` along the `separator`. |
 | [`strip_accents(string)`](#strip_accentsstring) | Strips accents from `string`. |
 | [`strlen(string)`](#strlenstring) | Number of bytes in `string`. |
@@ -641,7 +641,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex` pattern, returns the capturing group specified by optional parameter `group`; otherwise, returns the empty string. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| **Description** | If `string` contains the `regex` pattern, returns the capturing group specified by optional parameter `group`; otherwise, returns the empty string. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract('ABC', '([a-z])(b)', 1, 'i')` |
 | **Result** | `A` |
 
@@ -649,7 +649,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex` pattern, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| **Description** | If `string` contains the `regex` pattern, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract('John Doe', '([a-z]+) ([a-z]+)', ['first_name', 'last_name'], 'i')` |
 | **Result** | `{'first_name': John, 'last_name': Doe}` |
 
@@ -657,7 +657,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| **Description** | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract_all('Peter: 33, Paul:14', '(\w+):\s*(\d+)', 2)` |
 | **Result** | `[33, 14]` |
 
@@ -665,7 +665,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if the entire `string` matches the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| **Description** | Returns `true` if the entire `string` matches the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_full_match('anabanana', '(an)*')` |
 | **Result** | `false` |
 
@@ -673,7 +673,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_matches('anabanana', '(an)*')` |
 | **Result** | `true` |
 
@@ -681,7 +681,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
@@ -689,7 +689,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
 | **Aliases** | `str_split_regex`, `string_split_regex` |
@@ -815,7 +815,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `str_split_regex('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
 | **Aliases** | `regexp_split_to_array`, `string_split_regex` |
@@ -833,7 +833,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions %}#options-for-regular-expression-functions) can be set. |
+| **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `string_split_regex('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
 | **Aliases** | `regexp_split_to_array`, `str_split_regex` |

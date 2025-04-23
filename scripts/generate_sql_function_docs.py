@@ -145,7 +145,7 @@ PAGE_LINKS = {
     'slice conventions': f'docs/{DOC_VERSION}/sql/functions/list.md#slicing',
     'Pattern Matching': f'docs/{DOC_VERSION}/sql/functions/pattern_matching.md',
     'collations': f'docs/{DOC_VERSION}/sql/expressions/collations.md',
-    'regex `options`': f'docs/{DOC_VERSION}/sql/functions/regular_expressions#options-for-regular-expression-functions',
+    'regex `options`': f'docs/{DOC_VERSION}/sql/functions/regular_expressions.md#options-for-regular-expression-functions',
     # external page links:
     '`os.path.dirname`': 'https://docs.python.org/3.7/library/os.path.html#os.path.dirname',
     '`os.path.basename`': 'https://docs.python.org/3.7/library/os.path.html#os.path.basename',
