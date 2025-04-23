@@ -108,6 +108,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
 | `store_rejects` | Skip any lines with errors and store them in the rejects table. | `BOOL` | `false` |
 | `strict_mode` | Enforces the strictness level of the CSV Reader. When set to `true`, the parser will throw an error upon encountering any issues. When set to `false`, the parser will attempt to read structurally incorrect files. It is important to note that reading structurally incorrect files can cause ambiguity; therefore, this option should be used with caution. | `BOOL` | `true` |
+| `thousands` | Character used to identify thousands separators in numeric values. It must be a single character and different from the `decimal_separator` option.| `VARCHAR` | (empty) |
 | `timestampformat` | [Timestamp format]({% link docs/preview/sql/functions/dateformat.md %}) used when parsing and writing timestamps. | `VARCHAR` | (empty) |
 | `timestamp_format` | Alias for `timestampformat`; only available in the `COPY` statement. | `VARCHAR` | (empty) |
 | `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). See [example]({% link docs/preview/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
