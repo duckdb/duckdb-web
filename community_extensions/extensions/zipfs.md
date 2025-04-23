@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: zipfs
   description: Read files within zip archives
-  version: 1.1.3
+  version: 1.2.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: isaacbrodsky/duckdb-zipfs
-  ref: b920e53ded17076af5559c506ab2a871d9bee624
+  ref: 3d956dcb1222e3d55fea02d554ec142d3c2383cf
 
 docs:
   hello_world: |
@@ -26,10 +26,10 @@ docs:
   extended_description: |
     The zipfs extension adds support for reading files from within zip archives.
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: 8744
-extension_download_count_pretty: 8.7k
+extension_star_count: 26
+extension_star_count_pretty: 26
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_zipfs.png'
 layout: community_extension_doc
 ---
