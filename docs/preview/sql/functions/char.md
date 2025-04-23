@@ -20,11 +20,10 @@ This section describes functions and operators for examining and manipulating [`
 | [`string SIMILAR TO regex`](#string-similar-to-regex) | Returns `true` if the `string` matches the `regex` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string ^@ search_string`](#string--search_string) | Returns `true` if `string` begins with `search_string`. |
 | [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
-| [`array_extract(string, index)`](#array_extractstring-index) | Extracts a single character from a string using a (1-based) index. |
+| [`array_extract(string, index)`](#array_extractstring-index) | Extracts a single character from a `string` using a (1-based) `index`. |
 | [`array_slice(list, begin, end)`](#array_slicelist-begin-end) | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | [`ascii(string)`](#asciistring) | Returns an integer that represents the Unicode code point of the first character of the `string`. |
-| [`bar(x, min, max)`](#barx-min-max) | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
-| [`bar(x, min, max, width)`](#barx-min-max-width) | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
+| [`bar(x, min, max[, width])`](#barx-min-max-width) | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
 | [`base64(blob)`](#base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`bin(string)`](#binstring) | Converts the `string` to binary representation. |
 | [`bit_length(string)`](#bit_lengthstring) | Number of bits in a `string`. |
@@ -57,8 +56,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`like_escape(string, like_specifier, escape_character)`](#like_escapestring-like_specifier-escape_character) | Returns `true` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`lower(string)`](#lowerstring) | Converts `string` to lower case. |
 | [`lpad(string, count, character)`](#lpadstring-count-character) | Pads the `string` with the `character` on the left until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| [`ltrim(string)`](#ltrimstring) | Removes any spaces from the left side of the `string`. In the example, the `␣` symbol denotes a space character. |
-| [`ltrim(string, characters)`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. |
+| [`ltrim(string[, characters])`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
 | [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
@@ -67,37 +65,22 @@ This section describes functions and operators for examining and manipulating [`
 | [`not_ilike_escape(string, like_specifier, escape_character)`](#not_ilike_escapestring-like_specifier-escape_character) | Returns `false` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`not_like_escape(string, like_specifier, escape_character)`](#not_like_escapestring-like_specifier-escape_character) | Returns `false` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`ord(string)`](#ordstring) | Returns an `INTEGER` representing the `unicode` codepoint of the first character in the `string`. |
-| [`parse_dirname(path)`](#parse_dirnamepath) | Returns the top-level directory name from the given `path`, using both `forward_slash` and `backslash` as separators. |
-| [`parse_dirname(path, separator)`](#parse_dirnamepath-separator) | Returns the top-level directory name from the given `path`. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| [`parse_dirpath(path)`](#parse_dirpathpath) | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname), using both `forward_slash` and `backslash` as separators. |
-| [`parse_dirpath(path, separator)`](#parse_dirpathpath-separator) | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| [`parse_filename(path)`](#parse_filenamepath) | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function, using both `forward_slash` and `backslash` as separators. |
-| [`parse_filename(path, separator)`](#parse_filenamepath-separator) | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| [`parse_filename(path, trim_extension)`](#parse_filenamepath-trim_extension) | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function, using both `forward_slash` and `backslash` as separators. If `trim_extension` is `true`, the file extension will be removed (defaults to `false`). |
-| [`parse_filename(path, trim_extension, separator)`](#parse_filenamepath-trim_extension-separator) | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. If `trim_extension` is `true`, the file extension will be removed (defaults to `false`). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| [`parse_path(path)`](#parse_pathpath) | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function, using both `forward_slash` and `backslash` as separators. |
-| [`parse_path(path, separator)`](#parse_pathpath-separator) | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
+| [`parse_dirname(path[, separator])`](#parse_dirnamepath-separator) | Returns the top-level directory name from the given `path`. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
+| [`parse_dirpath(path[, separator])`](#parse_dirpathpath-separator) | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
+| [`parse_filename(string[, trim_extension][, separator])`](#parse_filenamestring-trim_extension-separator) | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. If `trim_extension` is `true`, the file extension will be removed (defaults to `false`). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
+| [`parse_path(path[, separator])`](#parse_pathpath-separator) | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
 | [`position(search_string IN string)`](#positionsearch_string-in-string) | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
 | [`prefix(string, search_string)`](#prefixstring-search_string) | Returns `true` if `string` starts with `search_string`. |
 | [`printf(format, ...)`](#printfformat-) | Formats a `string` using [printf syntax](#printf-syntax). |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/preview/guides/file_formats/read_file.md %}#read_text) for more details. |
 | [`regexp_escape(string)`](#regexp_escapestring) | Escapes special patterns to turn `string` into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape). |
-| [`regexp_extract(string, regex)`](#regexp_extractstring-regex) | If `string` contains the `regex`, returns the first match; otherwise, returns the empty string. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| [`regexp_extract(string, regex, group)`](#regexp_extractstring-regex-group) | If `string` contains the `regex`, returns the specified capturing `group`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| [`regexp_extract(string, regex, name_list)`](#regexp_extractstring-regex-name_list) | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| [`regexp_extract(string, regex, group, options)`](#regexp_extractstring-regex-group-options) | If `string` contains the `regex`, returns the specified capturing `group`, applying the set of regexp `options`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| [`regexp_extract(string, regex, name_list, options)`](#regexp_extractstring-regex-name_list-options) | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`, applying the set of regexp `options`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| [`regexp_extract_all(string, regex)`](#regexp_extract_allstring-regex) | Returns a list with the non-overlapping occurrences of the `regex` in the `string`. |
-| [`regexp_extract_all(string, regex, group)`](#regexp_extract_allstring-regex-group) | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. |
-| [`regexp_extract_all(string, regex, group, options)`](#regexp_extract_allstring-regex-group-options) | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`, applying the set of regexp `options`. |
-| [`regexp_full_match(string, regex)`](#regexp_full_matchstring-regex) | Returns `true` if the entire `string` matches the `regex`. |
-| [`regexp_full_match(string, regex, options)`](#regexp_full_matchstring-regex-options) | Returns `true` if the entire `string` matches the `regex`, applying the set of regexp `options`. |
-| [`regexp_matches(string, regex)`](#regexp_matchesstring-regex) | Returns `true` if `string` contains the `regex`, `false` otherwise. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| [`regexp_matches(string, regex, options)`](#regexp_matchesstring-regex-options) | Returns `true` if `string` contains the `regex`, `false` otherwise, applying the set of regexp `options`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| [`regexp_replace(string, regex, replacement)`](#regexp_replacestring-regex-replacement) | If `string` contains the `regex`, replaces the matching part with `replacement`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| [`regexp_replace(string, regex, replacement, options)`](#regexp_replacestring-regex-replacement-options) | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of regexp `options` is applied. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| [`regexp_split_to_array(string, regex)`](#regexp_split_to_arraystring-regex) | Splits the `string` along the `regex`. |
-| [`regexp_split_to_array(string, regex, options)`](#regexp_split_to_arraystring-regex-options) | Splits the `string` along the `regex`, applying the set of regexp `options`. |
+| [`regexp_extract(string, regex[, group][, options])`](#regexp_extractstring-regex-group-options) | If `string` contains the `regex` pattern, returns the capturing group specified by optional parameter `group`; otherwise, returns the empty string. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_extract(string, regex, name_list[, options])`](#regexp_extractstring-regex-name_list-options) | If `string` contains the `regex` pattern, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_extract_all(string, regex[, group][, options])`](#regexp_extract_allstring-regex-group-options) | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_full_match(string, regex[, col2])`](#regexp_full_matchstring-regex-col2) | Returns `true` if the entire `string` matches the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_matches(string, regex[, options])`](#regexp_matchesstring-regex-options) | Returns `true` if `string` contains the `regex`, `false` otherwise. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_replace(string, regex, replacement[, options])`](#regexp_replacestring-regex-replacement-options) | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
+| [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex-options) | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | [`regexp_split_to_table(string, regex)`](#regexp_split_to_tablestring-regex) | Splits the `string` along the `regex` and returns a row for each part. |
 | [`repeat(string, count)`](#repeatstring-count) | Repeats the `string` `count` number of times. |
 | [`replace(string, source, target)`](#replacestring-source-target) | Replaces any occurrences of the `source` with `target` in `string`. |
@@ -105,36 +88,29 @@ This section describes functions and operators for examining and manipulating [`
 | [`right(string, count)`](#rightstring-count) | Extract the right-most `count` characters. |
 | [`right_grapheme(string, count)`](#right_graphemestring-count) | Extracts the right-most `count` grapheme clusters. |
 | [`rpad(string, count, character)`](#rpadstring-count-character) | Pads the `string` with the `character` on the right until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| [`rtrim(string)`](#rtrimstring) | Removes any spaces from the right side of the `string`. In the example, the `␣` symbol denotes a space character. |
-| [`rtrim(string, characters)`](#rtrimstring-characters) | Removes any occurrences of any of the `characters` from the right side of the `string`. |
+| [`rtrim(string[, characters])`](#rtrimstring-characters) | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
 | [`sha1(value)`](#sha1value) | Returns a `VARCHAR` with the SHA-1 hash of the `value`. |
 | [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value` |
 | [`split(string, separator)`](#splitstring-separator) | Splits the `string` along the `separator`. |
 | [`split_part(string, separator, index)`](#split_partstring-separator-index) | Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). |
 | [`starts_with(string, search_string)`](#starts_withstring-search_string) | Returns `true` if `string` begins with `search_string`. |
 | [`str_split(string, separator)`](#str_splitstring-separator) | Splits the `string` along the `separator`. |
-| [`str_split_regex(string, regex)`](#str_split_regexstring-regex) | Splits the `string` along the `regex`. |
-| [`str_split_regex(string, regex, options)`](#str_split_regexstring-regex-options) | Splits the `string` along the `regex`, applying the set of regexp `options`. |
+| [`str_split_regex(string, regex[, options])`](#str_split_regexstring-regex-options) | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | [`string_split(string, separator)`](#string_splitstring-separator) | Splits the `string` along the `separator`. |
-| [`string_split_regex(string, regex)`](#string_split_regexstring-regex) | Splits the `string` along the `regex`. |
-| [`string_split_regex(string, regex, options)`](#string_split_regexstring-regex-options) | Splits the `string` along the `regex`, applying the set of regexp `options`. |
+| [`string_split_regex(string, regex[, options])`](#string_split_regexstring-regex-options) | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | [`string_to_array(string, separator)`](#string_to_arraystring-separator) | Splits the `string` along the `separator`. |
 | [`strip_accents(string)`](#strip_accentsstring) | Strips accents from `string`. |
 | [`strlen(string)`](#strlenstring) | Number of bytes in `string`. |
 | [`strpos(string, search_string)`](#strposstring-search_string) | Returns location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| [`substr(string, start)`](#substrstring-start) | Extracts substring starting from character `start` up to the end of the string. Note that a `start` value of `1` refers to the first character of the `string`. |
-| [`substr(string, start, length)`](#substrstring-start-length) | Extracts substring of `length` characters starting from character `start`. Note that a `start` value of `1` refers to the first character of the `string`. |
-| [`substring(string, start)`](#substringstring-start) | Extracts substring starting from character `start` up to the end of the string. Note that a `start` value of `1` refers to the first character of the `string`. |
-| [`substring(string, start, length)`](#substringstring-start-length) | Extracts substring of `length` characters starting from character `start`. Note that a `start` value of `1` refers to the first character of the `string`. |
-| [`substring_grapheme(string, start)`](#substring_graphemestring-start) | Extracts substring starting from grapheme clusters `start` up to the end of the string. Note that a `start` value of `1` refers to the `first` character of the `string`. |
-| [`substring_grapheme(string, start, length)`](#substring_graphemestring-start-length) | Extracts substring of `length` grapheme clusters starting from character `start`. Note that a `start` value of `1` refers to the `first` character of the `string`. |
+| [`substr(string, start[, length])`](#substrstring-start-length) | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
+| [`substring(string, start[, length])`](#substringstring-start-length) | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
+| [`substring_grapheme(string, start[, length])`](#substring_graphemestring-start-length) | Extracts substring starting from grapheme clusters `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` grapheme clusters instead. Note that a `start` value of `1` refers to the `first` character of the `string`. |
 | [`suffix(string, search_string)`](#suffixstring-search_string) | Returns `true` if `string` ends with `search_string`. |
 | [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`to_binary(string)`](#to_binarystring) | Converts the `string` to binary representation. |
 | [`to_hex(string)`](#to_hexstring) | Converts the `string` to hexadecimal representation. |
 | [`translate(string, from, to)`](#translatestring-from-to) | Replaces each character in `string` that matches a character in the `from` set with the corresponding character in the `to` set. If `from` is longer than `to`, occurrences of the extra characters in `from` are deleted. |
-| [`trim(string)`](#trimstring) | Removes any spaces from either side of the `string`. |
-| [`trim(string, characters)`](#trimstring-characters) | Removes any occurrences of any of the `characters` from either side of the `string`. |
+| [`trim(string[, characters])`](#trimstring-characters) | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
 | [`ucase(string)`](#ucasestring) | Converts `string` to upper case. |
 | [`unbin(value)`](#unbinvalue) | Converts a `value` from binary representation to a blob. |
 | [`unhex(value)`](#unhexvalue) | Converts a `value` from hexadecimal representation to a blob. |
@@ -205,7 +181,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extracts a single character from a string using a (1-based) index. |
+| **Description** | Extracts a single character from a `string` using a (1-based) `index`. |
 | **Example** | `array_extract('DuckDB', 2)` |
 | **Result** | `u` |
 
@@ -230,21 +206,13 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `ascii('Ω')` |
 | **Result** | `937` |
 
-#### `bar(x, min, max)`
+#### `bar(x, min, max[, width])`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
 | **Example** | `bar(5, 0, 20, 10)` |
-| **Result** | `██▌       ` |
-
-#### `bar(x, min, max, width)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
-| **Example** | `bar(5, 0, 20, 10)` |
-| **Result** | `██▌       ` |
+| **Result** | `██▌␣␣␣␣␣␣␣` |
 
 #### `base64(blob)`
 
@@ -521,20 +489,14 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `lpad('hello', 8, '>')` |
 | **Result** | `>>>hello` |
 
-#### `ltrim(string)`
+#### `ltrim(string[, characters])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any spaces from the left side of the `string`. In the example, the `␣` symbol denotes a space character. |
-| **Example** | `ltrim('␣␣␣␣test␣␣')` |
-| **Result** | `␣␣␣␣test␣␣` |
-
-#### `ltrim(string, characters)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. |
-| **Example** | `ltrim('>>>>test<<', '><')` |
+| **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
+| **Example 1** | `ltrim('␣␣␣␣test␣␣')` |
+| **Result** | `test␣␣` |
+| **Example 2** | `ltrim('>>>>test<<', '><')` |
 | **Result** | `test<<` |
 
 #### `md5(string)`
@@ -602,15 +564,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Result** | `[226, 226, -1, NULL]` |
 | **Alias** | `unicode` |
 
-#### `parse_dirname(path)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns the top-level directory name from the given `path`, using both `forward_slash` and `backslash` as separators. |
-| **Example** | `parse_dirname('path/to/file.csv')` |
-| **Result** | `path` |
-
-#### `parse_dirname(path, separator)`
+#### `parse_dirname(path[, separator])`
 
 <div class="nostroke_table"></div>
 
@@ -618,15 +572,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `parse_dirname('path/to/file.csv', 'system')` |
 | **Result** | `path` |
 
-#### `parse_dirpath(path)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname), using both `forward_slash` and `backslash` as separators. |
-| **Example** | `parse_dirpath('path/to/file.csv')` |
-| **Result** | `path/to` |
-
-#### `parse_dirpath(path, separator)`
+#### `parse_dirpath(path[, separator])`
 
 <div class="nostroke_table"></div>
 
@@ -634,47 +580,15 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `parse_dirpath('path/to/file.csv', 'forward_slash')` |
 | **Result** | `path/to` |
 
-#### `parse_filename(path)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function, using both `forward_slash` and `backslash` as separators. |
-| **Example** | `parse_filename('path/to/file.csv')` |
-| **Result** | `file.csv` |
-
-#### `parse_filename(path, separator)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_filename('path/to/file.csv', 'forward_slash')` |
-| **Result** | `file.csv` |
-
-#### `parse_filename(path, trim_extension)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function, using both `forward_slash` and `backslash` as separators. If `trim_extension` is `true`, the file extension will be removed (defaults to `false`). |
-| **Example** | `parse_filename('path/to/file.csv', true)` |
-| **Result** | `file` |
-
-#### `parse_filename(path, trim_extension, separator)`
+#### `parse_filename(string[, trim_extension][, separator])`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. If `trim_extension` is `true`, the file extension will be removed (defaults to `false`). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_filename('path/to/file.csv', true, 'system')` |
+| **Example** | `parse_filename('path/to/file.csv', true, 'forward_slash')` |
 | **Result** | `file` |
 
-#### `parse_path(path)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function, using both `forward_slash` and `backslash` as separators. |
-| **Example** | `parse_path('path/to/file.csv')` |
-| **Result** | `[path, to, file.csv]` |
-
-#### `parse_path(path, separator)`
+#### `parse_path(path[, separator])`
 
 <div class="nostroke_table"></div>
 
@@ -723,134 +637,61 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `regexp_escape('https://duckdb.org')` |
 | **Result** | `https\:\/\/duckdb\.org` |
 
-#### `regexp_extract(string, regex)`
+#### `regexp_extract(string, regex[, group][, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, returns the first match; otherwise, returns the empty string. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| **Example** | `regexp_extract('abcde', '[a-z]{3}')` |
-| **Result** | `abc` |
-
-#### `regexp_extract(string, regex, group)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | If `string` contains the `regex`, returns the specified capturing `group`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| **Example** | `regexp_extract('abc', '([a-z])(b)', 1)` |
-| **Result** | `a` |
-
-#### `regexp_extract(string, regex, name_list)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| **Example** | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` |
-| **Result** | `{'y': 2023, 'm': 04, 'd': 15}` |
-
-#### `regexp_extract(string, regex, group, options)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | If `string` contains the `regex`, returns the specified capturing `group`, applying the set of regexp `options`; otherwise, returns the empty string. The group must be a constant value. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| **Description** | If `string` contains the `regex` pattern, returns the capturing group specified by optional parameter `group`; otherwise, returns the empty string. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract('ABC', '([a-z])(b)', 1, 'i')` |
 | **Result** | `A` |
 
-#### `regexp_extract(string, regex, name_list, options)`
+#### `regexp_extract(string, regex, name_list[, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, returns the capturing groups as a struct with corresponding names from `name_list`, applying the set of regexp `options`; otherwise, returns a struct with the same keys and empty strings as values. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| **Description** | If `string` contains the `regex` pattern, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract('John Doe', '([a-z]+) ([a-z]+)', ['first_name', 'last_name'], 'i')` |
 | **Result** | `{'first_name': John, 'last_name': Doe}` |
 
-#### `regexp_extract_all(string, regex)`
+#### `regexp_extract_all(string, regex[, group][, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a list with the non-overlapping occurrences of the `regex` in the `string`. |
-| **Example** | `regexp_extract_all('Peter: 33, Paul:14', '\d+')` |
-| **Result** | `[33, 14]` |
-
-#### `regexp_extract_all(string, regex, group)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. |
+| **Description** | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract_all('Peter: 33, Paul:14', '(\w+):\s*(\d+)', 2)` |
 | **Result** | `[33, 14]` |
 
-#### `regexp_extract_all(string, regex, group, options)`
+#### `regexp_full_match(string, regex[, col2])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`, applying the set of regexp `options`. |
-| **Example** | `regexp_extract_all('Peter: 33, Paul:14', '([a-z]+):\s*(\d+)', 1, 'i')` |
-| **Result** | `[Peter, Paul]` |
-
-#### `regexp_full_match(string, regex)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns `true` if the entire `string` matches the `regex`. |
+| **Description** | Returns `true` if the entire `string` matches the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_full_match('anabanana', '(an)*')` |
 | **Result** | `false` |
 
-#### `regexp_full_match(string, regex, options)`
+#### `regexp_matches(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if the entire `string` matches the `regex`, applying the set of regexp `options`. |
-| **Example** | `regexp_full_match('Banana', '[a-z]+', 'i')` |
-| **Result** | `true` |
-
-#### `regexp_matches(string, regex)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_matches('anabanana', '(an)*')` |
 | **Result** | `true` |
 
-#### `regexp_matches(string, regex, options)`
+#### `regexp_replace(string, regex, replacement[, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise, applying the set of regexp `options`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| **Example** | `regexp_matches('anabanana', '(AN)+', 'i')` |
-| **Result** | `true` |
-
-#### `regexp_replace(string, regex, replacement)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
+| **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
-#### `regexp_replace(string, regex, replacement, options)`
+#### `regexp_split_to_array(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of regexp `options` is applied. See the [Regular Expressions]({% link docs/preview/sql/functions/regular_expressions.md %}) page for more details. |
-| **Example** | `regexp_replace('hello', '[LO]', '-', 'i')` |
-| **Result** | `he-lo` |
-
-#### `regexp_split_to_array(string, regex)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Splits the `string` along the `regex`. |
+| **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
-| **Aliases** | `str_split_regex`, `string_split_regex` |
-
-#### `regexp_split_to_array(string, regex, options)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Splits the `string` along the `regex`, applying the set of regexp `options`. |
-| **Example** | `regexp_split_to_array('hello world; 42', ' ?WORLD; ?', 'i')` |
-| **Result** | `[hello, 42]` |
 | **Aliases** | `str_split_regex`, `string_split_regex` |
 
 #### `regexp_split_to_table(string, regex)`
@@ -909,20 +750,14 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `rpad('hello', 10, '<')` |
 | **Result** | `hello<<<<<` |
 
-#### `rtrim(string)`
+#### `rtrim(string[, characters])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any spaces from the right side of the `string`. In the example, the `␣` symbol denotes a space character. |
-| **Example** | `rtrim('␣␣␣␣test␣␣')` |
-| **Result** | `␣␣␣␣test␣␣` |
-
-#### `rtrim(string, characters)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. |
-| **Example** | `rtrim('>>>>test<<', '><')` |
+| **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
+| **Example 1** | `rtrim('␣␣␣␣test␣␣')` |
+| **Result** | `␣␣␣␣test` |
+| **Example 2** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 
 #### `sha1(value)`
@@ -976,22 +811,13 @@ This section describes functions and operators for examining and manipulating [`
 | **Result** | `[hello, world]` |
 | **Aliases** | `split`, `string_split`, `string_to_array` |
 
-#### `str_split_regex(string, regex)`
+#### `str_split_regex(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Splits the `string` along the `regex`. |
+| **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `str_split_regex('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
-| **Aliases** | `regexp_split_to_array`, `string_split_regex` |
-
-#### `str_split_regex(string, regex, options)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Splits the `string` along the `regex`, applying the set of regexp `options`. |
-| **Example** | `str_split_regex('hello world; 42', ' ?WORLD; ?', 'i')` |
-| **Result** | `[hello, 42]` |
 | **Aliases** | `regexp_split_to_array`, `string_split_regex` |
 
 #### `string_split(string, separator)`
@@ -1003,22 +829,13 @@ This section describes functions and operators for examining and manipulating [`
 | **Result** | `[hello, world]` |
 | **Aliases** | `split`, `str_split`, `string_to_array` |
 
-#### `string_split_regex(string, regex)`
+#### `string_split_regex(string, regex[, options])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Splits the `string` along the `regex`. |
+| **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `string_split_regex('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
-| **Aliases** | `regexp_split_to_array`, `str_split_regex` |
-
-#### `string_split_regex(string, regex, options)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Splits the `string` along the `regex`, applying the set of regexp `options`. |
-| **Example** | `string_split_regex('hello world; 42', ' ?WORLD; ?', 'i')` |
-| **Result** | `[hello, 42]` |
 | **Aliases** | `regexp_split_to_array`, `str_split_regex` |
 
 #### `string_to_array(string, separator)`
@@ -1055,56 +872,36 @@ This section describes functions and operators for examining and manipulating [`
 | **Result** | `2` |
 | **Aliases** | `instr`, `position` |
 
-#### `substr(string, start)`
+#### `substr(string, start[, length])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extracts substring starting from character `start` up to the end of the string. Note that a `start` value of `1` refers to the first character of the `string`. |
-| **Example** | `substring('Hello', 2)` |
+| **Description** | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
+| **Example 1** | `substring('Hello', 2)` |
 | **Result** | `ello` |
-| **Alias** | `substring` |
-
-#### `substr(string, start, length)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Extracts substring of `length` characters starting from character `start`. Note that a `start` value of `1` refers to the first character of the `string`. |
-| **Example** | `substring('Hello', 2, 2)` |
+| **Example 2** | `substring('Hello', 2, 2)` |
 | **Result** | `el` |
 | **Alias** | `substring` |
 
-#### `substring(string, start)`
+#### `substring(string, start[, length])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extracts substring starting from character `start` up to the end of the string. Note that a `start` value of `1` refers to the first character of the `string`. |
-| **Example** | `substring('Hello', 2)` |
+| **Description** | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
+| **Example 1** | `substring('Hello', 2)` |
 | **Result** | `ello` |
-| **Alias** | `substr` |
-
-#### `substring(string, start, length)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Extracts substring of `length` characters starting from character `start`. Note that a `start` value of `1` refers to the first character of the `string`. |
-| **Example** | `substring('Hello', 2, 2)` |
+| **Example 2** | `substring('Hello', 2, 2)` |
 | **Result** | `el` |
 | **Alias** | `substr` |
 
-#### `substring_grapheme(string, start)`
+#### `substring_grapheme(string, start[, length])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extracts substring starting from grapheme clusters `start` up to the end of the string. Note that a `start` value of `1` refers to the `first` character of the `string`. |
-| **Example** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3)` |
+| **Description** | Extracts substring starting from grapheme clusters `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` grapheme clusters instead. Note that a `start` value of `1` refers to the `first` character of the `string`. |
+| **Example 1** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3)` |
 | **Result** | `🤦🏽‍♀️🦆` |
-
-#### `substring_grapheme(string, start, length)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Extracts substring of `length` grapheme clusters starting from character `start`. Note that a `start` value of `1` refers to the `first` character of the `string`. |
-| **Example** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3, 2)` |
+| **Example 2** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3, 2)` |
 | **Result** | `🤦🏽‍♀️🦆` |
 
 #### `suffix(string, search_string)`
@@ -1151,20 +948,14 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `translate('12345', '143', 'ax')` |
 | **Result** | `a2x5` |
 
-#### `trim(string)`
+#### `trim(string[, characters])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any spaces from either side of the `string`. |
-| **Example** | `trim('    test  ')` |
+| **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
+| **Example 1** | `trim('␣␣␣␣test␣␣')` |
 | **Result** | `test` |
-
-#### `trim(string, characters)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. |
-| **Example** | `trim('>>>>test<<', '><')` |
+| **Example 2** | `trim('>>>>test<<', '><')` |
 | **Result** | `test` |
 
 #### `ucase(string)`
@@ -1243,10 +1034,8 @@ These functions are used to measure the similarity of two strings using various 
 | [`editdist3(s1, s2)`](#editdist3s1-s2) | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | [`hamming(s1, s2)`](#hammings1-s2) | The Hamming distance between to strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | [`jaccard(s1, s2)`](#jaccards1-s2) | The Jaccard similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
-| [`jaro_similarity(s1, s2)`](#jaro_similaritys1-s2) | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
-| [`jaro_similarity(s1, s2, score_cutoff)`](#jaro_similaritys1-s2-score_cutoff) | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < score_cutoff, 0 is returned instead. |
-| [`jaro_winkler_similarity(s1, s2)`](#jaro_winkler_similaritys1-s2) | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
-| [`jaro_winkler_similarity(s1, s2, score_cutoff)`](#jaro_winkler_similaritys1-s2-score_cutoff) | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < score_cutoff, 0 is returned instead. |
+| [`jaro_similarity(s1, s2[, score_cutoff])`](#jaro_similaritys1-s2-score_cutoff) | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
+| [`jaro_winkler_similarity(s1, s2[, score_cutoff])`](#jaro_winkler_similaritys1-s2-score_cutoff) | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
 | [`levenshtein(s1, s2)`](#levenshteins1-s2) | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | [`mismatches(s1, s2)`](#mismatchess1-s2) | The Hamming distance between to strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
 
@@ -1286,36 +1075,20 @@ These functions are used to measure the similarity of two strings using various 
 | **Example** | `jaccard('duck', 'luck')` |
 | **Result** | `0.6` |
 
-#### `jaro_similarity(s1, s2)`
+#### `jaro_similarity(s1, s2[, score_cutoff])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
+| **Description** | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
 | **Example** | `jaro_similarity('duck', 'duckdb')` |
 | **Result** | `0.8888888888888888` |
 
-#### `jaro_similarity(s1, s2, score_cutoff)`
+#### `jaro_winkler_similarity(s1, s2[, score_cutoff])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < score_cutoff, 0 is returned instead. |
-| **Example** | `jaro_similarity('duck', 'duckdb', 0.9)` |
-| **Result** | `0.0` |
-
-#### `jaro_winkler_similarity(s1, s2)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
+| **Description** | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
 | **Example** | `jaro_winkler_similarity('duck', 'duckdb')` |
-| **Result** | `0.9333333333333333` |
-
-#### `jaro_winkler_similarity(s1, s2, score_cutoff)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < score_cutoff, 0 is returned instead. |
-| **Example** | `jaro_winkler_similarity('duck', 'duckdb', 0.5)` |
 | **Result** | `0.9333333333333333` |
 
 #### `levenshtein(s1, s2)`
