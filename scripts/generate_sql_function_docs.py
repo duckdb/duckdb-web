@@ -3,10 +3,10 @@
 from dataclasses import dataclass, field
 import duckdb
 import re
-from typing import Callable
+import operator
 
 
-@dataclass
+@dataclass(order=True)
 class DocFunction:
     name: str
     parameters: list[str]
@@ -145,7 +145,7 @@ PAGE_LINKS = {
     'slice conventions': f'docs/{DOC_VERSION}/sql/functions/list.md#slicing',
     'Pattern Matching': f'docs/{DOC_VERSION}/sql/functions/pattern_matching.md',
     'collations': f'docs/{DOC_VERSION}/sql/expressions/collations.md',
-    'Regular Expressions': f'docs/{DOC_VERSION}/sql/functions/regular_expressions.md',
+    'regex `options`': f'docs/{DOC_VERSION}/sql/functions/regular_expressions#options-for-regular-expression-functions',
     # external page links:
     '`os.path.dirname`': 'https://docs.python.org/3.7/library/os.path.html#os.path.dirname',
     '`os.path.basename`': 'https://docs.python.org/3.7/library/os.path.html#os.path.basename',
@@ -254,14 +254,13 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
 
 
 def sort_function_data(function_data: list[DocFunction]):
-    sorter: Callable[[DocFunction], str] = (
-        lambda func: f"{func.name}-{len(func.parameters)}-{func.parameters}"
-    )
     function_data_1 = sorted(
-        [func for func in function_data if func.name == EXTRACT_OPERATOR], key=sorter
+        [func for func in function_data if func.name == EXTRACT_OPERATOR],
+        key=operator.attrgetter("name", "description", "parameters"),
     )
     function_data_2 = sorted(
-        [func for func in function_data if func.name in BINARY_OPERATORS], key=sorter
+        [func for func in function_data if func.name in BINARY_OPERATORS],
+        key=operator.attrgetter("name", "description", "parameters"),
     )
     function_data_3 = sorted(
         [
@@ -269,7 +268,7 @@ def sort_function_data(function_data: list[DocFunction]):
             for func in function_data
             if (func.name not in BINARY_OPERATORS) and (func.name != EXTRACT_OPERATOR)
         ],
-        key=sorter,
+        key=operator.attrgetter("name", "description", "parameters"),
     )
     return function_data_1 + function_data_2 + function_data_3
 
@@ -282,12 +281,17 @@ def prune_duplicates(function_data: list[DocFunction]):
         if (
             func.name == function_data[idx_func - 1].name
             and function_data[idx_func - 1].description == func.description
-            and function_data[idx_func - 1].parameters == func.parameters[:-1]
         ):
-            func.nr_optional_arguments = (
-                function_data[idx_func - 1].nr_optional_arguments + 1
-            )
-            function_data[idx_func - 1].name = "DELETE_ME"
+            if function_data[idx_func - 1].parameters == func.parameters[:-1]:
+                func.nr_optional_arguments = (
+                    function_data[idx_func - 1].nr_optional_arguments + 1
+                )
+                function_data[idx_func - 1].name = "DELETE_ME"
+            elif all(
+                param in function_data[idx_func - 1].parameters
+                for param in func.parameters
+            ):
+                func.name = "DELETE_ME"
     return [func for func in function_data if func.name != "DELETE_ME"]
 
 
@@ -358,7 +362,7 @@ def get_function_title(func: DocFunction):
         else:
             mandatory_args = func.parameters[: -1 * func.nr_optional_arguments]
             optional_args = func.parameters[-1 * func.nr_optional_arguments :]
-            parameter_str = f"{", ".join(mandatory_args)}[, {", ".join(optional_args)}]"
+            parameter_str = f"{", ".join(mandatory_args)}{"".join(f"[, {arg}]" for arg in optional_args)}"
         function_title = f"{func.name}({parameter_str})"
     return function_title
 
