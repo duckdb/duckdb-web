@@ -128,10 +128,12 @@ def get_duckdb_conn():
             member_toc_line text,
             member_example text,
             member_result text,
+            aliases text,
             primary key (class_name, member_name)
         )
     """
     )
+
     return duckdb_conn
 
 
@@ -166,6 +168,7 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                 member_description = member_docs[0]
 
             if class_member_name in ['from_parquet', 'read_parquet']:
+                member_signature = '\n\n'.join(member_docs)
                 member_description = "Create a relation object from the Parquet files"
             number_of_duplicates = (
                 relational_api_table.filter(f"member_name = '{class_member_name}'")
@@ -212,6 +215,14 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                     if CODE_EXAMPLE_MAP.get(member_anchor)
                     else None
                 ),
+                ', '.join(
+                    [
+                        f"[`{alias}`](#{alias})"
+                        for alias in CODE_EXAMPLE_MAP.get(
+                            member_anchor, {"aliases": []}
+                        ).get("aliases", [])
+                    ]
+                ),
             ]
         )
 
@@ -235,6 +246,7 @@ def generate_from_db(relational_api_table):
             member_signature,
             case when member_description is not null then '\n\n#### Description\n\n' else NULL end as header_description, 
             member_description,
+            if(aliases != '', concat('\n\n**Aliases**: ', aliases), NULL) as aliases,
             case when member_example is not null then '\n\n##### Example\n\n' else NULL end as header_example,
             member_example,
             case when member_result is not null then '\n\n##### Result\n\n' else NULL end as header_result,
@@ -250,7 +262,8 @@ def generate_from_db(relational_api_table):
                     header_signature, 
                     member_signature, 
                     header_description, 
-                    member_description, 
+                    member_description,
+                    aliases,
                     header_example, 
                     member_example, 
                     header_result, 

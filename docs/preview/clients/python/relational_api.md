@@ -115,6 +115,8 @@ from_csv_auto(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **
 
 Create a relation object from the CSV file in 'name'
 
+**Aliases**: [`read_csv`](#read_csv)
+
 ##### Example
 
 ```python
@@ -194,11 +196,21 @@ rel.show()
 ```python
 from_parquet(*args, **kwargs)
 Overloaded function.
+
+1. from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_glob
+
+2. from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_globs
 ```
 
 #### Description
 
 Create a relation object from the Parquet files
+
+**Aliases**: [`read_parquet`](#read_parquet)
 
 ##### Example
 
@@ -319,6 +331,8 @@ read_csv(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **kwarg
 
 Create a relation object from the CSV file in 'name'
 
+**Aliases**: [`from_csv_auto`](#from_csv_auto)
+
 ##### Example
 
 ```python
@@ -399,11 +413,21 @@ rel.show()
 ```python
 read_parquet(*args, **kwargs)
 Overloaded function.
+
+1. read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_glob
+
+2. read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_globs
 ```
 
 #### Description
 
 Create a relation object from the Parquet files
+
+**Aliases**: [`from_parquet`](#from_parquet)
 
 ##### Example
 
@@ -815,6 +839,8 @@ rel.description
 
 Return a list containing the types of the columns of the relation.
 
+**Aliases**: [`types`](#types)
+
 ##### Example
 
 ```python
@@ -1163,6 +1189,8 @@ QUERY_RELATION
 #### Description
 
 Return a list containing the types of the columns of the relation.
+
+**Aliases**: [`dtypes`](#dtypes)
 
 ##### Example
 
@@ -1691,7 +1719,7 @@ INNER JOIN (
 ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id))
 ```
 
-> `NATURAL`, `POSITIONAL` and `ASOF` joins are not supported by the API.
+> `NATURAL`, `POSITIONAL` and `ASOF` joins are not provided by the relational API.
 > `CROSS` joins are provided through the [cross method](#cross). 
 
 
@@ -1881,6 +1909,8 @@ project(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb
 
 Project the relation object by the projection in project_expr
 
+**Aliases**: [`select`](#select)
+
 ##### Example
 
 ```python
@@ -1926,6 +1956,8 @@ select(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb.
 #### Description
 
 Project the relation object by the projection in project_expr
+
+**Aliases**: [`project`](#project)
 
 ##### Example
 
@@ -2762,6 +2794,8 @@ dense_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_col
 #### Description
 
 Computes the dense rank within the partition
+
+**Aliases**: [`rank_dense`](#rank_dense)
 
 ##### Example
 
@@ -4028,6 +4062,8 @@ rank_dense(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_col
 
 Computes the dense rank within the partition
 
+**Aliases**: [`dense_rank`](#dense_rank)
+
 ##### Example
 
 ```python
@@ -4136,6 +4172,8 @@ select_dtypes(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duc
 
 Select columns from the relation, by filtering based on type(s)
 
+**Aliases**: [`select_types`](#select_types)
+
 ##### Example
 
 ```python
@@ -4182,6 +4220,8 @@ select_types(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duck
 #### Description
 
 Select columns from the relation, by filtering based on type(s)
+
+**Aliases**: [`select_dtypes`](#select_dtypes)
 
 ##### Example
 
@@ -4230,6 +4270,8 @@ std(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_
 
 Computes the sample standard deviation for a given column
 
+**Aliases**: [`stddev`](#stddev), [`stddev_samp`](#stddev_samp)
+
 ##### Example
 
 ```python
@@ -4276,6 +4318,8 @@ stddev(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wind
 #### Description
 
 Computes the sample standard deviation for a given column
+
+**Aliases**: [`std`](#std), [`stddev_samp`](#stddev_samp)
 
 ##### Example
 
@@ -4370,6 +4414,8 @@ stddev_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '',
 #### Description
 
 Computes the sample standard deviation for a given column
+
+**Aliases**: [`stddev`](#stddev), [`std`](#std)
 
 ##### Example
 
@@ -4606,6 +4652,8 @@ var(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_
 
 Computes the sample variance for a given column
 
+**Aliases**: [`variance`](#variance), [`var_samp`](#var_samp)
+
 ##### Example
 
 ```python
@@ -4700,6 +4748,8 @@ var_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wi
 
 Computes the sample variance for a given column
 
+**Aliases**: [`variance`](#variance), [`var`](#var)
+
 ##### Example
 
 ```python
@@ -4746,6 +4796,8 @@ variance(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wi
 #### Description
 
 Computes the sample variance for a given column
+
+**Aliases**: [`var`](#var), [`var_samp`](#var_samp)
 
 ##### Example
 
@@ -4824,6 +4876,8 @@ arrow(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarro
 #### Description
 
 Execute and fetch all rows as an Arrow Table
+
+**Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`to_arrow_table`](#to_arrow_table)
 
 ##### Example
 
@@ -4987,6 +5041,8 @@ df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pan
 
 Execute and fetch all rows as a pandas DataFrame
 
+**Aliases**: [`fetchdf`](#fetchdf), [`to_df`](#to_df)
+
 ##### Example
 
 ```python
@@ -5131,6 +5187,8 @@ fetch_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 100000
 
 Execute and fetch all rows as an Arrow Table
 
+**Aliases**: [`arrow`](#arrow), [`to_arrow_table`](#to_arrow_table)
+
 ##### Example
 
 ```python
@@ -5269,6 +5327,8 @@ fetchdf(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -
 #### Description
 
 Execute and fetch all rows as a pandas DataFrame
+
+**Aliases**: [`df`](#df), [`to_df`](#to_df)
 
 ##### Example
 
@@ -5607,6 +5667,8 @@ to_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) 
 
 Execute and fetch all rows as an Arrow Table
 
+**Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`arrow`](#arrow)
+
 ##### Example
 
 ```python
@@ -5657,6 +5719,8 @@ to_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object = No
 
 Write the relation object to a CSV file in 'file_name'
 
+**Aliases**: [`write_csv`](#write_csv)
+
 ##### Example
 
 ```python
@@ -5697,6 +5761,8 @@ to_df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> 
 #### Description
 
 Execute and fetch all rows as a pandas DataFrame
+
+**Aliases**: [`fetchdf`](#fetchdf), [`df`](#df)
 
 ##### Example
 
@@ -5742,6 +5808,8 @@ to_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compression:
 #### Description
 
 Write the relation object to a Parquet file in 'file_name'
+
+**Aliases**: [`write_parquet`](#write_parquet)
 
 ##### Example
 
@@ -5907,6 +5975,8 @@ write_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object =
 
 Write the relation object to a CSV file in 'file_name'
 
+**Aliases**: [`to_csv`](#to_csv)
+
 ##### Example
 
 ```python
@@ -5947,6 +6017,8 @@ write_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compressi
 #### Description
 
 Write the relation object to a Parquet file in 'file_name'
+
+**Aliases**: [`to_parquet`](#to_parquet)
 
 ##### Example
 

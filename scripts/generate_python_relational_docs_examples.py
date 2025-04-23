@@ -26,6 +26,7 @@ PLACEHOLDER_RESULT = "```{result_type}\n{result}\n```"
 # default: bool = True if it the example should be used in DEFAULT_EXAMPLE
 # additional_description: str = text to be appended to the method description
 # result_type: str = how the result to be presented (default text)
+# aliases: str = list of methods the methods is alias of
 
 CREATION_MEMBER_CODE_EXAMPLE_MAP = {
     'from_arrow': {
@@ -79,6 +80,7 @@ rel.show()
 └───────┴─────────┘
 """,
         'default': False,
+        'aliases': ['read_csv'],
     },
     'from_df': {
         'example': """
@@ -130,6 +132,7 @@ rel.show()
 └──────┴─────────┘
 """,
         'default': False,
+        'aliases': ['read_parquet'],
     },
     'from_query': {
         'example': """
@@ -197,6 +200,7 @@ rel.show()
 └───────┴─────────┘
 """,
         'default': False,
+        'aliases': ['from_csv_auto'],
     },
     'read_json': {
         'example': """
@@ -249,6 +253,7 @@ rel.show()
 └──────┴─────────┘
 """,
         'default': False,
+        'aliases': ['from_parquet'],
     },
     'sql': {
         'example': """
@@ -394,6 +399,7 @@ DEFINITION_MEMBER_CODE_EXAMPLE_MAP = {
     'dtypes': {
         'example': 'rel.dtypes',
         'result': ' [UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]',
+        'aliases': ['types'],
     },
     'explain': {
         'example': 'rel.explain()',
@@ -455,6 +461,7 @@ FROM "range"(1, 10)
     'types': {
         'example': 'rel.types',
         'result': '[UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]',
+        'aliases': ['dtypes'],
     },
 }
 
@@ -771,6 +778,7 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 └─────────────────┘
 """,
         'default': True,
+        'aliases': ['select'],
     },
     'select': {
         'example': 'rel.select("description").limit(1)',
@@ -783,6 +791,7 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 └─────────────────┘
 """,
         'default': True,
+        'aliases': ['project'],
     },
     'sort': {
         'example': 'rel.sort("description")',
@@ -1038,6 +1047,7 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 │ value is uneven │     9 │                                                             5 │
 └─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
 """,
+        'aliases': ['rank_dense'],
     },
     'distinct': {
         'example': """
@@ -1411,6 +1421,7 @@ rel.distinct().order("range")
 │ value is even   │     8 │                                                             4 │
 └─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
 """,
+        'aliases': ['dense_rank'],
     },
     'row_number': {
         'example': 'rel.row_number(window_spec="over (partition by description order by value)", projected_columns="description, value")',
@@ -1442,6 +1453,7 @@ rel.distinct().order("range")
 │ value is uneven │
 └─────────────────┘
 """,
+        'aliases': ['select_types'],
     },
     'select_types': {
         'example': 'rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()',
@@ -1454,6 +1466,7 @@ rel.distinct().order("range")
 │ value is uneven │
 └─────────────────┘
 """,
+        'aliases': ['select_dtypes'],
     },
     'std': {
         'example': 'rel.std(column="value", groups="description", projected_columns="description")',
@@ -1466,6 +1479,7 @@ rel.distinct().order("range")
 │ value is even   │    2.581988897471611 │
 └─────────────────┴──────────────────────┘
 """,
+        'aliases': ['stddev', 'stddev_samp'],
     },
     'stddev': {
         'example': 'rel.stddev(column="value", groups="description", projected_columns="description")',
@@ -1478,6 +1492,7 @@ rel.distinct().order("range")
 │ value is uneven │   3.1622776601683795 │
 └─────────────────┴──────────────────────┘
 """,
+        'aliases': ['std', 'stddev_samp'],
     },
     'stddev_pop': {
         'example': 'rel.stddev_pop(column="value", groups="description", projected_columns="description")',
@@ -1502,6 +1517,7 @@ rel.distinct().order("range")
 │ value is uneven │   3.1622776601683795 │
 └─────────────────┴──────────────────────┘
 """,
+        'aliases': ['stddev', 'std'],
     },
     'string_agg': {
         'example': 'rel.string_agg(column="value", sep=",", groups="description", projected_columns="description")',
@@ -1562,6 +1578,7 @@ rel.distinct().order("range")
 │ value is uneven │              10.0 │
 └─────────────────┴───────────────────┘
 """,
+        'aliases': ['variance', 'var_samp'],
     },
     'var_pop': {
         'example': 'rel.var_pop(column="value", groups="description", projected_columns="description")',
@@ -1586,6 +1603,7 @@ rel.distinct().order("range")
 │ value is uneven │              10.0 │
 └─────────────────┴───────────────────┘
 """,
+        'aliases': ['variance', 'var'],
     },
     'variance': {
         'example': 'rel.variance(column="value", groups="description", projected_columns="description")',
@@ -1598,6 +1616,7 @@ rel.distinct().order("range")
 │ value is uneven │              10.0 │
 └─────────────────┴───────────────────┘
 """,
+        'aliases': ['var', 'var_samp'],
     },
 }
 
@@ -1617,6 +1636,7 @@ value: [[1,2,3,4,5,6,7,8,9]]
 created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,2025-04-10 09:09:12.614000Z,2025-04-10 09:10:12.614000Z,2025-04-10 09:11:12.614000Z,2025-04-10 09:12:12.614000Z,2025-04-10 09:13:12.614000Z,2025-04-10 09:14:12.614000Z,2025-04-10 09:15:12.614000Z]]
 """,
         'default': True,
+        'aliases': ['fetch_arrow_table', 'to_arrow_table'],
     },
     # 'close': {'example': '', 'result': '', 'default': False},
     'create': {
@@ -1653,6 +1673,7 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
 ...
 """,
         'default': True,
+        'aliases': ['fetchdf', 'to_df'],
     },
     'execute': {
         'example': 'rel.execute()',
@@ -1698,6 +1719,7 @@ value: [[1,2,3,4,5,6,7,8,9]]
 created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,2025-04-10 09:26:51.259000Z,2025-04-10 09:27:51.259000Z,2025-04-10 09:28:51.259000Z,2025-04-10 09:29:51.259000Z,2025-04-10 09:30:51.259000Z,2025-04-10 09:31:51.259000Z,2025-04-10 09:32:51.259000Z]]
 """,
         'default': True,
+        'aliases': ['arrow', 'to_arrow_table'],
     },
     'fetch_df_chunk': {
         'example': 'rel.fetch_df_chunk()',
@@ -1730,6 +1752,7 @@ created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,202
 ...
 """,
         'default': True,
+        'aliases': ['df', 'to_df'],
     },
     'fetchmany': {
         'example': 'rel.fetchmany(size=1)',
@@ -1832,11 +1855,13 @@ value: [[1,2,3,4,5,6,7,8,9]]
 created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,2025-04-10 09:56:24.015000Z,2025-04-10 09:57:24.015000Z,2025-04-10 09:58:24.015000Z,2025-04-10 09:59:24.015000Z,2025-04-10 10:00:24.015000Z,2025-04-10 10:01:24.015000Z,2025-04-10 10:02:24.015000Z]]
 """,
         'default': True,
+        'aliases': ['fetch_arrow_table', 'arrow'],
     },
     'to_csv': {
         'example': 'rel.to_csv("code_example.csv")',
         'result': 'The data is exported to a CSV file, named code_example.csv',
         'default': True,
+        'aliases': ['write_csv'],
     },
     'to_df': {
         'example': 'rel.to_df()',
@@ -1848,11 +1873,13 @@ created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,202
 ...
 """,
         'default': True,
+        'aliases': ['fetchdf', 'df'],
     },
     'to_parquet': {
         'example': 'rel.to_parquet("code_example.parquet")',
         'result': 'The data is exported to a Parquet file, named code_example.parquet',
         'default': True,
+        'aliases': ['write_parquet'],
     },
     'to_table': {
         'example': 'rel.to_table("table_code_example")',
@@ -1873,11 +1900,13 @@ created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,202
         'example': 'rel.write_csv("code_example.csv")',
         'result': 'The data is exported to a CSV file, named code_example.csv',
         'default': True,
+        'aliases': ['to_csv'],
     },
     'write_parquet': {
         'example': 'rel.write_parquet("code_example.parquet")',
         'result': 'The data is exported to a Parquet file, named code_example.parquet',
         'default': True,
+        'aliases': ['to_parquet'],
     },
 }
 
