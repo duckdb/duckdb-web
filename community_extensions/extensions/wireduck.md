@@ -53,10 +53,10 @@ docs:
         
     > Note: Wireduck is still experimental.
 
-extension_star_count: 34
-extension_star_count_pretty: 34
-extension_download_count: 437
-extension_download_count_pretty: 437
+extension_star_count: 35
+extension_star_count_pretty: 35
+extension_download_count: 435
+extension_download_count_pretty: 435
 image: '/images/community_extensions/social_preview/preview_community_extension_wireduck.png'
 layout: community_extension_doc
 ---
