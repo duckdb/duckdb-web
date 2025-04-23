@@ -1691,6 +1691,9 @@ INNER JOIN (
 ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id))
 ```
 
+> `NATURAL`, `POSITIONAL` and `ASOF` joins are not supported by the API.
+> `CROSS` joins are provided through the [cross method](#cross). 
+
 
 ##### Example
 
