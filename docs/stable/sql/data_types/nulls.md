@@ -101,13 +101,15 @@ SELECT ifnull(1, 'default_string');
 1
 ```
 
-## `NULL` and `AND`/`OR`
+## `NULL` and `AND` / `OR`
 
-`NULL` values have special behavior when used with `AND` and `OR`. For details, see the [Boolean Type documentation]({% link docs/stable/sql/data_types/boolean.md %}).
+`NULL` values have special behavior when used with `AND` and `OR`.
+For details, see the [Boolean Type documentation]({% link docs/stable/sql/data_types/boolean.md %}).
 
 ## `NULL` and `IN` / `NOT IN`
 
-The behavior of `... IN <something with a NULL>` is different from `... IN <something with no NULLs>`. For details, see the [IN documentation]({% link docs/stable/sql/expressions/in.md %}).
+The behavior of `... IN ⟨something with a NULL⟩` is different from `... IN ⟨something with no NULLs⟩`.
+For details, see the [`IN` documentation]({% link docs/stable/sql/expressions/in.md %}).
 
 ## `NULL` and Aggregate Functions
 

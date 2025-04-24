@@ -99,9 +99,15 @@ SELECT ifnull(1, 'default_string');
 1
 ```
 
-## `NULL` and Conjunctions
+## `NULL` and `AND` / `OR`
 
-`NULL` values have special semantics in `AND` / `OR` conjunctions. For the ternary logic truth tables, see the [Boolean Type documentation]({% link docs/preview/sql/data_types/boolean.md %}).
+`NULL` values have special behavior when used with `AND` and `OR`.
+For details, see the [Boolean Type documentation]({% link docs/stable/sql/data_types/boolean.md %}).
+
+## `NULL` and `IN` / `NOT IN`
+
+The behavior of `... IN ⟨something with a NULL⟩` is different from `... IN ⟨something with no NULLs⟩`.
+For details, see the [`IN` documentation]({% link docs/stable/sql/expressions/in.md %}).
 
 ## `NULL` and Aggregate Functions
 
