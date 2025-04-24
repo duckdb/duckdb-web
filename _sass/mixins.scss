@@ -22,6 +22,15 @@
 			border: 1px solid var(--interactive-button-yellow-border-color-hover, #EDDD0C);
 		}
 	}
+	&.blue{
+		background: var(--blue-70, #2EAFFF);
+		border: 1px solid var(--blue-60, #58A8DA);
+		color: #000;
+		&:hover{
+			background: var(--blue-60, #58A8DA);
+			border: 1px solid var(--blue-60, #58A8DA);
+		}
+	}
 	&.transparent{
 		border: 1px solid var(--interactive-button-black-border-color, #1A1A1A);
 		&:hover{
