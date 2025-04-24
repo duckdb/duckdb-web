@@ -10,8 +10,9 @@ from sphinx.application import Sphinx
 from sphinx.builders.html import StandaloneHTMLBuilder
 from sphinx.locale import __
 
+from generate_python_relational_docs import generate_python_relational_api_md
 
-DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "stable")
+DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "preview")
 
 redirect_from_text = """\
 redirect_from:
@@ -66,9 +67,14 @@ def post_process(filename: Path):
 
 
 def create_index_rst():
-    classes = sorted(
-        [name for name, obj in inspect.getmembers(duckdb) if inspect.isclass(obj)]
-    )
+    classes = [
+        {
+            "name": name,
+            "rst_type": 'automethod' if not inspect.isclass(obj) else 'autoclass',
+        }
+        for name, obj in inspect.getmembers(duckdb)
+        if inspect.isclass(obj) or inspect.isroutine(obj)
+    ]
 
     with open(
         join(
@@ -79,12 +85,13 @@ def create_index_rst():
     ) as f:
         f.write(".. currentmodule:: duckdb\n\n")
         for cls in classes:
-            if cls == "DuckDBPyRelation":
+            if cls['name'] == "DuckDBPyRelation":
                 f.write(".. include:: relation.rst\n")
             else:
-                f.write(f".. autoclass:: duckdb.{cls}\n")
-                f.write("   :members:\n")
-                f.write("   :show-inheritance:\n")
+                f.write(f".. {cls['rst_type']}:: duckdb.{cls['name']}\n")
+                if cls['rst_type'] == 'autoclass':
+                    f.write("   :members:\n")
+                    f.write("   :show-inheritance:\n")
 
 
 def create_relation_rst():
@@ -129,6 +136,7 @@ def main():
         version('pandas'),
     )
 
+    generate_python_relational_api_md()
     create_index_rst()
     create_relation_rst()
     destdir = join(

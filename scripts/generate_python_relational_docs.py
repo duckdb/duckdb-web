@@ -1,3 +1,5 @@
+import os
+
 import duckdb
 
 import inspect
@@ -19,8 +21,18 @@ from generate_python_relational_docs_methods import (
     OUTPUT_MEMBER_LIST,
 )
 
-FORMATTER_TEXT = """---
+DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "preview")
+
+redirect_from_text = """\
+redirect_from:
+- /docs/api/python/relational_api
+- /docs/api/python/relational_api/
+- /docs/clients/python/relational_api
+"""
+
+FORMATTER_TEXT = f"""---
 layout: docu
+{redirect_from_text if DUCKDB_DOC_VERSION == 'stable' else ''}
 title: Relational API
 ---
 
@@ -228,7 +240,7 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
 
 
 def generate_from_db(relational_api_table):
-    with open("docs/preview/clients/python/relational_api.md", "w") as f:
+    with open(f"docs/{DUCKDB_DOC_VERSION}/clients/python/relational_api.md", "w") as f:
         f.write(FORMATTER_TEXT)
         f.write("\n")
 
@@ -313,7 +325,7 @@ def check_fully_documented(class_name, configured_in_script, class_members):
         )
 
 
-def main():
+def generate_python_relational_api_md():
     check_fully_documented(
         class_name="DuckDBPyRelation",
         configured_in_script=PY_RELATION_MEMBERS,
@@ -352,4 +364,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    generate_python_relational_api_md()
