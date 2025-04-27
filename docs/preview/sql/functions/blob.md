@@ -21,7 +21,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`from_binary(value)`](#from_binaryvalue) | Converts a `value` from binary representation to a blob. |
 | [`from_hex(value)`](#from_hexvalue) | Converts a `value` from hexadecimal representation to a blob. |
 | [`hex(blob)`](#hexblob) | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
-| [`md5(blob)`](#md5blob) | Returns the MD5 hash of the `blob` as as a `VARCHAR`. |
+| [`md5(blob)`](#md5blob) | Returns the MD5 hash of the `blob` as a `VARCHAR`. |
 | [`md5_number(blob)`](#md5_numberblob) | Returns the MD5 hash of the `blob` as a `HUGEINT`. |
 | [`octet_length(blob)`](#octet_lengthblob) | Number of bytes in `blob`. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/preview/guides/file_formats/read_file.md %}#read_blob) for more details. |
@@ -119,7 +119,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `blob` as as a `VARCHAR`. |
+| **Description** | Returns the MD5 hash of the `blob` as a `VARCHAR`. |
 | **Example** | `md5('\xAA\xBB'::BLOB)` |
 | **Result** | `58cea1f6b2b06520613e09af90dc1c47` |
 
