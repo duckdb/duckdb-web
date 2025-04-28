@@ -6,7 +6,7 @@ excerpt: DuckDB, a free and open-source analytical data management system, has a
 tags: ["using DuckDB"]
 ---
 
-Window functions (those using the `OVER` clause) are important tools for analysing data series,
+Window functions (those using the `OVER` clause) are important tools for analyzing data series,
 but they can be slow if not implemented carefully.
 In this post, we will take a look at how DuckDB implements windowing.
 We will also see how DuckDB can leverage its aggregate function architecture
@@ -236,7 +236,7 @@ resulting in a 33% improvement in the last-in-group example:
 
 <img src="/images/blog/windowing/last-in-group-sort.jpg" alt="Window takes X seconds, Join takes half a second" title="Figure 4: Last in Group Sorting Performance Improvement" style="max-width:90%;width:90%;height:auto"/>
 
-As a final optimisation, even though you can request multiple window functions,
+As a final optimization, even though you can request multiple window functions,
 DuckDB will collect functions that use the same partitioning and ordering,
 and share the data layout between those functions.
 
