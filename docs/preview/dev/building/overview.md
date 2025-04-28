@@ -3,7 +3,6 @@ layout: docu
 title: Building DuckDB from Source
 ---
 
-
 ## When Should You Build DuckDB?
 
 DuckDB binaries are available for _stable_ and _preview_ builds on the [installation page]({% link docs/installation/index.html %}).
