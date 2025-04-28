@@ -8,6 +8,8 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tags: ["release"]
 ---
 
+TODO: change `/preview/` links to `/stable/`
+
 To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.3.0).
 
@@ -17,20 +19,21 @@ We are proud to release DuckDB 1.3.0. This release is codenamed “CODENAME” a
 
 ## What's New in 1.3.0
 
-
-### Breaking Changes
+### Breaking Changes and Deprecations
 
 [**The release is built using `manylinux_2_28`.**](https://github.com/duckdb/duckdb/pull/16956)
 Now that all mainstream distributions use [glibc 2.28](https://lists.gnu.org/archive/html/info-gnu/2018-08/msg00000.html) or newer, we can retire the `_gcc4` special case for Linux binary distributions.
 
+[**Lambda function move from `->` to `:`**](https://github.com/duckdb/duckdb/pull/17235)
+
 ### Fixes
 
-cgroup: https://github.com/duckdb/duckdb/pull/16608
+[cgroups](https://github.com/duckdb/duckdb/pull/16608)
 
 ### New Extension Features
 
-* encoding extension
-* Iceberg (Amazon S3 Tables, etc.)
+* [encoding extension]({% link docs/preview/core_extensions/encodings.md %})
+* Iceberg extension (Amazon S3 Tables, etc.)
 
 
 ### New Features
@@ -42,7 +45,7 @@ cgroup: https://github.com/duckdb/duckdb/pull/16608
 
 ## Final Thoughts
 
-TODO: conclusions and acknowledgement
+TODO: conclusions and acknowledgements
 
 These were a few highlights – but there are many more features and improvements in this release.  There have been **over XX commits** by over YY contributors since we released 1.2.2.
 The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.3.0).
