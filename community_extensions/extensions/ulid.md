@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 567
-extension_download_count_pretty: 567
+extension_download_count: 544
+extension_download_count_pretty: 544
 image: '/images/community_extensions/social_preview/preview_community_extension_ulid.png'
 layout: community_extension_doc
 ---
