@@ -94,8 +94,8 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Use **4 spaces** for indentation.
 * Use uppercase SQL keywords, e.g., `SELECT 42 AS x, 'hello world' AS y FROM ...;`.
 * Use lowercase function names, e.g., `SELECT cos(pi()), date_part('year', DATE '1992-09-20');`.
-* Use snake case (lowercase with underscore separators) for table and column names, e.g. `SELECT departure_time FROM train_services;`
-* Add spaces around commas and operators, e.g. `SELECT FROM tbl WHERE x > 42;`.
+* Use snake case (lowercase with underscore separators) for table and column names, e.g., `SELECT departure_time FROM train_services;`
+* Add spaces around commas and operators, e.g., `SELECT FROM tbl WHERE x > 42;`.
 * Add a semicolon to the end of each SQL statement, e.g., `SELECT 42 AS x;`.
 * Commas should be placed at the end of each line.
 * _Do not_ add clauses or expressions purely for aligning lines. For example, avoid adding `WHERE 1 = 1` and `WHERE true`.
@@ -178,7 +178,7 @@ FROM duckdb_functions()
 WHERE categories != [];
 ```
 
-All data (e.g. parameter names, descriptions, examples) comes from the output of `duckdb_functions()`. Any deviations (exclusion, additions or overrides), need to be hardcoded in the script [`generate_sql_function_docs.py`](scripts/generate_sql_function_docs.py) via variables `OVERRIDES` and `EXCLUDES`.
+All data (e.g., parameter names, descriptions, examples) comes from the output of `duckdb_functions()`. Any deviations (exclusion, additions or overrides), need to be hardcoded in the script [`generate_sql_function_docs.py`](scripts/generate_sql_function_docs.py) via variables `OVERRIDES` and `EXCLUDES`.
 
 Example: `blob.md`
 
