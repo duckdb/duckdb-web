@@ -171,7 +171,7 @@ so making it easier to say what you are doing helps others (or even you!) unders
 
 The syntax also makes it easier for DuckDB to understand what you want and produce your results faster.
 The window and inequality join version loses the valuable information that the intervals do not overlap.
-It also prevents the query optimiser from moving the join 
+It also prevents the query optimizer from moving the join 
 because SQL insists that windowing happens *after* joins.
 By treating the operation *as a join* with *known data constraints*,
 DuckDB can move the join for performance and use a tailored join algorithm.
@@ -205,7 +205,7 @@ In the first case, it may not be easy to determine an upper sentinel value
 (suppose the ordering was a string column?)
 In the second case, you would need to write the condition as 
 `h.when < s.end OR s.end IS NULL`
-and using an `OR` like this in a join condition makes comparisons slow and hard to optimise.
+and using an `OR` like this in a join condition makes comparisons slow and hard to optimize.
 Moreover, if the ordering column is already using `NULL` to indicate missing values,
 this option is not available.
 
@@ -546,7 +546,7 @@ Now the runtime improvement of AsOf over IEJoin is huge (~500×)
 because it can leverage the partitioning to eliminate almost all of the equality mismatches.
 
 The Hash Join implementation does much better here because 
-the optimiser notices that the probe side is smaller and builds the hash table on the "probe" table.
+the optimizer notices that the probe side is smaller and builds the hash table on the "probe" table.
 Also, the probe values here are unique, so the hash table chains are minimal.
 
 ### Window with Ranking

@@ -520,7 +520,7 @@ The [`QUALIFY` clause]({% link docs/stable/sql/query_syntax/qualify.md %}) avoid
 ### Box and Whisker Queries
 
 All aggregates can be used as windowing functions, including the complex statistical functions.
-These function implementations have been optimised for windowing,
+These function implementations have been optimized for windowing,
 and we can use the window syntax to write queries that generate the data for moving box-and-whisker plots:
 
 ```sql
