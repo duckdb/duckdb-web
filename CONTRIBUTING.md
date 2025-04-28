@@ -98,7 +98,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Add spaces around commas and operators, e.g. `SELECT FROM tbl WHERE x > 42;`.
 * Add a semicolon to the end of each SQL statement, e.g., `SELECT 42 AS x;`.
 * Commas should be placed at the end of each line.
-* _Do not_ add clauses or expressions purely for aligning lines. For exampe, avoid adding `WHERE 1 = 1` and `WHERE true`.
+* _Do not_ add clauses or expressions purely for aligning lines. For example, avoid adding `WHERE 1 = 1` and `WHERE true`.
 * _Do not_ include the DuckDB prompt. For example, avoid the following: `D SELECT 42;`.
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
 * The returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
