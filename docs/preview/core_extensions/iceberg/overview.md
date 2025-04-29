@@ -36,12 +36,14 @@ To test the examples, download the [`iceberg_data.zip`](/data/iceberg_data.zip) 
 
 ### Common Parameters
 
-| Parameter                    | Type      | Default                                    | Description                                                |
-|------------------------------|-----------|--------------------------------------------|------------------------------------------------------------|
-| `allow_moved_paths`          | `BOOLEAN` | `false`                                    | Allows scanning Iceberg tables that are moved              |
-| `metadata_compression_codec` | `VARCHAR` | `''`                                       | Treats metadata files as when set to `'gzip'`              |
-| `version`                    | `VARCHAR` | `'?'`                                      | Provides an explicit version string, hint file or guessing |
-| `version_name_format`        | `VARCHAR` | `'v%s%s.metadata.json,%s%s.metadata.json'` | Controls how versions are converted to metadata file names |
+| Parameter                    | Type        | Default                                    | Description                                                |
+| ---------------------------- | ----------- | ------------------------------------------ | ---------------------------------------------------------- |
+| `allow_moved_paths`          | `BOOLEAN`   | `false`                                    | Allows scanning Iceberg tables that are moved              |
+| `metadata_compression_codec` | `VARCHAR`   | `''`                                       | Treats metadata files as when set to `'gzip'`              |
+| `snapshot_from_id`           | `UBIGINT`   | `NULL`                                     | Access snapshot with a specific `id`                       |
+| `snapshot_from_timestamp`    | `TIMESTAMP` | `NULL`                                     | Access snapshot with a specific `timestamp`                |
+| `version`                    | `VARCHAR`   | `'?'`                                      | Provides an explicit version string, hint file or guessing |
+| `version_name_format`        | `VARCHAR`   | `'v%s%s.metadata.json,%s%s.metadata.json'` | Controls how versions are converted to metadata file names |
 
 ### Querying Individual Tables
 
@@ -172,7 +174,10 @@ The “latest” version is assumed to be the filename that is lexicographically
 ```sql
 SET unsafe_enable_version_guessing = true;
 SELECT count(*)
-FROM iceberg_scan('data/iceberg/lineitem_iceberg_no_hint', allow_moved_paths = true);
+FROM iceberg_scan(
+    'data/iceberg/lineitem_iceberg_no_hint',
+    allow_moved_paths = true
+);
 ```
 
 ## Limitations
