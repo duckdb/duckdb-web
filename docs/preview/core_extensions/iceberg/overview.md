@@ -174,7 +174,10 @@ The “latest” version is assumed to be the filename that is lexicographically
 ```sql
 SET unsafe_enable_version_guessing = true;
 SELECT count(*)
-FROM iceberg_scan('data/iceberg/lineitem_iceberg_no_hint', allow_moved_paths = true);
+FROM iceberg_scan(
+    'data/iceberg/lineitem_iceberg_no_hint',
+    allow_moved_paths = true
+);
 ```
 
 ## Limitations
