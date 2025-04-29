@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: bigquery
   description: Integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets
-  version: 0.2.2
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: hafenkran/duckdb-bigquery
-  ref: d2e6c8d38c97df6ba69a96e6ebd901e0fb28312e
+  ref: 2def6cec97b9e05149aca0c3a66b838ae47f25b0
 
 docs:
   hello_world: |
@@ -53,8 +53,8 @@ docs:
 
 extension_star_count: 106
 extension_star_count_pretty: 106
-extension_download_count: 18407
-extension_download_count_pretty: 18.4k
+extension_download_count: 18284
+extension_download_count_pretty: 18.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -93,13 +93,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|              name               |                                                                description                                                                 | input_type | scope  |
-|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
-| bq_curl_ca_bundle_path          | Path to the CA bundle for curl                                                                                                             | VARCHAR    | GLOBAL |
-| bq_debug_show_queries           | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                | BOOLEAN    | GLOBAL |
-| bq_default_location             | Default location for BigQuery queries                                                                                                      | VARCHAR    | GLOBAL |
-| bq_experimental_filter_pushdown | Whether to use filter pushdown (currently experimental)                                                                                    | BOOLEAN    | GLOBAL |
-| bq_experimental_use_info_schema | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API. | BOOLEAN    | GLOBAL |
-| bq_query_timeout_ms             | Timeout for BigQuery queries in milliseconds                                                                                               | BIGINT     | GLOBAL |
+|                  name                   |                                                                description                                                                 | input_type | scope  |
+|-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
+| bq_bignumeric_as_varchar                | Read BigQuery BIGNUMERIC data type as VARCHAR                                                                                              | BOOLEAN    | GLOBAL |
+| bq_curl_ca_bundle_path                  | Path to the CA bundle for curl                                                                                                             | VARCHAR    | GLOBAL |
+| bq_debug_show_queries                   | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                | BOOLEAN    | GLOBAL |
+| bq_default_location                     | Default location for BigQuery queries                                                                                                      | VARCHAR    | GLOBAL |
+| bq_experimental_enable_bigquery_options | Whether to enable BigQuery OPTIONS in CREATE statements                                                                                    | BOOLEAN    | GLOBAL |
+| bq_experimental_filter_pushdown         | Whether to use filter pushdown (currently experimental)                                                                                    | BOOLEAN    | GLOBAL |
+| bq_experimental_use_info_schema         | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API. | BOOLEAN    | GLOBAL |
+| bq_query_timeout_ms                     | Timeout for BigQuery queries in milliseconds                                                                                               | BIGINT     | GLOBAL |
 
 
