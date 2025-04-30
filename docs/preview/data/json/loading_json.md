@@ -82,7 +82,7 @@ These functions have the following parameters:
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `none`, `gzip`, `zstd` and `auto_detect`. | `VARCHAR` | `auto_detect` |
-| `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
+| `filename` | Whether or not an extra `filename` column should be included in the result. Since DuckDB v1.3.0, the `filename` column is added automatically as a virtual column and this option is only kept for compatibility reasons. | `BOOL` | `false` |
 | `format` | Can be one of `auto`, `unstructured`, `newline_delimited` and `array`. | `VARCHAR` | `array` |
 | `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/preview/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `newline_delimited`). | `BOOL` | `false` |

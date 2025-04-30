@@ -62,6 +62,13 @@ CREATE TABLE todos AS
     SELECT * FROM 'todos.json';
 ```
 
+Since DuckDB v1.3.0, the JSON reader returns the `filename` virtual column:
+
+```sql
+SELECT filename, *
+FROM 'todos-*.json';
+```
+
 ### Writing JSON
 
 Write the result of a query to a JSON file:
