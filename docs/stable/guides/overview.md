@@ -20,7 +20,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 ## Data Import and Export
 
 * [Data import overview]({% link docs/stable/guides/file_formats/overview.md %})
-* [File Access with the file: Protocol]({% link docs/stable/guides/file_formats/file_access.md %})
+* [File access with the `file:` protocol]({% link docs/stable/guides/file_formats/file_access.md %})
 
 ### CSV Files
 
