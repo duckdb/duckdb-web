@@ -238,7 +238,7 @@ DuckDB can make use of available memory for caching, it also fully supports disk
 <div class="answer" markdown="1">
 
 DuckDB does not use the [Apache Arrow format](https://arrow.apache.org/) internally.
-However, DuckDB supports reading from / writing to Arrow using the [`arrow` extension]({% link docs/stable/extensions/arrow.md %}).
+However, DuckDB supports reading from and writing to Arrow using the [`arrow` extension]({% link docs/stable/extensions/arrow.md %}).
 It can also run SQL queries directly on Arrow using [`pyarrow`]({% link docs/stable/guides/python/sql_on_arrow.md %}).
 
 </div>
@@ -318,7 +318,7 @@ DuckDB does not use *explicit SIMD* (single instruction, multiple data) instruct
 
 We welcome experiments comparing DuckDB's performance to other systems.
 To ensure fair comparison, we have a few recommendations.
-First, try to use the [latest DuckDB version available as a preview release]({% link docs/installation/index.html %}), which often has significant performance improvements compared to the last stable release.
+First, try to use the [preview release]({% link docs/preview/index.md %}), which often has significant performance improvements compared to the last stable release.
 Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
 Third, study the DuckDB [Performance Guide]({% link docs/stable/guides/performance/overview.md %}), which has best practices for ensuring optimal performance.
 Finally, please report the DuckDB version (for stable version, the version number, for nightly builds, the commit hash).
