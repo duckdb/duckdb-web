@@ -1755,14 +1755,48 @@ created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,202
         'aliases': ['df', 'to_df'],
     },
     'fetchmany': {
-        'example': 'rel.fetchmany(size=1)',
+        'example': """
+while res := rel.fetchmany(size=1):
+    print(res)
+""",
         'result': """
-[(UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
-  'value is uneven',
-  1,
-  datetime.datetime(2025, 4, 10, 11, 24, 51, 259000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('cf4c5e32-d0aa-4699-a3ee-0092e900f263'), 'value is uneven', 1, datetime.datetime(2025, 4, 30, 16, 23, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('cec335ac-24ac-49a3-ae9a-bb35f71fc88d'), 'value is even', 2, datetime.datetime(2025, 4, 30, 16, 24, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('2423295d-9bb0-453c-a385-21bdacba03b6'), 'value is uneven', 3, datetime.datetime(2025, 4, 30, 16, 25, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('88806b21-192d-41e7-a293-c789aad636ba'), 'value is even', 4, datetime.datetime(2025, 4, 30, 16, 26, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('05837a28-dacf-4121-88a6-a374aefb8a07'), 'value is uneven', 5, datetime.datetime(2025, 4, 30, 16, 27, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('b9c1f7e9-6156-4554-b80e-67d3b5d810bb'), 'value is even', 6, datetime.datetime(2025, 4, 30, 16, 28, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('4709c7fa-d286-4864-bb48-69748b447157'), 'value is uneven', 7, datetime.datetime(2025, 4, 30, 16, 29, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('30e48457-b103-4fa5-95cf-1c7f0143335b'), 'value is even', 8, datetime.datetime(2025, 4, 30, 16, 30, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('036b7f4b-bd78-4ffb-a351-964d93f267b7'), 'value is uneven', 9, datetime.datetime(2025, 4, 30, 16, 31, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
 """,
         'default': True,
+        'additional_description': '''
+\n
+>Warning Executing any operation during the retrieval of the data from an [aggregate](#aggregate) relation,
+>will close the result set.
+>```python
+>import duckdb
+>
+>duckdb_conn = duckdb.connect()
+>
+>rel = duckdb_conn.sql("""
+>       select 
+>           gen_random_uuid() as id, 
+>           concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+>           range as value, 
+>           now() + concat(range,' ', 'minutes')::interval as created_timestamp
+>       from range(1, 10)
+>    """
+>)
+>
+>agg_rel = rel.aggregate("value")
+>
+>while res := agg_rel.fetchmany(size=1):
+>    print(res)
+>    rel.show()
+>```
+''',
     },
     'fetchnumpy': {
         'example': 'rel.fetchnumpy()',
@@ -1790,14 +1824,48 @@ created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,202
         'default': True,
     },
     'fetchone': {
-        'example': 'rel.fetchone()',
+        'example': """
+while res := rel.fetchone():
+    print(res)
+""",
         'result': """
-(UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
- 'value is uneven',
- 1,
- datetime.datetime(2025, 4, 10, 11, 24, 51, 259000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('fe036411-f4c7-4f52-9ddd-80cd2bb56613'), 'value is uneven', 1, datetime.datetime(2025, 4, 30, 12, 59, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('466c9b43-e9f0-4237-8f26-155f259a5b59'), 'value is even', 2, datetime.datetime(2025, 4, 30, 13, 0, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('5755cf16-a94f-41ef-a16d-21e856d71f9f'), 'value is uneven', 3, datetime.datetime(2025, 4, 30, 13, 1, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('05b52c93-bd68-45e1-b02a-a08d682c33d5'), 'value is even', 4, datetime.datetime(2025, 4, 30, 13, 2, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('cf61ef13-2840-4541-900d-f493767d7622'), 'value is uneven', 5, datetime.datetime(2025, 4, 30, 13, 3, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('033e7c68-e800-4ee8-9787-6cf50aabc27b'), 'value is even', 6, datetime.datetime(2025, 4, 30, 13, 4, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('8b8d6545-ff54-45d6-b69a-97edb63dfe43'), 'value is uneven', 7, datetime.datetime(2025, 4, 30, 13, 5, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('7da79dfe-b29c-462b-a414-9d5e3cc80139'), 'value is even', 8, datetime.datetime(2025, 4, 30, 13, 6, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('f83ffff2-33b9-4f86-9d14-46974b546bab'), 'value is uneven', 9, datetime.datetime(2025, 4, 30, 13, 7, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
 """,
         'default': True,
+        'additional_description': '''
+\n
+>Warning Executing any operation during the retrieval of the data from an [aggregate](#aggregate) relation,
+>will close the result set.
+>```python
+>import duckdb
+>
+>duckdb_conn = duckdb.connect()
+>
+>rel = duckdb_conn.sql("""
+>       select 
+>           gen_random_uuid() as id, 
+>           concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+>           range as value, 
+>           now() + concat(range,' ', 'minutes')::interval as created_timestamp
+>       from range(1, 10)
+>    """
+>)
+>
+>agg_rel = rel.aggregate("value")
+>
+>while res := agg_rel.fetchone():
+>    print(res)
+>    rel.show()
+>```
+''',
     },
     'pl': {
         'example': 'rel.pl(batch_size=1)',
