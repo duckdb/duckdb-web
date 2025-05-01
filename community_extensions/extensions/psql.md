@@ -48,10 +48,10 @@ docs:
   extended_description: |
     PSQL extends DuckDB's SQL with a pipe syntax to provide simple composable queries. It's a lightweight variant of piped languages such as PRQL and Kusto, yet leveraging the full power of DuckDB's SQL.
 
-extension_star_count: 78
-extension_star_count_pretty: 78
-extension_download_count: 536
-extension_download_count_pretty: 536
+extension_star_count: 79
+extension_star_count_pretty: 79
+extension_download_count: 511
+extension_download_count_pretty: 511
 image: '/images/community_extensions/social_preview/preview_community_extension_psql.png'
 layout: community_extension_doc
 ---
