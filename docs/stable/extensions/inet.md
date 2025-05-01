@@ -145,7 +145,7 @@ SELECT cidr, broadcast(cidr) FROM tbl;
 | 127.0.0.1                      | 127.0.0.1                          |
 | 2001:db8:3c4d:15::1a2f:1a2b/96 | 2001:db8:3c4d:15::/96              |
 
-## `<<=` Predicate 
+## `<<=` Predicate
 
 Is subnet contained by or equal to subnet?
 
@@ -164,7 +164,7 @@ SELECT cidr, INET '192.168.1.5/32' <<= cidr FROM tbl;
 | 127.0.0.1                      | false                                       |
 | 2001:db8:3c4d:15::1a2f:1a2b/96 | false                                       |
 
-## `>>=` Predicate 
+## `>>=` Predicate
 
 Does subnet contain or equal subnet?
 

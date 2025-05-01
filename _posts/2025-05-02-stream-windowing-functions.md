@@ -12,19 +12,20 @@ tags: ["using DuckDB"]
 
 In data platforms, we usually categorize the data into dimension and fact data. While dimensions contain information about entities (name, address, serial number, etc.), facts contain events related to such entities (clicks, sales, bank transactions, readings from IoT devices, etc.). In general, fact data includes a timestamp attribute, denoting the moment when the event happened (or was observed).
 
-When the timestamped data is processed on a streaming platform, it is, usually, processed with _stream windowing functions_, in order to organize the data into time windows.
+When the timestamped data is processed on a streaming platform, it is often processed with _stream windowing functions_ in order to organize the data into time windows.
 In this post, we will show how to apply stream windows on static timestamped fact data in DuckDB, as part of a data analysis task to compute train service summaries, trends and interruptions at Amsterdam Centraal Station.
 
 > In a future post, we'll cover streaming design patterns with DuckDB.
 
 For the current implementation, we will use the DuckDB database created in the dbt project detailed in the article [“Fully Local Data Transformation with dbt and DuckDB”]({% post_url 2025-04-04-dbt-duckdb %}), based on the open data from the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/about). We start by attaching (in any DuckDB session) the database from our storage location.
 
-```sql 
+```sql
 ATTACH 'http://blobs.duckdb.org/data/dutch_railway_network.duckdb';
 USE dutch_railway_network.main_main;
 ```
 
-> Warning The database is rather big (approx. 1.2 GB), therefore make sure to have a stable internet connection. Instead of attaching the database, one could download the file and connect to it from the command line:
+> Warning The database is rather big (approx. 1.2 GB), therefore make sure to have a stable internet connection. Instead of attaching the database, you can also [download the database file](http://blobs.duckdb.org/data/dutch_railway_network.duckdb) and connect to it from the command line:
+>
 > ```bash
 > duckdb dutch_railway_network.duckdb -cmd 'USE main_main'
 > ```
@@ -126,13 +127,12 @@ Given that tumbling windows are non-overlapping intervals, we can calculate summ
     </a>
 </div>
 
-
 ## Hopping Windows
 
 [_Hopping windows_](https://learn.microsoft.com/en-us/stream-analytics-query/hopping-window-azure-stream-analytics) are fixed-size time intervals, but, contrary to tumbling windows, are overlapping. A hopping window is defined by:
 
 - how much time should elapse between the window start time, called **hopping size**;
-- how much time should a window contain, called **window size**. 
+- how much time should a window contain, called **window size**.
 
 One use case for hopping windows is to identify the five busiest 15-minute periods (window size) during 2024, starting every 5 minutes (hopping size). We start by generating artificial hopping windows for all the dates we are interested in:
 
@@ -186,7 +186,7 @@ LIMIT 5;
 
 resulting in:
 
-```text 
+```text
 ┌─────────────────────┬─────────────────────┬────────────────────┐
 │    window_start     │     window_end      │ number_of_services │
 │      timestamp      │      timestamp      │       int64        │
@@ -208,7 +208,7 @@ Can you imagine how it must have been like in the control room when within 15 mi
 [_Sliding windows_](https://learn.microsoft.com/en-us/stream-analytics-query/sliding-window-azure-stream-analytics) are overlapping intervals, but, compared to hopping windows, they are dynamically generated from the time column analyzed, therefore changing when new records are inserted.
 Sliding windows can be implemented by using the [`RANGE` window framing]({% link docs/stable/sql/functions/window_functions.md %}#framing):
 
-```sql 
+```sql
 SELECT
     station_service_time - INTERVAL 15 MINUTE AS window_start, -- window size
     station_service_time                      AS window_end,
