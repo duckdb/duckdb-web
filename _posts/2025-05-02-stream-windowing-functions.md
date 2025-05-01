@@ -13,7 +13,7 @@ tags: ["using DuckDB"]
 In data platforms, we usually categorize the data into dimension and fact data. While dimensions contain information about entities (name, address, serial number, etc.), facts contain events related to such entities (clicks, sales, bank transactions, readings from IoT devices, etc.). In general, fact data includes a timestamp attribute, denoting the moment when the event happened (or was observed).
 
 When the timestamped data is processed on a streaming platform, it is, usually, processed with _stream windowing functions_, in order to organize the data into time windows.
-In this post, we will show how to apply stream windows on a static timestamped fact data in DuckDB, as part of a data analysis task to compute train service summaries, trends and intreruptions at Amsterdam Centraal Station.
+In this post, we will show how to apply stream windows on static timestamped fact data in DuckDB, as part of a data analysis task to compute train service summaries, trends and interruptions at Amsterdam Centraal Station.
 
 > In a future post, we'll cover streaming design patterns with DuckDB.
 
@@ -31,13 +31,14 @@ USE dutch_railway_network.main_main;
 
 ## Tumbling Windows
 
-[_Tumbling windows_](https://learn.microsoft.com/en-us/stream-analytics-query/tumbling-window-azure-stream-analytics) are fixed-size time intervals, used to calculate summaries at a certain time unit level (year, day, hour, etc.). Tumbling windows are used to transform (irregular) fact data into time series data, by aggregating it at a regular time interval.
+[_Tumbling windows_](https://learn.microsoft.com/en-us/stream-analytics-query/tumbling-window-azure-stream-analytics) are fixed-size **[left-closed, right-open)** time intervals, used to calculate summaries at a certain time unit level (year, day, hour, etc.). Tumbling windows are also used to transform (irregular) fact data into time series data, by aggregating it at a regular time interval.
 
 One way of implementing tumbling windows is to use the [`date_trunc` function]({% link docs/stable/sql/functions/timestamp.md %}#date_truncpart-timestamp), which will truncate the timestamp to the specified precision. For example, in the following, we retrieve the number of services for each hour and each day in 2024:
 
 ```sql
 SELECT
-    date_trunc('hour', station_service_time) station_service_time_hour,
+    date_trunc('hour', station_service_time) AS window_start,
+    window_start + INTERVAL 1 HOUR AS window_end,
     count(*) AS number_of_services
 FROM ams_traffic_v
 WHERE year(station_service_time) = 2024
@@ -46,22 +47,22 @@ ORDER BY 1;
 ```
 
 ```text
-┌───────────────────────────┬────────────────────┐
-│ station_service_time_hour │ number_of_services │
-│         timestamp         │       int64        │
-├───────────────────────────┼────────────────────┤
-│ 2024-01-01 01:00:00       │                  2 │
-│ 2024-01-01 02:00:00       │                  3 │
-│ 2024-01-01 03:00:00       │                  4 │
-│          ·                │                  · │
-│          ·                │                  · │
-│          ·                │                  · │
-│ 2024-12-31 20:00:00       │                  9 │
-│ 2024-12-31 21:00:00       │                  1 │
-│ 2024-12-31 23:00:00       │                  2 │
-├───────────────────────────┴────────────────────┤
-│ 8781 rows (6 shown)                  2 columns │
-└────────────────────────────────────────────────┘
+┌─────────────────────┬─────────────────────┬────────────────────┐
+│    window_start     │     window_end      │ number_of_services │
+│      timestamp      │      timestamp      │       int64        │
+├─────────────────────┼─────────────────────┼────────────────────┤
+│ 2024-01-01 01:00:00 │ 2024-01-01 02:00:00 │                  2 │
+│ 2024-01-01 02:00:00 │ 2024-01-01 03:00:00 │                  3 │
+│ 2024-01-01 03:00:00 │ 2024-01-01 04:00:00 │                  4 │
+│          ·          │          ·          │                  · │
+│          ·          │          ·          │                  · │
+│          ·          │          ·          │                  · │
+│ 2024-12-31 20:00:00 │ 2024-12-31 21:00:00 │                  9 │
+│ 2024-12-31 21:00:00 │ 2024-12-31 22:00:00 │                  1 │
+│ 2024-12-31 23:00:00 │ 2025-01-01 00:00:00 │                  2 │
+├─────────────────────┴─────────────────────┴────────────────────┤
+│ 8781 rows (6 shown)                                  3 columns │
+└────────────────────────────────────────────────────────────────┘
 ```
 
 <div align="center" style="margin:10px">
@@ -82,7 +83,8 @@ SELECT
         INTERVAL 15 MINUTE, -- bucket width
         station_service_time,
         INTERVAL 0 MINUTE -- offset
-    ) AS service_hour_quarter,
+    ) AS window_start,
+    window_start + INTERVAL 15 MINUTE as window_end,
     count(*) AS number_of_services
 FROM ams_traffic_v
 WHERE year(station_service_time) = 2024
@@ -91,27 +93,28 @@ ORDER BY 1;
 ```
 
 ```text
-┌──────────────────────┬────────────────────┐
-│ service_hour_quarter │ number_of_services │
-│      timestamp       │       int64        │
-├──────────────────────┼────────────────────┤
-│ 2024-01-01 01:30:00  │                  1 │
-│ 2024-01-01 01:45:00  │                  1 │
-│ 2024-01-01 02:15:00  │                  2 │
-│          ·           │                  · │
-│          ·           │                  · │
-│          ·           │                  · │
-│ 2024-12-31 20:45:00  │                  2 │
-│ 2024-12-31 21:00:00  │                  1 │
-│ 2024-12-31 23:45:00  │                  2 │
-├──────────────────────┴────────────────────┤
-│ 32932 rows (6 shown)            2 columns │
-└───────────────────────────────────────────┘
+┌─────────────────────┬─────────────────────┬────────────────────┐
+│    window_start     │     window_end      │ number_of_services │
+│      timestamp      │      timestamp      │       int64        │
+├─────────────────────┼─────────────────────┼────────────────────┤
+│ 2024-01-01 01:30:00 │ 2024-01-01 01:45:00 │                  1 │
+│ 2024-01-01 01:45:00 │ 2024-01-01 02:00:00 │                  1 │
+│ 2024-01-01 02:15:00 │ 2024-01-01 02:30:00 │                  2 │
+│          ·          │          ·          │                  · │
+│          ·          │          ·          │                  · │
+│          ·          │          ·          │                  · │
+│ 2024-12-31 20:45:00 │ 2024-12-31 21:00:00 │                  2 │
+│ 2024-12-31 21:00:00 │ 2024-12-31 21:15:00 │                  1 │
+│ 2024-12-31 23:45:00 │ 2025-01-01 00:00:00 │                  2 │
+├─────────────────────┴─────────────────────┴────────────────────┤
+│ 32932 rows (6 shown)                                 3 columns │
+└────────────────────────────────────────────────────────────────┘
 ```
 
-> Given that the time bucket function is generating the buckets from the timestamp column itself, there could be missing gaps in the time series data. As seen in the above result, the first record is `2024-01-01 01:30:00`, because there are no records before that timestamp (`01:30:00` is included in the hour quarter `:30 - :45`, the time bucket function being **[left-closed, right-open interval)**).
+> The time bucket function is generating the buckets from the timestamp column itself, there could be gaps in the time series data.
+> As seen in the above result, the first record is `2024-01-01 01:30:00`, because there are no records before that timestamp.
 
-With tumbling windows, we can now easily calculate averages, such as the average number of services during a 15 minutes interval. It is interesting to observe that the number of train services is quite stable during the day but it's much lower during the night – even in Amsterdam.
+Given that tumbling windows are non-overlapping intervals, we can calculate summaries, such as the average number of services during a 15 minute interval. It is interesting to observe that the number of train services is quite stable during the day but it's much lower during the night – even in Amsterdam.
 
 <div align="center" style="margin:10px">
     <a href="/images/blog/time-based-analysis/hour_quarter_services.png">
@@ -165,16 +168,17 @@ WITH time_range AS (
 └───────────────────────────────────────────┘
 ```
 
-We then join the above intervals with the train service data in order to calculate the number of services for each interval:
+We then join the above intervals with the train service data in order to calculate the number of services for each **[left-closed, right-open)** interval:
 
 ```sql
 SELECT
     window_start,
     window_end,
-    count(*) AS number_of_services
+    count(service_sk) AS number_of_services
 FROM ams_traffic_v
 INNER JOIN time_range AS ts
-    ON station_service_time BETWEEN ts.window_start AND ts.window_end
+    ON station_service_time >= ts.window_start
+        AND station_service_time < ts.window_end
 GROUP BY ALL
 ORDER BY 3 DESC, 1 ASC
 LIMIT 5;
@@ -187,21 +191,22 @@ resulting in:
 │    window_start     │     window_end      │ number_of_services │
 │      timestamp      │      timestamp      │       int64        │
 ├─────────────────────┼─────────────────────┼────────────────────┤
-│ 2024-02-17 11:25:00 │ 2024-02-17 11:40:00 │                 29 │
 │ 2024-02-17 10:25:00 │ 2024-02-17 10:40:00 │                 28 │
-│ 2024-02-17 12:25:00 │ 2024-02-17 12:40:00 │                 28 │
-│ 2024-02-17 13:25:00 │ 2024-02-17 13:40:00 │                 28 │
-│ 2024-02-17 14:25:00 │ 2024-02-17 14:40:00 │                 28 │
+│ 2024-02-17 11:25:00 │ 2024-02-17 11:40:00 │                 28 │
+│ 2024-02-17 16:25:00 │ 2024-02-17 16:40:00 │                 28 │
+│ 2024-02-17 09:25:00 │ 2024-02-17 09:40:00 │                 27 │
+│ 2024-02-17 12:25:00 │ 2024-02-17 12:40:00 │                 27 │
 └─────────────────────┴─────────────────────┴────────────────────┘
 ```
 
-Can you imagine how it must have been like in the control room when within 15 minutes, 29 trains were arriving or departing in a station with 15 tracks?
+Can you imagine how it must have been like in the control room when within 15 minutes, 28 trains were arriving or departing in a station with 15 tracks?
 
-> By applying a `RIGHT OUTER JOIN` in the above query, missing gaps are filled with 0 number of services. Use it with precaution, it is a time consuming query!
+> By applying a `RIGHT OUTER JOIN` in the above query, gaps are filled with 0 number of services.
 
 ## Sliding Windows
 
-[_Sliding windows_](https://learn.microsoft.com/en-us/stream-analytics-query/sliding-window-azure-stream-analytics) are overlapping intervals, but, compared to hopping windows, they are dynamically generated from the time column analyzed, therefore changing when new records are inserted. Sliding windows can be implemented by using the [`RANGE` window framing]({% link docs/stable/sql/functions/window_functions.md %}#framing):
+[_Sliding windows_](https://learn.microsoft.com/en-us/stream-analytics-query/sliding-window-azure-stream-analytics) are overlapping intervals, but, compared to hopping windows, they are dynamically generated from the time column analyzed, therefore changing when new records are inserted.
+Sliding windows can be implemented by using the [`RANGE` window framing]({% link docs/stable/sql/functions/window_functions.md %}#framing):
 
 ```sql 
 SELECT
@@ -231,7 +236,7 @@ LIMIT 5;
 └─────────────────────┴─────────────────────┴────────────────────┘
 ```
 
-> When the data is produced at every X time units, a hopping window of X hop size is equivalent with a sliding window (applying the same window size). That is the reason why the window [2024-02-17 11:25:00, 2024-02-17 11:40:00] is returned by both hopping and sliding windows.
+> Because the current row is included in the calculation, the sliding windows are **[left-closed, right-closed]**.
 
 ## Session Windows
 
