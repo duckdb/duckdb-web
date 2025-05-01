@@ -27,10 +27,10 @@ docs:
   extended_description: |
     Quackformers, a DuckDB extension for LLM-related tasks. Quackformers is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/)
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 14
-extension_download_count_pretty: 14
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 134
+extension_download_count_pretty: 134
 image: '/images/community_extensions/social_preview/preview_community_extension_quackformers.png'
 layout: community_extension_doc
 ---

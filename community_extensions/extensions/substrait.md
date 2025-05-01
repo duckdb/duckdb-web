@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: substrait-io/duckdb-substrait-extension
-  ref: 2a8739cdceb4b31f52319733acb3521f04274eb2
+  ref: ec9f8725df7aa22bae7217ece2f221ac37563da4
 
 docs:
   hello_world: |
@@ -32,8 +32,8 @@ redirect_from:
 
 extension_star_count: 40
 extension_star_count_pretty: 40
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 160
+extension_download_count_pretty: 160
 image: '/images/community_extensions/social_preview/preview_community_extension_substrait.png'
 layout: community_extension_doc
 ---
