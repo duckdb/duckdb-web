@@ -1379,6 +1379,10 @@
                 {
                   "page": "Benchmarks",
                   "url": "benchmarks"
+                },
+                {
+                  "page": "Working with Huge Databases",
+                  "url": "working_with_huge_databases"
                 }
               ]
             },
