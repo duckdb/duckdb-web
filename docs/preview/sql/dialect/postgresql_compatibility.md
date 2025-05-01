@@ -175,6 +175,29 @@ In PostgreSQL, the `VACUUM` statement garbage collects tables and analyzes table
 In DuckDB, the [`VACUUM` statement]({% link docs/preview/sql/statements/vacuum.md %}) is only used to rebuild statistics.
 For instruction on reclaiming space, refer to the [“Reclaiming space” page]({% link docs/preview/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
 
+## Strings
+
+Since version 1.3.0, DuckDB escapes characters such as `'` in strings serialized in nested data structures.
+PostgreSQL does not do this.
+
+For an example, run:
+
+```sql
+SELECT ARRAY[''''];
+```
+
+PostgreSQL returns:
+
+```text
+{'}
+```
+
+DuckDB returns:
+
+```text
+['\'']
+```
+
 ## Functions
 
 ### `regexp_extract` Function
