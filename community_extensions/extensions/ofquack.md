@@ -25,8 +25,8 @@ docs:
     It allows you to run arbitrary SQL queries against Oracle Fusion database directly from DuckDB, inferring column names at runtime and returning all data as VARCHAR columns—as native DuckDB tables and as resultsets that can be directly consumed by downstream applications.
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 302
-extension_download_count_pretty: 302
+extension_download_count: 411
+extension_download_count_pretty: 411
 image: '/images/community_extensions/social_preview/preview_community_extension_ofquack.png'
 layout: community_extension_doc
 ---
