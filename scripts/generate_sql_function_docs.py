@@ -22,7 +22,7 @@ class DocFunction:
 DOC_VERSION = 'preview'
 DOC_FILES = [
     f'docs/{DOC_VERSION}/sql/functions/blob.md',
-    f'docs/{DOC_VERSION}/sql/functions/char.md',
+    f'docs/{DOC_VERSION}/sql/functions/text.md',
 ]
 
 # 'functions' that are binary operators are listed between the arguments

@@ -128,7 +128,7 @@ for await (const batch of await conn.send<{ v: arrow.Int32 }>(`
 
 Alternatively, you can prepare statements for parameterized queries using:
 
-``` ts
+```ts
 // Prepare query
 const stmt = await conn.prepare<{ v: arrow.Int32 }>(
     `SELECT (v + ?) AS v FROM generate_series(0, 10000) t(v);`

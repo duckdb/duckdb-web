@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: Text Functions
+redirect_from:
+- /docs/preview/sql/functions/char
+- /docs/preview/sql/functions/char/
 ---
 
 <!-- markdownlint-disable MD001 -->
