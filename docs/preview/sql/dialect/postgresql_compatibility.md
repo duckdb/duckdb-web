@@ -265,7 +265,7 @@ To work around this, add the other attributes or use the [`GROUP BY ALL` clause]
 
 PostgreSQL supports the [POSIX regular expression matching operators]({% link docs/preview/sql/functions/pattern_matching.md %}) `~` (case-sensitive partial regex matching) and `~*` (case-insensitive partial regex matching) as well as their negated variants, `!~` and `!~*`, respectively.
 
-In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/preview/sql/functions/char.md %}#regexp_full_matchstring-regex) and `!~` is equivalent to `NOT regexp_full_match`.
+In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex) and `!~` is equivalent to `NOT regexp_full_match`.
 The operators `~*` and `!~*` are not supported.
 
 The table below shows that the correspondence between these functions in PostgreSQL and DuckDB is almost non-existent.
