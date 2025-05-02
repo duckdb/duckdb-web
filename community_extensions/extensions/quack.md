@@ -24,7 +24,7 @@ extension:
 
 repo:
   github: duckdb/extension-template
-  ref: f89d2663d9788dc27f3a77bcdf638ace6357a459
+  ref: 86fc51202c4dff2333c8e36ec79c245d101099de
 
 docs:
   hello_world: |
@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 187
 extension_star_count_pretty: 187
-extension_download_count: 534
-extension_download_count_pretty: 534
+extension_download_count: 530
+extension_download_count_pretty: 530
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---
