@@ -26,6 +26,15 @@ CREATE TABLE strings (
 
 The `VARCHAR` field allows storage of Unicode characters. Internally, the data is encoded as UTF-8.
 
+## Specifying a Compression Type
+
+You can specify a compression type for a string with the `USING COMPRESSION` clause.
+For example, to apply zstd compression, run:
+
+```sql
+CREATE TABLE tbl(s VARCHAR USING COMPRESSION zstd);
+```
+
 ## Text Type Values
 
 Values of the text type are character strings, also known as string values or simply strings. At runtime, string values are constructed in one of the following ways:
