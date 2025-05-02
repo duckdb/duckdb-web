@@ -50,10 +50,10 @@ docs:
     
     > The PCAP Reader Extension is experimental, use at your own risk!
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 441
-extension_download_count_pretty: 441
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 446
+extension_download_count_pretty: 446
 image: '/images/community_extensions/social_preview/preview_community_extension_pcap_reader.png'
 layout: community_extension_doc
 ---
