@@ -37,6 +37,8 @@ DuckDB is an in-process database system and offers client APIs (also known as â€
 | [Ruby](https://suketa.github.io/ruby-duckdb/)                                  | [suketa](https://github.com/suketa)                                                     | Tertiary     |                                                                                                                             |
 | [Swift]({% link docs/stable/clients/swift.md %})                               | The DuckDB team                                                                         | Tertiary     |                                                                                                                             |
 | [Zig](https://github.com/karlseguin/zuckdb.zig)                                | [karlseguin](https://github.com/karlseguin)                                             | Tertiary     |                                                                                                                             |
+| [PHP](https://github.com/satur-io/duckdb-php))                                 | [satur-io](https://github.com/satur-io)                                                 | Tertiary     |   [{{ site.current_duckdb_php_version }}](https://packagist.org/packages/satur.io/duckdb)                                   |
+
 
 ## Support Tiers
 
