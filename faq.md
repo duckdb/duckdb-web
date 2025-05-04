@@ -443,7 +443,7 @@ You can find the recent releases in the [release calendar]({% link release_calen
 
 <div class="answer" markdown="1">
 
-You can find the development roadmap at [Development Roadmap]({% link roadmap.html %}).
+You can find the development roadmap at [Development Roadmap]({% link roadmap.md %}).
 
 </div>
 
