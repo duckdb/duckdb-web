@@ -55,14 +55,14 @@ OVERRIDES: list[DocFunction] = [
         name='md5_number_lower',
         parameters=['string'],
         description="Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`.",
-        examples=["md5_number_lower('123')"],
+        examples=["md5_number_lower('abc')"],
     ),
     DocFunction(
         category='string',
         name='md5_number_upper',
         parameters=['string'],
         description="Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`.",
-        examples=["md5_number_upper('123')"],
+        examples=["md5_number_upper('abc')"],
     ),
     DocFunction(
         category='regex',

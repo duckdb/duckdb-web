@@ -38,7 +38,7 @@ The functions below are difficult to categorize into specific function types and
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
 | [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
-| [`md5_number_higher(string)`](#md5_number_higherstring) | Returns the higher 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
+| [`md5_number_upper(string)`](#md5_number_upperstring) | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
 | [`nextval('sequence_name')`](#nextvalsequence_name) | Return the following value of the sequence. |
 | [`nullif(a, b)`](#nullifa-b) | Return `NULL` if `a = b`, else return `a`. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
 | [`pg_typeof(expression)`](#pg_typeofexpression) | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility. |
@@ -236,12 +236,12 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `md5_number_lower('123')` |
 | **Result** | `8091599832034528150` |
 
-#### `md5_number_higher(string)`
+#### `md5_number_upper(string)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the higher 8 bytes of the MD5 hash of `string` as a `UBIGINT`. |
-| **Example** | `md5_number_higher('123')` |
+| **Description** | Returns the upper 8 bytes of the MD5 hash of `string` as a `UBIGINT`. |
+| **Example** | `md5_number_upper('123')` |
 | **Result** | `6559309979213966368` |
 
 #### `nextval('sequence_name')`
