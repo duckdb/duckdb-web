@@ -242,7 +242,7 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Returns the upper 8 bytes of the MD5 hash of `string` as a `UBIGINT`. |
 | **Example** | `md5_number_upper('abc')` |
-| **Result** | `6559309979213966368` |
+| **Result** | `12704604231530709392` |
 
 #### `nextval('sequence_name')`
 

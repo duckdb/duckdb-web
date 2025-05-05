@@ -507,8 +507,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the MD5 hash of the `string` as a `VARCHAR`. |
-| **Example** | `md5('123')` |
-| **Result** | `202cb962ac59075b964b07152d234b70` |
+| **Example** | `md5('abc')` |
+| **Result** | `900150983cd24fb0d6963f7d28e17f72` |
 
 #### `md5_number(string)`
 
@@ -523,16 +523,16 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
-| **Example** | `md5_number_lower('123')` |
-| **Result** | `8091599832034528150` |
+| **Example** | `md5_number_lower('abc')` |
+| **Result** | `8250560606382298838` |
 
 #### `md5_number_upper(string)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
-| **Example** | `md5_number_upper('123')` |
-| **Result** | `6559309979213966368` |
+| **Example** | `md5_number_upper('abc')` |
+| **Result** | `12704604231530709392` |
 
 #### `nfc_normalize(string)`
 
