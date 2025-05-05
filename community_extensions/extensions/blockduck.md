@@ -23,10 +23,10 @@ repo:
 docs:
   https://yixins-organization.gitbook.io/blockduck-docs
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 469
-extension_download_count_pretty: 469
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 457
+extension_download_count_pretty: 457
 image: '/images/community_extensions/social_preview/preview_community_extension_blockduck.png'
 layout: community_extension_doc
 ---
