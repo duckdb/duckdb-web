@@ -13,11 +13,11 @@ The operations are summarized in the following table:
 
 | Operation | Snippet |
 |---|---|
-| [Pretty-printing floats](#pretty-printing-floating-point-numbers) | `SELECT (10 / 9)::DECIMAL(15, 3);` |
-| [Copying the schema](#copying-the-schema-of-a-table) | `CREATE TABLE tbl AS FROM example LIMIT 0;` |
-| [Shuffling data](#shuffling-data) | `FROM example ORDER BY hash(rowid + 42);` |
-| [Specifying types when reading CSVs](#specifying-types-in-the-csv-loader) | `FROM read_csv('example.csv', types = {'x': 'DECIMAL(15, 3)'});` |
-| [Updating CSV files in-place](#updating-csv-files-in-place) | `COPY (SELECT s FROM 'example.csv') TO 'example.csv';` |
+| [Pretty-printing floats](#pretty-printing-floating-point-numbers) | `SELECT (10 / 9)::DECIMAL(15, 3)`{:.language-sql .highlight} |
+| [Copying the schema](#copying-the-schema-of-a-table) | `CREATE TABLE tbl AS FROM example LIMIT 0`{:.language-sql .highlight} |
+| [Shuffling data](#shuffling-data) | `FROM example ORDER BY hash(rowid + 42)`{:.language-sql .highlight} |
+| [Specifying types when reading CSVs](#specifying-types-in-the-csv-loader) | `FROM read_csv('example.csv', types = {'x': 'DECIMAL(15, 3)'})`{:.language-sql .highlight} |
+| [Updating CSV files in-place](#updating-csv-files-in-place) | `COPY (SELECT s FROM 'example.csv') TO 'example.csv'`{:.language-sql .highlight} |
 
 ## Creating the Example Data Set
 

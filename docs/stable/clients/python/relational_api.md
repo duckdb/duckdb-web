@@ -18,7 +18,7 @@ For example, here we create a relation from a SQL query:
 ```python
 import duckdb
 
-rel = duckdb.sql("SELECT * FROM range(10_000_000_000) tbl(id)")
+rel = duckdb.sql("SELECT * FROM range(100_000) tbl(id)")
 rel.show()
 ```
 

@@ -34,7 +34,7 @@ library(duckdb)
 library(arrow)
 library(dplyr)
 
-# Open dataset using year,month folder partition
+# Open dataset using year, month folder partition
 ds <- arrow::open_dataset("nyc-taxi", partitioning = c("year", "month"))
 
 ds %>%
@@ -58,7 +58,7 @@ ds %>%
 
 The workflow in Python is as simple as it is in R. In this example we use DuckDB's Relational API.
 
-``` python
+```python
 import duckdb
 import pyarrow as pa
 import pyarrow.dataset as ds
@@ -80,61 +80,63 @@ In this section, we will look at some basic examples of the code needed to read 
 
 ### Setup
 
-First we need to install DuckDB and Arrow. The installation process for both libraries in Python and R is shown below.
+First we need to install DuckDB and Arrow. The installation process for both libraries is shown below.
+
+Python:
 
 ```batch
-# Python Install
 pip install duckdb
 pip install pyarrow
 ```
 
-``` R
-# R Install
+R:
+
+```R
 install.packages("duckdb")
 install.packages("arrow")
 ```
 
-To execute the sample-examples in this section, we need to download the following custom Parquet files:
+To execute the sample examples in this section, we need to download the following custom Parquet files:
 
 * [`integers.parquet`](/data/integers.parquet)
 * [`lineitemsf1.snappy.parquet`](https://blobs.duckdb.org/data/lineitemsf1.snappy.parquet)
 
 #### Python
 
-There are two ways in Python of querying data from Arrow:
+There are two ways in Python of querying data from Arrow.
 
-1. Through the Relational API
+1. Through the Relational API:
 
-```python
-# Reads Parquet File to an Arrow Table
-arrow_table = pq.read_table('integers.parquet')
+    ```python
+    # Reads Parquet File to an Arrow Table
+    arrow_table = pq.read_table('integers.parquet')
 
-# Transforms Arrow Table -> DuckDB Relation
-rel_from_arrow = duckdb.arrow(arrow_table)
+    # Transforms Arrow Table -> DuckDB Relation
+    rel_from_arrow = duckdb.arrow(arrow_table)
 
-# we can run a SQL query on this and print the result
-print(rel_from_arrow.query('arrow_table', 'SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
+    # we can run a SQL query on this and print the result
+    print(rel_from_arrow.query('arrow_table', 'SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
 
-# Transforms DuckDB Relation -> Arrow Table
-arrow_table_from_duckdb = rel_from_arrow.arrow()
-```
+    # Transforms DuckDB Relation -> Arrow Table
+    arrow_table_from_duckdb = rel_from_arrow.arrow()
+    ```
 
 2. By using replacement scans and querying the object directly with SQL:
 
-```python
-# Reads Parquet File to an Arrow Table
-arrow_table = pq.read_table('integers.parquet')
+    ```python
+    # Reads Parquet File to an Arrow Table
+    arrow_table = pq.read_table('integers.parquet')
 
-# Gets Database Connection
-con = duckdb.connect()
+    # Gets Database Connection
+    con = duckdb.connect()
 
-# we can run a SQL query on this and print the result
-print(con.execute('SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
+    # we can run a SQL query on this and print the result
+    print(con.execute('SELECT sum(data) FROM arrow_table WHERE data > 50').fetchone())
 
-# Transforms Query Result from DuckDB to Arrow Table
-# We can directly read the arrow object through DuckDB's replacement scans.
-con.execute("SELECT * FROM arrow_table").fetch_arrow_table()
-```
+    # Transforms Query Result from DuckDB to Arrow Table
+    # We can directly read the arrow object through DuckDB's replacement scans.
+    con.execute("SELECT * FROM arrow_table").fetch_arrow_table()
+    ```
 
 It is possible to transform both DuckDB Relations and Query Results back to Arrow.
 
@@ -226,7 +228,7 @@ For the comparison with Pandas, note that DuckDB runs in parallel, while pandas 
 
 In this example we run a simple aggregation on two columns of our lineitem table.
 
-``` python
+```python
 # DuckDB
 lineitem = pq.read_table('lineitemsf1.snappy.parquet')
 con = duckdb.connect()
@@ -237,7 +239,7 @@ con.execute("""SELECT sum(l_extendedprice * l_discount) AS revenue
                 lineitem;""").fetch_arrow_table()
 ```
 
-``` python
+```python
 # Pandas
 arrow_table = pq.read_table('lineitemsf1.snappy.parquet')
 
@@ -256,13 +258,13 @@ new_table = pa.Table.from_pandas(res)
 | DuckDB      | 0.19     |
 | Pandas      | 2.13     |
 
-The lineitem table is composed of 16 columns, however, to execute this query only two columns ```l_extendedprice``` and  *  ```l_discount``` are necessary. Since DuckDB can push down the projection of these columns, it is capable of executing this query about one order of magnitude faster than Pandas.
+The lineitem table is composed of 16 columns, however, to execute this query only two columns `l_extendedprice` and `l_discount` are necessary. Since DuckDB can push down the projection of these columns, it is capable of executing this query about one order of magnitude faster than Pandas.
 
 ### Filter Pushdown
 
 For our filter pushdown we repeat the same aggregation used in the previous section, but add filters on 4 more columns.
 
-``` python
+```python
 # DuckDB
 lineitem = pq.read_table('lineitemsf1.snappy.parquet')
 
@@ -281,7 +283,7 @@ con.execute("""SELECT sum(l_extendedprice * l_discount) AS revenue
             AND l_quantity < 24; """).fetch_arrow_table()
 ```
 
-``` python
+```python
 # Pandas
 arrow_table = pq.read_table('lineitemsf1.snappy.parquet')
 
@@ -308,16 +310,16 @@ The difference now between DuckDB and Pandas is more drastic, being two orders o
 
 As demonstrated before, DuckDB is capable of consuming and producing Arrow data in a streaming fashion. In this section we run a simple benchmark, to showcase the benefits in speed and memory usage when comparing it to full materialization and Pandas. This example uses the full NYC taxi dataset which you can download
 
-``` python
+```python
 # DuckDB
-# Open dataset using year,month folder partition
+# Open dataset using year, month folder partition
 nyc = ds.dataset('nyc-taxi/', partitioning=["year", "month"])
 
 # Get database connection
 con = duckdb.connect()
 
 # Run query that selects part of the data
-query = con.execute("SELECT total_amount, passenger_count,year FROM nyc where total_amount > 100 and year > 2014")
+query = con.execute("SELECT total_amount, passenger_count, year FROM nyc where total_amount > 100 and year > 2014")
 
 # Create Record Batch Reader from Query Result.
 # "fetch_record_batch()" also accepts an extra parameter related to the desired produced chunk size.
@@ -329,14 +331,14 @@ while len(chunk) > 0:
     chunk = record_batch_reader.read_next_batch()
 ```
 
-``` python
+```python
 # Pandas
 # We must exclude one of the columns of the NYC dataset due to an unimplemented cast in Arrow.
 working_columns = ["vendor_id","pickup_at","dropoff_at","passenger_count","trip_distance","pickup_longitude",
     "pickup_latitude","store_and_fwd_flag","dropoff_longitude","dropoff_latitude","payment_type",
     "fare_amount","extra","mta_tax","tip_amount","tolls_amount","total_amount","year", "month"]
 
-# Open dataset using year,month folder partition
+# Open dataset using year, month folder partition
 nyc_dataset = ds.dataset(dir, partitioning=["year", "month"])
 # Generate a scanner to skip problematic column
 dataset_scanner = nyc_dataset.scanner(columns=working_columns)

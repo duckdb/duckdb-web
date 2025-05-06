@@ -15,11 +15,11 @@ where we showcase [friendly SQL features]({% link docs/stable/sql/dialect/friend
 
 | Operation | SQL instructions |
 |-----------|------------------|
-| [Excluding columns from a table](#excluding-columns-from-a-table) | `EXCLUDE` or `COLUMNS(…)` and `NOT SIMILAR TO` |
-| [Renaming columns with pattern matching](#renaming-columns-with-pattern-matching) | `COLUMNS(…) AS …` |
-| [Loading with globbing](#loading-with-globbing) | `FROM '*.csv'` |
-| [Reordering Parquet files](#reordering-parquet-files) | `COPY (FROM … ORDER BY …) TO …` |
-| [Hive partitioning](#hive-partitioning) | `hive_partitioning = true`  |
+| [Excluding columns from a table](#excluding-columns-from-a-table) | `EXCLUDE`{:.language-sql .highlight}/`COLUMNS(...)`{:.language-sql .highlight}, `NOT SIMILAR TO`{:.language-sql .highlight} |
+| [Renaming columns with pattern matching](#renaming-columns-with-pattern-matching) | `COLUMNS(...) AS ...`{:.language-sql .highlight} |
+| [Loading with globbing](#loading-with-globbing) | `FROM '*.csv'`{:.language-sql .highlight} |
+| [Reordering Parquet files](#reordering-parquet-files) | `COPY (FROM ... ORDER BY ...) TO ...`{:.language-sql .highlight} |
+| [Hive partitioning](#hive-partitioning) | `hive_partitioning = true`{:.language-sql .highlight}  |
 
 ## Dataset
 
@@ -45,7 +45,7 @@ The result is a table with the column names and the column types.
 | Service:Type                 | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | Service:Company              | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | Service:Train number         | BIGINT      | YES  | NULL | NULL    | NULL  |
-| …                          | …         | …  | …  | …     | …   |
+| ...                          | ...         | ...  | ...  | ...     | ...   |
 
 Now, let's use [`SUMMARIZE`]({% link docs/stable/guides/meta/summarize.md %}) to inspect some statistics about the columns.
 
@@ -79,7 +79,7 @@ In both cases, the resulting table will contain the 5 remaining statistical colu
 | Service:Type                 | VARCHAR     | 20            | NULL                | NULL               | 1846574 | 0.00            |
 | Service:Company              | VARCHAR     | 12            | NULL                | NULL               | 1846574 | 0.00            |
 | Service:Train number         | BIGINT      | 17264         | 57781.81688196628   | 186353.76365744913 | 1846574 | 0.00            |
-| …                          | …         | …           | …                 | …                | …     | …             |
+| ...                          | ...         | ...           | ...                 | ...                | ...     | ...             |
 
 ## Renaming Columns with Pattern Matching
 
@@ -113,7 +113,7 @@ Add `DESCRIBE` at the beginning of the query and we can see the renamed columns:
 | Service_Type                 | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | Service_Company              | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | Service_Train_number         | BIGINT      | YES  | NULL | NULL    | NULL  |
-| …                          | …         | …  | …  | …     | …   |
+| ...                          | ...         | ...  | ...  | ...     | ...   |
 
 Let's break down the query starting with the first `COLUMNS` expression:
 
@@ -121,8 +121,8 @@ Let's break down the query starting with the first `COLUMNS` expression:
 SELECT COLUMNS('(\w*)\W*(\w*)\W*(\w*)') AS "\1_\2_\3"
 ```
 
-Here, we use regular expression with `(\w*)` groups that capture 0…n word characters (`[0-9A-Za-z_]`).
-Meanwhile, the expression `\W*` captures 0…n non-word characters (`[^0-9A-Za-z_]`).
+Here, we use regular expression with `(\w*)` groups that capture 0...n word characters (`[0-9A-Za-z_]`).
+Meanwhile, the expression `\W*` captures 0...n non-word characters (`[^0-9A-Za-z_]`).
 In the alias part we refer to the capture group `i` with `\i` so `"\1_\2_\3"` means that we only keep the word characters and separate their groups with underscores (`_`).
 However, because some column names contain words separated by a space, while others don't, after this `SELECT` statement we get column names with a trailing underscore (`_`), 
 e.g., `Service_Date_`.
@@ -155,7 +155,7 @@ ORDER BY service_company;
 | Breng           |
 | DB              |
 | Eu Sleeper      |
-| …             |
+| ...             |
 
 > The returned column name preserves its original cases even though we used lowercase letters in the query.
 
@@ -272,7 +272,7 @@ services-parquet-hive
 ├── Service_Company=Blauwnet
 │   ├── Service_Type=Intercity
 │   │   └── data_0.parquet
-…
+...
 ```
 
 We can now run the query on the Hive partitioned data set by passing the `hive_partitioning = true` flag:

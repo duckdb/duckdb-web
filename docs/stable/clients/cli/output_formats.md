@@ -12,6 +12,8 @@ title: Output Formats
 The `.mode` [dot command]({% link docs/stable/clients/cli/dot_commands.md %}) may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal [output to a file]({% link docs/stable/clients/cli/dot_commands.md %}#output-writing-results-to-a-file). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point.
 The `markdown` mode is particularly useful for building documentation and the `latex` mode is useful for writing academic papers.
 
+## List of Output Formats
+
 |     Mode     |                 Description                 |
 |--------------|---------------------------------------------|
 | `ascii`      | Columns/rows delimited by 0x1F and 0x1E     |
@@ -33,7 +35,9 @@ The `markdown` mode is particularly useful for building documentation and the `l
 | `tcl`        | TCL list elements                           |
 | `trash`      | No output                                   |
 
-Use `.mode` directly to query the appearance currently in use.
+## Changing the Output Format
+
+Use the vanilla `.mode` dot command to query the appearance currently in use.
 
 ```sql
 .mode
@@ -42,6 +46,8 @@ Use `.mode` directly to query the appearance currently in use.
 ```text
 current output mode: duckbox
 ```
+
+Use the `.mode` dot command with an argument to set the output format.
 
 ```sql
 .mode markdown
@@ -80,4 +86,59 @@ SELECT 10 AS col1, 20 AS col_2;
 col_1|col_2
 1|2
 10|20
+```
+
+## `duckbox` Mode
+
+By default, DuckDB renders query results in `duckbox` mode, which is a feature-rich ASCII-art style output format.
+
+The duckbox mode supports the `large_number_rendering` option, which allows human-readable rendering of large numbers. It has three levels:
+
+* `off` – All numbers are printed using regular formatting.
+* `footer` (default) – Large numbers are augmented with the human-readable format. Only applies to single-row results.
+* `all` - All large numbers are replaced with the human-readable format.
+
+See the following examples:
+
+```sql
+.large_number_rendering off
+SELECT pi() * 1_000_000_000 AS x;
+```
+
+```text
+┌───────────────────┐
+│         x         │
+│      double       │
+├───────────────────┤
+│ 3141592653.589793 │
+└───────────────────┘
+```
+
+```sql
+.large_number_rendering footer
+SELECT pi() * 1_000_000_000 AS x;
+```
+
+```text
+┌───────────────────┐
+│         x         │
+│      double       │
+├───────────────────┤
+│ 3141592653.589793 │
+│  (3.14 billion)   │
+└───────────────────┘
+```
+
+```sql
+.large_number_rendering all
+SELECT pi() * 1_000_000_000 AS x;
+```
+
+```text
+┌──────────────┐
+│      x       │
+│    double    │
+├──────────────┤
+│ 3.14 billion │
+└──────────────┘
 ```

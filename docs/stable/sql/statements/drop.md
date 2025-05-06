@@ -81,7 +81,9 @@ DROP SCHEMA myschema;
 ```
 
 ```console
-Dependency Error: Cannot drop entry `myschema` because there are entries that depend on it.
+Dependency Error:
+Cannot drop entry "myschema" because there are entries that depend on it.
+table "t1" depends on schema "myschema".
 Use DROP...CASCADE to drop all dependents.
 ```
 
@@ -123,7 +125,8 @@ SELECT * FROM v;
 ```
 
 ```console
-Catalog Error: Table with name tbl does not exist!
+Catalog Error:
+Table with name tbl does not exist!
 ```
 
 ## Limitations on Reclaiming Disk Space

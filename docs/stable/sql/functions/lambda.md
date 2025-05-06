@@ -218,7 +218,6 @@ SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
 [2, 3, 4]
 [3, 4]
 [4]
-[]
 ```
 
 ## Reduce

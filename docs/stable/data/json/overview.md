@@ -117,3 +117,15 @@ SELECT j->>'$.family' FROM example;
 ```text
 anatidae
 ```
+
+### Using Quotes for Special Characters
+
+JSON object keys that contain the special `[` and `.` characters can be used by surrounding them with double quotes (`"`):
+
+```sql
+SELECT '{"d[u]._\"ck":42}'->'$."d[u]._\"ck"' AS v;
+```
+
+```text
+42
+```

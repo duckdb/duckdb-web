@@ -35,7 +35,7 @@ PIVOT (
             FOR x
             IN range(TIMESTAMP '2024-10-01', now()::TIMESTAMP, INTERVAL 1 WEEK)
             IF strftime(x, '%W') != '53'
-        ])
+        ], union_by_name := true)
     )
     ON COLUMNS(* EXCLUDE _last_update)
     INTO NAME extension VALUE downloads

@@ -6,6 +6,9 @@ redirect_from:
 title: Arrow Extension
 ---
 
+> Deprecated The Arrow extension is deprecated.
+> Please consider using the [`nanoarrow` community extension]({% link community_extensions/extensions/nanoarrow.md %}) instead.
+
 The `arrow` extension implements features for using [Apache Arrow](https://arrow.apache.org/), a cross-language development platform for in-memory analytics.
 See the [announcement blog post]({% post_url 2021-12-03-duck-arrow %}) for more details.
 

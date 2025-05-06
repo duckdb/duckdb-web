@@ -209,7 +209,7 @@ Neo is currently marked “alpha”. This is an indication of completeness and m
 
 Additionally, some areas of functionality are not yet complete:
 
-* Appending and binding advanced data types. These require additional functions in DuckDB’s C API. The goal is to add these for the next release of DuckDB 1.2, [currently planned for January 2025]({% link docs/stable/dev/release_calendar.md %}).
+* Appending and binding advanced data types. These require additional functions in DuckDB’s C API. The goal is to add these for the next release of DuckDB 1.2, [currently planned for January 2025]({% link release_calendar.md %}).
 
 * Writing to data chunk [vectors]({% link docs/stable/internals/vector.md %}). Modifying binary buffers in a way that can be seen by a native layer presents special challenges in the Node environment. This is a high priority to work on in the near future.
 

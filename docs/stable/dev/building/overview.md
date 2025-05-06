@@ -3,6 +3,8 @@ layout: docu
 redirect_from:
 - /dev/building
 - /dev/building/
+- /docs/stable/dev/building
+- /docs/stable/dev/building/
 - /docs/dev/building
 - /docs/dev/building/
 - /docs/dev/building/build_instructions
@@ -17,9 +19,9 @@ title: Building DuckDB from Source
 
 ## When Should You Build DuckDB?
 
-DuckDB binaries are available for stable and nightly builds on the [installation page]({% link docs/installation/index.html %}).
+DuckDB binaries are available for _stable_ and _preview_ builds on the [installation page]({% link docs/installation/index.html %}).
 In most cases, it's recommended to use these binaries.
-When you are running on an experimental platform (e.g., [Raspberry Pi]({% link docs/stable/dev/building/raspberry_pi.md %})) or building an unmerged pull request,
+When you are running on an experimental platform (e.g., [Raspberry Pi]({% link docs/stable/dev/building/raspberry_pi.md %})) or you would like to build the project for an unmerged pull request,
 you can build DuckDB from source based on the [`duckdb/duckdb` repository hosted on GitHub](https://github.com/duckdb/duckdb/).
 This page explains the steps for building DuckDB.
 
@@ -27,8 +29,6 @@ This page explains the steps for building DuckDB.
 
 DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
 Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
-
-Currently, building DuckDB with the `-march=native` flag is not supported.
 
 ## Platforms
 
@@ -40,7 +40,6 @@ DuckDB fully supports Linux, macOS and Windows. Both AMD64 (x86_64) and ARM64 (A
 |--------------------|------------------------------------------------------------------------|
 | `linux_amd64`      | Linux AMD64 (x86_64) with [glibc](https://www.gnu.org/software/libc/)  |
 | `linux_arm64`      | Linux ARM64 (AArch64) with [glibc](https://www.gnu.org/software/libc/) |
-| `linux_amd64_musl` | Linux AMD64 (x86_64) with [musl libc](https://musl.libc.org/)          |
 | `osx_amd64`        | macOS 12+ AMD64 (Intel CPUs)                                           |
 | `osx_arm64`        | macOS 12+ ARM64 (Apple Silicon CPUs)                                   |
 | `windows_amd64`    | Windows 10+ AMD64 (x86_64)                                             |
@@ -61,10 +60,10 @@ For some platforms, DuckDB binaries and extensions (or a [subset of extensions](
 |------------------------|------------------------------------------------------------------------------------------------------|
 | `freebsd_amd64`        | FreeBSD AMD64 (x86_64)                                                                               |
 | `freebsd_arm64`        | FreeBSD ARM64 (AArch64)                                                                              |
-| `linux_amd64_musl`     | Linux AMD64 (x86_64) with musl libc, e.g., Alpine Linux                                              |
+| `linux_amd64_musl`     | Linux AMD64 (x86_64) with [musl libc](https://musl.libc.org/), e.g., Alpine Linux                    |
 | `linux_arm64_android`  | Android ARM64 (AArch64)                                                                              |
 | `linux_arm64_gcc4`     | Linux ARM64 (AArch64) with GCC 4, e.g., CentOS 7                                                     |
-| `linux_arm64_musl`     | Linux ARM64 (x86_64) with musl libc, e.g., Alpine Linux                                              |
+| `linux_arm64_musl`     | Linux ARM64 (AArch64) with [musl libc](https://musl.libc.org/), e.g., Alpine Linux                   |
 | `wasm_eh`              | WebAssembly Exception Handling                                                                       |
 | `wasm_mvp`             | WebAssembly Minimum Viable Product                                                                   |
 | `windows_amd64_mingw`  | Windows 10+ AMD64 (x86_64) with MinGW                                                                |
@@ -89,8 +88,10 @@ See the [“Unofficial and Unsupported Platforms” page]({% link docs/stable/de
 
 ## Limitations
 
-Currently, the DuckDB codebase is not compatible with C++23.
-Therefore, trying to compile DuckDB with `-std=c++23` will fail.
+Currently, DuckDB has the following limitations:
+
+* The DuckDB codebase is not compatible with [C++23](https://en.wikipedia.org/wiki/C%2B%2B23). Therefore, trying to compile DuckDB with `-std=c++23` will fail.
+* The `-march=native` build flag, i.e., compiling DuckDB with the local machine's native instructions set, is not supported.
 
 ## Troubleshooting Guides
 

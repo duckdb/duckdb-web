@@ -17,22 +17,24 @@ The following table shows which parts of the S3 API are required for each `httpf
 |:---|:---|
 | Public file reads | HTTP Range requests |
 | Private file reads | Secret key or session token authentication |
-| File glob | [ListObjectV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html) |
+| File glob | [ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html) |
 | File writes | [Multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html) |
 
 ## Configuration and Authentication
 
 The preferred way to configure and authenticate to S3 endpoints is to use [secrets]({% link docs/stable/sql/statements/create_secret.md %}). Multiple secret providers are available.
 
-> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/stable/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API]({% link docs/stable/extensions/httpfs/s3api_legacy_authentication.md %}).
+To migrate from the [deprecated S3 API]({% link docs/stable/extensions/httpfs/s3api_legacy_authentication.md %}), use a defined secret with a profile.
+See the [“Loading a Secret Based on a Profile” section](#loading-a-secret-based-on-a-profile).
 
-### `CONFIG` Provider
+### `config` Provider
 
-The default provider, `CONFIG` (i.e., user-configured), allows access to the S3 bucket by manually providing a key. For example:
+The default provider, `config` (i.e., user-configured), allows access to the S3 bucket by manually providing a key. For example:
 
 ```sql
-CREATE SECRET secret1 (
+CREATE OR REPLACE SECRET secret (
     TYPE s3,
+    PROVIDER config,
     KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
     SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
     REGION '⟨us-east-1⟩'
@@ -53,7 +55,7 @@ FROM 's3://⟨your_bucket⟩/⟨your_file⟩.parquet';
 The `credential_chain` provider allows automatically fetching credentials using mechanisms provided by the AWS SDK. For example, to use the AWS SDK default provider:
 
 ```sql
-CREATE SECRET secret2 (
+CREATE OR REPLACE SECRET secret (
     TYPE s3,
     PROVIDER credential_chain
 );
@@ -64,7 +66,7 @@ Again, to query a file using the above secret, simply query any `s3://` prefixed
 DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a semicolon-separated list (`a;b;c`) of providers that will be tried in order. For example:
 
 ```sql
-CREATE SECRET secret3 (
+CREATE OR REPLACE SECRET secret (
     TYPE s3,
     PROVIDER credential_chain,
     CHAIN 'env;config'
@@ -75,7 +77,7 @@ The possible values for `CHAIN` are the following:
 
 * [`config`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_profile_config_file_a_w_s_credentials_provider.html)
 * [`sts`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_s_t_s_assume_role_web_identity_credentials_provider.html)
-* [`sso`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_s_s_o_credentials_provider.html)
+* [`sso`](https://aws.amazon.com/what-is/sso/)
 * [`env`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_environment_a_w_s_credentials_provider.html)
 * [`instance`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_instance_profile_credentials_provider.html)
 * [`process`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_process_credentials_provider.html)
@@ -83,38 +85,69 @@ The possible values for `CHAIN` are the following:
 The `credential_chain` provider also allows overriding the automatically fetched config. For example, to automatically load credentials, and then override the region, run:
 
 ```sql
-CREATE SECRET secret4 (
+CREATE OR REPLACE SECRET secret (
     TYPE s3,
     PROVIDER credential_chain,
-    CHAIN 'config',
-    REGION 'eu-west-1'
+    CHAIN config,
+    REGION '⟨eu-west-1⟩'
 );
 ```
 
+#### Loading a Secret Based on a Profile
+
+To load credentials based on a profile which is not defined as a default from the `AWS_PROFILE` environment variable or as a default profile based on AWS SDK precedence, run:
+
+```sql
+CREATE OR REPLACE SECRET secret (
+    TYPE s3,
+    PROVIDER credential_chain,
+    CHAIN config,
+    PROFILE '⟨my_profile⟩'
+);
+```
+
+This approach is equivalent to the [deprecated S3 API's]({% link docs/stable/extensions/httpfs/s3api_legacy_authentication.md %})'s method `load_aws_credentials('⟨my_profile⟩')`.
+
 ### Overview of S3 Secret Parameters
 
-Below is a complete list of the supported parameters that can be used for both the `CONFIG` and `credential_chain` providers:
+Below is a complete list of the supported parameters that can be used for both the `config` and `credential_chain` providers:
 
 | Name                          | Description                                                                           | Secret            | Type      | Default                                     |
 |:------------------------------|:--------------------------------------------------------------------------------------|:------------------|:----------|:--------------------------------------------|
-| `KEY_ID`                      | The ID of the key to use                                                              | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
-| `SECRET`                      | The secret of the key to use                                                          | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
-| `REGION`                      | The region for which to authenticate (should match the region of the bucket to query) | `S3`, `GCS`, `R2` | `STRING`  | `us-east-1`                                 |
-| `SESSION_TOKEN`               | Optionally, a session token can be passed to use temporary credentials                | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
 | `ENDPOINT`                    | Specify a custom S3 endpoint                                                          | `S3`, `GCS`, `R2` | `STRING`  | `s3.amazonaws.com` for `S3`,                |
+| `KEY_ID`                      | The ID of the key to use                                                              | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
+| `REGION`                      | The region for which to authenticate (should match the region of the bucket to query) | `S3`, `GCS`, `R2` | `STRING`  | `us-east-1`                                 |
+| `SECRET`                      | The secret of the key to use                                                          | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
+| `SESSION_TOKEN`               | Optionally, a session token can be passed to use temporary credentials                | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
+| `URL_COMPATIBILITY_MODE`      | Can help when URLs contain problematic characters                                     | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `URL_STYLE`                   | Either `vhost` or `path`                                                              | `S3`, `GCS`, `R2` | `STRING`  | `vhost` for `S3`, `path` for `R2` and `GCS` |
 | `USE_SSL`                     | Whether to use HTTPS or HTTP                                                          | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
-| `URL_COMPATIBILITY_MODE`      | Can help when URLs contain problematic characters                                     | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint URL                              | `R2`              | `STRING`  | -                                           |
+| `KMS_KEY_ID`                  | AWS KMS (Key Management Service) key for Server Side Encryption S3                    | `S3`              | `STRING`  | -                                           |
 
 ### Platform-Specific Secret Types
+
+#### S3 Secrets
+
+The httpfs extension supports [Server Side Encryption via the AWS Key Management Service (KMS) on S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html) using the `KMS_KEY_ID` option:
+
+```sql
+CREATE OR REPLACE SECRET secret (
+    TYPE s3,
+    PROVIDER credential_chain,
+    CHAIN config,
+    REGION '⟨eu-west-1⟩',
+    KMS_KEY_ID 'arn:aws:kms:⟨region⟩:⟨account_id⟩:⟨key⟩/⟨key_id⟩',
+    SCOPE 's3://⟨bucket_sub_path⟩'
+);
+```
 
 #### R2 Secrets
 
 While [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2) uses the regular S3 API, DuckDB has a special Secret type, `R2`, to make configuring it a bit simpler:
 
 ```sql
-CREATE SECRET secret5 (
+CREATE OR REPLACE SECRET secret (
     TYPE r2,
     KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
     SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
@@ -126,7 +159,7 @@ Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpo
 
 ```sql
 SELECT *
-FROM read_parquet('r2://⟨some/file/that/uses/an/r2/secret⟩.parquet');
+FROM read_parquet('r2://⟨some_file_that_uses_an_r2_secret⟩.parquet');
 ```
 
 #### GCS Secrets
@@ -134,7 +167,7 @@ FROM read_parquet('r2://⟨some/file/that/uses/an/r2/secret⟩.parquet');
 While [Google Cloud Storage](https://cloud.google.com/storage) is accessed by DuckDB using the S3 API, DuckDB has a special Secret type, `GCS`, to make configuring it a bit simpler:
 
 ```sql
-CREATE SECRET secret6 (
+CREATE OR REPLACE SECRET secret (
     TYPE gcs,
     KEY_ID '⟨my_key⟩',
     SECRET '⟨my_secret⟩'
@@ -175,7 +208,7 @@ FROM read_parquet([
 
 ### Globbing
 
-File [globbing]({% link docs/stable/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
+File [globbing]({% link docs/stable/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectsV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
 
 ```sql
 SELECT *
@@ -197,7 +230,7 @@ SELECT *
 FROM read_parquet('s3://⟨bucket_name⟩/*.parquet', filename = true);
 ```
 
-could for example result in:
+This could for example result in:
 
 | column_a | column_b | filename |
 |:---|:---|:---|
@@ -247,6 +280,6 @@ Some additional configuration options exist for the S3 upload, though the defaul
 
 | Name | Description |
 |:---|:---|
-| `s3_uploader_max_parts_per_file` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
-| `s3_uploader_max_filesize` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
-| `s3_uploader_thread_limit` | maximum number of uploader threads |
+| `s3_uploader_max_parts_per_file` | Used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
+| `s3_uploader_max_filesize` | Used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
+| `s3_uploader_thread_limit` | Maximum number of uploader threads |

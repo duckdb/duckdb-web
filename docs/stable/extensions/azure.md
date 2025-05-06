@@ -1,5 +1,5 @@
 ---
-github_repository: https://github.com/duckdb/duckdb_azure
+github_repository: https://github.com/duckdb/duckdb-azure
 layout: docu
 redirect_from:
 - /docs/extensions/azure
@@ -94,7 +94,7 @@ Use the following [configuration options]({% link docs/stable/configuration/over
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
-| `azure_http_stats` | Include http info from Azure Storage in the [`EXPLAIN ANALYZE` statement]({% link docs/stable/dev/profiling.md %}). | `BOOLEAN` | `false` |
+| `azure_http_stats` | Include HTTP info from Azure Storage in the [`EXPLAIN ANALYZE` statement]({% link docs/stable/dev/profiling.md %}). | `BOOLEAN` | `false` |
 | `azure_read_transfer_concurrency` | Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer. | `BIGINT` | `5` |
 | `azure_read_transfer_chunk_size` | Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`. | `BIGINT` | `1024*1024` |
 | `azure_read_buffer_size` | Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`. | `UBIGINT` | `1024*1024` |
@@ -145,7 +145,7 @@ If you do not use authentication, you still need to specify the storage account 
 CREATE SECRET secret2 (
     TYPE azure,
     PROVIDER config,
-    ACCOUNT_NAME '⟨storage account name⟩'
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 
@@ -161,7 +161,7 @@ For example:
 CREATE SECRET secret3 (
     TYPE azure,
     PROVIDER credential_chain,
-    ACCOUNT_NAME '⟨storage account name⟩'
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 
@@ -172,7 +172,7 @@ CREATE SECRET secret4 (
     TYPE azure,
     PROVIDER credential_chain,
     CHAIN 'cli;env',
-    ACCOUNT_NAME '⟨storage account name⟩'
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 
@@ -194,10 +194,10 @@ Either with a secret:
 CREATE SECRET azure_spn (
     TYPE azure,
     PROVIDER service_principal,
-    TENANT_ID '⟨tenant id⟩',
-    CLIENT_ID '⟨client id⟩',
-    CLIENT_SECRET '⟨client secret⟩',
-    ACCOUNT_NAME '⟨storage account name⟩'
+    TENANT_ID '⟨tenant_id⟩',
+    CLIENT_ID '⟨client_id⟩',
+    CLIENT_SECRET '⟨client_secret⟩',
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 
@@ -207,10 +207,10 @@ Or with a certificate:
 CREATE SECRET azure_spn_cert (
     TYPE azure,
     PROVIDER service_principal,
-    TENANT_ID '⟨tenant id⟩',
-    CLIENT_ID '⟨client id⟩',
-    CLIENT_CERTIFICATE_PATH '⟨client cert path⟩',
-    ACCOUNT_NAME '⟨storage account name⟩'
+    TENANT_ID '⟨tenant_id⟩',
+    CLIENT_ID '⟨client_id⟩',
+    CLIENT_CERTIFICATE_PATH '⟨client_cert_path⟩',
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 ```
 
@@ -246,9 +246,9 @@ Where `variable_name` can be one of the following:
 | `azure_account_name` | Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string). | `STRING` | - |
 | `azure_endpoint` | Override the Azure endpoint for when the Azure credential providers are used. | `STRING` | `blob.core.windows.net` |
 | `azure_credential_chain`| Ordered list of Azure credential providers, in string format separated by `;`. For example: `'cli;managed_identity;env'`. See the list of possible values in the [`credential_chain` provider section](#credential_chain-provider). Not used if you pass the connection string. | `STRING` | - |
-| `azure_http_proxy`| Proxy to use when login & performing request to Azure. | `STRING` | `HTTP_PROXY` environment variable (if set). |
-| `azure_proxy_user_name`| Http proxy username if needed. | `STRING` | - |
-| `azure_proxy_password`| Http proxy password if needed. | `STRING` | - |
+| `azure_http_proxy` | Proxy to use when login & performing request to Azure. | `STRING` | `HTTP_PROXY` environment variable (if set). |
+| `azure_proxy_user_name` | HTTP proxy username if needed. | `STRING` | - |
+| `azure_proxy_password` | HTTP proxy password if needed. | `STRING` | - |
 
 ## Additional Information
 

@@ -3,7 +3,7 @@
 		<form autocomplete="off">
 			<div class="autocomplete">
 				<div class="empty_input"></div>
-				<input id="q" type="text" name="q" placeholder="Search docs">
+				<input id="q" type="text" name="q" placeholder="Search {% if page.url contains '/docs/' %}documentation{% elsif page.url contains '/news/' %}blog posts{% else %}docs & blog{% endif %}">
 			</div>
 		</form>
 		<div id="search_results"></div>

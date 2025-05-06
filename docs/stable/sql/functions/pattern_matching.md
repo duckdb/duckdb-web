@@ -92,14 +92,10 @@ SELECT 'abc' SIMILAR TO '(b|c).*';   -- false
 SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 ```
 
-There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
-
-<div class="monospace_table"></div>
-
-| `SIMILAR TO`-style | POSIX-style |
-|:-------------------|:------------|
-| `SIMILAR TO`       | `~`         |
-| `NOT SIMILAR TO`   | `!~`        |
+> In PostgreSQL, `~` is equivalent to `SIMILAR TO`
+and `!~` is equivalent to `NOT SIMILAR TO`.
+In DuckDB, these equivalences do not hold currently,
+see the [PostgreSQL compatibility page]({% link docs/stable/sql/dialect/postgresql_compatibility.md %}).
 
 ## Globbing
 

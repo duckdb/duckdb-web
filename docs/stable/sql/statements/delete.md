@@ -7,6 +7,8 @@ title: DELETE Statement
 ---
 
 The `DELETE` statement removes rows from the table identified by the table-name.
+If the `WHERE` clause is not present, all records in the table are deleted.
+If a `WHERE` clause is supplied, then only those rows for which the `WHERE` clause results in true are deleted. Rows for which the expression is false or `NULL` are retained.
 
 ## Examples
 
@@ -22,21 +24,35 @@ Delete all rows in the table `tbl`:
 DELETE FROM tbl;
 ```
 
-The `TRUNCATE` statement removes all rows from a table, acting as an alias for `DELETE FROM` without a `WHERE` clause:
+### `USING` Clause
+
+The `USING` clause allows deleting based on the content of other tables or subqueries.
+
+### `RETURNING` Clause
+
+The `RETURNING` clause allows returning the deletes values. It uses the same syntax as the `SELECT` clause except the `DISTINCT` modifier is not supported.
 
 ```sql
-TRUNCATE tbl;
+CREATE TABLE employees(name VARCHAR, age INTEGER);
+INSERT INTO employees VALUES ('Kat', 32);
+DELETE FROM employees RETURNING name, 2025 - age AS approx_birthyear;
 ```
+
+| name | approx_birthyear |
+|------|-----------------:|
+| Kat  | 1993             |
 
 ## Syntax
 
 <div id="rrdiagram"></div>
 
-The `DELETE` statement removes rows from the table identified by the table-name.
+## The`TRUNCATE` Statement
 
-If the `WHERE` clause is not present, all records in the table are deleted. If a `WHERE` clause is supplied, then only those rows for which the `WHERE` clause results in true are deleted. Rows for which the expression is false or NULL are retained.
+The `TRUNCATE` statement removes all rows from a table, acting as an alias for `DELETE FROM` without a `WHERE` clause:
 
-The `USING` clause allows deleting based on the content of other tables or subqueries.
+```sql
+TRUNCATE tbl;
+```
 
 ## Limitations on Reclaiming Memory and Disk Space
 

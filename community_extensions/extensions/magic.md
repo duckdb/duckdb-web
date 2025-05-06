@@ -11,14 +11,14 @@ extension:
   version: 0.0.1
   language: C++
   build: cmake
-  excluded_platforms: "linux_amd64_musl;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;windows_amd64"
+  excluded_platforms: "linux_amd64_musl;windows_amd64_rtools;windows_amd64_mingw;windows_amd64"
   license: MIT
   maintainers:
     - carlopi
 
 repo:
   github: carlopi/duckdb_magic
-  ref: 63f6e5f30220a3a65cfe168099c3fdbd2d5af4bd
+  ref: 4a6f9342814898609cb6a9f7dcad45904412680a
 
 docs:
   hello_world: |
@@ -38,10 +38,10 @@ docs:
     Packaged with version 5.45 of the magic library. The magic.mgc database is at the moment statically compiled in the library, so it's the same across platforms but immutable.
     Currently not available in Windows and Wasm, due to different but likely solvable vc-packaging issue, to be sorted out independently.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 543
-extension_download_count_pretty: 543
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 627
+extension_download_count_pretty: 627
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'
 layout: community_extension_doc
 ---

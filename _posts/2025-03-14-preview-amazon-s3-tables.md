@@ -2,11 +2,13 @@
 layout: post
 title: "Preview: Amazon S3 Tables in DuckDB"
 author: "Sam Ansmink, Tom Ebergen, Gabor Szarnyas"
-thumb: "/images/blog/thumbs/amazon-s3-tables.png"
+thumb: "/images/blog/thumbs/amazon-s3-tables.svg"
 image: "/images/blog/thumbs/amazon-s3-tables.png"
 excerpt: "We are happy to announce a new preview feature that adds support for Apache Iceberg REST Catalogs, enabling DuckDB users to connect to Amazon S3 Tables and Amazon SageMaker Lakehouse with ease."
 tags: ["extensions"]
 ---
+
+> The AWS Storage Blog also published a post on this feature, see [Streamlining access to tabular datasets stored in Amazon S3 Tables with DuckDB](https://aws.amazon.com/blogs/storage/streamlining-access-to-tabular-datasets-stored-in-amazon-s3-tables-with-duckdb/).
 
 ## Iceberg Ahead!
 
@@ -109,7 +111,7 @@ Next, point DuckDB to your S3 table bucket.
 You can do so by copy-pasting the S3 Tables ARN value directly from the AWS Management Console and using it in the `ATTACH` command:
 
 ```sql
-ATTACH 'arn:aws:s3tables:⟨us-east-2⟩:⟨111122223333⟩:bucket/⟨bucket_name⟩'
+ATTACH 'arn:aws:s3tables:⟨us-east-1⟩:⟨111122223333⟩:bucket/⟨bucket_name⟩'
     AS s3_tables_db (
         TYPE iceberg,
         ENDPOINT_TYPE s3_tables

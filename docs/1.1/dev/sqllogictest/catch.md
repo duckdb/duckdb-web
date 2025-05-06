@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /dev/sqllogictest/catch
 title: Catch C/C++ Tests
 ---
 

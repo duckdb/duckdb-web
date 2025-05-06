@@ -72,10 +72,26 @@ ERROR:  UNION types boolean and integer cannot be matched
 
 DuckDB performs an enforced cast, therefore, it completes the query and returns the following:
 
-|   x |
-| --: |
-|   1 |
-|   2 |
+|    x |
+| ---: |
+|    1 |
+|    2 |
+
+## Implicit Casting on Equality Checks
+
+DuckDB performs implicit casting on equality checks, e.g., converting strings to numeric and boolean values.
+Therefore, there are several instances, where PostgreSQL throws an error while DuckDB successfully computes the result:
+
+<div class="monospace_table"></div>
+
+| Expression    | PostgreSQL | DuckDB |
+| :------------ | ---------- | ------ |
+| '1.1' = 1     | error      | true   |
+| '1.1' = 1.1   | true       | true   |
+| 1 = 1.1       | false      | false  |
+| true = 'true' | true       | true   |
+| true = 1      | error      | true   |
+| 'true' = 1    | error      | error  |
 
 ## Case Sensitivity for Quoted Identifiers
 
@@ -174,16 +190,6 @@ Unlike PostgreSQL's `regexp_substr` function, DuckDB's `regexp_extract` returns 
 DuckDB does not support the [`to_date` PostgreSQL date formatting function](https://www.postgresql.org/docs/17/functions-formatting.html).
 Instead, please use the [`strptime` function]({% link docs/stable/sql/functions/dateformat.md %}#strptime-examples).
 
-### `current_date` / `current_time` / `current_timestamp`
-
-DuckDB's `current_date` and `current_time` pseudo-columns return the current date (as `DATE`) and time (as `TIME`) in UTC, whereas PostgreSQL returns the current date (as `DATE`) in the configured local timezone and time as `TIMETZ`. For the current time in the configured timezone, still as regular `TIME`, DuckDB offers the function `current_localtime()`.
-
-Both DuckDB and PostgreSQL return `current_timestamp` as `TIMESTAMPTZ`. DuckDB additionally offers `current_localtimestamp()`, which returns the time in the configured timezone as `TIMESTAMP`.
-
-DuckDB does not currently offer `current_localdate()`; though this can be computed via `current_timestamp::DATE` or `current_localtimestamp()::DATE`.
-
-> See the [DuckDB blog entry on time zones]({% post_url 2022-01-06-time-zones %}) for more information on timestamps and timezones and DuckDB's handling thereof.
-
 ## Resolution of Type Names in the Schema
 
 For [`CREATE TABLE` statements]({% link docs/stable/sql/statements/create_table.md %}), DuckDB attempts to resolve type names in the schema where a table is created. For example:
@@ -212,3 +218,49 @@ DESCRIBE myschema.mytable;
 | column_name | column_type      | null | key  | default | extra |
 | ----------- | ---------------- | ---- | ---- | ------- | ----- |
 | v           | ENUM('as', 'df') | YES  | NULL | NULL    | NULL  |
+
+## Exploiting Functional Dependencies for `GROUP BY`
+
+PostgreSQL can exploit functional dependencies, such as `i -> j` in the following query:
+
+```sql
+CREATE TABLE tbl (i INTEGER, j INTEGER, PRIMARY KEY (i));
+SELECT j
+FROM tbl
+GROUP BY i;
+```
+
+PostgreSQL runs the query.
+
+DuckDB fails:
+
+```console
+Binder Error:
+column "j" must appear in the GROUP BY clause or must be part of an aggregate function.
+Either add it to the GROUP BY list, or use "ANY_VALUE(j)" if the exact value of "j" is not important.
+```
+
+To work around this, add the other attributes or use the [`GROUP BY ALL` clause](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all).
+
+## Behavior of Regular Expression Match Operators
+
+PostgreSQL supports the [POSIX regular expression matching operators]({% link docs/stable/sql/functions/pattern_matching.md %}) `~` (case-sensitive partial regex matching) and `~*` (case-insensitive partial regex matching) as well as their negated variants, `!~` and `!~*`, respectively.
+
+In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/stable/sql/functions/char.md %}#regexp_full_matchstring-regex) and `!~` is equivalent to `NOT regexp_full_match`.
+The operators `~*` and `!~*` are not supported.
+
+The table below shows that the correspondence between these functions in PostgreSQL and DuckDB is almost non-existent.
+We recommend avoiding the POSIX regular expression matching operators in DuckDB.
+
+<div class="monospace_table"></div>
+
+<!-- markdownlint-disable MD056 -->
+
+| Expression          | PostgreSQL | DuckDB |
+| :------------------ | ---------- | ------ |
+| `'aaa' ~ '(a|b)'`   | true       | false  |
+| `'AAA' ~* '(a|b)'`  | true       | error  |
+| `'aaa' !~ '(a|b)'`  | false      | true   |
+| `'AAA' !~* '(a|b)'` | false      | error  |
+
+<!-- markdownlint-enable MD056 -->

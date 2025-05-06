@@ -2,8 +2,6 @@
 layout: docu
 title: Installing Extensions
 redirect_from:
-- /docs/extensions/troubleshooting
-- /docs/extensions/troubleshooting/
 - /docs/extensions/working_with_extensions
 - /docs/stable/extensions/working_with_extensions
 ---
@@ -140,7 +138,7 @@ to the [Client API documentation]({% link docs/stable/clients/overview.md %})
 
 By default, extensions are installed under the user's home directory:
 
-```{:.language-sql .highlight}
+```sql
 ~/.duckdb/extensions/⟨duckdb_version⟩/⟨platform_name⟩/
 ```
 

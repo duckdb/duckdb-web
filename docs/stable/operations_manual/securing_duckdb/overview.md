@@ -30,19 +30,53 @@ duckdb -safe ...
 .safe_mode
 ```
 
-## Disabling File Access
+## Restricting File Access
 
-DuckDB can list directories and read arbitrary files via its CSV parser’s [`read_csv` function]({% link docs/stable/data/csv/overview.md %}) or read text via the [`read_text` function]({% link docs/stable/sql/functions/char.md %}#read_textsource). For example:
+DuckDB can list directories and read arbitrary files via its CSV parser’s [`read_csv` function]({% link docs/stable/data/csv/overview.md %}) or read text via the [`read_text` function]({% link docs/stable/sql/functions/char.md %}#read_textsource).
+This makes it possible to read from the local file system, for example:
 
 ```sql
 SELECT *
 FROM read_csv('/etc/passwd', sep = ':');
 ```
 
-This can be disabled either by disabling external access altogether (`enable_external_access`) or disabling individual file systems. For example:
+### Disabling File Access
+
+Files access can be disabled in two ways. First, you can disable individual file systems. For example:
 
 ```sql
 SET disabled_filesystems = 'LocalFileSystem';
+```
+
+Second, you can also completely disable external access by setting the [`enable_external_access` option]({% link docs/stable/configuration/overview.md %}#configuration-reference) option to `false`.
+
+```sql
+SET enable_external_access = false;
+```
+
+This setting implies that:
+
+* `ATTACH` cannot attach to a database in a file.
+* `COPY` cannot read to or write from files.
+* Functions such as `read_csv`, `read_parquet`, `read_json`, etc. cannot read from an external source.
+
+### The `allowed_directories` and `allowed_paths` Options
+
+You can restrict DuckDB's access to certain directories or files using the `allowed_directories` and `allowed_paths` options (respectively).
+These options allows fine-grained access control for the file system.
+For example, you can set DuckDB to only use the `/tmp` directory.
+
+```sql
+SET allowed_directories = ['/tmp'];  
+SET enable_external_access = false;  
+FROM read_csv('test.csv');  
+```
+
+With the setting applied, DuckDB will refuse to read files in the current working directory:
+
+```console
+Permission Error:
+Cannot access file "test.csv" - file system operations are disabled by configuration  
 ```
 
 ## Secrets
@@ -70,6 +104,24 @@ SET lock_configuration = true;
 ```
 
 This prevents any configuration settings from being modified from that point onwards.
+
+## Prepared Statements to Prevent SQL Injection
+
+Similarly to other SQL databases, it's recommended to use [prepared statements]({% link docs/stable/sql/query_syntax/prepared_statements.md %}) in DuckDB to prevent [SQL injection](https://en.wikipedia.org/wiki/SQL_injection).
+
+**Therefore, avoid concatenating strings for queries:**
+
+```python
+import duckdb
+duckdb.execute("SELECT * FROM (VALUES (32, 'a'), (42, 'b')) t(x) WHERE x = " + str(42)).fetchall()
+```
+
+**Instead, use prepared statements:**
+
+```python
+import duckdb
+duckdb.execute("SELECT * FROM (VALUES (32, 'a'), (42, 'b')) t(x) WHERE x = ?", [42]).fetchall()
+```
 
 ## Constrain Resource Usage
 

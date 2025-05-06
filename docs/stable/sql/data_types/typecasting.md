@@ -43,10 +43,12 @@ Even though a casting operation is supported based on the source and target data
 
 ### Lossy Casts
 
-Casting operations that result in loss of precision are allowed. For example, it is  possible to explicitly cast a numeric type with fractional digits like `DECIMAL`, `FLOAT` or `DOUBLE` to an integral type like `INTEGER`. The number will be rounded.
+Casting operations that result in loss of precision are allowed. For example, it is  possible to explicitly cast a numeric type with fractional digits – such as `DECIMAL`, `FLOAT` or `DOUBLE` – to an integral type like `INTEGER` or `BIGINT`. The number will be rounded.
 
 ```sql
-SELECT CAST(3.5 AS INTEGER);
+SELECT CAST(3.1 AS INTEGER);  -- 3
+SELECT CAST(3.5 AS INTEGER);  -- 4
+SELECT CAST(-1.7 AS INTEGER); -- -2
 ```
 
 ### Overflows
@@ -58,7 +60,8 @@ SELECT CAST(999 AS TINYINT);
 ```
 
 ```console
-Conversion Error: Type INT32 with value 999 can't be cast because the value is out of range for the destination type INT8
+Conversion Error:
+Type INT32 with value 999 can't be cast because the value is out of range for the destination type INT8
 ```
 
 So even though the cast operation from `INTEGER` to `TINYINT` is supported, it is not possible for this particular value. [TRY_CAST]({% link docs/stable/sql/expressions/cast.md %}) can be used to convert the value into `NULL` instead of throwing an error.

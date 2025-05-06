@@ -25,7 +25,7 @@ Before you get started using the R-tree index, there are some limitations to be 
 
 - The R-tree index is only supported for the `GEOMETRY` data type.
 - The R-tree index will only be used to perform "index scans" when the table is filtered (using a `WHERE` clause) with one of the following spatial predicate functions (as they all imply intersection): `ST_Equals`, `ST_Intersects`, `ST_Touches`, `ST_Crosses`, `ST_Within`, `ST_Contains`, `ST_Overlaps`, `ST_Covers`, `ST_CoveredBy`, `ST_ContainsProperly`.
-- One of the arguments to the spatial predicate function must be a “constant” (i.e., a expression whose result is known at query planning time). This is because the query planner needs to know the bounding box of the query region _before_ the query itself is executed in order to use the R-tree index scan.
+- One of the arguments to the spatial predicate function must be a “constant” (i.e., an expression whose result is known at query planning time). This is because the query planner needs to know the bounding box of the query region _before_ the query itself is executed in order to use the R-tree index scan.
 
 In the future we want to enable R-tree indexes to be used to accelerate additional predicate functions and more complex queries such a spatial joins.
 

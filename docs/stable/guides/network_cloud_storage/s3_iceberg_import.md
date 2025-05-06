@@ -58,5 +58,6 @@ FROM iceberg_scan('s3://⟨bucket⟩/⟨iceberg_table_folder⟩/metadata/⟨id�
 Note that you need to link directly to the manifest file. Otherwise you'll get an error like this:
 
 ```console
-IO Error: Cannot open file "s3://bucket/iceberg_table_folder/metadata/version-hint.text": No such file or directory
+IO Error:
+Cannot open file "s3://bucket/iceberg_table_folder/metadata/version-hint.text": No such file or directory
 ```

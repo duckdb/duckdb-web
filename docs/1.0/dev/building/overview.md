@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /dev/building
-- /docs/archive/1.0/dev/building
 title: Building DuckDB from Source
 ---
 

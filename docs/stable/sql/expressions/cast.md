@@ -46,7 +46,8 @@ SELECT CAST('hello' AS INTEGER);
 ```
 
 ```console
-Conversion Error: Could not convert string 'hello' to INT32
+Conversion Error:
+Could not convert string 'hello' to INT32
 ```
 
 The exact behavior of the cast depends on the source and destination types. For example, when casting from `VARCHAR` to any other type, the string will be attempted to be converted.

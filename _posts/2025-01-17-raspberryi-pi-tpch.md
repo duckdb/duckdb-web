@@ -8,6 +8,8 @@ excerpt: DuckDB can run all TPC-H SF300 queries on a Raspberry Pi board.
 tags: ["benchmark"]
 --- 
 
+> Update (March 2025): The configuration described in this post can now run all TPC-H queries on the SF1,000 data set with the latest version of DuckDB!
+
 ## Introduction
 
 The Raspberry Pi is an initiative to provide affordable and easy-to-program microcomputer boards.
@@ -53,7 +55,7 @@ Here is a photo of our machine:
 So what is this little box capable of? We used the [TPC-H workload](https://www.tpc.org/tpch/) to find out.
 
 We first updated the Raspberry Pi OS (a fork of Debian Linux) to its latest version, 2024-11-19.
-We then compiled DuckDB [version `0024e5d4be`](https://github.com/duckdb/duckdb/commit/0024e5d4be) using the [Raspberry Pi build instruction]({% link docs/stable/dev/building/raspberry_pi.md %}).
+We then compiled DuckDB [version `0024e5d4be`](https://github.com/duckdb/duckdb/commit/0024e5d4be) using the [Raspberry Pi build instructions]({% link docs/stable/dev/building/raspberry_pi.md %}).
 To make the queries easy to run, we also included the [TPC-H extension]({% link docs/stable/extensions/tpch.md %}) in the build:
 
 ```batch
@@ -182,7 +184,7 @@ This is a great demonstration of what the continuous innovation in hardware and 
 
 ## Summary
 
-We showed that you can use DuckDB in a Raspberry Pi setup that costs less than $300 and
+We showed that you can use DuckDB in a Raspberry Pi setup that costs $300 and
 runs all queries on the TPC-H SF300 dataset in less than 30 minutes.
 
 We hope you enjoyed this blog post. If you have an interesting DuckDB setup, don't forget to share it with us!

@@ -24,8 +24,10 @@ This has the following effects:
 * Auto-complete no longer scans the file system for files to suggest as auto-complete targets.
 * The [`getenv` function]({% link docs/stable/clients/cli/overview.md %}#reading-environment-variables) is disabled.
 * The [`enable_external_access` option]({% link docs/stable/configuration/overview.md %}#configuration-reference) is set to `false`. This implies that:
-    * `ATTACH` cannot attach a database from an on-disk file.
-    * `COPY` cannot read to/write from files.
-    * `read_csv`, `read_parquet`, `read_json`, etc. cannot read from disk.
+    * `ATTACH` cannot attach to a database in a file.
+    * `COPY` cannot read to or write from files.
+    * Functions such as `read_csv`, `read_parquet`, `read_json`, etc. cannot read from an external source.
 
 Once safe mode is activated, it cannot be deactivated in the same DuckDB CLI session.
+
+For more information on running DuckDB in secure environments, see the [“Securing DuckDB” page]({% link docs/stable/operations_manual/securing_duckdb/overview.md %}).

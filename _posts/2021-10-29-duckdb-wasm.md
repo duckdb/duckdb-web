@@ -8,7 +8,7 @@ tags: ["using DuckDB"]
 
 <img src="/images/blog/duckdb_wasm.svg"
      alt="DuckDB-Wasm logo"
-     width=240
+     width="240"
      />
 
 *DuckDB-Wasm is fast! If you're here for performance numbers, head over to our benchmarks at [shell.duckdb.org/versus](https://shell.duckdb.org/versus).*
@@ -128,7 +128,7 @@ for await (const batch of await conn.send<{ v: arrow.Int32 }>(`
 
 Alternatively, you can prepare statements for parameterized queries using:
 
-``` ts
+```ts
 // Prepare query
 const stmt = await conn.prepare<{ v: arrow.Int32 }>(
     `SELECT (v + ?) AS v FROM generate_series(0, 10000) t(v);`
@@ -258,27 +258,29 @@ You can alternatively use the `.files` command to register files from the local 
 .timer on
 
 SELECT count(*)
-FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/lineitem.parquet';
+FROM 'https://blobs.duckdb.org/data/tpch-sf0.01-parquet/lineitem.parquet';
 
 SELECT count(*)
-FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet';
+FROM 'https://blobs.duckdb.org/data/tpch-sf0.01-parquet/customer.parquet';
 
 SELECT avg(c_acctbal)
-FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet';
+FROM 'https://blobs.duckdb.org/data/tpch-sf0.01-parquet/customer.parquet';
 
-SELECT * FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/orders.parquet' LIMIT 10;
+SELECT *
+FROM 'https://blobs.duckdb.org/data/tpch-sf0.01-parquet/orders.parquet'
+LIMIT 10;
 
 SELECT n_name, avg(c_acctbal)
 FROM
-    'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet',
-    'https://shell.duckdb.org/data/tpch/0_01/parquet/nation.parquet'
+    'https://blobs.duckdb.org/data/tpch-sf0.01-parquet/customer.parquet',
+    'https://blobs.duckdb.org/data/tpch-sf0.01-parquet/nation.parquet'
 WHERE c_nationkey = n_nationkey
 GROUP BY n_name;
 
 SELECT *
 FROM
-    'https://shell.duckdb.org/data/tpch/0_01/parquet/region.parquet',
-    'https://shell.duckdb.org/data/tpch/0_01/parquet/nation.parquet'
+    'https://blobs.duckdb.org/data/tpch-sf0.01-parquet/region.parquet',
+    'https://blobs.duckdb.org/data/tpch-sf0.01-parquet/nation.parquet'
 WHERE r_regionkey = n_regionkey;
 ```
 
@@ -286,8 +288,8 @@ WHERE r_regionkey = n_regionkey;
 
 The following table teases the execution times of some TPC-H queries at scale factor 0.5 using the libraries [DuckDB-Wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm), [sql.js](https://github.com/sql-js/sql.js/), [Arquero](https://github.com/uwdata/arquero) and [Lovefield](https://github.com/google/lovefield). You can find a more in-depth discussion with all TPC-H queries, additional scale factors and Microbenchmarks [here](https://shell.duckdb.org/versus).
 
-| Query | DuckDB-wasm | sql.js | Arquero | Lovefield |
-|:--|--:|--:|--:|--:|
+| Query | DuckDB-Wasm | sql.js | Arquero | Lovefield |
+|--:|--:|--:|--:|--:|
 | 1 | **0.855 s** | 8.441 s | 24.031 s | 12.666 s |
 | 3 | **0.179 s** | 1.758 s | 16.848 s | 3.587 s |
 | 4 | **0.151 s** | 0.384 s | 6.519 s | 3.779 s |
@@ -305,4 +307,3 @@ The following table teases the execution times of some TPC-H queries at scale fa
 ## Future Research
 
 We believe that WebAssembly unveils hitherto dormant potential for shared query processing between clients and servers. Pushing computation closer to the client can eliminate costly round-trips to the server and thus increase interactivity and scalability of in-browser analytics. We further believe that the release of DuckDB-Wasm could be the first step towards a more universal data plane spanning across multiple layers including traditional database servers, clients, CDN workers and computational storage. As an in-process analytical database, DuckDB might be the ideal driver for distributed query plans that increase the scalability and interactivity of SQL databases at low costs.
-

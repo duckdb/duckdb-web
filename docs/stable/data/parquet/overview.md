@@ -51,9 +51,7 @@ SELECT *
 FROM 'test/*.parquet';
 ```
 
-Read all files that match the glob pattern, and include a `filename` column:
-
-That specifies which file each row came from:
+Read all files that match the glob pattern, and include a `filename` column that specifies which file each row came from:
 
 ```sql
 SELECT *
@@ -130,7 +128,7 @@ EXPORT DATABASE 'target_directory' (FORMAT parquet);
 
 Parquet files are compressed columnar files that are efficient to load and process. DuckDB provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
 
-> Parquet data sets differ based on the number of files, the size of individual files, the compression algorithm used row group size, etc. These have a significant effect on performance. Please consult the [Performance Guide]({% link docs/stable/guides/performance/file_formats.md %}) for details.
+> Parquet data sets differ based on the number of files, the size of individual files, the compression algorithm used, row group size, etc. These have a significant effect on performance. Please consult the [Performance Guide]({% link docs/stable/guides/performance/file_formats.md %}) for details.
 
 ## `read_parquet` Function
 
@@ -157,7 +155,7 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 | `encryption_config` | Configuration for [Parquet encryption]({% link docs/stable/data/parquet/encryption.md %}). | `STRUCT` | - |
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `file_row_number` | Whether or not to include the `file_row_number` column. | `BOOL` | `false` |
-| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/stable/data/partitioning/hive_partitioning.md %}). | `BOOL` | `true` |
+| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/stable/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/stable/data/multiple_files/combining_schemas.md %}), rather than by position. | `BOOL` | `false` |
 
 ## Partial Reading
@@ -205,7 +203,7 @@ SELECT * FROM people;
 
 DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [`COPY` Statement page]({% link docs/stable/sql/statements/copy.md %}) for details, including all possible parameters for the `COPY` statement.
 
-Write a query to a snappy compressed Parquet file:
+Write a query to a Snappy-compressed Parquet file:
 
 ```sql
 COPY
@@ -264,7 +262,7 @@ COPY
     (FORMAT parquet, COMPRESSION zstd, ROW_GROUP_SIZE 100_000);
 ```
 
-Write data to an `LZ4_RAW`-compressed Parquet file:
+Write data to an LZ4-compressed Parquet file:
 
 ```sql
 COPY
@@ -279,10 +277,10 @@ Or, equivalently:
 COPY
     (FROM generate_series(100_000))
     TO 'result-lz4.parquet'
-    (FORMAT parquet, COMPRESSION lz4_RAW);
+    (FORMAT parquet, COMPRESSION lz4_raw);
 ```
 
-Write data to a `BROTLI`-compressed Parquet file:
+Write data to a Brotli-compressed Parquet file:
 
 ```sql
 COPY

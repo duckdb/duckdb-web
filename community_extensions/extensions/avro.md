@@ -12,14 +12,14 @@ extension:
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
 
   maintainers:
     - hannes
 
 repo:
   github: hannes/duckdb_avro
-  ref: 80fee540409f85fdb9473700bec0d5ca95eb74de
+  ref: ed18629fa56a97e0796a3582110b51ddd125159d
 
 docs:
   hello_world: |
@@ -28,10 +28,10 @@ docs:
     This extension provides a scan function for Apache Avro files.
     For more information and information regarding usage, limitations and performance, see the [README](https://github.com/hannes/duckdb_avro) and the [announcement blog post](https://duckdb.org/2024/12/09/duckdb-avro-extension).
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 10488
-extension_download_count_pretty: 10.5k
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 10409
+extension_download_count_pretty: 10.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_avro.png'
 layout: community_extension_doc
 ---

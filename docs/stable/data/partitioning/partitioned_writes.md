@@ -10,19 +10,22 @@ title: Partitioned Writes
 Write a table to a Hive partitioned data set of Parquet files:
 
 ```sql
-COPY orders TO 'orders' (FORMAT parquet, PARTITION_BY (year, month));
+COPY orders TO 'orders'
+(FORMAT parquet, PARTITION_BY (year, month));
 ```
 
 Write a table to a Hive partitioned data set of CSV files, allowing overwrites:
 
 ```sql
-COPY orders TO 'orders' (FORMAT csv, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE);
+COPY orders TO 'orders'
+(FORMAT csv, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE);
 ```
 
 Write a table to a Hive partitioned data set of GZIP-compressed CSV files, setting explicit data files' extension:
 
 ```sql
-COPY orders TO 'orders' (FORMAT csv, PARTITION_BY (year, month), COMPRESSION gzip, FILE_EXTENSION 'csv.gz');
+COPY orders TO 'orders'
+(FORMAT csv, PARTITION_BY (year, month), COMPRESSION gzip, FILE_EXTENSION 'csv.gz');
 ```
 
 ## Partitioned Writes
@@ -45,13 +48,15 @@ orders
          └── data_1.parquet
 ```
 
-The values of the partitions are automatically extracted from the data. Note that it can be very expensive to write many partitions as many files will be created. The ideal partition count depends on how large your data set is.
+The values of the partitions are automatically extracted from the data. Note that it can be very expensive to write a larger number of partitions as many files will be created. The ideal partition count depends on how large your data set is.
+
+To limit the maximum number of files the system can keep open before flushing to disk when writing using `PARTITION_BY`, use the `partitioned_write_max_open_files` configuration option (default: 100):
+
+```bash
+SET partitioned_write_max_open_files = 10;
+```
 
 > Bestpractice Writing data into many small partitions is expensive. It is generally recommended to have at least `100 MB` of data per partition.
-
-### Overwriting
-
-By default the partitioned write will not allow overwriting existing directories. Use the `OVERWRITE_OR_IGNORE` option to allow overwriting an existing directory.
 
 ### Filename Pattern
 
@@ -64,12 +69,34 @@ Write a table to a Hive partitioned data set of .parquet files, with an index in
 
 ```sql
 COPY orders TO 'orders'
-    (FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'orders_{i}');
+(FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'orders_{i}');
 ```
 
 Write a table to a Hive partitioned data set of .parquet files, with unique filenames:
 
 ```sql
 COPY orders TO 'orders'
-    (FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'file_{uuid}');
+(FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'file_{uuid}');
 ```
+
+### Overwriting
+
+By default the partitioned write will not allow overwriting existing directories.
+On a local file system, the `OVERWRITE` and `OVERWRITE_OR_IGNORE` options remove the existing directories.
+On remote file systems, overwriting is not supported.
+
+### Appending
+
+To append to an existing Hive partitioned directory structure, use the `APPEND` option:
+
+```sql
+COPY orders TO 'orders'
+(FORMAT PARQUET, PARTITION_BY (year, month), APPEND);
+```
+
+Using the `APPEND` option result in a behavior similar the `OVERWRITE_OR_IGNORE, FILENAME_PATTERN '{uuid}'` options,
+but DuckDB performs an extra check for whether the file already exists and then regenerates the UUID in the rare event that it does (to avoid clashes).
+
+### Handling Slashes in Columns
+
+To handle slashes in column names, use Percent-Encoding implemented by the [`url_encode` function]({% link docs/stable/sql/functions/char.md %}#url_encodestring).

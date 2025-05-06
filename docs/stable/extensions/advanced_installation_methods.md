@@ -17,7 +17,7 @@ http://extensions.duckdb.org/v⟨duckdb_version⟩/⟨platform_name⟩/⟨extens
 For example:
 
 ```text
-http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
+http://extensions.duckdb.org/v{{ site.current_duckdb_version }}/windows_amd64/json.duckdb_extension.gz
 ```
 
 ## Installing an Extension from an Explicit Path

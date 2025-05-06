@@ -8,9 +8,7 @@ title: CREATE INDEX Statement
 
 ## `CREATE INDEX`
 
-The `CREATE INDEX` statement constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported.
-
-> Unidimensional indexes are supported, while multidimensional indexes are not yet supported.
+The `CREATE INDEX` statement constructs an index on the specified column(s) of the specified table.
 
 ### Examples
 

@@ -136,7 +136,7 @@ It is worth noting that the boost from moving to multi-threading will only occur
 
 We can also recreate the overall plot by version rather than by time.
 This demonstrates that DuckDB has been doing more frequent releases recently.
-See [DuckDB's release calendar]({% link docs/stable/dev/release_calendar.md %}) for the full version history.
+See [DuckDB's release calendar]({% link release_calendar.md %}) for the full version history.
 
 <div id="overall_results_by_version" style="width:100%;height:400px;"></div>
 <script>
@@ -454,7 +454,7 @@ The query used follows the format:
 ```sql
 SELECT 
     sum(v3) AS v3 
-FROM ⟨dataframe or Parquet file⟩;
+FROM ⟨dataframe_or_Parquet_file⟩;
 ```
 
 #### Window Functions

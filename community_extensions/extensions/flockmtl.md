@@ -8,18 +8,19 @@ excerpt: |
 extension:
   name: flockmtl
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.2.3
+  version: 0.2.4
   language: SQL & C++
   build: cmake
   license: MIT
   excluded_platforms: "windows_amd64_rtools;wasm_mvp;wasm_eh;wasm_threads"
 
   maintainers:
-    - dorbanianas
+    - anasdorbani
+    - queryproc
 
 repo:
   github: dsg-polymtl/flockmtl
-  ref: 5c4d40bcd6e9918227a6b4e5b897c880e749355e
+  ref: 6f0dc7cfe2398b63b517c306b488e80ac44e2fe9
 
 docs:
   hello_world: |
@@ -51,12 +52,20 @@ docs:
     D SELECT llm_complete({'model_name': 'summarizer-model'}, {'prompt_name': 'summarize'}, {'text': 'We support more functions and approaches to combine relational analytics and semantic analysis. Check our repo for documentation and examples.'});
 
   extended_description: |
-    This extension is experimental and potentially unstable. Do not use it in production.
+    **FlockMTL** is an experimental DuckDB extension that enables seamless integration of large language models (LLMs) and retrieval-augmented generation (RAG) directly within SQL.
 
-extension_star_count: 106
-extension_star_count_pretty: 106
-extension_download_count: 411
-extension_download_count_pretty: 411
+    It introduces `MODEL` and `PROMPT` objects as first-class SQL entities, making it easy to define, manage, and reuse LLM interactions. Core functions like `llm_complete`, `llm_filter`, and `llm_rerank` allow you to perform generation, semantic filtering, and ranking—all from SQL.
+
+    FlockMTL is designed for rapid prototyping of LLM-based analytics and is optimized with batching and caching features for better performance.
+
+    📄 For more details and examples, see the [FlockMTL documentation](https://dsg-polymtl.github.io/flockmtl/docs/what-is-flockmtl).
+
+    > *Note:* FlockMTL is part of ongoing research by the [Data Systems Group @ Polytechnique Montréal](https://dsg-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
+
+extension_star_count: 195
+extension_star_count_pretty: 195
+extension_download_count: 513
+extension_download_count_pretty: 513
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
 layout: community_extension_doc
 ---
@@ -84,7 +93,11 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
-| fusion_relative   | scalar        | NULL        | NULL    | []       |
+| fusion_combanz    | scalar        | NULL        | NULL    | []       |
+| fusion_combmed    | scalar        | NULL        | NULL    | []       |
+| fusion_combmnz    | scalar        | NULL        | NULL    | []       |
+| fusion_combsum    | scalar        | NULL        | NULL    | []       |
+| fusion_rrf        | scalar        | NULL        | NULL    | []       |
 | llm_complete      | scalar        | NULL        | NULL    | []       |
 | llm_complete_json | scalar        | NULL        | NULL    | []       |
 | llm_embedding     | scalar        | NULL        | NULL    | []       |

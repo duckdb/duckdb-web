@@ -11,10 +11,16 @@ The `iceberg` extension implements support for the [Apache Iceberg open table fo
 
 ## Installing and Loading
 
-To install and load the `iceberg` extension, run:
+To install the `iceberg` extension, run:
 
 ```sql
 INSTALL iceberg;
+```
+
+Note that the `iceberg` extension is not autoloadable.
+Therefore, you need to load it before using it:
+
+```sql
 LOAD iceberg;
 ```
 
@@ -70,10 +76,7 @@ The `iceberg` works together with the [`httpfs` extension]({% link docs/stable/e
 
 ```sql
 SELECT count(*)
-FROM iceberg_scan(
-    's3://bucketname/lineitem_iceberg/metadata/v1.metadata.json',
-    allow_moved_paths = true
-);
+FROM iceberg_scan('s3://bucketname/lineitem_iceberg/metadata/v1.metadata.json');
 ```
 
 ### Access Iceberg Metadata

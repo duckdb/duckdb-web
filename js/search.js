@@ -5,6 +5,7 @@ function loadSearchData() {
 
 	const xhr = new XMLHttpRequest();
 	xhr.open('GET', '/data/search_data.json');
+	xhr.setRequestHeader('Accept-Encoding', 'gzip, deflate');
 	xhr.onreadystatechange = function(event) {
 		if (this.readyState === 4) {
 			const { data } = JSON.parse(this.responseText);
@@ -35,7 +36,7 @@ const tokenize = (string) => string.split(/[\s-.]+/); // search query tokenizer
 // id field, that is always stored and returned)
 const miniSearch = new MiniSearch({
 	fields: ['title', 'text', 'category', 'blurb'],
-	storeFields: ['title', 'text', 'category', 'url', 'blurb'],
+	storeFields: ['title', 'text', 'category', 'url', 'blurb', 'type'],
 	tokenize,
 	searchOptions: { tokenize }
 })
@@ -80,9 +81,29 @@ function bold_blurb(blurb, query) {
 	return blurb
 }
 
+// Check what page we are
+let currentPageType = 'all'; 
+if (window.location.pathname.includes('/docs/')) {
+	currentPageType = 'documentation';
+} else if (window.location.pathname.includes('/news/')) {
+	currentPageType = 'blog';
+}
+
 function perform_search(query) {
-	// Search for documents:
-	let results = miniSearch.search(query, { boost: { title: 100, category: 20, blurb: 2 }, prefix: true, fuzzy: 0.2});
+	let searchOptions = {
+		boost: { title: 100, category: 20, blurb: 2 },
+		prefix: true,
+		fuzzy: 0.2
+	};
+	
+	// Filter search results depening on what page we are
+	if (currentPageType === 'documentation') {
+		searchOptions.filter = (doc) => doc.type === 'documentation';
+	} else if (currentPageType === 'blog') {
+		searchOptions.filter = (doc) => doc.type === 'blog';
+	}
+	
+	let results = miniSearch.search(query, searchOptions);
 	let search_div = document.getElementById("search_results");
 	let search_html = "";
 	let max_index = 20;
@@ -130,7 +151,7 @@ text_div.addEventListener('input', on_update);
 inp = document.getElementById("q")
 const miniPredictor = new MiniSearch({
 	fields: ['title', 'category', 'blurb'],
-	storeFields: ['title', 'category', 'blurb'],
+	storeFields: ['title', 'category', 'blurb', 'type'],
 	tokenize,
 	searchOptions: { tokenize }
 })

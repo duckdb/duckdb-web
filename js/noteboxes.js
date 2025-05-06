@@ -42,8 +42,6 @@ $(document).ready(function(){
 			$blockquote.find('.content').prepend('<h4>Best Practice</h4>');
 		} else if (className !== "default") {
 			$blockquote.find('.content').prepend('<h4>' + firstWord + '</h4>');
-		} else {
-			$blockquote.find('.content').prepend('<h4>Note</h4>');
 		}
 
 		$blockquote.prepend('<div class="symbol"></div>');

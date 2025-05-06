@@ -22,7 +22,7 @@ DuckDB detects the following error types:
 * `MISSING COLUMNS`: This error occurs if a line in the CSV file has fewer columns than expected. In our example, we expect two columns; therefore, a row with just one value, e.g., `Pedro`, would cause this error.
 * `TOO MANY COLUMNS`: This error occurs if a line in the CSV has more columns than expected. In our example, any line with more than two columns would cause this error, e.g., `Pedro,01-01-1992,pdet`.
 * `UNQUOTED VALUE`: Quoted values in CSV lines must always be unquoted at the end; if a quoted value remains quoted throughout, it will cause an error. For example, assuming our scanner uses `quote='"'`, the line `"pedro"holanda, 01-01-1992` would present an unquoted value error.
-* `LINE SIZE OVER MAXIMUM`: DuckDB has a parameter that sets the maximum line size a CSV file can have, which by default is set to `2,097,152` bytes. Assuming our scanner is set to `max_line_size = 25`, the line `Pedro Holanda, 01-01-1992` would produce an error, as it exceeds 25 bytes.
+* `LINE SIZE OVER MAXIMUM`: DuckDB has a parameter that sets the maximum line size a CSV file can have, which by default is set to 2,097,152 bytes. Assuming our scanner is set to `max_line_size = 25`, the line `Pedro Holanda, 01-01-1992` would produce an error, as it exceeds 25 bytes.
 * `INVALID UNICODE`: DuckDB only supports UTF-8 strings; thus, lines containing non-UTF-8 characters will produce an error. For example, the line `pedro\xff\xff, 01-01-1992` would be problematic.
 
 ### Anatomy of a CSV Error
@@ -33,7 +33,8 @@ These errors are designed to provide as much information as possible to allow us
 This is an example for a full error message:
 
 ```console
-Conversion Error: CSV Error on Line: 5648
+Conversion Error:
+CSV Error on Line: 5648
 Original Line: Pedro,The 90s
 Error when converting column "birth_date". date field value out of range: "The 90s", expected format is (DD-MM-YYYY)
 
@@ -62,7 +63,8 @@ Possible solutions:
 The first block provides us with information regarding where the error occurred, including the line number, the original CSV line, and which field was problematic:
 
 ```console
-Conversion Error: CSV Error on Line: 5648
+Conversion Error:
+CSV Error on Line: 5648
 Original Line: Pedro,The 90s
 Error when converting column "birth_date". date field value out of range: "The 90s", expected format is (DD-MM-YYYY)
 ```

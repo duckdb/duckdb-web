@@ -6,7 +6,7 @@ excerpt: "DuckDB offers several extensions to the SQL syntax. For a full list of
 tags: ["using DuckDB"]
 ---
 
-<img src="/images/blog/duck_chewbacca.png" alt="Chewbacca_the_duck" title="Chewbacca the duck is pretty friendly" width=200/>
+<img src="/images/blog/duck_chewbacca.png" alt="Chewbacca_the_duck" title="Chewbacca the duck is pretty friendly" width="200"/>
 
 An elegant user experience is a key design goal of DuckDB. This goal guides much of DuckDB's architecture: it is simple to install, seamless to integrate with other data structures like Pandas, Arrow, and R Dataframes, and requires no dependencies. Parallelization occurs automatically, and if a computation exceeds available memory, data is gracefully buffered out to disk. And of course, DuckDB's processing speed makes it easier to get more work accomplished.
 
@@ -41,7 +41,7 @@ SELECT
 FROM star_wars_owned_by_disney;
 ```
 
-This allows views, CTE's, or sub-queries to be built on one another in a highly concise way, while remaining adaptable to new underlying columns. 
+This allows views, CTE's, or sub-queries to be built on one another in a highly concise way, while remaining adaptable to new underlying columns.
 
 ## `GROUP BY ALL`
 
@@ -118,15 +118,13 @@ CREATE TABLE mandalorian AS SELECT 1 AS "THIS_IS_THE_WAY";
 SELECT this_is_the_way FROM mandalorian;
 ```  
 
-
 | THIS_IS_THE_WAY |
 |----------------:|
 | 1               |
 
-
 ## Friendly Error Messages
 
-Regardless of expertise, and despite DuckDB's best efforts to understand our intentions, we all make mistakes in our SQL queries. Many RDBMSs leave you trying to use the force to detect an error. In DuckDB, if you make a typo on a column or table name, you will receive a helpful suggestion about the most similar name. Not only that, you will receive an arrow that points directly to the offending location within your query. 
+Regardless of expertise, and despite DuckDB's best efforts to understand our intentions, we all make mistakes in our SQL queries. Many RDBMSs leave you trying to use the force to detect an error. In DuckDB, if you make a typo on a column or table name, you will receive a helpful suggestion about the most similar name. Not only that, you will receive an arrow that points directly to the offending location within your query.
 
 ```sql
 SELECT * FROM star_trek;
@@ -245,7 +243,6 @@ FROM (
     CROSS JOIN squadron_two s2
     ) theyre_coming_in_too_fast;
 ```  
-
 
 | tie_fighter | tie_fighter:1 |
 |:---|:---|

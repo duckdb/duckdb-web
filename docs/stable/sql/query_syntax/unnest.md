@@ -41,19 +41,18 @@ Unnest a list, generating 3 rows (1, 2, 3):
 SELECT unnest([1, 2, 3]);
 ```
 
-Unnest a scalar list, generating 3 rows ((1, 10), (2, 11), (3, NULL)):
-
-```sql
-SELECT unnest([1, 2, 3]), unnest([10, 11]);
-```
-
-Unnest a scalar list, generating 3 rows ((1, 10), (2, 10), (3, 10)):
+Unnest a list, generating 3 rows ((1, 10), (2, 10), (3, 10)):
 
 ```sql
 SELECT unnest([1, 2, 3]), 10;
 ```
 
-Unnest a list column generated from a subquery:
+Unnest two lists of different sizes, generating 3 rows ((1, 10), (2, 11), (3, NULL)):
+
+```sql
+SELECT unnest([1, 2, 3]), unnest([10, 11]);
+```
+Unnest a list column from a subquery:
 
 ```sql
 SELECT unnest(l) + 10 FROM (VALUES ([1, 2, 3]), ([4, 5])) tbl(l);
@@ -71,9 +70,9 @@ Empty result:
 SELECT unnest(NULL);
 ```
 
-Using `unnest` on a list will emit one tuple per entry in the list. When `unnest` is combined with regular scalar expressions, those expressions are repeated for every entry in the list. When multiple lists are unnested in the same `SELECT` clause, the lists are unnested side-by-side. If one list is longer than the other, the shorter list will be padded with `NULL` values.
+Using `unnest` on a list emits one row per list entry. Regular scalar expressions in the same `SELECT` clause are repeated for every emitted row. When multiple lists are unnested in the same `SELECT` clause, the lists are unnested side-by-side. If one list is longer than the other, the shorter list is padded with `NULL` values.
 
-An empty list and a `NULL` list will both unnest to zero elements.
+Empty and `NULL` lists both unnest to zero rows.
 
 ### Unnesting Structs
 

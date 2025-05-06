@@ -8,7 +8,7 @@ tags: ["using DuckDB"]
 
 <img src="/images/blog/ai_generated_star_trek_rubber_duck.png"
      alt="Looks like a Duck ready to boldly go where databases have not gone before"
-     width=200
+     width="200"
 />
 
 Who says that SQL should stay frozen in time, chained to a 1999 version of the specification? As a comparison, do folks remember what JavaScript felt like before Promises? Those didn’t launch until 2012! It’s clear that innovation at the programming syntax layer can have a profoundly positive impact on an entire language ecosystem.

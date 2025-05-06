@@ -48,13 +48,6 @@ Create a macro that does a subquery:
 CREATE MACRO one() AS (SELECT 1);
 ```
 
-Create a macro with a common table expression.
-Note that parameter names get priority over column names. To work around this, disambiguate using the table name.
-
-```sql
-CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM cte);
-```
-
 Macros are schema-dependent, and have an alias, `FUNCTION`:
 
 ```sql
@@ -158,7 +151,8 @@ CREATE MACRO add(a) AS a + b;
 ```
 
 ```console
-Binder Error: Referenced column "b" not found in FROM clause!
+Binder Error:
+Referenced column "b" not found in FROM clause!
 ```
 
 This works:
@@ -184,10 +178,11 @@ SELECT add('hello', 3);
 ```
 
 ```console
-Binder Error: Could not choose a best candidate function for the function call "+(STRING_LITERAL, INTEGER_LITERAL)". In order to select one, please add explicit type casts.
-    Candidate functions:
-    +(DATE, INTEGER) -> DATE
-    +(INTEGER, INTEGER) -> INTEGER
+Binder Error:
+Could not choose a best candidate function for the function call "add(STRING_LITERAL, INTEGER_LITERAL)". In order to select one, please add explicit type casts.
+	Candidate functions:
+	add(DATE, INTEGER) -> DATE
+	add(INTEGER, INTEGER) -> INTEGER
 ```
 
 Macros can have default parameters.
@@ -213,7 +208,8 @@ SELECT add_default(40, 2);
 ```
 
 ```console
-Binder Error: Macro function 'add_default(a)' requires a single positional argument, but 2 positional arguments were provided.
+Binder Error:
+Macro function 'add_default(a)' requires a single positional argument, but 2 positional arguments were provided.
 ```
 
 Default parameters must used by assigning them like the following:
@@ -233,7 +229,8 @@ SELECT add_default(b := 2, 40);
 ```
 
 ```console
-Binder Error: Positional parameters cannot come after parameters with a default value!
+Binder Error:
+Positional parameters cannot come after parameters with a default value!
 ```
 
 The order of default parameters does not matter:
@@ -282,7 +279,8 @@ SELECT my_macro(32, 52);
 ```
 
 ```console
-Binder Error: Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
+Binder Error:
+Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
 ```
 
 ### Using Subquery Macros
@@ -290,9 +288,30 @@ Binder Error: Macro function 'my_macro(a)' requires a single positional argument
 If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DuckDB will return the following error:
 
 ```console
-Binder Error: Table function cannot contain subqueries
+Binder Error:
+Table function cannot contain subqueries
 ```
 
 ### Overloads
 
 Overloads for macro functions have to be set at creation, it is not possible to define a macro by the same name twice without first removing the first definition.
+
+### Recursive Functions
+
+Defining recursive functions is not supported.
+For example, the following macro – supposed to compute the _n_th number of the Fibonacci sequence – fails:
+
+```sql
+CREATE OR REPLACE FUNCTION f(n) AS (SELECT 1);
+CREATE OR REPLACE FUNCTION f(n) AS (
+    CASE WHEN n <= 1 THEN 1
+    ELSE f(n - 1)
+    END
+);
+SELECT f(3);
+```
+
+```console
+Binder Error:
+Max expression depth limit of 1000 exceeded. Use "SET max_expression_depth TO x" to increase the maximum expression depth.
+```

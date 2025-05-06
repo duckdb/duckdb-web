@@ -593,7 +593,8 @@ a.github:hover{
 }
 
 body.landing header .headerline .headercontent .landingmenu nav .search_icon,
-body.documentation header .headerline .headercontent .landingmenu nav .search_icon{
+body.documentation header .headerline .headercontent .landingmenu nav .search_icon,
+body.blog header .headerline .headercontent .landingmenu nav .search_icon{
 	display: block;
 }
 
@@ -776,6 +777,7 @@ footer{
 			}
 			.footerlogo{
 				width: 140px;
+				height: 42px;
 				background-size: contain;
 				background-repeat: no-repeat;
 			}
@@ -1446,6 +1448,12 @@ div.singleentry {
 			@media screen and (max-width: 992px) {
 				width: 35px;
 				background-size: 50%;
+			}
+		}
+		
+		&.default, &.note{
+			.content p:first-of-type{
+				margin-top: 0;
 			}
 		}
 

@@ -7,6 +7,9 @@ title: Legacy Authentication Scheme for S3 API
 
 Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/stable/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. This page documents the legacy authentication scheme for the S3 API.
 
+> Warning This page describes a legacy method to store secrets as DuckDB settings.
+> This increases the risk of accidentally leaking secrets (e.g., by printing their values).
+> Therefore, avoid using these methods for storing secrets.
 > The recommended way to configuration and authentication of S3 endpoints is to use [secrets]({% link docs/stable/extensions/httpfs/s3api.md %}#configuration-and-authentication).
 
 ## Legacy Authentication Scheme
@@ -40,14 +43,14 @@ However, note that this may also require updating the endpoint. For example for 
 After configuring the correct endpoint and region, public files can be read. To also read private files, authentication credentials can be added:
 
 ```sql
-SET s3_access_key_id = '⟨AWS access key id⟩';
-SET s3_secret_access_key = '⟨AWS secret access key⟩';
+SET s3_access_key_id = '⟨aws_access_key_id⟩';
+SET s3_secret_access_key = '⟨aws_secret_access_key⟩';
 ```
 
 Alternatively, temporary S3 credentials are also supported. They require setting an additional session token:
 
 ```sql
-SET s3_session_token = '⟨AWS session token⟩';
+SET s3_session_token = '⟨aws_session_token⟩';
 ```
 
 The [`aws` extension]({% link docs/stable/extensions/aws.md %}) allows for loading AWS credentials.

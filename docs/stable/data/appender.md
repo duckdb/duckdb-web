@@ -71,7 +71,8 @@ You can change this by explicitly using [transactions]({% link docs/stable/sql/s
 If the Appender encounters a `PRIMARY KEY` conflict or a `UNIQUE` constraint violation, it fails and returns the following error:
 
 ```console
-Constraint Error: PRIMARY KEY or UNIQUE constraint violated: duplicate key "..."
+Constraint Error:
+PRIMARY KEY or UNIQUE constraint violated: duplicate key "..."
 ```
 
 In this case, the entire append operation fails and no rows are inserted.

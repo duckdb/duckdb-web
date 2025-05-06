@@ -217,6 +217,12 @@ h1, h2, h3, h4, h5{
 				code{
 					font-size: 15.5px;
 				}
+				code.highlight{
+					padding: 2px 6px;
+					border-radius: 6px !important;
+					margin-left: 0;
+					line-height: 27px;
+				}
 			}
 			table thead th{
 				font-weight: 700;
@@ -260,6 +266,9 @@ h1, h2, h3, h4, h5{
 					height: 100%;
 				}
 			}
+			video{
+				max-width: 100%;
+			}
 			.toc_sidebar{
 				position: fixed;
 				top: 0px;
@@ -271,7 +280,7 @@ h1, h2, h3, h4, h5{
 					display: none;
 				}
 				.toc_menu{
-					height: calc(100vh - 100px);
+					height: auto;
 					overflow: auto;
 					-ms-overflow-style: none; 
 					scrollbar-width: none;

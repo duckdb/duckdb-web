@@ -64,7 +64,7 @@ Currently some C++ wrapper code is required, but this is possibly the simplest w
 
 <div class="answer" markdown="1">
 
-Writing a DuckDB extension in Rust is possible and [several](https://github.com/duckdb/community-extensions/blob/main/extensions/crypto/description.yml) [extensions](https://github.com/duckdb/community-extensions/blob/main/extensions/evalexpr_rhai/description.yml) [exist](https://github.com/duckdb/community-extensions/blob/main/extensions/prql/description.yml) [already](https://github.com/duckdb/duckdb_delta),
+Writing a DuckDB extension in Rust is possible and [several](https://github.com/duckdb/community-extensions/blob/main/extensions/crypto/description.yml) [extensions](https://github.com/duckdb/community-extensions/blob/main/extensions/evalexpr_rhai/description.yml) [exist](https://github.com/duckdb/community-extensions/blob/main/extensions/prql/description.yml) [already](https://github.com/duckdb/duckdb-delta),
 providing various examples to draw inspiration from.
 
 Currently, writing a Rust-based DuckDB extension requires writing glue code in C++ and will force you to build through DuckDB's CMake & C++ based extension template.
@@ -113,7 +113,7 @@ Additionally, a new [C Extension API](https://github.com/duckdb/duckdb/pull/1268
 
 <div class="answer" markdown="1">
 
-Currently, DuckDB extensions must have a uniquely name. For this reason, PRs that introduce naming collisions will not be accepted and will require
+Currently, DuckDB extensions must have a unique name. For this reason, PRs that introduce naming collisions will not be accepted and will require
 a rename. To resolve this, manual namespacing would be the solution, for example by prefixing your vendor name to the extension name: `⟨vendor_name⟩_⟨extension_name⟩`.
 
 Note that in general the DuckDB team reserves the right to refuse extension names, or force an extension rename.

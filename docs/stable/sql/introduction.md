@@ -293,10 +293,18 @@ If we wanted to know what city (or cities) that reading occurred in, we might tr
 ```sql
 SELECT city
 FROM weather
-WHERE temp_lo = max(temp_lo);     -- WRONG
+WHERE temp_lo = max(temp_lo);
 ```
 
-but this will not work since the aggregate max cannot be used in the `WHERE` clause. (This restriction exists because the `WHERE` clause determines which rows will be included in the aggregate calculation; so obviously it has to be evaluated before aggregate functions are computed.) However, as is often the case the query can be restated to accomplish the desired result, here by using a subquery:
+But this will not work since the aggregate max cannot be used in the `WHERE` clause:
+
+```console
+Binder Error:
+WHERE clause cannot contain aggregates!
+```
+
+This restriction exists because the `WHERE` clause determines which rows will be included in the aggregate calculation; so obviously it has to be evaluated before aggregate functions are computed.
+However, as is often the case the query can be restated to accomplish the desired result, here by using a subquery:
 
 ```sql
 SELECT city

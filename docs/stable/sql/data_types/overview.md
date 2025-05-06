@@ -51,25 +51,15 @@ DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `U
 | [`STRUCT`]({% link docs/stable/sql/data_types/struct.md %}) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | `{'i': 42, 'j': 'a'}` | `STRUCT(i INTEGER, j VARCHAR)` |
 | [`UNION`]({% link docs/stable/sql/data_types/union.md %}) | A union of multiple alternative data types, storing one of them in each value at a time. A union also contains a discriminator “tag” value to inspect and access the currently set member type. | Rows may be set to different member types of the union. | `union_value(num := 2)` | `UNION(num INTEGER, text VARCHAR)` |
 
+### Rules for Case Sensitivity
+
+The keys of `MAP`s are case-sensitive, while keys of `UNION`s and `STRUCT`s are case-insensitive.
+For examples, see the [Rules for Case Sensitivity section]({% link docs/stable/sql/dialect/overview.md %}#case-sensitivity-of-keys-in-nested-data-structures).
+
 ### Updating Values of Nested Types
 
 When performing _updates_ on values of nested types, DuckDB performs a _delete_ operation followed by an _insert_ operation.
 When used in a table with ART indexes (either via explicit indexes or primary keys/unique constraints), this can lead to [unexpected constraint violations]({% link docs/stable/sql/indexes.md %}#constraint-checking-in-update-statements).
-For example:
-
-```sql
-CREATE TABLE students (id INTEGER PRIMARY KEY, name VARCHAR);
-INSERT INTO students VALUES (1, 'Student 1');
-
-UPDATE tbl
-    SET j = [2]
-    WHERE i = 1;
-```
-
-```console
-Constraint Error: Duplicate key "i: 1" violates primary key constraint.
-If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
-```
 
 ## Nesting
 

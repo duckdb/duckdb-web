@@ -7,6 +7,8 @@ redirect_from:
 - /docs/api/odbc/overview
 - /docs/api/odbc/overview/
 - /docs/clients/odbc/overview
+- /docs/stable/clients/odbc
+- /docs/stable/clients/odbc/
 title: ODBC API Overview
 ---
 

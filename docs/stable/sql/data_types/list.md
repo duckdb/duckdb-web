@@ -53,6 +53,8 @@ Retrieving one or more values from a list can be accomplished using brackets and
 
 <div class="monospace_table"></div>
 
+<!-- markdownlint-disable MD052 -->
+
 | Example                                  | Result     |
 |:-----------------------------------------|:-----------|
 | SELECT ['a', 'b', 'c'][3]                | 'c'        |
@@ -63,6 +65,8 @@ Retrieving one or more values from a list can be accomplished using brackets and
 | SELECT ['a', 'b', 'c'][:2]               | ['a', 'b'] |
 | SELECT ['a', 'b', 'c'][-2:]              | ['b', 'c'] |
 | SELECT list_slice(['a', 'b', 'c'], 2, 3) | ['b', 'c'] |
+
+<!-- markdownlint-disable MD052 -->
 
 ## Comparison and Ordering
 
@@ -107,23 +111,6 @@ These queries return `NULL`.
 
 ```sql
 SELECT [1, 2] < [1, NULL, 4] AS result;
-```
-
-## Updating Lists
-
-Updates on lists are internally represented as an insert and a delete operation.
-Therefore, updating list values may lead to a duplicate key error on primary/unique keys.
-See the following example:
-
-```sql
-CREATE TABLE tbl (id INTEGER PRIMARY KEY, lst INTEGER[], comment VARCHAR);
-INSERT INTO tbl VALUES (1, [12, 34], 'asd');
-UPDATE tbl SET lst = [56, 78] WHERE id = 1;
-```
-
-```console
-Constraint Error: Duplicate key "id: 1" violates primary key constraint.
-If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
 ```
 
 ## Functions

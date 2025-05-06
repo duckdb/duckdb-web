@@ -55,7 +55,7 @@ SELECT * FROM read_xlsx('test_excel.xlsx', range = 'E:Z');
 
 If no range parameter is provided, the range is automatically inferred as the rectangular region of cells between the first row of consecutive non-empty cells and the first empty row spanning the same columns.
 
-By default, if no range is provided DuckDB will stop reading the excel file at when encountering an empty row. But when a range is provided, the default is to read until the end of the range. This behavior can be controlled with the `stop_at_empty` parameter:
+By default, if no range is provided DuckDB will stop reading the Excel file at when encountering an empty row. But when a range is provided, the default is to read until the end of the range. This behavior can be controlled with the `stop_at_empty` parameter:
 
 ```sql
 -- Read the first 100 rows, or until the first empty row, whichever comes first
@@ -89,7 +89,7 @@ Alternatively, you can use the `COPY` statement with the `XLSX` format option to
 COPY tbl FROM 'test_excel.xlsx' (FORMAT xlsx, SHEET 'Sheet1');
 ```
 
-When using the `COPY` statement to load an excel file into a existing table, the types of the columns in the target table will be used to coerce the types of the cells in the Excel sheet.
+When using the `COPY` statement to load an Excel file into an existing table, the types of the columns in the target table will be used to coerce the types of the cells in the Excel sheet.
 
 ## Importing a Sheet with/without a Header
 

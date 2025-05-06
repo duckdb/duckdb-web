@@ -20,7 +20,7 @@ The 'config' keyword argument can be used to provide a `dict` that contains key-
 
 The special value `:memory:` can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process).
 
-#### Named in-memory Connections
+#### Named In-memory Connections
 
 The special value `:memory:` can also be postfixed with a name, for example: `:memory:conn3`.
 When a name is provided, subsequent `duckdb.connect` calls will create a new connection to the same database, sharing the catalogs (views, tables, macros etc..).
@@ -51,7 +51,7 @@ duckdb.execute("CREATE TABLE tbl AS SELECT 42 a")
 con = duckdb.connect(":default:")
 con.sql("SELECT * FROM tbl")
 # or
-duckdb.default_connection.sql("SELECT * FROM tbl")
+duckdb.default_connection().sql("SELECT * FROM tbl")
 ```
 
 ```text

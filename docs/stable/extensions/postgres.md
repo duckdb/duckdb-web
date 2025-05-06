@@ -56,15 +56,15 @@ dbname=postgresscanner
 host=localhost port=5432 dbname=mydb connect_timeout=10
 ```
 
-| Name       | Description                          | Default      |
-| ---------- | ------------------------------------ | ------------ |
-| `dbname`   | Database name                        | [user]       |
-| `host`     | Name of host to connect to           | `localhost`  |
-| `hostaddr` | Host IP address                      | `localhost`  |
-| `passfile` | Name of file passwords are stored in | `~/.pgpass`  |
-| `password` | PostgreSQL password                  | (empty)      |
-| `port`     | Port number                          | `5432`       |
-| `user`     | PostgreSQL user name                 | current user |
+| Name       | Description                          | Default        |
+| ---------- | ------------------------------------ | -------------- |
+| `dbname`   | Database name                        | [user]         |
+| `host`     | Name of host to connect to           | `localhost`    |
+| `hostaddr` | Host IP address                      | `localhost`    |
+| `passfile` | Name of file passwords are stored in | `~/.pgpass`    |
+| `password` | PostgreSQL password                  | (empty)        |
+| `port`     | Port number                          | `5432`         |
+| `user`     | PostgreSQL user name                 | _current user_ |
 
 An example URI is `postgresql://username@hostname/dbname`.
 

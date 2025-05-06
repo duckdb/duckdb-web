@@ -1,5 +1,5 @@
 ---
-github_repository: https://github.com/duckdb/duckdb_spatial
+github_repository: https://github.com/duckdb/duckdb-spatial
 layout: docu
 redirect_from:
 - /docs/extensions/spatial
@@ -13,10 +13,16 @@ For an overview of the extension, see our [blog post]({% post_url 2023-04-28-spa
 
 ## Installing and Loading
 
-To install and load the `spatial` extension, run:
+To install the `spatial` extension, run:
 
 ```sql
 INSTALL spatial;
+```
+
+Note that the `spatial` extension is not autoloadable.
+Therefore, you need to load it before using it:
+
+```sql
 LOAD spatial;
 ```
 

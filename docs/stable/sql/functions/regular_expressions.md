@@ -29,7 +29,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 | [`regexp_extract_all(string, regex[, group = 0][, options])`](#regexp_extract_allstring-regex-group--0-options) | Finds non-overlapping occurrences of `regex` in `string` and returns the corresponding values of `group`. |
 | [`regexp_full_match(string, regex[, options])`](#regexp_full_matchstring-regex-options) | Returns `true` if the entire `string` matches the `regex`. |
 | [`regexp_matches(string, pattern[, options])`](#regexp_matchesstring-pattern-options) | Returns `true` if  `string` contains the regexp `pattern`, `false` otherwise. |
-| [`regexp_replace(string, pattern, replacement[, options])`](#regexp_replacestring-pattern-replacement-options) | If `string` contains the regexp `pattern`, replaces the matching part with `replacement`. |
+| [`regexp_replace(string, pattern, replacement[, options])`](#regexp_replacestring-pattern-replacement-options) | If `string` contains the regexp `pattern`, replaces the matching part with `replacement`. By default, only the first occurrence is replaced. A set of optional [`options`](#options-for-regular-expression-functions), including the global flag `g`, can be set. |
 | [`regexp_split_to_array(string, regex[, options])`](#regexp_split_to_arraystring-regex-options) | Alias of `string_split_regex`. Splits the `string` along the `regex`. |
 | [`regexp_split_to_table(string, regex[, options])`](#regexp_split_to_tablestring-regex-options) | Splits the `string` along the `regex` and returns a row for each part. |
 
@@ -77,7 +77,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 <div class="nostroke_table"></div>
 
-| **Description** | If `string` contains the regexp `pattern`, replaces the matching part with `replacement`. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
+| **Description** | If `string` contains the regexp `pattern`, replaces the matching part with `replacement`. By default, only the first occurrence is replaced. A set of optional [`options`](#options-for-regular-expression-functions), including the global flag `g`, can be set. |
 | **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
@@ -95,7 +95,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 | **Description** | Splits the `string` along the `regex` and returns a row for each part. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_split_to_table('hello world; 42', ';? ')` |
-| **Result** | Three rows: `'hello'`, `'world', '42'` |
+| **Result** | Three rows: `'hello'`, `'world'`, `'42'` |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `true` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
 
@@ -195,7 +195,8 @@ SELECT regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'm
 ```
 
 ```console
-Binder Error: Not enough group names in regexp_extract
+Binder Error:
+Not enough group names in regexp_extract
 ```
 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.

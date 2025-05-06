@@ -362,7 +362,8 @@ USING sum(population) * 1000;
 However, it fails with the following error:
 
 ```console
-Catalog Error: * is not an aggregate function
+Catalog Error:
+* is not an aggregate function
 ```
 
 To work around this limitation, perform the `PIVOT` with the aggregation only, then use the [`COLUMNS` expression]({% link docs/stable/sql/expressions/star.md %}#columns-expression):

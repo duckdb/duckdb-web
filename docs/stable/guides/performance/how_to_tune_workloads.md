@@ -7,6 +7,22 @@ redirect_from:
 title: Tuning Workloads
 ---
 
+## The `preserve_insertion_order` Option
+
+When importing or exporting data sets (from/to the Parquet or CSV formats), which are much larger than the available memory, an out of memory error may occur:
+
+```console
+Out of Memory Error: failed to allocate data of size ... (.../... used)
+```
+
+In these cases, consider setting the [`preserve_insertion_order` configuration option]({% link docs/stable/configuration/overview.md %}) to `false`:
+
+```sql
+SET preserve_insertion_order = false;
+```
+
+This allows the systems to re-order any results that do not contain `ORDER BY` clauses, potentially reducing memory usage.
+
 ## Parallelism (Multi-Core Processing)
 
 ### The Effect of Row Groups on Parallelism
@@ -123,22 +139,6 @@ An important side note needs to be made here though. The first two queries are f
 DuckDB will perform best when reusing the same database connection many times. Disconnecting and reconnecting on every query will incur some overhead, which can reduce performance when running many small queries. DuckDB also caches some data and metadata in memory, and that cache is lost when the last open connection is closed. Frequently, a single connection will work best, but a connection pool may also be used.
 
 Using multiple connections can parallelize some operations, although it is typically not necessary. DuckDB does attempt to parallelize as much as possible within each individual query, but it is not possible to parallelize in all cases. Making multiple connections can process more operations concurrently. This can be more helpful if DuckDB is not CPU limited, but instead bottlenecked by another resource like network transfer speed.
-
-## The `preserve_insertion_order` Option
-
-When importing or exporting data sets (from/to the Parquet or CSV formats), which are much larger than the available memory, an out of memory error may occur:
-
-```console
-Out of Memory Error: failed to allocate data of size ... (.../... used)
-```
-
-In these cases, consider setting the [`preserve_insertion_order` configuration option]({% link docs/stable/configuration/overview.md %}) to `false`:
-
-```sql
-SET preserve_insertion_order = false;
-```
-
-This allows the systems to re-order any results that do not contain `ORDER BY` clauses, potentially reducing memory usage.
 
 ## Persistent vs. In-Memory Tables
 

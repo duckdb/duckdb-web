@@ -36,7 +36,7 @@ A Bash script to achieve this (to be adapted with the file names and executable 
 /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 ```
 
-After this, `mydata.db` will remain in the old format, `mydata.new.db` will contain the same data but in a format accessible by the more recent DuckDB version, and the folder `tmp` will hold the same data in a universal format as different files.
+After this, `mydata.old.db` will remain in the old format, `mydata.new.db` will contain the same data but in a format accessible by the more recent DuckDB version, and the folder `tmp` will hold the same data in a universal format as different files.
 
 Check [`EXPORT` documentation]({% link docs/stable/sql/statements/export.md %}) for more details on the syntax.
 
@@ -114,7 +114,7 @@ To see the commits that changed each storage version, see the [commit log](https
 
 | Storage version | DuckDB version(s)               |
 |----------------:|---------------------------------|
-| 65              | v1.2.0                          |
+| 65              | v1.2.x                          |
 | 64              | v0.9.x, v0.10.x, v1.0.0, v1.1.x |
 | 51              | v0.8.x                          |
 | 43              | v0.7.x                          |

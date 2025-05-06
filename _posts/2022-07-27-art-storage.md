@@ -8,7 +8,7 @@ tags: ["deep dive"]
 
 <img src="/images/blog/ART/pedro-art.jpg"
      alt="DuckDB ART"
-     width=200
+     width="200"
  />
 
 DuckDB uses [ART Indexes](https://db.in.tum.de/~leis/papers/ART.pdf) to keep primary key (PK), foreign key (FK), and unique constraints. They also speed up point-queries, range queries (with high selectivity), and joins. Before the bleeding edge version (or V0.4.1, depending on when you are reading this post), DuckDB did not persist ART indexes on disk. When storing a database file, only the information about existing PKs and FKs would be stored, with all other indexes being transient and non-existing when restarting the database. For PKs and FKs, they would be fully reconstructed when reloading the database, creating the inconvenience of high-loading times.
@@ -27,14 +27,14 @@ Tries are tree data structures, where each tree level holds information on part 
 
 <img src="/images/blog/ART/string-trie.png"
      alt="String Trie"
-     width=300
+     width="300"
  />
 
 To perform lookups on a Trie, you must match each character of the key to the current level of the Trie. For example, if you search for pedro, you must check the root contains the letter p. If it does, you check if any of its children contains the letter e, up to the point you reach a leaf node containing the pointer to the tuple that holds this string. (See figure below).
 
 <img src="/images/blog/ART/lookup-trie.png"
      alt="Lookup Trie"
-     width=200
+     width="200"
  />
 
 The main advantage of Tries is that they have O(k) lookups, meaning that in the worst case, the lookup cost will equal the length of the strings.
@@ -47,7 +47,7 @@ In the example below, we have a Trie that indexes the values 7, 10, and 12. You 
 
 <img src="/images/blog/ART/2-bit-trie.png"
      alt="2-bit Trie"
-     width=600
+     width="600"
  />
 
 One can quickly notice that this Trie representation is wasteful on two different fronts. First, many nodes only have one child (i.e., one path), which could be collapsed by vertical compression (i.e., Radix Tree). Second, many nodes have null pointers, storing space without any information in them, which could be resolved with horizontal compression.
@@ -58,14 +58,14 @@ The basic idea of vertical compression is that we collapse paths with nodes that
 
 <img src="/images/blog/ART/2-bit-collapse-trie.png"
      alt="2-bit Radix Tree (Collapsing)"
-     width=600
+     width="600"
  />
 
 Below you can see the resulting Trie after vertical compression. This Trie variant is commonly known as a Radix Tree. Although a lot of wasted space has already been saved with this Trie variant, we still have many nodes with unset pointers.
 
 <img src="/images/blog/ART/2-bit-collapse-trie-result.png"
      alt="2-bit Radix Tree"
-     width=600
+     width="600"
  />
 
 
@@ -77,7 +77,7 @@ To fully understand the design decisions behind ART indexes, we must first exten
 
 <img src="/images/blog/ART/8-bit-radix-tree.png"
      alt="8-bit Radix Tree"
-     width=600
+     width="600"
  />
 
 Below you can see the same nodes as before in a TRIE node of 8 bits. In reality, these nodes will store (2^8) 256 pointers, with the key being the array position of the pointer. In the case depicted by this example, we have a node with (256 pointers * 8 bytes) 2048 byte size while only actually utilizing  24 bytes (3 pointers * 8 bytes), which means that 2016 bytes are entirely wasted. To avoid this situation. ART indexes are composed of 4 different node types that depend on how full the current node is. Below I quickly describe each node with a graphical representation of them. In the graphical representation, I present a conceptual visualization of the node and an example with keys 0,4 and 255.
@@ -88,35 +88,35 @@ Below you can see the same nodes as before in a TRIE node of 8 bits. In reality,
 
 <img src="/images/blog/ART/art-4.png"
      alt="Art Node 4"
-     width=500
+     width="500"
  />
 
 **Node 16** : Node 16 holds up to 16 different keys. Like node 4, each key is stored in a one-byte array, with one pointer per key. With its total size being 144 bytes (16\*1 + 16\*8). Like Node 4, the pointer array is aligned with the key array.
 
 <img src="/images/blog/ART/art-16.png"
      alt="Art Node 16"
-     width=500
+     width="500"
  />
 
 **Node 48** : Node 48 holds up to 48 different keys. When a key is present in this node, the one-byte array position representing that key will hold an index into the pointer array that points to the child of that key. Its total size is 640 bytes (256\*1 + 48\*8). Note that the pointer array and the key array are not aligned anymore. The key array points to the position in the pointer array where the pointer of that key is stored (e.g., the key 255 in the key array is set to 2 because the position 2 of the pointer array points to the child pertinent to that key).
 
 <img src="/images/blog/ART/art-48.png"
      alt="Art Node 48"
-     width=500
+     width="500"
  />
 
 **Node 256**: Node 256 holds up to 256 different keys, hence all possible values in the distribution. It only has a pointer vector, if the pointer is set, the key exists, and it points to its child. Its total size is 2048 bytes (256 pointers * 8 bytes).
 
 <img src="/images/blog/ART/art-256.png"
      alt="Art Node 256"
-     width=500
+     width="500"
  />
 
 For the example in the previous section, we could use a `Node 4` instead of a `Node 256` to store the keys, since we only have 3 keys present. Hence it would look like the following:
 
 <img src="/images/blog/ART/art-index-example.png"
      alt="Art Index Example"
-     width=300
+     width="300"
  />
 
 ## ART in DuckDB
@@ -202,14 +202,14 @@ The post-order traversal is shown in the figure below. The circles in red repres
 
 <img src="/images/blog/ART/serialization-order.png"
      alt="Post Order Traversal Example"
-     width=600
+     width="600"
  />
 
 The figure below shows an actual representation of what this would look like in DuckDB's block format. In DuckDB, data is stored in 256 kB contiguous blocks, with some blocks reserved for metadata and some for actual data. Each block is represented by an `id`. To allow for navigation within a block, they are partitioned by byte offsets hence each block contains 256,000 different offsets
 
 <img src="/images/blog/ART/block-storage.png"
      alt="DuckDB Block Serialization"
-     width=800
+     width="800"
  />
 
 In this example, we have `Block 0` that stored some of our database metadata. In particular, between offsets 100,000 and 100,200 we store information pertinent to one ART index. This will store information on the index (e.g., name, constraints, expression) and the `<Block,Offset>` position of its root node.
@@ -248,7 +248,7 @@ In the following figure, you can see a visual representation of DuckDB's Swizzla
 
 <img src="/images/blog/ART/pointer-swizzling.png"
      alt="Pointer Swizzling"
-     width=300
+     width="300"
  />
 
 ## Benchmarks
@@ -316,7 +316,7 @@ for i in range (0, 50000000, 10000):
 
 <img src="/images/blog/ART/cold-run.png"
      alt="Cold Run"
-     width=800
+     width="800"
  />
 
 In general, each query is 3x more expensive in the persisted storage format. This is due to two main reasons:
@@ -329,7 +329,7 @@ In this experiment, we execute the same queries as in the previous section.
 
 <img src="/images/blog/ART/hot-run.png"
      alt="Hot Run"
-     width=800
+     width="800"
  />
 
 The times in both versions are comparable since all the nodes in the storage version are already set in memory.
@@ -354,7 +354,7 @@ Art Indexes are a core part of both constraint enforcement and keeping access sp
 
 <img src="/images/blog/ART/want.jpeg"
      alt="We want you"
-     width=300
+     width="300"
  />
 
 To better understand how our indexes are used, it would be extremely helpful if you could answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98) created by one of our MSc students.

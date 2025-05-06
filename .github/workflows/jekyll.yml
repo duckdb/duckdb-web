@@ -49,6 +49,8 @@ jobs:
         uses: montudor/action-zip@v1
       - name: Fetch release calendar
         run: python scripts/get_calendar.py
+      - name: Generate llms.txt files
+        run: python scripts/generate_llms_txt.py
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -61,6 +63,8 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+      - name: Add Markdown files
+        run: scripts/generate_md_files.sh
       - name: Zip offline package
         run: |
           # create a copy of the _site directory for the offline package
@@ -101,13 +105,14 @@ jobs:
         run: python3 concatenate_to_single_file.py
       - name: Convert with pandoc
         run: pandoc --defaults pandoc-configuration.yaml
+      - name: Clean Markdown file
+        run: ./clean_markdown_file.sh
       - name: Move artifacts
         run: |
           mkdir -p ../_pdf
-          sed -i '1s/^.*$/# DuckDB Documentation/' duckdb-docs.md
-          cp duckdb-docs.md ../_pdf/llms.txt
-          mv duckdb-docs.md ../_pdf
-          mv duckdb-docs.pdf ../_pdf
+          sed -i '1s/^.*$/# DuckDB Documentation/' duckdb-docs-cleaned.md
+          cp duckdb-docs-cleaned.md ../_pdf/duckdb-docs.md
+          cp duckdb-docs.pdf ../_pdf
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:

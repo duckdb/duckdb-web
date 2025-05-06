@@ -116,7 +116,7 @@ Pre-generated DuckDB databases for TPC-H are available for download:
 
 Generating TPC-H data sets for large scale factors takes a significant amount of time.
 Additionally, when the generation is done in a single step, it requires a large amount of memory.
-The following table gives an estimate on the resources required to produce DuckDB database files containing the generated TPC-H data set using 128 threads.
+The following table gives estimates on the resources required to produce DuckDB database files containing the generated TPC-H data set using 128 threads when running the generation in a single step.
 
 | Scale factor | Database size | Data generation time | Generator's memory usage |
 |-------------:|--------------:|---------------------:|-------------------------:|
@@ -141,6 +141,7 @@ CALL dbgen(sf = 300, children = 10, step = 1);
 CALL dbgen(sf = 300, children = 10, step = 9);
 ```
 
-## Limitation
+## Limitations
 
-The `tpch(⟨query_id⟩)`{:.language-sql .highlight} function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). It is not possible to change the query parameters using the `tpch` extension. To run the queries with the parameters prescribed by the TPC-H benchmark, use a TPC-H framework implementation.
+* The `tpch(⟨query_id⟩)`{:.language-sql .highlight} function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). It is not possible to change the query parameters using the `tpch` extension. To run the queries with the parameters prescribed by the TPC-H benchmark, use a TPC-H framework implementation.
+* The `dbgen` function is not thread-safe. Calling it from multiple threads may result to incorrect results or `SIGABRT` errors.

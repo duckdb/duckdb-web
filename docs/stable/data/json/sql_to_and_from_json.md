@@ -11,7 +11,7 @@ DuckDB provides functions to serialize and deserialize `SELECT` statements betwe
 |:------|:-|:---------|
 | `json_deserialize_sql(json)` | Scalar  | Deserialize one or many `json` serialized statements back to an equivalent SQL string. |
 | `json_execute_serialized_sql(varchar)` | Table | Execute `json` serialized statements and return the resulting rows. Only one statement at a time is supported for now. |
-| `json_serialize_sql(varchar, skip_empty := boolean, skip_null := boolean, format := boolean)` | Scalar | Serialize a set of semicolon-separated (`;`) select statements to an equivalent list of `json` serialized statements. |
+| `json_serialize_sql(varchar, skip_default := boolean, skip_empty := boolean, skip_null := boolean, format := boolean)` | Scalar | Serialize a set of semicolon-separated (`;`) select statements to an equivalent list of `json` serialized statements. |
 | `PRAGMA json_execute_serialized_sql(varchar)` | Pragma | Pragma version of the `json_execute_serialized_sql` function. |
 
 The `json_serialize_sql(varchar)` function takes three optional parameters, `skip_empty`, `skip_null`, and `format` that can be used to control the output of the serialized statements.
@@ -29,7 +29,7 @@ SELECT json_serialize_sql('SELECT 2');
 ```
 
 ```text
-{"error":false,"statements":[{"node":{"type":"SELECT_NODE","modifiers":[],"cte_map":{"map":[]},"select_list":[{"class":"CONSTANT","type":"VALUE_CONSTANT","alias":"","value":{"type":{"id":"INTEGER","type_info":null},"is_null":false,"value":2}}],"from_table":{"type":"EMPTY","alias":"","sample":null},"where_clause":null,"group_expressions":[],"group_sets":[],"aggregate_handling":"STANDARD_HANDLING","having":null,"sample":null,"qualify":null}}]}
+{"error":false,"statements":[{"node":{"type":"SELECT_NODE","modifiers":[],"cte_map":{"map":[]},"select_list":[{"class":"CONSTANT","type":"VALUE_CONSTANT","alias":"","query_location":7,"value":{"type":{"id":"INTEGER","type_info":null},"is_null":false,"value":2}}],"from_table":{"type":"EMPTY","alias":"","sample":null,"query_location":18446744073709551615},"where_clause":null,"group_expressions":[],"group_sets":[],"aggregate_handling":"STANDARD_HANDLING","having":null,"sample":null,"qualify":null},"named_param_map":[]}]}
 ```
 
 Example with multiple statements and skip options:
@@ -39,9 +39,18 @@ SELECT json_serialize_sql('SELECT 1 + 2; SELECT a + b FROM tbl1', skip_empty := 
 ```
 
 ```text
-{"error":false,"statements":[{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":1}},{"class":"CONSTANT","type":"VALUE_CONSTANT","value":{"type":{"id":"INTEGER"},"is_null":false,"value":2}}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"EMPTY"},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","function_name":"+","children":[{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["a"]},{"class":"COLUMN_REF","type":"COLUMN_REF","column_names":["b"]}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"BASE_TABLE","table_name":"tbl1"},"aggregate_handling":"STANDARD_HANDLING"}}]}
+{"error":false,"statements":[{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":9,"function_name":"+","children":[{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":7,"value":{"type":{"id":"INTEGER"},"is_null":false,"value":1}},{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":11,"value":{"type":{"id":"INTEGER"},"is_null":false,"value":2}}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"EMPTY","query_location":18446744073709551615},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":23,"function_name":"+","children":[{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":21,"column_names":["a"]},{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":25,"column_names":["b"]}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"BASE_TABLE","query_location":32,"table_name":"tbl1"},"aggregate_handling":"STANDARD_HANDLING"}}]}
 ```
 
+Skip the default values in the AST (e.g., `"distinct":false`):
+
+```sql
+SELECT json_serialize_sql('SELECT 1 + 2; SELECT a + b FROM tbl1', skip_default := true, skip_empty := true, skip_null := true);
+```
+
+```text
+{"error":false,"statements":[{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":9,"function_name":"+","children":[{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":7,"value":{"type":{"id":"INTEGER"},"is_null":false,"value":1}},{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":11,"value":{"type":{"id":"INTEGER"},"is_null":false,"value":2}}],"order_bys":{"type":"ORDER_MODIFIER"},"is_operator":true}],"from_table":{"type":"EMPTY"},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":23,"function_name":"+","children":[{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":21,"column_names":["a"]},{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":25,"column_names":["b"]}],"order_bys":{"type":"ORDER_MODIFIER"},"is_operator":true}],"from_table":{"type":"BASE_TABLE","query_location":32,"table_name":"tbl1"},"aggregate_handling":"STANDARD_HANDLING"}}]}
+```
 Example with a syntax error:
 
 ```sql
@@ -49,7 +58,7 @@ SELECT json_serialize_sql('TOTALLY NOT VALID SQL');
 ```
 
 ```text
-{"error":true,"error_type":"parser","error_message":"syntax error at or near \"TOTALLY\"","position":"0","error_subtype":"SYNTAX_ERROR"}
+{"error":true,"error_type":"parser","error_message":"syntax error at or near \"TOTALLY\"","error_subtype":"SYNTAX_ERROR","position":"0"}
 ```
 
 Example with deserialize:
@@ -89,5 +98,6 @@ SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID 
 ```
 
 ```console
-Parser Error: Error parsing json: parser: syntax error at or near "TOTALLY"
+Parser Error:
+Error parsing json: parser: syntax error at or near "TOTALLY"
 ```
