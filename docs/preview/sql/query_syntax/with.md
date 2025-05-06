@@ -34,6 +34,13 @@ SELECT * FROM cte2;
 |-----:|
 | 4200 |
 
+You can specify column names for CTEs:
+
+```sql
+WITH cte(j) AS (SELECT 42 AS i)
+FROM cte;
+```
+
 ## CTE Materialization
 
 DuckDB can employ CTE materialization, i.e., inlining CTEs into the main query.
@@ -347,7 +354,7 @@ WITH RECURSIVE tbl(a, b) USING KEY (a) AS (
     WHERE a < 3
 )
 SELECT *
-FROM tbl
+FROM tbl;
 ```
 
 | a | b |
@@ -355,6 +362,22 @@ FROM tbl
 | 1 | 3 |
 | 2 | 3 |
 | 3 | 3 |
+
+## Using `VALUES`
+
+You can use the `VALUES` clause for the initial (anchor) part of the CTE:
+
+```sql
+WITH RECURSIVE tbl(a, b) USING KEY (a) AS (
+    VALUES (1, 3), (2, 4)
+        UNION
+    SELECT a + 1, b
+    FROM tbl
+    WHERE a < 3
+)
+SELECT *
+FROM tbl;
+```
 
 ### Example: `USING KEY` References Union Table
 
@@ -388,7 +411,6 @@ WITH RECURSIVE cc(id, comp) USING KEY (id) AS (
 TABLE cc
 ORDER BY id;
 ```
-
 
 | id | comp |
 |---:|-----:|
