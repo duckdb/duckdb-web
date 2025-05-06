@@ -785,6 +785,10 @@
                 {
                   "page": "Subqueries",
                   "url": "subqueries"
+                },
+                {
+                  "page": "TRY",
+                  "url": "try"
                 }
               ]
             },
