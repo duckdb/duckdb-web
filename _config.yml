@@ -35,7 +35,6 @@ current_duckdb_rust_version: 1.2.2
 current_duckdb_wasm_version: 1.2.2
 current_duckdb_csharp_version: 1.2.1
 current_duckdb_dart_version: 1.2.0
-current_duckdb_php_version: 1.2.2
 # Java
 current_java_version: 1.2.2.0
 current_java_short_version: 1.2.2
