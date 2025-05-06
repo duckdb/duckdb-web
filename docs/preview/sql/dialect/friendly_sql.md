@@ -45,6 +45,7 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
     * [`FILTER` clause]({% link docs/preview/sql/query_syntax/filter.md %})
     * [`GROUPING SETS`, `GROUP BY CUBE`, `GROUP BY ROLLUP` clauses]({% link docs/preview/sql/query_syntax/grouping_sets.md %})
 * [`count()` shorthand]({% link docs/preview/sql/functions/aggregates.md %}) for `count(*)`
+* [`IN` operator for lists and maps]({% link docs/preview/sql/expressions/in.md %})
 
 ## Literals and Identifiers
 
