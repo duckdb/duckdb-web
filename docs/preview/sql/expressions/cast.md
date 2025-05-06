@@ -61,3 +61,47 @@ SELECT TRY_CAST('hello' AS INTEGER) AS i;
 |  i   |
 |------|
 | NULL |
+
+## `cast_to_type` Function
+
+The `cast_to_type` function allows generating a cast from an expression to the type of another column.
+For example:
+
+```sql
+SELECT cast_to_type('42', NULL::INTEGER) AS result;
+```
+
+```text
+┌───────┐
+│  res  │
+│ int32 │
+├───────┤
+│  42   │
+└───────┘
+```
+
+This function is primarily useful in [macros]({% link docs/preview/guides/snippets/sharing_macros.md %}), as it allows you to maintain types.
+This helps with making generic macros that operate on different types. For example, the following macro adds to a number if the input is an `INTEGER`:
+
+```sql
+CREATE TABLE tbl(i INT, s VARCHAR);
+INSERT INTO tbl VALUES (42, 'hello world');
+
+CREATE MACRO conditional_add(col, nr) AS
+    CASE
+        WHEN typeof(col) == 'INTEGER' THEN cast_to_type(col::INTEGER + nr, col)
+        ELSE col
+    END;
+SELECT conditional_add(COLUMNS(*), 100) FROM tbl;
+```
+
+```text
+┌───────┬─────────────┐
+│   i   │      s      │
+│ int32 │   varchar   │
+├───────┼─────────────┤
+│  142  │ hello world │
+└───────┴─────────────┘
+```
+
+Note that the `CASE` statement needs to return the same type in all code paths. We can perform the addition on any input column by adding a cast to the desired type – but we need to cast the result of the addition back to the source type to make the binding work.
