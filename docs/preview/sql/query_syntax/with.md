@@ -358,7 +358,7 @@ FROM tbl
 
 ### Example: `USING KEY` References Union Table
 
-As well as using the union table as a dictionary, we can now reference it in queries. This allows us to use results from not just the previous iteration, but also earlier ones. This new feature makes certain algorithms easier to implement.
+As well as using the union table as a dictionary, we can now reference it in queries. This allows you to use results from not just the previous iteration, but also earlier ones. This new feature makes certain algorithms easier to implement.
 
 One example is the connected components algorithm. For each node, the algorithm determines the node with the lowest ID to which it is connected. To achieve this, we use the entries in the union table to track the lowest ID found for a node. If a new incoming row contains a lower ID, we update this value.
 
