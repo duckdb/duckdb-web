@@ -99,7 +99,7 @@ SECTION_MAP = {
     },
     "Functions": {
         "id": 4,
-        "description": "This section contains the functions which can be applied to an relation, \
+        "description": "This section contains the functions which can be applied to a relation, \
         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).",
         "method_list": [
             {"class": duckdb.DuckDBPyRelation, "members": FUNCTION_MEMBER_LIST}
