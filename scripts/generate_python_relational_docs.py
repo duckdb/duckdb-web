@@ -1,3 +1,5 @@
+import os
+
 import duckdb
 
 import inspect
@@ -19,8 +21,18 @@ from generate_python_relational_docs_methods import (
     OUTPUT_MEMBER_LIST,
 )
 
-FORMATTER_TEXT = """---
+DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "preview")
+
+redirect_from_text = """\
+redirect_from:
+- /docs/api/python/relational_api
+- /docs/api/python/relational_api/
+- /docs/clients/python/relational_api
+"""
+
+FORMATTER_TEXT = f"""---
 layout: docu
+{redirect_from_text if DUCKDB_DOC_VERSION == 'stable' else ''}
 title: Relational API
 ---
 
@@ -128,10 +140,12 @@ def get_duckdb_conn():
             member_toc_line text,
             member_example text,
             member_result text,
+            aliases text,
             primary key (class_name, member_name)
         )
     """
     )
+
     return duckdb_conn
 
 
@@ -166,6 +180,7 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                 member_description = member_docs[0]
 
             if class_member_name in ['from_parquet', 'read_parquet']:
+                member_signature = '\n\n'.join(member_docs)
                 member_description = "Create a relation object from the Parquet files"
             number_of_duplicates = (
                 relational_api_table.filter(f"member_name = '{class_member_name}'")
@@ -212,12 +227,20 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                     if CODE_EXAMPLE_MAP.get(member_anchor)
                     else None
                 ),
+                ', '.join(
+                    [
+                        f"[`{alias}`](#{alias})"
+                        for alias in CODE_EXAMPLE_MAP.get(
+                            member_anchor, {"aliases": []}
+                        ).get("aliases", [])
+                    ]
+                ),
             ]
         )
 
 
 def generate_from_db(relational_api_table):
-    with open("docs/preview/clients/python/relational_api.md", "w") as f:
+    with open(f"docs/{DUCKDB_DOC_VERSION}/clients/python/relational_api.md", "w") as f:
         f.write(FORMATTER_TEXT)
         f.write("\n")
 
@@ -235,6 +258,7 @@ def generate_from_db(relational_api_table):
             member_signature,
             case when member_description is not null then '\n\n#### Description\n\n' else NULL end as header_description, 
             member_description,
+            if(aliases != '', concat('\n\n**Aliases**: ', aliases), NULL) as aliases,
             case when member_example is not null then '\n\n##### Example\n\n' else NULL end as header_example,
             member_example,
             case when member_result is not null then '\n\n##### Result\n\n' else NULL end as header_result,
@@ -250,7 +274,8 @@ def generate_from_db(relational_api_table):
                     header_signature, 
                     member_signature, 
                     header_description, 
-                    member_description, 
+                    member_description,
+                    aliases,
                     header_example, 
                     member_example, 
                     header_result, 
@@ -300,7 +325,7 @@ def check_fully_documented(class_name, configured_in_script, class_members):
         )
 
 
-def main():
+def generate_python_relational_api_md():
     check_fully_documented(
         class_name="DuckDBPyRelation",
         configured_in_script=PY_RELATION_MEMBERS,
@@ -339,4 +364,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    generate_python_relational_api_md()

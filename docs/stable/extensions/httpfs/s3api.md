@@ -24,18 +24,17 @@ The following table shows which parts of the S3 API are required for each `httpf
 
 The preferred way to configure and authenticate to S3 endpoints is to use [secrets]({% link docs/stable/sql/statements/create_secret.md %}). Multiple secret providers are available.
 
-> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/stable/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API]({% link docs/stable/extensions/httpfs/s3api_legacy_authentication.md %}).
-
 To migrate from the [deprecated S3 API]({% link docs/stable/extensions/httpfs/s3api_legacy_authentication.md %}), use a defined secret with a profile.
 See the [“Loading a Secret Based on a Profile” section](#loading-a-secret-based-on-a-profile).
 
-### `CONFIG` Provider
+### `config` Provider
 
-The default provider, `CONFIG` (i.e., user-configured), allows access to the S3 bucket by manually providing a key. For example:
+The default provider, `config` (i.e., user-configured), allows access to the S3 bucket by manually providing a key. For example:
 
 ```sql
 CREATE OR REPLACE SECRET secret (
     TYPE s3,
+    PROVIDER config,
     KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
     SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
     REGION '⟨us-east-1⟩'
@@ -78,7 +77,7 @@ The possible values for `CHAIN` are the following:
 
 * [`config`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_profile_config_file_a_w_s_credentials_provider.html)
 * [`sts`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_s_t_s_assume_role_web_identity_credentials_provider.html)
-* [`sso`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_s_s_o_credentials_provider.html)
+* [`sso`](https://aws.amazon.com/what-is/sso/)
 * [`env`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_environment_a_w_s_credentials_provider.html)
 * [`instance`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_instance_profile_credentials_provider.html)
 * [`process`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_process_credentials_provider.html)

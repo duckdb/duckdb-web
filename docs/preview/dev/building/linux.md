@@ -109,7 +109,7 @@ MAKEFLAGS = -j$(nproc)
 ### Building the httpfs Extension Fails
 
 **Problem:**
-When building the [`httpfs` extension]({% link docs/preview/extensions/httpfs/overview.md %}) on Linux, the build may fail with the following error.
+When building the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}) on Linux, the build may fail with the following error.
 
 ```console
 CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):

@@ -58,7 +58,7 @@ ds %>%
 
 The workflow in Python is as simple as it is in R. In this example we use DuckDB's Relational API.
 
-``` python
+```python
 import duckdb
 import pyarrow as pa
 import pyarrow.dataset as ds
@@ -228,7 +228,7 @@ For the comparison with Pandas, note that DuckDB runs in parallel, while pandas 
 
 In this example we run a simple aggregation on two columns of our lineitem table.
 
-``` python
+```python
 # DuckDB
 lineitem = pq.read_table('lineitemsf1.snappy.parquet')
 con = duckdb.connect()
@@ -239,7 +239,7 @@ con.execute("""SELECT sum(l_extendedprice * l_discount) AS revenue
                 lineitem;""").fetch_arrow_table()
 ```
 
-``` python
+```python
 # Pandas
 arrow_table = pq.read_table('lineitemsf1.snappy.parquet')
 
@@ -258,13 +258,13 @@ new_table = pa.Table.from_pandas(res)
 | DuckDB      | 0.19     |
 | Pandas      | 2.13     |
 
-The lineitem table is composed of 16 columns, however, to execute this query only two columns ```l_extendedprice``` and  *  ```l_discount``` are necessary. Since DuckDB can push down the projection of these columns, it is capable of executing this query about one order of magnitude faster than Pandas.
+The lineitem table is composed of 16 columns, however, to execute this query only two columns `l_extendedprice` and `l_discount` are necessary. Since DuckDB can push down the projection of these columns, it is capable of executing this query about one order of magnitude faster than Pandas.
 
 ### Filter Pushdown
 
 For our filter pushdown we repeat the same aggregation used in the previous section, but add filters on 4 more columns.
 
-``` python
+```python
 # DuckDB
 lineitem = pq.read_table('lineitemsf1.snappy.parquet')
 
@@ -283,7 +283,7 @@ con.execute("""SELECT sum(l_extendedprice * l_discount) AS revenue
             AND l_quantity < 24; """).fetch_arrow_table()
 ```
 
-``` python
+```python
 # Pandas
 arrow_table = pq.read_table('lineitemsf1.snappy.parquet')
 
@@ -310,7 +310,7 @@ The difference now between DuckDB and Pandas is more drastic, being two orders o
 
 As demonstrated before, DuckDB is capable of consuming and producing Arrow data in a streaming fashion. In this section we run a simple benchmark, to showcase the benefits in speed and memory usage when comparing it to full materialization and Pandas. This example uses the full NYC taxi dataset which you can download
 
-``` python
+```python
 # DuckDB
 # Open dataset using year, month folder partition
 nyc = ds.dataset('nyc-taxi/', partitioning=["year", "month"])
@@ -331,7 +331,7 @@ while len(chunk) > 0:
     chunk = record_batch_reader.read_next_batch()
 ```
 
-``` python
+```python
 # Pandas
 # We must exclude one of the columns of the NYC dataset due to an unimplemented cast in Arrow.
 working_columns = ["vendor_id","pickup_at","dropoff_at","passenger_count","trip_distance","pickup_longitude",

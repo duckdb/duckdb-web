@@ -13,7 +13,7 @@ To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of ex
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
 ```
 
-This option also accepts out-of-tree extensions such as [`delta`]({% link docs/preview/extensions/delta.md %}):
+This option also accepts out-of-tree extensions such as [`delta`]({% link docs/preview/core_extensions/delta.md %}):
 
 ```batch
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch;delta' GEN=ninja make
@@ -25,7 +25,7 @@ In most cases, extension will be directly linked in the resulting DuckDB executa
 
 ### `BUILD_JEMALLOC`
 
-When this flag is set, the [`jemalloc` extension]({% link docs/preview/extensions/jemalloc.md %}) is built.
+When this flag is set, the [`jemalloc` extension]({% link docs/preview/core_extensions/jemalloc.md %}) is built.
 
 ### `BUILD_TPCE`
 

@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: fa0482c677f38c5b1796d04d84f263178f84c1dd
+  revision: 1af85d39e38d6dfb2f51f11ba106b97466d1ea76
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -40,7 +40,7 @@ GEM
       ffi (>= 1.15.0)
     eventmachine (1.2.7)
     execjs (2.10.0)
-    faraday (2.13.0)
+    faraday (2.13.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
@@ -167,7 +167,7 @@ GEM
       nokogiri (~> 1.12)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.10.2)
+    json (2.11.3)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
     kramdown-parser-gfm (1.1.0)
@@ -181,7 +181,7 @@ GEM
     mini_portile2 (2.8.8)
     net-http (0.6.0)
       uri
-    nokogiri (1.18.7)
+    nokogiri (1.18.8)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     octokit (4.25.1)
@@ -189,7 +189,7 @@ GEM
       sawyer (~> 0.9)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
-    public_suffix (6.0.1)
+    public_suffix (6.0.2)
     racc (1.8.1)
     rake (13.2.1)
     rb-fsevent (0.11.2)
@@ -199,7 +199,7 @@ GEM
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
-    sass-embedded (1.86.3)
+    sass-embedded (1.87.0)
       google-protobuf (~> 4.30)
       rake (>= 13)
     sass-listen (4.0.0)

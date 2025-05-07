@@ -87,7 +87,7 @@ The table below shows the available mathematical functions.
 | [`nextafter(x, y)`](#nextafterx-y) | Return the next floating point value after `x` in the direction of `y`. |
 | [`pi()`](#pi) | Returns the value of pi. |
 | [`pow(x, y)`](#powx-y) | Computes `x` to the power of `y`. |
-| [`power(x, y)`](#powerx-y) | Alias of `pow`. computes `x` to the power of `y`. |
+| [`power(x, y)`](#powerx-y) | Alias of `pow`. Computes `x` to the power of `y`. |
 | [`radians(x)`](#radiansx) | Converts degrees to radians. |
 | [`random()`](#random) | Returns a random number `x` in the range `0.0 <= x < 1.0`. |
 | [`round_even(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
@@ -428,7 +428,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of `pow`. computes `x` to the power of `y`. |
+| **Description** | Alias of `pow`. Computes `x` to the power of `y`. |
 | **Example** | `power(2, 3)` |
 | **Result** | `8` |
 

@@ -8,26 +8,30 @@ The `markdown` mode is particularly useful for building documentation and the `l
 
 ## List of Output Formats
 
-|     Mode     |                 Description                 |
-|--------------|---------------------------------------------|
-| `ascii`      | Columns/rows delimited by 0x1F and 0x1E     |
-| `box`        | Tables using unicode box-drawing characters |
-| `csv`        | Comma-separated values                      |
-| `column`     | Output in columns (See `.width`)            |
-| `duckbox`    | Tables with extensive features (default)    |
-| `html`       | HTML `<table>` code                         |
-| `insert`     | SQL insert statements for TABLE             |
-| `json`       | Results in a JSON array                     |
-| `jsonlines`  | Results in a NDJSON                         |
-| `latex`      | LaTeX tabular environment code              |
-| `line`       | One value per line                          |
-| `list`       | Values delimited by "\|"                    |
-| `markdown`   | Markdown table format                       |
-| `quote`      | Escape answers as for SQL                   |
-| `table`      | ASCII-art table                             |
-| `tabs`       | Tab-separated values                        |
-| `tcl`        | TCL list elements                           |
-| `trash`      | No output                                   |
+<!-- markdownlint-disable MD056 -->
+
+| Mode                                        | Description                                                    |
+| ------------------------------------------- | -------------------------------------------------------------- |
+| `ascii`                                     | Columns/rows delimited by 0x1F and 0x1E                        |
+| `box`                                       | Tables using unicode box-drawing characters                    |
+| `csv`                                       | Comma-separated values                                         |
+| `column`                                    | Output in columns (See `.width`)                               |
+| `duckbox`                                   | Tables with extensive features (default)                       |
+| `html`                                      | HTML `<table>` code                                            |
+| `insert ⟨TABLE⟩`{:.language-sql .highlight} | SQL insert statements for `⟨TABLE⟩`{:.language-sql .highlight} |
+| `json`                                      | Results in a JSON array                                        |
+| `jsonlines`                                 | Results in a NDJSON                                            |
+| `latex`                                     | LaTeX tabular environment code                                 |
+| `line`                                      | One value per line                                             |
+| `list`                                      | Values delimited by `|`                                        |
+| `markdown`                                  | Markdown table format                                          |
+| `quote`                                     | Escape answers as for SQL                                      |
+| `table`                                     | ASCII-art table                                                |
+| `tabs`                                      | Tab-separated values                                           |
+| `tcl`                                       | TCL list elements                                              |
+| `trash`                                     | No output                                                      |
+
+<!-- markdownlint-enable MD056 -->
 
 ## Changing the Output Format
 
@@ -88,9 +92,9 @@ By default, DuckDB renders query results in `duckbox` mode, which is a feature-r
 
 The duckbox mode supports the `large_number_rendering` option, which allows human-readable rendering of large numbers. It has three levels:
 
-* `off` – All numbers are printed using regular formatting.
-* `footer` (default) – Large numbers are augmented with the human-readable format. Only applies to single-row results.
-* `all` - All large numbers are replaced with the human-readable format.
+- `off` – All numbers are printed using regular formatting.
+- `footer` (default) – Large numbers are augmented with the human-readable format. Only applies to single-row results.
+- `all` - All large numbers are replaced with the human-readable format.
 
 See the following examples:
 

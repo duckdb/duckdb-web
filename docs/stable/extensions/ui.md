@@ -129,7 +129,34 @@ you can start the UI with a CSV available as a view using the [`-cmd` argument](
 duckdb -cmd "CREATE VIEW ⟨view_name⟩ AS FROM '⟨filename⟩.csv';" -ui
 ```
 
+### Running the UI in Read-Only Mode
+
+The DuckDB UI uses DuckDB tables as storage internally (e.g., for saving notebooks).
+Therefore, running the UI directly on a read-only database [is not supported](https://github.com/duckdb/duckdb-ui/issues/61):
+
+```bash
+duckdb -ui -readonly read_only_test.db
+```
+
+In the UI, this results in:
+
+```console
+Catalog Error: SET schema: No catalog + schema named "memory.main" found.
+```
+
+To work around this, run the UI on another database file:
+
+```bash
+duckdb -ui ui_catalog.db
+```
+
+Then, open a notebook and attach to the database:
+
+```sql
+ATTACH 'test.db' (READ_ONLY) AS my_db;
+USE my_db
+```
+
 ## Limitations
 
 * The UI currently does not support the ARM-based Windows platforms (`windows_arm64` and `windows_arm64_mingw`).
-* The UI uses DuckDB as a storage internally (e.g., for saving notebooks), therefore, it [does not support read-only mode](https://github.com/duckdb/duckdb-ui/issues/61).

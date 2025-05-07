@@ -1,5 +1,6 @@
 ---
 layout: docu
+
 title: Relational API
 ---
 
@@ -115,6 +116,8 @@ from_csv_auto(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **
 
 Create a relation object from the CSV file in 'name'
 
+**Aliases**: [`read_csv`](#read_csv)
+
 ##### Example
 
 ```python
@@ -194,11 +197,21 @@ rel.show()
 ```python
 from_parquet(*args, **kwargs)
 Overloaded function.
+
+1. from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_glob
+
+2. from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_globs
 ```
 
 #### Description
 
 Create a relation object from the Parquet files
+
+**Aliases**: [`read_parquet`](#read_parquet)
 
 ##### Example
 
@@ -319,6 +332,8 @@ read_csv(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **kwarg
 
 Create a relation object from the CSV file in 'name'
 
+**Aliases**: [`from_csv_auto`](#from_csv_auto)
+
 ##### Example
 
 ```python
@@ -399,11 +414,21 @@ rel.show()
 ```python
 read_parquet(*args, **kwargs)
 Overloaded function.
+
+1. read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_glob
+
+2. read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+
+Create a relation object from the Parquet files in file_globs
 ```
 
 #### Description
 
 Create a relation object from the Parquet files
+
+**Aliases**: [`from_parquet`](#from_parquet)
 
 ##### Example
 
@@ -815,6 +840,8 @@ rel.description
 
 Return a list containing the types of the columns of the relation.
 
+**Aliases**: [`types`](#types)
+
 ##### Example
 
 ```python
@@ -1163,6 +1190,8 @@ QUERY_RELATION
 #### Description
 
 Return a list containing the types of the columns of the relation.
+
+**Aliases**: [`dtypes`](#dtypes)
 
 ##### Example
 
@@ -1691,6 +1720,9 @@ INNER JOIN (
 ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id))
 ```
 
+> `NATURAL`, `POSITIONAL` and `ASOF` joins are not provided by the relational API.
+> `CROSS` joins are provided through the [cross method](#cross). 
+
 
 ##### Example
 
@@ -1878,6 +1910,8 @@ project(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb
 
 Project the relation object by the projection in project_expr
 
+**Aliases**: [`select`](#select)
+
 ##### Example
 
 ```python
@@ -1923,6 +1957,8 @@ select(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb.
 #### Description
 
 Project the relation object by the projection in project_expr
+
+**Aliases**: [`project`](#project)
 
 ##### Example
 
@@ -2759,6 +2795,8 @@ dense_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_col
 #### Description
 
 Computes the dense rank within the partition
+
+**Aliases**: [`rank_dense`](#rank_dense)
 
 ##### Example
 
@@ -4025,6 +4063,8 @@ rank_dense(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_col
 
 Computes the dense rank within the partition
 
+**Aliases**: [`dense_rank`](#dense_rank)
+
 ##### Example
 
 ```python
@@ -4133,6 +4173,8 @@ select_dtypes(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duc
 
 Select columns from the relation, by filtering based on type(s)
 
+**Aliases**: [`select_types`](#select_types)
+
 ##### Example
 
 ```python
@@ -4179,6 +4221,8 @@ select_types(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duck
 #### Description
 
 Select columns from the relation, by filtering based on type(s)
+
+**Aliases**: [`select_dtypes`](#select_dtypes)
 
 ##### Example
 
@@ -4227,6 +4271,8 @@ std(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_
 
 Computes the sample standard deviation for a given column
 
+**Aliases**: [`stddev`](#stddev), [`stddev_samp`](#stddev_samp)
+
 ##### Example
 
 ```python
@@ -4273,6 +4319,8 @@ stddev(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wind
 #### Description
 
 Computes the sample standard deviation for a given column
+
+**Aliases**: [`std`](#std), [`stddev_samp`](#stddev_samp)
 
 ##### Example
 
@@ -4367,6 +4415,8 @@ stddev_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '',
 #### Description
 
 Computes the sample standard deviation for a given column
+
+**Aliases**: [`stddev`](#stddev), [`std`](#std)
 
 ##### Example
 
@@ -4603,6 +4653,8 @@ var(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_
 
 Computes the sample variance for a given column
 
+**Aliases**: [`variance`](#variance), [`var_samp`](#var_samp)
+
 ##### Example
 
 ```python
@@ -4697,6 +4749,8 @@ var_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wi
 
 Computes the sample variance for a given column
 
+**Aliases**: [`variance`](#variance), [`var`](#var)
+
 ##### Example
 
 ```python
@@ -4743,6 +4797,8 @@ variance(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wi
 #### Description
 
 Computes the sample variance for a given column
+
+**Aliases**: [`var`](#var), [`var_samp`](#var_samp)
 
 ##### Example
 
@@ -4821,6 +4877,8 @@ arrow(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarro
 #### Description
 
 Execute and fetch all rows as an Arrow Table
+
+**Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`to_arrow_table`](#to_arrow_table)
 
 ##### Example
 
@@ -4984,6 +5042,8 @@ df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pan
 
 Execute and fetch all rows as a pandas DataFrame
 
+**Aliases**: [`fetchdf`](#fetchdf), [`to_df`](#to_df)
+
 ##### Example
 
 ```python
@@ -5128,6 +5188,8 @@ fetch_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 100000
 
 Execute and fetch all rows as an Arrow Table
 
+**Aliases**: [`arrow`](#arrow), [`to_arrow_table`](#to_arrow_table)
+
 ##### Example
 
 ```python
@@ -5267,6 +5329,8 @@ fetchdf(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -
 
 Execute and fetch all rows as a pandas DataFrame
 
+**Aliases**: [`df`](#df), [`to_df`](#to_df)
+
 ##### Example
 
 ```python
@@ -5312,6 +5376,32 @@ fetchmany(self: duckdb.duckdb.DuckDBPyRelation, size: int = 1) -> list
 
 Execute and fetch the next set of rows as a list of tuples
 
+
+>Warning Executing any operation during the retrieval of the data from an [aggregate](#aggregate) relation,
+>will close the result set.
+>```python
+>import duckdb
+>
+>duckdb_conn = duckdb.connect()
+>
+>rel = duckdb_conn.sql("""
+>       select 
+>           gen_random_uuid() as id, 
+>           concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+>           range as value, 
+>           now() + concat(range,' ', 'minutes')::interval as created_timestamp
+>       from range(1, 10)
+>    """
+>)
+>
+>agg_rel = rel.aggregate("value")
+>
+>while res := agg_rel.fetchmany(size=1):
+>    print(res)
+>    rel.show()
+>```
+
+
 ##### Example
 
 ```python
@@ -5329,17 +5419,23 @@ rel = duckdb_conn.sql("""
     """
 )
 
-rel.fetchmany(size=1)
+while res := rel.fetchmany(size=1):
+    print(res)
 ```
 
 
 ##### Result
 
 ```text
-[(UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
-  'value is uneven',
-  1,
-  datetime.datetime(2025, 4, 10, 11, 24, 51, 259000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('cf4c5e32-d0aa-4699-a3ee-0092e900f263'), 'value is uneven', 1, datetime.datetime(2025, 4, 30, 16, 23, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('cec335ac-24ac-49a3-ae9a-bb35f71fc88d'), 'value is even', 2, datetime.datetime(2025, 4, 30, 16, 24, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('2423295d-9bb0-453c-a385-21bdacba03b6'), 'value is uneven', 3, datetime.datetime(2025, 4, 30, 16, 25, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('88806b21-192d-41e7-a293-c789aad636ba'), 'value is even', 4, datetime.datetime(2025, 4, 30, 16, 26, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('05837a28-dacf-4121-88a6-a374aefb8a07'), 'value is uneven', 5, datetime.datetime(2025, 4, 30, 16, 27, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('b9c1f7e9-6156-4554-b80e-67d3b5d810bb'), 'value is even', 6, datetime.datetime(2025, 4, 30, 16, 28, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('4709c7fa-d286-4864-bb48-69748b447157'), 'value is uneven', 7, datetime.datetime(2025, 4, 30, 16, 29, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('30e48457-b103-4fa5-95cf-1c7f0143335b'), 'value is even', 8, datetime.datetime(2025, 4, 30, 16, 30, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
+[(UUID('036b7f4b-bd78-4ffb-a351-964d93f267b7'), 'value is uneven', 9, datetime.datetime(2025, 4, 30, 16, 31, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
 ```
 
 ----
@@ -5415,6 +5511,32 @@ fetchone(self: duckdb.duckdb.DuckDBPyRelation) -> typing.Optional[tuple]
 
 Execute and fetch a single row as a tuple
 
+
+>Warning Executing any operation during the retrieval of the data from an [aggregate](#aggregate) relation,
+>will close the result set.
+>```python
+>import duckdb
+>
+>duckdb_conn = duckdb.connect()
+>
+>rel = duckdb_conn.sql("""
+>       select 
+>           gen_random_uuid() as id, 
+>           concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+>           range as value, 
+>           now() + concat(range,' ', 'minutes')::interval as created_timestamp
+>       from range(1, 10)
+>    """
+>)
+>
+>agg_rel = rel.aggregate("value")
+>
+>while res := agg_rel.fetchone():
+>    print(res)
+>    rel.show()
+>```
+
+
 ##### Example
 
 ```python
@@ -5432,17 +5554,23 @@ rel = duckdb_conn.sql("""
     """
 )
 
-rel.fetchone()
+while res := rel.fetchone():
+    print(res)
 ```
 
 
 ##### Result
 
 ```text
-(UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
- 'value is uneven',
- 1,
- datetime.datetime(2025, 4, 10, 11, 24, 51, 259000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('fe036411-f4c7-4f52-9ddd-80cd2bb56613'), 'value is uneven', 1, datetime.datetime(2025, 4, 30, 12, 59, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('466c9b43-e9f0-4237-8f26-155f259a5b59'), 'value is even', 2, datetime.datetime(2025, 4, 30, 13, 0, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('5755cf16-a94f-41ef-a16d-21e856d71f9f'), 'value is uneven', 3, datetime.datetime(2025, 4, 30, 13, 1, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('05b52c93-bd68-45e1-b02a-a08d682c33d5'), 'value is even', 4, datetime.datetime(2025, 4, 30, 13, 2, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('cf61ef13-2840-4541-900d-f493767d7622'), 'value is uneven', 5, datetime.datetime(2025, 4, 30, 13, 3, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('033e7c68-e800-4ee8-9787-6cf50aabc27b'), 'value is even', 6, datetime.datetime(2025, 4, 30, 13, 4, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('8b8d6545-ff54-45d6-b69a-97edb63dfe43'), 'value is uneven', 7, datetime.datetime(2025, 4, 30, 13, 5, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('7da79dfe-b29c-462b-a414-9d5e3cc80139'), 'value is even', 8, datetime.datetime(2025, 4, 30, 13, 6, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
+(UUID('f83ffff2-33b9-4f86-9d14-46974b546bab'), 'value is uneven', 9, datetime.datetime(2025, 4, 30, 13, 7, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
 ```
 
 ----
@@ -5604,6 +5732,8 @@ to_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) 
 
 Execute and fetch all rows as an Arrow Table
 
+**Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`arrow`](#arrow)
+
 ##### Example
 
 ```python
@@ -5654,6 +5784,8 @@ to_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object = No
 
 Write the relation object to a CSV file in 'file_name'
 
+**Aliases**: [`write_csv`](#write_csv)
+
 ##### Example
 
 ```python
@@ -5694,6 +5826,8 @@ to_df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> 
 #### Description
 
 Execute and fetch all rows as a pandas DataFrame
+
+**Aliases**: [`fetchdf`](#fetchdf), [`df`](#df)
 
 ##### Example
 
@@ -5739,6 +5873,8 @@ to_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compression:
 #### Description
 
 Write the relation object to a Parquet file in 'file_name'
+
+**Aliases**: [`write_parquet`](#write_parquet)
 
 ##### Example
 
@@ -5904,6 +6040,8 @@ write_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object =
 
 Write the relation object to a CSV file in 'file_name'
 
+**Aliases**: [`to_csv`](#to_csv)
+
 ##### Example
 
 ```python
@@ -5944,6 +6082,8 @@ write_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compressi
 #### Description
 
 Write the relation object to a Parquet file in 'file_name'
+
+**Aliases**: [`to_parquet`](#to_parquet)
 
 ##### Example
 

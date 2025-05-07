@@ -65,5 +65,5 @@ DuckDB's Parquet encryption currently has the following limitations.
 ## Performance Implications
 
 Note that encryption has some performance implications.
-Without encryption, reading/writing the `lineitem` table from [`TPC-H`]({% link docs/preview/extensions/tpch.md %}) at SF1, which is 6M rows and 15 columns, from/to a Parquet file takes 0.26 and 0.99 seconds, respectively.
+Without encryption, reading/writing the `lineitem` table from [`TPC-H`]({% link docs/preview/core_extensions/tpch.md %}) at SF1, which is 6M rows and 15 columns, from/to a Parquet file takes 0.26 and 0.99 seconds, respectively.
 With encryption, this takes 0.64 and 2.21 seconds, both approximately 2.5× slower than the unencrypted version.

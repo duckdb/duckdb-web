@@ -74,7 +74,7 @@ Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone informat
 The corresponding `TIMESTAMP WITHOUT TIME ZONE` stores the same `INT64`, but arithmetic, binning, and string formatting follow the straightforward rules of Coordinated Universal Time (UTC) without offsets or time zones. Accordingly, `TIMESTAMP`s could be interpreted as UTC timestamps, but more commonly they are used to represent *local* observations of time recorded in an unspecified time zone, and operations on these types can be interpreted as simply manipulating tuple fields following nominal temporal logic.
 It is a common data cleaning problem to disambiguate such observations, which may also be stored in raw strings without time zone specification or UTC offsets, into unambiguous `TIMESTAMP WITH TIME ZONE` instants. One possible solution to this is to append UTC offsets to strings, followed by an explicit cast to `TIMESTAMP WITH TIME ZONE`. Alternatively, a `TIMESTAMP WITHOUT TIME ZONE` may be created first and then be combined with a time zone specification to obtain a time zone aware `TIMESTAMP WITH TIME ZONE`.
 
-## Conversion Between Strings And Naive And Time Zone-Aware Timestamps
+## Conversion between Strings and Naïve / Time Zone-Aware Timestamps
 
 The conversion between strings *without* UTC offsets or IANA time zone names and `WITHOUT TIME ZONE` types is unambiguous and straightforward.
 The conversion between strings *with* UTC offsets or time zone names and `WITH TIME ZONE` types is also unambiguous, but requires the `ICU` extension to handle time zone names.
@@ -162,7 +162,7 @@ To distinguish the two hours, another range of bins containing the offset from U
 ### Time Zone Support
 
 The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitable extension.
-The built-in [ICU extension]({% link docs/preview/extensions/icu.md %}) implements all the binning and arithmetic functions using the
+The built-in [ICU extension]({% link docs/preview/core_extensions/icu.md %}) implements all the binning and arithmetic functions using the
 [International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
 
 To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled with several DuckDB clients (including Python, R, JDBC, and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
@@ -196,7 +196,7 @@ You can also find a reference table of [available time zones]({% link docs/previ
 
 ## Calendar Support
 
-The [ICU extension]({% link docs/preview/extensions/icu.md %}) also supports non-Gregorian calendars using the `SET Calendar` command.
+The [ICU extension]({% link docs/preview/core_extensions/icu.md %}) also supports non-Gregorian calendars using the `SET Calendar` command.
 Note that the `INSTALL` and `LOAD` steps are only required if the DuckDB client does not bundle the ICU extension.
 
 ```sql

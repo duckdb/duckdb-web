@@ -15,14 +15,16 @@ On this page, we provide an overview of these methods so you can select which on
 INSERT INTO people VALUES (1, 'Mark');
 ```
 
-For a more detailed description, see the [page on the `INSERT statement`]({% link docs/preview/data/insert.md %}).
+For a more detailed description, see the [page on the `INSERT` statement]({% link docs/preview/data/insert.md %}).
 
 ## File Loading: Relative Paths
 
-Use the configuration option [`file_search_path`]({% link docs/preview/configuration/overview.md %}#local-configuration-options) to configure to which "root directories" relative paths are expanded.   
-If `file_search_path` is not set, the working directory is used as root directory for relative paths. In CLI, use `.shell echo $(pwd)` to double check the working directory location.
+Use the configuration option [`file_search_path`]({% link docs/preview/configuration/overview.md %}#local-configuration-options) to configure to which “root directories” relative paths are expanded on.
+If `file_search_path` is not set, the working directory is used as the basis for relative paths.
 
-## CSV Loading
+## File Formats
+
+### CSV Loading
 
 Data can be efficiently loaded from CSV files using several methods. The simplest is to use the CSV file's name:
 
@@ -57,7 +59,7 @@ CREATE TABLE test AS
 
 For more details, see the [page on CSV loading]({% link docs/preview/data/csv/overview.md %}).
 
-## Parquet Loading
+### Parquet Loading
 
 Parquet files can be efficiently loaded and queried using their filename:
 
@@ -79,7 +81,7 @@ COPY tbl FROM 'test.parquet';
 
 For more details, see the [page on Parquet loading]({% link docs/preview/data/parquet/overview.md %}).
 
-## JSON Loading
+### JSON Loading
 
 JSON files can be efficiently loaded and queried using their filename:
 
@@ -100,6 +102,15 @@ COPY tbl FROM 'test.json';
 ```
 
 For more details, see the [page on JSON loading]({% link docs/preview/data/json/overview.md %}).
+
+### Returning the Filename
+
+Since DuckDB v1.3.0, the CSV, JSON and Parquet readers support the `filename` virtual column:
+
+```sql
+COPY (FROM (VALUES (42), (43)) t(x)) TO 'test.parquet';
+SELECT *, filename FROM 'test.parquet';
+```
 
 ## Appender
 

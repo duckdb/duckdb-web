@@ -5,7 +5,7 @@ title: Google Cloud Storage Import
 
 ## Prerequisites
 
-The Google Cloud Storage (GCS) can be used via the [`httpfs` extension]({% link docs/preview/extensions/httpfs/overview.md %}).
+The Google Cloud Storage (GCS) can be used via the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}).
 This can be installed with the `INSTALL httpfs` SQL command. This only needs to be run once.
 
 ## Credentials and Configuration

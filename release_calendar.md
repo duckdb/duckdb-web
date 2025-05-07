@@ -7,13 +7,12 @@ redirect_from:
 - /dev/release-dates/
 - /dev/release-calendar
 - /dev/release-calendar/
-- /dev/docs/dev/release_calendar
-- /dev/docs/dev/release_calendar/
 - /docs/dev/release_calendar
-- /docs/dev/stable/release_calendar
-- /docs/dev/stable/release_calendar/
-- /docs/dev/preview/release_calendar
-- /docs/dev/preview/release_calendar/
+- /docs/dev/release_calendar/
+- /docs/stable/dev/release_calendar
+- /docs/stable/dev/release_calendar/
+- /docs/preview/dev/release_calendar
+- /docs/preview/dev/release_calendar/
 title: Release Calendar
 ---
 

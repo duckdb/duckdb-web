@@ -34,7 +34,7 @@ title: Map Functions
 
 | **Description** | Return the value for a given key, or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | **Example** | `element_at(map([100, 5], [42, 43]), 100)` |
-| **Result** | `42` |
+| **Result** | `[42]` |
 | **Aliases** | `map_extract(map, key)`, `map[key]` |
 
 #### `map_contains(map, key)`
@@ -75,7 +75,7 @@ title: Map Functions
 
 | **Description** | Return the value for a given key, or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | **Example** | `map_extract(map([100, 5], [42, 43]), 100)` |
-| **Result** | `42` |
+| **Result** | `[42]` |
 | **Aliases** | `element_at(map, key)`, `map[key]` |
 
 #### `map_from_entries(STRUCT(k, v)[])`
@@ -116,5 +116,5 @@ title: Map Functions
 
 | **Description** | Return the value for a given key, or `NULL` if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. |
 | **Example** | `map([100, 5], ['a', 'b'])[100]` |
-| **Result** | `'a'` |
+| **Result** | `a` |
 | **Aliases** | `element_at(map, key)`, `map_extract(map, key)` |

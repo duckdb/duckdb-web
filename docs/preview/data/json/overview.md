@@ -12,7 +12,15 @@ If you would like to install or load it manually, please consult the [“Install
 JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 While it is not a very efficient format for tabular data, it is very commonly used, especially as a data interchange format.
 
-> Bestpractice DuckDB implements multiple interfaces for JSON extraction: [JSONPath](https://goessner.net/articles/JsonPath/) and [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901). Both of them work with the arrow operator (`->`) and the `json_extract` function call. It's best to pick one syntax and use it in your entire application.
+## JSONPath and JSON Pointer Syntax
+
+DuckDB implements multiple interfaces for JSON extraction: [JSONPath](https://goessner.net/articles/JsonPath/) and [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901). Both of them work with the arrow operator (`->`) and the `json_extract` function call.
+
+Note that DuckDB only supports lookups in JSONPath, i.e., extracting fields with `.<key>` or array elements with `[<index>]`.
+Arrays can be indexed from the back and both approaches support the wildcard `*`.
+DuckDB _not_ support the full JSONPath syntax because SQL is readily available for any further transformations.
+
+> It's best to pick either the JSONPath or the JSON Pointer syntax and use it in your entire application.
 
 <!-- DuckDB mostly uses the PostgreSQL syntax, some functions from SQLite, and a few functions from other SQL systems -->
 
@@ -62,6 +70,13 @@ CREATE TABLE todos AS
     SELECT * FROM 'todos.json';
 ```
 
+Since DuckDB v1.3.0, the JSON reader returns the `filename` virtual column:
+
+```sql
+SELECT filename, *
+FROM 'todos-*.json';
+```
+
 ### Writing JSON
 
 Write the result of a query to a JSON file:
@@ -92,7 +107,7 @@ SELECT j.family FROM example;
 "anatidae"
 ```
 
-Extract the family key's value with a [JSONPath](https://goessner.net/articles/JsonPath/) expression:
+Extract the family key's value with a [JSONPath](https://goessner.net/articles/JsonPath/) expression as `JSON`:
 
 ```sql
 SELECT j->'$.family' FROM example;

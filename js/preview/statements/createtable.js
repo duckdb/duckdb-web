@@ -97,7 +97,8 @@ function GenerateCreateTable(options = {}) {
 				]),
 				Sequence([
 					Keyword("AS"),
-					Expression("select-node")
+					Expression("select-node"),
+					Optional(Keyword("WITH NO DATA"), "skip")
 				])
 			])
 		])

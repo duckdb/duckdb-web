@@ -3,10 +3,10 @@
 from dataclasses import dataclass, field
 import duckdb
 import re
-from typing import Callable
+import operator
 
 
-@dataclass
+@dataclass(order=True)
 class DocFunction:
     name: str
     parameters: list[str]
@@ -16,12 +16,13 @@ class DocFunction:
     is_variadic: bool = False
     aliases: list[str] = field(default_factory=list)
     fixed_example_results: list[str] = field(default_factory=list)
+    nr_optional_arguments: int = 0
 
 
 DOC_VERSION = 'preview'
 DOC_FILES = [
     f'docs/{DOC_VERSION}/sql/functions/blob.md',
-    f'docs/{DOC_VERSION}/sql/functions/char.md',
+    f'docs/{DOC_VERSION}/sql/functions/text.md',
 ]
 
 # 'functions' that are binary operators are listed between the arguments
@@ -53,15 +54,15 @@ OVERRIDES: list[DocFunction] = [
         category='string',
         name='md5_number_lower',
         parameters=['string'],
-        description="Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`.",
-        examples=["md5_number_lower('123')"],
+        description="Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`.",
+        examples=["md5_number_lower('abc')"],
     ),
     DocFunction(
         category='string',
         name='md5_number_upper',
         parameters=['string'],
-        description="Returns the upper 64-bit segment of the MD5 hash of the `string` as a `BIGINT`.",
-        examples=["md5_number_upper('123')"],
+        description="Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`.",
+        examples=["md5_number_upper('abc')"],
     ),
     DocFunction(
         category='regex',
@@ -144,7 +145,7 @@ PAGE_LINKS = {
     'slice conventions': f'docs/{DOC_VERSION}/sql/functions/list.md#slicing',
     'Pattern Matching': f'docs/{DOC_VERSION}/sql/functions/pattern_matching.md',
     'collations': f'docs/{DOC_VERSION}/sql/expressions/collations.md',
-    'Regular Expressions': f'docs/{DOC_VERSION}/sql/functions/regular_expressions.md',
+    'regex `options`': f'docs/{DOC_VERSION}/sql/functions/regular_expressions.md#options-for-regular-expression-functions',
     # external page links:
     '`os.path.dirname`': 'https://docs.python.org/3.7/library/os.path.html#os.path.dirname',
     '`os.path.basename`': 'https://docs.python.org/3.7/library/os.path.html#os.path.basename',
@@ -199,6 +200,18 @@ def get_function_blocks(
     return function_blocks_info
 
 
+def get_function_data(categories: list[str]) -> list[DocFunction]:
+    query = function_data_query(categories)
+    function_data: list[DocFunction] = [
+        DocFunction(*func) for func in duckdb.sql(query).fetchall()
+    ]
+    function_data = apply_overrides(function_data, categories)
+    function_data = sort_function_data(function_data)
+    function_data = prune_duplicates(function_data)
+    function_data = [apply_url_conversions(function) for function in function_data]
+    return function_data
+
+
 def function_data_query(categories: str) -> str:
     return f"""
 with categories as (select unnest({categories}) category)
@@ -224,12 +237,7 @@ order by all
 """
 
 
-def get_function_data(categories: list[str]) -> list[DocFunction]:
-    query = function_data_query(categories)
-    function_data: list[DocFunction] = [
-        DocFunction(*func) for func in duckdb.sql(query).fetchall()
-    ]
-    # apply overrides and add additional functions
+def apply_overrides(function_data: list[DocFunction], categories: list[str]):
     function_data = [
         func
         for func in function_data
@@ -242,15 +250,17 @@ def get_function_data(categories: list[str]) -> list[DocFunction]:
     function_data += [
         override for override in OVERRIDES if override.category in categories
     ]
-    # sort on: function_name, nr of arguments, argument names
-    sorter: Callable[[DocFunction], str] = (
-        lambda func: f"{func.name}-{len(func.parameters)}-{func.parameters}"
-    )
+    return function_data
+
+
+def sort_function_data(function_data: list[DocFunction]):
     function_data_1 = sorted(
-        [func for func in function_data if func.name == EXTRACT_OPERATOR], key=sorter
+        [func for func in function_data if func.name == EXTRACT_OPERATOR],
+        key=operator.attrgetter("name", "description", "parameters"),
     )
     function_data_2 = sorted(
-        [func for func in function_data if func.name in BINARY_OPERATORS], key=sorter
+        [func for func in function_data if func.name in BINARY_OPERATORS],
+        key=operator.attrgetter("name", "description", "parameters"),
     )
     function_data_3 = sorted(
         [
@@ -258,28 +268,51 @@ def get_function_data(categories: list[str]) -> list[DocFunction]:
             for func in function_data
             if (func.name not in BINARY_OPERATORS) and (func.name != EXTRACT_OPERATOR)
         ],
-        key=sorter,
+        key=operator.attrgetter("name", "description", "parameters"),
     )
-    function_data = function_data_1 + function_data_2 + function_data_3
-    # apply url conversions
-    for function in function_data:
-        for link_text in PAGE_LINKS:
-            if link_text in function.description:
-                if PAGE_LINKS[link_text].startswith('http'):
-                    # external link
-                    url = f"{PAGE_LINKS[link_text]}"
-                else:
-                    # internal link
-                    page, _, section = PAGE_LINKS[link_text].partition('#')
-                    url = ''
-                    if page:
-                        url = "{% " + f"link {page}" + " %}"
-                    if section:
-                        url += f"#{section}"
-                function.description = function.description.replace(
-                    link_text, f"[{link_text}]({url})"
+    return function_data_1 + function_data_2 + function_data_3
+
+
+# remove duplicates with optional parameters
+def prune_duplicates(function_data: list[DocFunction]):
+    for idx_func, func in enumerate(function_data):
+        if idx_func == 0:
+            continue
+        if (
+            func.name == function_data[idx_func - 1].name
+            and function_data[idx_func - 1].description == func.description
+        ):
+            if function_data[idx_func - 1].parameters == func.parameters[:-1]:
+                func.nr_optional_arguments = (
+                    function_data[idx_func - 1].nr_optional_arguments + 1
                 )
-    return function_data
+                function_data[idx_func - 1].name = "DELETE_ME"
+            elif all(
+                param in function_data[idx_func - 1].parameters
+                for param in func.parameters
+            ):
+                func.name = "DELETE_ME"
+    return [func for func in function_data if func.name != "DELETE_ME"]
+
+
+def apply_url_conversions(function: DocFunction):
+    for link_text in PAGE_LINKS:
+        if link_text in function.description:
+            if PAGE_LINKS[link_text].startswith('http'):
+                # external link
+                url = f"{PAGE_LINKS[link_text]}"
+            else:
+                # internal link
+                page, _, section = PAGE_LINKS[link_text].partition('#')
+                url = ''
+                if page:
+                    url = "{% " + f"link {page}" + " %}"
+                if section:
+                    url += f"#{section}"
+            function.description = function.description.replace(
+                link_text, f"[{link_text}]({url})"
+            )
+    return function
 
 
 def generate_docs_table(function_data: list[DocFunction]):
@@ -289,17 +322,9 @@ def generate_docs_table(function_data: list[DocFunction]):
         if not func.examples:
             print(f"WARNING (skipping): '{func.name}' - no example is available")
             continue
-        if func.name in BINARY_OPERATORS and len(func.parameters) == 2:
-            table_str += f"| [`{func.parameters[0]} {func.name} {func.parameters[1]}`](#{func.parameters[0]}-{func.name.lstrip('@*!^|pip3 list | grep duckdb').lower().replace(' ', '-')}-{func.parameters[1]}) | {func.description} |\n"
-        elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
-            parameter_list = ":".join(func.parameters[1:])
-            parameter_list_anchor = "".join(func.parameters)
-            table_str += f"| [`{func.parameters[0]}[{parameter_list}]`](#{parameter_list_anchor}) | {func.description} |\n"
-        else:
-            parameter_list = ", ".join(func.parameters)
-            function_name_anchor = func.name.lstrip('@*!^')
-            parameter_list_anchor = "-".join(func.parameters).lower().replace(' ', '-')
-            table_str += f"| [`{func.name}({parameter_list}{', ...' if (func.is_variadic) else ''})`](#{function_name_anchor}{parameter_list_anchor}{'-' if (func.is_variadic) else ''}) | {func.description} |\n"
+        func_title = get_function_title(func)
+        anchor = get_anchor_from_title(func_title)
+        table_str += f"| [`{func_title}`](#{anchor}) | {func.description} |\n"
     table_str += "\n<!-- markdownlint-enable MD056 -->\n"
     return table_str
 
@@ -310,16 +335,7 @@ def generate_docs_records(function_data: list[DocFunction]):
         if not func.examples:
             print(f"skipping {func.name}")
             continue
-        if func.name in BINARY_OPERATORS and len(func.parameters) == 2:
-            record_str += (
-                f"#### `{func.parameters[0]} {func.name} {func.parameters[1]}`\n\n"
-            )
-        elif func.name == EXTRACT_OPERATOR and len(func.parameters) >= 2:
-            parameter_list = ":".join(func.parameters[1:])
-            record_str += f"#### `{func.parameters[0]}[{parameter_list}]`\n\n"
-        else:
-            parameter_list = ", ".join(func.parameters)
-            record_str += f"#### `{func.name}({parameter_list}{', ...' if (func.is_variadic) else ''})`\n\n"
+        record_str += f"#### `{get_function_title(func)}`\n\n"
         record_str += '<div class="nostroke_table"></div>\n\n'
         record_str += f"| **Description** | {func.description} |\n"
         record_str += generate_example_rows(func)
@@ -328,6 +344,31 @@ def generate_docs_records(function_data: list[DocFunction]):
             record_str += f"| **{'Alias' if len(func.aliases) == 1 else 'Aliases'}** | {aliases} |\n"
         record_str += '\n'
     return record_str
+
+
+def get_function_title(func: DocFunction):
+    if func.name in BINARY_OPERATORS:
+        assert len(func.parameters) == 2
+        function_title = f"{func.parameters[0]} {func.name} {func.parameters[1]}"
+    elif func.name == EXTRACT_OPERATOR:
+        assert len(func.parameters) >= 2
+        parameter_str = ":".join(func.parameters[1:])
+        function_title = f"{func.parameters[0]}[{parameter_str}]"
+    else:
+        if func.nr_optional_arguments == 0:
+            parameter_str = (
+                f"{", ".join(func.parameters)}{', ...' if (func.is_variadic) else ''}"
+            )
+        else:
+            mandatory_args = func.parameters[: -1 * func.nr_optional_arguments]
+            optional_args = func.parameters[-1 * func.nr_optional_arguments :]
+            parameter_str = f"{", ".join(mandatory_args)}{"".join(f"[, {arg}]" for arg in optional_args)}"
+        function_title = f"{func.name}({parameter_str})"
+    return function_title
+
+
+def get_anchor_from_title(title: str):
+    return re.sub(r'[\(\)\[\]\.,$@|:^]+', '', title.lower().replace(' ', '-'))
 
 
 def generate_example_rows(func: DocFunction):
@@ -342,7 +383,8 @@ def generate_example_rows(func: DocFunction):
             try:
                 if func.name in BINARY_OPERATORS:
                     example = f"({example})"
-                query_result = duckdb.sql(rf"select {example}::VARCHAR").fetchall()
+                run_example = re.sub(r'␣', ' ', example)
+                query_result = duckdb.sql(rf"select {run_example}::VARCHAR").fetchall()
                 if len(query_result) != 1:
                     example_result = 'Multiple rows: ' + ', '.join(
                         (
@@ -354,8 +396,18 @@ def generate_example_rows(func: DocFunction):
                     )
                 else:
                     example_result = (
-                        f"`{query_result[0][0]}`" if query_result[0][0] else "`NULL`"
+                        f"{query_result[0][0]}" if query_result[0][0] else "NULL"
                     )
+                    # replace leading and trailing spaces by '␣'
+                    nr_leading_spaces = 0
+                    nr_trailing_spaces = 0
+                    while example_result and example_result[0] == ' ':
+                        example_result = example_result[1:]
+                        nr_leading_spaces += 1
+                    while example_result and example_result[-1] == ' ':
+                        example_result = example_result[:-1]
+                        nr_trailing_spaces += 1
+                    example_result = f"{nr_leading_spaces * '␣'}{example_result}{nr_trailing_spaces * '␣'}"
             except duckdb.ParserException as e:
                 print(
                     f"Error for function '{func.name}', could not calculate example: '{example}'. Consider adding it via OVERRIDES'. {e}"

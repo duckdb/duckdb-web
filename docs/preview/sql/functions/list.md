@@ -917,7 +917,7 @@ SELECT flatten([[NULL]]);
 Even if the only contents of each sub-list is `NULL`, still concatenate them together. Note that no de-duplication occurs when flattening. See `list_distinct` function for de-duplication:
 
 ```sql
-SELECT flatten([[NULL],[NULL]]);
+SELECT flatten([[NULL], [NULL]]);
 ```
 
 ```text
@@ -931,5 +931,5 @@ For details, see the [lambda functions page]({% link docs/preview/sql/functions/
 
 ## Related Functions
 
-There are also [aggregate functions]({% link docs/preview/sql/functions/aggregates.md %}) `list` and `histogram` that produces lists and lists of structs.
-The [`unnest`]({% link docs/preview/sql/query_syntax/unnest.md %}) function is used to unnest a list by one level.
+* The [aggregate functions]({% link docs/preview/sql/functions/aggregates.md %}) `list` and `histogram` produce lists and lists of structs.
+* The [`unnest` function]({% link docs/preview/sql/query_syntax/unnest.md %}) is used to unnest a list by one level.

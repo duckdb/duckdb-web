@@ -94,7 +94,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `filename` | Add path of the containing file to each row, as a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. | `BOOL` | `false` |
 | `force_not_null` | Do not match values in the specified columns against the `NULL` string. In the default case where the `NULL` string is empty, this means that empty values are read as zero-length strings instead of `NULL`s. | `VARCHAR[]` | `[]` |
 | `header` | First line of each file contains the column names. | `BOOL` | `false` |
-| `hive_partitioning` | Interpret the path as a [Hive partitioned path]({% link docs/stable/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
+| `hive_partitioning` | Interpret the path as a [Hive partitioned path]({% link docs/stable/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |
 | `ignore_errors` | Ignore any parsing errors encountered. | `BOOL` | `false` |
 | `max_line_size` or `maximum_line_size`. Not available in the `COPY` statement. | Maximum line size, in bytes. | `BIGINT` | 2000000 |
 | `names` or `column_names` | Column names, as a list. See [example]({% link docs/stable/data/csv/tips.md %}#provide-names-if-the-file-does-not-contain-a-header). | `VARCHAR[]` | (empty) |
@@ -117,7 +117,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). See [example]({% link docs/stable/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
 | `union_by_name` | Align columns from different files [by column name]({% link docs/stable/data/multiple_files/combining_schemas.md %}#union-by-name) instead of position. Using this option increases memory consumption. | `BOOL` | `false` |
 
-> Tip DuckDB's CSV reader supports UTF-8 (default), UTF-16 and Latin-1 encordings (see the `encoding` option).
+> Tip DuckDB's CSV reader supports UTF-8 (default), UTF-16 and Latin-1 encodings (see the `encoding` option).
 > To convert files with different encodings, we recommend using the [`iconv` command-line tool](https://linux.die.net/man/1/iconv).
 >
 > ```bash

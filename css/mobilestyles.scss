@@ -27,7 +27,16 @@
 		display: none;
 	}
 	
-	
+}
+
+@media only screen and (max-width: 1100px) {
+	footer .sitefooter .footercontent .footernavigation{
+		width: 100%;
+		margin-bottom: 25px;
+		>div{
+			width: calc(100% / 5);
+		}
+	}
 }
 
 @media only screen and (max-width: 980px) {
@@ -85,6 +94,14 @@
 
 		.postdetails {
 			padding: 20px;
+		}
+	}
+	footer .sitefooter .footercontent .footernavigation{
+		flex-wrap: wrap;
+		column-gap: 20px;
+		row-gap: 40px;
+		>div{
+			width: calc(33.33% - 20px);
 		}
 	}
 }
@@ -285,6 +302,11 @@
 		main .wrap #main_content_wrap{
 			padding-right: 0;
 		}
+	}
+	
+	body.documentation.outdated main .wrap #main_content_wrap,
+	body.documentation.nightly main .wrap #main_content_wrap{
+		padding-top: 40px;
 	}
 	
 	header .headerline .headercontent .options .banner{

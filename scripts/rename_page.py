@@ -1,6 +1,6 @@
 import os
 import argparse
-
+import glob
 
 parser = argparse.ArgumentParser(
     description='Rename a page in the docs, propagate rename to archived versions and add correct redirects.'
@@ -19,18 +19,10 @@ parser.add_argument(
     help='Target path (e.g. docs/extensions/sqlite.md)',
     required=True,
 )
-parser.add_argument(
-    '--execute',
-    dest='execute',
-    action='store_true',
-    help='The unittest filter to apply',
-    default=False,
-)
 args = parser.parse_args()
 
 source_page = args.source_file
 target_page = args.target_file
-archive_dir = 'docs/archive'
 
 if not source_page.startswith('docs/') or not target_page.startswith('docs/'):
     raise Exception(
@@ -39,23 +31,15 @@ if not source_page.startswith('docs/') or not target_page.startswith('docs/'):
 
 jekyll_marker = '\n---\n\n'
 
-if not args.execute:
-    print('-----------------------------------------')
-    print('DRY RUN - NOT ACTUALLY PERFORMING RENAME ')
-    print('Run with --execute to perform rename     ')
-    print('-----------------------------------------')
-
 
 def rename_page(source, target):
     print(f'{source} -> {target}')
-    if not args.execute:
-        return
     with open(source, 'r') as f:
         text = f.read()
     index = text.find(jekyll_marker)
     if index < 0:
         raise Exception(
-            f"Could not find --- marker in jekyll file {source} - failed to add redirect"
+            f"Could not find front matter marker ('---') in Jekyll file {source} - failed to add redirect"
         )
     redirect_target = source.replace('.md', '')
     new_text = text[:index]
@@ -65,15 +49,16 @@ def rename_page(source, target):
         f.write(new_text)
     os.remove(source)
 
+    doc_files = glob.glob('**/*.md', recursive=True)
+    for doc_file in doc_files:
+        with open(doc_file, 'r+') as f:
+            doc_content = f.read()
 
-# rename the main page
+        doc_content = doc_content.replace(
+            f"{{% link {source} %}}", f"{{% link {target} %}}"
+        )
+        with open(doc_file, 'w') as f:
+            f.write(doc_content)
+
+
 rename_page(source_page, target_page)
-
-# rename the archived versions
-for archive_version in os.listdir(archive_dir):
-    current_archive_dir = os.path.join(archive_dir, archive_version)
-    archive_source = source_page.replace('docs', current_archive_dir)
-    archive_target = target_page.replace('docs', current_archive_dir)
-    if not os.path.isfile(archive_source):
-        continue
-    rename_page(archive_source, archive_target)

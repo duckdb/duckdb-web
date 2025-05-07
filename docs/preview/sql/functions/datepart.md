@@ -44,7 +44,7 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 | `week` | Week number | `weeks`, `w` | `31` |
 | `yearweek` | ISO year and week number in `YYYYWW` format | | `202131` |
 
-Note that the time zone parts are all zero unless a time zone extension such as [ICU]({% link docs/preview/extensions/icu.md %})
+Note that the time zone parts are all zero unless a time zone extension such as [ICU]({% link docs/preview/core_extensions/icu.md %})
 has been installed to support `TIMESTAMP WITH TIME ZONE`.
 
 ## Part Functions

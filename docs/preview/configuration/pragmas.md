@@ -459,7 +459,7 @@ SET log_query_path = '';
 
 ## Full-Text Search Indexes
 
-The `create_fts_index` and `drop_fts_index` options are only available when the [`fts` extension]({% link docs/preview/extensions/full_text_search.md %}) is loaded. Their usage is documented on the [Full-Text Search extension page]({% link docs/preview/extensions/full_text_search.md %}).
+The `create_fts_index` and `drop_fts_index` options are only available when the [`fts` extension]({% link docs/preview/core_extensions/full_text_search.md %}) is loaded. Their usage is documented on the [Full-Text Search extension page]({% link docs/preview/core_extensions/full_text_search.md %}).
 
 ## Verification
 

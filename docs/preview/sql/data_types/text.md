@@ -26,6 +26,15 @@ CREATE TABLE strings (
 
 The `VARCHAR` field allows storage of Unicode characters. Internally, the data is encoded as UTF-8.
 
+## Specifying a Compression Type
+
+You can specify a compression type for a string with the `USING COMPRESSION` clause.
+For example, to apply zstd compression, run:
+
+```sql
+CREATE TABLE tbl(s VARCHAR USING COMPRESSION zstd);
+```
+
 ## Text Type Values
 
 Values of the text type are character strings, also known as string values or simply strings. At runtime, string values are constructed in one of the following ways:
@@ -33,17 +42,15 @@ Values of the text type are character strings, also known as string values or si
 * referencing columns whose declared or implied type is the text data type
 * [string literals]({% link docs/preview/sql/data_types/literal_types.md %}#string-literals)
 * [casting]({% link docs/preview/sql/expressions/cast.md %}#explicit-casting) expressions to a text type
-* applying a [string operator]({% link docs/preview/sql/functions/char.md %}#text-functions-and-operators), or invoking a function that returns a text type value
+* applying a [string operator]({% link docs/preview/sql/functions/text.md %}#text-functions-and-operators), or invoking a function that returns a text type value
 
 ## Strings with Special Characters
 
-To use special characters in string, use [escape string literals]({% link docs/preview/sql/data_types/literal_types.md %}#escape-string-literals) or [dollar-quoted string literals]({% link docs/preview/sql/data_types/literal_types.md %}#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function]({% link docs/preview/sql/functions/char.md %}):
+To use special characters in string, use [escape string literals]({% link docs/preview/sql/data_types/literal_types.md %}#escape-string-literals) or [dollar-quoted string literals]({% link docs/preview/sql/data_types/literal_types.md %}#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function]({% link docs/preview/sql/functions/text.md %}):
 
 ```sql
 SELECT 'Hello' || chr(10) || 'world' AS msg;
 ```
-
-<!-- This output intentionally uses the duckbox formatter -->
 
 ```text
 ┌──────────────┐
@@ -56,4 +63,4 @@ SELECT 'Hello' || chr(10) || 'world' AS msg;
 
 ## Functions
 
-See [Text Functions]({% link docs/preview/sql/functions/char.md %}) and [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %}).
+See [Text Functions]({% link docs/preview/sql/functions/text.md %}) and [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %}).

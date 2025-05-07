@@ -121,7 +121,7 @@ CREATE TABLE nums AS
     FROM range(0, 3) t(i);
 ```
 
-This syntax can be used in combination with the [CSV reader]({% link docs/preview/data/csv/overview.md %}), the shorthand to read directly from CSV files without specifying a function, the [`FROM`-first syntax]({% link docs/preview/sql/query_syntax/from.md %}), and the [HTTP(S) support]({% link docs/preview/extensions/httpfs/https.md %}), yielding concise SQL commands such as the following:
+This syntax can be used in combination with the [CSV reader]({% link docs/preview/data/csv/overview.md %}), the shorthand to read directly from CSV files without specifying a function, the [`FROM`-first syntax]({% link docs/preview/sql/query_syntax/from.md %}), and the [HTTP(S) support]({% link docs/preview/core_extensions/httpfs/https.md %}), yielding concise SQL commands such as the following:
 
 ```sql
 CREATE TABLE flights AS
@@ -135,17 +135,25 @@ CREATE OR REPLACE TABLE flights AS
     FROM 'https://duckdb.org/data/flights.csv';
 ```
 
-### Limitations
+### Copying the Schema
 
-Is not possible to create tables using CTAS statements with constraints (primary keys, check constraints, etc.).
-As of DuckDB v1.2.1, the `WITH NO DATA` modifier in `CREATE TABLE ... AS ... SELECT ... WITH NO DATA` does not work as expected. Avoid using this clause.
-You can create a copy of the data as follows:
+You can create a copy of the table's schema (column names and types only) as follows:
+
+```sql
+CREATE TABLE t1 AS
+    FROM t2
+    WITH NO DATA;
+```
+
+Or:
 
 ```sql
 CREATE TABLE t1 AS
     FROM t2
     LIMIT 0;
 ```
+
+It is not possible to create tables using CTAS statements with constraints (primary keys, check constraints, etc.).
 
 ## Check Constraints
 

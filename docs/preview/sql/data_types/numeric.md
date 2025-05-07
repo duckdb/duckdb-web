@@ -102,10 +102,32 @@ SELECT
 
 ## Universally Unique Identifiers (`UUID`s)
 
-DuckDB supports universally unique identifiers (UUIDs) through the `UUID` type. These use 128 bits and are represented internally as `HUGEINT` values.
+DuckDB supports [universally unique identifiers (UUIDs)](https://en.wikipedia.org/wiki/Universally_unique_identifier) through the `UUID` type.
+These use 128 bits and are represented internally as `HUGEINT` values.
 When printed, they are shown with lowercase hexadecimal characters, separated by dashes as follows: `⟨12345678⟩-⟨1234⟩-⟨1234⟩-⟨1234⟩-⟨1234567890ab⟩`{:.language-sql .highlight} (using 36 characters in total including the dashes). For example, `4ac7a9e9-607c-4c8a-84f3-843f0191e3fd` is a valid UUID.
 
-To generate a new UUID, use the [`uuid()` utility function]({% link docs/preview/sql/functions/utility.md %}#uuid).
+DuckDB supports generating UUIDv4 and [UUIDv7](https://uuid7.com/) identifiers.
+To retrieve the version of a UUID value, use the [`uuid_extract_version` function]({% link docs/preview/sql/functions/utility.md %}#uuid_extract_versionuuid).
+
+### UUIDv4
+
+To generate a UUIDv4 value, use the
+[`uuid()` function]({% link docs/preview/sql/functions/utility.md %}#uuid) or it aliases
+the [`uuidv4()`]({% link docs/preview/sql/functions/utility.md %}#uuidv4) and [`gen_random_uuid()`]({% link docs/preview/sql/functions/utility.md %}#gen_random_uuid)
+functions.
+
+### UUIDv7
+
+To generate a UUIDv7 value, use the [`uuidv7()`]({% link docs/preview/sql/functions/utility.md %}#uuidv7) function.
+To retrieve the timestamp from a UUIDv7 value, use the [`uuid_extract_timestamp` function]({% link docs/preview/sql/functions/utility.md %}#uuid_extract_timestampuuidv7):
+
+```sql
+SELECT uuid_extract_timestamp(uuidv7()) AS ts;
+```
+
+|            ts             |
+|---------------------------|
+| 2025-04-19 15:51:20.07+00 |
 
 ## Functions
 

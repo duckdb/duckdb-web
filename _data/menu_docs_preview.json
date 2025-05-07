@@ -785,6 +785,10 @@
                 {
                   "page": "Subqueries",
                   "url": "subqueries"
+                },
+                {
+                  "page": "TRY",
+                  "url": "try"
                 }
               ]
             },
@@ -866,7 +870,7 @@
                 },
                 {
                   "page": "Text Functions",
-                  "url": "char"
+                  "url": "text"
                 },
                 {
                   "page": "Time Functions",
@@ -983,14 +987,6 @@
               "url": "overview"
             },
             {
-              "page": "Core Extensions",
-              "url": "core_extensions"
-            },
-            {
-              "page": "Community Extensions",
-              "url": "community_extensions"
-            },
-            {
               "page": "Installing Extensions",
               "url": "installing_extensions"
             },
@@ -1009,7 +1005,13 @@
             {
               "page": "Troubleshooting of Extensions",
               "url": "troubleshooting"
-            },
+            }
+          ]
+        },
+        {
+          "page": "Core Extensions",
+          "slug": "core_extensions",
+          "subfolderitems": [
             {
               "page": "AutoComplete",
               "url": "autocomplete"
@@ -1029,6 +1031,10 @@
             {
               "page": "Delta",
               "url": "delta"
+            },
+            {
+              "page": "Encodings",
+              "url": "encodings"
             },
             {
               "page": "Excel",
@@ -1377,6 +1383,10 @@
                 {
                   "page": "Benchmarks",
                   "url": "benchmarks"
+                },
+                {
+                  "page": "Working with Huge Databases",
+                  "url": "working_with_huge_databases"
                 }
               ]
             },

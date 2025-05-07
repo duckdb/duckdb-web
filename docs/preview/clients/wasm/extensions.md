@@ -26,19 +26,19 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 
 ## List of Officially Available Extensions
 
-| Extension name | Description | Aliases |
-|---|-----|--|
-| [autocomplete]({% link docs/preview/extensions/autocomplete.md %}) | Adds support for autocomplete in the shell                       |                 |
-| [excel]({% link docs/preview/extensions/excel.md %})               | Adds support for Excel-like format strings                       |                 |
-| [fts]({% link docs/preview/extensions/full_text_search.md %})      | Adds support for Full-Text Search Indexes                        |                 |
-| [icu]({% link docs/preview/extensions/icu.md %})                   | Adds support for time zones and collations using the ICU library |                 |
-| [inet]({% link docs/preview/extensions/inet.md %})                 | Adds support for IP-related data types and functions             |                 |
-| [json]({% link docs/preview/data/json/overview.md %})              | Adds support for JSON operations                                 |                 |
-| [parquet]({% link docs/preview/data/parquet/overview.md %})        | Adds support for reading and writing Parquet files               |                 |
-| [sqlite]({% link docs/preview/extensions/sqlite.md %})             | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
-| [sqlsmith]({% link docs/preview/extensions/sqlsmith.md %})         |                                                                  |                 |
-| [tpcds]({% link docs/preview/extensions/tpcds.md %})               | Adds TPC-DS data generation and query support                    |                 |
-| [tpch]({% link docs/preview/extensions/tpch.md %})                 | Adds TPC-H data generation and query support                     |                 |
+| Extension name                                                          | Description                                                      | Aliases         |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------- |
+| [autocomplete]({% link docs/preview/core_extensions/autocomplete.md %}) | Adds support for autocomplete in the shell                       |                 |
+| [excel]({% link docs/preview/core_extensions/excel.md %})               | Adds support for Excel-like format strings                       |                 |
+| [fts]({% link docs/preview/core_extensions/full_text_search.md %})      | Adds support for Full-Text Search Indexes                        |                 |
+| [icu]({% link docs/preview/core_extensions/icu.md %})                   | Adds support for time zones and collations using the ICU library |                 |
+| [inet]({% link docs/preview/core_extensions/inet.md %})                 | Adds support for IP-related data types and functions             |                 |
+| [json]({% link docs/preview/data/json/overview.md %})                   | Adds support for JSON operations                                 |                 |
+| [parquet]({% link docs/preview/data/parquet/overview.md %})             | Adds support for reading and writing Parquet files               |                 |
+| [sqlite]({% link docs/preview/core_extensions/sqlite.md %})             | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
+| [sqlsmith]({% link docs/preview/core_extensions/sqlsmith.md %})         |                                                                  |                 |
+| [tpcds]({% link docs/preview/core_extensions/tpcds.md %})               | Adds TPC-DS data generation and query support                    |                 |
+| [tpch]({% link docs/preview/core_extensions/tpch.md %})                 | Adds TPC-H data generation and query support                     |                 |
 
 WebAssembly is basically an additional platform, and there might be platform-specific limitations that make some extensions not able to match their native capabilities or to perform them in a different way. We will document here relevant differences for DuckDB-hosted extensions.
 

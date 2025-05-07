@@ -52,8 +52,8 @@ This section describes functions and operators for examining and manipulating [`
 | [`ltrim(string)`](#ltrimstring) | Removes any spaces from the left side of the `string`. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
-| [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
-| [`md5_number_higher(string)`](#md5_number_higherstring) | Returns the higher 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
+| [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
+| [`md5_number_upper(string)`](#md5_number_upperstring) | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
 | [`nfc_normalize(string)`](#nfc_normalizestring) | Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. |
 | [`not_ilike_escape(string, like_specifier, escape_character)`](#not_ilike_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/stable/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`not_like_escape(string, like_specifier, escape_character)`](#not_like_escapestring-like_specifier-escape_character) | Returns false if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/stable/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
@@ -410,16 +410,16 @@ SELECT
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
+| **Description** | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
 | **Example** | `md5_number_lower('123')` |
 | **Result** | `8091599832034528150` |
 
-#### `md5_number_higher(string)`
+#### `md5_number_upper(string)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `string` as a `BIGINT`. |
-| **Example** | `md5_number_higher('123')` |
+| **Description** | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
+| **Example** | `md5_number_upper('123')` |
 | **Result** | `6559309979213966368` |
 
 #### `nfc_normalize(string)`

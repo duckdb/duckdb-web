@@ -1700,6 +1700,8 @@ function GenerateJoinType(options) {
 	return [
 		Optional(Choice(0,[
 			Keyword("INNER"),
+			Keyword("ANTI"),
+			Keyword("SEMI"),
 			Sequence([
 				Choice(0, [Keyword("LEFT"), Keyword("RIGHT"), Keyword("FULL")]),
 				Optional(Keyword("OUTER"), "skip")
@@ -1783,11 +1785,13 @@ function GenerateTableFunction(options) {
 function GenerateSubquery(options) {
 	return [
 		Sequence([
+			Optional(Keyword("LATERAL")),
 			Sequence([
 				Keyword("("),
 				Expression("select-node"),
 				Keyword(")")
-			])
+			]),
+			Optional(Expandable("table-alias", options, "table-alias", GenerateTableAlias), "skip")
 		])
 	]
 }

@@ -83,19 +83,6 @@
 			<li class="item-menu active opened">
 				 {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {{ item.page }}
 			</li>
-					<ul style="display: {% if url_contains %}block;{% else %}none{% endif %}">
-				{% assign mylist = site.data[menudocfile].extensions | sample: 5 %}
-				{% for entry in mylist %}
-						<li class="mainentry-menu
-								{%- if url_parts[2] == mainentry.url %} active{% endif -%}
-								{%- if mainentry.url %} {{ mainentry.url }}{% endif -%}
-								{%- if url_parts[2] %} {{ url_parts[2]}}{% endif -%}
-								opened
-							">
-							<a href="/community_extensions/extensions/{{ entry }}">{{ entry }}</a>
-						</li>
-						{% endfor %}
-					</ul>
 		{% endif %}
 
 	

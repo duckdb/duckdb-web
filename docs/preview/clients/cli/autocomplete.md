@@ -3,7 +3,7 @@ layout: docu
 title: Autocomplete
 ---
 
-The shell offers context-aware autocomplete of SQL queries through the [`autocomplete` extension]({% link docs/preview/extensions/autocomplete.md %}). autocomplete is triggered by pressing `Tab`.
+The shell offers context-aware autocomplete of SQL queries through the [`autocomplete` extension]({% link docs/preview/core_extensions/autocomplete.md %}). autocomplete is triggered by pressing `Tab`.
 
 Multiple autocomplete suggestions can be present. You can cycle forwards through the suggestions by repeatedly pressing `Tab`, or `Shift+Tab` to cycle backwards. autocompletion can be reverted by pressing `ESC` twice.
 

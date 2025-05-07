@@ -25,7 +25,7 @@ FROM duckdb_extensions();
 | ...               | ...       | ...                                                          |
 
 This list will show which extensions are available, which extensions are installed, at which version, where it is installed, and more.
-The list includes most, but not all, available core extensions. For the full list, we maintain a [list of core extensions]({% link docs/preview/extensions/core_extensions.md %}).
+The list includes most, but not all, available core extensions. For the full list, we maintain a [list of core extensions]({% link docs/preview/core_extensions/overview.md %}).
 
 ## Built-In Extensions
 
@@ -37,7 +37,7 @@ SELECT *
 FROM 'test.json';
 ```
 
-To make the DuckDB distribution lightweight, only a few essential extensions are built-in, varying slightly per distribution. Which extension is built-in on which platform is documented in the [list of core extensions]({% link docs/preview/extensions/core_extensions.md %}#default-extensions).
+To make the DuckDB distribution lightweight, only a few essential extensions are built-in, varying slightly per distribution. Which extension is built-in on which platform is documented in the [list of core extensions]({% link docs/preview/core_extensions/overview.md %}#default-extensions).
 
 ## Installing More Extensions
 
@@ -57,7 +57,7 @@ There are two main methods of making DuckDB perform the **installation** and **l
 
 In DuckDB extensions can also be explicitly installed and loaded. Both non-autoloadable and autoloadable extensions can be installed this way.
 To explicitly install and load an extension, DuckDB has the dedicated SQL statements `LOAD` and `INSTALL`. For example,
-to install and load the [`spatial` extension]({% link docs/preview/extensions/spatial/overview.md %}), run:
+to install and load the [`spatial` extension]({% link docs/preview/core_extensions/spatial/overview.md %}), run:
 
 ```sql
 INSTALL spatial;
@@ -84,11 +84,11 @@ SELECT *
 FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
 ```
 
-DuckDB will automatically install and load the [`httpfs`]({% link docs/preview/extensions/httpfs/overview.md %}) extension. No explicit `INSTALL` or `LOAD` statements are required.
+DuckDB will automatically install and load the [`httpfs`]({% link docs/preview/core_extensions/httpfs/overview.md %}) extension. No explicit `INSTALL` or `LOAD` statements are required.
 
 Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is preferred to have users opt-in to the extension explicitly before use due to the way they modify behavior in DuckDB.
 
-To see which extensions can be autoloaded, check the [core extensions list]({% link docs/preview/extensions/core_extensions.md %}).
+To see which extensions can be autoloaded, check the [core extensions list]({% link docs/preview/core_extensions/overview.md %}).
 
 ### Community Extensions
 
