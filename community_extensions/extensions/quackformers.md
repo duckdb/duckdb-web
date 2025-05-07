@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: quackformers
   description: Bert-based embedding extension.
-  version: 0.0.1
+  version: 0.1.1
   language: Rust
   build: cargo
   license: MIT
@@ -19,18 +19,20 @@ extension:
 
 repo:
   github: martin-conur/quackformers
-  ref: e97691261cebf2595953d876a40ec2f0bebf7301
+  ref: c5416cdff9e72b28a6d336c125f7654e65897cb9
 
 docs:
   hello_world: |
-    FROM embed('this is an embedable sentence');
+    SELECT embed('this is an embeddable sentence'); -- This is vanilla BERT (https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+    SELECT embed_jina('this is an embeddable sentence'); -- This is Jina BERT 
   extended_description: |
-    Quackformers, a DuckDB extension for LLM-related tasks. Quackformers is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/)
+    Quackformers, a DuckDB extension embeddings. Intended to be used alongside VSS vector search for RAG-type functionalities.
+    Quackformers is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/)
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 399
-extension_download_count_pretty: 399
+extension_download_count: 387
+extension_download_count_pretty: 387
 image: '/images/community_extensions/social_preview/preview_community_extension_quackformers.png'
 layout: community_extension_doc
 ---
@@ -56,8 +58,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| embed         | scalar        | NULL        | NULL    | []       |
+| function_name | function_type |                             description                              | comment |                  examples                  |
+|---------------|---------------|----------------------------------------------------------------------|---------|--------------------------------------------|
+| embed         | scalar        | Embed text using vanilla BERT implementation, 384 output dim float32 | NULL    | [SELECT embed('Quack Quack Quack!');]      |
+| embed_jina    | scalar        | Embed text using Jina BERT implementation, 768 output dim float32    | NULL    | [SELECT embed_jina('Quack Quack Quack!');] |
 
 
