@@ -10,7 +10,7 @@ The `TRY` expression ensures that errors caused by the input rows in the child (
 ## Examples
 
 The following calls return errors when invoked without the `TRY` expression.
-When thet are wrapped into as `TRY` expression, they return `NULL`:
+When they are wrapped into as `TRY` expression, they return `NULL`:
 
 ### Casting
 
