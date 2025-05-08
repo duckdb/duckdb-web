@@ -294,25 +294,25 @@ CREATE OR REPLACE FUNCTION nq_concat(my_list, separator) AS (
 
 CREATE OR REPLACE FUNCTION rowgroup_counts(table_name, column_list) AS TABLE (
     FROM query('
-    WITH by_row group_id AS (
+    WITH by_rowgroup_id AS (
         FROM ' || dq(table_name) || '
         SELECT
         ceiling((count(*) over ()) / 122880) AS total_row groups,
-        floor(rowid / 122880) AS row group_id,
+        floor(rowid / 122880) AS rowgroup_id,
         ' || dq_concat(column_list, ',') || '
-    ), row group_id_counts AS (
-    FROM by_row group_id
+    ), rowgroup_id_counts AS (
+    FROM by_rowgroup_id
     SELECT
         case ' ||
         nq_concat(list_transform(column_list, (i) -> ' when grouping('||dq(i)||') = 0 then alias('||dq(i)||') '),' ')
             || ' end AS column_name,
-        coalesce(*columns(* exclude (row group_id, total_row groups))) AS column_value,
+        coalesce(*columns(* exclude (rowgroup_id, total_row groups))) AS column_value,
         first(total_row groups) AS total_row groups,
-        count(distinct row group_id) AS row group_id_count
+        count(distinct rowgroup_id) AS rowgroup_id_count
     GROUP BY
         GROUPING SETS ( ' || nq_concat(list_transform(dq_list(column_list), (j) -> '('||j||')'), ', ') ||' )
     )
-    FROM row group_id_counts
+    FROM rowgroup_id_counts
     SELECT
         '||sq(table_name)||' AS table_name,
         *
@@ -329,11 +329,11 @@ CREATE OR REPLACE FUNCTION summarize_rowgroup_counts(table_name, column_list) AS
         table_name,
         column_name,
         total_row groups,
-        min(row group_id_count) AS min_cluster_depth,
-        avg(row group_id_count) AS avg_cluster_depth,
-        max(row group_id_count) AS max_cluster_depth,
-        map([0.1, 0.25, 0.5, 0.75, 0.9], quantile_cont(row group_id_count, [0.1, 0.25, 0.5, 0.75, 0.9]))::json AS quantiles,
-        histogram(row group_id_count,[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 32, 64, 128, 256])::json AS histograms,
+        min(rowgroup_id_count) AS min_cluster_depth,
+        avg(rowgroup_id_count) AS avg_cluster_depth,
+        max(rowgroup_id_count) AS max_cluster_depth,
+        map([0.1, 0.25, 0.5, 0.75, 0.9], quantile_cont(rowgroup_id_count, [0.1, 0.25, 0.5, 0.75, 0.9]))::JSON AS quantiles,
+        histogram(rowgroup_id_count, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 32, 64, 128, 256])::JSON AS histograms,
     GROUP BY ALL
     ORDER BY ALL
 );
@@ -347,7 +347,7 @@ We can then call the `rowgroup_counts` function on any table and any columns!
 FROM rowgroup_counts('flights_hilbert', ['origin', 'dest']);
 ```
 
-| table_name      | column_name | column_value | total_row groups | row group_id_count |
+| table_name      | column_name | column_value | total_row groups | rowgroup_id_count |
 | :-------------- | :---------- | :----------- | --------------: | ----------------: |
 | flights_hilbert | dest        | PSG          |             238 |                 2 |
 | flights_hilbert | dest        | ESC          |             238 |                 2 |
@@ -356,7 +356,7 @@ FROM rowgroup_counts('flights_hilbert', ['origin', 'dest']);
 | flights_hilbert | dest        | TUL          |             238 |                 7 |
 | ...             | ...         | ...          |             ... |               ... |
 
-The `row group_id_count` column is a measurement of how many distinct row groups that a specific column value is present in, so it is an indicator of how much work DuckDB would need to do to pull all data associated with that value.
+The `rowgroup_id_count` column is a measurement of how many distinct row groups that a specific column value is present in, so it is an indicator of how much work DuckDB would need to do to pull all data associated with that value.
 
 > This calculation uses the [pseudo-column `rowid`]({% link docs/preview/sql/statements/select.md %}#row-ids), and it requires data to have been inserted in a single batch to be perfectly accurate.
 > It is directionally correct for data inserted in batches.
