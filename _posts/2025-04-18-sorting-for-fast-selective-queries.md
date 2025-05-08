@@ -2,8 +2,8 @@
 layout: post
 title: "Approximate Sorting for Fast Selective Queries"
 author: "Alex Monahan"
-thumb: "/images/blog/thumbs/gsheets.svg"
-image: "/images/blog/thumbs/gsheets.png"
+thumb: "/images/blog/thumbs/indexing-tips.svg"
+image: "/images/blog/thumbs/indexing-tips.png"
 excerpt: "Sorting data when loading speeds up selective read queries by an order of magnitude using DuckDB's automatic min/max zone map indexes. Approximate sorting expands this technique to work when filtering on multiple columns and also works well with timestamps. Converting strings to numeric representations allows them to also benefit from space filling curve approaches like Morton (Z-Order) and Hilbert encodings."
 tags: ["using DuckDB", "benchmarks"]
 ---
