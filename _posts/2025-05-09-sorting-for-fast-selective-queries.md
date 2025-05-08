@@ -63,7 +63,7 @@ This is fairly small when accessed locally but can be more of a challenge over a
 In the rest of the post, we'll run different benchmarks to demonstrate how pruning can help reducing the amount of network traffic required to answer certain queries.
 
 Our hypothetical use case is to serve a dashboard where people can explore a single `origin`, a single `dest` (destination), or an `origin`–`dest` pair.
-The `origin` and `dest` columns are three letter airport codes (like `LAX` or `JFK`).
+The `origin` and `dest` columns are three-letter airport codes (like `LAX` or `JFK`).
 We assume once you have picked one of those filters, you want all the rows that match and a few arbitrary columns.
 
 Our second experiment will add in a time component and additionally filter to the latest 1, 13, or 52 weeks of data in the dataset.
@@ -238,12 +238,12 @@ The way to interpret this is that for selective queries to work effectively, eac
 Smaller is better!
 However, there are likely diminishing returns when this metric is below the number of threads DuckDB is using.
 
-<div id="number_of_row groups_per_value" style="width:100%;height:400px;min-width:720px;"></div>
+<div id="number_of_rowgroups_per_value" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/number_of_row groups_per_value.json')
+    fetch('{{ site.baseurl }}/data/zonemaps/number_of_rowgroups_per_value.json')
         .then(res => res.json())
         .then(parsed_json => {
-            let my_element = document.getElementById('number_of_row groups_per_value');
+            let my_element = document.getElementById('number_of_rowgroups_per_value');
             Plotly.newPlot( my_element, parsed_json.data, parsed_json.layout );
             });
 </script>
@@ -358,7 +358,7 @@ FROM rowgroup_counts('flights_hilbert', ['origin', 'dest']);
 
 The `row group_id_count` column is a measurement of how many distinct row groups that a specific column value is present in, so it is an indicator of how much work DuckDB would need to do to pull all data associated with that value.
 
-> This calculation uses the [pseudo-column `rowid`]({% link docs/preview/sql/statements/select.md }#row-ids), and it requires data to have been inserted in a single batch to be perfectly accurate.
+> This calculation uses the [pseudo-column `rowid`]({% link docs/preview/sql/statements/select.md %}#row-ids), and it requires data to have been inserted in a single batch to be perfectly accurate.
 > It is directionally correct for data inserted in batches.
 
 ## Additional Techniques
@@ -388,7 +388,7 @@ for chunk in chunks:
     INSERT INTO sorted_table
         FROM unsorted_table
         WHERE chunking_column = chunk
-        ORDER BY other_columns...
+        ORDER BY other_columns...;
 ```
 
 This will have the effect of sorting initially by the chunking column, and then by the `other_columns`.
@@ -397,7 +397,7 @@ It may also take longer to run (since the data must be scanned once per chunk), 
 ### Sort the First Few Characters of Strings
 
 Approximate sorting works well for improving read performance, and the runtime of [DuckDB's radix sort algorithm]({% post_url 2021-08-27-external-sorting %}) is sensitive to the length of strings (by design!).
-The time complexity of the algorithm is `O(nk)`, where n is the number of rows, and k is the width of the sorting key.
+The time complexity of the algorithm is `O(nk)`, where `n` is the number of rows, and `k` is the width of the sorting key.
 Sorting by just the first few characters of a `VARCHAR` can be quicker and less compute intensive while achieving similar read performance.
 DuckDB's `VARCHAR` data type also inlines the first 12 bytes of the string, so sorting by less than those 12 bytes (so, under 12 characters when using ASCII) can improve performance.
 For example:
@@ -405,16 +405,16 @@ For example:
 ```sql
 CREATE OR REPLACE TABLE sorted_table AS
     FROM unsorted_table
-    ORDER BY varchar_column_to_sort[:12]
+    ORDER BY varchar_column_to_sort[:12];
 ```
 
 ### Filter by More Columns
 
-Adding filters to a where clause can be helpful if those columns being filtered have any kind of approximate order.
+Adding filters to a `WHERE` clause can be helpful if those columns being filtered have any kind of approximate order.
 For example, instead of just filtering by `customer_id`, if the table is sorted by `customer_type`, include that in the query also.
 Often, if the `customer_id` is known at query time, it is possible to know other metadata as well.
 
-### Adjust the row group Size
+### Adjust the Row Group Size
 
 One parameter that can be tuned for specific workloads is the number of rows within a row group (the `ROW_GROUP_SIZE`).
 If there are many unique values within a column being filtered on, then a smaller number of rows per row group could reduce the total number of rows that must be scanned.
@@ -440,7 +440,7 @@ Creative sorting approaches that use space filling curves and/or rounded timesta
 Once your dataset becomes large or you are storing it remotely, consider applying these techniques.
 Plus, these approaches can be used in nearly any columnar file format or database!
 
-Happy Analyzing!
+Happy analyzing!
 
 ## Appendix: Experiment Details
 
@@ -506,19 +506,14 @@ The outcome is a dataset that is somewhat sorted by one column and somewhat sort
 CREATE OR REPLACE FUNCTION main.zip_varchar(i, j, num_chars := 6) AS (
     -- By default using 6 characters from each string so that
     -- if data is ASCII, we can fit it all in the 12 byte inline portion of DuckDB's string representation
-    array_to_string(
-      flatten(
-        [
-          list_value(z[1], z[2])
-          FOR z
-          IN list_zip(
-              string_split(substr(i, 1, num_chars).rpad(num_chars, ' '), ''),
-              string_split(substr(j, 1, num_chars).rpad(num_chars, ' '), '')
-          )
-        ]
-      ),
-      ''
-    )
+    [
+        list_value(z[1], z[2])
+        FOR z
+        IN list_zip(
+            substr(i, 1, num_chars).rpad(num_chars, ' ').string_split(''),
+            substr(j, 1, num_chars).rpad(num_chars, ' ').string_split('')
+        )
+    ].flatten().array_to_string(' ')
 );
 
 CREATE TABLE IF NOT EXISTS flights_zipped_varchar AS
@@ -542,11 +537,11 @@ SELECT
 
 ## Space Filling Curves
 
-The goal of a space filling curve is to map multiple dimensions (in our case 2: origin and destination) down to 1 dimension, but to preserve the higher dimension locality between data points.
-One application of them is in geospatial analytics and it is a helpful illustration.
-If our dataset contained the latitude and longitude coordinates of every cafe on earth (one row per cafe), but we wanted to sort so that cafes that are physically close to one another are near each other in the list, we could use a space filling curve.
-Cafes that are somewhat close in both latitude and longitude will receive a similar Morton or Hilbert encoding value.
-This will allow us to quickly execute queries like “Find all cafes within this rectangular region on a map”.
+The goal of a space filling curve is to map multiple dimensions (in our case, two: origin and destination) down to a single dimension, but to preserve the higher dimension locality between data points.
+One application of space filling curves is in geospatial analytics and it is a helpful illustration.
+If our dataset contained the latitude and longitude coordinates of every café on earth (one row per café), but we wanted to sort so that cafés that are physically close to one another are near each other in the list, we could use a space filling curve.
+cafés that are somewhat close in both latitude and longitude will receive a similar Morton or Hilbert encoding value.
+This will allow us to quickly execute queries like “Find all cafés within this rectangular region on a map”.
 (A rectangle like that is called a bounding box in geospatial-land!)
 
 Morton and Hilbert encodings are designed to accept integers or floating point numbers.
@@ -574,7 +569,7 @@ CREATE OR REPLACE FUNCTION main.varchar_to_ubigint(i, num_chars := 8) AS (
 );
 ```
 
-The `morton_encode` and `hilbert_encode` functions from the lindel community extension can then be used within the `ORDER BY` clause to sort by the Morton or Hilbert encoding.
+The `morton_encode` and `hilbert_encode` functions from the [`lindel` community extension]({% link community_extensions/extensions/lindel.md %}) can then be used within the `ORDER BY` clause to sort by the Morton or Hilbert encoding.
 
 ```sql
 INSTALL lindel FROM community;
@@ -597,7 +592,7 @@ CREATE TABLE IF NOT EXISTS flights_hilbert AS
         ]::UBIGINT[2]);
 ```
 
-Alternatively, the spatial extension can be used to execute a Hilbert encoding.
+Alternatively, the [`spatial` extension]({% link docs/stable/extensions/spatial/overview.md %}) can be used to execute a Hilbert encoding.
 It requires a bounding box to be supplied, as this helps determine the granularity of the encoding for geospatial use cases.
 It performed similarly to the Hilbert approach included in the above plots.
 
@@ -633,7 +628,7 @@ CREATE OR REPLACE TABLE flights_hilbert_spatial AS
 Sorting by an “approximate time” involves truncating the time to the nearest value of a certain time granularity.
 This can be accomplished with the `date_trunc` function.
 Once data is sorted by an approximate time, other sorting techniques can be applied.
-In this case, the dataset is subsequently sorted by the Hilbert encoding of origin and dest.
+In this case, the dataset is subsequently sorted by the Hilbert encoding of `origin` and `dest`.
 
 ```sql
 CREATE TABLE IF NOT EXISTS flights_hilbert_day AS
