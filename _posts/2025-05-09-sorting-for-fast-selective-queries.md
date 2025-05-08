@@ -19,7 +19,7 @@ Cartesian was the smallest distribution that included box plots
 <div align="center">
 <img src="/images/blog/sorting-for-fast-selective-queries/Hilbert-curve_rounded-gradient-animated.gif" alt="Animated Hilbert Encoding across 2 axes." width="600"/>
 
-An animated Hilbert space filling curve by <a href="//commons.wikimedia.org/w/index.php?title=User:TimSauder&amp;action=edit&amp;redlink=1" class="new" title="User:TimSauder (page does not exist)">TimSauder</a> – <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=67998181">Wikimedia Commons</a>
+<a href="https://commons.wikimedia.org/w/index.php?curid=67998181">An animated Hilbert space filling curve</a> by <a href="//commons.wikimedia.org/w/index.php?title=User:TimSauder&amp;action=edit&amp;redlink=1" class="new" title="User:TimSauder (page does not exist)">TimSauder</a> – <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>
 
 </div>
 
@@ -78,19 +78,19 @@ Let's have a look at some illustrative results first and dive into the details i
 The control groups are:
 
 - `random`: Sort by a hash – the worst case scenario!
-- `origin`: Single-column sort on origin
-- `origin-dest`: Sort on origin, then on destination
+- `origin`: Single-column sort on `origin`
+- `origin-dest`: Sort on `origin`, then on `destination`
 
 Our alternative sorting approaches are:
 
-- `zipped_varchar`: Sort by one letter at a time, alternating between origin and destination. This approach is implemented using a custom SQL macro – see the [Appendix](#appendix-experiment-details) for details!
-- `morton`: Convert origin and destination into integers, then order by [Morton encoding (Z-order)](https://en.wikipedia.org/wiki/Z-order_curve)
-- `hilbert`: Convert origin and destination into integers, then order by [Hilbert encoding](https://en.wikipedia.org/wiki/Hilbert_curve)
+- `zipped_varchar`: Sort by one letter at a time, alternating between `origin` and `destination`. This approach is implemented using a custom SQL macro – see the [Appendix](#appendix-experiment-details) for details!
+- `morton`: Convert `origin` and `destination` into integers, then order by [Morton encoding (Z-order)](https://en.wikipedia.org/wiki/Z-order_curve)
+- `hilbert`: Convert `origin` and `destination` into integers, then order by [Hilbert encoding](https://en.wikipedia.org/wiki/Hilbert_curve)
 
 > The Morton and Hilbert encoding functions come from the [`lindel` DuckDB community extension]({% link community_extensions/extensions/lindel.md %}), contributed by [Rusty Conover](https://github.com/rustyconover).
 > Thank you to Rusty and the folks who have built the [`lindel` Rust crate](https://crates.io/crates/lindel) upon which the DuckDB extension is based!
 > The [`spatial` extension]({% link docs/stable/extensions/spatial/overview.md %}) also contains an [`ST_Hilbert` function]({% link docs/stable/extensions/spatial/functions.md %}#st_hilbert) that works similarly.
-> Thanks to [[Max Gabrielsson](https://github.com/Maxxen)] and the GDAL community!
+> Thanks to [Max Gabrielsson](https://github.com/Maxxen) and the GDAL community!
 
 Both Morton and Hilbert are space filling curve algorithms that are designed to combine multiple columns into an order that preserves some approximate ordering for both columns.
 In the geospatial world, they are often used to preserve approximate ordering of latitude and longitude.
@@ -110,7 +110,7 @@ Querying a local DuckDB file showed very similar patterns, but with much faster 
             });
 </script>
 
-We can see that when filtering **by origin**, the `origin` single column sort is a full order of magnitude faster than randomly distributed data, requiring only 1.6 seconds instead of 16.
+We can see that when filtering **by `origin`**, the `origin` single column sort is a full order of magnitude faster than randomly distributed data, requiring only 1.6 seconds instead of 16.
 Our advanced techniques are nearly as fast as the dedicated sort on `origin`.
 
 <div id="remote_s3_query_performance_by_destination" style="width:100%;height:400px;min-width:720px;"></div>
@@ -123,8 +123,8 @@ Our advanced techniques are nearly as fast as the dedicated sort on `origin`.
             });
 </script>
 
-However, if you look at the plot **by destination**, we see the value of the more balanced techniques.
-The `origin_dest` approach of just appending destination to the list of sorted columns misses out on much of the benefits.
+However, if you look at the plot **by `destination`**, we see the value of the more balanced techniques.
+The `origin_dest` approach of just appending `destination` to the list of sorted columns misses out on much of the benefits.
 
 <div id="remote_s3_query_performance_by_origin_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
@@ -136,7 +136,7 @@ The `origin_dest` approach of just appending destination to the list of sorted c
             });
 </script>
 
-When querying for a **specific origin and destination pair,** all approaches are significantly faster than random.
+When querying for a **specific `origin` and `destination` pair,** all approaches are significantly faster than random.
 However, zooming in on the non-random techniques, the more advanced sorting approaches are as fast or slightly faster than sorting by `origin` or by `origin` and then `destination`.
 Performance is also faster than the other experiments, as less data needs to be read (since the filter is more selective).
 
@@ -168,9 +168,9 @@ This yields a total of 9 scenarios.
             });
 </script>
 
-When querying a week of data for a specific origin, sorting at the daily level performs the best.
+When querying a week of data for a specific `origin`, sorting at the daily level performs the best.
 However, sorting by a more approximate time (month or year) performs better when analyzing the latest 13 or 52 weeks of data.
-This is because the more approximate time buckets allow the Hilbert encoding to separate origins into different row groups more effectively.
+This is because the more approximate time buckets allow the Hilbert encoding to separate `origin`s into different row groups more effectively.
 
 <div id="remote_s3_query_performance_by_date_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
@@ -194,8 +194,8 @@ Querying by time and destination follows a very similar pattern, with the ideal 
             });
 </script>
 
-Filtering by origin and destination shows a very different outcome, with a yearly granularity being superior across the board!
-This is because the origin and destination filters are much more effective at skipping row groups when the timestamp ordering is very approximate.
+Filtering by `origin` and `destination` shows a very different outcome, with a yearly granularity being superior across the board!
+This is because the `origin` and `destination` filters are much more effective at skipping row groups when the timestamp ordering is very approximate.
 
 As a result, the best compromise across those three workloads is likely to be the very approximate yearly granularity.
 See!
@@ -221,7 +221,7 @@ When DuckDB receives a SQL query that contains a filter, before reading the colu
 Could this filter value possibly fall within the minimum/maximum range of this column segment?
 If it is not possible, then DuckDB can skip reading the data in that entire row group.
 
-For example, if we are searching for an origin of `PHX`, but the minimum origin in a segment is `ABQ` and the maximum is `ATL`, then we can skip reading the data in that segment.
+For example, if we are searching for an `origin` of `PHX`, but the minimum `origin` in a segment is `ABQ` and the maximum is `ATL`, then we can skip reading the data in that segment.
 However, if in another segment the min-max were `ABQ` and `SFO`, then we must read that segment and check each row for `PHX`.
 
 So our goal is to sort our data so that each subset of the data we want to retrieve is only stored in a few row groups.
@@ -251,11 +251,11 @@ However, there are likely diminishing returns when this metric is below the numb
 What can be interpreted from this graph?
 The random ordering spreads nearly every value across 100 or more row groups (the visualization is truncated at 100 row groups).
 This highlights how a random ordering will be very slow for selective queries!
-Sorting by origin greatly reduces the number of row groups that each origin is spread across, but destinations are still spread widely.
-Sorting by origin and destination retains the tight distribution of origins and slightly improves the metric for destinations.
+Sorting by `origin` greatly reduces the number of row groups that each `origin` is spread across, but `destination`s are still spread widely.
+Sorting by `origin` and `destination` retains the tight distribution of `origin`s and slightly improves the metric for `destination`s.
 
-The three advanced approaches (`zipped_varchar`, `morton`, and `hilbert`) are more balanced, with both origins and destinations only occuring in a moderate number of row groups.
-While they score worse in the origin metric than when sorting directly by origin, most origins are spread across fewer row groups than a modern laptop processor's core count, so high performance is retained.
+The three advanced approaches (`zipped_varchar`, `morton`, and `hilbert`) are more balanced, with both `origin`s and `destination`s only occuring in a moderate number of row groups.
+While they score worse in the `origin` metric than when sorting directly by `origin`, most `origin`s are spread across fewer row groups than a modern laptop processor's core count, so high performance is retained.
 The Hilbert encoding is the most balanced, so by this metric it would be declared the victor!
 
 To calculate this metric, we define several SQL macros using dynamic SQL and the `query` table function.
@@ -471,7 +471,7 @@ However, it is worth noting that overall insert performance slows down by nearly
 
 <details markdown='1'>
 <summary markdown='span'>
-    For reproducibility, here are the very standard queries used to initially load the data from Parquet, sort randomly, sort by origin, and sort by origin and then destination.
+    For reproducibility, here are the very standard queries used to initially load the data from Parquet, sort randomly, sort by `origin`, and sort by `origin` and then `destination`.
 </summary>
 
 ```sql
@@ -537,7 +537,7 @@ SELECT
 
 ## Space Filling Curves
 
-The goal of a space filling curve is to map multiple dimensions (in our case, two: origin and destination) down to a single dimension, but to preserve the higher dimension locality between data points.
+The goal of a space filling curve is to map multiple dimensions (in our case, two: `origin` and `destination`) down to a single dimension, but to preserve the higher dimension locality between data points.
 One application of space filling curves is in geospatial analytics and it is a helpful illustration.
 If our dataset contained the latitude and longitude coordinates of every café on earth (one row per café), but we wanted to sort so that cafés that are physically close to one another are near each other in the list, we could use a space filling curve.
 cafés that are somewhat close in both latitude and longitude will receive a similar Morton or Hilbert encoding value.
