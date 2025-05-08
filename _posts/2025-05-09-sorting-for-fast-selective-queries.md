@@ -267,10 +267,10 @@ To calculate this metric, we define several SQL macros using dynamic SQL and the
 
 ```sql
 CREATE OR REPLACE FUNCTION sq(my_varchar) AS (
-    ''''||replace(my_varchar,'''', '''''')||''''
+    '''' || replace(my_varchar,'''', '''''') || ''''
 );
 CREATE OR REPLACE FUNCTION dq(my_varchar) AS (
-    '"'||replace(my_varchar,'"', '""')||'"'
+    '"' || replace(my_varchar,'"', '""') || '"'
 );
 CREATE OR REPLACE FUNCTION nq(my_varchar) AS (
     replace(my_varchar, ';', 'No semicolons are permitted here')
