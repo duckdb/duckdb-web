@@ -8,7 +8,7 @@ excerpt: DuckDB can run all TPC-H SF300 queries on a Raspberry Pi board.
 tags: ["benchmark"]
 --- 
 
-> Update (March 2025): The configuration described in this post can now run all TPC-H queries on the SF1,000 data set with the latest version of DuckDB!
+> Update (April 2025): The configuration described in this post can now run **all TPC-H queries on the SF1,000 dataset** with the latest stable version of DuckDB, v1.2.2!
 
 ## Introduction
 
@@ -81,7 +81,7 @@ For the measurements, we used our `tpch-queries.sql` script, which performs a co
 <summary markdown='span'>
 `tpch-queries.sql`
 </summary>
-<pre>
+```sql
 PRAGMA version;
 SET enable_progress_bar = false;
 LOAD tpch;
@@ -108,20 +108,20 @@ PRAGMA tpch(19);
 PRAGMA tpch(20);
 PRAGMA tpch(21);
 PRAGMA tpch(22);
-</pre>
+```
 </details>
 
 We ran the script as follows:
 
 ```batch
-duckdb tpch-sf${SF}.db -c '.read tpch-queries.sql'
+duckdb tpch-sf${SF}.db -f tpch-queries.sql
 ```
 
 We did not encounter any crashes, errors or incorrect results.
 The following table contains the aggregated runtimes:
 
 | Scale factor | Storage      | Geometric mean runtime | Total runtime |
-|-------------:|--------------|-----------------------:|--------------:|
+|--------------|--------------|-----------------------:|--------------:|
 | SF100        | microSD card |                 23.8 s |       769.9 s |
 | SF100        | NVMe SSD     |                 11.7 s |       372.3 s |
 | SF300        | microSD card |                171.9 s |     4,866.5 s |

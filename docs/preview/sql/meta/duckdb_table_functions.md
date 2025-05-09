@@ -356,7 +356,7 @@ The `duckdb_variables()` function provides metadata about the variables availabl
 | Column | Description | Type |
 |:-|:---|:-|
 | `name` | The name of the variable, e.g., `x`. | `VARCHAR` |
-| `value` | The value of the variable, e.g. `12`. | `VARCHAR` |
+| `value` | The value of the variable, e.g., `12`. | `VARCHAR` |
 | `type` | The type of the variable, e.g., `INTEGER`. | `VARCHAR` |
 
 ## `duckdb_views`

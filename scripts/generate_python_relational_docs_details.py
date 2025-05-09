@@ -1,3 +1,31 @@
+from dataclasses import dataclass, field
+
+
+@dataclass
+class PythonRelAPIParamDetails:
+    # configure param details
+    parameter_name: str = None
+    parameter_type: list[str] = None
+    parameter_default: str = None
+    parameter_description: str = None
+
+
+@dataclass
+class PythonRelAPIDetails:
+    # Configure details for each method
+    additional_description: str = ''  # text to be appended to the method description
+    aliases: list[str] = None  # list of methods the methods is alias of
+    parameters: list[PythonRelAPIParamDetails] = None  # method parameter description
+    example: str = (
+        None  # either an entire example code, either the code to be placed in DEFAULT_EXAMPLE
+    )
+    use_default_example: bool = (
+        True  # True if it the example should be used in DEFAULT_EXAMPLE
+    )
+    result: str = None  # the result of the example code execution
+    result_type: str = "text"  # how the result to be presented (text, sql)
+
+
 DEFAULT_EXAMPLE = '''```python
 import duckdb
 
@@ -20,17 +48,9 @@ rel = duckdb_conn.sql("""
 PLACEHOLDER_EXAMPLE = "```python\n{code_example}\n```"
 PLACEHOLDER_RESULT = "```{result_type}\n{result}\n```"
 
-# Configure examples for each section method
-# example: str = either an entire example code, either the code to be placed in DEFAULT_EXAMPLE
-# result: str = the result of the example code execution
-# default: bool = True if it the example should be used in DEFAULT_EXAMPLE
-# additional_description: str = text to be appended to the method description
-# result_type: str = how the result to be presented (default text)
-# aliases: str = list of methods the methods is alias of
-
-CREATION_MEMBER_CODE_EXAMPLE_MAP = {
-    'from_arrow': {
-        'example': """
+CREATION_METHODS_MAP = {
+    'from_arrow': PythonRelAPIDetails(
+        example="""
 import duckdb
 import pyarrow as pa
 
@@ -44,7 +64,7 @@ rel = duckdb_conn.from_arrow(example_table)
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌──────┬─────────┐
 │  id  │  text   │
 │ int8 │ varchar │
@@ -52,10 +72,17 @@ rel.show()
 │    1 │ a       │
 └──────┴─────────┘
 """,
-        'default': False,
-    },
-    'from_csv_auto': {
-        'example': """
+        use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="arrow_object",
+                parameter_type=["pyarrow.Table", "pyarrow.RecordBatch"],
+                parameter_description="Arrow object to create a relation from",
+            )
+        ],
+    ),
+    'from_csv_auto': PythonRelAPIDetails(
+        example="""
 import csv
 import duckdb
 
@@ -71,7 +98,7 @@ rel = duckdb_conn.from_csv_auto("code_example.csv")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
@@ -79,11 +106,11 @@ rel.show()
 │     1 │ a       │
 └───────┴─────────┘
 """,
-        'default': False,
-        'aliases': ['read_csv'],
-    },
-    'from_df': {
-        'example': """
+        use_default_example=False,
+        aliases=['read_csv'],
+    ),
+    'from_df': PythonRelAPIDetails(
+        example="""
 import duckdb
 import pandas as pd
 
@@ -95,7 +122,7 @@ rel = duckdb_conn.from_df(df)
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
@@ -103,10 +130,10 @@ rel.show()
 │     1 │ a       │
 └───────┴─────────┘
 """,
-        'default': False,
-    },
-    'from_parquet': {
-        'example': """
+        use_default_example=False,
+    ),
+    'from_parquet': PythonRelAPIDetails(
+        example="""
 import duckdb
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -123,7 +150,7 @@ rel = duckdb_conn.from_parquet("code_example.parquet")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌──────┬─────────┐
 │  id  │  text   │
 │ int8 │ varchar │
@@ -131,11 +158,11 @@ rel.show()
 │    1 │ a       │
 └──────┴─────────┘
 """,
-        'default': False,
-        'aliases': ['read_parquet'],
-    },
-    'from_query': {
-        'example': """
+        use_default_example=False,
+        aliases=['read_parquet'],
+    ),
+    'from_query': PythonRelAPIDetails(
+        example="""
 import duckdb
 
 duckdb_conn = duckdb.connect()
@@ -144,7 +171,7 @@ rel = duckdb_conn.from_query("from range(1,2) tbl(id)")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┐
 │  id   │
 │ int64 │
@@ -152,10 +179,10 @@ rel.show()
 │     1 │
 └───────┘
 """,
-        'default': False,
-    },
-    'query': {
-        'example': """
+        use_default_example=False,
+    ),
+    'query': PythonRelAPIDetails(
+        example="""
 import duckdb
 
 duckdb_conn = duckdb.connect()
@@ -164,7 +191,7 @@ rel = duckdb_conn.query("from range(1,2) tbl(id)")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┐
 │  id   │
 │ int64 │
@@ -172,10 +199,10 @@ rel.show()
 │     1 │
 └───────┘
 """,
-        'default': False,
-    },
-    'read_csv': {
-        'example': """
+        use_default_example=False,
+    ),
+    'read_csv': PythonRelAPIDetails(
+        example="""
 import csv
 import duckdb
 
@@ -191,7 +218,7 @@ rel = duckdb_conn.read_csv("code_example.csv")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
@@ -199,11 +226,11 @@ rel.show()
 │     1 │ a       │
 └───────┴─────────┘
 """,
-        'default': False,
-        'aliases': ['from_csv_auto'],
-    },
-    'read_json': {
-        'example': """
+        use_default_example=False,
+        aliases=['from_csv_auto'],
+    ),
+    'read_json': PythonRelAPIDetails(
+        example="""
 import duckdb
 import json
 
@@ -216,7 +243,7 @@ rel = duckdb_conn.read_json("code_example.json")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
@@ -224,10 +251,10 @@ rel.show()
 │     1 │ a       │
 └───────┴─────────┘
 """,
-        'default': False,
-    },
-    'read_parquet': {
-        'example': """
+        use_default_example=False,
+    ),
+    'read_parquet': PythonRelAPIDetails(
+        example="""
 import duckdb
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -244,7 +271,7 @@ rel = duckdb_conn.read_parquet("code_example.parquet")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌──────┬─────────┐
 │  id  │  text   │
 │ int8 │ varchar │
@@ -252,11 +279,11 @@ rel.show()
 │    1 │ a       │
 └──────┴─────────┘
 """,
-        'default': False,
-        'aliases': ['from_parquet'],
-    },
-    'sql': {
-        'example': """
+        use_default_example=False,
+        aliases=['from_parquet'],
+    ),
+    'sql': PythonRelAPIDetails(
+        example="""
 import duckdb
 
 duckdb_conn = duckdb.connect()
@@ -265,7 +292,7 @@ rel = duckdb_conn.sql("from range(1,2) tbl(id)")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┐
 │  id   │
 │ int64 │
@@ -273,10 +300,10 @@ rel.show()
 │     1 │
 └───────┘
 """,
-        'default': False,
-    },
-    'table': {
-        'example': """
+        use_default_example=False,
+    ),
+    'table': PythonRelAPIDetails(
+        example="""
 import duckdb
 
 duckdb_conn = duckdb.connect()
@@ -287,7 +314,7 @@ rel = duckdb_conn.table("code_example")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┐
 │  id   │
 │ int64 │
@@ -295,10 +322,10 @@ rel.show()
 │     1 │
 └───────┘
 """,
-        'default': False,
-    },
-    'table_function': {
-        'example': '''
+        use_default_example=False,
+    ),
+    'table_function': PythonRelAPIDetails(
+        example='''
 import duckdb
 
 duckdb_conn = duckdb.connect()
@@ -312,7 +339,7 @@ rel = duckdb_conn.table_function(name="get_record_for", parameters=[1])
 
 rel.show()
 ''',
-        'result': """
+        result="""
 ┌───────────────┐
 │ (1 * "range") │
 │     int64     │
@@ -320,10 +347,10 @@ rel.show()
 │             1 │
 └───────────────┘
 """,
-        'default': False,
-    },
-    'values': {
-        'example': """
+        use_default_example=False,
+    ),
+    'values': PythonRelAPIDetails(
+        example="""
 import duckdb
 
 duckdb_conn = duckdb.connect()
@@ -332,7 +359,7 @@ rel = duckdb_conn.values([1, 'a'])
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┬─────────┐
 │ col0  │  col1   │
 │ int32 │ varchar │
@@ -340,10 +367,10 @@ rel.show()
 │     1 │ a       │
 └───────┴─────────┘
 """,
-        'default': False,
-    },
-    'view': {
-        'example': """
+        use_default_example=False,
+    ),
+    'view': PythonRelAPIDetails(
+        example="""
 import duckdb
 
 duckdb_conn = duckdb.connect()
@@ -354,7 +381,7 @@ rel = duckdb_conn.view("code_example")
 
 rel.show()
 """,
-        'result': """
+        result="""
 ┌───────┐
 │  id   │
 │ int64 │
@@ -362,18 +389,18 @@ rel.show()
 │     1 │
 └───────┘
 """,
-        'default': False,
-    },
+        use_default_example=False,
+    ),
 }
 
-DEFINITION_MEMBER_CODE_EXAMPLE_MAP = {
-    'columns': {
-        'example': 'rel.columns',
-        'result': " ['id', 'description', 'value', 'created_timestamp']",
-    },
-    'describe': {
-        'example': 'rel.describe()',
-        'result': """
+DEFINITION_METHODS_MAP = {
+    'columns': PythonRelAPIDetails(
+        example='rel.columns',
+        result=" ['id', 'description', 'value', 'created_timestamp']",
+    ),
+    'describe': PythonRelAPIDetails(
+        example='rel.describe()',
+        result="""
 ┌─────────┬──────────────────────────────────────┬─────────────────┬────────────────────┬────────────────────────────┐
 │  aggr   │                  id                  │   description   │       value        │     created_timestamp      │
 │ varchar │               varchar                │     varchar     │       double       │          varchar           │
@@ -386,30 +413,30 @@ DEFINITION_MEMBER_CODE_EXAMPLE_MAP = {
 │ median  │ NULL                                 │ NULL            │                5.0 │ NULL                       │
 └─────────┴──────────────────────────────────────┴─────────────────┴────────────────────┴────────────────────────────┘ 
 """,
-    },
-    'description': {
-        'example': 'rel.description',
-        'result': """
+    ),
+    'description': PythonRelAPIDetails(
+        example='rel.description',
+        result="""
 [('id', 'UUID', None, None, None, None, None),
  ('description', 'STRING', None, None, None, None, None),
  ('value', 'NUMBER', None, None, None, None, None),
  ('created_timestamp', 'DATETIME', None, None, None, None, None)]  
 """,
-    },
-    'dtypes': {
-        'example': 'rel.dtypes',
-        'result': ' [UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]',
-        'aliases': ['types'],
-    },
-    'explain': {
-        'example': 'rel.explain()',
-        'result': """
+    ),
+    'dtypes': PythonRelAPIDetails(
+        example='rel.dtypes',
+        result=' [UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]',
+        aliases=['types'],
+    ),
+    'explain': PythonRelAPIDetails(
+        example='rel.explain()',
+        result="""
 ┌───────────────────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             id            │\n│        description        │\n│           value           │\n│     created_timestamp     │\n│                           │\n│          ~9 Rows          │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│           RANGE           │\n│    ────────────────────   │\n│      Function: RANGE      │\n│                           │\n│          ~9 Rows          │\n└───────────────────────────┘\n\n
 """,
-    },
-    'query-1': {
-        'example': 'rel.query(virtual_table_name="rel_view", sql_query="from rel")\n\nduckdb_conn.sql("show rel_view")',
-        'result': """
+    ),
+    'query-1': PythonRelAPIDetails(
+        example='rel.query(virtual_table_name="rel_view", sql_query="from rel")\n\nduckdb_conn.sql("show rel_view")',
+        result="""
 ┌───────────────────┬──────────────────────────┬─────────┬─────────┬─────────┬─────────┐
 │    column_name    │       column_type        │  null   │   key   │ default │  extra  │
 │      varchar      │         varchar          │ varchar │ varchar │ varchar │ varchar │
@@ -420,16 +447,18 @@ DEFINITION_MEMBER_CODE_EXAMPLE_MAP = {
 │ created_timestamp │ TIMESTAMP WITH TIME ZONE │ YES     │ NULL    │ NULL    │ NULL    │
 └───────────────────┴──────────────────────────┴─────────┴─────────┴─────────┴─────────┘
 """,
-    },
-    'set_alias': {
-        'example': "rel.set_alias('abc').select('abc.id')",
-        'result': 'In the SQL query, the alias will be `abc`',
-    },
-    'alias': {'example': 'rel.alias', 'result': 'unnamed_relation_43c808c247431be5'},
-    'shape': {'example': 'rel.shape', 'result': '(9, 4)'},
-    'show': {
-        'example': 'rel.show()',
-        'result': """
+    ),
+    'set_alias': PythonRelAPIDetails(
+        example="rel.set_alias('abc').select('abc.id')",
+        result='In the SQL query, the alias will be `abc`',
+    ),
+    'alias': PythonRelAPIDetails(
+        example='rel.alias', result='unnamed_relation_43c808c247431be5'
+    ),
+    'shape': PythonRelAPIDetails(example='rel.shape', result='(9, 4)'),
+    'show': PythonRelAPIDetails(
+        example='rel.show()',
+        result="""
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -445,30 +474,30 @@ DEFINITION_MEMBER_CODE_EXAMPLE_MAP = {
 │ 08fdcbf8-4e53-4290-9e81-423af263b518 │ value is uneven │     9 │ 2025-04-09 15:49:20.642+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
-    },
-    'sql_query': {
-        'example': 'rel.sql_query()',
-        'result': """SELECT 
+    ),
+    'sql_query': PythonRelAPIDetails(
+        example='rel.sql_query()',
+        result="""SELECT 
     gen_random_uuid() AS id, 
     concat('value is ', CASE  WHEN ((mod("range", 2) = 0)) THEN ('even') ELSE 'uneven' END) AS description, 
     "range" AS "value", 
     (now() + CAST(concat("range", ' ', 'minutes') AS INTERVAL)) AS created_timestamp 
 FROM "range"(1, 10)
 """,
-        'result_type': "sql",
-    },
-    'type': {'example': 'rel.type', 'result': 'QUERY_RELATION'},
-    'types': {
-        'example': 'rel.types',
-        'result': '[UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]',
-        'aliases': ['dtypes'],
-    },
+        result_type="sql",
+    ),
+    'type': PythonRelAPIDetails(example='rel.type', result='QUERY_RELATION'),
+    'types': PythonRelAPIDetails(
+        example='rel.types',
+        result='[UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]',
+        aliases=['dtypes'],
+    ),
 }
 
-TRANSFORMATION_MEMBER_CODE_EXAMPLE_MAP = {
-    "aggregate": {
-        "example": "rel = rel.aggregate('max(value)')",
-        "result": """
+TRANSFORMATION_METHODS_MAP = {
+    "aggregate": PythonRelAPIDetails(
+        example="rel = rel.aggregate('max(value)')",
+        result="""
 ┌──────────────┐
 │ max("value") │
 │    int64     │
@@ -476,9 +505,9 @@ TRANSFORMATION_MEMBER_CODE_EXAMPLE_MAP = {
 │            9 │
 └──────────────┘
         """,
-    },
-    'apply': {
-        'example': """
+    ),
+    'apply': PythonRelAPIDetails(
+        example="""
 rel.apply(
     function_name="count", 
     function_aggr="id", 
@@ -486,7 +515,7 @@ rel.apply(
     projected_columns="description"
 )
 """,
-        'result': """
+        result="""
 ┌─────────────────┬───────────┐
 │   description   │ count(id) │
 │     varchar     │   int64   │
@@ -495,11 +524,11 @@ rel.apply(
 │ value is even   │         4 │
 └─────────────────┴───────────┘
 """,
-        'default': True,
-    },
-    'cross': {
-        'example': 'rel.cross(other_rel=rel.set_alias("other_rel"))',
-        'result': """
+        use_default_example=True,
+    ),
+    'cross': PythonRelAPIDetails(
+        example='rel.cross(other_rel=rel.set_alias("other_rel"))',
+        result="""
 ┌─────────────────────────────┬─────────────────┬───────┬───────────────────────────┬──────────────────────────────────────┬─────────────────┬───────┬───────────────────────────┐
 │             id              │   description   │ value │     created_timestamp     │                  id                  │   description   │ value │     created_timestamp     │
 │            uuid             │     varchar     │ int64 │ timestamp with time zone  │                 uuid                 │     varchar     │ int64 │ timestamp with time zone  │
@@ -507,11 +536,11 @@ rel.apply(
 │ cb2b453f-1a06-4f5e-abe1-b…  │ value is uneven │     1 │ 2025-04-10 09:53:29.78+02 │ cb2b453f-1a06-4f5e-abe1-bfd413581bcf │ value is uneven │     1 │ 2025-04-10 09:53:29.78+02 │
 ...
 """,
-        'default': True,
-    },
-    'except_': {
-        'example': 'rel.except_(other_rel=rel.set_alias("other_rel"))',
-        'result': """
+        use_default_example=True,
+    ),
+    'except_': PythonRelAPIDetails(
+        example='rel.except_(other_rel=rel.set_alias("other_rel"))',
+        result="""
 The relation query is executed twice, therefore generating different ids and timestamps:
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
@@ -521,11 +550,11 @@ The relation query is executed twice, therefore generating different ids and tim
 │ 08ad11dc-a9c2-4aaa-9272-760b27ad1f5d │ value is uneven │     7 │ 2025-04-10 11:47:05.711+02 │
 ...
 """,
-        'default': True,
-    },
-    'filter': {
-        'example': 'rel.filter("value = 2")',
-        'result': """
+        use_default_example=True,
+    ),
+    'filter': PythonRelAPIDetails(
+        example='rel.filter("value = 2")',
+        result="""
 ┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────┐
 │                  id                  │  description  │ value │     created_timestamp     │
 │                 uuid                 │    varchar    │ int64 │ timestamp with time zone  │
@@ -533,10 +562,10 @@ The relation query is executed twice, therefore generating different ids and tim
 │ b0684ab7-fcbf-41c5-8e4a-a51bdde86926 │ value is even │     2 │ 2025-04-10 09:54:29.78+02 │
 └──────────────────────────────────────┴───────────────┴───────┴───────────────────────────┘
 """,
-        'default': True,
-    },
-    'insert': {
-        'example': '''
+        use_default_example=True,
+    ),
+    'insert': PythonRelAPIDetails(
+        example='''
 import duckdb
 
 from datetime import datetime
@@ -567,7 +596,7 @@ rel.insert(
 
 rel.filter("value = 10")
 ''',
-        'result': """
+        result="""
 ┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────────┐
 │                  id                  │  description  │ value │       created_timestamp       │
 │                 uuid                 │    varchar    │ int64 │   timestamp with time zone    │
@@ -575,10 +604,10 @@ rel.filter("value = 10")
 │ c6dfab87-fae6-4213-8f76-1b96a8d179f6 │ value is even │    10 │ 2025-04-10 10:02:24.652218+02 │
 └──────────────────────────────────────┴───────────────┴───────┴───────────────────────────────┘
 """,
-        'default': False,
-    },
-    'insert_into': {
-        'example': '''
+        use_default_example=False,
+    ),
+    'insert_into': PythonRelAPIDetails(
+        example='''
 import duckdb
 
 from datetime import datetime
@@ -609,7 +638,7 @@ rel.insert_into("code_example")
 
 duckdb_conn.table("code_example").filter("value = 10")
     ''',
-        'result': """
+        result="""
 ┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────────┐
 │                  id                  │  description  │ value │       created_timestamp       │
 │                 uuid                 │    varchar    │ int64 │   timestamp with time zone    │
@@ -617,11 +646,11 @@ duckdb_conn.table("code_example").filter("value = 10")
 │ 271c5ddd-c1d5-4638-b5a0-d8c7dc9e8220 │ value is even │    10 │ 2025-04-10 14:29:18.616379+02 │
 └──────────────────────────────────────┴───────────────┴───────┴───────────────────────────────┘
 """,
-        'default': False,
-    },
-    'intersect': {
-        'example': 'rel.intersect(other_rel=rel.set_alias("other_rel"))',
-        'result': """
+        use_default_example=False,
+    ),
+    'intersect': PythonRelAPIDetails(
+        example='rel.intersect(other_rel=rel.set_alias("other_rel"))',
+        result="""
 The relation query is executed once with `rel` and once with `other_rel`,
 therefore generating different ids and timestamps:
 
@@ -632,10 +661,10 @@ therefore generating different ids and timestamps:
 │                        0 rows                         │
 └───────────────────────────────────────────────────────┘
 """,
-        'default': True,
-    },
-    'join': {
-        'example': """
+        use_default_example=True,
+    ),
+    'join': PythonRelAPIDetails(
+        example="""
 rel = rel.set_alias("rel").join(
     other_rel=rel.set_alias("other_rel"), 
     condition="rel.id = other_rel.id",
@@ -644,7 +673,7 @@ rel = rel.set_alias("rel").join(
 
 rel.count("*")
 """,
-        'result': """
+        result="""
 ┌──────────────┐
 │ count_star() │
 │    int64     │
@@ -652,8 +681,8 @@ rel.count("*")
 │            9 │
 └──────────────┘
 """,
-        'default': True,
-        'additional_description': """
+        use_default_example=True,
+        additional_description="""
 
 Depending on how the `condition` parameter is provided, the JOIN clause generated is:
 - `USING`
@@ -717,10 +746,10 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
 > `NATURAL`, `POSITIONAL` and `ASOF` joins are not provided by the relational API.
 > `CROSS` joins are provided through the [cross method](#cross). 
 """,
-    },
-    'limit': {
-        'example': 'rel.limit(1)',
-        'result': """
+    ),
+    'limit': PythonRelAPIDetails(
+        example='rel.limit(1)',
+        result="""
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -728,10 +757,10 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
 │ 4135597b-29e7-4cb9-a443-41f3d54f25df │ value is uneven │     1 │ 2025-04-10 10:52:03.678+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
-        'default': True,
-    },
-    'map': {
-        'example': """
+        use_default_example=True,
+    ),
+    'map': PythonRelAPIDetails(
+        example="""
 import duckdb
 from pandas import DataFrame
 
@@ -744,7 +773,7 @@ rel = duckdb_conn.sql("select range as id, 'dummy' as text from range(1,3)")
 
 rel.map(multiply_by_2, schema={"id": int, "text": str})
 """,
-        'result': """
+        result="""
 ┌───────┬─────────┐
 │  id   │  text   │
 │ int64 │ varchar │
@@ -753,11 +782,11 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 │     4 │ dummy   │
 └───────┴─────────┘
 """,
-        'default': False,
-    },
-    'order': {
-        'example': 'rel.order("value desc").limit(1, offset=4)',
-        'result': """
+        use_default_example=False,
+    ),
+    'order': PythonRelAPIDetails(
+        example='rel.order("value desc").limit(1, offset=4)',
+        result="""
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -765,11 +794,11 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 │ 55899131-e3d3-463c-a215-f65cb8aef3bf │ value is uneven │     5 │ 2025-04-10 10:56:03.678+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
-        'default': True,
-    },
-    'project': {
-        'example': 'rel.project("description").limit(1)',
-        'result': """
+        use_default_example=True,
+    ),
+    'project': PythonRelAPIDetails(
+        example='rel.project("description").limit(1)',
+        result="""
 ┌─────────────────┐
 │   description   │
 │     varchar     │
@@ -777,12 +806,12 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 │ value is uneven │
 └─────────────────┘
 """,
-        'default': True,
-        'aliases': ['select'],
-    },
-    'select': {
-        'example': 'rel.select("description").limit(1)',
-        'result': """
+        use_default_example=True,
+        aliases=['select'],
+    ),
+    'select': PythonRelAPIDetails(
+        example='rel.select("description").limit(1)',
+        result="""
 ┌─────────────────┐
 │   description   │
 │     varchar     │
@@ -790,12 +819,12 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 │ value is uneven │
 └─────────────────┘
 """,
-        'default': True,
-        'aliases': ['project'],
-    },
-    'sort': {
-        'example': 'rel.sort("description")',
-        'result': """
+        use_default_example=True,
+        aliases=['project'],
+    ),
+    'sort': PythonRelAPIDetails(
+        example='rel.sort("description")',
+        result="""
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -804,11 +833,11 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 │ 95f1ad48-facf-4a84-a971-0a4fecce68c7 │ value is even   │     2 │ 2025-04-10 16:48:15.605+02 │
 ...
 """,
-        'default': True,
-    },
-    'union': {
-        'example': 'rel = rel.union(union_rel=rel)\n\nrel.count("*")',
-        'result': """
+        use_default_example=True,
+    ),
+    'union': PythonRelAPIDetails(
+        example='rel = rel.union(union_rel=rel)\n\nrel.count("*")',
+        result="""
 ┌──────────────┐
 │ count_star() │
 │    int64     │
@@ -816,11 +845,11 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 │           18 │
 └──────────────┘
 """,
-        'default': True,
-        "additional_description": "\n>The union is `union all`. In order to retrieve distinct values, apply [distinct](#distinct).",
-    },
-    'update': {
-        'example': '''
+        use_default_example=True,
+        additional_description="\n>The union is `union all`. In order to retrieve distinct values, apply [distinct](#distinct).",
+    ),
+    'update': PythonRelAPIDetails(
+        example='''
 import duckdb
 
 from duckdb import ColumnExpression
@@ -847,7 +876,7 @@ rel = duckdb_conn.table("code_example")
 
 rel.show()
 ''',
-        'result': """
+        result="""
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -856,14 +885,14 @@ rel.show()
 │ c6a18a42-67fb-4c95-827b-c966f2f95b88 │ value is even   │     2 │ 2025-04-10 16:55:49.317+02 │
 ...
 """,
-        'default': False,
-    },
+        use_default_example=False,
+    ),
 }
 
-FUNCTION_MEMBER_CODE_EXAMPLE_MAP = {
-    'any_value': {
-        'example': "rel.any_value('id')",
-        'result': """
+FUNCTION_METHODS_MAP = {
+    'any_value': PythonRelAPIDetails(
+        example="rel.any_value('id')",
+        result="""
 ┌──────────────────────────────────────┐
 │            any_value(id)             │
 │                 uuid                 │
@@ -871,10 +900,10 @@ FUNCTION_MEMBER_CODE_EXAMPLE_MAP = {
 │ 642ea3d7-793d-4867-a759-91c1226c25a0 │
 └──────────────────────────────────────┘
 """,
-    },
-    'arg_max': {
-        'example': 'rel.arg_max(arg_column="value", value_column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'arg_max': PythonRelAPIDetails(
+        example='rel.arg_max(arg_column="value", value_column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬───────────────────────────┐
 │   description   │ arg_max("value", "value") │
 │     varchar     │           int64           │
@@ -883,10 +912,10 @@ FUNCTION_MEMBER_CODE_EXAMPLE_MAP = {
 │ value is even   │                         8 │
 └─────────────────┴───────────────────────────┘
 """,
-    },
-    'arg_min': {
-        'example': 'rel.arg_min(arg_column="value", value_column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'arg_min': PythonRelAPIDetails(
+        example='rel.arg_min(arg_column="value", value_column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬───────────────────────────┐
 │   description   │ arg_min("value", "value") │
 │     varchar     │           int64           │
@@ -895,10 +924,10 @@ FUNCTION_MEMBER_CODE_EXAMPLE_MAP = {
 │ value is uneven │                         1 │
 └─────────────────┴───────────────────────────┘
 """,
-    },
-    'avg': {
-        'example': "rel.avg('value')",
-        'result': """
+    ),
+    'avg': PythonRelAPIDetails(
+        example="rel.avg('value')",
+        result="""
 ┌──────────────┐
 │ avg("value") │
 │    double    │
@@ -906,14 +935,14 @@ FUNCTION_MEMBER_CODE_EXAMPLE_MAP = {
 │          5.0 │
 └──────────────┘
  """,
-    },
-    'bit_and': {
-        'example': """
+    ),
+    'bit_and': PythonRelAPIDetails(
+        example="""
 rel = rel.select("description, value::bit as value_bit")
 
 rel.bit_and(column="value_bit", groups="description", projected_columns="description")
 """,
-        'result': """
+        result="""
 ┌─────────────────┬──────────────────────────────────────────────────────────────────┐
 │   description   │                        bit_and(value_bit)                        │
 │     varchar     │                               bit                                │
@@ -922,14 +951,14 @@ rel.bit_and(column="value_bit", groups="description", projected_columns="descrip
 │ value is even   │ 0000000000000000000000000000000000000000000000000000000000000000 │
 └─────────────────┴──────────────────────────────────────────────────────────────────┘    
 """,
-    },
-    'bit_or': {
-        'example': """
+    ),
+    'bit_or': PythonRelAPIDetails(
+        example="""
 rel = rel.select("description, value::bit as value_bit")
 
 rel.bit_or(column="value_bit", groups="description", projected_columns="description")
 """,
-        'result': """
+        result="""
 ┌─────────────────┬──────────────────────────────────────────────────────────────────┐
 │   description   │                        bit_or(value_bit)                         │
 │     varchar     │                               bit                                │
@@ -938,14 +967,14 @@ rel.bit_or(column="value_bit", groups="description", projected_columns="descript
 │ value is even   │ 0000000000000000000000000000000000000000000000000000000000001110 │
 └─────────────────┴──────────────────────────────────────────────────────────────────┘    
 """,
-    },
-    'bit_xor': {
-        'example': """
+    ),
+    'bit_xor': PythonRelAPIDetails(
+        example="""
 rel = rel.select("description, value::bit as value_bit")
 
 rel.bit_xor(column="value_bit", groups="description", projected_columns="description")
 """,
-        'result': """
+        result="""
 ┌─────────────────┬──────────────────────────────────────────────────────────────────┐
 │   description   │                        bit_xor(value_bit)                        │
 │     varchar     │                               bit                                │
@@ -954,10 +983,10 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 │ value is uneven │ 0000000000000000000000000000000000000000000000000000000000001001 │
 └─────────────────┴──────────────────────────────────────────────────────────────────┘
 """,
-    },
-    'bitstring_agg': {
-        'example': 'rel.bitstring_agg(column="value", groups="description", projected_columns="description", min=1, max=9)',
-        'result': """
+    ),
+    'bitstring_agg': PythonRelAPIDetails(
+        example='rel.bitstring_agg(column="value", groups="description", projected_columns="description", min=1, max=9)',
+        result="""
 ┌─────────────────┬────────────────────────┐
 │   description   │ bitstring_agg("value") │
 │     varchar     │          bit           │
@@ -966,14 +995,14 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 │ value is even   │ 010101010              │
 └─────────────────┴────────────────────────┘
 """,
-    },
-    'bool_and': {
-        'example': """
+    ),
+    'bool_and': PythonRelAPIDetails(
+        example="""
 rel = rel.select("description, mod(value,2)::boolean as uneven")
 
 rel.bool_and(column="uneven", groups="description", projected_columns="description")
 """,
-        'result': """
+        result="""
 ┌─────────────────┬──────────────────┐
 │   description   │ bool_and(uneven) │
 │     varchar     │     boolean      │
@@ -982,14 +1011,14 @@ rel.bool_and(column="uneven", groups="description", projected_columns="descripti
 │ value is uneven │ true             │
 └─────────────────┴──────────────────┘
 """,
-    },
-    'bool_or': {
-        'example': """
+    ),
+    'bool_or': PythonRelAPIDetails(
+        example="""
 rel = rel.select("description, mod(value,2)::boolean as uneven")
 
 rel.bool_or(column="uneven", groups="description", projected_columns="description")
 """,
-        'result': """
+        result="""
 ┌─────────────────┬─────────────────┐
 │   description   │ bool_or(uneven) │
 │     varchar     │     boolean     │
@@ -998,10 +1027,10 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 │ value is uneven │ true            │
 └─────────────────┴─────────────────┘                
 """,
-    },
-    'count': {
-        'example': 'rel.count("id")',
-        'result': """
+    ),
+    'count': PythonRelAPIDetails(
+        example='rel.count("id")',
+        result="""
 ┌───────────┐
 │ count(id) │
 │   int64   │
@@ -1009,10 +1038,10 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 │         9 │
 └───────────┘
 """,
-    },
-    'cume_dist': {
-        'example': 'rel.cume_dist(window_spec="over (partition by description order by value)", projected_columns="description, value")',
-        'result': """
+    ),
+    'cume_dist': PythonRelAPIDetails(
+        example='rel.cume_dist(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        result="""
 ┌─────────────────┬───────┬──────────────────────────────────────────────────────────────┐
 │   description   │ value │ cume_dist() OVER (PARTITION BY description ORDER BY "value") │
 │     varchar     │ int64 │                            double                            │
@@ -1028,10 +1057,10 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 │ value is even   │     8 │                                                          1.0 │
 └─────────────────┴───────┴──────────────────────────────────────────────────────────────┘
 """,
-    },
-    'dense_rank': {
-        'example': ' rel.dense_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
-        'result': """
+    ),
+    'dense_rank': PythonRelAPIDetails(
+        example=' rel.dense_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        result="""
 ┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
 │   description   │ value │ dense_rank() OVER (PARTITION BY description ORDER BY "value") │
 │     varchar     │ int64 │                             int64                             │
@@ -1047,10 +1076,10 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 │ value is uneven │     9 │                                                             5 │
 └─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
 """,
-        'aliases': ['rank_dense'],
-    },
-    'distinct': {
-        'example': """
+        aliases=['rank_dense'],
+    ),
+    'distinct': PythonRelAPIDetails(
+        example="""
 import duckdb
 
 duckdb_conn = duckdb.connect()
@@ -1061,7 +1090,7 @@ rel = rel.union(union_rel=rel)
 
 rel.distinct().order("range")
 """,
-        'result': """
+        result="""
 ┌───────┐
 │ range │
 │ int64 │
@@ -1071,11 +1100,11 @@ rel.distinct().order("range")
 │     3 │
 └───────┘
 """,
-        "default": False,
-    },
-    'favg': {
-        'example': 'rel.favg(column="value", groups="description", projected_columns="description")',
-        'result': """
+        use_default_example=False,
+    ),
+    'favg': PythonRelAPIDetails(
+        example='rel.favg(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬───────────────┐
 │   description   │ favg("value") │
 │     varchar     │    double     │
@@ -1084,10 +1113,10 @@ rel.distinct().order("range")
 │ value is even   │           5.0 │
 └─────────────────┴───────────────┘
 """,
-    },
-    'first': {
-        'example': 'rel.first(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'first': PythonRelAPIDetails(
+        example='rel.first(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────┐
 │   description   │ "first"("value") │
 │     varchar     │      int64       │
@@ -1096,10 +1125,10 @@ rel.distinct().order("range")
 │ value is uneven │                1 │
 └─────────────────┴──────────────────┘
 """,
-    },
-    'first_value': {
-        'example': 'rel.first_value(column="value", window_spec="over (partition by description order by value)", projected_columns="description").distinct()',
-        'result': """
+    ),
+    'first_value': PythonRelAPIDetails(
+        example='rel.first_value(column="value", window_spec="over (partition by description order by value)", projected_columns="description").distinct()',
+        result="""
 ┌─────────────────┬───────────────────────────────────────────────────────────────────────┐
 │   description   │ first_value("value") OVER (PARTITION BY description ORDER BY "value") │
 │     varchar     │                                 int64                                 │
@@ -1108,10 +1137,10 @@ rel.distinct().order("range")
 │ value is uneven │                                                                     1 │
 └─────────────────┴───────────────────────────────────────────────────────────────────────┘
 """,
-    },
-    'fsum': {
-        'example': 'rel.fsum(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'fsum': PythonRelAPIDetails(
+        example='rel.fsum(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬───────────────┐
 │   description   │ fsum("value") │
 │     varchar     │    double     │
@@ -1120,10 +1149,10 @@ rel.distinct().order("range")
 │ value is uneven │          25.0 │
 └─────────────────┴───────────────┘
 """,
-    },
-    'geomean': {
-        'example': 'rel.geomean(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'geomean': PythonRelAPIDetails(
+        example='rel.geomean(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬───────────────────┐
 │   description   │ geomean("value")  │
 │     varchar     │      double       │
@@ -1132,10 +1161,10 @@ rel.distinct().order("range")
 │ value is even   │ 4.426727678801287 │
 └─────────────────┴───────────────────┘
 """,
-    },
-    'histogram': {
-        'example': 'rel.histogram(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'histogram': PythonRelAPIDetails(
+        example='rel.histogram(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬───────────────────────────┐
 │   description   │    histogram("value")     │
 │     varchar     │   map(bigint, ubigint)    │
@@ -1144,10 +1173,10 @@ rel.distinct().order("range")
 │ value is even   │ {2=1, 4=1, 6=1, 8=1}      │
 └─────────────────┴───────────────────────────┘
 """,
-    },
-    'lag': {
-        'example': 'rel.lag(column="description", window_spec="over (order by value)", projected_columns="description, value")',
-        'result': """
+    ),
+    'lag': PythonRelAPIDetails(
+        example='rel.lag(column="description", window_spec="over (order by value)", projected_columns="description, value")',
+        result="""
 ┌─────────────────┬───────┬───────────────────────────────────────────────────┐
 │   description   │ value │ lag(description, 1, NULL) OVER (ORDER BY "value") │
 │     varchar     │ int64 │                      varchar                      │
@@ -1163,10 +1192,10 @@ rel.distinct().order("range")
 │ value is uneven │     9 │ value is even                                     │
 └─────────────────┴───────┴───────────────────────────────────────────────────┘
 """,
-    },
-    'last': {
-        'example': 'rel.last(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'last': PythonRelAPIDetails(
+        example='rel.last(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬─────────────────┐
 │   description   │ "last"("value") │
 │     varchar     │      int64      │
@@ -1175,10 +1204,10 @@ rel.distinct().order("range")
 │ value is uneven │               9 │
 └─────────────────┴─────────────────┘
 """,
-    },
-    'last_value': {
-        'example': 'rel.last_value(column="value", window_spec="over (order by description)", projected_columns="description").distinct()',
-        'result': """
+    ),
+    'last_value': PythonRelAPIDetails(
+        example='rel.last_value(column="value", window_spec="over (order by description)", projected_columns="description").distinct()',
+        result="""
 ┌─────────────────┬─────────────────────────────────────────────────┐
 │   description   │ last_value("value") OVER (ORDER BY description) │
 │     varchar     │                      int64                      │
@@ -1187,10 +1216,10 @@ rel.distinct().order("range")
 │ value is even   │                                               8 │
 └─────────────────┴─────────────────────────────────────────────────┘
 """,
-    },
-    'lead': {
-        'example': 'rel.lead(column="description", window_spec="over (order by value)", projected_columns="description, value")',
-        'result': """
+    ),
+    'lead': PythonRelAPIDetails(
+        example='rel.lead(column="description", window_spec="over (order by value)", projected_columns="description, value")',
+        result="""
 ┌─────────────────┬───────┬────────────────────────────────────────────────────┐
 │   description   │ value │ lead(description, 1, NULL) OVER (ORDER BY "value") │
 │     varchar     │ int64 │                      varchar                       │
@@ -1206,10 +1235,10 @@ rel.distinct().order("range")
 │ value is uneven │     9 │ NULL                                               │
 └─────────────────┴───────┴────────────────────────────────────────────────────┘
 """,
-    },
-    'list': {
-        'example': 'rel.list(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'list': PythonRelAPIDetails(
+        example='rel.list(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬─────────────────┐
 │   description   │  list("value")  │
 │     varchar     │     int64[]     │
@@ -1218,10 +1247,10 @@ rel.distinct().order("range")
 │ value is uneven │ [1, 3, 5, 7, 9] │
 └─────────────────┴─────────────────┘
 """,
-    },
-    'max': {
-        'example': ' rel.max(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'max': PythonRelAPIDetails(
+        example=' rel.max(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────┐
 │   description   │ max("value") │
 │     varchar     │    int64     │
@@ -1230,10 +1259,10 @@ rel.distinct().order("range")
 │ value is uneven │            9 │
 └─────────────────┴──────────────┘
 """,
-    },
-    'mean': {
-        'example': 'rel.mean(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'mean': PythonRelAPIDetails(
+        example='rel.mean(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────┐
 │   description   │ avg("value") │
 │     varchar     │    double    │
@@ -1242,10 +1271,10 @@ rel.distinct().order("range")
 │ value is uneven │          5.0 │
 └─────────────────┴──────────────┘
 """,
-    },
-    'median': {
-        'example': 'rel.median(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'median': PythonRelAPIDetails(
+        example='rel.median(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬─────────────────┐
 │   description   │ median("value") │
 │     varchar     │     double      │
@@ -1254,10 +1283,10 @@ rel.distinct().order("range")
 │ value is uneven │             5.0 │
 └─────────────────┴─────────────────┘
 """,
-    },
-    'min': {
-        'example': 'rel.min(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'min': PythonRelAPIDetails(
+        example='rel.min(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────┐
 │   description   │ min("value") │
 │     varchar     │    int64     │
@@ -1266,10 +1295,10 @@ rel.distinct().order("range")
 │ value is even   │            2 │
 └─────────────────┴──────────────┘
 """,
-    },
-    'mode': {
-        'example': 'rel.mode(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'mode': PythonRelAPIDetails(
+        example='rel.mode(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬─────────────────┐
 │   description   │ "mode"("value") │
 │     varchar     │      int64      │
@@ -1278,10 +1307,10 @@ rel.distinct().order("range")
 │ value is even   │               2 │
 └─────────────────┴─────────────────┘
 """,
-    },
-    'n_tile': {
-        'example': 'rel.n_tile(window_spec="over (partition by description)", num_buckets=2, projected_columns="description, value")',
-        'result': """
+    ),
+    'n_tile': PythonRelAPIDetails(
+        example='rel.n_tile(window_spec="over (partition by description)", num_buckets=2, projected_columns="description, value")',
+        result="""
 ┌─────────────────┬───────┬──────────────────────────────────────────┐
 │   description   │ value │ ntile(2) OVER (PARTITION BY description) │
 │     varchar     │ int64 │                  int64                   │
@@ -1297,10 +1326,10 @@ rel.distinct().order("range")
 │ value is even   │     8 │                                        2 │
 └─────────────────┴───────┴──────────────────────────────────────────┘
 """,
-    },
-    'nth_value': {
-        'example': 'rel.nth_value(column="value", window_spec="over (partition by description)", projected_columns="description", offset=1)',
-        'result': """
+    ),
+    'nth_value': PythonRelAPIDetails(
+        example='rel.nth_value(column="value", window_spec="over (partition by description)", projected_columns="description", offset=1)',
+        result="""
 ┌─────────────────┬───────────────────────────────────────────────────────┐
 │   description   │ nth_value("value", 1) OVER (PARTITION BY description) │
 │     varchar     │                         int64                         │
@@ -1316,10 +1345,10 @@ rel.distinct().order("range")
 │ value is uneven │                                                     1 │
 └─────────────────┴───────────────────────────────────────────────────────┘
 """,
-    },
-    'percent_rank': {
-        'example': 'rel.percent_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
-        'result': """
+    ),
+    'percent_rank': PythonRelAPIDetails(
+        example='rel.percent_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        result="""
 ┌─────────────────┬───────┬─────────────────────────────────────────────────────────────────┐
 │   description   │ value │ percent_rank() OVER (PARTITION BY description ORDER BY "value") │
 │     varchar     │ int64 │                             double                              │
@@ -1335,10 +1364,10 @@ rel.distinct().order("range")
 │ value is uneven │     9 │                                                             1.0 │
 └─────────────────┴───────┴─────────────────────────────────────────────────────────────────┘
 """,
-    },
-    'product': {
-        'example': 'rel.product(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'product': PythonRelAPIDetails(
+        example='rel.product(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────┐
 │   description   │ product("value") │
 │     varchar     │      double      │
@@ -1347,10 +1376,10 @@ rel.distinct().order("range")
 │ value is even   │            384.0 │
 └─────────────────┴──────────────────┘
 """,
-    },
-    'quantile': {
-        'example': 'rel.quantile(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'quantile': PythonRelAPIDetails(
+        example='rel.quantile(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────────────────────┐
 │   description   │ quantile_disc("value", 0.500000) │
 │     varchar     │              int64               │
@@ -1359,10 +1388,10 @@ rel.distinct().order("range")
 │ value is even   │                                4 │
 └─────────────────┴──────────────────────────────────┘
 """,
-    },
-    'quantile_cont': {
-        'example': 'rel.quantile_cont(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'quantile_cont': PythonRelAPIDetails(
+        example='rel.quantile_cont(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────────────────────┐
 │   description   │ quantile_cont("value", 0.500000) │
 │     varchar     │              double              │
@@ -1371,10 +1400,10 @@ rel.distinct().order("range")
 │ value is uneven │                              5.0 │
 └─────────────────┴──────────────────────────────────┘
 """,
-    },
-    'quantile_disc': {
-        'example': 'rel.quantile_disc(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'quantile_disc': PythonRelAPIDetails(
+        example='rel.quantile_disc(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────────────────────┐
 │   description   │ quantile_disc("value", 0.500000) │
 │     varchar     │              int64               │
@@ -1383,10 +1412,10 @@ rel.distinct().order("range")
 │ value is uneven │                                5 │
 └─────────────────┴──────────────────────────────────┘
 """,
-    },
-    'rank': {
-        'example': 'rel.rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
-        'result': """
+    ),
+    'rank': PythonRelAPIDetails(
+        example='rel.rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        result="""
 ┌─────────────────┬───────┬─────────────────────────────────────────────────────────┐
 │   description   │ value │ rank() OVER (PARTITION BY description ORDER BY "value") │
 │     varchar     │ int64 │                          int64                          │
@@ -1402,10 +1431,10 @@ rel.distinct().order("range")
 │ value is even   │     8 │                                                       4 │
 └─────────────────┴───────┴─────────────────────────────────────────────────────────┘
 """,
-    },
-    'rank_dense': {
-        'example': ' rel.rank_dense(window_spec="over (partition by description order by value)", projected_columns="description, value")',
-        'result': """
+    ),
+    'rank_dense': PythonRelAPIDetails(
+        example=' rel.rank_dense(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        result="""
 ┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
 │   description   │ value │ dense_rank() OVER (PARTITION BY description ORDER BY "value") │
 │     varchar     │ int64 │                             int64                             │
@@ -1421,11 +1450,11 @@ rel.distinct().order("range")
 │ value is even   │     8 │                                                             4 │
 └─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
 """,
-        'aliases': ['dense_rank'],
-    },
-    'row_number': {
-        'example': 'rel.row_number(window_spec="over (partition by description order by value)", projected_columns="description, value")',
-        'result': """
+        aliases=['dense_rank'],
+    ),
+    'row_number': PythonRelAPIDetails(
+        example='rel.row_number(window_spec="over (partition by description order by value)", projected_columns="description, value")',
+        result="""
 ┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
 │   description   │ value │ row_number() OVER (PARTITION BY description ORDER BY "value") │
 │     varchar     │ int64 │                             int64                             │
@@ -1441,10 +1470,10 @@ rel.distinct().order("range")
 │ value is even   │     8 │                                                             4 │
 └─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
 """,
-    },
-    'select_dtypes': {
-        'example': 'rel.select_dtypes(types=[duckdb.typing.VARCHAR]).distinct()',
-        'result': """
+    ),
+    'select_dtypes': PythonRelAPIDetails(
+        example='rel.select_dtypes(types=[duckdb.typing.VARCHAR]).distinct()',
+        result="""
 ┌─────────────────┐
 │   description   │
 │     varchar     │
@@ -1453,11 +1482,11 @@ rel.distinct().order("range")
 │ value is uneven │
 └─────────────────┘
 """,
-        'aliases': ['select_types'],
-    },
-    'select_types': {
-        'example': 'rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()',
-        'result': """
+        aliases=['select_types'],
+    ),
+    'select_types': PythonRelAPIDetails(
+        example='rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()',
+        result="""
 ┌─────────────────┐
 │   description   │
 │     varchar     │
@@ -1466,11 +1495,11 @@ rel.distinct().order("range")
 │ value is uneven │
 └─────────────────┘
 """,
-        'aliases': ['select_dtypes'],
-    },
-    'std': {
-        'example': 'rel.std(column="value", groups="description", projected_columns="description")',
-        'result': """
+        aliases=['select_dtypes'],
+    ),
+    'std': PythonRelAPIDetails(
+        example='rel.std(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────────┐
 │   description   │ stddev_samp("value") │
 │     varchar     │        double        │
@@ -1479,11 +1508,11 @@ rel.distinct().order("range")
 │ value is even   │    2.581988897471611 │
 └─────────────────┴──────────────────────┘
 """,
-        'aliases': ['stddev', 'stddev_samp'],
-    },
-    'stddev': {
-        'example': 'rel.stddev(column="value", groups="description", projected_columns="description")',
-        'result': """
+        aliases=['stddev', 'stddev_samp'],
+    ),
+    'stddev': PythonRelAPIDetails(
+        example='rel.stddev(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────────┐
 │   description   │ stddev_samp("value") │
 │     varchar     │        double        │
@@ -1492,11 +1521,11 @@ rel.distinct().order("range")
 │ value is uneven │   3.1622776601683795 │
 └─────────────────┴──────────────────────┘
 """,
-        'aliases': ['std', 'stddev_samp'],
-    },
-    'stddev_pop': {
-        'example': 'rel.stddev_pop(column="value", groups="description", projected_columns="description")',
-        'result': """
+        aliases=['std', 'stddev_samp'],
+    ),
+    'stddev_pop': PythonRelAPIDetails(
+        example='rel.stddev_pop(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬─────────────────────┐
 │   description   │ stddev_pop("value") │
 │     varchar     │       double        │
@@ -1505,10 +1534,10 @@ rel.distinct().order("range")
 │ value is uneven │  2.8284271247461903 │
 └─────────────────┴─────────────────────┘
 """,
-    },
-    'stddev_samp': {
-        'example': 'rel.stddev_samp(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'stddev_samp': PythonRelAPIDetails(
+        example='rel.stddev_samp(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────────┐
 │   description   │ stddev_samp("value") │
 │     varchar     │        double        │
@@ -1517,11 +1546,11 @@ rel.distinct().order("range")
 │ value is uneven │   3.1622776601683795 │
 └─────────────────┴──────────────────────┘
 """,
-        'aliases': ['stddev', 'std'],
-    },
-    'string_agg': {
-        'example': 'rel.string_agg(column="value", sep=",", groups="description", projected_columns="description")',
-        'result': """
+        aliases=['stddev', 'std'],
+    ),
+    'string_agg': PythonRelAPIDetails(
+        example='rel.string_agg(column="value", sep=",", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────────────┐
 │   description   │ string_agg("value", ',') │
 │     varchar     │         varchar          │
@@ -1530,10 +1559,10 @@ rel.distinct().order("range")
 │ value is uneven │ 1,3,5,7,9                │
 └─────────────────┴──────────────────────────┘
 """,
-    },
-    'sum': {
-        'example': 'rel.sum(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'sum': PythonRelAPIDetails(
+        example='rel.sum(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────┐
 │   description   │ sum("value") │
 │     varchar     │    int128    │
@@ -1542,10 +1571,10 @@ rel.distinct().order("range")
 │ value is uneven │           25 │
 └─────────────────┴──────────────┘
 """,
-    },
-    'unique': {
-        'example': 'rel.unique(unique_aggr="description")',
-        'result': """
+    ),
+    'unique': PythonRelAPIDetails(
+        example='rel.unique(unique_aggr="description")',
+        result="""
 ┌─────────────────┐
 │   description   │
 │     varchar     │
@@ -1554,10 +1583,10 @@ rel.distinct().order("range")
 │ value is uneven │
 └─────────────────┘
 """,
-    },
-    'value_counts': {
-        'example': 'rel.value_counts(column="description", groups="description")',
-        'result': """
+    ),
+    'value_counts': PythonRelAPIDetails(
+        example='rel.value_counts(column="description", groups="description")',
+        result="""
 ┌─────────────────┬────────────────────┐
 │   description   │ count(description) │
 │     varchar     │       int64        │
@@ -1566,10 +1595,10 @@ rel.distinct().order("range")
 │ value is even   │                  4 │
 └─────────────────┴────────────────────┘
 """,
-    },
-    'var': {
-        'example': 'rel.var(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'var': PythonRelAPIDetails(
+        example='rel.var(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬───────────────────┐
 │   description   │ var_samp("value") │
 │     varchar     │      double       │
@@ -1578,11 +1607,11 @@ rel.distinct().order("range")
 │ value is uneven │              10.0 │
 └─────────────────┴───────────────────┘
 """,
-        'aliases': ['variance', 'var_samp'],
-    },
-    'var_pop': {
-        'example': 'rel.var_pop(column="value", groups="description", projected_columns="description")',
-        'result': """
+        aliases=['variance', 'var_samp'],
+    ),
+    'var_pop': PythonRelAPIDetails(
+        example='rel.var_pop(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬──────────────────┐
 │   description   │ var_pop("value") │
 │     varchar     │      double      │
@@ -1591,10 +1620,10 @@ rel.distinct().order("range")
 │ value is uneven │              8.0 │
 └─────────────────┴──────────────────┘
 """,
-    },
-    'var_samp': {
-        'example': 'rel.var_samp(column="value", groups="description", projected_columns="description")',
-        'result': """
+    ),
+    'var_samp': PythonRelAPIDetails(
+        example='rel.var_samp(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬───────────────────┐
 │   description   │ var_samp("value") │
 │     varchar     │      double       │
@@ -1603,11 +1632,11 @@ rel.distinct().order("range")
 │ value is uneven │              10.0 │
 └─────────────────┴───────────────────┘
 """,
-        'aliases': ['variance', 'var'],
-    },
-    'variance': {
-        'example': 'rel.variance(column="value", groups="description", projected_columns="description")',
-        'result': """
+        aliases=['variance', 'var'],
+    ),
+    'variance': PythonRelAPIDetails(
+        example='rel.variance(column="value", groups="description", projected_columns="description")',
+        result="""
 ┌─────────────────┬───────────────────┐
 │   description   │ var_samp("value") │
 │     varchar     │      double       │
@@ -1616,14 +1645,14 @@ rel.distinct().order("range")
 │ value is uneven │              10.0 │
 └─────────────────┴───────────────────┘
 """,
-        'aliases': ['var', 'var_samp'],
-    },
+        aliases=['var', 'var_samp'],
+    ),
 }
 
-OUTPUT_MEMBER_CODE_EXAMPLE_MAP = {
-    'arrow': {
-        'example': 'pa_table = rel.arrow()\n\npa_table',
-        'result': """
+OUTPUT_METHODS_MAP = {
+    'arrow': PythonRelAPIDetails(
+        example='pa_table = rel.arrow()\n\npa_table',
+        result="""
 pyarrow.Table
 id: string
 description: string
@@ -1635,13 +1664,21 @@ description: [["value is uneven","value is even","value is uneven","value is eve
 value: [[1,2,3,4,5,6,7,8,9]]
 created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,2025-04-10 09:09:12.614000Z,2025-04-10 09:10:12.614000Z,2025-04-10 09:11:12.614000Z,2025-04-10 09:12:12.614000Z,2025-04-10 09:13:12.614000Z,2025-04-10 09:14:12.614000Z,2025-04-10 09:15:12.614000Z]]
 """,
-        'default': True,
-        'aliases': ['fetch_arrow_table', 'to_arrow_table'],
-    },
-    # 'close': {'example': '', 'result': '', 'default': False},
-    'create': {
-        'example': 'rel.create("table_code_example")\n\nduckdb_conn.table("table_code_example").limit(1)',
-        'result': """
+        use_default_example=True,
+        aliases=['fetch_arrow_table', 'to_arrow_table'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="batch_size",
+                parameter_type=["int"],
+                parameter_default="1000000",
+                parameter_description="The batch size of writing the data to the Arrow table",
+            )
+        ],
+    ),
+    # 'close': PythonRelAPIDetails(example=  '', result=  '', use_default_example=False)
+    'create': PythonRelAPIDetails(
+        example='rel.create("table_code_example")\n\nduckdb_conn.table("table_code_example").limit(1)',
+        result="""
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -1649,11 +1686,11 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
 │ 3ac9e0ba-8390-4a02-ad72-33b1caea6354 │ value is uneven │     1 │ 2025-04-10 11:07:12.614+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
-        'default': True,
-    },
-    'create_view': {
-        'example': 'rel.create_view("view_code_example", replace=True)\n\nduckdb_conn.table("view_code_example").limit(1)',
-        'result': """
+        use_default_example=True,
+    ),
+    'create_view': PythonRelAPIDetails(
+        example='rel.create_view("view_code_example", replace=True)\n\nduckdb_conn.table("view_code_example").limit(1)',
+        result="""
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -1661,23 +1698,23 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
 │ 3ac9e0ba-8390-4a02-ad72-33b1caea6354 │ value is uneven │     1 │ 2025-04-10 11:07:12.614+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
-        'default': True,
-    },
-    'df': {
-        'example': 'rel.df()',
-        'result': """
+        use_default_example=True,
+    ),
+    'df': PythonRelAPIDetails(
+        example='rel.df()',
+        result="""
                                      id      description  value                created_timestamp
 0  3ac9e0ba-8390-4a02-ad72-33b1caea6354  value is uneven      1 2025-04-10 11:07:12.614000+02:00
 1  8b844392-1404-4bbc-b731-120f42c8ca27    value is even      2 2025-04-10 11:08:12.614000+02:00
 2  ca5584ca-8e97-4fca-a295-ae3c16c32f5b  value is uneven      3 2025-04-10 11:09:12.614000+02:00
 ...
 """,
-        'default': True,
-        'aliases': ['fetchdf', 'to_df'],
-    },
-    'execute': {
-        'example': 'rel.execute()',
-        'result': """
+        use_default_example=True,
+        aliases=['fetchdf', 'to_df'],
+    ),
+    'execute': PythonRelAPIDetails(
+        example='rel.execute()',
+        result="""
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
 │                  id                  │   description   │ value │     created_timestamp      │
 │                 uuid                 │     varchar     │ int64 │  timestamp with time zone  │
@@ -1686,11 +1723,11 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
 │ 8b844392-1404-4bbc-b731-120f42c8ca27 │ value is even   │     2 │ 2025-04-10 11:08:12.614+02 │
 │ ca5584ca-8e97-4fca-a295-ae3c16c32f5b │ value is uneven │     3 │ 2025-04-10 11:09:12.614+02 │
 """,
-        'default': True,
-    },
-    'fetch_arrow_reader': {
-        'example': 'pa_reader = rel.fetch_arrow_reader(batch_size=1)\n\npa_reader.read_next_batch()',
-        'result': """
+        use_default_example=True,
+    ),
+    'fetch_arrow_reader': PythonRelAPIDetails(
+        example='pa_reader = rel.fetch_arrow_reader(batch_size=1)\n\npa_reader.read_next_batch()',
+        result="""
 pyarrow.RecordBatch
 id: string
 description: string
@@ -1702,11 +1739,11 @@ description: ["value is even"]
 value: [2]
 created_timestamp: [2025-04-10 09:25:51.259000Z]
 """,
-        'default': True,
-    },
-    'fetch_arrow_table': {
-        'example': 'rel.fetch_arrow_table()',
-        'result': """
+        use_default_example=True,
+    ),
+    'fetch_arrow_table': PythonRelAPIDetails(
+        example='rel.fetch_arrow_table()',
+        result="""
 pyarrow.Table
 id: string
 description: string
@@ -1718,48 +1755,48 @@ description: [["value is uneven","value is even","value is uneven","value is eve
 value: [[1,2,3,4,5,6,7,8,9]]
 created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,2025-04-10 09:26:51.259000Z,2025-04-10 09:27:51.259000Z,2025-04-10 09:28:51.259000Z,2025-04-10 09:29:51.259000Z,2025-04-10 09:30:51.259000Z,2025-04-10 09:31:51.259000Z,2025-04-10 09:32:51.259000Z]]
 """,
-        'default': True,
-        'aliases': ['arrow', 'to_arrow_table'],
-    },
-    'fetch_df_chunk': {
-        'example': 'rel.fetch_df_chunk()',
-        'result': """
+        use_default_example=True,
+        aliases=['arrow', 'to_arrow_table'],
+    ),
+    'fetch_df_chunk': PythonRelAPIDetails(
+        example='rel.fetch_df_chunk()',
+        result="""
                                      id      description  value                created_timestamp
 0  1587b4b0-3023-49fe-82cf-06303ca136ac  value is uneven      1 2025-04-10 11:24:51.259000+02:00
 1  e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd    value is even      2 2025-04-10 11:25:51.259000+02:00
 2  3f8ad67a-290f-4a22-b41b-0173b8e45afa  value is uneven      3 2025-04-10 11:26:51.259000+02:00
 ...
 """,
-        'default': True,
-    },
-    'fetchall': {
-        'example': 'rel.limit(1).fetchall()',
-        'result': """
+        use_default_example=True,
+    ),
+    'fetchall': PythonRelAPIDetails(
+        example='rel.limit(1).fetchall()',
+        result="""
 [(UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
   'value is uneven',
   1,
   datetime.datetime(2025, 4, 10, 11, 24, 51, 259000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
 """,
-        'default': True,
-    },
-    'fetchdf': {
-        'example': 'rel.fetchdf()',
-        'result': """
+        use_default_example=True,
+    ),
+    'fetchdf': PythonRelAPIDetails(
+        example='rel.fetchdf()',
+        result="""
                                      id      description  value                created_timestamp
 0  1587b4b0-3023-49fe-82cf-06303ca136ac  value is uneven      1 2025-04-10 11:24:51.259000+02:00
 1  e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd    value is even      2 2025-04-10 11:25:51.259000+02:00
 2  3f8ad67a-290f-4a22-b41b-0173b8e45afa  value is uneven      3 2025-04-10 11:26:51.259000+02:00
 ...
 """,
-        'default': True,
-        'aliases': ['df', 'to_df'],
-    },
-    'fetchmany': {
-        'example': """
+        use_default_example=True,
+        aliases=['df', 'to_df'],
+    ),
+    'fetchmany': PythonRelAPIDetails(
+        example="""
 while res := rel.fetchmany(size=1):
     print(res)
 """,
-        'result': """
+        result="""
 [(UUID('cf4c5e32-d0aa-4699-a3ee-0092e900f263'), 'value is uneven', 1, datetime.datetime(2025, 4, 30, 16, 23, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
 [(UUID('cec335ac-24ac-49a3-ae9a-bb35f71fc88d'), 'value is even', 2, datetime.datetime(2025, 4, 30, 16, 24, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
 [(UUID('2423295d-9bb0-453c-a385-21bdacba03b6'), 'value is uneven', 3, datetime.datetime(2025, 4, 30, 16, 25, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
@@ -1770,8 +1807,8 @@ while res := rel.fetchmany(size=1):
 [(UUID('30e48457-b103-4fa5-95cf-1c7f0143335b'), 'value is even', 8, datetime.datetime(2025, 4, 30, 16, 30, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
 [(UUID('036b7f4b-bd78-4ffb-a351-964d93f267b7'), 'value is uneven', 9, datetime.datetime(2025, 4, 30, 16, 31, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
 """,
-        'default': True,
-        'additional_description': '''
+        use_default_example=True,
+        additional_description='''
 \n
 >Warning Executing any operation during the retrieval of the data from an [aggregate](#aggregate) relation,
 >will close the result set.
@@ -1797,10 +1834,10 @@ while res := rel.fetchmany(size=1):
 >    rel.show()
 >```
 ''',
-    },
-    'fetchnumpy': {
-        'example': 'rel.fetchnumpy()',
-        'result': """
+    ),
+    'fetchnumpy': PythonRelAPIDetails(
+        example='rel.fetchnumpy()',
+        result="""
 {'id': array([UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
         UUID('e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd'),
         UUID('3f8ad67a-290f-4a22-b41b-0173b8e45afa'),
@@ -1821,14 +1858,14 @@ while res := rel.fetchmany(size=1):
         '2025-04-10T09:30:51.259000', '2025-04-10T09:31:51.259000',
         '2025-04-10T09:32:51.259000'], dtype='datetime64[us]')}
 """,
-        'default': True,
-    },
-    'fetchone': {
-        'example': """
+        use_default_example=True,
+    ),
+    'fetchone': PythonRelAPIDetails(
+        example="""
 while res := rel.fetchone():
     print(res)
 """,
-        'result': """
+        result="""
 (UUID('fe036411-f4c7-4f52-9ddd-80cd2bb56613'), 'value is uneven', 1, datetime.datetime(2025, 4, 30, 12, 59, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
 (UUID('466c9b43-e9f0-4237-8f26-155f259a5b59'), 'value is even', 2, datetime.datetime(2025, 4, 30, 13, 0, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
 (UUID('5755cf16-a94f-41ef-a16d-21e856d71f9f'), 'value is uneven', 3, datetime.datetime(2025, 4, 30, 13, 1, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
@@ -1839,8 +1876,8 @@ while res := rel.fetchone():
 (UUID('7da79dfe-b29c-462b-a414-9d5e3cc80139'), 'value is even', 8, datetime.datetime(2025, 4, 30, 13, 6, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
 (UUID('f83ffff2-33b9-4f86-9d14-46974b546bab'), 'value is uneven', 9, datetime.datetime(2025, 4, 30, 13, 7, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
 """,
-        'default': True,
-        'additional_description': '''
+        use_default_example=True,
+        additional_description='''
 \n
 >Warning Executing any operation during the retrieval of the data from an [aggregate](#aggregate) relation,
 >will close the result set.
@@ -1866,10 +1903,10 @@ while res := rel.fetchone():
 >    rel.show()
 >```
 ''',
-    },
-    'pl': {
-        'example': 'rel.pl(batch_size=1)',
-        'result': """
+    ),
+    'pl': PythonRelAPIDetails(
+        example='rel.pl(batch_size=1)',
+        result="""
 shape: (9, 4)
 ┌─────────────────────────────────┬─────────────────┬───────┬────────────────────────────────┐
 │ id                              ┆ description     ┆ value ┆ created_timestamp              │
@@ -1878,11 +1915,11 @@ shape: (9, 4)
 ╞═════════════════════════════════╪═════════════════╪═══════╪════════════════════════════════╡
 │ b2f92c3c-9372-49f3-897f-2c86fc… ┆ value is uneven ┆ 1     ┆ 2025-04-10 11:49:51.886 CEST   │
 """,
-        'default': True,
-    },
-    'record_batch': {
-        'example': 'pa_batch = rel.record_batch(batch_size=1)\n\npa_batch.read_next_batch()',
-        'result': """
+        use_default_example=True,
+    ),
+    'record_batch': PythonRelAPIDetails(
+        example='pa_batch = rel.record_batch(batch_size=1)\n\npa_batch.read_next_batch()',
+        result="""
 pyarrow.RecordBatch
 id: string
 description: string
@@ -1894,11 +1931,11 @@ description: ["value is uneven"]
 value: [1]
 created_timestamp: [2025-04-10 09:52:55.249000Z]
 """,
-        'default': True,
-    },
-    'tf': {
-        'example': 'rel.select("description, value").tf()',
-        'result': """
+        use_default_example=True,
+    ),
+    'tf': PythonRelAPIDetails(
+        example='rel.select("description, value").tf()',
+        result="""
 {'description': <tf.Tensor: shape=(9,), dtype=string, numpy=
  array([b'value is uneven', b'value is even', b'value is uneven',
         b'value is even', b'value is uneven', b'value is even',
@@ -1906,11 +1943,11 @@ created_timestamp: [2025-04-10 09:52:55.249000Z]
        dtype=object)>,
  'value': <tf.Tensor: shape=(9,), dtype=int64, numpy=array([1, 2, 3, 4, 5, 6, 7, 8, 9])>}
 """,
-        'default': True,
-    },
-    'to_arrow_table': {
-        'example': 'rel.to_arrow_table()',
-        'result': """
+        use_default_example=True,
+    ),
+    'to_arrow_table': PythonRelAPIDetails(
+        example='rel.to_arrow_table()',
+        result="""
 pyarrow.Table
 id: string
 description: string
@@ -1922,66 +1959,66 @@ description: [["value is uneven","value is even","value is uneven","value is eve
 value: [[1,2,3,4,5,6,7,8,9]]
 created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,2025-04-10 09:56:24.015000Z,2025-04-10 09:57:24.015000Z,2025-04-10 09:58:24.015000Z,2025-04-10 09:59:24.015000Z,2025-04-10 10:00:24.015000Z,2025-04-10 10:01:24.015000Z,2025-04-10 10:02:24.015000Z]]
 """,
-        'default': True,
-        'aliases': ['fetch_arrow_table', 'arrow'],
-    },
-    'to_csv': {
-        'example': 'rel.to_csv("code_example.csv")',
-        'result': 'The data is exported to a CSV file, named code_example.csv',
-        'default': True,
-        'aliases': ['write_csv'],
-    },
-    'to_df': {
-        'example': 'rel.to_df()',
-        'result': """
+        use_default_example=True,
+        aliases=['fetch_arrow_table', 'arrow'],
+    ),
+    'to_csv': PythonRelAPIDetails(
+        example='rel.to_csv("code_example.csv")',
+        result='The data is exported to a CSV file, named code_example.csv',
+        use_default_example=True,
+        aliases=['write_csv'],
+    ),
+    'to_df': PythonRelAPIDetails(
+        example='rel.to_df()',
+        result="""
                                      id      description  value                created_timestamp
 0  e1f79925-60fd-4ee2-ae67-5eff6b0543d1  value is uneven      1 2025-04-10 11:56:04.452000+02:00
 1  caa619d4-d79c-4c00-b82e-9319b086b6f8    value is even      2 2025-04-10 11:57:04.452000+02:00
 2  64c68032-99b9-4e8f-b4a3-6c522d5419b3  value is uneven      3 2025-04-10 11:58:04.452000+02:00
 ...
 """,
-        'default': True,
-        'aliases': ['fetchdf', 'df'],
-    },
-    'to_parquet': {
-        'example': 'rel.to_parquet("code_example.parquet")',
-        'result': 'The data is exported to a Parquet file, named code_example.parquet',
-        'default': True,
-        'aliases': ['write_parquet'],
-    },
-    'to_table': {
-        'example': 'rel.to_table("table_code_example")',
-        'result': 'A table, named table_code_example, is created with the data of the relation',
-        'default': True,
-    },
-    'to_view': {
-        'example': 'rel.to_view("view_code_example", replace=True)',
-        'result': 'A view, named view_code_example, is created with the query definition of the relation',
-        'default': True,
-    },
-    'torch': {
-        'example': 'rel.select("value").torch()',
-        'result': "{'value': tensor([1, 2, 3, 4, 5, 6, 7, 8, 9])}",
-        'default': True,
-    },
-    'write_csv': {
-        'example': 'rel.write_csv("code_example.csv")',
-        'result': 'The data is exported to a CSV file, named code_example.csv',
-        'default': True,
-        'aliases': ['to_csv'],
-    },
-    'write_parquet': {
-        'example': 'rel.write_parquet("code_example.parquet")',
-        'result': 'The data is exported to a Parquet file, named code_example.parquet',
-        'default': True,
-        'aliases': ['to_parquet'],
-    },
+        use_default_example=True,
+        aliases=['fetchdf', 'df'],
+    ),
+    'to_parquet': PythonRelAPIDetails(
+        example='rel.to_parquet("code_example.parquet")',
+        result='The data is exported to a Parquet file, named code_example.parquet',
+        use_default_example=True,
+        aliases=['write_parquet'],
+    ),
+    'to_table': PythonRelAPIDetails(
+        example='rel.to_table("table_code_example")',
+        result='A table, named table_code_example, is created with the data of the relation',
+        use_default_example=True,
+    ),
+    'to_view': PythonRelAPIDetails(
+        example='rel.to_view("view_code_example", replace=True)',
+        result='A view, named view_code_example, is created with the query definition of the relation',
+        use_default_example=True,
+    ),
+    'torch': PythonRelAPIDetails(
+        example='rel.select("value").torch()',
+        result="{'value': tensor([1, 2, 3, 4, 5, 6, 7, 8, 9])}",
+        use_default_example=True,
+    ),
+    'write_csv': PythonRelAPIDetails(
+        example='rel.write_csv("code_example.csv")',
+        result='The data is exported to a CSV file, named code_example.csv',
+        use_default_example=True,
+        aliases=['to_csv'],
+    ),
+    'write_parquet': PythonRelAPIDetails(
+        example='rel.write_parquet("code_example.parquet")',
+        result='The data is exported to a Parquet file, named code_example.parquet',
+        use_default_example=True,
+        aliases=['to_parquet'],
+    ),
 }
 
-CODE_EXAMPLE_MAP = {
-    **CREATION_MEMBER_CODE_EXAMPLE_MAP,
-    **DEFINITION_MEMBER_CODE_EXAMPLE_MAP,
-    **TRANSFORMATION_MEMBER_CODE_EXAMPLE_MAP,
-    **FUNCTION_MEMBER_CODE_EXAMPLE_MAP,
-    **OUTPUT_MEMBER_CODE_EXAMPLE_MAP,
+DOCS_DETAILS_MAP = {
+    **CREATION_METHODS_MAP,
+    **DEFINITION_METHODS_MAP,
+    **TRANSFORMATION_METHODS_MAP,
+    **FUNCTION_METHODS_MAP,
+    **OUTPUT_METHODS_MAP,
 }

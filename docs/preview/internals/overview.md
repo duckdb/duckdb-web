@@ -28,7 +28,7 @@ The TableRef represents any table source. This can be a reference to a base tabl
 
 ### QueryNode
 
-The QueryNode represents either (1) a `SELECT` statement, or (2) a set operation (i.e. `UNION`, `INTERSECT` or `DIFFERENCE`).
+The QueryNode represents either (1) a `SELECT` statement, or (2) a set operation (i.e., `UNION`, `INTERSECT` or `DIFFERENCE`).
 
 ### SQL Statement
 

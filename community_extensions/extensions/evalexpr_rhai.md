@@ -98,8 +98,8 @@ repo:
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 448
-extension_download_count_pretty: 448
+extension_download_count: 453
+extension_download_count_pretty: 453
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
