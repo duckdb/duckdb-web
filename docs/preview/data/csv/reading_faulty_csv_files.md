@@ -39,8 +39,8 @@ Error when converting column "birth_date". date field value out of range: "The 9
 Column date is being converted as type DATE
 This type was auto-detected from the CSV file.
 Possible solutions:
-* Override the type for this column manually by setting the type explicitly, e.g. types={'birth_date': 'VARCHAR'}
-* Set the sample size to a larger value to enable the auto-detection to scan more values, e.g. sample_size=-1
+* Override the type for this column manually by setting the type explicitly, e.g., types={'birth_date': 'VARCHAR'}
+* Set the sample size to a larger value to enable the auto-detection to scan more values, e.g., sample_size=-1
 * Use a COPY statement to automatically derive types from an existing table.
 
   file= people.csv
@@ -73,8 +73,8 @@ The second block provides us with potential solutions:
 Column date is being converted as type DATE
 This type was auto-detected from the CSV file.
 Possible solutions:
-* Override the type for this column manually by setting the type explicitly, e.g. types={'birth_date': 'VARCHAR'}
-* Set the sample size to a larger value to enable the auto-detection to scan more values, e.g. sample_size=-1
+* Override the type for this column manually by setting the type explicitly, e.g., types={'birth_date': 'VARCHAR'}
+* Set the sample size to a larger value to enable the auto-detection to scan more values, e.g., sample_size=-1
 * Use a COPY statement to automatically derive types from an existing table.
 ```
 

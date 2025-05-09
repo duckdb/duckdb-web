@@ -1523,6 +1523,20 @@
               ]
             },
             {
+              "page": "Troubleshooting",
+              "slug": "troubleshooting",
+              "subsubfolderitems": [
+                {
+                  "page": "Crashes",
+                  "url": "crashes"
+                },
+                {
+                  "page": "Out of Memory Errors",
+                  "url": "oom_errors"
+                }
+              ]
+            },
+            {
               "page": "Glossary of Terms",
               "url": "glossary"
             },
