@@ -297,24 +297,24 @@ CREATE OR REPLACE FUNCTION rowgroup_counts(table_name, column_list) AS TABLE (
     WITH by_rowgroup_id AS (
         FROM ' || dq(table_name) || '
         SELECT
-        ceiling((count(*) over ()) / 122880) AS total_row groups,
-        floor(rowid / 122880) AS rowgroup_id,
+        ceiling((count(*) OVER ()) / 122_880) AS total_row groups,
+        floor(rowid / 122_880) AS rowgroup_id,
         ' || dq_concat(column_list, ',') || '
     ), rowgroup_id_counts AS (
     FROM by_rowgroup_id
     SELECT
         case ' ||
-        nq_concat(list_transform(column_list, (i) -> ' when grouping('||dq(i)||') = 0 then alias('||dq(i)||') '),' ')
+        nq_concat(list_transform(column_list, (i) -> ' when grouping(' || dq(i) || ') = 0 then alias(' || dq(i) || ') '),' ')
             || ' end AS column_name,
         coalesce(*columns(* exclude (rowgroup_id, total_row groups))) AS column_value,
         first(total_row groups) AS total_row groups,
         count(distinct rowgroup_id) AS rowgroup_id_count
     GROUP BY
-        GROUPING SETS ( ' || nq_concat(list_transform(dq_list(column_list), (j) -> '('||j||')'), ', ') ||' )
+        GROUPING SETS ( ' || nq_concat(list_transform(dq_list(column_list), (j) -> '(' || j || ')'), ', ') ||' )
     )
     FROM rowgroup_id_counts
     SELECT
-        '||sq(table_name)||' AS table_name,
+        ' || sq(table_name) || ' AS table_name,
         *
     ORDER BY
         column_name
@@ -469,10 +469,7 @@ However, it is worth noting that overall insert performance slows down by nearly
 
 ### Basic Sorting
 
-<details markdown='1'>
-<summary markdown='span'>
-    For reproducibility, here are the very standard queries used to initially load the data from Parquet, sort randomly, sort by `origin`, and sort by `origin` and then `destination`.
-</summary>
+For reproducibility, here are the very standard queries used to initially load the data from Parquet, sort randomly, sort by `origin`, and sort by `origin` and then `destination`.
 
 ```sql
 CREATE TABLE IF NOT EXISTS flights AS
@@ -480,22 +477,16 @@ CREATE TABLE IF NOT EXISTS flights AS
 
 CREATE TABLE IF NOT EXISTS flights_random AS
     FROM flights
-    ORDER BY
-        hash(rowid + 42);
+    ORDER BY hash(rowid + 42);
 
 CREATE TABLE IF NOT EXISTS flights_origin AS
     FROM flights
-    ORDER BY
-        origin;
+    ORDER BY origin;
 
 CREATE TABLE IF NOT EXISTS flights_origin_dest AS
     FROM flights
-    ORDER BY
-        origin,
-        dest;
+    ORDER BY origin, dest;
 ```
-
-</details>
 
 ## Sorting by Zipped `VARCHAR` Columns
 
