@@ -41,7 +41,6 @@ We summarize the main distributions in the table below.
 | [icu]({% link docs/preview/core_extensions/icu.md %})                   | yes | yes    |     | yes  | yes     |
 | [json]({% link docs/preview/data/json/overview.md %})              | yes | yes    |     | yes  | yes     |
 | [parquet]({% link docs/preview/data/parquet/overview.md %})        | yes | yes    | yes | yes  | yes     |
-| [tpch]({% link docs/preview/core_extensions/tpch.md %})                 |     | yes    |     |      |         |
 
 The jemalloc extension's availability is based on the operating system.
 Please check the [jemalloc page]({% link docs/preview/core_extensions/jemalloc.md %}) for details.
