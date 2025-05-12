@@ -28,7 +28,7 @@ There are a few major types of crashes:
   The database must be restarted prior to being used again.
   ```
 
-* **Out of memory errors**: A DuckDB crash can also be a symptom of the operating system killing the process.
+* **Out of memory errors:** A DuckDB crash can also be a symptom of the operating system killing the process.
   For example, many Linux distributions run an [OOM reaper or OOM killer process](https://learn.redhat.com/t5/Platform-Linux/Out-of-Memory-Killer/td-p/48828), which kills processes to free up their memory and thus prevents the operating system from running out of memory.
   If your DuckDB session is killed by the OOM reaper, consult the [“OOM errors” page]({% link docs/preview/guides/troubleshooting/oom_errors.md %})
 
