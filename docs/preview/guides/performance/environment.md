@@ -48,7 +48,7 @@ Counter-intuitively, using a disk-based DuckDB instance can be faster than an in
 Read more in the [“How to Tune Workloads” page]({% link docs/preview/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
 
 **File systems.**
-On Linux, we recommend using the ext4 or xfs file systems.
+On Linux, [DuckDB performs best with the XFS file system](https://www.phoronix.com/review/linux-615-filesystems/5) but it also performs reasonably well with other file systems such as ext4.
 On Windows, we recommend using NTFS and avoiding FAT32.
 
 > Note that DuckDB databases have built-in checksums, so integrity checks from the file system are not required to prevent data corruption.
