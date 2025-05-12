@@ -1013,6 +1013,10 @@
           "slug": "core_extensions",
           "subfolderitems": [
             {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
               "page": "AutoComplete",
               "url": "autocomplete"
             },
