@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 38
 extension_star_count_pretty: 38
-extension_download_count: 392
-extension_download_count_pretty: 392
+extension_download_count: 381
+extension_download_count_pretty: 381
 image: '/images/community_extensions/social_preview/preview_community_extension_wireduck.png'
 layout: community_extension_doc
 ---
