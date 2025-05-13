@@ -30,6 +30,8 @@ title: Core Extensions
 | [ui]({% link docs/preview/core_extensions/ui.md %})                     | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb-ui)       | Adds local UI for DuckDB                                                           | stable       |                         |
 | [vss]({% link docs/preview/core_extensions/vss.md %})                   | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb-vss)      | Adds support for vector similarity search queries                                  | experimental |                         |
 
+The **Stage** column shows the lifecycle stage of the extension following the convention of the [lifecycle stages used in tidyverse](https://lifecycle.r-lib.org/articles/stages.html).
+
 ## Default Extensions
 
 Different DuckDB clients ship a different set of extensions.
