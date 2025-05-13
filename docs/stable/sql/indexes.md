@@ -44,7 +44,8 @@ ART indexes create a secondary copy of the data in a second location – this co
 `UPDATE` statements on indexed columns and columns that cannot be updated in place are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
 This rewrite has performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
-Additionally, it causes the following constraint-checking limitation of `UPDATE` statements. The same limitation exists in other DBMSs, like PostgreSQL.
+Additionally, it causes the following constraint-checking limitation of `UPDATE` statements. 
+The same limitation exists in other DBMSs, like PostgreSQL.
 
 In the example below, note how the number of rows exceeds DuckDB's standard vector size, which is 2048.
 The `UPDATE` statement is rewritten into a `DELETE`, followed by an `INSERT`.
@@ -64,8 +65,26 @@ Constraint Error:
 Duplicate key "i: 2048" violates primary key constraint.
 ```
 
-A workaround is to split the `UPDATE` into a `DELETE ... RETURNING ...` followed by an `INSERT`.
-Both statements should be run inside a transaction via `BEGIN`, and eventually `COMMIT`.
+A workaround is to split the `UPDATE` into a `DELETE ... RETURNING ...` followed by an `INSERT`,
+with some additional logic to (temporarily) store the result of the `DELETE`.
+All statements should be run inside a transaction via `BEGIN`, and eventually `COMMIT`.
+
+Here's an example of how that could look like in the CLI.
+```sql
+CREATE TABLE my_table (i INTEGER PRIMARY KEY);
+INSERT INTO my_table SELECT range FROM range(3_000);
+
+BEGIN;
+CREATE TEMP TABLE tmp AS SELECT i FROM my_table;
+DELETE FROM my_table;
+INSERT INTO my_table SELECT i FROM tmp;
+DROP TABLE tmp;
+COMMIT;
+```
+
+In other clients, you might be able to fetch the result of `DELETE ... RETURNING ...`.
+Then, you can use that result in a subsequent `INSERT ...` statements, 
+or potentially make use of DuckDB's `Appender` (if available in the client).
 
 ### Over-Eager Constraint Checking in Foreign Keys
 
