@@ -297,7 +297,7 @@ CREATE OR REPLACE FUNCTION rowgroup_counts(table_name, column_list) AS TABLE (
     WITH by_rowgroup_id AS (
         FROM ' || dq(table_name) || '
         SELECT
-        ceiling((count(*) OVER ()) / 122_880) AS total_row groups,
+        ceiling((count(*) OVER ()) / 122_880) AS total_row_groups,
         floor(rowid / 122_880) AS rowgroup_id,
         ' || dq_concat(column_list, ',') || '
     ), rowgroup_id_counts AS (
@@ -306,8 +306,8 @@ CREATE OR REPLACE FUNCTION rowgroup_counts(table_name, column_list) AS TABLE (
         case ' ||
         nq_concat(list_transform(column_list, (i) -> ' when grouping(' || dq(i) || ') = 0 then alias(' || dq(i) || ') '),' ')
             || ' end AS column_name,
-        coalesce(*columns(* exclude (rowgroup_id, total_row groups))) AS column_value,
-        first(total_row groups) AS total_row groups,
+        coalesce(*columns(* exclude (rowgroup_id, total_row_groups))) AS column_value,
+        first(total_row_groups) AS total_row_groups,
         count(distinct rowgroup_id) AS rowgroup_id_count
     GROUP BY
         GROUPING SETS ( ' || nq_concat(list_transform(dq_list(column_list), (j) -> '(' || j || ')'), ', ') ||' )
@@ -328,7 +328,7 @@ CREATE OR REPLACE FUNCTION summarize_rowgroup_counts(table_name, column_list) AS
     SELECT
         table_name,
         column_name,
-        total_row groups,
+        total_row_groups,
         min(rowgroup_id_count) AS min_cluster_depth,
         avg(rowgroup_id_count) AS avg_cluster_depth,
         max(rowgroup_id_count) AS max_cluster_depth,
@@ -347,7 +347,7 @@ We can then call the `rowgroup_counts` function on any table and any columns!
 FROM rowgroup_counts('flights_hilbert', ['origin', 'dest']);
 ```
 
-| table_name      | column_name | column_value | total_row groups | rowgroup_id_count |
+| table_name      | column_name | column_value | total_row_groups | rowgroup_id_count |
 | :-------------- | :---------- | :----------- | --------------: | ----------------: |
 | flights_hilbert | dest        | PSG          |             238 |                 2 |
 | flights_hilbert | dest        | ESC          |             238 |                 2 |
@@ -430,7 +430,7 @@ Note that a row group size should be a power of 2.
 The minimum row group size is the vector size of DuckDB, which by default is 2048.
 
 ```sql
-ATTACH './smaller_row groups.duckdb' (ROW_GROUP_SIZE 8192);
+ATTACH './smaller_row_groups.duckdb' (ROW_GROUP_SIZE 8192);
 ```
 
 ## Conclusion
@@ -504,7 +504,7 @@ CREATE OR REPLACE FUNCTION main.zip_varchar(i, j, num_chars := 6) AS (
             substr(i, 1, num_chars).rpad(num_chars, ' ').string_split(''),
             substr(j, 1, num_chars).rpad(num_chars, ' ').string_split('')
         )
-    ].flatten().array_to_string(' ')
+    ].flatten().array_to_string('')
 );
 
 CREATE TABLE IF NOT EXISTS flights_zipped_varchar AS
@@ -531,7 +531,7 @@ SELECT
 The goal of a space filling curve is to map multiple dimensions (in our case, two: `origin` and `destination`) down to a single dimension, but to preserve the higher dimension locality between data points.
 One application of space filling curves is in geospatial analytics and it is a helpful illustration.
 If our dataset contained the latitude and longitude coordinates of every café on earth (one row per café), but we wanted to sort so that cafés that are physically close to one another are near each other in the list, we could use a space filling curve.
-cafés that are somewhat close in both latitude and longitude will receive a similar Morton or Hilbert encoding value.
+Cafés that are somewhat close in both latitude and longitude will receive a similar Morton or Hilbert encoding value.
 This will allow us to quickly execute queries like “Find all cafés within this rectangular region on a map”.
 (A rectangle like that is called a bounding box in geospatial-land!)
 
