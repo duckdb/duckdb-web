@@ -3,23 +3,24 @@ layout: docu
 title: Lambda Functions
 ---
 
-> Deprecated DuckDB 1.3.0 deprecated the old lambda single arrow syntax (`x -> x + 1`) 
-> in favor of the Python-style lambda syntax (`LAMBDA x : x + 1`).
+> Deprecated DuckDB 1.3.0 deprecated the old lambda single arrow syntax (`x -> x + 1`)
+> in favor of the Python-style syntax (`LAMBDA x : x + 1`).
 >
 > DuckDB 1.3.0 also introduces a new setting to configure the lambda syntax.
+>
 > ```sql
-> SET lambda_syntax='DEFAULT'
-> SET lambda_syntax='ENABLE_SINGLE_ARROW'
-> SET lambda_syntax='DISABLE_SINGLE_ARROW'
+> SET lambda_syntax = 'DEFAULT';
+> SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
+> SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
 > ```
 >
-> Currently, `DEFAULT` enables both syntax styles, i.e., 
+> Currently, `DEFAULT` enables both syntax styles, i.e.,
 > the old single arrow syntax and the Python-style syntax.
-> 
+>
 > DuckDB 1.4.0 will be the last release supporting the single arrow syntax without explicitly enabling it.
-> 
+>
 > DuckDB 1.5.0 disables the single arrow syntax on default.
-> 
+>
 > DuckDB 1.6.0 removes the `lambda_syntax` flag and fully deprecates the single arrow syntax,
 > so the old behavior will no longer be possible.
 
