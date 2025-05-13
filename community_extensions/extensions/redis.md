@@ -90,8 +90,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 379
-extension_download_count_pretty: 379
+extension_download_count: 378
+extension_download_count_pretty: 378
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'
 layout: community_extension_doc
 ---
