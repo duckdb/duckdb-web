@@ -114,7 +114,7 @@ with open('../../trec/topics', 'r') as f:
         topic_dict[num] = title
 ```
 
-This gives us a dictionary that has query number as keys, and query strings as values, e.g. `301 -> 'International Organized Crime'`.
+This gives us a dictionary that has query number as keys, and query strings as values, e.g., `301 -> 'International Organized Crime'`.
 
 We want to store the results in a specific format, so that they can be evaluated by [trec eval](https://github.com/usnistgov/trec_eval.git):
 

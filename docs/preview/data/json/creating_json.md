@@ -44,7 +44,7 @@ SELECT to_json({duck : 42});
 ```
 
 ```sql
-SELECT to_json(map(['duck'],[42]));
+SELECT to_json(MAP(['duck'], [42]));
 ```
 
 ```text

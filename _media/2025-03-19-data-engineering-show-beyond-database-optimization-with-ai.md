@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Beyond Database Optimization with AI – The Data Engineering Show"
+title: "Beyond database optimization with AI – The Data Engineering Show"
 author: Hannes Mühleisen
 excerpt: ""
 toc: false

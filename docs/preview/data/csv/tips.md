@@ -45,6 +45,13 @@ The `union_by_name` option can be used to unify the schema of files that have di
 SELECT * FROM read_csv('flights*.csv', union_by_name = true);
 ```
 
+To load data into _an existing table_ where the table has more columns than the CSV file, you can use the [`INSERT INTO ... BY NAME` clause]({% link docs/stable/sql/statements/insert.md %}#insert-into--by-name):
+
+```sql
+INSERT INTO tbl BY NAME
+    SELECT * FROM read_csv('input.csv');
+```
+
 ## Sample Size
 
 If the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}) is not detecting the correct type, try increasing the sample size.

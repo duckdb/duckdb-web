@@ -191,6 +191,17 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 | `keyword_name` | The keyword. | `VARCHAR` |
 | `keyword_category` | Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
 
+## `duckdb_prepared_statements`
+
+The `duckdb_prepared_statements()` function provides metadata about the [prepared statements]({% link docs/preview/sql/query_syntax/prepared_statements.md %}) that exist in the current DuckDB session.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | The name of the prepared statement. | `VARCHAR` |
+| `statement` | The SQL statement. | `VARCHAR` |
+| `parameter_types` | The expected parameter types for the statement's parameters. Currently returns `UNKNOWN` for all parameters. | `VARCHAR[]` |
+| `result_types` | The types of the columns in the table returned by the prepared statement. | `VARCHAR[]` |
+
 ## `duckdb_memory`
 
 The `duckdb_memory()` function provides metadata about DuckDB's buffer manager.
@@ -345,7 +356,7 @@ The `duckdb_variables()` function provides metadata about the variables availabl
 | Column | Description | Type |
 |:-|:---|:-|
 | `name` | The name of the variable, e.g., `x`. | `VARCHAR` |
-| `value` | The value of the variable, e.g. `12`. | `VARCHAR` |
+| `value` | The value of the variable, e.g., `12`. | `VARCHAR` |
 | `type` | The type of the variable, e.g., `INTEGER`. | `VARCHAR` |
 
 ## `duckdb_views`

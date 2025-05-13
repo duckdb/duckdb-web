@@ -8,9 +8,7 @@ However, additional libraries can be used to simplify SQL query development.
 This guide will describe how to utilize those additional libraries.
 See other guides in the Python section for how to use DuckDB and Python together.
 
-In this example, we use the [JupySQL](https://github.com/ploomber/jupysql) package.
-
-This example workflow is also available as a [Google Colab notebook](https://colab.research.google.com/drive/1eOA2FYHqEfZWLYssbUxdIpSL3PFxWVjk?usp=sharing).
+In this example, we use the [JupySQL](https://github.com/ploomber/jupysql) package. This example workflow is also available as a [Google Colab notebook](https://colab.research.google.com/drive/1bNfU8xRTu8MQJnCbyyDRxvptklLb0ExH?usp=sharing).
 
 ## Library Installation
 
@@ -49,6 +47,14 @@ pip install jupysql pandas matplotlib duckdb-engine
 
 Open a Jupyter Notebook and import the relevant libraries.
 
+Set configurations on jupysql to directly output data to Pandas and to simplify the output that is printed to the notebook.
+
+```python
+%config SqlMagic.autopandas = True
+%config SqlMagic.feedback = False
+%config SqlMagic.displaycon = False
+```
+
 ### Connecting to DuckDB Natively
 
 To connect to DuckDB, run:
@@ -62,7 +68,9 @@ conn = duckdb.connect()
 %sql conn --alias duckdb
 ```
 
-### Connecting to DuckDB via SQLAlchemy Using `duckdb_engine`
+> Warning [Variables]({% link docs/preview/sql/statements/set_variable.md %}) are not recognized within a native DuckDB connection.
+
+### Connecting to DuckDB via SQLAlchemy
 
 Alternatively, you can connect to DuckDB via SQLAlchemy using `duckdb_engine`. See the [performance and feature differences](https://jupysql.ploomber.io/en/latest/tutorials/duckdb-native-sqlalchemy.html).
 
@@ -75,16 +83,6 @@ import pandas as pd
 # Import jupysql Jupyter extension to create SQL cells
 %load_ext sql
 ```
-
-Set configurations on jupysql to directly output data to Pandas and to simplify the output that is printed to the notebook.
-
-```python
-%config SqlMagic.autopandas = True
-%config SqlMagic.feedback = False
-%config SqlMagic.displaycon = False
-```
-
-Connect jupysql to DuckDB using a SQLAlchemy-style connection string.
 Either connect to a new [in-memory DuckDB]({% link docs/preview/clients/python/dbapi.md %}#in-memory-connection), the [default connection]({% link docs/preview/clients/python/dbapi.md %}#default-connection) or a file backed database:
 
 ```sql
@@ -144,6 +142,7 @@ The dataframe being queried can be specified just like any other table in the `F
 ```sql
 %sql output_df << SELECT sum(i) AS total_i FROM input_df;
 ```
+> Warning When using the SQLAlchemy connection, and DuckDB >= 1.1.0, make sure to run `%sql SET python_scan_all_frames=true`, to make Pandas dataframes queryable. 
 
 ## Visualizing DuckDB Data
 
@@ -151,6 +150,24 @@ The most common way to plot datasets in Python is to load them using Pandas and 
 This approach requires loading all data into memory which is highly inefficient.
 The plotting module in JupySQL runs computations in the SQL engine.
 This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets.
+
+### Boxplot & Histogram
+
+To create a boxplot, call `%sqlplot boxplot`, passing the name of the table and the column to plot.
+In this case, the name of the table is the path of the locally stored Parquet file.
+
+```python
+from urllib.request import urlretrieve
+
+_ = urlretrieve(
+    "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet",
+    "yellow_tripdata_2021-01.parquet",
+)
+
+%sqlplot boxplot --table yellow_tripdata_2021-01.parquet --column trip_distance
+```
+
+![Boxplot of the trip_distance column](/images/trip-distance-boxplot.png)
 
 ### Install and Load DuckDB httpfs Extension
 
@@ -164,17 +181,6 @@ DuckDB can be used to process local [Parquet files]({% link docs/preview/data/pa
 INSTALL httpfs;
 LOAD httpfs;
 ```
-
-### Boxplot & Histogram
-
-To create a boxplot, call `%sqlplot boxplot`, passing the name of the table and the column to plot.
-In this case, the name of the table is the URL of the remotely stored Parquet file.
-
-```python
-%sqlplot boxplot --table https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet --column trip_distance
-```
-
-![Boxplot of the trip_distance column](/images/trip-distance-boxplot.png)
 
 Now, create a query that filters by the 90th percentile.
 Note the use of the `--save`, and `--no-execute` functions.
@@ -199,3 +205,5 @@ This uses `--with short-trips` so JupySQL uses the query defined previously and 
 ## Summary
 
 You now have the ability to alternate between SQL and Pandas in a simple and highly performant way! You can plot massive datasets directly through the engine (avoiding both the download of the entire file and loading all of it into Pandas in memory). Dataframes can be read as tables in SQL, and SQL results can be output into Dataframes. Happy analyzing!
+
+An alternative to `jupysql` is [`magic_duckdb`](https://github.com/iqmo-org/magic_duckdb).

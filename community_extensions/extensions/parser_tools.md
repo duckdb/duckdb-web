@@ -99,8 +99,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 434
-extension_download_count_pretty: 434
+extension_download_count: 382
+extension_download_count_pretty: 382
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
 layout: community_extension_doc
 ---

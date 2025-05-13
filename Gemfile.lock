@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: c0a25428d778cd3a0ecbdc370e9dd9e7517fe5c5
+  revision: 53c9de7d015ea35549e27cda50782abf5d5b8f3a
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -189,7 +189,7 @@ GEM
       sawyer (~> 0.9)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
-    public_suffix (6.0.1)
+    public_suffix (6.0.2)
     racc (1.8.1)
     rake (13.2.1)
     rb-fsevent (0.11.2)

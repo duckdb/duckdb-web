@@ -44,7 +44,7 @@ SELECT 'abc' NOT ILIKE '%C'; -- false
 
 To search within a string for a character that is a wildcard (`%` or `_`), the pattern must use an `ESCAPE` clause and an escape character to indicate the wildcard should be treated as a literal character instead of a wildcard. See an example below.
 
-Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs]({% link docs/preview/sql/functions/char.md %}) for details.
+Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs]({% link docs/preview/sql/functions/text.md %}) for details.
 
 Search for strings with 'a' then a literal percent sign then 'c':
 
@@ -203,7 +203,7 @@ DuckDB supports some PostgreSQL-style operators for regular expression matching:
 
 | PostgreSQL-style | Equivalent expression                                                                                    |
 | :--------------- | :------------------------------------------------------------------------------------------------------- |
-| `~`              | [`regexp_full_match`]({% link docs/preview/sql/functions/char.md %}#regexp_full_matchstring-regex)       |
-| `!~`             | `NOT` [`regexp_full_match`]({% link docs/preview/sql/functions/char.md %}#regexp_full_matchstring-regex) |
+| `~`              | [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex)       |
+| `!~`             | `NOT` [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex) |
 | `~*`             | (not supported)                                                                                          |
 | `!~*`            | (not supported)                                                                                          |

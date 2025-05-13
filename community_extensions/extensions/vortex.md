@@ -8,8 +8,8 @@ excerpt: |
 extension:
   name: vortex
   description: Provides write and scan function for vortex files
-  version: 0.0.1
-  language: C++
+  version: 0.1.0
+  language: C++,Rust
   build: cmake
   license: Apache-2.0
   maintainers:
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: spiraldb/duckdb-vortex
-  ref: 8e779ea539fd86719e3aa1a8fc49a3cbfbdd9aa5
+  ref: 6a80b20be682bf42bb685f0ce3123e4821944526
 
 docs:
   hello_world: |
@@ -30,10 +30,10 @@ docs:
     scan a vortex file
     `select * from read_vortex('...');`
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 387
+extension_download_count_pretty: 387
 image: '/images/community_extensions/social_preview/preview_community_extension_vortex.png'
 layout: community_extension_doc
 ---

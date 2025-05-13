@@ -32,9 +32,9 @@ The functions below are difficult to categorize into specific function types and
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
 | [`is_histogram_other_bin(arg)`](#is_histogram_other_binarg) | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/preview/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/preview/sql/functions/aggregates.md %}#histogramargboundaries) function. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
-| [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
-| [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
-| [`md5_number_higher(string)`](#md5_number_higherstring) | Returns the higher 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
+| [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `UHUGEINT`. |
+| [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
+| [`md5_number_upper(string)`](#md5_number_upperstring) | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
 | [`nextval('sequence_name')`](#nextvalsequence_name) | Return the following value of the sequence. |
 | [`nullif(a, b)`](#nullifa-b) | Return `NULL` if `a = b`, else return `a`. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
 | [`pg_typeof(expression)`](#pg_typeofexpression) | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility. |
@@ -217,32 +217,32 @@ The functions below are difficult to categorize into specific function types and
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the MD5 hash of the `string` as a `VARCHAR`. |
-| **Example** | `md5('123')` |
-| **Result** | `202cb962ac59075b964b07152d234b70` |
+| **Example** | `md5('abc')` |
+| **Result** | `900150983cd24fb0d6963f7d28e17f72` |
 
 #### `md5_number(string)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `string` as a `HUGEINT`. |
-| **Example** | `md5_number('123')` |
-| **Result** | `149263671248412135425768892945843956768` |
+| **Description** | Returns the MD5 hash of the `string` as a `UHUGEINT`. |
+| **Example** | `md5_number('abc')` |
+| **Result** | `152195979970564155685860391459828531600` |
 
 #### `md5_number_lower(string)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the lower 8 bytes of the MD5 hash of `string` as a `BIGINT`. |
-| **Example** | `md5_number_lower('123')` |
-| **Result** | `8091599832034528150` |
+| **Description** | Returns the lower 8 bytes of the MD5 hash of `string` as a `UBIGINT`. |
+| **Example** | `md5_number_lower('abc')` |
+| **Result** | `8250560606382298838` |
 
-#### `md5_number_higher(string)`
+#### `md5_number_upper(string)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the higher 8 bytes of the MD5 hash of `string` as a `BIGINT`. |
-| **Example** | `md5_number_higher('123')` |
-| **Result** | `6559309979213966368` |
+| **Description** | Returns the upper 8 bytes of the MD5 hash of `string` as a `UBIGINT`. |
+| **Example** | `md5_number_upper('abc')` |
+| **Result** | `12704604231530709392` |
 
 #### `nextval('sequence_name')`
 

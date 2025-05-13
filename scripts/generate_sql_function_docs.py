@@ -22,7 +22,7 @@ class DocFunction:
 DOC_VERSION = 'preview'
 DOC_FILES = [
     f'docs/{DOC_VERSION}/sql/functions/blob.md',
-    f'docs/{DOC_VERSION}/sql/functions/char.md',
+    f'docs/{DOC_VERSION}/sql/functions/text.md',
 ]
 
 # 'functions' that are binary operators are listed between the arguments
@@ -54,15 +54,15 @@ OVERRIDES: list[DocFunction] = [
         category='string',
         name='md5_number_lower',
         parameters=['string'],
-        description="Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`.",
-        examples=["md5_number_lower('123')"],
+        description="Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`.",
+        examples=["md5_number_lower('abc')"],
     ),
     DocFunction(
         category='string',
         name='md5_number_upper',
         parameters=['string'],
-        description="Returns the upper 64-bit segment of the MD5 hash of the `string` as a `BIGINT`.",
-        examples=["md5_number_upper('123')"],
+        description="Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`.",
+        examples=["md5_number_upper('abc')"],
     ),
     DocFunction(
         category='regex',

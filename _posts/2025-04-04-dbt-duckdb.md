@@ -277,11 +277,11 @@ dutch_railway_network:
       type: duckdb
       path: data/dutch_railway_network.duckdb
       extensions:
-        ...
+        - ...
         - postgres
       threads: 5
       attach:
-        ...
+        - ...
         - path: "postgresql://postgres:{{ env_var('DBT_DUCKDB_PG_PWD') }}@localhost:5466/postgres"
           type: postgres
           alias: postgres_db

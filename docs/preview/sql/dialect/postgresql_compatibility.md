@@ -169,11 +169,34 @@ LINE 1: SELECT 1 == 1 AS t;
 
 Note that the use of `==` is not encouraged due to its limited portability.
 
-## Vacuuming tables
+## Vacuuming Tables
 
 In PostgreSQL, the `VACUUM` statement garbage collects tables and analyzes tables.
 In DuckDB, the [`VACUUM` statement]({% link docs/preview/sql/statements/vacuum.md %}) is only used to rebuild statistics.
 For instruction on reclaiming space, refer to the [“Reclaiming space” page]({% link docs/preview/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
+
+## Strings
+
+Since version 1.3.0, DuckDB escapes characters such as `'` in strings serialized in nested data structures.
+PostgreSQL does not do this.
+
+For an example, run:
+
+```sql
+SELECT ARRAY[''''];
+```
+
+PostgreSQL returns:
+
+```text
+{'}
+```
+
+DuckDB returns:
+
+```text
+['\'']
+```
 
 ## Functions
 
@@ -242,7 +265,7 @@ To work around this, add the other attributes or use the [`GROUP BY ALL` clause]
 
 PostgreSQL supports the [POSIX regular expression matching operators]({% link docs/preview/sql/functions/pattern_matching.md %}) `~` (case-sensitive partial regex matching) and `~*` (case-insensitive partial regex matching) as well as their negated variants, `!~` and `!~*`, respectively.
 
-In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/preview/sql/functions/char.md %}#regexp_full_matchstring-regex) and `!~` is equivalent to `NOT regexp_full_match`.
+In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex) and `!~` is equivalent to `NOT regexp_full_match`.
 The operators `~*` and `!~*` are not supported.
 
 The table below shows that the correspondence between these functions in PostgreSQL and DuckDB is almost non-existent.

@@ -27,7 +27,7 @@ Before you get started using the R-tree index, there are some limitations to be 
 
 In the future we want to enable R-tree indexes to be used to accelerate additional predicate functions and more complex queries such a spatial joins.
 
-## How To Use R-Tree Indexes in DuckDB
+## How to Use R-Tree Indexes in DuckDB
 
 To create an R-tree index, simply use the `CREATE INDEX` statement with the `USING RTREE` clause, passing the geometry column to index within the parentheses. For example:
 

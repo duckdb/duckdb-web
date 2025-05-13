@@ -44,10 +44,10 @@ docs:
 
     Some (most) indices are not supported for gpus, however this is very easily resolvable. Please open an issue over at our repository in order to get this resolved!
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 466
-extension_download_count_pretty: 466
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 408
+extension_download_count_pretty: 408
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---

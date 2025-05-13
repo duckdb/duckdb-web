@@ -72,6 +72,17 @@ DuckDB can be built for end-of-life platforms such as [macOS 11](https://endofli
 Several platforms are not supported or supported on a best-effort basis.
 See the [“Unofficial and Unsupported Platforms” page]({% link docs/preview/dev/building/unofficial_and_unsupported_platforms.md %}) for details.
 
+## Amalgamation Build
+
+DuckDB can be build as a single pair of C++ header and source code files (`duckdb.hpp` and `duckdb.cpp`) with approximately 0.5M lines of code.
+To build it, run:
+
+```bash
+python scripts/amalgamation.py
+```
+
+Note that amalgamation build is provided on a best-effort basis and is not officially supported.
+
 ## Limitations
 
 Currently, DuckDB has the following limitations:

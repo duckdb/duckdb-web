@@ -112,16 +112,15 @@ docs:
     Authentication and connection parameters can be included in the URL
     ```
     export CLICKHOUSE_URL="tcp://user:pass@remote:9440/?secure=true&skip_verify=true"
+    -- export CLICKHOUSE_URL="tcp://localhost:9000"
     ```
-    
-    --- export CLICKHOUSE_URL="tcp://localhost:9000"
     
     > This extension is experimental and potentially unstable. Do not use in production. See README for full examples.
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 528
-extension_download_count_pretty: 528
+extension_download_count: 452
+extension_download_count_pretty: 452
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql_native.png'
 layout: community_extension_doc
 ---

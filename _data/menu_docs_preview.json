@@ -785,6 +785,10 @@
                 {
                   "page": "Subqueries",
                   "url": "subqueries"
+                },
+                {
+                  "page": "TRY",
+                  "url": "try"
                 }
               ]
             },
@@ -866,7 +870,7 @@
                 },
                 {
                   "page": "Text Functions",
-                  "url": "char"
+                  "url": "text"
                 },
                 {
                   "page": "Time Functions",
@@ -1008,6 +1012,10 @@
           "page": "Core Extensions",
           "slug": "core_extensions",
           "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
             {
               "page": "AutoComplete",
               "url": "autocomplete"
@@ -1379,6 +1387,10 @@
                 {
                   "page": "Benchmarks",
                   "url": "benchmarks"
+                },
+                {
+                  "page": "Working with Huge Databases",
+                  "url": "working_with_huge_databases"
                 }
               ]
             },
@@ -1511,6 +1523,20 @@
                 {
                   "page": "Copying an In-Memory Database to a File",
                   "url": "copy_in-memory_database_to_file"
+                }
+              ]
+            },
+            {
+              "page": "Troubleshooting",
+              "slug": "troubleshooting",
+              "subsubfolderitems": [
+                {
+                  "page": "Crashes",
+                  "url": "crashes"
+                },
+                {
+                  "page": "Out of Memory Errors",
+                  "url": "oom_errors"
                 }
               ]
             },

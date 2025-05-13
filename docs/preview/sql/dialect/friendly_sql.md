@@ -45,6 +45,11 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
     * [`FILTER` clause]({% link docs/preview/sql/query_syntax/filter.md %})
     * [`GROUPING SETS`, `GROUP BY CUBE`, `GROUP BY ROLLUP` clauses]({% link docs/preview/sql/query_syntax/grouping_sets.md %})
 * [`count()` shorthand]({% link docs/preview/sql/functions/aggregates.md %}) for `count(*)`
+* [`IN` operator for lists and maps]({% link docs/preview/sql/expressions/in.md %})
+* [Specifying column names for common table expressions (`WITH`)]({% link docs/preview/sql/query_syntax/with.md %}#basic-cte-examples)
+* [Specifying column names in the `JOIN` clause]({% link docs/preview/sql/query_syntax/from.md %}#shorthands-in-the-join-clause)
+* [Using `VALUES` in the `JOIN` clause]({% link docs/preview/sql/query_syntax/from.md %}#shorthands-in-the-join-clause)
+* [Using `VALUES` in the anchor part of common table expressions]({% link docs/preview/sql/query_syntax/with.md %}#using-values)
 
 ## Literals and Identifiers
 
@@ -68,13 +73,15 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
 
 * [Dot operator for function chaining]({% link docs/preview/sql/functions/overview.md %}#function-chaining-via-the-dot-operator): `SELECT ('hello').upper()`
 * String formatters:
-    the [`format()` function with the `fmt` syntax]({% link docs/preview/sql/functions/char.md %}#fmt-syntax) and
-    the [`printf() function`]({% link docs/preview/sql/functions/char.md %}#printf-syntax)
+    the [`format()` function with the `fmt` syntax]({% link docs/preview/sql/functions/text.md %}#fmt-syntax) and
+    the [`printf() function`]({% link docs/preview/sql/functions/text.md %}#printf-syntax)
 * [List comprehensions]({% post_url 2023-08-23-even-friendlier-sql %}#list-comprehensions)
-* [List slicing]({% post_url 2022-05-04-friendlier-sql %}#string-slicing)
+* [List slicing]({% post_url 2022-05-04-friendlier-sql %}#string-slicing) and indexing from the back (`[-1]`)
 * [String slicing]({% post_url 2022-05-04-friendlier-sql %}#string-slicing)
 * [`STRUCT.*` notation]({% post_url 2022-05-04-friendlier-sql %}#struct-dot-notation)
+* [Creating `LIST` using square brackets]({% link docs/preview/sql/data_types/list.md %}#creating-lists)
 * [Simple `LIST` and `STRUCT` creation]({% post_url 2022-05-04-friendlier-sql %}#simple-list-and-struct-creation)
+* [Updating the schema of `STRUCT`s]({% link docs/preview/sql/data_types/struct.md %}#updating-the-schema)
 
 ## Join Types
 
