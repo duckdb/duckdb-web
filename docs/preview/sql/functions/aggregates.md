@@ -179,7 +179,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_max(A, B)` |
-| **Alias(es)** | `argMax(arg, val)`, `max_by(arg, val)` |
+| **Alias(es)** | `argmax(arg, val)`, `max_by(arg, val)` |
 
 #### `arg_max(arg, val, n)`
 
@@ -187,7 +187,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | The generalized case of [`arg_max`](#arg_maxarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_max(A, B, 2)` |
-| **Alias(es)** | `argMax(arg, val, n)`, `max_by(arg, val, n)` |
+| **Alias(es)** | `argmax(arg, val, n)`, `max_by(arg, val, n)` |
 
 #### `arg_max_null(arg, val)`
 
@@ -403,7 +403,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `max_by(A, B)` |
-| **Alias(es)** | `argMax(arg, val)`, `arg_max(arg, val)` |
+| **Alias(es)** | `argmax(arg, val)`, `arg_max(arg, val)` |
 
 #### `max_by(arg, val, n)`
 
@@ -411,7 +411,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
 | **Example** | `max_by(A, B, 2)` |
-| **Alias(es)** | `argMax(arg, val, n)`, `arg_max(arg, val, n)` |
+| **Alias(es)** | `argmax(arg, val, n)`, `arg_max(arg, val, n)` |
 
 #### `min(arg)`
 
