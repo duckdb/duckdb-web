@@ -50,6 +50,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`greatest(timestamp, timestamp)`](#greatesttimestamp-timestamp) | The later of two timestamps. |
 | [`isfinite(timestamp)`](#isfinitetimestamp) | Returns true if the timestamp is finite, false otherwise. |
 | [`isinf(timestamp)`](#isinftimestamp) | Returns true if the timestamp is infinite, false otherwise. |
+| [`julian(timestamp)`](#juliantimestamp) | Extract the Julian Day number from a timestamp. |
 | [`last_day(timestamp)`](#last_daytimestamp) | The last day of the month. |
 | [`least(timestamp, timestamp)`](#leasttimestamp-timestamp) | The earlier of two timestamps. |
 | [`make_timestamp(bigint, bigint, bigint, bigint, bigint, double)`](#make_timestampbigint-bigint-bigint-bigint-bigint-double) | The timestamp for the given parts. |
@@ -260,6 +261,14 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Description** | Returns true if the timestamp is infinite, false otherwise. |
 | **Example** | `isinf(TIMESTAMP '-infinity')` |
 | **Result** | `true` |
+
+#### `julian(timestamp)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Extract the Julian Day number from a timestamp. |
+| **Example** | `julian(TIMESTAMP '1992-03-22 01:02:03.1234')` |
+| **Result** | `2448704.043091706` |
 
 #### `last_day(timestamp)`
 
