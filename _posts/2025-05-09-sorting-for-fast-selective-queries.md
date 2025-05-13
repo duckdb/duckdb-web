@@ -62,11 +62,11 @@ Combined, the Parquet files are about 1.1 GB.
 This is fairly small when accessed locally but can be more of a challenge over a slow remote connection.
 In the rest of the post, we'll run different benchmarks to demonstrate how pruning can help reducing the amount of network traffic required to answer certain queries.
 
-Our hypothetical use case is to serve a dashboard where people can explore a single `origin`, a single `dest` (destination), or an `origin`–`dest` pair.
+Our first experiment is a hypothetical use case to serve a dashboard where people can explore a single `origin`, a single `dest` (destination), or an `origin`–`dest` pair.
 The `origin` and `dest` columns are three-letter airport codes (like `LAX` or `JFK`).
 We assume once you have picked one of those filters, you want all the rows that match and a few arbitrary columns.
 
-Our second experiment will add in a time component and additionally filter to the latest 1, 13, or 52 weeks of data in the dataset.
+Our second experiment will add in a time component where our hypothetical users could additionally filter to the latest 1, 13, or 52 weeks of data in the dataset.
 
 ## Experimental Results
 
@@ -98,7 +98,13 @@ They operate on integers or floats, so a SQL macro is used to convert the first 
 More details are included in the [Appendix](#appendix-experiment-details)!
 
 These plots display query runtime when pulling from a DuckDB file hosted on S3.
-Querying a local DuckDB file showed very similar patterns, but with much faster query times overall!
+These same techniques can also be successfully applied to querying a local DuckDB file, but they are more impactful when data is remote. 
+
+All queries were run on an M1 Macbook Pro. 
+The tests were conducted with the DuckDB Python client, with results returned as Apache Arrow tables. 
+Each scenario is run 3 times and all 3 results are included in the output plots.
+In between each query, the DuckDB connection is closed and recreated (this time is not measured as a part of the results).
+This is to better simulate a single experience accessing the dashboard in our hypothetical use case.
 
 <div id="remote_s3_query_performance_by_origin" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
@@ -155,8 +161,14 @@ To sort on multiple columns as well as a time column, first sort by a truncated 
 In this experiment, we truncate the `flightdate` column to three levels of granularity: day, month, and year.
 We then use our most effective multi-column approach and sort by Hilbert encoding of `origin` and `dest` next.
 
-For each of the query patterns tested previously (filters on `origin`, `destination`, and `origin` / `destination`), we filter on 3 time ranges: the latest 1 week, 13 weeks, and 52 weeks.
-This yields a total of 9 scenarios.
+For each of the query patterns tested previously (filters on `origin`, `destination`, and `origin` / `destination`), we filter on three time ranges: the latest 1 week, 13 weeks, and 52 weeks.
+
+In summary, this microbenchmark tests:
+1. Sorting with `flightdate` at three levels of granularity: day, month, and year
+1. Filtering on three time ranges: the latest 1 week, 13 weeks, and 52 weeks
+1. Filtering using the three query patterns tested previously: filters on `origin`, `destination`, and `origin` / `destination`
+
+This yields a total of 27 scenarios.
 
 <div id="remote_s3_query_performance_by_date_origin" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
@@ -359,7 +371,7 @@ FROM rowgroup_counts('flights_hilbert', ['origin', 'dest']);
 The `rowgroup_id_count` column is a measurement of how many distinct row groups that a specific column value is present in, so it is an indicator of how much work DuckDB would need to do to pull all data associated with that value.
 
 > This calculation uses the [pseudo-column `rowid`]({% link docs/preview/sql/statements/select.md %}#row-ids), and it requires data to have been inserted in a single batch to be perfectly accurate.
-> It is directionally correct for data inserted in batches.
+> It is only an approximate metric when data is inserted in batches.
 
 ## Additional Techniques
 
