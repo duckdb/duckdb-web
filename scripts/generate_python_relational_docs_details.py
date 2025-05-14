@@ -6,8 +6,8 @@ class PythonRelAPIParamDetails:
     # configure param details
     parameter_name: str = None
     parameter_type: list[str] = None
-    parameter_default: str = None
-    parameter_description: str = None
+    parameter_default: str | None = None
+    parameter_description: str | None = None
 
 
 @dataclass
@@ -1687,6 +1687,15 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
         use_default_example=True,
+        aliases=["to_table"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="table_name",
+                parameter_type=["str"],
+                parameter_default=None,
+                parameter_description="The name of the table to be created. There shouldn't be any other table with the same name.",
+            )
+        ],
     ),
     'create_view': PythonRelAPIDetails(
         example='rel.create_view("view_code_example", replace=True)\n\nduckdb_conn.table("view_code_example").limit(1)',
@@ -1699,6 +1708,21 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
         use_default_example=True,
+        aliases=["to_view"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="view_name",
+                parameter_type=["str"],
+                parameter_default=None,
+                parameter_description="The name of the view to be created.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="replace",
+                parameter_type=["bool"],
+                parameter_default="True",
+                parameter_description="If the view should be created with `CREATE OR REPLACE`. When set to `False`, there shouldn't be another view with the same `view_name`.",
+            ),
+        ],
     ),
     'df': PythonRelAPIDetails(
         example='rel.df()',
@@ -1711,6 +1735,14 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
 """,
         use_default_example=True,
         aliases=['fetchdf', 'to_df'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="date_as_object",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="If the date columns should be interpreted as Python date objects.",
+            )
+        ],
     ),
     'execute': PythonRelAPIDetails(
         example='rel.execute()',
@@ -1740,6 +1772,14 @@ value: [2]
 created_timestamp: [2025-04-10 09:25:51.259000Z]
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="batch_size",
+                parameter_type=["int"],
+                parameter_default="1000000",
+                parameter_description="The batch size for fetching the data.",
+            )
+        ],
     ),
     'fetch_arrow_table': PythonRelAPIDetails(
         example='rel.fetch_arrow_table()',
@@ -1757,6 +1797,14 @@ created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,202
 """,
         use_default_example=True,
         aliases=['arrow', 'to_arrow_table'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="batch_size",
+                parameter_type=["int"],
+                parameter_default="1000000",
+                parameter_description="The batch size for fetching the data.",
+            )
+        ],
     ),
     'fetch_df_chunk': PythonRelAPIDetails(
         example='rel.fetch_df_chunk()',
@@ -1768,6 +1816,20 @@ created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,202
 ...
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="vectors_per_chunk",
+                parameter_type=["int"],
+                parameter_default="1",
+                parameter_description="Number of data chunks to be processed before converting to dataframe.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="date_as_object",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="If the date columns should be interpreted as Python date objects.",
+            ),
+        ],
     ),
     'fetchall': PythonRelAPIDetails(
         example='rel.limit(1).fetchall()',
@@ -1790,6 +1852,14 @@ created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,202
 """,
         use_default_example=True,
         aliases=['df', 'to_df'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="date_as_object",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="If the date columns should be interpreted as Python date objects.",
+            )
+        ],
     ),
     'fetchmany': PythonRelAPIDetails(
         example="""
@@ -1834,6 +1904,14 @@ while res := rel.fetchmany(size=1):
 >    rel.show()
 >```
 ''',
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="size",
+                parameter_type=["int"],
+                parameter_default="1",
+                parameter_description="The number of records to be fetched.",
+            )
+        ],
     ),
     'fetchnumpy': PythonRelAPIDetails(
         example='rel.fetchnumpy()',
@@ -1916,6 +1994,14 @@ shape: (9, 4)
 │ b2f92c3c-9372-49f3-897f-2c86fc… ┆ value is uneven ┆ 1     ┆ 2025-04-10 11:49:51.886 CEST   │
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="batch_size",
+                parameter_type=["int"],
+                parameter_default="1000000",
+                parameter_description="The number of records to be fetched per batch.",
+            )
+        ],
     ),
     'record_batch': PythonRelAPIDetails(
         example='pa_batch = rel.record_batch(batch_size=1)\n\npa_batch.read_next_batch()',
@@ -1932,6 +2018,14 @@ value: [1]
 created_timestamp: [2025-04-10 09:52:55.249000Z]
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="batch_size",
+                parameter_type=["int"],
+                parameter_default="1000000",
+                parameter_description="The batch size for fetching the data.",
+            )
+        ],
     ),
     'tf': PythonRelAPIDetails(
         example='rel.select("description, value").tf()',
@@ -1961,12 +2055,118 @@ created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,202
 """,
         use_default_example=True,
         aliases=['fetch_arrow_table', 'arrow'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="batch_size",
+                parameter_type=["int"],
+                parameter_default="1000000",
+                parameter_description="The batch size for fetching the data.",
+            )
+        ],
     ),
     'to_csv': PythonRelAPIDetails(
         example='rel.to_csv("code_example.csv")',
         result='The data is exported to a CSV file, named code_example.csv',
         use_default_example=True,
         aliases=['write_csv'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="file_name",
+                parameter_type=["str"],
+                parameter_default=None,
+                parameter_description="The name of the output CSV file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sep",
+                parameter_type=["str"],
+                parameter_default="','",
+                parameter_description="Field delimiter for the output file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="na_rep",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Missing data representation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="header",
+                parameter_type=["bool"],
+                parameter_default="True",
+                parameter_description="Whether to write column headers.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="quotechar",
+                parameter_type=["str"],
+                parameter_default="'\"'",
+                parameter_description="Character used to quote fields containing special characters.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="escapechar",
+                parameter_type=["str"],
+                parameter_default="None",
+                parameter_description="Character used to escape the delimiter if quoting is set to QUOTE_NONE.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="date_format",
+                parameter_type=["str"],
+                parameter_default="None",
+                parameter_description="Custom format string for DATE values.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="timestamp_format",
+                parameter_type=["str"],
+                parameter_default="None",
+                parameter_description="Custom format string for TIMESTAMP values.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="quoting",
+                parameter_type=["int"],
+                parameter_default="csv.QUOTE_MINIMAL",
+                parameter_description="Control field quoting behavior (e.g., QUOTE_MINIMAL, QUOTE_ALL).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="encoding",
+                parameter_type=["str"],
+                parameter_default="'utf-8'",
+                parameter_description="Character encoding for the output file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="compression",
+                parameter_type=["str"],
+                parameter_default="auto",
+                parameter_description="Compression type (e.g., 'gzip', 'bz2', 'zstd').",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="overwrite",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="When true, all existing files inside targeted directories will be removed (not supported on remote filesystems). Only has an effect when used with `partition_by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="per_thread_output",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="When `true`, write one file per thread, rather than one file in total. This allows for faster parallel writing.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="use_tmp_file",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Write to a temporary file before renaming to final name to avoid partial writes.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="partition_by",
+                parameter_type=["list[str]"],
+                parameter_default="None",
+                parameter_description="List of column names to partition output by (creates folder structure).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="write_partition_columns",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.",
+            ),
+        ],
     ),
     'to_df': PythonRelAPIDetails(
         example='rel.to_df()',
@@ -1979,22 +2179,122 @@ created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,202
 """,
         use_default_example=True,
         aliases=['fetchdf', 'df'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="date_as_object",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="If the date columns should be interpreted as Python date objects.",
+            )
+        ],
     ),
     'to_parquet': PythonRelAPIDetails(
         example='rel.to_parquet("code_example.parquet")',
         result='The data is exported to a Parquet file, named code_example.parquet',
         use_default_example=True,
         aliases=['write_parquet'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="file_name",
+                parameter_type=["str"],
+                parameter_default=None,
+                parameter_description="The name of the output Parquet file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="compression",
+                parameter_type=["str"],
+                parameter_default="'snappy'",
+                parameter_description="The compression format to use (`uncompressed`, `snappy`, `gzip`, `zstd`, `brotli`, `lz4`, `lz4_raw`).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="field_ids",
+                parameter_type=["STRUCT"],
+                parameter_default=None,
+                parameter_description="The field_id for each column. Pass auto to attempt to infer automatically.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="row_group_size_bytes",
+                parameter_type=["int"],
+                parameter_default="row_group_size * 1024",
+                parameter_description="The target size of each row group. You can pass either a human-readable string, e.g., 2MB, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="row_group_size",
+                parameter_type=["int"],
+                parameter_default="122880",
+                parameter_description="The target size, i.e., number of rows, of each row group.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="overwrite",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="If True, overwrite the file if it exists.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="per_thread_output",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="When `True`, write one file per thread, rather than one file in total. This allows for faster parallel writing.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="use_tmp_file",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Write to a temporary file before renaming to final name to avoid partial writes.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="partition_by",
+                parameter_type=["list[str]"],
+                parameter_default="None",
+                parameter_description="List of column names to partition output by (creates folder structure).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="write_partition_columns",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="append",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="When `True`, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with `partition_by`.",
+            ),
+        ],
     ),
     'to_table': PythonRelAPIDetails(
         example='rel.to_table("table_code_example")',
         result='A table, named table_code_example, is created with the data of the relation',
         use_default_example=True,
+        aliases=["create"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="table_name",
+                parameter_type=["str"],
+                parameter_default=None,
+                parameter_description="The name of the table to be created. There shouldn't be any other table with the same name.",
+            )
+        ],
     ),
     'to_view': PythonRelAPIDetails(
         example='rel.to_view("view_code_example", replace=True)',
         result='A view, named view_code_example, is created with the query definition of the relation',
         use_default_example=True,
+        aliases=["create_view"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="view_name",
+                parameter_type=["str"],
+                parameter_default=None,
+                parameter_description="The name of the view to be created.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="replace",
+                parameter_type=["bool"],
+                parameter_default="True",
+                parameter_description="If the view should be created with `CREATE OR REPLACE`. When set to `False`, there shouldn't be another view with the same `view_name`.",
+            ),
+        ],
     ),
     'torch': PythonRelAPIDetails(
         example='rel.select("value").torch()',
@@ -2006,12 +2306,178 @@ created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,202
         result='The data is exported to a CSV file, named code_example.csv',
         use_default_example=True,
         aliases=['to_csv'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="file_name",
+                parameter_type=["str"],
+                parameter_default=None,
+                parameter_description="The name of the output CSV file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sep",
+                parameter_type=["str"],
+                parameter_default="','",
+                parameter_description="Field delimiter for the output file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="na_rep",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Missing data representation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="header",
+                parameter_type=["bool"],
+                parameter_default="True",
+                parameter_description="Whether to write column headers.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="quotechar",
+                parameter_type=["str"],
+                parameter_default="'\"'",
+                parameter_description="Character used to quote fields containing special characters.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="escapechar",
+                parameter_type=["str"],
+                parameter_default="None",
+                parameter_description="Character used to escape the delimiter if quoting is set to QUOTE_NONE.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="date_format",
+                parameter_type=["str"],
+                parameter_default="None",
+                parameter_description="Custom format string for DATE values.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="timestamp_format",
+                parameter_type=["str"],
+                parameter_default="None",
+                parameter_description="Custom format string for TIMESTAMP values.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="quoting",
+                parameter_type=["int"],
+                parameter_default="csv.QUOTE_MINIMAL",
+                parameter_description="Control field quoting behavior (e.g., QUOTE_MINIMAL, QUOTE_ALL).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="encoding",
+                parameter_type=["str"],
+                parameter_default="'utf-8'",
+                parameter_description="Character encoding for the output file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="compression",
+                parameter_type=["str"],
+                parameter_default="auto",
+                parameter_description="Compression type (e.g., 'gzip', 'bz2', 'zstd').",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="overwrite",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="When true, all existing files inside targeted directories will be removed (not supported on remote filesystems). Only has an effect when used with `partition_by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="per_thread_output",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="When `true`, write one file per thread, rather than one file in total. This allows for faster parallel writing.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="use_tmp_file",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Write to a temporary file before renaming to final name to avoid partial writes.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="partition_by",
+                parameter_type=["list[str]"],
+                parameter_default="None",
+                parameter_description="List of column names to partition output by (creates folder structure).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="write_partition_columns",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.",
+            ),
+        ],
     ),
     'write_parquet': PythonRelAPIDetails(
         example='rel.write_parquet("code_example.parquet")',
         result='The data is exported to a Parquet file, named code_example.parquet',
         use_default_example=True,
         aliases=['to_parquet'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="file_name",
+                parameter_type=["str"],
+                parameter_default=None,
+                parameter_description="The name of the output Parquet file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="compression",
+                parameter_type=["str"],
+                parameter_default="'snappy'",
+                parameter_description="The compression format to use (`uncompressed`, `snappy`, `gzip`, `zstd`, `brotli`, `lz4`, `lz4_raw`).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="field_ids",
+                parameter_type=["STRUCT"],
+                parameter_default=None,
+                parameter_description="The field_id for each column. Pass auto to attempt to infer automatically.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="row_group_size_bytes",
+                parameter_type=["int"],
+                parameter_default="row_group_size * 1024",
+                parameter_description="The target size of each row group. You can pass either a human-readable string, e.g., 2MB, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="row_group_size",
+                parameter_type=["int"],
+                parameter_default="122880",
+                parameter_description="The target size, i.e., number of rows, of each row group.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="overwrite",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="If True, overwrite the file if it exists.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="per_thread_output",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="When `True`, write one file per thread, rather than one file in total. This allows for faster parallel writing.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="use_tmp_file",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Write to a temporary file before renaming to final name to avoid partial writes.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="partition_by",
+                parameter_type=["list[str]"],
+                parameter_default="None",
+                parameter_description="List of column names to partition output by (creates folder structure).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="write_partition_columns",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="append",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="When `True`, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with `partition_by`.",
+            ),
+        ],
     ),
 }
 
