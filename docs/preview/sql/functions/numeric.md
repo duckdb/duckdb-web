@@ -67,7 +67,7 @@ The table below shows the available mathematical functions.
 | [`divide(x, y)`](#dividex-y) | Alias for `x // y`. |
 | [`even(x)`](#evenx) | Round to next even number by rounding away from zero. |
 | [`exp(x)`](#expx) | Computes `e ** x`. |
-| [`factorial(x)`](#factorialx) | See `!` operator. Computes the product of the current integer and all integers below it. |
+| [`factorial(x)`](#factorialx) | See the `!` operator. Computes the product of the current integer and all integers below it. |
 | [`fdiv(x, y)`](#fdivx-y) | Performs integer division (`x // y`) but returns a `DOUBLE` value. |
 | [`floor(x)`](#floorx) | Rounds the number down. |
 | [`fmod(x, y)`](#fmodx-y) | Calculates the modulo value. Always returns a `DOUBLE` value. |
@@ -271,7 +271,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | See `!` operator. Computes the product of the current integer and all integers below it. |
+| **Description** | See the `!` operator. Computes the product of the current integer and all integers below it. |
 | **Example** | `factorial(4)` |
 | **Result** | `24` |
 
