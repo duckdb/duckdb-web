@@ -12,6 +12,7 @@ The functions below are difficult to categorize into specific function types and
 | Name | Description |
 |:--|:-------|
 | [`alias(column)`](#aliascolumn) | Return the name of the column. |
+| [`can_cast_implicitly(source_value, target_value)`](#can_cast_implicitlysource_value-target_value) | Whether or not we can implicitly cast from the types of the source value to the target value. |
 | [`checkpoint(database)`](#checkpointdatabase) | Synchronize WAL with file for (optional) database without interrupting transactions. |
 | [`coalesce(expr, ...)`](#coalesceexpr-) | Return the first expression that evaluates to a non-`NULL` value. Accepts 1 or more parameters. Each expression can be a column, literal value, function result, or many others. |
 | [`constant_or_null(arg1, arg2)`](#constant_or_nullarg1-arg2) | If `arg2` is `NULL`, return `NULL`. Otherwise, return `arg1`. |
@@ -63,6 +64,14 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Return the name of the column. |
 | **Example** | `alias(column1)` |
 | **Result** | `column1` |
+
+#### `can_cast_implicitly(source_value, target_value)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Whether or not we can implicitly cast from the types of the source value to the target value. |
+| **Example** | `can_cast_implicitly(1::BIGINT, 1::SMALLINT)` |
+| **Result** | `false` |
 
 #### `checkpoint(database)`
 
