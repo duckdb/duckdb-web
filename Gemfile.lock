@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 0aaf03f9cf33d3486f62c7ba0951c68063e7e84f
+  revision: 17ec60c8c07447cf2e528cec16ff0d1dda12c645
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -167,7 +167,7 @@ GEM
       nokogiri (~> 1.12)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.11.3)
+    json (2.12.0)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
     kramdown-parser-gfm (1.1.0)
@@ -178,7 +178,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.6.6)
     mercenary (0.4.0)
-    mini_portile2 (2.8.8)
+    mini_portile2 (2.8.9)
     net-http (0.6.0)
       uri
     nokogiri (1.18.8)
@@ -199,7 +199,7 @@ GEM
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
-    sass-embedded (1.87.0)
+    sass-embedded (1.88.0)
       google-protobuf (~> 4.30)
       rake (>= 13)
     sass-listen (4.0.0)
