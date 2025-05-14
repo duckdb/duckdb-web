@@ -16,6 +16,7 @@ The functions below are difficult to categorize into specific function types and
 | [`coalesce(expr, ...)`](#coalesceexpr-) | Return the first expression that evaluates to a non-`NULL` value. Accepts 1 or more parameters. Each expression can be a column, literal value, function result, or many others. |
 | [`constant_or_null(arg1, arg2)`](#constant_or_nullarg1-arg2) | If `arg2` is `NULL`, return `NULL`. Otherwise, return `arg1`. |
 | [`count_if(x)`](#count_ifx) | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
+| [`create_sort_key(parameters...)`](#create_sort_keyparameters) | Constructs a binary-comparable sort key based on a set of input parameters and sort qualifiers. |
 | [`current_catalog()`](#current_catalog) | Return the name of the currently active catalog. Default is memory. |
 | [`current_schema()`](#current_schema) | Return the name of the currently active schema. Default is main. |
 | [`current_schemas(boolean)`](#current_schemasboolean) | Return list of schemas. Pass a parameter of `true` to include implicit schemas. |
@@ -94,6 +95,14 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
 | **Example** | `count_if(42)` |
 | **Result** | 1 |
+
+#### `create_sort_key(parameters...)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Constructs a binary-comparable sort key based on a set of input parameters and sort qualifiers. |
+| **Example** | `create_sort_key('abc', 'ASC NULLS FIRST');` |
+| **Result** | `\x02bcd\x00` |
 
 #### `current_catalog()`
 
