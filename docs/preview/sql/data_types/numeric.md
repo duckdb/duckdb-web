@@ -18,11 +18,11 @@ The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` and `UHUGEINT` store wh
 | `INTEGER`   | `INT4`, `INT32`, `INT`, `SIGNED` |  - 2^31 |  2^31 - 1 |             4 |
 | `BIGINT`    | `INT8`, `INT64` `LONG`           |  - 2^63 |  2^63 - 1 |             8 |
 | `HUGEINT`   | `INT128`                         | - 2^127 | 2^127 - 1 |            16 |
-| `UTINYINT`  | -                                |       0 |   2^8 - 1 |             1 |
-| `USMALLINT` | -                                |       0 |  2^16 - 1 |             2 |
-| `UINTEGER`  | -                                |       0 |  2^32 - 1 |             4 |
-| `UBIGINT`   | -                                |       0 |  2^64 - 1 |             8 |
-| `UHUGEINT`  | -                                |       0 | 2^128 - 1 |            16 |
+| `UTINYINT`  | `UINT8`                          |       0 |   2^8 - 1 |             1 |
+| `USMALLINT` | `UINT16`                         |       0 |  2^16 - 1 |             2 |
+| `UINTEGER`  | `UINT32`                         |       0 |  2^32 - 1 |             4 |
+| `UBIGINT`   | `UINT64`                         |       0 |  2^64 - 1 |             8 |
+| `UHUGEINT`  | `UINT128`                        |       0 | 2^128 - 1 |            16 |
 
 The type integer is the common choice, as it offers the best balance between range, storage size, and performance. The `SMALLINT` type is generally only used if disk space is at a premium. The `BIGINT` and `HUGEINT` types are designed to be used when the range of the integer type is insufficient.
 

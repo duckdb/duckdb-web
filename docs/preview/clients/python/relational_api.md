@@ -74,6 +74,12 @@ from_arrow(self: duckdb.duckdb.DuckDBPyConnection, arrow_object: object) -> duck
 
 Create a relation object from an Arrow object
 
+#### Parameters
+
+- **arrow_object** : pyarrow.Table, pyarrow.RecordBatch
+                            
+	Arrow object to create a relation from
+
 ##### Example
 
 ```python
@@ -2146,7 +2152,7 @@ rel.show()
 
 ## Functions 
 
-This section contains the functions which can be applied to an relation,         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
+This section contains the functions which can be applied to a relation,         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
 
 | Name | Description |
 |:--|:-------|
@@ -4879,6 +4885,12 @@ arrow(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarro
 Execute and fetch all rows as an Arrow Table
 
 **Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`to_arrow_table`](#to_arrow_table)
+
+#### Parameters
+
+- **batch_size** : int, default: 1000000
+                            
+	The batch size of writing the data to the Arrow table
 
 ##### Example
 

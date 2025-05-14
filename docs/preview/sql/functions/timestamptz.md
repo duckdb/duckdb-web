@@ -28,6 +28,7 @@ they are always available.
 | [`isinf(timestamptz)`](#isinftimestamptz) | Returns true if the timestamp with time zone is infinite, false otherwise. |
 | [`least(timestamptz, timestamptz)`](#leasttimestamptz-timestamptz) | The earlier of two timestamps. |
 | [`now()`](#now) | Current date and time (start of current transaction). |
+| [`timetz_byte_comparable(timetz)`](#timetz_byte_comparabletimetz) | Converts a `TIME WITH TIME ZONE` to a `UBIGINT` sort key. |
 | [`to_timestamp(double)`](#to_timestampdouble) | Converts seconds since the epoch to a timestamp with time zone. |
 | [`transaction_timestamp()`](#transaction_timestamp) | Current date and time (start of current transaction). |
 
@@ -86,6 +87,14 @@ they are always available.
 | **Description** | Current date and time (start of current transaction). |
 | **Example** | `now()` |
 | **Result** | `2022-10-08 12:44:46.122-07` |
+
+#### `timetz_byte_comparable(timetz)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts a `TIME WITH TIME ZONE` to a `UBIGINT` sort key. |
+| **Example** | `timetz_byte_comparable('18:18:16.21-07:00'::TIMETZ)` |
+| **Result** | `2494691656335442799` |
 
 #### `to_timestamp(double)`
 

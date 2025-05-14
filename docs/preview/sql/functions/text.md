@@ -109,6 +109,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`substring(string, start[, length])`](#substringstring-start-length) | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
 | [`substring_grapheme(string, start[, length])`](#substring_graphemestring-start-length) | Extracts substring starting from grapheme clusters `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` grapheme clusters instead. Note that a `start` value of `1` refers to the `first` character of the `string`. |
 | [`suffix(string, search_string)`](#suffixstring-search_string) | Returns `true` if `string` ends with `search_string`. |
+| [`to_base(number, raxid[, min_length])`](#to_basenumber-raxid-min_length) |  Converts `number` to a string in the given base `radix`, optionally padding with leading zeros to `min_length`. |
 | [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`to_binary(string)`](#to_binarystring) | Converts the `string` to binary representation. |
 | [`to_hex(string)`](#to_hexstring) | Converts the `string` to hexadecimal representation. |
@@ -915,6 +916,12 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `suffix('abc', 'bc')` |
 | **Result** | `true` |
 | **Alias** | `ends_with` |
+
+#### `to_base(number, raxid[, min_length])`
+
+| **Description** | Converts `number` to a string in the given base `radix`, optionally padding with leading zeros to `min_length`. |
+| **Example** | `to_base(42, 16, 5)` |
+| **Result** | `0002A` |
 
 #### `to_base64(blob)`
 

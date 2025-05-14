@@ -1013,6 +1013,10 @@
           "slug": "core_extensions",
           "subfolderitems": [
             {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
               "page": "AutoComplete",
               "url": "autocomplete"
             },
@@ -1519,6 +1523,20 @@
                 {
                   "page": "Copying an In-Memory Database to a File",
                   "url": "copy_in-memory_database_to_file"
+                }
+              ]
+            },
+            {
+              "page": "Troubleshooting",
+              "slug": "troubleshooting",
+              "subsubfolderitems": [
+                {
+                  "page": "Crashes",
+                  "url": "crashes"
+                },
+                {
+                  "page": "Out of Memory Errors",
+                  "url": "oom_errors"
                 }
               ]
             },

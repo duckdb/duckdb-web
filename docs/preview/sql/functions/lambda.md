@@ -3,17 +3,38 @@ layout: docu
 title: Lambda Functions
 ---
 
+> Deprecated DuckDB 1.3.0 deprecated the old lambda single arrow syntax (`x -> x + 1`)
+> in favor of the Python-style syntax (`LAMBDA x : x + 1`).
+>
+> DuckDB 1.3.0 also introduces a new setting to configure the lambda syntax.
+>
+> ```sql
+> SET lambda_syntax = 'DEFAULT';
+> SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
+> SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
+> ```
+>
+> Currently, `DEFAULT` enables both syntax styles, i.e.,
+> the old single arrow syntax and the Python-style syntax.
+>
+> DuckDB 1.4.0 will be the last release supporting the single arrow syntax without explicitly enabling it.
+>
+> DuckDB 1.5.0 disables the single arrow syntax on default.
+>
+> DuckDB 1.6.0 removes the `lambda_syntax` flag and fully deprecates the single arrow syntax,
+> so the old behavior will no longer be possible.
+
 Lambda functions enable the use of more complex and flexible expressions in queries.
 DuckDB supports several scalar functions that operate on [`LIST`s]({% link docs/preview/sql/data_types/list.md %}) and
 accept lambda functions as parameters
-in the form `(parameter1, parameter2, ...) -> expression`.
+in the form `LAMBDA (⟨parameter1⟩, ⟨parameter2⟩, ...) : ⟨expression⟩`{:.language-sql .highlight}.
 If the lambda function has only one parameter, then the parentheses can be omitted.
 The parameters can have any names.
 For example, the following are all valid lambda functions:
 
-* `param -> param > 1`
-* `s -> contains(concat(s, 'DB'), 'duck')`
-* `(acc, x) -> acc + x`
+* `LAMBDA param : param > 1`{:.language-sql .highlight}
+* `LAMBDA s : contains(concat(s, 'DB'), 'duck')`{:.language-sql .highlight}
+* `LAMBDA (acc, x) : acc + x`{:.language-sql .highlight}
 
 ## Scalar Functions That Accept Lambda Functions
 
@@ -28,7 +49,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the lambda function to each element of the input list. The return type is defined by the return type of the lambda function. See [`list_transform` examples](#list_transform-examples). |
-| **Example** | `list_transform([4, 5, 6], x -> x + 1)` |
+| **Example** | `list_transform([4, 5, 6], LAMBDA x : x + 1)`{:.language-sql .highlight} |
 | **Result** | `[5, 6, 7]` |
 | **Aliases** | `array_transform`, `apply`, `list_apply`, `array_apply` |
 
@@ -37,7 +58,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Constructs a list from those elements of the input list for which the lambda function returns `true`. DuckDB must be able to cast the lambda function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples](#list_filter-examples). |
-| **Example** | `list_filter([4, 5, 6], x -> x > 4)` |
+| **Example** | `list_filter([4, 5, 6], LAMBDA x : x > 4)`{:.language-sql .highlight} |
 | **Result** | `[5, 6]` |
 | **Aliases** | `array_filter`, `filter` |
 
@@ -46,7 +67,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Reduces all elements of the input list into a single scalar value by executing the lambda function on a running result and the next list element. The lambda function has an optional `initial_value` argument. See [`list_reduce` examples](#list_reduce-examples) or details. |
-| **Example** | `list_reduce([1, 2, 3], (x, y) -> x + y, 100);` |
+| **Example** | `list_reduce([1, 2, 3], LAMBDA (x, y) : x + y, 100)`{:.language-sql .highlight} |
 | **Result** | `106` |
 | **Aliases** | `array_reduce`, `reduce` |
 
@@ -56,8 +77,8 @@ All scalar functions can be arbitrarily nested. For example, nested lambda funct
 
 ```sql
 SELECT list_transform(
-        list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0),
-        y -> y * y
+        list_filter([0, 1, 2, 3, 4, 5], LAMBDA x : x % 2 = 0),
+        LAMBDA y : y * y
     );
 ```
 
@@ -70,7 +91,8 @@ Nested lambda function to add each element of the first list to the sum of the s
 ```sql
 SELECT list_transform(
         [1, 2, 3],
-        x -> list_reduce([4, 5, 6], (a, b) -> a + b) + x
+        LAMBDA x :
+            list_reduce([4, 5, 6], LAMBDA (a, b) : a + b) + x
     );
 ```
 
@@ -90,7 +112,11 @@ Lambda functions confirm to scoping rules in the following order:
 ```sql
 CREATE TABLE tbl (x INTEGER);
 INSERT INTO tbl VALUES (10);
-SELECT apply([1, 2], x -> apply([4], x -> x + tbl.x)[1] + x) FROM tbl;
+SELECT list_apply(
+            [1, 2],
+            LAMBDA x : list_apply([4], LAMBDA x : x + tbl.x)[1] + x
+    )
+FROM tbl;
 ```
 
 ```text
@@ -105,7 +131,7 @@ This is always the last parameter of the lambda function (e.g., `i` in `(x, i)`)
 Get all elements that are larger than their index:
 
 ```sql
-SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
+SELECT list_filter([1, 3, 1, 5], LAMBDA (x, i) : x > i);
 ```
 
 ```text
@@ -119,7 +145,7 @@ SELECT list_filter([1, 3, 1, 5], (x, i) -> x > i);
 Incrementing each list element by one:
 
 ```sql
-SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
+SELECT list_transform([1, 2, NULL, 3], LAMBDA x : x + 1);
 ```
 
 ```text
@@ -129,7 +155,7 @@ SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
 Transforming strings:
 
 ```sql
-SELECT list_transform(['Duck', 'Goose', 'Sparrow'], s -> concat(s, 'DB'));
+SELECT list_transform(['Duck', 'Goose', 'Sparrow'], LAMBDA s : concat(s, 'DB'));
 ```
 
 ```text
@@ -139,7 +165,7 @@ SELECT list_transform(['Duck', 'Goose', 'Sparrow'], s -> concat(s, 'DB'));
 Combining lambda functions with other functions:
 
 ```sql
-SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
+SELECT list_transform([5, NULL, 6], LAMBDA x : coalesce(x, 0) + 1);
 ```
 
 ```text
@@ -151,7 +177,7 @@ SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
 Filter out negative values:
 
 ```sql
-SELECT list_filter([5, -6, NULL, 7], x -> x > 0);
+SELECT list_filter([5, -6, NULL, 7], LAMBDA x : x > 0);
 ```
 
 ```text
@@ -162,8 +188,8 @@ Divisible by 2 and 5:
 
 ```sql
 SELECT list_filter(
-        list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 = 0),
-        y -> y % 5 = 0
+        list_filter([2, 4, 3, 1, 20, 10, 3, 30], LAMBDA x : x % 2 = 0),
+        LAMBDA y : y % 5 = 0
     );
 ```
 
@@ -174,7 +200,7 @@ SELECT list_filter(
 In combination with `range(...)` to construct lists:
 
 ```sql
-SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
+SELECT list_filter([1, 2, 3, 4], LAMBDA x : x > #1) FROM range(4);
 ```
 
 ```text
@@ -182,7 +208,6 @@ SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
 [2, 3, 4]
 [3, 4]
 [4]
-[]
 ```
 
 ### `list_reduce` Examples
@@ -190,7 +215,7 @@ SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
 Sum of all list elements:
 
 ```sql
-SELECT list_reduce([1, 2, 3, 4], (acc, x) -> acc + x);
+SELECT list_reduce([1, 2, 3, 4], LAMBDA (acc, x) : acc + x);
 ```
 
 ```text
@@ -200,7 +225,10 @@ SELECT list_reduce([1, 2, 3, 4], (acc, x) -> acc + x);
 Only add up list elements if they are greater than 2:
 
 ```sql
-SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (acc, x) -> acc + x);
+SELECT list_reduce(
+        list_filter([1, 2, 3, 4], LAMBDA x : x > 2),
+        LAMBDA (acc, x) : acc + x
+    );
 ```
 
 ```text
@@ -210,7 +238,7 @@ SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (acc, x) -> acc + x);
 Concat all list elements:
 
 ```sql
-SELECT list_reduce(['DuckDB', 'is', 'awesome'], (acc, x) -> concat(acc, ' ', x));
+SELECT list_reduce(['DuckDB', 'is', 'awesome'], LAMBDA (acc, x) : concat(acc, ' ', x));
 ```
 
 ```text
@@ -220,7 +248,10 @@ DuckDB is awesome
 Concatenate elements with the index without an initial value:
 
 ```sql
-SELECT list_reduce(['a', 'b', 'c', 'd'], (x, y, i) -> x || ' - ' || CAST(i AS VARCHAR) || ' - ' || y);
+SELECT list_reduce(
+        ['a', 'b', 'c', 'd'],
+        LAMBDA (x, y, i) : x || ' - ' || CAST(i AS VARCHAR) || ' - ' || y
+    );
 ```
 
 ```text
@@ -230,7 +261,10 @@ a - 2 - b - 3 - c - 4 - d
 Concatenate elements with the index with an initial value:
 
 ```sql
-SELECT list_reduce(['a', 'b', 'c', 'd'], (x, y, i) -> x || ' - ' || CAST(i AS VARCHAR) || ' - ' || y, 'INITIAL');
+SELECT list_reduce(
+        ['a', 'b', 'c', 'd'],
+        LAMBDA (x, y, i) : x || ' - ' || CAST(i AS VARCHAR) || ' - ' || y, 'INITIAL'
+    );
 ```
 
 ```text
@@ -239,10 +273,11 @@ INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
 
 ## Limitations
 
-Subqueries in lambda expressions are not supported. For example:
+Subqueries in lambda expressions are currently not supported.
+For example:
 
 ```sql
-SELECT list_apply([1, 2, 3], x -> (SELECT 42) + x);
+SELECT list_apply([1, 2, 3], LAMBDA x : (SELECT 42) + x);
 ```
 
 ```console

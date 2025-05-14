@@ -23,8 +23,9 @@ In this blog post we will cover these aspects of memory management within DuckDB
 DuckDB uses a streaming execution engine to process queries. Data sources, such as tables, CSV files or Parquet files, are never fully materialized in memory. Instead, data is read and processed one chunk at a time. For example, consider the execution of the following query:
 
 ```sql
-SELECT UserAgent,
-       count(*)
+SELECT
+    UserAgent,
+    count(*)
 FROM 'hits.csv'
 GROUP BY UserAgent;
 ```
@@ -32,8 +33,8 @@ GROUP BY UserAgent;
 Instead of reading the entire CSV file at once, DuckDB reads data from the CSV file in pieces, and computes the aggregation incrementally using the data read from those pieces. This happens continuously until the entire CSV file is read, at which point the entire aggregation result is computed. 
 
 <img src="/images/blog/streamingexecution.png"
-     alt="DuckDB Streaming Execution"
-     width="800"
+    alt="DuckDB Streaming Execution"
+    width="800"
 />
 
 In the above example we are only showing a single data stream. In practice, DuckDB uses multiple data streams to enable multi-threaded execution – each thread executes its own data stream. The aggregation results of the different threads are combined to compute the final result.
@@ -55,8 +56,9 @@ In the previous example, streaming execution enabled larger-than-memory processi
 Streaming execution is not sufficient if the intermediates required to process a query are larger than memory. For example, suppose we group by the source IP in the previous example:
 
 ```sql
-SELECT IPNetworkID,
-       count(*)
+SELECT
+    IPNetworkID,
+    count(*)
 FROM 'hits.csv'
 GROUP BY IPNetworkID;
 ```
