@@ -4958,6 +4958,14 @@ create(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
 
 Creates a new table named table_name with the contents of the relation object
 
+**Aliases**: [`to_table`](#to_table)
+
+#### Parameters
+
+- **table_name** : str
+                            
+	The name of the table to be created. There shouldn't be any other table with the same name.
+
 ##### Example
 
 ```python
@@ -5005,6 +5013,17 @@ create_view(self: duckdb.duckdb.DuckDBPyRelation, view_name: str, replace: bool 
 #### Description
 
 Creates a view named view_name that refers to the relation object
+
+**Aliases**: [`to_view`](#to_view)
+
+#### Parameters
+
+- **view_name** : str
+                            
+	The name of the view to be created.
+- **replace** : bool, default: True
+                            
+	If the view should be created with `CREATE OR REPLACE`. When set to `False`, there shouldn't be another view with the same `view_name`.
 
 ##### Example
 
@@ -5055,6 +5074,12 @@ df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pan
 Execute and fetch all rows as a pandas DataFrame
 
 **Aliases**: [`fetchdf`](#fetchdf), [`to_df`](#to_df)
+
+#### Parameters
+
+- **date_as_object** : bool, default: False
+                            
+	If the date columns should be interpreted as Python date objects.
 
 ##### Example
 
@@ -5148,6 +5173,12 @@ fetch_arrow_reader(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 10000
 
 Execute and return an Arrow Record Batch Reader that yields all rows
 
+#### Parameters
+
+- **batch_size** : int, default: 1000000
+                            
+	The batch size for fetching the data.
+
 ##### Example
 
 ```python
@@ -5202,6 +5233,12 @@ Execute and fetch all rows as an Arrow Table
 
 **Aliases**: [`arrow`](#arrow), [`to_arrow_table`](#to_arrow_table)
 
+#### Parameters
+
+- **batch_size** : int, default: 1000000
+                            
+	The batch size for fetching the data.
+
 ##### Example
 
 ```python
@@ -5251,6 +5288,15 @@ fetch_df_chunk(self: duckdb.duckdb.DuckDBPyRelation, vectors_per_chunk: int = 1,
 #### Description
 
 Execute and fetch a chunk of the rows
+
+#### Parameters
+
+- **vectors_per_chunk** : int, default: 1
+                            
+	Number of data chunks to be processed before converting to dataframe.
+- **date_as_object** : bool, default: False
+                            
+	If the date columns should be interpreted as Python date objects.
 
 ##### Example
 
@@ -5343,6 +5389,12 @@ Execute and fetch all rows as a pandas DataFrame
 
 **Aliases**: [`df`](#df), [`to_df`](#to_df)
 
+#### Parameters
+
+- **date_as_object** : bool, default: False
+                            
+	If the date columns should be interpreted as Python date objects.
+
 ##### Example
 
 ```python
@@ -5413,6 +5465,12 @@ Execute and fetch the next set of rows as a list of tuples
 >    rel.show()
 >```
 
+
+#### Parameters
+
+- **size** : int, default: 1
+                            
+	The number of records to be fetched.
 
 ##### Example
 
@@ -5599,6 +5657,12 @@ pl(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> duckdb::P
 
 Execute and fetch all rows as a Polars DataFrame
 
+#### Parameters
+
+- **batch_size** : int, default: 1000000
+                            
+	The number of records to be fetched per batch.
+
 ##### Example
 
 ```python
@@ -5645,6 +5709,12 @@ record_batch(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) ->
 #### Description
 
 Execute and return an Arrow Record Batch Reader that yields all rows
+
+#### Parameters
+
+- **batch_size** : int, default: 1000000
+                            
+	The batch size for fetching the data.
 
 ##### Example
 
@@ -5746,6 +5816,12 @@ Execute and fetch all rows as an Arrow Table
 
 **Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`arrow`](#arrow)
 
+#### Parameters
+
+- **batch_size** : int, default: 1000000
+                            
+	The batch size for fetching the data.
+
 ##### Example
 
 ```python
@@ -5798,6 +5874,57 @@ Write the relation object to a CSV file in 'file_name'
 
 **Aliases**: [`write_csv`](#write_csv)
 
+#### Parameters
+
+- **file_name** : str
+                            
+	The name of the output CSV file.
+- **sep** : str, default: ','
+                            
+	Field delimiter for the output file.
+- **na_rep** : str, default: ''
+                            
+	Missing data representation.
+- **header** : bool, default: True
+                            
+	Whether to write column headers.
+- **quotechar** : str, default: '"'
+                            
+	Character used to quote fields containing special characters.
+- **escapechar** : str, default: None
+                            
+	Character used to escape the delimiter if quoting is set to QUOTE_NONE.
+- **date_format** : str, default: None
+                            
+	Custom format string for DATE values.
+- **timestamp_format** : str, default: None
+                            
+	Custom format string for TIMESTAMP values.
+- **quoting** : int, default: csv.QUOTE_MINIMAL
+                            
+	Control field quoting behavior (e.g., QUOTE_MINIMAL, QUOTE_ALL).
+- **encoding** : str, default: 'utf-8'
+                            
+	Character encoding for the output file.
+- **compression** : str, default: auto
+                            
+	Compression type (e.g., 'gzip', 'bz2', 'zstd').
+- **overwrite** : bool, default: False
+                            
+	When true, all existing files inside targeted directories will be removed (not supported on remote filesystems). Only has an effect when used with `partition_by`.
+- **per_thread_output** : bool, default: False
+                            
+	When `true`, write one file per thread, rather than one file in total. This allows for faster parallel writing.
+- **use_tmp_file** : bool, default: False
+                            
+	Write to a temporary file before renaming to final name to avoid partial writes.
+- **partition_by** : list[str], default: None
+                            
+	List of column names to partition output by (creates folder structure).
+- **write_partition_columns** : bool, default: False
+                            
+	Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.
+
 ##### Example
 
 ```python
@@ -5840,6 +5967,12 @@ to_df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> 
 Execute and fetch all rows as a pandas DataFrame
 
 **Aliases**: [`fetchdf`](#fetchdf), [`df`](#df)
+
+#### Parameters
+
+- **date_as_object** : bool, default: False
+                            
+	If the date columns should be interpreted as Python date objects.
 
 ##### Example
 
@@ -5888,6 +6021,42 @@ Write the relation object to a Parquet file in 'file_name'
 
 **Aliases**: [`write_parquet`](#write_parquet)
 
+#### Parameters
+
+- **file_name** : str
+                            
+	The name of the output Parquet file.
+- **compression** : str, default: 'snappy'
+                            
+	The compression format to use (`uncompressed`, `snappy`, `gzip`, `zstd`, `brotli`, `lz4`, `lz4_raw`).
+- **field_ids** : STRUCT
+                            
+	The field_id for each column. Pass auto to attempt to infer automatically.
+- **row_group_size_bytes** : int, default: row_group_size * 1024
+                            
+	The target size of each row group. You can pass either a human-readable string, e.g., 2MB, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored.
+- **row_group_size** : int, default: 122880
+                            
+	The target size, i.e., number of rows, of each row group.
+- **overwrite** : bool, default: False
+                            
+	If True, overwrite the file if it exists.
+- **per_thread_output** : bool, default: False
+                            
+	When `True`, write one file per thread, rather than one file in total. This allows for faster parallel writing.
+- **use_tmp_file** : bool, default: False
+                            
+	Write to a temporary file before renaming to final name to avoid partial writes.
+- **partition_by** : list[str], default: None
+                            
+	List of column names to partition output by (creates folder structure).
+- **write_partition_columns** : bool, default: False
+                            
+	Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.
+- **append** : bool, default: False
+                            
+	When `True`, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with `partition_by`.
+
 ##### Example
 
 ```python
@@ -5929,6 +6098,14 @@ to_table(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
 
 Creates a new table named table_name with the contents of the relation object
 
+**Aliases**: [`create`](#create)
+
+#### Parameters
+
+- **table_name** : str
+                            
+	The name of the table to be created. There shouldn't be any other table with the same name.
+
 ##### Example
 
 ```python
@@ -5969,6 +6146,17 @@ to_view(self: duckdb.duckdb.DuckDBPyRelation, view_name: str, replace: bool = Tr
 #### Description
 
 Creates a view named view_name that refers to the relation object
+
+**Aliases**: [`create_view`](#create_view)
+
+#### Parameters
+
+- **view_name** : str
+                            
+	The name of the view to be created.
+- **replace** : bool, default: True
+                            
+	If the view should be created with `CREATE OR REPLACE`. When set to `False`, there shouldn't be another view with the same `view_name`.
 
 ##### Example
 
@@ -6054,6 +6242,57 @@ Write the relation object to a CSV file in 'file_name'
 
 **Aliases**: [`to_csv`](#to_csv)
 
+#### Parameters
+
+- **file_name** : str
+                            
+	The name of the output CSV file.
+- **sep** : str, default: ','
+                            
+	Field delimiter for the output file.
+- **na_rep** : str, default: ''
+                            
+	Missing data representation.
+- **header** : bool, default: True
+                            
+	Whether to write column headers.
+- **quotechar** : str, default: '"'
+                            
+	Character used to quote fields containing special characters.
+- **escapechar** : str, default: None
+                            
+	Character used to escape the delimiter if quoting is set to QUOTE_NONE.
+- **date_format** : str, default: None
+                            
+	Custom format string for DATE values.
+- **timestamp_format** : str, default: None
+                            
+	Custom format string for TIMESTAMP values.
+- **quoting** : int, default: csv.QUOTE_MINIMAL
+                            
+	Control field quoting behavior (e.g., QUOTE_MINIMAL, QUOTE_ALL).
+- **encoding** : str, default: 'utf-8'
+                            
+	Character encoding for the output file.
+- **compression** : str, default: auto
+                            
+	Compression type (e.g., 'gzip', 'bz2', 'zstd').
+- **overwrite** : bool, default: False
+                            
+	When true, all existing files inside targeted directories will be removed (not supported on remote filesystems). Only has an effect when used with `partition_by`.
+- **per_thread_output** : bool, default: False
+                            
+	When `true`, write one file per thread, rather than one file in total. This allows for faster parallel writing.
+- **use_tmp_file** : bool, default: False
+                            
+	Write to a temporary file before renaming to final name to avoid partial writes.
+- **partition_by** : list[str], default: None
+                            
+	List of column names to partition output by (creates folder structure).
+- **write_partition_columns** : bool, default: False
+                            
+	Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.
+
 ##### Example
 
 ```python
@@ -6096,6 +6335,42 @@ write_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compressi
 Write the relation object to a Parquet file in 'file_name'
 
 **Aliases**: [`to_parquet`](#to_parquet)
+
+#### Parameters
+
+- **file_name** : str
+                            
+	The name of the output Parquet file.
+- **compression** : str, default: 'snappy'
+                            
+	The compression format to use (`uncompressed`, `snappy`, `gzip`, `zstd`, `brotli`, `lz4`, `lz4_raw`).
+- **field_ids** : STRUCT
+                            
+	The field_id for each column. Pass auto to attempt to infer automatically.
+- **row_group_size_bytes** : int, default: row_group_size * 1024
+                            
+	The target size of each row group. You can pass either a human-readable string, e.g., 2MB, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored.
+- **row_group_size** : int, default: 122880
+                            
+	The target size, i.e., number of rows, of each row group.
+- **overwrite** : bool, default: False
+                            
+	If True, overwrite the file if it exists.
+- **per_thread_output** : bool, default: False
+                            
+	When `True`, write one file per thread, rather than one file in total. This allows for faster parallel writing.
+- **use_tmp_file** : bool, default: False
+                            
+	Write to a temporary file before renaming to final name to avoid partial writes.
+- **partition_by** : list[str], default: None
+                            
+	List of column names to partition output by (creates folder structure).
+- **write_partition_columns** : bool, default: False
+                            
+	Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.
+- **append** : bool, default: False
+                            
+	When `True`, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with `partition_by`.
 
 ##### Example
 
