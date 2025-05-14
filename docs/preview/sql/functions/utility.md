@@ -19,6 +19,8 @@ The functions below are difficult to categorize into specific function types and
 | [`count_if(x)`](#count_ifx) | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
 | [`create_sort_key(parameters...)`](#create_sort_keyparameters) | Constructs a binary-comparable sort key based on a set of input parameters and sort qualifiers. |
 | [`current_catalog()`](#current_catalog) | Return the name of the currently active catalog. Default is memory. |
+| [`current_database()`](#current_database) | Return the name of the currently active database. |
+| [`current_query()`](#current_query) | Return the current query as a string. |
 | [`current_schema()`](#current_schema) | Return the name of the currently active schema. Default is main. |
 | [`current_schemas(boolean)`](#current_schemasboolean) | Return list of schemas. Pass a parameter of `true` to include implicit schemas. |
 | [`current_setting('setting_name')`](#current_settingsetting_name) | Return the current value of the configuration setting. |
@@ -120,6 +122,22 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Return the name of the currently active catalog. Default is memory. |
 | **Example** | `current_catalog()` |
 | **Result** | `memory` |
+
+#### `current_database()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Return the name of the currently active database. |
+| **Example** | `current_database()` |
+| **Result** | `memory` |
+
+#### `current_query()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Return the current query as a string. |
+| **Example** | `current_query()` |
+| **Result** | `SELECT current_query();` |
 
 #### `current_schema()`
 
