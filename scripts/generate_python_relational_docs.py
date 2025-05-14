@@ -259,17 +259,17 @@ def generate_from_db(relational_api_table):
                 """
             section,
             section_id,
-            concat('#### ', member_name) as header_member_name, 
-            if(member_signature is not null, '\n\n#### Signature\n\n', NULL) as header_signature, 
+            concat('#### ', '`', member_name, '`') as header_member_name, 
+            if(member_signature is not null, '\n\n##### Signature\n\n', NULL) as header_signature, 
             member_signature,
-            if(member_description is not null, '\n\n#### Description\n\n', NULL) as header_description, 
+            if(member_description is not null, '\n\n##### Description\n\n', NULL) as header_description, 
             member_description,
-            if(member_parameters is not null, '\n\n#### Parameters\n\n', NULL) as header_parameters, 
+            if(member_parameters is not null, '\n\n##### Parameters\n\n', NULL) as header_parameters, 
             member_parameters,
             if(aliases != '', concat('\n\n**Aliases**: ', aliases), NULL) as aliases,
-            if(member_example is not null, '\n\n##### Example\n\n', NULL) as header_example,
+            if(member_example is not null, '\n\n###### Example\n\n', NULL) as header_example,
             member_example,
-            if( member_result is not null, '\n\n##### Result\n\n', NULL) as header_result,
+            if( member_result is not null, '\n\n###### Result\n\n', NULL) as header_result,
             member_result
         """
             )

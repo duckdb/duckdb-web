@@ -62,25 +62,25 @@ This section contains the details on how a relation is created.         The meth
 | [`values`](#values) | Create a relation object from the passed values |
 | [`view`](#view) | Create a relation object for the named view |
 
-#### from_arrow
+#### `from_arrow`
 
-#### Signature
+##### Signature
 
 ```python
 from_arrow(self: duckdb.duckdb.DuckDBPyConnection, arrow_object: object) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create a relation object from an Arrow object
 
-#### Parameters
+##### Parameters
 
 - **arrow_object** : pyarrow.Table, pyarrow.RecordBatch
                             
 	Arrow object to create a relation from
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -97,7 +97,7 @@ rel = duckdb_conn.from_arrow(example_table)
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌──────┬─────────┐
@@ -110,21 +110,21 @@ rel.show()
 
 ----
 
-#### from_csv_auto
+#### `from_csv_auto`
 
-#### Signature
+##### Signature
 
 ```python
 from_csv_auto(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **kwargs) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create a relation object from the CSV file in 'name'
 
 **Aliases**: [`read_csv`](#read_csv)
 
-##### Example
+###### Example
 
 ```python
 import csv
@@ -143,7 +143,7 @@ rel = duckdb_conn.from_csv_auto("code_example.csv")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┬─────────┐
@@ -156,19 +156,19 @@ rel.show()
 
 ----
 
-#### from_df
+#### `from_df`
 
-#### Signature
+##### Signature
 
 ```python
 from_df(self: duckdb.duckdb.DuckDBPyConnection, df: pandas.DataFrame) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create a relation object from the DataFrame in df
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -183,7 +183,7 @@ rel = duckdb_conn.from_df(df)
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┬─────────┐
@@ -196,9 +196,9 @@ rel.show()
 
 ----
 
-#### from_parquet
+#### `from_parquet`
 
-#### Signature
+##### Signature
 
 ```python
 from_parquet(*args, **kwargs)
@@ -213,13 +213,13 @@ Create a relation object from the Parquet files in file_glob
 Create a relation object from the Parquet files in file_globs
 ```
 
-#### Description
+##### Description
 
 Create a relation object from the Parquet files
 
 **Aliases**: [`read_parquet`](#read_parquet)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -239,7 +239,7 @@ rel = duckdb_conn.from_parquet("code_example.parquet")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌──────┬─────────┐
@@ -252,19 +252,19 @@ rel.show()
 
 ----
 
-#### from_query
+#### `from_query`
 
-#### Signature
+##### Signature
 
 ```python
 from_query(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -276,7 +276,7 @@ rel = duckdb_conn.from_query("from range(1,2) tbl(id)")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┐
@@ -289,19 +289,19 @@ rel.show()
 
 ----
 
-#### query
+#### `query`
 
-#### Signature
+##### Signature
 
 ```python
 query(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -313,7 +313,7 @@ rel = duckdb_conn.query("from range(1,2) tbl(id)")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┐
@@ -326,21 +326,21 @@ rel.show()
 
 ----
 
-#### read_csv
+#### `read_csv`
 
-#### Signature
+##### Signature
 
 ```python
 read_csv(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **kwargs) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create a relation object from the CSV file in 'name'
 
 **Aliases**: [`from_csv_auto`](#from_csv_auto)
 
-##### Example
+###### Example
 
 ```python
 import csv
@@ -359,7 +359,7 @@ rel = duckdb_conn.read_csv("code_example.csv")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┬─────────┐
@@ -372,19 +372,19 @@ rel.show()
 
 ----
 
-#### read_json
+#### `read_json`
 
-#### Signature
+##### Signature
 
 ```python
 read_json(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, *, columns: typing.Optional[object] = None, sample_size: typing.Optional[object] = None, maximum_depth: typing.Optional[object] = None, records: typing.Optional[str] = None, format: typing.Optional[str] = None, date_format: typing.Optional[object] = None, timestamp_format: typing.Optional[object] = None, compression: typing.Optional[object] = None, maximum_object_size: typing.Optional[object] = None, ignore_errors: typing.Optional[object] = None, convert_strings_to_integers: typing.Optional[object] = None, field_appearance_threshold: typing.Optional[object] = None, map_inference_threshold: typing.Optional[object] = None, maximum_sample_files: typing.Optional[object] = None, filename: typing.Optional[object] = None, hive_partitioning: typing.Optional[object] = None, union_by_name: typing.Optional[object] = None, hive_types: typing.Optional[object] = None, hive_types_autocast: typing.Optional[object] = None) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create a relation object from the JSON file in 'name'
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -400,7 +400,7 @@ rel = duckdb_conn.read_json("code_example.json")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┬─────────┐
@@ -413,9 +413,9 @@ rel.show()
 
 ----
 
-#### read_parquet
+#### `read_parquet`
 
-#### Signature
+##### Signature
 
 ```python
 read_parquet(*args, **kwargs)
@@ -430,13 +430,13 @@ Create a relation object from the Parquet files in file_glob
 Create a relation object from the Parquet files in file_globs
 ```
 
-#### Description
+##### Description
 
 Create a relation object from the Parquet files
 
 **Aliases**: [`from_parquet`](#from_parquet)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -456,7 +456,7 @@ rel = duckdb_conn.read_parquet("code_example.parquet")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌──────┬─────────┐
@@ -469,19 +469,19 @@ rel.show()
 
 ----
 
-#### sql
+#### `sql`
 
-#### Signature
+##### Signature
 
 ```python
 sql(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -493,7 +493,7 @@ rel = duckdb_conn.sql("from range(1,2) tbl(id)")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┐
@@ -506,19 +506,19 @@ rel.show()
 
 ----
 
-#### table
+#### `table`
 
-#### Signature
+##### Signature
 
 ```python
 table(self: duckdb.duckdb.DuckDBPyConnection, table_name: str) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create a relation object for the named table
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -532,7 +532,7 @@ rel = duckdb_conn.table("code_example")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┐
@@ -545,19 +545,19 @@ rel.show()
 
 ----
 
-#### table_function
+#### `table_function`
 
-#### Signature
+##### Signature
 
 ```python
 table_function(self: duckdb.duckdb.DuckDBPyConnection, name: str, parameters: object = None) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create a relation object from the named table function with given parameters
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -574,7 +574,7 @@ rel = duckdb_conn.table_function(name="get_record_for", parameters=[1])
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────────────┐
@@ -587,19 +587,19 @@ rel.show()
 
 ----
 
-#### values
+#### `values`
 
-#### Signature
+##### Signature
 
 ```python
 values(self: duckdb.duckdb.DuckDBPyConnection, *args) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create a relation object from the passed values
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -611,7 +611,7 @@ rel = duckdb_conn.values([1, 'a'])
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┬─────────┐
@@ -624,19 +624,19 @@ rel.show()
 
 ----
 
-#### view
+#### `view`
 
-#### Signature
+##### Signature
 
 ```python
 view(self: duckdb.duckdb.DuckDBPyConnection, view_name: str) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create a relation object for the named view
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -650,7 +650,7 @@ rel = duckdb_conn.view("code_example")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┐
@@ -681,13 +681,13 @@ This section contains the details on how to inspect a relation.
 | [`type`](#type) | Get the type of the relation. |
 | [`types`](#types) | Return a list containing the types of the columns of the relation. |
 
-#### alias
+#### `alias`
 
-#### Description
+##### Description
 
 Get the name of the current alias
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -708,7 +708,7 @@ rel.alias
 ```
 
 
-##### Result
+###### Result
 
 ```text
 unnamed_relation_43c808c247431be5
@@ -716,13 +716,13 @@ unnamed_relation_43c808c247431be5
 
 ----
 
-#### columns
+#### `columns`
 
-#### Description
+##### Description
 
 Return a list containing the names of the columns of the relation.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -743,7 +743,7 @@ rel.columns
 ```
 
 
-##### Result
+###### Result
 
 ```text
  ['id', 'description', 'value', 'created_timestamp']
@@ -751,19 +751,19 @@ rel.columns
 
 ----
 
-#### describe
+#### `describe`
 
-#### Signature
+##### Signature
 
 ```python
 describe(self: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Gives basic statistics (e.g., min, max) and if NULL exists for each column of the relation.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -784,7 +784,7 @@ rel.describe()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────┬──────────────────────────────────────┬─────────────────┬────────────────────┬────────────────────────────┐
@@ -802,13 +802,13 @@ rel.describe()
 
 ----
 
-#### description
+#### `description`
 
-#### Description
+##### Description
 
 Return the description of the result
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -829,7 +829,7 @@ rel.description
 ```
 
 
-##### Result
+###### Result
 
 ```text
 [('id', 'UUID', None, None, None, None, None),
@@ -840,15 +840,15 @@ rel.description
 
 ----
 
-#### dtypes
+#### `dtypes`
 
-#### Description
+##### Description
 
 Return a list containing the types of the columns of the relation.
 
 **Aliases**: [`types`](#types)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -869,7 +869,7 @@ rel.dtypes
 ```
 
 
-##### Result
+###### Result
 
 ```text
  [UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]
@@ -877,13 +877,13 @@ rel.dtypes
 
 ----
 
-#### explain
+#### `explain`
 
-#### Description
+##### Description
 
 explain(self: duckdb.duckdb.DuckDBPyRelation, type: duckdb.duckdb.ExplainType = 'standard') -> str
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -904,7 +904,7 @@ rel.explain()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌───────────────────────────┐
@@ -929,19 +929,19 @@ rel.explain()
 
 ----
 
-#### query
+#### `query`
 
-#### Signature
+##### Signature
 
 ```python
 query(self: duckdb.duckdb.DuckDBPyRelation, virtual_table_name: str, sql_query: str) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Run the given SQL query in sql_query on the view named virtual_table_name that refers to the relation object
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -964,7 +964,7 @@ duckdb_conn.sql("show rel_view")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌───────────────────┬──────────────────────────┬─────────┬─────────┬─────────┬─────────┐
@@ -980,19 +980,19 @@ duckdb_conn.sql("show rel_view")
 
 ----
 
-#### set_alias
+#### `set_alias`
 
-#### Signature
+##### Signature
 
 ```python
 set_alias(self: duckdb.duckdb.DuckDBPyRelation, alias: str) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Rename the relation object to new alias
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1013,7 +1013,7 @@ rel.set_alias('abc').select('abc.id')
 ```
 
 
-##### Result
+###### Result
 
 ```text
 In the SQL query, the alias will be `abc`
@@ -1021,13 +1021,13 @@ In the SQL query, the alias will be `abc`
 
 ----
 
-#### shape
+#### `shape`
 
-#### Description
+##### Description
 
 Tuple of # of rows, # of columns in relation.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1048,7 +1048,7 @@ rel.shape
 ```
 
 
-##### Result
+###### Result
 
 ```text
 (9, 4)
@@ -1056,19 +1056,19 @@ rel.shape
 
 ----
 
-#### show
+#### `show`
 
-#### Signature
+##### Signature
 
 ```python
 show(self: duckdb.duckdb.DuckDBPyRelation, *, max_width: typing.Optional[int] = None, max_rows: typing.Optional[int] = None, max_col_width: typing.Optional[int] = None, null_value: typing.Optional[str] = None, render_mode: object = None) -> None
 ```
 
-#### Description
+##### Description
 
 Display a summary of the data
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1089,7 +1089,7 @@ rel.show()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
@@ -1110,19 +1110,19 @@ rel.show()
 
 ----
 
-#### sql_query
+#### `sql_query`
 
-#### Signature
+##### Signature
 
 ```python
 sql_query(self: duckdb.duckdb.DuckDBPyRelation) -> str
 ```
 
-#### Description
+##### Description
 
 Get the SQL query that is equivalent to the relation
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1143,7 +1143,7 @@ rel.sql_query()
 ```
 
 
-##### Result
+###### Result
 
 ```sql
 SELECT 
@@ -1156,13 +1156,13 @@ FROM "range"(1, 10)
 
 ----
 
-#### type
+#### `type`
 
-#### Description
+##### Description
 
 Get the type of the relation.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1183,7 +1183,7 @@ rel.type
 ```
 
 
-##### Result
+###### Result
 
 ```text
 QUERY_RELATION
@@ -1191,15 +1191,15 @@ QUERY_RELATION
 
 ----
 
-#### types
+#### `types`
 
-#### Description
+##### Description
 
 Return a list containing the types of the columns of the relation.
 
 **Aliases**: [`dtypes`](#dtypes)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1220,7 +1220,7 @@ rel.types
 ```
 
 
-##### Result
+###### Result
 
 ```text
 [UUID, VARCHAR, BIGINT, TIMESTAMP WITH TIME ZONE]
@@ -1250,19 +1250,19 @@ This section contains the methods which can be used to chain queries.        The
 | [`union`](#union) | Create the set union of this relation object with another relation object in other_rel |
 | [`update`](#update) | Update the given relation with the provided expressions |
 
-#### aggregate
+#### `aggregate`
 
-#### Signature
+##### Signature
 
 ```python
 aggregate(self: duckdb.duckdb.DuckDBPyRelation, aggr_expr: object, group_expr: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Compute the aggregate aggr_expr by the optional groups group_expr on the relation
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1283,7 +1283,7 @@ rel = rel.aggregate('max(value)')
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────┐
@@ -1297,19 +1297,19 @@ rel = rel.aggregate('max(value)')
 
 ----
 
-#### apply
+#### `apply`
 
-#### Signature
+##### Signature
 
 ```python
 apply(self: duckdb.duckdb.DuckDBPyRelation, function_name: str, function_aggr: str, group_expr: str = '', function_parameter: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Compute the function of a single column or a list of columns by the optional groups on the relation
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1335,7 +1335,7 @@ rel.apply(
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────┐
@@ -1349,19 +1349,19 @@ rel.apply(
 
 ----
 
-#### cross
+#### `cross`
 
-#### Signature
+##### Signature
 
 ```python
 cross(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create cross/cartesian product of two relational objects
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1382,7 +1382,7 @@ rel.cross(other_rel=rel.set_alias("other_rel"))
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────────────────┬─────────────────┬───────┬───────────────────────────┬──────────────────────────────────────┬─────────────────┬───────┬───────────────────────────┐
@@ -1395,19 +1395,19 @@ rel.cross(other_rel=rel.set_alias("other_rel"))
 
 ----
 
-#### except_
+#### `except_`
 
-#### Signature
+##### Signature
 
 ```python
 except_(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create the set except of this relation object with another relation object in other_rel
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1428,7 +1428,7 @@ rel.except_(other_rel=rel.set_alias("other_rel"))
 ```
 
 
-##### Result
+###### Result
 
 ```text
 The relation query is executed twice, therefore generating different ids and timestamps:
@@ -1443,19 +1443,19 @@ The relation query is executed twice, therefore generating different ids and tim
 
 ----
 
-#### filter
+#### `filter`
 
-#### Signature
+##### Signature
 
 ```python
 filter(self: duckdb.duckdb.DuckDBPyRelation, filter_expr: object) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Filter the relation object by the filter in filter_expr
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1476,7 +1476,7 @@ rel.filter("value = 2")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────┐
@@ -1489,19 +1489,19 @@ rel.filter("value = 2")
 
 ----
 
-#### insert
+#### `insert`
 
-#### Signature
+##### Signature
 
 ```python
 insert(self: duckdb.duckdb.DuckDBPyRelation, values: object) -> None
 ```
 
-#### Description
+##### Description
 
 Inserts the given values into the relation
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1535,7 +1535,7 @@ rel.insert(
 rel.filter("value = 10")
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────────┐
@@ -1548,19 +1548,19 @@ rel.filter("value = 10")
 
 ----
 
-#### insert_into
+#### `insert_into`
 
-#### Signature
+##### Signature
 
 ```python
 insert_into(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
 ```
 
-#### Description
+##### Description
 
 Inserts the relation object into an existing table named table_name
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1594,7 +1594,7 @@ rel.insert_into("code_example")
 duckdb_conn.table("code_example").filter("value = 10")
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬───────────────┬───────┬───────────────────────────────┐
@@ -1607,19 +1607,19 @@ duckdb_conn.table("code_example").filter("value = 10")
 
 ----
 
-#### intersect
+#### `intersect`
 
-#### Signature
+##### Signature
 
 ```python
 intersect(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create the set intersection of this relation object with another relation object in other_rel
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1640,7 +1640,7 @@ rel.intersect(other_rel=rel.set_alias("other_rel"))
 ```
 
 
-##### Result
+###### Result
 
 ```text
 The relation query is executed once with `rel` and once with `other_rel`,
@@ -1655,15 +1655,15 @@ therefore generating different ids and timestamps:
 
 ----
 
-#### join
+#### `join`
 
-#### Signature
+##### Signature
 
 ```python
 join(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation, condition: object, how: str = 'inner') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Join the relation object with another relation object in other_rel using the join condition expression in join_condition. Types supported are 'inner', 'left', 'right', 'outer', 'semi' and 'anti'
 
@@ -1730,7 +1730,7 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
 > `CROSS` joins are provided through the [cross method](#cross). 
 
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1757,7 +1757,7 @@ rel.count("*")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────┐
@@ -1770,19 +1770,19 @@ rel.count("*")
 
 ----
 
-#### limit
+#### `limit`
 
-#### Signature
+##### Signature
 
 ```python
 limit(self: duckdb.duckdb.DuckDBPyRelation, n: int, offset: int = 0) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Only retrieve the first n rows from this relation object, starting at offset
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1803,7 +1803,7 @@ rel.limit(1)
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
@@ -1816,19 +1816,19 @@ rel.limit(1)
 
 ----
 
-#### map
+#### `map`
 
-#### Signature
+##### Signature
 
 ```python
 map(self: duckdb.duckdb.DuckDBPyRelation, map_function: Callable, *, schema: typing.Optional[object] = None) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Calls the passed function on the relation
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1844,7 +1844,7 @@ rel = duckdb_conn.sql("select range as id, 'dummy' as text from range(1,3)")
 rel.map(multiply_by_2, schema={"id": int, "text": str})
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┬─────────┐
@@ -1858,19 +1858,19 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 
 ----
 
-#### order
+#### `order`
 
-#### Signature
+##### Signature
 
 ```python
 order(self: duckdb.duckdb.DuckDBPyRelation, order_expr: str) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Reorder the relation object by order_expr
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1891,7 +1891,7 @@ rel.order("value desc").limit(1, offset=4)
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
@@ -1904,21 +1904,21 @@ rel.order("value desc").limit(1, offset=4)
 
 ----
 
-#### project
+#### `project`
 
-#### Signature
+##### Signature
 
 ```python
 project(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Project the relation object by the projection in project_expr
 
 **Aliases**: [`select`](#select)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1939,7 +1939,7 @@ rel.project("description").limit(1)
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┐
@@ -1952,21 +1952,21 @@ rel.project("description").limit(1)
 
 ----
 
-#### select
+#### `select`
 
-#### Signature
+##### Signature
 
 ```python
 select(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Project the relation object by the projection in project_expr
 
 **Aliases**: [`project`](#project)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -1987,7 +1987,7 @@ rel.select("description").limit(1)
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┐
@@ -2000,19 +2000,19 @@ rel.select("description").limit(1)
 
 ----
 
-#### sort
+#### `sort`
 
-#### Signature
+##### Signature
 
 ```python
 sort(self: duckdb.duckdb.DuckDBPyRelation, *args) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Reorder the relation object by the provided expressions
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2033,7 +2033,7 @@ rel.sort("description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
@@ -2047,20 +2047,20 @@ rel.sort("description")
 
 ----
 
-#### union
+#### `union`
 
-#### Signature
+##### Signature
 
 ```python
 union(self: duckdb.duckdb.DuckDBPyRelation, union_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Create the set union of this relation object with another relation object in other_rel
 >The union is `union all`. In order to retrieve distinct values, apply [distinct](#distinct).
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2083,7 +2083,7 @@ rel.count("*")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────┐
@@ -2096,19 +2096,19 @@ rel.count("*")
 
 ----
 
-#### update
+#### `update`
 
-#### Signature
+##### Signature
 
 ```python
 update(self: duckdb.duckdb.DuckDBPyRelation, set: object, *, condition: object = None) -> None
 ```
 
-#### Description
+##### Description
 
 Update the given relation with the provided expressions
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2138,7 +2138,7 @@ rel = duckdb_conn.table("code_example")
 rel.show()
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
@@ -2211,19 +2211,19 @@ This section contains the functions which can be applied to a relation,         
 | [`var_samp`](#var_samp) | Computes the sample variance for a given column |
 | [`variance`](#variance) | Computes the sample variance for a given column |
 
-#### any_value
+#### `any_value`
 
-#### Signature
+##### Signature
 
 ```python
 any_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Returns the first non-null value from a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2244,7 +2244,7 @@ rel.any_value('id')
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┐
@@ -2257,19 +2257,19 @@ rel.any_value('id')
 
 ----
 
-#### arg_max
+#### `arg_max`
 
-#### Signature
+##### Signature
 
 ```python
 arg_max(self: duckdb.duckdb.DuckDBPyRelation, arg_column: str, value_column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Finds the row with the maximum value for a value column and returns the value of that row for an argument column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2290,7 +2290,7 @@ rel.arg_max(arg_column="value", value_column="value", groups="description", proj
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────────────────┐
@@ -2304,19 +2304,19 @@ rel.arg_max(arg_column="value", value_column="value", groups="description", proj
 
 ----
 
-#### arg_min
+#### `arg_min`
 
-#### Signature
+##### Signature
 
 ```python
 arg_min(self: duckdb.duckdb.DuckDBPyRelation, arg_column: str, value_column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Finds the row with the minimum value for a value column and returns the value of that row for an argument column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2337,7 +2337,7 @@ rel.arg_min(arg_column="value", value_column="value", groups="description", proj
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────────────────┐
@@ -2351,19 +2351,19 @@ rel.arg_min(arg_column="value", value_column="value", groups="description", proj
 
 ----
 
-#### avg
+#### `avg`
 
-#### Signature
+##### Signature
 
 ```python
 avg(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the average on a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2384,7 +2384,7 @@ rel.avg('value')
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────┐
@@ -2398,19 +2398,19 @@ rel.avg('value')
 
 ----
 
-#### bit_and
+#### `bit_and`
 
-#### Signature
+##### Signature
 
 ```python
 bit_and(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the bitwise AND of all bits present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2433,7 +2433,7 @@ rel.bit_and(column="value_bit", groups="description", projected_columns="descrip
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────────────────────────────────────────────────┐
@@ -2447,19 +2447,19 @@ rel.bit_and(column="value_bit", groups="description", projected_columns="descrip
 
 ----
 
-#### bit_or
+#### `bit_or`
 
-#### Signature
+##### Signature
 
 ```python
 bit_or(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the bitwise OR of all bits present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2482,7 +2482,7 @@ rel.bit_or(column="value_bit", groups="description", projected_columns="descript
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────────────────────────────────────────────────┐
@@ -2496,19 +2496,19 @@ rel.bit_or(column="value_bit", groups="description", projected_columns="descript
 
 ----
 
-#### bit_xor
+#### `bit_xor`
 
-#### Signature
+##### Signature
 
 ```python
 bit_xor(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the bitwise XOR of all bits present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2531,7 +2531,7 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────────────────────────────────────────────────┐
@@ -2545,19 +2545,19 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 
 ----
 
-#### bitstring_agg
+#### `bitstring_agg`
 
-#### Signature
+##### Signature
 
 ```python
 bitstring_agg(self: duckdb.duckdb.DuckDBPyRelation, column: str, min: typing.Optional[object] = None, max: typing.Optional[object] = None, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes a bitstring with bits set for each distinct value in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2578,7 +2578,7 @@ rel.bitstring_agg(column="value", groups="description", projected_columns="descr
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬────────────────────────┐
@@ -2592,19 +2592,19 @@ rel.bitstring_agg(column="value", groups="description", projected_columns="descr
 
 ----
 
-#### bool_and
+#### `bool_and`
 
-#### Signature
+##### Signature
 
 ```python
 bool_and(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the logical AND of all values present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2627,7 +2627,7 @@ rel.bool_and(column="uneven", groups="description", projected_columns="descripti
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────┐
@@ -2641,19 +2641,19 @@ rel.bool_and(column="uneven", groups="description", projected_columns="descripti
 
 ----
 
-#### bool_or
+#### `bool_or`
 
-#### Signature
+##### Signature
 
 ```python
 bool_or(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the logical OR of all values present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2676,7 +2676,7 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬─────────────────┐
@@ -2690,19 +2690,19 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 
 ----
 
-#### count
+#### `count`
 
-#### Signature
+##### Signature
 
 ```python
 count(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the number of elements present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2723,7 +2723,7 @@ rel.count("id")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌───────────┐
@@ -2736,19 +2736,19 @@ rel.count("id")
 
 ----
 
-#### cume_dist
+#### `cume_dist`
 
-#### Signature
+##### Signature
 
 ```python
 cume_dist(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the cumulative distribution within the partition
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2769,7 +2769,7 @@ rel.cume_dist(window_spec="over (partition by description order by value)", proj
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────┬──────────────────────────────────────────────────────────────┐
@@ -2790,21 +2790,21 @@ rel.cume_dist(window_spec="over (partition by description order by value)", proj
 
 ----
 
-#### dense_rank
+#### `dense_rank`
 
-#### Signature
+##### Signature
 
 ```python
 dense_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the dense rank within the partition
 
 **Aliases**: [`rank_dense`](#rank_dense)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2825,7 +2825,7 @@ rel = duckdb_conn.sql("""
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
@@ -2846,19 +2846,19 @@ rel = duckdb_conn.sql("""
 
 ----
 
-#### distinct
+#### `distinct`
 
-#### Signature
+##### Signature
 
 ```python
 distinct(self: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Retrieve distinct rows from this relation object
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2872,7 +2872,7 @@ rel = rel.union(union_rel=rel)
 rel.distinct().order("range")
 ```
 
-##### Result
+###### Result
 
 ```text
 ┌───────┐
@@ -2887,19 +2887,19 @@ rel.distinct().order("range")
 
 ----
 
-#### favg
+#### `favg`
 
-#### Signature
+##### Signature
 
 ```python
 favg(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the average of all values present in a given column using a more accurate floating point summation (Kahan Sum)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2920,7 +2920,7 @@ rel.favg(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────┐
@@ -2934,19 +2934,19 @@ rel.favg(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### first
+#### `first`
 
-#### Signature
+##### Signature
 
 ```python
 first(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Returns the first value of a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -2967,7 +2967,7 @@ rel.first(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────┐
@@ -2981,19 +2981,19 @@ rel.first(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### first_value
+#### `first_value`
 
-#### Signature
+##### Signature
 
 ```python
 first_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the first value within the group or partition
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3014,7 +3014,7 @@ rel.first_value(column="value", window_spec="over (partition by description orde
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────────────────────────────────────────────────────────────┐
@@ -3028,19 +3028,19 @@ rel.first_value(column="value", window_spec="over (partition by description orde
 
 ----
 
-#### fsum
+#### `fsum`
 
-#### Signature
+##### Signature
 
 ```python
 fsum(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the sum of all values present in a given column using a more accurate floating point summation (Kahan Sum)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3061,7 +3061,7 @@ rel.fsum(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────┐
@@ -3075,19 +3075,19 @@ rel.fsum(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### geomean
+#### `geomean`
 
-#### Signature
+##### Signature
 
 ```python
 geomean(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the geometric mean over all values present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3108,7 +3108,7 @@ rel.geomean(column="value", groups="description", projected_columns="description
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────────┐
@@ -3122,19 +3122,19 @@ rel.geomean(column="value", groups="description", projected_columns="description
 
 ----
 
-#### histogram
+#### `histogram`
 
-#### Signature
+##### Signature
 
 ```python
 histogram(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the histogram over all values present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3155,7 +3155,7 @@ rel.histogram(column="value", groups="description", projected_columns="descripti
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────────────────┐
@@ -3169,19 +3169,19 @@ rel.histogram(column="value", groups="description", projected_columns="descripti
 
 ----
 
-#### lag
+#### `lag`
 
-#### Signature
+##### Signature
 
 ```python
 lag(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: int = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the lag within the partition
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3202,7 +3202,7 @@ rel.lag(column="description", window_spec="over (order by value)", projected_col
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────┬───────────────────────────────────────────────────┐
@@ -3223,19 +3223,19 @@ rel.lag(column="description", window_spec="over (order by value)", projected_col
 
 ----
 
-#### last
+#### `last`
 
-#### Signature
+##### Signature
 
 ```python
 last(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Returns the last value of a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3256,7 +3256,7 @@ rel.last(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬─────────────────┐
@@ -3270,19 +3270,19 @@ rel.last(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### last_value
+#### `last_value`
 
-#### Signature
+##### Signature
 
 ```python
 last_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the last value within the group or partition
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3303,7 +3303,7 @@ rel.last_value(column="value", window_spec="over (order by description)", projec
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬─────────────────────────────────────────────────┐
@@ -3317,19 +3317,19 @@ rel.last_value(column="value", window_spec="over (order by description)", projec
 
 ----
 
-#### lead
+#### `lead`
 
-#### Signature
+##### Signature
 
 ```python
 lead(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: int = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the lead within the partition
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3350,7 +3350,7 @@ rel.lead(column="description", window_spec="over (order by value)", projected_co
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────┬────────────────────────────────────────────────────┐
@@ -3371,19 +3371,19 @@ rel.lead(column="description", window_spec="over (order by value)", projected_co
 
 ----
 
-#### list
+#### `list`
 
-#### Signature
+##### Signature
 
 ```python
 list(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Returns a list containing all values present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3404,7 +3404,7 @@ rel.list(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬─────────────────┐
@@ -3418,19 +3418,19 @@ rel.list(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### max
+#### `max`
 
-#### Signature
+##### Signature
 
 ```python
 max(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Returns the maximum value present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3451,7 +3451,7 @@ rel = duckdb_conn.sql("""
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────┐
@@ -3465,19 +3465,19 @@ rel = duckdb_conn.sql("""
 
 ----
 
-#### mean
+#### `mean`
 
-#### Signature
+##### Signature
 
 ```python
 mean(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the average on a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3498,7 +3498,7 @@ rel.mean(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────┐
@@ -3512,19 +3512,19 @@ rel.mean(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### median
+#### `median`
 
-#### Signature
+##### Signature
 
 ```python
 median(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the median over all values present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3545,7 +3545,7 @@ rel.median(column="value", groups="description", projected_columns="description"
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬─────────────────┐
@@ -3559,19 +3559,19 @@ rel.median(column="value", groups="description", projected_columns="description"
 
 ----
 
-#### min
+#### `min`
 
-#### Signature
+##### Signature
 
 ```python
 min(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Returns the minimum value present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3592,7 +3592,7 @@ rel.min(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────┐
@@ -3606,19 +3606,19 @@ rel.min(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### mode
+#### `mode`
 
-#### Signature
+##### Signature
 
 ```python
 mode(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the mode over all values present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3639,7 +3639,7 @@ rel.mode(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬─────────────────┐
@@ -3653,19 +3653,19 @@ rel.mode(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### n_tile
+#### `n_tile`
 
-#### Signature
+##### Signature
 
 ```python
 n_tile(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, num_buckets: int, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Divides the partition as equally as possible into num_buckets
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3686,7 +3686,7 @@ rel.n_tile(window_spec="over (partition by description)", num_buckets=2, project
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────┬──────────────────────────────────────────┐
@@ -3707,19 +3707,19 @@ rel.n_tile(window_spec="over (partition by description)", num_buckets=2, project
 
 ----
 
-#### nth_value
+#### `nth_value`
 
-#### Signature
+##### Signature
 
 ```python
 nth_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: int, ignore_nulls: bool = False, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the nth value within the partition
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3740,7 +3740,7 @@ rel.nth_value(column="value", window_spec="over (partition by description)", pro
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────────────────────────────────────────────┐
@@ -3761,19 +3761,19 @@ rel.nth_value(column="value", window_spec="over (partition by description)", pro
 
 ----
 
-#### percent_rank
+#### `percent_rank`
 
-#### Signature
+##### Signature
 
 ```python
 percent_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the relative rank within the partition
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3794,7 +3794,7 @@ rel.percent_rank(window_spec="over (partition by description order by value)", p
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────┬─────────────────────────────────────────────────────────────────┐
@@ -3815,19 +3815,19 @@ rel.percent_rank(window_spec="over (partition by description order by value)", p
 
 ----
 
-#### product
+#### `product`
 
-#### Signature
+##### Signature
 
 ```python
 product(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Returns the product of all values present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3848,7 +3848,7 @@ rel.product(column="value", groups="description", projected_columns="description
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────┐
@@ -3862,19 +3862,19 @@ rel.product(column="value", groups="description", projected_columns="description
 
 ----
 
-#### quantile
+#### `quantile`
 
-#### Signature
+##### Signature
 
 ```python
 quantile(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the exact quantile value for a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3895,7 +3895,7 @@ rel.quantile(column="value", groups="description", projected_columns="descriptio
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────────────────┐
@@ -3909,19 +3909,19 @@ rel.quantile(column="value", groups="description", projected_columns="descriptio
 
 ----
 
-#### quantile_cont
+#### `quantile_cont`
 
-#### Signature
+##### Signature
 
 ```python
 quantile_cont(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the interpolated quantile value for a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3942,7 +3942,7 @@ rel.quantile_cont(column="value", groups="description", projected_columns="descr
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────────────────┐
@@ -3956,19 +3956,19 @@ rel.quantile_cont(column="value", groups="description", projected_columns="descr
 
 ----
 
-#### quantile_disc
+#### `quantile_disc`
 
-#### Signature
+##### Signature
 
 ```python
 quantile_disc(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the exact quantile value for a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -3989,7 +3989,7 @@ rel.quantile_disc(column="value", groups="description", projected_columns="descr
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────────────────┐
@@ -4003,19 +4003,19 @@ rel.quantile_disc(column="value", groups="description", projected_columns="descr
 
 ----
 
-#### rank
+#### `rank`
 
-#### Signature
+##### Signature
 
 ```python
 rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the rank within the partition
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4036,7 +4036,7 @@ rel.rank(window_spec="over (partition by description order by value)", projected
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────┬─────────────────────────────────────────────────────────┐
@@ -4057,21 +4057,21 @@ rel.rank(window_spec="over (partition by description order by value)", projected
 
 ----
 
-#### rank_dense
+#### `rank_dense`
 
-#### Signature
+##### Signature
 
 ```python
 rank_dense(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the dense rank within the partition
 
 **Aliases**: [`dense_rank`](#dense_rank)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4092,7 +4092,7 @@ rel = duckdb_conn.sql("""
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
@@ -4113,19 +4113,19 @@ rel = duckdb_conn.sql("""
 
 ----
 
-#### row_number
+#### `row_number`
 
-#### Signature
+##### Signature
 
 ```python
 row_number(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the row number within the partition
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4146,7 +4146,7 @@ rel.row_number(window_spec="over (partition by description order by value)", pro
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────┬───────────────────────────────────────────────────────────────┐
@@ -4167,21 +4167,21 @@ rel.row_number(window_spec="over (partition by description order by value)", pro
 
 ----
 
-#### select_dtypes
+#### `select_dtypes`
 
-#### Signature
+##### Signature
 
 ```python
 select_dtypes(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Select columns from the relation, by filtering based on type(s)
 
 **Aliases**: [`select_types`](#select_types)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4202,7 +4202,7 @@ rel.select_dtypes(types=[duckdb.typing.VARCHAR]).distinct()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┐
@@ -4216,21 +4216,21 @@ rel.select_dtypes(types=[duckdb.typing.VARCHAR]).distinct()
 
 ----
 
-#### select_types
+#### `select_types`
 
-#### Signature
+##### Signature
 
 ```python
 select_types(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Select columns from the relation, by filtering based on type(s)
 
 **Aliases**: [`select_dtypes`](#select_dtypes)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4251,7 +4251,7 @@ rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┐
@@ -4265,21 +4265,21 @@ rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()
 
 ----
 
-#### std
+#### `std`
 
-#### Signature
+##### Signature
 
 ```python
 std(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the sample standard deviation for a given column
 
 **Aliases**: [`stddev`](#stddev), [`stddev_samp`](#stddev_samp)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4300,7 +4300,7 @@ rel.std(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────┐
@@ -4314,21 +4314,21 @@ rel.std(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### stddev
+#### `stddev`
 
-#### Signature
+##### Signature
 
 ```python
 stddev(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the sample standard deviation for a given column
 
 **Aliases**: [`std`](#std), [`stddev_samp`](#stddev_samp)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4349,7 +4349,7 @@ rel.stddev(column="value", groups="description", projected_columns="description"
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────┐
@@ -4363,19 +4363,19 @@ rel.stddev(column="value", groups="description", projected_columns="description"
 
 ----
 
-#### stddev_pop
+#### `stddev_pop`
 
-#### Signature
+##### Signature
 
 ```python
 stddev_pop(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the population standard deviation for a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4396,7 +4396,7 @@ rel.stddev_pop(column="value", groups="description", projected_columns="descript
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬─────────────────────┐
@@ -4410,21 +4410,21 @@ rel.stddev_pop(column="value", groups="description", projected_columns="descript
 
 ----
 
-#### stddev_samp
+#### `stddev_samp`
 
-#### Signature
+##### Signature
 
 ```python
 stddev_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the sample standard deviation for a given column
 
 **Aliases**: [`stddev`](#stddev), [`std`](#std)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4445,7 +4445,7 @@ rel.stddev_samp(column="value", groups="description", projected_columns="descrip
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────┐
@@ -4459,19 +4459,19 @@ rel.stddev_samp(column="value", groups="description", projected_columns="descrip
 
 ----
 
-#### string_agg
+#### `string_agg`
 
-#### Signature
+##### Signature
 
 ```python
 string_agg(self: duckdb.duckdb.DuckDBPyRelation, column: str, sep: str = ',', groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Concatenates the values present in a given column with a separator
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4492,7 +4492,7 @@ rel.string_agg(column="value", sep=",", groups="description", projected_columns=
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────────────┐
@@ -4506,19 +4506,19 @@ rel.string_agg(column="value", sep=",", groups="description", projected_columns=
 
 ----
 
-#### sum
+#### `sum`
 
-#### Signature
+##### Signature
 
 ```python
 sum(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the sum of all values present in a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4539,7 +4539,7 @@ rel.sum(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────┐
@@ -4553,19 +4553,19 @@ rel.sum(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### unique
+#### `unique`
 
-#### Signature
+##### Signature
 
 ```python
 unique(self: duckdb.duckdb.DuckDBPyRelation, unique_aggr: str) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Returns the distinct values in a column.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4586,7 +4586,7 @@ rel.unique(unique_aggr="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┐
@@ -4600,19 +4600,19 @@ rel.unique(unique_aggr="description")
 
 ----
 
-#### value_counts
+#### `value_counts`
 
-#### Signature
+##### Signature
 
 ```python
 value_counts(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the number of elements present in a given column, also projecting the original column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4633,7 +4633,7 @@ rel.value_counts(column="description", groups="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬────────────────────┐
@@ -4647,21 +4647,21 @@ rel.value_counts(column="description", groups="description")
 
 ----
 
-#### var
+#### `var`
 
-#### Signature
+##### Signature
 
 ```python
 var(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the sample variance for a given column
 
 **Aliases**: [`variance`](#variance), [`var_samp`](#var_samp)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4682,7 +4682,7 @@ rel.var(column="value", groups="description", projected_columns="description")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────────┐
@@ -4696,19 +4696,19 @@ rel.var(column="value", groups="description", projected_columns="description")
 
 ----
 
-#### var_pop
+#### `var_pop`
 
-#### Signature
+##### Signature
 
 ```python
 var_pop(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the population variance for a given column
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4729,7 +4729,7 @@ rel.var_pop(column="value", groups="description", projected_columns="description
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬──────────────────┐
@@ -4743,21 +4743,21 @@ rel.var_pop(column="value", groups="description", projected_columns="description
 
 ----
 
-#### var_samp
+#### `var_samp`
 
-#### Signature
+##### Signature
 
 ```python
 var_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the sample variance for a given column
 
 **Aliases**: [`variance`](#variance), [`var`](#var)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4778,7 +4778,7 @@ rel.var_samp(column="value", groups="description", projected_columns="descriptio
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────────┐
@@ -4792,21 +4792,21 @@ rel.var_samp(column="value", groups="description", projected_columns="descriptio
 
 ----
 
-#### variance
+#### `variance`
 
-#### Signature
+##### Signature
 
 ```python
 variance(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Computes the sample variance for a given column
 
 **Aliases**: [`var`](#var), [`var_samp`](#var_samp)
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4827,7 +4827,7 @@ rel.variance(column="value", groups="description", projected_columns="descriptio
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌─────────────────┬───────────────────┐
@@ -4872,27 +4872,27 @@ This section contains the functions which will trigger an SQL execution and retr
 | [`write_csv`](#write_csv) | Write the relation object to a CSV file in 'file_name' |
 | [`write_parquet`](#write_parquet) | Write the relation object to a Parquet file in 'file_name' |
 
-#### arrow
+#### `arrow`
 
-#### Signature
+##### Signature
 
 ```python
 arrow(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.Table
 ```
 
-#### Description
+##### Description
 
 Execute and fetch all rows as an Arrow Table
 
 **Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`to_arrow_table`](#to_arrow_table)
 
-#### Parameters
+##### Parameters
 
 - **batch_size** : int, default: 1000000
                             
 	The batch size of writing the data to the Arrow table
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4915,7 +4915,7 @@ pa_table
 ```
 
 
-##### Result
+###### Result
 
 ```text
 pyarrow.Table
@@ -4932,41 +4932,41 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
 
 ----
 
-#### close
+#### `close`
 
-#### Signature
+##### Signature
 
 ```python
 close(self: duckdb.duckdb.DuckDBPyRelation) -> None
 ```
 
-#### Description
+##### Description
 
 Closes the result
 
 ----
 
-#### create
+#### `create`
 
-#### Signature
+##### Signature
 
 ```python
 create(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
 ```
 
-#### Description
+##### Description
 
 Creates a new table named table_name with the contents of the relation object
 
 **Aliases**: [`to_table`](#to_table)
 
-#### Parameters
+##### Parameters
 
 - **table_name** : str
                             
 	The name of the table to be created. There shouldn't be any other table with the same name.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -4989,7 +4989,7 @@ duckdb_conn.table("table_code_example").limit(1)
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
@@ -5002,21 +5002,21 @@ duckdb_conn.table("table_code_example").limit(1)
 
 ----
 
-#### create_view
+#### `create_view`
 
-#### Signature
+##### Signature
 
 ```python
 create_view(self: duckdb.duckdb.DuckDBPyRelation, view_name: str, replace: bool = True) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Creates a view named view_name that refers to the relation object
 
 **Aliases**: [`to_view`](#to_view)
 
-#### Parameters
+##### Parameters
 
 - **view_name** : str
                             
@@ -5025,7 +5025,7 @@ Creates a view named view_name that refers to the relation object
                             
 	If the view should be created with `CREATE OR REPLACE`. When set to `False`, there shouldn't be another view with the same `view_name`.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5048,7 +5048,7 @@ duckdb_conn.table("view_code_example").limit(1)
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
@@ -5061,27 +5061,27 @@ duckdb_conn.table("view_code_example").limit(1)
 
 ----
 
-#### df
+#### `df`
 
-#### Signature
+##### Signature
 
 ```python
 df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
 ```
 
-#### Description
+##### Description
 
 Execute and fetch all rows as a pandas DataFrame
 
 **Aliases**: [`fetchdf`](#fetchdf), [`to_df`](#to_df)
 
-#### Parameters
+##### Parameters
 
 - **date_as_object** : bool, default: False
                             
 	If the date columns should be interpreted as Python date objects.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5102,7 +5102,7 @@ rel.df()
 ```
 
 
-##### Result
+###### Result
 
 ```text
                                      id      description  value                created_timestamp
@@ -5114,19 +5114,19 @@ rel.df()
 
 ----
 
-#### execute
+#### `execute`
 
-#### Signature
+##### Signature
 
 ```python
 execute(self: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Transform the relation into a result set
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5147,7 +5147,7 @@ rel.execute()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 ┌──────────────────────────────────────┬─────────────────┬───────┬────────────────────────────┐
@@ -5161,25 +5161,25 @@ rel.execute()
 
 ----
 
-#### fetch_arrow_reader
+#### `fetch_arrow_reader`
 
-#### Signature
+##### Signature
 
 ```python
 fetch_arrow_reader(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.RecordBatchReader
 ```
 
-#### Description
+##### Description
 
 Execute and return an Arrow Record Batch Reader that yields all rows
 
-#### Parameters
+##### Parameters
 
 - **batch_size** : int, default: 1000000
                             
 	The batch size for fetching the data.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5202,7 +5202,7 @@ pa_reader.read_next_batch()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 pyarrow.RecordBatch
@@ -5219,27 +5219,27 @@ created_timestamp: [2025-04-10 09:25:51.259000Z]
 
 ----
 
-#### fetch_arrow_table
+#### `fetch_arrow_table`
 
-#### Signature
+##### Signature
 
 ```python
 fetch_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.Table
 ```
 
-#### Description
+##### Description
 
 Execute and fetch all rows as an Arrow Table
 
 **Aliases**: [`arrow`](#arrow), [`to_arrow_table`](#to_arrow_table)
 
-#### Parameters
+##### Parameters
 
 - **batch_size** : int, default: 1000000
                             
 	The batch size for fetching the data.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5260,7 +5260,7 @@ rel.fetch_arrow_table()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 pyarrow.Table
@@ -5277,19 +5277,19 @@ created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,202
 
 ----
 
-#### fetch_df_chunk
+#### `fetch_df_chunk`
 
-#### Signature
+##### Signature
 
 ```python
 fetch_df_chunk(self: duckdb.duckdb.DuckDBPyRelation, vectors_per_chunk: int = 1, *, date_as_object: bool = False) -> pandas.DataFrame
 ```
 
-#### Description
+##### Description
 
 Execute and fetch a chunk of the rows
 
-#### Parameters
+##### Parameters
 
 - **vectors_per_chunk** : int, default: 1
                             
@@ -5298,7 +5298,7 @@ Execute and fetch a chunk of the rows
                             
 	If the date columns should be interpreted as Python date objects.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5319,7 +5319,7 @@ rel.fetch_df_chunk()
 ```
 
 
-##### Result
+###### Result
 
 ```text
                                      id      description  value                created_timestamp
@@ -5331,19 +5331,19 @@ rel.fetch_df_chunk()
 
 ----
 
-#### fetchall
+#### `fetchall`
 
-#### Signature
+##### Signature
 
 ```python
 fetchall(self: duckdb.duckdb.DuckDBPyRelation) -> list
 ```
 
-#### Description
+##### Description
 
 Execute and fetch all rows as a list of tuples
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5364,7 +5364,7 @@ rel.limit(1).fetchall()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 [(UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
@@ -5375,27 +5375,27 @@ rel.limit(1).fetchall()
 
 ----
 
-#### fetchdf
+#### `fetchdf`
 
-#### Signature
+##### Signature
 
 ```python
 fetchdf(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
 ```
 
-#### Description
+##### Description
 
 Execute and fetch all rows as a pandas DataFrame
 
 **Aliases**: [`df`](#df), [`to_df`](#to_df)
 
-#### Parameters
+##### Parameters
 
 - **date_as_object** : bool, default: False
                             
 	If the date columns should be interpreted as Python date objects.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5416,7 +5416,7 @@ rel.fetchdf()
 ```
 
 
-##### Result
+###### Result
 
 ```text
                                      id      description  value                created_timestamp
@@ -5428,15 +5428,15 @@ rel.fetchdf()
 
 ----
 
-#### fetchmany
+#### `fetchmany`
 
-#### Signature
+##### Signature
 
 ```python
 fetchmany(self: duckdb.duckdb.DuckDBPyRelation, size: int = 1) -> list
 ```
 
-#### Description
+##### Description
 
 Execute and fetch the next set of rows as a list of tuples
 
@@ -5466,13 +5466,13 @@ Execute and fetch the next set of rows as a list of tuples
 >```
 
 
-#### Parameters
+##### Parameters
 
 - **size** : int, default: 1
                             
 	The number of records to be fetched.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5494,7 +5494,7 @@ while res := rel.fetchmany(size=1):
 ```
 
 
-##### Result
+###### Result
 
 ```text
 [(UUID('cf4c5e32-d0aa-4699-a3ee-0092e900f263'), 'value is uneven', 1, datetime.datetime(2025, 4, 30, 16, 23, 5, 310000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))]
@@ -5510,19 +5510,19 @@ while res := rel.fetchmany(size=1):
 
 ----
 
-#### fetchnumpy
+#### `fetchnumpy`
 
-#### Signature
+##### Signature
 
 ```python
 fetchnumpy(self: duckdb.duckdb.DuckDBPyRelation) -> dict
 ```
 
-#### Description
+##### Description
 
 Execute and fetch all rows as a Python dict mapping each column to one numpy arrays
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5543,7 +5543,7 @@ rel.fetchnumpy()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 {'id': array([UUID('1587b4b0-3023-49fe-82cf-06303ca136ac'),
@@ -5569,15 +5569,15 @@ rel.fetchnumpy()
 
 ----
 
-#### fetchone
+#### `fetchone`
 
-#### Signature
+##### Signature
 
 ```python
 fetchone(self: duckdb.duckdb.DuckDBPyRelation) -> typing.Optional[tuple]
 ```
 
-#### Description
+##### Description
 
 Execute and fetch a single row as a tuple
 
@@ -5607,7 +5607,7 @@ Execute and fetch a single row as a tuple
 >```
 
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5629,7 +5629,7 @@ while res := rel.fetchone():
 ```
 
 
-##### Result
+###### Result
 
 ```text
 (UUID('fe036411-f4c7-4f52-9ddd-80cd2bb56613'), 'value is uneven', 1, datetime.datetime(2025, 4, 30, 12, 59, 8, 912000, tzinfo=<DstTzInfo 'Europe/Amsterdam' CEST+2:00:00 DST>))
@@ -5645,25 +5645,25 @@ while res := rel.fetchone():
 
 ----
 
-#### pl
+#### `pl`
 
-#### Signature
+##### Signature
 
 ```python
 pl(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> duckdb::PolarsDataFrame
 ```
 
-#### Description
+##### Description
 
 Execute and fetch all rows as a Polars DataFrame
 
-#### Parameters
+##### Parameters
 
 - **batch_size** : int, default: 1000000
                             
 	The number of records to be fetched per batch.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5684,7 +5684,7 @@ rel.pl(batch_size=1)
 ```
 
 
-##### Result
+###### Result
 
 ```text
 shape: (9, 4)
@@ -5698,25 +5698,25 @@ shape: (9, 4)
 
 ----
 
-#### record_batch
+#### `record_batch`
 
-#### Signature
+##### Signature
 
 ```python
 record_batch(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.RecordBatchReader
 ```
 
-#### Description
+##### Description
 
 Execute and return an Arrow Record Batch Reader that yields all rows
 
-#### Parameters
+##### Parameters
 
 - **batch_size** : int, default: 1000000
                             
 	The batch size for fetching the data.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5739,7 +5739,7 @@ pa_batch.read_next_batch()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 pyarrow.RecordBatch
@@ -5756,19 +5756,19 @@ created_timestamp: [2025-04-10 09:52:55.249000Z]
 
 ----
 
-#### tf
+#### `tf`
 
-#### Signature
+##### Signature
 
 ```python
 tf(self: duckdb.duckdb.DuckDBPyRelation) -> dict
 ```
 
-#### Description
+##### Description
 
 Fetch a result as dict of TensorFlow Tensors
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5789,7 +5789,7 @@ rel.select("description, value").tf()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 {'description': <tf.Tensor: shape=(9,), dtype=string, numpy=
@@ -5802,27 +5802,27 @@ rel.select("description, value").tf()
 
 ----
 
-#### to_arrow_table
+#### `to_arrow_table`
 
-#### Signature
+##### Signature
 
 ```python
 to_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.Table
 ```
 
-#### Description
+##### Description
 
 Execute and fetch all rows as an Arrow Table
 
 **Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`arrow`](#arrow)
 
-#### Parameters
+##### Parameters
 
 - **batch_size** : int, default: 1000000
                             
 	The batch size for fetching the data.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5843,7 +5843,7 @@ rel.to_arrow_table()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 pyarrow.Table
@@ -5860,21 +5860,21 @@ created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,202
 
 ----
 
-#### to_csv
+#### `to_csv`
 
-#### Signature
+##### Signature
 
 ```python
 to_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object = None, na_rep: object = None, header: object = None, quotechar: object = None, escapechar: object = None, date_format: object = None, timestamp_format: object = None, quoting: object = None, encoding: object = None, compression: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None) -> None
 ```
 
-#### Description
+##### Description
 
 Write the relation object to a CSV file in 'file_name'
 
 **Aliases**: [`write_csv`](#write_csv)
 
-#### Parameters
+##### Parameters
 
 - **file_name** : str
                             
@@ -5925,7 +5925,7 @@ Write the relation object to a CSV file in 'file_name'
                             
 	Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5946,7 +5946,7 @@ rel.to_csv("code_example.csv")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 The data is exported to a CSV file, named code_example.csv
@@ -5954,27 +5954,27 @@ The data is exported to a CSV file, named code_example.csv
 
 ----
 
-#### to_df
+#### `to_df`
 
-#### Signature
+##### Signature
 
 ```python
 to_df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
 ```
 
-#### Description
+##### Description
 
 Execute and fetch all rows as a pandas DataFrame
 
 **Aliases**: [`fetchdf`](#fetchdf), [`df`](#df)
 
-#### Parameters
+##### Parameters
 
 - **date_as_object** : bool, default: False
                             
 	If the date columns should be interpreted as Python date objects.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -5995,7 +5995,7 @@ rel.to_df()
 ```
 
 
-##### Result
+###### Result
 
 ```text
                                      id      description  value                created_timestamp
@@ -6007,21 +6007,21 @@ rel.to_df()
 
 ----
 
-#### to_parquet
+#### `to_parquet`
 
-#### Signature
+##### Signature
 
 ```python
 to_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
 ```
 
-#### Description
+##### Description
 
 Write the relation object to a Parquet file in 'file_name'
 
 **Aliases**: [`write_parquet`](#write_parquet)
 
-#### Parameters
+##### Parameters
 
 - **file_name** : str
                             
@@ -6057,7 +6057,7 @@ Write the relation object to a Parquet file in 'file_name'
                             
 	When `True`, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with `partition_by`.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -6078,7 +6078,7 @@ rel.to_parquet("code_example.parquet")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 The data is exported to a Parquet file, named code_example.parquet
@@ -6086,27 +6086,27 @@ The data is exported to a Parquet file, named code_example.parquet
 
 ----
 
-#### to_table
+#### `to_table`
 
-#### Signature
+##### Signature
 
 ```python
 to_table(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
 ```
 
-#### Description
+##### Description
 
 Creates a new table named table_name with the contents of the relation object
 
 **Aliases**: [`create`](#create)
 
-#### Parameters
+##### Parameters
 
 - **table_name** : str
                             
 	The name of the table to be created. There shouldn't be any other table with the same name.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -6127,7 +6127,7 @@ rel.to_table("table_code_example")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 A table, named table_code_example, is created with the data of the relation
@@ -6135,21 +6135,21 @@ A table, named table_code_example, is created with the data of the relation
 
 ----
 
-#### to_view
+#### `to_view`
 
-#### Signature
+##### Signature
 
 ```python
 to_view(self: duckdb.duckdb.DuckDBPyRelation, view_name: str, replace: bool = True) -> duckdb.duckdb.DuckDBPyRelation
 ```
 
-#### Description
+##### Description
 
 Creates a view named view_name that refers to the relation object
 
 **Aliases**: [`create_view`](#create_view)
 
-#### Parameters
+##### Parameters
 
 - **view_name** : str
                             
@@ -6158,7 +6158,7 @@ Creates a view named view_name that refers to the relation object
                             
 	If the view should be created with `CREATE OR REPLACE`. When set to `False`, there shouldn't be another view with the same `view_name`.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -6179,7 +6179,7 @@ rel.to_view("view_code_example", replace=True)
 ```
 
 
-##### Result
+###### Result
 
 ```text
 A view, named view_code_example, is created with the query definition of the relation
@@ -6187,19 +6187,19 @@ A view, named view_code_example, is created with the query definition of the rel
 
 ----
 
-#### torch
+#### `torch`
 
-#### Signature
+##### Signature
 
 ```python
 torch(self: duckdb.duckdb.DuckDBPyRelation) -> dict
 ```
 
-#### Description
+##### Description
 
 Fetch a result as dict of PyTorch Tensors
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -6220,7 +6220,7 @@ rel.select("value").torch()
 ```
 
 
-##### Result
+###### Result
 
 ```text
 {'value': tensor([1, 2, 3, 4, 5, 6, 7, 8, 9])}
@@ -6228,21 +6228,21 @@ rel.select("value").torch()
 
 ----
 
-#### write_csv
+#### `write_csv`
 
-#### Signature
+##### Signature
 
 ```python
 write_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object = None, na_rep: object = None, header: object = None, quotechar: object = None, escapechar: object = None, date_format: object = None, timestamp_format: object = None, quoting: object = None, encoding: object = None, compression: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None) -> None
 ```
 
-#### Description
+##### Description
 
 Write the relation object to a CSV file in 'file_name'
 
 **Aliases**: [`to_csv`](#to_csv)
 
-#### Parameters
+##### Parameters
 
 - **file_name** : str
                             
@@ -6293,7 +6293,7 @@ Write the relation object to a CSV file in 'file_name'
                             
 	Whether or not to write partition columns into files. Only has an effect when used with `partition_by`.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -6314,7 +6314,7 @@ rel.write_csv("code_example.csv")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 The data is exported to a CSV file, named code_example.csv
@@ -6322,21 +6322,21 @@ The data is exported to a CSV file, named code_example.csv
 
 ----
 
-#### write_parquet
+#### `write_parquet`
 
-#### Signature
+##### Signature
 
 ```python
 write_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
 ```
 
-#### Description
+##### Description
 
 Write the relation object to a Parquet file in 'file_name'
 
 **Aliases**: [`to_parquet`](#to_parquet)
 
-#### Parameters
+##### Parameters
 
 - **file_name** : str
                             
@@ -6372,7 +6372,7 @@ Write the relation object to a Parquet file in 'file_name'
                             
 	When `True`, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with `partition_by`.
 
-##### Example
+###### Example
 
 ```python
 import duckdb
@@ -6393,7 +6393,7 @@ rel.write_parquet("code_example.parquet")
 ```
 
 
-##### Result
+###### Result
 
 ```text
 The data is exported to a Parquet file, named code_example.parquet
