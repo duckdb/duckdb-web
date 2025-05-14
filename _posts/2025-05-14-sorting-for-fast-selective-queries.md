@@ -168,17 +168,23 @@ It may also take longer to run (since the data must be scanned once per chunk), 
 
 ### Sort the First Few Characters of Strings
 
-Approximate sorting works well for improving read performance, and the runtime of [DuckDB's radix sort algorithm]({% post_url 2021-08-27-external-sorting %}) is sensitive to the length of strings (by design!).
+Approximate sorting works well for improving read performance.
+In the zone maps of `VARCHAR` columns, DuckDB stores just the first 8 bytes of the min and max string values.
+As a result, there is no need to sort more than the first 8 bytes (8 ASCII characters)!
+
+This has an added benefit of faster sorting, as the runtime of [DuckDB's radix sort algorithm]({% post_url 2021-08-27-external-sorting %}) is sensitive to the length of strings (by design!).
 The time complexity of the algorithm is `O(nk)`, where `n` is the number of rows, and `k` is the width of the sorting key.
 Sorting by just the first few characters of a `VARCHAR` can be quicker and less compute intensive while achieving similar read performance.
-DuckDB's `VARCHAR` data type also inlines strings when they are under 12 bytes (12 ASCII characters), so working with short strings can improve performance.
+DuckDB's `VARCHAR` data type also inlines strings when they are under 12 bytes, so working with short strings is faster for that reason as well.
 For example:
 
 ```sql
 CREATE OR REPLACE TABLE sorted_table AS
     FROM unsorted_table
-    ORDER BY varchar_column_to_sort[:12];
+    ORDER BY varchar_column_to_sort[:8];
 ```
+
+> DuckDB's [friendly SQL]({% link docs/stable/sql/dialect/friendly_sql.md %}#functions-and-expressions) allows bracket notation for string slicing!
 
 ### Filter by More Columns
 
