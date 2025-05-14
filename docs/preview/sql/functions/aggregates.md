@@ -139,6 +139,7 @@ The table below shows the available general aggregate functions.
 | [`histogram(arg)`](#histogramarg) | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | [`histogram(arg, boundaries)`](#histogramarg-boundaries) | Returns a `MAP` of key-value pairs representing the provided upper `boundaries` and counts of elements in the corresponding bins (left-open and right-closed partitions) of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than all provided `boundaries` appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/preview/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
 | [`histogram_exact(arg, elements)`](#histogram_exactarg-elements) | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). |
+| [`histogram_values(source, boundaries)`](#histogram_valuessource-col_name-technique-bin_count) | Returns the upper boundaries of the bins and their counts. |
 | [`kahan_sum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
@@ -363,6 +364,14 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). |
 | **Example** | `histogram_exact(A, [0, 1, 10])` |
+| **Alias(es)** | - |
+
+#### `histogram_values(source, col_name, technique, bin_count)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the upper boundaries of the bins and their counts. |
+| **Example** | `histogram_values(integers, i, bin_count := 2)` |
 | **Alias(es)** | - |
 
 #### `last(arg)`
