@@ -949,7 +949,7 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
                 parameter_name="groups",
                 parameter_type=["str"],
                 parameter_default="''",
-                parameter_description="Optional grouping expression as a SQL string.",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
             )
         ],
     ),
@@ -970,7 +970,7 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
                 parameter_name="groups",
                 parameter_type=["str"],
                 parameter_default="''",
-                parameter_description="Optional grouping expression as a SQL string.",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
             )
         ],
     ),
@@ -1072,6 +1072,31 @@ FUNCTION_METHODS_MAP = {
 │ 642ea3d7-793d-4867-a759-91c1226c25a0 │
 └──────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name from which to retrieve any value.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'arg_max': PythonRelAPIDetails(
         example='rel.arg_max(arg_column="value", value_column="value", groups="description", projected_columns="description")',
@@ -1084,6 +1109,36 @@ FUNCTION_METHODS_MAP = {
 │ value is even   │                         8 │
 └─────────────────┴───────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="arg_column",
+                parameter_type=["str"],
+                parameter_description="The column name for which to find the argument maximizing the value.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="value_column",
+                parameter_type=["str"],
+                parameter_description="The column name containing values used to determine the maximum.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'arg_min': PythonRelAPIDetails(
         example='rel.arg_min(arg_column="value", value_column="value", groups="description", projected_columns="description")',
@@ -1096,6 +1151,36 @@ FUNCTION_METHODS_MAP = {
 │ value is uneven │                         1 │
 └─────────────────┴───────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="arg_column",
+                parameter_type=["str"],
+                parameter_description="The column name for which to find the argument minimizing the value.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="value_column",
+                parameter_type=["str"],
+                parameter_description="The column name containing values used to determine the minimum.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'avg': PythonRelAPIDetails(
         example="rel.avg('value')",
@@ -1107,6 +1192,31 @@ FUNCTION_METHODS_MAP = {
 │          5.0 │
 └──────────────┘
  """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the average on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'bit_and': PythonRelAPIDetails(
         example="""
@@ -1123,6 +1233,31 @@ rel.bit_and(column="value_bit", groups="description", projected_columns="descrip
 │ value is even   │ 0000000000000000000000000000000000000000000000000000000000000000 │
 └─────────────────┴──────────────────────────────────────────────────────────────────┘    
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to perform the bitwise AND aggregation on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'bit_or': PythonRelAPIDetails(
         example="""
@@ -1139,6 +1274,31 @@ rel.bit_or(column="value_bit", groups="description", projected_columns="descript
 │ value is even   │ 0000000000000000000000000000000000000000000000000000000000001110 │
 └─────────────────┴──────────────────────────────────────────────────────────────────┘    
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to perform the bitwise OR aggregation on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'bit_xor': PythonRelAPIDetails(
         example="""
@@ -1155,6 +1315,31 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 │ value is uneven │ 0000000000000000000000000000000000000000000000000000000000001001 │
 └─────────────────┴──────────────────────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to perform the bitwise XOR aggregation on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'bitstring_agg': PythonRelAPIDetails(
         example='rel.bitstring_agg(column="value", groups="description", projected_columns="description", min=1, max=9)',
@@ -1167,6 +1352,43 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 │ value is even   │ 010101010              │
 └─────────────────┴────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to aggregate as a bitstring.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="min",
+                parameter_type=["object"],
+                parameter_default="None",
+                parameter_description="Optional minimum bitstring value for aggregation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="max",
+                parameter_type=["object"],
+                parameter_default="None",
+                parameter_description="Optional maximum bitstring value for aggregation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'bool_and': PythonRelAPIDetails(
         example="""
@@ -1183,6 +1405,31 @@ rel.bool_and(column="uneven", groups="description", projected_columns="descripti
 │ value is uneven │ true             │
 └─────────────────┴──────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to perform the boolean AND aggregation on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'bool_or': PythonRelAPIDetails(
         example="""
@@ -1199,6 +1446,31 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 │ value is uneven │ true            │
 └─────────────────┴─────────────────┘                
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to perform the boolean OR aggregation on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'count': PythonRelAPIDetails(
         example='rel.count("id")',
@@ -1210,6 +1482,31 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 │         9 │
 └───────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to perform count on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'cume_dist': PythonRelAPIDetails(
         example='rel.cume_dist(window_spec="over (partition by description order by value)", projected_columns="description, value")',
@@ -1229,6 +1526,19 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 │ value is even   │     8 │                                                          1.0 │
 └─────────────────┴───────┴──────────────────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'dense_rank': PythonRelAPIDetails(
         example=' rel.dense_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
@@ -1249,6 +1559,19 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 └─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
 """,
         aliases=['rank_dense'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'distinct': PythonRelAPIDetails(
         example="""
@@ -1285,6 +1608,31 @@ rel.distinct().order("range")
 │ value is even   │           5.0 │
 └─────────────────┴───────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the average on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'first': PythonRelAPIDetails(
         example='rel.first(column="value", groups="description", projected_columns="description")',
@@ -1297,6 +1645,25 @@ rel.distinct().order("range")
 │ value is uneven │                1 │
 └─────────────────┴──────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name from which to retrieve the first value.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'first_value': PythonRelAPIDetails(
         example='rel.first_value(column="value", window_spec="over (partition by description order by value)", projected_columns="description").distinct()',
@@ -1309,6 +1676,25 @@ rel.distinct().order("range")
 │ value is uneven │                                                                     1 │
 └─────────────────┴───────────────────────────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name from which to retrieve the first value.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'fsum': PythonRelAPIDetails(
         example='rel.fsum(column="value", groups="description", projected_columns="description")',
@@ -1321,6 +1707,31 @@ rel.distinct().order("range")
 │ value is uneven │          25.0 │
 └─────────────────┴───────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the sum on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'geomean': PythonRelAPIDetails(
         example='rel.geomean(column="value", groups="description", projected_columns="description")',
@@ -1333,6 +1744,25 @@ rel.distinct().order("range")
 │ value is even   │ 4.426727678801287 │
 └─────────────────┴───────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the geometric mean on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'histogram': PythonRelAPIDetails(
         example='rel.histogram(column="value", groups="description", projected_columns="description")',
@@ -1345,6 +1775,25 @@ rel.distinct().order("range")
 │ value is even   │ {2=1, 4=1, 6=1, 8=1}      │
 └─────────────────┴───────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the histogram on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'lag': PythonRelAPIDetails(
         example='rel.lag(column="description", window_spec="over (order by value)", projected_columns="description, value")',
@@ -1364,6 +1813,42 @@ rel.distinct().order("range")
 │ value is uneven │     9 │ value is even                                     │
 └─────────────────┴───────┴───────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to apply the lag function on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="offset",
+                parameter_type=["int"],
+                parameter_default="1",
+                parameter_description="The number of rows to lag behind.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="default_value",
+                parameter_type=["str"],
+                parameter_default="'NULL'",
+                parameter_description="The default value to return when the lag offset goes out of bounds.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="ignore_nulls",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Whether to ignore NULL values when computing the lag.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'last': PythonRelAPIDetails(
         example='rel.last(column="value", groups="description", projected_columns="description")',
@@ -1376,6 +1861,25 @@ rel.distinct().order("range")
 │ value is uneven │               9 │
 └─────────────────┴─────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name from which to retrieve the last value.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'last_value': PythonRelAPIDetails(
         example='rel.last_value(column="value", window_spec="over (order by description)", projected_columns="description").distinct()',
@@ -1388,6 +1892,25 @@ rel.distinct().order("range")
 │ value is even   │                                               8 │
 └─────────────────┴─────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name from which to retrieve the last value within the window.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'lead': PythonRelAPIDetails(
         example='rel.lead(column="description", window_spec="over (order by value)", projected_columns="description, value")',
@@ -1407,6 +1930,42 @@ rel.distinct().order("range")
 │ value is uneven │     9 │ NULL                                               │
 └─────────────────┴───────┴────────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to apply the lead function on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="offset",
+                parameter_type=["int"],
+                parameter_default="1",
+                parameter_description="The number of rows to lead ahead.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="default_value",
+                parameter_type=["str"],
+                parameter_default="'NULL'",
+                parameter_description="The default value to return when the lead offset goes out of bounds.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="ignore_nulls",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Whether to ignore NULL values when computing the lead.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'list': PythonRelAPIDetails(
         example='rel.list(column="value", groups="description", projected_columns="description")',
@@ -1419,6 +1978,31 @@ rel.distinct().order("range")
 │ value is uneven │ [1, 3, 5, 7, 9] │
 └─────────────────┴─────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to aggregate values into a list.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'max': PythonRelAPIDetails(
         example=' rel.max(column="value", groups="description", projected_columns="description")',
@@ -1431,6 +2015,31 @@ rel.distinct().order("range")
 │ value is uneven │            9 │
 └─────────────────┴──────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the maximum value of.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'mean': PythonRelAPIDetails(
         example='rel.mean(column="value", groups="description", projected_columns="description")',
@@ -1443,6 +2052,31 @@ rel.distinct().order("range")
 │ value is uneven │          5.0 │
 └─────────────────┴──────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the mean value of.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'median': PythonRelAPIDetails(
         example='rel.median(column="value", groups="description", projected_columns="description")',
@@ -1455,6 +2089,31 @@ rel.distinct().order("range")
 │ value is uneven │             5.0 │
 └─────────────────┴─────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the median value of.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'min': PythonRelAPIDetails(
         example='rel.min(column="value", groups="description", projected_columns="description")',
@@ -1467,6 +2126,31 @@ rel.distinct().order("range")
 │ value is even   │            2 │
 └─────────────────┴──────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the min value of.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'mode': PythonRelAPIDetails(
         example='rel.mode(column="value", groups="description", projected_columns="description")',
@@ -1479,6 +2163,31 @@ rel.distinct().order("range")
 │ value is even   │               2 │
 └─────────────────┴─────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the mode (most frequent value) of.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'n_tile': PythonRelAPIDetails(
         example='rel.n_tile(window_spec="over (partition by description)", num_buckets=2, projected_columns="description, value")',
@@ -1498,6 +2207,24 @@ rel.distinct().order("range")
 │ value is even   │     8 │                                        2 │
 └─────────────────┴───────┴──────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="num_buckets",
+                parameter_type=["int"],
+                parameter_description="The number of buckets to divide the rows into.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'nth_value': PythonRelAPIDetails(
         example='rel.nth_value(column="value", window_spec="over (partition by description)", projected_columns="description", offset=1)',
@@ -1517,6 +2244,35 @@ rel.distinct().order("range")
 │ value is uneven │                                                     1 │
 └─────────────────┴───────────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name from which to retrieve the nth value within the window.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="offset",
+                parameter_type=["int"],
+                parameter_description="The position of the value to retrieve within the window (1-based index).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="ignore_nulls",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Whether to ignore NULL values when computing the nth value.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'percent_rank': PythonRelAPIDetails(
         example='rel.percent_rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
@@ -1536,6 +2292,19 @@ rel.distinct().order("range")
 │ value is uneven │     9 │                                                             1.0 │
 └─────────────────┴───────┴─────────────────────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'product': PythonRelAPIDetails(
         example='rel.product(column="value", groups="description", projected_columns="description")',
@@ -1548,6 +2317,31 @@ rel.distinct().order("range")
 │ value is even   │            384.0 │
 └─────────────────┴──────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the product of.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'quantile': PythonRelAPIDetails(
         example='rel.quantile(column="value", groups="description", projected_columns="description")',
@@ -1560,6 +2354,37 @@ rel.distinct().order("range")
 │ value is even   │                                4 │
 └─────────────────┴──────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to compute the quantile for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="q",
+                parameter_type=["object"],
+                parameter_default="0.5",
+                parameter_description="The quantile value to compute (e.g., 0.5 for median).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'quantile_cont': PythonRelAPIDetails(
         example='rel.quantile_cont(column="value", groups="description", projected_columns="description")',
@@ -1572,6 +2397,37 @@ rel.distinct().order("range")
 │ value is uneven │                              5.0 │
 └─────────────────┴──────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to compute the continuous quantile for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="q",
+                parameter_type=["object"],
+                parameter_default="0.5",
+                parameter_description="The quantile value to compute (e.g., 0.5 for median).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'quantile_disc': PythonRelAPIDetails(
         example='rel.quantile_disc(column="value", groups="description", projected_columns="description")',
@@ -1584,6 +2440,37 @@ rel.distinct().order("range")
 │ value is uneven │                                5 │
 └─────────────────┴──────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to compute the discrete quantile for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="q",
+                parameter_type=["object"],
+                parameter_default="0.5",
+                parameter_description="The quantile value to compute (e.g., 0.5 for median).",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'rank': PythonRelAPIDetails(
         example='rel.rank(window_spec="over (partition by description order by value)", projected_columns="description, value")',
@@ -1603,6 +2490,19 @@ rel.distinct().order("range")
 │ value is even   │     8 │                                                       4 │
 └─────────────────┴───────┴─────────────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'rank_dense': PythonRelAPIDetails(
         example=' rel.rank_dense(window_spec="over (partition by description order by value)", projected_columns="description, value")',
@@ -1623,6 +2523,19 @@ rel.distinct().order("range")
 └─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
 """,
         aliases=['dense_rank'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'row_number': PythonRelAPIDetails(
         example='rel.row_number(window_spec="over (partition by description order by value)", projected_columns="description, value")',
@@ -1642,6 +2555,19 @@ rel.distinct().order("range")
 │ value is even   │     8 │                                                             4 │
 └─────────────────┴───────┴───────────────────────────────────────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'select_dtypes': PythonRelAPIDetails(
         example='rel.select_dtypes(types=[duckdb.typing.VARCHAR]).distinct()',
@@ -1655,6 +2581,13 @@ rel.distinct().order("range")
 └─────────────────┘
 """,
         aliases=['select_types'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="types",
+                parameter_type=["object"],
+                parameter_description="Data type(s) to select columns by. Can be a single type or a collection of types.",
+            )
+        ],
     ),
     'select_types': PythonRelAPIDetails(
         example='rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()',
@@ -1668,6 +2601,13 @@ rel.distinct().order("range")
 └─────────────────┘
 """,
         aliases=['select_dtypes'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="types",
+                parameter_type=["object"],
+                parameter_description="Data type(s) to select columns by. Can be a single type or a collection of types.",
+            )
+        ],
     ),
     'std': PythonRelAPIDetails(
         example='rel.std(column="value", groups="description", projected_columns="description")',
@@ -1681,6 +2621,31 @@ rel.distinct().order("range")
 └─────────────────┴──────────────────────┘
 """,
         aliases=['stddev', 'stddev_samp'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the standard deviation for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'stddev': PythonRelAPIDetails(
         example='rel.stddev(column="value", groups="description", projected_columns="description")',
@@ -1694,6 +2659,31 @@ rel.distinct().order("range")
 └─────────────────┴──────────────────────┘
 """,
         aliases=['std', 'stddev_samp'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the standard deviation for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'stddev_pop': PythonRelAPIDetails(
         example='rel.stddev_pop(column="value", groups="description", projected_columns="description")',
@@ -1706,6 +2696,31 @@ rel.distinct().order("range")
 │ value is uneven │  2.8284271247461903 │
 └─────────────────┴─────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the standard deviation for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'stddev_samp': PythonRelAPIDetails(
         example='rel.stddev_samp(column="value", groups="description", projected_columns="description")',
@@ -1719,6 +2734,31 @@ rel.distinct().order("range")
 └─────────────────┴──────────────────────┘
 """,
         aliases=['stddev', 'std'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the standard deviation for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'string_agg': PythonRelAPIDetails(
         example='rel.string_agg(column="value", sep=",", groups="description", projected_columns="description")',
@@ -1731,6 +2771,37 @@ rel.distinct().order("range")
 │ value is uneven │ 1,3,5,7,9                │
 └─────────────────┴──────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to concatenate values from.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sep",
+                parameter_type=["str"],
+                parameter_default="','",
+                parameter_description="Separator string to use between concatenated values.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'sum': PythonRelAPIDetails(
         example='rel.sum(column="value", groups="description", projected_columns="description")',
@@ -1743,6 +2814,31 @@ rel.distinct().order("range")
 │ value is uneven │           25 │
 └─────────────────┴──────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the sum for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'unique': PythonRelAPIDetails(
         example='rel.unique(unique_aggr="description")',
@@ -1755,6 +2851,13 @@ rel.distinct().order("range")
 │ value is uneven │
 └─────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="unique_aggr",
+                parameter_type=["str"],
+                parameter_description="The column to get the distinct values for.",
+            )
+        ],
     ),
     'value_counts': PythonRelAPIDetails(
         example='rel.value_counts(column="description", groups="description")',
@@ -1767,6 +2870,19 @@ rel.distinct().order("range")
 │ value is even   │                  4 │
 └─────────────────┴────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to count values from.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+        ],
     ),
     'var': PythonRelAPIDetails(
         example='rel.var(column="value", groups="description", projected_columns="description")',
@@ -1780,6 +2896,31 @@ rel.distinct().order("range")
 └─────────────────┴───────────────────┘
 """,
         aliases=['variance', 'var_samp'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the sample variance for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'var_pop': PythonRelAPIDetails(
         example='rel.var_pop(column="value", groups="description", projected_columns="description")',
@@ -1792,6 +2933,31 @@ rel.distinct().order("range")
 │ value is uneven │              8.0 │
 └─────────────────┴──────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the population variance for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'var_samp': PythonRelAPIDetails(
         example='rel.var_samp(column="value", groups="description", projected_columns="description")',
@@ -1805,6 +2971,31 @@ rel.distinct().order("range")
 └─────────────────┴───────────────────┘
 """,
         aliases=['variance', 'var'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the sample variance for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'variance': PythonRelAPIDetails(
         example='rel.variance(column="value", groups="description", projected_columns="description")',
@@ -1818,6 +3009,31 @@ rel.distinct().order("range")
 └─────────────────┴───────────────────┘
 """,
         aliases=['var', 'var_samp'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="column",
+                parameter_type=["str"],
+                parameter_description="The column name to calculate the sample variance for.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the `group by`.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="window_spec",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional window specification for window functions, provided as `over (partition by ... order by ...)`",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
 }
 

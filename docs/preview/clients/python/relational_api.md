@@ -2021,7 +2021,7 @@ Project the relation object by the projection in project_expr
 
 - **groups** : str, default: ''
                             
-	Optional grouping expression as a SQL string.
+	Comma-separated list of columns to include in the `group by`.
 
 ##### Example
 
@@ -2075,7 +2075,7 @@ Project the relation object by the projection in project_expr
 
 - **groups** : str, default: ''
                             
-	Optional grouping expression as a SQL string.
+	Comma-separated list of columns to include in the `group by`.
 
 ##### Example
 
@@ -2349,6 +2349,21 @@ any_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', w
 
 Returns the first non-null value from a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name from which to retrieve any value.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -2394,6 +2409,24 @@ arg_max(self: duckdb.duckdb.DuckDBPyRelation, arg_column: str, value_column: str
 ##### Description
 
 Finds the row with the maximum value for a value column and returns the value of that row for an argument column
+
+##### Parameters
+
+- **arg_column** : str
+                            
+	The column name for which to find the argument maximizing the value.
+- **value_column** : str
+                            
+	The column name containing values used to determine the maximum.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -2442,6 +2475,24 @@ arg_min(self: duckdb.duckdb.DuckDBPyRelation, arg_column: str, value_column: str
 
 Finds the row with the minimum value for a value column and returns the value of that row for an argument column
 
+##### Parameters
+
+- **arg_column** : str
+                            
+	The column name for which to find the argument minimizing the value.
+- **value_column** : str
+                            
+	The column name containing values used to determine the minimum.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -2489,6 +2540,21 @@ avg(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_
 
 Computes the average on a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the average on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -2535,6 +2601,21 @@ bit_and(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', win
 ##### Description
 
 Computes the bitwise AND of all bits present in a given column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to perform the bitwise AND aggregation on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -2585,6 +2666,21 @@ bit_or(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wind
 
 Computes the bitwise OR of all bits present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to perform the bitwise OR aggregation on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -2633,6 +2729,21 @@ bit_xor(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', win
 ##### Description
 
 Computes the bitwise XOR of all bits present in a given column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to perform the bitwise XOR aggregation on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -2683,6 +2794,27 @@ bitstring_agg(self: duckdb.duckdb.DuckDBPyRelation, column: str, min: typing.Opt
 
 Computes a bitstring with bits set for each distinct value in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to aggregate as a bitstring.
+- **min** : object, default: None
+                            
+	Optional minimum bitstring value for aggregation.
+- **max** : object, default: None
+                            
+	Optional maximum bitstring value for aggregation.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -2729,6 +2861,21 @@ bool_and(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wi
 ##### Description
 
 Computes the logical AND of all values present in a given column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to perform the boolean AND aggregation on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -2779,6 +2926,21 @@ bool_or(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', win
 
 Computes the logical OR of all values present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to perform the boolean OR aggregation on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -2828,6 +2990,21 @@ count(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', windo
 
 Computes the number of elements present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to perform count on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -2873,6 +3050,15 @@ cume_dist(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_colu
 ##### Description
 
 Computes the cumulative distribution within the partition
+
+##### Parameters
+
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -2929,6 +3115,15 @@ dense_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_col
 Computes the dense rank within the partition
 
 **Aliases**: [`rank_dense`](#rank_dense)
+
+##### Parameters
+
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -3025,6 +3220,21 @@ favg(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window
 
 Computes the average of all values present in a given column using a more accurate floating point summation (Kahan Sum)
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the average on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3071,6 +3281,18 @@ first(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', proje
 ##### Description
 
 Returns the first value of a given column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name from which to retrieve the first value.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -3119,6 +3341,18 @@ first_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str 
 
 Computes the first value within the group or partition
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name from which to retrieve the first value.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3165,6 +3399,21 @@ fsum(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window
 ##### Description
 
 Computes the sum of all values present in a given column using a more accurate floating point summation (Kahan Sum)
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the sum on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -3213,6 +3462,18 @@ geomean(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', pro
 
 Computes the geometric mean over all values present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the geometric mean on.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3260,6 +3521,18 @@ histogram(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', w
 
 Computes the histogram over all values present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the histogram on.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3306,6 +3579,27 @@ lag(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset:
 ##### Description
 
 Computes the lag within the partition
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to apply the lag function on.
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **offset** : int, default: 1
+                            
+	The number of rows to lag behind.
+- **default_value** : str, default: 'NULL'
+                            
+	The default value to return when the lag offset goes out of bounds.
+- **ignore_nulls** : bool, default: False
+                            
+	Whether to ignore NULL values when computing the lag.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -3361,6 +3655,18 @@ last(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projec
 
 Returns the last value of a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name from which to retrieve the last value.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3408,6 +3714,18 @@ last_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str =
 
 Computes the last value within the group or partition
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name from which to retrieve the last value within the window.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3454,6 +3772,27 @@ lead(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset
 ##### Description
 
 Computes the lead within the partition
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to apply the lead function on.
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **offset** : int, default: 1
+                            
+	The number of rows to lead ahead.
+- **default_value** : str, default: 'NULL'
+                            
+	The default value to return when the lead offset goes out of bounds.
+- **ignore_nulls** : bool, default: False
+                            
+	Whether to ignore NULL values when computing the lead.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -3509,6 +3848,21 @@ list(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window
 
 Returns a list containing all values present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to aggregate values into a list.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3555,6 +3909,21 @@ max(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_
 ##### Description
 
 Returns the maximum value present in a given column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the maximum value of.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -3603,6 +3972,21 @@ mean(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window
 
 Computes the average on a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the mean value of.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3649,6 +4033,21 @@ median(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wind
 ##### Description
 
 Computes the median over all values present in a given column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the median value of.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -3697,6 +4096,21 @@ min(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_
 
 Returns the minimum value present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the min value of.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3744,6 +4158,21 @@ mode(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window
 
 Computes the mode over all values present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the mode (most frequent value) of.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3790,6 +4219,18 @@ n_tile(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, num_buckets: int,
 ##### Description
 
 Divides the partition as equally as possible into num_buckets
+
+##### Parameters
+
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **num_buckets** : int
+                            
+	The number of buckets to divide the rows into.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -3845,6 +4286,24 @@ nth_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, o
 
 Computes the nth value within the partition
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name from which to retrieve the nth value within the window.
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **offset** : int
+                            
+	The position of the value to retrieve within the window (1-based index).
+- **ignore_nulls** : bool, default: False
+                            
+	Whether to ignore NULL values when computing the nth value.
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3898,6 +4357,15 @@ percent_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_c
 ##### Description
 
 Computes the relative rank within the partition
+
+##### Parameters
+
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -3953,6 +4421,21 @@ product(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', win
 
 Returns the product of all values present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the product of.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -3999,6 +4482,24 @@ quantile(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, gro
 ##### Description
 
 Computes the exact quantile value for a given column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to compute the quantile for.
+- **q** : object, default: 0.5
+                            
+	The quantile value to compute (e.g., 0.5 for median).
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -4047,6 +4548,24 @@ quantile_cont(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5
 
 Computes the interpolated quantile value for a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to compute the continuous quantile for.
+- **q** : object, default: 0.5
+                            
+	The quantile value to compute (e.g., 0.5 for median).
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -4094,6 +4613,24 @@ quantile_disc(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5
 
 Computes the exact quantile value for a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to compute the discrete quantile for.
+- **q** : object, default: 0.5
+                            
+	The quantile value to compute (e.g., 0.5 for median).
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -4140,6 +4677,15 @@ rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: 
 ##### Description
 
 Computes the rank within the partition
+
+##### Parameters
+
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -4197,6 +4743,15 @@ Computes the dense rank within the partition
 
 **Aliases**: [`dense_rank`](#dense_rank)
 
+##### Parameters
+
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -4250,6 +4805,15 @@ row_number(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_col
 ##### Description
 
 Computes the row number within the partition
+
+##### Parameters
+
+- **window_spec** : str
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -4307,6 +4871,12 @@ Select columns from the relation, by filtering based on type(s)
 
 **Aliases**: [`select_types`](#select_types)
 
+##### Parameters
+
+- **types** : object
+                            
+	Data type(s) to select columns by. Can be a single type or a collection of types.
+
 ##### Example
 
 ```python
@@ -4355,6 +4925,12 @@ select_types(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duck
 Select columns from the relation, by filtering based on type(s)
 
 **Aliases**: [`select_dtypes`](#select_dtypes)
+
+##### Parameters
+
+- **types** : object
+                            
+	Data type(s) to select columns by. Can be a single type or a collection of types.
 
 ##### Example
 
@@ -4405,6 +4981,21 @@ Computes the sample standard deviation for a given column
 
 **Aliases**: [`stddev`](#stddev), [`stddev_samp`](#stddev_samp)
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the standard deviation for.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -4454,6 +5045,21 @@ Computes the sample standard deviation for a given column
 
 **Aliases**: [`std`](#std), [`stddev_samp`](#stddev_samp)
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the standard deviation for.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -4500,6 +5106,21 @@ stddev_pop(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', 
 ##### Description
 
 Computes the population standard deviation for a given column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the standard deviation for.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -4550,6 +5171,21 @@ Computes the sample standard deviation for a given column
 
 **Aliases**: [`stddev`](#stddev), [`std`](#std)
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the standard deviation for.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -4596,6 +5232,24 @@ string_agg(self: duckdb.duckdb.DuckDBPyRelation, column: str, sep: str = ',', gr
 ##### Description
 
 Concatenates the values present in a given column with a separator
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to concatenate values from.
+- **sep** : str, default: ','
+                            
+	Separator string to use between concatenated values.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -4644,6 +5298,21 @@ sum(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_
 
 Computes the sum of all values present in a given column
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the sum for.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -4691,6 +5360,12 @@ unique(self: duckdb.duckdb.DuckDBPyRelation, unique_aggr: str) -> duckdb.duckdb.
 
 Returns the distinct values in a column.
 
+##### Parameters
+
+- **unique_aggr** : str
+                            
+	The column to get the distinct values for.
+
 ##### Example
 
 ```python
@@ -4737,6 +5412,15 @@ value_counts(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = ''
 ##### Description
 
 Computes the number of elements present in a given column, also projecting the original column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to count values from.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
 
 ##### Example
 
@@ -4787,6 +5471,21 @@ Computes the sample variance for a given column
 
 **Aliases**: [`variance`](#variance), [`var_samp`](#var_samp)
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the sample variance for.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -4833,6 +5532,21 @@ var_pop(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', win
 ##### Description
 
 Computes the population variance for a given column
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the population variance for.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
@@ -4883,6 +5597,21 @@ Computes the sample variance for a given column
 
 **Aliases**: [`variance`](#variance), [`var`](#var)
 
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the sample variance for.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
+
 ##### Example
 
 ```python
@@ -4931,6 +5660,21 @@ variance(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', wi
 Computes the sample variance for a given column
 
 **Aliases**: [`var`](#var), [`var_samp`](#var_samp)
+
+##### Parameters
+
+- **column** : str
+                            
+	The column name to calculate the sample variance for.
+- **groups** : str, default: ''
+                            
+	Comma-separated list of columns to include in the `group by`.
+- **window_spec** : str, default: ''
+                            
+	Optional window specification for window functions, provided as `over (partition by ... order by ...)`
+- **projected_columns** : str, default: ''
+                            
+	Comma-separated list of columns to include in the result.
 
 ##### Example
 
