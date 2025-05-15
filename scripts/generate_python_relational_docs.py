@@ -267,9 +267,9 @@ def generate_from_db(relational_api_table):
             if(member_parameters is not null, '\n\n##### Parameters\n\n', NULL) as header_parameters, 
             member_parameters,
             if(aliases != '', concat('\n\n**Aliases**: ', aliases), NULL) as aliases,
-            if(member_example is not null, '\n\n###### Example\n\n', NULL) as header_example,
+            if(member_example is not null, '\n\n##### Example\n\n', NULL) as header_example,
             member_example,
-            if( member_result is not null, '\n\n###### Result\n\n', NULL) as header_result,
+            if( member_result is not null, '\n\n##### Result\n\n', NULL) as header_result,
             member_result
         """
             )

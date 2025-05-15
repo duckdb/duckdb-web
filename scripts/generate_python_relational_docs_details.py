@@ -505,6 +505,19 @@ TRANSFORMATION_METHODS_MAP = {
 │            9 │
 └──────────────┘
         """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="aggr_expr",
+                parameter_type=["str", "list[Expression]"],
+                parameter_description="The list of columns and aggregation functions.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="group_expr",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="The list of columns to be included in `group_by`. If `None`, `group by all` is applied.",
+            ),
+        ],
     ),
     'apply': PythonRelAPIDetails(
         example="""
@@ -525,6 +538,36 @@ rel.apply(
 └─────────────────┴───────────┘
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="function_name",
+                parameter_type=["str"],
+                parameter_description="Name of the function to apply over the relation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="function_aggr",
+                parameter_type=["str"],
+                parameter_description="The list of columns to apply the function over.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="group_expr",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional SQL expression for grouping.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="function_parameter",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional parameters to pass into the function.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="projected_columns",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Comma-separated list of columns to include in the result.",
+            ),
+        ],
     ),
     'cross': PythonRelAPIDetails(
         example='rel.cross(other_rel=rel.set_alias("other_rel"))',
@@ -537,6 +580,13 @@ rel.apply(
 ...
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="other_rel",
+                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_description="Another relation to perform a cross product with.",
+            )
+        ],
     ),
     'except_': PythonRelAPIDetails(
         example='rel.except_(other_rel=rel.set_alias("other_rel"))',
@@ -551,6 +601,13 @@ The relation query is executed twice, therefore generating different ids and tim
 ...
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="other_rel",
+                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_description="The relation to subtract from the current relation (set difference).",
+            )
+        ],
     ),
     'filter': PythonRelAPIDetails(
         example='rel.filter("value = 2")',
@@ -563,6 +620,13 @@ The relation query is executed twice, therefore generating different ids and tim
 └──────────────────────────────────────┴───────────────┴───────┴───────────────────────────┘
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="filter_expr",
+                parameter_type=["str", "Expression"],
+                parameter_description="The filter expression to apply over the relation.",
+            )
+        ],
     ),
     'insert': PythonRelAPIDetails(
         example='''
@@ -605,6 +669,13 @@ rel.filter("value = 10")
 └──────────────────────────────────────┴───────────────┴───────┴───────────────────────────────┘
 """,
         use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="values",
+                parameter_type=["object"],
+                parameter_description="A tuple of values matching the relation column list, to be inserted.",
+            )
+        ],
     ),
     'insert_into': PythonRelAPIDetails(
         example='''
@@ -647,6 +718,13 @@ duckdb_conn.table("code_example").filter("value = 10")
 └──────────────────────────────────────┴───────────────┴───────┴───────────────────────────────┘
 """,
         use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="table_name",
+                parameter_type=["str"],
+                parameter_description="The table name to insert the data into. The relation must respect the column order of the table.",
+            )
+        ],
     ),
     'intersect': PythonRelAPIDetails(
         example='rel.intersect(other_rel=rel.set_alias("other_rel"))',
@@ -662,6 +740,13 @@ therefore generating different ids and timestamps:
 └───────────────────────────────────────────────────────┘
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="other_rel",
+                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_description="The relation to intersect with the current relation (set intersection).",
+            )
+        ],
     ),
     'join': PythonRelAPIDetails(
         example="""
@@ -746,6 +831,24 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
 > `NATURAL`, `POSITIONAL` and `ASOF` joins are not provided by the relational API.
 > `CROSS` joins are provided through the [cross method](#cross). 
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="other_rel",
+                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_description="The relation to join with the current relation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="condition",
+                parameter_type=["object"],
+                parameter_description="The join condition, typically a SQL expression or the duplicated column name to join on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="how",
+                parameter_type=["str"],
+                parameter_default="'inner'",
+                parameter_description="The type of join to perform: 'inner', 'left', 'right', 'outer', 'semi' and 'anti'.",
+            ),
+        ],
     ),
     'limit': PythonRelAPIDetails(
         example='rel.limit(1)',
@@ -758,6 +861,19 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="n",
+                parameter_type=["int"],
+                parameter_description="The maximum number of rows to return.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="offset",
+                parameter_type=["int"],
+                parameter_default="0",
+                parameter_description="The number of rows to skip before starting to return rows.",
+            ),
+        ],
     ),
     'map': PythonRelAPIDetails(
         example="""
@@ -783,6 +899,19 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 └───────┴─────────┘
 """,
         use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="map_function",
+                parameter_type=["Callable"],
+                parameter_description="A Python function that takes a DataFrame and returns a transformed DataFrame.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="schema",
+                parameter_type=["object"],
+                parameter_default="None",
+                parameter_description="Optional schema describing the structure of the output relation.",
+            ),
+        ],
     ),
     'order': PythonRelAPIDetails(
         example='rel.order("value desc").limit(1, offset=4)',
@@ -795,6 +924,13 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
         use_default_example=True,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="order_expr",
+                parameter_type=["str"],
+                parameter_description="SQL expression defining the ordering of the result rows.",
+            )
+        ],
     ),
     'project': PythonRelAPIDetails(
         example='rel.project("description").limit(1)',
@@ -808,6 +944,14 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 """,
         use_default_example=True,
         aliases=['select'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional grouping expression as a SQL string.",
+            )
+        ],
     ),
     'select': PythonRelAPIDetails(
         example='rel.select("description").limit(1)',
@@ -821,6 +965,14 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 """,
         use_default_example=True,
         aliases=['project'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="groups",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional grouping expression as a SQL string.",
+            )
+        ],
     ),
     'sort': PythonRelAPIDetails(
         example='rel.sort("description")',
@@ -847,6 +999,13 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 """,
         use_default_example=True,
         additional_description="\n>The union is `union all`. In order to retrieve distinct values, apply [distinct](#distinct).",
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="union_rel",
+                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_description="The relation to union with the current relation (set union).",
+            )
+        ],
     ),
     'update': PythonRelAPIDetails(
         example='''
@@ -886,6 +1045,19 @@ rel.show()
 ...
 """,
         use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="set",
+                parameter_type=["object"],
+                parameter_description="Mapping of columns to new values for the update operation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="condition",
+                parameter_type=["object"],
+                parameter_default="None",
+                parameter_description="Optional condition to filter which rows to update.",
+            ),
+        ],
     ),
 }
 
