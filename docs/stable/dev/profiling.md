@@ -252,7 +252,7 @@ The contents of the outputted file:
 
 It is also possible to render the profiling output as a query graph.
 The query graph visually represents the query plan, showing the operators and their relationships.
-The query plan must be output in the `json` format and stored in a file.
+The query plan must be output in the `json` format, with the `PRAGMA profiling_mode='detailed';` set, and stored in a file.
 After writing a profiling output to its designated file, the Python script can render it as a query graph.
 The script requires the `duckdb` Python module to be installed.
 It generates an HTML file and opens it in your web browser.
