@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 434
-extension_download_count_pretty: 434
+extension_download_count: 433
+extension_download_count_pretty: 433
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---
@@ -69,7 +69,9 @@ LOAD {{ page.extension.name }};
 | update_suffixes          | scalar        | Update public suffixes                     | NULL    | [SELECT update_suffixes();]                                         |
 | update_tranco            | scalar        | Update tranco data                         | NULL    | [SELECT update_tranco(true);]                                       |
 | ipcalc                   | table         | NULL                                       | NULL    | [NULL]                                                              |
+| extract_port             | scalar        | NULL                                       | NULL    | [NULL]                                                              |
 | get_tranco_rank_category | scalar        | NULL                                       | NULL    | [NULL]                                                              |
 | netquack_version         | table         | NULL                                       | NULL    | [NULL]                                                              |
+| extract_extension        | scalar        | NULL                                       | NULL    | [NULL]                                                              |
 
 
