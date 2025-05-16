@@ -125,8 +125,11 @@ def train_split_data(selection_query):
         island_id,
         observation_id,
         species_id
-    """).df()
-    y_df = [x[0] for x in selection_query.select("species_id").fetchall()]
+    """).order("observation_id").df()
+    y_df = [
+        x[0] 
+        for x in selection_query.order("observation_id").select("species_id").fetchall()
+    ]
 
     num_test = 0.30
     return train_test_split(X_df, y_df, test_size=num_test)
