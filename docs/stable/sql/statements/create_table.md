@@ -144,14 +144,6 @@ You can create a copy of the table's schema (column names and types only) as fol
 ```sql
 CREATE TABLE t1 AS
     FROM t2
-    WITH NO DATA;
-```
-
-Or:
-
-```sql
-CREATE TABLE t1 AS
-    FROM t2
     LIMIT 0;
 ```
 
