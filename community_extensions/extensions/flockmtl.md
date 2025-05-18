@@ -62,10 +62,10 @@ docs:
 
     > *Note:* FlockMTL is part of ongoing research by the [Data Systems Group @ Polytechnique Montréal](https://dsg-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
 
-extension_star_count: 210
-extension_star_count_pretty: 210
-extension_download_count: 445
-extension_download_count_pretty: 445
+extension_star_count: 212
+extension_star_count_pretty: 212
+extension_download_count: 447
+extension_download_count_pretty: 447
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
 layout: community_extension_doc
 ---
