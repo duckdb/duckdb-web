@@ -20,7 +20,7 @@ There is a large volume of literature ([1](https://www.startdataengineering.com/
 
 ## Motivation
 
-What is the Modern Data Stack, and why use it? The MDS can mean many things (see examples [here](https://www.moderndatastack.xyz/stacks) and a [historical perspective here](https://www.getdbt.com/blog/future-of-the-modern-data-stack/)), but fundamentally it is a return to using SQL for data transformations by combining multiple best-in-class software tools to form a stack. A typical stack would include (at least!) a tool to extract data from sources and load it into a data warehouse, dbt to transform and analyze that data in the warehouse, and a business intelligence tool. The MDS leverages the accessibility of SQL in combination with software development best practices like git to enable analysts to scale their impact across their companies.
+What is the Modern Data Stack, and why use it? The MDS can mean many things (see [examples](https://www.moderndatastack.xyz/stacks) and a [historical perspective](https://www.getdbt.com/blog/future-of-the-modern-data-stack/)), but fundamentally it is a return to using SQL for data transformations by combining multiple best-in-class software tools to form a stack. A typical stack would include (at least!) a tool to extract data from sources and load it into a data warehouse, dbt to transform and analyze that data in the warehouse, and a business intelligence tool. The MDS leverages the accessibility of SQL in combination with software development best practices like git to enable analysts to scale their impact across their companies.
 
 Why build a bundled Modern Data Stack on a single machine, rather than on multiple machines and on a data warehouse? There are many advantages!
 * Simplify for higher developer productivity
@@ -45,7 +45,7 @@ Due to this tradeoff, this approach is more of an “Open Source Analytics Stack
 
 ## Choosing a Problem
 
-Given that the NBA season is starting soon, a monte carlo type simulation of the season is both topical and well-suited for analytical SQL. This is a particularly great scenario to test the limits of DuckDB because it only requires simple inputs and easily scales out to massive numbers of records. This entire project is held in a GitHub repo, which you can find [here](https://github.com/matsonj/nba-monte-carlo).
+Given that the NBA season is starting soon, a monte carlo type simulation of the season is both topical and well-suited for analytical SQL. This is a particularly great scenario to test the limits of DuckDB because it only requires simple inputs and easily scales out to massive numbers of records. This entire project is held in a GitHub repo, which you can find on [GitHub](https://github.com/matsonj/nba-monte-carlo).
 
 ## Building the Environment
 

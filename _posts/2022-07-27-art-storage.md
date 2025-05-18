@@ -241,7 +241,7 @@ Node 256 would increase 2048 bytes (256 * (4+4)), causing it to double its curre
 
 To avoid the increase in sizes of ART nodes, we decided to implement [Swizzlable Pointers](https://en.wikipedia.org/wiki/Pointer_swizzling) and use them instead of regular pointers.
 
-The idea is that we don't need all 64 bits (i.e., 48 bits give you an address space of 256 terabyte, supporting any of the current architectures, more [here](https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space) and [here](https://en.wikipedia.org/wiki/64-bit_computing).) in a pointer to point to a memory address (. Hence we can use the most significant bit as a flag (i.e., the Swizzle Flag). 
+The idea is that we don't need all 64 bits (i.e., 48 bits give you an address space of 256 terabyte, supporting any of the current architectures, see the [related discussion on Stack Overflow](https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space) and the [“64-bit computing” Wikipedia page](https://en.wikipedia.org/wiki/64-bit_computing)) in a pointer to point to a memory address. Hence we can use the most significant bit as a flag (i.e., the Swizzle Flag). 
 If the swizzle flag is set, the value in our Swizzlable Pointer is a memory address for the Node. Otherwise, the variable stores the Block Information of where the Node is stored. In the latter case, we use the following 31 bits to store the Block ID and the remaining 32 bits to store the offset.
 
 In the following figure, you can see a visual representation of DuckDB's Swizzlable Pointer.
