@@ -133,7 +133,7 @@ EXCLUDES = [('string', 'list_slice')]
 
 PAGE_LINKS = {
     # intra-page links:
-    '`concat(arg1, arg2, ...)`': "#concatvalue",
+    '`concat(arg1, arg2, ...)`': "#concatvalue-",
     'operator `||`': "#arg1--arg2",
     'fmt syntax': "#fmt-syntax",
     'printf syntax': '#printf-syntax',
@@ -383,8 +383,7 @@ def generate_example_rows(func: DocFunction):
             try:
                 if func.name in BINARY_OPERATORS:
                     example = f"({example})"
-                run_example = re.sub(r'␣', ' ', example)
-                query_result = duckdb.sql(rf"select {run_example}::VARCHAR").fetchall()
+                query_result = duckdb.sql(rf"select {example}::VARCHAR").fetchall()
                 if len(query_result) != 1:
                     example_result = 'Multiple rows: ' + ', '.join(
                         (
@@ -398,16 +397,6 @@ def generate_example_rows(func: DocFunction):
                     example_result = (
                         f"{query_result[0][0]}" if query_result[0][0] else "NULL"
                     )
-                    # replace leading and trailing spaces by '␣'
-                    nr_leading_spaces = 0
-                    nr_trailing_spaces = 0
-                    while example_result and example_result[0] == ' ':
-                        example_result = example_result[1:]
-                        nr_leading_spaces += 1
-                    while example_result and example_result[-1] == ' ':
-                        example_result = example_result[:-1]
-                        nr_trailing_spaces += 1
-                    example_result = f"{nr_leading_spaces * '␣'}{example_result}{nr_trailing_spaces * '␣'}"
             except duckdb.ParserException as e:
                 print(
                     f"Error for function '{func.name}', could not calculate example: '{example}'. Consider adding it via OVERRIDES'. {e}"
