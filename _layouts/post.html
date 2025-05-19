@@ -89,6 +89,9 @@
 													<span>Published on</span>
 													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
 												</div>
+												<div class="publishedinfo">
+													<span>Reading time: {{ content | reading_time }}</span>
+												</div>
 											{% endif %}
 										</div>
 									</div>
