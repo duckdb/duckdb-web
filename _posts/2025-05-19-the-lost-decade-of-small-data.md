@@ -115,7 +115,7 @@ Here are the results side-by-side:
 |    21 |      1011.9 |        47.8 |   21.17 |
 |    22 |        57.7 |         4.3 |   13.42 |
 
-We do see significant speedups, between 7 up to as much as 53. The [geometric mean](https://en.wikipedia.org/wiki/Geometric_mean) of the timings improved from 218 to 12, a ca. 20× improvement.
+We do see significant speedups, from 7 up to as much as 53. The [geometric mean](https://en.wikipedia.org/wiki/Geometric_mean) of the timings improved from 218 to 12, a ca. 20× improvement.
 
 ## Reproducibility
 
