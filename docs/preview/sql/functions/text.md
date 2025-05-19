@@ -22,7 +22,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`string LIKE target`](#string-like-target) | Returns `true` if the `string` matches the like specifier (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string SIMILAR TO regex`](#string-similar-to-regex) | Returns `true` if the `string` matches the `regex` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string ^@ search_string`](#string--search_string) | Returns `true` if `string` begins with `search_string`. |
-| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
+| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue-) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
 | [`array_extract(string, index)`](#array_extractstring-index) | Extracts a single character from a `string` using a (1-based) `index`. |
 | [`array_slice(list, begin, end)`](#array_slicelist-begin-end) | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | [`ascii(string)`](#asciistring) | Returns an integer that represents the Unicode code point of the first character of the `string`. |
@@ -173,7 +173,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
+| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue-) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
 | **Example 1** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
 | **Example 2** | `[1, 2, 3] || [4, 5, 6]` |

@@ -133,7 +133,7 @@ EXCLUDES = [('string', 'list_slice')]
 
 PAGE_LINKS = {
     # intra-page links:
-    '`concat(arg1, arg2, ...)`': "#concatvalue",
+    '`concat(arg1, arg2, ...)`': "#concatvalue-",
     'operator `||`': "#arg1--arg2",
     'fmt syntax': "#fmt-syntax",
     'printf syntax': '#printf-syntax',
