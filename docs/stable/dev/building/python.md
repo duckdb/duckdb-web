@@ -7,14 +7,14 @@ title: Python
 
 The DuckDB Python package lives in the main [DuckDB source on Github](https://github.com/duckdb/duckdb/) under the `/tools/pythonpkg/` folder. It uses [pybind11](https://pybind11.readthedocs.io/en/stable/) to create Python bindings with DuckDB.
 
-# Prerequisites
+## Prerequisites
 
 For everything described on this page we make the following assumptions:
 
 1. You have a working copy of the duckdb source (including the git tags) and you run commands from the root of the source
 2. You have a suitable Python installation available in a dedicated virtual env
 
-## 1. DuckDB code
+### 1. DuckDB code
 
 Make sure you have checked out the [DuckDB source](https://github.com/duckdb/duckdb/) and that you are in its root. E.g.:
 
@@ -38,7 +38,7 @@ git fetch --tags upstream
 git push --tags
 ```
 
-## 2. Python Virtual Env
+### 2. Python Virtual Env
 
 For everything described here you will need a suitable Python installation. While you technically might be able to use your system Python, we **strongly** recommend you use a Python virtual environment. A virtual environment isolates dependencies and, depending on the tooling you use, gives you control over which Python interpreter you use. This way you don't pollute your system-wide Python with the different packages you need for your projects.
 
@@ -68,27 +68,27 @@ If that fails with `No module named pip` and you use `uv`, then run:
 $ uv pip install pip
 ```
 
-# Building From Source
+## Building From Source
 
 Below are a number of options to build the python library from source, with or without debug symbols, and with a default or custom set of [extensions]({% link docs/stable/extensions/overview.md %}). Make sure to check out the [DuckDB build documentation]({% link docs/stable/dev/building/overview.md %}) if you run into trouble building the DuckDB main library.
 
-## Default release, debug build or cloud storage
+### Default release, debug build or cloud storage
 
 The following will build the package with the default set of extensions (json, parquet, icu and core_function).
 
-### Release build
+#### Release build
 
 ```bash
 GEN=ninja BUILD_PYTHON=1 make release
 ```
 
-### Debug build
+#### Debug build
 
 ```bash
 GEN=ninja BUILD_PYTHON=1 make debug
 ```
 
-### Cloud Storage
+#### Cloud Storage
 
 You may need the package files to reside under the same prefix where the library is installed; e.g., when installing to cloud storage from a notebook.
 
@@ -110,13 +110,13 @@ tar --directory=$DUCKDB_PREFIX/src/duckdb-pythonpkg -xzpf tools/pythonpkg/dist/d
 pip install --prefix $DUCKDB_PREFIX -e $DUCKDB_PREFIX/src/duckdb-pythonpkg/duckdb-${SETUPTOOLS_SCM_PRETEND_VERSION}
 ```
 
-### Verify
+#### Verify
 
 ```bash
 python3 -c "import duckdb; print(duckdb.sql('SELECT 42').fetchall())"
 ```
 
-## Adding extensions
+### Adding extensions
 
 Before thinking about statically linking extensions you should know that the Python package currently doesn't handle linked in extensions very well. If you don't really need to have an extension baked in than the advice is to just stick to [installing them at runtime]({% link docs/stable/extensions/installing_extensions.md %}). See `tools/pythonpkg/duckdb_extension_config.cmake` for the default list of extensions that are built with the python package. Any other extension should be considered problematic.
 
@@ -131,35 +131,35 @@ The DuckDB build process follows the following logic for building extensions:
 
 The following mechanisms add to the set of **_included_ extensions**:
 
-| Mechanism | Syntax / Example |
-| ---       | ---              |
-| **Built-in extensions enabled by default** | `extension/extension_config.cmake` (≈30 built-ins) |
-| **Python package extensions enabled by default** | `tools/pythonpkg/duckdb_extension_config.cmake` (`json;parquet;icu`) |
-| **Semicolon-separated include list** | `DUCKDB_EXTENSIONS=fts;tpch;json` |
-| **Flags** | `BUILD_TPCH=1`, `BUILD_JEMALLOC=1`, `BUILD_FTS=1`, … |
-| **Presets** | `BUILD_ALL_EXT=1` - Build all in-tree extensions<br/>`BUILD_ALL_IT_EXT=1` - _Only_ build in-tree extensions<br/>`BUILD_ALL_OOT_EXT=1` - Build all out-of-tree extensions |
-| **Custom config file(s)** | `DUCKDB_EXTENSION_CONFIGS=path/to/my.cmake` |
-| **Core-only overrides** <br/>_only relevant with `DISABLE_BUILTIN_EXTENSIONS=1`_ | `CORE_EXTENSIONS=httpfs;fts` |
+| Mechanism                                                                        | Syntax / Example                                                                                                                                                         |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Built-in extensions enabled by default**                                       | `extension/extension_config.cmake` (≈30 built-ins)                                                                                                                       |
+| **Python package extensions enabled by default**                                 | `tools/pythonpkg/duckdb_extension_config.cmake` (`json;parquet;icu`)                                                                                                     |
+| **Semicolon-separated include list**                                             | `DUCKDB_EXTENSIONS=fts;tpch;json`                                                                                                                                        |
+| **Flags**                                                                        | `BUILD_TPCH=1`, `BUILD_JEMALLOC=1`, `BUILD_FTS=1`, …                                                                                                                     |
+| **Presets**                                                                      | `BUILD_ALL_EXT=1` - Build all in-tree extensions<br/>`BUILD_ALL_IT_EXT=1` - _Only_ build in-tree extensions<br/>`BUILD_ALL_OOT_EXT=1` - Build all out-of-tree extensions |
+| **Custom config file(s)**                                                        | `DUCKDB_EXTENSION_CONFIGS=path/to/my.cmake`                                                                                                                              |
+| **Core-only overrides** <br/>_only relevant with `DISABLE_BUILTIN_EXTENSIONS=1`_ | `CORE_EXTENSIONS=httpfs;fts`                                                                                                                                             |
 
 ---
 
 The following mechanisms add to the set of **_excluded_ extensions**:
 
-| Mechanism  | Syntax / Example |
-| ---        | ---              |
-| **Semicolon-separated skip list** | `SKIP_EXTENSIONS=parquet;jemalloc` |
-| **Flags** | `DISABLE_PARQUET=1`, `DISABLE_CORE_FUNCTIONS=1`, … |
-| **“No built-ins” switch** <br/>_Throws out *every* statically linked extension **except** `core_functions`.  Use `CORE_EXTENSIONS=…` to whitelist a subset back in._ | `DISABLE_BUILTIN_EXTENSIONS=1` |
+| Mechanism                                                                                                                                                            | Syntax / Example                                   |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| **Semicolon-separated skip list**                                                                                                                                    | `SKIP_EXTENSIONS=parquet;jemalloc`                 |
+| **Flags**                                                                                                                                                            | `DISABLE_PARQUET=1`, `DISABLE_CORE_FUNCTIONS=1`, … |
+| **“No built-ins” switch** <br/>_Throws out *every* statically linked extension **except** `core_functions`.  Use `CORE_EXTENSIONS=…` to whitelist a subset back in._ | `DISABLE_BUILTIN_EXTENSIONS=1`                     |
 
 ---
 
-## Show all installed extensions
+### Show all installed extensions
 
 ```bash
 python3 -c "import duckdb; print(duckdb.sql('SELECT extension_name, installed, description FROM duckdb_extensions();'))"
 ```
 
-# Development Environment
+## Development Environment
 
 To set up the codebase for development you should run build duckdb as follows:
 
@@ -178,7 +178,7 @@ Once the build completes, do a sanity check to make sure everything works:
 python3 -c "import duckdb; print(duckdb.sql('SELECT 42').fetchall())"
 ```
 
-## Debugging
+### Debugging
 
 The basic recipe is to start `lldb` with your virtual env's Python interpreter and your script, then set a breakpoint and run your script.
 
@@ -214,11 +214,11 @@ WARNING:  Unable to resolve breakpoint to any actual locations.
 Target 0: (python3) stopped.
 ```
 
-## Debugging in an IDE / CLion
+### Debugging in an IDE / CLion
 
 After creating a debug build with `PYTHON_DEV` enabled, you should be able to get debugging going in an IDE that support `lldb`. Below are the instructions for CLion, but you should be able to get this going in e.g. VSCode as well.
 
-### Configure the CMake Debug Profile
+#### Configure the CMake Debug Profile
 
 This is a prerequisite for debugging, and will enable Intellisense and clang-tidy by generating a `compile-commands.json` file so your IDE knows how to inspect the source code. It also makes sure your Python virtual env can be found by your IDE's cmake.
 
@@ -229,7 +229,7 @@ Under `Settings | Build, Execution, Deployment | CMake` add the following CMake 
 -DBUILD_PYTHON=1 -DPYTHON_DEV=1
 ```
 
-### Create a run config for debugging
+#### Create a run config for debugging
 
 Under Run -> Edit Configurations... create a new CMake Application. Use the following values:
 * Name: Python Debug
@@ -241,11 +241,11 @@ That should be enough: Save and close.
 
 Now you can set a breakpoint in a C++ file. You then open your Python script in your editor and use this config to start a debug session.
 
-## Development and Stubs
+### Development and Stubs
 
 `*.pyi` stubs in `duckdb-stubs` are manually maintained. The connection-related stubs are generated using dedicated scripts in `tools/pythonpkg/scripts/`:
-- `generate_connection_stubs.py`
-- `generate_connection_wrapper_stubs.py`
+* `generate_connection_stubs.py`
+* `generate_connection_wrapper_stubs.py`
 
 These stubs are important for autocomplete in many IDEs, as static-analysis based language servers can't introspect `duckdb`'s binary module.
 
@@ -256,7 +256,7 @@ python3 -m pytest tests/stubs
 
 If you add new methods to the DuckDB Python API, you'll need to manually add corresponding type hints to the stub files.
 
-## What are py::objects and a py::handles??
+### What are py::objects and a py::handles??
 
 These are classes provided by pybind11, the library we use to manage our interaction with the python environment.
 py::handle is a direct wrapper around a raw PyObject* and does not manage any references.
@@ -268,9 +268,9 @@ I say *can* because it doesn't have to, using `py::reinterpret_borrow<py::object
 
 When directly interacting with python functions that return a `PyObject*`, such as `PyDateTime_DATE_GET_TZINFO`, you should generally wrap the call in `py::reinterpret_steal` to take ownership of the returned object.
 
-# Troubleshooting
+## Troubleshooting
 
-## Pip fails with `No names found, cannot describe anything`
+### Pip fails with `No names found, cannot describe anything`
 
 If you've forked DuckDB you may run into trouble when building the Python package when you haven't pulled in the tags.
 
@@ -286,7 +286,7 @@ git fetch --tags upstream
 git push --tags
 ```
 
-## Building with the httpfs extension Fails
+### Building with the httpfs extension Fails
 
 The build fails on OSX when both the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) and the Python package are included:
 
@@ -300,7 +300,7 @@ make: *** [release] Error 1
 
 Linking in the httpfs extension is problematic. Please install it at runtime, if you can.
 
-## Importing duckdb fails with `symbol not found in flat namespace`
+### Importing duckdb fails with `symbol not found in flat namespace`
 
 If you seen an error that looks like this:
 
@@ -310,7 +310,7 @@ ImportError: dlopen(/usr/bin/python3/site-packages/duckdb/duckdb.cpython-311-dar
 
 ... then you've probably tried to link in a problematic extension. As mentioned above: `tools/pythonpkg/duckdb_extension_config.cmake` contains the default list of extensions that are built with the python package. Any other extension might cause problems.
 
-## Python fails with `No module named 'duckdb.duckdb'`
+### Python fails with `No module named 'duckdb.duckdb'`
 
 If you're in `tools/pythonpkg` and try to `import duckdb` you might see:
 
