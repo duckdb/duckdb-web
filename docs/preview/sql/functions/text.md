@@ -38,7 +38,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`contains(string, search_string)`](#containsstring-search_string) | Returns `true` if `search_string` is found within `string`. |
 | [`ends_with(string, search_string)`](#ends_withstring-search_string) | Returns `true` if `string` ends with `search_string`. |
 | [`format(format, ...)`](#formatformat-) | Formats a string using the [fmt syntax](#fmt-syntax). |
-| [`formatReadableDecimalSize(integer)`](#formatreadabledecimalsizeinteger) | Converts `integer` to a human-readable representation (e.g. 16000 -> 16.0 KB). |
+| [`formatReadableDecimalSize(integer)`](#formatreadabledecimalsizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
 | [`formatReadableSize(integer)`](#formatreadablesizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`format_bytes(integer)`](#format_bytesinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`from_base64(string)`](#from_base64string) | Converts a base64 encoded `string` to a character string (`BLOB`). |
@@ -315,8 +315,8 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts `integer` to a human-readable representation (e.g. 16000 -> 16.0 KB). |
-| **Example** | `formatReadableDecimalSize(1000 * 16)` |
+| **Description** | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
+| **Example** | `formatReadableDecimalSize(16_000)` |
 | **Result** | `16.0 kB` |
 
 #### `formatReadableSize(integer)`
@@ -324,7 +324,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
-| **Example** | `formatReadableSize(1000 * 16)` |
+| **Example** | `formatReadableSize(16_000)` |
 | **Result** | `15.6 KiB` |
 | **Alias** | `format_bytes` |
 
@@ -333,7 +333,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
-| **Example** | `format_bytes(1000 * 16)` |
+| **Example** | `format_bytes(16_000)` |
 | **Result** | `15.6 KiB` |
 | **Alias** | `formatReadableSize` |
 
