@@ -40,7 +40,7 @@ Moving on to DuckDB itself: here at DuckDB we are more than a little religious a
 
 ## Benchmarks
 
-But we're not interested in synthetic CPU scores, we're interested in [synthetic SQL scores](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) instead! To see how the old girl is holding up when performing _serious_ data crunching, we used the _at this point rather tired but well-known TPC-H benchmark_ at scale factor 1000. This means that the two main tables, `lineitem` and `orders` contain 6 and 1.5 Billion rows, respectively. When stored as a DuckDB database, the database has a size of ca. 265 GB.
+But we're not interested in synthetic CPU scores, we're interested in [synthetic SQL scores](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) instead! To see how the old machine is holding up when performing _serious_ data crunching, we used the _at this point rather tired but well-known TPC-H benchmark_ at scale factor 1000. This means that the two main tables, `lineitem` and `orders` contain 6 and 1.5 Billion rows, respectively. When stored as a DuckDB database, the database has a size of ca. 265 GB.
 
 From the [audited results on the TPC website](https://www.tpc.org/tpch/results/tpch_advanced_sort_V35.asp?PRINTVER=false&VERSION=3&FLTCOL1=h_sf&FLTCOLOPR1=%3D&FLTCHO1=1000&ADDFILTERROW=&filterRowCount=1&SRTCOL1=h_sponsor&SRTDIR1=ASC&ADDSORTROW=&sortRowCount=1&DISPRES=100++++PERCENT&include_withdrawn_results=none&include_historic_results=yes&include_specification_revision=ON&include_server_cpu=ON&include_total_system_price=ON&include_cluster_info=ON), we can see that running the benchmark on this scale factor on a single node seems to require hardware costing hundreds of thousands of Dollars.
 
