@@ -18,7 +18,7 @@ For everything described on this page we make the following assumptions:
 
 Make sure you have checked out the [DuckDB source](https://github.com/duckdb/duckdb/) and that you are in its root. E.g.:
 
-```bash
+```batch
 $ git clone https://github.com/duckdb/duckdb.git
 ...
 $ cd duckdb
@@ -26,7 +26,7 @@ $ cd duckdb
 
 If you've _forked_ DuckDB you may run into trouble when building the Python package when you haven't pulled in the tags.
 
-```bash
+```batch
 # Check your remotes
 git remote -v
 
@@ -46,7 +46,7 @@ While we use Python's built-in `venv` module in our examples below, and technica
 
 Create and activate a virtual env as follows:
 
-```bash
+```batch
 # Create a virtual environment in the .venv folder (in the duckdb source root)
 $ python3 -m venv --prompt duckdb .venv
 
@@ -56,14 +56,14 @@ $ source .venv/bin/activate
 
 Make sure you have a modern enough version of pip available in your virtual env:
 
-```bash
+```batch
 # Print pip's help
 $ python3 -m pip install --upgrade pip
 ```
 
 If that fails with `No module named pip` and you use `uv`, then run:
 
-```bash
+```batch
 # Install pip
 $ uv pip install pip
 ```
@@ -78,41 +78,19 @@ The following will build the package with the default set of extensions (json, p
 
 #### Release build
 
-```bash
+```batch
 GEN=ninja BUILD_PYTHON=1 make release
 ```
 
 #### Debug build
 
-```bash
+```batch
 GEN=ninja BUILD_PYTHON=1 make debug
-```
-
-#### Cloud Storage
-
-You may need the package files to reside under the same prefix where the library is installed; e.g., when installing to cloud storage from a notebook.
-
-First, get the repository based version number and extract the source distribution.
-
-```bash
-python3 -m pip install build # required for PEP 517 compliant source dists
-cd tools/pythonpkg
-export SETUPTOOLS_SCM_PRETEND_VERSION=$(python3 -m setuptools_scm)
-pyproject-build . --sdist
-cd ../..
-```
-
-Next, copy over the python package related files, and install the package.
-
-```bash
-mkdir -p $DUCKDB_PREFIX/src/duckdb-pythonpkg
-tar --directory=$DUCKDB_PREFIX/src/duckdb-pythonpkg -xzpf tools/pythonpkg/dist/duckdb-${SETUPTOOLS_SCM_PRETEND_VERSION}.tar.gz
-pip install --prefix $DUCKDB_PREFIX -e $DUCKDB_PREFIX/src/duckdb-pythonpkg/duckdb-${SETUPTOOLS_SCM_PRETEND_VERSION}
 ```
 
 #### Verify
 
-```bash
+```batch
 python3 -c "import duckdb; print(duckdb.sql('SELECT 42').fetchall())"
 ```
 
@@ -155,15 +133,24 @@ The following mechanisms add to the set of **_excluded_ extensions**:
 
 ### Show all installed extensions
 
-```bash
+```batch
 python3 -c "import duckdb; print(duckdb.sql('SELECT extension_name, installed, description FROM duckdb_extensions();'))"
 ```
 
 ## Development Environment
 
-To set up the codebase for development you should run build duckdb as follows:
+This section walks you through the following steps:
 
-```bash
+* Creating a CMake profile for development
+* Debugging the Python extension code with lldb
+
+You can do this either on the CLI or from an IDE. The documentation below shows the configuration for CLion, but you should be able to get it to work with other IDEs like VSCode as well.
+
+### Debugging From the CLI
+
+Run this to configure the CMake profile needed to debug on the CLI:
+
+```batch
 GEN=ninja BUILD_PYTHON=1 PYTHON_DEV=1 make debug
 ```
 
@@ -174,13 +161,11 @@ This will take care of the following:
 
 Once the build completes, do a sanity check to make sure everything works:
 
-```bash
+```batch
 python3 -c "import duckdb; print(duckdb.sql('SELECT 42').fetchall())"
 ```
 
-### Debugging
-
-The basic recipe is to start `lldb` with your virtual env's Python interpreter and your script, then set a breakpoint and run your script.
+To debug, the basic recipe is to start `lldb` with your virtual env's Python interpreter and your script, then set a breakpoint and run your script.
 
 For example, given a script `dataframe.df` with the following contents:
 
@@ -191,7 +176,7 @@ print(duckdb.sql("select * from range(1000)").df())
 
 The following should work:
 
-```bash
+```batch
 lldb -- .venv/bin/python3 my_script.py
 ...
 # Set a breakpoint
@@ -216,30 +201,38 @@ Target 0: (python3) stopped.
 
 ### Debugging in an IDE / CLion
 
-After creating a debug build with `PYTHON_DEV` enabled, you should be able to get debugging going in an IDE that support `lldb`. Below are the instructions for CLion, but you should be able to get this going in e.g. VSCode as well.
+You should be able to get debugging going in an IDE that support `lldb`. Below are the instructions for CLion but you can copy the settings for your favorite IDE.
 
-#### Configure the CMake Debug Profile
+#### Configure a CMake Debug Profile
 
-This is a prerequisite for debugging, and will enable Intellisense and clang-tidy by generating a `compile-commands.json` file so your IDE knows how to inspect the source code. It also makes sure your Python virtual env can be found by your IDE's cmake.
+The following CMake profile enables Intellisense and clang-tidy by generating a `compile-commands.json` file so your IDE knows how to inspect the source code, and makes sure that the Python package will be built and installed in your Python virtual env.
 
-Under `Settings | Build, Execution, Deployment | CMake` add the following CMake options:
-```console
--DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
--DPython3_EXECUTABLE=$CMakeProjectDir$/.venv/bin/python3
--DBUILD_PYTHON=1 -DPYTHON_DEV=1
-```
+Under `Settings | Build, Execution, Deployment | CMake`, add a profile and set the fields as follows:
+
+* **Name**: Debug
+* **Build type**: Debug
+* **Generator**:  Ninja
+* **CMake Options** (on a single line):
+  ```console
+  -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
+  -DPython3_EXECUTABLE=$CMakeProjectDir$/.venv/bin/python3
+  -DBUILD_PYTHON=1
+  -DPYTHON_DEV=1
+  ```
 
 #### Create a run config for debugging
 
 Under Run -> Edit Configurations... create a new CMake Application. Use the following values:
-* Name: Python Debug
-* Target: `python_src` (it doesn't actually matter what you select here)
-* Program arguments: `$FilePath$`
-* Working directory: `$ProjectFileDir$`
+* **Name**: Python Debug
+* **Target**: `All targets`
+* **Executable**: `[ABS_PATH_TO_YOUR_VENV]/bin/python3` (careful: this is a symlink and sometimes an IDE might try and follow it and fill in the path to the actual executable, but that will not work)
+* **Program arguments**: `$FilePath$`
+* **Working directory**: `$ProjectFileDir$`
+* **Before Launch**: `Build` (this should already be set)
 
 That should be enough: Save and close.
 
-Now you can set a breakpoint in a C++ file. You then open your Python script in your editor and use this config to start a debug session.
+Now you can set a breakpoint in a C++ file. You then open your Python script in your editor and use this config and run `Python Debug` in debug mode.
 
 ### Development and Stubs
 
@@ -250,7 +243,7 @@ Now you can set a breakpoint in a C++ file. You then open your Python script in 
 These stubs are important for autocomplete in many IDEs, as static-analysis based language servers can't introspect `duckdb`'s binary module.
 
 To verify the stubs match the actual implementation:
-```bash
+```batch
 python3 -m pytest tests/stubs
 ```
 
@@ -274,7 +267,7 @@ When directly interacting with python functions that return a `PyObject*`, such 
 
 If you've forked DuckDB you may run into trouble when building the Python package when you haven't pulled in the tags.
 
-```bash
+```batch
 # Check your remotes
 git remote -v
 
