@@ -44,6 +44,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/previe
 | [`greatest(date, date)`](#greatestdate-date) | The later of two dates. |
 | [`isfinite(date)`](#isfinitedate) | Returns true if the date is finite, false otherwise. |
 | [`isinf(date)`](#isinfdate) | Returns true if the date is infinite, false otherwise. |
+| [`julian(date)`](#juliandate) | Extract the Julian Day number from a date. |
 | [`last_day(date)`](#last_daydate) | The last day of the corresponding month in the date. |
 | [`least(date, date)`](#leastdate-date) | The earlier of two dates. |
 | [`make_date(year, month, day)`](#make_dateyear-month-day) | The date for the given parts. |
@@ -176,6 +177,14 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/previe
 | **Description** | Returns `true` if the date is infinite, false otherwise. |
 | **Example** | `isinf(DATE '-infinity')` |
 | **Result** | `true` |
+
+#### `julian(date)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Extract the Julian Day number from a date. |
+| **Example** | `julian(DATE '1992-09-20')` |
+| **Result** | `2448886.0` |
 
 #### `last_day(date)`
 

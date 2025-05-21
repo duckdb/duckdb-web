@@ -81,12 +81,12 @@ extension:
   version: 0.0.2
 repo:
   github: rustyconover/duckdb-datasketches
-  ref: 30da391b41248f24daf23d905407c5faf32148ac
+  ref: 67b11e57fe5fa68624cf75ec7720ea35cf785336
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 900
-extension_download_count_pretty: 900
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 828
+extension_download_count_pretty: 828
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---

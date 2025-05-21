@@ -22,7 +22,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`string LIKE target`](#string-like-target) | Returns `true` if the `string` matches the like specifier (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string SIMILAR TO regex`](#string-similar-to-regex) | Returns `true` if the `string` matches the `regex` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string ^@ search_string`](#string--search_string) | Returns `true` if `string` begins with `search_string`. |
-| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
+| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue-) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
 | [`array_extract(string, index)`](#array_extractstring-index) | Extracts a single character from a `string` using a (1-based) `index`. |
 | [`array_slice(list, begin, end)`](#array_slicelist-begin-end) | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | [`ascii(string)`](#asciistring) | Returns an integer that represents the Unicode code point of the first character of the `string`. |
@@ -38,7 +38,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`contains(string, search_string)`](#containsstring-search_string) | Returns `true` if `search_string` is found within `string`. |
 | [`ends_with(string, search_string)`](#ends_withstring-search_string) | Returns `true` if `string` ends with `search_string`. |
 | [`format(format, ...)`](#formatformat-) | Formats a string using the [fmt syntax](#fmt-syntax). |
-| [`formatReadableDecimalSize(integer)`](#formatreadabledecimalsizeinteger) | Converts `integer` to a human-readable representation (e.g. 16000 -> 16.0 KB). |
+| [`formatReadableDecimalSize(integer)`](#formatreadabledecimalsizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
 | [`formatReadableSize(integer)`](#formatreadablesizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`format_bytes(integer)`](#format_bytesinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`from_base64(string)`](#from_base64string) | Converts a base64 encoded `string` to a character string (`BLOB`). |
@@ -59,11 +59,11 @@ This section describes functions and operators for examining and manipulating [`
 | [`like_escape(string, like_specifier, escape_character)`](#like_escapestring-like_specifier-escape_character) | Returns `true` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`lower(string)`](#lowerstring) | Converts `string` to lower case. |
 | [`lpad(string, count, character)`](#lpadstring-count-character) | Pads the `string` with the `character` on the left until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| [`ltrim(string[, characters])`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
+| [`ltrim(string[, characters])`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
-| [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
-| [`md5_number_upper(string)`](#md5_number_upperstring) | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
+| [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
+| [`md5_number_upper(string)`](#md5_number_upperstring) | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
 | [`nfc_normalize(string)`](#nfc_normalizestring) | Converts `string` to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. |
 | [`not_ilike_escape(string, like_specifier, escape_character)`](#not_ilike_escapestring-like_specifier-escape_character) | Returns `false` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`not_like_escape(string, like_specifier, escape_character)`](#not_like_escapestring-like_specifier-escape_character) | Returns `false` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
@@ -91,7 +91,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`right(string, count)`](#rightstring-count) | Extract the right-most `count` characters. |
 | [`right_grapheme(string, count)`](#right_graphemestring-count) | Extracts the right-most `count` grapheme clusters. |
 | [`rpad(string, count, character)`](#rpadstring-count-character) | Pads the `string` with the `character` on the right until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| [`rtrim(string[, characters])`](#rtrimstring-characters) | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
+| [`rtrim(string[, characters])`](#rtrimstring-characters) | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
 | [`sha1(value)`](#sha1value) | Returns a `VARCHAR` with the SHA-1 hash of the `value`. |
 | [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value` |
 | [`split(string, separator)`](#splitstring-separator) | Splits the `string` along the `separator`. |
@@ -109,11 +109,12 @@ This section describes functions and operators for examining and manipulating [`
 | [`substring(string, start[, length])`](#substringstring-start-length) | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
 | [`substring_grapheme(string, start[, length])`](#substring_graphemestring-start-length) | Extracts substring starting from grapheme clusters `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` grapheme clusters instead. Note that a `start` value of `1` refers to the `first` character of the `string`. |
 | [`suffix(string, search_string)`](#suffixstring-search_string) | Returns `true` if `string` ends with `search_string`. |
+| [`to_base(number, radix[, min_length])`](#to_basenumber-radix-min_length) | Converts `number` to a string in the given base `radix`, optionally padding with leading zeros to `min_length`. |
 | [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`to_binary(string)`](#to_binarystring) | Converts the `string` to binary representation. |
 | [`to_hex(string)`](#to_hexstring) | Converts the `string` to hexadecimal representation. |
 | [`translate(string, from, to)`](#translatestring-from-to) | Replaces each character in `string` that matches a character in the `from` set with the corresponding character in the `to` set. If `from` is longer than `to`, occurrences of the extra characters in `from` are deleted. |
-| [`trim(string[, characters])`](#trimstring-characters) | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
+| [`trim(string[, characters])`](#trimstring-characters) | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. |
 | [`ucase(string)`](#ucasestring) | Converts `string` to upper case. |
 | [`unbin(value)`](#unbinvalue) | Converts a `value` from binary representation to a blob. |
 | [`unhex(value)`](#unhexvalue) | Converts a `value` from hexadecimal representation to a blob. |
@@ -172,7 +173,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
+| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue-) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
 | **Example 1** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
 | **Example 2** | `[1, 2, 3] || [4, 5, 6]` |
@@ -215,7 +216,7 @@ This section describes functions and operators for examining and manipulating [`
 
 | **Description** | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
 | **Example** | `bar(5, 0, 20, 10)` |
-| **Result** | `██▌␣␣␣␣␣␣␣` |
+| **Result** | `██▌       ` |
 
 #### `base64(blob)`
 
@@ -314,8 +315,8 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts `integer` to a human-readable representation (e.g. 16000 -> 16.0 KB). |
-| **Example** | `formatReadableDecimalSize(1000 * 16)` |
+| **Description** | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
+| **Example** | `formatReadableDecimalSize(16_000)` |
 | **Result** | `16.0 kB` |
 
 #### `formatReadableSize(integer)`
@@ -323,7 +324,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
-| **Example** | `formatReadableSize(1000 * 16)` |
+| **Example** | `formatReadableSize(16_000)` |
 | **Result** | `15.6 KiB` |
 | **Alias** | `format_bytes` |
 
@@ -332,7 +333,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
-| **Example** | `format_bytes(1000 * 16)` |
+| **Example** | `format_bytes(16_000)` |
 | **Result** | `15.6 KiB` |
 | **Alias** | `formatReadableSize` |
 
@@ -496,9 +497,9 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
-| **Example 1** | `ltrim('␣␣␣␣test␣␣')` |
-| **Result** | `test␣␣` |
+| **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. |
+| **Example 1** | `ltrim('    test  ')` |
+| **Result** | `test  ` |
 | **Example 2** | `ltrim('>>>>test<<', '><')` |
 | **Result** | `test<<` |
 
@@ -522,7 +523,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
+| **Description** | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
 | **Example** | `md5_number_lower('abc')` |
 | **Result** | `8250560606382298838` |
 
@@ -530,7 +531,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `BIGINT`. |
+| **Description** | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
 | **Example** | `md5_number_upper('abc')` |
 | **Result** | `12704604231530709392` |
 
@@ -757,9 +758,9 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
-| **Example 1** | `rtrim('␣␣␣␣test␣␣')` |
-| **Result** | `␣␣␣␣test` |
+| **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
+| **Example 1** | `rtrim('    test  ')` |
+| **Result** | `    test` |
 | **Example 2** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 
@@ -916,6 +917,14 @@ This section describes functions and operators for examining and manipulating [`
 | **Result** | `true` |
 | **Alias** | `ends_with` |
 
+#### `to_base(number, radix[, min_length])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts `number` to a string in the given base `radix`, optionally padding with leading zeros to `min_length`. |
+| **Example** | `to_base(42, 16, 5)` |
+| **Result** | `0002A` |
+
 #### `to_base64(blob)`
 
 <div class="nostroke_table"></div>
@@ -955,8 +964,8 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. In the example, the `␣` symbol denotes a space character. |
-| **Example 1** | `trim('␣␣␣␣test␣␣')` |
+| **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. |
+| **Example 1** | `trim('    test  ')` |
 | **Result** | `test` |
 | **Example 2** | `trim('>>>>test<<', '><')` |
 | **Result** | `test` |

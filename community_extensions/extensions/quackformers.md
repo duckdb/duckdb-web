@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: quackformers
   description: Bert-based embedding extension.
-  version: 0.1.1
+  version: 0.1.3
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: martin-conur/quackformers
-  ref: c5416cdff9e72b28a6d336c125f7654e65897cb9
+  ref: b77a7939f290a6feb3e218d9a5f4f8cb18e11426
 
 docs:
   hello_world: |
@@ -31,8 +31,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 387
-extension_download_count_pretty: 387
+extension_download_count: 408
+extension_download_count_pretty: 408
 image: '/images/community_extensions/social_preview/preview_community_extension_quackformers.png'
 layout: community_extension_doc
 ---

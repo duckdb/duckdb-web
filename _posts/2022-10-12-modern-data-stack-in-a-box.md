@@ -12,7 +12,7 @@ tags: ["using DuckDB"]
      width="200"
  />
 
-This post is a collaboration with Jacob Matson and cross-posted on [dataduel.co](https://www.dataduel.co/modern-data-stack-in-a-box-with-duckdb/).
+This post is a collaboration with [Jacob Matson](https://github.com/matsonj) and cross-posted on [dataduel.co](https://www.dataduel.co/modern-data-stack-in-a-box-with-duckdb/).
 
 ## Summary
 
@@ -20,7 +20,7 @@ There is a large volume of literature ([1](https://www.startdataengineering.com/
 
 ## Motivation
 
-What is the Modern Data Stack, and why use it? The MDS can mean many things (see examples [here](https://www.moderndatastack.xyz/stacks) and a [historical perspective here](https://www.getdbt.com/blog/future-of-the-modern-data-stack/)), but fundamentally it is a return to using SQL for data transformations by combining multiple best-in-class software tools to form a stack. A typical stack would include (at least!) a tool to extract data from sources and load it into a data warehouse, dbt to transform and analyze that data in the warehouse, and a business intelligence tool. The MDS leverages the accessibility of SQL in combination with software development best practices like git to enable analysts to scale their impact across their companies.
+What is the Modern Data Stack, and why use it? The MDS can mean many things (see [examples](https://www.moderndatastack.xyz/stacks) and a [historical perspective](https://www.getdbt.com/blog/future-of-the-modern-data-stack/)), but fundamentally it is a return to using SQL for data transformations by combining multiple best-in-class software tools to form a stack. A typical stack would include (at least!) a tool to extract data from sources and load it into a data warehouse, dbt to transform and analyze that data in the warehouse, and a business intelligence tool. The MDS leverages the accessibility of SQL in combination with software development best practices like git to enable analysts to scale their impact across their companies.
 
 Why build a bundled Modern Data Stack on a single machine, rather than on multiple machines and on a data warehouse? There are many advantages!
 * Simplify for higher developer productivity
@@ -45,7 +45,7 @@ Due to this tradeoff, this approach is more of an “Open Source Analytics Stack
 
 ## Choosing a Problem
 
-Given that the NBA season is starting soon, a monte carlo type simulation of the season is both topical and well-suited for analytical SQL. This is a particularly great scenario to test the limits of DuckDB because it only requires simple inputs and easily scales out to massive numbers of records. This entire project is held in a GitHub repo, which you can find [here](https://www.github.com/matsonj/nba-monte-carlo).
+Given that the NBA season is starting soon, a monte carlo type simulation of the season is both topical and well-suited for analytical SQL. This is a particularly great scenario to test the limits of DuckDB because it only requires simple inputs and easily scales out to massive numbers of records. This entire project is held in a GitHub repo, which you can find on [GitHub](https://github.com/matsonj/nba-monte-carlo).
 
 ## Building the Environment
 
@@ -116,11 +116,11 @@ Once the data is on the web inside of GitHub, Meltano can pull a copy down into 
 
 ## Building dbt Models
 
-After the sources are loaded, the data is transformed with dbt. First, the source models are created as well as the scenario generator. Then the random numbers for that simulation run are generated – it should be noted that the random numbers are recorded as a table, not a view, in order to allow subsequent re-runs of the downstream models with the graph operators for troubleshooting purposes (i.e. `dbt run -s random_num_gen+`). Once the underlying data is laid out, the simulation begins, first by simulating the regular season, then the play-in games, and lastly the playoffs. Since each round of games has a dependency on the previous round, parallelization is limited in this model, which is reflected in the [dbt DAG](https://matsonj.github.io/nba-monte-carlo/#!/overview/nba_monte_carlo?g_v=1), in this case conveniently hosted on GitHub Pages.
+After the sources are loaded, the data is transformed with dbt. First, the source models are created as well as the scenario generator. Then the random numbers for that simulation run are generated – it should be noted that the random numbers are recorded as a table, not a view, in order to allow subsequent re-runs of the downstream models with the graph operators for troubleshooting purposes (i.e., `dbt run -s random_num_gen+`). Once the underlying data is laid out, the simulation begins, first by simulating the regular season, then the play-in games, and lastly the playoffs. Since each round of games has a dependency on the previous round, parallelization is limited in this model, which is reflected in the [dbt DAG](https://matsonj.github.io/nba-monte-carlo/#!/overview/nba_monte_carlo?g_v=1), in this case conveniently hosted on GitHub Pages.
 
 There are a few more design choices worth calling out:
 1. Simulation tables and summary tables were split into separate models for ease of use / transparency. So each round of the simulation has a sim model and an end model – this allows visibility into the correct parameters (conference, team, elo rating) to be passed into each subsequent round.
-1. To prevent overly deep queries, 'reg_season_end' and 'playoff_sim_r1' have been materialized as tables. While it is slightly slower on build, the performance gains when querying summary tables (i.e. 'season_summary') are more than worth the slowdown. However, it should be noted that even for only 10k sims, the database takes up about 150 MB in disk space. Running at 100k simulations easily expands it to a few GB.
+1. To prevent overly deep queries, 'reg_season_end' and 'playoff_sim_r1' have been materialized as tables. While it is slightly slower on build, the performance gains when querying summary tables (i.e., 'season_summary') are more than worth the slowdown. However, it should be noted that even for only 10k sims, the database takes up about 150 MB in disk space. Running at 100k simulations easily expands it to a few GB.
 
 ## Connecting Superset
 

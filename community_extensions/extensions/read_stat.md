@@ -57,10 +57,10 @@ docs:
     | `format` | The format of the input file, when its extension does not indicate it, either `'sas7bdat'`, `'xpt'`, `'sav'`, `'por'`, or `'dta'` | `VARCHAR` | `NULL` |
     | `encoding` | The character encoding of the input file, as defined by `iconv`, see https://www.gnu.org/software/libiconv/ | `VARCHAR` | `NULL` |
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 420
-extension_download_count_pretty: 420
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 471
+extension_download_count_pretty: 471
 image: '/images/community_extensions/social_preview/preview_community_extension_read_stat.png'
 layout: community_extension_doc
 ---

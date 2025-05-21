@@ -6,11 +6,12 @@ import inspect
 
 import warnings
 
-from generate_python_relational_docs_examples import (
-    CODE_EXAMPLE_MAP,
+from generate_python_relational_docs_details import (
+    DOCS_DETAILS_MAP,
     DEFAULT_EXAMPLE,
     PLACEHOLDER_EXAMPLE,
     PLACEHOLDER_RESULT,
+    PythonRelAPIDetails,
 )
 from generate_python_relational_docs_methods import (
     CREATION_MEMBER_LIST,
@@ -99,7 +100,7 @@ SECTION_MAP = {
     },
     "Functions": {
         "id": 4,
-        "description": "This section contains the functions which can be applied to an relation, \
+        "description": "This section contains the functions which can be applied to a relation, \
         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).",
         "method_list": [
             {"class": duckdb.DuckDBPyRelation, "members": FUNCTION_MEMBER_LIST}
@@ -137,6 +138,7 @@ def get_duckdb_conn():
             section_id integer,
             member_signature text,
             member_description text,
+            member_parameters text,
             member_toc_line text,
             member_example text,
             member_result text,
@@ -190,6 +192,7 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
             if number_of_duplicates > 0:
                 member_anchor = f"{class_member_name}-{number_of_duplicates}"
 
+        member_details = DOCS_DETAILS_MAP.get(member_anchor, PythonRelAPIDetails())
         relational_api_table.insert(
             [
                 class_name.__name__,
@@ -197,43 +200,46 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                 section,
                 SECTION_MAP.get(section).get("id"),
                 f"```python\n{member_signature}\n```" if member_signature else None,
-                f"{member_description}{CODE_EXAMPLE_MAP.get(member_anchor).get('additional_description', '') if CODE_EXAMPLE_MAP.get(member_anchor) else ''}",
+                f"{member_description}{member_details.additional_description}",
+                (
+                    '\n'.join(
+                        [
+                            f"""- **{parameter.parameter_name}** : {', '.join(parameter.parameter_type)}{", default: "+parameter.parameter_default if parameter.parameter_default else ''}
+                            \n\t{parameter.parameter_description}"""
+                            for parameter in member_details.parameters
+                        ]
+                    )
+                    if member_details.parameters
+                    else None
+                ),
                 f"| [`{class_member_name}`](#{member_anchor}) | {member_description} |",
                 (
                     DEFAULT_EXAMPLE.format(
-                        code_example=trim_code_block(
-                            CODE_EXAMPLE_MAP.get(member_anchor).get("example")
-                        )
+                        code_example=trim_code_block(member_details.example)
                     )
-                    if CODE_EXAMPLE_MAP.get(member_anchor)
-                    and CODE_EXAMPLE_MAP.get(member_anchor).get("default", True)
+                    if member_details.use_default_example and member_details.example
                     else (
                         PLACEHOLDER_EXAMPLE.format(
-                            code_example=trim_code_block(
-                                CODE_EXAMPLE_MAP.get(member_anchor).get("example")
-                            )
+                            code_example=trim_code_block(member_details.example)
                         )
-                        if CODE_EXAMPLE_MAP.get(member_anchor)
+                        if member_details.example
                         else None
                     )
                 ),
                 (
                     PLACEHOLDER_RESULT.format(
-                        result=CODE_EXAMPLE_MAP.get(member_anchor).get("result"),
-                        result_type=CODE_EXAMPLE_MAP.get(member_anchor).get(
-                            "result_type", "text"
-                        ),
+                        result=member_details.result,
+                        result_type=member_details.result_type,
                     ).replace("\n\n", "\n")
-                    if CODE_EXAMPLE_MAP.get(member_anchor)
+                    if member_details.result
                     else None
                 ),
-                ', '.join(
-                    [
-                        f"[`{alias}`](#{alias})"
-                        for alias in CODE_EXAMPLE_MAP.get(
-                            member_anchor, {"aliases": []}
-                        ).get("aliases", [])
-                    ]
+                (
+                    ', '.join(
+                        f"[`{alias}`](#{alias})" for alias in member_details.aliases
+                    )
+                    if member_details.aliases
+                    else None
                 ),
             ]
         )
@@ -253,15 +259,17 @@ def generate_from_db(relational_api_table):
                 """
             section,
             section_id,
-            concat('#### ', member_name) as header_member_name, 
-            case when member_signature is not null then '\n\n#### Signature\n\n' else NULL end as header_signature, 
+            concat('#### ', '`', member_name, '`') as header_member_name, 
+            if(member_signature is not null, '\n\n##### Signature\n\n', NULL) as header_signature, 
             member_signature,
-            case when member_description is not null then '\n\n#### Description\n\n' else NULL end as header_description, 
+            if(member_description is not null, '\n\n##### Description\n\n', NULL) as header_description, 
             member_description,
+            if(member_parameters is not null, '\n\n##### Parameters\n\n', NULL) as header_parameters, 
+            member_parameters,
             if(aliases != '', concat('\n\n**Aliases**: ', aliases), NULL) as aliases,
-            case when member_example is not null then '\n\n##### Example\n\n' else NULL end as header_example,
+            if(member_example is not null, '\n\n##### Example\n\n', NULL) as header_example,
             member_example,
-            case when member_result is not null then '\n\n##### Result\n\n' else NULL end as header_result,
+            if( member_result is not null, '\n\n##### Result\n\n', NULL) as header_result,
             member_result
         """
             )
@@ -276,6 +284,8 @@ def generate_from_db(relational_api_table):
                     header_description, 
                     member_description,
                     aliases,
+                    header_parameters,
+                    member_parameters,
                     header_example, 
                     member_example, 
                     header_result, 

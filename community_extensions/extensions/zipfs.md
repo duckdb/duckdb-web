@@ -14,11 +14,10 @@ extension:
   license: MIT
   maintainers:
     - isaacbrodsky
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
 
 repo:
   github: isaacbrodsky/duckdb-zipfs
-  ref: 6d4f61fb15cb1d6b258492631c885887bed4de14
+  ref: 145ac8252e18921e565ea58846bc9b5bde8e286c
 
 docs:
   hello_world: |
@@ -26,10 +25,10 @@ docs:
   extended_description: |
     The zipfs extension adds support for reading files from within zip archives.
 
-extension_star_count: 30
-extension_star_count_pretty: 30
-extension_download_count: 17534
-extension_download_count_pretty: 17.5k
+extension_star_count: 32
+extension_star_count_pretty: 32
+extension_download_count: 21918
+extension_download_count_pretty: 21.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_zipfs.png'
 layout: community_extension_doc
 ---
@@ -50,5 +49,14 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|          name          |                                                                                         description                                                                                          | input_type | scope  |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
+| zipfs_extension        | Extension to look for splitting the zip path and the file path within the zip.                                                                                                               | VARCHAR    | GLOBAL |
+| zipfs_extension_remove | Whether to remove the extension from the zip path (true, for artificial extensions that aren't really in the file name) or keep it (false, for using the actual file extension to split on). | BOOLEAN    | GLOBAL |
 
 

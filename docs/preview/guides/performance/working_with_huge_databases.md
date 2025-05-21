@@ -12,3 +12,5 @@ DuckDB supports huge database files without any practical restrictions, however,
 1. Object storage systems have lower limits on file sizes than block-based storage systems. For example, [AWS S3 limits the file size to 5 TB](https://aws.amazon.com/s3/faqs/).
 
 2. Checkpointing a DuckDB database can be slow. For example, checkpointing after adding a few rows to a table in the [TPC-H]({% link docs/preview/core_extensions/tpch.md %}) SF1000 database takes approximately 5 seconds.
+
+3. On block-based storage, the file has a big effect on performance when working with large files. On Linux, DuckDB performs best with XFS on large files.

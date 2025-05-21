@@ -286,7 +286,7 @@ WHERE r_regionkey = n_regionkey;
 
 ## Evaluation
 
-The following table teases the execution times of some TPC-H queries at scale factor 0.5 using the libraries [DuckDB-Wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm), [sql.js](https://github.com/sql-js/sql.js/), [Arquero](https://github.com/uwdata/arquero) and [Lovefield](https://github.com/google/lovefield). You can find a more in-depth discussion with all TPC-H queries, additional scale factors and Microbenchmarks [here](https://shell.duckdb.org/versus).
+The following table teases the execution times of some TPC-H queries at scale factor 0.5 using the libraries [DuckDB-Wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm), [sql.js](https://github.com/sql-js/sql.js/), [Arquero](https://github.com/uwdata/arquero) and [Lovefield](https://github.com/google/lovefield). You can find a more in-depth discussion with all TPC-H queries, additional scale factors and microbenchmarks on the [“DuckDB-Wasm versus X” page](https://shell.duckdb.org/versus).
 
 | Query | DuckDB-Wasm | sql.js | Arquero | Lovefield |
 |--:|--:|--:|--:|--:|

@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 1af85d39e38d6dfb2f51f11ba106b97466d1ea76
+  revision: f6ca0372e26dc55afb7455505ec1543808e3f903
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -54,13 +54,7 @@ GEM
       octokit (>= 4, < 10)
       public_suffix (>= 3.0, < 7.0)
       typhoeus (~> 1.3)
-    google-protobuf (4.30.2-arm64-darwin)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.30.2-x86_64-darwin)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.30.2-x86_64-linux)
+    google-protobuf (4.31.0)
       bigdecimal
       rake (>= 13)
     http_parser.rb (0.8.0)
@@ -167,7 +161,7 @@ GEM
       nokogiri (~> 1.12)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.11.3)
+    json (2.12.0)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
     kramdown-parser-gfm (1.1.0)
@@ -178,7 +172,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.6.6)
     mercenary (0.4.0)
-    mini_portile2 (2.8.8)
+    mini_portile2 (2.8.9)
     net-http (0.6.0)
       uri
     nokogiri (1.18.8)
@@ -199,8 +193,8 @@ GEM
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
-    sass-embedded (1.87.0)
-      google-protobuf (~> 4.30)
+    sass-embedded (1.89.0)
+      google-protobuf (~> 4.31)
       rake (>= 13)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)

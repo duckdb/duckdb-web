@@ -1,11 +1,11 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/cli/dot-commands
-- /docs/api/cli/dot-commands/
-- /docs/api/cli/dot_commands
-- /docs/api/cli/dot_commands/
-- /docs/clients/cli/dot_commands
+  - /docs/api/cli/dot-commands
+  - /docs/api/cli/dot-commands/
+  - /docs/api/cli/dot_commands
+  - /docs/api/cli/dot_commands/
+  - /docs/clients/cli/dot_commands
 title: Dot Commands
 ---
 
@@ -15,52 +15,52 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 
 <!-- markdownlint-disable MD056 -->
 
-| Command | Description |
-|---|------|
-| `.bail ⟨on|off⟩`{:.language-sql .highlight}                           | Stop after hitting an error. Default: `off`                                                                                                                                  |
-| `.binary ⟨on|off⟩`{:.language-sql .highlight}                         | Turn binary output `on` or `off`. Default: `off`                                                                                                                             |
-| `.cd ⟨DIRECTORY⟩`{:.language-sql .highlight}                          | Change the working directory to `DIRECTORY`                                                                                                                                  |
-| `.changes ⟨on|off⟩`{:.language-sql .highlight}                        | Show number of rows changed by SQL                                                                                                                                           |
-| `.columns`{:.language-sql .highlight}                                 | Column-wise rendering of query results                                                                                                                                       |
-| `.constant ⟨COLOR⟩`{:.language-sql .highlight}                        | Sets the syntax highlighting color used for constant values                                                                                                                  |
-| `.constantcode ⟨CODE⟩`{:.language-sql .highlight}                     | Sets the syntax highlighting terminal code used for constant values                                                                                                          |
-| `.databases`{:.language-sql .highlight}                               | List names and files of attached databases                                                                                                                                   |
-| `.echo ⟨on|off⟩`{:.language-sql .highlight}                           | Turn command echo `on` or `off`                                                                                                                                              |
-| `.exit ⟨CODE⟩`{:.language-sql .highlight}                             | Exit this program with return-code `CODE`                                                                                                                                    |
-| `.headers ⟨on|off⟩`{:.language-sql .highlight}                        | Turn display of headers `on` or `off`. Does not apply to duckbox mode                                                                                                        |
-| `.help ⟨-all⟩ ⟨PATTERN⟩`{:.language-sql .highlight}                   | Show help text for `PATTERN`                                                                                                                                                 |
-| `.highlight ⟨on|off⟩`{:.language-sql .highlight}                      | Toggle syntax highlighting in the shell `on` / `off`. See the [query syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details                |
-| `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`{:.language-sql .highlight}    | Configure the color of each component in (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details            |
-| `.highlight_results ⟨on|off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntaxx highlighting section](#configuring-the-query-syntax-highlighter) for more details  |
-| `.import ⟨FILE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                   | Import data from `FILE` into `TABLE`                                                                                                                                         |
-| `.indexes ⟨TABLE⟩`{:.language-sql .highlight}                         | Show names of indexes                                                                                                                                                        |
-| `.keyword ⟨COLOR⟩`{:.language-sql .highlight}                         | Sets the syntax highlighting color used for keywords                                                                                                                         |
-| `.keywordcode ⟨CODE⟩`{:.language-sql .highlight}                      | Sets the syntax highlighting terminal code used for keywords                                                                                                                 |
-| `.large_number_rendering ⟨all|footer|off⟩`{:.language-sql .highlight} | Toggle readable rendering of large numbers (duckbox only, default: `footer`)                                                                                                 |
-| `.log ⟨FILE|off⟩`{:.language-sql .highlight}                          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                                                                |
-| `.maxrows ⟨COUNT⟩`{:.language-sql .highlight}                         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                                                   |
-| `.maxwidth ⟨COUNT⟩`{:.language-sql .highlight}                        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                            |
-| `.mode MODE ⟨TABLE⟩`{:.language-sql .highlight}                       | Set [output mode]({% link docs/stable/clients/cli/output_formats.md %})                                                                                                      |
-| `.multiline`{:.language-sql .highlight}                               | Set multi-line mode (default)                                                                                                                                                |
-| `.nullvalue ⟨STRING⟩`{:.language-sql .highlight}                      | Use `STRING` in place of `NULL` values. Default: `NULL`                                                                                                                      |
-| `.once ⟨OPTIONS⟩ ⟨FILE⟩`{:.language-sql .highlight}                   | Output for the next SQL command only to `FILE`                                                                                                                               |
-| `.open ⟨OPTIONS⟩ ⟨FILE⟩`{:.language-sql .highlight}                   | Close existing database and reopen `FILE`                                                                                                                                    |
-| `.output ⟨FILE⟩`{:.language-sql .highlight}                           | Send output to `FILE` or `stdout` if `FILE` is omitted                                                                                                                       |
-| `.print ⟨STRING...⟩`{:.language-sql .highlight}                       | Print literal `STRING`                                                                                                                                                       |
-| `.prompt ⟨MAIN⟩ ⟨CONTINUE⟩`{:.language-sql .highlight}                | Replace the standard prompts                                                                                                                                                 |
-| `.quit`{:.language-sql .highlight}                                    | Exit this program                                                                                                                                                            |
-| `.read ⟨FILE⟩`{:.language-sql .highlight}                             | Read input from `FILE`                                                                                                                                                       |
-| `.rows`{:.language-sql .highlight}                                    | Row-wise rendering of query results (default)                                                                                                                                |
-| `.safe_mode`{:.language-sql .highlight}                               | Activates [safe mode]({% link docs/stable/clients/cli/safe_mode.md %})                                                                                                       |
-| `.schema ⟨PATTERN⟩`{:.language-sql .highlight}                        | Show the `CREATE` statements matching `PATTERN`                                                                                                                              |
-| `.separator ⟨COL⟩ ⟨ROW⟩`{:.language-sql .highlight}                   | Change the column and row separators                                                                                                                                         |
-| `.shell ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                   | Run `CMD` with `ARGS...` in a system shell                                                                                                                                   |
-| `.show`{:.language-sql .highlight}                                    | Show the current values for various settings                                                                                                                                 |
-| `.singleline`{:.language-sql .highlight}                              | Set single-line mode                                                                                                                                                         |
-| `.system ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                  | Run `CMD` with `ARGS...` in a system shell                                                                                                                                   |
-| `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List names of tables [matching `LIKE` pattern]({% link docs/stable/sql/functions/pattern_matching.md %}) `TABLE`                                                             |
-| `.timer ⟨on|off⟩`{:.language-sql .highlight}                          | Turn SQL timer `on` or `off`. SQL statements separated by `;` but *not* separated via newline are measured together                                                          |
-| `.width ⟨NUM1⟩ ⟨NUM2⟩ ...`{:.language-sql .highlight}                 | Set minimum column widths for columnar output                                                                                                                                |
+| Command                                                               | Description                                                                                                                                                                 |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.bail ⟨on/off⟩`{:.language-sql .highlight}                           | Stop after hitting an error. Default: `off`                                                                                                                                 |
+| `.binary ⟨on/off⟩`{:.language-sql .highlight}                         | Turn binary output `on` or `off`. Default: `off`                                                                                                                            |
+| `.cd ⟨DIRECTORY⟩`{:.language-sql .highlight}                          | Change the working directory to `DIRECTORY`                                                                                                                                 |
+| `.changes ⟨on/off⟩`{:.language-sql .highlight}                        | Show number of rows changed by SQL                                                                                                                                          |
+| `.columns`{:.language-sql .highlight}                                 | Column-wise rendering of query results                                                                                                                                      |
+| `.constant ⟨COLOR⟩`{:.language-sql .highlight}                        | Sets the syntax highlighting color used for constant values                                                                                                                 |
+| `.constantcode ⟨CODE⟩`{:.language-sql .highlight}                     | Sets the syntax highlighting terminal code used for constant values                                                                                                         |
+| `.databases`{:.language-sql .highlight}                               | List names and files of attached databases                                                                                                                                  |
+| `.echo ⟨on/off⟩`{:.language-sql .highlight}                           | Turn command echo `on` or `off`                                                                                                                                             |
+| `.exit ⟨CODE⟩`{:.language-sql .highlight}                             | Exit this program with return-code `CODE`                                                                                                                                   |
+| `.headers ⟨on/off⟩`{:.language-sql .highlight}                        | Turn display of headers `on` or `off`. Does not apply to duckbox mode                                                                                                       |
+| `.help ⟨-all⟩ ⟨PATTERN⟩`{:.language-sql .highlight}                   | Show help text for `PATTERN`                                                                                                                                                |
+| `.highlight ⟨on/off⟩`{:.language-sql .highlight}                      | Toggle syntax highlighting in the shell `on` / `off`. See the [query syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details               |
+| `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`{:.language-sql .highlight}    | Configure the color of each component in (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details           |
+| `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntaxx highlighting section](#configuring-the-query-syntax-highlighter) for more details |
+| `.import ⟨FILE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                   | Import data from `FILE` into `TABLE`                                                                                                                                        |
+| `.indexes ⟨TABLE⟩`{:.language-sql .highlight}                         | Show names of indexes                                                                                                                                                       |
+| `.keyword ⟨COLOR⟩`{:.language-sql .highlight}                         | Sets the syntax highlighting color used for keywords                                                                                                                        |
+| `.keywordcode ⟨CODE⟩`{:.language-sql .highlight}                      | Sets the syntax highlighting terminal code used for keywords                                                                                                                |
+| `.large_number_rendering ⟨all/footer/off⟩`{:.language-sql .highlight} | Toggle readable rendering of large numbers (duckbox only, default: `footer`)                                                                                                |
+| `.log ⟨FILE/off⟩`{:.language-sql .highlight}                          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                                                               |
+| `.maxrows ⟨COUNT⟩`{:.language-sql .highlight}                         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                                                  |
+| `.maxwidth ⟨COUNT⟩`{:.language-sql .highlight}                        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                           |
+| `.mode ⟨MODE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                     | Set [output mode]({% link docs/stable/clients/cli/output_formats.md %})                                                                                                     |
+| `.multiline`{:.language-sql .highlight}                               | Set multi-line mode (default)                                                                                                                                               |
+| `.nullvalue ⟨STRING⟩`{:.language-sql .highlight}                      | Use `STRING` in place of `NULL` values. Default: `NULL`                                                                                                                     |
+| `.once ⟨OPTIONS⟩ ⟨FILE⟩`{:.language-sql .highlight}                   | Output for the next SQL command only to `FILE`                                                                                                                              |
+| `.open ⟨OPTIONS⟩ ⟨FILE⟩`{:.language-sql .highlight}                   | Close existing database and reopen `FILE`                                                                                                                                   |
+| `.output ⟨FILE⟩`{:.language-sql .highlight}                           | Send output to `FILE` or `stdout` if `FILE` is omitted                                                                                                                      |
+| `.print ⟨STRING...⟩`{:.language-sql .highlight}                       | Print literal `STRING`                                                                                                                                                      |
+| `.prompt ⟨MAIN⟩ ⟨CONTINUE⟩`{:.language-sql .highlight}                | Replace the standard prompts                                                                                                                                                |
+| `.quit`{:.language-sql .highlight}                                    | Exit this program                                                                                                                                                           |
+| `.read ⟨FILE⟩`{:.language-sql .highlight}                             | Read input from `FILE`                                                                                                                                                      |
+| `.rows`{:.language-sql .highlight}                                    | Row-wise rendering of query results (default)                                                                                                                               |
+| `.safe_mode`{:.language-sql .highlight}                               | Activates [safe mode]({% link docs/stable/clients/cli/safe_mode.md %})                                                                                                      |
+| `.schema ⟨PATTERN⟩`{:.language-sql .highlight}                        | Show the `CREATE` statements matching `PATTERN`                                                                                                                             |
+| `.separator ⟨COL⟩ ⟨ROW⟩`{:.language-sql .highlight}                   | Change the column and row separators                                                                                                                                        |
+| `.shell ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                   | Run `CMD` with `ARGS...` in a system shell                                                                                                                                  |
+| `.show`{:.language-sql .highlight}                                    | Show the current values for various settings                                                                                                                                |
+| `.singleline`{:.language-sql .highlight}                              | Set single-line mode                                                                                                                                                        |
+| `.system ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                  | Run `CMD` with `ARGS...` in a system shell                                                                                                                                  |
+| `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List names of tables [matching `LIKE` pattern]({% link docs/stable/sql/functions/pattern_matching.md %}) `TABLE`                                                            |
+| `.timer ⟨on/off⟩`{:.language-sql .highlight}                          | Turn SQL timer `on` or `off`. SQL statements separated by `;` but _not_ separated via newline are measured together                                                         |
+| `.width ⟨NUM1⟩ ⟨NUM2⟩ ...`{:.language-sql .highlight}                 | Set minimum column widths for columnar output                                                                                                                               |
 
 ## Using the `.help` Command
 
@@ -234,9 +234,9 @@ For example:
 
 By default, the result highlighting makes a few small modifications:
 
-* Bold column names
-* `NULL` values are greyed out
-* Layout elements are grayed out
+- Bold column names
+- `NULL` values are greyed out
+- Layout elements are grayed out
 
 The highlighting of each of the components can be customized using the `.highlight_colors` command.
 For example:

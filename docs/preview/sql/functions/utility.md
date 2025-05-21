@@ -12,11 +12,15 @@ The functions below are difficult to categorize into specific function types and
 | Name | Description |
 |:--|:-------|
 | [`alias(column)`](#aliascolumn) | Return the name of the column. |
+| [`can_cast_implicitly(source_value, target_value)`](#can_cast_implicitlysource_value-target_value) | Whether or not we can implicitly cast from the types of the source value to the target value. |
 | [`checkpoint(database)`](#checkpointdatabase) | Synchronize WAL with file for (optional) database without interrupting transactions. |
 | [`coalesce(expr, ...)`](#coalesceexpr-) | Return the first expression that evaluates to a non-`NULL` value. Accepts 1 or more parameters. Each expression can be a column, literal value, function result, or many others. |
 | [`constant_or_null(arg1, arg2)`](#constant_or_nullarg1-arg2) | If `arg2` is `NULL`, return `NULL`. Otherwise, return `arg1`. |
 | [`count_if(x)`](#count_ifx) | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
+| [`create_sort_key(parameters...)`](#create_sort_keyparameters) | Constructs a binary-comparable sort key based on a set of input parameters and sort qualifiers. |
 | [`current_catalog()`](#current_catalog) | Return the name of the currently active catalog. Default is memory. |
+| [`current_database()`](#current_database) | Return the name of the currently active database. |
+| [`current_query()`](#current_query) | Return the current query as a string. |
 | [`current_schema()`](#current_schema) | Return the name of the currently active schema. Default is main. |
 | [`current_schemas(boolean)`](#current_schemasboolean) | Return list of schemas. Pass a parameter of `true` to include implicit schemas. |
 | [`current_setting('setting_name')`](#current_settingsetting_name) | Return the current value of the configuration setting. |
@@ -63,6 +67,14 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `alias(column1)` |
 | **Result** | `column1` |
 
+#### `can_cast_implicitly(source_value, target_value)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Whether or not we can implicitly cast from the types of the source value to the target value. |
+| **Example** | `can_cast_implicitly(1::BIGINT, 1::SMALLINT)` |
+| **Result** | `false` |
+
 #### `checkpoint(database)`
 
 <div class="nostroke_table"></div>
@@ -95,6 +107,14 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `count_if(42)` |
 | **Result** | 1 |
 
+#### `create_sort_key(parameters...)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Constructs a binary-comparable sort key based on a set of input parameters and sort qualifiers. |
+| **Example** | `create_sort_key('abc', 'ASC NULLS FIRST');` |
+| **Result** | `\x02bcd\x00` |
+
 #### `current_catalog()`
 
 <div class="nostroke_table"></div>
@@ -102,6 +122,22 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Return the name of the currently active catalog. Default is memory. |
 | **Example** | `current_catalog()` |
 | **Result** | `memory` |
+
+#### `current_database()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Return the name of the currently active database. |
+| **Example** | `current_database()` |
+| **Result** | `memory` |
+
+#### `current_query()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Return the current query as a string. |
+| **Example** | `current_query()` |
+| **Result** | `SELECT current_query();` |
 
 #### `current_schema()`
 

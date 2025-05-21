@@ -97,7 +97,7 @@ FROM 'https://docs.google.com/spreadsheets/d/1B4RFuOnZ4ITZ-nR9givZ7vWVOTVddC3VTK
 
 The Google Sheets API helpfully skips empty rows at the end of a dataset or empty columns to the right.
 Feel free to specify a slightly bigger `range` if your data may grow!
-Additionally, the `range` can be specified as a set of columns (e.g. `D:X`) to be friendlier to a variable number of rows.
+Additionally, the `range` can be specified as a set of columns (e.g., `D:X`) to be friendlier to a variable number of rows.
 
 ### Data Types
 
