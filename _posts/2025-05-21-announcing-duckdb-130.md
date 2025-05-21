@@ -128,25 +128,25 @@ Both views can be queried and will give the same result.
 
 The main advantage of this feature is usability: we can use the regular shell to navigate to a file, and then use DuckDB to open that file without having to refer to the path of the file at the SQL level.
 
-### `try` Expression
+### `TRY` Expression
 
-DuckDB already supported [`try_cast`]({% link docs/stable/sql/expressions/cast.md %}#try_cast), which was trying to cast a value but did not fail the query if this was not possible. For example:
+DuckDB already supported [`TRY_CAST`]({% link docs/stable/sql/expressions/cast.md %}#TRY_CAST), which was trying to cast a value but did not fail the query if this was not possible. For example:
 
 ```sql
-SELECT try_cast('asdf' AS INTEGER);
+SELECT TRY_CAST('asdf' AS INTEGER);
 ```
 
-returns `NULL`. This release [generalizes this functionality](https://github.com/duckdb/duckdb/pull/15939) beyond casting to arbitrary expressions that can error using `try`. For example, the logarithm of 0 [is undefined](https://www.quora.com/What-is-log-0), and `log(0)` will throw an exception and tell you that it “cannot take logarithm of zero”. With the new `try`, this will return `NULL` instead, e.g.:
+returns `NULL`. This release [generalizes this functionality](https://github.com/duckdb/duckdb/pull/15939) beyond casting to arbitrary expressions that can error using `TRY`. For example, the logarithm of 0 [is undefined](https://www.quora.com/What-is-log-0), and `log(0)` will throw an exception and tell you that it “cannot take logarithm of zero”. With the new `TRY`, this will return `NULL` instead, e.g.:
 
 ```sql
-SELECT try(log(0));
+SELECT TRY(log(0));
 ```
 
 ```text
 NULL
 ```
 
-Again, this will work for arbitrary expressions. We recommend to use `try` sparingly however if an error is expected often because there is going to be a performance impact. If any *batch* of rows causes an error, we switch to row-by-row execution of the expression to figure out exactly which row had an error and which did not. This is slower.
+Again, this will work for arbitrary expressions. We recommend to use `TRY` sparingly however if an error is expected often because there is going to be a performance impact. If any *batch* of rows causes an error, we switch to row-by-row execution of the expression to figure out exactly which row had an error and which did not. This is slower.
 
 ### Updatings Structs
 
