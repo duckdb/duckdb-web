@@ -145,7 +145,7 @@ This section walks you through the following steps:
 
 You can do this either on the CLI or from an IDE. The documentation below shows the configuration for CLion, but you should be able to get it to work with other IDEs like VSCode as well.
 
-### Debugging From the CLI
+### Debugging from the CLI
 
 Run this to configure the CMake profile needed to debug on the CLI:
 
@@ -210,23 +210,23 @@ You should be able to get debugging going in an IDE that support `lldb`. Below a
 
 The following CMake profile enables Intellisense and clang-tidy by generating a `compile-commands.json` file so your IDE knows how to inspect the source code, and makes sure that the Python package will be built and installed in your Python virtual env.
 
-Under **Settings** | **Build, Execution, Deployment** | **CMake**, add a profile and set the fields as follows:
+Under **Settings** -> **Build, Execution, Deployment** -> **CMake**, add a profile and set the fields as follows:
 
 * **Name**: Debug
 * **Build type**: Debug
 * **Generator**:  Ninja
 * **CMake Options** (on a single line):
 
-   ```console
-   -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
-   -DPython3_EXECUTABLE=$CMakeProjectDir$/.venv/bin/python3
-   -DBUILD_PYTHON=1
-   -DPYTHON_DEV=1
-   ```
+    ```console
+    -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
+    -DPython3_EXECUTABLE=$CMakeProjectDir$/.venv/bin/python3
+    -DBUILD_PYTHON=1
+    -DPYTHON_DEV=1
+    ```
 
 #### Create a Run Config for Debugging
 
-Under **Run** | **Edit Configurations...** create a new **CMake Application**. Use the following values:
+Under **Run** -> **Edit Configurations...** create a new **CMake Application**. Use the following values:
 
 * **Name**: Python Debug
 * **Target**: `All targets`
