@@ -941,6 +941,15 @@ query(self: duckdb.duckdb.DuckDBPyRelation, virtual_table_name: str, sql_query: 
 
 Run the given SQL query in sql_query on the view named virtual_table_name that refers to the relation object
 
+##### Parameters
+
+- **virtual_table_name** : str
+                            
+	The name to assign to the current relation when referenced in the SQL query.
+- **sql_query** : str
+                            
+	The SQL query string that uses the virtual table name to query the relation.
+
 ##### Example
 
 ```python
@@ -991,6 +1000,12 @@ set_alias(self: duckdb.duckdb.DuckDBPyRelation, alias: str) -> duckdb.duckdb.Duc
 ##### Description
 
 Rename the relation object to new alias
+
+##### Parameters
+
+- **alias** : str
+                            
+	The alias name to assign to the relation.
 
 ##### Example
 
@@ -1067,6 +1082,24 @@ show(self: duckdb.duckdb.DuckDBPyRelation, *, max_width: typing.Optional[int] = 
 ##### Description
 
 Display a summary of the data
+
+##### Parameters
+
+- **max_width** : int
+                            
+	Maximum display width for the entire output in characters.
+- **max_rows** : int
+                            
+	Maximum number of rows to display.
+- **max_col_width** : int
+                            
+	Maximum number of characters to display per column.
+- **null_value** : str
+                            
+	String to display in place of NULL values.
+- **render_mode** : object
+                            
+	Render mode for displaying the output.
 
 ##### Example
 
