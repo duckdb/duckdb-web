@@ -124,6 +124,123 @@ Create a relation object from the CSV file in 'name'
 
 **Aliases**: [`read_csv`](#read_csv)
 
+##### Parameters
+
+- **path_or_buffer** : Union[str, StringIO, TextIOBase]
+                            
+	Path to the CSV file or buffer to read from.
+- **header** : Optional[bool], Optional[int]
+                            
+	Row number(s) to use as the column names, or None if no header.
+- **compression** : Optional[str]
+                            
+	Compression type (e.g., 'gzip', 'bz2').
+- **sep** : Optional[str]
+                            
+	Delimiter to use; defaults to comma.
+- **delimiter** : Optional[str]
+                            
+	Alternative delimiter to use.
+- **dtype** : Optional[Dict[str, str]], Optional[List[str]]
+                            
+	Data types for columns.
+- **na_values** : Optional[str], Optional[List[str]]
+                            
+	Additional strings to recognize as NA/NaN.
+- **skiprows** : Optional[int]
+                            
+	Number of rows to skip at the start.
+- **quotechar** : Optional[str]
+                            
+	Character used to quote fields.
+- **escapechar** : Optional[str]
+                            
+	Character used to escape delimiter or quote characters.
+- **encoding** : Optional[str]
+                            
+	Encoding to use for UTF when reading/writing.
+- **parallel** : Optional[bool]
+                            
+	Enable parallel reading.
+- **date_format** : Optional[str]
+                            
+	Format to parse dates.
+- **timestamp_format** : Optional[str]
+                            
+	Format to parse timestamps.
+- **sample_size** : Optional[int]
+                            
+	Number of rows to sample for schema inference.
+- **all_varchar** : Optional[bool]
+                            
+	Treat all columns as VARCHAR.
+- **normalize_names** : Optional[bool]
+                            
+	Normalize column names to lowercase.
+- **null_padding** : Optional[bool]
+                            
+	Enable null padding for rows with missing columns.
+- **names** : Optional[List[str]]
+                            
+	List of column names to use.
+- **lineterminator** : Optional[str]
+                            
+	Character to break lines on.
+- **columns** : Optional[Dict[str, str]]
+                            
+	Column mapping for schema.
+- **auto_type_candidates** : Optional[List[str]]
+                            
+	List of columns for automatic type inference.
+- **max_line_size** : Optional[int]
+                            
+	Maximum line size in bytes.
+- **ignore_errors** : Optional[bool]
+                            
+	Ignore parsing errors.
+- **store_rejects** : Optional[bool]
+                            
+	Store rejected rows.
+- **rejects_table** : Optional[str]
+                            
+	Table name to store rejected rows.
+- **rejects_scan** : Optional[str]
+                            
+	Scan to use for rejects.
+- **rejects_limit** : Optional[int]
+                            
+	Limit number of rejects stored.
+- **force_not_null** : Optional[List[str]]
+                            
+	List of columns to force as NOT NULL.
+- **buffer_size** : Optional[int]
+                            
+	Buffer size in bytes.
+- **decimal** : Optional[str]
+                            
+	Character to recognize as decimal point.
+- **allow_quoted_nulls** : Optional[bool]
+                            
+	Allow quoted NULL values.
+- **filename** : Optional[bool], Optional[str]
+                            
+	Add filename column or specify filename.
+- **hive_partitioning** : Optional[bool]
+                            
+	Enable Hive-style partitioning.
+- **union_by_name** : Optional[bool]
+                            
+	Union files by column name instead of position.
+- **hive_types** : Optional[Dict[str, str]]
+                            
+	Hive types for columns.
+- **hive_types_autocast** : Optional[bool]
+                            
+	Automatically cast Hive types.
+- **connection** : DuckDBPyConnection
+                            
+	DuckDB connection to use.
+
 ##### Example
 
 ```python
@@ -167,6 +284,12 @@ from_df(self: duckdb.duckdb.DuckDBPyConnection, df: pandas.DataFrame) -> duckdb.
 ##### Description
 
 Create a relation object from the DataFrame in df
+
+##### Parameters
+
+- **df** : pandas.DataFrame
+                            
+	A pandas DataFrame to be converted into a DuckDB relation.
 
 ##### Example
 
@@ -219,6 +342,30 @@ Create a relation object from the Parquet files
 
 **Aliases**: [`read_parquet`](#read_parquet)
 
+##### Parameters
+
+- **file_glob** : str
+                            
+	File path or glob pattern pointing to Parquet files to be read.
+- **binary_as_string** : bool, default: False
+                            
+	Interpret binary columns as strings instead of blobs.
+- **file_row_number** : bool, default: False
+                            
+	Add a column containing the row number within each file.
+- **filename** : bool, default: False
+                            
+	Add a column containing the name of the file each row came from.
+- **hive_partitioning** : bool, default: False
+                            
+	Enable automatic detection of Hive-style partitions in file paths.
+- **union_by_name** : bool, default: False
+                            
+	Union Parquet files by matching column names instead of positions.
+- **compression** : object
+                            
+	Optional compression codec to use when reading the Parquet files.
+
 ##### Example
 
 ```python
@@ -264,6 +411,20 @@ from_query(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str 
 
 Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
 
+**Aliases**: [`query`](#query), [`sql`](#sql)
+
+##### Parameters
+
+- **query** : object
+                            
+	The SQL query or subquery to be executed and converted into a relation.
+- **alias** : str, default: ''
+                            
+	Optional alias name to assign to the resulting relation.
+- **params** : object
+                            
+	Optional query parameters to be used in the SQL query.
+
 ##### Example
 
 ```python
@@ -300,6 +461,20 @@ query(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '',
 ##### Description
 
 Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
+
+**Aliases**: [`from_query`](#from_query), [`sql`](#sql)
+
+##### Parameters
+
+- **query** : object
+                            
+	The SQL query or subquery to be executed and converted into a relation.
+- **alias** : str, default: ''
+                            
+	Optional alias name to assign to the resulting relation.
+- **params** : object
+                            
+	Optional query parameters to be used in the SQL query.
 
 ##### Example
 
@@ -339,6 +514,123 @@ read_csv(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **kwarg
 Create a relation object from the CSV file in 'name'
 
 **Aliases**: [`from_csv_auto`](#from_csv_auto)
+
+##### Parameters
+
+- **path_or_buffer** : Union[str, StringIO, TextIOBase]
+                            
+	Path to the CSV file or buffer to read from.
+- **header** : Optional[bool], Optional[int]
+                            
+	Row number(s) to use as the column names, or None if no header.
+- **compression** : Optional[str]
+                            
+	Compression type (e.g., 'gzip', 'bz2').
+- **sep** : Optional[str]
+                            
+	Delimiter to use; defaults to comma.
+- **delimiter** : Optional[str]
+                            
+	Alternative delimiter to use.
+- **dtype** : Optional[Dict[str, str]], Optional[List[str]]
+                            
+	Data types for columns.
+- **na_values** : Optional[str], Optional[List[str]]
+                            
+	Additional strings to recognize as NA/NaN.
+- **skiprows** : Optional[int]
+                            
+	Number of rows to skip at the start.
+- **quotechar** : Optional[str]
+                            
+	Character used to quote fields.
+- **escapechar** : Optional[str]
+                            
+	Character used to escape delimiter or quote characters.
+- **encoding** : Optional[str]
+                            
+	Encoding to use for UTF when reading/writing.
+- **parallel** : Optional[bool]
+                            
+	Enable parallel reading.
+- **date_format** : Optional[str]
+                            
+	Format to parse dates.
+- **timestamp_format** : Optional[str]
+                            
+	Format to parse timestamps.
+- **sample_size** : Optional[int]
+                            
+	Number of rows to sample for schema inference.
+- **all_varchar** : Optional[bool]
+                            
+	Treat all columns as VARCHAR.
+- **normalize_names** : Optional[bool]
+                            
+	Normalize column names to lowercase.
+- **null_padding** : Optional[bool]
+                            
+	Enable null padding for rows with missing columns.
+- **names** : Optional[List[str]]
+                            
+	List of column names to use.
+- **lineterminator** : Optional[str]
+                            
+	Character to break lines on.
+- **columns** : Optional[Dict[str, str]]
+                            
+	Column mapping for schema.
+- **auto_type_candidates** : Optional[List[str]]
+                            
+	List of columns for automatic type inference.
+- **max_line_size** : Optional[int]
+                            
+	Maximum line size in bytes.
+- **ignore_errors** : Optional[bool]
+                            
+	Ignore parsing errors.
+- **store_rejects** : Optional[bool]
+                            
+	Store rejected rows.
+- **rejects_table** : Optional[str]
+                            
+	Table name to store rejected rows.
+- **rejects_scan** : Optional[str]
+                            
+	Scan to use for rejects.
+- **rejects_limit** : Optional[int]
+                            
+	Limit number of rejects stored.
+- **force_not_null** : Optional[List[str]]
+                            
+	List of columns to force as NOT NULL.
+- **buffer_size** : Optional[int]
+                            
+	Buffer size in bytes.
+- **decimal** : Optional[str]
+                            
+	Character to recognize as decimal point.
+- **allow_quoted_nulls** : Optional[bool]
+                            
+	Allow quoted NULL values.
+- **filename** : Optional[bool], Optional[str]
+                            
+	Add filename column or specify filename.
+- **hive_partitioning** : Optional[bool]
+                            
+	Enable Hive-style partitioning.
+- **union_by_name** : Optional[bool]
+                            
+	Union files by column name instead of position.
+- **hive_types** : Optional[Dict[str, str]]
+                            
+	Hive types for columns.
+- **hive_types_autocast** : Optional[bool]
+                            
+	Automatically cast Hive types.
+- **connection** : DuckDBPyConnection
+                            
+	DuckDB connection to use.
 
 ##### Example
 
@@ -383,6 +675,69 @@ read_json(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, *, col
 ##### Description
 
 Create a relation object from the JSON file in 'name'
+
+##### Parameters
+
+- **path_or_buffer** : object
+                            
+	File path or file-like object containing JSON data to be read.
+- **columns** : object
+                            
+	Optional list of column names to project from the JSON data.
+- **sample_size** : object
+                            
+	Number of rows to sample for inferring JSON schema.
+- **maximum_depth** : object
+                            
+	Maximum depth to which JSON objects should be parsed.
+- **records** : str
+                            
+	Format string specifying whether JSON is in records mode.
+- **format** : str
+                            
+	Format of the JSON data (e.g., 'auto', 'newline_delimited').
+- **date_format** : object
+                            
+	Format string for parsing date fields.
+- **timestamp_format** : object
+                            
+	Format string for parsing timestamp fields.
+- **compression** : object
+                            
+	Compression codec used on the JSON data (e.g., 'gzip').
+- **maximum_object_size** : object
+                            
+	Maximum size in bytes for individual JSON objects.
+- **ignore_errors** : object
+                            
+	If True, skip over JSON records with parsing errors.
+- **convert_strings_to_integers** : object
+                            
+	If True, attempt to convert strings to integers where appropriate.
+- **field_appearance_threshold** : object
+                            
+	Threshold for inferring optional fields in nested JSON.
+- **map_inference_threshold** : object
+                            
+	Threshold for inferring maps from JSON object patterns.
+- **maximum_sample_files** : object
+                            
+	Maximum number of files to sample for schema inference.
+- **filename** : object
+                            
+	If True, include a column with the source filename for each row.
+- **hive_partitioning** : object
+                            
+	If True, enable Hive partitioning based on directory structure.
+- **union_by_name** : object
+                            
+	If True, align JSON columns by name instead of position.
+- **hive_types** : object
+                            
+	If True, use Hive types from directory structure for schema.
+- **hive_types_autocast** : object
+                            
+	If True, automatically cast data types to match Hive types.
 
 ##### Example
 
@@ -436,6 +791,30 @@ Create a relation object from the Parquet files
 
 **Aliases**: [`from_parquet`](#from_parquet)
 
+##### Parameters
+
+- **file_glob** : str
+                            
+	File path or glob pattern pointing to Parquet files to be read.
+- **binary_as_string** : bool, default: False
+                            
+	Interpret binary columns as strings instead of blobs.
+- **file_row_number** : bool, default: False
+                            
+	Add a column containing the row number within each file.
+- **filename** : bool, default: False
+                            
+	Add a column containing the name of the file each row came from.
+- **hive_partitioning** : bool, default: False
+                            
+	Enable automatic detection of Hive-style partitions in file paths.
+- **union_by_name** : bool, default: False
+                            
+	Union Parquet files by matching column names instead of positions.
+- **compression** : object
+                            
+	Optional compression codec to use when reading the Parquet files.
+
 ##### Example
 
 ```python
@@ -481,6 +860,20 @@ sql(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', p
 
 Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
 
+**Aliases**: [`from_query`](#from_query), [`query`](#query)
+
+##### Parameters
+
+- **query** : object
+                            
+	The SQL query or subquery to be executed and converted into a relation.
+- **alias** : str, default: ''
+                            
+	Optional alias name to assign to the resulting relation.
+- **params** : object
+                            
+	Optional query parameters to be used in the SQL query.
+
 ##### Example
 
 ```python
@@ -517,6 +910,12 @@ table(self: duckdb.duckdb.DuckDBPyConnection, table_name: str) -> duckdb.duckdb.
 ##### Description
 
 Create a relation object for the named table
+
+##### Parameters
+
+- **table_name** : str
+                            
+	Name of the table to create a relation from.
 
 ##### Example
 
@@ -556,6 +955,15 @@ table_function(self: duckdb.duckdb.DuckDBPyConnection, name: str, parameters: ob
 ##### Description
 
 Create a relation object from the named table function with given parameters
+
+##### Parameters
+
+- **name** : str
+                            
+	Name of the table function to call.
+- **parameters** : object
+                            
+	Optional parameters to pass to the table function.
 
 ##### Example
 
@@ -635,6 +1043,12 @@ view(self: duckdb.duckdb.DuckDBPyConnection, view_name: str) -> duckdb.duckdb.Du
 ##### Description
 
 Create a relation object for the named view
+
+##### Parameters
+
+- **view_name** : str
+                            
+	Name of the view to create a relation from.
 
 ##### Example
 
