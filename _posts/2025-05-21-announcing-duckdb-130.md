@@ -35,7 +35,7 @@ SELECT ((JSON '{"field": 42}')->'field') = 42;
 This often caused confusion among users, therefore, the new release deprecates the old arrow lambda syntax and replaces it with Python-style lambda syntax:
 
 ```sql
-SELECT list_transform([1, 2, 3], LAMBDA x: x + 1);
+SELECT list_transform([1, 2, 3], lambda x: x + 1);
 ```
 
 To make the transition smoother, the deprecation will happen in several steps over the next year.
