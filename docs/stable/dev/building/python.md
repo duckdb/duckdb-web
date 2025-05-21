@@ -290,7 +290,7 @@ git push --tags
 
 ### Building with the httpfs Extension Fails
 
-The build fails on OSX when both the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) and the Python package are included:
+The build fails on OSX when both the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) and the Python package are included:
 
 ```console
 ld: library not found for -lcrypto
