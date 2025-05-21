@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	let installationData = [];
 
-	$.get('/data/installation-data-1.3.yml?1', function(data) {
+	$.get('/data/installation-data-1.3.yml?12', function(data) {
 		// console.log(data)
 		installationData = jsyaml.load(data);
 		evaluation();
