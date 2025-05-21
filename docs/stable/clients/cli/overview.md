@@ -54,7 +54,7 @@ duckdb
 ```
 
 ```text
-v{{ site.current_duckdb_version }} {{ site.current_duckdb_hash }}
+DuckDB v{{ site.current_duckdb_version }} ({{ site.current_duckdb_codename }}) {{ site.current_duckdb_hash }}
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
@@ -253,7 +253,7 @@ INSTALL fts;
 LOAD fts;
 ```
 
-For details, see the [Extension docs]({% link docs/stable/extensions/overview.md %}).
+For details, see the [Extension docs]({% link docs/stable/core_extensions/overview.md %}).
 
 ## Reading from stdin and Writing to stdout
 

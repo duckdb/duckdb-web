@@ -53,11 +53,14 @@ The table below shows the available mathematical functions.
 |:--|:-------|
 | [`@(x)`](#x) | Absolute value. Parentheses are optional if `x` is a column name. |
 | [`abs(x)`](#absx) | Absolute value. |
-| [`acos(x)`](#acosx) | Computes the arccosine of `x`. |
+| [`acos(x)`](#acosx) | Computes the inverse cosine of `x`. |
+| [`acosh(x)`](#acoshx) | Computes the inverse hyperbolic cosine of `x`. |
 | [`add(x, y)`](#addx-y) | Alias for `x + y`. |
-| [`asin(x)`](#asinx) | Computes the arcsine of `x`. |
-| [`atan(x)`](#atanx) | Computes the arctangent of `x`. |
-| [`atan2(y, x)`](#atan2y-x) | Computes the arctangent `(y, x)`. |
+| [`asin(x)`](#asinx) | Computes the inverse sine of `x`. |
+| [`asinh(x)`](#asinhx) | Computes the inverse hyperbolic sine of `x`. |
+| [`atan(x)`](#atanx) | Computes the inverse tangent of `x`. |
+| [`atanh(x)`](#atanhx) | Computes the inverse hyperbolic tangent of `x`. |
+| [`atan2(y, x)`](#atan2y-x) | Computes the inverse tangent of `(y, x)`. |
 | [`bit_count(x)`](#bit_countx) | Returns the number of bits that are set. |
 | [`cbrt(x)`](#cbrtx) | Returns the cube root of the number. |
 | [`ceil(x)`](#ceilx) | Rounds the number up. |
@@ -68,7 +71,7 @@ The table below shows the available mathematical functions.
 | [`divide(x, y)`](#dividex-y) | Alias for `x // y`. |
 | [`even(x)`](#evenx) | Round to next even number by rounding away from zero. |
 | [`exp(x)`](#expx) | Computes `e ** x`. |
-| [`factorial(x)`](#factorialx) | See `!` operator. Computes the product of the current integer and all integers below it. |
+| [`factorial(x)`](#factorialx) | See the `!` operator. Computes the product of the current integer and all integers below it. |
 | [`fdiv(x, y)`](#fdivx-y) | Performs integer division (`x // y`) but returns a `DOUBLE` value. |
 | [`floor(x)`](#floorx) | Rounds the number down. |
 | [`fmod(x, y)`](#fmodx-y) | Calculates the modulo value. Always returns a `DOUBLE` value. |
@@ -91,7 +94,7 @@ The table below shows the available mathematical functions.
 | [`nextafter(x, y)`](#nextafterx-y) | Return the next floating point value after `x` in the direction of `y`. |
 | [`pi()`](#pi) | Returns the value of pi. |
 | [`pow(x, y)`](#powx-y) | Computes `x` to the power of `y`. |
-| [`power(x, y)`](#powerx-y) | Alias of `pow`. computes `x` to the power of `y`. |
+| [`power(x, y)`](#powerx-y) | Alias of `pow`. Computes `x` to the power of `y`. |
 | [`radians(x)`](#radiansx) | Converts degrees to radians. |
 | [`random()`](#random) | Returns a random number `x` in the range `0.0 <= x < 1.0`. |
 | [`round_even(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
@@ -128,9 +131,17 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Computes the arccosine of `x`. |
+| **Description** | Computes the inverse cosine of `x`. |
 | **Example** | `acos(0.5)` |
 | **Result** | `1.0471975511965976` |
+
+#### `acosh(x)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the inverse hyperbolic cosine of `x`. |
+| **Example** | `acosh(1.5)` |
+| **Result** | `0.9624236501192069` |
 
 #### `add(x, y)`
 
@@ -144,23 +155,39 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Computes the arcsine of `x`. |
+| **Description** | Computes the inverse sine of `x`. |
 | **Example** | `asin(0.5)` |
 | **Result** | `0.5235987755982989` |
+
+#### `asinh(x)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the inverse hyperbolix sine of `x`. |
+| **Example** | `asinh(0.5)` |
+| **Result** | `0.48121182505960347` |
 
 #### `atan(x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Computes the arctangent of `x`. |
+| **Description** | Computes the inverse tangent of `x`. |
 | **Example** | `atan(0.5)` |
 | **Result** | `0.4636476090008061` |
+
+#### `atanh(x)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the inverse hyperbolic tangent of `x`. |
+| **Example** | `atanh(0.5)` |
+| **Result** | `0.5493061443340549` |
 
 #### `atan2(y, x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Computes the arctangent (y, x). |
+| **Description** | Computes the inverse tangent (y, x). |
 | **Example** | `atan2(0.5, 0.5)` |
 | **Result** | `0.7853981633974483` |
 
@@ -248,7 +275,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | See `!` operator. Computes the product of the current integer and all integers below it. |
+| **Description** | See the `!` operator. Computes the product of the current integer and all integers below it. |
 | **Example** | `factorial(4)` |
 | **Result** | `24` |
 
@@ -432,7 +459,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Alias of `pow`. computes `x` to the power of `y`. |
+| **Description** | Alias of `pow`. Computes `x` to the power of `y`. |
 | **Example** | `power(2, 3)` |
 | **Result** | `8` |
 

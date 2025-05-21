@@ -27,7 +27,7 @@ To comply with standard SQL, one-based indexing is used almost everywhere, e.g.,
 
 | Expression                 | Result  | Note                                                                          |
 |----------------------------|---------|-------------------------------------------------------------------------------|
-| `-2^2`                     | `4.0`   | PostgreSQL compatibility means the unary minus has higher precedence than the exponentiation operator. Use additional parentheses, e.g., `-(2^2)` or the [`pow` function]({% link docs/stable/sql/functions/numeric.md %}#powx-y), e.g. `-pow(2, 2)`, to avoid mistakes. |
+| `-2^2`                     | `4.0`   | PostgreSQL compatibility means the unary minus has higher precedence than the exponentiation operator. Use additional parentheses, e.g., `-(2^2)` or the [`pow` function]({% link docs/stable/sql/functions/numeric.md %}#powx-y), e.g., `-pow(2, 2)`, to avoid mistakes. |
 | `'t' = true`               | `true`  | Compatible with PostgreSQL.                                                   |
 | `1 = '1'`                  | `true`  | Compatible with PostgreSQL.                                                   |
 | `1 = ' 1'`                 | `true`  | Compatible with PostgreSQL.                                                   |

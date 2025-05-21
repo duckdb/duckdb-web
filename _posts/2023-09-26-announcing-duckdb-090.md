@@ -186,7 +186,7 @@ CALL load_aws_credentials();
 SELECT * FROM 's3://some-bucket/that/requires/authentication.parquet';
 ```
 
-[See the documentation for more information]({% link docs/stable/extensions/aws.md %}).
+[See the documentation for more information]({% link docs/stable/core_extensions/aws.md %}).
 
 [**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb-iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
@@ -195,7 +195,7 @@ SELECT count(*)
 FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
-[See the documentation for more information]({% link docs/stable/extensions/iceberg/overview.md %}).
+[See the documentation for more information]({% link docs/stable/core_extensions/iceberg/overview.md %}).
 
 [**Experimental Azure Extension**](https://github.com/duckdb/duckdb-azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 
@@ -204,7 +204,7 @@ SET azure_storage_connection_string = '<your_connection_string>';
 SELECT * FROM 'azure://<my_container>/*.csv';
 ```
 
-[See the documentation for more information]({% link docs/stable/extensions/azure.md %}).
+[See the documentation for more information]({% link docs/stable/core_extensions/azure.md %}).
 
 ## Clients
 

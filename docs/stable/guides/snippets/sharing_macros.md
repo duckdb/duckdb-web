@@ -46,7 +46,7 @@ You can try it from DuckDB:
 duckdb
 ```
 
-Make sure that the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) is installed:
+Make sure that the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) is installed:
 
 ```sql
 INSTALL httpfs;
@@ -84,7 +84,7 @@ CREATE MACRO checksum(table_name) AS TABLE
     FROM query_table(table_name);
 ```
 
-To use it, make sure that the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) is installed:
+To use it, make sure that the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) is installed:
 
 ```sql
 INSTALL httpfs;

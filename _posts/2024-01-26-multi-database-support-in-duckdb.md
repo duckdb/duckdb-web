@@ -19,7 +19,7 @@ DuckDB supports advanced operations on its own native storage format – such as
 
 DuckDB now has a pluggable storage and transactional layer. This flexible layer allows new storage back-ends to be created by DuckDB extensions. These storage back-ends can support all database operations in the same way that DuckDB supports them, including inserting data and even modifying schemas.
 
-The [MySQL]({% link docs/stable/extensions/mysql.md %}), [Postgres]({% link docs/stable/extensions/postgres.md %}), and [SQLite]({% link docs/stable/extensions/sqlite.md %}) extensions implement this new pluggable storage and transactional layer, allowing DuckDB to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
+The [MySQL]({% link docs/stable/core_extensions/mysql.md %}), [Postgres]({% link docs/stable/core_extensions/postgres.md %}), and [SQLite]({% link docs/stable/core_extensions/sqlite.md %}) extensions implement this new pluggable storage and transactional layer, allowing DuckDB to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
 
 These extensions enable a number of useful features. For example, using these extensions you can:
 

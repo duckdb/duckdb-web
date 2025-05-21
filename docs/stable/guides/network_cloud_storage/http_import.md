@@ -7,7 +7,7 @@ redirect_from:
 title: HTTP Parquet Import
 ---
 
-To load a Parquet file over HTTP(S), the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) is required. This can be installed using the `INSTALL` SQL command. This only needs to be run once.
+To load a Parquet file over HTTP(S), the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) is required. This can be installed using the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL httpfs;

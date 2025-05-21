@@ -10,7 +10,7 @@ In general, if you would like to build DuckDB from source, it's recommended to a
 ## Python Package on macOS: Building the httpfs Extension Fails
 
 **Problem:**
-The build fails on macOS when both the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) and the Python package are included:
+The build fails on macOS when both the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) and the Python package are included:
 
 ```batch
 GEN=ninja BUILD_PYTHON=1 CORE_EXTENSIONS="httpfs" make

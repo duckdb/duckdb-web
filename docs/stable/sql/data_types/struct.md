@@ -11,8 +11,6 @@ Conceptually, a `STRUCT` column contains an ordered list of columns called “en
 
 `STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a `STRUCT`, but does not have a `ROW` data type. See an example below and the [`STRUCT` functions documentation]({% link docs/stable/sql/functions/struct.md %}) for details.
 
-`STRUCT`s have a fixed schema. It is not possible to change the schema of a `STRUCT` using `UPDATE` operations.
-
 See the [data types overview]({% link docs/stable/sql/data_types/overview.md %}) for a comparison between nested data types.
 
 ### Creating Structs
@@ -279,6 +277,75 @@ These queries return `NULL`.
 
 ```sql
 SELECT {'k1': 2, 'k2': 3} < {'k1': 2, 'k2': NULL} AS result;
+```
+
+## Updating the Schema
+
+Starting with DuckDB v1.3.0, it's possible to update the sub-schema of structs
+using the [`ALTER TABLE` clause]({% link docs/stable/sql/statements/alter_table.md %}).
+
+To follow the examples, initialize the `test` table as follows:
+
+```sql
+CREATE TABLE test(s STRUCT(i INTEGER, j INTEGER));
+INSERT INTO test VALUES (ROW(1, 1)), (ROW(2, 2));
+```
+
+### Adding a Field
+
+Add field `k INTEGER` to struct `s` in table `test`:
+
+```sql
+ALTER TABLE test ADD COLUMN s.k INTEGER;
+FROM test;
+```
+
+```text
+┌─────────────────────────────────────────┐
+│                    s                    │
+│ struct(i integer, j integer, k integer) │
+├─────────────────────────────────────────┤
+│ {'i': 1, 'j': 1, 'k': NULL}             │
+│ {'i': 2, 'j': 2, 'k': NULL}             │
+└─────────────────────────────────────────┘
+```
+
+### Dropping a Field
+
+Drop field `i` from struct `s` in table `test`:
+
+```sql
+ALTER TABLE test DROP COLUMN s.i;
+FROM test;
+```
+
+```text
+┌──────────────────────────────┐
+│              s               │
+│ struct(j integer, k integer) │
+├──────────────────────────────┤
+│ {'j': 1, 'k': NULL}          │
+│ {'j': 2, 'k': NULL}          │
+└──────────────────────────────┘
+```
+
+### Renaming a Field
+
+Renaming field `j` of struct `s` to `v1` in table test`:
+
+```sql
+ALTER TABLE test RENAME s.j TO v1;
+FROM test;
+```
+
+```text
+┌───────────────────────────────┐
+│               s               │
+│ struct(v1 integer, k integer) │
+├───────────────────────────────┤
+│ {'v1': 1, 'k': NULL}          │
+│ {'v1': 2, 'k': NULL}          │
+└───────────────────────────────┘
 ```
 
 ## Functions

@@ -34,7 +34,7 @@ def update_new_stable_page(new_stable_file, old_stable_dir):
 
 
 # copy docs/preview to docs/stable, while keeping the redirects from docs/stable
-def archive_preview(old_stable_version):
+def archive_preview():
     src = "docs/preview"
     dst = f"docs/stable_temp"
     old_stable = "docs/stable"
@@ -52,9 +52,9 @@ def archive_preview(old_stable_version):
 
             if src_file.endswith(".md"):
                 new_content = update_new_stable_page(src_file, old_stable)
-                print(new_content)
-                with open(dst_file, 'w') as f:
+                with open(dst_file, "w") as f:
                     f.write(new_content)
+                    f.write("\n")
             else:
                 shutil.copy2(src_file, dst_file)
 
@@ -102,9 +102,9 @@ def archive_stable(old_stable_version):
 
             if src_file.endswith(".md"):
                 new_content = update_stable_page(src_file, old_stable_version)
-                print(new_content)
-                with open(dst_file, 'w') as f:
+                with open(dst_file, "w") as f:
                     f.write(new_content)
+                    f.write("\n")
             else:
                 shutil.copy2(src_file, dst_file)
 
@@ -112,8 +112,8 @@ def archive_stable(old_stable_version):
 
 old_stable_version_no_dots = old_stable_version.replace(".", "")
 
-# copy_file("_data/menu_docs_stable.json", f"_data/menu_docs_{old_stable_version_no_dots}.json")
+shutil.copy("_data/menu_docs_stable.json", f"_data/menu_docs_{old_stable_version_no_dots}.json")
 archive_stable(old_stable_version)
 
-# copy_file("_data/menu_docs_preview.json", f"_data/menu_docs_stable.json")
-# archive_preview()
+shutil.copy("_data/menu_docs_preview.json", f"_data/menu_docs_stable.json")
+archive_preview()

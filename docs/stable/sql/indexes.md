@@ -8,7 +8,7 @@ title: Indexes
 
 ## Index Types
 
-DuckDB has two built-in index types. Indexes can also be defined via [extensions]({% link docs/stable/extensions/overview.md %}).
+DuckDB has two built-in index types. Indexes can also be defined via [extensions]({% link docs/stable/core_extensions/overview.md %}).
 
 ### Min-Max Index (Zonemap)
 
@@ -22,7 +22,7 @@ An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mai
 
 ### Indexes Defined by Extensions
 
-DuckDB supports [R-trees for spatial indexing]({% link docs/stable/extensions/spatial/r-tree_indexes.md %}) via the `spatial` extension.
+DuckDB supports [R-trees for spatial indexing]({% link docs/stable/core_extensions/spatial/r-tree_indexes.md %}) via the `spatial` extension.
 
 ## Persistence
 
@@ -44,7 +44,7 @@ ART indexes create a secondary copy of the data in a second location – this co
 `UPDATE` statements on indexed columns and columns that cannot be updated in place are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
 This rewrite has performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
-Additionally, it causes the following constraint-checking limitation of `UPDATE` statements. 
+Additionally, it causes the following constraint-checking limitation of `UPDATE` statements.
 The same limitation exists in other DBMSs, like PostgreSQL.
 
 In the example below, note how the number of rows exceeds DuckDB's standard vector size, which is 2048.
@@ -69,7 +69,8 @@ A workaround is to split the `UPDATE` into a `DELETE ... RETURNING ...` followed
 with some additional logic to (temporarily) store the result of the `DELETE`.
 All statements should be run inside a transaction via `BEGIN`, and eventually `COMMIT`.
 
-Here's an example of how that could look like in the CLI.
+Here's an example of how that could look like in the command line client.
+
 ```sql
 CREATE TABLE my_table (i INTEGER PRIMARY KEY);
 INSERT INTO my_table SELECT range FROM range(3_000);
@@ -83,7 +84,7 @@ COMMIT;
 ```
 
 In other clients, you might be able to fetch the result of `DELETE ... RETURNING ...`.
-Then, you can use that result in a subsequent `INSERT ...` statements, 
+Then, you can use that result in a subsequent `INSERT ...` statements,
 or potentially make use of DuckDB's `Appender` (if available in the client).
 
 ### Over-Eager Constraint Checking in Foreign Keys

@@ -32,7 +32,7 @@ duckdb -safe ...
 
 ## Restricting File Access
 
-DuckDB can list directories and read arbitrary files via its CSV parser’s [`read_csv` function]({% link docs/stable/data/csv/overview.md %}) or read text via the [`read_text` function]({% link docs/stable/sql/functions/char.md %}#read_textsource).
+DuckDB can list directories and read arbitrary files via its CSV parser’s [`read_csv` function]({% link docs/stable/data/csv/overview.md %}) or read text via the [`read_text` function]({% link docs/stable/sql/functions/text.md %}#read_textsource).
 This makes it possible to read from the local file system, for example:
 
 ```sql

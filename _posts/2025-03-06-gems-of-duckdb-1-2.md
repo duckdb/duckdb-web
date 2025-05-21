@@ -94,8 +94,8 @@ SELECT sum(CASE WHEN l_extendedprice > 500 THEN 1 END) FROM lineitem;
 
 ### Excel Extension
 
-Prior to DuckDB 1.2, Excel files were only supported by the [`spatial` extension]({% link docs/stable/extensions/spatial/overview.md %}), which is a heavyweight extension with several dependencies.
-Starting with 1.2, the [`excel` extension]({% link docs/stable/extensions/excel.md %}) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
+Prior to DuckDB 1.2, Excel files were only supported by the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}), which is a heavyweight extension with several dependencies.
+Starting with 1.2, the [`excel` extension]({% link docs/stable/core_extensions/excel.md %}) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
 
 ```sql
 FROM read_xlsx('test.xlsx', header = true);  

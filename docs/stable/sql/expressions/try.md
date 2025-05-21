@@ -1,62 +1,103 @@
 ---
 layout: docu
+redirect_from: null
 title: TRY expression
 ---
 
-<div id="rrdiagram"></div>
+The `TRY` expression ensures that errors caused by the input rows in the child (scalar) expression result in `NULL` for those rows, instead of causing the query to throw an error.
 
-Casting refers to the operation of converting a value in a particular data type to the corresponding value in another data type.
-Casting can occur either implicitly or explicitly. The syntax described here performs an explicit cast. More information on casting can be found on the [typecasting page]({% link docs/stable/sql/data_types/typecasting.md %}).
+> The `TRY` expression was inspired by the [`TRY_CAST` expression]({% link docs/stable/sql/expressions/cast.md %}#try_cast).
 
-## Explicit Casting
+## Examples
 
-The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types]({% link docs/stable/sql/data_types/overview.md %}). DuckDB also supports the shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
+The following calls return errors when invoked without the `TRY` expression.
+When they are wrapped into as `TRY` expression, they return `NULL`:
 
-```sql
-SELECT CAST(i AS VARCHAR) AS i
-FROM generate_series(1, 3) tbl(i);
-```
+### Casting
 
-| i |
-|---|
-| 1 |
-| 2 |
-| 3 |
+#### Without `TRY`
 
 ```sql
-SELECT i::DOUBLE AS i
-FROM generate_series(1, 3) tbl(i);
-```
-
-|  i  |
-|----:|
-| 1.0 |
-| 2.0 |
-| 3.0 |
-
-### Casting Rules
-
-Not all casts are possible. For example, it is not possible to convert an `INTEGER` to a `DATE`. Casts may also throw errors when the cast could not be successfully performed. For example, trying to cast the string `'hello'` to an `INTEGER` will result in an error being thrown.
-
-```sql
-SELECT CAST('hello' AS INTEGER);
+SELECT 'abc'::INTEGER;
 ```
 
 ```console
 Conversion Error:
-Could not convert string 'hello' to INT32
+Could not convert string 'abc' to INT32
 ```
 
-The exact behavior of the cast depends on the source and destination types. For example, when casting from `VARCHAR` to any other type, the string will be attempted to be converted.
-
-### `TRY_CAST`
-
-`TRY_CAST` can be used when the preferred behavior is not to throw an error, but instead to return a `NULL` value. `TRY_CAST` will never throw an error, and will instead return `NULL` if a cast is not possible.
+#### With `TRY`
 
 ```sql
-SELECT TRY_CAST('hello' AS INTEGER) AS i;
+SELECT TRY('abc'::INTEGER);
 ```
 
-|  i   |
-|------|
+```text
+NULL
+```
+
+### Logarithm on Zero
+
+#### Without `TRY`
+
+```sql
+SELECT ln(0);
+```
+
+```console
+Out of Range Error:
+cannot take logarithm of zero
+```
+
+#### With `TRY`
+
+```sql
+SELECT TRY(ln(0));
+```
+
+```text
+NULL
+```
+
+### Casting Multiple Rows
+
+#### Without `TRY`
+
+```sql
+WITH cte AS (FROM (VALUES ('123'), ('test'), ('235')) t(a))
+SELECT a::INTEGER AS x FROM cte;
+```
+
+```console
+Conversion Error:
+Could not convert string 'test' to INT32
+```
+
+#### With `TRY`
+
+```sql
+WITH cte AS (FROM (VALUES ('123'), ('test'), ('235')) t(a))
+SELECT TRY(a::INTEGER) AS x FROM cte;
+```
+
+<div class="center_aligned_header_table"></div>
+
+|  x   |
+|-----:|
+| 123  |
 | NULL |
+| 235  |
+
+## Limitations
+
+`TRY` cannot be used in combination with a volatile function or with a [scalar subquery]({% link docs/stable/sql/expressions/subqueries.md %}#scalar-subquery).
+For example:
+
+```sql
+SELECT TRY(random())
+```
+
+```console
+Binder Error:
+TRY can not be used in combination with a volatile function
+```

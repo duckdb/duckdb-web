@@ -1,5 +1,6 @@
 ---
 layout: docu
+redirect_from: null
 title: Extension Distribution
 ---
 
@@ -13,20 +14,17 @@ All official extensions are distributed for the following platforms.
 | Platform name      | Operating system | Architecture    | CPU types                      | Used by                    |
 |--------------------|------------------|-----------------|--------------------------------|----------------------------|
 | `linux_amd64`      | Linux            | x86_64  (AMD64) |                                | Node.js packages, etc.     |
-| `linux_amd64_gcc4` | Linux            | x86_64  (AMD64) |                                | Python packages, CLI, etc. |
 | `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. | All packages               |
 | `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          | All packages               |
 | `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     | All packages               |
 | `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               | All packages               |
-
-> For some Linux ARM distributions (e.g., Python), two different binaries are distributed. These target either the `linux_arm64` or `linux_arm64_gcc4` platforms. Note that extension binaries are distributed for the first, but not the second. Effectively that means that on these platforms your glibc version needs to be 2.28 or higher to use the distributed extension binaries.
 
 Some extensions are distributed for the following platforms:
 
 * `windows_amd64_mingw`
 * `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/stable/clients/wasm/extensions.md %}))
 
-For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`, `linux_arm64_gcc4`).
+For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`).
 
 ## Extensions Signing
 
@@ -37,7 +35,7 @@ By default, DuckDB uses its built-in public keys to verify the integrity of exte
 All core and community extensions are signed by the DuckDB team.
 
 Signing the extension simplifies their distribution, this is why they can be distributed over HTTP without the need for HTTPS,
-which is itself is supported through an extension ([`httpfs`]({% link docs/stable/extensions/httpfs/overview.md %})).
+which is itself is supported through an extension ([`httpfs`]({% link docs/stable/core_extensions/httpfs/overview.md %})).
 
 ### Unsigned Extensions
 
@@ -101,5 +99,5 @@ INSTALL icu FROM '⟨custom_repository⟩';
 
 The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
 
-If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/stable/extensions/overview.md %}#autoloading-extensions)
+If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/stable/core_extensions/overview.md %}#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.
