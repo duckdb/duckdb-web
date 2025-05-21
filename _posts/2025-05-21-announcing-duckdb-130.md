@@ -29,7 +29,12 @@ The single arrow operator is also used by the JSON extension to express [JSON ex
 The two meanings of the single arrow operator are treated the same by the binder, thus they share the same (low) precedence, necessitating extra parentheses in JSON expression with equality checks:
 
 ```sql
+SELECT (JSON '{"field": 42}')->'field' = 42;
+-- throws a Binder Error:
+-- No function matches the given name and argument types 'json_extract(JSON, BOOLEAN)
+
 SELECT ((JSON '{"field": 42}')->'field') = 42;
+-- return true
 ```
 
 This often caused confusion among users, therefore, the new release deprecates the old arrow lambda syntax and replaces it with Python-style lambda syntax:
