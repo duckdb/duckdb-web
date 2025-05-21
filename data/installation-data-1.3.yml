@@ -76,7 +76,7 @@
   download_method: Direct download
   architecture: arm64
   #sha_512: 64d84b5d468ae544251d567cadd8504472f5f2a6df1f6fa390bf1ed96b9d00d6f31a007729de92f1799520161235de5d7da44c0e18800da38fbd026d9c439973
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.0/duckdb_cli-linux-aarch64.zip
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.0/duckdb_cli-linux-arm64.zip
   installation_code: >-
     curl https://install.duckdb.org | sh
 - variant: stable
