@@ -30,7 +30,7 @@ If you've _forked_ DuckDB, you may run into trouble when building the Python pac
 # Check your remotes
 git remote -v
 
-# If you don't see upstream	git@github.com:duckdb/duckdb.git, then add it
+# If you don't see upstream git@github.com:duckdb/duckdb.git, then add it
 git remote add upstream git@github.com:duckdb/duckdb.git
 
 # Now you can pull & push the tags
@@ -194,13 +194,13 @@ WARNING:  Unable to resolve breakpoint to any actual locations.
 (lldb) r
 ...
     frame #0: 0x000000013025833c duckdb.cpython-310-darwin.so`duckdb::DuckDBPyRelation::FetchDF(this=0x00006000012f8d20, date_as_object=false) at pyrelation.cpp:808:7
-   805 	}
+   805   }
    806
-   807 	PandasDataFrame DuckDBPyRelation::FetchDF(bool date_as_object) {
--> 808 		if (!result) {
-   809 			if (!rel) {
-   810 				return py::none();
-   811 			}
+   807   PandasDataFrame DuckDBPyRelation::FetchDF(bool date_as_object) {
+-> 808     if (!result) {
+   809       if (!rel) {
+   810         return py::none();
+   811       }
 Target 0: (python3) stopped.
 ```
 
@@ -280,7 +280,7 @@ If you've forked DuckDB you may run into trouble when building the Python packag
 # Check your remotes
 git remote -v
 
-# If you don't see upstream	git@github.com:duckdb/duckdb.git, then add it
+# If you don't see upstream git@github.com:duckdb/duckdb.git, then add it
 git remote add upstream git@github.com:duckdb/duckdb.git
 
 # Now you can pull & push the tags
