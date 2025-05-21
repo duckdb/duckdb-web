@@ -21,14 +21,13 @@ def update_new_stable_page(new_stable_file, old_stable_dir):
         redirect_from_field = None
 
     new_stable_doc = frontmatter.load(new_stable_file)
-    
+
     # overwrite the new stable doc's redirect_from field with the one from the old stable document
     new_stable_doc["redirect_from"] = redirect_from_field
 
     # replace link tags in the content
     new_stable_doc.content = new_stable_doc.content.replace(
-        f"{{% link docs/preview/",
-        f"{{% link docs/stable/"
+        f"{{% link docs/preview/", f"{{% link docs/stable/"
     )
     return frontmatter.dumps(new_stable_doc)
 
@@ -58,7 +57,6 @@ def archive_preview():
             else:
                 shutil.copy2(src_file, dst_file)
 
-
     shutil.rmtree("docs/stable")
     shutil.move("docs/stable_temp", "docs/stable")
 
@@ -77,8 +75,7 @@ def update_stable_page(src_file, old_stable_version):
 
     # replace link tags in the content
     doc.content = doc.content.replace(
-        f"{{% link docs/stable/",
-        f"{{% link docs/{old_stable_version}/"
+        f"{{% link docs/stable/", f"{{% link docs/{old_stable_version}/"
     )
     return frontmatter.dumps(doc)
 
@@ -109,10 +106,11 @@ def archive_stable(old_stable_version):
                 shutil.copy2(src_file, dst_file)
 
 
-
 old_stable_version_no_dots = old_stable_version.replace(".", "")
 
-shutil.copy("_data/menu_docs_stable.json", f"_data/menu_docs_{old_stable_version_no_dots}.json")
+shutil.copy(
+    "_data/menu_docs_stable.json", f"_data/menu_docs_{old_stable_version_no_dots}.json"
+)
 archive_stable(old_stable_version)
 
 shutil.copy("_data/menu_docs_preview.json", f"_data/menu_docs_stable.json")
