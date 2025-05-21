@@ -1179,10 +1179,29 @@ DEFINITION_METHODS_MAP = {
 │ created_timestamp │ TIMESTAMP WITH TIME ZONE │ YES     │ NULL    │ NULL    │ NULL    │
 └───────────────────┴──────────────────────────┴─────────┴─────────┴─────────┴─────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="virtual_table_name",
+                parameter_type=["str"],
+                parameter_description="The name to assign to the current relation when referenced in the SQL query.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sql_query",
+                parameter_type=["str"],
+                parameter_description="The SQL query string that uses the virtual table name to query the relation.",
+            ),
+        ],
     ),
     'set_alias': PythonRelAPIDetails(
         example="rel.set_alias('abc').select('abc.id')",
         result='In the SQL query, the alias will be `abc`',
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="alias",
+                parameter_type=["str"],
+                parameter_description="The alias name to assign to the relation.",
+            )
+        ],
     ),
     'alias': PythonRelAPIDetails(
         example='rel.alias', result='unnamed_relation_43c808c247431be5'
@@ -1206,6 +1225,33 @@ DEFINITION_METHODS_MAP = {
 │ 08fdcbf8-4e53-4290-9e81-423af263b518 │ value is uneven │     9 │ 2025-04-09 15:49:20.642+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="max_width",
+                parameter_type=["int"],
+                parameter_description="Maximum display width for the entire output in characters.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="max_rows",
+                parameter_type=["int"],
+                parameter_description="Maximum number of rows to display.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="max_col_width",
+                parameter_type=["int"],
+                parameter_description="Maximum number of characters to display per column.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="null_value",
+                parameter_type=["str"],
+                parameter_description="String to display in place of NULL values.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="render_mode",
+                parameter_type=["object"],
+                parameter_description="Render mode for displaying the output.",
+            ),
+        ],
     ),
     'sql_query': PythonRelAPIDetails(
         example='rel.sql_query()',
