@@ -59,8 +59,8 @@ docs:
 
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 483
-extension_download_count_pretty: 483
+extension_download_count: 508
+extension_download_count_pretty: 508
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---
