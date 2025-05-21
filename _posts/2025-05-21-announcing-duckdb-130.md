@@ -20,11 +20,13 @@ In this blog post, we cover the most important features of the new release. Duck
 
 Now that all mainstream Linux distributions use [glibc 2.28](https://lists.gnu.org/archive/html/info-gnu/2018-08/msg00000.html) or newer, DuckDB's official Linux binaries require at least glibc 2.28 or newer. The release is [built using the `manylinux_2_28` image from Python](https://github.com/duckdb/duckdb/pull/16956), which combines an older glibc with a newer compiler.
 
-It is of course still possible to [build DuckDB from source]({% link docs/stable/dev/building/overview.md %}) for older versions of glibc.
+We highly value [portability]({% link why_duckdb.md %}#portable), so it is of course still possible to [build DuckDB from source]({% link docs/stable/dev/building/overview.md %}) for older versions of glibc.
 
 ### Lambda Function Syntax
 
-Previously, the way to specify lambda functions in DuckDB was by using the arrow operator syntax: `x -> x + 1`. The arrow operator is also used by the JSON extension to express [JSON extraction]({% link docs/stable/data/json/json_functions.md %}#json-extraction-functions) using the syntax `->'field'`. The two operators share the same (low) precedence, necessitating extra parentheses in JSON expression with equality checks:
+Previously, lambda functions in DuckDB could be specified using the single arrow syntax: `x -> x + 1`.
+The single arrow operator is also used by the JSON extension to express [JSON extraction]({% link docs/stable/data/json/json_functions.md %}#json-extraction-functions) using the syntax `->'field'`.
+The two meanings of the single arrow operator are treated the same by the binder, thus they share the same (low) precedence, necessitating extra parentheses in JSON expression with equality checks:
 
 ```sql
 SELECT ((JSON '{"field": 42}')->'field') = 42;
@@ -50,9 +52,9 @@ so the old behavior will no longer be accessible.
 
 ### Minor SQL Parser Changes
 
-* The term `AT` now needs quotes to be used as an identifier as it is used for [time travel in Iceberg](https://github.com/duckdb/duckdb-iceberg/pull/225)
-* `LAMBDA` is now a reserved keyword due to the change in lambda syntax
-* `GRANT` is no longer a reserved keyword
+* The term `AT` now needs quotes to be used as an identifier as it is used for [time travel in Iceberg](https://github.com/duckdb/duckdb-iceberg/pull/225).
+* `LAMBDA` is now a reserved keyword due to the change in lambda syntax.
+* `GRANT` is no longer a reserved keyword.
 
 ## New Features
 
@@ -60,14 +62,14 @@ The new DuckDB release again contains a lot of exciting new features:
 
 ### External File Cache
 
-DuckDB is used a lot to read from remote files, e.g., Parquet files stored on HTTP servers or blob storage. Previous versions would always re-read file data fully. With this release, we [added a cache for data from external files](https://github.com/duckdb/duckdb/pull/16463). This cache is subject to the overall DuckDB memory limit. If space is available, it will be used to dynamically cache data from external files. This should greatly improve re-running queries on remote data. For example:
+DuckDB is used a lot to read from remote files, e.g., Parquet files stored on HTTP servers or blob storage. Previous versions would always fully re-read file data. With this release, we [added a cache for data from external files](https://github.com/duckdb/duckdb/pull/16463). This cache is subject to the overall DuckDB memory limit. If space is available, it will be used to dynamically cache data from external files. This should greatly improve re-running queries on remote data. For example:
 
 ```sql
 .timer on
 .mode trash -- do not show query result
-from 's3://duckdb-blobs/data/shakespeare.parquet';
+FROM 's3://duckdb-blobs/data/shakespeare.parquet';
 Run Time (s): real ⟨1.456⟩ user 0.037920 sys 0.028510
-from 's3://duckdb-blobs/data/shakespeare.parquet';
+FROM 's3://duckdb-blobs/data/shakespeare.parquet';
 Run Time (s): real ⟨0.360⟩ user 0.029188 sys 0.007620
 ```
 
@@ -101,7 +103,7 @@ SET enable_external_file_cache = false;
 DuckDB's command line interface (CLI) gained the capability to [directly query Parquet, CSV or JSON files](https://github.com/duckdb/duckdb/pull/17415). This works by just using e.g. a Parquet file instead of the database file. This will expose a view that can be queried. For example, say we have a Parquet file called `region.parquet`, this will work:
 
 ```bash
-region.parquet -c 'SELECT r_name FROM region;'
+duckdb region.parquet -c 'SELECT r_name FROM region;'
 ```
 
 ```text
@@ -118,25 +120,28 @@ region.parquet -c 'SELECT r_name FROM region;'
 ```
 
 When using the CLI like this, what actually happens is that we launch a temporary in-memory DuckDB database, and create two views over the given file:
-file – this view is always named the same, regardless of the name of the file
-[base_file_name] – this view depends on the name of the file, e.g., for region.parquet this is region.
+
+* `file` – this view is always named the same, regardless of the name of the file.
+* `[base_file_name]` – this view depends on the name of the file, e.g., for `region.parquet` this is `region`.
+
 Both views can be queried and will give the same result.
 
-The main advantage of this is usability: we can use the regular shell to navigate to a file, and then use DuckDB to open that file without having to refer to the path of the file at the SQL level.
+The main advantage of this feature is usability: we can use the regular shell to navigate to a file, and then use DuckDB to open that file without having to refer to the path of the file at the SQL level.
 
-### try expression
+### `try` Expression
 
-DuckDB already supported `try_cast`, which was trying to cast a value but did not fail the query if this was not possible, e.g.:
+DuckDB already supported [`try_cast`]({% link docs/stable/sql/expressions/cast.md %}#try_cast), which was trying to cast a value but did not fail the query if this was not possible. For example:
 
 ```sql
 SELECT try_cast('asdf' AS INTEGER);
 ```
 
-Returns `NULL`. This release [generalizes this functionality](https://github.com/duckdb/duckdb/pull/15939) beyond casting to arbitrary expressions that can error using `try`. For example, the logarithm of 0 [is undefined](https://www.quora.com/What-is-log-0), and `log(0)` will throw an exception and tell you that it “cannot take logarithm of zero”. With the new `try`, this will return `NULL` instead, e.g.:
+returns `NULL`. This release [generalizes this functionality](https://github.com/duckdb/duckdb/pull/15939) beyond casting to arbitrary expressions that can error using `try`. For example, the logarithm of 0 [is undefined](https://www.quora.com/What-is-log-0), and `log(0)` will throw an exception and tell you that it “cannot take logarithm of zero”. With the new `try`, this will return `NULL` instead, e.g.:
 
 ```sql
 SELECT try(log(0));
 ```
+
 ```text
 NULL
 ```
@@ -169,15 +174,17 @@ Altering structs is also supported [inside `LIST` and `MAP` columns](https://git
 
 ### Swapping in New Databases
 
-The [`ATTACH OR REPLACE` clause](https://github.com/duckdb/duckdb/pull/15355) allows you to replace a database. For example:
+The [`ATTACH OR REPLACE` clause](https://github.com/duckdb/duckdb/pull/15355) allows you to replace a database,
+so you can swap a database on the fly.
+For example:
 
 ```sql
 ATTACH 'taxi_v1.duckdb' AS taxi;
+USE taxi;
 ATTACH OR REPLACE 'taxi_v2.duckdb' AS taxi;
 ```
 
 This feature was implemented by [external contributor `xevix`](https://github.com/xevix).
-
 
 ### UUID v7 Support
 
@@ -210,16 +217,6 @@ SELECT uuid_extract_version(uuidv7());
 │             uint32             │
 ├────────────────────────────────┤
 │               7                │
-└────────────────────────────────┘
-```
-
-```sql
-SELECT uuid_extract_version(uuidv4());
-┌────────────────────────────────┐
-│ uuid_extract_version(uuidv4()) │
-│             uint32             │
-├────────────────────────────────┤
-│               4                │
 └────────────────────────────────┘
 ```
 
@@ -259,7 +256,7 @@ MY_SECRET=asdf duckdb -c \
 
 ### Spatial JOIN Operator
 
-We added a new specialized join operator as part of the `spatial` extension, which greatly improves the efficiency of _spatial joins_, that is, queries that `JOIN` two geometry columns using specific spatial predicate functions, such as `ST_Intersects` and `ST_Contains`.
+We added a new specialized join operator as part of the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}), which greatly improves the efficiency of _spatial joins_, that is, queries that `JOIN` two geometry columns using specific spatial predicate functions, such as `ST_Intersects` and `ST_Contains`.
 
 Similarly to a `HASH_JOIN`, the `SPATIAL_JOIN` builds a temporary lookup data-structure for the smaller side of the join, except it's an R-Tree, instead of a hash table. What this means for you is that you don't need to create an index first, or do any other pre-processing to optimize your spatial joins. It's all handled by the join operator internally.
 
