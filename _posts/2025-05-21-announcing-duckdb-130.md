@@ -8,7 +8,7 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tags: ["release"]
 ---
 
-> To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). Note that releasing some client libraries (e.g., Go, R, Java) takes a few extra days due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). Note that it takes a few days to release some client libraries (e.g., Go, R, Java) and extensions (e.g., the UI) due to the extra changes and review rounds required.
 
 We are proud to release DuckDB 1.3.0. This release of DuckDB is named “Ossivalis” after Bucephala Ossivalis, an ancestor of the [Goldeneye duck](https://en.wikipedia.org/wiki/Common_goldeneye) that lived millions of years ago.
 
