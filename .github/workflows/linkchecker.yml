@@ -8,7 +8,6 @@ jobs:
   LinkChecker:
     name: Link Checker
     runs-on: ubuntu-24.04
-    needs: deploy
     steps:
       - uses: actions/checkout@v4
         with:
