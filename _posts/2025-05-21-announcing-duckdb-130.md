@@ -254,7 +254,58 @@ MY_SECRET=asdf duckdb -c \
     "CREATE SECRET http (TYPE http, BEARER_TOKEN getenv('MY_SECRET'))"
 ```
 
-### Spatial JOIN Operator
+### Unpacking Columns
+
+DuckDB v1.3.0 brings a further boost to the popular [`COLUMNS(*)` expression]({% link docs/stable/sql/expressions/star.md %}#columns-expression).
+Previously, _unpacking_ the entities into a list was possible by adding a leading `*` character:
+
+```sql
+CREATE TABLE tbl AS SELECT 21 AS a, 1.234 AS b;
+SELECT [*COLUMNS(*)] AS col_exp FROM tbl;
+```
+
+```text
+┌─────────────────┐
+│     col_exp     │
+│ decimal(13,3)[] │
+├─────────────────┤
+│ [21.000, 1.234] │
+└─────────────────┘
+```
+
+However, this syntax could not be used in tandem with other expressions such as casting:
+
+```sql
+SELECT [*COLUMNS(*)::VARCHAR] AS col_exp FROM tbl;
+```
+
+```console
+Binder Error:
+*COLUMNS() can not be used in this place
+```
+
+The new `UNPACK` keyword removes this limitation. The following expression
+
+```sql
+SELECT [UNPACK(COLUMNS(*)::VARCHAR)] AS col_exp FROM tbl;
+```
+
+is equivalent to:
+
+```sql
+SELECT [a::VARCHAR, b::VARCHAR] AS col_exp FROM tbl;
+```
+
+```text
+┌─────────────┐
+│   col_exp   │
+│  varchar[]  │
+├─────────────┤
+│ [21, 1.234] │
+└─────────────┘
+```
+
+### Spatial `JOIN` Operator
 
 We added a new specialized join operator as part of the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}), which greatly improves the efficiency of _spatial joins_, that is, queries that `JOIN` two geometry columns using specific spatial predicate functions, such as `ST_Intersects` and `ST_Contains`.
 
