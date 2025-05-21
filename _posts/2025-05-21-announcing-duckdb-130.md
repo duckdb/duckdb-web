@@ -103,7 +103,7 @@ SET enable_external_file_cache = false;
 DuckDB's command line interface (CLI) gained the capability to [directly query Parquet, CSV or JSON files](https://github.com/duckdb/duckdb/pull/17415). This works by just using e.g. a Parquet file instead of the database file. This will expose a view that can be queried. For example, say we have a Parquet file called `region.parquet`, this will work:
 
 ```bash
-duckdb region.parquet -c 'SELECT r_name FROM region;'
+duckdb region.parquet -c 'FROM region;'
 ```
 
 ```text
@@ -184,7 +184,7 @@ USE taxi;
 ATTACH OR REPLACE 'taxi_v2.duckdb' AS taxi;
 ```
 
-This feature was implemented by [external contributor `xevix`](https://github.com/xevix).
+This feature was implemented by external contributor [`xevix`](https://github.com/xevix).
 
 ### UUID v7 Support
 
@@ -321,7 +321,7 @@ We have completed an [almost complete re-implementation](https://github.com/duck
 
 We have also done a large amount of internal changes around the [reading of multiple files](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Aclosed+closed%3A%3E2025-02-05+multifilereader+) (e.g., a folder of Parquet files) in an API called the `MultiFileReader`. We have unified the handling of multiple files across many of our file readers, e.g., Parquet, CSV, JSON, Avro, etc. This allows DuckDB to handle e.g. schema differences between multiple files in a unified way.
 
-We have also added a new string compression method, `DICT_FSST`. Before, DuckDB supported *either* [dictionary encoding](https://en.wikipedia.org/wiki/Dictionary_coder) *or* [FSST compression](https://github.com/cwida/fsst) (“Fast Static Symbol Table”) for strings. Those compression methods could not be mixed within a storage block of 265 kB by default. However, we observed a lot of real-world data where part of the block would benefit from dictionary encoding, and another part would benefit from FSST. FSST does not by default duplicate-eliminate strings. This release [combines both methods](https://github.com/duckdb/duckdb/pull/15637) into a new compression method, `DICT_FFST`. This *first* runs dictionary encoding and *then* compresses the dictionary using FSST. Dictionary encoding and FSST-only encoding are also still available. We have also [optimized storing validity masks](https://github.com/duckdb/duckdb/pull/15591) (“which rows are NULL?”) in this release, some compression methods (like the new `DICT_FSST` can handle NULLs internally and this obviates the need for a separate validity mask. Combined, those new features should greatly reduce the storage space required especially for strings. Note that the compression method is automatically picked by DuckDB based on actually observed compression ratios so users will not have to explicitly set this.
+We have also added a new string compression method, `DICT_FSST`. Before, DuckDB supported *either* [dictionary encoding](https://en.wikipedia.org/wiki/Dictionary_coder) *or* [FSST compression](https://github.com/cwida/fsst) (“Fast Static Symbol Table”) for strings. Those compression methods could not be mixed within a storage block (265 kB by default). However, we observed a lot of real-world data where part of the block would benefit from dictionary encoding, and another part would benefit from FSST. FSST does not by default duplicate-eliminate strings. This release [combines both methods](https://github.com/duckdb/duckdb/pull/15637) into a new compression method, `DICT_FFST`. This *first* runs dictionary encoding and *then* compresses the dictionary using FSST. Dictionary encoding and FSST-only encoding are also still available. We have also [optimized storing validity masks](https://github.com/duckdb/duckdb/pull/15591) (“which rows are NULL?”) in this release, some compression methods (like the new `DICT_FSST`) can handle NULLs internally and this obviates the need for a separate validity mask. Combined, those new features should greatly reduce the storage space required especially for strings. Note that the compression method is automatically picked by DuckDB based on actually observed compression ratios so users will not have to explicitly set this.
 
 ## Final Thoughts
 
