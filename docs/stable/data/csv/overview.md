@@ -91,7 +91,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `delimiter` | Alias for `delim`; only available in the `COPY` statement. | `VARCHAR` | `,` |
 | `escape` | String used to escape the `quote` character within quoted values. | `VARCHAR` | `"` |
 | `encoding` | Encoding used by the CSV file. Options are `utf-8`, `utf-16`, `latin-1`. Not available in the `COPY` statement (which always uses `utf-8`). | `VARCHAR` | `utf-8` |
-| `filename` | Add path of the containing file to each row, as a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. | `BOOL` | `false` |
+| `filename` | Add path of the containing file to each row, as a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. Since DuckDB v1.3.0, the `filename` column is added automatically as a virtual column and this option is only kept for compatibility reasons. | `BOOL` | `false` |
 | `force_not_null` | Do not match values in the specified columns against the `NULL` string. In the default case where the `NULL` string is empty, this means that empty values are read as zero-length strings instead of `NULL`s. | `VARCHAR[]` | `[]` |
 | `header` | First line of each file contains the column names. | `BOOL` | `false` |
 | `hive_partitioning` | Interpret the path as a [Hive partitioned path]({% link docs/stable/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |
@@ -112,6 +112,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
 | `store_rejects` | Skip any lines with errors and store them in the rejects table. | `BOOL` | `false` |
 | `strict_mode` | Enforces the strictness level of the CSV Reader. When set to `true`, the parser will throw an error upon encountering any issues. When set to `false`, the parser will attempt to read structurally incorrect files. It is important to note that reading structurally incorrect files can cause ambiguity; therefore, this option should be used with caution. | `BOOL` | `true` |
+| `thousands` | Character used to identify thousands separators in numeric values. It must be a single character and different from the `decimal_separator` option.| `VARCHAR` | (empty) |
 | `timestampformat` | [Timestamp format]({% link docs/stable/sql/functions/dateformat.md %}) used when parsing and writing timestamps. | `VARCHAR` | (empty) |
 | `timestamp_format` | Alias for `timestampformat`; only available in the `COPY` statement. | `VARCHAR` | (empty) |
 | `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). See [example]({% link docs/stable/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |

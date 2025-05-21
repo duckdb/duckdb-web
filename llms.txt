@@ -21,7 +21,7 @@ Things to remember when using DuckDB:
 
 ## Extensions
 
-- DuckDB has a powerful [extension mechanism](https://duckdb.org/docs/stable/extensions/overview.md) that allows loading additional features to DuckDB.
+- DuckDB has a powerful [extension mechanism](https://duckdb.org/docs/stable/core_extensions/overview.md) that allows loading additional features to DuckDB.
 
 ## Examples
 

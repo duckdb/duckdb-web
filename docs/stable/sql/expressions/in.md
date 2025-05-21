@@ -50,7 +50,7 @@ NULL
 ## `IN [val1, val2, ...]` (List)
 
 The `IN` operator works on lists according to the semantics used in Python.
-Unlike for the [`IN ⟨collection⟩` operator](#in-collection), the presence of `NULL` values on the right hand side of the expression does not make a difference in the result:
+Unlike for the [`IN tuple` operator](#in-val1-val2--tuple), the presence of `NULL` values on the right hand side of the expression does not make a difference in the result:
 
 ```sql
 SELECT 'Math' IN ['CS', 'Math', NULL];

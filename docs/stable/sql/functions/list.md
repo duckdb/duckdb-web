@@ -19,7 +19,7 @@ title: List Functions
 | [`list_aggregate(list, name)`](#list_aggregatelist-name) | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates]({% link docs/stable/sql/functions/list.md %}#list-aggregates) section for more details. |
 | [`list_any_value(list)`](#list_any_valuelist) | Returns the first non-null value in the list. |
 | [`list_append(list, element)`](#list_appendlist-element) | Appends `element` to `list`. |
-| [`list_concat(list1, list2)`](#list_concatlist1-list2) | Concatenate two lists. NULL inputs are skipped. See also `||` |
+| [`list_concat(list1, ..., listn)`](#list_concatlist1--listn) | Concatenate lists. `NULL` inputs are skipped. See also `||` |
 | [`list_contains(list, element)`](#list_containslist-element) | Returns true if the list contains the element. |
 | [`list_cosine_similarity(list1, list2)`](#list_cosine_similaritylist1-list2) | Compute the cosine similarity between two lists. |
 | [`list_cosine_distance(list1, list2)`](#list_cosine_distancelist1-list2) | Compute the cosine distance between two lists. Equivalent to `1.0 - list_cosine_similarity`. |
@@ -137,13 +137,13 @@ title: List Functions
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `array_append`, `array_push_back` |
 
-#### `list_concat(list1, list2)`
+#### `list_concat(list1, ..., listn)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenate two lists. `NULL` inputs are skipped. See also `||`  |
-| **Example** | `list_concat([2, 3], [4, 5, 6])` |
-| **Result** | `[2, 3, 4, 5, 6]` |
+| **Description** | Concatenates lists. `NULL` inputs are skipped. See also `||`  |
+| **Example** | `list_concat([2, 3], [4, 5, 6], [7])` |
+| **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `list_cat`, `array_concat`, `array_cat` |
 
 #### `list_contains(list, element)`
@@ -422,7 +422,7 @@ The following operators are supported for lists:
 | `&&`  | Alias for [`list_has_any`](#list_has_anylist1-list2).                                                                   | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `true`               |
 | `@>`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`       | `true`               |
 | `<@`  | Alias for [`list_has_all`](#list_has_alllist-sub-list), where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`          | `true`               |
-| `||`  | Similar to [`list_concat`](#list_concatlist1-list2), except any `NULL` input results in `NULL`.                         | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
+| `||`  | Similar to [`list_concat`](#list_concatlist1--listn), except any `NULL` input results in `NULL`.                        | `[1, 2, 3] || [4, 5, 6]`          | `[1, 2, 3, 4, 5, 6]` |
 | `<=>` | Alias for [`list_cosine_distance`](#list_cosine_distancelist1-list2).                                                   | `[1, 2, 3] <=> [1, 2, 5]`         | `0.007416606`        |
 | `<->` | Alias for [`list_distance`](#list_distancelist1-list2).                                                                 | `[1, 2, 3] <-> [1, 2, 5]`         | `2.0`                |
 
@@ -919,7 +919,7 @@ SELECT flatten([[NULL]]);
 Even if the only contents of each sub-list is `NULL`, still concatenate them together. Note that no de-duplication occurs when flattening. See `list_distinct` function for de-duplication:
 
 ```sql
-SELECT flatten([[NULL],[NULL]]);
+SELECT flatten([[NULL], [NULL]]);
 ```
 
 ```text
@@ -933,5 +933,5 @@ For details, see the [lambda functions page]({% link docs/stable/sql/functions/l
 
 ## Related Functions
 
-There are also [aggregate functions]({% link docs/stable/sql/functions/aggregates.md %}) `list` and `histogram` that produces lists and lists of structs.
-The [`unnest`]({% link docs/stable/sql/query_syntax/unnest.md %}) function is used to unnest a list by one level.
+* The [aggregate functions]({% link docs/stable/sql/functions/aggregates.md %}) `list` and `histogram` produce lists and lists of structs.
+* The [`unnest` function]({% link docs/stable/sql/query_syntax/unnest.md %}) is used to unnest a list by one level.

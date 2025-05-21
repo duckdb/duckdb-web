@@ -88,7 +88,7 @@ FROM 'example.csv';
 └───────────────┘
 ```
 
-A typical alternative solution is to use the [`printf`]({% link docs/stable/sql/functions/char.md %}#printf-syntax) or [`format`]({% link docs/stable/sql/functions/char.md %}#fmt-syntax) functions, e.g.:
+A typical alternative solution is to use the [`printf`]({% link docs/stable/sql/functions/text.md %}#printf-syntax) or [`format`]({% link docs/stable/sql/functions/text.md %}#fmt-syntax) functions, e.g.:
 
 ```sql
 SELECT printf('%.3f', x)

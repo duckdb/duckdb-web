@@ -34,7 +34,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | Name | Description |
 |:--|:-------|
 | [`current_date`](#current_date) | Current date (at start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
-| [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date. |
+| [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date and return a `DATETIME` value. |
 | [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition]({% link docs/stable/sql/functions/datepart.md %}) boundaries between the dates. |
 | [`date_part(part, date)`](#date_partpart-date) | Get the [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The number of complete [partitions]({% link docs/stable/sql/functions/datepart.md %}) between the dates. |
@@ -48,6 +48,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | [`greatest(date, date)`](#greatestdate-date) | The later of two dates. |
 | [`isfinite(date)`](#isfinitedate) | Returns true if the date is finite, false otherwise. |
 | [`isinf(date)`](#isinfdate) | Returns true if the date is infinite, false otherwise. |
+| [`julian(date)`](#juliandate) | Extract the Julian Day number from a date. |
 | [`last_day(date)`](#last_daydate) | The last day of the corresponding month in the date. |
 | [`least(date, date)`](#leastdate-date) | The earlier of two dates. |
 | [`make_date(year, month, day)`](#make_dateyear-month-day) | The date for the given parts. |
@@ -69,9 +70,9 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 
 <div class="nostroke_table"></div>
 
-| **Description** | Add the interval to the date. |
+| **Description** | Add the interval to the date and return a `DATETIME` value. |
 | **Example** | `date_add(DATE '1992-09-15', INTERVAL 2 MONTH)` |
-| **Result** | `1992-11-15` |
+| **Result** | `1992-11-15 00:00:00` |
 
 #### `date_diff(part, startdate, enddate)`
 
@@ -180,6 +181,14 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | **Description** | Returns `true` if the date is infinite, false otherwise. |
 | **Example** | `isinf(DATE '-infinity')` |
 | **Result** | `true` |
+
+#### `julian(date)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Extract the Julian Day number from a date. |
+| **Example** | `julian(DATE '1992-09-20')` |
+| **Result** | `2448886.0` |
 
 #### `last_day(date)`
 
