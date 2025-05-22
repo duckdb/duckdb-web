@@ -26,17 +26,17 @@ If you already have a Bearer token, you can pass it directly to your `CREATE SEC
 ```sql
 CREATE SECRET iceberg_secret (
     TYPE ICEBERG,
-    TOKEN '⟨one_time_token⟩'
+    TOKEN '⟨bearer_token⟩'
 );
 ```
 
 You can attach the Iceberg catalog with the following [`ATTACH`]({% link docs/stable/sql/statements/attach.md %}) statement.
 
 ```sql
-ATTACH '⟨warehouse-name⟩' AS iceberg_catalog (
+ATTACH '⟨warehouse⟩' AS iceberg_catalog (
    TYPE iceberg,
    SECRET iceberg_secret, -- pass a specific secret name to prevent ambiguity
-   ENDPOINT ⟨rest-catalog-endpoint⟩
+   ENDPOINT ⟨https://rest_endpoint.com⟩
 );
 ```
 
@@ -59,7 +59,7 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 | `CLIENT_SECRET`              | `VARCHAR`  | `NULL`   | CLIENT_SECRET needed for Secret                               |
 | `DEFAULT_REGION`             | `VARCHAR`  | `NULL`   | A Default region to use when communicating with the storage layer |
 | `OAUTH2_SERVER_URI`          | `VARCHAR`  | `NULL`   | OAuth2 server url for getting a Bearer Token                  |
-| `AUTHORIZATION_TYPE`         | `VARCHAR`  | `OAUTH2` | 'SigV4' is also allowed for Catalogs with SigV4 authorization |
+| `AUTHORIZATION_TYPE`         | `VARCHAR`  | `OAUTH2` | Pass `SigV4` for Catalogs the require SigV4 authorization |
 
 
 The following options can only be passed to a `CREATE SECRET` statement, and they require `AUTHORIZATION_TYPE` to be `OAUTH2`
@@ -89,13 +89,13 @@ You can create a token by following the [create an API token](https://developers
 Then, attach the catalog with the following commands.
 
 ```sql
-ATTACH '⟨warehouse-name⟩' AS my_r2_catalog (
+ATTACH '⟨warehouse⟩' AS my_r2_catalog (
     TYPE ICEBERG,
     ENDPOINT '⟨catalog-uri⟩'
 );
 ```
 
-The variables for `warehouse-name` and `catalog-uri` will be available under the settings of the desired R2 Object Storage Catalog (R2 Object Store > Catalog name > Settings).
+The variables for `warehouse` and `catalog-uri` will be available under the settings of the desired R2 Object Storage Catalog (R2 Object Store > Catalog name > Settings).
 
 ### Polaris
 
