@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/dialect/indexing
+- /docs/1.2/sql/dialect/indexing
 title: Indexing
 ---
 

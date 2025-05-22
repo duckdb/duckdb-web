@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/data/insert
+- /docs/1.2/data/insert
 title: INSERT Statements
 ---
 

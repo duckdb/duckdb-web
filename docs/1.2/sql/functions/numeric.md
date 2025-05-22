@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/test/functions/math
-- /docs/test/functions/math/
-- /docs/sql/functions/numeric
+- /docs/1.2/test/functions/math
+- /docs/1.2/test/functions/math/
+- /docs/1.2/sql/functions/numeric
 title: Numeric Functions
 ---
 

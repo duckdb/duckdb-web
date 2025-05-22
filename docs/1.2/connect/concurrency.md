@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/connect/concurrency
+- /docs/1.2/connect/concurrency
 title: Concurrency
 ---
 

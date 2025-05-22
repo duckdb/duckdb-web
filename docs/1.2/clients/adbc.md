@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/adbc
-- /docs/api/adbc/
-- /docs/clients/adbc
+- /docs/1.2/api/adbc
+- /docs/1.2/api/adbc/
+- /docs/1.2/clients/adbc
 title: ADBC Client
 ---
 

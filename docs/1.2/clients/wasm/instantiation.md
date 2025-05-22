@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/wasm/instantiation
-- /docs/api/wasm/instantiation/
-- /docs/clients/wasm/instantiation
+- /docs/1.2/api/wasm/instantiation
+- /docs/1.2/api/wasm/instantiation/
+- /docs/1.2/clients/wasm/instantiation
 title: Instantiation
 ---
 

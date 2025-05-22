@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/extensions
-- /docs/extensions/
-- /docs/extensions/overview
+- /docs/1.2/extensions
+- /docs/1.2/extensions/
+- /docs/1.2/extensions/overview
 title: Extensions
 ---
 

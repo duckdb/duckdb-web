@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/dev/building/r
+- /docs/1.2/dev/building/r
 title: R
 ---
 

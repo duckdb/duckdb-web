@@ -2,7 +2,7 @@
 layout: docu
 railroad: expressions/case.js
 redirect_from:
-- /docs/sql/expressions/case
+- /docs/1.2/sql/expressions/case
 title: CASE Expression
 ---
 

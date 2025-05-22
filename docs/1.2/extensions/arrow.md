@@ -2,7 +2,7 @@
 github_repository: https://github.com/duckdb/arrow
 layout: docu
 redirect_from:
-- /docs/extensions/arrow
+- /docs/1.2/extensions/arrow
 title: Arrow Extension
 ---
 

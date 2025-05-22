@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/dialect/overview
+- /docs/1.2/sql/dialect/overview
 title: Overview
 ---
 

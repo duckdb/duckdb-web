@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/python/execute_sql
+- /docs/1.2/guides/python/execute_sql
 title: Executing SQL in Python
 ---
 

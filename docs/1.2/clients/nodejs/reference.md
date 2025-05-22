@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/nodejs/reference
-- /docs/api/nodejs/reference/
-- /docs/clients/nodejs/reference
+- /docs/1.2/api/nodejs/reference
+- /docs/1.2/api/nodejs/reference/
+- /docs/1.2/clients/nodejs/reference
 title: Node.js API
 ---
 

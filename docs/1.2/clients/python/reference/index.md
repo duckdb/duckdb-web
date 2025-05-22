@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/python/reference/index
-- /docs/api/python/reference/index/
-- /docs/clients/python/reference/index
+- /docs/1.2/api/python/reference/index
+- /docs/1.2/api/python/reference/index/
+- /docs/1.2/clients/python/reference/index
 title: Python Client API
 ---
 

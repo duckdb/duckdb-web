@@ -1,6 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/file_formats/overview
+- /docs/1.2/guides/file_formats/overview
 title: File Formats
 ---

@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/import/read_file
-- /docs/guides/import/read_file/
-- /docs/guides/file_formats/read_file
+- /docs/1.2/guides/import/read_file
+- /docs/1.2/guides/import/read_file/
+- /docs/1.2/guides/file_formats/read_file
 title: Directly Reading Files
 ---
 

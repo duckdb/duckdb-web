@@ -1,6 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/statements/overview
+- /docs/1.2/sql/statements/overview
 title: Statements Overview
 ---

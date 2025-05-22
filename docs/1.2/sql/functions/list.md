@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/functions/list
+- /docs/1.2/sql/functions/list
 title: List Functions
 ---
 

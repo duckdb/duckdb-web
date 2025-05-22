@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/python/known_issues
-- /docs/api/python/known_issues/
-- /docs/clients/python/known_issues
+- /docs/1.2/api/python/known_issues
+- /docs/1.2/api/python/known_issues/
+- /docs/1.2/clients/python/known_issues
 title: Known Python Issues
 ---
 

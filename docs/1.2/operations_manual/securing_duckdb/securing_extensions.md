@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/operations_manual/securing_duckdb/securing_extensions
+- /docs/1.2/operations_manual/securing_duckdb/securing_extensions
 title: Securing Extensions
 ---
 

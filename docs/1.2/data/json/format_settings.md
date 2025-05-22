@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/data/json/format_settings
+- /docs/1.2/data/json/format_settings
 title: JSON Format Settings
 ---
 

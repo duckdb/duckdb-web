@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/python/multiple_threads
+- /docs/1.2/guides/python/multiple_threads
 title: Multiple Python Threads
 ---
 

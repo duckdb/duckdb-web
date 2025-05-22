@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/set.js
 redirect_from:
-- /docs/sql/statements/set
+- /docs/1.2/sql/statements/set
 title: SET and RESET Statements
 ---
 

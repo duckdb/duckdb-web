@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/import/parquet_export
-- /docs/guides/import/parquet_export/
-- /docs/guides/file_formats/parquet_export
+- /docs/1.2/guides/import/parquet_export
+- /docs/1.2/guides/import/parquet_export/
+- /docs/1.2/guides/file_formats/parquet_export
 title: Parquet Export
 ---
 

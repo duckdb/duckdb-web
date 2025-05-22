@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/odbc/general
+- /docs/1.2/guides/odbc/general
 title: 'ODBC 101: A Duck Themed Guide to ODBC'
 ---
 

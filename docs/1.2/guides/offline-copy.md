@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/offline-copy
+- /docs/1.2/guides/offline-copy
 title: Browsing Offline
 ---
 

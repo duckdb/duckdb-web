@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/import/s3_iceberg_import
-- /docs/guides/import/s3_iceberg_import/
-- /docs/guides/network_cloud_storage/s3_iceberg_import
+- /docs/1.2/guides/import/s3_iceberg_import
+- /docs/1.2/guides/import/s3_iceberg_import/
+- /docs/1.2/guides/network_cloud_storage/s3_iceberg_import
 selected: S3 Iceberg Import
 title: S3 Iceberg Import
 ---

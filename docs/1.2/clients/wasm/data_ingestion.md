@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/wasm/data_ingestion
-- /docs/api/wasm/data_ingestion/
-- /docs/clients/wasm/data_ingestion
+- /docs/1.2/api/wasm/data_ingestion
+- /docs/1.2/api/wasm/data_ingestion/
+- /docs/1.2/clients/wasm/data_ingestion
 title: Data Ingestion
 ---
 

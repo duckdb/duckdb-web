@@ -2,9 +2,9 @@
 github_repository: https://github.com/duckdb/duckdb-odbc
 layout: docu
 redirect_from:
-- /docs/api/odbc/macos
-- /docs/api/odbc/macos/
-- /docs/clients/odbc/macos
+- /docs/1.2/api/odbc/macos
+- /docs/1.2/api/odbc/macos/
+- /docs/1.2/clients/odbc/macos
 title: ODBC API on macOS
 ---
 

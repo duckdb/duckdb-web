@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/internals/pivot
+- /docs/1.2/internals/pivot
 title: Pivot Internals
 ---
 

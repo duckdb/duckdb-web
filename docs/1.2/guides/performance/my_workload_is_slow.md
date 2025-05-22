@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/performance/my-workload-is-slow
-- /docs/guides/performance/my-workload-is-slow/
-- /docs/guides/performance/my_workload_is_slow
+- /docs/1.2/guides/performance/my-workload-is-slow
+- /docs/1.2/guides/performance/my-workload-is-slow/
+- /docs/1.2/guides/performance/my_workload_is_slow
 title: My Workload Is Slow
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/data/csv
-- /docs/data/csv/
-- /docs/data/csv/overview
+- /docs/1.2/data/csv
+- /docs/1.2/data/csv/
+- /docs/1.2/data/csv/overview
 title: CSV Import
 ---
 

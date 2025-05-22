@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/dev/building/android
+- /docs/1.2/dev/building/android
 title: Android
 ---
 

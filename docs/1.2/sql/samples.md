@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/samples.js
 redirect_from:
-- /docs/sql/samples
+- /docs/1.2/sql/samples
 title: Samples
 ---
 

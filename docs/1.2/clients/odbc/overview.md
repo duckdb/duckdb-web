@@ -2,11 +2,11 @@
 github_repository: https://github.com/duckdb/duckdb-odbc
 layout: docu
 redirect_from:
-- /docs/api/odbc
-- /docs/api/odbc/
-- /docs/api/odbc/overview
-- /docs/api/odbc/overview/
-- /docs/clients/odbc/overview
+- /docs/1.2/api/odbc
+- /docs/1.2/api/odbc/
+- /docs/1.2/api/odbc/overview
+- /docs/1.2/api/odbc/overview/
+- /docs/1.2/clients/odbc/overview
 - /docs/1.2/clients/odbc
 - /docs/1.2/clients/odbc/
 title: ODBC API Overview

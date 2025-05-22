@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/insert.js
 redirect_from:
-- /docs/sql/statements/insert
+- /docs/1.2/sql/statements/insert
 title: INSERT Statement
 ---
 

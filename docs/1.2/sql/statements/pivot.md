@@ -4,7 +4,7 @@ blurb: The PIVOT statement allows values within a column to be separated into th
 layout: docu
 railroad: statements/pivot.js
 redirect_from:
-- /docs/sql/statements/pivot
+- /docs/1.2/sql/statements/pivot
 title: PIVOT Statement
 ---
 

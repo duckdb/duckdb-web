@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/sql_editors/dbeaver
+- /docs/1.2/guides/sql_editors/dbeaver
 title: DBeaver SQL IDE
 ---
 

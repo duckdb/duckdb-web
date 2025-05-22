@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/python/jupyter
+- /docs/1.2/guides/python/jupyter
 title: Jupyter Notebooks
 ---
 

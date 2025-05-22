@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/statements/analyze
+- /docs/1.2/sql/statements/analyze
 title: ANALYZE Statement
 ---
 

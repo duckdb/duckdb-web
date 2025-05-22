@@ -1,9 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /dev/sqllogictest/multiple_connections
-- /dev/sqllogictest/multiple_connections/
-- /docs/dev/sqllogictest/multiple_connections
+- /docs/1.2/dev/sqllogictest/multiple_connections
 title: Multiple Connections
 ---
 
