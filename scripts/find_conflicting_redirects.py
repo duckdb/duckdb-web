@@ -12,6 +12,8 @@ for file in glob.glob("docs/**/*.md", recursive=True):
             doc_redirects = doc.metadata["redirect_from"]
             for doc_redirect in doc_redirects:
                 if doc_redirect in all_redirects:
-                    print(f"{file}: {doc_redirect} already occurs in {all_redirects[doc_redirect]}")
+                    print(
+                        f"{file}: {doc_redirect} already occurs in {all_redirects[doc_redirect]}"
+                    )
                 else:
                     all_redirects[doc_redirect] = file
