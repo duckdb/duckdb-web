@@ -56,7 +56,7 @@ So what is this little box capable of? We used the [TPC-H workload](https://www.
 
 We first updated the Raspberry Pi OS (a fork of Debian Linux) to its latest version, 2024-11-19.
 We then compiled DuckDB [version `0024e5d4be`](https://github.com/duckdb/duckdb/commit/0024e5d4be) using the [Raspberry Pi build instructions]({% link docs/stable/dev/building/raspberry_pi.md %}).
-To make the queries easy to run, we also included the [TPC-H extension]({% link docs/stable/extensions/tpch.md %}) in the build:
+To make the queries easy to run, we also included the [TPC-H extension]({% link docs/stable/core_extensions/tpch.md %}) in the build:
 
 ```batch
 GEN=ninja CORE_EXTENSIONS="tpch" make

@@ -66,7 +66,9 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
 
 * [Auto-detecting the headers and schema of CSV files]({% link docs/preview/data/csv/auto_detection.md %})
 * Directly querying [CSV files]({% link docs/preview/data/csv/overview.md %}) and [Parquet files]({% link docs/preview/data/parquet/overview.md %})
-* Loading from files using the syntax `FROM 'my.csv'`, `FROM 'my.csv.gz'`, `FROM 'my.parquet'`, etc.
+* [Replacement scans]({% link docs/preview/guides/glossary.md %}):
+    * You can load from files using the syntax `FROM 'my.csv'`, `FROM 'my.csv.gz'`, `FROM 'my.parquet'`, etc.
+    * In Python, you can [access Pandas data frames using `FROM df`]({% link docs/preview/guides/python/export_pandas.md %}).
 * [Filename expansion (globbing)]({% link docs/preview/sql/functions/pattern_matching.md %}#globbing), e.g.: `FROM 'my-data/part-*.parquet'`
 
 ## Functions and Expressions

@@ -14,7 +14,7 @@ The `PRAGMA` statement is a SQL extension adopted by DuckDB from SQLite. `PRAGMA
 `PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement]({% link docs/stable/sql/statements/set.md %}) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
 
 For DuckDB's built in configuration options, see the [Configuration Reference]({% link docs/stable/configuration/overview.md %}#configuration-reference).
-DuckDB [extensions]({% link docs/stable/extensions/overview.md %}) may register additional configuration options.
+DuckDB [extensions]({% link docs/stable/core_extensions/overview.md %}) may register additional configuration options.
 These are documented in the respective extensions' documentation pages.
 
 This page contains the supported `PRAGMA` settings.
@@ -463,7 +463,7 @@ SET log_query_path = '';
 
 ## Full-Text Search Indexes
 
-The `create_fts_index` and `drop_fts_index` options are only available when the [`fts` extension]({% link docs/stable/extensions/full_text_search.md %}) is loaded. Their usage is documented on the [Full-Text Search extension page]({% link docs/stable/extensions/full_text_search.md %}).
+The `create_fts_index` and `drop_fts_index` options are only available when the [`fts` extension]({% link docs/stable/core_extensions/full_text_search.md %}) is loaded. Their usage is documented on the [Full-Text Search extension page]({% link docs/stable/core_extensions/full_text_search.md %}).
 
 ## Verification
 

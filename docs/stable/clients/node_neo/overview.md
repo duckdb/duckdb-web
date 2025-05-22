@@ -934,7 +934,7 @@ const result = await pending.getResult();
 // ...
 ```
 
-### Ways to run SQL
+### Ways to Run SQL
 
 ```ts
 // Run to completion but don't yet retrieve any rows.
@@ -1040,7 +1040,7 @@ const reader = await pending.readAll();
 const reader = await pending.readUntil(targetRowCount);
 ```
 
-### Ways to get result data
+### Ways to Get Result Data
 
 ```ts
 // From a result

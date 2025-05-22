@@ -19,7 +19,7 @@ INSERT INTO integers VALUES (NULL);
 
 > Any comparison with a `NULL` value returns `NULL`, including `NULL = NULL`.
 
-You can use `IS NOT DISTINCT FROM` to perform an equality comparison where `NULL` values compare equal to each other. Use `IS NULL` or `IS NOT NULL` to check if a value is `NULL`.
+You can use `IS NOT DISTINCT FROM` to perform an equality comparison where `NULL` values compare equal to each other. Use `IS (NOT) NULL` to check if a value is `NULL`.
 
 ```sql
 SELECT NULL = NULL;

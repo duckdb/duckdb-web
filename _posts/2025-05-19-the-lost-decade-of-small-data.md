@@ -40,7 +40,7 @@ Moving on to DuckDB itself: here at DuckDB we are more than a little religious a
 
 ## Benchmarks
 
-But we're not interested in synthetic CPU scores, we're interested in [synthetic SQL scores](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) instead! To see how the old girl is holding up when performing _serious_ data crunching, we used the _at this point rather tired but well-known TPC-H benchmark_ at scale factor 1000. This means that the two main tables, `lineitem` and `orders` contain 6 and 1.5 Billion rows, respectively. When stored as a DuckDB database, the database has a size of ca. 265 GB.
+But we're not interested in synthetic CPU scores, we're interested in [synthetic SQL scores](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) instead! To see how the old machine is holding up when performing _serious_ data crunching, we used the _at this point rather tired but well-known TPC-H benchmark_ at scale factor 1000. This means that the two main tables, `lineitem` and `orders` contain 6 and 1.5 Billion rows, respectively. When stored as a DuckDB database, the database has a size of ca. 265 GB.
 
 From the [audited results on the TPC website](https://www.tpc.org/tpch/results/tpch_advanced_sort_V35.asp?PRINTVER=false&VERSION=3&FLTCOL1=h_sf&FLTCOLOPR1=%3D&FLTCHO1=1000&ADDFILTERROW=&filterRowCount=1&SRTCOL1=h_sponsor&SRTDIR1=ASC&ADDSORTROW=&sortRowCount=1&DISPRES=100++++PERCENT&include_withdrawn_results=none&include_historic_results=yes&include_specification_revision=ON&include_server_cpu=ON&include_total_system_price=ON&include_cluster_info=ON), we can see that running the benchmark on this scale factor on a single node seems to require hardware costing hundreds of thousands of Dollars.
 
@@ -86,7 +86,7 @@ But what do those cold numbers actually mean? The hidden sensation is that we ac
 
 But how do those results stack up against a modern MacBook? As a comparison point, we used a modern ARM-based [M3 Max MacBook Pro](https://everymac.com/systems/apple/macbook_pro/specs/macbook-pro-m3-max-16-core-cpu-40-core-gpu-14-late-2023-specs.html), which happened to be sitting on the same desk. But between them, the two MacBooks represent more than a decade of hardware development.
 
-Looking at [GeekBench 5 benchmark scores](https://everymac.com/ultimate-mac-comparison-chart/?compare=all-macs&highlight=0&prod1=MacBookPro159&prod2=MacBookPro063&prod3=) alone, we see a ca. 7x difference in raw CPU speed when using all cores, and ca. factor 3 difference in single-core speed. Of course there are also big differences in RAM and SSD speeds. Funnily, the display size and resolution are almost unchanged.
+Looking at [GeekBench 5 benchmark scores](https://everymac.com/ultimate-mac-comparison-chart/?compare=all-macs&highlight=0&prod1=MacBookPro159&prod2=MacBookPro063&prod3=) alone, we see a ca. 7× difference in raw CPU speed when using all cores, and ca. factor 3 difference in single-core speed. Of course there are also big differences in RAM and SSD speeds. Funnily, the display size and resolution are almost unchanged.
 
 Here are the results side-by-side:
 
@@ -115,7 +115,7 @@ Here are the results side-by-side:
 |    21 |      1011.9 |        47.8 |   21.17 |
 |    22 |        57.7 |         4.3 |   13.42 |
 
-We do see significant speedups, between 7 up to as much as 53. The [geometric mean](https://en.wikipedia.org/wiki/Geometric_mean) of the timings improved from 218 to 12, a ca. 20x improvement.
+We do see significant speedups, from 7 up to as much as 53. The [geometric mean](https://en.wikipedia.org/wiki/Geometric_mean) of the timings improved from 218 to 12, a ca. 20× improvement.
 
 ## Reproducibility
 
@@ -130,6 +130,6 @@ From a user perspective, it matters much more that those queries complete in som
 
 What is perhaps more interesting is that back in 2012, it would have been completely feasible to have a single-node SQL engine like DuckDB that could run complex analytical SQL queries against a database of 6 billion rows in manageable time – and we did not even have to [immerse it in dry ice this time](https://youtu.be/H1N2Jr34jwU?si=xCxQqZcLs8WA_5Yl&t=1763).
 
-History is full of “what if”s, what if something like DuckDB had existed in 2012? The main ingredients where there, vectorized query processing had [already been invented in 2005](https://www.cidrdb.org/cidr2005/papers/P19.pdf). Would the now somewhat-silly-looking move to distributed systems for data analysis have ever happened? The dataset size of our benchmark database was awfully close to that 99.9% percentile of input data volume for analytical queries in 2024. And while the retina MacBook Pro was a high-end machine in 2012, by 2014 many other vendors shifted to offering laptops with built-in SSD storage and larger amounts of memory became more widespread.
+History is full of “what if”s, what if something like DuckDB had existed in 2012? The main ingredients were there, vectorized query processing had [already been invented in 2005](https://www.cidrdb.org/cidr2005/papers/P19.pdf). Would the now somewhat-silly-looking move to distributed systems for data analysis have ever happened? The dataset size of our benchmark database was awfully close to that 99.9% percentile of input data volume for analytical queries in 2024. And while the retina MacBook Pro was a high-end machine in 2012, by 2014 many other vendors shifted to offering laptops with built-in SSD storage and larger amounts of memory became more widespread.
 
 So, yes, we really did lose a full decade.

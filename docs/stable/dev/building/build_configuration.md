@@ -48,7 +48,7 @@ The CI will also run this check, causing it to fail if this check fails.
 
 ## Extension Selection
 
-[Core DuckDB extensions]({% link docs/stable/extensions/core_extensions.md %}) are the ones maintained by the DuckDB team. These are hosted in the `duckdb` GitHub organization and are served by the `core` extension repository.
+[Core DuckDB extensions]({% link docs/stable/core_extensions/overview.md %}) are the ones maintained by the DuckDB team. These are hosted in the `duckdb` GitHub organization and are served by the `core` extension repository.
 
 Core extensions can be built as part of DuckDB via the `CORE_EXTENSIONS` flag, then listing the names of the extensions that are to be built.
 
@@ -78,7 +78,7 @@ When this flag is set, the [CLI]({% link docs/stable/clients/cli/overview.md %})
 ### `BUILD_BENCHMARK`
 
 When this flag is set, DuckDB's in-house benchmark suite is built.
-More information about this can be found [here](https://github.com/duckdb/duckdb/blob/main/benchmark/README.md).
+More information about this can be found [in the README](https://github.com/duckdb/duckdb/blob/main/benchmark/README.md).
 
 ### `BUILD_JDBC`
 

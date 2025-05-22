@@ -400,7 +400,7 @@ COPY (
   ) TO '/dev/stdout/' (HEADER false);
 ```
 
-For the second question, we use [string slicing]({% link docs/stable/sql/functions/char.md %}#stringbeginend) to extract the first three characters, [`upper`]({% link docs/stable/sql/functions/char.md %}#upperstring) to ensure case-insensitivity, and `NOT LIKE` for the negative condition:
+For the second question, we use [string slicing]({% link docs/stable/sql/functions/text.md %}#stringbeginend) to extract the first three characters, [`upper`]({% link docs/stable/sql/functions/text.md %}#upperstring) to ensure case-insensitivity, and `NOT LIKE` for the negative condition:
 
 ```plsql
 COPY (
@@ -516,10 +516,10 @@ COPY (
 ```
 
 Note that the `FROM` clause now has an HTTPS URL instead of a simple CSV file.
-The presence of the `https://` prefix triggers DuckDB to load the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) and use it to fetch the JSON document.
-We use the [`replace` function]({% link docs/stable/sql/functions/char.md %}#replacestring-source-target) to substitute the spaces with underscores,
-and the [`regexp_replace` function]({% link docs/stable/sql/functions/char.md %}#regexp_replacestring-pattern-replacement) for the replacement using a regular expression.
-(We could have also used string formatting functions such as [`format`]({% link docs/stable/sql/functions/char.md %}#fmt-syntax) and [`printf`]({% link docs/stable/sql/functions/char.md %}#printf-syntax)).
+The presence of the `https://` prefix triggers DuckDB to load the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) and use it to fetch the JSON document.
+We use the [`replace` function]({% link docs/stable/sql/functions/text.md %}#replacestring-source-target) to substitute the spaces with underscores,
+and the [`regexp_replace` function]({% link docs/stable/sql/functions/text.md %}#regexp_replacestring-pattern-replacement) for the replacement using a regular expression.
+(We could have also used string formatting functions such as [`format`]({% link docs/stable/sql/functions/text.md %}#fmt-syntax) and [`printf`]({% link docs/stable/sql/functions/text.md %}#printf-syntax)).
 To change the separator to a semicolon, we serialize the file using the `COPY` statement with the `DELIMITER ';'` option.
 
 ### Reading JSON

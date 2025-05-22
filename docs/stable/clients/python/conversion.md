@@ -89,6 +89,8 @@ The `dict` object can convert to either `STRUCT(...)` or `MAP(..., ...)` dependi
 If the dict has a structure similar to:
 
 ```python
+import duckdb
+
 my_map_dict = {
     "key": [
         1, 2, 3
@@ -97,13 +99,56 @@ my_map_dict = {
         "one", "two", "three"
     ]
 }
+
+duckdb.values(my_map_dict)
 ```
 
 Then we'll convert it to a `MAP` of key-value pairs of the two lists zipped together.
 The example above becomes a `MAP(INTEGER, VARCHAR)`:
 
-```sql
-{1=one, 2=two, 3=three}
+```text
+┌─────────────────────────┐
+│ {1=one, 2=two, 3=three} │
+│  map(integer, varchar)  │
+├─────────────────────────┤
+│ {1=one, 2=two, 3=three} │
+└─────────────────────────┘
+```
+
+If the dict is returned by a [function]({% link docs/stable/clients/python/function.md %}), 
+the function will return a `MAP`, therefore the function `return_type` has to be specified. Providing
+a return type which cannot convert to `MAP` will raise an error:
+```python
+import duckdb
+duckdb_conn = duckdb.connect()
+
+def get_map() -> dict[str,list[str]|list[int]]:
+    return {
+        "key": [
+            1, 2, 3
+        ],
+        "value": [
+            "one", "two", "three"
+        ]
+    }
+
+duckdb_conn.create_function("get_map", get_map, return_type=dict[int, str])
+
+duckdb_conn.sql("select get_map()").show()
+
+duckdb_conn.create_function("get_map_error", get_map)
+
+duckdb_conn.sql("select get_map_error()").show()
+```
+ ```text
+┌─────────────────────────┐
+│        get_map()        │
+│  map(bigint, varchar)   │
+├─────────────────────────┤
+│ {1=one, 2=two, 3=three} │
+└─────────────────────────┘
+
+ConversionException: Conversion Error: Type VARCHAR can't be cast as UNION(u1 VARCHAR[], u2 BIGINT[]). VARCHAR can't be implicitly cast to any of the union member types: VARCHAR[], BIGINT[]
 ```
 
 > The names of the fields matter and the two lists need to have the same size.
@@ -111,20 +156,77 @@ The example above becomes a `MAP(INTEGER, VARCHAR)`:
 Otherwise we'll try to convert it to a `STRUCT`.
 
 ```python
+import duckdb
+
 my_struct_dict = {
     1: "one",
     "2": 2,
     "three": [1, 2, 3],
     False: True
 }
-```
 
+duckdb.values(my_struct_dict)
+```
 Becomes:
 
-```sql
-{'1': one, '2': 2, 'three': [1, 2, 3], 'False': true}
+```text
+┌────────────────────────────────────────────────────────────────────┐
+│      {'1': 'one', '2': 2, 'three': [1, 2, 3], 'False': true}       │
+│ struct("1" varchar, "2" integer, three integer[], "false" boolean) │
+├────────────────────────────────────────────────────────────────────┤
+│ {'1': one, '2': 2, 'three': [1, 2, 3], 'False': true}              │
+└────────────────────────────────────────────────────────────────────┘
 ```
 
+If the dict is returned by a [function]({% link docs/stable/clients/python/function.md %}), 
+the function will return a `MAP`, due to [automatic conversion]({% link docs/stable/clients/python/types.md %}#dictkey_type-value_type).
+To return a `STRUCT`, the `return_type` has to be provided:
+```python
+import duckdb
+from duckdb.typing import BOOLEAN, INTEGER, VARCHAR
+from duckdb import list_type, struct_type
+
+duckdb_conn = duckdb.connect()
+
+my_struct_dict = {
+    1: "one",
+    "2": 2,
+    "three": [1, 2, 3],
+    False: True
+}
+
+def get_struct() -> dict[str|int|bool,str|int|list[int]|bool]:
+    return my_struct_dict
+
+duckdb_conn.create_function("get_struct_as_map", get_struct)
+
+duckdb_conn.sql("select get_struct_as_map()").show()
+
+duckdb_conn.create_function("get_struct", get_struct, return_type=struct_type({
+    1: VARCHAR,
+    "2": INTEGER,
+    "three": list_type(duckdb.typing.INTEGER),
+    False: BOOLEAN
+}))
+
+duckdb_conn.sql("select get_struct()").show()
+```
+
+```text
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                         get_struct_as_map()                                          │
+│ map(union(u1 varchar, u2 bigint, u3 boolean), union(u1 varchar, u2 bigint, u3 bigint[], u4 boolean)) │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ {1=one, 2=2, three=[1, 2, 3], false=true}                                                            │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────┐
+│                            get_struct()                            │
+│ struct("1" varchar, "2" integer, three integer[], "false" boolean) │
+├────────────────────────────────────────────────────────────────────┤
+│ {'1': one, '2': 2, 'three': [1, 2, 3], 'False': true}              │
+└────────────────────────────────────────────────────────────────────┘
+```
 > Every `key` of the dictionary is converted to string.
 
 ### `tuple`

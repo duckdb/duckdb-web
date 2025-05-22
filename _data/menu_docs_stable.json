@@ -785,6 +785,10 @@
                 {
                   "page": "Subqueries",
                   "url": "subqueries"
+                },
+                {
+                  "page": "TRY",
+                  "url": "try"
                 }
               ]
             },
@@ -866,7 +870,7 @@
                 },
                 {
                   "page": "Text Functions",
-                  "url": "char"
+                  "url": "text"
                 },
                 {
                   "page": "Time Functions",
@@ -983,14 +987,6 @@
               "url": "overview"
             },
             {
-              "page": "Core Extensions",
-              "url": "core_extensions"
-            },
-            {
-              "page": "Community Extensions",
-              "url": "community_extensions"
-            },
-            {
               "page": "Installing Extensions",
               "url": "installing_extensions"
             },
@@ -1009,10 +1005,16 @@
             {
               "page": "Troubleshooting of Extensions",
               "url": "troubleshooting"
-            },
+            }
+          ]
+        },
+        {
+          "page": "Core Extensions",
+          "slug": "core_extensions",
+          "subfolderitems": [
             {
-              "page": "Arrow",
-              "url": "arrow"
+              "page": "Overview",
+              "url": "overview"
             },
             {
               "page": "AutoComplete",
@@ -1033,6 +1035,10 @@
             {
               "page": "Delta",
               "url": "delta"
+            },
+            {
+              "page": "Encodings",
+              "url": "encodings"
             },
             {
               "page": "Excel",
@@ -1381,6 +1387,10 @@
                 {
                   "page": "Benchmarks",
                   "url": "benchmarks"
+                },
+                {
+                  "page": "Working with Huge Databases",
+                  "url": "working_with_huge_databases"
                 }
               ]
             },
@@ -1399,6 +1409,10 @@
                 {
                   "page": "Jupyter Notebooks",
                   "url": "jupyter"
+                },
+                {
+                  "page": "marimo Notebooks",
+                  "url": "marimo"
                 },
                 {
                   "page": "SQL on Pandas",
@@ -1509,6 +1523,20 @@
                 {
                   "page": "Copying an In-Memory Database to a File",
                   "url": "copy_in-memory_database_to_file"
+                }
+              ]
+            },
+            {
+              "page": "Troubleshooting",
+              "slug": "troubleshooting",
+              "subsubfolderitems": [
+                {
+                  "page": "Crashes",
+                  "url": "crashes"
+                },
+                {
+                  "page": "Out of Memory Errors",
+                  "url": "oom_errors"
                 }
               ]
             },

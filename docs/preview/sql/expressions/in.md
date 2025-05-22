@@ -4,7 +4,7 @@ railroad: expressions/in.js
 title: IN Operator
 ---
 
-The `IN` operator checks containment of the left expression inside the _collection_ on the right hand side (RHS). 
+The `IN` operator checks containment of the left expression inside the _collection_ on the right hand side (RHS).
 Supported collections on the RHS are tuples, lists, maps and subqueries that return a single column.
 
 <div id="rrdiagram"></div>
@@ -48,7 +48,7 @@ NULL
 ## `IN [val1, val2, ...]` (List)
 
 The `IN` operator works on lists according to the semantics used in Python.
-Unlike for the [`IN ⟨collection⟩` operator](#in-collection), the presence of `NULL` values on the right hand side of the expression does not make a difference in the result:
+Unlike for the [`IN tuple` operator](#in-val1-val2--tuple), the presence of `NULL` values on the right hand side of the expression does not make a difference in the result:
 
 ```sql
 SELECT 'Math' IN ['CS', 'Math', NULL];
