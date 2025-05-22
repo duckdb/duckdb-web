@@ -156,7 +156,7 @@ CREATE OR REPLACE SECRET secret (
 );
 ```
 
-Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpoint URL for you. Also note that for `R2` Secrets can also use both the `CONFIG` and `credential_chain` providers. Finally, `R2` secrets are only available when using URLs starting with `r2://`, for example:
+Note the addition of the `ACCOUNT_ID` which is used to generate the correct endpoint URL for you. Also note that `R2` Secrets can also use both the `CONFIG` and `credential_chain` providers. However, since DuckDB uses an AWS client internally, when using `credential_chain`, the client will search for AWS credentials in the standard AWS credential locations (environment variables, credential files, etc.). Therefore, your R2 credentials must be made available as AWS environment variables (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) for the credential chain to work properly. Finally, `R2` secrets are only available when using URLs starting with `r2://`, for example:
 
 ```sql
 SELECT *
@@ -170,12 +170,14 @@ While [Google Cloud Storage](https://cloud.google.com/storage) is accessed by Du
 ```sql
 CREATE OR REPLACE SECRET secret (
     TYPE gcs,
-    KEY_ID '⟨my_key⟩',
-    SECRET '⟨my_secret⟩'
+    KEY_ID '⟨my_hmac_access_id⟩',
+    SECRET '⟨my_hmac_secret_key⟩'
 );
 ```
 
-Note that the above secret, will automatically have the correct Google Cloud Storage endpoint configured. Also note that for `GCS` Secrets can also use both the `CONFIG` and `credential_chain` providers. Finally, `GCS` secrets are only available when using URLs starting with `gcs://` or `gs://`, for example:
+**Important**: The `KEY_ID` and `SECRET` values must be HMAC keys generated specifically for Google Cloud Storage interoperability. These are not the same as regular GCP service account keys or access tokens. You can create HMAC keys by following the [Google Cloud documentation for managing HMAC keys](https://cloud.google.com/storage/docs/authentication/managing-hmackeys).
+
+Note that the above secret will automatically have the correct Google Cloud Storage endpoint configured. Also note that `GCS` Secrets can also use both the `CONFIG` and `credential_chain` providers. However, since DuckDB uses an AWS client internally, when using `credential_chain`, the client will search for AWS credentials in the standard AWS credential locations (environment variables, credential files, etc.). Therefore, your GCS HMAC keys must be made available as AWS environment variables (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) for the credential chain to work properly. Finally, `GCS` secrets are only available when using URLs starting with `gcs://` or `gs://`, for example:
 
 ```sql
 SELECT *
