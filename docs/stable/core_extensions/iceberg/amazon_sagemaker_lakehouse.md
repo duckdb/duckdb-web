@@ -1,17 +1,16 @@
 ---
 layout: docu
 title: Amazon SageMaker Lakehouse (AWS Glue)
+redirect_from:
 - /docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse
 - /docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse/
 ---
 
 The `iceberg` extension supports reading Iceberg tables through the [Amazon SageMaker Lakehouse (a.k.a. AWS Glue)](https://aws.amazon.com/sagemaker/lakehouse/) catalog. Make sure you have the Iceberg extension installed by following the steps at [Installing and Loading]({% link docs/stable/core_extensions/iceberg/overview.md %})
 
-
 ## Connecting to Amazon SageMaker Lakehouse
 
 Configure your role, region, and credential provider (or explicit credentials) using the [Secrets Manager]({% link docs/stable/configuration/secrets_manager.md %}):
-
 
 ```sql
 CREATE SECRET (
