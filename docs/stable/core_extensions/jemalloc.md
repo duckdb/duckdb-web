@@ -1,7 +1,6 @@
 ---
 github_directory: https://github.com/duckdb/duckdb/tree/main/extension/jemalloc
 layout: docu
-redirect_from: null
 title: jemalloc Extension
 ---
 

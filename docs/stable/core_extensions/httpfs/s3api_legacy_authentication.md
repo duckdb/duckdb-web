@@ -1,6 +1,5 @@
 ---
 layout: docu
-redirect_from: null
 title: Legacy Authentication Scheme for S3 API
 ---
 

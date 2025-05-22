@@ -1,7 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-vss
 layout: docu
-redirect_from: null
 title: Vector Similarity Search Extension
 ---
 

@@ -1,6 +1,5 @@
 ---
 layout: docu
-redirect_from: null
 title: Amazon SageMaker Lakehouse (AWS Glue)
 ---
 

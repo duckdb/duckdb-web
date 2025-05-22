@@ -1,7 +1,9 @@
 ---
 layout: docu
-redirect_from: null
 title: Text Functions
+redirect_from:
+- docs/stable/sql/functions/char
+- docs/stable/sql/functions/char/
 ---
 
 <!-- markdownlint-disable MD001 -->

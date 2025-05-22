@@ -1,7 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-mysql
 layout: docu
-redirect_from: null
 title: MySQL Extension
 ---
 
