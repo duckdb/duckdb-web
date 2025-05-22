@@ -55,6 +55,17 @@ SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
 Currently, `DEFAULT` enables both syntax styles, i.e., the old single arrow syntax and the Python-style syntax. DuckDB 1.4.0 will be the last release supporting the single arrow syntax without explicitly enabling it. DuckDB 1.5.0 will disable the single arrow syntax by default. DuckDB 1.6.0 will remove the `lambda_syntax` flag and fully deprecate the single arrow syntax,
 so the old behavior will no longer be accessible.
 
+### Serializing Strings in List with Escapes
+
+Starting with the new version, DuckDB escapes characters such as `'` in strings serialized in nested data structures to allow round-tripping between the serialized string and the nested representation.
+For example:
+
+```sql
+SELECT ['hello ''my'' world'] AS s;
+```
+
+DuckDB version 1.2.2 returns `[hello 'my' world]` while DuckDB 1.3.0 returns `['hello \'my\' world']`.
+
 ### Minor SQL Parser Changes
 
 * The term `AT` now needs quotes to be used as an identifier as it is used for [time travel in Iceberg](https://github.com/duckdb/duckdb-iceberg/pull/225).
