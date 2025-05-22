@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: HTTP(S) Support
+redirect_from:
+- /docs/stable/extensions/httpfs/https
+- /docs/stable/extensions/httpfs/https/
 ---
 
 With the `httpfs` extension, it is possible to directly query files over the HTTP(S) protocol. This works for all files supported by DuckDB or its various extensions, and provides read-only access.

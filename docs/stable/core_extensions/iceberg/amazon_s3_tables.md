@@ -1,10 +1,12 @@
 ---
 layout: docu
 title: Amazon S3 Tables
+redirect_from:
+- /docs/stable/extensions/iceberg/amazon_s3_tables
+- /docs/stable/extensions/iceberg/amazon_s3_tables/
 ---
 
 The `iceberg` extension supports reading Iceberg tables stored in [Amazon S3 Tables](https://aws.amazon.com/s3/features/tables/). Make sure you have the Iceberg extension installed by following the steps at [Installing and Loading]({% link docs/stable/core_extensions/iceberg/overview.md %})
-
 
 ## Connecting to Amazon S3 Tables
 

@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: S3 API Support
+redirect_from:
+- /docs/stable/extensions/httpfs/s3api
+- /docs/stable/extensions/httpfs/s3api/
 ---
 
 The `httpfs` extension supports reading/writing/[globbing](#globbing) files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
