@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/functions/lambda
+- /docs/1.2/sql/functions/lambda
 title: Lambda Functions
 ---
 

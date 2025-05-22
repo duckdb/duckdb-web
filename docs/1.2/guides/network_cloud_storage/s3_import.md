@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/import/s3_import
-- /docs/guides/import/s3_import/
-- /docs/guides/network_cloud_storage/s3_import
+- /docs/1.2/guides/import/s3_import
+- /docs/1.2/guides/import/s3_import/
+- /docs/1.2/guides/network_cloud_storage/s3_import
 title: S3 Parquet Import
 ---
 

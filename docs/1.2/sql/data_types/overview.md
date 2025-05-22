@@ -2,7 +2,7 @@
 blurb: The table below shows all the built-in general-purpose data types.
 layout: docu
 redirect_from:
-- /docs/sql/data_types/overview
+- /docs/1.2/sql/data_types/overview
 title: Data Types
 ---
 

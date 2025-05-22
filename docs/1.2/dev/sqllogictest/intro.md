@@ -1,9 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /dev/sqllogictest/intro
-- /dev/sqllogictest/intro/
-- /docs/dev/sqllogictest/intro
+- /docs/1.2/dev/sqllogictest/intro
 title: sqllogictest Introduction
 ---
 

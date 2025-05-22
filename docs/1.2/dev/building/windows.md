@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/dev/building/windows
+- /docs/1.2/dev/building/windows
 title: Windows
 ---
 

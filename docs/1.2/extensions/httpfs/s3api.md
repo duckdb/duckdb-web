@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/extensions/httpfs/s3api
+- /docs/1.2/extensions/httpfs/s3api
 title: S3 API Support
 ---
 

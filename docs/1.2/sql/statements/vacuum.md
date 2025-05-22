@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/vacuum.js
 redirect_from:
-- /docs/sql/statements/vacuum
+- /docs/1.2/sql/statements/vacuum
 title: VACUUM Statement
 ---
 

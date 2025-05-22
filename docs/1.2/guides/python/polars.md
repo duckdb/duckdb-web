@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/python/polars
+- /docs/1.2/guides/python/polars
 title: Integration with Polars
 ---
 

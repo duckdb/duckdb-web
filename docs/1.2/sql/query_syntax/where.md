@@ -2,7 +2,7 @@
 layout: docu
 railroad: query_syntax/where.js
 redirect_from:
-- /docs/sql/query_syntax/where
+- /docs/1.2/sql/query_syntax/where
 title: WHERE Clause
 ---
 

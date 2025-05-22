@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/c/query
-- /docs/api/c/query/
-- /docs/clients/c/query
+- /docs/1.2/api/c/query
+- /docs/1.2/api/c/query/
+- /docs/1.2/clients/c/query
 title: Query
 ---
 

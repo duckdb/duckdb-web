@@ -1,11 +1,11 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/python/conversion
-- /docs/api/python/conversion/
-- /docs/api/python/result_conversion
-- /docs/api/python/result_conversion/
-- /docs/clients/python/conversion
+- /docs/1.2/api/python/conversion
+- /docs/1.2/api/python/conversion/
+- /docs/1.2/api/python/result_conversion
+- /docs/1.2/api/python/result_conversion/
+- /docs/1.2/clients/python/conversion
 title: Conversion between DuckDB and Python
 ---
 

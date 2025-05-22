@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/test/functions/char
-- /docs/test/functions/char/
-- /docs/sql/functions/char
+- /docs/1.2/test/functions/char
+- /docs/1.2/test/functions/char/
+- /docs/1.2/sql/functions/char
 title: Text Functions
 ---
 

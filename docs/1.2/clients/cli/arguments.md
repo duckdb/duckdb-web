@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/cli/arguments
-- /docs/cli/arguments/
-- /docs/clients/cli/arguments
+- /docs/1.2/cli/arguments
+- /docs/1.2/cli/arguments/
+- /docs/1.2/clients/cli/arguments
 title: Command Line Arguments
 ---
 

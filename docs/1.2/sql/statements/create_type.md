@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/createtype.js
 redirect_from:
-- /docs/sql/statements/create_type
+- /docs/1.2/sql/statements/create_type
 title: CREATE TYPE Statement
 ---
 

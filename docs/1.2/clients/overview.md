@@ -1,11 +1,11 @@
 ---
 layout: docu
 redirect_from:
-- /docs/clients
-- /docs/clients/
-- /docs/api/overview
-- /docs/api/overview/
-- /docs/clients/overview
+- /docs/1.2/clients
+- /docs/1.2/clients/
+- /docs/1.2/api/overview
+- /docs/1.2/api/overview/
+- /docs/1.2/clients/overview
 title: Client Overview
 ---
 

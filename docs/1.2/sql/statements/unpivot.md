@@ -4,7 +4,7 @@ blurb: The UNPIVOT statement allows columns to be stacked into rows that indicat
 layout: docu
 railroad: statements/unpivot.js
 redirect_from:
-- /docs/sql/statements/unpivot
+- /docs/1.2/sql/statements/unpivot
 title: UNPIVOT Statement
 ---
 

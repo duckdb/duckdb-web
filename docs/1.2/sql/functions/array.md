@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/functions/array
+- /docs/1.2/sql/functions/array
 title: Array Functions
 ---
 

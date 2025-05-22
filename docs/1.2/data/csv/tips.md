@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/data/csv/tips
+- /docs/1.2/data/csv/tips
 title: CSV Import Tips
 ---
 

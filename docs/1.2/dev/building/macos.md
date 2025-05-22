@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/dev/building/macos
+- /docs/1.2/dev/building/macos
 title: macOS
 ---
 

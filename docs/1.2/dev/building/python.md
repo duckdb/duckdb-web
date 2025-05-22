@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/dev/building/python
+- /docs/1.2/dev/building/python
 title: Python
 ---
 

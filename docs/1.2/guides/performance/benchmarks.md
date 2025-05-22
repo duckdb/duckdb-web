@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/performance/benchmarks
+- /docs/1.2/guides/performance/benchmarks
 title: Benchmarks
 ---
 

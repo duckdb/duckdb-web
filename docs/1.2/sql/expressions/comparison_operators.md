@@ -2,7 +2,7 @@
 layout: docu
 railroad: expressions/comparison.js
 redirect_from:
-- /docs/sql/expressions/comparison_operators
+- /docs/1.2/sql/expressions/comparison_operators
 title: Comparisons
 ---
 

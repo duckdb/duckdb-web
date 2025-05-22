@@ -2,7 +2,7 @@
 github_repository: https://github.com/duckdb/duckdb-mysql
 layout: docu
 redirect_from:
-- /docs/extensions/mysql
+- /docs/1.2/extensions/mysql
 title: MySQL Extension
 ---
 

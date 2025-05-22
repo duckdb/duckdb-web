@@ -1,9 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /internals/storage
-- /internals/storage/
-- /docs/internals/storage
+- /docs/1.2/internals/storage
 title: Storage Versions and Format
 ---
 

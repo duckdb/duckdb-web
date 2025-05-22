@@ -2,7 +2,7 @@
 layout: docu
 railroad: query_syntax/with.js
 redirect_from:
-- /docs/sql/query_syntax/with
+- /docs/1.2/sql/query_syntax/with
 title: WITH Clause
 ---
 

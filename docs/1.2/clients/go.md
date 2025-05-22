@@ -2,9 +2,9 @@
 github_repository: https://github.com/marcboeker/go-duckdb
 layout: docu
 redirect_from:
-- /docs/api/go
-- /docs/api/go/
-- /docs/clients/go
+- /docs/1.2/api/go
+- /docs/1.2/api/go/
+- /docs/1.2/clients/go
 title: Go Client
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/dialect/order_preservation
+- /docs/1.2/sql/dialect/order_preservation
 title: Order Preservation
 ---
 

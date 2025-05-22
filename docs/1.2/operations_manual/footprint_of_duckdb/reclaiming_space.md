@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/operations_manual/footprint_of_duckdb/reclaiming_space
+- /docs/1.2/operations_manual/footprint_of_duckdb/reclaiming_space
 title: Reclaiming Space
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/c/config
-- /docs/api/c/config/
-- /docs/clients/c/config
+- /docs/1.2/api/c/config
+- /docs/1.2/api/c/config/
+- /docs/1.2/clients/c/config
 title: Configuration
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/c/prepared
-- /docs/api/c/prepared/
-- /docs/clients/c/prepared
+- /docs/1.2/api/c/prepared
+- /docs/1.2/api/c/prepared/
+- /docs/1.2/clients/c/prepared
 title: Prepared Statements
 ---
 

@@ -1,19 +1,15 @@
 ---
 layout: docu
 redirect_from:
-- /dev/building
-- /dev/building/
 - /docs/1.2/dev/building
 - /docs/1.2/dev/building/
-- /docs/dev/building
-- /docs/dev/building/
-- /docs/dev/building/build_instructions
-- /docs/dev/building/build_instructions/
-- /docs/dev/building/platforms
-- /docs/dev/building/platforms/
-- /docs/dev/building/supported_platforms
-- /docs/dev/building/supported_platforms/
-- /docs/dev/building/overview
+- /docs/1.2/dev/building/build_instructions
+- /docs/1.2/dev/building/build_instructions/
+- /docs/1.2/dev/building/platforms
+- /docs/1.2/dev/building/platforms/
+- /docs/1.2/dev/building/supported_platforms
+- /docs/1.2/dev/building/supported_platforms/
+- /docs/1.2/dev/building/overview
 title: Building DuckDB from Source
 ---
 

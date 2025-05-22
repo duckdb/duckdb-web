@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/rust
-- /docs/api/rust/
-- /docs/clients/rust
+- /docs/1.2/api/rust
+- /docs/1.2/api/rust/
+- /docs/1.2/clients/rust
 title: Rust Client
 ---
 

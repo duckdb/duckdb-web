@@ -1,11 +1,11 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides
-- /docs/guides/
-- /docs/guides/index
-- /docs/guides/index/
-- /docs/guides/overview
+- /docs/1.2/guides
+- /docs/1.2/guides/
+- /docs/1.2/guides/index
+- /docs/1.2/guides/index/
+- /docs/1.2/guides/overview
 title: Guides
 ---
 

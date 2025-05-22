@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/meta/explain_analyze
+- /docs/1.2/guides/meta/explain_analyze
 title: 'EXPLAIN ANALYZE: Profile Queries'
 ---
 

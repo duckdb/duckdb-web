@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/python/relational_api
-- /docs/api/python/relational_api/
-- /docs/clients/python/relational_api
+- /docs/1.2/api/python/relational_api
+- /docs/1.2/api/python/relational_api/
+- /docs/1.2/clients/python/relational_api
 title: Relational API
 ---
 

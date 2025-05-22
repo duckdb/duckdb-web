@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/extensions/troubleshooting
+- /docs/1.2/extensions/troubleshooting
 title: Troubleshooting of Extensions
 ---
 

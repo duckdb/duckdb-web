@@ -2,9 +2,9 @@
 github_repository: https://github.com/duckdb/duckdb-sqlite
 layout: docu
 redirect_from:
-- /docs/extensions/sqlite_scanner
-- /docs/extensions/sqlite_scanner/
-- /docs/extensions/sqlite
+- /docs/1.2/extensions/sqlite_scanner
+- /docs/1.2/extensions/sqlite_scanner/
+- /docs/1.2/extensions/sqlite
 title: SQLite Extension
 ---
 

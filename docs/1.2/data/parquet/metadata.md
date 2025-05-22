@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/data/parquet/metadata
+- /docs/1.2/data/parquet/metadata
 title: Querying Parquet Metadata
 ---
 

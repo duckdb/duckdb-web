@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/c/data_chunk
-- /docs/api/c/data_chunk/
-- /docs/clients/c/data_chunk
+- /docs/1.2/api/c/data_chunk
+- /docs/1.2/api/c/data_chunk/
+- /docs/1.2/clients/c/data_chunk
 title: Data Chunks
 ---
 

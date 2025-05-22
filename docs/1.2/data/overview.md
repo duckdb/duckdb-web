@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/data/overview
+- /docs/1.2/data/overview
 title: Importing Data
 ---
 

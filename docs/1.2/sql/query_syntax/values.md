@@ -2,7 +2,7 @@
 layout: docu
 railroad: query_syntax/values.js
 redirect_from:
-- /docs/sql/query_syntax/values
+- /docs/1.2/sql/query_syntax/values
 title: VALUES Clause
 ---
 

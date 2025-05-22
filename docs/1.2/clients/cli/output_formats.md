@@ -1,11 +1,11 @@
 ---
 layout: docu
 redirect_from:
-- /docs/api/cli/output-formats
-- /docs/api/cli/output-formats/
-- /docs/api/cli/output_formats
-- /docs/api/cli/output_formats/
-- /docs/clients/cli/output_formats
+- /docs/1.2/api/cli/output-formats
+- /docs/1.2/api/cli/output-formats/
+- /docs/1.2/api/cli/output_formats
+- /docs/1.2/api/cli/output_formats/
+- /docs/1.2/clients/cli/output_formats
 title: Output Formats
 ---
 
