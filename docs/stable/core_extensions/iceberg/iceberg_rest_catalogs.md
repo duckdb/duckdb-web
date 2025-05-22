@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from: null # maybe redirect from old amazon_s3_tables and amazon_sagemaker_lakehouse docs?
-title: Iceberg Rest Catalogs
+title: Iceberg REST Catalogs
 ---
 
 The `iceberg` extension supports attaching Iceberg REST Catalogs. Before attaching an Iceberg REST Catalog, you must install the `iceberg` extension by following the instructions located in the [overview]({% link docs/stable/core_extensions/iceberg/overview.md %}).
