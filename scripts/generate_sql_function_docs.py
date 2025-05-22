@@ -21,6 +21,7 @@ class DocFunction:
 
 DOC_VERSION = 'preview'
 DOC_FILES = [
+    f'docs/{DOC_VERSION}/sql/functions/array.md',
     f'docs/{DOC_VERSION}/sql/functions/blob.md',
     f'docs/{DOC_VERSION}/sql/functions/text.md',
 ]
@@ -317,7 +318,7 @@ def apply_url_conversions(function: DocFunction):
 
 def generate_docs_table(function_data: list[DocFunction]):
     table_str = "<!-- markdownlint-disable MD056 -->\n\n"
-    table_str += "| Name | Description |\n|:--|:-------|\n"
+    table_str += "| Function | Description |\n|:--|:-------|\n"
     for func in function_data:
         if not func.examples:
             print(f"WARNING (skipping): '{func.name}' - no example is available")
