@@ -2,6 +2,9 @@
 github_repository: https://github.com/duckdb/duckdb-ui
 layout: docu
 title: UI Extension
+redirect_from:
+- /docs/stable/extensions/ui
+- /docs/stable/extensions/ui/
 ---
 
 The `ui` extension adds a user interface for your local DuckDB instance.

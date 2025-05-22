@@ -2,6 +2,9 @@
 github_repository: https://github.com/duckdb/duckdb-avro
 layout: docu
 title: Avro Extension
+redirect_from:
+- /docs/stable/extensions/avro
+- /docs/stable/extensions/avro/
 ---
 
 The `avro` extension enables DuckDB to read [Apache Avro](https://avro.apache.org) files.

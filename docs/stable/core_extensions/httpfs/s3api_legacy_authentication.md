@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: Legacy Authentication Scheme for S3 API
+redirect_from:
+- /docs/stable/extensions/httpfs/s3api_legacy_authentication
+- /docs/stable/extensions/httpfs/s3api_legacy_authentication/
 ---
 
 Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/stable/sql/statements/create_secret.md %}). Hence, the configuration of and authentication to S3 endpoints was handled via variables. This page documents the legacy authentication scheme for the S3 API.

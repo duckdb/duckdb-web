@@ -1,6 +1,9 @@
 ---
 layout: docu
 title: Hugging Face Support
+redirect_from:
+- /docs/stable/extensions/httpfs/hugging_face
+- /docs/stable/extensions/httpfs/hugging_face/
 ---
 
 The `httpfs` extension introduces support for the `hf://` protocol to access data sets hosted in [Hugging Face](https://huggingface.co/) repositories.

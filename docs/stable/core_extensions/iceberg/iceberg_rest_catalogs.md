@@ -1,6 +1,5 @@
 ---
 layout: docu
-redirect_from: null # maybe redirect from old amazon_s3_tables and amazon_sagemaker_lakehouse docs?
 title: Iceberg REST Catalogs
 ---
 

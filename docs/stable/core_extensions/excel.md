@@ -2,6 +2,9 @@
 github_repository: https://github.com/duckdb/duckdb-excel
 layout: docu
 title: Excel Extension
+redirect_from:
+- /docs/stable/extensions/excel
+- /docs/stable/extensions/excel/
 ---
 
 The `excel` extension provides functions to format numbers per Excel's formatting rules by wrapping the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), but as of DuckDB 1.2 also provides functionality to read and write Excel (`.xlsx`) files. However, `.xls` files are not supported.
