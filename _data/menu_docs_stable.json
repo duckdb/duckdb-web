@@ -1083,6 +1083,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Iceberg Rest Catalogs",
+                  "url": "iceberg_rest_catalogs"
+                },
+                {
                   "page": "Amazon S3 Tables",
                   "url": "amazon_s3_tables"
                 },

@@ -5,7 +5,7 @@ redirect_from: null
 title: Iceberg Extension
 ---
 
-The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/).
+The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/) and can connect to Iceberg Rest Catalogs. For information on how to connect to a Rest Catalog, please see the [Iceberg Rest Catalogs]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}) page.
 
 ## Installing and Loading
 
@@ -88,6 +88,13 @@ SELECT *
 FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
+You can also run the `iceberg_metadata` function on Iceberg tables attached via the Rest Catalog
+
+```sql
+SELECT *
+FROM iceberg_metadata(iceberg_table);
+```
+
 <div class="monospace_table"></div>
 
 |                             manifest_path                              | manifest_sequence_number | manifest_content | status  | content  |                                     file_path                                      | file_format | record_count |
@@ -102,6 +109,13 @@ To visualize the snapshots in an Iceberg table, use the `iceberg_snapshots` func
 ```sql
 SELECT *
 FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
+```
+
+You can also run the `iceberg_snapshots` function on Iceberg tables attached via the Rest Catalog
+
+```sql
+SELECT *
+FROM iceberg_snapshots(iceberg_table);
 ```
 
 <div class="monospace_table"></div>
