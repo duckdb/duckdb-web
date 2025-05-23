@@ -11,9 +11,7 @@ for file in glob.glob("docs/**/*.md", recursive=True):
         doc_redirects = doc["redirect_from"]
         for doc_redirect in doc_redirects:
             if file.startswith(doc_redirect[1:]):
-                print(
-                    f"{file} redirects to itself, removing redirect"
-                )
+                print(f"{file} redirects to itself, removing redirect")
                 doc["redirect_from"] = None
                 with open(file, 'w') as doc_file:
                     doc_file.write(frontmatter.dumps(doc))
