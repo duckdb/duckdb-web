@@ -4,7 +4,7 @@ title: "Arrow IPC Support in DuckDB"
 author: "Pedro Holanda (DuckDB Labs), Ian Cook (Columnar), Dewey Dunnington (Wherobots), Bryce Mecum (Voltron Data)"
 thumb: "/images/blog/thumbs/duckdb-arrow.svg"
 image: "/images/blog/thumbs/duckdb-arrow.png"
-excerpt: "DuckDB now supports consuming and producing the Arrow IPC Serialization Format through the 'arrow' community extension."
+excerpt: "DuckDB now supports consuming and producing the Arrow IPC Serialization Format through the `arrow` community extension."
 tags: ["extensions"]
 ---
 
