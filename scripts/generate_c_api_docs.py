@@ -18,29 +18,29 @@ with open(duckdb_h_path, 'r') as f:
     text = f.read()
 
 docs_map = {
-    'Open Connect': 'docs/clients/c/connect.md',
-    'Query Execution': 'docs/clients/c/query.md',
-    'Configuration': 'docs/clients/c/config.md',
-    'Result Functions': 'docs/clients/c/types.md',
+    'Open Connect': 'docs/stable/clients/c/connect.md',
+    'Query Execution': 'docs/stable/clients/c/query.md',
+    'Configuration': 'docs/stable/clients/c/config.md',
+    'Result Functions': 'docs/stable/clients/c/types.md',
     'Helpers': None,
-    'Date Time Timestamp Helpers': 'docs/clients/c/types.md',
-    'Hugeint Helpers': 'docs/clients/c/types.md',
-    'Decimal Helpers': 'docs/clients/c/types.md',
-    'Value Interface': 'docs/clients/c/value.md',
-    'Logical Type Interface': 'docs/clients/c/types.md',
-    'Data Chunk Interface': 'docs/clients/c/data_chunk.md',
-    'Vector Interface': 'docs/clients/c/vector.md',
-    'Validity Mask Functions': 'docs/clients/c/vector.md',
-    'Table Functions': 'docs/clients/c/table_functions.md',
-    'Table Function Bind': 'docs/clients/c/table_functions.md',
-    'Table Function Init': 'docs/clients/c/table_functions.md',
-    'Table Function': 'docs/clients/c/table_functions.md',
-    'Replacement Scans': 'docs/clients/c/replacement_scans.md',
-    'Prepared Statements': 'docs/clients/c/prepared.md',
-    'Appender': 'docs/clients/c/appender.md',
+    'Date Time Timestamp Helpers': 'docs/stable/clients/c/types.md',
+    'Hugeint Helpers': 'docs/stable/clients/c/types.md',
+    'Decimal Helpers': 'docs/stable/clients/c/types.md',
+    'Value Interface': 'docs/stable/clients/c/value.md',
+    'Logical Type Interface': 'docs/stable/clients/c/types.md',
+    'Data Chunk Interface': 'docs/stable/clients/c/data_chunk.md',
+    'Vector Interface': 'docs/stable/clients/c/vector.md',
+    'Validity Mask Functions': 'docs/stable/clients/c/vector.md',
+    'Table Functions': 'docs/stable/clients/c/table_functions.md',
+    'Table Function Bind': 'docs/stable/clients/c/table_functions.md',
+    'Table Function Init': 'docs/stable/clients/c/table_functions.md',
+    'Table Function': 'docs/stable/clients/c/table_functions.md',
+    'Replacement Scans': 'docs/stable/clients/c/replacement_scans.md',
+    'Prepared Statements': 'docs/stable/clients/c/prepared.md',
+    'Appender': 'docs/stable/clients/c/appender.md',
     'Arrow Interface': None,
 }
-all_api_functions = 'docs/clients/c/api.md'
+all_api_functions = 'docs/stable/clients/c/api.md'
 
 
 def is_line_separator(l):
@@ -216,7 +216,7 @@ def add_function(function_prototype, documentation, group):
     if len(documentation) == 0 or len(function_prototype) == 0:
         return
     function_prototype_str = ' '.join(
-        [x.replace('DUCKDB_API', '').strip() for x in function_prototype]
+        [x.replace('DUCKDB_C_API', '').strip() for x in function_prototype]
     )
     function_name = extract_function_name(function_prototype_str)
     docs_str = '\n'.join(documentation) + '\n'
@@ -280,7 +280,7 @@ for line in lines:
             code = []
             docs = []
     else:
-        if line.startswith('DUCKDB_API'):
+        if line.startswith('DUCKDB_C_API'):
             code = [line]
             if ';' not in line:
                 in_code = True
