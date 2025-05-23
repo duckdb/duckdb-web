@@ -20,7 +20,7 @@ But one limitation of Arrow's C data interface is that it exchanges data using p
 
 We're thrilled to announce that DuckDB is now able to consume and produce these Arrow streams via the new [`arrow` community extension]({% link community_extensions/extensions/arrow.md %}). In this post, we will describe the Arrow IPC serialization format in more detail, show how to install the new `arrow` community extension for DuckDB, and give a demo showing how to use it.
 
-### Arrow Interprocess Communication (Arrow IPC)
+## Arrow Interprocess Communication (Arrow IPC)
 
 The Arrow IPC format provides a way of serializing (and optionally compressing) Arrow-formatted data, enabling you to transfer data over a network or store it on disk while keeping it in Arrow format, avoiding the overhead of converting it to a different format. Arrow IPC supports LZ4 and ZSTD compression, and when stored as a file, it also supports a file footer that can be used to speed up retrieval and processing by allowing parts of the data to be skipped (similar to the approach used by the Parquet format). When compared to Parquet, the Arrow IPC format has two main benefits:
 
@@ -50,7 +50,7 @@ INSTALL arrow FROM community;
 LOAD arrow;
 ```
 
-### Demo
+## Demo
 
 In this demo, we will use the new Arrow DuckDB extension to generate the `lineitem` TPC-H table with scale factor 10 as an Arrow IPC file. While our demo will focus on Arrow IPC data stored in a file, the extension itself also allows you to consume and produce the Arrow IPC format directly as buffers. You can find detailed examples of usage and accepted parameters in the extension's [README](https://github.com/paleolimbot/duckdb-nanoarrow/blob/main/README.md).
 
