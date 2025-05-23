@@ -29,7 +29,11 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">void</span> <a href="#duckdb_interrupt"><span class="nf">duckdb_interrupt</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
 <span class="kt">duckdb_query_progress_type</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
 <span class="kt">void</span> <a href="#duckdb_disconnect"><span class="nf">duckdb_disconnect</span></a>(<span class="kt">duckdb_connection</span> *<span class="nv">connection</span>);
+<span class="kt">void</span> <a href="#duckdb_connection_get_client_context"><span class="nf">duckdb_connection_get_client_context</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">duckdb_client_context</span> *<span class="nv">out_context</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_client_context_get_connection_id"><span class="nf">duckdb_client_context_get_connection_id</span></a>(<span class="nv">duckdb_client_context</span> <span class="nv">context</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_client_context"><span class="nf">duckdb_destroy_client_context</span></a>(<span class="nv">duckdb_client_context</span> *<span class="nv">context</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_library_version"><span class="nf">duckdb_library_version</span></a>();
+<span class="kt">duckdb_value</span> <a href="#duckdb_get_table_names"><span class="nf">duckdb_get_table_names</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">bool</span> <span class="nv">qualified</span>);
 </code></pre></div></div>
 
 ### Configuration
@@ -152,7 +156,7 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
 </code></pre></div></div>
 
-### Bind Values To Prepared Statements
+### Bind Values to Prepared Statements
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_bind_value"><span class="nf">duckdb_bind_value</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_bind_parameter_index"><span class="nf">duckdb_bind_parameter_index</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
@@ -271,6 +275,8 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_struct_value"><span class="nf">duckdb_create_struct_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_list_value"><span class="nf">duckdb_create_list_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_array_value"><span class="nf">duckdb_create_array_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_map_value"><span class="nf">duckdb_create_map_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">map_type</span>, <span class="kt">duckdb_value</span> *<span class="nv">keys</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">entry_count</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_union_value"><span class="nf">duckdb_create_union_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">union_type</span>, <span class="kt">idx_t</span> <span class="nv">tag_index</span>, <span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_get_map_size"><span class="nf">duckdb_get_map_size</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_key"><span class="nf">duckdb_get_map_key</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_value"><span class="nf">duckdb_get_map_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
@@ -281,6 +287,7 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_enum_value"><span class="nf">duckdb_create_enum_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
 <span class="kt">uint64_t</span> <a href="#duckdb_get_enum_value"><span class="nf">duckdb_get_enum_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_struct_child"><span class="nf">duckdb_get_struct_child</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">char</span> *<a href="#duckdb_value_to_string"><span class="nf">duckdb_value_to_string</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 </code></pre></div></div>
 
 ### Logical Type Interface
@@ -330,7 +337,9 @@ This page contains the reference for DuckDB's C API.
 
 ### Vector Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_vector_get_column_type"><span class="nf">duckdb_vector_get_column_type</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <a href="#duckdb_create_vector"><span class="nf">duckdb_create_vector</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">capacity</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_vector"><span class="nf">duckdb_destroy_vector</span></a>(<span class="kt">duckdb_vector</span> *<span class="nv">vector</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_vector_get_column_type"><span class="nf">duckdb_vector_get_column_type</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
 <span class="kt">void</span> *<a href="#duckdb_vector_get_data"><span class="nf">duckdb_vector_get_data</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
 <span class="kt">uint64_t</span> *<a href="#duckdb_vector_get_validity"><span class="nf">duckdb_vector_get_validity</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
 <span class="kt">void</span> <a href="#duckdb_vector_ensure_validity_writable"><span class="nf">duckdb_vector_ensure_validity_writable</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
@@ -342,6 +351,9 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_reserve"><span class="nf">duckdb_list_vector_reserve</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">required_capacity</span>);
 <span class="kt">duckdb_vector</span> <a href="#duckdb_struct_vector_get_child"><span class="nf">duckdb_struct_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_vector</span> <a href="#duckdb_array_vector_get_child"><span class="nf">duckdb_array_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
+<span class="kt">void</span> <a href="#duckdb_slice_vector"><span class="nf">duckdb_slice_vector</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="nv">duckdb_selection_vector</span> <span class="nv">selection</span>, <span class="kt">idx_t</span> <span class="nv">len</span>);
+<span class="kt">void</span> <a href="#duckdb_vector_reference_value"><span class="nf">duckdb_vector_reference_value</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">duckdb_value</span> <span class="nv">value</span>);
+<span class="kt">void</span> <a href="#duckdb_vector_reference_vector"><span class="nf">duckdb_vector_reference_vector</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">to_vector</span>, <span class="kt">duckdb_vector</span> <span class="nv">from_vector</span>);
 </code></pre></div></div>
 
 ### Validity Mask Functions
@@ -363,14 +375,26 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">void</span> <a href="#duckdb_scalar_function_add_parameter"><span class="nf">duckdb_scalar_function_add_parameter</span></a>(<span class="kt">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">void</span> <a href="#duckdb_scalar_function_set_return_type"><span class="nf">duckdb_scalar_function_set_return_type</span></a>(<span class="kt">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">void</span> <a href="#duckdb_scalar_function_set_extra_info"><span class="nf">duckdb_scalar_function_set_extra_info</span></a>(<span class="kt">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="kt">void</span> *<span class="nv">extra_info</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_set_bind"><span class="nf">duckdb_scalar_function_set_bind</span></a>(<span class="kt">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="nv">duckdb_scalar_function_bind_t</span> <span class="nv">bind</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_set_bind_data"><span class="nf">duckdb_scalar_function_set_bind_data</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">void</span> *<span class="nv">bind_data</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_bind_set_error"><span class="nf">duckdb_scalar_function_bind_set_error</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 <span class="kt">void</span> <a href="#duckdb_scalar_function_set_function"><span class="nf">duckdb_scalar_function_set_function</span></a>(<span class="kt">duckdb_scalar_function</span> <span class="nv">scalar_function</span>, <span class="nv">duckdb_scalar_function_t</span> <span class="nv">function</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_register_scalar_function"><span class="nf">duckdb_register_scalar_function</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">con</span>, <span class="kt">duckdb_scalar_function</span> <span class="nv">scalar_function</span>);
 <span class="kt">void</span> *<a href="#duckdb_scalar_function_get_extra_info"><span class="nf">duckdb_scalar_function_get_extra_info</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> *<a href="#duckdb_scalar_function_get_bind_data"><span class="nf">duckdb_scalar_function_get_bind_data</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> <a href="#duckdb_scalar_function_get_client_context"><span class="nf">duckdb_scalar_function_get_client_context</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="nv">duckdb_client_context</span> *<span class="nv">out_context</span>);
 <span class="kt">void</span> <a href="#duckdb_scalar_function_set_error"><span class="nf">duckdb_scalar_function_set_error</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 <span class="kt">duckdb_scalar_function_set</span> <a href="#duckdb_create_scalar_function_set"><span class="nf">duckdb_create_scalar_function_set</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
 <span class="kt">void</span> <a href="#duckdb_destroy_scalar_function_set"><span class="nf">duckdb_destroy_scalar_function_set</span></a>(<span class="kt">duckdb_scalar_function_set</span> *<span class="nv">scalar_function_set</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_add_scalar_function_to_set"><span class="nf">duckdb_add_scalar_function_to_set</span></a>(<span class="kt">duckdb_scalar_function_set</span> <span class="nv">set</span>, <span class="kt">duckdb_scalar_function</span> <span class="nv">function</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_register_scalar_function_set"><span class="nf">duckdb_register_scalar_function_set</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">con</span>, <span class="kt">duckdb_scalar_function_set</span> <span class="nv">set</span>);
+</code></pre></div></div>
+
+### Selection Vector Interface
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_selection_vector</span> <a href="#duckdb_create_selection_vector"><span class="nf">duckdb_create_selection_vector</span></a>(<span class="kt">idx_t</span> <span class="nv">size</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_selection_vector"><span class="nf">duckdb_destroy_selection_vector</span></a>(<span class="nv">duckdb_selection_vector</span> <span class="nv">vector</span>);
+<span class="nv">sel_t</span> *<a href="#duckdb_selection_vector_get_data_ptr"><span class="nf">duckdb_selection_vector_get_data_ptr</span></a>(<span class="nv">duckdb_selection_vector</span> <span class="nv">vector</span>);
 </code></pre></div></div>
 
 ### Aggregate Functions
@@ -782,6 +806,63 @@ Closes the specified connection and de-allocates all memory allocated for that c
 
 <br>
 
+#### `duckdb_connection_get_client_context`
+
+Retrieves the client context of the connection.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_connection_get_client_context</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="nv">duckdb_client_context</span> *<span class="nv">out_context
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `connection`: The connection.
+* `out_context`: The client context of the connection. Must be destroyed with `duckdb_destroy_client_context`.
+
+<br>
+
+#### `duckdb_client_context_get_connection_id`
+
+Returns the connection id of the client context.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_client_context_get_connection_id</span>(<span class="nv">
+</span>  <span class="nv">duckdb_client_context</span> <span class="nv">context
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `context`: The client context.
+
+##### Return Value
+
+The connection id of the client context.
+
+<br>
+
+#### `duckdb_destroy_client_context`
+
+Destroys the client context and deallocates its memory.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_client_context</span>(<span class="nv">
+</span>  <span class="nv">duckdb_client_context</span> *<span class="nv">context
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `context`: The client context to destroy.
+
+<br>
+
 #### `duckdb_library_version`
 
 Returns the version of the linked DuckDB, with a version postfix for dev versions
@@ -794,6 +875,33 @@ Usually used for developing C extensions that must return this for a compatibili
 </span>  <span class="nv">
 </span>);
 </code></pre></div></div>
+<br>
+
+#### `duckdb_get_table_names`
+
+Get the list of (fully qualified) table names of the query.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_get_table_names</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
+</span>  <span class="kt">bool</span> <span class="nv">qualified
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `connection`: The connection for which to get the table names.
+* `query`: The query for which to get the table names.
+* `qualified`: Returns fully qualified table names (catalog.schema.table), if set to true, else only the (not
+escaped) table names.
+
+##### Return Value
+
+A duckdb_value of type VARCHAR[] containing the (fully qualified) table names of the query. Must be destroyed
+with duckdb_destroy_value.
+
 <br>
 
 #### `duckdb_create_config`
@@ -950,7 +1058,7 @@ query fails, otherwise the error stored within the result will not be freed corr
 
 #### `duckdb_destroy_result`
 
-Closes the result and de-allocates all memory allocated for that connection.
+Closes the result and de-allocates all memory allocated for that result.
 
 ##### Syntax
 
@@ -2648,7 +2756,7 @@ Binds a duckdb_hugeint value to the prepared statement at the specified index.
 
 #### `duckdb_bind_uhugeint`
 
-Binds an duckdb_uhugeint value to the prepared statement at the specified index.
+Binds a duckdb_uhugeint value to the prepared statement at the specified index.
 
 ##### Syntax
 
@@ -2676,7 +2784,7 @@ Binds a duckdb_decimal value to the prepared statement at the specified index.
 
 #### `duckdb_bind_uint8`
 
-Binds an uint8_t value to the prepared statement at the specified index.
+Binds a uint8_t value to the prepared statement at the specified index.
 
 ##### Syntax
 
@@ -2690,7 +2798,7 @@ Binds an uint8_t value to the prepared statement at the specified index.
 
 #### `duckdb_bind_uint16`
 
-Binds an uint16_t value to the prepared statement at the specified index.
+Binds a uint16_t value to the prepared statement at the specified index.
 
 ##### Syntax
 
@@ -2704,7 +2812,7 @@ Binds an uint16_t value to the prepared statement at the specified index.
 
 #### `duckdb_bind_uint32`
 
-Binds an uint32_t value to the prepared statement at the specified index.
+Binds a uint32_t value to the prepared statement at the specified index.
 
 ##### Syntax
 
@@ -2718,7 +2826,7 @@ Binds an uint32_t value to the prepared statement at the specified index.
 
 #### `duckdb_bind_uint64`
 
-Binds an uint64_t value to the prepared statement at the specified index.
+Binds a uint64_t value to the prepared statement at the specified index.
 
 ##### Syntax
 
@@ -3327,7 +3435,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_int8`
 
-Creates a value from a int8_t (a tinyint)
+Creates a value from an int8_t (a tinyint)
 
 ##### Syntax
 
@@ -3369,7 +3477,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_int16`
 
-Creates a value from a int16_t (a smallint)
+Creates a value from an int16_t (a smallint)
 
 ##### Syntax
 
@@ -3411,7 +3519,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_int32`
 
-Creates a value from a int32_t (an integer)
+Creates a value from an int32_t (an integer)
 
 ##### Syntax
 
@@ -3988,7 +4096,7 @@ Returns the int32_t value of the given value.
 
 ##### Parameters
 
-* `val`: A duckdb_value containing a integer
+* `val`: A duckdb_value containing an integer
 
 ##### Return Value
 
@@ -4558,6 +4666,60 @@ The array value, or nullptr, if the child type is `DUCKDB_TYPE_ANY` or `DUCKDB_T
 
 <br>
 
+#### `duckdb_create_map_value`
+
+Creates a map value from a map type and two arrays, one for the keys and one for the values, each of length
+`entry_count`. Must be destroyed with `duckdb_destroy_value`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_map_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">map_type</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> *<span class="nv">keys</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> *<span class="nv">values</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">entry_count
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `map_type`: The map type
+* `keys`: The keys of the map
+* `values`: The values of the map
+* `entry_count`: The number of entrys (key-value pairs) in the map
+
+##### Return Value
+
+The map value, or nullptr, if the parameters are invalid.
+
+<br>
+
+#### `duckdb_create_union_value`
+
+Creates a union value from a union type, a tag index, and a value.
+Must be destroyed with `duckdb_destroy_value`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_union_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">union_type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">tag_index</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `union_type`: The union type
+* `tag_index`: The index of the tag of the union
+* `value`: The value of the union
+
+##### Return Value
+
+The union value, or nullptr, if the parameters are invalid.
+
+<br>
+
 #### `duckdb_get_map_size`
 
 Returns the number of elements in a MAP value.
@@ -4771,6 +4933,27 @@ Returns the STRUCT child at index as a duckdb_value.
 ##### Return Value
 
 The child as a duckdb_value.
+
+<br>
+
+#### `duckdb_value_to_string`
+
+Returns the SQL string representation of the given value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_value_to_string</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: A duckdb_value.
+
+##### Return Value
+
+The SQL string representation as a null-terminated string. The result must be freed with `duckdb_free`.
 
 <br>
 
@@ -5603,6 +5786,31 @@ Sets the current number of tuples in a data chunk.
 
 <br>
 
+#### `duckdb_create_vector`
+
+Creates a flat vector.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_create_vector</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">capacity
+</span>);
+</code></pre></div></div>
+<br>
+
+#### `duckdb_destroy_vector`
+
+Destroys the vector and de-allocates all memory allocated for that vector, if unused else where.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_vector</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> *<span class="nv">vector
+</span>);
+</code></pre></div></div>
+<br>
+
 #### `duckdb_vector_get_column_type`
 
 Retrieves the column type of the specified vector.
@@ -5869,7 +6077,7 @@ The child vector
 
 #### `duckdb_array_vector_get_child`
 
-Retrieves the child vector of a array vector.
+Retrieves the child vector of an array vector.
 
 The resulting vector is valid as long as the parent vector is valid.
 The resulting vector has the size of the parent vector multiplied by the array size.
@@ -5889,6 +6097,57 @@ The resulting vector has the size of the parent vector multiplied by the array s
 
 The child vector
 
+<br>
+
+#### `duckdb_slice_vector`
+
+Slice a vector with a selection vector.
+
+The max value in the selection vector must be less than the length of the vector
+
+The resulting vector happens to be a dictionary vector.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_slice_vector</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+</span>  <span class="nv">duckdb_selection_vector</span> <span class="nv">selection</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">len
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `vector`: The vector which is to become a dictionary
+* `selection`: The selection vector
+* `len`: The length of the selection vector
+
+<br>
+
+#### `duckdb_vector_reference_value`
+
+Copies the value from `value` to `vector`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_reference_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+<br>
+
+#### `duckdb_vector_reference_vector`
+
+References the `from` vector in the `to` vector, this makes take shared ownership of the values buffer
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_reference_vector</span>(<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">to_vector</span>,<span class="nv">
+</span>  <span class="kt">duckdb_vector</span> <span class="nv">from_vector
+</span>);
+</code></pre></div></div>
 <br>
 
 #### `duckdb_validity_row_is_valid`
@@ -5984,7 +6243,7 @@ Equivalent to `duckdb_validity_set_row_validity` with valid set to true.
 
 Creates a new empty scalar function.
 
-The return value should be destroyed with `duckdb_destroy_scalar_function`.
+The return value must be destroyed with `duckdb_destroy_scalar_function`.
 
 
 ##### Return Value
@@ -6061,8 +6320,7 @@ The parameter type. Cannot contain INVALID.
 
 #### `duckdb_scalar_function_set_special_handling`
 
-Sets the parameters of the given scalar function to varargs. Does not require adding parameters with
-duckdb_scalar_function_add_parameter.
+Sets the scalar function's null-handling behavior to special.
 
 ##### Syntax
 
@@ -6150,7 +6408,67 @@ Assigns extra information to the scalar function that can be fetched during bind
 
 * `scalar_function`: The scalar function
 * `extra_info`: The extra information
-* `destroy`: The callback that will be called to destroy the bind data (if any)
+* `destroy`: The callback that will be called to destroy the extra information (if any)
+
+<br>
+
+#### `duckdb_scalar_function_set_bind`
+
+Sets the (optional) bind function of the scalar function.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_set_bind</span>(<span class="nv">
+</span>  <span class="kt">duckdb_scalar_function</span> <span class="nv">scalar_function</span>,<span class="nv">
+</span>  <span class="nv">duckdb_scalar_function_bind_t</span> <span class="nv">bind
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `scalar_function`: The scalar function
+* `bind`: The bind function
+
+<br>
+
+#### `duckdb_scalar_function_set_bind_data`
+
+Sets the user-provided bind data in the bind object of the scalar function.
+This object can be retrieved again during execution.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_set_bind_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">void</span> *<span class="nv">bind_data</span>,<span class="nv">
+</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `info`: The bind info of the scalar function.
+* `bind_data`: The bind data object.
+* `destroy`: The callback to destroy the bind data (if any).
+
+<br>
+
+#### `duckdb_scalar_function_bind_set_error`
+
+Report that an error has occurred while calling bind on a scalar function.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_bind_set_error</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `info`: The bind info object
+* `error`: The error message
 
 <br>
 
@@ -6221,6 +6539,48 @@ The extra info.
 
 <br>
 
+#### `duckdb_scalar_function_get_bind_data`
+
+Gets the scalar function's bind data set by `duckdb_scalar_function_set_bind_data`.
+
+Note that the bind data is read-only.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_scalar_function_get_bind_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `info`: The function info.
+
+##### Return Value
+
+The bind data object.
+
+<br>
+
+#### `duckdb_scalar_function_get_client_context`
+
+Retrieves the client context of the bind info of a scalar function.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_scalar_function_get_client_context</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="nv">duckdb_client_context</span> *<span class="nv">out_context
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `info`: The bind info object of the scalar function.
+* `out_context`: The client context of the bind info. Must be destroyed with `duckdb_destroy_client_context`.
+
+<br>
+
 #### `duckdb_scalar_function_set_error`
 
 Report that an error has occurred while executing the scalar function.
@@ -6244,7 +6604,7 @@ Report that an error has occurred while executing the scalar function.
 
 Creates a new empty scalar function set.
 
-The return value should be destroyed with `duckdb_destroy_scalar_function_set`.
+The return value must be destroyed with `duckdb_destroy_scalar_function_set`.
 
 
 ##### Return Value
@@ -6317,6 +6677,42 @@ If the set is incomplete or a function with this name already exists DuckDBError
 
 Whether or not the registration was successful.
 
+<br>
+
+#### `duckdb_create_selection_vector`
+
+Creates a new selection vector of size `size`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_selection_vector</span> <span class="nv">duckdb_create_selection_vector</span>(<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">size
+</span>);
+</code></pre></div></div>
+<br>
+
+#### `duckdb_destroy_selection_vector`
+
+Destroys a selection vector.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_selection_vector</span>(<span class="nv">
+</span>  <span class="nv">duckdb_selection_vector</span> <span class="nv">vector
+</span>);
+</code></pre></div></div>
+<br>
+
+#### `duckdb_selection_vector_get_data_ptr`
+
+Access the data pointer of a selection vector.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">sel_t</span> *<span class="nv">duckdb_selection_vector_get_data_ptr</span>(<span class="nv">
+</span>  <span class="nv">duckdb_selection_vector</span> <span class="nv">vector
+</span>);
+</code></pre></div></div>
 <br>
 
 #### `duckdb_create_aggregate_function`
@@ -6513,7 +6909,7 @@ Assigns extra information to the scalar function that can be fetched during bind
 
 * `aggregate_function`: The aggregate function
 * `extra_info`: The extra information
-* `destroy`: The callback that will be called to destroy the bind data (if any)
+* `destroy`: The callback that will be called to destroy the extra information (if any)
 
 <br>
 
@@ -6748,7 +7144,7 @@ Assigns extra information to the table function that can be fetched during bindi
 
 * `table_function`: The table function
 * `extra_info`: The extra information
-* `destroy`: The callback that will be called to destroy the bind data (if any)
+* `destroy`: The callback that will be called to destroy the extra information (if any)
 
 <br>
 
@@ -6993,7 +7389,8 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_bind_set_bind_data`
 
-Sets the user-provided bind data in the bind object. This object can be retrieved again during execution.
+Sets the user-provided bind data in the bind object of the table function.
+This object can be retrieved again during execution.
 
 ##### Syntax
 
@@ -7006,9 +7403,9 @@ Sets the user-provided bind data in the bind object. This object can be retrieve
 
 ##### Parameters
 
-* `info`: The info object
+* `info`: The bind info of the table function.
 * `bind_data`: The bind data object.
-* `destroy`: The callback that will be called to destroy the bind data (if any)
+* `destroy`: The callback to destroy the bind data (if any).
 
 <br>
 
@@ -7034,7 +7431,7 @@ Sets the cardinality estimate for the table function, used for optimization.
 
 #### `duckdb_bind_set_error`
 
-Report that an error has occurred while calling bind.
+Report that an error has occurred while calling bind on a table function.
 
 ##### Syntax
 
@@ -7226,9 +7623,9 @@ The extra info
 
 #### `duckdb_function_get_bind_data`
 
-Gets the bind data set by `duckdb_bind_set_bind_data` during the bind.
+Gets the table function's bind data set by `duckdb_bind_set_bind_data`.
 
-Note that the bind data should be considered as read-only.
+Note that the bind data is read-only.
 For tracking state, use the init data instead.
 
 ##### Syntax
@@ -7240,11 +7637,11 @@ For tracking state, use the init data instead.
 
 ##### Parameters
 
-* `info`: The info object
+* `info`: The function info object.
 
 ##### Return Value
 
-The bind data object
+The bind data object.
 
 <br>
 
