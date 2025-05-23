@@ -204,6 +204,12 @@ This feature was implemented by external contributor [`xevix`](https://github.co
 
 ### UUID v7 Support
 
+> Warning **Update (2025-05-23).**
+> The [UUID v7 implementation in DuckDB v1.3.0 is not consistent with the UUID standard](https://github.com/duckdb/duckdb/issues/17611), causing the timestamp values to be off.
+> This means that the timestamps in the generated UUID v7 values will only be correct if they are used exclusively within DuckDB.
+> Importing or exporting UUID v7 values from/to systems will yield incorrect timestamps.
+> We [patched this bug](https://github.com/duckdb/duckdb/pull/17612) and the fix will soon be available in the preview builds and the [upcoming 1.3.1 patch release]({% link release_calendar.md %}#upcoming-releases).
+
 DuckDB now [supports](https://github.com/duckdb/duckdb/pull/15819) [UUID v7](https://uuid7.com/), which is a newer version of UUIDs. `UUIDv7` combines a Unix timestamp in milliseconds and random bits, offering both uniqueness and sortability. This is useful to e.g. order UUIDs by age or to combine the ubiquitous `ID` and `TIMESTAMP` columns in many tables into a single `UUIDv7` column.
 
 New UUIDs can be created using the `uuidv7()` scalar function. For example:
