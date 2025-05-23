@@ -466,3 +466,88 @@ SELECT json_transform_strict(j, '{"family": "TINYINT", "coolness": "DOUBLE"}') F
 ```console
 Invalid Input Error: Failed to cast value: "anatidae"
 ```
+
+## JSON Table Functions
+
+DuckDB implements two JSON table functions that take a JSON value and produce a table from it.
+
+| Function | Description |
+|:---|:---|
+| `json_each(json[ ,path]` | Traverse `json` and return one row for each element in the top-level array or object. |
+| `json_tree(json[ ,path]` | Traverse `json` in depth-first fashion and return one row for each element in the structure. |
+
+If the element is not an array or object, the element itself is returned.
+If the optional `path` argument is supplied, traversal starts from the element at the given path instead of the root element.
+
+The resulting table has the following columns:
+
+| Field | Type | Description |
+| `key` | `VARCHAR` | Key of element relative to its parent |
+| `value` | `JSON` | Value of element |
+| `type` | `VARCHAR` | `json_type` (function) of this element |
+| `atom` | `JSON` | `json_value` (function) of this element |
+| `id` | `UBIGINT` | Element identifier, numbered by parse order |
+| `parent` | `UBIGINT` | `id` of parent element |
+| `fullkey` | `VARCHAR` | JSON path to element |
+| `path` | `VARCHAR` | JSON path to parent element |
+| `json` | `JSON` (Virtual) | The `json` parameter |
+| `root` | `TEXT` (Virtual) | The `path` parameter |
+| `rowid` | `BIGINT` (Virtual) | The row identifier
+
+These functions are analogous to [SQLite's functions with the same name](https://www.sqlite.org/json1.html#jeach).
+Note that, because the `json_each` and `json_tree` functions refer to previous subqueries in the same FROM clause, they are [*lateral joins*]({% link docs/stable/sql/query_syntax/from.html %}#lateral-joins).
+
+Examples:
+```sql
+CREATE TABLE example (j JSON);
+INSERT INTO example VALUES
+    ('{"family": "anatidae", "species": ["duck", "goose"], "coolness": 42.42}'),
+    ('{"family": "canidae", "species": ["labrador", "bulldog"], "hair": true}');
+```
+
+```sql
+SELECT je.*, je.rowid
+FROM example AS e, json_each(e.j) AS je;
+```
+
+|   key    |         value          |  type   |    atom    | id | parent |  fullkey   | path | rowid |
+|----------|------------------------|---------|------------|---:|--------|------------|------|------:|
+| family   | "anatidae"             | VARCHAR | "anatidae" | 2  | NULL   | $.family   | $    | 0     |
+| species  | ["duck","goose"]       | ARRAY   | NULL       | 4  | NULL   | $.species  | $    | 1     |
+| coolness | 42.42                  | DOUBLE  | 42.42      | 8  | NULL   | $.coolness | $    | 2     |
+| family   | "canidae"              | VARCHAR | "canidae"  | 2  | NULL   | $.family   | $    | 0     |
+| species  | ["labrador","bulldog"] | ARRAY   | NULL       | 4  | NULL   | $.species  | $    | 1     |
+| hair     | true                   | BOOLEAN | true       | 8  | NULL   | $.hair     | $    | 2     |
+
+```sql
+SELECT je.*, je.rowid
+FROM example AS e, json_each(e.j, '$.species') AS je;
+```
+
+| key |   value    |  type   |    atom    | id | parent |   fullkey    |   path    | rowid |
+|-----|------------|---------|------------|---:|--------|--------------|-----------|------:|
+| 0   | "duck"     | VARCHAR | "duck"     | 5  | NULL   | $.species[0] | $.species | 0     |
+| 1   | "goose"    | VARCHAR | "goose"    | 6  | NULL   | $.species[1] | $.species | 1     |
+| 0   | "labrador" | VARCHAR | "labrador" | 5  | NULL   | $.species[0] | $.species | 0     |
+| 1   | "bulldog"  | VARCHAR | "bulldog"  | 6  | NULL   | $.species[1] | $.species | 1     |
+
+
+```sql
+SELECT je.key, je.value, je.type, je.id, je.parent, je.fullkey, je.rowid
+FROM example AS e, json_tree(e.j) AS je;
+```
+
+|   key    |                               value                               |  type   | id | parent |   fullkey    | rowid |
+|----------|-------------------------------------------------------------------|---------|---:|--------|--------------|------:|
+| NULL     | {"family":"anatidae","species":["duck","goose"],"coolness":42.42} | OBJECT  | 0  | NULL   | $            | 0     |
+| family   | "anatidae"                                                        | VARCHAR | 2  | 0      | $.family     | 1     |
+| species  | ["duck","goose"]                                                  | ARRAY   | 4  | 0      | $.species    | 2     |
+| 0        | "duck"                                                            | VARCHAR | 5  | 4      | $.species[0] | 3     |
+| 1        | "goose"                                                           | VARCHAR | 6  | 4      | $.species[1] | 4     |
+| coolness | 42.42                                                             | DOUBLE  | 8  | 0      | $.coolness   | 5     |
+| NULL     | {"family":"canidae","species":["labrador","bulldog"],"hair":true} | OBJECT  | 0  | NULL   | $            | 0     |
+| family   | "canidae"                                                         | VARCHAR | 2  | 0      | $.family     | 1     |
+| species  | ["labrador","bulldog"]                                            | ARRAY   | 4  | 0      | $.species    | 2     |
+| 0        | "labrador"                                                        | VARCHAR | 5  | 4      | $.species[0] | 3     |
+| 1        | "bulldog"                                                         | VARCHAR | 6  | 4      | $.species[1] | 4     |
+| hair     | true                                                              | BOOLEAN | 8  | 0      | $.hair       | 5     |
