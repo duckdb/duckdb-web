@@ -482,6 +482,7 @@ If the optional `path` argument is supplied, traversal starts from the element a
 The resulting table has the following columns:
 
 | Field | Type | Description |
+|:---|:---|:---|
 | `key` | `VARCHAR` | Key of element relative to its parent |
 | `value` | `JSON` | Value of element |
 | `type` | `VARCHAR` | `json_type` (function) of this element |
@@ -492,12 +493,13 @@ The resulting table has the following columns:
 | `path` | `VARCHAR` | JSON path to parent element |
 | `json` | `JSON` (Virtual) | The `json` parameter |
 | `root` | `TEXT` (Virtual) | The `path` parameter |
-| `rowid` | `BIGINT` (Virtual) | The row identifier
+| `rowid` | `BIGINT` (Virtual) | The row identifier |
 
 These functions are analogous to [SQLite's functions with the same name](https://www.sqlite.org/json1.html#jeach).
 Note that, because the `json_each` and `json_tree` functions refer to previous subqueries in the same FROM clause, they are [*lateral joins*]({% link docs/stable/sql/query_syntax/from.md %}#lateral-joins).
 
 Examples:
+
 ```sql
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
