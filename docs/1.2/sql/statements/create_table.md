@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: statements/createtable.js
-redirect_from:
-- /docs/1.2/sql/statements/create_table
 title: CREATE TABLE Statement
 ---
 

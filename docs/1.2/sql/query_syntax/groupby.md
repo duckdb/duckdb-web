@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: query_syntax/groupby.js
-redirect_from:
-- /docs/1.2/sql/query_syntax/groupby
 title: GROUP BY Clause
 ---
 

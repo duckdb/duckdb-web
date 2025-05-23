@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/import/overview
-- /docs/1.2/guides/import/overview/
-- /docs/1.2/guides/performance/import
 title: Data Import
 ---
 

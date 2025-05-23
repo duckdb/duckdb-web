@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/sql/data_types/json
-- /docs/1.2/sql/data_types/json/
-- /docs/1.2/data/json/json_type
 title: JSON Type
 ---
 

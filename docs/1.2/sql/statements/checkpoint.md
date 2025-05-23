@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: statements/checkpoint.js
-redirect_from:
-- /docs/1.2/sql/statements/checkpoint
 title: CHECKPOINT Statement
 ---
 

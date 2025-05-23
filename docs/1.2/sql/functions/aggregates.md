@@ -1,10 +1,6 @@
 ---
 layout: docu
 railroad: expressions/aggregate.js
-redirect_from:
-- /docs/1.2/sql/aggregates
-- /docs/1.2/sql/aggregates/
-- /docs/1.2/sql/functions/aggregates
 title: Aggregate Functions
 ---
 

@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/snippets/create_synthetic_data
 title: Create Synthetic Data
 ---
 

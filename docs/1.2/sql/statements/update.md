@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: statements/update.js
-redirect_from:
-- /docs/1.2/sql/statements/update
 title: UPDATE Statement
 ---
 

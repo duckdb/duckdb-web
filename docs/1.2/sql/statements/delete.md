@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: statements/delete.js
-redirect_from:
-- /docs/1.2/sql/statements/delete
 title: DELETE Statement
 ---
 

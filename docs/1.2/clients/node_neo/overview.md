@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/node_neo/overview
-- /docs/1.2/api/node_neo/overview/
-- /docs/1.2/clients/node_neo/overview
 title: Node.js Client (Neo)
 ---
 

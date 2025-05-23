@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/wasm/query
-- /docs/1.2/api/wasm/query/
-- /docs/1.2/clients/wasm/query
 title: Query
 ---
 

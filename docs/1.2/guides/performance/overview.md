@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/performance
-- /docs/1.2/guides/performance/
-- /docs/1.2/guides/performance/overview
 title: Performance Guide
 ---
 

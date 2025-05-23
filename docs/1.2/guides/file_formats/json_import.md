@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/import/json_import
-- /docs/1.2/guides/import/json_import/
-- /docs/1.2/guides/file_formats/json_import
 title: JSON Import
 ---
 

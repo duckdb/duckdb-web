@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/import/query_mysql
-- /docs/1.2/guides/import/query_mysql/
-- /docs/1.2/guides/database_integration/mysql
 title: MySQL Import
 ---
 

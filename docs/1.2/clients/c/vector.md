@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/c/vector
-- /docs/1.2/api/c/vector/
-- /docs/1.2/clients/c/vector
 title: Vectors
 ---
 

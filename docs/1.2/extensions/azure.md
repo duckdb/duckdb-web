@@ -1,8 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-azure
 layout: docu
-redirect_from:
-- /docs/1.2/extensions/azure
 title: Azure Extension
 ---
 

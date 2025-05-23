@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/sql_features/friendly_sql
-- /docs/1.2/guides/sql_features/friendly_sql/
-- /docs/1.2/sql/dialect/friendly_sql
 title: Friendly SQL
 ---
 

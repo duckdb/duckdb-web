@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/import/query_parquet
-- /docs/1.2/guides/import/query_parquet/
-- /docs/1.2/guides/file_formats/query_parquet
 title: Querying Parquet Files
 ---
 

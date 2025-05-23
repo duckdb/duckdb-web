@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: query_syntax/filter.js
-redirect_from:
-- /docs/1.2/sql/query_syntax/filter
 title: FILTER Clause
 ---
 

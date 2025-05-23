@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/cpp
-- /docs/1.2/api/cpp/
-- /docs/1.2/clients/cpp
 title: C++ API
 ---
 

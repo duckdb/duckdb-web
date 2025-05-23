@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/dev/building/raspberry_pi
 title: Raspberry Pi
 ---
 

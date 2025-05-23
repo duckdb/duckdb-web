@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/dev/sqllogictest/writing_tests
 title: Writing Tests
 ---
 

@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/performance/file-formats
-- /docs/1.2/guides/performance/file-formats/
-- /docs/1.2/guides/performance/file_formats
 title: File Formats
 ---
 

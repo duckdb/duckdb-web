@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/c/appender
-- /docs/1.2/api/c/appender/
-- /docs/1.2/clients/c/appender
 title: Appender
 ---
 

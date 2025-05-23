@@ -1,10 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-odbc
 layout: docu
-redirect_from:
-- /docs/1.2/api/odbc/linux
-- /docs/1.2/api/odbc/linux/
-- /docs/1.2/clients/odbc/linux
 title: ODBC API on Linux
 ---
 

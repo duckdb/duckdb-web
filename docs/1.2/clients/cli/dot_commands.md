@@ -1,11 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/cli/dot-commands
-- /docs/1.2/api/cli/dot-commands/
-- /docs/1.2/api/cli/dot_commands
-- /docs/1.2/api/cli/dot_commands/
-- /docs/1.2/clients/cli/dot_commands
 title: Dot Commands
 ---
 

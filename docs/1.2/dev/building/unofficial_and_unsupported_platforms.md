@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/dev/building/unofficial_and_unsupported_platforms
 title: Unofficial and Unsupported Platforms
 ---
 

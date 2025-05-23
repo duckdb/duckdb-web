@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: expressions/logical.js
-redirect_from:
-- /docs/1.2/sql/expressions/logical_operators
 title: Logical Operators
 ---
 

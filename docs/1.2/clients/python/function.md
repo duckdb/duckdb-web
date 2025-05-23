@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/python/function
-- /docs/1.2/api/python/function/
-- /docs/1.2/clients/python/function
 title: Python Function API
 ---
 

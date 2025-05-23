@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/sql/information_schema
-- /docs/1.2/sql/information_schema/
-- /docs/1.2/sql/meta/information_schema
 title: Information Schema
 ---
 

@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/data/csv/reading_faulty_csv_files
 title: Reading Faulty CSV Files
 ---
 

@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/c/value
-- /docs/1.2/api/c/value/
-- /docs/1.2/clients/c/value
 title: Values
 ---
 

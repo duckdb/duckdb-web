@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/sql/statements/alter_view
 title: ALTER VIEW Statement
 ---
 

@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: statements/createschema.js
-redirect_from:
-- /docs/1.2/sql/statements/create_schema
 title: CREATE SCHEMA Statement
 ---
 

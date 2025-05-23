@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/internals/storage
 title: Storage Versions and Format
 ---
 

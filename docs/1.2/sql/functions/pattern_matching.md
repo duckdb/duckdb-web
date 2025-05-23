@@ -1,10 +1,6 @@
 ---
 layout: docu
 railroad: expressions/like.js
-redirect_from:
-- /docs/1.2/sql/functions/patternmatching
-- /docs/1.2/sql/functions/patternmatching/
-- /docs/1.2/sql/functions/pattern_matching
 title: Pattern Matching
 ---
 

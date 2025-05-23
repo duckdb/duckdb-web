@@ -1,13 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/cli
-- /docs/1.2/api/cli/
-- /docs/1.2/clients/cli
-- /docs/1.2/clients/cli/
-- /docs/1.2/api/cli/overview
-- /docs/1.2/api/cli/overview/
-- /docs/1.2/clients/cli/overview
 title: CLI API
 ---
 

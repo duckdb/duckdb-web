@@ -1,8 +1,6 @@
 ---
 github_directory: https://github.com/duckdb/duckdb/tree/main/extension/icu
 layout: docu
-redirect_from:
-- /docs/1.2/extensions/icu
 title: ICU Extension
 ---
 

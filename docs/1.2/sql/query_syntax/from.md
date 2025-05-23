@@ -3,8 +3,6 @@ blurb: The FROM clause can contain a single table, a combination of multiple tab
   that are joined together, or another SELECT query inside a subquery node.
 layout: docu
 railroad: query_syntax/from.js
-redirect_from:
-- /docs/1.2/sql/query_syntax/from
 title: FROM and JOIN Clauses
 ---
 

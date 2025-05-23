@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/import/csv_export
-- /docs/1.2/guides/import/csv_export/
-- /docs/1.2/guides/file_formats/csv_export
 title: CSV Export
 ---
 

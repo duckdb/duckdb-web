@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/operations_manual/overview
 title: Overview
 ---
 

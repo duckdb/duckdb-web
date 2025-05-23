@@ -1,12 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-postgres
 layout: docu
-redirect_from:
-- /docs/1.2/extensions/postgres_scanner
-- /docs/1.2/extensions/postgres_scanner/
-- /docs/1.2/extensions/postgresql
-- /docs/1.2/extensions/postgresql/
-- /docs/1.2/extensions/postgres
 title: PostgreSQL Extension
 ---
 

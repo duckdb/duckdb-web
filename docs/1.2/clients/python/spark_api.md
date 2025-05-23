@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/python/spark_api
-- /docs/1.2/api/python/spark_api/
-- /docs/1.2/clients/python/spark_api
 title: Spark API
 ---
 

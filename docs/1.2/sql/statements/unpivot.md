@@ -3,8 +3,6 @@ blurb: The UNPIVOT statement allows columns to be stacked into rows that indicat
   the prior column name and value.
 layout: docu
 railroad: statements/unpivot.js
-redirect_from:
-- /docs/1.2/sql/statements/unpivot
 title: UNPIVOT Statement
 ---
 

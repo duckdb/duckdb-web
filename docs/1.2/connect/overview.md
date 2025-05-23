@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/connect
-- /docs/1.2/connect/
-- /docs/1.2/connect/overview
 title: Connect
 ---
 

@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/julia
-- /docs/1.2/api/julia/
-- /docs/1.2/clients/julia
 title: Julia Client
 ---
 

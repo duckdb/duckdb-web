@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/api/python/expression
-- /docs/1.2/api/python/expression/
-- /docs/1.2/clients/python/expression
 title: Expression API
 ---
 

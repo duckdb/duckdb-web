@@ -1,11 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/data/parquet
-- /docs/1.2/data/parquet/
-- /docs/1.2/extensions/parquet
-- /docs/1.2/extensions/parquet/
-- /docs/1.2/data/parquet/overview
 title: Reading and Writing Parquet Files
 ---
 

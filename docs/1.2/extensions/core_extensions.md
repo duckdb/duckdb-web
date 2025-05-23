@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/extensions/official_extensions
-- /docs/1.2/extensions/official_extensions/
-- /docs/1.2/extensions/core_extensions
 title: Core Extensions
 ---
 

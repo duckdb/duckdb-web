@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/data/json/writing_json
 title: Writing JSON
 ---
 

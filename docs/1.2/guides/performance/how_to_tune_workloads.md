@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/1.2/guides/performance/how-to-tune-workloads
-- /docs/1.2/guides/performance/how-to-tune-workloads/
-- /docs/1.2/guides/performance/how_to_tune_workloads
 title: Tuning Workloads
 ---
 
