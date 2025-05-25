@@ -75,8 +75,8 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| pbix_meta     | table         | NULL        | NULL    | []       |
-| pbix_read     | table         | NULL        | NULL    | []       |
+| pbix_meta     | table         | NULL        | NULL    |          |
+| pbix_read     | table         | NULL        | NULL    |          |
 
 ### Added Settings
 

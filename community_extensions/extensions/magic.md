@@ -69,8 +69,8 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| magic_mime    | scalar        | NULL        | NULL    | []       |
-| magic_type    | scalar        | NULL        | NULL    | []       |
-| read_any      | table_macro   | NULL        | NULL    | []       |
+| magic_mime    | scalar        | NULL        | NULL    |          |
+| magic_type    | scalar        | NULL        | NULL    |          |
+| read_any      | table_macro   | NULL        | NULL    |          |
 
 

@@ -58,9 +58,9 @@ LOAD {{ page.extension.name }};
 
 | function_name  | function_type | description | comment | examples |
 |----------------|---------------|-------------|---------|----------|
-| ulid           | scalar        | NULL        | NULL    | []       |
-| ulid_epoch_ms  | scalar        | NULL        | NULL    | []       |
-| ulid_timestamp | scalar        | NULL        | NULL    | []       |
+| ulid           | scalar        | NULL        | NULL    |          |
+| ulid_epoch_ms  | scalar        | NULL        | NULL    |          |
+| ulid_timestamp | scalar        | NULL        | NULL    |          |
 
 ### Added Types
 

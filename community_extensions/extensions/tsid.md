@@ -89,7 +89,7 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
-| tsid              | scalar        | NULL        | NULL    | []       |
-| tsid_to_timestamp | scalar        | NULL        | NULL    | []       |
+| tsid              | scalar        | NULL        | NULL    |          |
+| tsid_to_timestamp | scalar        | NULL        | NULL    |          |
 
 
