@@ -66,6 +66,22 @@ SELECT ['hello ''my'' world'] AS s;
 
 DuckDB version 1.2.2 returns `[hello 'my' world]` while DuckDB 1.3.0 returns `['hello \'my\' world']`.
 
+To serialize a list of strings with the old behavior, use the [`array_to_string` function]({% link docs/stable/sql/functions/list.md %}#array_to_string):
+
+```sql
+SELECT printf('[%s]', array_to_string(
+        ['hello ''my'' world', 'hello ''cruel'' world'], ', '
+    )) AS s;
+```
+```text
+┌─────────────────────────────────────────┐
+│                    s                    │
+│                 varchar                 │
+├─────────────────────────────────────────┤
+│ [hello 'my' world, hello 'cruel' world] │
+└─────────────────────────────────────────┘
+```
+
 ### Minor SQL Parser Changes
 
 * The term `AT` now needs quotes to be used as an identifier as it is used for [time travel in Iceberg](https://github.com/duckdb/duckdb-iceberg/pull/225).
