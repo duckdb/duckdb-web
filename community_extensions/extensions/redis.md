@@ -119,13 +119,13 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| redis_get     | scalar        | NULL        | NULL    | []       |
-| redis_hget    | scalar        | NULL        | NULL    | []       |
-| redis_hset    | scalar        | NULL        | NULL    | []       |
-| redis_lpush   | scalar        | NULL        | NULL    | []       |
-| redis_lrange  | scalar        | NULL        | NULL    | []       |
-| redis_mget    | scalar        | NULL        | NULL    | []       |
-| redis_scan    | scalar        | NULL        | NULL    | []       |
-| redis_set     | scalar        | NULL        | NULL    | []       |
+| redis_get     | scalar        | NULL        | NULL    |          |
+| redis_hget    | scalar        | NULL        | NULL    |          |
+| redis_hset    | scalar        | NULL        | NULL    |          |
+| redis_lpush   | scalar        | NULL        | NULL    |          |
+| redis_lrange  | scalar        | NULL        | NULL    |          |
+| redis_mget    | scalar        | NULL        | NULL    |          |
+| redis_scan    | scalar        | NULL        | NULL    |          |
+| redis_set     | scalar        | NULL        | NULL    |          |
 
 
