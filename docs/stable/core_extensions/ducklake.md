@@ -24,6 +24,10 @@ If you would like to load it manually, run:
 LOAD ducklake;
 ```
 
+## Usage
+
+
+
 ## Functions
 
 Note that DuckLake registers several internal functions.
@@ -42,4 +46,4 @@ These are not intended to be called directly by DuckLake users.
 | `ducklake_table_deletions` | | |
 | `ducklake_table_info` | | |
 | `ducklake_table_insertions` | | |
-| `ducklake_table_insertions` | | | 
+| `ducklake_table_insertions` | | |

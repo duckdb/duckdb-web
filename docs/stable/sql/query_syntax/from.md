@@ -599,6 +599,26 @@ FROM tbl;
 | b | 1 |
 | b | 2 |
 
+## Time Travel Using `AT`
+
+DuckDB v1.3.0 introduced support for [time travel queries](https://docs.snowflake.com/en/user-guide/data-time-travel)
+on data lake formats such as
+[Delta]({% link docs/stable/core_extensions/delta.md %}),
+[DuckLake]({% link docs/stable/core_extensions/ducklake.md %}) and
+[Iceberg]({% link docs/stable/core_extensions/iceberg/overview.md %}).
+
+To specify a time travel query, use the `AT` modifier in the `FROM` clause.
+Time travel queries can use either a version number or the timestamp specified with
+`VERSION => ⟨version⟩`{:.language-sql .highlight}
+and
+`TIMESTAMP => ⟨timestamp or date⟩`{:.language-sql .highlight},
+respectively. For example:
+
+```sql
+FROM my_ducklake.demo AT (VERSION => 2);
+FROM my_ducklake.demo AT (TIMESTAMP => DATE '2025-05-26');
+```
+
 ## Syntax
 
 <div id="rrdiagram"></div>
