@@ -185,6 +185,7 @@ Please note that DuckDB Labs, the company that employs the main DuckDB contribut
 DuckDB supports [persistent storage]({% link docs/stable/connect/overview.md %}#persistent-database) and stores the database as a single file, which includes all tables, views, indexes, macros, etc. present in the database.
 DuckDB's [storage format]({% link docs/stable/internals/storage.md %}) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
 DuckDB can also run in [in-memory mode]({% link docs/stable/connect/overview.md %}#in-memory-database), where no data is persisted to disk.
+DuckDB can also save data in [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/stable/core_extensions/ducklake.md %}).
 
 </div>
 
@@ -270,6 +271,8 @@ Compatibility is also guaranteed between different DuckDB clients (e.g., Python 
 <div class="answer" markdown="1">
 See the documentation on [handling concurrency]({% link docs/stable/connect/concurrency.md %}#handling-concurrency)
 and the section on [“Writing to DuckDB from Multiple Processes”]({% link docs/stable/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
+
+To work on the same data set with multiple DuckDB clients, consider using the [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/stable/core_extensions/ducklake.md %}).
 </div>
 
 </div>
