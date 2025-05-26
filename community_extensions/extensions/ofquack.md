@@ -54,6 +54,6 @@ LOAD {{ page.extension.name }};
 
 |      function_name       | function_type | description | comment | examples |
 |--------------------------|---------------|-------------|---------|----------|
-| oracle_fusion_wsdl_query | table         | NULL        | NULL    | []       |
+| oracle_fusion_wsdl_query | table         | NULL        | NULL    |          |
 
 

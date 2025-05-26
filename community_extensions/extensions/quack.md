@@ -63,7 +63,7 @@ LOAD {{ page.extension.name }};
 
 |     function_name     | function_type | description | comment | examples |
 |-----------------------|---------------|-------------|---------|----------|
-| quack                 | scalar        | NULL        | NULL    | []       |
-| quack_openssl_version | scalar        | NULL        | NULL    | []       |
+| quack                 | scalar        | NULL        | NULL    |          |
+| quack_openssl_version | scalar        | NULL        | NULL    |          |
 
 
