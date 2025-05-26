@@ -602,8 +602,8 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon{
 	position: relative;
 	width: 100%;
 	text-align: center;
-	background-color: #F5FBFF;
-	color: black;
+	background: var(--lake-ribbon-background-color, rgba(153, 216, 255, 0.60));
+	color: var(--main-text-primary-color, #0D0D0D);
 	font-size: $fontSize16;
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -630,6 +630,7 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon{
 		height: 13px;
 		background-size: contain; 
 		background-repeat: no-repeat;
+		filter: invert(1);
 	}
 	@media only screen and (max-width: 980px) {
 		-webkit-box-pack: start;
