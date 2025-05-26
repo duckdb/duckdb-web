@@ -43,8 +43,8 @@ docs:
 
 
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 3
+extension_star_count_pretty: 3
 extension_download_count: 163603
 extension_download_count_pretty: 163.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_arrow.png'
@@ -74,9 +74,9 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
-| nanoarrow_version | scalar        | NULL        | NULL    | []       |
-| read_arrow        | table         | NULL        | NULL    | []       |
-| scan_arrow_ipc    | table         | NULL        | NULL    | []       |
-| to_arrow_ipc      | table         | NULL        | NULL    | []       |
+| nanoarrow_version | scalar        | NULL        | NULL    |          |
+| read_arrow        | table         | NULL        | NULL    |          |
+| scan_arrow_ipc    | table         | NULL        | NULL    |          |
+| to_arrow_ipc      | table         | NULL        | NULL    |          |
 
 
