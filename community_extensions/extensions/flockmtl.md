@@ -19,14 +19,14 @@ extension:
     - queryproc
 
 repo:
-  github: dsg-polymtl/flockmtl
-  ref: 6f0dc7cfe2398b63b517c306b488e80ac44e2fe9
+  github: dais-polymtl/flockmtl
+  ref: 3de4a715ec98ea5e87068d0cf1d96a95da8ab698
 
 docs:
   hello_world: |
     -- After loading, any function call will throw an error if the provider's secret doesn't exist
 
-    -- Create your provider secret by following the [documentation](https://dsg-polymtl.github.io/flockmtl/docs/supported-providers). For example, you can create a default OpenAI API key as follows:
+    -- Create your provider secret by following the [documentation](https://dais-polymtl.github.io/flockmtl/docs/what-is-flockmtl/). For example, you can create a default OpenAI API key as follows:
     D CREATE SECRET (TYPE OPENAI, API_KEY 'your-api-key');
 
     -- Call an OpenAI model with a predefined prompt ('Tell me hello world') and default model ('gpt-4o-mini')
@@ -58,12 +58,12 @@ docs:
 
     FlockMTL is designed for rapid prototyping of LLM-based analytics and is optimized with batching and caching features for better performance.
 
-    📄 For more details and examples, see the [FlockMTL documentation](https://dsg-polymtl.github.io/flockmtl/docs/what-is-flockmtl).
+    📄 For more details and examples, see the [FlockMTL documentation](https://dais-polymtl.github.io/flockmtl/docs/what-is-flockmtl).
 
-    > *Note:* FlockMTL is part of ongoing research by the [Data Systems Group @ Polytechnique Montréal](https://dsg-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
+    > *Note:* FlockMTL is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://dais-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
 
-extension_star_count: 212
-extension_star_count_pretty: 212
+extension_star_count: 217
+extension_star_count_pretty: 217
 extension_download_count: 499
 extension_download_count_pretty: 499
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
@@ -93,94 +93,19 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
-| fusion_combanz    | scalar        | NULL        | NULL    | []       |
-| fusion_combmed    | scalar        | NULL        | NULL    | []       |
-| fusion_combmnz    | scalar        | NULL        | NULL    | []       |
-| fusion_combsum    | scalar        | NULL        | NULL    | []       |
-| fusion_rrf        | scalar        | NULL        | NULL    | []       |
-| llm_complete      | scalar        | NULL        | NULL    | []       |
-| llm_complete_json | scalar        | NULL        | NULL    | []       |
-| llm_embedding     | scalar        | NULL        | NULL    | []       |
-| llm_filter        | scalar        | NULL        | NULL    | []       |
-| llm_first         | aggregate     | NULL        | NULL    | []       |
-| llm_last          | aggregate     | NULL        | NULL    | []       |
-| llm_reduce        | aggregate     | NULL        | NULL    | []       |
-| llm_reduce_json   | aggregate     | NULL        | NULL    | []       |
-| llm_rerank        | aggregate     | NULL        | NULL    | []       |
-
-### Overloaded Functions
-
-<div class="extension_functions_table"></div>
-
-|         function_name         | function_type | description | comment | examples |
-|-------------------------------|---------------|-------------|---------|----------|
-| array_append                  | macro         | NULL        | NULL    | []       |
-| array_intersect               | macro         | NULL        | NULL    | []       |
-| array_pop_back                | macro         | NULL        | NULL    | []       |
-| array_pop_front               | macro         | NULL        | NULL    | []       |
-| array_prepend                 | macro         | NULL        | NULL    | []       |
-| array_push_back               | macro         | NULL        | NULL    | []       |
-| array_push_front              | macro         | NULL        | NULL    | []       |
-| array_reverse                 | macro         | NULL        | NULL    | []       |
-| array_to_string               | macro         | NULL        | NULL    | []       |
-| array_to_string_comma_default | macro         | NULL        | NULL    | []       |
-| current_catalog               | macro         | NULL        | NULL    | []       |
-| current_role                  | macro         | NULL        | NULL    | []       |
-| current_user                  | macro         | NULL        | NULL    | []       |
-| date_add                      | macro         | NULL        | NULL    | []       |
-| fdiv                          | macro         | NULL        | NULL    | []       |
-| fmod                          | macro         | NULL        | NULL    | []       |
-| generate_subscripts           | macro         | NULL        | NULL    | []       |
-| geomean                       | macro         | NULL        | NULL    | []       |
-| geometric_mean                | macro         | NULL        | NULL    | []       |
-| get_block_size                | macro         | NULL        | NULL    | []       |
-| histogram                     | table_macro   | NULL        | NULL    | []       |
-| histogram_values              | table_macro   | NULL        | NULL    | []       |
-| list_any_value                | macro         | NULL        | NULL    | []       |
-| list_append                   | macro         | NULL        | NULL    | []       |
-| list_approx_count_distinct    | macro         | NULL        | NULL    | []       |
-| list_avg                      | macro         | NULL        | NULL    | []       |
-| list_bit_and                  | macro         | NULL        | NULL    | []       |
-| list_bit_or                   | macro         | NULL        | NULL    | []       |
-| list_bit_xor                  | macro         | NULL        | NULL    | []       |
-| list_bool_and                 | macro         | NULL        | NULL    | []       |
-| list_bool_or                  | macro         | NULL        | NULL    | []       |
-| list_count                    | macro         | NULL        | NULL    | []       |
-| list_entropy                  | macro         | NULL        | NULL    | []       |
-| list_first                    | macro         | NULL        | NULL    | []       |
-| list_histogram                | macro         | NULL        | NULL    | []       |
-| list_intersect                | macro         | NULL        | NULL    | []       |
-| list_kurtosis                 | macro         | NULL        | NULL    | []       |
-| list_kurtosis_pop             | macro         | NULL        | NULL    | []       |
-| list_last                     | macro         | NULL        | NULL    | []       |
-| list_mad                      | macro         | NULL        | NULL    | []       |
-| list_max                      | macro         | NULL        | NULL    | []       |
-| list_median                   | macro         | NULL        | NULL    | []       |
-| list_min                      | macro         | NULL        | NULL    | []       |
-| list_mode                     | macro         | NULL        | NULL    | []       |
-| list_prepend                  | macro         | NULL        | NULL    | []       |
-| list_product                  | macro         | NULL        | NULL    | []       |
-| list_reverse                  | macro         | NULL        | NULL    | []       |
-| list_sem                      | macro         | NULL        | NULL    | []       |
-| list_skewness                 | macro         | NULL        | NULL    | []       |
-| list_stddev_pop               | macro         | NULL        | NULL    | []       |
-| list_stddev_samp              | macro         | NULL        | NULL    | []       |
-| list_string_agg               | macro         | NULL        | NULL    | []       |
-| list_sum                      | macro         | NULL        | NULL    | []       |
-| list_var_pop                  | macro         | NULL        | NULL    | []       |
-| list_var_samp                 | macro         | NULL        | NULL    | []       |
-| map_contains_entry            | macro         | NULL        | NULL    | []       |
-| map_contains_value            | macro         | NULL        | NULL    | []       |
-| md5_number_lower              | macro         | NULL        | NULL    | []       |
-| md5_number_upper              | macro         | NULL        | NULL    | []       |
-| nullif                        | macro         | NULL        | NULL    | []       |
-| regexp_split_to_table         | macro         | NULL        | NULL    | []       |
-| round_even                    | macro         | NULL        | NULL    | []       |
-| roundbankers                  | macro         | NULL        | NULL    | []       |
-| session_user                  | macro         | NULL        | NULL    | []       |
-| split_part                    | macro         | NULL        | NULL    | []       |
-| user                          | macro         | NULL        | NULL    | []       |
-| wavg                          | macro         | NULL        | NULL    | []       |
-| weighted_avg                  | macro         | NULL        | NULL    | []       |
+| fusion_combanz    | scalar        | NULL        | NULL    |          |
+| fusion_combmed    | scalar        | NULL        | NULL    |          |
+| fusion_combmnz    | scalar        | NULL        | NULL    |          |
+| fusion_combsum    | scalar        | NULL        | NULL    |          |
+| fusion_rrf        | scalar        | NULL        | NULL    |          |
+| llm_complete      | scalar        | NULL        | NULL    |          |
+| llm_complete_json | scalar        | NULL        | NULL    |          |
+| llm_embedding     | scalar        | NULL        | NULL    |          |
+| llm_filter        | scalar        | NULL        | NULL    |          |
+| llm_first         | aggregate     | NULL        | NULL    |          |
+| llm_last          | aggregate     | NULL        | NULL    |          |
+| llm_reduce        | aggregate     | NULL        | NULL    |          |
+| llm_reduce_json   | aggregate     | NULL        | NULL    |          |
+| llm_rerank        | aggregate     | NULL        | NULL    |          |
 
 

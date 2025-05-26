@@ -88,8 +88,8 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| cron          | scalar        | NULL        | NULL    | []       |
-| cron_delete   | scalar        | NULL        | NULL    | []       |
-| cron_jobs     | table         | NULL        | NULL    | []       |
+| cron          | scalar        | NULL        | NULL    |          |
+| cron_delete   | scalar        | NULL        | NULL    |          |
+| cron_jobs     | table         | NULL        | NULL    |          |
 
 
