@@ -65,13 +65,9 @@ def update_stable_page(src_file, old_stable_version):
     # parse YAML metadata and adjust the "redirect_from" field
     doc = frontmatter.load(src_file)
 
-    redirect_from_field = doc.get("redirect_from")
-    if redirect_from_field:
-        redirect_from_field_to_archive = [
-            x.replace("docs/stable/", f"docs/{old_stable_version}/")
-            for x in redirect_from_field
-        ]
-        doc["redirect_from"] = redirect_from_field_to_archive
+    # remove redirects
+    if "redirect_from" in doc:
+        del doc["redirect_from"]
 
     # replace link tags in the content
     doc.content = doc.content.replace(
@@ -115,3 +111,6 @@ archive_stable(old_stable_version)
 
 shutil.copy("_data/menu_docs_preview.json", f"_data/menu_docs_stable.json")
 archive_preview()
+
+shutil.move("js/stable", "js/{old_stable_version}")
+shutil.copytree("js/preview", "js/stable")

@@ -27,7 +27,7 @@ title: Lambda Functions
 Lambda functions enable the use of more complex and flexible expressions in queries.
 DuckDB supports several scalar functions that operate on [`LIST`s]({% link docs/preview/sql/data_types/list.md %}) and
 accept lambda functions as parameters
-in the form `lambda (⟨parameter1⟩, ⟨parameter2⟩, ...) : ⟨expression⟩`{:.language-sql .highlight}.
+in the form `lambda ⟨parameter1⟩, ⟨parameter2⟩, ... : ⟨expression⟩`{:.language-sql .highlight}.
 If the lambda function has only one parameter, then the parentheses can be omitted.
 The parameters can have any names.
 For example, the following are all valid lambda functions:
@@ -67,7 +67,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Reduces all elements of the input list into a single scalar value by executing the lambda function on a running result and the next list element. The lambda function has an optional `initial_value` argument. See [`list_reduce` examples](#list_reduce-examples) or details. |
-| **Example** | `list_reduce([1, 2, 3], lambda (x, y) : x + y, 100)`{:.language-sql .highlight} |
+| **Example** | `list_reduce([1, 2, 3], lambda x, y : x + y, 100)`{:.language-sql .highlight} |
 | **Result** | `106` |
 | **Aliases** | `array_reduce`, `reduce` |
 

@@ -7,7 +7,7 @@ The `iceberg` extension supports attaching Iceberg REST Catalogs. Before attachi
 
 If you are attaching to an Iceberg REST Catalog managed by Amazon, please see the instructions for attaching to [Amazon S3 tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) or [Amazon Sagemaker Lakehouse]({% link docs/stable/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
 
-For all other Iceberg REST Catalogs, you can follow the instructions below. Please see the [Examples](#examples) section for questions about specific catalogs.
+For all other Iceberg REST Catalogs, you can follow the instructions below. Please see the [Examples](#specific-catalog-examples) section for questions about specific catalogs.
 
 Most Iceberg REST Catalogs authenticate via OAuth2. You can use the existing DuckDB secret workflow to store login credentials for the OAuth2 service.
 
@@ -68,7 +68,7 @@ The following options can only be passed to a `CREATE SECRET` statement, and the
 | `OAUTH2_GRANT_TYPE`          | `VARCHAR`  | `NULL` | Grant Type when requesting an OAuth Token |
 | `OAUTH2_SCOPE`               | `VARCHAR`  | `NULL` | Requested scope for the returned OAuth Access Token |
 
-## Specific Catalog Examples 
+## Specific Catalog Examples
 
 ### R2 Catalog
 

@@ -3,6 +3,7 @@ github_repository: https://github.com/duckdb/duckdb-sqlite
 layout: docu
 title: SQLite Extension
 redirect_from:
+- /docs/extensions/sqlite
 - /docs/stable/extensions/sqlite
 - /docs/stable/extensions/sqlite/
 ---

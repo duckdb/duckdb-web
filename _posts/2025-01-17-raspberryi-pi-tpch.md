@@ -8,7 +8,7 @@ excerpt: DuckDB can run all TPC-H SF300 queries on a Raspberry Pi board.
 tags: ["benchmark"]
 --- 
 
-> Update (April 2025): The configuration described in this post can now run **all TPC-H queries on the SF1,000 dataset** with the latest stable version of DuckDB, v1.2.2!
+> Update (April 2025): The setup described in this post can now run **all TPC-H queries on the SF1,000 dataset** with the latest stable version of DuckDB, v1.2.2!
 
 ## Introduction
 
