@@ -27,16 +27,31 @@ LOAD ducklake;
 ## Usage
 
 ```sql
-ATTACHINSTALL ducklake;
-ATTACH 'ducklake:metadata.ducklake' AS my_ducklake;
+ATTACH 'ducklake:metadata.ducklake' AS my_ducklake (DATA_PATH 'data_files');
 USE my_ducklake;
 ```
+
+## Tables
+
+In DuckDB, the `ducklake` extension stores the [catalog tables](http://ducklake.select/docs/stable/specification/tables/overview) for a DuckLake named `my_ducklake` in the `__ducklake_metadata_⟨my_ducklake⟩`{:.language-sql .highlight} catalog.
 
 ## Functions
 
 Note that DuckLake registers several functions.
+These should be called with the catalog name as the first argument, e.g.:
 
-TODO: call them based on the catalog prefix
+```sql
+FROM ducklake_snapshots('my_ducklake');
+```
+
+```text
+┌─────────────┬────────────────────────────┬────────────────┬──────────────────────────┐
+│ snapshot_id │       snapshot_time        │ schema_version │         changes          │
+│    int64    │  timestamp with time zone  │     int64      │ map(varchar, varchar[])  │
+├─────────────┼────────────────────────────┼────────────────┼──────────────────────────┤
+│      0      │ 2025-05-26 11:41:10.838+02 │       0        │ {schemas_created=[main]} │
+└─────────────┴────────────────────────────┴────────────────┴──────────────────────────┘
+```
 
 ### `ducklake_snapshots`
 
@@ -140,7 +155,6 @@ Upon success, it returns a table with a single column (`Success`) and 0 rows.
 | `cleanup_all`  | `BOOLEAN`                  | yes             |             |
 | `dry_run`      | `BOOLEAN`                  | yes             |             |
 | `older_than`   | `TIMESTAMP WITH TIME ZONE` | yes             |             |
-
 
 ### `ducklake_expire_snapshots`
 
