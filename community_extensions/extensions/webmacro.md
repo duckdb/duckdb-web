@@ -84,6 +84,6 @@ LOAD {{ page.extension.name }};
 
 |    function_name    | function_type | description | comment | examples |
 |---------------------|---------------|-------------|---------|----------|
-| load_macro_from_url | scalar        | NULL        | NULL    | []       |
+| load_macro_from_url | scalar        | NULL        | NULL    |          |
 
 
