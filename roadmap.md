@@ -22,8 +22,9 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * Documentation for the [C extension API](https://github.com/duckdb/extension-template-c)
 * Generic ODBC catalog, similarly to the existing PostgreSQL / MySQL / SQLite integrations
 * Go and Rust support for extensions
-* Improved support for the Iceberg format through the [iceberg extension]({% link docs/stable/core_extensions/iceberg/overview.md %})
-* Improved support for Delta Lake through the [delta extension]({% link docs/stable/core_extensions/delta.md %})
+* **Data lake formats.** – Update 2025-05-27: We released [DuckLake](https://ducklake.select/), a lakehouse format. We would like to emphasize that we will keep developing DuckDB's Iceberg and Delta Lake extensions, and plan to add write support for these formats.
+    * Improved support for the Iceberg format through the [iceberg extension]({% link docs/stable/core_extensions/iceberg/overview.md %})
+    * Improved support for Delta Lake through the [delta extension]({% link docs/stable/core_extensions/delta.md %})
 * [`MATCH RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
 * Remote file content caching using buffer manager (e.g., when querying Parquet files on S3)
 * [Database file encryption](https://github.com/duckdb/duckdb/discussions/4512)
