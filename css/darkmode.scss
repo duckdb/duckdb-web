@@ -84,7 +84,12 @@ html.darkmode body{
 	.banner .close{
 		filter: invert(0);
 	}
-
+	img.darkmode-img{
+		display: inline;
+	}
+	img.lightmode-img{
+		display: none;
+	}
 	
 	/** BLOG **/
 	.newswrap .postwrap .infoline .icon{
