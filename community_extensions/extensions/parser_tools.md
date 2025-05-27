@@ -128,9 +128,9 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
-| is_parsable       | scalar        | NULL        | NULL    | []       |
-| parse_table_names | scalar        | NULL        | NULL    | []       |
-| parse_tables      | scalar        | NULL        | NULL    | []       |
-| parse_tables      | table         | NULL        | NULL    | []       |
+| is_parsable       | scalar        | NULL        | NULL    |          |
+| parse_table_names | scalar        | NULL        | NULL    |          |
+| parse_tables      | scalar        | NULL        | NULL    |          |
+| parse_tables      | table         | NULL        | NULL    |          |
 
 

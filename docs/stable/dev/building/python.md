@@ -218,13 +218,12 @@ Under **Settings** -> **Build, Execution, Deployment** -> **CMake**, add a profi
 * **Build type**: Debug
 * **Generator**:  Ninja
 * **CMake Options** (on a single line):
-
-    ```console
-    -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
-    -DPython3_EXECUTABLE=$CMakeProjectDir$/.venv/bin/python3
-    -DBUILD_PYTHON=1
-    -DPYTHON_DEV=1
-    ```
+  ```console
+  -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
+  -DPython3_EXECUTABLE=$CMakeProjectDir$/.venv/bin/python3
+  -DBUILD_PYTHON=1
+  -DPYTHON_DEV=1
+  ```
 
 #### Create a Run Config for Debugging
 

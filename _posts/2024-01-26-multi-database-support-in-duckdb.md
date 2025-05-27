@@ -230,7 +230,7 @@ already modified database "postgres" – a single transaction can only write
 to a single attached database.
 ```
 
-## Copying Data Between Databases
+## Copying Data between Databases
 
 `CREATE TABLE AS`, `INSERT INTO` and `COPY` can be used to copy data between different attached databases. The dedicated [`COPY FROM DATABASE ... TO`]({% link docs/stable/sql/statements/copy.md %}#copy-from-database--to) can be used to copy all data from one database to another. This includes all tables and views that are stored in the source database.
 

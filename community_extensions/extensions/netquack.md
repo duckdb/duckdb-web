@@ -27,8 +27,8 @@ docs:
 
     Check the [documentation](https://github.com/hatamiarash7/duckdb-netquack) for more details and examples on each function.
 
-extension_star_count: 12
-extension_star_count_pretty: 12
+extension_star_count: 14
+extension_star_count_pretty: 14
 extension_download_count: 503
 extension_download_count_pretty: 503
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
@@ -68,10 +68,10 @@ LOAD {{ page.extension.name }};
 | get_tranco_rank          | scalar        | Getting the Tranco rank of a domain        | NULL    | [SELECT get_tranco_rank('cloudflare.com') as rank;]                 |
 | update_suffixes          | scalar        | Update public suffixes                     | NULL    | [SELECT update_suffixes();]                                         |
 | update_tranco            | scalar        | Update tranco data                         | NULL    | [SELECT update_tranco(true);]                                       |
-| ipcalc                   | table         | NULL                                       | NULL    | [NULL]                                                              |
-| extract_port             | scalar        | NULL                                       | NULL    | [NULL]                                                              |
-| get_tranco_rank_category | scalar        | NULL                                       | NULL    | [NULL]                                                              |
-| netquack_version         | table         | NULL                                       | NULL    | [NULL]                                                              |
-| extract_extension        | scalar        | NULL                                       | NULL    | [NULL]                                                              |
+| extract_port             | scalar        | NULL                                       | NULL    | NULL                                                                |
+| extract_extension        | scalar        | NULL                                       | NULL    | NULL                                                                |
+| ipcalc                   | table         | NULL                                       | NULL    | NULL                                                                |
+| get_tranco_rank_category | scalar        | NULL                                       | NULL    | NULL                                                                |
+| netquack_version         | table         | NULL                                       | NULL    | NULL                                                                |
 
 
