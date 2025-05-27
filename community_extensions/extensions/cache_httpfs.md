@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.2.1
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: 20c4e7539463f1f8244cbd92b3531d8a2b12ccee
+  ref: 39bf7bb325d022ceb4f38c41cab43c48e7dc3793
 
 docs:
   hello_world: |
@@ -35,8 +35,8 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 70
-extension_star_count_pretty: 70
+extension_star_count: 72
+extension_star_count_pretty: 72
 extension_download_count: 862
 extension_download_count_pretty: 862
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
@@ -66,13 +66,15 @@ LOAD {{ page.extension.name }};
 
 |              function_name              | function_type | description | comment | examples |
 |-----------------------------------------|---------------|-------------|---------|----------|
-| cache_httpfs_cache_access_info_query    | table         | NULL        | NULL    | []       |
-| cache_httpfs_cache_status_query         | table         | NULL        | NULL    | []       |
-| cache_httpfs_clear_cache                | scalar        | NULL        | NULL    | []       |
-| cache_httpfs_clear_cache_for_file       | scalar        | NULL        | NULL    | []       |
-| cache_httpfs_clear_profile              | scalar        | NULL        | NULL    | []       |
-| cache_httpfs_get_ondisk_data_cache_size | scalar        | NULL        | NULL    | []       |
-| cache_httpfs_get_profile                | scalar        | NULL        | NULL    | []       |
+| cache_httpfs_cache_access_info_query    | table         | NULL        | NULL    |          |
+| cache_httpfs_cache_status_query         | table         | NULL        | NULL    |          |
+| cache_httpfs_clear_cache                | scalar        | NULL        | NULL    |          |
+| cache_httpfs_clear_cache_for_file       | scalar        | NULL        | NULL    |          |
+| cache_httpfs_clear_profile              | scalar        | NULL        | NULL    |          |
+| cache_httpfs_get_cache_filesystems      | table         | NULL        | NULL    |          |
+| cache_httpfs_get_ondisk_data_cache_size | scalar        | NULL        | NULL    |          |
+| cache_httpfs_get_profile                | scalar        | NULL        | NULL    |          |
+| cache_httpfs_wrap_cache_filesystem      | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
