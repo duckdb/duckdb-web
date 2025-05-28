@@ -323,14 +323,14 @@ By default, the profiling coverage is set to `SELECT`.
 `SELECT` runs the profiler for each operator in the physical plan of a `SELECT` statement.
 
 ```sql
-SET profiling_coverage='SELECT';
+SET profiling_coverage = 'SELECT';
 ```
 
 By default, the profiler **does not** emit profiling information for other statement types (`INSERT INTO`, `ATTACH`, etc.).
 To run the profiler for all statement types, change this setting to `ALL`.
 
 ```sql
-SET profiling_coverage='ALL';
+SET profiling_coverage = 'ALL';
 ```
 
 ### Profiling Format
