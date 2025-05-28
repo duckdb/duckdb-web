@@ -5,6 +5,8 @@ title: Vector Similarity Search Extension
 redirect_from:
 - /docs/stable/extensions/vss
 - /docs/stable/extensions/vss/
+- /docs/extensions/vss
+- /docs/extensions/vss/
 ---
 
 The `vss` extension is an experimental extension for DuckDB that adds indexing support to accelerate vector similarity search queries using DuckDB's new fixed-size `ARRAY` type.
@@ -141,6 +143,8 @@ The `vss` extension also provides a couple of table macros to simplify matching 
 * `vss_join(left_table, right_table, left_col, right_col, k, metric := 'l2sq')`
 * `vss_match(right_table", left_col, right_col, k, metric := 'l2sq')`
 
+> `k` is the number of records to be selected from the `right_table` for each `left_table` record, ordered by the score.
+
 These **do not** currently make use of the `HNSW` index but are provided as convenience utility functions for users who are ok with performing brute-force vector similarity searches without having to write out the join logic themselves. In the future these might become targets for index-based optimizations as well.
 
 These functions can be used as follows:
@@ -157,7 +161,7 @@ INSERT INTO needle
     VALUES ([5, 5, 5]), ([1, 1, 1]);
 
 SELECT *
-FROM vss_join(needle, haystack, search_vec, vec, 3) res;
+FROM vss_join(needle, haystack, search_vec, vec, 2) res;
 ```
 
 ```text
@@ -166,10 +170,8 @@ FROM vss_join(needle, haystack, search_vec, vec, 3) res;
 │ float │   struct(search_vec float[3])   │  struct(id integer, vec float[3])   │
 ├───────┼─────────────────────────────────┼─────────────────────────────────────┤
 │   0.0 │ {'search_vec': [5.0, 5.0, 5.0]} │ {'id': 365, 'vec': [5.0, 5.0, 5.0]} │
-│   1.0 │ {'search_vec': [5.0, 5.0, 5.0]} │ {'id': 364, 'vec': [5.0, 4.0, 5.0]} │
-│   1.0 │ {'search_vec': [5.0, 5.0, 5.0]} │ {'id': 356, 'vec': [4.0, 5.0, 5.0]} │
+│   1.0 │ {'search_vec': [5.0, 5.0, 5.0]} │ {'id': 356, 'vec': [5.0, 5.0, 4.0]} │
 │   0.0 │ {'search_vec': [1.0, 1.0, 1.0]} │ {'id': 1, 'vec': [1.0, 1.0, 1.0]}   │
-│   1.0 │ {'search_vec': [1.0, 1.0, 1.0]} │ {'id': 10, 'vec': [2.0, 1.0, 1.0]}  │
 │   1.0 │ {'search_vec': [1.0, 1.0, 1.0]} │ {'id': 2, 'vec': [1.0, 2.0, 1.0]}   │
 └───────┴─────────────────────────────────┴─────────────────────────────────────┘
 ```
@@ -180,17 +182,17 @@ table (in this case, `search_vec`):
 
 ```sql
 SELECT *
-FROM needle, vss_match(haystack, search_vec, vec, 3) res;
+FROM needle, vss_match(haystack, search_vec, vec, 2) res;
 ```
 
 ```text
-┌─────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│   search_vec    │                                                                                       matches                                                                                        │
-│    float[3]     │                                                            struct(score float, "row" struct(id integer, vec float[3]))[]                                                             │
-├─────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ [5.0, 5.0, 5.0] │ [{'score': 0.0, 'row': {'id': 365, 'vec': [5.0, 5.0, 5.0]}}, {'score': 1.0, 'row': {'id': 364, 'vec': [5.0, 4.0, 5.0]}}, {'score': 1.0, 'row': {'id': 356, 'vec': [4.0, 5.0, 5.0]}}] │
-│ [1.0, 1.0, 1.0] │ [{'score': 0.0, 'row': {'id': 1, 'vec': [1.0, 1.0, 1.0]}}, {'score': 1.0, 'row': {'id': 10, 'vec': [2.0, 1.0, 1.0]}}, {'score': 1.0, 'row': {'id': 2, 'vec': [1.0, 2.0, 1.0]}}]      │
-└─────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│   search_vec    │                                                         matches                                                          │
+│    float[3]     │                              struct(score float, "row" struct(id integer, vec float[3]))[]                               │
+├─────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ [5.0, 5.0, 5.0] │ [{'score': 0.0, 'row': {'id': 365, 'vec': [5.0, 5.0, 5.0]}}, {'score': 1.0, 'row': {'id': 356, 'vec': [5.0, 5.0, 4.0]}}] │
+│ [1.0, 1.0, 1.0] │ [{'score': 0.0, 'row': {'id': 1, 'vec': [1.0, 1.0, 1.0]}}, {'score': 1.0, 'row': {'id': 2, 'vec': [1.0, 2.0, 1.0]}}]     │
+└─────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Limitations

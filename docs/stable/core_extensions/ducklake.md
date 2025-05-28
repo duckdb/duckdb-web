@@ -2,6 +2,9 @@
 github_repository: https://github.com/duckdb/ducklake
 layout: docu
 title: DuckLake
+redirect_from:
+- /docs/extensions/ducklake
+- /docs/extensions/ducklake/
 ---
 
 > DuckLake has been released in May 2025.

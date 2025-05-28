@@ -8,6 +8,7 @@ jobs:
   update_docs:
     name: Update docs
     runs-on: ubuntu-24.04
+    if: ${{ github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web' }}
 
     steps:
       - uses: actions/checkout@v4

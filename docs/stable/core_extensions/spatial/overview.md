@@ -7,6 +7,8 @@ redirect_from:
 - /docs/stable/extensions/spatial/
 - /docs/stable/extensions/spatial/overview
 - /docs/stable/extensions/spatial/overview/
+- /docs/extensions/spatial
+- /docs/extensions/spatial/
 ---
 
 The `spatial` extension provides support for geospatial data processing in DuckDB.

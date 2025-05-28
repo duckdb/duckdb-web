@@ -5,6 +5,8 @@ title: UI Extension
 redirect_from:
 - /docs/stable/extensions/ui
 - /docs/stable/extensions/ui/
+- /docs/extensions/ui
+- /docs/extensions/ui/
 ---
 
 The `ui` extension adds a user interface for your local DuckDB instance.

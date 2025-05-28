@@ -2,6 +2,8 @@
 layout: docu
 title: Text Functions
 redirect_from:
+- docs/sql/functions/char
+- docs/sql/functions/char/
 - docs/stable/sql/functions/char
 - docs/stable/sql/functions/char/
 ---
