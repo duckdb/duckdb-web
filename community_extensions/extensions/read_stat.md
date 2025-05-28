@@ -59,8 +59,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 444
-extension_download_count_pretty: 444
+extension_download_count: 483
+extension_download_count_pretty: 483
 image: '/images/community_extensions/social_preview/preview_community_extension_read_stat.png'
 layout: community_extension_doc
 ---
@@ -88,6 +88,6 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| read_stat     | table         | NULL        | NULL    | []       |
+| read_stat     | table         | NULL        | NULL    |          |
 
 

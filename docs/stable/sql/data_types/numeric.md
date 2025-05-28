@@ -20,11 +20,11 @@ The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` and `UHUGEINT` store wh
 | `INTEGER`   | `INT4`, `INT32`, `INT`, `SIGNED` |  - 2^31 |  2^31 - 1 |             4 |
 | `BIGINT`    | `INT8`, `INT64` `LONG`           |  - 2^63 |  2^63 - 1 |             8 |
 | `HUGEINT`   | `INT128`                         | - 2^127 | 2^127 - 1 |            16 |
-| `UTINYINT`  | -                                |       0 |   2^8 - 1 |             1 |
-| `USMALLINT` | -                                |       0 |  2^16 - 1 |             2 |
-| `UINTEGER`  | -                                |       0 |  2^32 - 1 |             4 |
-| `UBIGINT`   | -                                |       0 |  2^64 - 1 |             8 |
-| `UHUGEINT`  | -                                |       0 | 2^128 - 1 |            16 |
+| `UTINYINT`  | `UINT8`                          |       0 |   2^8 - 1 |             1 |
+| `USMALLINT` | `UINT16`                         |       0 |  2^16 - 1 |             2 |
+| `UINTEGER`  | `UINT32`                         |       0 |  2^32 - 1 |             4 |
+| `UBIGINT`   | `UINT64`                         |       0 |  2^64 - 1 |             8 |
+| `UHUGEINT`  | `UINT128`                        |       0 | 2^128 - 1 |            16 |
 
 The type integer is the common choice, as it offers the best balance between range, storage size, and performance. The `SMALLINT` type is generally only used if disk space is at a premium. The `BIGINT` and `HUGEINT` types are designed to be used when the range of the integer type is insufficient.
 
@@ -104,10 +104,32 @@ SELECT
 
 ## Universally Unique Identifiers (`UUID`s)
 
-DuckDB supports universally unique identifiers (UUIDs) through the `UUID` type. These use 128 bits and are represented internally as `HUGEINT` values.
+DuckDB supports [universally unique identifiers (UUIDs)](https://en.wikipedia.org/wiki/Universally_unique_identifier) through the `UUID` type.
+These use 128 bits and are represented internally as `HUGEINT` values.
 When printed, they are shown with lowercase hexadecimal characters, separated by dashes as follows: `⟨12345678⟩-⟨1234⟩-⟨1234⟩-⟨1234⟩-⟨1234567890ab⟩`{:.language-sql .highlight} (using 36 characters in total including the dashes). For example, `4ac7a9e9-607c-4c8a-84f3-843f0191e3fd` is a valid UUID.
 
-To generate a new UUID, use the [`uuid()` utility function]({% link docs/stable/sql/functions/utility.md %}#uuid).
+DuckDB supports generating UUIDv4 and [UUIDv7](https://uuid7.com/) identifiers.
+To retrieve the version of a UUID value, use the [`uuid_extract_version` function]({% link docs/stable/sql/functions/utility.md %}#uuid_extract_versionuuid).
+
+### UUIDv4
+
+To generate a UUIDv4 value, use the
+[`uuid()` function]({% link docs/stable/sql/functions/utility.md %}#uuid) or it aliases
+the [`uuidv4()`]({% link docs/stable/sql/functions/utility.md %}#uuidv4) and [`gen_random_uuid()`]({% link docs/stable/sql/functions/utility.md %}#gen_random_uuid)
+functions.
+
+### UUIDv7
+
+To generate a UUIDv7 value, use the [`uuidv7()`]({% link docs/stable/sql/functions/utility.md %}#uuidv7) function.
+To retrieve the timestamp from a UUIDv7 value, use the [`uuid_extract_timestamp` function]({% link docs/stable/sql/functions/utility.md %}#uuid_extract_timestampuuidv7):
+
+```sql
+SELECT uuid_extract_timestamp(uuidv7()) AS ts;
+```
+
+|            ts             |
+|---------------------------|
+| 2025-04-19 15:51:20.07+00 |
 
 ## Functions
 

@@ -97,10 +97,10 @@ docs:
   extended_description: |
     The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 57
-extension_star_count_pretty: 57
-extension_download_count: 468
-extension_download_count_pretty: 468
+extension_star_count: 58
+extension_star_count_pretty: 58
+extension_download_count: 505
+extension_download_count_pretty: 505
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---
@@ -128,8 +128,8 @@ LOAD {{ page.extension.name }};
 
 | function_name  | function_type | description | comment | examples |
 |----------------|---------------|-------------|---------|----------|
-| http_get       | scalar        | NULL        | NULL    | []       |
-| http_post      | scalar        | NULL        | NULL    | []       |
-| http_post_form | scalar        | NULL        | NULL    | []       |
+| http_get       | scalar        | NULL        | NULL    |          |
+| http_post      | scalar        | NULL        | NULL    |          |
+| http_post_form | scalar        | NULL        | NULL    |          |
 
 

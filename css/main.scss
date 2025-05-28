@@ -184,6 +184,23 @@ strong{
 	font-weight: normal;
 }
 
+em.caption{
+	font-style: normal!important;
+	text-align: center;
+	font-size: 14px;
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 1.5em;
+	color: var(--main-text-tertiary-color);
+}
+
+img.darkmode-img{
+	display: none;
+}
+img.lightmode-img{
+	display: inline;
+}
+
 /** External Links in Fließtext **/
 #main_content_wrap a.externallink,
 .singleentry .content a.externallink{
@@ -602,8 +619,8 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon{
 	position: relative;
 	width: 100%;
 	text-align: center;
-	background-color: $purple;
-	color: white;
+	background: var(--lake-ribbon-background-color, rgba(153, 216, 255, 0.60));
+	color: var(--main-text-primary-color, #0D0D0D);
 	font-size: $fontSize16;
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -616,7 +633,7 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon{
 			justify-content: center;
 	overflow: hidden;
 	padding: 15px 20px;
-	z-index: 1000;
+	z-index: 300;
 	a{
 		color: inherit;
 	}
@@ -630,6 +647,7 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon{
 		height: 13px;
 		background-size: contain; 
 		background-repeat: no-repeat;
+		filter: invert(1);
 	}
 	@media only screen and (max-width: 980px) {
 		-webkit-box-pack: start;
@@ -1338,7 +1356,7 @@ body.installation{
 			}
 		}
 	}
-	.sha512_btn{
+	.sha256_btn{
 		border-radius: 40px;
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		background: var(--main-codebox-sub-background-color, rgba(230, 230, 230, 0.60));
@@ -1354,7 +1372,7 @@ body.installation{
 			color: var(--doc-menu-info-deprecated-border-color, #A899FF);
 		}
 	}
-	.sha512.output{
+	.sha256.output{
 		padding-top: 0;
 		display: none;
 		.result{
@@ -1382,7 +1400,7 @@ body.installation{
 	.possibleresults{
 		display: none;
 	}
-	.wrap a.sha512{
+	.wrap a.sha256{
 		border-radius: 50px;
 		background-color: $black300;
 		border: 1px solid $black400;

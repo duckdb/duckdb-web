@@ -49,7 +49,7 @@ The purpose of processing the train services and the Netherlands cartography dat
 
 After we have [initialized](https://docs.getdbt.com/reference/commands/init) our project, we configure the connection details for DuckDB in the `profiles.yml` file. Along with specifying if the database should be in memory or persisted to disk, we also specify:
 
-- which extensions are required for the data processing, e.g., [spatial]({% link docs/stable/extensions/spatial/overview.md %});
+- which extensions are required for the data processing, e.g., [spatial]({% link docs/stable/core_extensions/spatial/overview.md %});
 - external databases, attached from the local disk or other storage solutions.
 
 ```yaml
@@ -265,7 +265,7 @@ Thanks to DuckDB's ability to connect and write to a PostgreSQL database, we can
 
 To connect to a PostgreSQL database, we need to specify in `profiles.yml`:
 
-- the [`postgres` extension]({% link docs/stable/extensions/postgres.md %});
+- the [`postgres` extension]({% link docs/stable/core_extensions/postgres.md %});
 - the PostgreSQL connection string in the `attach` section.
 
 {% raw %}

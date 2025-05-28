@@ -14,7 +14,7 @@ Attempted to access index 3 within vector of size 3
 
 > The issue is fixed in DuckDB v1.2.2 and newer versions.
 
-After encountering an internal error, DuckDB enters a restricted mode where any further operations will result in the following error message:
+After encountering an internal error, DuckDB enters “restricted mode”, where any further operations will result in the following error message:
 
 ```console
 FATAL Error:
@@ -23,5 +23,7 @@ The database must be restarted prior to being used again.
 ```
 
 To continue working with the same database, start a new DuckDB session on the same database.
+
+The reason DuckDB enters “restricted mode” is because the database is in an undefined state. Internal errors are by definition bugs that should never happen so the code path is never tested.
 
 If you encounter an internal error, please consider creating a minimal reproducible example and submitting an issue to the [DuckDB issue tracker](https://github.com/duckdb/duckdb/issues/new/choose).

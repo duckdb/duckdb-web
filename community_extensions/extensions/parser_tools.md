@@ -99,8 +99,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 388
-extension_download_count_pretty: 388
+extension_download_count: 435
+extension_download_count_pretty: 435
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
 layout: community_extension_doc
 ---
@@ -128,9 +128,9 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
-| is_parsable       | scalar        | NULL        | NULL    | []       |
-| parse_table_names | scalar        | NULL        | NULL    | []       |
-| parse_tables      | scalar        | NULL        | NULL    | []       |
-| parse_tables      | table         | NULL        | NULL    | []       |
+| is_parsable       | scalar        | NULL        | NULL    |          |
+| parse_table_names | scalar        | NULL        | NULL    |          |
+| parse_tables      | scalar        | NULL        | NULL    |          |
+| parse_tables      | table         | NULL        | NULL    |          |
 
 

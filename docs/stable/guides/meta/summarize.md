@@ -7,6 +7,7 @@ title: Summarize
 
 The `SUMMARIZE` command can be used to easily compute a number of aggregates over a table or a query.
 The `SUMMARIZE` command launches a query that computes a number of aggregates over all columns (`min`, `max`, `approx_unique`, `avg`, `std`, `q25`, `q50`, `q75`, `count`), and return these along the column name, column type, and the percentage of `NULL` values in the column.
+Note that the quantiles and percentiles are **approximate values**.
 
 ## Usage
 
@@ -24,7 +25,7 @@ SUMMARIZE SELECT * FROM tbl;
 
 ## Example
 
-Below is an example of `SUMMARIZE` on the `lineitem` table of TPC-H `SF1` table, generated using the [`tpch` extension]({% link docs/stable/extensions/tpch.md %}).
+Below is an example of `SUMMARIZE` on the `lineitem` table of TPC-H `SF1` table, generated using the [`tpch` extension]({% link docs/stable/core_extensions/tpch.md %}).
 
 ```sql
 INSTALL tpch;
@@ -65,7 +66,7 @@ CREATE TABLE tbl_summary AS SELECT * FROM (SUMMARIZE tbl);
 
 ## Summarizing Remote Tables
 
-It is possible to summarize remote tables via the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) using the `SUMMARIZE TABLE` statement. For example:
+It is possible to summarize remote tables via the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) using the `SUMMARIZE TABLE` statement. For example:
 
 ```sql
 SUMMARIZE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';

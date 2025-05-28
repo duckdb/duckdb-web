@@ -50,7 +50,7 @@ In short:
 
 * Reduce the number of threads using the `SET threads = ...` command.
 * If your query reads a large mount of data from a file or writes a large amount of data, try setting the `preserve_insertion_order` option to `false`: `SET preserve_insertion_order = false`.
-* Reduce the memory limit below the default 80% (see the [Limits page]({% link docs/preview/operations_manual/limits.md %})).
+* Reduce the memory limit below the default 80% (see the [Limits page]({% link docs/preview/operations_manual/limits.md %})). This can be helpful because some DuckDB operations circumvent the buffer manager and can reserve more memory than allowed by the memory limit. If you observe this, set the memory limit to 50-60% of the total system memory by using `SET memory_limit = ...`.
 * Break up the query into subqueries. This allows you to see where the intermediate results “blow up”, causing the query to run out of memory.
 
 ## See Also

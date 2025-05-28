@@ -173,7 +173,7 @@ Assigns extra information to the table function that can be fetched during bindi
 
 * `table_function`: The table function
 * `extra_info`: The extra information
-* `destroy`: The callback that will be called to destroy the bind data (if any)
+* `destroy`: The callback that will be called to destroy the extra information (if any)
 
 <br>
 
@@ -418,7 +418,8 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_bind_set_bind_data`
 
-Sets the user-provided bind data in the bind object. This object can be retrieved again during execution.
+Sets the user-provided bind data in the bind object of the table function.
+This object can be retrieved again during execution.
 
 ##### Syntax
 
@@ -431,9 +432,9 @@ Sets the user-provided bind data in the bind object. This object can be retrieve
 
 ##### Parameters
 
-* `info`: The info object
+* `info`: The bind info of the table function.
 * `bind_data`: The bind data object.
-* `destroy`: The callback that will be called to destroy the bind data (if any)
+* `destroy`: The callback to destroy the bind data (if any).
 
 <br>
 
@@ -459,7 +460,7 @@ Sets the cardinality estimate for the table function, used for optimization.
 
 #### `duckdb_bind_set_error`
 
-Report that an error has occurred while calling bind.
+Report that an error has occurred while calling bind on a table function.
 
 ##### Syntax
 
@@ -651,9 +652,9 @@ The extra info
 
 #### `duckdb_function_get_bind_data`
 
-Gets the bind data set by `duckdb_bind_set_bind_data` during the bind.
+Gets the table function's bind data set by `duckdb_bind_set_bind_data`.
 
-Note that the bind data should be considered as read-only.
+Note that the bind data is read-only.
 For tracking state, use the init data instead.
 
 ##### Syntax
@@ -665,11 +666,11 @@ For tracking state, use the init data instead.
 
 ##### Parameters
 
-* `info`: The info object
+* `info`: The function info object.
 
 ##### Return Value
 
-The bind data object
+The bind data object.
 
 <br>
 

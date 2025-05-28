@@ -67,18 +67,20 @@ The table below describes each metric and which nodes they are available for.
 
 Other than `QUERY_NAME` and `OPERATOR_TYPE`, it is possible to turn all metrics on or off.
 
-| Metric                  | Return type |   Unit   | Query | Operator | Description                                                                                                                   |
-|-------------------------|-------------|----------|:-----:|:--------:|-------------------------------------------------------------------------------------------------------------------------------|
-| `BLOCKED_THREAD_TIME`   | `double`    | seconds  |   ✅  |          | The total time threads are blocked                                                                                           |
-| `EXTRA_INFO`            | `string`    |          |   ✅  |    ✅    | Unique operator metrics                                                                                                      |
-| `LATENCY`               | `double`    | seconds  |   ✅  |          | The total elapsed query execution time                                                                                       |
-| `OPERATOR_CARDINALITY`  | `uint64`    | absolute |       |    ✅    | The cardinality of each operator, i.e., the number of rows it returns to its parent. Operator equivalent of `ROWS_RETURNED`  |
-| `OPERATOR_ROWS_SCANNED` | `uint64`    | absolute |       |    ✅    | The total rows scanned by each operator                                                                                      |
-| `OPERATOR_TIMING`       | `double`    | seconds  |       |    ✅    | The time taken by each operator. Operator equivalent of `LATENCY`                                                            |
-| `OPERATOR_TYPE`         | `string`    |          |       |    ✅    | The name of each operator                                                                                                    |
-| `QUERY_NAME`            | `string`    |          |   ✅  |          | The query string                                                                                                             |
-| `RESULT_SET_SIZE`       | `uint64`    |  bytes   |   ✅  |    ✅    | The size of the result                                                                                                       |
-| `ROWS_RETURNED`         | `uint64`    | absolute |   ✅  |          | The number of rows returned by the query                                                                                     |
+| Metric                      | Return type |   Unit   | Query | Operator | Description                                                                                                                   |
+|-----------------------------|-------------|----------|:-----:|:--------:|-------------------------------------------------------------------------------------------------------------------------------|
+| `BLOCKED_THREAD_TIME`       | `double`    | seconds  |   ✅  |          | The total time threads are blocked                                                                                            |
+| `EXTRA_INFO`                | `string`    |          |   ✅  |    ✅    | Unique operator metrics                                                                                                       |
+| `LATENCY`                   | `double`    | seconds  |   ✅  |          | The total elapsed query execution time                                                                                        |
+| `OPERATOR_CARDINALITY`      | `uint64`    | absolute |       |    ✅    | The cardinality of each operator, i.e., the number of rows it returns to its parent. Operator equivalent of `ROWS_RETURNED`   |
+| `OPERATOR_ROWS_SCANNED`     | `uint64`    | absolute |       |    ✅    | The total rows scanned by each operator                                                                                       |
+| `OPERATOR_TIMING`           | `double`    | seconds  |       |    ✅    | The time taken by each operator. Operator equivalent of `LATENCY`                                                             |
+| `OPERATOR_TYPE`             | `string`    |          |       |    ✅    | The name of each operator                                                                                                     |
+| `QUERY_NAME`                | `string`    |          |   ✅  |          | The query string                                                                                                              |
+| `RESULT_SET_SIZE`           | `uint64`    | bytes    |   ✅  |    ✅    | The size of the result                                                                                                        |
+| `ROWS_RETURNED`             | `uint64`    | absolute |   ✅  |          | The number of rows returned by the query                                                                                      |
+| `SYSTEM_PEAK_BUFFER_MEMORY` | `uint64`    | bytes    |   ✅  |          | Peak memory usage of all allocated buffers of the system during the query                                                     |
+| `SYSTEM_PEAK_TEMP_DIR_SIZE` | `uint64`    | bytes    |   ✅  |          | Peak size of the temp directory of the system during the query                                                                |
 
 ### Cumulative Metrics
 
@@ -252,7 +254,7 @@ The contents of the outputted file:
 
 It is also possible to render the profiling output as a query graph.
 The query graph visually represents the query plan, showing the operators and their relationships.
-The query plan must be output in the `json` format, with the `PRAGMA profiling_mode='detailed';` set, and stored in a file.
+The query plan must be output in the `json` format and stored in a file.
 After writing a profiling output to its designated file, the Python script can render it as a query graph.
 The script requires the `duckdb` Python module to be installed.
 It generates an HTML file and opens it in your web browser.

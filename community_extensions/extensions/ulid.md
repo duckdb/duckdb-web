@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 22
 extension_star_count_pretty: 22
-extension_download_count: 517
-extension_download_count_pretty: 517
+extension_download_count: 544
+extension_download_count_pretty: 544
 image: '/images/community_extensions/social_preview/preview_community_extension_ulid.png'
 layout: community_extension_doc
 ---
@@ -58,9 +58,9 @@ LOAD {{ page.extension.name }};
 
 | function_name  | function_type | description | comment | examples |
 |----------------|---------------|-------------|---------|----------|
-| ulid           | scalar        | NULL        | NULL    | []       |
-| ulid_epoch_ms  | scalar        | NULL        | NULL    | []       |
-| ulid_timestamp | scalar        | NULL        | NULL    | []       |
+| ulid           | scalar        | NULL        | NULL    |          |
+| ulid_epoch_ms  | scalar        | NULL        | NULL    |          |
+| ulid_timestamp | scalar        | NULL        | NULL    |          |
 
 ### Added Types
 

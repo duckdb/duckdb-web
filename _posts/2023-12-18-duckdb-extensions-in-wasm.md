@@ -27,11 +27,11 @@ CALL dbgen(sf = 0.1);
 PRAGMA tpch(7);
 ```
 
-This script first installs the [TPC-H extension]({% link docs/stable/extensions/tpch.md %}) from the official extension repository, which implements the popular TPC-H benchmark. It then loads the TPC-H extension, uses it to populate the database with generated data using the `dbgen` function. Finally, it runs [TPC-H query 7](https://github.com/duckdb/duckdb/blob/v0.9.2/extension/tpch/dbgen/queries/q07.sql).
+This script first installs the [TPC-H extension]({% link docs/stable/core_extensions/tpch.md %}) from the official extension repository, which implements the popular TPC-H benchmark. It then loads the TPC-H extension, uses it to populate the database with generated data using the `dbgen` function. Finally, it runs [TPC-H query 7](https://github.com/duckdb/duckdb/blob/v0.9.2/extension/tpch/dbgen/queries/q07.sql).
 
 This example demonstrates a case where we install an extension to complement DuckDB with a new feature (the TPC-H data generator), which is not part of the base DuckDB executable. Instead, it is downloaded from the extension repository, then loaded and executed it locally within the framework of DuckDB.
 
-Currently, DuckDB has [several extensions]({% link docs/stable/extensions/core_extensions.md %}). These add support for filesystems, file formats, database and network protocols. Additionally, they implement new functions such as full text search.
+Currently, DuckDB has [several extensions]({% link docs/stable/core_extensions/overview.md %}). These add support for filesystems, file formats, database and network protocols. Additionally, they implement new functions such as full text search.
 
 ## DuckDB-Wasm
 
@@ -61,7 +61,7 @@ COPY customer TO 'customer.parquet';
 
 This will first copy the `customer.parquet` to the DuckDB-Wasm file system, then download it via your browser.
 
-In short, your DuckDB instance, which _runs entirely within your browser,_ first installed and loaded the [TPC-H extension]({% link docs/stable/extensions/tpch.md %}). It then used the extension logic to generate data and convert it to a Parquet file. Finally, you could download the Parquet file as a regular file to your local file system.
+In short, your DuckDB instance, which _runs entirely within your browser,_ first installed and loaded the [TPC-H extension]({% link docs/stable/core_extensions/tpch.md %}). It then used the extension logic to generate data and convert it to a Parquet file. Finally, you could download the Parquet file as a regular file to your local file system.
 
 <a href="https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D0.1)~,PRAGMA-tpch(7)~">
 <img src="/images/wasm-blog-post-shell-tpch.png"
@@ -71,7 +71,7 @@ In short, your DuckDB instance, which _runs entirely within your browser,_ first
 
 ### Using the Spatial Extension in DuckDB-Wasm
 
-To show the possibilities unlocked by DuckDB-Wasm extensions and test the capabilities of what's possible, what about using the [spatial extension]({% link docs/stable/extensions/spatial/overview.md %}) within DuckDB-Wasm?
+To show the possibilities unlocked by DuckDB-Wasm extensions and test the capabilities of what's possible, what about using the [spatial extension]({% link docs/stable/core_extensions/spatial/overview.md %}) within DuckDB-Wasm?
 This extension implements geospatial types and functions that allow it to work with geospatial data and relevant workloads.
 
 To install and load the spatial extension in DuckDB-Wasm, run:
@@ -175,12 +175,12 @@ We see two main groups of developers using extensions with DuckDB-Wasm.
 
 ## Limitations
 
-DuckDB-Wasm extensions have a few inherent limitations. For example, it is not possible to communicate with native executables living on your machine, which is required by some extensions, such as the [`postgres` scanner extension]({% link docs/stable/extensions/postgres.md %}).
+DuckDB-Wasm extensions have a few inherent limitations. For example, it is not possible to communicate with native executables living on your machine, which is required by some extensions, such as the [`postgres` scanner extension]({% link docs/stable/core_extensions/postgres.md %}).
 Moreover, compilation to Wasm may not be currently supported for some libraries you are relying on, or capabilities might not be one-to-one with local executables due to additional requirements imposed on the browser, in particular around [non-secure HTTP requests]({% link docs/stable/clients/wasm/extensions.md %}#httpfs).
 
 ## Conclusions
 
-In this blog post, we explained how DuckDB-Wasm supports extensions, and demonstrated with multiple extensions: [TPC-H]({% link docs/stable/extensions/tpch.md %}), [Parquet]({% link docs/stable/data/parquet/overview.md %}), and [spatial]({% link docs/stable/extensions/spatial/overview.md %}).
+In this blog post, we explained how DuckDB-Wasm supports extensions, and demonstrated with multiple extensions: [TPC-H]({% link docs/stable/core_extensions/tpch.md %}), [Parquet]({% link docs/stable/data/parquet/overview.md %}), and [spatial]({% link docs/stable/core_extensions/spatial/overview.md %}).
 
 Thanks to the portability of DuckDB, the scripts shown in this blog post also work on your smartphone:
 

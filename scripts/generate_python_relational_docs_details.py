@@ -108,6 +108,234 @@ rel.show()
 """,
         use_default_example=False,
         aliases=['read_csv'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="path_or_buffer",
+                parameter_type=["Union[str, StringIO, TextIOBase]"],
+                parameter_description="Path to the CSV file or buffer to read from.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="header",
+                parameter_type=["Optional[bool], Optional[int]"],
+                parameter_default=None,
+                parameter_description="Row number(s) to use as the column names, or None if no header.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="compression",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Compression type (e.g., 'gzip', 'bz2').",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sep",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Delimiter to use; defaults to comma.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="delimiter",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Alternative delimiter to use.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="dtype",
+                parameter_type=["Optional[Dict[str, str]], Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="Data types for columns.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="na_values",
+                parameter_type=["Optional[str], Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="Additional strings to recognize as NA/NaN.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="skiprows",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Number of rows to skip at the start.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="quotechar",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Character used to quote fields.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="escapechar",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Character used to escape delimiter or quote characters.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="encoding",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Encoding to use for UTF when reading/writing.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="parallel",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Enable parallel reading.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="date_format",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Format to parse dates.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="timestamp_format",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Format to parse timestamps.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sample_size",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Number of rows to sample for schema inference.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="all_varchar",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Treat all columns as VARCHAR.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="normalize_names",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Normalize column names to lowercase.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="null_padding",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Enable null padding for rows with missing columns.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="names",
+                parameter_type=["Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="List of column names to use.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="lineterminator",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Character to break lines on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="columns",
+                parameter_type=["Optional[Dict[str, str]]"],
+                parameter_default=None,
+                parameter_description="Column mapping for schema.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="auto_type_candidates",
+                parameter_type=["Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="List of columns for automatic type inference.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="max_line_size",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Maximum line size in bytes.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="ignore_errors",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Ignore parsing errors.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="store_rejects",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Store rejected rows.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="rejects_table",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Table name to store rejected rows.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="rejects_scan",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Scan to use for rejects.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="rejects_limit",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Limit number of rejects stored.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="force_not_null",
+                parameter_type=["Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="List of columns to force as NOT NULL.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="buffer_size",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Buffer size in bytes.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="decimal",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Character to recognize as decimal point.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="allow_quoted_nulls",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Allow quoted NULL values.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="filename",
+                parameter_type=["Optional[bool], Optional[str]"],
+                parameter_default=None,
+                parameter_description="Add filename column or specify filename.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_partitioning",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Enable Hive-style partitioning.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="union_by_name",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Union files by column name instead of position.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_types",
+                parameter_type=["Optional[Dict[str, str]]"],
+                parameter_default=None,
+                parameter_description="Hive types for columns.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_types_autocast",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Automatically cast Hive types.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="connection",
+                parameter_type=["DuckDBPyConnection"],
+                parameter_description="DuckDB connection to use.",
+            ),
+        ],
     ),
     'from_df': PythonRelAPIDetails(
         example="""
@@ -131,6 +359,13 @@ rel.show()
 └───────┴─────────┘
 """,
         use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="df",
+                parameter_type=["pandas.DataFrame"],
+                parameter_description="A pandas DataFrame to be converted into a DuckDB relation.",
+            )
+        ],
     ),
     'from_parquet': PythonRelAPIDetails(
         example="""
@@ -160,6 +395,48 @@ rel.show()
 """,
         use_default_example=False,
         aliases=['read_parquet'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="file_glob",
+                parameter_type=["str"],
+                parameter_description="File path or glob pattern pointing to Parquet files to be read.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="binary_as_string",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Interpret binary columns as strings instead of blobs.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="file_row_number",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Add a column containing the row number within each file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="filename",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Add a column containing the name of the file each row came from.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_partitioning",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Enable automatic detection of Hive-style partitions in file paths.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="union_by_name",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Union Parquet files by matching column names instead of positions.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="compression",
+                parameter_type=["object"],
+                parameter_description="Optional compression codec to use when reading the Parquet files.",
+            ),
+        ],
     ),
     'from_query': PythonRelAPIDetails(
         example="""
@@ -180,6 +457,25 @@ rel.show()
 └───────┘
 """,
         use_default_example=False,
+        aliases=["query", "sql"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="query",
+                parameter_type=["object"],
+                parameter_description="The SQL query or subquery to be executed and converted into a relation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="alias",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional alias name to assign to the resulting relation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="params",
+                parameter_type=["object"],
+                parameter_description="Optional query parameters to be used in the SQL query.",
+            ),
+        ],
     ),
     'query': PythonRelAPIDetails(
         example="""
@@ -200,6 +496,25 @@ rel.show()
 └───────┘
 """,
         use_default_example=False,
+        aliases=["from_query", "sql"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="query",
+                parameter_type=["object"],
+                parameter_description="The SQL query or subquery to be executed and converted into a relation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="alias",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional alias name to assign to the resulting relation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="params",
+                parameter_type=["object"],
+                parameter_description="Optional query parameters to be used in the SQL query.",
+            ),
+        ],
     ),
     'read_csv': PythonRelAPIDetails(
         example="""
@@ -228,6 +543,234 @@ rel.show()
 """,
         use_default_example=False,
         aliases=['from_csv_auto'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="path_or_buffer",
+                parameter_type=["Union[str, StringIO, TextIOBase]"],
+                parameter_description="Path to the CSV file or buffer to read from.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="header",
+                parameter_type=["Optional[bool], Optional[int]"],
+                parameter_default=None,
+                parameter_description="Row number(s) to use as the column names, or None if no header.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="compression",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Compression type (e.g., 'gzip', 'bz2').",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sep",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Delimiter to use; defaults to comma.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="delimiter",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Alternative delimiter to use.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="dtype",
+                parameter_type=["Optional[Dict[str, str]], Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="Data types for columns.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="na_values",
+                parameter_type=["Optional[str], Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="Additional strings to recognize as NA/NaN.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="skiprows",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Number of rows to skip at the start.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="quotechar",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Character used to quote fields.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="escapechar",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Character used to escape delimiter or quote characters.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="encoding",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Encoding to use for UTF when reading/writing.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="parallel",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Enable parallel reading.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="date_format",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Format to parse dates.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="timestamp_format",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Format to parse timestamps.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sample_size",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Number of rows to sample for schema inference.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="all_varchar",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Treat all columns as VARCHAR.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="normalize_names",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Normalize column names to lowercase.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="null_padding",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Enable null padding for rows with missing columns.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="names",
+                parameter_type=["Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="List of column names to use.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="lineterminator",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Character to break lines on.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="columns",
+                parameter_type=["Optional[Dict[str, str]]"],
+                parameter_default=None,
+                parameter_description="Column mapping for schema.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="auto_type_candidates",
+                parameter_type=["Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="List of columns for automatic type inference.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="max_line_size",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Maximum line size in bytes.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="ignore_errors",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Ignore parsing errors.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="store_rejects",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Store rejected rows.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="rejects_table",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Table name to store rejected rows.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="rejects_scan",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Scan to use for rejects.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="rejects_limit",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Limit number of rejects stored.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="force_not_null",
+                parameter_type=["Optional[List[str]]"],
+                parameter_default=None,
+                parameter_description="List of columns to force as NOT NULL.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="buffer_size",
+                parameter_type=["Optional[int]"],
+                parameter_default=None,
+                parameter_description="Buffer size in bytes.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="decimal",
+                parameter_type=["Optional[str]"],
+                parameter_default=None,
+                parameter_description="Character to recognize as decimal point.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="allow_quoted_nulls",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Allow quoted NULL values.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="filename",
+                parameter_type=["Optional[bool], Optional[str]"],
+                parameter_default=None,
+                parameter_description="Add filename column or specify filename.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_partitioning",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Enable Hive-style partitioning.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="union_by_name",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Union files by column name instead of position.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_types",
+                parameter_type=["Optional[Dict[str, str]]"],
+                parameter_default=None,
+                parameter_description="Hive types for columns.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_types_autocast",
+                parameter_type=["Optional[bool]"],
+                parameter_default=None,
+                parameter_description="Automatically cast Hive types.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="connection",
+                parameter_type=["DuckDBPyConnection"],
+                parameter_description="DuckDB connection to use.",
+            ),
+        ],
     ),
     'read_json': PythonRelAPIDetails(
         example="""
@@ -252,6 +795,108 @@ rel.show()
 └───────┴─────────┘
 """,
         use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="path_or_buffer",
+                parameter_type=["object"],
+                parameter_description="File path or file-like object containing JSON data to be read.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="columns",
+                parameter_type=["object"],
+                parameter_description="Optional list of column names to project from the JSON data.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sample_size",
+                parameter_type=["object"],
+                parameter_description="Number of rows to sample for inferring JSON schema.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="maximum_depth",
+                parameter_type=["object"],
+                parameter_description="Maximum depth to which JSON objects should be parsed.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="records",
+                parameter_type=["str"],
+                parameter_description="Format string specifying whether JSON is in records mode.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="format",
+                parameter_type=["str"],
+                parameter_description="Format of the JSON data (e.g., 'auto', 'newline_delimited').",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="date_format",
+                parameter_type=["object"],
+                parameter_description="Format string for parsing date fields.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="timestamp_format",
+                parameter_type=["object"],
+                parameter_description="Format string for parsing timestamp fields.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="compression",
+                parameter_type=["object"],
+                parameter_description="Compression codec used on the JSON data (e.g., 'gzip').",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="maximum_object_size",
+                parameter_type=["object"],
+                parameter_description="Maximum size in bytes for individual JSON objects.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="ignore_errors",
+                parameter_type=["object"],
+                parameter_description="If True, skip over JSON records with parsing errors.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="convert_strings_to_integers",
+                parameter_type=["object"],
+                parameter_description="If True, attempt to convert strings to integers where appropriate.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="field_appearance_threshold",
+                parameter_type=["object"],
+                parameter_description="Threshold for inferring optional fields in nested JSON.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="map_inference_threshold",
+                parameter_type=["object"],
+                parameter_description="Threshold for inferring maps from JSON object patterns.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="maximum_sample_files",
+                parameter_type=["object"],
+                parameter_description="Maximum number of files to sample for schema inference.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="filename",
+                parameter_type=["object"],
+                parameter_description="If True, include a column with the source filename for each row.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_partitioning",
+                parameter_type=["object"],
+                parameter_description="If True, enable Hive partitioning based on directory structure.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="union_by_name",
+                parameter_type=["object"],
+                parameter_description="If True, align JSON columns by name instead of position.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_types",
+                parameter_type=["object"],
+                parameter_description="If True, use Hive types from directory structure for schema.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_types_autocast",
+                parameter_type=["object"],
+                parameter_description="If True, automatically cast data types to match Hive types.",
+            ),
+        ],
     ),
     'read_parquet': PythonRelAPIDetails(
         example="""
@@ -281,6 +926,48 @@ rel.show()
 """,
         use_default_example=False,
         aliases=['from_parquet'],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="file_glob",
+                parameter_type=["str"],
+                parameter_description="File path or glob pattern pointing to Parquet files to be read.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="binary_as_string",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Interpret binary columns as strings instead of blobs.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="file_row_number",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Add a column containing the row number within each file.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="filename",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Add a column containing the name of the file each row came from.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="hive_partitioning",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Enable automatic detection of Hive-style partitions in file paths.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="union_by_name",
+                parameter_type=["bool"],
+                parameter_default="False",
+                parameter_description="Union Parquet files by matching column names instead of positions.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="compression",
+                parameter_type=["object"],
+                parameter_description="Optional compression codec to use when reading the Parquet files.",
+            ),
+        ],
     ),
     'sql': PythonRelAPIDetails(
         example="""
@@ -301,6 +988,25 @@ rel.show()
 └───────┘
 """,
         use_default_example=False,
+        aliases=["from_query", "query"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="query",
+                parameter_type=["object"],
+                parameter_description="The SQL query or subquery to be executed and converted into a relation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="alias",
+                parameter_type=["str"],
+                parameter_default="''",
+                parameter_description="Optional alias name to assign to the resulting relation.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="params",
+                parameter_type=["object"],
+                parameter_description="Optional query parameters to be used in the SQL query.",
+            ),
+        ],
     ),
     'table': PythonRelAPIDetails(
         example="""
@@ -323,6 +1029,13 @@ rel.show()
 └───────┘
 """,
         use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="table_name",
+                parameter_type=["str"],
+                parameter_description="Name of the table to create a relation from.",
+            )
+        ],
     ),
     'table_function': PythonRelAPIDetails(
         example='''
@@ -348,6 +1061,18 @@ rel.show()
 └───────────────┘
 """,
         use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="name",
+                parameter_type=["str"],
+                parameter_description="Name of the table function to call.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="parameters",
+                parameter_type=["object"],
+                parameter_description="Optional parameters to pass to the table function.",
+            ),
+        ],
     ),
     'values': PythonRelAPIDetails(
         example="""
@@ -390,6 +1115,13 @@ rel.show()
 └───────┘
 """,
         use_default_example=False,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="view_name",
+                parameter_type=["str"],
+                parameter_description="Name of the view to create a relation from.",
+            )
+        ],
     ),
 }
 
@@ -447,10 +1179,29 @@ DEFINITION_METHODS_MAP = {
 │ created_timestamp │ TIMESTAMP WITH TIME ZONE │ YES     │ NULL    │ NULL    │ NULL    │
 └───────────────────┴──────────────────────────┴─────────┴─────────┴─────────┴─────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="virtual_table_name",
+                parameter_type=["str"],
+                parameter_description="The name to assign to the current relation when referenced in the SQL query.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="sql_query",
+                parameter_type=["str"],
+                parameter_description="The SQL query string that uses the virtual table name to query the relation.",
+            ),
+        ],
     ),
     'set_alias': PythonRelAPIDetails(
         example="rel.set_alias('abc').select('abc.id')",
         result='In the SQL query, the alias will be `abc`',
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="alias",
+                parameter_type=["str"],
+                parameter_description="The alias name to assign to the relation.",
+            )
+        ],
     ),
     'alias': PythonRelAPIDetails(
         example='rel.alias', result='unnamed_relation_43c808c247431be5'
@@ -474,6 +1225,33 @@ DEFINITION_METHODS_MAP = {
 │ 08fdcbf8-4e53-4290-9e81-423af263b518 │ value is uneven │     9 │ 2025-04-09 15:49:20.642+02 │
 └──────────────────────────────────────┴─────────────────┴───────┴────────────────────────────┘
 """,
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="max_width",
+                parameter_type=["int"],
+                parameter_description="Maximum display width for the entire output in characters.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="max_rows",
+                parameter_type=["int"],
+                parameter_description="Maximum number of rows to display.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="max_col_width",
+                parameter_type=["int"],
+                parameter_description="Maximum number of characters to display per column.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="null_value",
+                parameter_type=["str"],
+                parameter_description="String to display in place of NULL values.",
+            ),
+            PythonRelAPIParamDetails(
+                parameter_name="render_mode",
+                parameter_type=["object"],
+                parameter_description="Render mode for displaying the output.",
+            ),
+        ],
     ),
     'sql_query': PythonRelAPIDetails(
         example='rel.sql_query()',

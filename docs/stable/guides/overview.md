@@ -90,6 +90,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 * [How to install the Python client]({% link docs/stable/guides/python/install.md %})
 * [How to execute SQL queries]({% link docs/stable/guides/python/execute_sql.md %})
 * [How to easily query DuckDB in Jupyter Notebooks]({% link docs/stable/guides/python/jupyter.md %})
+* [How to easily query DuckDB in marimo Notebooks]({% link docs/stable/guides/python/marimo.md %})
 * [How to use Multiple Python Threads with DuckDB]({% link docs/stable/guides/python/multiple_threads.md %})
 * [How to use fsspec filesystems with DuckDB]({% link docs/stable/guides/python/filesystems.md %})
 

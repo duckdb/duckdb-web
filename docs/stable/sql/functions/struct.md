@@ -13,8 +13,10 @@ title: Struct Functions
 | [`struct[entry]`](#structentry) | Bracket notation that serves as an alias for `struct_extract` from named `STRUCT`s. |
 | [`struct[idx]`](#structidx) | Bracket notation that serves as an alias for `struct_extract` from unnamed `STRUCT`s (tuples), using an index (1-based). |
 | [`row(any, ...)`](#rowany-) | Create an unnamed `STRUCT` (tuple) containing the argument values. |
+| [`struct_concat(structs...)`](#struct_concatstructs) | Merge the multiple `structs` into a single `STRUCT`. |
 | [`struct_extract(struct, 'entry')`](#struct_extractstruct-entry) | Extract the named entry from the `STRUCT`. |
 | [`struct_extract(struct, idx)`](#struct_extractstruct-idx) | Extract the entry from an unnamed `STRUCT` (tuple) using an index (1-based). |
+| [`struct_extract_at(struct, idx)`](#struct_extract_atstruct-idx) | Extract the entry from a `STRUCT` (tuple) using an index (1-based). |
 | [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any-) | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
 | [`struct_pack(name := any, ...)`](#struct_packname--any-) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
 
@@ -50,6 +52,14 @@ title: Struct Functions
 | **Example** | `row(i, i % 4, i / 4)` |
 | **Result** | `(10, 2, 2.5)` |
 
+#### `struct_concat(structs...)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Merge the multiple `structs` into a single `STRUCT`. |
+| **Example** | `struct_concat(struct_pack(i := 4), struct_pack(s := 'string'))` |
+| **Result** | `{'i': 4, 's': string}` |
+
 #### `struct_extract(struct, 'entry')`
 
 <div class="nostroke_table"></div>
@@ -65,6 +75,14 @@ title: Struct Functions
 | **Description** | Extract the entry from an unnamed `STRUCT` (tuple) using an index (1-based). |
 | **Example** | `struct_extract(row(42, 84), 1)` |
 | **Result** | `42` |
+
+#### `struct_extract_at(struct, idx)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Extract the entry from a `STRUCT` (tuple) using an index (1-based). |
+| **Example** | `struct_extract_at({'v1': 10, 'v2': 20, 'v3': 3}, 20)` |
+| **Result** | `20` |
 
 #### `struct_insert(struct, name := any, ...)`
 

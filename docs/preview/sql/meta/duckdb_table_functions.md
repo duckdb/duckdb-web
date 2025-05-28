@@ -198,7 +198,7 @@ The `duckdb_log_contexts()` function provides information on the contexts of Duc
 | Column | Description | Type |
 |:-|:---|:-|
 | `context_id` | The identifier of the context. The `context_id` column in the [`duckdb_logs`](#duckdb_logs) table is a foreign key that points to this column. | `UBIGINT` |
-| `scope` | The scope of the context (`connection`, `database` or `file_opener` TODO: + more ? https://github.com/duckdb/duckdb/pull/15119). | `VARCHAR` |
+| `scope` | The scope of the context (`connection`, `database` or `file_opener` TODO: + more ? <https://github.com/duckdb/duckdb/pull/15119>). | `VARCHAR` |
 | `connection_id` | The identifier of the connection. | `UBIGINT` |
 | `transaction_id` | The identifier of the transaction. | `UBIGINT` |
 | `query_id` | The identifier of the query. | `UBIGINT` |

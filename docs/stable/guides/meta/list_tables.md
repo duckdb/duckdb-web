@@ -5,7 +5,7 @@ redirect_from:
 title: List Tables
 ---
 
-The `SHOW TABLES` command can be used to obtain a list of all tables within the selected schema.
+The `SHOW TABLES` command can be used to obtain a list of all tables within the [selected schema]({% link docs/stable/sql/statements/use.md %}).
 
 ```sql
 CREATE TABLE tbl (i INTEGER);

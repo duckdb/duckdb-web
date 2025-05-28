@@ -129,9 +129,10 @@ Below is a table of the columns returned by `parquet_kv_metadata`.
 DuckDB [supports Bloom filters]({% post_url 2025-03-07-parquet-bloom-filters-in-duckdb %}) for pruning the row groups that need to be read to answer highly selective queries.
 Currently, Bloom filters are supported for the following types:
 
-* Integer types (`TINYINT`, `UTINYINT`, `SMALLINT`, `USMALLINT`, `INTEGER`, `UINTEGER`, `BIGINT`, `UBIGINT`)
-* Floating point types (`FLOAT`, `DOUBLE`)
-* String types (`VARCHAR` and `BLOB`)
+* Integer types: `TINYINT`, `UTINYINT`, `SMALLINT`, `USMALLINT`, `INTEGER`, `UINTEGER`, `BIGINT`, `UBIGINT`
+* Floating point types: `FLOAT`, `DOUBLE`
+* `VARCHAR`
+* `BLOB`
 
 The `parquet_bloom_probe(filename, column_name, value)` function shows which row groups can excluded when filtering for a given value of a given column using the Bloom filter.
 For example:

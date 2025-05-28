@@ -208,7 +208,13 @@ ALTER i SET DATA TYPE VARCHAR USING concat(i, '_', j);
 
 The `[SET [DATA]] TYPE` clause changes the type of a column in a table. Any data present in the column is converted according to the provided expression in the `USING` clause, or, if the `USING` clause is absent, cast to the new data type. Note that columns can only have their type changed if they do not have any indexes that rely on them and are not part of any `CHECK` constraints.
 
-To change the sub-schema of a [`STRUCT`]({% link docs/stable/sql/data_types/struct.md %})-typed column, use `ALTER TABLE` with the `struct_insert` function.
+### Handling Structs
+
+There are two options to change the sub-schema of a [`STRUCT`]({% link docs/stable/sql/data_types/struct.md %})-typed column.
+
+#### `ALTER TABLE` with `struct_insert`
+
+You can use `ALTER TABLE` with the `struct_insert` function.
 For example:
 
 ```sql
@@ -216,6 +222,12 @@ CREATE TABLE tbl (col STRUCT(i INTEGER));
 ALTER TABLE tbl
 ALTER col TYPE USING struct_insert(col, a := 42, b := NULL::VARCHAR);
 ```
+
+#### `ALTER TABLE` with `ADD COLUMN` / `DROP COLUMN` / `RENAME COLUMN`
+
+Starting with DuckDB v1.3.0, `ALTER TABLE` supports the
+[`ADD COLUMN`, `DROP COLUMN` and `RENAME COLUMN` clauses]({% link docs/stable/sql/data_types/struct.md %}#updating-the-schema)
+to update the sub-schema of a `STRUCT`.
 
 ## `SET` / `DROP DEFAULT`
 

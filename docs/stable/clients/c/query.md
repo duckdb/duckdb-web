@@ -189,7 +189,7 @@ query fails, otherwise the error stored within the result will not be freed corr
 
 #### `duckdb_destroy_result`
 
-Closes the result and de-allocates all memory allocated for that connection.
+Closes the result and de-allocates all memory allocated for that result.
 
 ##### Syntax
 

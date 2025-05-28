@@ -90,8 +90,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 401
-extension_download_count_pretty: 401
+extension_download_count: 435
+extension_download_count_pretty: 435
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'
 layout: community_extension_doc
 ---
@@ -119,13 +119,13 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| redis_get     | scalar        | NULL        | NULL    | []       |
-| redis_hget    | scalar        | NULL        | NULL    | []       |
-| redis_hset    | scalar        | NULL        | NULL    | []       |
-| redis_lpush   | scalar        | NULL        | NULL    | []       |
-| redis_lrange  | scalar        | NULL        | NULL    | []       |
-| redis_mget    | scalar        | NULL        | NULL    | []       |
-| redis_scan    | scalar        | NULL        | NULL    | []       |
-| redis_set     | scalar        | NULL        | NULL    | []       |
+| redis_get     | scalar        | NULL        | NULL    |          |
+| redis_hget    | scalar        | NULL        | NULL    |          |
+| redis_hset    | scalar        | NULL        | NULL    |          |
+| redis_lpush   | scalar        | NULL        | NULL    |          |
+| redis_lrange  | scalar        | NULL        | NULL    |          |
+| redis_mget    | scalar        | NULL        | NULL    |          |
+| redis_scan    | scalar        | NULL        | NULL    |          |
+| redis_set     | scalar        | NULL        | NULL    |          |
 
 

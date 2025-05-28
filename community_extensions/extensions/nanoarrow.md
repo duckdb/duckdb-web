@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: nanoarrow
   description: Allows the consumption and production of the Apache Arrow interprocess communication (IPC) format, both from files and directly from stream buffers.
-  version: 1.2.1
+  version: 1.3.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
     - pdet
 repo:
   github: paleolimbot/duckdb-nanoarrow
-  ref: 24a28a3484ec514757278ae121dce507550dd4a2
+  ref: 8d76db91a3d375262e0d425a8a85fd8645b31ae9
 
 docs:
   hello_world: |
@@ -42,10 +42,10 @@ docs:
 
 
 
-extension_star_count: 18
-extension_star_count_pretty: 18
-extension_download_count: 820
-extension_download_count_pretty: 820
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 952
+extension_download_count_pretty: 952
 image: '/images/community_extensions/social_preview/preview_community_extension_nanoarrow.png'
 layout: community_extension_doc
 ---
@@ -73,9 +73,9 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
-| nanoarrow_version | scalar        | NULL        | NULL    | []       |
-| read_arrow        | table         | NULL        | NULL    | []       |
-| scan_arrow_ipc    | table         | NULL        | NULL    | []       |
-| to_arrow_ipc      | table         | NULL        | NULL    | []       |
+| nanoarrow_version | scalar        | NULL        | NULL    |          |
+| read_arrow        | table         | NULL        | NULL    |          |
+| scan_arrow_ipc    | table         | NULL        | NULL    |          |
+| to_arrow_ipc      | table         | NULL        | NULL    |          |
 
 

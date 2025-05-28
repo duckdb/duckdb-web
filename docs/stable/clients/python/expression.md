@@ -35,12 +35,19 @@ Selecting a single column:
 
 ```python
 col = duckdb.ColumnExpression('a')
-res = duckdb.df(df).select(col).fetchall()
-print(res)
+duckdb.df(df).select(col).show()
 ```
 
 ```text
-[(1,), (2,), (3,), (4,)]
+┌───────┐
+│   a   │
+│ int64 │
+├───────┤
+│     1 │
+│     2 │
+│     3 │
+│     4 │
+└───────┘
 ```
 
 Selecting multiple columns:
@@ -51,12 +58,19 @@ col_list = [
         duckdb.ColumnExpression('b').isnull(),
         duckdb.ColumnExpression('c') + 5
     ]
-res = duckdb.df(df).select(*col_list).fetchall()
-print(res)
+duckdb.df(df).select(*col_list).show()
 ```
 
 ```text
-[(10, False, 47), (20, True, 26), (30, False, 18), (40, False, 19)]
+┌──────────┬─────────────┬─────────┐
+│ (a * 10) │ (b IS NULL) │ (c + 5) │
+│  int64   │   boolean   │  int64  │
+├──────────┼─────────────┼─────────┤
+│       10 │ false       │      47 │
+│       20 │ true        │      26 │
+│       30 │ false       │      18 │
+│       40 │ false       │      19 │
+└──────────┴─────────────┴─────────┘
 ```
 
 ## Star Expression
@@ -77,12 +91,19 @@ df = pd.DataFrame({
 })
 
 star = duckdb.StarExpression(exclude = ['b'])
-res = duckdb.df(df).select(star).fetchall()
-print(res)
+duckdb.df(df).select(star).show()
 ```
 
 ```text
-[(1, 42), (2, 21), (3, 13), (4, 14)]
+┌───────┬───────┐
+│   a   │   c   │
+│ int64 │ int64 │
+├───────┼───────┤
+│     1 │    42 │
+│     2 │    21 │
+│     3 │    13 │
+│     4 │    14 │
+└───────┴───────┘
 ```
 
 ## Constant Expression
@@ -100,12 +121,19 @@ df = pd.DataFrame({
 })
 
 const = duckdb.ConstantExpression('hello')
-res = duckdb.df(df).select(const).fetchall()
-print(res)
+duckdb.df(df).select(const).show()
 ```
 
 ```text
-[('hello',), ('hello',), ('hello',), ('hello',)]
+┌─────────┐
+│ 'hello' │
+│ varchar │
+├─────────┤
+│ hello   │
+│ hello   │
+│ hello   │
+│ hello   │
+└─────────┘
 ```
 
 ## Case Expression
@@ -135,12 +163,19 @@ world = ConstantExpression('world')
 case = \
     CaseExpression(condition = ColumnExpression('b') == False, value = world) \
     .otherwise(hello)
-res = duckdb.df(df).select(case).fetchall()
-print(res)
+duckdb.df(df).select(case).show()
 ```
 
 ```text
-[('hello',), ('hello',), ('world',), ('hello',)]
+┌──────────────────────────────────────────────────────────┐
+│ CASE  WHEN ((b = false)) THEN ('world') ELSE 'hello' END │
+│                         varchar                          │
+├──────────────────────────────────────────────────────────┤
+│ hello                                                    │
+│ hello                                                    │
+│ world                                                    │
+│ hello                                                    │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ## Function Expression
@@ -158,21 +193,68 @@ from duckdb import (
 )
 
 df = pd.DataFrame({
-    'a': [
-        'test',
-        'pest',
-        'text',
-        'rest',
-    ]
+    'a': [1, 2, 3, 4],
+    'b': [True, None, False, True],
+    'c': [42, 21, 13, 14]
 })
 
-ends_with = FunctionExpression('ends_with', ColumnExpression('a'), ConstantExpression('est'))
-res = duckdb.df(df).select(ends_with).fetchall()
-print(res)
+multiply_by_2 = FunctionExpression('multiply', ColumnExpression('a'), ConstantExpression(2))
+duckdb.df(df).select(multiply_by_2).show()
 ```
 
 ```text
-[(True,), (True,), (False,), (True,)]
+┌────────────────┐
+│ multiply(a, 2) │
+│     int64      │
+├────────────────┤
+│              2 │
+│              4 │
+│              6 │
+│              8 │
+└────────────────┘
+```
+
+## SQL Expression
+
+This expression contains any valid SQL expression.
+
+```python
+import duckdb
+import pandas as pd
+
+from duckdb import SQLExpression
+
+df = pd.DataFrame({
+    'a': [1, 2, 3, 4],
+    'b': [True, None, False, True],
+    'c': [42, 21, 13, 14]
+})
+
+duckdb.df(df).filter(
+    SQLExpression("b is true")
+).select(
+    SQLExpression("a").alias("selecting_column_a"),
+    SQLExpression("case when a = 1 then 1 else 0 end").alias("selecting_case_expression"),
+    SQLExpression("1").alias("constant_numeric_column"),
+    SQLExpression("'hello'").alias("constant_text_column")
+).aggregate(
+    aggr_expr=[
+        SQLExpression("SUM(selecting_column_a)").alias("sum_a"), 
+        "selecting_case_expression" , 
+        "constant_numeric_column", 
+        "constant_text_column"
+    ],
+).show()
+```
+
+```text
+┌────────┬───────────────────────────┬─────────────────────────┬──────────────────────┐
+│ sum_a  │ selecting_case_expression │ constant_numeric_column │ constant_text_column │
+│ int128 │           int32           │          int32          │       varchar        │
+├────────┼───────────────────────────┼─────────────────────────┼──────────────────────┤
+│      4 │                         0 │                       1 │ hello                │
+│      1 │                         1 │                       1 │ hello                │
+└────────┴───────────────────────────┴─────────────────────────┴──────────────────────┘
 ```
 
 ## Common Operations

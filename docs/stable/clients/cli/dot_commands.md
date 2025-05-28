@@ -1,11 +1,11 @@
 ---
 layout: docu
 redirect_from:
-  - /docs/api/cli/dot-commands
-  - /docs/api/cli/dot-commands/
-  - /docs/api/cli/dot_commands
-  - /docs/api/cli/dot_commands/
-  - /docs/clients/cli/dot_commands
+- /docs/api/cli/dot-commands
+- /docs/api/cli/dot-commands/
+- /docs/api/cli/dot_commands
+- /docs/api/cli/dot_commands/
+- /docs/clients/cli/dot_commands
 title: Dot Commands
 ---
 
@@ -38,9 +38,9 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.keywordcode ⟨CODE⟩`{:.language-sql .highlight}                      | Sets the syntax highlighting terminal code used for keywords                                                                                                                |
 | `.large_number_rendering ⟨all/footer/off⟩`{:.language-sql .highlight} | Toggle readable rendering of large numbers (duckbox only, default: `footer`)                                                                                                |
 | `.log ⟨FILE/off⟩`{:.language-sql .highlight}                          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                                                               |
-| `.maxrows ⟨COUNT⟩`{:.language-sql .highlight}                         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                                                  |
-| `.maxwidth ⟨COUNT⟩`{:.language-sql .highlight}                        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                           |
-| `.mode ⟨MODE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                     | Set [output mode]({% link docs/stable/clients/cli/output_formats.md %})                                                                                                     |
+| `.maxrows ⟨COUNT⟩`{:.language-sql .highlight}                         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                                                 |
+| `.maxwidth ⟨COUNT⟩`{:.language-sql .highlight}                        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/stable/clients/cli/output_formats.md %})                          |
+| `.mode ⟨MODE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                     | Set [output mode]({% link docs/stable/clients/cli/output_formats.md %})                                                                                                    |
 | `.multiline`{:.language-sql .highlight}                               | Set multi-line mode (default)                                                                                                                                               |
 | `.nullvalue ⟨STRING⟩`{:.language-sql .highlight}                      | Use `STRING` in place of `NULL` values. Default: `NULL`                                                                                                                     |
 | `.once ⟨OPTIONS⟩ ⟨FILE⟩`{:.language-sql .highlight}                   | Output for the next SQL command only to `FILE`                                                                                                                              |
@@ -51,14 +51,14 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.quit`{:.language-sql .highlight}                                    | Exit this program                                                                                                                                                           |
 | `.read ⟨FILE⟩`{:.language-sql .highlight}                             | Read input from `FILE`                                                                                                                                                      |
 | `.rows`{:.language-sql .highlight}                                    | Row-wise rendering of query results (default)                                                                                                                               |
-| `.safe_mode`{:.language-sql .highlight}                               | Activates [safe mode]({% link docs/stable/clients/cli/safe_mode.md %})                                                                                                      |
+| `.safe_mode`{:.language-sql .highlight}                               | Activates [safe mode]({% link docs/stable/clients/cli/safe_mode.md %})                                                                                                     |
 | `.schema ⟨PATTERN⟩`{:.language-sql .highlight}                        | Show the `CREATE` statements matching `PATTERN`                                                                                                                             |
 | `.separator ⟨COL⟩ ⟨ROW⟩`{:.language-sql .highlight}                   | Change the column and row separators                                                                                                                                        |
 | `.shell ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                   | Run `CMD` with `ARGS...` in a system shell                                                                                                                                  |
 | `.show`{:.language-sql .highlight}                                    | Show the current values for various settings                                                                                                                                |
 | `.singleline`{:.language-sql .highlight}                              | Set single-line mode                                                                                                                                                        |
 | `.system ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                  | Run `CMD` with `ARGS...` in a system shell                                                                                                                                  |
-| `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List names of tables [matching `LIKE` pattern]({% link docs/stable/sql/functions/pattern_matching.md %}) `TABLE`                                                            |
+| `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List names of tables [matching `LIKE` pattern]({% link docs/stable/sql/functions/pattern_matching.md %}) `TABLE`                                                           |
 | `.timer ⟨on/off⟩`{:.language-sql .highlight}                          | Turn SQL timer `on` or `off`. SQL statements separated by `;` but _not_ separated via newline are measured together                                                         |
 | `.width ⟨NUM1⟩ ⟨NUM2⟩ ...`{:.language-sql .highlight}                 | Set minimum column widths for columnar output                                                                                                                               |
 
