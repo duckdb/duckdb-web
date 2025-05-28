@@ -7,6 +7,7 @@ redirect_from:
 - /docs/stable/extensions/iceberg/
 - /docs/stable/extensions/iceberg/overview
 - /docs/stable/extensions/iceberg/overview/
+- /docs/extensions/iceberg
 ---
 
 The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/) and can connect to Iceberg REST Catalogs. For information on how to connect to an Iceberg REST Catalog, please see the [Iceberg REST Catalogs]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}) page.
