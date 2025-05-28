@@ -5,6 +5,8 @@ title: AWS Extension
 redirect_from:
 - /docs/stable/extensions/aws
 - /docs/stable/extensions/aws/
+- /docs/extensions/aws
+- /docs/extensions/aws/
 ---
 
 The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities]({% link docs/stable/core_extensions/httpfs/overview.md %}#s3-api), using the AWS SDK.

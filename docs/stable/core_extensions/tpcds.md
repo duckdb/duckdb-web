@@ -5,6 +5,8 @@ title: TPC-DS Extension
 redirect_from:
 - /docs/stable/extensions/tpcds
 - /docs/stable/extensions/tpcds/
+- /docs/extensions/tpcds
+- /docs/extensions/tpcds/
 ---
 
 The `tpcds` extension implements the data generator and queries for the [TPC-DS benchmark](https://www.tpc.org/tpcds/).

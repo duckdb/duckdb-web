@@ -5,6 +5,8 @@ title: TPC-H Extension
 redirect_from:
 - /docs/stable/extensions/tpch
 - /docs/stable/extensions/tpch/
+- /docs/extensions/tpch
+- /docs/extensions/tpch/
 ---
 
 The `tpch` extension implements the data generator and queries for the [TPC-H benchmark](https://www.tpc.org/tpch/).

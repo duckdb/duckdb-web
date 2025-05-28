@@ -5,6 +5,8 @@ title: jemalloc Extension
 redirect_from:
 - /docs/stable/extensions/jemalloc
 - /docs/stable/extensions/jemalloc/
+- /docs/extensions/jemalloc
+- /docs/extensions/jemalloc/
 ---
 
 The `jemalloc` extension replaces the system's memory allocator with [jemalloc](https://jemalloc.net/).
