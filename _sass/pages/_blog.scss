@@ -1,8 +1,6 @@
----
----
-
-@use "sass:color";
-@use 'variables' as *;
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 @mixin button {
 	color: black;
@@ -91,9 +89,18 @@ table td, table th {
 	font-weight: bold;
 	color: var(--main-text-primary-color, #0D0D0D);
 }
-code, pre {
-	font-family: "JetBrainsMono-Regular","Lucida Console",monospace;
-	font-size: 16px;
+body.post {
+	code,
+	pre {
+		font-family: "JetBrainsMono-Regular", "Lucida Console", monospace;
+		font-size: 16px;
+	}
+
+	h1, h2, h3, h4, h5 {
+		code, pre {
+			font-size: inherit;
+		}
+	}
 }
 div.small_code_block + .language-text code {
 	font-size: 12px;
@@ -131,11 +138,7 @@ h5 {
 	font-weight: bold;
 }
 
-h1, h2, h3, h4, h5{
-	code, pre{
-		font-size: inherit;
-	}
-}
+
 
 .newswrap{
 	min-height: calc(100vh - 111px);
@@ -280,7 +283,7 @@ h1, h2, h3, h4, h5{
 					display: none;
 				}
 				.toc_menu{
-					height: auto;
+					height: calc(100vh - 100px);
 					overflow: auto;
 					-ms-overflow-style: none; 
 					scrollbar-width: none;

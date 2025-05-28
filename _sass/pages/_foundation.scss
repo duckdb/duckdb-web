@@ -1,7 +1,6 @@
----
----
-
-@use 'variables' as *;
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 /** ADDITIONAL CSS FOR FOUNDATION PAGE **/
 

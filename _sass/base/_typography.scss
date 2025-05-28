@@ -1,0 +1,199 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// =============================================================================
+// TYPOGRAPHY
+// =============================================================================
+
+/// Base typography styles
+
+/*
+body {
+  color: var(--main-text-primary-color, #0D0D0D);
+  background: var(--main-body-background-color, #FAFAFA);
+  font-size: 100%;
+  font-family: $fontSans;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/// Headings
+h1 {
+  font-size: $fontSizeh1;
+  line-height: 1.0;
+  font-weight: normal;
+  margin-bottom: 50px;
+}
+
+h2 {
+  font-size: $fontSizeh2;
+  line-height: 1.0;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-weight: normal;
+  font-size: $fontSizeh3;
+  line-height: 1.1;
+}
+
+h4 {
+  font-weight: normal;
+  font-size: $fontSizeh4;
+  line-height: 1.0;
+}
+
+h5 {
+  font-weight: normal;
+  line-height: 1.0;
+  font-size: $docuh5;
+}
+
+h6 {
+  font-weight: normal;
+  line-height: 1.0;
+  font-size: $fontSize14;
+}
+
+/// Paragraphs and text elements
+p {
+  line-height: 1.5;
+  margin: 15px 0;
+}
+
+p em {
+  font-family: $fontSans;
+  font-weight: 450;
+}
+
+/// Strong text
+strong {
+  font-family: $fontSans;
+  font-weight: 600;
+  font-weight: normal;
+}
+
+/// Links
+p a,
+li a {
+  color: inherit;
+  text-decoration: underline;
+  transition: color 0.3s;
+  
+  &:hover {
+    color: $blue;
+    cursor: pointer;
+  }
+}
+
+p a:has(code):hover {
+  background-color: transparent;
+}
+
+/// Lists
+ul {
+  list-style-type: '\2022 \00a0\00a0';
+  list-style-position: outside;
+  padding: 0;
+  padding-left: 20px;
+  margin-bottom: 15px;
+  
+  ul {
+    padding-left: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+ol {
+  list-style-position: inside;
+  list-style: decimal;
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+li {
+  line-height: 24px;
+}
+
+/// Definition lists
+dl {
+  margin-bottom: 15px;
+}
+
+dl dt {
+  font-weight: bold;
+}
+
+dl dd {
+  padding-left: 20px;
+  font-style: italic;
+}
+
+dl p {
+  padding-left: 20px;
+  font-style: italic;
+}
+
+/// Horizontal rule
+hr {
+  margin: 20px 0 10px 0;
+  border: 0.5px solid rgb(229, 229, 229);
+}
+
+/// Code and pre elements
+code,
+pre {
+  font-family: $fontMono;
+  font-size: 14px;
+  border-radius: 2px;
+  line-height: 1.4;
+}
+
+code {
+  padding: 1px 0px;
+  margin: 0 3px;
+}
+
+code em {
+  font-family: $fontMonoItalic;
+}
+
+pre {
+  padding: 10px;
+  overflow: auto;
+  background: var(--doc-codebox-background-color, #F2F2F2);
+  border-radius: 10px;
+}
+
+pre code {
+  display: block;
+  box-shadow: none;
+}
+
+/// Inline code
+code.highlighter-rouge,
+code.language-plaintext {
+  border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+  background: var(--doc-codebox-background-color, #F2F2F2);
+  font-family: $fontMonoMedium;
+  border-radius: 3px;
+  padding: 0px 2px;
+  margin: 0;
+  
+  em {
+    font-family: $fontMonoItalicMedium;
+  }
+}
+
+/// Documentation specific typography
+body.documentation {
+  code {
+    font-feature-settings: "ss19";
+  }
+}
+
+
+*/
