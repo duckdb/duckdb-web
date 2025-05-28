@@ -5,6 +5,8 @@ title: ICU Extension
 redirect_from:
 - /docs/stable/extensions/icu
 - /docs/stable/extensions/icu/
+- /docs/extensions/ice
+- /docs/extensions/ice/
 ---
 
 The `icu` extension contains an easy-to-use version of the collation/timezone part of the [ICU library](https://github.com/unicode-org/icu).

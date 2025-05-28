@@ -5,6 +5,8 @@ title: SQLSmith Extension
 redirect_from:
 - /docs/stable/extensions/sqlsmith
 - /docs/stable/extensions/sqlsmith/
+- /docs/extensions/sqlsmith
+- /docs/extensions/sqlsmith/
 ---
 
 The `sqlsmith` extension is used for testing.
