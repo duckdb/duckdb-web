@@ -15,11 +15,13 @@ venue: "TBA"
      width="680"
      />
 
-We are excited to announce the [DuckDB Berlin meetup](https://www.meetup.com/duckdb/events/304415344/) organized by [DuckDB Labs](https://duckdblabs.com/).
+We are excited to announce the DuckDB Berlin meetup, which will take place during the week of the [SIGMOD 2025 conference](https://2025.sigmod.org/).
+Every year, SIGMOD attracts hundreds of database researchers, some of whom already use DuckDB in their scientific work.
+This meetup will feature two talks from academics and one from industry practitioners.
 
 ## Attendance
 
-The meetup will be held south of the [Tiergarten](https://www.google.com/maps/@52.3533567,4.9586084,4302m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoASAFQAw%3D%3D).
+The meetup will be held south of the [Tiergarten](https://www.google.com/maps/@52.3533567,4.9586084,4302m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoASAFQAw%3D%3D), within 20 minutes walking distance from SIGMOD's venue.
 
 Attendance is free but **please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/308039708/) as soon as you know that you are attending,** so we can get a good estimate for the attendance early.
 
