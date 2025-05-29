@@ -16,6 +16,19 @@ This page explains the steps for building DuckDB.
 DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
 Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
 
+## Getting Started
+
+A `Makefile` wraps the build process.
+See [Build Configuration]({% link docs/stable/dev/building/build_configuration.md %}) for targets and configuration flags.
+
+```sh
+make
+make release # same as plain make
+make debug
+GEN=ninja make # for use with Ninja
+BUILD_BENCHMARK=1 make # Build with benchmarks
+```
+
 ## Platforms
 
 ### Platforms with Full Support
