@@ -16,7 +16,7 @@ venue: "TBA"
      />
 
 We are excited to announce the DuckDB Berlin meetup, which will take place during the week of the [SIGMOD 2025 conference](https://2025.sigmod.org/).
-Every year, SIGMOD attracts hundreds of database researchers, some of whom already use DuckDB in their scientific work.
+Every year, SIGMOD attracts hundreds of database researchers, some of whom already use [DuckDB in their scientific work](https://shows.acast.com/disseminate).
 This meetup will feature two talks from academics and one from industry practitioners.
 
 ## Attendance
