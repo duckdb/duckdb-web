@@ -70,26 +70,28 @@ img{
 		-ms-flex-pack: center;
 			justify-content: center;
 }
-table {
-	min-width: 100%;
-	max-width: 100%;
-	width: 100%;
-	-webkit-box-pack: center;
-		-ms-flex-pack: center;
-			justify-content: center;
-	text-align: center;
-	margin: 6px 0;
-	font-variant-numeric: tabular-nums;
-}
-table td, table th {
-	padding: 5px 10px;
-}
-  table tbody td {
-	font-size: 12px;
-	font-weight: bold;
-	color: var(--main-text-primary-color, #0D0D0D);
-}
+
+
 body.post {
+	table {
+		min-width: 100%;
+		max-width: 100%;
+		width: 100%;
+		-webkit-box-pack: center;
+			-ms-flex-pack: center;
+				justify-content: center;
+		text-align: center;
+		margin: 6px 0;
+		font-variant-numeric: tabular-nums;
+	}
+	table td, table th {
+		padding: 5px 10px;
+	}
+	  table tbody td {
+		font-size: 12px;
+		font-weight: bold;
+		color: var(--main-text-primary-color, #0D0D0D);
+	}
 	code,
 	pre {
 		font-family: "JetBrainsMono-Regular", "Lucida Console", monospace;
@@ -537,6 +539,11 @@ h5 {
 			}
 			p > img{
 				max-width: 100%;
+				margin: 0;
+				padding: 0;
+				vertical-align: middle;
+				text-align: center;
+				border: none;
 			}
 		}
 		.singleentry.contains_toc{

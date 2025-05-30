@@ -91,6 +91,7 @@ a, a:active, a:focus, button, button:active, button:focus {
   outline: none;
 }
 
+table a,
 p a,
 li a{
 	color: inherit;
@@ -115,7 +116,6 @@ ul{
 strong{
 	font-family: $fontSans;
 	font-weight: 600;
-	font-weight: normal;
 }
 
 em.caption{
