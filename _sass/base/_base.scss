@@ -6,63 +6,7 @@
 /** DUCKDB MAIN CSS **/
 
 
-@mixin button {
-	color: black;
-	height: 30px;
-	display: inline-block;
-	background-color: black;
-	line-height: 30px;
-	padding-left: 8px;
-	padding-right: 25px;
-	cursor: pointer;
-	font-size: 14px;
-	-webkit-transition: background-color .3s;
-	-o-transition: background-color .3s;
-	transition: background-color .3s;
-	span::after{
-		content: "→";
-		font-family: "DuckDB-Symbol";
-		margin-left: 4px;
-		-webkit-transition: -webkit-transform .3s;
-		transition: -webkit-transform .3s;
-		-o-transition: transform .3s;
-		transition: transform .3s;
-		transition: transform .3s, -webkit-transform .3s;
-		position: absolute;
-	}
-	&:hover span::after{
-		-webkit-transform: translateX(3px);
-			-ms-transform: translateX(3px);
-				transform: translateX(3px);
-	}
-}
 
-@mixin textlink {
-	color: color.scale($duckDBgrey, $lightness: -20%);
-	text-decoration: underline;
-	font-size: 14px;
-	-webkit-transition: color .3s;
-	-o-transition: color .3s;
-	transition: color .3s;
-	span::after{
-		content: "→";
-		font-family: "DuckDB-Symbol";
-		margin-left: 6px;
-		-webkit-transition: -webkit-transform .3s;
-		transition: -webkit-transform .3s;
-		-o-transition: transform .3s;
-		transition: transform .3s;
-		transition: transform .3s, -webkit-transform .3s;
-		position: absolute;
-		text-decoration: none;
-		line-height: 1.5;
-	}
-	&:hover span::after{
-		-webkit-transform: translateX(3px);
-			-ms-transform: translateX(3px);
-				transform: translateX(3px);
-	}
-}
 
 
 *{
@@ -530,12 +474,12 @@ header .headerline{
 					}
 				}
 				&:hover{
-					border-color: #2EAFFF;
+					border-color: var(--menu-topmenu-text-color-hover, #6A58DA);
 					svg path{
-						fill: #2EAFFF;
+						fill: var(--menu-topmenu-text-color-hover, #6A58DA);;
 					}
 					svg *[stroke] {
-					  stroke: #2EAFFF;
+					  stroke: var(--menu-topmenu-text-color-hover, #6A58DA);;
 					}
 				}
 				svg path{
