@@ -109,16 +109,17 @@ The type detection works by attempting to convert the values in each column to t
 
 <div class="monospace_table"></div>
 
-|   Types   |
-|-----------|
-| NULL      |
-| BOOLEAN   |
-| TIME      |
-| DATE      |
-| TIMESTAMP |
-| BIGINT    |
-| DOUBLE    |
-| VARCHAR   |
+|   Types     |
+|-------------|
+| NULL        |
+| BOOLEAN     |
+| TIME        |
+| DATE        |
+| TIMESTAMP   |
+| TIMESTAMPTZ |
+| BIGINT      |
+| DOUBLE      |
+| VARCHAR     |
 
 Everything can be cast to `VARCHAR`, therefore, this type has the lowest priority meaning that all columns are converted to `VARCHAR` as a fallback if they cannot be cast to anything else.
 In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
