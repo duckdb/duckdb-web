@@ -130,7 +130,7 @@ Usage example:
 SELECT * FROM read_csv('csv_file.csv', auto_type_candidates = ['BIGINT', 'DATE']);
 ```
 
-The default value for the `auto_type_candidates` option is `['SQLNULL', 'BOOLEAN', 'BIGINT', 'DOUBLE', 'TIME', 'DATE', 'TIMESTAMP', 'VARCHAR']`.
+The default value for the `auto_type_candidates` option is `['NULL', 'BOOLEAN', 'TIME', 'DATE', 'TIMESTAMP', 'BIGINT', 'DOUBLE', 'VARCHAR']`.
 
 ## CSV Functions
 
