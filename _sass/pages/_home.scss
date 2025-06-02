@@ -1,14 +1,6 @@
----
----
-
-
-
-/** DUCKDB HOME CSS **/
-
-@use "sass:color";
-@use 'variables' as *;
-@use 'mixins' as *;
-
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 body.landing{
 	font-size: $fontSizep;
@@ -144,7 +136,7 @@ body.landing{
 			}
 		}
 		.content{
-			padding: 20px 40px;
+			padding: 20px 20px;
 			font-family: "JetBrainsMono-Regular";
 			font-size: 14px;
 			position: relative;
@@ -475,6 +467,12 @@ body.landing{
 					display: none;
 				}
 			}
+			pre,
+			.highlight{
+				background: transparent;
+				padding: 0px;
+				border: none;
+			}
 			.button.livedemo{
 				border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 				-webkit-backdrop-filter: blur(5px);
@@ -566,8 +564,11 @@ body.landing{
 			z-index: 1;
 		}
 		.window button.copy{
-			right: 40px;
-			top: 15px;
+			right: 30px;
+			top: 30px;
+		}
+		.highlight{
+			border-radius: 10px;
 		}
 	}
 	

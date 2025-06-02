@@ -1,0 +1,81 @@
+main.inactive{
+	&:before{
+		content: " ";
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.2);
+		top: 70px;
+		left: 0;
+		z-index: 500;
+	}
+}
+
+// Hide
+.onlymobile{
+	display: none;
+}
+.notonmobile{
+	display: block;
+}
+
+// Page width classes 
+.w-small {
+	.wrap {
+		max-width: 750px;
+		margin: 0 auto;
+	}
+}
+
+.w-medium {
+	.wrap {
+		max-width: 950px;
+		margin: 0 auto;
+	}
+}
+
+.w-large {
+	.wrap {
+		max-width: 1150px;
+		margin: 0 auto;
+	}
+}
+
+.w-full {
+	.wrap {
+		max-width: 100%;
+	}
+}
+
+// Two image styles
+img.darkmode-img{
+	display: none;
+}
+img.lightmode-img{
+	display: inline;
+}
+
+// Blocklink
+a.blocklink{
+	display: block;
+	position: absolute;
+	z-index: 500;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	&:hover{
+		background-color: transparent!important;
+	}
+}
+
+.flexwrap{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+	-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+			justify-content: space-between;
+}

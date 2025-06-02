@@ -27,8 +27,15 @@
 		border: 1px solid var(--blue-60, #58A8DA);
 		color: #000;
 		&:hover{
-			background: var(--blue-60, #58A8DA);
-			border: 1px solid var(--blue-60, #58A8DA);
+
+		}
+	}
+	&.black{
+		background: var(--main-text-primary-color, #F2F2F2);
+		border: 1px solid black;
+		color: var(--main-body-background-color, #0D0D0D);
+		&:hover{
+	
 		}
 	}
 	&.transparent{
@@ -99,6 +106,44 @@
 	&:hover{
 		color: $purple;
 	}
+}
+
+@mixin textlink {
+	color: $duckDBgrey;
+	text-decoration: underline;
+	font-size: 14px;
+	-webkit-transition: color .3s;
+	-o-transition: color .3s;
+	transition: color .3s;
+	span::after{
+		content: "→";
+		font-family: "DuckDB-Symbol";
+		margin-left: 6px;
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
+		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
+		position: absolute;
+		text-decoration: none;
+		line-height: 1.5;
+	}
+	&:hover span::after{
+		-webkit-transform: translateX(3px);
+			-ms-transform: translateX(3px);
+				transform: translateX(3px);
+	}
+}
+
+.ducklake_logo,
+#ducklake_logo{
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='149' height='38' fill='none'%3E%3Cpath fill='%231A1A1A' d='M19 0C8.524 0 0 8.524 0 19s8.524 19 19 19 19-8.524 19-19S29.476 0 19 0Z'/%3E%3Cpath fill='%232EAFFF' fill-rule='evenodd' d='M17.39 9.66a9.376 9.376 0 0 1 8.093 4.62h1.707v.01c2.357 0 4.345 1.895 4.35 4.3h.01c0 2.39-1.96 4.35-4.35 4.35h-1.264c-1.43 3.132-4.526 5.344-8.157 5.492l-.39.008-.483-.013A9.384 9.384 0 0 1 8 19.05v-.01c0-5.19 4.2-9.39 9.39-9.39v.01Zm0 2.85c-3.6 0-6.53 2.92-6.53 6.53v.01a6.531 6.531 0 0 0 12.74 2.02l.32-.99h3.28c.797 0 1.484-.674 1.49-1.48h-.01c0-.79-.66-1.46-1.49-1.46H23.7l-.38-.83a6.513 6.513 0 0 0-5.93-3.8Z' clip-rule='evenodd'/%3E%3Cpath fill='%230D0D0D' d='M50.906 10H45v17.793h5.906c3.96 0 7.188-3.974 7.188-8.925 0-4.951-3.227-8.868-7.188-8.868Zm0 14.922h-3.228V12.883h3.228c2.507 0 4.499 2.711 4.499 5.985 0 3.274-1.992 6.065-4.499 6.065v-.011ZM79.281 25.105h-.652c-1.557 0-2.839-1.32-2.839-2.94v-3.067c0-1.654 1.293-2.987 2.839-2.987h.652c1.603 0 2.919 1.24 2.919 2.78h2.724c0-3.067-2.552-5.594-5.631-5.594h-.653c-3.033 0-5.494 2.607-5.494 5.8v3.068c0 3.228 2.45 5.824 5.494 5.824h.653c3.182 0 5.78-2.527 5.78-5.572h-2.724c0 1.47-1.385 2.677-3.056 2.677l-.012.011ZM68.316 22.119c0 1.757-1.02 2.986-2.427 2.986h-.675c-1.431 0-2.427-1.24-2.427-2.986v-8.145h-2.701v8.662c0 3.124 2.117 5.364 5.082 5.364h.778c2.965 0 5.048-2.24 5.048-5.364v-8.662h-2.667v8.145h-.011ZM97.95 13.32h-3.755L89.79 18.35v-8.328h-2.667v17.736h2.667v-5.204l1.293-1.447 4.396 6.65h3.307l-5.837-8.844 5.002-5.594ZM136.284 13.32h-3.778l-4.395 5.031v-8.328h-2.667v17.736h2.667v-5.204l1.293-1.447 4.396 6.65h3.308l-5.838-8.844 5.014-5.594ZM103.055 10h-2.644v17.793h10.222v-2.871h-7.578V10ZM146.241 22.889c-.251 1.252-1.51 2.216-3.01 2.216h-.652c-1.557 0-2.839-1.309-2.839-2.94v-1h9.134v-2.274c0-3.067-2.552-5.594-5.631-5.594h-.653c-3.033 0-5.494 2.607-5.494 5.8v3.068c0 3.228 2.449 5.824 5.494 5.824h.653c3.021 0 5.517-2.275 5.757-5.112h-2.747l-.012.012Zm-3.01-6.778c1.58 0 2.873 1.298 2.907 2.814h-6.409c.091-1.573 1.339-2.814 2.838-2.814h.664ZM120.019 15.433c-.801-1.034-1.843-1.654-3.033-1.654h-.676c-2.941 0-5.001 2.401-5.001 5.824v2.55c0 3.4 2.06 5.824 5.001 5.824h.676c1.19 0 2.232-.597 3.033-1.62v1.39h2.575V13.952h-2.575v1.481Zm.252 6.088c0 2.275-1.385 3.837-3.274 3.837h-.675c-1.534 0-2.598-1.32-2.598-3.193v-2.55c0-1.907 1.064-3.251 2.598-3.251h.675c1.9 0 3.274 1.55 3.274 3.733v1.424Z'/%3E%3C/svg%3E");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center left;
+	width: 149px;
+	height: 70px;
+	pointer-events: none;
 }
 
 .duckdb_logo,
