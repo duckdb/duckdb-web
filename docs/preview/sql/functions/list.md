@@ -22,6 +22,7 @@ title: List Functions
 | [`apply(list, lambda(x))`](#applylist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
 | [`array_aggr(list, function_name, ...)`](#array_aggrlist-function_name-) | Executes the aggregate function `function_name` on the elements of `list`. See the List Aggregates section for more details. |
 | [`array_aggregate(list, function_name, ...)`](#array_aggregatelist-function_name-) | Executes the aggregate function `function_name` on the elements of `list`. See the List Aggregates section for more details. |
+| [`array_append(list, element)`](#array_appendlist-element) | Appends `element` to `list`. |
 | [`array_apply(list, lambda(x))`](#array_applylist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
 | [`array_cat()`](#array_cat) | Concatenates two lists. |
 | [`array_concat()`](#array_concat) | Concatenates two lists. |
@@ -36,8 +37,11 @@ title: List Functions
 | [`array_indexof(list, element)`](#array_indexoflist-element) | Returns the index of the element if the list contains the element. If the element is not found, it returns NULL. |
 | [`array_length(list)`](#array_lengthlist) | Returns the length of the `list`. |
 | [`array_length(list, dimension)`](#array_lengthlist-dimension) | `array_length` for lists with dimensions other than 1 not implemented |
+| [`array_pop_back(list)`](#array_pop_backlist) | Returns the `list` without the last element. |
+| [`array_pop_front(list)`](#array_pop_frontlist) | Returns the `list` without the first element. |
 | [`array_position(list, element)`](#array_positionlist-element) | Returns the index of the element if the list contains the element. If the element is not found, it returns NULL. |
 | [`array_prepend(element, list)`](#array_prependelement-list) | Prepends `element` to `list`. |
+| [`array_push_back(list, element)`](#array_push_backlist-element) | Appends `element` to `list`. |
 | [`array_push_front(list, element)`](#array_push_frontlist-element) | Prepends `element` to `list`. |
 | [`array_reduce(list, lambda(x,y)[, initial_value])`](#array_reducelist-lambdaxy-initial_value) | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
 | [`array_resize(list, size[[, value]])`](#array_resizelist-size-value) | Resizes the list to contain size elements. Initializes new elements with value or NULL if value is not set. |
@@ -46,6 +50,8 @@ title: List Functions
 | [`array_slice(list, begin, end)`](#array_slicelist-begin-end) | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | [`array_slice(list, begin, end, step)`](#array_slicelist-begin-end-step) | list_slice with added step feature. |
 | [`array_sort(list[, col1][, col2])`](#array_sortlist-col1-col2) | Sorts the elements of the list. See the Sorting Lists section for more details about the `NULL` sorting order. |
+| [`array_to_string(list, delimiter)`](#array_to_stringlist-delimiter) | Concatenates list/array elements using an optional `delimiter`. |
+| [`array_to_string_comma_default(array)`](#array_to_string_comma_defaultarray) | Concatenates list/array elements with a comma delimiter. |
 | [`array_transform(list, lambda(x))`](#array_transformlist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
 | [`array_unique(list)`](#array_uniquelist) | Counts the unique elements of a list. |
 | [`array_where(value_list, mask_list)`](#array_wherevalue_list-mask_list) | Returns a list with the BOOLEANs in mask_list applied as a mask to the value_list. |
@@ -62,6 +68,7 @@ title: List Functions
 | [`length(list)`](#lengthlist) | Returns the length of the `list`. |
 | [`list_aggr(list, function_name, ...)`](#list_aggrlist-function_name-) | Executes the aggregate function `function_name` on the elements of `list`. See the List Aggregates section for more details. |
 | [`list_aggregate(list, function_name, ...)`](#list_aggregatelist-function_name-) | Executes the aggregate function `function_name` on the elements of `list`. See the List Aggregates section for more details. |
+| [`list_append(list, element)`](#list_appendlist-element) | Appends `element` to `list`. |
 | [`list_apply(list, lambda(x))`](#list_applylist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
 | [`list_cat()`](#list_cat) | Concatenates two lists. |
 | [`list_concat()`](#list_concat) | Concatenates two lists. |
@@ -216,6 +223,15 @@ title: List Functions
 | **Result** | `1` |
 | **Aliases** | `aggregate`, `array_aggr`, `list_aggr`, `list_aggregate` |
 
+#### `array_append(list, element)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Appends `element` to `list`. |
+| **Example** | `array_append([2, 3], 4)`{:.language-sql .highlight} |
+| **Result** | `[2, 3, 4]` |
+| **Aliases** | `array_push_back`, `list_append` |
+
 #### `array_apply(list, lambda(x))`
 
 <div class="nostroke_table"></div>
@@ -339,6 +355,22 @@ title: List Functions
 | **Example** | `array_length([1, 2, 3])`{:.language-sql .highlight} |
 | **Result** | `3` |
 
+#### `array_pop_back(list)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the `list` without the last element. |
+| **Example** | `array_pop_back([4, 5, 6])`{:.language-sql .highlight} |
+| **Result** | `[4, 5]` |
+
+#### `array_pop_front(list)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the `list` without the first element. |
+| **Example** | `array_pop_front([4, 5, 6])`{:.language-sql .highlight} |
+| **Result** | `[5, 6]` |
+
 #### `array_position(list, element)`
 
 <div class="nostroke_table"></div>
@@ -356,6 +388,15 @@ title: List Functions
 | **Example** | `array_prepend(3, [4, 5, 6])`{:.language-sql .highlight} |
 | **Result** | `[3, 4, 5, 6]` |
 | **Alias** | `list_prepend` |
+
+#### `array_push_back(list, element)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Appends `element` to `list`. |
+| **Example** | `array_push_back([2, 3], 4)`{:.language-sql .highlight} |
+| **Result** | `[2, 3, 4]` |
+| **Aliases** | `array_append`, `list_append` |
 
 #### `array_push_front(list, element)`
 
@@ -431,6 +472,24 @@ title: List Functions
 | **Example** | `array_sort([3, 6, 1, 2])`{:.language-sql .highlight} |
 | **Result** | `[1, 2, 3, 6]` |
 | **Alias** | `list_sort` |
+
+#### `array_to_string(list, delimiter)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Concatenates list/array elements using an optional `delimiter`. |
+| **Example 1** | `array_to_string([1, 2, 3], '-')`{:.language-sql .highlight} |
+| **Result** | `1-2-3` |
+| **Example 2** | `array_to_string(['aa', 'bb', 'cc'], '')`{:.language-sql .highlight} |
+| **Result** | `aabbcc` |
+
+#### `array_to_string_comma_default(array)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Concatenates list/array elements with a comma delimiter. |
+| **Example** | `array_to_string_comma_default(['Banana', 'Apple', 'Melon'])`{:.language-sql .highlight} |
+| **Result** | `Banana,Apple,Melon` |
 
 #### `array_transform(list, lambda(x))`
 
@@ -571,6 +630,15 @@ title: List Functions
 | **Example** | `list_aggregate([1, 2, NULL], 'min')`{:.language-sql .highlight} |
 | **Result** | `1` |
 | **Aliases** | `aggregate`, `array_aggr`, `array_aggregate`, `list_aggr` |
+
+#### `list_append(list, element)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Appends `element` to `list`. |
+| **Example** | `list_append([2, 3], 4)`{:.language-sql .highlight} |
+| **Result** | `[2, 3, 4]` |
+| **Aliases** | `array_append`, `array_push_back` |
 
 #### `list_apply(list, lambda(x))`
 

@@ -106,6 +106,42 @@ OVERRIDES: list[DocFunction] = [
         description="Prepends `element` to `list`.",
         examples=["array_push_front([4, 5, 6], 3)"],
     ),
+    DocFunction(
+        category='list',
+        name='list_append',
+        parameters=["list", "element"],
+        description="Appends `element` to `list`.",
+        examples=["list_append([2, 3], 4)"],
+        aliases=["array_append", "array_push_back"],
+    ),
+    DocFunction(
+        category='list',
+        name='array_pop_back',
+        parameters=["list"],
+        description="Returns the `list` without the last element.",
+        examples=["array_pop_back([4, 5, 6])"],
+    ),
+    DocFunction(
+        category='list',
+        name='array_pop_front',
+        parameters=["list"],
+        description="Returns the `list` without the first element.",
+        examples=["array_pop_front([4, 5, 6])"],
+    ),
+    DocFunction(
+        category='list',
+        name='array_to_string',
+        parameters=['list', 'delimiter'],
+        description="Concatenates list/array elements using an optional `delimiter`.",
+        examples=["array_to_string([1, 2, 3], '-')", "array_to_string(['aa', 'bb', 'cc'], '')"],
+    ),
+    DocFunction(
+        category='list',
+        name='array_to_string_comma_default',
+        parameters=['array'],
+        description="Concatenates list/array elements with a comma delimiter.",
+        examples=["array_to_string_comma_default(['Banana', 'Apple', 'Melon'])"],
+    ),
     # others
     DocFunction(
         category='string',
