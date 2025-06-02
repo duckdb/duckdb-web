@@ -11,7 +11,7 @@ title: List Functions
 | Function | Description |
 |:--|:-------|
 | [`list[index]`](#listindex) | Extracts a single list element using a (1-based) index. |
-| [`list[begin[:end][:step]]`](#listbeginendstep) | Extract a sublist using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. See [slicing]({% link docs/preview/sql/functions/list.md %}#slicing). |
+| [`list[begin[:end][:step]]`](#listbeginendstep) | Extracts a sublist using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. See [slicing]({% link docs/preview/sql/functions/list.md %}#slicing). |
 | [`list1 && list2`](#list1-&&-list2) | Returns true if the lists have any element in common. NULLs are ignored. |
 | [`list1 <-> list2`](#list1-<->-list2) | Computes the distance between two lists. |
 | [`list1 <=> list2`](#list1-<=>-list2) | Computes the cosine distance between two lists. |
@@ -37,6 +37,8 @@ title: List Functions
 | [`array_length(list)`](#array_lengthlist) | Returns the length of the `list`. |
 | [`array_length(list, dimension)`](#array_lengthlist-dimension) | `array_length` for lists with dimensions other than 1 not implemented |
 | [`array_position(list, element)`](#array_positionlist-element) | Returns the index of the element if the list contains the element. If the element is not found, it returns NULL. |
+| [`array_prepend(element, list)`](#array_prependelement-list) | Prepends `element` to `list`. |
+| [`array_push_front(list, element)`](#array_push_frontlist-element) | Prepends `element` to `list`. |
 | [`array_reduce(list, lambda(x,y)[, initial_value])`](#array_reducelist-lambdaxy-initial_value) | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
 | [`array_resize(list, size[[, value]])`](#array_resizelist-size-value) | Resizes the list to contain size elements. Initializes new elements with value or NULL if value is not set. |
 | [`array_reverse_sort(list[, col1])`](#array_reverse_sortlist-col1) | Sorts the elements of the list in reverse order. See the Sorting Lists section for more details about the `NULL` sorting order. |
@@ -82,6 +84,7 @@ title: List Functions
 | [`list_negative_inner_product(list1, list2)`](#list_negative_inner_productlist1-list2) | Computes the negative inner product between two lists. |
 | [`list_pack(, ...)`](#list_pack-) | Creates a LIST containing the argument values. |
 | [`list_position(list, element)`](#list_positionlist-element) | Returns the index of the element if the list contains the element. If the element is not found, it returns NULL. |
+| [`list_prepend(element, list)`](#list_prependelement-list) | Prepends `element` to `list`. |
 | [`list_reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
 | [`list_resize(list, size[[, value]])`](#list_resizelist-size-value) | Resizes the list to contain size elements. Initializes new elements with value or NULL if value is not set. |
 | [`list_reverse_sort(list[, col1])`](#list_reverse_sortlist-col1) | Sorts the elements of the list in reverse order. See the Sorting Lists section for more details about the `NULL` sorting order. |
@@ -115,7 +118,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extract a sublist using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. See [slicing]({% link docs/preview/sql/functions/list.md %}#slicing). |
+| **Description** | Extracts a sublist using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. See [slicing]({% link docs/preview/sql/functions/list.md %}#slicing). |
 | **Example** | `[4, 5, 6][3]`{:.language-sql .highlight} |
 | **Result** | `6` |
 | **Alias** | `list_slice` |
@@ -344,6 +347,23 @@ title: List Functions
 | **Example** | `array_position([1, 2, NULL], 2)`{:.language-sql .highlight} |
 | **Result** | `2` |
 | **Aliases** | `array_indexof`, `list_indexof`, `list_position` |
+
+#### `array_prepend(element, list)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Prepends `element` to `list`. |
+| **Example** | `array_prepend(3, [4, 5, 6])`{:.language-sql .highlight} |
+| **Result** | `[3, 4, 5, 6]` |
+| **Alias** | `list_prepend` |
+
+#### `array_push_front(list, element)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Prepends `element` to `list`. |
+| **Example** | `array_push_front([4, 5, 6], 3)`{:.language-sql .highlight} |
+| **Result** | `[3, 4, 5, 6]` |
 
 #### `array_reduce(list, lambda(x,y)[, initial_value])`
 
@@ -748,6 +768,15 @@ title: List Functions
 | **Example** | `list_position([1, 2, NULL], 2)`{:.language-sql .highlight} |
 | **Result** | `2` |
 | **Aliases** | `array_indexof`, `array_position`, `list_indexof` |
+
+#### `list_prepend(element, list)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Prepends `element` to `list`. |
+| **Example** | `list_prepend(3, [4, 5, 6])`{:.language-sql .highlight} |
+| **Result** | `[3, 4, 5, 6]` |
+| **Alias** | `array_prepend` |
 
 #### `list_reduce(list, lambda(x,y)[, initial_value])`
 

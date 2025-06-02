@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from dataclasses import dataclass, field
+import copy
 import duckdb
 import re
 import operator
@@ -31,6 +32,8 @@ DOC_FILES = [
 # 'functions' that are binary operators are listed between the arguments
 BINARY_OPERATORS = ['||', '^@', '&&', '<->', '<=>', '<@', '@>', 'LIKE', 'SIMILAR TO']
 EXTRACT_OPERATOR = '[]'
+# 'position' requires keyword 'IN' as argument
+NON_STANDARD_FUNCTIONS = ['position']
 
 # override/add to duckdb_functions() outputs:
 # NOTE: duckdb_functions() only contains sufficient information for scalar and aggregate functions.
@@ -87,6 +90,21 @@ OVERRIDES: list[DocFunction] = [
         parameters=['string', 'separator', 'index'],
         description="Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior).",
         examples=["split_part('a;b;c', ';', 2)"],
+    ),
+    DocFunction(
+        category='list',
+        name='list_prepend',
+        parameters=['element', 'list'],
+        description="Prepends `element` to `list`.",
+        examples=["list_prepend(3, [4, 5, 6])"],
+        aliases=["array_prepend"],
+    ),
+    DocFunction(
+        category='list',
+        name='array_push_front',
+        parameters=['list', 'element'],
+        description="Prepends `element` to `list`.",
+        examples=["array_push_front([4, 5, 6], 3)"],
     ),
     # others
     DocFunction(
@@ -290,16 +308,32 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
         )
         and (func.category, func.name) not in EXCLUDES
     ]
-    function_data += [
-        override for override in OVERRIDES if override.category in categories
-    ]
+    for override in OVERRIDES:
+        if override.category in categories:
+            function_data.append(override)
+            for alias_str in override.aliases:
+                if (
+                    alias_str not in function_data
+                    and override.name not in BINARY_OPERATORS
+                    and override.name not in NON_STANDARD_FUNCTIONS
+                    and override.name != EXTRACT_OPERATOR
+                ):
+                    alias: DocFunction = copy.deepcopy(override)
+                    alias.name = alias_str
+                    alias.aliases.remove(alias_str)
+                    alias.aliases.append(override.name)
+                    alias.examples = [
+                        example.replace(override.name, alias.name)
+                        for example in alias.examples
+                    ]
+                    function_data.append(alias)
     return function_data
 
 
 def sort_function_data(function_data: list[DocFunction]):
     function_data_1 = sorted(
         [func for func in function_data if func.name == EXTRACT_OPERATOR],
-        key=lambda func: len(func.parameters)
+        key=lambda func: len(func.parameters),
     )
     function_data_2 = sorted(
         [func for func in function_data if func.name in BINARY_OPERATORS],
@@ -340,8 +374,13 @@ def prune_duplicates(function_data: list[DocFunction]):
 
 def apply_description_appends(function: DocFunction):
     for extension_function in DESCRIPTION_EXTENSIONS:
-        if extension_function == function.name or extension_function in function.aliases:
-            function.description = f"{function.description} {DESCRIPTION_EXTENSIONS[extension_function]}"
+        if (
+            extension_function == function.name
+            or extension_function in function.aliases
+        ):
+            function.description = (
+                f"{function.description} {DESCRIPTION_EXTENSIONS[extension_function]}"
+            )
     return function
 
 
@@ -405,7 +444,7 @@ def get_function_title(func: DocFunction):
         if func.nr_optional_arguments == 0:
             parameter_str = ":".join(func.parameters[1:])
         else:
-            mandatory_args = func.parameters[1: -1 * func.nr_optional_arguments]
+            mandatory_args = func.parameters[1 : -1 * func.nr_optional_arguments]
             optional_args = func.parameters[-1 * func.nr_optional_arguments :]
             parameter_str = f"{":".join(mandatory_args)}{"".join(f"[:{arg}]" for arg in optional_args)}"
         function_title = f"{func.parameters[0]}[{parameter_str}]"
@@ -433,7 +472,9 @@ def generate_example_rows(func: DocFunction):
             func.fixed_example_results[idx] if func.fixed_example_results else ''
         )
         example_num = ' ' + str(idx + 1) if len(func.examples) > 1 else ''
-        lines += f"| **Example{example_num}** | `{example}`{{:.language-sql .highlight}} |\n"
+        lines += (
+            f"| **Example{example_num}** | `{example}`{{:.language-sql .highlight}} |\n"
+        )
         if not example_result:
             try:
                 if func.name in BINARY_OPERATORS:
