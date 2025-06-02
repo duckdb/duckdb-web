@@ -30,7 +30,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the cosine distance between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| **Example** | `array_cosine_distance(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
+| **Example** | `array_cosine_distance(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))`{:.language-sql .highlight} |
 | **Result** | `0.007416606` |
 
 #### `array_cosine_similarity(array1, array2)`
@@ -38,7 +38,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the cosine similarity between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| **Example** | `array_cosine_similarity(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
+| **Example** | `array_cosine_similarity(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))`{:.language-sql .highlight} |
 | **Result** | `0.9925834` |
 
 #### `array_cross_product(array, array)`
@@ -46,7 +46,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the cross product of two arrays of size 3. The array elements can not be `NULL`. |
-| **Example** | `array_cross_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
+| **Example** | `array_cross_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))`{:.language-sql .highlight} |
 | **Result** | `[-1.0, 2.0, -1.0]` |
 
 #### `array_distance(array1, array2)`
@@ -54,7 +54,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the distance between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| **Example** | `array_distance(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
+| **Example** | `array_distance(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))`{:.language-sql .highlight} |
 | **Result** | `1.7320508` |
 
 #### `array_dot_product(array1, array2)`
@@ -62,7 +62,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| **Example** | `array_dot_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
+| **Example** | `array_dot_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))`{:.language-sql .highlight} |
 | **Result** | `20.0` |
 | **Alias** | `array_inner_product` |
 
@@ -71,7 +71,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| **Example** | `array_inner_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
+| **Example** | `array_inner_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))`{:.language-sql .highlight} |
 | **Result** | `20.0` |
 | **Alias** | `array_dot_product` |
 
@@ -80,7 +80,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the negative inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| **Example** | `array_negative_dot_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
+| **Example** | `array_negative_dot_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))`{:.language-sql .highlight} |
 | **Result** | `-20.0` |
 | **Alias** | `array_negative_inner_product` |
 
@@ -89,7 +89,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the negative inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| **Example** | `array_negative_inner_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
+| **Example** | `array_negative_inner_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))`{:.language-sql .highlight} |
 | **Result** | `-20.0` |
 | **Alias** | `array_negative_dot_product` |
 
@@ -98,7 +98,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 <div class="nostroke_table"></div>
 
 | **Description** | Creates an `ARRAY` containing the argument values. |
-| **Example** | `array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT)` |
+| **Example** | `array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT)`{:.language-sql .highlight} |
 | **Result** | `[1.0, 2.0, 3.0]` |
 
 <!-- End of section generated by scripts/generate_sql_function_docs.py -->

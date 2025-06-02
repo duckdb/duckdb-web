@@ -379,7 +379,7 @@ def generate_example_rows(func: DocFunction):
             func.fixed_example_results[idx] if func.fixed_example_results else ''
         )
         example_num = ' ' + str(idx + 1) if len(func.examples) > 1 else ''
-        lines += f"| **Example{example_num}** | `{example}` |\n"
+        lines += f"| **Example{example_num}** | `{example}`{{:.language-sql .highlight}} |\n"
         if not example_result:
             try:
                 if func.name in BINARY_OPERATORS:
