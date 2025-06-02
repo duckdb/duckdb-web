@@ -5,7 +5,7 @@ author: Hannes Mühleisen
 excerpt: ""
 toc: false
 tags: ["Talk", "Landscape"]
-length: "40 min"
+length: "35 min"
 ---
 
 <div class="video-container">
@@ -17,4 +17,3 @@ length: "40 min"
 Event: [Data Council 2025](https://www.datacouncil.ai/bay-2025)
 
 Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)
-
