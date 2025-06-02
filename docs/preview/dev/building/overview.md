@@ -88,7 +88,7 @@ DuckDB can also be built for end-of-life platforms such as [macOS 11](https://en
 DuckDB can be build as a single pair of C++ header and source code files (`duckdb.hpp` and `duckdb.cpp`) with approximately 0.5M lines of code.
 To generate this file, run:
 
-```bash
+```batch
 python scripts/amalgamation.py
 ```
 
