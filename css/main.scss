@@ -4,6 +4,8 @@
 @use '../_sass/abstracts/variables';
 @use '../_sass/abstracts/mixins';
 
+@use '../_sass/utilities/helpers';
+
 @use '../_sass/base/reset';
 @use '../_sass/base/fonts';
 @use '../_sass/base/typography';
@@ -11,7 +13,10 @@
 @use '../_sass/base/base';
 
 @use '../_sass/components/copy_button';
+@use '../_sass/components/faq';
+@use '../_sass/components/info_boxes';
 
+@use '../_sass/layout/header';
 @use '../_sass/layout/search';
 @use '../_sass/layout/footer';
 
@@ -19,6 +24,7 @@
 @use '../_sass/pages/docs';
 @use '../_sass/pages/blog';
 @use '../_sass/pages/home';
+@use '../_sass/pages/installation';
 @use '../_sass/pages/foundation';
 
 @use '../_sass/themes/darkmode';
