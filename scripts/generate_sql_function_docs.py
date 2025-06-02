@@ -23,11 +23,13 @@ DOC_VERSION = 'preview'
 DOC_FILES = [
     f'docs/{DOC_VERSION}/sql/functions/array.md',
     f'docs/{DOC_VERSION}/sql/functions/blob.md',
+    f'docs/{DOC_VERSION}/sql/functions/lambda.md',
+    f'docs/{DOC_VERSION}/sql/functions/list.md',
     f'docs/{DOC_VERSION}/sql/functions/text.md',
 ]
 
 # 'functions' that are binary operators are listed between the arguments
-BINARY_OPERATORS = ['||', '^@', 'LIKE', 'SIMILAR TO']
+BINARY_OPERATORS = ['||', '^@', '&&', '<->', '<=>', '<@', '@>', 'LIKE', 'SIMILAR TO']
 EXTRACT_OPERATOR = '[]'
 
 # override/add to duckdb_functions() outputs:
@@ -49,6 +51,13 @@ OVERRIDES: list[DocFunction] = [
         description="Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the `read_text` guide for more details.",
         examples=["read_text('hello.txt')"],
         fixed_example_results=["hello\\n"],
+    ),
+    DocFunction(
+        category='list',
+        name='unnest',
+        parameters=['list'],
+        description="Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the unnest page for more details.",
+        examples=["unnest([1, 2, 3])"],
     ),
     # macros
     DocFunction(
@@ -97,6 +106,23 @@ OVERRIDES: list[DocFunction] = [
         aliases=['array_slice'],
     ),
     DocFunction(
+        category='list',
+        name='[]',
+        parameters=['list', 'index'],
+        description="Extracts a single list element using a (1-based) index.",
+        examples=["[4, 5, 6][3]"],
+        aliases=['list_extract'],
+    ),
+    DocFunction(
+        category='list',
+        name='[]',
+        parameters=['list', 'begin', 'end', 'step'],
+        description="Extracts a sublist using slice conventions. Negative values are accepted. See slicing.",
+        examples=["[4, 5, 6][3]"],
+        aliases=['list_slice'],
+        nr_optional_arguments=2,
+    ),
+    DocFunction(
         category='string',
         name='LIKE',
         parameters=['string', 'target'],
@@ -132,14 +158,28 @@ OVERRIDES: list[DocFunction] = [
 # NOTE: All function aliases are added, unless explicitly excluded. Format: (<category>, <function_name>)
 EXCLUDES = [('string', 'list_slice')]
 
+# define appends to function descriptions, e.g. for 'more details' links.
+DESCRIPTION_EXTENSIONS = {
+    "list_aggregate": "See the List Aggregates section for more details.",
+    "list_filter": "See `list_filter` examples.",
+    "list_reduce": "See `list_reduce` examples.",
+    "list_transform": "See `list_transform` examples.",
+    "list_sort": "See the Sorting Lists section for more details about the `NULL` sorting order.",
+    "list_reverse_sort": "See the Sorting Lists section for more details about the `NULL` sorting order.",
+}
+
 PAGE_LINKS = {
     # intra-page links:
     '`concat(arg1, arg2, ...)`': "#concatvalue-",
     'operator `||`': "#arg1--arg2",
     'fmt syntax': "#fmt-syntax",
     'printf syntax': '#printf-syntax',
+    'Flattens': '#flattening',
     # links to other doc pages:
     '`list_concat(list1, list2)`': f'docs/{DOC_VERSION}/sql/functions/list.md#list_concatlist1-list2',
+    '`list_filter` examples': f'docs/{DOC_VERSION}/sql/functions/lambda.md#list_filter-examples',
+    '`list_reduce` examples': f'docs/{DOC_VERSION}/sql/functions/lambda.md#list_reduce-examples',
+    '`list_transform` examples': f'docs/{DOC_VERSION}/sql/functions/lambda.md#list_transform-examples',
     '`read_blob` guide': f'docs/{DOC_VERSION}/guides/file_formats/read_file.md#read_blob',
     '`read_text` guide': f'docs/{DOC_VERSION}/guides/file_formats/read_file.md#read_text',
     'slicing': f'docs/{DOC_VERSION}/sql/functions/list.md#slicing',
@@ -147,6 +187,7 @@ PAGE_LINKS = {
     'Pattern Matching': f'docs/{DOC_VERSION}/sql/functions/pattern_matching.md',
     'collations': f'docs/{DOC_VERSION}/sql/expressions/collations.md',
     'regex `options`': f'docs/{DOC_VERSION}/sql/functions/regular_expressions.md#options-for-regular-expression-functions',
+    'unnest page': f'docs/{DOC_VERSION}/sql/query_syntax/unnest.md',
     # external page links:
     '`os.path.dirname`': 'https://docs.python.org/3.7/library/os.path.html#os.path.dirname',
     '`os.path.basename`': 'https://docs.python.org/3.7/library/os.path.html#os.path.basename',
@@ -209,6 +250,7 @@ def get_function_data(categories: list[str]) -> list[DocFunction]:
     function_data = apply_overrides(function_data, categories)
     function_data = sort_function_data(function_data)
     function_data = prune_duplicates(function_data)
+    function_data = [apply_description_appends(function) for function in function_data]
     function_data = [apply_url_conversions(function) for function in function_data]
     return function_data
 
@@ -257,7 +299,7 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
 def sort_function_data(function_data: list[DocFunction]):
     function_data_1 = sorted(
         [func for func in function_data if func.name == EXTRACT_OPERATOR],
-        key=operator.attrgetter("name", "description", "parameters"),
+        key=lambda func: len(func.parameters)
     )
     function_data_2 = sorted(
         [func for func in function_data if func.name in BINARY_OPERATORS],
@@ -294,6 +336,13 @@ def prune_duplicates(function_data: list[DocFunction]):
             ):
                 func.name = "DELETE_ME"
     return [func for func in function_data if func.name != "DELETE_ME"]
+
+
+def apply_description_appends(function: DocFunction):
+    for extension_function in DESCRIPTION_EXTENSIONS:
+        if extension_function == function.name or extension_function in function.aliases:
+            function.description = f"{function.description} {DESCRIPTION_EXTENSIONS[extension_function]}"
+    return function
 
 
 def apply_url_conversions(function: DocFunction):
@@ -353,7 +402,12 @@ def get_function_title(func: DocFunction):
         function_title = f"{func.parameters[0]} {func.name} {func.parameters[1]}"
     elif func.name == EXTRACT_OPERATOR:
         assert len(func.parameters) >= 2
-        parameter_str = ":".join(func.parameters[1:])
+        if func.nr_optional_arguments == 0:
+            parameter_str = ":".join(func.parameters[1:])
+        else:
+            mandatory_args = func.parameters[1: -1 * func.nr_optional_arguments]
+            optional_args = func.parameters[-1 * func.nr_optional_arguments :]
+            parameter_str = f"{":".join(mandatory_args)}{"".join(f"[:{arg}]" for arg in optional_args)}"
         function_title = f"{func.parameters[0]}[{parameter_str}]"
     else:
         if func.nr_optional_arguments == 0:
