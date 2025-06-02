@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Approximate Sorting for Fast Selective Queries"
+title: "Multi-Column Approximate Sorting for Faster Dashboards"
 author: "Alex Monahan"
 thumb: "/images/blog/thumbs/indexing-tips.svg"
 image: "/images/blog/thumbs/indexing-tips.png"
-excerpt: "Sorting data when loading speeds up selective read queries by an order of magnitude using DuckDB's automatic min-max indexes (also known as zone maps). Approximate sorting expands this technique to work when filtering on multiple columns and also works well with timestamps. Converting strings to numeric representations allows them to also benefit from space filling curve approaches like Morton (Z-order) and Hilbert encodings."
+excerpt: "With any columnar data format, using advanced multi-column sorting when loading data can improve performance on a wide variety of selective read queries. Space filling curve encodings like Morton (Z-Order) and Hilbert approximately sort multiple columns together. Sorting by rounded timestamps adds additional benefits when filtering on recent data."
 tags: ["deep dive"]
 ---
 
@@ -23,35 +23,55 @@ Cartesian was the smallest distribution that included box plots
 
 </div>
 
+It is rare to have a dashboard with a single chart.
+It is even more rare to only query your data one way.
+It is rarer still to query your data with no filters at all!
 
-<!-- TODO: 
+When queries read a subset of the total rows, sorting data while loading provides significant benefits.
+Please have a look at [the prior post in this series]({% post_url 2025-05-14-sorting-for-fast-selective-queries %}) to understand how this approach works and for practical tips!
 
-Fix TLDR
+In order to see these benefits in a wider variety of real world cases, we have to get a bit more creative.
+These advanced techiques help when one of these situations occur:
 
-Introduction to sorting
-  Motivation for sorting in general
-    Link back to prior post
-  Motivation for multi-column sorting
-Introduction to Space Filling Curves
+- Queries filter on different columns
+- Query patterns are not perfectly predictable
+- Queries filter by time and at least one other column
 
-Maybe combine Appendix with main section? (make it a more seamless flow)
-    Likely still want the appendix?
+In this post, we describe several advanced sorting strategies, compare them with some experiments (micro-benchmarks), and then calculate a metric to measure their effectiveness.
 
- -->
+## The Strategy
 
-<!-- TODO: Get the rest of this from the appendix and combine -->
+Instead of sorting precisely by one or a small number of columns, we want to sort approximately by a larger number of columns.
+That will allow queries with different `WHERE` clauses to all benefit from DuckDB's min-max indexes (zone maps).
+This post introduces two high level approaches with several examples of each: sorting by space filling curves, and sorting by truncated timestamps.
+
+### Space Filling Curves 
+
 Both Morton and Hilbert are space filling curve algorithms that are designed to combine multiple columns into an order that preserves some approximate ordering for both columns.
 One application of space filling curves is in geospatial analytics and it is a helpful illustration.
 
-If our dataset contained the latitude and longitude coordinates of every café on earth (one row per café), but we wanted to sort so that cafés that are physically close to one another are near each other in the list, we could use a space filling curve.
+If a dataset contained the latitude and longitude coordinates of every café on earth (one row per café), but we wanted to sort so that cafés that are physically close to one another are near each other in the list, we could use a space filling curve.
 Cafés that are somewhat close in both latitude and longitude will receive a similar Morton or Hilbert encoding value.
 This will allow us to quickly execute queries like “Find all cafés within this rectangular region on a map”.
-(A rectangle like that is called a bounding box in geospatial-land!)
+(A rectangular region like that is called a bounding box in geospatial-land!)
+The GIF at the top of this post shows various levels of granularity of a Hilbert encoding - imagine if the x axis were longitude and the y axis were lattitude.
+The "zig-zag" line of the Hilbert algorithm is the list of cafés, sorted approximately.
 
 Both Morton and Hilbert operate on integers or floats, but this post outlines a way to use them to sort `VARCHAR` columns as well.
 A SQL macro is used to convert the first few characters of a `VARCHAR` column into an integer as a pre-processing step.
-More details are included in the [Appendix](#appendix-experiment-details)!
 
+### Truncated Timestamps
+
+More recent data tends to be more useful data, so frequently queries filter on a time column.
+However, often queries filter on time and on other columns as well.
+
+**Don't just sort on the timestamp column!**
+You will miss out on performance benefits.
+This is because timestamps tend to be so granular, that in practical terms the data is only sorted by timestamp.
+How many rows of your data were inserted at exactly `2025-01-01 01:02:03.456789`?
+Probably just one!
+
+To sort on multiple columns as well as a time column, first sort by a truncated timestamp (truncated to the start of the day, week, year, etc.) and then on the other columns.
 
 ## The “On-Time Flights” Dataset
 
@@ -71,8 +91,7 @@ Our second experiment will add in a time component where our hypothetical users 
 
 ## Experimental Design
 
-We will show a few approaches to sort data approximately or using space-filling curves to speed up retrieval.
-Let's have a look at some illustrative results first and dive into the details in subsequent sections.
+We will show a few approaches to sort data approximately to speed up retrieval.
 
 The control groups are:
 
@@ -82,9 +101,13 @@ The control groups are:
 
 Our alternative sorting approaches are:
 
-- `zipped_varchar`: Sort by one letter at a time, alternating between `origin` and `destination`. This approach is implemented using a custom SQL macro – see the [Appendix](#appendix-experiment-details) for details!
+- `zipped_varchar`: Sort by one letter at a time, alternating between `origin` and `destination`.
+    - For example, an `origin` of `ABC` and a `destination` of `XYZ` would become `AXBYCZ`, which would then be sorted.  
 - `morton`: Convert `origin` and `destination` into integers, then order by [Morton encoding (Z-order)](https://en.wikipedia.org/wiki/Z-order_curve)
 - `hilbert`: Convert `origin` and `destination` into integers, then order by [Hilbert encoding](https://en.wikipedia.org/wiki/Hilbert_curve)
+
+> The `zipped_varchar` algorithm is implemented using a SQL macro so no extensions are needed.
+> It also handles arbitrary length strings.
 
 > The Morton and Hilbert encoding functions come from the [`lindel` DuckDB community extension]({% link community_extensions/extensions/lindel.md %}), contributed by [Rusty Conover](https://github.com/rustyconover).
 > Thank you to Rusty and the folks who have built the [`lindel` Rust crate](https://crates.io/crates/lindel) upon which the DuckDB extension is based!
@@ -93,14 +116,205 @@ Our alternative sorting approaches are:
 
 These plots display query runtime when pulling from a DuckDB file hosted on S3.
 These same techniques can also be successfully applied to the [DuckLake](https://ducklake.select/) integrated data lake and catalog format!
+DuckLake is the modern evolution of the cloud data lakehouse - take a minute to check out the [launch post]({% post_url 2025-05-27-ducklake %}) if you haven't yet!
 DuckLake has an [additional concept of a partition](https://ducklake.select/docs/stable/duckdb/advanced_features/partitioning), which enables entire files to be skipped.
-To take full advantage of DuckLake, first partition your data (by time or otherwise) and then apply the techniques in this post on each individual file.
+To take full advantage of DuckLake, first partition your data (by time or otherwise) and then apply the techniques in this post when loading your data.
 
 All experiments were run on an M1 MacBook Pro with DuckDB v1.2.2.
-The tests were conducted with the DuckDB Python client, with results returned as Apache Arrow tables.
-Each scenario is run 3 times and all 3 results are included in the output plots.
+The tests were conducted with the DuckDB Python client with results returned as Apache Arrow tables.
 In between each query, the DuckDB connection is closed and recreated (this time is not measured as a part of the results).
 This is to better simulate a single user's experience accessing the dashboard in our hypothetical use case.
+
+<details markdown='1' style="font-size:19px;margin-bottom:15px;">
+<summary markdown='span'>
+    Expand to see the basic sorting queries
+</summary>
+
+For reproducibility, here are the very standard queries used to initially load the data from Parquet, sort randomly, sort by `origin`, and sort by `origin` and then `destination`.
+The parquet files were downloaded [from Kaggle](https://www.kaggle.com/datasets/robikscube/flight-delay-dataset-20182022).
+
+```sql
+CREATE TABLE IF NOT EXISTS flights AS
+    FROM './Combined_Flights*.parquet';
+
+-- The hash function is used instead of random
+-- for consistency across re-runs
+CREATE TABLE IF NOT EXISTS flights_random AS
+    FROM flights
+    ORDER BY hash(rowid + 42);
+
+CREATE TABLE IF NOT EXISTS flights_origin AS
+    FROM flights
+    ORDER BY origin;
+
+CREATE TABLE IF NOT EXISTS flights_origin_dest AS
+    FROM flights
+    ORDER BY origin, dest;
+```
+</details>
+<details markdown='1' style="font-size:19px;margin-bottom:15px;">
+<summary markdown='span'>
+    Expand to see the Zipped `VARCHAR` sorting queries
+</summary>
+
+As an example of an approach that does not require an extension, this SQL macro roughly approximates a space filling curve approach, but using alphanumeric characters instead of integers.
+The outcome is a dataset that is somewhat sorted by one column and somewhat sorted by another.
+
+```sql
+CREATE OR REPLACE FUNCTION main.zip_varchar(i, j, num_chars := 6) AS (
+    -- By default using 6 characters from each string so that
+    -- if data is ASCII, we can fit it all in 12 bytes so that it is stored inline
+    -- rather than requiring a pointer
+    [
+        list_value(z[1], z[2])
+        FOR z
+        IN list_zip(
+            substr(i, 1, num_chars).rpad(num_chars, ' ').string_split(''),
+            substr(j, 1, num_chars).rpad(num_chars, ' ').string_split('')
+        )
+    ].flatten().array_to_string('')
+);
+
+CREATE TABLE IF NOT EXISTS flights_zipped_varchar AS
+    FROM flights
+    ORDER BY
+        main.zip_varchar(origin, dest, num_chars := 3);
+```
+
+Here is an example of the output that the `zip_varchar` function produces:
+
+```sql
+SELECT
+    'ABC' AS origin,
+    'XYZ' AS dest,
+    main.zip_varchar(origin, dest, num_chars := 3) AS zipped_varchar;
+```
+
+| origin | dest | zipped_varchar |
+| ------ | ---- | -------------- |
+| ABC    | XYZ  | AXBYCZ         |
+
+</details>
+<details markdown='1' style="font-size:19px;margin-bottom:15px;">
+<summary markdown='span'>
+    Expand to see the Morton and Hilbert sorting queries
+</summary>
+
+The goal of a space filling curve is to map multiple dimensions (in our case, two: `origin` and `destination`) down to a single dimension, but to preserve the higher dimension locality between data points.
+Morton and Hilbert encodings are designed to accept integers or floating point numbers.
+However, in our examples, we want to apply these techniques to `VARCHAR` columns.
+
+Strings actually encode a substantial amount of data per length of the string.
+This is because numbers can only have 10 values per digit (in our base 10 numbering system), but a string can have many more (all lowercase letters, capital letters, or symbols).
+As a result, we are not able to encode very long strings into integers – only the first few characters.
+This will still work for our approximate sorting use case!
+
+This SQL function can convert a `VARCHAR` containing ASCII characters (up to 8 characters in length) into a `UBIGINT`.
+It splits the `VARCHAR` up into individual characters, calculates the ASCII number for that character, converts that to bits, concatenates the bits together, then converts to a `UBIGINT`.
+
+```sql
+CREATE OR REPLACE FUNCTION main.varchar_to_ubigint(i, num_chars := 8) AS (
+    -- The maximum number of characters that will fit in a UBIGINT is 8
+    -- and a UBIGINT is the largest type that the lindel community extension accepts for Hilbert or Morton encoding
+    list_reduce(
+        [
+            ascii(my_letter)::UTINYINT::BIT::VARCHAR
+            FOR my_letter
+            IN (i[:num_chars]).rpad(num_chars, ' ').string_split('')
+        ],
+        (x, y) -> x || y
+    )::BIT::UBIGINT
+);
+```
+
+The `morton_encode` and `hilbert_encode` functions from the [`lindel` community extension]({% link community_extensions/extensions/lindel.md %}) can then be used within the `ORDER BY` clause to sort by the Morton or Hilbert encoding.
+
+```sql
+INSTALL lindel FROM community;
+LOAD lindel;
+
+CREATE TABLE IF NOT EXISTS flights_morton AS
+    FROM flights
+    ORDER BY
+        morton_encode([
+            varchar_to_ubigint(origin, num_chars := 3),
+            varchar_to_ubigint(dest, num_chars := 3)
+        ]::UBIGINT[2]);
+
+CREATE TABLE IF NOT EXISTS flights_hilbert AS
+    FROM flights
+    ORDER BY
+        hilbert_encode([
+            varchar_to_ubigint(origin, num_chars := 3),
+            varchar_to_ubigint(dest, num_chars := 3)
+        ]::UBIGINT[2]);
+```
+
+Alternatively, the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}) can be used to execute a Hilbert encoding.
+It requires a bounding box to be supplied, as this helps determine the granularity of the encoding for geospatial use cases.
+It performed similarly to the Hilbert approach included in the experimental results.
+
+```sql
+SET VARIABLE bounding_box = (
+    WITH flights_converted_to_ubigint AS (
+        FROM flights
+            SELECT
+            *,
+            varchar_to_ubigint(origin, num_chars := 3) AS origin_ubigint,
+            varchar_to_ubigint(dest, num_chars := 3) AS dest_ubigint
+        )
+    FROM flights_converted_to_ubigint
+    SELECT {
+        min_x: min(origin_ubigint),
+        min_y: min(dest_ubigint),
+        max_x: max(origin_ubigint),
+        max_y: max(dest_ubigint)
+    }::BOX_2D
+);
+CREATE OR REPLACE TABLE flights_hilbert_spatial AS
+    FROM flights
+    ORDER BY
+        ST_Hilbert(
+            varchar_to_ubigint(origin, num_chars := 3),
+            varchar_to_ubigint(dest, num_chars := 3),
+            getvariable('bounding_box')
+        );
+```
+</details>
+
+<details markdown='1' style="font-size:19px;margin-bottom:15px;">
+<summary markdown='span'>
+    Expand to see the selective read queries used to measure performance
+</summary>
+
+In summary, this microbenchmark tests:
+
+1. Querying tables sorted by the 6 different approaches (3 control and 3 advanced)
+1. Filtering using three query patterns: filters on `origin`, `destination`, and `origin` / `destination`
+1. Filtering with 4 different `origin`/`dest` pairs:
+    1. SFO - LAX
+    1. LAX - SFO
+    1. ORD - LGA
+    1. LGA - ORD
+
+Each of these 72 unique queries are repeated 3 times for a total of 216 queries.
+All are included in the resulting plots.
+
+```sql
+FROM ⟨sorted_table⟩ 
+SELECT flightdate, airline, origin, dest, deptime, arrtime
+WHERE origin = ⟨origin⟩;
+
+FROM ⟨sorted_table⟩ 
+SELECT flightdate, airline, origin, dest, deptime, arrtime
+WHERE dest = ⟨dest⟩;
+
+FROM ⟨sorted_table⟩ 
+SELECT flightdate, airline, origin, dest, deptime, arrtime
+WHERE origin = ⟨origin⟩ AND dest = ⟨dest⟩;
+```
+
+</details>
 
 ## Experimental Results
 
@@ -149,28 +363,87 @@ It would be the best choice to support all 3 workloads.
 
 ### Approximate Time Sorting
 
-More recent data tends to be more useful data, so frequently queries filter on a time column.
-However, often queries filter on time and on other columns as well.
-
-**Don't just sort on the timestamp column!**
-You will miss out on performance benefits.
-This is because timestamps tend to be so granular, that in practical terms the data is only sorted by timestamp.
-How many rows of your data were inserted at exactly `2025-01-01 01:02:03.456789`?
-Probably just one!
-
-To sort on multiple columns as well as a time column, first sort by a truncated timestamp and then on the other columns.
-In this experiment, we truncate the `flightdate` column to three levels of granularity: day, month, and year.
+Sorting by an “approximate time” involves truncating the time to the nearest value of a certain time granularity.
+In this experiment, we load the data with 3 different sorting approaches. 
+We first sort on a truncation of the `flightdate` column, truncated to either day, month, or year.
 We then use our most effective multi-column approach and sort by the Hilbert encoding of `origin` and `dest` next.
 
-For each of the query patterns tested previously (filters on `origin`, `destination`, and `origin` / `destination`), we filter on three time ranges: the latest 1 week, 13 weeks, and 52 weeks.
+When measuring performance, we test each of the query patterns tested previously (filters on `origin`, `destination`, and `origin` / `destination`), but additionally filter on three different time ranges: the latest 1 week, 13 weeks, and 52 weeks.
+
+<details markdown='1' style="font-size:19px;margin-bottom:15px;">
+<summary markdown='span'>
+    Expand to see the approximate time sorting queries
+</summary>
+
+```sql
+CREATE TABLE IF NOT EXISTS flights_hilbert_day AS
+    FROM flights
+    ORDER BY
+        date_trunc('day', flightdate),
+        hilbert_encode([
+            varchar_to_ubigint(origin, num_chars := 3),
+            varchar_to_ubigint(dest, num_chars := 3)
+        ]::UBIGINT[2]);
+
+CREATE TABLE IF NOT EXISTS flights_hilbert_month AS
+    FROM flights
+    ORDER BY
+        date_trunc('month', flightdate),
+        hilbert_encode([
+            varchar_to_ubigint(origin, num_chars := 3),
+            varchar_to_ubigint(dest, num_chars := 3)
+        ]::UBIGINT[2]);
+
+CREATE TABLE IF NOT EXISTS flights_hilbert_year AS
+    FROM flights
+    ORDER BY
+        date_trunc('year', flightdate),
+        hilbert_encode([
+            varchar_to_ubigint(origin, num_chars := 3),
+            varchar_to_ubigint(dest, num_chars := 3)
+        ]::UBIGINT[2]);
+```
+</details>
+
+<details markdown='1' style="font-size:19px;margin-bottom:15px;">
+<summary markdown='span'>
+    Expand to see the selective read queries used to measure performance
+</summary>
 
 In summary, this microbenchmark tests:
-1. Sorting with `flightdate` at three levels of granularity: day, month, and year
+1. Querying tables sorted with `flightdate` truncated to three levels of granularity: day, month, and year, then by Hilbert encoding.
 1. Filtering on three time ranges: the latest 1 week, 13 weeks, and 52 weeks
-1. Filtering using the three query patterns tested previously: filters on `origin`, `destination`, and `origin` / `destination`
+1. Filtering on `origin`, `destination`, and `origin` / `destination`
+1. Filtering with 4 different `origin`/`dest` pairs:
+    1. SFO - LAX
+    1. LAX - SFO
+    1. ORD - LGA
+    1. LGA - ORD
 
-This yields a total of 27 scenarios.
+Each of these 108 unique queries are repeated 3 times for a total of 324 queries.
 
+```sql
+FROM ⟨sorted_table⟩ 
+SELECT flightdate, airline, origin, dest, deptime, arrtime
+WHERE 
+    origin = ⟨origin⟩
+    AND flightdate >= ('2022-07-31'::TIMESTAMP - INTERVAL ⟨time_range⟩ WEEKS);
+
+FROM ⟨sorted_table⟩ 
+SELECT flightdate, airline, origin, dest, deptime, arrtime
+WHERE 
+    dest = ⟨dest⟩
+    AND flightdate >= ('2022-07-31'::TIMESTAMP - INTERVAL ⟨time_range⟩ WEEKS);
+
+FROM ⟨sorted_table⟩ 
+SELECT flightdate, airline, origin, dest, deptime, arrtime
+WHERE 
+    origin = ⟨origin⟩ 
+    AND dest = ⟨dest⟩
+    AND flightdate >= ('2022-07-31'::TIMESTAMP - INTERVAL ⟨time_range⟩ WEEKS);
+```
+
+</details>
 <div id="remote_s3_query_performance_by_date_origin" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
     fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_date_origin.json')
@@ -214,13 +487,36 @@ As a result, the best compromise across those three workloads is likely to be th
 See!
 Don't just sort by timestamp!
 
+## Table Creation Time
+
+The upfront investment required to see these benefits is the time required to sort the data when inserting.
+Typically this is still a good trade off - data inserts tend to happen in the background, but nobody wants to be staring at dashboard loading spinners!
+
+Creating a DuckDB table from Parquet files without sorting took slightly over 21 seconds.
+Each other approach copied from the unsorted DuckDB table and created a new table.
+The various methods of sorting required similar amounts of time (between 48 and 61 seconds), so we are free to choose the one with the most effective results without considering relative insert performance.
+However, it is worth noting that overall insert performance slows down by nearly 3× with any sorting.
+
+| Table name       | Creation time (s) |
+| :--------------- | ----------------: |
+| `from_parquet`   |              21.4 |
+| `random`         |              60.2 |
+| `origin`         |              51.9 |
+| `origin_dest`    |              48.7 |
+| `zipped_varchar` |              58.2 |
+| `morton`         |              54.6 |
+| `hilbert`        |              58.5 |
+| `hilbert_day`    |              58.7 |
+| `hilbert_month`  |              53.8 |
+| `hilbert_year`   |              60.2 |
+
 
 ## Measuring Sortedness
 
 The most effective way to choose a sort order is to simulate your production workload, like in the experiments above.
 However, this is not always feasible or easy to do.
 Instead, we can measure how well sorted the dataset is on the columns of interest.
-The metric we will use is “Number of row groups per Value”.
+The metric we will use is “Number of Row Groups per Value”.
 The way to interpret this is that for selective queries to work effectively, each value being filtered on should only be present in a small number of row groups.
 Smaller is better!
 However, there are likely diminishing returns when this metric is below the number of threads DuckDB is using.
@@ -249,12 +545,16 @@ The Hilbert encoding is the most balanced, so by this metric it would be declare
 
 To calculate this metric, we define several SQL macros using dynamic SQL and the `query` table function.
 
-<details markdown='1'>
+<details markdown='1' style="font-size:19px;margin-bottom:15px;">
 <summary markdown='span'>
-    Expand for details!
+    Expand to see the macros for calculating “Number of Row Groups per Value”
 </summary>
 
 ```sql
+-- These are helper functions for writing dynamic SQL
+-- sq = single quotes
+-- dq = double quotes
+-- nq = no quotes
 CREATE OR REPLACE FUNCTION sq(my_varchar) AS (
     '''' || replace(my_varchar,'''', '''''') || ''''
 );
@@ -280,7 +580,7 @@ CREATE OR REPLACE FUNCTION nq_concat(my_list, separator) AS (
     list_reduce(nq_list(my_list), (x, y) -> x || separator || y)
 );
 
-
+-- This function produces the "Number of row groups per Value" boxplot
 CREATE OR REPLACE FUNCTION rowgroup_counts(table_name, column_list) AS TABLE (
     FROM query('
     WITH by_rowgroup_id AS (
@@ -340,9 +640,7 @@ FROM rowgroup_counts('flights_hilbert', ['origin', 'dest']);
 | :-------------- | :---------- | :----------- | --------------: | ----------------: |
 | flights_hilbert | dest        | PSG          |             238 |                 2 |
 | flights_hilbert | dest        | ESC          |             238 |                 2 |
-| flights_hilbert | dest        | YUM          |             238 |                 2 |
-| flights_hilbert | dest        | TWF          |             238 |                 2 |
-| flights_hilbert | dest        | TUL          |             238 |                 7 |
+| flights_hilbert | origin      | YUM          |             238 |                 2 |
 | ...             | ...         | ...          |             ... |               ... |
 
 The `rowgroup_id_count` column is a measurement of how many distinct row groups that a specific column value is present in, so it is an indicator of how much work DuckDB would need to do to pull all data associated with that value.
@@ -350,206 +648,16 @@ The `rowgroup_id_count` column is a measurement of how many distinct row groups 
 > This calculation uses the [pseudo-column `rowid`]({% link docs/preview/sql/statements/select.md %}#row-ids), and it requires data to have been inserted in a single batch to be perfectly accurate.
 > It is only an approximate metric when data is inserted in batches.
 
-## Appendix: Experiment Details
+## Conclusion
 
-### Table Creation Time
+When storing data in a columnar file format like a DuckDB database or a Parquet file, approximately sorting by multiple columns can lead to fast read queries across a variety of query patterns.
+Sorting using the Hilbert encoding provided high performance across multiple workloads, and sorting by year and then by Hilbert performed well when also filtering by time. 
 
-Creating a DuckDB table from Parquet files without sorting took slightly over 21 seconds.
-Each other approach copied from the unsorted DuckDB table and created a new table.
-The various methods of sorting required similar amounts of time (between 48 and 61 seconds), so we are free to choose the one with the most effective results without considering relative insert performance.
-However, it is worth noting that overall insert performance slows down by nearly 3× with any sorting.
+Thanks to the "Number of Row Groups per Value" calculation, we can measure the sortedness of any table by any column, and it was predictive of the experimental performance we observed.
+This way we can experiment with different sorting approaches and quickly forecast their effectiveness, without having to benchmark read workloads each time.
 
-| Table name       | Creation time (s) |
-| :--------------- | ----------------: |
-| `from_parquet`   |              21.4 |
-| `random`         |              60.2 |
-| `origin`         |              51.9 |
-| `origin_dest`    |              48.7 |
-| `zipped_varchar` |              58.2 |
-| `morton`         |              54.6 |
-| `hilbert`        |              58.5 |
-| `hilbert_day`    |              58.7 |
-| `hilbert_month`  |              53.8 |
-| `hilbert_year`   |              60.2 |
+Using these approaches can greatly speed up dashboard interactivity when users are unpredictable (which we always are!).
+They can also be used in combination with the [the additional techniques outlined in the prior post]({% post_url 2025-05-14-sorting-for-fast-selective-queries %}#additional-techniques) for further benefits.
+Data is always different, so we get to be creative!
 
-### Basic Sorting
-
-For reproducibility, here are the very standard queries used to initially load the data from Parquet, sort randomly, sort by `origin`, and sort by `origin` and then `destination`.
-The parquet files were downloaded [from Kaggle](https://www.kaggle.com/datasets/robikscube/flight-delay-dataset-20182022).
-
-```sql
-CREATE TABLE IF NOT EXISTS flights AS
-    FROM './Combined_Flights*.parquet';
-
--- The hash function is used instead of random
--- for consistency across re-runs
-CREATE TABLE IF NOT EXISTS flights_random AS
-    FROM flights
-    ORDER BY hash(rowid + 42);
-
-CREATE TABLE IF NOT EXISTS flights_origin AS
-    FROM flights
-    ORDER BY origin;
-
-CREATE TABLE IF NOT EXISTS flights_origin_dest AS
-    FROM flights
-    ORDER BY origin, dest;
-```
-
-## Sorting by Zipped `VARCHAR` Columns
-
-As an example of an approach that does not require an extension, this SQL macro roughly approximates a space filling curve approach, but using alphanumeric characters instead of integers.
-The outcome is a dataset that is somewhat sorted by one column and somewhat sorted by another.
-
-```sql
-CREATE OR REPLACE FUNCTION main.zip_varchar(i, j, num_chars := 6) AS (
-    -- By default using 6 characters from each string so that
-    -- if data is ASCII, we can fit it all in 12 bytes so that it is stored inline
-    -- rather than requiring a pointer
-    [
-        list_value(z[1], z[2])
-        FOR z
-        IN list_zip(
-            substr(i, 1, num_chars).rpad(num_chars, ' ').string_split(''),
-            substr(j, 1, num_chars).rpad(num_chars, ' ').string_split('')
-        )
-    ].flatten().array_to_string('')
-);
-
-CREATE TABLE IF NOT EXISTS flights_zipped_varchar AS
-    FROM flights
-    ORDER BY
-        main.zip_varchar(origin, dest, num_chars := 3);
-```
-
-Here is an example of the output that the `zip_varchar` function produces:
-
-```sql
-SELECT
-    'ABC' AS origin,
-    'XYZ' AS dest,
-    main.zip_varchar(origin, dest, num_chars := 3) AS zipped_varchar;
-```
-
-| origin | dest | zipped_varchar |
-| ------ | ---- | -------------- |
-| ABC    | XYZ  | AXBYCZ         |
-
-## Space Filling Curves
-
-The goal of a space filling curve is to map multiple dimensions (in our case, two: `origin` and `destination`) down to a single dimension, but to preserve the higher dimension locality between data points.
-Morton and Hilbert encodings are designed to accept integers or floating point numbers.
-However, in our examples, we want to apply these techniques to `VARCHAR` columns.
-
-Strings actually encode a substantial amount of data per length of the string.
-This is because numbers can only have 10 values per digit (in our base 10 numbering system), but a string can have many more (all lowercase letters, capital letters, or symbols).
-As a result, we are not able to encode very long strings into integers – only the first few characters.
-This will still work for our approximate sorting use case!
-
-This SQL function can convert a `VARCHAR` containing ASCII characters (up to 8 characters in length) into a `UBIGINT`.
-It splits the `VARCHAR` up into individual characters, calculates the ASCII number for that character, converts that to bits, concatenates the bits together, then converts to a `UBIGINT`.
-
-```sql
-CREATE OR REPLACE FUNCTION main.varchar_to_ubigint(i, num_chars := 8) AS (
-    -- The maximum number of characters that will fit in a UBIGINT is 8
-    -- and a UBIGINT is the largest type that the lindel community extension accepts for Hilbert or Morton encoding
-    list_reduce(
-        [
-            ascii(my_letter)::UTINYINT::BIT::VARCHAR
-            FOR my_letter
-            IN (i[:num_chars]).rpad(num_chars, ' ').string_split('')
-        ],
-        (x, y) -> x || y
-    )::BIT::UBIGINT
-);
-```
-
-The `morton_encode` and `hilbert_encode` functions from the [`lindel` community extension]({% link community_extensions/extensions/lindel.md %}) can then be used within the `ORDER BY` clause to sort by the Morton or Hilbert encoding.
-
-```sql
-INSTALL lindel FROM community;
-LOAD lindel;
-
-CREATE TABLE IF NOT EXISTS flights_morton AS
-    FROM flights
-    ORDER BY
-        morton_encode([
-            varchar_to_ubigint(origin, num_chars := 3),
-            varchar_to_ubigint(dest, num_chars := 3)
-        ]::UBIGINT[2]);
-
-CREATE TABLE IF NOT EXISTS flights_hilbert AS
-    FROM flights
-    ORDER BY
-        hilbert_encode([
-            varchar_to_ubigint(origin, num_chars := 3),
-            varchar_to_ubigint(dest, num_chars := 3)
-        ]::UBIGINT[2]);
-```
-
-Alternatively, the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}) can be used to execute a Hilbert encoding.
-It requires a bounding box to be supplied, as this helps determine the granularity of the encoding for geospatial use cases.
-It performed similarly to the Hilbert approach included in the above plots.
-
-```sql
-SET VARIABLE bounding_box = (
-    WITH flights_converted_to_ubigint AS (
-        FROM flights
-            SELECT
-            *,
-            varchar_to_ubigint(origin, num_chars := 3) AS origin_ubigint,
-            varchar_to_ubigint(dest, num_chars := 3) AS dest_ubigint
-        )
-    FROM flights_converted_to_ubigint
-    SELECT {
-        min_x: min(origin_ubigint),
-        min_y: min(dest_ubigint),
-        max_x: max(origin_ubigint),
-        max_y: max(dest_ubigint)
-    }::BOX_2D
-);
-CREATE OR REPLACE TABLE flights_hilbert_spatial AS
-    FROM flights
-    ORDER BY
-        ST_Hilbert(
-            varchar_to_ubigint(origin, num_chars := 3),
-            varchar_to_ubigint(dest, num_chars := 3),
-            getvariable('bounding_box')
-        );
-```
-
-## Approximate Time Sorting
-
-Sorting by an “approximate time” involves truncating the time to the nearest value of a certain time granularity.
-This can be accomplished with the `date_trunc` function.
-Once data is sorted by an approximate time, other sorting techniques can be applied.
-In this case, the dataset is subsequently sorted by the Hilbert encoding of `origin` and `dest`.
-
-```sql
-CREATE TABLE IF NOT EXISTS flights_hilbert_day AS
-    FROM flights
-    ORDER BY
-        date_trunc('day', flightdate),
-        hilbert_encode([
-            varchar_to_ubigint(origin, num_chars := 3),
-            varchar_to_ubigint(dest, num_chars := 3)
-        ]::UBIGINT[2]);
-
-CREATE TABLE IF NOT EXISTS flights_hilbert_month AS
-    FROM flights
-    ORDER BY
-        date_trunc('month', flightdate),
-        hilbert_encode([
-            varchar_to_ubigint(origin, num_chars := 3),
-            varchar_to_ubigint(dest, num_chars := 3)
-        ]::UBIGINT[2]);
-
-CREATE TABLE IF NOT EXISTS flights_hilbert_year AS
-    FROM flights
-    ORDER BY
-        date_trunc('year', flightdate),
-        hilbert_encode([
-            varchar_to_ubigint(origin, num_chars := 3),
-            varchar_to_ubigint(dest, num_chars := 3)
-        ]::UBIGINT[2]);
-```
+Happy analyzing, folks!
