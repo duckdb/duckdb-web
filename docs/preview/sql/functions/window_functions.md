@@ -64,6 +64,7 @@ The table below shows the available general window functions.
 |:--|:-------|
 | [`cume_dist([ORDER BY ordering])`](#cume_distorder-by-ordering) | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. |
 | [`dense_rank()`](#dense_rank) | The rank of the current row *without gaps;* this function counts peer groups. |
+| [`fill(expr [ ORDER BY ordering])`](#fillexpr-order-by-ordering) | Fill in missing values using linear interpolation with `ORDER BY` as the X-axis. |
 | [`first_value(expr[ ORDER BY ordering][ IGNORE NULLS])`](#first_valueexpr-order-by-ordering-ignore-nulls) | Returns `expr` evaluated at the row that is the first row (with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
 | [`lag(expr[, offset[, default]][ ORDER BY ordering][ IGNORE NULLS])`](#lagexpr-offset-default-order-by-ordering-ignore-nulls) | Returns `expr` evaluated at the row that is `offset` rows (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) before the current row within the window frame; if there is no such row, instead return `default` (which must be of the Same type as `expr`). Both `offset` and `default` are evaluated with respect to the current row. If omitted, `offset` defaults to `1` and default to `NULL`. |
 | [`last_value(expr[ ORDER BY ordering][ IGNORE NULLS])`](#last_valueexpr-order-by-ordering-ignore-nulls) | Returns `expr` evaluated at the row that is the last row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. |
@@ -91,6 +92,14 @@ The table below shows the available general window functions.
 | **Return type** | `BIGINT` |
 | **Example** | `dense_rank()` |
 | **Aliases** | `rank_dense()` |
+
+#### `fill(expr[ ORDER BY ordering])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Replaces `NULL` values of `expr` with an linear interpolation based on the closest non-`NULL` values and  the sort values. Both values must support arithmetic and there must be only one ordering key. For missing values at the ends, linear extrapolation is used. Failure to interpolate results in the `NULL` value being retained. |
+| **Return type** | Same type as `expr` |
+| **Example** | `fill(column)` |
 
 #### `first_value(expr[ ORDER BY ordering][ IGNORE NULLS])`
 
