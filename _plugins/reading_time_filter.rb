@@ -10,13 +10,13 @@ module ReadingTimeFilter
 
     # Setup default value.
     if ! config
-      second_plural = "seconds"
-      minute_singular = "minute"
-      minute_plural = "minutes"
+      second_plural = "sec"
+      minute_singular = "min"
+      minute_plural = "min"
     else
-      second_plural = config["second_plural"] ? config["second_plural"] : "seconds"
-      minute_singular = config["minute_singular"] ? config["minute_singular"] : "minute"
-      minute_plural = config["minute_plural"] ? config["minute_plural"] : "minutes"
+      second_plural = config["second_plural"] ? config["second_plural"] : "sec"
+      minute_singular = config["minute_singular"] ? config["minute_singular"] : "min"
+      minute_plural = config["minute_plural"] ? config["minute_plural"] : "min"
     end
 
     # Average reading words per minute.
