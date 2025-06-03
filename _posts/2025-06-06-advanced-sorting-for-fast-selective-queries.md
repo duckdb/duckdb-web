@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Multi-Column Approximate Sorting for Faster Dashboards"
+title: "Faster Dashboards with Multi-Column Approximate Sorting"
 author: "Alex Monahan"
 thumb: "/images/blog/thumbs/indexing-tips.svg"
 image: "/images/blog/thumbs/indexing-tips.png"
