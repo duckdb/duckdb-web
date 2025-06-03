@@ -37,7 +37,10 @@ div.singleentry {
 
 		.content {
 			padding: 20px;
-			width: 100%;
+			width: calc(100% - 45px);
+			@media screen and (max-width: 992px){
+				width: calc(100% - 35px);
+			}
 		}
 
 		.symbol {
