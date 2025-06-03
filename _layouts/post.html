@@ -84,11 +84,9 @@
 											<span class="author">{{ page.author }}</span>
 											{% if page.event != true and page.collection != "events" %}
 												<div class="publishedinfo">
-													<span>Published on</span>
 													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
-												</div>
-												<div class="publishedinfo">
-													<span>Reading time: {{ content | reading_time }}</span>
+													<span class="bullet">&middot;</span>
+													<span class="readingtime"> {{ content | reading_time }}</span>
 												</div>
 											{% endif %}
 										</div>
