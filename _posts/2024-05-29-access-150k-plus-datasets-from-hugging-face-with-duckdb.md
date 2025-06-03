@@ -2,8 +2,8 @@
 layout: post
 title: "Access 150k+ Datasets from Hugging Face with DuckDB"
 author: The Hugging Face and DuckDB teams
-thumb: "/images/blog/thumbs/240529.svg"
-image: "/images/blog/thumbs/240529.png"
+thumb: "/images/blog/thumbs/hugging-face.svg"
+image: "/images/blog/thumbs/hugging-face.png"
 excerpt: "DuckDB can now read data from [Hugging Face](https://huggingface.co/) via the `hf://` prefix."
 tags: ["extensions"]
 ---
