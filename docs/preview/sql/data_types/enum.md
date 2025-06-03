@@ -18,19 +18,19 @@ Enum types are created from either a hardcoded set of values or from a select st
 Create enum using hardcoded values:
 
 ```sql
-CREATE TYPE ⟨enum_name⟩ AS ENUM ([⟨value_1⟩, ⟨value_2⟩, ...]);
+CREATE TYPE ⟨enum_name⟩ AS ENUM (⟨value_1⟩, ⟨value_2⟩, ...);
 ```
 
 Create enum using a `SELECT` statement that returns a single column of `VARCHAR`s:
 
 ```sql
-CREATE TYPE ⟨enum_name⟩ AS ENUM (select_expression⟩);
+CREATE TYPE ⟨enum_name⟩ AS ENUM (⟨select_expression⟩);
 ```
 
 Enums can also be created on the fly during [casting]({% link docs/preview/sql/expressions/cast.md %}):
 
 ```sql
-SELECT 'some_string'::ENUM ([⟨value_1⟩, ⟨value_2⟩, ...]);
+SELECT 'some_string'::ENUM (⟨value_1⟩, ⟨value_2⟩, ...);
 ```
 
 ### Examples
