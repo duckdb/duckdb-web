@@ -55,7 +55,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 {% endif %}
 
 
-<body class="documentation{% if page.body_class %} {{ page.body_class }}{% endif %}{% if version_viewed == "preview" %} nightly{% elsif version_viewed != "stable" %} outdated{% endif %}">
+<body class="documentation layout_docu{% if page.body_class %} {{ page.body_class }}{% endif %}{% if version_viewed == "preview" %} nightly{% elsif version_viewed != "stable" %} outdated{% endif %}">
 
 	<header>
 		<div class="headerline">

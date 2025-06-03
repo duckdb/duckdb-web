@@ -90,6 +90,10 @@ body.search {
 				right: 13px;
 				top: 13px;
 				cursor: pointer;
+				display: none;
+				&.visible {
+					display: block;
+				}
 			}
 		}
 
