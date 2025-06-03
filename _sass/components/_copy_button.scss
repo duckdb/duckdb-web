@@ -7,8 +7,8 @@ pre.highlight > button,
 	position: absolute;
 	background: var(--main-codebox-border-color, #E6E6E6);
 	border-radius: 50px;
-	width: 24px;
-	height: 24px;
+	width: 30px;
+	height: 30px;
 	top: 7px;
 	right: 7px;
 	border: 0;
@@ -26,6 +26,7 @@ pre.highlight > button,
 		width: 24px;
 		height: 24px;
 		background-size: contain;
+		background-position: center center;
 		display: inline-block;
 		background-repeat: no-repeat;
 	}
@@ -34,6 +35,7 @@ pre.highlight > button,
 		width: 24px;
 		height: 24px;
 		background-size: contain;
+		background-position: center center;
 		display: inline-block;
 		background-repeat: no-repeat;
 	}
