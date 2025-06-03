@@ -7,7 +7,7 @@ thumb: "/images/blog/thumbs/duckdb-berlin-meetup.svg"
 image: "/images/blog/thumbs/duckdb-berlin-meetup.png"
 excerpt: ""
 tags: ["meetup"]
-venue: "TBA"
+venue: "Dorint Kurfürstendamm Berlin"
 ---
 
 <img src="/images/blog/thumbs/duckdb-berlin-meetup.svg"
@@ -18,7 +18,7 @@ venue: "TBA"
 We are excited to announce the DuckDB Berlin meetup, which will take place during the week of the [SIGMOD 2025 conference](https://2025.sigmod.org/).
 Every year, SIGMOD attracts hundreds of database researchers, some of whom already use [DuckDB in their scientific work](https://shows.acast.com/disseminate). The DuckDB meetup will feature two talks from researchers and one from industry practitioners.
 
-The meetup will be held south of the [Tiergarten](https://www.google.com/maps/@52.3533567,4.9586084,4302m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoASAFQAw%3D%3D), within 20 minutes walking distance from SIGMOD's venue.
+The meetup will be held at the [Dorint Kurfürstendamm Berlin](https://maps.app.goo.gl/Fv2WhXUJ7F5CLNTm6), less than 20 minutes walking distance from SIGMOD's venue.
 
 ## Attendance
 
