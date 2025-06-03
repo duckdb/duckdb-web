@@ -33,7 +33,7 @@
 	
 	<script src="{{ site.baseurl }}/js/determine_color_scheme.js?{{ site.data['hash'] }}"></script>
 </head>
-<body {% if page.body_class %} class="{{ page.body_class }}" {% endif %}>
+<body class="layout_postarchive{% if page.body_class %} {{ page.body_class }}{% endif %}">
 	
 	<header>
 		<div class="headerline">
