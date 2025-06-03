@@ -209,17 +209,6 @@ body.documentation {
         margin-bottom: 15px;
     }
 
-    ul {
-        list-style-position: outside;
-        list-style-type: '\2022 \00a0\00a0';
-        padding: 0 0 0 20px;
-
-        ul {
-            padding-left: 20px;
-            margin: 0;
-        }
-    }
-
     li {
         line-height: 24px;
     }
@@ -261,6 +250,17 @@ body.documentation {
                 font-variant-ligatures: none;
             }
 
+        }
+        
+        ul {
+            list-style-position: outside;
+            list-style-type: '\2022 \00a0\00a0';
+            padding: 0 0 0 20px;
+            
+            ul {
+                padding-left: 20px;
+                margin: 0;
+            }
         }
 
         table.bench {
