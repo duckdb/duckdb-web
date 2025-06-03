@@ -119,12 +119,14 @@ give the user information on which extensions were updated to/from which version
 UPDATE EXTENSIONS;
 ```
 
-| extension_name | repository   | update_result         | previous_version | current_version |
-|:---------------|:-------------|:----------------------|:-----------------|:----------------|
-| httpfs         | core         | NO_UPDATE_AVAILABLE   | 70fd6a8a24       | 70fd6a8a24      |
-| delta          | core         | UPDATED               | d9e5cc1          | 04c61e4         |
-| azure          | core         | NO_UPDATE_AVAILABLE   | 49b63dc          | 49b63dc         |
-| aws            | core_nightly | NO_UPDATE_AVAILABLE   | 42c78d3          | 42c78d3         |
+<div class="monospace_table"></div>
+
+| extension_name | repository   | update_result       | previous_version | current_version |
+| :------------- | :----------- | :------------------ | :--------------- | :-------------- |
+| httpfs         | core         | NO_UPDATE_AVAILABLE | 70fd6a8a24       | 70fd6a8a24      |
+| delta          | core         | UPDATED             | d9e5cc1          | 04c61e4         |
+| azure          | core_nightly | NO_UPDATE_AVAILABLE | 49b63dc          | 49b63dc         |
+| aws            | core         | NO_UPDATE_AVAILABLE | 42c78d3          | 42c78d3         |
 
 Note that DuckDB will look for updates in the source repository for each extension. So if an extension was installed from
 `core_nightly`, it will be updated with the latest nightly build.
@@ -132,13 +134,15 @@ Note that DuckDB will look for updates in the source repository for each extensi
 The update statement can also be provided with a list of specific extensions to update:
 
 ```sql
-UPDATE EXTENSIONS (httpfs, azure);
+UPDATE EXTENSIONS (httpfs, aws);
 ```
 
-| extension_name | repository   | update_result         | previous_version | current_version |
-|:---------------|:-------------|:----------------------|:-----------------|:----------------|
-| httpfs         | core         | NO_UPDATE_AVAILABLE   | 70fd6a8a24       | 70fd6a8a24      |
-| azure          | core         | NO_UPDATE_AVAILABLE   | 49b63dc          | 49b63dc         |
+<div class="monospace_table"></div>
+
+| extension_name | repository | update_result       | previous_version | current_version |
+| :------------- | :--------- | :------------------ | :--------------- | :-------------- |
+| httpfs         | core       | NO_UPDATE_AVAILABLE | 7ce5308          | 7ce5308         |
+| aws            | core       | NO_UPDATE_AVAILABLE | 4f318eb          | 4f318eb         |
 
 ## Target DuckDB Version
 
