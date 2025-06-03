@@ -5,6 +5,9 @@
 footer{
 	.sitefooter{
 		color: var(--main-text-primary-color, #F2F2F2);
+		background: var(--main-body-background-color, #FAFAFA);
+		position: relative;
+		z-index: 100;
 		.footercontent{
 			max-width: 1150px;
 			margin: 0 auto;
