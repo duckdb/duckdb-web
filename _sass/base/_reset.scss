@@ -338,6 +338,11 @@ svg:not(:root) {
   overflow: hidden;
 }
 
+svg {
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+  image-rendering: auto;
+}
 
 /* =============================================================================
    Figures
