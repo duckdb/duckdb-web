@@ -24,9 +24,9 @@ module ReadingTimeFilter
 
     # Calculate reading time.
     case total_words
-    when 0 .. 74
+    when 0 .. 75
       return "30 #{second_plural}"
-    when 75 .. 149
+    when 76 .. 150
       return "1 #{minute_singular}"
     else
       minutes = ( total_words / words_per_minute ).floor
