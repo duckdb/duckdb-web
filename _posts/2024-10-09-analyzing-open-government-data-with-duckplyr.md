@@ -180,7 +180,7 @@ GROUP BY sex_
 ORDER BY sex_
 ```
 
-This takes ca. 20s on the limited Colab free tier compute. The result is:
+This takes ca. 20 s on the limited Colab free tier compute. The result is:
 
 ```text
     sex_ group_count
