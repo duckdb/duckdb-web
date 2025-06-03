@@ -363,9 +363,16 @@ h5 {
 					line-height: 1;
 					margin-top: 0;
 				}
+				ul{
+					padding: 0 0 0 20px;
+				}
+				ul li, 
+				ol li,
 				p{
 					font-size: 16.5px;
-					margin-top: .8em;
+				}
+				p{
+					margin: .8em 0;
 				}
 			}
 			table{
