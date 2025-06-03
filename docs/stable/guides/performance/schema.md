@@ -77,7 +77,7 @@ In the second experiment, we create the schema *with* a primary key, then load t
 In the third case, we create the schema *without* a primary key, load the data and then add the primary key constraint.
 In all cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
 
-|                  Operation                    | Execution Time |
+|                  Operation                    | Execution time |
 |-----------------------------------------------|---------------:|
 | Load with primary key                         |        461.6 s |
 | Load without primary key                      |        121.0 s |

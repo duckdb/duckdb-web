@@ -1,7 +1,7 @@
----
----
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
-@use 'variables' as *;
 
 body.search {
 	height: 100vh;
@@ -38,8 +38,8 @@ body.search {
 		padding: 25px 30px 5px 30px;
 
 		form {
-			padding: 0;
-			background: transparent;
+			padding: 0!important;
+			background: transparent!important;
 
 			input {
 				padding: 10px;

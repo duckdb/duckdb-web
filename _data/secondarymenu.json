@@ -34,10 +34,6 @@
             {
               "page": "Why DuckDB",
               "url": "/why_duckdb"
-            },
-            {
-              "page": "FAQ",
-              "url": "/faq"
             }
           ]
         },
@@ -60,6 +56,10 @@
             {
               "page": "Webshop",
               "url": "https://shop.duckdb.org/"
+            },
+            {
+              "page": "FAQ",
+              "url": "/faq"
             }
           ]
         },

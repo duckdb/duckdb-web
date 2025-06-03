@@ -7,7 +7,7 @@ thumb: "/images/blog/thumbs/duckdb-berlin-meetup.svg"
 image: "/images/blog/thumbs/duckdb-berlin-meetup.png"
 excerpt: ""
 tags: ["meetup"]
-venue: "near the Tiergarten"
+venue: "TBA"
 ---
 
 <img src="/images/blog/thumbs/duckdb-berlin-meetup.svg"

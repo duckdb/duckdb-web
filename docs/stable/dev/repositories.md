@@ -40,3 +40,7 @@ Several components of DuckDB are maintained in separate repositories.
 
 * Core extension repositories are linked in the [Official Extensions page]({% link docs/stable/core_extensions/overview.md %})
 * Community extensions are served from the [Community Extensions repository]({% link community_extensions/index.md %})
+
+## Specifications
+
+* [DuckLake specification](https://ducklake.select/docs/stable/specification/introduction)

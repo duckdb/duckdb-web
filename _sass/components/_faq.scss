@@ -1,0 +1,112 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+/** FAQ **/
+body.faq,
+.frequentlyaskedquestions,
+body.documentation main .wrap.frequentlyaskedquestions{
+	h2{
+		
+	}
+	h3{
+		cursor: pointer;
+		font-size: 18px;
+		position: relative;
+		font-weight: 600;
+		margin: 0;
+		padding-right: 55px;
+		&::after{
+			content: " ";
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cpath stroke='%230D0D0D' stroke-linecap='square' stroke-width='1.5' d='m18 9.5-6 6-6-6'/%3E%3C/svg%3E");
+			background-color: var(--doc-codebox-button-background-color-hover, rgba(217, 217, 217, 0.60));
+			background-size: contain;
+			background-repeat: no-repeat;
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+			position: absolute;
+			right: 0px;
+			top: -5px;
+			-webkit-transition: -webkit-transform .3s;
+			transition: -webkit-transform .3s;
+			-o-transition: transform .3s;
+			transition: transform .3s;
+			transition: transform .3s, -webkit-transform .3s;
+			cursor: pointer;
+		}
+		a:hover{
+			background-color: transparent;
+		}
+	}
+	.qa-wrap{
+		padding: 20px;
+		background: var(--doc-codebox-background-color, #F2F2F2);
+		-webkit-transition: background-color .3s;
+		-o-transition: background-color .3s;
+		transition: background-color .3s;
+		margin-bottom: 5px;
+		border-radius: 10px;
+		border: 1px solid transparent;
+		-webkit-transition: border .3s;
+		-o-transition: border .3s;
+		transition: border .3s;
+		&.open h3::after{
+			-webkit-transform: rotate(180deg);
+				-ms-transform: rotate(180deg);
+					transform: rotate(180deg);
+		}
+		&:hover{
+			border-color: var(--doc-codebox-border-color);
+		}
+	}
+	.answer{
+		display: none;
+		max-width: calc(100% - 55px);
+		padding-top: 20px;
+		>p:first-child{
+			margin-top: 0;
+		}
+	}
+	.headlinebar{
+		margin-bottom: 40px;
+	}
+}
+
+body.faq,
+section.faq{
+	.frequentlyaskedquestions{
+		max-width: 750px;
+		margin: 0 auto;
+	}
+	.qa-wrap{
+		h3{
+			font-weight: 600;
+			font-size: 18px;
+			a{
+				color: var(--main-text-primary-color, #0D0D0D);
+			}
+		}
+		.answer{
+			p:last-of-type{
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+body.faq{
+	h2{
+		font-size: 28px;
+		font-weight: 700;
+		margin-bottom: 20px;
+		margin-top: 40px;
+		line-height: 1;
+	}
+	h2:first-of-type{
+		margin-top: 0;
+	}
+	h2 a{
+		color: var(--main-text-primary-color, #0D0D0D);
+	}
+}

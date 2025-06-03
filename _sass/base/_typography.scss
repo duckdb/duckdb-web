@@ -1,0 +1,38 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// =============================================================================
+// TYPOGRAPHY, tbd. move alle typography styles here
+// =============================================================================
+
+
+.duckdbsymbol{
+	font-family: "DuckDB-Symbol";
+}
+
+/** External Links in Fließtext **/
+#main_content_wrap a.externallink,
+.singleentry .content a.externallink{
+	display: inline;
+	word-break: break-word;
+	&::after{
+		content: "";
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M11.8 0H6.613v1.514h2.603L3.804 6.926l1.07 1.07 5.412-5.412v2.603H11.8V0ZM5.922 1.286H0V11.8h10.33V5.878H8.815v4.408H1.514V2.8h4.408V1.286Z' clip-rule='evenodd'/%3E%3C/svg%3E");
+		display: inline-block;
+		-webkit-transition: all .3s;
+		-o-transition: all .3s;
+		transition: all .3s;
+		width: .80em;
+		height: .80em;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;
+		margin-left: .25em;
+		margin-right: 1px;
+		transform: translateY(.1em);
+	}
+	&:hover::after{
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath fill='%234396D7' fill-rule='evenodd' d='M11.8 0H6.613v1.514h2.603L3.804 6.926l1.07 1.07 5.412-5.412v2.603H11.8V0ZM5.922 1.286H0V11.8h10.33V5.878H8.815v4.408H1.514V2.8h4.408V1.286Z' clip-rule='evenodd'/%3E%3C/svg%3E");
+	}
+}
