@@ -504,7 +504,17 @@ $(document).ready(function(){
 	$('.searchoverlay .empty_input').click(function(){
 		$(".searchoverlay form input").val('').focus();
 		$("#search_results").empty();
+		$(this).removeClass('visible');
 	})
+	
+	// Show/hide empty_input button based on input content
+	$(".searchoverlay form input").on('input', function() {
+		if($(this).val().length > 0) {
+			$('.searchoverlay .empty_input').addClass('visible');
+		} else {
+			$('.searchoverlay .empty_input').removeClass('visible');
+		}
+	});
 	if( $('.hamburger').is(':visible') ){
 		$('.search_icon').click(function(e){
 			if ( $('.hamburger').hasClass('is-active') ){
