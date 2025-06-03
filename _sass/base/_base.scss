@@ -110,6 +110,9 @@ main > .pagehead{
 		font-size: $fontSizeh1;
 		margin: 0;
 	}
+	@media only screen and (max-width: 1170px) {
+		padding: 65px 15px;
+	}
 }
 
 
