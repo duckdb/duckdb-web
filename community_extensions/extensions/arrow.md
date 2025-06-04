@@ -6,19 +6,18 @@ excerpt: |
   This extension is an alias to the nanoarrow extension. Allows the consumption and production of the Apache Arrow interprocess communication (IPC) format, both from files and directly from stream buffers.
 
 extension:
-  name: arrow
-  description: This extension is an alias to the nanoarrow extension. Allows the consumption and production of the Apache Arrow interprocess communication (IPC) format, both from files and directly from stream buffers.
-  version: 1.2.1
+  name: nanoarrow
+  description: Allows the consumption and production of the Apache Arrow interprocess communication (IPC) format, both from files and directly from stream buffers.
+  version: 1.3.0
   language: C++
   build: cmake
   license: MIT
-  requires_toolchains: "python3" 
   maintainers:
+    - paleolimbot 
     - pdet
 repo:
-  github: duckdb/duckdb-extension-alias
-  ref: dce7fb0831e2b83d41746381c1a99979eecbe401
-  canonical_name: nanoarrow
+  github: paleolimbot/duckdb-nanoarrow
+  ref: 8d76db91a3d375262e0d425a8a85fd8645b31ae9
 
 docs:
   hello_world: |
@@ -43,11 +42,11 @@ docs:
 
 
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 163603
-extension_download_count_pretty: 163.6k
-image: '/images/community_extensions/social_preview/preview_community_extension_arrow.png'
+extension_star_count: 30
+extension_star_count_pretty: 30
+extension_download_count: 952
+extension_download_count_pretty: 952
+image: '/images/community_extensions/social_preview/preview_community_extension_nanoarrow.png'
 layout: community_extension_doc
 ---
 
@@ -67,16 +66,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| nanoarrow_version | scalar        | NULL        | NULL    |          |
-| read_arrow        | table         | NULL        | NULL    |          |
-| scan_arrow_ipc    | table         | NULL        | NULL    |          |
-| to_arrow_ipc      | table         | NULL        | NULL    |          |
 
 
