@@ -16,7 +16,7 @@ Cartesian was the smallest distribution that included box plots
 -->
 <script src="{{ site.baseurl }}/js/plotly-cartesian-3.0.1.min.js"></script>
 
-<div align="center">
+<div align="center" id="hilbert-curve">
 <img src="/images/blog/sorting-for-fast-selective-queries/Hilbert-curve_rounded-gradient-animated.gif" alt="Animated Hilbert Encoding across 2 axes." width="600"/>
 
 <a href="https://commons.wikimedia.org/w/index.php?curid=67998181">An animated Hilbert space filling curve</a> by <a href="//commons.wikimedia.org/w/index.php?title=User:TimSauder&amp;action=edit&amp;redlink=1" class="new" title="User:TimSauder (page does not exist)">TimSauder</a> – <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>
@@ -31,21 +31,21 @@ When queries read a subset of the total rows, sorting data while loading provide
 Please have a look at [the prior post in this series]({% post_url 2025-05-14-sorting-for-fast-selective-queries %}) to understand how this approach works and for practical tips!
 
 In order to see these benefits in a wider variety of real world cases, we have to get a bit more creative.
-These advanced techiques help when one of these situations occur:
+These advanced techniques help when one of these situations occur:
 
 - Queries filter on different columns
 - Query patterns are not perfectly predictable
 - Queries filter by time and at least one other column
 
-In this post, we describe several advanced sorting strategies, compare them with some experiments (micro-benchmarks), and then calculate a metric to measure their effectiveness.
+In this post, we describe several advanced sorting strategies, compare them with some experiments (microbenchmarks), and then calculate a metric to measure their effectiveness.
 
 ## The Strategy
 
 Instead of sorting precisely by one or a small number of columns, we want to sort approximately by a larger number of columns.
-That will allow queries with different `WHERE` clauses to all benefit from DuckDB's min-max indexes (zone maps).
-This post introduces two high level approaches with several examples of each: sorting by space filling curves, and sorting by truncated timestamps.
+That will allow queries with different `WHERE` clauses to all benefit from DuckDB's [min-max indexes (zone maps)]({% link docs/stable/sql/indexes %}#min-max-index-zonemap).
+This post introduces two high-level approaches with several examples of each: sorting by space filling curves, and sorting by truncated timestamps.
 
-### Space Filling Curves 
+### Space Filling Curves
 
 Both Morton and Hilbert are space filling curve algorithms that are designed to combine multiple columns into an order that preserves some approximate ordering for both columns.
 One application of space filling curves is in geospatial analytics and it is a helpful illustration.
@@ -54,7 +54,7 @@ If a dataset contained the latitude and longitude coordinates of every café on 
 Cafés that are somewhat close in both latitude and longitude will receive a similar Morton or Hilbert encoding value.
 This will allow us to quickly execute queries like “Find all cafés within this rectangular region on a map”.
 (A rectangular region like that is called a bounding box in geospatial-land!)
-The GIF at the top of this post shows various levels of granularity of a Hilbert encoding - imagine if the x axis were longitude and the y axis were lattitude.
+The [GIF at the top of this post](#hilbert-curve) shows various levels of granularity of a Hilbert encoding – imagine if the x axis were longitude and the y axis were latitude.
 The "zig-zag" line of the Hilbert algorithm is the list of cafés, sorted approximately.
 
 Both Morton and Hilbert operate on integers or floats, but this post outlines a way to use them to sort `VARCHAR` columns as well.
@@ -102,7 +102,7 @@ The control groups are:
 Our alternative sorting approaches are:
 
 - `zipped_varchar`: Sort by one letter at a time, alternating between `origin` and `destination`.
-    - For example, an `origin` of `ABC` and a `destination` of `XYZ` would become `AXBYCZ`, which would then be sorted.  
+    – For example, an `origin` of `ABC` and a `destination` of `XYZ` would become `AXBYCZ`, which would then be sorted.
 - `morton`: Convert `origin` and `destination` into integers, then order by [Morton encoding (Z-order)](https://en.wikipedia.org/wiki/Z-order_curve)
 - `hilbert`: Convert `origin` and `destination` into integers, then order by [Hilbert encoding](https://en.wikipedia.org/wiki/Hilbert_curve)
 
@@ -116,7 +116,7 @@ Our alternative sorting approaches are:
 
 These plots display query runtime when pulling from a DuckDB file hosted on S3.
 These same techniques can also be successfully applied to the [DuckLake](https://ducklake.select/) integrated data lake and catalog format!
-DuckLake is the modern evolution of the cloud data lakehouse - take a minute to check out the [launch post]({% post_url 2025-05-27-ducklake %}) if you haven't yet!
+DuckLake is the modern evolution of the cloud data lakehouse – take a minute to check out the [launch post]({% post_url 2025-05-27-ducklake %}) if you haven't yet!
 DuckLake has an [additional concept of a partition](https://ducklake.select/docs/stable/duckdb/advanced_features/partitioning), which enables entire files to be skipped.
 To take full advantage of DuckLake, first partition your data (by time or otherwise) and then apply the techniques in this post when loading your data.
 
@@ -292,24 +292,24 @@ In summary, this microbenchmark tests:
 1. Querying tables sorted by the 6 different approaches (3 control and 3 advanced)
 1. Filtering using three query patterns: filters on `origin`, `destination`, and `origin` / `destination`
 1. Filtering with 4 different `origin`/`dest` pairs:
-    1. SFO - LAX
-    1. LAX - SFO
-    1. ORD - LGA
-    1. LGA - ORD
+    1. SFO – LAX
+    1. LAX – SFO
+    1. ORD – LGA
+    1. LGA – ORD
 
 Each of these 72 unique queries are repeated 3 times for a total of 216 queries.
 All are included in the resulting plots.
 
 ```sql
-FROM ⟨sorted_table⟩ 
+FROM ⟨sorted_table⟩
 SELECT flightdate, airline, origin, dest, deptime, arrtime
 WHERE origin = ⟨origin⟩;
 
-FROM ⟨sorted_table⟩ 
+FROM ⟨sorted_table⟩
 SELECT flightdate, airline, origin, dest, deptime, arrtime
 WHERE dest = ⟨dest⟩;
 
-FROM ⟨sorted_table⟩ 
+FROM ⟨sorted_table⟩
 SELECT flightdate, airline, origin, dest, deptime, arrtime
 WHERE origin = ⟨origin⟩ AND dest = ⟨dest⟩;
 ```
@@ -364,7 +364,7 @@ It would be the best choice to support all 3 workloads.
 ### Approximate Time Sorting
 
 Sorting by an “approximate time” involves truncating the time to the nearest value of a certain time granularity.
-In this experiment, we load the data with 3 different sorting approaches. 
+In this experiment, we load the data with 3 different sorting approaches.
 We first sort on a truncation of the `flightdate` column, truncated to either day, month, or year.
 We then use our most effective multi-column approach and sort by the Hilbert encoding of `origin` and `dest` next.
 
@@ -415,32 +415,32 @@ In summary, this microbenchmark tests:
 1. Filtering on three time ranges: the latest 1 week, 13 weeks, and 52 weeks
 1. Filtering on `origin`, `destination`, and `origin` / `destination`
 1. Filtering with 4 different `origin`/`dest` pairs:
-    1. SFO - LAX
-    1. LAX - SFO
-    1. ORD - LGA
-    1. LGA - ORD
+    1. SFO – LAX
+    1. LAX – SFO
+    1. ORD – LGA
+    1. LGA – ORD
 
 Each of these 108 unique queries are repeated 3 times for a total of 324 queries.
 
 ```sql
-FROM ⟨sorted_table⟩ 
+FROM ⟨sorted_table⟩
 SELECT flightdate, airline, origin, dest, deptime, arrtime
-WHERE 
+WHERE
     origin = ⟨origin⟩
-    AND flightdate >= ('2022-07-31'::TIMESTAMP - INTERVAL ⟨time_range⟩ WEEKS);
+    AND flightdate >= ('2022-07-31'::TIMESTAMP – INTERVAL ⟨time_range⟩ WEEKS);
 
-FROM ⟨sorted_table⟩ 
+FROM ⟨sorted_table⟩
 SELECT flightdate, airline, origin, dest, deptime, arrtime
-WHERE 
+WHERE
     dest = ⟨dest⟩
-    AND flightdate >= ('2022-07-31'::TIMESTAMP - INTERVAL ⟨time_range⟩ WEEKS);
+    AND flightdate >= ('2022-07-31'::TIMESTAMP – INTERVAL ⟨time_range⟩ WEEKS);
 
-FROM ⟨sorted_table⟩ 
+FROM ⟨sorted_table⟩
 SELECT flightdate, airline, origin, dest, deptime, arrtime
-WHERE 
-    origin = ⟨origin⟩ 
+WHERE
+    origin = ⟨origin⟩
     AND dest = ⟨dest⟩
-    AND flightdate >= ('2022-07-31'::TIMESTAMP - INTERVAL ⟨time_range⟩ WEEKS);
+    AND flightdate >= ('2022-07-31'::TIMESTAMP – INTERVAL ⟨time_range⟩ WEEKS);
 ```
 
 </details>
@@ -487,10 +487,10 @@ As a result, the best compromise across those three workloads is likely to be th
 See!
 Don't just sort by timestamp!
 
-## Table Creation Time
+### Table Creation Time
 
 The upfront investment required to see these benefits is the time required to sort the data when inserting.
-Typically this is still a good trade off - data inserts tend to happen in the background, but nobody wants to be staring at dashboard loading spinners!
+Typically this is still a good trade off – data inserts tend to happen in the background, but nobody wants to be staring at dashboard loading spinners!
 
 Creating a DuckDB table from Parquet files without sorting took slightly over 21 seconds.
 Each other approach copied from the unsorted DuckDB table and created a new table.
@@ -509,7 +509,6 @@ However, it is worth noting that overall insert performance slows down by nearly
 | `hilbert_day`    |              58.7 |
 | `hilbert_month`  |              53.8 |
 | `hilbert_year`   |              60.2 |
-
 
 ## Measuring Sortedness
 
@@ -651,7 +650,7 @@ The `rowgroup_id_count` column is a measurement of how many distinct row groups 
 ## Conclusion
 
 When storing data in a columnar file format like a DuckDB database or a Parquet file, approximately sorting by multiple columns can lead to fast read queries across a variety of query patterns.
-Sorting using the Hilbert encoding provided high performance across multiple workloads, and sorting by year and then by Hilbert performed well when also filtering by time. 
+Sorting using the Hilbert encoding provided high performance across multiple workloads, and sorting by year and then by Hilbert performed well when also filtering by time.
 
 Thanks to the "Number of Row Groups per Value" calculation, we can measure the sortedness of any table by any column, and it was predictive of the experimental performance we observed.
 This way we can experiment with different sorting approaches and quickly forecast their effectiveness, without having to benchmark read workloads each time.
