@@ -180,7 +180,6 @@
 		transform: translateY(0);
 	}
 	header .headerline .headercontent .landingmenu nav .hasSub {
-		pointer-events: all;
 		> div,
 		> div > a{
 			pointer-events: none;
@@ -612,12 +611,11 @@
 	}
 	
 	.pagetitle {
-		padding: 35px 15px;
+		padding: 35px 0px;
 	}
 	
 	em.caption{
 		font-size: 12px;
-		margin-top: .2em;
 	}
 	
 }
