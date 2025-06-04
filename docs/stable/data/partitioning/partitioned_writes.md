@@ -91,7 +91,7 @@ To append to an existing Hive partitioned directory structure, use the `APPEND` 
 
 ```sql
 COPY orders TO 'orders'
-(FORMAT PARQUET, PARTITION_BY (year, month), APPEND);
+(FORMAT parquet, PARTITION_BY (year, month), APPEND);
 ```
 
 Using the `APPEND` option result in a behavior similar the `OVERWRITE_OR_IGNORE, FILENAME_PATTERN '{uuid}'` options,
