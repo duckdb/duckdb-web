@@ -2,6 +2,8 @@
 layout: post
 title: "Beyond database optimization with AI – The Data Engineering Show"
 author: Hannes Mühleisen
+thumb: "/images/media/thumbs/2025-03-19-data-engineering-show-beyond-database-optimization-with-ai.png"
+image: "/images/media/thumbs/2025-03-19-data-engineering-show-beyond-database-optimization-with-ai.png"
 excerpt: ""
 toc: false
 tags: ["Podcast"]

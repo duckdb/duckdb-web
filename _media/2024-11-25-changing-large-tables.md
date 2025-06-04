@@ -2,6 +2,8 @@
 layout: post
 title: "Changing large tables"
 author: Hannes Mühleisen
+thumb: "/images/media/thumbs/2024-11-25-changing-large-tables.png"
+image: "/images/media/thumbs/2024-11-25-changing-large-tables.png"
 excerpt: ""
 toc: false
 tags: ["Talk"]
