@@ -42,7 +42,7 @@ In this post, we describe several advanced sorting strategies, compare them with
 ## The Strategy
 
 Instead of sorting precisely by one or a small number of columns, we want to sort approximately by a larger number of columns.
-That will allow queries with different `WHERE` clauses to all benefit from DuckDB's [min-max indexes (zone maps)]({% link docs/stable/sql/indexes %}#min-max-index-zonemap).
+That will allow queries with different `WHERE` clauses to all benefit from DuckDB's [min-max indexes (zone maps)]({% link docs/stable/sql/indexes.md %}#min-max-index-zonemap).
 This post introduces two high-level approaches with several examples of each: sorting by space filling curves, and sorting by truncated timestamps.
 
 ### Space Filling Curves
