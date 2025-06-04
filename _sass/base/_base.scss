@@ -63,9 +63,11 @@ em.caption{
 	font-style: normal!important;
 	text-align: center;
 	font-size: 14px;
+	line-height: 1.1;
 	display: inline-block;
 	width: 100%;
 	margin-bottom: 1.5em;
+	margin-top: 1em;
 	color: var(--main-text-tertiary-color);
 }
 
@@ -104,16 +106,7 @@ main > .pagehead{
 }
 
 
-.pagetitle{
-	padding: 65px 0;
-	h1{
-		font-size: $fontSizeh1;
-		margin: 0;
-	}
-	@media only screen and (max-width: 1170px) {
-		padding: 65px 15px;
-	}
-}
+
 
 
 main{
@@ -211,13 +204,27 @@ body.installation div.environment.select label.onlymobile{
 	cursor: pointer;
 }
 
+.pagetitle {
+	padding: 65px 0;
+
+	h1 {
+		font-size: $fontSizeh1;
+		margin: 0;
+	}
+
+	@media only screen and (max-width: 770px) {
+		padding: 45px 0px;
+
+		h1 {
+			font-size: 35px;
+		}
+	}
+}
+
 .layout_default{
 	#main_content_wrap{
 		padding: 0 15px;
 		margin-bottom: 100px;
-	}
-	.pagetitle{
-		padding: 65px 0;
 	}
 }
 
