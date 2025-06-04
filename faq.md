@@ -338,6 +338,26 @@ DuckDB does not use *explicit SIMD* (single instruction, multiple data) instruct
 
 <div class="qa-wrap" markdown="1">
 
+### How does scalability work in DuckDB?
+
+<div class="answer" markdown="1">
+
+DuckDB is a single-node database system, hence it makes use of _vertical scalability,_
+i.e., making use of more resources (CPU, memory, and disk) to support larger datasets.
+DuckDB has been tested on machines with 100+ CPU cores and terabytes of memory.
+
+DuckDB's native database format also scales for multiple terabytes of data but this needs some planning – see the [“Working with Huge Databases” page]({% link docs/stable/guides/performance/working_with_huge_databases.md %}).
+
+For working with large-scale datasets and/or collaborating on the same dataset, consider using the [DuckLake](https://ducklake.select/) lakehouse format.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### I would like to benchmark DuckDB against another system. How do I proceed?
 
 <div class="answer" markdown="1">
