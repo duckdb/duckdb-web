@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 6cadcc18f23f80bc9fd1692a6befc4e4cf4d7ee4
+  revision: 227aaa07c67cff4af495378c09b1c5d078f3ad4c
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -21,7 +21,7 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     base64 (0.2.0)
-    bigdecimal (3.2.1)
+    bigdecimal (3.2.2)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
