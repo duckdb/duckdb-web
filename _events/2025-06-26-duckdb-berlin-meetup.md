@@ -30,7 +30,7 @@ Attendance is free but **please RSVP on [meetup.com](https://www.meetup.com/duck
 |------:|:----------|:--------|
 | 18:00 | Mingle & snacks | TBA |
 | 19:00 | [Amine Mhedhbi](https://amine.io/) – assistant professor at Polytechnique Montréal, co-author of FlockMTL ([community extension](https://duckdb.org/community_extensions/extensions/flockmtl), [paper](https://arxiv.org/pdf/2504.01157)) | |
-| 19:30 | [Marcin Rudolf](https://www.linkedin.com/in/marcinrudolf/?originalSubdomain=de) – co-founder at [dltHub](https://dlthub.com/) | TBA |
+| 19:30 | [Marcin Rudolf](https://www.linkedin.com/in/marcinrudolf/?originalSubdomain=de) – co-founder at [dltHub](https://dlthub.com/) | From REST API to Iceberg Lakehouse: ELT with Python, DuckDB, and dlt |
 | 20:00 | [David Justen](https://d-justen.github.io/) – PhD student at Technische Universität Berlin, co-author of the [POLAR paper](https://d-justen.github.io/assets/p1350-justen.pdf) | TBA |
 
 ## Inquiries
