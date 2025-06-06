@@ -5,7 +5,7 @@ title: Troubleshooting
 
 ## Limitations
 
-* The catalog is not refreshed automatically. To update the list of table in the catalog, `DETACH` from the catalog and `ATTACH` again.
+* Writing Iceberg tables is currently not supported.
 * Reading tables with deletes is not yet supported.
 
 ## Curl Request Fails

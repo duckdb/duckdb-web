@@ -32,7 +32,7 @@
 	
 	<script src="{{ site.baseurl }}/js/determine_color_scheme.js?{{ site.data['hash'] }}"></script>
 </head>
-<body {% if page.body_class %} class="{{ page.body_class }}" {% endif %}>
+<body class="layout_default{% if page.body_class %} {{ page.body_class }}{% endif %}">
 
 	<header>
 		<div class="headerline">
@@ -63,7 +63,7 @@
 	</header>
 	
 	{% assign file_extension = page.path | split: "." | last %}
-	<main class="f-{{file_extension}}">
+	<main class="f-{{file_extension}}{% if page.max_page_width %} w-{{page.max_page_width}}{% endif %}">
 		
 		{% include searchoverlay.html %}
 

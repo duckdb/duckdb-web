@@ -32,7 +32,7 @@ However, similarly to PostgreSQL, [JSON features use a zero-based indexing]({% l
 Explanation: the `n` in the numeric type `INTn` and `UINTn` denote the width of the number in either bytes or bits.
 `INT1`, `INT2`, `INT4` correspond to the number of bytes, while `INT16`, `INT32` and `INT64` correpsond to the number of bits.
 The same applies to `UINT` values.
-Howver, the value `n = 8` is a valid choice for both the number of bits and bytes.
+However, the value `n = 8` is a valid choice for both the number of bits and bytes.
 For unsigned values, `UINT8` corresponds to `UTINYINT` (8 bits).
 For signed values, `INT8` corresponds to `BIGINT` (8 bytes).
 

@@ -232,6 +232,9 @@ body.installation{
 			border: 1px solid color.scale($black400, $lightness: -4%);
 		}
 	}
+	#sidebar{
+		display: none;
+	}
 }
 
 body.installation{

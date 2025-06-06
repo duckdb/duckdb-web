@@ -651,11 +651,13 @@ html.darkmode body.documentation #ducklake_logo{
 
 body.faq,
 body.manifesto{
+	ol,
 	ul{
 		padding: 0;
 		margin: 0;
 		padding-left: 20px;
 	}
+	ol li,
 	ul li,
 	p{
 		font-size: 18px;
