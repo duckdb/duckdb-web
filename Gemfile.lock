@@ -49,7 +49,7 @@ GEM
     ffi (1.17.2)
     ffi (1.17.2-arm64-darwin)
     ffi (1.17.2-x86_64-darwin)
-    ffi (1.17.2-x86_64-linux-gnu)
+    ffi (1.17.2-x86_64-linux)
     forwardable-extended (2.6.0)
     github-pages-health-check (1.19.0)
       addressable (~> 2.8.7)
