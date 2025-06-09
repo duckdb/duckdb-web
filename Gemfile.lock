@@ -47,9 +47,12 @@ GEM
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
     ffi (1.17.2)
+    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
     forwardable-extended (2.6.0)
-    github-pages-health-check (1.18.5)
-      addressable (~> 2.3)
+    github-pages-health-check (1.19.0)
+      addressable (~> 2.8.7)
       dnsruby (~> 1.60)
       octokit (>= 4, < 10)
       public_suffix (>= 3.0, < 7.0)
@@ -218,7 +221,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  github-pages-health-check (= 1.18.5)
+  github-pages-health-check (= 1.19.0)
   jekyll (= 4.4.1)
   jekyll-avatar (= 0.8.0)
   jekyll-coffeescript (= 1.1.1)
