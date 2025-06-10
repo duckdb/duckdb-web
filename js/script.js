@@ -6,9 +6,9 @@ $(document).ready(function(){
 			$('html, body').animate({
 				scrollTop: $(hash).offset().top-90
 			}, 300, 'swing');
-			if( $('.frequentlyaskedquestions').length ){
-				$('h3'+hash).parent('.qa-wrap').addClass('open');
-				$('h3'+hash).parent('.qa-wrap').find('.answer').slideToggle(300);
+			if ($('body').hasClass('faq')) {
+				$(hash).parent('.qa-wrap').addClass('open');
+				$(hash).parent('.qa-wrap').find('.answer').slideDown(300);
 			}
 		}
 	}
@@ -232,8 +232,6 @@ $(document).ready(function(){
 		});
 	}
 
-	
-	
     
     // Scroll Top Button 
     $('.scrolltop').click(function(){
@@ -241,42 +239,6 @@ $(document).ready(function(){
 	    return false;
 	});
     
-	
-	// Header Animation
-	if( $('.hamburger').is(':visible') ){
-		var animationpath = "/js/duckdbanimation_search.json"
-	} else {
-		var animationpath = "/js/duckdbanimation.json"
-	}
-	let duckDBicon = document.getElementById('duckdbanimation');	
-    let animationduckDBicon = lottie.loadAnimation({
-            container: duckDBicon,
-            renderer: 'svg',
-            loop: false,
-            autoplay: false,
-            path: animationpath
-    });
-    
-	if( !$('.hamburger').is(':visible') ){
-		$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseenter(function() {
-			animationduckDBicon.play();
-			animationduckDBicon.setDirection(1)
-		})
-		$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseleave(function() {
-			animationduckDBicon.play();
-			animationduckDBicon.setDirection(-1)
-		})
-	}
-	
-	if ($('.wrap.livedemo').length =! 0){
-		lottie.loadAnimation({
-		  container: document.getElementById('loading-spinner'), 
-		  renderer: 'svg',
-		  loop: true,
-		  autoplay: true,
-		  path: "/js/duckdbanimationloop.json"
-		});
-	}
 	
 	
 	// Landing Page Typewriter Animation
@@ -320,14 +282,24 @@ $(document).ready(function(){
 	    $('#docusitemaphere').append(contentlist).find("ul").removeAttr("style")
 	}
 	
-	// Add class-name to external Links
-	$('a').filter(function() {
-		return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0;
-	}).addClass("externallink").attr('target','_blank');
-	
-	$('.headercontent a, .mainlinks a, .box-link a, .footercontent a').removeClass('externallink'); 
-	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
-	$('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
+// Add class-name to external Links
+$('a').filter(function() {
+	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0;
+}).addClass("externallink").attr('target','_blank');
+
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a').removeClass('externallink'); 
+$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
+$('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
+
+// Wrap external links followed by a "." in a nobreak span
+if ($('body.documentation #main_content_wrap').length) {
+    var mainContent = $('body.documentation #main_content_wrap');
+    var html = mainContent.html();
+    var updatedHtml = html.replace(/(<a [^>]*class="[^"]*externallink[^"]*"[^>]*>.*?<\/a>)\./g, '<span class="nobreak">$1.</span>');
+    if (html !== updatedHtml) {
+        mainContent.html(updatedHtml);
+    }
+}
 	
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){
