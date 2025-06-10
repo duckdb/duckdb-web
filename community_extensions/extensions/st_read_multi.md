@@ -8,18 +8,18 @@ excerpt: |
 extension:
   name: st_read_multi
   description: Read multiple geospatial files
-  version: 0.0.1
+  version: 0.0.2
   language: Rust
   build: cargo
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl;windows_amd64_mingw"
   requires_toolchains: "rust;python3"
   maintainers:
     - yutannihilation
 
 repo:
   github: yutannihilation/duckdb-ext-st-read-multi
-  ref: 4a1f50e91ed4f28cbe67977f549a474cc305b2a0
+  ref: 3dbc23e9ec09df586a02f6f76c07d6c9f9e5ca0e
 
 docs:
   hello_world: |
@@ -27,10 +27,10 @@ docs:
 
     SELECT * REPLACE (ST_GeomFromWkb(geometry) as geometry) FROM ST_Read_Multi('path/to/*.geojson');
   extended_description: |
-    Read multiple geospatial files. Currently, only GeoJSON is supported.
+    Read multiple geospatial files. Currently, only GeoJSON and GeoPackages are supported.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 2
+extension_star_count_pretty: 2
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_st_read_multi.png'
@@ -58,8 +58,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                              description                              | comment |                  examples                  |
-|---------------|---------------|-----------------------------------------------------------------------|---------|--------------------------------------------|
-| st_read_multi | table         | Read multiple geospatial files. Currently, only GeoJSON is supported. | NULL    | [FROM ST_Read_Multi('path/to/*.geojson');] |
+| function_name | function_type |                                      description                                       | comment |                  examples                  |
+|---------------|---------------|----------------------------------------------------------------------------------------|---------|--------------------------------------------|
+| st_read_multi | table         | Read multiple geospatial files. Currently, only GeoJSON and GeoPackages are supported. | NULL    | [FROM ST_Read_Multi('path/to/*.geojson');] |
 
 
