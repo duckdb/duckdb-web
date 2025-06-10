@@ -26,12 +26,12 @@ Attendance is free but **please RSVP on [meetup.com](https://www.meetup.com/duck
 
 ## Timetable
 
-| Time  | Presenter                                                                  | Title                                                                               |
-| :---- | :------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
-| 18:00 | Mingle & snacks                                                            |                                                                                     |
-| 19:00 | [Amine Mhedhbi](https://amine.io/) <br/>*(Polytechnique&nbsp;Montréal)*    | FlockMTL: a Multimodal AI Community Extension for DuckDB                            |
-| 19:25 | [Marcin Rudolf](https://www.linkedin.com/in/marcinrudolf/) <br/>*(dltHub)* | From REST API to Iceberg Lakehouse: ELT with Python, DuckDB, and dlt                |
-| 19:50 | [David Justen](https://d-justen.github.io/) <br/>*(TU Berlin)*             | POLAR: Adaptive and Non-invasive Join Order Selection via Plans of Least Resistance |
+| Time  | Presenter                                                                  | Title                                                                |
+| :---- | :------------------------------------------------------------------------- | :------------------------------------------------------------------- |
+| 18:00 | Mingle & snacks                                                            |                                                                      |
+| 19:00 | [Amine Mhedhbi](https://amine.io/) <br/>*(Polytechnique&nbsp;Montréal)*    | FlockMTL: a Multimodal AI Community Extension for DuckDB             |
+| 19:25 | [Marcin Rudolf](https://www.linkedin.com/in/marcinrudolf/) <br/>*(dltHub)* | From REST API to Iceberg Lakehouse: ELT with Python, DuckDB, and dlt |
+| 19:50 | [David Justen](https://d-justen.github.io/) <br/>*(TU Berlin)*             | POLAR for DuckDB: Stop Guessing, Start Adapting                      |
 
 ## Inquiries
 
