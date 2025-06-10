@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pyroscope
   description: DuckDB Pyroscope Extension for Continuous Profiling
-  version: 0.0.2
+  version: 0.1.3
   language: Rust
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-pyroscope
-  ref: 397556c066614614cf346b0c4fb2d21740c31f29
+  ref: e72cf4cdbfbe79476f55adb2a98aec2792d72f68
 
 docs:
   hello_world: |
@@ -53,8 +53,8 @@ docs:
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 421
-extension_download_count_pretty: 421
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_pyroscope.png'
 layout: community_extension_doc
 ---
@@ -82,7 +82,7 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| trace_start   | table         | NULL        | NULL    | []       |
-| trace_stop    | table         | NULL        | NULL    | []       |
+| trace_start   | table         | NULL        | NULL    |          |
+| trace_stop    | table         | NULL        | NULL    |          |
 
 
