@@ -35,8 +35,49 @@ EXTRACT_OPERATOR = '[]'
 # 'position' requires keyword 'IN' as argument
 NON_STANDARD_FUNCTIONS = ['position']
 
+# list macros defined in duckdb/src/catalog/default/default_functions.cpp
+LIST_AGGREGATE_FUNCTIONS = [
+    # algebraic list aggregates
+    "list_avg",
+    "list_var_samp",
+    "list_var_pop",
+    "list_stddev_pop",
+    "list_stddev_samp",
+    "list_sem",
+    # distributive list aggregates
+    "list_approx_count_distinct",
+    "list_bit_xor",
+    "list_bit_or",
+    "list_bit_and",
+    "list_bool_and",
+    "list_bool_or",
+    "list_count",
+    "list_entropy",
+    "list_last",
+    "list_first",
+    "list_any_value",
+    "list_kurtosis",
+    "list_kurtosis_pop",
+    "list_min",
+    "list_max",
+    "list_product",
+    "list_skewness",
+    "list_sum",
+    "list_string_agg",
+    # holistic list aggregates
+    "list_mode",
+    "list_median",
+    "list_mad",
+    # nested list aggregates
+    "list_histogram",
+]
+
 # override/add to duckdb_functions() outputs:
-# NOTE: duckdb_functions() only contains sufficient information for scalar and aggregate functions.
+"""
+NOTE: duckdb_functions() only contains sufficient information for scalar and aggregate functions.
+For now, function info for table functions, macros, and a number of spcials is added via the
+OVERRIDES list
+"""
 OVERRIDES: list[DocFunction] = [
     # table functions
     DocFunction(
@@ -133,7 +174,10 @@ OVERRIDES: list[DocFunction] = [
         name='array_to_string',
         parameters=['list', 'delimiter'],
         description="Concatenates list/array elements using an optional `delimiter`.",
-        examples=["array_to_string([1, 2, 3], '-')", "array_to_string(['aa', 'bb', 'cc'], '')"],
+        examples=[
+            "array_to_string([1, 2, 3], '-')",
+            "array_to_string(['aa', 'bb', 'cc'], '')",
+        ],
     ),
     DocFunction(
         category='list',
@@ -142,12 +186,28 @@ OVERRIDES: list[DocFunction] = [
         description="Concatenates list/array elements with a comma delimiter.",
         examples=["array_to_string_comma_default(['Banana', 'Apple', 'Melon'])"],
     ),
+    DocFunction(
+        category='list',
+        name='list_intersect',
+        parameters=['list1', 'list2'],
+        description="Returns a list of all the elements that exist in both `list1` and `list2`, without duplicates.",
+        examples=["list_intersect([1, 2, 3], [2, 3, 4])"],
+        aliases=["array_intersect"],
+    ),
+    DocFunction(
+        category='list',
+        name='list_reverse',
+        parameters=['list'],
+        description="Reverses the `list`.",
+        examples=["list_reverse([3, 6, 1, 2])"],
+        aliases=["array_reverse"],
+    ),
     # others
     DocFunction(
         category='string',
         name='[]',
         parameters=['string', 'index'],
-        description="Extracts a single character using a (1-based) index.",
+        description="Extracts a single character using a (1-based) `index`.",
         examples=["'DuckDB'[4]"],
         aliases=['array_extract'],
     ),
@@ -163,7 +223,7 @@ OVERRIDES: list[DocFunction] = [
         category='list',
         name='[]',
         parameters=['list', 'index'],
-        description="Extracts a single list element using a (1-based) index.",
+        description="Extracts a single list element using a (1-based) `index`.",
         examples=["[4, 5, 6][3]"],
         aliases=['list_extract'],
     ),
@@ -207,6 +267,15 @@ OVERRIDES: list[DocFunction] = [
         examples=["'abc' ^@ 'a'"],
         aliases=['starts_with'],
     ),
+    DocFunction(
+        category='list',
+        name='list_concat',  # edge case: variadic taking ANY[]
+        parameters=['list1', '...', 'listn'],
+        description="Concatenates lists. `NULL` inputs are skipped. See also ||.",
+        examples=["list_concat([2, 3], [4, 5, 6], [7])"],
+        aliases=['list_cat', 'array_concat', 'array_cat'],
+        is_variadic=True,
+    ),
 ]
 
 # NOTE: All function aliases are added, unless explicitly excluded. Format: (<category>, <function_name>)
@@ -218,8 +287,8 @@ DESCRIPTION_EXTENSIONS = {
     "list_filter": "See `list_filter` examples.",
     "list_reduce": "See `list_reduce` examples.",
     "list_transform": "See `list_transform` examples.",
-    "list_sort": "See the Sorting Lists section for more details about the `NULL` sorting order.",
-    "list_reverse_sort": "See the Sorting Lists section for more details about the `NULL` sorting order.",
+    "list_sort": "See the Sorting Lists section for more details about sorting order and `NULL` values.",
+    "list_reverse_sort": "See the Sorting Lists section for more details about sorting order and `NULL` values.",
 }
 
 PAGE_LINKS = {
@@ -229,6 +298,9 @@ PAGE_LINKS = {
     'fmt syntax': "#fmt-syntax",
     'printf syntax': '#printf-syntax',
     'Flattens': '#flattening',
+    'List Aggregates': '#list-aggregates',
+    'Sorting Lists': '#sorting-lists',
+    'list_sort': '#list_sortlist',
     # links to other doc pages:
     '`list_concat(list1, list2)`': f'docs/{DOC_VERSION}/sql/functions/list.md#list_concatlist1-list2',
     '`list_filter` examples': f'docs/{DOC_VERSION}/sql/functions/lambda.md#list_filter-examples',
@@ -344,6 +416,20 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
         )
         and (func.category, func.name) not in EXCLUDES
     ]
+    if 'list' in categories:
+        for list_aggregate_function in LIST_AGGREGATE_FUNCTIONS:
+            example_list = (
+                "[3,3,9]" if 'bool' not in list_aggregate_function else "[true, false]"
+            )
+            function_data.append(
+                DocFunction(
+                    category='list',
+                    name=list_aggregate_function,
+                    parameters=['list'],
+                    description=f"Applies aggregate function `[{list_aggregate_function[5:]}]({{% link docs/preview/sql/functions/aggregates.md %}})` to the `list`.",
+                    examples=[f"{list_aggregate_function}({example_list})"],
+                )
+            )
     for override in OVERRIDES:
         if override.category in categories:
             function_data.append(override)
@@ -472,6 +558,7 @@ def generate_docs_records(function_data: list[DocFunction]):
 
 
 def get_function_title(func: DocFunction):
+    assert func.nr_optional_arguments == 0 or not func.is_variadic
     if func.name in BINARY_OPERATORS:
         assert len(func.parameters) == 2
         function_title = f"{func.parameters[0]} {func.name} {func.parameters[1]}"
@@ -485,10 +572,10 @@ def get_function_title(func: DocFunction):
             parameter_str = f"{":".join(mandatory_args)}{"".join(f"[:{arg}]" for arg in optional_args)}"
         function_title = f"{func.parameters[0]}[{parameter_str}]"
     else:
+        if func.is_variadic and len(func.parameters) == 0:
+            func.parameters = ['arg']
         if func.nr_optional_arguments == 0:
-            parameter_str = (
-                f"{", ".join(func.parameters)}{', ...' if (func.is_variadic) else ''}"
-            )
+            parameter_str = f"{", ".join(func.parameters)}{', ...' if (func.is_variadic and '...' not in func.parameters) else ''}"
         else:
             mandatory_args = func.parameters[: -1 * func.nr_optional_arguments]
             optional_args = func.parameters[-1 * func.nr_optional_arguments :]
