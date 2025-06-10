@@ -110,8 +110,8 @@ docs:
     | `redis_hscan_over_scan(scan_pattern, hscan_pattern, count, secret)` | Table | For all keys matching scan_pattern, HSCAN with hscan_pattern, return (key, field, value) rows |
 
 
-extension_star_count: 4
-extension_star_count_pretty: 4
+extension_star_count: 5
+extension_star_count_pretty: 5
 extension_download_count: 435
 extension_download_count_pretty: 435
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'

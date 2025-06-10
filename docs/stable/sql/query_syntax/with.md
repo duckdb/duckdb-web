@@ -45,7 +45,7 @@ FROM cte;
 
 ## CTE Materialization
 
-DuckDB can employ CTE materialization, i.e., inlining CTEs into the main query.
+DuckDB can employ CTE materialization, instead of inlining CTEs into the main query.
 This is performed using heuristics: if the CTE performs a grouped aggregation and is queried more than once, it is materialized.
 Materialization can be explicitly activated by defining the CTE using `AS MATERIALIZED` and disabled by using `AS NOT MATERIALIZED`.
 
