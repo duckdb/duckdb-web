@@ -1037,6 +1037,10 @@
               "url": "delta"
             },
             {
+              "page": "DuckLake",
+              "url": "ducklake"
+            },
+            {
               "page": "Encodings",
               "url": "encodings"
             },
