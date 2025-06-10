@@ -3,21 +3,19 @@ layout: docu
 title: Amazon S3 Tables
 ---
 
+> Support for S3 Tables is currently experimental.
+
 The `iceberg` extension supports reading Iceberg tables stored in [Amazon S3 Tables](https://aws.amazon.com/s3/features/tables/).
 
 ## Requirements
 
-The S3 Tables support is currently experimental.
-To use it, install the following extensions:
+Install the following extensions:
 
 ```sql
-FORCE INSTALL aws FROM core_nightly;
-FORCE INSTALL httpfs FROM core_nightly;
-FORCE INSTALL iceberg FROM core_nightly;
+INSTALL aws;
+INSTALL httpfs;
+INSTALL iceberg;
 ```
-
-> If you want to switch back to using extensions from the `core` repository,
-> follow the [extension documentation]({% link docs/preview/extensions/installing_extensions.md %}#force-installing-to-upgrade-extensions).
 
 ## Connecting to Amazon S3 Tables
 
