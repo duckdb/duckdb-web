@@ -276,6 +276,16 @@ OVERRIDES: list[DocFunction] = [
         aliases=['list_cat', 'array_concat', 'array_cat'],
         is_variadic=True,
     ),
+    DocFunction(
+        category='list',
+        name='list_zip',  # edge case: variadic taking ANY (multiple lists, plus optional boolean)
+        parameters=['list_1', '...', 'list_n', 'truncate'],
+        description="Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length.",
+        examples=["list_zip([1, 2], [3, 4], [5, 6])", "list_zip([1, 2], [3, 4], [5, 6, 7])", "list_zip([1, 2], [3, 4], [5, 6, 7], true)"],
+        aliases=['array_zip'],
+        nr_optional_arguments=1,
+        is_variadic=True,
+    ),
 ]
 
 # NOTE: All function aliases are added, unless explicitly excluded. Format: (<category>, <function_name>)
@@ -558,7 +568,6 @@ def generate_docs_records(function_data: list[DocFunction]):
 
 
 def get_function_title(func: DocFunction):
-    assert func.nr_optional_arguments == 0 or not func.is_variadic
     if func.name in BINARY_OPERATORS:
         assert len(func.parameters) == 2
         function_title = f"{func.parameters[0]} {func.name} {func.parameters[1]}"

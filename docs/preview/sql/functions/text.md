@@ -17,7 +17,7 @@ This section describes functions and operators for examining and manipulating [`
 
 | Function | Description |
 |:--|:-------|
-| [`string[index]`](#stringindex) | Extracts a single character using a (1-based) index. |
+| [`string[index]`](#stringindex) | Extracts a single character using a (1-based) `index`. |
 | [`string[begin:end]`](#stringbeginend) | Extracts a string using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing) similar to Python. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
 | [`string LIKE target`](#string-like-target) | Returns `true` if the `string` matches the like specifier (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string SIMILAR TO regex`](#string-similar-to-regex) | Returns `true` if the `string` matches the `regex` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
@@ -129,7 +129,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extracts a single character using a (1-based) index. |
+| **Description** | Extracts a single character using a (1-based) `index`. |
 | **Example** | `'DuckDB'[4]`{:.language-sql .highlight} |
 | **Result** | `k` |
 | **Alias** | `array_extract` |

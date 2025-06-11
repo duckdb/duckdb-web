@@ -21,7 +21,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 | [`array_inner_product(array1, array2)`](#array_inner_productarray1-array2) | Computes the inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
 | [`array_negative_dot_product(array1, array2)`](#array_negative_dot_productarray1-array2) | Computes the negative inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
 | [`array_negative_inner_product(array1, array2)`](#array_negative_inner_productarray1-array2) | Computes the negative inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| [`array_value(, ...)`](#array_value-) | Creates an `ARRAY` containing the argument values. |
+| [`array_value(arg, ...)`](#array_valuearg-) | Creates an `ARRAY` containing the argument values. |
 
 <!-- markdownlint-enable MD056 -->
 
@@ -93,7 +93,7 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 | **Result** | `-20.0` |
 | **Alias** | `array_negative_dot_product` |
 
-#### `array_value(, ...)`
+#### `array_value(arg, ...)`
 
 <div class="nostroke_table"></div>
 
