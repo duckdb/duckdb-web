@@ -231,7 +231,7 @@ OVERRIDES: list[DocFunction] = [
         category='list',
         name='[]',
         parameters=['list', 'begin', 'end', 'step'],
-        description="Extracts a sublist using slice conventions. Negative values are accepted. See slicing.",
+        description="Extracts a sublist using slice conventions. Negative values are accepted.",
         examples=["[4, 5, 6][3]"],
         aliases=['list_slice'],
         nr_optional_arguments=2,
@@ -270,8 +270,8 @@ OVERRIDES: list[DocFunction] = [
     DocFunction(
         category='list',
         name='list_concat',  # edge case: variadic taking ANY[]
-        parameters=['list1', '...', 'listn'],
-        description="Concatenates lists. `NULL` inputs are skipped. See also ||.",
+        parameters=['list_1', '...', 'list_n'],
+        description="Concatenates lists. `NULL` inputs are skipped. See also operator `||`.",
         examples=["list_concat([2, 3], [4, 5, 6], [7])"],
         aliases=['list_cat', 'array_concat', 'array_cat'],
         is_variadic=True,
@@ -281,7 +281,11 @@ OVERRIDES: list[DocFunction] = [
         name='list_zip',  # edge case: variadic taking ANY (multiple lists, plus optional boolean)
         parameters=['list_1', '...', 'list_n', 'truncate'],
         description="Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length.",
-        examples=["list_zip([1, 2], [3, 4], [5, 6])", "list_zip([1, 2], [3, 4], [5, 6, 7])", "list_zip([1, 2], [3, 4], [5, 6, 7], true)"],
+        examples=[
+            "list_zip([1, 2], [3, 4], [5, 6])",
+            "list_zip([1, 2], [3, 4], [5, 6, 7])",
+            "list_zip([1, 2], [3, 4], [5, 6, 7], true)",
+        ],
         aliases=['array_zip'],
         nr_optional_arguments=1,
         is_variadic=True,
@@ -303,7 +307,6 @@ DESCRIPTION_EXTENSIONS = {
 
 PAGE_LINKS = {
     # intra-page links:
-    '`concat(arg1, arg2, ...)`': "#concatvalue-",
     'operator `||`': "#arg1--arg2",
     'fmt syntax': "#fmt-syntax",
     'printf syntax': '#printf-syntax',
@@ -312,7 +315,8 @@ PAGE_LINKS = {
     'Sorting Lists': '#sorting-lists',
     'list_sort': '#list_sortlist',
     # links to other doc pages:
-    '`list_concat(list1, list2)`': f'docs/{DOC_VERSION}/sql/functions/list.md#list_concatlist1-list2',
+    '`concat(arg1, arg2, ...)`': f"docs/{DOC_VERSION}/sql/functions/text.md#concatvalue-",
+    '`list_concat(list1, list2, ...)`': f'docs/{DOC_VERSION}/sql/functions/list.md#list_concatlist_1--list_n',
     '`list_filter` examples': f'docs/{DOC_VERSION}/sql/functions/lambda.md#list_filter-examples',
     '`list_reduce` examples': f'docs/{DOC_VERSION}/sql/functions/lambda.md#list_reduce-examples',
     '`list_transform` examples': f'docs/{DOC_VERSION}/sql/functions/lambda.md#list_transform-examples',
@@ -436,7 +440,7 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
                     category='list',
                     name=list_aggregate_function,
                     parameters=['list'],
-                    description=f"Applies aggregate function `[{list_aggregate_function[5:]}]({{% link docs/preview/sql/functions/aggregates.md %}})` to the `list`.",
+                    description=f"Applies aggregate function [`{list_aggregate_function[5:]}`]({{% link docs/{DOC_VERSION}/sql/functions/aggregates.md %}}#general-aggregate-functions) to the `list`.",
                     examples=[f"{list_aggregate_function}({example_list})"],
                 )
             )
@@ -594,7 +598,7 @@ def get_function_title(func: DocFunction):
 
 
 def get_anchor_from_title(title: str):
-    return re.sub(r'[\(\)\[\]\.,$@|:^]+', '', title.lower().replace(' ', '-'))
+    return re.sub(r'[\(\)\[\]\.,$@|:<>=&^]+', '', title.lower().replace(' ', '-'))
 
 
 def generate_example_rows(func: DocFunction):

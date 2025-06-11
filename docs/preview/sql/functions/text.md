@@ -22,7 +22,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`string LIKE target`](#string-like-target) | Returns `true` if the `string` matches the like specifier (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string SIMILAR TO regex`](#string-similar-to-regex) | Returns `true` if the `string` matches the `regex` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
 | [`string ^@ search_string`](#string--search_string) | Returns `true` if `string` begins with `search_string`. |
-| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue-) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
+| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`]({% link docs/preview/sql/functions/text.md %}#concatvalue-) and [`list_concat(list1, list2, ...)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist_1--list_n). |
 | [`array_extract(string, index)`](#array_extractstring-index) | Extracts a single character from a `string` using a (1-based) `index`. |
 | [`array_slice(list, begin, end)`](#array_slicelist-begin-end) | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | [`ascii(string)`](#asciistring) | Returns an integer that represents the Unicode code point of the first character of the `string`. |
@@ -33,7 +33,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`char_length(string)`](#char_lengthstring) | Number of characters in `string`. |
 | [`character_length(string)`](#character_lengthstring) | Number of characters in `string`. |
 | [`chr(code_point)`](#chrcode_point) | Returns a character which is corresponding the ASCII code value or Unicode code point. |
-| [`concat(value, ...)`](#concatvalue-) | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
+| [`concat(value, ...)`](#concatvalue-) | Concatenates multiple strings or lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`concat_ws(separator, string, ...)`](#concat_wsseparator-string-) | Concatenates many strings, separated by `separator`. `NULL` inputs are skipped. |
 | [`contains(string, search_string)`](#containsstring-search_string) | Returns `true` if `search_string` is found within `string`. |
 | [`ends_with(string, search_string)`](#ends_withstring-search_string) | Returns `true` if `string` ends with `search_string`. |
@@ -173,7 +173,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue-) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
+| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`]({% link docs/preview/sql/functions/text.md %}#concatvalue-) and [`list_concat(list1, list2, ...)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist_1--list_n). |
 | **Example 1** | `'Duck' || 'DB'`{:.language-sql .highlight} |
 | **Result** | `DuckDB` |
 | **Example 2** | `[1, 2, 3] || [4, 5, 6]`{:.language-sql .highlight} |
@@ -274,9 +274,11 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `concat('Hello', ' ', 'World')`{:.language-sql .highlight} |
+| **Description** | Concatenates multiple strings or lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
+| **Example 1** | `concat('Hello', ' ', 'World')`{:.language-sql .highlight} |
 | **Result** | `Hello World` |
+| **Example 2** | `concat([1, 2, 3], NULL, [4, 5, 6])`{:.language-sql .highlight} |
+| **Result** | `[1, 2, 3, 4, 5, 6]` |
 
 #### `concat_ws(separator, string, ...)`
 

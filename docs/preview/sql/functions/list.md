@@ -11,13 +11,13 @@ title: List Functions
 | Function | Description |
 |:--|:-------|
 | [`list[index]`](#listindex) | Extracts a single list element using a (1-based) `index`. |
-| [`list[begin[:end][:step]]`](#listbeginendstep) | Extracts a sublist using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. See [slicing]({% link docs/preview/sql/functions/list.md %}#slicing). |
-| [`list1 && list2`](#list1-&&-list2) | Returns true if the lists have any element in common. NULLs are ignored. |
-| [`list1 <-> list2`](#list1-<->-list2) | Calculates the Euclidean distance between two points with coordinates given in two inputs lists of equal length. |
-| [`list1 <=> list2`](#list1-<=>-list2) | Computes the cosine distance between two same-sized lists. |
-| [`list1 <@ list2`](#list1-<-list2) | Returns true if all elements of list2 are in list1. NULLs are ignored. |
-| [`list1 @> list2`](#list1->-list2) | Returns true if all elements of list2 are in list1. NULLs are ignored. |
-| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue-) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
+| [`list[begin[:end][:step]]`](#listbeginendstep) | Extracts a sublist using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
+| [`list1 && list2`](#list1--list2) | Returns true if the lists have any element in common. NULLs are ignored. |
+| [`list1 <-> list2`](#list1---list2) | Calculates the Euclidean distance between two points with coordinates given in two inputs lists of equal length. |
+| [`list1 <=> list2`](#list1--list2) | Computes the cosine distance between two same-sized lists. |
+| [`list1 <@ list2`](#list1--list2) | Returns true if all elements of list2 are in list1. NULLs are ignored. |
+| [`list1 @> list2`](#list1--list2) | Returns true if all elements of list2 are in list1. NULLs are ignored. |
+| [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`]({% link docs/preview/sql/functions/text.md %}#concatvalue-) and [`list_concat(list1, list2, ...)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist_1--list_n). |
 | [`aggregate(list, function_name, ...)`](#aggregatelist-function_name-) | Executes the aggregate function `function_name` on the elements of `list`. See the [List Aggregates](#list-aggregates) section for more details. |
 | [`apply(list, lambda(x))`](#applylist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
 | [`array_aggr(list, function_name, ...)`](#array_aggrlist-function_name-) | Executes the aggregate function `function_name` on the elements of `list`. See the [List Aggregates](#list-aggregates) section for more details. |
@@ -25,9 +25,9 @@ title: List Functions
 | [`array_append(list, element)`](#array_appendlist-element) | Appends `element` to `list`. |
 | [`array_apply(list, lambda(x))`](#array_applylist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
 | [`array_cat()`](#array_cat) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| [`array_cat(list1, ..., listn)`](#array_catlist1--listn) | Concatenates lists. `NULL` inputs are skipped. See also ||. |
+| [`array_cat(list_1, ..., list_n)`](#array_catlist_1--list_n) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`array_concat()`](#array_concat) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| [`array_concat(list1, ..., listn)`](#array_concatlist1--listn) | Concatenates lists. `NULL` inputs are skipped. See also ||. |
+| [`array_concat(list_1, ..., list_n)`](#array_concatlist_1--list_n) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`array_contains(list, element)`](#array_containslist-element) | Returns true if the list contains the element. |
 | [`array_distinct(list)`](#array_distinctlist) | Removes all duplicates and `NULL` values from a list. Does not preserve the original order. |
 | [`array_extract(list, index)`](#array_extractlist-index) | Extracts the `index`th (1-based) value from the `list`. |
@@ -63,7 +63,7 @@ title: List Functions
 | [`array_zip(list_1, ..., list_n[, truncate])`](#array_ziplist_1--list_n-truncate) | Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
 | [`char_length(list)`](#char_lengthlist) | Returns the length of the `list`. |
 | [`character_length(list)`](#character_lengthlist) | Returns the length of the `list`. |
-| [`concat(value, ...)`](#concatvalue-) | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
+| [`concat(value, ...)`](#concatvalue-) | Concatenates multiple strings or lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`contains(list, element)`](#containslist-element) | Returns `true` if the `list` contains the `element`. |
 | [`filter(list, lambda(x))`](#filterlist-lambdax) | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/preview/sql/functions/lambda.md %}#list_filter-examples). |
 | [`flatten(nested_list)`](#flattennested_list) | [Flattens](#flattening) a nested list by one level. |
@@ -73,72 +73,72 @@ title: List Functions
 | [`length(list)`](#lengthlist) | Returns the length of the `list`. |
 | [`list_aggr(list, function_name, ...)`](#list_aggrlist-function_name-) | Executes the aggregate function `function_name` on the elements of `list`. See the [List Aggregates](#list-aggregates) section for more details. |
 | [`list_aggregate(list, function_name, ...)`](#list_aggregatelist-function_name-) | Executes the aggregate function `function_name` on the elements of `list`. See the [List Aggregates](#list-aggregates) section for more details. |
-| [`list_any_value(list)`](#list_any_valuelist) | Applies aggregate function `[any_value]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_any_value(list)`](#list_any_valuelist) | Applies aggregate function [`any_value`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_append(list, element)`](#list_appendlist-element) | Appends `element` to `list`. |
 | [`list_apply(list, lambda(x))`](#list_applylist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| [`list_approx_count_distinct(list)`](#list_approx_count_distinctlist) | Applies aggregate function `[approx_count_distinct]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_avg(list)`](#list_avglist) | Applies aggregate function `[avg]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_bit_and(list)`](#list_bit_andlist) | Applies aggregate function `[bit_and]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_bit_or(list)`](#list_bit_orlist) | Applies aggregate function `[bit_or]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_bit_xor(list)`](#list_bit_xorlist) | Applies aggregate function `[bit_xor]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_bool_and(list)`](#list_bool_andlist) | Applies aggregate function `[bool_and]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_bool_or(list)`](#list_bool_orlist) | Applies aggregate function `[bool_or]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_approx_count_distinct(list)`](#list_approx_count_distinctlist) | Applies aggregate function [`approx_count_distinct`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_avg(list)`](#list_avglist) | Applies aggregate function [`avg`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_bit_and(list)`](#list_bit_andlist) | Applies aggregate function [`bit_and`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_bit_or(list)`](#list_bit_orlist) | Applies aggregate function [`bit_or`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_bit_xor(list)`](#list_bit_xorlist) | Applies aggregate function [`bit_xor`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_bool_and(list)`](#list_bool_andlist) | Applies aggregate function [`bool_and`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_bool_or(list)`](#list_bool_orlist) | Applies aggregate function [`bool_or`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_cat()`](#list_cat) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| [`list_cat(list1, ..., listn)`](#list_catlist1--listn) | Concatenates lists. `NULL` inputs are skipped. See also ||. |
-| [`list_concat(list1, ..., listn)`](#list_concatlist1--listn) | Concatenates lists. `NULL` inputs are skipped. See also ||. |
+| [`list_cat(list_1, ..., list_n)`](#list_catlist_1--list_n) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
+| [`list_concat(list_1, ..., list_n)`](#list_concatlist_1--list_n) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`list_contains(list, element)`](#list_containslist-element) | Returns true if the list contains the element. |
 | [`list_cosine_distance(list1, list2)`](#list_cosine_distancelist1-list2) | Computes the cosine distance between two same-sized lists. |
 | [`list_cosine_similarity(list1, list2)`](#list_cosine_similaritylist1-list2) | Computes the cosine similarity between two same-sized lists. |
-| [`list_count(list)`](#list_countlist) | Applies aggregate function `[count]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_count(list)`](#list_countlist) | Applies aggregate function [`count`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_distance(list1, list2)`](#list_distancelist1-list2) | Calculates the Euclidean distance between two points with coordinates given in two inputs lists of equal length. |
 | [`list_distinct(list)`](#list_distinctlist) | Removes all duplicates and `NULL` values from a list. Does not preserve the original order. |
 | [`list_dot_product(list1, list2)`](#list_dot_productlist1-list2) | Computes the inner product between two same-sized lists. |
 | [`list_element(list, index)`](#list_elementlist-index) | Extract the `index`th (1-based) value from the list. |
-| [`list_entropy(list)`](#list_entropylist) | Applies aggregate function `[entropy]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_entropy(list)`](#list_entropylist) | Applies aggregate function [`entropy`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_extract(list, index)`](#list_extractlist-index) | Extract the `index`th (1-based) value from the list. |
 | [`list_filter(list, lambda(x))`](#list_filterlist-lambdax) | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/preview/sql/functions/lambda.md %}#list_filter-examples). |
-| [`list_first(list)`](#list_firstlist) | Applies aggregate function `[first]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_first(list)`](#list_firstlist) | Applies aggregate function [`first`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_grade_up(list[, col1][, col2])`](#list_grade_uplist-col1-col2) | Works like [list_sort](#list_sortlist), but the results are the indexes that correspond to the position in the original list instead of the actual values. |
 | [`list_has(list, element)`](#list_haslist-element) | Returns true if the list contains the element. |
 | [`list_has_all(list1, list2)`](#list_has_alllist1-list2) | Returns true if all elements of list2 are in list1. NULLs are ignored. |
 | [`list_has_any(list1, list2)`](#list_has_anylist1-list2) | Returns true if the lists have any element in common. NULLs are ignored. |
-| [`list_histogram(list)`](#list_histogramlist) | Applies aggregate function `[histogram]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_histogram(list)`](#list_histogramlist) | Applies aggregate function [`histogram`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_indexof(list, element)`](#list_indexoflist-element) | Returns the index of the `element` if the `list` contains the `element`. If the `element` is not found, it returns `NULL`. |
 | [`list_inner_product(list1, list2)`](#list_inner_productlist1-list2) | Computes the inner product between two same-sized lists. |
 | [`list_intersect(list1, list2)`](#list_intersectlist1-list2) | Returns a list of all the elements that exist in both `list1` and `list2`, without duplicates. |
-| [`list_kurtosis(list)`](#list_kurtosislist) | Applies aggregate function `[kurtosis]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_kurtosis_pop(list)`](#list_kurtosis_poplist) | Applies aggregate function `[kurtosis_pop]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_last(list)`](#list_lastlist) | Applies aggregate function `[last]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_mad(list)`](#list_madlist) | Applies aggregate function `[mad]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_max(list)`](#list_maxlist) | Applies aggregate function `[max]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_median(list)`](#list_medianlist) | Applies aggregate function `[median]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_min(list)`](#list_minlist) | Applies aggregate function `[min]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_mode(list)`](#list_modelist) | Applies aggregate function `[mode]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_kurtosis(list)`](#list_kurtosislist) | Applies aggregate function [`kurtosis`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_kurtosis_pop(list)`](#list_kurtosis_poplist) | Applies aggregate function [`kurtosis_pop`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_last(list)`](#list_lastlist) | Applies aggregate function [`last`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_mad(list)`](#list_madlist) | Applies aggregate function [`mad`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_max(list)`](#list_maxlist) | Applies aggregate function [`max`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_median(list)`](#list_medianlist) | Applies aggregate function [`median`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_min(list)`](#list_minlist) | Applies aggregate function [`min`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_mode(list)`](#list_modelist) | Applies aggregate function [`mode`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_negative_dot_product(list1, list2)`](#list_negative_dot_productlist1-list2) | Computes the negative inner product between two same-sized lists. |
 | [`list_negative_inner_product(list1, list2)`](#list_negative_inner_productlist1-list2) | Computes the negative inner product between two same-sized lists. |
 | [`list_pack(arg, ...)`](#list_packarg-) | Creates a LIST containing the argument values. |
 | [`list_position(list, element)`](#list_positionlist-element) | Returns the index of the `element` if the `list` contains the `element`. If the `element` is not found, it returns `NULL`. |
 | [`list_prepend(element, list)`](#list_prependelement-list) | Prepends `element` to `list`. |
-| [`list_product(list)`](#list_productlist) | Applies aggregate function `[product]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_product(list)`](#list_productlist) | Applies aggregate function [`product`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
 | [`list_resize(list, size[[, value]])`](#list_resizelist-size-value) | Resizes the `list` to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
 | [`list_reverse(list)`](#list_reverselist) | Reverses the `list`. |
 | [`list_reverse_sort(list[, col1])`](#list_reverse_sortlist-col1) | Sorts the elements of the list in reverse order. See the [Sorting Lists](#sorting-lists) section for more details about sorting order and `NULL` values. |
 | [`list_select(value_list, index_list)`](#list_selectvalue_list-index_list) | Returns a list based on the elements selected by the `index_list`. |
-| [`list_sem(list)`](#list_semlist) | Applies aggregate function `[sem]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_skewness(list)`](#list_skewnesslist) | Applies aggregate function `[skewness]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_sem(list)`](#list_semlist) | Applies aggregate function [`sem`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_skewness(list)`](#list_skewnesslist) | Applies aggregate function [`skewness`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_slice(list, begin, end)`](#list_slicelist-begin-end) | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | [`list_slice(list, begin, end, step)`](#list_slicelist-begin-end-step) | list_slice with added step feature. |
 | [`list_sort(list[, col1][, col2])`](#list_sortlist-col1-col2) | Sorts the elements of the list. See the [Sorting Lists](#sorting-lists) section for more details about sorting order and `NULL` values. |
-| [`list_stddev_pop(list)`](#list_stddev_poplist) | Applies aggregate function `[stddev_pop]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_stddev_samp(list)`](#list_stddev_samplist) | Applies aggregate function `[stddev_samp]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_string_agg(list)`](#list_string_agglist) | Applies aggregate function `[string_agg]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_sum(list)`](#list_sumlist) | Applies aggregate function `[sum]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_stddev_pop(list)`](#list_stddev_poplist) | Applies aggregate function [`stddev_pop`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_stddev_samp(list)`](#list_stddev_samplist) | Applies aggregate function [`stddev_samp`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_string_agg(list)`](#list_string_agglist) | Applies aggregate function [`string_agg`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_sum(list)`](#list_sumlist) | Applies aggregate function [`sum`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_transform(list, lambda(x))`](#list_transformlist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
 | [`list_unique(list)`](#list_uniquelist) | Counts the unique elements of a `list`. |
 | [`list_value(arg, ...)`](#list_valuearg-) | Creates a LIST containing the argument values. |
-| [`list_var_pop(list)`](#list_var_poplist) | Applies aggregate function `[var_pop]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
-| [`list_var_samp(list)`](#list_var_samplist) | Applies aggregate function `[var_samp]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| [`list_var_pop(list)`](#list_var_poplist) | Applies aggregate function [`var_pop`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_var_samp(list)`](#list_var_samplist) | Applies aggregate function [`var_samp`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_where(value_list, mask_list)`](#list_wherevalue_list-mask_list) | Returns a list with the `BOOLEAN`s in `mask_list` applied as a mask to the `value_list`. |
 | [`list_zip(list_1, ..., list_n[, truncate])`](#list_ziplist_1--list_n-truncate) | Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
 | [`range(start[, stop][, step])`](#rangestart-stop-step) | Creates a list of values between `start` and `stop` - the stop parameter is exclusive. |
@@ -162,7 +162,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Extracts a sublist using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. See [slicing]({% link docs/preview/sql/functions/list.md %}#slicing). |
+| **Description** | Extracts a sublist using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | **Example** | `[4, 5, 6][3]`{:.language-sql .highlight} |
 | **Result** | `6` |
 | **Alias** | `list_slice` |
@@ -216,7 +216,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`](#concatvalue-) and [`list_concat(list1, list2)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist1-list2). |
+| **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`]({% link docs/preview/sql/functions/text.md %}#concatvalue-) and [`list_concat(list1, list2, ...)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist_1--list_n). |
 | **Example 1** | `'Duck' || 'DB'`{:.language-sql .highlight} |
 | **Result** | `DuckDB` |
 | **Example 2** | `[1, 2, 3] || [4, 5, 6]`{:.language-sql .highlight} |
@@ -287,11 +287,11 @@ title: List Functions
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `array_concat`, `list_cat`, `list_concat` |
 
-#### `array_cat(list1, ..., listn)`
+#### `array_cat(list_1, ..., list_n)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also ||. |
+| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | **Example** | `array_cat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `list_cat`, `array_concat`, `list_concat` |
@@ -305,11 +305,11 @@ title: List Functions
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `array_cat`, `list_cat`, `list_concat` |
 
-#### `array_concat(list1, ..., listn)`
+#### `array_concat(list_1, ..., list_n)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also ||. |
+| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | **Example** | `array_concat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `list_cat`, `array_cat`, `list_concat` |
@@ -639,9 +639,11 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates multiple strings, lists, or blobs. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `concat('Hello', ' ', 'World')`{:.language-sql .highlight} |
+| **Description** | Concatenates multiple strings or lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
+| **Example 1** | `concat('Hello', ' ', 'World')`{:.language-sql .highlight} |
 | **Result** | `Hello World` |
+| **Example 2** | `concat([1, 2, 3], NULL, [4, 5, 6])`{:.language-sql .highlight} |
+| **Result** | `[1, 2, 3, 4, 5, 6]` |
 
 #### `contains(list, element)`
 
@@ -725,7 +727,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[any_value]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`any_value`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_any_value([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `3` |
 
@@ -751,7 +753,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[approx_count_distinct]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`approx_count_distinct`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_approx_count_distinct([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `2` |
 
@@ -759,7 +761,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[avg]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`avg`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_avg([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `5.0` |
 
@@ -767,7 +769,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[bit_and]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`bit_and`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_bit_and([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `1` |
 
@@ -775,7 +777,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[bit_or]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`bit_or`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_bit_or([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `11` |
 
@@ -783,7 +785,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[bit_xor]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`bit_xor`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_bit_xor([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `9` |
 
@@ -791,7 +793,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[bool_and]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`bool_and`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_bool_and([true, false])`{:.language-sql .highlight} |
 | **Result** | `false` |
 
@@ -799,7 +801,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[bool_or]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`bool_or`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_bool_or([true, false])`{:.language-sql .highlight} |
 | **Result** | `true` |
 
@@ -812,20 +814,20 @@ title: List Functions
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `array_cat`, `array_concat`, `list_concat` |
 
-#### `list_cat(list1, ..., listn)`
+#### `list_cat(list_1, ..., list_n)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also ||. |
+| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | **Example** | `list_cat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `array_concat`, `array_cat`, `list_concat` |
 
-#### `list_concat(list1, ..., listn)`
+#### `list_concat(list_1, ..., list_n)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also ||. |
+| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | **Example** | `list_concat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `list_cat`, `array_concat`, `array_cat` |
@@ -860,7 +862,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[count]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`count`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_count([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `3` |
 
@@ -904,7 +906,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[entropy]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`entropy`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_entropy([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `0.9182958340544893` |
 
@@ -930,7 +932,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[first]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`first`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_first([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `3` |
 
@@ -974,7 +976,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[histogram]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`histogram`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_histogram([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `{3=2, 9=1}` |
 
@@ -1009,7 +1011,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[kurtosis]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`kurtosis`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_kurtosis([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `NULL` |
 
@@ -1017,7 +1019,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[kurtosis_pop]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`kurtosis_pop`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_kurtosis_pop([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `-1.4999999999999978` |
 
@@ -1025,7 +1027,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[last]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`last`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_last([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `9` |
 
@@ -1033,7 +1035,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[mad]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`mad`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_mad([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `0.0` |
 
@@ -1041,7 +1043,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[max]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`max`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_max([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `9` |
 
@@ -1049,7 +1051,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[median]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`median`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_median([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `3.0` |
 
@@ -1057,7 +1059,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[min]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`min`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_min([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `3` |
 
@@ -1065,7 +1067,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[mode]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`mode`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_mode([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `3` |
 
@@ -1118,7 +1120,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[product]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`product`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_product([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `81.0` |
 
@@ -1171,7 +1173,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[sem]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`sem`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_sem([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `1.6329931618554523` |
 
@@ -1179,7 +1181,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[skewness]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`skewness`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_skewness([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `1.7320508075688796` |
 
@@ -1214,7 +1216,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[stddev_pop]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`stddev_pop`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_stddev_pop([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `2.8284271247461903` |
 
@@ -1222,7 +1224,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[stddev_samp]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`stddev_samp`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_stddev_samp([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `3.4641016151377544` |
 
@@ -1230,7 +1232,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[string_agg]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`string_agg`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_string_agg([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `3,3,9` |
 
@@ -1238,7 +1240,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[sum]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`sum`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_sum([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `15` |
 
@@ -1273,7 +1275,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[var_pop]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`var_pop`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_var_pop([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `8.0` |
 
@@ -1281,7 +1283,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Applies aggregate function `[var_samp]({% link docs/preview/sql/functions/aggregates.md %})` to the `list`. |
+| **Description** | Applies aggregate function [`var_samp`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_var_samp([3,3,9])`{:.language-sql .highlight} |
 | **Result** | `12.0` |
 
