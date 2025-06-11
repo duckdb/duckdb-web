@@ -26,7 +26,7 @@ Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/ev
 | Time  | Title   | Presenter(s) | Slides |
 |------:|:--------|:-------------|--------|
 | 18:00 | _Venue opens_ | | |
-| 18:15 | **[Ducklake: A modern data platform combining DuckDB with the governance capabilities of Unity Catalog](https://youtu.be/1oAxSHfwo_g)** | Daniel Tom and Frank Mbonu _([Xebia](https://xebia.com/))_ | [pdf](https://blobs.duckdb.org/events/duckdb-amsterdam-meetup2/diederik-greveling-frank-mbonu-xebia-ducklake.pdf) |
+| 18:15 | **[A modern data platform combining DuckDB with the governance capabilities of Unity Catalog](https://youtu.be/1oAxSHfwo_g)** | Daniel Tom and Frank Mbonu _([Xebia](https://xebia.com/))_ | [pdf](https://blobs.duckdb.org/events/duckdb-amsterdam-meetup2/diederik-greveling-frank-mbonu-xebia-ducklake.pdf) |
 | 18:40 | **[Using DuckDB in a spreadsheet with WASM](https://youtu.be/38PUtuDM4oU)** | Chris Laffra _([PySheets](https://pysheets.app/))_ | [pdf](https://blobs.duckdb.org/events/duckdb-amsterdam-meetup2/chris-laffra-pysheets-quack-by-example-duckdb-in-a-spreadsheet-with-wasm.pdf) |
 | 19:05 | **[Building a Postgres Data Warehouse using DuckDB](https://youtu.be/iQaXD2YeKNI)** | Marco Slot _([Crunchy Data](https://www.crunchydata.com/))_ | [pdf](https://blobs.duckdb.org/events/duckdb-amsterdam-meetup2/marco-slot-crunchy-data-building-a-postgres-data-warehouse-using-duckdb.pdf) |
 | 19:30 | _Drinks and snacks by [Xebia](https://xebia.com/)_ | | |

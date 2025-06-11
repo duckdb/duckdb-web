@@ -45,4 +45,4 @@ USE test;
 SHOW TABLES;
 ```
 
-For more information see the [SQLite extension documentation]({% link docs/stable/extensions/sqlite.md %}).
+For more information see the [SQLite extension documentation]({% link docs/stable/core_extensions/sqlite.md %}).

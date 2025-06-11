@@ -42,10 +42,18 @@ Note that larger-than-memory workloads can be processed both in persistent mode 
 
 ### Local Disk
 
+**Disk type.**
 DuckDB's disk-based mode is designed to work best with SSD and NVMe disks. While HDDs are supported, they will result in low performance, especially for write operations.
 
+**Disk-based vs. in-memory storage.**
 Counter-intuitively, using a disk-based DuckDB instance can be faster than an in-memory instance due to compression.
 Read more in the [“How to Tune Workloads” page]({% link docs/stable/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
+
+**File systems.**
+On Linux, [DuckDB performs best with the XFS file system](https://www.phoronix.com/review/linux-615-filesystems/5) but it also performs reasonably well with other file systems such as ext4.
+On Windows, we recommend using NTFS and avoiding FAT32.
+
+> Note that DuckDB databases have built-in checksums, so integrity checks from the file system are not required to prevent data corruption.
 
 ### Network-Attached Disks
 
@@ -66,8 +74,20 @@ as well as spurious errors cased by the underlying file system.
 
 ## Operating System
 
-We recommend using the latest stable version of operating systems: macOS, Windows, and Linux are all well-tested and DuckDB can run on them with high performance. Among Linux distributions, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
+We recommend using the latest stable version of operating systems: macOS, Windows, and Linux are all well-tested and DuckDB can run on them with high performance.
+
+### Linux
+
+DuckDB runs on all mainstream Linux distributions released in the last ≈5 years.
+If you don't have a particular preference, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
+
+#### glibc vs. musl libc
+
+DuckDB can be built with both [glibc](https://www.gnu.org/software/libc/) (default) and [musl libc](https://www.musl-libc.org/) (see the [build guide]({% link docs/stable/dev/building/linux.md %})).
+However, note that DuckDB binaries built with musl libc have lower performance.
+In practice, this can lead to a slowdown of more than 5× on compute-intensive workloads.
+Therefore, it's recommended to use a Linux distribution with glibc for performance-oriented workloads when running DuckDB.
 
 ## Memory Allocator
 
-If you have a many-core CPU running on a system where DuckDB ships with [`jemalloc`]({% link docs/stable/extensions/jemalloc.md %}) as the default memory allocator, consider [enabling the allocator's background threads]({% link docs/stable/extensions/jemalloc.md %}#background-threads).
+If you have a many-core CPU running on a system where DuckDB ships with [`jemalloc`]({% link docs/stable/core_extensions/jemalloc.md %}) as the default memory allocator, consider [enabling the allocator's background threads]({% link docs/stable/core_extensions/jemalloc.md %}#background-threads).

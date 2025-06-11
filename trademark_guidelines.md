@@ -1,7 +1,8 @@
 ---
 layout: default
-body_class: tmguidelines
 title: DUCKDB™ Trademark use guidelines
+body_class: tmguidelines
+max_page_width: small
 ---
 
 <div class="wrap pagetitle">

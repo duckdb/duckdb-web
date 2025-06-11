@@ -45,7 +45,7 @@ CREATE TABLE tbl_description AS SELECT * FROM (DESCRIBE tbl);
 
 ## Describing Remote Tables
 
-It is possible to describe remote tables via the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) using the `DESCRIBE TABLE` statement. For example:
+It is possible to describe remote tables via the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) using the `DESCRIBE TABLE` statement. For example:
 
 ```sql
 DESCRIBE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';

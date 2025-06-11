@@ -91,7 +91,7 @@ To append to an existing Hive partitioned directory structure, use the `APPEND` 
 
 ```sql
 COPY orders TO 'orders'
-(FORMAT PARQUET, PARTITION_BY (year, month), APPEND);
+(FORMAT parquet, PARTITION_BY (year, month), APPEND);
 ```
 
 Using the `APPEND` option result in a behavior similar the `OVERWRITE_OR_IGNORE, FILENAME_PATTERN '{uuid}'` options,
@@ -99,4 +99,4 @@ but DuckDB performs an extra check for whether the file already exists and then 
 
 ### Handling Slashes in Columns
 
-To handle slashes in column names, use Percent-Encoding implemented by the [`url_encode` function]({% link docs/stable/sql/functions/char.md %}#url_encodestring).
+To handle slashes in column names, use Percent-Encoding implemented by the [`url_encode` function]({% link docs/stable/sql/functions/text.md %}#url_encodestring).

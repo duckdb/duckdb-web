@@ -1,11 +1,16 @@
 ---
-layout: docu
+layout: default
 title: Frequently Asked Questions
+body_class: faq
 ---
 
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
+
+<div class="wrap pagetitle">
+  <h1>Frequently Asked Questions</h1>
+</div>
 
 ## Overview
 
@@ -136,7 +141,7 @@ The following projects are officially affiliated with DuckDB:
 
 * the [DuckDB project](https://github.com/duckdb/duckdb)
 * all primary [client libraries]({% link docs/stable/clients/overview.md %})
-* all [core DuckDB extensions]({% link docs/stable/extensions/core_extensions.md %})
+* all [core DuckDB extensions]({% link docs/stable/core_extensions/overview.md %})
 * the [DuckDB UI](https://github.com/duckdb/duckdb-ui)
 * [MotherDuck](https://motherduck.com)
 * [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb)
@@ -156,7 +161,7 @@ Other projects are likely _not affiliated_ with the DuckDB project. Please check
 
 <div class="answer" markdown="1">
 
-Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/stable/extensions/core_extensions.md %}) or a [community extension]({% link community_extensions/index.md %}). If you have a feature request for DuckDB, please follow these guidelines:
+Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/stable/core_extensions/overview.md %}) or a [community extension]({% link community_extensions/index.md %}). If you have a feature request for DuckDB, please follow these guidelines:
 
 * If you have a feature idea, please raise an issue in the [“Ideas” section in DuckDB's GitHub Discussions](https://github.com/duckdb/duckdb/discussions/categories/ideas). The DuckDB team monitors these ideas and, over time, implements the frequently requested features. For example, we recently published the [Avro Community Extension]({% link community_extensions/extensions/avro.md %}) to support reading Avro files, which was the most requested feature in the issue tracker.
 * If you would like to implement a feature in the main DuckDB project, please discuss it with the DuckDB team on GitHub Discussions or on [our Discord server](https://discord.duckdb.org/). The team can verify whether the idea and the proposed implementation line up with the project's long-term vision.
@@ -185,6 +190,7 @@ Please note that DuckDB Labs, the company that employs the main DuckDB contribut
 DuckDB supports [persistent storage]({% link docs/stable/connect/overview.md %}#persistent-database) and stores the database as a single file, which includes all tables, views, indexes, macros, etc. present in the database.
 DuckDB's [storage format]({% link docs/stable/internals/storage.md %}) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
 DuckDB can also run in [in-memory mode]({% link docs/stable/connect/overview.md %}#in-memory-database), where no data is persisted to disk.
+DuckDB can also save data in [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/stable/core_extensions/ducklake.md %}).
 
 </div>
 
@@ -203,7 +209,7 @@ In general, using SSDs (SATA or NVMe SSDs) leads to superior performance compare
 
 The location of the storage varies greatly depending the workload:
 
-* _For read-only workloads,_ the DuckDB database can be stored on local disks and remote endpoints such as [HTTPS]({% link docs/stable/extensions/httpfs/https.md %}) and cloud object storage such as [AWS S3]({% link docs/stable/extensions/httpfs/s3api.md %}) and similar providers.
+* _For read-only workloads,_ the DuckDB database can be stored on local disks and remote endpoints such as [HTTPS]({% link docs/stable/core_extensions/httpfs/https.md %}) and cloud object storage such as [AWS S3]({% link docs/stable/core_extensions/httpfs/s3api.md %}) and similar providers.
 * _For read-write workloads,_ storing the database on instance-attached storage yields the best performance.
 Network-attached cloud storage such as [AWS EBS](https://aws.amazon.com/ebs/) also works and its performance can be fine-tuned with the guaranteed IOPS settings.
 Based on our experience, we **strongly advise against running DuckDB – or any other database management system – for read-write workloads on [network-attached storage (NAS)](https://en.wikipedia.org/wiki/Network-attached_storage).**
@@ -238,7 +244,7 @@ DuckDB can make use of available memory for caching, it also fully supports disk
 <div class="answer" markdown="1">
 
 DuckDB does not use the [Apache Arrow format](https://arrow.apache.org/) internally.
-However, DuckDB supports reading from and writing to Arrow using the [`arrow` extension]({% link docs/stable/extensions/arrow.md %}).
+However, DuckDB supports reading from and writing to Arrow using the [`arrow` community extension]({% link community_extensions/extensions/arrow.md %}).
 It can also run SQL queries directly on Arrow using [`pyarrow`]({% link docs/stable/guides/python/sql_on_arrow.md %}).
 
 </div>
@@ -270,6 +276,8 @@ Compatibility is also guaranteed between different DuckDB clients (e.g., Python 
 <div class="answer" markdown="1">
 See the documentation on [handling concurrency]({% link docs/stable/connect/concurrency.md %}#handling-concurrency)
 and the section on [“Writing to DuckDB from Multiple Processes”]({% link docs/stable/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
+
+To work on the same data set with multiple DuckDB clients, consider using the [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/stable/core_extensions/ducklake.md %}).
 </div>
 
 </div>
@@ -321,6 +329,26 @@ If you are unsure about the DuckDB version used in a process, run the `PRAGMA ve
 <div class="answer" markdown="1">
 
 DuckDB does not use *explicit SIMD* (single instruction, multiple data) instructions because they greatly complicate portability and compilation. Instead, DuckDB uses *implicit SIMD*, where we go to great lengths to write our C++ code in such a way that the compiler can *auto-generate SIMD instructions* for the specific hardware. As an example why this is a good idea, it took 10 minutes to port DuckDB to the Apple Silicon architecture.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### How does scalability work in DuckDB?
+
+<div class="answer" markdown="1">
+
+DuckDB is a single-node database system, hence it makes use of _vertical scalability,_
+i.e., making use of more resources (CPU, memory, and disk) to support larger datasets.
+DuckDB has been tested on machines with 100+ CPU cores and terabytes of memory.
+
+DuckDB's native database format also scales for multiple terabytes of data but this needs some planning – see the [“Working with Huge Databases” page]({% link docs/stable/guides/performance/working_with_huge_databases.md %}).
+
+For working with large-scale datasets and/or collaborating on the same dataset, consider using the [DuckLake](https://ducklake.select/) lakehouse format.
 
 </div>
 
@@ -389,10 +417,10 @@ for interactive data analysis by a user (“data science”) and
 as pipeline component for automated data processing (“data enginereering”).
 DuckDB can also be deployed in novel architectures, where one traditionally couldn't run an analytical database management system but DuckDB is available thanks to its portability.
 These architectures include running DuckDB in browsers (using the <a href="{% link docs/stable/clients/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
-Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/stable/extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
-<a href="{% link docs/stable/extensions/mysql.md %}">other</a>
-<a href="{% link docs/stable/extensions/postgres.md %}">database</a>
-<a href="{% link docs/stable/extensions/sqlite.md %}">systems</a>.
+Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/stable/core_extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
+<a href="{% link docs/stable/core_extensions/mysql.md %}">other</a>
+<a href="{% link docs/stable/core_extensions/postgres.md %}">database</a>
+<a href="{% link docs/stable/core_extensions/sqlite.md %}">systems</a>.
 And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/05/28/duckdb-doesnt-need-data">doesn't even need data to be a database</a>.
 
 </div>

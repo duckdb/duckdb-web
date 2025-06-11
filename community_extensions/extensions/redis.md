@@ -8,17 +8,18 @@ excerpt: |
 extension:
   name: redis
   description: Redis compatible Client for DuckDB
-  version: 1.0.0
+  version: 1.0.1
   language: C++
   build: cmake
   license: MIT
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - lmangani
+    - gigapi
 
 repo:
   github: quackscience/duckdb-extension-redis
-  ref: 3ce0c3b637a0c9c6aa5090ed4c9f2d37cd32a2f4
+  ref: 03bb83c5d1f50ac9f085f49c6415ccb6d0854517
 
 docs:
   hello_world: |
@@ -72,7 +73,6 @@ docs:
     FROM items;
     
   extended_description: |
-  
     <img src="https://github.com/user-attachments/assets/46a5c546-7e9b-42c7-87f4-bc8defe674e0" width=250 />
 
     # DuckDB Redis Client Extension
@@ -82,16 +82,38 @@ docs:
     
     ## Features
     Currently supported Redis operations:
-    - String operations: `GET`, `SET`
-    - Hash operations: `HGET`, `HSET`
-    - List operations: `LPUSH`, `LRANGE`
-    - Batch operations: `MGET`, `SCAN`
+    - String operations: `GET`, `SET`, `MGET`
+    - Hash operations: `HGET`, `HSET`, `HGETALL`, `HSCAN`, `HSCAN_OVER_SCAN`
+    - List operations: `LPUSH`, `LRANGE`, `LRANGE_TABLE`
+    - Key operations: `DEL`, `EXISTS`, `TYPE`, `SCAN`, `KEYS`
+    - Batch and discovery operations: `SCAN`, `HSCAN_OVER_SCAN`, `KEYS`
+    
+    ## Quick Reference: Available Functions
+    
+    | Function | Type | Description |
+    |----------|------|-------------|
+    | `redis_get(key, secret)` | Scalar | Get value of a string key |
+    | `redis_set(key, value, secret)` | Scalar | Set value of a string key |
+    | `redis_mget(keys_csv, secret)` | Scalar | Get values for multiple keys (comma-separated) |
+    | `redis_hget(key, field, secret)` | Scalar | Get value of a hash field |
+    | `redis_hset(key, field, value, secret)` | Scalar | Set value of a hash field |
+    | `redis_lpush(key, value, secret)` | Scalar | Push value to a list |
+    | `redis_lrange(key, start, stop, secret)` | Scalar | Get range from a list (comma-separated) |
+    | `redis_del(key, secret)` | Scalar | Delete a key (returns TRUE if deleted) |
+    | `redis_exists(key, secret)` | Scalar | Check if a key exists (returns TRUE if exists) |
+    | `redis_type(key, secret)` | Scalar | Get the type of a key |
+    | `redis_scan(cursor, pattern, count, secret)` | Scalar | Scan keys (returns cursor:keys_csv) |
+    | `redis_hscan(key, cursor, pattern, count, secret)` | Scalar | Scan fields in a hash |
+    | `redis_keys(pattern, secret)` | Table | List all keys matching a pattern |
+    | `redis_hgetall(key, secret)` | Table | List all fields and values in a hash |
+    | `redis_lrange_table(key, start, stop, secret)` | Table | List elements in a list as rows |
+    | `redis_hscan_over_scan(scan_pattern, hscan_pattern, count, secret)` | Table | For all keys matching scan_pattern, HSCAN with hscan_pattern, return (key, field, value) rows |
 
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 424
-extension_download_count_pretty: 424
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 435
+extension_download_count_pretty: 435
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'
 layout: community_extension_doc
 ---
@@ -117,15 +139,23 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| redis_get     | scalar        | NULL        | NULL    | []       |
-| redis_hget    | scalar        | NULL        | NULL    | []       |
-| redis_hset    | scalar        | NULL        | NULL    | []       |
-| redis_lpush   | scalar        | NULL        | NULL    | []       |
-| redis_lrange  | scalar        | NULL        | NULL    | []       |
-| redis_mget    | scalar        | NULL        | NULL    | []       |
-| redis_scan    | scalar        | NULL        | NULL    | []       |
-| redis_set     | scalar        | NULL        | NULL    | []       |
+|     function_name     | function_type | description | comment | examples |
+|-----------------------|---------------|-------------|---------|----------|
+| redis_del             | scalar        | NULL        | NULL    |          |
+| redis_exists          | scalar        | NULL        | NULL    |          |
+| redis_get             | scalar        | NULL        | NULL    |          |
+| redis_hget            | scalar        | NULL        | NULL    |          |
+| redis_hgetall         | table         | NULL        | NULL    |          |
+| redis_hscan           | scalar        | NULL        | NULL    |          |
+| redis_hscan_over_scan | table         | NULL        | NULL    |          |
+| redis_hset            | scalar        | NULL        | NULL    |          |
+| redis_keys            | table         | NULL        | NULL    |          |
+| redis_lpush           | scalar        | NULL        | NULL    |          |
+| redis_lrange          | scalar        | NULL        | NULL    |          |
+| redis_lrange_table    | table         | NULL        | NULL    |          |
+| redis_mget            | scalar        | NULL        | NULL    |          |
+| redis_scan            | scalar        | NULL        | NULL    |          |
+| redis_set             | scalar        | NULL        | NULL    |          |
+| redis_type            | scalar        | NULL        | NULL    |          |
 
 

@@ -8,6 +8,9 @@ excerpt: "DuckDB now supports reading Avro files through the `avro` community ex
 tags: ["extensions"]
 ---
 
+> **Update (May 2025):**
+> Avro support is now available as the [`avro` core extension]({% link docs/stable/core_extensions/avro.md %}).
+
 ## The Apache™ Avro™ Format
 
 [Avro](https://avro.apache.org) is a binary format for record data. Like many innovations in the data space, Avro was [developed](https://vimeo.com/7362534) by [Doug Cutting](https://en.wikipedia.org/wiki/Doug_Cutting) as part of the Apache Hadoop project [in around 2009](https://github.com/apache/hadoop/commit/8296413d4988c08343014c6808a30e9d5e441bfc). Avro gets its name – somewhat obscurely – from a defunct [British aircraft manufacturer](https://en.wikipedia.org/wiki/Avro). The company famously built over 7,000 [Avro Lancaster heavy bombers](https://en.wikipedia.org/wiki/Avro_Lancaster) under the challenging conditions of World War 2. But we digress.

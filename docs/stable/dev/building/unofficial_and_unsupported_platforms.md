@@ -50,4 +50,3 @@ GEN=ninja \
 ```
 
 For more reference information on DuckDB RISC-V cross-compiling, see the [mocusez/duckdb-riscv-ci](https://github.com/mocusez/duckdb-riscv-ci) and [DuckDB Pull Request #16549](https://github.com/duckdb/duckdb/pull/16549)
-

@@ -12,7 +12,7 @@ The `INSTALL` statement downloads an extension so it can be loaded into a DuckDB
 
 ### Examples
 
-Install the [`httpfs`]({% link docs/stable/extensions/httpfs/overview.md %}) extension:
+Install the [`httpfs`]({% link docs/stable/core_extensions/httpfs/overview.md %}) extension:
 
 ```sql
 INSTALL httpfs;
@@ -34,13 +34,13 @@ The `LOAD` statement loads an installed DuckDB extension into the current sessio
 
 ### Examples
 
-Load the [`httpfs`]({% link docs/stable/extensions/httpfs/overview.md %}) extension:
+Load the [`httpfs`]({% link docs/stable/core_extensions/httpfs/overview.md %}) extension:
 
 ```sql
 LOAD httpfs;
 ```
 
-Load the [`spatial`]({% link docs/stable/extensions/spatial/overview.md %}) extension:
+Load the [`spatial`]({% link docs/stable/core_extensions/spatial/overview.md %}) extension:
 
 ```sql
 LOAD spatial;

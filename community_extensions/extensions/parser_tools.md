@@ -97,10 +97,10 @@ docs:
     Future versions may expose additional aspects of the parsed query structure.
     For more details and examples, visit the [extension repository](https://github.com/zacMode/duckdb_extension_parser_tools).
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 411
-extension_download_count_pretty: 411
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 435
+extension_download_count_pretty: 435
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
 layout: community_extension_doc
 ---
@@ -128,9 +128,9 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
-| is_parsable       | scalar        | NULL        | NULL    | []       |
-| parse_table_names | scalar        | NULL        | NULL    | []       |
-| parse_tables      | scalar        | NULL        | NULL    | []       |
-| parse_tables      | table         | NULL        | NULL    | []       |
+| is_parsable       | scalar        | NULL        | NULL    |          |
+| parse_table_names | scalar        | NULL        | NULL    |          |
+| parse_tables      | scalar        | NULL        | NULL    |          |
+| parse_tables      | table         | NULL        | NULL    |          |
 
 

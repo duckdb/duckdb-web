@@ -12,7 +12,7 @@ title: Node.js API
 > Deprecated The old DuckDB Node.js package is deprecated.
 > Please use the [DuckDB Node Neo package]({% link docs/stable/clients/node_neo/overview.md %}) instead.
 
-This package provides a Node.js API for DuckDB.
+The [`duckdb`](https://www.npmjs.com/package/duckdb) package provides a Node.js API for DuckDB.
 The API for this client is somewhat compliant to the SQLite Node.js client for easier transition.
 
 ## Initializing
@@ -173,7 +173,7 @@ db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
 
 ## Loading Unsigned Extensions
 
-To load [unsigned extensions]({% link docs/stable/extensions/overview.md %}#unsigned-extensions), instantiate the database as follows:
+To load [unsigned extensions]({% link docs/stable/core_extensions/overview.md %}#unsigned-extensions), instantiate the database as follows:
 
 ```js
 db = new duckdb.Database(':memory:', {"allow_unsigned_extensions": "true"});

@@ -46,11 +46,4 @@ Alternatively, the `COPY` statement can also be used to load data from a CSV fil
 COPY tbl FROM 'input.csv';
 ```
 
-To load data into an existing table where the table has more columns than the CSV file, you can use the [`INSERT INTO ... BY NAME` clause]({% link docs/stable/sql/statements/insert.md %}#insert-into--by-name):
-
-```sql
-INSERT INTO tbl BY NAME
-    SELECT * FROM read_csv('input.csv');
-```
-
 For additional options, see the [CSV import reference]({% link docs/stable/data/csv/overview.md %}) and the [`COPY` statement documentation]({% link docs/stable/sql/statements/copy.md %}).

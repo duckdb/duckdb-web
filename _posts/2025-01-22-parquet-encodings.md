@@ -72,15 +72,15 @@ CALL dbgen(sf = 1);
 
 -- Export to Parquet using Snappy compression
 COPY lineitem TO 'snappy_v1.parquet'
-    (COMPRESSION snappy, PARQUET_VERSION v1); -- 244 MB, ~0.46s
+    (COMPRESSION snappy, PARQUET_VERSION v1); -- 244 MB, ~0.46 s
 COPY lineitem TO 'snappy_v2.parquet'
-    (COMPRESSION snappy, PARQUET_VERSION v2); -- 170 MB, ~0.39s
+    (COMPRESSION snappy, PARQUET_VERSION v2); -- 170 MB, ~0.39 s
 
 -- Export to Parquet using zstd compression
 COPY lineitem TO 'zstd_v1.parquet'
-    (COMPRESSION zstd, PARQUET_VERSION v1); -- 152 MB, ~0.58s
+    (COMPRESSION zstd, PARQUET_VERSION v1); -- 152 MB, ~0.58 s
 COPY lineitem TO 'zstd_v2.parquet'
-    (COMPRESSION zstd, PARQUET_VERSION v2); -- 135 MB, ~0.44s
+    (COMPRESSION zstd, PARQUET_VERSION v2); -- 135 MB, ~0.44 s
 ```
 
 When using [Snappy](https://github.com/google/snappy), DuckDB's default page compression algorithm for Parquet, which focuses mostly on speed, not compression ratio, the file is ~30% smaller and writing is ~15% faster with the encodings enabled.
@@ -91,8 +91,8 @@ Here are some more extreme examples:
 
 ```sql
 CREATE TABLE range AS FROM range(1e9::BIGINT);
-COPY range TO 'v1.parquet' (PARQUET_VERSION v1); -- 3.7 GB, ~2.96s
-COPY range TO 'v2.parquet' (PARQUET_VERSION v2); -- 1.3 MB, ~1.68s
+COPY range TO 'v1.parquet' (PARQUET_VERSION v1); -- 3.7 GB, ~2.96 s
+COPY range TO 'v2.parquet' (PARQUET_VERSION v2); -- 1.3 MB, ~1.68 s
 ```
 
 The integer sequence 0, 1, 2, ... compresses extremely well with `DELTA_BINARY_PACKED`.
@@ -103,8 +103,8 @@ Nonetheless, if there is a pattern, the data will compress quite well:
 
 ```sql
 CREATE TABLE range AS SELECT range / 1e9 FROM range(1e9::BIGINT);
-COPY range TO 'v1.parquet' (PARQUET_VERSION v1); -- 6.3 GB, ~3.83s
-COPY range TO 'v2.parquet' (PARQUET_VERSION v2); -- 610 MB, ~2.63s
+COPY range TO 'v1.parquet' (PARQUET_VERSION v1); -- 6.3 GB, ~3.83 s
+COPY range TO 'v2.parquet' (PARQUET_VERSION v2); -- 610 MB, ~2.63 s
 ```
 
 This sequence compresses really well with `BYTE_STREAM_SPLIT`.

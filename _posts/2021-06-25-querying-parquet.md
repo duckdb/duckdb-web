@@ -76,7 +76,7 @@ To illustrate how effective these automatic optimizations are, we will run a num
 
 In these queries, we use a part of the infamous New York Taxi dataset stored as Parquet files, specifically data from April, May and June 2019. These files are ca. 360 MB in size together and contain around 21 million rows of 18 columns each. The three files are placed into the `taxi/` folder.
 
-The examples are available [here as an interactive notebook over at Google Colab](https://colab.research.google.com/drive/1e1beWqYOcFidKl2IxHtxT5s9i_6KYuNY). The timings reported here are from this environment for reproducibility.
+The examples are available as [an interactive notebook over at Google Colab](https://colab.research.google.com/drive/1e1beWqYOcFidKl2IxHtxT5s9i_6KYuNY). The timings reported here are from this environment for reproducibility.
 
 ## Reading Multiple Parquet Files
 
@@ -220,7 +220,7 @@ len(pandas.read_parquet('alltaxi.parquet')
           .query("pickup_at > '2019-06-30'"))
 ```
 
-This again reads the entire file into memory, however, causing this query to take `7.5s`. With the manual projection pushdown we can bring this down to `0.9s`. Still significantly higher than DuckDB.
+This again reads the entire file into memory, however, causing this query to take 7.5 s. With the manual projection pushdown we can bring this down to 0.9 s. Still significantly higher than DuckDB.
 
 ```python
 # pandas projection pushdown

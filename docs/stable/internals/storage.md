@@ -21,7 +21,7 @@ _Forward compatibility_ refers to the ability of an older DuckDB version to read
 
 Forward compatibility is provided on a **best effort** basis. While stability of the storage format is important – there are still many improvements and innovations that we want to make to the storage format in the future. As such, forward compatibility may be (partially) broken on occasion.
 
-## How to Move Between Storage Formats
+## How to Move between Storage Formats
 
 When you update DuckDB and open an old database file, you might encounter an error message about incompatible storage formats, pointing to this page.
 To move your database(s) to newer format you only need the older and the newer DuckDB executable.
@@ -72,7 +72,7 @@ This shows the storage versions:
 
 This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
 
-### Converting Between Storage Versions
+### Converting between Storage Versions
 
 To convert from the new format to the old format for compatibility, use the following sequence in DuckDB v1.2.0+:
 
@@ -114,6 +114,7 @@ To see the commits that changed each storage version, see the [commit log](https
 
 | Storage version | DuckDB version(s)               |
 |----------------:|---------------------------------|
+| 66              | v1.3.x                          |
 | 65              | v1.2.x                          |
 | 64              | v0.9.x, v0.10.x, v1.0.0, v1.1.x |
 | 51              | v0.8.x                          |

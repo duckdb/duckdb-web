@@ -2,8 +2,8 @@
 layout: post
 title: "Creating a SQL-Only Extension for Excel-Style Pivoting in DuckDB"
 author: "Alex Monahan"
-thumb: "/images/blog/thumbs/240927.svg"
-image: "/images/blog/thumbs/240927.png"
+thumb: "/images/blog/thumbs/dynamic-sql.svg"
+image: "/images/blog/thumbs/dynamic-sql.png"
 excerpt: "Easily create sharable extensions using only SQL macros that can apply to any table and any columns. We demonstrate the power of this capability with the pivot_table extension that provides Excel-style pivoting."
 tags: ["extensions"]
 ---
@@ -73,7 +73,7 @@ To achieve this level of flexibility, the `pivot_table` extension uses many frie
     * [`list_transform`]({% link docs/stable/sql/functions/lambda.md %}#list_transformlist-lambda) for string manipulation like quoting
     * [`list_reduce`]({% link docs/stable/sql/functions/lambda.md %}#list_reducelist-lambda) to concatenate strings together
     * [`list_aggregate`]({% link docs/stable/sql/functions/list.md %}#list_aggregatelist-name) to sum multiple columns and identify subtotal and grand total rows
-* [Bracket notation for string slicing]({% link docs/stable/sql/functions/char.md %}#stringbeginend)
+* [Bracket notation for string slicing]({% link docs/stable/sql/functions/text.md %}#stringbeginend)
 * [`UNION ALL BY NAME`]({% link docs/stable/sql/query_syntax/setops.md %}#union-all-by-name) to stack data by column name for subtotals and grand totals
 * [`SELECT * REPLACE`]({% link docs/stable/sql/expressions/star.md %}#replace-clause) to dynamically clean up subtotal columns
 * [`SELECT * EXCLUDE`]({% link docs/stable/sql/expressions/star.md %}#exclude-clause) to remove internally generated columns from the final result
@@ -213,7 +213,7 @@ NULL
 
 Now, just add, commit, and push your changes to GitHub like before, and GitHub Actions will compile your extension and test it!
 
-If you would like to do further ad-hoc testing of your extension, you can download the extension from your GitHub Actions run's artifacts and then [install it locally using these steps]({% link docs/stable/extensions/overview.md %}#unsigned-extensions).
+If you would like to do further ad-hoc testing of your extension, you can download the extension from your GitHub Actions run's artifacts and then [install it locally using these steps]({% link docs/stable/core_extensions/overview.md %}#unsigned-extensions).
 
 ### Uploading to the Community Extensions Repository
 

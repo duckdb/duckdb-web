@@ -18,7 +18,7 @@ extension:
   # (Optional) param that specifies required extra toolchains
   requires_toolchains: "rust"
   # (Optional) param that specifies a precise vcpkg commit to use
-  vcpkg_commit: "5e5d0e1cd7785623065e77eff011afdeec1a3574"
+  vcpkg_commit: "ce613c41372b23b1f51333815feb3edd87ef8a8b"
   # (Optional) this extension requires additional custom toolchain setup
   custom_toolchain_script: true
 
@@ -32,10 +32,10 @@ docs:
   extended_description: |
     The quack extension is based on DuckDB's [Extension Template](https://github.com/duckdb/extension-template/), and it's a great starting point to get started building more advanced extensions.
 
-extension_star_count: 191
-extension_star_count_pretty: 191
-extension_download_count: 521
-extension_download_count_pretty: 521
+extension_star_count: 198
+extension_star_count_pretty: 198
+extension_download_count: 540
+extension_download_count_pretty: 540
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---
@@ -63,7 +63,7 @@ LOAD {{ page.extension.name }};
 
 |     function_name     | function_type | description | comment | examples |
 |-----------------------|---------------|-------------|---------|----------|
-| quack                 | scalar        | NULL        | NULL    | []       |
-| quack_openssl_version | scalar        | NULL        | NULL    | []       |
+| quack                 | scalar        | NULL        | NULL    |          |
+| quack_openssl_version | scalar        | NULL        | NULL    |          |
 
 

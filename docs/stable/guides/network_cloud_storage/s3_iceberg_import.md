@@ -10,7 +10,7 @@ title: S3 Iceberg Import
 
 ## Prerequisites
 
-To load an Iceberg file from S3, both the [`httpfs`]({% link docs/stable/extensions/httpfs/overview.md %}) and [`iceberg`]({% link docs/stable/extensions/iceberg/overview.md %}) extensions are required. They can be installed using the `INSTALL` SQL command. The extensions only need to be installed once.
+To load an Iceberg file from S3, both the [`httpfs`]({% link docs/stable/core_extensions/httpfs/overview.md %}) and [`iceberg`]({% link docs/stable/core_extensions/iceberg/overview.md %}) extensions are required. They can be installed using the `INSTALL` SQL command. The extensions only need to be installed once.
 
 ```sql
 INSTALL httpfs;
@@ -37,7 +37,7 @@ CREATE SECRET (
 );
 ```
 
-Alternatively, use the [`aws` extension]({% link docs/stable/extensions/aws.md %}) to retrieve the credentials automatically:
+Alternatively, use the [`aws` extension]({% link docs/stable/core_extensions/aws.md %}) to retrieve the credentials automatically:
 
 ```sql
 CREATE SECRET (

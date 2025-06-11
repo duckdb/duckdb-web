@@ -46,8 +46,8 @@ docs:
     *Note:* Current limitations include inability of the WASM version to parse `https` hosted files and that pbix_read() will decompress the entire model in memory.
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 449
-extension_download_count_pretty: 449
+extension_download_count: 462
+extension_download_count_pretty: 462
 image: '/images/community_extensions/social_preview/preview_community_extension_pbix.png'
 layout: community_extension_doc
 ---
@@ -75,8 +75,8 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| pbix_meta     | table         | NULL        | NULL    | []       |
-| pbix_read     | table         | NULL        | NULL    | []       |
+| pbix_meta     | table         | NULL        | NULL    |          |
+| pbix_read     | table         | NULL        | NULL    |          |
 
 ### Added Settings
 

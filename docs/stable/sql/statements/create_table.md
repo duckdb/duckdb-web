@@ -123,7 +123,7 @@ CREATE TABLE nums AS
     FROM range(0, 3) t(i);
 ```
 
-This syntax can be used in combination with the [CSV reader]({% link docs/stable/data/csv/overview.md %}), the shorthand to read directly from CSV files without specifying a function, the [`FROM`-first syntax]({% link docs/stable/sql/query_syntax/from.md %}), and the [HTTP(S) support]({% link docs/stable/extensions/httpfs/https.md %}), yielding concise SQL commands such as the following:
+This syntax can be used in combination with the [CSV reader]({% link docs/stable/data/csv/overview.md %}), the shorthand to read directly from CSV files without specifying a function, the [`FROM`-first syntax]({% link docs/stable/sql/query_syntax/from.md %}), and the [HTTP(S) support]({% link docs/stable/core_extensions/httpfs/https.md %}), yielding concise SQL commands such as the following:
 
 ```sql
 CREATE TABLE flights AS
@@ -140,6 +140,14 @@ CREATE OR REPLACE TABLE flights AS
 ### Copying the Schema
 
 You can create a copy of the table's schema (column names and types only) as follows:
+
+```sql
+CREATE TABLE t1 AS
+    FROM t2
+    WITH NO DATA;
+```
+
+Or:
 
 ```sql
 CREATE TABLE t1 AS

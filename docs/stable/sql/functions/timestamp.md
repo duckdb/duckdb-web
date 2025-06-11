@@ -43,7 +43,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of `date_sub`. The number of complete [partitions]({% link docs/stable/sql/functions/datepart.md %}) between the timestamps. |
 | [`datetrunc(part, timestamp)`](#datetruncpart-timestamp) | Alias of `date_trunc`. Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
 | [`dayname(timestamp)`](#daynametimestamp) | The (English) name of the weekday. |
-| [`epoch_ms(ms)`](#epoch_msms) | Converts integer milliseconds since the epoch to a timestamp. |
+| [`epoch_ms(ms)`](#epoch_msms) | Converts milliseconds since the epoch to a timestamp. |
 | [`epoch_ms(timestamp)`](#epoch_mstimestamp) | Returns the total number of milliseconds since the epoch. |
 | [`epoch_ns(timestamp)`](#epoch_nstimestamp) | Returns the total number of nanoseconds since the epoch. |
 | [`epoch_us(timestamp)`](#epoch_ustimestamp) | Returns the total number of microseconds since the epoch. |
@@ -52,10 +52,12 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`greatest(timestamp, timestamp)`](#greatesttimestamp-timestamp) | The later of two timestamps. |
 | [`isfinite(timestamp)`](#isfinitetimestamp) | Returns true if the timestamp is finite, false otherwise. |
 | [`isinf(timestamp)`](#isinftimestamp) | Returns true if the timestamp is infinite, false otherwise. |
+| [`julian(timestamp)`](#juliantimestamp) | Extract the Julian Day number from a timestamp. |
 | [`last_day(timestamp)`](#last_daytimestamp) | The last day of the month. |
 | [`least(timestamp, timestamp)`](#leasttimestamp-timestamp) | The earlier of two timestamps. |
 | [`make_timestamp(bigint, bigint, bigint, bigint, bigint, double)`](#make_timestampbigint-bigint-bigint-bigint-bigint-double) | The timestamp for the given parts. |
-| [`make_timestamp(microseconds)`](#make_timestampmicroseconds) | Converts integer microseconds since the epoch to a timestamp. |
+| [`make_timestamp(microseconds)`](#make_timestampmicroseconds) | Converts microseconds since the epoch to a timestamp. |
+| [`make_timestamp_ns(nanoseconds)`](#make_timestamp_nsnanoseconds) | Converts nanoseconds since the epoch to a timestamp. |
 | [`monthname(timestamp)`](#monthnametimestamp) | The (English) name of the month. |
 | [`strftime(timestamp, format)`](#strftimetimestamp-format) | Converts timestamp to string according to the [format string]({% link docs/stable/sql/functions/dateformat.md %}#format-specifiers). |
 | [`strptime(text, format-list)`](#strptimetext-format-list) | Converts the string `text` to timestamp applying the [format strings]({% link docs/stable/sql/functions/dateformat.md %}) in the list until one succeeds. Throws an error on failure. To return `NULL` on failure, use [`try_strptime`](#try_strptimetext-format-list). |
@@ -195,7 +197,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts integer milliseconds since the epoch to a timestamp. |
+| **Description** | Converts milliseconds since the epoch to a timestamp. |
 | **Example** | `epoch_ms(701222400000)` |
 | **Result** | `1992-03-22 00:00:00` |
 
@@ -263,6 +265,14 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Example** | `isinf(TIMESTAMP '-infinity')` |
 | **Result** | `true` |
 
+#### `julian(timestamp)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Extract the Julian Day number from a timestamp. |
+| **Example** | `julian(TIMESTAMP '1992-03-22 01:02:03.1234')` |
+| **Result** | `2448704.043091706` |
+
 #### `last_day(timestamp)`
 
 <div class="nostroke_table"></div>
@@ -291,9 +301,17 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts integer microseconds since the epoch to a timestamp. |
+| **Description** | Converts microseconds since the epoch to a timestamp. |
 | **Example** | `make_timestamp(1667810584123456)` |
 | **Result** | `2022-11-07 08:43:04.123456` |
+
+#### `make_timestamp_ns(nanoseconds)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts nanoseconds since the epoch to a timestamp. |
+| **Example** | `make_timestamp_ns(1667810584123456789)` |
+| **Result** | `2022-11-07 08:43:04.123456789` |
 
 #### `monthname(timestamp)`
 

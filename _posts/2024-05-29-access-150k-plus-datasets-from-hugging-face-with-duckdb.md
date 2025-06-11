@@ -2,8 +2,8 @@
 layout: post
 title: "Access 150k+ Datasets from Hugging Face with DuckDB"
 author: The Hugging Face and DuckDB teams
-thumb: "/images/blog/thumbs/240529.svg"
-image: "/images/blog/thumbs/240529.png"
+thumb: "/images/blog/thumbs/hugging-face.svg"
+image: "/images/blog/thumbs/hugging-face.png"
 excerpt: "DuckDB can now read data from [Hugging Face](https://huggingface.co/) via the `hf://` prefix."
 tags: ["extensions"]
 ---
@@ -25,7 +25,7 @@ A typical repository looks like this:
 
 ## Read Using `hf://` Paths
 
-You often need to read files in various formats (such as CSV, JSONL, and Parquet) when working with data. As of version v0.10.3, DuckDB has native support for `hf://` paths as part of the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}), allowing easy access to all these formats.
+You often need to read files in various formats (such as CSV, JSONL, and Parquet) when working with data. As of version v0.10.3, DuckDB has native support for `hf://` paths as part of the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}), allowing easy access to all these formats.
 
 Now, it is possible to query them using the URL pattern below:
 

@@ -27,7 +27,7 @@ Using sorting will be helpful in any of these situations:
 - You access your data via HTTP(S)
 - Your data lives in the cloud on object storage such as AWS S3
 
-This overview describes the DuckDB file format, but thanks to DuckDB's [partial reading support]({% link docs/stable/extensions/httpfs/https.md %}#partial-reading), these techniques can be generally applied to nearly any columnar file format or database.
+This overview describes the DuckDB file format, but thanks to DuckDB's [partial reading support]({% link docs/stable/core_extensions/httpfs/https.md %}#partial-reading), these techniques can be generally applied to nearly any columnar file format or database.
 This is a great way to speed up querying Apache Parquet files on remote endpoints – including data lakes!
 
 > Stay tuned for a subsequent post covering advanced multi-column sorting!

@@ -15,9 +15,26 @@ Acknowledging these quirks is the best we can do, which is why we have compiled 
 
 On empty groups, the aggregate functions `sum`, `list`, and `string_agg` all return `NULL` instead of `0`, `[]` and `''`, respectively. This is dictated by the SQL Standard and obeyed by all SQL implementations we know. This behavior is inherited by the list aggregate [`list_sum`]({% link docs/stable/sql/functions/list.md %}#list_-rewrite-functions), but not by the DuckDB original [`list_dot_product`]({% link docs/stable/sql/functions/list.md %}#list_dot_productlist1-list2) which returns `0` on empty lists.
 
-## Indexing
+## 0 vs. 1-Based Indexing
 
-To comply with standard SQL, one-based indexing is used almost everywhere, e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`). However, similarly to PostgreSQL, [JSON features use a zero-based indexing]({% link docs/stable/data/json/overview.md %}#indexing).
+To comply with standard SQL, one-based indexing is used almost everywhere, e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`).
+However, similarly to PostgreSQL, [JSON features use a zero-based indexing]({% link docs/stable/data/json/overview.md %}#indexing).
+
+## Types
+
+### `UINT8` vs. `INT8`
+
+`UINT8` and `INT8` are aliases to integer types of different widths:
+
+* `UINT8` corresponds to `UTINYINT` because it's an _8-bit_ unsigned integer
+* `INT8` corresponds to `BIGINT` because it's an _8-byte_ signed integer
+
+Explanation: the `n` in the numeric type `INTn` and `UINTn` denote the width of the number in either bytes or bits.
+`INT1`, `INT2`, `INT4` correspond to the number of bytes, while `INT16`, `INT32` and `INT64` correpsond to the number of bits.
+The same applies to `UINT` values.
+However, the value `n = 8` is a valid choice for both the number of bits and bytes.
+For unsigned values, `UINT8` corresponds to `UTINYINT` (8 bits).
+For signed values, `INT8` corresponds to `BIGINT` (8 bytes).
 
 ## Expressions
 
@@ -27,7 +44,7 @@ To comply with standard SQL, one-based indexing is used almost everywhere, e.g.,
 
 | Expression                 | Result  | Note                                                                          |
 |----------------------------|---------|-------------------------------------------------------------------------------|
-| `-2^2`                     | `4.0`   | PostgreSQL compatibility means the unary minus has higher precedence than the exponentiation operator. Use additional parentheses, e.g., `-(2^2)` or the [`pow` function]({% link docs/stable/sql/functions/numeric.md %}#powx-y), e.g. `-pow(2, 2)`, to avoid mistakes. |
+| `-2^2`                     | `4.0`   | PostgreSQL compatibility means the unary minus has higher precedence than the exponentiation operator. Use additional parentheses, e.g., `-(2^2)` or the [`pow` function]({% link docs/stable/sql/functions/numeric.md %}#powx-y), e.g., `-pow(2, 2)`, to avoid mistakes. |
 | `'t' = true`               | `true`  | Compatible with PostgreSQL.                                                   |
 | `1 = '1'`                  | `true`  | Compatible with PostgreSQL.                                                   |
 | `1 = ' 1'`                 | `true`  | Compatible with PostgreSQL.                                                   |

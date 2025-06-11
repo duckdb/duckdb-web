@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Installing Extensions
 redirect_from:
 - /docs/extensions/working_with_extensions
-- /docs/stable/extensions/working_with_extensions
+- /docs/stable/core_extensions/working_with_extensions
+title: Installing Extensions
 ---
 
 To install core DuckDB extensions, use the `INSTALL` command.

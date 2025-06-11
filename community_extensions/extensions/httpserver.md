@@ -74,10 +74,10 @@ docs:
   
     > This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 197
-extension_star_count_pretty: 197
-extension_download_count: 921
-extension_download_count_pretty: 921
+extension_star_count: 203
+extension_star_count_pretty: 203
+extension_download_count: 873
+extension_download_count_pretty: 873
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---
@@ -105,7 +105,7 @@ LOAD {{ page.extension.name }};
 
 |  function_name  | function_type | description | comment | examples |
 |-----------------|---------------|-------------|---------|----------|
-| httpserve_start | scalar        | NULL        | NULL    | []       |
-| httpserve_stop  | scalar        | NULL        | NULL    | []       |
+| httpserve_start | scalar        | NULL        | NULL    |          |
+| httpserve_stop  | scalar        | NULL        | NULL    |          |
 
 

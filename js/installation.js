@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	let installationData = [];
 
-	$.get('/data/installation-data-1.2.yml?121a', function(data) {
+	$.get('/data/installation-data-1.3.yml?12', function(data) {
 		// console.log(data)
 		installationData = jsyaml.load(data);
 		evaluation();
@@ -242,9 +242,9 @@ $(document).ready(function(){
 		
 		hideSections( sectionsToHide.join(',') );
 		
-		// Check if SHA512 is available
-		function sha512Exists(config) {
-		  return config.sha_512;
+		// Check if SHA256 is available
+		function sha256Exists(config) {
+		  return config.sha_256;
 		}
 	
 		// If platform.select has .hide class, then show .info in it, otherwise hide .info
@@ -272,18 +272,18 @@ $(document).ready(function(){
 		if (configurables[0].link) {
 			$('.link.output').show();
 			let linkHtml = '<a href="' + configurables[0].link + '">' + configurables[0].link + '</a>';
-			if (sha512Exists(configurables[0])) {
-				linkHtml += ' <span class="sha512_btn">SHA-512</span>';
+			if (sha256Exists(configurables[0])) {
+				linkHtml += ' <span class="sha256_btn">SHA-256</span>';
 			}
 			$('.link.output .result').html(linkHtml);
 		} else {
 			$('.link.output').hide();
 		}
 		
-		if (sha512Exists(configurables[0])) {
-			$('.sha512.output .result').html(configurables[0].sha_512);
+		if (sha256Exists(configurables[0])) {
+			$('.sha256.output .result').html(configurables[0].sha_256);
 		} else {
-			$('.sha512.output').hide();
+			$('.sha256.output').hide();
 		}
 	
 		if ( configurables[0].note ) {
@@ -363,12 +363,12 @@ $(document).ready(function(){
 
 });
 
-$(document).on('click', '.sha512_btn', function(e) {
+$(document).on('click', '.sha256_btn', function(e) {
 	e.preventDefault();
 	$(this).toggleClass('active');
 	if ($(this).hasClass('active')) {
-		$('.sha512.output').css('display', 'flex');
+		$('.sha256.output').css('display', 'flex');
 	} else {
-		$('.sha512.output').hide();
+		$('.sha256.output').hide();
 	}
 });

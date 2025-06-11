@@ -25,8 +25,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 464
-extension_download_count_pretty: 464
+extension_download_count: 484
+extension_download_count_pretty: 484
 image: '/images/community_extensions/social_preview/preview_community_extension_blockduck.png'
 layout: community_extension_doc
 ---
@@ -54,20 +54,20 @@ LOAD {{ page.extension.name }};
 
 |            function_name            | function_type | description | comment | examples |
 |-------------------------------------|---------------|-------------|---------|----------|
-| bitcoin_blocks_rpc                  | table         | NULL        | NULL    | []       |
-| bitcoin_inputs_rpc                  | table         | NULL        | NULL    | []       |
-| bitcoin_outputs_rpc                 | table         | NULL        | NULL    | []       |
-| bitcoin_transactions_rpc            | table         | NULL        | NULL    | []       |
-| blockduck_create_contract_event_rpc | pragma        | NULL        | NULL    | []       |
-| blockduck_create_contract_view_rpc  | pragma        | NULL        | NULL    | []       |
-| blockduck_set_configs               | pragma        | NULL        | NULL    | []       |
-| blockduck_set_verbose               | pragma        | NULL        | NULL    | []       |
-| blockduck_version                   | table         | NULL        | NULL    | []       |
-| eth_blocks_rpc                      | table         | NULL        | NULL    | []       |
-| eth_latest_block_rpc                | table         | NULL        | NULL    | []       |
-| eth_logs_rpc                        | table         | NULL        | NULL    | []       |
-| eth_traces_rpc                      | table         | NULL        | NULL    | []       |
-| eth_traces_v2_rpc                   | table         | NULL        | NULL    | []       |
-| eth_transactions_rpc                | table         | NULL        | NULL    | []       |
+| bitcoin_blocks_rpc                  | table         | NULL        | NULL    |          |
+| bitcoin_inputs_rpc                  | table         | NULL        | NULL    |          |
+| bitcoin_outputs_rpc                 | table         | NULL        | NULL    |          |
+| bitcoin_transactions_rpc            | table         | NULL        | NULL    |          |
+| blockduck_create_contract_event_rpc | pragma        | NULL        | NULL    |          |
+| blockduck_create_contract_view_rpc  | pragma        | NULL        | NULL    |          |
+| blockduck_set_configs               | pragma        | NULL        | NULL    |          |
+| blockduck_set_verbose               | pragma        | NULL        | NULL    |          |
+| blockduck_version                   | table         | NULL        | NULL    |          |
+| eth_blocks_rpc                      | table         | NULL        | NULL    |          |
+| eth_latest_block_rpc                | table         | NULL        | NULL    |          |
+| eth_logs_rpc                        | table         | NULL        | NULL    |          |
+| eth_traces_rpc                      | table         | NULL        | NULL    |          |
+| eth_traces_v2_rpc                   | table         | NULL        | NULL    |          |
+| eth_transactions_rpc                | table         | NULL        | NULL    |          |
 
 

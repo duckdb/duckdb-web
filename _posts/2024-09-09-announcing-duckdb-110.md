@@ -2,8 +2,8 @@
 layout: post
 title: "Announcing DuckDB 1.1.0"
 author: The DuckDB team
-thumb: "/images/blog/thumbs/240909.svg"
-image: "/images/blog/thumbs/240909.png"
+thumb: "/images/blog/thumbs/duckdb-release-1-1-0.svg"
+image: "/images/blog/thumbs/duckdb-release-1-1-0.png"
 excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 1.1.0, codenamed “Eatoni”."
 tags: ["release"]
 ---
@@ -361,7 +361,7 @@ See also [Richard's talk on the topic](https://www.youtube.com/watch?v=QubE0u8Kq
 
 ### GeoParquet
 
-GeoParquet is an extension format of the ubiquitous Parquet format that standardizes how to encode vector geometries and their metadata in Parquet files. This can be used to store geographic data sets in Parquet files efficiently. When the [`spatial` extension]({% link docs/stable/extensions/spatial/overview.md %}) is installed and loaded, reading from a GeoParquet file through DuckDB's normal Parquet reader will now [automatically convert geometry columns to the `GEOMETRY` type](https://github.com/duckdb/duckdb/pull/12503), for example:
+GeoParquet is an extension format of the ubiquitous Parquet format that standardizes how to encode vector geometries and their metadata in Parquet files. This can be used to store geographic data sets in Parquet files efficiently. When the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}) is installed and loaded, reading from a GeoParquet file through DuckDB's normal Parquet reader will now [automatically convert geometry columns to the `GEOMETRY` type](https://github.com/duckdb/duckdb/pull/12503), for example:
 
 ```sql
 INSTALL spatial;

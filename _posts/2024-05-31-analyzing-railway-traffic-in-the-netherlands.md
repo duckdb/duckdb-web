@@ -2,8 +2,8 @@
 layout: post
 title: "Analyzing Railway Traffic in the Netherlands"
 author: Gabor Szarnyas
-thumb: "/images/blog/thumbs/240531.svg"
-image: "/images/blog/thumbs/240531.png"
+thumb: "/images/blog/thumbs/railways.svg"
+image: "/images/blog/thumbs/railways.png"
 excerpt: "We use a real-world railway dataset to demonstrate some of DuckDB's key features, including querying different file formats, connecting to remote endpoints, and using advanced SQL features."
 tags: ["using DuckDB"]
 ---
@@ -51,7 +51,7 @@ Hence, the SQL statement `FROM 'services-2023.csv.gz';` is a shorthand for `SELE
 
 * Third, the query creates a table called `services` and populates it with the result from the CSV reader. This is achieved using a [`CREATE TABLE ... AS` statement]({% link docs/stable/sql/statements/create_table.md %}#create-table--as-select-ctas).
 
-Using [DuckDB v0.10.3]({% link docs/installation/index.html %}), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints]({% link docs/stable/sql/functions/char.md %}#print-numbers-with-thousand-separators) the number of rows in the `services` table:
+Using [DuckDB v0.10.3]({% link docs/installation/index.html %}), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints]({% link docs/stable/sql/functions/text.md %}#print-numbers-with-thousand-separators) the number of rows in the `services` table:
 
 ```sql
 SELECT format('{:,}', count(*)) AS num_services
@@ -177,7 +177,7 @@ ORDER BY month;
 
 ### Directly Querying Parquet Files through HTTPS or S3
 
-DuckDB supports querying remote files, including CSV and Parquet, via [the HTTP(S) protocol and the S3 API]({% link docs/stable/extensions/httpfs/overview.md %}).
+DuckDB supports querying remote files, including CSV and Parquet, via [the HTTP(S) protocol and the S3 API]({% link docs/stable/core_extensions/httpfs/overview.md %}).
 For example, we can run the following query:
 
 ```sql
@@ -408,7 +408,7 @@ including
 [automatic detection of formats based on filenames]({% link docs/stable/data/overview.md %}),
 [auto-inferencing the schema of CSV files]({% post_url 2023-10-27-csv-sniffer %}),
 [direct Parquet querying]({% post_url 2021-06-25-querying-parquet %}),
-[remote querying]({% link docs/stable/extensions/httpfs/overview.md %}),
+[remote querying]({% link docs/stable/core_extensions/httpfs/overview.md %}),
 [window functions]({% post_url 2021-10-13-windowing %}),
 [unpivot]({% link docs/stable/sql/statements/unpivot.md %}),
 [several friendly SQL features]({% link docs/stable/sql/dialect/friendly_sql.md %}) (such as `FROM`-first, `GROUP BY ALL`, and `COLUMNS(*)`),
