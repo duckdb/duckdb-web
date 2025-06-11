@@ -130,7 +130,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts a single character using a (1-based) `index`. |
-| **Example** | `'DuckDB'[4]`{:.language-sql .highlight} |
+| **Example** | `'DuckDB'[4]` |
 | **Result** | `k` |
 | **Alias** | `array_extract` |
 
@@ -139,7 +139,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts a string using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing) similar to Python. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
-| **Example** | `'DuckDB'[:4]`{:.language-sql .highlight} |
+| **Example** | `'DuckDB'[:4]` |
 | **Result** | `Duck` |
 | **Alias** | `array_slice` |
 
@@ -148,7 +148,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if the `string` matches the like specifier (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
-| **Example** | `'hello' LIKE '%lo'`{:.language-sql .highlight} |
+| **Example** | `'hello' LIKE '%lo'` |
 | **Result** | `true` |
 
 #### `string SIMILAR TO regex`
@@ -156,7 +156,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if the `string` matches the `regex` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})). |
-| **Example** | `'hello' SIMILAR TO 'l+'`{:.language-sql .highlight} |
+| **Example** | `'hello' SIMILAR TO 'l+'` |
 | **Result** | `false` |
 | **Alias** | `regexp_full_match` |
 
@@ -165,7 +165,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if `string` begins with `search_string`. |
-| **Example** | `'abc' ^@ 'a'`{:.language-sql .highlight} |
+| **Example** | `'abc' ^@ 'a'` |
 | **Result** | `true` |
 | **Alias** | `starts_with` |
 
@@ -174,11 +174,11 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`]({% link docs/preview/sql/functions/text.md %}#concatvalue-) and [`list_concat(list1, list2, ...)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist_1--list_n). |
-| **Example 1** | `'Duck' || 'DB'`{:.language-sql .highlight} |
+| **Example 1** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
-| **Example 2** | `[1, 2, 3] || [4, 5, 6]`{:.language-sql .highlight} |
+| **Example 2** | `[1, 2, 3] || [4, 5, 6]` |
 | **Result** | `[1, 2, 3, 4, 5, 6]` |
-| **Example 3** | `'\xAA'::BLOB || '\xBB'::BLOB`{:.language-sql .highlight} |
+| **Example 3** | `'\xAA'::BLOB || '\xBB'::BLOB` |
 | **Result** | `\xAA\xBB` |
 
 #### `array_extract(string, index)`
@@ -186,7 +186,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts a single character from a `string` using a (1-based) `index`. |
-| **Example** | `array_extract('DuckDB', 2)`{:.language-sql .highlight} |
+| **Example** | `array_extract('DuckDB', 2)` |
 | **Result** | `u` |
 
 #### `array_slice(list, begin, end)`
@@ -194,11 +194,11 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
-| **Example 1** | `array_slice('DuckDB', 3, 4)`{:.language-sql .highlight} |
+| **Example 1** | `array_slice('DuckDB', 3, 4)` |
 | **Result** | `ck` |
-| **Example 2** | `array_slice('DuckDB', 3, NULL)`{:.language-sql .highlight} |
+| **Example 2** | `array_slice('DuckDB', 3, NULL)` |
 | **Result** | `NULL` |
-| **Example 3** | `array_slice('DuckDB', 0, -3)`{:.language-sql .highlight} |
+| **Example 3** | `array_slice('DuckDB', 0, -3)` |
 | **Result** | `Duck` |
 | **Alias** | `list_slice` |
 
@@ -207,7 +207,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns an integer that represents the Unicode code point of the first character of the `string`. |
-| **Example** | `ascii('Ω')`{:.language-sql .highlight} |
+| **Example** | `ascii('Ω')` |
 | **Result** | `937` |
 
 #### `bar(x, min, max[, width])`
@@ -215,7 +215,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
-| **Example** | `bar(5, 0, 20, 10)`{:.language-sql .highlight} |
+| **Example** | `bar(5, 0, 20, 10)` |
 | **Result** | `██▌       ` |
 
 #### `base64(blob)`
@@ -223,7 +223,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `blob` to a base64 encoded string. |
-| **Example** | `base64('A'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 | **Alias** | `to_base64` |
 
@@ -232,7 +232,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts the `string` to binary representation. |
-| **Example** | `bin('Aa')`{:.language-sql .highlight} |
+| **Example** | `bin('Aa')` |
 | **Result** | `0100000101100001` |
 | **Alias** | `to_binary` |
 
@@ -241,7 +241,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Number of bits in a `string`. |
-| **Example** | `bit_length('abc')`{:.language-sql .highlight} |
+| **Example** | `bit_length('abc')` |
 | **Result** | `24` |
 
 #### `char_length(string)`
@@ -249,7 +249,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Number of characters in `string`. |
-| **Example** | `char_length('Hello🦆')`{:.language-sql .highlight} |
+| **Example** | `char_length('Hello🦆')` |
 | **Result** | `6` |
 | **Aliases** | `character_length`, `len`, `length` |
 
@@ -258,7 +258,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Number of characters in `string`. |
-| **Example** | `character_length('Hello🦆')`{:.language-sql .highlight} |
+| **Example** | `character_length('Hello🦆')` |
 | **Result** | `6` |
 | **Aliases** | `char_length`, `len`, `length` |
 
@@ -267,7 +267,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a character which is corresponding the ASCII code value or Unicode code point. |
-| **Example** | `chr(65)`{:.language-sql .highlight} |
+| **Example** | `chr(65)` |
 | **Result** | `A` |
 
 #### `concat(value, ...)`
@@ -275,9 +275,9 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates multiple strings or lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example 1** | `concat('Hello', ' ', 'World')`{:.language-sql .highlight} |
+| **Example 1** | `concat('Hello', ' ', 'World')` |
 | **Result** | `Hello World` |
-| **Example 2** | `concat([1, 2, 3], NULL, [4, 5, 6])`{:.language-sql .highlight} |
+| **Example 2** | `concat([1, 2, 3], NULL, [4, 5, 6])` |
 | **Result** | `[1, 2, 3, 4, 5, 6]` |
 
 #### `concat_ws(separator, string, ...)`
@@ -285,7 +285,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates many strings, separated by `separator`. `NULL` inputs are skipped. |
-| **Example** | `concat_ws(', ', 'Banana', 'Apple', 'Melon')`{:.language-sql .highlight} |
+| **Example** | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` |
 | **Result** | `Banana, Apple, Melon` |
 
 #### `contains(string, search_string)`
@@ -293,7 +293,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if `search_string` is found within `string`. |
-| **Example** | `contains('abc', 'a')`{:.language-sql .highlight} |
+| **Example** | `contains('abc', 'a')` |
 | **Result** | `true` |
 
 #### `ends_with(string, search_string)`
@@ -301,7 +301,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if `string` ends with `search_string`. |
-| **Example** | `ends_with('abc', 'bc')`{:.language-sql .highlight} |
+| **Example** | `ends_with('abc', 'bc')` |
 | **Result** | `true` |
 | **Alias** | `suffix` |
 
@@ -310,7 +310,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Formats a string using the [fmt syntax](#fmt-syntax). |
-| **Example** | `format('Benchmark "{}" took {} seconds', 'CSV', 42)`{:.language-sql .highlight} |
+| **Example** | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` |
 | **Result** | `Benchmark "CSV" took 42 seconds` |
 
 #### `formatReadableDecimalSize(integer)`
@@ -318,7 +318,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
-| **Example** | `formatReadableDecimalSize(16_000)`{:.language-sql .highlight} |
+| **Example** | `formatReadableDecimalSize(16_000)` |
 | **Result** | `16.0 kB` |
 
 #### `formatReadableSize(integer)`
@@ -326,7 +326,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
-| **Example** | `formatReadableSize(16_000)`{:.language-sql .highlight} |
+| **Example** | `formatReadableSize(16_000)` |
 | **Result** | `15.6 KiB` |
 | **Alias** | `format_bytes` |
 
@@ -335,7 +335,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
-| **Example** | `format_bytes(16_000)`{:.language-sql .highlight} |
+| **Example** | `format_bytes(16_000)` |
 | **Result** | `15.6 KiB` |
 | **Alias** | `formatReadableSize` |
 
@@ -344,7 +344,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a base64 encoded `string` to a character string (`BLOB`). |
-| **Example** | `from_base64('QQ==')`{:.language-sql .highlight} |
+| **Example** | `from_base64('QQ==')` |
 | **Result** | `A` |
 
 #### `from_binary(value)`
@@ -352,7 +352,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `value` from binary representation to a blob. |
-| **Example** | `from_binary('0110')`{:.language-sql .highlight} |
+| **Example** | `from_binary('0110')` |
 | **Result** | `\x06` |
 | **Alias** | `unbin` |
 
@@ -361,7 +361,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `value` from hexadecimal representation to a blob. |
-| **Example** | `from_hex('2A')`{:.language-sql .highlight} |
+| **Example** | `from_hex('2A')` |
 | **Result** | `*` |
 | **Alias** | `unhex` |
 
@@ -370,9 +370,9 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the largest value. For strings lexicographical ordering is used. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
-| **Example 1** | `greatest(42, 84)`{:.language-sql .highlight} |
+| **Example 1** | `greatest(42, 84)` |
 | **Result** | `84` |
-| **Example 2** | `greatest('abc', 'bcd', 'cde', 'EFG')`{:.language-sql .highlight} |
+| **Example 2** | `greatest('abc', 'bcd', 'cde', 'EFG')` |
 | **Result** | `cde` |
 
 #### `hash(value, ...)`
@@ -380,7 +380,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a `UBIGINT` with the hash of the `value`. Note that this is not a cryptographic hash. |
-| **Example** | `hash('🦆')`{:.language-sql .highlight} |
+| **Example** | `hash('🦆')` |
 | **Result** | `4164431626903154684` |
 
 #### `hex(string)`
@@ -388,7 +388,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts the `string` to hexadecimal representation. |
-| **Example** | `hex('Hello')`{:.language-sql .highlight} |
+| **Example** | `hex('Hello')` |
 | **Result** | `48656C6C6F` |
 | **Alias** | `to_hex` |
 
@@ -397,7 +397,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
-| **Example** | `ilike_escape('A%c', 'a$%C', '$')`{:.language-sql .highlight} |
+| **Example** | `ilike_escape('A%c', 'a$%C', '$')` |
 | **Result** | `true` |
 
 #### `instr(string, search_string)`
@@ -405,7 +405,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| **Example** | `instr('test test', 'es')`{:.language-sql .highlight} |
+| **Example** | `instr('test test', 'es')` |
 | **Result** | `2` |
 | **Aliases** | `position`, `strpos` |
 
@@ -414,7 +414,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `string` to lower case. |
-| **Example** | `lcase('Hello')`{:.language-sql .highlight} |
+| **Example** | `lcase('Hello')` |
 | **Result** | `hello` |
 | **Alias** | `lower` |
 
@@ -423,9 +423,9 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the smallest value. For strings lexicographical ordering is used. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
-| **Example 1** | `least(42, 84)`{:.language-sql .highlight} |
+| **Example 1** | `least(42, 84)` |
 | **Result** | `42` |
-| **Example 2** | `least('abc', 'bcd', 'cde', 'EFG')`{:.language-sql .highlight} |
+| **Example 2** | `least('abc', 'bcd', 'cde', 'EFG')` |
 | **Result** | `EFG` |
 
 #### `left(string, count)`
@@ -433,7 +433,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts the left-most count characters. |
-| **Example** | `left('Hello🦆', 2)`{:.language-sql .highlight} |
+| **Example** | `left('Hello🦆', 2)` |
 | **Result** | `He` |
 
 #### `left_grapheme(string, count)`
@@ -441,7 +441,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts the left-most count grapheme clusters. |
-| **Example** | `left_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)`{:.language-sql .highlight} |
+| **Example** | `left_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)` |
 | **Result** | `🤦🏼‍♂️` |
 
 #### `len(string)`
@@ -449,7 +449,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Number of characters in `string`. |
-| **Example** | `length('Hello🦆')`{:.language-sql .highlight} |
+| **Example** | `length('Hello🦆')` |
 | **Result** | `6` |
 | **Aliases** | `char_length`, `character_length`, `length` |
 
@@ -458,7 +458,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Number of characters in `string`. |
-| **Example** | `length('Hello🦆')`{:.language-sql .highlight} |
+| **Example** | `length('Hello🦆')` |
 | **Result** | `6` |
 | **Aliases** | `char_length`, `character_length`, `len` |
 
@@ -467,7 +467,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Number of grapheme clusters in `string`. |
-| **Example** | `length_grapheme('🤦🏼‍♂️🤦🏽‍♀️')`{:.language-sql .highlight} |
+| **Example** | `length_grapheme('🤦🏼‍♂️🤦🏽‍♀️')` |
 | **Result** | `2` |
 
 #### `like_escape(string, like_specifier, escape_character)`
@@ -475,7 +475,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
-| **Example** | `like_escape('a%c', 'a$%c', '$')`{:.language-sql .highlight} |
+| **Example** | `like_escape('a%c', 'a$%c', '$')` |
 | **Result** | `true` |
 
 #### `lower(string)`
@@ -483,7 +483,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `string` to lower case. |
-| **Example** | `lower('Hello')`{:.language-sql .highlight} |
+| **Example** | `lower('Hello')` |
 | **Result** | `hello` |
 | **Alias** | `lcase` |
 
@@ -492,7 +492,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Pads the `string` with the `character` on the left until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| **Example** | `lpad('hello', 8, '>')`{:.language-sql .highlight} |
+| **Example** | `lpad('hello', 8, '>')` |
 | **Result** | `>>>hello` |
 
 #### `ltrim(string[, characters])`
@@ -500,9 +500,9 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `ltrim('    test  ')`{:.language-sql .highlight} |
+| **Example 1** | `ltrim('    test  ')` |
 | **Result** | `test  ` |
-| **Example 2** | `ltrim('>>>>test<<', '><')`{:.language-sql .highlight} |
+| **Example 2** | `ltrim('>>>>test<<', '><')` |
 | **Result** | `test<<` |
 
 #### `md5(string)`
@@ -510,7 +510,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the MD5 hash of the `string` as a `VARCHAR`. |
-| **Example** | `md5('abc')`{:.language-sql .highlight} |
+| **Example** | `md5('abc')` |
 | **Result** | `900150983cd24fb0d6963f7d28e17f72` |
 
 #### `md5_number(string)`
@@ -518,7 +518,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the MD5 hash of the `string` as a `HUGEINT`. |
-| **Example** | `md5_number('abc')`{:.language-sql .highlight} |
+| **Example** | `md5_number('abc')` |
 | **Result** | `152195979970564155685860391459828531600` |
 
 #### `md5_number_lower(string)`
@@ -526,7 +526,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
-| **Example** | `md5_number_lower('abc')`{:.language-sql .highlight} |
+| **Example** | `md5_number_lower('abc')` |
 | **Result** | `8250560606382298838` |
 
 #### `md5_number_upper(string)`
@@ -534,7 +534,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
-| **Example** | `md5_number_upper('abc')`{:.language-sql .highlight} |
+| **Example** | `md5_number_upper('abc')` |
 | **Result** | `12704604231530709392` |
 
 #### `nfc_normalize(string)`
@@ -542,7 +542,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `string` to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. |
-| **Example** | `nfc_normalize('ardèch')`{:.language-sql .highlight} |
+| **Example** | `nfc_normalize('ardèch')` |
 | **Result** | `ardèch` |
 
 #### `not_ilike_escape(string, like_specifier, escape_character)`
@@ -550,7 +550,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `false` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
-| **Example** | `not_ilike_escape('A%c', 'a$%C', '$')`{:.language-sql .highlight} |
+| **Example** | `not_ilike_escape('A%c', 'a$%C', '$')` |
 | **Result** | `false` |
 
 #### `not_like_escape(string, like_specifier, escape_character)`
@@ -558,7 +558,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `false` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
-| **Example** | `not_like_escape('a%c', 'a$%c', '$')`{:.language-sql .highlight} |
+| **Example** | `not_like_escape('a%c', 'a$%c', '$')` |
 | **Result** | `false` |
 
 #### `ord(string)`
@@ -566,7 +566,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns an `INTEGER` representing the `unicode` codepoint of the first character in the `string`. |
-| **Example** | `[unicode('âbcd'), unicode('â'), unicode(''), unicode(NULL)]`{:.language-sql .highlight} |
+| **Example** | `[unicode('âbcd'), unicode('â'), unicode(''), unicode(NULL)]` |
 | **Result** | `[226, 226, -1, NULL]` |
 | **Alias** | `unicode` |
 
@@ -575,7 +575,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the top-level directory name from the given `path`. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_dirname('path/to/file.csv', 'system')`{:.language-sql .highlight} |
+| **Example** | `parse_dirname('path/to/file.csv', 'system')` |
 | **Result** | `path` |
 
 #### `parse_dirpath(path[, separator])`
@@ -583,7 +583,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the head of the `path` (the pathname until the last slash) similarly to Python's [`os.path.dirname`](https://docs.python.org/3.7/library/os.path.html#os.path.dirname). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_dirpath('path/to/file.csv', 'forward_slash')`{:.language-sql .highlight} |
+| **Example** | `parse_dirpath('path/to/file.csv', 'forward_slash')` |
 | **Result** | `path/to` |
 
 #### `parse_filename(string[, trim_extension][, separator])`
@@ -591,7 +591,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the last component of the `path` similarly to Python's [`os.path.basename`](https://docs.python.org/3.7/library/os.path.html#os.path.basename) function. If `trim_extension` is `true`, the file extension will be removed (defaults to `false`). `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_filename('path/to/file.csv', true, 'forward_slash')`{:.language-sql .highlight} |
+| **Example** | `parse_filename('path/to/file.csv', true, 'forward_slash')` |
 | **Result** | `file` |
 
 #### `parse_path(path[, separator])`
@@ -599,7 +599,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list of the components (directories and filename) in the `path` similarly to Python's [`pathlib.parts`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.parts) function. `separator` options: `system`, `both_slash` (default), `forward_slash`, `backslash`. |
-| **Example** | `parse_path('path/to/file.csv', 'system')`{:.language-sql .highlight} |
+| **Example** | `parse_path('path/to/file.csv', 'system')` |
 | **Result** | `[path, to, file.csv]` |
 
 #### `position(search_string IN string)`
@@ -607,7 +607,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| **Example** | `position('b' IN 'abc')`{:.language-sql .highlight} |
+| **Example** | `position('b' IN 'abc')` |
 | **Result** | `2` |
 | **Aliases** | `instr`, `strpos` |
 
@@ -616,7 +616,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if `string` starts with `search_string`. |
-| **Example** | `prefix('abc', 'ab')`{:.language-sql .highlight} |
+| **Example** | `prefix('abc', 'ab')` |
 | **Result** | `true` |
 
 #### `printf(format, ...)`
@@ -624,7 +624,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Formats a `string` using [printf syntax](#printf-syntax). |
-| **Example** | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)`{:.language-sql .highlight} |
+| **Example** | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` |
 | **Result** | `Benchmark "CSV" took 42 seconds` |
 
 #### `read_text(source)`
@@ -632,7 +632,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/preview/guides/file_formats/read_file.md %}#read_text) for more details. |
-| **Example** | `read_text('hello.txt')`{:.language-sql .highlight} |
+| **Example** | `read_text('hello.txt')` |
 | **Result** | `hello\n` |
 
 #### `regexp_escape(string)`
@@ -640,7 +640,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Escapes special patterns to turn `string` into a regular expression similarly to Python's [`re.escape` function](https://docs.python.org/3/library/re.html#re.escape). |
-| **Example** | `regexp_escape('https://duckdb.org')`{:.language-sql .highlight} |
+| **Example** | `regexp_escape('https://duckdb.org')` |
 | **Result** | `https\:\/\/duckdb\.org` |
 
 #### `regexp_extract(string, regex[, group][, options])`
@@ -648,7 +648,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | If `string` contains the `regex` pattern, returns the capturing group specified by optional parameter `group`; otherwise, returns the empty string. The `group` must be a constant value. If no `group` is given, it defaults to 0. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_extract('ABC', '([a-z])(b)', 1, 'i')`{:.language-sql .highlight} |
+| **Example** | `regexp_extract('ABC', '([a-z])(b)', 1, 'i')` |
 | **Result** | `A` |
 
 #### `regexp_extract(string, regex, name_list[, options])`
@@ -656,7 +656,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | If `string` contains the `regex` pattern, returns the capturing groups as a struct with corresponding names from `name_list`; otherwise, returns a struct with the same keys and empty strings as values. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_extract('John Doe', '([a-z]+) ([a-z]+)', ['first_name', 'last_name'], 'i')`{:.language-sql .highlight} |
+| **Example** | `regexp_extract('John Doe', '([a-z]+) ([a-z]+)', ['first_name', 'last_name'], 'i')` |
 | **Result** | `{'first_name': John, 'last_name': Doe}` |
 
 #### `regexp_extract_all(string, regex[, group][, options])`
@@ -664,7 +664,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_extract_all('Peter: 33, Paul:14', '(\w+):\s*(\d+)', 2)`{:.language-sql .highlight} |
+| **Example** | `regexp_extract_all('Peter: 33, Paul:14', '(\w+):\s*(\d+)', 2)` |
 | **Result** | `[33, 14]` |
 
 #### `regexp_full_match(string, regex[, col2])`
@@ -672,7 +672,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if the entire `string` matches the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_full_match('anabanana', '(an)*')`{:.language-sql .highlight} |
+| **Example** | `regexp_full_match('anabanana', '(an)*')` |
 | **Result** | `false` |
 
 #### `regexp_matches(string, regex[, options])`
@@ -680,7 +680,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if `string` contains the `regex`, `false` otherwise. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_matches('anabanana', '(an)*')`{:.language-sql .highlight} |
+| **Example** | `regexp_matches('anabanana', '(an)*')` |
 | **Result** | `true` |
 
 #### `regexp_replace(string, regex, replacement[, options])`
@@ -688,7 +688,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | If `string` contains the `regex`, replaces the matching part with `replacement`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_replace('hello', '[lo]', '-')`{:.language-sql .highlight} |
+| **Example** | `regexp_replace('hello', '[lo]', '-')` |
 | **Result** | `he-lo` |
 
 #### `regexp_split_to_array(string, regex[, options])`
@@ -696,7 +696,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
-| **Example** | `regexp_split_to_array('hello world; 42', ';? ')`{:.language-sql .highlight} |
+| **Example** | `regexp_split_to_array('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
 | **Aliases** | `str_split_regex`, `string_split_regex` |
 
@@ -705,7 +705,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex` and returns a row for each part. |
-| **Example** | `regexp_split_to_table('hello world; 42', ';? ')`{:.language-sql .highlight} |
+| **Example** | `regexp_split_to_table('hello world; 42', ';? ')` |
 | **Result** | Multiple rows: `'hello'`, `'world'`, `'42'` |
 
 #### `repeat(string, count)`
@@ -713,7 +713,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Repeats the `string` `count` number of times. |
-| **Example** | `repeat('A', 5)`{:.language-sql .highlight} |
+| **Example** | `repeat('A', 5)` |
 | **Result** | `AAAAA` |
 
 #### `replace(string, source, target)`
@@ -721,7 +721,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Replaces any occurrences of the `source` with `target` in `string`. |
-| **Example** | `replace('hello', 'l', '-')`{:.language-sql .highlight} |
+| **Example** | `replace('hello', 'l', '-')` |
 | **Result** | `he--o` |
 
 #### `reverse(string)`
@@ -729,7 +729,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Reverses the `string`. |
-| **Example** | `reverse('hello')`{:.language-sql .highlight} |
+| **Example** | `reverse('hello')` |
 | **Result** | `olleh` |
 
 #### `right(string, count)`
@@ -737,7 +737,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extract the right-most `count` characters. |
-| **Example** | `right('Hello🦆', 3)`{:.language-sql .highlight} |
+| **Example** | `right('Hello🦆', 3)` |
 | **Result** | `lo🦆` |
 
 #### `right_grapheme(string, count)`
@@ -745,7 +745,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts the right-most `count` grapheme clusters. |
-| **Example** | `right_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)`{:.language-sql .highlight} |
+| **Example** | `right_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)` |
 | **Result** | `🤦🏽‍♀️` |
 
 #### `rpad(string, count, character)`
@@ -753,7 +753,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Pads the `string` with the `character` on the right until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| **Example** | `rpad('hello', 10, '<')`{:.language-sql .highlight} |
+| **Example** | `rpad('hello', 10, '<')` |
 | **Result** | `hello<<<<<` |
 
 #### `rtrim(string[, characters])`
@@ -761,9 +761,9 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `rtrim('    test  ')`{:.language-sql .highlight} |
+| **Example 1** | `rtrim('    test  ')` |
 | **Result** | `    test` |
-| **Example 2** | `rtrim('>>>>test<<', '><')`{:.language-sql .highlight} |
+| **Example 2** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 
 #### `sha1(value)`
@@ -771,7 +771,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a `VARCHAR` with the SHA-1 hash of the `value`. |
-| **Example** | `sha1('🦆')`{:.language-sql .highlight} |
+| **Example** | `sha1('🦆')` |
 | **Result** | `949bf843dc338be348fb9525d1eb535d31241d76` |
 
 #### `sha256(value)`
@@ -779,7 +779,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a `VARCHAR` with the SHA-256 hash of the `value` |
-| **Example** | `sha256('🦆')`{:.language-sql .highlight} |
+| **Example** | `sha256('🦆')` |
 | **Result** | `d7a5c5e0d1d94c32218539e7e47d4ba9c3c7b77d61332fb60d633dde89e473fb` |
 
 #### `split(string, separator)`
@@ -787,7 +787,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `separator`. |
-| **Example** | `split('hello-world', '-')`{:.language-sql .highlight} |
+| **Example** | `split('hello-world', '-')` |
 | **Result** | `[hello, world]` |
 | **Aliases** | `str_split`, `string_split`, `string_to_array` |
 
@@ -796,7 +796,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). |
-| **Example** | `split_part('a;b;c', ';', 2)`{:.language-sql .highlight} |
+| **Example** | `split_part('a;b;c', ';', 2)` |
 | **Result** | `b` |
 
 #### `starts_with(string, search_string)`
@@ -804,7 +804,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if `string` begins with `search_string`. |
-| **Example** | `starts_with('abc', 'a')`{:.language-sql .highlight} |
+| **Example** | `starts_with('abc', 'a')` |
 | **Result** | `true` |
 | **Alias** | `^@` |
 
@@ -813,7 +813,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `separator`. |
-| **Example** | `str_split('hello-world', '-')`{:.language-sql .highlight} |
+| **Example** | `str_split('hello-world', '-')` |
 | **Result** | `[hello, world]` |
 | **Aliases** | `split`, `string_split`, `string_to_array` |
 
@@ -822,7 +822,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
-| **Example** | `str_split_regex('hello world; 42', ';? ')`{:.language-sql .highlight} |
+| **Example** | `str_split_regex('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
 | **Aliases** | `regexp_split_to_array`, `string_split_regex` |
 
@@ -831,7 +831,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `separator`. |
-| **Example** | `string_split('hello-world', '-')`{:.language-sql .highlight} |
+| **Example** | `string_split('hello-world', '-')` |
 | **Result** | `[hello, world]` |
 | **Aliases** | `split`, `str_split`, `string_to_array` |
 
@@ -840,7 +840,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `regex`. A set of optional [regex `options`]({% link docs/preview/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
-| **Example** | `string_split_regex('hello world; 42', ';? ')`{:.language-sql .highlight} |
+| **Example** | `string_split_regex('hello world; 42', ';? ')` |
 | **Result** | `[hello, world, 42]` |
 | **Aliases** | `regexp_split_to_array`, `str_split_regex` |
 
@@ -849,7 +849,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Splits the `string` along the `separator`. |
-| **Example** | `string_to_array('hello-world', '-')`{:.language-sql .highlight} |
+| **Example** | `string_to_array('hello-world', '-')` |
 | **Result** | `[hello, world]` |
 | **Aliases** | `split`, `str_split`, `string_split` |
 
@@ -858,7 +858,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Strips accents from `string`. |
-| **Example** | `strip_accents('mühleisen')`{:.language-sql .highlight} |
+| **Example** | `strip_accents('mühleisen')` |
 | **Result** | `muhleisen` |
 
 #### `strlen(string)`
@@ -866,7 +866,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Number of bytes in `string`. |
-| **Example** | `strlen('🦆')`{:.language-sql .highlight} |
+| **Example** | `strlen('🦆')` |
 | **Result** | `4` |
 
 #### `strpos(string, search_string)`
@@ -874,7 +874,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
-| **Example** | `strpos('test test', 'es')`{:.language-sql .highlight} |
+| **Example** | `strpos('test test', 'es')` |
 | **Result** | `2` |
 | **Aliases** | `instr`, `position` |
 
@@ -883,9 +883,9 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
-| **Example 1** | `substring('Hello', 2)`{:.language-sql .highlight} |
+| **Example 1** | `substring('Hello', 2)` |
 | **Result** | `ello` |
-| **Example 2** | `substring('Hello', 2, 2)`{:.language-sql .highlight} |
+| **Example 2** | `substring('Hello', 2, 2)` |
 | **Result** | `el` |
 | **Alias** | `substring` |
 
@@ -894,9 +894,9 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
-| **Example 1** | `substring('Hello', 2)`{:.language-sql .highlight} |
+| **Example 1** | `substring('Hello', 2)` |
 | **Result** | `ello` |
-| **Example 2** | `substring('Hello', 2, 2)`{:.language-sql .highlight} |
+| **Example 2** | `substring('Hello', 2, 2)` |
 | **Result** | `el` |
 | **Alias** | `substr` |
 
@@ -905,9 +905,9 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts substring starting from grapheme clusters `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` grapheme clusters instead. Note that a `start` value of `1` refers to the `first` character of the `string`. |
-| **Example 1** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3)`{:.language-sql .highlight} |
+| **Example 1** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3)` |
 | **Result** | `🤦🏽‍♀️🦆` |
-| **Example 2** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3, 2)`{:.language-sql .highlight} |
+| **Example 2** | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3, 2)` |
 | **Result** | `🤦🏽‍♀️🦆` |
 
 #### `suffix(string, search_string)`
@@ -915,7 +915,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if `string` ends with `search_string`. |
-| **Example** | `suffix('abc', 'bc')`{:.language-sql .highlight} |
+| **Example** | `suffix('abc', 'bc')` |
 | **Result** | `true` |
 | **Alias** | `ends_with` |
 
@@ -924,7 +924,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `number` to a string in the given base `radix`, optionally padding with leading zeros to `min_length`. |
-| **Example** | `to_base(42, 16, 5)`{:.language-sql .highlight} |
+| **Example** | `to_base(42, 16, 5)` |
 | **Result** | `0002A` |
 
 #### `to_base64(blob)`
@@ -932,7 +932,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `blob` to a base64 encoded string. |
-| **Example** | `to_base64('A'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `to_base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 | **Alias** | `base64` |
 
@@ -941,7 +941,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts the `string` to binary representation. |
-| **Example** | `to_binary('Aa')`{:.language-sql .highlight} |
+| **Example** | `to_binary('Aa')` |
 | **Result** | `0100000101100001` |
 | **Alias** | `bin` |
 
@@ -950,7 +950,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts the `string` to hexadecimal representation. |
-| **Example** | `to_hex('Hello')`{:.language-sql .highlight} |
+| **Example** | `to_hex('Hello')` |
 | **Result** | `48656C6C6F` |
 | **Alias** | `hex` |
 
@@ -959,7 +959,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Replaces each character in `string` that matches a character in the `from` set with the corresponding character in the `to` set. If `from` is longer than `to`, occurrences of the extra characters in `from` are deleted. |
-| **Example** | `translate('12345', '143', 'ax')`{:.language-sql .highlight} |
+| **Example** | `translate('12345', '143', 'ax')` |
 | **Result** | `a2x5` |
 
 #### `trim(string[, characters])`
@@ -967,9 +967,9 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `trim('    test  ')`{:.language-sql .highlight} |
+| **Example 1** | `trim('    test  ')` |
 | **Result** | `test` |
-| **Example 2** | `trim('>>>>test<<', '><')`{:.language-sql .highlight} |
+| **Example 2** | `trim('>>>>test<<', '><')` |
 | **Result** | `test` |
 
 #### `ucase(string)`
@@ -977,7 +977,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `string` to upper case. |
-| **Example** | `ucase('Hello')`{:.language-sql .highlight} |
+| **Example** | `ucase('Hello')` |
 | **Result** | `HELLO` |
 | **Alias** | `upper` |
 
@@ -986,7 +986,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `value` from binary representation to a blob. |
-| **Example** | `unbin('0110')`{:.language-sql .highlight} |
+| **Example** | `unbin('0110')` |
 | **Result** | `\x06` |
 | **Alias** | `from_binary` |
 
@@ -995,7 +995,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `value` from hexadecimal representation to a blob. |
-| **Example** | `unhex('2A')`{:.language-sql .highlight} |
+| **Example** | `unhex('2A')` |
 | **Result** | `*` |
 | **Alias** | `from_hex` |
 
@@ -1004,7 +1004,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns an `INTEGER` representing the `unicode` codepoint of the first character in the `string`. |
-| **Example** | `[unicode('âbcd'), unicode('â'), unicode(''), unicode(NULL)]`{:.language-sql .highlight} |
+| **Example** | `[unicode('âbcd'), unicode('â'), unicode(''), unicode(NULL)]` |
 | **Result** | `[226, 226, -1, NULL]` |
 | **Alias** | `ord` |
 
@@ -1013,7 +1013,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `string` to upper case. |
-| **Example** | `upper('Hello')`{:.language-sql .highlight} |
+| **Example** | `upper('Hello')` |
 | **Result** | `HELLO` |
 | **Alias** | `ucase` |
 
@@ -1022,7 +1022,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Decodes a URL from a representation using [Percent-Encoding](https://datatracker.ietf.org/doc/html/rfc3986#section-2.1). |
-| **Example** | `url_decode('https%3A%2F%2Fduckdb.org%2Fwhy_duckdb%23portable')`{:.language-sql .highlight} |
+| **Example** | `url_decode('https%3A%2F%2Fduckdb.org%2Fwhy_duckdb%23portable')` |
 | **Result** | `https://duckdb.org/why_duckdb#portable` |
 
 #### `url_encode(string)`
@@ -1030,7 +1030,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Encodes a URL to a representation using [Percent-Encoding](https://datatracker.ietf.org/doc/html/rfc3986#section-2.1). |
-| **Example** | `url_encode('this string has/ special+ characters>')`{:.language-sql .highlight} |
+| **Example** | `url_encode('this string has/ special+ characters>')` |
 | **Result** | `this%20string%20has%2F%20special%2B%20characters%3E` |
 
 <!-- End of section generated by scripts/generate_sql_function_docs.py -->
@@ -1060,7 +1060,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Characters of different cases (e.g., `a` and `A`) are considered different. |
-| **Example** | `damerau_levenshtein('duckdb', 'udckbd')`{:.language-sql .highlight} |
+| **Example** | `damerau_levenshtein('duckdb', 'udckbd')` |
 | **Result** | `2` |
 
 #### `editdist3(s1, s2)`
@@ -1068,7 +1068,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Characters of different cases (e.g., `a` and `A`) are considered different. |
-| **Example** | `editdist3('duck', 'db')`{:.language-sql .highlight} |
+| **Example** | `editdist3('duck', 'db')` |
 | **Result** | `3` |
 | **Alias** | `levenshtein` |
 
@@ -1077,7 +1077,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The Hamming distance between to strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
-| **Example** | `hamming('duck', 'luck')`{:.language-sql .highlight} |
+| **Example** | `hamming('duck', 'luck')` |
 | **Result** | `1` |
 | **Alias** | `mismatches` |
 
@@ -1086,7 +1086,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The Jaccard similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
-| **Example** | `jaccard('duck', 'luck')`{:.language-sql .highlight} |
+| **Example** | `jaccard('duck', 'luck')` |
 | **Result** | `0.6` |
 
 #### `jaro_similarity(s1, s2[, score_cutoff])`
@@ -1094,7 +1094,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
-| **Example** | `jaro_similarity('duck', 'duckdb')`{:.language-sql .highlight} |
+| **Example** | `jaro_similarity('duck', 'duckdb')` |
 | **Result** | `0.8888888888888888` |
 
 #### `jaro_winkler_similarity(s1, s2[, score_cutoff])`
@@ -1102,7 +1102,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
-| **Example** | `jaro_winkler_similarity('duck', 'duckdb')`{:.language-sql .highlight} |
+| **Example** | `jaro_winkler_similarity('duck', 'duckdb')` |
 | **Result** | `0.9333333333333333` |
 
 #### `levenshtein(s1, s2)`
@@ -1110,7 +1110,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Characters of different cases (e.g., `a` and `A`) are considered different. |
-| **Example** | `levenshtein('duck', 'db')`{:.language-sql .highlight} |
+| **Example** | `levenshtein('duck', 'db')` |
 | **Result** | `3` |
 | **Alias** | `editdist3` |
 
@@ -1119,7 +1119,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The Hamming distance between to strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
-| **Example** | `mismatches('duck', 'luck')`{:.language-sql .highlight} |
+| **Example** | `mismatches('duck', 'luck')` |
 | **Result** | `1` |
 | **Alias** | `hamming` |
 

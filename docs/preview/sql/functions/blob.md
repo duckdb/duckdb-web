@@ -39,11 +39,11 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`]({% link docs/preview/sql/functions/text.md %}#concatvalue-) and [`list_concat(list1, list2, ...)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist_1--list_n). |
-| **Example 1** | `'Duck' || 'DB'`{:.language-sql .highlight} |
+| **Example 1** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
-| **Example 2** | `[1, 2, 3] || [4, 5, 6]`{:.language-sql .highlight} |
+| **Example 2** | `[1, 2, 3] || [4, 5, 6]` |
 | **Result** | `[1, 2, 3, 4, 5, 6]` |
-| **Example 3** | `'\xAA'::BLOB || '\xBB'::BLOB`{:.language-sql .highlight} |
+| **Example 3** | `'\xAA'::BLOB || '\xBB'::BLOB` |
 | **Result** | `\xAA\xBB` |
 
 #### `base64(blob)`
@@ -51,7 +51,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `blob` to a base64 encoded string. |
-| **Example** | `base64('A'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 | **Alias** | `to_base64` |
 
@@ -60,7 +60,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `blob` to `VARCHAR`. Fails if `blob` is not valid UTF-8. |
-| **Example** | `decode('\xC3\xBC'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `decode('\xC3\xBC'::BLOB)` |
 | **Result** | `ü` |
 
 #### `encode(string)`
@@ -68,7 +68,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding. |
-| **Example** | `encode('my_string_with_ü')`{:.language-sql .highlight} |
+| **Example** | `encode('my_string_with_ü')` |
 | **Result** | `my_string_with_\xC3\xBC` |
 
 #### `from_base64(string)`
@@ -76,7 +76,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a base64 encoded `string` to a character string (`BLOB`). |
-| **Example** | `from_base64('QQ==')`{:.language-sql .highlight} |
+| **Example** | `from_base64('QQ==')` |
 | **Result** | `A` |
 
 #### `from_binary(value)`
@@ -84,7 +84,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `value` from binary representation to a blob. |
-| **Example** | `from_binary('0110')`{:.language-sql .highlight} |
+| **Example** | `from_binary('0110')` |
 | **Result** | `\x06` |
 | **Alias** | `unbin` |
 
@@ -93,7 +93,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `value` from hexadecimal representation to a blob. |
-| **Example** | `from_hex('2A')`{:.language-sql .highlight} |
+| **Example** | `from_hex('2A')` |
 | **Result** | `*` |
 | **Alias** | `unhex` |
 
@@ -102,7 +102,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
-| **Example** | `hex('\xAA\xBB'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `hex('\xAA\xBB'::BLOB)` |
 | **Result** | `AABB` |
 | **Alias** | `to_hex` |
 
@@ -111,7 +111,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the MD5 hash of the `blob` as a `VARCHAR`. |
-| **Example** | `md5('\xAA\xBB'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `md5('\xAA\xBB'::BLOB)` |
 | **Result** | `58cea1f6b2b06520613e09af90dc1c47` |
 
 #### `md5_number(blob)`
@@ -119,7 +119,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the MD5 hash of the `blob` as a `HUGEINT`. |
-| **Example** | `md5_number('\xAA\xBB'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `md5_number('\xAA\xBB'::BLOB)` |
 | **Result** | `94525045605907259200829535064523132504` |
 
 #### `octet_length(blob)`
@@ -127,7 +127,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Number of bytes in `blob`. |
-| **Example** | `octet_length('\xAA\xBB'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `octet_length('\xAA\xBB'::BLOB)` |
 | **Result** | `2` |
 
 #### `read_blob(source)`
@@ -135,7 +135,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/preview/guides/file_formats/read_file.md %}#read_blob) for more details. |
-| **Example** | `read_blob('hello.bin')`{:.language-sql .highlight} |
+| **Example** | `read_blob('hello.bin')` |
 | **Result** | `hello\x0A` |
 
 #### `repeat(blob, count)`
@@ -143,7 +143,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Repeats the `blob` `count` number of times. |
-| **Example** | `repeat('\xAA\xBB'::BLOB, 5)`{:.language-sql .highlight} |
+| **Example** | `repeat('\xAA\xBB'::BLOB, 5)` |
 | **Result** | `\xAA\xBB\xAA\xBB\xAA\xBB\xAA\xBB\xAA\xBB` |
 
 #### `sha1(blob)`
@@ -151,7 +151,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a `VARCHAR` with the SHA-1 hash of the `blob`. |
-| **Example** | `sha1('\xAA\xBB'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `sha1('\xAA\xBB'::BLOB)` |
 | **Result** | `65b1e351a6cbfeb41c927222bc9ef53aad3396b0` |
 
 #### `sha256(blob)`
@@ -159,7 +159,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a `VARCHAR` with the SHA-256 hash of the `blob`. |
-| **Example** | `sha256('\xAA\xBB'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `sha256('\xAA\xBB'::BLOB)` |
 | **Result** | `d798d1fac6bd4bb1c11f50312760351013379a0ab6f0a8c0af8a506b96b2525a` |
 
 #### `to_base64(blob)`
@@ -167,7 +167,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `blob` to a base64 encoded string. |
-| **Example** | `to_base64('A'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `to_base64('A'::BLOB)` |
 | **Result** | `QQ==` |
 | **Alias** | `base64` |
 
@@ -176,7 +176,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
-| **Example** | `to_hex('\xAA\xBB'::BLOB)`{:.language-sql .highlight} |
+| **Example** | `to_hex('\xAA\xBB'::BLOB)` |
 | **Result** | `AABB` |
 | **Alias** | `hex` |
 
@@ -185,7 +185,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `value` from binary representation to a blob. |
-| **Example** | `unbin('0110')`{:.language-sql .highlight} |
+| **Example** | `unbin('0110')` |
 | **Result** | `\x06` |
 | **Alias** | `from_binary` |
 
@@ -194,7 +194,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Converts a `value` from hexadecimal representation to a blob. |
-| **Example** | `unhex('2A')`{:.language-sql .highlight} |
+| **Example** | `unhex('2A')` |
 | **Result** | `*` |
 | **Alias** | `from_hex` |
 

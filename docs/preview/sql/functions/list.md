@@ -154,7 +154,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts a single list element using a (1-based) `index`. |
-| **Example** | `[4, 5, 6][3]`{:.language-sql .highlight} |
+| **Example** | `[4, 5, 6][3]` |
 | **Result** | `6` |
 | **Alias** | `list_extract` |
 
@@ -163,7 +163,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts a sublist using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
-| **Example** | `[4, 5, 6][3]`{:.language-sql .highlight} |
+| **Example** | `[4, 5, 6][3]` |
 | **Result** | `6` |
 | **Alias** | `list_slice` |
 
@@ -172,7 +172,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if the lists have any element in common. NULLs are ignored. |
-| **Example** | `list_has_any([1, 2, 3], [2, 3, 4])`{:.language-sql .highlight} |
+| **Example** | `list_has_any([1, 2, 3], [2, 3, 4])` |
 | **Result** | `true` |
 | **Aliases** | `array_has_any`, `list_has_any` |
 
@@ -181,7 +181,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Calculates the Euclidean distance between two points with coordinates given in two inputs lists of equal length. |
-| **Example** | `list_distance([1, 2, 3], [1, 2, 5])`{:.language-sql .highlight} |
+| **Example** | `list_distance([1, 2, 3], [1, 2, 5])` |
 | **Result** | `2.0` |
 | **Alias** | `list_distance` |
 
@@ -190,7 +190,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the cosine distance between two same-sized lists. |
-| **Example** | `list_cosine_distance([1, 2, 3], [1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_cosine_distance([1, 2, 3], [1, 2, 3])` |
 | **Result** | `0.0` |
 | **Alias** | `list_cosine_distance` |
 
@@ -199,7 +199,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if all elements of list2 are in list1. NULLs are ignored. |
-| **Example** | `list_has_all([1, 2, 3], [2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_has_all([1, 2, 3], [2, 3])` |
 | **Result** | `true` |
 | **Aliases** | `@>`, `array_has_all`, `list_has_all` |
 
@@ -208,7 +208,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if all elements of list2 are in list1. NULLs are ignored. |
-| **Example** | `list_has_all([1, 2, 3], [2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_has_all([1, 2, 3], [2, 3])` |
 | **Result** | `true` |
 | **Aliases** | `<@`, `array_has_all`, `list_has_all` |
 
@@ -217,11 +217,11 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`]({% link docs/preview/sql/functions/text.md %}#concatvalue-) and [`list_concat(list1, list2, ...)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist_1--list_n). |
-| **Example 1** | `'Duck' || 'DB'`{:.language-sql .highlight} |
+| **Example 1** | `'Duck' || 'DB'` |
 | **Result** | `DuckDB` |
-| **Example 2** | `[1, 2, 3] || [4, 5, 6]`{:.language-sql .highlight} |
+| **Example 2** | `[1, 2, 3] || [4, 5, 6]` |
 | **Result** | `[1, 2, 3, 4, 5, 6]` |
-| **Example 3** | `'\xAA'::BLOB || '\xBB'::BLOB`{:.language-sql .highlight} |
+| **Example 3** | `'\xAA'::BLOB || '\xBB'::BLOB` |
 | **Result** | `\xAA\xBB` |
 
 #### `aggregate(list, function_name, ...)`
@@ -229,7 +229,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Executes the aggregate function `function_name` on the elements of `list`. See the [List Aggregates](#list-aggregates) section for more details. |
-| **Example** | `aggregate([1, 2, NULL], 'min')`{:.language-sql .highlight} |
+| **Example** | `aggregate([1, 2, NULL], 'min')` |
 | **Result** | `1` |
 | **Aliases** | `array_aggr`, `array_aggregate`, `list_aggr`, `list_aggregate` |
 
@@ -238,7 +238,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `apply([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `apply([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `array_apply`, `array_transform`, `list_apply`, `list_transform` |
 
@@ -247,7 +247,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Executes the aggregate function `function_name` on the elements of `list`. See the [List Aggregates](#list-aggregates) section for more details. |
-| **Example** | `array_aggr([1, 2, NULL], 'min')`{:.language-sql .highlight} |
+| **Example** | `array_aggr([1, 2, NULL], 'min')` |
 | **Result** | `1` |
 | **Aliases** | `aggregate`, `array_aggregate`, `list_aggr`, `list_aggregate` |
 
@@ -256,7 +256,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Executes the aggregate function `function_name` on the elements of `list`. See the [List Aggregates](#list-aggregates) section for more details. |
-| **Example** | `array_aggregate([1, 2, NULL], 'min')`{:.language-sql .highlight} |
+| **Example** | `array_aggregate([1, 2, NULL], 'min')` |
 | **Result** | `1` |
 | **Aliases** | `aggregate`, `array_aggr`, `list_aggr`, `list_aggregate` |
 
@@ -265,7 +265,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Appends `element` to `list`. |
-| **Example** | `array_append([2, 3], 4)`{:.language-sql .highlight} |
+| **Example** | `array_append([2, 3], 4)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `array_push_back`, `list_append` |
 
@@ -274,7 +274,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `array_apply([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `array_apply([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `apply`, `array_transform`, `list_apply`, `list_transform` |
 
@@ -283,7 +283,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `array_cat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
+| **Example** | `array_cat([2, 3], [4, 5, 6], [7])` |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `array_concat`, `list_cat`, `list_concat` |
 
@@ -292,7 +292,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `array_cat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
+| **Example** | `array_cat([2, 3], [4, 5, 6], [7])` |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `list_cat`, `array_concat`, `list_concat` |
 
@@ -301,7 +301,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `array_concat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
+| **Example** | `array_concat([2, 3], [4, 5, 6], [7])` |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `array_cat`, `list_cat`, `list_concat` |
 
@@ -310,7 +310,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `array_concat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
+| **Example** | `array_concat([2, 3], [4, 5, 6], [7])` |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `list_cat`, `array_cat`, `list_concat` |
 
@@ -319,7 +319,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if the list contains the element. |
-| **Example** | `array_contains([1, 2, NULL], 1)`{:.language-sql .highlight} |
+| **Example** | `array_contains([1, 2, NULL], 1)` |
 | **Result** | `true` |
 | **Aliases** | `array_has`, `list_contains`, `list_has` |
 
@@ -328,7 +328,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Removes all duplicates and `NULL` values from a list. Does not preserve the original order. |
-| **Example** | `array_distinct([1, 1, NULL, -3, 1, 5])`{:.language-sql .highlight} |
+| **Example** | `array_distinct([1, 1, NULL, -3, 1, 5])` |
 | **Result** | `[5, -3, 1]` |
 | **Alias** | `list_distinct` |
 
@@ -337,7 +337,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts the `index`th (1-based) value from the `list`. |
-| **Example** | `array_extract([4, 5, 6], 3)`{:.language-sql .highlight} |
+| **Example** | `array_extract([4, 5, 6], 3)` |
 | **Result** | `6` |
 
 #### `array_filter(list, lambda(x))`
@@ -345,7 +345,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/preview/sql/functions/lambda.md %}#list_filter-examples). |
-| **Example** | `array_filter([3, 4, 5], lambda x : x > 4)`{:.language-sql .highlight} |
+| **Example** | `array_filter([3, 4, 5], lambda x : x > 4)` |
 | **Result** | `[5]` |
 | **Aliases** | `filter`, `list_filter` |
 
@@ -354,7 +354,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Works like [list_sort](#list_sortlist), but the results are the indexes that correspond to the position in the original list instead of the actual values. |
-| **Example** | `array_grade_up([3, 6, 1, 2])`{:.language-sql .highlight} |
+| **Example** | `array_grade_up([3, 6, 1, 2])` |
 | **Result** | `[3, 4, 1, 2]` |
 | **Aliases** | `grade_up`, `list_grade_up` |
 
@@ -363,7 +363,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if the list contains the element. |
-| **Example** | `array_has([1, 2, NULL], 1)`{:.language-sql .highlight} |
+| **Example** | `array_has([1, 2, NULL], 1)` |
 | **Result** | `true` |
 | **Aliases** | `array_contains`, `list_contains`, `list_has` |
 
@@ -372,7 +372,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if all elements of list2 are in list1. NULLs are ignored. |
-| **Example** | `array_has_all([1, 2, 3], [2, 3])`{:.language-sql .highlight} |
+| **Example** | `array_has_all([1, 2, 3], [2, 3])` |
 | **Result** | `true` |
 | **Aliases** | `<@`, `@>`, `list_has_all` |
 
@@ -381,7 +381,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if the lists have any element in common. NULLs are ignored. |
-| **Example** | `array_has_any([1, 2, 3], [2, 3, 4])`{:.language-sql .highlight} |
+| **Example** | `array_has_any([1, 2, 3], [2, 3, 4])` |
 | **Result** | `true` |
 | **Aliases** | `&&`, `list_has_any` |
 
@@ -390,7 +390,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the index of the `element` if the `list` contains the `element`. If the `element` is not found, it returns `NULL`. |
-| **Example** | `array_indexof([1, 2, NULL], 2)`{:.language-sql .highlight} |
+| **Example** | `array_indexof([1, 2, NULL], 2)` |
 | **Result** | `2` |
 | **Aliases** | `array_position`, `list_indexof`, `list_position` |
 
@@ -399,7 +399,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list of all the elements that exist in both `list1` and `list2`, without duplicates. |
-| **Example** | `array_intersect([1, 2, 3], [2, 3, 4])`{:.language-sql .highlight} |
+| **Example** | `array_intersect([1, 2, 3], [2, 3, 4])` |
 | **Result** | `[3, 2]` |
 | **Alias** | `list_intersect` |
 
@@ -408,7 +408,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the length of the `list`. |
-| **Example** | `array_length([1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `array_length([1, 2, 3])` |
 | **Result** | `3` |
 
 #### `array_length(list, dimension)`
@@ -416,7 +416,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | `array_length` for lists with dimensions other than 1 not implemented |
-| **Example** | `array_length([1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `array_length([1, 2, 3])` |
 | **Result** | `3` |
 
 #### `array_pop_back(list)`
@@ -424,7 +424,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the `list` without the last element. |
-| **Example** | `array_pop_back([4, 5, 6])`{:.language-sql .highlight} |
+| **Example** | `array_pop_back([4, 5, 6])` |
 | **Result** | `[4, 5]` |
 
 #### `array_pop_front(list)`
@@ -432,7 +432,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the `list` without the first element. |
-| **Example** | `array_pop_front([4, 5, 6])`{:.language-sql .highlight} |
+| **Example** | `array_pop_front([4, 5, 6])` |
 | **Result** | `[5, 6]` |
 
 #### `array_position(list, element)`
@@ -440,7 +440,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the index of the `element` if the `list` contains the `element`. If the `element` is not found, it returns `NULL`. |
-| **Example** | `array_position([1, 2, NULL], 2)`{:.language-sql .highlight} |
+| **Example** | `array_position([1, 2, NULL], 2)` |
 | **Result** | `2` |
 | **Aliases** | `array_indexof`, `list_indexof`, `list_position` |
 
@@ -449,7 +449,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Prepends `element` to `list`. |
-| **Example** | `array_prepend(3, [4, 5, 6])`{:.language-sql .highlight} |
+| **Example** | `array_prepend(3, [4, 5, 6])` |
 | **Result** | `[3, 4, 5, 6]` |
 | **Alias** | `list_prepend` |
 
@@ -458,7 +458,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Appends `element` to `list`. |
-| **Example** | `array_push_back([2, 3], 4)`{:.language-sql .highlight} |
+| **Example** | `array_push_back([2, 3], 4)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `array_append`, `list_append` |
 
@@ -467,7 +467,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Prepends `element` to `list`. |
-| **Example** | `array_push_front([4, 5, 6], 3)`{:.language-sql .highlight} |
+| **Example** | `array_push_front([4, 5, 6], 3)` |
 | **Result** | `[3, 4, 5, 6]` |
 
 #### `array_reduce(list, lambda(x,y)[, initial_value])`
@@ -475,7 +475,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
-| **Example** | `array_reduce([1, 2, 3], lambda x, y : x + y)`{:.language-sql .highlight} |
+| **Example** | `array_reduce([1, 2, 3], lambda x, y : x + y)` |
 | **Result** | `6` |
 | **Aliases** | `list_reduce`, `reduce` |
 
@@ -484,7 +484,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Resizes the `list` to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
-| **Example** | `array_resize([1, 2, 3], 5, 0)`{:.language-sql .highlight} |
+| **Example** | `array_resize([1, 2, 3], 5, 0)` |
 | **Result** | `[1, 2, 3, 0, 0]` |
 | **Alias** | `list_resize` |
 
@@ -493,7 +493,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Reverses the `list`. |
-| **Example** | `array_reverse([3, 6, 1, 2])`{:.language-sql .highlight} |
+| **Example** | `array_reverse([3, 6, 1, 2])` |
 | **Result** | `[2, 1, 6, 3]` |
 | **Alias** | `list_reverse` |
 
@@ -502,7 +502,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists](#sorting-lists) section for more details about sorting order and `NULL` values. |
-| **Example** | `array_reverse_sort([3, 6, 1, 2])`{:.language-sql .highlight} |
+| **Example** | `array_reverse_sort([3, 6, 1, 2])` |
 | **Result** | `[6, 3, 2, 1]` |
 | **Alias** | `list_reverse_sort` |
 
@@ -511,7 +511,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list based on the elements selected by the `index_list`. |
-| **Example** | `array_select([10, 20, 30, 40], [1, 4])`{:.language-sql .highlight} |
+| **Example** | `array_select([10, 20, 30, 40], [1, 4])` |
 | **Result** | `[10, 40]` |
 | **Alias** | `list_select` |
 
@@ -520,11 +520,11 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
-| **Example 1** | `array_slice('DuckDB', 3, 4)`{:.language-sql .highlight} |
+| **Example 1** | `array_slice('DuckDB', 3, 4)` |
 | **Result** | `ck` |
-| **Example 2** | `array_slice('DuckDB', 3, NULL)`{:.language-sql .highlight} |
+| **Example 2** | `array_slice('DuckDB', 3, NULL)` |
 | **Result** | `NULL` |
-| **Example 3** | `array_slice('DuckDB', 0, -3)`{:.language-sql .highlight} |
+| **Example 3** | `array_slice('DuckDB', 0, -3)` |
 | **Result** | `Duck` |
 | **Alias** | `list_slice` |
 
@@ -533,7 +533,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | list_slice with added step feature. |
-| **Example** | `array_slice([4, 5, 6], 1, 3, 2)`{:.language-sql .highlight} |
+| **Example** | `array_slice([4, 5, 6], 1, 3, 2)` |
 | **Result** | `[4, 6]` |
 | **Alias** | `list_slice` |
 
@@ -542,7 +542,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Sorts the elements of the list. See the [Sorting Lists](#sorting-lists) section for more details about sorting order and `NULL` values. |
-| **Example** | `array_sort([3, 6, 1, 2])`{:.language-sql .highlight} |
+| **Example** | `array_sort([3, 6, 1, 2])` |
 | **Result** | `[1, 2, 3, 6]` |
 | **Alias** | `list_sort` |
 
@@ -551,9 +551,9 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates list/array elements using an optional `delimiter`. |
-| **Example 1** | `array_to_string([1, 2, 3], '-')`{:.language-sql .highlight} |
+| **Example 1** | `array_to_string([1, 2, 3], '-')` |
 | **Result** | `1-2-3` |
-| **Example 2** | `array_to_string(['aa', 'bb', 'cc'], '')`{:.language-sql .highlight} |
+| **Example 2** | `array_to_string(['aa', 'bb', 'cc'], '')` |
 | **Result** | `aabbcc` |
 
 #### `array_to_string_comma_default(array)`
@@ -561,7 +561,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates list/array elements with a comma delimiter. |
-| **Example** | `array_to_string_comma_default(['Banana', 'Apple', 'Melon'])`{:.language-sql .highlight} |
+| **Example** | `array_to_string_comma_default(['Banana', 'Apple', 'Melon'])` |
 | **Result** | `Banana,Apple,Melon` |
 
 #### `array_transform(list, lambda(x))`
@@ -569,7 +569,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `array_transform([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `array_transform([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `apply`, `array_apply`, `list_apply`, `list_transform` |
 
@@ -578,7 +578,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Counts the unique elements of a `list`. |
-| **Example** | `array_unique([1, 1, NULL, -3, 1, 5])`{:.language-sql .highlight} |
+| **Example** | `array_unique([1, 1, NULL, -3, 1, 5])` |
 | **Result** | `3` |
 | **Alias** | `list_unique` |
 
@@ -587,7 +587,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list with the `BOOLEAN`s in `mask_list` applied as a mask to the `value_list`. |
-| **Example** | `array_where([10, 20, 30, 40], [true, false, false, true])`{:.language-sql .highlight} |
+| **Example** | `array_where([10, 20, 30, 40], [true, false, false, true])` |
 | **Result** | `[10, 40]` |
 | **Alias** | `list_where` |
 
@@ -596,11 +596,11 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
-| **Example 1** | `array_zip([1, 2], [3, 4], [5, 6])`{:.language-sql .highlight} |
+| **Example 1** | `array_zip([1, 2], [3, 4], [5, 6])` |
 | **Result** | `[(1, 3, 5), (2, 4, 6)]` |
-| **Example 2** | `array_zip([1, 2], [3, 4], [5, 6, 7])`{:.language-sql .highlight} |
+| **Example 2** | `array_zip([1, 2], [3, 4], [5, 6, 7])` |
 | **Result** | `[(1, 3, 5), (2, 4, 6), (NULL, NULL, 7)]` |
-| **Example 3** | `array_zip([1, 2], [3, 4], [5, 6, 7], true)`{:.language-sql .highlight} |
+| **Example 3** | `array_zip([1, 2], [3, 4], [5, 6, 7], true)` |
 | **Result** | `[(1, 3, 5), (2, 4, 6)]` |
 | **Alias** | `list_zip` |
 
@@ -609,11 +609,11 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
-| **Example 1** | `array_zip([1, 2], [3, 4], [5, 6])`{:.language-sql .highlight} |
+| **Example 1** | `array_zip([1, 2], [3, 4], [5, 6])` |
 | **Result** | `[(1, 3, 5), (2, 4, 6)]` |
-| **Example 2** | `array_zip([1, 2], [3, 4], [5, 6, 7])`{:.language-sql .highlight} |
+| **Example 2** | `array_zip([1, 2], [3, 4], [5, 6, 7])` |
 | **Result** | `[(1, 3, 5), (2, 4, 6), (NULL, NULL, 7)]` |
-| **Example 3** | `array_zip([1, 2], [3, 4], [5, 6, 7], true)`{:.language-sql .highlight} |
+| **Example 3** | `array_zip([1, 2], [3, 4], [5, 6, 7], true)` |
 | **Result** | `[(1, 3, 5), (2, 4, 6)]` |
 | **Alias** | `list_zip` |
 
@@ -622,7 +622,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the length of the `list`. |
-| **Example** | `char_length([1,2,3])`{:.language-sql .highlight} |
+| **Example** | `char_length([1,2,3])` |
 | **Result** | `3` |
 | **Aliases** | `character_length`, `len`, `length` |
 
@@ -631,7 +631,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the length of the `list`. |
-| **Example** | `character_length([1,2,3])`{:.language-sql .highlight} |
+| **Example** | `character_length([1,2,3])` |
 | **Result** | `3` |
 | **Aliases** | `char_length`, `len`, `length` |
 
@@ -640,9 +640,9 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates multiple strings or lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example 1** | `concat('Hello', ' ', 'World')`{:.language-sql .highlight} |
+| **Example 1** | `concat('Hello', ' ', 'World')` |
 | **Result** | `Hello World` |
-| **Example 2** | `concat([1, 2, 3], NULL, [4, 5, 6])`{:.language-sql .highlight} |
+| **Example 2** | `concat([1, 2, 3], NULL, [4, 5, 6])` |
 | **Result** | `[1, 2, 3, 4, 5, 6]` |
 
 #### `contains(list, element)`
@@ -650,7 +650,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns `true` if the `list` contains the `element`. |
-| **Example** | `contains([1, 2, NULL], 1)`{:.language-sql .highlight} |
+| **Example** | `contains([1, 2, NULL], 1)` |
 | **Result** | `true` |
 
 #### `filter(list, lambda(x))`
@@ -658,7 +658,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/preview/sql/functions/lambda.md %}#list_filter-examples). |
-| **Example** | `filter([3, 4, 5], lambda x : x > 4)`{:.language-sql .highlight} |
+| **Example** | `filter([3, 4, 5], lambda x : x > 4)` |
 | **Result** | `[5]` |
 | **Aliases** | `array_filter`, `list_filter` |
 
@@ -667,7 +667,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | [Flattens](#flattening) a nested list by one level. |
-| **Example** | `flatten([[1, 2, 3], [4, 5]])`{:.language-sql .highlight} |
+| **Example** | `flatten([[1, 2, 3], [4, 5]])` |
 | **Result** | `[1, 2, 3, 4, 5]` |
 
 #### `generate_series(start[, stop][, step])`
@@ -675,7 +675,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Creates a list of values between `start` and `stop` - the stop parameter is inclusive. |
-| **Example** | `generate_series(2, 5, 3)`{:.language-sql .highlight} |
+| **Example** | `generate_series(2, 5, 3)` |
 | **Result** | `[2, 5]` |
 
 #### `grade_up(list[, col1][, col2])`
@@ -683,7 +683,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Works like [list_sort](#list_sortlist), but the results are the indexes that correspond to the position in the original list instead of the actual values. |
-| **Example** | `grade_up([3, 6, 1, 2])`{:.language-sql .highlight} |
+| **Example** | `grade_up([3, 6, 1, 2])` |
 | **Result** | `[3, 4, 1, 2]` |
 | **Aliases** | `array_grade_up`, `list_grade_up` |
 
@@ -692,7 +692,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the length of the `list`. |
-| **Example** | `length([1,2,3])`{:.language-sql .highlight} |
+| **Example** | `length([1,2,3])` |
 | **Result** | `3` |
 | **Aliases** | `char_length`, `character_length`, `length` |
 
@@ -701,7 +701,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the length of the `list`. |
-| **Example** | `length([1,2,3])`{:.language-sql .highlight} |
+| **Example** | `length([1,2,3])` |
 | **Result** | `3` |
 | **Aliases** | `char_length`, `character_length`, `len` |
 
@@ -710,7 +710,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Executes the aggregate function `function_name` on the elements of `list`. See the [List Aggregates](#list-aggregates) section for more details. |
-| **Example** | `list_aggregate([1, 2, NULL], 'min')`{:.language-sql .highlight} |
+| **Example** | `list_aggregate([1, 2, NULL], 'min')` |
 | **Result** | `1` |
 | **Aliases** | `aggregate`, `array_aggr`, `array_aggregate`, `list_aggregate` |
 
@@ -719,7 +719,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Executes the aggregate function `function_name` on the elements of `list`. See the [List Aggregates](#list-aggregates) section for more details. |
-| **Example** | `list_aggregate([1, 2, NULL], 'min')`{:.language-sql .highlight} |
+| **Example** | `list_aggregate([1, 2, NULL], 'min')` |
 | **Result** | `1` |
 | **Aliases** | `aggregate`, `array_aggr`, `array_aggregate`, `list_aggr` |
 
@@ -728,7 +728,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`any_value`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_any_value([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_any_value([3,3,9])` |
 | **Result** | `3` |
 
 #### `list_append(list, element)`
@@ -736,7 +736,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Appends `element` to `list`. |
-| **Example** | `list_append([2, 3], 4)`{:.language-sql .highlight} |
+| **Example** | `list_append([2, 3], 4)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `array_append`, `array_push_back` |
 
@@ -745,7 +745,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `list_apply([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `list_apply([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `apply`, `array_apply`, `array_transform`, `list_transform` |
 
@@ -754,7 +754,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`approx_count_distinct`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_approx_count_distinct([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_approx_count_distinct([3,3,9])` |
 | **Result** | `2` |
 
 #### `list_avg(list)`
@@ -762,7 +762,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`avg`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_avg([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_avg([3,3,9])` |
 | **Result** | `5.0` |
 
 #### `list_bit_and(list)`
@@ -770,7 +770,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`bit_and`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_bit_and([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_bit_and([3,3,9])` |
 | **Result** | `1` |
 
 #### `list_bit_or(list)`
@@ -778,7 +778,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`bit_or`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_bit_or([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_bit_or([3,3,9])` |
 | **Result** | `11` |
 
 #### `list_bit_xor(list)`
@@ -786,7 +786,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`bit_xor`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_bit_xor([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_bit_xor([3,3,9])` |
 | **Result** | `9` |
 
 #### `list_bool_and(list)`
@@ -794,7 +794,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`bool_and`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_bool_and([true, false])`{:.language-sql .highlight} |
+| **Example** | `list_bool_and([true, false])` |
 | **Result** | `false` |
 
 #### `list_bool_or(list)`
@@ -802,7 +802,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`bool_or`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_bool_or([true, false])`{:.language-sql .highlight} |
+| **Example** | `list_bool_or([true, false])` |
 | **Result** | `true` |
 
 #### `list_cat()`
@@ -810,7 +810,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `list_cat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
+| **Example** | `list_cat([2, 3], [4, 5, 6], [7])` |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `array_cat`, `array_concat`, `list_concat` |
 
@@ -819,7 +819,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `list_cat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
+| **Example** | `list_cat([2, 3], [4, 5, 6], [7])` |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `array_concat`, `array_cat`, `list_concat` |
 
@@ -828,7 +828,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `list_concat([2, 3], [4, 5, 6], [7])`{:.language-sql .highlight} |
+| **Example** | `list_concat([2, 3], [4, 5, 6], [7])` |
 | **Result** | `[2, 3, 4, 5, 6, 7]` |
 | **Aliases** | `list_cat`, `array_concat`, `array_cat` |
 
@@ -837,7 +837,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if the list contains the element. |
-| **Example** | `list_contains([1, 2, NULL], 1)`{:.language-sql .highlight} |
+| **Example** | `list_contains([1, 2, NULL], 1)` |
 | **Result** | `true` |
 | **Aliases** | `array_contains`, `array_has`, `list_has` |
 
@@ -846,7 +846,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the cosine distance between two same-sized lists. |
-| **Example** | `list_cosine_distance([1, 2, 3], [1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_cosine_distance([1, 2, 3], [1, 2, 3])` |
 | **Result** | `0.0` |
 | **Alias** | `<=>` |
 
@@ -855,7 +855,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the cosine similarity between two same-sized lists. |
-| **Example** | `list_cosine_similarity([1, 2, 3], [1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_cosine_similarity([1, 2, 3], [1, 2, 3])` |
 | **Result** | `1.0` |
 
 #### `list_count(list)`
@@ -863,7 +863,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`count`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_count([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_count([3,3,9])` |
 | **Result** | `3` |
 
 #### `list_distance(list1, list2)`
@@ -871,7 +871,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Calculates the Euclidean distance between two points with coordinates given in two inputs lists of equal length. |
-| **Example** | `list_distance([1, 2, 3], [1, 2, 5])`{:.language-sql .highlight} |
+| **Example** | `list_distance([1, 2, 3], [1, 2, 5])` |
 | **Result** | `2.0` |
 | **Alias** | `<->` |
 
@@ -880,7 +880,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Removes all duplicates and `NULL` values from a list. Does not preserve the original order. |
-| **Example** | `list_distinct([1, 1, NULL, -3, 1, 5])`{:.language-sql .highlight} |
+| **Example** | `list_distinct([1, 1, NULL, -3, 1, 5])` |
 | **Result** | `[5, -3, 1]` |
 | **Alias** | `array_distinct` |
 
@@ -889,7 +889,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the inner product between two same-sized lists. |
-| **Example** | `list_dot_product([1, 2, 3], [1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_dot_product([1, 2, 3], [1, 2, 3])` |
 | **Result** | `14.0` |
 | **Alias** | `list_inner_product` |
 
@@ -898,7 +898,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Extract the `index`th (1-based) value from the list. |
-| **Example** | `list_element([4, 5, 6], 3)`{:.language-sql .highlight} |
+| **Example** | `list_element([4, 5, 6], 3)` |
 | **Result** | `6` |
 | **Alias** | `list_extract` |
 
@@ -907,7 +907,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`entropy`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_entropy([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_entropy([3,3,9])` |
 | **Result** | `0.9182958340544893` |
 
 #### `list_extract(list, index)`
@@ -915,7 +915,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Extract the `index`th (1-based) value from the list. |
-| **Example** | `list_extract([4, 5, 6], 3)`{:.language-sql .highlight} |
+| **Example** | `list_extract([4, 5, 6], 3)` |
 | **Result** | `6` |
 | **Alias** | `list_element` |
 
@@ -924,7 +924,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/preview/sql/functions/lambda.md %}#list_filter-examples). |
-| **Example** | `list_filter([3, 4, 5], lambda x : x > 4)`{:.language-sql .highlight} |
+| **Example** | `list_filter([3, 4, 5], lambda x : x > 4)` |
 | **Result** | `[5]` |
 | **Aliases** | `array_filter`, `filter` |
 
@@ -933,7 +933,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`first`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_first([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_first([3,3,9])` |
 | **Result** | `3` |
 
 #### `list_grade_up(list[, col1][, col2])`
@@ -941,7 +941,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Works like [list_sort](#list_sortlist), but the results are the indexes that correspond to the position in the original list instead of the actual values. |
-| **Example** | `list_grade_up([3, 6, 1, 2])`{:.language-sql .highlight} |
+| **Example** | `list_grade_up([3, 6, 1, 2])` |
 | **Result** | `[3, 4, 1, 2]` |
 | **Aliases** | `array_grade_up`, `grade_up` |
 
@@ -950,7 +950,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if the list contains the element. |
-| **Example** | `list_has([1, 2, NULL], 1)`{:.language-sql .highlight} |
+| **Example** | `list_has([1, 2, NULL], 1)` |
 | **Result** | `true` |
 | **Aliases** | `array_contains`, `array_has`, `list_contains` |
 
@@ -959,7 +959,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if all elements of list2 are in list1. NULLs are ignored. |
-| **Example** | `list_has_all([1, 2, 3], [2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_has_all([1, 2, 3], [2, 3])` |
 | **Result** | `true` |
 | **Aliases** | `<@`, `@>`, `array_has_all` |
 
@@ -968,7 +968,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns true if the lists have any element in common. NULLs are ignored. |
-| **Example** | `list_has_any([1, 2, 3], [2, 3, 4])`{:.language-sql .highlight} |
+| **Example** | `list_has_any([1, 2, 3], [2, 3, 4])` |
 | **Result** | `true` |
 | **Aliases** | `&&`, `array_has_any` |
 
@@ -977,7 +977,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`histogram`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_histogram([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_histogram([3,3,9])` |
 | **Result** | `{3=2, 9=1}` |
 
 #### `list_indexof(list, element)`
@@ -985,7 +985,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the index of the `element` if the `list` contains the `element`. If the `element` is not found, it returns `NULL`. |
-| **Example** | `list_indexof([1, 2, NULL], 2)`{:.language-sql .highlight} |
+| **Example** | `list_indexof([1, 2, NULL], 2)` |
 | **Result** | `2` |
 | **Aliases** | `array_indexof`, `array_position`, `list_position` |
 
@@ -994,7 +994,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the inner product between two same-sized lists. |
-| **Example** | `list_inner_product([1, 2, 3], [1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_inner_product([1, 2, 3], [1, 2, 3])` |
 | **Result** | `14.0` |
 | **Alias** | `list_dot_product` |
 
@@ -1003,7 +1003,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list of all the elements that exist in both `list1` and `list2`, without duplicates. |
-| **Example** | `list_intersect([1, 2, 3], [2, 3, 4])`{:.language-sql .highlight} |
+| **Example** | `list_intersect([1, 2, 3], [2, 3, 4])` |
 | **Result** | `[3, 2]` |
 | **Alias** | `array_intersect` |
 
@@ -1012,7 +1012,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`kurtosis`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_kurtosis([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_kurtosis([3,3,9])` |
 | **Result** | `NULL` |
 
 #### `list_kurtosis_pop(list)`
@@ -1020,7 +1020,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`kurtosis_pop`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_kurtosis_pop([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_kurtosis_pop([3,3,9])` |
 | **Result** | `-1.4999999999999978` |
 
 #### `list_last(list)`
@@ -1028,7 +1028,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`last`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_last([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_last([3,3,9])` |
 | **Result** | `9` |
 
 #### `list_mad(list)`
@@ -1036,7 +1036,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`mad`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_mad([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_mad([3,3,9])` |
 | **Result** | `0.0` |
 
 #### `list_max(list)`
@@ -1044,7 +1044,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`max`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_max([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_max([3,3,9])` |
 | **Result** | `9` |
 
 #### `list_median(list)`
@@ -1052,7 +1052,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`median`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_median([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_median([3,3,9])` |
 | **Result** | `3.0` |
 
 #### `list_min(list)`
@@ -1060,7 +1060,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`min`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_min([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_min([3,3,9])` |
 | **Result** | `3` |
 
 #### `list_mode(list)`
@@ -1068,7 +1068,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`mode`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_mode([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_mode([3,3,9])` |
 | **Result** | `3` |
 
 #### `list_negative_dot_product(list1, list2)`
@@ -1076,7 +1076,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the negative inner product between two same-sized lists. |
-| **Example** | `list_negative_dot_product([1, 2, 3], [1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_negative_dot_product([1, 2, 3], [1, 2, 3])` |
 | **Result** | `-14.0` |
 | **Alias** | `list_negative_inner_product` |
 
@@ -1085,7 +1085,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the negative inner product between two same-sized lists. |
-| **Example** | `list_negative_inner_product([1, 2, 3], [1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `list_negative_inner_product([1, 2, 3], [1, 2, 3])` |
 | **Result** | `-14.0` |
 | **Alias** | `list_negative_dot_product` |
 
@@ -1094,7 +1094,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Creates a LIST containing the argument values. |
-| **Example** | `list_pack(4, 5, 6)`{:.language-sql .highlight} |
+| **Example** | `list_pack(4, 5, 6)` |
 | **Result** | `[4, 5, 6]` |
 | **Alias** | `list_value` |
 
@@ -1103,7 +1103,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the index of the `element` if the `list` contains the `element`. If the `element` is not found, it returns `NULL`. |
-| **Example** | `list_position([1, 2, NULL], 2)`{:.language-sql .highlight} |
+| **Example** | `list_position([1, 2, NULL], 2)` |
 | **Result** | `2` |
 | **Aliases** | `array_indexof`, `array_position`, `list_indexof` |
 
@@ -1112,7 +1112,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Prepends `element` to `list`. |
-| **Example** | `list_prepend(3, [4, 5, 6])`{:.language-sql .highlight} |
+| **Example** | `list_prepend(3, [4, 5, 6])` |
 | **Result** | `[3, 4, 5, 6]` |
 | **Alias** | `array_prepend` |
 
@@ -1121,7 +1121,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`product`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_product([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_product([3,3,9])` |
 | **Result** | `81.0` |
 
 #### `list_reduce(list, lambda(x,y)[, initial_value])`
@@ -1129,7 +1129,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
-| **Example** | `list_reduce([1, 2, 3], lambda x, y : x + y)`{:.language-sql .highlight} |
+| **Example** | `list_reduce([1, 2, 3], lambda x, y : x + y)` |
 | **Result** | `6` |
 | **Aliases** | `array_reduce`, `reduce` |
 
@@ -1138,7 +1138,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Resizes the `list` to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set. |
-| **Example** | `list_resize([1, 2, 3], 5, 0)`{:.language-sql .highlight} |
+| **Example** | `list_resize([1, 2, 3], 5, 0)` |
 | **Result** | `[1, 2, 3, 0, 0]` |
 | **Alias** | `array_resize` |
 
@@ -1147,7 +1147,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Reverses the `list`. |
-| **Example** | `list_reverse([3, 6, 1, 2])`{:.language-sql .highlight} |
+| **Example** | `list_reverse([3, 6, 1, 2])` |
 | **Result** | `[2, 1, 6, 3]` |
 | **Alias** | `array_reverse` |
 
@@ -1156,7 +1156,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Sorts the elements of the list in reverse order. See the [Sorting Lists](#sorting-lists) section for more details about sorting order and `NULL` values. |
-| **Example** | `list_reverse_sort([3, 6, 1, 2])`{:.language-sql .highlight} |
+| **Example** | `list_reverse_sort([3, 6, 1, 2])` |
 | **Result** | `[6, 3, 2, 1]` |
 | **Alias** | `array_reverse_sort` |
 
@@ -1165,7 +1165,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list based on the elements selected by the `index_list`. |
-| **Example** | `list_select([10, 20, 30, 40], [1, 4])`{:.language-sql .highlight} |
+| **Example** | `list_select([10, 20, 30, 40], [1, 4])` |
 | **Result** | `[10, 40]` |
 | **Alias** | `array_select` |
 
@@ -1174,7 +1174,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`sem`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_sem([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_sem([3,3,9])` |
 | **Result** | `1.6329931618554523` |
 
 #### `list_skewness(list)`
@@ -1182,7 +1182,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`skewness`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_skewness([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_skewness([3,3,9])` |
 | **Result** | `1.7320508075688796` |
 
 #### `list_slice(list, begin, end)`
@@ -1190,7 +1190,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
-| **Example** | `list_slice([4, 5, 6], 2, 3)`{:.language-sql .highlight} |
+| **Example** | `list_slice([4, 5, 6], 2, 3)` |
 | **Result** | `[5, 6]` |
 | **Alias** | `array_slice` |
 
@@ -1199,7 +1199,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | list_slice with added step feature. |
-| **Example** | `list_slice([4, 5, 6], 1, 3, 2)`{:.language-sql .highlight} |
+| **Example** | `list_slice([4, 5, 6], 1, 3, 2)` |
 | **Result** | `[4, 6]` |
 | **Alias** | `array_slice` |
 
@@ -1208,7 +1208,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Sorts the elements of the list. See the [Sorting Lists](#sorting-lists) section for more details about sorting order and `NULL` values. |
-| **Example** | `list_sort([3, 6, 1, 2])`{:.language-sql .highlight} |
+| **Example** | `list_sort([3, 6, 1, 2])` |
 | **Result** | `[1, 2, 3, 6]` |
 | **Alias** | `array_sort` |
 
@@ -1217,7 +1217,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`stddev_pop`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_stddev_pop([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_stddev_pop([3,3,9])` |
 | **Result** | `2.8284271247461903` |
 
 #### `list_stddev_samp(list)`
@@ -1225,7 +1225,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`stddev_samp`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_stddev_samp([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_stddev_samp([3,3,9])` |
 | **Result** | `3.4641016151377544` |
 
 #### `list_string_agg(list)`
@@ -1233,7 +1233,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`string_agg`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_string_agg([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_string_agg([3,3,9])` |
 | **Result** | `3,3,9` |
 
 #### `list_sum(list)`
@@ -1241,7 +1241,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`sum`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_sum([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_sum([3,3,9])` |
 | **Result** | `15` |
 
 #### `list_transform(list, lambda(x))`
@@ -1249,7 +1249,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `list_transform([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `list_transform([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `apply`, `array_apply`, `array_transform`, `list_apply` |
 
@@ -1258,7 +1258,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Counts the unique elements of a `list`. |
-| **Example** | `list_unique([1, 1, NULL, -3, 1, 5])`{:.language-sql .highlight} |
+| **Example** | `list_unique([1, 1, NULL, -3, 1, 5])` |
 | **Result** | `3` |
 | **Alias** | `array_unique` |
 
@@ -1267,7 +1267,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Creates a LIST containing the argument values. |
-| **Example** | `list_value(4, 5, 6)`{:.language-sql .highlight} |
+| **Example** | `list_value(4, 5, 6)` |
 | **Result** | `[4, 5, 6]` |
 | **Alias** | `list_pack` |
 
@@ -1276,7 +1276,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`var_pop`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_var_pop([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_var_pop([3,3,9])` |
 | **Result** | `8.0` |
 
 #### `list_var_samp(list)`
@@ -1284,7 +1284,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`var_samp`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_var_samp([3,3,9])`{:.language-sql .highlight} |
+| **Example** | `list_var_samp([3,3,9])` |
 | **Result** | `12.0` |
 
 #### `list_where(value_list, mask_list)`
@@ -1292,7 +1292,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list with the `BOOLEAN`s in `mask_list` applied as a mask to the `value_list`. |
-| **Example** | `list_where([10, 20, 30, 40], [true, false, false, true])`{:.language-sql .highlight} |
+| **Example** | `list_where([10, 20, 30, 40], [true, false, false, true])` |
 | **Result** | `[10, 40]` |
 | **Alias** | `array_where` |
 
@@ -1301,11 +1301,11 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
-| **Example 1** | `list_zip([1, 2], [3, 4], [5, 6])`{:.language-sql .highlight} |
+| **Example 1** | `list_zip([1, 2], [3, 4], [5, 6])` |
 | **Result** | `[(1, 3, 5), (2, 4, 6)]` |
-| **Example 2** | `list_zip([1, 2], [3, 4], [5, 6, 7])`{:.language-sql .highlight} |
+| **Example 2** | `list_zip([1, 2], [3, 4], [5, 6, 7])` |
 | **Result** | `[(1, 3, 5), (2, 4, 6), (NULL, NULL, 7)]` |
-| **Example 3** | `list_zip([1, 2], [3, 4], [5, 6, 7], true)`{:.language-sql .highlight} |
+| **Example 3** | `list_zip([1, 2], [3, 4], [5, 6, 7], true)` |
 | **Result** | `[(1, 3, 5), (2, 4, 6)]` |
 | **Alias** | `array_zip` |
 
@@ -1314,7 +1314,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Creates a list of values between `start` and `stop` - the stop parameter is exclusive. |
-| **Example** | `range(2, 5, 3)`{:.language-sql .highlight} |
+| **Example** | `range(2, 5, 3)` |
 | **Result** | `[2]` |
 
 #### `reduce(list, lambda(x,y)[, initial_value])`
@@ -1322,7 +1322,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
-| **Example** | `reduce([1, 2, 3], lambda x, y : x + y)`{:.language-sql .highlight} |
+| **Example** | `reduce([1, 2, 3], lambda x, y : x + y)` |
 | **Result** | `6` |
 | **Aliases** | `array_reduce`, `list_reduce` |
 
@@ -1331,7 +1331,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Repeats the `list` `count` number of times. |
-| **Example** | `repeat([1, 2, 3], 5)`{:.language-sql .highlight} |
+| **Example** | `repeat([1, 2, 3], 5)` |
 | **Result** | `[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]` |
 
 #### `unnest(list)`
@@ -1339,7 +1339,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [unnest page]({% link docs/preview/sql/query_syntax/unnest.md %}) for more details. |
-| **Example** | `unnest([1, 2, 3])`{:.language-sql .highlight} |
+| **Example** | `unnest([1, 2, 3])` |
 | **Result** | Multiple rows: `'1'`, `'2'`, `'3'` |
 
 #### `unpivot_list(arg, ...)`
@@ -1347,7 +1347,7 @@ title: List Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Identical to list_value, but generated as part of unpivot for better error messages. |
-| **Example** | `unpivot_list(4, 5, 6)`{:.language-sql .highlight} |
+| **Example** | `unpivot_list(4, 5, 6)` |
 | **Result** | `[4, 5, 6]` |
 
 <!-- End of section generated by scripts/generate_sql_function_docs.py -->

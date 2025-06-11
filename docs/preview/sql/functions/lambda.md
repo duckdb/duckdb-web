@@ -61,7 +61,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `apply([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `apply([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `array_apply`, `array_transform`, `list_apply`, `list_transform` |
 
@@ -70,7 +70,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `array_apply([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `array_apply([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `apply`, `array_transform`, `list_apply`, `list_transform` |
 
@@ -79,7 +79,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/preview/sql/functions/lambda.md %}#list_filter-examples). |
-| **Example** | `array_filter([3, 4, 5], lambda x : x > 4)`{:.language-sql .highlight} |
+| **Example** | `array_filter([3, 4, 5], lambda x : x > 4)` |
 | **Result** | `[5]` |
 | **Aliases** | `filter`, `list_filter` |
 
@@ -88,7 +88,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
-| **Example** | `array_reduce([1, 2, 3], lambda x, y : x + y)`{:.language-sql .highlight} |
+| **Example** | `array_reduce([1, 2, 3], lambda x, y : x + y)` |
 | **Result** | `6` |
 | **Aliases** | `list_reduce`, `reduce` |
 
@@ -97,7 +97,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `array_transform([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `array_transform([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `apply`, `array_apply`, `list_apply`, `list_transform` |
 
@@ -106,7 +106,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/preview/sql/functions/lambda.md %}#list_filter-examples). |
-| **Example** | `filter([3, 4, 5], lambda x : x > 4)`{:.language-sql .highlight} |
+| **Example** | `filter([3, 4, 5], lambda x : x > 4)` |
 | **Result** | `[5]` |
 | **Aliases** | `array_filter`, `list_filter` |
 
@@ -115,7 +115,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `list_apply([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `list_apply([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `apply`, `array_apply`, `array_transform`, `list_transform` |
 
@@ -124,7 +124,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/preview/sql/functions/lambda.md %}#list_filter-examples). |
-| **Example** | `list_filter([3, 4, 5], lambda x : x > 4)`{:.language-sql .highlight} |
+| **Example** | `list_filter([3, 4, 5], lambda x : x > 4)` |
 | **Result** | `[5]` |
 | **Aliases** | `array_filter`, `filter` |
 
@@ -133,7 +133,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
-| **Example** | `list_reduce([1, 2, 3], lambda x, y : x + y)`{:.language-sql .highlight} |
+| **Example** | `list_reduce([1, 2, 3], lambda x, y : x + y)` |
 | **Result** | `6` |
 | **Aliases** | `array_reduce`, `reduce` |
 
@@ -142,7 +142,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| **Example** | `list_transform([1, 2, 3], lambda x : x + 1)`{:.language-sql .highlight} |
+| **Example** | `list_transform([1, 2, 3], lambda x : x + 1)` |
 | **Result** | `[2, 3, 4]` |
 | **Aliases** | `apply`, `array_apply`, `array_transform`, `list_apply` |
 
@@ -151,7 +151,7 @@ For example, the following are all valid lambda functions:
 <div class="nostroke_table"></div>
 
 | **Description** | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
-| **Example** | `reduce([1, 2, 3], lambda x, y : x + y)`{:.language-sql .highlight} |
+| **Example** | `reduce([1, 2, 3], lambda x, y : x + y)` |
 | **Result** | `6` |
 | **Aliases** | `array_reduce`, `list_reduce` |
 
