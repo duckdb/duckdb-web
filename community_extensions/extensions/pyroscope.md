@@ -51,8 +51,8 @@ docs:
     ![pyroscope_duckdb_large](https://github.com/user-attachments/assets/74fad3ec-3bc3-4880-be4b-8149c5431115)
 
 
-extension_star_count: 17
-extension_star_count_pretty: 17
+extension_star_count: 18
+extension_star_count_pretty: 18
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_pyroscope.png'

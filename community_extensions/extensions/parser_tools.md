@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: parser_tools
   description: Exposes functions for parsing referenced tables and usage context from SQL queries using DuckDB's native parser.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: zacMode/duckdb_extension_parser_tools
-  ref: 9818c41f1fb2d7ee65486216a1b4576e5b659df9
+  ref: 1d06e5c01d5ce65146b0739c2d257bca7caf2141
 
 docs:
   hello_world: |
@@ -90,6 +90,46 @@ docs:
     │ WITH cte AS (SELECT 1) SELECT * FROM cte      │ true   │
     └───────────────────────────────────────────────┴────────┘
 
+    -- Extract WHERE conditions from a query
+    SELECT * FROM parse_where('SELECT * FROM MyTable WHERE time > 1 AND time < 100');
+    ┌────────────────┬────────────┬─────────┐
+    │   condition    │ table_name │ context │
+    │    varchar     │  varchar   │ varchar │
+    ├────────────────┼────────────┼─────────┤
+    │ ("time" > 1)   │ MyTable    │ WHERE   │
+    │ ("time" < 100) │ MyTable    │ WHERE   │
+    └────────────────┴────────────┴─────────┘
+    
+    -- Return detailed condition breakdown from a query
+    SELECT * FROM parse_where_detailed('SELECT * FROM MyTable WHERE time > 1 AND time < 100');
+    ┌─────────────┬───────────────┬─────────┬────────────┬─────────┐
+    │ column_name │ operator_type │  value  │ table_name │ context │
+    │   varchar   │    varchar    │ varchar │  varchar   │ varchar │
+    ├─────────────┼───────────────┼─────────┼────────────┼─────────┤
+    │ time        │ >             │ 1       │ MyTable    │ WHERE   │
+    │ time        │ <             │ 100     │ MyTable    │ WHERE   │
+    └─────────────┴───────────────┴─────────┴────────────┴─────────┘
+    
+    -- Parse a query with a BETWEEN condition
+    SELECT * FROM parse_where('SELECT * FROM MyTable WHERE time BETWEEN 1 AND 100');
+    ┌────────────────────────────┬────────────┬─────────┐
+    │         condition          │ table_name │ context │
+    │          varchar           │  varchar   │ varchar │
+    ├────────────────────────────┼────────────┼─────────┤
+    │ ("time" BETWEEN 1 AND 100) │ MyTable    │ WHERE   │
+    └────────────────────────────┴────────────┴─────────┘
+    
+    -- Detailed parsing of a BETWEEN condition
+    SELECT * FROM parse_where_detailed('SELECT * FROM MyTable WHERE time BETWEEN 1 AND 100');
+    ┌─────────────┬───────────────┬─────────┬────────────┬─────────┐
+    │ column_name │ operator_type │  value  │ table_name │ context │
+    │   varchar   │    varchar    │ varchar │  varchar   │ varchar │
+    ├─────────────┼───────────────┼─────────┼────────────┼─────────┤
+    │ time        │ >=            │ 1       │ MyTable    │ WHERE   │
+    │ time        │ <=            │ 100     │ MyTable    │ WHERE   │
+    └─────────────┴───────────────┴─────────┴────────────┴─────────┘
+
+
 
   extended_description: |
     `parser_tools` is a DuckDB extension that enables SQL query introspection using DuckDB’s native parser.
@@ -97,8 +137,8 @@ docs:
     Future versions may expose additional aspects of the parsed query structure.
     For more details and examples, visit the [extension repository](https://github.com/zacMode/duckdb_extension_parser_tools).
 
-extension_star_count: 8
-extension_star_count_pretty: 8
+extension_star_count: 9
+extension_star_count_pretty: 9
 extension_download_count: 435
 extension_download_count_pretty: 435
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
@@ -126,11 +166,14 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| is_parsable       | scalar        | NULL        | NULL    |          |
-| parse_table_names | scalar        | NULL        | NULL    |          |
-| parse_tables      | scalar        | NULL        | NULL    |          |
-| parse_tables      | table         | NULL        | NULL    |          |
+|    function_name     | function_type | description | comment | examples |
+|----------------------|---------------|-------------|---------|----------|
+| is_parsable          | scalar        | NULL        | NULL    |          |
+| parse_table_names    | scalar        | NULL        | NULL    |          |
+| parse_tables         | scalar        | NULL        | NULL    |          |
+| parse_tables         | table         | NULL        | NULL    |          |
+| parse_where          | scalar        | NULL        | NULL    |          |
+| parse_where          | table         | NULL        | NULL    |          |
+| parse_where_detailed | table         | NULL        | NULL    |          |
 
 
