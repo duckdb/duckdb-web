@@ -18,6 +18,8 @@ Text analytics is a central component of many modern data workflows, covering ta
 
 We will be working with a public dataset, available on [Hugging Face](https://huggingface.co/datasets/dair-ai/emotion), which contains English Twitter messages and their classification to one of the following emotions: anger, fear, joy, love, sadness, and surprise.
 
+With DuckDB we are able to access Hugging Face datasets via the `hf://` prefix:
+
 ```python
 from_hf_rel = conn.read_parquet(
         "hf://datasets/dair-ai/emotion/unsplit/train-00000-of-00001.parquet",
@@ -396,7 +398,7 @@ The BM25 score is ranked in descending order and the cosine  distance in ascendi
 
 > cosine similarity = 1 - cosine distance
 
-Because the BM25 score can be, in theory, unbounded we need [to scale the score](https://en.wikipedia.org/wiki/Feature_scaling) to the interval `[0, 1]` by implementing the min-max normalization:
+Because the BM25 score can be, in theory, unbounded, we need [to scale the score](https://en.wikipedia.org/wiki/Feature_scaling) to the interval `[0, 1]` by implementing the min-max normalization:
 
 ```python
 max(bm25_score) over () as max_bm25_score,
@@ -412,7 +414,7 @@ if(
     exact_match_score,
     cast(
         0.3 * coalesce(norm_bm25_score, 0) +
-        0.7 * coalesce(norm_cosine_similarity_score, 0)
+        0.7 * coalesce(cosine_similarity_score, 0)
         as
         decimal(3, 2)
     )
