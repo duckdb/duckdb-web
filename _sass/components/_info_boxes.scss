@@ -15,15 +15,15 @@ div.singleentry {
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
-		font-size: 14px;
+		@include body-small;
 
 		h4 {
-			font-size: 14px !important;
+			font-size: var(--type-body-small, 14px)!important;
 			margin: 0px !important;
 		}
 
 		p {
-			font-size: 14px;
+			@include body-small;
 			margin-bottom: 300px;
 			margin: 1.8em 0;
 		}

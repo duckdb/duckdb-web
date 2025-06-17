@@ -14,11 +14,9 @@
 body{
 	color: var(--main-text-primary-color);
 	background: var(--main-body-background-color, #FAFAFA);
-	font-size: 100%;
-	font-family: $fontSans;
-	font-weight: 400;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	@include body-standard();
 }
 
 ::-moz-selection {
@@ -60,10 +58,9 @@ strong{
 }
 
 em.caption{
+	@include body-small();
 	font-style: normal!important;
 	text-align: center;
-	font-size: 14px;
-	line-height: 1.1;
 	display: inline-block;
 	width: 100%;
 	margin-bottom: 1.5em;
@@ -111,8 +108,7 @@ main > .pagehead{
 
 main{
 	h1{
-		font-size: 24px;
-		font-weight: normal;
+		
 		margin-bottom: 50px;
 	}
 	.wrap{
@@ -131,36 +127,24 @@ main{
 
 
 h1{
-	font-size: 32px;
-	line-height: 1.0;
-	font-weight: normal;
+	@include headline-1();
 	margin-bottom: 50px;
 }
 h2{
-	font-size: 28px;
-	line-height: 1.0;
-	font-weight: normal;
+	@include headline-2();
 	margin-bottom: 30px;
 }
 h3{
-	font-weight: normal;
-	font-size: 24px;
-	line-height: 1.1;
+	@include headline-3();
 }
 h4{
-	font-weight: normal;
-	font-size: 22px;
-	line-height: 1.0;
+	@include title-1();
 }
 h5{
-	font-weight: normal;
-	line-height: 1.0;
-	font-size: 16px;
+	@include title-2();
 }
 h6{
-	font-weight: normal;
-	line-height: 1.0;
-	font-size: 14px;
+	@include title-3();
 }
 
 main .wrap{
@@ -208,16 +192,12 @@ body.installation div.environment.select label.onlymobile{
 	padding: 65px 0;
 
 	h1 {
-		font-size: $fontSizeh1;
+		@include display-1();
 		margin: 0;
 	}
 
 	@media only screen and (max-width: 770px) {
 		padding: 45px 0px;
-
-		h1 {
-			font-size: 35px;
-		}
 	}
 }
 
