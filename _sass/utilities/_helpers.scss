@@ -1,3 +1,7 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
 main.inactive{
 	&:before{
 		content: " ";
@@ -83,4 +87,83 @@ a.blocklink{
 
 .nobreak {
     white-space: nowrap;
+}
+
+
+/** FONT STYLE CLASSES **/
+
+.display-1 {
+	@include display-1;
+}
+
+.display-2 {
+	@include display-2;
+}
+
+.display-3 {
+	@include display-3;
+}
+
+.headline-1 {
+	@include headline-1;
+}
+
+.headline-2 {
+	@include headline-2;
+}
+
+.headline-3 {
+	@include headline-3;
+}
+
+.title-1 {
+	@include title-1;
+}
+
+.title-2 {
+	@include title-2;
+}
+
+.title-3 {
+	@include title-3;
+}
+
+.label-1 {
+	@include label-1;
+}
+
+.label-2 {
+	@include label-2;
+}
+
+.label-3 {
+	@include label-3;
+}
+
+.body-large {
+	@include body-large;
+}
+
+.body-standard {
+	@include body-standard;
+}
+
+.body-small {
+	@include body-small;
+}
+
+.tiny {
+	@include tiny;
+}
+
+.pre-title {
+	@include pre-title;
+}
+
+.menu-item {
+	@include menu-item;
+}
+
+.text-secondary-color{
+	color: var(--main-text-secondary-color, #666);
 }

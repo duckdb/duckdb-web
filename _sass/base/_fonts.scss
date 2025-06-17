@@ -5,9 +5,19 @@
 /** FONT IMPORT **/
 @font-face {
   font-family: "SuisseIntl";
+  src: url("webfont/SuisseIntl-Regular-WebXL.woff2") format("woff2"),
+    url("webfont/SuisseIntl-Regular-WebXL.woff") format("woff");
+  font-weight: 400;
+  /* Normal weight */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
   src: url("webfont/SuisseIntl-Book-WebXL.woff2") format("woff2"),
     url("webfont/SuisseIntl-Book-WebXL.woff") format("woff");
-  font-weight: 400;
+  font-weight: 450;
   /* Normal weight */
   font-style: normal;
   font-display: swap;

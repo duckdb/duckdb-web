@@ -292,14 +292,22 @@ $('table a.externallink:contains(GitHub)').removeClass('externallink').addClass(
 $('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
 
 // Wrap external links followed by a "." in a nobreak span
-if ($('body.documentation #main_content_wrap').length) {
-    var mainContent = $('body.documentation #main_content_wrap');
-    var html = mainContent.html();
-    var updatedHtml = html.replace(/(<a [^>]*class="[^"]*externallink[^"]*"[^>]*>.*?<\/a>)\./g, '<span class="nobreak">$1.</span>');
-    if (html !== updatedHtml) {
-        mainContent.html(updatedHtml);
-    }
-}
+$('body.documentation #main_content_wrap a.externallink').each(function () {
+	const link = $(this);
+	const next = link[0].nextSibling;
+
+	if (next?.nodeType === 3 && next.nodeValue.trim().startsWith('.')) {
+		const text = next.nodeValue;
+		const dotIndex = text.indexOf('.');
+		const dot = text[dotIndex];
+		const rest = text.slice(dotIndex + 1);
+
+		next.remove();
+		link.wrap('<span class="nobreak"></span>');
+		link.after(dot);
+		if (rest) link.parent().after(document.createTextNode(rest));
+	}
+});
 	
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){

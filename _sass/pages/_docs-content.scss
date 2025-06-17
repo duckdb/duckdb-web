@@ -15,21 +15,17 @@ body.documentation {
         h3,
         h4,
         h5 {
-            font-weight: 700;
-            line-height: 1;
-
             a:hover {
                 color: black;
                 text-decoration: underline;
             }
-
             code {
                 font-family: $fontMonoXBold;
             }
         }
 
         h1 {
-            font-size: $docuh1;
+            @include headline-1;
             margin-bottom: 20px;
             margin-top: 50px;
 
@@ -39,7 +35,7 @@ body.documentation {
         }
 
         h2 {
-            font-size: $docuh2;
+            @include headline-2;
             margin-bottom: 20px;
             margin-top: 40px;
 
@@ -49,10 +45,9 @@ body.documentation {
         }
 
         h3 {
-            font-size: $docuh3;
+            @include headline-3;
             margin-bottom: 10px;
             margin-top: 30px;
-            font-family: $fontSans;
 
             code {
                 font-family: $fontMonoXBold;
@@ -69,7 +64,7 @@ body.documentation {
         }
 
         h4 {
-            font-size: $docuh4;
+            @include title-1;
 
             code {
                 font-size: 19px;
@@ -77,7 +72,7 @@ body.documentation {
         }
 
         h5 {
-            font-size: $docuh5;
+            @include title-2;
 
             code {
                 font-size: 19px;
@@ -179,7 +174,7 @@ body.documentation {
     }
 
     p {
-        line-height: 1.5;
+        @include body-standard;
 
         em {
             font-family: $fontSans;
@@ -210,7 +205,7 @@ body.documentation {
     }
 
     li {
-        line-height: 24px;
+        line-height: 1.5;
     }
 
     ol {
@@ -351,14 +346,14 @@ body.post {
 
         th {
             padding: 10px;
-            font-size: 14px;
             font-weight: 700;
+            font-size: var(--type-body-small, 14px);
         }
 
         td {
             padding: 10px;
             border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
-            font-size: 14px;
+            font-size: var(--type-body-small, 14px);
             line-height: 1.55;
             vertical-align: top;
 
@@ -462,10 +457,8 @@ body.post {
     // Code blocks
     code,
     pre {
-        font-family: $fontMono;
-        font-size: 14px;
+        @include code-standard;
         border-radius: 2px;
-        line-height: 1.4;
     }
 
     pre.highlight {

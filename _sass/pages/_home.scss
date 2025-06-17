@@ -3,21 +3,16 @@
 @use '../abstracts/mixins' as *;
 
 body.landing{
-	font-size: $fontSizep;
+	
+	@include body-standard;
+	
 	main{
 		margin-top: 70px;
 	}
-	/** GENERAL STYLES **/
 	h1{
-		font-size: $fontSizeh1;
-		font-weight: 500;
-		line-height: 1;
 		margin: 0;
 	}
 	h3{
-		font-size: $fontSizeh4;
-		line-height: 1.1;
-		font-weight: 500;
 		margin: 0;
 	}
 	section{
@@ -104,16 +99,14 @@ body.landing{
 				border-radius: 100px; 
 				padding: 5px;
 				li {
+					@include label-1;
 					border-radius: 50px;
 					padding: 12px 14px;
 					color: var(--interactive-filter-unselected-text-color, #666);
-					font-size: 14px;
-					line-height: 1;
 					cursor: pointer;
 					-webkit-transition: background 0.2s, color 0.2s;
 					-o-transition: background 0.2s, color 0.2s;
 					transition: background 0.2s, color 0.2s;
-					font-weight: 500;
 					white-space: nowrap;
 					&:hover, &.active {
 						color: var(--interactive-filter-selected-text-color, #1A1A1A);
@@ -136,24 +129,21 @@ body.landing{
 			}
 		}
 		.content{
+			@include code-standard;
 			padding: 20px 20px;
-			font-family: "JetBrainsMono-Regular";
-			font-size: 14px;
 			position: relative;
 			.lines{
+				@include code-standard;
+				line-height: 17px;
 				position: absolute;
 				top: 20px;
 				left: 25px;
 				color: var(--main-text-tertiary-color, #B2B2B2);
-				font-size: 14px;
-				line-height: 17px;
-				font-family: "JetBrainsMono-Regular";
 				pointer-events: none;
 			}
 			code{
-				font-size: 14px;
+				@include code-standard;
 				line-height: 17px;
-				font-family: "JetBrainsMono-Regular";
 			}
 			a{
 				color: inherit;
@@ -175,9 +165,9 @@ body.landing{
 		.bottombar{
 			padding: 15px 20px;
 			border-top: 1px solid var(--main-codebox-border-color, #E6E6E6);
-			span{
-				color: #919191;
-				font-size: 14px;
+			.system span{
+				color: var(--main-text-tertiary-color, #B2B2B2);
+				@include body-small;
 			}
 			p{
 				margin: 0;
@@ -223,7 +213,7 @@ body.landing{
 			padding-top: 0;
 			display: none;
 			p{
-				font-size: $fontSize16;
+				@include body-standard();
 			}
 			p:first-child{
 				margin-top: 0;
@@ -278,6 +268,7 @@ body.landing{
 	
 	/** STYLE SELECT BOX ANYWAYS – SO IT IS COLORED DIRECTLY **/
 	select {
+	 @include label-1();
 	  -webkit-appearance: none;
 		 -moz-appearance: none;
 			  appearance: none;
@@ -291,7 +282,6 @@ body.landing{
 	  cursor: inherit;
 	  line-height: inherit;
 	  z-index: 1;
-	  font-weight: 500;
 	  outline: none;
 
 	  display: -ms-grid;
@@ -309,7 +299,6 @@ body.landing{
 	  border-radius: 100px;
 	  padding: 10px 14px;
 	
-	  font-size: 14px;
 	  cursor: pointer;
 	  line-height: 1.1;
 	  color: black;
@@ -363,10 +352,7 @@ body.landing{
 		position: relative;
 		color: black;
 		min-width: $select-width;
-		//height: $select-height;
-		font-size: 14px;
-		line-height: 1;
-		font-weight: 500;
+		@include label-1();
 	}
 	
 	.select-styled {
@@ -383,7 +369,9 @@ body.landing{
 		z-index: 710;
 		word-break: keep-all;
 		> span{
+			@include label-1();
 			color: inherit;
+			line-height: 1;
 		}
 		&:after {
 			content: "";
@@ -455,7 +443,7 @@ body.landing{
 				-ms-flex-align: start;
 					align-items: flex-start;
 			.duckdb{
-				width: calc(40%);
+				width: calc(45%);
 				text-align: left;
 				p{
 					margin: 25px 0;	
@@ -525,8 +513,6 @@ body.landing{
 					}
 				}
 				p{
-					font-size: $fontSize16;
-					font-weight: 450;
 					margin: 15px 0;
 				}
 			}
@@ -623,9 +609,6 @@ body.landing{
 
 @media only screen and (max-width: 1100px) {
 	body.landing{
-		h1{
-			font-size: 40px;
-		}
 		section#quickinstall .wrap .install{
 			width: calc(100% - 390px);
 		}
@@ -639,7 +622,6 @@ body.landing{
 
 @media only screen and (max-width: 940px) {
 	body.landing{
-		font-size: 17px;
 		h1{
 			max-width: 500px;
 		}
@@ -688,10 +670,6 @@ body.landing{
 
 @media only screen and (max-width: 660px) {
 	body.landing{
-		font-size: 16px;
-		h1{
-			font-size: 35px;
-		}
 		section.whyduckdb .flexwrap .featurebox{
 			width: 100%;
 		}
