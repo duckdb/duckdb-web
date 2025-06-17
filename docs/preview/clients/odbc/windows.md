@@ -18,11 +18,7 @@ Using the DuckDB ODBC API on Windows requires the following steps:
    * `duckdb_odbc_setup.dll`: a setup DLL used by the Windows ODBC Data Source Administrator tool.
    * `odbc_install.exe`: an installation script to aid the configuration on Windows.
 
-   Decompress the archive to a directory (e.g., `duckdb_odbc`). For example, run:
-
-   ```bash
-   mkdir duckdb_odbc && unzip duckdb_odbc-windows-amd64.zip -d duckdb_odbc
-   ```
+   Decompress the archive to a directory (e.g., `duckdb_odbc`).
 
 4. The `odbc_install.exe` binary performs the configuration of the DuckDB ODBC Driver on Windows. It depends on the `Odbccp32.dll` that provides functions to configure the ODBC registry entries.
 

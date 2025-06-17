@@ -2,6 +2,9 @@
 github_repository: https://github.com/duckdb/duckdb-odbc
 layout: docu
 title: ODBC API Overview
+redirect_from:
+- /docs/clients/odbc/overview
+- /docs/clients/odbc/overview/
 ---
 
 The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of Database Management Systems (DBMSs).
