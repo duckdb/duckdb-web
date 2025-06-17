@@ -41,6 +41,11 @@ footer{
 				margin-top: 60px;
 				font-weight: 400;
 				color: #979797;
+				display: flex;
+				justify-content: space-between;
+				a{
+					color: inherit;
+				}
 			}
 			strong{
 					font-weight: normal;
@@ -73,6 +78,9 @@ footer{
 				height: 38px;
 				background-size: contain;
 				background-repeat: no-repeat;
+			}
+			.footerlogo.duckdb_logo{
+				width: 128.36px;
 			}
 			img.duckdbfooter{
 				width: 140px;
