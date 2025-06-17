@@ -45,7 +45,7 @@ Now, to query using the above secret, simply query any `s3://` prefixed file:
 
 ```sql
 SELECT *
-FROM 's3://⟨your_bucket⟩/⟨your_file⟩.parquet';
+FROM 's3://⟨your-bucket⟩/⟨your_file⟩.parquet';
 ```
 
 ### `credential_chain` Provider
@@ -136,7 +136,7 @@ CREATE OR REPLACE SECRET secret (
     CHAIN config,
     REGION '⟨eu-west-1⟩',
     KMS_KEY_ID 'arn:aws:kms:⟨region⟩:⟨account_id⟩:⟨key⟩/⟨key_id⟩',
-    SCOPE 's3://⟨bucket_sub_path⟩'
+    SCOPE 's3://⟨bucket-sub-path⟩'
 );
 ```
 
@@ -157,7 +157,7 @@ Note the addition of the `ACCOUNT_ID` which is used to generate to correct endpo
 
 ```sql
 SELECT *
-FROM read_parquet('r2://⟨some_file_that_uses_an_r2_secret⟩.parquet');
+FROM read_parquet('r2://⟨some-file-that-uses-an-r2-secret⟩.parquet');
 ```
 
 #### GCS Secrets
@@ -185,7 +185,7 @@ Reading files from S3 is now as simple as:
 
 ```sql
 SELECT *
-FROM 's3://⟨bucket_name⟩/⟨filename⟩.⟨extension⟩';
+FROM 's3://⟨your-bucket⟩/⟨filename⟩.⟨extension⟩';
 ```
 
 ### Partial Reading
@@ -199,8 +199,8 @@ Multiple files are also possible, for example:
 ```sql
 SELECT *
 FROM read_parquet([
-    's3://⟨bucket_name⟩/⟨filename_1⟩.parquet',
-    's3://⟨bucket_name⟩/⟨filename_2⟩.parquet'
+    's3://⟨your-bucket⟩/⟨filename-1⟩.parquet',
+    's3://⟨your-bucket⟩/⟨filename-2⟩.parquet'
 ]);
 ```
 
@@ -210,7 +210,7 @@ File [globbing]({% link docs/preview/sql/functions/pattern_matching.md %}#globbi
 
 ```sql
 SELECT *
-FROM read_parquet('s3://⟨bucket_name⟩/*.parquet');
+FROM read_parquet('s3://⟨your-bucket⟩/*.parquet');
 ```
 
 This query matches all files in the root of the bucket with the [Parquet extension]({% link docs/preview/data/parquet/overview.md %}).
@@ -218,22 +218,22 @@ This query matches all files in the root of the bucket with the [Parquet extensi
 Several features for matching are supported, such as `*` to match any number of any character, `?` for any single character or `[0-9]` for a single character in a range of characters:
 
 ```sql
-SELECT count(*) FROM read_parquet('s3://⟨bucket_name⟩/folder*/100?/t[0-9].parquet');
+SELECT count(*) FROM read_parquet('s3://⟨your-bucket⟩/folder*/100?/t[0-9].parquet');
 ```
 
 A useful feature when using globs is the `filename` option, which adds a column named `filename` that encodes the file that a particular row originated from:
 
 ```sql
 SELECT *
-FROM read_parquet('s3://⟨bucket_name⟩/*.parquet', filename = true);
+FROM read_parquet('s3://⟨your-bucket⟩/*.parquet', filename = true);
 ```
 
 This could for example result in:
 
 | column_a | column_b | filename |
 |:---|:---|:---|
-| 1 | examplevalue1 | s3://bucket_name/file1.parquet |
-| 2 | examplevalue1 | s3://bucket_name/file2.parquet |
+| 1 | examplevalue1 | s3://bucket-name/file1.parquet |
+| 2 | examplevalue1 | s3://bucket-name/file2.parquet |
 
 ### Hive Partitioning
 
@@ -244,13 +244,13 @@ DuckDB also offers support for the [Hive partitioning scheme]({% link docs/previ
 Writing to S3 uses the multipart upload API. This allows DuckDB to robustly upload files at high speed. Writing to S3 works for both CSV and Parquet:
 
 ```sql
-COPY table_name TO 's3://⟨bucket_name⟩/⟨filename⟩.⟨extension⟩';
+COPY table_name TO 's3://⟨your-bucket⟩/⟨filename⟩.⟨extension⟩';
 ```
 
 Partitioned copy to S3 also works:
 
 ```sql
-COPY table TO 's3://⟨bucket_name⟩/partitioned' (
+COPY table TO 's3://⟨your-bucket⟩/partitioned' (
     FORMAT parquet,
     PARTITION_BY (⟨part_col_a⟩, ⟨part_col_b⟩)
 );
@@ -259,7 +259,7 @@ COPY table TO 's3://⟨bucket_name⟩/partitioned' (
 An automatic check is performed for existing files/directories, which is currently quite conservative (and on S3 will add a bit of latency). To disable this check and force writing, an `OVERWRITE_OR_IGNORE` flag is added:
 
 ```sql
-COPY table TO 's3://⟨bucket_name⟩/partitioned' (
+COPY table TO 's3://⟨your-bucket⟩/partitioned' (
     FORMAT parquet,
     PARTITION_BY (⟨part_col_a⟩, ⟨part_col_b⟩),
     OVERWRITE_OR_IGNORE true
@@ -269,7 +269,7 @@ COPY table TO 's3://⟨bucket_name⟩/partitioned' (
 The naming scheme of the written files looks like this:
 
 ```sql
-s3://⟨your_bucket⟩/partitioned/part_col_a=⟨val⟩/part_col_b=⟨val⟩/data_⟨thread_number⟩.parquet
+s3://⟨your-bucket⟩/partitioned/part_col_a=⟨val⟩/part_col_b=⟨val⟩/data_⟨thread_number⟩.parquet
 ```
 
 ### Configuration

@@ -30,7 +30,7 @@ Is your Delta table on someone else’s machine, perhaps in AWS? DuckDB can also
 
 ```sql
 CREATE SECRET (TYPE s3, PROVIDER credential_chain);
-SELECT * FROM delta_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩');
+SELECT * FROM delta_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩');
 ```
 
 For other cloud providers such as Azure or Google Cloud, check the [extension’s documentation page]({% link docs/stable/core_extensions/delta.md %}#usage).
@@ -96,7 +96,7 @@ SELECT * FROM t1;
 For even more performance improvements, DuckDB also supports **persisting this cached Delta metadata _between_ different queries**. To do this, the Delta table can be attached using the `PIN_SNAPSHOT` option. With this option enabled, subsequent queries can reuse the metadata such as in the following code block:
 
 ```sql
-ATTACH 's3://⟨your_bucket⟩/⟨your_delta_table⟩' AS t2 (
+ATTACH 's3://⟨your-bucket⟩/⟨your_delta_table⟩' AS t2 (
     TYPE delta,
     PIN_SNAPSHOT
 );
@@ -152,7 +152,7 @@ In the previous benchmarks, file skipping has only a very limited effect. The ov
 The table has 100 million rows and has a very basic schema with an incrementing `id` column of `INTEGER` type and a `value` column of `VARCHAR` type. If we query the data using DuckDB we will see something like:
 
 ```sql
-FROM delta_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩');
+FROM delta_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩');
 ```
 
 ```text
@@ -182,7 +182,7 @@ Now, let’s say we are only interested in a specific range of `id`s: maybe we o
 For the first query, we will directly read all the parquet files stored in the table using a [glob pattern]({% link docs/stable/data/multiple_files/overview.md %}#multi-file-reads-and-globs):
 
 ```sql
-FROM parquet_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩/*.parquet')
+FROM parquet_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩/*.parquet')
 WHERE id < 100;
 ```
 
@@ -191,7 +191,7 @@ WHERE id < 100;
 For the second query, we directly scan the table using the `delta_scan` table function, selecting only the `id`s we are interested in using a `WHERE` clause:
 
 ```sql
-FROM delta_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩')
+FROM delta_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩')
 WHERE id < 100;
 ```
 
@@ -201,7 +201,7 @@ We can use DuckDB’s `EXPLAIN ANALYZE` statement to get more details here. Let�
 
 ```sql
 EXPLAIN ANALYZE
-FROM parquet_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩/*.parquet')
+FROM parquet_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩/*.parquet')
 WHERE id < 100;
 ```
 
@@ -233,7 +233,7 @@ We can see in the `EXPLAIN ANALYZE` output that our filter was properly pushed d
 
 ```sql
 EXPLAIN ANALYZE
-FROM delta_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩');
+FROM delta_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩');
 ```
 
 ```text

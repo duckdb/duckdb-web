@@ -266,18 +266,18 @@ CREATE SECRET secret1 (
     TYPE s3,
     KEY_ID 'my_key1',
     SECRET 'my_secret1',
-    SCOPE 's3://⟨my_bucket⟩'
+    SCOPE 's3://⟨my-bucket⟩'
 );
 
 CREATE SECRET secret2 (
     TYPE s3,
     KEY_ID 'my_key2',
     SECRET 'my_secret2',
-    SCOPE 's3://⟨my_other_bucket⟩'
+    SCOPE 's3://⟨my-other-bucket⟩'
 );
 ```
 
-Now, if the user queries something from `s3://⟨my_other_bucket⟩/something`{:.language-sql .highlight}, `secret2` will be chosen automatically for that request.
+Now, if the user queries something from `s3://⟨my-other-bucket⟩/something`{:.language-sql .highlight}, `secret2` will be chosen automatically for that request.
 
 Secrets can be listed using the built-in table-producing function, e.g., by using `FROM duckdb_secrets();`{:.language-sql .highlight}. Sensitive information will be redacted.
 

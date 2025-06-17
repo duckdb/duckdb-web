@@ -22,7 +22,7 @@ The `read_avro` function is integrated into DuckDB's file system abstraction, me
 
 ```sql
 FROM read_avro('http://blobs.duckdb.org/data/userdata1.avro');
-FROM read_avro('s3://⟨your_bucket⟩/⟨some_file⟩.avro');
+FROM read_avro('s3://⟨your-bucket⟩/⟨some_file⟩.avro');
 ```
 
 should "just" work.
