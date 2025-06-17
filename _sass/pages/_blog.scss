@@ -38,9 +38,8 @@ section.upcoming-events,
 				margin-bottom: 15px;
 				line-height: 1;
 				span{
-					text-transform: uppercase;
-					font-size: 12.5px;
-					color: var(--main-text-secondary-color, #666);
+					@include pre-title;
+					color: var(--main-text-tertiary-color, #B2B2B2);
 					margin-right: 20px;
 				}
 				.length{
@@ -81,7 +80,8 @@ section.upcoming-events,
 			}
 		}
 		.meta{
-			font-size: $fontSize14;
+			@include body-small();
+			color: var(--main-text-secondary-color, #666);
 			margin-top: 15px;
 			margin-bottom: 5px;
 			display: -webkit-box;
@@ -90,16 +90,17 @@ section.upcoming-events,
 			-webkit-column-gap: 20px;
 			   -moz-column-gap: 20px;
 					column-gap: 20px;
-			color: var(--main-text-secondary-color, #666);
 			.date{
 				white-space: nowrap;
 			}
 			.author{
-				font-weight: 450;
 				-o-text-overflow: ellipsis;
 				   text-overflow: ellipsis;
 				overflow: hidden;
 				white-space: nowrap;
+			}
+			.publishedinfo{
+				color: var(--main-text-secondary-color, #666);
 			}
 		}
 		h3{
@@ -142,9 +143,8 @@ section.upcoming-events,
 			column-gap: 60px;
 	margin-bottom: 70px;
 	#search-input {
-		font-family: $fontSans;
+		@include label-1();
 		padding: 16px 16px 16px 40px;
-		font-size: 14px;
 		border: 1px solid var(--main-codebox-border-color, #E6E6E6);
 		border-radius: 100px;
 		width: 100%;
@@ -187,15 +187,13 @@ section.upcoming-events,
 		}
 	
 		.filter-btn {
+			@include label-1;
 			white-space: nowrap;
-			font-family: $fontSans;
 			position: relative;
 			z-index: 2;
 			background: none;
 			border: none;
 			padding: 11px 15px;
-			font-weight: 500;
-			font-size: $fontSize14;
 			color: var(--interactive-filter-unselected-text-color, #666);
 			cursor: pointer;
 			border-radius: 100px;
@@ -239,14 +237,12 @@ body.post {
 		padding: 5px 10px;
 	}
 	  table tbody td {
-		font-size: 12px;
-		font-weight: bold;
+		@include label-2();
 		color: var(--main-text-primary-color, #0D0D0D);
 	}
 	code,
 	pre {
-		font-family: "JetBrainsMono-Regular", "Lucida Console", monospace;
-		font-size: 16px;
+		@include code-large;
 	}
 
 	h1, h2, h3, h4, h5 {
@@ -263,7 +259,6 @@ h4 {
 			margin-block-start:0em;
 	-webkit-margin-after:0em;
 			margin-block-end:0em;
-	font-size: 110%;
 	font-weight: bold;
 }
 h1 a {
@@ -286,10 +281,6 @@ h5 a {
 	text-decoration: none;
 	color: var(--main-text-primary-color, #0D0D0D);
 }
-h5 {
-	font-size: 100%;
-	font-weight: bold;
-}
 
 
 
@@ -309,19 +300,12 @@ h5 {
 				font-weight: 500;
 			}
 			p, ul li, ol li{
-				font-size: 19px;
-				line-height: 1.5;
+				@include body-large();
 				margin-top: 30px;
 				margin-bottom: 30px;
-				font-family: $fontSans;
-				font-weight: 400;
-				letter-spacing: .1px;
 				i, em{
 					font-family: $fontSans;
 					font-style: italic;
-				}
-				@media only screen and (max-width: 660px) {
-					font-size: 15px;
 				}
 			}
 			ul li, ol li{
@@ -333,24 +317,20 @@ h5 {
 				border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 			}
 			h2{
-				font-size: 31px;
-				line-height: 35px;
+				@include headline-1();
 				margin-top: 60px;
-				font-weight: 500;
 			}
 			h3{
-				font-size: 28px;
-				line-height: 33px;
-				font-weight: normal;
+				@include headline-2();
 				margin-top: 60px;
-				font-weight: 500;
 			}
 			h4{
-				font-size: 24px;
-				line-height: 31px;
-				font-weight: normal;
+				@include headline-3();
 				margin-top: 60px;
-				font-weight: 500;
+			}
+			h5{
+				@include title-1();
+				margin-top: 60px;
 			}
 			h2 + h3,
 			h3 + h4{
@@ -358,9 +338,7 @@ h5 {
 			}
 			blockquote{
 				h4{
-					font-size: 16.5px;
-					font-weight: 700;
-					line-height: 1;
+					@include title-2();
 					margin-top: 0;
 				}
 				ul{
@@ -369,7 +347,7 @@ h5 {
 				ul li, 
 				ol li,
 				p{
-					font-size: 16.5px;
+					@include body-standard();
 				}
 				p{
 					margin: .8em 0;
@@ -378,7 +356,7 @@ h5 {
 			table{
 				text-align: left;
 				code{
-					font-size: 15.5px;
+					@include code-standard();
 				}
 				code.highlight{
 					padding: 2px 6px;
@@ -388,12 +366,10 @@ h5 {
 				}
 			}
 			table thead th{
-				font-weight: 700;
-				font-size: 16px;
+				@include title-2();
 			}
 			table tbody td{
-				font-weight: normal;
-				font-size: 16px;
+				@include body-standard();
 				padding: 10px;
 			}
 			table tbody tr:hover{
@@ -451,15 +427,13 @@ h5 {
 						display: none;
 					}
 					h5{
+						@include pre-title();
 						color: var(--main-text-tertiary-color, #B2B2B2);
-						font-size: 12px;
-						font-style: normal;
-						font-weight: 450;
-						text-transform: uppercase;
 						margin-left: 12px;
+						margin-top: 0;
 					}
 					ul li{
-						font-size: 14px;
+						@include tiny();
 					}
 					ul#toc{
 						list-style: none;
@@ -473,7 +447,6 @@ h5 {
 							border-left: 1px solid #D9D9D9;
 							li{
 								list-style: none;
-								font-size: 14px;
 							}
 							ul{
 								display: none;
@@ -597,16 +570,14 @@ h5 {
 			position: relative;
 			z-index: 100;
 			h1{
-				font-size: $fontSizeh1;
+				@include display-1();
 				margin-top: 0;
 				margin-bottom: 0;
 			}
 			h3{
 				margin-top: 0;
 				margin-bottom: 0;
-				font-size: $fontSizeh4;
-				line-height: 1em;
-				font-weight: 600;
+				@include headline-3();
 			}
 			.postpreview{
 				margin-bottom: 0;
@@ -642,9 +613,7 @@ h5 {
 				flex-direction: column;
 			}
 			span{
-				font-size: $fontSize14;
-				color: var(--main-text-secondary-color, #666);
-				font-weight: 400;
+				@include body-small();
 			}
 			.scheduled + .venue{
 				margin-left: 25px;
@@ -652,6 +621,9 @@ h5 {
 			span.bullet{
 				margin: 0 5px;
 			}
+		}
+		.infoline + p > img{
+			width: 100%;
 		}
 		.postpreview{
 			margin-bottom: 75px;
@@ -663,7 +635,6 @@ h5 {
 			-webkit-transition: color .3s;
 			-o-transition: color .3s;
 			transition: color .3s;
-			font-size: 100%;
 			@include textlink();
 			span::after{
 				line-height: 1.2;
@@ -683,8 +654,7 @@ h5 {
 			padding-top: 75px;
 			padding-bottom: 75px;
 			h1{
-				font-size: $fontSizeh1;
-				line-height: 1;
+				@include display-2();
 				margin-bottom: 30px;
 				margin-top: 0;
 			}
@@ -730,19 +700,10 @@ h5 {
 			}
 		}
 		.post-list{
-			h1{
-				font-size: $fontSizeh2;
-				font-style: normal;
-				font-weight: 500;
-				margin-top: 0;
-				margin-bottom: 50px;
-			}
 			h3{
+				@include headline-3();
 				margin-top: 0;
 				margin-bottom: 0;
-				font-size: $fontSizeh4;
-				line-height: 1.1;
-				font-weight: 600;
 			}
 			>section{
 				padding: 105px 15px;
@@ -752,6 +713,7 @@ h5 {
 			}
 		}
 	}
+	/*
 	.headlinebar{
 		background-color: #f5f5f5;
 		height: 52px;
@@ -763,6 +725,8 @@ h5 {
 		left: 0;
 		width: 100%;
 	}
+	*/
+	/*
 	.sidebar{
 		width: 252px;
 		background-color: $duckDByellow;
@@ -816,6 +780,7 @@ h5 {
 			}
 		}
 	}
+	*/
 }
 
 footer{
@@ -866,42 +831,25 @@ footer{
 	.newswrap .postwrap .postcontent .singleentry {
 		padding-top: 50px;
 		padding-bottom: 50px;
-		.infoline span {
-			font-size: 14px;
-			.author {
-				font-weight: 600;
-			}
-		}
 		p {
-			font-size: 15px;
-			line-height: 23px;
 			margin: 20px 0;
 		}
 		h2 {
-			font-size: 25px;
-			line-height: 28px;
 			margin: 35px 0 20px;
 		}
 		h3 {
-			font-size: 20px;
-			line-height: 1.2;
 			margin: 35px 0 20px;
 			&:first-child {
 				margin-top: 0;
 			}
 		}
 		h4 {
-			font-size: 18px;
-			line-height: 1.2;
 			margin: 35px 0 20px;
 			&:first-child {
 				margin-top: 0;
 			}
 		}
 		ul li {
-			font-size: 15px;
-			line-height: 23px;
-
 			ul {
 				margin-top: 0;
 			}
@@ -922,13 +870,6 @@ footer{
 			display: none;
 		}
 	}
-
-	code,
-	pre {
-		font-size: 14px;
-		line-height: 1.5em;
-	}
-
 	
 }
 

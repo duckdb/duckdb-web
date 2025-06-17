@@ -102,7 +102,7 @@ body.search {
 			bottom: 20px;
 			right: 20px;
 			color: var(--main-text-secondary-color, #666);
-			font-size: 14px;
+			@include tiny();
 
 			span {
 				background: var(--doc-codebox-background-color, #F2F2F2);
@@ -131,11 +131,10 @@ body.search {
 			}
 
 			h2 {
-				font-size: 16px;
+				@include title-2();
 				margin-top: 0;
 				margin-bottom: 9px;
 				text-decoration: none;
-				font-weight: 700;
 
 				u {
 					text-decoration: underline;
@@ -175,7 +174,7 @@ body.search {
 				}
 
 				.search_text {
-					font-size: 14px;
+					@include body-small();
 					color: var(--main-text-secondary-color, #666);
 
 					u {
@@ -189,7 +188,7 @@ body.search {
 				border-radius: 50px;
 				border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 				background: var(--interactive-filterbox-background-color, #FAFAFA);
-				font-size: 11px;
+				@include tiny();
 				padding: 3px 8px;
 				margin-top: 10px;
 				display: inline-block;
