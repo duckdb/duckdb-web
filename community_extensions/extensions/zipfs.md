@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: zipfs
   description: Read files within zip archives
-  version: 1.3.0
+  version: 1.3.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: isaacbrodsky/duckdb-zipfs
-  ref: 317df3b17359364a0ff2427d961831cb5d633e33
+  ref: 937f64900653f69081f82eb5f41536bce280af7e
 
 docs:
   hello_world: |
@@ -54,9 +54,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|          name          |                                                                                         description                                                                                          | input_type | scope  |
-|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
-| zipfs_extension        | Extension to look for splitting the zip path and the file path within the zip.                                                                                                               | VARCHAR    | GLOBAL |
-| zipfs_extension_remove | Whether to remove the extension from the zip path (true, for artificial extensions that aren't really in the file name) or keep it (false, for using the actual file extension to split on). | BOOLEAN    | GLOBAL |
+|      name       |                                                                             description                                                                             | input_type | scope  |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
+| zipfs_extension | Extension to look for splitting the zip path and the file path within the zip. To specify an artificial seperator, instead set: `set zipfs_split = '!!';`           | VARCHAR    | GLOBAL |
+| zipfs_split     | Extension to look for splitting the zip path and the file path within the zip. Will be removed from the zip file name. Overrides zipfs_extension. Defaults to NULL. | VARCHAR    | GLOBAL |
 
 
