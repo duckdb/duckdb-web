@@ -417,9 +417,8 @@ html.darkmode {
 
 /* Desktop/Mobile */
 :root {
+  --type-weight-standard: 450;
   /* Desktop */
-  --not-export-blog-post-width: 400px;
-  --not-export-test-sizes: 1440px;
   --page-section-padding: 20px;
   --page-element-spacing-medium: 25px;
   --page-docs-page-padding: 30px;
@@ -454,9 +453,8 @@ html.darkmode {
 // MOBILE SIZES
 @media (max-width: 720px) {
   :root {
+    --type-weight-standard: 400;
     /* Mobile */
-    --not-export-blog-post-width: 363px;
-    --not-export-test-sizes: 393px;
     --page-docs-page-padding: 15px;
     --page-section-padding: 15px;
     --page-element-spacing-medium: 20px;

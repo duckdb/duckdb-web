@@ -110,7 +110,9 @@ body.documentation {
                 padding-left: 0px;
                 margin-left: 15px;
                 border-left: 1px solid var(--main-codebox-border-color, #E6E6E6);
-
+                margin-top: 2px;
+                margin-bottom: 2px;
+                
                 li {
                     list-style: none;
                 }
@@ -132,7 +134,7 @@ body.documentation {
             a {
                 color: var(--main-text-tertiary-color, #B2B2B2);
                 text-decoration: none;
-                padding: 7px 12px;
+                padding: 6px 12px;
                 border-radius: 100px;
                 display: inline-block;
                 text-overflow: ellipsis;

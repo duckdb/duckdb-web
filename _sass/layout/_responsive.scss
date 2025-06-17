@@ -471,6 +471,8 @@
 	
 	footer .sitefooter .footercontent .bottomline{
 		margin-bottom: 0;
+		flex-wrap: wrap;
+		flex-direction: column;
 	}
 
 	

@@ -95,14 +95,14 @@
 
 @mixin body-large {
 	font-size: var(--type-body-large, 18px);
-	font-weight: 450;
+	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.6;
 	font-family: "SuisseIntl";
 }
 
 @mixin body-standard {
 	font-size: var(--type-body-normal, 16px);
-	font-weight: 450;
+	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.5;
 	letter-spacing: 0.0025em;
 	font-family: "SuisseIntl";
@@ -110,7 +110,7 @@
 
 @mixin body-small {
 	font-size: var(--type-body-small, 14px);
-	font-weight: 450;
+	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.4;
 	letter-spacing: 0.005em;
 	font-family: "SuisseIntl";
@@ -118,7 +118,7 @@
 
 @mixin tiny {
 	font-size: var(--type-tiny, 12px);
-	font-weight: 450;
+	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.2;
 	letter-spacing: 0.005em;
 	font-family: "SuisseIntl";
@@ -127,7 +127,7 @@
 @mixin pre-title {
 	font-size: var(--type-pre-title, 13px);
 	text-transform: uppercase;
-	font-weight: 450;
+	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.2;
 	letter-spacing: 0.03em;
 	font-family: "SuisseIntl";
