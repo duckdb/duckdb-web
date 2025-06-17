@@ -19,16 +19,16 @@
 
 main h1,
 h1{
-	font-size: 50px;
-	font-weight: 600;
-	letter-spacing: -1.1px;
+	@include display-2();
 }
 
+/*
 h4{
 	font-size: 20px;
 	font-weight: 700;
 	letter-spacing: -.02em;
 }
+*/
 
 h1, h2, h3, h4, h5, h6{
 	a{
@@ -128,13 +128,11 @@ header .headerline .headercontent .landingmenu nav .hasSub + .submenuwrap ul li 
 			}
 			.content{
 				h3{
-					font-size: 18px;
-					font-style: normal;
-					font-weight: 600;
+					@include title-1();
 					margin-bottom: 15px;
 				}
 				p{
-					font-size: 16px;
+					@include body-standard();
 					margin: 0;
 				}
 			}
@@ -173,13 +171,13 @@ header .headerline .headercontent .landingmenu nav .hasSub + .submenuwrap ul li 
 
 /** Landing page styles **/
 body.landing{
-	font-size: 16px;
+	@include body-standard();
 	section.welcome{
 		background: linear-gradient(180deg, var(--lake-background-gradient-start, #F5FBFF) 0%, var(--lake-background-gradient-end, #E5F5FF) 100%);
 		padding-bottom: 130px;
 		.ducklake{
 			margin: 0 auto;
-			max-width: 715px;
+			max-width: 770px;
 			text-align: center;
 			display: flex;
 			flex-direction: column;
@@ -241,20 +239,14 @@ body.landing{
 		}
 	}
 	h1{
-		font-size: 50px;
-		font-weight: 600;
-		letter-spacing: -1.1px;
+		@include display-1();
 	}
 	h2{
-		font-size: 50px;
-		font-weight: 600;
+		@include display-2();
 		text-align: center;
-		letter-spacing: -1.1px;
 	}
 	h3{
-		font-size: 28px;
-		font-weight: 600;
-		letter-spacing: -0.56px;
+		@include display-3();
 	}
 	
 	h2 + div{
@@ -551,7 +543,7 @@ section.architecture {
 			}
 
 			p {
-				font-size: 14px;
+				@include body-small();
 				color: var(--main-text-secondary-color, #666);
 			}
 		}
@@ -651,6 +643,9 @@ html.darkmode body.documentation #ducklake_logo{
 
 body.faq,
 body.manifesto{
+	.wrap * + h3{
+		margin-top: 1.8em;
+	}
 	ol,
 	ul{
 		padding: 0;
@@ -660,8 +655,7 @@ body.manifesto{
 	ol li,
 	ul li,
 	p{
-		font-size: 18px;
-		line-height: 1.6;
+		@include body-large();
 	}
 	p + h4{
 		margin-top: 2em;
@@ -676,21 +670,6 @@ body.manifesto{
 		}
 		@media only screen and (max-width: 750px) {
 			padding: 15px;	
-		}
-	}
-	@media only screen and (max-width: 690px) {
-		.pagetitle h1{
-			font-size: 28px;
-		}
-		h2{
-			font-size: 25px;
-		}
-		ul li,
-		p{
-			font-size: 15px;
-		}
-		code, pre{
-			font-size: 14px;
 		}
 	}
 }
@@ -739,12 +718,6 @@ footer .sitefooter .footercontent > div a:hover{
 }
 @media only screen and (max-width: 690px) {
 	body.landing {
-
-		.welcome h1,
-		h2 {
-			font-size: 34px;
-		}
-		
 		.wave{
 			height: 15px;
 			transform: translateY(-15px);
@@ -951,6 +924,7 @@ pre code {
 	display: block;
 	-webkit-box-shadow: none;
 	box-shadow: none;
+	@include code-large();
 }
 
 pre.highlight {
@@ -1021,6 +995,57 @@ div.highlight {
 		height: 100%;
 		display: block;
 		transition: all 0.2s ease;
+	}
+
+}
+
+
+
+/** SPECIAL DUCKLAKE DARKMODE STYLES **/
+
+html.darkmode {
+	body.landing {
+		.wave {
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 364.8 28.6'%3E%3Cpath d='M364.8 0h-.1c-45.5 0-68.3 4.2-91.1 8.3-22.8 4.2-45.5 8.3-91 8.3s-68.3-4.2-91.1-8.3C68.7 4.2 45.9 0 .4 0H0v28.6h364.8V0Z' style='fill:%230d0d0d'/%3E%3C/svg%3E");
+		}
+	}
+	.banner .close{
+		filter: invert(0);
+	}
+	img.darkmode-img{
+		display: inline;
+	}
+	img.lightmode-img{
+		display: none;
+	}
+	section.architecture {
+		.diagram {
+			.connector svg path {
+				fill: #f2f2f2;
+			}
+			.database .catalog .icons img.duckdb,
+			.client .browser .icons img.duckdb_icon{
+				content: url('/images/deployment_diagram/dark/cat_icon-duckdb.svg');
+			}
+			.client .browser .ducklake img.ducklake_icon{
+				content: url('/images/deployment_diagram/dark/ducklake_comb_alt.svg');
+			}
+			.client .browser>img{
+				content: url('/images/deployment_diagram/dark/window.svg');
+			}
+			.database .catalog .icons img.postgre{
+				content: url('/images/deployment_diagram/dark/cat_icon-postgre.svg');
+			}
+			.database .catalog .icons img.sqlite{
+				content: url('/images/deployment_diagram/dark/cat_icon-sqlite.svg');
+			}
+			.database .catalog .icons img.mysql{
+				content: url('/images/deployment_diagram/dark/cat_icon-mysql.svg');
+			}
+			.database .catalog > img{
+				content: url('/images/deployment_diagram/dark/database.svg');
+			}
+		}
 	}
 
 }
