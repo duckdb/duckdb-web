@@ -99,9 +99,6 @@ section.upcoming-events,
 				overflow: hidden;
 				white-space: nowrap;
 			}
-			.publishedinfo{
-				color: var(--main-text-secondary-color, #666);
-			}
 		}
 		h3{
 			margin-bottom: 15px;
@@ -622,6 +619,9 @@ h5 a {
 			}
 			span.bullet{
 				margin: 0 5px;
+			}
+			.publishedinfo{
+				color: var(--main-text-secondary-color, #666);
 			}
 		}
 		.infoline + p > img{
