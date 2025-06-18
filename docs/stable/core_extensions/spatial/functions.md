@@ -2855,10 +2855,10 @@ The following formats are currently recognized by their file extension:
 
 ```sql
 -- Read a Shapefile
-ELECT * FROM ST_Read('some/file/path/filename.shp');
+SELECT * FROM ST_Read('some/file/path/filename.shp');
 
 - Read a GeoJSON file
-REATE TABLE my_geojson_table AS SELECT * FROM ST_Read('some/file/path/filename.json');
+CREATE TABLE my_geojson_table AS SELECT * FROM ST_Read('some/file/path/filename.json');
 ```
 
 ----
