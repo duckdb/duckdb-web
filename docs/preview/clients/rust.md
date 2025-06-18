@@ -3,6 +3,8 @@ layout: docu
 title: Rust Client
 ---
 
+> The latest stable version of the DuckDB Rust client is {{ site.current_duckdb_rust_version }}.
+
 ## Installation
 
 The DuckDB Rust client can be installed from [crates.io](https://crates.io/crates/duckdb). Please see the [docs.rs](http://docs.rs/duckdb) for details.

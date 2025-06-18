@@ -9,7 +9,7 @@ redirect_from:
 title: Node.js API
 ---
 
-> The latest version of the DuckDB CLI client is {{ site.current_duckdb_node_version }}.
+> The latest version of the DuckDB Node.js (deprecated) client is {{ site.current_duckdb_nodejs_version }}.
 
 > Deprecated The old DuckDB Node.js package is deprecated.
 > Please use the [DuckDB Node Neo package]({% link docs/stable/clients/node_neo/overview.md %}) instead.
