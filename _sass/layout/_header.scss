@@ -319,15 +319,15 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	
 	.close {
 		position: absolute;
-		right: 30px;
-		top: calc(50% - 7px);
+		right: 26px;
+		top: calc(50% - 12px);
 		cursor: pointer;
-		background-image: url("data:image/svg+xml,%3Csvg width='13' height='13' viewBox='0 0 13 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.972 11.648 7.736 6.44l5.236-5.208L11.712 0 6.504 5.208 1.296 0 .064 1.232 5.272 6.44.064 11.648l1.232 1.232 5.208-5.208 5.208 5.208 1.26-1.232Z' fill='%23fff'%3E%3C/path%3E%3C/svg%3E");
-		width: 13px;
-		height: 13px;
-		background-size: contain; 
-		background-repeat: no-repeat;
-		filter: invert(1);
+		svg path{
+			fill: var(--main-text-primary-color, #0D0D0D);
+		}
+		svg *[stroke] {
+		  stroke: var(--main-text-primary-color, #0D0D0D);
+		}
 	}
 	/* Responsive Styles */
 	@media only screen and (max-width: 980px) {
@@ -338,9 +338,8 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	
 	@media only screen and (max-width: 660px) {
 		padding: 15px 40px 15px 15px;
-		
 		.close {
-			right: 15px;
+			right: 10px;
 		}
 	}
 }
