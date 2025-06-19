@@ -22,12 +22,10 @@ title: List Functions
 | [`apply(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`array_aggr(list, function_name, ...)`](#list_aggregatelist-function_name-) | Alias for `list_aggregate`. |
 | [`array_aggregate(list, function_name, ...)`](#list_aggregatelist-function_name-) | Alias for `list_aggregate`. |
-| [`array_append(list, element)`](#array_appendlist-element) | Appends `element` to `list`. |
+| [`array_append(list, element)`](#list_appendlist-element) | Alias for `list_append`. |
 | [`array_apply(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
-| [`array_cat()`](#array_cat) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| [`array_cat(list_1, ..., list_n)`](#array_catlist_1--list_n) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| [`array_concat()`](#array_concat) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| [`array_concat(list_1, ..., list_n)`](#array_concatlist_1--list_n) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
+| [`array_cat(list_1, ..., list_n)`](#list_concatlist_1--list_n) | Alias for `list_concat`. |
+| [`array_concat(list_1, ..., list_n)`](#list_concatlist_1--list_n) | Alias for `list_concat`. |
 | [`array_contains(list, element)`](#list_containslist-element) | Alias for `list_contains`. |
 | [`array_distinct(list)`](#list_distinctlist) | Alias for `list_distinct`. |
 | [`array_extract(list, index)`](#array_extractlist-index) | Extracts the `index`th (1-based) value from the `list`. |
@@ -37,18 +35,17 @@ title: List Functions
 | [`array_has_all(list1, list2)`](#list_has_alllist1-list2) | Alias for `list_has_all`. |
 | [`array_has_any(list1, list2)`](#list_has_anylist1-list2) | Alias for `list_has_any`. |
 | [`array_indexof(list, element)`](#list_positionlist-element) | Alias for `list_position`. |
-| [`array_intersect(list1, list2)`](#array_intersectlist1-list2) | Returns a list of all the elements that exist in both `list1` and `list2`, without duplicates. |
-| [`array_length(list)`](#array_lengthlist) | Returns the length of the `list`. |
-| [`array_length(list, dimension)`](#array_lengthlist-dimension) | `array_length` for lists with dimensions other than 1 not implemented |
+| [`array_intersect(list1, list2)`](#list_intersectlist1-list2) | Alias for `list_intersect`. |
+| [`array_length(list)`](#lengthlist) | Alias for `length`. |
 | [`array_pop_back(list)`](#array_pop_backlist) | Returns the `list` without the last element. |
 | [`array_pop_front(list)`](#array_pop_frontlist) | Returns the `list` without the first element. |
 | [`array_position(list, element)`](#list_positionlist-element) | Alias for `list_position`. |
-| [`array_prepend(element, list)`](#array_prependelement-list) | Prepends `element` to `list`. |
-| [`array_push_back(list, element)`](#array_push_backlist-element) | Appends `element` to `list`. |
+| [`array_prepend(element, list)`](#list_prependelement-list) | Alias for `list_prepend`. |
+| [`array_push_back(list, element)`](#list_appendlist-element) | Alias for `list_append`. |
 | [`array_push_front(list, element)`](#array_push_frontlist-element) | Prepends `element` to `list`. |
 | [`array_reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Alias for `list_reduce`. |
 | [`array_resize(list, size[[, value]])`](#list_resizelist-size-value) | Alias for `list_resize`. |
-| [`array_reverse(list)`](#array_reverselist) | Reverses the `list`. |
+| [`array_reverse(list)`](#list_reverselist) | Alias for `list_reverse`. |
 | [`array_reverse_sort(list[, col1])`](#list_reverse_sortlist-col1) | Alias for `list_reverse_sort`. |
 | [`array_select(value_list, index_list)`](#list_selectvalue_list-index_list) | Alias for `list_select`. |
 | [`array_slice(list, begin, end)`](#list_slicelist-begin-end) | Alias for `list_slice`. |
@@ -59,8 +56,7 @@ title: List Functions
 | [`array_transform(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`array_unique(list)`](#list_uniquelist) | Alias for `list_unique`. |
 | [`array_where(value_list, mask_list)`](#list_wherevalue_list-mask_list) | Alias for `list_where`. |
-| [`array_zip(arg, ...)`](#array_ziparg-) | Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
-| [`array_zip(list_1, ..., list_n[, truncate])`](#array_ziplist_1--list_n-truncate) | Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
+| [`array_zip(list_1, ..., list_n[, truncate])`](#list_ziplist_1--list_n-truncate) | Alias for `list_zip`. |
 | [`char_length(list)`](#lengthlist) | Alias for `length`. |
 | [`character_length(list)`](#lengthlist) | Alias for `length`. |
 | [`concat(value, ...)`](#concatvalue-) | Concatenates multiple strings or lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
@@ -83,8 +79,7 @@ title: List Functions
 | [`list_bit_xor(list)`](#list_bit_xorlist) | Applies aggregate function [`bit_xor`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_bool_and(list)`](#list_bool_andlist) | Applies aggregate function [`bool_and`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_bool_or(list)`](#list_bool_orlist) | Applies aggregate function [`bool_or`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| [`list_cat()`](#list_cat) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| [`list_cat(list_1, ..., list_n)`](#list_catlist_1--list_n) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
+| [`list_cat(list_1, ..., list_n)`](#list_concatlist_1--list_n) | Alias for `list_concat`. |
 | [`list_concat(list_1, ..., list_n)`](#list_concatlist_1--list_n) | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`list_contains(list, element)`](#list_containslist-element) | Returns true if the list contains the element. |
 | [`list_cosine_distance(list1, list2)`](#list_cosine_distancelist1-list2) | Computes the cosine distance between two same-sized lists. |
@@ -179,51 +174,6 @@ title: List Functions
 | **Example 3** | `'\xAA'::BLOB || '\xBB'::BLOB` |
 | **Result** | `\xAA\xBB` |
 
-#### `array_append(list, element)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Appends `element` to `list`. |
-| **Example** | `array_append([2, 3], 4)` |
-| **Result** | `[2, 3, 4]` |
-| **Aliases** | `array_push_back`, `list_append` |
-
-#### `array_cat()`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `array_cat([2, 3], [4, 5, 6], [7])` |
-| **Result** | `[2, 3, 4, 5, 6, 7]` |
-| **Aliases** | `array_concat`, `list_cat`, `list_concat` |
-
-#### `array_cat(list_1, ..., list_n)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `array_cat([2, 3], [4, 5, 6], [7])` |
-| **Result** | `[2, 3, 4, 5, 6, 7]` |
-| **Aliases** | `list_cat`, `array_concat`, `list_concat` |
-
-#### `array_concat()`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `array_concat([2, 3], [4, 5, 6], [7])` |
-| **Result** | `[2, 3, 4, 5, 6, 7]` |
-| **Aliases** | `array_cat`, `list_cat`, `list_concat` |
-
-#### `array_concat(list_1, ..., list_n)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `array_concat([2, 3], [4, 5, 6], [7])` |
-| **Result** | `[2, 3, 4, 5, 6, 7]` |
-| **Aliases** | `list_cat`, `array_cat`, `list_concat` |
-
 #### `array_extract(list, index)`
 
 <div class="nostroke_table"></div>
@@ -231,31 +181,6 @@ title: List Functions
 | **Description** | Extracts the `index`th (1-based) value from the `list`. |
 | **Example** | `array_extract([4, 5, 6], 3)` |
 | **Result** | `6` |
-
-#### `array_intersect(list1, list2)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns a list of all the elements that exist in both `list1` and `list2`, without duplicates. |
-| **Example** | `array_intersect([1, 2, 3], [2, 3, 4])` |
-| **Result** | `[3, 2]` |
-| **Alias** | `list_intersect` |
-
-#### `array_length(list)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns the length of the `list`. |
-| **Example** | `array_length([1, 2, 3])` |
-| **Result** | `3` |
-
-#### `array_length(list, dimension)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | `array_length` for lists with dimensions other than 1 not implemented |
-| **Example** | `array_length([1, 2, 3])` |
-| **Result** | `3` |
 
 #### `array_pop_back(list)`
 
@@ -273,24 +198,6 @@ title: List Functions
 | **Example** | `array_pop_front([4, 5, 6])` |
 | **Result** | `[5, 6]` |
 
-#### `array_prepend(element, list)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Prepends `element` to `list`. |
-| **Example** | `array_prepend(3, [4, 5, 6])` |
-| **Result** | `[3, 4, 5, 6]` |
-| **Alias** | `list_prepend` |
-
-#### `array_push_back(list, element)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Appends `element` to `list`. |
-| **Example** | `array_push_back([2, 3], 4)` |
-| **Result** | `[2, 3, 4]` |
-| **Aliases** | `array_append`, `list_append` |
-
 #### `array_push_front(list, element)`
 
 <div class="nostroke_table"></div>
@@ -298,15 +205,6 @@ title: List Functions
 | **Description** | Prepends `element` to `list`. |
 | **Example** | `array_push_front([4, 5, 6], 3)` |
 | **Result** | `[3, 4, 5, 6]` |
-
-#### `array_reverse(list)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Reverses the `list`. |
-| **Example** | `array_reverse([3, 6, 1, 2])` |
-| **Result** | `[2, 1, 6, 3]` |
-| **Alias** | `list_reverse` |
 
 #### `array_to_string(list, delimiter)`
 
@@ -325,32 +223,6 @@ title: List Functions
 | **Description** | Concatenates list/array elements with a comma delimiter. |
 | **Example** | `array_to_string_comma_default(['Banana', 'Apple', 'Melon'])` |
 | **Result** | `Banana,Apple,Melon` |
-
-#### `array_zip(arg, ...)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
-| **Example 1** | `array_zip([1, 2], [3, 4], [5, 6])` |
-| **Result** | `[(1, 3, 5), (2, 4, 6)]` |
-| **Example 2** | `array_zip([1, 2], [3, 4], [5, 6, 7])` |
-| **Result** | `[(1, 3, 5), (2, 4, 6), (NULL, NULL, 7)]` |
-| **Example 3** | `array_zip([1, 2], [3, 4], [5, 6, 7], true)` |
-| **Result** | `[(1, 3, 5), (2, 4, 6)]` |
-| **Alias** | `list_zip` |
-
-#### `array_zip(list_1, ..., list_n[, truncate])`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Zips n `LIST`s to a new `LIST` whose length will be that of the longest list. Its elements are structs of n elements from each list `list_1`, …, `list_n`, missing elements are replaced with `NULL`. If `truncate` is set, all lists are truncated to the smallest list length. |
-| **Example 1** | `array_zip([1, 2], [3, 4], [5, 6])` |
-| **Result** | `[(1, 3, 5), (2, 4, 6)]` |
-| **Example 2** | `array_zip([1, 2], [3, 4], [5, 6, 7])` |
-| **Result** | `[(1, 3, 5), (2, 4, 6), (NULL, NULL, 7)]` |
-| **Example 3** | `array_zip([1, 2], [3, 4], [5, 6, 7], true)` |
-| **Result** | `[(1, 3, 5), (2, 4, 6)]` |
-| **Alias** | `list_zip` |
 
 #### `concat(value, ...)`
 
@@ -476,24 +348,6 @@ title: List Functions
 | **Description** | Applies aggregate function [`bool_or`]({% link docs/preview/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | **Example** | `list_bool_or([true, false])` |
 | **Result** | `true` |
-
-#### `list_cat()`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `list_cat([2, 3], [4, 5, 6], [7])` |
-| **Result** | `[2, 3, 4, 5, 6, 7]` |
-| **Aliases** | `array_cat`, `array_concat`, `list_concat` |
-
-#### `list_cat(list_1, ..., list_n)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Concatenates lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
-| **Example** | `list_cat([2, 3], [4, 5, 6], [7])` |
-| **Result** | `[2, 3, 4, 5, 6, 7]` |
-| **Aliases** | `array_concat`, `array_cat`, `list_concat` |
 
 #### `list_concat(list_1, ..., list_n)`
 

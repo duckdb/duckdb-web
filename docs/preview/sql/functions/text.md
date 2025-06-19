@@ -24,7 +24,6 @@ This section describes functions and operators for examining and manipulating [`
 | [`string ^@ search_string`](#string--search_string) | Returns `true` if `string` begins with `search_string`. |
 | [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`]({% link docs/preview/sql/functions/text.md %}#concatvalue-) and [`list_concat(list1, list2, ...)`]({% link docs/preview/sql/functions/list.md %}#list_concatlist_1--list_n). |
 | [`array_extract(string, index)`](#array_extractstring-index) | Extracts a single character from a `string` using a (1-based) `index`. |
-| [`array_slice(list, begin, end)`](#array_slicelist-begin-end) | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
 | [`ascii(string)`](#asciistring) | Returns an integer that represents the Unicode code point of the first character of the `string`. |
 | [`bar(x, min, max[, width])`](#barx-min-max-width) | Draws a band whose width is proportional to (`x - min`) and equal to `width` characters when `x` = `max`. `width` defaults to 80. |
 | [`base64(blob)`](#to_base64blob) | Alias for `to_base64`. |
@@ -96,7 +95,6 @@ This section describes functions and operators for examining and manipulating [`
 | [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value` |
 | [`split(string, separator)`](#string_splitstring-separator) | Alias for `string_split`. |
 | [`split_part(string, separator, index)`](#split_partstring-separator-index) | Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). |
-| [`starts_with(string, search_string)`](#string--search_string) | Alias for `^@`. |
 | [`str_split(string, separator)`](#string_splitstring-separator) | Alias for `string_split`. |
 | [`str_split_regex(string, regex[, options])`](#string_split_regexstring-regex-options) | Alias for `string_split_regex`. |
 | [`string_split(string, separator)`](#string_splitstring-separator) | Splits the `string` along the `separator`. |
@@ -104,7 +102,6 @@ This section describes functions and operators for examining and manipulating [`
 | [`string_to_array(string, separator)`](#string_splitstring-separator) | Alias for `string_split`. |
 | [`strip_accents(string)`](#strip_accentsstring) | Strips accents from `string`. |
 | [`strlen(string)`](#strlenstring) | Number of bytes in `string`. |
-| [`strpos(string, search_string)`](#instrstring-search_string) | Alias for `instr`. |
 | [`substr(string, start[, length])`](#substringstring-start-length) | Alias for `substring`. |
 | [`substring(string, start[, length])`](#substringstring-start-length) | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
 | [`substring_grapheme(string, start[, length])`](#substring_graphemestring-start-length) | Extracts substring starting from grapheme clusters `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` grapheme clusters instead. Note that a `start` value of `1` refers to the `first` character of the `string`. |
@@ -188,19 +185,6 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Extracts a single character from a `string` using a (1-based) `index`. |
 | **Example** | `array_extract('DuckDB', 2)` |
 | **Result** | `u` |
-
-#### `array_slice(list, begin, end)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Extracts a sublist or substring using [slice conventions]({% link docs/preview/sql/functions/list.md %}#slicing). Negative values are accepted. |
-| **Example 1** | `array_slice('DuckDB', 3, 4)` |
-| **Result** | `ck` |
-| **Example 2** | `array_slice('DuckDB', 3, NULL)` |
-| **Result** | `NULL` |
-| **Example 3** | `array_slice('DuckDB', 0, -3)` |
-| **Result** | `Duck` |
-| **Alias** | `list_slice` |
 
 #### `ascii(string)`
 

@@ -293,6 +293,14 @@ OVERRIDES: list[DocFunction] = [
         nr_optional_arguments=1,
         is_variadic=True,
     ),
+    DocFunction(
+        category='list',
+        name='array_length',  # edge case: contains not implemented overload
+        parameters=['list'],
+        description="",
+        examples=[""],
+        alias_of='length',
+    ),
 ]
 
 # NOTE: All function aliases are added, unless explicitly excluded. Format: (<category>, <function_name>)
@@ -433,7 +441,11 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
         func
         for func in function_data
         if not any(
-            func.category == override.category and func.name == override.name
+            func.category == override.category
+            and (
+                func.name == override.name
+                or (func.name in override.aliases and func.alias_of)
+            )
             for override in OVERRIDES
         )
         and (func.category, func.name) not in EXCLUDES
@@ -470,6 +482,7 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
                         example.replace(override.name, alias.name)
                         for example in alias.examples
                     ]
+                    alias.alias_of = override.name
                     function_data.append(alias)
     return function_data
 
