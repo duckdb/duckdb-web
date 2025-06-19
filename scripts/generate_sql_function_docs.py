@@ -264,11 +264,11 @@ OVERRIDES: list[DocFunction] = [
     ),
     DocFunction(
         category='string',
-        name='^@',  # edge case: alias between operator and regular function
+        name='starts_with',  # edge case: alias between operator and regular function
         parameters=['string', 'search_string'],
         description="Returns `true` if `string` begins with `search_string`.",
-        examples=["'abc' ^@ 'a'"],
-        aliases=['starts_with'],
+        examples=["starts_with('abc', 'a')"],
+        aliases=['^@'],
     ),
     DocFunction(
         category='list',
@@ -437,15 +437,15 @@ order by all
 
 
 def apply_overrides(function_data: list[DocFunction], categories: list[str]):
+    # remove function mentioned in overrides, except when the override is a special function
     function_data = [
         func
         for func in function_data
         if not any(
             func.category == override.category
-            and (
-                func.name == override.name
-                or (func.name in override.aliases and func.alias_of)
-            )
+            and (func.name == override.name or (func.name in override.aliases))
+            and override.name
+            not in (*BINARY_OPERATORS, EXTRACT_OPERATOR, *NON_STANDARD_FUNCTIONS)
             for override in OVERRIDES
         )
         and (func.category, func.name) not in EXCLUDES
@@ -468,11 +468,10 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
         if override.category in categories:
             function_data.append(override)
             for alias_str in override.aliases:
-                if (
-                    alias_str not in function_data
-                    and override.name not in BINARY_OPERATORS
-                    and override.name not in NON_STANDARD_FUNCTIONS
-                    and override.name != EXTRACT_OPERATOR
+                if alias_str not in function_data and override.name not in (
+                    *BINARY_OPERATORS,
+                    EXTRACT_OPERATOR,
+                    *NON_STANDARD_FUNCTIONS,
                 ):
                     alias: DocFunction = copy.deepcopy(override)
                     alias.name = alias_str
