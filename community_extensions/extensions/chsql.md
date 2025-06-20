@@ -95,8 +95,8 @@ docs:
     #### Legal Disclaimer
     > DuckDB ® is a trademark of DuckDB Foundation. ClickHouse® is a trademark of ClickHouse Inc. All trademarks, service marks, and logos mentioned or depicted are the property of their respective owners. The use of any third-party trademarks, brand names, product names, and company names is purely informative or intended as parody and does not imply endorsement, affiliation, or association with the respective owners.
 
-extension_star_count: 63
-extension_star_count_pretty: 63
+extension_star_count: 64
+extension_star_count_pretty: 64
 extension_download_count: 5668
 extension_download_count_pretty: 5.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql.png'
