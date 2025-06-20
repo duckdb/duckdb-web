@@ -6,11 +6,10 @@
   installation_code: winget install DuckDB.cli
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
-
     For example, the Python library can use a different version than the CLI
-    client.
+    client. Therefore, they need to be installed and updated separately.
 
-    Therefore, they need to be updated separately.
+    Note that DuckDB on Windows requires a fresh installation of the Microsoft Visual C++ Redistributable. If you experience issues while running the DuckDB CLI, please install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">MSVC Redistributable</a>
 - variant: stable
   environment: Command line
   platform: Windows
@@ -20,11 +19,10 @@
   link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/duckdb_cli-windows-amd64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
-
     For example, the Python library can use a different version than the CLI
-    client.
+    client. Therefore, they need to be installed and updated separately.
 
-    Therefore, they need to be updated separately.
+    Note that DuckDB on Windows requires a fresh installation of the Microsoft Visual C++ Redistributable. If you experience issues while running the DuckDB CLI, please install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">MSVC Redistributable</a>
 - variant: stable
   environment: Command line
   platform: Windows
@@ -34,11 +32,10 @@
   link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/duckdb_cli-windows-arm64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
-
     For example, the Python library can use a different version than the CLI
-    client.
+    client. Therefore, they need to be installed and updated separately.
 
-    Therefore, they need to be updated separately.
+    Note that DuckDB on Windows requires a fresh installation of the Microsoft Visual C++ Redistributable. If you experience issues while running the DuckDB CLI, please install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">MSVC Redistributable</a>
 - variant: stable
   environment: Command line
   platform: macOS
@@ -47,11 +44,9 @@
   installation_code: brew install duckdb
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
-
     For example, the Python library can use a different version than the CLI
     client.
-
-    Therefore, they need to be updated separately.
+    Therefore, they need to be installed and updated separately.
 - variant: stable
   environment: Command line
   platform: macOS
@@ -198,11 +193,9 @@
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
-
     For example, the Python library can use a different version than the CLI
     client.
-
-    Therefore, they need to be updated separately.
+    Therefore, they need to be installed and updated separately.
 - variant: nightly
   environment: Command line
   platform: macOS
