@@ -5,6 +5,7 @@ import copy
 import duckdb
 import re
 import operator
+from typing import Optional, Self
 
 
 @dataclass(order=True)
@@ -14,10 +15,12 @@ class DocFunction:
     description: str
     examples: list[str]
     category: str
+    alias_of: str = ''
     is_variadic: bool = False
     aliases: list[str] = field(default_factory=list)
     fixed_example_results: list[str] = field(default_factory=list)
     nr_optional_arguments: int = 0
+    alias_of_obj: Optional[Self] = None
 
 
 DOC_VERSION = 'preview'
@@ -261,11 +264,11 @@ OVERRIDES: list[DocFunction] = [
     ),
     DocFunction(
         category='string',
-        name='^@',  # edge case: alias between operator and regular function
+        name='starts_with',  # edge case: alias between operator and regular function
         parameters=['string', 'search_string'],
         description="Returns `true` if `string` begins with `search_string`.",
-        examples=["'abc' ^@ 'a'"],
-        aliases=['starts_with'],
+        examples=["starts_with('abc', 'a')"],
+        aliases=['^@'],
     ),
     DocFunction(
         category='list',
@@ -289,6 +292,14 @@ OVERRIDES: list[DocFunction] = [
         aliases=['array_zip'],
         nr_optional_arguments=1,
         is_variadic=True,
+    ),
+    DocFunction(
+        category='list',
+        name='array_length',  # edge case: contains not implemented overload
+        parameters=['list'],
+        description="",
+        examples=[""],
+        alias_of='length',
     ),
 ]
 
@@ -338,6 +349,9 @@ PAGE_LINKS = {
 
 
 def main():
+    print(
+        f"generating docfiles with DuckDB version: {duckdb.sql('pragma version').fetchone()}"
+    )
     for doc_file in DOC_FILES:
         print(f"creating file {doc_file} ...")
         with open(doc_file, "r") as f:
@@ -390,8 +404,10 @@ def get_function_data(categories: list[str]) -> list[DocFunction]:
     function_data = apply_overrides(function_data, categories)
     function_data = sort_function_data(function_data)
     function_data = prune_duplicates(function_data)
-    function_data = [apply_description_appends(function) for function in function_data]
-    function_data = [apply_url_conversions(function) for function in function_data]
+    for function in function_data:
+        apply_description_appends(function)
+        apply_url_conversions(function)
+        set_canonical_function(function, function_data)
     return function_data
 
 
@@ -404,9 +420,9 @@ select distinct
   f1.description,
   f1.examples,
   categories.category,
+  f1.alias_of,
   f1.varargs='ANY' as is_variadic,
   list_sort(list_distinct(list(f2.function_name))) as aliases,
-  list_value() fixed_example_results
 from
   categories
   join duckdb_functions() f1 on list_contains(f1.categories, categories.category)
@@ -421,11 +437,15 @@ order by all
 
 
 def apply_overrides(function_data: list[DocFunction], categories: list[str]):
+    # remove function mentioned in overrides, except when the override is a special function
     function_data = [
         func
         for func in function_data
         if not any(
-            func.category == override.category and func.name == override.name
+            func.category == override.category
+            and (func.name == override.name or (func.name in override.aliases))
+            and override.name
+            not in (*BINARY_OPERATORS, EXTRACT_OPERATOR, *NON_STANDARD_FUNCTIONS)
             for override in OVERRIDES
         )
         and (func.category, func.name) not in EXCLUDES
@@ -448,11 +468,10 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
         if override.category in categories:
             function_data.append(override)
             for alias_str in override.aliases:
-                if (
-                    alias_str not in function_data
-                    and override.name not in BINARY_OPERATORS
-                    and override.name not in NON_STANDARD_FUNCTIONS
-                    and override.name != EXTRACT_OPERATOR
+                if alias_str not in function_data and override.name not in (
+                    *BINARY_OPERATORS,
+                    EXTRACT_OPERATOR,
+                    *NON_STANDARD_FUNCTIONS,
                 ):
                     alias: DocFunction = copy.deepcopy(override)
                     alias.name = alias_str
@@ -462,6 +481,7 @@ def apply_overrides(function_data: list[DocFunction], categories: list[str]):
                         example.replace(override.name, alias.name)
                         for example in alias.examples
                     ]
+                    alias.alias_of = override.name
                     function_data.append(alias)
     return function_data
 
@@ -540,6 +560,18 @@ def apply_url_conversions(function: DocFunction):
     return function
 
 
+def set_canonical_function(function: DocFunction, function_data: list[DocFunction]):
+    if function.alias_of:
+        for other_func in function_data:
+            if (
+                other_func.name == function.alias_of
+                and other_func.parameters == function.parameters
+            ):
+                function.alias_of_obj = other_func
+                break
+    return function
+
+
 def generate_docs_table(function_data: list[DocFunction]):
     table_str = "<!-- markdownlint-disable MD056 -->\n\n"
     table_str += "| Function | Description |\n|:--|:-------|\n"
@@ -548,8 +580,13 @@ def generate_docs_table(function_data: list[DocFunction]):
             print(f"WARNING (skipping): '{func.name}' - no example is available")
             continue
         func_title = get_function_title(func)
-        anchor = get_anchor_from_title(func_title)
-        table_str += f"| [`{func_title}`](#{anchor}) | {func.description} |\n"
+        if func.alias_of_obj:
+            anchor = get_anchor_from_title(get_function_title(func.alias_of_obj))
+            func_description = f"Alias for `{func.alias_of_obj.name}`."
+        else:
+            anchor = get_anchor_from_title(func_title)
+            func_description = func.description
+        table_str += f"| [`{func_title}`](#{anchor}) | {func_description} |\n"
     table_str += "\n<!-- markdownlint-enable MD056 -->\n"
     return table_str
 
@@ -557,8 +594,7 @@ def generate_docs_table(function_data: list[DocFunction]):
 def generate_docs_records(function_data: list[DocFunction]):
     record_str = "\n"
     for func in function_data:
-        if not func.examples:
-            print(f"skipping {func.name}")
+        if func.alias_of_obj:
             continue
         record_str += f"#### `{get_function_title(func)}`\n\n"
         record_str += '<div class="nostroke_table"></div>\n\n'

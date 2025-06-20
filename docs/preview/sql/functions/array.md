@@ -17,9 +17,9 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 | [`array_cosine_similarity(array1, array2)`](#array_cosine_similarityarray1-array2) | Computes the cosine similarity between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
 | [`array_cross_product(array, array)`](#array_cross_productarray-array) | Computes the cross product of two arrays of size 3. The array elements can not be `NULL`. |
 | [`array_distance(array1, array2)`](#array_distancearray1-array2) | Computes the distance between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| [`array_dot_product(array1, array2)`](#array_dot_productarray1-array2) | Computes the inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
+| [`array_dot_product(array1, array2)`](#array_inner_productarray1-array2) | Alias for `array_inner_product`. |
 | [`array_inner_product(array1, array2)`](#array_inner_productarray1-array2) | Computes the inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| [`array_negative_dot_product(array1, array2)`](#array_negative_dot_productarray1-array2) | Computes the negative inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
+| [`array_negative_dot_product(array1, array2)`](#array_negative_inner_productarray1-array2) | Alias for `array_negative_inner_product`. |
 | [`array_negative_inner_product(array1, array2)`](#array_negative_inner_productarray1-array2) | Computes the negative inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
 | [`array_value(arg, ...)`](#array_valuearg-) | Creates an `ARRAY` containing the argument values. |
 
@@ -57,15 +57,6 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 | **Example** | `array_distance(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
 | **Result** | `1.7320508` |
 
-#### `array_dot_product(array1, array2)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Computes the inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| **Example** | `array_dot_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
-| **Result** | `20.0` |
-| **Alias** | `array_inner_product` |
-
 #### `array_inner_product(array1, array2)`
 
 <div class="nostroke_table"></div>
@@ -74,15 +65,6 @@ All [`LIST` functions]({% link docs/preview/sql/functions/list.md %}) work with 
 | **Example** | `array_inner_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
 | **Result** | `20.0` |
 | **Alias** | `array_dot_product` |
-
-#### `array_negative_dot_product(array1, array2)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Computes the negative inner product between two arrays of the same size. The array elements can not be `NULL`. The arrays can have any size as long as the size is the same for both arguments. |
-| **Example** | `array_negative_dot_product(array_value(1.0::FLOAT, 2.0::FLOAT, 3.0::FLOAT), array_value(2.0::FLOAT, 3.0::FLOAT, 4.0::FLOAT))` |
-| **Result** | `-20.0` |
-| **Alias** | `array_negative_inner_product` |
 
 #### `array_negative_inner_product(array1, array2)`
 
