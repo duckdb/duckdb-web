@@ -12,7 +12,7 @@ The `USE` statement selects a database and optional schema to use as the default
 
 ```sql
 --- Sets the 'memory' database as the default. Will use 'main' schema implicitly or error
-if it does not exist.
+--- if it does not exist.
 USE memory;
 --- Sets the 'duck.main' database and schema as the default
 USE duck.main;
