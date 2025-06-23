@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB internals"
+title: "DuckDB: The SQLite for analytics"
 author: Mark Raasveldt
 thumb: "/images/media/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.png"
 image: "/images/media/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.png"
