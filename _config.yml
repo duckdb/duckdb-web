@@ -27,7 +27,7 @@ current_duckdb_version: 1.3.1
 current_duckdb_hash: "2063dda3e6"
 current_snapshot_version: 1.2.3-dev
 current_duckdb_odbc_version: 1.3.1.0
-current_duckdb_odbc_short_version: 1.3.0
+current_duckdb_odbc_short_version: 1.3.1
 current_duckdb_go_version: 1.3.1
 current_duckdb_node_neo_version: 1.3.1
 current_duckdb_nodejs_version: 1.3.0
