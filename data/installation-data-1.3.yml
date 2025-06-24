@@ -166,25 +166,25 @@
   platform: Windows
   download_method: Direct download
   architecture: x86_64
-  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.3.0.0/duckdb_odbc-windows-amd64.zip
+  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.3.1.0/duckdb_odbc-windows-amd64.zip
 - variant: stable
   environment: ODBC
   platform: macOS
   download_method: Direct download
   architecture: universal
-  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.3.0.0/duckdb_odbc-osx-universal.zip
+  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.3.1.0/duckdb_odbc-osx-universal.zip
 - variant: stable
   environment: ODBC
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.3.0.0/duckdb_odbc-linux-amd64.zip
+  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.3.1.0/duckdb_odbc-linux-amd64.zip
 - variant: stable
   environment: ODBC
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.3.0.0/duckdb_odbc-linux-arm64.zip
+  link: https://github.com/duckdb/duckdb-odbc/releases/download/v1.3.1.0/duckdb_odbc-linux-arm64.zip
 - variant: nightly
   environment: Command line
   platform: Windows
