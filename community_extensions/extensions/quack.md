@@ -24,7 +24,7 @@ extension:
 
 repo:
   github: duckdb/extension-template
-  ref: 86fc51202c4dff2333c8e36ec79c245d101099de
+  ref: 07c9a0d9acf8da9b62e546dc1419d62c0a930244
 
 docs:
   hello_world: |
@@ -32,8 +32,8 @@ docs:
   extended_description: |
     The quack extension is based on DuckDB's [Extension Template](https://github.com/duckdb/extension-template/), and it's a great starting point to get started building more advanced extensions.
 
-extension_star_count: 201
-extension_star_count_pretty: 201
+extension_star_count: 202
+extension_star_count_pretty: 202
 extension_download_count: 540
 extension_download_count_pretty: 540
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
