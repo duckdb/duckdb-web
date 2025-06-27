@@ -17,7 +17,7 @@ extension:
     - Hugoberry
 repo:
   github: Hugoberry/duckdb-pbix-extension
-  ref: bb98c3942a6cb16a9507fd3ca2238611221ca8fc
+  ref: 22d1d12b15c5b26b2053e7b07a25dad192e16c40
 docs:
   hello_world: |
     -- Get metadata tables from a PowerBI file
@@ -43,7 +43,8 @@ docs:
     For a pure Python implementation of the pbix parser, check out the [PBIXray](https://github.com/Hugoberry/pbixray) library.
     
     
-    *Note:* Current limitations include inability of the WASM version to parse `https` hosted files and that pbix_read() will decompress the entire model in memory.
+    *Note:* Current limitations include inability of the WASM version to parse `https` hosted files and that pbix_read() will decompress the entire model in memory. 
+
 extension_star_count: 22
 extension_star_count_pretty: 22
 extension_download_count: 462
