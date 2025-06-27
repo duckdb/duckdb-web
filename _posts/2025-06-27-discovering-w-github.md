@@ -429,4 +429,4 @@ px.scatter(
 ## Conclusion
 
 In this post we showed how DuckDB can be used to process API requests and historical data from git commits.
-Some of the repositories returned by the GitHub search API made it to [awesome-duckdb](https://github.com/davidgasquez/awesome-duckdb), which is our go-to list for curated DuckDB related projects; for example [tailpipe](https://github.com/turbot/tailpipe), an open source Security Information and Event Management for instant log insights, and [preswald](https://github.com/StructuredLabs/preswald), a WASM packager for Python-based interactive data apps.
+Some of the repositories returned by the GitHub search API made it to [awesome-duckdb](https://github.com/davidgasquez/awesome-duckdb), which is our go-to list for curated DuckDB related projects; for example [tailpipe](https://github.com/turbot/tailpipe), an open source Security Information and Event Management for instant log insights, and [preswald](https://github.com/StructuredLabs/preswald), a Wasm packager for Python-based interactive data apps.
