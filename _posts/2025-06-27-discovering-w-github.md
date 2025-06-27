@@ -2,8 +2,8 @@
 layout: post
 title: "Discovering DuckDB Use Cases via GitHub"
 author: Petrica Leuca
-thumb:
-image:
+thumb: "/images/blog/thumbs/use-cases.svg"
+image: "/images/blog/thumbs/use-cases.png"
 excerpt: "In this post, we use the GitHub API to find repositories that mention DuckDB, then use DuckDB itself to parse and query the results efficiently with SQL."
 tags: ["using DuckDB"]
 ---
