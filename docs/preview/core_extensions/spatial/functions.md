@@ -1,4 +1,7 @@
-# DuckDB Spatial Function Reference
+---
+layout: docu
+title: Spatial Functions
+---
 
 ## Function Index 
 **[Scalar Functions](#scalar-functions)**
