@@ -191,16 +191,30 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 | `keyword_name` | The keyword. | `VARCHAR` |
 | `keyword_category` | Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
 
-## `duckdb_prepared_statements`
+## `duckdb_log_contexts`
 
-The `duckdb_prepared_statements()` function provides metadata about the [prepared statements]({% link docs/preview/sql/query_syntax/prepared_statements.md %}) that exist in the current DuckDB session.
+The `duckdb_log_contexts()` function provides information on the contexts of DuckDB log entries.
 
 | Column | Description | Type |
 |:-|:---|:-|
-| `name` | The name of the prepared statement. | `VARCHAR` |
-| `statement` | The SQL statement. | `VARCHAR` |
-| `parameter_types` | The expected parameter types for the statement's parameters. Currently returns `UNKNOWN` for all parameters. | `VARCHAR[]` |
-| `result_types` | The types of the columns in the table returned by the prepared statement. | `VARCHAR[]` |
+| `context_id` | The identifier of the context. The `context_id` column in the [`duckdb_logs`](#duckdb_logs) table is a foreign key that points to this column. | `UBIGINT` |
+| `scope` | The scope of the context (`connection`, `database` or `file_opener` TODO: + more ? <https://github.com/duckdb/duckdb/pull/15119>). | `VARCHAR` |
+| `connection_id` | The identifier of the connection. | `UBIGINT` |
+| `transaction_id` | The identifier of the transaction. | `UBIGINT` |
+| `query_id` | The identifier of the query. | `UBIGINT` |
+| `thread_id` | The identifier of the thread. | `UBIGINT` |
+
+## `duckdb_logs`
+
+The `duckdb_logs()` function returns a table of DuckDB log entries.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `context_id` | The identifier of the context of the log entry. Foreign key to the [`duckdb_log_contexts`](#duckdb_log_contexts) table. | `UBIGINT` |
+| `timestamp` | The timestamp of the log entry. | `TIMESTAMP` |
+| `type` | The type of the log entry. TODO: ?? | `VARCHAR` |
+| `log_level` | The level of the log entry (`TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`). | `VARCHAR` |
+| `message` | The message of the log entry. | `VARCHAR` |
 
 ## `duckdb_memory`
 
@@ -221,6 +235,17 @@ These can be selectively turned off using [`PRAGMA disabled_optimizers`]({% link
 |:-|:---|:-|
 | `name` | The name of the optimization rule. | `VARCHAR` |
 
+## `duckdb_prepared_statements`
+
+The `duckdb_prepared_statements()` function provides metadata about the [prepared statements]({% link docs/preview/sql/query_syntax/prepared_statements.md %}) that exist in the current DuckDB session.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | The name of the prepared statement. | `VARCHAR` |
+| `statement` | The SQL statement. | `VARCHAR` |
+| `parameter_types` | The expected parameter types for the statement's parameters. Currently returns `UNKNOWN` for all parameters. | `VARCHAR[]` |
+| `result_types` | The types of the columns in the table returned by the prepared statement. | `VARCHAR[]` |
+
 ## `duckdb_schemas`
 
 The `duckdb_schemas()` function provides metadata about the schemas available in the DuckDB instance.
@@ -237,6 +262,16 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 | `sql` | Always `NULL`| `VARCHAR` |
 
 The [`information_schema.schemata`]({% link docs/preview/sql/meta/information_schema.md %}#schemata-database-catalog-and-schema) system view provides a more standardized way to obtain metadata about database schemas.
+
+## `duckdb_secret_types`
+
+The `duckdb_secret_types()` lists secret types that are supported in the current DuckDB session.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `type` | The name of the secret type, e.g., `s3`. | `VARCHAR` |
+| `default_provider` | The default secret provider, e.g., `config`. | `VARCHAR` |
+| `extension` | The extension that registered the secret type, e.g., `aws`. | `VARCHAR` |
 
 ## `duckdb_secrets`
 
@@ -356,7 +391,7 @@ The `duckdb_variables()` function provides metadata about the variables availabl
 | Column | Description | Type |
 |:-|:---|:-|
 | `name` | The name of the variable, e.g., `x`. | `VARCHAR` |
-| `value` | The value of the variable, e.g. `12`. | `VARCHAR` |
+| `value` | The value of the variable, e.g., `12`. | `VARCHAR` |
 | `type` | The type of the variable, e.g., `INTEGER`. | `VARCHAR` |
 
 ## `duckdb_views`

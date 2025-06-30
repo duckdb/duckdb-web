@@ -30,7 +30,7 @@ Contributions to the [DuckDB Documentation](https://duckdb.org/) are welcome. To
 
 Before submitting a contribution, please check whether your contribution is eligible.
 
-1. Before creating a new page, please [search the existing documentation](https://duckdb.org/docs/search) for similar pages.
+1. Before creating a new page, please search the existing documentation for similar pages.
 2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [Awesome DuckDB community repository](https://github.com/davidgasquez/awesome-duckdb).
 
 ## Adding a New Page
@@ -108,10 +108,11 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
    Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
    ```
    ````
-* To specify placeholders (or template-style code), use the left angle and right angle characters, `⟨` and `⟩`. These will be highlighted in red and typeset with a bold monospace font to draw the reader's attention to them.
+* To specify placeholders (or template-style code), use the left angle and right angle characters, `⟨` and `⟩`. These will be highlighted in red and typeset in monospace bold italic to draw the reader's attention to them.
      * For example, you could write: To create a table from a Parquet file, run: `CREATE TABLE ⟨your_table_name⟩ AS FROM '⟨your_filename⟩.parquet'`.
      * Copy the characters from here: `⟨⟩`.
      * These characters are known in LaTeX code as `\langle` and `\rangle`.
+     * Inline code snippets containing placeholders should be highlighted as SQL code. This can be achieved by appending `{:.language-sql .highlight}` after the code snippet (no space is required before the curly brace).
      * *Avoid* using arithmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
 
 ### Python Style

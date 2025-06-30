@@ -43,9 +43,17 @@ FROM cte;
 
 ## CTE Materialization
 
-DuckDB can employ CTE materialization, i.e., inlining CTEs into the main query.
-This is performed using heuristics: if the CTE performs a grouped aggregation and is queried more than once, it is materialized.
-Materialization can be explicitly activated by defining the CTE using `AS MATERIALIZED` and disabled by using `AS NOT MATERIALIZED`.
+DuckDB handles CTEs as _materialized_ by default, meaning that the CTE is evaluated
+once and the result is stored in a temporary table. However, under certain conditions,
+DuckDB can _inline_ the CTE into the main query, which means that the CTE is not
+materialized and its definition is duplicated in each place it is referenced.
+Inlining is done using the following heuristics:
+- The CTE is not referenced more than once.
+- The CTE does not contain a `VOLATILE` function.
+- The CTE is using `AS NOT MATERIALIZED` and does not use `AS MATERIALIZED`.
+- The CTE does not perform a grouped aggregation.
+
+Materialization can be explicitly activated by defining the CTE using `AS MATERIALIZED` and disabled by using `AS NOT MATERIALIZED`. Note that inlining is not always possible, even if the heuristics are met. For example, if the CTE contains a `read_csv` function, it cannot be inlined.
 
 Take the following query for example, which invokes the same CTE three times:
 
@@ -89,6 +97,8 @@ FROM
     t AS t2,
     t AS t3;
 ```
+
+Generally, it is not recommended to use explicit materialization hints, as DuckDB's query optimizer is capable of deciding when to materialize or inline a CTE based on the query structure and the heuristics mentioned above. However, in some cases, it may be beneficial to use `MATERIALIZED` or `NOT MATERIALIZED` to control the behavior explicitly.
 
 ## Recursive CTEs
 

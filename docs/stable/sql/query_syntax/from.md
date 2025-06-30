@@ -498,7 +498,7 @@ DuckDB allows self-joins for all types of joins.
 Note that tables need to be aliased, using the same table name without aliases will result in an error:
 
 ```sql
-CREATE TABLE t (x int);
+CREATE TABLE t (x INTEGER);
 SELECT * FROM t JOIN t USING(x);
 ```
 
@@ -512,6 +512,33 @@ Adding the aliases allows the query to parse successfully:
 ```sql
 SELECT * FROM t AS t t1 JOIN t t2 USING(x);
 ```
+
+### Shorthands in the `JOIN` Clause
+
+You can specify column names in the `JOIN` clause:
+
+```sql
+CREATE TABLE t1 (x INTEGER);
+CREATE TABLE t2 (y INTEGER);
+INSERT INTO t1 VALUES (1), (2), (4);
+INSERT INTO t2 VALUES (2), (3);
+SELECT * FROM t1 NATURAL JOIN t2 t2(x);
+```
+
+| x |
+|--:|
+| 2 |
+
+You can also use the `VALUES` clause in the `JOIN` clause:
+
+```sql
+SELECT * FROM t1 NATURAL JOIN (VALUES (2), (4)) _(x);
+```
+
+| x |
+|--:|
+| 2 |
+| 4 |
 
 ## `FROM`-First Syntax
 
@@ -571,6 +598,26 @@ FROM tbl;
 | a | 2 |
 | b | 1 |
 | b | 2 |
+
+## Time Travel Using `AT`
+
+DuckDB v1.3.0 introduced support for [time travel queries](https://docs.snowflake.com/en/user-guide/data-time-travel)
+on data lake formats such as
+[Delta]({% link docs/stable/core_extensions/delta.md %}),
+[DuckLake]({% link docs/stable/core_extensions/ducklake.md %}) and
+[Iceberg]({% link docs/stable/core_extensions/iceberg/overview.md %}).
+
+To specify a time travel query, use the `AT` modifier in the `FROM` clause.
+Time travel queries can use either a version number or the timestamp specified with
+`VERSION => ⟨version⟩`{:.language-sql .highlight}
+and
+`TIMESTAMP => ⟨timestamp or date⟩`{:.language-sql .highlight},
+respectively. For example:
+
+```sql
+FROM my_ducklake.demo AT (VERSION => 2);
+FROM my_ducklake.demo AT (TIMESTAMP => DATE '2025-05-26');
+```
 
 ## Syntax
 

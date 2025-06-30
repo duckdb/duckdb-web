@@ -5,7 +5,7 @@ redirect_from:
 title: Full-Text Search
 ---
 
-DuckDB supports full-text search via the [`fts` extension]({% link docs/stable/extensions/full_text_search.md %}).
+DuckDB supports full-text search via the [`fts` extension]({% link docs/stable/core_extensions/full_text_search.md %}).
 A full-text index allows for a query to quickly search for all occurrences of individual words within longer text strings.
 
 ## Example: Shakespeare Corpus

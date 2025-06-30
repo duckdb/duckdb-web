@@ -3,11 +3,11 @@ layout: docu
 title: ADBC Client
 ---
 
+> The latest stable version of the DuckDB ADBC client is {{ site.current_duckdb_version }}.
+
 [Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/), similarly to ODBC and JDBC, is a C-style API that enables code portability between different database systems. This allows developers to effortlessly build applications that communicate with database systems without using code specific to that system. The main difference between ADBC and ODBC/JDBC is that ADBC uses [Arrow](https://arrow.apache.org/) to transfer data between the database system and the application. DuckDB has an ADBC driver, which takes advantage of the [zero-copy integration between DuckDB and Arrow]({% post_url 2021-12-03-duck-arrow %}) to efficiently transfer data.
 
-DuckDB's ADBC driver currently supports version 0.7 of ADBC.
-
-Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/0.7.0/cpp/index.html) for a more extensive discussion on ADBC and a detailed API explanation.
+Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/current/) for a more extensive discussion on ADBC and a detailed API explanation.
 
 ## Implemented Functionality
 
@@ -185,10 +185,10 @@ import (
 
     "github.com/apache/arrow-adbc/go/adbc"
     "github.com/apache/arrow-adbc/go/adbc/drivermgr"
-    "github.com/apache/arrow/go/v17/arrow"
-    "github.com/apache/arrow/go/v17/arrow/array"
-    "github.com/apache/arrow/go/v17/arrow/ipc"
-    "github.com/apache/arrow/go/v17/arrow/memory"
+    "github.com/apache/arrow-go/v18/arrow"
+    "github.com/apache/arrow-go/v18/arrow/array"
+    "github.com/apache/arrow-go/v18/arrow/ipc"
+    "github.com/apache/arrow-go/v18/arrow/memory"
 )
 
 func _makeSampleArrowRecord() arrow.Record {

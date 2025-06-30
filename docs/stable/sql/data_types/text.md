@@ -44,17 +44,15 @@ Values of the text type are character strings, also known as string values or si
 * referencing columns whose declared or implied type is the text data type
 * [string literals]({% link docs/stable/sql/data_types/literal_types.md %}#string-literals)
 * [casting]({% link docs/stable/sql/expressions/cast.md %}#explicit-casting) expressions to a text type
-* applying a [string operator]({% link docs/stable/sql/functions/char.md %}#text-functions-and-operators), or invoking a function that returns a text type value
+* applying a [string operator]({% link docs/stable/sql/functions/text.md %}#text-functions-and-operators), or invoking a function that returns a text type value
 
 ## Strings with Special Characters
 
-To use special characters in string, use [escape string literals]({% link docs/stable/sql/data_types/literal_types.md %}#escape-string-literals) or [dollar-quoted string literals]({% link docs/stable/sql/data_types/literal_types.md %}#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function]({% link docs/stable/sql/functions/char.md %}):
+To use special characters in string, use [escape string literals]({% link docs/stable/sql/data_types/literal_types.md %}#escape-string-literals) or [dollar-quoted string literals]({% link docs/stable/sql/data_types/literal_types.md %}#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function]({% link docs/stable/sql/functions/text.md %}):
 
 ```sql
 SELECT 'Hello' || chr(10) || 'world' AS msg;
 ```
-
-<!-- This output intentionally uses the duckbox formatter -->
 
 ```text
 ┌──────────────┐
@@ -67,4 +65,4 @@ SELECT 'Hello' || chr(10) || 'world' AS msg;
 
 ## Functions
 
-See [Text Functions]({% link docs/stable/sql/functions/char.md %}) and [Pattern Matching]({% link docs/stable/sql/functions/pattern_matching.md %}).
+See [Text Functions]({% link docs/stable/sql/functions/text.md %}) and [Pattern Matching]({% link docs/stable/sql/functions/pattern_matching.md %}).

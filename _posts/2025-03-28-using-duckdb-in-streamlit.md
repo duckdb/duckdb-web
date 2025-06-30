@@ -84,7 +84,7 @@ duckdb_conn = duckdb.connect(
 ### Attaching an External Database
 
 Another way to connect to DuckDB is to establish a **read only** connection to an instance over HTTPS or S3 compatible APIs,
-e.g. `DUCKDB_EXTERNAL_LOCATION = "https://blobs.duckdb.org/nl-railway/train_stations_and_services.duckdb"`:
+e.g., `DUCKDB_EXTERNAL_LOCATION = "https://blobs.duckdb.org/nl-railway/train_stations_and_services.duckdb"`:
 
 ```python
 duckdb_conn = duckdb.connect()

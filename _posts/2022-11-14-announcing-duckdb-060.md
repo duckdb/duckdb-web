@@ -6,14 +6,14 @@ excerpt: ""
 tags: ["release"]
 ---
 
-<img src="/images/blog/white-headed-duck.jpeg"
+<img src="/images/blog/white-headed-duck.jpg"
      alt="Image of white-headed duck"
      width="200"
      />
 
 The DuckDB team is happy to announce the latest DuckDB version (0.6.0) has been released. This release of DuckDB is named "Oxyura" after the [White-headed duck (Oxyura leucocephala)](https://en.wikipedia.org/wiki/White-headed_duck) which is an endangered species native to Eurasia.
 
-To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.6.0).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.6.0).
 
 ## What's in 0.6.0
 
@@ -21,11 +21,11 @@ The new release contains many improvements to the storage system, general perfor
 
 ## Storage Improvements
 
-As we are working towards stabilizing the storage format and moving towards version 1.0, we have been actively working on improving our storage format, including many [compression improvements]({% post_url 2022-10-28-lightweight-compression %}). 
+As we are working towards stabilizing the storage format and moving towards version 1.0, we have been actively working on improving our storage format, including many [compression improvements]({% post_url 2022-10-28-lightweight-compression %}).
 
 **Optimistic writing to disk.** In previous DuckDB versions, the data of a single transaction was first loaded into memory, and would only be written to disk on a commit. While this works fine when data is loaded in batches that fit in memory, it does not work well when loading a lot of data in a single transaction, such as when ingesting one very large file into the system.
 
-This version introduces [optimistic writing to disk](https://github.com/duckdb/duckdb/pull/4996). When loading large data sets in a single transaction, data is compressed and streamed to the database file, even before the `COMMIT` has occurred. When the transaction is committed, the data will already have been written to disk, and no further writing has to happen. On a rollback, any optimistically written data is reclaimed by the system. 
+This version introduces [optimistic writing to disk](https://github.com/duckdb/duckdb/pull/4996). When loading large data sets in a single transaction, data is compressed and streamed to the database file, even before the `COMMIT` has occurred. When the transaction is committed, the data will already have been written to disk, and no further writing has to happen. On a rollback, any optimistically written data is reclaimed by the system.
 
 **Parallel data loading**. In addition to optimistically writing data to disk, this release includes support for parallel data loading into individual tables. This greatly improves performance of data loading on machines that have multiple cores (i.e., all modern machines).
 
@@ -68,7 +68,6 @@ The compression ratio of a dataset containing temperatures of cities stored as d
 
 DuckDB aims to have very high performance for a wide variety of workloads. As such, we are always working to improve performance for various workloads. This release is no different.
 
-
 **Parallel CSV Loading (Experimental)**. In this release we are launching [a new experimental parallel CSV reader](https://github.com/duckdb/duckdb/pull/5194). This greatly improves the ingestion speed of large CSV files into the system. While we have done our best to make the parallel CSV reader robust – CSV parsing is a minefield as there is such a wide variety of different files out there – so we have marked the reader as experimental for now.
 
 The parallel CSV reader can be enabled by setting the `experimental_parallel_csv` flag to true. We aim to make the parallel CSV reader the default reader in future DuckDB versions.
@@ -81,8 +80,8 @@ Below is the load time of a 720 MB CSV file containing the `lineitem` table from
 
 |     Variant     | Load time |
 |-----------------|----------:|
-| Single Threaded | 3.5s      |
-| Parallel        | 0.6s      |
+| Single-threaded | 3.5 s     |
+| Parallel        | 0.6 s     |
 
 **Parallel CREATE INDEX & Index Memory Management Improvements**. Index creation is also sped up significantly in this release, as [the `CREATE INDEX` statement can now be executed fully in parallel](https://github.com/duckdb/duckdb/pull/4655). In addition, the number of memory allocations done by the ART is greatly reduced through [inlining of small structures](https://github.com/duckdb/duckdb/pull/5292) which both reduces memory size and further improves performance.
 

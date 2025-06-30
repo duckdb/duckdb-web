@@ -3,6 +3,8 @@ layout: docu
 title: C++ API
 ---
 
+> The latest stable version of the DuckDB C++ API is {{ site.current_duckdb_version }}.
+
 > Warning DuckDB's C++ API is internal.
 > It is not guaranteed to be stable and can change without notice.
 > If you would like to build an application on DuckDB, we recommend using the [C API]({% link docs/preview/clients/c/overview.md %}).

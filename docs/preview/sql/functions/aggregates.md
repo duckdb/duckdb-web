@@ -129,8 +129,9 @@ The table below shows the available general aggregate functions.
 | [`bitstring_agg(arg)`](#bitstring_aggarg) | Returns a bitstring whose length corresponds to the range of the non-null (integer) values, with bits set at the location of each (distinct) value. |
 | [`bool_and(arg)`](#bool_andarg) | Returns `true` if every input value is `true`, otherwise `false`. |
 | [`bool_or(arg)`](#bool_orarg) | Returns `true` if any input value is `true`, otherwise `false`. |
-| [`count()`](#countarg) | Returns the number of rows in a group. |
-| [`count(arg)`](#countarg) | Returns the number of non-null values in `arg`. |
+| [`count()`](#count) | Returns the number of rows in a group. |
+| [`count(arg)`](#countarg) | Returns the number of non-`NULL` values in `arg`. |
+| [`countif(arg)`](#countifarg) | Returns the number of rows in a group where `arg` is `true`. |
 | [`favg(arg)`](#favgarg) | Calculates the average using a more accurate floating point summation (Kahan Sum). |
 | [`first(arg)`](#firstarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`fsum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
@@ -138,6 +139,8 @@ The table below shows the available general aggregate functions.
 | [`histogram(arg)`](#histogramarg) | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | [`histogram(arg, boundaries)`](#histogramarg-boundaries) | Returns a `MAP` of key-value pairs representing the provided upper `boundaries` and counts of elements in the corresponding bins (left-open and right-closed partitions) of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than all provided `boundaries` appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/preview/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
 | [`histogram_exact(arg, elements)`](#histogram_exactarg-elements) | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). |
+| [`histogram_values(source, boundaries)`](#histogram_valuessource-col_name-technique-bin_count) | Returns the upper boundaries of the bins and their counts. |
+| [`kahan_sum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
@@ -152,6 +155,7 @@ The table below shows the available general aggregate functions.
 | [`string_agg(arg)`](#string_aggarg-sep) | Concatenates the column string values with a comma separator (`,`). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`sum(arg)`](#sumarg) | Calculates the sum of all non-null values in `arg` / counts `true` values when `arg` is boolean. |
+| [`sumkahan(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
 | [`weighted_avg(arg, weight)`](#weighted_avgarg-weight) | Calculates the weighted average all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the corresponding `arg` value will be skipped. |
 
 #### `any_value(arg)`
@@ -176,7 +180,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_max(A, B)` |
-| **Alias(es)** | `argMax(arg, val)`, `max_by(arg, val)` |
+| **Alias(es)** | `argmax(arg, val)`, `max_by(arg, val)` |
 
 #### `arg_max(arg, val, n)`
 
@@ -184,7 +188,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | The generalized case of [`arg_max`](#arg_maxarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_max(A, B, 2)` |
-| **Alias(es)** | `argMax(arg, val, n)`, `max_by(arg, val, n)` |
+| **Alias(es)** | `argmax(arg, val, n)`, `max_by(arg, val, n)` |
 
 #### `arg_max_null(arg, val)`
 
@@ -286,7 +290,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the number of rows in a group.|
+| **Description** | Returns the number of rows in a group. |
 | **Example** | `count()` |
 | **Alias(es)** | `count(*)` |
 
@@ -294,8 +298,16 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the number of non-null values in `arg`. |
+| **Description** | Returns the number of non-`NULL` values in `arg`. |
 | **Example** | `count(A)` |
+| **Alias(es)** | - |
+
+#### `countif(arg)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the number of rows in a group where `arg` is `true`. |
+| **Example** | `countif(A)` |
 | **Alias(es)** | - |
 
 #### `favg(arg)`
@@ -320,7 +332,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
 | **Example** | `fsum(A)` |
-| **Alias(es)** | `sumKahan`, `kahan_sum` |
+| **Alias(es)** | `sumkahan`, `kahan_sum` |
 
 #### `geomean(arg)`
 
@@ -352,6 +364,14 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). |
 | **Example** | `histogram_exact(A, [0, 1, 10])` |
+| **Alias(es)** | - |
+
+#### `histogram_values(source, col_name, technique, bin_count)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the upper boundaries of the bins and their counts. |
+| **Example** | `histogram_values(integers, i, bin_count := 2)` |
 | **Alias(es)** | - |
 
 #### `last(arg)`
@@ -392,7 +412,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `max_by(A, B)` |
-| **Alias(es)** | `argMax(arg, val)`, `arg_max(arg, val)` |
+| **Alias(es)** | `argmax(arg, val)`, `arg_max(arg, val)` |
 
 #### `max_by(arg, val, n)`
 
@@ -400,7 +420,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
 | **Example** | `max_by(A, B, 2)` |
-| **Alias(es)** | `argMax(arg, val, n)`, `arg_max(arg, val, n)` |
+| **Alias(es)** | `argmax(arg, val, n)`, `arg_max(arg, val, n)` |
 
 #### `min(arg)`
 
@@ -513,6 +533,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`regr_sxy(y, x)`](#regr_sxyy-x) | The population covariance, which includes Bessel's bias correction. |
 | [`regr_syy(y, x)`](#regr_syyy-x) | The population variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs , where x is the independent variable and y is the dependent variable. |
 | [`skewness(x)`](#skewnessx) | The skewness. |
+| [`sem(x)`](#semx) | The standard error of the mean. |
 | [`stddev_pop(x)`](#stddev_popx) | The population standard deviation. |
 | [`stddev_samp(x)`](#stddev_sampx) | The sample standard deviation. |
 | [`var_pop(x)`](#var_popx) | The population variance, which does not include bias correction. |
@@ -675,6 +696,14 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 <div class="nostroke_table"></div>
 
 | **Description** | The population variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| **Formula** | - |
+| **Alias(es)** | - |
+
+#### `sem(x)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | The standard error of the mean. |
 | **Formula** | - |
 | **Alias(es)** | - |
 

@@ -432,7 +432,7 @@ Profiling in DuckDB reveals that the actual sorting takes less than a second at 
 DuckDB's new parallel sorting implementation can efficiently sort more data than fits in memory, making use of the speed of modern SSDs.
 Where other systems crash because they run out of memory, or switch to an external sorting strategy that is much slower, DuckDB's performance gracefully degrades as it goes over the memory limit.
 
-The code that was used to run the experiments can be found [here](https://github.com/lnkuiper/experiments/tree/master/sorting).
+The code that was used to run the experiments can be found on [GitHub](https://github.com/lnkuiper/experiments/tree/master/sorting).
 If we made any mistakes, please let us know!
 
 DuckDB is a free and open-source database management system (MIT licensed). It aims to be the SQLite for Analytics, and provides a fast and efficient database system with zero external dependencies. It is available not just for Python, but also for C/C++, R, Java, and more.

@@ -33,6 +33,6 @@ CREATE SECRET my_secret (
 After setting up the Fastly Object Storage credentials, you can query the data there using DuckDB's built-in methods, such as `read_csv` or `read_parquet`:
 
 ```sql
-SELECT * FROM 's3://⟨fastly_bucket_name⟩/(file).csv';
-SELECT * FROM read_parquet('s3://⟨fastly_bucket_name⟩/⟨file⟩.parquet');
+SELECT * FROM 's3://⟨fastly-bucket-name⟩/(file).csv';
+SELECT * FROM read_parquet('s3://⟨fastly-bucket-name⟩/⟨file⟩.parquet');
 ```

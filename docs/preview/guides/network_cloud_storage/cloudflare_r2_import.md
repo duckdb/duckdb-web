@@ -18,7 +18,7 @@ CREATE SECRET (
     TYPE r2,
     KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
     SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
-    ACCOUNT_ID '⟨your_account_id⟩' -- your 33 character hexadecimal account ID
+    ACCOUNT_ID '⟨your-33-character-hexadecimal-account-ID⟩'
 );
 ```
 
@@ -27,5 +27,5 @@ CREATE SECRET (
 After setting up the R2 credentials, you can query the R2 data using DuckDB's built-in methods, such as `read_csv` or `read_parquet`:
 
 ```sql
-SELECT * FROM read_parquet('r2://⟨r2_bucket_name⟩/⟨file⟩');
+SELECT * FROM read_parquet('r2://⟨r2-bucket-name⟩/⟨file⟩');
 ```

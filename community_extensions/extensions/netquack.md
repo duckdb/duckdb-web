@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: netquack
   description: DuckDB extension for parsing, extracting, and analyzing domains, URIs, and paths with ease.
-  version: 1.2.0
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: hatamiarash7/duckdb-netquack
-  ref: 8094acb2ed43eb20e1ef56f54e91cc49c0788d62
+  ref: c5b7ed449dca37e6824b5c8d8e671a129f5dd960
 
 docs:
   extended_description: |
@@ -27,10 +27,10 @@ docs:
 
     Check the [documentation](https://github.com/hatamiarash7/duckdb-netquack) for more details and examples on each function.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 463
-extension_download_count_pretty: 463
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 503
+extension_download_count_pretty: 503
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---
@@ -68,8 +68,10 @@ LOAD {{ page.extension.name }};
 | get_tranco_rank          | scalar        | Getting the Tranco rank of a domain        | NULL    | [SELECT get_tranco_rank('cloudflare.com') as rank;]                 |
 | update_suffixes          | scalar        | Update public suffixes                     | NULL    | [SELECT update_suffixes();]                                         |
 | update_tranco            | scalar        | Update tranco data                         | NULL    | [SELECT update_tranco(true);]                                       |
-| ipcalc                   | table         | NULL                                       | NULL    | [NULL]                                                              |
-| get_tranco_rank_category | scalar        | NULL                                       | NULL    | [NULL]                                                              |
-| netquack_version         | table         | NULL                                       | NULL    | [NULL]                                                              |
+| extract_port             | scalar        | NULL                                       | NULL    | NULL                                                                |
+| extract_extension        | scalar        | NULL                                       | NULL    | NULL                                                                |
+| ipcalc                   | table         | NULL                                       | NULL    | NULL                                                                |
+| get_tranco_rank_category | scalar        | NULL                                       | NULL    | NULL                                                                |
+| netquack_version         | table         | NULL                                       | NULL    | NULL                                                                |
 
 

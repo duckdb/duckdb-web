@@ -8,6 +8,8 @@ redirect_from:
 title: Go Client
 ---
 
+> The latest version of the DuckDB Go client is {{ site.current_duckdb_go_version }}.
+
 The DuckDB Go driver, `go-duckdb`, allows using DuckDB via the `database/sql` interface.
 For examples on how to use this interface, see the [official documentation](https://pkg.go.dev/database/sql) and [tutorial](https://go.dev/doc/tutorial/database-access).
 

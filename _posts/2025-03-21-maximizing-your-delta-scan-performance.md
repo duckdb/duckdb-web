@@ -4,7 +4,7 @@ title: "Maximizing Your Delta Scan Performance in DuckDB"
 author: "Sam Ansmink"
 thumb: "/images/blog/thumbs/delta-lake-part-2.png"
 image: "/images/blog/thumbs/delta-lake-part-2.png"
-excerpt: "We released a new version of the [`delta` extension](/docs/stable/extensions/delta), which includes several new features and performance improvements. In this blog post, we’ll put the `delta` extension through its paces with some benchmarks and take a deep dive into some of the new performance-related features."
+excerpt: "We released a new version of the [`delta` extension](/docs/stable/core_extensions/delta), which includes several new features and performance improvements. In this blog post, we’ll put the `delta` extension through its paces with some benchmarks and take a deep dive into some of the new performance-related features."
 tags: ["extensions"]
 ---
 
@@ -18,7 +18,7 @@ Let’s start off with a small recap of Delta to get back up to speed. [Delta La
 
 ## The `delta` Extension
 
-DuckDB natively supports reading Delta Tables through the [`delta` extension]({% link docs/stable/extensions/delta.md %}). This extension is one of the [core DuckDB extensions]({% link docs/stable/extensions/core_extensions.md %}) with >70k weekly downloads. Using this extension to read from a Delta Table is really simple. Since DuckDB v1.2.0, the `delta` extension will be automatically installed upon first use and loaded when invoking the `delta_scan` function.
+DuckDB natively supports reading Delta Tables through the [`delta` extension]({% link docs/stable/core_extensions/delta.md %}). This extension is one of the [core DuckDB extensions]({% link docs/stable/core_extensions/overview.md %}) with >70k weekly downloads. Using this extension to read from a Delta Table is really simple. Since DuckDB v1.2.0, the `delta` extension will be automatically installed upon first use and loaded when invoking the `delta_scan` function.
 
 So for example, to read a local Delta table, simply open any DuckDB client and run:
 
@@ -30,14 +30,14 @@ Is your Delta table on someone else’s machine, perhaps in AWS? DuckDB can also
 
 ```sql
 CREATE SECRET (TYPE s3, PROVIDER credential_chain);
-SELECT * FROM delta_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩');
+SELECT * FROM delta_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩');
 ```
 
-For other cloud providers such as Azure or Google Cloud, check the [extension’s documentation page]({% link docs/stable/extensions/delta.md %}#usage).
+For other cloud providers such as Azure or Google Cloud, check the [extension’s documentation page]({% link docs/stable/core_extensions/delta.md %}#usage).
 
 ## Performance Improvements between `delta` v0.1.0 and 0.3.0
 
-While the first release (v0.1.0) of the `delta` extension already came with various performance-related features such as projection pushdown and constant filter pushdown, the features added since then have massively improved the performance of `delta_scan`. To illustrate this, our first benchmark will use the industry standard [TPC-DS]({% link docs/stable/extensions/tpcds.md %}) benchmark with the scale factor 1 data set (SF1).
+While the first release (v0.1.0) of the `delta` extension already came with various performance-related features such as projection pushdown and constant filter pushdown, the features added since then have massively improved the performance of `delta_scan`. To illustrate this, our first benchmark will use the industry standard [TPC-DS]({% link docs/stable/core_extensions/tpcds.md %}) benchmark with the scale factor 1 data set (SF1).
 
 ### Benchmark Setup
 
@@ -96,7 +96,7 @@ SELECT * FROM t1;
 For even more performance improvements, DuckDB also supports **persisting this cached Delta metadata _between_ different queries**. To do this, the Delta table can be attached using the `PIN_SNAPSHOT` option. With this option enabled, subsequent queries can reuse the metadata such as in the following code block:
 
 ```sql
-ATTACH 's3://⟨your_bucket⟩/⟨your_delta_table⟩' AS t2 (
+ATTACH 's3://⟨your-bucket⟩/⟨your_delta_table⟩' AS t2 (
     TYPE delta,
     PIN_SNAPSHOT
 );
@@ -152,7 +152,7 @@ In the previous benchmarks, file skipping has only a very limited effect. The ov
 The table has 100 million rows and has a very basic schema with an incrementing `id` column of `INTEGER` type and a `value` column of `VARCHAR` type. If we query the data using DuckDB we will see something like:
 
 ```sql
-FROM delta_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩');
+FROM delta_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩');
 ```
 
 ```text
@@ -182,7 +182,7 @@ Now, let’s say we are only interested in a specific range of `id`s: maybe we o
 For the first query, we will directly read all the parquet files stored in the table using a [glob pattern]({% link docs/stable/data/multiple_files/overview.md %}#multi-file-reads-and-globs):
 
 ```sql
-FROM parquet_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩/*.parquet')
+FROM parquet_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩/*.parquet')
 WHERE id < 100;
 ```
 
@@ -191,7 +191,7 @@ WHERE id < 100;
 For the second query, we directly scan the table using the `delta_scan` table function, selecting only the `id`s we are interested in using a `WHERE` clause:
 
 ```sql
-FROM delta_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩')
+FROM delta_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩')
 WHERE id < 100;
 ```
 
@@ -201,7 +201,7 @@ We can use DuckDB’s `EXPLAIN ANALYZE` statement to get more details here. Let�
 
 ```sql
 EXPLAIN ANALYZE
-FROM parquet_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩/*.parquet')
+FROM parquet_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩/*.parquet')
 WHERE id < 100;
 ```
 
@@ -233,7 +233,7 @@ We can see in the `EXPLAIN ANALYZE` output that our filter was properly pushed d
 
 ```sql
 EXPLAIN ANALYZE
-FROM delta_scan('s3://⟨your_bucket⟩/⟨your_delta_table⟩');
+FROM delta_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩');
 ```
 
 ```text
@@ -266,7 +266,7 @@ For the `delta_scan` function’s `EXPLAIN ANALYZE` output, we can see two new f
 ### Partition Information Pushdown
 
 The final DuckDB Delta performance feature is partition information pushdown. Partition information pushdown and the partition-aware aggregation operator are relatively [new](https://github.com/duckdb/duckdb/pull/14329) features introduced in DuckDB v1.2.0. In the v0.3.0 release of the `delta` extension this feature was also added, which means that DuckDB can now use the partitioning information to create query plans that can utilize the fact that the data scanned is already partitioned.
-To show the performance benefit of partition information, we will, _surprise,_ run another benchmark! This time, we chose the [TPC-H dataset]({% link docs/stable/extensions/tpch.md %}) at scale factor 10 and ran the experiment on a 32 GB MacBook Pro M1 Max. We partitioned the `lineitem` table by the `l_returnflag` and `l_linestatus` columns. We then run [Q1](https://github.com/duckdb/duckdb/blob/v1.2.1/extension/tpch/dbgen/queries/q01.sql) which looks roughly like this:
+To show the performance benefit of partition information, we will, _surprise,_ run another benchmark! This time, we chose the [TPC-H dataset]({% link docs/stable/core_extensions/tpch.md %}) at scale factor 10 and ran the experiment on a 32 GB MacBook Pro M1 Max. We partitioned the `lineitem` table by the `l_returnflag` and `l_linestatus` columns. We then run [Q1](https://github.com/duckdb/duckdb/blob/v1.2.1/extension/tpch/dbgen/queries/q01.sql) which looks roughly like this:
 
 ```sql
 SELECT

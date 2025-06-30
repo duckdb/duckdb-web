@@ -1,0 +1,284 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../components/hamburgers.min.css';
+
+/** DUCKDB AND DUCKLAKE BASE STYLES **/
+
+
+*{
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body{
+	color: var(--main-text-primary-color);
+	background: var(--main-body-background-color, #FAFAFA);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	@include body-standard();
+}
+
+::-moz-selection {
+  background: $duckDByellow;
+}
+::selection {
+  background: $duckDByellow;
+}
+
+a, a:active, a:focus, button, button:active, button:focus {
+  outline: none;
+}
+
+table a,
+p a,
+li a{
+	color: inherit;
+	text-decoration: underline;
+	-webkit-transition: color .3s;
+	-o-transition: color .3s;
+	transition: color .3s;
+	&:hover{
+		color: $blue;
+		cursor: pointer;
+	}
+}
+
+p a:has(code):hover{
+	background-color: transparent;
+}
+
+ul{
+	list-style-type: '\2022 \00a0\00a0';
+}
+
+strong{
+	font-family: $fontSans;
+	font-weight: 600;
+}
+
+em.caption{
+	@include body-small();
+	font-style: normal!important;
+	text-align: center;
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 1.5em;
+	margin-top: 1em;
+	color: var(--main-text-tertiary-color);
+}
+
+
+
+.icon-24{
+	width: 24px;
+	height: 24px;
+}
+
+
+
+
+
+
+img.downloadlogo{
+	height: 50px;
+	width: 150px;
+	position: absolute;
+	top: 10px;
+	left: 15px;
+	z-index: 999;
+	opacity: 0!important;
+}
+
+
+
+main.f-md{
+	.pagehead + .wrap{
+		padding: 105px 15px;
+	}
+}
+
+main > .pagehead{
+	margin-top: 70px;
+}
+
+
+
+
+
+main{
+	h1{
+		
+		margin-bottom: 50px;
+	}
+	.wrap{
+		max-width: $maxContentWidthOld;
+		margin: 0 auto;
+	}
+	#main_content_wrap{
+		margin-top: 70px;
+	}
+	> .pagehead + .wrap > #main_content_wrap{
+		margin-top: 0;
+	}
+}
+
+
+
+
+h1{
+	@include headline-1();
+	margin-bottom: 50px;
+}
+h2{
+	@include headline-2();
+	margin-bottom: 30px;
+}
+h3{
+	@include headline-3();
+}
+h4{
+	@include title-1();
+}
+h5{
+	@include title-2();
+}
+h6{
+	@include title-3();
+}
+
+main .wrap{
+	h2{
+		font-weight: 600;
+	}
+	* + h2{
+		margin-top: 2em;
+		margin-bottom: .5em;
+	}
+}
+
+body.landing label.onlymobile,
+body.installation div.environment.select label.onlymobile{
+	position: relative;
+	&::after{
+		content: "\E010";
+		font-family: "DuckDB-Symbol";
+		right: 10px;
+		top: 4px;
+		padding: 0 0 2px;
+		position: absolute;
+		pointer-events: none;
+		font-size: 20px;
+		color: white;
+	}
+}
+.environmentselect{
+	width: 100%;
+	/*border: 1px solid #b8b8b8;*/
+	border: none;
+	background: black;
+	color: white;
+	border-radius: 0;
+	height: 35px;
+	padding-left: 9px;
+	font-family: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	cursor: pointer;
+}
+
+.pagetitle {
+	padding: 65px 0;
+
+	h1 {
+		@include display-1();
+		margin: 0;
+	}
+
+	@media only screen and (max-width: 770px) {
+		padding: 45px 0px;
+	}
+}
+
+.layout_default{
+	#main_content_wrap{
+		padding: 0 15px;
+		margin-bottom: 100px;
+	}
+}
+
+/** GENERATED HTML FIXES FOR DOCUMENTATION **/
+div.bodywrapper{
+	dl dt{
+		font-family: $fontMonoBold;
+		font-weight: normal;
+		a.headerlink{
+			opacity: 0;
+			-webkit-transition: opacity .3s;
+			-o-transition: opacity .3s;
+			transition: opacity .3s;
+			padding-left: 4px;
+		}
+		.sig-prename,
+		.property span.pre{
+			font-family: $fontMono;
+		}
+	}
+	dl{
+		p{
+			margin-top: 4px;
+			margin-bottom: 30px;
+			padding-left: 0;
+			font-style: normal;
+		}
+		dd{
+			padding-left: 0;
+		}
+	}
+	dl dd,
+	em.sig-param{
+		font-style: normal;
+		.n{
+			font-weight: normal;
+			font-family: $fontMono;
+		}
+	}
+	a.reference.internal{
+		text-decoration: none;
+	}
+	dt.sig-object{
+		background: var(--doc-codebox-background-color, #F2F2F2);
+		border-radius: 7px;
+		padding: 2px 5px 2px 5px;
+		display: inline-block;
+		&:hover{
+			a.headerlink{
+				opacity: 1;
+			}
+		}
+	}
+}
+
+body.tmguidelines{
+	a{
+		color: inherit;
+	}
+	p + h2{
+		margin-top: 70px;
+	}
+}
+
+.wrap.odbc101aduckthemedguidetoodbc #environment + .nostroke_table + table tr > td:first-child,
+.wrap.odbc101aduckthemedguidetoodbc #connection + .nostroke_table + table tr > td:first-child,
+.wrap.odbc101aduckthemedguidetoodbc #statement + .nostroke_table + table tr > td:first-child,
+.wrap.odbc101aduckthemedguidetoodbc #descriptor + .nostroke_table + table tr > td:first-child{
+	white-space: nowrap;
+}
+
+
+@media print {
+	header, footer {
+		display: none !important;
+	}
+}

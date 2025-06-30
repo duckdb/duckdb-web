@@ -8,6 +8,9 @@ excerpt: "DuckDB now supports reading Avro files through the `avro` community ex
 tags: ["extensions"]
 ---
 
+> **Update (May 2025):**
+> Avro support is now available as the [`avro` core extension]({% link docs/stable/core_extensions/avro.md %}).
+
 ## The Apache™ Avro™ Format
 
 [Avro](https://avro.apache.org) is a binary format for record data. Like many innovations in the data space, Avro was [developed](https://vimeo.com/7362534) by [Doug Cutting](https://en.wikipedia.org/wiki/Doug_Cutting) as part of the Apache Hadoop project [in around 2009](https://github.com/apache/hadoop/commit/8296413d4988c08343014c6808a30e9d5e441bfc). Avro gets its name – somewhat obscurely – from a defunct [British aircraft manufacturer](https://en.wikipedia.org/wiki/Avro). The company famously built over 7,000 [Avro Lancaster heavy bombers](https://en.wikipedia.org/wiki/Avro_Lancaster) under the challenging conditions of World War 2. But we digress.
@@ -76,7 +79,7 @@ The `read_avro` function is integrated into DuckDB's file system abstraction, me
 
 ```sql
 FROM read_avro('http://blobs.duckdb.org/data/userdata1.avro');
-FROM read_avro('s3://my-example-bucket/some_example_file.avro');
+FROM read_avro('s3://⟨my-example-bucket⟩/some_example_file.avro');
 ```
 
 should “just” work.
@@ -84,14 +87,14 @@ should “just” work.
 You can also [*glob* multiple files]({% link docs/stable/sql/functions/pattern_matching.md %}#globbing) in a single read call or pass a list of files to the functions:
 
 ```sql
-FROM read_avro('some_example_file_*.avro');
-FROM read_avro(['some_example_file_1.avro', 'some_example_file_2.avro']);
+FROM read_avro('some-example-file-*.avro');
+FROM read_avro(['some-example-file-1.avro', 'some-example-file-2.avro']);
 ```
 
 If the filenames somehow contain valuable information (as is unfortunately all-too-common), you can pass the `filename` argument to `read_avro`:
 
 ```sql
-FROM read_avro('some_example_file_*.avro', filename = true);
+FROM read_avro('some-example-file-*.avro', filename = true);
 ```
 
 This will result in an additional column in the result set that contains the actual filename of the Avro file.

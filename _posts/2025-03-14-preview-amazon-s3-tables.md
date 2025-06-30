@@ -20,7 +20,7 @@ and
 [AWS](https://aws.amazon.com/blogs/big-data/read-and-write-s3-iceberg-table-using-aws-glue-iceberg-rest-catalog-from-open-source-apache-spark/)
 have all announced or already implemented support for Iceberg tables. These platforms also support Iceberg [catalogs](https://iceberg.apache.org/terms/#catalog), which are responsible for tracking current metadata for a collection of Iceberg tables grouped by namespaces.
 
-DuckDB has supported reading Iceberg tables [since September 2023]({% post_url 2023-09-26-announcing-duckdb-090 %}) via the [`iceberg` extension]({% link docs/stable/extensions/iceberg/overview.md %}). Today, we are happy to introduce a new preview feature in this extension, which allows attaching to [Iceberg REST catalogs](https://www.tabular.io/apache-iceberg-cookbook/getting-started-catalog-background/). This preview release coincides with two AWS announcements yesterday: [support for Iceberg tables in Amazon S3 Tables](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-s3-tables-apache-iceberg-rest-catalog-apis/) and the [GA release of the integration between S3 Tables and SageMaker Lakehouse (AWS Glue Data Catalog)](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-sagemaker-lakehouse-integration-s3-tables-generally-available/). In practice, these developments mean that DuckDB now provides an end-to-end solution for reading Iceberg tables in [S3 Tables]({% link docs/stable/extensions/iceberg/amazon_s3_tables.md %}) and [SageMaker Lakehouse]({% link docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
+DuckDB has supported reading Iceberg tables [since September 2023]({% post_url 2023-09-26-announcing-duckdb-090 %}) via the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). Today, we are happy to introduce a new preview feature in this extension, which allows attaching to [Iceberg REST catalogs](https://www.tabular.io/apache-iceberg-cookbook/getting-started-catalog-background/). This preview release coincides with two AWS announcements yesterday: [support for Iceberg tables in Amazon S3 Tables](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-s3-tables-apache-iceberg-rest-catalog-apis/) and the [GA release of the integration between S3 Tables and SageMaker Lakehouse (AWS Glue Data Catalog)](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-sagemaker-lakehouse-integration-s3-tables-generally-available/). In practice, these developments mean that DuckDB now provides an end-to-end solution for reading Iceberg tables in [S3 Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) and [SageMaker Lakehouse]({% link docs/stable/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
 
 > DuckDB's support for Iceberg REST Catalog endpoints in Amazon S3 Tables is the result of a collaboration between AWS and DuckDB Labs.
 
@@ -111,14 +111,14 @@ Next, point DuckDB to your S3 table bucket.
 You can do so by copy-pasting the S3 Tables ARN value directly from the AWS Management Console and using it in the `ATTACH` command:
 
 ```sql
-ATTACH 'arn:aws:s3tables:⟨us-east-1⟩:⟨111122223333⟩:bucket/⟨bucket_name⟩'
+ATTACH 'arn:aws:s3tables:⟨us-east-1⟩:⟨111122223333⟩:bucket/⟨bucket-name⟩'
     AS s3_tables_db (
         TYPE iceberg,
         ENDPOINT_TYPE s3_tables
     );
 ```
 
-And that's all! Now, DuckDB is connected to Amazon S3 Tables. 
+And that's all! Now, DuckDB is connected to Amazon S3 Tables.
 To show the available tables, run:
 
 ```sql

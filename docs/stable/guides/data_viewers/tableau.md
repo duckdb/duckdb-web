@@ -48,7 +48,7 @@ you will need to make sure the file was created with a file-compatible version o
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
 <!-- markdownlint-disable MD034 -->
-Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_java_version }}/duckdb_jdbc-{{ site.current_java_version }}.jar).
+Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar).
 <!-- markdownlint-enable MD034 -->
 
 * macOS: Copy it to `~/Library/Tableau/Drivers/`
@@ -73,14 +73,14 @@ please use the DuckDB taco connector as described below.
 ## Installing the Tableau DuckDB Connector
 
 While it is possible to use the Tableau-provided PostgreSQL dialect to communicate with the DuckDB JDBC driver,
-we strongly recommend using the [DuckDB "taco" connector](https://github.com/MotherDuck-Open-Source/duckdb-tableau-connector).
+we strongly recommend using the [DuckDB "taco" connector](https://github.com/motherduckdb/duckdb-tableau-connector).
 This connector has been fully tested against the Tableau dialect generator
-and [is more compatible](https://github.com/MotherDuck-Open-Source/duckdb-tableau-connector/blob/main/tableau_connectors/duckdb_jdbc/dialect.tdd)
+and [is more compatible](https://github.com/motherduckdb/duckdb-tableau-connector/blob/main/tableau_connectors/duckdb_jdbc/dialect.tdd)
 than the provided PostgreSQL dialect.
 
 The documentation on how to install and use the connector is in its repository,
 but essentially you will need the
-[`duckdb_jdbc.taco`](https://github.com/MotherDuck-Open-Source/duckdb-tableau-connector/raw/main/packaged-connector/duckdb_jdbc-v1.0.0-signed.taco) file.
+[`duckdb_jdbc.taco`](https://github.com/motherduckdb/duckdb-tableau-connector/raw/main/packaged-connector/duckdb_jdbc-v1.0.0-signed.taco) file.
 (Despite what the Tableau documentation says, the real security risk is in the JDBC driver code,
 not the small amount of JavaScript in the Taco.)
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pcap_reader
   description: Read PCAP files from DuckDB
-  version: 0.0.6
+  version: 0.1.3
   language: Rust
   build: cmake
   license: MIT
@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-pcap
-  ref: a7f4900e4c640e12f17f0980a59c59876b620802
+  ref: 0a11ddc058beb2d480ccbfa83e16a68400c5d076
 
 docs:
   hello_world: |
@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 425
-extension_download_count_pretty: 425
+extension_download_count: 465
+extension_download_count_pretty: 465
 image: '/images/community_extensions/social_preview/preview_community_extension_pcap_reader.png'
 layout: community_extension_doc
 ---
@@ -81,6 +81,6 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| pcap_reader   | table         | NULL        | NULL    | []       |
+| pcap_reader   | table         | NULL        | NULL    |          |
 
 

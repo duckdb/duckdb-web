@@ -1,0 +1,316 @@
+@use 'variables' as *;
+
+
+@mixin display-1 {
+	font-size: var(--type-display-1, 57px);
+	font-weight: 600;
+	line-height: 1.1;
+	letter-spacing: -0.00249em;
+	font-family: "SuisseIntl";
+}
+
+@mixin display-2 {
+	font-size: var(--type-display-2, 45px);
+	font-weight: 600;
+	line-height: 1.2;
+	font-family: "SuisseIntl";
+}
+
+@mixin display-3 {
+	font-size: var(--type-display-3, 36px);
+	font-weight: 600;
+	line-height: 1.2;
+	font-family: "SuisseIntl";
+}
+
+@mixin headline-1 {
+	font-size: var(--type-headline-1, 32px);
+	font-weight: 600;
+	line-height: 1.2;
+	font-family: "SuisseIntl";
+}
+
+@mixin headline-2 {
+	font-size: var(--type-headline-2, 28px);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin headline-3 {
+	font-size: var(--type-headline-3, 24px);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin title-1 {
+	font-size: var(--type-title-1, 18px);
+	font-weight: 600;
+	line-height: 1.2;
+	font-family: "SuisseIntl";
+}
+
+@mixin title-2 {
+	font-size: var(--type-title-2, 16px);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin title-3 {
+	font-size: var(--type-title-3, 14px);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin label-1 {
+	font-size: var(--type-label-1, 14px);
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin label-2 {
+	font-size: var(--type-label-2, 12px);
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin label-3 {
+	font-size: var(--type-label-3, 11px);
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.005em;
+	font-family: "SuisseIntl";
+}
+
+@mixin body-large {
+	font-size: var(--type-body-large, 18px);
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.6;
+	font-family: "SuisseIntl";
+}
+
+@mixin body-standard {
+	font-size: var(--type-body-normal, 16px);
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.5;
+	letter-spacing: 0.0025em;
+	font-family: "SuisseIntl";
+}
+
+@mixin body-small {
+	font-size: var(--type-body-small, 14px);
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.4;
+	letter-spacing: 0.005em;
+	font-family: "SuisseIntl";
+}
+
+@mixin tiny {
+	font-size: var(--type-tiny, 12px);
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.2;
+	letter-spacing: 0.005em;
+	font-family: "SuisseIntl";
+}
+
+@mixin pre-title {
+	font-size: var(--type-pre-title, 13px);
+	text-transform: uppercase;
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.2;
+	letter-spacing: 0.03em;
+	font-family: "SuisseIntl";
+}
+
+@mixin menu-item {
+	font-size: var(--type-menu-items, 15px);
+	font-weight: 450;
+	line-height: 1;
+	font-family: "SuisseIntl";
+}
+
+@mixin code-standard {
+	font-size: var(--type-code, 14px);
+	line-height: 1.4;
+	font-family: "JetBrainsMono-Regular";
+}
+
+@mixin code-large {
+	font-size: var(--type-code-large, 16px);
+	line-height: 1.4;
+	font-family: "JetBrainsMono-Regular";
+}
+
+
+@mixin button {
+	@include label-1;
+	display: inline-block;
+	cursor: pointer;
+	transition: background-color .3s;
+	padding: 12px 20px;
+	border-radius: 100px;
+	text-decoration: none;
+	color: inherit;
+	box-sizing: border-box;
+	margin-right: 10px;
+	&.yellow{
+		background: var(--interactive-button-yellow-background-color, #FFF100);
+		border: 1px solid var(--interactive-button-yellow-border-color-hover, #EDDD0C);
+		color: #000;
+		&:hover{
+			background: var(--interactive-button-yellow-background-color-hover, #EDDD0C);
+			border: 1px solid var(--interactive-button-yellow-border-color-hover, #EDDD0C);
+		}
+	}
+	&.blue{
+		background: var(--blue-70, #2EAFFF);
+		border: 1px solid var(--blue-60, #58A8DA);
+		color: #000;
+		&:hover{
+
+		}
+	}
+	&.black{
+		background: var(--main-text-primary-color, #F2F2F2);
+		border: 1px solid black;
+		color: var(--main-body-background-color, #0D0D0D);
+		&:hover{
+	
+		}
+	}
+	&.transparent{
+		border: 1px solid var(--interactive-button-black-border-color, #1A1A1A);
+		&:hover{
+			border: 1px solid var(--interactive-button-black-border-color, #1A1A1A);
+		}
+	}
+	&.white{
+		background: white;
+		color: black;
+		&:hover{
+			background: #7D66FF;
+			color: white;
+		}
+	}
+	&.arrow-down::after{
+		content: "↓";
+		margin-left: 5px;
+	}
+	&.arrow-right{
+		&:after{
+			/*background-image: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.472 4.64599L8.146 8.99999L7.25 8.07599L10.008 5.33199H0V3.97399H10.036L7.25 1.21599L8.146 0.291992L12.472 4.64599Z' fill='black'/%3E%3C/svg%3E%0A");
+			content: "";
+			width: 13px;
+			height: 9px;
+			background-size: contain;
+			display: inline-block;
+			*/
+			margin-left: 5px;
+			transition: all .25s;
+			content: "→";
+		}
+		&:hover:after{
+			margin-left: 12px;
+		}
+	}
+	&:hover{
+		text-decoration: none;
+	}
+}
+
+@mixin textbutton{
+	@include label-1;
+	color: inherit;
+	text-decoration: none;
+	display: inline;
+	&.arrow-right{
+		&:after{
+			/*
+			background-image: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.472 4.64599L8.146 8.99999L7.25 8.07599L10.008 5.33199H0V3.97399H10.036L7.25 1.21599L8.146 0.291992L12.472 4.64599Z' fill='black'/%3E%3C/svg%3E%0A");
+			content: "";
+			width: 13px;
+			height: 9px;
+			background-size: contain;
+			display: inline-block;
+			*/
+			content: "→";
+			margin-left: 5px;
+			transition: all .25s;
+		}
+		&:hover:after{
+			margin-left: 12px;
+			/*background-image: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.472 4.64599L8.146 8.99999L7.25 8.07599L10.008 5.33199H0V3.97399H10.036L7.25 1.21599L8.146 0.291992L12.472 4.64599Z' fill='%237D66FF'/%3E%3C/svg%3E%0A");*/
+		}
+	}
+	&:hover{
+		color: $purple;
+	}
+}
+
+@mixin textlink {
+	color: $duckDBgrey;
+	text-decoration: underline;
+	font-size: 14px;
+	-webkit-transition: color .3s;
+	-o-transition: color .3s;
+	transition: color .3s;
+	span::after{
+		content: "→";
+		font-family: "DuckDB-Symbol";
+		margin-left: 6px;
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
+		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
+		position: absolute;
+		text-decoration: none;
+		line-height: 1.5;
+	}
+	&:hover span::after{
+		-webkit-transform: translateX(3px);
+			-ms-transform: translateX(3px);
+				transform: translateX(3px);
+	}
+}
+
+.ducklake_logo,
+#ducklake_logo{
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='149' height='38' fill='none'%3E%3Cpath fill='%231A1A1A' d='M19 0C8.524 0 0 8.524 0 19s8.524 19 19 19 19-8.524 19-19S29.476 0 19 0Z'/%3E%3Cpath fill='%232EAFFF' fill-rule='evenodd' d='M17.39 9.66a9.376 9.376 0 0 1 8.093 4.62h1.707v.01c2.357 0 4.345 1.895 4.35 4.3h.01c0 2.39-1.96 4.35-4.35 4.35h-1.264c-1.43 3.132-4.526 5.344-8.157 5.492l-.39.008-.483-.013A9.384 9.384 0 0 1 8 19.05v-.01c0-5.19 4.2-9.39 9.39-9.39v.01Zm0 2.85c-3.6 0-6.53 2.92-6.53 6.53v.01a6.531 6.531 0 0 0 12.74 2.02l.32-.99h3.28c.797 0 1.484-.674 1.49-1.48h-.01c0-.79-.66-1.46-1.49-1.46H23.7l-.38-.83a6.513 6.513 0 0 0-5.93-3.8Z' clip-rule='evenodd'/%3E%3Cpath fill='%230D0D0D' d='M50.906 10H45v17.793h5.906c3.96 0 7.188-3.974 7.188-8.925 0-4.951-3.227-8.868-7.188-8.868Zm0 14.922h-3.228V12.883h3.228c2.507 0 4.499 2.711 4.499 5.985 0 3.274-1.992 6.065-4.499 6.065v-.011ZM79.281 25.105h-.652c-1.557 0-2.839-1.32-2.839-2.94v-3.067c0-1.654 1.293-2.987 2.839-2.987h.652c1.603 0 2.919 1.24 2.919 2.78h2.724c0-3.067-2.552-5.594-5.631-5.594h-.653c-3.033 0-5.494 2.607-5.494 5.8v3.068c0 3.228 2.45 5.824 5.494 5.824h.653c3.182 0 5.78-2.527 5.78-5.572h-2.724c0 1.47-1.385 2.677-3.056 2.677l-.012.011ZM68.316 22.119c0 1.757-1.02 2.986-2.427 2.986h-.675c-1.431 0-2.427-1.24-2.427-2.986v-8.145h-2.701v8.662c0 3.124 2.117 5.364 5.082 5.364h.778c2.965 0 5.048-2.24 5.048-5.364v-8.662h-2.667v8.145h-.011ZM97.95 13.32h-3.755L89.79 18.35v-8.328h-2.667v17.736h2.667v-5.204l1.293-1.447 4.396 6.65h3.307l-5.837-8.844 5.002-5.594ZM136.284 13.32h-3.778l-4.395 5.031v-8.328h-2.667v17.736h2.667v-5.204l1.293-1.447 4.396 6.65h3.308l-5.838-8.844 5.014-5.594ZM103.055 10h-2.644v17.793h10.222v-2.871h-7.578V10ZM146.241 22.889c-.251 1.252-1.51 2.216-3.01 2.216h-.652c-1.557 0-2.839-1.309-2.839-2.94v-1h9.134v-2.274c0-3.067-2.552-5.594-5.631-5.594h-.653c-3.033 0-5.494 2.607-5.494 5.8v3.068c0 3.228 2.449 5.824 5.494 5.824h.653c3.021 0 5.517-2.275 5.757-5.112h-2.747l-.012.012Zm-3.01-6.778c1.58 0 2.873 1.298 2.907 2.814h-6.409c.091-1.573 1.339-2.814 2.838-2.814h.664ZM120.019 15.433c-.801-1.034-1.843-1.654-3.033-1.654h-.676c-2.941 0-5.001 2.401-5.001 5.824v2.55c0 3.4 2.06 5.824 5.001 5.824h.676c1.19 0 2.232-.597 3.033-1.62v1.39h2.575V13.952h-2.575v1.481Zm.252 6.088c0 2.275-1.385 3.837-3.274 3.837h-.675c-1.534 0-2.598-1.32-2.598-3.193v-2.55c0-1.907 1.064-3.251 2.598-3.251h.675c1.9 0 3.274 1.55 3.274 3.733v1.424Z'/%3E%3C/svg%3E");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center left;
+	width: 149px;
+	height: 70px;
+	pointer-events: none;
+}
+
+.duckdb_logo,
+#duckdb_logo{
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='129' height='38' fill='none' viewBox='0 0 129 38'%3E%3Cpath fill='%230D0D0D' d='M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19Z'/%3E%3Cpath fill='%23FFF100' d='M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795ZM7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.535 7.875-7.875 0-4.341-3.534-7.876-7.875-7.876S7.172 14.66 7.172 19Z'/%3E%3Cpath fill='%230D0D0D' d='M68.543 14.125v7.92c0 1.705-1.034 2.91-2.446 2.91h-.69c-1.446 0-2.446-1.205-2.446-2.91v-7.92h-2.725v8.41c0 3.033 2.135 5.215 5.127 5.215h.79c2.99 0 5.104-2.182 5.104-5.216v-8.409h-2.714ZM93.4 18.932l5.049-5.432h-3.804l-4.437 4.886v-8.102h-2.691v17.239h2.691v-5.057l1.301-1.398 4.437 6.466h3.337L93.4 18.932Zm-42.438 5.84h-3.259V13.069h3.259c2.524 0 4.537 2.625 4.537 5.807 0 3.284-2.013 5.898-4.537 5.898Zm0-14.51H45v17.284h5.96c3.993 0 7.263-3.853 7.263-8.671 0-4.704-3.259-8.614-7.262-8.614Zm56.117 14.51h-3.214V13.069h3.214c2.546 0 4.537 2.625 4.537 5.807 0 3.284-1.991 5.898-4.537 5.898Zm0-14.51h-5.928v17.284h5.928c4.048 0 7.262-3.853 7.262-8.671 0-4.704-3.214-8.614-7.262-8.614Zm16.259 14.51h-4.193V19.99h4.193c1.245 0 2.324 1.102 2.324 2.375 0 1.352-1.079 2.409-2.324 2.409Zm-4.193-7.567v-4.137h3.336c1.123 0 2.035.898 2.035 2.057 0 1.148-.912 2.08-2.035 2.08h-3.336Zm7.062.92c.611-.83 1.034-1.875 1.034-3.011 0-2.66-2.18-4.864-4.76-4.864h-6.027v17.284h6.884c2.791 0 5.026-2.33 5.026-5.182a5.178 5.178 0 0 0-2.157-4.227Zm-47.276-1.42h.667c1.613 0 2.948 1.204 2.948 2.704h2.746c0-2.977-2.569-5.432-5.682-5.432h-.668c-3.069 0-5.538 2.534-5.538 5.637v2.477c0 3.136 2.48 5.659 5.538 5.659h.668c3.214 0 5.838-2.454 5.838-5.41H82.7c0 1.433-1.401 2.603-3.091 2.603h-.668c-1.568 0-2.869-1.273-2.869-2.852v-2.477c0-1.614 1.29-2.91 2.858-2.91Z'/%3E%3C/svg%3E");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center left;
+	width: 128.36px;
+	height: 70px;
+	pointer-events: none;
+}
+
+.button{
+	@include button;
+}
+.textbutton{
+	@include textbutton;
+}
+

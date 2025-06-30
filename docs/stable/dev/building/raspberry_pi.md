@@ -5,9 +5,12 @@ redirect_from:
 title: Raspberry Pi
 ---
 
+DuckDB is not officially distributed for the Raspberry Pi OS (previously called Raspbian).
+You can build it following the instructions on this page.
+
 ## Raspberry Pi (64-bit)
 
-DuckDB can be built for 64-bit Raspberry Pi boards. First, install the required build packages:
+First, install the required build packages:
 
 ```batch
 sudo apt-get update

@@ -50,12 +50,11 @@ On macOS, running on Apple Silicon architecture, the result is:
 | osx_arm64 |
 
 On Windows, running on an AMD64 architecture, the platform is `windows_amd64`.
-On CentOS 7, running on the AMD64 architecture, the platform is `linux_amd64_gcc4`.
-On Ubuntu 22.04, running on the ARM64 architecture, the platform is `linux_arm64`.
+On Ubuntu Linux, running on the ARM64 architecture, the platform is `linux_arm64`.
 
 ## Extensions
 
-To get a list of DuckDB extension and their status (e.g., `loaded`, `installed`), use the [`duckdb_extensions()` function]({% link docs/stable/extensions/overview.md %}#listing-extensions):
+To get a list of DuckDB extension and their status (e.g., `loaded`, `installed`), use the [`duckdb_extensions()` function]({% link docs/stable/core_extensions/overview.md %}#listing-extensions):
 
 ```sql
 SELECT *

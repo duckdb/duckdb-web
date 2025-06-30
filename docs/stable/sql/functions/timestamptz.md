@@ -10,7 +10,7 @@ title: Timestamp with Time Zone Functions
 This section describes functions and operators for examining and manipulating [`TIMESTAMP WITH TIME ZONE`
 (or `TIMESTAMPTZ`) values]({% link docs/stable/sql/data_types/timestamp.md %}). See also the related [`TIMESTAMP` functions]({% link docs/stable/sql/functions/timestamp.md %}).
 
-Time zone support is provided by the built-in [ICU extension]({% link docs/stable/extensions/icu.md %}).
+Time zone support is provided by the built-in [ICU extension]({% link docs/stable/core_extensions/icu.md %}).
 
 In the examples below, the current time zone is presumed to be `America/Los_Angeles`
 using the Gregorian calendar.
@@ -30,6 +30,7 @@ they are always available.
 | [`isinf(timestamptz)`](#isinftimestamptz) | Returns true if the timestamp with time zone is infinite, false otherwise. |
 | [`least(timestamptz, timestamptz)`](#leasttimestamptz-timestamptz) | The earlier of two timestamps. |
 | [`now()`](#now) | Current date and time (start of current transaction). |
+| [`timetz_byte_comparable(timetz)`](#timetz_byte_comparabletimetz) | Converts a `TIME WITH TIME ZONE` to a `UBIGINT` sort key. |
 | [`to_timestamp(double)`](#to_timestampdouble) | Converts seconds since the epoch to a timestamp with time zone. |
 | [`transaction_timestamp()`](#transaction_timestamp) | Current date and time (start of current transaction). |
 
@@ -88,6 +89,14 @@ they are always available.
 | **Description** | Current date and time (start of current transaction). |
 | **Example** | `now()` |
 | **Result** | `2022-10-08 12:44:46.122-07` |
+
+#### `timetz_byte_comparable(timetz)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts a `TIME WITH TIME ZONE` to a `UBIGINT` sort key. |
+| **Example** | `timetz_byte_comparable('18:18:16.21-07:00'::TIMETZ)` |
+| **Result** | `2494691656335442799` |
 
 #### `to_timestamp(double)`
 

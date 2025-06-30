@@ -8,17 +8,16 @@ excerpt: |
 extension:
   name: zipfs
   description: Read files within zip archives
-  version: 1.2.2
+  version: 1.3.1
   language: C++
   build: cmake
   license: MIT
   maintainers:
     - isaacbrodsky
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
 
 repo:
   github: isaacbrodsky/duckdb-zipfs
-  ref: 6d4f61fb15cb1d6b258492631c885887bed4de14
+  ref: 937f64900653f69081f82eb5f41536bce280af7e
 
 docs:
   hello_world: |
@@ -26,10 +25,10 @@ docs:
   extended_description: |
     The zipfs extension adds support for reading files from within zip archives.
 
-extension_star_count: 30
-extension_star_count_pretty: 30
-extension_download_count: 17534
-extension_download_count_pretty: 17.5k
+extension_star_count: 37
+extension_star_count_pretty: 37
+extension_download_count: 22344
+extension_download_count_pretty: 22.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_zipfs.png'
 layout: community_extension_doc
 ---
@@ -50,5 +49,14 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|      name       |                                                                             description                                                                             | input_type | scope  |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
+| zipfs_extension | Extension to look for splitting the zip path and the file path within the zip. To specify an artificial seperator, instead set: `set zipfs_split = '!!';`           | VARCHAR    | GLOBAL |
+| zipfs_split     | Extension to look for splitting the zip path and the file path within the zip. Will be removed from the zip file name. Overrides zipfs_extension. Defaults to NULL. | VARCHAR    | GLOBAL |
 
 

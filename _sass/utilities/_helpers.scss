@@ -1,0 +1,169 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+main.inactive{
+	&:before{
+		content: " ";
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.2);
+		top: 70px;
+		left: 0;
+		z-index: 500;
+	}
+}
+
+// Hide
+.onlymobile{
+	display: none;
+}
+.notonmobile{
+	display: block;
+}
+
+// Page width classes 
+.w-small {
+	.wrap {
+		max-width: 750px;
+		margin: 0 auto;
+	}
+}
+
+.w-medium {
+	.wrap {
+		max-width: 950px;
+		margin: 0 auto;
+	}
+}
+
+.w-large {
+	.wrap {
+		max-width: 1150px;
+		margin: 0 auto;
+	}
+}
+
+.w-full {
+	.wrap {
+		max-width: 100%;
+	}
+}
+
+// Two image styles
+img.darkmode-img{
+	display: none;
+}
+img.lightmode-img{
+	display: inline;
+}
+
+// Blocklink
+a.blocklink{
+	display: block;
+	position: absolute;
+	z-index: 500;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	&:hover{
+		background-color: transparent!important;
+	}
+}
+
+.flexwrap{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+	-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+			justify-content: space-between;
+}
+
+
+.nobreak {
+    white-space: nowrap;
+}
+
+
+/** FONT STYLE CLASSES **/
+
+.display-1 {
+	@include display-1;
+}
+
+.display-2 {
+	@include display-2;
+}
+
+.display-3 {
+	@include display-3;
+}
+
+.headline-1 {
+	@include headline-1;
+}
+
+.headline-2 {
+	@include headline-2;
+}
+
+.headline-3 {
+	@include headline-3;
+}
+
+.title-1 {
+	@include title-1;
+}
+
+.title-2 {
+	@include title-2;
+}
+
+.title-3 {
+	@include title-3;
+}
+
+.label-1 {
+	@include label-1;
+}
+
+.label-2 {
+	@include label-2;
+}
+
+.label-3 {
+	@include label-3;
+}
+
+.body-large {
+	@include body-large;
+}
+
+.body-standard {
+	@include body-standard;
+}
+
+.body-small {
+	@include body-small;
+}
+
+.tiny {
+	@include tiny;
+}
+
+.pre-title {
+	@include pre-title;
+}
+
+.menu-item {
+	@include menu-item;
+}
+
+.text-secondary-color{
+	color: var(--main-text-secondary-color, #666);
+}

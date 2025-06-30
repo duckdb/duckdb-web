@@ -1,0 +1,105 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+footer{
+	.sitefooter{
+		color: var(--main-text-primary-color, #F2F2F2);
+		background: var(--main-body-background-color, #FAFAFA);
+		position: relative;
+		z-index: 100;
+		.footercontent{
+			@include body-small;
+			max-width: 1150px;
+			margin: 0 auto;
+			padding: 60px 15px 20px 15px;
+			//padding-bottom: 45px;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-pack: justify;
+				-ms-flex-pack: justify;
+					justify-content: space-between;
+			-webkit-column-gap: 80px;
+			   -moz-column-gap: 80px;
+					column-gap: 80px;
+			-ms-flex-wrap: wrap;
+				flex-wrap: wrap;
+			.footernavigation{
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-column-gap: 50px;
+				   -moz-column-gap: 50px;
+						column-gap: 50px;
+				a{
+					line-height: 2;
+				}
+			}
+			.bottomline{
+				width: 100%;
+				margin-top: 60px;
+				font-weight: 400;
+				color: #979797;
+				display: flex;
+				justify-content: space-between;
+				a{
+					color: inherit;
+				}
+			}
+			strong{
+					font-weight: normal;
+				color: $duckDByellow;
+				}
+			> div{
+				overflow: visible;
+				position: relative;
+				a{
+					color: var(--main-text-secondary-color, #B2B2B2);
+					text-decoration: none;
+					-webkit-transition: color .3s;
+					-o-transition: color .3s;
+					transition: color .3s;
+					&:hover{
+						color: $purple;
+					}
+				}
+			}
+			h6{
+				text-decoration: none;
+				font-family: $fontSans;
+				font-weight: 500;
+				margin-top: 0px;
+				margin-bottom: 20px;
+				color: inherit;
+			}
+			.footerlogo{
+				width: 149px;
+				height: 38px;
+				background-size: contain;
+				background-repeat: no-repeat;
+			}
+			.footerlogo.duckdb_logo{
+				width: 128.36px;
+			}
+			img.duckdbfooter{
+				width: 140px;
+				height: auto;
+			}
+			.icons a{
+				text-decoration: none;
+				font-size: 25px;
+				span{
+					margin-right: 4px;
+				}
+			}
+			.tmhints{
+				a{
+					font-size: 11px;
+					color: var(--main-text-secondary-color, #B2B2B2);
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}

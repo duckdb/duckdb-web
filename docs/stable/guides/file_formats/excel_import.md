@@ -133,4 +133,4 @@ SELECT * FROM read_xlsx('test_excel.xlsx', ignore_errors = true);
 ## See Also
 
 DuckDB can also [export Excel files]({% link docs/stable/guides/file_formats/excel_export.md %}).
-For additional details on Excel support, see the [excel extension page]({% link docs/stable/extensions/excel.md %}).
+For additional details on Excel support, see the [excel extension page]({% link docs/stable/core_extensions/excel.md %}).

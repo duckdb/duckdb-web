@@ -5,7 +5,7 @@ redirect_from:
 title: Building Extensions
 ---
 
-[Extensions]({% link docs/stable/extensions/overview.md %}) can be built from source and installed from the resulting local binary.
+[Extensions]({% link docs/stable/core_extensions/overview.md %}) can be built from source and installed from the resulting local binary.
 
 ## Building Extensions
 
@@ -15,7 +15,7 @@ To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of ex
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
 ```
 
-This option also accepts out-of-tree extensions such as [`delta`]({% link docs/stable/extensions/delta.md %}):
+This option also accepts out-of-tree extensions such as [`delta`]({% link docs/stable/core_extensions/delta.md %}):
 
 ```batch
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch;delta' GEN=ninja make
@@ -27,7 +27,7 @@ In most cases, extension will be directly linked in the resulting DuckDB executa
 
 ### `BUILD_JEMALLOC`
 
-When this flag is set, the [`jemalloc` extension]({% link docs/stable/extensions/jemalloc.md %}) is built.
+When this flag is set, the [`jemalloc` extension]({% link docs/stable/core_extensions/jemalloc.md %}) is built.
 
 ### `BUILD_TPCE`
 

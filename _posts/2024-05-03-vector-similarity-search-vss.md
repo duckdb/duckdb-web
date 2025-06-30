@@ -4,7 +4,7 @@ title: "Vector Similarity Search in DuckDB"
 author: Max Gabrielsson
 thumb: "/images/blog/thumbs/vss.svg"
 image: "/images/blog/thumbs/vss.png"
-excerpt: "This blog post shows a preview of DuckDB's new [`vss` extension](/docs/extensions/vss), which introduces support for HNSW (Hierarchical Navigable Small Worlds) indexes to accelerate vector similarity search."
+excerpt: "This blog post shows a preview of DuckDB's new `vss` extension, which introduces support for HNSW (Hierarchical Navigable Small Worlds) indexes to accelerate vector similarity search."
 tags: ["extensions"]
 ---
 
@@ -19,7 +19,7 @@ However, as the hype for __vector embeddings__ and __semantic similarity search_
 
 > If you're one of today's [lucky 10,000](https://xkcd.com/1053/) and haven't heard of word embeddings or vector search, the short version is that it's a technique used to represent documents, images, entities – _data_ as high-dimensional _vectors_ and then search for _similar_ vectors in a vector space, using some sort of mathematical "distance" expression to measure similarity. This is used in a wide range of applications, from natural language processing to recommendation systems and image recognition, and has recently seen a surge in popularity due to the advent of generative AI and availability of pre-trained models.
 
-This got the community really excited! While we (DuckDB Labs) initially went on record saying that we would not be adding a vector similarity search index to DuckDB as we deemed it to be too far out of scope, we were very interested in supporting custom indexes through extensions in general. Shoot, I've been _personally_ nagging on about wanting to plug-in an "R-Tree" index since the inception of DuckDBs [spatial extension]({% link docs/stable/extensions/spatial/overview.md %})! So when one of our client projects evolved into creating a proof-of-concept custom "HNSW" index extension, we said that we'd give it a shot. And... well, one thing led to another.
+This got the community really excited! While we (DuckDB Labs) initially went on record saying that we would not be adding a vector similarity search index to DuckDB as we deemed it to be too far out of scope, we were very interested in supporting custom indexes through extensions in general. Shoot, I've been _personally_ nagging on about wanting to plug-in an "R-Tree" index since the inception of DuckDBs [spatial extension]({% link docs/stable/core_extensions/spatial/overview.md %})! So when one of our client projects evolved into creating a proof-of-concept custom "HNSW" index extension, we said that we'd give it a shot. And... well, one thing led to another.
 
 Fast forward to now and we're happy to announce the availability of the `vss` vector similarity search extension for DuckDB! While some may say we're late to the vector search party, [we'd like to think the party is just getting started!](https://www.gartner.com/en/newsroom/press-releases/2023-10-11-gartner-says-more-than-80-percent-of-enterprises-will-have-used-generative-ai-apis-or-deployed-generative-ai-enabled-applications-by-2026)
 
@@ -123,6 +123,6 @@ Another current limitation with the `HNSW` index so far are that it only support
 
 The `vss` extension for DuckDB is a new extension that adds support for creating HNSW indexes on fixed-size list columns in DuckDB, accelerating vector similarity search queries. The extension can currently be installed on DuckDB v0.10.2 on all supported platforms (including Wasm!) by running `INSTALL vss; LOAD vss`. The `vss` extension treads new ground for DuckDB extensions by providing a custom index type and we're excited to refine and expand on this functionality going forward.
 
-While we're still working on addressing some of the limitations above, particularly those related to persistence (and performance), we still really want to share this early version the `vss` extension as we believe this will open up a lot of cool opportunities for the community. So make sure to check out the [`vss` extension documentation]({% link docs/stable/extensions/vss.md %}) for more information on how to work with this extension!
+While we're still working on addressing some of the limitations above, particularly those related to persistence (and performance), we still really want to share this early version the `vss` extension as we believe this will open up a lot of cool opportunities for the community. So make sure to check out the [`vss` extension documentation]({% link docs/stable/core_extensions/vss.md %}) for more information on how to work with this extension!
 
 This work was made possible by the sponsorship of a DuckDB Labs customer! If you are interested in similar work for specific capabilities, please reach out to [DuckDB Labs](https://duckdblabs.com/). Alternatively, we're happy to welcome contributors! Please reach out to the DuckDB Labs team over on Discord or on the [`vss` extension GitHub repository](https://github.com/duckdb/duckdb-vss) to keep up with the latest developments.

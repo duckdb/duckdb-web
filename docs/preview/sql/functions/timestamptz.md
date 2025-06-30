@@ -28,6 +28,7 @@ they are always available.
 | [`isinf(timestamptz)`](#isinftimestamptz) | Returns true if the timestamp with time zone is infinite, false otherwise. |
 | [`least(timestamptz, timestamptz)`](#leasttimestamptz-timestamptz) | The earlier of two timestamps. |
 | [`now()`](#now) | Current date and time (start of current transaction). |
+| [`timetz_byte_comparable(timetz)`](#timetz_byte_comparabletimetz) | Converts a `TIME WITH TIME ZONE` to a `UBIGINT` sort key. |
 | [`to_timestamp(double)`](#to_timestampdouble) | Converts seconds since the epoch to a timestamp with time zone. |
 | [`transaction_timestamp()`](#transaction_timestamp) | Current date and time (start of current transaction). |
 
@@ -86,6 +87,14 @@ they are always available.
 | **Description** | Current date and time (start of current transaction). |
 | **Example** | `now()` |
 | **Result** | `2022-10-08 12:44:46.122-07` |
+
+#### `timetz_byte_comparable(timetz)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts a `TIME WITH TIME ZONE` to a `UBIGINT` sort key. |
+| **Example** | `timetz_byte_comparable('18:18:16.21-07:00'::TIMETZ)` |
+| **Result** | `2494691656335442799` |
 
 #### `to_timestamp(double)`
 
@@ -160,7 +169,6 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 | [`datepart(part, timestamptz)`](#datepartpart-timestamptz) | Alias of date_part. Get [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to *extract*). |
 | [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of date_sub. The number of complete [partitions]({% link docs/preview/sql/functions/datepart.md %}) between the timestamps. |
 | [`datetrunc(part, timestamptz)`](#datetruncpart-timestamptz) | Alias of date_trunc. Truncate to specified [precision]({% link docs/preview/sql/functions/datepart.md %}). |
-| [`epoch_ms(timestamptz)`](#epoch_mstimestamptz) | Converts a timestamptz to milliseconds since the epoch. |
 | [`epoch_ns(timestamptz)`](#epoch_nstimestamptz) | Converts a timestamptz to nanoseconds since the epoch. |
 | [`epoch_us(timestamptz)`](#epoch_ustimestamptz) | Converts a timestamptz to microseconds since the epoch. |
 | [`extract(field FROM timestamptz)`](#extractfield-from-timestamptz) | Get [subfield]({% link docs/preview/sql/functions/datepart.md %}) from a `TIMESTAMP WITH TIME ZONE`. |
@@ -271,14 +279,6 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 | **Description** | Alias of date_trunc. Truncate to specified [precision]({% link docs/preview/sql/functions/datepart.md %}). |
 | **Example** | `datetrunc('hour', TIMESTAMPTZ '1992-09-20 20:38:40')` |
 | **Result** | `1992-09-20 20:00:00` |
-
-#### `epoch_ms(timestamptz)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Converts a timestamptz to milliseconds since the epoch. |
-| **Example** | `epoch_ms('2022-11-07 08:43:04.123456+00'::TIMESTAMPTZ);` |
-| **Result** | `1667810584123` |
 
 #### `epoch_ns(timestamptz)`
 

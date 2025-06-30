@@ -7,7 +7,7 @@ redirect_from:
 title: S3 Parquet Export
 ---
 
-To write a Parquet file to S3, the [`httpfs` extension]({% link docs/stable/extensions/httpfs/overview.md %}) is required. This can be installed using the `INSTALL` SQL command. This only needs to be run once.
+To write a Parquet file to S3, the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) is required. This can be installed using the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL httpfs;
@@ -32,7 +32,7 @@ CREATE SECRET (
 
 > Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your_region⟩.amazonaws.com'`{:.language-sql .highlight}.
 
-Alternatively, use the [`aws` extension]({% link docs/stable/extensions/aws.md %}) to retrieve the credentials automatically:
+Alternatively, use the [`aws` extension]({% link docs/stable/core_extensions/aws.md %}) to retrieve the credentials automatically:
 
 ```sql
 CREATE SECRET (
@@ -44,7 +44,7 @@ CREATE SECRET (
 After the `httpfs` extension is set up and the S3 credentials are correctly configured, Parquet files can be written to S3 using the following command:
 
 ```sql
-COPY ⟨table_name⟩ TO 's3://⟨s3_bucket⟩/⟨filename⟩.parquet';
+COPY ⟨table_name⟩ TO 's3://⟨s3-bucket⟩/⟨filename⟩.parquet';
 ```
 
 Similarly, Google Cloud Storage (GCS) is supported through the Interoperability API.

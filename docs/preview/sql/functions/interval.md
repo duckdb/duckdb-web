@@ -41,6 +41,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | [`to_milliseconds(integer)`](#to_millisecondsinteger) | Construct a millisecond interval. |
 | [`to_minutes(integer)`](#to_minutesinteger) | Construct a minute interval. |
 | [`to_months(integer)`](#to_monthsinteger) | Construct a month interval. |
+| [`to_quarters(integer`)](#to_quartersinteger) | Construct an interval of `integer` quarters. |
 | [`to_seconds(integer)`](#to_secondsinteger) | Construct a second interval. |
 | [`to_weeks(integer)`](#to_weeksinteger) | Construct a week interval. |
 | [`to_years(integer)`](#to_yearsinteger) | Construct a year interval. |
@@ -150,6 +151,14 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | **Description** | Construct a month interval. |
 | **Example** | `to_months(5)` |
 | **Result** | `INTERVAL 5 MONTH` |
+
+#### `to_quarters(integer)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Construct an interval of `integer` quarters. |
+| **Example** | `to_quarters(5)` |
+| **Result** | `INTERVAL 1 YEAR 3 MONTHS` |
 
 #### `to_seconds(integer)`
 

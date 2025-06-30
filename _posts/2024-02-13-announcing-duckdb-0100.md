@@ -2,8 +2,8 @@
 layout: post
 title: "Announcing DuckDB 0.10.0"
 author: Mark Raasveldt and Hannes Mühleisen
-thumb: "/images/blog/thumbs/240213.svg"
-image: "/images/blog/thumbs/240213.png"
+thumb: "/images/blog/thumbs/duckdb-release-0-10-0.svg"
+image: "/images/blog/thumbs/duckdb-release-0-10-0.png"
 excerpt: "The DuckDB team is happy to announce the latest DuckDB release (0.10.0). This release is named Fusca after the [Velvet scoter](https://en.wikipedia.org/wiki/Velvet_scoter) native to Europe."
 tags: ["release"]
 ---
@@ -266,18 +266,18 @@ CREATE SECRET secret1 (
     TYPE s3,
     KEY_ID 'my_key1',
     SECRET 'my_secret1',
-    SCOPE 's3://⟨my_bucket⟩'
+    SCOPE 's3://⟨my-bucket⟩'
 );
 
 CREATE SECRET secret2 (
     TYPE s3,
     KEY_ID 'my_key2',
     SECRET 'my_secret2',
-    SCOPE 's3://⟨my_other_bucket⟩'
+    SCOPE 's3://⟨my-other-bucket⟩'
 );
 ```
 
-Now, if the user queries something from `s3://⟨my_other_bucket⟩/something`{:.language-sql .highlight}, `secret2` will be chosen automatically for that request.
+Now, if the user queries something from `s3://⟨my-other-bucket⟩/something`{:.language-sql .highlight}, `secret2` will be chosen automatically for that request.
 
 Secrets can be listed using the built-in table-producing function, e.g., by using `FROM duckdb_secrets();`{:.language-sql .highlight}. Sensitive information will be redacted.
 
@@ -327,7 +327,7 @@ JOIN tbl AS t3 USING (i);
 
 Note that a temporary directory has to be set here, because the operators actually need to offload data to disk to complete this query given this memory limit.
 
-With the new version 0.10.0, this query completes in ca. 5s on a MacBook, while it would error out on the previous version with `Error: Out of Memory Error: failed to pin block of size ...`.
+With the new version 0.10.0, this query completes in ca. 5 s on a MacBook, while it would error out on the previous version with `Error: Out of Memory Error: failed to pin block of size ...`.
 
 ## Adaptive Lossless Floating-Point Compression (ALP)
 

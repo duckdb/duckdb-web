@@ -297,16 +297,17 @@ Overloads for macro functions have to be set at creation, it is not possible to 
 ### Recursive Functions
 
 Defining recursive functions is not supported.
-For example, the following macro – supposed to compute the _n_th number of the Fibonacci sequence – fails:
+For example, the following macro – supposed to compute the *n*th number of the Fibonacci sequence – fails:
 
 ```sql
-CREATE OR REPLACE FUNCTION f(n) AS (SELECT 1);
-CREATE OR REPLACE FUNCTION f(n) AS (
-    CASE WHEN n <= 1 THEN 1
-    ELSE f(n - 1)
+CREATE OR REPLACE FUNCTION fibo(n) AS (SELECT 1);
+CREATE OR REPLACE FUNCTION fibo(n) AS (
+    CASE
+        WHEN n <= 1 THEN 1
+        ELSE fibo(n - 1)
     END
 );
-SELECT f(3);
+SELECT fibo(3);
 ```
 
 ```console

@@ -26,23 +26,23 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 
 ## Autoloading
 
-[Autoloading]({% link docs/stable/extensions/overview.md %}), i.e., the possibility for DuckDB to add extension functionality on-the-fly, is enabled by default in DuckDB-Wasm.
+[Autoloading]({% link docs/stable/core_extensions/overview.md %}), i.e., the possibility for DuckDB to add extension functionality on-the-fly, is enabled by default in DuckDB-Wasm.
 
 ## List of Officially Available Extensions
 
-| Extension name | Description | Aliases |
-|---|-----|--|
-| [autocomplete]({% link docs/stable/extensions/autocomplete.md %}) | Adds support for autocomplete in the shell                       |                 |
-| [excel]({% link docs/stable/extensions/excel.md %})               | Adds support for Excel-like format strings                       |                 |
-| [fts]({% link docs/stable/extensions/full_text_search.md %})      | Adds support for Full-Text Search Indexes                        |                 |
-| [icu]({% link docs/stable/extensions/icu.md %})                   | Adds support for time zones and collations using the ICU library |                 |
-| [inet]({% link docs/stable/extensions/inet.md %})                 | Adds support for IP-related data types and functions             |                 |
-| [json]({% link docs/stable/data/json/overview.md %})              | Adds support for JSON operations                                 |                 |
-| [parquet]({% link docs/stable/data/parquet/overview.md %})        | Adds support for reading and writing Parquet files               |                 |
-| [sqlite]({% link docs/stable/extensions/sqlite.md %})             | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
-| [sqlsmith]({% link docs/stable/extensions/sqlsmith.md %})         |                                                                  |                 |
-| [tpcds]({% link docs/stable/extensions/tpcds.md %})               | Adds TPC-DS data generation and query support                    |                 |
-| [tpch]({% link docs/stable/extensions/tpch.md %})                 | Adds TPC-H data generation and query support                     |                 |
+| Extension name                                                          | Description                                                      | Aliases         |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------- |
+| [autocomplete]({% link docs/stable/core_extensions/autocomplete.md %}) | Adds support for autocomplete in the shell                       |                 |
+| [excel]({% link docs/stable/core_extensions/excel.md %})               | Adds support for Excel-like format strings                       |                 |
+| [fts]({% link docs/stable/core_extensions/full_text_search.md %})      | Adds support for Full-Text Search Indexes                        |                 |
+| [icu]({% link docs/stable/core_extensions/icu.md %})                   | Adds support for time zones and collations using the ICU library |                 |
+| [inet]({% link docs/stable/core_extensions/inet.md %})                 | Adds support for IP-related data types and functions             |                 |
+| [json]({% link docs/stable/data/json/overview.md %})                   | Adds support for JSON operations                                 |                 |
+| [parquet]({% link docs/stable/data/parquet/overview.md %})             | Adds support for reading and writing Parquet files               |                 |
+| [sqlite]({% link docs/stable/core_extensions/sqlite.md %})             | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
+| [sqlsmith]({% link docs/stable/core_extensions/sqlsmith.md %})         |                                                                  |                 |
+| [tpcds]({% link docs/stable/core_extensions/tpcds.md %})               | Adds TPC-DS data generation and query support                    |                 |
+| [tpch]({% link docs/stable/core_extensions/tpch.md %})                 | Adds TPC-H data generation and query support                     |                 |
 
 WebAssembly is basically an additional platform, and there might be platform-specific limitations that make some extensions not able to match their native capabilities or to perform them in a different way. We will document here relevant differences for DuckDB-hosted extensions.
 

@@ -1,21 +1,22 @@
 ---
 layout: docu
 redirect_from:
-- /docs/clients
-- /docs/clients/
-- /docs/api/overview
-- /docs/api/overview/
-- /docs/clients/overview
+  - /clients
+  - /docs/clients
+  - /docs/clients/
+  - /docs/api/overview
+  - /docs/api/overview/
+  - /docs/clients/overview
 title: Client Overview
 ---
 
 DuckDB is an in-process database system and offers client APIs (also known as “drivers”) for several languages.
 
-| Client API                                                                     | Maintainer                                                                              | Support tier | Supported DuckDB version                                                                                                    |
+| Client API                                                                     | Maintainer                                                                              | Support tier | Version                                                                                                                     |
 | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------- |
 | [C]({% link docs/stable/clients/c/overview.md %})                              | The DuckDB team                                                                         | Primary      | [{{ site.current_duckdb_version }}]({% link docs/installation/index.html %}?version=stable&environment=cplusplus)           |
 | [Command Line Interface (CLI)]({% link docs/stable/clients/cli/overview.md %}) | The DuckDB team                                                                         | Primary      | [{{ site.current_duckdb_version }}]({% link docs/installation/index.html %}?version=stable&environment=cli)                 |
-| [Java (JDBC)]({% link docs/stable/clients/java.md %})                          | The DuckDB team                                                                         | Primary      | [{{ site.current_java_short_version }}](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc)                       |
+| [Java (JDBC)]({% link docs/stable/clients/java.md %})                          | The DuckDB team                                                                         | Primary      | [{{ site.current_duckdb_java_short_version }}](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc)                |
 | [Go]({% link docs/stable/clients/go.md %})                                     | [Marc Boeker](https://github.com/marcboeker) and the DuckDB team                        | Primary      | [{{ site.current_duckdb_go_version }}](https://github.com/marcboeker/go-duckdb?tab=readme-ov-file#go-sql-driver-for-duckdb) |
 | [Node.js (node-neo)]({% link docs/stable/clients/node_neo/overview.md %})      | [Jeff Raymakers](https://github.com/jraymakers) ([MotherDuck](https://motherduck.com/)) | Primary      | [{{ site.current_duckdb_node_neo_version }}](https://www.npmjs.com/package/@duckdb/node-api)                                |
 | [ODBC]({% link docs/stable/clients/odbc/overview.md %})                        | The DuckDB team                                                                         | Primary      | [{{ site.current_duckdb_odbc_short_version }}]({% link docs/installation/index.html %}?version=stable&environment=odbc)     |
@@ -36,6 +37,7 @@ DuckDB is an in-process database system and offers client APIs (also known as �
 | [PHP](https://github.com/satur-io/duckdb-php)                                  | [satur-io](https://github.com/satur-io)                                                 | Tertiary     |                                                                                                                             |
 | [Pyodide](https://github.com/duckdb/duckdb-pyodide)                            | The DuckDB team                                                                         | Tertiary     |                                                                                                                             |
 | [Ruby](https://suketa.github.io/ruby-duckdb/)                                  | [suketa](https://github.com/suketa)                                                     | Tertiary     |                                                                                                                             |
+| [Scala](https://www.duck4s.com/docs/index.html)                                | [Salar Rahmanian](https://www.softinio.com)                                             | Tertiary     |                                                                                                                             |
 | [Swift]({% link docs/stable/clients/swift.md %})                               | The DuckDB team                                                                         | Tertiary     |                                                                                                                             |
 | [Zig](https://github.com/karlseguin/zuckdb.zig)                                | [karlseguin](https://github.com/karlseguin)                                             | Tertiary     |                                                                                                                             |
 
@@ -56,4 +58,4 @@ We report the latest stable version for the clients in the primary and secondary
 ## Compatibility
 
 All DuckDB clients support the same DuckDB SQL syntax and use the same on-disk [database format]({% link docs/stable/internals/storage.md %}).
-[DuckDB extensions]({% link docs/stable/extensions/overview.md %}) are also portable between clients with some exceptions (see [Wasm extensions]({% link docs/stable/clients/wasm/extensions.md %}#list-of-officially-available-extensions)).
+[DuckDB extensions]({% link docs/stable/core_extensions/overview.md %}) are also portable between clients with some exceptions (see [Wasm extensions]({% link docs/stable/clients/wasm/extensions.md %}#list-of-officially-available-extensions)).

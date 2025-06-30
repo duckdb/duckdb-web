@@ -76,7 +76,7 @@ When this flag is set, the [CLI]({% link docs/preview/clients/cli/overview.md %}
 ### `BUILD_BENCHMARK`
 
 When this flag is set, DuckDB's in-house benchmark suite is built.
-More information about this can be found [here](https://github.com/duckdb/duckdb/blob/main/benchmark/README.md).
+More information about this can be found [in the README](https://github.com/duckdb/duckdb/blob/main/benchmark/README.md).
 
 ### `BUILD_JDBC`
 

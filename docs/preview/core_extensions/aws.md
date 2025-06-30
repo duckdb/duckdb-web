@@ -42,7 +42,7 @@ Now, to query using the above secret, simply query any `s3://` prefixed file:
 
 ```sql
 SELECT *
-FROM 's3://⟨your_bucket⟩/⟨your_file⟩.parquet';
+FROM 's3://⟨your-bucket⟩/⟨your_file⟩.parquet';
 ```
 
 ### `credential_chain` Provider

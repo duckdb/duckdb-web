@@ -14,7 +14,7 @@ title: Functions
 
 ## Function Chaining via the Dot Operator
 
-DuckDB supports the dot syntax for function chaining. This allows the function call `fn(arg1, arg2, arg3, ...)` to be rewritten as `arg1.fn(arg2, arg3, ...)`. For example, take the following use of the [`replace` function]({% link docs/stable/sql/functions/char.md %}#replacestring-source-target):
+DuckDB supports the dot syntax for function chaining. This allows the function call `fn(arg1, arg2, arg3, ...)` to be rewritten as `arg1.fn(arg2, arg3, ...)`. For example, take the following use of the [`replace` function]({% link docs/stable/sql/functions/text.md %}#replacestring-source-target):
 
 ```sql
 SELECT replace(goose_name, 'goose', 'duck') AS duck_name
@@ -28,13 +28,38 @@ SELECT goose_name.replace('goose', 'duck') AS duck_name
 FROM unnest(['African goose', 'Faroese goose', 'Hungarian goose', 'Pomeranian goose']) breed(goose_name);
 ```
 
-> Tip To apply function chaining to literals, you must use parentheses, e.g.:
->
-> ```sql
-> SELECT ('hello world').replace(' ', '_');
-> ```
+### Using with Literals and Arrays
 
-> Function chaining via the dot operator is limited to *scalar* functions; it is not available for *table* functions. For example, `SELECT * FROM ('/myfile.parquet').read_parquet()` is not supported.  
+To apply function chaining to literals and following array access operations, you must surround the argument with parentheses, e.g.:
+
+```sql
+SELECT ('hello world').replace(' ', '_');
+```
+
+```sql
+SELECT (2).sqrt();
+```
+
+```sql
+SELECT (m[1]).map_entries()
+FROM (VALUES ([MAP {'hello': 42}, MAP {'world': 42}])) t(m);
+```
+
+In the absence of these parentheses, DuckDB will return a `Parser Error` for the function call:
+
+```console
+Parser Error:
+syntax error at or near "("
+```
+
+### Limitations
+
+Function chaining via the dot operator is limited to *scalar* functions and is not supported for *table* functions.
+For example, the following call returns a `Parser Error`:
+
+```sql
+SELECT * FROM ('my_file.parquet').read_parquet(); -- does not work
+```
 
 ## Query Functions
 

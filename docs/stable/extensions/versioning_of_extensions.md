@@ -17,7 +17,7 @@ Most software has some sort of version number. Version numbers serve a few impor
 * Give an indication of expected stability (e.g., `v0.0.1` is likely not very stable, whereas `v13.11.0` probably is stable)
 
 Just like [DuckDB itself]({% link release_calendar.md %}), DuckDB extensions have their own version number. To ensure consistent semantics
-of these version numbers across the various extensions, DuckDB's [Core Extensions]({% link docs/stable/extensions/core_extensions.md %}) use
+of these version numbers across the various extensions, DuckDB's [Core Extensions]({% link docs/stable/core_extensions/overview.md %}) use
 a versioning scheme that prescribes how extensions should be versioned. The versioning scheme for Core Extensions is made up of 3 different stability levels: **unstable**, **pre-release**, and **stable**.
 Let's go over each of the 3 levels and describe their format:
 
@@ -119,12 +119,14 @@ give the user information on which extensions were updated to/from which version
 UPDATE EXTENSIONS;
 ```
 
-| extension_name | repository   | update_result         | previous_version | current_version |
-|:---------------|:-------------|:----------------------|:-----------------|:----------------|
-| httpfs         | core         | NO_UPDATE_AVAILABLE   | 70fd6a8a24       | 70fd6a8a24      |
-| delta          | core         | UPDATED               | d9e5cc1          | 04c61e4         |
-| azure          | core         | NO_UPDATE_AVAILABLE   | 49b63dc          | 49b63dc         |
-| aws            | core_nightly | NO_UPDATE_AVAILABLE   | 42c78d3          | 42c78d3         |
+<div class="monospace_table"></div>
+
+| extension_name | repository   | update_result       | previous_version | current_version |
+| :------------- | :----------- | :------------------ | :--------------- | :-------------- |
+| httpfs         | core         | NO_UPDATE_AVAILABLE | 70fd6a8a24       | 70fd6a8a24      |
+| delta          | core         | UPDATED             | d9e5cc1          | 04c61e4         |
+| azure          | core_nightly | NO_UPDATE_AVAILABLE | 49b63dc          | 49b63dc         |
+| aws            | core         | NO_UPDATE_AVAILABLE | 42c78d3          | 42c78d3         |
 
 Note that DuckDB will look for updates in the source repository for each extension. So if an extension was installed from
 `core_nightly`, it will be updated with the latest nightly build.
@@ -132,13 +134,15 @@ Note that DuckDB will look for updates in the source repository for each extensi
 The update statement can also be provided with a list of specific extensions to update:
 
 ```sql
-UPDATE EXTENSIONS (httpfs, azure);
+UPDATE EXTENSIONS (httpfs, aws);
 ```
 
-| extension_name | repository   | update_result         | previous_version | current_version |
-|:---------------|:-------------|:----------------------|:-----------------|:----------------|
-| httpfs         | core         | NO_UPDATE_AVAILABLE   | 70fd6a8a24       | 70fd6a8a24      |
-| azure          | core         | NO_UPDATE_AVAILABLE   | 49b63dc          | 49b63dc         |
+<div class="monospace_table"></div>
+
+| extension_name | repository | update_result       | previous_version | current_version |
+| :------------- | :--------- | :------------------ | :--------------- | :-------------- |
+| httpfs         | core       | NO_UPDATE_AVAILABLE | 7ce5308          | 7ce5308         |
+| aws            | core       | NO_UPDATE_AVAILABLE | 4f318eb          | 4f318eb         |
 
 ## Target DuckDB Version
 
@@ -153,4 +157,4 @@ While from a user's perspective, there are generally no noticeable differences, 
 
 * in-tree extensions use the version of DuckDB instead of having their own version
 * in-tree extensions do not have dedicated release notes, their changes are reflected in the regular [DuckDB release notes](https://github.com/duckdb/duckdb/releases)
-* core out-of tree extensions tend to live in repositories named `github.com/duckdb/duckdb-⟨extension_name⟩`{:.language-sql .highlight} but the name may vary. See the [full list]({% link docs/stable/extensions/core_extensions.md %}) of core extensions for details.
+* core out-of tree extensions tend to live in repositories named `github.com/duckdb/duckdb-⟨extension_name⟩`{:.language-sql .highlight} but the name may vary. See the [full list]({% link docs/stable/core_extensions/overview.md %}) of core extensions for details.

@@ -44,7 +44,7 @@ SELECT st.* FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS st);
 
 ### `EXCLUDE` Clause
 
-`EXCLUDE` allows us to exclude specific columns from the `*` expression.
+`EXCLUDE` allows you to exclude specific columns from the `*` expression.
 
 ```sql
 SELECT * EXCLUDE (col)
@@ -53,7 +53,7 @@ FROM tbl;
 
 ### `REPLACE` Clause
 
-`REPLACE` allows us to replace specific columns by alternative expressions.
+`REPLACE` allows you to replace specific columns by alternative expressions.
 
 ```sql
 SELECT * REPLACE (col1 / 1_000 AS col1, col2 / 1_000 AS col2)
@@ -62,7 +62,7 @@ FROM tbl;
 
 ### `RENAME` Clause
 
-`RENAME` allows us to replace specific columns.
+`RENAME` allows you to replace specific columns.
 
 ```sql
 SELECT * RENAME (col1 AS height, col2 AS width)
@@ -71,7 +71,7 @@ FROM tbl;
 
 ### Column Filtering via Pattern Matching Operators
 
-The [pattern matching operators]({% link docs/stable/sql/functions/pattern_matching.md %}) `LIKE`, `GLOB`, `SIMILAR TO` and their variants allow us to select columns by matching their names to patterns.
+The [pattern matching operators]({% link docs/stable/sql/functions/pattern_matching.md %}) `LIKE`, `GLOB`, `SIMILAR TO` and their variants allow you to select columns by matching their names to patterns.
 
 ```sql
 SELECT * LIKE 'col%'
@@ -91,7 +91,7 @@ FROM tbl;
 ## `COLUMNS` Expression
 
 
-The `COLUMNS` expression is similar to the regular star expression, but additionally allows us to execute the same expression on the resulting columns. 
+The `COLUMNS` expression is similar to the regular star expression, but additionally allows you to execute the same expression on the resulting columns.
 
 ```sql
 CREATE TABLE numbers (id INTEGER, number INTEGER);
@@ -184,6 +184,15 @@ To remove a colon (`:`) character in the middle of a column name, run:
 CREATE TABLE tbl ("Foo:Bar" INTEGER, "Foo:Baz" INTEGER, "Foo:Qux" INTEGER);
 SELECT COLUMNS('(\w*):(\w*)') AS '\1\2' FROM tbl;
 ```
+
+To add the original column name to the expression alias, run:
+```sql
+SELECT min(COLUMNS(*)) AS "min_\0" FROM numbers;
+```
+
+| min_id | min_number |
+|-------:|-----------:|
+|      1 |         10 |
 
 ### `COLUMNS` Lambda Function
 

@@ -13,7 +13,7 @@ tags: ["release"]
 
 The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been released. This release of DuckDB is named "Labradorius" after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) that was native to North America.
 
-To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
+To install the new version, please visit the [installation guide]({% link docs/installation/index.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
 
 ## What's in 0.7.0
 
@@ -27,15 +27,15 @@ The new release contains many improvements to the JSON support, new SQL features
 FROM 'data/json/with_list.json';
 ```
 
-| id |               name               |
-|----|----------------------------------|
-| 1  | [O, Brother,, Where, Art, Thou?] |
-| 2  | [Home, for, the, Holidays]       |
-| 3  | [The, Firm]                      |
-| 4  | [Broadcast, News]                |
-| 5  | [Raising, Arizona]               |
+| id  | name                             |
+| --- | -------------------------------- |
+| 1   | [O, Brother,, Where, Art, Thou?] |
+| 2   | [Home, for, the, Holidays]       |
+| 3   | [The, Firm]                      |
+| 4   | [Broadcast, News]                |
+| 5   | [Raising, Arizona]               |
 
-**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [Hive-partitioned Parquet and CSV files]({% link docs/stable/extensions/httpfs/overview.md %}#hive-partitioning) for a while. After this release [DuckDB will also be able to *write* Hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
+**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [Hive-partitioned Parquet and CSV files]({% link docs/stable/core_extensions/httpfs/overview.md %}#hive-partitioning) for a while. After this release [DuckDB will also be able to _write_ Hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
 
 ```sql
 COPY orders TO 'orders' (FORMAT parquet, PARTITION_BY (year, month));
@@ -61,10 +61,10 @@ orders
 
 **Parallel Parquet/CSV Writing.** Parquet and CSV writing are sped up tremendously this release with the [parallel Parquet and CSV writer support](https://github.com/duckdb/duckdb/pull/5756).
 
-| Format  | Old  | New (8T) |
-|---------|-----:|---------|
-| CSV     | 2.6s | 0.4s     |
-| Parquet | 7.5s | 1.3s     |
+| Format  |   Old | New (8T) |
+| ------- | ----: | -------: |
+| CSV     | 2.6 s | 0.4 s    |
+| Parquet | 7.5 s | 1.3 s    |
 
 Note that currently the parallel writing is currently limited to non-insertion order preserving – which can be toggled by setting the `preserve_insertion_order` setting to false. In a future release we aim to alleviate this restriction and order parallel insertion order preserving writes as well.
 
@@ -81,7 +81,7 @@ DETACH new_db;
 
 See the [documentation for more information]({% link docs/stable/sql/statements/attach.md %}).
 
-**SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/duckdb-sqlite) makes use of this to add native read/write support for SQLite database files to DuckDB.
+**SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [_pluggable database engines_](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/duckdb-sqlite) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
@@ -102,18 +102,18 @@ INSERT INTO movies VALUES (1, 'A New Hope');
 FROM movies;
 ```
 
-| id |    name    |
-|----|------------|
-| 1  | A New Hope |
+| id  | name       |
+| --- | ---------- |
+| 1   | A New Hope |
 
 ```sql
 INSERT OR REPLACE INTO movies VALUES (1, 'The Phantom Menace');
 FROM movies;
 ```
 
-| id |        name        |
-|----|--------------------|
-| 1  | The Phantom Menace |
+| id  | name               |
+| --- | ------------------ |
+| 1   | The Phantom Menace |
 
 See the [documentation for more information]({% link docs/stable/sql/statements/insert.md %}#on-conflict-clause).
 
@@ -129,11 +129,11 @@ CREATE TABLE t2 AS FROM (VALUES (4), (5), (6)) t(k);
 SELECT * FROM t1 POSITIONAL JOIN t2;
 ```
 
-| i | k |
-|---|---|
-| 1 | 4 |
-| 2 | 5 |
-| 3 | 6 |
+| i   | k   |
+| --- | --- |
+| 1   | 4   |
+| 2   | 5   |
+| 3   | 6   |
 
 ## Python API Improvements
 

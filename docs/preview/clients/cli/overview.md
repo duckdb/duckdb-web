@@ -3,6 +3,8 @@ layout: docu
 title: CLI API
 ---
 
+> The latest stable version of the DuckDB CLI client is {{ site.current_duckdb_version }}.
+
 ## Installation
 
 The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link docs/installation/index.html %}) under the CLI tab for download links.
@@ -46,7 +48,7 @@ duckdb
 ```
 
 ```text
-v{{ site.current_duckdb_version }} {{ site.current_duckdb_hash }}
+DuckDB v{{ site.current_duckdb_version }} ({{ site.current_duckdb_codename }}) {{ site.current_duckdb_hash }}
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.

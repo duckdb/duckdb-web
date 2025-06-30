@@ -76,7 +76,7 @@ ORDER BY 1;
     </a>
 </div>
 
-Another approach is to use the [`time_bucket` function]({% link docs/stable/sql/functions/timestamp.md%}#time_bucketbucket_width-timestamp-offset), which will truncate the timestamp to the bucket width provided, starting from the specified offset. For example, we calculate the number of services each quarter of an hour, starting with `00`:
+Another approach is to use the [`time_bucket` function]({% link docs/stable/sql/functions/timestamp.md %}#time_bucketbucket_width-timestamp-offset), which will truncate the timestamp to the bucket width provided, starting from the specified offset. For example, we calculate the number of services each quarter of an hour, starting with `00`:
 
 ```sql
 SELECT

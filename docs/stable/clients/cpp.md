@@ -7,9 +7,12 @@ redirect_from:
 title: C++ API
 ---
 
-> Warning DuckDB's C++ API is internal.
+> The latest version of the DuckDB C++ API is {{ site.current_duckdb_version }}.
+
+> Warning DuckDB's C++ API is primarily intended for internal use.
 > It is not guaranteed to be stable and can change without notice.
-> If you would like to build an application on DuckDB, we recommend using the [C API]({% link docs/stable/clients/c/overview.md %}).
+> If you would like to build an application on DuckDB,
+> we recommend using the [C API]({% link docs/stable/clients/c/overview.md %}).
 
 ## Installation
 
