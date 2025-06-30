@@ -16,6 +16,7 @@ function GenerateAttach(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Keyword("ATTACH"),
+			GenerateOrReplace(),
 			Optional(Keyword("DATABASE"), "skip"),
 			Optional(Sequence([Keyword("IF NOT EXISTS")]), "skip"),
 			Expression("database-path"),

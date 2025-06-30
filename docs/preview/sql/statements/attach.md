@@ -50,6 +50,12 @@ Attach the database `file.db` if explicit database alias `file_db` does not yet 
 ATTACH IF NOT EXISTS 'file.db' AS file_db;
 ```
 
+Attach the database `file2.db` as alias `file_db` detaching and replacing the existing alias if it exists:
+
+```sql
+ATTACH OR REPLACE 'file2.db' AS file_db;
+```
+
 Create a table in the attached database with alias `file`:
 
 ```sql
@@ -99,8 +105,6 @@ Similarly, the following two commands connecting to S3 are equivalent:
 ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db;
 ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
 ```
-
-> Prior to DuckDB version 1.1.0, it was necessary to specify the `READ_ONLY` flag for HTTP and S3 endpoints.
 
 ### Explicit Storage Versions
 
