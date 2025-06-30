@@ -44,6 +44,12 @@ title: Documentation
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
+        <a href="{% link docs/stable/clients/odbc/overview.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/odbc.svg %}"></span>
+        <span>ODBC</span>
+        <span class="chevron"></span>
+    </div>
+    <div class="box-link half-width">
         <a href="{% link docs/stable/clients/python/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/python.svg %}"></span>
         <span>Python</span>
@@ -53,6 +59,12 @@ title: Documentation
         <a href="{% link docs/stable/clients/r.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/r.svg %}"></span>
         <span>R</span>
+        <span class="chevron"></span>
+    </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/stable/clients/rust.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/rust.svg %}"></span>
+        <span>Rust</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
