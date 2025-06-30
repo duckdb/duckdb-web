@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-httpclient
-  ref: a4b96527c14038641deaa3d4866a27847ee92912
+  ref: 04f20978af5dbf2a682b9c37aed571d989b801f6
 
 docs:
   hello_world: |
@@ -97,8 +97,8 @@ docs:
   extended_description: |
     The HTTP Client Extension is experimental, use at your own risk!
 
-extension_star_count: 59
-extension_star_count_pretty: 59
+extension_star_count: 62
+extension_star_count_pretty: 62
 extension_download_count: 505
 extension_download_count_pretty: 505
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
