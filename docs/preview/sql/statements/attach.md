@@ -106,8 +106,6 @@ ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db;
 ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
 ```
 
-> Prior to DuckDB version 1.1.0, it was necessary to specify the `READ_ONLY` flag for HTTP and S3 endpoints.
-
 ### Explicit Storage Versions
 
 [DuckDB v1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicilty specifying the storage version.
