@@ -50,6 +50,12 @@ Attach the database `file.db` if explicit database alias `file_db` does not yet 
 ATTACH IF NOT EXISTS 'file.db' AS file_db;
 ```
 
+Attach the database `file2.db` as alias `file_db` detaching and replacing the existing alias if it exists:
+
+```sql
+ATTACH OR REPLACE 'file2.db' AS file_db;
+```
+
 Create a table in the attached database with alias `file`:
 
 ```sql
