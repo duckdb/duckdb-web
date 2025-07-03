@@ -13,7 +13,7 @@ Acknowledging these quirks is the best we can do, which is why we have compiled 
 
 On empty groups, the aggregate functions `sum`, `list`, and `string_agg` all return `NULL` instead of `0`, `[]` and `''`, respectively. This is dictated by the SQL Standard and obeyed by all SQL implementations we know. This behavior is inherited by the list aggregate [`list_sum`]({% link docs/preview/sql/functions/list.md %}#list_-rewrite-functions), but not by the DuckDB original [`list_dot_product`]({% link docs/preview/sql/functions/list.md %}#list_dot_productlist1-list2) which returns `0` on empty lists.
 
-## Indexing
+## 0 vs. 1-Based Indexing
 
 To comply with standard SQL, one-based indexing is used almost everywhere, e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`). However, similarly to PostgreSQL, [JSON features use a zero-based indexing]({% link docs/preview/data/json/overview.md %}#indexing).
 

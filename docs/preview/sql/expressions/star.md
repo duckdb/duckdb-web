@@ -183,6 +183,16 @@ CREATE TABLE tbl ("Foo:Bar" INTEGER, "Foo:Baz" INTEGER, "Foo:Qux" INTEGER);
 SELECT COLUMNS('(\w*):(\w*)') AS '\1\2' FROM tbl;
 ```
 
+To add the original column name to the expression alias, run:
+
+```sql
+SELECT min(COLUMNS(*)) AS "min_\0" FROM numbers;
+```
+
+| min_id | min_number |
+|-------:|-----------:|
+|      1 |         10 |
+
 ### `COLUMNS` Lambda Function
 
 `COLUMNS` also supports passing in a lambda function. The lambda function will be evaluated for all columns present in the `FROM` clause, and only columns that match the lambda function will be returned. This allows the execution of arbitrary expressions in order to select and rename columns.
