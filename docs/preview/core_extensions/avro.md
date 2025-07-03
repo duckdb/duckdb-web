@@ -6,6 +6,8 @@ title: Avro Extension
 
 The `avro` extension enables DuckDB to read [Apache Avro](https://avro.apache.org) files.
 
+> The `avro` extensions was [released as a community extension in late 2024]({% post_url 2024-12-09-duckdb-avro-extension %}) and became a core extension in early 2025.
+
 ## The `read_avro` Function
 
 The extension adds a single DuckDB function, `read_avro`. This function can be used like so:
