@@ -11,25 +11,25 @@ The `CREATE VIEW` statement defines a new view in the catalog.
 Create a simple view:
 
 ```sql
-CREATE VIEW v1 AS SELECT * FROM tbl;
+CREATE VIEW view1 AS SELECT * FROM tbl;
 ```
 
 Create a view or replace it if a view with that name already exists:
 
 ```sql
-CREATE OR REPLACE VIEW v1 AS SELECT 42;
+CREATE OR REPLACE VIEW view1 AS SELECT 42;
 ```
 
 Create a view and replace the column names:
 
 ```sql
-CREATE VIEW v1(a) AS SELECT 42;
+CREATE VIEW view1(a) AS SELECT 42;
 ```
 
 The SQL query behind an existing view can be read using the [`duckdb_views()` function]({% link docs/preview/sql/meta/duckdb_table_functions.md %}#duckdb_views) like this:
 
 ```sql
-SELECT sql FROM duckdb_views() WHERE view_name = 'v1';
+SELECT sql FROM duckdb_views() WHERE view_name = 'view1';
 ```
 
 ## Syntax
