@@ -25,7 +25,7 @@ Run these `pip install` commands from the command line if Jupyter Notebook is no
 pip install duckdb
 ```
 
-Install Jupyter Notebook
+Install Jupyter Notebook:
 
 ```bash
 pip install notebook

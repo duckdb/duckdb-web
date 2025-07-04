@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: httpserver
   description: DuckDB HTTP API Server Extension
-  version: 0.1.5
+  version: 0.1.6
   language: SQL & C++
   build: cmake
   license: MIT
@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: quackscience/duckdb-extension-httpserver
-  ref: 1468e965565370fa3fae7780d99dd4821cf23dee
+  ref: cf27205ccf04ae3ef2d252521a83008cac4c8381
 
 docs:
   hello_world: |
@@ -72,10 +72,10 @@ docs:
     - Work with local and remote datasets including [MotherDuck](https://motherduck.com) 🐤
     - _100% Opensource, ready to use and extend by the Community!_
   
-    > This extension is experimental and potentially unstable. Do not use it in production.
+    > This extension is experimental and potentially unstable. Use at your own risk.
 
-extension_star_count: 204
-extension_star_count_pretty: 204
+extension_star_count: 208
+extension_star_count_pretty: 208
 extension_download_count: 873
 extension_download_count_pretty: 873
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'

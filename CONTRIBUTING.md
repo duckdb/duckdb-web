@@ -112,6 +112,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
      * For example, you could write: To create a table from a Parquet file, run: `CREATE TABLE ⟨your_table_name⟩ AS FROM '⟨your_filename⟩.parquet'`.
      * Copy the characters from here: `⟨⟩`.
      * These characters are known in LaTeX code as `\langle` and `\rangle`.
+     * Inline code snippets containing placeholders should be highlighted as SQL code. This can be achieved by appending `{:.language-sql .highlight}` after the code snippet (no space is required before the curly brace).
      * *Avoid* using arithmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
 
 ### Python Style

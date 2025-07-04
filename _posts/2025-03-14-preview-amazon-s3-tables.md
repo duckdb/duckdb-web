@@ -111,14 +111,14 @@ Next, point DuckDB to your S3 table bucket.
 You can do so by copy-pasting the S3 Tables ARN value directly from the AWS Management Console and using it in the `ATTACH` command:
 
 ```sql
-ATTACH 'arn:aws:s3tables:⟨us-east-1⟩:⟨111122223333⟩:bucket/⟨bucket_name⟩'
+ATTACH 'arn:aws:s3tables:⟨us-east-1⟩:⟨111122223333⟩:bucket/⟨bucket-name⟩'
     AS s3_tables_db (
         TYPE iceberg,
         ENDPOINT_TYPE s3_tables
     );
 ```
 
-And that's all! Now, DuckDB is connected to Amazon S3 Tables. 
+And that's all! Now, DuckDB is connected to Amazon S3 Tables.
 To show the available tables, run:
 
 ```sql

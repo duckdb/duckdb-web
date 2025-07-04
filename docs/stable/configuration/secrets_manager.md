@@ -89,7 +89,7 @@ CREATE SECRET secret1 (
     TYPE s3,
     KEY_ID 'my_secret_key1',
     SECRET 'my_secret_value1',
-    SCOPE 's3://my_bucket'
+    SCOPE 's3://⟨my-bucket⟩'
 );
 ```
 
@@ -98,14 +98,14 @@ CREATE SECRET secret2 (
     TYPE s3,
     KEY_ID 'my_secret_key2',
     SECRET 'my_secret_value2',
-    SCOPE 's3://my_other_bucket'
+    SCOPE 's3://⟨my-other-bucket⟩'
 );
 ```
 
-Now, if the user queries something from `s3://my-other-bucket/something`, secret `secret2` will be chosen automatically for that request. To see which secret is being used, the `which_secret` scalar function can be used, which takes a path and a secret type as parameters:
+Now, if the user queries something from `s3://⟨my-other-bucket⟩/something`, secret `secret2` will be chosen automatically for that request. To see which secret is being used, the `which_secret` scalar function can be used, which takes a path and a secret type as parameters:
 
 ```sql
-FROM which_secret('s3://my-other-bucket/file.parquet', 's3');
+FROM which_secret('s3://⟨my-other-bucket⟩/file.parquet', 's3');
 ```
 
 ## Listing Secrets

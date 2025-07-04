@@ -471,6 +471,8 @@
 	
 	footer .sitefooter .footercontent .bottomline{
 		margin-bottom: 0;
+		flex-wrap: wrap;
+		flex-direction: column;
 	}
 
 	
@@ -484,24 +486,11 @@
 	}
 	
 	.pagehead h1 {
-		font-size: 35px;
 		padding: 50px 15px;
-	}
-	
-	.newswrap .postwrap .postcontent .recentposts h1{
-		font-size: 35px;
 	}
 
 	main.f-md .pagehead+.wrap {
 		padding: 50px 15px;
-	}
-
-	body.landing .welcome h1 {
-		font-size: 200%;
-	}
-
-	body.landing .benefits h1 {
-		font-size: 145%;
 	}
 
 	body.landing .welcome .mainlinks ul li,
@@ -521,19 +510,6 @@
 
 	body.landing .docu .boxlayout .box:first-child {
 		padding-right: 0;
-	}
-
-	body.landing .using .box {
-		margin-bottom: 50px;
-
-		&:nth-child(2) {
-			margin-bottom: 0;
-		}
-
-		div.icon {
-			font-size: 75px;
-			width: 85px;
-		}
 	}
 
 	body.landing .docu .boxlayout .box .button {
@@ -596,14 +572,6 @@
 	.newswrap .postwrap .postcontent .recentposts .postpreview {
 		width: 100%;
 		margin-bottom: 10px;
-
-		.meta {
-			font-size: 11.5px;
-		}
-
-		.postdetails .tags span {
-			font-size: 11px;
-		}
 	}
 	
 	.newswrap .postwrap .postcontent .recentposts{
@@ -612,10 +580,6 @@
 	
 	.pagetitle {
 		padding: 35px 0px;
-	}
-	
-	em.caption{
-		font-size: 12px;
 	}
 	
 }
@@ -655,18 +619,6 @@
 
 	body.landing .welcome .mainlinks ul {
 		margin-top: 60px;
-	}
-
-	.newswrap .postwrap .singleentry {
-		h1 {
-			font-size: 30px;
-			line-height: 34px;
-		}
-
-		h2 {
-			font-size: 28px;
-			line-height: 30px;
-		}
 	}
 
 	footer .sitefooter .footercontent>div {

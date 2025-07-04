@@ -21,6 +21,7 @@ We would like to use this event to stop for a moment and revisit recent developm
 * DuckDB now has a [built-in UI]({% post_url 2025-03-12-duckdb-ui %}).
 * DuckDB now supports Iceberg REST Catalog, which also allows it to connect to [Amazon S3 Tables]({% post_url 2025-03-14-preview-amazon-s3-tables %})
 * We published the much-requested [roadmap]({% link roadmap.md %}).
+* Coincidentally, this is the 100th post on our blog.
 
 ## Metrics
 

@@ -6,159 +6,288 @@ redirect_from:
 - /docs/stable/extensions/spatial/functions/
 ---
 
-## Function Index
-
+## Function Index 
 **[Scalar Functions](#scalar-functions)**
 
-| Function                                                      | Summary                                                                                                                                                                                                                                                                                                                                                               |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`ST_Area`](#st_area)                                         | Compute the area of a geometry.                                                                                                                                                                                                                                                                                                                                       |
-| [`ST_Area_Spheroid`](#st_area_spheroid)                       | Returns the area of a geometry in meters, using an ellipsoidal model of the earth                                                                                                                                                                                                                                                                                     |
-| [`ST_AsGeoJSON`](#st_asgeojson)                               | Returns the geometry as a GeoJSON fragment                                                                                                                                                                                                                                                                                                                            |
-| [`ST_AsHEXWKB`](#st_ashexwkb)                                 | Returns the geometry as a HEXWKB string                                                                                                                                                                                                                                                                                                                               |
-| [`ST_AsSVG`](#st_assvg)                                       | Convert the geometry into a SVG fragment or path                                                                                                                                                                                                                                                                                                                      |
-| [`ST_AsText`](#st_astext)                                     | Returns the geometry as a WKT string                                                                                                                                                                                                                                                                                                                                  |
-| [`ST_AsWKB`](#st_aswkb)                                       | Returns the geometry as a WKB (Well-Known-Binary) blob                                                                                                                                                                                                                                                                                                                |
-| [`ST_Boundary`](#st_boundary)                                 | Returns the "boundary" of a geometry                                                                                                                                                                                                                                                                                                                                  |
-| [`ST_Buffer`](#st_buffer)                                     | Returns a buffer around the input geometry at the target distance                                                                                                                                                                                                                                                                                                     |
-| [`ST_BuildArea`](#st_buildarea)                               | Creates a polygonal geometry by attemtping to "fill in" the input geometry.                                                                                                                                                                                                                                                                                           |
-| [`ST_Centroid`](#st_centroid)                                 | Returns the centroid of a geometry                                                                                                                                                                                                                                                                                                                                    |
-| [`ST_Collect`](#st_collect)                                   | Collects a list of geometries into a collection geometry.                                                                                                                                                                                                                                                                                                             |
-| [`ST_CollectionExtract`](#st_collectionextract)               | Extracts geometries from a GeometryCollection into a typed multi geometry.                                                                                                                                                                                                                                                                                            |
-| [`ST_ConcaveHull`](#st_concavehull)                           | Returns the 'concave' hull of the input geometry, containing all of the source input's points, and which can be used to create polygons from points. The ratio parameter dictates the level of concavity; 1.0 returns the convex hull; and 0 indicates to return the most concave hull possible. Set allowHoles to a non-zero value to allow output containing holes. |
-| [`ST_Contains`](#st_contains)                                 | Returns true if the first geometry contains the second geometry                                                                                                                                                                                                                                                                                                       |
-| [`ST_ContainsProperly`](#st_containsproperly)                 | Returns true if the first geometry \"properly\" contains the second geometry                                                                                                                                                                                                                                                                                          |
-| [`ST_ConvexHull`](#st_convexhull)                             | Returns the convex hull enclosing the geometry                                                                                                                                                                                                                                                                                                                        |
-| [`ST_CoverageInvalidEdges`](#st_coverageinvalidedges)         | Returns the invalid edges in a polygonal coverage, which are edges that are not shared by two polygons.                                                                                                                                                                                                                                                               |
-| [`ST_CoverageSimplify`](#st_coveragesimplify)                 | Simplify the edges in a polygonal coverage, preserving the coverange by ensuring that the there are no seams between the resulting simplified polygons.                                                                                                                                                                                                               |
-| [`ST_CoverageUnion`](#st_coverageunion)                       | Union all geometries in a polygonal coverage into a single geometry.                                                                                                                                                                                                                                                                                                  |
-| [`ST_CoveredBy`](#st_coveredby)                               | Returns true if geom1 is "covered by" geom2                                                                                                                                                                                                                                                                                                                           |
-| [`ST_Covers`](#st_covers)                                     | Returns true if the geom1 "covers" geom2                                                                                                                                                                                                                                                                                                                              |
-| [`ST_Crosses`](#st_crosses)                                   | Returns true if geom1 "crosses" geom2                                                                                                                                                                                                                                                                                                                                 |
-| [`ST_DWithin`](#st_dwithin)                                   | Returns if two geometries are within a target distance of each-other                                                                                                                                                                                                                                                                                                  |
-| [`ST_DWithin_Spheroid`](#st_dwithin_spheroid)                 | Returns if two POINT_2D's are within a target distance in meters, using an ellipsoidal model of the earths surface.                                                                                                                                                                                                                                                   |
-| [`ST_Difference`](#st_difference)                             | Returns the "difference" between two geometries                                                                                                                                                                                                                                                                                                                       |
-| [`ST_Dimension`](#st_dimension)                               | Returns the "topological dimension" of a geometry.                                                                                                                                                                                                                                                                                                                    |
-| [`ST_Disjoint`](#st_disjoint)                                 | Returns true if the geometries are disjoint                                                                                                                                                                                                                                                                                                                           |
-| [`ST_Distance`](#st_distance)                                 | Returns the planar distance between two geometries                                                                                                                                                                                                                                                                                                                    |
-| [`ST_Distance_Sphere`](#st_distance_sphere)                   | Returns the haversine (great circle) distance between two geometries.                                                                                                                                                                                                                                                                                                 |
-| [`ST_Distance_Spheroid`](#st_distance_spheroid)               | Returns the distance between two geometries in meters using an ellipsoidal model of the earths surface.                                                                                                                                                                                                                                                               |
-| [`ST_Dump`](#st_dump)                                         | Dumps a geometry into a list of sub-geometries and their "path" in the original geometry.                                                                                                                                                                                                                                                                             |
-| [`ST_EndPoint`](#st_endpoint)                                 | Returns the end point of a LINESTRING.                                                                                                                                                                                                                                                                                                                                |
-| [`ST_Envelope`](#st_envelope)                                 | Returns the minimum bounding rectangle of a geometry as a polygon geometry                                                                                                                                                                                                                                                                                            |
-| [`ST_Equals`](#st_equals)                                     | Returns true if the geometries are "equal"                                                                                                                                                                                                                                                                                                                            |
-| [`ST_Extent`](#st_extent)                                     | Returns the minimal bounding box enclosing the input geometry                                                                                                                                                                                                                                                                                                         |
-| [`ST_Extent_Approx`](#st_extent_approx)                       | Returns the approximate bounding box of a geometry, if available.                                                                                                                                                                                                                                                                                                     |
-| [`ST_ExteriorRing`](#st_exteriorring)                         | Returns the exterior ring (shell) of a polygon geometry.                                                                                                                                                                                                                                                                                                              |
-| [`ST_FlipCoordinates`](#st_flipcoordinates)                   | Returns a new geometry with the coordinates of the input geometry "flipped" so that x = y and y = x                                                                                                                                                                                                                                                                   |
-| [`ST_Force2D`](#st_force2d)                                   | Forces the vertices of a geometry to have X and Y components                                                                                                                                                                                                                                                                                                          |
-| [`ST_Force3DM`](#st_force3dm)                                 | Forces the vertices of a geometry to have X, Y and M components                                                                                                                                                                                                                                                                                                       |
-| [`ST_Force3DZ`](#st_force3dz)                                 | Forces the vertices of a geometry to have X, Y and Z components                                                                                                                                                                                                                                                                                                       |
-| [`ST_Force4D`](#st_force4d)                                   | Forces the vertices of a geometry to have X, Y, Z and M components                                                                                                                                                                                                                                                                                                    |
-| [`ST_GeomFromGeoJSON`](#st_geomfromgeojson)                   | Deserializes a GEOMETRY from a GeoJSON fragment.                                                                                                                                                                                                                                                                                                                      |
-| [`ST_GeomFromHEXEWKB`](#st_geomfromhexewkb)                   | Deserialize a GEOMETRY from a HEX(E)WKB encoded string                                                                                                                                                                                                                                                                                                                |
-| [`ST_GeomFromHEXWKB`](#st_geomfromhexwkb)                     | Deserialize a GEOMETRY from a HEX(E)WKB encoded string                                                                                                                                                                                                                                                                                                                |
-| [`ST_GeomFromText`](#st_geomfromtext)                         | Deserialize a GEOMETRY from a WKT encoded string                                                                                                                                                                                                                                                                                                                      |
-| [`ST_GeomFromWKB`](#st_geomfromwkb)                           | Deserializes a GEOMETRY from a WKB encoded blob                                                                                                                                                                                                                                                                                                                       |
-| [`ST_GeometryType`](#st_geometrytype)                         | Returns a 'GEOMETRY_TYPE' enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, and `GEOMETRYCOLLECTION`.                                                                                                                                                      |
-| [`ST_HasM`](#st_hasm)                                         | Check if the input geometry has M values.                                                                                                                                                                                                                                                                                                                             |
-| [`ST_HasZ`](#st_hasz)                                         | Check if the input geometry has Z values.                                                                                                                                                                                                                                                                                                                             |
-| [`ST_Hilbert`](#st_hilbert)                                   | Encodes the X and Y values as the hilbert curve index for a curve covering the given bounding box.                                                                                                                                                                                                                                                                    |
-| [`ST_Intersection`](#st_intersection)                         | Returns the intersection of two geometries                                                                                                                                                                                                                                                                                                                            |
-| [`ST_Intersects`](#st_intersects)                             | Returns true if the geometries intersect                                                                                                                                                                                                                                                                                                                              |
-| [`ST_Intersects_Extent`](#st_intersects_extent)               | Returns true if the extent of two geometries intersects                                                                                                                                                                                                                                                                                                               |
-| [`ST_IsClosed`](#st_isclosed)                                 | Check if a geometry is 'closed'                                                                                                                                                                                                                                                                                                                                       |
-| [`ST_IsEmpty`](#st_isempty)                                   | Returns true if the geometry is "empty".                                                                                                                                                                                                                                                                                                                              |
-| [`ST_IsRing`](#st_isring)                                     | Returns true if the geometry is a ring (both ST_IsClosed and ST_IsSimple).                                                                                                                                                                                                                                                                                            |
-| [`ST_IsSimple`](#st_issimple)                                 | Returns true if the geometry is simple                                                                                                                                                                                                                                                                                                                                |
-| [`ST_IsValid`](#st_isvalid)                                   | Returns true if the geometry is valid                                                                                                                                                                                                                                                                                                                                 |
-| [`ST_Length`](#st_length)                                     | Returns the length of the input line geometry                                                                                                                                                                                                                                                                                                                         |
-| [`ST_Length_Spheroid`](#st_length_spheroid)                   | Returns the length of the input geometry in meters, using an ellipsoidal model of the earth                                                                                                                                                                                                                                                                           |
-| [`ST_LineInterpolatePoint`](#st_lineinterpolatepoint)         | Returns a point interpolated along a line at a fraction of total 2D length.                                                                                                                                                                                                                                                                                           |
-| [`ST_LineInterpolatePoints`](#st_lineinterpolatepoints)       | Returns a multi-point interpolated along a line at a fraction of total 2D length.                                                                                                                                                                                                                                                                                     |
-| [`ST_LineMerge`](#st_linemerge)                               | "Merges" the input line geometry, optionally taking direction into account.                                                                                                                                                                                                                                                                                           |
-| [`ST_LineString2DFromWKB`](#st_linestring2dfromwkb)           | Deserialize a LINESTRING_2D from a WKB encoded blob                                                                                                                                                                                                                                                                                                                   |
-| [`ST_LineSubstring`](#st_linesubstring)                       | Returns a substring of a line between two fractions of total 2D length.                                                                                                                                                                                                                                                                                               |
-| [`ST_M`](#st_m)                                               | Returns the M coordinate of a point geometry                                                                                                                                                                                                                                                                                                                          |
-| [`ST_MMax`](#st_mmax)                                         | Returns the maximum M coordinate of a geometry                                                                                                                                                                                                                                                                                                                        |
-| [`ST_MMin`](#st_mmin)                                         | Returns the minimum M coordinate of a geometry                                                                                                                                                                                                                                                                                                                        |
-| [`ST_MakeEnvelope`](#st_makeenvelope)                         | Create a rectangular polygon from min/max coordinates                                                                                                                                                                                                                                                                                                                 |
-| [`ST_MakeLine`](#st_makeline)                                 | Create a LINESTRING from a list of POINT geometries                                                                                                                                                                                                                                                                                                                   |
-| [`ST_MakePolygon`](#st_makepolygon)                           | Create a POLYGON from a LINESTRING shell                                                                                                                                                                                                                                                                                                                              |
-| [`ST_MakeValid`](#st_makevalid)                               | Returns a valid representation of the geometry                                                                                                                                                                                                                                                                                                                        |
-| [`ST_MaximumInscribedCircle`](#st_maximuminscribedcircle)     | Returns the maximum inscribed circle of the input geometry, optionally with a tolerance.                                                                                                                                                                                                                                                                              |
-| [`ST_MinimumRotatedRectangle`](#st_minimumrotatedrectangle)   | Returns the minimum rotated rectangle that bounds the input geometry, finding the surrounding box that has the lowest area by using a rotated rectangle, rather than taking the lowest and highest coordinate values as per ST_Envelope().                                                                                                                            |
-| [`ST_Multi`](#st_multi)                                       | Turns a single geometry into a multi geometry.                                                                                                                                                                                                                                                                                                                        |
-| [`ST_NGeometries`](#st_ngeometries)                           | Returns the number of component geometries in a collection geometry.                                                                                                                                                                                                                                                                                                  |
-| [`ST_NInteriorRings`](#st_ninteriorrings)                     | Returns the number if interior rings of a polygon                                                                                                                                                                                                                                                                                                                     |
-| [`ST_NPoints`](#st_npoints)                                   | Returns the number of vertices within a geometry                                                                                                                                                                                                                                                                                                                      |
-| [`ST_Node`](#st_node)                                         | Returns a "noded" MultiLinestring, produced by combining a collection of input linestrings and adding additional vertices where they intersect.                                                                                                                                                                                                                       |
-| [`ST_Normalize`](#st_normalize)                               | Returns the "normalized" representation of the geometry                                                                                                                                                                                                                                                                                                               |
-| [`ST_NumGeometries`](#st_numgeometries)                       | Returns the number of component geometries in a collection geometry.                                                                                                                                                                                                                                                                                                  |
-| [`ST_NumInteriorRings`](#st_numinteriorrings)                 | Returns the number if interior rings of a polygon                                                                                                                                                                                                                                                                                                                     |
-| [`ST_NumPoints`](#st_numpoints)                               | Returns the number of vertices within a geometry                                                                                                                                                                                                                                                                                                                      |
-| [`ST_Overlaps`](#st_overlaps)                                 | Returns true if the geometries overlap                                                                                                                                                                                                                                                                                                                                |
-| [`ST_Perimeter`](#st_perimeter)                               | Returns the length of the perimeter of the geometry                                                                                                                                                                                                                                                                                                                   |
-| [`ST_Perimeter_Spheroid`](#st_perimeter_spheroid)             | Returns the length of the perimeter in meters using an ellipsoidal model of the earths surface.                                                                                                                                                                                                                                                                       |
-| [`ST_Point`](#st_point)                                       | Creates a GEOMETRY point                                                                                                                                                                                                                                                                                                                                              |
-| [`ST_Point2D`](#st_point2d)                                   | Creates a POINT_2D                                                                                                                                                                                                                                                                                                                                                    |
-| [`ST_Point2DFromWKB`](#st_point2dfromwkb)                     | Deserialize a POINT_2D from a WKB encoded blob                                                                                                                                                                                                                                                                                                                        |
-| [`ST_Point3D`](#st_point3d)                                   | Creates a POINT_3D                                                                                                                                                                                                                                                                                                                                                    |
-| [`ST_Point4D`](#st_point4d)                                   | Creates a POINT_4D                                                                                                                                                                                                                                                                                                                                                    |
-| [`ST_PointN`](#st_pointn)                                     | Returns the n'th vertex from the input geometry as a point geometry                                                                                                                                                                                                                                                                                                   |
-| [`ST_PointOnSurface`](#st_pointonsurface)                     | Returns a point guaranteed to lie on the surface of the geometry                                                                                                                                                                                                                                                                                                      |
-| [`ST_Points`](#st_points)                                     | Collects all the vertices in the geometry into a MULTIPOINT                                                                                                                                                                                                                                                                                                           |
-| [`ST_Polygon2DFromWKB`](#st_polygon2dfromwkb)                 | Deserialize a POLYGON_2D from a WKB encoded blob                                                                                                                                                                                                                                                                                                                      |
-| [`ST_Polygonize`](#st_polygonize)                             | Returns a polygonized representation of the input geometries                                                                                                                                                                                                                                                                                                          |
-| [`ST_QuadKey`](#st_quadkey)                                   | Compute the [quadkey](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system) for a given lon/lat point at a given level.                                                                                                                                                                                                                          |
-| [`ST_ReducePrecision`](#st_reduceprecision)                   | Returns the geometry with all vertices reduced to the given precision                                                                                                                                                                                                                                                                                                 |
-| [`ST_RemoveRepeatedPoints`](#st_removerepeatedpoints)         | Remove repeated points from a LINESTRING.                                                                                                                                                                                                                                                                                                                             |
-| [`ST_Reverse`](#st_reverse)                                   | Returns the geometry with the order of its vertices reversed                                                                                                                                                                                                                                                                                                          |
-| [`ST_ShortestLine`](#st_shortestline)                         | Returns the shortest line between two geometries                                                                                                                                                                                                                                                                                                                      |
-| [`ST_Simplify`](#st_simplify)                                 | Returns a simplified version of the geometry                                                                                                                                                                                                                                                                                                                          |
-| [`ST_SimplifyPreserveTopology`](#st_simplifypreservetopology) | Returns a simplified version of the geometry that preserves topology                                                                                                                                                                                                                                                                                                  |
-| [`ST_StartPoint`](#st_startpoint)                             | Returns the start point of a LINESTRING.                                                                                                                                                                                                                                                                                                                              |
-| [`ST_Touches`](#st_touches)                                   | Returns true if the geometries touch                                                                                                                                                                                                                                                                                                                                  |
-| [`ST_Transform`](#st_transform)                               | Transforms a geometry between two coordinate systems                                                                                                                                                                                                                                                                                                                  |
-| [`ST_Union`](#st_union)                                       | Returns the union of two geometries                                                                                                                                                                                                                                                                                                                                   |
-| [`ST_VoronoiDiagram`](#st_voronoidiagram)                     | Returns the Voronoi diagram of the supplied MultiPoint geometry                                                                                                                                                                                                                                                                                                       |
-| [`ST_Within`](#st_within)                                     | Returns true if the first geometry is within the second                                                                                                                                                                                                                                                                                                               |
-| [`ST_X`](#st_x)                                               | Returns the X coordinate of a point geometry                                                                                                                                                                                                                                                                                                                          |
-| [`ST_XMax`](#st_xmax)                                         | Returns the maximum X coordinate of a geometry                                                                                                                                                                                                                                                                                                                        |
-| [`ST_XMin`](#st_xmin)                                         | Returns the minimum X coordinate of a geometry                                                                                                                                                                                                                                                                                                                        |
-| [`ST_Y`](#st_y)                                               | Returns the Y coordinate of a point geometry                                                                                                                                                                                                                                                                                                                          |
-| [`ST_YMax`](#st_ymax)                                         | Returns the maximum Y coordinate of a geometry                                                                                                                                                                                                                                                                                                                        |
-| [`ST_YMin`](#st_ymin)                                         | Returns the minimum Y coordinate of a geometry                                                                                                                                                                                                                                                                                                                        |
-| [`ST_Z`](#st_z)                                               | Returns the Z coordinate of a point geometry                                                                                                                                                                                                                                                                                                                          |
-| [`ST_ZMFlag`](#st_zmflag)                                     | Returns a flag indicating the presence of Z and M values in the input geometry.                                                                                                                                                                                                                                                                                       |
-| [`ST_ZMax`](#st_zmax)                                         | Returns the maximum Z coordinate of a geometry                                                                                                                                                                                                                                                                                                                        |
-| [`ST_ZMin`](#st_zmin)                                         | Returns the minimum Z coordinate of a geometry                                                                                                                                                                                                                                                                                                                        |
+| Function | Summary |
+| --- | --- |
+| [`DuckDB_PROJ_Compiled_Version`](#duckdb_proj_compiled_version) | Returns a text description of the PROJ library version that that this instance of DuckDB was compiled against. |
+| [`DuckDB_Proj_Version`](#duckdb_proj_version) | Returns a text description of the PROJ library version that is being used by this instance of DuckDB. |
+| [`ST_Affine`](#st_affine) | Applies an affine transformation to a geometry. |
+| [`ST_Area`](#st_area) | Compute the area of a geometry. |
+| [`ST_Area_Spheroid`](#st_area_spheroid) | Returns the area of a geometry in meters, using an ellipsoidal model of the earth |
+| [`ST_AsGeoJSON`](#st_asgeojson) | Returns the geometry as a GeoJSON fragment |
+| [`ST_AsHEXWKB`](#st_ashexwkb) | Returns the geometry as a HEXWKB string |
+| [`ST_AsSVG`](#st_assvg) | Convert the geometry into a SVG fragment or path |
+| [`ST_AsText`](#st_astext) | Returns the geometry as a WKT string |
+| [`ST_AsWKB`](#st_aswkb) | Returns the geometry as a WKB (Well-Known-Binary) blob |
+| [`ST_Azimuth`](#st_azimuth) | Returns the azimuth (a clockwise angle measured from north) of two points in radian. |
+| [`ST_Boundary`](#st_boundary) | Returns the "boundary" of a geometry |
+| [`ST_Buffer`](#st_buffer) | Returns a buffer around the input geometry at the target distance |
+| [`ST_BuildArea`](#st_buildarea) | Creates a polygonal geometry by attemtping to "fill in" the input geometry. |
+| [`ST_Centroid`](#st_centroid) | Returns the centroid of a geometry |
+| [`ST_Collect`](#st_collect) | Collects a list of geometries into a collection geometry. |
+| [`ST_CollectionExtract`](#st_collectionextract) | Extracts geometries from a GeometryCollection into a typed multi geometry. |
+| [`ST_ConcaveHull`](#st_concavehull) | Returns the 'concave' hull of the input geometry, containing all of the source input's points, and which can be used to create polygons from points. The ratio parameter dictates the level of concavity; 1.0 returns the convex hull; and 0 indicates to return the most concave hull possible. Set allowHoles to a non-zero value to allow output containing holes. |
+| [`ST_Contains`](#st_contains) | Returns true if the first geometry contains the second geometry |
+| [`ST_ContainsProperly`](#st_containsproperly) | Returns true if the first geometry \"properly\" contains the second geometry |
+| [`ST_ConvexHull`](#st_convexhull) | Returns the convex hull enclosing the geometry |
+| [`ST_CoverageInvalidEdges`](#st_coverageinvalidedges) | Returns the invalid edges in a polygonal coverage, which are edges that are not shared by two polygons. |
+| [`ST_CoverageSimplify`](#st_coveragesimplify) | Simplify the edges in a polygonal coverage, preserving the coverange by ensuring that the there are no seams between the resulting simplified polygons. |
+| [`ST_CoverageUnion`](#st_coverageunion) | Union all geometries in a polygonal coverage into a single geometry. |
+| [`ST_CoveredBy`](#st_coveredby) | Returns true if geom1 is "covered by" geom2 |
+| [`ST_Covers`](#st_covers) | Returns true if the geom1 "covers" geom2 |
+| [`ST_Crosses`](#st_crosses) | Returns true if geom1 "crosses" geom2 |
+| [`ST_DWithin`](#st_dwithin) | Returns if two geometries are within a target distance of each-other |
+| [`ST_DWithin_GEOS`](#st_dwithin_geos) | Returns if two geometries are within a target distance of each-other |
+| [`ST_DWithin_Spheroid`](#st_dwithin_spheroid) | Returns if two POINT_2D's are within a target distance in meters, using an ellipsoidal model of the earths surface |
+| [`ST_Difference`](#st_difference) | Returns the "difference" between two geometries |
+| [`ST_Dimension`](#st_dimension) | Returns the "topological dimension" of a geometry. |
+| [`ST_Disjoint`](#st_disjoint) | Returns true if the geometries are disjoint |
+| [`ST_Distance`](#st_distance) | Returns the planar distance between two geometries |
+| [`ST_Distance_GEOS`](#st_distance_geos) | Returns the planar distance between two geometries |
+| [`ST_Distance_Sphere`](#st_distance_sphere) | Returns the haversine (great circle) distance between two geometries. |
+| [`ST_Distance_Spheroid`](#st_distance_spheroid) | Returns the distance between two geometries in meters using an ellipsoidal model of the earths surface |
+| [`ST_Dump`](#st_dump) | Dumps a geometry into a list of sub-geometries and their "path" in the original geometry. |
+| [`ST_EndPoint`](#st_endpoint) | Returns the end point of a LINESTRING. |
+| [`ST_Envelope`](#st_envelope) | Returns the minimum bounding rectangle of a geometry as a polygon geometry |
+| [`ST_Equals`](#st_equals) | Returns true if the geometries are "equal" |
+| [`ST_Extent`](#st_extent) | Returns the minimal bounding box enclosing the input geometry |
+| [`ST_Extent_Approx`](#st_extent_approx) | Returns the approximate bounding box of a geometry, if available. |
+| [`ST_ExteriorRing`](#st_exteriorring) | Returns the exterior ring (shell) of a polygon geometry. |
+| [`ST_FlipCoordinates`](#st_flipcoordinates) | Returns a new geometry with the coordinates of the input geometry "flipped" so that x = y and y = x |
+| [`ST_Force2D`](#st_force2d) | Forces the vertices of a geometry to have X and Y components |
+| [`ST_Force3DM`](#st_force3dm) | Forces the vertices of a geometry to have X, Y and M components |
+| [`ST_Force3DZ`](#st_force3dz) | Forces the vertices of a geometry to have X, Y and Z components |
+| [`ST_Force4D`](#st_force4d) | Forces the vertices of a geometry to have X, Y, Z and M components |
+| [`ST_GeomFromGeoJSON`](#st_geomfromgeojson) | Deserializes a GEOMETRY from a GeoJSON fragment. |
+| [`ST_GeomFromHEXEWKB`](#st_geomfromhexewkb) | Deserialize a GEOMETRY from a HEX(E)WKB encoded string |
+| [`ST_GeomFromHEXWKB`](#st_geomfromhexwkb) | Deserialize a GEOMETRY from a HEX(E)WKB encoded string |
+| [`ST_GeomFromText`](#st_geomfromtext) | Deserialize a GEOMETRY from a WKT encoded string |
+| [`ST_GeomFromWKB`](#st_geomfromwkb) | Deserializes a GEOMETRY from a WKB encoded blob |
+| [`ST_GeometryType`](#st_geometrytype) | Returns a 'GEOMETRY_TYPE' enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, and `GEOMETRYCOLLECTION`. |
+| [`ST_HasM`](#st_hasm) | Check if the input geometry has M values. |
+| [`ST_HasZ`](#st_hasz) | Check if the input geometry has Z values. |
+| [`ST_Hilbert`](#st_hilbert) | Encodes the X and Y values as the hilbert curve index for a curve covering the given bounding box. |
+| [`ST_Intersection`](#st_intersection) | Returns the intersection of two geometries |
+| [`ST_Intersects`](#st_intersects) | Returns true if the geometries intersect |
+| [`ST_Intersects_Extent`](#st_intersects_extent) | Returns true if the extent of two geometries intersects |
+| [`ST_IsClosed`](#st_isclosed) | Check if a geometry is 'closed' |
+| [`ST_IsEmpty`](#st_isempty) | Returns true if the geometry is "empty". |
+| [`ST_IsRing`](#st_isring) | Returns true if the geometry is a ring (both ST_IsClosed and ST_IsSimple). |
+| [`ST_IsSimple`](#st_issimple) | Returns true if the geometry is simple |
+| [`ST_IsValid`](#st_isvalid) | Returns true if the geometry is valid |
+| [`ST_Length`](#st_length) | Returns the length of the input line geometry |
+| [`ST_Length_Spheroid`](#st_length_spheroid) | Returns the length of the input geometry in meters, using an ellipsoidal model of the earth |
+| [`ST_LineInterpolatePoint`](#st_lineinterpolatepoint) | Returns a point interpolated along a line at a fraction of total 2D length. |
+| [`ST_LineInterpolatePoints`](#st_lineinterpolatepoints) | Returns a multi-point interpolated along a line at a fraction of total 2D length. |
+| [`ST_LineMerge`](#st_linemerge) | "Merges" the input line geometry, optionally taking direction into account. |
+| [`ST_LineString2DFromWKB`](#st_linestring2dfromwkb) | Deserialize a LINESTRING_2D from a WKB encoded blob |
+| [`ST_LineSubstring`](#st_linesubstring) | Returns a substring of a line between two fractions of total 2D length. |
+| [`ST_M`](#st_m) | Returns the M coordinate of a point geometry |
+| [`ST_MMax`](#st_mmax) | Returns the maximum M coordinate of a geometry |
+| [`ST_MMin`](#st_mmin) | Returns the minimum M coordinate of a geometry |
+| [`ST_MakeEnvelope`](#st_makeenvelope) | Create a rectangular polygon from min/max coordinates |
+| [`ST_MakeLine`](#st_makeline) | Create a LINESTRING from a list of POINT geometries |
+| [`ST_MakePolygon`](#st_makepolygon) | Create a POLYGON from a LINESTRING shell |
+| [`ST_MakeValid`](#st_makevalid) | Returns a valid representation of the geometry |
+| [`ST_MaximumInscribedCircle`](#st_maximuminscribedcircle) | Returns the maximum inscribed circle of the input geometry, optionally with a tolerance. |
+| [`ST_MinimumRotatedRectangle`](#st_minimumrotatedrectangle) | Returns the minimum rotated rectangle that bounds the input geometry, finding the surrounding box that has the lowest area by using a rotated rectangle, rather than taking the lowest and highest coordinate values as per ST_Envelope(). |
+| [`ST_Multi`](#st_multi) | Turns a single geometry into a multi geometry. |
+| [`ST_NGeometries`](#st_ngeometries) | Returns the number of component geometries in a collection geometry. |
+| [`ST_NInteriorRings`](#st_ninteriorrings) | Returns the number of interior rings of a polygon |
+| [`ST_NPoints`](#st_npoints) | Returns the number of vertices within a geometry |
+| [`ST_Node`](#st_node) | Returns a "noded" MultiLinestring, produced by combining a collection of input linestrings and adding additional vertices where they intersect. |
+| [`ST_Normalize`](#st_normalize) | Returns the "normalized" representation of the geometry |
+| [`ST_NumGeometries`](#st_numgeometries) | Returns the number of component geometries in a collection geometry. |
+| [`ST_NumInteriorRings`](#st_numinteriorrings) | Returns the number of interior rings of a polygon |
+| [`ST_NumPoints`](#st_numpoints) | Returns the number of vertices within a geometry |
+| [`ST_Overlaps`](#st_overlaps) | Returns true if the geometries overlap |
+| [`ST_Perimeter`](#st_perimeter) | Returns the length of the perimeter of the geometry |
+| [`ST_Perimeter_Spheroid`](#st_perimeter_spheroid) | Returns the length of the perimeter in meters using an ellipsoidal model of the earths surface |
+| [`ST_Point`](#st_point) | Creates a GEOMETRY point |
+| [`ST_Point2D`](#st_point2d) | Creates a POINT_2D |
+| [`ST_Point2DFromWKB`](#st_point2dfromwkb) | Deserialize a POINT_2D from a WKB encoded blob |
+| [`ST_Point3D`](#st_point3d) | Creates a POINT_3D |
+| [`ST_Point4D`](#st_point4d) | Creates a POINT_4D |
+| [`ST_PointN`](#st_pointn) | Returns the n'th vertex from the input geometry as a point geometry |
+| [`ST_PointOnSurface`](#st_pointonsurface) | Returns a point guaranteed to lie on the surface of the geometry |
+| [`ST_Points`](#st_points) | Collects all the vertices in the geometry into a MULTIPOINT |
+| [`ST_Polygon2DFromWKB`](#st_polygon2dfromwkb) | Deserialize a POLYGON_2D from a WKB encoded blob |
+| [`ST_Polygonize`](#st_polygonize) | Returns a polygonized representation of the input geometries |
+| [`ST_QuadKey`](#st_quadkey) | Compute the [quadkey](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system) for a given lon/lat point at a given level. |
+| [`ST_ReducePrecision`](#st_reduceprecision) | Returns the geometry with all vertices reduced to the given precision |
+| [`ST_RemoveRepeatedPoints`](#st_removerepeatedpoints) | Remove repeated points from a LINESTRING. |
+| [`ST_Reverse`](#st_reverse) | Returns the geometry with the order of its vertices reversed |
+| [`ST_ShortestLine`](#st_shortestline) | Returns the shortest line between two geometries |
+| [`ST_Simplify`](#st_simplify) | Returns a simplified version of the geometry |
+| [`ST_SimplifyPreserveTopology`](#st_simplifypreservetopology) | Returns a simplified version of the geometry that preserves topology |
+| [`ST_StartPoint`](#st_startpoint) | Returns the start point of a LINESTRING. |
+| [`ST_TileEnvelope`](#st_tileenvelope) | The `ST_TileEnvelope` scalar function generates tile envelope rectangular polygons from specified zoom level and tile indices. |
+| [`ST_Touches`](#st_touches) | Returns true if the geometries touch |
+| [`ST_Transform`](#st_transform) | Transforms a geometry between two coordinate systems |
+| [`ST_Union`](#st_union) | Returns the union of two geometries |
+| [`ST_VoronoiDiagram`](#st_voronoidiagram) | Returns the Voronoi diagram of the supplied MultiPoint geometry |
+| [`ST_Within`](#st_within) | Returns true if the first geometry is within the second |
+| [`ST_WithinProperly`](#st_withinproperly) | Returns true if the first geometry \"properly\" is contained by the second geometry |
+| [`ST_X`](#st_x) | Returns the X coordinate of a point geometry |
+| [`ST_XMax`](#st_xmax) | Returns the maximum X coordinate of a geometry |
+| [`ST_XMin`](#st_xmin) | Returns the minimum X coordinate of a geometry |
+| [`ST_Y`](#st_y) | Returns the Y coordinate of a point geometry |
+| [`ST_YMax`](#st_ymax) | Returns the maximum Y coordinate of a geometry |
+| [`ST_YMin`](#st_ymin) | Returns the minimum Y coordinate of a geometry |
+| [`ST_Z`](#st_z) | Returns the Z coordinate of a point geometry |
+| [`ST_ZMFlag`](#st_zmflag) | Returns a flag indicating the presence of Z and M values in the input geometry. |
+| [`ST_ZMax`](#st_zmax) | Returns the maximum Z coordinate of a geometry |
+| [`ST_ZMin`](#st_zmin) | Returns the minimum Z coordinate of a geometry |
 
 **[Aggregate Functions](#aggregate-functions)**
 
-| Function                                                      | Summary                                                                          |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| [`ST_CoverageInvalidEdges_Agg`](#st_coverageinvalidedges_agg) | Returns the invalid edges of a coverage geometry                                 |
-| [`ST_CoverageSimplify_Agg`](#st_coveragesimplify_agg)         | Simplifies a set of geometries while maintaining coverage                        |
-| [`ST_CoverageUnion_Agg`](#st_coverageunion_agg)               | Unions a set of geometries while maintaining coverage                            |
-| [`ST_Envelope_Agg`](#st_envelope_agg)                         | Alias for [ST_Extent_Agg](#st_extent_agg).                                       |
-| [`ST_Extent_Agg`](#st_extent_agg)                             | Computes the minimal-bounding-box polygon containing the set of input geometries |
-| [`ST_Intersection_Agg`](#st_intersection_agg)                 | Computes the intersection of a set of geometries                                 |
-| [`ST_Union_Agg`](#st_union_agg)                               | Computes the union of a set of input geometries                                  |
+| Function | Summary |
+| --- | --- |
+| [`ST_CoverageInvalidEdges_Agg`](#st_coverageinvalidedges_agg) | Returns the invalid edges of a coverage geometry |
+| [`ST_CoverageSimplify_Agg`](#st_coveragesimplify_agg) | Simplifies a set of geometries while maintaining coverage |
+| [`ST_CoverageUnion_Agg`](#st_coverageunion_agg) | Unions a set of geometries while maintaining coverage |
+| [`ST_Envelope_Agg`](#st_envelope_agg) | Alias for [ST_Extent_Agg](#st_extent_agg). |
+| [`ST_Extent_Agg`](#st_extent_agg) | Computes the minimal-bounding-box polygon containing the set of input geometries |
+| [`ST_Intersection_Agg`](#st_intersection_agg) | Computes the intersection of a set of geometries |
+| [`ST_MemUnion_Agg`](#st_memunion_agg) | Computes the union of a set of input geometries. |
+| [`ST_Union_Agg`](#st_union_agg) | Computes the union of a set of input geometries |
+
+**[Macro Functions](#Macro-functions)**
+
+| Function | Summary |
+| --- | --- |
+| [`ST_Rotate`](#st_rotate) | Alias of ST_RotateZ |
+| [`ST_RotateX`](#st_rotatex) | Rotates a geometry around the X axis. This is a shorthand macro for calling ST_Affine. |
+| [`ST_RotateY`](#st_rotatey) | Rotates a geometry around the Y axis. This is a shorthand macro for calling ST_Affine. |
+| [`ST_RotateZ`](#st_rotatez) | Rotates a geometry around the Z axis. This is a shorthand macro for calling ST_Affine. |
+| [`ST_Scale`](#st_scale) |  |
+| [`ST_TransScale`](#st_transscale) | Translates and then scales a geometry in X and Y direction. This is a shorthand macro for calling ST_Affine. |
+| [`ST_Translate`](#st_translate) |  |
 
 **[Table Functions](#table-functions)**
 
-| Function                                  | Summary                                                                                                          |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| [`ST_Drivers`](#st_drivers)               | Returns the list of supported GDAL drivers and file formats                                                      |
-| [`ST_GeneratePoints`](#st_generatepoints) | Generates a set of random points within the specified bounding box.                                              |
-| [`ST_Read`](#st_read)                     | Read and import a variety of geospatial file formats using the GDAL library.                                     |
-| [`ST_ReadOSM`](#st_readosm)               | The `ST_ReadOsm()` table function enables reading compressed OpenStreetMap data directly from a `.osm.pbf file.` |
-| [`ST_Read_Meta`](#st_read_meta)           | Read the metadata from a variety of geospatial file formats using the GDAL library.                              |
+| Function | Summary |
+| --- | --- |
+| [`ST_Drivers`](#st_drivers) | Returns the list of supported GDAL drivers and file formats |
+| [`ST_GeneratePoints`](#st_generatepoints) | Generates a set of random points within the specified bounding box. |
+| [`ST_Read`](#st_read) | Read and import a variety of geospatial file formats using the GDAL library. |
+| [`ST_ReadOSM`](#st_readosm) | The `ST_ReadOsm()` table function enables reading compressed OpenStreetMap data directly from a `.osm.pbf file.` |
+| [`ST_ReadSHP`](#st_readshp) | Read a Shapefile without relying on the GDAL library |
+| [`ST_Read_Meta`](#st_read_meta) | Read the metadata from a variety of geospatial file formats using the GDAL library. |
 
 ----
 
 ## Scalar Functions
+
+### DuckDB_PROJ_Compiled_Version
+
+
+#### Signature
+
+```sql
+VARCHAR DuckDB_PROJ_Compiled_Version ()
+```
+
+#### Description
+
+Returns a text description of the PROJ library version that that this instance of DuckDB was compiled against.
+
+#### Example
+
+```sql
+SELECT duckdb_proj_compiled_version();
+┌────────────────────────────────┐
+│ duckdb_proj_compiled_version() │
+│            varchar             │
+├────────────────────────────────┤
+│ Rel. 9.1.1, December 1st, 2022 │
+└────────────────────────────────┘
+```
+
+----
+
+### DuckDB_Proj_Version
+
+
+#### Signature
+
+```sql
+VARCHAR DuckDB_Proj_Version ()
+```
+
+#### Description
+
+Returns a text description of the PROJ library version that is being used by this instance of DuckDB.
+
+#### Example
+
+```sql
+SELECT duckdb_proj_version();
+┌───────────────────────┐
+│ duckdb_proj_version() │
+│        varchar        │
+├───────────────────────┤
+│ 9.1.1                 │
+└───────────────────────┘
+```
+
+----
+
+### ST_Affine
+
+
+#### Signatures
+
+```sql
+GEOMETRY ST_Affine (geom GEOMETRY, a DOUBLE, b DOUBLE, c DOUBLE, d DOUBLE, e DOUBLE, f DOUBLE, g DOUBLE, h DOUBLE, i DOUBLE, xoff DOUBLE, yoff DOUBLE, zoff DOUBLE)
+GEOMETRY ST_Affine (geom GEOMETRY, a DOUBLE, b DOUBLE, d DOUBLE, e DOUBLE, xoff DOUBLE, yoff DOUBLE)
+```
+
+#### Description
+
+Applies an affine transformation to a geometry.
+
+For the 2D variant, the transformation matrix is defined as follows:
+```
+| a b xoff |
+| d e yoff |
+| 0 0 1    |
+```
+
+For the 3D variant, the transformation matrix is defined as follows:
+```
+| a b c xoff |
+| d e f yoff |
+| g h i zoff |
+| 0 0 0 1    |
+```
+
+The transformation is applied to all vertices of the geometry.
+
+#### Example
+
+```sql
+-- Translate a point by (2, 3)
+SELECT ST_Affine(ST_Point(1, 1),
+                 1, 0,   -- a, b
+                 0, 1,   -- d, e
+                 2, 3);  -- xoff, yoff
+----
+POINT (3 4)
+
+-- Scale a geometry by factor 2 in X and Y
+SELECT ST_Affine(ST_Point(1, 1),
+                 2, 0, 0,   -- a, b, c
+                 0, 2, 0,   -- d, e, f
+                 0, 0, 1,   -- g, h, i
+                 0, 0, 0);  -- xoff, yoff, zoff
+----
+POINT (2 2)
+```
+
+----
 
 ### ST_Area
 
@@ -187,7 +316,7 @@ The `POINT_2D` and `LINESTRING_2D` overloads of this function always return `0.0
 #### Example
 
 ```sql
-SELECT ST_Area('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
+select ST_Area('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
 -- 1.0
 ```
 
@@ -233,7 +362,7 @@ This function supports geometries with Z values, but not M values. M values are 
 #### Example
 
 ```sql
-SELECT ST_AsGeoJSON('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
+select ST_AsGeoJSON('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
 ----
 {"type":"Polygon","coordinates":[[[0.0,0.0],[0.0,1.0],[1.0,1.0],[1.0,0.0],[0.0,0.0]]]}
 
@@ -267,7 +396,7 @@ Returns the geometry as a HEXWKB string
 #### Example
 
 ```sql
-SELECT ST_AsHexWKB('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
+SELECT ST_AsHexWKB('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
 ----
 01030000000100000005000000000000000000000000000...
 ```
@@ -288,7 +417,7 @@ VARCHAR ST_AsSVG (geom GEOMETRY, relative BOOLEAN, precision INTEGER)
 Convert the geometry into a SVG fragment or path
 
 The SVG fragment is returned as a string. The fragment is a path element that can be used in an SVG document.
-The second Boolean argument specifies whether the path should be relative or absolute.
+The second boolean argument specifies whether the path should be relative or absolute.
 The third argument specifies the maximum number of digits to use for the coordinates.
 
 Points are formatted as cx/cy using absolute coordinates or x/y using relative coordinates.
@@ -304,6 +433,7 @@ M 0 0 L 0 -1 1 -1 1 0 Z
 ----
 
 ### ST_AsText
+
 
 #### Signatures
 
@@ -322,7 +452,7 @@ Returns the geometry as a WKT string
 #### Example
 
 ```sql
-SELECT ST_AsText(ST_MakeEnvelope(0,0,1,1));
+SELECT ST_MakeEnvelope(0,0,1,1);
 ----
 POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))
 ```
@@ -348,6 +478,30 @@ Returns the geometry as a WKB (Well-Known-Binary) blob
 SELECT ST_AsWKB('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY)::BLOB;
 ----
 \x01\x03\x00\x00\x00\x01\x00\x00\x00\x05...
+```
+
+----
+
+### ST_Azimuth
+
+
+#### Signatures
+
+```sql
+DOUBLE ST_Azimuth (origin GEOMETRY, target GEOMETRY)
+DOUBLE ST_Azimuth (origin POINT_2D, target POINT_2D)
+```
+
+#### Description
+
+Returns the azimuth (a clockwise angle measured from north) of two points in radian.
+
+#### Example
+
+```sql
+SELECT degrees(ST_Azimuth(ST_Point(0, 0), ST_Point(0, 1)));
+----
+90.0
 ```
 
 ----
@@ -421,12 +575,12 @@ Unlike ST_Polygonize, this function does not fill in holes.
 #### Signatures
 
 ```sql
+GEOMETRY ST_Centroid (geom GEOMETRY)
 POINT_2D ST_Centroid (point POINT_2D)
 POINT_2D ST_Centroid (linestring LINESTRING_2D)
 POINT_2D ST_Centroid (polygon POLYGON_2D)
 POINT_2D ST_Centroid (box BOX_2D)
 POINT_2D ST_Centroid (box BOX_2DF)
-GEOMETRY ST_Centroid (geom GEOMETRY)
 ```
 
 #### Description
@@ -510,7 +664,7 @@ If the input geometry is a GeometryCollection, the function will return a multi 
 - if `type` = 3, returns a MultiPolygon containg all the Polygons in the collection
 
 If no `type` parameters is provided, the function will return a multi geometry matching the highest "surface dimension"
-of the contained geometries. E.g., if the collection contains only Points, a MultiPoint will be returned. But if the
+of the contained geometries. E.g. if the collection contains only Points, a MultiPoint will be returned. But if the
 collection contains both Points and LineStrings, a MultiLineString will be returned. Similarly, if the collection
 contains Polygons, a MultiPolygon will be returned. Contained geometries of a lower surface dimension will be ignored.
 
@@ -522,7 +676,7 @@ If the input geometry is not a GeometryCollection, the function will return the 
 #### Example
 
 ```sql
-SELECT st_collectionextract('MULTIPOINT(1 2,3 4)'::GEOMETRY, 1);
+select st_collectionextract('MULTIPOINT(1 2,3 4)'::geometry, 1);
 -- MULTIPOINT (1 2, 3 4)
 ```
 
@@ -707,6 +861,21 @@ Returns if two geometries are within a target distance of each-other
 
 ----
 
+### ST_DWithin_GEOS
+
+
+#### Signature
+
+```sql
+BOOLEAN ST_DWithin_GEOS (geom1 GEOMETRY, geom2 GEOMETRY, distance DOUBLE)
+```
+
+#### Description
+
+Returns if two geometries are within a target distance of each-other
+
+----
+
 ### ST_DWithin_Spheroid
 
 
@@ -718,7 +887,7 @@ BOOLEAN ST_DWithin_Spheroid (p1 POINT_2D, p2 POINT_2D, distance DOUBLE)
 
 #### Description
 
-Returns if two POINT_2D's are within a target distance in meters, using an ellipsoidal model of the earths surface.
+Returns if two POINT_2D's are within a target distance in meters, using an ellipsoidal model of the earths surface
 
 The input geometry is assumed to be in the [EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (WGS84), with [latitude, longitude] axis order and the distance is returned in meters. This function uses the [GeographicLib](https://geographiclib.sourceforge.io/) library to solve the [inverse geodesic problem](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid#Solution_of_the_direct_and_inverse_problems), calculating the distance between two points using an ellipsoidal model of the earth. This is a highly accurate method for calculating the distance between two arbitrary points taking the curvature of the earths surface into account, but is also the slowest.
 
@@ -760,7 +929,7 @@ Returns the "topological dimension" of a geometry.
 #### Example
 
 ```sql
-SELECT st_dimension('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
+select st_dimension('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
 ----
 2
 ```
@@ -792,6 +961,34 @@ DOUBLE ST_Distance (point1 POINT_2D, point2 POINT_2D)
 DOUBLE ST_Distance (point POINT_2D, linestring LINESTRING_2D)
 DOUBLE ST_Distance (linestring LINESTRING_2D, point POINT_2D)
 DOUBLE ST_Distance (geom1 GEOMETRY, geom2 GEOMETRY)
+```
+
+#### Description
+
+Returns the planar distance between two geometries
+
+#### Example
+
+```sql
+SELECT ST_Distance('POINT (0 0)'::GEOMETRY, 'POINT (3 4)'::GEOMETRY);
+----
+5.0
+
+-- Z coordinates are ignored
+SELECT ST_Distance('POINT Z (0 0 0)'::GEOMETRY, 'POINT Z (3 4 5)'::GEOMETRY);
+----
+5.0
+```
+
+----
+
+### ST_Distance_GEOS
+
+
+#### Signature
+
+```sql
+DOUBLE ST_Distance_GEOS (geom1 GEOMETRY, geom2 GEOMETRY)
 ```
 
 #### Description
@@ -831,7 +1028,7 @@ DOUBLE ST_Distance_Spheroid (p1 POINT_2D, p2 POINT_2D)
 
 #### Description
 
-Returns the distance between two geometries in meters using an ellipsoidal model of the earths surface.
+Returns the distance between two geometries in meters using an ellipsoidal model of the earths surface
 
 The input geometry is assumed to be in the [EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (WGS84), with [latitude, longitude] axis order and the distance limit is expected to be in meters. This function uses the [GeographicLib](https://geographiclib.sourceforge.io/) library to solve the [inverse geodesic problem](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid#Solution_of_the_direct_and_inverse_problems), calculating the distance between two points using an ellipsoidal model of the earth. This is a highly accurate method for calculating the distance between two arbitrary points taking the curvature of the earths surface into account, but is also the slowest.
 
@@ -869,11 +1066,11 @@ You can use the `UNNEST(res, recursive := true)` function to explode  resulting 
 #### Example
 
 ```sql
-SELECT st_dump('MULTIPOINT(1 2,3 4)'::GEOMETRY);
+select st_dump('MULTIPOINT(1 2,3 4)'::geometry);
 ----
 [{'geom': 'POINT(1 2)', 'path': [0]}, {'geom': 'POINT(3 4)', 'path': [1]}]
 
-SELECT unnest(st_dump('MULTIPOINT(1 2,3 4)'::GEOMETRY), recursive := true);
+select unnest(st_dump('MULTIPOINT(1 2,3 4)'::geometry), recursive := true);
 -- ┌─────────────┬─────────┐
 -- │    geom     │  path   │
 -- │  geometry   │ int32[] │
@@ -1117,7 +1314,7 @@ GEOMETRY ST_GeomFromHEXEWKB (hexwkb VARCHAR)
 
 Deserialize a GEOMETRY from a HEX(E)WKB encoded string
 
-DuckDB spatial doesnt currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB" are just aliases of each other.
+DuckDB spatial doesnt currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB" are just aliases of eachother.
 
 ----
 
@@ -1134,7 +1331,7 @@ GEOMETRY ST_GeomFromHEXWKB (hexwkb VARCHAR)
 
 Deserialize a GEOMETRY from a HEX(E)WKB encoded string
 
-DuckDB spatial doesnt currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB" are just aliases of each other.
+DuckDB spatial doesnt currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB" are just aliases of eachother.
 
 ----
 
@@ -1693,6 +1890,17 @@ Returns the maximum inscribed circle of the input geometry, optionally with a to
 By default, the tolerance is computed as `max(width, height) / 1000`.
 The return value is a struct with the center of the circle, the nearest point to the center on the boundary of the geometry, and the radius of the circle.
 
+#### Example
+
+```sql
+-- Find the maximum inscribed circle of a square
+SELECT ST_MaximumInscribedCircle(
+    ST_GeomFromText('POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))')
+);
+----
+{'center': POINT (5 5), 'nearest': POINT (5 0), 'radius': 5.0}
+```
+
 ----
 
 ### ST_MinimumRotatedRectangle
@@ -1771,7 +1979,7 @@ INTEGER ST_NInteriorRings (polygon POLYGON_2D)
 
 #### Description
 
-Returns the number if interior rings of a polygon
+Returns the number of interior rings of a polygon
 
 ----
 
@@ -1806,6 +2014,17 @@ GEOMETRY ST_Node (geom GEOMETRY)
 #### Description
 
 Returns a "noded" MultiLinestring, produced by combining a collection of input linestrings and adding additional vertices where they intersect.
+
+#### Example
+
+```sql
+-- Create a noded multilinestring from two intersecting lines
+SELECT ST_Node(
+    ST_GeomFromText('MULTILINESTRING((0 0, 2 2), (0 2, 2 0))')
+);
+----
+MULTILINESTRING ((0 0, 1 1), (1 1, 2 2), (0 2, 1 1), (1 1, 2 0))
+```
 
 ----
 
@@ -1852,7 +2071,7 @@ INTEGER ST_NumInteriorRings (polygon POLYGON_2D)
 
 #### Description
 
-Returns the number if interior rings of a polygon
+Returns the number of interior rings of a polygon
 
 ----
 
@@ -1919,7 +2138,7 @@ DOUBLE ST_Perimeter_Spheroid (poly POLYGON_2D)
 
 #### Description
 
-Returns the length of the perimeter in meters using an ellipsoidal model of the earths surface.
+Returns the length of the perimeter in meters using an ellipsoidal model of the earths surface
 
 The input geometry is assumed to be in the [EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (WGS84), with [latitude, longitude] axis order and the length is returned in meters. This function uses the [GeographicLib](https://geographiclib.sourceforge.io/) library, calculating the perimeter using an ellipsoidal model of the earth. This is a highly accurate method for calculating the perimeter of a polygon taking the curvature of the earth into account, but is also the slowest.
 
@@ -2049,11 +2268,11 @@ Collects all the vertices in the geometry into a MULTIPOINT
 #### Example
 
 ```sql
-SELECT st_points('LINESTRING(1 1, 2 2)'::GEOMETRY);
+select st_points('LINESTRING(1 1, 2 2)'::geometry);
 ----
 MULTIPOINT (1 1, 2 2)
 
-SELECT st_points('MULTIPOLYGON Z EMPTY'::GEOMETRY);
+select st_points('MULTIPOLYGON Z EMPTY'::geometry);
 ----
 MULTIPOINT Z EMPTY
 ```
@@ -2088,6 +2307,17 @@ GEOMETRY ST_Polygonize (geometries GEOMETRY[])
 
 Returns a polygonized representation of the input geometries
 
+#### Example
+
+```sql
+-- Create a polygon from a closed linestring ring
+SELECT ST_Polygonize([
+    ST_GeomFromText('LINESTRING(0 0, 0 10, 10 10, 10 0, 0 0)')
+]);
+---
+GEOMETRYCOLLECTION (POLYGON ((0 0, 0 10, 10 10, 10 0, 0 0)))
+```
+
 ----
 
 ### ST_QuadKey
@@ -2103,7 +2333,7 @@ VARCHAR ST_QuadKey (point GEOMETRY, level INTEGER)
 #### Description
 
 Compute the [quadkey](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system) for a given lon/lat point at a given level.
-Note that the parameter order is **longitude**, **latitude**.
+Note that the parameter order is __longitude__, __latitude__.
 
 `level` has to be between 1 and 23, inclusive.
 
@@ -2230,6 +2460,44 @@ Returns the start point of a LINESTRING.
 
 ----
 
+### ST_TileEnvelope
+
+
+#### Signature
+
+```sql
+GEOMETRY ST_TileEnvelope (tile_zoom INTEGER, tile_x INTEGER, tile_y INTEGER)
+```
+
+#### Description
+
+The `ST_TileEnvelope` scalar function generates tile envelope rectangular polygons from specified zoom level and tile indices.
+
+This is used in MVT generation to select the features corresponding to the tile extent. The envelope is in the Web Mercator
+coordinate reference system (EPSG:3857). The tile pyramid starts at zoom level 0, corresponding to a single tile for the
+world. Each zoom level doubles the number of tiles in each direction, such that zoom level 1 is 2 tiles wide by 2 tiles high,
+zoom level 2 is 4 tiles wide by 4 tiles high, and so on. Tile indices start at `[x=0, y=0]` at the top left, and increase
+down and right. For example, at zoom level 2, the top right tile is `[x=3, y=0]`, the bottom left tile is `[x=0, y=3]`, and
+the bottom right is `[x=3, y=3]`.
+
+```sql
+SELECT ST_TileEnvelope(2, 3, 1);
+```
+
+#### Example
+
+```sql
+SELECT ST_TileEnvelope(2, 3, 1);
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                         st_tileenvelope(2, 3, 1)                                          │
+│                                                 geometry                                                  │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ POLYGON ((1.00188E+07 0, 1.00188E+07 1.00188E+07, 2.00375E+07 1.00188E+07, 2.00375E+07 0, 1.00188E+07 0)) │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+----
+
 ### ST_Touches
 
 
@@ -2265,7 +2533,7 @@ Transforms a geometry between two coordinate systems
 
 The source and target coordinate systems can be specified using any format that the [PROJ library](https://proj.org) supports.
 
-The third optional `always_xy` parameter can be used to force the input and output geometries to be interpreted as having a [easting, northing] coordinate axis order regardless of what the source and target coordinate system definition says. This is particularly useful when transforming to/from the [WGS84/EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (what most people think of when they hear "longitude"/"latitude" or "GPS coordinates"), which is defined as having a [latitude, longitude] axis order even though [longitude, latitude] is commonly used in practice (e.g., in [GeoJSON](https://tools.ietf.org/html/rfc7946)). More details available in the [PROJ documentation](https://proj.org/en/9.3/faq.html#why-is-the-axis-ordering-in-proj-not-consistent).
+The third optional `always_xy` parameter can be used to force the input and output geometries to be interpreted as having a [easting, northing] coordinate axis order regardless of what the source and target coordinate system definition says. This is particularly useful when transforming to/from the [WGS84/EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (what most people think of when they hear "longitude"/"latitude" or "GPS coordinates"), which is defined as having a [latitude, longitude] axis order even though [longitude, latitude] is commonly used in practice (e.g. in [GeoJSON](https://tools.ietf.org/html/rfc7946)). More details available in the [PROJ documentation](https://proj.org/en/9.3/faq.html#why-is-the-axis-ordering-in-proj-not-consistent).
 
 DuckDB spatial vendors its own static copy of the PROJ database of coordinate systems, so if you have your own installation of PROJ on your system the available coordinate systems may differ to what's available in other GIS software.
 
@@ -2278,31 +2546,29 @@ DuckDB spatial vendors its own static copy of the PROJ database of coordinate sy
 -- but the output will be [easting, northing] because that is what's defined by
 -- WebMercator.
 
-SELECT ST_AsText(
+SELECT
     ST_Transform(
         st_point(52.373123, 4.892360),
         'EPSG:4326',
         'EPSG:3857'
-    )
-);
+    );
 ----
 POINT (544615.0239773799 6867874.103539125)
 
--- Alternatively, let's say we got our input point from e.g., a GeoJSON file,
+-- Alternatively, let's say we got our input point from e.g. a GeoJSON file,
 -- which uses WGS84 but with [longitude, latitude] axis order. We can use the
 -- `always_xy` parameter to force the input geometry to be interpreted as having
 -- a [northing, easting] axis order instead, even though the source coordinate
 -- reference system definition (WGS84) says otherwise.
 
-SELECT ST_AsText(
+SELECT 
     ST_Transform(
         -- note the axis order is reversed here
         st_point(4.892360, 52.373123),
         'EPSG:4326',
         'EPSG:3857',
         always_xy := true
-    )
-);
+    );
 ----
 POINT (544615.0239773799 6867874.103539125)
 
@@ -2371,6 +2637,23 @@ BOOLEAN ST_Within (geom1 GEOMETRY, geom2 GEOMETRY)
 #### Description
 
 Returns true if the first geometry is within the second
+
+----
+
+### ST_WithinProperly
+
+
+#### Signature
+
+```sql
+BOOLEAN ST_WithinProperly (geom1 GEOMETRY, geom2 GEOMETRY)
+```
+
+#### Description
+
+Returns true if the first geometry \"properly\" is contained by the second geometry
+
+This function functions the same as `ST_ContainsProperly`, but the arguments are swapped.
 
 ----
 
@@ -2739,6 +3022,22 @@ Computes the intersection of a set of geometries
 
 ----
 
+### ST_MemUnion_Agg
+
+
+#### Signature
+
+```sql
+GEOMETRY ST_MemUnion_Agg (col0 GEOMETRY)
+```
+
+#### Description
+
+Computes the union of a set of input geometries.
+                "Slower, but might be more memory efficient than ST_UnionAgg as each geometry is merged into the union individually rather than all at once.
+
+----
+
 ### ST_Union_Agg
 
 
@@ -2751,6 +3050,143 @@ GEOMETRY ST_Union_Agg (col0 GEOMETRY)
 #### Description
 
 Computes the union of a set of input geometries
+
+----
+
+## Macro Functions
+
+### ST_Rotate
+
+
+#### Signature
+
+```sql
+GEOMETRY ST_Rotate (geom GEOMETRY, radians double)
+```
+
+#### Description
+
+Alias of ST_RotateZ
+
+----
+
+### ST_RotateX
+
+
+#### Signature
+
+```sql
+GEOMETRY ST_RotateX (geom GEOMETRY, radians double)
+```
+
+#### Description
+
+Rotates a geometry around the X axis. This is a shorthand macro for calling ST_Affine.
+
+#### Example
+
+```sql
+-- Rotate a 3D point 90 degrees (π/2 radians) around the X-axis
+SELECT ST_RotateX(ST_GeomFromText('POINT Z(0 1 0)'), pi()/2);
+----
+POINT Z (0 0 1)
+```
+
+----
+
+### ST_RotateY
+
+
+#### Signature
+
+```sql
+GEOMETRY ST_RotateY (geom GEOMETRY, radians double)
+```
+
+#### Description
+
+Rotates a geometry around the Y axis. This is a shorthand macro for calling ST_Affine.
+
+#### Example
+
+```sql
+-- Rotate a 3D point 90 degrees (π/2 radians) around the Y-axis
+SELECT ST_RotateY(ST_GeomFromText('POINT Z(1 0 0)'), pi()/2);
+----
+POINT Z (0 0 -1)
+```
+
+----
+
+### ST_RotateZ
+
+
+#### Signature
+
+```sql
+GEOMETRY ST_RotateZ (geom GEOMETRY, radians double)
+```
+
+#### Description
+
+Rotates a geometry around the Z axis. This is a shorthand macro for calling ST_Affine.
+
+#### Example
+
+```sql
+-- Rotate a point 90 degrees (π/2 radians) around the Z-axis
+SELECT ST_RotateZ(ST_Point(1, 0), pi()/2);
+----
+POINT (0 1)
+```
+
+----
+
+### ST_Scale
+
+
+#### Signatures
+
+```sql
+GEOMETRY ST_Scale (geom GEOMETRY, xs double, ys double, zs double)
+GEOMETRY ST_Scale (geom GEOMETRY, xs double, ys double)
+```
+
+----
+
+### ST_TransScale
+
+
+#### Signature
+
+```sql
+GEOMETRY ST_TransScale (geom GEOMETRY, dx double, dy double, xs double, ys double)
+```
+
+#### Description
+
+Translates and then scales a geometry in X and Y direction. This is a shorthand macro for calling ST_Affine.
+
+#### Example
+
+```sql
+-- Translate by (1, 2) then scale by (2, 3)
+SELECT ST_TransScale(ST_Point(1, 1), 1, 2, 2, 3);
+----
+POINT (4 9)
+```
+
+----
+
+### ST_Translate
+
+
+#### Signatures
+
+```sql
+GEOMETRY ST_Translate (geom GEOMETRY, dx double, dy double, dz double)
+GEOMETRY ST_Translate (geom GEOMETRY, dx double, dy double)
+```
 
 ----
 
@@ -2821,17 +3257,17 @@ The `ST_Read` table function is based on the [GDAL](https://gdal.org/index.html)
 
 Except for the `path` parameter, all parameters are optional.
 
-| Parameter               | Type      | Description                                                                                                                                                                                                                                                                                              |
-| ----------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `path`                  | `VARCHAR`   | The path to the file to read. Mandatory                                                                                                                                                                                                                                                                  |
-| `sequential_layer_scan` | `BOOLEAN`   | If set to true, the table function will scan through all layers sequentially and return the first layer that matches the given layer name. This is required for some drivers to work properly, e.g., the OSM driver.                                                                                     |
-| `spatial_filter`        | `WKB_BLOB` | If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower.                        |
-| `open_options`          | `VARCHAR[]` | A list of key-value pairs that are passed to the GDAL driver to control the opening of the file. E.g., the GeoJSON driver supports a FLATTEN_NESTED_ATTRIBUTES=YES option to flatten nested attributes.                                                                                                  |
-| `layer`                 | `VARCHAR`   | The name of the layer to read from the file. If NULL, the first layer is returned. Can also be a layer index (starting at 0).                                                                                                                                                                            |
-| `allowed_drivers`       | `VARCHAR[]` | A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed.                                                                                                                                                                                             |
-| `sibling_files`         | `VARCHAR[]` | A list of sibling files that are required to open the file. E.g., the ESRI Shapefile driver requires a .shx file to be present. Although most of the time these can be discovered automatically.                                                                                                         |
-| `spatial_filter_box`    | `BOX_2D`    | If set to a BOX_2D, the table function will only return rows that intersect with the given bounding box. Similar to spatial_filter.                                                                                                                                                                      |
-| `keep_wkb`              | `BOOLEAN`   | If set, the table function will return geometries in a wkb_geometry column with the type WKB_BLOB (which can be cast to BLOB) instead of GEOMETRY. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesnt support representing in the GEOMETRY type yet. |
+| Parameter | Type | Description |
+| --------- | -----| ----------- |
+| `path` | VARCHAR | The path to the file to read. Mandatory |
+| `sequential_layer_scan` | BOOLEAN | If set to true, the table function will scan through all layers sequentially and return the first layer that matches the given layer name. This is required for some drivers to work properly, e.g., the OSM driver. |
+| `spatial_filter` | WKB_BLOB | If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower. |
+| `open_options` | VARCHAR[] | A list of key-value pairs that are passed to the GDAL driver to control the opening of the file. E.g., the GeoJSON driver supports a FLATTEN_NESTED_ATTRIBUTES=YES option to flatten nested attributes. |
+| `layer` | VARCHAR | The name of the layer to read from the file. If NULL, the first layer is returned. Can also be a layer index (starting at 0). |
+| `allowed_drivers` | VARCHAR[] | A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed. |
+| `sibling_files` | VARCHAR[] | A list of sibling files that are required to open the file. E.g., the ESRI Shapefile driver requires a .shx file to be present. Although most of the time these can be discovered automatically. |
+| `spatial_filter_box` | BOX_2D | If set to a BOX_2D, the table function will only return rows that intersect with the given bounding box. Similar to spatial_filter. |
+| `keep_wkb` | BOOLEAN | If set, the table function will return geometries in a wkb_geometry column with the type WKB_BLOB (which can be cast to BLOB) instead of GEOMETRY. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesnt support representing in the GEOMETRY type yet. |
 
 Note that GDAL is single-threaded, so this table function will not be able to make full use of parallelism.
 
@@ -2845,20 +3281,20 @@ In practice this is just syntax-sugar for calling ST_Read, so there is no differ
 
 The following formats are currently recognized by their file extension:
 
-| Format         | Extension |
-| -------------- | --------- |
-| ESRI ShapeFile | `.shp`    |
-| GeoPackage     | `.gpkg`   |
-| FlatGeoBuf     | `.fgb`    |
+| Format | Extension |
+| ------ | --------- |
+| ESRI ShapeFile | .shp |
+| GeoPackage | .gpkg |
+| FlatGeoBuf | .fgb |
 
 #### Example
 
 ```sql
 -- Read a Shapefile
-ELECT * FROM ST_Read('some/file/path/filename.shp');
+SELECT * FROM ST_Read('some/file/path/filename.shp');
 
-- Read a GeoJSON file
-REATE TABLE my_geojson_table AS SELECT * FROM ST_Read('some/file/path/filename.json');
+-- Read a GeoJSON file
+CREATE TABLE my_geojson_table AS SELECT * FROM ST_Read('some/file/path/filename.json');
 ```
 
 ----
@@ -2904,6 +3340,20 @@ LIMIT 5;
 
 ----
 
+### ST_ReadSHP
+
+#### Signature
+
+```sql
+ST_ReadSHP (col0 VARCHAR, encoding VARCHAR)
+```
+
+#### Description
+
+Read a Shapefile without relying on the GDAL library
+
+----
+
 ### ST_Read_Meta
 
 #### Signature
@@ -2929,3 +3379,6 @@ SELECT
     layers[1].geometry_fields[1].crs.auth_code as code
 FROM st_read_meta('../../tmp/data/amsterdam_roads.fgb');
 ```
+
+----
+

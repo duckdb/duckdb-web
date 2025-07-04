@@ -34,7 +34,7 @@ header .headerline {
 		}
 		/* Main Navigation */
 		.landingmenu {
-			font-size: 16px;
+			@include menu-item();
 			height: 100%;
 			width: 100%;
 			position: absolute;
@@ -92,7 +92,7 @@ header .headerline {
 							display: block;
 							text-decoration: none;
 							color: inherit;
-							font-size: 14px;
+							@include menu-item();
 							line-height: 1;
 							padding: 15px 20px;
 							border-radius: 120px;
@@ -106,6 +106,7 @@ header .headerline {
 								color: var(--menu-topmenu-text-color-hover, #6A58DA);
 							}
 						}
+						/*
 						ul {
 							padding: 5px 12px;
 							margin: -6px 0 5px;
@@ -114,6 +115,7 @@ header .headerline {
 								line-height: 20px;
 							}
 						}
+						*/
 					}
 					&:hover {
 						opacity: 1;
@@ -298,12 +300,12 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 
 /* Site-wide Banner */
 .banner {
+	@include body-standard;
 	position: relative;
 	width: 100%;
 	text-align: center;
 	background: var(--lake-ribbon-background-color, rgba(153, 216, 255, 0.6));
 	color: var(--main-text-primary-color, #0D0D0D);
-	font-size: $fontSize16;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -317,15 +319,15 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	
 	.close {
 		position: absolute;
-		right: 30px;
-		top: calc(50% - 7px);
+		right: 26px;
+		top: calc(50% - 12px);
 		cursor: pointer;
-		background-image: url("data:image/svg+xml,%3Csvg width='13' height='13' viewBox='0 0 13 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.972 11.648 7.736 6.44l5.236-5.208L11.712 0 6.504 5.208 1.296 0 .064 1.232 5.272 6.44.064 11.648l1.232 1.232 5.208-5.208 5.208 5.208 1.26-1.232Z' fill='%23fff'%3E%3C/path%3E%3C/svg%3E");
-		width: 13px;
-		height: 13px;
-		background-size: contain; 
-		background-repeat: no-repeat;
-		filter: invert(1);
+		svg path{
+			fill: var(--main-text-primary-color, #0D0D0D);
+		}
+		svg *[stroke] {
+		  stroke: var(--main-text-primary-color, #0D0D0D);
+		}
 	}
 	/* Responsive Styles */
 	@media only screen and (max-width: 980px) {
@@ -335,11 +337,9 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	}
 	
 	@media only screen and (max-width: 660px) {
-		font-size: 16px;
 		padding: 15px 40px 15px 15px;
-		
 		.close {
-			right: 15px;
+			right: 10px;
 		}
 	}
 }

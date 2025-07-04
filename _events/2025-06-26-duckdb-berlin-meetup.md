@@ -7,7 +7,7 @@ thumb: "/images/blog/thumbs/duckdb-berlin-meetup.svg"
 image: "/images/blog/thumbs/duckdb-berlin-meetup.png"
 excerpt: ""
 tags: ["meetup"]
-venue: "Dorint Kurfürstendamm Berlin"
+venue: "Dorint Kurfürstendamm Berlin, Opéra room, 2nd floor"
 ---
 
 <img src="/images/blog/thumbs/duckdb-berlin-meetup.svg"
@@ -18,7 +18,10 @@ venue: "Dorint Kurfürstendamm Berlin"
 We are excited to announce the DuckDB Berlin meetup, which will take place during the week of the [SIGMOD 2025 conference](https://2025.sigmod.org/).
 Every year, SIGMOD attracts hundreds of database researchers, some of whom already use [DuckDB in their scientific work](https://shows.acast.com/disseminate). The DuckDB meetup will feature two talks from researchers and one from industry practitioners.
 
-The meetup will be held at the [Dorint Kurfürstendamm Berlin](https://maps.app.goo.gl/Fv2WhXUJ7F5CLNTm6), less than 20 minutes walking distance from SIGMOD's venue.
+## Venue
+
+The meetup will take place at the [Dorint Kurfürstendamm Berlin](https://maps.app.goo.gl/Fv2WhXUJ7F5CLNTm6), about 20 minutes walking distance from SIGMOD's venue.
+When entering the hotel, look for the **Opéra room on the 2nd floor**.
 
 ## Attendance
 
@@ -26,13 +29,14 @@ Attendance is free but **please RSVP on [meetup.com](https://www.meetup.com/duck
 
 ## Timetable
 
-| Time  | Presenter                                                                  | Title                                                                |
-| :---- | :------------------------------------------------------------------------- | :------------------------------------------------------------------- |
-| 18:00 | Mingle & snacks                                                            |                                                                      |
-| 19:00 | [Amine Mhedhbi](https://amine.io/) <br/>*(Polytechnique&nbsp;Montréal)*    | FlockMTL: a Multimodal AI Community Extension for DuckDB             |
-| 19:25 | [Marcin Rudolf](https://www.linkedin.com/in/marcinrudolf/) <br/>*(dltHub)* | From REST API to Iceberg Lakehouse: ELT with Python, DuckDB, and dlt |
-| 19:50 | [David Justen](https://d-justen.github.io/) <br/>*(TU Berlin)*             | POLAR for DuckDB: Stop Guessing, Start Adapting                      |
-| 21:00 | Venue closes                                                               |                                                                      |
+| Time  | Presenter                                                                  | Title                                                                | Slides                                                                                                                                                              |
+| :---- | :------------------------------------------------------------------------- | :------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 18:00 | Mingle & snacks                                                            |                                                                      |                                                                                                                                                                     |
+| 19:00 | [Gabor Szarnyas](https://szarnyasg.org/) <br/>_(DuckDB Labs)_              | Welcome to the DuckDB Cinematic Universe                             | [pdf](http://blobs.duckdb.org/events/duckdb-berlin-meetup/gabor-szarnyas-the-duckdb-cinematic-universe.pdf)                                                         |
+| 19:10 | [Amine Mhedhbi](https://amine.io/) <br/>_(Polytechnique&nbsp;Montréal)_    | FlockMTL: A Multimodal AI Community Extension for DuckDB             | [pdf](http://blobs.duckdb.org/events/duckdb-berlin-meetup/amine-mhedhbi-flockmtl-a-multimodal-ai-community-extension-for-duckdb.pdf)                                |
+| 19:35 | [Marcin Rudolf](https://www.linkedin.com/in/marcinrudolf/) <br/>_(dltHub)_ | From REST API to Iceberg Lakehouse: ELT with Python, DuckDB, and dlt | [pdf](http://blobs.duckdb.org/events/duckdb-berlin-meetup/marcin-rudolf-shreyas-gowda-dlthub-from-rest-api-to-iceberg-lakehouse-elt-with-python-dlt-and-duckdb.pdf) |
+| 20:00 | [David Justen](https://d-justen.github.io/) <br/>_(TU Berlin)_             | POLAR for DuckDB: Stop Guessing, Start Adapting                      | [pdf](http://blobs.duckdb.org/events/duckdb-berlin-meetup/david-justen-polar-stop-guessing-start-adapting.pdf)                                                      |
+| 20:30 | Event ends                                                                 |                                                                      |                                                                                                                                                                     |
 
 ## Inquiries
 

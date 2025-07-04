@@ -412,3 +412,77 @@ html.darkmode {
   --social-thumbnail-symbol-image: var(--grey-05);
   --social-thumbnail-text-color: var(--grey-95);
 }
+
+
+
+/* Desktop/Mobile */
+:root {
+  --type-weight-standard: 450;
+  /* Desktop */
+  --page-section-padding: 20px;
+  --page-element-spacing-medium: 25px;
+  --page-docs-page-padding: 30px;
+  --page-element-spacing-large: 50px;
+  --page-section-spacing: 105px;
+  --page-max-width-tiny: 500px;
+  --page-max-width-small: 750px;
+  --page-max-width-medium: 950px;
+  --page-max-width-large: 1150px;
+  --type-label-3: 11px;
+  --type-label-2: 12px;
+  --type-tiny: 12px;
+  --type-pre-title: 13px;
+  --type-body-small: 14px;
+  --type-code: 14px;
+  --type-label-1: 14px;
+  --type-title-3: 14px;
+  --type-menu-items: 15px;
+  --type-body-normal: 16px;
+  --type-code-large: 16px;
+  --type-title-2: 16px;
+  --type-body-large: 18px;
+  --type-title-1: 18px;
+  --type-headline-3: 24px;
+  --type-headline-2: 28px;
+  --type-headline-1: 32px;
+  --type-display-3: 36px;
+  --type-display-2: 45px;
+  --type-display-1: 57px;
+}
+
+// MOBILE SIZES
+@media (max-width: 720px) {
+  :root {
+    --type-weight-standard: 400;
+    /* Mobile */
+    --page-docs-page-padding: 15px;
+    --page-section-padding: 15px;
+    --page-element-spacing-medium: 20px;
+    --page-element-spacing-large: 35px;
+    --page-section-spacing: 55px;
+    --page-max-width-large: 393px;
+    --page-max-width-medium: 393px;
+    --page-max-width-small: 393px;
+    --page-max-width-tiny: 393px;
+    --type-label-3: 11px;
+    --type-tiny: 11px;
+    --type-label-2: 12px;
+    --type-pre-title: 12px;
+    --type-body-small: 13px;
+    --type-code: 13px;
+    --type-label-1: 13px;
+    --type-title-3: 13px;
+    --type-body-normal: 14px;
+    --type-menu-items: 14px;
+    --type-code-large: 15px;
+    --type-title-2: 15px;
+    --type-body-large: 16px;
+    --type-title-1: 16px;
+    --type-headline-3: 19px;
+    --type-headline-2: 23px;
+    --type-headline-1: 27px;
+    --type-display-3: 30px;
+    --type-display-2: 34px;
+    --type-display-1: 38px;
+  }
+}

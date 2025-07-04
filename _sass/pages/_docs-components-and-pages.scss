@@ -91,7 +91,7 @@ body.documentation {
         }
 
         &.nightly span.icon_nightly {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' data-name='Ebene 1' viewBox='0 0 14 14'%3E%3Cpath fill='%23FF6900' fill-rule='evenodd' d='M7 14c3.87 0 7-3.13 7-7s-3.13-7-7-7-7 3.13-7 7 3.13 7 7 7Z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='14' viewBox='0 0 15 14' fill='none'%3E%3Cpath d='M7.60156 0C11.4676 0 14.6016 3.13401 14.6016 7C14.6016 10.866 11.4676 14 7.60156 14C3.73557 14 0.601562 10.866 0.601562 7C0.601562 3.13401 3.73557 0 7.60156 0ZM7.31738 2.4502C7.31735 4.02564 6.97769 5.07163 6.31445 5.72949C5.65074 6.38775 4.60428 6.71579 3.05176 6.71582V7.28418C4.60224 7.28421 5.64906 7.62106 6.31348 8.28418C6.97778 8.94741 7.31735 9.99451 7.31738 11.5498H7.88574C7.88577 9.99404 8.22268 8.94724 8.88574 8.28418C9.5488 7.62112 10.5956 7.28421 12.1514 7.28418V6.71582C10.5937 6.71579 9.54713 6.38756 8.88477 5.72949C8.22291 5.07179 7.88577 4.02595 7.88574 2.4502H7.31738Z' fill='%23FF6900'/%3E%3C/svg%3E");
             width: 18px;
             height: 18px;
             display: inline-block;
@@ -172,14 +172,14 @@ body.documentation {
 
         >ul>li.hasSub,
         >ul>li {
-            font-size: 140%;
+            @include title-1();
             list-style: none;
             margin-top: 40px;
             margin-bottom: 10px;
         }
 
         >ul>ul>li.hasSub {
-            font-size: 100%;
+            @include body-standard();
         }
 
         >ul>ul>ul>li.hasSub {
@@ -248,7 +248,7 @@ body.documentation {
     .opensearch {
         border-radius: 10px;
         border: 1px solid var(--menu-dropdown-border-color, #333);
-        padding: 8px 8px 8px 35px;
+        padding: 6px 8px 8px 35px;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='none' viewBox='0 0 15 15'%3E%3Cpath stroke='%23999999' stroke-width='1.5' d='m10.432 9.692 3.926 3.927'/%3E%3Ccircle cx='6.282' cy='6.303' r='5.173' stroke='%23999999' stroke-width='1.5'/%3E%3C/svg%3E");
         background-size: 15px 15px;
         background-repeat: no-repeat;
@@ -259,7 +259,7 @@ body.documentation {
         height: 40px;
 
         >.shortcut {
-            font-size: 12px;
+            @include tiny();
             color: var(--menu-topmenu-searchbar-shortcut-text-color, #999);
             padding: 5px 7px;
             border-radius: 5px;
@@ -295,8 +295,8 @@ body.documentation {
         align-items: center;
         position: relative;
         gap: 10px;
-        font-weight: 500;
-        font-size: $fontSize14;
+        @include body-small();
+        //@include label-1();
         transition: border .5s;
 
         &:hover {
@@ -357,15 +357,14 @@ body.documentation {
         &.downloads {
             span.num {
                 color: var(--interactive-folderbox-text-color, #1A1A1A);
-                font-size: 18px;
-                font-weight: 600;
+                @include title-1();
                 margin-right: .5em;
             }
 
             span.month,
             span.week {
                 color: var(--main-text-secondary-color, #666);
-                font-size: 12px;
+                @include tiny();
             }
 
             span.month+span.week {
@@ -373,7 +372,7 @@ body.documentation {
             }
 
             span.symbol+span+span {
-                margin-left: 15px;
+                margin-left: 5px;
             }
         }
     }
@@ -383,27 +382,6 @@ body.documentation {
         ul {
             list-style-position: outside;
             padding-left: 20px;
-        }
-
-        div.icon {
-            width: 90px;
-            height: 90px;
-            background-color: $black100;
-            text-align: center;
-            font-size: 60px;
-            padding-top: 9px;
-        }
-
-        div.headline {
-            display: flex;
-            padding-top: 60px;
-
-            h1,
-            h2 {
-                margin-left: 20px;
-                margin-top: 30px;
-                font-size: 140%;
-            }
         }
 
         article {
@@ -420,7 +398,6 @@ body.documentation {
             }
 
             sup {
-                font-size: 100%;
                 top: 0;
 
                 &::after {
@@ -436,7 +413,6 @@ body.documentation {
         .footnotes {
             width: 280px;
             margin-left: 40px;
-            font-size: 70%;
             position: relative;
 
             div.sup {
@@ -447,7 +423,6 @@ body.documentation {
                 sup {
                     min-width: 20px;
                     top: 0;
-                    font-size: 70%;
                     display: inline-block;
                 }
 
@@ -475,15 +450,14 @@ body.documentation {
         width: 100%;
 
         h5 {
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: .8em;
+            @include title-3();
+            margin-bottom: .5em !important;
             margin-top: 0 !important;
         }
 
         >div:last-child {
+            @include tiny();
             text-align: left;
-            font-size: 12px;
         }
 
         p {
@@ -491,8 +465,7 @@ body.documentation {
         }
 
         ul li {
-            font-size: 14px;
-            line-height: 21px;
+            @include body-small();
         }
 
         ul {

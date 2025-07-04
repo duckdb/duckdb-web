@@ -7,7 +7,7 @@ title: Community Extension Development
 
 DuckDB provides a C++ based [Extension Template](https://github.com/duckdb/extension-template) which comes batteries-included.
 The template is configured with the package manager [vcpkg](https://vcpkg.io/), a SQL-based testing framework, and a GitHub Actions based CI/CD toolchain.
-The CI/CD chain will automatically build your extension for all supported DuckDB platforms including Linux, MacOS, Windows and WASM.
+The CI/CD chain will automatically build your extension for all supported DuckDB platforms including Linux, MacOS, Windows and Wasm.
 
 ## Publishing
 

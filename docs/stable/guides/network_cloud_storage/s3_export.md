@@ -44,7 +44,7 @@ CREATE SECRET (
 After the `httpfs` extension is set up and the S3 credentials are correctly configured, Parquet files can be written to S3 using the following command:
 
 ```sql
-COPY ⟨table_name⟩ TO 's3://⟨s3_bucket⟩/⟨filename⟩.parquet';
+COPY ⟨table_name⟩ TO 's3://⟨s3-bucket⟩/⟨filename⟩.parquet';
 ```
 
 Similarly, Google Cloud Storage (GCS) is supported through the Interoperability API.

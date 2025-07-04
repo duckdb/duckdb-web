@@ -9,20 +9,6 @@ body.installation{
 	main .wrap, main .wrap #main_content_wrap{
 		max-width: 100%;
 	}
-	h1{
-		font-size: 140%;
-		font-weight: normal;
-		margin-bottom: 50px;
-	}
-	h2{
-		font-size: 110%;
-		font-weight: normal;
-		margin-bottom: 7px;
-		-webkit-user-select: none;
-		   -moz-user-select: none;
-			-ms-user-select: none;
-				user-select: none;
-	}
 	.yourselection{
 		position: relative;
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);;
@@ -41,7 +27,7 @@ body.installation{
 			pointer-events: none;
 		}
 	}
-	.select{
+	main .select{
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -50,14 +36,13 @@ body.installation{
 		border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		padding: 25px 20px;
 		.info{
+			@include body-small();
 			width: 100%;
-			font-size: 14px;
 			margin-left: 162px;
 			margin-top: 8px;
 		}
 		h3{
-			font-size: 17px!important;
-			font-weight: 600!important;
+			@include title-2();
 			width: 162px;
 			-ms-flex-negative: 0;
 				flex-shrink: 0;
@@ -95,7 +80,7 @@ body.installation{
 				color: var(--interactive-filter-unselected-text-color, #666);
 				border-radius: 50px;
 				font-weight: 500;
-				font-size: 14px;
+				@include label-1();
 				cursor: pointer;
 				-webkit-transition: background-color .2s;
 				-o-transition: background-color .2s;
@@ -150,12 +135,11 @@ body.installation{
 			padding-top: 8px;
 		}
 		.result{
-			font-family: $fontMono;
+			@include code-standard();
 			padding: 12px 12px 14px 14px;
 			border-radius: 10px;
 			border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 			background: var(--doc-codebox-background-color, #F2F2F2);
-			font-size: 14px;
 			position: relative;
 			width: calc(100% - 162px);
 			pre{

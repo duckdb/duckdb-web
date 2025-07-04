@@ -9,6 +9,7 @@ footer{
 		position: relative;
 		z-index: 100;
 		.footercontent{
+			@include body-small;
 			max-width: 1150px;
 			margin: 0 auto;
 			padding: 60px 15px 20px 15px;
@@ -22,7 +23,6 @@ footer{
 			-webkit-column-gap: 80px;
 			   -moz-column-gap: 80px;
 					column-gap: 80px;
-			font-size: 14px;
 			-ms-flex-wrap: wrap;
 				flex-wrap: wrap;
 			.footernavigation{
@@ -41,6 +41,11 @@ footer{
 				margin-top: 60px;
 				font-weight: 400;
 				color: #979797;
+				display: flex;
+				justify-content: space-between;
+				a{
+					color: inherit;
+				}
 			}
 			strong{
 					font-weight: normal;
@@ -73,6 +78,9 @@ footer{
 				height: 38px;
 				background-size: contain;
 				background-repeat: no-repeat;
+			}
+			.footerlogo.duckdb_logo{
+				width: 128.36px;
 			}
 			img.duckdbfooter{
 				width: 140px;

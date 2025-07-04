@@ -1,11 +1,162 @@
 @use 'variables' as *;
 
+
+@mixin display-1 {
+	font-size: var(--type-display-1, 57px);
+	font-weight: 600;
+	line-height: 1.1;
+	letter-spacing: -0.00249em;
+	font-family: "SuisseIntl";
+}
+
+@mixin display-2 {
+	font-size: var(--type-display-2, 45px);
+	font-weight: 600;
+	line-height: 1.2;
+	font-family: "SuisseIntl";
+}
+
+@mixin display-3 {
+	font-size: var(--type-display-3, 36px);
+	font-weight: 600;
+	line-height: 1.2;
+	font-family: "SuisseIntl";
+}
+
+@mixin headline-1 {
+	font-size: var(--type-headline-1, 32px);
+	font-weight: 600;
+	line-height: 1.2;
+	font-family: "SuisseIntl";
+}
+
+@mixin headline-2 {
+	font-size: var(--type-headline-2, 28px);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin headline-3 {
+	font-size: var(--type-headline-3, 24px);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin title-1 {
+	font-size: var(--type-title-1, 18px);
+	font-weight: 600;
+	line-height: 1.2;
+	font-family: "SuisseIntl";
+}
+
+@mixin title-2 {
+	font-size: var(--type-title-2, 16px);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin title-3 {
+	font-size: var(--type-title-3, 14px);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin label-1 {
+	font-size: var(--type-label-1, 14px);
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin label-2 {
+	font-size: var(--type-label-2, 12px);
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.001em;
+	font-family: "SuisseIntl";
+}
+
+@mixin label-3 {
+	font-size: var(--type-label-3, 11px);
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.005em;
+	font-family: "SuisseIntl";
+}
+
+@mixin body-large {
+	font-size: var(--type-body-large, 18px);
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.6;
+	font-family: "SuisseIntl";
+}
+
+@mixin body-standard {
+	font-size: var(--type-body-normal, 16px);
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.5;
+	letter-spacing: 0.0025em;
+	font-family: "SuisseIntl";
+}
+
+@mixin body-small {
+	font-size: var(--type-body-small, 14px);
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.4;
+	letter-spacing: 0.005em;
+	font-family: "SuisseIntl";
+}
+
+@mixin tiny {
+	font-size: var(--type-tiny, 12px);
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.2;
+	letter-spacing: 0.005em;
+	font-family: "SuisseIntl";
+}
+
+@mixin pre-title {
+	font-size: var(--type-pre-title, 13px);
+	text-transform: uppercase;
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.2;
+	letter-spacing: 0.03em;
+	font-family: "SuisseIntl";
+}
+
+@mixin menu-item {
+	font-size: var(--type-menu-items, 15px);
+	font-weight: 450;
+	line-height: 1;
+	font-family: "SuisseIntl";
+}
+
+@mixin code-standard {
+	font-size: var(--type-code, 14px);
+	line-height: 1.4;
+	font-family: "JetBrainsMono-Regular";
+}
+
+@mixin code-large {
+	font-size: var(--type-code-large, 16px);
+	line-height: 1.4;
+	font-family: "JetBrainsMono-Regular";
+}
+
+
 @mixin button {
+	@include label-1;
 	display: inline-block;
 	cursor: pointer;
-	font-size: 14px;
-	line-height: 1;
-	font-weight: 600;
 	transition: background-color .3s;
 	padding: 12px 20px;
 	border-radius: 100px;
@@ -79,8 +230,7 @@
 }
 
 @mixin textbutton{
-	font-size: 14px;
-	font-weight: 500;
+	@include label-1;
 	color: inherit;
 	text-decoration: none;
 	display: inline;
@@ -163,3 +313,4 @@
 .textbutton{
 	@include textbutton;
 }
+

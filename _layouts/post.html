@@ -86,7 +86,7 @@
 												<div class="publishedinfo">
 													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
 													<span class="bullet">&middot;</span>
-													<span class="readingtime"> {{ content | reading_time }}</span>
+													<span class="readingtime"> {% if page.collection == "media" %}{{ page.length }}{% else %}{{ content | reading_time }}{% endif %}</span>
 												</div>
 											{% endif %}
 										</div>

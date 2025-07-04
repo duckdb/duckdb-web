@@ -23,7 +23,9 @@ html.darkmode ::selection {
 
 
 html.darkmode body{
-	
+	strong{
+		font-weight: 700;
+	}
 	#duckdb_logo,
 	.duckdb_logo{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='129' height='38' fill='none' viewBox='0 0 129 38'%3E%3Cpath fill='%23FFF100' d='M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19Z'/%3E%3Cpath fill='%230D0D0D' d='M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795ZM7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.535 7.875-7.875 0-4.341-3.534-7.876-7.875-7.876S7.172 14.66 7.172 19Z'/%3E%3Cpath fill='%23FAFAFA' d='M68.543 14.125v7.92c0 1.705-1.034 2.91-2.446 2.91h-.69c-1.446 0-2.446-1.205-2.446-2.91v-7.92h-2.725v8.41c0 3.033 2.135 5.215 5.127 5.215h.79c2.99 0 5.104-2.182 5.104-5.216v-8.409h-2.714ZM93.4 18.932l5.049-5.432h-3.804l-4.437 4.886v-8.102h-2.691v17.239h2.691v-5.057l1.301-1.398 4.437 6.466h3.337L93.4 18.932Zm-42.438 5.84h-3.259V13.069h3.259c2.524 0 4.537 2.625 4.537 5.807 0 3.284-2.013 5.898-4.537 5.898Zm0-14.51H45v17.284h5.96c3.993 0 7.263-3.853 7.263-8.671 0-4.704-3.259-8.614-7.262-8.614Zm56.117 14.51h-3.214V13.069h3.214c2.546 0 4.537 2.625 4.537 5.807 0 3.284-1.991 5.898-4.537 5.898Zm0-14.51h-5.928v17.284h5.928c4.048 0 7.262-3.853 7.262-8.671 0-4.704-3.214-8.614-7.262-8.614Zm16.259 14.51h-4.193V19.99h4.193c1.245 0 2.324 1.102 2.324 2.375 0 1.352-1.079 2.409-2.324 2.409Zm-4.193-7.567v-4.137h3.336c1.123 0 2.035.898 2.035 2.057 0 1.148-.912 2.08-2.035 2.08h-3.336Zm7.062.92c.611-.83 1.034-1.875 1.034-3.011 0-2.66-2.18-4.864-4.76-4.864h-6.027v17.284h6.884c2.791 0 5.026-2.33 5.026-5.182a5.178 5.178 0 0 0-2.157-4.227Zm-47.276-1.42h.667c1.613 0 2.948 1.204 2.948 2.704h2.746c0-2.977-2.569-5.432-5.682-5.432h-.668c-3.069 0-5.538 2.534-5.538 5.637v2.477c0 3.136 2.48 5.659 5.538 5.659h.668c3.214 0 5.838-2.454 5.838-5.41H82.7c0 1.433-1.401 2.603-3.091 2.603h-.668c-1.568 0-2.869-1.273-2.869-2.852v-2.477c0-1.614 1.29-2.91 2.858-2.91Z'/%3E%3C/svg%3E");
@@ -175,51 +177,4 @@ html.darkmode body.documentation{
 }
 
 
-/** SPECIAL DUCKLAKE DARKMODE STYLES **/
 
-html.darkmode {
-	body.landing {
-		.wave {
-			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 364.8 28.6'%3E%3Cpath d='M364.8 0h-.1c-45.5 0-68.3 4.2-91.1 8.3-22.8 4.2-45.5 8.3-91 8.3s-68.3-4.2-91.1-8.3C68.7 4.2 45.9 0 .4 0H0v28.6h364.8V0Z' style='fill:%230d0d0d'/%3E%3C/svg%3E");
-		}
-	}
-	.banner .close{
-		filter: invert(0);
-	}
-	img.darkmode-img{
-		display: inline;
-	}
-	img.lightmode-img{
-		display: none;
-	}
-	section.architecture {
-		.diagram {
-			.connector svg path {
-				fill: #f2f2f2;
-			}
-			.database .catalog .icons img.duckdb,
-			.client .browser .icons img.duckdb_icon{
-				content: url('/images/deployment_diagram/dark/cat_icon-duckdb.svg');
-			}
-			.client .browser .ducklake img.ducklake_icon{
-				content: url('/images/deployment_diagram/dark/ducklake_comb_alt.svg');
-			}
-			.client .browser>img{
-				content: url('/images/deployment_diagram/dark/window.svg');
-			}
-			.database .catalog .icons img.postgre{
-				content: url('/images/deployment_diagram/dark/cat_icon-postgre.svg');
-			}
-			.database .catalog .icons img.sqlite{
-				content: url('/images/deployment_diagram/dark/cat_icon-sqlite.svg');
-			}
-			.database .catalog .icons img.mysql{
-				content: url('/images/deployment_diagram/dark/cat_icon-mysql.svg');
-			}
-			.database .catalog > img{
-				content: url('/images/deployment_diagram/dark/database.svg');
-			}
-		}
-	}
-
-}

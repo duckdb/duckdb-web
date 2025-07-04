@@ -14,10 +14,10 @@ Delete the table with the name `tbl`:
 DROP TABLE tbl;
 ```
 
-Drop the view with the name `v1`; do not throw an error if the view does not exist:
+Drop the view with the name `view1`; do not throw an error if the view does not exist:
 
 ```sql
-DROP VIEW IF EXISTS v1;
+DROP VIEW IF EXISTS view1;
 ```
 
 Drop function `fn`:
@@ -116,11 +116,13 @@ Currently, dependencies are not tracked for views. For example, if a view is cre
 
 ```sql
 CREATE TABLE tbl (i INTEGER);
-CREATE VIEW v AS
+CREATE VIEW view1 AS
     SELECT i FROM tbl;
 DROP TABLE tbl RESTRICT;
-SELECT * FROM v;
+SELECT * FROM view1;
 ```
+
+This returns the following error message:
 
 ```console
 Catalog Error:

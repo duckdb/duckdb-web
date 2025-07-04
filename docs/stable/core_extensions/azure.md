@@ -104,12 +104,12 @@ Use the following [configuration options]({% link docs/stable/configuration/over
 | `azure_transport_option_type` | Underlying [adapter](https://github.com/Azure/azure-sdk-for-cpp/blob/main/doc/HttpTransportAdapter.md) to use in the Azure SDK. Valid values are: `default` or `curl`. | `VARCHAR` | `default` |
 | `azure_context_caching` | Enable/disable the caching of the underlying Azure SDK HTTP connection in the DuckDB connection context when performing queries. If you suspect that this is causing some side effect, you can try to disable it by setting it to false (not recommended). | `BOOLEAN` | `true` |
 
-> Setting `azure_transport_option_type` explicitly to `curl` with have the following effect:
-> * On Linux, this may solve certificates issue (`Error: Invalid Error: Fail to get a new connection for: https://storage_account_name.blob.core.windows.net/. Problem with the SSL CA cert (path? access rights?)`) because when specifying the extension will try to find the bundle certificate in various paths (that is not done by *curl* by default and might be wrong due to static linking).
+> Setting `azure_transport_option_type` explicitly to `curl` will have the following effect:
+> * On Linux, this may solve certificate issue (`Error: Invalid Error: Fail to get a new connection for: https://storage_account_name.blob.core.windows.net/. Problem with the SSL CA cert (path? access rights?)`) because when specifying the extension will try to find the bundle certificate in various paths (that is not done by *curl* by default and might be wrong due to static linking).
 > * On Windows, this replaces the default adapter (*WinHTTP*) allowing you to use all *curl* capabilities (for example using a socks proxies).
 > * On all operating systems, it will honor the following environment variables:
 >   * `CURL_CA_INFO`: Path to a PEM encoded file containing the certificate authorities sent to libcurl. Note that this option is known to only work on Linux and might throw if set on other platforms.
->   * `CURL_CA_PATH`: Path to a directory which holds PEM encoded file, containing the certificate authorities sent to libcurl.
+>   * `CURL_CA_PATH`: Path to a directory which holds PEM encoded files, containing the certificate authorities sent to libcurl.
 
 Example:
 
@@ -233,7 +233,7 @@ CREATE SECRET secret5 (
 
 > * When using secrets, the `HTTP_PROXY` environment variable will still be honored except if you provide an explicit value for it.
 > * When using secrets, the `SET` variable of the *Authentication with variables* session will be ignored.
-> * The Azure `credential_chain` provider, the actual token is fetched at query time, not at the time of creating the secret.
+> * The Azure `credential_chain` provider, the actual token is fetched at query time, not when the secret is created.
 
 ### Authentication with Variables (Deprecated)
 
@@ -260,7 +260,7 @@ Where `variable_name` can be one of the following:
 The Azure extension relies on the Azure SDK to connect to Azure Blob storage and supports printing the SDK logs to the console.
 To control the log level, set the [`AZURE_LOG_LEVEL`](https://github.com/Azure/azure-sdk-for-cpp/blob/main/sdk/core/azure-core/README.md#sdk-log-messages) environment variable.
 
-For instance, verbose logs can be enabled as follows in Python:
+For instance, verbose logs can be enabled in Python as follows:
 
 ```python
 import os
@@ -276,7 +276,7 @@ duckdb.sql("SELECT count(*) FROM 'az://myaccount.blob.core.windows.net/path/to/b
 
 Even though ADLS implements similar functionality as the Blob storage, there are some important performance benefits to using the ADLS endpoints for globbing, especially when using (complex) glob patterns.
 
-To demonstrate, lets look at an example of how the a glob is performed internally using respectively the Blob and ADLS endpoints.
+To demonstrate, let's look at an example of how a glob is performed internally using the Blob and ADLS endpoints, respectively.
 
 Using the following filesystem:
 
