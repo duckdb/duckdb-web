@@ -101,10 +101,16 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * _Do not_ add clauses or expressions purely for aligning lines. For example, avoid adding `WHERE 1 = 1` and `WHERE true`.
 * _Do not_ include the DuckDB prompt. For example, avoid the following: `D SELECT 42;`.
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
-* The returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
-* Output printed on the system console (e.g., in Python) and system messages (e.g., errors) should be formatted as code with the `text` language tag. For example:
+* Larger returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`). For smaller tables, using the default `.mode duckbox` is acceptable.
+* Output printed on the system console should be formatted as code with the `text` language tag. For example:
    ````
    ```text
+   DuckDB v1.3.1 (Ossivalis) 2063dda3e6
+   ```
+   ````
+* Error messages should be formatted as code with the `console` language tag. For example:
+   ````
+   ```console
    Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
    ```
    ````
