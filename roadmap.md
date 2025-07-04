@@ -44,7 +44,7 @@ If you would like to expedite the development of these features, please [get in 
 * Time series optimizations
 * Partition-aware optimizations
 * Sorting-aware optimizations
-* Better Filter Cardinality Estimation using automatically maintained table samples
+* Better filter cardinality estimation using automatically maintained table samples
 * [Parallel Python UDFs](https://github.com/duckdb/duckdb/issues/14817)
 * [`ALTER TABLE` support for adding foreign keys](https://github.com/duckdb/duckdb/discussions/4204)
 * Improvements of query profiling (especially for concurrently running queries)
