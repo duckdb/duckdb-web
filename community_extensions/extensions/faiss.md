@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: faiss
   description: Provides access to faiss indices from DuckDB.
-  version: 0.10.0
+  version: 0.11.0
   language: C++
   build: cmake
   license: MIT
@@ -22,7 +22,7 @@ extension:
 
 repo:
   github: duckdb-faiss-ext/duckdb-faiss-ext
-  ref: b0ac9446787bf0983d2f0fbdaf1e633b3b589830
+  ref: 065f69843f43e8b1274ee58c598e66083aad6847
 
 docs:
   hello_world: |
@@ -33,6 +33,8 @@ docs:
     -- Create the index and insert data into it
     CALL FAISS_CREATE('name', 5, 'IDMap,HNSW32');
     CALL FAISS_ADD((SELECT id, data FROM input), 'name');
+    -- On linux, with cuda, we can move the index to the GPU
+    -- CALL FAISS_TO_GPU('name', 0);
     -- Get 10 results with uneven id
     SELECT id, UNNEST(FAISS_SEARCH_FILTER('name', 10, data, 'id%2==1', 'rowid', 'input')) FROM queries;
     -- Get 10 results with even id
@@ -44,8 +46,8 @@ docs:
 
     Some (most) indices are not supported for gpus, however this is very easily resolvable. Please open an issue over at our repository in order to get this resolved!
 
-extension_star_count: 17
-extension_star_count_pretty: 17
+extension_star_count: 19
+extension_star_count_pretty: 19
 extension_download_count: 486
 extension_download_count_pretty: 486
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
@@ -75,17 +77,17 @@ LOAD {{ page.extension.name }};
 
 |      function_name      | function_type | description | comment | examples |
 |-------------------------|---------------|-------------|---------|----------|
-| __faiss_create_mask     | table         | NULL        | NULL    | []       |
-| faiss_add               | table         | NULL        | NULL    | []       |
-| faiss_create            | table         | NULL        | NULL    | []       |
-| faiss_create_params     | table         | NULL        | NULL    | []       |
-| faiss_destroy           | table         | NULL        | NULL    | []       |
-| faiss_load              | table         | NULL        | NULL    | []       |
-| faiss_manual_train      | table         | NULL        | NULL    | []       |
-| faiss_save              | table         | NULL        | NULL    | []       |
-| faiss_search            | scalar        | NULL        | NULL    | []       |
-| faiss_search_filter     | scalar        | NULL        | NULL    | []       |
-| faiss_search_filter_set | scalar        | NULL        | NULL    | []       |
-| faiss_to_gpu            | table         | NULL        | NULL    | []       |
+| __faiss_create_mask     | table         | NULL        | NULL    |          |
+| faiss_add               | table         | NULL        | NULL    |          |
+| faiss_create            | table         | NULL        | NULL    |          |
+| faiss_create_params     | table         | NULL        | NULL    |          |
+| faiss_destroy           | table         | NULL        | NULL    |          |
+| faiss_load              | table         | NULL        | NULL    |          |
+| faiss_manual_train      | table         | NULL        | NULL    |          |
+| faiss_save              | table         | NULL        | NULL    |          |
+| faiss_search            | scalar        | NULL        | NULL    |          |
+| faiss_search_filter     | scalar        | NULL        | NULL    |          |
+| faiss_search_filter_set | scalar        | NULL        | NULL    |          |
+| faiss_to_gpu            | table         | NULL        | NULL    |          |
 
 
