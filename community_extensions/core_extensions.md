@@ -17,4 +17,4 @@ INSTALL json;
 LOAD json
 ```
 
-For an extensive list and documentation of all core DuckDB extensions check out the [main DuckDB docs](https://duckdb.org/docs/extensions/core_extensions.html).
+For an extensive list and documentation of all core DuckDB extensions check out the [main DuckDB docs](https://duckdb.org/docs/stable/core_extensions/overview).
