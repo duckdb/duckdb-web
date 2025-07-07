@@ -417,6 +417,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Deploying DuckDB-Wasm",
+                  "url": "deploying_duckdb_wasm"
+                },
+                {
                   "page": "Instantiation",
                   "url": "instantiation"
                 },
