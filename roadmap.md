@@ -15,7 +15,7 @@ The Foundation and [DuckDB Labs](https://duckdblabs.com) are not funded by exter
 Instead, the Foundation is funded by contributions from its [members]({% link foundation/index.html %}#supporters),
 while DuckDB Labs' revenue is based on [commercial support and feature prioritization services](https://duckdblabs.com/#support).
 
-## Planned Features (Last Updated: May 2025)
+## Planned Features (Last Updated: June 2025)
 
 This section lists the features that the DuckDB team plans to work on **in the coming year**.
 
@@ -25,7 +25,7 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * **Data lake formats**
     * Improved support for the Iceberg format through the [iceberg extension]({% link docs/stable/core_extensions/iceberg/overview.md %})
     * Improved support for Delta Lake through the [delta extension]({% link docs/stable/core_extensions/delta.md %})
-    * (Update 2025-05-27:) We released [DuckLake](https://ducklake.select/), a lakehouse format. We would like to emphasize that we are still committed to develop both DuckDB's Iceberg and Delta Lake extensions, including adding write support for these formats.
+    * Note that we released [DuckLake](https://ducklake.select/), a lakehouse format, in May 2025. We would like to emphasize that we are still committed to develop both DuckDB's Iceberg and Delta Lake extensions, including adding write support for these formats. Upcoming releases of DuckDB will be therefore capable of converting data lakes between these formats, i.e., importing to DuckLake and exporting from DuckLake to another data lake format.
 * [`MATCH RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
 * Remote file content caching using buffer manager (e.g., when querying Parquet files on S3)
 * [Database file encryption](https://github.com/duckdb/duckdb/discussions/4512)
@@ -44,12 +44,12 @@ If you would like to expedite the development of these features, please [get in 
 * Time series optimizations
 * Partition-aware optimizations
 * Sorting-aware optimizations
-* Better Filter Cardinality Estimation using automatically maintained table samples
+* Better filter cardinality estimation using automatically maintained table samples
 * [Parallel Python UDFs](https://github.com/duckdb/duckdb/issues/14817)
 * [`ALTER TABLE` support for adding foreign keys](https://github.com/duckdb/duckdb/discussions/4204)
 * Improvements of query profiling (especially for concurrently running queries)
 * [XML read support](https://github.com/duckdb/duckdb/discussions/9547)
 * [Materialized views](https://github.com/duckdb/duckdb/discussions/3638)
-* [`MERGE` statement](https://github.com/duckdb/duckdb/discussions/13396)
 * [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
 * [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104)
+* [`MERGE` statement](https://github.com/duckdb/duckdb/discussions/4601) - (Update 2025-07-04) `MERGE` is supported now in the preview release.

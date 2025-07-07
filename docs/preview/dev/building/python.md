@@ -216,13 +216,12 @@ Under **Settings** -> **Build, Execution, Deployment** -> **CMake**, add a profi
 * **Build type**: Debug
 * **Generator**:  Ninja
 * **CMake Options** (on a single line):
-
-    ```console
-    -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
-    -DPython3_EXECUTABLE=$CMakeProjectDir$/.venv/bin/python3
-    -DBUILD_PYTHON=1
-    -DPYTHON_DEV=1
-    ```
+  ```console
+  -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
+  -DPython3_EXECUTABLE=$CMakeProjectDir$/.venv/bin/python3
+  -DBUILD_PYTHON=1
+  -DPYTHON_DEV=1
+  ```
 
 #### Create a Run Config for Debugging
 
@@ -256,7 +255,7 @@ python3 -m pytest tests/stubs
 
 If you add new methods to the DuckDB Python API, you'll need to manually add corresponding type hints to the stub files.
 
-### What are py::objects and a py::handles?
+### What are py::objects and py::handles?
 
 These are classes provided by pybind11, the library we use to manage our interaction with the Python environment.
 `py::handle` is a direct wrapper around a raw PyObject* and does not manage any references.

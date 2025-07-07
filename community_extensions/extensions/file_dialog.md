@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: file_dialog
   description: Choose a file via native file dialog
-  version: 0.0.2
+  version: 0.0.3
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: yutannihilation/duckdb-ext-file-dialog
-  ref: 6b44c5f21cdb1b22625f6d332837dc8cb0020cc3
+  ref: 51df4969343b3a01925b08e1f68cb733dda97cdc
 
 docs:
   hello_world: |
@@ -31,10 +31,10 @@ docs:
   extended_description: |
     This extension is a tiny utility to choose a file interactively.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 341
-extension_download_count_pretty: 341
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_file_dialog.png'
 layout: community_extension_doc
 ---
@@ -60,8 +60,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| choose_file   | scalar        | NULL        | NULL    | []       |
+| function_name | function_type |             description              | comment |            examples             |
+|---------------|---------------|--------------------------------------|---------|---------------------------------|
+| choose_file   | scalar        | Choose a file via native file dialog | NULL    | [FROM read_csv(choose_file());] |
 
 

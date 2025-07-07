@@ -18,7 +18,7 @@ In this blog post, we cover the most important features of the new release. Duck
 
 ### Old Linux glibc Deprecation
 
-Now that all mainstream Linux distributions use [glibc 2.28](https://lists.gnu.org/archive/html/info-gnu/2018-08/msg00000.html) or newer, DuckDB's official Linux binaries require at least glibc 2.28 or newer. The release is [built using the `manylinux_2_28` image from Python](https://github.com/duckdb/duckdb/pull/16956), which combines an older glibc with a newer compiler.
+Now that all mainstream Linux distributions use [glibc 2.28](https://lists.gnu.org/archive/html/info-gnu/2018-08/msg00000.html) or newer, DuckDB's official Linux binaries require at least glibc 2.28 or newer. The release is [built using the `manylinux_2_28` image from Python](https://github.com/duckdb/duckdb/pull/16956), which combines an older glibc with a newer compiler. This change also implies that extensions are no longer distributed for the `linux_amd64_gcc4` platform.
 
 We highly value [portability]({% link why_duckdb.md %}#portable), so it is of course still possible to [build DuckDB from source]({% link docs/stable/dev/building/overview.md %}) for older versions of glibc.
 
