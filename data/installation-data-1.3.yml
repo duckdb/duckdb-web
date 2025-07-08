@@ -250,12 +250,13 @@
   download_method: Package manager
   architecture: universal
   installation_code: >-
-  ...
-    <dependency>
-        <groupId>org.duckdb</groupId>
-        <artifactId>duckdb_jdbc</artifactId>
-        <version>1.4.0-SNAPSHOT</version>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.duckdb</groupId>
+            <artifactId>duckdb_jdbc</artifactId>
+            <version>1.4.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <repositories>
         <repository>
             <id>oss-sonatype</id>
