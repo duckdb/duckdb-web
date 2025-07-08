@@ -61,6 +61,11 @@
 }
 
 @font-face {
+  font-family: "JetBrainsMono-Medium";
+  src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Medium.woff2") format("woff2"), url("webfont/JetBrainsMono/woff/JetBrainsMono-Medium.woff") format("woff");
+}
+
+@font-face {
   font-family: "JetBrainsMono-Bold";
   src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Bold.woff2") format("woff2"), url("webfont/JetBrainsMono/woff/JetBrainsMonoNL-Bold.woff") format("woff");
 }
@@ -73,6 +78,11 @@
 @font-face {
   font-family: "JetBrainsMono-Italic";
   src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Italic.woff2") format("woff2"), url("webfont/JetBrainsMono/woff/JetBrainsMonoNL-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "JetBrainsMono-Medium-Italic";
+  src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-MediumItalic.woff2") format("woff2"), url("webfont/JetBrainsMono/woff/JetBrainsMono-Medium-Italic.woff") format("woff");
 }
 
 @font-face {

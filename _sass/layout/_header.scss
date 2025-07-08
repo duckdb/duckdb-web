@@ -226,10 +226,12 @@ header .headerline {
 				}
 				
 				svg path {
+					transition: fill .2s;
 					fill: var(--main-text-secondary-color, #666);
 				}
 				
 				svg *[stroke] {
+					transition: stroke .2s;
 					stroke: var(--main-text-secondary-color, #666);
 				}
 
