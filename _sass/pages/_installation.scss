@@ -26,6 +26,9 @@ body.installation{
 			opacity: 0.4;
 			pointer-events: none;
 		}
+		.select ul{
+			padding-left: 0!important;
+		}
 	}
 	main .select{
 		display: -webkit-box;
