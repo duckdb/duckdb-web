@@ -5,7 +5,7 @@ author: "Laurens Kuiper"
 thumb: "/images/blog/thumbs/parquet-encodings.svg"
 image: "/images/blog/thumbs/parquet-encodings.png"
 excerpt: "Mainstream query engines do not support reading newer Parquet encodings, forcing systems like DuckDB to default to writing older encodings, thereby sacrificing compression."
-tags: ["parquet"]
+tags: ["using DuckDB"]
 ---
 
 ## The Apache® Parquet™ Format

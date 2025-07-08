@@ -5,7 +5,7 @@ author: "The DuckDB team"
 thumb: "/images/blog/thumbs/gems-of-duckdb-1-2.svg"
 image: "/images/blog/thumbs/gems-of-duckdb-1-2.png"
 excerpt: "We highlight a few exciting features that were introduced in DuckDB 1.2."
-tags: ["releases"]
+tags: ["release"]
 ---
 
 We published the DuckDB 1.2.1 bugfix release yesterday. As usual, please consult the [release notes](https://github.com/duckdb/duckdb/releases/tag/v1.2.1) for the full list of changes and the [installation page]({% link  docs/installation/index.html %}) for instructions on installing or upgrading. In this post, we'll highlight a few features that were recently added to DuckDB and improvements that have been made in its ecosystem.
