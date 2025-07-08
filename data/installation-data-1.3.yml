@@ -15,8 +15,8 @@
   platform: Windows
   download_method: Direct download
   architecture: x86_64
-  sha_256: a9f51426860649158c3d89a04fa7c741343c545237ced49c60cf67e065e9c828
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/duckdb_cli-windows-amd64.zip
+  sha_256: 0f20f96cc83540817e9e42f88d1f62e5452a9a2b4fcdef7f97cfc94a971d313f
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/duckdb_cli-windows-amd64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
     For example, the Python library can use a different version than the CLI
@@ -28,8 +28,8 @@
   platform: Windows
   download_method: Direct download
   architecture: arm64
-  sha_256: 38a73d00a8dc3da7c422794fedc56667cd7eeddda562b57bcbb01b827ab23e4b
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/duckdb_cli-windows-arm64.zip
+  sha_256: c8093ef9bdfa27d06b3f4f3d9a858044b7eac07e6a799012f5f722dc07242eb8
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/duckdb_cli-windows-arm64.zip
   note: >-
     Each DuckDB client is installed without relying on any other DuckDB clients.
     For example, the Python library can use a different version than the CLI
@@ -52,8 +52,8 @@
   platform: macOS
   download_method: Direct download
   architecture: universal
-  sha_256: 75305d5b818811f40bb9016f423f9dab74928996a63bf88d6341cd7adf43c7c9
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/duckdb_cli-osx-universal.zip
+  sha_256: 660ed83745a7024fe7c92d4de6c28665cc79bfb6e22101e5761830cc4ec050ef
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/duckdb_cli-osx-universal.zip
   installation_code: >-
     curl https://install.duckdb.org | sh
 - variant: stable
@@ -61,8 +61,8 @@
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  sha_256: a43e0156c9799496089dd265605113471df5a30a7db26e1c662484eb1d31fc08
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/duckdb_cli-linux-amd64.zip
+  sha_256: 682ff48f988cb6f054fe42e755b7037ade3441e7a406cce3180b05ac0287279d
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/duckdb_cli-linux-amd64.zip
   installation_code: >-
     curl https://install.duckdb.org | sh
 - variant: stable
@@ -70,8 +70,8 @@
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  sha_256: 93ddf7bc61d148273b821abbca911053dec3ba5e004d5fa981b4732b7e608905
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/duckdb_cli-linux-arm64.zip
+  sha_256: f322807f0f5d146d2bb1eea253f894d0a015561695408fa22981f085eb2b77ad
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/duckdb_cli-linux-arm64.zip
   installation_code: >-
     curl https://install.duckdb.org | sh
 - variant: stable
@@ -131,36 +131,36 @@
   platform: Windows
   download_method: Direct download
   architecture: x86_64
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/libduckdb-windows-amd64.zip
-  sha_256: 5152f6426fafdd6ab695d38bc0a7a6273055e9e7e520b0880e1169470507d579
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/libduckdb-windows-amd64.zip
+  sha_256: b156e9d6f977291ceb0e07f7a339589865bfabae02dae7357cf10465cbb85ce7
 - variant: stable
   environment: C/C++
   platform: Windows
   download_method: Direct download
   architecture: arm64
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/libduckdb-windows-arm64.zip
-  sha_256: 38a73d00a8dc3da7c422794fedc56667cd7eeddda562b57bcbb01b827ab23e4b
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/libduckdb-windows-arm64.zip
+  sha_256: 4f61418ee9de3afd93828469c3d999ac1f0fecd89ac9b65acca01ed0daafa307
 - variant: stable
   environment: C/C++
   platform: macOS
   download_method: Direct download
   architecture: universal
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/libduckdb-osx-universal.zip
-  sha_256: a0bf095ef1bdf4713b7f10a054032057f302682ffbad8002e20f92b10cd8878b
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/libduckdb-osx-universal.zip
+  sha_256: 6e4a9bfd4f15c83f43b9585b4f62c6f9851de3410cd28275de37d6d74b138415
 - variant: stable
   environment: C/C++
   platform: Linux
   download_method: Direct download
   architecture: x86_64
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/libduckdb-linux-amd64.zip
-  sha_256: ac905cb0651c8601c34d0d7f635456a60764b3ff468f6c3ff2565fff9202ef3b
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/libduckdb-linux-amd64.zip
+  sha_256: 748f7c3722f8a4a15e7666e24b917615776879a2e9d92e079d0191a7832e93c1
 - variant: stable
   environment: C/C++
   platform: Linux
   download_method: Direct download
   architecture: arm64
-  link: https://github.com/duckdb/duckdb/releases/download/v1.3.1/libduckdb-linux-arm64.zip
-  sha_256: dec1b4057afa902e07b699f89fa3757c859b94127b8f8f226715ce3ea0fc62ef
+  link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/libduckdb-linux-arm64.zip
+  sha_256: 3fc6e2c310eef6244d3a9d9ccbbc7c1b80e34cb7115ac67739fe1b9744246b68
 - variant: stable
   environment: ODBC
   platform: Windows
