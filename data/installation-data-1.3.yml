@@ -250,6 +250,7 @@
   download_method: Package manager
   architecture: universal
   installation_code: >-
+  ...
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
