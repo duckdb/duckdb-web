@@ -5,10 +5,6 @@
   architecture: universal
   installation_code: winget install DuckDB.cli
   note: >-
-    Each DuckDB client is installed without relying on any other DuckDB clients.
-    For example, the Python library can use a different version than the CLI
-    client. Therefore, they need to be installed and updated separately.
-
     Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 - variant: stable
   environment: Command line
@@ -18,10 +14,6 @@
   sha_256: 0f20f96cc83540817e9e42f88d1f62e5452a9a2b4fcdef7f97cfc94a971d313f
   link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/duckdb_cli-windows-amd64.zip
   note: >-
-    Each DuckDB client is installed without relying on any other DuckDB clients.
-    For example, the Python library can use a different version than the CLI
-    client. Therefore, they need to be installed and updated separately.
-
     Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 - variant: stable
   environment: Command line
@@ -31,10 +23,6 @@
   sha_256: c8093ef9bdfa27d06b3f4f3d9a858044b7eac07e6a799012f5f722dc07242eb8
   link: https://github.com/duckdb/duckdb/releases/download/v1.3.2/duckdb_cli-windows-arm64.zip
   note: >-
-    Each DuckDB client is installed without relying on any other DuckDB clients.
-    For example, the Python library can use a different version than the CLI
-    client. Therefore, they need to be installed and updated separately.
-
     Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 - variant: stable
   environment: Command line
@@ -42,11 +30,6 @@
   download_method: Package manager
   architecture: universal
   installation_code: brew install duckdb
-  note: >-
-    Each DuckDB client is installed without relying on any other DuckDB clients.
-    For example, the Python library can use a different version than the CLI
-    client.
-    Therefore, they need to be installed and updated separately.
 - variant: stable
   environment: Command line
   platform: macOS
@@ -191,11 +174,6 @@
   download_method: Direct download
   architecture: universal
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip'
-  note: >-
-    Each DuckDB client is installed without relying on any other DuckDB clients.
-    For example, the Python library can use a different version than the CLI
-    client.
-    Therefore, they need to be installed and updated separately.
 - variant: nightly
   environment: Command line
   platform: macOS
