@@ -289,7 +289,7 @@ Conversion Error:
 Could not convert string 'asdf' to INT32
 ```
 
-Currently, this is expect behavior.
+Currently, this is expected behavior.
 As a workaround, you can create a copy of the table:
 
 ```sql
