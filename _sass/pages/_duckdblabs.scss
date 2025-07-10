@@ -244,10 +244,10 @@ body.landing{
 		height: auto;
 		position: absolute;
 		left: 0px;
-		top: 290px;
+		top: clamp(100px, calc(290px - (100vw - 1440px) * 0.1226), 300px);
 		pointer-events: none;
 		width: 50%;
-		aspect-ratio: 191 / 770;
+		aspect-ratio: 191 / 54;
 	}
 	
 	.landing_bg_2{
@@ -265,10 +265,10 @@ body.landing{
 		height: auto;
 		position: absolute;
 		left: 0px;
-		top: -100px;
+		top: clamp(-200px, calc(-100px - (100vw - 1440px) * 0.0849), -100px);
 		width: 63%;
 		pointer-events: none;
-		aspect-ratio: 400 / 908;
+		aspect-ratio: 400 / 180;
 	}
 	
 }

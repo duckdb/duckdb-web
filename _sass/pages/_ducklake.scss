@@ -53,9 +53,6 @@ svg path{
 	background: var(--lake-ribbon-background-color, #99D8FF);
 	color: var(--main-text-primary-color, #F2F2F2);
 	z-index: 800;
-	.close{
-		filter: invert(1);
-	}
 	a{
 		text-decoration: none;
 	}
@@ -253,8 +250,8 @@ body.landing{
 	
 }
 
-section.podcast{
-	
+.newswrap .postwrap .infoline .icon{
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='58' fill='none' viewBox='0 0 58 58'%3E%3Cpath fill='%230D0D0D' d='M29.04.257C13.193.257.297 13.152.297 29c0 15.848 12.896 28.743 28.743 28.743 15.848 0 28.743-12.895 28.743-28.743C57.783 13.152 44.888.257 29.04.257Z'/%3E%3Cpath fill='%232EAFFF' fill-rule='evenodd' d='M26.603 15.4c5.226 0 9.773 2.804 12.244 6.989h2.583v.015c3.565 0 6.572 2.867 6.58 6.506h.015c0 3.615-2.965 6.58-6.58 6.58h-1.912c-2.165 4.738-6.848 8.084-12.34 8.308l-.59.012-.731-.019c-7.51-.38-13.473-6.58-13.474-14.185v-.017c0-7.85 6.354-14.204 14.205-14.204v.014Zm0 4.312c-5.446 0-9.877 4.417-9.877 9.877v.017c0 5.445 4.416 9.877 9.877 9.877a9.876 9.876 0 0 0 9.395-6.822l.484-1.498h4.962c1.206 0 2.245-1.02 2.253-2.238h-.014c0-1.195-.998-2.209-2.253-2.209h-5.28l-.575-1.256a9.853 9.853 0 0 0-8.972-5.748Z' clip-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 @keyframes spin {
@@ -318,77 +315,37 @@ section.architecture {
 
 			.browser-wrap {
 				width: 100%;
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 10px;
-				margin-top: 40px;
-
+				margin-top: 60px;
+				position: relative;
+				
 				.browser {
 					width: 285px;
 					transition: all 0.5s;
 				}
-
-				&.contains-multi {
-					padding-right: 15px;
-					.browser {
-						width: calc(100% - 2px);
-						left: 0;
-
-						.broser-content {
-							top: 40px;
-						}
-
-						.ducklake,
-						.icons {
-							width: 50px;
-							height: 50px;
-
-							.sub {
-								margin-top: 55px;
-								font-size: 10px;
-							}
-						}
-					}
-
-					.browser.multi {
-						opacity: 1;
-						pointer-events: auto;
-						transform: translateY(0);
-					}
-				}
+				
 			}
 
 			.browser.multi {
 				opacity: 0;
 				pointer-events: none;
-				transform: translateY(20px);
+				position: absolute;
+				top: 0;
+				left: 50px;
+				z-index: 10;
+				transform: translate(0,0);
 			}
 
 			.browser {
 				position: relative;
 				left: 50px;
 				transition: all 0.4s;
-
+				z-index: 20;
+				
 				>img {
 					width: 100%;
 					height: auto;
 					z-index: 50;
 					position: relative;
-				}
-
-				>img.multi {
-					position: absolute;
-					left: 0;
-					top: 0;
-					opacity: 0;
-					visibility: hidden;
-					transform: translate(0, 0);
-					transition: transform 0.5s ease-out, opacity 0.3s ease-in-out;
-
-					&.visible {
-						opacity: 1;
-						visibility: visible;
-					}
 				}
 
 				.broser-content {
@@ -403,21 +360,17 @@ section.architecture {
 					transition: all 0.3s;
 				}
 
-				.ducklake,
-				.icons {
+				.ducklake{
 					display: flex;
 					flex-direction: column;
 					align-items: center;
 					position: relative;
-					height: 70px;
-					width: 70px;
+					
 					transition: all 0.4s;
 
 					img {
-						height: 100%;
-						width: auto;
-						position: absolute;
-						transition: all 0.3s;
+						height: 70px;
+						width: 70px;
 
 						&.active-icon {
 							opacity: 1;
@@ -426,10 +379,21 @@ section.architecture {
 					}
 
 					.sub {
-						margin-top: 80px;
+						margin-top: 5px;
 						text-align: center;
 						transition: all 0.4s;
 					}
+				}
+			}
+			
+			.browser-wrap.contains-multi{
+				.browser.multi{
+					opacity: 1;
+					transform: translate(10px, 10px);
+				}
+				.browser:not(.multi){
+					transform: translate(-10px, -10px);
+					filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.05));
 				}
 			}
 		}
@@ -493,8 +457,12 @@ section.architecture {
 			text-align: center;
 
 			img {
-				width: 75px;
+				width: 80px;
 			}
+		}
+		
+		.storage .folder .sub{
+			margin-top: 6px;
 		}
 
 		.database .catalog {
@@ -610,6 +578,11 @@ footer .sitefooter .footercontent > div a:hover{
 	section.architecture .illustration{
 		width: 700px;
 	}
+	
+	section.architecture .diagram .client .browser.multi,
+	section.architecture .diagram .client .browser{
+		left: 30px;
+	}
 
 }
 
@@ -684,58 +657,32 @@ footer .sitefooter .footercontent > div a:hover{
 				height: 320px;
 
 				.browser-wrap {
-					margin-top: 6%;
+					margin-top: 0;
 					display: block;
-
-					&.contains-multi {
-						display: grid;
-						padding-right: 0;
+					width: 345px;
+					left: 50%;
+					top: 50%;
+					transform: translate(-50%, calc(-50% - 25px));
+					.browser {
+					
+						&.multi{
+							opacity: 1;
+						}
+					
+						.broser-content {
+							top: 58%;
+							transform: translateY(-50%);
+							gap: 10px;
+						}
 						
-						.browser {
-
-							&.multi:nth-child(2),
-							&.multi:nth-child(3) {
-								display: none;
-							}
-
-							.broser-content {
-								top: 50%;
-								transform: translateY(-50%);
-								gap: 10px;
-							}
-
-							.ducklake,
-							.icons {
-								width: 45px;
-								height: 45px;
-
-								.sub {
-									margin-top: 48px;
-								}
-							}
-						}
-					}
-
-					&:not(.contains-multi) {
-						.browser {
-							width: 50%;
-							min-width: 180px;
-							left: 48%;
-							transform: translateX(-50%);
-						}
 					}
 				}
 
 				.browser {
 
-					.ducklake,
-					.icons {
-						width: 50px;
-						height: 50px;
-
-						.sub {
-							margin-top: 55px;
-						}
+					.ducklake img{
+						width: 60px;
+						height: 60px;
 					}
 
 					.broser-content {
@@ -761,7 +708,6 @@ footer .sitefooter .footercontent > div a:hover{
 				.catalog {
 					.icons {
 				
-
 						img {
 							width: 45px;
 							height: 45px;
@@ -795,7 +741,7 @@ footer .sitefooter .footercontent > div a:hover{
 @media only screen and (max-width: 590px) {
 	section.architecture .diagram .client {
 		height: unset;
-		aspect-ratio: 16 / 10;
+		aspect-ratio: 16 / 12;
 	}
 }
 
@@ -809,12 +755,23 @@ footer .sitefooter .footercontent > div a:hover{
 			.storage .folder img {
 				width: 75px;
 			}
+			.client .browser-wrap{
+				width: 280px;
+				left: 50%;
+			}
+			.client .browser-wrap .browser{
+				width: 220px;
+			}
+			.client .browser .ducklake img{
+				width: 50px;
+				height: 50px;
+			}
 		}
 	}
 }
 
 
-
+section.architecture .diagram 
 
 // General Code-Highlight Styles (Todo: Remove from docu.scss 767 to 816)
 .highlight {
@@ -916,20 +873,23 @@ html.darkmode {
 	section.architecture {
 		.diagram {
 			.connector svg path {
-				fill: #f2f2f2;
+				fill: #B2B2B2;
 			}
 			.database .catalog .icons img.duckdb,
 			.client .browser .icons img.duckdb_icon{
 				content: url('/images/deployment_diagram/dark/cat_icon-duckdb.svg');
 			}
 			.client .browser .ducklake img.ducklake_icon{
-				content: url('/images/deployment_diagram/dark/ducklake_comb_alt.svg');
+				content: url('/images/deployment_diagram/dark/ducklake_comb.svg');
 			}
 			.client .browser>img{
 				content: url('/images/deployment_diagram/dark/window.svg');
 			}
 			.database .catalog .icons img.postgre{
 				content: url('/images/deployment_diagram/dark/cat_icon-postgre.svg');
+			}
+			.storage .folder img{
+				content: url('/images/deployment_diagram/dark/parquet_folder.svg');
 			}
 			.database .catalog .icons img.sqlite{
 				content: url('/images/deployment_diagram/dark/cat_icon-sqlite.svg');
