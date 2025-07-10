@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "PyData Lithuania Special"
+title: "PyData Lithuania special"
 author: Gábor Szárnyas
 excerpt: ""
 toc: false
