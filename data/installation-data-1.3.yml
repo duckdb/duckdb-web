@@ -64,7 +64,7 @@
   architecture: universal
   installation_code: pip install duckdb --upgrade
   note: >-
-    The DuckDB Python package requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+    Note that on Windows 10, the DuckDB Python client requires the latest Microsoft Visual C++ Redistributable. Please make sure to install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">MSVC Redistributable</a> on this platform.
 - variant: stable
   environment: R
   platform: all
