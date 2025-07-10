@@ -2,8 +2,13 @@ function GenerateUse(options = {}) {
     return Diagram([
         AutomaticStack([
             Keyword("USE"),
-            Expression("database-name"),
-            Optional(Sequence([Keyword("."), Expression("schema-name")]), "skip")
+            Choice(0, [
+                Sequence([
+                    Expression("database-name"),
+                    Optional(Sequence([Keyword("."), Expression("schema-name")]), "skip")
+                ]),
+                Expression("schema-name")
+            ])
         ])
     ])
 }
