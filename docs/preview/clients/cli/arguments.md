@@ -42,7 +42,7 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-no-stdin`       | Exit after processing options instead of reading stdin                                                        |
 | `-nullvalue TEXT` | Set text string for `NULL` values. Default: `NULL`                                                            |
 | `-quote`          | Set [output mode]({% link docs/preview/clients/cli/output_formats.md %}) to `quote`                            |
-| `-readonly`       | Open the database read-only                                                                                   |
+| `-readonly`       | Open the database read-only. This option also supports attaching to remote databases via HTTPS                                                                                   |
 | `-s COMMAND`      | Run `COMMAND` and exit                                                                                        |
 | `-separator SEP`  | Set output column separator to `SEP`. Default: `|`                                                            |
 | `-table`          | Set [output mode]({% link docs/preview/clients/cli/output_formats.md %}) to `table`                            |
