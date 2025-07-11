@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: flockmtl
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.2.5
+  version: 0.3.0
   language: SQL & C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: dais-polymtl/flockmtl
-  ref: da740bb111250aabfab028aa2d2158907e7ea394
+  ref: 303249fb63aac23cda35a2f4d590796a12b75ca4
 
 docs:
   hello_world: |
@@ -46,7 +46,7 @@ docs:
     D CREATE PROMPT('summarize', 'summarize the text into 1 word: {{text}}');
 
     -- Create a variable name for the model to do the summarizing
-    D CREATE MODEL('summarizer-model', 'gpt-4o', {'context_window': 128000, 'max_output_tokens': 16400});
+    D CREATE MODEL('summarizer-model', 'gpt-4o', 'openai');
 
     -- Summarize text and pass it as parameter 
     D SELECT llm_complete({'model_name': 'summarizer-model'}, {'prompt_name': 'summarize'}, {'text': 'We support more functions and approaches to combine relational analytics and semantic analysis. Check our repo for documentation and examples.'});
@@ -94,11 +94,9 @@ LOAD {{ page.extension.name }};
 |   function_name   | function_type |                              description                               |                      comment                      |                                                         examples                                                          |
 |-------------------|---------------|------------------------------------------------------------------------|---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
 | llm_complete      | scalar        | Generates text completions using a specified language model            | Requires a defined prompt and model               | [SELECT llm_complete({'model_name': 'default'}, {'prompt_name': 'hello-world'});]                                         |
-| llm_complete_json | scalar        | Produces JSON-formatted text completions                               | Useful for structured outputs                     | [SELECT llm_complete_json({'model_name': 'default'}, {'prompt_name': 'hello-world'});]                                    |
 | llm_filter        | scalar        | Filters data based on language model evaluations                       |  returning boolean values                         | [SELECT * FROM data WHERE llm_filter({'model_name': 'default'}, {'prompt_name': 'is_relevant'}, {'text': content});]      |
 | llm_embedding     | scalar        | Generates embeddings for input text                                    | Useful for semantic similarity tasks              | [SELECT llm_embedding({'model_name': 'default'}, {'text': 'Sample text'});]                                               |
 | llm_reduce        | aggregate     | Aggregates multiple inputs into a single output using a language model | Summarizes or combines multiple rows              | [SELECT llm_reduce({'model_name': 'default'}, {'prompt_name': 'summarize'}, {'text': content}) FROM documents;]           |
-| llm_reduce_json   | aggregate     | Similar to llm_reduce but outputs JSON-formatted results               | Useful for structured summaries                   | [SELECT llm_reduce_json({'model_name': 'default'}, {'prompt_name': 'summarize'}, {'text': content}) FROM documents;]      |
 | llm_rerank        | aggregate     | Reorders query results based on relevance scores from a language model | Enhances result relevance in search applications  | [SELECT llm_rerank({'model_name': 'default'}, {'prompt_name': 'rank_relevance'}, {'text': content}) FROM search_results;] |
 | llm_first         | aggregate     | Selects the top-ranked result after reranking                          | Retrieves the most relevant item                  | [SELECT llm_first({'model_name': 'default'}, {'prompt_name': 'rank_relevance'}, {'text': content}) FROM search_results;]  |
 | llm_last          | aggregate     | Selects the bottom-ranked result after reranking                       | Retrieves the least relevant item                 | [SELECT llm_last({'model_name': 'default'}, {'prompt_name': 'rank_relevance'}, {'text': content}) FROM search_results;]   |
@@ -107,5 +105,7 @@ LOAD {{ page.extension.name }};
 | fusion_combmnz    | scalar        | Sums normalized scores and multiplies by the hit count                 | Enhances the impact of frequently occurring items | [SELECT fusion_combmnz(score1, score2) FROM combined_scores;]                                                             |
 | fusion_combmed    | scalar        | Computes the median of normalized scores                               | Reduces the effect of outliers in combined scores | [SELECT fusion_combmed(score1, score2) FROM combined_scores;]                                                             |
 | fusion_combanz    | scalar        | Calculates the average of normalized scores                            | Provides a balanced aggregation of scores         | [SELECT fusion_combanz(score1, score2) FROM combined_scores;]                                                             |
+| llm_reduce_json   | aggregate     | NULL                                                                   | NULL                                              | NULL                                                                                                                      |
+| llm_complete_json | scalar        | NULL                                                                   | NULL                                              | NULL                                                                                                                      |
 
 
