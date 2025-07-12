@@ -121,8 +121,6 @@ In the following, we disclose the limitations of the `avro` DuckDB extension alo
 
 * There is currently no support for projection or filter **pushdown**, but this is also planned at a later stage.
 
-* There is currently no support for ~~the Wasm or~~ the Windows-MinGW builds of DuckDB due to issues with the Avro library dependency (sigh again). We plan to fix this eventually.
-
 * As mentioned above, DuckDB cannot express recursive type definitions that Avro has. This is unlikely to ever change.
 
 * There is no support to allow users to provide a separate Avro schema file. This is unlikely to change, all Avro files we have seen so far had their schema embedded.
