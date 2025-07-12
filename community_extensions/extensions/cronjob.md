@@ -57,8 +57,8 @@ docs:
   extended_description: |
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 37
-extension_star_count_pretty: 37
+extension_star_count: 38
+extension_star_count_pretty: 38
 extension_download_count: 508
 extension_download_count_pretty: 508
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'

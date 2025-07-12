@@ -74,8 +74,8 @@ docs:
   
     > This extension is experimental and potentially unstable. Use at your own risk.
 
-extension_star_count: 212
-extension_star_count_pretty: 212
+extension_star_count: 213
+extension_star_count_pretty: 213
 extension_download_count: 873
 extension_download_count_pretty: 873
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
