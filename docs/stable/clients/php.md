@@ -30,7 +30,7 @@ Full documentation is available in [https://duckdb-php.readthedocs.io/](https://
 DuckDB::sql("SELECT 'quack' as my_column")->print();    
 ```
 
-```
+```text
 -------------------
 | my_column       |
 -------------------
@@ -66,6 +66,7 @@ After that, we can use the function `query` to perform the requests.
 In addition, the library also provides prepared statements for binding parameters to our query.
 
 #### Prepared Statements
+
 ```php
 $duckDB = DuckDB::create();
 
@@ -84,6 +85,7 @@ $result->print();
 ```
 
 #### Appenders
+
 Appenders are the preferred method to load data in DuckDB. See [DuckDB docs](https://duckdb.org/docs/stable/clients/c/appender.html)
 for more information.
 
@@ -120,7 +122,7 @@ DuckDB::sql(
 )->print();
 ```
 
-```
+```text
 --------------------------------------
 | Reporting Year   | AVG Gas Produce |
 --------------------------------------
@@ -139,7 +141,7 @@ Or summarize a remote csv:
 DuckDB::sql('SUMMARIZE TABLE "https://blobs.duckdb.org/data/Star_Trek-Season_1.csv";')->print();
 ```
 
-```
+```text
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | column_name      | column_type      | min              | max              | approx_unique    | avg              | std              | q25              | q50              | q75              | count            | null_percentage |
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -156,12 +158,14 @@ DuckDB::sql('SUMMARIZE TABLE "https://blobs.duckdb.org/data/Star_Trek-Season_1.c
 > Do you want more use cases? Check the [examples folder](examples).
 
 ### Requirements
+
 - Linux, macOS, or Windows
 - x64 platform
 - PHP >= 8.3
 - ext-ffi
 
 #### Recommended
+
 - ext-bcmath - Needed for big integers (> PHP_INT_MAX)
 - ext-zend-opcache - For better performance
 
