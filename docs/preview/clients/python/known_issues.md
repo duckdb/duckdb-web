@@ -44,7 +44,7 @@ Out[2]:
 
 Please also check out the [Jupyter guide]({% link docs/preview/guides/python/jupyter.md %}) for tips on using Jupyter with JupySQL.
 
-### Crashes and Errors on Windos
+### Crashes and Errors on Windows
 
 When importing DuckDB on Windows, the Python runtime may crash or return an error upon import or first use:
 
