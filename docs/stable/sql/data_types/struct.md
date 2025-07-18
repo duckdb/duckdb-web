@@ -246,7 +246,7 @@ Comparisons are done in lexicographical order where individual entries are compa
 Specifically:
 
 * If all values of `s1` and `s2` compare equal, then `s1` and `s2` compare equal.
-* else, if `s1.value[i] < s2.value[i] OR s2.value[i] is NULL` for the first index `i` where `s1.value[i] != s2.value[i]`, then `s1` is less than `s2`.
+* else, if `s1.value[i] < s2.value[i] OR s2.value[i] is NULL` for the first index `i` where `s1.value[i] != s2.value[i]`, then `s1` is less than `s2`, and vice versa.
 
 Structs of different types are implicitly cast to a joint super type, following the rules for `UNION BY NAME` described on the [typecasting page]({% link docs/stable/sql/data_types/typecasting.md %}#structs).
 
