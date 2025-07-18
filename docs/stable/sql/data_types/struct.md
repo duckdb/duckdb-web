@@ -241,7 +241,7 @@ The `STRUCT` type can be compared using all the [comparison operators]({% link d
 These comparisons can be used in [logical expressions]({% link docs/stable/sql/expressions/logical_operators.md %})
 such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs/stable/sql/data_types/boolean.md %}).
 
-Comparisons are done in lexicographical order where individual entries are compared as usual except that `NULL` values are treated as larger than any other value.
+Comparisons are done in lexicographical order, with individual entries being compared as usual except that `NULL` values are treated as larger than all other values.
 
 Specifically:
 
