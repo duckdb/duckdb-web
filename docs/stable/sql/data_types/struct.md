@@ -249,7 +249,7 @@ Specifically:
 * **Less Than**. For the first index `i` where `s1.value[i] != s2.value[i]`:
 If `s1.value[i] < s2.value[i] OR s2 is NULL`, then `s1` is less than `s2`.
 
-Structs of different types are implicitly cast to a joint super type, following the rules for `UNION BY NAME` described on the [typecasting page]({% link docs/sql/data_types/typecasting.md %}#structs).
+Structs of different types are implicitly cast to a joint super type, following the rules for `UNION BY NAME` described on the [typecasting page]({% link docs/stable/sql/data_types/typecasting.md %}#structs).
 
 The following queries return `true`:
 
