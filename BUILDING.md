@@ -140,7 +140,7 @@ bundle install
 If you are on Windows, run these two commands to ensure Jekyll works:
 
 ```bash
-gem uninstall eventmachine
+gem uninstall eventmachine --force
 gem install eventmachine --platform ruby
 ```
 
