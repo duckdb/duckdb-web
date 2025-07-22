@@ -4,23 +4,25 @@ layout: docu
 title: PHP Client
 ---
 
+> The DuckDB PHP client is a [tertiary client]({% link docs/preview/clients/overview.md %}) and is maintained by a third-party.
+
 Client API for PHP.
 
 Focused on performance, it uses the official C API internally through [FFI](https://www.php.net/manual/en/book.ffi.php), achieving good benchmarks.
 This library is more than just a wrapper for the C API; it introduces custom, PHP-friendly methods to simplify working with DuckDB. It is compatible with Linux, Windows, and macOS, requiring PHP version 8.3 or higher.
 
 
-### Install
+## Install
 
 ```bash
 composer require satur.io/duckdb
 ```
 
-### Documentation
+## Documentation
 
-Full documentation is available in [https://duckdb-php.readthedocs.io/](https://duckdb-php.readthedocs.io/).
+Full documentation is available at [https://duckdb-php.readthedocs.io/](https://duckdb-php.readthedocs.io/).
 
-### Quick Start
+## Quick Start
 
 ```php
 DuckDB::sql("SELECT 'quack' as my_column")->print();    
@@ -39,7 +41,7 @@ in-memory database which is destroyed after retrieving the result.
 
 This is not the most common use case, let's see how to get a persistent connection.
 
-#### Connection
+### Connection
 
 ```php
 $duckDB = DuckDB::create('duck.db'); // or DuckDB::create() for in-memory database
@@ -61,7 +63,7 @@ After that, we can use the function `query` to perform the requests.
 
 In addition, the library also provides prepared statements for binding parameters to our query.
 
-#### Prepared Statements
+### Prepared Statements
 
 ```php
 $duckDB = DuckDB::create();
@@ -80,9 +82,9 @@ $result = $intPreparedStatement->execute();
 $result->print();
 ```
 
-#### Appenders
+### Appenders
 
-Appenders are the preferred method to load data in DuckDB. See [DuckDB docs](https://duckdb.org/docs/stable/clients/c/appender.html)
+Appenders are the preferred method to load data in DuckDB. See [Appender page]({% link docs/preview/clients/c/appender.md %})
 for more information.
 
 ```php
@@ -100,8 +102,7 @@ for ($i = 0; $i < 100; ++$i) {
 $appender->flush();
 ```
 
-
-#### DuckDB powerful
+### DuckDB-Powerful
 
 DuckDB provides some amazing features. For example, 
 you can query remote files directly.
@@ -112,9 +113,9 @@ for a parquet remote file:
 ```php
 DuckDB::sql(
     'SELECT "Reporting Year", avg("Gas Produced, MCF") as "AVG Gas Produced" 
-                FROM "https://github.com/plotly/datasets/raw/refs/heads/master/oil-and-gas.parquet" 
-                WHERE "Reporting Year" BETWEEN 1985 AND 1990
-                GROUP BY "Reporting Year";'
+    FROM "https://github.com/plotly/datasets/raw/refs/heads/master/oil-and-gas.parquet" 
+    WHERE "Reporting Year" BETWEEN 1985 AND 1990
+    GROUP BY "Reporting Year";'
 )->print();
 ```
 
@@ -145,29 +146,26 @@ DuckDB::sql('SUMMARIZE TABLE "https://blobs.duckdb.org/data/Star_Trek-Season_1.c
 | episode_num      | BIGINT           | 0                | 29               | 29               | 14.5             | 8.8034084308295  | 7                | 14               | 22               | 30               | 0               |
 | aired_date       | DATE             | 1965-02-28       | 1967-04-13       | 35               |                  |                  | 1966-10-20       | 1966-12-22       | 1967-02-16       | 30               | 0               |
 | cnt_kirk_hookup  | BIGINT           | 0                | 2                | 3                | 0.3333333333333  | 0.6064784348631  | 0                | 0                | 1                | 30               | 0               |
-
 ...
-
 ```
 
-
-> Do you want more use cases? Check the [examples folder](examples).
-
-### Requirements
+## Requirements
 
 - Linux, macOS, or Windows
 - x64 platform
 - PHP >= 8.3
 - ext-ffi
 
-#### Recommended
+### Recommended
 
 - ext-bcmath - Needed for big integers (> PHP_INT_MAX)
 - ext-zend-opcache - For better performance
 
-### Type Support
+## Type Support
 
 From version 1.2.0 on the library supports all DuckDB file types.
+
+<div class="monospace_table"></div>
 
 | DuckDB Type              | SQL Type     | PHP Type                             |
 |--------------------------|--------------|--------------------------------------|
