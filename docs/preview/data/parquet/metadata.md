@@ -16,37 +16,37 @@ Below is a table of the columns returned by `parquet_metadata`.
 
 <div class="monospace_table"></div>
 
-| Field                          | Type              |
-|--------------------------------|-------------------|
-| file_name                      | VARCHAR           |
-| row_group_id                   | BIGINT            |
-| row_group_num_rows             | BIGINT            |
-| row_group_num_columns          | BIGINT            |
-| row_group_bytes                | BIGINT            |
-| column_id                      | BIGINT            |
-| file_offset                    | BIGINT            |
-| num_values                     | BIGINT            |
-| path_in_schema                 | VARCHAR           |
-| type                           | VARCHAR           |
-| stats_min                      | VARCHAR           |
-| stats_max                      | VARCHAR           |
-| stats_null_count               | BIGINT            |
-| stats_distinct_count           | BIGINT            |
-| stats_min_value                | VARCHAR           |
-| stats_max_value                | VARCHAR           |
-| compression                    | VARCHAR           |
-| encodings                      | VARCHAR           |
-| index_page_offset              | BIGINT            |
-| dictionary_page_offset         | BIGINT            |
-| data_page_offset               | BIGINT            |
-| total_compressed_size          | BIGINT            |
-| total_uncompressed_size        | BIGINT            |
-| key_value_metadata             | MAP(BLOB, BLOB)   |
-| bloom_filter_offset            | BIGINT            |
-| bloom_filter_length            | BIGINT            |
-| min_is_exact                   | BOOLEAN           |
-| max_is_exact                   | BOOLEAN           |
-| row_group_compressed_bytes     | BIGINT            |
+| Field                      | Type            |
+| -------------------------- | --------------- |
+| file_name                  | VARCHAR         |
+| row_group_id               | BIGINT          |
+| row_group_num_rows         | BIGINT          |
+| row_group_num_columns      | BIGINT          |
+| row_group_bytes            | BIGINT          |
+| column_id                  | BIGINT          |
+| file_offset                | BIGINT          |
+| num_values                 | BIGINT          |
+| path_in_schema             | VARCHAR         |
+| type                       | VARCHAR         |
+| stats_min                  | VARCHAR         |
+| stats_max                  | VARCHAR         |
+| stats_null_count           | BIGINT          |
+| stats_distinct_count       | BIGINT          |
+| stats_min_value            | VARCHAR         |
+| stats_max_value            | VARCHAR         |
+| compression                | VARCHAR         |
+| encodings                  | VARCHAR         |
+| index_page_offset          | BIGINT          |
+| dictionary_page_offset     | BIGINT          |
+| data_page_offset           | BIGINT          |
+| total_compressed_size      | BIGINT          |
+| total_uncompressed_size    | BIGINT          |
+| key_value_metadata         | MAP(BLOB, BLOB) |
+| bloom_filter_offset        | BIGINT          |
+| bloom_filter_length        | BIGINT          |
+| min_is_exact               | BOOLEAN         |
+| max_is_exact               | BOOLEAN         |
+| row_group_compressed_bytes | BIGINT          |
 
 ## Parquet Schema
 
@@ -97,7 +97,7 @@ Below is a table of the columns returned by `parquet_file_metadata`.
 <div class="monospace_table"></div>
 
 | Field                       | Type    |
-| ----------------------------| ------- |
+| --------------------------- | ------- |
 | file_name                   | VARCHAR |
 | created_by                  | VARCHAR |
 | num_rows                    | BIGINT  |
@@ -142,8 +142,8 @@ For example:
 FROM parquet_bloom_probe('my_file.parquet', 'my_col', 500);
 ```
 
-|   file_name     | row_group_id | bloom_filter_excludes |
-|-----------------|-------------:|----------------------:|
-| my_file.parquet | 0            | true                  |
-| ...             | ...          | ...                   |
-| my_file.parquet | 9            | false                 |
+| file_name       | row_group_id | bloom_filter_excludes |
+| --------------- | -----------: | --------------------: |
+| my_file.parquet |            0 |                  true |
+| ...             |          ... |                   ... |
+| my_file.parquet |            9 |                 false |
