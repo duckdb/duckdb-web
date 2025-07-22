@@ -118,7 +118,7 @@ The `IN` operator can be used as a shorthand for the [`contains` string function
 For example:
 
 ```sql
-SELECT 'Hello' IN 'Hello World'
+SELECT 'Hello' IN 'Hello World';
 ```
 
 ```text
