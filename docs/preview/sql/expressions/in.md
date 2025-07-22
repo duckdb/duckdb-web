@@ -110,6 +110,19 @@ Binder Error:
 Subquery returns 2 columns - expected 1
 ```
 
+## `IN` String
+
+The `IN` operator can be used as a shorthand for the [`contains` string function]({% link docs/stable/sql/functions/text.md %}#containsstring-search_string).
+For example:
+
+```sql
+SELECT 'Hello' IN 'Hello World';
+```
+
+```text
+true
+```
+
 ## `NOT IN`
 
 `NOT IN` can be used to check if an element is not present in the set.
