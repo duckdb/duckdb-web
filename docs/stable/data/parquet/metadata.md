@@ -46,6 +46,8 @@ Below is a table of the columns returned by `parquet_metadata`.
 | key_value_metadata      | MAP(BLOB, BLOB) |
 | bloom_filter_offset     | BIGINT          |
 | bloom_filter_length     | BIGINT          |
+| min_is_exact            | BOOLEAN         |
+| max_is_exact            | BOOLEAN         |
 
 ## Parquet Schema
 
@@ -96,7 +98,7 @@ Below is a table of the columns returned by `parquet_file_metadata`.
 <div class="monospace_table"></div>
 
 | Field                       | Type    |
-| ----------------------------| ------- |
+| --------------------------- | ------- |
 | file_name                   | VARCHAR |
 | created_by                  | VARCHAR |
 | num_rows                    | BIGINT  |
@@ -141,8 +143,8 @@ For example:
 FROM parquet_bloom_probe('my_file.parquet', 'my_col', 500);
 ```
 
-|   file_name     | row_group_id | bloom_filter_excludes |
-|-----------------|-------------:|----------------------:|
-| my_file.parquet | 0            | true                  |
-| ...             | ...          | ...                   |
-| my_file.parquet | 9            | false                 |
+| file_name       | row_group_id | bloom_filter_excludes |
+| --------------- | -----------: | --------------------: |
+| my_file.parquet |            0 |                  true |
+| ...             |          ... |                   ... |
+| my_file.parquet |            9 |                 false |
