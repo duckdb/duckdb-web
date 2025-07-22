@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: splink_udfs
   description: Phonetic and text normalization functions for record linkage.
-  version: 0.0.2
+  version: 0.0.3
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: moj-analytical-services/splink_udfs
-  ref: 6e4ccbe4d0a92d134fc16ef19503a20663299d75
+  ref: 00f6fb3678c26504fd316ad71691a8523c48f74f
 
 docs:
   hello_world: |
@@ -26,8 +26,8 @@ docs:
   extended_description: |
     The splink_udfs extension provides functions for data cleaning and phonetic matching.
 
-    Includes `soundex(str)`, `strip_diacritics(str)`, and `unaccent(str)`. For best
-    results, it is recommended to combine them, e.g. `soundex(unaccent(str))`.
+    Includes `soundex(str)`, `strip_diacritics(str)`, `double_metaphone` and `unaccent(str)`.
+    For best results, it is recommended to combine them, e.g. `soundex(unaccent(str))`.
 
 extension_star_count: 2
 extension_star_count_pretty: 2
