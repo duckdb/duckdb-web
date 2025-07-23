@@ -8,6 +8,7 @@ jobs:
   LinkChecker:
     name: Link Checker
     runs-on: ubuntu-24.04
+    if: github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web'
     steps:
       - uses: actions/checkout@v4
         with:
