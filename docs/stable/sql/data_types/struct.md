@@ -307,7 +307,7 @@ using the [`ALTER TABLE` clause]({% link docs/stable/sql/statements/alter_table.
 To follow the examples, initialize the `test` table as follows:
 
 ```sql
-CREATE TABLE test(s STRUCT(i INTEGER, j INTEGER));
+CREATE TABLE test (s STRUCT(i INTEGER, j INTEGER));
 INSERT INTO test VALUES (ROW(1, 1)), (ROW(2, 2));
 ```
 

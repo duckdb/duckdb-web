@@ -32,7 +32,7 @@ You can specify a compression type for a string with the `USING COMPRESSION` cla
 For example, to apply zstd compression, run:
 
 ```sql
-CREATE TABLE tbl(s VARCHAR USING COMPRESSION zstd);
+CREATE TABLE tbl (s VARCHAR USING COMPRESSION zstd);
 ```
 
 ## Text Type Values

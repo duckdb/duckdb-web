@@ -185,7 +185,7 @@ Again, this will work for arbitrary expressions. We recommend to use `TRY` spari
 Starting with the new release, [it's possible to update the sub-schema of structs using the `ALTER TABLE` clause](https://github.com/duckdb/duckdb/pull/17003). You can add, drop, and rename fields:
 
 ```sql
-CREATE TABLE test(s STRUCT(i INTEGER, j INTEGER));
+CREATE TABLE test (s STRUCT(i INTEGER, j INTEGER));
 INSERT INTO test VALUES (ROW(1, 1)), (ROW(2, 2));
 ALTER TABLE test DROP COLUMN s.i;
 ALTER TABLE test ADD COLUMN s.k INTEGER;

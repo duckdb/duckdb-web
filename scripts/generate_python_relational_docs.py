@@ -131,7 +131,7 @@ def get_duckdb_conn():
     duckdb_conn = duckdb.connect()
     duckdb_conn.sql(
         """
-        CREATE TABLE relational_api_members(
+        CREATE TABLE relational_api_members (
             class_name text,
             member_name text,
             section text,

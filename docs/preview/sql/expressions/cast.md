@@ -84,7 +84,7 @@ This function is primarily useful in [macros]({% link docs/preview/guides/snippe
 This helps with making generic macros that operate on different types. For example, the following macro adds to a number if the input is an `INTEGER`:
 
 ```sql
-CREATE TABLE tbl(i INT, s VARCHAR);
+CREATE TABLE tbl (i INT, s VARCHAR);
 INSERT INTO tbl VALUES (42, 'hello world');
 
 CREATE MACRO conditional_add(col, nr) AS
