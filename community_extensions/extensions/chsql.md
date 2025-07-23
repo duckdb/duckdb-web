@@ -8,17 +8,18 @@ excerpt: |
 extension:
   name: chsql
   description: ClickHouse SQL Macros for DuckDB
-  version: 1.0.12
+  version: 1.0.132
   language: SQL & C++
   build: cmake
   license: MIT
   maintainers:
     - lmangani
     - akvlad
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64;"
 
 repo:
   github: quackscience/duckdb-extension-clickhouse-sql
-  ref: b992342a09fad4f45be67cab7972d72a824267b6
+  ref: f056022f4a9d20e280059d66458d907f4a080cdd
 
 docs:
   hello_world: |
@@ -95,8 +96,8 @@ docs:
     #### Legal Disclaimer
     > DuckDB ® is a trademark of DuckDB Foundation. ClickHouse® is a trademark of ClickHouse Inc. All trademarks, service marks, and logos mentioned or depicted are the property of their respective owners. The use of any third-party trademarks, brand names, product names, and company names is purely informative or intended as parody and does not imply endorsement, affiliation, or association with the respective owners.
 
-extension_star_count: 64
-extension_star_count_pretty: 64
+extension_star_count: 67
+extension_star_count_pretty: 67
 extension_download_count: 5668
 extension_download_count_pretty: 5.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql.png'
