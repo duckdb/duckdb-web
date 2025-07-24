@@ -29,8 +29,8 @@ docs:
     Includes `soundex(str)`, `strip_diacritics(str)`, `double_metaphone` and `unaccent(str)`.
     For best results, it is recommended to combine them, e.g. `soundex(unaccent(str))`.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
+extension_star_count: 5
+extension_star_count_pretty: 5
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
