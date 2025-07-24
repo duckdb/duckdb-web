@@ -52,7 +52,7 @@ See related discussions on the [DuckDB GitHub issues](https://github.com/duckdb/
 
 > Warning Attempting to reinstall your Xcode suite may impact other applications on your system. Proceed with caution.
 
-```bash
+```batch
 sudo rm -rf /Library/Developer/CommandLineTools
 xcode-select --install
 ```
