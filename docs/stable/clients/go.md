@@ -120,4 +120,4 @@ func main() {
 
 ### More Examples
 
-For more examples, see the [examples in the `duckdb-go` repository](https://github.com/marcboeker/go-duckdb/tree/master/examples).
+For more examples, see the [examples in the `duckdb-go` repository](https://github.com/marcboeker/go-duckdb/tree/main/examples).
