@@ -15,7 +15,7 @@ body.documentation main .wrap.frequentlyaskedquestions{
 		&::after{
 			content: " ";
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cpath stroke='%230D0D0D' stroke-linecap='square' stroke-width='1.5' d='m18 9.5-6 6-6-6'/%3E%3C/svg%3E");
-			background-color: var(--doc-codebox-button-background-color-hover, rgba(217, 217, 217, 0.60));
+			background-color: var(--doc-codebox-button-background-color, #E6E6E6);
 			background-size: contain;
 			background-repeat: no-repeat;
 			width: 24px;
