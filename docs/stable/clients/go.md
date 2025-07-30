@@ -20,7 +20,7 @@ For examples on how to use this interface, see the [official documentation](http
 To install the `go-duckdb` client, run:
 
 ```bash
-go get github.com/marcboeker/go-duckdb
+go get github.com/marcboeker/go-duckdb/v2
 ```
 
 ## Importing
@@ -30,7 +30,7 @@ To import the DuckDB Go package, add the following entries to your imports:
 ```go
 import (
 	"database/sql"
-	_ "github.com/marcboeker/go-duckdb"
+	_ "github.com/marcboeker/go-duckdb/v2"
 )
 ```
 
@@ -83,7 +83,7 @@ import (
 	"fmt"
 	"log"
 
-	_ "github.com/marcboeker/go-duckdb"
+	_ "github.com/marcboeker/go-duckdb/v2"
 )
 
 func main() {
@@ -120,4 +120,4 @@ func main() {
 
 ### More Examples
 
-For more examples, see the [examples in the `duckdb-go` repository](https://github.com/marcboeker/go-duckdb/tree/master/examples).
+For more examples, see the [examples in the `duckdb-go` repository](https://github.com/marcboeker/go-duckdb/tree/main/examples).
