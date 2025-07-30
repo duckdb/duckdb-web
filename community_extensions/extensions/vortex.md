@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: vortex-data/duckdb-vortex
-  ref: de4fe4b9478029a620c0b7889ea634b5e0254ebe
+  ref: ccccee8cb386d52e28323d1c124ecf3e369b8990
 
 docs:
   hello_world: |
@@ -31,8 +31,8 @@ docs:
     scan a vortex file
     `select * from read_vortex('...');`
 
-extension_star_count: 10
-extension_star_count_pretty: 10
+extension_star_count: 12
+extension_star_count_pretty: 12
 extension_download_count: 439
 extension_download_count_pretty: 439
 image: '/images/community_extensions/social_preview/preview_community_extension_vortex.png'
@@ -55,13 +55,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| read_vortex   | table         | NULL        | NULL    |          |
 
 
