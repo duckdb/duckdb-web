@@ -15,7 +15,7 @@ Example:
 
 ```sql
 PRAGMA enable_logging;
--- Run some queries..
+-- Run some queries...
 SELECT * FROM duckdb_logs;
 ```
 

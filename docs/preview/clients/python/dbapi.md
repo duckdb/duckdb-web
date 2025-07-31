@@ -19,7 +19,7 @@ The special value `:memory:` can be used to create an **in-memory database**. No
 #### Named In-memory Connections
 
 The special value `:memory:` can also be postfixed with a name, for example: `:memory:conn3`.
-When a name is provided, subsequent `duckdb.connect` calls will create a new connection to the same database, sharing the catalogs (views, tables, macros etc..).
+When a name is provided, subsequent `duckdb.connect` calls will create a new connection to the same database, sharing the catalogs (views, tables, macros etc.).
 
 Using `:memory:` without a name will always create a new and separate database instance.
 

@@ -60,7 +60,7 @@ endloop
 
 Loops should be used sparingly. While it might be tempting to use loops for inserting data using insert statements, this will considerably slow down the test cases. Instead, it is better to generate data using the built-in `range` and `repeat` functions.
 
-To create the table `integers` with the values `[0, 1, .., 98,  99]`, run:
+To create the table `integers` with the values `[0, 1, ..., 98,  99]`, run:
 
 ```sql
 CREATE TABLE integers AS SELECT * FROM range(0, 100, 1) t1(i);
