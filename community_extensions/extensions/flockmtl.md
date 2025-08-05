@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: flockmtl
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.3.1
+  version: 0.3.2
   language: SQL & C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: dais-polymtl/flockmtl
-  ref: e26d2ed90cc20eb382e7ca272cbc9a3e565afc25
+  ref: be6192f51a780beeaa48db6ec60b689ddccdeffd
 
 docs:
   hello_world: |
@@ -62,8 +62,8 @@ docs:
 
     > *Note:* FlockMTL is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://dais-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
 
-extension_star_count: 249
-extension_star_count_pretty: 249
+extension_star_count: 252
+extension_star_count_pretty: 252
 extension_download_count: 499
 extension_download_count_pretty: 499
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
