@@ -3,26 +3,26 @@ layout: post
 title: "Spatial Joins in DuckDB"
 author: "Max Gabrielsson"
 tags: ["deep dive"]
-excerpt: "Despite being challenging to optimize, DuckDB v1.3.0 signifcantly improves the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator"
+excerpt: "DuckDB v1.3.0 signifcantly improves the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator"
 ---
 
 ## Introduction 
 
-Spatial joins are join operations that match rows based on the (geo-)spatial relationship between column(s). In practice they are often used to answer questions like “which of these points are within which of these polygons?”, but at a high level, connecting two datasets based on the **physical location(s)** they model is an extremely powerful way to correlate and enrich otherwise disparate data sources, anchor insights to the real world, and more often than not tell a great story with your analysis.
+Spatial joins are join operations that match rows based on the (geo-)spatial relationship between column(s). In practice they are often used to answer questions like “which of these points are within which of these polygons?”. Being able to connect datasets based on the **physical location(s)** they model is fundamental to the whole field of geospatial data science, but at a high level, also an extremely powerful way to correlate and enrich otherwise disparate data sources, anchor insights to the real world, and more often than not tell a great story with your analysis.
 
-Ever since its inception, DuckDB's `spatial` extension has provided a `GEOMETRY` column type to represent locations, regions and shapes, along with plenty of _spatial predicate_ functions to use when `JOIN`:ing. But it wasn't until recently, in DuckDB v1.3.0 that spatial joins really became _scalable_ thanks to the introduction of the dedicated `SPATIAL_JOIN` query **operator**. 
+Ever since its inception, DuckDB's `spatial` extension has provided a `GEOMETRY` column type to represent locations, regions and shapes, along with plenty of _spatial predicate_ functions to use when `JOIN`:ing. However, it wasn't until recently in DuckDB v1.3.0 that spatial joins really became _scalable_ thanks to the introduction of the dedicated `SPATIAL_JOIN` query **operator**.
 
-I managed to hastily sneak in some information about it towards [the end of the v1.3.0 release notes]({% post_url 2025-05-21-announcing-duckdb-130 %}#spatial-join-operator), but we figured there is enough say about it to justify a separate blog post. So in this post, we will take a closer look at some of the challenges of optimizing spatial joins in DuckDB and how the new `SPATIAL_JOIN` operator achieves new levels of efficency.
+We managed to hastily sneak in some information about this new operator towards [the end of the v1.3.0 release notes]({% post_url 2025-05-21-announcing-duckdb-130 %}#spatial-join-operator), but we figured we got enough to talk about to justify a separate blog post. So in this post, we will take a closer look at some of the challenges involved in optimizing spatial joins, and how the new `SPATIAL_JOIN` operator addresses them to achieve new levels of efficiency.
 
-## What does spatial join look like again?
+## What does a spatial join look like again?
 
-Spatial joins are incredibly important in geospatial analysis, and performing one in SQL is actually surprisingly easy. They don't require any special syntax or magic incantation, you just have to join two tables with a `GEOMETRY` column using some _spatial predicate_. Below is a simple query that joins two tables `a` and `b` on the condition that the geometries in `a.geom` and `b.geom` “intersect”, using the `ST_Intersects` spatial predicate function:
+Performing a spatial join in SQL is actually very straightforward. There is no special syntax or magic incantation required. Like you probably could've guessed, you just have to `JOIN` two tables with a `GEOMETRY` column using some _spatial predicate_. Below is a simple example that joins two tables `some_table` and `another_table` on the condition that the geometries in `some_table.geom` and `another_table.geom` “intersect”, using the `ST_Intersects` spatial predicate function:
 
 ```sql
-SELECT * FROM a JOIN b ON ST_Intersects(a.geom, b.geom)
+SELECT * FROM some_table JOIN another_table ON ST_Intersects(some_table.geom, another_table.geom)
 ```
 
-Let's try to do something more advanced to demonstrate. We're going to analyze the [New York City Citi Bike Trip dataset](https://citibikenyc.com/system-data), which contains around 58 million rows representing rental bike trips in New York City, including the start and end locations of each trip. We want to find neighborhoods in NYC that have the most bike trips starting in them. To do this, we will join the bike trip data with a [dataset of NYC neighborhoods](https://www.nyc.gov/content/planning/pages/resources/datasets/neighborhood-tabulation), count and group the number of trips starting in each neighborhood, and finally sort a limit to return the top 3 groups. We've compiled these datasets and extracted the relevant columns for this example into two tables, `rides` and `hoods` in a [DuckDB database available to download here](https://duckdb-blobs.s3.us-east-1.amazonaws.com/biketrips.db)
+Let's try to do something more advanced. We're going to analyze the [New York City Citi Bike Trip dataset](https://citibikenyc.com/system-data), which contains around 58 million rows representing rental bike trips in New York City, including the start and end locations of each trip. We want to find neighborhoods in NYC that have the most bike trips starting in them. Therefore, we join the bike trip data with a [dataset of NYC neighborhood polygons](https://www.nyc.gov/content/planning/pages/resources/datasets/neighborhood-tabulation). We then count and group the number of trips starting in each neighborhood, and finally sort and limit the results to return the top 3 neighborhoods in which most trips originate. We've compiled the datasets and extracted the relevant columns for this example into two tables, `rides` and `hoods`, into a [DuckDB database file that you can download here](https://duckdb-blobs.s3.us-east-1.amazonaws.com/biketrips.db).
 
 The query looks like this:
 
@@ -49,7 +49,7 @@ LIMIT 3;
 
 This query joins the 58,033,724 rides with the 310 neighborhood polygons and takes about **30s** to run on my laptop (MacBook M3 Pro, 36GB RAM). 
 
-While this might not seem that impressive at first glance (a `HASH_JOIN` over similarly sized input would finish an order of magnitude faster), I'm actually somewhat pleased that DuckDB is able to execute a spatial join at this scale in a time frame somewhat acceptable for interactive exploratory analysis (on a laptop no less!). To understand why, we first need to take a closer look at how DuckDB used to do spatial joins, why spatial joins are so challenging to optimize, and how the new `SPATIAL_JOIN` operator changes the game.
+While 30 seconds might not seem that impressive at first glance (a `HASH_JOIN` over similarly sized input would finish an order of magnitude faster), I'm actually pleased DuckDB is able to execute a spatial join at this scale in a time frame that is, if not great, stll acceptable for exploratory analysis (on a laptop no less!). To understand difference in execution time, compared to e.g. a `HASH_JOIN`, we first need to take a closer look at how DuckDB used to do spatial joins and why spatial joins are so challenging to optimize. Then, we'll dive into how the new `SPATIAL_JOIN` operator changes the game.
 
 ## How DuckDB (used to) do spatial joins
 
@@ -69,13 +69,15 @@ The first thing to understand is that a _spatial predicate_ is really just a fun
 | `ST_CoveredBy(a, b)`        | Returns true if geometry A is covered by geometry B                            |
 | `ST_DWithin(a, b, x)`       | Returns true if geometry A is within distance X of geometry B                  |
 
+> We use `ST_Intersects` in the example query above to keep it simple, even if `ST_Contains` or `ST_ContainsProperly` might be more appropriate for point-in-polygon joins.
+
 Since all the above spatial predicates live in the `spatial` extension, DuckDB's query planner doesn't really know anything about them, except their names and that they are functions that take two `GEOMETRY` arguments and return a boolean value. This means that vanilla DuckDB on its own can't apply any special optimizations to them, and has to treat them like **any other function** in the database.
 
 When DuckDB plans a join where the join condition is an arbitrary function, it normally can't use any of the advanced built-in join strategies like `HASH_JOIN` or `RANGE_JOIN` which are optimized for equality or range comparisons. Instead DuckDB has to fall back to the simplest join strategy, which is to perform a “Nested Loop Join” (NLJ) – i.e. to evaluate the join condition for every possible pair of rows in the two tables. This is the most general way to implement a join, but it is also the least efficient. Since the _complexity_ of the join is `O(n * m)`, where `n` and `m` are the number of rows in the two tables, the time it takes to perform the join grows quadratically with the size of the input.
 
 Quadratic complexity quickly becomes infeasible for large joins, but DuckDB's raw execution power usually makes it bearable when joining small to medium sized tables. However, what makes the nested-loop-join strategy impractical for spatial joins in particular, even at small to medium scale is that spatial predicates can be _very_ computationally expensive to evaluate in the first place. This is mostly due to the sheer complexity of the algorithms involved, but also due to the denormalized nature of geometries, in which a single geometry can contain a very large number of points. Also, besides the inherent theoretical complexity, the reality in `spatial` is that most of the spatial predicates implemented with the help of third-party libraries require a deserialization step to convert the internal binary format of the `GEOMETRY` column to an executable data structure. This usually also requires allocating memory outside of DuckDBs own memory management system, which increases pressure and lock contention on the global memory allocator, limiting the effectiveness of additional parallelism.
 
-To illustrate how this plays out in practice, lets take a look at the query plan for the example query above, but with the `SPATIAL_JOIN` optimization disabled to force DuckDB to use a nested-loop-join instead:
+To illustrate how this plays out in practice, let's take a look at the query plan for the example query above, but with the `SPATIAL_JOIN` optimization disabled to force DuckDB to use a nested-loop-join instead:
 
 ```sql
 LOAD spatial; -- Load the spatial extension
@@ -304,8 +306,8 @@ Nice, we're back to a single join condition again. So how does this perform? We 
 | Number of rows in `rides` | Nested Loop Join | Piecewise Merge Join | Spatial Join |
 | ------------------------- | ---------------- | -------------------- | ------------ |
 | 1,000,000                 | 30.8s            | 2.3s                 | 0.5s         |
-| 10,000,000                | 310.3.8s         | 21.2s                | 14.5s        |
-| 58,033,724                | 1799.6           | 107.6s               | 28.7s        |
+| 10,000,000                | 310.3s           | 21.2s                | 14.5s        |
+| 58,033,724                | 1799.6s          | 107.6s               | 28.7s        |
 
 As you can see, the `SPATIAL_JOIN` operator is able to execute the full 58 million row dataset faster than the original naive nested-loop-join could execute the 1 million row dataset. That's a 58x improvement!
 But more importantly it also _scales_ much better. Compared to the `PIECEWISE_MERGE_JOIN`, the execution time only doubles as the input size increases almost 6 times over, instead of being multiplied by a similar factor.
