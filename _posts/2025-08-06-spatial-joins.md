@@ -3,7 +3,7 @@ layout: post
 title: "Spatial Joins in DuckDB"
 author: "Max Gabrielsson"
 tags: ["deep dive"]
-excerpt: "DuckDB v1.3.0 signifcantly improves the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator"
+excerpt: "DuckDB v1.3.0 significantly improved the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator."
 ---
 
 ## Introduction 
