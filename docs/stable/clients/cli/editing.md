@@ -85,6 +85,17 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | `Ctrl`+`X` | Insert a newline after the cursor                                                  |
 | `Ctrl`+`Z` | Suspend CLI and return to shell, use `fg` to re-open                               |
 
+## External Editor Mode
+
+Use `.edit` or `\e` to open a query in an external text editor.
+
+* When entered alone, it opens the previous command for editing.
+* When used inside a multi-line command, it opens the current command in the editor.
+
+The editor is taken from the first set environment variable among `DUCKDB_EDITOR`, `EDITOR` or `VISUAL` (in that order). If none are set, `vi` is used.
+
+> This feature is only available in the linenoise-based CLI editor, which is currently supported on macOS and Linux.
+
 ## Using Read-Line
 
 If you prefer, you can use [`rlwrap`](https://github.com/hanslub42/rlwrap) to use read-line directly with the shell. Then, use `Shift`+`Enter` to insert a newline and `Enter` to execute the query:
