@@ -8,7 +8,7 @@ image: "/images/blog/thumbs/spatial-joins.png"
 excerpt: "DuckDB v1.3.0 significantly improved the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator."
 ---
 
-## Introduction 
+## Introduction
 
 Spatial joins are join operations that match rows based on the (geo-)spatial relationship between column(s). In practice they are often used to answer questions like “which of these points are within which of these polygons?”. Being able to connect datasets based on the **physical location(s)** they model is fundamental to the whole field of geospatial data science, but at a high level, also an extremely powerful way to correlate and enrich otherwise disparate data sources, anchor insights to the real world, and more often than not tell a great story with your analysis.
 
@@ -30,18 +30,19 @@ JOIN another_table
 Let's try to do something more advanced. We're going to analyze the [NYC _Citi Bike Trip_ dataset](https://citibikenyc.com/system-data), which contains around 58 million rows representing rental bike trips in New York City, including the start and end locations of each trip. We want to find neighborhoods in NYC that have the most bike trips starting in them. Therefore, we join the bike trip data with a [dataset of NYC neighborhood polygons](https://www.nyc.gov/content/planning/pages/resources/datasets/neighborhood-tabulation). We then count and group the number of trips starting in each neighborhood, and finally sort and limit the results to return the top 3 neighborhoods in which most trips originate. We've compiled the datasets and extracted the relevant columns for this example into two tables, `rides` and `hoods`, into a [218MB DuckDB database file](https://blobs.duckdb.org/data/biketrips.duckdb).
 
 Let's make sure the `spatial` extension is installed and loaded:
+
 ```sql
 INSTALL spatial; -- Install the spatial extension
 LOAD spatial;    -- Load the spatial extension
 ```
 
 Our query looks like this:
- 
+
 ```sql
-SELECT neighborhood, count(*) AS num_rides 
+SELECT neighborhood, count(*) AS num_rides
 FROM rides
-JOIN hoods ON ST_Intersects(rides.start_geom, hoods.geom) 
-GROUP BY neighborhood 
+JOIN hoods ON ST_Intersects(rides.start_geom, hoods.geom)
+GROUP BY neighborhood
 ORDER BY num_rides DESC
 LIMIT 3;
 ```
@@ -87,21 +88,20 @@ Since all the above spatial predicates live in the `spatial` extension, DuckDB's
 
 ### Optimization Challenges
 
-When DuckDB plans a join where the join condition is an arbitrary function, it normally can't use any of the advanced built-in join strategies like `HASH_JOIN` or `RANGE_JOIN` which are optimized for equality or range comparisons. Instead DuckDB has to fall back to the simplest join strategy, which is to perform a **nested loop join** (NLJ), i.e., to evaluate the join condition for every possible pair of rows in the two tables. In pseudo-code, a nested-loop-join would look something like this:
+When DuckDB plans a join where the join condition is an arbitrary function, it normally can't use any of the advanced built-in join strategies like `HASH_JOIN` or `RANGE_JOIN` which are optimized for equality or range comparisons. Instead DuckDB has to fall back to the simplest join strategy, which is to perform a **nested loop join** (NLJ), i.e., to evaluate the join condition for every possible pair of rows in the two tables. In pseudo-code, a nested loop join would look something like this:
 
 ```python
 for row_a in table_a:
     for row_b in table_b:
         if join_condition(row_a, row_b):
             emit(row_a, row_b)
-
 ```
 
-This is the most general way to implement a join, but it is also the least efficient. Since the _complexity_ of the join is `O(nm)`, where `n` and `m` are the number of rows in the two tables, the time it takes to perform the join grows quadratically with the size of the input. 
+This is the most general way to implement a join, but it is also the least efficient. Since the _complexity_ of the join is `O(nm)`, where `n` and `m` are the number of rows in the two tables, the time it takes to perform the join grows quadratically with the size of the input.
 
 ### Complexity Challenges
 
-Obviously, quadratic complexity quickly becomes infeasible for large joins, but DuckDB's raw execution power usually makes it bearable when joining small- to medium-sized tables. 
+Obviously, quadratic complexity quickly becomes infeasible for large joins, but DuckDB's raw execution power usually makes it bearable when joining small- to medium-sized tables.
 
 However, what makes the nested loop join strategy impractical for spatial joins in particular, even at small- to medium-scale is that spatial predicates can be _very_ computationally expensive to evaluate in the first place. This is mostly due to the sheer complexity of the algorithms involved, but also due to the denormalized nature of geometries, in which a single geometry can contain a very large number of points. Also, besides the inherent theoretical complexity, the reality in `spatial` is that most of the spatial predicates implemented with the help of third-party libraries require a deserialization step to convert the internal binary format of the `GEOMETRY` column to an executable data structure. This usually also requires allocating memory outside of DuckDB's own memory management system, which increases pressure and lock contention on the global memory allocator, limiting the effectiveness of additional parallelism.
 
@@ -112,15 +112,16 @@ To illustrate how this plays out in practice, let's take a look at the query pla
 ```sql
 LOAD spatial; -- Load the spatial extension
 
--- Disable the spatial join optimizer!
+-- Disable the spatial join optimizer
 SET disabled_optimizers = 'extension';
 
--- Print the new plan, using EXPLAIN to verify that we are using a nested-loop-join
-EXPLAIN SELECT neighborhood, count(*) as num_rides 
-FROM rides 
-JOIN hoods on st_intersects(rides.start_geom, hoods.geom) 
-GROUP BY neighborhood 
-ORDER BY num_rides DESC 
+-- Print the new plan, using EXPLAIN to verify
+-- that we are using a nested loop join
+EXPLAIN SELECT neighborhood, count(*) AS num_rides
+FROM rides
+JOIN hoods on st_intersects(rides.start_geom, hoods.geom)
+GROUP BY neighborhood
+ORDER BY num_rides DESC
 LIMIT 3;
 ```
 
@@ -176,7 +177,7 @@ This is obviously not great. Running a 1/58th of the full dataset already takes 
 
 In order to improve the situation, one of the first optimizations implemented in the early versions of the `spatial` extension was a re-write rule for the query planner.
 
-Since evaluating the spatial predicate function itself is so expensive, its a good idea to try to do some *cheap* filtering of potential join matches first in order to reduce the number of pairs that actually need to go through the precise spatial relationship check. Luckily for us, it is relatively easy to do this for most spatial predicates since they all have a common property. Almost all spatial predicates _imply_ _intersection_ in some way, and **if two geometries intersect, their bounding boxes must also intersect**. 
+Since evaluating the spatial predicate function itself is so expensive, its a good idea to try to do some *cheap* filtering of potential join matches first in order to reduce the number of pairs that actually need to go through the precise spatial relationship check. Luckily for us, it is relatively easy to do this for most spatial predicates since they all have a common property. Almost all spatial predicates _imply_ _intersection_ in some way, and **if two geometries intersect, their bounding boxes must also intersect**.
 
 The *bounding box*, sometimes called *minimum bounding rectangle* (MBR) of a geometry is the smallest rectangle that fully contains the geometry. Because bounding boxes basically represent the minimum and maximum x and y coordinates of all vertices in the geometry, they are relatively efficient to compute by just scanning over the geometry a single pass. Additionally, checking if two bounding boxes intersect is also very cheap, as it can be done in constant time with a few simple less-than and greater-than comparisons.
 
@@ -209,11 +210,11 @@ PRAGMA version;
 
 ```sql
 -- Print the new query plan, using EXPLAIN
-EXPLAIN SELECT neighborhood, count(*) AS num_rides 
+EXPLAIN SELECT neighborhood, count(*) AS num_rides
 FROM rides
-JOIN hoods ON ST_Intersects(rides.start_geom, hoods.geom) 
-GROUP BY neighborhood 
-ORDER BY num_rides DESC 
+JOIN hoods ON ST_Intersects(rides.start_geom, hoods.geom)
+GROUP BY neighborhood
+ORDER BY num_rides DESC
 LIMIT 3;
 ```
 
@@ -245,7 +246,7 @@ Result of EXPLAIN
 │            geom)          │ -- precise spatial predicate
 └─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
-│    PIECEWISE_MERGE_JOIN   │ 
+│    PIECEWISE_MERGE_JOIN   │
 │    ────────────────────   │
 │      Join Type: INNER     │
 │                           │
@@ -285,7 +286,7 @@ This looks a lot more complicated than the original nested loop join, so how doe
 |                10,000,000 |         19.6 s |
 |                58,033,724 |        107.6 s |
 
-Much better, we managed to reduce the execution time from 30 minutes to **just under 2 minutes** for the full dataset! This was a huge improvement. Without requiring any custom operator code, we were able to leverage DuckDBs existing inequality join functionality to significantly speed up spatial joins as well. However, this approach still has some drawbacks:
+Much better, we managed to reduce the execution time from 30 minutes to **just under 2 minutes** for the full dataset! This was a huge improvement. Without requiring any custom operator code, we were able to leverage DuckDB's existing inequality join functionality to significantly speed up spatial joins as well. However, this approach still has some drawbacks:
 
 However, this approach still has some drawbacks:
 
@@ -322,11 +323,11 @@ Just to show what this plan looks like, this is what you get when you run the sa
 LOAD spatial; -- Load the spatial extension
 
 -- Print the new query plan, using EXPLAIN
-EXPLAIN SELECT neighborhood, count(*) as num_rides 
-FROM rides 
-JOIN hoods on st_intersects(rides.start_geom, hoods.geom) 
-GROUP BY neighborhood 
-ORDER BY num_rides DESC 
+EXPLAIN SELECT neighborhood, count(*) as num_rides
+FROM rides
+JOIN hoods on st_intersects(rides.start_geom, hoods.geom)
+GROUP BY neighborhood
+ORDER BY num_rides DESC
 LIMIT 3;
 ```
 
@@ -391,7 +392,7 @@ Even though we've made a lot of improvements, spatial joins in DuckDB are not qu
 
 The current implementation of the `SPATIAL_JOIN` operator buffers the entire right side input in memory to build the R-tree index. This means that it can only handle right side inputs that fit in memory. We plan to add support for larger-than-memory R-trees by partitioning the right side into smaller separate R-trees, and then merging the results of the join from each partition, similar to how the `HASH_JOIN` operator handles larger-than-memory hash tables.
 
-### Increased Parallelism 
+### Increased Parallelism
 
 DuckDB's execution engine dynamically adjusts the number of threads used in a query based on the number of rows scanned, but since the spatial predicates are so expensive to evaluate, we could potentially benefit from more parallelism as the spatial joins are mostly CPU bound. In particular, we are considering buffering and partitioning the left side of the join as well, which would allow us to spawn our own worker tasks within the operator to evaluate the join condition across a number of threads decoupled from the cardinality of the input. This would increase memory usage and prevent the join from being streamed, but we've been able to employ a similar technique when constructing the [`HNSW` (Hierarchical Navigable Small Worlds) index over in the `vss` extension]({% link docs/stable/core_extensions/vss.md %}) to great effect.
 
@@ -400,18 +401,19 @@ DuckDB's execution engine dynamically adjusts the number of threads used in a qu
 Most predicate functions in the `spatial` extension are implemented using third-party libraries which carry some overhead as we are unable to integrate them as tightly with DuckDB's execution engine and memory management, often requiring some sort of deserialization or conversion step. This can be quite expensive, especially for large geometries. To demonstrate impact of this in practice, we can compare the performance of joining on `ST_Intersects(x, y)` with the functionally equivalent `ST_DWithin(x, y, 0)`, by comparing the previous results with the timings of the following query:
 
 ```sql
-SELECT neighborhood, count(*) as num_rides 
-FROM rides JOIN hoods on st_dwithin(rides.start_geom, hoods.geom, 0) 
-GROUP BY neighborhood 
-ORDER BY num_rides DESC 
+SELECT neighborhood, count(*) AS num_rides
+FROM rides
+JOIN hoods ON ST_DWithin(rides.start_geom, hoods.geom, 0)
+GROUP BY neighborhood
+ORDER BY num_rides DESC
 LIMIT 3;
 ```
 
-| Number of rows in `rides` | Spatial Join (Intersects) | Spatial Join (DWithin) |
-| ------------------------: | ------------------------: | ---------------------: |
-|                 1,000,000 |                      0.5s |                   0.1s |
-|                10,000,000 |                       4.8 |                   0.7s |
-|                58,033,724 |                     28.7s |                   4.3s |
+| Number of rows in `rides` | Spatial join (`Intersects`) | Spatial join (`DWithin`) |
+| ------------------------: | --------------------------: | -----------------------: |
+|                 1,000,000 |                       0.5 s |                    0.1 s |
+|                10,000,000 |                       4.8 s |                    0.7 s |
+|                58,033,724 |                      28.7 s |                    4.3 s |
 
 Even though `ST_DWithin` is technically doing more work, its implementation in the `spatial` extension was recently changed to our own highly optimized native implementation which avoids extra memory allocation and copying. This clearly demonstrates how optimizing the spatial predicate functions themselves can significantly improve the performance of spatial joins. We are actively working on adding optimized versions of the rest of the commonly used spatial predicates (like `ST_Intersects`, `ST_Contains`, `ST_Within`, etc.) to the `spatial` extension and expect to see similar performance improvements across the board.
 
