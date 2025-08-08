@@ -124,7 +124,7 @@ LIMIT 3;
 └───────────────────────────┘└───────────────────────────┘
 ```
 
-Executing this query, with the `BLOCKWISE_NL_JOIN` (blockwise nested-loop-join), now takes **30 minutes** on my laptop. I've also run the query with a limit on the number of rows in the `rides` table to see how the performance scales with the size of the input. The results are as follows:
+Executing this query, with the `BLOCKWISE_NL_JOIN` (blockwise nested-loop-join), now takes **30 minutes** on my laptop. I've also run the query with a subset of rows in the `rides` table to see how the performance scales with the size of the input. The results are as follows:
 
 | Number of rows in `rides` | Execution time        |
 | ------------------------- | --------------------- |
@@ -227,9 +227,9 @@ This looks a lot more complicated than the original nested-loop-join, so how doe
 
 | Number of rows in `rides` | Execution time |
 | ------------------------- | -------------- |
-| 1,000,000                 | 2s             |
-| 10,000,000                | 21s            |
-| 58,033,724                | 108s           |
+| 1,000,000                 | 2.3s             |
+| 10,000,000                | 19.6s            |
+| 58,033,724                | 107.6s           |
 
 Much better, we managed to reduce the execution time from 30 minutes to just under 2 minutes for the full dataset! This was a huge improvement. Without requiring any custom operator code, we were able to leverage DuckDBs existing inequality join functionality to significantly speed up spatial joins as well.
 
@@ -306,7 +306,7 @@ Nice, we're back to a single join condition again. So how does this perform? We 
 | Number of rows in `rides` | Nested Loop Join | Piecewise Merge Join | Spatial Join |
 | ------------------------- | ---------------- | -------------------- | ------------ |
 | 1,000,000                 | 30.8s            | 2.3s                 | 0.5s         |
-| 10,000,000                | 310.3s           | 21.2s                | 14.5s        |
+| 10,000,000                | 310.3s           | 19.6s                | 4.8s         |
 | 58,033,724                | 1799.6s          | 107.6s               | 28.7s        |
 
 As you can see, the `SPATIAL_JOIN` operator is able to execute the full 58 million row dataset faster than the original naive nested-loop-join could execute the 1 million row dataset. That's a 58x improvement!
@@ -338,17 +338,11 @@ LIMIT 3;
 
 | Number of rows in `rides` | Spatial Join (Intersects) | Spatial Join (DWithin) |
 | ------------------------- | ------------------------- | ---------------------- |
-| 1,000,000                 | 0.5s                      | 0.15                   |
-| 10,000,000                | 14.5s                     | 4.8                    |
+| 1,000,000                 | 0.5s                      | 0.1s                   |
+| 10,000,000                | 4.8                       | 0.7s                  |
 | 58,033,724                | 28.7s                     | 4.3s                   |
 
-Even though `ST_DWithin` is technically doing more work, its implementation in the `spatial` extension was recently changed to our own highly optimized native implementation which avoids extra memory allocation and copying.
-
-In this case, besides being faster overall, computing the join on the full dataset is also faster than the smaller 10 million row subset because DuckDB dynamically adjusts the number of threads used in a query based on the estimated cardinality of the input. More data, more threads. 
-
-**But!**, the fact that we don't see the same pattern as the input size (and hence number of worker threads) increases for the `ST_Intersects` based join clearly demonstrates how optimizing the spatial predicate functions themselves can greatly impact the *scalability* of the spatial join, in the sense that it enables us to use more threads without being bottlenecked by e.g. memory allocation contention.
-
-We are actively working on adding more native implementations of the functions in the `spatial` extension and hope to have the remaining spatial predicates commonly used in joins (like `ST_Intersects`) optimized as well in the near future.
+Even though `ST_DWithin` is technically doing more work, its implementation in the `spatial` extension was recently changed to our own highly optimized native implementation which avoids extra memory allocation and copying. This clearly demonstrates how optimizing the spatial predicate functions themselves can significantly improve the performance of spatial joins. We are actively working on adding optimized versions of the rest of the commonly used spatial predicates (like `ST_Intersects`, `ST_Contains`, `ST_Within`, etc.) to the `spatial` extension and expect to see similar performance improvements across the board.
 
 ### Advanced join conditions
 
