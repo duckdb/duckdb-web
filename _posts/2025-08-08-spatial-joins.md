@@ -119,7 +119,7 @@ SET disabled_optimizers = 'extension';
 -- that we are using a nested loop join
 EXPLAIN SELECT neighborhood, count(*) AS num_rides
 FROM rides
-JOIN hoods on st_intersects(rides.start_geom, hoods.geom)
+JOIN hoods ON st_intersects(rides.start_geom, hoods.geom)
 GROUP BY neighborhood
 ORDER BY num_rides DESC
 LIMIT 3;
@@ -323,9 +323,9 @@ Just to show what this plan looks like, this is what you get when you run the sa
 LOAD spatial; -- Load the spatial extension
 
 -- Print the new query plan, using EXPLAIN
-EXPLAIN SELECT neighborhood, count(*) as num_rides
+EXPLAIN SELECT neighborhood, count(*) AS num_rides
 FROM rides
-JOIN hoods on st_intersects(rides.start_geom, hoods.geom)
+JOIN hoods ON st_intersects(rides.start_geom, hoods.geom)
 GROUP BY neighborhood
 ORDER BY num_rides DESC
 LIMIT 3;
