@@ -73,9 +73,19 @@ The first thing to understand is that a _spatial predicate_ is really just a fun
 
 Since all the above spatial predicates live in the `spatial` extension, DuckDB's query planner doesn't really know anything about them, except their names and that they are functions that take two `GEOMETRY` arguments and return a boolean value. This means that vanilla DuckDB on its own can't apply any special optimizations to them, and has to treat them like **any other function** in the database.
 
-When DuckDB plans a join where the join condition is an arbitrary function, it normally can't use any of the advanced built-in join strategies like `HASH_JOIN` or `RANGE_JOIN` which are optimized for equality or range comparisons. Instead DuckDB has to fall back to the simplest join strategy, which is to perform a “Nested Loop Join” (NLJ) – i.e. to evaluate the join condition for every possible pair of rows in the two tables. This is the most general way to implement a join, but it is also the least efficient. Since the _complexity_ of the join is `O(n * m)`, where `n` and `m` are the number of rows in the two tables, the time it takes to perform the join grows quadratically with the size of the input.
+When DuckDB plans a join where the join condition is an arbitrary function, it normally can't use any of the advanced built-in join strategies like `HASH_JOIN` or `RANGE_JOIN` which are optimized for equality or range comparisons. Instead DuckDB has to fall back to the simplest join strategy, which is to perform a “Nested Loop Join” (NLJ) – i.e. to evaluate the join condition for every possible pair of rows in the two tables. In pseudo-code, a nested-loop-join would look something like this:
 
-Quadratic complexity quickly becomes infeasible for large joins, but DuckDB's raw execution power usually makes it bearable when joining small to medium sized tables. However, what makes the nested-loop-join strategy impractical for spatial joins in particular, even at small to medium scale is that spatial predicates can be _very_ computationally expensive to evaluate in the first place. This is mostly due to the sheer complexity of the algorithms involved, but also due to the denormalized nature of geometries, in which a single geometry can contain a very large number of points. Also, besides the inherent theoretical complexity, the reality in `spatial` is that most of the spatial predicates implemented with the help of third-party libraries require a deserialization step to convert the internal binary format of the `GEOMETRY` column to an executable data structure. This usually also requires allocating memory outside of DuckDBs own memory management system, which increases pressure and lock contention on the global memory allocator, limiting the effectiveness of additional parallelism.
+```python
+for row_a in table_a:
+    for row_b in table_b:
+        if join_condition(row_a, row_b):
+            emit(row_a, row_b)
+
+```
+
+This is the most general way to implement a join, but it is also the least efficient. Since the _complexity_ of the join is `O(n * m)`, where `n` and `m` are the number of rows in the two tables, the time it takes to perform the join grows quadratically with the size of the input. Obviously, quadratic complexity quickly becomes infeasible for large joins, but DuckDB's raw execution power usually makes it bearable when joining small to medium sized tables. 
+
+However, what makes the nested-loop-join strategy impractical for spatial joins in particular, even at small to medium scale, is that spatial predicates can be _very_ computationally expensive to evaluate in the first place. This is mostly due to the sheer complexity of the algorithms involved, but also due to the denormalized nature of geometries, in which a single geometry can contain a very large number of points. Also, besides the inherent theoretical complexity, the reality in `spatial` is that most of the spatial predicates implemented with the help of third-party libraries require a deserialization step to convert the internal binary format of the `GEOMETRY` column to an executable data structure. This usually also requires allocating memory outside of DuckDBs own memory management system, which increases pressure and lock contention on the global memory allocator, limiting the effectiveness of additional parallelism.
 
 To illustrate how this plays out in practice, let's take a look at the query plan for the example query above, but with the `SPATIAL_JOIN` optimization disabled to force DuckDB to use a nested-loop-join instead:
 
@@ -138,13 +148,15 @@ Which is obviously not great. Running a 1/58th of the full dataset already takes
 
 In order to improve the situation, one of the first optimizations implemented in the early versions of the `spatial` extension was a re-write rule for the query planner. 
 
-The goal was to try to reduce the number of pairs that need to be evaluated by the exact spatial predicate function, by first filtering out pairs that are guaranteed to not match using a more efficient but less accurate bounding box check. The key insight is that the common spatial predicates almost all _imply_ that the geometries involved have to also _intersect_. And if they intersect, they also have to have _bounding boxes_ that intersect. This means that we can use the bounding boxes of the geometries to quickly filter out pairs that are guaranteed to not match, before evaluating the more expensive spatial predicate function. 
+Since evaluating the spatial predicate function itself is so expensive, its a good idea to try to do some *cheap* filtering of potential join matches first, in order to reduce the number of pairs that actually need to be checked by the precise spatial predicate function. Luckily for us, it is relatively easy to do this for most spatial predicates, since they all have a common property. They all _imply_ that the geometries involved have to _intersect_ in some way. And **if two geometries intersect, their bounding boxes must also intersect**. 
 
-Since checking if two bounding boxes intersect can be expressed as a set of simple less-than and greater-than comparisons, we can use DuckDB's existing [inequality join]({% post_url 2022-05-27-iejoin %}#inequality-join-iejoin) functionality to perform this join efficiently!
+The *bounding box*, sometimes called *minimum bounding rectangle* (MBR) of a geometry is the smallest rectangle that contains the geometry. Bounding boxes are relatively efficient to compute as they are basically just the minimum and maximum x and y coordinates of all vertices in the geometry, and can be computed in by scanning over the geometry a single pass. Additionally, checking if two bounding boxes intersect is also very cheap, as it can be done in constant time with a few simple less-than and greater-than comparisons on the min/max x and y coordinates of the bounding boxes.
 
-To implement this, we made the following changes to `spatial`:
+Therefore, we can make use of DuckDB's existing inequality join functionality! Explaining the inner workings of inequality joins is beyond the scope of this post because Richard have already done a great job of that in his [blog post on range joins]({% post_url 2022-05-27-iejoin %}#inequality-join-iejoin), but the gist is that its a join type that can efficiently join two tables using a series of inequality operators like `<`, `>`, `<=`, `>=`, etc.
 
-* Cache an approximate bounding box for each geometry in the serialized binary representation of the `GEOMETRY` column
+To leverage this, we made the following changes to `spatial`:
+
+* Cache an approximate bounding box for each geometry in the serialized binary representation of the `GEOMETRY` column so that we don't have to recompute it every time we need to evaluate a spatial predicate.
 * Introduce a re-write rule to change any inner nested-loop-join operators with a spatial predicate into two new operators:
     * `PIECEWISE_MERGE_JOIN`, a “IE” (inequality) range-join operator joining on the intersection of the bounding boxes, written as a series of `BETWEEN` clauses on the min/max values of the bounding boxes
     * `FILTER` operator that filters the resulting rows on the actual spatial predicate function.
@@ -231,12 +243,12 @@ This looks a lot more complicated than the original nested-loop-join, so how doe
 | 10,000,000                | 19.6s            |
 | 58,033,724                | 107.6s           |
 
-Much better, we managed to reduce the execution time from 30 minutes to just under 2 minutes for the full dataset! This was a huge improvement. Without requiring any custom operator code, we were able to leverage DuckDBs existing inequality join functionality to significantly speed up spatial joins as well.
+Much better, we managed to reduce the execution time from 30 minutes to just under 2 minutes for the full dataset! Without requiring any custom operator code, we were able to leverage DuckDBs existing inequality join functionality to significantly speed up spatial joins as well.
 
 However, this approach still has some drawbacks:
 
 * This re-write is only possible to do for `INNER` joins
-* We now have to store bounding boxes for each geometry, which increases the memory footprint of the `GEOMETRY` column, and we also have to recompute it whenever create or modify a `GEOMETRY`
+* We now store bounding boxes for each geometry, which increases the memory footprint of the `GEOMETRY` column, and we also have to recompute them whenever create or modify a `GEOMETRY`
 * The `PIECEWISE_MERGE_JOIN` operator has to sort the two input tables, which requires a lot of memory and can be really slow for large tables once the data no longer fits in memory
 
 DuckDB has since optimized sorting considerably, and `spatial` and its functions have also received various optimizations that improve performance slightly. Nonetheless this was always somewhat of a stop-gap solution to make spatial joins at least usable in the common case. How can we do better?
@@ -246,6 +258,8 @@ DuckDB has since optimized sorting considerably, and `spatial` and its functions
 One of the goals when implementing the [`RTREE` index]({% link docs/stable/core_extensions/spatial/r-tree_indexes.md %}) last year was to eventually be able to replace the `spatial` extensions `PIECEWISE_MERGE_JOIN` optimization with an index-based join strategy. After implementing the `RTREE`, we realized that creating a r-tree based index on top of existing data is actually surprisingly fast. Instead of requiring the user to always have to load data into a table and then index it just to accelerate their spatial joins, what if we just create a temporary r-tree index on-the-fly when executing the join? Kind of like how we create a temporary hash-table when performing a `HASH_JOIN`?
 
 This is exactly what the new `SPATIAL_JOIN` operator does. It takes two input tables, buffers all the input of the “right” table (i.e. table that the join-order-optimizer expects to be smaller), builds an r-tree index on top of the collected input, and then performs a join by looking up each row of the “left” table in the r-tree index as they arrive. The idea is exactly the same as with a `HASH_JOIN`, but instead of using a hash-table, we use an r-tree as our acceleration data structure to look up the matching rows.
+
+To quickly recap how an [r-tree](https://en.wikipedia.org/wiki/R-tree) works, it is a balanced tree data structure where internal nodes contain bounding boxes that cover the bounding boxes of their child nodes, and leaf nodes contain a bounding box for the geometry and a pointer to the row in the table they correspond to. This makes it possible to quickly look up all geometries that intersect a given bounding box by traversing the tree from the top down, only following branches that intersect the search box.
 
 While being a lot more complex to implement compared to the `PIECEWISE_MERGE_JOIN` based approach, this has several advantages:
 * The query re-write rule is much simpler, we just have to detect a nested-loop-join with a spatial predicate and replace it with a `SPATIAL_JOIN` operator, no other modifications to the query plan are needed.
