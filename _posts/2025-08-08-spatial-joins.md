@@ -286,7 +286,7 @@ This looks a lot more complicated than the original nested loop join, so how doe
 |                10,000,000 |         19.6 s |
 |                58,033,724 |        107.6 s |
 
-Much better, we managed to reduce the execution time from 30 minutes to **just under 2 minutes** for the full dataset! This was a huge improvement. Without requiring any custom operator code, we were able to leverage DuckDB's existing inequality join functionality to significantly speed up spatial joins as well. However, this approach still has some drawbacks:
+Much better, we managed to reduce the execution time from 30 minutes to **just under 2 minutes** for the full dataset! This was a huge improvement. Without requiring any custom operator code, we were able to leverage DuckDB's existing inequality join functionality to significantly speed up spatial joins as well.
 
 However, this approach still has some drawbacks:
 
