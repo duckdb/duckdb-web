@@ -326,12 +326,14 @@ To create and execute a prepared statement in the CLI client, use the `PREPARE` 
 
 ## Known Issues
 
-When querying the `max_memory` or `memory_limit` from the `duckdb_settings` using the CLI on Windows Subsystem for Linux (WSL) prior to version `2.5.7`, the returned values are incorrect. 
+When querying the `max_memory` or `memory_limit` from the `duckdb_settings` using the on the following versions of Ubuntu, the results are inaccurate:
+- Ubuntu 24.04.2
+- Canonical-Ubuntu-20.04-2025.07.23-0
 
 Example:
 
 ```bash
-from duckdb_settings() where name like '%mem%';
+echo "from duckdb_settings() where name like '%mem%';" | duckdb mydb.duckdb
 ```
 
 A workaround for this is to [download the latest WSL release](https://github.com/microsoft/WSL/releases).
