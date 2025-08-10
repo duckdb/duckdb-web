@@ -326,7 +326,7 @@ To create and execute a prepared statement in the CLI client, use the `PREPARE` 
 
 ## Known Issues
 
-When querying the `max_memory` or `memory_limit` from the `duckdb_settings` using the on the following versions of Ubuntu, the results are inaccurate:
+When querying the `max_memory` or `memory_limit` from the `duckdb_settings` using any of the following versions of Ubuntu, the values are inaccurate:
 - Ubuntu 24.04.2
 - Canonical-Ubuntu-20.04-2025.07.23-0
 
