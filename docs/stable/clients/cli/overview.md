@@ -336,4 +336,14 @@ Example:
 echo "from duckdb_settings() where name like '%mem%';" | duckdb mydb.duckdb
 ```
 
-A workaround for this is to [download the latest WSL release](https://github.com/microsoft/WSL/releases).
+Output:
+
+```bash
+┌──────────────┬────────────┬─────────────────────────────────────────────┬────────────┬─────────┐
+│     name     │   value    │                 description                 │ input_type │  scope  │
+│   varchar    │  varchar   │                   varchar                   │  varchar   │ varchar │
+├──────────────┼────────────┼─────────────────────────────────────────────┼────────────┼─────────┤
+│ max_memory   │ 1638.3 PiB │ The maximum memory of the system (e.g. 1GB) │ VARCHAR    │ GLOBAL  │
+│ memory_limit │ 1638.3 PiB │ The maximum memory of the system (e.g. 1GB) │ VARCHAR    │ GLOBAL  │
+└──────────────┴────────────┴─────────────────────────────────────────────┴────────────┴─────────┘
+```
