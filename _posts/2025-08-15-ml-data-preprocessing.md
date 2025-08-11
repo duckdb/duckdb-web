@@ -75,10 +75,10 @@ When applying one-hot encoding over a category column, each distinct value is tr
 FROM financial_trx
 SELECT DISTINCT
     transaction_type,
-    deposit_onehot: (transaction_type = 'deposit')::INTEGER,
-    payment_onehot: (transaction_type = 'payment')::INTEGER,
-    transfer_onehot: (transaction_type = 'transfer')::INTEGER,
-    withdrawal_onehot: (transaction_type = 'withdrawal')::INTEGER
+    deposit_onehot: (transaction_type = 'deposit')::INT,
+    payment_onehot: (transaction_type = 'payment')::INT,
+    transfer_onehot: (transaction_type = 'transfer')::INT,
+    withdrawal_onehot: (transaction_type = 'withdrawal')::INT
 ORDER BY transaction_type;
 ```
 
@@ -99,7 +99,7 @@ Another way to one-hot encode is by using the [`PIVOT` statement]({% link docs/s
 ```sql
 PIVOT financial_trx
 ON transaction_type
-USING coalesce(max(transaction_type = transaction_type)::INTEGER, 0) AS onehot
+USING coalesce(max(transaction_type = transaction_type)::INT, 0) AS onehot
 GROUP BY transaction_type;
 ```
 
@@ -115,12 +115,12 @@ If there are more category columns to be one-hot encoded then `PIVOT` can be use
 WITH onehot_trx_type AS (
     PIVOT financial_trx
     ON transaction_type
-    USING coalesce(max(transaction_type = transaction_type)::INTEGER, 0) AS onehot
+    USING coalesce(max(transaction_type = transaction_type)::INT, 0) AS onehot
     GROUP BY transaction_type
 ), onehot_payment_channel AS (
     PIVOT financial_trx
     ON payment_channel
-    USING coalesce(max(payment_channel = payment_channel)::INTEGER, 0) AS onehot
+    USING coalesce(max(payment_channel = payment_channel)::INT, 0) AS onehot
     GROUP BY payment_channel
 )
 SELECT
@@ -142,9 +142,7 @@ Ordinal encoding assigns a unique identifier to each categorical value and it is
 WITH trx_type_ordinal_encoded AS (
     SELECT
         transaction_type,
-        trx_type_oe: row_number() OVER (
-            ORDER BY transaction_type
-        ) - 1
+        trx_type_oe: row_number() OVER (ORDER BY transaction_type) - 1
     FROM (
         SELECT DISTINCT transaction_type
         FROM financial_trx
@@ -259,7 +257,7 @@ EXCEPT
 FROM financial_trx_training;
 ```
 
-> Using a `seed` we make sure the sampling is reproducible, i.e., it returns the same result on the same input data on every execution.
+> We configure DuckDB to use a single-thread and set a `seed` to make sure that the sampling is reproducible.
 
 ### Standard Scaling
 
@@ -274,7 +272,9 @@ WITH scaling_params AS (
         stddev_pop_velocity_score: stddev_pop(velocity_score)
     FROM financial_trx_training
 )
-SELECT ss_velocity_score: (velocity_score - avg_velocity_score) / stddev_pop_velocity_score
+SELECT
+    ss_velocity_score: (velocity_score - avg_velocity_score) /
+        stddev_pop_velocity_score
 FROM
     financial_trx_testing,
     scaling_params;
@@ -284,7 +284,7 @@ The above query can be greatly simplified by using DuckDB macros. With [scalar m
 
 ```sql
 CREATE OR REPLACE MACRO standard_scaler(val, avg_val, std_val) AS
-(val - avg_val) / std_val;
+    (val - avg_val) / std_val;
 ```
 
 With [table macros]({% link docs/stable/sql/statements/create_macro.md %}#table-macros), we can create a function to return the scaling parameters required by the standard scaler macro:
@@ -391,7 +391,7 @@ We define the scalar macro for the robust scaling calculation:
 
 ```sql
 CREATE OR REPLACE MACRO robust_scaler(val, q25_val, q50_val, q75_val) AS
-(val - q50_val) / nullif(q75_val - q25_val, 0);
+    (val - q50_val) / nullif(q75_val - q25_val, 0);
 ```
 
 And, similarly with the other scaling transformations, we call it in SQL directly:
