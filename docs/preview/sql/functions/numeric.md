@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/test/functions/math
-- /docs/test/functions/math/
-- /docs/sql/functions/numeric
 title: Numeric Functions
 ---
 
@@ -11,7 +7,7 @@ title: Numeric Functions
 
 ## Numeric Operators
 
-The table below shows the available mathematical operators for [numeric types]({% link docs/stable/sql/data_types/numeric.md %}).
+The table below shows the available mathematical operators for [numeric types]({% link docs/preview/sql/data_types/numeric.md %}).
 
 <!-- markdownlint-disable MD056 -->
 
