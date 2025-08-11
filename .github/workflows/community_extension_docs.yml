@@ -20,7 +20,7 @@ jobs:
         path: '.'
         token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
 
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v5
       with:
         name: generated_markdowns
 

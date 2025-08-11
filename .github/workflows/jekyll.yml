@@ -126,11 +126,11 @@ jobs:
     needs: [build_html, build_pdf]
     steps:
       # download both the html and the pdf artifacts into the _site directory
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           name: html_artifact
           path: _site
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           name: pdf_artifact
           path: _site
