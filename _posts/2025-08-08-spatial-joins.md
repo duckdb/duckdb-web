@@ -398,7 +398,7 @@ DuckDB's execution engine dynamically adjusts the number of threads used in a qu
 
 ### Faster Predicate Functions
 
-Most predicate functions in the `spatial` extension are implemented using third-party libraries which carry some overhead as we are unable to integrate them as tightly with DuckDB's execution engine and memory management, often requiring some sort of deserialization or conversion step. This can be quite expensive, especially for large geometries. To demonstrate impact of this in practice, we can compare the performance of joining on `ST_Intersects(x, y)` with the functionally equivalent `ST_DWithin(x, y, 0)`, by comparing the previous results with the timings of the following query:
+Most predicate functions in the `spatial` extension are implemented using third-party libraries which carry some overhead as we are unable to integrate them as tightly with DuckDB's execution engine and memory management, often requiring some sort of deserialization or conversion step. This can be quite expensive, especially for large geometries. To demonstrate impact of this in practice, we can compare the performance of joining on `ST_Intersects(x, y)` with the somewhat equivalent `ST_DWithin(x, y, 0)`, by comparing the previous results with the timings of the following query:
 
 ```sql
 SELECT neighborhood, count(*) AS num_rides
@@ -415,7 +415,7 @@ LIMIT 3;
 |                10,000,000 |                       4.8 s |                    0.7 s |
 |                58,033,724 |                      28.7 s |                    4.3 s |
 
-Even though `ST_DWithin` is technically doing more work, its implementation in the `spatial` extension was recently changed to our own highly optimized native implementation which avoids extra memory allocation and copying. This clearly demonstrates how optimizing the spatial predicate functions themselves can significantly improve the performance of spatial joins. We are actively working on adding optimized versions of the rest of the commonly used spatial predicates (like `ST_Intersects`, `ST_Contains`, `ST_Within`, etc.) to the `spatial` extension and expect to see similar performance improvements across the board.
+Now, `ST_DWithin` is not the strictly the same as `ST_Intersects`, so this is not an apples-to-apples comparison. Even if they produce the same output in this example, you should not rush to replace all instances of `ST_Intersects` with `ST_DWithin` in your code just to squeeze out some extra performance. In fact, `ST_DWithin` is technically doing _more_ work as the algorithm is more complex. The reason why it is still faster in this case, and the reason why we're bringing it up, is because its implementation in the `spatial` extension was recently changed to our own highly optimized native implementation. This implementation goes the extra mile in avoiding memory allocation and copying, and the results speak for themselves. This goes to show how optimizing the spatial predicate functions themselves can significantly improve the performance of spatial joins. We are actively working on adding optimized versions of the rest of the commonly used spatial predicates (like `ST_Intersects`, `ST_Contains`, `ST_Within`, etc.) to the `spatial` extension and expect to see similar performance improvements across the board. So stick with `ST_Intersects` when appropriate, and look forward to more performance gains in the future!
 
 ### Advanced Join Conditions
 
