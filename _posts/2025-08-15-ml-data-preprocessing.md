@@ -472,10 +472,10 @@ Therefore, in our benchmark, the `scikit-learn` data preprocessing steps include
 - all the columns are passed through the transformation step, by setting `remainder='passthrough'`.
 
 ```python
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 
 
 def scikit_feature_scaling_training_data(x_train):
@@ -532,7 +532,7 @@ demonstrating that DuckDB offers a significant performance improvement over `sci
     </a>
 </div>
 
-> In the script `reconcile_results.py`, the results between the DuckDB and `scikit-learn` are reconciled, demonstrating that both implementations produce the same results.
+> In the script `reconcile_results.py`, the results between the DuckDB and `scikit-learn` preprocessing steps are reconciled, demonstrating that both implementations produce the same results.
 
 ## Conclusion
 
