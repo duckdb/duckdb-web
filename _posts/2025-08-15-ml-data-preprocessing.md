@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Data Preprocessing for Machine Learning with DuckDB"
+title: "Basic Feature Engineering with DuckDB"
 author: Petrica Leuca
 thumb: "/images/blog/thumbs/duckdb-scikit-learn-2.png"
 image: "/images/blog/thumbs/duckdb-scikit-learn-2.svg"
@@ -459,7 +459,68 @@ Filling missing data should be done before feature scaling.
 
 ## Benchmark
 
-Bringing the above data processing steps together, we have decided to benchmark the execution time against the data processing pipelines with `scikit-learn`. The code is available [in our blog examples repository](https://github.com/duckdb/duckdb-blog-examples/tree/main/ml_data_preprocessing). The figure below shows the execution times on a MacBook Pro with 16 GB:
+Bringing the above data processing steps together, we have decided to benchmark the execution time against the `scikit-learn` data preprocessing pipelines.
+The code is available [in our blog examples repository](https://github.com/duckdb/duckdb-blog-examples/tree/main/ml_data_preprocessing).
+
+In `scikit-learn`, data preprocessing is done through transformers and pipelines.
+A transformer is a class that implements the `fit` and `transform` methods, while a pipeline is a sequence of transformers that are applied to the data in a specific order.
+Unless specified otherwise, each step of the pipeline returns, in numpy arrays, only the result of the transformation step.
+Because in DuckDB we transform the data through SQL expressions, we can inspect the full data set after each step.
+Therefore, in our benchmark, the `scikit-learn` data preprocessing steps include the following transformations:
+
+- the [output of the transformation step](https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_set_output.html) is set to `pandas`;
+- all the columns are passed through the transformation step, by setting `remainder='passthrough'`.
+
+```python
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
+from sklearn.compose import ColumnTransformer
+
+
+def scikit_feature_scaling_training_data(x_train):
+    impute_missing_data = Pipeline(
+        [
+            ("imputer", SimpleImputer(strategy="mean")),
+            ("scaler", MinMaxScaler(copy=False)),
+        ]
+    )
+
+    scaling_steps = ColumnTransformer(
+        [
+            (
+                "ss",
+                StandardScaler(copy=False),
+                ["velocity_score"]
+            ),
+            (
+                "minmax_time_since_last_transaction",
+                impute_missing_data,
+                ["time_since_last_transaction"],
+            ),
+            ( 
+                "minmax",
+                MinMaxScaler(copy=False),
+                ["spending_deviation_score"]
+            ),
+            (
+                "rs",
+                RobustScaler(copy=False),
+                ["amount"]
+            ),
+        ],
+        remainder="passthrough",
+        verbose_feature_names_out=False,
+    )
+
+    scaling_steps.set_output(transform="pandas")
+    scaling_steps.fit(x_train)
+
+    return scaling_steps, scaling_steps.transform(x_train)
+```
+
+The figure below shows the execution times on a MacBook Pro with 16 GB,
+demonstrating that DuckDB offers a significant performance improvement over `scikit-learn` for the data preprocessing steps.
 
 <div align="center" style="margin:10px">
     <a href="/images/blog/ml-data-preprocessing/ml_data_preprocessing.png">
@@ -471,9 +532,7 @@ Bringing the above data processing steps together, we have decided to benchmark 
     </a>
 </div>
 
-It is important to note that, because DuckDB makes available the full data to be inspected in between processing steps, we have included in the benchmark the conversion of `scikit-learn` data preprocessing results into Pandas dataframes.
-
-In the script `reconcile_results.py`, the results between the DuckDB and `scikit-learn` are reconciled, demonstrating that both implementations produce the same results.
+> In the script `reconcile_results.py`, the results between the DuckDB and `scikit-learn` are reconciled, demonstrating that both implementations produce the same results.
 
 ## Conclusion
 
