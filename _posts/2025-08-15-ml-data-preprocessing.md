@@ -251,13 +251,14 @@ CREATE TABLE financial_trx_training AS
 FROM financial_trx
 USING SAMPLE 80 PERCENT (reservoir, 256);
 
+SET threads = 8;
+
 CREATE TABLE financial_trx_testing AS
 FROM financial_trx
-EXCEPT
-FROM financial_trx_training;
+ANTI JOIN financial_trx_training USING (transaction_id);
 ```
 
-> We configure DuckDB to use a single-thread and set a `seed` to make sure that the sampling is reproducible.
+> We configure DuckDB to use a single-thread during sampling and set a `seed` to make sure that the sampling is reproducible.
 
 ### Standard Scaling
 
