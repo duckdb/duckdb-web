@@ -259,6 +259,7 @@ ANTI JOIN financial_trx_training USING (transaction_id);
 ```
 
 > We configure DuckDB to use a single-thread during sampling and set a `seed` to make sure that the sampling is reproducible.
+> We also apply the `reservoir` sampling strategy to have exactly 80% of the records in the resulting sample.
 
 ### Standard Scaling
 
