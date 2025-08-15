@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: splink_udfs
   description: Phonetic, text normalization and fuzzy matching functions for record linkage.
-  version: 0.0.6
+  version: 0.0.7
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: moj-analytical-services/splink_udfs
-  ref: b30d5548824af3b2f8f474febde9aca646cc3de9
+  ref: 8e6c3b9cfd8a27d73435c8ded7129dfe718893d7
 
 docs:
   hello_world: |
