@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: httpserver
   description: DuckDB HTTP API Server Extension
-  version: 0.1.8
+  version: 0.1.9
   language: SQL & C++
   build: cmake
   license: MIT
@@ -18,10 +18,11 @@ extension:
     - akvlad
     - niclashaderer
     - gropaul
+    - rustyconover
 
 repo:
-  github: quackscience/duckdb-extension-httpserver
-  ref: db20da882e68941e1edb9927d1596a9024df23cc
+  github: Query-farm/duckdb-extension-httpserver
+  ref: 5ec9292017d03348cf4e91eb2f9cf23c9719a891
 
 docs:
   hello_world: |
@@ -74,8 +75,10 @@ docs:
   
     > This extension is experimental and potentially unstable. Use at your own risk.
 
-extension_star_count: 222
-extension_star_count_pretty: 222
+    > This DuckDB extension was created by Query.Farm, where we develop and maintain many extensions that expand DuckDB’s capabilities by connecting it to new data sources, formats, and features.
+
+extension_star_count: 223
+extension_star_count_pretty: 223
 extension_download_count: 873
 extension_download_count_pretty: 873
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
