@@ -31,8 +31,8 @@ docs:
   extended_description: |
     This extension is a tiny utility to choose a file interactively.
 
-extension_star_count: 13
-extension_star_count_pretty: 13
+extension_star_count: 14
+extension_star_count_pretty: 14
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_file_dialog.png'
