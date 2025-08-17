@@ -26,7 +26,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
 ### Prerequisites
 
-1. The site is built using [Jekyll](https://jekyllrb.com/). For instructions on setting up Ruby for Jekyll, please visit the [Installation page of Jekyll](https://jekyllrb.com/docs/installation/macos/). Note that as of January 2025, the latest Ruby (3.4.x) is not supported by Jekyll. Instead, you need Ruby 3.3.x, which can be installed via [chruby](https://jekyllrb.com/docs/installation/macos/#step-2-install-chruby-and-the-latest-ruby-with-ruby-install).
+1. The site is built using [Jekyll](https://jekyllrb.com/). For instructions on setting up Ruby for Jekyll, please visit the [Installation page of Jekyll](https://jekyllrb.com/docs/installation/macos/). To install a specific Ruby version, we recommend using [chruby](https://jekyllrb.com/docs/installation/macos/#step-2-install-chruby-and-the-latest-ruby-with-ruby-install).
 
 2. Install Jekyll and the other required Ruby dependencies using Bundler:
 
@@ -36,12 +36,13 @@ The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
     For more details on setting up Jekyll, consult [GitHub's instructions](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll).
 
-3. Create a Python virtual env and install requirements
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate
-  pip install -r requirements.txt
-  ```
+3. Create a Python virtual env and install requirements:
+
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+    ```
 
 ### Serving the site using a local Jekyll installation
 
