@@ -181,7 +181,7 @@
   architecture: universal
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip'
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb-binaries-osx.zip https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip &&
+    curl -fL --progress-bar --output duckdb-binaries-osx.zip https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip &&
     unzip duckdb-binaries-osx.zip &&
     unzip duckdb_cli-osx-universal.zip
 - variant: nightly
@@ -191,7 +191,7 @@
   architecture: x86_64
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip'
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb-binaries-linux-amd64.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip &&
+    curl -fL --progress-bar --output duckdb-binaries-linux-amd64.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip &&
     unzip duckdb-binaries-linux-amd64.zip &&
     unzip duckdb_cli-linux-amd64.zip
 - variant: nightly
@@ -201,7 +201,7 @@
   architecture: arm64
   link: 'https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip'
   installation_code: >-
-    curl --fail --location --progress-bar --output duckdb-binaries-linux-arm64.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip &&
+    curl -fL --progress-bar --output duckdb-binaries-linux-arm64.zip https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip &&
     unzip duckdb-binaries-linux-arm64.zip &&
     unzip duckdb_cli-linux-arm64.zip
 - variant: nightly
