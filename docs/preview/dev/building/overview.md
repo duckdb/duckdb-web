@@ -109,7 +109,7 @@ Note that amalgamation build is provided on a best-effort basis and is not offic
 
 ## Limitations
 
-Currently, DuckDB has the following known compile time limitations:
+Currently, DuckDB has the following known compile-time limitations:
 
 * The `-march=native` build flag, i.e., compiling DuckDB with the local machine's native instructions set, is not supported.
 
