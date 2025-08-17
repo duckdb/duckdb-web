@@ -323,27 +323,3 @@ It is only available in the CLI client and is not supported in other DuckDB clie
 
 The DuckDB CLI supports executing [prepared statements]({% link docs/stable/sql/query_syntax/prepared_statements.md %}) in addition to regular `SELECT` statements.
 To create and execute a prepared statement in the CLI client, use the `PREPARE` clause and the `EXECUTE` statement.
-
-## Known Issues
-
-When querying the `max_memory` or `memory_limit` from the `duckdb_settings` using any of the following versions of Ubuntu, the values are inaccurate:
-- Ubuntu 24.04.2
-- Canonical-Ubuntu-20.04-2025.07.23-0
-
-Example:
-
-```bash
-echo "from duckdb_settings() where name like '%mem%';" | duckdb mydb.duckdb
-```
-
-Output:
-
-```bash
-┌──────────────┬────────────┬─────────────────────────────────────────────┬────────────┬─────────┐
-│     name     │   value    │                 description                 │ input_type │  scope  │
-│   varchar    │  varchar   │                   varchar                   │  varchar   │ varchar │
-├──────────────┼────────────┼─────────────────────────────────────────────┼────────────┼─────────┤
-│ max_memory   │ 1638.3 PiB │ The maximum memory of the system (e.g. 1GB) │ VARCHAR    │ GLOBAL  │
-│ memory_limit │ 1638.3 PiB │ The maximum memory of the system (e.g. 1GB) │ VARCHAR    │ GLOBAL  │
-└──────────────┴────────────┴─────────────────────────────────────────────┴────────────┴─────────┘
-```
