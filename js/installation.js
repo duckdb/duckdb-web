@@ -52,6 +52,7 @@ $(document).ready(function(){
 		markup = markup.replace( 'pip install', '<span class="nb">pip install</span>' );
 		markup = markup.replace( 'winget install', '<span class="nb">winget install</span>' );
 		markup = markup.replace( 'curl', '<span class="nb">curl</span>' );
+		markup = markup.replaceAll( 'unzip', '<span class="nb">unzip</span>' );
 		markup = markup.replace( '| sh', '| <span class="nb">sh</span>' );
 		markup = markup.replace( /([^-._'"/])duckdb([^-._'"/])/, '$1<span class="nb">duckdb</span>$2' );
 		markup = markup.replace( /^duckdb$/, '<span class="nb">duckdb</span>' );
