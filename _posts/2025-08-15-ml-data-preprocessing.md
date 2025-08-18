@@ -528,7 +528,7 @@ demonstrating that DuckDB offers a significant performance improvement over `sci
     <a href="/images/blog/ml-data-preprocessing/ml_data_preprocessing.png">
         <img
           src="/images/blog/ml-data-preprocessing/ml_data_preprocessing.png"
-          alt="Data Preprocessing Benchmark"
+          alt="Data Preprocessing Benchmark, During Training"
           width="700"
         />
     </a>
@@ -536,6 +536,14 @@ demonstrating that DuckDB offers a significant performance improvement over `sci
 
 > In the script `reconcile_results.py`, the results between the DuckDB and `scikit-learn` preprocessing steps are reconciled, demonstrating that both implementations produce the same results.
 
+In the above examples, we demonstrated how to perform data preprocessing with SQL expressions during training.
+In practice, the same preprocessing steps must be applied at inference time, such that new data is transformed consistently with the training data.
+With `scikit-learn`, this is achieved by persisting the pipeline alongside the model and applying the pipeline at inference time.
+With DuckDB, the equivalent consistency is achieved by persisting the original training data (or the metrics returned by the `scaling_params` macro, computed during training).
+Despite the (transformed) training data being much larger than the model artifacts, versioning the data and features calculated at training time is a common practice, which ensures model traceability and reproducibility.
+
+> For efficient (training) data management, one can leverage solutions that provide time travel, such as [DuckLake](https://ducklake.select/docs/stable/duckdb/usage/time_travel).
+
 ## Conclusion
 
-In this article we demonstrated how DuckDB offers a performant and SQL-native approach to data preprocessing for machine learning workflows. By handling tasks such as missing value imputation, categorical encoding, and feature scaling directly within the database engine, one can eliminate unnecessary data movement and reduce preprocessing latency.
+In this article we showed how DuckDB offers a performant and SQL-native approach to data preprocessing for machine learning workflows. By handling tasks such as missing value imputation, categorical encoding, and feature scaling directly within the database engine, one can eliminate unnecessary data movement, during training, and reduce preprocessing latency.
