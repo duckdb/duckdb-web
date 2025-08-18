@@ -1,7 +1,13 @@
 ---
-layout: docu
+layout: default
 title: Why DuckDB
+body_class: why-duckdb blog_typography
+toc: true
 ---
+
+<div class="wrap pagetitle">
+  <div class="pagetitle-heading" role="heading" aria-level="1">Why DuckDB</div>
+</div>
 
 There are many database management systems (DBMS) out there. But there is [no one-size-fits all database system](https://blobs.duckdb.org/papers/stonebraker-centintemel-one-size-fits-all-icde-2015.pdf). All take different trade-offs to better adjust to specific use cases. DuckDB is no different. Here, we try to explain what goals DuckDB has and why and how we try to achieve those goals through technical means. To start with, DuckDB is a [relational (table-oriented) DBMS](https://en.wikipedia.org/wiki/Relational_database) that supports the [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL).
 

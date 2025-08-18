@@ -83,14 +83,35 @@
 	-->
 		{% endif %}
 		
-			<div class="wrap">
-				<div id="main_content_wrap">
-					{% include anchor_headings.html html=content %}
+			<div class="wrap {% if page.toc == true %}fullwidth{% endif %}">
+				<div id="main_content_wrap" class="{% if page.toc == true %} contains_toc{% endif %}">
+					<div class="content">
+						{% if page.toc == true %}
+						<div class="contentwidth">
+						{% endif %}
+							{% include anchor_headings.html html=content %}
 
-					{% if page.benchmark and page.benchmark != "" and page.benchmark != nil %}
-					<table class="table">
-						{% include {{ page.benchmark }} %}
-					</table>
+							{% if page.benchmark and page.benchmark != "" and page.benchmark != nil %}
+							<table class="table">
+								{% include {{ page.benchmark }} %}
+							</table>
+							{% endif %}
+						{% if page.toc == true %}
+						</div>
+						{% endif %}
+					</div>
+					
+					{% if page.toc == true %}
+						<div class="toc_sidebar">
+							{% assign toc_only = content | toc_only %}
+							{% assign toc_text_only = toc_only | strip_html | remove: ' ' %}
+							{% if toc_text_only.size > 10 %}
+								<div class="toc_menu">
+									<h5>In this article</h5>
+									{{ toc_only }}
+								</div>
+							{% endif %}
+						</div>
 					{% endif %}
 				</div>
 			</div>
