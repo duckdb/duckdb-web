@@ -21,7 +21,7 @@ CREATE TABLE financial_trx AS
     FROM read_csv('https://blobs.duckdb.org/data/financial_fraud_detection_dataset.csv');
 ```
 
-We start by analyzing the data by executing [`SUMMARIZE`]({% link docs/stable/guides/meta/summarize.md %})
+We start by analyzing the data by executing [`SUMMARIZE`]({% link docs/stable/guides/meta/summarize.md %}):
 
 ```sql
 FROM (SUMMARIZE financial_trx)
