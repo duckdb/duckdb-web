@@ -244,23 +244,10 @@ func (r *DuckDBSQLRunner) importRecord(sr io.Reader) error {
         return fmt.Errorf("failed to create IPC reader: %w", err)
     }
     defer rdr.Release()
-    stmt, err := r.conn.NewStatement()
-    if err != nil {
-        return fmt.Errorf("failed to create new statement: %w", err)
-    }
-    if err := stmt.SetOption(adbc.OptionKeyIngestMode, adbc.OptionValueIngestModeCreate); err != nil {
-        return fmt.Errorf("failed to set ingest mode: %w", err)
-    }
-    if err := stmt.SetOption(adbc.OptionKeyIngestTargetTable, "temp_table"); err != nil {
-        return fmt.Errorf("failed to set ingest target table: %w", err)
-    }
-    if err := stmt.BindStream(r.ctx, rdr); err != nil {
-        return fmt.Errorf("failed to bind stream: %w", err)
-    }
-    if _, err := stmt.ExecuteUpdate(r.ctx); err != nil {
-        return fmt.Errorf("failed to execute update: %w", err)
-    }
-    return stmt.Close()
+
+    _, err = adbc.IngestStream(r.ctx, r.conn, rdr, "temp_table", adbc.OptionValueIngestModeCreate, adbc.IngestStreamOptions{})
+
+    return err
 }
 
 func (r *DuckDBSQLRunner) runSQL(sql string) ([]arrow.Record, error) {
