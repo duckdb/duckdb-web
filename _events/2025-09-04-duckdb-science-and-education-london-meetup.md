@@ -7,7 +7,7 @@ thumb: "/images/events/thumbs/duckdb-science-and-education-london-meetup.svg"
 image: "/images/events/thumbs/duckdb-science-and-education-london-meetup.png"
 excerpt: ""
 tags: ["meetup"]
-venue: "1 Great George Street, London"
+venue: "One Great George Street, London"
 ---
 
 <img src="/images/events/thumbs/duckdb-science-and-education-london-meetup.svg"
