@@ -29,10 +29,9 @@ The type integer is the common choice, as it offers the best balance between ran
 ## Variable Integer
 
 The previously mentioned integer types all have in common that the numbers in the minimum and maximum range all have the same storage size, `UTINYINT` is 1 byte, `SMALLINT` is 2 bytes, etc.
-But sometimes you need numbers that are even bigger than what is supported by a `HUGEINT`! For these situations the `VARINT` type can come in handy, as the `VARINT` type has a _much_ bigger limit (the value can consist of up to 1,262,612 digits).
-The minimum storage size for a `VARINT` is 4 bytes, every digit takes up an extra bit, rounded up to 8 (12 digits take 12 bits, rounded up to 16, becomes two extra bytes).
+But sometimes you need numbers that are even bigger than what is supported by a `HUGEINT`! In these situations, you can use the `VARINT` type, which stores positive numbers in a similar fashion as other integer types, but uses three additional bytes to store the required size and a sign bit. A number with `N` decimal digits requires approximately `0.415 * N + 3` bytes when stored in a `VARINT`. 
 
-Both negative and positive values are supported by the `VARINT` type.
+Unlike `VARINT` implementations in other systems, there are limits: the maximal and minimal representable values are approximately `±4.27e20201778`. Those are numbers with 20,201,779 decimal digits and storing a single such number requires 8 megabytes. 
 
 ## Fixed-Point Decimals
 
