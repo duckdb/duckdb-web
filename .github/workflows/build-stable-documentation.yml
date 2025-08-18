@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Python requirements
         run: pip3 install -r requirements.txt --break-system-packages
       - name: Setup Ruby
@@ -39,7 +39,7 @@ jobs:
         working-directory: single-file-document
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Python
         run: |
           PYTHONUNBUFFERED=1

@@ -11,7 +11,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web' }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
       - uses: actions/setup-python@v5
@@ -22,11 +22,11 @@ jobs:
       - run: pip install wheel pip -U --break-system-packages
       - run: pip install -r requirements.txt -U --break-system-packages
       - run: pip install duckdb --pre -U --break-system-packages # grab the latest duckdb python dev version
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           path: 'duckdb'
           repository: 'duckdb/duckdb'
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           path: 'duckdb-node'
           repository: 'duckdb/duckdb-node'
