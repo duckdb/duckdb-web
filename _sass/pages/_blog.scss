@@ -292,101 +292,7 @@ h5 a {
 		position: relative;
 		.postcontent{
 			margin: 0 auto;
-			h1{
-				margin-top: 60px;
-				font-weight: 500;
-			}
-			p, ul li, ol li{
-				@include body-large();
-				margin-top: 30px;
-				margin-bottom: 30px;
-				i, em{
-					font-family: $fontSans;
-					font-style: italic;
-				}
-			}
-			ul li, ol li{
-				margin-top: 0;
-				margin-bottom: 0;
-			}
-			iframe{
-				outline: 0;
-				border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
-			}
-			h2{
-				@include headline-1();
-				margin-top: 60px;
-			}
-			h3{
-				@include headline-2();
-				margin-top: 60px;
-			}
-			h4{
-				@include headline-3();
-				margin-top: 60px;
-			}
-			h5{
-				@include title-1();
-				margin-top: 60px;
-			}
-			h2 + h3,
-			h3 + h4{
-				margin-top: 30px;
-			}
-			blockquote{
-				h4{
-					@include title-2();
-					margin-top: 0;
-				}
-				ul{
-					padding: 0 0 0 20px;
-				}
-				ul li, 
-				ol li,
-				p{
-					@include body-standard();
-				}
-				p{
-					margin: .8em 0;
-				}
-			}
-			table{
-				text-align: left;
-				code{
-					@include code-standard();
-				}
-				code.highlight{
-					padding: 2px 6px;
-					border-radius: 6px !important;
-					margin-left: 0;
-					line-height: 27px;
-				}
-			}
-			table thead th{
-				@include title-2();
-			}
-			table tbody td{
-				@include body-standard();
-				padding: 10px;
-			}
-			table tbody tr:hover{
-				background: var(--doc-codebox-border-color, #E6E6E6);
-			}
-			div.highlight{
-				max-width: 750px;
-			}
-			div.highlighter-rouge + table,
-			table + div.highlighter-rouge{
-				margin-top: 30px;
-			}
-			.highlighter-rouge,
-			table{
-				margin-bottom: 20px;
-			}
-			hr {
-				margin: 50px 0 50px 0;
-				border: 0.5px solid rgb(229, 229, 229);
-			}
+			@include blog-typography;
 			.video-container{
 				margin: 30px 0;
 				position: relative;
@@ -487,7 +393,7 @@ h5 a {
 				}
 				> ul{
 					padding: 20px;
-					-ms-grid-columns: (1fr)[4];
+					-ms-grid-columns: 1fr 1fr 1fr 1fr;
 					grid-template-columns: repeat(4, 1fr);
 					list-style: none;
 					display: -ms-grid;
@@ -500,11 +406,11 @@ h5 a {
 						text-align: center;
 					}
 					@media only screen and (max-width: 900px) {
-						-ms-grid-columns: (1fr)[3];
+						-ms-grid-columns: 1fr 1fr 1fr;
 						grid-template-columns: repeat(3, 1fr);
 					}
 					@media only screen and (max-width: 700px) {
-						-ms-grid-columns: (1fr)[2];
+						-ms-grid-columns: 1fr 1fr;
 						grid-template-columns: repeat(2, 1fr);
 					}
 					@media only screen and (max-width: 550px) {

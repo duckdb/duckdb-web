@@ -755,6 +755,32 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		});
 	}
 	
+	/** HIGHLIGHT TOC MENU FOR DEFAULT LAYOUT **/
+	if ($('#main_content_wrap.contains_toc').length) {
+		var headings = $('#main_content_wrap h2, #main_content_wrap h3');
+		var tocEntries = $('.toc-entry');
+		
+		$(window).on('scroll', function() {
+			var scrollPos = $(window).scrollTop() + 150; // top offset
+			var documentHeight = $(document).height();
+		
+			headings.each(function(index, element) {
+				var id = $(element).attr('id');
+				var offset = $(element).offset().top;
+		
+				if (scrollPos >= offset) {
+					tocEntries.removeClass('current');
+					$('.toc-entry a[href="#' + id + '"]').parent().addClass('current');
+				}
+			});
+		
+			if (scrollPos + $(window).height() >= documentHeight - 20) {
+				tocEntries.removeClass('current'); 
+				$('.toc-entry:last').addClass('current'); 
+			}
+		});
+	}
+	
 	
 	/** HIDE BANNER **/
 	const showbanner = getWithExpiry("homeBanner");
@@ -779,6 +805,20 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	/** ADD WORD-BOXES TO CODE TABLES */
 	$('.monospace_table + table tbody td').each(function() {
 		$(this).wrapInner('<code class="language-plaintext"></code>');
+	});
+	
+	/** RE-CALCULATE SELECT-ACTIVE-BUBBLES */
+	$(window).on('load', function() {
+		$('.topbar, .environment').each(function() {
+			var $activeItem = $(this).find('li.active');
+			updateHighlight($(this), $activeItem);
+		});
+	});
+	$(window).on('resize', function() {
+		$('.topbar, .environment').each(function() {
+			var $activeItem = $(this).find('li.active');
+			updateHighlight($(this), $activeItem);
+		});
 	});
 	
 });

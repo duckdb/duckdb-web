@@ -1,12 +1,19 @@
 ---
-layout: docu
+layout: default
 title: Development Roadmap
+body_class: roadmap blog_typography post
 redirect_from:
 - /docs/stable/dev/roadmap
 - /docs/stable/dev/roadmap/
 - /docs/preview/dev/roadmap
 - /docs/preview/dev/roadmap/
+max_page_width: small
+toc: false
 ---
+
+<div class="wrap pagetitle">
+  <h1>Development Roadmap</h1>
+</div>
 
 ## Overview
 

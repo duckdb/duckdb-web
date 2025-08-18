@@ -189,9 +189,10 @@ body.installation div.environment.select label.onlymobile{
 }
 
 .pagetitle {
-	padding: 65px 0;
-
-	h1 {
+	padding: 65px 0 50px 0;
+	
+	h1,
+	.pagetitle-heading {
 		@include display-1();
 		margin: 0;
 	}

@@ -2,6 +2,7 @@
 layout: default
 title: Frequently Asked Questions
 body_class: faq
+toc: false
 ---
 
 <!-- ################################################################################# -->

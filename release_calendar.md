@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 redirect_from:
 - /cal
 - /release-calendar
@@ -14,7 +14,14 @@ redirect_from:
 - /docs/preview/dev/release_calendar
 - /docs/preview/dev/release_calendar/
 title: Release Calendar
+body_class: release-calendar blog_typography post
+max_page_width: medium
+toc: false
 ---
+
+<div class="wrap pagetitle">
+  <h1>Release Calendar</h1>
+</div>
 
 DuckDB follows [semantic versioning](https://semver.org/spec/v2.0.0.html).
 Larger new features are introduced in minor versions,

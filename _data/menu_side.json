@@ -1,22 +1,6 @@
 {
   "sidemenu": [
     {
-      "page": "Why DuckDB",
-      "url": "/why_duckdb"
-    },
-    {
-      "page": "Code of Conduct",
-      "url": "/code_of_conduct"
-    },
-    {
-      "page": "Release Calendar",
-      "url": "/release_calendar"
-    },
-    {
-      "page": "Roadmap",
-      "url": "/roadmap"
-    },
-    {
       "page": "Sitemap",
       "url": "/docs/sitemap"
     },

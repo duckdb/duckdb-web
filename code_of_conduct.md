@@ -1,7 +1,14 @@
 ---
-layout: docu
+layout: default
 title: Code of Conduct
+body_class: code-of-conduct blog_typography
+max_page_width: small
+toc: false
 ---
+
+<div class="wrap pagetitle">
+  <h1>Code of Conduct</h1>
+</div>
 
 **All creatures are welcome**: We aim to create a safe space for all community members, regardless of their age, race, gender, sexual orientation, physical appearance or disability, choice of text editor, or any other qualities by which living beings can be discriminated.
 
