@@ -3,14 +3,14 @@ layout: post
 event: true
 title: "DuckDB Amsterdam Meetup #3"
 author: "DuckDB meetup organizers"
-thumb: "/images/blog/thumbs/duckdb-amsterdam-meetup-3.svg"
-image: "/images/blog/thumbs/duckdb-amsterdam-meetup-3.png"
+thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-3.svg"
+image: "/images/events/thumbs/duckdb-amsterdam-meetup-3.png"
 excerpt: ""
 tags: ["meetup"]
 venue: "Adyen Rokin office, Amsterdam"
 ---
 
-<img src="/images/blog/thumbs/duckdb-amsterdam-meetup-3.svg"
+<img src="/images/events/thumbs/duckdb-amsterdam-meetup-3.svg"
      alt="DuckDB Amsterdam Meetup Splashscreen"
      width="680"
      />

@@ -3,8 +3,8 @@ layout: post
 event: true
 title: "DuckDB Amsterdam Meetup #1"
 author: "DuckDB meetup organizers"
-thumb: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.svg"
-image: "/images/blog/thumbs/duckdb-amsterdam-meetup-1.png"
+thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-1.svg"
+image: "/images/events/thumbs/duckdb-amsterdam-meetup-1.png"
 excerpt: ""
 tags: ["meetup"]
 venue: "Miro, Amsterdam"
@@ -12,7 +12,7 @@ redirect_from:
   - 2024/10/17/duckdb-amsterdam-meetup-1
 ---
 
-<img src="/images/blog/thumbs/duckdb-amsterdam-meetup-1.svg"
+<img src="/images/events/thumbs/duckdb-amsterdam-meetup-1.svg"
      alt="DuckDB Amsterdam Meetup Splashscreen"
      width="680"
      />

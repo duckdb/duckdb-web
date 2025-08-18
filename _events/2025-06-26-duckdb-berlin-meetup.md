@@ -3,14 +3,14 @@ layout: post
 event: true
 title: "DuckDB Berlin Meetup"
 author: "DuckDB meetup organizers"
-thumb: "/images/blog/thumbs/duckdb-berlin-meetup.svg"
-image: "/images/blog/thumbs/duckdb-berlin-meetup.png"
+thumb: "/images/events/thumbs/duckdb-berlin-meetup.svg"
+image: "/images/events/thumbs/duckdb-berlin-meetup.png"
 excerpt: ""
 tags: ["meetup"]
 venue: "Dorint Kurfürstendamm Berlin, Opéra room, 2nd floor"
 ---
 
-<img src="/images/blog/thumbs/duckdb-berlin-meetup.svg"
+<img src="/images/events/thumbs/duckdb-berlin-meetup.svg"
      alt="DuckDB Berlin Meetup Splashscreen"
      width="680"
      />
