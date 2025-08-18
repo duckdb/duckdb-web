@@ -17,3 +17,5 @@ length: "55 min"
 Event: [Systems Distributed 2025](https://systemsdistributed.com/)
 
 Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)
+
+[Slide deck](http://blobs.duckdb.org/slides/hannes-muhleisen-ducklake-systems-distributed.pdf)
