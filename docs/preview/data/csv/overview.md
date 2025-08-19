@@ -46,7 +46,7 @@ CREATE TABLE ontime (
 COPY ontime FROM 'flights.csv';
 ```
 
-Alternatively, create a table without specifying the schema manually using a [`CREATE TABLE .. AS SELECT` statement]({% link docs/preview/sql/statements/create_table.md %}#create-table--as-select-ctas):
+Alternatively, create a table without specifying the schema manually using a [`CREATE TABLE ... AS SELECT` statement]({% link docs/preview/sql/statements/create_table.md %}#create-table--as-select-ctas):
 
 ```sql
 CREATE TABLE ontime AS

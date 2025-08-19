@@ -77,7 +77,7 @@ print(duckdb.typing.DuckDBPyType(dict[str, int]))
 MAP(VARCHAR, BIGINT)
 ```
 
-#### `{'a': field_one, 'b': field_two, .., 'n': field_n}`
+#### `{'a': field_one, 'b': field_two, ..., 'n': field_n}`
 
 `dict` objects map to a `STRUCT` composed of the keys and values of the dict.
 

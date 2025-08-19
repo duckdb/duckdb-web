@@ -34,7 +34,7 @@ await c.close();
 // More Example https://arrow.apache.org/docs/js/
 import { tableFromArrays } from 'apache-arrow';
 
-// EOS signal according to Arrorw IPC streaming format
+// EOS signal according to Arrow IPC streaming format
 // See https://arrow.apache.org/docs/format/Columnar.html#ipc-streaming-format
 const EOS = new Uint8Array([255, 255, 255, 255, 0, 0, 0, 0]);
 

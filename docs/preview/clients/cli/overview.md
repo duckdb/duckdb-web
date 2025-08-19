@@ -25,12 +25,12 @@ If in a PowerShell or POSIX shell environment, use the command `./duckdb` instea
 The typical usage of the `duckdb` command is the following:
 
 ```bash
-duckdb [OPTIONS] [FILENAME]
+duckdb ⟨OPTIONS⟩ ⟨FILENAME⟩
 ```
 
 ### Options
 
-The `[OPTIONS]` part encodes [arguments for the CLI client]({% link docs/preview/clients/cli/arguments.md %}). Common options include:
+The `⟨OPTIONS⟩`{:.language-sql .highlight} part encodes [arguments for the CLI client]({% link docs/preview/clients/cli/arguments.md %}). Common options include:
 
 * `-csv`: sets the output mode to CSV
 * `-json`: sets the output mode to JSON
@@ -40,7 +40,7 @@ For a full list of options, see the [command line arguments page]({% link docs/p
 
 ### In-Memory vs. Persistent Database
 
-When no `[FILENAME]` argument is provided, the DuckDB CLI will open a temporary [in-memory database]({% link docs/preview/connect/overview.md %}#in-memory-database).
+When no `⟨FILENAME⟩`{:.language-sql .highlight} argument is provided, the DuckDB CLI will open a temporary [in-memory database]({% link docs/preview/connect/overview.md %}#in-memory-database).
 You will see DuckDB's version number, the information on the connection and a prompt starting with a `D`.
 
 ```bash

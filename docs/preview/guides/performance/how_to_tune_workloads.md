@@ -105,30 +105,13 @@ Some basic SQL tricks can help with this:
 
 To inspect how much remote data is transferred for a query, [`EXPLAIN ANALYZE`]({% link docs/preview/guides/meta/explain_analyze.md %}) can be used to print out the total number of requests and total data transferred for queries on remote files.
 
-### Avoid Reading Data More Than Once
+### Caching
 
-DuckDB does not cache data from remote files automatically. This means that running a query on a remote file twice will download the required data twice. So if data needs to be accessed multiple times, storing it locally can make sense. To illustrate this, lets look at an example:
-
-Consider the following queries:
+Starting with version 1.3.0, DuckDB supports caching remote data. To inspect the content of the external file cache, run:
 
 ```sql
-SELECT col_a + col_b FROM 's3://bucket/file.parquet' WHERE col_a > 10;
-SELECT col_a * col_b FROM 's3://bucket/file.parquet' WHERE col_a > 10;
+FROM duckdb_external_file_cache();
 ```
-
-These queries download the columns `col_a` and `col_b` from `s3://bucket/file.parquet` twice. Now consider the following queries:
-
-```sql
-CREATE TABLE local_copy_of_file AS
-    SELECT col_a, col_b FROM 's3://bucket/file.parquet' WHERE col_a > 10;
-
-SELECT col_a + col_b FROM local_copy_of_file;
-SELECT col_a * col_b FROM local_copy_of_file;
-```
-
-Here DuckDB will first copy `col_a` and `col_b` from `s3://bucket/file.parquet` into a local table, and then query the local in-memory columns twice. Note also that the filter `WHERE col_a > 10` is also now applied only once.
-
-An important side note needs to be made here though. The first two queries are fully streaming, with only a small memory footprint, whereas the second requires full materialization of columns `col_a` and `col_b`. This means that in some rare cases (e.g., with a high-speed network, but with very limited memory available) it could actually be beneficial to download the data twice.
 
 ## Best Practices for Using Connections
 

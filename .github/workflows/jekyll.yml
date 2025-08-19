@@ -25,11 +25,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3' # Not needed with a .ruby-version file
+          ruby-version: '3.4' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
       - name: Get star count
@@ -96,7 +96,7 @@ jobs:
         working-directory: single-file-document
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Python
         run: |
           PYTHONUNBUFFERED=1
@@ -126,11 +126,11 @@ jobs:
     needs: [build_html, build_pdf]
     steps:
       # download both the html and the pdf artifacts into the _site directory
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           name: html_artifact
           path: _site
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           name: pdf_artifact
           path: _site

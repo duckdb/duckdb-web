@@ -30,6 +30,7 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
     * [`SELECT * REPLACE`]({% link docs/stable/sql/expressions/star.md %}#replace-clause): the `REPLACE` option allows replacing specific columns with different expressions in a `*` expression.
     * [`UNION BY NAME`]({% link docs/stable/sql/query_syntax/setops.md %}#union-all-by-name): perform the `UNION` operation along the names of columns (instead of relying on positions).
     * [Prefix aliases in the `SELECT` and `FROM` clauses]({% link docs/stable/sql/query_syntax/select.md %}): write `x: 42` instead of `42 AS x` for improved readability.
+    * [Specifying a percentage of the table size for the `LIMIT` clause]({% link docs/stable/sql/query_syntax/limit.md %}): write `LIMIT 10%` to return 10% of the query results.
 * Transforming tables:
     * [`PIVOT`]({% link docs/stable/sql/statements/pivot.md %}) to turn long tables to wide tables.
     * [`UNPIVOT`]({% link docs/stable/sql/statements/unpivot.md %}) to turn wide tables to long tables.

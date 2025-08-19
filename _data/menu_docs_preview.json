@@ -277,6 +277,10 @@
                 {
                   "page": "Syntax Highlighting",
                   "url": "syntax_highlighting"
+                },
+                {
+                  "page": "Known Issues",
+                  "url": "known_issues"
                 }
               ]
             },

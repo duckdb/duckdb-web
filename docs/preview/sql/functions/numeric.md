@@ -224,8 +224,8 @@ The table below shows the available mathematical functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the cosine of `x`. |
-| **Example** | `cos(90)` |
-| **Result** | `-0.4480736161291701` |
+| **Example** | `cos(pi() / 3)` |
+| **Result** | `0.5000000000000001 ` |
 
 #### `cot(x)`
 
@@ -519,8 +519,8 @@ The table below shows the available mathematical functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the sin of `x`. |
-| **Example** | `sin(90)` |
-| **Result** | `0.8939966636005579` |
+| **Example** | `sin(pi() / 6)` |
+| **Result** | `0.49999999999999994` |
 
 #### `sqrt(x)`
 
@@ -543,8 +543,8 @@ The table below shows the available mathematical functions.
 <div class="nostroke_table"></div>
 
 | **Description** | Computes the tangent of `x`. |
-| **Example** | `tan(90)` |
-| **Result** | `-1.995200412208242` |
+| **Example** | `tan(pi() / 4)` |
+| **Result** | `0.9999999999999999` |
 
 #### `trunc(x)`
 

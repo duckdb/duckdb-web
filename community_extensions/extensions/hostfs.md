@@ -58,8 +58,8 @@ docs:
   extended_description: >
     The HostFS extension allows you to navigate and explore the filesystem using SQL. It provides a set of functions to list files, get file metadata, and more. 
     For more information, please see the [HostFS documentation](https://github.com/gropaul/hostFS).
-extension_star_count: 19
-extension_star_count_pretty: 19
+extension_star_count: 22
+extension_star_count_pretty: 22
 extension_download_count: 491
 extension_download_count_pretty: 491
 image: '/images/community_extensions/social_preview/preview_community_extension_hostfs.png'

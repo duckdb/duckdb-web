@@ -23,7 +23,7 @@ All [`LIST` functions]({% link docs/stable/sql/functions/list.md %}) work with t
 | [`array_dot_product(array1, array2)`](#array_dot_productarray1-array2)                         | Alias for `array_inner_product(array1, array2)`.                                                                                                                                                                                               |
 | [`array_negative_dot_product(array1, array2)`](#array_negative_dot_productarray1-array2)       | Alias for `array_negative_inner_product(array1, array2)`.                                                                                                                                                                                      |
 
-#### `array_value(arg1, ..)`
+#### `array_value(arg1, ...)`
 
 <div class="nostroke_table"></div>
 

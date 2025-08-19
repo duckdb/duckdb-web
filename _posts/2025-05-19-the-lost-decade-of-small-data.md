@@ -8,7 +8,7 @@ excerpt: "We benchmark DuckDB on a 2012 MacBook Pro to decide: did we lose a dec
 tags: ["benchmark"]
 ---
 
-Much has been said, not in the very least by ourselves, about how [data is actually not that “Big”](https://youtu.be/-wCzn9gKoUk?si=npV0awLO3nQZvrlS&t=2637) and how the speed of hardware innovation is outpacing the growth of useful datasets. We may have gone so far to [predict a data singularity in the near future](https://youtu.be/GELhdezYmP0?si=Rj3JZfoKW8JQDaci&t=2494), where 99% of useful datasets can be comfortably queried on a single node. As [recently shown](https://www.fivetran.com/blog/how-do-people-use-snowflake-and-redshift), the median scan in Amazon Redshift and Snowflake reads a doable 100 MB of data, and the 99.9-percentile reads less than 300 GB. So the singularity might be closer than we think.
+Much has been said, not in the very least by ourselves, about how [data is actually not that “Big”](https://youtu.be/-wCzn9gKoUk?si=npV0awLO3nQZvrlS&t=2637) and how the speed of hardware innovation is outpacing the growth of useful datasets. We may have gone so far to [predict a data singularity in the near future](https://youtu.be/GELhdezYmP0?si=Rj3JZfoKW8JQDaci&t=2494), where 99% of useful datasets can be comfortably queried on a single node. As it was [recently shown](https://www.fivetran.com/blog/how-do-people-use-snowflake-and-redshift), the median scan in Amazon Redshift and Snowflake reads a doable 100 MB of data, and the 99.9-percentile reads less than 300 GB. So the singularity might be closer than we think.
 
 But we started wondering, when did this development really start? When did personal computers like the ubiquitous MacBook Pro, usually condemned to running Chrome, become the data processing powerhouses that they really are today?
 
@@ -40,11 +40,11 @@ Moving on to DuckDB itself: here at DuckDB we are more than a little religious a
 
 ## Benchmarks
 
-But we're not interested in synthetic CPU scores, we're interested in [synthetic SQL scores](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) instead! To see how the old machine is holding up when performing _serious_ data crunching, we used the _at this point rather tired but well-known TPC-H benchmark_ at scale factor 1000. This means that the two main tables, `lineitem` and `orders` contain 6 and 1.5 Billion rows, respectively. When stored as a DuckDB database, the database has a size of ca. 265 GB.
+But we're not interested in synthetic CPU scores, we're interested in [synthetic SQL scores](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) instead! To see how the old machine is holding up when performing _serious_ data crunching, we used the _at this point rather tired but well-known TPC-H benchmark_ at scale factor 1000. This means that the two main tables, `lineitem` and `orders` contain 6 and 1.5 billion rows, respectively. When stored as a DuckDB database, the database has a size of ca. 265 GB.
 
 From the [audited results on the TPC website](https://www.tpc.org/tpch/results/tpch_advanced_sort_V35.asp?PRINTVER=false&VERSION=3&FLTCOL1=h_sf&FLTCOLOPR1=%3D&FLTCHO1=1000&ADDFILTERROW=&filterRowCount=1&SRTCOL1=h_sponsor&SRTDIR1=ASC&ADDSORTROW=&sortRowCount=1&DISPRES=100++++PERCENT&include_withdrawn_results=none&include_historic_results=yes&include_specification_revision=ON&include_server_cpu=ON&include_total_system_price=ON&include_cluster_info=ON), we can see that running the benchmark on this scale factor on a single node seems to require hardware costing hundreds of thousands of Dollars.
 
-We ran each of the 22 benchmark queries five times, and took the median runtime to remove noise. However, because the amount of RAM (16 GB) is very much less than the database size (256 GB), no significant amount of the input data can be cached in the buffer manager, so those are not really what people sometimes call “hot” runs.
+We ran each of the 22 benchmark queries five times, and took the median runtime to remove noise. However, because the amount of RAM (16 GB) is very much less than the database size (265 GB), no significant amount of the input data can be cached in the buffer manager, so those are not really what people sometimes call “hot” runs.
 
 <div align="center">
      <img src="/images/blog/lost-decade/setup.jpg"
