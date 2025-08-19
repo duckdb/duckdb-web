@@ -42,10 +42,6 @@ Everybody is welcome to attend but please consider that the talks in this meetup
 | 19:30 | Talks (TBA)     |       |
 | 21:30 | Event ends      |       |
 
-## Streaming and Recording
-
-The meeting will not be streamed or recorded.
-
 ## Inquiries
 
 Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.
