@@ -45,14 +45,14 @@ For example, the following are all valid lambda functions:
 | [`apply(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`array_apply(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`array_filter(list, lambda(x))`](#list_filterlist-lambdax) | Alias for `list_filter`. |
-| [`array_reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Alias for `list_reduce`. |
+| [`array_reduce(list, lambda(x, y)[, initial_value])`](#list_reducelist-lambdax-y-initial_value) | Alias for `list_reduce`. |
 | [`array_transform(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`filter(list, lambda(x))`](#list_filterlist-lambdax) | Alias for `list_filter`. |
 | [`list_apply(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`list_filter(list, lambda(x))`](#list_filterlist-lambdax) | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/preview/sql/functions/lambda.md %}#list_filter-examples). |
-| [`list_reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
+| [`list_reduce(list, lambda(x, y)[, initial_value])`](#list_reducelist-lambdax-y-initial_value) | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/preview/sql/functions/lambda.md %}#list_reduce-examples). |
 | [`list_transform(list, lambda(x))`](#list_transformlist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/preview/sql/functions/lambda.md %}#list_transform-examples). |
-| [`reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Alias for `list_reduce`. |
+| [`reduce(list, lambda(x, y)[, initial_value])`](#list_reducelist-lambdax-y-initial_value) | Alias for `list_reduce`. |
 
 <!-- markdownlint-enable MD056 -->
 
@@ -65,7 +65,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5]` |
 | **Aliases** | `array_filter`, `filter` |
 
-#### `list_reduce(list, lambda(x,y)[, initial_value])`
+#### `list_reduce(list, lambda(x, y)[, initial_value])`
 
 <div class="nostroke_table"></div>
 
