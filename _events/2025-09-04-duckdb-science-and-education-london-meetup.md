@@ -1,7 +1,7 @@
 ---
 layout: post
 event: true
-title: "DuckDB Meetup on Science and Education in London"
+title: "DuckDB Meetup on Science and Education (London)"
 author: "DuckDB meetup organizers"
 thumb: "/images/events/thumbs/duckdb-science-and-education-london-meetup.svg"
 image: "/images/events/thumbs/duckdb-science-and-education-london-meetup.png"
