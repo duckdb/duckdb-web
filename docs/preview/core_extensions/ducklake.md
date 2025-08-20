@@ -178,3 +178,13 @@ Upon success, it returns a table with a single column (`Success`) and 0 rows.
 | Parameter name | Parameter type | Named parameter | Description |
 | -------------- | -------------- | --------------- | ----------- |
 | `catalog`      | `VARCHAR`      | no              |             |
+
+## Compatibility Matrix
+
+DuckLake spec and extension for DuckDB are currently released together. This may not be the case in the future, where the spec and the extension may have different release cadances. It can also be the case that the extension needs a DuckDB core update, therefore DuckDB versions are also included in this compatibility matrix.
+
+| DuckDB | DuckLake Extension | DuckLake Spec |
+|--------|--------------------|---------------|
+| 1.4.x  | 0.3                | 0.3           |
+| 1.3.x  | 0.2                | 0.2           |
+| 1.3.x  | 0.1                | 0.1           |
