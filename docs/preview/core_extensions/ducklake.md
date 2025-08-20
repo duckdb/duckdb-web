@@ -181,7 +181,7 @@ Upon success, it returns a table with a single column (`Success`) and 0 rows.
 
 ## Compatibility Matrix
 
-DuckLake spec and extension for DuckDB are currently released together. This may not be the case in the future, where the spec and the extension may have different release cadances. It can also be the case that the extension needs a DuckDB core update, therefore DuckDB versions are also included in this compatibility matrix.
+The DuckLake specification and the `ducklake` DuckDB extension are currently released together. This may not be the case in the future, where the specification and the extension may have different release cadences. It can also be the case that the extension needs a DuckDB core update, therefore DuckDB versions are also included in this compatibility matrix.
 
 | DuckDB | DuckLake Extension | DuckLake Spec |
 |--------|--------------------|---------------|
