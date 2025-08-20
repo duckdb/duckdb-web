@@ -1,7 +1,7 @@
 ---
 layout: post
 event: true
-title: "DuckDB Meetup on Science and Education in London"
+title: "DuckDB Meetup on Science and Education (London)"
 author: "DuckDB meetup organizers"
 thumb: "/images/events/thumbs/duckdb-science-and-education-london-meetup.svg"
 image: "/images/events/thumbs/duckdb-science-and-education-london-meetup.png"
@@ -27,7 +27,7 @@ We'll notify the speakers by August 28 (Thursday).
 
 ## Venue
 
-The meetup will take place at the _One Great George Street_ conference center located at [1 Great George Street, London SW1P 3AA (Google Maps)](https://maps.app.goo.gl/DWVGea9utbWp7GRw6); [Apple Maps](https://maps.apple.com/place?address=1%20Great%20George%20Street,%20London,%20SW1P%203AA,%20England&coordinate=51.501103,-0.128750&name=1%20Great%20George%20Street&map=explore), in just a few minutes walking distance from VLDB's venue.
+The meetup will take place in London at the _One Great George Street_ conference center located at [1 Great George Street, London SW1P 3AA (Google Maps)](https://maps.app.goo.gl/DWVGea9utbWp7GRw6); [Apple Maps](https://maps.apple.com/place?address=1%20Great%20George%20Street,%20London,%20SW1P%203AA,%20England&coordinate=51.501103,-0.128750&name=1%20Great%20George%20Street&map=explore), in just a few minutes walking distance from VLDB's venue.
 
 ## Attendance
 
@@ -41,10 +41,6 @@ Everybody is welcome to attend but please consider that the talks in this meetup
 | 18:30 | Mingle & snacks |       |
 | 19:30 | Talks (TBA)     |       |
 | 21:30 | Event ends      |       |
-
-## Streaming and Recording
-
-The meeting will not be streamed or recorded.
 
 ## Inquiries
 
