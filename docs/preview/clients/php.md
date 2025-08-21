@@ -202,5 +202,5 @@ From version 1.2.0 on the library supports all DuckDB file types.
 | DUCKDB_TYPE_MAP          | MAP          | array                                |
 | DUCKDB_TYPE_UNION        | UNION        | mixed                                |
 | DUCKDB_TYPE_BIT          | BIT          | string                               |
-| DUCKDB_TYPE_VARINT       | VARINT       | string                               |
+| DUCKDB_TYPE_BIGNUM       | BIGNUM       | string                               |
 | DUCKDB_TYPE_SQLNULL      | NULL         | null                                 |
