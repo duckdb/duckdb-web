@@ -4,7 +4,7 @@ railroad: statements/merge_into.js
 title: MERGE INTO Statement
 ---
 
-`MERGE INTO` is an alternative to `INSERT INTO ... ON CONFLICT` that doesn't need a primary key since it allows for a custom match condition. This is a very useful alternative for upserting use cases (`INSERT` + `UPDATE`) when the destination table does not have a primary key constraint.
+The `MERGE INTO` statement is an alternative to `INSERT INTO ... ON CONFLICT` that doesn't need a primary key since it allows for a custom match condition. This is a very useful alternative for upserting use cases (`INSERT` + `UPDATE`) when the destination table does not have a primary key constraint.
 
 
 ## Examples
@@ -12,86 +12,90 @@ title: MERGE INTO Statement
 First, let's create a simple table.
 
 ```sql
-CREATE TABLE people(id INTEGER, name VARCHAR, salary FLOAT);
+CREATE TABLE people (id INTEGER, name VARCHAR, salary FLOAT);
 INSERT INTO people VALUES (1, 'John', 92_000.0), (2, 'Anna', 100_000.0);
 ```
 
 The simplest upsert would be updating or inserting a whole row.
 
 ```sql
-MERGE INTO people 
+MERGE INTO people
     USING (
-        SELECT 
-            unnest([3, 1]) AS id, 
-            unnest(['Sarah', 'Jhon']) AS name, 
+        SELECT
+            unnest([3, 1]) AS id,
+            unnest(['Sarah', 'John']) AS name,
             unnest([95_000.0, 105_000.0]) AS salary
-    ) AS upserts 
-    ON (upserts.id = people.id) 
+    ) AS upserts
+    ON (upserts.id = people.id)
     WHEN MATCHED THEN UPDATE
     WHEN NOT MATCHED THEN INSERT;
 
-FROM people;
+FROM people
+ORDER BY id;
 ```
 
 | id | name  |  salary  |
 |---:|-------|---------:|
-| 1  | Jhon  | 92000.0  |
-| 3  | Sarah | 95000.0  |
+| 1  | John  | 92000.0  |
 | 2  | Anna  | 105000.0 |
+| 3  | Sarah | 95000.0  |
 
 
-In the previous example we are updating the whole row if `id` matches. However, it is also a common pattern to receive a change set with some keys and the changed value. This is a good use for `SET`.
+In the previous example we are updating the whole row if `id` matches. However, it is also a common pattern to receive a _change set_ with some keys and the changed value. This is a good use for `SET`.
 
 ```sql
-MERGE INTO people 
+MERGE INTO people
     USING (
-        SELECT 
-            1 AS id,  
+        SELECT
+            1 AS id, 
             98_000.0 AS salary
-    ) AS salary_updates 
-    ON (salary_updates.id = people.id) 
+    ) AS salary_updates
+    ON (salary_updates.id = people.id)
     WHEN MATCHED THEN UPDATE SET salary = salary_updates.salary;
 
-FROM people;
+FROM people
+ORDER BY id;
 ```
 
 | id | name  |  salary  |
 |---:|-------|---------:|
-| 3  | Sarah | 95000.0  |
+| 1  | John  | 98000.0  |
 | 2  | Anna  | 105000.0 |
-| 1  | Jhon  | 98000.0  |
+| 3  | Sarah | 95000.0  |
 
-Another common pattern is to receive a delete set of rows, which may only contain ids of rows to be deleted.
+Another common pattern is to receive a _delete set_ of rows, which may only contain ids of rows to be deleted.
 
 ```sql
-MERGE INTO people 
+MERGE INTO people
     USING (
-        SELECT 
-            1 AS id,  
-    ) AS deletes 
-    ON (deletes.id = people.id) 
+        SELECT
+            1 AS id, 
+    ) AS deletes
+    ON (deletes.id = people.id)
     WHEN MATCHED THEN DELETE;
 
-FROM people;
+FROM people
+ORDER BY id;
 ```
 
 | id | name  |  salary  |
 |---:|-------|---------:|
-| 3  | Sarah | 95000.0  |
 | 2  | Anna  | 105000.0 |
+| 3  | Sarah | 95000.0  |
 
-`MERGE INTO` also supports more complex conditions, for example for a given delete set we can decide to only remove rows that contain a `salary` bigger than a certain amount.
+`MERGE INTO` also supports more complex conditions, for example, for a given _delete set_ we can decide to only remove rows that contain a `salary` bigger than a certain amount.
 
 ```sql
-MERGE INTO people 
+MERGE INTO people
     USING (
-        SELECT 
-            unnest([3, 2]) AS id,  
-    ) AS deletes 
-    ON (deletes.id = people.id) 
+        SELECT
+            unnest([3, 2]) AS id, 
+    ) AS deletes
+    ON (deletes.id = people.id)
     WHEN MATCHED AND people.salary > 100_000.0 THEN DELETE;
 
-FROM people;
+FROM people
+ORDER BY id;
 ```
 
 | id | name  | salary  |
@@ -101,14 +105,14 @@ FROM people;
 If needed, DuckDB also supports multiple `UPDATE` and `DELETE` conditions.
 
 ```sql
-MERGE INTO people 
+MERGE INTO people
     USING (
-        SELECT 
-            unnest([3, 1]) AS id, 
-            unnest(['Sarah', 'Jhon']) AS name, 
+        SELECT
+            unnest([3, 1]) AS id,
+            unnest(['Sarah', 'John']) AS name,
             unnest([95_000.0, 105_000.0]) AS salary
-    ) AS upserts 
-    ON (upserts.id = people.id) 
+    ) AS upserts
+    ON (upserts.id = people.id)
     WHEN MATCHED AND people.salary < 100_000.0 THEN UPDATE
     -- Second update or delete condition
     WHEN MATCHED AND people.salary > 100_000.0 THEN DELETE
