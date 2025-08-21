@@ -17,8 +17,9 @@ title: Struct Functions
 | [`struct_extract(struct, 'entry')`](#struct_extractstruct-entry) | Extract the named entry from the `STRUCT`. |
 | [`struct_extract(struct, idx)`](#struct_extractstruct-idx) | Extract the entry from an unnamed `STRUCT` (tuple) using an index (1-based). |
 | [`struct_extract_at(struct, idx)`](#struct_extract_atstruct-idx) | Extract the entry from a `STRUCT` (tuple) using an index (1-based). |
-| [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any-) | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
+| [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any-) | Add field(s) to an existing `STRUCT`. |
 | [`struct_pack(name := any, ...)`](#struct_packname--any-) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
+| [`struct_update(struct, name := any, ...)`](#struct_updatestruct-name--any-) | Add or update field(s) of an existing `STRUCT`. |
 
 #### `struct.entry`
 
@@ -88,7 +89,7 @@ title: Struct Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). |
+| **Description** | Add field(s) to an existing `STRUCT`. |
 | **Example** | `struct_insert({'a': 1}, b := 2)` |
 | **Result** | `{'a': 1, 'b': 2}` |
 
@@ -99,3 +100,11 @@ title: Struct Functions
 | **Description** | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
 | **Example** | `struct_pack(i := 4, s := 'string')` |
 | **Result** | `{'i': 4, 's': string}` |
+
+#### `struct_update(struct, name := any, ...)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Add or update field(s) of an existing `STRUCT`. |
+| **Example** | `struct_insert({'a': 1, 'b': 2}, b := 3, c := 4)` |
+| **Result** | `{'a': 1, 'b': 3, 'c': 4}` |
