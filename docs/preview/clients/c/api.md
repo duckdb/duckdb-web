@@ -219,7 +219,7 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_int64"><span class="nf">duckdb_create_int64</span></a>(<span class="kt">int64_t</span> <span class="nv">val</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_hugeint"><span class="nf">duckdb_create_hugeint</span></a>(<span class="kt">duckdb_hugeint</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_uhugeint"><span class="nf">duckdb_create_uhugeint</span></a>(<span class="kt">duckdb_uhugeint</span> <span class="nv">input</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_varint"><span class="nf">duckdb_create_varint</span></a>(<span class="nv">duckdb_varint</span> <span class="nv">input</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_bignum"><span class="nf">duckdb_create_bignum</span></a>(<span class="nv">duckdb_bignum</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_decimal"><span class="nf">duckdb_create_decimal</span></a>(<span class="kt">duckdb_decimal</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_float"><span class="nf">duckdb_create_float</span></a>(<span class="kt">float</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_double"><span class="nf">duckdb_create_double</span></a>(<span class="kt">double</span> <span class="nv">input</span>);
@@ -246,7 +246,7 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">uint64_t</span> <a href="#duckdb_get_uint64"><span class="nf">duckdb_get_uint64</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_hugeint</span> <a href="#duckdb_get_hugeint"><span class="nf">duckdb_get_hugeint</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_uhugeint</span> <a href="#duckdb_get_uhugeint"><span class="nf">duckdb_get_uhugeint</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
-<span class="nv">duckdb_varint</span> <a href="#duckdb_get_varint"><span class="nf">duckdb_get_varint</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
+<span class="nv">duckdb_bignum</span> <a href="#duckdb_get_bignum"><span class="nf">duckdb_get_bignum</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_decimal</span> <a href="#duckdb_get_decimal"><span class="nf">duckdb_get_decimal</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">float</span> <a href="#duckdb_get_float"><span class="nf">duckdb_get_float</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">double</span> <a href="#duckdb_get_double"><span class="nf">duckdb_get_double</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
@@ -3527,20 +3527,20 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-#### `duckdb_create_varint`
+#### `duckdb_create_bignum`
 
-Creates a VARINT value from a duckdb_varint
+Creates a BIGNUM value from a duckdb_bignum
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_varint</span>(<span class="nv">
-</span>  <span class="nv">duckdb_varint</span> <span class="nv">input
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_bignum</span>(<span class="nv">
+</span>  <span class="nv">duckdb_bignum</span> <span class="nv">input
 </span>);
 </code></pre></div></div>
 
 ##### Parameters
 
-* `input`: The duckdb_varint value
+* `input`: The duckdb_bignum value
 
 ##### Return Value
 
@@ -4097,25 +4097,25 @@ A duckdb_uhugeint, or MinValue<uhugeint> if the value cannot be converted
 
 <br>
 
-#### `duckdb_get_varint`
+#### `duckdb_get_bignum`
 
-Returns the duckdb_varint value of the given value.
+Returns the duckdb_bignum value of the given value.
 The `data` field must be destroyed with `duckdb_free`.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_varint</span> <span class="nv">duckdb_get_varint</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_bignum</span> <span class="nv">duckdb_get_bignum</span>(<span class="nv">
 </span>  <span class="kt">duckdb_value</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
 ##### Parameters
 
-* `val`: A duckdb_value containing a VARINT
+* `val`: A duckdb_value containing a BIGNUM
 
 ##### Return Value
 
-A duckdb_varint. The `data` field must be destroyed with `duckdb_free`.
+A duckdb_bignum. The `data` field must be destroyed with `duckdb_free`.
 
 <br>
 
