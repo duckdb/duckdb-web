@@ -63,15 +63,13 @@ SELECT {
     } AS s;
 ```
 
-### Adding Field(s) and updating Value(s) to Structs
+### Adding Field(s)/Value(s) to Structs
 
-To add new fields or update existing ones, you can use `struct_update`:
+Add to a struct of integers:
 
 ```sql
-SELECT struct_update({'a': 1, 'b': 2}, b:=3, c:=4) AS s;
+SELECT struct_insert({'a': 1, 'b': 2, 'c': 3}, d := 4) AS s;
 ```
-
-Alternatively, `struct_insert` also allows adding new fields but not updating existing ones.
 
 ### Retrieving from Structs
 
