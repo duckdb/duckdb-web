@@ -43,7 +43,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of `date_sub`. The number of complete [partitions]({% link docs/stable/sql/functions/datepart.md %}) between the timestamps. |
 | [`datetrunc(part, timestamp)`](#datetruncpart-timestamp) | Alias of `date_trunc`. Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
 | [`dayname(timestamp)`](#daynametimestamp) | The (English) name of the weekday. |
-| [`epoch_ms(ms)`](#epoch_msms) | Converts milliseconds since the epoch to a timestamp. |
+| [`epoch_ms(ms)`](#epoch_msms) | Converts milliseconds since the epoch to a timestamp. See `make_timestamp` for the equivalent function for microseconds. |
 | [`epoch_ms(timestamp)`](#epoch_mstimestamp) | Returns the total number of milliseconds since the epoch. |
 | [`epoch_ns(timestamp)`](#epoch_nstimestamp) | Returns the total number of nanoseconds since the epoch. |
 | [`epoch_us(timestamp)`](#epoch_ustimestamp) | Returns the total number of microseconds since the epoch. |
