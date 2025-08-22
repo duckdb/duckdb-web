@@ -36,8 +36,8 @@ ORDER BY id;
 
 | id | name  |  salary  |
 |---:|-------|---------:|
-| 1  | John  | 92000.0  |
-| 2  | Anna  | 105000.0 |
+| 1  | John  | 105000.0 |
+| 2  | Anna  | 100000.0 |
 | 3  | Sarah | 95000.0  |
 
 
@@ -60,7 +60,7 @@ ORDER BY id;
 | id | name  |  salary  |
 |---:|-------|---------:|
 | 1  | John  | 98000.0  |
-| 2  | Anna  | 105000.0 |
+| 2  | Anna  | 100000.0 |
 | 3  | Sarah | 95000.0  |
 
 Another common pattern is to receive a _delete set_ of rows, which may only contain ids of rows to be deleted.
@@ -80,10 +80,10 @@ ORDER BY id;
 
 | id | name  |  salary  |
 |---:|-------|---------:|
-| 2  | Anna  | 105000.0 |
+| 2  | Anna  | 100000.0 |
 | 3  | Sarah | 95000.0  |
 
-`MERGE INTO` also supports more complex conditions, for example, for a given _delete set_ we can decide to only remove rows that contain a `salary` bigger than a certain amount.
+`MERGE INTO` also supports more complex conditions, for example, for a given _delete set_ we can decide to only remove rows that contain a `salary` bigger or equal than a certain amount.
 
 ```sql
 MERGE INTO people
@@ -92,7 +92,7 @@ MERGE INTO people
             unnest([3, 2]) AS id, 
     ) AS deletes
     ON (deletes.id = people.id)
-    WHEN MATCHED AND people.salary > 100_000.0 THEN DELETE;
+    WHEN MATCHED AND people.salary >= 100_000.0 THEN DELETE;
 
 FROM people
 ORDER BY id;
@@ -105,19 +105,28 @@ ORDER BY id;
 If needed, DuckDB also supports multiple `UPDATE` and `DELETE` conditions.
 
 ```sql
+-- Let's get John back in!
+INSERT INTO people VALUES (1, 'John', 105_000.0);
+
 MERGE INTO people
     USING (
         SELECT
             unnest([3, 1]) AS id,
-            unnest(['Sarah', 'John']) AS name,
-            unnest([95_000.0, 105_000.0]) AS salary
-    ) AS upserts
+            unnest([89_000.0, 70_000.0]) AS salary
+    ) AS
     ON (upserts.id = people.id)
-    WHEN MATCHED AND people.salary < 100_000.0 THEN UPDATE
+    WHEN MATCHED AND people.salary < 100_000.0 THEN UPDATE SET salary = upserts.salary
     -- Second update or delete condition
     WHEN MATCHED AND people.salary > 100_000.0 THEN DELETE
-    WHEN NOT MATCHED THEN INSERT;
+    WHEN NOT MATCHED THEN INSERT BY NAME;
+
+FROM people
+ORDER BY id;
 ```
+
+| id | name  | salary  |
+|---:|-------|--------:|
+| 3  | Sarah | 89000.0 |
 
 ## Syntax
 
