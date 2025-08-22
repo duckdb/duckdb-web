@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: bigquery
   description: Integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets
-  version: 0.4.1
+  version: 0.4.2
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: hafenkran/duckdb-bigquery
-  ref: 44e3ce3fcab3b727f4158d6ee607ceaded4b6011
+  ref: 31aeb97b17ba0a4d83e8975548accb958af6d495
 
 docs:
   hello_world: |
@@ -48,7 +48,8 @@ docs:
     └───────┴────────────────┘
 
   extended_description: |
-    The DuckDB BigQuery Extension integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets.
+    This extension allows DuckDB to connect to Google BigQuery using the BigQuery Storage (read/write) and REST APIs. 
+    It enables users to read, write, and manage their BigQuery datasets/tables directly from DuckDB using standard SQL queries.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/hafenkran/duckdb-bigquery).
 
 extension_star_count: 126
@@ -84,11 +85,11 @@ LOAD {{ page.extension.name }};
 |----------------------|---------------|------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------|
 | bigquery_attach      | table         | Attach to a BigQuery project.                                                            | NULL    | [ATTACH 'project=my_gcp_project' as bq (TYPE bigquery);]                                                                  |
 | bigquery_scan        | table         | Scan a single table directly from BigQuery.                                              | NULL    | [SELECT * FROM bigquery_scan('my_gcp_project.quacking_dataset.duck_tbl');]                                                |
-| bigquery_arrow_scan  | table         | Scan a single table directly from BigQuery (more efficient reimplementation).            | NULL    | [SELECT * FROM bigquery_arrow_scan('my_gcp_project.quacking_dataset.duck_tbl');]                                          |
 | bigquery_query       | table         | Run a custom GoogleSQL query in BigQuery and read the results.                           | NULL    | [SELECT * FROM bigquery_query('bq', 'SELECT * FROM quacking_dataset.duck_tbl WHERE duck_id = 123');]                      |
 | bigquery_execute     | table         | Execute an arbitrary GoogleSQL query in BigQuery.                                        | NULL    | [CALL bigquery_execute('bq', 'CREATE SCHEMA deluxe_dataset OPTIONS(location="us", default_table_expiration_days=3.75);')] |
 | bigquery_jobs        | table         | List jobs in a BigQuery project.                                                         | NULL    | [SELECT * FROM bigquery_jobs('bq');]                                                                                      |
 | bigquery_clear_cache | table         | Clear the internal caches to refetch the most current project information from BigQuery. | NULL    | [CALL bigquery_clear_cache();]                                                                                            |
+| bigquery_arrow_scan  | table         | NULL                                                                                     | NULL    | NULL                                                                                                                      |
 
 ### Added Settings
 
