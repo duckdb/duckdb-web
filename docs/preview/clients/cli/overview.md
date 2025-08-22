@@ -315,3 +315,38 @@ It is only available in the CLI client and is not supported in other DuckDB clie
 
 The DuckDB CLI supports executing [prepared statements]({% link docs/preview/sql/query_syntax/prepared_statements.md %}) in addition to regular `SELECT` statements.
 To create and execute a prepared statement in the CLI client, use the `PREPARE` clause and the `EXECUTE` statement.
+
+## Query Completion ETA
+
+DuckDB's CLI now provides intelligent time-to-completion estimates for running queries and displays total execution time upon completion.
+
+When executing queries in the DuckDB CLI, the progress bar displays an estimated time remaining until completion. This feature employs advanced statistical modeling ([Kalman filtering](https://en.wikipedia.org/wiki/Kalman_filter)) to deliver more accurate predictions than simple linear extrapolation.
+
+### How It Works
+
+DuckDB calculates the estimated time to completion through the following process:
+
+1. Progress Monitoring: DuckDB's internal progress API reports the estimated completion percentage for the running query
+2. Statistical Filtering: A Kalman filter smooths noisy progress measurements and accounts for execution variability
+3. Continuous Refinement: The system continuously updates predicted completion time as new progress data becomes available, improving accuracy throughout execution
+
+The Kalman filter adapts to changing execution conditions such as memory pressure, I/O bottlenecks, or network delays. This adaptive approach means estimated completion times may not always decrease linearly—estimates can increase when query execution becomes less predictable.
+
+### Factors Affecting The Accuracy of Query Completion ETA
+
+Completion time estimates may be less reliable under these conditions:
+
+System Resource Constraints:
+
+- Memory pressure causing disk swapping
+- High CPU load from competing processes
+- Disk I/O bottlenecks
+
+Query Execution Characteristics:
+
+- Variable execution phases (initial setup versus main processing)
+- Network-dependent operations with inconsistent latency
+- Queries with unpredictable branching logic
+- Operations on remote data sources
+- External function calls
+- Highly skewed data distributions
