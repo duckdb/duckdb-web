@@ -336,17 +336,17 @@ The Kalman filter adapts to changing execution conditions such as memory pressur
 
 Completion time estimates may be less reliable under these conditions:
 
-System Resource Constraints:
+System resource constraints:
 
-- Memory pressure causing disk swapping
-- High CPU load from competing processes
-- Disk I/O bottlenecks
+* Memory pressure causing disk swapping
+* High CPU load from competing processes
+* Disk I/O bottlenecks
 
-Query Execution Characteristics:
+Query execution characteristics:
 
-- Variable execution phases (initial setup versus main processing)
-- Network-dependent operations with inconsistent latency
-- Queries with unpredictable branching logic
-- Operations on remote data sources
-- External function calls
-- Highly skewed data distributions
+* Variable execution phases (initial setup versus main processing)
+* Network-dependent operations with inconsistent latency
+* Queries with unpredictable branching logic
+* Operations on remote data sources
+* External function calls
+* Highly skewed data distributions
