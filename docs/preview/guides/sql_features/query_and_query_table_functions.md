@@ -3,13 +3,15 @@ layout: docu
 title: query and query_table Functions
 ---
 
-The [`query`]({% link docs/preview/sql/functions/utility.md %}#queryquery_string_literal)
-and [`query_table`]({% link docs/preview/sql/functions/utility.md %}#query_tabletbl_name)
-functions take a string literal, and convert it into a `SELECT` subquery and a table reference, respectively.
-Note that these functions only accept literal strings.
-As such, they are not as powerful (or dangerous) as a generic `eval`.
+The [`query_table`]({% link docs/preview/sql/functions/utility.md %}#query_tabletbl_name)
+and [`query`]({% link docs/preview/sql/functions/utility.md %}#queryquery_string_literal)
+functions enable powerful and more dynamic SQL.
 
-These functions are conceptually simple, but enable powerful and more dynamic SQL. For example, they allow passing in a table name as a prepared statement parameter:
+The `query_table` function returns the table whose name is specified by its string argument; the `query` function returns the table obtained by executing the query specified by its string argument.
+Both functions only accept constant strings. As such, they are not as powerful (or dangerous) as a generic `eval`.
+
+
+For example, they allow passing in a table name as a prepared statement parameter:
 
 ```sql
 CREATE TABLE my_table (i INTEGER);
@@ -49,3 +51,5 @@ LIMIT 3;
 | year        | 2017      | 2017      |
 | quarter     | 1         | 3         |
 | month       | 1         | 9         |
+
+
