@@ -38,7 +38,6 @@ Retrieve configuration value:
 
 ```sql
 SELECT current_setting('threads');
-
 ```
 
 Set the default collation for the session:
