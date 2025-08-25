@@ -43,6 +43,7 @@ Set the default collation for the session:
 ```sql
 SET SESSION default_collation = 'nocase';
 ```
+
 #### Set a Global Variable
 
 Set the default sort order globally:

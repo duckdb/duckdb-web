@@ -8,12 +8,12 @@ DuckDB supports the definition of SQL-level variables using the `SET VARIABLE` a
 
 ### Variable Scopes
 
-DuckDb supports two levels of variable scopes:
+DuckDB supports two levels of variable scopes:
 
 | Scope | Description |
 |---|---|
 | `SESSION` | Variables with a `SESSION` scope are local to you and only affect the current session. | 
-| `GLOBAL` | Variables with a `GLOBAL` scope are specific [configuration option variables](https://duckdb.org/docs/stable/configuration/overview.html#global-configuration-options) that affect the entire DuckDB instance and all sessions. For example, see [Set a Global Variable]({% link docs/stable/sql/statements/set.md%}#set-a-global-variable).|
+| `GLOBAL` | Variables with a `GLOBAL` scope are specific [configuration option variables](https://duckdb.org/docs/stable/configuration/overview.html#global-configuration-options) that affect the entire DuckDB instance and all sessions. For example, see [Set a Global Variable]({% link docs/preview/sql/statements/set.md%}#set-a-global-variable). |
 
 ## `SET VARIABLE`
 
