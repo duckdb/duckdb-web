@@ -54,7 +54,7 @@ SET GLOBAL sort_order = 'desc';
 
 Set the default threads globally: 
 
-```sql 
+```sql
 SET GLOBAL threads = 4;
 ```
 
