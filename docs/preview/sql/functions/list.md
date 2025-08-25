@@ -1085,7 +1085,8 @@ The function [`list_aggregate`](#list_aggregatelist-name) allows the execution o
 
 `list_aggregate` accepts additional arguments after the aggregate function name. These extra arguments are passed directly to the aggregate function, which serves as the second argument of `list_aggregate`.
 
-Order sensitive aggregate functions are applied in the order of the list. No `ORDER BY` / `DISTINCT` / `FILTER` clauses are supported by `list_aggregate`. They may instead be emulated using `list_sort` / `list_grade_up` / `list_select` / `list_distinct` / `list_filter`. 
+Order-sensitive aggregate functions are applied in the order of the list. The `ORDER BY`, `DISTINCT` and `FILTER` clauses are not supported by `list_aggregate`.
+They may instead be emulated using `list_sort`, `list_grade_up`, `list_select`, `list_distinct` and `list_filter`.
 
 ```sql
 SELECT list_aggregate([1, 2, -4, NULL], 'min');

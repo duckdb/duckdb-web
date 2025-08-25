@@ -31,7 +31,7 @@ These are called _holistic_ aggregates, and they require more care when implemen
 For some aggregates (like `STRING_AGG`) the order of the values can change the result.
 This is not a problem for windowing because `OVER` clauses can specify an ordering,
 but in a `GROUP BY` clause, the values are unordered.
-To handle this, order sensitive aggregates can include a `WITHIN GROUP(ORDER BY <expr>)` clause
+To handle this, order-sensitive aggregates can include a `WITHIN GROUP(ORDER BY <expr>)` clause
 to specify the order of the values.
 Because the values must all be collected and sorted,
 aggregates that use the `WITHIN GROUP` clause are holistic.
