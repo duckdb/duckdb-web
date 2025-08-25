@@ -64,6 +64,10 @@ silver:
     url: https://www.crunchydata.com/
     logoimg: crunchydata.svg
 
+  - name: Shiguredo
+    url: https://shiguredo.jp/
+    logoimg: shiguredo.svg
+
 technical:
   - name: Cloudflare
     url: https://www.cloudflare.com/
