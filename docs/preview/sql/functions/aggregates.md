@@ -122,7 +122,7 @@ The table below shows the available general aggregate functions.
 | [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min_null(arg, val)`](#arg_min_nullarg-val) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`array_agg(arg)`](#array_aggarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`avg(arg)`](#avgarg) | Calculates the average of all non-null values in `arg`. |
+| [`avg(arg)`](#avgarg) | Calculates the average of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`bit_and(arg)`](#bit_andarg) | Returns the bitwise AND of all bits in a given expression. |
 | [`bit_or(arg)`](#bit_orarg) | Returns the bitwise OR of all bits in a given expression. |
 | [`bit_xor(arg)`](#bit_xorarg) | Returns the bitwise XOR of all bits in a given expression. |
@@ -132,15 +132,15 @@ The table below shows the available general aggregate functions.
 | [`count()`](#count) | Returns the number of rows in a group. |
 | [`count(arg)`](#countarg) | Returns the number of non-`NULL` values in `arg`. |
 | [`countif(arg)`](#countifarg) | Returns the number of rows in a group where `arg` is `true`. |
-| [`favg(arg)`](#favgarg) | Calculates the average using a more accurate floating point summation (Kahan Sum). |
+| [`favg(arg)`](#favgarg) | Calculates the average using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`first(arg)`](#firstarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`fsum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
-| [`geomean(arg)`](#geomeanarg) | Calculates the geometric mean of all non-null values in `arg`. |
+| [`fsum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`geomean(arg)`](#geomeanarg) | Calculates the geometric mean of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`histogram(arg)`](#histogramarg) | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | [`histogram(arg, boundaries)`](#histogramarg-boundaries) | Returns a `MAP` of key-value pairs representing the provided upper `boundaries` and counts of elements in the corresponding bins (left-open and right-closed partitions) of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than all provided `boundaries` appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/preview/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
 | [`histogram_exact(arg, elements)`](#histogram_exactarg-elements) | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). |
 | [`histogram_values(source, boundaries)`](#histogram_valuessource-col_name-technique-bin_count) | Returns the upper boundaries of the bins and their counts. |
-| [`kahan_sum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
+| [`kahan_sum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions).  |
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
@@ -151,12 +151,12 @@ The table below shows the available general aggregate functions.
 | [`min(arg, n)`](#minarg-n) | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
 | [`min_by(arg, val)`](#min_byarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`min_by(arg, val, n)`](#min_byarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
-| [`product(arg)`](#productarg) | Calculates the product of all non-null values in `arg`. |
+| [`product(arg)`](#productarg) | Calculates the product of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`string_agg(arg)`](#string_aggarg-sep) | Concatenates the column string values with a comma separator (`,`). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`sum(arg)`](#sumarg) | Calculates the sum of all non-null values in `arg` / counts `true` values when `arg` is boolean. |
-| [`sumkahan(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
-| [`weighted_avg(arg, weight)`](#weighted_avgarg-weight) | Calculates the weighted average all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the corresponding `arg` value will be skipped. |
+| [`sum(arg)`](#sumarg) | Calculates the sum of all non-null values in `arg` / counts `true` values when `arg` is boolean. The floating-point versions of this function are [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`sumkahan(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`weighted_avg(arg, weight)`](#weighted_avgarg-weight) | Calculates the weighted average all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the corresponding `arg` value will be skipped. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 
 #### `any_value(arg)`
 
@@ -234,7 +234,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the average of all non-null values in `arg`. |
+| **Description** | Calculates the average of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `avg(A)` |
 | **Alias(es)** | `mean` |
 
@@ -314,7 +314,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the average using a more accurate floating point summation (Kahan Sum). |
+| **Description** | Calculates the average using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `favg(A)` |
 | **Alias(es)** | - |
 
@@ -330,7 +330,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the sum using a more accurate floating point summation (Kahan Sum). |
+| **Description** | Calculates the sum using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `fsum(A)` |
 | **Alias(es)** | `sumkahan`, `kahan_sum` |
 
@@ -338,7 +338,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the geometric mean of all non-null values in `arg`. |
+| **Description** | Calculates the geometric mean of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `geomean(A)` |
 | **Alias(es)** | `geometric_mean(A)` |
 
@@ -458,7 +458,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the product of all non-null values in `arg`. |
+| **Description** | Calculates the product of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `product(A)` |
 | **Alias(es)** | - |
 
@@ -482,7 +482,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the sum of all non-null values in `arg` / counts `true` values when `arg` is boolean. |
+| **Description** | Calculates the sum of all non-null values in `arg` / counts `true` values when `arg` is boolean. The floating-point versions of this function are [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `sum(A)` |
 | **Alias(es)** | - |
 
@@ -490,7 +490,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the weighted average of all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the value will be skipped. |
+| **Description** | Calculates the weighted average of all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the value will be skipped. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `weighted_avg(A, W)` |
 | **Alias(es)** | `wavg(arg, weight)` |
 
