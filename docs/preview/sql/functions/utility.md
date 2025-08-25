@@ -55,7 +55,7 @@ The functions below are difficult to categorize into specific function types and
 | [`uuid()`](#uuid) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`uuidv4()`](#uuidv4) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`uuidv7()`](#uuidv7) | Return a random UUIDv7 similar to this: `81964ebe-00b1-7e1d-b0f9-43c29b6fb8f5`. |
-| [`uuid_extract_timestamp(uuidv7)`](#uuid_extract_timestampuuidv7) | Extracts timestamp from a UUIDv7 value. |
+| [`uuid_extract_timestamp(uuidv7)`](#uuid_extract_timestampuuidv7) | Extracts `TIMESTAMP WITH TIME ZONE` from a UUIDv7 value. |
 | [`uuid_extract_version(uuid)`](#uuid_extract_versionuuid) | Extracts UUID version (`4` or `7`). |
 | [`version()`](#version) | Return the currently active version of DuckDB in this format. |
 
@@ -406,7 +406,7 @@ The functions below are difficult to categorize into specific function types and
 
 #### `uuid_extract_timestamp(uuidv7)`
 
-| **Description** | Extracts timestamp from a UUIDv7 value. |
+| **Description** | Extracts `TIMESTAMP WITH TIME ZONE` from a UUIDv7 value. |
 | **Example** | `uuid_extract_timestamp(uuidv7())` |
 | **Result** | `2025-04-19 15:51:20.07+00` |
 
