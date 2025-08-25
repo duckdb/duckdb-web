@@ -38,16 +38,24 @@ Retrieve configuration value:
 SELECT current_setting('threads');
 ```
 
+Set the default collation for the session:
+
+```sql
+SET SESSION default_collation = 'nocase';
+```
+
+#### Set a Global Variable
+
 Set the default sort order globally:
 
 ```sql
 SET GLOBAL sort_order = 'desc';
 ```
 
-Set the default collation for the session:
+Set the default threads globally: 
 
 ```sql
-SET SESSION default_collation = 'nocase';
+SET GLOBAL threads = 4;
 ```
 
 ## Syntax
