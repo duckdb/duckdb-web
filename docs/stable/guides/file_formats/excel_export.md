@@ -9,6 +9,9 @@ title: Excel Export
 
 DuckDB supports exporting data to Excel `.xlsx` files. However, `.xls` files are not supported.
 
+> Note: Excel export requires the duckdb-excel extension.
+> Please run INSTALL 'excel'; LOAD 'excel'; before using FORMAT xlsx.
+
 ## Exporting Excel Sheets
 
 To export a table to an Excel file, use the `COPY` statement with the `FORMAT xlsx` option:
@@ -21,6 +24,12 @@ The result of a query can also be directly exported to an Excel file:
 
 ```sql
 COPY (SELECT * FROM tbl) TO 'output.xlsx' WITH (FORMAT xlsx);
+```
+
+without excel extension:
+
+```
+COPY (SELECT * FROM tbl) TO 'output.xlsx';
 ```
 
 To write the column names as the first row in the Excel file, use the `HEADER` option:
