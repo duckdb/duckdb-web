@@ -30,7 +30,7 @@ The functions below are difficult to categorize into specific function types and
 | [`force_checkpoint(database)`](#force_checkpointdatabase) | Synchronize WAL with file for (optional) database interrupting transactions. |
 | [`gen_random_uuid()`](#gen_random_uuid) | Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`getenv(var)`](#getenvvar) | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/preview/clients/cli/overview.md %}). |
-| [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with the hash of the `value`. |
+| [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with a hash of `value`. The used hash function may change across DuckDB versions.|
 | [`icu_sort_key(string, collator)`](#icu_sort_keystring-collator) | Surrogate [sort key](https://unicode-org.github.io/icu/userguide/collation/architecture.html#sort-keys) used to sort special characters according to the specific locale. Collator parameter is optional. Only available when the ICU extension is installed. |
 | [`if(a, b, c)`](#ifa-b-c) | Ternary conditional operator. |
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
@@ -42,7 +42,7 @@ The functions below are difficult to categorize into specific function types and
 | [`nextval('sequence_name')`](#nextvalsequence_name) | Return the following value of the sequence. |
 | [`nullif(a, b)`](#nullifa-b) | Return `NULL` if `a = b`, else return `a`. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
 | [`pg_typeof(expression)`](#pg_typeofexpression) | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility. |
-| [`query(`*`query_string_literal`*`)`](#queryquery_string_literal) | Table function that parses and executes the query defined in *`query_string_literal`*. Only literal strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
+| [`query(`*`query_string`*`)`](#queryquery_string) | Table function that parses and executes the query defined in *`query_string`*. Only constant strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
 | [`query_table(`*`tbl_name`*`)`](#query_tabletbl_name) | Table function that returns the table given in *`tbl_name`*. |
 | [`query_table(`*`tbl_names`*`, [`*`by_name`*`])`](#query_tabletbl_names-by_name) | Table function that returns the union of tables given in *`tbl_names`*. If the optional *`by_name`* parameter is set to `true`, it uses [`UNION ALL BY NAME`]({% link docs/preview/sql/query_syntax/setops.md %}#union-all-by-name) semantics. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/preview/guides/file_formats/read_file.md %}#read_blob) for more details. |
@@ -55,7 +55,7 @@ The functions below are difficult to categorize into specific function types and
 | [`uuid()`](#uuid) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`uuidv4()`](#uuidv4) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`uuidv7()`](#uuidv7) | Return a random UUIDv7 similar to this: `81964ebe-00b1-7e1d-b0f9-43c29b6fb8f5`. |
-| [`uuid_extract_timestamp(uuidv7)`](#uuid_extract_timestampuuidv7) | Extracts timestamp from a UUIDv7 value. |
+| [`uuid_extract_timestamp(uuidv7)`](#uuid_extract_timestampuuidv7) | Extracts `TIMESTAMP WITH TIME ZONE` from a UUIDv7 value. |
 | [`uuid_extract_version(uuid)`](#uuid_extract_versionuuid) | Extracts UUID version (`4` or `7`). |
 | [`version()`](#version) | Return the currently active version of DuckDB in this format. |
 
@@ -212,7 +212,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a `UBIGINT` with the hash of the `value`. |
+| **Description** | Returns a `UBIGINT` with the hash of the `value`. The used hash function may change across DuckDB versions. |
 | **Example** | `hash('🦆')` |
 | **Result** | `2595805878642663834` |
 
@@ -304,11 +304,11 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `pg_typeof('abc')` |
 | **Result** | `varchar` |
 
-#### `query(query_string_literal)`
+#### `query(query_string)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Table function that parses and executes the query defined in `query_string_literal`. Only literal strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
+| **Description** | Table function that parses and executes the query defined in `query_string`. Only constant strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
 | **Example** | `query('SELECT 42 AS x')` |
 | **Result** | `42` |
 
@@ -406,7 +406,7 @@ The functions below are difficult to categorize into specific function types and
 
 #### `uuid_extract_timestamp(uuidv7)`
 
-| **Description** | Extracts timestamp from a UUIDv7 value. |
+| **Description** | Extracts `TIMESTAMP WITH TIME ZONE` from a UUIDv7 value. |
 | **Example** | `uuid_extract_timestamp(uuidv7())` |
 | **Result** | `2025-04-19 15:51:20.07+00` |
 

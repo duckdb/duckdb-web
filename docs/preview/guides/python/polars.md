@@ -58,4 +58,24 @@ shape: (3, 2)
 └─────┴────────┘
 ```
 
+The optional `lazy` parameter allows returning Polars LazyFrames.
+
+```python
+df = duckdb.sql("""
+    SELECT 1 AS id, 'banana' AS fruit
+    UNION ALL
+    SELECT 2, 'apple'
+    UNION ALL
+    SELECT 3, 'mango'"""
+).pl(lazy=True)
+print(df)
+```
+
+```text
+naive plan: (run LazyFrame.explain(optimized=True) to see the optimized plan)
+
+PYTHON SCAN []
+PROJECT */2 COLUMNS
+```
+
 To learn more about Polars, feel free to explore their [Python API Reference](https://pola-rs.github.io/polars/py-polars/html/reference/index.html).

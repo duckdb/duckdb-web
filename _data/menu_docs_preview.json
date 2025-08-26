@@ -553,6 +553,10 @@
                   "url": "load_and_install"
                 },
                 {
+                  "page": "MERGE INTO",
+                  "url": "merge_into"
+                },
+                {
                   "page": "PIVOT",
                   "url": "pivot"
                 },

@@ -3,14 +3,14 @@ layout: post
 event: true
 title: "DuckDB Amsterdam Meetup #2"
 author: "DuckDB meetup organizers"
-thumb: "/images/blog/thumbs/duckdb-amsterdam-meetup-2.svg"
-image: "/images/blog/thumbs/duckdb-amsterdam-meetup-2.png"
+thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-2.svg"
+image: "/images/events/thumbs/duckdb-amsterdam-meetup-2.png"
 excerpt: ""
 tags: ["meetup"]
 venue: "Xebia, Amsterdam"
 ---
 
-<img src="/images/blog/thumbs/duckdb-amsterdam-meetup-2.svg"
+<img src="/images/events/thumbs/duckdb-amsterdam-meetup-2.svg"
      alt="DuckDB Amsterdam Meetup Splashscreen"
      width="680"
      />

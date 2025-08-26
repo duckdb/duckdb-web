@@ -352,7 +352,7 @@ Interesting to observe that the phrase `i am excited to learn and feel privilege
 
 ### Similarity Joins
 
-Vector embeddings are most known for their usability in search engines, but they can be used in a variety of text analytics use cases, such as topic grouping, classification or semantic matching between documents. The VSS extension provides [vector similarity joins]({% link docs/stable/core_extensions/vss.md%}#bonus-vector-similarity-search-joins), which can be used to conduct these types of analytics.
+Vector embeddings are most known for their usability in search engines, but they can be used in a variety of text analytics use cases, such as topic grouping, classification or semantic matching between documents. The VSS extension provides [vector similarity joins]({% link docs/stable/core_extensions/vss.md %}#bonus-vector-similarity-search-joins), which can be used to conduct these types of analytics.
 
 For example, we show in the below [heatmap chart](https://plotly.com/python/heatmaps/) the number of texts for each combination of emotion labels, where the x-axis corresponds to the semantic matching between the text and the emotion, the y-axis to the classified emotion, and the color indicates the count of texts assigned to each pair: 
 

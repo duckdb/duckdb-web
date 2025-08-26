@@ -34,6 +34,19 @@ cd duckdb
 GEN=ninja make
 ```
 
+Note that on older Red Hat-based distributions, you may have to change the package name for `g++` to `gcc-c++`,
+skip Ninja and manually configure the number of Make jobs:
+
+```batch
+sudo yum install -y git gcc-c++ cmake openssl-devel
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+mkdir build
+cd build
+cmake ..
+make -j`nproc`
+```
+
 ### Alpine Linux
 
 #### CLI Client

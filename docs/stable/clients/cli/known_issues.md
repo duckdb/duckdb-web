@@ -3,9 +3,9 @@ layout: docu
 title: Known Issues
 ---
 
-## Incorrect Memory Values on WSL 2
+## Incorrect Memory Values on Old Linux Distributions and WSL 2
 
-On Windows Subsystem for Linux 2 (WSL2), when querying the `max_memory` or `memory_limit` from the `duckdb_settings`, the values may be inaccurate on certain Ubuntu versions (e.g., 20.04 and 24.04):
+On Windows Subsystem for Linux 2 (WSL2), when querying the `max_memory` or `memory_limit` from the `duckdb_settings`, the values may be inaccurate on certain Ubuntu versions (e.g., 20.04 and 24.04). The issue also occurs on older distributions such as Red Hat Enterprise Linux 8 (RHEL 8):
 
 Example:
 
