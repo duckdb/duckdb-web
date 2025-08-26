@@ -319,7 +319,9 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		// AJAX FORM SEND
 		$("#ajaxForm").submit(function(e){
 			e.preventDefault();
+			var form = this;
 			var action = $(this).attr("action");
+			var status = $(this).find('.success');
 			
 			$('#ajaxForm button[type="submit"]').hide();
 			$('#ajaxForm .lds-ellipsis').fadeIn();
@@ -327,7 +329,6 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			$.ajax({
 				type: "POST",
 				url: action,
-				crossDomain: true,
 				data: new FormData(this),
 				dataType: "json",
 				processData: false,
@@ -335,12 +336,34 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 				headers: {
 					"Accept": "application/json"
 				}
-			}).done(function() {
-				$('#ajaxForm').addClass('inactive');
-				$('#ajaxForm .lds-ellipsis').hide();
-				$('.success').addClass('is-active');
-			}).fail(function() {
-				alert('An error occurred! Please try again later.');
+			}).done(function(data) {
+				if (data.ok) {
+					$('#ajaxForm').addClass('inactive');
+					$('#ajaxForm .lds-ellipsis').hide();
+					$('.success').addClass('is-active');
+					form.reset();
+				} else {
+					if (data.errors) {
+						var errorText = data.errors.map(error => error.message).join(", ");
+						alert('Error: ' + errorText);
+					} else {
+						alert('An error occurred! Please try again later.');
+					}
+					$('#ajaxForm button[type="submit"]').show();
+					$('#ajaxForm .lds-ellipsis').hide();
+				}
+			}).fail(function(xhr) {
+				try {
+					var data = JSON.parse(xhr.responseText);
+					if (data.errors) {
+						var errorText = data.errors.map(error => error.message).join(", ");
+						alert('Error: ' + errorText);
+					} else {
+						alert('An error occurred! Please try again later.');
+					}
+				} catch (e) {
+					alert('An error occurred! Please try again later.');
+				}
 				$('#ajaxForm button[type="submit"]').show();
 				$('#ajaxForm .lds-ellipsis').hide();
 			});
