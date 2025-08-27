@@ -32,15 +32,22 @@ The meetup will take place in London at the _One Great George Street_ conference
 ## Attendance
 
 To attend, **please RSVP on [lu.ma](https://lu.ma/0nd63g9f)**.
-Everybody is welcome to attend but please consider that the talks in this meetup will primarily focus on DuckDB's role in teaching and research instead of focusing on technology and use cases.
 
 ## Timetable
 
-| Time  | Presenter       | Title |
-| :---- | :-------------- | :---- |
-| 18:30 | Mingle & snacks |       |
-| 19:30 | Talks (TBA)     |       |
-| 21:30 | Event ends      |       |
+| Time   | Title                                                                                         | Presenter                                                                                    |
+| :----- | :-------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| 18:30  | Mingle & snacks                                                                               |                                                                                              |
+| 19:30s | [Gabor Szarnyas](https://szarnyasg.org)<br>_(DuckDB Labs)_                                    | Opening remarks                                                                              |
+| 19:45  | [Laurens Kuiper](https://www.linkedin.com/in/lnkuiper/)<br>_(DuckDB Labs)_                    | Hands-on: A PhD centered around DuckDB                                                       |
+| 20:05  | [Richard Wesley](https://www.linkedin.com/in/riwesley/)<br>_(DuckDB Labs)_                    | Time flies like a duck                                                                       |
+| 20:30  | Lightning talks                                                                               |
+|        | [Torsten Grust](https://db.cs.uni-tuebingen.de/grust)<br>_(University of Tübingen, Germany)_  | Ducks love running in circles                                                                |
+|        | [Abigale Kim](https://www.linkedin.com/in/abigalekim/)<br>_(University of Wisconsin–Madison)_ | Anarchy in the database: A survey and evaluation of database management system extensibility |
+|        | Junchang (Jason) Wang<br>_(Nanjing University of Posts and Telecommunications)_               | Elevating bitmap indexing in OLAP DBMSs                                                      |
+|        | [Anas Dorbani](https://www.linkedin.com/in/anasdorbani/)<br>_(Polytechnique Montréal)_        | When the duck quacks: Multimodal querying with FlockMTL                                      |
+| 21:00  | Talks end                                                                                     |                                                                                              |
+| 21:30  | Event ends                                                                                    |                                                                                              |
 
 ## Inquiries
 
