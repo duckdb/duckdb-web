@@ -7,6 +7,8 @@ Examples in this documentation often use datasets based on the [Dutch Railway da
 These high-quality datasets are maintained by the team behind the [Rijden de Treinen _(Are the trains running?)_ application](https://www.rijdendetreinen.nl/en/about).
 This page contains download links to our mirrors to the datasets.
 
+> In 2024, we have published a [blog post on the analysis of these datasets]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}).
+
 ## Loading the Datasets
 
 You can load the datasets directly as follows:
@@ -19,6 +21,8 @@ CREATE TABLE services AS
 ```sql
 DESCRIBE services;
 ```
+
+<div class="monospace_table"></div>
 
 |         column_name          |       column_type        | null | key  | default | extra |
 |------------------------------|--------------------------|------|------|---------|-------|
@@ -68,3 +72,7 @@ DESCRIBE services;
 * [2025-01](https://blobs.duckdb.org/nl-railway/services-2025-01.csv.gz) (30 MB)
 * [2025-02](https://blobs.duckdb.org/nl-railway/services-2025-02.csv.gz) (28 MB)
 * [2025-03](https://blobs.duckdb.org/nl-railway/services-2025-03.csv.gz) (30 MB)
+* [2025-04](https://blobs.duckdb.org/nl-railway/services-2025-04.csv.gz) (32 MB)
+* [2025-05](https://blobs.duckdb.org/nl-railway/services-2025-05.csv.gz) (33 MB)
+* [2025-06](https://blobs.duckdb.org/nl-railway/services-2025-06.csv.gz) (32 MB)
+* [2025-07](https://blobs.duckdb.org/nl-railway/services-2025-07.csv.gz) (33 MB)
