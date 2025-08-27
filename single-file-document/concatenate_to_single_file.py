@@ -383,7 +383,7 @@ with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") 
           ---
           title: DuckDB Documentation
           subtitle: >-
-            DuckDB version {config["current_snapshot_version"]}\\newline
+            DuckDB version {config["current_duckdb_version"]}\\newline
             Generated on {datetime.now(timezone.utc).strftime("%Y-%m-%d at %H:%M UTC")}
           ---
         """))
