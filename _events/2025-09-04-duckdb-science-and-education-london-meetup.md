@@ -30,7 +30,7 @@ To attend, **please RSVP on [lu.ma](https://lu.ma/0nd63g9f)**.
 | Time   | Title                                                                                         | Presenter                                                                                    |
 | :----- | :-------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
 | 18:30  | Mingle & snacks                                                                               |                                                                                              |
-| 19:30s | [Gabor Szarnyas](https://szarnyasg.org)<br>_(DuckDB Labs)_                                    | Opening remarks                                                                              |
+| 19:30 | [Gabor Szarnyas](https://szarnyasg.org)<br>_(DuckDB Labs)_                                    | Opening remarks                                                                              |
 | 19:45  | [Laurens Kuiper](https://www.linkedin.com/in/lnkuiper/)<br>_(DuckDB Labs)_                    | Hands-on: A PhD centered around DuckDB                                                       |
 | 20:05  | [Richard Wesley](https://www.linkedin.com/in/riwesley/)<br>_(DuckDB Labs)_                    | Time flies like a duck                                                                       |
 | 20:30  | Lightning talks                                                                               |
