@@ -28,6 +28,31 @@ SHOW ALL TABLES;
 | memory   | main   | tbl        | [i]          | [INTEGER]    | false     |
 | memory   | s1     | tbl        | [v]          | [VARCHAR]    | false     |
 
+`SHOW TABLES FROM db` can be used to list all tables in a given database or schema.
+
+```sql
+ATTACH 'db.duckdb';
+CREATE TABLE db.main_tbl (u VARCHAR);
+CREATE SCHEMA db.s1;
+CREATE TABLE db.s1.schema_tbl (v VARCHAR);
+SHOW TABLES FROM db;
+```
+
+| name       |
+|------------|
+| main_tbl   |
+| schema_tbl |
+
+Or a specific schema.
+
+```sql
+SHOW TABLES FROM db.s1;
+```
+
+| name       |
+|------------|
+| schema_tbl |
+
 To view the schema of an individual table, use the [`DESCRIBE` command]({% link docs/preview/guides/meta/describe.md %}).
 
 ## See Also
