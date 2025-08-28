@@ -3,15 +3,15 @@ layout: post
 event: true
 title: "DuckDB in Science Meetup (London)"
 author: "DuckDB meetup organizers"
-thumb: "/images/events/thumbs/duckdb-science-and-education-london-meetup.svg"
-image: "/images/events/thumbs/duckdb-science-and-education-london-meetup.png"
+thumb: "/images/events/thumbs/duckdb-science-meetup.svg"
+image: "/images/events/thumbs/duckdb-science-meetup.png"
 excerpt: ""
 tags: ["meetup"]
 venue: "One Great George Street, London"
 ---
 
-<img src="/images/events/thumbs/duckdb-science-and-education-london-meetup.svg"
-     alt="DuckDB London Meetup Splashscreen"
+<img src="/images/events/thumbs/duckdb-science-meetup.svg"
+     alt="DuckDB in Science Meetup Splashscreen"
      width="680"
      />
 
