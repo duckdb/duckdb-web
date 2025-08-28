@@ -54,6 +54,23 @@ DESCRIBE FROM read_text('README.md');
 | size          | BIGINT      | YES  | NULL | NULL    | NULL  |
 | last_modified | TIMESTAMP   | YES  | NULL | NULL    | NULL  |
 
+## Hive Partitioning
+
+Data can be read from [Hive partitioned]({% link docs/preview/data/partitioning/hive_partitioning.md %}) data sets.
+
+```sql
+SELECT *
+FROM read_blob('data/parquet-testing/hive-partitioning/simple/**/*.parquet')
+WHERE part IN ('a', 'b') AND date >= '2012-01-01';
+```
+
+
+|             filename                  |           content             | size |      last_modified     |    date    |  part   |
+|---------------------------------------|-------------------------------|------|------------------------|------------|---------|
+| …/part=a/date=2012-01-01/test.parquet | PAR1\x15\x00\x15\x14\x15\x18… | 266  | 2024-11-12 02:23:20+00 | 2012-01-01 | a       |
+| …/part=b/date=2013-01-01/test.parquet | PAR1\x15\x00\x15\x14\x15\x18… | 266  | 2024-11-12 02:23:20+00 | 2013-01-01 | b       |
+
+
 ## Handling Missing Metadata
 
 In cases where the underlying filesystem is unable to provide some of this data due (e.g., because HTTPFS can't always return a valid timestamp), the cell is set to `NULL` instead.
