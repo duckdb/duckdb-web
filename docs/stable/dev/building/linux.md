@@ -36,6 +36,19 @@ cd duckdb
 GEN=ninja make
 ```
 
+### Arch, Omarchy and Manjaro
+
+#### CLI Client
+
+The requirements for building the DuckDB CLI client on Arch, Omarchy, Manjaro, etc. are the following:
+
+```batch
+sudo pacman -S git gcc cmake ninja openssl
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+GEN=ninja make
+```
+
 ### Alpine Linux
 
 #### CLI Client
