@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: 2f2709cbcf594029559aba69706b31b70d6578aa
+  ref: 04bd8cfafa0149c8628da7dfd2f90a29b0b62bf1
 
 docs:
   hello_world: |
@@ -35,8 +35,8 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 91
-extension_star_count_pretty: 91
+extension_star_count: 92
+extension_star_count_pretty: 92
 extension_download_count: 862
 extension_download_count_pretty: 862
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
