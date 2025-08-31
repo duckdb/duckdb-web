@@ -23,7 +23,7 @@ The meetup will take place in London at the _One Great George Street_ conference
 
 ## Attendance
 
-To attend, **please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/310746763/)**.
+🎟️ To attend, **please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/310746763/)**.
 
 ## Timetable
 
