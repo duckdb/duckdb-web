@@ -15,11 +15,11 @@ venue: "One Great George Street, London"
      width="680"
      />
 
-We are excited to announce the DuckDB London meetup, which will take place during the week of the prestigious [VLDB 2025 conference](https://vldb.org/2025/). This meetup will specifically focus on DuckDB's role in science. It will include deep-dive talks from the developers of DuckDB and uses of DuckDB in science from members of the research community.
+We are excited to announce the DuckDB London meetup, which will take place during the week of the prestigious [VLDB 2025 conference](https://vldb.org/2025/). This meetup will specifically focus on DuckDB's role in science. It will include deep dive talks from the developers of DuckDB and uses of DuckDB in science from members of the research community.
 
 ## Venue
 
-The meetup will take place in London at the _One Great George Street_ conference center located at [1 Great George Street, London SW1P 3AA (Google Maps)](https://maps.app.goo.gl/DWVGea9utbWp7GRw6); [Apple Maps](https://maps.apple.com/place?address=1%20Great%20George%20Street,%20London,%20SW1P%203AA,%20England&coordinate=51.501103,-0.128750&name=1%20Great%20George%20Street&map=explore), in just a few minutes walking distance from VLDB's venue.
+The meetup will take place in London at the _One Great George Street_ conference center located at [1 Great George Street, London SW1P 3AA (Google Maps)](https://maps.app.goo.gl/DWVGea9utbWp7GRw6); [Apple Maps](https://maps.apple.com/place?address=1%20Great%20George%20Street,%20London,%20SW1P%203AA,%20England&coordinate=51.501103,-0.128750&name=1%20Great%20George%20Street&map=explore), just a few minutes walking distance from VLDB's venue.
 
 ## Attendance
 
