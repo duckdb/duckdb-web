@@ -15,6 +15,8 @@ SELECT size, parse_path(filename), content
 FROM read_text('test/sql/table_function/files/*.txt');
 ```
 
+<div class="monospace_table"></div>
+
 | size |             parse_path(filename)              |      content     |
 |-----:|-----------------------------------------------|------------------|
 | 12   | [test, sql, table_function, files, one.txt]   | Hello World!     |
@@ -32,6 +34,8 @@ SELECT size, content, filename
 FROM read_blob('test/sql/table_function/files/*');
 ```
 
+<div class="monospace_table"></div>
+
 | size |                              content                         |                filename                 |
 |-----:|--------------------------------------------------------------|-----------------------------------------|
 | 178  |  PK\x03\x04\x0A\x00\x00\x00\x00\x00\xACi=X\x14t\xCE\xC7\x0A… | test/sql/table_function/files/four.blob |
@@ -47,12 +51,32 @@ The schemas of the tables returned by `read_text` and `read_blob` are identical:
 DESCRIBE FROM read_text('README.md');
 ```
 
+<div class="monospace_table"></div>
+
 |  column_name  | column_type | null | key  | default | extra |
 |---------------|-------------|------|------|---------|-------|
 | filename      | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | content       | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | size          | BIGINT      | YES  | NULL | NULL    | NULL  |
 | last_modified | TIMESTAMP   | YES  | NULL | NULL    | NULL  |
+
+## Hive Partitioning
+
+Data can be read from [Hive partitioned]({% link docs/preview/data/partitioning/hive_partitioning.md %}) datasets.
+
+```sql
+SELECT *
+FROM read_blob('data/parquet-testing/hive-partitioning/simple/**/*.parquet')
+WHERE part IN ('a', 'b') AND date >= '2012-01-01';
+```
+
+<div class="monospace_table"></div>
+
+|             filename                  |           content             | size |      last_modified     |    date    |  part   |
+|---------------------------------------|-------------------------------|------|------------------------|------------|---------|
+| …/part=a/date=2012-01-01/test.parquet | PAR1\x15\x00\x15\x14\x15\x18… | 266  | 2024-11-12 02:23:20+00 | 2012-01-01 | a       |
+| …/part=b/date=2013-01-01/test.parquet | PAR1\x15\x00\x15\x14\x15\x18… | 266  | 2024-11-12 02:23:20+00 | 2013-01-01 | b       |
+
 
 ## Handling Missing Metadata
 
