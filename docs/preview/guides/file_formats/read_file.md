@@ -15,6 +15,8 @@ SELECT size, parse_path(filename), content
 FROM read_text('test/sql/table_function/files/*.txt');
 ```
 
+<div class="monospace_table"></div>
+
 | size |             parse_path(filename)              |      content     |
 |-----:|-----------------------------------------------|------------------|
 | 12   | [test, sql, table_function, files, one.txt]   | Hello World!     |
@@ -32,6 +34,8 @@ SELECT size, content, filename
 FROM read_blob('test/sql/table_function/files/*');
 ```
 
+<div class="monospace_table"></div>
+
 | size |                              content                         |                filename                 |
 |-----:|--------------------------------------------------------------|-----------------------------------------|
 | 178  |  PK\x03\x04\x0A\x00\x00\x00\x00\x00\xACi=X\x14t\xCE\xC7\x0A… | test/sql/table_function/files/four.blob |
@@ -47,6 +51,8 @@ The schemas of the tables returned by `read_text` and `read_blob` are identical:
 DESCRIBE FROM read_text('README.md');
 ```
 
+<div class="monospace_table"></div>
+
 |  column_name  | column_type | null | key  | default | extra |
 |---------------|-------------|------|------|---------|-------|
 | filename      | VARCHAR     | YES  | NULL | NULL    | NULL  |
@@ -56,7 +62,7 @@ DESCRIBE FROM read_text('README.md');
 
 ## Hive Partitioning
 
-Data can be read from [Hive partitioned]({% link docs/preview/data/partitioning/hive_partitioning.md %}) data sets.
+Data can be read from [Hive partitioned]({% link docs/preview/data/partitioning/hive_partitioning.md %}) datasets.
 
 ```sql
 SELECT *
@@ -64,6 +70,7 @@ FROM read_blob('data/parquet-testing/hive-partitioning/simple/**/*.parquet')
 WHERE part IN ('a', 'b') AND date >= '2012-01-01';
 ```
 
+<div class="monospace_table"></div>
 
 |             filename                  |           content             | size |      last_modified     |    date    |  part   |
 |---------------------------------------|-------------------------------|------|------------------------|------------|---------|
