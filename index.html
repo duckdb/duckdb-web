@@ -147,48 +147,6 @@ body_class: landing nowrap
 	</div>
 </section>
 
-{% assign future_events = site.events | where_exp: "event", "event.date >= site.time" | sort: 'date' %}
-{% if future_events.size > 0 %}
-<section class="upcoming-events">
-	<div class="wrap">
-		<h1 class="display-2">Upcoming events</h1>
-		<div class="newstileswrap">
-			{% for event in future_events limit:2 %}
-				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %} <!-- Generiert Werte von 1 bis 3 -->
-				{% assign tag_classes = event.tags | join: ' ' %}
-				<div class="eventpreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ event.title | escape }}">
-					<a href="{{ event.url }}" class="blocklink" title="{{ event.title }}"></a>
-					<div class="postimg custom">
-						{% if event.thumb %}
-							<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image">
-						{% else %}
-							<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
-						{% endif %}
-					</div>
-					<div class="postdetails">
-						{% if event.tags %}
-						<div class="tags">
-							<span class="eventdate">{{ event.date | date: "%Y-%m-%d" }}</span>
-							{% for tag in event.tags %}
-								<span class="tag">{{ tag }}</span>
-							{% endfor %}
-						</div>
-						{% endif %}
-						<h3 class="headline-3">{{ event.title }}</h3>
-						<div class="meta text-secondary-color body-small">
-							<div class="venue">{{ event.venue | default: "Venue not specified" }}</div>
-							<div class="author">{{ event.author | default: "DuckDB" }}</div>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-		<a href="/events" class="button transparent arrow-right">
-			All events <span></span>
-		</a>
-</section>
-{% endif %}
-
 <div class="landing_bg_1"></div>
 <div class="landing_bg_2"></div>
 
