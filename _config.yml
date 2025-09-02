@@ -64,6 +64,9 @@ collections:
   events:
     output: true
     permalink: /events/:year/:month/:day/:title/
+  science:
+    output: true
+    permalink: /science/:title/
 
 excerpt_separator: <!--more-->
 future: true
