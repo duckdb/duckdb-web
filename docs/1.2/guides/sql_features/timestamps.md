@@ -3,7 +3,7 @@ layout: docu
 title: Timestamp Issues
 ---
 
-## Timestamp With Time Zone Promotion Casts
+## Timestamp with Time Zone Promotion Casts
 
 Working with time zones in SQL can be quite confusing at times. 
 For example, when filtering to a date range, one might try the following query:
