@@ -1513,6 +1513,10 @@
                 {
                   "page": "query and query_table Functions",
                   "url": "query_and_query_table_functions"
+                },
+                {
+                  "page": "Timestamp Issues",
+                  "url": "timestamps"
                 }
               ]
             },
