@@ -9,55 +9,70 @@ Working with time zones in SQL can be quite confusing at times.
 For example, when filtering to a date range, one might try the following query:
 
 ```sql
-set timezone='America/Los_Angeles';
+SET timezone = 'America/Los_Angeles';
 
-create table times as 
-    from range('2025-08-30'::TIMESTAMPTZ, '2025-08-31'::TIMESTAMPTZ, INTERVAL 1 HOUR) tbl(t);
+CREATE TABLE times AS
+    FROM range('2025-08-30'::TIMESTAMPTZ, '2025-08-31'::TIMESTAMPTZ, INTERVAL 1 HOUR) tbl(t);
 
-from times where t <= '2025-08-30';
+FROM times WHERE t <= '2025-08-30';
 ```
-| t |
-| timestamp with time zone |
-| :--- |
-| 2025-08-30 00:00:00-07 |
+
+```text
+┌──────────────────────────┐
+│            t             │
+│ timestamp with time zone │
+├──────────────────────────┤
+│ 2025-08-30 00:00:00-07   │
+└──────────────────────────┘
+```
 
 But if you change to another time zone, the results of the query change:
 
 ```sql
-set timezone = 'HST';
-from fnord where t <= '2025-08-30';
+SET timezone = 'HST';
+FROM times WHERE t <= '2025-08-30';
 ```
-| t |
-| timestamp with time zone |
-| :--- |
-| 2025-08-29 21:00:00-10 |
-| 2025-08-29 22:00:00-10 |
-| 2025-08-29 23:00:00-10 |
-| 2025-08-30 00:00:00-10 |
 
-or worse:
+```text
+┌──────────────────────────┐
+│            t             │
+│ timestamp with time zone │
+├──────────────────────────┤
+│ 2025-08-29 21:00:00-10   │
+│ 2025-08-29 22:00:00-10   │
+│ 2025-08-29 23:00:00-10   │
+│ 2025-08-30 00:00:00-10   │
+└──────────────────────────┘
+```
+
+Or worse:
 
 ```sql
-set timezone = 'America/New_York';
-from times where t <= '2025-08-30';
+SET timezone = 'America/New_York';
+FROM times WHERE t <= '2025-08-30';
 ```
-| t |
-| timestamp with time zone |
-| ---: |
-| 0 rows |
+
+```text
+┌──────────────────────────┐
+│            t             │
+│ timestamp with time zone │
+├──────────────────────────┤
+│          0 rows          │
+└──────────────────────────┘
+```
 
 These confusing results are due to the SQL casting rules from `DATE` to `TIMESTAMP WITH TIME ZONE`.
 This cast is required to promote the date to midnight _in the current time zone_. 
 
 In general, unless you need to use the current time zone for display (or 
-[other temporal binning](https://duckdb.org/2022/01/06/time-zones.html) operations) 
+[other temporal binning]({% post_url 2022-01-06-time-zones %}) operations) 
 you should use plain `TIMESTAMP`s for temporal data.
 This will avoid confusing issues such as this, and the arithmetic operations are generally faster. 
 
 ## Time Zone Performance
 
-DuckDB uses the International Components for Unicode time library for 
-[time zone support](https://duckdb.org/2022/01/06/time-zones.html).
+DuckDB uses the _International Components for Unicode_ time library for 
+[time zone support]({% post_url 2022-01-06-time-zones %}).
 This library has a number of advantages, including support for daylight savings time past 2037.
 (Note: Pandas gives incorrect results past that year).
 
@@ -67,18 +82,18 @@ For example, if the application is modeling electrical supply and demand out to 
 one can create the calendar table like so:
 
 ```sql
-set timezone = 'Europe/Netherlands';
+SET timezone = 'Europe/Netherlands';
 
-create or replace table hourly as
-    select 
+CREATE OR REPLACE TABLE hourly AS
+    SELECT 
         ts, 
-        year::SMALLINT as year,
-        month::TINYINT as month,
-        day::TINYINT as day,
-        hour::TINYINT as hour,
-    from (
-        select ts, unnest(date_part(['year', 'month', 'day', 'hour',], ts))
-        from generate_series(
+        year::SMALLINT AS year,
+        month::TINYINT AS month,
+        day::TINYINT AS day,
+        hour::TINYINT AS hour,
+    FROM (
+        SELECT ts, unnest(date_part(['year', 'month', 'day', 'hour',], ts))
+        FROM generate_series(
             '2020-01-01'::DATE::TIMESTAMPTZ, 
             '2100-01-01'::DATE::TIMESTAMPTZ, 
             INTERVAL 1 HOUR) tbl(ts)
