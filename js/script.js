@@ -803,9 +803,12 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	
 	
 	/** HIDE BANNER **/
-	const showbanner = getWithExpiry("homeBanner");
-	if(showbanner == false){
-		$('.banner').css('display', 'none');
+	const currentBannerVersion = $('.banner').data('banner-version') || 'default';
+	const storedBannerData = getWithExpiry("homeBanner");
+	const shouldShowBanner = !storedBannerData || storedBannerData.version !== currentBannerVersion;
+
+	if (!shouldShowBanner) {
+		$('.banner').hide();
 		if( $('body').hasClass('documentation') ){
 			$('main').removeAttr('class');
 		}
@@ -813,7 +816,8 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		$('.banner').css('display', 'flex');
 	}
 	$('.banner .close').click(function(){
-		setWithExpiry('homeBanner', false, 172800000); // 900000 = 15 min, 172800000 = 2 days
+		const bannerVersion = $('.banner').data('banner-version') || 'default';
+		setWithExpiry('homeBanner', {version: bannerVersion, closed: true}, 172800000); // 900000 = 15 min, 172800000 = 2 days
 		$('.banner').slideUp(300);
 		if( $('body').hasClass('documentation') ){
 			$('main').removeAttr('class');

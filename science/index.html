@@ -1,0 +1,65 @@
+---
+layout: postarchive
+title: DuckDB in Science
+excerpt: A curated collection of external papers, lectures, and podcasts exploring DuckDB in research and academia. 
+---
+
+{% assign all_tags = "" %}
+{% for science in site.science %}
+	{% assign all_tags = all_tags | append: science.tags | join: "," | append: "," %}
+{% endfor %}
+{% assign unique_tags = all_tags | split: "," | uniq | sort %}
+
+<div class="wrap">
+	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
+		<input type="text" id="search-input" placeholder="Search...">
+		<div class="filtertags">
+			<div class="filter-highlight"></div>
+			<button type="button" class="filter-btn active" data-filter="*">All</button>
+			<button type="button" class="filter-btn" data-filter=".paper">Paper</button>
+			<button type="button" class="filter-btn" data-filter=".podcast">Podcast</button>
+		</div>
+	</div>
+</div>
+
+<div class="post-list wrap">
+	<div class="newstiles science-tiles">
+		{% assign sorted_science = site.science | sort: 'date' | reverse %}
+		{% for science in sorted_science %}
+			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
+			{% assign tag_classes = "" %}
+			{% for tag in science.tags %}
+				{% assign slugified_tag = tag | slugify %}
+				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
+			{% endfor %}
+			<div class="sciencepreview postpreview {{ tag_classes | downcase }}" data-title="{{ science.title | escape }}">
+				<a href="/science/{{ science.slug | default: science.title | slugify }}/" title="{{ science.title }}" class="blocklink"></a>
+				<div class="postimg custom">
+					{% if science.thumb %}
+						<img src="{{ science.thumb }}" alt="{{ science.title }}" class="zoom-image">
+					{% else %}
+						{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
+						<img src="/images/science/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+					{% endif %}
+				</div>
+				<div class="postdetails">
+					{% if science.tags %}
+					<div class="tags">
+						{% for tag in science.tags %}
+							<span class="tag">{{ tag }}</span>
+						{% endfor %}
+						{% if science.length %}
+						  <span class="length">{{ science.length }}</span>
+						{% endif %}
+					</div>
+					{% endif %}
+					<h3>{{ science.title }}</h3>
+					<div class="meta">
+						<div class="date">{{ science.date | date: "%Y-%m-%d" }}</div>
+						<div class="author">{{ science.author }}</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>

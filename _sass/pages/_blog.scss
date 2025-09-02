@@ -131,6 +131,15 @@ section.upcoming-events,
 	}
 }
 
+
+.science-tiles .sciencepreview.postpreview {
+	width: calc(33.333% - 15px);
+	.postimg{
+		aspect-ratio: 1/1;
+	}
+}
+
+
 .filterbar{
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -169,6 +178,7 @@ section.upcoming-events,
 		border-radius: 30px;
 		border: 1px solid var(--main-codebox-border-color, #E6E6E6);
 		padding: 5px;
+		margin-left: auto;
 	
 		.filter-highlight {
 			position: absolute;
