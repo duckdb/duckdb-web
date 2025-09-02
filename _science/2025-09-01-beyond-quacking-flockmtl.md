@@ -2,6 +2,8 @@
 layout: post
 title: "Beyond Quacking: Deep Integration of Language Models and RAG into DuckDB"
 author: "Anas Dorbani, Sunny Yasser, Jimmy Lin, Amine Mhedhbi"
+thumb: "/images/science/thumbs/vldb-2025.svg"
+image: "/images/science/thumbs/vldb-2025.png"
 excerpt: ""
 tags: ["Paper"]
 ---

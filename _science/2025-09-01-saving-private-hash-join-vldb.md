@@ -2,6 +2,8 @@
 layout: post
 title: Saving Private Hash Join
 author: "Laurens Kuiper, Paul Groß, Peter Boncz, Hannes Mühleisen"
+thumb: "/images/science/thumbs/vldb-2025.svg"
+image: "/images/science/thumbs/vldb-2025.png"
 excerpt: ""
 tags: ["Paper"]
 ---
