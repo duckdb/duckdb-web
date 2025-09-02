@@ -6,7 +6,6 @@ author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/science/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.png"
 image: "/images/science/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.png"
 excerpt: ""
-toc: false
 tags: ["Podcast"]
 length: "40 min"
 ---

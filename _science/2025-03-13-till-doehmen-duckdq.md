@@ -6,7 +6,6 @@ author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/science/thumbs/2025-03-13-till-doehmen-duckdq.png"
 image: "/images/science/thumbs/2025-03-13-till-doehmen-duckdq.png"
 excerpt: ""
-toc: false
 tags: ["Podcast"]
 length: "60 min"
 ---

@@ -6,7 +6,6 @@ author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/science/thumbs/2025-04-10-arjen-p-de-vries-faiss.png"
 image: "/images/science/thumbs/2025-04-10-arjen-p-de-vries-faiss.png"
 excerpt: ""
-toc: false
 tags: ["Podcast"]
 length: "45 min"
 ---
