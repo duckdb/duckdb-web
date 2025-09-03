@@ -108,6 +108,11 @@ body.documentation {
         p+table {
             margin-top: 15px;
         }
+        
+        p + .monospace_table,
+        div + .monospace_table{
+            margin-top: 20px;
+        }
 
         .limit-width {
             width: 100%;
