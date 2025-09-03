@@ -10,7 +10,7 @@ tags: ["Paper"]
 
 [Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3735106.3736535)
 
-Venue: DBPL 2025
+Venue: DBPL at SIGMOD 2025
 
 ## Abstract
 
