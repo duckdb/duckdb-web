@@ -63,11 +63,11 @@
 		</div>
 	</header>
 	
-	<main>
+	<main class="main-{{ page.collection }}">
 		<div class="newswrap">
 			<div class="postwrap">
 				<div class="postcontent">
-					<div class="singleentry{% if page.toc != false %} contains_toc{% endif %}">
+					<div class="singleentry{% if page.collection %} singleentry-{{ page.collection }}{% endif %}{% if page.toc != false %} contains_toc{% endif %}">
 						<div class="content">
 							<div class="contentwidth">
 								<h1>{{ page.title }}</h1>

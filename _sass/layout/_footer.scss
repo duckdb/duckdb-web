@@ -46,6 +46,12 @@ footer{
 				a{
 					color: inherit;
 				}
+				a + a{
+					margin-left: 15px;
+				}
+				>div{
+					white-space: nowrap;
+				}
 			}
 			strong{
 					font-weight: normal;
