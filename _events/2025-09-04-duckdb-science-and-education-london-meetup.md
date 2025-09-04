@@ -21,6 +21,10 @@ We are excited to announce the DuckDB London meetup, which will take place durin
 
 The meetup will take place in London at the _One Great George Street_ conference center located at [1 Great George Street, London SW1P 3AA (Google Maps)](https://maps.app.goo.gl/DWVGea9utbWp7GRw6); [Apple Maps](https://maps.apple.com/place?address=1%20Great%20George%20Street,%20London,%20SW1P%203AA,%20England&coordinate=51.501103,-0.128750&name=1%20Great%20George%20Street&map=explore), just a few minutes walking distance from VLDB's venue.
 
+Snacks and drinks will be served on the ground floor in the **Council Room** starting at 18:30.
+
+The presentations will take place on floor -1 in the **Godfrey Mitchell Theatre** starting at 19:30.
+
 ## Attendance
 
 🎟️ To attend, **please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/310746763/)**.
