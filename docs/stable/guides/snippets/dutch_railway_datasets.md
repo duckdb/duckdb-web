@@ -46,54 +46,6 @@ DESCRIBE services;
 
 ## Datasets
 
----
-layout: docu
-title: Dutch Railway Datasets
----
-
-Examples in this documentation often use datasets based on the [Dutch Railway datasets](https://www.rijdendetreinen.nl/en/open-data/).
-These high-quality datasets are maintained by the team behind the [Rijden de Treinen _(Are the trains running?)_ application](https://www.rijdendetreinen.nl/en/about).
-This page contains download links to our mirrors to the datasets.
-
-> In 2024, we have published a [blog post on the analysis of these datasets]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}).
-
-## Loading the Datasets
-
-You can load the datasets directly as follows:
-
-```sql
-CREATE TABLE services AS
-    FROM 'https://blobs.duckdb.org/nl-railway/services-2025-03.csv.gz';
-```
-
-```sql
-DESCRIBE services;
-```
-
-<div class="monospace_table"></div>
-
-|         column_name          |       column_type        | null | key  | default | extra |
-|------------------------------|--------------------------|------|------|---------|-------|
-| Service:RDT-ID               | BIGINT                   | YES  | NULL | NULL    | NULL  |
-| Service:Date                 | DATE                     | YES  | NULL | NULL    | NULL  |
-| Service:Type                 | VARCHAR                  | YES  | NULL | NULL    | NULL  |
-| Service:Company              | VARCHAR                  | YES  | NULL | NULL    | NULL  |
-| Service:Train number         | BIGINT                   | YES  | NULL | NULL    | NULL  |
-| Service:Completely cancelled | BOOLEAN                  | YES  | NULL | NULL    | NULL  |
-| Service:Partly cancelled     | BOOLEAN                  | YES  | NULL | NULL    | NULL  |
-| Service:Maximum delay        | BIGINT                   | YES  | NULL | NULL    | NULL  |
-| Stop:RDT-ID                  | BIGINT                   | YES  | NULL | NULL    | NULL  |
-| Stop:Station code            | VARCHAR                  | YES  | NULL | NULL    | NULL  |
-| Stop:Station name            | VARCHAR                  | YES  | NULL | NULL    | NULL  |
-| Stop:Arrival time            | TIMESTAMP WITH TIME ZONE | YES  | NULL | NULL    | NULL  |
-| Stop:Arrival delay           | BIGINT                   | YES  | NULL | NULL    | NULL  |
-| Stop:Arrival cancelled       | BOOLEAN                  | YES  | NULL | NULL    | NULL  |
-| Stop:Departure time          | TIMESTAMP WITH TIME ZONE | YES  | NULL | NULL    | NULL  |
-| Stop:Departure delay         | BIGINT                   | YES  | NULL | NULL    | NULL  |
-| Stop:Departure cancelled     | BOOLEAN                  | YES  | NULL | NULL    | NULL  |
-
-## Datasets
-
 ### Yearly Data Sets
 
 The yearly data sets are about 350 MB each.
