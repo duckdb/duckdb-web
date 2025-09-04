@@ -36,8 +36,8 @@ docs:
     If you pass multiple bands (e.g., band := [1,2,3]) it returns a wide schema:
     (cell_id, band1, band2, …). This is optimized for fast CTAS/UPDATE patterns
     when building “wide” raster tables inside DuckDB.
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 2
+extension_star_count_pretty: 2
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_geotiff.png'
