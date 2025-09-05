@@ -29,7 +29,7 @@ The event starts at 18:00 and will feature three talks from DuckDB users and dev
 | ----: | :---------------------------------------------------------------------------- | :-------------------------------- |
 | 17:30 | _Venue opens_                                                                 |                                   |
 | 18:00 | Opening remarks                                                               | Gábor Szárnyas<br>_(DuckDB Labs)_ |
-| 18:10 | TBA                                                                           | Roland Bouman<br>_(TBA)_          |
+| 18:10 | Huey: pivoting hundreds of millions of rows in the browser with DuckDB-Wasm   | Roland Bouman                     |
 | 18:35 | Indexes are (not) all you need" - Common DuckDB pitfalls and how to find them | Tania Bogatsch<br>_(DuckDB Labs)_ |
 | 19:00 | TBA                                                                           | Lorenzo Mangani<br>_(TBA)_        |
 | 19:30 | _Drinks and snacks by [Adyen](https://www.adyen.com/)_                        |                                   |
