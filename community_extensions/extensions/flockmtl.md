@@ -62,8 +62,8 @@ docs:
 
     > *Note:* FlockMTL is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://dais-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
 
-extension_star_count: 263
-extension_star_count_pretty: 263
+extension_star_count: 264
+extension_star_count_pretty: 264
 extension_download_count: 499
 extension_download_count_pretty: 499
 image: '/images/community_extensions/social_preview/preview_community_extension_flockmtl.png'
