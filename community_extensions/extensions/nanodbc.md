@@ -8,16 +8,16 @@ excerpt: |
 extension:
   name: nanodbc
   description: Connect to any ODBC-compatible database and query data directly from DuckDB
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
-  excluded_platforms: "linux_amd64;linux_arm64;linux_amd64_musl;osx_amd64;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw"
+  excluded_platforms: "linux_amd64_musl;osx_amd64;wasm_mvp;wasm_eh;wasm_threads"
   license: MIT
   maintainers:
     - Hugoberry
 repo:
   github: Hugoberry/duckdb-nanodbc-extension
-  ref: 25bf0edb450f160fb045ca559eae8cdd72284167
+  ref: 3c724bd8c9d0946a9bd54cba26a351ffbadafc5a
 docs:
   hello_world: |
     -- Query a table using DSN
@@ -52,8 +52,8 @@ docs:
 
     
 
-extension_star_count: 9
-extension_star_count_pretty: 9
+extension_star_count: 30
+extension_star_count_pretty: 30
 extension_download_count: 473
 extension_download_count_pretty: 473
 image: '/images/community_extensions/social_preview/preview_community_extension_nanodbc.png'
@@ -83,9 +83,9 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| odbc_attach   | table         | NULL        | NULL    | []       |
-| odbc_exec     | table         | NULL        | NULL    | []       |
-| odbc_query    | table         | NULL        | NULL    | []       |
-| odbc_scan     | table         | NULL        | NULL    | []       |
+| odbc_attach   | table         | NULL        | NULL    |          |
+| odbc_exec     | table         | NULL        | NULL    |          |
+| odbc_query    | table         | NULL        | NULL    |          |
+| odbc_scan     | table         | NULL        | NULL    |          |
 
 
