@@ -19,7 +19,7 @@ We are excited to announce the [third DuckDB Amsterdam meetup](https://www.meetu
 
 ## Registration Process
 
-Attendance is free. Please [RSVP on meetup.com](https://www.meetup.com/duckdb/events/308780911/).
+🎟️ Attendance is free. Please [RSVP on meetup.com](https://www.meetup.com/duckdb/events/308780911/).
 
 ## Timetable
 
