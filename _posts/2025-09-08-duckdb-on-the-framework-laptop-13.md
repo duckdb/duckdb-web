@@ -145,7 +145,7 @@ Note that Framework currently only sells 96 GB memory kits but both the motherbo
 
 ### File System Configuration
 
-In our initial experiments, we experienced intermittent checksum errors from the btrfs file system in [dmesg](https://man.archlinux.org/man/dmesg.1.en), manifesting as `BTRFS warning (device dm-0): csum failed ...` messages and crashes. We ran extensive disk and memory tests, which indicated no issues, and also attempted to reproduce the error on an AWS EC2 cloud instance with btrfs but we could not observe the issue there. If you have an insight into this error or have a reproducer, please [let us know](https://github.com/duckdb/duckdb/issues/new) and we'd be happy to send you some [DuckDB merch](https://shop.duckdb.org/)!
+In our initial experiments, we experienced intermittent checksum errors from the btrfs file system in [dmesg](https://man.archlinux.org/man/dmesg.1.en), manifesting as `BTRFS warning (device dm-0): csum failed ...` messages and crashes. We ran extensive disk and memory tests, which indicated no issues, and also attempted to reproduce the error on an AWS EC2 cloud instance with btrfs but we could not observe the issue there. If you have an insight into this error or have a reproducer, please [let us know by opening an issue](https://github.com/duckdb/duckdb/issues/new) and we'd be happy to send you some [DuckDB merch](https://shop.duckdb.org/)!
 
 Because DuckDB's storage already uses checksums, we can [disable copy-on-write along with checksums](https://wiki.archlinux.org/title/Btrfs#Disabling_CoW) for the experiments using the NOCOW attribute without risking data corruption:
 
