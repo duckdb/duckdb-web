@@ -80,7 +80,7 @@ Luckily, we could use the [tpchgen-rs](https://github.com/clflushopt/tpchgen-rs/
 
 #### SF3,000
 
-We first ran all 22 TPC-H queries on the SF3,000 the dataset, which corresponds to 3,000 GB of CSV files.
+We first ran all 22 TPC-H queries on the SF3,000 the dataset, which corresponds to 3 TB of CSV files.
 The total runtime of the queries was 47.5 minutes with a geometric mean query runtime of 86.5 seconds.
 
 During the experiments, we noticed that the laptop bottom cover heated up [above 45 degrees Celsius](https://www.notebookcheck.net/Framework-Laptop-13-5-Ryzen-AI-9-review-Skip-the-Intel-version-for-better-performance.997363.0.html): while the keyboard was still usable, you definitely won't want to keep this machine on your lap while running data crunching workloads.
@@ -100,19 +100,19 @@ That said, if you analyze terabyte-sized datasets on your laptop, you may still 
 
 #### TPC-H SF10,000
 
-Finally, it was time for our ultimate challenge – can this laptop handle the SF10,000 dataset?
-To decide, we:
+Finally, it was time for our ultimate challenge – can this laptop handle the SF10,000 dataset, corresponding to 10 TB of CSV files?
+To find out, we:
 
 * generated the data – _about 4 TB in Parquet files,_
-* loaded it into DuckDB – _about 2.7 TB in DuckDB's format,_
-* cleaned up the Parquet files – _knowing that the extra space will come in handy,_
-* ran the queries – _and witnessed DuckDB spilling 3.6 TB on the disk for some queries,_
+* loaded the files into DuckDB – _about 2.7 TB in DuckDB's file format,_
+* cleaned up the Parquet files – _knowing that the extra space will come in handy later,_
+* ran the queries – _occasionally witnessing DuckDB spilling 3.6 TB on disk,_
 
-but ultimately saw it finishing without an issue!
+and ultimately saw them finishing without an issue!
 
 **The run took a total of 4.2 hours with a geometric mean query runtime of 6.6 minutes.**
 
-Unsurprisingly, some thermal throttling also occurred here, so we repeated the experiment with cooling periods. We found that this brings down the total query runtime to 3.8 hours with a geomean runtime of 5.7 minutes (14% speedup). This means that the differences are smaller than for the SF3,000 dataset, which actually makes perfect sense: given the longer query runtimes, the cooling periods no longer have that much of an effect.
+Unsurprisingly, some thermal throttling also occurred here, so we repeated the experiment with cooling periods. We found that this brings down the total query runtime to 3.8 hours with a geomean runtime of 5.7 minutes (14% speedup). This means that the differences are smaller than for the SF3,000 dataset, which makes perfect sense: given the longer query runtimes, the cooling periods no longer have that much of an effect.
 
 ## Conclusion
 
