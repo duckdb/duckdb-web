@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MotherDuck: DuckDB in the cloud and in the client"
+title: "MotherDuck: DuckDB in the Cloud and in the Client"
 author: "RJ Atwal, Peter Boncz, Ryan Boyd, Antony Courtney, Till Döhmen, Florian Gerlinghoff, Jeff Huang, Joseph Hwang, Raphael Hyde, Elena Felder, Jacob Lacouture, Yves LeMaout, Boaz Leskes, Yao Liu, Alex Monahan, Dan Perkins, Tino Tereshko, Jordan Tigani, Nick Ursa, Stephanie Wang, Yannick Welsch"
 thumb: "/images/science/thumbs/cidr-2024.svg"
 image: "/images/science/thumbs/cidr-2024.png"
