@@ -21,6 +21,7 @@ extension:
 repo:
   github: hafenkran/duckdb-bigquery
   ref: 31aeb97b17ba0a4d83e8975548accb958af6d495
+  ref_next: 10882a382d45f941d9672c5030fab22e34660792
 
 docs:
   hello_world: |
@@ -48,12 +49,12 @@ docs:
     └───────┴────────────────┘
 
   extended_description: |
-    This extension allows DuckDB to connect to Google BigQuery using the BigQuery Storage (read/write) and REST APIs. 
+    This community-maintained extension allows DuckDB to connect to Google BigQuery using the BigQuery Storage (read/write) and REST APIs. 
     It enables users to read, write, and manage their BigQuery datasets/tables directly from DuckDB using standard SQL queries.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/hafenkran/duckdb-bigquery).
 
-extension_star_count: 126
-extension_star_count_pretty: 126
+extension_star_count: 127
+extension_star_count_pretty: 127
 extension_download_count: 21678
 extension_download_count_pretty: 21.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
