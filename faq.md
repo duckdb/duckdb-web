@@ -494,3 +494,32 @@ Before opening a pull request, please consult our [Contributor Guide](https://gi
 </div>
 
 </div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### What are official sources on DuckDB?
+
+<div class="answer" markdown="1">
+
+In the following, we list official, authoritative sources on the DuckDB and the DuckLake projects.
+Exercise caution when using other sources.
+You should be particularly cautious when downloading binaries and installation scripts from other sources.
+
+Websites:
+
+* [`duckdb.org`](https://duckdb.org/): DuckDB
+* [`ducklake.select`](https://ducklake.select/): DuckLake
+* [`duckdblabs.com`](https://duckdblabs.com/): DuckDB Labs
+
+Social media:
+
+* [Bluesky](https://bsky.app/profile/duckdb.org)
+* [LinkedIn](https://www.linkedin.com/company/duckdb/)
+* [Twitter (X)](https://x.com/duckdb)
+
+
+</div>
+
+</div>
