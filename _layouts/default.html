@@ -34,6 +34,10 @@
 </head>
 <body class="layout_default{% if page.body_class %} {{ page.body_class }}{% endif %}">
 
+	{% if page.body_class contains "landing" and page.banner == true %}
+		{% include landingpage_banner.html %}
+	{% endif %}
+	
 	<header>
 		<div class="headerline">
 			<div class="headercontent">

@@ -5,6 +5,24 @@
 body.landing{
 	
 	@include body-standard;
+
+	.banner {
+		position: relative;
+		width: 100%;
+	}
+	
+	.banner + header {
+		position: sticky;
+		top: 0;
+		z-index: 900;
+		& + main{
+			margin-top: 0;
+		}
+		.headerline {
+			position: unset;
+			top: unset;
+		}
+	}
 	
 	main{
 		margin-top: 70px;

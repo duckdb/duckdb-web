@@ -183,10 +183,11 @@ $(document).ready(function(){
 		$('.sidenavigation li.documentation.opened').toggleClass('opened').next('ul').hide();
 	}
 	
-    /* MOBILE MENU / SUBMENU */
+	/* MOBILE MENU / SUBMENU */
 	const $hamburger = $(".hamburger");
 	const $landingMenu = $(".landingmenu nav");
 	const $sideNavigation = $(".sidenavigation");
+	const $banner = $(".banner");
 
 	if ($hamburger.length > 0) {
 		$hamburger.on("click", function() {
@@ -200,6 +201,16 @@ $(document).ready(function(){
 			if ($sideNavigation.length > 0) { // Menu 2: Sidenavigation
 				$sideNavigation.toggleClass("slidein");
 				$("body.documentation main .wrap").toggleClass("inactive");
+			}
+
+			// Banner hide/show mobile menu
+			if ($banner.length > 0) {
+				const isActive = $(this).hasClass("is-active");
+				if (isActive) {
+					$banner.slideUp(250);
+				} else {
+					$banner.slideDown(250);
+				}
 			}
 		});
 
