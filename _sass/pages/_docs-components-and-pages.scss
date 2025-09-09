@@ -367,6 +367,28 @@ body.documentation {
             margin: 0;
         }
     }
+    
+    // Mini footer
+    .bottomline{
+        @include body-small;
+        width: 100%;
+        margin-top: 80px;
+        font-weight: 400;
+        color: #979797;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        a{
+            color: inherit;
+            text-decoration: none;
+        }
+        a + a{
+            margin-left: 15px;
+        }
+        >div{
+            white-space: nowrap;
+        }
+    }
 
     // Installation page
     body.documentation.installation {
