@@ -314,3 +314,25 @@ SELECT fibo(3);
 Binder Error:
 Max expression depth limit of 1000 exceeded. Use "SET max_expression_depth TO x" to increase the maximum expression depth.
 ```
+
+### Function Chaining on the First Function Does Not Work
+
+Macros do not support the dot operator for function chaining on the first function.
+To illustrate this, see an example with the `lower` function, which works:
+
+```sql
+CREATE OR REPLACE MACRO low(s) AS lower(s);
+SELECT low('AA');
+```
+
+However, rewriting `lower(s)` to use function chaining does not work:
+
+```sql
+CREATE OR REPLACE MACRO low(s) AS s.lower();
+SELECT low('AA');
+```
+
+```console
+Binder Error:
+Referenced column "s" not found in FROM clause!
+```
