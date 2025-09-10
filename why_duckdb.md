@@ -83,7 +83,7 @@ Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorg
     * [Chimp](https://vldb.org/pvldb/vol15/p3058-liakos.pdf) by Panagiotis Liakos, Katia Papakonstantinopoulou and Yannis Kotidi
     * [Patas](https://github.com/duckdb/duckdb/pull/5044), an in-house development
     * [ALP (adaptive lossless floating-point compression)](https://dl.acm.org/doi/pdf/10.1145/3626717) by Azim Afroozeh, Leonard Kuffo and Peter Boncz, who also [contributed their implementation](https://github.com/duckdb/duckdb/pull/9635)
-* **SQL Parser:** We use the PostgreSQL parser that was [repackaged as a stand-alone library](https://github.com/lfittl/libpg_query). The translation to our own parse tree is inspired by [Peloton](https://pelotondb.io).
+* **SQL Parser:** We use the PostgreSQL parser that was [repackaged as a stand-alone library](https://github.com/lfittl/libpg_query). The translation to our own parse tree is inspired by [Peloton](https://db.cs.cmu.edu/peloton/).
 * **Shell:** We use the [SQLite shell](https://sqlite.org/cli.html) to work with DuckDB.
 * **Regular expressions:** DuckDB uses Google's [RE2](https://github.com/google/re2) regular expression engine.
 * **String formatting:** DuckDB uses the [fmt](https://github.com/fmtlib/fmt) string formatting library.
