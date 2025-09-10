@@ -60,6 +60,13 @@ cd duckdb
 GEN=ninja make
 ```
 
+DuckDB is also [available in AUR](https://aur.archlinux.org/packages/duckdb).
+To install it, run:
+
+```batch
+yay -S duckdb
+```
+
 ### Alpine Linux
 
 #### CLI Client
