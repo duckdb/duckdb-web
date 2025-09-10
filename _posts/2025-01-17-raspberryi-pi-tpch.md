@@ -25,10 +25,6 @@ After all, 16 GB or memory is equivalent to the amount found in the median gamin
 So, surely, the Pi must be able to handle a few dozen GBs of data, right?
 We ventured to find out.
 
-> Do you have a cool DuckDB setup?
-> We would like to hear about it!
-> Please post about it on social media or email it to <gabor@duckdblabs.com>.
-
 ## Setup
 
 Our setup consisted of the following components, priced at a total of $300:
@@ -181,7 +177,7 @@ Back then, these systems – with their software license and maintenance costs f
 This means that – if you ignore the maintenance aspects –, the “bang for your buck” metric (a.k.a. price–performance ratio) for TPC read queries has increased by around 1,000× over the last 20 years.
 This is a great demonstration of what the continuous innovation in hardware and software enables in modern systems.
 
-> Disclaimer: The results presented here are not official TPC-H results and only include the read queries of TPC-H.
+_Disclaimer: The results presented here are not official TPC-H results and only include the read queries of TPC-H._
 
 ## Summary
 
@@ -189,3 +185,7 @@ We showed that you can use DuckDB in a Raspberry Pi setup that costs $300 and
 runs all queries on the TPC-H SF300 dataset in less than 30 minutes.
 
 We hope you enjoyed this blog post. If you have an interesting DuckDB setup, don't forget to share it with us!
+
+> Do you have a cool DuckDB setup?
+> We would like to hear about it!
+> Please post about it on social media or email it to <gabor@duckdblabs.com>.
