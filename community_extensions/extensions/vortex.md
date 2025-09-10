@@ -31,8 +31,8 @@ docs:
     scan a vortex file
     `select * from read_vortex('...');`
 
-extension_star_count: 18
-extension_star_count_pretty: 18
+extension_star_count: 19
+extension_star_count_pretty: 19
 extension_download_count: 439
 extension_download_count_pretty: 439
 image: '/images/community_extensions/social_preview/preview_community_extension_vortex.png'
