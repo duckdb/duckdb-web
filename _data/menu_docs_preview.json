@@ -177,6 +177,10 @@
               "url": "overview"
             },
             {
+              "page": "Tertiary Clients",
+              "url": "tertiary"
+            },
+            {
               "page": "ADBC",
               "url": "adbc"
             },
@@ -551,6 +555,10 @@
                 {
                   "page": "LOAD / INSTALL",
                   "url": "load_and_install"
+                },
+                {
+                  "page": "MERGE INTO",
+                  "url": "merge_into"
                 },
                 {
                   "page": "PIVOT",
@@ -1509,6 +1517,10 @@
                 {
                   "page": "query and query_table Functions",
                   "url": "query_and_query_table_functions"
+                },
+                {
+                  "page": "Timestamp Issues",
+                  "url": "timestamps"
                 }
               ]
             },

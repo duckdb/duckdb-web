@@ -34,12 +34,12 @@ docs:
     --- Read file without providing detail on type
     FROM read_any('https://raw.githubusercontent.com/duckdb/duckdb/main/data/parquet-testing/adam_genotypes.parquet');
   extended_description: |
-    Very experimental port of libmagic (that powers file UNIX utility), allow to classify files based on the the content of the header, accoring to the libmagic library.
+    Very experimental port of libmagic (that powers file UNIX utility), allow to classify files based on the content of the header, accoring to the libmagic library.
     Packaged with version 5.45 of the magic library. The magic.mgc database is at the moment statically compiled in the library, so it's the same across platforms but immutable.
     Currently not available in Windows and Wasm, due to different but likely solvable vc-packaging issue, to be sorted out independently.
 
-extension_star_count: 6
-extension_star_count_pretty: 6
+extension_star_count: 7
+extension_star_count_pretty: 7
 extension_download_count: 592
 extension_download_count_pretty: 592
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'

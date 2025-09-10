@@ -54,6 +54,10 @@
               "url": "/events/"
             },
             {
+              "page": "Science",
+              "url": "/science/"
+            },
+            {
               "page": "Webshop",
               "url": "https://shop.duckdb.org/"
             },

@@ -19,20 +19,20 @@ We are excited to announce the [third DuckDB Amsterdam meetup](https://www.meetu
 
 ## Registration Process
 
-Attendance is free. Please [RSVP on meetup.com](https://www.meetup.com/duckdb/events/308780911/).
+🎟️ Attendance is free. Please [RSVP on meetup.com](https://www.meetup.com/duckdb/events/308780911/).
 
 ## Timetable
 
-The event starts at 18:00 and will feature three talks from DuckDB users.
-We'll announce the speakers and the schedule in the coming weeks.
+The event starts at 18:00 and will feature three talks from DuckDB users and developers.
 
-<!--
-
-| Time  | Title   | Presenter(s) | Slides |
-|------:|:--------|:-------------|--------|
-| 18:00 | _Venue opens_ | | |
-| 19:30 | _Drinks and snacks by [Adyen](https://www.adyen.com/)_ | | |
--->
+|  Time | Title                                                                       | Presenter(s)                                                 |
+| ----: | :-------------------------------------------------------------------------- | :----------------------------------------------------------- |
+| 17:30 | _Venue opens_                                                               |                                                              |
+| 18:00 | Opening remarks                                                             | Gábor Szárnyas<br>_[(DuckDB Labs)](https://duckdblabs.com/)_ |
+| 18:10 | Huey: Pivoting hundreds of millions of rows in the browser with DuckDB-Wasm | Roland Bouman                                                |
+| 18:35 | Indexes are (not) all you need: Common DuckDB pitfalls and how to find them | Tania Bogatsch<br>_[(DuckDB Labs)](https://duckdblabs.com/)_ |
+| 19:00 | query.farm: Growing DuckDB community extensions                             | Lorenzo Mangani<br>_[(query.farm)](https://query.farm/)_     |
+| 19:30 | _Drinks and snacks by [Adyen](https://www.adyen.com/)_                      |                                                              |
 
 The event will be held at the Adyen Rokin office: 1012KK Amsterdam, Rokin 49 ([Apple Maps](https://maps.apple.com/place?address=Rokin%2049,%201012%20KK%20Amsterdam,%20Netherlands&coordinate=52.371375,4.893167&name=Adyen%20Rokin%20Office&place-id=I9267DC82A95CF006&map=explore), [Google Maps](https://maps.app.goo.gl/MCHMGtjFi7SD8QBb7)).
 The catering is provided by Adyen.

@@ -4,15 +4,8 @@ title: An in-process SQL OLAP database management system
 subtitle: An In-Process Analytical Database
 description: DuckDB is an in-process SQL OLAP database management system. Simple, feature-rich, fast & open source.
 body_class: landing nowrap
+banner: false
 ---
-
-<div class="banner">
-	<div class="content">
-		We released <a href="https://ducklake.select">DuckLake</a>, a SQL-as-a-lakehouse standard –
-		Read the <a href="{% post_url 2025-05-27-ducklake %}">announcement</a> and the <a href="{% post_url 2025-07-04-ducklake-02 %}">v0.2 blog post</a>.
-	</div>
-	<div class="close">{% include icon.html name="close" size="24" class="icon" %}</div>
-</div>
 
 <section class="welcome">
 	<div class="flexwrap wrap">
@@ -67,37 +60,37 @@ body_class: landing nowrap
 			<div class="featurebox">
 				<div class="icon simple"></div>
 				<h3 class="title-1">Simple</h3>
-				<p class="body-small text-secondary-color">DuckDB is easy to <a href="/docs/installation">install</a> and deploy. It has zero external dependencies and runs <nobr>in-process</nobr> in its host application or as a single binary.</p>
+				<p class="body-small text-secondary-color">DuckDB was designed to be simple to use. It has zero dependencies, so it can be installed in seconds and deployed in milliseconds.</p>
 				<a href="/why_duckdb#simple" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="featurebox">
 				<div class="icon portable"></div>
 				<h3 class="title-1">Portable</h3>
-				<p class="body-small text-secondary-color">DuckDB runs on Linux, macOS, Windows, Android, iOS and all popular hardware architectures. It has idiomatic <a href="/docs/stable/clients/overview">client APIs</a> for major programming languages.</p>
+				<p class="body-small text-secondary-color">DuckDB runs on all popular operating systems and hardware architectures. It has idiomatic client APIs for major programming languages.</p>
 				<a href="/why_duckdb#portable" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="featurebox">
 				<div class="icon featurerich"></div>
 				<h3 class="title-1">Feature-rich</h3>
-				<p class="body-small text-secondary-color">DuckDB offers a <a href="/docs/stable/sql/introduction">rich SQL dialect</a>. It can read and write file formats such as CSV, Parquet, and JSON, to and from the local file system and remote endpoints such as S3 buckets.</p>
+				<p class="body-small text-secondary-color">DuckDB supports multiple file formats (CSV, Parquet, and JSON), data lake formats. It can also connect to network and cloud storage.</p>
 				<a href="/why_duckdb#feature-rich" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="featurebox">
 				<div class="icon speed"></div>
 				<h3 class="title-1">Fast</h3>
-				<p class="body-small text-secondary-color">DuckDB runs analytical queries at blazing speed thanks to its columnar engine, which supports parallel execution and can process larger-than-memory workloads.</p>
+				<p class="body-small text-secondary-color">DuckDB runs queries at blazing speed. It uses parallel execution and can process larger-than-memory workloads.</p>
 				<a href="/why_duckdb#fast" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="featurebox">
 				<div class="icon extensible"></div>
 				<h3 class="title-1">Extensible</h3>
-				<p class="body-small text-secondary-color">DuckDB is extensible by third-party features such as new data types, functions, file formats and new SQL syntax. User contributions are available as community extensions.</p>
+				<p class="body-small text-secondary-color">DuckDB is extensible by third-party features. User contributions are available as community extensions.</p>
 				<a href="/why_duckdb#extensible" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="featurebox">
 				<div class="icon free"></div>
 				<h3 class="title-1">Free</h3>
-				<p class="body-small text-secondary-color">DuckDB and its core extensions are <nobr>open-source</nobr> under the permissive MIT License. The intellectual property of the project is held by the <a href="/foundation">DuckDB Foundation</a>.</p>
+				<p class="body-small text-secondary-color">DuckDB, its core extensions and the DuckLake format are <nobr>open-source</nobr> under the permissive MIT License.</p>
 				<a href="/why_duckdb#free" class="textbutton arrow-right">Read more</a>
 			</div>
 		</div>
@@ -144,48 +137,6 @@ body_class: landing nowrap
 		</a>
 	</div>
 </section>
-
-{% assign future_events = site.events | where_exp: "event", "event.date >= site.time" | sort: 'date' %}
-{% if future_events.size > 0 %}
-<section class="upcoming-events">
-	<div class="wrap">
-		<h1 class="display-2">Upcoming events</h1>
-		<div class="newstileswrap">
-			{% for event in future_events limit:2 %}
-				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %} <!-- Generiert Werte von 1 bis 3 -->
-				{% assign tag_classes = event.tags | join: ' ' %}
-				<div class="eventpreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ event.title | escape }}">
-					<a href="{{ event.url }}" class="blocklink" title="{{ event.title }}"></a>
-					<div class="postimg custom">
-						{% if event.thumb %}
-							<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image">
-						{% else %}
-							<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
-						{% endif %}
-					</div>
-					<div class="postdetails">
-						{% if event.tags %}
-						<div class="tags">
-							<span class="eventdate">{{ event.date | date: "%Y-%m-%d" }}</span>
-							{% for tag in event.tags %}
-								<span class="tag">{{ tag }}</span>
-							{% endfor %}
-						</div>
-						{% endif %}
-						<h3 class="headline-3">{{ event.title }}</h3>
-						<div class="meta text-secondary-color body-small">
-							<div class="venue">{{ event.venue | default: "Venue not specified" }}</div>
-							<div class="author">{{ event.author | default: "DuckDB" }}</div>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-		<a href="/events" class="button transparent arrow-right">
-			All events <span></span>
-		</a>
-</section>
-{% endif %}
 
 <div class="landing_bg_1"></div>
 <div class="landing_bg_2"></div>

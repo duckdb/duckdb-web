@@ -4,6 +4,7 @@ title: DUCKDB™ Trademark use guidelines
 body_class: tmguidelines
 max_page_width: small
 redirect_from:
+- /tm
 - /trademark
 - /trademarks
 ---

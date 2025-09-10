@@ -156,7 +156,7 @@ Our scope is to create a Markdown file containing a table, with the following fo
 - **created at**, when the repository was created;
 - **updated at**, when the repository was last updated.
 
-To retrieve the `name` field we use [`concat_ws`]({%link docs/stable/sql/functions/text.md%}#concat_wsseparator-string-) and [`concat`]({%link docs/stable/sql/functions/text.md %}#concatvalue-) functions, in order to generate the hyperlink and text with the Markdown newline character(`<br>`):
+To retrieve the `name` field we use [`concat_ws`]({%link docs/stable/sql/functions/text.md %}#concat_wsseparator-string-) and [`concat`]({%link docs/stable/sql/functions/text.md %}#concatvalue-) functions, in order to generate the hyperlink and text with the Markdown newline character(`<br>`):
 ```python
 selection_query = (
     duckdb_conn.table("github_raw_data")

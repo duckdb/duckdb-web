@@ -183,10 +183,11 @@ $(document).ready(function(){
 		$('.sidenavigation li.documentation.opened').toggleClass('opened').next('ul').hide();
 	}
 	
-    /* MOBILE MENU / SUBMENU */
+	/* MOBILE MENU / SUBMENU */
 	const $hamburger = $(".hamburger");
 	const $landingMenu = $(".landingmenu nav");
 	const $sideNavigation = $(".sidenavigation");
+	const $banner = $(".banner");
 
 	if ($hamburger.length > 0) {
 		$hamburger.on("click", function() {
@@ -200,6 +201,16 @@ $(document).ready(function(){
 			if ($sideNavigation.length > 0) { // Menu 2: Sidenavigation
 				$sideNavigation.toggleClass("slidein");
 				$("body.documentation main .wrap").toggleClass("inactive");
+			}
+
+			// Banner hide/show mobile menu
+			if ($banner.length > 0) {
+				const isActive = $(this).hasClass("is-active");
+				if (isActive) {
+					$banner.slideUp(250);
+				} else {
+					$banner.slideDown(250);
+				}
 			}
 		});
 
@@ -319,7 +330,9 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		// AJAX FORM SEND
 		$("#ajaxForm").submit(function(e){
 			e.preventDefault();
+			var form = this;
 			var action = $(this).attr("action");
+			var status = $(this).find('.success');
 			
 			$('#ajaxForm button[type="submit"]').hide();
 			$('#ajaxForm .lds-ellipsis').fadeIn();
@@ -327,7 +340,6 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			$.ajax({
 				type: "POST",
 				url: action,
-				crossDomain: true,
 				data: new FormData(this),
 				dataType: "json",
 				processData: false,
@@ -335,12 +347,34 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 				headers: {
 					"Accept": "application/json"
 				}
-			}).done(function() {
-				$('#ajaxForm').addClass('inactive');
-				$('#ajaxForm .lds-ellipsis').hide();
-				$('.success').addClass('is-active');
-			}).fail(function() {
-				alert('An error occurred! Please try again later.');
+			}).done(function(data) {
+				if (data.ok) {
+					$('#ajaxForm').addClass('inactive');
+					$('#ajaxForm .lds-ellipsis').hide();
+					$('.success').addClass('is-active');
+					form.reset();
+				} else {
+					if (data.errors) {
+						var errorText = data.errors.map(error => error.message).join(", ");
+						alert('Error: ' + errorText);
+					} else {
+						alert('An error occurred! Please try again later.');
+					}
+					$('#ajaxForm button[type="submit"]').show();
+					$('#ajaxForm .lds-ellipsis').hide();
+				}
+			}).fail(function(xhr) {
+				try {
+					var data = JSON.parse(xhr.responseText);
+					if (data.errors) {
+						var errorText = data.errors.map(error => error.message).join(", ");
+						alert('Error: ' + errorText);
+					} else {
+						alert('An error occurred! Please try again later.');
+					}
+				} catch (e) {
+					alert('An error occurred! Please try again later.');
+				}
 				$('#ajaxForm button[type="submit"]').show();
 				$('#ajaxForm .lds-ellipsis').hide();
 			});
@@ -780,9 +814,12 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	
 	
 	/** HIDE BANNER **/
-	const showbanner = getWithExpiry("homeBanner");
-	if(showbanner == false){
-		$('.banner').css('display', 'none');
+	const currentBannerVersion = $('.banner').data('banner-version') || 'default';
+	const storedBannerData = getWithExpiry("homeBanner");
+	const shouldShowBanner = !storedBannerData || storedBannerData.version !== currentBannerVersion;
+
+	if (!shouldShowBanner) {
+		$('.banner').hide();
 		if( $('body').hasClass('documentation') ){
 			$('main').removeAttr('class');
 		}
@@ -790,7 +827,8 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		$('.banner').css('display', 'flex');
 	}
 	$('.banner .close').click(function(){
-		setWithExpiry('homeBanner', false, 172800000); // 900000 = 15 min, 172800000 = 2 days
+		const bannerVersion = $('.banner').data('banner-version') || 'default';
+		setWithExpiry('homeBanner', {version: bannerVersion, closed: true}, 172800000); // 900000 = 15 min, 172800000 = 2 days
 		$('.banner').slideUp(300);
 		if( $('body').hasClass('documentation') ){
 			$('main').removeAttr('class');

@@ -6,7 +6,6 @@ author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/science/thumbs/2025-03-21-daniel-ten-wolde-duckpgq.png"
 image: "/images/science/thumbs/2025-03-21-daniel-ten-wolde-duckpgq.png"
 excerpt: ""
-toc: false
 tags: ["Podcast"]
 length: "50 min"
 ---

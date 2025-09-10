@@ -36,6 +36,19 @@ cd duckdb
 GEN=ninja make
 ```
 
+### Arch, Omarchy and Manjaro
+
+#### CLI Client
+
+The requirements for building the DuckDB CLI client on Arch, Omarchy, Manjaro, etc. are the following:
+
+```batch
+sudo pacman -S git gcc cmake ninja openssl
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+GEN=ninja make
+```
+
 ### Alpine Linux
 
 #### CLI Client
@@ -57,7 +70,7 @@ Therefore, it's recommended to use glibc for performance-oriented workloads.
 
 #### Distribution for the `linux_*_musl` platforms
 
-Starting with DuckDB v1.2.0, [_extensions_ are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions) (but not yet for the `linux_amd64_musl` platform).
+Starting with DuckDB v1.2.0, [_DuckDB extensions_ are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions) (but not yet for the `linux_arm64_musl` platform).
 However, there are no official _DuckDB binaries_ distributed for musl libc but it can be build with it manually following the instructions on this page.
 
 #### Python Client on Alpine Linux

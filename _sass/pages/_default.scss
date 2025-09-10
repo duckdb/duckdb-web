@@ -29,7 +29,9 @@
     }
 }
 
-
+body:not(.layout_default) .blog_typography{
+    @include blog-typography;
+}
 
 /** DEFAULT LAYOUT STYLES WITH TOC **/
 

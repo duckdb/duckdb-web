@@ -131,6 +131,33 @@ section.upcoming-events,
 	}
 }
 
+.newswrap .postwrap .singleentry-science{
+	h1{
+		hyphens: auto;
+	}
+	.infoline .icon{
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' fill='none' viewBox='0 0 35 35'%3E%3Ccircle cx='17.75' cy='17.25' r='17.25' fill='%231A1A1A'/%3E%3Cpath fill='%23A899FF' d='M8.166 17.409a5.917 5.917 0 0 0 5.909 5.908 5.917 5.917 0 0 0 5.908-5.908 5.917 5.917 0 0 0-5.908-5.909 5.917 5.917 0 0 0-5.909 5.909ZM24.664 15.295h-2.797v4.22h2.797a2.14 2.14 0 0 0 2.123-2.123c0-1.168-.964-2.097-2.123-2.097Z'/%3E%3C/svg%3E");
+	}
+}
+
+.science-tiles .sciencepreview.postpreview {
+	width: calc(33.333% - 15px);
+	.postimg{
+		aspect-ratio: 1/1;
+		background-color: #9787f2;
+	}
+}
+
+main.main-science .recentposts .newstileswrap .postpreview {
+	width: calc(33.333% - 15px);
+	
+	.postimg {
+		aspect-ratio: 1/1;
+		background-color: #9787f2;
+	}
+}
+
+
 .filterbar{
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -169,6 +196,7 @@ section.upcoming-events,
 		border-radius: 30px;
 		border: 1px solid var(--main-codebox-border-color, #E6E6E6);
 		padding: 5px;
+		margin-left: auto;
 	
 		.filter-highlight {
 			position: absolute;

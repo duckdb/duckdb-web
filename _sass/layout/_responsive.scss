@@ -314,6 +314,11 @@
 		z-index: 500;
 	}
 	
+	.science-tiles .sciencepreview.postpreview,
+	main.main-science .recentposts .newstileswrap .postpreview {
+		width: calc(50% - 10px);
+	}
+	
 	.notonmobile {
 		display: none;
 	}
@@ -559,6 +564,8 @@
 
 	section.blog .postpreview,
 	section.upcoming-events .postpreview,
+	.science-tiles .sciencepreview.postpreview,
+	main.main-science .recentposts .newstileswrap .postpreview,
 	.post-list .newstiles .postpreview,
 	.newswrap .postwrap .recentposts .postpreview,
 	.newswrap .postwrap .postcontent .recentposts .postpreview {

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: faiss
   description: Provides access to faiss indices from DuckDB.
-  version: 0.11.0
+  version: 0.12.0
   language: C++
   build: cmake
   license: MIT
@@ -22,7 +22,7 @@ extension:
 
 repo:
   github: duckdb-faiss-ext/duckdb-faiss-ext
-  ref: 065f69843f43e8b1274ee58c598e66083aad6847
+  ref: v0.12.0
 
 docs:
   hello_world: |
@@ -46,8 +46,8 @@ docs:
 
     Some (most) indices are not supported for gpus, however this is very easily resolvable. Please open an issue over at our repository in order to get this resolved!
 
-extension_star_count: 23
-extension_star_count_pretty: 23
+extension_star_count: 24
+extension_star_count_pretty: 24
 extension_download_count: 486
 extension_download_count_pretty: 486
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'

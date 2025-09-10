@@ -306,7 +306,7 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	position: relative;
 	width: 100%;
 	text-align: center;
-	background: var(--lake-ribbon-background-color, rgba(153, 216, 255, 0.6));
+	background: var(--main-ribbon-background-color-purple, rgba(169, 153, 255, 0.60));
 	color: var(--main-text-primary-color, #0D0D0D);
 	display: flex;
 	align-items: center;
@@ -314,6 +314,21 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	overflow: hidden;
 	padding: 15px 20px;
 	z-index: 500;
+	
+	&.purple{
+		background: var(--main-ribbon-background-color-purple, rgba(169, 153, 255, 0.60));
+		border-bottom: 1px solid var(--main-ribbon-border-color-purple, rgba(169, 153, 255, 0.60));
+	}
+	
+	&.yellow{
+		background: var(--main-ribbon-background-color-yellow, #fffa9999);
+		border-bottom: 1px solid var(--main-ribbon-border-color-yellow, #665d0099);
+	}
+	
+	&.blue{
+		background: var(--main-ribbon-background-color-blue, #99d8ff99);
+		border-bottom: 1px solid var(--main-ribbon-border-color-blue, #153a5199);
+	}
 	
 	a {
 		color: inherit;

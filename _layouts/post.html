@@ -63,11 +63,11 @@
 		</div>
 	</header>
 	
-	<main>
+	<main class="main-{{ page.collection }}">
 		<div class="newswrap">
 			<div class="postwrap">
 				<div class="postcontent">
-					<div class="singleentry{% if page.toc != false %} contains_toc{% endif %}">
+					<div class="singleentry{% if page.collection %} singleentry-{{ page.collection }}{% endif %}{% if page.toc != false %} contains_toc{% endif %}">
 						<div class="content">
 							<div class="contentwidth">
 								<h1>{{ page.title }}</h1>
@@ -85,8 +85,14 @@
 											{% if page.event != true and page.collection != "events" %}
 												<div class="publishedinfo">
 													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
-													<span class="bullet">&middot;</span>
-													<span class="readingtime"> {% if page.collection == "media" %}{{ page.length }}{% else %}{{ content | reading_time }}{% endif %}</span>
+													{% if page.collection == "media" %}
+														<span class="bullet">&middot;</span>
+														<span class="readingtime">{{ page.length }}</span>
+													{% elsif page.collection == "science" %}
+													{% else %}
+														<span class="bullet">&middot;</span>
+														<span class="readingtime">{{ content | reading_time }}</span>
+													{% endif %}
 												</div>
 											{% endif %}
 										</div>

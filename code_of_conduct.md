@@ -3,6 +3,8 @@ layout: default
 title: Code of Conduct
 body_class: code-of-conduct blog_typography
 max_page_width: small
+redirect_from:
+- /coc
 toc: false
 ---
 

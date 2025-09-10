@@ -23,8 +23,8 @@ docs:
   extended_description: |
     The Ofquack extension provides seamless integration between DuckDB and Oracle Fusion via WSDL-based SOAP calls.
     It allows you to run arbitrary SQL queries against Oracle Fusion database directly from DuckDB, inferring column names at runtime and returning all data as VARCHAR columns—as native DuckDB tables and as resultsets that can be directly consumed by downstream applications.
-extension_star_count: 4
-extension_star_count_pretty: 4
+extension_star_count: 5
+extension_star_count_pretty: 5
 extension_download_count: 440
 extension_download_count_pretty: 440
 image: '/images/community_extensions/social_preview/preview_community_extension_ofquack.png'

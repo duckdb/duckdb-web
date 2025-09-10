@@ -16,10 +16,11 @@ extension:
   requires_toolchains: "rust;python3"
   maintainers:
     - samansmink
+    - mlafeldt
 
 repo:
   github: duckdb/extension-template-rs
-  ref: ecd8397290ce9f788dc9b6e81d8bb54ce03a32bb
+  ref: 3dd3adbeb84f617ebc44619d8b1a8fe6416fd214
 
 docs:
   hello_world: |
@@ -28,8 +29,8 @@ docs:
     The quack extension is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/), and it's a great starting point to get started building DuckDB extensions in Rust.
 
 
-extension_star_count: 75
-extension_star_count_pretty: 75
+extension_star_count: 79
+extension_star_count_pretty: 79
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_quack.png'

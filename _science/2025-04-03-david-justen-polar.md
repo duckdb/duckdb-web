@@ -6,7 +6,6 @@ author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/science/thumbs/2025-04-03-david-justen-polar.png"
 image: "/images/science/thumbs/2025-04-03-david-justen-polar.png"
 excerpt: ""
-toc: false
 tags: ["Podcast"]
 length: "50 min"
 ---

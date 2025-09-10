@@ -142,6 +142,7 @@ $docuh5: 18px;
   --purple-transparent-10: #130d3599;
   --purple-transparent-15: #18104199;
   --purple-transparent-20: #1e155199;
+  --purple-transparent-80: #a999ff99;
   --purple-transparent-85: #beb2ff99;
   --purple-transparent-90: #d4ccff99;
   --purple-transparent-95: #e9e5ff99;
@@ -252,6 +253,7 @@ $docuh5: 18px;
   --interactive-filterbox-background-color: var(--grey-98);
   --interactive-filterbox-border-color: var(--grey-90);
   --interactive-folderbox-background-color: var(--grey-transparent-98);
+  --interactive-folderbox-background-color-hover: var(--grey-transparent-95);
   --interactive-folderbox-border-color: var(--grey-90);
   --interactive-folderbox-border-color-hover: var(--grey-80);
   --interactive-folderbox-text-color: var(--grey-10);
@@ -265,6 +267,7 @@ $docuh5: 18px;
   --lake-background-gradient-end: var(--blue-95);
   --lake-background-gradient-start: var(--blue-98);
   --lake-filter-selected-background-color: var(--blue-90);
+  --lake-filter-selected-background-color-2: var(--blue-90);
   --lake-graphics-arrow: var(--blue-80);
   --lake-graphics-element-border: var(--blue-80);
   --lake-highlight-blue-background-color: var(--blue-70);
@@ -279,10 +282,10 @@ $docuh5: 18px;
   --main-blogpost-background-color: var(--grey-100);
   --main-blogpost-border-color: var(--grey-90);
   --main-body-background-color: var(--grey-98);
-  --main-codebox-border-color: var(--grey-90);
+  --main-codebox-border-color: #0d0d0d26;
   --main-codebox-dropshadow: #2eafff26;
   --main-codebox-main-background-color: var(--grey-transparent-98);
-  --main-codebox-sub-background-color: var(--grey-transparent-90);
+  --main-codebox-sub-background-color: #0d0d0d14;
   --main-highlight-orange-background: var(--grey-10);
   --main-highlight-orange-text: var(--orange-50);
   --main-highlight-purple-background: var(--grey-10);
@@ -294,6 +297,12 @@ $docuh5: 18px;
   --main-infobox-border-color: var(--purple-transparent-90);
   --main-marker-background-color: var(--yellow-transparent-60);
   --main-marker-border-color: var(--yellow-45);
+  --main-ribbon-background-color-blue: var(--blue-transparent-80);
+  --main-ribbon-background-color-purple: var(--purple-transparent-80);
+  --main-ribbon-background-color-yellow: var(--yellow-transparent-80);
+  --main-ribbon-border-color-blue: var(--blue-transparent-80);
+  --main-ribbon-border-color-purple: var(--purple-transparent-80);
+  --main-ribbon-border-color-yellow: var(--yellow-transparent-80);
   --main-section-background-gradient-end-color: var(--grey-95);
   --main-section-background-gradient-start-color: var(--grey-98);
   --main-section-orange-background-gradient-end-color: var(--orange-50);
@@ -323,6 +332,8 @@ $docuh5: 18px;
   --social-thumbnail-symbol-background: var(--grey-05);
   --social-thumbnail-symbol-image: var(--yellow-50);
   --social-thumbnail-text-color: var(--grey-10);
+  --social-yel-purp-1: #fff100;
+  --social-yel-purp-2: #eddd0c;
   --syntax-class-type-interface: #d52753;
   --syntax-comment: var(--grey-60);
   --syntax-constant: #823ff1;
@@ -388,6 +399,7 @@ html.darkmode {
   --interactive-filterbox-background-color: var(--grey-05);
   --interactive-filterbox-border-color: var(--grey-20);
   --interactive-folderbox-background-color: var(--grey-transparent-10);
+  --interactive-folderbox-background-color-hover: var(--grey-transparent-15);
   --interactive-folderbox-border-color: var(--grey-20);
   --interactive-folderbox-border-color-hover: var(--grey-30);
   --interactive-folderbox-text-color: var(--grey-90);
@@ -401,6 +413,7 @@ html.darkmode {
   --lake-background-gradient-end: var(--blue-05);
   --lake-background-gradient-start: var(--blue-02);
   --lake-filter-selected-background-color: var(--blue-15);
+  --lake-filter-selected-background-color-2: var(--blue-15);
   --lake-graphics-arrow: var(--blue-40);
   --lake-graphics-element-border: var(--blue-30);
   --lake-highlight-blue-background-color: var(--grey-10);
@@ -430,6 +443,12 @@ html.darkmode {
   --main-infobox-border-color: var(--grey-transparent-20);
   --main-marker-background-color: var(--yellow-transparent-30);
   --main-marker-border-color: var(--yellow-transparent-40);
+  --main-ribbon-background-color-blue: var(--blue-transparent-20);
+  --main-ribbon-background-color-purple: var(--purple-transparent-20);
+  --main-ribbon-background-color-yellow: var(--yellow-transparent-20);
+  --main-ribbon-border-color-blue: var(--blue-transparent-20);
+  --main-ribbon-border-color-purple: var(--purple-transparent-20);
+  --main-ribbon-border-color-yellow: var(--yellow-transparent-20);
   --main-section-background-gradient-end-color: var(--grey-10);
   --main-section-background-gradient-start-color: var(--grey-05);
   --main-section-orange-background-gradient-end-color: var(--orange-50);
@@ -459,6 +478,8 @@ html.darkmode {
   --social-thumbnail-symbol-background: var(--yellow-50);
   --social-thumbnail-symbol-image: var(--grey-05);
   --social-thumbnail-text-color: var(--grey-95);
+  --social-yel-purp-1: #a899ff;
+  --social-yel-purp-2: #9787f2;
   --syntax-class-type-interface: #ff6480;
   --syntax-comment: var(--grey-40);
   --syntax-constant: #9f7efe;
@@ -471,8 +492,6 @@ html.darkmode {
   --syntax-property: #ba9678;
   --syntax-string: #f9c859;
 }
-
-
 
 /* Desktop/Mobile */
 :root {
@@ -545,3 +564,4 @@ html.darkmode {
     --type-display-1: 38px;
   }
 }
+
