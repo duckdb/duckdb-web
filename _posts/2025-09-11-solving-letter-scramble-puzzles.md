@@ -88,7 +88,7 @@ Then, we can find the solution with a short SQL statement:
 FROM find_weak_anagram('Clumsy Rental Red');
 ```
 
-## Self-“Anagrams”
+## Weak Anagrams Station Pairs
 
 We got curious: are there two stations that are weak anagrams of each other?
 We can create a Cartesian product from the station names and compare their ordered letters to find out:
