@@ -1,110 +1,392 @@
+<div class="wrap pagetitle">
+	<h1>DuckDB Installation</h1>
+</div>
+
 <p>This page contains installation options for DuckDB. For production use, we recommend the stable release.</p>
 <p>Binaries are available for major programming languages and <a href="{% link docs/stable/dev/building/overview.md %}#supported-platforms">platforms</a>. If there are no pre-packaged binaries available, consider <a href="{% link docs/stable/dev/building/overview.md %}">building DuckDB from source</a>.</p>
-<div class="yourselection">
-	<div class="version select" data-select="version">
-		<h3>
-			Version
-		</h3>
-		<ul class="version">
-			<li data-id=".stable" class="selected">
-				<div>Stable release</span></div>
-			</li>
-			<li data-id=".main">
-				<div>Preview release</div>
-			</li>
-		</ul>
-	</div>
-	<div class="environment select" data-select="environment">
-		<h3>
-			Environment
-		</h3>
-		<ul class="environment">
-			<li data-id=".cli" class="selected">Command line</li>
-			<li data-id=".python">Python</li>
-			<li data-id=".r">R</li>
-			<li data-id=".java">Java</li>
-			<li data-id=".js">Node.js</li>
-			<li data-id=".rust">Rust</li>
-			<li data-id=".go">Go</li>
-			<li data-id=".cplusplus">C/C++</li>
-			<li data-id=".odbc">ODBC</li>
-		</ul>
-	</div>
-	<div class="platform select" data-select="platform">
-		<h3>
-			Platform
-		</h3>
-		<ul class="platform">
-			<li data-id=".linux">Linux</li>
-			<li data-id=".macos" class="selected">macOS</li>
-			<li data-id=".win">Windows</li>
-		</ul>
-		<div class="info">The package is available for all platforms.</div>
-	</div>
-	<div class="download_method select" data-select="download_method">
-		<h3>
-			Download method
-		</h3>
-		<ul class="download_method">
-			<li data-id=".direct" class="selected">Direct download</li>
-			<li data-id=".package_manager">Package manager</li>
-		</ul>
-	</div>
-	<div class="architecture select hide" data-select="architecture">
-		<h3>
-			Architecture
-		</h3>
-		<ul class="architecture">
-			<li data-id=".x86_64">x86_64</li>
-			<li data-id=".arm64">arm64</li>
-		</ul>
-		<div class="info">The package supports both architectures.</div>
-	</div>
 
-	<div class="installation output">
-		<h3>
-			Installation
-		</h3>
-		<div class="result" id="resultselection">
-			<figure class="highlight">
-				<pre><code></code></pre>
-			</figure>
+<div class="installationselection">
+
+	<div class="selection-foldout" data-foldout="platform">
+		<div class="selection-head">
+			<h3>Platform<span class="selected"></span></h3>
 		</div>
-	</div>
 
-	<div class="link output">
-		<h3>
-			Link
-		</h3>
-		<div class="result">
-
+		<div class="selection-content">
+			<div class="selection-options" data-role="platform">
+				<div class="option" aria-checked="false" tabindex="-1" data-value="linux"><span class="symbol"><img src="/images/icons/linux.svg" aria-hidden="true"></span><span class="label">Linux</span></div>
+				<div class="option active" aria-checked="true" tabindex="0" data-value="macos"><span class="symbol"><img src="/images/icons/macos.svg" aria-hidden="true"></span><span class="label">macOS</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="windows"><span class="symbol"><img src="/images/icons/windows.svg" aria-hidden="true"></span><span class="label">Windows</span></div>
+			</div>
+			
+			<h4>Architecture</h4>
+			<div class="selection-options" data-role="architecture">
+				<div class="option" aria-checked="false" tabindex="0" data-value="x86_64"><span class="label">x86_64</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="arm64"><span class="label">arm64</span></div>
+			</div>
 		</div>
+
 	</div>
 	
-	<div class="sha256 output">
-		<h3></h3>
-		<div class="result">
-			
+	<div class="selection-foldout open" data-foldout="environment">
+		<div class="selection-head">
+			<h3>Environment<span class="selected"></span></h3>
 		</div>
-	</div>
-
-	<div class="note output">
-		<h3>
-
-		</h3>
-		<div class="result">
-
+		
+		<div class="selection-content">
+			<div class="selection-options" data-role="environment">
+				<div class="option" aria-checked="false" tabindex="0" data-value="cli"><span class="symbol"><img src="/images/icons/cli.svg" aria-hidden="true"></span><span class="label">Command line</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="python"><span class="symbol"><img src="/images/icons/python.svg" aria-hidden="true"></span><span class="label">Python</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="nodejs"><span class="symbol"><img src="/images/icons/nodejs.svg" aria-hidden="true"></span><span class="label">Node.js</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="odbc"><span class="symbol"><img src="/images/icons/odbc.svg" aria-hidden="true"></span><span class="label">ODBC</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="java"><span class="symbol"><img src="/images/icons/java.svg" aria-hidden="true"></span><span class="label">Java</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="go"><span class="symbol"><img src="/images/icons/go.svg" aria-hidden="true"></span><span class="label">Go</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="c"><span class="symbol"><img src="/images/icons/c.svg" aria-hidden="true"></span><span class="label">C / C++</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="r"><span class="symbol"><img src="/images/icons/r.svg" aria-hidden="true"></span><span class="label">R</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="rust"><span class="symbol"><img src="/images/icons/rust.svg" aria-hidden="true"></span><span class="label">Rust</span></div>
+				<div class="option" aria-checked="false" tabindex="-1" data-value="webassembly"><span class="symbol"><img src="/images/icons/webassembly.svg" aria-hidden="true"></span><span class="label">WebAssembly</span></div>
+			</div>
 		</div>
+		
 	</div>
+	
+	
+	<div class="installation-instructions">
+		
+		<h2>Installation <span class="currentversion">v{{ site.current_duckdb_version }}</span></h2>
+		
+<div id="result">
 
-	<div class="example output">
-		<h3>
-			Usage example
-		</h3>
-		<div class="result">
-			<figure class="highlight">
-				<pre><code></code></pre>
-			</figure>
-		</div>
+<div class="instruction-wrap"></div>
+<div class="more">
+	<a type="button" class="alternative-options" aria-expanded="false">Alternative download methods</a>
+	<a class="docs-link" href="">Client documentation page</a>
+</div>
+
+</div><!-- result -->
+		
+	</div><!-- installation-instructions -->
+	
+	<div class="installation-hint">
+		<p>Please select platform, architecture and environment to see recommended installation instructions.</p>
 	</div>
+	
+</div>
+
+
+<div class="hidden instruction-collection" hidden aria-hidden="true">
+
+
+
+<div
+	data-platform="macos"
+	data-environment="cli"
+	data-docs="/docs/stable/clients/cli/overview">
+
+{%- highlight bash -%}
+curl https://install.duckdb.org | sh
+{%- endhighlight -%}
+
+<div class="alternative">
+<h4>Package manager</h4>
+{%- highlight bash -%}
+brew install duckdb
+{%- endhighlight -%}
+<h4>Direct Download</h4>
+{%- assign f = site.data.checksums.artifacts.cli.macos.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="cli" platform="macos" -%}
+</div>
+</div>
+
+
+<div
+	data-platform="linux"
+	data-environment="cli"
+	data-architecture="x86_64"
+	data-docs="/docs/stable/clients/cli/overview">
+
+{%- highlight bash -%}
+curl https://install.duckdb.org | sh
+{%- endhighlight -%}
+
+<div class="alternative">
+<h4>Direct Download</h4>
+{%- assign f = site.data.checksums.artifacts.cli.linux.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" -%}
+</div>
+</div>
+
+
+<div
+	data-platform="linux"
+	data-environment="cli"
+	data-architecture="arm64"
+	data-docs="/docs/stable/clients/cli/overview">
+
+{%- highlight bash -%}
+curl https://install.duckdb.org | sh
+{%- endhighlight -%}
+
+<div class="alternative">
+<h4>Direct Download</h4>
+{%- assign f = site.data.checksums.artifacts.cli.linux.arm64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" -%}
+</div>
+</div>
+
+
+<div
+	data-platform="windows"
+	data-environment="cli"
+	data-architecture="x86_64"
+	data-docs="/docs/stable/clients/cli/overview">
+
+{%- assign f = site.data.checksums.artifacts.cli.windows.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" -%}
+<div class="note">
+	Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+</div>
+
+<div class="alternative">
+<h4>Package manager</h4>
+
+{%- highlight bash -%}
+winget install DuckDB.cli
+{%- endhighlight -%}
+
+</div>
+
+</div>
+
+
+<div
+	data-platform="windows"
+	data-environment="cli"
+	data-architecture="arm64"
+	data-docs="/docs/stable/clients/cli/overview">
+
+{%- assign f = site.data.checksums.artifacts.cli.windows.arm64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" -%}
+<div class="note">
+	Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+</div>
+
+<div class="alternative">
+<h4>Package manager</h4>
+
+{%- highlight bash -%}
+winget install DuckDB.cli
+{%- endhighlight -%}
+
+</div>
+
+</div>
+
+
+<div
+	data-environment="python"
+	data-docs="/docs/stable/clients/python/overview.html">
+
+{%- highlight bash -%}
+pip install duckdb
+{%- endhighlight -%}
+
+<div class="note">
+	Note that on Windows 10, the DuckDB Python client requires the latest Microsoft Visual C++ Redistributable. Please make sure to install the latest <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">MSVC Redistributable</a> on this platform. To work around this issue without upgrading the MSVC Redistributable, consider <b>installing the preview (nightly) release,</b> which resolves this problem.
+</div>
+</div>
+
+
+<div
+	data-environment="r"
+	data-docs="/docs/stable/clients/r.html">
+
+{%- highlight bash -%}
+install.packages("duckdb")
+{%- endhighlight -%}
+
+<div class="note">
+	On certain platforms, such as Linux AArch64 (arm64), the DuckDB R package needs to be compiled from source. To speed up this process, follow the instructions on the <a href="/docs/stable/dev/building/r">R build page</a>.
+</div>
+</div>
+
+
+
+<div
+	data-environment="java"
+	data-docs="/docs/stable/clients/java">
+	
+	<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
+
+<div class="alternative">
+<h4>Package manager</h4>
+
+{%- highlight java -%}
+<dependency>
+	<groupId>org.duckdb</groupId>
+	<artifactId>duckdb_jdbc</artifactId>
+	<version>{{ site.current_duckdb_java_version }}</version>
+</dependency>
+{%- endhighlight -%}
+
+</div>
+</div>
+
+<div
+	data-environment="nodejs"
+	data-docs="/docs/stable/clients/node_neo/overview">
+
+{%- highlight bash -%}
+npm install @duckdb/node-api
+{%- endhighlight -%}
+	
+</div>
+
+
+<div
+	data-environment="rust"
+	data-docs="/docs/stable/clients/rust">
+
+{%- highlight bash -%}
+cargo add duckdb --features bundled
+{%- endhighlight -%}
+	
+</div>
+
+
+<div
+	data-environment="go"
+	data-docs="/docs/stable/clients/go">
+
+{%- highlight bash -%}
+go get github.com/marcboeker/go-duckdb
+{%- endhighlight -%}
+	
+</div>
+
+
+<div
+	data-platform="linux"
+	data-environment="c"
+	data-docs="/docs/stable/clients/c/overview"
+	data-architecture="x86_64">
+
+{%- assign f = site.data.checksums.artifacts.c.linux.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="c" platform="linux" architecture="x86_64" -%}
+
+</div>
+
+
+<div
+	data-platform="linux"
+	data-environment="c"
+	data-docs="/docs/stable/clients/c/overview"
+	data-architecture="arm64">
+
+{%- assign f = site.data.checksums.artifacts.c.linux.arm64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="c" platform="linux" architecture="arm64" -%}
+
+</div>
+
+
+<div
+	data-platform="macos"
+	data-environment="c"
+	data-docs="/docs/stable/clients/c/overview">
+
+{%- assign f = site.data.checksums.artifacts.c.macos.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="c" platform="macos" -%}
+
+</div>
+
+
+<div
+	data-platform="windows"
+	data-environment="c"
+	data-architecture="arm64"
+	data-docs="/docs/stable/clients/c/overview">
+
+{%- assign f = site.data.checksums.artifacts.c.windows.arm64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="c" platform="windows" architecture="arm64" -%}
+
+</div>
+
+
+<div
+	data-platform="windows"
+	data-environment="c"
+	data-architecture="x86_64"
+	data-docs="/docs/stable/clients/c/overview">
+
+{%- assign f = site.data.checksums.artifacts.c.windows.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="c" platform="windows" architecture="x86_64" -%}
+
+</div>
+
+
+<div
+	data-platform="linux"
+	data-environment="odbc"
+	data-docs="/docs/stable/clients/odbc/overview"
+	data-architecture="x86_64">
+	
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-linux-amd64.zip</a>
+
+</div>
+
+
+<div
+	data-platform="linux"
+	data-environment="odbc"
+	data-docs="/docs/stable/clients/odbc/overview"
+	data-architecture="arm64">
+	
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-arm64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-linux-arm64.zip</a>
+
+</div>
+
+
+<div
+	data-platform="macos"
+	data-environment="odbc"
+	data-docs="/docs/stable/clients/odbc/overview">
+	
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-osx-universal.zip</a>
+
+</div>
+
+
+<div
+	data-platform="windows"
+	data-environment="odbc"
+	data-docs="/docs/stable/clients/odbc/overview"
+	data-architecture="x86_64">
+	
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
