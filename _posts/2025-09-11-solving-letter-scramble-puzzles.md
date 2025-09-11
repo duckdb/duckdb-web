@@ -46,7 +46,7 @@ SELECT
 
 Indeed, both expressions are weak anagrams of `Amsterdam`!
 
-## Station Names
+## Matching against Station Names
 
 To solve the puzzle, we need a list of train stations.
 Luckily, one of our go-to datasets at DuckDB is the [Dutch railway datasets]({% link docs/stable/guides/snippets/dutch_railway_datasets.md %}), including its services and train stations. We can create a table with the station names:
@@ -71,7 +71,7 @@ Click to see the solution
 [Lelystad Centrum](https://en.wikipedia.org/wiki/Lelystad_Centrum_railway_station)
 </details>
 
-## Solve with a Table Macro
+## Defining a Table Macro for Finding Weak Anagrams
 
 To find a weak anagram station name, we can use a [table macro]({% link docs/stable/sql/statements/create_macro.md %}#table-macros):
 
@@ -82,15 +82,15 @@ CREATE MACRO find_weak_anagram(s) AS TABLE
     WHERE order_letters(name_long) = order_letters(s);
 ```
 
-Then, we can find the solution with a short SQL statement:
+Then, we can find the solution using a short SQL statement:
 
 ```sql
 FROM find_weak_anagram('Clumsy Rental Red');
 ```
 
-## Weak Anagrams Station Pairs
+## Weak Anagram Station Pairs
 
-We got curious: are there two stations that are weak anagrams of each other?
+We got curious: are there two stations whose names are weak anagrams of each other?
 We can create a Cartesian product from the station names and compare their ordered letters to find out:
 
 ```sql
@@ -104,7 +104,7 @@ WHERE s1.name_long.order_letters() = s2.name_long.order_letters()
   AND NOT s2.name_long.contains(s1.name_long);
 ```
 
-There are in fact three station pairs:
+There are in fact three station pairs whose names are weak anagrams of each other:
 
 |  station_1  | station_2  |
 |-------------|------------|
@@ -115,7 +115,7 @@ There are in fact three station pairs:
 ## Cleaning Up
 
 Most of the time, you don't have to clean up after running a simple DuckDB script:
-you simply close the in-memory database session, which takes care of the cleanup.
+simply closing the in-memory database session takes care of the cleanup.
 However, it's worth pointing out that macros in DuckDB are persisted and this can get in the way
 – e.g., when copying the database into a [DuckLake](https://ducklake.select/):
 
@@ -124,21 +124,25 @@ ATTACH 'ducklake:metadata.ducklake' AS my_ducklake;
 COPY FROM DATABASE memory TO my_ducklake;
 ```
 
-DuckLake [does not support macros (functions)](https://ducklake.select/docs/stable/duckdb/unsupported_features.html#likely-to-be-supported-in-the-future), and throws the following error message:
+DuckLake [does not support macros (functions)](https://ducklake.select/docs/stable/duckdb/unsupported_features.html#likely-to-be-supported-in-the-future), so it throws the following error:
 
 ```console
 Not implemented Error:
 DuckLake does not support functions
 ```
 
-You can drop the macros with the following commands:
+There are two options to work around this problem.
 
-```sql
-DROP MACRO order_letters;
-DROP MACRO TABLE find_weak_anagram;
-```
+- If you need to keep the macros and you are using DuckDB as your catalog database for DuckLake, you can use the [DuckDB to DuckLake migration script](https://ducklake.select/docs/preview/duckdb/migrations/duckdb_to_ducklakel#migration-script). This will migrate the macros into the catalog of your DuckLake.
 
-With this, the `COPY FROM DATABASE` call succeeds.
+- If you do not need the macros or your destination's catalog database does not support them, you can drop them with the following commands:
+
+  ```sql
+  DROP MACRO order_letters;
+  DROP MACRO TABLE find_weak_anagram;
+  ```
+
+  Without the macros, the copying to DuckLake call succeeds.
 
 ## Summary
 
