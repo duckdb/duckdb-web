@@ -8,7 +8,7 @@ image: "/images/blog/thumbs/letter-scramble-puzzle.png"
 excerpt: "In this lighthearted post, we solve a puzzle type that's on display in Dutch trains."
 ---
 
-The [Dutch National Railway Services (NS)](https://www.ns.nl/) is releasing a “letter scramble”-style puzzle every week where
+The [Dutch National Railways (NS)](https://www.ns.nl/) is releasing a “letter scramble”-style puzzle every week where
 they give a term whose letters can be found in a Dutch train station's name.
 In order to have a match, it doesn't have to be a perfect anagram – for example, `Amsterdam` (9 letters) matches both `mastered` (8 letters) and `Dream Master` (11 letters) because all three terms contain the same letters, just with different amounts of repetitions. Let's call this a “weak anagram”.
 
@@ -23,7 +23,7 @@ CREATE MACRO order_letters(s) AS
     lower(s)                  -- convert all characters to lowercase
     .regexp_replace(
         '[^\p{L}]', '', 'g'
-    )                         -- remove all non-Unicode characters
+    )                         -- remove all non-Unicode letters
     .string_to_array('')      -- turn the string into a list
     .list_distinct()          -- eliminate duplicate elements from the list
     .list_sort();             -- sort the list
