@@ -64,16 +64,18 @@ FROM stations
 WHERE order_letters(name_long) = order_letters('Clumsy Rental Red');
 ```
 
+We are not going to spoil the solution but you can reveal it below.
+
 <details markdown='1'>
 <summary markdown='span'>
-Click to see the solution
+Click to see the solution.
 </summary>
 [Lelystad Centrum](https://en.wikipedia.org/wiki/Lelystad_Centrum_railway_station)
 </details>
 
-## Defining a Table Macro for Finding Weak Anagrams
+## Table Macro for Finding Weak Anagrams
 
-To find a weak anagram station name, we can use a [table macro]({% link docs/stable/sql/statements/create_macro.md %}#table-macros):
+To find station name, which is a weak anagram to a term, we can use a [table macro]({% link docs/stable/sql/statements/create_macro.md %}#table-macros):
 
 ```sql
 CREATE MACRO find_weak_anagram(s) AS TABLE
@@ -82,7 +84,7 @@ CREATE MACRO find_weak_anagram(s) AS TABLE
     WHERE order_letters(name_long) = order_letters(s);
 ```
 
-Then, we can find the solution using a short SQL statement:
+Then, we can find the solution using a simple SQL statement:
 
 ```sql
 FROM find_weak_anagram('Clumsy Rental Red');
