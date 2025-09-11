@@ -28,7 +28,7 @@ The last few weeks since the release were quite eventful:
 1. MotherDuck, a DuckDB-based cloud warehouse, just [reached General Availability](https://motherduck.com/blog/announcing-motherduck-general-availability-data-warehousing-with-duckdb/) last week.
     Congratulations to the team on the successful release!
 
-2. We added support to DuckDB for [Delta Lake](https://delta.io/), an open-source lakehouse framework.
+2. We added support to DuckDB for [Delta Lake](https://delta.io/), an open-source Lakehouse framework.
     This feature was described in Sam Ansmink's [blog post]({% post_url 2024-06-10-delta %}) and Hannes Mühleisen's [keynote segment at the DATA+AI summit](https://www.youtube.com/watch?v=wuP6iEYH11E).
 
     With extensions for both [Delta Lake]({% link docs/stable/core_extensions/delta.md %}) and [Iceberg]({% link docs/stable/core_extensions/iceberg/overview.md %}),

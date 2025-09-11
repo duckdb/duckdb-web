@@ -116,7 +116,7 @@ Our alternative sorting approaches are:
 
 These plots display query runtime when pulling from a DuckDB file hosted on S3.
 These same techniques can also be successfully applied to the [DuckLake](https://ducklake.select/) integrated data lake and catalog format!
-DuckLake is the modern evolution of the cloud data lakehouse – take a minute to check out the [launch post]({% post_url 2025-05-27-ducklake %}) if you haven't yet!
+DuckLake is the modern evolution of the cloud data Lakehouse – take a minute to check out the [launch post]({% post_url 2025-05-27-ducklake %}) if you haven't yet!
 DuckLake has an [additional concept of a partition](https://ducklake.select/docs/stable/duckdb/advanced_features/partitioning), which enables entire files to be skipped.
 To take full advantage of DuckLake, first partition your data (by time or otherwise) and then apply the techniques in this post when loading your data.
 
