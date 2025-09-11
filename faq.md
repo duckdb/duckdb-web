@@ -452,6 +452,20 @@ Please check the [release calendar]({% link release_calendar.md %}) for the plan
 
 <div class="qa-wrap" markdown="1">
 
+### Which DuckDB clients and versions are officially supported?
+
+<div class="answer" markdown="1">
+
+Official supports covers the [primary clients]({% link docs/stable/clients/overview.md %}) of the latest stable version (currently {{ site.current_duckdb_version }}).
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### How frequently are new DuckDB versions released?
 
 <div class="answer" markdown="1">
