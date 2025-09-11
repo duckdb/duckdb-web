@@ -25,11 +25,11 @@ CREATE MACRO order_letters(s) AS
         '[^\p{L}]', '', 'g'
     )                         -- remove all non-Unicode characters
     .string_to_array('')      -- turn the string into a list
-    .list_distinct()          -- eliminate unique elements from the list
+    .list_distinct()          -- eliminate duplicate elements from the list
     .list_sort();             -- sort the list
 ```
 
-We can use this to see whether to terms match:
+We can use this to see whether two terms are weak anagrams:
 
 ```sql
 SELECT
@@ -44,7 +44,7 @@ SELECT
 |-----------------------|-----------------------|-----------------------|----------:|----------:|
 | [a, d, e, m, r, s, t] | [a, d, e, m, r, s, t] | [a, d, e, m, r, s, t] | true      | true      |
 
-Indeed, both expressions match do!
+Indeed, both expressions are weak anagrams of `Amsterdam`!
 
 ## Station Names
 
@@ -56,7 +56,7 @@ CREATE TABLE stations AS
     FROM 'https://blobs.duckdb.org/nl-railway/stations-2023-09.csv';
 ```
 
-Then, we can select the 
+Then, we can select the station names that are weak anagrams of the puzzle:
 
 ```sql
 SELECT name_long
@@ -143,7 +143,7 @@ With this, the `COPY FROM DATABASE` call succeeds.
 ## Summary
 
 That was our quick guide to solving the NS puzzle!
-Is this a database problem? Not really, but you DuckDB's SQL allows you to succinctly solve take care of it.
+Is this a database problem? Not really, but DuckDB's SQL allows you to succinctly formulate and solve it!
 Happy puzzle solving!
 
 > This week, the puzzle is `Zere Tanda Voozan`.
