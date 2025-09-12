@@ -156,3 +156,9 @@ Happy puzzle solving!
 
 > This week, the puzzle is `Zere Tanda Voozan`.
 > You can find the weekly puzzle's solution on the [NS website](https://www.ns.nl/dagje-uit/ontspanning/puzzel.html).
+
+## Update on Weak vs. Strong Anagrams
+
+Reader feedback indicated that the NS puzzles are _strong anagrams_ (with the same amount of letters as the station name) and the puzzle term for the first week of September was actually `Clumsy Rental Ted` and not `Clumsy Rental Red`!
+The latter is impossible to fact-check but we looked into [historical data](https://gist.github.com/szarnyasg/fdf7f5be161df8a6b0b930c1768797fd), ran it through our DuckDB solver script, and it turned out that 95% of the time there are _strong anagrams._
+However, occasionally weak anagrams are also given such as `Alleen Costume Hut` which stands for `Houten Castellum` even though the puzzle term and the station name have different numbers of `e` letters.
