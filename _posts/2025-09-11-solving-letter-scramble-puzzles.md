@@ -21,9 +21,9 @@ First, let's create a [macro]({% link docs/stable/sql/statements/create_macro.md
 ```sql
 CREATE MACRO order_letters(s) AS 
     lower(s)                  -- convert all characters to lowercase
-    .regexp_replace(
+    .regexp_replace(          -- remove all non-Unicode letters
         '[^\p{L}]', '', 'g'
-    )                         -- remove all non-Unicode letters
+    )
     .string_to_array('')      -- turn the string into a list
     .list_distinct()          -- eliminate duplicate elements from the list
     .list_sort();             -- sort the list
@@ -148,8 +148,10 @@ There are two options to work around this problem.
 
 ## Summary
 
-That was our quick guide to solving the NS puzzle!
-Is this a database problem? Not really, but DuckDB's SQL allows you to succinctly formulate and solve it!
+That was our quick guide to solving the NS puzzle.
+Is this a database problem? Not really, but DuckDB's SQL allows you to succinctly formulate it and solve it in less than 0.1 seconds!
+And sure, ChatGPT can solve this puzzle – but it spends _almost a minute_ (using a ton of computing resources) to reason its way through it.
+
 Happy puzzle solving!
 
 > This week, the puzzle is `Zere Tanda Voozan`.
