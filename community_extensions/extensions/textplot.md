@@ -19,7 +19,7 @@ extension:
   version: 1.0.1
 repo:
   github: query-farm/textplot
-  ref: 0341f691404f427cf0b72f9669f19bbd3c3ff1e1
+  ref: a344d9e1249b29354d3c516f4000cc764d3dfd6d
 
 extension_star_count: 8
 extension_star_count_pretty: 8
@@ -54,6 +54,7 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|-------------|---------|----------|
 | tp_bar        | scalar        | NULL        | NULL    | NULL     |
 | tp_density    | scalar        | NULL        | NULL    | NULL     |
+| tp_qr         | scalar        | NULL        | NULL    | NULL     |
 | tp_sparkline  | scalar        | NULL        | NULL    | NULL     |
 
 
