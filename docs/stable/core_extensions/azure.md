@@ -182,10 +182,26 @@ CREATE SECRET secret4 (
 The possible values are the following:
 [`cli`](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli);
 [`managed_identity`](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview);
+[`workload_identity`](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview);
 [`env`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#environment-variables);
 [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential);
 
 If no explicit `CHAIN` is provided, the default one will be [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential)
+
+#### MANAGED_IDENTITY Provider
+
+If you need to specifically name the User-assigned Managed Identity to be used, the
+`MANAGED_IDENTITY` provider must be used (instead of a `CHAIN`). This provider allows identity 
+specification via one of `CLIENT_ID`, `OBJECT_ID` or `RESOURCE_ID`, e.g.:
+
+```sql
+CREATE SECRET secret1 (
+    TYPE AZURE,
+    PROVIDER MANAGED_IDENTITY,
+    ACCOUNT_NAME '⟨storage account name⟩',
+    CLIENT_ID '⟨used-assigned managed identity client id⟩'
+);
+```
 
 #### `SERVICE_PRINCIPAL` Provider
 
