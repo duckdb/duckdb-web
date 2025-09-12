@@ -46,6 +46,10 @@ DESCRIBE services;
 
 ## Datasets
 
+### 80-Month Datasets
+
+* [2019-01 to 2025-08](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip): 80 months as uncompressed CSVs in a single zip
+
 ### Yearly Data Sets
 
 The yearly data sets are about 350 MB each.
