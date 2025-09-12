@@ -82,7 +82,7 @@ body.installation{
 			@include label-1;
 		}
 		
-		.selection-options + h4{
+		.architecture-wrap h4{
 			margin-top: 30px;
 			margin-bottom: 15px;
 		}
@@ -144,6 +144,10 @@ body.installation{
 			&:hover{
 				border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
 				background: var(--interactive-folderbox-background-color-hover, rgba(242, 242, 242, 0.60));
+			}
+			
+			&:focus-visible{
+				outline: none;
 			}
 		}
 		
@@ -209,13 +213,13 @@ body.installation{
 				}
 			}
 			.docs-link{
-				color: var(--main-text-tertiary-color, #B2B2B2);
+				color: var(--main-text-secondary-color, #666666);
 				text-decoration: none;
 				
 				&:after{
 					width: 13px;
 					height: 10px;
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='10' fill='none' viewBox='0 0 13 10'%3E%3Cpath fill='%23B2B2B2' d='M12.472 5 8.146 9.354 7.25 8.43l2.758-2.744H0V4.328h10.036L7.25 1.57l.896-.924L12.472 5Z'/%3E%3C/svg%3E");
+					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='10' fill='none' viewBox='0 0 13 10'%3E%3Cpath fill='%23666666' d='M12.472 5 8.146 9.354 7.25 8.43l2.758-2.744H0V4.328h10.036L7.25 1.57l.896-.924L12.472 5Z'/%3E%3C/svg%3E");
 				}
 			}
 			.alternative-options{
@@ -223,13 +227,13 @@ body.installation{
 				border: none;
 				padding: 0;
 				font: inherit;
-				color: var(--main-text-tertiary-color, #B2B2B2);
+				color: var(--main-text-secondary-color, #666666);
 				text-decoration: none;
 				
 				&:after{
 					width: 13px;
 					height: 9px;
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='9' fill='none' viewBox='0 0 13 9'%3E%3Cpath stroke='%23B2B2B2' stroke-width='1.5' d='M1 1.5 6.5 7 12 1.5'/%3E%3C/svg%3E");
+					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='9' fill='none' viewBox='0 0 13 9'%3E%3Cpath stroke='%23666666' stroke-width='1.5' d='M1 1.5 6.5 7 12 1.5'/%3E%3C/svg%3E");
 				}
 			}
 			.alternative-options[aria-expanded="true"]{

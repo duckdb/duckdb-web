@@ -19,6 +19,7 @@
     var $rgPlat = $container.find('.selection-options[data-role="platform"]');
     var $rgEnv = $container.find('.selection-options[data-role="environment"]');
     var $rgArch = $container.find('.selection-options[data-role="architecture"]');
+    var $archWrap = $container.find('.architecture-wrap');
 
     var state = {
       platform: null,
@@ -27,8 +28,10 @@
     };
 
     var urlFlags = {
-      archFromURL: false
+      archFromURL: false,
+      envFromURL: false
     };
+    var initKeepEnvOpen = false;
 
     function detectPlatform() {
       var p = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
@@ -45,6 +48,7 @@
         state.environment = sanitizeParam(params.get('environment'));
         state.architecture = sanitizeParam(params.get('architecture'));
         urlFlags.archFromURL = params.has('architecture');
+        urlFlags.envFromURL = params.has('environment');
       } catch (e) {}
     }
 
@@ -79,7 +83,7 @@
       var pf = detectPlatform();
       return {
         platform: pf,
-        environment: null,
+        environment: 'cli',
         architecture: null
       };
     }
@@ -185,7 +189,7 @@
       $foldEnv.find('.selection-head .selected').text(envLabel ? ' ' + envLabel : '');
 
       var platLabel = labelFor('platform');
-      var arch = state.architecture ? String(state.architecture) : '';
+      var arch = (state.platform === 'macos') ? '' : (state.architecture ? String(state.architecture) : '');
       var parts = [];
       if (platLabel) parts.push(platLabel);
       if (arch) parts.push(arch);
@@ -204,11 +208,13 @@
     }
 
     function updateFoldouts(animate) {
-      var shouldClosePlat = !!state.platform && !!state.architecture;
+      var shouldClosePlat = !!state.platform && (state.platform === 'macos' || !!state.architecture);
       setFoldoutOpen($foldPlat, !shouldClosePlat, !!animate);
 
-      var shouldCloseEnv = !!state.environment;
+      var shouldCloseEnv = !!state.environment && !initKeepEnvOpen;
       setFoldoutOpen($foldEnv, !shouldCloseEnv ? true : false, !!animate);
+
+      initKeepEnvOpen = false;
     }
 
     function bestTemplate() {
@@ -359,6 +365,16 @@
         .attr('tabindex', '0');
     }
 
+    function updateArchitectureVisibility() {
+      if ($archWrap && $archWrap.length) {
+        if (state.platform === 'macos') {
+          $archWrap.hide();
+        } else {
+          $archWrap.show();
+        }
+      }
+    }
+
     function onOptionActivate($opt) {
       if ($opt.attr('aria-disabled') === 'true' || $opt.hasClass('disabled')) return;
 
@@ -373,6 +389,7 @@
       // Reset architecture on platform change
       if (role === 'platform') {
         clearArchitectureSelection();
+        updateArchitectureVisibility();
       }
 
       if (role !== 'architecture') {
@@ -474,9 +491,11 @@
 
     // Init
     readURL();
+    initKeepEnvOpen = !urlFlags.envFromURL;
     normalizeState();
     applyUIFromState();
     updateAvailability();
+    updateArchitectureVisibility();
     writeURL();
     $('.installation-instructions').hide();
     render();
@@ -485,7 +504,7 @@
     wire();
 
     // Auto-detect architecture if not set via URL or user choice
-    if (!state.architecture && !urlFlags.archFromURL) {
+    if (!state.architecture && !urlFlags.archFromURL && state.platform !== 'macos') {
       detectArchitecture().then(function (arch) {
         if (arch && !state.architecture) {
           state.architecture = arch;
