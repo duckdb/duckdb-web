@@ -60,17 +60,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name        | function_type | description | comment | examples |
-|----------------------------|---------------|-------------|---------|----------|
-| build_cleaned_address      | scalar        | NULL        | NULL    |          |
-| build_suffix_trie          | aggregate     | NULL        | NULL    |          |
-| double_metaphone           | scalar        | NULL        | NULL    |          |
-| format_address_with_counts | scalar        | NULL        | NULL    |          |
-| ngrams                     | scalar        | NULL        | NULL    |          |
-| peel_end_tokens            | scalar        | NULL        | NULL    |          |
-| soundex                    | scalar        | NULL        | NULL    |          |
-| strip_diacritics           | scalar        | NULL        | NULL    |          |
-| unaccent                   | scalar        | NULL        | NULL    |          |
+|   function_name   | function_type | description | comment | examples |
+|-------------------|---------------|-------------|---------|----------|
+| build_suffix_trie | aggregate     | NULL        | NULL    |          |
+| double_metaphone  | scalar        | NULL        | NULL    |          |
+| find_address      | scalar        | NULL        | NULL    |          |
+| ngrams            | scalar        | NULL        | NULL    |          |
+| soundex           | scalar        | NULL        | NULL    |          |
+| strip_diacritics  | scalar        | NULL        | NULL    |          |
+| unaccent          | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
