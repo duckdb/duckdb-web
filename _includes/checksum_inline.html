@@ -1,0 +1,63 @@
+{%- comment -%}
+Renders a checksum block (div.shainfo) for a given artifact if available in site.data.checksums.
+Usage:
+  {% include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" %}
+Notes:
+- architecture is optional; if omitted, a deterministic fallback is chosen (x86_64, then arm64, then first entry).
+- Algorithm selection follows site.data.checksums.preferred_algorithms (e.g., ["sha512","sha256"]); falls back to any available if none match.
+- Renders nothing if no checksum is found.
+{%- endcomment -%}
+
+{%- assign env = include.environment -%}
+{%- assign plat = include.platform -%}
+{%- assign arch = include.architecture -%}
+{%- assign data = site.data.checksums.artifacts -%}
+
+{%- if data and env and plat and data[env] and data[env][plat] -%}
+  {%- assign plat_map = data[env][plat] -%}
+
+  {%- if arch and plat_map[arch] -%}
+    {%- assign entry = plat_map[arch] -%}
+  {%- else -%}
+    {%- assign entry = plat_map.x86_64 -%}
+    {%- if entry == nil -%}
+      {%- assign entry = plat_map.arm64 -%}
+    {%- endif -%}
+    {%- if entry == nil -%}
+      {%- for kv in plat_map -%}
+        {%- assign entry = kv[1] -%}
+        {%- break -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if entry and entry.hashes -%}
+    {%- assign preferred = site.data.checksums.preferred_algorithms -%}
+    {%- if preferred == nil -%}
+      {%- assign preferred = "sha256" | split: "," -%}
+    {%- endif -%}
+
+    {%- assign chosen_alg = "" -%}
+    {%- assign chosen_sum = "" -%}
+
+    {%- for alg in preferred -%}
+      {%- if entry.hashes[alg] -%}
+        {%- assign chosen_alg = alg -%}
+        {%- assign chosen_sum = entry.hashes[alg] -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if chosen_alg == "" -%}
+      {%- for kv in entry.hashes -%}
+        {%- assign chosen_alg = kv[0] -%}
+        {%- assign chosen_sum = kv[1] -%}
+        {%- break -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if chosen_alg != "" and chosen_sum != "" -%}
+<div class="shainfo"><span>{{ chosen_alg | upcase }}:</span><span class="hash">{{ chosen_sum }}</span></div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}

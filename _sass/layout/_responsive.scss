@@ -581,6 +581,54 @@
 		padding: 35px 0px;
 	}
 	
+	body.installation {
+		.selection-options {
+			gap: 10px;
+	
+			.option {
+				height: 54px;
+				padding: 8px;
+	
+				.symbol {
+					width: 36px;
+					height: 36px;
+	
+					img {
+						max-width: 16px;
+						max-height: 16px;
+					}
+				}
+			}
+		}
+	
+		.installation-instructions {
+			pre,
+			.selection-foldout {
+				padding: 15px;
+			}
+	
+			#result .more {
+				gap: 15px;
+			}
+		}
+	
+		.selection-head h3 .selected {
+			margin-left: 15px;
+		}
+	
+		.shainfo {
+			line-height: 1;
+	
+			span {
+				font-size: 12px;
+	
+				&.hash {
+					word-break: break-all;
+					overflow-wrap: anywhere;
+				}
+			}
+		}
+	}
 }
 
 @media only screen and (max-height: 840px) {
