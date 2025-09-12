@@ -24,6 +24,8 @@ The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` and `UHUGEINT` store wh
 | `UBIGINT`   | `UINT64`                         |       0 |  2^64 - 1 |             8 |
 | `UHUGEINT`  | `UINT128`                        |       0 | 2^128 - 1 |            16 |
 
+> `INT8` is a 64-bit integer, and is not the signed equivalent of `UINT8`, an unsigned, 8-bit integer. The type aliases `INT1`, `INT2`, `INT4` and `INT8` for signed integers were inherited from PostgreSQL, where digits in these names indicate their size in *bytes*, whereas the type aliases for their unsigned equivalents, `UINT8`, `UINT16`, `UINT32` and `UINT64`, indicate their size in *bits* following the C/C++ convention.
+
 The type integer is the common choice, as it offers the best balance between range, storage size, and performance. The `SMALLINT` type is generally only used if disk space is at a premium. The `BIGINT` and `HUGEINT` types are designed to be used when the range of the integer type is insufficient.
 
 ## Variable-Length Integers
