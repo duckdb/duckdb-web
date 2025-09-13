@@ -325,4 +325,4 @@ Traceback (most recent call last):
 ModuleNotFoundError: No module named 'duckdb.duckdb'
 ```
 
-This is because Python imported from the `duckdb` directory (i.e. `tools/pythonpkg/duckdb/`), rather than from the installed package. You should start your interpreter from a different directory instead.
+This is because Python imported from the `duckdb` directory (i.e., `tools/pythonpkg/duckdb/`), rather than from the installed package. You should start your interpreter from a different directory instead.
