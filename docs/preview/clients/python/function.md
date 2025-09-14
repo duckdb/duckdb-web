@@ -42,7 +42,7 @@ The `create_function` method takes the following parameters:
 2. `function` The Python function you wish to register as a UDF.
 3. `parameters` Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
 4. `return_type` Scalar functions return one element per row. This parameter specifies the return type of the function.
-5. `type` (optional): DuckDB supports both native Python types and PyArrow Arrays. By default, `type = 'native'` is assumed, but you can specify `type = 'arrow'` to use PyArrow Arrays. In general, using an arrow UDF will be much more efficient than native because it will be able to operate in batches.
+5. `type` (optional): DuckDB supports both native Python types and PyArrow Arrays. By default, `type = 'native'` is assumed, but you can specify `type = 'arrow'` to use PyArrow Arrays. In general, using an Arrow UDF will be much more efficient than native because it will be able to operate in batches.
 6. `null_handling` (optional): By default, `NULL` values are automatically handled as `NULL`-in `NULL`-out. Users can specify a desired behavior for `NULL` values by setting `null_handling = 'special'`.
 7. `exception_handling` (optional): By default, when an exception is thrown from the Python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `NULL`, by setting this parameter to `'return_null'`
 8. `side_effects` (optional): By default, functions are expected to produce the same result for the same input. If the result of a function is impacted by any type of randomness, `side_effects` must be set to `True`.
@@ -313,7 +313,7 @@ If the function is expected to receive arrow arrays, set the `type` parameter to
 
 This will let the system know to provide arrow arrays of up to `STANDARD_VECTOR_SIZE` tuples to the function, and also expect an array of the same amount of tuples to be returned from the function.
 
-In general, using an arrow UDF will be much more efficient than native because it will be able to operate in batches.
+In general, using an Arrow UDF will be much more efficient than native because it will be able to operate in batches.
 
 ```python
 import duckdb
