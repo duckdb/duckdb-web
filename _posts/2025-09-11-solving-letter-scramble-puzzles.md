@@ -135,7 +135,7 @@ DuckLake does not support functions
 
 There are two options to work around this problem.
 
-- If you need to keep the macros and you are using DuckDB as your catalog database for DuckLake, you can use the [DuckDB to DuckLake migration script](https://ducklake.select/docs/preview/duckdb/migrations/duckdb_to_ducklakel#migration-script). This will migrate the macros into the catalog of your DuckLake.
+- If you need to keep the macros and you are using DuckDB as your catalog database for DuckLake, you can use the [DuckDB to DuckLake migration script](https://ducklake.select/docs/preview/duckdb/migrations/duckdb_to_ducklake#migration-script). This will migrate the macros into the catalog of your DuckLake.
 
 - If you do not need the macros or your destination's catalog database does not support them, you can drop them with the following commands:
 
