@@ -52,9 +52,11 @@ main.inactive{
 }
 
 // Two image styles
+video.darkmode-img,
 img.darkmode-img{
 	display: none;
 }
+video.lightmode-img,
 img.lightmode-img{
 	display: inline;
 }
