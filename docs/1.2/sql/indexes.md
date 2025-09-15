@@ -114,7 +114,7 @@ During the `INSERT`, it is unaware it will reinsert the foreign key value as par
 
 When a delete is committed on a table with an ART index, data can only be removed from the index when no further transactions exist that refer to the deleted entry. This means if you perform a delete transaction, a subsequent transaction which inserts a record with the same key as the deleted record can fail with a constraint error if there is a concurrent transaction referencing the deleted record. Pseudocode to demonstrate:
 
-```
+```cpp
 // Assume "someTable" is a table with an ART index preventing duplicates
 tx1 = duckdbTxStart()
 someRecord = duckdb(tx1, "select * from someTable using sample 1 rows")
