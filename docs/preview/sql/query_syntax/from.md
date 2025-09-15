@@ -119,11 +119,10 @@ SELECT sum(t.i)
 WHERE i % 2 = 0;
 ```
 
-### Table functions
+### Table Functions
 
 Some functions in duckdb return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references. 
 Examples include `read_csv`, `read_parquet`, `range`, `generate_series`, `repeat`, `unnest`, `glob`. For example, the previous example
-
 
 ```sql
 SELECT *
@@ -146,7 +145,6 @@ FROM read_csv('test.csv') WITH ORDINALITY;
 ```
 
 Note that the same result could be achieved using the `row_number` window function.
-
 
 ## Joins
 
