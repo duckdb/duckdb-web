@@ -224,7 +224,12 @@ install.packages("duckdb")
 <div
     data-environment="java"
     data-docs="/docs/stable/clients/java">
-    
+
+<h4>Direct Download</h4>
+    <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
+</div>
+
+<h4>Maven</h4>
 {%- highlight xml -%}
 <dependency>
     <groupId>org.duckdb</groupId>
@@ -233,10 +238,11 @@ install.packages("duckdb")
 </dependency>
 {%- endhighlight -%}
 
-<div class="alternative">
-<h4>Direct Download</h4>
-    <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
-</div>
+<h4>Gradle</h4>
+{%- highlight groovy -%}
+implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
+{%- endhighlight -%}
+
 </div>
 
 <div
