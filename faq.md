@@ -309,7 +309,7 @@ Additionally to the DuckDB clients for Python, R, and other programming language
 
 You can install multiple DuckDB clients on the same computer.
 These clients are installed individually and can have different DuckDB versions.
-For example, you can use the DuckDB 1.2.1 package in R, DuckDB 1.2.2 as the CLI client, and the preview release in Python.
+For example, you can use the DuckDB 1.3.2 package in R, DuckDB 1.4.0 as the CLI client, and the preview release in Python.
 
 If you are unsure about the DuckDB version used in a process, run the `PRAGMA version` query, which prints the version of DuckDB.
 
