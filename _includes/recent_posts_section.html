@@ -7,6 +7,8 @@
 				Other Media
 			{% elsif page.collection == "science" %}
 				Other Science Posts
+			{% elsif page.collection == "everywhere" %}
+				Other Everywhere Posts
 			{% else %}
 				Recent Posts
 			{% endif %}
@@ -18,11 +20,13 @@
 				{% assign items = site.media | sort: "date" | reverse %}
 			{% elsif page.collection == "science" %}
 				{% assign items = site.science | sort: "date" | reverse %}
+			{% elsif page.collection == "everywhere" %}
+				{% assign items = site.everywhere | sort: "date" | reverse %}
 			{% else %}
 				{% assign items = site.posts | sort: "date" | reverse %}
 			{% endif %}
 			
-			{% if page.collection == "science" %}
+			{% if page.collection == "science" or page.collection == "everywhere" %}
 				{% assign max_recent_posts = 3 %}
 			{% else %}
 				{% assign max_recent_posts = 2 %}
@@ -99,8 +103,8 @@
 				{% endif %}
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}{{ site.baseurl }}{% if page.collection == "events" %}/events/{% elsif page.collection == "media" %}/media/{% elsif page.collection == "science" %}/science/{% else %}/news/{% endif %}" class="button transparent arrow-right">
-			All {% if page.collection == "events" %}events{% elsif page.collection == "media" %}media{% elsif page.collection == "science" %}science posts{% else %}blog posts{% endif %} <span></span>
+		<a href="{{ site.url }}{{ site.baseurl }}{% if page.collection == "events" %}/events/{% elsif page.collection == "media" %}/media/{% elsif page.collection == "science" %}/science/{% elsif page.collection == "everywhere" %}/everywhere/{% else %}/news/{% endif %}" class="button transparent arrow-right">
+			All {% if page.collection == "events" %}events{% elsif page.collection == "media" %}media{% elsif page.collection == "science" %}science posts{% elsif page.collection == "everywhere" %}everywhere posts{% else %}blog posts{% endif %} <span></span>
 		</a>
 	</div>
 </section>

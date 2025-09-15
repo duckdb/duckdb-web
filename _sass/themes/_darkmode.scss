@@ -21,7 +21,6 @@ html.darkmode ::selection {
 	}
 }
 
-
 html.darkmode body{
 	strong{
 		font-weight: 700;
@@ -169,6 +168,17 @@ html.darkmode body{
 	/** FOUNDATION **/
 	&.foundation section.supporters .supporterboard ul li img{
 		filter: invert(1);
+	}
+	
+	&.documentation p video.darkmode-img,
+	&.documentation p img.darkmode-img,
+	video.darkmode-img,
+	img.darkmode-img{
+		display: inline;
+	}
+	video.lightmode-img,
+	img.lightmode-img{
+		display: none;
 	}
 	
 }

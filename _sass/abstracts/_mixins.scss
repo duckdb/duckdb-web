@@ -440,6 +440,11 @@
 		margin: 0;
 		margin-bottom: 0px;
 	}
+	li .highlight pre > code{
+		border: none;
+		padding: 0;
+		background: unset;
+	}
 
 	h1, h2, h3, h4, h5 {
 		code, pre {

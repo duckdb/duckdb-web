@@ -872,13 +872,6 @@ html.darkmode {
 	.banner .close{
 		filter: invert(0);
 	}
-	body.documentation p img.darkmode-img,
-	img.darkmode-img{
-		display: inline;
-	}
-	img.lightmode-img{
-		display: none;
-	}
 	section.architecture {
 		.diagram {
 			.connector svg path {

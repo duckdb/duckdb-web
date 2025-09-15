@@ -1,0 +1,70 @@
+---
+layout: postarchive
+title: DuckDB Everywhere
+excerpt: This page contains a collection of interesting DuckDB deployments from small single-board computers to big servers. We give DuckDB a spin on cheap hardware and in high-IO cloud servers.
+---
+
+{% assign all_tags = "" %}
+{% for item in site.everywhere %}
+  {% assign all_tags = all_tags | append: item.tags | join: "," | append: "," %}
+{% endfor %}
+{% assign unique_tags = all_tags | split: "," | uniq | sort %}
+
+<div class="wrap blog_typography">
+  <p>This page contains a collection of interesting DuckDB deployments from small single-board computers to big servers. We give DuckDB a spin on cheap hardware and in high-IO cloud servers.</p>
+</div>
+
+<div class="wrap">
+  <div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
+    <input type="text" id="search-input" placeholder="Search...">
+    <div class="filtertags">
+      <div class="filter-highlight"></div>
+      <button type="button" class="filter-btn active" data-filter="*">All</button>
+      <button type="button" class="filter-btn" data-filter=".cloud">Cloud</button>
+      <button type="button" class="filter-btn" data-filter=".portable-devices">Portable devices</button>
+      <button type="button" class="filter-btn" data-filter=".microcomputers">Microcomputers</button>
+      <button type="button" class="filter-btn" data-filter=".other">Other</button>
+    </div>
+  </div>
+</div>
+
+<div class="post-list wrap">
+  <div class="newstiles everywhere-tiles">
+    {% assign sorted_everywhere = site.everywhere | sort: 'date' | reverse %}
+    {% for item in sorted_everywhere %}
+      {% assign tag_classes = "" %}
+      {% for tag in item.tags %}
+        {% assign slugified_tag = tag | slugify %}
+        {% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
+      {% endfor %}
+      <div class="everywherepreview postpreview {{ tag_classes | downcase }}" data-title="{{ item.title | escape }}">
+        <a href="/everywhere/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
+        <div class="postimg custom">
+          {% if item.thumb %}
+            <img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
+          {% else %}
+            {% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
+            <img src="/images/everywhere/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+          {% endif %}
+        </div>
+        <div class="postdetails">
+          {% if item.tags %}
+            <div class="tags">
+              {% for tag in item.tags %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+              {% if item.length %}
+                <span class="length">{{ item.length }}</span>
+              {% endif %}
+            </div>
+          {% endif %}
+          <h3>{{ item.title }}</h3>
+          <div class="meta">
+            <div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
+            <div class="author">{{ item.author }}</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
