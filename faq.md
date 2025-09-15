@@ -290,9 +290,11 @@ To work on the same data set with multiple DuckDB clients, consider using the [D
 ### Is there an official DuckDB Docker image available?
 
 <div class="answer" markdown="1">
-There is no official DuckDB Docker image available.
+We are going to release an official Docker image in September 2025.
+<!--
 DuckDB uses an [in-process deployment model]({% link why_duckdb.md %}#simple), where the client application and DuckDB are running in the same process.
 Additionally to the DuckDB clients for Python, R, and other programming languages, DuckDB is also available as a standalone command-line client. This client is available on a [wide range of platforms]({% link docs/installation/index.html %}?version=stable&environment=cli) and is portable without containerization, making it unnecessary to containerize the process for most deployments.
+-->
 </div>
 
 </div>
