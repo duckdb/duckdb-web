@@ -67,6 +67,9 @@ collections:
   science:
     output: true
     permalink: /science/:title/
+  everywhere:
+    output: true
+    permalink: /everywhere/:title/
 
 excerpt_separator: <!--more-->
 future: true
