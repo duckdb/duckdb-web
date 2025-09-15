@@ -204,7 +204,43 @@ pip install duckdb
 
 
 <div
+    data-platform="windows"
     data-environment="r"
+    data-docs="/docs/stable/clients/r.html">
+
+{%- highlight bash -%}
+install.packages("duckdb")
+{%- endhighlight -%}
+</div>
+
+
+<div
+    data-platform="macos"
+    data-environment="r"
+    data-docs="/docs/stable/clients/r.html">
+
+{%- highlight bash -%}
+install.packages("duckdb")
+{%- endhighlight -%}
+</div>
+
+
+<div
+    data-platform="linux"
+    data-environment="r"
+    data-architecture="x86_64"
+    data-docs="/docs/stable/clients/r.html">
+
+{%- highlight bash -%}
+install.packages("duckdb")
+{%- endhighlight -%}
+</div>
+
+
+<div
+    data-platform="linux"
+    data-environment="r"
+    data-architecture="arm64"
     data-docs="/docs/stable/clients/r.html">
 
 {%- highlight bash -%}
@@ -212,11 +248,9 @@ install.packages("duckdb")
 {%- endhighlight -%}
 
 <div class="note">
-    On certain platforms, such as Linux AArch64 (arm64), the DuckDB R package needs to be compiled from source. To speed up this process, follow the instructions on the <a href="/docs/stable/dev/building/r">R build page</a>.
+    On Linux / arm64, the DuckDB R package needs to be compiled from source. To speed this up, follow the instructions on the <a href="/docs/stable/dev/building/r">R build page</a>.
 </div>
 </div>
-
-
 
 <div
     data-environment="java"
@@ -380,6 +414,15 @@ go get github.com/marcboeker/go-duckdb
 </div>
 
 
+<div
+    data-platform="windows"
+    data-environment="odbc"
+    data-docs="/docs/stable/clients/odbc/overview"
+    data-architecture="arm64">
+
+The ODBC client is not yet available as a binary for Windows / arm64.
+
+</div>
 
 
 
