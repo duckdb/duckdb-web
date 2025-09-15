@@ -31,7 +31,6 @@
       archFromURL: false,
       envFromURL: false
     };
-    var initKeepEnvOpen = false;
 
     function detectPlatform() {
       var p = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
@@ -210,11 +209,6 @@
     function updateFoldouts(animate) {
       var shouldClosePlat = !!state.platform && (state.platform === 'macos' || !!state.architecture);
       setFoldoutOpen($foldPlat, !shouldClosePlat, !!animate);
-
-      var shouldCloseEnv = !!state.environment && !initKeepEnvOpen;
-      setFoldoutOpen($foldEnv, !shouldCloseEnv ? true : false, !!animate);
-
-      initKeepEnvOpen = false;
     }
 
     function bestTemplate() {
@@ -491,7 +485,6 @@
 
     // Init
     readURL();
-    initKeepEnvOpen = !urlFlags.envFromURL;
     normalizeState();
     applyUIFromState();
     updateAvailability();
