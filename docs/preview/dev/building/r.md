@@ -5,7 +5,7 @@ title: R
 
 This page contains instructions for building the R client library.
 
-## The Build Only Uses a Single Thread
+## Parallelizing the Build
 
 **Problem:**
 By default, R compiles packages using a single thread, which causes the build to be slow.

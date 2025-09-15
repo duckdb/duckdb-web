@@ -97,7 +97,7 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Replaces `NULL` values of `expr` with an linear interpolation based on the closest non-`NULL` values and  the sort values. Both values must support arithmetic and there must be only one ordering key. For missing values at the ends, linear extrapolation is used. Failure to interpolate results in the `NULL` value being retained. |
+| **Description** | Replaces `NULL` values of `expr` with a linear interpolation based on the closest non-`NULL` values and  the sort values. Both values must support arithmetic and there must be only one ordering key. For missing values at the ends, linear extrapolation is used. Failure to interpolate results in the `NULL` value being retained. |
 | **Return type** | Same type as `expr` |
 | **Example** | `fill(column)` |
 

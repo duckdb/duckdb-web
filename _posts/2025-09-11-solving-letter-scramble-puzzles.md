@@ -1,0 +1,164 @@
+---
+layout: post
+title: "Solving Letter Scramble Puzzles with DuckDB"
+author: "Gabor Szarnyas"
+tags: ["using DuckDB"]
+thumb: "/images/blog/thumbs/letter-scramble-puzzle.svg"
+image: "/images/blog/thumbs/letter-scramble-puzzle.png"
+excerpt: "In this lighthearted post, we solve a puzzle type that's on display in Dutch trains."
+---
+
+The [Dutch National Railways (NS)](https://www.ns.nl/) is releasing a “letter scramble”-style puzzle every week where
+they give a term whose letters can be found in a Dutch train station's name.
+In order to have a match, it doesn't have to be a perfect anagram – for example, `Amsterdam` (9 letters) matches both `mastered` (8 letters) and `Dream Master` (11 letters) because all three terms contain the same letters, just with different amounts of repetitions. Let's call this a “weak anagram”.
+
+The puzzle in the first week of September was `Clumsy Rental Red`. Let's try to find the solution using DuckDB!
+
+## Letter Scrambling Macro
+
+First, let's create a [macro]({% link docs/stable/sql/statements/create_macro.md %}) that turns a string into an ordered list of unique characters:
+
+```sql
+CREATE MACRO order_letters(s) AS 
+    lower(s)                  -- convert all characters to lowercase
+    .regexp_replace(          -- remove all non-Unicode letters
+        '[^\p{L}]', '', 'g'
+    )
+    .string_to_array('')      -- turn the string into a list
+    .list_distinct()          -- eliminate duplicate elements from the list
+    .list_sort();             -- sort the list
+```
+
+We can use this to see whether two terms are weak anagrams:
+
+```sql
+SELECT
+    order_letters('Amsterdam') AS letters_1,
+    order_letters('mastered') AS letters_2,
+    order_letters('Dream Master') AS letters_3,
+    letters_1 = letters_2 AS matches_1,
+    letters_1 = letters_3 AS matches_2;
+```
+
+|       letters_1       |       letters_2       |       letters_3       | matches_1 | matches_2 |
+|-----------------------|-----------------------|-----------------------|----------:|----------:|
+| [a, d, e, m, r, s, t] | [a, d, e, m, r, s, t] | [a, d, e, m, r, s, t] | true      | true      |
+
+Indeed, both expressions are weak anagrams of `Amsterdam`!
+
+## Matching against Station Names
+
+To solve the puzzle, we need a list of train stations.
+Luckily, one of our go-to datasets at DuckDB is the [Dutch railway datasets]({% link docs/stable/guides/snippets/dutch_railway_datasets.md %}), including its services and train stations. We can create a table with the station names:
+
+```sql
+CREATE TABLE stations AS
+    FROM 'https://blobs.duckdb.org/nl-railway/stations-2023-09.csv';
+```
+
+Then, we can select the station names that are weak anagrams of the puzzle:
+
+```sql
+SELECT name_long
+FROM stations
+WHERE order_letters(name_long) = order_letters('Clumsy Rental Red');
+```
+
+We are not going to spoil the solution but you can reveal it below.
+
+<details markdown='1'>
+<summary markdown='span'>
+Click to see the solution.
+</summary>
+[Lelystad Centrum](https://en.wikipedia.org/wiki/Lelystad_Centrum_railway_station)
+</details>
+
+## Table Macro for Finding Weak Anagrams
+
+To find station name, which is a weak anagram to a term, we can use a [table macro]({% link docs/stable/sql/statements/create_macro.md %}#table-macros):
+
+```sql
+CREATE MACRO find_weak_anagram(s) AS TABLE
+    SELECT name_long
+    FROM stations
+    WHERE order_letters(name_long) = order_letters(s);
+```
+
+Then, we can find the solution using a simple SQL statement:
+
+```sql
+FROM find_weak_anagram('Clumsy Rental Red');
+```
+
+## Weak Anagram Station Pairs
+
+We got curious: are there two stations whose names are weak anagrams of each other?
+We can create a Cartesian product from the station names and compare their ordered letters to find out:
+
+```sql
+SELECT s1.name_long AS station_1, s2.name_long AS station_2
+FROM stations s1, stations s2
+WHERE s1.name_long.order_letters() = s2.name_long.order_letters()
+  -- ensure symmetry-breaking
+  AND s1.name_long < s2.name_long
+  -- make sure the station names don't contain each other
+  AND NOT s1.name_long.contains(s2.name_long)
+  AND NOT s2.name_long.contains(s1.name_long);
+```
+
+There are in fact three station pairs whose names are weak anagrams of each other:
+
+|  station_1  | station_2  |
+|-------------|------------|
+| Melsele     | Selm       |
+| Etten-Leur  | Lunteren   |
+| Diemen Zuid | Emmen Zuid |
+
+## Cleaning Up
+
+Most of the time, you don't have to clean up after running a simple DuckDB script:
+simply closing the in-memory database session takes care of the cleanup.
+However, it's worth pointing out that macros in DuckDB are persisted and this can get in the way
+– e.g., when copying the database into a [DuckLake](https://ducklake.select/):
+
+```sql
+ATTACH 'ducklake:metadata.ducklake' AS my_ducklake;
+COPY FROM DATABASE memory TO my_ducklake;
+```
+
+DuckLake [does not support macros (functions)](https://ducklake.select/docs/stable/duckdb/unsupported_features.html#likely-to-be-supported-in-the-future), so it throws the following error:
+
+```console
+Not implemented Error:
+DuckLake does not support functions
+```
+
+There are two options to work around this problem.
+
+- If you need to keep the macros and you are using DuckDB as your catalog database for DuckLake, you can use the [DuckDB to DuckLake migration script](https://ducklake.select/docs/preview/duckdb/migrations/duckdb_to_ducklake#migration-script). This will migrate the macros into the catalog of your DuckLake.
+
+- If you do not need the macros or your destination's catalog database does not support them, you can drop them with the following commands:
+
+  ```sql
+  DROP MACRO order_letters;
+  DROP MACRO TABLE find_weak_anagram;
+  ```
+
+  Without the macros, the copying to DuckLake call succeeds.
+
+## Summary
+
+That was our quick guide to solving the NS puzzle.
+Is this a database problem? Not really, but DuckDB's SQL allows you to succinctly formulate it and solve it in less than 0.1 seconds!
+And sure, ChatGPT can solve this puzzle – but it spends _almost a minute_ (using a ton of computing resources) to reason its way through it.
+
+Happy puzzle solving!
+
+> This week, the puzzle is `Zere Tanda Voozan`.
+> You can find the weekly puzzle's solution on the [NS website](https://www.ns.nl/dagje-uit/ontspanning/puzzel.html).
+
+## Update on Weak vs. Strong Anagrams
+
+Reader feedback indicated that the NS puzzles are _strong anagrams_ (with the same amount of letters as the station name) and the puzzle term for the first week of September was actually `Clumsy Rental Ted` and not `Clumsy Rental Red`!
+The latter is impossible to fact-check but we looked into [historical data](https://gist.github.com/szarnyasg/fdf7f5be161df8a6b0b930c1768797fd), ran it through our DuckDB solver script, and it turned out that 95% of the time there are _strong anagrams._
+However, occasionally weak anagrams are also given such as `Alleen Costume Hut` which stands for `Houten Castellum` even though the puzzle term and the station name have different numbers of `e` letters.

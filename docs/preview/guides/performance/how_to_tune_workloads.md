@@ -5,7 +5,7 @@ title: Tuning Workloads
 
 ## The `preserve_insertion_order` Option
 
-When importing or exporting data sets (from/to the Parquet or CSV formats), which are much larger than the available memory, an out of memory error may occur:
+When importing or exporting datasets (from/to the Parquet or CSV formats), which are much larger than the available memory, an out of memory error may occur:
 
 ```console
 Out of Memory Error: failed to allocate data of size ... (.../... used)
@@ -33,7 +33,7 @@ Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to Hy
 
 ## Larger-than-Memory Workloads (Out-of-Core Processing)
 
-A key strength of DuckDB is support for larger-than-memory workloads, i.e., it is able to process data sets that are larger than the available system memory (also known as _out-of-core processing_).
+A key strength of DuckDB is support for larger-than-memory workloads, i.e., it is able to process datasets that are larger than the available system memory (also known as _out-of-core processing_).
 It can also run queries where the intermediate results cannot fit into memory.
 This section explains the prerequisites, scope, and known limitations of larger-than-memory processing in DuckDB.
 
@@ -67,7 +67,7 @@ That said, there are some limitations at the moment:
 
 * If multiple blocking operators appear in the same query, DuckDB may still throw an out-of-memory exception due to the complex interplay of these operators.
 * Some [aggregate functions]({% link docs/preview/sql/functions/aggregates.md %}), such as `list()` and `string_agg()`, do not support offloading to disk.
-* [Aggregate functions that use sorting]({% link docs/preview/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions) are holistic, i.e., they need all inputs before the aggregation can start. As DuckDB cannot yet offload some complex intermediate aggregate states to disk, these functions can cause an out-of-memory exception when run on large data sets.
+* [Aggregate functions that use sorting]({% link docs/preview/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions) are holistic, i.e., they need all inputs before the aggregation can start. As DuckDB cannot yet offload some complex intermediate aggregate states to disk, these functions can cause an out-of-memory exception when run on large datasets.
 * The `PIVOT` operation [internally uses the `list()` function]({% link docs/preview/sql/statements/pivot.md %}#internals), therefore it is subject to the same limitation.
 
 ## Profiling

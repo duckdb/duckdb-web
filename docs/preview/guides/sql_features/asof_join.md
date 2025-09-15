@@ -19,7 +19,7 @@ _Give me the value of the property **as of this time**_.
 More generally, however, AsOf joins embody some common temporal analytic semantics,
 which can be cumbersome and slow to implement in standard SQL.
 
-## Portfolio Example Data Set
+## Portfolio Example Dataset
 
 Let's start with a concrete example.
 Suppose we have a table of stock [`prices`](/data/prices.csv) with timestamps:

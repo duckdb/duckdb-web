@@ -27,7 +27,7 @@ SET threads = 4;
 
 #### Memory for Ideal Performance
 
-The amount of memory required for ideal performance depends on several factors, including the data set size and the queries to execute.
+The amount of memory required for ideal performance depends on several factors, including the dataset size and the queries to execute.
 Maybe surprisingly, the _queries_ have a larger effect on the memory requirement.
 Workloads containing large joins over many-to-many tables yield large intermediate datasets and thus require more memory for their evaluation to fully fit into the memory.
 As an approximation, aggregation-heavy workloads require 1-2 GB memory per thread and join-heavy workloads require 3-4 GB memory per thread.

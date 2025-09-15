@@ -6,28 +6,28 @@
 	font-weight: 600;
 	line-height: 1.1;
 	letter-spacing: -0.00249em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin display-2 {
 	font-size: var(--type-display-2, 45px);
 	font-weight: 600;
 	line-height: 1.2;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin display-3 {
 	font-size: var(--type-display-3, 36px);
 	font-weight: 600;
 	line-height: 1.2;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin headline-1 {
 	font-size: var(--type-headline-1, 32px);
 	font-weight: 600;
 	line-height: 1.2;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin headline-2 {
@@ -35,7 +35,7 @@
 	font-weight: 600;
 	line-height: 1.2;
 	letter-spacing: 0.001em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin headline-3 {
@@ -43,14 +43,14 @@
 	font-weight: 600;
 	line-height: 1.2;
 	letter-spacing: 0.001em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin title-1 {
 	font-size: var(--type-title-1, 18px);
 	font-weight: 600;
 	line-height: 1.2;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin title-2 {
@@ -58,7 +58,7 @@
 	font-weight: 600;
 	line-height: 1.2;
 	letter-spacing: 0.001em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin title-3 {
@@ -66,7 +66,7 @@
 	font-weight: 600;
 	line-height: 1.2;
 	letter-spacing: 0.001em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin label-1 {
@@ -74,7 +74,7 @@
 	font-weight: 600;
 	line-height: 1;
 	letter-spacing: 0.001em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin label-2 {
@@ -82,7 +82,7 @@
 	font-weight: 600;
 	line-height: 1;
 	letter-spacing: 0.001em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin label-3 {
@@ -90,14 +90,14 @@
 	font-weight: 600;
 	line-height: 1;
 	letter-spacing: 0.005em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin body-large {
 	font-size: var(--type-body-large, 18px);
 	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.6;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin body-standard {
@@ -105,7 +105,7 @@
 	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.5;
 	letter-spacing: 0.0025em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin body-small {
@@ -113,7 +113,7 @@
 	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.4;
 	letter-spacing: 0.005em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin tiny {
@@ -121,7 +121,7 @@
 	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.2;
 	letter-spacing: 0.005em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin pre-title {
@@ -130,14 +130,14 @@
 	font-weight: var(--type-weight-standard, 450);
 	line-height: 1.2;
 	letter-spacing: 0.03em;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin menu-item {
 	font-size: var(--type-menu-items, 15px);
 	font-weight: 450;
 	line-height: 1;
-	font-family: "SuisseIntl";
+	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin code-standard {
@@ -439,6 +439,11 @@
 		padding: 0px 2px;
 		margin: 0;
 		margin-bottom: 0px;
+	}
+	li .highlight pre > code{
+		border: none;
+		padding: 0;
+		background: unset;
 	}
 
 	h1, h2, h3, h4, h5 {

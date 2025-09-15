@@ -194,6 +194,12 @@ body.documentation {
             text-align: center;
             border: none;
         }
+        
+        video.darkmode-img,
+        img.darkmode-img{
+            display: none;
+        }
+        
     }
 
     code em {

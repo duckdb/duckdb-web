@@ -17,7 +17,7 @@ or in a remote data bucket that is accessible from the server.
 ## Database Creation
 
 When using a DuckDB database file
-the data sets do not actually need to be imported into DuckDB tables;
+the datasets do not actually need to be imported into DuckDB tables;
 it suffices to create views of the data.
 For example, this will create a view of the `h2oai` Parquet test file in the current DuckDB code base:
 

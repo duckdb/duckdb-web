@@ -290,9 +290,11 @@ To work on the same data set with multiple DuckDB clients, consider using the [D
 ### Is there an official DuckDB Docker image available?
 
 <div class="answer" markdown="1">
-There is no official DuckDB Docker image available.
+We are going to release an official Docker image in September 2025.
+<!--
 DuckDB uses an [in-process deployment model]({% link why_duckdb.md %}#simple), where the client application and DuckDB are running in the same process.
 Additionally to the DuckDB clients for Python, R, and other programming languages, DuckDB is also available as a standalone command-line client. This client is available on a [wide range of platforms]({% link docs/installation/index.html %}?version=stable&environment=cli) and is portable without containerization, making it unnecessary to containerize the process for most deployments.
+-->
 </div>
 
 </div>
@@ -307,7 +309,7 @@ Additionally to the DuckDB clients for Python, R, and other programming language
 
 You can install multiple DuckDB clients on the same computer.
 These clients are installed individually and can have different DuckDB versions.
-For example, you can use the DuckDB 1.2.1 package in R, DuckDB 1.2.2 as the CLI client, and the preview release in Python.
+For example, you can use the DuckDB 1.3.2 package in R, DuckDB 1.4.0 as the CLI client, and the preview release in Python.
 
 If you are unsure about the DuckDB version used in a process, run the `PRAGMA version` query, which prints the version of DuckDB.
 
@@ -349,7 +351,7 @@ DuckDB has been tested on machines with 100+ CPU cores and terabytes of memory.
 
 DuckDB's native database format also scales for multiple terabytes of data but this needs some planning – see the [“Working with Huge Databases” page]({% link docs/stable/guides/performance/working_with_huge_databases.md %}).
 
-For working with large-scale datasets and/or collaborating on the same dataset, consider using the [DuckLake](https://ducklake.select/) lakehouse format.
+For working with large-scale datasets and/or collaborating on the same dataset, consider using the [DuckLake](https://ducklake.select/) Lakehouse format.
 
 </div>
 
@@ -443,6 +445,20 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 <div class="answer" markdown="1">
 
 Please check the [release calendar]({% link release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### Which DuckDB clients and versions are officially supported?
+
+<div class="answer" markdown="1">
+
+Official supports covers the [primary clients]({% link docs/stable/clients/overview.md %}) of the latest stable version (currently {{ site.current_duckdb_version }}).
 
 </div>
 

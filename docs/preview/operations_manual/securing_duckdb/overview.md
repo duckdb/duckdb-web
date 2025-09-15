@@ -7,7 +7,7 @@ DuckDB is quite powerful, which can be problematic, especially if untrusted SQL 
 This page lists some options to restrict the potential fallout from malicious SQL queries.
 
 The approach to securing DuckDB varies depending on your use case, environment, and potential attack models.
-Therefore, consider the security-related configuration options carefully, especially when working with confidential data sets.
+Therefore, consider the security-related configuration options carefully, especially when working with confidential datasets.
 
 If you plan to embed DuckDB in your application, please consult the [“Embedding DuckDB”]({% link docs/preview/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
 

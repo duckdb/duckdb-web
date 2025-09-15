@@ -14,7 +14,7 @@ positional (`$1`),
 and named (`$param`).
 Note that not all clients support all of these syntaxes, e.g., the [JDBC client]({% link docs/preview/clients/java.md %}) only supports auto-incremented parameters in prepared statements.
 
-### Example Data Set
+### Example Dataset
 
 In the following, we introduce the three different syntaxes and illustrate them with examples using the following table.
 

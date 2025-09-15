@@ -81,7 +81,7 @@ In all cases, we take the data from `.csv.gz` files, and measure the time requir
 | Load without primary key                      |        121.0 s |
 | Load without primary key then add primary key |        242.0 s |
 
-For this data set, primary keys will only have a (small) positive effect on highly selective queries such as when filtering on a single identifier.
+For this dataset, primary keys will only have a (small) positive effect on highly selective queries such as when filtering on a single identifier.
 Definining primary keys (or indexes) will not have an effect on join and aggregation operators.
 
 > Bestpractice For best bulk load performance, avoid primary key constraints.

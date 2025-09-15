@@ -97,7 +97,7 @@ The data generator function `dbgen` has the following parameters:
 | `step`      | `UINTEGER` | Defines the partition to be generated, indexed from 0 to `children` - 1. Must be defined when the `children` arguments is defined |
 | `suffix`    | `VARCHAR`  | Append the `suffix` to table names                                                                                                |
 
-## Pre-Generated Data Sets
+## Pre-Generated Datasets
 
 Pre-generated DuckDB databases for TPC-H are available for download:
 
@@ -112,9 +112,9 @@ Pre-generated DuckDB databases for TPC-H are available for download:
 
 ## Resource Usage of the Data Generator
 
-Generating TPC-H data sets for large scale factors takes a significant amount of time.
+Generating TPC-H datasets for large scale factors takes a significant amount of time.
 Additionally, _if the generation is performed in a single step,_ it requires a large amount of memory.
-The following table gives an estimate on the resources required to produce DuckDB database files containing the generated TPC-H data set using 128 threads.
+The following table gives an estimate on the resources required to produce DuckDB database files containing the generated TPC-H dataset using 128 threads.
 
 | Scale factor | Database size | Generation time | Single-step generation's memory usage |
 | -----------: | ------------: | --------------: | ------------------------------------: |

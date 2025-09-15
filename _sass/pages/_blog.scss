@@ -140,7 +140,8 @@ section.upcoming-events,
 	}
 }
 
-.science-tiles .sciencepreview.postpreview {
+.science-tiles .sciencepreview.postpreview,
+.everywhere-tiles .everywherepreview.postpreview {
 	width: calc(33.333% - 15px);
 	.postimg{
 		aspect-ratio: 1/1;
@@ -148,7 +149,8 @@ section.upcoming-events,
 	}
 }
 
-main.main-science .recentposts .newstileswrap .postpreview {
+main.main-science .recentposts .newstileswrap .postpreview,
+main.main-everywhere .recentposts .newstileswrap .postpreview {
 	width: calc(33.333% - 15px);
 	
 	.postimg {

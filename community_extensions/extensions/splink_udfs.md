@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: splink_udfs
   description: Phonetic, text normalization and address matching functions for record linkage.
-  version: 0.0.8
+  version: 0.0.9
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,8 @@ extension:
 
 repo:
   github: moj-analytical-services/splink_udfs
-  ref: 06c42c48faa4c3e926f1dca5b1d6e64eab952395
+  ref: 69b6b0c864854b767cb7fcd3594bc433e993d64d
+  ref_next: e8e5804e4f18eb9c5b7aa8c96088349555be9add
 
 docs:
   hello_world: |
@@ -59,17 +60,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name        | function_type | description | comment | examples |
-|----------------------------|---------------|-------------|---------|----------|
-| build_cleaned_address      | scalar        | NULL        | NULL    |          |
-| build_suffix_trie          | aggregate     | NULL        | NULL    |          |
-| double_metaphone           | scalar        | NULL        | NULL    |          |
-| format_address_with_counts | scalar        | NULL        | NULL    |          |
-| ngrams                     | scalar        | NULL        | NULL    |          |
-| peel_end_tokens            | scalar        | NULL        | NULL    |          |
-| soundex                    | scalar        | NULL        | NULL    |          |
-| strip_diacritics           | scalar        | NULL        | NULL    |          |
-| unaccent                   | scalar        | NULL        | NULL    |          |
+|   function_name   | function_type | description | comment | examples |
+|-------------------|---------------|-------------|---------|----------|
+| build_suffix_trie | aggregate     | NULL        | NULL    |          |
+| double_metaphone  | scalar        | NULL        | NULL    |          |
+| find_address      | scalar        | NULL        | NULL    |          |
+| ngrams            | scalar        | NULL        | NULL    |          |
+| soundex           | scalar        | NULL        | NULL    |          |
+| strip_diacritics  | scalar        | NULL        | NULL    |          |
+| unaccent          | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
