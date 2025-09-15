@@ -15,9 +15,13 @@ which lives in the Andean highlands of Colombia, Venezuela and Ecuador.
 
 In this blog post, we cover the most important features of the new release. DuckDB is moving rather quickly, and we could cover only a small fraction of the changes in this release. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
 
-<source src="https://blobs.duckdb.org/videos/cli-eta-light.mov" type="video/mp4" />{: .lightmode-img }
-<source src="https://blobs.duckdb.org/videos/cli-eta-dark.mov" type="video/mp4" />{: .darkmode-img }
 
+<video muted controls loop width="700" class="lightmode-img">
+  <source src="https://blobs.duckdb.org/videos/cli-eta-light.mov" type="video/mp4">
+</video>
+<video muted controls loop width="700" class="darkmode-img">
+  <source src="https://blobs.duckdb.org/videos/cli-eta-dark.mov" type="video/mp4">
+</video>
 
 ## Breaking Changes and Deprecations
 
