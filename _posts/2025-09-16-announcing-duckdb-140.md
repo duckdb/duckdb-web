@@ -85,7 +85,7 @@ Click to see the end-of-life (EOL) dates for DuckDB releases.
 Being able to encrypt DuckDB database files has been a [long-standing feature request](https://github.com/duckdb/duckdb/discussions/4512). Starting with this release, DuckDB supports encryption of its files. Encryption keys are given using the `ENCRYPTION_KEY` parameter for to [`ATTACH`]({% link docs/stable/sql/statements/attach.md %}), like so:
 
 ```sql
-ATTACH 'encrypted.db' AS enc (ENCRYPTION_KEY 'asdf');
+ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack');
 ```
 
 DuckDB uses the industry-standard [AES encryption](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) with a key length of 256 bits using the recommended [GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode) mode by default.
