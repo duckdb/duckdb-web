@@ -12,7 +12,7 @@ We are proud to release DuckDB v1.4.0, named “Andium” after the _Andean teal
 
 In this blog post, we cover the most important updates for this release around support, features and extensions. DuckDB is moving rather quickly, and we could cover only a small fraction of the changes in this release. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
 
-> To install the new version, please visit the new [installation page]({% link install/index.html %}). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link docs/installation/index.html %}). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 ## Long Term Support (LTS) Edition
 
