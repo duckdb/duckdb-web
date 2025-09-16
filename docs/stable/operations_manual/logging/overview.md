@@ -129,6 +129,33 @@ CALL enable_logging(storage_path='path/to/store/logs');
 
 ## Advanced Usage
 
+### Normalized vs denormalized logging
+
+DuckDB's log storages can log in two ways: normalized vs denormalized.
+
+In denormalized logging, the log context information is appended directly to each log entry, while in normalized logging
+the log entries are stored separately with context_ids referencing the context information.
+
+| Log Storage | Normalized   |
+|-------------|--------------|
+| `memory`    | yes          |
+| `file`      | configurable |
+| `stdout`    | no           |
+
+For file storage, you can switch between normalized and denormalized by providing a path ending in .csv (for normalized)
+or without .csv (for denormalized). For file logging, denormalized is generally recommended since this increases performance 
+and reduces the total size of the logs. To configure normalization of `file` log storage:
+
+```sql
+-- normalized: creates `/tmp/duckdb_log_contexts.csv` and `/tmp/duckdb_log_entries.csv`
+CALL enable_logging(storage_path='/tmp');
+-- denormalized: creates `/tmp/logs.csv`
+CALL enable_logging(storage_path='/tmp/logs.csv');
+```
+
+Note that the difference between normalized and denormalized is typically hidden from users through the 'duckdb_logs' function,
+which automatically joins normalized tables into a single unified result. To illustrate, both configurations above will be 
+queryable using `FROM duckdb_logs;` and will produce identical results.  
 
 ### Buffer Size
 
@@ -163,7 +190,8 @@ your logging:
 CALL enable_logging(storage='stdout', storage_buffer_size=2048);
 ```
 
-Or imagine you are debugging a crash in DuckDB and you want to use the `file` logger to understand what's going on: simply disable the
+Or imagine you are debugging a crash in DuckDB and you want to use the `file` logger to understand what's going on:
+Simply disable the
 buffering using:
 
 ```sql
@@ -171,7 +199,8 @@ CALL enable_logging(storage_path='/tmp/mylogs', storage_buffer_size=2048);
 ```
 
 ### Syntactic sugar
-DuckDB contains some syntactic sugar to make common paths
+
+DuckDB contains some syntactic sugar to make common paths:
 
 The following statements are all equal 
 ```sql
@@ -180,5 +209,5 @@ CALL enable_logging(storage='file', storage_config={'path': 'path/to/store/logs'
 -- using shorthand for common path storage config param 
 CALL enable_logging(storage='file', storage_path='path/to/store/logs');
 -- omitting `storage='file'` -> is implied from presence of `storage_config`
-CALL enable_logging(storage_config='path': 'path/to/store/logs');
+CALL enable_logging(storage_config={'path': 'path/to/store/logs'});
 ```
