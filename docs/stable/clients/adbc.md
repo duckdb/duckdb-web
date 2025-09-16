@@ -7,7 +7,7 @@ redirect_from:
 title: ADBC Client
 ---
 
-> The latest version of the DuckDB ADBC client is {{ site.current_duckdb_version }}.
+> The latest stable version of the DuckDB ADBC client is {{ site.current_duckdb_version }}.
 
 [Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/), similarly to ODBC and JDBC, is a C-style API that enables code portability between different database systems. This allows developers to effortlessly build applications that communicate with database systems without using code specific to that system. The main difference between ADBC and ODBC/JDBC is that ADBC uses [Arrow](https://arrow.apache.org/) to transfer data between the database system and the application. DuckDB has an ADBC driver, which takes advantage of the [zero-copy integration between DuckDB and Arrow]({% post_url 2021-12-03-duck-arrow %}) to efficiently transfer data.
 
@@ -248,23 +248,10 @@ func (r *DuckDBSQLRunner) importRecord(sr io.Reader) error {
         return fmt.Errorf("failed to create IPC reader: %w", err)
     }
     defer rdr.Release()
-    stmt, err := r.conn.NewStatement()
-    if err != nil {
-        return fmt.Errorf("failed to create new statement: %w", err)
-    }
-    if err := stmt.SetOption(adbc.OptionKeyIngestMode, adbc.OptionValueIngestModeCreate); err != nil {
-        return fmt.Errorf("failed to set ingest mode: %w", err)
-    }
-    if err := stmt.SetOption(adbc.OptionKeyIngestTargetTable, "temp_table"); err != nil {
-        return fmt.Errorf("failed to set ingest target table: %w", err)
-    }
-    if err := stmt.BindStream(r.ctx, rdr); err != nil {
-        return fmt.Errorf("failed to bind stream: %w", err)
-    }
-    if _, err := stmt.ExecuteUpdate(r.ctx); err != nil {
-        return fmt.Errorf("failed to execute update: %w", err)
-    }
-    return stmt.Close()
+
+    _, err = adbc.IngestStream(r.ctx, r.conn, rdr, "temp_table", adbc.OptionValueIngestModeCreate, adbc.IngestStreamOptions{})
+
+    return err
 }
 
 func (r *DuckDBSQLRunner) runSQL(sql string) ([]arrow.Record, error) {

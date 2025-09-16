@@ -5,7 +5,7 @@ redirect_from:
 title: Building Extensions
 ---
 
-[Extensions]({% link docs/stable/core_extensions/overview.md %}) can be built from source and installed from the resulting local binary.
+[Extensions]({% link docs/stable/extensions/overview.md %}) can be built from source and installed from the resulting local binary.
 
 ## Building Extensions
 

@@ -14,7 +14,7 @@ The `PRAGMA` statement is a SQL extension adopted by DuckDB from SQLite. `PRAGMA
 `PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement]({% link docs/stable/sql/statements/set.md %}) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
 
 For DuckDB's built in configuration options, see the [Configuration Reference]({% link docs/stable/configuration/overview.md %}#configuration-reference).
-DuckDB [extensions]({% link docs/stable/core_extensions/overview.md %}) may register additional configuration options.
+DuckDB [extensions]({% link docs/stable/extensions/overview.md %}) may register additional configuration options.
 These are documented in the respective extensions' documentation pages.
 
 This page contains the supported `PRAGMA` settings.
@@ -319,6 +319,22 @@ Independent of the format, `enable_profiling` is **mandatory** to enable profili
 ```sql
 PRAGMA enable_profiling;
 PRAGMA enable_profile;
+```
+
+### Profiling Coverage
+
+By default, the profiling coverage is set to `SELECT`.
+`SELECT` runs the profiler for each operator in the physical plan of a `SELECT` statement.
+
+```sql
+SET profiling_coverage = 'SELECT';
+```
+
+By default, the profiler **does not** emit profiling information for other statement types (`INSERT INTO`, `ATTACH`, etc.).
+To run the profiler for all statement types, change this setting to `ALL`.
+
+```sql
+SET profiling_coverage = 'ALL';
 ```
 
 ### Profiling Format

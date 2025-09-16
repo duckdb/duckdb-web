@@ -77,8 +77,6 @@ The value class represents a single value of any type.
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_struct_value"><span class="nf">duckdb_create_struct_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_list_value"><span class="nf">duckdb_create_list_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_array_value"><span class="nf">duckdb_create_array_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_map_value"><span class="nf">duckdb_create_map_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">map_type</span>, <span class="kt">duckdb_value</span> *<span class="nv">keys</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">entry_count</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_union_value"><span class="nf">duckdb_create_union_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">union_type</span>, <span class="kt">idx_t</span> <span class="nv">tag_index</span>, <span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_get_map_size"><span class="nf">duckdb_get_map_size</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_key"><span class="nf">duckdb_get_map_key</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_value"><span class="nf">duckdb_get_map_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
@@ -89,7 +87,6 @@ The value class represents a single value of any type.
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_enum_value"><span class="nf">duckdb_create_enum_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
 <span class="kt">uint64_t</span> <a href="#duckdb_get_enum_value"><span class="nf">duckdb_get_enum_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_struct_child"><span class="nf">duckdb_get_struct_child</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="kt">char</span> *<a href="#duckdb_value_to_string"><span class="nf">duckdb_value_to_string</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 </code></pre></div></div>
 
 #### `duckdb_destroy_value`
@@ -176,7 +173,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_int8`
 
-Creates a value from an int8_t (a tinyint)
+Creates a value from a int8_t (a tinyint)
 
 ##### Syntax
 
@@ -218,7 +215,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_int16`
 
-Creates a value from an int16_t (a smallint)
+Creates a value from a int16_t (a smallint)
 
 ##### Syntax
 
@@ -260,7 +257,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_int32`
 
-Creates a value from an int32_t (an integer)
+Creates a value from a int32_t (an integer)
 
 ##### Syntax
 
@@ -837,7 +834,7 @@ Returns the int32_t value of the given value.
 
 ##### Parameters
 
-* `val`: A duckdb_value containing an integer
+* `val`: A duckdb_value containing a integer
 
 ##### Return Value
 
@@ -1407,60 +1404,6 @@ The array value, or nullptr, if the child type is `DUCKDB_TYPE_ANY` or `DUCKDB_T
 
 <br>
 
-#### `duckdb_create_map_value`
-
-Creates a map value from a map type and two arrays, one for the keys and one for the values, each of length
-`entry_count`. Must be destroyed with `duckdb_destroy_value`.
-
-##### Syntax
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_map_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">map_type</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> *<span class="nv">keys</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> *<span class="nv">values</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">entry_count
-</span>);
-</code></pre></div></div>
-
-##### Parameters
-
-* `map_type`: The map type
-* `keys`: The keys of the map
-* `values`: The values of the map
-* `entry_count`: The number of entrys (key-value pairs) in the map
-
-##### Return Value
-
-The map value, or nullptr, if the parameters are invalid.
-
-<br>
-
-#### `duckdb_create_union_value`
-
-Creates a union value from a union type, a tag index, and a value.
-Must be destroyed with `duckdb_destroy_value`.
-
-##### Syntax
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_union_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">union_type</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">tag_index</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
-
-##### Parameters
-
-* `union_type`: The union type
-* `tag_index`: The index of the tag of the union
-* `value`: The value of the union
-
-##### Return Value
-
-The union value, or nullptr, if the parameters are invalid.
-
-<br>
-
 #### `duckdb_get_map_size`
 
 Returns the number of elements in a MAP value.
@@ -1674,26 +1617,5 @@ Returns the STRUCT child at index as a duckdb_value.
 ##### Return Value
 
 The child as a duckdb_value.
-
-<br>
-
-#### `duckdb_value_to_string`
-
-Returns the SQL string representation of the given value.
-
-##### Syntax
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_value_to_string</span>(<span class="nv">
-</span>  <span class="kt">duckdb_value</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
-
-##### Parameters
-
-* `value`: A duckdb_value.
-
-##### Return Value
-
-The SQL string representation as a null-terminated string. The result must be freed with `duckdb_free`.
 
 <br>

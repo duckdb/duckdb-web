@@ -121,6 +121,33 @@ SELECT sum(t.i)
 WHERE i % 2 = 0;
 ```
 
+### Table Functions
+
+Some functions in duckdb return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references. 
+Examples include `read_csv`, `read_parquet`, `range`, `generate_series`, `repeat`, `unnest`, `glob`. For example, the previous example
+
+```sql
+SELECT *
+FROM 'test.csv';
+```
+
+is implicitly translated to 
+
+
+```sql
+SELECT *
+FROM read_csv('test.csv');
+```
+
+All table functions support a `WITH ORDINALITY` prefix, which extends the returned table by an integer column `ordinality` that enumerates the generated rows starting at `1`.
+
+```sql
+SELECT * 
+FROM read_csv('test.csv') WITH ORDINALITY;
+```
+
+Note that the same result could be achieved using the `row_number` window function.
+
 ## Joins
 
 Joins are a fundamental relational operation used to connect two tables or relations horizontally.
@@ -598,26 +625,6 @@ FROM tbl;
 | a | 2 |
 | b | 1 |
 | b | 2 |
-
-## Time Travel Using `AT`
-
-DuckDB v1.3.0 introduced support for [time travel queries](https://docs.snowflake.com/en/user-guide/data-time-travel)
-on data lake formats such as
-[Delta]({% link docs/stable/core_extensions/delta.md %}),
-[DuckLake]({% link docs/stable/core_extensions/ducklake.md %}) and
-[Iceberg]({% link docs/stable/core_extensions/iceberg/overview.md %}).
-
-To specify a time travel query, use the `AT` modifier in the `FROM` clause.
-Time travel queries can use either a version number or the timestamp specified with
-`VERSION => ⟨version⟩`{:.language-sql .highlight}
-and
-`TIMESTAMP => ⟨timestamp or date⟩`{:.language-sql .highlight},
-respectively. For example:
-
-```sql
-FROM my_ducklake.demo AT (VERSION => 2);
-FROM my_ducklake.demo AT (TIMESTAMP => DATE '2025-05-26');
-```
 
 ## Syntax
 

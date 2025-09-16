@@ -1,13 +1,13 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-odbc
 layout: docu
-title: ODBC API Overview
 redirect_from:
 - /docs/clients/odbc/overview
 - /docs/clients/odbc/overview/
+title: ODBC API Overview
 ---
 
-> The latest version of the DuckDB ODBC client is {{ site.current_duckdb_odbc_short_version }}.
+> The latest stable version of the DuckDB ODBC client is {{ site.current_duckdb_odbc_short_version }}.
 
 The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of Database Management Systems (DBMSs).
 The ODBC API consists of the Driver Manager (DM) and the ODBC drivers.

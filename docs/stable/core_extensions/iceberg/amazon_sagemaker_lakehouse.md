@@ -1,14 +1,28 @@
 ---
 layout: docu
-title: Amazon SageMaker Lakehouse (AWS Glue)
 redirect_from:
 - /docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse
 - /docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse/
+title: Amazon SageMaker Lakehouse (AWS Glue)
 ---
 
 > Support for Amazon SageMaker Lakehouse (AWS Glue) is currently experimental.
 
-The `iceberg` extension supports reading Iceberg tables through the [Amazon SageMaker Lakehouse (a.k.a. AWS Glue)](https://aws.amazon.com/sagemaker/lakehouse/) catalog. Make sure you have the Iceberg extension installed by following the steps at [Installing and Loading]({% link docs/stable/core_extensions/iceberg/overview.md %})
+The `iceberg` extension supports reading Iceberg tables through the [Amazon SageMaker Lakehouse (a.k.a. AWS Glue)](https://aws.amazon.com/sagemaker/lakehouse/) catalog.
+
+## Requirements
+
+The S3 Tables support is currently experimental.
+To use it, install the following extensions:
+
+```sql
+FORCE INSTALL aws FROM core_nightly;
+FORCE INSTALL httpfs FROM core_nightly;
+FORCE INSTALL iceberg FROM core_nightly;
+```
+
+> If you want to switch back to using extensions from the `core` repository,
+> follow the [extension documentation]({% link docs/stable/extensions/installing_extensions.md %}#force-installing-to-upgrade-extensions).
 
 ## Connecting to Amazon SageMaker Lakehouse
 

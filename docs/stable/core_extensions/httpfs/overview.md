@@ -1,7 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-httpfs
 layout: docu
-title: httpfs Extension for HTTP and S3 Support
 redirect_from:
 - /docs/extensions/httpfs
 - /docs/extensions/httpfs/
@@ -11,6 +10,7 @@ redirect_from:
 - /docs/stable/extensions/httpfs/
 - /docs/stable/extensions/httpfs/overview
 - /docs/stable/extensions/httpfs/overview/
+title: httpfs Extension for HTTP and S3 Support
 ---
 
 The `httpfs` extension is an autoloadable extension implementing a file system that allows reading remote/writing remote files.

@@ -1,19 +1,19 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-postgres
 layout: docu
-title: PostgreSQL Extension
 redirect_from:
 - /docs/extensions/postgres
 - /docs/extensions/postgres/
 - /docs/stable/extensions/postgres
 - /docs/stable/extensions/postgres/
+title: PostgreSQL Extension
 ---
 
 The `postgres` extension allows DuckDB to directly read and write data from a running PostgreSQL database instance. The data can be queried directly from the underlying PostgreSQL database. Data can be loaded from PostgreSQL tables into DuckDB tables, or vice versa. See the [official announcement]({% post_url 2022-09-30-postgres-scanner %}) for implementation details and background.
 
 ## Installing and Loading
 
-The `postgres` extension will be transparently [autoloaded]({% link docs/stable/core_extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+The `postgres` extension will be transparently [autoloaded]({% link docs/stable/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql

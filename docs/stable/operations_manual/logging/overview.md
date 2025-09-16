@@ -1,5 +1,6 @@
 ---
 layout: docu
+redirect_from: null
 title: Logging
 ---
 
@@ -15,7 +16,7 @@ Example:
 
 ```sql
 PRAGMA enable_logging;
--- Run some queries..
+-- Run some queries...
 SELECT * FROM duckdb_logs;
 ```
 

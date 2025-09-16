@@ -1,19 +1,19 @@
 ---
 github_directory: https://github.com/duckdb/duckdb/tree/main/extension/tpcds
 layout: docu
-title: TPC-DS Extension
 redirect_from:
 - /docs/stable/extensions/tpcds
 - /docs/stable/extensions/tpcds/
 - /docs/extensions/tpcds
 - /docs/extensions/tpcds/
+title: TPC-DS Extension
 ---
 
 The `tpcds` extension implements the data generator and queries for the [TPC-DS benchmark](https://www.tpc.org/tpcds/).
 
 ## Installing and Loading
 
-The `tpcds` extension will be transparently [autoloaded]({% link docs/stable/core_extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+The `tpcds` extension will be transparently [autoloaded]({% link docs/stable/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql

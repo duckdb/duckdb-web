@@ -6,6 +6,7 @@ title: Limits
 ---
 
 This page contains DuckDB's built-in limit values.
+To check the value of a setting on your system, use the `current_setting` function.
 
 ## Limit Values
 

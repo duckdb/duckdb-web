@@ -99,7 +99,7 @@ The [`FROM` clause]({% link docs/stable/sql/query_syntax/from.md %}) specifies t
 
 <div id="rrdiagram10"></div>
 
-The [`SAMPLE` clause]({% link docs/stable/sql/query_syntax/sample.md %}) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The `SAMPLE` clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [Samples]({% link docs/stable/sql/samples.md %}) page for more information.
+The [`SAMPLE` clause]({% link docs/stable/sql/query_syntax/sample.md %}) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a dataset. The `SAMPLE` clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [Samples]({% link docs/stable/sql/samples.md %}) page for more information.
 
 ## `WHERE` Clause
 

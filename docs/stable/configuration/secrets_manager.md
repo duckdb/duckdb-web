@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-  - /docs/configuration/secrets_manager
+- /docs/configuration/secrets_manager
 title: Secrets Manager
 ---
 
@@ -17,15 +17,15 @@ Currently, the following secret types are available:
 
 | Secret type   | Service / protocol   | Extension                                                                         |
 | ------------- | -------------------- | --------------------------------------------------------------------------------- |
-| `azure`       | Azure Blob Storage   | [`azure`]({% link docs/stable/core_extensions/azure.md %})                        |
+| `azure`       | Azure Blob Storage   | [`azure`]({% link docs/stable/core_extensions/azure.md %})                       |
 | `ducklake`    | DuckLake             | [`ducklake`](https://ducklake.select/docs/stable/duckdb/usage/connecting#secrets) |
-| `gcs`         | Google Cloud Storage | [`httpfs`]({% link docs/stable/core_extensions/httpfs/s3api.md %})                |
-| `http`        | HTTP and HTTPS       | [`httpfs`]({% link docs/stable/core_extensions/httpfs/https.md %})                |
-| `huggingface` | Hugging Face         | [`httpfs`]({% link docs/stable/core_extensions/httpfs/hugging_face.md %})         |
-| `mysql`       | MySQL                | [`mysql`]({% link docs/stable/core_extensions/mysql.md %})                        |
-| `postgres`    | PostgreSQL           | [`postgres`]({% link docs/stable/core_extensions/postgres.md %})                  |
-| `r2`          | Cloudflare R2        | [`httpfs`]({% link docs/stable/core_extensions/httpfs/s3api.md %})                |
-| `s3`          | AWS S3               | [`httpfs`]({% link docs/stable/core_extensions/httpfs/s3api.md %})                |
+| `gcs`         | Google Cloud Storage | [`httpfs`]({% link docs/stable/core_extensions/httpfs/s3api.md %})               |
+| `http`        | HTTP and HTTPS       | [`httpfs`]({% link docs/stable/core_extensions/httpfs/https.md %})               |
+| `huggingface` | Hugging Face         | [`httpfs`]({% link docs/stable/core_extensions/httpfs/hugging_face.md %})        |
+| `mysql`       | MySQL                | [`mysql`]({% link docs/stable/core_extensions/mysql.md %})                       |
+| `postgres`    | PostgreSQL           | [`postgres`]({% link docs/stable/core_extensions/postgres.md %})                 |
+| `r2`          | Cloudflare R2        | [`httpfs`]({% link docs/stable/core_extensions/httpfs/s3api.md %})               |
+| `s3`          | AWS S3               | [`httpfs`]({% link docs/stable/core_extensions/httpfs/s3api.md %})               |
 
 For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 

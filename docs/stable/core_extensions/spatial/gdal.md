@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: GDAL Integration
 redirect_from:
 - /docs/stable/extensions/spatial/gdal
 - /docs/stable/extensions/spatial/gdal/
+title: GDAL Integration
 ---
 
 The spatial extension integrates the [GDAL](https://gdal.org/en/latest/) translator library to read and write spatial data from a variety of geospatial vector file formats. See the documentation for the [`st_read` table function]({% link docs/stable/core_extensions/spatial/functions.md %}#st_read) for how to make use of this in practice.

@@ -1,5 +1,6 @@
 ---
 layout: docu
+redirect_from: null
 title: Building DuckDB from Source
 ---
 
@@ -26,7 +27,7 @@ make
 make release # same as plain make
 make debug
 GEN=ninja make # for use with Ninja
-BUILD_BENCHMARK=1 make # Build with benchmarks
+BUILD_BENCHMARK=1 make # build with benchmarks
 ```
 
 ## Platforms
@@ -109,9 +110,8 @@ Note that amalgamation build is provided on a best-effort basis and is not offic
 
 ## Limitations
 
-Currently, DuckDB has the following limitations:
+Currently, DuckDB has the following known compile-time limitations:
 
-* The DuckDB codebase is not compatible with [C++23](https://en.wikipedia.org/wiki/C%2B%2B23). Therefore, trying to compile DuckDB with `-std=c++23` will fail.
 * The `-march=native` build flag, i.e., compiling DuckDB with the local machine's native instructions set, is not supported.
 
 ## Troubleshooting Guides

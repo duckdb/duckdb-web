@@ -1,11 +1,11 @@
 ---
 layout: docu
-title: S3 API Support
 redirect_from:
 - /docs/extensions/httpfs/s3api
 - /docs/extensions/httpfs/s3api/
 - /docs/stable/extensions/httpfs/s3api
 - /docs/stable/extensions/httpfs/s3api/
+title: S3 API Support
 ---
 
 The `httpfs` extension supports reading/writing/[globbing](#globbing) files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
@@ -127,6 +127,7 @@ Below is a complete list of the supported parameters that can be used for both t
 | `USE_SSL`                     | Whether to use HTTPS or HTTP                                                          | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint URL                              | `R2`              | `STRING`  | -                                           |
 | `KMS_KEY_ID`                  | AWS KMS (Key Management Service) key for Server Side Encryption S3                    | `S3`              | `STRING`  | -                                           |
+| `REQUESTER_PAYS`              | Allows use of "requester pays" S3 buckets                                             | `S3`              | `BOOLEAN` | `false`                                     |
 
 ### Platform-Specific Secret Types
 
@@ -176,6 +177,7 @@ CREATE OR REPLACE SECRET secret (
     SECRET '⟨my_hmac_secret_key⟩'
 );
 ```
+
 
 **Important**: The `KEY_ID` and `SECRET` values must be HMAC keys generated specifically for Google Cloud Storage interoperability. These are not the same as regular GCP service account keys or access tokens. You can create HMAC keys by following the [Google Cloud documentation for managing HMAC keys](https://cloud.google.com/storage/docs/authentication/managing-hmackeys).
 

@@ -1,12 +1,12 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-sqlsmith
 layout: docu
-title: SQLSmith Extension
 redirect_from:
 - /docs/stable/extensions/sqlsmith
 - /docs/stable/extensions/sqlsmith/
 - /docs/extensions/sqlsmith
 - /docs/extensions/sqlsmith/
+title: SQLSmith Extension
 ---
 
 The `sqlsmith` extension is used for testing.

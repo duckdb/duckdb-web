@@ -14,7 +14,7 @@ Here is an example using a Python function that calls a third-party library.
 
 ```python
 import duckdb
-from duckdb.typing import *
+from duckdb.typing import VARCHAR
 from faker import Faker
 
 def generate_random_name():
@@ -46,7 +46,7 @@ The `create_function` method takes the following parameters:
 2. `function` The Python function you wish to register as a UDF.
 3. `parameters` Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
 4. `return_type` Scalar functions return one element per row. This parameter specifies the return type of the function.
-5. `type` (optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type = 'arrow'` to use PyArrow Tables.
+5. `type` (optional): DuckDB supports both native Python types and PyArrow Arrays. By default, `type = 'native'` is assumed, but you can specify `type = 'arrow'` to use PyArrow Arrays. In general, using an Arrow UDF will be much more efficient than native because it will be able to operate in batches.
 6. `null_handling` (optional): By default, `NULL` values are automatically handled as `NULL`-in `NULL`-out. Users can specify a desired behavior for `NULL` values by setting `null_handling = 'special'`.
 7. `exception_handling` (optional): By default, when an exception is thrown from the Python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `NULL`, by setting this parameter to `'return_null'`
 8. `side_effects` (optional): By default, functions are expected to produce the same result for the same input. If the result of a function is impacted by any type of randomness, `side_effects` must be set to `True`.
@@ -168,7 +168,7 @@ When this is not desired, you need to explicitly set this parameter to `"special
 
 ```python
 import duckdb
-from duckdb.typing import *
+from duckdb.typing import BIGINT
 
 def dont_intercept_null(x):
     return 5
@@ -186,7 +186,7 @@ With `null_handling="special"`:
 
 ```python
 import duckdb
-from duckdb.typing import *
+from duckdb.typing import BIGINT
 
 def dont_intercept_null(x):
     return 5
@@ -236,7 +236,7 @@ If you want to disable this behavior, and instead return `NULL`, you'll need to 
 
 ```python
 import duckdb
-from duckdb.typing import *
+from duckdb.typing import BIGINT
 
 def will_throw():
     raise ValueError("ERROR")
@@ -317,6 +317,39 @@ If the function is expected to receive arrow arrays, set the `type` parameter to
 
 This will let the system know to provide arrow arrays of up to `STANDARD_VECTOR_SIZE` tuples to the function, and also expect an array of the same amount of tuples to be returned from the function.
 
+In general, using an Arrow UDF will be much more efficient than native because it will be able to operate in batches.
+
+```python
+import duckdb
+import pyarrow as pa
+from duckdb.typing import VARCHAR
+from pyarrow import compute as pc
+
+
+def mirror(strings: pa.Array, sep: pa.Array) -> pa.Array:
+    assert isinstance(strings, pa.ChunkedArray)
+    assert isinstance(sep, pa.ChunkedArray)
+    return pc.binary_join_element_wise(strings, pc.ascii_reverse(strings), sep)
+
+
+duckdb.create_function(
+    "mirror",
+    mirror,
+    [VARCHAR, VARCHAR],
+    return_type=VARCHAR,
+    type="arrow",
+)
+
+duckdb.sql(
+    "CREATE OR REPLACE TABLE strings AS SELECT 'hello' AS str UNION ALL SELECT 'world' AS str;"
+)
+print(duckdb.sql("SELECT mirror(str, '|') FROM strings;").fetchall())
+```
+
+```text
+[('hello|olleh',), ('world|dlrow',)]
+```
+
 ### Native
 
 When the function type is set to `native` the function will be provided with a single tuple at a time, and expect only a single value to be returned.
@@ -325,14 +358,20 @@ This can be useful to interact with Python libraries that don't operate on Arrow
 ```python
 import duckdb
 
-from duckdb.typing import *
+from duckdb.typing import DATE
 from faker import Faker
 
 def random_date():
     fake = Faker()
     return fake.date_between()
 
-duckdb.create_function("random_date", random_date, [], DATE, type="native")
+duckdb.create_function(
+    "random_date",
+    random_date,
+    parameters=[],
+    return_type=DATE,
+    type="native",
+)
 res = duckdb.sql("SELECT random_date()").fetchall()
 print(res)
 ```

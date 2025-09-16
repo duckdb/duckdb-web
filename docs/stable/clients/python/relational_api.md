@@ -6970,18 +6970,22 @@ while res := rel.fetchone():
 ##### Signature
 
 ```python
-pl(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> duckdb::PolarsDataFrame
+pl(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000, lazy: bool = False) -> duckdb::PolarsDataFrame
 ```
 
 ##### Description
 
-Execute and fetch all rows as a Polars DataFrame
+Execute and fetch all rows as a Polars DataFrame or LazyFrame.
 
 ##### Parameters
 
 - **batch_size** : int, default: 1000000
                             
 	The number of records to be fetched per batch.
+
+- **lazy** : bool, default: False
+                            
+	Return a LazyFrame with support for filter pushdown.
 
 ##### Example
 

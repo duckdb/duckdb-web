@@ -17,8 +17,7 @@ On empty groups, the aggregate functions `sum`, `list`, and `string_agg` all ret
 
 ## 0 vs. 1-Based Indexing
 
-To comply with standard SQL, one-based indexing is used almost everywhere, e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`).
-However, similarly to PostgreSQL, [JSON features use a zero-based indexing]({% link docs/stable/data/json/overview.md %}#indexing).
+To comply with standard SQL, one-based indexing is used almost everywhere, e.g., array and string indexing and slicing, and window functions (`row_number`, `rank`, `dense_rank`). However, similarly to PostgreSQL, [JSON features use a zero-based indexing]({% link docs/stable/data/json/overview.md %}#indexing).
 
 ## Types
 

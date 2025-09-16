@@ -19,7 +19,7 @@ In DuckDB, replacement scans are used when a table name used by a query does not
 
 ### Extension
 
-DuckDB has a flexible extension mechanism that allows for dynamically loading extensions. These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality. For details, see the [Extensions page]({% link docs/stable/core_extensions/overview.md %}).
+DuckDB has a flexible extension mechanism that allows for dynamically loading extensions. These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality. For details, see the [Extensions page]({% link docs/stable/extensions/overview.md %}).
 
 ### Platform
 

@@ -8,7 +8,7 @@ redirect_from:
 title: R Client
 ---
 
-> The latest version of the DuckDB R client is {{ site.current_duckdb_r_version }}.
+> The latest stable version of the DuckDB R client is {{ site.current_duckdb_r_version }}.
 
 ## Installation
 

@@ -15,6 +15,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `BIGINT`                   | `INT8`, `LONG`                     | Signed eight-byte integer                                                                                  |
 | `BIT`                      | `BITSTRING`                        | String of 1s and 0s                                                                                        |
 | `BLOB`                     | `BYTEA`, `BINARY,` `VARBINARY`     | Variable-length binary data                                                                                |
+| `BIGNUM`                   |                                    | Variable-length integer                                                                                    |
 | `BOOLEAN`                  | `BOOL`, `LOGICAL`                  | Logical Boolean (`true` / `false`)                                                                         |
 | `DATE`                     |                                    | Calendar date (year, month day)                                                                            |
 | `DECIMAL(prec, scale)`     | `NUMERIC(prec, scale)`             | Fixed-precision number with the given width (precision) and scale, defaults to `prec = 18` and `scale = 3` |
@@ -23,7 +24,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `HUGEINT`                  |                                    | Signed sixteen-byte integer                                                                                |
 | `INTEGER`                  | `INT4`, `INT`, `SIGNED`            | Signed four-byte integer                                                                                   |
 | `INTERVAL`                 |                                    | Date / time delta                                                                                          |
-| `JSON`                     |                                    | JSON object (via the [`json` extension]({% link docs/stable/data/json/overview.md %}))                            |
+| `JSON`                     |                                    | JSON object (via the [`json` extension]({% link docs/stable/data/json/overview.md %}))                    |
 | `SMALLINT`                 | `INT2`, `SHORT`                    | Signed two-byte integer                                                                                    |
 | `TIME`                     |                                    | Time of day (no time zone)                                                                                 |
 | `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ`                      | Combination of time and date that uses the current time zone                                               |

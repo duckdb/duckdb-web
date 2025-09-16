@@ -1,5 +1,6 @@
 ---
 layout: docu
+redirect_from: null
 title: Out of Memory Errors
 ---
 
@@ -7,7 +8,7 @@ DuckDB has a state of the art out-of-core query engine that can spill to disk fo
 We continuously strive to improve DuckDB to improve its scalability and prevent out of memory errors whenever possible.
 That said, you may still experience out-of-memory errors if you run queries with multiple [blocking operators]({% link docs/stable/guides/performance/how_to_tune_workloads.md %}#blocking-operators), certain aggregation functions, `PIVOT` operations, etc., or if you have very little available memory compared to the dataset size.
 
-## Types of Out of Memory Errors
+## Types of “Out of Memory” Errors
 
 Out of memory errors mainly occur in two forms:
 
@@ -50,7 +51,7 @@ In short:
 
 * Reduce the number of threads using the `SET threads = ...` command.
 * If your query reads a large mount of data from a file or writes a large amount of data, try setting the `preserve_insertion_order` option to `false`: `SET preserve_insertion_order = false`.
-* Reduce the memory limit below the default 80% (see the [Limits page]({% link docs/stable/operations_manual/limits.md %})). This can be helpful because some DuckDB operations circumvent the buffer manager and can reserve more memory than allowed by the memory limit. If you observe this, set the memory limit to 50-60% of the total system memory by using `SET memory_limit = ...`.
+* Counter-intuitively, reducing the memory limit below the [default 80%]({% link docs/stable/operations_manual/limits.md %}) can help prevent out of memory errors. This is because some DuckDB operations circumvent the database's buffer manager and thus they can reserve more memory than allowed by the memory limit. If this happens (e.g., DuckDB is killed by the operating system or an OOM reaper process), set the memory limit to just 50-60% of the total system memory by using the `SET memory_limit = '...'` statement.
 * Break up the query into subqueries. This allows you to see where the intermediate results “blow up”, causing the query to run out of memory.
 
 ## See Also

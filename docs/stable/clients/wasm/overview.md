@@ -10,7 +10,7 @@ redirect_from:
 title: DuckDB Wasm
 ---
 
-> The latest version of the DuckDB WebAssembly client is {{ site.current_duckdb_wasm_version }}.
+> The latest stable version of the DuckDB WebAssembly client is {{ site.current_duckdb_wasm_version }}.
 
 DuckDB has been compiled to WebAssembly, so it can run inside any browser on any device.
 

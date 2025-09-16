@@ -63,13 +63,15 @@ SELECT {
     } AS s;
 ```
 
-### Adding Field(s)/Value(s) to Structs
+### Adding or Updating Fields of Structs
 
-Add to a struct of integers:
+To add new fields or update existing ones, you can use `struct_update`:
 
 ```sql
-SELECT struct_insert({'a': 1, 'b': 2, 'c': 3}, d := 4) AS s;
+SELECT struct_update({'a': 1, 'b': 2}, b := 3, c := 4) AS s;
 ```
+
+Alternatively, `struct_insert` also allows adding new fields but not updating existing ones.
 
 ### Retrieving from Structs
 
@@ -241,63 +243,43 @@ The `STRUCT` type can be compared using all the [comparison operators]({% link d
 These comparisons can be used in [logical expressions]({% link docs/stable/sql/expressions/logical_operators.md %})
 such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs/stable/sql/data_types/boolean.md %}).
 
-Comparisons are done in lexicographical order, with individual entries being compared as usual except that `NULL` values are treated as larger than all other values.
+For comparisons, the keys of a `STRUCT` have a fixed positional order, from left to right.
+Comparisons behave the same as row comparisons, therefore, matching keys must be at identical positions.
 
-Specifically:
+Specifically, for any `STRUCT` comparison, the following rules apply:
 
-* If all values of `s1` and `s2` compare equal, then `s1` and `s2` compare equal.
-* else, if `s1.value[i] < s2.value[i] OR s2.value[i] is NULL` for the first index `i` where `s1.value[i] != s2.value[i]`, then `s1` is less than `s2`, and vice versa.
+* **Equality.** `s1` and `s2` are equal, if all respective values are equal.
+* **Less Than**. For the first index `i` where `s1.value[i] != s2.value[i]`:
+If `s1.value[i] < s2.value[i]`, `s1` is less than `s2`.
 
-Structs of different types are implicitly cast to a struct type with the union of the involved keys, following the rules for [combination casting]({% link docs/stable/sql/data_types/typecasting.md %}#structs).
+`NULL` values are compared following PostgreSQL's semantics.
+Lower nesting levels are used for tie-breaking.
 
-The following queries return `true`:
+Here are some queries returning `true` for the comparison.
 
 ```sql
-SELECT {'k1': 0, 'k2': 0} < {'k1': 1, 'k2': 0};
+SELECT {'k1': 2, 'k2': 3} < {'k1': 2, 'k2': 4} AS result;
 ```
 
 ```sql
-SELECT {'k1': 'hello'} < {'k1': 'world'};
+SELECT {'k1': 'hello'} < {'k1': 'world'} AS result;
+```
+
+These queries return `false`.
+
+```sql
+SELECT {'k2': 4, 'k1': 3} < {'k2': 2, 'k1': 4} AS result;
 ```
 
 ```sql
-SELECT {'k1': 0, 'k2': 0} < {'k1': 0, 'k2': NULL};
+SELECT {'k1': [4, 3]} < {'k1': [3, 6, 7]} AS result;
 ```
+
+These queries return `NULL`.
 
 ```sql
-SELECT {'k1': 0} < {'k2': 0};
+SELECT {'k1': 2, 'k2': 3} < {'k1': 2, 'k2': NULL} AS result;
 ```
-
-```sql
-SELECT  {'k1': 0, 'k2': 0} < {'k2': 0, 'k3': 0};
-```
-
-```sql
-SELECT {'k1': 1, 'k2': 0} > {'k3': 0, 'k1': 0};
-```
-
-The following queries return `false`:
-
-```sql
-SELECT {'k1': 1, 'k2': 0} < {'k1': 0, 'k2': 1};
-```
-
-```sql
-SELECT {'k1': [0]} < {'k1': [0, 0]};
-```
-
-```sql
-SELECT {'k1': 1} > {'k2': 0};
-```
-
-```sql
-SELECT {'k1': 0, 'k2': 0} < {'k3': 0, 'k1': 1};
-```
-
-```sql
-SELECT  {'k1': 1, 'k2': 0} > {'k2': 0, 'k3': 0};
-```
-
 
 ## Updating the Schema
 

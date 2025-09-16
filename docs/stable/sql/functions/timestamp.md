@@ -43,7 +43,6 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of `date_sub`. The number of complete [partitions]({% link docs/stable/sql/functions/datepart.md %}) between the timestamps. |
 | [`datetrunc(part, timestamp)`](#datetruncpart-timestamp) | Alias of `date_trunc`. Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
 | [`dayname(timestamp)`](#daynametimestamp) | The (English) name of the weekday. |
-| [`epoch_ms(ms)`](#epoch_msms) | Converts milliseconds since the epoch to a timestamp. |
 | [`epoch_ms(timestamp)`](#epoch_mstimestamp) | Returns the total number of milliseconds since the epoch. |
 | [`epoch_ns(timestamp)`](#epoch_nstimestamp) | Returns the total number of nanoseconds since the epoch. |
 | [`epoch_us(timestamp)`](#epoch_ustimestamp) | Returns the total number of microseconds since the epoch. |
@@ -57,6 +56,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`least(timestamp, timestamp)`](#leasttimestamp-timestamp) | The earlier of two timestamps. |
 | [`make_timestamp(bigint, bigint, bigint, bigint, bigint, double)`](#make_timestampbigint-bigint-bigint-bigint-bigint-double) | The timestamp for the given parts. |
 | [`make_timestamp(microseconds)`](#make_timestampmicroseconds) | Converts microseconds since the epoch to a timestamp. |
+| [`make_timestamp_ms(milliseconds)`](#make_timestamp_msmilliseconds) | Converts milliseconds since the epoch to a timestamp. |
 | [`make_timestamp_ns(nanoseconds)`](#make_timestamp_nsnanoseconds) | Converts nanoseconds since the epoch to a timestamp. |
 | [`monthname(timestamp)`](#monthnametimestamp) | The (English) name of the month. |
 | [`strftime(timestamp, format)`](#strftimetimestamp-format) | Converts timestamp to string according to the [format string]({% link docs/stable/sql/functions/dateformat.md %}#format-specifiers). |
@@ -193,14 +193,6 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Example** | `dayname(TIMESTAMP '1992-03-22')` |
 | **Result** | `Sunday` |
 
-#### `epoch_ms(ms)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Converts milliseconds since the epoch to a timestamp. |
-| **Example** | `epoch_ms(701222400000)` |
-| **Result** | `1992-03-22 00:00:00` |
-
 #### `epoch_ms(timestamp)`
 
 <div class="nostroke_table"></div>
@@ -304,6 +296,14 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Description** | Converts microseconds since the epoch to a timestamp. |
 | **Example** | `make_timestamp(1667810584123456)` |
 | **Result** | `2022-11-07 08:43:04.123456` |
+
+#### `make_timestamp_ms(milliseconds)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts milliseconds since the epoch to a timestamp. |
+| **Example** | `make_timestamp(1667810584123)` |
+| **Result** | `2022-11-07 08:43:04.123` |
 
 #### `make_timestamp_ns(nanoseconds)`
 

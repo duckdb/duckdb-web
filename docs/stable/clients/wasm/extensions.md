@@ -26,7 +26,7 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 
 ## Autoloading
 
-[Autoloading]({% link docs/stable/core_extensions/overview.md %}), i.e., the possibility for DuckDB to add extension functionality on-the-fly, is enabled by default in DuckDB-Wasm.
+[Autoloading]({% link docs/stable/extensions/overview.md %}), i.e., the possibility for DuckDB to add extension functionality on-the-fly, is enabled by default in DuckDB-Wasm.
 
 ## List of Officially Available Extensions
 

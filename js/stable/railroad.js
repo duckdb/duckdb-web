@@ -1761,21 +1761,11 @@ function GenerateTableSample(options) {
 	]
 }
 
-
 function GenerateTableReference(options) {
 	return [
 		Sequence([
 			Optional(Sequence([Expression("schema-name"), Keyword(".")]), "skip"),
-			Expression("table-name"),
-			Optional(Sequence([
-				Keyword("AT"),
-				Keyword("("),
-				Choice(0,[
-					Sequence([Keyword("VERSION"), Keyword("=>"), Expression("version")]),
-					Sequence([Keyword("TIMESTAMP"), Keyword("=>"), Expression("timestamp")])
-				]),
-				Keyword(")")
-			]), "skip")
+			Expression("table-name")
 		])
 	]
 }

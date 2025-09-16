@@ -8,7 +8,7 @@ redirect_from:
 title: PHP Client
 ---
 
-> The DuckDB PHP client is a [tertiary client]({% link docs/preview/clients/overview.md %}) and is maintained by a third-party.
+> The DuckDB PHP client is a [tertiary client]({% link docs/stable/clients/overview.md %}) and is maintained by a third-party.
 
 Client API for PHP.
 
@@ -206,5 +206,5 @@ From version 1.2.0 on the library supports all DuckDB file types.
 | DUCKDB_TYPE_MAP          | MAP          | array                                |
 | DUCKDB_TYPE_UNION        | UNION        | mixed                                |
 | DUCKDB_TYPE_BIT          | BIT          | string                               |
-| DUCKDB_TYPE_VARINT       | VARINT       | string                               |
+| DUCKDB_TYPE_BIGNUM       | BIGNUM       | string                               |
 | DUCKDB_TYPE_SQLNULL      | NULL         | null                                 |

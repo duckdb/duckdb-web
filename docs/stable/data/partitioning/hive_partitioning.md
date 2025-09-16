@@ -7,14 +7,14 @@ title: Hive Partitioning
 
 ## Examples
 
-Read data from a Hive partitioned data set:
+Read data from a Hive partitioned dataset:
 
 ```sql
 SELECT *
 FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = true);
 ```
 
-Write a table to a Hive partitioned data set:
+Write a table to a Hive partitioned dataset:
 
 ```sql
 COPY orders

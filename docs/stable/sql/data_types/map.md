@@ -53,7 +53,7 @@ CREATE TABLE tbl (col MAP(INTEGER, DOUBLE));
 
 ## Retrieving from Maps
 
-`MAP` values can be retrieved using the `map_extract_value` function or bracket notation. 
+`MAP` values can be retrieved using the `map_extract_value` function or bracket notation:
 
 ```sql
 SELECT MAP {'key1': 5, 'key2': 43}['key1'];
@@ -63,7 +63,7 @@ SELECT MAP {'key1': 5, 'key2': 43}['key1'];
 5
 ```
 
-If the key has the wrong type, an error is thrown. If it has the correct type but is merely not contained in the map, a `NULL` value is returned.
+If the key has the wrong type, an error is thrown. If it has the correct type but is merely not contained in the map, a `NULL` value is returned:
 
 ```sql
 SELECT MAP {'key1': 5, 'key2': 43}['key3'];

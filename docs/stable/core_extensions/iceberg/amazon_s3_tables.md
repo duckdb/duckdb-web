@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Amazon S3 Tables
 redirect_from:
 - /docs/stable/extensions/iceberg/amazon_s3_tables
 - /docs/stable/extensions/iceberg/amazon_s3_tables/
+title: Amazon S3 Tables
 ---
 
 > Support for S3 Tables is currently experimental.

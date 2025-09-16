@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Spatial Functions
 redirect_from:
 - /docs/stable/extensions/spatial/functions
 - /docs/stable/extensions/spatial/functions/
+title: Spatial Functions
 ---
 
 ## Function Index 
@@ -3381,4 +3381,3 @@ FROM st_read_meta('../../tmp/data/amsterdam_roads.fgb');
 ```
 
 ----
-

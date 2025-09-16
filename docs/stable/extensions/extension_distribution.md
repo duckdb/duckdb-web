@@ -1,5 +1,6 @@
 ---
 layout: docu
+redirect_from: null
 title: Extension Distribution
 ---
 
@@ -98,5 +99,5 @@ INSTALL icu FROM '⟨custom_repository⟩';
 
 The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
 
-If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/stable/core_extensions/overview.md %}#autoloading-extensions)
+If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/stable/extensions/overview.md %}#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.

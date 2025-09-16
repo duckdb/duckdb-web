@@ -8,7 +8,7 @@ title: Indexes
 
 ## Index Types
 
-DuckDB has two built-in index types. Indexes can also be defined via [extensions]({% link docs/stable/core_extensions/overview.md %}).
+DuckDB has two built-in index types. Indexes can also be defined via [extensions]({% link docs/stable/extensions/overview.md %}).
 
 ### Min-Max Index (Zonemap)
 

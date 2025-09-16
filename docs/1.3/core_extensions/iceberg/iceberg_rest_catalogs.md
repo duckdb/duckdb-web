@@ -3,9 +3,9 @@ layout: docu
 title: Iceberg REST Catalogs
 ---
 
-The `iceberg` extension supports attaching Iceberg REST Catalogs. Before attaching an Iceberg REST Catalog, you must install the `iceberg` extension by following the instructions located in the [overview]({% link docs/stable/core_extensions/iceberg/overview.md %}).
+The `iceberg` extension supports attaching Iceberg REST Catalogs. Before attaching an Iceberg REST Catalog, you must install the `iceberg` extension by following the instructions located in the [overview]({% link docs/1.3/core_extensions/iceberg/overview.md %}).
 
-If you are attaching to an Iceberg REST Catalog managed by Amazon, please see the instructions for attaching to [Amazon S3 tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) or [Amazon Sagemaker Lakehouse]({% link docs/stable/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
+If you are attaching to an Iceberg REST Catalog managed by Amazon, please see the instructions for attaching to [Amazon S3 tables]({% link docs/1.3/core_extensions/iceberg/amazon_s3_tables.md %}) or [Amazon Sagemaker Lakehouse]({% link docs/1.3/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
 
 For all other Iceberg REST Catalogs, you can follow the instructions below. Please see the [Examples](#specific-catalog-examples) section for questions about specific catalogs.
 
@@ -29,7 +29,7 @@ CREATE SECRET iceberg_secret (
 );
 ```
 
-You can attach the Iceberg catalog with the following [`ATTACH`]({% link docs/stable/sql/statements/attach.md %}) statement.
+You can attach the Iceberg catalog with the following [`ATTACH`]({% link docs/1.3/sql/statements/attach.md %}) statement.
 
 ```sql
 ATTACH '⟨warehouse⟩' AS iceberg_catalog (

@@ -186,6 +186,7 @@ SELECT COLUMNS('(\w*):(\w*)') AS '\1\2' FROM tbl;
 ```
 
 To add the original column name to the expression alias, run:
+
 ```sql
 SELECT min(COLUMNS(*)) AS "min_\0" FROM numbers;
 ```

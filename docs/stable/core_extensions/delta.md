@@ -1,12 +1,12 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-delta
 layout: docu
-title: Delta Extension
 redirect_from:
 - /docs/stable/extensions/delta
 - /docs/stable/extensions/delta/
 - /docs/extensions/delta
 - /docs/extensions/delta/
+title: Delta Extension
 ---
 
 The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers **read support** for Delta tables, both local and remote.
@@ -17,7 +17,7 @@ For implementation details, see the [announcement blog post]({% post_url 2024-06
 
 ## Installing and Loading
 
-The `delta` extension will be transparently [autoloaded]({% link docs/stable/core_extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+The `delta` extension will be transparently [autoloaded]({% link docs/stable/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql

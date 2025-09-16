@@ -7,21 +7,21 @@ title: Partitioned Writes
 
 ## Examples
 
-Write a table to a Hive partitioned data set of Parquet files:
+Write a table to a Hive partitioned dataset of Parquet files:
 
 ```sql
 COPY orders TO 'orders'
 (FORMAT parquet, PARTITION_BY (year, month));
 ```
 
-Write a table to a Hive partitioned data set of CSV files, allowing overwrites:
+Write a table to a Hive partitioned dataset of CSV files, allowing overwrites:
 
 ```sql
 COPY orders TO 'orders'
 (FORMAT csv, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE);
 ```
 
-Write a table to a Hive partitioned data set of GZIP-compressed CSV files, setting explicit data files' extension:
+Write a table to a Hive partitioned dataset of GZIP-compressed CSV files, setting explicit data files' extension:
 
 ```sql
 COPY orders TO 'orders'
@@ -48,7 +48,7 @@ orders
          └── data_1.parquet
 ```
 
-The values of the partitions are automatically extracted from the data. Note that it can be very expensive to write a larger number of partitions as many files will be created. The ideal partition count depends on how large your data set is.
+The values of the partitions are automatically extracted from the data. Note that it can be very expensive to write a larger number of partitions as many files will be created. The ideal partition count depends on how large your dataset is.
 
 To limit the maximum number of files the system can keep open before flushing to disk when writing using `PARTITION_BY`, use the `partitioned_write_max_open_files` configuration option (default: 100):
 
@@ -65,14 +65,14 @@ By default, files will be named `data_0.parquet` or `data_0.csv`. With the flag 
 * `{i}` will be replaced by an index
 * `{uuid}` will be replaced by a 128 bits long UUID
 
-Write a table to a Hive partitioned data set of .parquet files, with an index in the filename:
+Write a table to a Hive partitioned dataset of .parquet files, with an index in the filename:
 
 ```sql
 COPY orders TO 'orders'
 (FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'orders_{i}');
 ```
 
-Write a table to a Hive partitioned data set of .parquet files, with unique filenames:
+Write a table to a Hive partitioned dataset of .parquet files, with unique filenames:
 
 ```sql
 COPY orders TO 'orders'

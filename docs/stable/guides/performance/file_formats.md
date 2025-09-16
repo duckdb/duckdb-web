@@ -24,7 +24,7 @@ When deciding on whether to query these files directly or to first load them to 
 
 **Tip.** If you find that DuckDB produces a suboptimal join order on Parquet files, try loading the Parquet files to DuckDB tables. The improved statistics likely help obtain a better join order.
 
-**Repeated queries:** If you plan to run multiple queries on the same data set, it is worth loading the data into DuckDB. The queries will always be somewhat faster, which over time amortizes the initial load time.
+**Repeated queries:** If you plan to run multiple queries on the same dataset, it is worth loading the data into DuckDB. The queries will always be somewhat faster, which over time amortizes the initial load time.
 
 **High decompression times:** Some Parquet files are compressed using heavyweight compression algorithms such as gzip. In these cases, querying the Parquet files will necessitate an expensive decompression time every time the file is accessed. Meanwhile, lightweight compression methods like Snappy, LZ4, and zstd, are faster to decompress. You may use the [`parquet_metadata` function]({% link docs/stable/data/parquet/metadata.md %}#parquet-metadata) to find out the compression algorithm used.
 

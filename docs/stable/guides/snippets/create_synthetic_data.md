@@ -5,7 +5,7 @@ redirect_from:
 title: Create Synthetic Data
 ---
 
-DuckDB allows you to quickly generate synthetic data sets. To do so, you may use:
+DuckDB allows you to quickly generate synthetic datasets. To do so, you may use:
 
 * [range functions]({% link docs/stable/sql/functions/list.md %}#range-functions)
 * hash functions, e.g.,
