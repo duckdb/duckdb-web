@@ -22,7 +22,7 @@ from generate_python_relational_docs_methods import (
     OUTPUT_MEMBER_LIST,
 )
 
-DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "preview")
+DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "stable")
 
 redirect_from_text = """\
 redirect_from:
