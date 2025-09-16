@@ -35,15 +35,48 @@ For LTS DuckDB versions, [community support](https://duckdblabs.com/community_su
 <summary markdown='span'>
 Click to see the end-of-life (EOL) dates for DuckDB releases.
 </summary>
-|    Version | Codename     | End of community support |
-| ---------: | ------------ | ------------------------ |
-|       0.\* |              | 2024-06-03               |
-|     1.0.\* | Nivis        | 2024-09-09               |
-|     1.1.\* | Eatoni       | 2025-02-05               |
-|     1.2.\* | Histrionicus | 2025-05-21               |
-|     1.3.\* | Ossivalis    | 2025-09-16               |
-| 1.4.\* LTS | Andium       | 2026-09-16               |
-<details>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Version</th>
+<th>Codename</th>
+<th>End of community support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">0.*</td>
+<td></td>
+<td>2024-06-03</td>
+</tr>
+<tr>
+<td style="text-align: right;">1.0.*</td>
+<td>Nivis</td>
+<td>2024-09-09</td>
+</tr>
+<tr>
+<td style="text-align: right;">1.1.*</td>
+<td>Eatoni</td>
+<td>2025-02-05</td>
+</tr>
+<tr>
+<td style="text-align: right;">1.2.*</td>
+<td>Histrionicus</td>
+<td>2025-05-21</td>
+</tr>
+<tr>
+<td style="text-align: right;">1.3.*</td>
+<td>Ossivalis</td>
+<td>2025-09-16</td>
+</tr>
+<tr>
+<td style="text-align: right;">1.4.* LTS</td>
+<td>Andium</td>
+<td>2026-09-16</td>
+</tr>
+</tbody>
+</table>
+</details>
 
 ## New Features
 
