@@ -29,7 +29,7 @@ CALL disable_logging();
 To clear the current log, run
 
 ```sql
-CALL truncate_duckdb_logs()
+CALL truncate_duckdb_logs();
 ```
 
 ## Log Level
@@ -45,7 +45,7 @@ DuckDB supports different logging levels that control the verbosity of the logs:
 The log level can be set using:
 
 ```sql
-CALL enable_logging(level='debug')
+CALL enable_logging(level='debug');
 ```
 
 ## Log Types
@@ -60,16 +60,16 @@ In DuckDB, log messages can have an associated log type. Log types allow two mai
 To log only messages of a specific type:
 
 ```sql
-PRAGMA enable_logging('HTTP');
+CALL enable_logging('HTTP');
 ```
 
-The above pragma will automatically set the correct log level, and will add the `HTTP` type to the `enabled_log_types` settings. This ensures
+The above function will automatically set the correct log level, and will add the `HTTP` type to the `enabled_log_types` settings. This ensures
 only log messages of the 'HTTP' type will be written to the log.
 
 To enable multiple log types, simply pass:
 
 ```sql
-PRAGMA enable_logging(['HTTP', 'QueryLog']);
+CALL enable_logging(['HTTP', 'QueryLog']);~~~~
 ```
 
 ### Structured Logging
