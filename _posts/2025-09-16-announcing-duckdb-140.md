@@ -224,11 +224,13 @@ Community member [Rusty Conover (@rustyconover)](https://github.com/rustyconover
 
 [Richard (@hawkfish)](https://github.com/hawkfish) built a new window function, `FILL`, that can be used to _interpolate_ missing values in ordered windows. Here is an example, you can see a missing value between 1 and 42, it's interpolated to 21 in the result.
 
-```SQL
-FROM (VALUES (1, 1), (2, NULL), (3, 42)) t(c1, c2) SELECT fill(c2) OVER (ORDER BY c1) f;
+```sql
+FROM (VALUES (1, 1), (2, NULL), (3, 42)) t(c1, c2)
+SELECT fill(c2) OVER (ORDER BY c1) f;
 ```
 
 This will be the result:
+
 | f |
 |---:|
 | 1 |
@@ -255,13 +257,13 @@ This feature was [implemented](https://github.com/duckdb/duckdb/pull/17459) by [
 
 In-memory tables now support [checkpointing](https://github.com/duckdb/duckdb/pull/18348). This has two key benefits:
 
-1. In-memory tables now support compression. This is disabled by default – you can turn it on using:
+* In-memory tables now support compression. This is disabled by default – you can turn it on using:
 
-```sql
-ATTACH ':memory:' AS memory_compressed (COMPRESS);
-```
+  ```sql
+  ATTACH ':memory:' AS memory_compressed (COMPRESS);
+  ```
 
-Checkpointing triggers vacuuming deleted rows, allowing space to be reclaimed after deletes/truncation.
+* Checkpointing triggers vacuuming deleted rows, allowing space to be reclaimed after deletes/truncation.
 
 ## Distribution 
 
