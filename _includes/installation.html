@@ -258,6 +258,7 @@ install.packages("duckdb")
 
 <h4>Direct Download</h4>
 <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
+{%- include checksum_inline.html environment="java" -%}
 
 <h4>Maven</h4>
 {%- highlight xml -%}
@@ -378,6 +379,7 @@ go get github.com/marcboeker/go-duckdb
     data-architecture="x86_64">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-linux-amd64.zip</a>
+{%- include checksum_inline.html environment="odbc" platform="linux" architecture="x86_64" -%}
 
 </div>
 
@@ -389,6 +391,7 @@ go get github.com/marcboeker/go-duckdb
     data-architecture="arm64">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-arm64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-linux-arm64.zip</a>
+{%- include checksum_inline.html environment="odbc" platform="linux" architecture="arm64" -%}
 
 </div>
 
@@ -399,6 +402,7 @@ go get github.com/marcboeker/go-duckdb
     data-docs="/docs/stable/clients/odbc/overview">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-osx-universal.zip</a>
+{%- include checksum_inline.html environment="odbc" platform="macos" -%}
 
 </div>
 
@@ -410,6 +414,7 @@ go get github.com/marcboeker/go-duckdb
     data-architecture="x86_64">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
+{%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" -%}
 
 </div>
 
