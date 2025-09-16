@@ -56,7 +56,7 @@ body.documentation .highlight code a{
 }
 
 // class names
-.highlight :is(.nc, .nv){
+.highlight :is(.nc, .nv, .nl){
 	color: #d52753;
 }
 
@@ -71,7 +71,7 @@ body.documentation .highlight code a{
 }
 
 // strings
-.highlight :is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl, .nl){
+.highlight :is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl){
 	color: #c5a332;
 }
 

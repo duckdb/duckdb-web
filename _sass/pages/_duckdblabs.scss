@@ -133,8 +133,9 @@ body.landing{
 			margin-top: 100px;
 			h3{
 				padding: 20px;
-				font-size: var(--type-headline-3, 24px);
+				font-size: var(--type-title-2, 16px);
 				border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+				text-align: center;
 			}
 			.logos{
 				padding: 20px 30px;
