@@ -12,7 +12,7 @@ from sphinx.locale import __
 
 from generate_python_relational_docs import generate_python_relational_api_md
 
-DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "preview")
+DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "stable")
 
 redirect_from_text = """\
 redirect_from:
@@ -179,7 +179,7 @@ def main():
         filename.unlink()
 
     # test objects.inv
-    # python -m sphinx.ext.intersphinx http://localhost:4000/docs/preview/clients/python/reference/objects.inv
+    # python -m sphinx.ext.intersphinx http://localhost:4000/docs/stable/clients/python/reference/objects.inv
 
 
 if __name__ == "__main__":
