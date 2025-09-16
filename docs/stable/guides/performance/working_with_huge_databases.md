@@ -1,6 +1,5 @@
 ---
 layout: docu
-redirect_from: null
 title: Working with Huge Databases
 ---
 
