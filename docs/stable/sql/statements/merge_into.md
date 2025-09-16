@@ -42,7 +42,7 @@ ORDER BY id;
 | 3  | Sarah | 95000.0  |
 
 
-In the previous example we are updating the whole row if `id` matches. However, it is also a common pattern to receive a _change set_ with some keys and the changed value. This is a good use for `SET`.
+In the previous example we are updating the whole row if `id` matches. However, it is also a common pattern to receive a _change set_ with some keys and the changed value. This is a good use for `SET`. If the match condition uses a column that has the same name in the source and destination, the keyword `USING` can be used in the match condition.
 
 ```sql
 MERGE INTO people
@@ -51,7 +51,7 @@ MERGE INTO people
             1 AS id, 
             98_000.0 AS salary
     ) AS salary_updates
-    ON (salary_updates.id = people.id)
+    USING (id)
     WHEN MATCHED THEN UPDATE SET salary = salary_updates.salary;
 
 FROM people
@@ -72,7 +72,7 @@ MERGE INTO people
         SELECT
             1 AS id, 
     ) AS deletes
-    ON (deletes.id = people.id)
+    USING (id)
     WHEN MATCHED THEN DELETE;
 
 FROM people
@@ -92,7 +92,7 @@ MERGE INTO people
         SELECT
             unnest([3, 2]) AS id, 
     ) AS deletes
-    ON (deletes.id = people.id)
+    USING (id)
     WHEN MATCHED AND people.salary >= 100_000.0 THEN DELETE;
 
 FROM people
@@ -103,7 +103,7 @@ ORDER BY id;
 |---:|-------|--------:|
 | 3  | Sarah | 95000.0 |
 
-If needed, DuckDB also supports multiple `UPDATE` and `DELETE` conditions.
+If needed, DuckDB also supports multiple `UPDATE` and `DELETE` conditions. The `RETURNING` clause can be used to indicate which rows where affected by the `MERGE` statement.
 
 ```sql
 -- Let's get John back in!
@@ -114,20 +114,19 @@ MERGE INTO people
         SELECT
             unnest([3, 1]) AS id,
             unnest([89_000.0, 70_000.0]) AS salary
-    ) AS
-    ON (upserts.id = people.id)
+    ) AS upserts
+    USING (id)
     WHEN MATCHED AND people.salary < 100_000.0 THEN UPDATE SET salary = upserts.salary
     -- Second update or delete condition
     WHEN MATCHED AND people.salary > 100_000.0 THEN DELETE
-    WHEN NOT MATCHED THEN INSERT BY NAME;
-
-FROM people
-ORDER BY id;
+    WHEN NOT MATCHED THEN INSERT BY NAME
+    RETURNING merge_action, *;
 ```
 
-| id | name  | salary  |
-|---:|-------|--------:|
-| 3  | Sarah | 89000.0 |
+| merge_action | id | name  |  salary  |
+|--------------|---:|-------|---------:|
+| UPDATE       | 3  | Sarah | 89000.0  |
+| DELETE       | 1  | John  | 105000.0 |
 
 ## Syntax
 
