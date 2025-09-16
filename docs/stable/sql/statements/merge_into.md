@@ -7,7 +7,6 @@ title: MERGE INTO Statement
 
 The `MERGE INTO` statement is an alternative to `INSERT INTO ... ON CONFLICT` that doesn't need a primary key since it allows for a custom match condition. This is a very useful alternative for upserting use cases (`INSERT` + `UPDATE`) when the destination table does not have a primary key constraint.
 
-
 ## Examples
 
 First, let's create a simple table.
