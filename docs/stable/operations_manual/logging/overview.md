@@ -4,13 +4,13 @@ redirect_from: null
 title: Logging
 ---
 
-DuckDB contains a logging mechanism to provide additional information to users, such as query execution details,
+DuckDB implements a logging mechanism that provides users with detailed information about events such as query execution,
 performance metrics, and system events.
 
 ## Basics
 
-DuckDB's logging mechanism can be enabled or disabled using pragmas. By default, logs are stored in a special view
-called `duckdb_logs` that can be queried like any other table.
+The DuckDB logging mechanism can be enabled or disabled using a special function, `enable_logging`. Logs are stored in a special view
+named `duckdb_logs`, which can be queried like any standard table.
 
 Example:
 
@@ -18,6 +18,18 @@ Example:
 CALL enable_logging();
 -- Run some queries...
 SELECT * FROM duckdb_logs;
+```
+
+To disable logging, run
+
+```sql
+CALL disable_logging();
+```
+
+To clear the current log, run
+
+```sql
+CALL truncate_duckdb_logs()
 ```
 
 ## Log Level
@@ -40,8 +52,8 @@ CALL enable_logging(level='debug')
 
 In DuckDB, log messages can have an associated log type. Log types allow two main things:
 
-- fine-grained control over which log messages get created
-- structured logging
+- Fine-grained control over log message generation
+- Support for structured logging
 
 ### Logging-Specific Types
 
@@ -97,11 +109,13 @@ the following log storage types are implemented in core DuckDB
 | `file`      | Log to (a) csv file(s)                                    |
 
 
+Note that the `duckdb_logs` view is automatically updated to target the currently active log storage. This means that switching
+the log storage may influence what is returned by the `duckdb_logs` function.
+
 ### Logging to stdout
 ```sql
 CALL enable_logging(storage='stdout');
 ```
-
 
 ### Logging to file 
 
@@ -110,17 +124,18 @@ CALL enable_logging(storage='file', storage_config={'path': 'path/to/store/logs'
 ```
 or using the equivalent shorthand
 ```sql
-CALL enable_logging(storage_config='path': 'path/to/store/logs');
+CALL enable_logging(storage_path='path/to/store/logs');
 ```
 
+## Advanced Usage
 
-## Advanced usage
 
-### Buffer size
-The log storage in DuckDB uses a buffering mechanism to improve logging performance. What this means though is that there
-may be a delay between when a message is logged and when it is written out by the log storage. This can be annoying because it 
-obfuscates when the message was actually written. Especially when debugging crashes in DuckDB this is problematic because log
-message right before the crash may never get written. Fortunately, the buffer size can be adjusted to work around this:
+### Buffer Size
+
+The log storage in DuckDB implements a buffering mechanism to optimize logging performance. This implementation
+introduces a potential delay between message logging and storage writing. This delay can obscure the actual message writing time,
+which is particularly problematic when debugging crashes, as messages generated immediately before a crash might not be
+written. To address this, the buffer size can be configured as follows:
 
 ```sql
 CALL enable_logging(storage_config={'buffer_size': 0});
