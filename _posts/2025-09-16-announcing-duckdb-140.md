@@ -161,19 +161,19 @@ Click to see the code snippet showing Iceberg writes.
 INSTALL iceberg;
 LOAD iceberg;
 ATTACH '' AS iceberg_datalake (
-        TYPE ICEBERG,
-        CLIENT_ID 'admin',
-        CLIENT_SECRET 'password',
-        ENDPOINT 'http://127.0.0.1:8181'
-    );
+    TYPE iceberg,
+    CLIENT_ID 'admin',
+    CLIENT_SECRET 'password',
+    ENDPOINT 'http://127.0.0.1:8181'
+);
 CREATE SECRET (
-        TYPE S3,
-        KEY_ID 'admin',
-        SECRET 'password',
-        ENDPOINT '127.0.0.1:9000',
-        URL_STYLE 'path',
-        USE_SSL 0
-    );
+    TYPE S3,
+    KEY_ID 'admin',
+    SECRET 'password',
+    ENDPOINT '127.0.0.1:9000',
+    URL_STYLE 'path',
+    USE_SSL false
+);
 USE iceberg_datalake.default;
 ATTACH 'duckdb.db' AS duckdb_db;
 CREATE TABLE duckdb_db.t AS SELECT range a FROM range(4);
