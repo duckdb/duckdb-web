@@ -23,20 +23,33 @@ Starting with this release, every _other_ DuckDB version is going to be a Long T
 For LTS DuckDB versions, [community support](https://duckdblabs.com/community_support_policy/) will last a year after the release (for now).
 [DuckDB Labs](https://duckdblabs.com/) is also starting to offer support for older LTS versions after their community support has expired.
 
+<div align="center" style="margin:10px">
+    <img
+      src="/images/blog/lts-support.svg"
+      alt="DuckDB Long-Term Support"
+      width="700"
+    />
+</div>
+
+<details markdown='1'>
+<summary markdown='span'>
+Click to see the end-of-life (EOL) dates for DuckDB releases.
+</summary>
 |    Version | Codename     | End of community support |
 | ---------: | ------------ | ------------------------ |
 |       0.\* |              | 2024-06-03               |
 |     1.0.\* | Nivis        | 2024-09-09               |
 |     1.1.\* | Eatoni       | 2025-02-05               |
 |     1.2.\* | Histrionicus | 2025-05-21               |
-|     1.3.\* | Ossivalis    | 2025-09-15               |
-| 1.4.\* LTS | Andium       | 2026-09-15               |
+|     1.3.\* | Ossivalis    | 2025-09-16               |
+| 1.4.\* LTS | Andium       | 2026-09-16               |
+<details>
 
 ## New Features
 
 ### Database Encryption
 
-Being able to encrypt DuckDB database files has been a [long-standing feature request](https://github.com/duckdb/duckdb/discussions/4512). Starting with this release, DucKDB supports encryption of its files. Encryption keys are given using the `ENCRYPTION_KEY` parameter for to [`ATTACH`]({% link docs/stable/sql/statements/attach.md %}), like so:
+Being able to encrypt DuckDB database files has been a [long-standing feature request](https://github.com/duckdb/duckdb/discussions/4512). Starting with this release, DuckDB supports encryption of its files. Encryption keys are given using the `ENCRYPTION_KEY` parameter for to [`ATTACH`]({% link docs/stable/sql/statements/attach.md %}), like so:
 
 ```sql
 ATTACH 'encrypted.db' AS enc (ENCRYPTION_KEY 'asdf');
@@ -129,7 +142,7 @@ CREATE SECRET (
         USE_SSL 0
     );
 USE iceberg_datalake.default;
-ATTACH ‘duckdb.db’ AS duckdb_db;
+ATTACH 'duckdb.db' AS duckdb_db;
 CREATE TABLE duckdb_db.t AS SELECT range a FROM range(4);
 CREATE TABLE t AS SELECT * FROM duckdb_db.t;
 FROM iceberg_datalake.default.t;
@@ -165,7 +178,7 @@ This means that copying data from DuckDB or DuckLake to Iceberg is now possible.
 
 ### CLI Progress Bar ETA
 
-Community member [Rusty Conover (@rustyconover)](https://github.com/rustyconover) [contributed](https://github.com/duckdb/duckdb/pull/18575) an ETA (estimated time of arrival) feature to the DuckDB command line client. Estimating the remaining time is a difficult problem as progress measurements can vary a lot due to noise. To alleviate this, the new feature estimate uses a Kalman filter to improve estimates. Here's how it works in practice:
+Community member [Rusty Conover (@rustyconover)](https://github.com/rustyconover) [contributed](https://github.com/duckdb/duckdb/pull/18575) an ETA (estimated time of arrival) feature to the DuckDB command line client. Estimating the remaining time is a [difficult problem](https://xkcd.com/612/) as progress measurements can vary a lot due to noise. To alleviate this, the ETA feature first collects some initial performance data, then continues to refine its estimate using a [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter). Here's how it works in practice:
 
 <video muted controls loop width="700" class="lightmode-img">
   <source src="https://blobs.duckdb.org/videos/cli-eta-light.mov" type="video/mp4">
