@@ -206,6 +206,22 @@
       $live.text(liveText.join(', '));
     }
 
+    function updateVersionLabel() {
+      if (!$inst || !$inst.length) return;
+      var core = String($inst.attr('data-core-version') || '').trim();
+      var jv = String($inst.attr('data-java-version') || '').trim();
+      var ov = String($inst.attr('data-odbc-version') || '').trim();
+      var env = state.environment || '';
+      var ver = core;
+      if (env === 'java' && jv) ver = jv;
+      else if (env === 'odbc' && ov) ver = ov;
+      var $cv = $inst.find('.currentversion');
+      if ($cv.length) {
+        if (ver) $cv.text('v' + ver);
+        else $cv.text('');
+      }
+    }
+
     function updateFoldouts(animate) {
       var shouldClosePlat = !!state.platform && (state.platform === 'macos' || !!state.architecture);
       setFoldoutOpen($foldPlat, !shouldClosePlat, !!animate);
@@ -393,6 +409,7 @@
       writeURL();
       render();
       updateHeadings();
+      updateVersionLabel();
       updateFoldouts(true);
     }
 
@@ -493,6 +510,7 @@
     $('.installation-instructions').hide();
     render();
     updateHeadings();
+    updateVersionLabel();
     updateFoldouts(false);
     wire();
 
@@ -506,8 +524,10 @@
           writeURL();
           render();
           updateHeadings();
+          updateVersionLabel();
           updateFoldouts(true);
         } else if (!arch) {
+          updateVersionLabel();
           updateFoldouts(true);
         }
       });
