@@ -23,13 +23,8 @@ Starting with this release, every _other_ DuckDB version is going to be a Long T
 For LTS DuckDB versions, [community support](https://duckdblabs.com/community_support_policy/) will last a year after the release (for now).
 [DuckDB Labs](https://duckdblabs.com/) is also starting to offer support for older LTS versions after their community support has expired.
 
-<div align="center" style="margin:10px">
-    <img
-      src="/images/blog/lts-support.svg"
-      alt="DuckDB Long-Term Support"
-      width="700"
-    />
-</div>
+![DuckDB LTS support]({{ site.baseurl }}/images/blog/lts-support-light.svg){: .lightmode-img }
+![DuckDB LTS support]({{ site.baseurl }}/images/blog/lts-support-dark.svg){: .darkmode-img }
 
 <details markdown='1'>
 <summary markdown='span'>
