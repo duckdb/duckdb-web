@@ -45,7 +45,7 @@ Note that using remote paths for compressed files is currently not possible.
 
 ## Building and Installing Extensions from Source
 
-For building and installing extensions from source, see the [Building DuckkDB guide]({% link docs/stable/dev/building/overview.md %}).
+For building and installing extensions from source, see the [Building DuckDB guide]({% link docs/stable/dev/building/overview.md %}).
 
 ### Statically Linking Extensions
 
