@@ -82,9 +82,79 @@ Functions related to binding, used for bulk insertion or in prepared statements.
 |:---|:-|:---|:----|
 | `StatementBindStream` |  Bind Arrow Stream. This can be used for bulk inserts or prepared statements. | `(AdbcStatement*, ArrowArrayStream*, AdbcError*)` | `StatementBindStream(&adbc_statement, &input_data, &adbc_error)` |
 
+## Setting Up the DuckDB ADBC Driver
+
+Before using DuckDB as an ADBC driver, you must install the `libduckdb` shared library on your system and make it available to your application. This library contains the core DuckDB engine that the ADBC driver interfaces with.
+
+### Downloading libduckdb
+
+Download the appropriate `libduckdb` library for your platform from the [DuckDB releases page](https://github.com/duckdb/duckdb/releases):
+
+- **Linux**: `libduckdb-linux-amd64.zip` (contains `libduckdb.so`)
+- **macOS**: `libduckdb-osx-universal.zip` (contains `libduckdb.dylib`)
+- **Windows**: `libduckdb-windows-amd64.zip` (contains `duckdb.dll`)
+
+Extract the archive to obtain the shared library file.
+
+### Installing the Library
+
+#### Linux
+
+1. Extract the `libduckdb.so` file from the downloaded archive
+2. Make sure your code can use the library. You can:
+  * Either copy it to a system library directory (requires root access):
+    ```bash 
+    sudo cp libduckdb.so /usr/local/lib/
+    sudo ldconfig
+    ```
+  * Or place it in a custom directory and add that directory to your `LD_LIBRARY_PATH`:
+    ```bash
+    mkdir -p ~/lib
+    cp libduckdb.so ~/lib/
+    export LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
+    ```
+
+#### macOS
+
+1. Extract the `libduckdb.dylib` file from the downloaded archive
+2. Make sure your code can use the library. You can:
+  * Either copy it to a system library directory:
+    ```bash
+    sudo cp libduckdb.dylib /usr/local/lib/
+    ```
+  * Or place it in a custom directory and add that directory to your `DYLD_LIBRARY_PATH`:
+    ```bash
+    mkdir -p ~/lib
+    cp libduckdb.dylib ~/lib/
+    export DYLD_LIBRARY_PATH=~/lib:$DYLD_LIBRARY_PATH
+    ```
+
+#### Windows
+
+1. Extract the `duckdb.dll` file from the downloaded archive
+2. Place it in one of the following locations:
+   - The same directory as your application executable
+   - A directory listed in your `PATH` environment variable
+   - The Windows system directory (e.g., `C:\Windows\System32`)
+
+
+### Understanding Library Paths
+
+The **LD_LIBRARY_PATH** (Linux) and **DYLD_LIBRARY_PATH** (macOS) are environment variables that tell the system where to look for shared libraries at runtime. When your application tries to load `libduckdb`, the system searches these paths to locate the library file.
+
+### Verifying Installation
+
+You can verify that the library is properly installed and accessible:
+
+**Linux/macOS:**
+```bash
+ldd path/to/your/application  # Linux
+otool -L path/to/your/application  # macOS
+```
+
 ## Examples
 
-Regardless of the programming language being used, there are two database options which will be required to utilize ADBC with DuckDB. The first one is the `driver`, which takes a path to the DuckDB library. The second option is the `entrypoint`, which is an exported function from the DuckDB-ADBC driver that initializes all the ADBC functions. Once we have configured these two options, we can optionally set the `path` option, providing a path on disk to store our DuckDB database. If not set, an in-memory database is created. After configuring all the necessary options, we can proceed to initialize our database. Below is how you can do so with various different language environments.
+Regardless of the programming language being used, there are two database options which will be required to utilize ADBC with DuckDB. The first one is the `driver`, which takes a path to the DuckDB library (see [Setting Up the DuckDB Library](#setting-up-the-duckdb-library) above for installation instructions). The second option is the `entrypoint`, which is an exported function from the DuckDB-ADBC driver that initializes all the ADBC functions. Once we have configured these two options, we can optionally set the `path` option, providing a path on disk to store our DuckDB database. If not set, an in-memory database is created. After configuring all the necessary options, we can proceed to initialize our database. Below is how you can do so with various different language environments.
 
 ### C++
 
@@ -98,7 +168,7 @@ AdbcStatement adbc_statement;
 ArrowArrayStream arrow_stream;
 ```
 
-We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` options as mentioned above. Then we set the `path` option and initialize the database. With the example below, the string `"path/to/libduckdb.dylib"` should be the path to the dynamic library for DuckDB. This will be `.dylib` on macOS, and `.so` on Linux.
+We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` options as mentioned above. Then we set the `path` option and initialize the database. The `driver` option should point to your installed `libduckdb` library - see [Setting Up the DuckDB Library](#setting-up-the-duckdb-library) for installation instructions.
 
 ```cpp
 AdbcDatabaseNew(&adbc_database, &adbc_error);
@@ -173,7 +243,7 @@ with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
 
 ### Go
 
-Make sure to download the `libduckdb` library first (i.e., the `.so` on Linux, `.dylib` on Mac or `.dll` on Windows) from the [releases page](https://github.com/duckdb/duckdb/releases), and put it on your `LD_LIBRARY_PATH` before you run the code (but if you don't, the error will explain your options regarding the location of this file.)
+Make sure to install the `libduckdb` library first - see [Setting Up the DuckDB Library](#setting-up-the-duckdb-library) for detailed installation instructions.
 
 The following example uses an in-memory DuckDB database to modify in-memory Arrow RecordBatches via SQL queries:
 
