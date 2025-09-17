@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: zipfs
   description: Read files within zip archives
-  version: 1.3.2
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: isaacbrodsky/duckdb-zipfs
-  ref: d9e4ff22c851f7d3892b239d5a8227d82639e664
+  ref: 06c32cfe02d2590e4f061cfc5b468dad4c1ab542
 
 docs:
   hello_world: |
@@ -54,9 +54,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|      name       |                                                                             description                                                                             | input_type | scope  |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
-| zipfs_extension | Extension to look for splitting the zip path and the file path within the zip. To specify an artificial seperator, instead set: `set zipfs_split = '!!';`           | VARCHAR    | GLOBAL |
-| zipfs_split     | Extension to look for splitting the zip path and the file path within the zip. Will be removed from the zip file name. Overrides zipfs_extension. Defaults to NULL. | VARCHAR    | GLOBAL |
+|      name       |                                                                             description                                                                             | input_type | scope  | aliases |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| zipfs_extension | Extension to look for splitting the zip path and the file path within the zip. To specify an artificial seperator, instead set: `set zipfs_split = '!!';`           | VARCHAR    | GLOBAL | []      |
+| zipfs_split     | Extension to look for splitting the zip path and the file path within the zip. Will be removed from the zip file name. Overrides zipfs_extension. Defaults to NULL. | VARCHAR    | GLOBAL | []      |
 
 
