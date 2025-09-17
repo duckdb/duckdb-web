@@ -18,15 +18,15 @@ extension:
 
 repo:
   github: duckdb/extension-template-c
-  ref: 7463f669f6ea6705876dee047114f6484ba6ef6f
+  ref: 7f71365c5ce61b2b346717af07c9d448cfc9d3c3
 
 docs:
   extended_description: |
     The capi_quack extension is based on DuckDB's [C/C++ C API template](https://github.com/duckdb/extension-template-c/).
 
 
-extension_star_count: 16
-extension_star_count_pretty: 16
+extension_star_count: 17
+extension_star_count_pretty: 17
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_capi_quack.png'
