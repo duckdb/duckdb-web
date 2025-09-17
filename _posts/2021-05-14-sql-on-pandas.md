@@ -365,7 +365,7 @@ Nevertheless, for good measure we have run the first Ungrouped Aggregate query i
 | Pandas      |   0.017   |
 | PandaSQL    |   24.43   |
 
-We can see that PandaSQL (powered by SQLite) is around 1000X~ slower than either Pandas or DuckDB on this straightforward benchmark. The performance difference was so large we have opted not to run the other benchmarks for PandaSQL.
+We can see that PandaSQL (powered by SQLite) is around 1000× slower than either Pandas or DuckDB on this straightforward benchmark. The performance difference was so large we have opted not to run the other benchmarks for PandaSQL.
 
 ## Appendix C: Query on Parquet Directly
 

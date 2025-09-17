@@ -146,8 +146,8 @@ FROM (
 
 for a matrix of the following values:
 
-* Prices – 100K to 1B rows in steps of 10x;
-* Time – 1 to 2048 rows in steps of 2x (until it got too slow);
+* Prices – 100K to 1B rows in steps of 10×;
+* Time – 1 to 2048 rows in steps of 2× (until it got too slow);
 * Threads – 36, 18 and 9;
 
 Here are the results:

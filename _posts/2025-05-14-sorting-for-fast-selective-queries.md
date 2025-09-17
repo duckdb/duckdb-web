@@ -218,7 +218,7 @@ These can boost performance if multiple reader workloads with different filters 
 For example, what if I need to filter by US state for some queries, but by customer last name for others?
 Additionally, sorting by rounded time buckets (day, month, or year) and then by other columns can be helpful when only recent data is needed.
 
-Microbenchmarks will show the 10x performance benefits that were mentioned at the start of this post!
+Microbenchmarks will show the 10× performance benefits that were mentioned at the start of this post!
 The post will also provide ways to measure how effectively a table is sorted along various columns.
 
 ## Conclusion
