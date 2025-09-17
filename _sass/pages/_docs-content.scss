@@ -207,43 +207,6 @@ body.documentation {
     }
 
 
-
-    // Lists
-    dl,
-    ol,
-    ul {
-        margin-bottom: 15px;
-    }
-
-    li {
-        line-height: 1.5;
-    }
-
-    ol {
-        list-style-position: inside;
-        list-style: decimal;
-        padding-left: 20px;
-    }
-
-    dl {
-        dt {
-            font-weight: bold;
-        }
-
-        dd,
-        p {
-            padding-left: 20px;
-            font-style: italic;
-        }
-    }
-
-    hr {
-        margin: 20px 0 10px 0;
-        border: 0.5px solid rgb(229, 229, 229);
-    }
-
-
-
     // Main content specific styles
     #main_content_wrap {
         table {
@@ -256,6 +219,40 @@ body.documentation {
                 font-variant-ligatures: none;
             }
 
+        }
+        
+        // Lists
+        dl,
+        ol,
+        ul {
+            margin-bottom: 15px;
+        }
+        
+        li {
+            line-height: 1.5;
+        }
+        
+        ol {
+            list-style-position: inside;
+            list-style: decimal;
+            padding-left: 20px;
+        }
+        
+        dl {
+            dt {
+                font-weight: bold;
+            }
+        
+            dd,
+            p {
+                padding-left: 20px;
+                font-style: italic;
+            }
+        }
+        
+        hr {
+            margin: 20px 0 10px 0;
+            border: 0.5px solid rgb(229, 229, 229);
         }
         
         ul {
