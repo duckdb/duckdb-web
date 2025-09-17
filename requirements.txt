@@ -1,5 +1,5 @@
 # used to generate python api docs
-duckdb --pre
+duckdb
 sphinx
 pandas
 pandas-stubs
