@@ -103,12 +103,12 @@ Extract the archive to obtain the shared library file.
 1. Extract the `libduckdb.so` file from the downloaded archive
 2. Make sure your code can use the library. You can:
   - Either copy it to a system library directory (requires root access):
-    ```bash 
+    ```batch 
     sudo cp libduckdb.so /usr/local/lib/
     sudo ldconfig
     ```
   - Or place it in a custom directory and add that directory to your `LD_LIBRARY_PATH`:
-    ```bash
+    ```batch
     mkdir -p ~/lib
     cp libduckdb.so ~/lib/
     export LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
@@ -119,11 +119,11 @@ Extract the archive to obtain the shared library file.
 1. Extract the `libduckdb.dylib` file from the downloaded archive
 2. Make sure your code can use the library. You can:
   - Either copy it to a system library directory:
-    ```bash
+    ```batch
     sudo cp libduckdb.dylib /usr/local/lib/
     ```
   - Or place it in a custom directory and add that directory to your `DYLD_LIBRARY_PATH`:
-    ```bash
+    ```batch
     mkdir -p ~/lib
     cp libduckdb.dylib ~/lib/
     export DYLD_LIBRARY_PATH=~/lib:$DYLD_LIBRARY_PATH
@@ -147,7 +147,7 @@ The **LD_LIBRARY_PATH** (Linux) and **DYLD_LIBRARY_PATH** (macOS) are environmen
 You can verify that the library is properly installed and accessible:
 
 **Linux/macOS:**
-```bash
+```batch
 ldd path/to/your/application  # Linux
 otool -L path/to/your/application  # macOS
 ```
@@ -208,7 +208,7 @@ StatementExecuteQuery(&adbc_statement, nullptr, nullptr, &adbc_error);
 
 The first thing to do is to use `pip` and install the ADBC Driver manager. You will also need to install the `pyarrow` to directly access Apache Arrow formatted result sets (such as using `fetch_arrow_table`).
 
-```bash
+```batch
 pip install adbc_driver_manager pyarrow
 ```
 
