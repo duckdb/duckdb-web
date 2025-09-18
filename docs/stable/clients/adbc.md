@@ -102,32 +102,40 @@ Extract the archive to obtain the shared library file.
 
 1. Extract the `libduckdb.so` file from the downloaded archive
 2. Make sure your code can use the library. You can:
-  - Either copy it to a system library directory (requires root access):
-    ```batch 
-    sudo cp libduckdb.so /usr/local/lib/
-    sudo ldconfig
-    ```
-  - Or place it in a custom directory and add that directory to your `LD_LIBRARY_PATH`:
-    ```batch
-    mkdir -p ~/lib
-    cp libduckdb.so ~/lib/
-    export LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
-    ```
+
+    - Either copy it to a system library directory (requires root access):
+
+      ```batch
+      sudo cp libduckdb.so /usr/local/lib/
+      sudo ldconfig
+      ```
+
+    - Or place it in a custom directory and add that directory to your `LD_LIBRARY_PATH`:
+
+      ```batch
+      mkdir -p ~/lib
+      cp libduckdb.so ~/lib/
+      export LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
+      ```
 
 #### macOS
 
 1. Extract the `libduckdb.dylib` file from the downloaded archive
 2. Make sure your code can use the library. You can:
-  - Either copy it to a system library directory:
-    ```batch
-    sudo cp libduckdb.dylib /usr/local/lib/
-    ```
-  - Or place it in a custom directory and add that directory to your `DYLD_LIBRARY_PATH`:
-    ```batch
-    mkdir -p ~/lib
-    cp libduckdb.dylib ~/lib/
-    export DYLD_LIBRARY_PATH=~/lib:$DYLD_LIBRARY_PATH
-    ```
+
+    - Either copy it to a system library directory:
+
+      ```batch
+      sudo cp libduckdb.dylib /usr/local/lib/
+      ```
+
+    - Or place it in a custom directory and add that directory to your `DYLD_LIBRARY_PATH`:
+
+      ```batch
+      mkdir -p ~/lib
+      cp libduckdb.dylib ~/lib/
+      export DYLD_LIBRARY_PATH=~/lib:$DYLD_LIBRARY_PATH
+      ```
 
 #### Windows
 
