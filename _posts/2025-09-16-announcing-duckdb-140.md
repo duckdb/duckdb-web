@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Announcing DuckDB 1.4.0"
+title: "Announcing DuckDB 1.4.0 LTS"
 author: "The DuckDB team"
-thumb: "/images/blog/thumbs/duckdb-release-1-4-0.svg"
-image: "/images/blog/thumbs/duckdb-release-1-4-0.png"
+thumb: "/images/blog/thumbs/duckdb-release-1-4-0-lts.svg"
+image: "/images/blog/thumbs/duckdb-release-1-4-0-lts.png"
 excerpt: "We're releasing DuckDB version 1.4.0, codenamed “Andium”. This is an LTS release with one year of community support, and it packs several new features including database encryption, the MERGE statement and Iceberg writes."
 tags: ["release"]
 ---
