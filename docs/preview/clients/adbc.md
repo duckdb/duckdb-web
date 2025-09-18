@@ -144,7 +144,7 @@ Extract the archive to obtain the shared library file.
 
 ### Understanding Library Paths
 
-The **LD_LIBRARY_PATH** (Linux) and **DYLD_LIBRARY_PATH** (macOS) are environment variables that tell the system where to look for shared libraries at runtime. When your application tries to load `libduckdb`, the system searches these paths to locate the library file.
+The `LD_LIBRARY_PATH` (Linux) and `DYLD_LIBRARY_PATH` (macOS) are environment variables that tell the system where to look for shared libraries at runtime. When your application tries to load `libduckdb`, the system searches these paths to locate the library file.
 
 ### Verifying Installation
 
