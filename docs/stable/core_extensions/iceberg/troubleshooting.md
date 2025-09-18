@@ -26,7 +26,7 @@ Curl Request to '/v1/oauth/tokens' failed with error: 'URL using bad/illegal for
 
 Make sure that you have the latest Iceberg extension installed:
 
-```bash
+```batch
 duckdb
 ```
 
@@ -36,7 +36,7 @@ FORCE INSTALL iceberg FROM core_nightly;
 
 Exit DuckDB and start a new session:
 
-```bash
+```batch
 duckdb
 ```
 

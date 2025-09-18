@@ -6,7 +6,7 @@ title: Command Line Arguments
 The table below summarizes DuckDB's command line options.
 To list all command line options, use the command:
 
-```bash
+```batch
 duckdb -help
 ```
 
@@ -57,7 +57,7 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 Note that the CLI arguments are processed in order, similarly to the behavior of the SQLite CLI.
 For example:
 
-```bash
+```batch
 duckdb -csv -c 'SELECT 42 AS hello' -json -c 'SELECT 84 AS world'
 ```
 

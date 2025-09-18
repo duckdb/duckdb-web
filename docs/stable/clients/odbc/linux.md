@@ -16,13 +16,13 @@ Users can install it from the command line:
 
 On Debian-based distributions (Ubuntu, Mint, etc.), run:
 
-```bash
+```batch
 sudo apt-get install unixodbc odbcinst
 ```
 
 On Fedora-based distributions (Amazon Linux, RHEL, CentOS, etc.), run:
 
-```bash
+```batch
 sudo yum install unixODBC
 ```
 
@@ -44,7 +44,7 @@ sudo yum install unixODBC
 
    To extract them, run:
 
-   ```bash
+   ```batch
    mkdir duckdb_odbc && unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
    ```
 
@@ -54,19 +54,19 @@ sudo yum install unixODBC
 
    The `-u` option based on the user home directory to setup the ODBC init files.
 
-   ```bash
+   ```batch
    ./unixodbc_setup.sh -u
    ```
 
    The `-s` option changes the system level files that will be visible for all users, because of that it requires root privileges.
 
-   ```bash
+   ```batch
    sudo ./unixodbc_setup.sh -s
    ```
 
    The option `--help` shows the usage of `unixodbc_setup.sh` prints the help.
 
-   ```bash
+   ```batch
    ./unixodbc_setup.sh --help
    ```
 

@@ -19,7 +19,7 @@ Using the DuckDB ODBC API on Windows requires the following steps:
 
    Decompress the archive to a directory (e.g., `duckdb_odbc`). For example, run:
 
-   ```bash
+   ```batch
    mkdir duckdb_odbc && unzip duckdb_odbc-windows-amd64.zip -d duckdb_odbc
    ```
 

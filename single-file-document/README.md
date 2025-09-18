@@ -7,7 +7,7 @@
 
 ## Generate document
 
-```bash
+```batch
 single-file-document/generate_single_file_documentation.sh
 ```
 
@@ -15,7 +15,7 @@ single-file-document/generate_single_file_documentation.sh
 
 If you do not have Pandoc installed, you can build with Docker using:
 
-```bash
+```batch
 single-file-document/generate_single_file_documentation.sh --docker
 ```
 
@@ -23,7 +23,7 @@ single-file-document/generate_single_file_documentation.sh --docker
 
 To generate the intermediate LaTeX code produced by Pandoc, run:
 
-```bash
+```batch
 single-file-document/generate_latex.sh
 ```
 

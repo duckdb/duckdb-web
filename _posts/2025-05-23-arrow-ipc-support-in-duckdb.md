@@ -119,7 +119,7 @@ which prints:
 
 What if you want to fetch an Arrow IPC stream directly from a server into DuckDB? To demonstrate this, we can start an HTTP file server in the same directory where we saved `lineitem.arrows`. We use the Node.js package [serve](https://www.npmjs.com/package/serve) to do this (instead of Python's built-in `http.server`) because it supports [HTTP range requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests):
 
-```batch
+```bash
 npx serve -l 8008
 ```
 
@@ -147,7 +147,7 @@ which prints the same result:
 
 Alternatively, you can use a tool like `curl` to fetch Arrow IPC data from a server and pipe it to DuckDB in the terminal:
 
-```batch
+```bash
 URL="http://localhost:8008/lineitem.arrows"
 SQL="LOAD arrow; FROM read_arrow('/dev/stdin') SELECT count(*);"
 

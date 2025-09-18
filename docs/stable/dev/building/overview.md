@@ -21,7 +21,7 @@ Additionally, we recommend using the [Ninja build system](https://ninja-build.or
 A `Makefile` wraps the build process.
 See [Build Configuration]({% link docs/stable/dev/building/build_configuration.md %}) for targets and configuration flags.
 
-```batch
+```bash
 make
 make release # same as plain make
 make debug
@@ -101,7 +101,7 @@ DuckDB can also be built for end-of-life platforms such as [macOS 11](https://en
 DuckDB can be build as a single pair of C++ header and source code files (`duckdb.hpp` and `duckdb.cpp`) with approximately 0.5M lines of code.
 To generate this file, run:
 
-```batch
+```bash
 python scripts/amalgamation.py
 ```
 

@@ -30,7 +30,7 @@ Note that the separator is not the pipe character `|`, instead it is the [“Box
 First, we save the table above as `duckbox.csv`.
 Then, we clean it using `sed`:
 
-```batch
+```bash
 echo -n > duckbox-cleaned.csv
 sed -n "2s/^│ *//;s/ *│$//;s/ *│ */│/p;2q" duckbox.csv >> duckbox-cleaned.csv
 sed "1,4d;\$d;s/^│ *//;s/ *│$//;s/ *│ */│/g" duckbox.csv >> duckbox-cleaned.csv

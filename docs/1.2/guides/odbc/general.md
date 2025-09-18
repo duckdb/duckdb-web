@@ -111,19 +111,19 @@ These files contain the definitions of the ODBC functions, as well as the data t
 
 On macOS:
 
-```bash
+```batch
 brew install unixodbc
 ```
 
 On Ubuntu and Debian:
 
-```bash
+```batch
 sudo apt-get install -y unixodbc-dev
 ```
 
 On Fedora, CentOS, and Red Hat:
 
-```bash
+```batch
 sudo yum install -y unixODBC-devel
 ```
 

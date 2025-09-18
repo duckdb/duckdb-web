@@ -11,7 +11,7 @@ DuckDB has a powerful [macro mechanism]({% link docs/stable/sql/statements/creat
 
 First, we defined a macro that pretty-prints a non-negative integer as a short string with thousands, millions, and billions (without rounding) as follows:
 
-```bash
+```batch
 duckdb pretty_print_integer_macro.duckdb
 ```
 
@@ -42,7 +42,7 @@ We have published this macro on `blobs.duckdb.org`.
 
 You can try it from DuckDB:
 
-```bash
+```batch
 duckdb
 ```
 
@@ -74,7 +74,7 @@ SELECT pretty_print_macro_db.pretty_print_integer(42_123) AS x;
 
 It's also possible to share table macros. For example, we created the [`checksum` macro]({% post_url 2024-10-11-duckdb-tricks-part-2 %}#computing-checksums-for-columns) as follows:
 
-```bash
+```batch
 duckdb compute_table_checksum.duckdb
 ```
 

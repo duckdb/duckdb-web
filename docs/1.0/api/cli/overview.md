@@ -25,7 +25,7 @@ If in a PowerShell or POSIX shell environment, use the command `./duckdb` instea
 
 The typical usage of the `duckdb` command is the following:
 
-```bash
+```batch
 duckdb [OPTIONS] [FILENAME]
 ```
 
@@ -44,7 +44,7 @@ For a full list of options, see the [command line arguments page]({% link docs/1
 When no `[FILENAME]` argument is provided, the DuckDB CLI will open a temporary [in-memory database]({% link docs/1.0/connect/overview.md %}#in-memory-database).
 You will see DuckDB's version number, the information on the connection and a prompt starting with a `D`.
 
-```bash
+```batch
 duckdb
 ```
 
@@ -58,7 +58,7 @@ D
 
 To open or create a [persistent database]({% link docs/1.0/connect/overview.md %}#persistent-database), simply include a path as a command line argument:
 
-```bash
+```batch
 duckdb my_database.duckdb
 ```
 
@@ -205,7 +205,7 @@ Note that the duck head is built with Unicode characters and does not work in al
 
 To invoke that file on initialization, use this command:
 
-```bash
+```batch
 duckdb -init prompt.sql
 ```
 
@@ -224,13 +224,13 @@ Use ".open FILENAME" to reopen on a persistent database.
 
 To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
 
-```bash
+```batch
 duckdb < select_example.sql
 ```
 
 To execute a command with SQL text passed in directly from the command line, call `duckdb` with two arguments: the database location (or `:memory:`), and a string with the SQL statement to execute.
 
-```bash
+```batch
 duckdb :memory: "SELECT 42 AS the_answer"
 ```
 
@@ -258,7 +258,7 @@ COPY (SELECT 42 AS woot UNION ALL SELECT 43 AS woot) TO 'test.csv' (HEADER);
 
 First, read a file and pipe it to the `duckdb` CLI executable. As arguments to the DuckDB CLI, pass in the location of the database to open, in this case, an in-memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
 
-```bash
+```batch
 cat test.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
@@ -269,7 +269,7 @@ cat test.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 
 To write back to stdout, the copy command can be used with the `/dev/stdout` file location.
 
-```bash
+```batch
 cat test.csv | \
     duckdb -c "COPY (SELECT * FROM read_csv('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
 ```

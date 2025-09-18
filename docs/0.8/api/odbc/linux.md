@@ -14,13 +14,13 @@ Users can install it from the command line:
 
 ## Debian SO flavors
 
-```bash
+```batch
 sudo apt get install unixodbc
 ```
 
 ## Fedora SO flavors
 
-```bash
+```batch
 sudo yum install unixodbc
 # or
 sudo dnf install unixodbc
@@ -38,7 +38,7 @@ DuckDB releases the ODBC driver as asset. For linux, download it from <a href="h
 
 Run unzip to extract the files to a permanent directory:
 
-```bash
+```batch
 mkdir duckdb_odbc
 unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
 ```
@@ -54,7 +54,7 @@ In a terminal window, change to the `duckdb_odbc` permanent directory, and run t
 
 The `-u` option based on the user home directory to setup the ODBC init files.
 
-```bash
+```batch
 unixodbc_setup.sh -u
 ```
 
@@ -64,7 +64,7 @@ P.S.: The default configuration consists of a database `:memory:`.
 
 The **-s** changes the system level files that will be visible for all users, because of that it requires root privileges.
 
-```bash
+```batch
 sudo unixodbc_setup.sh -s
 ```
 P.S.: The default configuration consists of a database `:memory:`.
@@ -74,7 +74,7 @@ P.S.: The default configuration consists of a database `:memory:`.
 
 The option `--help` shows the usage of `unixodbc_setup.sh` that provides alternative options for a customer configuration, like `-db` and `-D`.
 
-```bash
+```batch
 unixodbc_setup.sh --help
 
 Usage: ./unixodbc_setup.sh <level> [options]

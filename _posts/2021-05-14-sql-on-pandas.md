@@ -65,7 +65,7 @@ As DuckDB is capable of using multiple processors (multi-threading), we include 
 
 First we need to install DuckDB. This is a simple one-liner.
 
-```bash
+```batch
 pip install duckdb
 ```
 

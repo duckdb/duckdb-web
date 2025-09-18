@@ -96,6 +96,6 @@ The editor is taken from the first set environment variable among `DUCKDB_EDITOR
 
 If you prefer, you can use [`rlwrap`](https://github.com/hanslub42/rlwrap) to use read-line directly with the shell. Then, use `Shift`+`Enter` to insert a newline and `Enter` to execute the query:
 
-```bash
+```batch
 rlwrap --substitute-prompt="D " duckdb -batch
 ```

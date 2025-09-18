@@ -32,7 +32,7 @@ Therefore, it's use is not recommended.
 
 The user [“LivingLinux” on Bluesky](https://bsky.app/profile/livinglinux.bsky.social) managed to [build DuckDB](https://bsky.app/profile/livinglinux.bsky.social/post/3lak5q7mmg42j) for a [RISC-V](https://en.wikipedia.org/wiki/RISC-V) profile and [published a video about it](https://www.youtube.com/watch?v=G6uVDH3kvNQ). The instruction to build DuckDB, including the `fts` extension, is the following:
 
-```bash
+```batch
 GEN=ninja \
     CC='gcc-14 -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \
     CXX='g++-14 -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \
@@ -42,7 +42,7 @@ GEN=ninja \
 
 For those who do not have a RISC-V chip development environment, you can cross-compile DuckDB using latest [g++-riscv64-linux-gnu](https://github.com/riscv-collab/riscv-gnu-toolchain) :
 
-```bash
+```batch
 GEN=ninja \
     CC='riscv64-linux-gnu-gcc -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \
     CXX='riscv64-linux-gnu-g++ -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \

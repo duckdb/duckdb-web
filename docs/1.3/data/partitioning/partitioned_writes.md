@@ -50,7 +50,7 @@ The values of the partitions are automatically extracted from the data. Note tha
 
 To limit the maximum number of files the system can keep open before flushing to disk when writing using `PARTITION_BY`, use the `partitioned_write_max_open_files` configuration option (default: 100):
 
-```bash
+```batch
 SET partitioned_write_max_open_files = 10;
 ```
 

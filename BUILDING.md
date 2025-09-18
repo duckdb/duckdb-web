@@ -30,7 +30,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
 2. Install Jekyll and the other required Ruby dependencies using Bundler:
 
-    ```bash
+    ```batch
     bundle install
     ```
 
@@ -38,7 +38,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
 3. Create a Python virtual env and install requirements:
 
-    ```bash
+    ```batch
     python3 -m venv venv
     source venv/bin/activate
     pip install -r requirements.txt
@@ -48,7 +48,7 @@ The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
 To serve this website, run:
 
-```bash
+```batch
 scripts/serve-latest.sh
 ```
 
@@ -56,7 +56,7 @@ Visit <http://localhost:4000/docs/> to browse the website.
 
 Note that to save time on building, the `serve-latest.sh` script only deploys the latest stable version and excludes the archives. To serve the full website with old versions included, run:
 
-```bash
+```batch
 scripts/serve.sh
 ```
 
@@ -72,13 +72,13 @@ For portability, we provide a [Docker image](Dockerfile).
 
 First, build the image using:
 
-```bash
+```batch
 scripts/docker-build.sh
 ```
 
 Serve the website (latest only, archives excluded) with:
 
-```bash
+```batch
 scripts/docker-serve-latest.sh
 ```
 
@@ -86,13 +86,13 @@ To browse the website, visit <http://localhost:4000/docs/>.
 
 Serve the full website with:
 
-```bash
+```batch
 scripts/docker-serve.sh
 ```
 
 To stop the container, run:
 
-```bash
+```batch
 scripts/docker-stop.sh
 ```
 
@@ -104,7 +104,7 @@ If you are using a [Dev Container](https://code.visualstudio.com/docs/devcontain
 
 To generate the search index, run:
 
-```bash
+```batch
 scripts/install-dependencies.sh
 scripts/generate-search-index.sh
 ```
@@ -113,7 +113,7 @@ scripts/generate-search-index.sh
 
 The release calendar is updated automatically by [CI](.github/workflows/jekyll.yml). To manually update the release calendar, run:
 
-```bash
+```batch
 python scripts/get_calendar.py
 ```
 
@@ -130,7 +130,7 @@ To text updates to `rouge` locally, edit the `Gemfile`:
 
 Then, run:
 
-```bash
+```batch
 bundle install
 ```
 
@@ -140,7 +140,7 @@ bundle install
 
 If you are on Windows, run these two commands to ensure Jekyll works:
 
-```bash
+```batch
 gem uninstall eventmachine --force
 gem install eventmachine --platform ruby
 ```
@@ -155,7 +155,7 @@ posix-spawn.c:226:27: error: incompatible function pointer types passing 'int (V
 
 The workaround is to run the following `bundle` command:
 
-```bash
+```batch
 bundle config set --global build.posix-spawn "--with-cflags=-Wno-error=incompatible-function-pointer-types"
 ```
 
@@ -170,7 +170,7 @@ After upgrading Ruby, Jekyll fails with the following error message:
 
 The solution is to run the following commands in the repository:
 
-```bash
+```batch
 gem install bundler
 bundle install
 ```
@@ -178,7 +178,7 @@ bundle install
 If this workaround is not sufficient, you likely have to upgrade your Bundler version.
 To do so, run:
 
-```bash
+```batch
 rm Gemfile.lock
 bundle install
 ```
@@ -187,7 +187,7 @@ bundle install
 
 Bundle update fails with the following error message:
 
-```bash
+```batch
 bundle update
 ```
 
@@ -205,7 +205,7 @@ and the repository exists.
 
 To resolve this, clean the Jekyll gem cache:
 
-```bash
+```batch
 rm -rf /opt/homebrew/lib/ruby/gems/3.3.0/cache/
 ```
 
@@ -213,7 +213,7 @@ rm -rf /opt/homebrew/lib/ruby/gems/3.3.0/cache/
 
 Bundle install fails with the following error message:
 
-```bash
+```batch
 bundle install
 ```
 
@@ -225,7 +225,7 @@ scratch should fix the problem.
 
 The solution, according to a [Stack Overflow answer](https://stackoverflow.com/a/63761800), is to run:
 
-```bash
+```batch
 gem update --system
 ```
 

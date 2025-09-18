@@ -5,7 +5,7 @@ title: Sharing Macros
 
 DuckDB has a powerful [macro mechanism]({% link docs/1.1/sql/statements/create_macro.md %}) that allows creating shorthands for common tasks. For example, we can define a macro that pretty-prints a non-negative integer as a short string that contains billions, millions, and thousands (without rounding) as follows:
 
-```bash
+```batch
 duckdb pretty_print_integer_macro.duckdb
 ```
 
@@ -34,7 +34,7 @@ As one would expect, the macro gets persisted in the database.
 But this also means that we can host it on an HTTPS endpoint and share it with anyone!
 We have published this macro on `blobs.duckdb.org`. Let's start a new DuckDB session and try it:
 
-```bash
+```batch
 duckdb
 ```
 

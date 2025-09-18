@@ -30,7 +30,7 @@ However, note that, the more threads that are used, the higher the RAM consumpti
 **Problem:**
 Building the Python package succeeds but the package cannot be imported:
 
-```batch
+```bash
 cd tools/pythonpkg/
 python3 -m pip install .
 python3 -c "import duckdb"

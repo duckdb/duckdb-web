@@ -7,7 +7,7 @@ title: Integration with Polars
 
 ## Installation
 
-```bash
+```batch
 pip install duckdb
 pip install -U 'polars[pyarrow]'
 ```

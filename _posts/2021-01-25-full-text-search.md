@@ -18,7 +18,7 @@ Alright, enough about the "why", let's get to the "how".
 
 The TREC 2004 Robust Retrieval Track has 250 "topics" (search queries) over TREC disks 4 and 5. The data consist of many text files stored in SGML format, along with a corresponding DTD (document type definition) file. This format is rarely used anymore, but it is similar to XML. We will use OpenSP's command line tool `osx` to convert it to XML. Because there are many files, I wrote a Bash script:
 
-```batch
+```bash
 mkdir -p latimes/xml
 for i in $(seq -w 1 9); do
     cat dtds/la.dtd latimes-$i | osx > latimes/xml/latimes-$i.xml
@@ -150,7 +150,7 @@ with open('results', 'w+') as f:
 
 Now that we have created our 'results' file, we can compare them to the relevance assessments `qrels` using `trec_eval`.
 
-```batch
+```bash
 ./trec_eval -m P.30 -m map qrels results
 ```
 

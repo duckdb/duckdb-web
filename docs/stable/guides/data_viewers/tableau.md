@@ -90,11 +90,11 @@ On Linux, copy the Taco file to `/opt/tableau/connectors`.
 On Windows, copy the Taco file to `C:\Program Files\Tableau\Connectors`.
 Then issue these commands to disable signature validation:
 
-```bash
+```batch
 tsm configuration set -k native_api.disable_verify_connector_plugin_signature -v true
 ```
 
-```bash
+```batch
 tsm pending-changes apply
 ```
 
@@ -105,7 +105,7 @@ The last command will restart the server with the new settings.
 Copy the Taco file to the `/Users/[User]/Documents/My Tableau Repository/Connectors` folder.
 Then launch Tableau Desktop from the Terminal with the command line argument to disable signature validation:
 
-```bash
+```batch
 /Applications/Tableau\ Desktop\ ⟨year⟩.⟨quarter⟩.app/Contents/MacOS/Tableau -DDisableVerifyConnectorPluginSignature=true
 ```
 

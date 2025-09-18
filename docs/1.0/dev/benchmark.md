@@ -10,7 +10,7 @@ When making changes that have potential performance implications, it is importan
 
 To build the benchmark suite, run the following command in the [DuckDB repository](https://github.com/duckdb/duckdb):
 
-```bash
+```batch
 BUILD_BENCHMARK=1 BUILD_TPCH=1 make
 ```
 
@@ -18,7 +18,7 @@ BUILD_BENCHMARK=1 BUILD_TPCH=1 make
 
 To list all available benchmarks, run:
 
-```bash
+```batch
 build/release/benchmark/benchmark_runner --list
 ```
 
@@ -28,7 +28,7 @@ build/release/benchmark/benchmark_runner --list
 
 To run a single benchmark, issue the following command:
 
-```bash
+```batch
 build/release/benchmark/benchmark_runner benchmark/micro/nulls/no_nulls_addition.benchmark
 ```
 
@@ -45,7 +45,7 @@ benchmark/micro/nulls/no_nulls_addition.benchmark	5	0.124102
 
 You can also specify an output file using the `--out` flag. This will write only the timings (delimited by newlines) to that file.
 
-```bash
+```batch
 build/release/benchmark/benchmark_runner benchmark/micro/nulls/no_nulls_addition.benchmark --out=timings.out
 ```
 
@@ -64,7 +64,7 @@ The output will contain the following:
 You can also use a regular expression to specify which benchmarks to run.
 Be careful of shell expansion of certain regex characters (e.g., `*` will likely be expanded by your shell, hence this requires proper quoting or escaping).
 
-```bash
+```batch
 build/release/benchmark/benchmark_runner "benchmark/micro/nulls/.*"
 ```
 
@@ -72,7 +72,7 @@ build/release/benchmark/benchmark_runner "benchmark/micro/nulls/.*"
 
 Not specifying any argument will run all benchmarks.
 
-```bash
+```batch
 build/release/benchmark/benchmark_runner
 ```
 
@@ -80,7 +80,7 @@ build/release/benchmark/benchmark_runner
 
 The `--info` flag gives you some other information about the benchmark.
 
-```bash
+```batch
 build/release/benchmark/benchmark_runner benchmark/micro/nulls/no_nulls_addition.benchmark --info
 ```
 

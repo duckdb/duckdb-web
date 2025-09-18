@@ -221,14 +221,14 @@ qux
 Note that this trick is not possible in Unix shells without a workaround.
 One might be tempted to run the following command on the `example.csv` file and expect the same result:
 
-```bash
+```batch
 cut -d, -f1 example.csv > example.csv
 ```
 
 However, due to the intricacies of Unix pipelines, executing this command leaves us with an empty `example.csv` file.
 The solution is to use different file names, then perform a rename operation:
 
-```bash
+```batch
 cut -d, -f1 example.csv > tmp.csv && mv tmp.csv example.csv
 ```
 

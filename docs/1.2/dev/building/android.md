@@ -16,19 +16,19 @@ We provide build instructions for setups using macOS and Android Studio. For oth
 
 1. Set the Android NDK's location. For example:
 
-   ```batch
+   ```bash
    ANDROID_NDK=~/Library/Android/sdk/ndk/28.0.12433566/
    ```
 
 1. Set the [Android ABI](https://developer.android.com/ndk/guides/abis). For example:
 
-   ```batch
+   ```bash
    ANDROID_ABI=arm64-v8a
    ```
 
    Or:
 
-   ```batch
+   ```bash
    ANDROID_ABI=x86_64
    ```
 
@@ -36,13 +36,13 @@ We provide build instructions for setups using macOS and Android Studio. For oth
 
 1. Set the list of DuckDB extensions to build. These will be statically linked in the binary. For example:
 
-   ```batch
+   ```bash
    DUCKDB_EXTENSIONS="icu;json;parquet"
    ```
 
 1. Navigate to DuckDB's directory and run the build as follows:
 
-   ```batch
+   ```bash
    PLATFORM_NAME="android_${ANDROID_ABI}"
    BUILDDIR=./build/${PLATFORM_NAME}
    mkdir -p ${BUILDDIR}
@@ -75,19 +75,19 @@ We provide build instructions for setups using macOS and Android Studio. For oth
 
 1. To build the [command line client]({% link docs/1.2/clients/cli/overview.md %}) in the [Termux application](https://termux.dev/), install the following packages:
 
-   ```batch
+   ```bash
    pkg install -y git ninja clang cmake python3
    ```
 
 1. Set the list of DuckDB extensions to build. These will be statically linked in the binary. For example:
 
-   ```batch
+   ```bash
    DUCKDB_EXTENSIONS="icu;json"
    ```
 
 1. Build DuckDB as follows:
 
-   ```batch
+   ```bash
    mkdir build
    cd build
    export LDFLAGS="-llog"
@@ -102,7 +102,7 @@ We provide build instructions for setups using macOS and Android Studio. For oth
 
 Note that you can also use the Python client on Termux:
 
-```batch
+```bash
 pip install --pre --upgrade duckdb
 ```
 
@@ -120,6 +120,6 @@ ld.lld: error: undefined symbol: __android_log_write
 **Solution:**
 Make sure the log library is linked:
 
-```batch
+```bash
 export LDFLAGS="-llog"
 ```

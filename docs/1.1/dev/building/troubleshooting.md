@@ -14,6 +14,6 @@ These issues have also been reported to occur on Alpine Linux, especially on mac
 **Solution:**
 Avoid using Ninja by setting the Makefile generator to empty via `GEN=`:
 
-```batch
+```bash
 GEN= make
 ```

@@ -32,7 +32,7 @@ FROM read_csv('flights.csv',
 
 Read a CSV from stdin, auto-infer options:
 
-```bash
+```batch
 cat flights.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
@@ -127,7 +127,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `union_by_name` | Align columns from different files [by column name]({% link docs/1.1/data/multiple_files/combining_schemas.md %}#union-by-name) instead of position. Using this option increases memory consumption. | `BOOL` | `false` |
 
 > Tip We recommend the [`iconv` command-line tool](https://linux.die.net/man/1/iconv) to convert files with encodings not supported by `read_csv` to UTF-8. For example:
->  ```bash
+>  ```batch
 > iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
 > ```
 

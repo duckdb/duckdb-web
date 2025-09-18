@@ -6,7 +6,7 @@ title: Command Line Arguments
 The table below summarizes DuckDB's command line options.
 To list all command line options, use the command:
 
-```bash
+```batch
 duckdb -help
 ```
 

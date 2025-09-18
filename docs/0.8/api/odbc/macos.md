@@ -14,7 +14,7 @@ Users can install it from the command line:
 
 ## Brew
 
-```bash
+```batch
 brew install unixodbc 
 ```
 
@@ -29,7 +29,7 @@ DuckDB releases the ODBC driver as asset. For MacOS, download it from <a href="h
 
 Run unzip to extract the files to a permanent directory:
 
-```bash
+```batch
 mkdir duckdb_odbc
 unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
 ```

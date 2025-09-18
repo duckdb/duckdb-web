@@ -118,7 +118,7 @@ PostgreSQL connection information can also be specified with [environment variab
 This can be useful in a production environment where the connection information is managed externally
 and passed in to the environment.
 
-```batch
+```bash
 export PGPASSWORD="secret"
 export PGHOST=localhost
 export PGUSER=owner

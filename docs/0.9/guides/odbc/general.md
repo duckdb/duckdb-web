@@ -92,7 +92,7 @@ The first step is to include the SQL header files:
 ```
 
 These files contain the definitions of the ODBC functions, as well as the data types used by ODBC.  In order to be able to use these header files you have to have the `unixodbc` package installed:
-```bash
+```batch
 brew install unixodbc
 # or
 sudo apt-get install unixodbc-dev

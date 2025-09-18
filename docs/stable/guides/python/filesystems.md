@@ -13,7 +13,7 @@ The following is an example of using `fsspec` to query a file in Google Cloud St
 
 Firstly, you must install `duckdb` and `fsspec`, and a filesystem interface of your choice.
 
-```bash
+```batch
 pip install duckdb fsspec gcsfs
 ```
 

@@ -13,19 +13,19 @@ title: DuckDB with Ibis
 
 You can pip install Ibis with the DuckDB backend:
 
-```bash
+```batch
 pip install 'ibis-framework[duckdb]'
 ```
 
 or use conda:
 
-```bash
+```batch
 conda install ibis-framework
 ```
 
 or use mamba:
 
-```bash
+```batch
 mamba install ibis-framework
 ```
 

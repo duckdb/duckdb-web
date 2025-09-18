@@ -508,7 +508,7 @@ Use ".open FILENAME" to reopen on a persistent database.
 
 To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
 
-```bash
+```batch
 $ ./duckdb < select_example.sql
 ```
 

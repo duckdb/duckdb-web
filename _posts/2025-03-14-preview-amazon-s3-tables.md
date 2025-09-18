@@ -33,7 +33,7 @@ make sure you are running the **latest stable** DuckDB release (version 1.2.1).
 For our example steps, we'll use the DuckDB [CLI client]({% link docs/stable/clients/overview.md %}).
 You can obtain this client from the [installation page]({% link docs/installation/index.html %}) and start it with:
 
-```bash
+```batch
 duckdb
 ```
 

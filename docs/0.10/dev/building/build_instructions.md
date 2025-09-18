@@ -14,19 +14,19 @@ Install the required packages with the package manager of your distribution.
 
 Fedora, CentOS, and Red Hat:
 
-```bash
+```batch
 sudo yum install -y git g++ cmake ninja-build openssl-devel
 ```
 
 Ubuntu and Debian:
 
-```bash
+```batch
 sudo apt-get update && sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 Alpine Linux:
 
-```bash
+```batch
 apk add g++ git make cmake ninja
 ```
 
@@ -34,7 +34,7 @@ apk add g++ git make cmake ninja
 
 Install Xcode and [Homebrew](https://brew.sh/). Then, install the required packages with:
 
-```bash
+```batch
 brew install cmake ninja
 ```
 
@@ -48,7 +48,7 @@ On Windows, the DuckDB Python package requires the [Microsoft Visual C++ Redistr
 
 To build DuckDB we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
 
-```bash
+```batch
 GEN=ninja make
 ```
 

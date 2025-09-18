@@ -9,13 +9,13 @@ title: Building Extensions
 
 To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
 
-```batch
+```bash
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
 ```
 
 This option also accepts out-of-tree extensions such as [`delta`]({% link docs/1.2/extensions/delta.md %}):
 
-```batch
+```bash
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch;delta' GEN=ninja make
 ```
 
@@ -76,13 +76,13 @@ duckdb_extension_load(parquet)
 
 Build DuckDB as follows:
 
-```batch
+```bash
 GEN=ninja EXTENSION_CONFIGS="extension_config.cmake" make
 ```
 
 Then, to install the extensions in one go, run:
 
-```batch
+```bash
 # for release builds
 cd build/release/extension/
 # for debug builds

@@ -6,7 +6,7 @@
 
 Install the NodeJS and Python dependencies in the `duckdb-web` directory:
 
-```bash
+```batch
 npm install
 pip install -r requirements.txt
 ```
@@ -15,14 +15,14 @@ pip install -r requirements.txt
 
 Download the [Preview Version](https://duckdb.org/docs/installation/?version=main), extract the `duckdb` file and move it to the directory expected by the scripts:
 
-```bash
+```batch
 mkdir -p build/release
 mv duckdb build/release
 ```
 
 Run the script as follows:
 
-```bash
+```batch
 ./scripts/generate_all_docs.sh <path_to_duckdb_directory>
 ```
 
@@ -32,7 +32,7 @@ Build DuckDB and install the in-tree extensions.
 
 Go to the DuckDB directory and run:
 
-```bash
+```batch
 GEN=ninja EXTENSION_CONFIGS=".github/config/in_tree_extensions.cmake" make
 cd build/release/extension/
 for EXTENSION in *; do
@@ -42,7 +42,7 @@ done
 
 Run the script as follows:
 
-```bash
+```batch
 ./scripts/generate_all_docs.sh <path_to_duckdb_source_directory>
 ```
 

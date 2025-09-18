@@ -22,7 +22,7 @@ In line with DuckDB's “low friction” principle, we made sure that you can in
 
 DuckDB can now be installed on UNIX-like systems with an installation script:
 
-```bash
+```batch
 curl https://install.duckdb.org | sh
 ```
 
@@ -47,13 +47,13 @@ This optimization comes especially handy when querying remote Parquet files or D
 
 The DuckDB CLI client now [supports the `-f` flag](https://github.com/duckdb/duckdb/pull/15050) to execute SQL script files:
 
-```bash
+```batch
 duckdb -f script.sql
 ```
 
 This is equivalent to:
 
-```bash
+```batch
 duckdb -c ".read script.sql"
 ```
 

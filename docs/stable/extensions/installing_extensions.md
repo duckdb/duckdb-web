@@ -160,7 +160,7 @@ Currently, DuckDB does not provide a command to uninstall extensions.
 To uninstall an extension, navigate to the extension's [Installation Location](#installation-location) and remove its `.duckdb_extension` binary file:
 For example:
 
-```bash
+```batch
 rm ~/.duckdb/extensions/v1.2.1/osx_arm64/excel.duckdb_extension
 ```
 

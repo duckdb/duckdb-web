@@ -124,7 +124,7 @@ SQLite databases can also be opened directly and can be used transparently inste
 
 For example, with the shell, a SQLite database can be opened as follows:
 
-```bash
+```batch
 duckdb sakila.db
 ```
 
@@ -156,7 +156,7 @@ INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
 
 The resulting SQLite database can then be read into from SQLite.
 
-```bash
+```batch
 sqlite3 new_sqlite_database.db
 ```
 

@@ -30,7 +30,7 @@ FROM read_csv('flights.csv',
 
 Read a CSV from stdin, auto-infer options:
 
-```bash
+```batch
 cat flights.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
@@ -116,7 +116,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 > Tip DuckDB's CSV reader supports UTF-8 (default), UTF-16 and Latin-1 encodings (see the `encoding` option).
 > To convert files with different encodings, we recommend using the [`iconv` command-line tool](https://linux.die.net/man/1/iconv).
 >
-> ```bash
+> ```batch
 > iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
 > ```
 

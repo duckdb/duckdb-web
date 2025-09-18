@@ -18,7 +18,7 @@ With DuckDB, you can write to the console (`stdout`) by using the `TO '/dev/stdo
 
 Installation instructions for YouPlot can be found on the main [YouPlot repository](https://github.com/red-data-tools/YouPlot#installation). If you're on a Mac, you can use:
 
-```bash
+```batch
 brew install youplot
 ```
 
@@ -30,13 +30,13 @@ By combining the [`COPY...TO`](https://duckdb.org/docs/sql/statements/copy#copy-
 
 1. As an example, this is how to read all data from `input.json`:
 
-    ```bash
+    ```batch
     duckdb -s "SELECT * FROM read_json_auto('input.json')"
     ```
 
 2. To prepare the data for YouPlot, write a simple aggregate:
 
-    ```bash
+    ```batch
     duckdb -s "SELECT date, SUM(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10"
     ```
 
@@ -50,7 +50,7 @@ By combining the [`COPY...TO`](https://duckdb.org/docs/sql/statements/copy#copy-
 
     The full DuckDB command below outputs the query in CSV format with a header:
 
-    ```bash
+    ```batch
     duckdb -s "COPY (SELECT date, SUM(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
     ```
 
@@ -58,7 +58,7 @@ By combining the [`COPY...TO`](https://duckdb.org/docs/sql/statements/copy#copy-
 
 Finally, the data can now be piped to YouPlot! Let's assume we have an `input.json` file with dates and number of purchases made by somebody on that date. Using the query above, we'll pipe the data to the `uplot` command to draw a plot of the Top 10 Purchase Dates
 
-```bash
+```batch
 duckdb -s "COPY (SELECT date, SUM(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" | uplot bar -d, -H -t "Top 10 Purchase Dates"
 ```
 
@@ -72,7 +72,7 @@ Maybe you're piping some data through `jq`. Maybe you're downloading a JSON file
 
 Let's combine this with a quick `curl` from GitHub to see what a certain user has been up to lately.
 
-```bash
+```batch
 curl -sL "https://api.github.com/users/dacort/events?per_page=100" \
     | duckdb -s "COPY (SELECT type, count(*) as event_count FROM read_json_auto('/dev/stdin') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)" \
     | uplot bar -d, -H -t "GitHub Events for @dacort"

@@ -15,7 +15,7 @@ On Linux, install the required packages with the package manager of your distrib
 
 On Ubuntu and Debian (and also MX Linux, Linux Mint, etc.), the requirements for building the DuckDB CLI client are the following:
 
-```batch
+```bash
 sudo apt-get update
 sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 git clone https://github.com/duckdb/duckdb
@@ -29,7 +29,7 @@ GEN=ninja make
 
 The requirements for building the DuckDB CLI client on Fedora, CentOS, Red Hat, AlmaLinux, Rocky Linux, etc. are the following:
 
-```batch
+```bash
 sudo yum install -y git g++ cmake ninja-build openssl-devel
 git clone https://github.com/duckdb/duckdb
 cd duckdb
@@ -39,7 +39,7 @@ GEN=ninja make
 Note that on older Red Hat-based distributions, you may have to change the package name for `g++` to `gcc-c++`,
 skip Ninja and manually configure the number of Make jobs:
 
-```batch
+```bash
 sudo yum install -y git gcc-c++ cmake openssl-devel
 git clone https://github.com/duckdb/duckdb
 cd duckdb
@@ -55,7 +55,7 @@ make -j`nproc`
 
 The requirements for building the DuckDB CLI client on Arch, Omarchy, Manjaro, etc. are the following:
 
-```batch
+```bash
 sudo pacman -S git gcc cmake ninja openssl
 git clone https://github.com/duckdb/duckdb
 cd duckdb
@@ -65,7 +65,7 @@ GEN=ninja make
 DuckDB is also [available in AUR](https://aur.archlinux.org/packages/duckdb).
 To install it, run:
 
-```batch
+```bash
 yay -S duckdb
 ```
 
@@ -75,7 +75,7 @@ yay -S duckdb
 
 The requirements for building the DuckDB CLI client on Alpine Linux are the following:
 
-```batch
+```bash
 apk add g++ git make cmake ninja
 git clone https://github.com/duckdb/duckdb
 cd duckdb
@@ -98,7 +98,7 @@ However, there are no official _DuckDB binaries_ distributed for musl libc but i
 Currently, installing the DuckDB Python on Alpine Linux requires compilation from source.
 To do so, install the required packages before running `pip`:
 
-```batch
+```bash
 apk add g++ py3-pip python3-dev
 pip install duckdb
 ```
@@ -107,7 +107,7 @@ pip install duckdb
 
 Once the build finishes successfully, you can find the `duckdb` binary in the `build` directory:
 
-```batch
+```bash
 build/release/duckdb
 ```
 
@@ -117,7 +117,7 @@ For different build configurations (`debug`, `relassert`, etc.), please consult 
 
 To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
 
-```batch
+```bash
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
 ```
 
@@ -156,12 +156,12 @@ CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake
 **Solution:**
 Install the `libssl-dev` library.
 
-```batch
+```bash
 sudo apt-get install -y libssl-dev
 ```
 
 Then, build with:
 
-```batch
+```bash
 GEN=ninja CORE_EXTENSIONS="httpfs" make
 ```

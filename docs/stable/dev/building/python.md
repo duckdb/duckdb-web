@@ -18,7 +18,7 @@ For everything described on this page we make the following assumptions:
 
 Make sure you have checked out the [DuckDB source](https://github.com/duckdb/duckdb/) and that you are in its root. E.g.:
 
-```batch
+```bash
 git clone https://github.com/duckdb/duckdb
 ...
 cd duckdb
@@ -26,7 +26,7 @@ cd duckdb
 
 If you've _forked_ DuckDB, you may run into trouble when building the Python package when you haven't pulled in the tags.
 
-```batch
+```bash
 # Check your remotes
 git remote -v
 
@@ -46,7 +46,7 @@ While we use Python's built-in `venv` module in our examples below, and technica
 
 Create and activate a virtual env as follows:
 
-```batch
+```bash
 # Create a virtual environment in the .venv folder (in the duckdb source root)
 python3 -m venv --prompt duckdb .venv
 
@@ -56,14 +56,14 @@ source .venv/bin/activate
 
 Make sure you have a modern enough version of `pip` available in your virtual env:
 
-```batch
+```bash
 # Print pip's help
 python3 -m pip install --upgrade pip
 ```
 
 If that fails with `No module named pip` and you use `uv`, then run:
 
-```batch
+```bash
 # Install pip
 uv pip install pip
 ```
@@ -78,19 +78,19 @@ The following will build the package with the default set of extensions (json, p
 
 #### Release Build
 
-```batch
+```bash
 GEN=ninja BUILD_PYTHON=1 make release
 ```
 
 #### Debug Build
 
-```batch
+```bash
 GEN=ninja BUILD_PYTHON=1 make debug
 ```
 
 #### Verify
 
-```batch
+```bash
 python3 -c "import duckdb; print(duckdb.sql('SELECT 42').fetchall())"
 ```
 
@@ -134,7 +134,7 @@ The following mechanisms add to the set of **_excluded_ extensions**:
 
 ### Show All Installed Extensions
 
-```batch
+```bash
 python3 -c "import duckdb; print(duckdb.sql('SELECT extension_name, installed, description FROM duckdb_extensions();'))"
 ```
 
@@ -151,7 +151,7 @@ You can do this either on the CLI or from an IDE. The documentation below shows 
 
 Run this to configure the CMake profile needed to debug on the CLI:
 
-```batch
+```bash
 GEN=ninja BUILD_PYTHON=1 PYTHON_DEV=1 make debug
 ```
 
@@ -163,7 +163,7 @@ This will take care of the following:
 
 Once the build completes, do a sanity check to make sure everything works:
 
-```batch
+```bash
 python3 -c "import duckdb; print(duckdb.sql('SELECT 42').fetchall())"
 ```
 
@@ -179,11 +179,11 @@ print(duckdb.sql("select * from range(1000)").df())
 
 The following should work:
 
-```batch
+```bash
 lldb -- .venv/bin/python3 my_script.py
 ```
 
-```batch
+```bash
 # Set a breakpoint
 (lldb) br s -n duckdb::DuckDBPyRelation::FetchDF
 Breakpoint 1: no locations (pending).
@@ -251,7 +251,7 @@ These stubs are important for autocomplete in many IDEs, as static-analysis base
 
 To verify the stubs match the actual implementation:
 
-```batch
+```bash
 python3 -m pytest tests/stubs
 ```
 
@@ -275,7 +275,7 @@ When directly interacting with python functions that return a `PyObject*`, such 
 
 If you've forked DuckDB you may run into trouble when building the Python package when you haven't pulled in the tags.
 
-```batch
+```bash
 # Check your remotes
 git remote -v
 

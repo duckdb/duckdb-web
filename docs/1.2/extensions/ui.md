@@ -19,7 +19,7 @@ in the [MotherDuck documentation](https://motherduck.com/docs/getting-started/mo
 
 To start the UI from the command line:
 
-```bash
+```batch
 duckdb -ui
 ```
 
@@ -123,7 +123,7 @@ properly.
 Using the [DuckDB CLI client]({% link docs/1.2/clients/cli/overview.md %}),
 you can start the UI with a CSV available as a view using the [`-cmd` argument]({% link docs/1.2/clients/cli/arguments.md %}):
 
-```bash
+```batch
 duckdb -cmd "CREATE VIEW ⟨view_name⟩ AS FROM '⟨filename⟩.csv';" -ui
 ```
 
@@ -132,7 +132,7 @@ duckdb -cmd "CREATE VIEW ⟨view_name⟩ AS FROM '⟨filename⟩.csv';" -ui
 The DuckDB UI uses DuckDB tables as storage internally (e.g., for saving notebooks).
 Therefore, running the UI directly on a read-only database [is not supported](https://github.com/duckdb/duckdb-ui/issues/61):
 
-```bash
+```batch
 duckdb -ui -readonly read_only_test.db
 ```
 
@@ -144,7 +144,7 @@ Catalog Error: SET schema: No catalog + schema named "memory.main" found.
 
 To work around this, run the UI on another database file:
 
-```bash
+```batch
 duckdb -ui ui_catalog.db
 ```
 

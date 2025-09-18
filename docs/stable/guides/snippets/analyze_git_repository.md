@@ -16,7 +16,7 @@ Despite being featured in the [Emoji Movie](https://www.imdb.com/title/tt4877122
 we can assume that the [Fish Cake with Swirl emoji (🍥)](https://emojipedia.org/fish-cake-with-swirl) is not a common occurrence in most Git logs.
 So, let's clone the [`duckdb/duckdb` repository](https://github.com/duckdb/duckdb) and export its log as follows:
 
-```bash
+```batch
 git log --date=iso-strict --pretty=format:%ad🍥%h🍥%an🍥%s > git-log.csv
 ```
 

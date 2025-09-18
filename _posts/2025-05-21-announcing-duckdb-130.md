@@ -134,7 +134,7 @@ SET enable_external_file_cache = false;
 
 DuckDB's command line interface (CLI) gained the capability to [directly query Parquet, CSV or JSON files](https://github.com/duckdb/duckdb/pull/17415). This works by just using e.g. a Parquet file instead of the database file. This will expose a view that can be queried. For example, say we have a Parquet file called `region.parquet`, this will work:
 
-```bash
+```batch
 duckdb region.parquet -c 'FROM region;'
 ```
 
@@ -287,7 +287,7 @@ CREATE SECRET http (
 
 You can see that the `BEARER_TOKEN` field in the secret is set from the `getvariable` function in `CREATE SECRET`. In the CLI, this is also possible through *environment variables* using `getenv()`. For example, this is now possible:
 
-```bash
+```batch
 MY_SECRET=asdf duckdb -c \
     "CREATE SECRET http (TYPE http, BEARER_TOKEN getenv('MY_SECRET'))"
 ```

@@ -73,7 +73,7 @@ The problem is likely caused by using an outdated Microsoft Visual C++ (MSVC) Re
 The solution is to install the [latest MSVC Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist).
 Alternatively, you can instruct `pip` to compile the package from source as follows:
 
-```bash
+```batch
 python3 -m pip install duckdb --no-binary duckdb
 ```
 

@@ -23,25 +23,25 @@ Four additional libraries improve the DuckDB experience in Jupyter notebooks.
 
 Run these `pip install` commands from the command line if Jupyter Notebook is not yet installed. Otherwise, see Google Colab link above for an in-notebook example:
 
-```bash
+```batch
 pip install duckdb
 ```
 
 Install Jupyter Notebook:
 
-```bash
+```batch
 pip install notebook
 ```
 
 Or JupyterLab:
 
-```bash
+```batch
 pip install jupyterlab
 ```
 
 Install supporting libraries:
 
-```bash
+```batch
 pip install jupysql pandas matplotlib duckdb-engine
 ```
 

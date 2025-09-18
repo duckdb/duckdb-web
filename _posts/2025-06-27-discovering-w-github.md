@@ -253,7 +253,7 @@ Below is a sample of the `exported_records.md` file, rendered as HTML:
 
 Why a Markdown file you may wonder. Because it is rendered automatically by GitHub and there is no need to host our tiny data application somewhere else. In fact, we copy the above table to README, such that it is displayed automatically on the first page of the repository:
 
-```batch
+```bash
 echo '# Repositories using `duckdb`' > README.md
 cat exported_records.md >> README.md
 ```

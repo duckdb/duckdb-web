@@ -84,7 +84,7 @@ First we need to install DuckDB and Arrow. The installation process for both lib
 
 Python:
 
-```batch
+```bash
 pip install duckdb
 pip install pyarrow
 ```

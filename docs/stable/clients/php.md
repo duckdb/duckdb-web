@@ -18,7 +18,7 @@ This library is more than just a wrapper for the C API; it introduces custom, PH
 
 ## Install
 
-```bash
+```batch
 composer require satur.io/duckdb
 ```
 

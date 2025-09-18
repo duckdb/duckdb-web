@@ -50,7 +50,7 @@ The CI will also run this check, causing it to fail if this check fails.
 
 Core extensions can be built as part of DuckDB via the `CORE_EXTENSIONS` flag, then listing the names of the extensions that are to be built.
 
-```bash
+```batch
 CORE_EXTENSIONS='tpch;httpfs;fts;json;parquet' make
 ```
 
@@ -61,7 +61,7 @@ More on this topic at [building duckdb extensions]({% link docs/preview/dev/buil
 For every package that is maintained by core DuckDB, there exists a flag in the Makefile to enable building the package.
 These can be enabled by either setting them in the current `env`, through set up files like `bashrc` or `zshrc`, or by setting them before the call to `make`, for example:
 
-```bash
+```batch
 BUILD_PYTHON=1 make debug
 ```
 
@@ -104,7 +104,7 @@ It is possible to override the Git hash and version when building from source us
 This is useful when building from sources that are not part of a complete Git repository (e.g., an archive file with no information on commit hashes and tags).
 For example:
 
-```bash
+```batch
 OVERRIDE_GIT_DESCRIBE=v0.10.0-843-g09ea97d0a9 GEN=ninja make
 ```
 

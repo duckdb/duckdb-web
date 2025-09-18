@@ -123,7 +123,7 @@ FROM read_csv('example.dsv', sep = '🦆');
 The [RFC 4180 specification](https://www.ietf.org/rfc/rfc4180.txt) defines requirements for well-formed CSV files, e.g., having a single line delimiter.
 By default, DuckDB now parses CSVs in so-called strict mode (`strict_mode = true). For example, the following CSV file gets rejected because of mixed newline characters:
 
-```bash
+```batch
 echo "a,b\r\nhello,42\nworld,84" > rfc_4180-defiant.csv
 ```
 

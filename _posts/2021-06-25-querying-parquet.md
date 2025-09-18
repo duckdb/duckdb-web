@@ -30,13 +30,13 @@ As a short teaser, here is a code snippet that allows you to directly run a SQL 
 
 To install the DuckDB package:
 
-```bash
+```batch
 pip install duckdb
 ```
 
 To download the Parquet file:
 
-```bash
+```batch
 wget https://blobs.duckdb.org/data/taxi_2019_04.parquet
 ```
 

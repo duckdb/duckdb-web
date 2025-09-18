@@ -40,7 +40,7 @@ To determine the mapping between zone names and zone IDs, use the `aws ec2 descr
 
 * Zone name to zone ID mapping:
 
-  ```batch
+  ```bash
   aws ec2 describe-availability-zones --output json \
       | jq -r '.AvailabilityZones[] | select(.ZoneName == "us-east-1f") | .ZoneId'
   ```
@@ -51,7 +51,7 @@ To determine the mapping between zone names and zone IDs, use the `aws ec2 descr
 
 * Zone ID to zone name mapping:
 
-  ```batch
+  ```bash
   aws ec2 describe-availability-zones --output json \
       | jq -r '.AvailabilityZones[] | select(.ZoneId == "use1-az5") | .ZoneName'
   ```

@@ -27,7 +27,7 @@ The content of the `tmp` folder will be overridden, so choose an empty/non yet e
 
 A bash one-liner (to be adapted with the file names and executable locations) is:
 
-```bash
+```batch
 /older/version/duckdb mydata.db -c "EXPORT DATABASE 'tmp'" && /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 ```
 
@@ -39,7 +39,7 @@ Check [`EXPORT` documentation](../sql/statements/export) for more details on the
 
 DuckDB files start with a `uint64_t` which contains a checksum for the main header, followed by four magic bytes (`DUCK`), followed by the storage version number in a `uint64_t`.
 
-```bash
+```batch
 hexdump -n 20 -C mydata.db
 ```
 

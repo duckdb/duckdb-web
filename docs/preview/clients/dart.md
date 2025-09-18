@@ -18,7 +18,7 @@ DuckDB.Dart can be installed from [pub.dev](https://pub.dev/packages/dart_duckdb
 
 Add the dependency with Flutter:
 
-```bash
+```batch
 flutter pub add dart_duckdb
 ```
 

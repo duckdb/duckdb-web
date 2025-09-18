@@ -194,7 +194,7 @@ SELECT * FROM glob('**/README.md');
 
 Meanwhile, the globbing of Bash, Zsh, etc. finds the file using the same syntax:
 
-```bash
+```batch
 ls **/README.md
 ```
 

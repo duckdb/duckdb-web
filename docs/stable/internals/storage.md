@@ -31,7 +31,7 @@ The content of the `tmp` folder will be overridden, so choose an empty/non yet e
 
 A Bash script to achieve this (to be adapted with the file names and executable locations) is the following
 
-```batch
+```bash
 /older/duckdb mydata.old.db -c "EXPORT DATABASE 'tmp'"
 /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp'"
 ```
@@ -86,7 +86,7 @@ COPY FROM DATABASE file1 TO converted_file;
 
 DuckDB files start with a `uint64_t` which contains a checksum for the main header, followed by four magic bytes (`DUCK`), followed by the storage version number in a `uint64_t`.
 
-```bash
+```batch
 hexdump -n 20 -C mydata.db
 ```
 

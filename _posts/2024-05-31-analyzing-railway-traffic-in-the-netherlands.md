@@ -28,7 +28,7 @@ To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.du
 
 First, start the [DuckDB command line client]({% link docs/stable/clients/cli/overview.md %}) on a persistent database:
 
-```bash
+```batch
 duckdb railway.db
 ```
 
@@ -266,7 +266,7 @@ LIMIT 5;
 The second dataset, [`tariff-distances-2022-01.csv`](https://blobs.duckdb.org/data/tariff-distances-2022-01.csv), contains the [station distances](https://www.rijdendetreinen.nl/en/open-data/station-distances). The distances are defined as the shortest route on the railway network and they are used to calculate the tariffs for ticket.
 Let's peek into this file:
 
-```bash
+```batch
 head -n 9 tariff-distances-2022-01.csv | cut -d, -f1-9
 ```
 

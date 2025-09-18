@@ -11,19 +11,19 @@ To build using extension flags, set the corresponding [`BUILD_[EXTENSION_NAME]` 
 
 For example, to install the [`httpfs` extension](../../extensions/httpfs), run the following script:
 
-```bash
+```batch
 GEN=ninja BUILD_HTTPFS=1 make
 ```
 
 For release builds:
 
-```bash
+```batch
 build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
 ```
 
 For debug builds:
 
-```bash
+```batch
 build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
 ```
 
@@ -121,13 +121,13 @@ duckdb_extension_load(parquet)
 
 Build DuckDB as follows:
 
-```bash
+```batch
 GEN=ninja EXTENSION_CONFIGS="extension_config.cmake" make
 ```
 
 Then, to install the extensions in one go, run:
 
-```bash
+```batch
 # for release builds
 cd build/release/extension/
 # for debug builds

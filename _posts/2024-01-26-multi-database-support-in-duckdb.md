@@ -249,7 +249,7 @@ The explicit `ATTACH` statement is not required to connect to a different databa
 
 **CLI:**
 
-```bash
+```batch
 duckdb sqlite:file.db
 ```
 

@@ -10,7 +10,7 @@ Additionally, we recommend using the [Ninja build system](https://ninja-build.or
 
 Clone the DuckDB repository.
 
-```bash
+```batch
 git clone https://github.com/duckdb/duckdb
 ```
 
@@ -22,19 +22,19 @@ Install the required packages with the package manager of your distribution.
 
 Ubuntu and Debian:
 
-```bash
+```batch
 sudo apt-get update && sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 Fedora, CentOS, and Red Hat:
 
-```bash
+```batch
 sudo yum install -y git g++ cmake ninja-build openssl-devel
 ```
 
 Alpine Linux:
 
-```bash
+```batch
 apk add g++ git make cmake ninja
 ```
 
@@ -42,7 +42,7 @@ apk add g++ git make cmake ninja
 
 Install Xcode and [Homebrew](https://brew.sh/). Then, install the required packages with:
 
-```bash
+```batch
 brew install cmake ninja
 ```
 
@@ -56,7 +56,7 @@ On Windows, the DuckDB Python package requires the [Microsoft Visual C++ Redistr
 
 To build DuckDB we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
 
-```bash
+```batch
 GEN=ninja make
 ```
 
@@ -64,13 +64,13 @@ GEN=ninja make
 
 For testing, it can be useful to build DuckDB with statically linked core extensions. To do so, run:
 
-```bash
+```batch
 CORE_EXTENSIONS='autocomplete;icu;parquet;json' GEN=ninja make
 ```
 
 This option also accepts out-of-tree extensions:
 
-```bash
+```batch
 CORE_EXTENSIONS='autocomplete;icu;parquet;json;delta' GEN=ninja make
 ```
 
@@ -82,6 +82,6 @@ For more details, see the [“Building Extensions” page]({% link docs/1.0/dev/
 
 Ninja parallelizes the build, which can cause out-of-memory issues on systems with limited resources. They also occur on Alpine Linux. In these cases, avoid using Ninja:
 
-```bash
+```batch
 make
 ```

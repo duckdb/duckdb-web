@@ -102,7 +102,7 @@ Backward compatibility refers to the ability of a newer DuckDB version to read s
 
 Write with v0.9:
 
-```bash
+```batch
 duckdb_092 v092.db
 ```
 
@@ -113,7 +113,7 @@ FROM lineitem.parquet;
 
 Read with v0.10:
 
-```bash
+```batch
 duckdb_0100 v092.db
 ```
 
@@ -140,7 +140,7 @@ Forward compatibility refers to the ability of an older DuckDB version to read s
 
 Write with v0.10:
 
-```bash
+```batch
 duckdb_0100 v010.db
 ```
 
@@ -151,7 +151,7 @@ FROM lineitem.parquet;
 
 Read with v0.9:
 
-```bash
+```batch
 duckdb_092 v010.db
 ```
 

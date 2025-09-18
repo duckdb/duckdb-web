@@ -32,7 +32,7 @@ Killed
 
 To get more detailed information, check the diagnostic messages using the [`dmesg` command](https://en.wikipedia.org/wiki/Dmesg) (you may need `sudo`):
 
-```bash
+```batch
 sudo dmesg
 ```
 

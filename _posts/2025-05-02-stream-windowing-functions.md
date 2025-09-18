@@ -26,7 +26,7 @@ USE dutch_railway_network.main_main;
 
 > Warning The database is rather big (approx. 1.2 GB), therefore make sure to have a stable internet connection. Instead of attaching the database, you can also [download the database file](http://blobs.duckdb.org/data/dutch_railway_network.duckdb) and connect to it from the command line:
 >
-> ```bash
+> ```batch
 > duckdb dutch_railway_network.duckdb -cmd 'USE main_main'
 > ```
 

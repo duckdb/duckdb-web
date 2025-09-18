@@ -12,7 +12,7 @@ On Windows, DuckDB requires the [Microsoft Visual C++ Redistributable package](h
 To build DuckDB on Windows, we recommend using the Visual Studio compiler.
 To use it, follow the instructions in the [CI workflow](https://github.com/duckdb/duckdb/blob/52b43b166091c82b3f04bf8af15f0ace18207a64/.github/workflows/Windows.yml#L73):
 
-```batch
+```bash
 python scripts/windows_ci.py
 cmake \
     -DCMAKE_BUILD_TYPE=Release \
@@ -32,7 +32,7 @@ Note that this build is only supported for compatibility reasons and should only
 To build DuckDB with MinGW64, install the required dependencies using Pacman.
 When prompted with `Enter a selection (default=all)`, select the default option by pressing `Enter`.
 
-```batch
+```bash
 pacman -Syu git mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja
 git clone https://github.com/duckdb/duckdb
 cd duckdb
@@ -42,7 +42,7 @@ cmake --build . --config Release
 
 Once the build finishes successfully, you can find the `duckdb.exe` binary in the repository's directory:
 
-```batch
+```bash
 ./duckdb.exe
 ```
 
@@ -50,7 +50,7 @@ Once the build finishes successfully, you can find the `duckdb.exe` binary in th
 
 Building on Windows may result in the following error:
 
-```bash
+```batch
 go build
 ```
 
@@ -68,7 +68,7 @@ GitHub user [vdmitriyev](https://github.com/vdmitriyev) shared instructions for 
 
 4. Build your project using the following instructions:
 
-   ```batch
+   ```bash
    set PATH=C:\DuckDB-Go\libs\;%PATH%
    set CGO_CFLAGS=-IC:\DuckDB-Go\libs\
    set CGO_LDFLAGS=-LC:\DuckDB-Go\libs\ -lduckdb

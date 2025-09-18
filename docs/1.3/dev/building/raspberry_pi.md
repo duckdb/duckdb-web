@@ -10,14 +10,14 @@ You can build it following the instructions on this page.
 
 First, install the required build packages:
 
-```batch
+```bash
 sudo apt-get update
 sudo apt-get install -y git g++ cmake ninja-build
 ```
 
 Then, clone and build it as follows:
 
-```batch
+```bash
 git clone https://github.com/duckdb/duckdb
 cd duckdb
 GEN=ninja CORE_EXTENSIONS="icu;json" make
@@ -25,7 +25,7 @@ GEN=ninja CORE_EXTENSIONS="icu;json" make
 
 Finally, run it:
 
-```batch
+```bash
 build/release/duckdb
 ```
 
@@ -35,7 +35,7 @@ On 32-bit Raspberry Pi boards, you need to add the [`-latomic` link flag](https:
 As extensions are not distributed for this platform, it's recommended to also include them in the build.
 For example:
 
-```batch
+```bash
 mkdir build
 cd build
 cmake .. \

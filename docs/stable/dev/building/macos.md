@@ -9,7 +9,7 @@ title: macOS
 
 Install Xcode and [Homebrew](https://brew.sh/). Then, install the required packages with:
 
-```batch
+```bash
 brew install git cmake ninja
 ```
 
@@ -17,7 +17,7 @@ brew install git cmake ninja
 
 Clone and build DuckDB as follows.
 
-```batch
+```bash
 git clone https://github.com/duckdb/duckdb
 cd duckdb
 GEN=ninja make
@@ -25,7 +25,7 @@ GEN=ninja make
 
 Once the build finishes successfully, you can find the `duckdb` binary in the `build` directory:
 
-```batch
+```bash
 build/release/duckdb
 ```
 
@@ -52,7 +52,7 @@ See related discussions on the [DuckDB GitHub issues](https://github.com/duckdb/
 
 > Warning Attempting to reinstall your Xcode suite may impact other applications on your system. Proceed with caution.
 
-```batch
+```bash
 sudo rm -rf /Library/Developer/CommandLineTools
 xcode-select --install
 ```
@@ -69,12 +69,12 @@ duckdb(83082,0x205b30240) malloc: nano zone abandoned due to inability to reserv
 **Solution:**
 To prevent this, set the `MallocNanoZone` flag to 0:
 
-```batch
+```bash
 MallocNanoZone=0 make debug
 ```
 
 To apply this change for your future terminal sessions, you can add the following to your `~/.zshrc` file:
 
-```batch
+```bash
 export MallocNanoZone=0
 ```

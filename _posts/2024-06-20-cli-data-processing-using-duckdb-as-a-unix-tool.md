@@ -139,7 +139,7 @@ Projecting columns is a very common data processing step. Let's take the `pop.cs
 
 In the Unix shell, we use the [`cut` command](https://man7.org/linux/man-pages/man1/cut.1.html) and specify the file's delimiter (`-d`) and the columns to be projected (`-f`).
 
-```bash
+```batch
 cut -d , -f 1,3 pop.csv
 ```
 
@@ -186,7 +186,7 @@ This query produces the same result as the Unix command's output shown [above](#
 To turn this into a standalone CLI command, we can invoke the DuckDB command line client with the `-c ⟨query⟩`{:.language-sql .highlight} argument, which runs the SQL query and exits once it's finished.
 Using this technique, the query above can be turned into the following one-liner:
 
-```bash
+```batch
 duckdb -c "COPY (SELECT #1, #3 FROM 'pop.csv') TO '/dev/stdout/'"
 ```
 
@@ -209,7 +209,7 @@ Note that we need to handle the header of the file separately: we take the first
 Finally, we perform a projection to reorder the columns.
 Unfortunately, the [`cut` command cannot reorder the columns](https://stackoverflow.com/questions/2129123/rearrange-columns-using-cut), so we use [`awk`](https://man7.org/linux/man-pages/man1/awk.1p.html) instead:
 
-```bash
+```batch
 (head -n 1 pop.csv; tail -n +2 pop.csv \
     | sort -t , -k 2,2 -k 3rn) \
     | awk -F , '{ print $2 "," $1 "," $3 }'
@@ -257,7 +257,7 @@ Due to the sorting requirement, we apply `sort` on both inputs before performing
 The intersection is performed using `comm -12` where the argument `-12` means that we only want to keep lines that are in both files.
 We again rely on `head` and `tail` to treat the headers and the rest of the files separately during processing and glue them together at the end.
 
-```bash
+```batch
 head -n 1 pop.csv | cut -d , -f 1; \
     comm -12 \
         <(tail -n +2 pop.csv | cut -d , -f 1 | sort) \
@@ -296,7 +296,7 @@ In our example, we know that the `pop.csv` and the `area.csv` files have an equa
 
 In the Unix shell, we use the [`paste`](https://man7.org/linux/man-pages/man1/paste.1.html) command and remove the duplicate `city` field using `cut`:
 
-```bash
+```batch
 paste -d , pop.csv area.csv | cut -d , -f 1,2,3,5
 ```
 
@@ -353,7 +353,7 @@ Let's try to formulate two queries:
 
 To answer the first question in the Unix shell, we use `grep` and the regular expression `^[^,]*dam,`:
 
-```bash
+```batch
 grep "^[^,]*dam," cities-airports.csv
 ```
 
@@ -373,7 +373,7 @@ First, they do not support case-insensitive matching _using a backreference_ (`g
 Second, they do not support [negative lookbehinds](https://www.regular-expressions.info/lookaround.html).
 Therefore, we use [`pcregrep`](https://man7.org/linux/man-pages/man1/pcregrep.1.html), and formulate our question as follows:
 
-```bash
+```batch
 pcregrep -i '^([a-z]{3}).*?(?<!dam),\1$' cities-airports.csv
 ```
 
@@ -426,7 +426,7 @@ Unix tools support joining files via the [`join` command](https://man7.org/linux
 To make this work, we sort the files based on their `IATA` fields, then perform the join on the first file's 2nd column (`-1 2`) and the second file's 1st column (`-2 1`).
 We have to omit the header for the `join` command to work, so we do just that and construct a new header with an `echo` command:
 
-```bash
+```batch
 echo "IATA,city,airport name"; \
     join -t , -1 2 -2 1 \
         <(tail -n +2 cities-airports.csv | sort -t , -k 2,2) \
@@ -477,7 +477,7 @@ And while we're at it, also fetch the data set via HTTPS this time, using the UR
 In Unix, remote data sets are typically fetched via [`curl`](https://man7.org/linux/man-pages/man1/curl.1.html).
 The output of `curl` is piped into the subsequent processing steps, in this case, a bunch of [`sed`](https://man7.org/linux/man-pages/man1/sed.1.html) commands.
 
-```bash
+```batch
 curl -s https://duckdb.org/data/cli/pop.csv \
     | sed 's/\([^,]*,.*\) \(.*,[^,]*\)/\1_\2/g' \
     | sed 's/,/;/g' \
@@ -530,7 +530,7 @@ As a final exercise, let's query the number of stars given to the [`duckdb/duckd
 
 In Unix tools, we can use `curl` to get the JSON file from `https://api.github.com` and pipe its output to [`jq`](https://jqlang.github.io/jq/manual/) to query the JSON object.
 
-```bash
+```batch
 curl -s https://api.github.com/repos/duckdb/duckdb \
     | jq ".stargazers_count"
 ```
@@ -560,7 +560,7 @@ We'll use the [2023 railway services file (`services-2023.csv.gz`)](https://blob
 In Unix, we can use the [`gzcat`](https://man7.org/linux/man-pages/man1/zcat.1p.html) command to decompress the `csv.gz` file into a pipeline. Then, we can use `grep` or `pcregrep` (which is more performant), and top it off with the [`wc`](https://man7.org/linux/man-pages/man1/wc.1.html) command to count the number of lines (`-l`).
 In DuckDB, the built-in CSV reader also supports [compressed CSV files]({% link docs/stable/data/csv/overview.md %}#parameters), so we can use that without any extra configuration.
 
-```batch
+```bash
 gzcat services-2023.csv.gz | grep '^[^,]*,[^,]*,Intercity,' | wc -l
 gzcat services-2023.csv.gz | pcregrep '^[^,]*,[^,]*,Intercity,' | wc -l
 duckdb -c "SELECT count(*) FROM 'services-2023.csv.gz' WHERE \"Service:Type\" = 'Intercity';"
@@ -568,7 +568,7 @@ duckdb -c "SELECT count(*) FROM 'services-2023.csv.gz' WHERE \"Service:Type\" = 
 
 We also test the tools on uncompressed input:
 
-```batch
+```bash
 gunzip -k services-2023.csv.gz
 grep '^[^,]*,[^,]*,Intercity,' services-2023.csv | wc -l
 pcregrep '^[^,]*,[^,]*,Intercity,' services-2023.csv | wc -l

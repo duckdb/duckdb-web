@@ -23,7 +23,7 @@ To run this experiment, we purchased the 13" modular laptop by [Framework](https
 
 We installed [Omarchy 2.0](https://omarchy.org/), an Arch Linux-based distribution with a vibrant community and first-class support for Framework laptops. Assembling the laptop and installing Omarchy took less than an hour in total. Installing the DuckDB command line client only took seconds using the installer script:
 
-```batch
+```bash
 curl https://install.duckdb.org | sh
 ```
 
@@ -43,14 +43,14 @@ To see how this laptop performs, we ran a few benchmarks focusing on loading and
 To measure CSV loading performance, we used one of our favorite datasets: the [Dutch railway services]({% link docs/stable/guides/snippets/dutch_railway_datasets.md %}). We picked the [full dataset spanning the last 80 months](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip) (between Jan 2019 and Aug 2025).
 We can fetch and decompress the file as follows:
 
-```batch
+```bash
 wget https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip
 unzip railway-services-80-months.zip
 ```
 
 The resulting directory is approximately 20 GB. Let's see how quickly DuckDB can load the files:
 
-```batch
+```bash
 duckdb
 ```
 
@@ -149,7 +149,7 @@ In our initial experiments, we experienced intermittent checksum errors from the
 
 Because DuckDB's storage already uses checksums, we can [disable copy-on-write along with checksums](https://wiki.archlinux.org/title/Btrfs#Disabling_CoW) for the experiments using the NOCOW attribute without risking data corruption:
 
-```batch
+```bash
 sudo chattr +C duckdb-tpch-experiment
 lsattr -d duckdb-tpch-experiment
 ```

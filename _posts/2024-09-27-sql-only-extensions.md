@@ -100,7 +100,7 @@ The first step is to create your own GitHub repo from the [DuckDB Extension Temp
 
 Then clone your new repository onto your local machine using the terminal:
 
-```bash
+```batch
 git clone --recurse-submodules \
     https://github.com/⟨your_github_username⟩/⟨your_extension_repo⟩.git
 ```
@@ -124,7 +124,7 @@ GitHub Actions will also run tests on your extension to validate it is working p
 
 > Note The instructions are not written for a Windows audience, so we recommend GitHub Actions in that case!
 
-```batch
+```bash
 git add -A
 git commit -m "Initial commit of my SQL extension!"
 git push

@@ -55,13 +55,13 @@ We first updated the Raspberry Pi OS (a fork of Debian Linux) to its latest vers
 We then compiled DuckDB [version `0024e5d4be`](https://github.com/duckdb/duckdb/commit/0024e5d4be) using the [Raspberry Pi build instructions]({% link docs/stable/dev/building/raspberry_pi.md %}).
 To make the queries easy to run, we also included the [TPC-H extension]({% link docs/stable/core_extensions/tpch.md %}) in the build:
 
-```batch
+```bash
 GEN=ninja CORE_EXTENSIONS="tpch" make
 ```
 
 We then downloaded DuckDB database files containing the TPC-H datasets at different scale factors (SF):
 
-```batch
+```bash
 wget https://blobs.duckdb.org/data/tpch-sf100.db
 wget https://blobs.duckdb.org/data/tpch-sf300.db
 ```
@@ -110,7 +110,7 @@ PRAGMA tpch(22);
 
 We ran the script as follows:
 
-```batch
+```bash
 duckdb tpch-sf${SF}.db -f tpch-queries.sql
 ```
 

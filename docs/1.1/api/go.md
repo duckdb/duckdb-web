@@ -13,7 +13,7 @@ For examples on how to use this interface, see the [official documentation](http
 
 To install the `go-duckdb` client, run:
 
-```bash
+```batch
 go get github.com/marcboeker/go-duckdb
 ```
 

@@ -49,7 +49,7 @@ which is itself is supported through an extension ([`httpfs`]({% link docs/1.2/e
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
 To load unsigned extensions using the [CLI client]({% link docs/1.2/clients/cli/overview.md %}), pass the `-unsigned` flag to it on startup:
 
-```bash
+```batch
 duckdb -unsigned
 ```
 

@@ -309,7 +309,7 @@ With this configuration, all the models from the `transformation` directory will
 
 After executing the models with `dbt run --model +reverse_etl`, the data is available to query from PostgreSQL:
 
-```bash
+```batch
 psql -U postgres
 ```
 

@@ -21,7 +21,7 @@ The availability of the `jemalloc` extension depends on the operating system.
 Linux distributions of DuckDB ships with the `jemalloc` extension.
 To disable the `jemalloc` extension, [build DuckDB from source]({% link docs/stable/dev/building/overview.md %}) and set the `SKIP_EXTENSIONS` flag as follows:
 
-```bash
+```batch
 GEN=ninja SKIP_EXTENSIONS="jemalloc" make
 ```
 
@@ -29,7 +29,7 @@ GEN=ninja SKIP_EXTENSIONS="jemalloc" make
 
 The macOS version of DuckDB does not ship with the `jemalloc` extension but can be [built from source]({% link docs/stable/dev/building/macos.md %}) to include it:
 
-```bash
+```batch
 GEN=ninja BUILD_JEMALLOC=1 make
 ```
 

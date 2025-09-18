@@ -18,7 +18,7 @@ Run this command:
 
 With Flutter:
 
-```bash
+```batch
 flutter pub add dart_duckdb
 ```
 

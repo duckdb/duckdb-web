@@ -14,7 +14,7 @@ title: Harlequin SQL IDE
 
 After installing Python 3.8 or above, install Harlequin using `pip` or `pipx` with:
 
-```bash
+```batch
 pip install harlequin
 ```
 
@@ -22,13 +22,13 @@ pip install harlequin
 
 From any shell, to open a DuckDB database file:
 
-```bash
+```batch
 harlequin "path/to/duck.db"
 ```
 
 To open an in-memory DuckDB session, run Harlequin with no arguments:
 
-```bash
+```batch
 harlequin
 ```
 

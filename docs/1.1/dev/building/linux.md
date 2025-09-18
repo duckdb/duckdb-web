@@ -9,20 +9,20 @@ On Linux, install the required packages with the package manager of your distrib
 
 ### Ubuntu and Debian
 
-```batch
+```bash
 sudo apt-get update
 sudo apt-get install -y git g++ cmake ninja-build libssl-dev
 ```
 
 ### Fedora, CentOS, and Red Hat
 
-```batch
+```bash
 sudo yum install -y git g++ cmake ninja-build openssl-devel
 ```
 
 ### Alpine Linux
 
-```batch
+```bash
 apk add g++ git make cmake ninja
 ```
 
@@ -33,7 +33,7 @@ There are no official binaries distributed for musl libc but DuckDB can be build
 
 Clone and build DuckDB as follows:
 
-```batch
+```bash
 git clone https://github.com/duckdb/duckdb
 cd duckdb
 GEN=ninja make
@@ -41,7 +41,7 @@ GEN=ninja make
 
 Once the build finishes successfully, you can find the `duckdb` binary in the `build` directory:
 
-```batch
+```bash
 build/release/duckdb
 ```
 
@@ -51,7 +51,7 @@ For different build configurations (`debug`, `relassert`, etc.), please consult 
 
 To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
 
-```batch
+```bash
 CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
 ```
 
@@ -92,12 +92,12 @@ CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake
 **Solution:**
 Install the `libssl-dev` library.
 
-```batch
+```bash
 sudo apt-get install -y libssl-dev
 ```
 
 Then, build with:
 
-```batch
+```bash
 GEN=ninja CORE_EXTENSIONS="httpfs" make
 ```

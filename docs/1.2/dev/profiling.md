@@ -253,7 +253,7 @@ After writing a profiling output to its designated file, the Python script can r
 The script requires the `duckdb` Python module to be installed.
 It generates an HTML file and opens it in your web browser.
 
-```bash
+```batch
 python -m duckdb.query_graph /path/to/file.json
 ```
 
