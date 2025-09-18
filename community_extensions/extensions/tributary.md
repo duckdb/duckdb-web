@@ -17,10 +17,10 @@ extension:
   maintainers:
     - rustyconover
   name: tributary
-  version: 1.0.0
+  version: 2025091601
 repo:
   github: query-farm/tributary
-  ref: 72e66b8cff9b521805a6415535915f8fcaa9df8c
+  ref: d1409bccd6b1fdc85c84020780ed79d1e90dd675
 
 extension_star_count: 29
 extension_star_count_pretty: 29
@@ -56,5 +56,6 @@ LOAD {{ page.extension.name }};
 | tributary            | scalar        | NULL        | NULL    |          |
 | tributary_metadata   | table         | NULL        | NULL    |          |
 | tributary_scan_topic | table         | NULL        | NULL    |          |
+| tributary_version    | scalar        | NULL        | NULL    |          |
 
 

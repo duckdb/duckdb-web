@@ -16,10 +16,10 @@ extension:
   maintainers:
     - rustyconover
   name: bitfilters
-  version: 1.0.1
+  version: 2025091601
 repo:
   github: query-farm/bitfilters
-  ref: 4b3a69ae8616083e3506cfce3f5526bbcf9d16d2
+  ref: cfcf8cf24d7299aa07d0a24c234e5c1f31d04065
 
 extension_star_count: 2
 extension_star_count_pretty: 2

@@ -16,10 +16,10 @@ extension:
   maintainers:
     - rustyconover
   name: marisa
-  version: 1.0.1
+  version: 2025091601
 repo:
   github: query-farm/marisa
-  ref: 3b45275ba8574679ca342ecb9bb06ccffa597e68
+  ref: 2092f5c0e46aa9fd896bbdd4ff385fb46cec1632
 
 extension_star_count: 2
 extension_star_count_pretty: 2
