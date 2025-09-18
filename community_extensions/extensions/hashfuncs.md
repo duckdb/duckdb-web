@@ -16,10 +16,10 @@ extension:
   maintainers:
     - rustyconover
   name: hashfuncs
-  version: 1.0.1
+  version: 2025091601
 repo:
   github: query-farm/hashfuncs
-  ref: c4b516011f02170f55036ef855aa11eb128bd2a2
+  ref: a4d74bb68e9fab243d257326a6e9da9945884c19
 
 extension_star_count: 2
 extension_star_count_pretty: 2

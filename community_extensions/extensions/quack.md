@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: quack
   description: Provides a hello world example demo
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT

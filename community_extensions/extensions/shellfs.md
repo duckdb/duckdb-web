@@ -18,10 +18,10 @@ extension:
     - rustyconover
   name: shellfs
   requires_toolchains: python3
-  version: 1.0.0
+  version: 2025091601
 repo:
   github: query-farm/shellfs
-  ref: ae31efcb4d299d39d68fd2941a57f4bd0d1b5d1e
+  ref: ee2ce42e3689fc6be35f88cfefc7cf80f2e7648e
 
 extension_star_count: 79
 extension_star_count_pretty: 79
@@ -52,8 +52,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|      name      |  description   | input_type | scope  |
-|----------------|----------------|------------|--------|
-| ignore_sigpipe | Ignore SIGPIPE | BOOLEAN    | GLOBAL |
+|      name      |  description   | input_type | scope  | aliases |
+|----------------|----------------|------------|--------|---------|
+| ignore_sigpipe | Ignore SIGPIPE | BOOLEAN    | GLOBAL | []      |
 
 
