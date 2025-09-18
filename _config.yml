@@ -27,7 +27,7 @@ current_duckdb_version: 1.4.0
 current_duckdb_hash: "b8a06e4a22"
 current_duckdb_odbc_version: 1.4.0.0
 current_duckdb_odbc_short_version: 1.4.0
-current_duckdb_go_version: 1.3.2
+current_duckdb_go_version: 1.4.0
 current_duckdb_nodejs_version: 1.4.0
 current_duckdb_node_neo_version: 1.3.2
 current_duckdb_r_version: 1.4.0
