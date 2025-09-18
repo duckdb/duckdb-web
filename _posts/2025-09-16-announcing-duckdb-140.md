@@ -172,7 +172,7 @@ CREATE SECRET (
 );
 USE iceberg_datalake.default;
 ATTACH 'duckdb.db' AS duckdb_db;
-CREATE TABLE duckdb_db.t AS SELECT range a FROM range(4);
+CREATE TABLE duckdb_db.t AS SELECT a FROM range(4) t(a);
 CREATE TABLE t AS SELECT * FROM duckdb_db.t;
 FROM iceberg_datalake.default.t;
 ```
