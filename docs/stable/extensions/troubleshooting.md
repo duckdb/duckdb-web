@@ -10,7 +10,7 @@ You might be visiting this page directed via a DuckDB error message, similar to:
 ```sql
 INSTALL non_existing;
 ```
-```
+```console
 HTTP Error:
 Failed to download extension "non_existing" at URL "http://extensions.duckdb.org/v1.4.0/osx_arm64/non_existing.duckdb_extension.gz" (HTTP 404)
 
