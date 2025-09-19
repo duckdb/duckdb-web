@@ -13,7 +13,7 @@ Most Iceberg REST Catalogs authenticate via OAuth2. You can use the existing Duc
 
 ```sql
 CREATE SECRET iceberg_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     CLIENT_ID '⟨admin⟩',
     CLIENT_SECRET '⟨password⟩',
     OAUTH2_SERVER_URI '⟨http://irc_host_url.com/v1/oauth/tokens⟩'
@@ -24,7 +24,7 @@ If you already have a Bearer token, you can pass it directly to your `CREATE SEC
 
 ```sql
 CREATE SECRET iceberg_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     TOKEN '⟨bearer_token⟩'
 );
 ```
@@ -32,10 +32,11 @@ CREATE SECRET iceberg_secret (
 You can attach the Iceberg catalog with the following [`ATTACH`]({% link docs/preview/sql/statements/attach.md %}) statement.
 
 ```sql
+LOAD httpfs;
 ATTACH '⟨warehouse⟩' AS iceberg_catalog (
    TYPE iceberg,
    SECRET iceberg_secret, -- pass a specific secret name to prevent ambiguity
-   ENDPOINT ⟨https://rest_endpoint.com⟩
+   ENDPOINT '⟨https://rest_endpoint.com⟩'
 );
 ```
 
@@ -77,7 +78,7 @@ To attach to an [R2 cloudflare](https://developers.cloudflare.com/r2/data-catalo
 
 ```sql
 CREATE SECRET r2_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     TOKEN '⟨r2_token⟩'
 );
 
@@ -89,7 +90,7 @@ Then, attach the catalog with the following commands.
 
 ```sql
 ATTACH '⟨warehouse⟩' AS my_r2_catalog (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT '⟨catalog-uri⟩'
 );
 ```
@@ -102,15 +103,15 @@ To attach to a [Polaris](https://polaris.apache.org) catalog the following comma
 
 ```sql
 CREATE SECRET polaris_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     CLIENT_ID '⟨admin⟩',
     CLIENT_SECRET '⟨password⟩',
 );
 ```
 
 ```sql
-ATTACH 'quickstart_catalog' as polaris_catalog (
-    TYPE ICEBERG,
+ATTACH 'quickstart_catalog' AS polaris_catalog (
+    TYPE iceberg,
     ENDPOINT '⟨polaris_rest_catalog_endpoint⟩'
 );
 ```
@@ -122,7 +123,7 @@ To attach to a [Lakekeeper](https://docs.lakekeeper.io) catalog the following co
 
 ```sql
 CREATE SECRET lakekeeper_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     CLIENT_ID '⟨admin⟩',
     CLIENT_SECRET '⟨password⟩',
     OAUTH2_SCOPE '⟨scope⟩',
@@ -131,10 +132,10 @@ CREATE SECRET lakekeeper_secret (
 ```
 
 ```sql
-ATTACH '⟨warehouse⟩' as lakekeeper_catalog (
-    TYPE ICEBERG,
+ATTACH '⟨warehouse⟩' AS lakekeeper_catalog (
+    TYPE iceberg,
     ENDPOINT '⟨lakekeeper_irc_url⟩',
-    SECRET lakekeeper_secret
+    SECRET '⟨lakekeeper_secret⟩'
 );
 ```
 
