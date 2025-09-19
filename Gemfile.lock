@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 7a7b316b29b4276d274a50fad78374296ce05949
+  revision: 04c5a672b7e3a6ee8751dcfeff3bbffd8cb1b069
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -276,4 +276,4 @@ DEPENDENCIES
   word_wrap (~> 1.0)
 
 BUNDLED WITH
-   2.5.18
+   2.7.2
