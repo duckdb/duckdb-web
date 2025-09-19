@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Iceberg Support in DuckDB"
+title: "Making Iceberg Easy with DuckDB-Iceberg"
 author: "Tom Ebergen (DuckDB Labs)"
 #thumb: "/images/media/thumbs/"
 #image: "/images/media/thumbs/"
@@ -17,3 +17,5 @@ length: "15 min"
 Event: [Apache Iceberg Europe Community Meetup](https://luma.com/u042b0vw)
 
 Speaker: Tom Ebergen (DuckDB Labs)
+
+[Slides](https://blobs.duckdb.org/slides/tom-ebergen-duckdb-iceberg-london-meetup.pdf)
