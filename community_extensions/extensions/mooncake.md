@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: Mooncake-Labs/duckdb_mooncake
-  ref: 44a4dc49b3b0fa677955f7427232d98736d48115
+  ref: d30535457a6a2fbdecb5b0cd869b543606902fc6
 
 docs:
   hello_world: |
@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 284
+extension_download_count_pretty: 284
 image: '/images/community_extensions/social_preview/preview_community_extension_mooncake.png'
 layout: community_extension_doc
 ---
