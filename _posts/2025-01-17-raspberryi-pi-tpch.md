@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "TPC-H on a Raspberry Pi"
-author: Gábor Szárnyas
+author: Gabor Szarnyas
 thumb: "/images/blog/thumbs/raspberry-pi.svg"
 image: "/images/blog/thumbs/raspberry-pi.png"
 excerpt: DuckDB can run all TPC-H queries on a Raspberry Pi 5 board up to the 1,000 GiB dataset.
