@@ -164,7 +164,7 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 The matches of capture groups in regular expressions can be used to rename matching columns.
 The capture groups are one-indexed; `\0` is the original column name.
 
-For example, to select the first three letters of colum names, run:
+For example, to select the first three letters of column names, run:
 
 ```sql
 SELECT COLUMNS('(\w{3}).*') AS '\1' FROM numbers;

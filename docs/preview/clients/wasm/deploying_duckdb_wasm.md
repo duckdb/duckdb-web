@@ -15,7 +15,7 @@ A DuckDB-Wasm deployment needs to access the following components:
 This is distributed as either TypeScript code or CommonJS JavaScript code in the `npm` duckdb-wasm package, and can be either bundled together with a given application, served in a same origin (sub-)domain and included at runtime or served from a third party CDN like JSDelivery.
 This do need some form of transpilation, and can't be served as-is, given it needs to know the location of the follow up files for this to be functional.
 Details will depend on your given setup, examples can be found at <https://github.com/duckdb/duckdb-wasm/tree/main/examples>.
-Example deployment could be for example <https://shell.duckdb.org>, that transpile the main library componenent together with shell code (first approach). Or the `bare-browser` example at <https://github.com/duckdb/duckdb-wasm/tree/main/examples/bare-browser>.
+Example deployment could be for example <https://shell.duckdb.org>, that transpile the main library component together with shell code (first approach). Or the `bare-browser` example at <https://github.com/duckdb/duckdb-wasm/tree/main/examples/bare-browser>.
 
 ## JS Worker Component
 
