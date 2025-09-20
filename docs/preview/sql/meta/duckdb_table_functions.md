@@ -82,7 +82,7 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 | `expression` | If constraint is a check constraint, the definition of the condition being checked, otherwise `NULL`. | `VARCHAR` |
 | `constraint_column_indexes` | An array of table column indexes referring to the columns that appear in the constraint definition. | `BIGINT[]` |
 | `constraint_column_names` | An array of table column names appearing in the constraint definition. | `VARCHAR[]` |
-| `constraint_name` | The naem of constraint. | `VARCHAR` |
+| `constraint_name` | The name of the constraint. | `VARCHAR` |
 | `referenced_table` | The table referenced by the constraint. | `VARCHAR` |
 | `referenced_column_names` | The column names references the by the constraint. | `VARCHAR[]` |
 
@@ -282,7 +282,7 @@ The `duckdb_secrets()` function provides metadata about the secrets available in
 | `name` | The name of the secret. | `VARCHAR` |
 | `type` | The type of the secret, e.g., `S3`, `GCS`, `R2`, `AZURE`. | `VARCHAR` |
 | `provider` | The provider of the secret. | `VARCHAR` |
-| `persistent` | Denotes whether the secret is persisent. | `BOOLEAN` |
+| `persistent` | Denotes whether the secret is persistent. | `BOOLEAN` |
 | `storage` | The backend for storing the secret. | `VARCHAR` |
 | `scope` | The scope of the secret. | `VARCHAR[]` |
 | `secret_string` | Returns the content of the secret as a string. Sensitive pieces of information, e.g., they access key, are redacted. | `VARCHAR` |

@@ -17,7 +17,7 @@ available separately as [@duckdb/node-bindings](https://www.npmjs.com/package/@d
 
 * Native support for Promises; no need for separate [duckdb-async](https://www.npmjs.com/package/duckdb-async) wrapper.
 * DuckDB-specific API; not based on the [SQLite Node API](https://www.npmjs.com/package/sqlite3).
-* Lossless & efficent support for values of all [DuckDB data types]({% link docs/preview/sql/data_types/overview.md %}).
+* Lossless & efficient support for values of all [DuckDB data types]({% link docs/preview/sql/data_types/overview.md %}).
 * Wraps [released DuckDB binaries](https://github.com/duckdb/duckdb/releases) instead of rebuilding DuckDB.
 * Built on [DuckDB's C API]({% link docs/preview/clients/c/overview.md %}); exposes more functionality.
 
@@ -694,7 +694,7 @@ if (columnType.typeId === DuckDBTypeId.ARRAY) {
 
 if (columnType.typeId === DuckDBTypeId.BIT) {
   const bools = columnValue.toBools(); // array of booleans
-  const bits = columnValue.toBits(); // arrary of 0s and 1s
+  const bits = columnValue.toBits(); // array of 0s and 1s
   const bitString = columnValue.toString(); // string of '0's and '1's
 }
 

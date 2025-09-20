@@ -8,7 +8,7 @@ Most notably, SQL uses set semantics, which allows results to be returned in a d
 DuckDB exploits this to improve performance, particularly when performing multi-threaded query execution.
 Other factors, such as using different compilers, operating systems, and hardware architectures, can also cause changes in ordering.
 This page documents the cases where non-determinism is an _expected behavior_.
-If you would like to make your queries determinisic, see the [“Working Around Non-Determinism” section](#working-around-non-determinism).
+If you would like to make your queries deterministic, see the [“Working Around Non-Determinism” section](#working-around-non-determinism).
 
 ## Set Semantics
 

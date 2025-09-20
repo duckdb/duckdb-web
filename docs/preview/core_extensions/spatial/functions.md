@@ -21,7 +21,7 @@ title: Spatial Functions
 | [`ST_Azimuth`](#st_azimuth) | Returns the azimuth (a clockwise angle measured from north) of two points in radian. |
 | [`ST_Boundary`](#st_boundary) | Returns the "boundary" of a geometry |
 | [`ST_Buffer`](#st_buffer) | Returns a buffer around the input geometry at the target distance |
-| [`ST_BuildArea`](#st_buildarea) | Creates a polygonal geometry by attemtping to "fill in" the input geometry. |
+| [`ST_BuildArea`](#st_buildarea) | Creates a polygonal geometry by attempting to "fill in" the input geometry. |
 | [`ST_Centroid`](#st_centroid) | Returns the centroid of a geometry |
 | [`ST_Collect`](#st_collect) | Collects a list of geometries into a collection geometry. |
 | [`ST_CollectionExtract`](#st_collectionextract) | Extracts geometries from a GeometryCollection into a typed multi geometry. |
@@ -560,7 +560,7 @@ GEOMETRY ST_BuildArea (geom GEOMETRY)
 
 #### Description
 
-Creates a polygonal geometry by attemtping to "fill in" the input geometry.
+Creates a polygonal geometry by attempting to "fill in" the input geometry.
 
 Unlike ST_Polygonize, this function does not fill in holes.
 
@@ -656,9 +656,9 @@ GEOMETRY ST_CollectionExtract (geom GEOMETRY)
 Extracts geometries from a GeometryCollection into a typed multi geometry.
 
 If the input geometry is a GeometryCollection, the function will return a multi geometry, determined by the `type` parameter.
-- if `type` = 1, returns a MultiPoint containg all the Points in the collection
-- if `type` = 2, returns a MultiLineString containg all the LineStrings in the collection
-- if `type` = 3, returns a MultiPolygon containg all the Polygons in the collection
+- if `type` = 1, returns a MultiPoint containing all the Points in the collection
+- if `type` = 2, returns a MultiLineString containing all the LineStrings in the collection
+- if `type` = 3, returns a MultiPolygon containing all the Polygons in the collection
 
 If no `type` parameters is provided, the function will return a multi geometry matching the highest "surface dimension"
 of the contained geometries. E.g. if the collection contains only Points, a MultiPoint will be returned. But if the
@@ -1488,7 +1488,7 @@ UINTEGER ST_Hilbert (box BOX_2DF, bounds BOX_2DF)
 
 Encodes the X and Y values as the hilbert curve index for a curve covering the given bounding box.
 If a geometry is provided, the center of the approximate bounding box is used as the point to encode.
-If no bounding box is provided, the hilbert curve index is mapped to the full range of a single-presicion float.
+If no bounding box is provided, the hilbert curve index is mapped to the full range of a single-precision float.
 For the BOX_2D and BOX_2DF variants, the center of the box is used as the point to encode.
 
 ----
