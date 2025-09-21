@@ -17,7 +17,7 @@ extension:
     - Hugoberry
 repo:
   github: Hugoberry/duckdb-pbix-extension
-  ref: 22d1d12b15c5b26b2053e7b07a25dad192e16c40
+  ref: 92c60bb174285fad2bf105526c3d44319fe43ec1
 docs:
   hello_world: |
     -- Get metadata tables from a PowerBI file
@@ -47,8 +47,8 @@ docs:
 
 extension_star_count: 27
 extension_star_count_pretty: 27
-extension_download_count: 462
-extension_download_count_pretty: 462
+extension_download_count: 316
+extension_download_count_pretty: 316
 image: '/images/community_extensions/social_preview/preview_community_extension_pbix.png'
 layout: community_extension_doc
 ---
@@ -83,8 +83,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|       name        |                description                | input_type | scope  |
-|-------------------|-------------------------------------------|------------|--------|
-| pbix_magic_number | A magic number to accelerate file parsing | INTEGER    | GLOBAL |
+|       name        |                description                | input_type | scope  | aliases |
+|-------------------|-------------------------------------------|------------|--------|---------|
+| pbix_magic_number | A magic number to accelerate file parsing | INTEGER    | GLOBAL | []      |
 
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: observefs
   description: Provides IO observability to filesystem
-  version: 0.0.1
+  version: 0.1.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-filesystem-observability
-  ref: fca3e0b5cadcd61a6039d714d9250ea2c06a625a
+  ref: d09d28a3e9f9b9b321de85c2754bca0a97852a2b
 
 docs:
   hello_world: |
@@ -27,13 +27,13 @@ docs:
     This extension provides observability to duckdb filesystems.
     It supports a few key features:
     - 100% compatible with duckdb httpfs
-    - Provides both process-wise and bucket-wise latency stats
+    - Provides both process-wise and bucket-wise latency stats (including histogram and quantile estimation)
     - Allows registering ANY duckdb compatible filesystems (i.e., azure filesystem)
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 61
-extension_download_count_pretty: 61
+extension_download_count: 123
+extension_download_count_pretty: 123
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---
@@ -59,10 +59,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name     | function_type | description | comment | examples |
-|-----------------------|---------------|-------------|---------|----------|
-| observefs_clear       | scalar        | NULL        | NULL    |          |
-| observefs_get_profile | scalar        | NULL        | NULL    |          |
+|       function_name       | function_type | description | comment | examples |
+|---------------------------|---------------|-------------|---------|----------|
+| observefs_clear           | scalar        | NULL        | NULL    |          |
+| observefs_get_profile     | scalar        | NULL        | NULL    |          |
+| observefs_wrap_filesystem | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
