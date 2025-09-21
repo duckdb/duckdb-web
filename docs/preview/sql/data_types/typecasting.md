@@ -68,7 +68,7 @@ So even though the cast operation from `INTEGER` to `TINYINT` is supported, it i
 
 ### Varchar
 
-The [`VARCHAR`]({% link docs/preview/sql/data_types/text.md %}) type acts as a univeral target: any arbitrary value of any arbitrary type can always be cast to the `VARCHAR` type. This type is also used for displaying values in the shell.
+The [`VARCHAR`]({% link docs/preview/sql/data_types/text.md %}) type acts as a universal target: any arbitrary value of any arbitrary type can always be cast to the `VARCHAR` type. This type is also used for displaying values in the shell.
 
 ```sql
 SELECT CAST(42.5 AS VARCHAR);
