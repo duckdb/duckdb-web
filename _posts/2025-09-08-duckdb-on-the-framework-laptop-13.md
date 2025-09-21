@@ -56,7 +56,7 @@ duckdb
 
 ```sql
 .timer on
-CREATE TABLE services AS FROM 'services/services-*.csv.gz';
+CREATE TABLE services AS FROM 'services/services-*.csv';
 -- Run Time (s): real 10.219 user 217.596664 sys 7.348692
 ```
 
