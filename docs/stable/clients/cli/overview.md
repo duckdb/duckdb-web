@@ -8,10 +8,10 @@ redirect_from:
 - /docs/api/cli/overview
 - /docs/api/cli/overview/
 - /docs/clients/cli/overview
-title: CLI API
+title: Command Line Client
 ---
 
-> The latest stable version of the DuckDB CLI client is {{ site.current_duckdb_version }}.
+> The latest stable version of the DuckDB command line client is {{ site.current_duckdb_version }}.
 
 ## Installation
 
