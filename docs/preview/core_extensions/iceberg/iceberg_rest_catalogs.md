@@ -110,7 +110,7 @@ This functionality enables the user to grab a `snapshot_from_id` to do **time-tr
 SELECT * FROM my_datalake.default.t AT (VERSION => ⟨SNAPSHOT_ID⟩)
 
 -- Or using a timestamp
-SELECT * FROM iceberg_scan(TIMESTAMP => TIMESTAMP '2025-09-22 12:32:43.217')
+SELECT * FROM my_datalake.default.t AT (TIMESTAMP => TIMESTAMP '2025-09-22 12:32:43.217')
 ```
 
 ### Interoperability with DuckLake
