@@ -50,24 +50,74 @@ SHOW ALL TABLES;
 A REST Catalog with OAuth2 authorization can also be attached with just an `ATTACH` statement. See the complete list of `ATTACH` options for a REST catalog below. 
 
  
-| Parameter                    | Type       | Default  | Description                                                |
-| ---------------------------- | ---------- | -------- | ---------------------------------------------------------- |
-| `ENDPOINT_TYPE`              | `VARCHAR`  | `NULL`   | Used for attaching S3Tables or Glue catalogs. Allowed values are 'GLUE' and 'S3_TABLES' |
-| `ENDPOINT`                   | `VARCHAR`  | `NULL`   | URL endpoint to communicate with the REST Catalog. Cannot be used in conjunction with `ENDPOINT_TYPE`            |
-| `SECRET`                     | `VARCHAR`  | `NULL`   | Name of secret used to communicate with the REST Catalog |
-| `CLIENT_ID`                  | `VARCHAR`  | `NULL`   | CLIENT_ID used for Secret                                     |
-| `CLIENT_SECRET`              | `VARCHAR`  | `NULL`   | CLIENT_SECRET needed for Secret                               |
-| `DEFAULT_REGION`             | `VARCHAR`  | `NULL`   | A Default region to use when communicating with the storage layer |
-| `OAUTH2_SERVER_URI`          | `VARCHAR`  | `NULL`   | OAuth2 server url for getting a Bearer Token                  |
-| `AUTHORIZATION_TYPE`         | `VARCHAR`  | `OAUTH2` | Pass `SigV4` for Catalogs the require SigV4 authorization |
+| Parameter                     | Type      | Default  | Description                                                                                           |
+|-------------------------------|-----------|----------|-------------------------------------------------------------------------------------------------------|
+| `ENDPOINT_TYPE`               | `VARCHAR` | `NULL`   | Used for attaching S3Tables or Glue catalogs. Allowed values are 'GLUE' and 'S3_TABLES'               |
+| `ENDPOINT`                    | `VARCHAR` | `NULL`   | URL endpoint to communicate with the REST Catalog. Cannot be used in conjunction with `ENDPOINT_TYPE` |
+| `SECRET`                      | `VARCHAR` | `NULL`   | Name of secret used to communicate with the REST Catalog                                              |
+| `CLIENT_ID`                   | `VARCHAR` | `NULL`   | CLIENT_ID used for Secret                                                                             |
+| `CLIENT_SECRET`               | `VARCHAR` | `NULL`   | CLIENT_SECRET needed for Secret                                                                       |
+| `DEFAULT_REGION`              | `VARCHAR` | `NULL`   | A Default region to use when communicating with the storage layer                                     |
+| `OAUTH2_SERVER_URI`           | `VARCHAR` | `NULL`   | OAuth2 server url for getting a Bearer Token                                                          |
+| `AUTHORIZATION_TYPE`          | `VARCHAR` | `OAUTH2` | Pass `SigV4` for Catalogs the require SigV4 authorization, `none` for catalogs that don't need auth   |
+| `SUPPORTED_NESTED_NAMESPACES` | `BOOLEAN` | `true`   | Option for catalogs that support nested namespaces.                                                   |
+| `SUPPORT_STAGE_CREATE`        | `BOOLEAN` | `false`  | Option for catalogs that do not support stage create.                                                 |
+
 
 
 The following options can only be passed to a `CREATE SECRET` statement, and they require `AUTHORIZATION_TYPE` to be `OAUTH2`
 
-| Parameter                    | Type       | Default  | Description                                                |
-| ---------------------------- | ---------- | -------- | ---------------------------------------------------------- |
-| `OAUTH2_GRANT_TYPE`          | `VARCHAR`  | `NULL` | Grant Type when requesting an OAuth Token |
-| `OAUTH2_SCOPE`               | `VARCHAR`  | `NULL` | Requested scope for the returned OAuth Access Token |
+| Parameter           | Type      | Default | Description                                         |
+|---------------------|-----------|---------|-----------------------------------------------------|
+| `OAUTH2_GRANT_TYPE` | `VARCHAR` | `NULL`  | Grant Type when requesting an OAuth Token           |
+| `OAUTH2_SCOPE`      | `VARCHAR` | `NULL`  | Requested scope for the returned OAuth Access Token |
+
+
+### Supported Operations
+
+The DuckDB Iceberg extensions supports the following operations when used with a REST catalog attached:
+
+- `CREATE/DROP SCHEMA`
+- `CREATE/DROP TABLE`
+- `INSERT INTO`
+- `SELECT`
+- `ALTER TABLE`
+
+Since these operations are supported, the following would also work:
+
+```sql
+COPY FROM DATABASE duckdb_db TO iceberg_datalake;
+
+-- Or
+COPY FROM DATABASE iceberg_datalake to duckdb_db;
+```
+
+This functionality enables deep copies between Iceberg and DuckDB storage.
+
+### Interoperability with DuckLake
+
+The DuckDB Iceberg extensions exposes a function to do metadata only copies of the Iceberg metadata to DuckLake, which enables users to query Iceberg tables as if they where DuckLake tables.
+
+```sql
+-- Given that we have an Iceberg catalog attached aliased to iceberg_datalake
+ATTACH `ducklake:my_ducklake.ducklake` AS my_ducklake;
+
+CALL iceberg_to_ducklake('iceberg_datalake', 'my_ducklake');
+```
+
+It is also possible to skip a set of tables provided the `skip_tables` parameter.
+
+```sql
+CALL iceberg_to_ducklake('iceberg_datalake', 'my_ducklake', skip_tables := ['table_to_skip']);
+```
+
+### Unsupported Operations
+
+The following operations are not supported by the Iceberg DuckDB extension:
+
+- `UPDATE`
+- `DELETE`
+- `MERGE INTO`
 
 ## Specific Catalog Examples
 

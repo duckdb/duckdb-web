@@ -11,7 +11,8 @@ redirect_from:
 title: Iceberg Extension
 ---
 
-The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/).
+The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/). 
+In this page we will go over the basic usage of the extension without the need to attach to an Iceberg catalog. For full support &mdash;including write support&mdash; see [how to attach Iceberg REST catalogs]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}).
 
 ## Installing and Loading
 
@@ -186,7 +187,3 @@ FROM iceberg_scan(
     allow_moved_paths = true
 );
 ```
-
-## Limitations
-
-Writing (i.e., exporting to) Iceberg files is currently not supported.
