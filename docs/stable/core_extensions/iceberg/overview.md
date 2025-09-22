@@ -187,3 +187,12 @@ FROM iceberg_scan(
     allow_moved_paths = true
 );
 ```
+
+## Limitations
+
+- Updates and deletes.
+- Inserts into v3 Iceberg specification tables.
+- Reads from v3 tables with v2 data types.
+- Geometry data type
+
+For a set of unsupported operations when attaching to an iceberg catalog, [see]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}#unsupported-operations).
