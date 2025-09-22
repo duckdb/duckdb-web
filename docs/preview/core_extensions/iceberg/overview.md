@@ -4,7 +4,8 @@ layout: docu
 title: Iceberg Extension
 ---
 
-The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/).
+The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/). 
+In this page we will go over the basic usage of the extension without the need to attach to an Iceberg catalog. For full support &mdash;including write support&mdash; see [how to attach Iceberg REST catalogs]({% link docs/preview/core_extensions/iceberg/iceberg_rest_catalogs.md %}).
 
 ## Installing and Loading
 
@@ -71,7 +72,7 @@ FROM iceberg_scan('lineitem_iceberg/metadata/v1.metadata.json');
 |-------------:|
 | 60175        |
 
-The `iceberg` works together with the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}) or the [`azure` extension]({% link docs/preview/core_extensions/azure.md %}) to access Iceberg tables in object stores such as S3 or Azure Blob Storage.
+The `iceberg` works together with the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) or the [`azure` extension]({% link docs/stable/core_extensions/azure.md %}) to access Iceberg tables in object stores such as S3 or Azure Blob Storage.
 
 ```sql
 SELECT count(*)
@@ -179,7 +180,3 @@ FROM iceberg_scan(
     allow_moved_paths = true
 );
 ```
-
-## Limitations
-
-Writing (i.e., exporting to) Iceberg files is currently not supported.
