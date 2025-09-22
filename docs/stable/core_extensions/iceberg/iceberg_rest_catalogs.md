@@ -81,7 +81,6 @@ The DuckDB Iceberg extensions supports the following operations when used with a
 - `CREATE/DROP TABLE`
 - `INSERT INTO`
 - `SELECT`
-- `ALTER TABLE`
 
 Since these operations are supported, the following would also work:
 
@@ -93,6 +92,26 @@ COPY FROM DATABASE iceberg_datalake to duckdb_db;
 ```
 
 This functionality enables deep copies between Iceberg and DuckDB storage.
+
+### Metadata Operations
+
+The functions `iceberg_metadata` and `iceberg_snapshots` are also available to use with an Iceberg REST catalog using a fully qualified path, e.g.
+
+```sql
+SELECT * FROM iceberg_metadata(my_datalake.default.t)
+
+-- Or
+SELECT * FROM iceberg_snapshots(my_datalake.default.t)
+```
+
+This functionality enables the user to grab a `snapshot_from_id` to do **time-traveling**.
+
+```sql
+SELECT * FROM iceberg_scan(my_datalake.default.t, snapshot_from_id => ⟨SNAPSHOT_ID⟩);
+
+-- Or using a timestamp
+SELECT * FROM iceberg_scan(my_datalake.default.t, snapshot_from_timestamp => '2025-09-22 12:32:43.217')
+```
 
 ### Interoperability with DuckLake
 
@@ -118,6 +137,7 @@ The following operations are not supported by the Iceberg DuckDB extension:
 - `UPDATE`
 - `DELETE`
 - `MERGE INTO`
+- `ALTER TABLE`
 
 ## Specific Catalog Examples
 
