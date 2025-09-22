@@ -107,10 +107,10 @@ SELECT * FROM iceberg_snapshots(my_datalake.default.t)
 This functionality enables the user to grab a `snapshot_from_id` to do **time-traveling**.
 
 ```sql
-SELECT * FROM iceberg_scan(my_datalake.default.t, snapshot_from_id => ⟨SNAPSHOT_ID⟩);
+SELECT * FROM my_datalake.default.t AT (VERSION => ⟨SNAPSHOT_ID⟩)
 
 -- Or using a timestamp
-SELECT * FROM iceberg_scan(my_datalake.default.t, snapshot_from_timestamp => '2025-09-22 12:32:43.217')
+SELECT * FROM iceberg_scan(TIMESTAMP => TIMESTAMP '2025-09-22 12:32:43.217')
 ```
 
 ### Interoperability with DuckLake
