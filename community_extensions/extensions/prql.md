@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: ywelsch/duckdb-prql
-  ref: ed0cd73d02436b33e85ac107f21cb693f18de416
+  ref: 0b411575bb454e96cd5bd8aa97ba1d73ed689a34
 
 docs:
   hello_world: |
@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 297
 extension_star_count_pretty: 297
-extension_download_count: 494
-extension_download_count_pretty: 494
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_prql.png'
 layout: community_extension_doc
 ---
