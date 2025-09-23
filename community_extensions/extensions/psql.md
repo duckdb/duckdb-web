@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: ywelsch/duckdb-psql
-  ref: 21d37708ce02819f5601279a67ee05e1ad1397cc
+  ref: f0ee86e08020f4b7d7300da5be9c7a0f01c63dce
 
 docs:
   hello_world: |
@@ -50,8 +50,8 @@ docs:
 
 extension_star_count: 92
 extension_star_count_pretty: 92
-extension_download_count: 501
-extension_download_count_pretty: 501
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_psql.png'
 layout: community_extension_doc
 ---
