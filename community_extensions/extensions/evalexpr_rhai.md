@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 688
-extension_download_count_pretty: 688
+extension_download_count: 729
+extension_download_count_pretty: 729
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
