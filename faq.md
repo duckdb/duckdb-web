@@ -315,6 +315,25 @@ If you are unsure about the DuckDB version used in a process, run the `PRAGMA ve
 
 </div>
 
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### Where can I learn more about DuckDB?
+
+<div class="answer" markdown="1">
+
+DuckDB has an the official [documentation]({% link docs/stable/index.md %}), [blog]({% link news/index.html %}) and [media collection]({% link media/index.html %}).
+At the same time, there are a few third-party resources which can help you learn more about DuckDB:
+
+* To discover projects using DuckDB, we recommend visiting the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
+* There is a number of [DuckDB books](https://www.goodreads.com/search?utf8=%E2%9C%93&q=duckdb&search_type=books) available.
+* The [tldr pages](https://tldr.sh/) initiative has a [DuckDB entry](https://tldr.inbrowser.app/pages/common/duckdb).
+
+</div>
+
+</div>
+
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
