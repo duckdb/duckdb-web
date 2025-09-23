@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cwiqduck
   description: DuckDB filesystem extension for CWIQ FS
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT
@@ -18,12 +18,12 @@ extension:
 
 repo:
   github: cwiq-os/cwiqduck
-  ref: ae71d1443f588f23a6b5802b76f999d06f5814f7
+  ref: 81bb6a0c509ef91919560cbcddaf8e489e0ac8eb 
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 73
-extension_download_count_pretty: 73
+extension_download_count: 155
+extension_download_count_pretty: 155
 image: '/images/community_extensions/social_preview/preview_community_extension_cwiqduck.png'
 layout: community_extension_doc
 ---
