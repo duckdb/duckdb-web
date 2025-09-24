@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 144
-extension_download_count_pretty: 144
+extension_download_count: 192
+extension_download_count_pretty: 192
 image: '/images/community_extensions/social_preview/preview_community_extension_chaos.png'
 layout: community_extension_doc
 ---
