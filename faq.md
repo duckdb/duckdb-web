@@ -477,7 +477,7 @@ Official supports covers the [primary clients]({% link docs/stable/clients/overv
 
 New feature releases (e.g., v1.2.0) are released every 3–5 months.
 Bugfix releases (e.g., v1.1.3) are released every 2–4 weeks after a feature release.
-You can find the recent releases in the [release calendar]({% link release_calendar.md %}).
+You can find the recent releases in the [Release Calendar]({% link release_calendar.md %}).
 
 </div>
 
