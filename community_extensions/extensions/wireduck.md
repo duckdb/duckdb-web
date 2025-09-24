@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: wireduck
   description: Read and dissect PCAP files from DuckDB
-  version: 0.0.1
+  version: 0.0.2
   language: c++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: hyehudai/wireduck
-  ref: 1970a7c27360e75acc54beb9e778a6513261296b
+  ref: 19c4018cc8ebad08547d621bcdc25df86294ca2b
 
 docs:
   hello_world: |
@@ -53,10 +53,10 @@ docs:
         
     > Note: Wireduck is still experimental.
 
-extension_star_count: 45
-extension_star_count_pretty: 45
-extension_download_count: 439
-extension_download_count_pretty: 439
+extension_star_count: 46
+extension_star_count_pretty: 46
+extension_download_count: 97
+extension_download_count_pretty: 97
 image: '/images/community_extensions/social_preview/preview_community_extension_wireduck.png'
 layout: community_extension_doc
 ---
@@ -77,5 +77,15 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|     function_name      | function_type | description | comment | examples |
+|------------------------|---------------|-------------|---------|----------|
+| check_tshark_installed | scalar        | NULL        | NULL    |          |
+| initialize_glossary    | table         | NULL        | NULL    |          |
+| read_pcap              | table         | NULL        | NULL    |          |
 
 
