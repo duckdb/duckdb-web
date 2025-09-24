@@ -58,4 +58,3 @@ If you would like to expedite the development of these features, please [get in 
 * [Materialized views](https://github.com/duckdb/duckdb/discussions/3638)
 * [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
 * [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104)
-* [`MERGE` statement](https://github.com/duckdb/duckdb/discussions/4601) - (Update 2025-07-04) `MERGE` is supported now in the preview release.
