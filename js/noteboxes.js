@@ -23,6 +23,9 @@ $(document).ready(function(){
 			case "Deprecated":
 				className = "deprecated";
 				break;
+			case "Update":
+				className = "update";
+				break;	
 			default:
 				className = "default"; 
 				break;

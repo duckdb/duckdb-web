@@ -393,6 +393,7 @@
 	table tbody td {
 		@include body-standard();
 		padding: 10px;
+		vertical-align: middle;
 	}
 	
 	table tbody tr:hover {
