@@ -461,7 +461,7 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 
 <div class="answer" markdown="1">
 
-Official supports covers the [primary clients]({% link docs/stable/clients/overview.md %}) of the latest stable version (currently {{ site.current_duckdb_version }}).
+Official supports covers the [primary clients]({% link docs/stable/clients/overview.md %}) of the latest LTS version (currently 1.4.x) and the latest stable version (currently also 1.4.x).
 
 </div>
 
