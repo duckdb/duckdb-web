@@ -394,24 +394,24 @@ body.installation{
 	}
 	
 	.installation-hint{
-		display: none;
-		display: flex;
+		display: inline-flex;
 		flex-wrap: nowrap;
 		align-items: center;
-		gap: 8px;
-		margin-top: 16px;
-		margin-left: 2px;
+		gap: 6px;
+		margin-left: 8px;
+		vertical-align: middle;
 		
 		p{
 			margin: 0;
-			font-size: var(--type-body-small);
+			font-size: var(--type-label-1);
 			font-weight: 600;
 			color: var(--orange-50, #FF6900);
 		}
 		
 		svg{
-			width: 19px;
-			height: 19px;
+			width: 15px;
+			height: 15px;
+			transform: translateY(-1px);
 		}
 	}
 	
