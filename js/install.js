@@ -18,7 +18,6 @@
     var $foldEnv = $container.find('.selection-foldout[data-foldout="environment"]');
     var $rgPlat = $container.find('.selection-options[data-role="platform"]');
     var $rgEnv = $container.find('.selection-options[data-role="environment"]');
-    var $rgArch = $container.find('.selection-options[data-role="architecture"]');
     var $archWrap = $container.find('.architecture-wrap');
 
     var state = {
@@ -102,8 +101,12 @@
 
     function selectOption(role, value) {
       if (!role) return;
-      var $group = role === 'platform' ? $rgPlat : role === 'environment' ? $rgEnv : role === 'architecture' ? $rgArch : $();
-      if (!$group.length) return;
+      var $group;
+      if (role === 'platform') $group = $rgPlat;
+      else if (role === 'environment') $group = $rgEnv;
+      else if (role === 'architecture') $group = getCurrentArchGroup();
+      else $group = $();
+      if (!$group || !$group.length) return;
 
       var $opt = $group.find('.option').filter(function () {
         return String($(this).data('value')) === String(value);
@@ -126,7 +129,8 @@
 
     // Reset architecture selection (used on platform change)
     function clearArchitectureSelection() {
-      var $opts = $rgArch.find('.option');
+      var $group = getCurrentArchGroup();
+      var $opts = $group && $group.length ? $group.find('.option') : $();
       if (!$opts.length) {
         state.architecture = null;
         return;
@@ -166,9 +170,10 @@
     }
 
     function labelFor(role) {
-      var $group = role === 'platform' ? $rgPlat : role === 'environment' ? $rgEnv : role === 'architecture' ? $rgArch : $();
+      var $group = role === 'platform' ? $rgPlat : role === 'environment' ? $rgEnv : role === 'architecture' ? getCurrentArchGroup() : $();
+      if (!$group || !$group.length) return '';
       var $opt = $group.find('.option.active').first();
-      var txt = $.trim($opt.find('.label').text() || $opt.text() || '');
+      var txt = $.trim(($opt.find('.label').text() || $opt.text() || ''));
       return txt;
     }
 
@@ -275,7 +280,6 @@
       // If environment is selected but architecture is missing and required, show hint instead of instructions
       if (state.environment && !state.architecture && requiresArchitecture(state.platform, state.environment)) {
         if ($wrap.length) $wrap.empty();
-        // neutralize .more area
         $altToggle
           .hide()
           .attr('aria-expanded', 'false')
@@ -290,9 +294,19 @@
           .attr('tabindex', '-1');
         $inst.hide();
         if ($hint && $hint.length) $hint.show();
+
+        if (state.platform) {
+          selectOption('platform', state.platform);
+          updateArchitectureVisibility();
+          var $grp = getCurrentArchGroup();
+          if ($grp && $grp.length) {
+            $grp.addClass('error');
+          }
+        }
         return;
       } else {
         if ($hint && $hint.length) $hint.hide();
+        $container.find('.arch-inline').removeClass('error');
       }
 
       var $tpl = bestTemplate();
@@ -322,7 +336,8 @@
         $wrap.html($tpl.html());
         $wrap.find('.more').remove();
       } else {
-        $result.html($tpl.html());
+        if ($hint && $hint.length) $hint.hide();
+        $container.find('.arch-inline').removeClass('error');
       }
 
       updateMore($tpl);
@@ -367,21 +382,72 @@
     }
 
     function updateAvailability() {
-      var $group = $rgArch;
-      if (!$group.length) return;
+      var $group = getCurrentArchGroup();
+      if (!$group || !$group.length) return;
       $group.find('.option')
         .removeClass('disabled')
         .attr('aria-disabled', 'false')
         .attr('tabindex', '0');
     }
 
+
+    function getActivePlatformItem() {
+      var $active = $rgPlat.find('.option.active').first();
+      if (!$active.length) return $();
+      var $item = $active.closest('.platform-item');
+      return $item.length ? $item : $();
+    }
+
+    function getCurrentArchGroup() {
+      var $item = getActivePlatformItem();
+      return $item.length ? $item.children('.arch-inline.selection-options[data-role="architecture"]') : $();
+    }
+
+    function closeInlineArchGroups() {
+      $rgPlat.find('.platform-item .arch-inline.selection-options[data-role="architecture"]').removeClass('open');
+      $rgPlat.find('.platform-item .option[aria-controls]').removeAttr('aria-controls aria-expanded');
+    }
+
+    function ensureInlineArchGroup() {
+      var $item = getActivePlatformItem();
+      if (!$item.length) return;
+      var $group = $item.children('.arch-inline.selection-options[data-role="architecture"]');
+      if (!$group.length) return;
+
+      // optional aria linkage to the platform option
+      var id = $group.attr('id') || ('arch-inline-' + (Date.now()) + '-' + Math.floor(Math.random() * 1000));
+      $group.attr('id', id);
+      var $btn = $item.children('.option').first();
+      $btn.attr('aria-controls', id).attr('aria-expanded', 'true');
+
+      $group.attr('role', 'radiogroup');
+      $group.find('.option').attr('role', 'radio');
+      var $opts = $group.find('.option');
+      var $active = $opts.filter('.active').first();
+      if ($active.length) {
+        $opts.not($active).attr('tabindex', '-1');
+        $active.attr('tabindex', '0');
+      } else {
+        $opts.attr('tabindex', '-1');
+        $opts.first().attr('tabindex', '0');
+      }
+      
+      window.requestAnimationFrame(function () {
+        $group.addClass('open');
+      });
+
+      if (state.architecture) {
+        selectOption('architecture', state.architecture);
+      }
+    }
+
     function updateArchitectureVisibility() {
       if ($archWrap && $archWrap.length) {
-        if (state.platform === 'macos') {
-          $archWrap.hide();
-        } else {
-          $archWrap.show();
-        }
+        $archWrap.hide();
+      }
+      closeInlineArchGroups();
+      if (requiresArchitecture(state.platform, state.environment) && state.platform !== 'macos') {
+        ensureInlineArchGroup();
       }
     }
 
@@ -414,7 +480,7 @@
     }
 
     function wire() {
-      $rgPlat.add($rgEnv).add($rgArch).attr('role', 'radiogroup');
+      $container.find('.selection-options[data-role]').attr('role', 'radiogroup');
       $container.find('.selection-options .option').attr('role', 'radio');
 
       $container.on('click', '.selection-options .option', function (e) {
@@ -455,7 +521,7 @@
         if (isOpen) $content.show(); else $content.hide();
       });
 
-      $rgPlat.add($rgEnv).add($rgArch).each(function () {
+      $container.find('.selection-options[data-role]').each(function () {
         var $group = $(this);
         var $opts = $group.find('.option');
         var $active = $opts.filter('.active').first();
@@ -504,8 +570,8 @@
     readURL();
     normalizeState();
     applyUIFromState();
-    updateAvailability();
     updateArchitectureVisibility();
+    updateAvailability();
     writeURL();
     $('.installation-instructions').hide();
     render();
@@ -520,6 +586,7 @@
         if (arch && !state.architecture) {
           state.architecture = arch;
           applyUIFromState();
+          updateArchitectureVisibility();
           updateAvailability();
           writeURL();
           render();

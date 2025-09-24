@@ -13,19 +13,31 @@
             
             <div class="platform-wrap">
                 <div class="selection-options" data-role="platform">
-                    <div class="option" aria-checked="false" tabindex="-1" data-value="linux"><span class="symbol"><img src="/images/icons/linux.svg" aria-hidden="true"></span><span class="label">Linux</span></div>
-                    <div class="option active" aria-checked="true" tabindex="0" data-value="macos"><span class="symbol"><img src="/images/icons/macos.svg" aria-hidden="true"></span><span class="label">macOS</span></div>
-                    <div class="option" aria-checked="false" tabindex="-1" data-value="windows"><span class="symbol"><img src="/images/icons/windows.svg" aria-hidden="true"></span><span class="label">Windows</span></div>
+                    <div class="platform-item">
+                        <div class="option" aria-checked="false" tabindex="-1" data-value="linux"><span class="symbol"><img src="/images/icons/linux.svg" aria-hidden="true"></span><span class="label">Linux</span></div>
+                        <div class="arch-inline selection-options" data-role="architecture" aria-label="Architecture">
+                            <div class="option" aria-checked="false" tabindex="-1" data-value="x86_64"><span class="label">x86_64</span></div>
+                            <div class="option" aria-checked="false" tabindex="-1" data-value="arm64"><span class="label">arm64</span></div>
+                        </div>
+                    </div>
+                    <div class="platform-item">
+                        <div class="option active" aria-checked="true" tabindex="0" data-value="macos"><span class="symbol"><img src="/images/icons/macos.svg" aria-hidden="true"></span><span class="label">macOS</span></div>
+                    </div>
+                    <div class="platform-item">
+                        <div class="option" aria-checked="false" tabindex="-1" data-value="windows"><span class="symbol"><img src="/images/icons/windows.svg" aria-hidden="true"></span><span class="label">Windows</span></div>
+                        <div class="arch-inline selection-options" data-role="architecture" aria-label="Architecture">
+                            <div class="option" aria-checked="false" tabindex="-1" data-value="x86_64"><span class="label">x86_64</span></div>
+                            <div class="option" aria-checked="false" tabindex="-1" data-value="arm64"><span class="label">arm64</span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="architecture-wrap">
-                <h4>Architecture</h4>
-                <div class="selection-options" data-role="architecture">
-                    <div class="option" aria-checked="false" tabindex="0" data-value="x86_64"><span class="label">x86_64</span></div>
-                    <div class="option" aria-checked="false" tabindex="-1" data-value="arm64"><span class="label">arm64</span></div>
-                </div>
+            <div class="installation-hint">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" fill="none" viewBox="0 0 19 20"><path fill="#FF6900" fill-rule="evenodd" d="M9.5.5a9.5 9.5 0 1 1 0 19 9.5 9.5 0 0 1 0-19Zm-1 12.55v2.1h2.072v-2.1H8.5ZM8.57 5v2.604l.35 3.55h1.23l.352-3.55V5H8.57Z" clip-rule="evenodd"/></svg>
+                <p>Please select Architecture!</p>
             </div>
+            
         </div>
 
     </div>
@@ -67,10 +79,6 @@
 </div><!-- result -->
         
     </div><!-- installation-instructions -->
-    
-    <div class="installation-hint">
-        <p>Please select platform, architecture and environment to see recommended installation instructions.</p>
-    </div>
     
 </div>
 
@@ -123,18 +131,17 @@ curl https://install.duckdb.org | sh
 {%- endhighlight -%}
 
 <div class="alternative">
+    
 <h4>Direct Download</h4>
 {%- assign f = site.data.checksums.artifacts.cli.linux.x86_64.filename -%}
 <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" -%}
-</div>
 
-<div class="alternative">
 <h4>Docker Image</h4>
-
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
+
 </div>
 </div>
 
@@ -150,17 +157,18 @@ curl https://install.duckdb.org | sh
 {%- endhighlight -%}
 
 <div class="alternative">
+    
 <h4>Direct Download</h4>
 {%- assign f = site.data.checksums.artifacts.cli.linux.arm64.filename -%}
 <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" -%}
-</div>
 
 <h4>Docker Image</h4>
-
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
+
+</div>
 </div>
 
 
@@ -179,17 +187,16 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 
 <div class="alternative">
 <h4>Package Manager</h4>
-
 {%- highlight bash -%}
 winget install DuckDB.cli
 {%- endhighlight -%}
-</div>
 
 <h4>Docker Image</h4>
-
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
+
+</div>
 </div>
 
 
@@ -208,18 +215,16 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 
 <div class="alternative">
 <h4>Package Manager</h4>
-
 {%- highlight bash -%}
 winget install DuckDB.cli
 {%- endhighlight -%}
 
 <h4>Docker Image</h4>
-
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
-</div>
 
+</div>
 </div>
 
 

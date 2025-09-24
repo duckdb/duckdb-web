@@ -7,6 +7,10 @@
 
 body.installation{
 	
+	.pagetitle h1{
+		@include headline-1;
+	}
+	
 	.aboutthispage{
 		margin-top: 60px;
 	}
@@ -56,12 +60,12 @@ body.installation{
 		}
 	}
 	.selection-foldout{
-		padding: 20px;
+		padding: 16px;
 		background: var(--doc-codebox-background-color, #F2F2F2);
 		-webkit-transition: background-color .3s;
 		-o-transition: background-color .3s;
 		transition: background-color .3s;
-		margin-bottom: 10px;
+		margin-bottom: 8px;
 		border-radius: 10px;
 		border: 1px solid transparent;
 		-webkit-transition: border .3s;
@@ -97,18 +101,18 @@ body.installation{
 	}
 	
 	.selection-head + .selection-content{
-		padding-top: 30px;
+		padding-top: 24px;
 	}
 	
 	.selection-options{
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
-		gap: 15px;
+		gap: 8px;
 		
 		.option{
-			border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
 			border-radius: 10px;
+			border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
 			background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
 			display: flex;
 			gap: 10px;
@@ -116,23 +120,25 @@ body.installation{
 			padding: 10px;
 			align-items: center;
 			cursor: pointer;
+			z-index: 4;
 			transition: all .3s;
 			
 			.label{
-				@include body-small;
+				@include label-1;
 			}
 			
 			.symbol {
+				border-radius: 6px;
+				border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
+				background: var(--interactive-installation-icon-background, rgba(230, 230, 230, 0.60));
 				display: block;
 				flex-shrink: 0;
 				width: 40px;
 				height: 40px;
-				border-radius: 7.467px;
-				border: 0.747px solid var(--main-codebox-border-color, #E6E6E6);
-				background: var(--main-codebox-sub-background-color, rgba(230, 230, 230, 0.60));
 				display: flex;
-				align-items: center;
 				justify-content: center;
+				align-items: center;
+				transition: all .3s;
 			
 				img {
 					max-width: 21px;
@@ -144,6 +150,10 @@ body.installation{
 			&:hover{
 				border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
 				background: var(--interactive-folderbox-background-color-hover, rgba(242, 242, 242, 0.60));
+				.symbol{
+					border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
+					background: var(--interactive-installation-icon-background, rgba(230, 230, 230, 0.60));
+				}
 			}
 			
 			&:focus-visible{
@@ -152,8 +162,64 @@ body.installation{
 		}
 		
 		.option.active{
-			border: 1px solid var(--interactive-button-primary-yellow-border-color, #EDDD0C);
-			background: var(--interactive-button-primary-yellow-background-color, #FFF100);
+			border: 1px solid var(--interactive-installation-box-border, #BEB3FF);
+			background: var(--interactive-installation-box-background, #E9E5FF);
+			
+			.symbol{
+				border: 1px solid var(--interactive-installation-box-border, #BEB3FF);
+				background: var(--interactive-installation-icon-background-selected, #D4CCFF);
+			}
+		}
+	}
+	
+	.selection-options[data-role="platform"] .platform-item {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		height: 60px;
+	}
+	
+	.selection-options[data-role="platform"] .platform-item .arch-inline {
+		display: inline-flex;
+		flex-wrap: nowrap;
+		gap: 8px;
+		border-radius: 10px;
+		padding: 6px 0px;
+		opacity: 0;
+		pointer-events: none;
+		z-index: 2;
+		width: 0;
+		transition: all .3s;
+		//min-width: 160px; 
+		
+		.option{
+			height: unset;
+			
+			.label{
+				@include label-2;
+			}
+		}
+		
+		.option:nth-child(2){
+			transform: translateX(-10%);
+			transition: all .3s;
+		}
+		
+		&.open {
+			opacity: 1;
+			pointer-events: auto;
+			padding: 6px 8px;
+			width: 150px;
+			.option:nth-child(2){
+				transform: translateX(0);
+			}
+		}
+		
+		&.error{
+			.option{
+				border: 1px solid var(--interactive-installation-error-border, #FFA566);
+				background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
+			}
 		}
 	}
 	
@@ -256,7 +322,7 @@ body.installation{
 		}
 		
 		pre {
-			padding: 20px; /* instead of 10px */
+			padding: 16px; /* instead of 10px */
 			overflow: auto;
 			border-radius: 10px;
 			background: var(--doc-codebox-background-color, #F2F2F2);
@@ -329,7 +395,24 @@ body.installation{
 	
 	.installation-hint{
 		display: none;
-		margin-top: 50px;
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: 8px;
+		margin-top: 16px;
+		margin-left: 2px;
+		
+		p{
+			margin: 0;
+			font-size: var(--type-body-small);
+			font-weight: 600;
+			color: var(--orange-50, #FF6900);
+		}
+		
+		svg{
+			width: 19px;
+			height: 19px;
+		}
 	}
 	
 	a.download-btn{
@@ -340,36 +423,45 @@ body.installation{
 		gap: 10px;
 		padding: 10px 15px 10px 10px;
 		border-radius: 10px;
-		border: 1px solid var(--doc-codebox-button-border, #CCC);
-		background: var(--doc-codebox-background-color, #F2F2F2);
-		transition: background .3s;
+		border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
+		background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
+		transition: all .3s;
 		text-decoration: none;
 		color: inherit;
 		@include label-1;
 		
 		&:before{
-			background: var(--doc-codebox-button-border, #CCC);
-			border-radius: 100px;
-			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='none' viewBox='0 0 15 15'%3E%3Cpath fill='%23000' d='M7.417 10.75 3.25 6.583l1.167-1.208 2.166 2.167V.75H8.25v6.792l2.167-2.167 1.166 1.208-4.166 4.167ZM.75 14.083V9.917h1.667v2.5h10v-2.5h1.666v4.166H.75Z'/%3E%3C/svg%3E");
+			border-radius: 6px;
+			border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
+			background-color: var(--interactive-installation-icon-background, rgba(230, 230, 230, 0.60));
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3E%3Cpath fill='%231A1A1A' d='M9.92.646v8.898l3.217-3.249 1.3 1.313L9 13.098l-5.437-5.49 1.3-1.313 3.218 3.25v-8.9h1.838Zm-7.816 10.21v4.642h13.792v-4.641h1.838v6.498H.267v-6.498h1.838Z'/%3E%3C/svg%3E");
 			background-repeat: no-repeat;
-			background-size: 13.5px;
+			background-size: 17.5px;
 			background-position: center center;
-			width: 30px;
-			height: 30px;
+			width: 40px;
+			height: 40px;
 			content: "";
 			display: inline-block;
+			transition: all .3s;
 		}
+		
 		&:after{
 			display: none!important;
 		}
 		
 		&:hover{
-			background: var(--doc-codebox-background-hover, #E6E6E6);
+			border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
+			background-color: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
+			&::before{
+				border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
+				background-color: var(--interactive-installation-icon-background, rgba(230, 230, 230, 0.60));
+			}
 		}
 	}
 	
 	.shainfo{
-		margin-top: 15px;
+		margin-top: 10px;
+		
 		span:first-child{
 			font-weight: 700;
 			margin-right: 5px;
@@ -381,14 +473,9 @@ body.installation{
 	}
 	
 	
+
 	
-	
-	
-	
-	
-	
-	
-	
+
 	/** ORIGINAL INSTALLATION CSS **/
 	
 	main .wrap, main .wrap #main_content_wrap{
