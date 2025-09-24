@@ -5,7 +5,8 @@
 pre.highlight > button,
 .highlight button.copy{
 	position: absolute;
-	background: var(--doc-codebox-button-background-color, #E6E6E6);
+	background: var(--doc-codebox-button-background-color, rgba(217, 217, 217, 0.60));
+	backdrop-filter: blur(1px);
 	border-radius: 50px;
 	width: 30px;
 	height: 30px;
@@ -18,9 +19,11 @@ pre.highlight > button,
 	justify-content: center;
 	align-items: center;
 	transition: background .3s;
+	
 	&:hover{
-		background-color: var(--doc-codebox-button-background-color-hover, #cccccc);
+		background-color: var(--doc-codebox-button-background-color-hover, #b2b2b299);
 	}
+	
 	span.copy{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cmask id='a' fill='%23fff'%3E%3Crect width='9' height='9' x='9' y='6' rx='.5'/%3E%3C/mask%3E%3Crect width='9' height='9' x='9' y='6' stroke='%230D0D0D' stroke-linecap='square' stroke-width='3' mask='url(%23a)' rx='.5'/%3E%3Cpath stroke='%230D0D0D' stroke-linecap='square' stroke-width='1.5' d='M6.75 9.5v7.273a.5.5 0 0 0 .5.5h6.962'/%3E%3C/svg%3E");
 		width: 24px;
@@ -30,6 +33,7 @@ pre.highlight > button,
 		display: inline-block;
 		background-repeat: no-repeat;
 	}
+	
 	span.copied{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cpath stroke='%230D0D0D' stroke-linecap='square' stroke-width='1.5' d='m18 8.5-8.118 8.118L6.5 13.235'/%3E%3C/svg%3E");
 		width: 24px;
@@ -45,12 +49,11 @@ pre.highlight > button,
 .code.dark .highlight button.copy,
 .darkmode pre.highlight > button,
 .darkmode .highlight button.copy{
-	&:hover{
-		background-color: #2b2b2b;
-	}
+
 	span.copy{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cmask id='a' fill='%23fff'%3E%3Crect width='9' height='9' x='9' y='6' rx='.5'/%3E%3C/mask%3E%3Crect width='9' height='9' x='9' y='6' stroke='%23F2F2F2' stroke-linecap='square' stroke-width='3' mask='url(%23a)' rx='.5'/%3E%3Cpath stroke='%23F2F2F2' stroke-linecap='square' stroke-width='1.5' d='M6.75 9.5v7.273a.5.5 0 0 0 .5.5h6.962'/%3E%3C/svg%3E");
 	}
+	
 	span.copied{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cpath stroke='%23F2F2F2' stroke-linecap='square' stroke-width='1.5' d='m18 8.5-8.118 8.118L6.5 13.235'/%3E%3C/svg%3E");
 	}
