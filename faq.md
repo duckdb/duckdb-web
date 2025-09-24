@@ -457,20 +457,6 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 
 <div class="qa-wrap" markdown="1">
 
-### When is the next version going to be released?
-
-<div class="answer" markdown="1">
-
-Please check the [release calendar]({% link release_calendar.md %}) for the planned release date of the next stable version of DuckDB.
-
-</div>
-
-</div>
-
-<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
-
-<div class="qa-wrap" markdown="1">
-
 ### Which DuckDB clients and versions are officially supported?
 
 <div class="answer" markdown="1">
@@ -501,11 +487,12 @@ You can find the recent releases in the [release calendar]({% link release_calen
 
 <div class="qa-wrap" markdown="1">
 
-### Is there a development roadmap for DuckDB?
+### When is the next version going to be released and what features can I expect?
 
 <div class="answer" markdown="1">
 
-Yes, see the [Development Roadmap]({% link roadmap.md %}).
+Please check the [Release Calendar]({% link release_calendar.md %}) for the planned release date of the next stable version of DuckDB
+and the [Development Roadmap]({% link roadmap.md %}) for the features planned for the upcoming year.
 
 </div>
 
