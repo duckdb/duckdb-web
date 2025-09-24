@@ -465,6 +465,10 @@
                   "url": "analyze"
                 },
                 {
+                  "page": "ALTER DATABASE",
+                  "url": "alter_database"
+                },
+                {
                   "page": "ALTER TABLE",
                   "url": "alter_table"
                 },
