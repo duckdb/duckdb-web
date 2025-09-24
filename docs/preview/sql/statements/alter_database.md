@@ -13,10 +13,10 @@ name without needing to detach and reattach it.
 
 ## RENAME DATABASE
 
-The following scenarios are not valid for using `ALTER DATABASE` to rename DuckDB databases:
+The following scenarios are not supported when renaming a DuckDB database with `ALTER DATABASE`:
 
-- You cannot rename a database to certain reserved keywords such as `system` or `temp`.
-- You cannot rename a database to the same name of a database attached in memory.
+- Renaming a database to certain reserved keywords such as `system` or `temp`.
+- Renaming a database to the same name of a database attached in memory.
 
 Rename a database from `old_name` to `new_name`:
 
