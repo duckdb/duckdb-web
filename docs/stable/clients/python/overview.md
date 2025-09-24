@@ -1,4 +1,5 @@
 ---
+github_repository: https://github.com/duckdb/duckdb-python
 layout: docu
 redirect_from:
 - /docs/api/python
