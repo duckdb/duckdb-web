@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/attach.js
 redirect_from:
-- /docs/sql/statements/attach
+  - /docs/sql/statements/attach
 title: ATTACH and DETACH Statements
 ---
 
@@ -136,7 +136,7 @@ LOAD httpfs;
 ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack'); -- will be faster thanks to httpfs
 ```
 
-To change the AES mode to [CBC](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC)) or [CTR](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_(CTR)), use the `ENCRYPTION_CIPHER` option:
+To change the AES mode to [CBC](<https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC)>) or [CTR](<https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_(CTR)>), use the `ENCRYPTION_CIPHER` option:
 
 ```sql
 ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack', ENCRYPTION_CIPHER 'CBC');
@@ -147,14 +147,15 @@ Database encryption implies using [storage version](#explicit-storage-versions) 
 
 ### Options
 
-| Name                        | Description                                                                                                                 | Type      | Default value |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------|-----------|---------------|
-| `ACCESS_MODE`               | Access mode of the database (`AUTOMATIC`, `READ_ONLY`, or `READ_WRITE`).                                                    | `VARCHAR` | `automatic`   |
-| `TYPE`                      | The file type (`DUCKDB` or `SQLITE`), or deduced from the input string literal (MySQL, PostgreSQL).                         | `VARCHAR` | `DUCKDB`      |
-| `BLOCK_SIZE`                | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
-| `STORAGE_VERSION`           | The version of the storage used.                                                                                            | `VARCHAR` | `v1.0.0`      |
-| `ENCRYPTION_KEY`            | The encryption key used for encrypting the database.                                                                        | `VARCHAR` | -             |
-| `ENCRYPTION_CIPHER`         | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |
+| Name                | Description                                                                                                                 | Type      | Default value     |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ----------------- |
+| `ACCESS_MODE`       | Access mode of the database (`AUTOMATIC`, `READ_ONLY`, or `READ_WRITE`).                                                    | `VARCHAR` | `automatic`       |
+| `COMPRESS`          | Whether the database is compressed. Default: `false` for in-memory databases, `true` for persistent databases.              | `VARCHAR` | (see description) |
+| `TYPE`              | The file type (`DUCKDB` or `SQLITE`), or deduced from the input string literal (MySQL, PostgreSQL).                         | `VARCHAR` | `DUCKDB`          |
+| `BLOCK_SIZE`        | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`          |
+| `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `v1.0.0`          |
+| `ENCRYPTION_KEY`    | The encryption key used for encrypting the database.                                                                        | `VARCHAR` | -                 |
+| `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -                 |
 
 ## `DETACH`
 
@@ -175,7 +176,7 @@ USE memory_db;
 
 ## Name Qualification
 
-The fully qualified name of catalog objects contains the *catalog*, the *schema* and the *name* of the object. For example:
+The fully qualified name of catalog objects contains the _catalog_, the _schema_ and the _name_ of the object. For example:
 
 Attach the database `new_db`:
 
@@ -201,7 +202,7 @@ Refer to the column `col` inside the table `my_table`:
 SELECT new_db.my_schema.my_table.col FROM new_db.my_schema.my_table;
 ```
 
-Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the *catalog search path*. The default catalog search path includes the system catalog, the temporary catalog and the initially attached database together with the `main` schema.
+Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the _catalog search path_. The default catalog search path includes the system catalog, the temporary catalog and the initially attached database together with the `main` schema.
 
 Also note the rules on [identifiers and database names in particular]({% link docs/stable/sql/dialect/keywords_and_identifiers.md %}#database-names).
 
@@ -233,7 +234,7 @@ USE new_db.my_schema;
 
 ### Resolving Conflicts
 
-When providing only a single qualification, the system can interpret this as *either* a catalog *or* a schema, as long as there are no conflicts. For example:
+When providing only a single qualification, the system can interpret this as _either_ a catalog _or_ a schema, as long as there are no conflicts. For example:
 
 ```sql
 ATTACH 'new_db.db';
@@ -292,13 +293,13 @@ SELECT * FROM tbl2;
 
 ## Transactional Semantics
 
-When running queries on multiple databases, the system opens separate transactions per database. The transactions are started *lazily* by default – when a given database is referenced for the first time in a query, a transaction for that database will be started. `SET immediate_transaction_mode = true` can be toggled to change this behavior to eagerly start transactions in all attached databases instead.
+When running queries on multiple databases, the system opens separate transactions per database. The transactions are started _lazily_ by default – when a given database is referenced for the first time in a query, a transaction for that database will be started. `SET immediate_transaction_mode = true` can be toggled to change this behavior to eagerly start transactions in all attached databases instead.
 
-While multiple transactions can be active at a time – the system only supports *writing* to a single attached database in a single transaction. If you try to write to multiple attached databases in a single transaction the following error will be thrown:
+While multiple transactions can be active at a time – the system only supports _writing_ to a single attached database in a single transaction. If you try to write to multiple attached databases in a single transaction the following error will be thrown:
 
 ```console
 Attempting to write to database "db2" in a transaction that has already modified database "db1" -
 a single transaction can only write to a single attached database.
 ```
 
-The reason for this restriction is that the system does not maintain atomicity for transactions across attached databases. Transactions are only atomic *within* each database file. By restricting the global transaction to write to only a single database file the atomicity guarantees are maintained.
+The reason for this restriction is that the system does not maintain atomicity for transactions across attached databases. Transactions are only atomic _within_ each database file. By restricting the global transaction to write to only a single database file the atomicity guarantees are maintained.
