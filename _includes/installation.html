@@ -10,7 +10,7 @@
                 <span class="selected"></span>
                 <span class="installation-hint">
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" fill="none" viewBox="0 0 19 20"><path fill="#FF6900" fill-rule="evenodd" d="M9.5.5a9.5 9.5 0 1 1 0 19 9.5 9.5 0 0 1 0-19Zm-1 12.55v2.1h2.072v-2.1H8.5ZM8.57 5v2.604l.35 3.55h1.23l.352-3.55V5H8.57Z" clip-rule="evenodd"/></svg>
-                    <p>Please select your architecture!</p>
+                    <p>Please select your architecture.</p>
                 </span>
             </h3>
         </div>
@@ -102,23 +102,26 @@ curl https://install.duckdb.org | sh
 {%- endhighlight -%}
 
 <div class="alternative">
-<h4>Package Manager</h4>
+
+<h4>Package Manager (Homebrew)</h4>
+
 {%- highlight bash -%}
 brew install duckdb
 {%- endhighlight -%}
-
-<h4>Direct Download</h4>
-{%- assign f = site.data.checksums.artifacts.cli.macos.x86_64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="cli" platform="macos" -%}
 
 <h4>Docker Image</h4>
 
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
+
 </div>
 </div>
+
+<h4>Direct Download</h4>
+{%- assign f = site.data.checksums.artifacts.cli.macos.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="cli" platform="macos" -%}
 
 
 <div
@@ -132,16 +135,16 @@ curl https://install.duckdb.org | sh
 {%- endhighlight -%}
 
 <div class="alternative">
-    
-<h4>Direct Download</h4>
-{%- assign f = site.data.checksums.artifacts.cli.linux.x86_64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" -%}
 
 <h4>Docker Image</h4>
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
+
+<h4>Direct Download</h4>
+{%- assign f = site.data.checksums.artifacts.cli.linux.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" -%}
 
 </div>
 </div>
@@ -158,16 +161,16 @@ curl https://install.duckdb.org | sh
 {%- endhighlight -%}
 
 <div class="alternative">
-    
-<h4>Direct Download</h4>
-{%- assign f = site.data.checksums.artifacts.cli.linux.arm64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" -%}
 
 <h4>Docker Image</h4>
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
+
+<h4>Direct Download</h4>
+{%- assign f = site.data.checksums.artifacts.cli.linux.arm64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" -%}
 
 </div>
 </div>
@@ -187,12 +190,15 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 </div>
 
 <div class="alternative">
+
 <h4>Package Manager</h4>
+
 {%- highlight bash -%}
 winget install DuckDB.cli
 {%- endhighlight -%}
 
 <h4>Docker Image</h4>
+
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
@@ -215,12 +221,15 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 </div>
 
 <div class="alternative">
+
 <h4>Package Manager</h4>
+
 {%- highlight bash -%}
 winget install DuckDB.cli
 {%- endhighlight -%}
 
 <h4>Docker Image</h4>
+
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
@@ -270,6 +279,7 @@ install.packages("duckdb")
 {%- highlight bash -%}
 install.packages("duckdb")
 {%- endhighlight -%}
+
 </div>
 
 
@@ -292,11 +302,8 @@ install.packages("duckdb")
     data-environment="java"
     data-docs="/docs/stable/clients/java">
 
-<h4>Direct Download</h4>
-<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
-{%- include checksum_inline.html environment="java" -%}
-
 <h4>Maven</h4>
+
 {%- highlight xml -%}
 <dependency>
     <groupId>org.duckdb</groupId>
@@ -306,9 +313,15 @@ install.packages("duckdb")
 {%- endhighlight -%}
 
 <h4>Gradle</h4>
+
 {%- highlight groovy -%}
 implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
 {%- endhighlight -%}
+
+<h4>Direct Download (JAR)</h4>
+<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
+{%- include checksum_inline.html environment="java" -%}
+
 </div>
 
 <div
