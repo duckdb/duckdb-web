@@ -257,6 +257,7 @@ In-memory tables now support [checkpointing](https://github.com/duckdb/duckdb/pu
 
   ```sql
   ATTACH ':memory:' AS memory_compressed (COMPRESS);
+  USE memory_compressed;
   ```
 
 * Checkpointing triggers vacuuming deleted rows, allowing space to be reclaimed after deletes/truncation.
