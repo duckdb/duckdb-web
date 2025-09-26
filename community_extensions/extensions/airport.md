@@ -28,8 +28,8 @@ repo:
 
 extension_star_count: 299
 extension_star_count_pretty: 299
-extension_download_count: 335
-extension_download_count_pretty: 335
+extension_download_count: 379
+extension_download_count_pretty: 379
 image: '/images/community_extensions/social_preview/preview_community_extension_airport.png'
 layout: community_extension_doc
 ---
