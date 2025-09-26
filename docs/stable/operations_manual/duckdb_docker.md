@@ -15,7 +15,9 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 
 ## Using the DuckDB UI with Docker
 
-To use the [DuckDB UI]({% link docs/stable/core_extensions/ui.md %}) with Docker, enable host networking. Note that this forwards all ports from the container, so exercise caution and avoid this in secure environments.
+To use the [DuckDB UI]({% link docs/stable/core_extensions/ui.md %}) with Docker, enable host networking.
+
+> This setting forwards all ports from the container, so exercise caution and avoid it in secure environments.
 
 ```batch
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace --net host duckdb/duckdb
