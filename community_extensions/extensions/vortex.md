@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: vortex
   description: Provides write and scan functions for Vortex files
-  version: 0.42.1
+  version: 0.53.0
   language: C++,Rust
   build: cmake
   license: Apache-2.0
@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: vortex-data/duckdb-vortex
-  ref: ccccee8cb386d52e28323d1c124ecf3e369b8990
+  ref: 8c592713f9d970a8a2004eebf2db1fd2099a42dd
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 439
-extension_download_count_pretty: 439
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_vortex.png'
 layout: community_extension_doc
 ---
