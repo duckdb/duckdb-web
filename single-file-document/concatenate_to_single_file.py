@@ -64,7 +64,7 @@ def fix_language_tags_for_syntax_highlighting(doc_body):
     # We do not want explicit prompts in the single-file version of the documentation,
     # so we unify these.
     doc_body = doc_body.replace("```plsql", "```sql")
-    doc_body = doc_body.replace("```bash", "```batch")
+    doc_body = doc_body.replace("```batch", "```bash")
     return doc_body
 
 
