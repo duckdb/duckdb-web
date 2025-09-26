@@ -1647,6 +1647,10 @@
             {
               "page": "Limits",
               "url": "limits"
+            },
+            {
+              "page": "DuckDB Docker Container",
+              "url": "duckdb_docker"
             }
           ]
         },
