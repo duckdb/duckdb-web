@@ -222,7 +222,7 @@ expanded_cleaned_data <- data |>
   inner_join(year |> mutate(year_ = Description), join_by(Year == Code))
 
 # create final aggregation, still completely lazily
-twenty_till_fourty_non_european_in_auckland_area <-
+twenty_till_forty_non_european_in_auckland_area <-
   expanded_cleaned_data |>
   filter(
     age_ >= 20, age_ <= 40,
@@ -232,7 +232,7 @@ twenty_till_fourty_non_european_in_auckland_area <-
   ) |>
   summarise(group_count = sum(count_), .by = sex_) |> arrange(sex_)
 
-print(twenty_till_fourty_non_european_in_auckland_area)
+print(twenty_till_forty_non_european_in_auckland_area)
 ```
 
 This looks nicer and completes in ca. one minute, but there are several hidden issues. First, we read the _entire_ dataset into RAM. While for this dataset this is likely possible because most computers have more than 1 GB of RAM, this will of course not work for larger datasets. Then, we execute a series of dplyr verbs. However, dplyr executes those eagerly, meaning it does not holistically optimize the sequence of verbs. For example, it cannot see that we are filtering out all non-European ethnicities in the last step and happily computes all of those for the intermediate result. The same happens with survey years that are not 2018, only in the last step we filter those out. We have computed an expensive join on all other years for nothing. Depending on data distributions, this can be extremely wasteful. And yes, it is possible to manually move the filters around but this is tedious and error-prone. At least the result is exactly the same as the SQL version above:
@@ -265,7 +265,7 @@ Now we re-run the exact same dplyr pipeline as above. Only this time we are “d
 Only when we finally print the result
 
 ```R
-print(twenty_till_fourty_non_european_in_auckland_area)
+print(twenty_till_forty_non_european_in_auckland_area)
 ```
 
 actual computation is triggered. This finishes in the same time as the hand-rolled SQL query above, only that this time we had a much more pleasant experience from using the dplyr syntax. And, thankfully, the result is still exactly the same.

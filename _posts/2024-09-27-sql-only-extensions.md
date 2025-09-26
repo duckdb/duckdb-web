@@ -444,7 +444,7 @@ The SQL string is constructed using list lambda functions and the building block
 At its core, the `pivot_table` function determines the SQL required to generate the desired pivot based on which parameters are in use.
 
 Since this SQL statement is a string at the end of the day, we can use a hierarchy of scalar SQL macros rather than a single large macro.
-This is a common traditional issue with SQL – it tends to not be very modular or reusable, but we are able to compartmentalize our logic wth DuckDB's syntax.
+This is a common traditional issue with SQL – it tends to not be very modular or reusable, but we are able to compartmentalize our logic with DuckDB's syntax.
 
 > Note If a non-optional parameter is not in use, an empty list (`[]`) should be passed in.
 

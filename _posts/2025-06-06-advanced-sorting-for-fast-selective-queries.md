@@ -538,7 +538,7 @@ This highlights how a random ordering will be very slow for selective queries!
 Sorting by `origin` greatly reduces the number of row groups that each `origin` is spread across, but `destination`s are still spread widely.
 Sorting by `origin` and `destination` retains the tight distribution of `origin`s and slightly improves the metric for `destination`s.
 
-The three advanced approaches (`zipped_varchar`, `morton`, and `hilbert`) are more balanced, with both `origin`s and `destination`s only occuring in a moderate number of row groups.
+The three advanced approaches (`zipped_varchar`, `morton`, and `hilbert`) are more balanced, with both `origin`s and `destination`s only occurring in a moderate number of row groups.
 While they score worse in the `origin` metric than when sorting directly by `origin`, most `origin`s are spread across fewer row groups than a modern laptop processor's core count, so high performance is retained.
 The Hilbert encoding is the most balanced, so by this metric it would be declared the victor as well!
 
