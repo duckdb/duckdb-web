@@ -48,6 +48,7 @@ def replace_jekyll_tags_for_variables(doc_body, config):
 
 
 def replace_box_names(doc_body):
+    doc_body = doc_body.replace("> Update",       "> **Update.**")
     doc_body = doc_body.replace("> Bestpractice", "> **Best practice.**")
     doc_body = doc_body.replace("> Note",         "> **Note.**")
     doc_body = doc_body.replace("> Warning",      "> **Warning.**")
