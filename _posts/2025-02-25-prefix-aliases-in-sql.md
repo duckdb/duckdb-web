@@ -68,7 +68,7 @@ SELECT *
 FROM my_table: some_other_table;
 ```
 
-Aliases can be quoted if neccessary using *double* quotes:
+Aliases can be quoted if necessary using *double* quotes:
 
 ```sql
 SELECT "forty two": 42;

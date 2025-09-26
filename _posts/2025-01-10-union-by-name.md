@@ -177,7 +177,7 @@ Pandas is incredibly widely used and is a significant contributor to the popular
 Bringing this capability to SQL can broaden its impact beyond Python and into the other languages that DuckDB supports (Java, Node.js, Go, Rust, etc.).
 Databases should learn from dataframes!
 
-PySpark added the function `unionByName` in 2018 and added the abilty to handle the addition of new columns in version 3.1 in March of 2021.
+PySpark added the function `unionByName` in 2018 and added the ability to handle the addition of new columns in version 3.1 in March of 2021.
 This is another option for Pythonistas, but carries with it the requirement for a Spark cluster and its overhead.
 
 SQL's `UNION` clause had the `CORRESPONDING` keyword since 1992 (!) at the latest, but critically it lacks the ability to handle new or missing columns.
@@ -281,7 +281,7 @@ COPY (
 ```
 
 This query runs in 3.7 minutes, so the overhead of handling schema evolution is only about 10%!
-That is a small price to pay for flexibilty and ease of use.
+That is a small price to pay for flexibility and ease of use.
 
 However, we can improve performance further still.
 The next change was to increase the number of threads that DuckDB uses.

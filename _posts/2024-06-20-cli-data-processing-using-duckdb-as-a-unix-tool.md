@@ -26,7 +26,7 @@ Tools such as
 [`grep`](https://man7.org/linux/man-pages/man1/grep.1.html),
 [`sed`](https://man7.org/linux/man-pages/man1/sed.1.html), and
 [`sort`](https://man7.org/linux/man-pages/man1/sort.1.html)
-are ubiquitious and widely used in [shell scripts](https://en.wikipedia.org/wiki/Shell_script).
+are ubiquitous and widely used in [shell scripts](https://en.wikipedia.org/wiki/Shell_script).
 
 As a purpose-built data processing tool, DuckDB fits the Unix philosophy quite well.
 First, it was designed to be a fast in-process analytical SQL database system _(do one thing and do it well)._
@@ -252,7 +252,7 @@ Let's find the cities that are both in the top-10 most populous cities and have 
 #### Unix Shell: `comm`
 
 The Unix solution for intersection uses the [`comm` tool](https://linux.die.net/man/1/comm), intended to compare two _sorted_ files line-by-line.
-We first `cut` the relevant colum from both files.
+We first `cut` the relevant column from both files.
 Due to the sorting requirement, we apply `sort` on both inputs before performing the intersection.
 The intersection is performed using `comm -12` where the argument `-12` means that we only want to keep lines that are in both files.
 We again rely on `head` and `tail` to treat the headers and the rest of the files separately during processing and glue them together at the end.
