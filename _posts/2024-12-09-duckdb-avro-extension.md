@@ -4,12 +4,11 @@ title: "The DuckDB Avro Extension"
 author: "Hannes Mühleisen"
 thumb: "/images/blog/thumbs/avro.svg"
 image: "/images/blog/thumbs/avro.png"
-excerpt: "DuckDB now supports reading Avro files through the `avro` community extension."
+excerpt: "DuckDB now supports reading Avro files."
 tags: ["extensions"]
 ---
 
-> **Update (May 2025):**
-> Avro support is now available as the [`avro` core extension]({% link docs/stable/core_extensions/avro.md %}).
+> Update Avro support is now available through the [`avro` core extension]({% link docs/stable/core_extensions/avro.md %}).
 
 ## The Apache™ Avro™ Format
 
