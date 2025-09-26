@@ -62,7 +62,7 @@ SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 
 DuckDB contains the following predefined repositories:
 
-<div class="narrow_tabl"></div>
+<div class="narrow_table"></div>
 
 | Alias                 | URL                                      | Description                                                                            |
 |:----------------------|:-----------------------------------------|:---------------------------------------------------------------------------------------|
