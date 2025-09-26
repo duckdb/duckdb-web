@@ -60,7 +60,7 @@ duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_a
      | uplot bar -d, -H -t "Top 10 Purchase Dates"
 ```
 
-This tells `uplot` to draw a bar plot, use a comma-seperated delimiter (`-d,`), that the data has a header (`-H`), and give the plot a title (`-t`).
+This tells `uplot` to draw a bar plot, use a comma-separated delimiter (`-d,`), that the data has a header (`-H`), and give the plot a title (`-t`).
 
 ![youplot-top-10](/images/guides/youplot/top-10-plot.png)
 

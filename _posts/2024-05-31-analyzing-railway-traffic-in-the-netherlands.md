@@ -129,7 +129,7 @@ The `arg_max()` function only helps us find the top-1 value but it is not suffic
 ### Using a Window Function (`OVER`)
 
 DuckDB has extensive support for SQL features, including [window functions]({% link docs/stable/sql/functions/window_functions.md %}) and we can use the [`rank()` function]({% link docs/stable/sql/functions/window_functions.md %}#rank) to find top-k values.
-Addtionally, we use [`make_date`]({% link docs/stable/sql/functions/date.md %}#make_dateyear-month-day) to reconstruct the date, [`strftime`]({% link docs/stable/sql/functions/timestamptz.md %}#strftimetimestamptz-format) to turn it into the month's name and [`array_agg`]({% link docs/stable/sql/functions/aggregates.md %}#array_aggarg):
+Additionally, we use [`make_date`]({% link docs/stable/sql/functions/date.md %}#make_dateyear-month-day) to reconstruct the date, [`strftime`]({% link docs/stable/sql/functions/timestamptz.md %}#strftimetimestamptz-format) to turn it into the month's name and [`array_agg`]({% link docs/stable/sql/functions/aggregates.md %}#array_aggarg):
 
 ```sql
 SELECT month, month_name, array_agg(station) AS top3_stations

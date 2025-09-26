@@ -85,7 +85,7 @@ CSV files are often distributed in compressed format such as GZIP archives (`.cs
 ### Loading Many Small CSV Files
 
 The [CSV reader]({% link docs/stable/data/csv/overview.md %}) runs the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}) on all files. For many small files, this may cause an unnecessarily high overhead.
-A potential optimization to speed this up is to turn the sniffer off. Assuming that all files have the same CSV dialect and colum names/types, get the sniffer options as follows:
+A potential optimization to speed this up is to turn the sniffer off. Assuming that all files have the same CSV dialect and column names/types, get the sniffer options as follows:
 
 ```sql
 .mode line

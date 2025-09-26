@@ -79,7 +79,7 @@ We can analyze the response by:
   └────────────┘
   ```
 
-The total number of repositories mentioning DuckDB is 3837, but the `items` object contains only 30. This is due to [pagination](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api?apiVersion=2022-11-28) that is set to 30 records per page by default. We can retrieve a maximum of 100 records by using the `per_page` query parameter. Additionaly, we use the `page` query parameter in order to retrieve the results for each page:
+The total number of repositories mentioning DuckDB is 3837, but the `items` object contains only 30. This is due to [pagination](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api?apiVersion=2022-11-28) that is set to 30 records per page by default. We can retrieve a maximum of 100 records by using the `per_page` query parameter. Additionally, we use the `page` query parameter in order to retrieve the results for each page:
 
 ```python
 (

@@ -265,9 +265,15 @@ CREATE TABLE random10m AS
 We took the median of 5 runs of each of these queries, for each table size:
 
 ```sql
-SELECT any_value(i) FROM (FROM ascending10m ORDER BY i);
-SELECT any_value(i) FROM (FROM descending10m ORDER BY i);
-SELECT any_value(i) FROM (FROM random10m ORDER BY i);
+SELECT any_value(i)
+FROM (FROM ascending10m ORDER BY i);
+
+SELECT any_value(i)
+FROM (FROM descending10m ORDER BY i);
+
+SELECT any_value(i)
+FROM (FROM random10m ORDER BY i);
+
 -- etc. for 100m and 1000m
 ```
 
@@ -276,17 +282,17 @@ This allows us to better isolate the performance of the sorting implementation.
 
 #### Results
 
-| Table | Rows [Millions] | Old [s] | New [s] | Speedup vs. Old [x] |
-|:-|-:|-:|-:|-:|
-| Ascending | 10 | 0.110 | **0.033** | 3.333 |
-| Ascending | 100 | 0.912 | **0.181** | 5.038 |
-| Ascending | 1000 | 15.302 | **1.475** | 10.374 |
-| Descending | 10 | 0.121 | **0.034** | 3.558 |
-| Descending | 100 | 0.908 | **0.207** | 4.386 |
-| Descending | 1000 | 15.789 | **1.712** | 9.222 |
-| Random | 10 | 0.120 | **0.094** | 1.276 |
-| Random | 100 | 1.028 | **0.587** | 1.751 |
-| Random | 1000 | 17.554 | **6.493** | 2.703 |
+| Table      | Rows [Millions] | Old [s] |   New [s] | Speedup vs. Old [x] |
+| :--------- | --------------: | ------: | --------: | ------------------: |
+| Ascending  |              10 |   0.110 | **0.033** |               3.333 |
+| Ascending  |             100 |   0.912 | **0.181** |               5.038 |
+| Ascending  |            1000 |  15.302 | **1.475** |              10.374 |
+| Descending |              10 |   0.121 | **0.034** |               3.558 |
+| Descending |             100 |   0.908 | **0.207** |               4.386 |
+| Descending |            1000 |  15.789 | **1.712** |               9.222 |
+| Random     |              10 |   0.120 | **0.094** |               1.276 |
+| Random     |             100 |   1.028 | **0.587** |               1.751 |
+| Random     |            1000 |  17.554 | **6.493** |               2.703 |
 
 This shows that the new implementation is highly adaptive to pre-sorted data: it is roughly 10x faster at ascending/descending data than the old implementation.
 It has much better raw sorting performance: it is more than 2× faster at sorting randomly ordered data (at 1000 million).
@@ -312,16 +318,17 @@ We sort the `lineitem` table from TPC-H which has 15 columns, by the `l_shipdate
 We took the median execution time of 5 runs of this query for each scale factor:
 
 ```sql
-SELECT any_value(COLUMNS(*)) FROM (FROM lineitem ORDER BY l_shipdate);
+SELECT any_value(COLUMNS(*))
+FROM (FROM lineitem ORDER BY l_shipdate);
 ```
 
 #### Results
 
-| Table | SF | Old [s] | New [s] | Speedup vs. Old [x] |
-|:-|-:|-:|-:|-:|
-| TPC-H SF 1 lineitem by l_shipdate | 1 | 0.328 | **0.189** | 1.735 |
-| TPC-H SF 10 lineitem by l_shipdate | 10 | 3.353 | **1.520** | 2.205 |
-| TPC-H SF 100 lineitem by l_shipdate | 100 | 273.982 | **80.919** | 3.385 |
+| Table                                   |   SF | Old [s] |    New [s] | Speedup vs. Old [x] |
+| :-------------------------------------- | ---: | ------: | ---------: | ------------------: |
+| TPC-H SF 1 `lineitem` by `l_shipdate`   |    1 |   0.328 |  **0.189** |               1.735 |
+| TPC-H SF 10 `lineitem` by `l_shipdate`  |   10 |   3.353 |  **1.520** |               2.205 |
+| TPC-H SF 100 `lineitem` by `l_shipdate` |  100 | 273.982 | **80.919** |               3.385 |
 
 We have set the memory limit to 30 GB, so the data no longer fits in memory at scale factor 100.
 The new implementation is roughly 2× faster at scale factors 1 and 10, and more than 3× faster at scale factor 100.
@@ -346,12 +353,12 @@ We use the same data and query as in the first benchmark, and take the median of
 
 #### Results
 
-| Threads | Old [s] | New [s] | Old Speedup vs. 1 Thread [x] | New Speedup vs. 1 Thread [x] |
-|-:|-:|-:|-:|-:|
-| 1 | **3.240** | 4.234 | **1.000** | **1.000** |
-| 2 | **2.121** | 2.193 | 1.527 | **1.930** |
-| 4 | 1.401 | **1.216** | 2.312 | **3.481** |
-| 8 | 0.920 | **0.654** | 3.521 | **6.474** |
+| Threads |   Old [s] |   New [s] | Old Speedup vs. 1 Thread [x] | New Speedup vs. 1 Thread [x] |
+| ------: | --------: | --------: | ---------------------------: | ---------------------------: |
+|       1 | **3.240** |     4.234 |                    **1.000** |                    **1.000** |
+|       2 | **2.121** |     2.193 |                        1.527 |                    **1.930** |
+|       4 |     1.401 | **1.216** |                        2.312 |                    **3.481** |
+|       8 |     0.920 | **0.654** |                        3.521 |                    **6.474** |
 
 As we can see, the new, single-threaded sorting performance is around 30% slower than the old one.
 This is due to the new sorting implementation using an _in-place MSD radix sort_, rather than an _out-of-place Least Significant Digit (LSD) radix sort_.

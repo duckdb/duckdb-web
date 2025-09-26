@@ -125,8 +125,8 @@ the segment tree approach ends up being about 5% slower than just starting from 
 
 To really improve the performance of moving quantiles,
 we note that the partial order probably does not change much between frames.
-If we maintain a list of indirect indicies into the window and call `nth_element` on the indicies,
-we can reorder the partially ordered indicies instead of the values themselves.
+If we maintain a list of indirect indices into the window and call `nth_element` on the indices,
+we can reorder the partially ordered indices instead of the values themselves.
 In the common case where the frame has the same size,
 we can even check to see whether the new value disrupts the partial ordering at all,
 and skip the reordering!

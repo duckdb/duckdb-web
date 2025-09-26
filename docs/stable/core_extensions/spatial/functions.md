@@ -24,7 +24,7 @@ title: Spatial Functions
 | [`ST_Azimuth`](#st_azimuth) | Returns the azimuth (a clockwise angle measured from north) of two points in radian. |
 | [`ST_Boundary`](#st_boundary) | Returns the "boundary" of a geometry |
 | [`ST_Buffer`](#st_buffer) | Returns a buffer around the input geometry at the target distance |
-| [`ST_BuildArea`](#st_buildarea) | Creates a polygonal geometry by attemtping to "fill in" the input geometry. |
+| [`ST_BuildArea`](#st_buildarea) | Creates a polygonal geometry by attempting to "fill in" the input geometry. |
 | [`ST_Centroid`](#st_centroid) | Returns the centroid of a geometry |
 | [`ST_Collect`](#st_collect) | Collects a list of geometries into a collection geometry. |
 | [`ST_CollectionExtract`](#st_collectionextract) | Extracts geometries from a GeometryCollection into a typed multi geometry. |
@@ -563,7 +563,7 @@ GEOMETRY ST_BuildArea (geom GEOMETRY)
 
 #### Description
 
-Creates a polygonal geometry by attemtping to "fill in" the input geometry.
+Creates a polygonal geometry by attempting to "fill in" the input geometry.
 
 Unlike ST_Polygonize, this function does not fill in holes.
 
