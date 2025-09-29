@@ -30,12 +30,13 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * Generic ODBC catalog, similarly to the existing PostgreSQL / MySQL / SQLite integrations
 * Go and Rust support for extensions
 * Improvements to Lakehouse formats
-    * Improved support for the Iceberg format through the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). This was partially implemented in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}), which offers Iceberg writes.
+    * Improved support for the Iceberg format through the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). This was partially implemented in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}), which can Iceberg tables.
     * Improved support for Delta Lake through the [`delta` extension]({% link docs/stable/core_extensions/delta.md %}).
     * In May 2025, we released [DuckLake](https://ducklake.select/), a new Lakehouse format. We would like to emphasize that we are still committed to developing both the `iceberg` and `delta` extensions. We also strive to [provide interoperability]({% post_url 2025-09-17-ducklake-03 %}#interoperability-with-iceberg) between DuckLake and other lakehouse formats.
 * [`MATCH RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
 * Distribution of musl libc binaries
 * Distribution of Windows ARM64 extensions
+* [`GEOMETRY` type](https://github.com/duckdb/duckdb/pull/19136)
 
 This list was compiled by the DuckDB maintainers and is based on the long-term strategic vision for the DuckDB project and general interactions with users in the open-source community (GitHub Issues and Discussions, social media, etc.).
 For details on how to request features in DuckDB, please refer to the FAQ item [“I would like feature X to be implemented in DuckDB”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed).
