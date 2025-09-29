@@ -17,15 +17,15 @@ extension:
   maintainers:
     - rustyconover
   name: radio
-  version: 2025092401
+  version: 2025092701
 repo:
   github: query-farm/radio
-  ref: bcff9e16f949d9d1980336f890650ab9dfac131d
+  ref: 6b9e6209cfaab1d6327a7bba5bffb620d8bdb2ac
 
 extension_star_count: 30
 extension_star_count_pretty: 30
-extension_download_count: 377
-extension_download_count_pretty: 377
+extension_download_count: 378
+extension_download_count_pretty: 378
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---
