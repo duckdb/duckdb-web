@@ -9,7 +9,7 @@ pdf-engine: xelatex
 syntax-definition: sql-duckdb.xml
 highlight-style: bluloco-light.theme
 table-of-contents: true
-toc-depth: 3
+toc-depth: 2
 top-level-division: part
 variables:
   book: true

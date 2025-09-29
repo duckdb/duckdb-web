@@ -70,7 +70,7 @@ def fix_language_tags_for_syntax_highlighting(doc_body):
 
 def move_headers_down(doc_body):
     # move headers h2-h4 down by 1 level
-    extra_header_levels = "#"
+    extra_header_levels = "##"
     return re.sub(r"^##", f"##{extra_header_levels}", doc_body, flags=re.MULTILINE)
 
 
