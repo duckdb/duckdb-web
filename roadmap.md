@@ -26,10 +26,10 @@ while DuckDB Labs' revenue is based on [commercial support and feature prioritiz
 
 This section lists the features that the DuckDB team plans to work on **in the coming year**.
 
-* Documentation for the [C extension API](https://github.com/duckdb/extension-template-c)
+* Migration and documentation to [C client API]({% link docs/stable/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
 * Generic ODBC catalog, similarly to the existing PostgreSQL / MySQL / SQLite integrations
 * Go and Rust support for extensions
-* **Data lake formats**
+* Improvements to Lakehouse formats
     * Improved support for the Iceberg format through the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). This was partially implemented in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}), which offers Iceberg writes.
     * Improved support for Delta Lake through the [`delta` extension]({% link docs/stable/core_extensions/delta.md %}).
     * In May 2025, we released [DuckLake](https://ducklake.select/), a new Lakehouse format. We would like to emphasize that we are still committed to developing both the `iceberg` and `delta` extensions. We also strive to [provide interoperability]({% post_url 2025-09-17-ducklake-03 %}#interoperability-with-iceberg) between DuckLake and other lakehouse formats.
