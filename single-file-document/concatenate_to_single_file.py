@@ -48,6 +48,7 @@ def replace_jekyll_tags_for_variables(doc_body, config):
 
 
 def replace_box_names(doc_body):
+    doc_body = doc_body.replace("> Update",       "> **Update.**")
     doc_body = doc_body.replace("> Bestpractice", "> **Best practice.**")
     doc_body = doc_body.replace("> Note",         "> **Note.**")
     doc_body = doc_body.replace("> Warning",      "> **Warning.**")
@@ -63,13 +64,13 @@ def fix_language_tags_for_syntax_highlighting(doc_body):
     # We do not want explicit prompts in the single-file version of the documentation,
     # so we unify these.
     doc_body = doc_body.replace("```plsql", "```sql")
-    doc_body = doc_body.replace("```bash", "```batch")
+    doc_body = doc_body.replace("```batch", "```bash")
     return doc_body
 
 
 def move_headers_down(doc_body):
     # move headers h2-h4 down by 1 level
-    extra_header_levels = "#"
+    extra_header_levels = "##"
     return re.sub(r"^##", f"##{extra_header_levels}", doc_body, flags=re.MULTILINE)
 
 

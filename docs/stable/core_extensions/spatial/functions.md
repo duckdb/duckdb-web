@@ -7,6 +7,7 @@ title: Spatial Functions
 ---
 
 ## Function Index 
+
 **[Scalar Functions](#scalar-functions)**
 
 | Function | Summary |
@@ -24,7 +25,7 @@ title: Spatial Functions
 | [`ST_Azimuth`](#st_azimuth) | Returns the azimuth (a clockwise angle measured from north) of two points in radian. |
 | [`ST_Boundary`](#st_boundary) | Returns the "boundary" of a geometry |
 | [`ST_Buffer`](#st_buffer) | Returns a buffer around the input geometry at the target distance |
-| [`ST_BuildArea`](#st_buildarea) | Creates a polygonal geometry by attemtping to "fill in" the input geometry. |
+| [`ST_BuildArea`](#st_buildarea) | Creates a polygonal geometry by attempting to "fill in" the input geometry. |
 | [`ST_Centroid`](#st_centroid) | Returns the centroid of a geometry |
 | [`ST_Collect`](#st_collect) | Collects a list of geometries into a collection geometry. |
 | [`ST_CollectionExtract`](#st_collectionextract) | Extracts geometries from a GeometryCollection into a typed multi geometry. |
@@ -154,7 +155,7 @@ title: Spatial Functions
 | [`ST_MemUnion_Agg`](#st_memunion_agg) | Computes the union of a set of input geometries. |
 | [`ST_Union_Agg`](#st_union_agg) | Computes the union of a set of input geometries |
 
-**[Macro Functions](#Macro-functions)**
+**[Macro Functions](#macro-functions)**
 
 | Function | Summary |
 | --- | --- |
@@ -250,14 +251,16 @@ GEOMETRY ST_Affine (geom GEOMETRY, a DOUBLE, b DOUBLE, d DOUBLE, e DOUBLE, xoff 
 Applies an affine transformation to a geometry.
 
 For the 2D variant, the transformation matrix is defined as follows:
-```
+
+```text
 | a b xoff |
 | d e yoff |
 | 0 0 1    |
 ```
 
 For the 3D variant, the transformation matrix is defined as follows:
-```
+
+```text
 | a b c xoff |
 | d e f yoff |
 | g h i zoff |
@@ -563,7 +566,7 @@ GEOMETRY ST_BuildArea (geom GEOMETRY)
 
 #### Description
 
-Creates a polygonal geometry by attemtping to "fill in" the input geometry.
+Creates a polygonal geometry by attempting to "fill in" the input geometry.
 
 Unlike ST_Polygonize, this function does not fill in holes.
 

@@ -22,9 +22,9 @@ FROM tbl;
 The `*` expression can be prepended by a table name to select only columns from that table.
 
 ```sql
-SELECT table_name.*
-FROM table_name
-JOIN other_table_name USING (id);
+SELECT tbl.*
+FROM tbl
+JOIN other_tbl USING (id);
 ```
 
 Similarly, the `*` expression can also be used to retrieve all keys from a struct as separate columns.
@@ -166,7 +166,7 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 The matches of capture groups in regular expressions can be used to rename matching columns.
 The capture groups are one-indexed; `\0` is the original column name.
 
-For example, to select the first three letters of colum names, run:
+For example, to select the first three letters of column names, run:
 
 ```sql
 SELECT COLUMNS('(\w{3}).*') AS '\1' FROM numbers;

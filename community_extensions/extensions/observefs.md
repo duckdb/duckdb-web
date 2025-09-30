@@ -30,10 +30,10 @@ docs:
     - Provides both process-wise and bucket-wise latency stats (including histogram and quantile estimation)
     - Allows registering ANY duckdb compatible filesystems (i.e., azure filesystem)
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 274
-extension_download_count_pretty: 274
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 346
+extension_download_count_pretty: 346
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---

@@ -81,7 +81,7 @@ All functions in ODBC return a code which represents the success or failure of t
 | Return code             | Description                                        |
 |-------------------------|----------------------------------------------------|
 | `SQL_SUCCESS`           | The function completed successfully                                                                                                           |
-| `SQL_SUCCESS_WITH_INFO` | The function completed successfully, but additional information is available, including a warning                                              |
+| `SQL_SUCCESS_WITH_INFO` | The function completed successfully, but additional information is available, including a warning                                             |
 | `SQL_ERROR`             | The function failed                                                                                                                           |
 | `SQL_INVALID_HANDLE`    | The handle provided was invalid, indicating a programming error, i.e., when a handle is not allocated before it is used, or is the wrong type |
 | `SQL_NO_DATA`           | The function completed successfully, but no more data is available                                                                            |

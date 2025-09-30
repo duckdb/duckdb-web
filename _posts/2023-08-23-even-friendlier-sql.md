@@ -104,7 +104,7 @@ DESCRIBE trek_facts;
 | highest_warp_speed_issued               | BIGINT      | YES  | NULL | NULL    | NULL  |
 | bool_hand_phasers_fired                 | BIGINT      | YES  | NULL | NULL    | NULL  |
 | bool_ship_phasers_fired                 | BIGINT      | YES  | NULL | NULL    | NULL  |
-| bool_ship_photon_torpedos_fired         | BIGINT      | YES  | NULL | NULL    | NULL  |
+| bool_ship_photon_torpedoes_fired         | BIGINT      | YES  | NULL | NULL    | NULL  |
 | cnt_transporter_pax                     | BIGINT      | YES  | NULL | NULL    | NULL  |
 | cnt_damn_it_jim_quote                   | BIGINT      | YES  | NULL | NULL    | NULL  |
 | cnt_im_givin_her_all_shes_got_quote     | BIGINT      | YES  | NULL | NULL    | NULL  |

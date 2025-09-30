@@ -1,6 +1,5 @@
 ---
 layout: docu
-
 title: Relational API
 ---
 
@@ -67,7 +66,7 @@ This section contains the details on how a relation is created.         The meth
 ##### Signature
 
 ```python
-from_arrow(self: duckdb.duckdb.DuckDBPyConnection, arrow_object: object) -> duckdb.duckdb.DuckDBPyRelation
+from_arrow(self: _duckdb.DuckDBPyConnection, arrow_object: object) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -115,7 +114,7 @@ rel.show()
 ##### Signature
 
 ```python
-from_csv_auto(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **kwargs) -> duckdb.duckdb.DuckDBPyRelation
+from_csv_auto(self: _duckdb.DuckDBPyConnection, path_or_buffer: object, **kwargs) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -278,7 +277,7 @@ rel.show()
 ##### Signature
 
 ```python
-from_df(self: duckdb.duckdb.DuckDBPyConnection, df: pandas.DataFrame) -> duckdb.duckdb.DuckDBPyRelation
+from_df(self: _duckdb.DuckDBPyConnection, df: pandas.DataFrame) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -327,11 +326,11 @@ rel.show()
 from_parquet(*args, **kwargs)
 Overloaded function.
 
-1. from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+1. from_parquet(self: _duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> _duckdb.DuckDBPyRelation
 
 Create a relation object from the Parquet files in file_glob
 
-2. from_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+2. from_parquet(self: _duckdb.DuckDBPyConnection, file_globs: collections.abc.Sequence[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> _duckdb.DuckDBPyRelation
 
 Create a relation object from the Parquet files in file_globs
 ```
@@ -404,7 +403,7 @@ rel.show()
 ##### Signature
 
 ```python
-from_query(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> duckdb.duckdb.DuckDBPyRelation
+from_query(self: _duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -455,7 +454,7 @@ rel.show()
 ##### Signature
 
 ```python
-query(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> duckdb.duckdb.DuckDBPyRelation
+query(self: _duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -506,7 +505,7 @@ rel.show()
 ##### Signature
 
 ```python
-read_csv(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, **kwargs) -> duckdb.duckdb.DuckDBPyRelation
+read_csv(self: _duckdb.DuckDBPyConnection, path_or_buffer: object, **kwargs) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -669,7 +668,7 @@ rel.show()
 ##### Signature
 
 ```python
-read_json(self: duckdb.duckdb.DuckDBPyConnection, path_or_buffer: object, *, columns: typing.Optional[object] = None, sample_size: typing.Optional[object] = None, maximum_depth: typing.Optional[object] = None, records: typing.Optional[str] = None, format: typing.Optional[str] = None, date_format: typing.Optional[object] = None, timestamp_format: typing.Optional[object] = None, compression: typing.Optional[object] = None, maximum_object_size: typing.Optional[object] = None, ignore_errors: typing.Optional[object] = None, convert_strings_to_integers: typing.Optional[object] = None, field_appearance_threshold: typing.Optional[object] = None, map_inference_threshold: typing.Optional[object] = None, maximum_sample_files: typing.Optional[object] = None, filename: typing.Optional[object] = None, hive_partitioning: typing.Optional[object] = None, union_by_name: typing.Optional[object] = None, hive_types: typing.Optional[object] = None, hive_types_autocast: typing.Optional[object] = None) -> duckdb.duckdb.DuckDBPyRelation
+read_json(self: _duckdb.DuckDBPyConnection, path_or_buffer: object, *, columns: typing.Optional[object] = None, sample_size: typing.Optional[object] = None, maximum_depth: typing.Optional[object] = None, records: typing.Optional[str] = None, format: typing.Optional[str] = None, date_format: typing.Optional[object] = None, timestamp_format: typing.Optional[object] = None, compression: typing.Optional[object] = None, maximum_object_size: typing.Optional[object] = None, ignore_errors: typing.Optional[object] = None, convert_strings_to_integers: typing.Optional[object] = None, field_appearance_threshold: typing.Optional[object] = None, map_inference_threshold: typing.Optional[object] = None, maximum_sample_files: typing.Optional[object] = None, filename: typing.Optional[object] = None, hive_partitioning: typing.Optional[object] = None, union_by_name: typing.Optional[object] = None, hive_types: typing.Optional[object] = None, hive_types_autocast: typing.Optional[object] = None) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -776,11 +775,11 @@ rel.show()
 read_parquet(*args, **kwargs)
 Overloaded function.
 
-1. read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+1. read_parquet(self: _duckdb.DuckDBPyConnection, file_glob: str, binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> _duckdb.DuckDBPyRelation
 
 Create a relation object from the Parquet files in file_glob
 
-2. read_parquet(self: duckdb.duckdb.DuckDBPyConnection, file_globs: list[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> duckdb.duckdb.DuckDBPyRelation
+2. read_parquet(self: _duckdb.DuckDBPyConnection, file_globs: collections.abc.Sequence[str], binary_as_string: bool = False, *, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None) -> _duckdb.DuckDBPyRelation
 
 Create a relation object from the Parquet files in file_globs
 ```
@@ -853,7 +852,7 @@ rel.show()
 ##### Signature
 
 ```python
-sql(self: duckdb.duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> duckdb.duckdb.DuckDBPyRelation
+sql(self: _duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params: object = None) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -904,7 +903,7 @@ rel.show()
 ##### Signature
 
 ```python
-table(self: duckdb.duckdb.DuckDBPyConnection, table_name: str) -> duckdb.duckdb.DuckDBPyRelation
+table(self: _duckdb.DuckDBPyConnection, table_name: str) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -949,7 +948,7 @@ rel.show()
 ##### Signature
 
 ```python
-table_function(self: duckdb.duckdb.DuckDBPyConnection, name: str, parameters: object = None) -> duckdb.duckdb.DuckDBPyRelation
+table_function(self: _duckdb.DuckDBPyConnection, name: str, parameters: object = None) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1000,7 +999,7 @@ rel.show()
 ##### Signature
 
 ```python
-values(self: duckdb.duckdb.DuckDBPyConnection, *args) -> duckdb.duckdb.DuckDBPyRelation
+values(self: _duckdb.DuckDBPyConnection, *args) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1037,7 +1036,7 @@ rel.show()
 ##### Signature
 
 ```python
-view(self: duckdb.duckdb.DuckDBPyConnection, view_name: str) -> duckdb.duckdb.DuckDBPyRelation
+view(self: _duckdb.DuckDBPyConnection, view_name: str) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1086,7 +1085,7 @@ This section contains the details on how to inspect a relation.
 | [`describe`](#describe) | Gives basic statistics (e.g., min, max) and if NULL exists for each column of the relation. |
 | [`description`](#description) | Return the description of the result |
 | [`dtypes`](#dtypes) | Return a list containing the types of the columns of the relation. |
-| [`explain`](#explain) | explain(self: duckdb.duckdb.DuckDBPyRelation, type: duckdb.duckdb.ExplainType = 'standard') -> str |
+| [`explain`](#explain) | explain(self: _duckdb.DuckDBPyRelation, type: _duckdb.ExplainType = 'standard') -> str |
 | [`query`](#query-1) | Run the given SQL query in sql_query on the view named virtual_table_name that refers to the relation object |
 | [`set_alias`](#set_alias) | Rename the relation object to new alias |
 | [`shape`](#shape) | Tuple of # of rows, # of columns in relation. |
@@ -1170,7 +1169,7 @@ rel.columns
 ##### Signature
 
 ```python
-describe(self: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+describe(self: _duckdb.DuckDBPyRelation) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1295,7 +1294,7 @@ rel.dtypes
 
 ##### Description
 
-explain(self: duckdb.duckdb.DuckDBPyRelation, type: duckdb.duckdb.ExplainType = 'standard') -> str
+explain(self: _duckdb.DuckDBPyRelation, type: _duckdb.ExplainType = 'standard') -> str
 
 ##### Example
 
@@ -1348,7 +1347,7 @@ rel.explain()
 ##### Signature
 
 ```python
-query(self: duckdb.duckdb.DuckDBPyRelation, virtual_table_name: str, sql_query: str) -> duckdb.duckdb.DuckDBPyRelation
+query(self: _duckdb.DuckDBPyRelation, virtual_table_name: str, sql_query: str) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1408,7 +1407,7 @@ duckdb_conn.sql("show rel_view")
 ##### Signature
 
 ```python
-set_alias(self: duckdb.duckdb.DuckDBPyRelation, alias: str) -> duckdb.duckdb.DuckDBPyRelation
+set_alias(self: _duckdb.DuckDBPyRelation, alias: str) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1490,7 +1489,7 @@ rel.shape
 ##### Signature
 
 ```python
-show(self: duckdb.duckdb.DuckDBPyRelation, *, max_width: typing.Optional[int] = None, max_rows: typing.Optional[int] = None, max_col_width: typing.Optional[int] = None, null_value: typing.Optional[str] = None, render_mode: object = None) -> None
+show(self: _duckdb.DuckDBPyRelation, *, max_width: typing.Optional[typing.SupportsInt] = None, max_rows: typing.Optional[typing.SupportsInt] = None, max_col_width: typing.Optional[typing.SupportsInt] = None, null_value: typing.Optional[str] = None, render_mode: object = None) -> None
 ```
 
 ##### Description
@@ -1562,7 +1561,7 @@ rel.show()
 ##### Signature
 
 ```python
-sql_query(self: duckdb.duckdb.DuckDBPyRelation) -> str
+sql_query(self: _duckdb.DuckDBPyRelation) -> str
 ```
 
 ##### Description
@@ -1702,7 +1701,7 @@ This section contains the methods which can be used to chain queries.        The
 ##### Signature
 
 ```python
-aggregate(self: duckdb.duckdb.DuckDBPyRelation, aggr_expr: object, group_expr: str = '') -> duckdb.duckdb.DuckDBPyRelation
+aggregate(self: _duckdb.DuckDBPyRelation, aggr_expr: object, group_expr: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1758,7 +1757,7 @@ rel = rel.aggregate('max(value)')
 ##### Signature
 
 ```python
-apply(self: duckdb.duckdb.DuckDBPyRelation, function_name: str, function_aggr: str, group_expr: str = '', function_parameter: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+apply(self: _duckdb.DuckDBPyRelation, function_name: str, function_aggr: str, group_expr: str = '', function_parameter: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1828,7 +1827,7 @@ rel.apply(
 ##### Signature
 
 ```python
-cross(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+cross(self: _duckdb.DuckDBPyRelation, other_rel: _duckdb.DuckDBPyRelation) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1880,7 +1879,7 @@ rel.cross(other_rel=rel.set_alias("other_rel"))
 ##### Signature
 
 ```python
-except_(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+except_(self: _duckdb.DuckDBPyRelation, other_rel: _duckdb.DuckDBPyRelation) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1934,7 +1933,7 @@ The relation query is executed twice, therefore generating different ids and tim
 ##### Signature
 
 ```python
-filter(self: duckdb.duckdb.DuckDBPyRelation, filter_expr: object) -> duckdb.duckdb.DuckDBPyRelation
+filter(self: _duckdb.DuckDBPyRelation, filter_expr: object) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -1986,7 +1985,7 @@ rel.filter("value = 2")
 ##### Signature
 
 ```python
-insert(self: duckdb.duckdb.DuckDBPyRelation, values: object) -> None
+insert(self: _duckdb.DuckDBPyRelation, values: object) -> None
 ```
 
 ##### Description
@@ -2051,7 +2050,7 @@ rel.filter("value = 10")
 ##### Signature
 
 ```python
-insert_into(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
+insert_into(self: _duckdb.DuckDBPyRelation, table_name: str) -> None
 ```
 
 ##### Description
@@ -2116,7 +2115,7 @@ duckdb_conn.table("code_example").filter("value = 10")
 ##### Signature
 
 ```python
-intersect(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+intersect(self: _duckdb.DuckDBPyRelation, other_rel: _duckdb.DuckDBPyRelation) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2170,7 +2169,7 @@ therefore generating different ids and timestamps:
 ##### Signature
 
 ```python
-join(self: duckdb.duckdb.DuckDBPyRelation, other_rel: duckdb.duckdb.DuckDBPyRelation, condition: object, how: str = 'inner') -> duckdb.duckdb.DuckDBPyRelation
+join(self: _duckdb.DuckDBPyRelation, other_rel: _duckdb.DuckDBPyRelation, condition: object, how: str = 'inner') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2297,7 +2296,7 @@ rel.count("*")
 ##### Signature
 
 ```python
-limit(self: duckdb.duckdb.DuckDBPyRelation, n: int, offset: int = 0) -> duckdb.duckdb.DuckDBPyRelation
+limit(self: _duckdb.DuckDBPyRelation, n: typing.SupportsInt, offset: typing.SupportsInt = 0) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2352,7 +2351,7 @@ rel.limit(1)
 ##### Signature
 
 ```python
-map(self: duckdb.duckdb.DuckDBPyRelation, map_function: Callable, *, schema: typing.Optional[object] = None) -> duckdb.duckdb.DuckDBPyRelation
+map(self: _duckdb.DuckDBPyRelation, map_function: collections.abc.Callable, *, schema: typing.Optional[object] = None) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2403,7 +2402,7 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
 ##### Signature
 
 ```python
-order(self: duckdb.duckdb.DuckDBPyRelation, order_expr: str) -> duckdb.duckdb.DuckDBPyRelation
+order(self: _duckdb.DuckDBPyRelation, order_expr: str) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2455,7 +2454,7 @@ rel.order("value desc").limit(1, offset=4)
 ##### Signature
 
 ```python
-project(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb.duckdb.DuckDBPyRelation
+project(self: _duckdb.DuckDBPyRelation, *args, groups: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2509,7 +2508,7 @@ rel.project("description").limit(1)
 ##### Signature
 
 ```python
-select(self: duckdb.duckdb.DuckDBPyRelation, *args, groups: str = '') -> duckdb.duckdb.DuckDBPyRelation
+select(self: _duckdb.DuckDBPyRelation, *args, groups: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2563,7 +2562,7 @@ rel.select("description").limit(1)
 ##### Signature
 
 ```python
-sort(self: duckdb.duckdb.DuckDBPyRelation, *args) -> duckdb.duckdb.DuckDBPyRelation
+sort(self: _duckdb.DuckDBPyRelation, *args) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2610,7 +2609,7 @@ rel.sort("description")
 ##### Signature
 
 ```python
-union(self: duckdb.duckdb.DuckDBPyRelation, union_rel: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+union(self: _duckdb.DuckDBPyRelation, union_rel: _duckdb.DuckDBPyRelation) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2665,7 +2664,7 @@ rel.count("*")
 ##### Signature
 
 ```python
-update(self: duckdb.duckdb.DuckDBPyRelation, set: object, *, condition: object = None) -> None
+update(self: _duckdb.DuckDBPyRelation, set: object, *, condition: object = None) -> None
 ```
 
 ##### Description
@@ -2789,7 +2788,7 @@ This section contains the functions which can be applied to a relation,         
 ##### Signature
 
 ```python
-any_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+any_value(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2850,7 +2849,7 @@ rel.any_value('id')
 ##### Signature
 
 ```python
-arg_max(self: duckdb.duckdb.DuckDBPyRelation, arg_column: str, value_column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+arg_max(self: _duckdb.DuckDBPyRelation, arg_column: str, value_column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2915,7 +2914,7 @@ rel.arg_max(arg_column="value", value_column="value", groups="description", proj
 ##### Signature
 
 ```python
-arg_min(self: duckdb.duckdb.DuckDBPyRelation, arg_column: str, value_column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+arg_min(self: _duckdb.DuckDBPyRelation, arg_column: str, value_column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -2980,7 +2979,7 @@ rel.arg_min(arg_column="value", value_column="value", groups="description", proj
 ##### Signature
 
 ```python
-avg(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+avg(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3042,7 +3041,7 @@ rel.avg('value')
 ##### Signature
 
 ```python
-bit_and(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+bit_and(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3106,7 +3105,7 @@ rel.bit_and(column="value_bit", groups="description", projected_columns="descrip
 ##### Signature
 
 ```python
-bit_or(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+bit_or(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3170,7 +3169,7 @@ rel.bit_or(column="value_bit", groups="description", projected_columns="descript
 ##### Signature
 
 ```python
-bit_xor(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+bit_xor(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3234,7 +3233,7 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 ##### Signature
 
 ```python
-bitstring_agg(self: duckdb.duckdb.DuckDBPyRelation, column: str, min: typing.Optional[object] = None, max: typing.Optional[object] = None, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+bitstring_agg(self: _duckdb.DuckDBPyRelation, column: str, min: typing.Optional[object] = None, max: typing.Optional[object] = None, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3302,7 +3301,7 @@ rel.bitstring_agg(column="value", groups="description", projected_columns="descr
 ##### Signature
 
 ```python
-bool_and(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+bool_and(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3366,7 +3365,7 @@ rel.bool_and(column="uneven", groups="description", projected_columns="descripti
 ##### Signature
 
 ```python
-bool_or(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+bool_or(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3430,7 +3429,7 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 ##### Signature
 
 ```python
-count(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+count(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3491,7 +3490,7 @@ rel.count("id")
 ##### Signature
 
 ```python
-cume_dist(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+cume_dist(self: _duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3554,7 +3553,7 @@ rel.cume_dist(window_spec="over (partition by description order by value)", proj
 ##### Signature
 
 ```python
-dense_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+dense_rank(self: _duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3619,7 +3618,7 @@ rel = duckdb_conn.sql("""
 ##### Signature
 
 ```python
-distinct(self: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+distinct(self: _duckdb.DuckDBPyRelation) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3660,7 +3659,7 @@ rel.distinct().order("range")
 ##### Signature
 
 ```python
-favg(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+favg(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3722,7 +3721,7 @@ rel.favg(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-first(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+first(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3781,7 +3780,7 @@ rel.first(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-first_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+first_value(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3840,7 +3839,7 @@ rel.first_value(column="value", window_spec="over (partition by description orde
 ##### Signature
 
 ```python
-fsum(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+fsum(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3902,7 +3901,7 @@ rel.fsum(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-geomean(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+geomean(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3961,7 +3960,7 @@ rel.geomean(column="value", groups="description", projected_columns="description
 ##### Signature
 
 ```python
-histogram(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+histogram(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4020,7 +4019,7 @@ rel.histogram(column="value", groups="description", projected_columns="descripti
 ##### Signature
 
 ```python
-lag(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: int = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+lag(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: typing.SupportsInt = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4095,7 +4094,7 @@ rel.lag(column="description", window_spec="over (order by value)", projected_col
 ##### Signature
 
 ```python
-last(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+last(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4154,7 +4153,7 @@ rel.last(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-last_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+last_value(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4213,7 +4212,7 @@ rel.last_value(column="value", window_spec="over (order by description)", projec
 ##### Signature
 
 ```python
-lead(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: int = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+lead(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: typing.SupportsInt = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4288,7 +4287,7 @@ rel.lead(column="description", window_spec="over (order by value)", projected_co
 ##### Signature
 
 ```python
-list(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+list(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4350,7 +4349,7 @@ rel.list(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-max(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+max(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4412,7 +4411,7 @@ rel = duckdb_conn.sql("""
 ##### Signature
 
 ```python
-mean(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+mean(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4474,7 +4473,7 @@ rel.mean(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-median(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+median(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4536,7 +4535,7 @@ rel.median(column="value", groups="description", projected_columns="description"
 ##### Signature
 
 ```python
-min(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+min(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4598,7 +4597,7 @@ rel.min(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-mode(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+mode(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4660,7 +4659,7 @@ rel.mode(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-n_tile(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, num_buckets: int, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+n_tile(self: _duckdb.DuckDBPyRelation, window_spec: str, num_buckets: typing.SupportsInt, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4726,7 +4725,7 @@ rel.n_tile(window_spec="over (partition by description)", num_buckets=2, project
 ##### Signature
 
 ```python
-nth_value(self: duckdb.duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: int, ignore_nulls: bool = False, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+nth_value(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: typing.SupportsInt, ignore_nulls: bool = False, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4798,7 +4797,7 @@ rel.nth_value(column="value", window_spec="over (partition by description)", pro
 ##### Signature
 
 ```python
-percent_rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+percent_rank(self: _duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4861,7 +4860,7 @@ rel.percent_rank(window_spec="over (partition by description order by value)", p
 ##### Signature
 
 ```python
-product(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+product(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4923,7 +4922,7 @@ rel.product(column="value", groups="description", projected_columns="description
 ##### Signature
 
 ```python
-quantile(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+quantile(self: _duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4988,7 +4987,7 @@ rel.quantile(column="value", groups="description", projected_columns="descriptio
 ##### Signature
 
 ```python
-quantile_cont(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+quantile_cont(self: _duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5053,7 +5052,7 @@ rel.quantile_cont(column="value", groups="description", projected_columns="descr
 ##### Signature
 
 ```python
-quantile_disc(self: duckdb.duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+quantile_disc(self: _duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5118,7 +5117,7 @@ rel.quantile_disc(column="value", groups="description", projected_columns="descr
 ##### Signature
 
 ```python
-rank(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+rank(self: _duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5181,7 +5180,7 @@ rel.rank(window_spec="over (partition by description order by value)", projected
 ##### Signature
 
 ```python
-rank_dense(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+rank_dense(self: _duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5246,7 +5245,7 @@ rel = duckdb_conn.sql("""
 ##### Signature
 
 ```python
-row_number(self: duckdb.duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+row_number(self: _duckdb.DuckDBPyRelation, window_spec: str, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5309,7 +5308,7 @@ rel.row_number(window_spec="over (partition by description order by value)", pro
 ##### Signature
 
 ```python
-select_dtypes(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duckdb.DuckDBPyRelation
+select_dtypes(self: _duckdb.DuckDBPyRelation, types: object) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5364,7 +5363,7 @@ rel.select_dtypes(types=[duckdb.typing.VARCHAR]).distinct()
 ##### Signature
 
 ```python
-select_types(self: duckdb.duckdb.DuckDBPyRelation, types: object) -> duckdb.duckdb.DuckDBPyRelation
+select_types(self: _duckdb.DuckDBPyRelation, types: object) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5419,7 +5418,7 @@ rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()
 ##### Signature
 
 ```python
-std(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+std(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5483,7 +5482,7 @@ rel.std(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-stddev(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+stddev(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5547,7 +5546,7 @@ rel.stddev(column="value", groups="description", projected_columns="description"
 ##### Signature
 
 ```python
-stddev_pop(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+stddev_pop(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5609,7 +5608,7 @@ rel.stddev_pop(column="value", groups="description", projected_columns="descript
 ##### Signature
 
 ```python
-stddev_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+stddev_samp(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5673,7 +5672,7 @@ rel.stddev_samp(column="value", groups="description", projected_columns="descrip
 ##### Signature
 
 ```python
-string_agg(self: duckdb.duckdb.DuckDBPyRelation, column: str, sep: str = ',', groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+string_agg(self: _duckdb.DuckDBPyRelation, column: str, sep: str = ',', groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5738,7 +5737,7 @@ rel.string_agg(column="value", sep=",", groups="description", projected_columns=
 ##### Signature
 
 ```python
-sum(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+sum(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5800,7 +5799,7 @@ rel.sum(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-unique(self: duckdb.duckdb.DuckDBPyRelation, unique_aggr: str) -> duckdb.duckdb.DuckDBPyRelation
+unique(self: _duckdb.DuckDBPyRelation, unique_aggr: str) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5853,7 +5852,7 @@ rel.unique(unique_aggr="description")
 ##### Signature
 
 ```python
-value_counts(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '') -> duckdb.duckdb.DuckDBPyRelation
+value_counts(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5909,7 +5908,7 @@ rel.value_counts(column="description", groups="description")
 ##### Signature
 
 ```python
-var(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+var(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -5973,7 +5972,7 @@ rel.var(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-var_pop(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+var_pop(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -6035,7 +6034,7 @@ rel.var_pop(column="value", groups="description", projected_columns="description
 ##### Signature
 
 ```python
-var_samp(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+var_samp(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -6099,7 +6098,7 @@ rel.var_samp(column="value", groups="description", projected_columns="descriptio
 ##### Signature
 
 ```python
-variance(self: duckdb.duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> duckdb.duckdb.DuckDBPyRelation
+variance(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -6162,7 +6161,7 @@ This section contains the functions which will trigger an SQL execution and retr
 
 | Name | Description |
 |:--|:-------|
-| [`arrow`](#arrow) | Execute and fetch all rows as an Arrow Table |
+| [`arrow`](#arrow) | Execute and return an Arrow Record Batch Reader that yields all rows |
 | [`close`](#close) | Closes the result |
 | [`create`](#create) | Creates a new table named table_name with the contents of the relation object |
 | [`create_view`](#create_view) | Creates a view named view_name that refers to the relation object |
@@ -6177,7 +6176,7 @@ This section contains the functions which will trigger an SQL execution and retr
 | [`fetchnumpy`](#fetchnumpy) | Execute and fetch all rows as a Python dict mapping each column to one numpy arrays |
 | [`fetchone`](#fetchone) | Execute and fetch a single row as a tuple |
 | [`pl`](#pl) | Execute and fetch all rows as a Polars DataFrame |
-| [`record_batch`](#record_batch) | Execute and return an Arrow Record Batch Reader that yields all rows |
+| [`record_batch`](#record_batch) | record_batch(self: object, batch_size: typing.SupportsInt = 1000000) -> object |
 | [`tf`](#tf) | Fetch a result as dict of TensorFlow Tensors |
 | [`to_arrow_table`](#to_arrow_table) | Execute and fetch all rows as an Arrow Table |
 | [`to_csv`](#to_csv) | Write the relation object to a CSV file in 'file_name' |
@@ -6194,12 +6193,12 @@ This section contains the functions which will trigger an SQL execution and retr
 ##### Signature
 
 ```python
-arrow(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.Table
+arrow(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.RecordBatchReader
 ```
 
 ##### Description
 
-Execute and fetch all rows as an Arrow Table
+Execute and return an Arrow Record Batch Reader that yields all rows
 
 **Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`to_arrow_table`](#to_arrow_table)
 
@@ -6254,7 +6253,7 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
 ##### Signature
 
 ```python
-close(self: duckdb.duckdb.DuckDBPyRelation) -> None
+close(self: _duckdb.DuckDBPyRelation) -> None
 ```
 
 ##### Description
@@ -6268,7 +6267,7 @@ Closes the result
 ##### Signature
 
 ```python
-create(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
+create(self: _duckdb.DuckDBPyRelation, table_name: str) -> None
 ```
 
 ##### Description
@@ -6324,7 +6323,7 @@ duckdb_conn.table("table_code_example").limit(1)
 ##### Signature
 
 ```python
-create_view(self: duckdb.duckdb.DuckDBPyRelation, view_name: str, replace: bool = True) -> duckdb.duckdb.DuckDBPyRelation
+create_view(self: _duckdb.DuckDBPyRelation, view_name: str, replace: bool = True) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -6383,7 +6382,7 @@ duckdb_conn.table("view_code_example").limit(1)
 ##### Signature
 
 ```python
-df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
+df(self: _duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
 ```
 
 ##### Description
@@ -6436,7 +6435,7 @@ rel.df()
 ##### Signature
 
 ```python
-execute(self: duckdb.duckdb.DuckDBPyRelation) -> duckdb.duckdb.DuckDBPyRelation
+execute(self: _duckdb.DuckDBPyRelation) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -6483,7 +6482,7 @@ rel.execute()
 ##### Signature
 
 ```python
-fetch_arrow_reader(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.RecordBatchReader
+fetch_arrow_reader(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.RecordBatchReader
 ```
 
 ##### Description
@@ -6541,7 +6540,7 @@ created_timestamp: [2025-04-10 09:25:51.259000Z]
 ##### Signature
 
 ```python
-fetch_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.Table
+fetch_arrow_table(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.Table
 ```
 
 ##### Description
@@ -6599,7 +6598,7 @@ created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,202
 ##### Signature
 
 ```python
-fetch_df_chunk(self: duckdb.duckdb.DuckDBPyRelation, vectors_per_chunk: int = 1, *, date_as_object: bool = False) -> pandas.DataFrame
+fetch_df_chunk(self: _duckdb.DuckDBPyRelation, vectors_per_chunk: typing.SupportsInt = 1, *, date_as_object: bool = False) -> pandas.DataFrame
 ```
 
 ##### Description
@@ -6653,7 +6652,7 @@ rel.fetch_df_chunk()
 ##### Signature
 
 ```python
-fetchall(self: duckdb.duckdb.DuckDBPyRelation) -> list
+fetchall(self: _duckdb.DuckDBPyRelation) -> list
 ```
 
 ##### Description
@@ -6697,7 +6696,7 @@ rel.limit(1).fetchall()
 ##### Signature
 
 ```python
-fetchdf(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
+fetchdf(self: _duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
 ```
 
 ##### Description
@@ -6750,7 +6749,7 @@ rel.fetchdf()
 ##### Signature
 
 ```python
-fetchmany(self: duckdb.duckdb.DuckDBPyRelation, size: int = 1) -> list
+fetchmany(self: _duckdb.DuckDBPyRelation, size: typing.SupportsInt = 1) -> list
 ```
 
 ##### Description
@@ -6832,7 +6831,7 @@ while res := rel.fetchmany(size=1):
 ##### Signature
 
 ```python
-fetchnumpy(self: duckdb.duckdb.DuckDBPyRelation) -> dict
+fetchnumpy(self: _duckdb.DuckDBPyRelation) -> dict
 ```
 
 ##### Description
@@ -6891,7 +6890,7 @@ rel.fetchnumpy()
 ##### Signature
 
 ```python
-fetchone(self: duckdb.duckdb.DuckDBPyRelation) -> typing.Optional[tuple]
+fetchone(self: _duckdb.DuckDBPyRelation) -> typing.Optional[tuple]
 ```
 
 ##### Description
@@ -6967,22 +6966,18 @@ while res := rel.fetchone():
 ##### Signature
 
 ```python
-pl(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000, lazy: bool = False) -> duckdb::PolarsDataFrame
+pl(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000, *, lazy: bool = False) -> duckdb::PolarsDataFrame
 ```
 
 ##### Description
 
-Execute and fetch all rows as a Polars DataFrame or LazyFrame.
+Execute and fetch all rows as a Polars DataFrame
 
 ##### Parameters
 
 - **batch_size** : int, default: 1000000
                             
 	The number of records to be fetched per batch.
-
-- **lazy** : bool, default: False
-                            
-	Return a LazyFrame with support for filter pushdown.
 
 ##### Example
 
@@ -7021,15 +7016,9 @@ shape: (9, 4)
 
 #### `record_batch`
 
-##### Signature
-
-```python
-record_batch(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.RecordBatchReader
-```
-
 ##### Description
 
-Execute and return an Arrow Record Batch Reader that yields all rows
+record_batch(self: object, batch_size: typing.SupportsInt = 1000000) -> object
 
 ##### Parameters
 
@@ -7082,7 +7071,7 @@ created_timestamp: [2025-04-10 09:52:55.249000Z]
 ##### Signature
 
 ```python
-tf(self: duckdb.duckdb.DuckDBPyRelation) -> dict
+tf(self: _duckdb.DuckDBPyRelation) -> dict
 ```
 
 ##### Description
@@ -7128,7 +7117,7 @@ rel.select("description, value").tf()
 ##### Signature
 
 ```python
-to_arrow_table(self: duckdb.duckdb.DuckDBPyRelation, batch_size: int = 1000000) -> pyarrow.lib.Table
+to_arrow_table(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.Table
 ```
 
 ##### Description
@@ -7186,7 +7175,7 @@ created_timestamp: [[2025-04-10 09:54:24.015000Z,2025-04-10 09:55:24.015000Z,202
 ##### Signature
 
 ```python
-to_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object = None, na_rep: object = None, header: object = None, quotechar: object = None, escapechar: object = None, date_format: object = None, timestamp_format: object = None, quoting: object = None, encoding: object = None, compression: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None) -> None
+to_csv(self: _duckdb.DuckDBPyRelation, file_name: str, *, sep: object = None, na_rep: object = None, header: object = None, quotechar: object = None, escapechar: object = None, date_format: object = None, timestamp_format: object = None, quoting: object = None, encoding: object = None, compression: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None) -> None
 ```
 
 ##### Description
@@ -7280,7 +7269,7 @@ The data is exported to a CSV file, named code_example.csv
 ##### Signature
 
 ```python
-to_df(self: duckdb.duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
+to_df(self: _duckdb.DuckDBPyRelation, *, date_as_object: bool = False) -> pandas.DataFrame
 ```
 
 ##### Description
@@ -7333,7 +7322,7 @@ rel.to_df()
 ##### Signature
 
 ```python
-to_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
+to_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
 ```
 
 ##### Description
@@ -7412,7 +7401,7 @@ The data is exported to a Parquet file, named code_example.parquet
 ##### Signature
 
 ```python
-to_table(self: duckdb.duckdb.DuckDBPyRelation, table_name: str) -> None
+to_table(self: _duckdb.DuckDBPyRelation, table_name: str) -> None
 ```
 
 ##### Description
@@ -7461,7 +7450,7 @@ A table, named table_code_example, is created with the data of the relation
 ##### Signature
 
 ```python
-to_view(self: duckdb.duckdb.DuckDBPyRelation, view_name: str, replace: bool = True) -> duckdb.duckdb.DuckDBPyRelation
+to_view(self: _duckdb.DuckDBPyRelation, view_name: str, replace: bool = True) -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -7513,7 +7502,7 @@ A view, named view_code_example, is created with the query definition of the rel
 ##### Signature
 
 ```python
-torch(self: duckdb.duckdb.DuckDBPyRelation) -> dict
+torch(self: _duckdb.DuckDBPyRelation) -> dict
 ```
 
 ##### Description
@@ -7554,7 +7543,7 @@ rel.select("value").torch()
 ##### Signature
 
 ```python
-write_csv(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, sep: object = None, na_rep: object = None, header: object = None, quotechar: object = None, escapechar: object = None, date_format: object = None, timestamp_format: object = None, quoting: object = None, encoding: object = None, compression: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None) -> None
+write_csv(self: _duckdb.DuckDBPyRelation, file_name: str, *, sep: object = None, na_rep: object = None, header: object = None, quotechar: object = None, escapechar: object = None, date_format: object = None, timestamp_format: object = None, quoting: object = None, encoding: object = None, compression: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None) -> None
 ```
 
 ##### Description
@@ -7648,7 +7637,7 @@ The data is exported to a CSV file, named code_example.csv
 ##### Signature
 
 ```python
-write_parquet(self: duckdb.duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
+write_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
 ```
 
 ##### Description

@@ -108,9 +108,9 @@ SELECT * FROM get_users([1, 5]);
 To define macros on arbitrary tables, use the [`query_table` function]({% link docs/preview/guides/sql_features/query_and_query_table_functions.md %}). For example, the following macro computes a column-wise checksum on a table:
 
 ```sql
-CREATE MACRO checksum(table_name) AS TABLE
+CREATE MACRO checksum(tbl) AS TABLE
     SELECT bit_xor(md5_number(COLUMNS(*)::VARCHAR))
-    FROM query_table(table_name);
+    FROM query_table(tbl);
 
 CREATE TABLE tbl AS SELECT unnest([42, 43]) AS x, 100 AS y;
 SELECT * FROM checksum('tbl');

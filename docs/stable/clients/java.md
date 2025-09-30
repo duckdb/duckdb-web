@@ -235,7 +235,7 @@ The DuckDB JDBC driver offers batch write functionality.
 The batch writer supports prepared statements to mitigate the overhead of query parsing.
 
 > The preferred method for bulk inserts is to use the [Appender](#appender) due to its higher performance.
-> However, when using the Appender is not possbile, the batch writer is available as alternative.
+> However, when using the Appender is not possible, the batch writer is available as alternative.
 
 #### Batch Writer with Prepared Statements
 

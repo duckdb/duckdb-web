@@ -34,6 +34,9 @@
 .. autoclass:: duckdb.ConversionException
    :members:
    :show-inheritance:
+.. autoclass:: duckdb.DBAPITypeObject
+   :members:
+   :show-inheritance:
 .. autoclass:: duckdb.DataError
    :members:
    :show-inheritance:
@@ -263,6 +266,7 @@
 .. automethod:: duckdb.project
 .. automethod:: duckdb.query
 .. automethod:: duckdb.query_df
+.. automethod:: duckdb.query_progress
 .. automethod:: duckdb.read_csv
 .. automethod:: duckdb.read_json
 .. automethod:: duckdb.read_parquet
@@ -290,5 +294,6 @@
 .. automethod:: duckdb.unregister
 .. automethod:: duckdb.unregister_filesystem
 .. automethod:: duckdb.values
+.. automethod:: duckdb.version
 .. automethod:: duckdb.view
 .. automethod:: duckdb.write_csv

@@ -39,10 +39,8 @@ def generate_docs_llms_files():
             title = doc.get('title', '')
             content = doc.content.strip()
 
-            # For website URL, remove the .md extension
+            # Set website path to point to the Markdown file
             website_path = str(relative_path)
-            if website_path.endswith('.md'):
-                website_path = website_path[:-3]
             website_url = f"https://duckdb.org/docs/stable/{website_path}"
 
             # Add to file groups

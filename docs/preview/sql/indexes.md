@@ -110,3 +110,61 @@ Violates foreign key constraint because key "id: 1" is still referenced by a for
 
 The reason for this is because DuckDB does not yet support “looking ahead”.
 During the `INSERT`, it is unaware it will reinsert the foreign key value as part of the `UPDATE` rewrite.
+
+### Constraint Checking After Delete With Concurrent Transactions
+
+When a delete is committed on a table with an index, data can only be removed from the index when no further transactions exist that refer to the deleted entry. This means that for indices which enforce constraint violations, if you perform a delete transaction, constraint checking can fail for a subsequent transaction which inserts a record with the same key as the deleted record if there is a concurrent transaction referencing the deleted record. Note that constraint violations are only relevant for primary key, foreign key, and `UNIQUE` indexes.
+
+There are two main ways that constraint checking can fail:
+
+#### Over-Eager Unique Constraint Checking
+
+For uniqueness constraints, inserts can fail when they should succeed:
+
+```cpp
+// Assume "someTable" is a table with an index enforcing uniqueness
+tx1 = duckdbTxStart()
+someRecord = duckdb(tx1, "select * from someTable using sample 1 rows")
+
+tx2 = duckdbTxStart()
+duckdbDelete(tx2, someRecord)
+duckdbTxCommit(tx2)
+
+// At this point someRecord is deleted, but the ART index is not updated, so the following would fail with a constraint error:
+// tx3 = duckdbTxStart()
+// duckdbInsert(tx3, someRecord)
+// duckdbTxCommit(tx3)
+
+duckdbTxCommit(tx1) // Following this, the above insert would succeed because the ART index was allowed to update
+```
+
+#### Under-Eager Foreign Key Constraint Checking
+
+For foreign key constraints, inserts can succeed when they should fail:
+
+```cpp
+// Setup: Create a primary table with UUID primary key and a secondary table with foreign key reference
+primaryId = generateNewGUID()
+conn = duckdbConnectInMemory()
+// Create tables and insert initial record in primary table
+duckdb(conn, "CREATE TABLE primary_table (id UUID PRIMARY KEY)")
+duckdb(conn, "CREATE TABLE secondary_table (primary_id UUID, FOREIGN KEY (primary_id) REFERENCES primary_table(id))")
+duckdbInsert(conn, "primary_table", {id: primaryId})
+// Start transaction tx1 which will read from primary_table
+tx1 = duckdbTxStart(conn)
+readRecord = duckdb(tx1, "SELECT id FROM primary_table LIMIT 1")
+// Note: tx1 remains open, holding locks/resources
+// Outside of tx1, delete the record from primary_table
+duckdbDelete(conn, "primary_table", {id: primaryId})
+// Try to insert into secondary_table with foreign key reference to the now-deleted primary record
+// This succeeds because tx1 is still open and the constraint isn't fully enforced yet
+duckdbInsert(conn, "secondary_table", {primary_id: primaryId})
+// Commit tx1, releasing any locks/resources
+duckdbTxCommit(tx1)
+// Verify the primary record is indeed deleted
+count = duckdb(conn, "SELECT count() FROM primary_table WHERE id = $primaryId", {primaryId: primaryId})
+assert(count == 0, "Record should be deleted")
+// Verify the secondary record with the foreign key reference exists, an inconsistent state
+count = duckdb(conn, "SELECT count() FROM secondary_table WHERE primary_id = $primaryId", {primaryId: primaryId})
+assert(count == 1, "Foreign key reference should exist")
+```

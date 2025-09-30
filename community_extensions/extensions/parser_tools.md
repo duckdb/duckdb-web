@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: parser_tools
   description: Exposes functions for parsing referenced tables and usage context from SQL queries using DuckDB's native parser.
-  version: 0.4.0
+  version: 0.5.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: zfarrell/duckdb_extension_parser_tools
-  ref: da3e91e673cfb3497b7a9498545fbbaba43a0ecd
+  ref: 0c74f1b24610d324d6254fce6b32755f734e3df7
 
 docs:
   hello_world: |
@@ -128,8 +128,37 @@ docs:
     │ time        │ >=            │ 1       │ MyTable    │ WHERE   │
     │ time        │ <=            │ 100     │ MyTable    │ WHERE   │
     └─────────────┴───────────────┴─────────┴────────────┴─────────┘
+    
+    -- Extract function calls
+    SELECT * FROM parse_functions('SELECT upper(name), count(*) FROM users WHERE length(email) > 0');
+    ┌───────────────┬─────────┬─────────┐
+    │ function_name │ schema  │ context │
+    │    varchar    │ varchar │ varchar │
+    ├───────────────┼─────────┼─────────┤
+    │ upper         │ main    │ select  │
+    │ count_star    │ main    │ select  │
+    │ length        │ main    │ where   │
+    └───────────────┴─────────┴─────────┘
 
+    -- Parse multi-statement as table
+    SELECT * from  parse_statements('SELECT 42; INSERT INTO log VALUES (1); SELECT 43;') as statements;
+    ┌──────────────────────────────┐
+    │          statement           │
+    │           varchar            │
+    ├──────────────────────────────┤
+    │ SELECT 42                    │
+    │ INSERT INTO log (VALUES (1)) │
+    │ SELECT 43                    │
+    └──────────────────────────────┘
 
+    -- Count statements
+    SELECT num_statements('SELECT 1; SELECT 2; SELECT 3;');
+    ┌────────────────┐
+    │ num_statements │
+    │     int64      │
+    ├────────────────┤
+    │       3        │
+    └────────────────┘
 
   extended_description: |
     `parser_tools` is a DuckDB extension that enables SQL query introspection using DuckDB’s native parser.
@@ -139,8 +168,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 296
-extension_download_count_pretty: 296
+extension_download_count: 370
+extension_download_count_pretty: 370
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
 layout: community_extension_doc
 ---
@@ -169,9 +198,12 @@ LOAD {{ page.extension.name }};
 |    function_name     | function_type | description | comment | examples |
 |----------------------|---------------|-------------|---------|----------|
 | is_parsable          | scalar        | NULL        | NULL    |          |
+| num_statements       | scalar        | NULL        | NULL    |          |
 | parse_function_names | scalar        | NULL        | NULL    |          |
 | parse_functions      | scalar        | NULL        | NULL    |          |
 | parse_functions      | table         | NULL        | NULL    |          |
+| parse_statements     | scalar        | NULL        | NULL    |          |
+| parse_statements     | table         | NULL        | NULL    |          |
 | parse_table_names    | scalar        | NULL        | NULL    |          |
 | parse_tables         | scalar        | NULL        | NULL    |          |
 | parse_tables         | table         | NULL        | NULL    |          |

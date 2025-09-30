@@ -172,7 +172,7 @@ AdbcStatement adbc_statement;
 ArrowArrayStream arrow_stream;
 ```
 
-We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` options as mentioned above. Then we set the `path` option and initialize the database. The `driver` option should point to your installed `libduckdb` library - see [Setting Up the DuckDB ADBC Driver](#setting-up-the-duckdb-adbc-driver) for installation instructions.
+We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` options as mentioned above. Then we set the `path` option and initialize the database. The `driver` option should point to your installed `libduckdb` library – see [Setting Up the DuckDB ADBC Driver](#setting-up-the-duckdb-adbc-driver) for installation instructions.
 
 ```cpp
 AdbcDatabaseNew(&adbc_database, &adbc_error);
@@ -247,7 +247,7 @@ with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
 
 ### Go
 
-Make sure to install the `libduckdb` library first - see [Setting Up the DuckDB ADBC Driver](#setting-up-the-duckdb-adbc-driver) for detailed installation instructions.
+Make sure to install the `libduckdb` library first – see [Setting Up the DuckDB ADBC Driver](#setting-up-the-duckdb-adbc-driver) for detailed installation instructions.
 
 The following example uses an in-memory DuckDB database to modify in-memory Arrow RecordBatches via SQL queries:
 

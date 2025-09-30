@@ -328,7 +328,7 @@ FROM main_public.rep_fact_train_services_daily_agg;
 
 ## Execution Details
 
-The above implementation consists of 10 models and 20 data tests, processing 400 MB of data from the attached DuckDB database, together with small data organized in GeoJSON files. The total execution time, on a single thread and on a MacBook Pro of 12 GB, is between 40 and 45 seconds. From the total execution time, approximatively 30 seconds are spent to process the train services data and 4 seconds to write the aggregated data to PostgreSQL:
+The above implementation consists of 10 models and 20 data tests, processing 400 MB of data from the attached DuckDB database, together with small data organized in GeoJSON files. The total execution time, on a single thread and on a MacBook Pro of 12 GB, is between 40 and 45 seconds. From the total execution time, approximately 30 seconds are spent to process the train services data and 4 seconds to write the aggregated data to PostgreSQL:
 
 ```text
 05:48:07  Running with dbt=1.9.3

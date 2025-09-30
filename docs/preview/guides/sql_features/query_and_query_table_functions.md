@@ -79,4 +79,3 @@ FROM stack('cities', ['country', 'city'], 'year', 'population');
 | US      | New York  | 2000 | 100        |
 | US      | New York  | 2010 | 120        |
 | US      | New York  | 2020 | 150        |
-

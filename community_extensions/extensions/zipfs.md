@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: isaacbrodsky/duckdb-zipfs
-  ref: 189d9ab4696bb340867f278dcadf1e35810365b3
+  ref: 3918f81a69ea00b683b70a292ed13d819e550f7d
 
 docs:
   hello_world: |
@@ -25,10 +25,10 @@ docs:
   extended_description: |
     The zipfs extension adds support for reading files from within zip archives.
 
-extension_star_count: 41
-extension_star_count_pretty: 41
-extension_download_count: 3422
-extension_download_count_pretty: 3.4k
+extension_star_count: 43
+extension_star_count_pretty: 43
+extension_download_count: 3323
+extension_download_count_pretty: 3.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_zipfs.png'
 layout: community_extension_doc
 ---

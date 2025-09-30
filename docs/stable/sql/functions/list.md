@@ -95,7 +95,7 @@ title: List Functions
 | [`list_extract(list, index)`](#list_extractlist-index) | Extract the `index`th (1-based) value from the list. |
 | [`list_filter(list, lambda(x))`](#list_filterlist-lambdax) | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/stable/sql/functions/lambda.md %}#list_filter-examples). |
 | [`list_first(list)`](#list_firstlist) | Applies aggregate function [`first`]({% link docs/stable/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| [`list_grade_up(list[, col1][, col2])`](#list_grade_uplist-col1-col2) | Works like [list_sort](#list_sortlist), but the results are the indexes that correspond to the position in the original list instead of the actual values. |
+| [`list_grade_up(list[, col1][, col2])`](#list_grade_uplist-col1-col2) | Works like [`list_sort`](#list_sortlist-col1-col2), but the results are the indexes that correspond to the position in the original list instead of the actual values. |
 | [`list_has(list, element)`](#list_containslist-element) | Alias for `list_contains`. |
 | [`list_has_all(list1, list2)`](#list_has_alllist1-list2) | Returns true if all elements of list2 are in list1. NULLs are ignored. |
 | [`list_has_any(list1, list2)`](#list_has_anylist1-list2) | Returns true if the lists have any element in common. NULLs are ignored. |
@@ -450,7 +450,7 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Works like [list_sort](#list_sortlist), but the results are the indexes that correspond to the position in the original list instead of the actual values. |
+| **Description** | Works like [`list_sort`](#list_sortlist-col1-col2), but the results are the indexes that correspond to the position in the original list instead of the actual values. |
 | **Example** | `list_grade_up([3, 6, 1, 2])` |
 | **Result** | `[3, 4, 1, 2]` |
 | **Aliases** | `array_grade_up`, `grade_up` |
@@ -1083,7 +1083,7 @@ SELECT ([1, 2, 3, 4, 5])[:-:-2];
 
 ## List Aggregates
 
-The function [`list_aggregate`](#list_aggregatelist-name) allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g., `min`, `histogram` or `sum`.
+The function [`list_aggregate`](#list_aggregatelist-function_name-) allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g., `min`, `histogram` or `sum`.
 
 `list_aggregate` accepts additional arguments after the aggregate function name. These extra arguments are passed directly to the aggregate function, which serves as the second argument of `list_aggregate`.
 

@@ -10,45 +10,45 @@ The `FROM` clause specifies the *source* of the data on which the remainder of t
 
 ## Examples
 
-Select all columns from the table called `table_name`:
+Select all columns from the table called `tbl`:
 
 ```sql
 SELECT *
-FROM table_name;
+FROM tbl;
 ```
 
 Select all columns from the table using the `FROM`-first syntax:
 
 ```sql
-FROM table_name
+FROM tbl
 SELECT *;
 ```
 
 Select all columns using the `FROM`-first syntax and omitting the `SELECT` clause:
 
 ```sql
-FROM table_name;
+FROM tbl;
 ```
 
-Select all columns from the table called `table_name` through an alias `tn`:
+Select all columns from the table called `tbl` through an alias `tn`:
 
 ```sql
 SELECT tn.*
-FROM table_name tn;
+FROM tbl tn;
 ```
 
 Use a prefix alias:
 
 ```sql
 SELECT tn.*
-FROM tn: table_name;
+FROM tn: tbl;
 ```
 
-Select all columns from the table `table_name` in the schema `schema_name`:
+Select all columns from the table `tbl` in the schema `schema_name`:
 
 ```sql
 SELECT *
-FROM schema_name.table_name;
+FROM schema_name.tbl;
 ```
 
 Select the column `i` from the table function `range`, where the first column of the range function is renamed to `i`:
@@ -69,7 +69,7 @@ Select all columns from a subquery:
 
 ```sql
 SELECT *
-FROM (SELECT * FROM table_name);
+FROM (SELECT * FROM tbl);
 ```
 
 Select the entire row of the table as a struct:
@@ -90,16 +90,16 @@ Join two tables together:
 
 ```sql
 SELECT *
-FROM table_name
+FROM tbl
 JOIN other_table
-  ON table_name.key = other_table.key;
+  ON tbl.key = other_table.key;
 ```
 
 Select a 10% sample from a table:
 
 ```sql
 SELECT *
-FROM table_name
+FROM tbl
 TABLESAMPLE 10%;
 ```
 
@@ -107,7 +107,7 @@ Select a sample of 10 rows from a table:
 
 ```sql
 SELECT *
-FROM table_name
+FROM tbl
 TABLESAMPLE 10 ROWS;
 ```
 

@@ -36,6 +36,7 @@ Starting with v1.4.0, in-memory tables support checkpointing. This has two key b
 
   ```sql
   ATTACH ':memory:' AS memory_compressed (COMPRESS);
+  USE memory_compressed;
   ```
 
 * Checkpointing triggers vacuuming deleted rows, allowing space to be reclaimed after deletes/truncation.

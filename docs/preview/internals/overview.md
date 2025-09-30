@@ -65,7 +65,7 @@ After the logical planner has created the logical query tree, the optimizers are
 
 ## Column Binding Resolver
 
-The column binding resolver converts logical [`BoundColumnRefExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/expression/bound_columnref_expression.hpp) nodes that refer to a column of a specific table into [`BoundReferenceExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/expression/bound_reference_expression.hpp) nodes that refer to a specific index into the DataChunks that are passed around in the execution engine.
+The column binding resolver converts logical [`BoundColumnRefExpresion`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/expression/bound_columnref_expression.hpp) nodes that refer to a column of a specific table into [`BoundReferenceExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/expression/bound_reference_expression.hpp) nodes that refer to a specific index into the DataChunks that are passed around in the execution engine.
 
 ## Physical Plan Generator
 

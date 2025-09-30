@@ -110,7 +110,7 @@ ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
 
 ### Explicit Storage Versions
 
-[DuckDB v1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicilty specifying the storage version.
+[DuckDB v1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicitly specifying the storage version.
 Using this, you can opt-in to newer forwards-incompatible features:
 
 ```sql
@@ -147,15 +147,15 @@ Database encryption implies using [storage version](#explicit-storage-versions) 
 
 ### Options
 
-| Name                | Description                                                                                                                 | Type      | Default value     |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ----------------- |
-| `ACCESS_MODE`       | Access mode of the database (`AUTOMATIC`, `READ_ONLY`, or `READ_WRITE`).                                                    | `VARCHAR` | `automatic`       |
-| `COMPRESS`          | Whether the database is compressed. Default: `false` for in-memory databases, `true` for persistent databases.              | `VARCHAR` | (see description) |
-| `TYPE`              | The file type (`DUCKDB` or `SQLITE`), or deduced from the input string literal (MySQL, PostgreSQL).                         | `VARCHAR` | `DUCKDB`          |
-| `BLOCK_SIZE`        | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`          |
-| `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `v1.0.0`          |
-| `ENCRYPTION_KEY`    | The encryption key used for encrypting the database.                                                                        | `VARCHAR` | -                 |
-| `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -                 |
+| Name                | Description                                                                                                                 | Type      | Default value |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
+| `ACCESS_MODE`       | Access mode of the database (`AUTOMATIC`, `READ_ONLY`, or `READ_WRITE`).                                                    | `VARCHAR` | `automatic`   |
+| `COMPRESS`          | Whether the database is compressed. Only applicable for in-memory databases.                                                | `VARCHAR` | `false`       |
+| `TYPE`              | The file type (`DUCKDB` or `SQLITE`), or deduced from the input string literal (MySQL, PostgreSQL).                         | `VARCHAR` | `DUCKDB`      |
+| `BLOCK_SIZE`        | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
+| `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `v1.0.0`      |
+| `ENCRYPTION_KEY`    | The encryption key used for encrypting the database.                                                                        | `VARCHAR` | -             |
+| `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |
 
 ## `DETACH`
 

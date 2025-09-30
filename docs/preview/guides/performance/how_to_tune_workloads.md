@@ -25,7 +25,7 @@ This allows the systems to re-order any results that do not contain `ORDER BY` c
 
 DuckDB parallelizes the workload based on _[row groups]({% link docs/preview/internals/storage.md %}#row-groups),_ i.e., groups of rows that are stored together at the storage level.
 A row group in DuckDB's database format consists of max. 122,880 rows.
-Parallelism starts at the level of row groups, therefore, for a query to run on _k_ threads, it needs to scan at least _k_ * 122,880 rows.
+Parallelism starts at the level of row groups, therefore, for a query to run on _k_ threads, it needs to scan at least _k_ \* 122,880 rows.
 
 ### Too Many Threads
 
@@ -53,10 +53,10 @@ These are called _blocking operators_ as they require their entire input to be b
 and are the most memory-intensive operators in relational database systems.
 The main blocking operators are the following:
 
-* _grouping:_ [`GROUP BY`]({% link docs/preview/sql/query_syntax/groupby.md %})
-* _joining:_ [`JOIN`]({% link docs/preview/sql/query_syntax/from.md %}#joins)
-* _sorting:_ [`ORDER BY`]({% link docs/preview/sql/query_syntax/orderby.md %})
-* _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/preview/sql/functions/window_functions.md %})
+- _grouping:_ [`GROUP BY`]({% link docs/preview/sql/query_syntax/groupby.md %})
+- _joining:_ [`JOIN`]({% link docs/preview/sql/query_syntax/from.md %}#joins)
+- _sorting:_ [`ORDER BY`]({% link docs/preview/sql/query_syntax/orderby.md %})
+- _windowing:_ [`OVER ... (PARTITION BY ... ORDER BY ...)`]({% link docs/preview/sql/functions/window_functions.md %})
 
 DuckDB supports larger-than-memory processing for all of these operators.
 
@@ -65,23 +65,23 @@ DuckDB supports larger-than-memory processing for all of these operators.
 DuckDB strives to always complete workloads even if they are larger-than-memory.
 That said, there are some limitations at the moment:
 
-* If multiple blocking operators appear in the same query, DuckDB may still throw an out-of-memory exception due to the complex interplay of these operators.
-* Some [aggregate functions]({% link docs/preview/sql/functions/aggregates.md %}), such as `list()` and `string_agg()`, do not support offloading to disk.
-* [Aggregate functions that use sorting]({% link docs/preview/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions) are holistic, i.e., they need all inputs before the aggregation can start. As DuckDB cannot yet offload some complex intermediate aggregate states to disk, these functions can cause an out-of-memory exception when run on large datasets.
-* The `PIVOT` operation [internally uses the `list()` function]({% link docs/preview/sql/statements/pivot.md %}#internals), therefore it is subject to the same limitation.
+- If multiple blocking operators appear in the same query, DuckDB may still throw an out-of-memory exception due to the complex interplay of these operators.
+- Some [aggregate functions]({% link docs/preview/sql/functions/aggregates.md %}), such as `list()` and `string_agg()`, do not support offloading to disk.
+- [Aggregate functions that use sorting]({% link docs/preview/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions) are holistic, i.e., they need all inputs before the aggregation can start. As DuckDB cannot yet offload some complex intermediate aggregate states to disk, these functions can cause an out-of-memory exception when run on large datasets.
+- The `PIVOT` operation [internally uses the `list()` function]({% link docs/preview/sql/statements/pivot.md %}#internals), therefore it is subject to the same limitation.
 
 ## Profiling
 
 If your queries are not performing as well as expected, it’s worth studying their query plans:
 
-* Use [`EXPLAIN`]({% link docs/preview/guides/meta/explain.md %}) to print the physical query plan without running the query.
-* Use [`EXPLAIN ANALYZE`]({% link docs/preview/guides/meta/explain_analyze.md %}) to run and profile the query. This will show the CPU time that each step in the query takes. Note that due to multi-threading, adding up the individual times will be larger than the total query processing time.
+- Use [`EXPLAIN`]({% link docs/preview/guides/meta/explain.md %}) to print the physical query plan without running the query.
+- Use [`EXPLAIN ANALYZE`]({% link docs/preview/guides/meta/explain_analyze.md %}) to run and profile the query. This will show the CPU time that each step in the query takes. Note that due to multi-threading, adding up the individual times will be larger than the total query processing time.
 
 Query plans can point to the root of performance issues. A few general directions:
 
-* Avoid nested loop joins in favor of hash joins.
-* A scan that does not include a filter pushdown for a filter condition that is later applied performs unnecessary IO. Try rewriting the query to apply a pushdown.
-* Bad join orders where the cardinality of an operator explodes to billions of tuples should be avoided at all costs.
+- Avoid nested loop joins in favor of hash joins.
+- A scan that does not include a filter pushdown for a filter condition that is later applied performs unnecessary IO. Try rewriting the query to apply a pushdown.
+- Bad join orders where the cardinality of an operator explodes to billions of tuples should be avoided at all costs.
 
 ## Prepared Statements
 
@@ -99,9 +99,9 @@ The main bottleneck in workloads reading remote files is likely to be the IO. Th
 
 Some basic SQL tricks can help with this:
 
-* Avoid `SELECT *`. Instead, only select columns that are actually used. DuckDB will try to only download the data it actually needs.
-* Apply filters on remote parquet files when possible. DuckDB can use these filters to reduce the amount of data that is scanned.
-* Either [sort]({% link docs/preview/sql/query_syntax/orderby.md %}) or [partition]({% link docs/preview/data/partitioning/partitioned_writes.md %}) data by columns that are regularly used for filters: this increases the effectiveness of the filters in reducing IO.
+- Avoid `SELECT *`. Instead, only select columns that are actually used. DuckDB will try to only download the data it actually needs.
+- Apply filters on remote parquet files when possible. DuckDB can use these filters to reduce the amount of data that is scanned.
+- Either [sort]({% link docs/preview/sql/query_syntax/orderby.md %}) or [partition]({% link docs/preview/data/partitioning/partitioned_writes.md %}) data by columns that are regularly used for filters: this increases the effectiveness of the filters in reducing IO.
 
 To inspect how much remote data is transferred for a query, [`EXPLAIN ANALYZE`]({% link docs/preview/guides/meta/explain_analyze.md %}) can be used to print out the total number of requests and total data transferred for queries on remote files.
 
@@ -121,21 +121,22 @@ Using multiple connections can parallelize some operations, although it is typic
 
 ## Persistent vs. In-Memory Tables
 
-DuckDB supports [lightweight compression techniques]({% post_url 2022-10-28-lightweight-compression %}). Currently, these are only applied on persistent (on-disk) databases.
+DuckDB supports [lightweight compression techniques]({% post_url 2022-10-28-lightweight-compression %}). By default, compression is only applied on persistent (on-disk) databases and not on in-memory tables.
 
-DuckDB does not compress its in-memory tables. The reason for this is that compression is performed during checkpointing, and in-memory tables are not checkpointed.
-
-In some cases, this can result in counter-intuitive performance results where queries are faster on on-disk tables compared to in-memory ones. For example, Q1 of the [TPC-H workload]({% link docs/preview/core_extensions/tpch.md %}) is faster when running on-disk compared to the in-memory mode:
+In some cases, this can result in counter-intuitive performance results where queries are faster on on-disk tables compared to in-memory ones. Let's take Q1 of the [TPC-H workload]({% link docs/preview/core_extensions/tpch.md %}) for example on the SF30 dataset:
 
 ```sql
-INSTALL tpch;
-LOAD tpch;
 CALL dbgen(sf = 30);
 .timer on
 PRAGMA tpch(1);
 ```
 
-| Database setup      | Execution time |
-|---------------------|---------------:|
-| In-memory database  | 4.80 s         |
-| Persistent database | 0.57 s         |
+We run this script using three DuckDB prompts:
+
+| Database setup              | DuckDB prompt                                               | Execution time |
+| --------------------------- | ----------------------------------------------------------- | -------------: |
+| In-memory DB (uncompressed) | `duckdb`                                                    |         4.22 s |
+| In-memory DB (compressed)   | `duckdb -cmd "ATTACH ':memory:' AS db (COMPRESS); USE db;"` |         0.55 s |
+| Persistent DB (compressed)  | `duckdb tpch-sf30.db`                                       |         0.56 s |
+
+We can observe that the compressed databases about 8× faster compared to the uncompressed in-memory database.

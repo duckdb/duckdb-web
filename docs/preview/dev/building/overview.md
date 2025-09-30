@@ -19,7 +19,7 @@ Additionally, we recommend using the [Ninja build system](https://ninja-build.or
 ## Getting Started
 
 A `Makefile` wraps the build process.
-See [Build Configuration]({% link docs/stable/dev/building/build_configuration.md %}) for targets and configuration flags.
+See [Build Configuration]({% link docs/preview/dev/building/build_configuration.md %}) for targets and configuration flags.
 
 ```bash
 make

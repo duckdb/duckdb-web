@@ -1,9 +1,6 @@
 ---
 layout: docu
 title: Text Functions
-redirect_from:
-- /docs/preview/sql/functions/char
-- /docs/preview/sql/functions/char/
 ---
 
 <!-- markdownlint-disable MD001 -->
@@ -654,8 +651,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `rtrim('    test  ')` |
-| **Result** | `    test` |
+| **Example 1** | `rtrim('test  ')` |
+| **Result** | `test` |
 | **Example 2** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 

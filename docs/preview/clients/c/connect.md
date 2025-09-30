@@ -45,7 +45,13 @@ duckdb_close(&db);
 <span class="kt">void</span> <a href="#duckdb_interrupt"><span class="nf">duckdb_interrupt</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
 <span class="kt">duckdb_query_progress_type</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
 <span class="kt">void</span> <a href="#duckdb_disconnect"><span class="nf">duckdb_disconnect</span></a>(<span class="kt">duckdb_connection</span> *<span class="nv">connection</span>);
+<span class="kt">void</span> <a href="#duckdb_connection_get_client_context"><span class="nf">duckdb_connection_get_client_context</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">duckdb_client_context</span> *<span class="nv">out_context</span>);
+<span class="kt">void</span> <a href="#duckdb_connection_get_arrow_options"><span class="nf">duckdb_connection_get_arrow_options</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">duckdb_arrow_options</span> *<span class="nv">out_arrow_options</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_client_context_get_connection_id"><span class="nf">duckdb_client_context_get_connection_id</span></a>(<span class="nv">duckdb_client_context</span> <span class="nv">context</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_client_context"><span class="nf">duckdb_destroy_client_context</span></a>(<span class="nv">duckdb_client_context</span> *<span class="nv">context</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_arrow_options"><span class="nf">duckdb_destroy_arrow_options</span></a>(<span class="nv">duckdb_arrow_options</span> *<span class="nv">arrow_options</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_library_version"><span class="nf">duckdb_library_version</span></a>();
+<span class="kt">duckdb_value</span> <a href="#duckdb_get_table_names"><span class="nf">duckdb_get_table_names</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">bool</span> <span class="nv">qualified</span>);
 </code></pre></div></div>
 
 #### `duckdb_create_instance_cache`
@@ -269,6 +275,98 @@ Closes the specified connection and de-allocates all memory allocated for that c
 
 <br>
 
+#### `duckdb_connection_get_client_context`
+
+Retrieves the client context of the connection.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_connection_get_client_context</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="nv">duckdb_client_context</span> *<span class="nv">out_context
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `connection`: The connection.
+* `out_context`: The client context of the connection. Must be destroyed with `duckdb_destroy_client_context`.
+
+<br>
+
+#### `duckdb_connection_get_arrow_options`
+
+Retrieves the arrow options of the connection.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_connection_get_arrow_options</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="nv">duckdb_arrow_options</span> *<span class="nv">out_arrow_options
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `connection`: The connection.
+
+<br>
+
+#### `duckdb_client_context_get_connection_id`
+
+Returns the connection id of the client context.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_client_context_get_connection_id</span>(<span class="nv">
+</span>  <span class="nv">duckdb_client_context</span> <span class="nv">context
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `context`: The client context.
+
+##### Return Value
+
+The connection id of the client context.
+
+<br>
+
+#### `duckdb_destroy_client_context`
+
+Destroys the client context and deallocates its memory.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_client_context</span>(<span class="nv">
+</span>  <span class="nv">duckdb_client_context</span> *<span class="nv">context
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `context`: The client context to destroy.
+
+<br>
+
+#### `duckdb_destroy_arrow_options`
+
+Destroys the arrow options and deallocates its memory.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_arrow_options</span>(<span class="nv">
+</span>  <span class="nv">duckdb_arrow_options</span> *<span class="nv">arrow_options
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `arrow_options`: The arrow options to destroy.
+
+<br>
+
 #### `duckdb_library_version`
 
 Returns the version of the linked DuckDB, with a version postfix for dev versions
@@ -281,4 +379,31 @@ Usually used for developing C extensions that must return this for a compatibili
 </span>  <span class="nv">
 </span>);
 </code></pre></div></div>
+<br>
+
+#### `duckdb_get_table_names`
+
+Get the list of (fully qualified) table names of the query.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_get_table_names</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
+</span>  <span class="kt">bool</span> <span class="nv">qualified
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `connection`: The connection for which to get the table names.
+* `query`: The query for which to get the table names.
+* `qualified`: Returns fully qualified table names (catalog.schema.table), if set to true, else only the (not
+escaped) table names.
+
+##### Return Value
+
+A duckdb_value of type VARCHAR[] containing the (fully qualified) table names of the query. Must be destroyed
+with duckdb_destroy_value.
+
 <br>

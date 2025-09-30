@@ -17,7 +17,7 @@ To install `ducklake`, run:
 INSTALL ducklake;
 ```
 
-The `ducklake` extension will be transparently [autoloaded]({% link docs/stable/core_extensions/overview.md %}#autoloading-extensions) on first use in an `ATTACH` clause.
+The `ducklake` extension will be transparently [autoloaded]({% link docs/preview/core_extensions/overview.md %}#autoloading-extensions) on first use in an `ATTACH` clause.
 If you would like to load it manually, run:
 
 ```sql

@@ -28,6 +28,7 @@ The table function API can be used to define a table function that can then be c
 ### Table Function Bind
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#duckdb_bind_get_extra_info"><span class="nf">duckdb_bind_get_extra_info</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> <a href="#duckdb_table_function_get_client_context"><span class="nf">duckdb_table_function_get_client_context</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="nv">duckdb_client_context</span> *<span class="nv">out_context</span>);
 <span class="kt">void</span> <a href="#duckdb_bind_add_result_column"><span class="nf">duckdb_bind_add_result_column</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_bind_get_parameter_count"><span class="nf">duckdb_bind_get_parameter_count</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_bind_get_parameter"><span class="nf">duckdb_bind_get_parameter</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
@@ -169,7 +170,7 @@ Assigns extra information to the table function that can be fetched during bindi
 
 * `table_function`: The table function
 * `extra_info`: The extra information
-* `destroy`: The callback that will be called to destroy the bind data (if any)
+* `destroy`: The callback that will be called to destroy the extra information (if any)
 
 <br>
 
@@ -320,6 +321,25 @@ The extra info
 
 <br>
 
+#### `duckdb_table_function_get_client_context`
+
+Retrieves the client context of the bind info of a table function.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_get_client_context</span>(<span class="nv">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="nv">duckdb_client_context</span> *<span class="nv">out_context
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `info`: The bind info object of the table function.
+* `out_context`: The client context of the bind info. Must be destroyed with `duckdb_destroy_client_context`.
+
+<br>
+
 #### `duckdb_bind_add_result_column`
 
 Adds a result column to the output of the table function.
@@ -414,7 +434,8 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_bind_set_bind_data`
 
-Sets the user-provided bind data in the bind object. This object can be retrieved again during execution.
+Sets the user-provided bind data in the bind object of the table function.
+This object can be retrieved again during execution.
 
 ##### Syntax
 
@@ -427,9 +448,9 @@ Sets the user-provided bind data in the bind object. This object can be retrieve
 
 ##### Parameters
 
-* `info`: The info object
+* `info`: The bind info of the table function.
 * `bind_data`: The bind data object.
-* `destroy`: The callback that will be called to destroy the bind data (if any)
+* `destroy`: The callback to destroy the bind data (if any).
 
 <br>
 
@@ -455,7 +476,7 @@ Sets the cardinality estimate for the table function, used for optimization.
 
 #### `duckdb_bind_set_error`
 
-Report that an error has occurred while calling bind.
+Report that an error has occurred while calling bind on a table function.
 
 ##### Syntax
 
@@ -647,9 +668,9 @@ The extra info
 
 #### `duckdb_function_get_bind_data`
 
-Gets the bind data set by `duckdb_bind_set_bind_data` during the bind.
+Gets the table function's bind data set by `duckdb_bind_set_bind_data`.
 
-Note that the bind data should be considered as read-only.
+Note that the bind data is read-only.
 For tracking state, use the init data instead.
 
 ##### Syntax
@@ -661,11 +682,11 @@ For tracking state, use the init data instead.
 
 ##### Parameters
 
-* `info`: The info object
+* `info`: The function info object.
 
 ##### Return Value
 
-The bind data object
+The bind data object.
 
 <br>
 

@@ -112,7 +112,7 @@ Subquery returns 2 columns - expected 1
 
 ## `IN` String
 
-The `IN` operator can be used as a shorthand for the [`contains` string function]({% link docs/stable/sql/functions/text.md %}#containsstring-search_string).
+The `IN` operator can be used as a shorthand for the [`contains` string function]({% link docs/preview/sql/functions/text.md %}#containsstring-search_string).
 For example:
 
 ```sql

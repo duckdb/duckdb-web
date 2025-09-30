@@ -52,10 +52,10 @@ docs:
 
     
 
-extension_star_count: 36
-extension_star_count_pretty: 36
-extension_download_count: 611
-extension_download_count_pretty: 611
+extension_star_count: 38
+extension_star_count_pretty: 38
+extension_download_count: 616
+extension_download_count_pretty: 616
 image: '/images/community_extensions/social_preview/preview_community_extension_nanodbc.png'
 layout: community_extension_doc
 ---
