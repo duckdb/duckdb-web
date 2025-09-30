@@ -8,16 +8,16 @@ excerpt: |
 extension:
   name: msolap
   description: Extension that allows DuckDB to connect to Microsoft SQL Server Analysis Services (SSAS) and other OLAP data sources using the MSOLAP provider
-  version: 0.1.2
+  version: 0.1.2 
   language: C++
   build: cmake
-  excluded_platforms: "linux_amd64;linux_arm64;linux_amd64_musl;osx_amd64;osx_arm64;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw"
+  excluded_platforms: "linux_arm64;linux_amd64_musl;osx_amd64;osx_arm64;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw"
   license: MIT
   maintainers:
     - Hugoberry
 repo:
   github: Hugoberry/duckdb-msolap-extension
-  ref: a35dcecb20794a26534b028cc1f8bd0209f28c8d
+  ref: 84e1b00e2e42a905c0efd5eb55f8bef1cefa6173
 docs:
   hello_world: |
     -- Execute a simple DAX query against a local SSAS instance
@@ -43,10 +43,10 @@ docs:
     
     *Note:* Current limitations include Windows-only support due to COM dependencies, limited data type conversion for complex OLAP types, and limited support for calculated measures and hierarchies. The extension requires the installation of the Microsoft OLEDB provider for Analysis Services (MSOLAP.8).
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 426
-extension_download_count_pretty: 426
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_msolap.png'
 layout: community_extension_doc
 ---
@@ -74,6 +74,6 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| msolap        | table         | NULL        | NULL    | []       |
+| msolap        | table         | NULL        | NULL    |          |
 
 

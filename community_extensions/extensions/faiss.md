@@ -22,7 +22,7 @@ extension:
 
 repo:
   github: duckdb-faiss-ext/duckdb-faiss-ext
-  ref: v0.12.0
+  ref: 9ccd224c66ae16f55693d633040e5c756e414cbf
 
 docs:
   hello_world: |
@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 486
-extension_download_count_pretty: 486
+extension_download_count: 70
+extension_download_count_pretty: 70
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---
@@ -84,7 +84,6 @@ LOAD {{ page.extension.name }};
 | faiss_destroy           | table         | NULL        | NULL    |          |
 | faiss_load              | table         | NULL        | NULL    |          |
 | faiss_manual_train      | table         | NULL        | NULL    |          |
-| faiss_save              | table         | NULL        | NULL    |          |
 | faiss_search            | scalar        | NULL        | NULL    |          |
 | faiss_search_filter     | scalar        | NULL        | NULL    |          |
 | faiss_search_filter_set | scalar        | NULL        | NULL    |          |
