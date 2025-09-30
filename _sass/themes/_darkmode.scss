@@ -113,6 +113,9 @@ html.darkmode body{
 	&.installation .selection-options .option/*:not(.active)*/ .symbol img{
 		filter: invert(1);
 	}
+	&.installation .installation-instructions #result .more a::after{
+		filter: invert(1);
+	}
 
 	
 	/** BLOG **/

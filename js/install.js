@@ -32,10 +32,22 @@
     };
 
     function detectPlatform() {
-      var p = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
-      if (/Mac/i.test(p)) return 'macos';
-      if (/Win/i.test(p)) return 'windows';
-      if (/Linux|X11/i.test(p)) return 'linux';
+      if (window.UAParser) {
+        try {
+          var result = new UAParser().getResult();
+          var osName = (result && result.os && result.os.name) ? String(result.os.name).toLowerCase() : '';
+          if (osName) {
+            if (/mac\s?os|macos|os\s?x/.test(osName)) return 'macos';
+            if (/windows/.test(osName)) return 'windows';
+            if (/linux|ubuntu|debian|fedora|arch|gentoo|suse|centos/.test(osName)) return 'linux';
+          }
+        } catch (e) {}
+      }
+
+      var fallback = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
+      if (/Mac/i.test(fallback)) return 'macos';
+      if (/Win/i.test(fallback)) return 'windows';
+      if (/Linux|X11/i.test(fallback)) return 'linux';
       return 'macos';
     }
 
@@ -194,6 +206,11 @@
 
       var platLabel = labelFor('platform');
       var arch = (state.platform === 'macos') ? '' : (state.architecture ? String(state.architecture) : '');
+      var needsPlatform = environmentRequiresPlatform(state.environment);
+      if (!needsPlatform) {
+        platLabel = '';
+        arch = '';
+      }
       var parts = [];
       if (platLabel) parts.push(platLabel);
       if (arch) parts.push(arch);
@@ -228,6 +245,34 @@
     }
 
     function updateFoldouts(animate) {
+      var needsPlatform = environmentRequiresPlatform(state.environment);
+
+      if (!needsPlatform) {
+        setFoldoutOpen($foldPlat, false, !!animate);
+        $foldPlat.addClass('disabled').attr('aria-disabled', 'true');
+        $rgPlat.attr('aria-disabled', 'true');
+        $rgPlat.find('.option')
+          .attr('aria-disabled', 'true')
+          .attr('tabindex', '-1');
+        closeInlineArchGroups();
+        $container.find('.arch-inline').removeClass('error');
+        if ($hint && $hint.length) $hint.hide();
+        return;
+      }
+
+      $foldPlat.removeClass('disabled').removeAttr('aria-disabled');
+      $rgPlat.removeAttr('aria-disabled');
+      var $platOptions = $rgPlat.find('.option');
+      $platOptions.attr('aria-disabled', 'false');
+      var $activePlat = $platOptions.filter('.active').first();
+      if ($activePlat.length) {
+        $platOptions.not($activePlat).attr('tabindex', '-1');
+        $activePlat.attr('tabindex', '0');
+      } else {
+        $platOptions.attr('tabindex', '-1');
+        $platOptions.first().attr('tabindex', '0');
+      }
+
       var shouldClosePlat = !!state.platform && (state.platform === 'macos' || !!state.architecture);
       setFoldoutOpen($foldPlat, !shouldClosePlat, !!animate);
     }
@@ -274,6 +319,14 @@
       if ($templates.find(selPlatEnvNoArch).length) return false;
       // otherwise architecture is required
       return true;
+    }
+
+    function environmentRequiresPlatform(environment) {
+      if (!environment) return false;
+      var selEnvOnly = '[data-environment="' + cssEscape(environment) + '"]:not([data-platform])';
+      if ($templates.find(selEnvOnly).length) return false;
+      var selWithPlatform = '[data-environment="' + cssEscape(environment) + '"][data-platform]';
+      return $templates.find(selWithPlatform).length > 0;
     }
 
     function render() {
@@ -494,6 +547,7 @@
 
       $container.on('click', '.selection-foldout', function () {
         var $fold = $(this);
+        if ($fold.hasClass('disabled')) return;
         if (!$fold.hasClass('open')) {
           var $content = $fold.children('.selection-content');
           $content.stop(true, true).slideDown(150);
@@ -504,6 +558,7 @@
       $container.on('click', '.selection-head', function (e) {
         e.stopPropagation();
         var $fold = $(this).closest('.selection-foldout');
+        if ($fold.hasClass('disabled')) return;
         var $content = $fold.children('.selection-content');
         if ($fold.hasClass('open')) {
           $content.stop(true, true).slideUp(150);
