@@ -44,9 +44,11 @@ duckdb_appender_destroy(&appender);
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_appender_create"><span class="nf">duckdb_appender_create</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_create_ext"><span class="nf">duckdb_appender_create_ext</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">catalog</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_create_query"><span class="nf">duckdb_appender_create_query</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">idx_t</span> <span class="nv">column_count</span>, <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">column_names</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_appender_column_count"><span class="nf">duckdb_appender_column_count</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_appender_column_type"><span class="nf">duckdb_appender_column_type</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_appender_error"><span class="nf">duckdb_appender_error</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="nv">duckdb_error_data</span> <a href="#duckdb_appender_error_data"><span class="nf">duckdb_appender_error_data</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_flush"><span class="nf">duckdb_appender_flush</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_close"><span class="nf">duckdb_appender_close</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_destroy"><span class="nf">duckdb_appender_destroy</span></a>(<span class="kt">duckdb_appender</span> *<span class="nv">appender</span>);
@@ -141,6 +143,41 @@ Note that the object must be destroyed with `duckdb_appender_destroy`.
 
 <br>
 
+#### `duckdb_appender_create_query`
+
+Creates an appender object that executes the given query with any data appended to it.
+
+Note that the object must be destroyed with `duckdb_appender_destroy`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_create_query</span>(<span class="nv">
+</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">column_count</span>,<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">column_names</span>,<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> *<span class="nv">out_appender
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `connection`: The connection context to create the appender in.
+* `query`: The query to execute, can be an INSERT, DELETE, UPDATE or MERGE INTO statement.
+* `column_count`: The number of columns to append.
+* `types`: The types of the columns to append.
+* `table_name`: (optionally) the table name used to refer to the appended data, defaults to "appended_data".
+* `column_names`: (optionally) the list of column names, defaults to "col1", "col2", ...
+* `out_appender`: The resulting appender object.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
 #### `duckdb_appender_column_count`
 
 Returns the number of columns that belong to the appender.
@@ -191,7 +228,10 @@ The `duckdb_logical_type` of the column.
 
 #### `duckdb_appender_error`
 
-Returns the error message associated with the given appender.
+> Warning Deprecation notice. This method is scheduled for removal in a future release.
+Use duckdb_appender_error_data instead.
+
+Returns the error message associated with the appender.
 If the appender has no error message, this returns `nullptr` instead.
 
 The error message should not be freed. It will be de-allocated when `duckdb_appender_destroy` is called.
@@ -213,11 +253,33 @@ The error message, or `nullptr` if there is none.
 
 <br>
 
+#### `duckdb_appender_error_data`
+
+Returns the error data associated with the appender.
+Must be destroyed with duckdb_destroy_error_data.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_error_data</span> <span class="nv">duckdb_appender_error_data</span>(<span class="nv">
+</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `appender`: The appender to get the error data from.
+
+##### Return Value
+
+The error data.
+
+<br>
+
 #### `duckdb_appender_flush`
 
 Flush the appender to the table, forcing the cache of the appender to be cleared. If flushing the data triggers a
 constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
-It is not possible to append more values. Call duckdb_appender_error to obtain the error message followed by
+It is not possible to append more values. Call duckdb_appender_error_data to obtain the error data followed by
 duckdb_appender_destroy to destroy the invalidated appender.
 
 ##### Syntax
@@ -241,7 +303,7 @@ duckdb_appender_destroy to destroy the invalidated appender.
 
 Closes the appender by flushing all intermediate states and closing it for further appends. If flushing the data
 triggers a constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
-Call duckdb_appender_error to obtain the error message followed by duckdb_appender_destroy to destroy the invalidated
+Call duckdb_appender_error_data to obtain the error data followed by duckdb_appender_destroy to destroy the invalidated
 appender.
 
 ##### Syntax

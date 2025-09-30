@@ -656,9 +656,9 @@ GEOMETRY ST_CollectionExtract (geom GEOMETRY)
 Extracts geometries from a GeometryCollection into a typed multi geometry.
 
 If the input geometry is a GeometryCollection, the function will return a multi geometry, determined by the `type` parameter.
-- if `type` = 1, returns a MultiPoint containing all the Points in the collection
-- if `type` = 2, returns a MultiLineString containing all the LineStrings in the collection
-- if `type` = 3, returns a MultiPolygon containing all the Polygons in the collection
+- if `type` = 1, returns a MultiPoint containg all the Points in the collection
+- if `type` = 2, returns a MultiLineString containg all the LineStrings in the collection
+- if `type` = 3, returns a MultiPolygon containg all the Polygons in the collection
 
 If no `type` parameters is provided, the function will return a multi geometry matching the highest "surface dimension"
 of the contained geometries. E.g. if the collection contains only Points, a MultiPoint will be returned. But if the
@@ -1488,7 +1488,7 @@ UINTEGER ST_Hilbert (box BOX_2DF, bounds BOX_2DF)
 
 Encodes the X and Y values as the hilbert curve index for a curve covering the given bounding box.
 If a geometry is provided, the center of the approximate bounding box is used as the point to encode.
-If no bounding box is provided, the hilbert curve index is mapped to the full range of a single-precision float.
+If no bounding box is provided, the hilbert curve index is mapped to the full range of a single-presicion float.
 For the BOX_2D and BOX_2DF variants, the center of the box is used as the point to encode.
 
 ----
@@ -3378,4 +3378,3 @@ FROM st_read_meta('../../tmp/data/amsterdam_roads.fgb');
 ```
 
 ----
-

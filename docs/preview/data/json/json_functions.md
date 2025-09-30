@@ -494,7 +494,7 @@ The resulting table has the following columns:
 | `rowid`   | `BIGINT` (Virtual) | The row identifier                          |
 
 These functions are analogous to [SQLite's functions with the same name](https://www.sqlite.org/json1.html#jeach).
-Note that, because the `json_each` and `json_tree` functions refer to previous subqueries in the same FROM clause, they are [*lateral joins*]({% link docs/stable/sql/query_syntax/from.md %}#lateral-joins).
+Note that, because the `json_each` and `json_tree` functions refer to previous subqueries in the same FROM clause, they are [*lateral joins*]({% link docs/preview/sql/query_syntax/from.md %}#lateral-joins).
 
 Examples:
 

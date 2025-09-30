@@ -62,6 +62,10 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_param_logical_type"><span class="nf">duckdb_param_logical_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_clear_bindings"><span class="nf">duckdb_clear_bindings</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
 <span class="kt">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_prepared_statement_column_count"><span class="nf">duckdb_prepared_statement_column_count</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_prepared_statement_column_name"><span class="nf">duckdb_prepared_statement_column_name</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_prepared_statement_column_logical_type"><span class="nf">duckdb_prepared_statement_column_logical_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
+<span class="kt">duckdb_type</span> <a href="#duckdb_prepared_statement_column_type"><span class="nf">duckdb_prepared_statement_column_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
 </code></pre></div></div>
 
 #### `duckdb_prepare`
@@ -257,5 +261,104 @@ Returns the statement type of the statement to be executed
 ##### Return Value
 
 duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
+
+<br>
+
+#### `duckdb_prepared_statement_column_count`
+
+Returns the number of columns present in a the result of the prepared statement. If any of the column types are invalid,
+the result will be 1.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_prepared_statement_column_count</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement.
+
+##### Return Value
+
+The number of columns present in the result of the prepared statement.
+
+<br>
+
+#### `duckdb_prepared_statement_column_name`
+
+Returns the name of the specified column of the result of the prepared_statement.
+The returned string should be freed using `duckdb_free`.
+
+Returns `nullptr` if the column is out of range.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_prepared_statement_column_name</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement.
+* `col_idx`: The column index.
+
+##### Return Value
+
+The column name of the specified column.
+
+<br>
+
+#### `duckdb_prepared_statement_column_logical_type`
+
+Returns the column type of the specified column of the result of the prepared_statement.
+
+Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
+The return type of this call should be destroyed with `duckdb_destroy_logical_type`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_prepared_statement_column_logical_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement to fetch the column type from.
+* `col_idx`: The column index.
+
+##### Return Value
+
+The logical type of the specified column.
+
+<br>
+
+#### `duckdb_prepared_statement_column_type`
+
+Returns the column type of the specified column of the result of the prepared_statement.
+
+Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_prepared_statement_column_type</span>(<span class="nv">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement to fetch the column type from.
+* `col_idx`: The column index.
+
+##### Return Value
+
+The type of the specified column.
 
 <br>

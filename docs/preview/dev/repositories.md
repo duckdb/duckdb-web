@@ -13,10 +13,11 @@ Several components of DuckDB are maintained in separate repositories.
 ## Clients
 
 * [`duckdb-java`](https://github.com/duckdb/duckdb-java): Java (JDBC) client
-* [`duckdb-node`](https://github.com/duckdb/duckdb-node): Node.js client, first iteration
-* [`duckdb-node-neo`](https://github.com/duckdb/duckdb-node-neo): Node.js client, second iteration
+* [`duckdb-node`](https://github.com/duckdb/duckdb-node): Node.js client (deprecated)
+* [`duckdb-node-neo`](https://github.com/duckdb/duckdb-node-neo): Node.js client
 * [`duckdb-odbc`](https://github.com/duckdb/duckdb-odbc): ODBC client
 * [`duckdb-pyodide`](https://github.com/duckdb/duckdb-pyodide): Pyodide client
+* [`duckdb-python`](https://github.com/duckdb/duckdb-python): Python client
 * [`duckdb-r`](https://github.com/duckdb/duckdb-r): R client
 * [`duckdb-rs`](https://github.com/duckdb/duckdb-rs): Rust client
 * [`duckdb-swift`](https://github.com/duckdb/duckdb-swift): Swift client
@@ -34,6 +35,7 @@ Several components of DuckDB are maintained in separate repositories.
 
 ## Extensions
 
+* [`duckdb-ui`](https://github.com/duckdb/duckdb-ui): web UI for DuckDB
 * Core extension repositories are linked in the [Official Extensions page]({% link docs/preview/core_extensions/overview.md %})
 * Community extensions are served from the [Community Extensions repository]({% link community_extensions/index.md %})
 

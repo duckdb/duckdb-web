@@ -10,16 +10,16 @@ The `SELECT` clause specifies the list of columns that will be returned by the q
 
 ## Examples
 
-Select all columns from the table called `table_name`:
+Select all columns from the table called `tbl`:
 
 ```sql
-SELECT * FROM table_name;
+SELECT * FROM tbl;
 ```
 
 Perform arithmetic on the columns in a table, and provide an alias:
 
 ```sql
-SELECT col1 + col2 AS res, sqrt(col1) AS root FROM table_name;
+SELECT col1 + col2 AS res, sqrt(col1) AS root FROM tbl;
 ```
 
 Use prefix aliases:
@@ -28,7 +28,7 @@ Use prefix aliases:
 SELECT
     res: col1 + col2,
     root: sqrt(col1)
-FROM table_name;
+FROM tbl;
 ```
 
 Select all unique cities from the `addresses` table:
@@ -85,11 +85,11 @@ The `SELECT` clause contains a list of expressions that specify the result of a 
 
 ### Star Expressions
 
-Select all columns from the table called `table_name`:
+Select all columns from the table called `tbl`:
 
 ```sql
 SELECT *
-FROM table_name;
+FROM tbl;
 ```
 
 Select all columns matching the given regular expression from the table:

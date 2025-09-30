@@ -4,8 +4,7 @@ railroad: statements/checkpoint.js
 title: CHECKPOINT Statement
 ---
 
-The `CHECKPOINT` statement synchronizes data in the write-ahead log (WAL) to the database data file. For in-memory
-databases this statement will succeed with no effect.
+The `CHECKPOINT` statement synchronizes data in the write-ahead log (WAL) to the database data file.
 
 ## Examples
 
@@ -26,6 +25,19 @@ Abort any in-progress transactions to synchronize the data:
 ```sql
 FORCE CHECKPOINT;
 ```
+
+## Checkpointing In-Memory Tables
+
+Starting with v1.4.0, in-memory tables support checkpointing. This has two key benefits:
+
+* In-memory tables also support compression. This is disabled by default – you can turn it on using:
+
+  ```sql
+  ATTACH ':memory:' AS memory_compressed (COMPRESS);
+  USE memory_compressed;
+  ```
+
+* Checkpointing triggers vacuuming deleted rows, allowing space to be reclaimed after deletes/truncation.
 
 ## Syntax
 

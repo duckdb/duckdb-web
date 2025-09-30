@@ -25,12 +25,13 @@ The value class represents a single value of any type.
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_int64"><span class="nf">duckdb_create_int64</span></a>(<span class="kt">int64_t</span> <span class="nv">val</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_hugeint"><span class="nf">duckdb_create_hugeint</span></a>(<span class="kt">duckdb_hugeint</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_uhugeint"><span class="nf">duckdb_create_uhugeint</span></a>(<span class="kt">duckdb_uhugeint</span> <span class="nv">input</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_varint"><span class="nf">duckdb_create_varint</span></a>(<span class="nv">duckdb_varint</span> <span class="nv">input</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_bignum"><span class="nf">duckdb_create_bignum</span></a>(<span class="nv">duckdb_bignum</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_decimal"><span class="nf">duckdb_create_decimal</span></a>(<span class="kt">duckdb_decimal</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_float"><span class="nf">duckdb_create_float</span></a>(<span class="kt">float</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_double"><span class="nf">duckdb_create_double</span></a>(<span class="kt">double</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_date"><span class="nf">duckdb_create_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_time"><span class="nf">duckdb_create_time</span></a>(<span class="kt">duckdb_time</span> <span class="nv">input</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_time_ns"><span class="nf">duckdb_create_time_ns</span></a>(<span class="nv">duckdb_time_ns</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_time_tz_value"><span class="nf">duckdb_create_time_tz_value</span></a>(<span class="kt">duckdb_time_tz</span> <span class="nv">value</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_timestamp"><span class="nf">duckdb_create_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">input</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_timestamp_tz"><span class="nf">duckdb_create_timestamp_tz</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">input</span>);
@@ -52,12 +53,13 @@ The value class represents a single value of any type.
 <span class="kt">uint64_t</span> <a href="#duckdb_get_uint64"><span class="nf">duckdb_get_uint64</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_hugeint</span> <a href="#duckdb_get_hugeint"><span class="nf">duckdb_get_hugeint</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_uhugeint</span> <a href="#duckdb_get_uhugeint"><span class="nf">duckdb_get_uhugeint</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
-<span class="nv">duckdb_varint</span> <a href="#duckdb_get_varint"><span class="nf">duckdb_get_varint</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
+<span class="nv">duckdb_bignum</span> <a href="#duckdb_get_bignum"><span class="nf">duckdb_get_bignum</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_decimal</span> <a href="#duckdb_get_decimal"><span class="nf">duckdb_get_decimal</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">float</span> <a href="#duckdb_get_float"><span class="nf">duckdb_get_float</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">double</span> <a href="#duckdb_get_double"><span class="nf">duckdb_get_double</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_date</span> <a href="#duckdb_get_date"><span class="nf">duckdb_get_date</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_time</span> <a href="#duckdb_get_time"><span class="nf">duckdb_get_time</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
+<span class="nv">duckdb_time_ns</span> <a href="#duckdb_get_time_ns"><span class="nf">duckdb_get_time_ns</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_time_tz</span> <a href="#duckdb_get_time_tz"><span class="nf">duckdb_get_time_tz</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_timestamp</span> <a href="#duckdb_get_timestamp"><span class="nf">duckdb_get_timestamp</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
 <span class="kt">duckdb_timestamp</span> <a href="#duckdb_get_timestamp_tz"><span class="nf">duckdb_get_timestamp_tz</span></a>(<span class="kt">duckdb_value</span> <span class="nv">val</span>);
@@ -73,6 +75,8 @@ The value class represents a single value of any type.
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_struct_value"><span class="nf">duckdb_create_struct_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_list_value"><span class="nf">duckdb_create_list_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_array_value"><span class="nf">duckdb_create_array_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_map_value"><span class="nf">duckdb_create_map_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">map_type</span>, <span class="kt">duckdb_value</span> *<span class="nv">keys</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">entry_count</span>);
+<span class="kt">duckdb_value</span> <a href="#duckdb_create_union_value"><span class="nf">duckdb_create_union_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">union_type</span>, <span class="kt">idx_t</span> <span class="nv">tag_index</span>, <span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_get_map_size"><span class="nf">duckdb_get_map_size</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_key"><span class="nf">duckdb_get_map_key</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_map_value"><span class="nf">duckdb_get_map_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
@@ -83,6 +87,7 @@ The value class represents a single value of any type.
 <span class="kt">duckdb_value</span> <a href="#duckdb_create_enum_value"><span class="nf">duckdb_create_enum_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
 <span class="kt">uint64_t</span> <a href="#duckdb_get_enum_value"><span class="nf">duckdb_get_enum_value</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_struct_child"><span class="nf">duckdb_get_struct_child</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">char</span> *<a href="#duckdb_value_to_string"><span class="nf">duckdb_value_to_string</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
 </code></pre></div></div>
 
 #### `duckdb_destroy_value`
@@ -169,7 +174,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_int8`
 
-Creates a value from a int8_t (a tinyint)
+Creates a value from an int8_t (a tinyint)
 
 ##### Syntax
 
@@ -211,7 +216,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_int16`
 
-Creates a value from a int16_t (a smallint)
+Creates a value from an int16_t (a smallint)
 
 ##### Syntax
 
@@ -253,7 +258,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 #### `duckdb_create_int32`
 
-Creates a value from a int32_t (an integer)
+Creates a value from an int32_t (an integer)
 
 ##### Syntax
 
@@ -373,20 +378,20 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
-#### `duckdb_create_varint`
+#### `duckdb_create_bignum`
 
-Creates a VARINT value from a duckdb_varint
+Creates a BIGNUM value from a duckdb_bignum
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_varint</span>(<span class="nv">
-</span>  <span class="nv">duckdb_varint</span> <span class="nv">input
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_bignum</span>(<span class="nv">
+</span>  <span class="nv">duckdb_bignum</span> <span class="nv">input
 </span>);
 </code></pre></div></div>
 
 ##### Parameters
 
-* `input`: The duckdb_varint value
+* `input`: The duckdb_bignum value
 
 ##### Return Value
 
@@ -486,6 +491,27 @@ Creates a value from a time
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_time</span>(<span class="nv">
 </span>  <span class="kt">duckdb_time</span> <span class="nv">input
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `input`: The time value
+
+##### Return Value
+
+The value. This must be destroyed with `duckdb_destroy_value`.
+
+<br>
+
+#### `duckdb_create_time_ns`
+
+Creates a value from a time_ns
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_time_ns</span>(<span class="nv">
+</span>  <span class="nv">duckdb_time_ns</span> <span class="nv">input
 </span>);
 </code></pre></div></div>
 
@@ -830,7 +856,7 @@ Returns the int32_t value of the given value.
 
 ##### Parameters
 
-* `val`: A duckdb_value containing a integer
+* `val`: A duckdb_value containing an integer
 
 ##### Return Value
 
@@ -943,25 +969,25 @@ A duckdb_uhugeint, or MinValue<uhugeint> if the value cannot be converted
 
 <br>
 
-#### `duckdb_get_varint`
+#### `duckdb_get_bignum`
 
-Returns the duckdb_varint value of the given value.
+Returns the duckdb_bignum value of the given value.
 The `data` field must be destroyed with `duckdb_free`.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_varint</span> <span class="nv">duckdb_get_varint</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_bignum</span> <span class="nv">duckdb_get_bignum</span>(<span class="nv">
 </span>  <span class="kt">duckdb_value</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
 ##### Parameters
 
-* `val`: A duckdb_value containing a VARINT
+* `val`: A duckdb_value containing a BIGNUM
 
 ##### Return Value
 
-A duckdb_varint. The `data` field must be destroyed with `duckdb_free`.
+A duckdb_bignum. The `data` field must be destroyed with `duckdb_free`.
 
 <br>
 
@@ -1067,6 +1093,27 @@ Returns the time value of the given value.
 ##### Return Value
 
 A duckdb_time, or MinValue<time> if the value cannot be converted
+
+<br>
+
+#### `duckdb_get_time_ns`
+
+Returns the time_ns value of the given value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_time_ns</span> <span class="nv">duckdb_get_time_ns</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">val
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `val`: A duckdb_value containing a time_ns
+
+##### Return Value
+
+A duckdb_time_ns, or MinValue<time_ns> if the value cannot be converted
 
 <br>
 
@@ -1400,6 +1447,60 @@ The array value, or nullptr, if the child type is `DUCKDB_TYPE_ANY` or `DUCKDB_T
 
 <br>
 
+#### `duckdb_create_map_value`
+
+Creates a map value from a map type and two arrays, one for the keys and one for the values, each of length
+`entry_count`. Must be destroyed with `duckdb_destroy_value`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_map_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">map_type</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> *<span class="nv">keys</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> *<span class="nv">values</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">entry_count
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `map_type`: The map type
+* `keys`: The keys of the map
+* `values`: The values of the map
+* `entry_count`: The number of entrys (key-value pairs) in the map
+
+##### Return Value
+
+The map value, or nullptr, if the parameters are invalid.
+
+<br>
+
+#### `duckdb_create_union_value`
+
+Creates a union value from a union type, a tag index, and a value.
+Must be destroyed with `duckdb_destroy_value`.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_union_value</span>(<span class="nv">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">union_type</span>,<span class="nv">
+</span>  <span class="kt">idx_t</span> <span class="nv">tag_index</span>,<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `union_type`: The union type
+* `tag_index`: The index of the tag of the union
+* `value`: The value of the union for that tag
+
+##### Return Value
+
+The union value, or nullptr, if the parameters are invalid.
+
+<br>
+
 #### `duckdb_get_map_size`
 
 Returns the number of elements in a MAP value.
@@ -1613,5 +1714,26 @@ Returns the STRUCT child at index as a duckdb_value.
 ##### Return Value
 
 The child as a duckdb_value.
+
+<br>
+
+#### `duckdb_value_to_string`
+
+Returns the SQL string representation of the given value.
+
+##### Syntax
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_value_to_string</span>(<span class="nv">
+</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+</span>);
+</code></pre></div></div>
+
+##### Parameters
+
+* `value`: A duckdb_value.
+
+##### Return Value
+
+The SQL string representation as a null-terminated string. The result must be freed with `duckdb_free`.
 
 <br>

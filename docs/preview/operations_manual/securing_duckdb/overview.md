@@ -160,5 +160,5 @@ There is no good reason to run DuckDB as root.
 Securing DuckDB can also be supported via proven means, for example:
 
 * Scoping user privileges via [`chroot`](https://en.wikipedia.org/wiki/Chroot), relying on the operating system
-* Containerization, e.g., Docker and Podman
+* Containerization, e.g., via Docker or Podman. See the [“DuckDB Docker Container” page]({% link docs/preview/operations_manual/duckdb_docker.md %})
 * Running DuckDB in WebAssembly
