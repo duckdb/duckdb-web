@@ -31,10 +31,10 @@ docs:
     scan a vortex file
     `select * from read_vortex('...');`
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 571
-extension_download_count_pretty: 571
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 612
+extension_download_count_pretty: 612
 image: '/images/community_extensions/social_preview/preview_community_extension_vortex.png'
 layout: community_extension_doc
 ---

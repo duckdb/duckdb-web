@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: isaacbrodsky/duckdb-zipfs
-  ref: 0c1f313e5294bed9d28d6d86531dee7997f7f243
+  ref: 3918f81a69ea00b683b70a292ed13d819e550f7d
 
 docs:
   hello_world: |
@@ -27,8 +27,8 @@ docs:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 3542
-extension_download_count_pretty: 3.5k
+extension_download_count: 3323
+extension_download_count_pretty: 3.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_zipfs.png'
 layout: community_extension_doc
 ---
