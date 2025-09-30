@@ -129,12 +129,12 @@ CREATE TABLE MyTaBLe (x INTEGER);
 SELECT * FROM "MyTaBLe";
 CREATE TABLE "PreservedCase" (x INTEGER);
 SELECT * FROM PreservedCase;
-SELECT table_name FROM duckdb_tables();
+SELECT tbl FROM duckdb_tables();
 ```
 
 <div class="monospace_table"></div>
 
-| table_name    |
+| tbl    |
 | ------------- |
 | MyTaBLe       |
 | PreservedCase |
@@ -144,12 +144,12 @@ PostgreSQL's behavior of lowercasing identifiers is accessible using the [`prese
 ```sql
 SET preserve_identifier_case = false;
 CREATE TABLE MyTaBLe (x INTEGER);
-SELECT table_name FROM duckdb_tables();
+SELECT tbl FROM duckdb_tables();
 ```
 
 <div class="monospace_table"></div>
 
-| table_name |
+| tbl |
 | ---------- |
 | mytable    |
 

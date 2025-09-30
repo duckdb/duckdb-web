@@ -14,7 +14,7 @@ Select all rows that where the `id` is equal to 3:
 
 ```sql
 SELECT *
-FROM table_name
+FROM tbl
 WHERE id = 3;
 ```
 
@@ -22,7 +22,7 @@ Select all rows that match the given **case-sensitive** `LIKE` expression:
 
 ```sql
 SELECT *
-FROM table_name
+FROM tbl
 WHERE name LIKE '%mark%';
 ```
 
@@ -30,7 +30,7 @@ Select all rows that match the given **case-insensitive** expression formulated 
 
 ```sql
 SELECT *
-FROM table_name
+FROM tbl
 WHERE name ILIKE '%mark%';
 ```
 
@@ -38,7 +38,7 @@ Select all rows that match the given composite expression:
 
 ```sql
 SELECT *
-FROM table_name
+FROM tbl
 WHERE id = 3 OR id = 7;
 ```
 
