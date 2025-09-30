@@ -274,7 +274,7 @@ FROM (FROM descending10m ORDER BY i);
 SELECT any_value(i)
 FROM (FROM random10m ORDER BY i);
 
--- etc. for 100m and 1000m
+-- and so on for 100m and 1000m
 ```
 
 This query causes DuckDB to evaluate the entire sort, without materializing the whole table as a query result.
