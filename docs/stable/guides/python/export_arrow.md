@@ -17,7 +17,7 @@ my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
 
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow Table
-results = duckdb.sql("SELECT * FROM my_arrow_table").arrow()
+results = duckdb.sql("SELECT * FROM my_arrow_table").fetch_arrow_table()
 ```
 
 ## Export as a RecordBatchReader
@@ -31,22 +31,17 @@ my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
 
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow RecordBatchReader
 chunk_size = 1_000_000
-results = duckdb.sql("SELECT * FROM my_arrow_table").fetch_record_batch(chunk_size)
+result = duckdb.sql("SELECT * FROM my_arrow_table").arrow(chunk_size)
 
 # Loop through the results. A StopIteration exception is thrown when the RecordBatchReader is empty
-while True:
-    try:
-        # Process a single chunk here (just printing as an example)
-        print(results.read_next_batch().to_pandas())
-    except StopIteration:
-        print('Already fetched all batches')
-        break
+while (batch := result.read_next_batch()):
+    # Process a single chunk here
+    print(batch.to_pandas())
 ```
 
 ## Export from Relational API
 
-Arrow objects can also be exported from the Relational API. A relation can be converted to an Arrow table using the `arrow` or `to_arrow_table` functions, or a record batch using `record_batch`.
-A result can be exported to an Arrow table with `arrow` or the alias `fetch_arrow_table`, or to a RecordBatchReader using `fetch_arrow_reader`.
+Arrow objects can also be exported from the Relational API. A relation can be converted to an Arrow table using either the `DuckDBPyRelation.fetch_arrow_table` or `DuckDBPyRelation.to_arrow_table` function, and to an Arrow record batch reader using either the `DuckDBPyRelation.arrow` or `DuckDBPyRelation.fetch_arrow_reader` function.
 
 ```python
 import duckdb
@@ -59,9 +54,15 @@ con.execute('INSERT INTO integers VALUES (0), (1), (2), (3), (4), (5), (6), (7),
 
 # Create a relation from the table and export the entire relation as Arrow
 rel = con.table("integers")
-relation_as_arrow = rel.arrow() # or .to_arrow_table()
+relation_as_arrow = rel.to_arrow_table() # or .fetch_arrow_table()
 
-# Or, calculate a result using that relation and export that result to Arrow
+# Calculate a result using that relation and export that result to Arrow
 res = rel.aggregate("sum(i)").execute()
-result_as_arrow = res.arrow() # or fetch_arrow_table()
+arrow_table = res.to_arrow_table() # or .fetch_arrow_table()
+
+# You can also create an Arrow record batch reader from a relation
+arrow_batch_reader = res.arrow() # or .fetch_arrow_reader()
+while (batch := arrow_batch_reader.read_next_batch()):
+    # Process a single chunk here
+    print(batch.to_pandas())
 ```
