@@ -126,7 +126,7 @@ MERGE INTO people
 | UPDATE       | 3  | Sarah | 89000.0  |
 | DELETE       | 1  | John  | 105000.0 |
 
-In some cases, you may want to perform a different action specifically if the source doesn't meet a specific condition. For example, if we expect that data that is not present on the source shouldn't be present in the target:
+In some cases, you may want to perform a different action specifically if the source doesn't meet a condition. For example, if we expect that data that is not present on the source shouldn't be present in the target:
 
 ```sql
 CREATE TABLE source AS SELECT UNNEST([1,2]) AS id;
