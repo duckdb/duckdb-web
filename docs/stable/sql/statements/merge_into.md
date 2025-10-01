@@ -129,14 +129,15 @@ MERGE INTO people
 In some cases, you may want to perform a different action specifically if the source doesn't meet a condition. For example, if we expect that data that is not present on the source shouldn't be present in the target:
 
 ```sql
-CREATE TABLE source AS SELECT UNNEST([1,2]) AS id;
+CREATE TABLE source AS
+    SELECT unnest([1,2]) AS id;
 
 MERGE INTO source
-  USING (SELECT 1 AS id) target 
-  USING (id)
-  WHEN MATCHED THEN UPDATE
-  WHEN NOT MATCHED BY SOURCE THEN DELETE
-  RETURNING merge_action, *;
+    USING (SELECT 1 AS id) target
+    USING (id)
+    WHEN MATCHED THEN UPDATE
+    WHEN NOT MATCHED BY SOURCE THEN DELETE
+    RETURNING merge_action, *;
 ```
 
 | merge_action | id |
