@@ -130,9 +130,10 @@ In some cases, you may want to perform a different action specifically if the so
 
 ```sql
 CREATE TABLE source AS SELECT UNNEST([1,2]) AS id;
+
 MERGE INTO source
-  USING(SELECT 1 AS id) target 
-  USING(id)
+  USING (SELECT 1 AS id) target 
+  USING (id)
   WHEN MATCHED THEN UPDATE
   WHEN NOT MATCHED BY SOURCE THEN DELETE
   RETURNING merge_action, *;
