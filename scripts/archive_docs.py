@@ -14,16 +14,17 @@ old_stable_version = sys.argv[1]
 def update_new_stable_page(new_stable_file, old_stable_dir):
     # if the old counterpart exists, parse YAML metadata and get the "redirect_from" field
     old_stable_file = new_stable_file.replace("docs/preview", "docs/stable")
-    if os.path.exists(old_stable_file):
-        old_stable_doc = frontmatter.load(old_stable_file)
-        redirect_from_field = old_stable_doc.get("redirect_from")
-    else:
-        redirect_from_field = None
 
     new_stable_doc = frontmatter.load(new_stable_file)
 
     # overwrite the new stable doc's redirect_from field with the one from the old stable document
-    new_stable_doc["redirect_from"] = redirect_from_field
+    if "redirect_from" in new_stable_doc:
+        del new_stable_doc["redirect_from"]
+    if os.path.exists(old_stable_file):
+        old_stable_doc = frontmatter.load(old_stable_file)
+        redirect_from_field = old_stable_doc.get("redirect_from")
+        if redirect_from_field is not None:
+            new_stable_doc["redirect_from"] = redirect_from_field
 
     # replace link tags in the content
     new_stable_doc.content = new_stable_doc.content.replace(
