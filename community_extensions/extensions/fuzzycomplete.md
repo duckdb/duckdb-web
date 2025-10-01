@@ -18,15 +18,15 @@ extension:
   name: fuzzycomplete
   requires_toolchains: rust
   version: 1.0.0
-  excluded_platforms: "linux_amd64_musl"
+  excluded_platforms: "linux_amd64_musl;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;"
 repo:
   github: query-farm/fuzzycomplete
-  ref: 2ac9b48856c6cf0bdbc9411805596526943a2f56
+  ref: 6d3c26da367edad90f9410388f54f5972fb89ac9
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 375
-extension_download_count_pretty: 375
+extension_download_count: 387
+extension_download_count_pretty: 387
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
 layout: community_extension_doc
 ---

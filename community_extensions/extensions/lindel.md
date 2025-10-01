@@ -17,16 +17,16 @@ extension:
     - rustyconover
   name: lindel
   requires_toolchains: rust
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;"
   version: 2025091601
 repo:
   github: query-farm/lindel
-  ref: 8f7bf33a11062a071f129ec0ff9e8c8cda045d00
+  ref: 37ab86240b0d8ad0febd3e343343272489388ed0
 
 extension_star_count: 50
 extension_star_count_pretty: 50
-extension_download_count: 760
-extension_download_count_pretty: 760
+extension_download_count: 756
+extension_download_count_pretty: 756
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---

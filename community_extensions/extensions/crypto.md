@@ -18,15 +18,15 @@ extension:
   name: crypto
   requires_toolchains: rust
   version: 2025091601
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;"
 repo:
   github: query-farm/crypto
-  ref: 790c098c3ce8be48cfb50e215947580bed6d16c9
+  ref: d82ced3066b4934bf8a81f939f53361f6dcb1f43
 
 extension_star_count: 22
 extension_star_count_pretty: 22
-extension_download_count: 9711
-extension_download_count_pretty: 9.7k
+extension_download_count: 9445
+extension_download_count_pretty: 9.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---

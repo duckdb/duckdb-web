@@ -11,7 +11,7 @@ docs:
 extension:
   build: cmake
   description: Evaluate the Rhai scripting language in DuckDB
-  excluded_platforms: windows_amd64_rtools;windows_amd64_mingw;windows_amd64
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;"
   language: C++
   license: Apache-2.0
   maintainers:
@@ -21,11 +21,11 @@ extension:
   version: 2025091601
 repo:
   github: query-farm/evalexpr_rhai
-  ref: 4b5e3c6ae750c223025a9a20919856090c60d675
+  ref: 01d394492b2b1e2a22f8fa7de6546ab170438e9d
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 2295
+extension_download_count: 2269
 extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
