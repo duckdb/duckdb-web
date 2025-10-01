@@ -107,7 +107,7 @@ def adjust_links_in_doc_body(doc_body):
     # replace relative installation page links
     doc_body = re.sub(
             r"\[installation page\]\((.*)?\)",
-            r"[installation page](https://duckdb.org/docs/installation/)",
+            r"[installation page](https://duckdb.org/install)",
             doc_body
         )
 
