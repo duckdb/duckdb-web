@@ -1,0 +1,15 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+body.design{
+	
+	section + section{
+		margin-top: 64px;
+	}
+	
+	.frequentlyaskedquestions{
+		margin-top: 4*8px;
+	}
+	
+}
