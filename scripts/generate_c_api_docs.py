@@ -47,7 +47,7 @@ def is_line_separator(l):
     return l.strip().startswith('//===---')
 
 
-lines = [x.strip() for x in text.split('\n')]
+lines = text.split('\n')
 docs = []
 code = []
 current_group = None

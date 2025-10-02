@@ -763,7 +763,7 @@ Append a duckdb_value to the appender.
 #### `duckdb_append_data_chunk`
 
 Appends a pre-filled data chunk to the specified appender.
-Attempts casting, if the data chunk types do not match the active appender types.
+ Attempts casting, if the data chunk types do not match the active appender types.
 
 ##### Syntax
 
