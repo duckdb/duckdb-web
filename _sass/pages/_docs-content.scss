@@ -560,7 +560,7 @@ body.post {
     details{
         summary{
             color: var(--main-text-secondary-color, #666);
-            display: flex;
+            display: inline;
             gap: 5px;
             align-items: center; 
             cursor: pointer;
@@ -576,6 +576,8 @@ body.post {
                 width: 26px;
                 height: 26px;
                 transition: transform .3s;
+                position: absolute;
+                transform: translate(3px,-2px);
             }
             
             &::marker {
