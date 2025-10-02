@@ -2,8 +2,8 @@
 layout: post
 title: "DuckLake: Simplifying the Lakehouse ecosystem"
 author: "Hannes Mühleisen and Mark Raasveldt (DuckDB Labs)"
-#thumb: "/images/media/thumbs/"
-#image: "/images/media/thumbs/"
+thumb: "/images/media/thumbs/2025-09-09-data-engineering-podcast.png"
+image: "/images/media/thumbs/2025-09-09-data-engineering-podcast.png"
 excerpt: ""
 toc: false
 tags: ["Podcast"]
