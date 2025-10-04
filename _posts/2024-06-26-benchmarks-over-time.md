@@ -49,7 +49,7 @@ This approach avoids many comparison pitfalls, and also provides several valuabl
 
 There are some limitations when looking at the performance of a system over time.
 If a feature is brand new, there is no prior performance to compare to!
-As a result, this post focuses on fundamental workloads rather than DuckDB's ever-increasing set of integrations with different Lakehouse data formats, cloud services, and more.
+As a result, this post focuses on fundamental workloads rather than DuckDB's ever-increasing set of integrations with different lakehouse data formats, cloud services, and more.
 
 The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]({% link docs/stable/sql/dialect/friendly_sql.md %}) additions, as those have also been added more recently.
 (When writing these queries, it felt like going back in time!)

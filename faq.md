@@ -368,7 +368,7 @@ DuckDB has been tested on machines with 100+ CPU cores and terabytes of memory.
 
 DuckDB's native database format also scales for multiple terabytes of data but this needs some planning – see the [“Working with Huge Databases” page]({% link docs/stable/guides/performance/working_with_huge_databases.md %}).
 
-For working with large-scale datasets and/or collaborating on the same dataset, consider using the [DuckLake](https://ducklake.select/) Lakehouse format.
+For working with large-scale datasets and/or collaborating on the same dataset, consider using the [DuckLake](https://ducklake.select/) lakehouse format.
 
 </div>
 
