@@ -256,7 +256,8 @@ or as a number of *groups* (sets of rows with the same sort value).
 The full syntax is shown in the diagram at the top of the page,
 and this diagram visually illustrates computation environment:
 
-<img src="/images/framing.png" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
+<img src="/images/framing-light.png" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto" class="lightmode-img" />
+<img src="/images/framing-dark.png" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto" class="darkmode-img" />
 
 ### Partition and Ordering
 

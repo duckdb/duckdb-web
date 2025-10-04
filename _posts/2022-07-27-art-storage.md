@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Persistent Storage of Adaptive Radix Trees in DuckDB"
+title: "Persistent Storage of Adaptive Radix Trees (ART) in DuckDB"
 author: Pedro Holanda
 excerpt: DuckDB uses Adaptive Radix Tree (ART) Indexes to enforce constraints and to speed up query filters. Up to this point, indexes were not persisted, causing issues like loss of indexing information and high reload times for tables with data constraints. We now persist ART Indexes to disk, drastically diminishing database loading times (up to orders of magnitude), and we no longer lose track of existing indexes. This blog post contains a deep dive into the implementation of ART storage, benchmarks, and future work. Finally, to better understand how our indexes are used, I'm asking you to answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98). It will guide us when defining our future roadmap.
 tags: ["deep dive"]
@@ -8,7 +8,7 @@ tags: ["deep dive"]
 
 <img src="/images/blog/ART/pedro-art.jpg"
      alt="DuckDB ART"
-     width="200"
+     width="400"
  />
 
 DuckDB uses [ART Indexes](https://db.in.tum.de/~leis/papers/ART.pdf) to keep primary key (PK), foreign key (FK), and unique constraints. They also speed up point-queries, range queries (with high selectivity), and joins. Before the bleeding edge version (or V0.4.1, depending on when you are reading this post), DuckDB did not persist ART indexes on disk. When storing a database file, only the information about existing PKs and FKs would be stored, with all other indexes being transient and non-existing when restarting the database. For PKs and FKs, they would be fully reconstructed when reloading the database, creating the inconvenience of high-loading times.
@@ -314,9 +314,15 @@ for i in range (0, 50000000, 10000):
   times.append(time.time() - cur_time)
 ```
 
-<img src="/images/blog/ART/cold-run.png"
+<img src="/images/blog/ART/cold-run-light.png"
      alt="Cold Run"
      width="800"
+     class="lightmode-img"
+ />
+<img src="/images/blog/ART/cold-run-dark.png"
+     alt="Cold Run"
+     width="800"
+     class="darkmode-img"
  />
 
 In general, each query is 3x more expensive in the persisted storage format. This is due to two main reasons:
@@ -327,9 +333,15 @@ In general, each query is 3x more expensive in the persisted storage format. Thi
 
 In this experiment, we execute the same queries as in the previous section.
 
-<img src="/images/blog/ART/hot-run.png"
+<img src="/images/blog/ART/hot-run-light.png"
      alt="Hot Run"
      width="800"
+     class="lightmode-img"
+ />
+<img src="/images/blog/ART/hot-run-dark.png"
+     alt="Hot Run"
+     width="800"
+     class="darkmode-img"
  />
 
 The times in both versions are comparable since all the nodes in the storage version are already set in memory.

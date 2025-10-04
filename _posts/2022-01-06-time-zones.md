@@ -14,7 +14,7 @@ via the new `TIMESTAMP WITH TIME ZONE` (or `TIMESTAMPTZ` for short) data type. T
 
 In this post, we will describe how time works in DuckDB and what time zone functionality has been added.
 
-## What is Time?
+## What Is Time?
 
 >People assume that time is a strict progression of cause to effect,
 >but actually from a non-linear, non-subjective viewpoint
@@ -50,9 +50,15 @@ Binning is probably a familiar idea if you have worked with continuous data:
 You break up a set of values into ranges and map each value to the range (or *bin*) that it falls into.
 Temporal binning is just doing this to instants:
 
-<img src="/images/blog/timezones/tz-instants.svg"
+<img src="/images/blog/timezones/tz-instants-light.svg"
      alt="Time Zone Instants at the Epoch"
      width="600"
+     class="lightmode-img"
+     />
+<img src="/images/blog/timezones/tz-instants-dark.svg"
+     alt="Time Zone Instants at the Epoch"
+     width="600"
+     class="darkmode-img"
      />
 
 Temporal binning systems are often called *calendars*,
@@ -61,9 +67,15 @@ and temporal binning also includes rules for time.
 These time rules are called *time zones*, and they also impact where the day boundaries used by the calendar fall.
 For example, here is what the binning for a second time zone looks like at the epoch:
 
-<img src="/images/blog/timezones/tz-timezone.svg"
+<img src="/images/blog/timezones/tz-timezone-light.svg"
      alt="Two Time Zones at the Epoch"
      width="600"
+     class="lightmode-img"
+     />
+<img src="/images/blog/timezones/tz-timezone-dark.svg"
+     alt="Two Time Zones at the Epoch"
+     width="600"
+     class="darkmode-img"
      />
 
 The most confusing thing about temporal binning is that there is more than one way to bin time,
@@ -79,9 +91,15 @@ The biggest temporal binning problem most people run into occurs when daylight s
 This example contains a daylight savings time change where the "hour" bin is two hours long!
 To distinguish the two hours, we needed to include another bin containing the offset from UTC:
 
-<img src="/images/blog/timezones/tz-daylight.svg"
+<img src="/images/blog/timezones/tz-daylight-light.svg"
      alt="Two Time Zones at a Daylight Savings Time transition"
      width="600"
+     class="lightmode-img"
+     />
+<img src="/images/blog/timezones/tz-daylight-dark.svg"
+     alt="Two Time Zones at a Daylight Savings Time transition"
+     width="600"
+     class="darkmode-img"
      />
 
 As this example shows, in order to bin the instants correctly, we need to know the binning rules that apply.

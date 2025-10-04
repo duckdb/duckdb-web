@@ -169,7 +169,10 @@ _ = urlretrieve(
 %sqlplot boxplot --table yellow_tripdata_2021-01.parquet --column trip_distance
 ```
 
-![Boxplot of the trip_distance column](/images/trip-distance-boxplot.png)
+<img src="/images/trip-distance-boxplot.png"
+     alt="Boxplot of the trip_distance column"
+     width="500"
+     />
 
 ### Install and Load DuckDB httpfs Extension
 
@@ -202,7 +205,10 @@ This uses `--with short-trips` so JupySQL uses the query defined previously and 
 %sqlplot histogram --table short_trips --column trip_distance --bins 10 --with short_trips
 ```
 
-![Histogram of the trip_distance column](/images/trip-distance-histogram.png)
+<img src="/images/trip-distance-histogram.png"
+     alt="Histogram of the trip_distance column"
+     width="500"
+     />
 
 ## Summary
 
