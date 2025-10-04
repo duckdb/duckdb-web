@@ -205,7 +205,8 @@ Therefore, strings are represented by a pointer, which points into a separate bl
 
 We have changed our heap to also store strings row-by-row in buffer-managed blocks:
 
-<img src="/images/blog/sorting/heap.svg" alt="Each fixed-size row has its own variable-sized row in the heap" title="DuckDB's row layout heap"/>
+<img src="/images/blog/sorting/heap-light.svg" alt="Each fixed-size row has its own variable-sized row in the heap" title="DuckDB's row layout heap" class="lightmode-img" />
+<img src="/images/blog/sorting/heap-dark.svg" alt="Each fixed-size row has its own variable-sized row in the heap" title="DuckDB's row layout heap" class="darkmode-img" />
 
 Each row has an additional 8-byte field `pointer` which points to the start of this row in the heap.
 This is useless in the in-memory representation, but we will see why it is useful for the on-disk representation in just a second.
@@ -220,7 +221,8 @@ The 8-byte `pointer` field is overwritten with an 8-byte `offset` field, denotin
 This technique is called ["pointer swizzling"](https://en.wikipedia.org/wiki/Pointer_swizzling).
 When we swizzle the pointers, the row layout and heap block look like this:
 
-<img src="/images/blog/sorting/heap_swizzled.svg" alt="Pointers are 'swizzled': replaced by offsets" title="DuckDB's 'swizzled' row layout heap"/>
+<img src="/images/blog/sorting/heap_swizzled-light.svg" alt="Pointers are 'swizzled': replaced by offsets" title="DuckDB's 'swizzled' row layout heap" class="lightmode-img" />
+<img src="/images/blog/sorting/heap_swizzled-dark.svg" alt="Pointers are 'swizzled': replaced by offsets" title="DuckDB's 'swizzled' row layout heap" class="darkmode-img" />
 
 The pointers to the subsequent string values are also overwritten with an 8-byte relative offset, denoting how far this string is offset from the start of the row in the heap (hence every `stringA` has an offset of `0`: It is the first string in the row).
 Using relative offsets within rows rather than absolute offsets is very useful during sorting, as these relative offsets stay constant, and do not need to be updated when a row is copied.
@@ -508,7 +510,8 @@ With predicated code, the CPU does not have to predict which instructions to exe
 A simple trick to reduce I/O is zig-zagging through the pairs of blocks to merge in the cascaded merge sort.
 This is illustrated in the image below (dashes arrows indicate in which order the blocks are merged).
 
-<img src="/images/blog/sorting/zigzag.svg" alt="Zig-zagging through the merge sort iterations to reduce read and write operations" title="Zig-zagging to reduce I/O"/>
+<img src="/images/blog/sorting/zigzag-light.svg" alt="Zig-zagging through the merge sort iterations to reduce read and write operations" title="Zig-zagging to reduce I/O" class="lightmode-img" />
+<img src="/images/blog/sorting/zigzag-dark.svg" alt="Zig-zagging through the merge sort iterations to reduce read and write operations" title="Zig-zagging to reduce I/O" class="darkmode-img" />
 
 By zig-zagging through the blocks, we start an iteration by merging the last blocks that were merged in the previous iteration.
 Those blocks are likely still in memory, saving us some precious read/write operations.

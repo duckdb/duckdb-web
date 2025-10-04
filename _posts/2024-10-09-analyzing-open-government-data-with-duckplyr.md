@@ -10,8 +10,13 @@ tags: ["using DuckDB"]
 
 > For the duckplyr documentation, visit [`duckplyr.tidyverse.org`](https://duckplyr.tidyverse.org/).
 
-<img src="/images/blog/duckplyr/duckplyr-logo.svg"
-     width="400"
+<img src="/images/blog/duckplyr/duckplyr-logo-light.svg"
+     width="800"
+     class="lightmode-img"
+     />
+<img src="/images/blog/duckplyr/duckplyr-logo-dark.svg"
+     width="800"
+     class="darkmode-img"
      />
 
 Wrangling data by throwing SQL strings at it is not the most ergonomic way to perform interactive data analysis in R. For a while now, we have been working with the dplyr project team at [Posit](https://posit.co/) (formerly RStudio) and Kirill Müller to develop _duckplyr_. [duckplyr](https://duckplyr.tidyverse.org) is a high-performance drop-in replacement for dplyr, powered by DuckDB. You can read more about duckplyr in the [announcement blog post]({% post_url 2024-04-02-duckplyr %}). In this post, we are going to walk through a challenging real-world use case with duckplyr. For those of you wishing to follow along, we have prepared a [Google Colab notebook](https://colab.research.google.com/drive/1PxvkZ4FpMNtP-CpKpz5hvH-xKgaYC3-S) with all the code snippets in this post. Timings reported below are also from Colab.

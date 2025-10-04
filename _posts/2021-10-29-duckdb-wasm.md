@@ -2,13 +2,19 @@
 layout: post
 title: "DuckDB-Wasm: Efficient Analytical SQL in the Browser"
 author: André Kohn and Dominik Moritz
-excerpt: "[DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it in your browser at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)."
+excerpt: "[DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)."
 tags: ["using DuckDB"]
 ---
 
-<img src="/images/blog/duckdb_wasm.svg"
+<img src="/images/blog/duckdb_wasm-light.svg"
      alt="DuckDB-Wasm logo"
      width="240"
+     class="lightmode-img"
+     />
+<img src="/images/blog/duckdb_wasm-dark.svg"
+     alt="DuckDB-Wasm logo"
+     width="240"
+     class="darkmode-img"
      />
 
 *DuckDB-Wasm is fast! If you're here for performance numbers, head over to our benchmarks at [shell.duckdb.org/versus](https://shell.duckdb.org/versus).*
@@ -156,10 +162,17 @@ DuckDB-Wasm integrates a dedicated filesystem for WebAssembly. DuckDB itself is 
 The following figure shows our current web filesystem in action. The sequence diagram presents a user running a SQL query that scans a single Parquet file. The query is first offloaded to a dedicated web worker through a JavaScript API. There, it is passed to the WebAssembly module that processes the query until the execution hits the `parquet_scan` table function. This table function then reads the file using a buffered filesystem which, in turn, issues paged reads on the web filesystem. This web filesystem then uses an environment-specific runtime to read the file from several possible locations.
 
 <p align="center">
-    <img src="/images/blog/webfs.svg"
+    <img src="/images/blog/webfs-light.svg"
         alt="Example Web Filesystem shown visually"
         title="Web Filesystem"
         style="width:100%; max-width:800px"
+        class="lightmode-img"
+        />
+    <img src="/images/blog/webfs-dark.svg"
+        alt="Example Web Filesystem shown visually"
+        title="Web Filesystem"
+        style="width:100%; max-width:800px"
+        class="darkmode-img"
         />
 </p>
 
