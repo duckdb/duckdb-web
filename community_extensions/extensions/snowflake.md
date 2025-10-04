@@ -66,8 +66,8 @@ docs:
     **Prerequisites:** The Apache Arrow ADBC Snowflake driver must be installed separately before using this extension.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
 
-extension_star_count: 12
-extension_star_count_pretty: 12
+extension_star_count: 13
+extension_star_count_pretty: 13
 extension_download_count: 475
 extension_download_count_pretty: 475
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
