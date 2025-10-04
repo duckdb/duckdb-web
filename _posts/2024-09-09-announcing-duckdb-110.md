@@ -55,7 +55,7 @@ SELECT 1 / 0 AS division_by_zero;
 └──────────────────┘
 ```
 
-[**Error when scalar subquery returns multiple values.**](https://github.com/duckdb/duckdb/pull/13514) Scalar subqueries can only return a single value per input row. Previously, DuckDB would match SQLite's behavior and select an arbitrary row to return when multiple rows were returned. In practice this behavior often led to confusion. Starting with this release, an error is returned instead, matching the behavior of Postgres. The subquery can be wrapped with `ARRAY` to collect all of the results of the subquery in a list.
+[**Error when scalar subquery returns multiple values.**](https://github.com/duckdb/duckdb/pull/13514) Scalar subqueries can only return a single value per input row. Previously, DuckDB would match SQLite's behavior and select an arbitrary row to return when multiple rows were returned. In practice this behavior often led to confusion. Starting with this release, an error is returned instead, matching the behavior of Postgres. The subquery can be wrapped with `array` to collect all of the results of the subquery in a list.
 
 ```sql
 SELECT (SELECT unnest(range(10)));
@@ -67,7 +67,7 @@ an expression - scalar subqueries can only return a single row.
 ```
 
 ```sql
-SELECT ARRAY(SELECT unnest(range(10))) AS subquery_result;
+SELECT array(SELECT unnest(range(10))) AS subquery_result;
 ```
 
 ```text
