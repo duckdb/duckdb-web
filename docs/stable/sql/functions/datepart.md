@@ -13,6 +13,8 @@ The parts to be extracted or manipulated are specified by one of the strings in 
 The example column provides the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
 The entries of the first table may additionally be used as units to construct `INTERVAL`s.
 
+> Except for `julian`, which returns a `DOUBLE`, all parts are extracted as integers. Since there are no infinite integer values in duckdb, `NULL`s are returned for infinite timestamps. 
+
 ## Part Specifiers Usable as Date Part Specifiers and in Intervals
 
 | Specifier | Description | Synonyms | Example |
@@ -40,12 +42,13 @@ The entries of the first table may additionally be used as units to construct `I
 | `era` | Gregorian era (CE/AD, BCE/BC) | | `1` |
 | `isodow` | ISO day of the week (Monday = 1, Sunday = 7) | | `2` |
 | `isoyear` | ISO Year number (Starts on Monday of week containing Jan 4th) | | `2021` |
+| `julian` | Julian Day number. | | `2459430.4998162435` |
 | `timezone_hour` | Time zone offset hour portion | | `0` |
 | `timezone_minute` | Time zone offset minute portion | | `0` |
 | `timezone` | Time zone offset in seconds | | `0` |
 | `week` | Week number | `weeks`, `w` | `31` |
 | `yearweek` | ISO year and week number in `YYYYWW` format | | `202131` |
-
+	
 Note that the time zone parts are all zero unless a time zone extension such as [ICU]({% link docs/stable/core_extensions/icu.md %})
 has been installed to support `TIMESTAMP WITH TIME ZONE`.
 
@@ -66,6 +69,7 @@ There are dedicated extraction functions to get certain subfields:
 | [`hour(date)`](#hourdate) | Hours. |
 | [`isodow(date)`](#isodowdate) | Numeric ISO weekday (Monday = 1, Sunday = 7). |
 | [`isoyear(date)`](#isoyeardate) | ISO Year number (Starts on Monday of week containing Jan 4th). |
+| [`julian(date)`](#juliandate) | `DOUBLE` Julian Day number. |
 | [`microsecond(date)`](#microseconddate) | Sub-minute microseconds. |
 | [`millennium(date)`](#millenniumdate) | Millennium. |
 | [`millisecond(date)`](#milliseconddate) | Sub-minute milliseconds. |
@@ -169,6 +173,16 @@ There are dedicated extraction functions to get certain subfields:
 | **Description** | ISO Year number (Starts on Monday of week containing Jan 4th). |
 | **Example** | `isoyear(DATE '2022-01-01')` |
 | **Result** | `2021` |
+
+
+#### `julian(date)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | `DOUBLE` Julian Day number. |
+| **Example** | `julian(DATE '1992-09-20')` |
+| **Result** | `2448886.0` |
+
 
 #### `microsecond(date)`
 
