@@ -275,7 +275,7 @@ Compatibility is also guaranteed between different DuckDB clients (e.g., Python 
 ### How does DuckDB handle concurrency? Can multiple processes write to DuckDB?
 
 <div class="answer" markdown="1">
-See the documentation on [handling concurrency]({% link docs/stable/connect/concurrency.md %}#handling-concurrency)
+See the documentation on [handling concurrency]({% link docs/stable/operations_manual/duckdb_docker.md %}#handling-concurrency)
 and the section on [“Writing to DuckDB from Multiple Processes”]({% link docs/stable/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
 
 To work on the same data set with multiple DuckDB clients, consider using the [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/stable/core_extensions/ducklake.md %}).
