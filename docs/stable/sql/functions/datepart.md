@@ -13,7 +13,7 @@ The parts to be extracted or manipulated are specified by one of the strings in 
 The example column provides the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
 The entries of the first table may additionally be used as units to construct `INTERVAL`s.
 
-> Except for `julian`, which returns a `DOUBLE`, all parts are extracted as integers. Since there are no infinite integer values in duckdb, `NULL`s are returned for infinite timestamps. 
+> Except for `julian`, which returns a `DOUBLE`, all parts are extracted as integers. Since there are no infinite integer values in DuckDB, `NULL`s are returned for infinite timestamps. 
 
 ## Part Specifiers Usable as Date Part Specifiers and in Intervals
 
