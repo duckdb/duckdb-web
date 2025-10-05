@@ -34,6 +34,12 @@ Attach the database `file.db` with a block size of 16 kB:
 ATTACH 'file.db' (BLOCK_SIZE 16_384);
 ```
 
+Attach the database `file.db` with a row group size of 100 rows:
+
+```sql
+ATTACH 'file.db' (ROW_GROUP_SIZE 100);
+```
+
 Attach a SQLite database for reading and writing (see the [`sqlite` extension]({% link docs/stable/core_extensions/sqlite.md %}) for more information):
 
 ```sql
