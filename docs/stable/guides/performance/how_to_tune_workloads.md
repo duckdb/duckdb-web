@@ -37,6 +37,8 @@ The row group size can be specified as an option of the `ATTACH` statement:
 ATTACH '/tmp/somefile.db' AS db (ROW_GROUP_SIZE 16384);
 ```
 
+The [performance considerations when chosing `ROW_GROUP_SIZE` for parquet files]({% link docs/stable/data/parquet/tips.md %}#selecting-a-row_group_size) apply verbatim to DuckDB's own database format.
+
 ### Too Many Threads
 
 Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`]({% link docs/stable/configuration/pragmas.md %}#threads).
