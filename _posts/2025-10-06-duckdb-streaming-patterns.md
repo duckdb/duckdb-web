@@ -24,11 +24,11 @@ Now that we have a definition, let's take a look at three common architectural p
 
 - The **Streaming Database Pattern** is similar to the previous one in terms of latency but drastically simplifies the experience. Streaming databases like RisingWave or Materialize can directly read from the streaming source and update your materialized view on the fly. They aim at keeping ACID consistency and allowing clients to query data using the PostgreSQL wire protocol.
 
-“Where does DuckDB fit in all this?” – you may ask. Well, DuckDB fits well with patterns one and two. Even if DuckDB does not support materialized views ([yet](https://duckdb.org/roadmap)), we can work around this limitation and implement these patterns to still get very good results.
+“Where does DuckDB fit in all this?” – you may ask. Well, DuckDB fits well with patterns one and two. Even if DuckDB does not support materialized views ([yet]({% link roadmap.md %})), we can work around this limitation and implement these patterns to still get very good results.
 
 > Interestingly, the streaming engine industry doesn't have many official benchmarks. The [Nexmark](https://github.com/nexmark/nexmark) benchmark seems to be the most common, but there are not many published results comparing engines using this benchmark.
 
-## Materialized View Pattern: Cooking our Own Materialized View with DuckDB
+## Materialized View Pattern: Cooking Our Own Materialized View with DuckDB
 
 We know that DuckDB is very fast at aggregating data on the fly and also performs very well in transactional workloads (for an OLAP system). So does DuckLake's lakehouse format, thanks to its [data inlining feature](https://ducklake.select/docs/stable/duckdb/advanced_features/data_inlining). In this section we are going to see both DuckDB and DuckLake in action, acting as a sink for Kafka and calculating new metric values based on deltas.
 
@@ -98,12 +98,12 @@ You can check the full pipeline in [this repository](https://github.com/guillesd
 
 ![pattern_bonus](/images/blog/streaming_patterns/streaming_pattern_bonus.png)
 
-This setup is the most similar thing to the Streaming Databases Pattern that you can do right now with DuckDB. Powered by the [`tributary` DuckDB community extension](https://duckdb.org/community_extensions/extensions/tributary), you can create a view or a table that reads directly from a Kafka topic. To simulate materialized views, we are using views for this specific example. The following query showcases how simple this process is:
+This setup is the most similar thing to the Streaming Databases Pattern that you can do right now with DuckDB. Powered by the [`tributary` DuckDB community extension](/community_extensions/extensions/tributary), you can create a view or a table that reads directly from a Kafka topic. To simulate materialized views, we are using views for this specific example. The following query showcases how simple this process is:
 
 ```sql
 CREATE VIEW IF NOT EXISTS raw_events_view AS
-    SELECT * 
-        EXCLUDE message, 
+    SELECT
+        * EXCLUDE message, 
         decode(message)::JSON AS message 
     FROM tributary_scan_topic(⟨TOPIC⟩, "bootstrap.servers" := "localhost:9092");
 ```
@@ -112,16 +112,16 @@ Currently this extension has no state management. Every time this view is querie
 
 You can check the full pipeline in [this repository](https://github.com/guillesd/duckdb-streaming-patterns/blob/main/pipelines/bonus_pattern.py).
 
-> This is an experimental extension from Query.farm.
+> This is an experimental extension from [Query.Farm](https://query.farm/).
 
 ## Some Thoughts
 
 Conclusions always feel very subjective, so I rather write about some of my thoughts regarding streaming patterns in general and particularly around DuckDB. 
 
 **The Materialized View Pattern is usually good enough.**
-My hot take is that most use cases for analytics are usually covered by the Materialized View Pattern without the need of complexity that comes with other patterns. I believe that DuckDB is very well suited for this pattern because for a small OLAP, it does incredibly well at handling large amounts of streaming inserts. In [this article](https://arrow.apache.org/blog/2025/03/10/fast-streaming-inserts-in-duckdb-with-adbc/) DuckDB was pushed to the limit and was able to handle more than one million rows inserted per second. Also note that **[materialized views are on the DuckDB's long-term roadmap](https://duckdb.org/roadmap#future-work)**, so this pattern will become even simpler in the near future.
+My hot take is that most use cases for analytics are usually covered by the Materialized View Pattern without the need of complexity that comes with other patterns. I believe that DuckDB is very well suited for this pattern because for a small OLAP, it does incredibly well at handling large amounts of streaming inserts. In [this article](https://arrow.apache.org/blog/2025/03/10/fast-streaming-inserts-in-duckdb-with-adbc/) DuckDB was pushed to the limit and was able to handle more than one million rows inserted per second. Also note that **[materialized views are on the DuckDB's long-term roadmap]({% link roadmap.md %}#future-work)**, so this pattern will become even simpler in the near future.
 
-If you are streaming to a Lakehouse, you should know that DuckLake's [Data Inlining feature](https://ducklake.select/docs/stable/duckdb/advanced_features/data_inlining) was specifically designed to deal with high-throughput inserts while solving the small file problem. This makes DuckLake a great candidate for this pattern if you have a Lakehouse-like architecture.
+If you are streaming to a lakehouse, you should know that DuckLake's [Data Inlining feature](https://ducklake.select/docs/stable/duckdb/advanced_features/data_inlining) was specifically designed to deal with high-throughput inserts while solving the small file problem. This makes DuckLake a great candidate for this pattern if you have a lakehouse-like architecture.
 
 **Streaming Engines and Streaming Databases can be hard (or expensive).**
 At scale, Streaming Engines can be hard to manage. It is an evolving field and some work is being done to make forever running streaming queries easier to operate. For example, [Apache Fluss](https://fluss.apache.org/) is being built with the idea to solve some of the shortcomings described in this post. However, it does add another layer of complexity to an already complex streaming architecture.
