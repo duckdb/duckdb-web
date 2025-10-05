@@ -7,11 +7,11 @@ title: Date Part Functions
 
 <!-- markdownlint-disable MD001 -->
 
-The `date_part` and `date_diff` and `date_trunc` functions can be used to manipulate the fields of temporal types such as [`DATE`]({% link docs/stable/sql/data_types/date.md %}) and [`TIMESTAMP`]({% link docs/stable/sql/data_types/timestamp.md %}).
-The fields are specified as strings that contain the part name of the field.
+Below is a full list of all available date parts specifiers, which can be passed as strings to the `date_part`, `date_trunc`, and `date_diff` functions to extract or manipulate fields of temporal types such as [`TIMESTAMP`]({% link docs/stable/sql/data_types/timestamp.md %}), [`TIMESTAMPTZ`]({% link docs/stable/sql/data_types/timestamptz.md %}), [`DATE`]({% link docs/stable/sql/data_types/date.md %}) and [`INTERVAL`]({% link docs/stable/sql/data_types/interval.md %}).
 
-Below is a full list of all available date part specifiers.
-The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
+Some of these specifiers may also be as units to construct `INTERVAL`s. 
+
+The example column in the tables below provides the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
 
 ## Part Specifiers Usable as Date Part Specifiers and in Intervals
 
