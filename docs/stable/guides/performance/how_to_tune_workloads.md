@@ -28,8 +28,14 @@ This allows the systems to re-order any results that do not contain `ORDER BY` c
 ### The Effect of Row Groups on Parallelism
 
 DuckDB parallelizes the workload based on _[row groups]({% link docs/stable/internals/storage.md %}#row-groups),_ i.e., groups of rows that are stored together at the storage level.
-A row group in DuckDB's database format consists of max. 122,880 rows.
+The default row group size in DuckDB's database format is 122,880 rows.
 Parallelism starts at the level of row groups, therefore, for a query to run on _k_ threads, it needs to scan at least _k_ \* 122,880 rows.
+
+The row group size can be specified as an option of the `ATTACH` statement: 
+
+```sql
+ATTACH '/tmp/somefile.db' AS db (ROW_GROUP_SIZE 16384);
+```
 
 ### Too Many Threads
 
