@@ -32,7 +32,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`age(timestamp)`](#agetimestamp) | Subtract from current_date. |
 | [`century(timestamp)`](#centurytimestamp) | Extracts the century of a timestamp. |
 | [`current_localtimestamp()`](#current_localtimestamp) | Returns the current timestamp (at the start of the transaction). |
-| [`date_diff(part, starttimestamp, endtimestamp)`](#date_diffpart-starttimestamp-endtimestamp) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between the timestamps, inclusive of the larger timstamp and exclusive of the smaller timestamp. |
+| [`date_diff(part, starttimestamp, endtimestamp)`](#date_diffpart-starttimestamp-endtimestamp) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `starttimestamp` and `endtimestamp`, inclusive of the larger timstamp and exclusive of the smaller timestamp. |
 | [`date_part([part, ...], timestamp)`](#date_partpart--timestamp) | Get the listed [subfields]({% link docs/stable/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
 | [`date_part(part, timestamp)`](#date_partpart-timestamp) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, starttimestamp, endtimestamp)`](#date_subpart-starttimestamp-endtimestamp) | The length of the interval between the timestamps, in units of [`part`]({% link docs/stable/sql/functions/datepart.md %}), rounded towards zero to the next integer. |
