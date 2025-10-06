@@ -138,6 +138,23 @@ Read the contents of a JSON file `lineitem.json` into the `lineitem` table:
 COPY lineitem FROM 'lineitem.json' (FORMAT json, ARRAY true);
 ```
 
+An expression may be used as the source of a `COPY ... FROM` command if it is placed within parentheses. 
+
+Read the contents of a file whose path is stored in a variable into the `lineitem` table:
+
+```sql
+
+SET VARIABLE source_file = 'lineitem.json';
+COPY lineitem FROM (getvariable('source_file'));
+```
+
+Read the contents of a file provided as parameter of a prepared statement into the `lineitem` table:
+
+```sql
+PREPARE v1 AS COPY lineitem FROM ($1);
+EXECUTE v1('lineitem.json');
+```
+
 ### Syntax
 
 <div id="rrdiagram1"></div>
@@ -213,6 +230,22 @@ COPY (SELECT l_orderkey, l_comment FROM lineitem) TO 'lineitem_part.parquet' (RE
 | lineitem_part.parquet | 600572 | 8579141         | 1445              | {'"l_comment"'={column_size_bytes=7642227, max=zzle. slyly, min=' Tiresias above the blit', null_count=0}, '"l_orderkey"'={column_size_bytes=935457, max=600000, min=1, null_count=0}} | NULL           |
 
 Note: for nested columns (e.g., structs) the column statistics are defined for each part. For example, if we have a column `name STRUCT(field1 INTEGER, field2 INTEGER)` the column statistics will have stats for `name.field1` and `name.field2`.
+
+An expression may be used as the target of a `COPY ... TO` command if it is placed within parentheses. 
+
+Copy the result of a query to a file whose path is stored in a variable:
+
+```sql
+SET VARIABLE target_file = 'target_file.parquet';
+COPY (SELECT 'hello world') TO (getvariable('target_file'));
+```
+
+Copy to a file provided as parameter of a prepared statement:
+
+```sql
+PREPARE v1 AS COPY (SELECT 42 i) to $1;
+EXECUTE v1('file.csv');
+```
 
 ### `COPY ... TO` Options
 
