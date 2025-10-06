@@ -114,7 +114,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
    Error: Constraint Error: Duplicate key "i: 1" violates primary key constraint.
    ```
    ````
-* To specify placeholders (or template-style code), use the left angle and right angle characters, `⟨` and `⟩`. These will be highlighted in red and typeset in monospace bold italic to draw the reader's attention to them.
+* To specify placeholders (or template-style code), use left angle and right angle characters, `⟨` and `⟩`, also known as chevrons or angle brackets. These will be highlighted in red and typeset in monospace bold italic to draw the reader's attention to them.
      * For example, you could write: To create a table from a Parquet file, run: `CREATE TABLE ⟨your_table_name⟩ AS FROM '⟨your_filename⟩.parquet'`.
      * Copy the characters from here: `⟨⟩`.
      * These characters are known in LaTeX code as `\langle` and `\rangle`.
