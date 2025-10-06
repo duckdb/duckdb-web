@@ -197,11 +197,11 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 | **Example** | `age(TIMESTAMP '1992-09-20')` |
 | **Result** | `29 years 1 month 27 days 12:39:00.844` |
 
-#### `date_diff(part, startdate, enddate)`
+#### `date_diff(part, starttimestamptz, endtimestamptz)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | The number of [partition]({% link docs/stable/sql/functions/datepart.md %}) boundaries between the timestamps. |
+| **Description** | The signed number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `starttimestamptz` and `endtimestamptz`, inclusive of the larger timestamp and exclusive of the smaller timestamp. |
 | **Example** | `date_diff('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` |
 | **Result** | `2` |
 
@@ -221,11 +221,11 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 | **Example** | `date_part('minute', TIMESTAMPTZ '1992-09-20 20:38:40')` |
 | **Result** | `38` |
 
-#### `date_sub(part, startdate, enddate)`
+#### `date_sub(part, starttimestamptz, endtimestamptz)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | The number of complete [partitions]({% link docs/stable/sql/functions/datepart.md %}) between the timestamps. |
+| **Description** | The signed length of the interval between `starttimestamptz` and `endtimestamptz`, in units of [`part`]({% link docs/stable/sql/functions/datepart.md %}), rounded to the next integer towards zero. |
 | **Example** | `date_sub('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` |
 | **Result** | `1` |
 
