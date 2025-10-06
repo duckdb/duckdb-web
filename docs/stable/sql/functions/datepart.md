@@ -11,7 +11,7 @@ The `date_part`, `date_trunc`, and `date_diff` functions can be used to extract 
 
 The parts to be extracted or manipulated are specified by one of the strings in the tables below. 
 The example column provides the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
-The entries of the first table may additionally be used as units to construct `INTERVAL`s.
+Only the entries of the first table can be extracted from `INTERVAL`s or used to construct them.
 
 > Except for `julian`, which returns a `DOUBLE`, all parts are extracted as integers. Since there are no infinite integer values in DuckDB, `NULL`s are returned for infinite timestamps. 
 
