@@ -540,7 +540,7 @@ Duplicate alias "t" in query!
 Adding the aliases allows the query to parse successfully:
 
 ```sql
-SELECT * FROM t AS t t1 JOIN t t2 USING(x);
+SELECT * FROM t AS t1 JOIN t AS t2 USING(x);
 ```
 
 ### Shorthands in the `JOIN` Clause
