@@ -48,7 +48,6 @@ The entries of the first table may additionally be used as units to construct `I
 | `timezone` | Time zone offset in seconds | | `0` |
 | `week` | Week number | `weeks`, `w` | `31` |
 | `yearweek` | ISO year and week number in `YYYYWW` format | | `202131` |
-	
 Note that the time zone parts are all zero unless a time zone extension such as [ICU]({% link docs/stable/core_extensions/icu.md %})
 has been installed to support `TIMESTAMP WITH TIME ZONE`.
 
