@@ -290,7 +290,7 @@ To work on the same data set with multiple DuckDB clients, consider using the [D
 ### Is there an official DuckDB Docker image available?
 
 <div class="answer" markdown="1">
-You can run the DuckDB command line client using the official [DuckDB Docker image]({% link docs/stable/core_extensions/ui.md %}).
+You can run the DuckDB command line client using the official [DuckDB Docker image]({% link docs/stable/operations_manual/duckdb_docker.md %}).
 
 Please note that in most cases you do not need a container to run DuckDB: you can simply deploy it [in-process]({% link why_duckdb.md %}#simple) within your client application or as a standalone command-line binary.
 </div>
