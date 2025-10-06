@@ -148,7 +148,7 @@ SELECT *
 FROM read_csv('test.csv') WITH ORDINALITY;
 ```
 
-Note that the same result could be achieved using the [`row_number` window function]({% link docs/stable/sql/functions/window_functions %}#row_numberorder-by-ordering).
+Note that the same result could be achieved using the [`row_number` window function]({% link docs/stable/sql/functions/window_functions.md %}#row_numberorder-by-ordering).
 In the presence of [joins](#joins), however, `WITH ORDINALITY` allows enumerating one side of the join instead of the final result set, without having to resort to sub-queries.
 
 ## Joins
