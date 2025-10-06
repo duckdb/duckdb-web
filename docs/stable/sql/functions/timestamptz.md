@@ -161,16 +161,11 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 |:--|:-------|
 | [`age(timestamptz, timestamptz)`](#agetimestamptz-timestamptz) | Subtract arguments, resulting in the time difference between the two timestamps. |
 | [`age(timestamptz)`](#agetimestamptz) | Subtract from current_date. |
-| [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition]({% link docs/stable/sql/functions/datepart.md %}) boundaries between the timestamps. |
-| [`date_part([part, ...], timestamptz)`](#date_partpart--timestamptz) | Get the listed [subfields]({% link docs/stable/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
-| [`date_part(part, timestamptz)`](#date_partpart-timestamptz) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to *extract*). |
-| [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The number of complete [partitions]({% link docs/stable/sql/functions/datepart.md %}) between the timestamps. |
+| [`date_diff(part, starttimestamp, endtimestamp)`](#date_diffpart-starttimestamp-endtimestamp) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between the timestamps, inclusive of the larger timstamp and exclusive of the smaller timestamp. |
+| [`date_part([part, ...], timestamp)`](#date_partpart--timestamp) | Get the listed [subfields]({% link docs/stable/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
+| [`date_part(part, timestamp)`](#date_partpart-timestamp) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
+| [`date_sub(part, starttimestamp, endtimestamp)`](#date_subpart-starttimestamp-endtimestamp) | The length of the interval between the timestamps, in units of [`part`]({% link docs/stable/sql/functions/datepart.md %}), rounded towards zero to the next integer. |
 | [`date_trunc(part, timestamptz)`](#date_truncpart-timestamptz) | Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
-| [`datediff(part, startdate, enddate)`](#datediffpart-startdate-enddate) | Alias of date_diff. The number of [partition]({% link docs/stable/sql/functions/datepart.md %}) boundaries between the timestamps. |
-| [`datepart([part, ...], timestamptz)`](#datepartpart--timestamptz) | Alias of date_part. Get the listed [subfields]({% link docs/stable/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
-| [`datepart(part, timestamptz)`](#datepartpart-timestamptz) | Alias of date_part. Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to *extract*). |
-| [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | Alias of date_sub. The number of complete [partitions]({% link docs/stable/sql/functions/datepart.md %}) between the timestamps. |
-| [`datetrunc(part, timestamptz)`](#datetruncpart-timestamptz) | Alias of date_trunc. Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
 | [`epoch_ns(timestamptz)`](#epoch_nstimestamptz) | Converts a timestamptz to nanoseconds since the epoch. |
 | [`epoch_us(timestamptz)`](#epoch_ustimestamptz) | Converts a timestamptz to microseconds since the epoch. |
 | [`extract(field FROM timestamptz)`](#extractfield-from-timestamptz) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) from a `TIMESTAMP WITH TIME ZONE`. |
@@ -240,46 +235,6 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 | **Description** | Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
 | **Example** | `date_trunc('hour', TIMESTAMPTZ '1992-09-20 20:38:40')` |
-| **Result** | `1992-09-20 20:00:00` |
-
-#### `datediff(part, startdate, enddate)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Alias of date_diff. The number of [partition]({% link docs/stable/sql/functions/datepart.md %}) boundaries between the timestamps. |
-| **Example** | `datediff('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` |
-| **Result** | `2` |
-
-#### `datepart([part, ...], timestamptz)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Alias of date_part. Get the listed [subfields]({% link docs/stable/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
-| **Example** | `datepart(['year', 'month', 'day'], TIMESTAMPTZ '1992-09-20 20:38:40-07')` |
-| **Result** | `{year: 1992, month: 9, day: 20}` |
-
-#### `datepart(part, timestamptz)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Alias of date_part. Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to *extract*). |
-| **Example** | `datepart('minute', TIMESTAMPTZ '1992-09-20 20:38:40')` |
-| **Result** | `38` |
-
-#### `datesub(part, startdate, enddate)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Alias of date_sub. The number of complete [partitions]({% link docs/stable/sql/functions/datepart.md %}) between the timestamps. |
-| **Example** | `datesub('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` |
-| **Result** | `1` |
-
-#### `datetrunc(part, timestamptz)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Alias of date_trunc. Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
-| **Example** | `datetrunc('hour', TIMESTAMPTZ '1992-09-20 20:38:40')` |
 | **Result** | `1992-09-20 20:00:00` |
 
 #### `epoch_ns(timestamptz)`
