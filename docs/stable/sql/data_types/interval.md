@@ -80,7 +80,7 @@ The following table describe how these parts are extracted by `datepart` in form
 
 <!-- markdownlint-enable MD056 -->
 
-Additionally, `datepart` may be used to extract centuries, decades, quarters, seconds, and milliseconds from `INTERVAL`s. However, these parts are not required when reassembling the original `INTERVAL`. In fact, if the previous query additionally extracted any of these additional parts, then the sum of extracted parts would generally be larger than the original `period`.
+Additionally, `datepart` may be used to extract centuries, decades, quarters, seconds, and milliseconds from `INTERVAL`s. However, these parts are not required when reassembling the original `INTERVAL`. In fact, if the previous query additionally extracted any of these additional parts, then the sum of the extracted parts would generally be larger than the original `period`.
 
 !-- markdownlint-disable MD056 -->
 
