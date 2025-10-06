@@ -161,10 +161,10 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 |:--|:-------|
 | [`age(timestamptz, timestamptz)`](#agetimestamptz-timestamptz) | Subtract arguments, resulting in the time difference between the two timestamps. |
 | [`age(timestamptz)`](#agetimestamptz) | Subtract from current_date. |
-| [`date_diff(part, starttimestamp, endtimestamp)`](#date_diffpart-starttimestamp-endtimestamp) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between the timestamps, inclusive of the larger timstamp and exclusive of the smaller timestamp. |
+| [`date_diff(part, starttimestamptz, endtimestamptz)`](#date_diffpart-starttimestamptz-endtimestamptz) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `starttimestamptz` and `endtimestamptz` inclusive of the larger timstamp and exclusive of the smaller timestamp. |
 | [`date_part([part, ...], timestamp)`](#date_partpart--timestamp) | Get the listed [subfields]({% link docs/stable/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
 | [`date_part(part, timestamp)`](#date_partpart-timestamp) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
-| [`date_sub(part, starttimestamp, endtimestamp)`](#date_subpart-starttimestamp-endtimestamp) | The length of the interval between the timestamps, in units of [`part`]({% link docs/stable/sql/functions/datepart.md %}), rounded towards zero to the next integer. |
+| [`date_sub(part, starttimestamptz, endtimestamptz)`](#date_subpart-starttimestamptz-endtimestamptz) | The length of the interval between the timestamps, in units of [`part`]({% link docs/stable/sql/functions/datepart.md %}), rounded towards zero to the next integer. |
 | [`date_trunc(part, timestamptz)`](#date_truncpart-timestamptz) | Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
 | [`epoch_ns(timestamptz)`](#epoch_nstimestamptz) | Converts a timestamptz to nanoseconds since the epoch. |
 | [`epoch_us(timestamptz)`](#epoch_ustimestamptz) | Converts a timestamptz to microseconds since the epoch. |
