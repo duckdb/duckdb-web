@@ -35,9 +35,9 @@ The default provider, `config` (i.e., user-configured), allows access to the S3 
 CREATE OR REPLACE SECRET secret (
     TYPE s3,
     PROVIDER config,
-    KEY_ID 'AKIAIOSFODNN7EXAMPLE',
-    SECRET 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-    REGION 'us-east-1'
+    KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
+    SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
+    REGION '⟨us-east-1⟩'
 );
 ```
 
@@ -89,7 +89,7 @@ CREATE OR REPLACE SECRET secret (
     TYPE s3,
     PROVIDER credential_chain,
     CHAIN config,
-    REGION 'eu-west-1'
+    REGION '⟨eu-west-1⟩'
 );
 ```
 
