@@ -35,7 +35,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | [`date_diff(part, starttimestamp, endtimestamp)`](#date_diffpart-starttimestamp-endtimestamp) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `starttimestamp` and `endtimestamp`, inclusive of the larger timstamp and exclusive of the smaller timestamp. |
 | [`date_part([part, ...], timestamp)`](#date_partpart--timestamp) | Get the listed [subfields]({% link docs/stable/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
 | [`date_part(part, timestamp)`](#date_partpart-timestamp) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
-| [`date_sub(part, starttimestamp, endtimestamp)`](#date_subpart-starttimestamp-endtimestamp) | The length of the interval between the timestamps, in units of [`part`]({% link docs/stable/sql/functions/datepart.md %}), rounded towards zero to the next integer. |
+| [`date_sub(part, starttimestamp, endtimestamp)`](#date_subpart-starttimestamp-endtimestamp) | The signed length of the interval between `starttimestamp` and `endtimestamp`, truncated to whole multiples of [`part`]({% link docs/stable/sql/functions/datepart.md %}). |
 | [`date_trunc(part, timestamp)`](#date_truncpart-timestamp) | Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
 | [`dayname(timestamp)`](#daynametimestamp) | The (English) name of the weekday. |
 | [`epoch_ms(timestamp)`](#epoch_mstimestamp) | Returns the total number of milliseconds since the epoch. |
@@ -128,7 +128,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | The signed length of the interval between `starttimestamp` and `endtimestamp`, in units of [`part`]({% link docs/stable/sql/functions/datepart.md %}), rounded to the next integer towards zero. |
+| **Description** | The signed length of the interval between `starttimestamp` and `endtimestamp`, truncated to whole multiples of [`part`]({% link docs/stable/sql/functions/datepart.md %}). |
 | **Example** | `date_sub('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` |
 | **Result** | `1` |
 
