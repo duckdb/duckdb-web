@@ -77,6 +77,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | **Description** | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `startdate` and `enddate`, inclusive of the larger date and exclusive of the smaller date. |
 | **Example** | `date_diff('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `2` |
+| **Alias** | `datediff` |
 
 #### `date_part(part, date)`
 
@@ -85,6 +86,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | **Description** | Get the [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | **Example** | `date_part('year', DATE '1992-09-20')` |
 | **Result** | `1992` |
+| **Alias** | `datepart` |
 
 #### `date_sub(part, startdate, enddate)`
 
@@ -93,6 +95,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | **Description** | The signed length of the interval between `startdate` and `enddate`, truncated to whole multiples of [`part`]({% link docs/stable/sql/functions/datepart.md %}). |
 | **Example** | `date_sub('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `1` |
+| **Alias** | `datesub` |
 
 #### `date_trunc(part, date)`
 
@@ -101,6 +104,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | **Description** | Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |
 | **Example** | `date_trunc('month', DATE '1992-03-07')` |
 | **Result** | `1992-03-01` |
+| **Alias** | `datetrunc` |
 
 #### `dayname(date)`
 
