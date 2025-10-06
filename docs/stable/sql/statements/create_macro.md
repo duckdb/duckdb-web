@@ -285,7 +285,7 @@ Macro function 'my_macro(a)' requires a single positional argument, but 2 positi
 
 ### Using Subquery Macros
 
-If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DuckDB will return the following error:
+Table macros as well as scalar macros defined using scalar subqueries cannot be used in the arguments of table functions. DuckDB will return the following error:
 
 ```console
 Binder Error:
