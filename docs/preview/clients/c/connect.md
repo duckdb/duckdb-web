@@ -46,10 +46,10 @@ duckdb_close(&db);
 <span class="kt">duckdb_query_progress_type</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
 <span class="kt">void</span> <a href="#duckdb_disconnect"><span class="nf">duckdb_disconnect</span></a>(<span class="kt">duckdb_connection</span> *<span class="nv">connection</span>);
 <span class="kt">void</span> <a href="#duckdb_connection_get_client_context"><span class="nf">duckdb_connection_get_client_context</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">duckdb_client_context</span> *<span class="nv">out_context</span>);
-<span class="kt">void</span> <a href="#duckdb_connection_get_arrow_options"><span class="nf">duckdb_connection_get_arrow_options</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">duckdb_arrow_options</span> *<span class="nv">out_arrow_options</span>);
+<span class="kt">void</span> <a href="#duckdb_connection_get_arrow_options"><span class="nf">duckdb_connection_get_arrow_options</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">duckdb_arrow_options</span> *<span class="nv">out_arrow_options</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_client_context_get_connection_id"><span class="nf">duckdb_client_context_get_connection_id</span></a>(<span class="nv">duckdb_client_context</span> <span class="nv">context</span>);
 <span class="kt">void</span> <a href="#duckdb_destroy_client_context"><span class="nf">duckdb_destroy_client_context</span></a>(<span class="nv">duckdb_client_context</span> *<span class="nv">context</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_arrow_options"><span class="nf">duckdb_destroy_arrow_options</span></a>(<span class="nv">duckdb_arrow_options</span> *<span class="nv">arrow_options</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_arrow_options"><span class="nf">duckdb_destroy_arrow_options</span></a>(<span class="kt">duckdb_arrow_options</span> *<span class="nv">arrow_options</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_library_version"><span class="nf">duckdb_library_version</span></a>();
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_table_names"><span class="nf">duckdb_get_table_names</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">bool</span> <span class="nv">qualified</span>);
 </code></pre></div></div>
@@ -302,7 +302,7 @@ Retrieves the arrow options of the connection.
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_connection_get_arrow_options</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="nv">duckdb_arrow_options</span> *<span class="nv">out_arrow_options
+</span>  <span class="kt">duckdb_arrow_options</span> *<span class="nv">out_arrow_options
 </span>);
 </code></pre></div></div>
 
@@ -357,7 +357,7 @@ Destroys the arrow options and deallocates its memory.
 ##### Syntax
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_arrow_options</span>(<span class="nv">
-</span>  <span class="nv">duckdb_arrow_options</span> *<span class="nv">arrow_options
+</span>  <span class="kt">duckdb_arrow_options</span> *<span class="nv">arrow_options
 </span>);
 </code></pre></div></div>
 

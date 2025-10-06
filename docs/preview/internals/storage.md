@@ -162,6 +162,12 @@ DuckDB's storage format stores the data in _row groups,_ i.e., horizontal partit
 This concept is equivalent to [Parquet's row groups](https://parquet.apache.org/docs/concepts/).
 Several features in DuckDB, including [parallelism]({% link docs/preview/guides/performance/how_to_tune_workloads.md %}) and [compression]({% post_url 2022-10-28-lightweight-compression %}) are based on row groups.
 
+The row group size can be specified as an option of the `ATTACH` statement: 
+
+```sql
+ATTACH '/tmp/somefile.db' AS db (ROW_GROUP_SIZE 16384);
+```
+
 ## Troubleshooting
 
 ### Error Message When Opening an Incompatible Database File

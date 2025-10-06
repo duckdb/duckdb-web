@@ -53,7 +53,7 @@ DROP MACRO mcr;
 Drop macro table `mt`:
 
 ```sql
-DROP MACRO TABLE mt;
+DROP MACRO TABLE mt; -- the `TABLE` is optional since v1.4.0
 ```
 
 Drop type `typ`:

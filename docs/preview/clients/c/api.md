@@ -26,10 +26,10 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">duckdb_query_progress_type</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
 <span class="kt">void</span> <a href="#duckdb_disconnect"><span class="nf">duckdb_disconnect</span></a>(<span class="kt">duckdb_connection</span> *<span class="nv">connection</span>);
 <span class="kt">void</span> <a href="#duckdb_connection_get_client_context"><span class="nf">duckdb_connection_get_client_context</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">duckdb_client_context</span> *<span class="nv">out_context</span>);
-<span class="kt">void</span> <a href="#duckdb_connection_get_arrow_options"><span class="nf">duckdb_connection_get_arrow_options</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">duckdb_arrow_options</span> *<span class="nv">out_arrow_options</span>);
+<span class="kt">void</span> <a href="#duckdb_connection_get_arrow_options"><span class="nf">duckdb_connection_get_arrow_options</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">duckdb_arrow_options</span> *<span class="nv">out_arrow_options</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_client_context_get_connection_id"><span class="nf">duckdb_client_context_get_connection_id</span></a>(<span class="nv">duckdb_client_context</span> <span class="nv">context</span>);
 <span class="kt">void</span> <a href="#duckdb_destroy_client_context"><span class="nf">duckdb_destroy_client_context</span></a>(<span class="nv">duckdb_client_context</span> *<span class="nv">context</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_arrow_options"><span class="nf">duckdb_destroy_arrow_options</span></a>(<span class="nv">duckdb_arrow_options</span> *<span class="nv">arrow_options</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_arrow_options"><span class="nf">duckdb_destroy_arrow_options</span></a>(<span class="kt">duckdb_arrow_options</span> *<span class="nv">arrow_options</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_library_version"><span class="nf">duckdb_library_version</span></a>();
 <span class="kt">duckdb_value</span> <a href="#duckdb_get_table_names"><span class="nf">duckdb_get_table_names</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">bool</span> <span class="nv">qualified</span>);
 </code></pre></div></div>
@@ -60,7 +60,7 @@ This page contains the reference for DuckDB's C API.
 <span class="kt">duckdb_type</span> <a href="#duckdb_column_type"><span class="nf">duckdb_column_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
 <span class="kt">duckdb_statement_type</span> <a href="#duckdb_result_statement_type"><span class="nf">duckdb_result_statement_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_column_logical_type"><span class="nf">duckdb_column_logical_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="nv">duckdb_arrow_options</span> <a href="#duckdb_result_get_arrow_options"><span class="nf">duckdb_result_get_arrow_options</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
+<span class="kt">duckdb_arrow_options</span> <a href="#duckdb_result_get_arrow_options"><span class="nf">duckdb_result_get_arrow_options</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_column_count"><span class="nf">duckdb_column_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_row_count"><span class="nf">duckdb_row_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_rows_changed"><span class="nf">duckdb_rows_changed</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
@@ -557,8 +557,8 @@ This page contains the reference for DuckDB's C API.
 
 ### Arrow Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_error_data</span> <a href="#duckdb_to_arrow_schema"><span class="nf">duckdb_to_arrow_schema</span></a>(<span class="nv">duckdb_arrow_options</span> <span class="nv">arrow_options</span>, <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">names</span>, <span class="kt">idx_t</span> <span class="nv">column_count</span>, <span class="nv">struct</span> <span class="nv">ArrowSchema</span> *<span class="nv">out_schema</span>);
-<span class="nv">duckdb_error_data</span> <a href="#duckdb_data_chunk_to_arrow"><span class="nf">duckdb_data_chunk_to_arrow</span></a>(<span class="nv">duckdb_arrow_options</span> <span class="nv">arrow_options</span>, <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>, <span class="nv">struct</span> <span class="nv">ArrowArray</span> *<span class="nv">out_arrow_array</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_error_data</span> <a href="#duckdb_to_arrow_schema"><span class="nf">duckdb_to_arrow_schema</span></a>(<span class="kt">duckdb_arrow_options</span> <span class="nv">arrow_options</span>, <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">names</span>, <span class="kt">idx_t</span> <span class="nv">column_count</span>, <span class="nv">struct</span> <span class="nv">ArrowSchema</span> *<span class="nv">out_schema</span>);
+<span class="nv">duckdb_error_data</span> <a href="#duckdb_data_chunk_to_arrow"><span class="nf">duckdb_data_chunk_to_arrow</span></a>(<span class="kt">duckdb_arrow_options</span> <span class="nv">arrow_options</span>, <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>, <span class="nv">struct</span> <span class="nv">ArrowArray</span> *<span class="nv">out_arrow_array</span>);
 <span class="nv">duckdb_error_data</span> <a href="#duckdb_schema_from_arrow"><span class="nf">duckdb_schema_from_arrow</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">struct</span> <span class="nv">ArrowSchema</span> *<span class="nv">schema</span>, <span class="nv">duckdb_arrow_converted_schema</span> *<span class="nv">out_types</span>);
 <span class="nv">duckdb_error_data</span> <a href="#duckdb_data_chunk_from_arrow"><span class="nf">duckdb_data_chunk_from_arrow</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">struct</span> <span class="nv">ArrowArray</span> *<span class="nv">arrow_array</span>, <span class="nv">duckdb_arrow_converted_schema</span> <span class="nv">converted_schema</span>, <span class="kt">duckdb_data_chunk</span> *<span class="nv">out_chunk</span>);
 <span class="kt">void</span> <a href="#duckdb_destroy_arrow_converted_schema"><span class="nf">duckdb_destroy_arrow_converted_schema</span></a>(<span class="nv">duckdb_arrow_converted_schema</span> *<span class="nv">arrow_converted_schema</span>);
@@ -868,7 +868,7 @@ Retrieves the arrow options of the connection.
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_connection_get_arrow_options</span>(<span class="nv">
 </span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="nv">duckdb_arrow_options</span> *<span class="nv">out_arrow_options
+</span>  <span class="kt">duckdb_arrow_options</span> *<span class="nv">out_arrow_options
 </span>);
 </code></pre></div></div>
 
@@ -923,7 +923,7 @@ Destroys the arrow options and deallocates its memory.
 ##### Syntax
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_arrow_options</span>(<span class="nv">
-</span>  <span class="nv">duckdb_arrow_options</span> *<span class="nv">arrow_options
+</span>  <span class="kt">duckdb_arrow_options</span> *<span class="nv">arrow_options
 </span>);
 </code></pre></div></div>
 
@@ -1353,7 +1353,7 @@ should be produced.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_arrow_options</span> <span class="nv">duckdb_result_get_arrow_options</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_arrow_options</span> <span class="nv">duckdb_result_get_arrow_options</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
@@ -1482,9 +1482,9 @@ by `duckdb_column_data` are undefined.
 int32_t *data = (int32_t *) duckdb_column_data(&result, 0);
 bool *nullmask = duckdb_nullmask_data(&result, 0);
 if (nullmask[row]) {
-printf("Data for row %d: NULL\n", row);
+    printf("Data for row %d: NULL\n", row);
 } else {
-printf("Data for row %d: %d\n", row, data[row]);
+    printf("Data for row %d: %d\n", row, data[row]);
 }
 ```
 
@@ -8329,8 +8329,8 @@ A profiling information object.
 #### `duckdb_profiling_info_get_value`
 
 Returns the value of the metric of the current profiling info node. Returns nullptr, if the metric does
-not exist or is not enabled. Currently, the value holds a string, and you can retrieve the string
-by calling the corresponding function: char *duckdb_get_varchar(duckdb_value value).
+ not exist or is not enabled. Currently, the value holds a string, and you can retrieve the string
+ by calling the corresponding function: char *duckdb_get_varchar(duckdb_value value).
 
 ##### Syntax
 
@@ -9093,7 +9093,7 @@ Append a duckdb_value to the appender.
 #### `duckdb_append_data_chunk`
 
 Appends a pre-filled data chunk to the specified appender.
-Attempts casting, if the data chunk types do not match the active appender types.
+ Attempts casting, if the data chunk types do not match the active appender types.
 
 ##### Syntax
 
@@ -9268,7 +9268,7 @@ Transforms a DuckDB Schema into an Arrow Schema
 ##### Syntax
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_error_data</span> <span class="nv">duckdb_to_arrow_schema</span>(<span class="nv">
-</span>  <span class="nv">duckdb_arrow_options</span> <span class="nv">arrow_options</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_options</span> <span class="nv">arrow_options</span>,<span class="nv">
 </span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">names</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">column_count</span>,<span class="nv">
@@ -9297,7 +9297,7 @@ Transforms a DuckDB data chunk into an Arrow array.
 ##### Syntax
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_error_data</span> <span class="nv">duckdb_data_chunk_to_arrow</span>(<span class="nv">
-</span>  <span class="nv">duckdb_arrow_options</span> <span class="nv">arrow_options</span>,<span class="nv">
+</span>  <span class="kt">duckdb_arrow_options</span> <span class="nv">arrow_options</span>,<span class="nv">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
 </span>  <span class="nv">struct</span> <span class="nv">ArrowArray</span> *<span class="nv">out_arrow_array
 </span>);
@@ -9598,7 +9598,7 @@ The number of rows changed.
 
 > Warning Deprecation notice. This method is scheduled for removal in a future release.
 
-Returns the error message contained within the result. The error is only set if `duckdb_query_arrow` returns
+ Returns the error message contained within the result. The error is only set if `duckdb_query_arrow` returns
 `DuckDBError`.
 
 The error message should not be freed. It will be de-allocated when `duckdb_destroy_arrow` is called.

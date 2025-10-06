@@ -126,6 +126,27 @@ MERGE INTO people
 | UPDATE       | 3  | Sarah | 89000.0  |
 | DELETE       | 1  | John  | 105000.0 |
 
+In some cases, you may want to perform a different action specifically if the source doesn't meet a condition. For example, if we expect that data that is not present on the source shouldn't be present in the target:
+
+```sql
+CREATE TABLE source AS
+    SELECT unnest([1,2]) AS id;
+
+MERGE INTO source
+    USING (SELECT 1 AS id) target
+    USING (id)
+    WHEN MATCHED THEN UPDATE
+    WHEN NOT MATCHED BY SOURCE THEN DELETE
+    RETURNING merge_action, *;
+```
+
+| merge_action | id |
+|--------------|---:|
+| UPDATE       | 1  |
+| DELETE       | 2  |
+
+There is also the possibility of specifying `WHEN NOT MATCHED BY TARGET`. However, the behavior is, as you may expect, the same as `WHEN NOT MATCHED` since by default when specifying conditions, we look at the target.
+
 ## Syntax
 
 <div id="rrdiagram"></div>
