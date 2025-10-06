@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: eeagrid
   description: Extension that adds support for working with the EEA Reference Grid System.
-  version: 1.3.1
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eeagrid
-  ref: 7baa632d47cb58830b82eb515eb01c34a0d2cb25
+  ref: 1b4f24e483f1b0be9cb2f774450b14805caddee9
 
 docs:
   hello_world: |
@@ -29,9 +29,17 @@ docs:
     ----
     5078600
 
+    SELECT EEA_GridNum2CoordX(23090257455218688, 1_000_000);
+    ----
+    5000000
+
     SELECT EEA_GridNum2CoordY(23090257455218688);
     ----
     2871400
+
+    SELECT EEA_GridNum2CoordY(23090257455218688, 1_000);
+    ----
+    2871000
 
     SELECT EEA_GridNumAt100m(23090257455218688);
     ----
@@ -88,13 +96,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                               description                                               | comment |                    examples                     |
-|---------------------|---------------|---------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------|
-| EEA_CoordXY2GridNum | scalar        | Returns the EEA Reference Grid code to a given XY coordinate (EPSG:3035).                               | NULL    | [SELECT EEA_CoordXY2GridNum(5078600, 2871400);] |
-| EEA_GridNum2CoordX  | scalar        | Returns the X-coordinate (EPSG:3035) of the grid cell corresponding to a given EEA Reference Grid code. | NULL    | [SELECT EEA_GridNum2CoordX(23090257455218688);] |
-| EEA_GridNum2CoordY  | scalar        | Returns the Y-coordinate (EPSG:3035) of the grid cell corresponding to a given EEA Reference Grid code. | NULL    | [SELECT EEA_GridNum2CoordY(23090257455218688);] |
-| EEA_GridNumAt100m   | scalar        | Returns the Grid code at 100 m resolution given an EEA reference Grid code.                             | NULL    | [SELECT EEA_GridNumAt100m(23090257455218688);]  |
-| EEA_GridNumAt10km   | scalar        | Returns the Grid code at 10 km resolution given an EEA reference Grid code.                             | NULL    | [SELECT EEA_GridNumAt10km(23090257455218688);]  |
-| EEA_GridNumAt1km    | scalar        | Returns the Grid code at 1 km resolution given an EEA reference Grid code.                              | NULL    | [SELECT EEA_GridNumAt1km(23090257455218688);]   |
+|    function_name    | function_type |                                                                            description                                                                             | comment |                    examples                     |
+|---------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------|
+| EEA_CoordXY2GridNum | scalar        | Returns the EEA Reference Grid code to a given XY coordinate (EPSG:3035).                                                                                          | NULL    | [SELECT EEA_CoordXY2GridNum(5078600, 2871400);] |
+| EEA_GridNum2CoordX  | scalar        | Returns the X-coordinate (EPSG:3035) of the grid cell corresponding to a given EEA Reference Grid code, optionally truncating the value to a specified resolution. | NULL    | [SELECT EEA_GridNum2CoordX(23090257455218688);] |
+| EEA_GridNum2CoordY  | scalar        | Returns the Y-coordinate (EPSG:3035) of the grid cell corresponding to a given EEA Reference Grid code, optionally truncating the value to a specified resolution. | NULL    | [SELECT EEA_GridNum2CoordY(23090257455218688);] |
+| EEA_GridNumAt100m   | scalar        | Returns the Grid code at 100 m resolution given an EEA reference Grid code.                                                                                        | NULL    | [SELECT EEA_GridNumAt100m(23090257455218688);]  |
+| EEA_GridNumAt10km   | scalar        | Returns the Grid code at 10 km resolution given an EEA reference Grid code.                                                                                        | NULL    | [SELECT EEA_GridNumAt10km(23090257455218688);]  |
+| EEA_GridNumAt1km    | scalar        | Returns the Grid code at 1 km resolution given an EEA reference Grid code.                                                                                         | NULL    | [SELECT EEA_GridNumAt1km(23090257455218688);]   |
 
 
