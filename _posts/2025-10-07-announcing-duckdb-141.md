@@ -21,7 +21,7 @@ See the [AWS documentation page]({% link docs/stable/core_extensions/aws.md %}) 
 
 ### Secret Validation
 
-Since DuckDB v1.4.0, the AWS `credential_chain` provider looks for and require credentials during `CREATE SECRET` time, failing if absent/unavailable. Since, v1.4.1 this behavior can also be configured via the `VALIDATION` option as follows:
+Since DuckDB v1.4.0, the AWS `credential_chain` provider looks for any required credentials during `CREATE SECRET` time, failing if absent/unavailable. Since, v1.4.1 this behavior can also be configured via the `VALIDATION` option as follows:
 
 ```sql
 CREATE OR REPLACE SECRET secret (
