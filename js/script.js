@@ -456,7 +456,7 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		if ( e.metaKey && ( e.which === 75 ) || e.ctrlKey && ( e.which === 75 ) ) {
 			// open search on cmd/ctrl + k
 			e.preventDefault(); // Prevent default browser behavior for all browsers
-			if( $('body').hasClass('documentation') || $('body').hasClass('landing') ){
+			if( $('body').hasClass('documentation') || $('body').hasClass('landing') || $('body').hasClass('blog') ){
 				toggleSearch();
 			}
 		}
