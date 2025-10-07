@@ -416,8 +416,8 @@ TO 'array_true.json' (FORMAT JSON, ARRAY TRUE);
 -- RETURNS: 
 /*
 [
-	{"id":1,"name":"Alice","ducks":[1,2,3]},
-	{"id":2,"name":"Bob","ducks":[1,2,3]}
+	{"id":1,"name":"Alice","numbers":[1,2,3]},
+	{"id":2,"name":"Bob","numbers":[1,2,3]}
 ]
 */
 ```
