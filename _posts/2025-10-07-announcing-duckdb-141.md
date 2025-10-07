@@ -24,7 +24,7 @@ The DuckDB [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/ove
         TYPE iceberg,
         ENDPOINT '⟨endpoint⟩',
         ACCESS_DELEGATION_MODE '⟨delegation_mode_option⟩',
-        SECRET 'my_secret'
+        SECRET '⟨my_secret⟩'
     );
     ```
 
