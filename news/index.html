@@ -35,8 +35,19 @@ body_class: blog
 				{% assign slugified_tag = tag | slugify %}
 				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
 			{% endfor %}
-			<div class="postpreview {{ tag_classes | downcase }}" data-title="{{ post.title | escape }}">
-				<a href="{{ post.url }}" title="{{ post.title }}" class="blocklink"></a>
+			{% if post.external_post_url %}
+				{% assign is_external = true %}
+				{% assign post_link = post.external_post_url %}
+				{% assign link_target = "_blank" %}
+				{% assign link_rel = "noopener noreferrer" %}
+			{% else %}
+				{% assign is_external = false %}
+				{% assign post_link = post.url %}
+				{% assign link_target = "_self" %}
+				{% assign link_rel = "" %}
+			{% endif %}
+			<div class="postpreview {{ tag_classes | downcase }}{% if is_external %} external-post{% endif %}" data-title="{{ post.title | escape }}">
+				<a href="{{ post_link }}" title="{{ post.title }}" class="blocklink" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
 				<div class="postimg custom">
 					{% if post.thumb %}
 						<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image">
@@ -54,6 +65,9 @@ body_class: blog
 					{% endif %}
 					<h3>{{ post.title }}</h3>
 					<div class="meta">
+						{% if is_external %}
+							<div class="external-source">{{ post.external_post_url | extract_domain }}</div>
+						{% endif %}
 						<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
 						<div class="author">{{ post.author }}</div>
 					</div>
