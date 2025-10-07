@@ -36,7 +36,7 @@ The DuckDB [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/ove
 
 ## AWS Improvements
 
-The `aws` extension received a number of changes, which make it easier to configure and troubleshoot.
+The `aws` extension received a number of changes, which makes it easier to configure and troubleshoot.
 See the [`aws` documentation page]({% link docs/stable/core_extensions/aws.md %}) for more details.
 
 ### Secret Validation
