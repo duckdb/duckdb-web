@@ -15,6 +15,25 @@ You can find the complete [release notes on GitHub](https://github.com/duckdb/du
 
 > To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some client libraries (e.g., R) due to the extra changes and review rounds required.
 
+## Iceberg Improvements
+
+* You can now attach to an Iceberg REST Catalog and specify an access delegation mode. This fixes a bug when using catalogs that did not vend credentials. The `ATTACH` statement will now look like this:
+
+    ```sql
+    ATTACH '⟨warehouse_name⟩' AS my_datalake (
+        TYPE iceberg,
+        ENDPOINT '⟨endpoint⟩',
+        ACCESS_DELEGATION_MODE '⟨delegation_mode_option⟩',
+        SECRET 'my_secret'
+    );
+    ```
+
+    The current `ACCESS_DELEGATION_MODE` options are `vended_credentials` (default) and `none`.
+
+* When attaching to AWS-managed REST Catalogs, the `http_timeout` setting is now respected.
+* Attempting to rename or replace a table within a transaction now throws a clear error message.
+* AWS Athena can now read Iceberg tables written by DuckDB.
+
 ## AWS Improvements
 
 The AWS extension received a number of changes, which make it easier to configure and troubleshoot.
@@ -43,7 +62,7 @@ Previously, setting the S3 region incorrectly could result in difficult-to-debug
 
 DuckDB v1.4.1 [removes `us-east-1` as the default S3 region](https://github.com/duckdb/duckdb/pull/19087) and returns a 301 error code if an incorrect region is used.
 
-## Missing Data
+## Fixes for Missing Data
 
 Users reported two cases where DuckDB omitted some data:
 
