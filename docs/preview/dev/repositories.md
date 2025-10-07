@@ -23,7 +23,7 @@ Several components of DuckDB are maintained in separate repositories.
 * [`duckdb-swift`](https://github.com/duckdb/duckdb-swift): Swift client
 * [`duckdb-wasm`](https://github.com/duckdb/duckdb-wasm): WebAssembly client
 * [`duckplyr`](https://github.com/tidyverse/duckplyr): a drop-in replacement for dplyr in R
-* [`go-duckdb`](https://github.com/marcboeker/go-duckdb): Go client
+* [`go-duckdb`](https://github.com/duckdb/duckdb-go): Go client
 
 ## Connectors
 

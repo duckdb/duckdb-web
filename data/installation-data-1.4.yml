@@ -108,7 +108,7 @@
   platform: all
   download_method: Package manager
   architecture: universal
-  installation_code: go get github.com/marcboeker/go-duckdb
+  installation_code: go get github.com/duckdb/duckdb-go
 - variant: stable
   environment: C/C++
   platform: Windows
