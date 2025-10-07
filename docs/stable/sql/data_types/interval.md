@@ -67,8 +67,6 @@ FROM (
 
 The following table describe how these parts are extracted by `datepart` in formulas, as a function of the three basis units.
 
-!-- markdownlint-disable MD056 -->
-
 | Part                 | Formula                                          |
 |----------------------|--------------------------------------------------|
 | `year`               | `#months // 12`                                  |
@@ -78,11 +76,7 @@ The following table describe how these parts are extracted by `datepart` in form
 | `minute`             | `(#microseconds // (60 * 1_000_000)) % 60`       |
 | `microsecond`        | `#microseconds % (60 * 1_000_000)`               |
 
-<!-- markdownlint-enable MD056 -->
-
 Additionally, `datepart` may be used to extract centuries, decades, quarters, seconds, and milliseconds from `INTERVAL`s. However, these parts are not required when reassembling the original `INTERVAL`. In fact, if the previous query additionally extracted any of these additional parts, then the sum of the extracted parts would generally be larger than the original `period`.
-
-!-- markdownlint-disable MD056 -->
 
 | Part                 | Formula                                          |
 |----------------------|--------------------------------------------------|
@@ -91,8 +85,6 @@ Additionally, `datepart` may be used to extract centuries, decades, quarters, se
 | `quarter`            | `datepart('month', interval) // 3 + 1`           | 
 | `second`             | `datepart('microsecond', interval) // 1_000_000` |
 | `millisecond`        | `datepart('microsecond', interval) // 1_000`     |
-
-<!-- markdownlint-enable MD056 -->
 
 > All units use 0-based indexing, except for quarters, which use 1-based indexing.
 
