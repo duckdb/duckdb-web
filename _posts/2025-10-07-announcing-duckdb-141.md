@@ -34,7 +34,7 @@ CREATE OR REPLACE SECRET secret (
 Two validation modes are supported:
 
 * `exists` (default) requires present credentials.
-* `none` allows `CREATE SECRET` to succeed for credential_chains with no available credentials.
+* `none` allows `CREATE SECRET` to succeed for `credential_chains` with no available credentials.
 
 ### S3 Default Region
 
