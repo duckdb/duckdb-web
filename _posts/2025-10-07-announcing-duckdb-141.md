@@ -19,16 +19,16 @@ The DuckDB [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/ove
 
 * You can now attach to an Iceberg REST Catalog and specify an access delegation mode. This fixes a bug when using catalogs that did not vend credentials. The `ATTACH` statement will now look like this:
 
-    ```sql
-    ATTACH '⟨warehouse_name⟩' AS my_datalake (
-        TYPE iceberg,
-        ENDPOINT '⟨endpoint⟩',
-        ACCESS_DELEGATION_MODE '⟨delegation_mode_option⟩',
-        SECRET '⟨my_secret⟩'
-    );
-    ```
+  ```sql
+  ATTACH '⟨warehouse_name⟩' AS my_datalake (
+      TYPE iceberg,
+      ENDPOINT '⟨endpoint⟩',
+      ACCESS_DELEGATION_MODE '⟨delegation_mode_option⟩',
+      SECRET '⟨my_secret⟩'
+  );
+  ```
 
-    The current `ACCESS_DELEGATION_MODE` options are `vended_credentials` (default) and `none`.
+  The current `ACCESS_DELEGATION_MODE` options are `vended_credentials` (default) and `none`.
 
 * When attaching to AWS-managed REST Catalogs, the `http_timeout` setting is now respected.
 * Attempting to rename or replace a table within a transaction now throws a clear error message.
