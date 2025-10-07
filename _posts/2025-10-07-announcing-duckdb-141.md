@@ -4,18 +4,18 @@ title: "Announcing DuckDB 1.4.1 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-4-1-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-1-lts.png"
-excerpt: "We are shipping DuckDB 1.4.1 LTS with a number of bugfixes and improvements."
+excerpt: "Today we are releasing DuckDB 1.4.1, the first bugfix release of our LTS edition."
 tags: ["release"]
 ---
 
-Today we are releasing DuckDB 1.4.1 LTS, the first bugfix release of our Long-Term Support (LTS) edition.
-
-In this blog post, we highlight a few important fixes and convenience improvements.
+In this blog post, we highlight a few important fixes and convenience improvements in DuckDB v1.4.1 LTS.
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.1).
 
-> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some client libraries (e.g., R) due to the extra changes and review rounds required.
+To install the new version, please visit the [installation page]({% link install/index.html %}).
 
 ## Iceberg Improvements
+
+The DuckDB [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}) received a number of patches:
 
 * You can now attach to an Iceberg REST Catalog and specify an access delegation mode. This fixes a bug when using catalogs that did not vend credentials. The `ATTACH` statement will now look like this:
 
@@ -36,8 +36,8 @@ You can find the complete [release notes on GitHub](https://github.com/duckdb/du
 
 ## AWS Improvements
 
-The AWS extension received a number of changes, which make it easier to configure and troubleshoot.
-See the [AWS documentation page]({% link docs/stable/core_extensions/aws.md %}) for more details.
+The `aws` extension received a number of changes, which make it easier to configure and troubleshoot.
+See the [`aws` documentation page]({% link docs/stable/core_extensions/aws.md %}) for more details.
 
 ### Secret Validation
 
@@ -73,13 +73,13 @@ DuckDB v1.4.1 fixes both of these issues.
 
 ## Autoloading
 
-In DuckDB v1.4.0, the [httpfs extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) was not always autoloaded. For example, running:
+In DuckDB v1.4.0, the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) was not always autoloaded. For example, running:
 
 ```sql
 COPY (SELECT 42 AS answer) TO 's3://my_bucket/my_file.parquet';
 ```
 
-without loading httpfs manually returned the following error:
+without loading `httpfs` manually returned the following error:
 
 ```console
 Cannot open file "s3://my_bucket/my_file.parquet": No such file or directory
