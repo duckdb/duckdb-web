@@ -387,7 +387,7 @@ COPY (SELECT 'QUACK!' AS hello) TO 'quack.json';
 Sets the value of column `num_list` to `[1,2,3]` and outputs the results to `numbers.json`:
 
 ```sql
-COPY (SELECT [1, 2, 3] AS num_list) TO 'numbers.json';
+COPY (SELECT [1,2,3] AS num_list) TO 'numbers.json';
 --RETURNS: {"num_list":[1,2,3]}
 ```
 
@@ -398,7 +398,7 @@ COPY (SELECT 'gzip' AS compression_type) TO 'compression.json.gz';
 -- RETURNS: {"compression_type":"gzip"}
 ```
 
-Sets the value of column `compression_type` to `gzip` and outputs the results to `compression.json.gz` with explicit compression:
+Sets the value of column `compression_type` to `gzip_explicit` and outputs the results to `compression.json.gz` with explicit compression:
 
 ```sql
 COPY (select 'gzip_explicit' AS compression_type) TO 'explcit_compression.json' (FORMAT JSON, COMPRESSION 'GZIP');
