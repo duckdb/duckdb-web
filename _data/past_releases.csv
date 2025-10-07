@@ -1,4 +1,5 @@
 release_date,version_number,lts,codename,duck_species_primary,duck_species_secondary,duck_wikipage,blog_post,end_of_life
+2025-10-07,1.4.1,true,,,,,,
 2025-09-16,1.4.0,true,Andium,Anas andium,Andean teal,https://en.wikipedia.org/wiki/Andean_teal,https://duckdb.org/2025/09/16/announcing-duckdb-140,2026-09-16
 2025-07-08,1.3.2,false,,,,,,
 2025-06-16,1.3.1,false,,,,,,
