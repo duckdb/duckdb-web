@@ -9,6 +9,13 @@
 	<title>{{ page.title }} – DuckDB</title>
 	{% endif %}
 	
+	{% if page.external_post_url %}
+	<meta http-equiv="refresh" content="0; url={{ page.external_post_url }}">
+	<script type="text/javascript">
+		window.location.href = "{{ page.external_post_url }}";
+	</script>
+	{% endif %}
+	
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css?{{ site.data['hash'] }}">
 	
 	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
