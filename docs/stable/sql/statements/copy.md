@@ -393,13 +393,6 @@ COPY (SELECT [1, 2, 3] AS num_list) TO 'numbers.json';
 --RETURNS: {"num_list":[1,2,3]}
 ```
 
-Sets the value of column `compression_type` to `gzip` and outputs the results to `compression.json.gz`:
-
-```sql
-COPY (SELECT 'gzip' AS compression_type) TO 'compression.json.gz';
--- RETURNS: {"compression_type":"gzip"}
-```
-
 Sets the value of column `compression_type` to `gzip_explicit` and outputs the results to `compression.json.gz` with explicit compression:
 
 ```sql
@@ -455,12 +448,6 @@ Type casts the string value `foo` to the `BLOB` data type and outputs the result
 
 ```sql
 COPY (select 'foo'::BLOB) TO 'blob_output.blob' (FORMAT BLOB);
-```
-
-Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output_gzip_inferred.blob.gz` with inferred compression:
-
-```sql
-COPY (select 'foo'::BLOB) TO 'blob_output_gzip_inferred.blob.gz' (FORMAT BLOB);
 ```
 
 Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output_gzip.blob.gz` with explicit compression:
