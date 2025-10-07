@@ -150,7 +150,7 @@ COPY lineitem FROM 'lineitem.json' (FORMAT json, ARRAY true);
 
 ## `COPY ... TO`
 
-`COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
+`COPY ... TO` exports data from DuckDB to an external CSV, Parquet, JSON or BLOB file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 
@@ -377,6 +377,97 @@ The below options are applicable when writing `JSON` files.
 | `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.json.gz` will use `gzip`, `file.json.zst` will use `zstd`, and `file.json` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/stable/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/stable/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
+
+
+Sets the value of column `hello` to `QUACK!` and outputs the results to `quack.json`:
+
+```sql
+COPY (SELECT 'QUACK!' AS hello) TO 'quack.json';
+--RETURNS: {"hello":"QUACK!"}
+```
+
+Sets the value of column `num_list` to `[1,2,3]` and outputs the results to `numbers.json`:
+
+```sql
+COPY (SELECT [1, 2, 3] AS num_list) TO 'numbers.json';
+--RETURNS: {"num_list":[1,2,3]}
+```
+
+Sets the value of column `compression_type` to `gzip` and outputs the results to `compression.json.gz`:
+
+```sql
+COPY (SELECT 'gzip' AS compression_type) TO 'compression.json.gz';
+-- RETURNS: {"compression_type":"gzip"}
+```
+
+Sets the value of column `compression_type` to `gzip` and outputs the results to `compression.json.gz` with explicit compression:
+
+```sql
+COPY (select 'gzip_explicit' AS compression_type) TO 'explcit_compression.json' (FORMAT JSON, COMPRESSION 'GZIP');
+-- RETURNS: {"compression_type":"gzip_explicit"}
+```
+
+Sets all values of single rows to be returned as nested arrays to `array_true.json`:
+
+```sql
+COPY (SELECT 1 AS id, 'Alice' AS name, [1,2,3] as numbers
+      UNION ALL
+      SELECT 2, 'Bob', [4,5,6] as numbers) 
+TO 'array_true.json' (FORMAT JSON, ARRAY TRUE);
+
+-- RETURNS: 
+/*
+[
+	{"id":1,"name":"Alice","ducks":[1,2,3]},
+	{"id":2,"name":"Bob","ducks":[1,2,3]}
+]
+*/
+```
+
+Sets all values of single rows to be returned as non-nested arrays to `array_false.json`:
+
+```sql
+COPY (SELECT 1 AS id, 'Alice' AS name, [1,2,3] as numbers
+      UNION ALL
+      SELECT 2, 'Bob', [4,5,6] as numbers) 
+TO 'array_false.json' (FORMAT JSON, ARRAY FALSE);
+
+-- RETURNS:
+/*
+{"id":1,"name":"Alice","numbers":[1,2,3]}
+{"id":2,"name":"Bob","numbers":[4,5,6]}
+*/
+```
+
+### BLOB Options
+
+The `BLOB` format option allows you to select a single column of a DuckDB table into a `.blob` file.
+The column must be cast to the `BLOB` data type. For details on typecasting, see the 
+[Casting Operations Matrix]({% link docs/preview/sql/data_types/typecasting.md %}#Casting-Operations-Matrix).
+
+The below options are applicable when writing `BLOB` files.
+
+| Name | Description | Type | Default |
+|:--|:-----|:-|:-|
+| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.json.gz` will use `gzip`, `file.json.zst` will use `zstd`, and `file.json` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
+
+Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output.blob`:
+
+```sql
+COPY (select 'foo'::BLOB) TO 'blob_output.blob' (FORMAT BLOB);
+```
+
+Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output_gzip_inferred.blob.gz` with inferred compression:
+
+```sql
+COPY (select 'foo'::BLOB) TO 'blob_output_gzip_inferred.blob.gz' (FORMAT BLOB);
+```
+
+Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output_gzip.blob.gz` with explicit compression:
+
+```sql
+COPY (select 'foo'::BLOB) TO 'blob_output_gzip.blob' (FORMAT BLOB, COMPRESSION 'GZIP');
+```
 
 ## Limitations
 
