@@ -46,10 +46,10 @@ DuckDB v1.4.1 [removes `us-east-1` as the default S3 region](https://github.com/
 
 Users reported two cases where DuckDB omitted some data:
 
-* The Parquet reader had a [regression which caused it to omit some rows](https://github.com/duckdb/duckdb/issues/19131) when using predicate pushdown.
-* In some cornercases, DuckDB's ART index, used for `CREATE INDEX`, [omitted some rows](https://github.com/duckdb/duckdb/issues/19190) in a non-deterministic fashion when running on multiple threads.
+* The Parquet reader had a [regression which caused it to omit some rows](https://github.com/duckdb/duckdb/issues/19131) when using predicate pushdown on certain string columns.
+* In some cornercases, DuckDB's ART index [omitted some rows](https://github.com/duckdb/duckdb/issues/19190) in a non-deterministic fashion when running on multiple threads. Note that this index is only used when you manually specify indexes using `CREATE INDEX`.
 
-This release fixes these issues.
+DuckDB v1.4.1 fixes both of these issues.
 
 ## Autoloading
 
