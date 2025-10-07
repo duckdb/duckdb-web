@@ -37,9 +37,10 @@ The `ROW_GROUP_SIZE` parameter specifies the minimum number of rows in a Parquet
 A Parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset.
 
 Compression algorithms are only applied per row group, so the larger the row group size, the more opportunities to compress the data.
-DuckDB can read Parquet row groups in parallel even within the same file and uses predicate pushdown to only scan the row groups whose metadata ranges match the `WHERE` clause of the query.
-However there is some overhead associated with reading the metadata in each group.
-A good approach would be to ensure that within each file, the total number of row groups is at least as large as the number of CPU threads used to query that file.
+On the other hand, larger row group sizes mean that each thread keeps more data in memory before flushing when streaming results.
+Another argument for smaller row group sizes is that DuckDB can read Parquet row groups in parallel even within the same file and uses predicate pushdown to only scan the row groups whose metadata ranges match the `WHERE` clause of the query. However, there is some overhead associated with reading the metadata in each group.
+
+A good rule of thumb is to ensure that the number of row groups per file is at least as large as the number of CPU threads used to query that file.
 More row groups beyond the thread count would improve the speed of highly selective queries, but slow down queries that must scan the whole file like aggregations.
 
 To write a query to a Parquet file with a different row group size, run:

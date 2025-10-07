@@ -213,6 +213,10 @@ Unlike PostgreSQL's `regexp_substr` function, DuckDB's `regexp_extract` returns 
 DuckDB does not support the [`to_date` PostgreSQL date formatting function](https://www.postgresql.org/docs/17/functions-formatting.html).
 Instead, please use the [`strptime` function]({% link docs/stable/sql/functions/dateformat.md %}#strptime-examples).
 
+### `date_part` Function
+
+Most parts extracted by the [`date_part` function]({% link docs/stable/sql/functions/datepart.md %}) are returned as integers. Since there are no infinite integer values in DuckDB, `NULL`s are returned for infinite timestamps.
+
 ## Resolution of Type Names in the Schema
 
 For [`CREATE TABLE` statements]({% link docs/stable/sql/statements/create_table.md %}), DuckDB attempts to resolve type names in the schema where a table is created. For example:

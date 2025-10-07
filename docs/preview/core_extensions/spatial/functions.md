@@ -4,6 +4,7 @@ title: Spatial Functions
 ---
 
 ## Function Index 
+
 **[Scalar Functions](#scalar-functions)**
 
 | Function | Summary |
@@ -151,7 +152,7 @@ title: Spatial Functions
 | [`ST_MemUnion_Agg`](#st_memunion_agg) | Computes the union of a set of input geometries. |
 | [`ST_Union_Agg`](#st_union_agg) | Computes the union of a set of input geometries |
 
-**[Macro Functions](#Macro-functions)**
+**[Macro Functions](#macro-functions)**
 
 | Function | Summary |
 | --- | --- |
@@ -247,14 +248,16 @@ GEOMETRY ST_Affine (geom GEOMETRY, a DOUBLE, b DOUBLE, d DOUBLE, e DOUBLE, xoff 
 Applies an affine transformation to a geometry.
 
 For the 2D variant, the transformation matrix is defined as follows:
-```
+
+```text
 | a b xoff |
 | d e yoff |
 | 0 0 1    |
 ```
 
 For the 3D variant, the transformation matrix is defined as follows:
-```
+
+```text
 | a b c xoff |
 | d e f yoff |
 | g h i zoff |

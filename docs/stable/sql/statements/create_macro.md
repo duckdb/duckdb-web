@@ -7,7 +7,6 @@ title: CREATE MACRO Statement
 ---
 
 The `CREATE MACRO` statement can create a scalar or table macro (function) in the catalog.
-A macro may only be a single `SELECT` statement (similar to a `VIEW`), but it has the benefit of accepting parameters.
 
 For a scalar macro, `CREATE MACRO` is followed by the name of the macro, and optionally parameters within a set of parentheses. The keyword `AS` is next, followed by the text of the macro. By design, a scalar macro may only return a single value.
 For a table macro, the syntax is similar to a scalar macro except `AS` is replaced with `AS TABLE`. A table macro may return a table of arbitrary size and shape.
@@ -285,7 +284,7 @@ Macro function 'my_macro(a)' requires a single positional argument, but 2 positi
 
 ### Using Subquery Macros
 
-If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DuckDB will return the following error:
+Table macros as well as scalar macros defined using scalar subqueries cannot be used in the arguments of table functions. DuckDB will return the following error:
 
 ```console
 Binder Error:

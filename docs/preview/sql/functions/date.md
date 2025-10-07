@@ -31,14 +31,10 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/previe
 |:--|:-------|
 | [`current_date`](#current_date) | Current date (at start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
 | [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date and return a `DATETIME` value. |
-| [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [partition]({% link docs/preview/sql/functions/datepart.md %}) boundaries between the dates. |
-| [`date_part(part, date)`](#date_partpart-date) | Get the [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to `extract`). |
-| [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The number of complete [partitions]({% link docs/preview/sql/functions/datepart.md %}) between the dates. |
+| [`date_diff(part, startdate, startdate)`](#date_diffpart-startdate-enddate) | The number of [`part`]({% link docs/preview/sql/functions/datepart.md %}) boundaries between `startdate` and `enddate`, inclusive of the larger date and exclusive of the smaller date. |
+| [`date_part(part, date)`](#date_partpart-date) | Get [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to `extract`). |
+| [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The signed length of the interval between `startdate` and `enddate`, truncated to whole multiples of [`part`]({% link docs/preview/sql/functions/datepart.md %}). |
 | [`date_trunc(part, date)`](#date_truncpart-date) | Truncate to specified [precision]({% link docs/preview/sql/functions/datepart.md %}). |
-| [`datediff(part, startdate, enddate)`](#datediffpart-startdate-enddate) | The number of [partition]({% link docs/preview/sql/functions/datepart.md %}) boundaries between the dates. Alias of `date_diff`. |
-| [`datepart(part, date)`](#datepartpart-date) | Get the [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to `extract`). Alias of `date_part`. |
-| [`datesub(part, startdate, enddate)`](#datesubpart-startdate-enddate) | The number of complete [partitions]({% link docs/preview/sql/functions/datepart.md %}) between the dates. Alias of `date_sub`. |
-| [`datetrunc(part, date)`](#datetruncpart-date) | Truncate to specified [precision]({% link docs/preview/sql/functions/datepart.md %}). Alias of `date_trunc`. |
 | [`dayname(date)`](#daynamedate) | The (English) name of the weekday. |
 | [`extract(part from date)`](#extractpart-from-date) | Get [subfield]({% link docs/preview/sql/functions/datepart.md %}) from a date. |
 | [`greatest(date, date)`](#greatestdate-date) | The later of two dates. |
@@ -74,9 +70,10 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/previe
 
 <div class="nostroke_table"></div>
 
-| **Description** | The number of [partition]({% link docs/preview/sql/functions/datepart.md %}) boundaries between the dates. |
+| **Description** | The number of [`part`]({% link docs/preview/sql/functions/datepart.md %}) boundaries between `startdate` and `enddate`, inclusive of the larger date and exclusive of the smaller date. |
 | **Example** | `date_diff('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `2` |
+| **Alias** | `datediff` |
 
 #### `date_part(part, date)`
 
@@ -85,14 +82,16 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/previe
 | **Description** | Get the [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | **Example** | `date_part('year', DATE '1992-09-20')` |
 | **Result** | `1992` |
+| **Alias** | `datepart` |
 
 #### `date_sub(part, startdate, enddate)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | The number of complete [partitions]({% link docs/preview/sql/functions/datepart.md %}) between the dates. |
+| **Description** | The signed length of the interval between `startdate` and `enddate`, truncated to whole multiples of [`part`]({% link docs/preview/sql/functions/datepart.md %}). |
 | **Example** | `date_sub('month', DATE '1992-09-15', DATE '1992-11-14')` |
 | **Result** | `1` |
+| **Alias** | `datesub` |
 
 #### `date_trunc(part, date)`
 
@@ -101,42 +100,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/previe
 | **Description** | Truncate to specified [precision]({% link docs/preview/sql/functions/datepart.md %}). |
 | **Example** | `date_trunc('month', DATE '1992-03-07')` |
 | **Result** | `1992-03-01` |
-
-#### `datediff(part, startdate, enddate)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | The number of [partition]({% link docs/preview/sql/functions/datepart.md %}) boundaries between the dates. |
-| **Example** | `datediff('month', DATE '1992-09-15', DATE '1992-11-14')` |
-| **Result** | `2` |
-| **Alias** | `date_diff`. |
-
-#### `datepart(part, date)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Get the [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to `extract`). |
-| **Example** | `datepart('year', DATE '1992-09-20')` |
-| **Result** | `1992` |
-| **Alias** | `date_part`. |
-
-#### `datesub(part, startdate, enddate)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | The number of complete [partitions]({% link docs/preview/sql/functions/datepart.md %}) between the dates. |
-| **Example** | `datesub('month', DATE '1992-09-15', DATE '1992-11-14')` |
-| **Result** | `1` |
-| **Alias** | `date_sub`. |
-
-#### `datetrunc(part, date)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Truncate to specified [precision]({% link docs/preview/sql/functions/datepart.md %}). |
-| **Example** | `datetrunc('month', DATE '1992-03-07')` |
-| **Result** | `1992-03-01` |
-| **Alias** | `date_trunc`. |
+| **Alias** | `datetrunc` |
 
 #### `dayname(date)`
 

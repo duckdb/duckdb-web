@@ -124,14 +124,16 @@ WHERE i % 2 = 0;
 ### Table Functions
 
 Some functions in duckdb return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references. 
-Examples include `read_csv`, `read_parquet`, `range`, `generate_series`, `repeat`, `unnest`, `glob`. For example, the previous example
+Examples include [`read_csv`]({%link docs/stable/data/csv/overview.md %}#csv-functions), [`read_parquet`]({%link docs/stable/data/parquet/overview.md %}#read_parquet-function), [`range`]({% link docs/stable/sql/functions/list.md %}#rangestart-stop-step), [`generate_series`]({% link docs/stable/sql/functions/list.md %}#generate_seriesstart-stop-step), [`repeat`]({% link docs/stable/sql/functions/utility.md %}#repeat_rowvarargs-num_rows), [`unnest`]({% link docs/stable/sql/query_syntax/unnest.md %}), and [`glob`]({%link docs/stable/sql/functions/utility.md %}#globsearch_path) (note that some of the examples here can be used as both scalar and table functions). 
+
+For example,
 
 ```sql
 SELECT *
 FROM 'test.csv';
 ```
 
-is implicitly translated to 
+is implicitly translated to a call of the `read_csv` table function:
 
 
 ```sql
@@ -146,7 +148,8 @@ SELECT *
 FROM read_csv('test.csv') WITH ORDINALITY;
 ```
 
-Note that the same result could be achieved using the `row_number` window function.
+Note that the same result could be achieved using the [`row_number` window function]({% link docs/stable/sql/functions/window_functions.md %}#row_numberorder-by-ordering).
+In the presence of [joins](#joins), however, `WITH ORDINALITY` allows enumerating one side of the join instead of the final result set, without having to resort to sub-queries.
 
 ## Joins
 
@@ -537,7 +540,7 @@ Duplicate alias "t" in query!
 Adding the aliases allows the query to parse successfully:
 
 ```sql
-SELECT * FROM t AS t t1 JOIN t t2 USING(x);
+SELECT * FROM t AS t1 JOIN t AS t2 USING(x);
 ```
 
 ### Shorthands in the `JOIN` Clause
