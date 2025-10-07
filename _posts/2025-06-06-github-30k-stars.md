@@ -10,7 +10,7 @@ excerpt: "We have reached 30&nbsp;000 stars on GitHub! Here's what happened whil
 
 The [`duckdb/duckdb` GitHub repository](https://github.com/duckdb/duckdb) has just passed 30&nbsp;000 stars!
 
-![Star history](/images/blog/star-history-20250606.png)
+![Star history]({% link images/blog/star-history-20250606.png %})
 
 We would like to use this event to stop for a moment and revisit recent developments in the DuckDB ecosystem since last December, not even six months ago, when we reached [25&nbsp;000 stars]({% post_url 2024-12-16-github-25k-stars %}).
 

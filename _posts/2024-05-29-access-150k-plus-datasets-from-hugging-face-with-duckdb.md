@@ -21,7 +21,7 @@ A dataset typically includes the following content:
 
 A typical repository looks like this:
 
-![Hugging face repository](/images/blog/hugging-face-example-repository.png)
+![Hugging face repository]({% link images/blog/hugging-face-example-repository.png %})
 
 ## Read Using `hf://` Paths
 

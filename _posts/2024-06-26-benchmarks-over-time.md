@@ -372,8 +372,8 @@ Future work can further test the boundaries of what is possible with DuckDB's ou
 
 DuckDB's performance on the same hardware has improved dramatically, and at the same time, the capabilities of hardware are increasing rapidly as well.
 
-![ram-prices](/images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-memory.png){: width="360" }![ssd-prices](/images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-SSDs.png){: width="360" }
-
+![ram-prices]({% link images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-memory.png %}){: width="450" }
+![ssd-prices]({% link images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-SSDs.png %}){: width="450" }
 Source: [Our World in Data](https://ourworldindata.org/grapher/historical-cost-of-computer-memory-and-storage?yScale=linear&time=2021..latest&facet=metric&uniformYAxis=0)
 
 The price of RAM has declined by 2.2× and the price of SSD storage has decreased by 2.7× from 2021 to 2023 alone.

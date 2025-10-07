@@ -31,7 +31,7 @@ Arrow and Parquet are complementary formats. Parquet's sophisticated system of e
 
 To give you an illustration of just how simple the Arrow IPC format is, consider the following illustration. In the Arrow IPC format, a table is serialized as a sequence of record batches (a collection of records organized in a columnar layout), preceded by their shared schema:
 
-![An illustration of an Arrow IPC stream transmitting data from a table with three columns. The first record batch contains the values for the first three rows, the second record batch contains the values for the next three rows, and so on. Actual Arrow record batches might contain thousands to millions of rows.](/images/blog/arrow_ipc_fig1.png)
+![An illustration of an Arrow IPC stream transmitting data from a table with three columns. The first record batch contains the values for the first three rows, the second record batch contains the values for the next three rows, and so on. Actual Arrow record batches might contain thousands to millions of rows.]({% link images/blog/arrow_ipc_fig1.png %})
 
 *Figure from [Apache Arrow Blog: How the Apache Arrow Format Accelerates Query Result Transfer](https://arrow.apache.org/blog/2025/01/10/arrow-result-transfer).*
 
