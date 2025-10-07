@@ -108,7 +108,7 @@ For details, see the [Boolean Type documentation]({% link docs/stable/sql/data_t
 
 ## `NULL` and `IN` / `NOT IN`
 
-The behavior of `... IN ⟨something with a NULL⟩` is different from `... IN ⟨something with no NULLs⟩`.
+The behavior of `... IN ⟨something with a NULL⟩`{:.language-sql .highlight} is different from `... IN ⟨something with no NULLs⟩`{:.language-sql .highlight}.
 For details, see the [`IN` documentation]({% link docs/stable/sql/expressions/in.md %}).
 
 ## `NULL` and Aggregate Functions
