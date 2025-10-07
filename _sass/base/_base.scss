@@ -12,7 +12,7 @@
 }
 
 body{
-	color: var(--main-text-primary-color);
+	color: var(--main-text-primary-color, #0D0D0D);
 	background: var(--main-body-background-color, #FAFAFA);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
