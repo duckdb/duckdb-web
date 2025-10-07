@@ -4,13 +4,14 @@ title: "Announcing DuckDB 1.4.1 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-4-1-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-1-lts.png"
-excerpt: "We are shipping DuckDB 1.4.1 LTS!"
+excerpt: "We are shipping DuckDB 1.4.1 LTS with a number of bugfixes and improvements."
 tags: ["release"]
 ---
 
-Today we are releasing DuckDB 1.4.1 LTS, the first bugfix release for a Long-Term Support (LTS) edition of DuckDB.
+Today we are releasing DuckDB 1.4.1 LTS, the first bugfix release of our Long-Term Support (LTS) edition.
+
 In this blog post, we highlight a few important fixes and convenience improvements.
-For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
+You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.1).
 
 > To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some client libraries (e.g., R) due to the extra changes and review rounds required.
 
@@ -21,7 +22,7 @@ See the [AWS documentation page]({% link docs/stable/core_extensions/aws.md %}) 
 
 ### Secret Validation
 
-Since DuckDB v1.4.0, the AWS `credential_chain` provider looks for any required credentials during `CREATE SECRET` time, failing if absent/unavailable. Since, v1.4.1 this behavior can also be configured via the `VALIDATION` option as follows:
+Since DuckDB v1.4.0, the AWS `credential_chain` provider looks for any required credentials during `CREATE SECRET` time, failing if absent/unavailable. Since v1.4.1 this behavior can also be configured via the `VALIDATION` option as follows:
 
 ```sql
 CREATE OR REPLACE SECRET secret (
@@ -47,7 +48,7 @@ DuckDB v1.4.1 [removes `us-east-1` as the default S3 region](https://github.com/
 Users reported two cases where DuckDB omitted some data:
 
 * The Parquet reader had a [regression which caused it to omit some rows](https://github.com/duckdb/duckdb/issues/19131) when using predicate pushdown on certain string columns.
-* In some cornercases, DuckDB's ART index [omitted some rows](https://github.com/duckdb/duckdb/issues/19190) in a non-deterministic fashion when running on multiple threads. Note that this index is only used when you manually specify indexes using `CREATE INDEX`.
+* In certain edge cases, DuckDB’s ART index could [omit rows](https://github.com/duckdb/duckdb/issues/19190) rows non-deterministically when running on multiple threads. Note that this index is only used when you manually specify an index with [`CREATE INDEX`]({% link docs/stable/sql/indexes.md %}).
 
 DuckDB v1.4.1 fixes both of these issues.
 
@@ -69,7 +70,7 @@ With v1.4.1, autoloading works and DuckDB can write to the bucket right away.
 
 ## Docker Image
 
-We now officially distribute a [Docker image](https://hub.docker.com/r/duckdb/duckdb/), so you can run DuckDB in a containerized environment:
+We now officially distribute a [Docker image](https://hub.docker.com/r/duckdb/duckdb/), making it easy to run DuckDB in a containerized environment:
 
 ```batch
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
