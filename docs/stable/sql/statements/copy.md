@@ -450,7 +450,7 @@ Type casts the string value `foo` to the `BLOB` data type and outputs the result
 COPY (select 'foo'::BLOB) TO 'blob_output.blob' (FORMAT BLOB);
 ```
 
-Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output_gzip.blob.gz` with explicit compression:
+Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output_gzip.blob.gz` with `gzip` compression:
 
 ```sql
 COPY (select 'foo'::BLOB) TO 'blob_output_gzip.blob' (FORMAT BLOB, COMPRESSION 'GZIP');
