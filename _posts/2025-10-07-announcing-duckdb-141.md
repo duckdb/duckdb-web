@@ -65,7 +65,7 @@ without loading httpfs manually returned the following error:
 Cannot open file "s3://my_bucket/my_file.parquet": No such file or directory
 ```
 
-With v1.4.1, the autoloading works and DuckDB can read from the bucket right away.
+With v1.4.1, autoloading works and DuckDB can write to the bucket right away.
 
 ## Docker Image
 
