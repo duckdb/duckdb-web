@@ -36,7 +36,7 @@ DuckDB implements MVCC using a technique inspired by the paper [“Fast Serializ
 UPDATE Accounts SET Balance = Balance + 5 WHERE Name = 'Sally';
 ```
 
-<img src="/images/blog/mvcc/rowbasedmvcc.png"
+<img src="{% link images/blog/mvcc/rowbasedmvcc.png %}"
      alt="Row-Based MVCC"
      width="800"
  />
@@ -68,7 +68,7 @@ In order to address these issues – DuckDB instead stores **bulk version inform
 UPDATE Accounts SET Balance = Balance + Balance / 5;
 ```
 
-<img src="/images/blog/mvcc/columnbasedmvcc.png"
+<img src="{% link images/blog/mvcc/columnbasedmvcc.png %}"
      alt="Column-Based MVCC"
      width="800"
  />

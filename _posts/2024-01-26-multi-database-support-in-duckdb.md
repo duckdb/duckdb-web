@@ -8,7 +8,7 @@ excerpt: DuckDB can attach MySQL, Postgres, and SQLite databases in addition to 
 tags: ["extensions"]
 ---
 
-<img src="/images/blog/duckdb-multidb-support.png"
+<img src="{% link images/blog/duckdb-multidb-support.png %}"
      alt="DuckDB supports reading and writing to MySQL, Postgres, and SQLite"
      width="700"
 />

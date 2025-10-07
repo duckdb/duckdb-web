@@ -28,7 +28,7 @@ We quickly found that the iPhone can indeed run the workload without any problem
 The results got us thinking: what if we improve the cooling of the phone? To this end, we purchased a box of dry ice, which has a temperature below -50 degrees Celsius, and put the phone in the box for the duration of the experiments.
 
 <div align="center">
-    <img src="/images/blog/tpch-mobile/ice-cooled-iphone-1.jpg"
+    <img src="{% link images/blog/tpch-mobile/ice-cooled-iphone-1.jpg %}"
     alt="iPhone in a box of dry ice, running TPC-H"
     width="600"
     /></div>
@@ -37,7 +37,7 @@ The results got us thinking: what if we improve the cooling of the phone? To thi
 This helped a lot: DuckDB completed in 478.2 seconds. This is a more than 20% improvement – but we still didn't manage to be under 400 seconds.
 
 <div align="center">
-    <img src="/images/blog/tpch-mobile/ice-cooled-iphone-2.jpg"
+    <img src="{% link images/blog/tpch-mobile/ice-cooled-iphone-2.jpg %}"
     alt="The phone with icing on it, a few minutes after finishing the benchmark"
     width="300"
     /></div>
@@ -50,7 +50,7 @@ In our next experiment, we picked up a [Samsung Galaxy S24 Ultra phone](https://
 We ran DuckDB in the [Termux terminal emulator](https://termux.dev/en/). We compiled DuckDB [CLI client]({% link docs/stable/clients/cli/overview.md %}) from source following the [Android build instructions]({% link docs/stable/dev/building/android.md %}) and ran the experiments from the command line.
 
 <div align="center">
-    <img src="/images/blog/tpch-mobile/duckdb-termux-android-emulator.png"
+    <img src="{% link images/blog/tpch-mobile/duckdb-termux-android-emulator.png %}"
     alt="Screenshot of DuckDB in Termux, running in the Android emulator"
     width="600"
     /></div>
@@ -94,7 +94,7 @@ If we read the paper, we learn that the experiments were carried out on an HP wo
 It also had an Itanium CPU and looked like this:
 
 <div align="center">
-    <img src="/images/blog/tpch-mobile/hp-itanium-workstation.jpg"
+    <img src="{% link images/blog/tpch-mobile/hp-itanium-workstation.jpg %}"
     alt="The Itanium2 workstation used in original the experiments"
     width="600"
     /></div>
@@ -105,7 +105,7 @@ It also had an Itanium CPU and looked like this:
 The paper provides a detailed breakdown of the runtimes:
 
 <div align="center">
-    <img src="/images/blog/tpch-mobile/cidr2005-monetdb-x100-results.png"
+    <img src="{% link images/blog/tpch-mobile/cidr2005-monetdb-x100-results.png %}"
     alt="Benchmark results from the CIDR 2005 paper “MonetDB/X100: Hyper-Pipelining Query Execution”"
     width="450"
     /></div>
@@ -121,7 +121,7 @@ Here is a video of Hannes presenting the results at the event:
 And here are all results visualized on a plot:
 
 <div align="center">
-    <img src="/images/blog/tpch-mobile/tpch-mobile-experiment-runtimes.svg"
+    <img src="{% link images/blog/tpch-mobile/tpch-mobile-experiment-runtimes.svg %}"
     alt="Plot with the TPC-H SF100 experiment results for MonetDB/X100 and DuckDB"
     width="750"
     /></div>

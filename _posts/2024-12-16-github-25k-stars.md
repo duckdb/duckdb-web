@@ -32,7 +32,7 @@ Early next year, we are going to host [DuckCon in Amsterdam]({% link _events/202
 But for now, let’s sit around the syntax tree and be merry thinking about what’s to come.
 
 <div align="center">
-    <img src="/images/blog/duckdb-syntax-tree.jpg"
+    <img src="{% link images/blog/duckdb-syntax-tree.jpg %}"
     alt="Christmas tree with SQL syntax decorations"
     width="800"
     /></div>

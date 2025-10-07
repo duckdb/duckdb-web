@@ -8,7 +8,7 @@ excerpt: "DuckDB ships with a fast and robust CSV reader, which â€“ we believe â
 tags: ["benchmark"]
 ---
 
-<img src="/images/blog/pollock/pollock-duck.png"
+<img src="{% link images/blog/pollock/pollock-duck.png %}"
      alt="DuckDB art"
      width="500"
 />
@@ -19,7 +19,7 @@ It is a well-known fact that CSV files come in all shapes and forms.
 While there is a [well-defined standard](https://www.ietf.org/rfc/rfc4180.txt), it is common for systems to export data without following even the basic rules of CSV construction.
 For example, Rabobank, one of the biggest banks in the Netherlands, exports the financial data of its clients with unescaped quotes in quoted values.
 
-<img src="/images/blog/pollock/tweet.png"
+<img src="{% link images/blog/pollock/tweet.png %}"
      alt="Hannes' tweet reaching out to the bank"
      width="500"
 />

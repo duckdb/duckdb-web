@@ -10,11 +10,11 @@ tags: ["using DuckDB"]
 
 > For the duckplyr documentation, visit [`duckplyr.tidyverse.org`](https://duckplyr.tidyverse.org/).
 
-<img src="/images/blog/duckplyr/duckplyr-logo-light.svg"
+<img src="{% link images/blog/duckplyr/duckplyr-logo-light.svg %}"
      width="800"
      class="lightmode-img"
      />
-<img src="/images/blog/duckplyr/duckplyr-logo-dark.svg"
+<img src="{% link images/blog/duckplyr/duckplyr-logo-dark.svg %}"
      width="800"
      class="darkmode-img"
      />

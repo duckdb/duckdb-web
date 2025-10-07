@@ -29,7 +29,7 @@ curl https://install.duckdb.org | sh
 
 We changed the theme to _[Osaka Jade](https://github.com/Justikun/omarchy-osaka-jade-theme)_ for a more Matrix-like look and got to work:
 
-<img src="/images/blog/framework-13-duckdb.jpg"
+<img src="{% link images/blog/framework-13-duckdb.jpg %}"
      alt="DuckDB running on the Framework Laptop 13&quot;"
      width="800"
      />

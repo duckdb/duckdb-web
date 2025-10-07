@@ -17,7 +17,7 @@ Cartesian was the smallest distribution that included box plots
 <script src="{{ site.baseurl }}/js/plotly-cartesian-3.0.1.min.js"></script>
 
 <div align="center" id="hilbert-curve">
-<img src="/images/blog/sorting-for-fast-selective-queries/Hilbert-curve_rounded-gradient-animated.gif" alt="Animated Hilbert Encoding across 2 axes." width="600"/>
+<img src="{% link images/blog/sorting-for-fast-selective-queries/Hilbert-curve_rounded-gradient-animated.gif %}" alt="Animated Hilbert Encoding across 2 axes." width="600"/>
 
 <a href="https://commons.wikimedia.org/w/index.php?curid=67998181">An animated Hilbert space filling curve</a> by <a href="//commons.wikimedia.org/w/index.php?title=User:TimSauder&amp;action=edit&amp;redlink=1" class="new" title="User:TimSauder (page does not exist)">TimSauder</a> – <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>
 

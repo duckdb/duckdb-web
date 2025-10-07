@@ -6,7 +6,7 @@ excerpt: ""
 tags: ["release"]
 ---
 
-<img src="/images/blog/labrador_duck.png"
+<img src="{% link images/blog/labrador_duck.png %}"
      alt="Image of the labrador duck"
      width="200"
      />

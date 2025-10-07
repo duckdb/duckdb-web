@@ -56,7 +56,7 @@ These nested vector representations enable our execution engine to reuse existin
 We'll elaborate more on why this is relevant later.
 
 <div align="center">
-<img src="/images/blog/lambda/vectors.png" alt="drawing" width="240"/>
+<img src="{% link images/blog/lambda/vectors.png %}" alt="drawing" width="240"/>
 </div>
 
 ## Lambdas
@@ -124,7 +124,7 @@ For the correlated columns `rowid` and `n`, we use [selection vectors](https://d
 This way, we can fire our expression execution on the child vector, another nested vector, and the expanded vector `n`.
 
 <div align="center">
-<img src="/images/blog/lambda/relational.png" alt="drawing" width="600"/>
+<img src="{% link images/blog/lambda/relational.png %}" alt="drawing" width="600"/>
 </div>
 
 The heavy-hitting operation is the last one, reaggregating the transformed elements into their respective lists.
@@ -161,7 +161,7 @@ As this is a list-native function, we’re aware of the existence of a parent ve
 So, once we get the result from the transformation, we can completely omit the reaggregation step.
 
 <div align="center">
-<img src="/images/blog/lambda/native.png" alt="drawing" width="600"/>
+<img src="{% link images/blog/lambda/native.png %}" alt="drawing" width="600"/>
 </div>
 
 To see the efficiency of `list_transform` in action, we executed a simple benchmark.

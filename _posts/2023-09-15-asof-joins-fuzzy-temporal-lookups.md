@@ -646,7 +646,7 @@ ORDER BY 1, 2;
 
 The results are shown here:
 
-<img src="/images/asof-rank.png"
+<img src="{% link images/asof-rank.png %}"
      alt="Rank Benchmark Results"
      width="760"
 />

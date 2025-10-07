@@ -8,7 +8,7 @@ excerpt: ""
 tags: ["release"]
 ---
 
-<img src="/images/blog/yellow-billed-duck.jpg"
+<img src="{% link images/blog/yellow-billed-duck.jpg %}"
      alt="Image of the Yellow Billed Duck"
      width="200"
      />

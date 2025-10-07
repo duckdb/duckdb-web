@@ -64,7 +64,7 @@ This will first copy the `customer.parquet` to the DuckDB-Wasm file system, then
 In short, your DuckDB instance, which _runs entirely within your browser,_ first installed and loaded the [TPC-H extension]({% link docs/stable/core_extensions/tpch.md %}). It then used the extension logic to generate data and convert it to a Parquet file. Finally, you could download the Parquet file as a regular file to your local file system.
 
 <a href="https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D0.1)~,PRAGMA-tpch(7)~">
-<img src="/images/wasm-blog-post-shell-tpch.png"
+<img src="{% link images/wasm-blog-post-shell-tpch.png %}"
      alt="Wasm shell using the TPC-H extension"
      width="800"
      /></a>
@@ -107,7 +107,7 @@ Let's dig into how this all works.
 The following figure shows an overview of DuckDB-Wasm's architecture.
 Both components in the figure run within the web browser.
 
-<img src="/images/wasm-blog-post-overview.png"
+<img src="{% link images/wasm-blog-post-overview.png %}"
      alt="Overview of the architecture of DuckDB-Wasm"
      width="600"
      />
@@ -119,7 +119,7 @@ This component lives in a Web Worker and communicates with the main thread compo
 
 What happens when we add extensions to the mix?
 
-<img src="/images/wasm-blog-post-extensions.png"
+<img src="{% link images/wasm-blog-post-extensions.png %}"
      alt="Overview of the architecture of DuckDB-Wasm with extensions"
      width="828"
      />
@@ -184,7 +184,7 @@ In this blog post, we explained how DuckDB-Wasm supports extensions, and demonst
 
 Thanks to the portability of DuckDB, the scripts shown in this blog post also work on your smartphone:
 
-<img src="/images/wasm-blog-post-ios-shell.png"
+<img src="{% link images/wasm-blog-post-ios-shell.png %}"
      alt="Wasm shell using the TPC-H extension on iOS"
      width="400"
      />

@@ -60,7 +60,7 @@ We plot on a bar chart the emotion distribution to have an initial understanding
 <div align="center" style="margin:10px">
     <a href="/images/blog/text-analytics/emotions_in_dataset.png">
         <img
-          src="/images/blog/text-analytics/emotions_in_dataset.png"
+          src="{% link images/blog/text-analytics/emotions_in_dataset.png %}"
           alt="Emotion distribution in the data"
           width="700"
         />
@@ -172,7 +172,7 @@ We can also visualize the data to gain insights. One simple and effective approa
 <div align="center" style="margin:10px">
     <a href="/images/blog/text-analytics/most_used_word.png">
         <img
-          src="/images/blog/text-analytics/most_used_word.png"
+          src="{% link images/blog/text-analytics/most_used_word.png %}"
           alt="Most used word"
           width="700"
         />
@@ -191,7 +191,7 @@ By applying `stem` to the token column, we can now visualize the most frequently
 <div align="center" style="margin:10px">
     <a href="/images/blog/text-analytics/most_used_stem.png">
         <img
-          src="/images/blog/text-analytics/most_used_stem.png"
+          src="{% link images/blog/text-analytics/most_used_stem.png %}"
           alt="Most used stem"
           width="700"
         />
@@ -241,7 +241,7 @@ text_emotions_rel
 <div align="center" style="margin:10px">
     <a href="/images/blog/text-analytics/fts.png">
         <img
-          src="/images/blog/text-analytics/fts.png"
+          src="{% link images/blog/text-analytics/fts.png %}"
           alt="FTS results"
           width="700"
         />
@@ -341,7 +341,7 @@ text_emotions_rel
 <div align="center" style="margin:10px">
     <a href="/images/blog/text-analytics/vss.png">
         <img
-          src="/images/blog/text-analytics/vss.png"
+          src="{% link images/blog/text-analytics/vss.png %}"
           alt="VSS results"
           width="700"
         />
@@ -359,7 +359,7 @@ For example, we show in the below [heatmap chart](https://plotly.com/python/heat
 <div align="center" style="margin:10px">
     <a href="/images/blog/text-analytics/best_matched_emotion.png">
         <img
-          src="/images/blog/text-analytics/best_matched_emotion.png"
+          src="{% link images/blog/text-analytics/best_matched_emotion.png %}"
           alt="Best matched emotion versus classified emotion"
           width="700"
         />
@@ -425,7 +425,7 @@ And here are the results! Much better, don't you think?
 <div align="center" style="margin:10px">
     <a href="/images/blog/text-analytics/hybrid.png">
         <img
-          src="/images/blog/text-analytics/hybrid.png"
+          src="{% link images/blog/text-analytics/hybrid.png %}"
           alt="Hybrid search results"
           width="700"
         />

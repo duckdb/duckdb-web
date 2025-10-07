@@ -69,7 +69,7 @@ ORDER BY 1;
 <div align="center" style="margin:10px">
     <a href="/images/blog/time-based-analysis/hour_services.png">
         <img
-          src="/images/blog/time-based-analysis/hour_services.png"
+          src="{% link images/blog/time-based-analysis/hour_services.png %}"
           alt="Hourly Number of Train Services, 2024"
           width="700"
         />
@@ -120,7 +120,7 @@ Given that tumbling windows are non-overlapping intervals, we can calculate summ
 <div align="center" style="margin:10px">
     <a href="/images/blog/time-based-analysis/hour_quarter_services.png">
         <img
-          src="/images/blog/time-based-analysis/hour_quarter_services.png"
+          src="{% link images/blog/time-based-analysis/hour_quarter_services.png %}"
           alt="Average Number of Train Services, per 15 minutes, 2024"
           width="700"
         />
@@ -374,7 +374,7 @@ Something must have happened on 29 April 2024! We observe that, during the 18 ho
 <div align="center" style="margin:10px">
     <a href="/images/blog/time-based-analysis/timeline_gap.png">
         <img
-          src="/images/blog/time-based-analysis/timeline_gap.png"
+          src="{% link images/blog/time-based-analysis/timeline_gap.png %}"
           alt="Train Service Windows on 29 April 2024"
           width="700"
         />

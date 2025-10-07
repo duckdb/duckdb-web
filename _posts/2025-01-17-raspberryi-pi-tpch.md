@@ -42,7 +42,7 @@ We installed the heat sinks, popped the SSD into place, and assembled the house.
 Here is a photo of our machine:
 
 <div align="center">
-    <img src="/images/blog/raspberry-pi-5-duckdb.jpg"
+    <img src="{% link images/blog/raspberry-pi-5-duckdb.jpg %}"
     alt="Raspberry 5 in an Argon ONE v3 case"
     width="600"
     /></div>

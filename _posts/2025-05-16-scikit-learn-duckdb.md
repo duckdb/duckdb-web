@@ -47,7 +47,7 @@ We can now plot the data and check for species specific clusters. For example, u
 <div align="center" style="margin:10px">
     <a href="/images/blog/scikit-learn-duckdb/penguins_species.png">
         <img
-          src="/images/blog/scikit-learn-duckdb/penguins_species.png"
+          src="{% link images/blog/scikit-learn-duckdb/penguins_species.png %}"
           alt="Penguins observations, bill depth and length"
           width="700"
         />
@@ -106,7 +106,7 @@ Our scope is to predict a penguin's specie based on its characteristics (feature
 <div align="center" style="margin:10px">
     <a href="/images/blog/scikit-learn-duckdb/decision_tree.png">
         <img
-          src="/images/blog/scikit-learn-duckdb/decision_tree.png"
+          src="{% link images/blog/scikit-learn-duckdb/decision_tree.png %}"
           alt="Model decision tree"
           width="700"
         />

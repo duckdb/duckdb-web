@@ -8,7 +8,7 @@ image: "/images/blog/thumbs/duckdb-release-0-8-0.png"
 tags: ["release"]
 ---
 
-<img src="/images/blog/mottled_duck.jpg"
+<img src="{% link images/blog/mottled_duck.jpg %}"
      alt="Image of the Mottled Duck"
      width="200"
      />

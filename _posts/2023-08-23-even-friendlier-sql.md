@@ -6,7 +6,7 @@ excerpt: DuckDB continues to push the boundaries of SQL syntax to both simplify 
 tags: ["using DuckDB"]
 ---
 
-<img src="/images/blog/ai_generated_star_trek_rubber_duck.png"
+<img src="{% link images/blog/ai_generated_star_trek_rubber_duck.png %}"
      alt="Looks like a Duck ready to boldly go where databases have not gone before"
      width="200"
 />

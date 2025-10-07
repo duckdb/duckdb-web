@@ -7,7 +7,7 @@ tags: ["using DuckDB"]
 ---
 
 <!-- https://www.ebay.com/itm/185408133658 -->
-<img src="/images/blog/mds_in_a_box/rubber_duck_on_a_box.jpg"
+<img src="{% link images/blog/mds_in_a_box/rubber_duck_on_a_box.jpg %}"
      alt="Duck on a box"
      width="200"
  />
@@ -130,12 +130,12 @@ There are 2 models designed for analysis, although any number of them can be use
 
 Below is an example Superset dashboard containing several charts based on this data. Superset is able to clearly summarize the data as well as display the level of variability within the monte carlo simulation. The duckdb_engine queries can be refreshed quickly when new simulations are run.
 
-<img src="/images/blog/mds_in_a_box/mds_in_a_box_superset_1.png"
+<img src="{% link images/blog/mds_in_a_box/mds_in_a_box_superset_1.png %}"
      alt="mds_in_a_box_superset_1"
      width="680"
  />
 
-<img src="/images/blog/mds_in_a_box/mds_in_a_box_superset_2.png"
+<img src="{% link images/blog/mds_in_a_box/mds_in_a_box_superset_2.png %}"
      alt="mds_in_a_box_superset_2"
      width="680"
  />

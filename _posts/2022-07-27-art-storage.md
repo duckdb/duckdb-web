@@ -6,7 +6,7 @@ excerpt: DuckDB uses Adaptive Radix Tree (ART) Indexes to enforce constraints an
 tags: ["deep dive"]
 ---
 
-<img src="/images/blog/ART/pedro-art.jpg"
+<img src="{% link images/blog/ART/pedro-art.jpg %}"
      alt="DuckDB ART"
      width="400"
  />
@@ -25,14 +25,14 @@ Adaptive Radix Trees are, in essence, [Tries](https://en.wikipedia.org/wiki/Trie
 
 Tries are tree data structures, where each tree level holds information on part of the dataset. They are commonly exemplified with strings. In the figure below, you can see a Trie representation of a table containing the strings "pedro", "paulo" and "peri" The root node represents the first character "p" with children "a" (from paulo) and "e" (from pedro and peri), and so on.
 
-<img src="/images/blog/ART/string-trie.png"
+<img src="{% link images/blog/ART/string-trie.png %}"
      alt="String Trie"
      width="300"
  />
 
 To perform lookups on a Trie, you must match each character of the key to the current level of the Trie. For example, if you search for pedro, you must check the root contains the letter p. If it does, you check if any of its children contains the letter e, up to the point you reach a leaf node containing the pointer to the tuple that holds this string. (See figure below).
 
-<img src="/images/blog/ART/lookup-trie.png"
+<img src="{% link images/blog/ART/lookup-trie.png %}"
      alt="Lookup Trie"
      width="200"
  />
@@ -45,7 +45,7 @@ To have more realistic examples, from this point onwards, all depictions in this
 
 In the example below, we have a Trie that indexes the values 7, 10, and 12. You can also see the binary representation of each value on the table next to them. Each node consists of the bits 0 and 1, with a pointer next to them. This pointer can either be set (represented by `*`) or null (represented by `Ø`). Similar to the string Trie we had before, each level of the Trie will represent two bits, with the pointer next to these bits pointing to their children. Finally, the leaves point to the actual data. 
 
-<img src="/images/blog/ART/2-bit-trie.png"
+<img src="{% link images/blog/ART/2-bit-trie.png %}"
      alt="2-bit Trie"
      width="600"
  />
@@ -56,14 +56,14 @@ One can quickly notice that this Trie representation is wasteful on two differen
 
 The basic idea of vertical compression is that we collapse paths with nodes that only have one child. To support this, nodes store a prefix variable containing the collapsed path to that node. You can see a representation of this in the figure below. For example, one can see that the first four nodes have only one child. These nodes can be collapsed to the third node (i.e., the first one that bifurcates) as a prefix path. When performing lookups, the key must match all values included in the prefix path. 
 
-<img src="/images/blog/ART/2-bit-collapse-trie.png"
+<img src="{% link images/blog/ART/2-bit-collapse-trie.png %}"
      alt="2-bit Radix Tree (Collapsing)"
      width="600"
  />
 
 Below you can see the resulting Trie after vertical compression. This Trie variant is commonly known as a Radix Tree. Although a lot of wasted space has already been saved with this Trie variant, we still have many nodes with unset pointers.
 
-<img src="/images/blog/ART/2-bit-collapse-trie-result.png"
+<img src="{% link images/blog/ART/2-bit-collapse-trie-result.png %}"
      alt="2-bit Radix Tree"
      width="600"
  />
@@ -75,7 +75,7 @@ Below you can see the resulting Trie after vertical compression. This Trie varia
 
 To fully understand the design decisions behind ART indexes, we must first extend the 2-bit fan-out to 8-bits, the commonly found fan-out for database systems.
 
-<img src="/images/blog/ART/8-bit-radix-tree.png"
+<img src="{% link images/blog/ART/8-bit-radix-tree.png %}"
      alt="8-bit Radix Tree"
      width="600"
  />
@@ -86,35 +86,35 @@ Below you can see the same nodes as before in a TRIE node of 8 bits. In reality,
 
 **Node 4**: Node 4 holds up to 4 different keys. Each key is stored in a one-byte array, with one pointer per key. With its total size being 40 bytes (4\*1 + 4\*8). Note that the pointer array is aligned with the key array (e.g., key 0 is in position 0 of the keys array, hence its pointer is in position 0 of the pointers array)
 
-<img src="/images/blog/ART/art-4.png"
+<img src="{% link images/blog/ART/art-4.png %}"
      alt="Art Node 4"
      width="500"
  />
 
 **Node 16** : Node 16 holds up to 16 different keys. Like node 4, each key is stored in a one-byte array, with one pointer per key. With its total size being 144 bytes (16\*1 + 16\*8). Like Node 4, the pointer array is aligned with the key array.
 
-<img src="/images/blog/ART/art-16.png"
+<img src="{% link images/blog/ART/art-16.png %}"
      alt="Art Node 16"
      width="500"
  />
 
 **Node 48** : Node 48 holds up to 48 different keys. When a key is present in this node, the one-byte array position representing that key will hold an index into the pointer array that points to the child of that key. Its total size is 640 bytes (256\*1 + 48\*8). Note that the pointer array and the key array are not aligned anymore. The key array points to the position in the pointer array where the pointer of that key is stored (e.g., the key 255 in the key array is set to 2 because the position 2 of the pointer array points to the child pertinent to that key).
 
-<img src="/images/blog/ART/art-48.png"
+<img src="{% link images/blog/ART/art-48.png %}"
      alt="Art Node 48"
      width="500"
  />
 
 **Node 256**: Node 256 holds up to 256 different keys, hence all possible values in the distribution. It only has a pointer vector, if the pointer is set, the key exists, and it points to its child. Its total size is 2048 bytes (256 pointers * 8 bytes).
 
-<img src="/images/blog/ART/art-256.png"
+<img src="{% link images/blog/ART/art-256.png %}"
      alt="Art Node 256"
      width="500"
  />
 
 For the example in the previous section, we could use a `Node 4` instead of a `Node 256` to store the keys, since we only have 3 keys present. Hence it would look like the following:
 
-<img src="/images/blog/ART/art-index-example.png"
+<img src="{% link images/blog/ART/art-index-example.png %}"
      alt="Art Index Example"
      width="300"
  />
@@ -200,14 +200,14 @@ To allow for lazy loading, we must store all children of a node, collect the inf
 
 The post-order traversal is shown in the figure below. The circles in red represent the numeric order where the nodes will be stored. If we start from the root node (i.e., Node 4 with storage order 10), we must first store both children (i.e., Node 16 with storage order 8 and the Leaf with storage order 9). This goes on recursively for each of its children.
 
-<img src="/images/blog/ART/serialization-order.png"
+<img src="{% link images/blog/ART/serialization-order.png %}"
      alt="Post Order Traversal Example"
      width="600"
  />
 
 The figure below shows an actual representation of what this would look like in DuckDB's block format. In DuckDB, data is stored in 256 kB contiguous blocks, with some blocks reserved for metadata and some for actual data. Each block is represented by an `id`. To allow for navigation within a block, they are partitioned by byte offsets hence each block contains 256,000 different offsets
 
-<img src="/images/blog/ART/block-storage.png"
+<img src="{% link images/blog/ART/block-storage.png %}"
      alt="DuckDB Block Serialization"
      width="800"
  />
@@ -246,7 +246,7 @@ If the swizzle flag is set, the value in our Swizzlable Pointer is a memory addr
 
 In the following figure, you can see a visual representation of DuckDB's Swizzlable Pointer.
 
-<img src="/images/blog/ART/pointer-swizzling.png"
+<img src="{% link images/blog/ART/pointer-swizzling.png %}"
      alt="Pointer Swizzling"
      width="300"
  />
@@ -314,12 +314,12 @@ for i in range (0, 50000000, 10000):
   times.append(time.time() - cur_time)
 ```
 
-<img src="/images/blog/ART/cold-run-light.png"
+<img src="{% link images/blog/ART/cold-run-light.png %}"
      alt="Cold Run"
      width="800"
      class="lightmode-img"
  />
-<img src="/images/blog/ART/cold-run-dark.png"
+<img src="{% link images/blog/ART/cold-run-dark.png %}"
      alt="Cold Run"
      width="800"
      class="darkmode-img"
@@ -333,12 +333,12 @@ In general, each query is 3x more expensive in the persisted storage format. Thi
 
 In this experiment, we execute the same queries as in the previous section.
 
-<img src="/images/blog/ART/hot-run-light.png"
+<img src="{% link images/blog/ART/hot-run-light.png %}"
      alt="Hot Run"
      width="800"
      class="lightmode-img"
  />
-<img src="/images/blog/ART/hot-run-dark.png"
+<img src="{% link images/blog/ART/hot-run-dark.png %}"
      alt="Hot Run"
      width="800"
      class="darkmode-img"
@@ -364,7 +364,7 @@ ART index storage has been a long-standing issue in DuckDB, with multiple users 
 
 Art Indexes are a core part of both constraint enforcement and keeping access speed up in DuckDB. And as depicted in the previous section, there are many distinct paths we can take in our bag of ART goodies, with advantages for completely different use cases.
 
-<img src="/images/blog/ART/want.jpg"
+<img src="{% link images/blog/ART/want.jpg %}"
      alt="We want you"
      width="300"
  />

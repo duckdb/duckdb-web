@@ -50,12 +50,12 @@ Binning is probably a familiar idea if you have worked with continuous data:
 You break up a set of values into ranges and map each value to the range (or *bin*) that it falls into.
 Temporal binning is just doing this to instants:
 
-<img src="/images/blog/timezones/tz-instants-light.svg"
+<img src="{% link images/blog/timezones/tz-instants-light.svg %}"
      alt="Time Zone Instants at the Epoch"
      width="600"
      class="lightmode-img"
      />
-<img src="/images/blog/timezones/tz-instants-dark.svg"
+<img src="{% link images/blog/timezones/tz-instants-dark.svg %}"
      alt="Time Zone Instants at the Epoch"
      width="600"
      class="darkmode-img"
@@ -67,12 +67,12 @@ and temporal binning also includes rules for time.
 These time rules are called *time zones*, and they also impact where the day boundaries used by the calendar fall.
 For example, here is what the binning for a second time zone looks like at the epoch:
 
-<img src="/images/blog/timezones/tz-timezone-light.svg"
+<img src="{% link images/blog/timezones/tz-timezone-light.svg %}"
      alt="Two Time Zones at the Epoch"
      width="600"
      class="lightmode-img"
      />
-<img src="/images/blog/timezones/tz-timezone-dark.svg"
+<img src="{% link images/blog/timezones/tz-timezone-dark.svg %}"
      alt="Two Time Zones at the Epoch"
      width="600"
      class="darkmode-img"
@@ -91,12 +91,12 @@ The biggest temporal binning problem most people run into occurs when daylight s
 This example contains a daylight savings time change where the "hour" bin is two hours long!
 To distinguish the two hours, we needed to include another bin containing the offset from UTC:
 
-<img src="/images/blog/timezones/tz-daylight-light.svg"
+<img src="{% link images/blog/timezones/tz-daylight-light.svg %}"
      alt="Two Time Zones at a Daylight Savings Time transition"
      width="600"
      class="lightmode-img"
      />
-<img src="/images/blog/timezones/tz-daylight-dark.svg"
+<img src="{% link images/blog/timezones/tz-daylight-dark.svg %}"
      alt="Two Time Zones at a Daylight Savings Time transition"
      width="600"
      class="darkmode-img"

@@ -8,7 +8,7 @@ excerpt: "The DuckDB team is happy to announce the latest DuckDB release (0.10.0
 tags: ["release"]
 ---
 
-<img src="/images/blog/velvet-scoter-duck.jpg"
+<img src="{% link images/blog/velvet-scoter-duck.jpg %}"
      alt="Image of the Velvet Scoter"
      width="200"
      />
@@ -346,7 +346,7 @@ As a user, you don't have to do anything to make use of the new ALP compression 
 
 The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/stable/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/stable/clients/cli/editing.md %}).
 
-<img src="/images/syntax_highlighting_screenshot.png"
+<img src="{% link images/syntax_highlighting_screenshot.png %}"
      alt="Image showing syntax highlighting in the shell"
      width="700"
      />

@@ -527,7 +527,7 @@ demonstrating that DuckDB offers a significant performance improvement over `sci
 <div align="center" style="margin:10px">
     <a href="/images/blog/ml-data-preprocessing/ml_data_preprocessing.png">
         <img
-          src="/images/blog/ml-data-preprocessing/ml_data_preprocessing.png"
+          src="{% link images/blog/ml-data-preprocessing/ml_data_preprocessing.png %}"
           alt="Data Preprocessing Benchmark, During Training"
           width="700"
         />

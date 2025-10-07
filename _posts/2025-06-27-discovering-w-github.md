@@ -357,7 +357,7 @@ With [git-auto-commit-action](https://github.com/stefanzweifel/git-auto-commit-a
 <div align="center" style="margin:10px">
     <a href="/images/blog/discovering-use-cases/git_commits.png">
         <img
-          src="/images/blog/discovering-use-cases/git_commits.png"
+          src="{% link images/blog/discovering-use-cases/git_commits.png %}"
           alt="GitHub commits history"
           width="700"
         />
@@ -387,7 +387,7 @@ The `git_log.md` contains now the entire history of appended records to the READ
 <div align="center" style="margin:10px">
     <a href="/images/blog/discovering-use-cases/plot_repos.png">
         <img
-          src="/images/blog/discovering-use-cases/plot_repos.png"
+          src="{% link images/blog/discovering-use-cases/plot_repos.png %}"
           alt="GitHub repositories mentioning DuckDB"
           width="700"
         />

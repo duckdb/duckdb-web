@@ -45,7 +45,7 @@ CREATE SECRET (TYPE gsheet);
 
 As a part of the `CREATE SECRET` command, a browser window will open and allow for a login and copying a temporary token to then paste back into DuckDB.
 
-<img src="/images/blog/gsheets_oauth_browser_screenshot.png"
+<img src="{% link images/blog/gsheets_oauth_browser_screenshot.png %}"
      alt="In-browser OAuth flow to generate token."
      width="680"
      />

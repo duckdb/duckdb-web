@@ -6,7 +6,7 @@ excerpt: DuckDB now supports vectorized Scalar Python User Defined Functions (UD
 tags: ["using DuckDB"]
 ---
 
-<img src="/images/blog/bird-dance.gif"
+<img src="{% link images/blog/bird-dance.gif %}"
      alt="DuckDB-Waddle-fly"
      width="100"
      />
