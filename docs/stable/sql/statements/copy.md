@@ -442,7 +442,7 @@ The below options are applicable when writing `BLOB` files.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.json.gz` will use `gzip`, `file.json.zst` will use `zstd`, and `file.json` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
+| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.blob.gz` will use `gzip`, `file.blob.zst` will use `zstd`, and `file.blob` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 
 Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output.blob`:
 
