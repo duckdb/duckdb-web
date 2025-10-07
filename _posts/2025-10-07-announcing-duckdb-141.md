@@ -9,14 +9,14 @@ tags: ["release"]
 ---
 
 Today we are releasing DuckDB 1.4.1 LTS, the first bugfix release for a Long-Term Support (LTS) edition of DuckDB.
-In this blog post, we highlight a few important fixes and improvements.
+In this blog post, we highlight a few important fixes and convenience improvements.
 For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
 
 > To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some client libraries (e.g., R) due to the extra changes and review rounds required.
 
 ## AWS Improvements
 
-The AWS extension received a number of improvements and bugfixes.
+The AWS extension received a number of changes, which make it easier to configure and troubleshoot.
 See the [AWS documentation page]({% link docs/stable/core_extensions/aws.md %}) for more details.
 
 ### Secret Validation
@@ -69,7 +69,7 @@ With v1.4.1, the autoloading works and DuckDB can read from the bucket right awa
 
 ## Docker Image
 
-We now officially distribute a [Docker image](https://github.com/duckdb/duckdb-docker), so you can run DuckDB in a containerized environment:
+We now officially distribute a [Docker image](https://hub.docker.com/r/duckdb/duckdb/), so you can run DuckDB in a containerized environment:
 
 ```batch
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
