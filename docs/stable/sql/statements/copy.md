@@ -389,7 +389,7 @@ COPY (SELECT 'QUACK!' AS hello) TO 'quack.json';
 Sets the value of column `num_list` to `[1,2,3]` and outputs the results to `numbers.json`:
 
 ```sql
-COPY (SELECT [1,2,3] AS num_list) TO 'numbers.json';
+COPY (SELECT [1, 2, 3] AS num_list) TO 'numbers.json';
 --RETURNS: {"num_list":[1,2,3]}
 ```
 
@@ -403,17 +403,17 @@ COPY (SELECT 'gzip' AS compression_type) TO 'compression.json.gz';
 Sets the value of column `compression_type` to `gzip_explicit` and outputs the results to `compression.json.gz` with explicit compression:
 
 ```sql
-COPY (select 'gzip_explicit' AS compression_type) TO 'explcit_compression.json' (FORMAT JSON, COMPRESSION 'GZIP');
+COPY (SELECT 'gzip_explicit' AS compression_type) TO 'explicit_compression.json' (FORMAT json, COMPRESSION 'GZIP');
 -- RETURNS: {"compression_type":"gzip_explicit"}
 ```
 
 Sets all values of single rows to be returned as nested arrays to `array_true.json`:
 
 ```sql
-COPY (SELECT 1 AS id, 'Alice' AS name, [1,2,3] as numbers
+COPY (SELECT 1 AS id, 'Alice' AS name, [1, 2, 3] AS numbers
       UNION ALL
-      SELECT 2, 'Bob', [4,5,6] as numbers) 
-TO 'array_true.json' (FORMAT JSON, ARRAY TRUE);
+      SELECT 2, 'Bob', [4, 5, 6] AS numbers)
+TO 'array_true.json' (FORMAT json, ARRAY true);
 
 -- RETURNS: 
 /*
@@ -427,10 +427,10 @@ TO 'array_true.json' (FORMAT JSON, ARRAY TRUE);
 Sets all values of single rows to be returned as non-nested arrays to `array_false.json`:
 
 ```sql
-COPY (SELECT 1 AS id, 'Alice' AS name, [1,2,3] as numbers
+COPY (SELECT 1 AS id, 'Alice' AS name, [1, 2, 3] AS numbers
       UNION ALL
-      SELECT 2, 'Bob', [4,5,6] as numbers) 
-TO 'array_false.json' (FORMAT JSON, ARRAY FALSE);
+      SELECT 2, 'Bob', [4, 5, 6] AS numbers)
+TO 'array_false.json' (FORMAT json, ARRAY false);
 
 -- RETURNS:
 /*
