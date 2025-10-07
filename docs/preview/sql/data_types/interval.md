@@ -34,7 +34,7 @@ SELECT
 >
 > For more precision, include the unit in the string or use a more granular unit; e.g., `INTERVAL '1.5 years'` or `INTERVAL 18 MONTHS`.
 
-Three basis units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and a day doesn't correspond to a fixed amount of microseconds.
+Three independent basis units are necessary because a month does not correspond to a fixed amount of days (February has fewer days than March) and a day doesn't correspond to a fixed amount of microseconds (days can be 25 hours or 23 hours long because of daylight saving time).
 The division into components makes the `INTERVAL` class suitable for adding or subtracting specific time units to a date. For example, we can generate a table with the first day of every month using the following SQL query:
 
 ```sql
@@ -63,7 +63,26 @@ FROM (
 
 > Warning The *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
 
-Additionally, the amounts of centuries, decades, quarters, seconds, and milliseconds in an `INTERVAL`, rounded down to the nearest integer, can be extracted via the `datepart` function. However, these components are not required to reassemble the original `INTERVAL`. In fact, if the previous query additionally extracted decades or seconds, then the sum of extracted parts would generally be larger than the original `period` since this would double count the months and microseconds components, respectively.
+The following table describe how these parts are extracted by `datepart` in formulas, as a function of the three basis units.
+
+| Part                 | Formula                                          |
+|----------------------|--------------------------------------------------|
+| `year`               | `#months // 12`                                  |
+| `month`              | `#months % 12`                                   |
+| `day`                | `#days`                                          | 
+| `hour`               | `#microseconds // (60 * 60 * 1_000_000)`         |
+| `minute`             | `(#microseconds // (60 * 1_000_000)) % 60`       |
+| `microsecond`        | `#microseconds % (60 * 1_000_000)`               |
+
+Additionally, `datepart` may be used to extract centuries, decades, quarters, seconds, and milliseconds from `INTERVAL`s. However, these parts are not required when reassembling the original `INTERVAL`. In fact, if the previous query additionally extracted any of these additional parts, then the sum of the extracted parts would generally be larger than the original `period`.
+
+| Part                 | Formula                                          |
+|----------------------|--------------------------------------------------|
+| `century`            | `datepart('year', interval) // 100`              |
+| `decade`             | `datepart('year', interval) // 10`               |
+| `quarter`            | `datepart('month', interval) // 3 + 1`           | 
+| `second`             | `datepart('microsecond', interval) // 1_000_000` |
+| `millisecond`        | `datepart('microsecond', interval) // 1_000`     |
 
 > All units use 0-based indexing, except for quarters, which use 1-based indexing.
 
@@ -103,7 +122,7 @@ SELECT
 
 Subtracting two `DATE`s from one another does not create an `INTERVAL` but rather returns the number of days between the given dates as integer value.
 
-> Warning Extracting a component of the `INTERVAL` difference between two `TIMESTAMP`s is not equivalent to computing the number of partition boundaries between the two `TIMESTAMP`s for the corresponding unit, as computed by the `datediff` function:
+> Warning Extracting a part of the `INTERVAL` difference between two `TIMESTAMP`s is not equivalent to computing the number of partition boundaries between the two `TIMESTAMP`s for the corresponding unit, as computed by the `datediff` function:
 >
 > ```sql
 > SELECT

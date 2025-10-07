@@ -26,7 +26,7 @@ For example:
 
 ```sql
 SELECT *
-FROM (SELECT UNNEST({'a': 42, 'b': {'a': 88, 'b': 99}}, recursive := true));
+FROM (SELECT unnest({'a': 42, 'b': {'a': 88, 'b': 99}}, recursive := true));
 ```
 
 | a  | a_1 | b  |

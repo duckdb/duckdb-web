@@ -105,7 +105,7 @@ CREATE OR REPLACE SECRET secret (
 Two validation modes are supported:
 
 * `exists` (default) requires present credentials.
-* `none` allows `CREATE SECRET` to succeed for credential_chains with no available credentials.
+* `none` allows `CREATE SECRET` to succeed for `credential_chains` with no available credentials.
 
 > `VALIDATION 'exists'` validates only the __presence__ of a credential, __not its operational readiness__. Thus, no attempt is made to
 > convert into an access token, or perform a read, write, etc.
