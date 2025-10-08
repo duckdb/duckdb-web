@@ -94,7 +94,7 @@ uv sync --no-build-isolation
 - The build happens in an isolated, ephemeral environment where cmake's paths point to non-existing directories
 - Installing dependencies first, then building without isolation ensures proper cmake integration
 
-### 3. Enable pre-commit hooks
+### 3. Enable Pre-Commit Hooks
 
 We run a number of linting, formatting and type-checking in CI. You can run all of these manually, but to make your life easier you can install the exact same checks we run in CI as git hooks with pre-commit, which is already installed as part of the dev dependencies:
 
