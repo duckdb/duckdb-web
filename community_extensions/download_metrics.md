@@ -23,7 +23,7 @@ INTO NAME extension VALUE downloads_last_week
 ORDER BY downloads_last_week DESC;
 ```
 
-For example, to return the download counts for the weeks since October 1, 2024:
+For example, to return the download counts for the weeks since September 22, 2025:
 
 ```sql
 PIVOT (
@@ -33,14 +33,14 @@ PIVOT (
                 strftime(x, '%Y/%W')
             )
             FOR x
-            IN range(TIMESTAMP '2024-10-01', now()::TIMESTAMP, INTERVAL 1 WEEK)
+            IN range(TIMESTAMP '2025-09-22', now()::TIMESTAMP, INTERVAL 1 WEEK)
             IF strftime(x, '%W') != '53'
         ], union_by_name := true)
     )
     ON COLUMNS(* EXCLUDE _last_update)
     INTO NAME extension VALUE downloads
 )
-ON date_trunc('day', _last_update)
+ON date_trunc('day', _last_update::TIMESTAMP)
 USING any_value(downloads)
 ORDER BY extension;
 ```
