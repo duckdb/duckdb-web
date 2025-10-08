@@ -59,11 +59,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name       | function_type | description | comment | examples |
-|---------------------------|---------------|-------------|---------|----------|
-| observefs_clear           | scalar        | NULL        | NULL    |          |
-| observefs_get_profile     | scalar        | NULL        | NULL    |          |
-| observefs_wrap_filesystem | scalar        | NULL        | NULL    |          |
+|             function_name             | function_type | description | comment | examples |
+|---------------------------------------|---------------|-------------|---------|----------|
+| observefs_clear                       | scalar        | NULL        | NULL    |          |
+| observefs_get_profile                 | scalar        | NULL        | NULL    |          |
+| observefs_list_registered_filesystems | scalar        | NULL        | NULL    |          |
+| observefs_wrap_filesystem             | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
