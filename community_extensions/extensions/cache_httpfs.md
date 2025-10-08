@@ -64,17 +64,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|              function_name              | function_type | description | comment | examples |
-|-----------------------------------------|---------------|-------------|---------|----------|
-| cache_httpfs_cache_access_info_query    | table         | NULL        | NULL    |          |
-| cache_httpfs_cache_status_query         | table         | NULL        | NULL    |          |
-| cache_httpfs_clear_cache                | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_cache_for_file       | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_profile              | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_cache_filesystems      | table         | NULL        | NULL    |          |
-| cache_httpfs_get_ondisk_data_cache_size | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_profile                | scalar        | NULL        | NULL    |          |
-| cache_httpfs_wrap_cache_filesystem      | scalar        | NULL        | NULL    |          |
+|              function_name               | function_type | description | comment | examples |
+|------------------------------------------|---------------|-------------|---------|----------|
+| cache_httpfs_cache_access_info_query     | table         | NULL        | NULL    |          |
+| cache_httpfs_cache_status_query          | table         | NULL        | NULL    |          |
+| cache_httpfs_clear_cache                 | scalar        | NULL        | NULL    |          |
+| cache_httpfs_clear_cache_for_file        | scalar        | NULL        | NULL    |          |
+| cache_httpfs_clear_profile               | scalar        | NULL        | NULL    |          |
+| cache_httpfs_get_cache_filesystems       | table         | NULL        | NULL    |          |
+| cache_httpfs_get_ondisk_data_cache_size  | scalar        | NULL        | NULL    |          |
+| cache_httpfs_get_profile                 | scalar        | NULL        | NULL    |          |
+| cache_httpfs_list_registered_filesystems | scalar        | NULL        | NULL    |          |
+| cache_httpfs_wrap_cache_filesystem       | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
