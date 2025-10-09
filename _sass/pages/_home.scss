@@ -701,7 +701,7 @@ body.landing{
 		right: 0px;
 	}
 	
-	section.clickbench {
+	section.most_scalable {
 		.flexwrap {
 			display: flex;
 			flex-wrap: wrap;
@@ -789,7 +789,7 @@ body.landing{
 
 
 @media only screen and (max-width: 1100px) {
-	body.landing section.clickbench {
+	body.landing section.most_scalable {
 		.flexwrap {
 			display: flex;
 			flex-wrap: wrap;
@@ -921,7 +921,7 @@ body.landing{
 			max-width: unset;
 		}	
 	}
-	body.landing section.clickbench .box > div:first-child{
+	body.landing section.most_scalable .box > div:first-child{
 		max-width: 100px;
 	}
 }
