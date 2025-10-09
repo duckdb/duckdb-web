@@ -169,3 +169,28 @@ a.blocklink{
 .text-secondary-color{
 	color: var(--main-text-secondary-color, #666);
 }
+
+$spacings: (
+  0: 0,
+  1: 4px,
+  2: 8px,
+  3: 16px,
+  4: 24px,
+  5: 32px,
+  6: 48px,
+  7: 64px
+);
+
+@each $key, $value in $spacings {
+  .m-#{$key}  { margin: $value !important; }
+  .mt-#{$key} { margin-top: $value !important; }
+  .mb-#{$key} { margin-bottom: $value !important; }
+  .ml-#{$key} { margin-left: $value !important; }
+  .mr-#{$key} { margin-right: $value !important; }
+
+  .p-#{$key}  { padding: $value !important; }
+  .pt-#{$key} { padding-top: $value !important; }
+  .pb-#{$key} { padding-bottom: $value !important; }
+  .pl-#{$key} { padding-left: $value !important; }
+  .pr-#{$key} { padding-right: $value !important; }
+}
