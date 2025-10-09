@@ -12,4 +12,39 @@ body.design{
 		margin-top: 4*8px;
 	}
 	
+	.usage-example{
+		padding: 30px;
+		background: white;
+		display: inline-block;
+		
+		img{
+			all: unset;
+			max-width: 100%;
+		}
+	}
+	
+	.color-cards{
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	
+	.color-card{
+		width: 169px;
+		line-height: 1.37;
+		white-space: nowrap;
+		display: inline-block;
+		
+		strong{
+			display: inline-block;
+			margin-bottom: 8px;
+			font-weight: 700;
+		}
+		
+		&--main{
+			width: auto;
+		}
+	}
+	
 }
