@@ -16,10 +16,10 @@ extension:
   maintainers:
     - rustyconover
   name: datasketches
-  version: 2025092701
+  version: 2025100901
 repo:
   github: query-farm/datasketches
-  ref: 1caaafaf9e8e2b7f857228f82275a9518cfb2241
+  ref: cfb689852bfff08d95a46b6d4a991bcb457807f2
 
 extension_star_count: 34
 extension_star_count_pretty: 34
