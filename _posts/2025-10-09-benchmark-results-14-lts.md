@@ -23,7 +23,7 @@ Today, DuckDB hit #1 on the popular [ClickBench database benchmark](https://benc
      class="darkmode-img"
      />
 
-This result was made possible due to a long line of performance optimizations, most recently the new [sort implementation]({% post_url 2025-09-24-sorting-again %}) in DuckDB v1.4.
+This result was made possible due several [performance optimizations]({% post_url 2025-09-16-announcing-duckdb-140 %}#performance-and-optimizations) in DuckDB v1.4.
 
 ## TPC-H SF100,000
 
