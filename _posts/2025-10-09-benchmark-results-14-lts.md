@@ -4,7 +4,7 @@ title: "Benchmark Results for DuckDB v1.4 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/benchmark-results-1-4-lts.svg"
 image: "/images/blog/thumbs/benchmark-results-1-4-lts.png"
-excerpt: "DuckDB v1.4 LTS is both fast and scalable. In in-memory mode, it is the fastest system on ClickBench. In disk-based mode, it can run complex analytical queries on a dataset equivalent to 100 TB on a single machine."
+excerpt: "DuckDB v1.4 LTS is both fast and scalable. In in-memory mode, it is the fastest system on ClickBench. In disk-based mode, it can run complex analytical queries on a dataset equivalent to 100 TB CSV files on a single machine."
 tags: ["release"]
 ---
 
