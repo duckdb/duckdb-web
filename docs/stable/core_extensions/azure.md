@@ -209,7 +209,7 @@ CREATE SECRET secret1 (
 The provider may be used without specifying an ID; if only a single ID is available this provider 
 will function identically to the `credential_chain` provider, and use the single available ID. If 
 multiple IDs are available, behavior is undefined (or more specifically, defined by the Azure SDK)
--- therefore we recommend explicit Identity setting in this situation.
+– therefore we recommend explicit Identity setting in this situation.
 
 
 #### `SERVICE_PRINCIPAL` Provider
