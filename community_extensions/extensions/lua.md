@@ -21,7 +21,7 @@ repo:
 
 docs:
   hello_world: |
-    SELECT lua('return "Hello " .. context', "World");
+    SELECT lua('return "Hello " .. context', 'World');
   extended_description: |
     Adds support for the Lua embedded scripting language to DuckDB.
 
