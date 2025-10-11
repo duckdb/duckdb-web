@@ -247,6 +247,13 @@ PREPARE v1 AS COPY (SELECT 42 i) to $1;
 EXECUTE v1('file.csv');
 ```
 
+Expressions may be used for options as well. Copy to a file using a format stored in a  variable:
+
+```sql
+SET VARIABLE my_format='parquet';
+COPY (SELECT 42 i) TO 'file' (FORMAT getvariable('my_format'));
+```
+
 ### `COPY ... TO` Options
 
 Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes. Arbitrary expressions may be used for parameter values.
