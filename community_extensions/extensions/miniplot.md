@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/miniplot
-  ref: c14175a0fd7dbc04541a8e80abd378c73c8349ec
+  ref: 6197f14cf803e4234b69ddc279ee64eec79bea73
 
 docs:
   hello_world: |
@@ -80,8 +80,8 @@ docs:
 
     **Note:** Charts open in your default web browser as standalone HTML files.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
+extension_star_count: 3
+extension_star_count_pretty: 3
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_miniplot.png'
