@@ -65,10 +65,10 @@ Create a macro `arr_append` (with a functionality equivalent to `array_append`):
 CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
 ```
 
-Create a macro with typed parameter
+Create a macro with a typed parameter
 
 ```sql
-CREATE MACRO is_maximal(a INT) AS a == 2^31 - 1;
+CREATE MACRO is_maximal(a INT) AS a = 2^31 - 1;
 ```
 
 ### Table Macros
@@ -148,8 +148,8 @@ SELECT
 
 ```sql
 CREATE OR REPLACE MACRO is_maximal
-    (a TINYINT) AS a == 2^7 - 1,
-    (a INT) AS a == 2^31 - 1;
+    (a TINYINT) AS a = 2^7 - 1,
+    (a INT) AS a = 2^31 - 1;
 ```
 
 ```sql
