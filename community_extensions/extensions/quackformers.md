@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: quackformers
   description: Bert-based embedding extension.
-  version: 0.1.3
+  version: 0.1.4
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: martin-conur/quackformers
-  ref: b77a7939f290a6feb3e218d9a5f4f8cb18e11426
+  ref: efa6753b16ffe7d97c0855894251a519d95d9034
 
 docs:
   hello_world: |
@@ -29,10 +29,10 @@ docs:
     Quackformers, a DuckDB extension embeddings. Intended to be used alongside VSS vector search for RAG-type functionalities.
     Quackformers is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/)
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 421
-extension_download_count_pretty: 421
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_quackformers.png'
 layout: community_extension_doc
 ---

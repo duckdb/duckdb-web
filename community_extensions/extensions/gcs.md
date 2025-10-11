@@ -36,8 +36,8 @@ docs:
     └─────────────────────────────────────────┴─────────┴───────┴──────────────────────────┘
 
 
-extension_star_count: 0
-extension_star_count_pretty: 0
+extension_star_count: 1
+extension_star_count_pretty: 1
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_gcs.png'
