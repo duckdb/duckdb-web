@@ -15,7 +15,9 @@ The `NULL` literal is denoted with the keyword `NULL`. The `NULL` literal can be
 
 ## Integer Literals
 
-Integer literals are denoted as a sequence of one or more digits. At runtime, these result in values of the `INTEGER_LITERAL` type. `INTEGER_LITERAL` types can be implicitly converted to any [integer type]({% link docs/stable/sql/data_types/numeric.md %}#integer-types) in which the value fits. For example, the integer literal `42` can be implicitly converted to a `TINYINT`, but the integer literal `1000` cannot be.
+Integer literals are denoted as a sequence of one or more decimal digits. At runtime, these result in values of the `INTEGER_LITERAL` type. `INTEGER_LITERAL` types can be implicitly converted to any [integer type]({% link docs/stable/sql/data_types/numeric.md %}#integer-types) in which the value fits. For example, the integer literal `42` can be implicitly converted to a `TINYINT`, but the integer literal `1000` cannot be.
+
+> DuckDB does not support hexadecimal or binary literals directly. However, strings or string literals in hexadecimal or binary notation with `0x` or `0b` prefixes respectively, can be cast to integer types, e.g., `'0xFF'::INT = 255` or `0b101::INT = 5`.
 
 ## Other Numeric Literals
 
