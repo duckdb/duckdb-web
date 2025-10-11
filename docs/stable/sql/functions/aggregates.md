@@ -166,7 +166,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the first non-`NULL` value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `any_value(A)` |
-| **Alias(es)** | - |
 
 #### `arg_max(arg, val)`
 
@@ -190,7 +189,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_max_null(A, B)` |
-| **Alias(es)** | - |
 
 #### `arg_min(arg, val)`
 
@@ -214,7 +212,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_min_null(A, B)` |
-| **Alias(es)** | - |
 
 #### `avg(arg)`
 
@@ -230,7 +227,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the bitwise `AND` of all bits in a given expression. |
 | **Example** | `bit_and(A)` |
-| **Alias(es)** | - |
 
 #### `bit_or(arg)`
 
@@ -238,23 +234,18 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the bitwise `OR` of all bits in a given expression. |
 | **Example** | `bit_or(A)` |
-| **Alias(es)** | - |
-
 #### `bit_xor(arg)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the bitwise `XOR` of all bits in a given expression. |
 | **Example** | `bit_xor(A)` |
-| **Alias(es)** | - |
-
 #### `bitstring_agg(arg)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns a bitstring whose length corresponds to the range of the non-null (integer) values, with bits set at the location of each (distinct) value. |
 | **Example** | `bitstring_agg(A)` |
-| **Alias(es)** | - |
 
 #### `bool_and(arg)`
 
@@ -262,7 +253,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns `true` if every input value is `true`, otherwise `false`. |
 | **Example** | `bool_and(A)` |
-| **Alias(es)** | - |
 
 #### `bool_or(arg)`
 
@@ -270,7 +260,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns `true` if any input value is `true`, otherwise `false`. |
 | **Example** | `bool_or(A)` |
-| **Alias(es)** | - |
 
 #### `count()`
 
@@ -284,9 +273,8 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the number rows with non-`NULL` values in `arg`. |
+| **Description** | Returns the number rows where `arg` is not `NULL`. |
 | **Example** | `count(A)` |
-| **Alias(es)** | - |
 
 #### `countif(arg)`
 
@@ -294,7 +282,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the number of rows where `arg` is `true`. |
 | **Example** | `countif(A)` |
-| **Alias(es)** | - |
 
 #### `favg(arg)`
 
@@ -302,7 +289,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the average using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `favg(A)` |
-| **Alias(es)** | - |
 
 #### `first(arg)`
 
@@ -334,7 +320,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | **Example** | `histogram(A)` |
-| **Alias(es)** | - |
 
 #### `histogram(arg, boundaries)`
 
@@ -342,7 +327,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `MAP` of key-value pairs representing the provided upper `boundaries` and counts of elements in the corresponding bins (left-open and right-closed partitions) of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than all provided `boundaries` appear, see [`is_histogram_other_bin`]({% link docs/stable/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/stable/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
 | **Example** | `histogram(A, [0, 1, 10])` |
-| **Alias(es)** | - |
 
 #### `histogram_exact(arg, elements)`
 
@@ -350,7 +334,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/stable/sql/functions/utility.md %}#is_histogram_other_binarg). |
 | **Example** | `histogram_exact(A, [0, 1, 10])` |
-| **Alias(es)** | - |
 
 #### `histogram_values(source, col_name, technique, bin_count)`
 
@@ -358,7 +341,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the upper boundaries of the bins and their counts. |
 | **Example** | `histogram_values(integers, i, bin_count := 2)` |
-| **Alias(es)** | - |
 
 #### `last(arg)`
 
@@ -366,7 +348,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `last(A)` |
-| **Alias(es)** | - |
 
 #### `list(arg)`
 
@@ -382,7 +363,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the maximum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
 | **Example** | `max(A)` |
-| **Alias(es)** | - |
 
 #### `max(arg, n)`
 
@@ -390,7 +370,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** |  Returns a `LIST` containing the `arg` values for the "top" `n` rows ordered by `arg` descending. |
 | **Example** | `max(A, 2)` |
-| **Alias(es)** | - |
 
 #### `min(arg)`
 
@@ -398,7 +377,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the minimum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
 | **Example** | `min(A)` |
-| **Alias(es)** | - |
 
 #### `min(arg, n)`
 
@@ -406,7 +384,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
 | **Example** | `min(A, 2)` |
-| **Alias(es)** | - |
 
 #### `product(arg)`
 
@@ -414,7 +391,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the product of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `product(A)` |
-| **Alias(es)** | - |
 
 #### `string_agg(arg)`
 
@@ -438,7 +414,6 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Calculates the sum of all non-null values in `arg` / counts `true` values when `arg` is boolean. The floating-point versions of this function are [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `sum(A)` |
-| **Alias(es)** | - |
 
 #### `weighted_avg(arg, weight)`
 
@@ -499,7 +474,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The correlation coefficient.
 | **Formula** | `covar_pop(y, x) / (stddev_pop(x) * stddev_pop(y))` |
-| **Alias(es)** | - |
 
 #### `covar_pop(y, x)`
 
@@ -507,7 +481,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The population covariance, which does not include bias correction. |
 | **Formula** | `(sum(x*y) - sum(x) * sum(y) / regr_count(y, x)) / regr_count(y, x)`, `covar_samp(y, x) * (1 - 1 / regr_count(y, x))` |
-| **Alias(es)** | - |
 
 #### `covar_samp(y, x)`
 
@@ -523,7 +496,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The log-2 entropy. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `kurtosis_pop(x)`
 
@@ -531,7 +503,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The excess kurtosis (Fisher’s definition) without bias correction. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `kurtosis(x)`
 
@@ -539,7 +510,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The excess kurtosis (Fisher's definition) with bias correction according to the sample size. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `mad(x)`
 
@@ -547,7 +517,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The median absolute deviation. Temporal types return a positive `INTERVAL`. |
 | **Formula** | `median(abs(x - median(x)))` |
-| **Alias(es)** | - |
 
 #### `median(x)`
 
@@ -555,7 +524,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The middle value of the set. For even value counts, quantitative values are averaged and ordinal values return the lower value. |
 | **Formula** | `quantile_cont(x, 0.5)` |
-| **Alias(es)** | - |
 
 #### `mode(x)`
 
@@ -563,7 +531,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The most frequent value. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `quantile_cont(x, pos)`
 
@@ -571,7 +538,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The interpolated `pos`-quantile of `x` for `0 <= pos <= 1`. Returns the `pos * (n_nonnull_values - 1)`th (zero-indexed, in the specified order) value of `x` or an interpolation between the adjacent values if the index is not an integer. Intuitively, arranges the values of `x` as equispaced *points* on a line, starting at 0 and ending at 1, and returns the (interpolated) value at `pos`. This is Type 7 in Hyndman & Fan (1996). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `quantile_disc(x, pos)`
 
@@ -587,7 +553,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The average of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `regr_avgy(y, x)`
 
@@ -595,7 +560,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The average of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `regr_count(y, x)`
 
@@ -603,7 +567,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The number of non-`NULL` pairs. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `regr_intercept(y, x)`
 
@@ -611,7 +574,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The intercept of the univariate linear regression line, where x is the independent variable and y is the dependent variable. |
 | **Formula** | `regr_avgy(y, x) - regr_slope(y, x) * regr_avgx(y, x)` |
-| **Alias(es)** | - |
 
 #### `regr_r2(y, x)`
 
@@ -619,7 +581,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The squared Pearson correlation coefficient between y and x. Also: The coefficient of determination in a linear regression, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `regr_slope(y, x)`
 
@@ -635,7 +596,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The sample variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `regr_sxy(y, x)`
 
@@ -651,7 +611,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The sample variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `sem(x)`
 
@@ -659,7 +618,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The standard error of the mean. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `skewness(x)`
 
@@ -667,7 +625,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The skewness. |
 | **Formula** | - |
-| **Alias(es)** | - |
 
 #### `stddev_pop(x)`
 
@@ -675,7 +632,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The population standard deviation. |
 | **Formula** | `sqrt(var_pop(x))` |
-| **Alias(es)** | - |
 
 #### `stddev_samp(x)`
 
@@ -691,7 +647,6 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 | **Description** | The population variance, which does not include bias correction. |
 | **Formula** | `(sum(x^2) - sum(x)^2 / count(x)) / count(x)`, `var_samp(y, x) * (1 - 1 / count(x))` |
-| **Alias(es)** | - |
 
 #### `var_samp(x)`
 
