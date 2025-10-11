@@ -53,7 +53,7 @@ Macros are schema-dependent, and have an alias, `FUNCTION`:
 CREATE FUNCTION main.my_avg(x) AS sum(x) / count(x);
 ```
 
-Create a macro with default constant parameters:
+Create a macro with a default parameter:
 
 ```sql
 CREATE MACRO add_default(a, b := 5) AS a + b;
@@ -63,6 +63,12 @@ Create a macro `arr_append` (with a functionality equivalent to `array_append`):
 
 ```sql
 CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
+```
+
+Create a macro with typed parameter
+
+```sql
+CREATE MACRO is_maximal(a INT) AS a == 2^31 - 1;
 ```
 
 ### Table Macros
@@ -119,7 +125,7 @@ SELECT * FROM checksum('tbl');
 
 ## Overloading
 
-It is possible to overload a macro based on the amount of parameters it takes, this works for both scalar and table macros.
+It is possible to overload a macro based on the types or the number of its parameters; this works for both scalar and table macros.
 
 By providing overloads we can have both `add_x(a, b)` and `add_x(a, b, c)` with different function bodies.
 
@@ -138,6 +144,24 @@ SELECT
 | two_args | three_args |
 |----------|------------|
 |    63    |     84     |
+
+
+```sql
+CREATE OR REPLACE MACRO is_maximal
+    (a TINYINT) AS a == 2^7 - 1,
+    (a INT) AS a == 2^31 - 1;
+```
+
+```sql
+SELECT
+    is_maximal(127::TINYINT) AS tiny,
+    is_maximal(127) AS regular
+```
+
+|   tiny   |  regular   |
+|----------|------------|
+|   true   |    false   |
+
 
 ## Syntax
 
@@ -185,8 +209,6 @@ Could not choose a best candidate function for the function call "add(STRING_LIT
 ```
 
 Macros can have default parameters.
-Unlike some languages, default parameters must be named
-when the macro is invoked.
 
 `b` is a default parameter:
 
@@ -200,39 +222,7 @@ The following will result in 42:
 SELECT add_default(37);
 ```
 
-The following will throw an error:
-
-```sql
-SELECT add_default(40, 2);
-```
-
-```console
-Binder Error:
-Macro function 'add_default(a)' requires a single positional argument, but 2 positional arguments were provided.
-```
-
-Default parameters must used by assigning them like the following:
-
-```sql
-SELECT add_default(40, b := 2) AS x;
-```
-
-| x  |
-|---:|
-| 42 |
-
-However, the following fails:
-
-```sql
-SELECT add_default(b := 2, 40);
-```
-
-```console
-Binder Error:
-Positional parameters cannot come after parameters with a default value!
-```
-
-The order of default parameters does not matter:
+The order of named parameters does not matter:
 
 ```sql
 CREATE MACRO triple_add(a, b := 5, c := 10) AS a + b + c;
@@ -254,10 +244,10 @@ The `add` macro we defined above is used in a query:
 SELECT add(40, 2) AS x;
 ```
 
-Internally, add is replaced with its definition of `a + b`:
+Internally, `add` is replaced with its definition of `a + b`:
 
 ```sql
-SELECT a + b; AS x
+SELECT a + b AS x;
 ```
 
 Then, the parameters are replaced by the supplied arguments:
@@ -267,20 +257,6 @@ SELECT 40 + 2 AS x;
 ```
 
 ## Limitations
-
-### Using Named Parameters
-
-Currently, positional macro parameters can only be used positionally, and named parameters can only be used by supplying their name. Therefore, the following will not work:
-
-```sql
-CREATE MACRO my_macro(a, b := 42) AS (a + b);
-SELECT my_macro(32, 52);
-```
-
-```console
-Binder Error:
-Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
-```
 
 ### Using Subquery Macros
 
