@@ -81,7 +81,7 @@ DROP SEQUENCE IF EXISTS serial;
 
 ### Using Sequences for Primary Keys
 
-Sequences can be used as `DEFAULT` values in `CREATE TABLE` statements. 
+Sequences can be used as `DEFAULT` values in [`CREATE TABLE` statements]({%link docs/stable/sql/statements/create_table.md %}). 
 
 The example below uses a sequence to create an integer [primary key]({% link docs/stable/sql/constraints.md %}#primary-key-and-unique-constraint):
 
