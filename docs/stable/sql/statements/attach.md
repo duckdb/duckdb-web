@@ -155,7 +155,6 @@ Database encryption implies using [storage version](#explicit-storage-versions) 
 
 ### Options
 
-
 | Name                | Description                                                                                                                 | Type      | Default value |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
 | `ACCESS_MODE`       | Access mode of the database (`AUTOMATIC`, `READ_ONLY`, or `READ_WRITE`).                                                    | `VARCHAR` | `automatic`   |
