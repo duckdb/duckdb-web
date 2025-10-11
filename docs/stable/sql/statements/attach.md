@@ -99,6 +99,8 @@ Note that attachment definitions are not persisted between sessions: when a new 
 
 `ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files.
 
+Options can be provided as key value pairs, where values can be literals or arbitrary expressions. 
+
 `ATTACH` supports HTTP and S3 endpoints. For these, it creates a read-only connection by default.
 Therefore, the following two commands are equivalent:
 
@@ -152,6 +154,7 @@ ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack', ENCRYPTION_CIPHER
 Database encryption implies using [storage version](#explicit-storage-versions) 1.4.0 or later.
 
 ### Options
+
 
 | Name                | Description                                                                                                                 | Type      | Default value |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
