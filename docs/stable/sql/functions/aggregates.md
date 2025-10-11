@@ -118,14 +118,12 @@ The table below shows the available general aggregate functions.
 | Function | Description |
 |:--|:--------|
 | [`any_value(arg)`](#any_valuearg) | Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`arbitrary(arg)`](#arbitraryarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val)`](#arg_maxarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val, n)`](#arg_maxarg-val-n) | The generalized case of [`arg_max`](#arg_maxarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max_null(arg, val)`](#arg_max_nullarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min(arg, val)`](#arg_minarg-val) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min_null(arg, val)`](#arg_min_nullarg-val) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`array_agg(arg)`](#array_aggarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`avg(arg)`](#avgarg) | Calculates the average of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`bit_and(arg)`](#bit_andarg) | Returns the bitwise AND of all bits in a given expression. |
 | [`bit_or(arg)`](#bit_orarg) | Returns the bitwise OR of all bits in a given expression. |
@@ -133,13 +131,13 @@ The table below shows the available general aggregate functions.
 | [`bitstring_agg(arg)`](#bitstring_aggarg) | Returns a bitstring whose length corresponds to the range of the non-null (integer) values, with bits set at the location of each (distinct) value. |
 | [`bool_and(arg)`](#bool_andarg) | Returns `true` if every input value is `true`, otherwise `false`. |
 | [`bool_or(arg)`](#bool_orarg) | Returns `true` if any input value is `true`, otherwise `false`. |
-| [`count()`](#count) | Returns the number of rows in a group. |
-| [`count(arg)`](#countarg) | Returns the number of non-`NULL` values in `arg`. |
-| [`countif(arg)`](#countifarg) | Returns the number of rows in a group where `arg` is `true`. |
+| [`count()`](#count) | Returns the number of rows. |
+| [`count(arg)`](#countarg) | Returns the number of rows where `arg` is not `NULL`. |
+| [`countif(arg)`](#countifarg) | Returns the number of rows where `arg` is `true`. |
 | [`favg(arg)`](#favgarg) | Calculates the average using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`first(arg)`](#firstarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`fsum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`geomean(arg)`](#geomeanarg) | Calculates the geometric mean of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`geometric_mean(arg)`](#geometric_meanarg) | Calculates the geometric mean of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`histogram(arg)`](#histogramarg) | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | [`histogram(arg, boundaries)`](#histogramarg-boundaries) | Returns a `MAP` of key-value pairs representing the provided upper `boundaries` and counts of elements in the corresponding bins (left-open and right-closed partitions) of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than all provided `boundaries` appear, see [`is_histogram_other_bin`]({% link docs/stable/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/stable/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
 | [`histogram_exact(arg, elements)`](#histogram_exactarg-elements) | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/stable/sql/functions/utility.md %}#is_histogram_other_binarg). |
@@ -169,14 +167,6 @@ The table below shows the available general aggregate functions.
 | **Description** | Returns the first non-`NULL` value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `any_value(A)` |
 | **Alias(es)** | - |
-
-#### `arbitrary(arg)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns the first value (`NULL` or non-`NULL`) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| **Example** | `arbitrary(A)` |
-| **Alias(es)** | `first(A)` |
 
 #### `arg_max(arg, val)`
 
@@ -225,14 +215,6 @@ The table below shows the available general aggregate functions.
 | **Description** | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_min_null(A, B)` |
 | **Alias(es)** | - |
-
-#### `array_agg(arg)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| **Example** | `array_agg(A)` |
-| **Alias(es)** | `list` |
 
 #### `avg(arg)`
 
@@ -294,7 +276,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the number of rows in a group. |
+| **Description** | Returns the number of rows. |
 | **Example** | `count()` |
 | **Alias(es)** | `count(*)` |
 
@@ -302,7 +284,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the number of non-`NULL` values in `arg`. |
+| **Description** | Returns the number rows with non-`NULL` values in `arg`. |
 | **Example** | `count(A)` |
 | **Alias(es)** | - |
 
@@ -310,7 +292,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the number of rows in a group where `arg` is `true`. |
+| **Description** | Returns the number of rows where `arg` is `true`. |
 | **Example** | `countif(A)` |
 | **Alias(es)** | - |
 
@@ -338,13 +320,13 @@ The table below shows the available general aggregate functions.
 | **Example** | `fsum(A)` |
 | **Alias(es)** | `sumkahan`, `kahan_sum` |
 
-#### `geomean(arg)`
+#### `geometric_mean(arg)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Calculates the geometric mean of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| **Example** | `geomean(A)` |
-| **Alias(es)** | `geometric_mean(A)` |
+| **Example** | `geometric_mean(A)` |
+| **Alias(es)** | `geomean(A)` |
 
 #### `histogram(arg)`
 
@@ -410,22 +392,6 @@ The table below shows the available general aggregate functions.
 | **Example** | `max(A, 2)` |
 | **Alias(es)** | - |
 
-#### `max_by(arg, val)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| **Example** | `max_by(A, B)` |
-| **Alias(es)** | `argmax(arg, val)`, `arg_max(arg, val)` |
-
-#### `max_by(arg, val, n)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
-| **Example** | `max_by(A, B, 2)` |
-| **Alias(es)** | `argmax(arg, val, n)`, `arg_max(arg, val, n)` |
-
 #### `min(arg)`
 
 <div class="nostroke_table"></div>
@@ -442,22 +408,6 @@ The table below shows the available general aggregate functions.
 | **Example** | `min(A, 2)` |
 | **Alias(es)** | - |
 
-#### `min_by(arg, val)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| **Example** | `min_by(A, B)` |
-| **Alias(es)** | `argMin(arg, val)`, `arg_min(arg, val)` |
-
-#### `min_by(arg, val, n)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
-| **Example** | `min_by(A, B, 2)` |
-| **Alias(es)** | `argMin(arg, val, n)`, `arg_min(arg, val, n)` |
-
 #### `product(arg)`
 
 <div class="nostroke_table"></div>
@@ -472,7 +422,7 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Concatenates the column string values with a comma separator (`,`). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `string_agg(S, ',')` |
-| **Alias(es)** | `group_concat(arg, sep)`, `listagg(arg, sep)` |
+| **Alias(es)** | `group_concat(arg)`, `listagg(arg)` |
 
 #### `string_agg(arg, sep)`
 
@@ -533,9 +483,9 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`regr_intercept(y, x)`](#regr_intercepty-x) | The intercept of the univariate linear regression line, where x is the independent variable and y is the dependent variable. |
 | [`regr_r2(y, x)`](#regr_r2y-x) | The squared Pearson correlation coefficient between y and x. Also: The coefficient of determination in a linear regression, where x is the independent variable and y is the dependent variable. |
 | [`regr_slope(y, x)`](#regr_slopey-x) | The slope of the linear regression line, where x is the independent variable and y is the dependent variable. |
-| [`regr_sxx(y, x)`](#regr_sxxy-x) | The population variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
-| [`regr_sxy(y, x)`](#regr_sxyy-x) | The population covariance, which includes Bessel's bias correction. |
-| [`regr_syy(y, x)`](#regr_syyy-x) | The population variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs , where x is the independent variable and y is the dependent variable. |
+| [`regr_sxx(y, x)`](#regr_sxxy-x) | The sample variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| [`regr_sxy(y, x)`](#regr_sxyy-x) | The sample covariance, which includes Bessel's bias correction. |
+| [`regr_syy(y, x)`](#regr_syyy-x) | The sample variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs , where x is the independent variable and y is the dependent variable. |
 | [`skewness(x)`](#skewnessx) | The skewness. |
 | [`sem(x)`](#semx) | The standard error of the mean. |
 | [`stddev_pop(x)`](#stddev_popx) | The population standard deviation. |
@@ -683,7 +633,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The population variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| **Description** | The sample variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
@@ -691,15 +641,15 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The population covariance, which includes Bessel's bias correction. |
-| **Formula** | - |
-| **Alias(es)** | - |
+| **Description** | The sample covariance, which includes Bessel's bias correction. |
+| **Formula** | `(sum(x*y) - sum(x) * sum(y) / regr_count(y, x)) / (regr_count(y, x) - 1)`, `covar_pop(y, x) / (1 - 1 / regr_count(y, x))` |
+| **Alias(es)** | `covar_samp(y, x)` |
 
 #### `regr_syy(y, x)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | The population variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
+| **Description** | The sample variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | **Formula** | - |
 | **Alias(es)** | - |
 
