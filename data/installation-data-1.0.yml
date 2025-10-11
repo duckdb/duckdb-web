@@ -151,7 +151,7 @@
   download_method: Package manager
   architecture: universal
   has_sha_512_hash: ''
-  installation_code: go get github.com/marcboeker/go-duckdb
+  installation_code: go get github.com/duckdb/duckdb-go
   link: ''
   note: ''
   usage_example: ''
