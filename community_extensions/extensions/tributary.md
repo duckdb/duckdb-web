@@ -6,8 +6,7 @@ excerpt: |
   Enable DuckDB to interact with Apache Kafka
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_tributary.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_tributary.html).
 extension:
   build: cmake
   description: Enable DuckDB to interact with Apache Kafka
@@ -15,12 +14,12 @@ extension:
   language: C++
   license: MIT
   maintainers:
-    - rustyconover
+  - rustyconover
   name: tributary
-  version: 2025091601
+  version: '2025101201'
 repo:
   github: query-farm/tributary
-  ref: d1409bccd6b1fdc85c84020780ed79d1e90dd675
+  ref: 048d37f8b64ee3cb661df4f4a8fea01e61f15eda
 
 extension_star_count: 31
 extension_star_count_pretty: 31

@@ -6,20 +6,19 @@ excerpt: |
   Non-cryptographic hash functions, xxHash, rapidhash and Murmurhash3
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_hashfuncs.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_hashfuncs.html).
 extension:
   build: cmake
   description: Non-cryptographic hash functions, xxHash, rapidhash and Murmurhash3
   language: C++
   license: Apache-2.0
   maintainers:
-    - rustyconover
+  - rustyconover
   name: hashfuncs
-  version: 2025091601
+  version: '2025101201'
 repo:
   github: query-farm/hashfuncs
-  ref: a4d74bb68e9fab243d257326a6e9da9945884c19
+  ref: fa2511ec48ae93736e370fa45a9c91923965cf48
 
 extension_star_count: 4
 extension_star_count_pretty: 4
