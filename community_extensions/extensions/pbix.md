@@ -91,8 +91,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|       name        |                description                | input_type | scope  | aliases |
-|-------------------|-------------------------------------------|------------|--------|---------|
-| pbix_magic_number | A magic number to accelerate file parsing | INTEGER    | GLOBAL | []      |
+|               name                |                                description                                 | input_type | scope  | aliases |
+|-----------------------------------|----------------------------------------------------------------------------|------------|--------|---------|
+| pbix_ignore_errors                | Return empty VPAX structure instead of throwing exceptions on parse errors | BOOLEAN    | GLOBAL | []      |
+| pbix_trailing_chunks_optimization | Number of trailing chunks to read for optimized file parsing               | INTEGER    | GLOBAL | []      |
 
 
