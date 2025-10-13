@@ -10,7 +10,6 @@ docs:
 extension:
   build: cmake
   description: Linearization/Delinearization, Z-Order, Hilbert and Morton Curves
-  excluded_platforms: wasm_mvp;wasm_eh;wasm_threads;
   language: C++
   license: Apache-2.0
   maintainers:
@@ -20,7 +19,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/lindel
-  ref: 1397044d26d520957b2dcffb73e444bf35803901
+  ref: 78da538fa9f50f3514d18af9066c54000964e640
 
 extension_star_count: 51
 extension_star_count_pretty: 51
