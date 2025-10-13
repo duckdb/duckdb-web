@@ -28,36 +28,14 @@
     
     <div class="selection-foldout" data-foldout="platform">
         <div class="selection-head">
-            <h3>Platform
-                <span class="selected"></span>
-                <span class="installation-hint">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" fill="none" viewBox="0 0 19 20"><path fill="#FF6900" fill-rule="evenodd" d="M9.5.5a9.5 9.5 0 1 1 0 19 9.5 9.5 0 0 1 0-19Zm-1 12.55v2.1h2.072v-2.1H8.5ZM8.57 5v2.604l.35 3.55h1.23l.352-3.55V5H8.57Z" clip-rule="evenodd"/></svg>
-                    <p>Please select your architecture.</p>
-                </span>
-            </h3>
+            <h3>Platform<span class="selected"></span></h3>
         </div>
     
         <div class="selection-content">
-            <div class="platform-wrap">
-                <div class="selection-options" data-role="platform">
-                    <div class="platform-item">
-                        <div class="option" aria-checked="false" tabindex="-1" data-value="linux"><span class="symbol"><img src="/images/icons/linux.svg" aria-hidden="true"></span><span class="label">Linux</span></div>
-                        <div class="arch-inline selection-options" data-role="architecture" aria-label="Architecture">
-                            <div class="option" aria-checked="false" tabindex="-1" data-value="x86_64"><span class="label">x86_64</span></div>
-                            <div class="option" aria-checked="false" tabindex="-1" data-value="arm64"><span class="label">arm64</span></div>
-                        </div>
-                    </div>
-                    <div class="platform-item">
-                        <div class="option active" aria-checked="true" tabindex="0" data-value="macos"><span class="symbol"><img src="/images/icons/macos.svg" aria-hidden="true"></span><span class="label">macOS</span></div>
-                    </div>
-                    <div class="platform-item">
-                        <div class="option" aria-checked="false" tabindex="-1" data-value="windows"><span class="symbol"><img src="/images/icons/windows.svg" aria-hidden="true"></span><span class="label">Windows</span></div>
-                        <div class="arch-inline selection-options" data-role="architecture" aria-label="Architecture">
-                            <div class="option" aria-checked="false" tabindex="-1" data-value="x86_64"><span class="label">x86_64</span></div>
-                            <div class="option" aria-checked="false" tabindex="-1" data-value="arm64"><span class="label">arm64</span></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="selection-options" data-role="platform">
+                <div class="option" aria-checked="false" tabindex="-1" data-value="linux"><span class="symbol"><img src="/images/icons/linux.svg" aria-hidden="true"></span><span class="label">Linux</span></div>
+                <div class="option active" aria-checked="true" tabindex="0" data-value="macos"><span class="symbol"><img src="/images/icons/macos.svg" aria-hidden="true"></span><span class="label">macOS</span></div>
+                <div class="option" aria-checked="false" tabindex="-1" data-value="windows"><span class="symbol"><img src="/images/icons/windows.svg" aria-hidden="true"></span><span class="label">Windows</span></div>
             </div>
         </div>
     </div>
@@ -125,7 +103,6 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 <div
     data-platform="linux"
     data-environment="cli"
-    data-architecture="x86_64"
     data-docs="/docs/stable/clients/cli/overview">
 
     <figure class="highlight">
@@ -139,35 +116,13 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
 
-<h4>Direct Download</h4>
-{%- assign f = site.data.checksums.artifacts.cli.linux.x86_64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+<h4>Direct Downloads</h4>
+{%- assign f_x86 = site.data.checksums.artifacts.cli.linux.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" -%}
 
-</div>
-</div>
-
-
-<div
-    data-platform="linux"
-    data-environment="cli"
-    data-architecture="arm64"
-    data-docs="/docs/stable/clients/cli/overview">
-
-    <figure class="highlight">
-        <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">sh</span></code></pre>
-    </figure>
-
-<div class="alternative">
-
-<h4>Docker Image</h4>
-{%- highlight bash -%}
-docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
-{%- endhighlight -%}
-
-<h4>Direct Download</h4>
-{%- assign f = site.data.checksums.artifacts.cli.linux.arm64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- assign f_arm = site.data.checksums.artifacts.cli.linux.arm64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" -%}
 
 </div>
@@ -177,43 +132,17 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 <div
     data-platform="windows"
     data-environment="cli"
-    data-architecture="x86_64"
     data-docs="/docs/stable/clients/cli/overview">
 
-{%- assign f = site.data.checksums.artifacts.cli.windows.x86_64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+<h4>Direct Downloads</h4>
+{%- assign f_x86 = site.data.checksums.artifacts.cli.windows.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" -%}
-<div class="note">
-    Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
 
-<div class="alternative">
-
-<h4>Package Manager</h4>
-
-{%- highlight bash -%}
-winget install DuckDB.cli
-{%- endhighlight -%}
-
-<h4>Docker Image</h4>
-
-{%- highlight bash -%}
-docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
-{%- endhighlight -%}
-
-</div>
-</div>
-
-
-<div
-    data-platform="windows"
-    data-environment="cli"
-    data-architecture="arm64"
-    data-docs="/docs/stable/clients/cli/overview">
-
-{%- assign f = site.data.checksums.artifacts.cli.windows.arm64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- assign f_arm = site.data.checksums.artifacts.cli.windows.arm64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" -%}
+
 <div class="note">
     Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 </div>
@@ -271,20 +200,6 @@ install.packages("duckdb")
 <div
     data-platform="linux"
     data-environment="r"
-    data-architecture="x86_64"
-    data-docs="/docs/stable/clients/r.html">
-
-{%- highlight bash -%}
-install.packages("duckdb")
-{%- endhighlight -%}
-
-</div>
-
-
-<div
-    data-platform="linux"
-    data-environment="r"
-    data-architecture="arm64"
     data-docs="/docs/stable/clients/r.html">
 
 {%- highlight bash -%}
@@ -295,6 +210,8 @@ install.packages("duckdb")
     On Linux / arm64, the DuckDB R package needs to be compiled from source. To speed this up, follow the instructions on the <a href="/docs/stable/dev/building/r">R build page</a>.
 </div>
 </div>
+
+
 
 <div
     data-environment="java"
@@ -358,24 +275,14 @@ go get github.com/marcboeker/go-duckdb
 <div
     data-platform="linux"
     data-environment="c"
-    data-docs="/docs/stable/clients/c/overview"
-    data-architecture="x86_64">
+    data-docs="/docs/stable/clients/c/overview">
 
-{%- assign f = site.data.checksums.artifacts.c.linux.x86_64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- assign f_x86 = site.data.checksums.artifacts.c.linux.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="c" platform="linux" architecture="x86_64" -%}
 
-</div>
-
-
-<div
-    data-platform="linux"
-    data-environment="c"
-    data-docs="/docs/stable/clients/c/overview"
-    data-architecture="arm64">
-
-{%- assign f = site.data.checksums.artifacts.c.linux.arm64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- assign f_arm = site.data.checksums.artifacts.c.linux.arm64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="c" platform="linux" architecture="arm64" -%}
 
 </div>
@@ -396,47 +303,27 @@ go get github.com/marcboeker/go-duckdb
 <div
     data-platform="windows"
     data-environment="c"
-    data-architecture="arm64"
     data-docs="/docs/stable/clients/c/overview">
 
-{%- assign f = site.data.checksums.artifacts.c.windows.arm64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+{%- assign f_x86 = site.data.checksums.artifacts.c.windows.x86_64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_x86 }}</a>
+{%- include checksum_inline.html environment="c" platform="windows" architecture="x86_64" -%}
+
+{%- assign f_arm = site.data.checksums.artifacts.c.windows.arm64.filename -%}
+<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="c" platform="windows" architecture="arm64" -%}
 
 </div>
 
 
 <div
-    data-platform="windows"
-    data-environment="c"
-    data-architecture="x86_64"
-    data-docs="/docs/stable/clients/c/overview">
-
-{%- assign f = site.data.checksums.artifacts.c.windows.x86_64.filename -%}
-<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="c" platform="windows" architecture="x86_64" -%}
-
-</div>
-
-
-<div
     data-platform="linux"
     data-environment="odbc"
-    data-docs="/docs/stable/clients/odbc/overview"
-    data-architecture="x86_64">
+    data-docs="/docs/stable/clients/odbc/overview">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-linux-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="linux" architecture="x86_64" -%}
 
-</div>
-
-
-<div
-    data-platform="linux"
-    data-environment="odbc"
-    data-docs="/docs/stable/clients/odbc/overview"
-    data-architecture="arm64">
-    
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-arm64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-linux-arm64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="linux" architecture="arm64" -%}
 
@@ -457,22 +344,14 @@ go get github.com/marcboeker/go-duckdb
 <div
     data-platform="windows"
     data-environment="odbc"
-    data-docs="/docs/stable/clients/odbc/overview"
-    data-architecture="x86_64">
+    data-docs="/docs/stable/clients/odbc/overview">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" -%}
 
+<div class="note">
+    The ODBC client is not yet available as a binary for Windows / arm64.
 </div>
-
-
-<div
-    data-platform="windows"
-    data-environment="odbc"
-    data-docs="/docs/stable/clients/odbc/overview"
-    data-architecture="arm64">
-
-The ODBC client is not yet available as a binary for Windows / arm64.
 
 </div>
 
