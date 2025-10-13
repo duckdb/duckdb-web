@@ -176,58 +176,6 @@ body.installation{
 		}
 	}
 	
-	.selection-options[data-role="platform"] .platform-item {
-		position: relative;
-		display: inline-flex;
-		align-items: center;
-		height: 60px;
-	}
-	
-	.selection-options[data-role="platform"] .platform-item .arch-inline {
-		display: inline-flex;
-		flex-wrap: nowrap;
-		gap: 8px;
-		border-radius: 10px;
-		padding: 6px 0px;
-		opacity: 0;
-		pointer-events: none;
-		z-index: 2;
-		width: 0;
-		transition: all .3s;
-		//min-width: 160px; 
-		
-		.option{
-			height: unset;
-			
-			.label{
-				@include label-2;
-			}
-		}
-		
-		.option:nth-child(2){
-			transform: translateX(-10%);
-			transition: all .3s;
-		}
-		
-		&.open {
-			opacity: 1;
-			pointer-events: auto;
-			padding: 6px 8px;
-			width: 150px;
-			.option:nth-child(2){
-				transform: translateX(0);
-			}
-		}
-		
-		&.error{
-			.option{
-				border: 1px solid var(--interactive-installation-error-border, #FFA566);
-				background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
-			}
-		}
-	}
-	
-	
 	.installation-instructions,
 	.instruction-collection{
 		margin-top: 50px;
@@ -426,28 +374,6 @@ body.installation{
 		
 	}
 	
-	.installation-hint{
-		display: inline-flex;
-		flex-wrap: nowrap;
-		align-items: center;
-		gap: 6px;
-		margin-left: 8px;
-		vertical-align: middle;
-		
-		p{
-			margin: 0;
-			font-size: var(--type-label-1);
-			font-weight: 600;
-			color: var(--orange-50, #FF6900);
-		}
-		
-		svg{
-			width: 15px;
-			height: 15px;
-			transform: translateY(-1px);
-		}
-	}
-	
 	a.download-btn{
 		display: flex!important;
 		justify-content: flex-start;
@@ -493,7 +419,8 @@ body.installation{
 	}
 	
 	.shainfo{
-		margin-top: 10px;
+		margin-top: 8px;
+		color: var(--main-text-secondary-color, #666);
 		
 		span:first-child{
 			font-weight: 700;
@@ -503,6 +430,10 @@ body.installation{
 			@include code-standard;
 			font-size: 14px;
 		}
+	}
+	
+	.shainfo + .download-btn{
+		margin-top: 3*8px;
 	}
 	
 	
