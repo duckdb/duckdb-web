@@ -26,11 +26,11 @@ Create a table with a composite primary key:
 CREATE TABLE t1 (id INTEGER, j VARCHAR, PRIMARY KEY (id, j));
 ```
 
-Create a table with various different types and constraints:
+Create a table with various different types, constraints, and default values:
 
 ```sql
 CREATE TABLE t1 (
-    i INTEGER NOT NULL,
+    i INTEGER NOT NULL DEFAULT 0,
     decimalnr DOUBLE CHECK (decimalnr < 10),
     date DATE UNIQUE,
     time TIMESTAMP
@@ -71,9 +71,11 @@ Note that only the column names and types are copied to `t2`, other pieces of in
 
 ## Temporary Tables
 
-Temporary tables can be created using the `CREATE TEMP TABLE` or the `CREATE TEMPORARY TABLE` statement (see diagram below).
-Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped.
-Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration]({% link docs/preview/configuration/overview.md %}) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained.
+Temporary tables are session scoped, meaning that only the specific connection that created them can access them and once the connection to DuckDB is closed they will be automatically dropped (similar to PostgreSQL, for example).
+
+They can be created using the `CREATE TEMP TABLE` or the `CREATE TEMPORARY TABLE` statement (see diagram below) and are part of the `temp.main` schema. While discouraged, their names can overlap with the names of the regular database tables. In these cases, temporary tables take priority in name resolution and full qualifaction is required to refer to a regular table e.g., `memory.main.t1`.
+
+Temporary tables reside in memory rather than on disk even when connecting to a persistent DuckDB, but if the `temp_directory` [configuration]({% link docs/preview/configuration/overview.md %}) is set, data will be spilled to disk if memory becomes constrained.
 
 Create a temporary table from a CSV file (automatically detecting column names and types):
 
@@ -88,8 +90,6 @@ Allow temporary tables to off-load excess memory to disk:
 ```sql
 SET temp_directory = '/path/to/directory/';
 ```
-
-Temporary tables are part of the `temp.main` schema. While discouraged, their names can overlap with the names of the regular database tables. In these cases, use their fully qualified name, e.g., `temp.main.t1`, for disambiguation.
 
 ## `CREATE OR REPLACE`
 

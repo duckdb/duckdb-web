@@ -6,23 +6,24 @@ excerpt: |
   By utilizing the Apache DataSketches library this extension can efficiently compute approximate distinct item counts and estimations of quantiles, while allowing the sketches to be serialized.
 
 docs:
-  extended_description: |
-     For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_datasketches.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_datasketches.html).
 extension:
   build: cmake
-  description: By utilizing the Apache DataSketches library this extension can efficiently compute approximate distinct item counts and estimations of quantiles, while allowing the sketches to be serialized.
+  description: By utilizing the Apache DataSketches library this extension can efficiently
+    compute approximate distinct item counts and estimations of quantiles, while allowing
+    the sketches to be serialized.
   language: C++
   license: MIT
   maintainers:
-    - rustyconover
+  - rustyconover
   name: datasketches
-  version: 2025092701
+  version: '2025101201'
 repo:
   github: query-farm/datasketches
-  ref: 1caaafaf9e8e2b7f857228f82275a9518cfb2241
+  ref: ca1c6e7f7078ec95398e4e8c403872cc6c9a1e1b
 
-extension_star_count: 34
-extension_star_count_pretty: 34
+extension_star_count: 35
+extension_star_count_pretty: 35
 extension_download_count: 498
 extension_download_count_pretty: 498
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'

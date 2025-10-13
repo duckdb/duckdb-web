@@ -240,20 +240,13 @@ A separate blog post will be coming.
 
 ## Performance and Optimizations
 
-### Sorting Rework
-
-[Laurens (@lnkuiper)](https://github.com/lnkuiper) [rewrote DuckDB’s sorting implementation](https://github.com/duckdb/duckdb/pull/17584#thread-scaling-performance) ([again](https://github.com/duckdb/duckdb/pull/1561)). This new implementation uses a k-way merge sort to reduce data movement. It is also adaptive to pre-sorted data and uses a new API that makes it possible to use this new sorting code elsewhere in DuckDB, for example in window functions. We are seeing much better thread scaling performance with this implementation. We will publish a separate blog post with more detailed performance measurements.
-
-### Materializing Common Table Expressions
-
-Common table expressions (CTEs) are now materialized by default (instead of inlining them). This both improves performance and resolves some correctness bugs that happened due to inlining.
-This feature was [implemented](https://github.com/duckdb/duckdb/pull/17459) by [Denis Hirn (kryonix)](https://github.com/kryonix), who [contributed support for recursive CTEs](https://github.com/duckdb/duckdb/pull/404) back in 2020.
+DuckDB v1.4.0 received a number of performance optimizations.
 
 ### Checkpointing In-Memory Tables
 
 In-memory tables now support [checkpointing](https://github.com/duckdb/duckdb/pull/18348). This has two key benefits:
 
-* In-memory tables now support compression. This is disabled by default – you can turn it on using:
+* In-memory tables now support compression, which can have a significant (5-10×) performance boost for some queries. This is disabled by default – you can turn it on using:
 
   ```sql
   ATTACH ':memory:' AS memory_compressed (COMPRESS);
@@ -261,6 +254,21 @@ In-memory tables now support [checkpointing](https://github.com/duckdb/duckdb/pu
   ```
 
 * Checkpointing triggers vacuuming deleted rows, allowing space to be reclaimed after deletes/truncation.
+
+### Sorting Rework
+
+[Laurens (@lnkuiper)](https://github.com/lnkuiper) [rewrote DuckDB’s sorting implementation](https://github.com/duckdb/duckdb/pull/17584#thread-scaling-performance) ([again](https://github.com/duckdb/duckdb/pull/1561)). This new implementation uses a k-way merge sort to reduce data movement. It is also adaptive to pre-sorted data and uses a new API that makes it possible to use this new sorting code elsewhere in DuckDB, for example in window functions. We are seeing much better thread scaling performance with this implementation. We will publish a separate blog post with more detailed performance measurements.
+
+> Update We have now covered this in a [separate blog post]({% post_url 2025-09-24-sorting-again %}).
+
+### Materializing Common Table Expressions
+
+Common table expressions (CTEs) are now materialized by default (instead of inlining them). This both improves performance and resolves some correctness bugs that happened due to inlining.
+This feature was [implemented](https://github.com/duckdb/duckdb/pull/17459) by [Denis Hirn (kryonix)](https://github.com/kryonix), who [contributed support for recursive CTEs](https://github.com/duckdb/duckdb/pull/404) back in 2020.
+
+### Additional Optimizations
+
+DuckBB v1.4.0 fixes some [scaling issues](https://github.com/duckdb/duckdb/pull/17985), supports [caching for hashes of string dictionaries](https://github.com/duckdb/duckdb/pull/18580) and has several [aggregation optimizations](https://github.com/duckdb/duckdb/pull/17718).
 
 ## Distribution 
 

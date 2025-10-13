@@ -6,23 +6,24 @@ excerpt: |
   Add comprehensive statistical distribution functions to DuckDB, enabling advanced statistical analysis, probability calculations, and random sampling directly within SQL queries.
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_stochastic.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_stochastic.html).
 extension:
   build: cmake
-  description: Add comprehensive statistical distribution functions to DuckDB, enabling advanced statistical analysis, probability calculations, and random sampling directly within SQL queries.
+  description: Add comprehensive statistical distribution functions to DuckDB, enabling
+    advanced statistical analysis, probability calculations, and random sampling directly
+    within SQL queries.
   language: C++
   license: Apache-2.0
   maintainers:
-    - rustyconover
+  - rustyconover
   name: stochastic
-  version: 2025091601
+  version: '2025101201'
 repo:
   github: query-farm/stochastic
-  ref: d9228f3d99e839d2a5b052ca98bdebd646875870
+  ref: 9b0cbd2d5131c0d003c4f608b7592c774b42f2da
 
-extension_star_count: 11
-extension_star_count_pretty: 11
+extension_star_count: 12
+extension_star_count_pretty: 12
 extension_download_count: 393
 extension_download_count_pretty: 393
 image: '/images/community_extensions/social_preview/preview_community_extension_stochastic.png'

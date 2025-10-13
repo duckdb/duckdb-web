@@ -151,6 +151,8 @@ Database encryption implies using [storage version](#explicit-storage-versions) 
 
 ### Options
 
+Zero or more copy options may be provided within parentheses following the `ATTACH` statement. Parameter values can be passed in with or without wrapping in single quotes. Arbitrary expressions may be used for parameter values.
+
 | Name                | Description                                                                                                                 | Type      | Default value |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
 | `ACCESS_MODE`       | Access mode of the database (`AUTOMATIC`, `READ_ONLY`, or `READ_WRITE`).                                                    | `VARCHAR` | `automatic`   |

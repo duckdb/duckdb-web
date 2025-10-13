@@ -51,7 +51,7 @@ git config --local core.hooksPath .githooks/
 
 ## Development Environment Setup
 
-### Platform-Specific Setup
+### 1. Platform-Specific Setup
 
 **All Platforms:**
 - Python 3.9+ supported
@@ -75,7 +75,7 @@ xcode-select --install
 - Visual Studio 2019+ with C++ support
 - Git for Windows
 
-### Install Dependencies and Build
+### 2. Install Dependencies and Build
 
 Set up the development environment in two steps:
 
@@ -92,7 +92,23 @@ uv sync --no-build-isolation
 - The build happens in an isolated, ephemeral environment where cmake's paths point to non-existing directories
 - Installing dependencies first, then building without isolation ensures proper cmake integration
 
-### Verify Installation
+### 3. Enable Pre-Commit Hooks
+
+We run a number of linting, formatting and type-checking in CI. You can run all of these manually, but to make your life easier you can install the exact same checks we run in CI as git hooks with pre-commit, which is already installed as part of the dev dependencies:
+
+```bash
+uvx pre-commit install
+```
+
+This will run all required checks before letting your commit pass.
+
+You can also install a post-checkout hook that always runs `git submodule update --init --recursive`. When you change branches between main and a bugfix branch, this makes sure the duckdb submodule is always correctly initialized:
+
+```bash
+uvx pre-commit install --hook-type post-checkout
+```
+
+### 4. Verify Installation
 
 ```bash
 uv run python -c "import duckdb; print(duckdb.sql('SELECT 42').fetchall())"
