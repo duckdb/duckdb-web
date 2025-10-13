@@ -90,7 +90,7 @@ CREATE OR REPLACE SECRET secret (
 
 ### Validation
 
-Since v1.4.0, the AWS `credential_chain` provider will look for and require credentials during `CREATE SECRET` time, failing if absent/unavailable.
+Since v1.4.0, the AWS `credential_chain` provider will look for any required credentials during `CREATE SECRET` time, failing if absent/unavailable.
 
 Since v1.4.1 this behavior may be configured via the `VALIDATION` option as follows:
 

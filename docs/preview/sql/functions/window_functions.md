@@ -157,15 +157,6 @@ The table below shows the available general window functions.
 | **Return type** | `DOUBLE` |
 | **Example** | `percent_rank()` |
 
-#### `rank_dense()`
-
-<div class="nostroke_table"></div>
-
-| **Description** | The rank of the current row *without gaps*. |
-| **Return type** | `BIGINT` |
-| **Example** | `rank_dense()` |
-| **Aliases** | `dense_rank()` |
-
 #### `rank([ORDER BY ordering])`
 
 <div class="nostroke_table"></div>
