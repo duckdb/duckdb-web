@@ -179,7 +179,7 @@ FROM delta_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩');
 
 Now, let’s say we are only interested in a specific range of `id`s: maybe we only want `id`s below 100. We will now construct two queries.
 
-For the first query, we will directly read all the parquet files stored in the table using a [glob pattern]({% link docs/stable/data/multiple_files/overview.md %}#multi-file-reads-and-globs):
+For the first query, we will directly read all the Parquet files stored in the table using a [glob pattern]({% link docs/stable/data/multiple_files/overview.md %}#multi-file-reads-and-globs):
 
 ```sql
 FROM parquet_scan('s3://⟨your-bucket⟩/⟨your_delta_table⟩/*.parquet')

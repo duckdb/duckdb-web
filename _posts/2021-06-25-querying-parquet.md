@@ -8,7 +8,7 @@ tags: ["using DuckDB"]
 
 Apache Parquet is the most common "Big Data" storage format for analytics. In Parquet files, data is stored in a columnar-compressed binary format. Each Parquet file stores a single table. The table is partitioned into row groups, which each contain a subset of the rows of the table. Within a row group, the table data is stored in a columnar fashion.
 
-<img src="{% link images/blog/parquet.svg %}" alt="Example parquet file shown visually. The parquet file (taxi.parquet) is divided into row groups that each have two columns (pickup_at and dropoff_at)" title="Taxi Parquet File" style="max-width:30%"/>
+<img src="{% link images/blog/parquet.svg %}" alt="Example Parquet file shown visually. The Parquet file (taxi.parquet) is divided into row groups that each have two columns (pickup_at and dropoff_at)" title="Taxi Parquet File" style="max-width:30%"/>
 
 The Parquet format has a number of properties that make it suitable for analytical use cases:
 
@@ -64,7 +64,7 @@ WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20';
 
 In this query, we read a single column from our Parquet file (`pickup_at`). Any other columns stored in the Parquet file can be entirely skipped, as we do not need them to answer our query.
 
-<img src="{% link images/blog/parquet-filter-svg.svg %}" alt="Projection & filter pushdown into parquet file example." title="Filter Pushdown" style="max-width:30%"/>
+<img src="{% link images/blog/parquet-filter-svg.svg %}" alt="Projection & filter pushdown into Parquet file example." title="Filter Pushdown" style="max-width:30%"/>
 
 In addition, only rows that have a `pickup_at` between the 15th and the 20th of April 2019 influence the result of the query. Any rows that do not satisfy this predicate can be skipped.
 
@@ -122,12 +122,12 @@ Pandas takes significantly longer to complete this query. That is because Pandas
 
 ## Concatenate into a Single File
 
-We can address the concatenation issue by creating a single big Parquet file from the three smaller parts. We can use the `pyarrow` library for this, which has support for reading multiple Parquet files and streaming them into a single large file. Note that the `pyarrow` parquet reader is the very same parquet reader that is used by Pandas internally.
+We can address the concatenation issue by creating a single big Parquet file from the three smaller parts. We can use the `pyarrow` library for this, which has support for reading multiple Parquet files and streaming them into a single large file. Note that the `pyarrow` Parquet reader is the very same Parquet reader that is used by Pandas internally.
 
 ```python
 import pyarrow.parquet as pq
 
-# concatenate all three parquet files
+# concatenate all three Parquet files
 pq.write_table(pq.ParquetDataset('taxi/').read(), 'alltaxi.parquet', row_group_size=100000)
 ```
 
@@ -228,7 +228,7 @@ len(pandas.read_parquet('alltaxi.parquet', columns=['pickup_at'])
           .query("pickup_at > '2019-06-30'"))
 ```
 
-The `pyarrow` parquet reader also allows us to perform filter pushdown into the scan, however. Once we add this we end up with a much more competitive `70ms` to complete the query.
+The `pyarrow` Parquet reader also allows us to perform filter pushdown into the scan, however. Once we add this we end up with a much more competitive `70ms` to complete the query.
 
 ```python
 len(pandas.read_parquet('alltaxi.parquet', columns=['pickup_at'], filters=[('pickup_at', '>', '2019-06-30')]))
@@ -241,12 +241,12 @@ len(pandas.read_parquet('alltaxi.parquet', columns=['pickup_at'], filters=[('pic
 | Pandas (projection pushdown)          | 0.90     |
 | Pandas (projection & filter pushdown) | 0.07     |
 
-This shows that the results here are not due to DuckDB's parquet reader being faster than the `pyarrow` Parquet reader. The reason that DuckDB performs better on these queries is because its optimizers automatically extract all required columns and filters from the SQL query, which then get automatically utilized in the Parquet reader with no manual effort required.
+This shows that the results here are not due to DuckDB's Parquet reader being faster than the `pyarrow` Parquet reader. The reason that DuckDB performs better on these queries is because its optimizers automatically extract all required columns and filters from the SQL query, which then get automatically utilized in the Parquet reader with no manual effort required.
 
 Interestingly, both the `pyarrow` Parquet reader and DuckDB are significantly faster than performing this operation natively in Pandas on a materialized DataFrame.
 
 ```python
-# read the entire parquet file into Pandas
+# read the entire Parquet file into Pandas
 df = pandas.read_parquet('alltaxi.parquet')
 # run the query natively in Pandas
 # note: we only time this part

@@ -56,7 +56,7 @@ SELECT '15:30:00.123456789'::TIME_NS;
 15:30:00.123456789
 ```
 
-`TIME_NS` values can also be read from parquet when the type is [`TIME` with unit `NANOS`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#time).
+`TIME_NS` values can also be read from Parquet when the type is [`TIME` with unit `NANOS`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#time).
 
 > Warning The `TIME` type should only be used in rare cases, where the date part of the timestamp can be disregarded.
 > Most applications should use the [`TIMESTAMP` types]({% link docs/stable/sql/data_types/timestamp.md %}) to represent their timestamps.

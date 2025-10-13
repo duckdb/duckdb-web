@@ -131,7 +131,7 @@ This is to better simulate a single user's experience accessing the dashboard in
 </summary>
 
 For reproducibility, here are the very standard queries used to initially load the data from Parquet, sort randomly, sort by `origin`, and sort by `origin` and then `destination`.
-The parquet files were downloaded [from Kaggle](https://www.kaggle.com/datasets/robikscube/flight-delay-dataset-20182022).
+The Parquet files were downloaded [from Kaggle](https://www.kaggle.com/datasets/robikscube/flight-delay-dataset-20182022).
 
 ```sql
 CREATE TABLE IF NOT EXISTS flights AS

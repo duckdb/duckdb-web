@@ -183,7 +183,7 @@ def predict_fare(x: dt.float64) -> dt.float32:
     return pa.array(predicted.numpy())
 
 
-# Execute a query on the NYC Taxi parquet file to showcase our model's predictions, the actual fare amount, and the distance.
+# Execute a query on the NYC Taxi Parquet file to showcase our model's predictions, the actual fare amount, and the distance.
 expr = (
     ibis.read_parquet('yellow_tripdata_2016-02.parquet')
     .mutate(
