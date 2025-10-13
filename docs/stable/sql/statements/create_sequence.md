@@ -81,11 +81,13 @@ DROP SEQUENCE IF EXISTS serial;
 
 ### Using Sequences for Primary Keys
 
-Sequences can provide an integer primary key for a table. For example:
+Sequences can be used as `DEFAULT` values in [`CREATE TABLE` statements]({%link docs/stable/sql/statements/create_table.md %}). 
+
+The example below uses a sequence to create an integer [primary key]({% link docs/stable/sql/constraints.md %}#primary-key-and-unique-constraint):
 
 ```sql
 CREATE SEQUENCE id_sequence START 1;
-CREATE TABLE tbl (id INTEGER DEFAULT nextval('id_sequence'), s VARCHAR);
+CREATE TABLE tbl (id INTEGER PRIMARY KEY DEFAULT nextval('id_sequence'), s VARCHAR);
 INSERT INTO tbl (s) VALUES ('hello'), ('world');
 SELECT * FROM tbl;
 ```
