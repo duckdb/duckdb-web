@@ -65,7 +65,7 @@ Create a macro `arr_append` (with a functionality equivalent to `array_append`):
 CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
 ```
 
-Create a macro with a typed parameter
+Create a macro with a typed parameter:
 
 ```sql
 CREATE MACRO is_maximal(a INT) AS a = 2^31 - 1;
