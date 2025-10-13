@@ -20,7 +20,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/shellfs
-  ref: b786dbbd268f426892a4caca59db6a2c1a3f63ef
+  ref: f0bcfb8035b2f2d62b3dbfa202bbe61a125b51ee
 
 extension_star_count: 81
 extension_star_count_pretty: 81

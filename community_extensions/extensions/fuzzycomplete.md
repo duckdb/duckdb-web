@@ -20,7 +20,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/fuzzycomplete
-  ref: 2e35c7d6d0ae0d64e6eac5193852c7b7f5fe0803
+  ref: 0289e3e5c2e454fad1ef9ca51379460563d2b6f0
 
 extension_star_count: 21
 extension_star_count_pretty: 21
