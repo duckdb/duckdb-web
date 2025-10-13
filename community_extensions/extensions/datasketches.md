@@ -20,7 +20,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/datasketches
-  ref: ca1c6e7f7078ec95398e4e8c403872cc6c9a1e1b
+  ref: 4482941cf751a9c4fd1086b798b68fa695497b30
 
 extension_star_count: 35
 extension_star_count_pretty: 35

@@ -19,7 +19,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/rapidfuzz
-  ref: d8491f6d462beb93e0629a0f7df34914363307dd
+  ref: ab47af95622e5b23769d3aac2dca16bbf69d8d35
 
 extension_star_count: 3
 extension_star_count_pretty: 3

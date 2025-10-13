@@ -20,7 +20,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/bitfilters
-  ref: 002ab751fc30d94d005b2db27c9f68271b8a36b5
+  ref: feb75dd1f5fe7837422a03c6cddde70988b7cad1
 
 extension_star_count: 2
 extension_star_count_pretty: 2

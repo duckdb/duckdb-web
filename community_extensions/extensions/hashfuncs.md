@@ -18,7 +18,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/hashfuncs
-  ref: fa2511ec48ae93736e370fa45a9c91923965cf48
+  ref: d07e4e8878b5bb27624be71f5012c64b507b5b60
 
 extension_star_count: 4
 extension_star_count_pretty: 4

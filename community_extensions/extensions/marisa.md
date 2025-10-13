@@ -21,7 +21,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/marisa
-  ref: 63be878761e2e7da1e6cfad4cc3988544e3ef96a
+  ref: 62a09ef28fab1d81c18bafe143eaed935b4abf08
 
 extension_star_count: 2
 extension_star_count_pretty: 2
