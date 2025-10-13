@@ -155,7 +155,7 @@ CREATE OR REPLACE MACRO is_maximal
 ```sql
 SELECT
     is_maximal(127::TINYINT) AS tiny,
-    is_maximal(127) AS regular
+    is_maximal(127) AS regular;
 ```
 
 |   tiny   |  regular   |
