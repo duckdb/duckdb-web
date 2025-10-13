@@ -20,7 +20,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/crypto
-  ref: ee7e10a49288776187317bacad77bd0c504b9696
+  ref: 81f20f42d62ac87e879de59e4ad086a3aadc74ae
 
 extension_star_count: 22
 extension_star_count_pretty: 22

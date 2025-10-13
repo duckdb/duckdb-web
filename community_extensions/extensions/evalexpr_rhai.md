@@ -20,7 +20,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/evalexpr_rhai
-  ref: d5e3737b11298b5882db38899ba480cf4fd110cb
+  ref: d2b943f54a2901b55a4d15eb802fc427d85b9b60
 
 extension_star_count: 21
 extension_star_count_pretty: 21
