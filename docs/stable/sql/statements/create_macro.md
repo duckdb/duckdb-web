@@ -68,7 +68,7 @@ CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
 Create a macro with a typed parameter:
 
 ```sql
-CREATE MACRO is_maximal(a INT) AS a = 2^31 - 1;
+CREATE MACRO is_maximal(a INTEGER) AS a = 2^31 - 1;
 ```
 
 ### Table Macros
