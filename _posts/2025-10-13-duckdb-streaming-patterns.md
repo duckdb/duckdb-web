@@ -2,10 +2,10 @@
 layout: post
 title: "Streaming Patterns with DuckDB"
 author: "Guillermo Sanchez"
-thumb: 
-image: 
+thumb: /images/blog/streaming_patterns/streaming-patterns-wide.svg
+image: /images/blog/streaming_patterns/streaming-patterns-wide.svg
 excerpt: "DuckDB used for streaming analytics? This post will show you some patterns in which you can use DuckDB to refresh your data at near real-time speed."
-tags: [""]
+tags: ["using duckdb"]
 ---
 
 The words “DuckDB” and “streaming” don't usually make it into the same sentence. Maybe this is because DuckDB has been positioned as an all powerful (but very lightweight) OLAP database. Or maybe this is because the ecosystem of streaming analytics has centered around names such as Kafka, Flink and Spark Streaming, and most recently players trying to change the game like Materialize or RisingWave. But can DuckDB be used in the context of streaming analytics? What is streaming analytics in the first place?
