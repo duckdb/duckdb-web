@@ -250,7 +250,7 @@ EXECUTE v1('file.csv');
 Expressions may be used for options as well. Copy to a file using a format stored in a  variable:
 
 ```sql
-SET VARIABLE my_format='parquet';
+SET VARIABLE my_format = 'parquet';
 COPY (SELECT 42 i) TO 'file' (FORMAT getvariable('my_format'));
 ```
 
