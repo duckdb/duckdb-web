@@ -247,7 +247,7 @@ PREPARE v1 AS COPY (SELECT 42 i) to $1;
 EXECUTE v1('file.csv');
 ```
 
-Expressions may be used for options as well. Copy to a file using a format stored in a  variable:
+Expressions may be used for options as well. Copy to a file using a format stored in a variable:
 
 ```sql
 SET VARIABLE my_format = 'parquet';
