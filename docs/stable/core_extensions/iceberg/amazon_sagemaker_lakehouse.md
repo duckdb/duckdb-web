@@ -49,6 +49,15 @@ ATTACH '⟨account_id⟩' AS glue_catalog (
 );
 ```
 
+Or alternatively:
+
+```sql
+ATTACH '⟨account_id⟩' AS glue_catalog (
+    TYPE iceberg,
+    ENDPOINT_TYPE 'glue'
+);
+```
+
 To check whether the attachment worked, list all tables:
 
 ```sql
