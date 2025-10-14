@@ -25,7 +25,7 @@ INSTALL iceberg;
 
 ## Connecting to Amazon SageMaker Lakehouse (AWS Glue)
 
-Create an s3 secret using the [Secrets Manager]({% link docs/stable/configuration/secrets_manager.md %}):
+Create an S3 secret using the [Secrets Manager]({% link docs/stable/configuration/secrets_manager.md %}):
 
 ```sql
 CREATE SECRET (
