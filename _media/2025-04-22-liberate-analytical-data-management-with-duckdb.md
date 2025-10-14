@@ -18,5 +18,5 @@ length: "35 min"
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Data Council 2025](https://www.datacouncil.ai/bay-2025) |
 | **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
-| **Slide Deck** | [Download](https://blobs.duckdb.org/slides/data-council-2025-liberate-analytical-data-management-with-duckdb.pdf) |
+| **Slide deck** | [Download](https://blobs.duckdb.org/slides/data-council-2025-liberate-analytical-data-management-with-duckdb.pdf) |
 | **YouTube** | [Liberate Analytical Data Management with DuckDB](https://www.youtube.com/watch?v=o53onmgnQDU) |

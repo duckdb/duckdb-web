@@ -14,6 +14,8 @@ length: "65 min"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/f9QlkXW4H9A?si=7nUCLymvtVwG51nc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-Podcast: [The Geek Narrator](https://www.geeknarrator.com/)
-
-Guest: [Mark Raasveldt (DuckDB Labs)](https://mytherin.github.io/)
+|-------|-------|
+| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
+| **Podcast** | [The Geek Narrator](https://www.geeknarrator.com/) |
+| **Guest** | [Mark Raasveldt (DuckDB Labs)](https://mytherin.github.io/) |
+| **YouTube** | [Deep Dive into DuckDB](https://www.youtube.com/watch?v=f9QlkXW4H9A) |

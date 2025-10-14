@@ -10,8 +10,8 @@ tags: ["Podcast"]
 length: "80 min"
 ---
 
-<a href="https://www.dataengineeringpodcast.com/episodepage/duckdb-in-process-olap-database-episode-270">Listen to the podcast episode</a>
-
-Podcast: [Data Engineering Podcast](https://www.dataengineeringpodcast.com/)
-
-Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)
+|-------|-------|
+| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
+| **Podcast** | [Data Engineering Podcast](https://www.dataengineeringpodcast.com/) |
+| **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Episode site** | [Listen](https://www.dataengineeringpodcast.com/episodepage/duckdb-in-process-olap-database-episode-270) |

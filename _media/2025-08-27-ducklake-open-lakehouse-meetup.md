@@ -9,6 +9,9 @@ toc: false
 tags: ["Talk"]
 ---
 
-This talk was presented at the [Open Lakehouse meetup](https://luma.com/OLM-827) in Amsterdam. The video is not yet available.
-
-[Slides](http://blobs.duckdb.org/slides/hannes-muehleisen-ducklake-open-lakehouse-meetup.pdf)
+|-------|-------|
+| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
+| **Event** | [Amsterdam Open Lakehouse Meetup](https://luma.com/OLM-827) |
+| **Speaker** | [Hannes Mühleisen](https://hannes.muehleisen.org/) (DuckDB Labs) |
+| **Slide deck** | [Download](http://blobs.duckdb.org/slides/hannes-muehleisen-ducklake-open-lakehouse-meetup.pdf) |
+| **YouTube** | _to be released_ |

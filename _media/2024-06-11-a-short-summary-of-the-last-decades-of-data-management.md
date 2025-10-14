@@ -14,15 +14,9 @@ length: "50 min"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/-wCzn9gKoUk?si=7nUCLymvtVwG51nc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-Event: [GOTO Amsterdam 2024](https://gotoams.nl/2024/)
-
-Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)
-
-<div class="box-link-wrapper">
-	<div class="box-link full-width">
-		<a href="https://blobs.duckdb.org/slides/goto-amsterdam-2024-hannes-muehleisen-short-history-keynote.pdf"></a>
-		<span class="symbol"><img src="{% link images/icons/doc.svg %}"></span>
-		<span>Download Presentation</span>
-		<span class="chevron"></span>
-	</div>
-</div>
+|-------|-------|
+| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
+| **Event** | [GOTO Amsterdam 2024](https://gotoams.nl/2024/) |
+| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Slide deck** | [Download](https://blobs.duckdb.org/slides/goto-amsterdam-2024-hannes-muehleisen-short-history-keynote.pdf) |
+| **YouTube** | [A Short Summary of the Last Decades of Data Management](https://www.youtube.com/watch?v=-wCzn9gKoUk) |
