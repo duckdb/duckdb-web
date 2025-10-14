@@ -131,6 +131,8 @@
       var $group = role === 'platform' ? $rgPlat : role === 'environment' ? $rgEnv : $();
       if (!$group || !$group.length) return '';
       var $opt = $group.find('.option.active').first();
+      var displayLabel = $opt.attr('data-display-label');
+      if (displayLabel) return $.trim(displayLabel);
       var txt = $.trim(($opt.find('.label').text() || $opt.text() || ''));
       return txt;
     }
