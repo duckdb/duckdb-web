@@ -108,7 +108,7 @@ The main bottleneck in workloads reading remote files is likely to be the IO. Th
 Some basic SQL tricks can help with this:
 
 - Avoid `SELECT *`. Instead, only select columns that are actually used. DuckDB will try to only download the data it actually needs.
-- Apply filters on remote parquet files when possible. DuckDB can use these filters to reduce the amount of data that is scanned.
+- Apply filters on remote Parquet files when possible. DuckDB can use these filters to reduce the amount of data that is scanned.
 - Either [sort]({% link docs/preview/sql/query_syntax/orderby.md %}) or [partition]({% link docs/preview/data/partitioning/partitioned_writes.md %}) data by columns that are regularly used for filters: this increases the effectiveness of the filters in reducing IO.
 
 To inspect how much remote data is transferred for a query, [`EXPLAIN ANALYZE`]({% link docs/preview/guides/meta/explain_analyze.md %}) can be used to print out the total number of requests and total data transferred for queries on remote files.
