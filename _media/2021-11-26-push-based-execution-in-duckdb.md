@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Push-based execution in DuckDB"
+title: "Push-Based Execution in DuckDB"
 author: Mark Raasveldt
 thumb: "/images/media/thumbs/2021-11-26-push-based-execution-in-duckdb.png"
 image: "/images/media/thumbs/2021-11-26-push-based-execution-in-duckdb.png"

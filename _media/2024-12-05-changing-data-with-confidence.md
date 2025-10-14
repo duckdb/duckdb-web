@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Changing data with confidence"
+title: "Changing Data with Confidence"
 author: Hannes Mühleisen
 thumb: "/images/media/thumbs/2024-12-05-changing-data-with-confidence.png"
 image: "/images/media/thumbs/2024-12-05-changing-data-with-confidence.png"

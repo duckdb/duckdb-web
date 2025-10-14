@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "PyData Lithuania special"
+title: "PyData Lithuania Special"
 author: Gábor Szárnyas
 thumb: "/images/media/thumbs/2025-05-12-pydata-lithuania-special.png"
 image: "/images/media/thumbs/2025-05-12-pydata-lithuania-special.png"

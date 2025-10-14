@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Changing large tables"
+title: "Changing Large Tables"
 author: Hannes Mühleisen
 thumb: "/images/media/thumbs/2024-11-25-changing-large-tables.png"
 image: "/images/media/thumbs/2024-11-25-changing-large-tables.png"

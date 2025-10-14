@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB: Crunching data anywhere from laptops to servers"
+title: "DuckDB: Crunching Data Anywhere from Laptops to Servers"
 author: Gabor Szarnyas
 thumb: "/images/media/thumbs/2024-06-12-duckdb-crunching-data-anywhere-from-laptops-to-servers.png"
 image: "/images/media/thumbs/2024-06-12-duckdb-crunching-data-anywhere-from-laptops-to-servers.png"

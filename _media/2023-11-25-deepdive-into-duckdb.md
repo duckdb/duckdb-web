@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Deep dive into DuckDB"
+title: "Deep Dive into DuckDB"
 author: Mark Raasveldt
 thumb: "/images/media/thumbs/2023-11-25-deepdive-into-duckdb.png"
 image: "/images/media/thumbs/2023-11-25-deepdive-into-duckdb.png"

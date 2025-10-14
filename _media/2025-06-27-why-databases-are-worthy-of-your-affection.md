@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Why databases are worthy of your affection"
+title: "Why Databases are Worthy of Your Affection"
 author: "Hannes Mühleisen (DuckDB Labs)"
 thumb: "/images/media/thumbs/2025-06-27-joy-of-coding.png"
 image: "/images/media/thumbs/2025-06-27-joy-of-coding.png"

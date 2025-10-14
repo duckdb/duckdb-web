@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "In-process analytical data management with DuckDB"
+title: "In-Process Analytical Data Management with DuckDB"
 author: Hannes Mühleisen
 thumb: "/images/media/thumbs/2023-09-14-in-process-analytical-data-management-with-duckdb.png"
 image: "/images/media/thumbs/2023-09-14-in-process-analytical-data-management-with-duckdb.png"
