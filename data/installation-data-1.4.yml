@@ -292,6 +292,12 @@
   link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip'
 - variant: nightly
   environment: ODBC
+  platform: Windows
+  download_method: Direct download
+  architecture: arm64
+  link: 'https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip'
+- variant: nightly
+  environment: ODBC
   platform: macOS
   download_method: Direct download
   architecture: universal
