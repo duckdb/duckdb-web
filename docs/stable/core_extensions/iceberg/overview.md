@@ -118,6 +118,8 @@ FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 | 1               | 3776207205136740581 | 2023-02-15 15:07:54.504 | lineitem_iceberg/metadata/snap-3776207205136740581-1-cf3d0be5-cf70-453d-ad8f-48fdc412e608.avro |
 | 2               | 7635660646343998149 | 2023-02-15 15:08:14.73  | lineitem_iceberg/metadata/snap-7635660646343998149-1-10eaca8a-1e1c-421e-ad6d-b232e5ee23d3.avro |
 
+> `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id` or `snapshot_from_timestamp` as parameters.
+
 ### Selecting Metadata Versions
 
 By default, the `iceberg` extension will look for a `version-hint.text` file to identify the proper metadata version to use. This can be overridden by explicitly supplying a version number via the `version` parameter to the functions of the `iceberg` extension:
@@ -127,7 +129,6 @@ SELECT *
 FROM iceberg_snapshots(
     'data/iceberg/lineitem_iceberg',
     version = '1',
-    allow_moved_paths = true
 );
 ```
 
@@ -141,7 +142,6 @@ SELECT *
 FROM iceberg_snapshots(
     'data/iceberg/lineitem_iceberg',
     version = 'version-hint.txt',
-    allow_moved_paths = true
 );
 ```
 
@@ -160,7 +160,6 @@ FROM iceberg_snapshots(
     version = '2',
     version_name_format = 'rev-%s.metadata.json%s',
     metadata_compression_codec = 'gzip',
-    allow_moved_paths = true
 );
 ```
 
