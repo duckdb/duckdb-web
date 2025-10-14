@@ -409,18 +409,21 @@ INSERT INTO edges VALUES
 ```
 
 ```sql
-WITH RECURSIVE cc(id, comp) USING KEY (id) AS (
+WITH RECURSIVE con_comp(id, comp) USING KEY (id) AS (
     SELECT n.id, n.id AS comp
     FROM nodes AS n
-        UNION
-    (SELECT DISTINCT ON (u.id) u.id, v.comp
-    FROM recurring.cc AS u, cc AS v, edges AS e
-    WHERE ((e.node1id, e.node2id) = (u.id, v.id)
-       OR (e.node2id, e.node1id) = (u.id, v.id))
-      AND v.comp < u.comp
-    ORDER BY u.id ASC, v.comp ASC)
+        UNION (
+    SELECT DISTINCT ON (previous_iter.id) previous_iter.id, initial_iter.comp
+    FROM 
+        recurring.con_comp AS previous_iter,
+        con_comp AS initial_iter,
+        edges AS e
+    WHERE ((e.node1id, e.node2id) = (previous_iter.id, initial_iter.id)
+       OR (e.node2id, e.node1id) = (previous_iter.id, initial_iter.id))
+      AND initial_iter.comp < previous_iter.comp
+    ORDER BY initial_iter.id ASC, previous_iter.comp ASC)
 )
-TABLE cc
+TABLE con_comp
 ORDER BY id;
 ```
 
