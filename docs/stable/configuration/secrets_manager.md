@@ -26,6 +26,8 @@ Currently, the following secret types are available:
 | `postgres`    | PostgreSQL           | [`postgres`]({% link docs/stable/core_extensions/postgres.md %})                 |
 | `r2`          | Cloudflare R2        | [`httpfs`]({% link docs/stable/core_extensions/httpfs/s3api.md %})               |
 | `s3`          | AWS S3               | [`httpfs`]({% link docs/stable/core_extensions/httpfs/s3api.md %})               |
+| `iceberg`     | Iceberg REST Catalog | [`httpfs`]({% link docs/stable/core_extensions/httpfs/s3api.md %}), [`iceberg`]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}) |
+
 
 For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
