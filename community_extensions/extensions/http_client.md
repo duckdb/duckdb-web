@@ -100,7 +100,7 @@ docs:
 
 extension_star_count: 73
 extension_star_count_pretty: 73
-extension_download_count: null
+extension_download_count: 
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc

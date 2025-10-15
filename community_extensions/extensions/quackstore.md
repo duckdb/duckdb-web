@@ -25,9 +25,9 @@ repo:
 docs:
   extended_description: |
     See [README.md](https://github.com/coginiti-dev/QuackStore)
-extension_star_count: 68
-extension_star_count_pretty: 68
-extension_download_count: null
+extension_star_count: 69
+extension_star_count_pretty: 69
+extension_download_count: 
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_quackstore.png'
 layout: community_extension_doc
