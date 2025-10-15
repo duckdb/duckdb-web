@@ -24,9 +24,15 @@ title: Documentation
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
+        <a href="{% link docs/preview/clients/cpp.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/cpp.svg %}"></span>
+        <span>C++</span>
+        <span class="chevron"></span>
+    </div>
+    <div class="box-link half-width">
         <a href="{% link docs/preview/clients/cli/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/cli.svg %}"></span>
-        <span>CLI (command line interface)</span>
+        <span>CLI (Command Line Interface)</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">

@@ -12,6 +12,7 @@ Several components of DuckDB are maintained in separate repositories.
 
 ## Clients
 
+* [`duckdb-go`](https://github.com/duckdb/duckdb-go): Go client
 * [`duckdb-java`](https://github.com/duckdb/duckdb-java): Java (JDBC) client
 * [`duckdb-node`](https://github.com/duckdb/duckdb-node): Node.js client (deprecated)
 * [`duckdb-node-neo`](https://github.com/duckdb/duckdb-node-neo): Node.js client
@@ -23,7 +24,6 @@ Several components of DuckDB are maintained in separate repositories.
 * [`duckdb-swift`](https://github.com/duckdb/duckdb-swift): Swift client
 * [`duckdb-wasm`](https://github.com/duckdb/duckdb-wasm): WebAssembly client
 * [`duckplyr`](https://github.com/tidyverse/duckplyr): a drop-in replacement for dplyr in R
-* [`go-duckdb`](https://github.com/duckdb/duckdb-go): Go client
 
 ## Connectors
 
