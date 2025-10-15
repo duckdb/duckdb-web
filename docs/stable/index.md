@@ -28,7 +28,7 @@ title: Documentation
     <div class="box-link half-width">
         <a href="{% link docs/stable/clients/cli/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/cli.svg %}"></span>
-        <span>CLI (command line interface)</span>
+        <span>CLI (Command Line Interface)</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
