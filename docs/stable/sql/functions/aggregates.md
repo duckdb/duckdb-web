@@ -104,7 +104,7 @@ FROM tbl;
 
 ### Handling `NULL` Values
 
-All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#array_aggarg)), [`first`](#firstarg) ([`arbitrary`](#arbitraryarg)) and [`last`](#lastarg).
+All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#array_aggarg)), [`first`](#firstarg) ([`arbitrary`](#firstarg)) and [`last`](#lastarg).
 To exclude `NULL`s from `list`, you can use a [`FILTER` clause]({% link docs/stable/sql/query_syntax/filter.md %}).
 To ignore `NULL`s from `first`, you can use the [`any_value` aggregate](#any_valuearg).
 
@@ -118,7 +118,6 @@ The table below shows the available general aggregate functions.
 | Function | Description |
 |:--|:--------|
 | [`any_value(arg)`](#any_valuearg) | Returns the first non-null value from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`arbitrary(arg)`](#firstarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val)`](#arg_maxarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val, n)`](#arg_maxarg-val-n) | The generalized case of [`arg_max`](#arg_maxarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max_null(arg, val)`](#arg_max_nullarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
