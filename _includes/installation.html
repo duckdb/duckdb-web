@@ -172,6 +172,11 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- highlight bash -%}
 pip install duckdb
 {%- endhighlight -%}
+
+<div class="note">
+    Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+</div>
+
 </div>
 
 
@@ -208,6 +213,10 @@ implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
 <h4>Direct Download (JAR)</h4>
 <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
 {%- include checksum_inline.html environment="java" -%}
+
+<div class="note">
+    Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+</div>
 
 </div>
 
