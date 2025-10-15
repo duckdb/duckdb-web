@@ -14,7 +14,7 @@ For examples on how to use this interface, see the [official documentation](http
 To install the `go-duckdb` client, run:
 
 ```batch
-go get github.com/marcboeker/go-duckdb
+go get github.com/marcboeker/go-duckdb/v2
 ```
 
 ## Importing

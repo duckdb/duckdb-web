@@ -56,13 +56,13 @@ go build
 collect2.exe: error: ld returned 5 exit status
 ```
 
-GitHub user [vdmitriyev](https://github.com/vdmitriyev) shared instructions for [building the DuckDB Go client on Windows](https://github.com/marcboeker/go-duckdb/issues/4#issuecomment-2176409066):
+GitHub user [vdmitriyev](https://github.com/vdmitriyev) shared instructions for [building the DuckDB Go client on Windows](https://github.com/duckdb/duckdb-go/issues/4#issuecomment-2176409066):
 
 1. Get four files (`.dll, .lib, .hpp, .h`) from the `libduckdb-windows-amd64.zip` archive.
 
 2. Place them to, e.g.,: `C:\DuckDB-Go\libs\`.
 
-3. Install the dependencies following the [`go-duckdb` project](https://github.com/marcboeker/go-duckdb).
+3. Install the dependencies following the [`go-duckdb` project](https://github.com/duckdb/duckdb-go).
 
 4. Build your project using the following instructions:
 
