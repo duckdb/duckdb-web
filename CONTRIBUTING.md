@@ -51,7 +51,7 @@ Before creating a pull request, please perform the following steps:
 * Preview your changes in the browser using the [site build guide](BUILDING.md).
 * Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for markdownlint.
 
-When creating a PR, please check the box to "Allow edits from maintainers".
+When creating a PR, please check the box to "Allow edits from maintainers". This allows the maintainers to make small adjustments before merging a pull request.
 
 ## Style Guide
 
