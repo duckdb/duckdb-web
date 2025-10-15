@@ -50,7 +50,7 @@ For planned new features, see the [DuckDB Development Roadmap]({% link roadmap.m
 
 ### LTS Releases
 
-Starting with v1.4.0, every _other_ DuckDB version is going to be a Long Term Support (LTS) edition.
+Starting with v1.4.0, every _other_ DuckDB version is going to be a Long-Term Support (LTS) edition.
 For LTS DuckDB versions, the support period for [community support](https://duckdblabs.com/community_support_policy/) is currently a year after the release.
 [DuckDB Labs](https://duckdblabs.com/) is offering support for older LTS versions after their community support has expired.
 

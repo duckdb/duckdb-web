@@ -14,12 +14,12 @@ In this blog post, we cover the most important updates for this release around s
 
 > To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
-## Long Term Support (LTS) Edition
+## Long-Term Support (LTS) Edition
 
 We are delighted to see that DuckDB is used regularly in production environments and realize that such deployments often come with a requirement for long-term maintenance.
 In the past, we would automatically deprecate old DuckDB versions whenever the newer version was released. But we’re changing this today.
 
-Starting with this release, every _other_ DuckDB version is going to be a Long Term Support (LTS) edition.
+Starting with this release, every _other_ DuckDB version is going to be a Long-Term Support (LTS) edition.
 For LTS DuckDB versions, [community support](https://duckdblabs.com/community_support_policy/) will last a year after the release (for now).
 [DuckDB Labs](https://duckdblabs.com/) is also starting to offer support for older LTS versions after their community support has expired.
 
