@@ -14,7 +14,7 @@ https://github.com/plotly/plotly.js/blob/master/dist/README.md
 
 Cartesian was the smallest distribution that included box plots
 -->
-<script src="{{ site.baseurl }}/js/plotly-cartesian-3.0.1.min.js"></script>
+<script src="/js/plotly-cartesian-3.0.1.min.js"></script>
 
 <div align="center" id="hilbert-curve">
 <img src="{% link images/blog/sorting-for-fast-selective-queries/Hilbert-curve_rounded-gradient-animated.gif %}" alt="Animated Hilbert Encoding across 2 axes." width="600"/>
@@ -320,7 +320,7 @@ WHERE origin = ⟨origin⟩ AND dest = ⟨dest⟩;
 
 <div id="remote_s3_query_performance_by_origin" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_origin.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_origin.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_origin');
@@ -333,7 +333,7 @@ Our advanced techniques are nearly as fast as the dedicated sort on `origin`.
 
 <div id="remote_s3_query_performance_by_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_destination.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_destination.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_destination');
@@ -346,7 +346,7 @@ The `origin_dest` approach of just appending `destination` to the list of sorted
 
 <div id="remote_s3_query_performance_by_origin_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_origin_destination.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_origin_destination.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_origin_destination');
@@ -446,7 +446,7 @@ WHERE
 </details>
 <div id="remote_s3_query_performance_by_date_origin" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_date_origin.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_date_origin.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_date_origin');
@@ -460,7 +460,7 @@ This is because the more approximate time buckets allow the Hilbert encoding to 
 
 <div id="remote_s3_query_performance_by_date_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_date_destination.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_date_destination.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_date_destination');
@@ -472,7 +472,7 @@ Querying by time and destination follows a very similar pattern, with the ideal 
 
 <div id="remote_s3_query_performance_by_date_origin_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_date_origin_destination.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_date_origin_destination.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_date_origin_destination');
@@ -524,7 +524,7 @@ However, there are likely diminishing returns when this metric is below the numb
 
 <div id="number_of_rowgroups_per_value" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/number_of_rowgroups_per_value.json')
+    fetch('/data/zonemaps/number_of_rowgroups_per_value.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('number_of_rowgroups_per_value');
