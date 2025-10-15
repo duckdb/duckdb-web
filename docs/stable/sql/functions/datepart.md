@@ -9,11 +9,11 @@ title: Date Part Functions
 
 The `date_part`, `date_trunc`, and `date_diff` functions can be used to extract or manipulate parts of temporal types such as [`TIMESTAMP`]({% link docs/stable/sql/data_types/timestamp.md %}), [`TIMESTAMPTZ`]({% link docs/stable/sql/data_types/timestamp.md %}), [`DATE`]({% link docs/stable/sql/data_types/date.md %}) and [`INTERVAL`]({% link docs/stable/sql/data_types/interval.md %}).
 
-The parts to be extracted or manipulated are specified by one of the strings in the tables below. 
+The parts to be extracted or manipulated are specified by one of the strings in the tables below.
 The example column provides the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
 Only the entries of the first table can be extracted from `INTERVAL`s or used to construct them.
 
-> Except for `julian`, which returns a `DOUBLE`, all parts are extracted as integers. Since there are no infinite integer values in DuckDB, `NULL`s are returned for infinite timestamps. 
+> Except for `julian` and `epoch`, which return `DOUBLE`s, all parts are extracted as integers. Since there are no infinite integer values in DuckDB, `NULL`s are returned for infinite timestamps.
 
 ## Part Specifiers Usable as Date Part Specifiers and in Intervals
 
@@ -38,7 +38,7 @@ Only the entries of the first table can be extracted from `INTERVAL`s or used to
 |:--|:--|:---|--:|
 | `dayofweek` | Day of the week (Sunday = 0, Saturday = 6) | `weekday`, `dow` | `2` |
 | `dayofyear` | Day of the year (1-365/366) | `doy` | `215` |
-| `epoch` | Seconds since 1970-01-01 | | `1627991984` |
+| `epoch` | Seconds since 1970-01-01 | | `1760465850.6698709` |
 | `era` | Gregorian era (CE/AD, BCE/BC) | | `1` |
 | `isodow` | ISO day of the week (Monday = 1, Sunday = 7) | | `2` |
 | `isoyear` | ISO Year number (Starts on Monday of week containing Jan 4th) | | `2021` |
