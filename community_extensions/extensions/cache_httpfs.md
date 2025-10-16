@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.7.2
+  version: 0.8.0
   language: C++
   build: cmake
   license: MIT
@@ -19,11 +19,11 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: e618d72b02e955ecac5c6f3f881d47a2fdf6404b
+  ref: b0054da8f2f8153cb62ac239cb14afc943a74334
 
 docs:
   hello_world: |
-    SELECT cache_httpfs_get_cache_size();
+    SELECT cache_httpfs_get_ondisk_data_cache_size();
   extended_description: |
     This extension adds a read cache filesystem to DuckDB, which acts as a wrapper of httpfs extention. 
     It supports a few key features:
@@ -66,6 +66,7 @@ LOAD {{ page.extension.name }};
 
 |              function_name               | function_type | description | comment | examples |
 |------------------------------------------|---------------|-------------|---------|----------|
+| cache_httpfs_add_exclusion_regex         | scalar        | NULL        | NULL    |          |
 | cache_httpfs_cache_access_info_query     | table         | NULL        | NULL    |          |
 | cache_httpfs_cache_status_query          | table         | NULL        | NULL    |          |
 | cache_httpfs_clear_cache                 | scalar        | NULL        | NULL    |          |
@@ -74,7 +75,9 @@ LOAD {{ page.extension.name }};
 | cache_httpfs_get_cache_filesystems       | table         | NULL        | NULL    |          |
 | cache_httpfs_get_ondisk_data_cache_size  | scalar        | NULL        | NULL    |          |
 | cache_httpfs_get_profile                 | scalar        | NULL        | NULL    |          |
-| cache_httpfs_list_registered_filesystems | scalar        | NULL        | NULL    |          |
+| cache_httpfs_list_exclusion_regex        | table         | NULL        | NULL    |          |
+| cache_httpfs_list_registered_filesystems | table         | NULL        | NULL    |          |
+| cache_httpfs_reset_exclusion_regex       | scalar        | NULL        | NULL    |          |
 | cache_httpfs_wrap_cache_filesystem       | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
