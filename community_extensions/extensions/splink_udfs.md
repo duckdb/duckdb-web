@@ -32,8 +32,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 
-extension_download_count_pretty: n/a
+extension_download_count: 507
+extension_download_count_pretty: 507
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
 layout: community_extension_doc
 ---
