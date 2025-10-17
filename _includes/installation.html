@@ -194,6 +194,10 @@ install.packages("duckdb")
     data-environment="java"
     data-docs="/docs/stable/clients/java">
 
+<h4>Direct Download (JAR)</h4>
+<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
+{%- include checksum_inline.html environment="java" -%}
+
 <h4>Maven</h4>
 
 {%- highlight xml -%}
@@ -209,10 +213,6 @@ install.packages("duckdb")
 {%- highlight groovy -%}
 implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
 {%- endhighlight -%}
-
-<h4>Direct Download (JAR)</h4>
-<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
-{%- include checksum_inline.html environment="java" -%}
 
 <div class="note">
     Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
