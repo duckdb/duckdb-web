@@ -9,7 +9,7 @@ excerpt: "Combining multiple features of DuckDB’s [friendly SQL](/docs/guides/
 tags: ["using DuckDB"]
 ---
 
-<img src="/images/blog/duck_gymnast.jpg"
+<img src="{% link images/blog/duck_gymnast.jpg %}"
      alt="Duck Gymnast"
      width="300"
      />

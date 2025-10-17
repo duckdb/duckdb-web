@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: observefs
   description: Provides IO observability to filesystem
-  version: 0.1.0
+  version: 0.3.3
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-filesystem-observability
-  ref: d09d28a3e9f9b9b321de85c2754bca0a97852a2b
+  ref: 4af6cecdeddefeb5c3352bc52c24044fce2ca724
 
 docs:
   hello_world: |
@@ -30,10 +30,10 @@ docs:
     - Provides both process-wise and bucket-wise latency stats (including histogram and quantile estimation)
     - Allows registering ANY duckdb compatible filesystems (i.e., azure filesystem)
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 346
-extension_download_count_pretty: 346
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 361
+extension_download_count_pretty: 361
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---
@@ -59,11 +59,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name       | function_type | description | comment | examples |
-|---------------------------|---------------|-------------|---------|----------|
-| observefs_clear           | scalar        | NULL        | NULL    |          |
-| observefs_get_profile     | scalar        | NULL        | NULL    |          |
-| observefs_wrap_filesystem | scalar        | NULL        | NULL    |          |
+|             function_name             | function_type | description | comment | examples |
+|---------------------------------------|---------------|-------------|---------|----------|
+| observefs_clear                       | scalar        | NULL        | NULL    |          |
+| observefs_get_profile                 | scalar        | NULL        | NULL    |          |
+| observefs_get_tcp_connection          | table         | NULL        | NULL    |          |
+| observefs_list_registered_filesystems | table         | NULL        | NULL    |          |
+| observefs_wrap_filesystem             | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 

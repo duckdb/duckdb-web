@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.7.0
+  version: 0.8.0
   language: C++
   build: cmake
   license: MIT
@@ -19,11 +19,11 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: 1a4ec174571c0576bc5dadd7c7d261ca16a44f2e
+  ref: b0054da8f2f8153cb62ac239cb14afc943a74334
 
 docs:
   hello_world: |
-    SELECT cache_httpfs_get_cache_size();
+    SELECT cache_httpfs_get_ondisk_data_cache_size();
   extended_description: |
     This extension adds a read cache filesystem to DuckDB, which acts as a wrapper of httpfs extention. 
     It supports a few key features:
@@ -35,10 +35,10 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 98
-extension_star_count_pretty: 98
-extension_download_count: 4015
-extension_download_count_pretty: 4.0k
+extension_star_count: 104
+extension_star_count_pretty: 104
+extension_download_count: 5441
+extension_download_count_pretty: 5.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -64,17 +64,21 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|              function_name              | function_type | description | comment | examples |
-|-----------------------------------------|---------------|-------------|---------|----------|
-| cache_httpfs_cache_access_info_query    | table         | NULL        | NULL    |          |
-| cache_httpfs_cache_status_query         | table         | NULL        | NULL    |          |
-| cache_httpfs_clear_cache                | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_cache_for_file       | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_profile              | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_cache_filesystems      | table         | NULL        | NULL    |          |
-| cache_httpfs_get_ondisk_data_cache_size | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_profile                | scalar        | NULL        | NULL    |          |
-| cache_httpfs_wrap_cache_filesystem      | scalar        | NULL        | NULL    |          |
+|              function_name               | function_type | description | comment | examples |
+|------------------------------------------|---------------|-------------|---------|----------|
+| cache_httpfs_add_exclusion_regex         | scalar        | NULL        | NULL    |          |
+| cache_httpfs_cache_access_info_query     | table         | NULL        | NULL    |          |
+| cache_httpfs_cache_status_query          | table         | NULL        | NULL    |          |
+| cache_httpfs_clear_cache                 | scalar        | NULL        | NULL    |          |
+| cache_httpfs_clear_cache_for_file        | scalar        | NULL        | NULL    |          |
+| cache_httpfs_clear_profile               | scalar        | NULL        | NULL    |          |
+| cache_httpfs_get_cache_filesystems       | table         | NULL        | NULL    |          |
+| cache_httpfs_get_ondisk_data_cache_size  | scalar        | NULL        | NULL    |          |
+| cache_httpfs_get_profile                 | scalar        | NULL        | NULL    |          |
+| cache_httpfs_list_exclusion_regex        | table         | NULL        | NULL    |          |
+| cache_httpfs_list_registered_filesystems | table         | NULL        | NULL    |          |
+| cache_httpfs_reset_exclusion_regex       | scalar        | NULL        | NULL    |          |
+| cache_httpfs_wrap_cache_filesystem       | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 

@@ -8,7 +8,7 @@ excerpt: DuckDB is primarily focused on performance, leveraging the capabilities
 tags: ["using DuckDB"]
 ---
 
-<img src="/images/blog/csv-sniffer/ducktetive.jpg"
+<img src="{% link images/blog/csv-sniffer/ducktetive.jpg %}"
      alt="ducktetive"
      width="300"
      />
@@ -40,7 +40,7 @@ Name, Height, Vegetarian, Birthday
 "Mark", 1.72, N/A, 20-09-92
 ```
 
-<img src="/images/blog/csv-sniffer/sniffer.png"
+<img src="{% link images/blog/csv-sniffer/sniffer.png %}"
      alt="sniffing overview"
      width="680"
      />
@@ -187,7 +187,7 @@ Sometimes, CSV files can have dialect options or more refined types that appear 
 
 Below, you can see how increasing the default sample size by multiplier (see X axis) affects the sniffer's runtime on the NYC dataset. As expected, the total time spent on sniffing increases linearly with the total sample size.
 
-<img src="/images/blog/csv-sniffer/sample.png"
+<img src="{% link images/blog/csv-sniffer/sample.png %}"
      alt="sample benchmark"
      width="500"
      />
@@ -196,7 +196,7 @@ Below, you can see how increasing the default sample size by multiplier (see X a
 
 The other main characteristic of a CSV file that will affect the auto-detection is the number of columns the file has. Here, we test the sniffer against a varying number of `INTEGER` type columns in files with 10,906,858 tuples. The results are depicted in the figure below. We can see that from one column to two, we have a steeper increase in runtime. That's because, for single columns, we have a simplified dialect detection due to the lack of delimiters. For the other columns, as expected, we have a more linear increase in runtime, depending on the number of columns.
 
-<img src="/images/blog/csv-sniffer/columns.png"
+<img src="{% link images/blog/csv-sniffer/columns.png %}"
      alt="sniffer benchmark"
      width="500"
      />

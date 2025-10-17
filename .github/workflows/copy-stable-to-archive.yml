@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  LinkChecker:
+  CopyStableToArchive:
+    if: github.repository == 'duckdb/duckdb-web'
     name: Copy stable to preview
     runs-on: ubuntu-24.04
     steps:

@@ -171,7 +171,7 @@ The query will be executed when one of the following methods is encountered:
 <div align="center" style="margin:10px">
     <a href="/images/blog/duckdb-streamlit/top_5_busiest_stations.png">
         <img
-          src="/images/blog/duckdb-streamlit/top_5_busiest_stations.png"
+          src="{% link images/blog/duckdb-streamlit/top_5_busiest_stations.png %}"
           alt="Top 5 Busiest Train Stations per Month"
           width="600"
         />
@@ -219,7 +219,7 @@ The data about the train rides through the train stations of The Netherlands, at
 <div align="center" style="margin:10px">
     <a href="/images/blog/duckdb-streamlit/network_utilization_across_country.png">
         <img
-          src="/images/blog/duckdb-streamlit/network_utilization_across_country.png"
+          src="{% link images/blog/duckdb-streamlit/network_utilization_across_country.png %}"
           alt="Railway Network Utilization across the Country"
           width="800"
         />
@@ -250,7 +250,7 @@ In our case, we generate an animation with the railway network utilization at se
 <div align="center" style="margin:10px">
     <a href="/images/blog/duckdb-streamlit/number_train_rides.png">
         <img
-          src="/images/blog/duckdb-streamlit/number_train_rides.png"
+          src="{% link images/blog/duckdb-streamlit/number_train_rides.png %}"
           alt="Railway Network Utilization during the Year"
           width="667"
         />
@@ -308,7 +308,7 @@ The code of implementing interactive maps with Plotly in Streamlit is available 
 <div align="center" style="margin:10px">
     <a href="/images/blog/duckdb-streamlit/closest_train_stations.png">
         <img
-          src="/images/blog/duckdb-streamlit/closest_train_stations.png"
+          src="{% link images/blog/duckdb-streamlit/closest_train_stations.png %}"
           alt="Closest 5 train stations from user selection"
           width="600"
         />

@@ -38,14 +38,14 @@ We asked users about the environment where DuckDB is deployed and found that mos
 This is in line with the vision that originally drove the creation of DuckDB: creating a system that harnesses the power of hardware available in modern end-user devices.
 29% run DuckDB on desktop workstations, and 58% run it on servers (see the breakdown later in the [“Server Types” section](#server-types)).
 
-![DuckDB environments](/images/blog/survey/environments.svg)
+![DuckDB environments]({% link images/blog/survey/environments.svg %})
 
 ### Clients
 
 [Unsurprisingly](https://www.tiobe.com/tiobe-index/python/), DuckDB is most often used from Python (73%), followed by the [standalone command-line application]({% link docs/stable/clients/cli/overview.md %}) (47%).
 The third spot is hotly contested with R, WebAssembly (!) and Java all achieving around 14%, followed by Node.js (Javascript) at 9%
 
-![DuckDB clients](/images/blog/survey/clients.svg)
+![DuckDB clients]({% link images/blog/survey/clients.svg %})
 
 The next few places, with 6-7% each, are occupied by ODBC, Rust, and Go.
 Finally, Arrow (ADBC) rounds off the top 10 with 5%.
@@ -57,7 +57,7 @@ These deployments include cloud instances, on-premises installations, and contin
 Windows desktop and macOS have a similar share of users, 41–45%.
 A further 9% run DuckDB on Windows servers.
 
-![DuckDB platforms](/images/blog/survey/platforms.svg)
+![DuckDB platforms]({% link images/blog/survey/platforms.svg %})
 
 We found the number of Linux desktop users quite striking.
 While the overall [market share of Linux desktop is around 4.5%](https://gs.statcounter.com/os-market-share/desktop/worldwide/2024),
@@ -72,13 +72,13 @@ But how big are these servers, and where are they operated?
 Both small servers (less than 16 GB of memory) and medium-sized servers (16-512 GB of memory) are popular, with 56% and 61% of users reporting that they run DuckDB on these.
 About 14% of respondents run DuckDB on servers with more than 0.5 TB of memory.
 
-![Server size](/images/blog/survey/server-sizes.svg)
+![Server size]({% link images/blog/survey/server-sizes.svg %})
 
 Regarding _where_ the servers run, on-premises deployments and AWS are neck-and-neck with 27%.
 They are followed by two other clouds, Microsoft Azure and the Google Cloud Platform.
 Finally, about 4% of users run DuckDB on Hetzner servers.
 
-![Server premises](/images/blog/survey/server-premises.svg)
+![Server premises]({% link images/blog/survey/server-premises.svg %})
 
 ## Data
 
@@ -90,7 +90,7 @@ CSV is a close second with 73%.
 JSON is also popular with vanilla JSON achieving 42% and NDJSON 11%.
 About ⅓ reported to use Arrow.
 
-![Data formats](/images/blog/survey/data-formats.svg)
+![Data formats]({% link images/blog/survey/data-formats.svg %})
 
 ### Dataset Sizes
 
@@ -103,7 +103,7 @@ For ¾ of users, their largest dataset size was less than 100 GB data,
 About 1% processed 10 TB+ datasets.
 These findings are in line with [statistics derived from a recent RedShift usage dataset](https://motherduck.com/blog/redshift-files-hunt-for-big-data/#whos-got-big-data) by [Jordan Tigani of MotherDuck](https://motherduck.com/authors/jordan-tigani/), and the recent analysis of the [Snowflake and RedShift datasets](https://www.fivetran.com/blog/how-do-people-use-snowflake-and-redshift) by [George Fraser of Fivetran](https://www.fivetran.com/people/george-fraser).
 
-![Dataset sizes](/images/blog/survey/dataset_sizes.svg)
+![Dataset sizes]({% link images/blog/survey/dataset_sizes.svg %})
 
 While these results obviously are somewhat biased – users who need to crunch through huge datasets may not work with DuckDB (yet!) –, the skew towards smaller datasets is quite significant and shows that many real-world use cases can be tackled using small to medium-sized datasets. The results also show that DuckDB *can* solve many problems on datasets larger than 1 TB.
 
@@ -112,7 +112,7 @@ While these results obviously are somewhat biased – users who need to crunch t
 ### Most Liked Features
 
 We were curious: what do users like most about DuckDB? The plot shows the most frequent responses:
-![Most liked DuckDB features](/images/blog/survey/most_liked_features.svg)
+![Most liked DuckDB features]({% link images/blog/survey/most_liked_features.svg %})
 
 The most liked feature is **high performance**.
 Users also enjoy **file format support** (CSV, Parquet, JSON, etc.),
@@ -147,7 +147,7 @@ For the rest of the requested features, several ones are in the making at DuckDB
 
 We asked respondents to indicate their main roles in their organization. The top-5 answers were as follows:
 
-![User roles](/images/blog/survey/roles.svg)
+![User roles]({% link images/blog/survey/roles.svg %})
 
 It's no surprise that DuckDB is popular in the “data” roles: 26% of the respondents are data engineers, 14% are data scientists, and 9% are data analysts.
 The form had a surprisingly high share of software engineers, 23%.

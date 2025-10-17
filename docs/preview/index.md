@@ -24,9 +24,15 @@ title: Documentation
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
+        <a href="{% link docs/preview/clients/cpp.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/cpp.svg %}"></span>
+        <span>C++</span>
+        <span class="chevron"></span>
+    </div>
+    <div class="box-link half-width">
         <a href="{% link docs/preview/clients/cli/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/cli.svg %}"></span>
-        <span>CLI (command line interface)</span>
+        <span>CLI (Command Line Interface)</span>
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
@@ -112,7 +118,7 @@ title: Documentation
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
-        <a href="{% link docs/installation/index.html %}"></a>
+        <a href="{% link install/index.html %}"></a>
         <span class="symbol"><img src="{% link images/icons/database.svg %}"></span>
         <span>Installation</span>
         <span class="chevron"></span>

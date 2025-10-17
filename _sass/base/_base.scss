@@ -12,7 +12,7 @@
 }
 
 body{
-	color: var(--main-text-primary-color);
+	color: var(--main-text-primary-color, #0D0D0D);
 	background: var(--main-body-background-color, #FAFAFA);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -196,6 +196,15 @@ body.installation div.environment.select label.onlymobile{
 		@include display-1();
 		margin: 0;
 	}
+	
+	&--small {
+		padding: 65px 0 20px 0;
+		
+		h1,
+		.pagetitle-heading {
+			@include headline-1;
+		}
+	  }
 
 	@media only screen and (max-width: 770px) {
 		padding: 45px 0px;

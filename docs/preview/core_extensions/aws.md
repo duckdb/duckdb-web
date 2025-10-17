@@ -88,6 +88,28 @@ CREATE OR REPLACE SECRET secret (
 );
 ```
 
+### Validation
+
+Since v1.4.0, the AWS `credential_chain` provider will look for any required credentials during `CREATE SECRET` time, failing if absent/unavailable.
+
+Since v1.4.1 this behavior may be configured via the `VALIDATION` option as follows:
+
+```sql
+CREATE OR REPLACE SECRET secret (
+    TYPE s3,
+    PROVIDER credential_chain,
+    VALIDATION 'exists'
+);
+```
+
+Two validation modes are supported:
+
+* `exists` (default) requires present credentials.
+* `none` allows `CREATE SECRET` to succeed for `credential_chains` with no available credentials.
+
+> `VALIDATION 'exists'` validates only the __presence__ of a credential, __not its operational readiness__. Thus, no attempt is made to
+> convert into an access token, or perform a read, write, etc.
+
 ### Auto-Refresh
 
 Some AWS endpoints require periodic refreshing of the credentials.

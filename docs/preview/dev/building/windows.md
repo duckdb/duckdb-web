@@ -60,15 +60,15 @@ GitHub user [vdmitriyev](https://github.com/vdmitriyev) shared instructions for 
 
 1. Get four files (`.dll, .lib, .hpp, .h`) from the `libduckdb-windows-amd64.zip` archive.
 
-2. Place them to, e.g.,: `C:\DuckDB-Go\libs\`.
+2. Place them to, e.g.,: `C:\duckdb-go\libs\`.
 
-3. Install the dependencies following the [`go-duckdb` project](https://github.com/marcboeker/go-duckdb).
+3. Install the dependencies following the [`duckdb-go` project](https://github.com/duckdb/duckdb-go).
 
 4. Build your project using the following instructions:
 
    ```bash
-   set PATH=C:\DuckDB-Go\libs\;%PATH%
-   set CGO_CFLAGS=-IC:\DuckDB-Go\libs\
-   set CGO_LDFLAGS=-LC:\DuckDB-Go\libs\ -lduckdb
+   set PATH=C:\duckdb-go\libs\;%PATH%
+   set CGO_CFLAGS=-IC:\duckdb-go\libs\
+   set CGO_LDFLAGS=-LC:\duckdb-go\libs\ -lduckdb
    go build
    ```

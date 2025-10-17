@@ -136,6 +136,23 @@ Read the contents of a JSON file `lineitem.json` into the `lineitem` table:
 COPY lineitem FROM 'lineitem.json' (FORMAT json, ARRAY true);
 ```
 
+An expression may be used as the source of a `COPY ... FROM` command if it is placed within parentheses. 
+
+Read the contents of a file whose path is stored in a variable into the `lineitem` table:
+
+```sql
+
+SET VARIABLE source_file = 'lineitem.json';
+COPY lineitem FROM (getvariable('source_file'));
+```
+
+Read the contents of a file provided as parameter of a prepared statement into the `lineitem` table:
+
+```sql
+PREPARE v1 AS COPY lineitem FROM ($1);
+EXECUTE v1('lineitem.json');
+```
+
 ### Syntax
 
 <div id="rrdiagram1"></div>
@@ -148,7 +165,7 @@ COPY lineitem FROM 'lineitem.json' (FORMAT json, ARRAY true);
 
 ## `COPY ... TO`
 
-`COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
+`COPY ... TO` exports data from DuckDB to an external CSV, Parquet, JSON or BLOB file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 
@@ -212,9 +229,32 @@ COPY (SELECT l_orderkey, l_comment FROM lineitem) TO 'lineitem_part.parquet' (RE
 
 Note: for nested columns (e.g., structs) the column statistics are defined for each part. For example, if we have a column `name STRUCT(field1 INTEGER, field2 INTEGER)` the column statistics will have stats for `name.field1` and `name.field2`.
 
+An expression may be used as the target of a `COPY ... TO` command if it is placed within parentheses. 
+
+Copy the result of a query to a file whose path is stored in a variable:
+
+```sql
+SET VARIABLE target_file = 'target_file.parquet';
+COPY (SELECT 'hello world') TO (getvariable('target_file'));
+```
+
+Copy to a file provided as parameter of a prepared statement:
+
+```sql
+PREPARE v1 AS COPY (SELECT 42 i) to $1;
+EXECUTE v1('file.csv');
+```
+
+Expressions may be used for options as well. Copy to a file using a format stored in a variable:
+
+```sql
+SET VARIABLE my_format = 'parquet';
+COPY (SELECT 42 i) TO 'file' (FORMAT getvariable('my_format'));
+```
+
 ### `COPY ... TO` Options
 
-Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes.
+Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes. Arbitrary expressions may be used for parameter values.
 
 Any option that is a Boolean can be enabled or disabled in multiple ways. You can write `true`, `ON`, or `1` to enable the option, and `false`, `OFF`, or `0` to disable it. The `BOOLEAN` value can also be omitted, e.g., by only passing `(HEADER)`, in which case `true` is assumed.
 
@@ -307,7 +347,7 @@ The below options are applicable when writing Parquet files.
 | `ROW_GROUP_SIZE_BYTES` | The target size of each row group. You can pass either a human-readable string, e.g., `2MB`, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored. | `BIGINT` | `row_group_size * 1024` |
 | `ROW_GROUP_SIZE` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122880 |
 | `ROW_GROUPS_PER_FILE` | Create a new Parquet file if the current one has a specified number of row groups. If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behaviour of `FILE_SIZE_BYTES`. However, if `per_thread_output` is set, only one thread writes to each file, and it becomes accurate again. | `BIGINT` |  (empty) |
-| `PARQUET_VERSION` | The parquet version to use (`V1`, `V2`). | `VARCHAR` | `V1` |
+| `PARQUET_VERSION` | The Parquet version to use (`V1`, `V2`). | `VARCHAR` | `V1` |
 
 Some examples of `FIELD_IDS` are as follows.
 
@@ -375,6 +415,84 @@ The below options are applicable when writing `JSON` files.
 | `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.json.gz` will use `gzip`, `file.json.zst` will use `zstd`, and `file.json` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/preview/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `TIMESTAMPFORMAT` | Specifies the date format to use when writing timestamps. See [Date Format]({% link docs/preview/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
+
+
+Sets the value of column `hello` to `QUACK!` and outputs the results to `quack.json`:
+
+```sql
+COPY (SELECT 'QUACK!' AS hello) TO 'quack.json';
+--RETURNS: {"hello":"QUACK!"}
+```
+
+Sets the value of column `num_list` to `[1,2,3]` and outputs the results to `numbers.json`:
+
+```sql
+COPY (SELECT [1, 2, 3] AS num_list) TO 'numbers.json';
+--RETURNS: {"num_list":[1,2,3]}
+```
+
+Sets the value of column `compression_type` to `gzip_explicit` and outputs the results to `compression.json.gz` with explicit compression:
+
+```sql
+COPY (SELECT 'gzip_explicit' AS compression_type) TO 'explicit_compression.json' (FORMAT json, COMPRESSION 'GZIP');
+-- RETURNS: {"compression_type":"gzip_explicit"}
+```
+
+Sets all values of single rows to be returned as nested arrays to `array_true.json`:
+
+```sql
+COPY (SELECT 1 AS id, 'Alice' AS name, [1, 2, 3] AS numbers
+      UNION ALL
+      SELECT 2, 'Bob', [4, 5, 6] AS numbers)
+TO 'array_true.json' (FORMAT json, ARRAY true);
+
+-- RETURNS: 
+/*
+[
+	{"id":1,"name":"Alice","numbers":[1,2,3]},
+	{"id":2,"name":"Bob","numbers":[1,2,3]}
+]
+*/
+```
+
+Sets all values of single rows to be returned as non-nested arrays to `array_false.json`:
+
+```sql
+COPY (SELECT 1 AS id, 'Alice' AS name, [1, 2, 3] AS numbers
+      UNION ALL
+      SELECT 2, 'Bob', [4, 5, 6] AS numbers)
+TO 'array_false.json' (FORMAT json, ARRAY false);
+
+-- RETURNS:
+/*
+{"id":1,"name":"Alice","numbers":[1,2,3]}
+{"id":2,"name":"Bob","numbers":[4,5,6]}
+*/
+```
+
+### BLOB Options
+
+The `BLOB` format option allows you to select a single column of a DuckDB table into a `.blob` file.
+The column must be cast to the `BLOB` data type. For details on typecasting, see the 
+[Casting Operations Matrix]({% link docs/preview/sql/data_types/typecasting.md %}#Casting-Operations-Matrix).
+
+The below options are applicable when writing `BLOB` files.
+
+| Name | Description | Type | Default |
+|:--|:-----|:-|:-|
+| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.blob.gz` will use `gzip`, `file.blob.zst` will use `zstd`, and `file.blob` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
+
+Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output.blob`:
+
+```sql
+COPY (select 'foo'::BLOB) TO 'blob_output.blob' (FORMAT BLOB);
+```
+
+Type casts the string value `foo` to the `BLOB` data type and outputs the results to `blob_output_gzip.blob.gz` with `gzip` compression:
+
+```sql
+COPY (select 'foo'::BLOB) TO 'blob_output_gzip.blob' (FORMAT BLOB, COMPRESSION 'GZIP');
+```
 
 ## Limitations
 

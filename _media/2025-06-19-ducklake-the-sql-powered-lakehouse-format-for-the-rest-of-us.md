@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckLake – The SQL-powered Lakehouse format for the rest of us"
+title: "DuckLake – The SQL-Powered Lakehouse Format for the Rest of Us"
 author: "Hannes Mühleisen (DuckDB Labs)"
 thumb: "/images/media/thumbs/2025-06-19-systems-distributed.png"
 image: "/images/media/thumbs/2025-06-19-systems-distributed.png"
@@ -14,8 +14,9 @@ length: "55 min"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/YQEUkFWa69o?si=ms2SMtxElpzXGAQy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-Event: [Systems Distributed 2025](https://systemsdistributed.com/)
-
-Speaker: [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/)
-
-[Slide deck](http://blobs.duckdb.org/slides/hannes-muehleisen-ducklake-systems-distributed.pdf)
+|-------|-------|
+| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
+| **Event** | [Systems Distributed 2025](https://systemsdistributed.com/) |
+| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Slide deck** | [Download](http://blobs.duckdb.org/slides/hannes-muehleisen-ducklake-systems-distributed.pdf) |
+| **YouTube** | [DuckLake – The SQL-Powered Lakehouse Format for the Rest of Us](https://www.youtube.com/watch?v=YQEUkFWa69o) |

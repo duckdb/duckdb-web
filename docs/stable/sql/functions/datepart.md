@@ -7,11 +7,13 @@ title: Date Part Functions
 
 <!-- markdownlint-disable MD001 -->
 
-The `date_part` and `date_diff` and `date_trunc` functions can be used to manipulate the fields of temporal types such as [`DATE`]({% link docs/stable/sql/data_types/date.md %}) and [`TIMESTAMP`]({% link docs/stable/sql/data_types/timestamp.md %}).
-The fields are specified as strings that contain the part name of the field.
+The `date_part`, `date_trunc`, and `date_diff` functions can be used to extract or manipulate parts of temporal types such as [`TIMESTAMP`]({% link docs/stable/sql/data_types/timestamp.md %}), [`TIMESTAMPTZ`]({% link docs/stable/sql/data_types/timestamp.md %}), [`DATE`]({% link docs/stable/sql/data_types/date.md %}) and [`INTERVAL`]({% link docs/stable/sql/data_types/interval.md %}).
 
-Below is a full list of all available date part specifiers.
-The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
+The parts to be extracted or manipulated are specified by one of the strings in the tables below.
+The example column provides the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
+Only the entries of the first table can be extracted from `INTERVAL`s or used to construct them.
+
+> Except for `julian` and `epoch`, which return `DOUBLE`s, all parts are extracted as integers. Since there are no infinite integer values in DuckDB, `NULL`s are returned for infinite timestamps.
 
 ## Part Specifiers Usable as Date Part Specifiers and in Intervals
 
@@ -36,10 +38,11 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 |:--|:--|:---|--:|
 | `dayofweek` | Day of the week (Sunday = 0, Saturday = 6) | `weekday`, `dow` | `2` |
 | `dayofyear` | Day of the year (1-365/366) | `doy` | `215` |
-| `epoch` | Seconds since 1970-01-01 | | `1627991984` |
+| `epoch` | Seconds since 1970-01-01 | | `1760465850.6698709` |
 | `era` | Gregorian era (CE/AD, BCE/BC) | | `1` |
 | `isodow` | ISO day of the week (Monday = 1, Sunday = 7) | | `2` |
 | `isoyear` | ISO Year number (Starts on Monday of week containing Jan 4th) | | `2021` |
+| `julian` | Julian Day number. | | `2459430.4998162435` |
 | `timezone_hour` | Time zone offset hour portion | | `0` |
 | `timezone_minute` | Time zone offset minute portion | | `0` |
 | `timezone` | Time zone offset in seconds | | `0` |
@@ -66,6 +69,7 @@ There are dedicated extraction functions to get certain subfields:
 | [`hour(date)`](#hourdate) | Hours. |
 | [`isodow(date)`](#isodowdate) | Numeric ISO weekday (Monday = 1, Sunday = 7). |
 | [`isoyear(date)`](#isoyeardate) | ISO Year number (Starts on Monday of week containing Jan 4th). |
+| [`julian(date)`](#juliandate) | `DOUBLE` Julian Day number. |
 | [`microsecond(date)`](#microseconddate) | Sub-minute microseconds. |
 | [`millennium(date)`](#millenniumdate) | Millennium. |
 | [`millisecond(date)`](#milliseconddate) | Sub-minute milliseconds. |
@@ -169,6 +173,16 @@ There are dedicated extraction functions to get certain subfields:
 | **Description** | ISO Year number (Starts on Monday of week containing Jan 4th). |
 | **Example** | `isoyear(DATE '2022-01-01')` |
 | **Result** | `2021` |
+
+
+#### `julian(date)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | `DOUBLE` Julian Day number. |
+| **Example** | `julian(DATE '1992-09-20')` |
+| **Result** | `2448886.0` |
+
 
 #### `microsecond(date)`
 

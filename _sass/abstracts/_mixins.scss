@@ -355,6 +355,13 @@
 		margin-top: 30px;
 	}
 	
+	h3,
+	h4 {
+		+ table {
+			margin-top: 18px;
+		}
+	}
+	
 	blockquote {
 		h4 {
 			@include title-2();

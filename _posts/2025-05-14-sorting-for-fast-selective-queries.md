@@ -39,7 +39,7 @@ DuckDB stores data in a single file.
 Each file is called a _database_ (the DuckDB library is the _database engine_).
 
 <div align="center">
-<img src="/images/blog/sorting-for-fast-selective-queries/duckdb_file_format_overview_diagram.png"
+<img src="{% link images/blog/sorting-for-fast-selective-queries/duckdb_file_format_overview_diagram.png %}"
     alt="DuckDB File Format Overview Diagram: Database"
     style="max-width: 680px;"
  />
@@ -57,7 +57,7 @@ Each row group is 122&nbsp;880 rows by default.
 Next, we zoom in on `Row Group 1` from `Table 1` in the first diagram:
 
 <div align="center">
-<img src="/images/blog/sorting-for-fast-selective-queries/duckdb_rowgroup_diagram.png"
+<img src="{% link images/blog/sorting-for-fast-selective-queries/duckdb_rowgroup_diagram.png %}"
     alt="DuckDB File Format Overview Diagram: Row Group"
     style="max-width: 680px;"
  />

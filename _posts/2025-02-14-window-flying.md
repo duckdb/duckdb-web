@@ -38,7 +38,7 @@ The chart below shows the speedups achieved by the vectorization improvements:
 
 <div align="center">
 <a href="/images/blog/windowing/vectorization-improvements.png">
-<img src="/images/blog/windowing/vectorization-improvements.png" alt="Vectorization Improvements" title="Vectorization Improvements" style="width: 950px" />
+<img src="{% link images/blog/windowing/vectorization-improvements.png %}" alt="Vectorization Improvements" title="Vectorization Improvements" style="width: 950px" />
 </a>
 </div>
 
@@ -141,7 +141,7 @@ Note that the _x_ axis shows the speedups compared to the baseline (1×) and the
 
 <div align="center">
 <a href="/images/blog/windowing/streaming-lead.png">
-<img src="/images/blog/windowing/streaming-lead.png" alt="Streaming Lead Performance" title="Streaming Lead Performance" style="width: 800px" />
+<img src="{% link images/blog/windowing/streaming-lead.png %}" alt="Streaming Lead Performance" title="Streaming Lead Performance" style="width: 800px" />
 </a>
 </div>
 
@@ -159,7 +159,7 @@ then most of the cores will be idle, reducing throughput.
 
 <div align="center">
 <a href="/images/blog/windowing/parallel-partitions.png">
-<img src="/images/blog/windowing/parallel-partitions.png" alt="Thread Partition Evaluation" title="Thread Partition Evaluation" style="width: 400px;" />
+<img src="{% link images/blog/windowing/parallel-partitions.png %}" alt="Thread Partition Evaluation" title="Thread Partition Evaluation" style="width: 400px;" />
 </a>
 </div>
 
@@ -173,7 +173,7 @@ As a side benefit, we were able to reduce the memory footprint because fewer par
 
 <div align="center">
 <a href="/images/blog/windowing/partition-major.png">
-<img src="/images/blog/windowing/partition-major.png" alt="Partition Major Evaluation" title="Partition Major Evaluation" style="width: 400px;" />
+<img src="{% link images/blog/windowing/partition-major.png %}" alt="Partition Major Evaluation" title="Partition Major Evaluation" style="width: 400px;" />
 </a>
 </div>
 

@@ -41,7 +41,7 @@ COPY tbl FROM 'input.parquet' (FORMAT parquet);
 
 ## Adjusting the Schema on the Fly
 
-Yo can load a Parquet file into a slightly different schema (e.g., different number of columns, more relaxed types) using the following trick.
+You can load a Parquet file into a slightly different schema (e.g., different number of columns, more relaxed types) using the following trick.
 
 Suppose we have a Parquet file with two columns, `c1` and `c2`:
 

@@ -25,7 +25,7 @@ toc: false
 
 DuckDB is maintained by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Prof. Dr. Hannes Mühleisen](https://hannes.muehleisen.org) along with [many other contributors](https://github.com/duckdb/duckdb/graphs/contributors) from all over the world. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckDB Labs](https://www.duckdblabs.com), which provides commercial services around DuckDB. Several other DuckDB contributors are also affiliated with DuckDB Labs.
 
-DuckDB's initial development took place at the [Database Architectures Group](https://www.cwi.nl/research/groups/database-architectures) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, The Netherlands.
+DuckDB's initial development took place at the [Database Architectures Group](https://www.cwi.nl/research/groups/database-architectures) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands.
 
 </div>
 
@@ -39,7 +39,7 @@ DuckDB's initial development took place at the [Database Architectures Group](ht
 
 <div class="answer" markdown="1">
 
-Ducks are amazing animals. They can fly, walk and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research](/images/wilbur.jpg). They are thus the perfect mascot for a versatile and resilient data management system. Also the logo designs itself.
+Ducks are amazing animals. They can fly, walk and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research](/images/wilbur.jpg). They are thus the perfect mascot for a versatile and resilient data management system.
 
 </div>
 
@@ -96,21 +96,11 @@ To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://
 
 <div class="qa-wrap" markdown="1">
 
-### Where do I find the DuckDB logo?
+### Where do I find the DuckDB logo and design guidelines?
 
 <div class="answer" markdown="1">
 
-You can download the DuckDB Logo here:
-
-- Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked.png) / [pdf](/images/logo-dl/DuckDB_Logo-stacked.pdf)
-- Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal.png) / [pdf](/images/logo-dl/DuckDB_Logo-horizontal.pdf)
-
-Inverted variants for dark backgrounds:
-
-- Stacked logo: [svg](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.png) / [pdf](/images/logo-dl/DuckDB_Logo-stacked-dark-mode.pdf)
-- Horizontal logo: [svg](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.svg) / [png](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.png) / [pdf](/images/logo-dl/DuckDB_Logo-horizontal-dark-mode.pdf)
-
-The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
+Please head to the [Design & Brand Assets page]({% link design/index.html %}).
 
 </div>
 
@@ -290,7 +280,7 @@ To work on the same data set with multiple DuckDB clients, consider using the [D
 ### Is there an official DuckDB Docker image available?
 
 <div class="answer" markdown="1">
-You can run the DuckDB command line client using the official [DuckDB Docker image]({% link docs/stable/core_extensions/ui.md %}).
+You can run the DuckDB command line client using the official [DuckDB Docker image]({% link docs/stable/operations_manual/duckdb_docker.md %}).
 
 Please note that in most cases you do not need a container to run DuckDB: you can simply deploy it [in-process]({% link why_duckdb.md %}#simple) within your client application or as a standalone command-line binary.
 </div>
@@ -368,7 +358,7 @@ DuckDB has been tested on machines with 100+ CPU cores and terabytes of memory.
 
 DuckDB's native database format also scales for multiple terabytes of data but this needs some planning – see the [“Working with Huge Databases” page]({% link docs/stable/guides/performance/working_with_huge_databases.md %}).
 
-For working with large-scale datasets and/or collaborating on the same dataset, consider using the [DuckLake](https://ducklake.select/) Lakehouse format.
+For working with large-scale datasets and/or collaborating on the same dataset, consider using the [DuckLake](https://ducklake.select/) lakehouse format.
 
 </div>
 

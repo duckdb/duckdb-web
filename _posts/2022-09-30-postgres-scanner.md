@@ -6,7 +6,7 @@ excerpt: DuckDB can now directly query tables stored in PostgreSQL and speed up 
 tags: ["extensions"]
 ---
 
-<img src="/images/blog/elephant-duck.jpg"
+<img src="{% link images/blog/elephant-duck.jpg %}"
      alt="DuckDB goes Postgres"
      width="200"
  />

@@ -556,5 +556,44 @@ body.post {
     table pre {
         margin: 0;
     }
+    
+    details{
+        summary{
+            color: var(--main-text-secondary-color, #666);
+            display: inline;
+            gap: 5px;
+            align-items: center; 
+            cursor: pointer;
+            transition: padding .3s;
+            
+            &::after{
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='27' fill='none' viewBox='0 0 26 27'%3E%3Cpath stroke='%23666' stroke-width='1.857' d='m19 10.701-6.5 6.5-6.5-6.5'/%3E%3C/svg%3E");
+                background-size: contain;
+                background-position: center center;
+                background-repeat: no-repeat;
+                display: inline-block;
+                content: "";
+                width: 26px;
+                height: 26px;
+                transition: transform .3s;
+                position: absolute;
+                transform: translate(3px,-2px);
+            }
+            
+            &::marker {
+                display: none;
+            }
+            
+        }
+        &[open]{
+            summary{
+                padding-bottom: 20px;
+                
+                &::after{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
 
 }

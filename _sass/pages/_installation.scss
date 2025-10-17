@@ -91,6 +91,10 @@ body.installation{
 			margin-bottom: 15px;
 		}
 		
+		&.disabled{
+			display: none;
+		}
+		
 	}
 	.selection-foldout:not(.open) .selection-content{
 		display: none;
@@ -172,58 +176,6 @@ body.installation{
 		}
 	}
 	
-	.selection-options[data-role="platform"] .platform-item {
-		position: relative;
-		display: inline-flex;
-		align-items: center;
-		height: 60px;
-	}
-	
-	.selection-options[data-role="platform"] .platform-item .arch-inline {
-		display: inline-flex;
-		flex-wrap: nowrap;
-		gap: 8px;
-		border-radius: 10px;
-		padding: 6px 0px;
-		opacity: 0;
-		pointer-events: none;
-		z-index: 2;
-		width: 0;
-		transition: all .3s;
-		//min-width: 160px; 
-		
-		.option{
-			height: unset;
-			
-			.label{
-				@include label-2;
-			}
-		}
-		
-		.option:nth-child(2){
-			transform: translateX(-10%);
-			transition: all .3s;
-		}
-		
-		&.open {
-			opacity: 1;
-			pointer-events: auto;
-			padding: 6px 8px;
-			width: 150px;
-			.option:nth-child(2){
-				transform: translateX(0);
-			}
-		}
-		
-		&.error{
-			.option{
-				border: 1px solid var(--interactive-installation-error-border, #FFA566);
-				background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
-			}
-		}
-	}
-	
-	
 	.installation-instructions,
 	.instruction-collection{
 		margin-top: 50px;
@@ -261,7 +213,7 @@ body.installation{
 			.more{
 				display: flex;
 				flex-wrap: wrap;
-				gap: 35px;
+				gap: 10px;
 				margin-top: 30px;
 				color: var(--main-text-tertiary-color, #B2B2B2);
 				@include label-1;
@@ -279,13 +231,23 @@ body.installation{
 				}
 			}
 			.docs-link{
-				color: var(--main-text-secondary-color, #666666);
+				//color: var(--main-text-secondary-color, #666666);
+				color: var(--main-text-primary-color, #0D0D0D);
 				text-decoration: none;
+				
+				border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
+				border-radius: 50px;
+				padding: 12px 20px;
+				transition: border .3s;
 				
 				&:after{
 					width: 13px;
 					height: 10px;
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='10' fill='none' viewBox='0 0 13 10'%3E%3Cpath fill='%23666666' d='M12.472 5 8.146 9.354 7.25 8.43l2.758-2.744H0V4.328h10.036L7.25 1.57l.896-.924L12.472 5Z'/%3E%3C/svg%3E");
+					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='10' fill='none' viewBox='0 0 13 10'%3E%3Cpath fill='%23000000' d='M12.472 5 8.146 9.354 7.25 8.43l2.758-2.744H0V4.328h10.036L7.25 1.57l.896-.924L12.472 5Z'/%3E%3C/svg%3E");
+				}
+				
+				&:hover{
+					border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
 				}
 			}
 			.alternative-options{
@@ -293,13 +255,23 @@ body.installation{
 				border: none;
 				padding: 0;
 				font: inherit;
-				color: var(--main-text-secondary-color, #666666);
+				//color: var(--main-text-secondary-color, #666666);
+				color: var(--main-text-primary-color, #0D0D0D);
 				text-decoration: none;
+				
+				border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
+				border-radius: 50px;
+				padding: 12px 20px;
+				transition: border .3s;
 				
 				&:after{
 					width: 13px;
 					height: 9px;
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='9' fill='none' viewBox='0 0 13 9'%3E%3Cpath stroke='%23666666' stroke-width='1.5' d='M1 1.5 6.5 7 12 1.5'/%3E%3C/svg%3E");
+					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='9' fill='none' viewBox='0 0 13 9'%3E%3Cpath stroke='%23000000' stroke-width='1.5' d='M1 1.5 6.5 7 12 1.5'/%3E%3C/svg%3E");
+				}
+				
+				&:hover{
+					border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
 				}
 			}
 			.alternative-options[aria-expanded="true"]{
@@ -350,6 +322,15 @@ body.installation{
 				display: block;
 				box-shadow: none;
 			}
+			
+			a{
+				text-decoration: none;
+				color: inherit;
+				
+				&:hover{
+					text-decoration: underline;
+				}
+			}
 		}
 		
 		code.highlighter-rouge,
@@ -391,28 +372,6 @@ body.installation{
 			}
 		}
 		
-	}
-	
-	.installation-hint{
-		display: inline-flex;
-		flex-wrap: nowrap;
-		align-items: center;
-		gap: 6px;
-		margin-left: 8px;
-		vertical-align: middle;
-		
-		p{
-			margin: 0;
-			font-size: var(--type-label-1);
-			font-weight: 600;
-			color: var(--orange-50, #FF6900);
-		}
-		
-		svg{
-			width: 15px;
-			height: 15px;
-			transform: translateY(-1px);
-		}
 	}
 	
 	a.download-btn{
@@ -460,7 +419,8 @@ body.installation{
 	}
 	
 	.shainfo{
-		margin-top: 10px;
+		margin-top: 8px;
+		color: var(--main-text-secondary-color, #666);
 		
 		span:first-child{
 			font-weight: 700;
@@ -470,6 +430,10 @@ body.installation{
 			@include code-standard;
 			font-size: 14px;
 		}
+	}
+	
+	.shainfo + .download-btn{
+		margin-top: 3*8px;
 	}
 	
 	

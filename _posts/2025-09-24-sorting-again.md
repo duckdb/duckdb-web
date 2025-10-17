@@ -142,7 +142,7 @@ We want sorted runs to be much longer than that (for performance reasons that we
 To be able to generate longer sorted runs, we implemented an `std::iterator` that can iterate over non-contiguous blocks of memory:
 
 <p align="center">
-    <img src="/images/blog/sorting_again/block_iterator.svg"
+    <img src="{% link images/blog/sorting_again/block_iterator.svg %}"
         alt="DuckDB's block iterator"
         width="800"
     />
@@ -174,7 +174,7 @@ This means that data can be output before the full merge has been computed.
 We visualize this for four sorted runs:
 
 <p align="center">
-    <img src="/images/blog/sorting_again/k_way_merge.svg"
+    <img src="{% link images/blog/sorting_again/k_way_merge.svg %}"
         alt="Streaming k-way merge"
         width="500"
     />
@@ -300,7 +300,7 @@ It has much better raw sorting performance: it is more than 2× faster at sortin
 We also plot the results on a __log-log scale__:
 
 <p align="center">
-    <img src="/images/blog/sorting_again/integers.svg"
+    <img src="{% link images/blog/sorting_again/integers.svg %}"
         alt="Integer sorting benchmark"
         height=300
     />
@@ -337,7 +337,7 @@ This shows that the new _k_-way merge sort reduces data movement and I/O, is muc
 Again, we plot the results on a __log-log scale__:
 
 <p align="center">
-    <img src="/images/blog/sorting_again/lineitem.svg"
+    <img src="{% link images/blog/sorting_again/lineitem.svg %}"
         alt="Lineitem sorting benchmark"
         height=300
     />
@@ -370,7 +370,7 @@ At 8 threads, the old implementation has a speedup of only ~3.5× over 1 thread,
 Again, we plot the results on a __log-log scale__:
 
 <p align="center">
-    <img src="/images/blog/sorting_again/threads.svg"
+    <img src="{% link images/blog/sorting_again/threads.svg %}"
         alt="Thread scaling benchmark"
         height=300
     />

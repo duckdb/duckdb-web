@@ -6,7 +6,7 @@ excerpt: DuckDB supports efficient lightweight compression that is automatically
 tags: ["deep dive"]
 ---
 
-<img src="/images/compression/matroshka-duck.png"
+<img src="{% link images/compression/matroshka-duck.png %}"
      alt="Matroshka Ducks (ducks going from big to small)"
      width="200"
      />
@@ -36,7 +36,7 @@ At its core, compression algorithms try to find patterns in a data set in order 
 
 As an example of this concept, let us consider the following two data sets.
 
-<img src="/images/compression/exampledata.png"
+<img src="{% link images/compression/exampledata.png %}"
      alt="Example data set with predictable and noisy data"
      width="100%"
      />
@@ -79,7 +79,7 @@ Because of the advantages described above, DuckDB uses only specialized lightwei
 
 DuckDB's storage splits tables into _Row Groups_. These are groups of `120K` rows, stored in columnar chunks called _Column Segments_. This storage layout is similar to [Parquet]({% post_url 2021-06-25-querying-parquet %}) – but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DuckDB's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
 
-<img src="/images/compression/storageformat.png"
+<img src="{% link images/compression/storageformat.png %}"
      alt="Visualization of the storage format of DuckDB"
      width="100%"
      />
@@ -96,7 +96,7 @@ DuckDB implements several lightweight compression algorithms, and we are in the 
 
 Constant encoding is the most straightforward compression algorithm in DuckDB. Constant encoding is used when every single value in a column segment is the same value. In that case, we store only that single value. This encoding is visualized below.
 
-<img src="/images/compression/constant.png"
+<img src="{% link images/compression/constant.png %}"
      alt="Data set stored both uncompressed and with constant compression"
      width="100%"
      />
@@ -107,7 +107,7 @@ When applicable, this encoding technique leads to tremendous space savings. Whil
 
 [Run-length encoding](https://en.wikipedia.org/wiki/Run-length_encoding) (RLE) is a compression algorithm that takes advantage of repeated values in a dataset. Rather than storing individual values, the data set is decomposed into a pair of (value, count) tuples, where the count represents how often the value is repeated. This encoding is visualized below.
 
-<img src="/images/compression/rle.png"
+<img src="{% link images/compression/rle.png %}"
      alt="Data set stored both uncompressed and with RLE compression"
      width="100%"
      />
@@ -118,7 +118,7 @@ RLE is powerful when there are many repeating values in the data. This might occ
 
 Bit Packing is a compression technique that takes advantage of the fact that integral values rarely span the full range of their data type. For example, four-byte integer values can store values from negative two billion to positive two billion. Frequently the full range of this data type is not used, and instead only small numbers are stored. Bit packing takes advantage of this by removing all of the unnecessary leading zeros when storing values. An example (in decimal) is provided below.
 
-<img src="/images/compression/bitpacking.png"
+<img src="{% link images/compression/bitpacking.png %}"
      alt="Data set stored both uncompressed and with bitpacking compression"
      width="100%"
      />
@@ -131,7 +131,7 @@ Bit packing is very powerful in practice. It is also convenient to users – as 
 
 Frame of Reference encoding is an extension of bit packing, where we also include a frame. The frame is the minimum value found in the set of values. The values are stored as the offset from this frame. An example of this is given below.
 
-<img src="/images/compression/for.png"
+<img src="{% link images/compression/for.png %}"
      alt="Data set stored both uncompressed and with FOR compression"
      width="100%"
      />
@@ -142,7 +142,7 @@ While this might not seem particularly useful at a first glance, it is very powe
 
 Dictionary encoding works by extracting common values into a separate dictionary, and then replacing the original values with references to said dictionary. An example is provided below.
 
-<img src="/images/compression/dictionary.png"
+<img src="{% link images/compression/dictionary.png %}"
      alt="Data set stored both uncompressed and with Dictionary compression"
      width="100%"
      />
@@ -153,7 +153,7 @@ Dictionary encoding is particularly efficient when storing text columns with man
 
 [Fast Static Symbol Table](https://www.vldb.org/pvldb/vol13/p2649-boncz.pdf) compression is an extension to dictionary compression, that not only extracts repetitions of entire strings, but also extracts repetitions _within_ strings. This is effective when storing strings that are themselves unique, but have a lot of repetition within the strings, such as URLs or e-mail addresses. An image illustrating how this works is shown below.
 
-<img src="/images/compression/fsst.png"
+<img src="{% link images/compression/fsst.png %}"
      alt="Data set stored both uncompressed and with FSST compression"
      width="100%"
      />

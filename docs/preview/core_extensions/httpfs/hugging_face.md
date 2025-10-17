@@ -119,7 +119,7 @@ FROM 'hf://datasets/datasets-examples/doc-formats-csv-1@~parquet/**/*.parquet';
 | pokemon | pika  |
 | human   | hello |
 
-The previous query will read all parquet files under the `~parquet` revision. This is a special branch where Hugging Face automatically generates the Parquet files of every dataset to enable efficient scanning.
+The previous query will read all Parquet files under the `~parquet` revision. This is a special branch where Hugging Face automatically generates the Parquet files of every dataset to enable efficient scanning.
 
 ## Authentication
 

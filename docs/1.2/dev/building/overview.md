@@ -5,7 +5,7 @@ title: Building DuckDB from Source
 
 ## When Should You Build DuckDB?
 
-DuckDB binaries are available for _stable_ and _preview_ builds on the [installation page]({% link docs/installation/index.html %}).
+DuckDB binaries are available for _stable_ and _preview_ builds on the [installation page]({% link install/index.html %}).
 In most cases, it's recommended to use these binaries.
 When you are running on an experimental platform (e.g., [Raspberry Pi]({% link docs/1.2/dev/building/raspberry_pi.md %})) or you would like to build the project for an unmerged pull request,
 you can build DuckDB from source based on the [`duckdb/duckdb` repository hosted on GitHub](https://github.com/duckdb/duckdb/).

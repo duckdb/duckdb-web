@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: paleolimbot/duckdb-geography
-  ref: e83725eb4ea245db9d2a5e02887dacfda3eb59a7
+  ref: 1f66ba5a3a0e72f53c7237987ef743605189fa69
 
 docs:
   hello_world: |
@@ -29,10 +29,10 @@ docs:
     [README](https://github.com/paleolimbot/duckdb-geography/blob/main/README.md)
     and [function documentation](https://github.com/paleolimbot/duckdb-geography/blob/main/docs/function-reference.md).
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: 599
-extension_download_count_pretty: 599
+extension_star_count: 32
+extension_star_count_pretty: 32
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_geography.png'
 layout: community_extension_doc
 ---
@@ -60,64 +60,64 @@ LOAD {{ page.extension.name }};
 
 |          function_name          | function_type | description | comment | examples |
 |---------------------------------|---------------|-------------|---------|----------|
-| s2                              | scalar        | NULL        | NULL    | []       |
-| s2_arbitrarycellfromwkb         | scalar        | NULL        | NULL    | []       |
-| s2_area                         | scalar        | NULL        | NULL    | []       |
-| s2_astext                       | scalar        | NULL        | NULL    | []       |
-| s2_aswkb                        | scalar        | NULL        | NULL    | []       |
-| s2_bounds_box                   | scalar        | NULL        | NULL    | []       |
-| s2_bounds_box_agg               | aggregate     | NULL        | NULL    | []       |
-| s2_box                          | scalar        | NULL        | NULL    | []       |
-| s2_box_intersects               | scalar        | NULL        | NULL    | []       |
-| s2_box_struct                   | scalar        | NULL        | NULL    | []       |
-| s2_box_union                    | scalar        | NULL        | NULL    | []       |
-| s2_box_wkb                      | scalar        | NULL        | NULL    | []       |
-| s2_cell_child                   | scalar        | NULL        | NULL    | []       |
-| s2_cell_contains                | scalar        | NULL        | NULL    | []       |
-| s2_cell_edge_neighbor           | scalar        | NULL        | NULL    | []       |
-| s2_cell_from_token              | scalar        | NULL        | NULL    | []       |
-| s2_cell_intersects              | scalar        | NULL        | NULL    | []       |
-| s2_cell_level                   | scalar        | NULL        | NULL    | []       |
-| s2_cell_parent                  | scalar        | NULL        | NULL    | []       |
-| s2_cell_range_max               | scalar        | NULL        | NULL    | []       |
-| s2_cell_range_min               | scalar        | NULL        | NULL    | []       |
-| s2_cell_token                   | scalar        | NULL        | NULL    | []       |
-| s2_cell_vertex                  | scalar        | NULL        | NULL    | []       |
-| s2_cellfromlonlat               | scalar        | NULL        | NULL    | []       |
-| s2_cellfromwkb                  | scalar        | NULL        | NULL    | []       |
-| s2_contains                     | scalar        | NULL        | NULL    | []       |
-| s2_covering                     | scalar        | NULL        | NULL    | []       |
-| s2_covering_fixed_level         | scalar        | NULL        | NULL    | []       |
-| s2_data_cities                  | table         | NULL        | NULL    | []       |
-| s2_data_city                    | scalar        | NULL        | NULL    | []       |
-| s2_data_countries               | table         | NULL        | NULL    | []       |
-| s2_data_country                 | scalar        | NULL        | NULL    | []       |
-| s2_dependencies                 | table         | NULL        | NULL    | []       |
-| s2_difference                   | scalar        | NULL        | NULL    | []       |
-| s2_dimension                    | scalar        | NULL        | NULL    | []       |
-| s2_distance                     | scalar        | NULL        | NULL    | []       |
-| s2_dwithin                      | scalar        | NULL        | NULL    | []       |
-| s2_equals                       | scalar        | NULL        | NULL    | []       |
-| s2_format                       | scalar        | NULL        | NULL    | []       |
-| s2_geogfromtext                 | scalar        | NULL        | NULL    | []       |
-| s2_geogfromtext_novalidate      | scalar        | NULL        | NULL    | []       |
-| s2_geogfromwkb                  | scalar        | NULL        | NULL    | []       |
-| s2_geogfromwkb_novalidate       | scalar        | NULL        | NULL    | []       |
-| s2_intersection                 | scalar        | NULL        | NULL    | []       |
-| s2_intersects                   | scalar        | NULL        | NULL    | []       |
-| s2_is_valid                     | scalar        | NULL        | NULL    | []       |
-| s2_is_valid_reason              | scalar        | NULL        | NULL    | []       |
-| s2_isempty                      | scalar        | NULL        | NULL    | []       |
-| s2_length                       | scalar        | NULL        | NULL    | []       |
-| s2_max_distance                 | scalar        | NULL        | NULL    | []       |
-| s2_mayintersect                 | scalar        | NULL        | NULL    | []       |
-| s2_num_points                   | scalar        | NULL        | NULL    | []       |
-| s2_perimeter                    | scalar        | NULL        | NULL    | []       |
-| s2_prepare                      | scalar        | NULL        | NULL    | []       |
-| s2_register_geoarrow_extensions | table         | NULL        | NULL    | []       |
-| s2_union                        | scalar        | NULL        | NULL    | []       |
-| s2_x                            | scalar        | NULL        | NULL    | []       |
-| s2_y                            | scalar        | NULL        | NULL    | []       |
+| s2                              | scalar        | NULL        | NULL    |          |
+| s2_arbitrarycellfromwkb         | scalar        | NULL        | NULL    |          |
+| s2_area                         | scalar        | NULL        | NULL    |          |
+| s2_astext                       | scalar        | NULL        | NULL    |          |
+| s2_aswkb                        | scalar        | NULL        | NULL    |          |
+| s2_bounds_box                   | scalar        | NULL        | NULL    |          |
+| s2_bounds_box_agg               | aggregate     | NULL        | NULL    |          |
+| s2_box                          | scalar        | NULL        | NULL    |          |
+| s2_box_intersects               | scalar        | NULL        | NULL    |          |
+| s2_box_struct                   | scalar        | NULL        | NULL    |          |
+| s2_box_union                    | scalar        | NULL        | NULL    |          |
+| s2_box_wkb                      | scalar        | NULL        | NULL    |          |
+| s2_cell_child                   | scalar        | NULL        | NULL    |          |
+| s2_cell_contains                | scalar        | NULL        | NULL    |          |
+| s2_cell_edge_neighbor           | scalar        | NULL        | NULL    |          |
+| s2_cell_from_token              | scalar        | NULL        | NULL    |          |
+| s2_cell_intersects              | scalar        | NULL        | NULL    |          |
+| s2_cell_level                   | scalar        | NULL        | NULL    |          |
+| s2_cell_parent                  | scalar        | NULL        | NULL    |          |
+| s2_cell_range_max               | scalar        | NULL        | NULL    |          |
+| s2_cell_range_min               | scalar        | NULL        | NULL    |          |
+| s2_cell_token                   | scalar        | NULL        | NULL    |          |
+| s2_cell_vertex                  | scalar        | NULL        | NULL    |          |
+| s2_cellfromlonlat               | scalar        | NULL        | NULL    |          |
+| s2_cellfromwkb                  | scalar        | NULL        | NULL    |          |
+| s2_contains                     | scalar        | NULL        | NULL    |          |
+| s2_covering                     | scalar        | NULL        | NULL    |          |
+| s2_covering_fixed_level         | scalar        | NULL        | NULL    |          |
+| s2_data_cities                  | table         | NULL        | NULL    |          |
+| s2_data_city                    | scalar        | NULL        | NULL    |          |
+| s2_data_countries               | table         | NULL        | NULL    |          |
+| s2_data_country                 | scalar        | NULL        | NULL    |          |
+| s2_dependencies                 | table         | NULL        | NULL    |          |
+| s2_difference                   | scalar        | NULL        | NULL    |          |
+| s2_dimension                    | scalar        | NULL        | NULL    |          |
+| s2_distance                     | scalar        | NULL        | NULL    |          |
+| s2_dwithin                      | scalar        | NULL        | NULL    |          |
+| s2_equals                       | scalar        | NULL        | NULL    |          |
+| s2_format                       | scalar        | NULL        | NULL    |          |
+| s2_geogfromtext                 | scalar        | NULL        | NULL    |          |
+| s2_geogfromtext_novalidate      | scalar        | NULL        | NULL    |          |
+| s2_geogfromwkb                  | scalar        | NULL        | NULL    |          |
+| s2_geogfromwkb_novalidate       | scalar        | NULL        | NULL    |          |
+| s2_intersection                 | scalar        | NULL        | NULL    |          |
+| s2_intersects                   | scalar        | NULL        | NULL    |          |
+| s2_is_valid                     | scalar        | NULL        | NULL    |          |
+| s2_is_valid_reason              | scalar        | NULL        | NULL    |          |
+| s2_isempty                      | scalar        | NULL        | NULL    |          |
+| s2_length                       | scalar        | NULL        | NULL    |          |
+| s2_max_distance                 | scalar        | NULL        | NULL    |          |
+| s2_mayintersect                 | scalar        | NULL        | NULL    |          |
+| s2_num_points                   | scalar        | NULL        | NULL    |          |
+| s2_perimeter                    | scalar        | NULL        | NULL    |          |
+| s2_prepare                      | scalar        | NULL        | NULL    |          |
+| s2_register_geoarrow_extensions | table         | NULL        | NULL    |          |
+| s2_union                        | scalar        | NULL        | NULL    |          |
+| s2_x                            | scalar        | NULL        | NULL    |          |
+| s2_y                            | scalar        | NULL        | NULL    |          |
 
 ### Added Types
 

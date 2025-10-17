@@ -6,26 +6,26 @@ excerpt: |
   Allow interaction with event buses like Websocket and Redis publish/subscribe servers.
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_radio.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_radio.html).
 extension:
   build: cmake
-  description: Allow interaction with event buses like Websocket and Redis publish/subscribe servers.
+  description: Allow interaction with event buses like Websocket and Redis publish/subscribe
+    servers.
   excluded_platforms: wasm_mvp;wasm_eh;wasm_threads;windows_amd64;windows_amd64_mingw;windows_amd64_rtools
   language: C++
   license: MIT
   maintainers:
-    - rustyconover
+  - rustyconover
   name: radio
-  version: 2025092701
+  version: '2025101201'
 repo:
   github: query-farm/radio
-  ref: 6b9e6209cfaab1d6327a7bba5bffb620d8bdb2ac
+  ref: 8c9d85cc7632c8ed4172a5413b3168bb158971ee
 
 extension_star_count: 30
 extension_star_count_pretty: 30
-extension_download_count: 388
-extension_download_count_pretty: 388
+extension_download_count: 405
+extension_download_count_pretty: 405
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---

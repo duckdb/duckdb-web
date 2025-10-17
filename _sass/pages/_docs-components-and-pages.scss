@@ -475,6 +475,16 @@ body.documentation {
             margin: 0 !important;
         }
     }
+    
+    span:not(.symbol):not(.chevron) {
+        @include label-1;
+    }
+    
+    span.subline{
+        color: var(--main-text-tertiary-color, #B2B2B2);
+        margin-top: 2px;
+        display: inline-block;
+    }
 
     &.stars,
     &.downloads {

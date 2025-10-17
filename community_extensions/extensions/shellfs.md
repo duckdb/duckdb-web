@@ -6,8 +6,7 @@ excerpt: |
   Allow shell commands to be used for input and output
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_shellfs.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_shellfs.html).
 extension:
   build: cmake
   description: Allow shell commands to be used for input and output
@@ -15,18 +14,18 @@ extension:
   language: C++
   license: MIT
   maintainers:
-    - rustyconover
+  - rustyconover
   name: shellfs
   requires_toolchains: python3
-  version: 2025091601
+  version: '2025101201'
 repo:
   github: query-farm/shellfs
-  ref: ee2ce42e3689fc6be35f88cfefc7cf80f2e7648e
+  ref: f0bcfb8035b2f2d62b3dbfa202bbe61a125b51ee
 
 extension_star_count: 81
 extension_star_count_pretty: 81
-extension_download_count: 29478
-extension_download_count_pretty: 29.5k
+extension_download_count: 27263
+extension_download_count_pretty: 27.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
 layout: community_extension_doc
 ---

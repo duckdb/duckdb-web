@@ -8,16 +8,16 @@ excerpt: |
 extension:
   name: pbix
   description: Extension that allows parsing the data model embedded in PowerBI (pbix) files
-  version: 0.3.0
+  version: 0.5.1
   language: C++
   build: cmake
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;linux_amd64_musl"
+  excluded_platforms: "linux_amd64_musl"
   license: MIT
   maintainers:
     - Hugoberry
 repo:
   github: Hugoberry/duckdb-pbix-extension
-  ref: 92c60bb174285fad2bf105526c3d44319fe43ec1
+  ref: 3747686cc2a2175f70c9d3c3b451aa7dbf542110
 docs:
   hello_world: |
     -- Get metadata tables from a PowerBI file
@@ -31,24 +31,31 @@ docs:
       "Reseller ID" 
     FROM pbix_read('Adventure Works DW 2020.pbix','Reseller') 
     LIMIT 10;
+
+    -- Read metadata about models in a folder of pbix files
+    SELECT
+      file,
+      list_transform(pbix2vpax(file).Tables, t->t.TableName) as tab
+    FROM glob('data/**/*.pbix');
   extended_description: >
     The PBIX extension allows you to parse the data model embedded in PowerBI (pbix) files directly in DuckDB.
     
     
-    It provides two main functions:
+    It provides three functions:
     - `pbix_meta()`: Returns metadata tables for a data model (consult [MS-SSAS-T](https://learn.microsoft.com/en-us/openspecs/sql_server_protocols/ms-ssas-t/f85cd3b9-690c-4bc7-a1f0-a854d7daecd8) for metadata structures)
     - `pbix_read()`: Returns the contents of a specific table from a pbix file
+    - `pbix2vpax()`: Generate comprehensive VPAX serialisation of the entire data model (scalar function)
     
     
     For a pure Python implementation of the pbix parser, check out the [PBIXray](https://github.com/Hugoberry/pbixray) library.
     
     
-    *Note:* Current limitations include inability of the WASM version to parse `https` hosted files and that pbix_read() will decompress the entire model in memory. 
+    *Note:* Current limitations include the inability of the WASM version to parse `https` hosted files, and that pbix_read() will decompress the entire model in memory. 
 
-extension_star_count: 28
-extension_star_count_pretty: 28
-extension_download_count: 489
-extension_download_count_pretty: 489
+extension_star_count: 29
+extension_star_count_pretty: 29
+extension_download_count: 484
+extension_download_count_pretty: 484
 image: '/images/community_extensions/social_preview/preview_community_extension_pbix.png'
 layout: community_extension_doc
 ---
@@ -76,6 +83,7 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
+| pbix2vpax     | scalar        | NULL        | NULL    |          |
 | pbix_meta     | table         | NULL        | NULL    |          |
 | pbix_read     | table         | NULL        | NULL    |          |
 
@@ -83,8 +91,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|       name        |                description                | input_type | scope  | aliases |
-|-------------------|-------------------------------------------|------------|--------|---------|
-| pbix_magic_number | A magic number to accelerate file parsing | INTEGER    | GLOBAL | []      |
+|               name                |                                description                                 | input_type | scope  | aliases |
+|-----------------------------------|----------------------------------------------------------------------------|------------|--------|---------|
+| pbix_ignore_errors                | Return empty VPAX structure instead of throwing exceptions on parse errors | BOOLEAN    | GLOBAL | []      |
+| pbix_trailing_chunks_optimization | Number of trailing chunks to read for optimized file parsing               | INTEGER    | GLOBAL | []      |
 
 

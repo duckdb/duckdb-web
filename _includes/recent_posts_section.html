@@ -67,8 +67,19 @@
 							</div>
 						</div>
 					{% else %}
-						<div class="postpreview {% if page.collection == 'events' %}eventpreview{% endif %} {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}">
-							<a href="{{ item.url }}" class="blocklink"></a>
+						{% if item.external_post_url %}
+							{% assign is_external = true %}
+							{% assign post_link = item.external_post_url %}
+							{% assign link_target = "_blank" %}
+							{% assign link_rel = "noopener noreferrer" %}
+						{% else %}
+							{% assign is_external = false %}
+							{% assign post_link = item.url %}
+							{% assign link_target = "_self" %}
+							{% assign link_rel = "" %}
+						{% endif %}
+						<div class="postpreview {% if page.collection == 'events' %}eventpreview{% endif %} {{ tag_classes | downcase | slugify }}{% if is_external %} external-post{% endif %}" data-title="{{ item.title | escape }}">
+							<a href="{{ post_link }}" class="blocklink" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
 							<div class="postimg custom">
 								{% if item.thumb %}
 									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
@@ -87,11 +98,14 @@
 									{% endfor %}
 								</div>
 								{% endif %}
-								<h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+								<h3><a href="{{ post_link }}" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}>{{ item.title }}</a></h3>
 								<div class="meta">
 									{% if page.collection == 'events' %}
 										<div class="venue">{{ item.venue | default: "Venue not specified" }}</div>
 									{% else %}
+										{% if is_external %}
+											<div class="external-source">{{ item.external_post_url | extract_domain }}</div>
+										{% endif %}
 										<div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
 									{% endif %}
 									<div class="author">{{ item.author | default: "DuckDB" }}</div>
@@ -103,7 +117,7 @@
 				{% endif %}
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}{{ site.baseurl }}{% if page.collection == "events" %}/events/{% elsif page.collection == "media" %}/media/{% elsif page.collection == "science" %}/science/{% elsif page.collection == "everywhere" %}/everywhere/{% else %}/news/{% endif %}" class="button transparent arrow-right">
+		<a href="{{ site.url }}{% if page.collection == "events" %}/events/{% elsif page.collection == "media" %}/media/{% elsif page.collection == "science" %}/science/{% elsif page.collection == "everywhere" %}/everywhere/{% else %}/news/{% endif %}" class="button transparent arrow-right">
 			All {% if page.collection == "events" %}events{% elsif page.collection == "media" %}media{% elsif page.collection == "science" %}science posts{% elsif page.collection == "everywhere" %}everywhere posts{% else %}blog posts{% endif %} <span></span>
 		</a>
 	</div>

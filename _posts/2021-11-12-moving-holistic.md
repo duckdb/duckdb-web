@@ -66,7 +66,7 @@ Computing a moving median is not as easy.
 Let's look at a simple example of how we might implement moving `median` in Python
 for the following string data, using a frame that includes one element from each side:
 
-<img src="/images/blog/holistic/python.svg" alt="Python Median Example" title="Figure 1: Python Median Example" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/holistic/python.svg %}" alt="Python Median Example" title="Figure 1: Python Median Example" style="max-width:90%;width:90%;height:auto"/>
 
 For this example we are using strings so we don't have to worry about interpolating values.
 
@@ -134,7 +134,7 @@ With this approach, we can obtain a significant performance boost of 1.5-10 time
 
 In this example, we have a 3-element frame (green) that moves one space to the right for each value:
 
-<img src="/images/blog/holistic/median.svg" alt="Median Example" title="Figure 2: Median Example" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/holistic/median.svg %}" alt="Median Example" title="Figure 2: Median Example" style="max-width:90%;width:90%;height:auto"/>
 
 The median values in orange must be computed from scratch.
 Notice that in the example, this only happens at the start of the window.
@@ -202,7 +202,7 @@ but when that happens we can rescan the table to find the new mode.
 
 In this example, the 4-element frame (green) moves one space to the right for each value:
 
-<img src="/images/blog/holistic/mode.svg" alt="Mode Example" title="Figure 3: Mode Example" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/holistic/mode.svg %}" alt="Mode Example" title="Figure 3: Mode Example" style="max-width:90%;width:90%;height:auto"/>
 
 When the mode is unchanged (blue) it can be used directly.
 When the mode becomes ambiguous (orange), we must recan the table.
@@ -245,7 +245,7 @@ which has the same overhead as the other benchmarks, but is trivial to compute
 (it just returns the frame size).
 That overhead was subtracted from the run times to give the algorithm timings:
 
-<img src="/images/blog/holistic/benchmarks.svg" alt="Holistic Aggregate Benchmarks" title="Figure 3: Holistic Aggregate Benchmarks" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/holistic/benchmarks.svg %}" alt="Holistic Aggregate Benchmarks" title="Figure 3: Holistic Aggregate Benchmarks" style="max-width:90%;width:90%;height:auto"/>
 
 As can be seen, there is a substantial benefit from implementing the window operation
 for all of these aggregates, often on the order of a factor of ten.

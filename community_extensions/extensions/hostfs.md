@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: hostfs
   description: Navigate and explore the filesystem using SQL
-  version: 0.0.2
+  version: 0.0.3
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: gropaul/hostFS
-  ref: 422dccbdbf5de509e03111ea78afe5f1c35fdde6
+  ref: 29017b23edd9bed0cbd9847c9ba76b84427df1f7
 
 docs:
   hello_world: |
@@ -58,10 +58,10 @@ docs:
   extended_description: >
     The HostFS extension allows you to navigate and explore the filesystem using SQL. It provides a set of functions to list files, get file metadata, and more. 
     For more information, please see the [HostFS documentation](https://github.com/gropaul/hostFS).
-extension_star_count: 23
-extension_star_count_pretty: 23
-extension_download_count: 491
-extension_download_count_pretty: 491
+extension_star_count: 26
+extension_star_count_pretty: 26
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_hostfs.png'
 layout: community_extension_doc
 ---
@@ -105,6 +105,8 @@ LOAD {{ page.extension.name }};
 | lsr                | pragma        | NULL        | NULL    |          |
 | lsr                | table         | NULL        | NULL    |          |
 | path_exists        | scalar        | NULL        | NULL    |          |
+| path_separator     | scalar        | NULL        | NULL    |          |
+| path_split         | macro         | NULL        | NULL    |          |
 | path_type          | scalar        | NULL        | NULL    |          |
 | pwd                | pragma        | NULL        | NULL    |          |
 | pwd                | scalar        | NULL        | NULL    |          |

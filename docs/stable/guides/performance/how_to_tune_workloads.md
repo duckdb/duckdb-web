@@ -28,8 +28,16 @@ This allows the systems to re-order any results that do not contain `ORDER BY` c
 ### The Effect of Row Groups on Parallelism
 
 DuckDB parallelizes the workload based on _[row groups]({% link docs/stable/internals/storage.md %}#row-groups),_ i.e., groups of rows that are stored together at the storage level.
-A row group in DuckDB's database format consists of max. 122,880 rows.
+The default row group size in DuckDB's database format is 122,880 rows.
 Parallelism starts at the level of row groups, therefore, for a query to run on _k_ threads, it needs to scan at least _k_ \* 122,880 rows.
+
+The row group size can be specified as an option of the `ATTACH` statement: 
+
+```sql
+ATTACH '/tmp/somefile.db' AS db (ROW_GROUP_SIZE 16384);
+```
+
+The [performance considerations when chosing `ROW_GROUP_SIZE` for Parquet files]({% link docs/stable/data/parquet/tips.md %}#selecting-a-row_group_size) apply verbatim to DuckDB's own database format.
 
 ### Too Many Threads
 
@@ -104,7 +112,7 @@ The main bottleneck in workloads reading remote files is likely to be the IO. Th
 Some basic SQL tricks can help with this:
 
 - Avoid `SELECT *`. Instead, only select columns that are actually used. DuckDB will try to only download the data it actually needs.
-- Apply filters on remote parquet files when possible. DuckDB can use these filters to reduce the amount of data that is scanned.
+- Apply filters on remote Parquet files when possible. DuckDB can use these filters to reduce the amount of data that is scanned.
 - Either [sort]({% link docs/stable/sql/query_syntax/orderby.md %}) or [partition]({% link docs/stable/data/partitioning/partitioned_writes.md %}) data by columns that are regularly used for filters: this increases the effectiveness of the filters in reducing IO.
 
 To inspect how much remote data is transferred for a query, [`EXPLAIN ANALYZE`]({% link docs/stable/guides/meta/explain_analyze.md %}) can be used to print out the total number of requests and total data transferred for queries on remote files.

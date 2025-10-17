@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 1.0.0
+  version: 1.1.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: main
+  ref: 440ef9e852a806def5783c7ca4f7fdb3d1021881
 
 docs:
   hello_world: |
@@ -73,8 +73,9 @@ docs:
     - `mcp_publish_query(sql, uri, format, interval)` - Publish query results
     
     The extension implements the complete JSON-RPC 2.0 MCP protocol with support for multiple transport mechanisms. It enables powerful use cases including database federation, remote data access, tool orchestration, and exposing database insights to external MCP-compatible systems. Perfect for integration with AI agents, data pipelines, and distributed analytical workflows.
-extension_star_count: 6
-extension_star_count_pretty: 6
+
+extension_star_count: 7
+extension_star_count_pretty: 7
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
@@ -102,32 +103,39 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type | description | comment | examples |
-|----------------------|---------------|-------------|---------|----------|
-| mcp_call_tool        | scalar        | NULL        | NULL    |          |
-| mcp_get_prompt       | scalar        | NULL        | NULL    |          |
-| mcp_get_resource     | scalar        | NULL        | NULL    |          |
-| mcp_list_prompts     | scalar        | NULL        | NULL    |          |
-| mcp_list_resources   | scalar        | NULL        | NULL    |          |
-| mcp_list_tools       | scalar        | NULL        | NULL    |          |
-| mcp_publish_query    | scalar        | NULL        | NULL    |          |
-| mcp_publish_table    | scalar        | NULL        | NULL    |          |
-| mcp_reconnect_server | scalar        | NULL        | NULL    |          |
-| mcp_server_health    | scalar        | NULL        | NULL    |          |
-| mcp_server_start     | scalar        | NULL        | NULL    |          |
-| mcp_server_status    | scalar        | NULL        | NULL    |          |
-| mcp_server_stop      | scalar        | NULL        | NULL    |          |
+|        function_name         | function_type | description | comment | examples |
+|------------------------------|---------------|-------------|---------|----------|
+| mcp_call_tool                | scalar        | NULL        | NULL    |          |
+| mcp_get_diagnostics          | scalar        | NULL        | NULL    |          |
+| mcp_get_prompt               | scalar        | NULL        | NULL    |          |
+| mcp_get_resource             | scalar        | NULL        | NULL    |          |
+| mcp_list_prompt_templates    | scalar        | NULL        | NULL    |          |
+| mcp_list_prompts             | scalar        | NULL        | NULL    |          |
+| mcp_list_resources           | scalar        | NULL        | NULL    |          |
+| mcp_list_tools               | scalar        | NULL        | NULL    |          |
+| mcp_publish_query            | scalar        | NULL        | NULL    |          |
+| mcp_publish_table            | scalar        | NULL        | NULL    |          |
+| mcp_reconnect_server         | scalar        | NULL        | NULL    |          |
+| mcp_register_prompt_template | scalar        | NULL        | NULL    |          |
+| mcp_render_prompt_template   | scalar        | NULL        | NULL    |          |
+| mcp_server_health            | scalar        | NULL        | NULL    |          |
+| mcp_server_start             | scalar        | NULL        | NULL    |          |
+| mcp_server_status            | scalar        | NULL        | NULL    |          |
+| mcp_server_stop              | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|         name         |                                                   description                                                    | input_type | scope  |
-|----------------------|------------------------------------------------------------------------------------------------------------------|------------|--------|
-| allowed_mcp_commands | Colon-delimited list of executable paths allowed for MCP servers (security: executable paths only, no arguments) | VARCHAR    | GLOBAL |
-| allowed_mcp_urls     | Space-delimited list of URL prefixes allowed for MCP servers                                                     | VARCHAR    | GLOBAL |
-| mcp_disable_serving  | Disable MCP server functionality entirely (client-only mode)                                                     | BOOLEAN    | GLOBAL |
-| mcp_lock_servers     | Lock MCP server configuration to prevent runtime changes (security feature)                                      | BOOLEAN    | GLOBAL |
-| mcp_server_file      | Path to MCP server configuration file                                                                            | VARCHAR    | GLOBAL |
+|         name         |                                                   description                                                    | input_type | scope  | aliases |
+|----------------------|------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| allowed_mcp_commands | Colon-delimited list of executable paths allowed for MCP servers (security: executable paths only, no arguments) | VARCHAR    | GLOBAL | []      |
+| allowed_mcp_urls     | Space-delimited list of URL prefixes allowed for MCP servers                                                     | VARCHAR    | GLOBAL | []      |
+| mcp_console_logging  | Enable MCP logging to console/stderr                                                                             | BOOLEAN    | GLOBAL | []      |
+| mcp_disable_serving  | Disable MCP server functionality entirely (client-only mode)                                                     | BOOLEAN    | GLOBAL | []      |
+| mcp_lock_servers     | Lock MCP server configuration to prevent runtime changes (security feature)                                      | BOOLEAN    | GLOBAL | []      |
+| mcp_log_file         | Path to MCP log file (empty for no file logging)                                                                 | VARCHAR    | GLOBAL | []      |
+| mcp_log_level        | MCP logging level (trace, debug, info, warn, error, off)                                                         | VARCHAR    | GLOBAL | []      |
+| mcp_server_file      | Path to MCP server configuration file                                                                            | VARCHAR    | GLOBAL | []      |
 
 

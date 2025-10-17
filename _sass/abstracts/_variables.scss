@@ -48,8 +48,6 @@ $docuh5: 18px;
 
 
 
-
-
 /* Colors */
 :root {
   --blue-02: #020608;
@@ -272,7 +270,8 @@ $docuh5: 18px;
   --interactive-installation-icon-background-selected: var(--purple-90);
   --interactive-installation-icon-border: var(--grey-80);
   --lake-architecture-background-hover: var(--blue-95);
-  --lake-architecture-logo-catalog-db: var(--grey-20);
+  --lake-architecture-logo-catalog-db: var(--grey-30);
+  --lake-architecture-logo-catalog-icon: var(--grey-95);
   --lake-architecture-logo-highlight-db: var(--yellow-50);
   --lake-architecture-logo-highlight-lake: var(--blue-70);
   --lake-architecture-logo-primary-db: var(--grey-05);
@@ -287,7 +286,7 @@ $docuh5: 18px;
   --lake-highlight-blue-text-color: var(--grey-10);
   --lake-infobox-border-color: var(--blue-transparent-90);
   --lake-infobox-primary-background-color: var(--blue-transparent-95);
-  --lake-infobox-quaternary-background-color: var(--blue-transparent-80);
+  --lake-infobox-quaternary-background-color: var(--blue-transparent-85);
   --lake-infobox-secondary-background-color: var(--blue-transparent-90);
   --lake-infobox-tertiary-background-color: var(--blue-transparent-85);
   --lake-ribbon-background-color: var(--blue-transparent-80);
@@ -338,6 +337,12 @@ $docuh5: 18px;
   --no-export-labs: var(--grey-transparent-95);
   --social-shape-gradient-end-color: var(--yellow-40);
   --social-shape-gradient-start-color: var(--yellow-45);
+  --social-social-background: var(--grey-95);
+  --social-social-code-background: var(--grey-90);
+  --social-social-code-border: var(--grey-80);
+  --social-social-colorful-background: var(--yellow-50);
+  --social-social-colorful-border: var(--yellow-40);
+  --social-social-colorful-code-background: var(--yellow-45);
   --social-thumbnail-background-color: var(--yellow-50);
   --social-thumbnail-background-shape-color: var(--yellow-45);
   --social-thumbnail-button-background-color: var(--grey-10);
@@ -379,7 +384,7 @@ html.darkmode {
   --doc-codebox-border-color: var(--grey-20);
   --doc-codebox-button-background-color: var(--grey-transparent-20);
   --doc-codebox-button-background-color-hover: var(--grey-transparent-30);
-  --doc-codebox-button-border: var(--grey-20);
+  --doc-codebox-button-border: var(--grey-30);
   --doc-menu-info-deprecated-border-color: var(--purple-80);
   --doc-scrollbar-bg: var(--grey-15);
   --doc-scrollbar-slider: var(--grey-20);
@@ -427,10 +432,11 @@ html.darkmode {
   --interactive-installation-icon-background-selected: var(--yellow-transparent-20);
   --interactive-installation-icon-border: var(--grey-transparent-30);
   --lake-architecture-background-hover: var(--blue-20);
-  --lake-architecture-logo-catalog-db: var(--grey-30);
+  --lake-architecture-logo-catalog-db: var(--blue-30);
+  --lake-architecture-logo-catalog-icon: var(--grey-05);
   --lake-architecture-logo-highlight-db: var(--grey-05);
   --lake-architecture-logo-highlight-lake: var(--grey-05);
-  --lake-architecture-logo-primary-db: var(--yellow-50);
+  --lake-architecture-logo-primary-db: var(--blue-40);
   --lake-architecture-logo-primary-lake: var(--blue-70);
   --lake-background-gradient-end: var(--blue-05);
   --lake-background-gradient-start: var(--blue-02);
@@ -442,9 +448,9 @@ html.darkmode {
   --lake-highlight-blue-text-color: var(--blue-70);
   --lake-infobox-border-color: var(--grey-transparent-20);
   --lake-infobox-primary-background-color: var(--blue-transparent-15);
-  --lake-infobox-quaternary-background-color: var(--blue-transparent-40);
+  --lake-infobox-quaternary-background-color: var(--blue-transparent-5);
   --lake-infobox-secondary-background-color: var(--blue-transparent-15);
-  --lake-infobox-tertiary-background-color: var(--blue-transparent-30);
+  --lake-infobox-tertiary-background-color: var(--blue-transparent-15);
   --lake-ribbon-background-color: var(--blue-transparent-20);
   --lake-ribbon-border-color: var(--blue-transparent-30);
   --main-blogpost-background-color: var(--grey-02);
@@ -493,6 +499,12 @@ html.darkmode {
   --no-export-labs: var(--grey-transparent-15);
   --social-shape-gradient-end-color: var(--grey-30);
   --social-shape-gradient-start-color: var(--grey-15);
+  --social-social-background: var(--grey-05);
+  --social-social-code-background: var(--grey-10);
+  --social-social-code-border: var(--grey-30);
+  --social-social-colorful-background: var(--purple-70);
+  --social-social-colorful-border: var(--purple-30);
+  --social-social-colorful-code-background: var(--purple-50);
   --social-thumbnail-background-color: var(--grey-10);
   --social-thumbnail-background-shape-color: var(--grey-15);
   --social-thumbnail-button-background-color: var(--yellow-50);
@@ -586,3 +598,4 @@ html.darkmode {
     --type-display-1: 38px;
   }
 }
+

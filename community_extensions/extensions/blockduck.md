@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: blockduck
   description: Live SQL Queries on Blockchain
-  version: 0.7.0
+  version: 0.8.0
   language: C++
   build: cmake
   license: MIT
@@ -18,15 +18,15 @@ extension:
 
 repo:
   github: luohaha/BlockDuck
-  ref: 074b7b1fe81fcc0464358636754cefc23d798cb5
+  ref: 60e9c73da0376c2be2e5f82dfb1c756516373344
 
 docs:
   https://yixins-organization.gitbook.io/blockduck-docs
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 484
-extension_download_count_pretty: 484
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_blockduck.png'
 layout: community_extension_doc
 ---
@@ -47,27 +47,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|            function_name            | function_type | description | comment | examples |
-|-------------------------------------|---------------|-------------|---------|----------|
-| bitcoin_blocks_rpc                  | table         | NULL        | NULL    |          |
-| bitcoin_inputs_rpc                  | table         | NULL        | NULL    |          |
-| bitcoin_outputs_rpc                 | table         | NULL        | NULL    |          |
-| bitcoin_transactions_rpc            | table         | NULL        | NULL    |          |
-| blockduck_create_contract_event_rpc | pragma        | NULL        | NULL    |          |
-| blockduck_create_contract_view_rpc  | pragma        | NULL        | NULL    |          |
-| blockduck_set_configs               | pragma        | NULL        | NULL    |          |
-| blockduck_set_verbose               | pragma        | NULL        | NULL    |          |
-| blockduck_version                   | table         | NULL        | NULL    |          |
-| eth_blocks_rpc                      | table         | NULL        | NULL    |          |
-| eth_latest_block_rpc                | table         | NULL        | NULL    |          |
-| eth_logs_rpc                        | table         | NULL        | NULL    |          |
-| eth_traces_rpc                      | table         | NULL        | NULL    |          |
-| eth_traces_v2_rpc                   | table         | NULL        | NULL    |          |
-| eth_transactions_rpc                | table         | NULL        | NULL    |          |
 
 

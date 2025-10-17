@@ -280,8 +280,11 @@ section.architecture {
 			position: relative;
 
 			h4 {
-				font-size: 17px;
-				font-weight: 600;
+				@include title-2;
+				
+				.choosen-storage{
+					font-weight: 400;
+				}
 			}
 
 			&:hover {
@@ -293,19 +296,27 @@ section.architecture {
 				}
 			}
 		}
+		
+		.database, 
+		.storage{
+			border-radius: 15px;
+			border: 1px solid var(--main-ribbon-border-color-blue, rgba(153, 216, 255, 0.60));
+			background: var(--lake-infobox-quaternary-background-color, rgba(178, 226, 255, 0.60));
+		}
 
 		.client {
-			width: 60%;
+			position: relative;
+			width: calc(50% - 8px);
 			overflow: hidden;
-			height: 393px;
 
 			.browser-wrap {
-				width: 100%;
-				margin-top: 60px;
-				position: relative;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				position: absolute;
 				
 				.browser {
-					width: 285px;
+					width: 250px;
 					transition: all 0.5s;
 				}
 				
@@ -316,14 +327,12 @@ section.architecture {
 				pointer-events: none;
 				position: absolute;
 				top: 0;
-				left: 50px;
 				z-index: 10;
 				transform: translate(0,0);
 			}
 
 			.browser {
 				position: relative;
-				left: 50px;
 				transition: all 0.4s;
 				z-index: 20;
 				
@@ -355,19 +364,13 @@ section.architecture {
 					transition: all 0.4s;
 
 					img {
-						height: 70px;
-						width: 70px;
+						height: 60px;
+						width: 60px;
 
 						&.active-icon {
 							opacity: 1;
 							visibility: visible;
 						}
-					}
-
-					.sub {
-						margin-top: 5px;
-						text-align: center;
-						transition: all 0.4s;
 					}
 				}
 			}
@@ -417,28 +420,11 @@ section.architecture {
 			}
 		}
 
-		.connector {
-			position: absolute;
-			bottom: 30px;
-			height: 10px;
-			width: 50px;
-			left: calc(-28px - 8px);
-			z-index: 101;
-
-			svg {
-				width: 100%;
-				height: auto;
-			}
-		}
-
-		.sub {
-			color: var(--main-text-secondary-color, #666);
-			font-size: 14px;
-		}
+		
 
 		.storage .folder,
 		.database .catalog {
-			height: 140px;
+			height: 120px;
 			padding: 30px;
 			text-align: center;
 
@@ -446,32 +432,27 @@ section.architecture {
 				width: 80px;
 			}
 		}
-		
-		.storage .folder .sub{
-			margin-top: 6px;
-		}
 
 		.database .catalog {
 			>img {
 				width: 65px;
-				transform: translateX(-10px);
 			}
 
 			.icons {
 				position: absolute;
-				top: 100px;
-				right: calc(50% - 20px);
-				transform: translate(50%);
-				width: 100px;
+				top: 97px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 65px;
 				height: 50px;
 
 				img {
-					width: 50px;
-					height: 50px;
+					width: 26px;
+					height: auto;
 					position: absolute;
 					left: 50%;
 					top: 0;
-					transform: translateX(-30%);
+					transform: translateX(-50%);
 					opacity: 0;
 					visibility: hidden;
 					transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.4s ease-in-out;
@@ -482,23 +463,43 @@ section.architecture {
 						transform: translateX(-50%);
 					}
 				}
-
-				.sub {
-					position: absolute;
-					width: 100%;
-					top: 55px;
-					left: 0;
-					text-align: center;
-				}
 			}
 		}
 	}
+	
+	span.choosen-catalog,
+	span.choosen-storage{
+		font-weight: 400;
+	}
 
 	.database-storage {
-		width: calc(40% - 15px);
+		position: relative;
+		width: calc(50% - 8px);
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
+		padding: 16px;
+		border-radius: 15px;
+		border: 1px solid var(--lake-ribbon-border-color, rgba(153, 216, 255, 0.60));
+		background: var(--lake-infobox-tertiary-background-color, rgba(178, 226, 255, 0.60));
+		
+		> h4 {
+			@include title-2;
+		}
+		
+		.connector {
+			position: absolute;
+			top: calc(50% + 1px);
+			height: 10px;
+			width: 50px;
+			left: calc(-28px - 8px);
+			z-index: 101;
+		
+			svg {
+				width: 100%;
+				height: auto;
+			}
+		}
 	}
 }
 
@@ -583,11 +584,13 @@ footer .sitefooter .footercontent > div a:hover{
 		width: 700px;
 	}
 	
-	section.architecture .diagram .client .browser.multi,
-	section.architecture .diagram .client .browser{
-		left: 30px;
+	section.architecture .diagram .client .browser-wrap .browser{
+		width: 220px;
+		.broser-content{
+			top: 52px;
+		}
 	}
-
+	
 }
 
 @media only screen and (max-width: 940px) {
@@ -659,15 +662,10 @@ footer .sitefooter .footercontent > div a:hover{
 
 			.client {
 				width: 100%;
-				height: 320px;
+				height: 250px;
 
 				.browser-wrap {
-					margin-top: 0;
-					display: block;
-					width: 345px;
-					left: 50%;
-					top: 50%;
-					transform: translate(-50%, calc(-50% - 25px));
+					
 					.browser {
 					
 						&.multi{
@@ -701,39 +699,43 @@ footer .sitefooter .footercontent > div a:hover{
 			.database-storage {
 				width: 100%;
 				flex-direction: row;
+				flex-wrap: wrap;
+				
+				>h4{
+					width: 100%;
+				}
+				
+				.connector{
+					left: calc(50% - 18px);
+					top: -14px;
+					transform: rotate(90deg);
+				}
 			}
 
 			.database,
 			.storage {
-				width: calc(50% - 7px);
-				height: 185px;
+				width: calc(50% - 8px);
+				height: 165px;
 			}
-
-			.database {
-				.catalog {
-					.icons {
+			
+			.storage .folder,
+			.database .catalog{
+				padding: 0;
+				display: flex;
+				height: calc(100% - 18px);
+				position: relative;
 				
-						img {
-							width: 45px;
-							height: 45px;
-						}
-
-						.sub {
-							top: 50px;
-						}
-					}
+				.icons{
+					top: 60px;
 				}
 			}
 
-			.connector {
-				bottom: unset;
-				top: -15px;
-				left: unset;
-				right: -10px;
-				transform: rotate(90deg);
-			}
+
 		}
+		
 	}
+	
+
 	
 	@media (pointer: coarse) {
 		section.architecture .diagram .client:hover .hover-content, section.architecture .diagram .database:hover .hover-content, section.architecture .diagram .storage:hover .hover-content{
@@ -746,7 +748,7 @@ footer .sitefooter .footercontent > div a:hover{
 @media only screen and (max-width: 590px) {
 	section.architecture .diagram .client {
 		height: unset;
-		aspect-ratio: 16 / 12;
+		aspect-ratio: 16 / 9;
 	}
 }
 
@@ -758,25 +760,28 @@ footer .sitefooter .footercontent > div a:hover{
 			}
 
 			.storage .folder img {
-				width: 75px;
+				width: 70px;
 			}
-			.client .browser-wrap{
-				width: 280px;
-				left: 50%;
-			}
-			.client .browser-wrap .browser{
-				width: 220px;
-			}
+		
+		
 			.client .browser .ducklake img{
-				width: 50px;
-				height: 50px;
+				width: 55px;
+				height: 55px;
 			}
 		}
 	}
 }
 
+@media only screen and (max-width: 490px) {
+	section.architecture .diagram .client{
+		aspect-ratio: 16 / 13;
+	}
+}
 
-section.architecture .diagram 
+
+
+
+
 
 // General Code-Highlight Styles (Todo: Remove from docu.scss 767 to 816)
 .highlight {
@@ -877,9 +882,8 @@ html.darkmode {
 			.connector svg path {
 				fill: #B2B2B2;
 			}
-			.database .catalog .icons img.duckdb,
-			.client .browser .icons img.duckdb_icon{
-				content: url('/images/deployment_diagram/dark/cat_icon-duckdb.svg');
+			.database .catalog .icons img:not(.duckdb){
+				filter: invert(1);
 			}
 			.client .browser .ducklake img.ducklake_icon{
 				content: url('/images/deployment_diagram/dark/ducklake_comb.svg');
@@ -887,17 +891,8 @@ html.darkmode {
 			.client .browser>img{
 				content: url('/images/deployment_diagram/dark/window.svg');
 			}
-			.database .catalog .icons img.postgre{
-				content: url('/images/deployment_diagram/dark/cat_icon-postgre.svg');
-			}
 			.storage .folder img{
 				content: url('/images/deployment_diagram/dark/parquet_folder.svg');
-			}
-			.database .catalog .icons img.sqlite{
-				content: url('/images/deployment_diagram/dark/cat_icon-sqlite.svg');
-			}
-			.database .catalog .icons img.mysql{
-				content: url('/images/deployment_diagram/dark/cat_icon-mysql.svg');
 			}
 			.database .catalog > img{
 				content: url('/images/deployment_diagram/dark/database.svg');

@@ -51,8 +51,8 @@ CALL enable_logging(level='debug');
 
 In DuckDB, log messages can have an associated log type. Log types allow two main things:
 
-- Fine-grained control over log message generation
-- Support for structured logging
+* Fine-grained control over log message generation
+* Support for structured logging
 
 ### Logging-Specific Types
 
@@ -112,23 +112,26 @@ Note that the `duckdb_logs` view is automatically updated to target the currentl
 the log storage may influence what is returned by the `duckdb_logs` function.
 
 ### Logging to stdout
+
 ```sql
 CALL enable_logging(storage='stdout');
 ```
 
-### Logging to file 
+### Logging to File 
 
 ```sql
 CALL enable_logging(storage='file', storage_config={'path': 'path/to/store/logs'});
 ```
-or using the equivalent shorthand
+
+or using the equivalent shorthand:
+
 ```sql
 CALL enable_logging(storage_path='path/to/store/logs');
 ```
 
 ## Advanced Usage
 
-### Normalized vs denormalized logging
+### Normalized vs. Denormalized Logging
 
 DuckDB's log storages can log in two ways: normalized vs denormalized.
 
@@ -147,9 +150,9 @@ and reduces the total size of the logs. To configure normalization of `file` log
 
 ```sql
 -- normalized: creates `/tmp/duckdb_log_contexts.csv` and `/tmp/duckdb_log_entries.csv`
-CALL enable_logging(storage_path='/tmp');
+CALL enable_logging(storage_path = '/tmp');
 -- denormalized: creates `/tmp/logs.csv`
-CALL enable_logging(storage_path='/tmp/logs.csv');
+CALL enable_logging(storage_path = '/tmp/logs.csv');
 ```
 
 Note that the difference between normalized and denormalized is typically hidden from users through the 'duckdb_logs' function,
@@ -197,16 +200,15 @@ buffering using:
 CALL enable_logging(storage_path='/tmp/mylogs', storage_buffer_size=2048);
 ```
 
-### Syntactic sugar
+### Syntactic Sugar
 
-DuckDB contains some syntactic sugar to make common paths:
+DuckDB contains some syntactic sugar to make common paths. For example, the following statements are all equal:
 
-The following statements are all equal 
 ```sql
 -- regular invocation 
-CALL enable_logging(storage='file', storage_config={'path': 'path/to/store/logs'});
+CALL enable_logging(storage='file', storage_config = {'path': 'path/to/store/logs'});
 -- using shorthand for common path storage config param 
-CALL enable_logging(storage='file', storage_path='path/to/store/logs');
+CALL enable_logging(storage='file', storage_path = 'path/to/store/logs');
 -- omitting `storage='file'` -> is implied from presence of `storage_config`
-CALL enable_logging(storage_config={'path': 'path/to/store/logs'});
+CALL enable_logging(storage_config = {'path': 'path/to/store/logs'});
 ```

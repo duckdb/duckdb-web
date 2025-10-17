@@ -34,6 +34,12 @@ Attach the database `file.db` with a block size of 16 kB:
 ATTACH 'file.db' (BLOCK_SIZE 16_384);
 ```
 
+Attach the database `file.db` with a row group size of 100 rows:
+
+```sql
+ATTACH 'file.db' (ROW_GROUP_SIZE 100);
+```
+
 Attach a SQLite database for reading and writing (see the [`sqlite` extension]({% link docs/stable/core_extensions/sqlite.md %}) for more information):
 
 ```sql
@@ -147,12 +153,15 @@ Database encryption implies using [storage version](#explicit-storage-versions) 
 
 ### Options
 
+Zero or more copy options may be provided within parentheses following the `ATTACH` statement. Parameter values can be passed in with or without wrapping in single quotes. Arbitrary expressions may be used for parameter values.
+
 | Name                | Description                                                                                                                 | Type      | Default value |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
 | `ACCESS_MODE`       | Access mode of the database (`AUTOMATIC`, `READ_ONLY`, or `READ_WRITE`).                                                    | `VARCHAR` | `automatic`   |
 | `COMPRESS`          | Whether the database is compressed. Only applicable for in-memory databases.                                                | `VARCHAR` | `false`       |
 | `TYPE`              | The file type (`DUCKDB` or `SQLITE`), or deduced from the input string literal (MySQL, PostgreSQL).                         | `VARCHAR` | `DUCKDB`      |
 | `BLOCK_SIZE`        | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
+| `ROW_GROUP_SIZE`    | The row group size of a new database file.                                                                                  | `UBIGINT` | `122880`    |
 | `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `v1.0.0`      |
 | `ENCRYPTION_KEY`    | The encryption key used for encrypting the database.                                                                        | `VARCHAR` | -             |
 | `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |

@@ -5,6 +5,8 @@ redirect_from:
 title: Browsing Offline
 ---
 
+The offline documentation is currently not available. Please check back later.
+<!--
 You can browse the DuckDB documentation offline in the following formats:
 
 * [Single Markdown file](/duckdb-docs.md) (approx. 4 MB)
@@ -18,3 +20,4 @@ You can browse the DuckDB documentation offline in the following formats:
   ```
 
   Then, connect to <http://localhost:8000/>.
+-->

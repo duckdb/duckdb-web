@@ -69,7 +69,7 @@ First we need to install DuckDB. This is a simple one-liner.
 pip install duckdb
 ```
 
-To set up the dataset for processing we download two parquet files using `wget`. After that, we load the data into a Pandas DataFrame using the built-in Parquet reader of DuckDB. The system automatically infers that we are reading a parquet file by looking at the `.parquet` extension of the file.
+To set up the dataset for processing we download two Parquet files using `wget`. After that, we load the data into a Pandas DataFrame using the built-in Parquet reader of DuckDB. The system automatically infers that we are reading a Parquet file by looking at the `.parquet` extension of the file.
 
 ```python
 lineitem = duckdb.query(
@@ -369,7 +369,7 @@ We can see that PandaSQL (powered by SQLite) is around 1000× slower than either
 
 ## Appendix C: Query on Parquet Directly
 
-In the benchmarks above, we fully read the parquet files into Pandas. However, DuckDB also has the capability of directly running queries on top of Parquet files (in parallel!). In this appendix, we show the performance of this compared to loading the file into Python first.
+In the benchmarks above, we fully read the Parquet files into Pandas. However, DuckDB also has the capability of directly running queries on top of Parquet files (in parallel!). In this appendix, we show the performance of this compared to loading the file into Python first.
 
 For the benchmark, we will run two queries: the simplest query (the ungrouped aggregate) and the most complex query (the final join) and compare the cost of running this query directly on the Parquet file, compared to loading it into Pandas using the `read_parquet` function.
 

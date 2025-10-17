@@ -44,8 +44,8 @@ DuckDB will then replay the write-ahead log and perform a [checkpoint operation]
 ### Using the Latest Stable and Preview Builds
 
 DuckDB is constantly improving, so there is a chance that the bug you have encountered has already been fixed in the codebase.
-First, try updating to the [**latest stable build**]({% link docs/installation/index.html %}?version=stable).
-If this doesn't resolve the problem, try using the [**preview build**]({% link docs/installation/index.html %}?version=main) (also known as the “nightly build”).
+First, try updating to the [**latest stable build**]({% link install/index.html %}?version=stable).
+If this doesn't resolve the problem, try using the [**preview build**]({% link install/index.html %}?version=main) (also known as the “nightly build”).
 
 If you would like use DuckDB with an [open pull request](https://github.com/duckdb/duckdb/pulls) applied to the codebase,
 you can try [building it from source]({% link docs/preview/dev/building/overview.md %}).

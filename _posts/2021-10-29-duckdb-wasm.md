@@ -2,13 +2,19 @@
 layout: post
 title: "DuckDB-Wasm: Efficient Analytical SQL in the Browser"
 author: André Kohn and Dominik Moritz
-excerpt: "[DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it in your browser at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)."
+excerpt: "[DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)."
 tags: ["using DuckDB"]
 ---
 
-<img src="/images/blog/duckdb_wasm.svg"
+<img src="{% link images/blog/duckdb_wasm-light.svg %}"
      alt="DuckDB-Wasm logo"
      width="240"
+     class="lightmode-img"
+     />
+<img src="{% link images/blog/duckdb_wasm-dark.svg %}"
+     alt="DuckDB-Wasm logo"
+     width="240"
+     class="darkmode-img"
      />
 
 *DuckDB-Wasm is fast! If you're here for performance numbers, head over to our benchmarks at [shell.duckdb.org/versus](https://shell.duckdb.org/versus).*
@@ -156,10 +162,17 @@ DuckDB-Wasm integrates a dedicated filesystem for WebAssembly. DuckDB itself is 
 The following figure shows our current web filesystem in action. The sequence diagram presents a user running a SQL query that scans a single Parquet file. The query is first offloaded to a dedicated web worker through a JavaScript API. There, it is passed to the WebAssembly module that processes the query until the execution hits the `parquet_scan` table function. This table function then reads the file using a buffered filesystem which, in turn, issues paged reads on the web filesystem. This web filesystem then uses an environment-specific runtime to read the file from several possible locations.
 
 <p align="center">
-    <img src="/images/blog/webfs.svg"
+    <img src="{% link images/blog/webfs-light.svg %}"
         alt="Example Web Filesystem shown visually"
         title="Web Filesystem"
         style="width:100%; max-width:800px"
+        class="lightmode-img"
+        />
+    <img src="{% link images/blog/webfs-dark.svg %}"
+        alt="Example Web Filesystem shown visually"
+        title="Web Filesystem"
+        style="width:100%; max-width:800px"
+        class="darkmode-img"
         />
 </p>
 
@@ -178,7 +191,7 @@ The rapid pace of this development presents challenges and opportunities for lib
 The most promising feature for DuckDB-Wasm is [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) which is already enabled by default in Chrome 95. DuckDB and DuckDB-Wasm are written in C++ and use exceptions for faulty situations. DuckDB does not use exceptions for general control flow but to automatically propagate errors upwards to the top-level plan driver. In native environments, these exceptions are implemented as "zero-cost exceptions" as they induce no overhead until they are thrown. With the WebAssembly MVP, however, that is no longer possible as the compiler toolchain Emscripten has to emulate exceptions through JavaScript. Without WebAssembly exceptions, DuckDB-Wasm calls throwing functions through a JavaScript hook that can catch exceptions emulated through JavaScript `aborts`. An example for these hook calls is shown in the following figure. Both stack traces originate from a single paged read of a Parquet file in DuckDB-Wasm. The left side shows a stack trace with the WebAssembly MVP and requires multiple calls through the functions `wasm-to-js-i*` . The right stack trace uses WebAssembly exceptions without any hook calls.
 
 <p align="center">
-    <img src="/images/blog/wasm-eh.png"
+    <img src="{% link images/blog/wasm-eh.png %}"
         alt="Exception handling shown visually"
         title="WebAssembly Exceptions"
         style="width:100%; max-width:600px;border-radius:4px;border:1px solid rgb(200,200,200);"

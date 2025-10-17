@@ -16,7 +16,7 @@ We hit the previous milestone, [10&nbsp;000 stars]({% post_url 2023-05-12-github
 Since then, the growth of stars has been slowly increasing, until the [release of version 1.0.0 in early June]({% post_url 2024-06-03-announcing-duckdb-100 %}) gave the boost that propelled the star count to 20&nbsp;000.
 
 <div align="center">
-    <img src="/images/blog/github-20k-stars-duckdb.png" alt="Star History of DuckDB" width="700"/>
+    <img src="{% link images/blog/github-20k-stars-duckdb.png %}" alt="Star History of DuckDB" width="700"/>
     <br/>
     (image source: <a href="https://star-history.com/">star-history.com</a>)
 </div>
@@ -28,7 +28,7 @@ The last few weeks since the release were quite eventful:
 1. MotherDuck, a DuckDB-based cloud warehouse, just [reached General Availability](https://motherduck.com/blog/announcing-motherduck-general-availability-data-warehousing-with-duckdb/) last week.
     Congratulations to the team on the successful release!
 
-2. We added support to DuckDB for [Delta Lake](https://delta.io/), an open-source Lakehouse framework.
+2. We added support to DuckDB for [Delta Lake](https://delta.io/), an open-source lakehouse framework.
     This feature was described in Sam Ansmink's [blog post]({% post_url 2024-06-10-delta %}) and Hannes Mühleisen's [keynote segment at the DATA+AI summit](https://www.youtube.com/watch?v=wuP6iEYH11E).
 
     With extensions for both [Delta Lake]({% link docs/stable/core_extensions/delta.md %}) and [Iceberg]({% link docs/stable/core_extensions/iceberg/overview.md %}),
@@ -37,14 +37,14 @@ The last few weeks since the release were quite eventful:
 3. We ran a poster campaign for DuckDB in Amsterdam:
 
     <div align="center">
-        <img src="/images/blog/duckdb-poster-campaign-amsterdam.jpg" alt="Big Data on your Laptop Poster in Amsterdam" width="700"/>
+        <img src="{% link images/blog/duckdb-poster-campaign-amsterdam.jpg %}" alt="Big Data on your Laptop Poster in Amsterdam" width="700"/>
         <br/>
     </div>
 
 4. [DuckDB Labs](https://duckdblabs.com) sponsored the [Hack4Her event](https://hack4her.github.io/), a female-focused student hackathon in the Netherlands. During the DuckDB Challenge of the event, teams built a community-driven app providing safe walking routes in Amsterdam using DuckDB and its [geospatial library]({% link docs/stable/core_extensions/spatial/overview.md %}).
 
     <div align="center">
-        <img src="/images/blog/hack4her-duckdb-amsterdam.jpg" alt="Hack4Her Event" width="700"/>
+        <img src="{% link images/blog/hack4her-duckdb-amsterdam.jpg %}" alt="Hack4Her Event" width="700"/>
         <br/>
     </div>
 
@@ -59,7 +59,7 @@ First, two books about DuckDB are expected to be released:
 
 Second, we are holding our next user community meeting, [DuckCon #5]({% link _events/2024-08-15-duckcon5.md %}) in Seattle on August 15 with the regular "State of the Duck" update as well as three regular talks and several lightning talks.
 
-<div align="center"> <a href="{% link _events/2024-08-15-duckcon5.md %}"><img src="/images/duckcon5-splashscreen.svg"
+<div align="center"> <a href="{% link _events/2024-08-15-duckcon5.md %}"><img src="{% link images/duckcon5-splashscreen.svg %}"
      alt="DuckCon #5 Splashscreen"
      width="680"
      /></a></div>

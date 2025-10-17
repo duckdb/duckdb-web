@@ -108,7 +108,7 @@ DuckDB provides some amazing features. For example,
 you can query remote files directly.
 
 Let's use an aggregate function to calculate the average of a column
-for a parquet remote file:
+for a Parquet remote file:
 
 ```php
 DuckDB::sql(

@@ -144,7 +144,7 @@ for (idx_t row = 0; row < row_count; row++) {
 <span class="kt">duckdb_type</span> <a href="#duckdb_column_type"><span class="nf">duckdb_column_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
 <span class="kt">duckdb_statement_type</span> <a href="#duckdb_result_statement_type"><span class="nf">duckdb_result_statement_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_column_logical_type"><span class="nf">duckdb_column_logical_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="nv">duckdb_arrow_options</span> <a href="#duckdb_result_get_arrow_options"><span class="nf">duckdb_result_get_arrow_options</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
+<span class="kt">duckdb_arrow_options</span> <a href="#duckdb_result_get_arrow_options"><span class="nf">duckdb_result_get_arrow_options</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_column_count"><span class="nf">duckdb_column_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_row_count"><span class="nf">duckdb_row_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_rows_changed"><span class="nf">duckdb_rows_changed</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
@@ -307,7 +307,7 @@ should be produced.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_arrow_options</span> <span class="nv">duckdb_result_get_arrow_options</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_arrow_options</span> <span class="nv">duckdb_result_get_arrow_options</span>(<span class="nv">
 </span>  <span class="kt">duckdb_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
@@ -436,9 +436,9 @@ by `duckdb_column_data` are undefined.
 int32_t *data = (int32_t *) duckdb_column_data(&result, 0);
 bool *nullmask = duckdb_nullmask_data(&result, 0);
 if (nullmask[row]) {
-printf("Data for row %d: NULL\n", row);
+    printf("Data for row %d: NULL\n", row);
 } else {
-printf("Data for row %d: %d\n", row, data[row]);
+    printf("Data for row %d: %d\n", row, data[row]);
 }
 ```
 

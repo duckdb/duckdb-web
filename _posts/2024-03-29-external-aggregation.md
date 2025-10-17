@@ -108,9 +108,15 @@ As shown in the image below, a small amount of “MetaData” is needed to recom
 The fixed-size rows are stored in “Row Pages”, and variable-size rows in “Var Pages”.
 
 <p align="center">
-    <img src="/images/external_aggregation/TupleDataCollection.svg"
+    <img src="{% link images/external_aggregation/TupleDataCollection-light.svg %}"
         alt="DuckDB's spillable page layout"
         width="600"
+        class="lightmode-img"
+        />
+    <img src="{% link images/external_aggregation/TupleDataCollection-dark.svg %}"
+        alt="DuckDB's spillable page layout"
+        width="600"    
+        class="darkmode-img"
         />
 </p>
 
@@ -146,9 +152,15 @@ For the most part, we still use this same approach.
 You’ll see this in the image below, which illustrates our new implementation.
 
 <p align="center">
-    <img src="/images/external_aggregation/OOCHA.svg"
+    <img src="{% link images/external_aggregation/OOCHA-light.svg %}"
         alt="DuckDB's external hash aggregation"
         width="600"
+        class="lightmode-img"
+        />
+    <img src="{% link images/external_aggregation/OOCHA-dark.svg %}"
+        alt="DuckDB's external hash aggregation"
+        width="600"
+        class="darkmode-img"
         />
 </p>
 

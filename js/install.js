@@ -9,7 +9,6 @@
     var $result = $('#result');
     var $templates = $('.instruction-collection');
     var $inst = $('.installation-instructions');
-    var $hint = $('.installation-hint');
     var $wrap = $result.children('.instruction-wrap');
     var $more = $result.children('.more');
     var $docsLink = $more.find('.docs-link');
@@ -18,24 +17,29 @@
     var $foldEnv = $container.find('.selection-foldout[data-foldout="environment"]');
     var $rgPlat = $container.find('.selection-options[data-role="platform"]');
     var $rgEnv = $container.find('.selection-options[data-role="environment"]');
-    var $archWrap = $container.find('.architecture-wrap');
 
     var state = {
       platform: null,
-      environment: null,
-      architecture: null
-    };
-
-    var urlFlags = {
-      archFromURL: false,
-      envFromURL: false
+      environment: null
     };
 
     function detectPlatform() {
-      var p = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
-      if (/Mac/i.test(p)) return 'macos';
-      if (/Win/i.test(p)) return 'windows';
-      if (/Linux|X11/i.test(p)) return 'linux';
+      if (window.UAParser) {
+        try {
+          var result = new UAParser().getResult();
+          var osName = (result && result.os && result.os.name) ? String(result.os.name).toLowerCase() : '';
+          if (osName) {
+            if (/mac\s?os|macos|os\s?x/.test(osName)) return 'macos';
+            if (/windows/.test(osName)) return 'windows';
+            if (/linux|ubuntu|debian|fedora|arch|gentoo|suse|centos/.test(osName)) return 'linux';
+          }
+        } catch (e) {}
+      }
+
+      var fallback = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
+      if (/Mac/i.test(fallback)) return 'macos';
+      if (/Win/i.test(fallback)) return 'windows';
+      if (/Linux|X11/i.test(fallback)) return 'linux';
       return 'macos';
     }
 
@@ -44,9 +48,6 @@
         var params = new URLSearchParams(window.location.search);
         state.platform = sanitizeParam(params.get('platform'));
         state.environment = sanitizeParam(params.get('environment'));
-        state.architecture = sanitizeParam(params.get('architecture'));
-        urlFlags.archFromURL = params.has('architecture');
-        urlFlags.envFromURL = params.has('environment');
       } catch (e) {}
     }
 
@@ -55,7 +56,6 @@
         var params = new URLSearchParams(window.location.search);
         setOrDelete(params, 'platform', state.platform);
         setOrDelete(params, 'environment', state.environment);
-        setOrDelete(params, 'architecture', state.architecture);
         var newQuery = params.toString();
         var newUrl = window.location.pathname + (newQuery ? '?' + newQuery : '') + window.location.hash;
         var prevQuery = window.location.search.replace(/^\?/, '');
@@ -81,8 +81,7 @@
       var pf = detectPlatform();
       return {
         platform: pf,
-        environment: 'cli',
-        architecture: null
+        environment: 'cli'
       };
     }
 
@@ -94,9 +93,6 @@
 
       var $activeEnv = $container.find('.selection-options[data-role="environment"] .option.active').first();
       state.environment = state.environment || ($activeEnv.data('value') || null) || def.environment;
-
-      var $activeArch = $container.find('.selection-options[data-role="architecture"] .option.active').first();
-      state.architecture = state.architecture || ($activeArch.data('value') || null) || def.architecture;
     }
 
     function selectOption(role, value) {
@@ -104,7 +100,6 @@
       var $group;
       if (role === 'platform') $group = $rgPlat;
       else if (role === 'environment') $group = $rgEnv;
-      else if (role === 'architecture') $group = getCurrentArchGroup();
       else $group = $();
       if (!$group || !$group.length) return;
 
@@ -127,52 +122,17 @@
       state[role] = value;
     }
 
-    // Reset architecture selection (used on platform change)
-    function clearArchitectureSelection() {
-      var $group = getCurrentArchGroup();
-      var $opts = $group && $group.length ? $group.find('.option') : $();
-      if (!$opts.length) {
-        state.architecture = null;
-        return;
-      }
-      $opts
-        .removeClass('active')
-        .attr('aria-checked', 'false')
-        .attr('tabindex', '-1');
-      $opts.first().attr('tabindex', '0');
-      state.architecture = null;
-    }
-
     function applyUIFromState() {
       selectOption('platform', state.platform);
       selectOption('environment', state.environment);
-      if (state.architecture) {
-        selectOption('architecture', state.architecture);
-      }
-    }
-
-    // Default architecture detection via UAParser (never overrides user/URL)
-    async function detectArchitecture() {
-      try {
-        if (window.UAParser) {
-          var result = new UAParser().getResult();
-          var arch = (result && result.cpu && result.cpu.architecture) ? String(result.cpu.architecture).toLowerCase() : '';
-          if (/^(arm64|aarch64)$/.test(arch)) return 'arm64';
-          if (/^(amd64|x86_64|x86-64|x64)$/.test(arch)) return 'x86_64';
-          var osName = (result && result.os && result.os.name) ? String(result.os.name).toLowerCase() : '';
-          if (/windows/.test(osName)) return 'x86_64';
-          if (/mac\s?os|macos/.test(osName)) return 'arm64';
-          if (/linux/.test(osName)) return 'x86_64';
-          return null;
-        }
-      } catch (e) {}
-      return null;
     }
 
     function labelFor(role) {
-      var $group = role === 'platform' ? $rgPlat : role === 'environment' ? $rgEnv : role === 'architecture' ? getCurrentArchGroup() : $();
+      var $group = role === 'platform' ? $rgPlat : role === 'environment' ? $rgEnv : $();
       if (!$group || !$group.length) return '';
       var $opt = $group.find('.option.active').first();
+      var displayLabel = $opt.attr('data-display-label');
+      if (displayLabel) return $.trim(displayLabel);
       var txt = $.trim(($opt.find('.label').text() || $opt.text() || ''));
       return txt;
     }
@@ -193,11 +153,11 @@
       $foldEnv.find('.selection-head .selected').text(envLabel ? ' ' + envLabel : '');
 
       var platLabel = labelFor('platform');
-      var arch = (state.platform === 'macos') ? '' : (state.architecture ? String(state.architecture) : '');
-      var parts = [];
-      if (platLabel) parts.push(platLabel);
-      if (arch) parts.push(arch);
-      var text = parts.length ? ' ' + parts.join(', ') : '';
+      var needsPlatform = environmentRequiresPlatform(state.environment);
+      if (!needsPlatform) {
+        platLabel = '';
+      }
+      var text = platLabel ? ' ' + platLabel : '';
       $foldPlat.find('.selection-head .selected').text(text);
 
       var $live = $container.find('.live-region');
@@ -207,7 +167,6 @@
       var liveText = [];
       if (envLabel) liveText.push(envLabel);
       if (platLabel) liveText.push(platLabel);
-      if (arch) liveText.push(arch);
       $live.text(liveText.join(', '));
     }
 
@@ -228,87 +187,60 @@
     }
 
     function updateFoldouts(animate) {
-      var shouldClosePlat = !!state.platform && (state.platform === 'macos' || !!state.architecture);
+      var needsPlatform = environmentRequiresPlatform(state.environment);
+
+      if (!needsPlatform) {
+        setFoldoutOpen($foldPlat, false, !!animate);
+        $foldPlat.addClass('disabled').attr('aria-disabled', 'true');
+        $rgPlat.attr('aria-disabled', 'true');
+        $rgPlat.find('.option')
+          .attr('aria-disabled', 'true')
+          .attr('tabindex', '-1');
+        return;
+      }
+
+      $foldPlat.removeClass('disabled').removeAttr('aria-disabled');
+      $rgPlat.removeAttr('aria-disabled');
+      var $platOptions = $rgPlat.find('.option');
+      $platOptions.attr('aria-disabled', 'false');
+      var $activePlat = $platOptions.filter('.active').first();
+      if ($activePlat.length) {
+        $platOptions.not($activePlat).attr('tabindex', '-1');
+        $activePlat.attr('tabindex', '0');
+      } else {
+        $platOptions.attr('tabindex', '-1');
+        $platOptions.first().attr('tabindex', '0');
+      }
+
+      var shouldClosePlat = !!state.platform;
       setFoldoutOpen($foldPlat, !shouldClosePlat, !!animate);
     }
 
     function bestTemplate() {
       var p = state.platform;
       var e = state.environment;
-      var a = state.architecture;
 
       if (!p || !e) return $();
 
-      var selExact = '[data-platform="' + cssEscape(p) + '"][data-environment="' + cssEscape(e) + '"]';
-      if (a) selExact += '[data-architecture="' + cssEscape(a) + '"]';
-      var $exact = $templates.find(selExact).first();
-      if ($exact.length) return $exact;
+      // Try platform + environment match
+      var sel = '[data-platform="' + cssEscape(p) + '"][data-environment="' + cssEscape(e) + '"]';
+      var $match = $templates.find(sel).first();
+      if ($match.length) return $match;
 
-      if (a) {
-        var selEnvArchNoPlat = '[data-environment="' + cssEscape(e) + '"][data-architecture="' + cssEscape(a) + '"]:not([data-platform])';
-        var $envArchNoPlat = $templates.find(selEnvArchNoPlat).first();
-        if ($envArchNoPlat.length) return $envArchNoPlat;
-      }
-
-      var selWildcard = '[data-platform="' + cssEscape(p) + '"][data-environment="' + cssEscape(e) + '"]:not([data-architecture]), ' +
-                        '[data-platform="' + cssEscape(p) + '"][data-environment="' + cssEscape(e) + '"][data-architecture=""]';
-      var $wild = $templates.find(selWildcard).first();
-      if ($wild.length) return $wild;
-
-      var selEnvOnly = '[data-environment="' + cssEscape(e) + '"]:not([data-platform]):not([data-architecture])';
-      var $envOnly = $templates.find(selEnvOnly).first();
-      if ($envOnly.length) return $envOnly;
-
-      return $();
+      // Fallback: environment-only (e.g., Python, Node.js)
+      var selEnvOnly = '[data-environment="' + cssEscape(e) + '"]:not([data-platform])';
+      return $templates.find(selEnvOnly).first();
     }
 
-    // Return true if architecture choice is required for current platform+environment
-    function requiresArchitecture(p, e) {
-      if (!e) return false;
-      // env-only snippet available -> no architecture required
-      var selEnvOnly = '[data-environment="' + cssEscape(e) + '"]:not([data-platform]):not([data-architecture])';
+    function environmentRequiresPlatform(environment) {
+      if (!environment) return false;
+      var selEnvOnly = '[data-environment="' + cssEscape(environment) + '"]:not([data-platform])';
       if ($templates.find(selEnvOnly).length) return false;
-      if (!p) return false;
-      // platform+env without architecture exists -> no architecture required
-      var selPlatEnvNoArch = '[data-platform="' + cssEscape(p) + '"][data-environment="' + cssEscape(e) + '"]:not([data-architecture])';
-      if ($templates.find(selPlatEnvNoArch).length) return false;
-      // otherwise architecture is required
-      return true;
+      var selWithPlatform = '[data-environment="' + cssEscape(environment) + '"][data-platform]';
+      return $templates.find(selWithPlatform).length > 0;
     }
 
     function render() {
-      // If environment is selected but architecture is missing and required, show hint instead of instructions
-      if (state.environment && !state.architecture && requiresArchitecture(state.platform, state.environment)) {
-        if ($wrap.length) $wrap.empty();
-        $altToggle
-          .hide()
-          .attr('aria-expanded', 'false')
-          .off('click.install')
-          .removeAttr('aria-controls')
-          .attr('tabindex', '-1')
-          .removeAttr('role');
-        $docsLink
-          .removeAttr('href')
-          .hide()
-          .attr('aria-disabled', 'true')
-          .attr('tabindex', '-1');
-        $inst.hide();
-        if ($hint && $hint.length) $hint.show();
-
-        if (state.platform) {
-          selectOption('platform', state.platform);
-          updateArchitectureVisibility();
-          var $grp = getCurrentArchGroup();
-          if ($grp && $grp.length) {
-            $grp.addClass('error');
-          }
-        }
-        return;
-      } else {
-        if ($hint && $hint.length) $hint.hide();
-        $container.find('.arch-inline').removeClass('error');
-      }
-
       var $tpl = bestTemplate();
 
       if (!$tpl.length) {
@@ -335,9 +267,6 @@
       if ($wrap.length) {
         $wrap.html($tpl.html());
         $wrap.find('.more').remove();
-      } else {
-        if ($hint && $hint.length) $hint.hide();
-        $container.find('.arch-inline').removeClass('error');
       }
 
       updateMore($tpl);
@@ -381,76 +310,6 @@
       }
     }
 
-    function updateAvailability() {
-      var $group = getCurrentArchGroup();
-      if (!$group || !$group.length) return;
-      $group.find('.option')
-        .removeClass('disabled')
-        .attr('aria-disabled', 'false')
-        .attr('tabindex', '0');
-    }
-
-
-    function getActivePlatformItem() {
-      var $active = $rgPlat.find('.option.active').first();
-      if (!$active.length) return $();
-      var $item = $active.closest('.platform-item');
-      return $item.length ? $item : $();
-    }
-
-    function getCurrentArchGroup() {
-      var $item = getActivePlatformItem();
-      return $item.length ? $item.children('.arch-inline.selection-options[data-role="architecture"]') : $();
-    }
-
-    function closeInlineArchGroups() {
-      $rgPlat.find('.platform-item .arch-inline.selection-options[data-role="architecture"]').removeClass('open');
-      $rgPlat.find('.platform-item .option[aria-controls]').removeAttr('aria-controls aria-expanded');
-    }
-
-    function ensureInlineArchGroup() {
-      var $item = getActivePlatformItem();
-      if (!$item.length) return;
-      var $group = $item.children('.arch-inline.selection-options[data-role="architecture"]');
-      if (!$group.length) return;
-
-      // optional aria linkage to the platform option
-      var id = $group.attr('id') || ('arch-inline-' + (Date.now()) + '-' + Math.floor(Math.random() * 1000));
-      $group.attr('id', id);
-      var $btn = $item.children('.option').first();
-      $btn.attr('aria-controls', id).attr('aria-expanded', 'true');
-
-      $group.attr('role', 'radiogroup');
-      $group.find('.option').attr('role', 'radio');
-      var $opts = $group.find('.option');
-      var $active = $opts.filter('.active').first();
-      if ($active.length) {
-        $opts.not($active).attr('tabindex', '-1');
-        $active.attr('tabindex', '0');
-      } else {
-        $opts.attr('tabindex', '-1');
-        $opts.first().attr('tabindex', '0');
-      }
-      
-      window.requestAnimationFrame(function () {
-        $group.addClass('open');
-      });
-
-      if (state.architecture) {
-        selectOption('architecture', state.architecture);
-      }
-    }
-
-    function updateArchitectureVisibility() {
-      if ($archWrap && $archWrap.length) {
-        $archWrap.hide();
-      }
-      closeInlineArchGroups();
-      if (requiresArchitecture(state.platform, state.environment) && state.platform !== 'macos') {
-        ensureInlineArchGroup();
-      }
-    }
-
     function onOptionActivate($opt) {
       if ($opt.attr('aria-disabled') === 'true' || $opt.hasClass('disabled')) return;
 
@@ -461,16 +320,6 @@
       if (!role || !value) return;
 
       selectOption(role, value);
-
-      // Reset architecture on platform change
-      if (role === 'platform') {
-        clearArchitectureSelection();
-        updateArchitectureVisibility();
-      }
-
-      if (role !== 'architecture') {
-        updateAvailability();
-      }
 
       writeURL();
       render();
@@ -494,6 +343,7 @@
 
       $container.on('click', '.selection-foldout', function () {
         var $fold = $(this);
+        if ($fold.hasClass('disabled')) return;
         if (!$fold.hasClass('open')) {
           var $content = $fold.children('.selection-content');
           $content.stop(true, true).slideDown(150);
@@ -504,6 +354,7 @@
       $container.on('click', '.selection-head', function (e) {
         e.stopPropagation();
         var $fold = $(this).closest('.selection-foldout');
+        if ($fold.hasClass('disabled')) return;
         var $content = $fold.children('.selection-content');
         if ($fold.hasClass('open')) {
           $content.stop(true, true).slideUp(150);
@@ -570,8 +421,6 @@
     readURL();
     normalizeState();
     applyUIFromState();
-    updateArchitectureVisibility();
-    updateAvailability();
     writeURL();
     $('.installation-instructions').hide();
     render();
@@ -579,25 +428,5 @@
     updateVersionLabel();
     updateFoldouts(false);
     wire();
-
-    // Auto-detect architecture if not set via URL or user choice
-    if (!state.architecture && !urlFlags.archFromURL && state.platform !== 'macos') {
-      detectArchitecture().then(function (arch) {
-        if (arch && !state.architecture) {
-          state.architecture = arch;
-          applyUIFromState();
-          updateArchitectureVisibility();
-          updateAvailability();
-          writeURL();
-          render();
-          updateHeadings();
-          updateVersionLabel();
-          updateFoldouts(true);
-        } else if (!arch) {
-          updateVersionLabel();
-          updateFoldouts(true);
-        }
-      });
-    }
   });
 })(jQuery);

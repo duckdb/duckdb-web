@@ -14,10 +14,10 @@ https://github.com/plotly/plotly.js/blob/master/dist/README.md
 
 Cartesian was the smallest distribution that included box plots
 -->
-<script src="{{ site.baseurl }}/js/plotly-cartesian-3.0.1.min.js"></script>
+<script src="/js/plotly-cartesian-3.0.1.min.js"></script>
 
 <div align="center" id="hilbert-curve">
-<img src="/images/blog/sorting-for-fast-selective-queries/Hilbert-curve_rounded-gradient-animated.gif" alt="Animated Hilbert Encoding across 2 axes." width="600"/>
+<img src="{% link images/blog/sorting-for-fast-selective-queries/Hilbert-curve_rounded-gradient-animated.gif %}" alt="Animated Hilbert Encoding across 2 axes." width="600"/>
 
 <a href="https://commons.wikimedia.org/w/index.php?curid=67998181">An animated Hilbert space filling curve</a> by <a href="//commons.wikimedia.org/w/index.php?title=User:TimSauder&amp;action=edit&amp;redlink=1" class="new" title="User:TimSauder (page does not exist)">TimSauder</a> – <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>
 
@@ -116,7 +116,7 @@ Our alternative sorting approaches are:
 
 These plots display query runtime when pulling from a DuckDB file hosted on S3.
 These same techniques can also be successfully applied to the [DuckLake](https://ducklake.select/) integrated data lake and catalog format!
-DuckLake is the modern evolution of the cloud data Lakehouse – take a minute to check out the [launch post]({% post_url 2025-05-27-ducklake %}) if you haven't yet!
+DuckLake is the modern evolution of the cloud data lakehouse – take a minute to check out the [launch post]({% post_url 2025-05-27-ducklake %}) if you haven't yet!
 DuckLake has an [additional concept of a partition](https://ducklake.select/docs/stable/duckdb/advanced_features/partitioning), which enables entire files to be skipped.
 To take full advantage of DuckLake, first partition your data (by time or otherwise) and then apply the techniques in this post when loading your data.
 
@@ -131,7 +131,7 @@ This is to better simulate a single user's experience accessing the dashboard in
 </summary>
 
 For reproducibility, here are the very standard queries used to initially load the data from Parquet, sort randomly, sort by `origin`, and sort by `origin` and then `destination`.
-The parquet files were downloaded [from Kaggle](https://www.kaggle.com/datasets/robikscube/flight-delay-dataset-20182022).
+The Parquet files were downloaded [from Kaggle](https://www.kaggle.com/datasets/robikscube/flight-delay-dataset-20182022).
 
 ```sql
 CREATE TABLE IF NOT EXISTS flights AS
@@ -320,7 +320,7 @@ WHERE origin = ⟨origin⟩ AND dest = ⟨dest⟩;
 
 <div id="remote_s3_query_performance_by_origin" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_origin.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_origin.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_origin');
@@ -333,7 +333,7 @@ Our advanced techniques are nearly as fast as the dedicated sort on `origin`.
 
 <div id="remote_s3_query_performance_by_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_destination.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_destination.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_destination');
@@ -346,7 +346,7 @@ The `origin_dest` approach of just appending `destination` to the list of sorted
 
 <div id="remote_s3_query_performance_by_origin_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_origin_destination.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_origin_destination.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_origin_destination');
@@ -446,7 +446,7 @@ WHERE
 </details>
 <div id="remote_s3_query_performance_by_date_origin" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_date_origin.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_date_origin.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_date_origin');
@@ -460,7 +460,7 @@ This is because the more approximate time buckets allow the Hilbert encoding to 
 
 <div id="remote_s3_query_performance_by_date_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_date_destination.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_date_destination.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_date_destination');
@@ -472,7 +472,7 @@ Querying by time and destination follows a very similar pattern, with the ideal 
 
 <div id="remote_s3_query_performance_by_date_origin_destination" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/remote_s3_query_performance_by_date_origin_destination.json')
+    fetch('/data/zonemaps/remote_s3_query_performance_by_date_origin_destination.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('remote_s3_query_performance_by_date_origin_destination');
@@ -524,7 +524,7 @@ However, there are likely diminishing returns when this metric is below the numb
 
 <div id="number_of_rowgroups_per_value" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/zonemaps/number_of_rowgroups_per_value.json')
+    fetch('/data/zonemaps/number_of_rowgroups_per_value.json')
         .then(res => res.json())
         .then(parsed_json => {
             let my_element = document.getElementById('number_of_rowgroups_per_value');

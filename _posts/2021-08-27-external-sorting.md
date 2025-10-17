@@ -160,7 +160,7 @@ This is especially slow when the final two blocks are merged: One thread has to 
 To fully parallelize this phase, we have implemented [Merge Path](https://arxiv.org/pdf/1406.2628.pdf) by Oded Green et al.
 Merge Path pre-computes *where* the sorted lists will intersect while merging, shown in the image below (taken from the paper).
 
-<img src="/images/blog/sorting/merge_path.png" alt="Merge Path – A Visually Intuitive Approach to Parallel Merging" title="Merge Path by Oded Green, Saher Odeh, Yitzhak Birk" style="max-width:70%"/>
+<img src="{% link images/blog/sorting/merge_path.png %}" alt="Merge Path – A Visually Intuitive Approach to Parallel Merging" title="Merge Path by Oded Green, Saher Odeh, Yitzhak Birk" style="max-width:70%"/>
 
 The intersections along the merge path can be efficiently computed using [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
 If we know where the intersections are, we can merge partitions of the sorted data independently in parallel.
@@ -205,7 +205,8 @@ Therefore, strings are represented by a pointer, which points into a separate bl
 
 We have changed our heap to also store strings row-by-row in buffer-managed blocks:
 
-<img src="/images/blog/sorting/heap.svg" alt="Each fixed-size row has its own variable-sized row in the heap" title="DuckDB's row layout heap"/>
+<img src="{% link images/blog/sorting/heap-light.svg %}" alt="Each fixed-size row has its own variable-sized row in the heap" title="DuckDB's row layout heap" class="lightmode-img" />
+<img src="{% link images/blog/sorting/heap-dark.svg %}" alt="Each fixed-size row has its own variable-sized row in the heap" title="DuckDB's row layout heap" class="darkmode-img" />
 
 Each row has an additional 8-byte field `pointer` which points to the start of this row in the heap.
 This is useless in the in-memory representation, but we will see why it is useful for the on-disk representation in just a second.
@@ -220,7 +221,8 @@ The 8-byte `pointer` field is overwritten with an 8-byte `offset` field, denotin
 This technique is called ["pointer swizzling"](https://en.wikipedia.org/wiki/Pointer_swizzling).
 When we swizzle the pointers, the row layout and heap block look like this:
 
-<img src="/images/blog/sorting/heap_swizzled.svg" alt="Pointers are 'swizzled': replaced by offsets" title="DuckDB's 'swizzled' row layout heap"/>
+<img src="{% link images/blog/sorting/heap_swizzled-light.svg %}" alt="Pointers are 'swizzled': replaced by offsets" title="DuckDB's 'swizzled' row layout heap" class="lightmode-img" />
+<img src="{% link images/blog/sorting/heap_swizzled-dark.svg %}" alt="Pointers are 'swizzled': replaced by offsets" title="DuckDB's 'swizzled' row layout heap" class="darkmode-img" />
 
 The pointers to the subsequent string values are also overwritten with an 8-byte relative offset, denoting how far this string is offset from the start of the row in the heap (hence every `stringA` has an offset of `0`: It is the first string in the row).
 Using relative offsets within rows rather than absolute offsets is very useful during sorting, as these relative offsets stay constant, and do not need to be updated when a row is copied.
@@ -304,7 +306,7 @@ This experiment is more of a micro-benchmark than anything else and is of little
 For our first experiment, we will look at how the systems scale with the number of rows.
 From the initial table with integers, we have made 9 more tables, with 10M, 20M, ..., 90M integers each.
 
-<img src="/images/blog/sorting/randints_scaling.svg" alt="Sorting 10-100M random integers" title="Random Integers Experiment" style="max-width:100%"/>
+<img src="{% link images/blog/sorting/randints_scaling.svg %}" alt="Sorting 10-100M random integers" title="Random Integers Experiment" style="max-width:100%"/>
 
 Being a traditional disk-based database system, SQLite always opts for an external sorting strategy.
 It writes intermediate sorted blocks to disk even if they fit in main-memory, therefore it is much slower.
@@ -315,7 +317,7 @@ DuckDB and ClickHouse both make very good use out of all available threads, with
 We are not sure what strategy HyPer uses.
 For our next experiment, we will zoom in on multi-threading, and see how well ClickHouse and DuckDB scale with the number of threads (we were not able to set the number of threads for HyPer).
 
-<img src="/images/blog/sorting/randints_threads.svg" alt="Sorting 100M random integers" title="Threads Experiment" style="max-width:70%"/>
+<img src="{% link images/blog/sorting/randints_threads.svg %}" alt="Sorting 100M random integers" title="Threads Experiment" style="max-width:70%"/>
 
 This plot demonstrates that Radix sort is very fast.
 DuckDB sorts 100M integers in just under 5 seconds using a single thread, which is much faster than ClickHouse.
@@ -328,7 +330,7 @@ For all of the of other the experiments, we have set both DuckDB and ClickHouse 
 For our last experiment with random integers, we will see how the sortedness of the input may impact performance.
 This is especially important to do in systems that use Quicksort because Quicksort performs much worse on inversely sorted data than on random data.
 
-<img src="/images/blog/sorting/randints_sortedness.svg" alt="Sorting 100M integers with different sortedness" title="Sortedness Experiment" style="max-width:100%"/>
+<img src="{% link images/blog/sorting/randints_sortedness.svg %}" alt="Sorting 100M integers with different sortedness" title="Sortedness Experiment" style="max-width:100%"/>
 
 Not surprisingly, all systems perform better on sorted data, sometimes by a large margin.
 ClickHouse, Pandas, and SQLite likely have some optimization here: e.g., keeping track of sortedness in the catalog, or checking sortedness while scanning the input.
@@ -365,7 +367,7 @@ The data was generated using DuckDB's TPC-DS extension, then exported to CSV in 
 Our first experiment on the `catalog_sales` table is selecting 1 column, then 2 columns, ..., up to all 34, always ordering by `cs_quantity` and `cs_item_sk`.
 This experiment will tell us how well the different systems can re-order payload columns.
 
-<img src="/images/blog/sorting/tpcds_catalog_sales_payload.svg" alt="Increasing the number of payload columns for the catalog_sales table" title="Catalog Sales Payload Experiment" style="max-width:100%"/>
+<img src="{% link images/blog/sorting/tpcds_catalog_sales_payload.svg %}" alt="Increasing the number of payload columns for the catalog_sales table" title="Catalog Sales Payload Experiment" style="max-width:100%"/>
 
 We see similar trends at SF10 and SF100, but for SF100, at around 12 payload columns or so, the data does not fit in memory anymore, and ClickHouse and HyPer show a big drop in performance.
 ClickHouse switches to an external sorting strategy, which is much slower than its in-memory strategy.
@@ -407,7 +409,7 @@ Now that we have seen how the systems handle large amounts of fixed-size types, 
 For our first experiment on the `customer` table, we will select all columns, and order them by either 3 integer columns (`c_birth_year`, `c_birth_month`, `c_birth_day`), or by 2 string columns (`c_first_name`, `c_last_name`).
 Comparing strings is much, much more difficult than comparing integers, because strings can have variable sizes, and need to be compare byte-by-byte, whereas integers always have the same comparison.
 
-<img src="/images/blog/sorting/tpcds_customer_type_sort_barplot.svg" alt="Comparing sorting speed with different sorting key types" title="Customer Sort Type Experiment" style="max-width:100%"/>
+<img src="{% link images/blog/sorting/tpcds_customer_type_sort_barplot.svg %}" alt="Comparing sorting speed with different sorting key types" title="Customer Sort Type Experiment" style="max-width:100%"/>
 
 As expected, ordering by strings is more expensive than ordering by integers, except for HyPer, which is impressive.
 Pandas has only a slightly bigger difference between ordering by integers and ordering by strings than ClickHouse and DuckDB.
@@ -420,7 +422,7 @@ In our next experiment, we will see how the payload type affects performance.
 `customer` has 10 integer columns and 8 string columns.
 We will either select all integer columns or all string columns and order by (`c_birth_year`, `c_birth_month`, `c_birth_day`) every time.
 
-<img src="/images/blog/sorting/tpcds_customer_type_payload_barplot.svg" alt="Comparing sorting speed with different payload types" title="Customer Payload Type Experiment" style="max-width:100%"/>
+<img src="{% link images/blog/sorting/tpcds_customer_type_payload_barplot.svg %}" alt="Comparing sorting speed with different payload types" title="Customer Payload Type Experiment" style="max-width:100%"/>
 
 As expected, re-ordering strings takes much more time than re-ordering integers.
 Pandas has an advantage here because it already has the strings in memory, and most likely only needs to re-order pointers to these strings.
@@ -508,7 +510,8 @@ With predicated code, the CPU does not have to predict which instructions to exe
 A simple trick to reduce I/O is zig-zagging through the pairs of blocks to merge in the cascaded merge sort.
 This is illustrated in the image below (dashes arrows indicate in which order the blocks are merged).
 
-<img src="/images/blog/sorting/zigzag.svg" alt="Zig-zagging through the merge sort iterations to reduce read and write operations" title="Zig-zagging to reduce I/O"/>
+<img src="{% link images/blog/sorting/zigzag-light.svg %}" alt="Zig-zagging through the merge sort iterations to reduce read and write operations" title="Zig-zagging to reduce I/O" class="lightmode-img" />
+<img src="{% link images/blog/sorting/zigzag-dark.svg %}" alt="Zig-zagging through the merge sort iterations to reduce read and write operations" title="Zig-zagging to reduce I/O" class="darkmode-img" />
 
 By zig-zagging through the blocks, we start an iteration by merging the last blocks that were merged in the previous iteration.
 Those blocks are likely still in memory, saving us some precious read/write operations.
@@ -521,7 +524,7 @@ We also ran the `catalog_sales` SF100 experiment on a machine with x86 CPU archi
 The machine has an Intel(R) Xeon(R) W-2145 CPU @ 3.70 GHz, which has 8 cores (up to 16 virtual threads), and 128 GB of RAM, so this time the data fits fully in memory.
 We have set the number of threads that DuckDB and ClickHouse use to 8 because we saw no visibly improved performance past 8.
 
-<img src="/images/blog/sorting/jewels_payload.svg" alt="Increasing the number of payload columns for the catalog_sales table (jewels)" title="Catalog Sales Payload Experiment (on bigger machine)" style="max-width:90%"/>
+<img src="{% link images/blog/sorting/jewels_payload.svg %}" alt="Increasing the number of payload columns for the catalog_sales table (jewels)" title="Catalog Sales Payload Experiment (on bigger machine)" style="max-width:90%"/>
 
 Pandas performs comparatively worse than on the MacBook, because it has a single-threaded implementation, and this CPU has a lower single-thread performance.
 Again, Pandas crashes with an error (this machine does not dynamically increase swap):

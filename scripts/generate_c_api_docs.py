@@ -47,7 +47,7 @@ def is_line_separator(l):
     return l.strip().startswith('//===---')
 
 
-lines = [x.strip() for x in text.split('\n')]
+lines = text.split('\n')
 docs = []
 code = []
 current_group = None
@@ -127,6 +127,7 @@ duckdb_aggregate_function_set
 duckdb_appender
 duckdb_arrow
 duckdb_arrow_array
+duckdb_arrow_options
 duckdb_arrow_schema
 duckdb_bind_info
 duckdb_blob

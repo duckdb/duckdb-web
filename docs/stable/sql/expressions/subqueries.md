@@ -49,6 +49,20 @@ SELECT course FROM grades WHERE grade = (SELECT min(grade) FROM grades);
 |--------|
 | Math   |
 
+## `ARRAY` Subqueries
+
+Subqueries that return multiple values can be wrapped with `ARRAY` to collect all results in a list.
+
+```sql
+SELECT ARRAY(SELECT grade FROM grades) AS all_grades;
+```
+
+| all_grades |
+|-----------:|
+| [7, 9, 8]  |
+
+
+
 ## Subquery Comparisons: `ALL`, `ANY` and `SOME`
 
 In the section on [scalar subqueries](#scalar-subquery), a scalar expression was compared directly to a subquery using the equality [comparison operator]({% link docs/stable/sql/expressions/comparison_operators.md %}#comparison-operators) (`=`).

@@ -1,5 +1,5 @@
 ---
-github_repository: https://github.com/marcboeker/go-duckdb
+github_repository: https://github.com/duckdb/duckdb-go
 layout: docu
 redirect_from:
 - /docs/api/go
@@ -8,19 +8,17 @@ redirect_from:
 title: Go Client
 ---
 
-> The latest version of the DuckDB Go client is {{ site.current_duckdb_go_version }}.
+> The DuckDB Go client's project recently moved from [`github.com/marcboeker/go-duckdb`](https://github.com/marcboeker/go-duckdb) to [`github.com/duckdb/duckdb-go`](https://github.com/duckdb/duckdb-go) starting with `v2.5.0`. Please follow the [migration guide](https://github.com/duckdb/duckdb-go#migration-from-marcboekergo-duckdb) to update to the new repository.
 
-The DuckDB Go driver, `go-duckdb`, allows using DuckDB via the `database/sql` interface.
+The DuckDB Go client, `duckdb-go`, allows using DuckDB via the `database/sql` interface.
 For examples on how to use this interface, see the [official documentation](https://pkg.go.dev/database/sql) and [tutorial](https://go.dev/doc/tutorial/database-access).
-
-> The `go-duckdb` project, hosted at <https://github.com/marcboeker/go-duckdb>, is the official DuckDB Go client.
 
 ## Installation
 
-To install the `go-duckdb` client, run:
+To install the `duckdb-go` client, run:
 
 ```batch
-go get github.com/marcboeker/go-duckdb/v2
+go get github.com/duckdb/duckdb-go/v2
 ```
 
 ## Importing
@@ -30,7 +28,7 @@ To import the DuckDB Go package, add the following entries to your imports:
 ```go
 import (
 	"database/sql"
-	_ "github.com/marcboeker/go-duckdb/v2"
+	_ "github.com/duckdb/duckdb-go/v2"
 )
 ```
 
@@ -83,7 +81,7 @@ import (
 	"fmt"
 	"log"
 
-	_ "github.com/marcboeker/go-duckdb/v2"
+	_ "github.com/duckdb/duckdb-go/v2"
 )
 
 func main() {
@@ -120,4 +118,8 @@ func main() {
 
 ### More Examples
 
-For more examples, see the [examples in the `duckdb-go` repository](https://github.com/marcboeker/go-duckdb/tree/main/examples).
+For more examples, see the [examples in the `duckdb-go` repository](https://github.com/duckdb/duckdb-go/tree/main/examples).
+
+## Acknowledgements
+
+We would like to thank [Marc Boeker](https://github.com/marcboeker) for the initial implementation of the DuckDB Go client.

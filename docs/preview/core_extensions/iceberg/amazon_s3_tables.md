@@ -33,9 +33,9 @@ Alternatively, you can set the values manually:
 ```sql
 CREATE SECRET (
     TYPE s3,
-    KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
-    SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
-    REGION '⟨us-east-1⟩'
+    KEY_ID '⟨key_id⟩',
+    SECRET '⟨secret⟩',
+    REGION '⟨region⟩'
 );
 ```
 

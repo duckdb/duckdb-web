@@ -5,7 +5,6 @@ title: CREATE MACRO Statement
 ---
 
 The `CREATE MACRO` statement can create a scalar or table macro (function) in the catalog.
-A macro may only be a single `SELECT` statement (similar to a `VIEW`), but it has the benefit of accepting parameters.
 
 For a scalar macro, `CREATE MACRO` is followed by the name of the macro, and optionally parameters within a set of parentheses. The keyword `AS` is next, followed by the text of the macro. By design, a scalar macro may only return a single value.
 For a table macro, the syntax is similar to a scalar macro except `AS` is replaced with `AS TABLE`. A table macro may return a table of arbitrary size and shape.
@@ -52,7 +51,7 @@ Macros are schema-dependent, and have an alias, `FUNCTION`:
 CREATE FUNCTION main.my_avg(x) AS sum(x) / count(x);
 ```
 
-Create a macro with default constant parameters:
+Create a macro with a default parameter:
 
 ```sql
 CREATE MACRO add_default(a, b := 5) AS a + b;
@@ -62,6 +61,12 @@ Create a macro `arr_append` (with a functionality equivalent to `array_append`):
 
 ```sql
 CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
+```
+
+Create a macro with a typed parameter:
+
+```sql
+CREATE MACRO is_maximal(a INTEGER) AS a = 2^31 - 1;
 ```
 
 ### Table Macros
@@ -118,7 +123,7 @@ SELECT * FROM checksum('tbl');
 
 ## Overloading
 
-It is possible to overload a macro based on the amount of parameters it takes, this works for both scalar and table macros.
+It is possible to overload a macro based on the types or the number of its parameters; this works for both scalar and table macros.
 
 By providing overloads we can have both `add_x(a, b)` and `add_x(a, b, c)` with different function bodies.
 
@@ -137,6 +142,24 @@ SELECT
 | two_args | three_args |
 |----------|------------|
 |    63    |     84     |
+
+
+```sql
+CREATE OR REPLACE MACRO is_maximal
+    (a TINYINT) AS a = 2^7 - 1,
+    (a INT) AS a = 2^31 - 1;
+```
+
+```sql
+SELECT
+    is_maximal(127::TINYINT) AS tiny,
+    is_maximal(127) AS regular;
+```
+
+|   tiny   |  regular   |
+|----------|------------|
+|   true   |    false   |
+
 
 ## Syntax
 
@@ -184,8 +207,6 @@ Could not choose a best candidate function for the function call "add(STRING_LIT
 ```
 
 Macros can have default parameters.
-Unlike some languages, default parameters must be named
-when the macro is invoked.
 
 `b` is a default parameter:
 
@@ -199,39 +220,7 @@ The following will result in 42:
 SELECT add_default(37);
 ```
 
-The following will throw an error:
-
-```sql
-SELECT add_default(40, 2);
-```
-
-```console
-Binder Error:
-Macro function 'add_default(a)' requires a single positional argument, but 2 positional arguments were provided.
-```
-
-Default parameters must used by assigning them like the following:
-
-```sql
-SELECT add_default(40, b := 2) AS x;
-```
-
-| x  |
-|---:|
-| 42 |
-
-However, the following fails:
-
-```sql
-SELECT add_default(b := 2, 40);
-```
-
-```console
-Binder Error:
-Positional parameters cannot come after parameters with a default value!
-```
-
-The order of default parameters does not matter:
+The order of named parameters does not matter:
 
 ```sql
 CREATE MACRO triple_add(a, b := 5, c := 10) AS a + b + c;
@@ -253,10 +242,10 @@ The `add` macro we defined above is used in a query:
 SELECT add(40, 2) AS x;
 ```
 
-Internally, add is replaced with its definition of `a + b`:
+Internally, `add` is replaced with its definition of `a + b`:
 
 ```sql
-SELECT a + b; AS x
+SELECT a + b AS x;
 ```
 
 Then, the parameters are replaced by the supplied arguments:
@@ -267,23 +256,9 @@ SELECT 40 + 2 AS x;
 
 ## Limitations
 
-### Using Named Parameters
-
-Currently, positional macro parameters can only be used positionally, and named parameters can only be used by supplying their name. Therefore, the following will not work:
-
-```sql
-CREATE MACRO my_macro(a, b := 42) AS (a + b);
-SELECT my_macro(32, 52);
-```
-
-```console
-Binder Error:
-Macro function 'my_macro(a)' requires a single positional argument, but 2 positional arguments were provided.
-```
-
 ### Using Subquery Macros
 
-If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DuckDB will return the following error:
+Table macros as well as scalar macros defined using scalar subqueries cannot be used in the arguments of table functions. DuckDB will return the following error:
 
 ```console
 Binder Error:

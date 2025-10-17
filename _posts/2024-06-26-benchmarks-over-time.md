@@ -9,11 +9,11 @@ tags: ["benchmark"]
 ---
 
 <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
-<script src="{{ site.baseurl }}/js/plotly-1.58.5.min.js"></script>
+<script src="/js/plotly-1.58.5.min.js"></script>
 
 <div id="overall_results_by_time_header" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_overall_results_by_time.json')
+    fetch('/data/perf_over_time_overall_results_by_time.json')
         .then(res => res.json())
         .then(parsed_json => {
             let overall_results_by_time_header = document.getElementById('overall_results_by_time_header');
@@ -49,7 +49,7 @@ This approach avoids many comparison pitfalls, and also provides several valuabl
 
 There are some limitations when looking at the performance of a system over time.
 If a feature is brand new, there is no prior performance to compare to!
-As a result, this post focuses on fundamental workloads rather than DuckDB's ever-increasing set of integrations with different Lakehouse data formats, cloud services, and more.
+As a result, this post focuses on fundamental workloads rather than DuckDB's ever-increasing set of integrations with different lakehouse data formats, cloud services, and more.
 
 The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]({% link docs/stable/sql/dialect/friendly_sql.md %}) additions, as those have also been added more recently.
 (When writing these queries, it felt like going back in time!)
@@ -78,7 +78,7 @@ The latest DuckDB can complete one run of the full benchmark suite in under 35 s
 
 <div id="overall_results_by_time" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_overall_results_by_time.json')
+    fetch('/data/perf_over_time_overall_results_by_time.json')
         .then(res => res.json())
         .then(parsed_json => {
             let overall_results_by_time = document.getElementById('overall_results_by_time');
@@ -96,7 +96,7 @@ Due to the variety of uses for window functions, and their relative algorithmic 
 
 <div id="overall_results_by_time_relative" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_overall_results_by_time_relative.json')
+    fetch('/data/perf_over_time_overall_results_by_time_relative.json')
         .then(res => res.json())
         .then(parsed_json => {
             let overall_results_by_time_relative = document.getElementById('overall_results_by_time_relative');
@@ -140,7 +140,7 @@ See [DuckDB's release calendar]({% link release_calendar.md %}) for the full ver
 
 <div id="overall_results_by_version" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_overall_results_by_version.json')
+    fetch('/data/perf_over_time_overall_results_by_version.json')
         .then(res => res.json())
         .then(parsed_json => {
             let overall_results_by_version = document.getElementById('overall_results_by_version');
@@ -153,7 +153,7 @@ If you remember the version that you last tested, you can compare how much faste
 
 <div id="overall_results_by_version_relative" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_overall_results_by_version_relative.json')
+    fetch('/data/perf_over_time_overall_results_by_version_relative.json')
         .then(res => res.json())
         .then(parsed_json => {
             let overall_results_by_version_relative = document.getElementById('overall_results_by_version_relative');
@@ -168,7 +168,7 @@ If you remember the version that you last tested, you can compare how much faste
 
 <div id="perf_over_time_csv_reader_area" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_csv_reader_area.json')
+    fetch('/data/perf_over_time_csv_reader_area.json')
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_csv_reader_area = document.getElementById('perf_over_time_csv_reader_area');
@@ -184,7 +184,7 @@ DuckDB has **improved CSV reader performance by nearly 3×**, while adding the a
 
 <div id="perf_over_time_group_by_area" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_group_by_area.json')
+    fetch('/data/perf_over_time_group_by_area.json')
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_group_by_area = document.getElementById('perf_over_time_group_by_area');
@@ -212,7 +212,7 @@ You can see that this was achieved while continuing to improve performance for t
 
 <div id="perf_over_time_join_area" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_join_area.json')
+    fetch('/data/perf_over_time_join_area.json')
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_join_area = document.getElementById('perf_over_time_join_area');
@@ -233,7 +233,7 @@ This focus has also benefitted the smaller-than-memory case and has led to the i
 
 <div id="perf_over_time_window_area" style="width:100%;height:510px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_window_area.json')
+    fetch('/data/perf_over_time_window_area.json')
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_window_area = document.getElementById('perf_over_time_window_area');
@@ -256,7 +256,7 @@ We leave benchmarking that feature for future work!
 
 <div id="perf_over_time_export_area" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_export_area.json')
+    fetch('/data/perf_over_time_export_area.json')
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_export_area = document.getElementById('perf_over_time_export_area');
@@ -285,7 +285,7 @@ This prevents substantial unnecessary processing for high-cardinality columns wh
 
 <div id="perf_over_time_export_arrow_pandas_parquet" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_export_arrow_pandas_parquet.json')
+    fetch('/data/perf_over_time_export_arrow_pandas_parquet.json')
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_export_arrow_pandas_parquet = document.getElementById('perf_over_time_export_arrow_pandas_parquet');
@@ -305,7 +305,7 @@ It is even competitive with Apache Arrow.
 
 <div id="perf_over_time_scan_other_formats_area" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_scan_other_formats_area.json')
+    fetch('/data/perf_over_time_scan_other_formats_area.json')
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_scan_other_formats_area = document.getElementById('perf_over_time_scan_other_formats_area');
@@ -325,7 +325,7 @@ DuckDB is a great fit for this type of work!
 
 <div id="perf_over_time_scan_other_formats_arrow_pandas_parquet" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_scan_other_formats_arrow_pandas_parquet.json')
+    fetch('/data/perf_over_time_scan_other_formats_arrow_pandas_parquet.json')
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_scan_other_formats_arrow_pandas_parquet = document.getElementById('perf_over_time_scan_other_formats_arrow_pandas_parquet');
@@ -346,7 +346,7 @@ Analyzing larger-than-memory data is a superpower for DuckDB, allowing it to be 
 
 <div id="perf_over_time_scale_by_time" style="width:100%;height:400px;"></div>
 <script>
-    fetch('{{ site.baseurl }}/data/perf_over_time_scale_by_time.json')
+    fetch('/data/perf_over_time_scale_by_time.json')
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_scale_by_time = document.getElementById('perf_over_time_scale_by_time');
@@ -372,8 +372,8 @@ Future work can further test the boundaries of what is possible with DuckDB's ou
 
 DuckDB's performance on the same hardware has improved dramatically, and at the same time, the capabilities of hardware are increasing rapidly as well.
 
-![ram-prices](/images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-memory.png){: width="360" }![ssd-prices](/images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-SSDs.png){: width="360" }
-
+![ram-prices]({% link images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-memory.png %}){: width="450" }
+![ssd-prices]({% link images/blog/performance_over_time/historical-cost-of-computer-memory-and-storage-SSDs.png %}){: width="450" }
 Source: [Our World in Data](https://ourworldindata.org/grapher/historical-cost-of-computer-memory-and-storage?yScale=linear&time=2021..latest&facet=metric&uniformYAxis=0)
 
 The price of RAM has declined by 2.2× and the price of SSD storage has decreased by 2.7× from 2021 to 2023 alone.

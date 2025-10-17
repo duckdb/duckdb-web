@@ -12,19 +12,19 @@ We are proud to release DuckDB v1.4.0, named “Andium” after the _Andean teal
 
 In this blog post, we cover the most important updates for this release around support, features and extensions. DuckDB is moving rather quickly, and we could cover only a small fraction of the changes in this release. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
 
-> To install the new version, please visit the [installation page]({% link docs/installation/index.html %}). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
-## Long Term Support (LTS) Edition
+## Long-Term Support (LTS) Edition
 
 We are delighted to see that DuckDB is used regularly in production environments and realize that such deployments often come with a requirement for long-term maintenance.
 In the past, we would automatically deprecate old DuckDB versions whenever the newer version was released. But we’re changing this today.
 
-Starting with this release, every _other_ DuckDB version is going to be a Long Term Support (LTS) edition.
+Starting with this release, every _other_ DuckDB version is going to be a Long-Term Support (LTS) edition.
 For LTS DuckDB versions, [community support](https://duckdblabs.com/community_support_policy/) will last a year after the release (for now).
 [DuckDB Labs](https://duckdblabs.com/) is also starting to offer support for older LTS versions after their community support has expired.
 
-![DuckDB LTS support]({{ site.baseurl }}/images/blog/lts-support-light.svg){: .lightmode-img }
-![DuckDB LTS support]({{ site.baseurl }}/images/blog/lts-support-dark.svg){: .darkmode-img }
+![DuckDB LTS support](/images/blog/lts-support-light.svg){: .lightmode-img }
+![DuckDB LTS support](/images/blog/lts-support-dark.svg){: .darkmode-img }
 
 <details markdown='1'>
 <summary markdown='span'>
@@ -240,20 +240,13 @@ A separate blog post will be coming.
 
 ## Performance and Optimizations
 
-### Sorting Rework
-
-[Laurens (@lnkuiper)](https://github.com/lnkuiper) [rewrote DuckDB’s sorting implementation](https://github.com/duckdb/duckdb/pull/17584#thread-scaling-performance) ([again](https://github.com/duckdb/duckdb/pull/1561)). This new implementation uses a k-way merge sort to reduce data movement. It is also adaptive to pre-sorted data and uses a new API that makes it possible to use this new sorting code elsewhere in DuckDB, for example in window functions. We are seeing much better thread scaling performance with this implementation. We will publish a separate blog post with more detailed performance measurements.
-
-### Materializing Common Table Expressions
-
-Common table expressions (CTEs) are now materialized by default (instead of inlining them). This both improves performance and resolves some correctness bugs that happened due to inlining.
-This feature was [implemented](https://github.com/duckdb/duckdb/pull/17459) by [Denis Hirn (kryonix)](https://github.com/kryonix), who [contributed support for recursive CTEs](https://github.com/duckdb/duckdb/pull/404) back in 2020.
+DuckDB v1.4.0 received a number of performance optimizations.
 
 ### Checkpointing In-Memory Tables
 
 In-memory tables now support [checkpointing](https://github.com/duckdb/duckdb/pull/18348). This has two key benefits:
 
-* In-memory tables now support compression. This is disabled by default – you can turn it on using:
+* In-memory tables now support compression, which can have a significant (5-10×) performance boost for some queries. This is disabled by default – you can turn it on using:
 
   ```sql
   ATTACH ':memory:' AS memory_compressed (COMPRESS);
@@ -262,11 +255,26 @@ In-memory tables now support [checkpointing](https://github.com/duckdb/duckdb/pu
 
 * Checkpointing triggers vacuuming deleted rows, allowing space to be reclaimed after deletes/truncation.
 
+### Sorting Rework
+
+[Laurens (@lnkuiper)](https://github.com/lnkuiper) [rewrote DuckDB’s sorting implementation](https://github.com/duckdb/duckdb/pull/17584#thread-scaling-performance) ([again](https://github.com/duckdb/duckdb/pull/1561)). This new implementation uses a k-way merge sort to reduce data movement. It is also adaptive to pre-sorted data and uses a new API that makes it possible to use this new sorting code elsewhere in DuckDB, for example in window functions. We are seeing much better thread scaling performance with this implementation. We will publish a separate blog post with more detailed performance measurements.
+
+> Update We have now covered this in a [separate blog post]({% post_url 2025-09-24-sorting-again %}).
+
+### Materializing Common Table Expressions
+
+Common table expressions (CTEs) are now materialized by default (instead of inlining them). This both improves performance and resolves some correctness bugs that happened due to inlining.
+This feature was [implemented](https://github.com/duckdb/duckdb/pull/17459) by [Denis Hirn (kryonix)](https://github.com/kryonix), who [contributed support for recursive CTEs](https://github.com/duckdb/duckdb/pull/404) back in 2020.
+
+### Additional Optimizations
+
+DuckBB v1.4.0 fixes some [scaling issues](https://github.com/duckdb/duckdb/pull/17985), supports [caching for hashes of string dictionaries](https://github.com/duckdb/duckdb/pull/18580) and has several [aggregation optimizations](https://github.com/duckdb/duckdb/pull/17718).
+
 ## Distribution 
 
-### MacOS Notarization
+### macOS Notarization
 
-MacOS has a fairly advanced model to ensure system integrity built around cryptographic signatures along with so-called “[notarization](https://developer.apple.com/documentation/Security/notarizing-macos-software-before-distribution)” by Apple. We had been signing our binaries [for about two years already](https://github.com/duckdb/duckdb/pull/7484).
+macOS has a fairly advanced model to ensure system integrity built around cryptographic signatures along with so-called “[notarization](https://developer.apple.com/documentation/Security/notarizing-macos-software-before-distribution)” by Apple. We had been signing our binaries [for about two years already](https://github.com/duckdb/duckdb/pull/7484).
 Starting from this release, the DuckDB command line utility (`duckdb`) and the dynamic library `libduckdb...sdylib` are _released with this notarization_. This will reduce the amount of complaints when using web browsers to download our binaries. Unfortunately, macOS does not yet fully support notarization of command line utility, so the “open with double click” use case will still have to wait. The recommended path to install the CLI on macOS is still our install script:
 
 ```batch

@@ -41,7 +41,7 @@ Frames are specified as a number of rows on either side (*preceding* or *followi
 The distance can either be specified as a number of *rows* or a *range* of values
 using the partition's ordering value and a distance.
 
-<img src="/images/blog/windowing/framing.svg" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/windowing/framing.svg %}" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
 
 Framing is the most confusing part of the windowing environment,
 so let's look at a very simple example and ignore the partitioning and ordering for a moment.
@@ -56,7 +56,7 @@ FROM results;
 
 This query computes the `sum` of each point and the points on either side of it:
 
-<img src="/images/blog/windowing/moving-sum.jpg" alt="Moving sum of three values" title="Figure 2: A moving sum of three values" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/windowing/moving-sum.jpg %}" alt="Moving sum of three values" title="Figure 2: A moving sum of three values" style="max-width:90%;width:90%;height:auto"/>
 
 Notice that at the edge of the partition, there are only two values added together.
 
@@ -209,7 +209,7 @@ This join query requires two scans of the table, but the only materialised data 
 This type of query showed up [in a user's blog](https://bwlewis.github.io/duckdb_and_r/last/last.html)
 and we found that the join query was over 20 times faster on their data set:
 
-<img src="/images/blog/windowing/last-in-group.jpg" alt="Window takes 13 seconds, Join takes half a second" title="Figure 3: Last in Group Join vs Window Comparison" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/windowing/last-in-group.jpg %}" alt="Window takes 13 seconds, Join takes half a second" title="Figure 3: Last in Group Join vs Window Comparison" style="max-width:90%;width:90%;height:auto"/>
 
 Of course most analytic tasks that use windowing *do* require using the `Window` operator,
 and DuckDB uses a collection of techniques to make the performance as fast as possible.
@@ -234,7 +234,7 @@ along with the ability to work on partitions that were larger than memory.
 This functionality has been also added to the `Window` operator,
 resulting in a 33% improvement in the last-in-group example:
 
-<img src="/images/blog/windowing/last-in-group-sort.jpg" alt="Window takes X seconds, Join takes half a second" title="Figure 4: Last in Group Sorting Performance Improvement" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/windowing/last-in-group-sort.jpg %}" alt="Window takes X seconds, Join takes half a second" title="Figure 4: Last in Group Sorting Performance Improvement" style="max-width:90%;width:90%;height:auto"/>
 
 As a final optimization, even though you can request multiple window functions,
 DuckDB will collect functions that use the same partitioning and ordering,
@@ -282,7 +282,7 @@ Instead of adding more functions, DuckDB uses the *segment tree* approach from L
 This works by building a tree on top of the entire partition with the aggregated values at the bottom.
 Values are combined into states at nodes above them in the tree until there is a single root:
 
-<img src="/images/blog/windowing/segment-tree.png" alt="Segment Tree for sum aggregation" title="Figure 5: Segment Tree for sum aggregation. Only the red nodes (7, 13, 20) have to be aggregated to compute the sum of 7, 3, 10, 6, 2, 8, 4" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/windowing/segment-tree.png %}" alt="Segment Tree for sum aggregation" title="Figure 5: Segment Tree for sum aggregation. Only the red nodes (7, 13, 20) have to be aggregated to compute the sum of 7, 3, 10, 6, 2, 8, 4" style="max-width:90%;width:90%;height:auto"/>
 
 To compute a value, the algorithm generates states for the ragged ends of the frame,
 *combines* states in the tree above the values in the frame,

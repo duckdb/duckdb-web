@@ -298,7 +298,7 @@ $('a').filter(function() {
 	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0;
 }).addClass("externallink").attr('target','_blank');
 
-$('.headercontent a, .mainlinks a, .box-link a, .footercontent a').removeClass('externallink'); 
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a').removeClass('externallink'); 
 $('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
 $('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
 
@@ -456,7 +456,7 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		if ( e.metaKey && ( e.which === 75 ) || e.ctrlKey && ( e.which === 75 ) ) {
 			// open search on cmd/ctrl + k
 			e.preventDefault(); // Prevent default browser behavior for all browsers
-			if( $('body').hasClass('documentation') || $('body').hasClass('landing') ){
+			if( $('body').hasClass('documentation') || $('body').hasClass('landing') || $('body').hasClass('blog') ){
 				toggleSearch();
 			}
 		}

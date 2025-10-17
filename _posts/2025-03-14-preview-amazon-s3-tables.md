@@ -31,7 +31,7 @@ DuckDB has supported reading Iceberg tables [since September 2023]({% post_url 2
 To connect to Apache Iceberg REST Catalogs in DuckDB,
 make sure you are running the **latest stable** DuckDB release (version 1.2.1).
 For our example steps, we'll use the DuckDB [CLI client]({% link docs/stable/clients/overview.md %}).
-You can obtain this client from the [installation page]({% link docs/installation/index.html %}) and start it with:
+You can obtain this client from the [installation page]({% link install/index.html %}) and start it with:
 
 ```batch
 duckdb

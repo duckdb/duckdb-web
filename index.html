@@ -4,7 +4,7 @@ title: An in-process SQL OLAP database management system
 subtitle: An In-Process Analytical Database
 description: DuckDB is an in-process SQL OLAP database management system. Simple, feature-rich, fast & open source.
 body_class: landing nowrap
-banner: true
+banner: false
 ---
 
 {% comment %}
@@ -103,6 +103,33 @@ To add a banner, set banner: true in the front matter and define the banner cont
 
 {% include quick_installation.html %}
 
+<section class="most_scalable">
+	<div class="wrap">
+		<div class="flexwrap">
+			<div class="col-1">
+				<h1 class="display-2">The most scalable single-node database</h1>
+			</div>
+			<div class="col-2">
+				<div class="box">
+					<div>
+						<div class="label">ClickBench</div>
+						<div class="number">#1</div>
+						<div class="info">system*</div>
+					</div>
+					<div class="divider"></div>
+					<div>
+						<div class="label">TPC-H</div>
+						<div class="number">SF 100,000</div>
+						<div class="info">on a single machine*</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="reference">*see <a href="{% post_url 2025-10-09-benchmark-results-14-lts %}">our blog post</a> for more details</div>
+	</div>
+</section>
+
+<!--
 <section class="blog">
 	<div class="wrap">
 		<h1 class="display-2">Blog</h1>
@@ -136,11 +163,13 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				</div>
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}{{ site.baseurl }}/news" class="button transparent arrow-right">
+		<a href="{{ site.url }}/news" class="button transparent arrow-right">
 			All blog posts <span></span>
 		</a>
 	</div>
 </section>
+-->
+
 
 <div class="landing_bg_1"></div>
 <div class="landing_bg_2"></div>

@@ -15,4 +15,4 @@ DuckDB's [native database format]({% link docs/stable/internals/storage.md %}) s
 
 3. On block-based storage, the file has a big effect on performance when working with large files. On Linux, DuckDB performs best with XFS on large files.
 
-For storing large amounts of data, consider using the [DuckLake Lakehouse format](https://ducklake.select/).
+For storing large amounts of data, consider using the [DuckLake lakehouse format](https://ducklake.select/).

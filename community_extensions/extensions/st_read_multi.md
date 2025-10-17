@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: yutannihilation/duckdb-ext-st-read-multi
-  ref: 2a8d498a6581feda50524ed3e9fb761d7a5a21ad
+  ref: e82e2f361944d78c800421a3138fdbacf1f636dc
 
 docs:
   hello_world: |
@@ -29,10 +29,10 @@ docs:
   extended_description: |
     Read multiple geospatial files. Currently, only GeoJSON and GeoPackages are supported.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 368
-extension_download_count_pretty: 368
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 374
+extension_download_count_pretty: 374
 image: '/images/community_extensions/social_preview/preview_community_extension_st_read_multi.png'
 layout: community_extension_doc
 ---

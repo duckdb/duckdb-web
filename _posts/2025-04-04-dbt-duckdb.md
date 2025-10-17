@@ -34,7 +34,7 @@ After doing an initial exploration of the above data, we can observe that a prov
 <div align="center" style="margin:10px">
     <a href="/images/blog/dbt-duckdb/data_model.svg">
         <img
-          src="/images/blog/dbt-duckdb/data_model.svg"
+          src="{% link images/blog/dbt-duckdb/data_model.svg %}"
           alt="Transformation Layer Data Model"
           width="700"
         />
@@ -161,7 +161,7 @@ One major benefit of using DuckDB for data processing is the ability to export d
 
 ### External Files
 
-The feature of exporting data to files is enabled by the `dbt-duckdb` adapter with the [`external` materialization](https://github.com/duckdb/dbt-duckdb?tab=readme-ov-file#writing-to-external-files). With the `external` materialization, we are able to export data to CSV, JSON and Parquet file types to a specified storage location (local or external). The load type is `full refresh`, therefore existing files are overwritten.
+The feature of exporting data to files is enabled by the `dbt-duckdb` adapter with the [`external` materialization](https://github.com/duckdb/dbt-duckdb#readme). With the `external` materialization, we are able to export data to CSV, JSON and Parquet file types to a specified storage location (local or external). The load type is `full refresh`, therefore existing files are overwritten.
 
 In the following processing step, we export aggregated train service data at month level, to a Parquet file, partitioned by year and month:
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: hdf5
   description: Read HDF5 files from DuckDB
-  version: 0.1.3
+  version: 0.1.5
   language: Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: Berrysoft/duckdb-hdf5
-  ref: b814b5892ea233bed1544fbc4eec60cfebadea83
+  ref: 5bb76c775d132f56869bd65b2ec267b951d2ff69
 
 docs:
   hello_world: |
@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 467
-extension_download_count_pretty: 467
+extension_download_count: 391
+extension_download_count_pretty: 391
 image: '/images/community_extensions/social_preview/preview_community_extension_hdf5.png'
 layout: community_extension_doc
 ---
