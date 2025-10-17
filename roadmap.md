@@ -60,3 +60,4 @@ If you would like to expedite the development of these features, please [get in 
 * [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104)
 * [Generic ODBC catalog](https://github.com/duckdb/duckdb/discussions/6645), similarly to the existing PostgreSQL / MySQL / SQLite integrations
 * [XML read support](https://github.com/duckdb/duckdb/discussions/9547)
+* Guaranteeing [FIPS](https://en.wikipedia.org/wiki/FIPS_140-2)-compliance for the [database encryption]({% link docs/stable/sql/statements/attach.md %}#database-encryption)
