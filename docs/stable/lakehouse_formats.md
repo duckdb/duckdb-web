@@ -42,7 +42,7 @@ If the DuckDB core extension does not cover your use case, you can still use Duc
 
 ### Using PyIceberg with DuckDB
 
-In this example, we will use PyIceberg to create and alter the schema of a table and DuckDB to read and write to the table.
+In this example, we will use [PyIceberg](https://py.iceberg.apache.org/) to create and alter the schema of a table and DuckDB to read and write to the table.
 
 <!-- markdownlint-disable MD040 MD046 -->
 
