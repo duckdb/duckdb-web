@@ -169,6 +169,10 @@
           ]
         },
         {
+          "page": "Lakehouse Formats",
+          "url": "lakehouse_formats"
+        },
+        {
           "page": "Client APIs",
           "slug": "clients",
           "subfolderitems": [
