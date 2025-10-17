@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: mettekou/duckdb-read-stat
-  ref: 5253f0b6d9ef56f7ee26c37f555ee7a4881578e6
+  ref: d66821b3626caddbc8da7794617747e079f2ff64
 
 docs:
   hello_world: |
@@ -59,8 +59,8 @@ docs:
 
 extension_star_count: 22
 extension_star_count_pretty: 22
-extension_download_count: 483
-extension_download_count_pretty: 483
+extension_download_count: null
+extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_read_stat.png'
 layout: community_extension_doc
 ---
