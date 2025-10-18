@@ -4,12 +4,10 @@ layout: docu
 title: Go Client
 ---
 
-> The latest version of the DuckDB Go client is {{ site.current_duckdb_go_version }}.
+> The DuckDB Go client's project recently moved from [`github.com/marcboeker/go-duckdb`](https://github.com/marcboeker/go-duckdb) to [`github.com/duckdb/duckdb-go`](https://github.com/duckdb/duckdb-go) starting with `v2.5.0`. Please follow the [migration guide](https://github.com/duckdb/duckdb-go#migration-from-marcboekergo-duckdb) to update to the new repository.
 
-The DuckDB Go driver, `duckdb-go`, allows using DuckDB via the `database/sql` interface.
+The DuckDB Go client, `duckdb-go`, allows using DuckDB via the `database/sql` interface.
 For examples on how to use this interface, see the [official documentation](https://pkg.go.dev/database/sql) and [tutorial](https://go.dev/doc/tutorial/database-access).
-
-> The `duckdb-go` project, hosted at <https://github.com/duckdb/duckdb-go>, is the official DuckDB Go client.
 
 ## Installation
 
@@ -120,4 +118,4 @@ For more examples, see the [examples in the `duckdb-go` repository](https://gith
 
 ## Acknowledgements
 
-We would like to thank [Marc Boeker](https://github.com/marcboeker) for the initial implementation of the DuckDB Go driver.
+We would like to thank [Marc Boeker](https://github.com/marcboeker) for the initial implementation of the DuckDB Go client.

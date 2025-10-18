@@ -100,7 +100,7 @@ FROM tbl;
 
 ### Handling `NULL` Values
 
-All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#array_aggarg)), [`first`](#firstarg) ([`arbitrary`](#arbitraryarg)) and [`last`](#lastarg).
+All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#listarg)), [`first`](#firstarg) ([`arbitrary`](#firstarg)) and [`last`](#lastarg).
 To exclude `NULL`s from `list`, you can use a [`FILTER` clause]({% link docs/preview/sql/query_syntax/filter.md %}).
 To ignore `NULL`s from `first`, you can use the [`any_value` aggregate](#any_valuearg).
 
@@ -138,22 +138,16 @@ The table below shows the available general aggregate functions.
 | [`histogram(arg, boundaries)`](#histogramarg-boundaries) | Returns a `MAP` of key-value pairs representing the provided upper `boundaries` and counts of elements in the corresponding bins (left-open and right-closed partitions) of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than all provided `boundaries` appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/preview/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
 | [`histogram_exact(arg, elements)`](#histogram_exactarg-elements) | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/preview/sql/functions/utility.md %}#is_histogram_other_binarg). |
 | [`histogram_values(source, boundaries)`](#histogram_valuessource-col_name-technique-bin_count) | Returns the upper boundaries of the bins and their counts. |
-| [`kahan_sum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions).  |
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
 | [`max(arg, n)`](#maxarg-n) | Returns a `LIST` containing the `arg` values for the "top" `n` rows ordered by `arg` descending. |
-| [`max_by(arg, val)`](#max_byarg-val) | Finds the row with the maximum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`max_by(arg, val, n)`](#max_byarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "top" `n` rows ordered by `val` descending. |
 | [`min(arg)`](#minarg) | Returns the minimum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
 | [`min(arg, n)`](#minarg-n) | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
-| [`min_by(arg, val)`](#min_byarg-val) | Finds the row with the minimum `val`. Calculates the `arg` expression at that row. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`min_by(arg, val, n)`](#min_byarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. |
 | [`product(arg)`](#productarg) | Calculates the product of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`string_agg(arg)`](#string_aggarg-sep) | Concatenates the column string values with a comma separator (`,`). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`sum(arg)`](#sumarg) | Calculates the sum of all non-null values in `arg` / counts `true` values when `arg` is boolean. The floating-point versions of this function are [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`sumkahan(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`weighted_avg(arg, weight)`](#weighted_avgarg-weight) | Calculates the weighted average all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the corresponding `arg` value will be skipped. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 
 #### `any_value(arg)`
