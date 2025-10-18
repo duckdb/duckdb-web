@@ -72,7 +72,6 @@ The table below shows the available general window functions.
 | [`nth_value(expr, nth[ ORDER BY ordering][ IGNORE NULLS])`](#nth_valueexpr-nth-order-by-ordering-ignore-nulls) | Returns `expr` evaluated at the nth row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame (counting from 1); `NULL` if no such row. |
 | [`ntile(num_buckets[ ORDER BY ordering])`](#ntilenum_buckets-order-by-ordering) | An integer ranging from 1 to `num_buckets`, dividing the partition as equally as possible. |
 | [`percent_rank([ORDER BY ordering])`](#percent_rankorder-by-ordering) | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. |
-| [`rank_dense()`](#rank_dense) | The rank of the current row *without gaps*. |
 | [`rank([ORDER BY ordering])`](#rankorder-by-ordering) | The rank of the current row *with gaps;* same as `row_number` of its first peer. |
 | [`row_number([ORDER BY ordering])`](#row_numberorder-by-ordering) | The number of the current row within the partition, counting from 1. |
 
