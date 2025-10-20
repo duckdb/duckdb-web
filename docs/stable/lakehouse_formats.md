@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/lakehouse_formats
+  - /docs/lakehouse_formats
 title: Lakehouse Formats
 ---
 
@@ -11,28 +11,30 @@ Lakehouse formats, often referred to as open table formats, are specifications f
 
 DuckDB supports Iceberg, Delta and DuckLake as first-class citizens. The following matrix represents what DuckDB natively supports out of the box through core extensions.
 
-|                              | DuckLake                                                               | Iceberg                                                                  | Delta                                                       |
-|------------------------------|:----------------------------------------------------------------------:|:------------------------------------------------------------------------:|:-----------------------------------------------------------:|
-| Extension                    | [`ducklake`](https://ducklake.select/docs/stable/duckdb/introduction)  | [`iceberg`]({% link docs/stable/core_extensions/iceberg/overview.md %})  | [`delta`]({% link docs/stable/core_extensions/delta.md %})  |
-| Read                         | ✅                                                                     | ✅                                                                       | ✅                                                          |
-| Write                        | ✅                                                                     | ✅                                                                       | ✅                                                          |
-| Deletes                      | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Updates                      | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Upserting                    | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Create table                 | ✅                                                                     | ✅                                                                       | ❌                                                          |
-| Create table with partitions | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Attaching to a catalog       | ✅                                                                     | ✅                                                                       | ✅ (`uc_catalog` extension)                                 |
-| Rename table                 | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Rename columns               | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Add/drop columns             | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Alter column type            | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Compaction and maintenance   | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Encryption                   | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Manage table properties      | ✅                                                                     | ❌                                                                       | ❌                                                          |
-| Time travel                  | ✅                                                                     | ✅                                                                       | ✅                                                          |
-| Query table changes          | ✅                                                                     | ❌                                                                       | ❌                                                          |
+|                              | DuckLake                                                              | Iceberg                                                                 | Delta                                                      |
+| ---------------------------- | :-------------------------------------------------------------------- | :---------------------------------------------------------------------- | :--------------------------------------------------------- |
+| Extension                    | [`ducklake`](https://ducklake.select/docs/stable/duckdb/introduction) | [`iceberg`]({% link docs/stable/core_extensions/iceberg/overview.md %}) | [`delta`]({% link docs/stable/core_extensions/delta.md %}) |
+| Read                         | ✅                                                                    | ✅                                                                      | ✅                                                         |
+| Write                        | ✅                                                                    | ✅                                                                      | ✅                                                         |
+| Deletes                      | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Updates                      | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Upserting                    | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Create table                 | ✅                                                                    | ✅                                                                      | ❌                                                         |
+| Create table with partitions | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Attaching to a catalog       | ✅                                                                    | ✅                                                                      | ✅ `*`                                                     |
+| Rename table                 | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Rename columns               | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Add/drop columns             | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Alter column type            | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Compaction and maintenance   | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Encryption                   | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Manage table properties      | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Time travel                  | ✅                                                                    | ✅                                                                      | ✅                                                         |
+| Query table changes          | ✅                                                                    | ❌                                                                      | ❌                                                         |
 
-DuckDB aims to build native extensions with minimal dependencies. The `iceberg` extension for example, has no Iceberg dependencies, which means all data and metadata operations are implemented natively in the DuckDB extension. For the `delta` extension, we use the [`delta-kernel-rs` project](https://github.com/delta-io/delta-kernel-rs), which is meant to be a lightweight platform for engines to build delta integrations that are as close to native as possible.
+`*` Through the `uc_catalog` extension
+
+DuckDB aims to build native extensions with minimal dependencies. The `iceberg` extension for example, has dependencies on third-party Iceberg libraries, which means all data and metadata operations are implemented natively in the DuckDB extension. For the `delta` extension, we use the [`delta-kernel-rs` project](https://github.com/delta-io/delta-kernel-rs), which is meant to be a lightweight platform for engines to build delta integrations that are as close to native as possible.
 
 > **Why do native implementations matter?** Native implementations allow DuckDB to do more performance optimizations such as complex filter pushdowns (with file-level and row-group level pruning) and improve memory management.
 
@@ -114,6 +116,7 @@ table = catalog.load_table("default.bids")
 with table.update_schema() as update:
     update.add_column("retries", IntegerType(), "Number of retries to place the bid")
 ```
+
 </details>
 
 <!-- markdownlint-enable MD040 MD046 -->
@@ -135,7 +138,7 @@ import pyarrow as pa
 
 # Create a delta table and read it with DuckDB Delta extension
 dl.write_deltalake(
-    "tmp/some_table", 
+    "tmp/some_table",
     pa.table({
         "id": [1, 2, 3],
         "value": ["a", "b", "c"]
@@ -152,7 +155,7 @@ with duckdb.connect() as conn:
 
 # Append some data and read the data change feed using the PyArrow integration
 dl.write_deltalake(
-    "tmp/some_table", 
+    "tmp/some_table",
     pa.table({
         "id": [4, 5],
         "value": ["d", "e"]
@@ -164,6 +167,7 @@ with duckdb.connect() as conn:
     conn.register("t", table)
     conn.sql("SELECT * FROM t").show()
 ```
+
 </details>
 
 <!-- markdownlint-enable MD040 MD046 -->
