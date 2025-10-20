@@ -117,7 +117,7 @@ WHERE current_mood = 'happy'::new_mood;
 | Pedro     | happy        |
 
 
-When comparing an enum to a `VARCHAR`, duckdb will cast the enum to `VARCHAR` and perform a string comparison:
+When comparing an enum to a `VARCHAR`, DuckDB will cast the enum to `VARCHAR` and perform a string comparison:
 
 ```sql
 SELECT * FROM person
@@ -126,8 +126,8 @@ WHERE current_mood = name;
 -- No rows returned
 ```
 
-When comparing against a constant string, duckdb will perform an optimization
-and `try_cast(<constant string>, enum_type)` so that physically
+When comparing against a constant string, DuckDB will perform an optimization
+and `try_cast(⟨constant string⟩, enum_type)`{:.language-sql .highlight} so that physically
 we are doing an integer comparison instead of a string comparison
 (but logically it is still a string comparison):
 
@@ -142,7 +142,7 @@ WHERE current_mood = 'sad';
 | Pagliacci | sad          |
 
 
-> Warning This means that comparing against a bogus string always results in False:
+> Warning This means that comparing against a bogus string always results in `false`:
 
 ```sql
 SELECT * FROM person
@@ -184,7 +184,7 @@ ORDER BY m;
 | medium |
 | high   |
 
-> Warning If you compare an enum to a non-enum (eg a varchar or a different enum type),
+> Warning If you compare an enum to a non-enum (e.g., a `VARCHAR` or a different enum type),
 the enum will first be cast to a string (as described in the previous section),
 and the comparison will be done lexicographically as with strings:
 
@@ -203,7 +203,7 @@ WHERE priority_level >= 'medium';
 | b    | medium          |
 
 
-So, if you want to eg "get all priorities at or above 'medium'" then explicitly cast to the enum type:
+So, if you want to e.g. "get all priorities at or above `medium`" then explicitly cast to the enum type:
 
 ```sql
 SELECT * FROM tasks
