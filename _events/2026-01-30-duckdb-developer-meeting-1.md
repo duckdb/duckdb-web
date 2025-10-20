@@ -7,7 +7,7 @@ thumb: "/images/events/thumbs/duckdb-developer-meeting-1.svg"
 image: "/images/events/thumbs/duckdb-developer-meeting-1.png"
 excerpt: ""
 tags: ["meetup"]
-venue: "TBA, Amsterdam"
+venue: "Pakhuis de Zwijger, Amsterdam"
 ---
 
 <img src="/images/events/thumbs/duckdb-developer-meeting-1.svg"
