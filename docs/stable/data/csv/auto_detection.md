@@ -5,6 +5,7 @@ redirect_from:
 title: CSV Auto Detection
 ---
 
+
 When using `read_csv`, the system tries to automatically infer how to read the CSV file using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}).
 This step is necessary because CSV files are not self-describing and come in many different dialects. The auto-detection works roughly as follows:
 
@@ -111,34 +112,36 @@ The type detection works by attempting to convert the values in each column to t
 
 <div class="monospace_table"></div>
 
-|   Types   |
-|-----------|
-| BOOLEAN   |
-| BIGINT    |
-| DOUBLE    |
-| TIME      |
-| DATE      |
-| TIMESTAMP |
-| VARCHAR   |
+|   Types     |
+|-------------|
+| NULL        |
+| BOOLEAN     |
+| TIME        |
+| DATE        |
+| TIMESTAMP   |
+| TIMESTAMPTZ |
+| BIGINT      |
+| DOUBLE      |
+| VARCHAR     |
 
-Everything can be cast to `VARCHAR`, therefore, this type has the lowest priority meaning that all columns are converted to `VARCHAR` if they cannot be cast to anything else.
+Everything can be cast to `VARCHAR`, therefore, this type has the lowest priority meaning that all columns are converted to `VARCHAR` as a fallback if they cannot be cast to anything else.
 In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
-The set of candidate types that should be considered by the CSV reader can be explicitly specified using the [`auto_type_candidates`]({% link docs/stable/data/csv/overview.md %}#auto_type_candidates-details) option.
+The set of candidate types that should be considered by the CSV reader can be specified explicitly using the [`auto_type_candidates`]({% link docs/stable/data/csv/overview.md %}#auto_type_candidates-details) option. `VARCHAR` as the fallback type will always be considered as a candidate type whether you specify it or not.
 
-In addition to the default set of candidate types, other types that may be specified using the `auto_type_candidates` options are:
+Here are all additional candidate types that may be specified using the `auto_type_candidates` option, in order of priority:
 
 <div class="monospace_table"></div>
 
 |   Types   |
 |-----------|
+| TINYINT   |
+| SMALLINT  |
+| INTEGER   |
 | DECIMAL   |
 | FLOAT     |
-| INTEGER   |
-| SMALLINT  |
-| TINYINT   |
 
-Even though the set of data types that can be automatically detected may appear quite limited, the CSV reader can configured to read arbitrarily complex types by using the `types`-option described in the next section.
+Even though the set of data types that can be automatically detected may appear quite limited, the CSV reader can be configured to read arbitrarily complex types by using the `types`-option described in the next section.
 
 Type detection can be entirely disabled by using the `all_varchar` option. If this is set all columns will remain as `VARCHAR` (as they originally occur in the CSV file).
 
