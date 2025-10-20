@@ -1,30 +1,30 @@
 ---
 layout: post
 event: true
-title: "DuckDB Amsterdam Meetup #4"
-author: "DuckDB meetup organizers"
-thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-4.svg"
-image: "/images/events/thumbs/duckdb-amsterdam-meetup-4.png"
+title: "DuckDB Developer Meeting #1"
+author: "The DuckDB team"
+#thumb: "/images/events/thumbs/duckdb-developer-meeting-1.svg"
+#image: "/images/events/thumbs/duckdb-developer-meeting-1.png"
 excerpt: ""
 tags: ["meetup"]
 venue: "TBA, Amsterdam"
 ---
 
-<img src="/images/events/thumbs/duckdb-amsterdam-meetup-4.svg"
-     alt="DuckDB Amsterdam Meetup Splashscreen"
+<img src="/images/events/thumbs/duckdb-developer-meeting-1.svg"
+     alt="DuckDB Developer Meeting"
      width="680"
      />
 
-We are excited to announce the [fourth DuckDB Amsterdam meetup](), organized by [DuckDB Labs](https://duckdblabs.com/).
+We are excited to announce the first DuckDB Developer Meeting, organized by [DuckDB Labs](https://duckdblabs.com/).
+The event will features talks from DuckDB developers, and is aimed at developers who build DuckDB extensions or complex applications on top of DuckDB.
 
+<!--
 ### Registration Process
 
 🎟️ Attendance is free. Please [RSVP on meetup.com](TODO).
+-->
 
 ### Timetable
-
-The event starts at 15:30 and will feature four talks from DuckDB users and developers.
-
 
 
 
@@ -33,7 +33,7 @@ The event starts at 15:30 and will feature four talks from DuckDB users and deve
 **Public transport.**
 The easiest way to access the venue is taking [public transport from Amsterdam Centraal station](https://www.ns.nl/en/journeyplanner/#/?vertrek=Amsterdam%20Centraal&vertrektype=treinstation&aankomst=ChIJL4osDqgJxkcRjR_3yE9Ani0&aankomsttype=poi&aankomstlabel=Pakhuis%20de%20Zwijger&type=vertrek&tijd=2024-10-22T12:58&firstMileModality=PUBLIC_TRANSPORT&lastMileModality=WALK).
 Take Tram 26 to Kattenburgerstraat or Bus 46 to Jan Schaeferbrug.
-All forms of public transport in Amsterdam [accept contactless payment debit/credit cards](https://www.ovpay.nl/en) (issued by Visa, Mastercard, and Maestro).
+All forms of public transport in Amsterdam [accept contactless payment debit/credit cards](https://www.ovpay.nl/en) (issued by Visa, Mastercard and Maestro).
 
 **Parking.**
 Bicycle parking is available in front of the building.
@@ -49,8 +49,9 @@ If you experience any incidents, please let us know at <quack@duckdb.org>.
 ### Events Nearby
 
 The [FOSDEM 2026 conference in Brussels](https://fosdem.org/2026/) is happening on the weekend after the DuckDB Amsterdam Meetup, so you can conveniently travel there.
-Two railway companies operate direct services on this route: the [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) leaves from Amsterdam Centraal, while the [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid.
-
+Two railway companies operate direct services on this route.
+The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid,
+while the [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal.
 
 ### Inquiries
 
