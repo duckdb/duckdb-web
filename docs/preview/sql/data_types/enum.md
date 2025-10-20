@@ -142,7 +142,7 @@ WHERE current_mood = 'sad';
 | Pagliacci | sad          |
 
 
-> Warning This means that comparing against a bogus string always results in `false`:
+> Warning This means that comparing against a random (non-equivalent) string always results in `false` (and does not error):
 
 ```sql
 SELECT * FROM person
