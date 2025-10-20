@@ -20,11 +20,7 @@ The event will features talks from DuckDB developers, and is aimed at developers
 
 ### Registration Process
 
-We will open the registration in late October.
-
-<!--
-🎟️ Attendance is free. Please [RSVP on meetup.com](TODO).
--->
+🎟️ Attendance is free. Please sign up on [Eventbrite]().
 
 ### Timetable
 
