@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB in Research S01E03: David Justen"
-subtitle: "POLAR: Adaptive and non-invasive join order selection via plans of least resistance"
+subtitle: "POLAR: Adaptive and Non-Invasive Join Order Selection via Plans of Least Resistance"
 author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/science/thumbs/2025-04-03-david-justen-polar.png"
 image: "/images/science/thumbs/2025-04-03-david-justen-polar.png"
