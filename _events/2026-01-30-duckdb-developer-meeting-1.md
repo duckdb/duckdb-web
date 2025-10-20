@@ -3,24 +3,26 @@ layout: post
 event: true
 title: "DuckDB Developer Meeting #1"
 author: "The DuckDB team"
-#thumb: "/images/events/thumbs/duckdb-developer-meeting-1.svg"
-#image: "/images/events/thumbs/duckdb-developer-meeting-1.png"
+thumb: "/images/events/thumbs/duckdb-developer-meeting-1.svg"
+image: "/images/events/thumbs/duckdb-developer-meeting-1.png"
 excerpt: ""
 tags: ["meetup"]
 venue: "TBA, Amsterdam"
 ---
 
 <img src="/images/events/thumbs/duckdb-developer-meeting-1.svg"
-     alt="DuckDB Developer Meeting"
+     alt="DuckDB Developer Meeting #1 splashscreen"
      width="680"
      />
 
 We are excited to announce the first DuckDB Developer Meeting, organized by [DuckDB Labs](https://duckdblabs.com/).
 The event will features talks from DuckDB developers, and is aimed at developers who build DuckDB extensions or complex applications on top of DuckDB.
 
-<!--
 ### Registration Process
 
+We will open the registration in late October.
+
+<!--
 🎟️ Attendance is free. Please [RSVP on meetup.com](TODO).
 -->
 
