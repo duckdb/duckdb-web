@@ -24,7 +24,7 @@ arm64 beta:
 
 ## Fixes for Crashes
 
-crashes -
-https://github.com/duckdb/duckdb/issues/19357
-https://github.com/duckdb/duckdb-fuzzer/issues/3389
+crashes:
 
+* <https://github.com/duckdb/duckdb/issues/19357>
+* <https://github.com/duckdb/duckdb-fuzzer/issues/3389>
