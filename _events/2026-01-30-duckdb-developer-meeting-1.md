@@ -42,7 +42,7 @@ Attendance is free. Please [RSVP on Eventbrite](https://www.eventbrite.com/e/duc
 **Public transport.**
 The easiest way to access the venue is taking [public transport from Amsterdam Centraal station](https://www.ns.nl/en/journeyplanner/#/?vertrek=Amsterdam%20Centraal&vertrektype=treinstation&aankomst=ChIJL4osDqgJxkcRjR_3yE9Ani0&aankomsttype=poi&aankomstlabel=Pakhuis%20de%20Zwijger&type=vertrek&tijd=2024-10-22T12:58&firstMileModality=PUBLIC_TRANSPORT&lastMileModality=WALK).
 Take Tram 26 to Kattenburgerstraat or Bus 46 to Jan Schaeferbrug.
-All forms of public transport in Amsterdam [accept contactless payment debit/credit cards](https://www.ovpay.nl/en) (issued by Visa, Mastercard and Maestro).
+All forms of public transport in Amsterdam [accept contactless payment debit/credit cards](https://www.ovpay.nl/en).
 
 **Parking.**
 Bicycle parking is available in front of the building.
