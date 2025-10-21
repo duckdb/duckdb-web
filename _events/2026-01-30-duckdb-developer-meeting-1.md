@@ -57,10 +57,11 @@ If you experience any incidents, please let us know at <quack@duckdb.org>.
 
 ### Events Nearby
 
-The [FOSDEM 2026 conference in Brussels](https://fosdem.org/2026/) is happening on the weekend after the DuckDB Amsterdam Meetup, so you can conveniently travel there.
-Two railway companies operate direct services on this route.
-The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid,
-while the [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal.
+The [FOSDEM 2026 conference in Brussels](https://fosdem.org/2026/) is happening on the weekend after the DuckDB Developer Meeting, so you can conveniently travel there.
+Two railway companies operate direct services between Amsterdam and Brussels.
+The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation and is generally cheaper.
+The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation and and a slightly more premium pricing.
+Both train services run about once per hour on Friday evenings.
 
 ### Inquiries
 
