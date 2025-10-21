@@ -12,12 +12,12 @@
 						<div class="select-highlight"></div>
 						<li data-client="cli" class="active">Command line</li>
 						<li data-client="python">Python</li>
-						<li data-client="r">R</li>
 						<li data-client="java">Java</li>
+						<li data-client="go">Go</li>
 						<li data-client="nodejs">Node.js</li>
 						<li data-client="odbc">ODBC</li>
+						<li data-client="r">R</li>
 						<li data-client="rust">Rust</li>
-						<li data-client="go">Go</li>
 					</ul>
 				</div>
 				
@@ -53,13 +53,7 @@ install.packages("duckdb")
 </div>
 
 <div data-install="java">
-{% highlight xml %}
-<dependency>
-	<groupId>org.duckdb</groupId>
-	<artifactId>duckdb_jdbc</artifactId>
-	<version>{{ site.current_duckdb_java_version }}</version>
-</dependency>
-{% endhighlight %}
+<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" target="_blank">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
 </div>
 
 <div data-install="nodejs">
