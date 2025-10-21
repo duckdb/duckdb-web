@@ -16,19 +16,26 @@ venue: "Pakhuis de Zwijger, Amsterdam"
      />
 
 We are excited to announce the first DuckDB Developer Meeting, organized by [DuckDB Labs](https://duckdblabs.com/).
-The event will features talks from DuckDB developers, and is aimed at developers who build DuckDB extensions or complex applications on top of DuckDB.
+The event will feature talks from DuckDB developers, and is aimed at developers who build DuckDB extensions or complex applications on top of DuckDB.
+
+### New Event Type
+
+This event is slightly from our usual meetups and conferences as it primarily focuses on DuckDB extension development and building complex applications on top of DuckDB. Therefore, the main topics of the event will be the **C API, extension template, and internals**.
 
 ### Registration Process
 
-We will open the registration in late October.
+Attendance is free. Please [RSVP on Eventbrite](https://www.eventbrite.com/e/duckdb-developer-meeting-1-tickets-1850334944629?aff=oddtdtcreator).
 
-<!--
-🎟️ Attendance is free. Please [RSVP on meetup.com](TODO).
--->
+### Program Outline
 
-### Timetable
-
-
+|  Time | Title               |
+| ----: | :------------------ |
+| 15:30 | _Venue opens_       |
+| 16:00 | First session       |
+| 16:50 | _Break_             |
+| 17:10 | Second session      |
+| 18:00 | _Drinks and snacks_ |
+| 19:30 | _End of event_      |
 
 ### Accessing the Venue
 
