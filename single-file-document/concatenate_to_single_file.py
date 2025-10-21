@@ -129,10 +129,27 @@ def adjust_links_in_doc_body(doc_body):
     doc_body = doc_body.replace("](/data/", "](https://duckdb.org/data/")
 
     # remove '<div>' HTML tags
-    doc_body = re.sub(r'<div[^>]*?>[\n ]*([^§]*?)[\n ]*</div>', r'\1', doc_body, flags=re.MULTILINE)
+    doc_body = re.sub(
+        r'<div[^>]*?>[\n ]*([^§]*?)[\n ]*</div>',
+        r'\1',
+        doc_body,
+        flags=re.MULTILINE
+    )
 
     # replace '<img>' HTML tags with Markdown's '![]()' construct
-    doc_body = re.sub(r'<img src="([^"]*)"[^§]*?/>', r'![](\1)\n', doc_body, flags=re.MULTILINE)
+    doc_body = re.sub(
+        r'<img src="([^"]*)"[^§]*?/>',
+        r'![](\1)\n',
+        doc_body,
+        flags=re.MULTILINE
+    )
+
+    # replace links to images
+    doc_body = re.sub(
+        r'{% link images/(.*?)\.(gif|jpg|png|svg) %}',
+        r'/images/\1.\2',
+        doc_body
+    )
 
     # use relative path for images in Markdown
     doc_body = doc_body.replace("](/images", "](../images")
