@@ -1617,6 +1617,16 @@
               ]
             },
             {
+              "page": "Installing DuckDB",
+              "slug": "installing_duckdb",
+              "subsubfolderitems": [
+                {
+                  "page": "Install Script",
+                  "url": "install_script"
+                }
+              ]
+            },
+            {
               "page": "Logging",
               "slug": "logging",
               "subsubfolderitems": [
