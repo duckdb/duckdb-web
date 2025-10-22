@@ -37,7 +37,7 @@ SELECT
     (SELECT count(*) FROM AccountTransferAccount) AS num_transfers;
 ```
 
-```
+```text
 ┌─────────────┬──────────────┬───────────────┐
 │ num_persons │ num_accounts │ num_transfers │
 │    int64    │    int64     │     int64     │
