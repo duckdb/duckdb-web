@@ -44,7 +44,7 @@ DuckDB supports different logging levels that control the verbosity of the logs:
 The log level can be set using:
 
 ```sql
-CALL enable_logging(level='debug');
+CALL enable_logging(level = 'debug');
 ```
 
 ## Log Types
@@ -114,26 +114,26 @@ the log storage may influence what is returned by the `duckdb_logs` function.
 ### Logging to stdout
 
 ```sql
-CALL enable_logging(storage='stdout');
+CALL enable_logging(storage = 'stdout');
 ```
 
 ### Logging to File 
 
 ```sql
-CALL enable_logging(storage='file', storage_config={'path': 'path/to/store/logs'});
+CALL enable_logging(storage = 'file', storage_config = {'path': 'path/to/store/logs'});
 ```
 
 or using the equivalent shorthand:
 
 ```sql
-CALL enable_logging(storage_path='path/to/store/logs');
+CALL enable_logging(storage_path = 'path/to/store/logs');
 ```
 
 ## Advanced Usage
 
 ### Normalized vs. Denormalized Logging
 
-DuckDB's log storages can log in two ways: normalized vs denormalized.
+DuckDB's log storages can log in two ways: normalized vs. denormalized.
 
 In denormalized logging, the log context information is appended directly to each log entry, while in normalized logging
 the log entries are stored separately with context_ids referencing the context information.
@@ -167,29 +167,28 @@ which is particularly problematic when debugging crashes, as messages generated 
 written. To address this, the buffer size can be configured as follows:
 
 ```sql
-CALL enable_logging(storage_config={'buffer_size': 0});
+CALL enable_logging(storage_config = {'buffer_size': 0});
 ```
 
 or using the equivalent shorthand:
 
 ```sql
-CALL enable_logging(storage_buffer_size=0);
+CALL enable_logging(storage_buffer_size = 0);
 ```
 
 Note that the default buffer size is different for different log storages:
 
-
-| Log Storage | Default buffer size         |
-|-------------|-----------------------------|
-| `memory`    | STANDARD_VECTOR_SIZE (2048) |
-| `file`      | STANDARD_VECTOR_SIZE (2048) |
-| `stdout`    | Disabled (0)                |
+| Log Storage | Default buffer size           |
+|-------------|-------------------------------|
+| `memory`    | `STANDARD_VECTOR_SIZE` (2048) |
+| `file`      | `STANDARD_VECTOR_SIZE` (2048) |
+| `stdout`    | Disabled (0)                  |
 
 So for example, if you want to increase your `stdout` logging performance, simply enable buffering to greatly (>10x) speed up 
 your logging:
 
 ```SQL
-CALL enable_logging(storage='stdout', storage_buffer_size=2048);
+CALL enable_logging(storage = 'stdout', storage_buffer_size = 2048);
 ```
 
 Or imagine you are debugging a crash in DuckDB and you want to use the `file` logger to understand what's going on:
@@ -197,7 +196,7 @@ Simply disable the
 buffering using:
 
 ```sql
-CALL enable_logging(storage_path='/tmp/mylogs', storage_buffer_size=2048);
+CALL enable_logging(storage_path = '/tmp/mylogs', storage_buffer_size = 2048);
 ```
 
 ### Syntactic Sugar
@@ -206,9 +205,9 @@ DuckDB contains some syntactic sugar to make common paths. For example, the foll
 
 ```sql
 -- regular invocation 
-CALL enable_logging(storage='file', storage_config = {'path': 'path/to/store/logs'});
+CALL enable_logging(storage = 'file', storage_config = {'path': 'path/to/store/logs'});
 -- using shorthand for common path storage config param 
-CALL enable_logging(storage='file', storage_path = 'path/to/store/logs');
--- omitting `storage='file'` -> is implied from presence of `storage_config`
+CALL enable_logging(storage = 'file', storage_path = 'path/to/store/logs');
+-- omitting `storage = 'file'` -> is implied from presence of `storage_config`
 CALL enable_logging(storage_config = {'path': 'path/to/store/logs'});
 ```

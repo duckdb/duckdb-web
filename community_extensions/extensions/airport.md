@@ -23,7 +23,7 @@ extension:
   version: '2025101201'
 repo:
   github: query-farm/airport
-  ref: 8ba55ee4eb30c4c59e4daca4a4b850c47d302dfa
+  ref: 31c249a2e300207159256d3f42bb6064647ea73a
 
 extension_star_count: 304
 extension_star_count_pretty: 304
