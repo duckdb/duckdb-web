@@ -1,0 +1,40 @@
+name: Copy stable to preview
+
+on:
+  schedule:
+    - cron: "0 4 * * *"  # run every day
+  workflow_dispatch:
+
+jobs:
+  UpdateStarCountAndCopyStableToArchive:
+    if: github.repository == 'duckdb/duckdb-web'
+    name: Copy stable to preview
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Update star count
+        run: |
+          STAR_COUNT=$(gh api repos/duckdb/duckdb | jq ".stargazers_count")
+          STAR_COUNT_FORMATTED=$(python3 -c 'import sys; print(f"{int(sys.argv[1]) / 1000:.1f}k", end="")' ${STAR_COUNT})
+          sed -i "s/^star_count:.*/star_count: '${STAR_COUNT_FORMATTED}'" _config.yml
+
+      - name: Run copy
+        run: |
+          pip install -r requirements.txt --break-system-packages
+          python scripts/copy_stable_to_preview.py
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v7.0.8
+        with:
+          branch: update-preview-branch
+          commit-message: "Copy stable to preview"
+          title: "Automated PR: Copy stable to preview"
+          body: "This PR was created automatically by GitHub Actions."
