@@ -32,7 +32,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`chr(code_point)`](#chrcode_point) | Returns a character which is corresponding the ASCII code value or Unicode code point. |
 | [`concat(value, ...)`](#concatvalue-) | Concatenates multiple strings or lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`concat_ws(separator, string, ...)`](#concat_wsseparator-string-) | Concatenates many strings, separated by `separator`. `NULL` inputs are skipped. |
-| [`contains(string, search_string)`](#containsstring-search_string) | Returns `true` if `search_string` is found within `string`. |
+| [`contains(string, search_string)`](#containsstring-search_string) | Returns `true` if `search_string` is found within `string`. Note that [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |g
 | [`ends_with(string, search_string)`](#suffixstring-search_string) | Alias for `suffix`. |
 | [`format(format, ...)`](#formatformat-) | Formats a string using the [fmt syntax](#fmt-syntax). |
 | [`formatReadableDecimalSize(integer)`](#formatreadabledecimalsizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
@@ -41,13 +41,13 @@ This section describes functions and operators for examining and manipulating [`
 | [`from_base64(string)`](#from_base64string) | Converts a base64 encoded `string` to a character string (`BLOB`). |
 | [`from_binary(value)`](#unbinvalue) | Alias for `unbin`. |
 | [`from_hex(value)`](#unhexvalue) | Alias for `unhex`. |
-| [`greatest(arg1, ...)`](#greatestarg1-) | Returns the largest value. For strings lexicographical ordering is used. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
+| [`greatest(arg1, ...)`](#greatestarg1-) | Returns the largest value in lexicographical order. Note that lowercase characters are considered larger than uppercase characters and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
 | [`hash(value, ...)`](#hashvalue-) | Returns a `UBIGINT` with the hash of the `value`. Note that this is not a cryptographic hash. |
 | [`hex(string)`](#hexstring) | Converts the `string` to hexadecimal representation. |
 | [`ilike_escape(string, like_specifier, escape_character)`](#ilike_escapestring-like_specifier-escape_character) | Returns `true` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/preview/sql/functions/pattern_matching.md %})) using case-insensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`instr(string, search_string)`](#instrstring-search_string) | Returns location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. |
 | [`lcase(string)`](#lowerstring) | Alias for `lower`. |
-| [`least(arg1, ...)`](#leastarg1-) | Returns the smallest value. For strings lexicographical ordering is used. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
+| [`least(arg1, ...)`](#leastarg1-) | Returns the smallest value in lexicographical order. Note that uppercase characters are considered smaller than lowercase characters and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
 | [`left(string, count)`](#leftstring-count) | Extracts the left-most count characters. |
 | [`left_grapheme(string, count)`](#left_graphemestring-count) | Extracts the left-most count grapheme clusters. |
 | [`len(string)`](#lengthstring) | Alias for `length`. |
@@ -106,7 +106,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`substr(string, start[, length])`](#substringstring-start-length) | Alias for `substring`. |
 | [`substring(string, start[, length])`](#substringstring-start-length) | Extracts substring starting from character `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` characters instead. Note that a `start` value of `1` refers to the first character of the `string`. |
 | [`substring_grapheme(string, start[, length])`](#substring_graphemestring-start-length) | Extracts substring starting from grapheme clusters `start` up to the end of the string. If optional argument `length` is set, extracts a substring of `length` grapheme clusters instead. Note that a `start` value of `1` refers to the `first` character of the `string`. |
-| [`suffix(string, search_string)`](#suffixstring-search_string) | Returns `true` if `string` ends with `search_string`. |
+| [`suffix(string, search_string)`](#suffixstring-search_string) | Returns `true` if `string` ends with `search_string`. Note that [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
 | [`to_base(number, radix[, min_length])`](#to_basenumber-radix-min_length) | Converts `number` to a string in the given base `radix`, optionally padding with leading zeros to `min_length`. |
 | [`to_base64(blob)`](#to_base64blob) | Converts a `blob` to a base64 encoded string. |
 | [`to_binary(string)`](#binstring) | Alias for `bin`. |
@@ -295,7 +295,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the largest value. For strings lexicographical ordering is used. Note that lowercase characters are considered “larger” than uppercase characters and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
+| **Description** | Returns the largest value in lexicographical order. Note that lowercase characters are considered larger than uppercase characters and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
 | **Example 1** | `greatest(42, 84)` |
 | **Result** | `84` |
 | **Example 2** | `greatest('abc', 'bcd', 'cde', 'EFG')` |
@@ -339,7 +339,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the smallest value. For strings lexicographical ordering is used. Note that uppercase characters are considered “smaller” than lowercase characters, and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
+| **Description** | Returns the smallest value in lexicographical order. Note that uppercase characters are considered smaller than lowercase characters and [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
 | **Example 1** | `least(42, 84)` |
 | **Result** | `42` |
 | **Example 2** | `least('abc', 'bcd', 'cde', 'EFG')` |
@@ -748,7 +748,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if `string` ends with `search_string`. |
+| **Description** | Returns `true` if `string` ends with `search_string`. Note that [collations]({% link docs/preview/sql/expressions/collations.md %}) are not supported. |
 | **Example** | `suffix('abc', 'bc')` |
 | **Result** | `true` |
 | **Alias** | `ends_with` |
