@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB in Research S02E02: Abigale Kim"
-subtitle: "TODO"
+subtitle: "Anarchy in the Database: Abigale Kim on DuckDB and DBMS Extensibility"
 author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/science/thumbs/abigale-kim.png"
 image: "/images/science/thumbs/abigale-kim.png"
@@ -28,7 +28,7 @@ Highlights:
 * The rise of GPU-accelerated DuckDB extensions
 * Why bridging research and engineering matters for the future of databases
 
-Links:
+Papers:
 
 * [Anarchy in the Database: A Survey and Evaluation of Database Management System Extensibility]({% link _science/2025-09-01-anarchy-in-the-database.md %})
 * [Rethinking Analytical Processing in the GPU Era](https://arxiv.org/pdf/2508.04701)
