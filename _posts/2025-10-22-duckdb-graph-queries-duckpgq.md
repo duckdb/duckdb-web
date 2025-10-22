@@ -5,6 +5,7 @@ author: "Daniël ten Wolde"
 thumb: "/images/blog/thumbs/duckdb-graph-queries-duckpgq.svg"
 image: "/images/blog/thumbs/duckdb-graph-queries-duckpgq.png"
 excerpt: "You can process graphs in DuckDB! In this post, we show how to use DuckDB and the DuckPGQ community extension to analyze financial data for fraudulent patterns with the SQL/PGQ graph syntax that's part of SQL:2023."
+tags: ["extension"]
 ---
 
 Following the money is harder than it looks. Sophisticated criminals hide their tracks using long, complex chains of transactions, hoping to obscure the origin of illicit funds. Unraveling these networks is a classic graph problem: you're looking for suspicious patterns and hidden paths in a vast web of accounts and transactions.
