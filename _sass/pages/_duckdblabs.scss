@@ -430,14 +430,14 @@ body.career{
 	input[type="text"],
 	input[type="password"],
 	textarea {
-		background-color: white;
+		background: var(--doc-codebox-background-color, #1A1A1A);
+		border: 1px solid var(--doc-codebox-border-color, #333);
 		color: var(--main-text-primary-color, #0D0D0D);
 		font-size: 16px;
 		//padding: 25px 10px 25px 10px;
 		padding: 35px 10px 10px 10px;
 		display: block;
 		width: $width;
-		border: none;
 		border-radius: 10px;
 		transition: all .3s;
 		&:focus {
@@ -478,7 +478,8 @@ body.career{
 	.file-input {
 	  display: inline-block;
 	  text-align: left;
-	  background: white;
+	  background: var(--doc-codebox-background-color, #1A1A1A);
+	  border: 1px solid var(--doc-codebox-border-color, #333);
 	  padding: 16px;
 	  width: 450px;
 	  position: relative;
@@ -567,7 +568,7 @@ body.career{
 		border: 0;
 		padding: 0;
 		margin: 0;
-		margin-top: 30px;
+		margin-top: 24px;
 		@include button();
 	}
 }
@@ -717,5 +718,17 @@ html.darkmode {
 	}
 	body.landing section.support .options .option:hover{
 		background: #232323;
+	}
+	.form input[type="text"]:focus, .form input[type="password"]:focus, .form textarea:focus{
+		background-color: var(--purple-transparent-20);
+	}
+	.form .file-input > .button{
+		background-color: var(--grey-transparent-20);
+	}
+	.form .file-input:hover > .button{
+		background-color: var(--interactive-button-primary-orange-background, #FF6900);
+	}
+	.form .file-input:hover > .button{
+		background-image: url("data:image/svg+xml,%3Csvg width='11' height='10' viewBox='0 0 11 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.25504 9.40523V5.57608H10.1368V3.90518H6.25504V0.11084H4.51436V3.90518H0.615234V5.57608H4.51436V9.40523H6.25504Z' fill='black'/%3E%3C/svg%3E%0A")
 	}
 }

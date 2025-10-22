@@ -150,14 +150,11 @@ body.landing{
 	}
 	.type{
 		display: inline-block;
-		border: 1px solid var(--main-marker-border-color, #EDDD0C);
-		background: var(--main-marker-background-color, rgba(255, 244, 51, 0.60));
-		border-radius: 10px;
-		padding: 6px 15px 8px 15px;
-		margin-left: -15px;
-		margin-top: .15em;
-		margin-bottom: .15em;
+		margin-top: 0.2em;
+		margin-bottom: 0.12em;
 		white-space: nowrap;
+		border-bottom: 12px solid var(--yellow-50);
+		line-height: 0.6em;
 		.typecursor{
 			font-weight: 450;
 			margin-left: .1em;
@@ -718,52 +715,58 @@ body.landing{
 			padding-right: 40px;
 		}
 		
-		.box {
+	}
+	
+	.numbersbox {
+		display: flex;
+		justify-content: space-around;
+		padding: 24px;
+		border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
+		border-radius: 15px;
+		background: var(--main-infobox-background-color, rgba(246, 245, 255, 0.6));
+		backdrop-filter: blur(5px);
+	
+		> div {
 			display: flex;
-			justify-content: space-around;
-			padding: 24px;
-			border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
-			border-radius: 15px;
-			background: var(--main-infobox-background-color, rgba(246, 245, 255, 0.6));
-			backdrop-filter: blur(5px);
-		
-			> div {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				gap: 8px;
-			}
-		
-			.label {
-				color: var(--main-text-secondary-color, #666);
-				@include pre-title;
-			}
-		
-			.number {
-				@include display-2;
-			}
-		
-			.info {
-				@include body-standard;
-			}
-		
-			.divider {
-				width: 1px;
-				background: var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
-			}
+			flex-direction: column;
+			align-items: center;
+			gap: 8px;
 		}
-		
-		.reference {
-			width: 100%;
-			margin-top: 24px;
-			text-align: right;
-			font-size: var(--type-tiny, 12px);
-			color: var(--main-text-tertiary-color, #B2B2B2);
-		
-			a {
-				color: inherit;
-			}
+	
+		.label {
+			color: var(--main-text-secondary-color, #666);
+			@include pre-title;
+			text-align: center;
 		}
+	
+		.number {
+			@include display-2;
+		}
+	
+		.info {
+			@include body-standard;
+		}
+	
+		.divider {
+			width: 1px;
+			background: var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
+		}
+	}
+	
+	.numbersbox-reference {
+		width: 100%;
+		margin-top: 16px;
+		text-align: right;
+		font-size: var(--type-tiny, 12px);
+		color: var(--main-text-tertiary-color, #B2B2B2);
+	
+		a {
+			color: inherit;
+		}
+	}
+	
+	section.metrics{
+		padding: 8px 15px;
 	}
 	
 }
@@ -803,8 +806,15 @@ body.landing{
 			padding: 0;
 		}
 		
-		.box {
+		.numbersbox {
 			padding: 16px;
+		}
+	}
+	
+	section.metrics .numbersbox{
+		>div:last-child,
+		> .divider:nth-last-child(2){
+			display: none;
 		}
 	}
 }
@@ -912,6 +922,45 @@ body.landing{
 			white-space: nowrap;
 		}
 	}
+	body.landing section.metrics{
+		padding: 7*8px 15px
+	}
+	section.metrics .numbersbox{
+		flex-wrap: wrap;
+		padding: 8px;
+		align-items: flex-start;
+		
+		>div:not(.divider){
+			width: calc(50% - 6px);
+			padding: 24px 16px;
+			box-sizing: border-box;
+			position: relative;
+			
+			&::before{
+				content: "";
+				width: 76%;
+				height: 1px;
+				background-color: var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
+				position: absolute;
+				top: 2px;
+			}
+			
+			&:nth-child(1)::before,
+			&:nth-child(3)::before{
+				display: none;
+			}
+		}
+		
+		.divider{
+			height: 100px;
+			align-self: center;
+		}
+		
+		.divider:nth-of-type(4){
+			display: none;
+		}
+		
+	}
 }
 
 @media only screen and (max-width: 450px) {
@@ -920,8 +969,5 @@ body.landing{
 			width: 100%;
 			max-width: unset;
 		}	
-	}
-	body.landing section.most_scalable .box > div:first-child{
-		max-width: 100px;
 	}
 }
