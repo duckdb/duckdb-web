@@ -1,4 +1,4 @@
-name: Copy stable to preview
+name: Nightly documentation updates
 
 on:
   schedule:
