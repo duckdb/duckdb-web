@@ -6,7 +6,7 @@ redirect_from:
 title: CALL Statement
 ---
 
-The `CALL` statement invokes the given [table function]({%link docs/stable/sql/query_syntax/from %}#table-functions) and returns the results. 
+The `CALL` statement invokes the given [table function]({% link docs/stable/sql/query_syntax/from.md %}#table-functions) and returns the results. 
 
 > Thanks to [`FROM` first syntax]({% link docs/stable/sql/query_syntax/from.md %}#from-first-syntax) and the fact that procedures in DuckDB are implemented as table functions, you can use `FROM` instead of `CALL`.
 
