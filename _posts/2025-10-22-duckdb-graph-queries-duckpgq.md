@@ -258,7 +258,7 @@ As you can see, the logic requires a `WITH RECURSIVE` clause, manual path tracki
 
 ## Wrapping Up
 
-We began this post with a simple goal: to see if we could use DuckDB to hunt for the complex patterns and hidden paths typical of graph analysis. After diving into the FinBench dataset, the conclusion is clear: you can.
+We began this post with a simple goal: to see if we could use DuckDB to hunt for the complex patterns and hidden paths typical of graph analysis. After diving into the Financial Benchmark dataset, the conclusion is clear: you can.
 
 The key takeaway is the drastic improvement in usability. We saw how the visual syntax of SQL/PGQ, enabled by the DuckPGQ extension, transformed a sophisticated "ownership cycle" query from a monstrous recursive CTE into a few readable lines of code. This is exactly the kind of expressive power needed for real-world analytical tasks. For more information and complete documentation on DuckPGQ, be sure to visit its official website: [duckpgq.org](https://duckpgq.org).
 
