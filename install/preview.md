@@ -14,7 +14,7 @@ redirect_from:
   <h1>DuckDB Preview (Nightly) Installation</h1>
 </div>
 
-The nightly builds provide the latest development version of DuckDB. These previews include the newest features and fixes, but may be unstable.
+The preview (nightly) builds provide the latest development version of DuckDB. As such, they are constantly in flux and they are less suitable for production use than the stable releases of DuckDB. You should only use these releases if you are looking for [recent bugfixes](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Amerged) or optimizations.
 
 ### Command Line Interface (CLI)
 
