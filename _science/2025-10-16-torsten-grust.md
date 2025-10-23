@@ -15,6 +15,7 @@ length: "50 min"
 * [Apple Podcasts](https://podcasts.apple.com/us/podcast/recursive-ctes-trampolines-and-teaching-databases/id1631350873?i=1000732177402)
 * [Spotify](https://open.spotify.com/episode/3MdbbJP2CzVJT7whI7l0Va?si=7a8594c2795145f1)
 * [YouTube](https://youtu.be/Hoo0KZ6EDq0)
+* [Acast](https://shows.acast.com/disseminate/episodes/torsten-grust)
 
 ## Description
 

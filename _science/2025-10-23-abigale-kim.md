@@ -7,14 +7,15 @@ thumb: "/images/science/thumbs/abigale-kim.png"
 image: "/images/science/thumbs/abigale-kim.png"
 excerpt: ""
 tags: ["Podcast"]
-length: "50 min"
+length: "45 min"
 ---
 
 ## Links
 
-* [Apple Podcasts]()
-* [Spotify]()
-* [YouTube]()
+* [Apple Podcasts](https://podcasts.apple.com/us/podcast/anarchy-in-the-database-abigale-kim-on-duckdb-and/id1631350873?i=1000733086266)
+* [Spotify](https://open.spotify.com/episode/5E5vpZYoSZeCHZWTcQd2J3)
+* [YouTube](https://www.youtube.com/watch?v=fJVmx8nEWNo)
+* [Acast](https://shows.acast.com/disseminate/episodes/anarchy-in-the-database-abigale-kim-on-dbms-extensibility)
 
 ## Description
 
