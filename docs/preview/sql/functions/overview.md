@@ -57,6 +57,13 @@ For example, the following call returns a `Parser Error`:
 SELECT * FROM ('my_file.parquet').read_parquet(); -- does not work
 ```
 
+Additionally, the functions `coalesce` and `ifnull` cannot be used with function chaining for the time being:
+
+```sql
+SELECT (2).coalesce(0); -- does not work
+SELECT (2).ifnull(0); -- does not work
+```
+
 ## Query Functions
 
 The `duckdb_functions()` table function shows the list of functions currently built into the system.
