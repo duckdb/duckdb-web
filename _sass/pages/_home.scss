@@ -153,7 +153,7 @@ body.landing{
 		margin-top: 0.2em;
 		margin-bottom: 0.12em;
 		white-space: nowrap;
-		border-bottom: 12px solid var(--yellow-50);
+		border-bottom: 12px solid var(--main-marker-border-color, #EDDD0C);
 		line-height: 0.6em;
 		.typecursor{
 			font-weight: 450;
@@ -255,7 +255,6 @@ body.landing{
 				transition: color .3s;
 			}
 			a:hover{
-				color: $purple;
 				background: none!important;
 			}
 			pre{
@@ -263,6 +262,12 @@ body.landing{
 			}
 			&.haslines{
 				padding-left: 60px;
+			}
+		}
+		.result.content{
+			.highlight{
+				margin-top: 10px;
+				margin-bottom: 12.5px;
 			}
 		}
 		.bottombar{
