@@ -4,7 +4,7 @@ title: "Adoption Metrics and Benchmark Results for DuckDB v1.4 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/benchmark-results-1-4-lts.svg"
 image: "/images/blog/thumbs/benchmark-results-1-4-lts.png"
-excerpt: "The DuckDB landing page makes some strong claims about DuckDB's popularity. In this blog post, we these claims."
+excerpt: "The DuckDB landing page makes some strong claims about DuckDB's popularity. In this blog post, we show evidence for these claims."
 tags: ["release"]
 ---
 
