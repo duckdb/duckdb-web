@@ -4,7 +4,7 @@ title: "Relational Charades: Turning Movies into Tables"
 author: "Hannes Mühleisen"
 thumb: "/images/blog/thumbs/movies-in-databases.svg"
 image: "/images/blog/thumbs/movies-in-databases.png"
-excerpt: "You can store and even process videos in DuckDB. In this post, we show you show."
+excerpt: "You can store and even process videos in DuckDB. In this post, we show you how."
 ---
 
 <p style="text-align: right"><i>“Your scientists were so preoccupied with whether they could,<br/> they didn't stop to think if they should.”</i><br/>
