@@ -26,10 +26,16 @@ jobs:
           STAR_COUNT_FORMATTED=$(python3 -c 'import sys; print(f"{int(sys.argv[1]) / 1000:.1f}k", end="")' ${STAR_COUNT})
           sed -i "s/^star_count:.*/star_count: '${STAR_COUNT_FORMATTED}'" _config.yml
 
-      - name: Run copy
+      - name: Copy releases CSV
+        run: |
+          # make sure the duckdb-releases.csv file gets deployes
+          cp _data/past_releases.csv data/duckdb-releases.csv
+
+      - name: Run copy and update calendar
         run: |
           pip install -r requirements.txt --break-system-packages
           python scripts/copy_stable_to_preview.py
+          python scripts/get_calendar.py
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v7.0.8
