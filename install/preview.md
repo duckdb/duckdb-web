@@ -2,12 +2,19 @@
 layout: default
 title: DuckDB Preview (Nightly) Installation
 excerpt: DuckDB preview installation page
+body_class: blog_typography nightly_install
+max_page_width: medium
+toc: false
 redirect_from:
 - install/nightly
 - install/nightlies
 ---
 
-## DuckDB Preview (Nightly) Installation
+<div class="wrap pagetitle pagetitle--small">
+  <h1>DuckDB Preview (Nightly) Installation</h1>
+</div>
+
+The nightly builds provide the latest development version of DuckDB. These previews include the newest features and fixes, but may be unstable.
 
 ### Command Line Interface (CLI)
 
@@ -63,7 +70,7 @@ Maven:
 npm install duckdb@next
 ```
 
-> The nightly release of the Node.js driver installs the old (deprecated) Node.js driver and not DuckDB Node Neo. For the Node Neo driver, the nightly release is currently not available.
+Note: The nightly release of the Node.js driver installs the old (deprecated) Node.js driver and not DuckDB Node Neo. For the Node Neo driver, the nightly release is currently not available.
 
 ### C / C++
 

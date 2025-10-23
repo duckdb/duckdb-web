@@ -362,6 +362,11 @@
 		}
 	}
 	
+	h2 + .highlighter-rouge,
+	h3 + .highlighter-rouge{
+		margin-top: 30px;
+	}
+	
 	blockquote {
 		h4 {
 			@include title-2();
@@ -391,12 +396,18 @@
 			margin-left: 0;
 			line-height: 27px;
 		}
+		tr{
+			border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6)
+		}
+		th{
+			padding: 5px 10px;
+		}
 	}
-	
+
 	table thead th {
 		@include title-2();
 	}
-	
+
 	table tbody td {
 		@include body-standard();
 		padding: 10px;
@@ -409,6 +420,17 @@
 	
 	div.highlight {
 		max-width: 750px;
+		border-radius: 10px;
+		border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+	}
+	
+	pre.highlight {
+		tab-size: 4;
+		white-space: pre;
+		overflow-x: auto;
+		padding: 15px;
+		margin: 0;
+		border-radius: 10px;
 	}
 	
 	div.highlighter-rouge + table,
