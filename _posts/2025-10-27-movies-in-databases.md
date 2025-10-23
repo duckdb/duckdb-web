@@ -280,7 +280,7 @@ ORDER BY y, x;
 SELECT '</table></body></html>';
 ```
 
-You can see the result in [`movies-table.html`](https://blobs.duckdb.org/data/movies-table.html) (keep in mind that it's 20 MB and renders each movie pixes as a table field!).
+You can see the result in [`movies-table.html`](https://blobs.duckdb.org/data/movies-table.html) (keep in mind that it's 20 MB and renders each movie pixels as a table field!).
 
 ## Conclusion
 
