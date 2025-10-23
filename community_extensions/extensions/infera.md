@@ -44,8 +44,8 @@ docs:
     This extension is experimental at the moment, so it is not recommended for production use.
     For more information, like API references and examples, visit the project's GitHub repository: https://github.com/CogitatorTech/infera
 
-extension_star_count: 80
-extension_star_count_pretty: 80
+extension_star_count: 81
+extension_star_count_pretty: 81
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_infera.png'
