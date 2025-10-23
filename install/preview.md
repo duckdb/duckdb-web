@@ -6,8 +6,10 @@ body_class: blog_typography nightly_install
 max_page_width: medium
 toc: false
 redirect_from:
-- install/nightly
-- install/nightlies
+- /nightly
+- /nightlies
+- /install/nightly
+- /install/nightlies
 ---
 
 <div class="wrap pagetitle pagetitle--small">
