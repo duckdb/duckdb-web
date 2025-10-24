@@ -42,7 +42,7 @@ Configure the system to use 1 thread.
 SET threads TO 1;
 ```
 
-Turn logging on logging and set the logging level to `debug`.
+Turn logging on and set the logging level to `debug`.
 For additional details on logging levels, see [Log Level]({% link docs/stable/operations_manual/logging/overview.md%}#log-level).
 
 ```sql
@@ -52,8 +52,14 @@ set logging_level='debug';
 
 Write a single log message with the a `debug` level and a `connection` scope.
 
-```
+```sql
 SELECT write_log('A new client has connected.', level := 'debug', scope := 'connection');
+```
+
+Write a single log message with the a `debug` level and a `connection` scope and a custom `log_type`.
+
+```
+SELECT write_log('A new duck has connected to the lake.', level := 'debug', scope := 'connection', log_type := 'duckdb.docs.example.quack');
 ```
 
 Check logs with the `debug` log level.
