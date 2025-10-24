@@ -42,6 +42,39 @@ Configure the system to use 1 thread.
 SET threads TO 1;
 ```
 
+Turn logging on logging and set the logging level to `debug`.
+For additional details on logging levels, see [Log Level]({% link docs/stable/operations_manual/logging/overview.md%}#log-level).
+
+```sql
+set enable_logging=true;
+set logging_level='debug';
+```
+
+Write a single log message with the a `debug` level and a `connection` scope.
+
+```
+SELECT write_log('A new client has connected.', level := 'debug', scope := 'connection');
+```
+
+Check logs with the `debug` log level.
+
+```sql
+SELECT * FROM duckdb_logs WHERE log_level ='debug';
+```
+
+Check logs with the `QueryLog` type.
+For additional details on logging types, see [Logging-Specific Types]({% link docs/stable/operations_manual/logging/overview.md%}#logging-specific -types).
+
+```sql
+SELECT * FROM duckdb_logs WHERE type ='QueryLog';
+```
+
+Check current logging settings.
+
+```sql
+SELECT * FROM duckdb_settings() where name like '%logging%';
+```
+
 Enable printing of a progress bar during long-running queries.
 
 ```sql

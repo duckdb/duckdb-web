@@ -68,7 +68,7 @@ only log messages of the 'HTTP' type will be written to the log.
 To enable multiple log types, simply pass:
 
 ```sql
-CALL enable_logging(['HTTP', 'QueryLog']);~~~~
+CALL enable_logging(['HTTP', 'QueryLog']);
 ```
 
 ### Structured Logging
