@@ -72,7 +72,6 @@ SELECT * FROM duckdb_logs WHERE log_level ='DEBUG';
 ```
 
 Check logs with the `QueryLog` type.
-For additional details on logging types, see [Logging-Specific Types]({% link docs/stable/operations_manual/logging/overview.md%}#logging-specific -types).
 
 ```sql
 SELECT * FROM duckdb_logs WHERE type ='QueryLog';
