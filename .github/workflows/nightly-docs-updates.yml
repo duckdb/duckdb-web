@@ -22,7 +22,7 @@ jobs:
 
       - name: Update star count
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           STAR_COUNT=$(gh api repos/duckdb/duckdb | jq ".stargazers_count")
           STAR_COUNT_FORMATTED=$(python3 -c 'import sys; print(f"{int(sys.argv[1]) / 1000:.1f}k", end="")' ${STAR_COUNT})
