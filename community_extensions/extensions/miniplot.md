@@ -80,8 +80,8 @@ docs:
 
     **Note:** Charts open in your default web browser as standalone HTML files.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
+extension_star_count: 6
+extension_star_count_pretty: 6
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_miniplot.png'
