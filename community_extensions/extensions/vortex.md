@@ -25,11 +25,11 @@ repo:
 
 docs:
   hello_world: |
-    write a vortex file
-    `COPY (SELECT * from generate_series(0, 4)) TO 'FILENAME.vortex' (FORMAT VORTEX);`
+    -- Write a Vortex file:
+    COPY (SELECT * from generate_series(0, 4)) TO 'FILENAME.vortex' (FORMAT vortex);
 
-    scan a vortex file
-    `select * from read_vortex('...');`
+    -- Scan a Vortex file:
+    SELECT * FROM read_vortex('...');
 
 extension_star_count: 30
 extension_star_count_pretty: 30
