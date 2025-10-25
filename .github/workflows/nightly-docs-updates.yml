@@ -43,6 +43,6 @@ jobs:
         uses: peter-evans/create-pull-request@v7.0.8
         with:
           branch: update-preview-branch
-          commit-message: "Copy stable to preview"
-          title: "Automated PR: Copy stable to preview"
+          commit-message: "Update star count, copy stable to preview"
+          title: "Automated PR: Nightly documentation update"
           body: "This PR was created automatically by GitHub Actions."
