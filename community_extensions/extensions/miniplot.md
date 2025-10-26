@@ -108,6 +108,7 @@ LOAD {{ page.extension.name }};
 | line_chart               | scalar        | NULL        | NULL    |          |
 | miniplot                 | scalar        | NULL        | NULL    |          |
 | miniplot_openssl_version | scalar        | NULL        | NULL    |          |
+| scatter_3d_chart         | scalar        | NULL        | NULL    |          |
 | scatter_chart            | scalar        | NULL        | NULL    |          |
 
 
