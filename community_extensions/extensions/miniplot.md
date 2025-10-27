@@ -72,8 +72,8 @@ docs:
         'Monthly Sales from CSV'
     ) FROM read_csv('sales.csv');
 
-extension_star_count: 6
-extension_star_count_pretty: 6
+extension_star_count: 8
+extension_star_count_pretty: 8
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_miniplot.png'
