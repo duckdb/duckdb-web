@@ -32,10 +32,10 @@ Attach the database `file.db` with a block size of 16 kB:
 ATTACH 'file.db' (BLOCK_SIZE 16_384);
 ```
 
-Attach the database `file.db` with a row group size of 100 rows:
+Attach the database `file.db` with a row group size of 2048 rows:
 
 ```sql
-ATTACH 'file.db' (ROW_GROUP_SIZE 100);
+ATTACH 'file.db' (ROW_GROUP_SIZE 2048);
 ```
 
 Attach a SQLite database for reading and writing (see the [`sqlite` extension]({% link docs/preview/core_extensions/sqlite.md %}) for more information):
@@ -133,7 +133,7 @@ DuckDB supports database encryption. By default, it uses [AES encryption](https:
 ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack');
 ```
 
-The encryption covers the main database file, the write-ahead-log (WAL) file, and even temporary files. To encrypt data, DuckDB can use either the built-in `mbedtls` library or the OpenSSL library from the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}). Note that the OpenSSL versions are much faster due to hardware acceleration, so make sure to load the `httpfs` for good encryption performance:
+To encrypt data, DuckDB can use either the built-in `mbedtls` library or the OpenSSL library from the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}). Note that the OpenSSL versions are much faster due to hardware acceleration, so make sure to load the `httpfs` for good encryption performance:
 
 ```sql
 LOAD httpfs;
