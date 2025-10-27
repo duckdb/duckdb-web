@@ -135,7 +135,7 @@ DuckDB supports database encryption. By default, it uses [AES encryption](https:
 ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack');
 ```
 
-The encryption covers the main database file, the write-ahead-log (WAL) file, and even temporary files. To encrypt data, DuckDB can use either the built-in `mbedtls` library or the OpenSSL library from the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}). Note that the OpenSSL versions are much faster due to hardware acceleration, so make sure to load the `httpfs` for good encryption performance:
+To encrypt data, DuckDB can use either the built-in `mbedtls` library or the OpenSSL library from the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}). Note that the OpenSSL versions are much faster due to hardware acceleration, so make sure to load the `httpfs` for good encryption performance:
 
 ```sql
 LOAD httpfs;
