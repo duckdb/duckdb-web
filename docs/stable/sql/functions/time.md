@@ -24,24 +24,14 @@ The table below shows the available scalar functions for `TIME` types.
 
 | Name | Description |
 |:--|:-------|
-| [`current_time`](#current_time) | Current time (start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
 | [`date_diff(part, starttime, endtime)`](#date_diffpart-starttime-endtime) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `starttime` and `endtime`, inclusive of the larger time and exclusive of the smaller time. |
 | [`date_part(part, time)`](#date_partpart-time) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, starttime, endtime)`](#date_subpart-starttime-endtime) | The signed length of the interval between `starttime` and `endtime`, truncated to whole multiples of [`part`]({% link docs/stable/sql/functions/datepart.md %}). |
 | [`extract(part FROM time)`](#extractpart-from-time) | Get subfield from a time. |
-| [`get_current_time()`](#get_current_time) | Current time (start of current transaction) in UTC. |
+| [`get_current_time()`](#get_current_time) | Current time (start of current transaction). |
 | [`make_time(bigint, bigint, double)`](#make_timebigint-bigint-double) | The time for the given parts. |
 
 The only [date parts]({% link docs/stable/sql/functions/datepart.md %}) that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds` and `microseconds`.
-
-#### `current_time`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Current time (start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
-| **Example** | `current_time` |
-| **Result** | `10:31:58.578` |
-| **Alias** | `get_current_time()` |
 
 #### `date_diff(part, starttime, endtime)`
 
@@ -82,10 +72,10 @@ The only [date parts]({% link docs/stable/sql/functions/datepart.md %}) that are
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current time (start of current transaction) in UTC. |
+| **Description** | Current time (start of current transaction) as `TIMETZ`. |
 | **Example** | `get_current_time()` |
-| **Result** | `10:31:58.578` |
-| **Alias** | `current_time` |
+| **Result** | `06:09:59.988+2  ` |
+| **Alias** | `current_time` (no parentheses necessary) |
 
 #### `make_time(bigint, bigint, double)`
 
