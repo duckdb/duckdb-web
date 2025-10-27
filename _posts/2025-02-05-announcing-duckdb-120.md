@@ -31,6 +31,8 @@ If you would like to return a list, use the [`map_extract` function]({% link doc
 
 [**The indexing of `list_reduce` is fixed.**](https://github.com/duckdb/duckdb/pull/15614) When indexing is applied in `list_reduce`, the index points to the [last parameter of the lambda function]({% link docs/stable/sql/functions/lambda.md %}#reduce) and indexing starts from 1. Therefore, `list_reduce(['a', 'b'], (x, y, i) -> x || y || i)` returns `ab2`.
 
+[**The `current_time` and `current_date` functions are now with respect to local timezone.**](https://github.com/duckdb/duckdb/pull/15125) This makes both functions compatible with PostgreSQL at the price of requiring ICU to be loaded to use these functions and their aliases `get_current_time()` and `today()`.
+
 ### Explicit Storage Versions
 
 DuckDB v1.2.0 ships new compression methods but *they are not yet enabled by default* to ensure that older DuckDB versions can read files produced by DuckDB v1.2.0.
