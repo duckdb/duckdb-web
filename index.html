@@ -143,8 +143,19 @@ To add a banner, set banner: true in the front matter and define the banner cont
 			{% for post in site.posts limit:2 %}
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
 				{% assign tag_classes = post.tags | join: ' ' | downcase | slugify %}
-				<div class="postpreview {{ tag_classes }}" data-title="{{ post.title | escape }}">
-					<a href="{{ post.url }}" class="blocklink" title="{{ post.title }}"></a>
+				{% if post.external_post_url %}
+					{% assign is_external = true %}
+					{% assign post_link = post.external_post_url %}
+					{% assign link_target = "_blank" %}
+					{% assign link_rel = "noopener noreferrer" %}
+				{% else %}
+					{% assign is_external = false %}
+					{% assign post_link = post.url %}
+					{% assign link_target = "_self" %}
+					{% assign link_rel = "" %}
+				{% endif %}
+				<div class="postpreview {{ tag_classes }}{% if is_external %} external-post{% endif %}" data-title="{{ post.title | escape }}">
+					<a href="{{ post_link }}" class="blocklink" title="{{ post.title }}" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
 					<div class="postimg custom">
 						{% if post.thumb %}
 							<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image"/>
@@ -162,6 +173,9 @@ To add a banner, set banner: true in the front matter and define the banner cont
 						{% endif %}
 						<h3 class="headline-3">{{ post.title }}</h3>
 						<div class="meta text-secondary-color body-small">
+							{% if is_external %}
+								<div class="external-source">{{ post.external_post_url | extract_domain }}</div>
+							{% endif %}
 							<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
 							<div class="author">{{ post.author | default: "Unknown Author" }}</div>
 						</div>

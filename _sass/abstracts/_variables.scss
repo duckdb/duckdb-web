@@ -295,6 +295,7 @@ $docuh5: 18px;
   --main-blogpost-border-color: var(--grey-90);
   --main-blogpost-ext-border-color: var(--blue-90);
   --main-body-background-color: var(--grey-98);
+  --main-body-background-gradient: #fafafa00;
   --main-codebox-border-color: #0d0d0d26;
   --main-codebox-dropshadow: #0000000d;
   --main-codebox-main-background-color: var(--grey-transparent-98);
@@ -322,6 +323,7 @@ $docuh5: 18px;
   --main-number-box-gradient-end: #d4ccff00;
   --main-number-box-gradient-start: var(--purple-transparent-90);
   --main-number-box-text-secondary: var(--grey-transparent-30);
+  --main-quaternary-color: var(--grey-80);
   --main-ribbon-background-color-blue: var(--blue-transparent-80);
   --main-ribbon-background-color-purple: var(--purple-transparent-80);
   --main-ribbon-background-color-yellow: var(--yellow-transparent-80);
@@ -470,6 +472,7 @@ html.darkmode {
   --main-blogpost-border-color: var(--grey-20);
   --main-blogpost-ext-border-color: var(--blue-20);
   --main-body-background-color: var(--grey-05);
+  --main-body-background-gradient: #0d0d0d00;
   --main-codebox-border-color: var(--grey-20);
   --main-codebox-dropshadow: #ffffff26;
   --main-codebox-main-background-color: var(--grey-transparent-05);
@@ -497,6 +500,7 @@ html.darkmode {
   --main-number-box-gradient-end: #fff1001a;
   --main-number-box-gradient-start: var(--yellow-transparent-40);
   --main-number-box-text-secondary: var(--grey-transparent-70);
+  --main-quaternary-color: var(--grey-40);
   --main-ribbon-background-color-blue: var(--blue-transparent-20);
   --main-ribbon-background-color-purple: var(--purple-transparent-20);
   --main-ribbon-background-color-yellow: var(--yellow-transparent-20);
@@ -624,4 +628,3 @@ html.darkmode {
     --type-display-1: 38px;
   }
 }
-
