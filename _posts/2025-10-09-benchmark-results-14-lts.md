@@ -25,6 +25,8 @@ On October 9, 2025, DuckDB's in-memory variant hit #1 on the popular [ClickBench
 
 This result was made possible due several [performance optimizations]({% post_url 2025-09-16-announcing-duckdb-140 %}#performance-and-optimizations) in DuckDB v1.4.
 
+> Update As of October 26, the rules of ClickBench changed. The new rules prevent [in-memory databases from showing “cold” (and “combined”) results](https://github.com/ClickHouse/ClickBench/pull/660). After this change, DuckDB is the #1 open-source system in hot runs, closely trailing the leader in that category, Umbra, a closed-source research prototype.
+
 ## #3 Most Admired System on Stack Overflow
 
 In Stack Overflow's 2024 Developer Survey, DuckDB was named among the [**top-3 most admired database systems**](https://survey.stackoverflow.co/2024/technology#2-databases).
