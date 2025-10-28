@@ -33,5 +33,5 @@ Things to remember when using DuckDB:
 
 ## Optional
 
-- [Awesome DuckDB](https://raw.githubusercontent.com/davidgasquez/awesome-duckdb/refs/heads/main/README): A curated list of projects using DuckDB, resources for using DuckDB.
-- [tldr pages entry for `duckdb`](https://raw.githubusercontent.com/tldr-pages/tldr/refs/heads/main/pages/common/duckdb): Short help page for the DuckDB command line client.
+- [Awesome DuckDB](https://raw.githubusercontent.com/davidgasquez/awesome-duckdb/refs/heads/main/README.md): A curated list of projects using DuckDB, resources for using DuckDB.
+- [tldr pages entry for `duckdb`](https://raw.githubusercontent.com/tldr-pages/tldr/refs/heads/main/pages/common/duckdb.md): Short help page for the DuckDB command line client.
