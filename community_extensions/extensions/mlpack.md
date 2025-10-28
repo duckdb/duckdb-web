@@ -8,18 +8,18 @@ excerpt: |
 extension:
   name: mlpack
   description: Machine learning library in C++
-  version: 0.0.2
+  version: 0.0.3
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_mingw;windows_amd64;osx_amd64;osx_arm64;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "windows_amd64_mingw;windows_amd64;wasm_mvp;wasm_eh;wasm_threads"
   requires_toolchains: "fortran;omp"    
   maintainers:
     - eddelbuettel
 
 repo:
   github: eddelbuettel/duckdb-mlpack
-  ref: 64ce9296ac4189f2c2883928f8e937b8954a8f79
+  ref: f9bb8d53f37f23455a51c2e894a918e6a4aa6d6c
   
 docs:
   hello_world: |
@@ -30,7 +30,7 @@ docs:
     CREATE TABLE Y AS SELECT * FROM read_csv("https://eddelbuettel.github.io/duckdb-mlpack/data/iris_labels.csv");
     CREATE TABLE Z (name VARCHAR, value VARCHAR);
     INSERT INTO Z VALUES ('iterations', '50'), ('tolerance', '1e-7');
-    CREATE TABLE M (json VARCHAR);
+    CREATE TABLE M (key VARCHAR, json VARCHAR);
 
     -- Train model for 'Y' on 'X' using parameters 'Z', store in 'M'
     CREATE TEMP TABLE A AS SELECT * FROM mlpack_adaboost("X", "Y", "Z", "M");
@@ -46,8 +46,6 @@ docs:
     INSERT INTO N VALUES (5.843, 3.054, 3.759, 1.199), (4.3, 2.0, 1.0, 0.1), (7.9, 4.4, 6.9, 2.5);
     -- and this predict one element each
     SELECT * FROM mlpack_adaboost_pred("N", "M");
-
-    EOF
 
   extended_description: |
     The mlpack extension allows to fit (or train) and predict (or classify) from the models implemented, currently adaBoost and (regularized) linear regression.

@@ -23,8 +23,8 @@ repo:
   github: query-farm/marisa
   ref: 62a09ef28fab1d81c18bafe143eaed935b4abf08
 
-extension_star_count: 3
-extension_star_count_pretty: 3
+extension_star_count: 4
+extension_star_count_pretty: 4
 extension_download_count: 380
 extension_download_count_pretty: 380
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
