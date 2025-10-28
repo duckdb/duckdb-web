@@ -32,8 +32,8 @@ If you’re into **data systems, query processing, or bridging research and prac
 
 Links:
 
-* [USING KEY in Recursive CTEs](https://duckdb.org/2025/05/23/using-key)
-* [How DuckDB is USING KEY to Unlock Recursive Query Performance](https://dl.acm.org/doi/pdf/10.1145/3722212.3725107)
+* [USING KEY in Recursive CTEs]({% post_url 2025-05-23-using-key %})
+* [How DuckDB is `USING KEY` to Unlock Recursive Query Performance]({% link _science/2025-06-22-bamberg-using-key-sigmod.md %})
 * [Trampoline-Style Queries for SQL](https://mail.vldb.org/cidrdb/papers/2025/p1-lambrecht.pdf)
 * [U Tübingen Advent of code](https://github.com/DBatUTuebingen/Advent_of_Code)
 * [A Fix for the Fixation on Fixpoints](https://db.cs.uni-tuebingen.de/publications/2023/a-fix-for-the-fixation-on-fixpoints/a-fix-for-the-fixation-on-fixpoints.pdf)
