@@ -5,7 +5,7 @@ title: SHOW and SHOW DATABASE Statements
 
 ## `SHOW` Statement
 
-The `SHOW` statement is an alias for [`DESCRIBE`]({% link docs/stable/sql/statements/show.md %}).
+The `SHOW` statement is an alias for [`DESCRIBE`]({% link docs/stable/sql/statements/describe.md %}).
 It shows the schema of a table, view or query.
 
 ## `SHOW DATABASES` Statement
