@@ -21,7 +21,7 @@ INSTALL aws;
 LOAD aws;
 ```
 
-> In most cases, the `aws` extension works in conjunction with the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}.
+> In most cases, the `aws` extension works in conjunction with the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}).
 
 ## Configuration and Authentication
 
