@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB in Research S02E03: Mihail Stoian"
-subtitle: "TODO"
+subtitle: "Rethinking Query Execution and Bidirectional Information Flow in DuckDB"
 author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/science/thumbs/mihail-stoian.png"
 image: "/images/science/thumbs/mihail-stoian.png"
@@ -10,11 +10,12 @@ tags: ["Podcast"]
 length: "35 min"
 ---
 
-## Links
+## Podcast Links
 
-* [Apple Podcasts]()
-* [Spotify]()
-* [YouTube]()
+* [Apple Podcasts](https://podcasts.apple.com/us/podcast/parachute-rethinking-query-execution-and/id1631350873?i=1000734163381)
+* [Spotify](https://open.spotify.com/episode/21HQZct3VjcJBnDR2hJ6hi)
+* [YouTube](https://www.youtube.com/watch?v=HfZuVtY5lZg)
+* [Acast](https://shows.acast.com/disseminate/episodes/parachute)
 
 ## Description
 
