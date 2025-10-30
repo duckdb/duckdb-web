@@ -15,6 +15,9 @@ For implementation details, see the [announcement blog post]({% post_url 2024-06
 
 > Warning The `delta` extension is currently experimental and is [only supported on given platforms](#supported-duckdb-versions-and-platforms).
 
+> To connect to Unity Catalog, DuckDB has the [`uc_catalog` experimental extension](https://github.com/duckdb/uc_catalog).
+> Please note that this extension is a proof-of-concept and not production-ready.
+
 ## Installing and Loading
 
 The `delta` extension will be transparently [autoloaded]({% link docs/stable/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.

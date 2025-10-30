@@ -426,7 +426,7 @@ The functions below are difficult to categorize into specific function types and
 
 ## Utility Table Functions
 
-A table function is used in place of a table in a `FROM` clause.
+A [table function]({% link docs/preview/sql/query_syntax/from.md %}#table-functions) is used in place of a table in a `FROM` clause.
 
 | Name | Description |
 |:--|:-------|

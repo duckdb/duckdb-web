@@ -589,6 +589,10 @@
                   "url": "set_variable"
                 },
                 {
+                  "page": "SHOW and SHOW DATABASES",
+                  "url": "show"
+                },
+                {
                   "page": "SUMMARIZE",
                   "url": "summarize"
                 },

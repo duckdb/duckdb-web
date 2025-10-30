@@ -33,7 +33,6 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 
 | Name | Description |
 |:--|:-------|
-| [`current_date`](#current_date) | Current date (at start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
 | [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date and return a `DATETIME` value. |
 | [`date_diff(part, startdate, startdate)`](#date_diffpart-startdate-enddate) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `startdate` and `enddate`, inclusive of the larger date and exclusive of the smaller date. |
 | [`date_part(part, date)`](#date_partpart-date) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
@@ -52,15 +51,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | [`strftime(date, format)`](#strftimedate-format) | Converts a date to a string according to the [format string]({% link docs/stable/sql/functions/dateformat.md %}). |
 | [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` to a grid of width `bucket_width`. The grid is anchored at `2000-01-01[ + offset]` when `bucket_width` is a number of months or coarser units, else `2000-01-03[ + offset]`. Note that `2000-01-03` is a Monday. |
 | [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01` when `bucket_width` is a number of months or coarser units, else `2000-01-03`. Note that `2000-01-03` is a Monday. |
-| [`today()`](#today) | Current date (start of current transaction) in UTC. |
-
-#### `current_date`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Current date (at start of current transaction) in the local time zone. Note that parentheses should be omitted from the function call. |
-| **Example** | `current_date` |
-| **Result** | `2022-10-08` |
+| [`today()`](#today) | Current date (start of current transaction) in the local time zone. |
 
 #### `date_add(date, interval)`
 
@@ -214,9 +205,10 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current date (start of current transaction) in UTC. |
+| **Description** | Current date (start of current transaction) in the local time zone. |
 | **Example** | `today()` |
 | **Result** | `2022-10-08` |
+| **Alias** | `current_date` (no parentheses necessary) |
 
 ## Date Part Extraction Functions
 

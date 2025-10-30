@@ -4,7 +4,7 @@ title: "Adoption Metrics and Benchmark Results for DuckDB v1.4 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/benchmark-results-1-4-lts.svg"
 image: "/images/blog/thumbs/benchmark-results-1-4-lts.png"
-excerpt: "The DuckDB landing page makes some strong claims about DuckDB's popularity. In this blog post, we these claims."
+excerpt: "The DuckDB landing page makes some strong claims about DuckDB's popularity. In this blog post, we show evidence for these claims."
 tags: ["release"]
 ---
 
@@ -25,6 +25,8 @@ On October 9, 2025, DuckDB's in-memory variant hit #1 on the popular [ClickBench
 
 This result was made possible due several [performance optimizations]({% post_url 2025-09-16-announcing-duckdb-140 %}#performance-and-optimizations) in DuckDB v1.4.
 
+> Update As of October 26, the rules of ClickBench changed. The new rules prevent [in-memory databases from showing “cold” (and “combined”) results](https://github.com/ClickHouse/ClickBench/pull/660). After this change, DuckDB is the #1 open-source system in hot runs, closely trailing the leader in that category, Umbra, a closed-source research prototype.
+
 ## #3 Most Admired System on Stack Overflow
 
 In Stack Overflow's 2024 Developer Survey, DuckDB was named among the [**top-3 most admired database systems**](https://survey.stackoverflow.co/2024/technology#2-databases).
@@ -44,7 +46,7 @@ DuckDB is not only fast but it is also scalable. We have recently run the querie
 
 We ran the experiment on an [`i8g.48xlarge` EC2 instance](https://aws.amazon.com/ec2/instance-types/i8g/), which has 1.5 TB of RAM and 192 CPU cores (AWS Graviton4, Arm64). This instance has 12 NVMe SSD disks, each 3750 GB in size. We created a RAID-0 array from them to have a single 45 TB partition and formatted it using [XFS]({% link docs/stable/guides/performance/environment.md %}#local-disk).
 
-We generated the dataset with the [tpchgen-rs](https://github.com/clflushopt/tpchgen-rs/) tool, a pure Rust implementation of the TPC-H generator. We configured the generator to produce chunks of Parquet files and loaded them into DuckDB. The final DuckDB database was about 27 TB in size (as a single file!).
+We generated the dataset with the [`tpchgen-cli`](https://github.com/clflushopt/tpchgen-rs/) tool, a pure Rust implementation of the TPC-H generator. We configured the generator to produce chunks of Parquet files and loaded them into DuckDB. The final DuckDB database was about 27 TB in size (as a single file!).
 
 DuckDB completed all 22 queries of the benchmark using its [larger-than-memory processing]({% post_url 2024-07-09-memory-management %}). For some queries, this required spilling _about 7 terabytes of data_ to disk.
 The median query runtime was 1.19 hours and the geometric mean runtime was 1.13 hours.

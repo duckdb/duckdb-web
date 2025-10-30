@@ -74,7 +74,7 @@ and were curious: how far can DuckDB scale on this laptop?
 #### Data Generation
 
 Of course, we first needed some big TPC-H datasets, and we needed to generate them locally – downloading them could take days.
-Luckily, we could use the [tpchgen-rs](https://github.com/clflushopt/tpchgen-rs/) tool, a pure Rust implementation of the TPC-H generator that can produce large-scale datasets on the laptop in just a few hours. We generated the data as Parquet files and loaded them into DuckDB.
+Luckily, we could use the [`tpchgen-cli`](https://github.com/clflushopt/tpchgen-rs/) tool, a pure Rust implementation of the TPC-H generator that can produce large-scale datasets on the laptop in just a few hours. We generated the data as Parquet files and loaded them into DuckDB.
 
 > Omarchy comes with the [btrfs](https://en.wikipedia.org/wiki/Btrfs) file system by default. We created a directory for the generated data and disabled copy-on-write (see the [configuration details](#file-system-configuration)).
 

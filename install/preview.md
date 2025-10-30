@@ -2,83 +2,73 @@
 layout: default
 title: DuckDB Preview (Nightly) Installation
 excerpt: DuckDB preview installation page
+body_class: blog_typography nightly_install
+max_page_width: medium
+toc: false
 redirect_from:
-- install/nightly
-- install/nightlies
+  - /nightly
+  - /nightlies
+  - /install/nightly
+  - /install/nightlies
 ---
 
-## DuckDB Preview (Nightly) Installation
+<div class="wrap pagetitle pagetitle--small">
+  <h1>DuckDB Preview (Nightly) Installation</h1>
+</div>
 
-### Command Line Interface (CLI)
+The preview (nightly) builds provide the latest development version of DuckDB. As such, they are constantly in flux and they are less suitable for production use than the stable releases of DuckDB. You should only use these releases if you are looking for [recent bugfixes](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Amerged) or optimizations.
 
-| Platform | Architecture   | Download                                                                        |
-| -------- | -------------- | ------------------------------------------------------------------------------- |
-| Linux    | x86_64         | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip) |
-| Linux    | arm64          | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip) |
-| macOS    | arm64 / x86_64 | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip)         |
-| Windows  | arm64 / x86_64 | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip)     |
+## Command Line Interface (CLI)
 
-### Python
+| Platform | Architecture       | Download                                                                        |
+| -------- | ------------------ | ------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip) |
+| Linux    | `x86_64`           | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip) |
+| macOS    | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip)         |
+| Windows  | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip)     |
+
+## Python
 
 ```batch
 pip install duckdb --pre --upgrade
 ```
 
-### R
+## Java
 
-```R
-install.packages("pak")
-pak::pak("duckdb/duckdb-r")
-```
+In the [`duckdb-java` repository](https://github.com/duckdb/duckdb-java), list the [successful runs on the `Java JDBC` workflow](https://github.com/duckdb/duckdb-java/actions?query=workflow%3A%22Java+JDBC%22+is%3Asuccess). In the workflow output, you can find the artifacts such as `java-linux-aarch64.zip` and `java-osx-universal.zip`.
 
-### Java
-
-Maven:
-
-```xml
-<dependencies>
-  <dependency>
-    <groupId>org.duckdb</groupId>
-    <artifactId>duckdb_jdbc</artifactId>
-    <version>1.5.0-SNAPSHOT</version>
-  </dependency>
-</dependencies>
-<repositories>
-  <repository>
-    <id>oss-sonatype</id>
-    <name>oss-sonatype</name>
-    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    <snapshots>
-      <enabled>true</enabled>
-    </snapshots>
-  </repository>
-</repositories>
-```
-
-[Direct Download (JAR)](https://artifacts.duckdb.org/duckdb-java/latest/java-jars.zip)
-
-### Node.js
+## Node.js
 
 ```batch
 npm install duckdb@next
 ```
 
-> The nightly release of the Node.js driver installs the old (deprecated) Node.js driver and not DuckDB Node Neo. For the Node Neo driver, the nightly release is currently not available.
+Note: The nightly release of the Node.js driver installs the old (deprecated) Node.js driver and not DuckDB Node Neo. For the Node Neo driver, the nightly release is currently not available.
 
-### C / C++
+## ODBC
 
-| Platform | Architecture   | Download                                                                        |
-| -------- | -------------- | ------------------------------------------------------------------------------- |
-| Linux    | x86_64         | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip) |
-| Linux    | arm64          | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip) |
-| macOS    | arm64 / x86_64 | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip)         |
-| Windows  | arm64 / x86_64 | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip)     |
+| Platform | Architecture       | Download                                                                         |
+| -------- | ------------------ | -------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
+| Linux    | `x86_64`           | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
+| macOS    | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-osx-universal.zip) |
+| Windows  | `arm64`            | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip) |
+| Windows  | `x86_64`           | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip) |
 
-### ODBC
+## C / C++
 
-| Platform | Architecture   | Download                                                                          |
-| -------- | -------------- | --------------------------------------------------------------------------------- |
-| Linux    | x86_64         | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)    |
-| Linux    | arm64          | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)    |
-| macOS    | arm64 / x86_64 | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-osx-universal.zip)  |
-| Windows  | arm64 / x86_64 | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip') |
+| Platform | Architecture       | Download                                                                        |
+| -------- | ------------------ | ------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip) |
+| Linux    | `x86_64`           | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip) |
+| macOS    | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip)         |
+| Windows  | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip)     |
+
+## R
+
+In R, run the following to install the latest DuckDB from source:
+
+```R
+install.packages("pak")
+pak::pak("duckdb/duckdb-r")
+```
