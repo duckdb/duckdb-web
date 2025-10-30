@@ -77,8 +77,8 @@ docs:
 
     > This DuckDB extension was created by Query.Farm, where we develop and maintain many extensions that expand DuckDB’s capabilities by connecting it to new data sources, formats, and features.
 
-extension_star_count: 240
-extension_star_count_pretty: 240
+extension_star_count: 241
+extension_star_count_pretty: 241
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
