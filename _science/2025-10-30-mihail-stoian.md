@@ -31,7 +31,7 @@ Mihail discusses:
 
 Whether you’re a **database researcher,** **systems engineer,** or **curious practitioner,** this deep-dive reveals how academic innovation continues to shape modern data infrastructure.
 
-Links:
+### Resources
 
 * [Parachute: Single-Pass Bi-Directional Information Passing (VLDB 2025 Paper)]({% link _science/2025-09-01-parachute.md %})
 * [Mihail's homepage](https://stoianmihail.github.io/)
