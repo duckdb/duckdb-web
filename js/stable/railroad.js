@@ -1400,7 +1400,7 @@ function GenerateQualifiedTableName(options, tname = "table-name") {
 				Keyword(".")
 			])
 		]),
-		Expression("type-name")
+		Expression("table-name")
 	]);
 }
 
