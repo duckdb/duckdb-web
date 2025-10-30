@@ -28,8 +28,8 @@ docs:
   extended_description: |
     For more information regarding usage, see [README.md](https://github.com/Mooncake-Labs/duckdb_mooncake/blob/v0.0.1/README.md).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 2
+extension_star_count_pretty: 2
 extension_download_count: 474
 extension_download_count_pretty: 474
 image: '/images/community_extensions/social_preview/preview_community_extension_mooncake.png'
