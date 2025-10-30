@@ -10,10 +10,16 @@ tags: ["Podcast"]
 length: "50 min"
 ---
 
-## Links
+## Podcast Links
 
 * [Apple Podcasts]()
 * [Spotify]()
 * [YouTube]()
 
 ## Description
+
+TODO
+
+### Resources
+
+TODO
