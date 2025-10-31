@@ -41,7 +41,7 @@ On Windows, this extension is not available.
 
 ### Environment Variables
 
-The jemalloc allocator in DuckDB can be configured via the [`MALLOC_CONF` environment variable](https://jemalloc.net/jemalloc.3.html#environment).
+The jemalloc allocator in DuckDB can be configured via the `DUCKDB_JE_MALLOC_CONF` environment variable. Setting this is equivalent to setting the [`MALLOC_CONF` environment variable](https://jemalloc.net/jemalloc.3.html#environment) for jemalloc but DuckDB uses a different environment variable name to avoid potential name clashes with other applications.
 
 ### Background Threads
 
