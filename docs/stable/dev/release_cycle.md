@@ -256,6 +256,7 @@ type (single/multi branch):
         - Latest version: Extension **`vx.<y+1>-codename`** branch
 
 #### Switching between single branch, two branch, and three branch
+
 Switching between the different branch types for extensions is a fairly straighforward process and should be done as follows:
 
 - Switch: **Single branch** `->` **Two branch**
