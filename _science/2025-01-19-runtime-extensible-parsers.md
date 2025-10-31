@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Runtime-Extensible Parsers"
-author: Hannes Mühleisen, Mark Raasveldt"
+author: "Hannes Mühleisen, Mark Raasveldt"
 thumb: "/images/science/thumbs/cidr-2025.svg"
 image: "/images/science/thumbs/cidr-2025.png"
 excerpt: ""
