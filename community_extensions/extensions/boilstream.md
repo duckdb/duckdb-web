@@ -34,8 +34,8 @@ docs:
     - Vend web token and pass it along with the PRAGMA duckdb_secrets_boilstream_endpoint('https://your-server/secrets:TOKEN')
     - FROM duckdb_secrets();
 
-extension_star_count: 0
-extension_star_count_pretty: 0
+extension_star_count: 1
+extension_star_count_pretty: 1
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'

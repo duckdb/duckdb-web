@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: rusty_sheet
   description: An Excel/WPS/OpenDocument Spreadsheets file reader for DuckDB
-  version: 0.3.0
+  version: 0.3.1
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: redraiment/rusty-sheet
-  ref: v0.3.0
+  ref: v0.3.1
 
 docs:
   hello_world: |
