@@ -210,7 +210,7 @@ Create a **CMake Application** run configuration:
 
 - **Name:** Python Debug
 - **Target:** `All targets`
-- **Executable:** `[PROJECT_DIR]/.venv/bin/python3`
+- **Executable:** `⟨PROJECT_DIR⟩/.venv/bin/python3`{:.language-sql .highlight}
 - **Program arguments:** `$FilePath$`
 - **Working directory:** `$ProjectFileDir$`
 
