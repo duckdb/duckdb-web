@@ -5,8 +5,7 @@ redirect_from:
 title: Unofficial and Unsupported Platforms
 ---
 
-> Warning
-> The platforms listed on this page are not officially supported.
+> Warning The platforms listed on this page are not officially supported.
 > The build instructions are provided on a best-effort basis.
 > Community contributions are very welcome.
 
