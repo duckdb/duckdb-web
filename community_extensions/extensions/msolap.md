@@ -43,8 +43,8 @@ docs:
     
     *Note:* Current limitations include Windows-only support due to COM dependencies, limited data type conversion for complex OLAP types, and limited support for calculated measures and hierarchies. The extension requires the installation of the Microsoft OLEDB provider for Analysis Services (MSOLAP.8).
 
-extension_star_count: 9
-extension_star_count_pretty: 9
+extension_star_count: 10
+extension_star_count_pretty: 10
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_msolap.png'
