@@ -37,7 +37,7 @@ In the release docs we use some basic terminology to describe versions and branc
   binary-compatible across multiple DuckDB versions
 - **`In-tree extensions`**: Extensions that live inside the `duckdb/duckdb` source tree
 
-### Main branches and tags
+### Main Branches and Tags
 
 In git-based version control, branches are used to allow multiple versions of the same codebase to co-exist. At DuckDB,
 there are two core branches that play the main role in the DuckDB (and extensions) release cycle. We will start off by
@@ -47,14 +47,14 @@ listing the format these core branches come in.
 - **`vx.y-codename`** branch: the branch used to produce all `vx.y.z` releases
 - **`vx.y.z`** tag: a stable release of DuckDB. These tags are write-only and will always be tied to the same commit
 
-## The main DuckDB release cycle
+## The Main DuckDB Release Cycle
 
-> Note: LTS (Long Term Support) releases follow a separate maintenance cycle to provide extended support and stability
+> LTS (Long-Term Support) releases follow a separate maintenance cycle to provide extended support and stability.
 
 The main DuckDB release cycle consists of 3 main phases: *Mid-cycle*, *Pre-release* and *Feature freeze*. These phases are clearly defined and communicated to ensure the
 whole team is synchronized and working together towards the next release.
 
-### Phase 1: Mid-cycle
+### Phase 1: Mid-Cycle
 
 #### Active DuckDB Branches
 
@@ -74,7 +74,7 @@ frequently merged into main to keep the two in sync.
 - Bug-fixes for `vx.y.<z+n>` patch releases are merged into `vx.y-codename`
 - Features and bug-fixes for `vx.<y+1>.0` are merged into `main`
 
-### Phase 2: Pre-release
+### Phase 2: Pre-Release
 
 #### Active Branches
 
@@ -94,7 +94,7 @@ branch from which all subsequent `vx.<y+1>.<n>` patch releases are released.
 - Features and bug-fixes for `vx.<y+1>.0` are merged into `vx.<y+1>-codename`
 - Features for `vx.<y+2>.0` are merged into `vx.<y+2>-codename`
 
-### Phase 3: Feature freeze
+### Phase 3: Feature Freeze
 
 #### Active Branches
 
@@ -116,7 +116,7 @@ last-minute bugs by disallowing feature merges.
 - Features for `vx.<y+1>.0` are no longer allowed, should target `vx.<y+2>.0` instead
 - Features for `vx.<y+2>.0` are merged into `vx.<y+2>-codename`
 
-## Main Extension release cycle
+## Main Extension Release Cycle
 
 Most DuckDB extensions are completely separate from the main `duckdb/duckdb` repository and are free to follow their own
 release cycle. In this section we categorize different types of DuckDB extensions and go over their release cycles.
@@ -130,13 +130,13 @@ extensions share the same release cycle based on which of these three categories
 
 We will now go over the release cycles of the three different categories, in order of increasing complexity.
 
-### In-tree extensions
+### In-Tree Extensions
 
 For *in-tree extensions*, the release cycle is very simple. Since their code lives in the `duckdb/duckdb` repository,
 they move in complete lock-step with DuckDB. This means they share the same versioning and branching. In this sense they
 are not really extensions, but more lazy-loadable parts of the `duckdb/duckdb` codebase.
 
-### Stable API extensions
+### Stable API Extensions
 
 Stable API extensions in DuckDB are a relatively new concept, but are planned to form the majority of extensions in the
 future. Stable API extensions are built on the stable C extension API, making them binary compatible with multiple
@@ -147,7 +147,7 @@ While the release cycle for stable API extensions is still work in progress, the
 stable API extensions consists of a similar but separate cycle to that of `duckdb/duckdb`, where every version will
 target 1 or more versions of DuckDB.
 
-### Unstable API extensions
+### Unstable API Extensions
 
 Unstable API extensions currently make up the majority of DuckDB extensions. These extensions either target the C++
 extension API, or the unstable C extension API. They are, from a release cycle point of view, the most complex. Every
@@ -156,7 +156,7 @@ these extensions tends to form a sometimes intricate dance around the main DuckD
 move as many extensions over to stable APIs, we expect unstable API extensions to be around for quite some time so there
 remains a need to clearly define their lifecycle. Therefore we will use the remainder of this section to describe it.
 
-#### Categorizing by branching
+#### Categorizing by Branching
 
 To start, we will divide the unstable API extensions into different subcategories. Just like DuckDB itself, these
 extensions follow the same branching scheme as DuckDB where a combination of `main` and `vx.y-codename` play the main
@@ -166,7 +166,7 @@ role. We will now define the three types of unstable extensions by looking at th
 - **Two branch extensions** have two *active* branches: `main`and `vx.y-codename`
 - **Three branch extensions** have three *active* branches: `main`, `vx.y-codename`, and `vx.<y+1>-codename`
 
-#### DuckDB targets
+#### DuckDB Targets
 
 Every unstable API extension should target a single version of DuckDB. This target version is defined by a combination
 of **the duckdb submodule** and the target version in the [`MainDistributionPipeline`](https://github.com/duckdb/extension-template/blob/main/.github/workflows/MainDistributionPipeline.yml) workflow.
@@ -191,7 +191,7 @@ combinations
         - Extension **`vx.y-codename`** `->` DuckDB **`vx.y.z`** or **`vx.y-codename`**
         - Extension **`vx.<y+1>-codename`** `->` DuckDB **`vx.<y+1>-codename`**
 
-#### Where to merge PRs
+#### Where to Merge PRs
 
 To know where to merge a PR into an unstable API extension depends on two things: the
 current release phase and the type of extensions. We will now go over all combinations.
@@ -231,7 +231,7 @@ current release phase and the type of extensions. We will now go over all combin
 [^2]: Patch releases during pre-release or feature-freeze phases are uncommon. Consider targeting changes for the next
 minor release instead.
 
-#### What extension version will be released?
+#### What Extension Version Will Be Released?
 
 Every DuckDB release, a complete set of all core extensions should be available. For unstable API extensions, this means
 a rebuild of the binaries. For the core extensions, this build generally happens through the `duckdb/duckdb` CI. This
@@ -255,7 +255,7 @@ type (single/multi branch):
     - Extension type: **Three branch**
         - Latest version: Extension **`vx.<y+1>-codename`** branch
 
-#### Switching between single branch, two branch, and three branch
+#### Switching between Single Branch, Two Branch and Three Branch
 
 Switching between the different branch types for extensions is a fairly straighforward process and should be done as follows:
 
