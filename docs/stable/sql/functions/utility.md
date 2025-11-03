@@ -46,7 +46,8 @@ The functions below are difficult to categorize into specific function types and
 | [`nextval('sequence_name')`](#nextvalsequence_name) | Return the following value of the sequence. |
 | [`nullif(a, b)`](#nullifa-b) | Return `NULL` if `a = b`, else return `a`. Equivalent to `CASE WHEN a = b THEN NULL ELSE a END`. |
 | [`pg_typeof(expression)`](#pg_typeofexpression) | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility. |
-| [`query(`*`query_string`*`)`](#queryquery_string) | Table function that parses and executes the query defined in *`query_string`*. Only constant strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
+| [`pg_size_pretty(number)`](#pg_size_prettynumber) | Formats `number` as a human-readable storage size, using `kiB`, `MiB`, `GiB` or `TiB` as appropriate. |
+| [`query(query_string)`](#queryquery_string) | Table function that parses and executes the query defined in *`query_string`*. Only constant strings are allowed. Warning: this function allows invoking arbitrary queries, potentially altering the database state. |
 | [`query_table(`*`tbl_name`*`)`](#query_tabletbl_name) | Table function that returns the table given in *`tbl_name`*. |
 | [`query_table(`*`tbl_names`*`, [`*`by_name`*`])`](#query_tabletbl_names-by_name) | Table function that returns the union of tables given in *`tbl_names`*. If the optional *`by_name`* parameter is set to `true`, it uses [`UNION ALL BY NAME`]({% link docs/stable/sql/query_syntax/setops.md %}#union-all-by-name) semantics. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/stable/guides/file_formats/read_file.md %}#read_blob) for more details. |
@@ -307,6 +308,14 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility. |
 | **Example** | `pg_typeof('abc')` |
 | **Result** | `varchar` |
+
+#### `pg_size_pretty(number)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Formats `number` as a human-readable storage size, using `kiB`, `MiB`, `GiB` or `TiB` as appropriate. |
+| **Example** | `pg_size_pretty(1000000)` |
+| **Result** | `976.5 KiB` |
 
 #### `query(query_string)`
 
