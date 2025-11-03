@@ -41,7 +41,6 @@ This section describes functions and operators for examining and manipulating [`
 | [`ends_with(string, search_string)`](#suffixstring-search_string) | Alias for `suffix`. |
 | [`format(format, ...)`](#formatformat-) | Formats a string using the [fmt syntax](#fmt-syntax). |
 | [`formatReadableDecimalSize(integer)`](#formatreadabledecimalsizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
-| [`formatReadableSize(integer)`](#format_bytesinteger) | Alias for `format_bytes`. |
 | [`format_bytes(integer)`](#format_bytesinteger) | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | [`from_base64(string)`](#from_base64string) | Converts a base64 encoded `string` to a character string (`BLOB`). |
 | [`from_binary(value)`](#unbinvalue) | Alias for `unbin`. |
@@ -271,14 +270,6 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` |
 | **Result** | `Benchmark "CSV" took 42 seconds` |
 
-#### `formatReadableDecimalSize(integer)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
-| **Example** | `formatReadableDecimalSize(16_000)` |
-| **Result** | `16.0 kB` |
-
 #### `format_bytes(integer)`
 
 <div class="nostroke_table"></div>
@@ -286,7 +277,7 @@ This section describes functions and operators for examining and manipulating [`
 | **Description** | Converts `integer` to a human-readable representation using units based on powers of 2 (KiB, MiB, GiB, etc.). |
 | **Example** | `format_bytes(16_000)` |
 | **Result** | `15.6 KiB` |
-| **Alias** | `formatReadableSize` |
+| **Alias** | `formatReadableSize`, `pg_size_pretty` |
 
 #### `from_base64(string)`
 
