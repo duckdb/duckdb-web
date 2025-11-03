@@ -101,7 +101,7 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 
 <h4>Direct Download</h4>
 {%- assign f = site.data.checksums.artifacts.cli.macos.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="cli" platform="macos" -%}
 
 </div>
@@ -125,11 +125,11 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 
 <h4>Direct Downloads</h4>
 {%- assign f_x86 = site.data.checksums.artifacts.cli.linux.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_x86 }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" -%}
 
 {%- assign f_arm = site.data.checksums.artifacts.cli.linux.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_arm }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" -%}
 
 </div>
@@ -143,11 +143,11 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 
 <h4>Direct Downloads</h4>
 {%- assign f_x86 = site.data.checksums.artifacts.cli.windows.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_x86 }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" -%}
 
 {%- assign f_arm = site.data.checksums.artifacts.cli.windows.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_arm }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" -%}
 
 <div class="note">
@@ -202,7 +202,7 @@ install.packages("duckdb")
     data-docs="{% link docs/stable/clients/java.md %}">
 
 <h4>Direct Download (JAR)</h4>
-<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
+<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn"="rent_duckdb_java_version }}.jar" download rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
 {%- include checksum_inline.html environment="java" -%}
 
 <h4>Maven</h4>
@@ -267,11 +267,11 @@ go get github.com/duckdb/duckdb-go/v2
     data-docs="{% link docs/stable/clients/c/overview.md %}">
 
 {%- assign f_x86 = site.data.checksums.artifacts.c.linux.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_x86 }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="c" platform="linux" architecture="x86_64" -%}
 
 {%- assign f_arm = site.data.checksums.artifacts.c.linux.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_arm }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="c" platform="linux" architecture="arm64" -%}
 
 </div>
@@ -283,7 +283,7 @@ go get github.com/duckdb/duckdb-go/v2
     data-docs="{% link docs/stable/clients/c/overview.md %}">
 
 {%- assign f = site.data.checksums.artifacts.c.macos.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="c" platform="macos" -%}
 
 </div>
@@ -295,11 +295,11 @@ go get github.com/duckdb/duckdb-go/v2
     data-docs="{% link docs/stable/clients/c/overview.md %}">
 
 {%- assign f_x86 = site.data.checksums.artifacts.c.windows.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_x86 }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="c" platform="windows" architecture="x86_64" -%}
 
 {%- assign f_arm = site.data.checksums.artifacts.c.windows.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" target="_blank" rel="noopener noreferrer">{{ f_arm }}</a>
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="c" platform="windows" architecture="arm64" -%}
 
 </div>
@@ -312,10 +312,10 @@ go get github.com/duckdb/duckdb-go/v2
     data-environment="odbc"
     data-docs="{% link docs/stable/clients/odbc/overview.md %}">
     
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-linux-amd64.zip</a>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" download="64.zip" rel="noopener noreferrer">duckdb_odbc-linux-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="linux" architecture="x86_64" -%}
 
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-arm64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-linux-arm64.zip</a>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-arm64.zip" class="download-btn" download="64.zip" rel="noopener noreferrer">duckdb_odbc-linux-arm64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="linux" architecture="arm64" -%}
 
 </div>
@@ -326,7 +326,7 @@ go get github.com/duckdb/duckdb-go/v2
     data-environment="odbc"
     data-docs="{% link docs/stable/clients/odbc/overview.md %}">
     
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-osx-universal.zip</a>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" class="download-btn" download="versal.zip" rel="noopener noreferrer">duckdb_odbc-osx-universal.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="macos" -%}
 
 </div>
@@ -337,7 +337,7 @@ go get github.com/duckdb/duckdb-go/v2
     data-environment="odbc"
     data-docs="{% link docs/stable/clients/odbc/overview.md %}">
     
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" target="_blank" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" download="64.zip" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" -%}
 
 <div class="note">
