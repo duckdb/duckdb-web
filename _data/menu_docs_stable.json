@@ -1681,6 +1681,10 @@
               "url": "repositories"
             },
             {
+              "page": "Release Cycle",
+              "url": "release_cycle"
+            },
+            {
               "page": "Profiling",
               "url": "profiling"
             },
