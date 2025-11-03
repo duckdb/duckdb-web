@@ -20,8 +20,8 @@ repo:
   github: query-farm/hashfuncs
   ref: d07e4e8878b5bb27624be71f5012c64b507b5b60
 
-extension_star_count: 4
-extension_star_count_pretty: 4
+extension_star_count: 8
+extension_star_count_pretty: 8
 extension_download_count: 448
 extension_download_count_pretty: 448
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'

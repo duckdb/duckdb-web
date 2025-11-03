@@ -42,29 +42,72 @@ Configure the system to use 1 thread.
 SET threads TO 1;
 ```
 
-Enable printing of a progress bar during long-running queries.
+Turn logging on and set the logging level to `debug`.
+For additional details on logging levels, see [Log Level]({% link docs/stable/operations_manual/logging/overview.md %}#log-level).
+
+```sql
+SET enable_logging = true;
+SET logging_level = 'debug';
+```
+
+Write a single log message with the `debug` level and a `connection` scope:
+
+```sql
+SELECT write_log('A new client has connected.', level := 'debug', scope := 'connection');
+```
+
+Write a single log message with the a `debug` level and a `connection` scope and a custom `log_type`:
+
+```sql
+SELECT write_log(
+        'A new duck has connected to the lake.', 
+        level := 'debug', 
+        scope := 'connection', 
+        log_type := 'duckdb.docs.example.quack'
+    );
+```
+
+Check logs with the `DEBUG` log level:
+
+```sql
+SELECT * FROM duckdb_logs WHERE log_level = 'DEBUG';
+```
+
+Check logs with the `QueryLog` type:
+
+```sql
+SELECT * FROM duckdb_logs WHERE type = 'QueryLog';
+```
+
+Check current logging settings:
+
+```sql
+SELECT * FROM duckdb_settings() WHERE name LIKE '%logging%';
+```
+
+Enable printing of a progress bar during long-running queries:
 
 ```sql
 SET enable_progress_bar = true;
 ```
 
-Set the default null order to `NULLS LAST`.
+Set the default null order to `NULLS LAST`:
 
 ```sql
 SET default_null_order = 'nulls_last';
 ```
 
-Return the current value of a specific setting.
+Return the current value of a specific setting:
 
 ```sql
 SELECT current_setting('threads') AS threads;
 ```
 
 | threads |
-|--------:|
-| 10      |
+| ------: |
+|      10 |
 
-Query a specific setting.
+Query a specific setting:
 
 ```sql
 SELECT *
@@ -72,18 +115,18 @@ FROM duckdb_settings()
 WHERE name = 'threads';
 ```
 
-|  name   | value |                   description                   | input_type | scope  |
-|---------|-------|-------------------------------------------------|------------|--------|
+| name    | value | description                                     | input_type | scope  |
+| ------- | ----- | ----------------------------------------------- | ---------- | ------ |
 | threads | 1     | The number of total threads used by the system. | BIGINT     | GLOBAL |
 
-Show a list of all available settings.
+Show a list of all available settings:
 
 ```sql
 SELECT *
 FROM duckdb_settings();
 ```
 
-Reset the memory limit of the system back to the default.
+Reset the memory limit of the system back to the default:
 
 ```sql
 RESET memory_limit;
@@ -101,8 +144,8 @@ Configuration options come with different default [scopes]({% link docs/stable/s
 
 ### Global Configuration Options
 
-|                     Name                      |                                                                                                  Description                                                                                                  |    Type     |                    Default value                    |
-|----|--------|--|---|
+| Name                                          | Description                                                                                                                                                                                                   | Type        | Default value                                       |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
 | `Calendar`                                    | The current calendar                                                                                                                                                                                          | `VARCHAR`   | System (locale) calendar                            |
 | `TimeZone`                                    | The current time zone                                                                                                                                                                                         | `VARCHAR`   | System (locale) timezone                            |
 | `access_mode`                                 | Access mode of the database (`AUTOMATIC`, `READ_ONLY` or `READ_WRITE`)                                                                                                                                        | `VARCHAR`   | `automatic`                                         |
@@ -227,8 +270,8 @@ Configuration options come with different default [scopes]({% link docs/stable/s
 
 ### Local Configuration Options
 
-|                 Name                 |                                                                       Description                                                                       |   Type    |                                                                                                                                                                                                                                                          Default value                                                                                                                                                                                                                                                           |
-|----|--------|--|---|
+| Name                                 | Description                                                                                                                                             | Type      | Default value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `custom_profiling_settings`          | Accepts a `JSON` enabling custom metrics                                                                                                                | `VARCHAR` | `{"TOTAL_BYTES_WRITTEN": "true", "TOTAL_BYTES_READ": "true", "ROWS_RETURNED": "true", "LATENCY": "true", "RESULT_SET_SIZE": "true", "OPERATOR_TIMING": "true", "OPERATOR_ROWS_SCANNED": "true", "CUMULATIVE_ROWS_SCANNED": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TYPE": "true", "OPERATOR_NAME": "true", "CPU_TIME": "true", "EXTRA_INFO": "true", "SYSTEM_PEAK_BUFFER_MEMORY": "true", "BLOCKED_THREAD_TIME": "true", "CUMULATIVE_CARDINALITY": "true", "SYSTEM_PEAK_TEMP_DIR_SIZE": "true", "QUERY_NAME": "true"}` |
 | `enable_http_logging`                | (deprecated) Enables HTTP logging                                                                                                                       | `BOOLEAN` | `true`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `enable_profiling`                   | Enables profiling, and sets the output format (`JSON`, `QUERY_TREE`, `QUERY_TREE_OPTIMIZER`)                                                            | `VARCHAR` | NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |

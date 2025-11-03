@@ -20,7 +20,7 @@ The event will feature talks from DuckDB developers, and is aimed at developers 
 
 ### New Event Type
 
-This event is slightly from our usual meetups and conferences as it primarily focuses on DuckDB extension development and building complex applications on top of DuckDB. Therefore, the main topics of the event will be the **C API, extension template, and internals**.
+This event is slightly different from our usual meetups and conferences as it primarily focuses on DuckDB extension development and building complex applications on top of DuckDB. Therefore, the main topics of the event will be the **C API, extension template, and internals**.
 
 ### Registration Process
 

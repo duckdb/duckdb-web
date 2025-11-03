@@ -589,6 +589,10 @@
                   "url": "set_variable"
                 },
                 {
+                  "page": "SHOW and SHOW DATABASES",
+                  "url": "show"
+                },
+                {
                   "page": "SUMMARIZE",
                   "url": "summarize"
                 },
@@ -1675,6 +1679,10 @@
             {
               "page": "DuckDB Repositories",
               "url": "repositories"
+            },
+            {
+              "page": "Release Cycle",
+              "url": "release_cycle"
             },
             {
               "page": "Profiling",

@@ -10,7 +10,7 @@ tags: ["using DuckDB"]
 
 ## Syntax
 
-<p><i>“Perhaps we <a href="https://www.youtube.com/watch?v=TBAf5l1RmcA">should just leave nature alone</a>, to its simple one-assed schematics.”</i><br/>
+<p style="text-align: right"><i>“Perhaps we <a href="https://www.youtube.com/watch?v=TBAf5l1RmcA">should just leave nature alone</a>, to its simple one-assed schematics.”</i><br/>
    — Dr. Alphonse Mephesto, South Park Episode #5</p>
 
 There is often more than one way to do things in our beloved SQL. For example, you can define join conditions *implicitly* (and dangerously) in the `WHERE` clause or use the (better) `JOIN ... ON ...` syntax. Generally, having “more than one way to do things” can be confusing and even outright [dangerous sometimes](https://www.youtube.com/watch?v=noQcWra6sbU).
