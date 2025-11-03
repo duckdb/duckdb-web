@@ -24,7 +24,7 @@ We use **CLion** as our IDE. This guide doesn't include specific instructions fo
 Start by [forking `duckdb-python`](https://github.com/duckdb/duckdb-python/fork) into a personal repository, then clone your fork:
 
 ```bash
-git clone --recurse-submodules ⟨YOUR_FORK_URL⟩
+git clone --recurse-submodules YOUR_FORK_URL
 cd duckdb-python
 git remote add upstream https://github.com/duckdb/duckdb-python.git
 git fetch --all
