@@ -176,14 +176,11 @@ SELECT unnest([{'a': 0, 'b': {'bb': {'bbb': 1}}}], recursive := true, keep_paren
 ```
 
 yields the following result:
-```
-┌───────┬──────────┐
-│   a   │ b.bb.bbb │
-│ int32 │  int32   │
-├───────┼──────────┤
-│  0    │    1     │
-└───────┴──────────┘
-```
+ 
+|  a  | b.bb.bbb |
+|----:|---------:|
+|  0  |    1     |
+
 In this case, the field names are preserved, showing the path to the innermost value. This is particularly useful when working with complex nested data structures, as it maintains the structure and naming convention of the original data. The parameter can also be used in conjunction with the `max_depth` parameter, allowing more control and enabling more precise management of nested structures.
 
 
