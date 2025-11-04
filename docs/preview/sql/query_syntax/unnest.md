@@ -164,3 +164,19 @@ FROM (VALUES ([1, 2, 3]), ([4, 5])) tbl(l);
 | 3 | 3     |
 | 4 | 1     |
 | 5 | 2     |
+
+### Keep Column Names When Recursively Unnesting
+
+The `keep_parent_names` parameter can be used to retain the parent column names when recursively unnesting a named struct. For example, unnesting the following query with `keep_parent_names` enabled:
+
+```sql
+SELECT unnest([{'a': 0, 'b': {'bb': {'bbb': 1}}}], recursive := true, keep_parent_names := true);
+```
+
+yields the following result:
+ 
+|  a  | b.bb.bbb |
+|----:|---------:|
+|  0  |    1     |
+
+In this case, the field names are preserved, showing the path to the innermost value. This is particularly useful when working with complex nested data structures, as it maintains the structure and naming convention of the original data. The parameter can also be used in conjunction with the `max_depth` parameter, allowing more control and enabling more precise management of nested structures.
