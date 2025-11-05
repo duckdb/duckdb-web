@@ -9,7 +9,7 @@ extension:
   name: infera
   description: A DuckDB extension for in-database inference
   version: 0.2.0
-  language: C++
+  language: Rust & C++
   build: cmake
   license: MIT OR Apache-2.0
   maintainers:
@@ -26,26 +26,30 @@ docs:
     -- 0. Assuming the extension is already installed and loaded
     
     -- 1. Load a simple linear model from a remote URL
-    select infera_load_model('linear_model',
+    SELECT infera_load_model('linear_model',
     'https://github.com/CogitatorTech/infera/raw/refs/heads/main/test/models/linear.onnx');
     
     -- 2. Run a prediction using a very simple linear model
     -- Model: y = 2*x1 - 1*x2 + 0.5*x3 + 0.25
-    select infera_predict('linear_model', 1.0, 2.0, 3.0);
+    SELECT infera_predict('linear_model', 1.0, 2.0, 3.0);
     -- Expected output: 1.75
     
     -- 3. Unload the model when we're done with it
-    select infera_unload_model('linear_model');
+    SELECT infera_unload_model('linear_model');
     
     -- 4. Check the Infera version
-    select infera_get_version();
+    SELECT infera_get_version();
 
   extended_description: |
-    This extension is experimental at the moment, so it is not recommended for production use.
-    For more information, like API references and examples, visit the project's GitHub repository: https://github.com/CogitatorTech/infera
+    Infera extension allows users to use machine learning models directly in SQL queries to perform inference on data stored in DuckDB tables.
+    It is developed in Rust and uses [Tract](https://github.com/snipsco/tract) as the backend inference engine.
+    Infera supports loading and running models in [ONNX](https://onnx.ai/) format.
+    Check out the [ONNX Model Zoo](https://huggingface.co/onnxmodelzoo) repository on Hugging Face for a large collection of ready-to-use models that can be used with Infera.
+    
+    For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/infera).
 
-extension_star_count: 83
-extension_star_count_pretty: 83
+extension_star_count: 86
+extension_star_count_pretty: 86
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_infera.png'
@@ -73,20 +77,20 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name       | function_type | description | comment | examples |
-|---------------------------|---------------|-------------|---------|----------|
-| infera_clear_cache        | scalar        | NULL        | NULL    |          |
-| infera_get_cache_info     | scalar        | NULL        | NULL    |          |
-| infera_get_loaded_models  | scalar        | NULL        | NULL    |          |
-| infera_get_model_info     | scalar        | NULL        | NULL    |          |
-| infera_get_version        | scalar        | NULL        | NULL    |          |
-| infera_is_model_loaded    | scalar        | NULL        | NULL    |          |
-| infera_load_model         | scalar        | NULL        | NULL    |          |
-| infera_predict            | scalar        | NULL        | NULL    |          |
-| infera_predict_from_blob  | scalar        | NULL        | NULL    |          |
-| infera_predict_multi      | scalar        | NULL        | NULL    |          |
-| infera_predict_multi_list | scalar        | NULL        | NULL    |          |
-| infera_set_autoload_dir   | scalar        | NULL        | NULL    |          |
-| infera_unload_model       | scalar        | NULL        | NULL    |          |
+|       function_name       | function_type |                                             description                                              |                                 comment                                  |                                   examples                                   |
+|---------------------------|---------------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| infera_load_model         | scalar        | Load an ONNX model from a local file path or a remote URL and assign it a unique name.               | Supports local paths and remote URLs; caches remote models.              | [select infera_load_model('local_model','/path/to/model.onnx');]             |
+| infera_unload_model       | scalar        | Unload a model, freeing its associated resources.                                                    | Returns true on success.                                                 | [select infera_unload_model('local_model');]                                 |
+| infera_set_autoload_dir   | scalar        | Scan a directory for .onnx files, load them automatically, and return a JSON report.                 | Returns JSON with loaded models and any errors.                          | [select infera_set_autoload_dir('path/to/your/models');]                     |
+| infera_get_loaded_models  | scalar        | Return a JSON array containing the names of all currently loaded models.                             | JSON array of model names.                                               | [select infera_get_loaded_models();]                                         |
+| infera_get_model_info     | scalar        | Return a JSON object with metadata for a specific loaded model (name, input/output shapes).          | Throws an error if the model is not loaded.                              | [select infera_get_model_info('local_model');]                               |
+| infera_predict            | scalar        | Perform inference on a batch of data; returns a single float value per input row.                    | Features accept FLOAT, DOUBLE, INTEGER, BIGINT, DECIMAL (cast to float). | [select infera_predict('my_model', 1.0, 2.5, 3.0) as prediction;]            |
+| infera_predict_multi      | scalar        | Perform inference and return all outputs as a JSON-encoded array.                                    | Useful for models that produce multiple predictions per sample.          | [select infera_predict_multi('multi_output_model', 1.0, 2.0);]               |
+| infera_predict_multi_list | scalar        | Perform inference and return outputs as a typed LIST\[FLOAT\].                                       | Avoids JSON parsing for multi-output models.                             | [select infera_predict_multi_list('multi_output_model', 1.0, 2.0);]          |
+| infera_predict_from_blob  | scalar        | Perform inference on raw BLOB data (e.g., image tensor); returns LIST\[FLOAT\].                      | Accepts raw tensor BLOB data from a column.                              | [select infera_predict_from_blob('my_model', my_blob_column) from my_table;] |
+| infera_is_model_loaded    | scalar        | Return true if the given model is currently loaded, otherwise false.                                 | NULL                                                                     | [select infera_is_model_loaded('squeezenet');]                               |
+| infera_get_version        | scalar        | Return a JSON object with version and build information for the Infera extension.                    | NULL                                                                     | [select infera_get_version();]                                               |
+| infera_clear_cache        | scalar        | Clear the entire model cache directory to free up disk space.                                        | Returns true on success.                                                 | [select infera_clear_cache();]                                               |
+| infera_get_cache_info     | scalar        | Return cache statistics: directory path, total size in bytes, file count, and configured size limit. | Returns JSON with cache fields.                                          | [select infera_get_cache_info();]                                            |
 
 
