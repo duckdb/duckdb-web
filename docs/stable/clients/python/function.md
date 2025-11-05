@@ -14,7 +14,7 @@ Here is an example using a Python function that calls a third-party library.
 
 ```python
 import duckdb
-from duckdb.typing import VARCHAR
+from duckdb.sqltypes import VARCHAR
 from faker import Faker
 
 def generate_random_name():
@@ -168,7 +168,7 @@ When this is not desired, you need to explicitly set this parameter to `"special
 
 ```python
 import duckdb
-from duckdb.typing import BIGINT
+from duckdb.sqltypes import BIGINT
 
 def dont_intercept_null(x):
     return 5
@@ -186,7 +186,7 @@ With `null_handling="special"`:
 
 ```python
 import duckdb
-from duckdb.typing import BIGINT
+from duckdb.sqltypes import BIGINT
 
 def dont_intercept_null(x):
     return 5
@@ -205,7 +205,7 @@ print(res)
 
 ```python
 import duckdb
-from duckdb.typing import VARCHAR
+from duckdb.sqltypes import VARCHAR
 
 
 def return_str_or_none(x: str) -> str | None:
@@ -236,7 +236,7 @@ If you want to disable this behavior, and instead return `NULL`, you'll need to 
 
 ```python
 import duckdb
-from duckdb.typing import BIGINT
+from duckdb.sqltypes import BIGINT
 
 def will_throw():
     raise ValueError("ERROR")
@@ -322,7 +322,7 @@ In general, using an Arrow UDF will be much more efficient than native because i
 ```python
 import duckdb
 import pyarrow as pa
-from duckdb.typing import VARCHAR
+from duckdb.sqltypes import VARCHAR
 from pyarrow import compute as pc
 
 
@@ -358,7 +358,7 @@ This can be useful to interact with Python libraries that don't operate on Arrow
 ```python
 import duckdb
 
-from duckdb.typing import DATE
+from duckdb.sqltypes import DATE
 from faker import Faker
 
 def random_date():
