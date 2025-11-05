@@ -57,10 +57,10 @@ The table below shows the mapping of Numpy DType to DuckDB type.
 Which can also be arbitrarily nested.
 
 ```python
-import duckdb
+import duckdb.sqltypes
 from typing import Union
 
-duckdb.typing.DuckDBPyType(list[dict[Union[str, int], str]])
+duckdb.sqltypes.DuckDBPyType(list[dict[Union[str, int], str]])
 ```
 
 ```text
@@ -72,9 +72,9 @@ MAP(UNION(u1 VARCHAR, u2 BIGINT), VARCHAR)[]
 `dict` type objects map to a `MAP` type of the key type and the value type.
 
 ```python
-import duckdb
+import duckdb.sqltypes
 
-print(duckdb.typing.DuckDBPyType(dict[str, int]))
+print(duckdb.sqltypes.DuckDBPyType(dict[str, int]))
 ```
 
 ```text
@@ -86,9 +86,9 @@ MAP(VARCHAR, BIGINT)
 `dict` objects map to a `STRUCT` composed of the keys and values of the dict.
 
 ```python
-import duckdb
+import duckdb.sqltypes
 
-print(duckdb.typing.DuckDBPyType({'a': str, 'b': int}))
+print(duckdb.sqltypes.DuckDBPyType({'a': str, 'b': int}))
 ```
 
 ```text
@@ -100,10 +100,10 @@ STRUCT(a VARCHAR, b BIGINT)
 `typing.Union` objects map to a `UNION` type of the provided types.
 
 ```python
-import duckdb
+import duckdb.sqltypes
 from typing import Union
 
-print(duckdb.typing.DuckDBPyType(Union[int, str, bool, bytearray]))
+print(duckdb.sqltypes.DuckDBPyType(Union[int, str, bool, bytearray]))
 ```
 
 ```text
@@ -112,7 +112,7 @@ UNION(u1 BIGINT, u2 VARCHAR, u3 BOOLEAN, u4 BLOB)
 
 ### Creation Functions
 
-For the built-in types, you can use the constants defined in `duckdb.typing`:
+For the built-in types, you can use the constants defined in `duckdb.sqltypes`:
 
 <div class="monospace_table"></div>
 

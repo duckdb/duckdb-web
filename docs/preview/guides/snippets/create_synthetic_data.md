@@ -18,7 +18,7 @@ For example:
 ```python
 import duckdb
 
-from duckdb.typing import *
+from duckdb.sqltypes import *
 from faker import Faker
 
 fake = Faker()
