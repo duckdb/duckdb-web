@@ -64,8 +64,8 @@ docs:
     The DuckDB rusty-sheet extension that enables reading Excel, WPS and OpenDocument spreadsheet files directly within SQL queries. This extension provides seamless integration for analyzing spreadsheet data using DuckDB's powerful SQL engine.
     For detailed setup and usage instructions, visit the docs at [rusty-sheet](https://github.com/redraiment/rusty-sheet).
 
-extension_star_count: 44
-extension_star_count_pretty: 44
+extension_star_count: 45
+extension_star_count_pretty: 45
 extension_download_count: 381
 extension_download_count_pretty: 381
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_sheet.png'
