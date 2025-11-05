@@ -44,7 +44,7 @@ Then, connect to the catalog:
 ```sql
 ATTACH '⟨account_id⟩' AS glue_catalog (
     TYPE iceberg,
-    ENDPOINT 'glue.⟨REGION⟩.amazonaws.com/iceberg'
+    ENDPOINT 'glue.⟨REGION⟩.amazonaws.com/iceberg',
     AUTHORIZATION_TYPE 'sigv4'
 );
 ```
