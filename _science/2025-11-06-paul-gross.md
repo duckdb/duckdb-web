@@ -19,7 +19,7 @@ length: "50 min"
 
 ## Description
 
-In this episode of the _DuckDB in Research_ series, host Jack Waudby sits down with Paul Groß, PhD student at CWI Amsterdam, to explore his work on adaptive factorization and worst-case optimal joins - techniques that push the boundaries of analytical query performance.
+In this episode of the _DuckDB in Research_ series, host Jack Waudby sits down with Paul Groß, PhD student at CWI Amsterdam, to explore his work on adaptive factorization and worst-case optimal joins – techniques that push the boundaries of analytical query performance.
 Paul shares insights from his CIDR'25 paper _[“Adaptive Factorization Using Linear Chained Hash Tables”]({% link _science/2025-01-19-factorization.md %}),_ revealing how decades of database theory meet modern, practical system design in DuckDB. From hash table internals to adaptive query planning, this episode uncovers how research innovations are becoming part of real-world systems.
 Whether you’re a database researcher, engineer, or curious student, you’ll come away with a deeper understanding of query optimization and the realities of systems engineering.
 
