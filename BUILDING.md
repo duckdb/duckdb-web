@@ -194,7 +194,7 @@ To force regeneration of a page or include so that it is rendered in your localh
 4. Run the `scripts/serve-latest.sh` from your terminal again
 5. Navigate to the page and refresh your browser, any changes will now be visible from your local branch
 
-### Bundle update failsgi
+### Bundle update fails
 
 Bundle update fails with the following error message:
 
