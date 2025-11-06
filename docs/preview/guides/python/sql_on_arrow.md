@@ -20,7 +20,7 @@ my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
 
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow Table
-results = con.execute("SELECT * FROM my_arrow_table WHERE i = 2").arrow()
+results = con.execute("SELECT * FROM my_arrow_table WHERE i = 2").fetch_arrow_table()
 ```
 
 ## Apache Arrow Datasets
@@ -52,7 +52,7 @@ pq.write_to_dataset(my_arrow_table, str(base_path / "parquet_folder"))
 my_arrow_dataset = ds.dataset(str(base_path / 'parquet_folder/'))
 
 # query the Apache Arrow Dataset "my_arrow_dataset" and return as an Arrow Table
-results = con.execute("SELECT * FROM my_arrow_dataset WHERE i = 2").arrow()
+results = con.execute("SELECT * FROM my_arrow_dataset WHERE i = 2").fetch_arrow_table()
 ```
 
 ## Apache Arrow Scanners
@@ -89,7 +89,7 @@ scanner_filter = (pc.field("i") == pc.scalar(2))
 arrow_scanner = ds.Scanner.from_dataset(my_arrow_dataset, filter = scanner_filter)
 
 # query the Apache Arrow scanner "arrow_scanner" and return as an Arrow Table
-results = con.execute("SELECT * FROM arrow_scanner").arrow()
+results = con.execute("SELECT * FROM arrow_scanner").fetch_arrow_table()
 ```
 
 ## Apache Arrow RecordBatchReaders
@@ -109,5 +109,5 @@ my_recordbatch = pa.RecordBatch.from_pydict({'i': [1, 2, 3, 4],
 my_recordbatchreader = pa.ipc.RecordBatchReader.from_batches(my_recordbatch.schema, [my_recordbatch])
 
 # query the Apache Arrow RecordBatchReader "my_recordbatchreader" and return as an Arrow Table
-results = con.execute("SELECT * FROM my_recordbatchreader WHERE i = 2").arrow()
+results = con.execute("SELECT * FROM my_recordbatchreader WHERE i = 2").fetch_arrow_table()
 ```
