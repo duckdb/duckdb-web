@@ -183,7 +183,18 @@ rm Gemfile.lock
 bundle install
 ```
 
-### Bundle update fails
+### Jekyll Content Not Rendering Properly
+
+Dynamic page regeneration might not apply to includes, railroad diagrams, or other content.
+To force regeneration of a page or include so that it is rendered in your localhost browser, perform the following steps: 
+
+1. Stop the terminal session where you ran the Jekyll build command i.e. `scripts/serve-latest.sh`
+2. Run `git add myfile.md` for your particular page
+3. Run `git clean` to trigger a full Jekyll rebuild
+4. Run the `scripts/serve-latest.sh` from your terminal again
+5. Navigate to the page and refresh your browser, any changes will now be visible from your local branch
+
+### Bundle update failsgi
 
 Bundle update fails with the following error message:
 

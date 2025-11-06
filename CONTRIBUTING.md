@@ -164,8 +164,13 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Avoid directly editing the generated content, instead, edit the source files (often found in the [`duckdb` repository](https://github.com/duckdb/duckdb)), and run the generator script.
 
 > [!TIP]
-> Dynamic page regeneration might not apply to includes, railroad diagrams, or other dynamic content.
-> To force regeneration of a page or include, run `git add` followed by `git clean` to trigger a full Jekyll rebuild.
+> Dynamic page regeneration might not apply to includes, railroad diagrams, or other content.
+> To force regeneration of a page or include so that it is rendered in your localhost browser, perform the following steps: 
+> 1. Stop the terminal session where you ran the Jekyll build command i.e. `scripts/serve-latest.sh`
+> 2. Run `git add myfile.md` for your particular page
+> 3. Run `git clean` to trigger a full Jekyll rebuild
+> 4. Run the `scripts/serve-latest.sh` from your terminal again
+> 5. Navigate to the page and refresh your browser, any changes will now be visible from your local branch
 
 ### Generated SQL Function Lists
 
