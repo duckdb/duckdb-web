@@ -9,7 +9,7 @@ excerpt: "You can now use the MERGE statement in DuckDB. In this post, we show y
 
 In version 1.4.0 of DuckDB released support for the `MERGE` statement. The `MERGE` statement allows you to insert, update, or delete records from a source (incoming) table into a target (master) table. The `MERGE` statement is also commonly referred to as an `UPSERT`, meaning that if there is a matching primary key in the target table you can optionally update it, and if not you can insert a new record. 
 
-# Use Case
+## Use Case
 
 The `MERGE` statement is useful for building type 2 [slowly changing dimensions](https://en.wikipedia.org/wiki/Slowly_changing_dimension), which can help represent a tables primary key changes over time. With additional date columns, you can determine when changes happened to a record, for how long those changes affected the primary key, and easily determine what the current state of the primary key is.
 
@@ -23,13 +23,13 @@ The `MERGE` statement is useful for data warehousing OLTP databases, a few commo
 
 When using `MERGE` you choose the specified clauses, what exactly happens to the records. It's important to note that the Id field you choose must be a primary key and guarantee uniqueness. If your records are not completely unique for your incoming and master data sets, `MERGE` will not work.
 
-# Workflow Diagram
+## Workflow Diagram
 
 The following diagram shows a visual representation of the SQL `MERGE` flow:
 
 <img src="{% link images/blog/merge/sql-merge-statement-workflow.png %}" width="800" />
 
-# Terminology
+## Terminology
 
 When working with the `MERGE` statement it is important to understand the keywords that are unique to the statement.
 
@@ -44,7 +44,7 @@ When working with the `MERGE` statement it is important to understand the keywor
 
 > Note: `WHEN MATCHED` and `WHEN NOT MATCHED` can specify either `SOURCE` or `TARGET` and you can specify logic for either.
 
-# Example
+## Example
 
 Alright, now that we have the formal definitions out of the way, lets get on with a real world example of using DuckDB's `MERGE`.
 
@@ -184,7 +184,7 @@ To view only the expired historical records, run the following query:
 SELECT * FROM master_ducks WHERE is_current = false ORDER BY duck_id, begin_date DESC;
 ```
 
-# Conclusion
+## Conclusion
 
 DuckDB in addition to all its great existing features now also supports the `MERGE` statement. Because of DuckDB's ability to connect to so many data sources, the fact that it supports `MERGE` opens up a lot of analytical use cases. This statement is useful for building out historical views of your data. In this blog we reviewed the detailed syntax and walked through a practical example of implementing the statement with example data.
 
