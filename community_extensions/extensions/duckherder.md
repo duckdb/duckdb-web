@@ -28,8 +28,8 @@ docs:
     This extension is built on storage extension, to execute query on remote server and transfer data back with arrow flight.
     From users' perspective, all DML and DDL SQL statements should be used exactly the same as local duckdb.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
+extension_star_count: 3
+extension_star_count_pretty: 3
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_duckherder.png'
