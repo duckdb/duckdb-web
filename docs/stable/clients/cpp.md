@@ -58,14 +58,15 @@ auto result = con.Query("INSERT INTO integers VALUES (1, 2)");
 if (result->HasError()) {
     auto errorType = result->GetErrorType();
     switch (errorType) {
-        case (duckdb::ExceptionType::CONSTRAINT):
-            // Some handling
-            break;
-        // More handling
+    case duckdb::ExceptionType::CONSTRAINT: {
+        // Example handling
+        auto errorObject = result->GetErrorObject();
+        errorObject.ConvertErrorToJSON(); 
+        std::cout << errorObject.Message() << std::endl;
+        break;
     }
-    auto errorObject = result->GetErrorObject();
-    errorObject.ConvertErrorToJSON();
-    std::cout << errorObject.Message() << std::endl;
+    // More handling
+    }
 } else {
     // Normal code
 }
