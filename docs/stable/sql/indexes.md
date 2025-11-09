@@ -114,7 +114,7 @@ Violates foreign key constraint because key "id: 1" is still referenced by a for
 The reason for this is that DuckDB does not yet support “looking ahead”.
 During the `INSERT`, it is unaware it will reinsert the foreign key value as part of the `UPDATE` rewrite.
 
-### Constraint Checking After Delete With Concurrent Transactions
+### Constraint Checking after Delete with Concurrent Transactions
 
 To better understand the limitations of indexes, we'll first provide a brief overview of index storage in DuckDB.
 DuckDB creates a physical secondary copy of the key column expressions and their row IDs when defining index-based constraints, or when using the `CREATE [UNIQUE] INDEX` statement.
