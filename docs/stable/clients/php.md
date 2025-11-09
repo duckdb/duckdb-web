@@ -8,23 +8,23 @@ redirect_from:
 title: PHP Client
 ---
 
-> The DuckDB PHP client is a [tertiary client]({% link docs/stable/clients/overview.md %}) and is maintained by a third-party.
+> The DuckDB PHP client is a [tertiary client]({% link docs/preview/clients/overview.md %}) and is maintained by a third-party.
 
 Client API for PHP.
 
 Focused on performance, it uses the official C API internally through [FFI](https://www.php.net/manual/en/book.ffi.php), achieving good benchmarks.
 This library is more than just a wrapper for the C API; it introduces custom, PHP-friendly methods to simplify working with DuckDB. It is compatible with Linux, Windows, and macOS, requiring PHP version 8.3 or higher.
 
+Full documentation is available at [https://duckdb-php.readthedocs.io/](https://duckdb-php.readthedocs.io/).
 
-## Install
+## Automatic install (recommended for newcomers)
 
 ```batch
-composer require satur.io/duckdb
+composer require satur.io/duckdb-auto
 ```
 
-## Documentation
-
-Full documentation is available at [https://duckdb-php.readthedocs.io/](https://duckdb-php.readthedocs.io/).
+You will need to allow `satur.io/duckdb-auto` to execute code to use this installation method,
+check [installation](https://duckdb-php.readthedocs.io/en/latest/installation) for more details.
 
 ## Quick Start
 
@@ -88,7 +88,7 @@ $result->print();
 
 ### Appenders
 
-Appenders are the preferred method to load data in DuckDB. See [Appender page]({% link docs/stable/clients/c/appender.md %})
+Appenders are the preferred method to load data in DuckDB. See [Appender page]({% link docs/preview/clients/c/appender.md %})
 for more information.
 
 ```php
