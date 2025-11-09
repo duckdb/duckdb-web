@@ -88,7 +88,7 @@ $result->print();
 
 ### Appenders
 
-Appenders are the preferred method to load data in DuckDB. See [Appender page]({% link docs/preview/clients/c/appender.md %})
+Appenders are the preferred method to load data in DuckDB. See [Appender page]({% link docs/stable/clients/c/appender.md %})
 for more information.
 
 ```php
