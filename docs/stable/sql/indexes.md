@@ -136,6 +136,15 @@ That behavior causes two main limitations, which are listed in more detail below
 The long-term solution to these limitations is to enable transaction-timestamp tracking in indexes.
 However, as-of now, DuckDB does not fully support MVCC for its indexes.
 
+#### Workarounds
+
+As this is a limitation in DuckDB, there is currently no pure-SQL workaround.
+If you have concurrent reads and writes on a table with indexes, then you need to add application-side locks.
+I.e., if you have multiple writes happening while a concurrent read is running, then these have to wait for the read(s) to finish.
+
+You might also consider not using indexes altogether. 
+Instead, DuckDB's `MERGE INTO` statement might suit your needs better.
+
 #### Over-Eager Unique Constraint Checking
 
 For uniqueness constraints, inserts can fail when they should succeed:
