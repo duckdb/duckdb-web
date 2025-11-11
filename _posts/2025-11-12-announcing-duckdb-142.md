@@ -13,6 +13,8 @@ You can find the complete [release notes on GitHub](https://github.com/duckdb/du
 
 To install the new version, please visit the [installation page]({% link install/index.html %}).
 
+In this blog post, we will highlight a few important features and fixes.
+
 ## Dynamic Prompts in the CLI
 
 DuckDB v1.4.2 adds dynamic prompts for the CLI:
