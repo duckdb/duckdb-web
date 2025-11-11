@@ -38,12 +38,18 @@ We will publish a separate blog post on these improvements shortly. Stay tuned!
 
 We fixed several crashes and internal errors:
 
-* [`duckdb#19238` MERGE into Iceberg table with TIMESTAMPTZ columns crashes](https://github.com/duckdb/duckdb/issues/19238)
+* [`duckdb#19238` `MERGE INTO` Iceberg table with `TIMESTAMPTZ` columns crashes](https://github.com/duckdb/duckdb/issues/19238)
 * [`duckdb#19355` Unknown expression type invalidates database](https://github.com/duckdb/duckdb/issues/19355)
-* [`duckdb#19357` Expected unified vector format of type VARCHAR, but found type INT32](https://github.com/duckdb/duckdb/issues/19357)
-* [`duckdb#19455` Merge into failed: logical operator type mismatch](https://github.com/duckdb/duckdb/issues/19455)
-* [`duckdb#19498` Window function. Crash with duckdb_pdqsort::pdqsort_detail::pdqsort_loop](https://github.com/duckdb/duckdb/issues/19498)
-* [`duckdb#19700` RLE Select bug](https://github.com/duckdb/duckdb/issues/19700)
+* [`duckdb#19357` Expected unified vector format of type `VARCHAR`, but found type `INT32`](https://github.com/duckdb/duckdb/issues/19357)
+* [`duckdb#19455` `MERGE INTO` failed: logical operator type mismatch](https://github.com/duckdb/duckdb/issues/19455)
+* [`duckdb#19498` Window function crash with `duckdb_pdqsort::pdqsort_detail::pdqsort_loop`](https://github.com/duckdb/duckdb/issues/19498)
+* [`duckdb#19700` RLE select bug](https://github.com/duckdb/duckdb/issues/19700)
+
+We fixed cases when DuckDB returned incorrect results:
+
+* [`duckdb#17757` UUID Comparison in aggregation filter broken on Linux](https://github.com/duckdb/duckdb/issues/17757)
+* [`duckdb#19327` Wrong result for `DISTINCT` and `LEFT JOIN`](https://github.com/duckdb/duckdb/issues/19327)
+* [`duckdb#19377` Array with values shows null depending on query](https://github.com/duckdb/duckdb/issues/19377)
 
 We also fixed several issues found by our [fuzzer](https://github.com/duckdb/duckdb-fuzzer/):
 
