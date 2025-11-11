@@ -13,38 +13,6 @@ You can find the complete [release notes on GitHub](https://github.com/duckdb/du
 
 To install the new version, please visit the [installation page]({% link install/index.html %}).
 
-## Windows Improvements
-
-We are introducing beta support for Windows arm64. You can now install extensions on Windows arm64:
-
-```sql
-PRAGMA platform;
-```
-
-```text
-┌───────────────┐
-│   platform    │
-│    varchar    │
-├───────────────┤
-│ windows_arm64 │
-└───────────────┘
-```
-
-```sql
-INSTALL spatial;
-LOAD spatial;
-SELECT ST_Area(ST_GeomFromText('POLYGON((0 0, 4 0, 4 3, 0 3, 0 0))')) AS area;
-```
-
-```text
-┌────────┐
-│  area  │
-│ double │
-├────────┤
-│  12.0  │
-└────────┘
-```
-
 ## Iceberg Improvements
 
 DuckDB v1.4.2 ships a number of improvements for the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}): insert, update, and delete statements are all supported now:
