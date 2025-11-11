@@ -13,6 +13,24 @@ You can find the complete [release notes on GitHub](https://github.com/duckdb/du
 
 To install the new version, please visit the [installation page]({% link install/index.html %}).
 
+## Dynamic Prompts in the CLI
+
+DuckDB v1.4.2 adds dynamic prompts for the CLI:
+
+```batch
+duckdb
+```
+
+```sql
+memory D ATTACH 'my_database.duckdb';
+memory D USE my_database;
+my_database D CREATE SCHEMA my_schema;
+my_database D USE my_schema;
+my_database.my_schema D
+```
+
+These prompts can be configured. See details in the [pull request](https://github.com/duckdb/duckdb/pull/19579).
+
 ## Iceberg Improvements
 
 DuckDB v1.4.2 ships a number of improvements for the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}): insert, update, and delete statements are all supported now:
