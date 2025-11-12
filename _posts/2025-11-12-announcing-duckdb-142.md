@@ -93,7 +93,7 @@ CALL enable_logging();
 
 -- Run some queries
 CREATE TABLE small AS FROM range(1_000_000);
-CREATE TABLE big AS FROM range(1_000_000_000);
+CREATE TABLE large AS FROM range(1_000_000_000);
 
 PRAGMA disable_profiling;
 
