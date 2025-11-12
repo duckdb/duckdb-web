@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 729
-extension_download_count_pretty: 729
+extension_download_count: 975
+extension_download_count_pretty: 975
 image: '/images/community_extensions/social_preview/preview_community_extension_vortex.png'
 layout: community_extension_doc
 ---

@@ -23,8 +23,8 @@ repo:
   ref: 68c4797ed487445933eae1683bb8074a56a477ff
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 652
+extension_download_count_pretty: 652
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---
