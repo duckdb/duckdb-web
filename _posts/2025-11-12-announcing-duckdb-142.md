@@ -79,7 +79,7 @@ FROM duckdb_logs_parsed('HTTP');
 
 #### Accessing the Profiler's Output from the Logger
 
-[The logger can now access the profiler's output `#19572`](https://github.com/duckdb/duckdb/pull/19572).
+The logger can now also access the profiler's output ([`#19572`](https://github.com/duckdb/duckdb/pull/19572)).
 This means that if both the profiler and the logger are enabled, you can log information such as the execution time of queries:
 
 ```sql
