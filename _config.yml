@@ -20,7 +20,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. http://example.com
 # Set current codename of DuckDB and version numbers of DuckDB clients
-current_duckdb_codename: "Ossivalis"
+current_duckdb_codename: "Andium"
 current_short_duckdb_version: "1.4"
 preview_short_duckdb_version: "1.5-dev"
 current_duckdb_version: 1.4.2
