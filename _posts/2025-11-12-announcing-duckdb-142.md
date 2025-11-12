@@ -45,24 +45,35 @@ WHERE col1 = 1;
 
 We will publish a separate blog post on these improvements shortly. Stay tuned!
 
-### Logger Improvements
+### Logger and Profiler Improvements
 
-#### Time HTTP requests
+#### Time HTTP Requests
 
-The logger can now log the time of HTTP requests ([`#19691`](https://github.com/duckdb/duckdb/pull/19691)):
+The logger can now log the time of HTTP requests ([`#19691`](https://github.com/duckdb/duckdb/pull/19691)).
+For example, if we query the Dutch railway tariffs table as a Parquet file ([`tariffs.parquet`](https://blobs.duckdb.org/tariffs.parquet)),
+we can see multiple HTTP requests: a `HEAD` request and three `GET` requests:
 
 ```sql
 CALL enable_logging('HTTP');
-FROM 'https://blobs.duckdb.org/train-services-2025-10.csv';
-SELECT request.type, request.url, request.start_time, request.duration_ms
+CREATE TABLE railway_tariffs AS
+    FROM 'https://blobs.duckdb.org/tariffs.parquet';
+SELECT request.type, request.url, request.duration_ms
 FROM duckdb_logs_parsed('HTTP');
 ```
 
 ```text
-TODO
+┌─────────┬──────────────────────────────────────────┬─────────────┐
+│  type   │                   url                    │ duration_ms │
+│ varchar │                 varchar                  │    int64    │
+├─────────┼──────────────────────────────────────────┼─────────────┤
+│ HEAD    │ https://blobs.duckdb.org/tariffs.parquet │         177 │
+│ GET     │ https://blobs.duckdb.org/tariffs.parquet │         103 │
+│ GET     │ https://blobs.duckdb.org/tariffs.parquet │         176 │
+│ GET     │ https://blobs.duckdb.org/tariffs.parquet │         182 │
+└─────────┴──────────────────────────────────────────┴─────────────┘
 ```
 
-#### Access the Profiler's Output from the Logger
+#### Accessing the Profiler's Output from the Logger
 
 [The logger can now access the profiler's output `#19572`](https://github.com/duckdb/duckdb/pull/19572).
 This means that if both the profiler and the logger are enabled, you can log information such as the execution time of queries:
@@ -98,6 +109,11 @@ You can see in the output that the first `CREATE` statement took about 3 millise
 │        9 │ Metrics │ CPU_TIME │         3.267 │
 └──────────┴─────────┴──────────┴───────────────┘
 ```
+
+#### Profiler Metrics
+
+The profiler now supports [several new metrics]({% link docs/stable/dev/profiling.md %}#metrics).
+These allow you the get a deeper understanding on where the execution time is spent in queries.
 
 ### Performance Improvements
 
