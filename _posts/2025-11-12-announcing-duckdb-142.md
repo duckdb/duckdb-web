@@ -122,6 +122,40 @@ DuckDB v1.4.2 also ships some small performance improvements:
 * [`#19477` DuckDB now buffers WAL index deletes, not only appends](https://github.com/duckdb/duckdb/pull/19477)
 * [`#19644` Detaching from a database is now faster](https://github.com/duckdb/duckdb/pull/19644)
 
+### Vortex Support
+
+DuckDB now supports the [Vortex file format](https://vortex.dev/) through the `vortex` extension.
+First, install and load the extension:
+
+```sql
+INSTALL vortex;
+LOAD vortex;
+```
+
+Then, you can write Vortex files as follows:
+
+```sql
+COPY (SELECT * FROM generate_series(0, 3) t(i))
+TO 'my.vortex' (FORMAT vortex);
+```
+
+And read them using the `read_vortex` function:
+
+```sql
+SELECT * FROM read_vortex('my.vortex');
+```
+
+```text
+┌───────┐
+│   i   │
+│ int64 │
+├───────┤
+│     0 │
+│     1 │
+│     2 │
+└───────┘
+```
+
 ## Fixes
 
 We fixed several crashes, internal errors, incorrect results and regressions.
