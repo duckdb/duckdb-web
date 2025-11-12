@@ -10,13 +10,14 @@ For platforms where packages for certain extensions are not available, users can
 
 All official extensions are distributed for the following platforms.
 
-| Platform name      | Operating system | Architecture    | CPU types                      | Used by                    |
-|--------------------|------------------|-----------------|--------------------------------|----------------------------|
-| `linux_amd64`      | Linux            | x86_64  (AMD64) |                                | Node.js packages, etc.     |
-| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. | All packages               |
-| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          | All packages               |
-| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     | All packages               |
-| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               | All packages               |
+| Platform name      | Operating system | Architecture    | CPU types                      |
+|--------------------|------------------|-----------------|--------------------------------|
+| `linux_amd64`      | Linux            | x86_64  (AMD64) |                                |
+| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. |
+| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          |
+| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     |
+| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               |
+| `windows_arm64`    | Windows          | AArch64 (ARM64) | Copilot+ PC with Qualcommm CPU |
 
 Some extensions are distributed for the following platforms:
 
