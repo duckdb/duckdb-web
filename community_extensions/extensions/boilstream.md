@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: boilstream
   description: Mounts boilstream server as a secure Remote Secrets Storage
-  version: 0.3.2
+  version: 0.3.4
   language: C++, Rust
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dforsber/boilstream-extension
-  ref: 1e7beb67b58bc790f22c8ea168f212c0893a4776
+  ref: 88e0b56a40b0cba836b31050acb0775813640c20
 
 docs:
   hello_world: |
@@ -34,10 +34,10 @@ docs:
     - Vend web token and pass it along with the PRAGMA duckdb_secrets_boilstream_endpoint('https://your-server/secrets:TOKEN')
     - FROM duckdb_secrets();
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 621
+extension_download_count_pretty: 621
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---

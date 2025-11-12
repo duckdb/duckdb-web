@@ -135,7 +135,8 @@ To see the commits that changed each storage version, see the [commit log](https
 ## Compression
 
 DuckDB uses [lightweight compression]({% post_url 2022-10-28-lightweight-compression %}).
-Note that compression is only applied to persistent databases and is **not applied to in-memory instances**.
+By default, compression is only applied to persistent databases and is **not applied to in-memory instances**.
+To turn on compression for in-memory databases, use `ATTACH` with the [`COMPRESS` option]({% link docs/preview/sql/statements/attach.md %}#options).
 
 ### Compression Algorithms
 

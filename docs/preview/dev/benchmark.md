@@ -97,3 +97,97 @@ SELECT min(i + 1) FROM integers;
 ```
 
 The `--profile` flag will output a query tree.
+
+## Creating Benchmarks
+
+Some development work is around performance,
+and including a benchmark along with the other tests not only validates any improvements,
+but also prevents future performance regressions in the feature.
+
+### Benchmark Example
+
+To illustrate how to create a benchmark file, we can look at the benchmark for the `FILL` window function.
+(The `FILL` function linearly interpolates missing values in an ordered partition.)
+
+Benchmarks are similar to unit test files, and have the same type of header.
+
+```py
+# name: benchmark/micro/window/window_fill.benchmark
+# description: Measure the perfomance of FILL
+# group: [window]
+```
+The `make format-head` command fill can ensure that the header has the expected structure and prevent tidy check errors.
+
+Below this header, there are a set of keywords summarizing the benchmark.
+
+```text
+name FillPerformance
+group micro
+subgroup window
+```
+
+While some benchmarks run a single query,
+it can often be useful to _parameterize_ a benchmark using the `argument` keyword.
+This allows the benchmark to be with different settings, such as data volume.
+For the `FILL` benchmark, there are three arguments:
+
+```text
+argument sf 10
+argument errors 0.1
+argument keys 4
+```
+
+For `FILL` these are
+* The scale factor (millions of rows per partition)
+* The error rate (fraction of the values that are missing)
+* The number of partitions.
+
+Benchmarks generally require some data preparation before running the query.
+Data preparation is done in the `load` section of the benchmark file.
+For the `FILL` benchmark, we create a table using the parameters and a random number generator.
+
+```sql
+load
+select setseed(0.8675309);
+create or replace table data as (
+	select
+		k::TINYINT as k,
+		(case when random() > ${errors} then m - 1704067200000 else null end) as v,
+		m,
+	from range(1704067200000, 1704067200000 + ${sf} * 1_000_000 * 10, 10) times(m)
+	cross join range(${keys}) keys(k)
+);
+```
+
+The `argument` parameters are expanded in the query,
+similar to the way that `foreach` values are expanded in unit tests.
+Note that we can issue multiple SQL statements in the `load` section.
+
+One the data is prepared, we are finally ready to specify the query we will benchmark!
+This is done in the `run` section, and the restrictions are the same as for a unit test
+(e.g., no blank lines, etc.)
+For the `FILL` benchmark, we want to find all places where the interpolation fails:
+
+```sql
+run
+SELECT
+	m,
+	k,
+	fill(v) OVER (PARTITION BY k ORDER BY m) as v
+FROM
+	data
+qualify v <> m - 1704067200000;
+```
+
+If the interpolation is correct, then we will have no output, no matter the scale.
+We can check this with the final `result` clause,
+which ash the same syntax as a unit test:
+
+```text
+result III
+```
+
+By providing no output rows, we can check the correctness of the query as well as its performance.
+
+There are many other examples in the top level `benchmark/` directory,
+and you may want to have a look to discover some other techniques.

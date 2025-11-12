@@ -31,10 +31,10 @@ docs:
     - Provides cache access insight to duckdb external file cache
     - Allows registering ANY duckdb compatible filesystems (i.e., azure filesystem)
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 361
-extension_download_count_pretty: 361
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 710
+extension_download_count_pretty: 710
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---
@@ -60,45 +60,47 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|             function_name             | function_type | description | comment | examples |
-|---------------------------------------|---------------|-------------|---------|----------|
-| observefs_clear                       | scalar        | NULL        | NULL    |          |
-| observefs_get_profile                 | scalar        | NULL        | NULL    |          |
-| observefs_get_tcp_connection          | table         | NULL        | NULL    |          |
-| observefs_list_registered_filesystems | table         | NULL        | NULL    |          |
-| observefs_wrap_filesystem             | scalar        | NULL        | NULL    |          |
+|                   function_name                   | function_type | description | comment | examples |
+|---------------------------------------------------|---------------|-------------|---------|----------|
+| observefs_clear                                   | scalar        | NULL        | NULL    |          |
+| observefs_clear_external_file_cache_access_record | scalar        | NULL        | NULL    |          |
+| observefs_external_file_cache_access_record       | table         | NULL        | NULL    |          |
+| observefs_get_profile                             | scalar        | NULL        | NULL    |          |
+| observefs_list_registered_filesystems             | table         | NULL        | NULL    |          |
+| observefs_wrap_filesystem                         | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|                 name                 |                                         description                                          | input_type | scope  | aliases |
-|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
-| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
-| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
-| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
-| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
-| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
-| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
-| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
-| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
-| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
-| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
-| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
-| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
-| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
-| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
-| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
-| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
-| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
-| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
-| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
-| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
+|                    name                    |                                         description                                          | input_type | scope  | aliases |
+|--------------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
+| auto_fallback_to_full_download             | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
+| ca_cert_file                               | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
+| enable_curl_server_cert_verification       | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_server_cert_verification            | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
+| force_download                             | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
+| hf_max_per_page                            | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
+| http_keep_alive                            | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
+| http_retries                               | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
+| http_retry_backoff                         | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
+| http_retry_wait_ms                         | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
+| http_timeout                               | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
+| httpfs_client_implementation               | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| observefs_enable_external_file_cache_stats | Whether to enable stats record for external file cache.                                      | BOOLEAN    | GLOBAL | []      |
+| s3_access_key_id                           | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_endpoint                                | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
+| s3_kms_key_id                              | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_region                                  | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
+| s3_requester_pays                          | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_secret_access_key                       | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_session_token                           | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_filesize                   | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_parts_per_file             | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
+| s3_uploader_thread_limit                   | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
+| s3_url_compatibility_mode                  | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
+| s3_url_style                               | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
+| s3_use_ssl                                 | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
+| unsafe_disable_etag_checks                 | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
 
 

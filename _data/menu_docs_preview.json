@@ -589,6 +589,10 @@
                   "url": "set_variable"
                 },
                 {
+                  "page": "SHOW and SHOW DATABASES",
+                  "url": "show"
+                },
+                {
                   "page": "SUMMARIZE",
                   "url": "summarize"
                 },
@@ -1617,6 +1621,16 @@
               ]
             },
             {
+              "page": "Installing DuckDB",
+              "slug": "installing_duckdb",
+              "subsubfolderitems": [
+                {
+                  "page": "Install Script",
+                  "url": "install_script"
+                }
+              ]
+            },
+            {
               "page": "Logging",
               "slug": "logging",
               "subsubfolderitems": [
@@ -1665,6 +1679,10 @@
             {
               "page": "DuckDB Repositories",
               "url": "repositories"
+            },
+            {
+              "page": "Release Cycle",
+              "url": "release_cycle"
             },
             {
               "page": "Profiling",

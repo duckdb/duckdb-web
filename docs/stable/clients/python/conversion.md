@@ -183,7 +183,7 @@ the function will return a `MAP`, due to [automatic conversion]({% link docs/sta
 To return a `STRUCT`, the `return_type` has to be provided:
 ```python
 import duckdb
-from duckdb.typing import BOOLEAN, INTEGER, VARCHAR
+from duckdb.sqltypes import BOOLEAN, INTEGER, VARCHAR
 from duckdb import list_type, struct_type
 
 duckdb_conn = duckdb.connect()
@@ -205,7 +205,7 @@ duckdb_conn.sql("select get_struct_as_map()").show()
 duckdb_conn.create_function("get_struct", get_struct, return_type=struct_type({
     1: VARCHAR,
     "2": INTEGER,
-    "three": list_type(duckdb.typing.INTEGER),
+    "three": list_type(INTEGER),
     False: BOOLEAN
 }))
 

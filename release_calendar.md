@@ -57,6 +57,8 @@ For LTS DuckDB versions, the support period for [community support](https://duck
 <img src="/images/blog/lts-support-light.svg" alt="DuckDB LTS support" width="900" class="lightmode-img">
 <img src="/images/blog/lts-support-dark.svg" alt="DuckDB LTS support" width="900" class="darkmode-img">
 
+For an overview of end-of-life information, see the [DuckDB entry on `endoflife.date`](https://endoflife.date/duckdb).
+
 ## Past Releases
 
 In the following, we list DuckDB's past releases along with their codename where applicable.

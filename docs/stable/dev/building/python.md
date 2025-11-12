@@ -5,7 +5,7 @@ redirect_from:
 title: Python
 ---
 
-The DuckDB Python package has its own repository at [duckdb/duckdb-python](https://github.com/duckdb/duckdb-python) and uses [pybind11](https://pybind11.readthedocs.io/en/stable/) to create Python bindings with DuckDB.
+The DuckDB Python package has its own repository at [`duckdb/duckdb-python`](https://github.com/duckdb/duckdb-python) and uses [pybind11](https://pybind11.readthedocs.io/en/stable/) to create Python bindings with DuckDB.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ This guide assumes:
 
 1. You have a working copy of the DuckDB Python package source (including git submodules and tags)
 2. You have [Astral UV](https://docs.astral.sh/uv/) version >= 0.8.0 installed
-3. You run commands from the root of the duckdb-python source
+3. You run commands from the root of the `duckdb-python` source
 
 We are opinionated about using **Astral UV** for Python environment and dependency management. While using pip for a development environment with an editable install without build isolation is possible, we don't provide guidance for that approach in this guide.
 
@@ -21,10 +21,10 @@ We use **CLion** as our IDE. This guide doesn't include specific instructions fo
 
 ### 1. DuckDB Python Repository
 
-Start by [forking duckdb-python](https://github.com/duckdb/duckdb-python/fork) into a personal repository, then clone your fork:
+Start by [forking `duckdb-python`](https://github.com/duckdb/duckdb-python/fork) into a personal repository, then clone your fork:
 
 ```bash
-git clone --recurse-submodules [YOUR_FORK_URL]
+git clone --recurse-submodules YOUR_FORK_URL
 cd duckdb-python
 git remote add upstream https://github.com/duckdb/duckdb-python.git
 git fetch --all
@@ -62,12 +62,14 @@ git config --local core.hooksPath .githooks/
 - C++ compiler toolchain
 
 **Linux (Ubuntu 24.04):**
+
 ```bash
 sudo apt-get update
 sudo apt-get install ccache
 ```
 
 **macOS:**
+
 ```bash
 # Xcode command line tools
 xcode-select --install
@@ -121,11 +123,13 @@ uv run python -c "import duckdb; print(duckdb.sql('SELECT 42').fetchall())"
 ### Running Tests
 
 Run all tests:
+
 ```bash
 uv run --no-build-isolation pytest ./tests --verbose
 ```
 
 Run fast tests only (excludes slow directory):
+
 ```bash
 uv run --no-build-isolation pytest ./tests --verbose --ignore=./tests/slow
 ```
@@ -133,17 +137,20 @@ uv run --no-build-isolation pytest ./tests --verbose --ignore=./tests/slow
 ### Test Coverage
 
 Run with coverage (compiles extension with `--coverage` for C++ coverage):
+
 ```bash
 COVERAGE=1 uv run --no-build-isolation coverage run -m pytest ./tests --verbose
 ```
 
 Check Python coverage:
+
 ```bash
 uv run coverage html -d htmlcov-python
 uv run coverage report --format=markdown
 ```
 
 Check C++ coverage:
+
 ```bash
 uv run gcovr \
   --gcov-ignore-errors all \
@@ -163,11 +170,13 @@ uv run gcovr \
 ### Building Wheels
 
 Build wheel for your system:
+
 ```bash
 uv build
 ```
 
 Build for specific Python version:
+
 ```bash
 uv build -p 3.9
 ```
@@ -187,11 +196,11 @@ For CLion users, the project can be configured for C++ debugging of the Python e
 
 In **Settings** → **Build, Execution, Deployment** → **CMake**, create a Debug profile:
 
-- **Name**: Debug
-- **Build type**: Debug  
-- **Generator**: Ninja
-- **CMake Options**:
-  ```
+- **Name:** Debug
+- **Build type:** Debug  
+- **Generator:** Ninja
+- **CMake Options:**
+  ```text
   -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
   ```
 
@@ -199,11 +208,11 @@ In **Settings** → **Build, Execution, Deployment** → **CMake**, create a Deb
 
 Create a **CMake Application** run configuration:
 
-- **Name**: Python Debug
-- **Target**: `All targets`
-- **Executable**: `[PROJECT_DIR]/.venv/bin/python3`
-- **Program arguments**: `$FilePath$`
-- **Working directory**: `$ProjectFileDir$`
+- **Name:** Python Debug
+- **Target:** `All targets`
+- **Executable:** `⟨PROJECT_DIR⟩/.venv/bin/python3`{:.language-sql .highlight}
+- **Program arguments:** `$FilePath$`
+- **Working directory:** `$ProjectFileDir$`
 
 This allows setting C++ breakpoints and debugging Python scripts that use the DuckDB extension.
 
@@ -222,6 +231,7 @@ lldb -- .venv/bin/python3 test.py
 ```
 
 In lldb:
+
 ```bash
 # Set breakpoint (library loads when imported)
 (lldb) br s -n duckdb::DuckDBPyRelation::FetchDF
@@ -236,7 +246,8 @@ You can run the packaging workflow manually on your fork for any branch, choosin
 
 ### Build Issues
 
-**Missing git tags**: If you forked DuckDB Python, ensure you have the upstream tags:
+**Missing git tags:** If you forked DuckDB Python, ensure you have the upstream tags:
+
 ```bash
 git remote add upstream https://github.com/duckdb/duckdb-python.git
 git fetch --tags upstream
@@ -245,4 +256,4 @@ git push --tags
 
 ### Platform-Specific Issues
 
-**Windows compilation**: Ensure you have Visual Studio 2019+ with C++ support installed.
+**Windows compilation:** Ensure you have Visual Studio 2019+ with C++ support installed.

@@ -16,7 +16,7 @@ INSTALL aws;
 LOAD aws;
 ```
 
-> In most cases, the `aws` extension works in conjunction with the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}.
+> In most cases, the `aws` extension works in conjunction with the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}).
 
 ## Configuration and Authentication
 
@@ -36,7 +36,7 @@ CREATE OR REPLACE SECRET secret (
 );
 ```
 
-> Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your_region⟩.amazonaws.com'`{:.language-sql .highlight}.
+> Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your-region⟩.amazonaws.com'`{:.language-sql .highlight}.
 
 Now, to query using the above secret, simply query any `s3://` prefixed file:
 

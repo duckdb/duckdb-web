@@ -57,6 +57,39 @@ To add a banner, set banner: true in the front matter and define the banner cont
 </section>
 
 
+<section class="metrics">
+	<div class="wrap">
+		<div class="numbersbox">
+			<div>
+				<div class="number">#1</div>
+				<div class="label">open-source system<br/>in ClickBench hot runs</div>
+			</div>
+			<div class="divider"></div>
+			<div>
+				<div class="number">#3</div>
+				<div class="label">most admired DB<br/>on Stack Overflow</div>
+			</div>
+			<div class="divider"></div>
+			<div>
+				<div class="number">20+</div>
+				<div class="label">Fortune-100<br/>companies use DuckDB</div>
+			</div>
+			<div class="divider"></div>
+			<div>
+				<div class="number">25M+</div>
+				<div class="label">downloads/<br/>month</div>
+			</div>
+			<div class="divider"></div>
+			<div>
+				<div class="number">SF 100k</div>
+				<div class="label">TPC-H on a single<br/>machine</div>
+			</div>
+		</div>
+		<div class="numbersbox-reference">*see <a href="{% post_url 2025-10-09-benchmark-results-14-lts %}">our blog post</a> for more details</div>
+	</div>
+</section>
+
+
 <section class="whyduckdb">
 	<div class="wrap">
 		<h1 class="display-2">DuckDB at a glance</h1>
@@ -103,33 +136,6 @@ To add a banner, set banner: true in the front matter and define the banner cont
 
 {% include quick_installation.html %}
 
-<section class="most_scalable">
-	<div class="wrap">
-		<div class="flexwrap">
-			<div class="col-1">
-				<h1 class="display-2">The most scalable single-node database</h1>
-			</div>
-			<div class="col-2">
-				<div class="box">
-					<div>
-						<div class="label">ClickBench</div>
-						<div class="number">#1</div>
-						<div class="info">system*</div>
-					</div>
-					<div class="divider"></div>
-					<div>
-						<div class="label">TPC-H</div>
-						<div class="number">SF 100,000</div>
-						<div class="info">on a single machine*</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="reference">*see <a href="{% post_url 2025-10-09-benchmark-results-14-lts %}">our blog post</a> for more details</div>
-	</div>
-</section>
-
-<!--
 <section class="blog">
 	<div class="wrap">
 		<h1 class="display-2">Blog</h1>
@@ -137,8 +143,19 @@ To add a banner, set banner: true in the front matter and define the banner cont
 			{% for post in site.posts limit:2 %}
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
 				{% assign tag_classes = post.tags | join: ' ' | downcase | slugify %}
-				<div class="postpreview {{ tag_classes }}" data-title="{{ post.title | escape }}">
-					<a href="{{ post.url }}" class="blocklink" title="{{ post.title }}"></a>
+				{% if post.external_post_url %}
+					{% assign is_external = true %}
+					{% assign post_link = post.external_post_url %}
+					{% assign link_target = "_blank" %}
+					{% assign link_rel = "noopener noreferrer" %}
+				{% else %}
+					{% assign is_external = false %}
+					{% assign post_link = post.url %}
+					{% assign link_target = "_self" %}
+					{% assign link_rel = "" %}
+				{% endif %}
+				<div class="postpreview {{ tag_classes }}{% if is_external %} external-post{% endif %}" data-title="{{ post.title | escape }}">
+					<a href="{{ post_link }}" class="blocklink" title="{{ post.title }}" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
 					<div class="postimg custom">
 						{% if post.thumb %}
 							<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image"/>
@@ -156,6 +173,9 @@ To add a banner, set banner: true in the front matter and define the banner cont
 						{% endif %}
 						<h3 class="headline-3">{{ post.title }}</h3>
 						<div class="meta text-secondary-color body-small">
+							{% if is_external %}
+								<div class="external-source">{{ post.external_post_url | extract_domain }}</div>
+							{% endif %}
 							<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
 							<div class="author">{{ post.author | default: "Unknown Author" }}</div>
 						</div>
@@ -168,7 +188,6 @@ To add a banner, set banner: true in the front matter and define the banner cont
 		</a>
 	</div>
 </section>
--->
 
 
 <div class="landing_bg_1"></div>

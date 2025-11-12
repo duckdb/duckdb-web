@@ -15,16 +15,16 @@ Client API for PHP.
 Focused on performance, it uses the official C API internally through [FFI](https://www.php.net/manual/en/book.ffi.php), achieving good benchmarks.
 This library is more than just a wrapper for the C API; it introduces custom, PHP-friendly methods to simplify working with DuckDB. It is compatible with Linux, Windows, and macOS, requiring PHP version 8.3 or higher.
 
+Full documentation is available at [https://duckdb-php.readthedocs.io/](https://duckdb-php.readthedocs.io/).
 
-## Install
+## Automatic Install (Recommended for Newcomers)
 
 ```batch
-composer require satur.io/duckdb
+composer require satur.io/duckdb-auto
 ```
 
-## Documentation
-
-Full documentation is available at [https://duckdb-php.readthedocs.io/](https://duckdb-php.readthedocs.io/).
+You will need to allow `satur.io/duckdb-auto` to execute code to use this installation method,
+check [installation](https://duckdb-php.readthedocs.io/en/latest/installation) for more details.
 
 ## Quick Start
 

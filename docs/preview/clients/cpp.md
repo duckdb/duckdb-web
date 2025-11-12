@@ -47,7 +47,28 @@ if (result->HasError()) {
 }
 ```
 
-The `MaterializedQueryResult` instance contains firstly two fields that indicate whether the query was successful. `Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues will lead to the `success` Boolean field in the query result instance to be set to `false`. In this case an error message may be available in `error` as a string. If successful, other fields are set: the type of statement that was just executed (e.g., `StatementType::INSERT_STATEMENT`) is contained in `statement_type`. The high-level (“Logical type”/“SQL type”) types of the result set columns are in `types`. The names of the result columns are in the `names` string vector. In case multiple result sets are returned, for example because the result set contained multiple statements, the result set can be chained using the `next` field.
+The `MaterializedQueryResult` instance contains firstly two fields that indicate whether the query was successful. `Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues will lead to the `success` Boolean field in the query result instance to be set to `false`. In this case an error message may be available in `error` as a string. The methods `GetErrorType()` and `GetErrorObject()` are also available for any `QueryResult` instance which may aid in more explicit error handling. 
+
+```cpp
+auto result = con.Query("INSERT INTO integers VALUES (1, 2)");
+if (result->HasError()) {
+    auto errorType = result->GetErrorType();
+    switch (errorType) {
+    case duckdb::ExceptionType::CONSTRAINT: {
+        // Example handling
+        auto errorObject = result->GetErrorObject();
+        errorObject.ConvertErrorToJSON(); 
+        std::cout << errorObject.Message() << std::endl;
+        break;
+    }
+    // More handling
+    }
+} else {
+    // Normal code
+}
+```
+
+If successful, other fields are set: the type of statement that was just executed (e.g., `StatementType::INSERT_STATEMENT`) is contained in `statement_type`. The high-level (“Logical type”/“SQL type”) types of the result set columns are in `types`. The names of the result columns are in the `names` string vector. In case multiple result sets are returned, for example because the result set contained multiple statements, the result set can be chained using the `next` field.
 
 DuckDB also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
 

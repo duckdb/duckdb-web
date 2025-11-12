@@ -35,7 +35,9 @@ To drop an [ART index](#adaptive-radix-tree-art), use the [`DROP INDEX` statemen
 
 ## Limitations of ART Indexes
 
-ART indexes create a secondary copy of the data in a second location – this complicates processing, particularly when combined with transactions. Certain limitations apply when it comes to modifying data that is also stored in secondary indexes.
+ART indexes create a secondary copy of the data in a second location.
+Maintaining that second copy complicates processing, particularly when combined with transactions. 
+Thus, certain limitations currently apply when it comes to modifying data that is also stored in secondary indexes.
 
 > As expected, indexes have a strong effect on performance, slowing down loading and updates, but speeding up certain queries. Please consult the [Performance Guide]({% link docs/stable/guides/performance/indexing.md %}) for details.
 
@@ -47,7 +49,7 @@ This rewrite has performance implications, particularly for wide tables, as enti
 Additionally, it causes the following constraint-checking limitation of `UPDATE` statements.
 The same limitation exists in other DBMSs, like PostgreSQL.
 
-In the example below, note how the number of rows exceeds DuckDB's standard vector size, which is 2048.
+In the example below, note how the number of rows exceeds DuckDB's standard vector size, which is 2048 by default.
 The `UPDATE` statement is rewritten into a `DELETE`, followed by an `INSERT`.
 This rewrite happens per chunk of data (2048 rows) moving through DuckDB's processing pipeline.
 When updating `i = 2047` to `i = 2048`, we do not yet know that 2048 becomes 2049, and so forth.
@@ -84,8 +86,7 @@ COMMIT;
 ```
 
 In other clients, you might be able to fetch the result of `DELETE ... RETURNING ...`.
-Then, you can use that result in a subsequent `INSERT ...` statements,
-or potentially make use of DuckDB's `Appender` (if available in the client).
+Then, you can use that result in a subsequent `INSERT ...` statements, or potentially make use of DuckDB's `Appender` (if available in the client).
 
 ### Over-Eager Constraint Checking in Foreign Keys
 
@@ -110,63 +111,101 @@ Constraint Error:
 Violates foreign key constraint because key "id: 1" is still referenced by a foreign key in a different table. If this is an unexpected constraint violation, please refer to our foreign key limitations in the documentation
 ```
 
-The reason for this is because DuckDB does not yet support “looking ahead”.
+The reason for this is that DuckDB does not yet support “looking ahead”.
 During the `INSERT`, it is unaware it will reinsert the foreign key value as part of the `UPDATE` rewrite.
 
-### Constraint Checking After Delete With Concurrent Transactions
+### Constraint Checking after Delete with Concurrent Transactions
 
-When a delete is committed on a table with an index, data can only be removed from the index when no further transactions exist that refer to the deleted entry. This means that for indices which enforce constraint violations, if you perform a delete transaction, constraint checking can fail for a subsequent transaction which inserts a record with the same key as the deleted record if there is a concurrent transaction referencing the deleted record. Note that constraint violations are only relevant for primary key, foreign key, and `UNIQUE` indexes.
+To better understand the limitations of indexes, we'll first provide a brief overview of index storage in DuckDB.
+DuckDB creates a physical secondary copy of the key column expressions and their row IDs when defining index-based constraints, or when using the `CREATE [UNIQUE] INDEX` statement.
+That secondary structure lives in the physical storage of the table to which it belongs.
+Note that constraint violations are only relevant for primary key, foreign key, and `UNIQUE` indexes.
 
-There are two main ways that constraint checking can fail:
+When running transactions, DuckDB can only change or delete a value after there are no more dependencies to it from older transactions.
+I.e., after all older transactions that still need to see the old value have finished.
+DuckDB uses MVCC to ensure that transactionality.
+For the table storage, each transaction knows if it still has visibility on a value or not.
+A transaction has visibility on a value, if it started before the `COMMIT` of the change/delete.
+Similarly, it has no more visibility on the value, if it started afterward.
+
+**Indexes do not yet have such functionality.**
+Let's say that a `value-row_id` pair exists in the global index and there is a `COMMIT` changing/deleting that value.
+In that case, it **also** stays visible to newer transactions until all **older**, dependent transactions have finished.
+That behavior causes two main limitations, which are listed in more detail below.
+
+The long-term solution to these limitations is to enable transaction-timestamp tracking in indexes.
+However, as-of now, DuckDB does not fully support MVCC for its indexes.
+
+#### Workarounds
+
+As this is a limitation in DuckDB, there is currently no pure-SQL workaround.
+If you have concurrent reads and writes on a table with indexes, then you need to add application-side locks.
+I.e., if you have multiple writes happening while a concurrent read is running, then these have to wait for the read(s) to finish.
+
+You might also consider not using indexes altogether. 
+Instead, DuckDB's `MERGE INTO` statement might suit your needs better.
 
 #### Over-Eager Unique Constraint Checking
 
 For uniqueness constraints, inserts can fail when they should succeed:
 
 ```cpp
-// Assume "someTable" is a table with an index enforcing uniqueness
+// Assume "someTable" is a table with an index enforcing uniqueness.
 tx1 = duckdbTxStart()
-someRecord = duckdb(tx1, "select * from someTable using sample 1 rows")
+someRecord = duckdb(tx1, "SELECT * FROM someTable USING SAMPLE 1 ROWS")
 
 tx2 = duckdbTxStart()
 duckdbDelete(tx2, someRecord)
 duckdbTxCommit(tx2)
 
-// At this point someRecord is deleted, but the ART index is not updated, so the following would fail with a constraint error:
-// tx3 = duckdbTxStart()
-// duckdbInsert(tx3, someRecord)
-// duckdbTxCommit(tx3)
+// At this point someRecord is deleted, but tx1 still needs visibility on that record.
+// Thus, the ART index is not updated, so the following query fails with a constraint error:
+tx3 = duckdbTxStart()
+duckdbInsert(tx3, someRecord)
+duckdbTxCommit(tx3)
 
-duckdbTxCommit(tx1) // Following this, the above insert would succeed because the ART index was allowed to update
+// Following this, the above insert succeeds because the ART index was allowed to update.
+duckdbTxCommit(tx1)
 ```
+
+Note that in older versions of DuckDB some variations of this might've **seemed** to work (no constraint exception).
+That is especially the case for `UPSERT` statements.
+However, these variations caused incorrect states, as constraint checking was incorrectly based on an already-deleted value.
 
 #### Under-Eager Foreign Key Constraint Checking
 
 For foreign key constraints, inserts can succeed when they should fail:
 
 ```cpp
-// Setup: Create a primary table with UUID primary key and a secondary table with foreign key reference
+// Setup: Create a primary table with a UUID primary key and a secondary table with a foreign key reference.
 primaryId = generateNewGUID()
 conn = duckdbConnectInMemory()
-// Create tables and insert initial record in primary table
+
+// Create tables and insert the initial record in the primary table.
 duckdb(conn, "CREATE TABLE primary_table (id UUID PRIMARY KEY)")
 duckdb(conn, "CREATE TABLE secondary_table (primary_id UUID, FOREIGN KEY (primary_id) REFERENCES primary_table(id))")
 duckdbInsert(conn, "primary_table", {id: primaryId})
-// Start transaction tx1 which will read from primary_table
+
+// Start a transaction tx1, which reads from primary_table.
 tx1 = duckdbTxStart(conn)
 readRecord = duckdb(tx1, "SELECT id FROM primary_table LIMIT 1")
-// Note: tx1 remains open, holding locks/resources
-// Outside of tx1, delete the record from primary_table
+
+// Note: tx1 remains open, holding locks/resources.
+// Outside of tx1, delete the record from primary_table.
 duckdbDelete(conn, "primary_table", {id: primaryId})
-// Try to insert into secondary_table with foreign key reference to the now-deleted primary record
-// This succeeds because tx1 is still open and the constraint isn't fully enforced yet
+
+// Try to insert into secondary_table, which has a foreign key reference to the now-deleted primary record.
+// This succeeds because tx1 is still open and the constraint isn't fully enforced yet.
 duckdbInsert(conn, "secondary_table", {primary_id: primaryId})
-// Commit tx1, releasing any locks/resources
+
+// Commit tx1, releasing any locks/resources.
 duckdbTxCommit(tx1)
-// Verify the primary record is indeed deleted
+
+// Verify the primary record is indeed deleted.
 count = duckdb(conn, "SELECT count() FROM primary_table WHERE id = $primaryId", {primaryId: primaryId})
 assert(count == 0, "Record should be deleted")
-// Verify the secondary record with the foreign key reference exists, an inconsistent state
+
+// Verify the secondary record with the foreign key reference exists, an inconsistent state!
 count = duckdb(conn, "SELECT count() FROM secondary_table WHERE primary_id = $primaryId", {primaryId: primaryId})
 assert(count == 1, "Foreign key reference should exist")
 ```

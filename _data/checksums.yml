@@ -19,11 +19,11 @@ artifacts:
       x86_64:
         filename: "duckdb_cli-linux-amd64.zip"
         hashes:
-          sha256: "82c75b22b8035204122da84528f6954fb80c8749f0c9eeb9709e33d0b7933fe5"
+          sha256: "3e29952507ebd202e8d0e2678df4490689bfc9c86534e240b541791b969df0e1"
       arm64:
         filename: "duckdb_cli-linux-arm64.zip"
         hashes:
-          sha256: "3e29952507ebd202e8d0e2678df4490689bfc9c86534e240b541791b969df0e1"
+          sha256: "646f60c92268c441f0095ce855e16528a8539e466da2788649f359be8cbdc8d1"
     windows:
       x86_64:
         filename: "duckdb_cli-windows-amd64.zip"

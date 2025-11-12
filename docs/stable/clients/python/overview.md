@@ -246,4 +246,12 @@ con.load_extension("h3")
 
 ### Unsigned Extensions
 
-To load [unsigned extensions]({% link docs/stable/extensions/overview.md %}#unsigned-extensions), use the `config = {"allow_unsigned_extensions": "true"}` argument with the `duckdb.connect()` method.
+To load [unsigned extensions]({% link docs/stable/extensions/overview.md %}#unsigned-extensions), use:
+
+```python
+con = duckdb.connect(config={"allow_unsigned_extensions": "true"})
+```
+
+> Warning Only load unsigned extensions from sources you trust.
+> Avoid loading unsigned extensions over HTTP.
+> Consult the [Securing DuckDB page]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how set up DuckDB in a secure manner.

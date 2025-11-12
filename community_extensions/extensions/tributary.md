@@ -21,10 +21,10 @@ repo:
   github: query-farm/tributary
   ref: 8d5742017bd1438a414d6f73ff8f0a815b3e7916
 
-extension_star_count: 34
-extension_star_count_pretty: 34
-extension_download_count: 386
-extension_download_count_pretty: 386
+extension_star_count: 37
+extension_star_count_pretty: 37
+extension_download_count: 679
+extension_download_count_pretty: 679
 image: '/images/community_extensions/social_preview/preview_community_extension_tributary.png'
 layout: community_extension_doc
 ---

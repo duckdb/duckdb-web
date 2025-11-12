@@ -5331,7 +5331,7 @@ Select columns from the relation, by filtering based on type(s)
 ##### Example
 
 ```python
-import duckdb
+import duckdb.sqltypes
 
 duckdb_conn = duckdb.connect()
 
@@ -5345,7 +5345,7 @@ rel = duckdb_conn.sql("""
     """
 )
 
-rel.select_dtypes(types=[duckdb.typing.VARCHAR]).distinct()
+rel.select_dtypes(types=[duckdb.sqltypes.VARCHAR]).distinct()
 ```
 
 
@@ -5386,7 +5386,7 @@ Select columns from the relation, by filtering based on type(s)
 ##### Example
 
 ```python
-import duckdb
+import duckdb.sqltypes
 
 duckdb_conn = duckdb.connect()
 
@@ -5400,7 +5400,7 @@ rel = duckdb_conn.sql("""
     """
 )
 
-rel.select_types(types=[duckdb.typing.VARCHAR]).distinct()
+rel.select_types(types=[duckdb.sqltypes.VARCHAR]).distinct()
 ```
 
 

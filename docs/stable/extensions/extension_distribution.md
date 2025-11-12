@@ -39,8 +39,7 @@ which is itself is supported through an extension ([`httpfs`]({% link docs/stabl
 
 ### Unsigned Extensions
 
-> Warning
-> Only load unsigned extensions from sources you trust.
+> Warning Only load unsigned extensions from sources you trust.
 > Avoid loading unsigned extensions over HTTP.
 > Consult the [Securing DuckDB page]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how set up DuckDB in a secure manner.
 

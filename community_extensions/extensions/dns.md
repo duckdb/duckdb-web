@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: dns
   description: The DNS Extension enables DNS lookups and reverse DNS lookups from within DuckDB
-  version: 0.3.0
+  version: 0.4.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-dns
-  ref: 783eccdbe63ab4f4024ee0e6f2d3746f3302d55c
+  ref: b95577b43190fb67d0a723a0acf25cac5b769ff6
 
 docs:
   hello_world: |
@@ -85,6 +85,15 @@ docs:
     ├───────────────────────────────────────┤
     │ DNS concurrency limit updated to 250  │
     └───────────────────────────────────────┘
+
+    -- Set DNS cache size to 8192 (default: 1000)
+    D SELECT set_dns_cache_size(8192);
+    ┌────────────────────────────────┐
+    │    set_dns_cache_size(8192)    │
+    │            varchar             │
+    ├────────────────────────────────┤
+    │ DNS cache size updated to 8192 │
+    └────────────────────────────────┘
     
   extended_description: |
     This community extension implements DNS (reverse) lookup functions for DuckDB.
@@ -216,6 +225,28 @@ docs:
     -- Returns: Concurrency limit updated to 500
     ```
 
+    ### `set_dns_cache_size(size)`
+
+    Updates the DNS cache size for the resolver. The cache stores DNS query results to improve performance by avoiding repeated lookups for the same queries. Each cache entry stores the results for a unique DNS query (hostname + record type combination).
+
+    **Parameters:**
+    - `size` (BIGINT): The maximum number of cached DNS queries (must be greater than 0)
+
+    **Returns:** VARCHAR - A success or error message
+
+    **Default:** 4096 cached queries
+
+    **Examples:**
+    ```sql
+    -- Set cache size to 8192 for larger workloads
+    SELECT set_dns_cache_size(8192);
+    -- Returns: DNS cache size updated to 8192
+
+    -- Set cache size to 2048 for smaller memory footprint
+    SELECT set_dns_cache_size(2048);
+    -- Returns: DNS cache size updated to 2048
+    ```
+
     ### `corey(hostname)` - Table Function
 
     Queries all TXT records for a hostname and returns them as a table with one row per TXT record. This is useful for advanced filtering, aggregation, and analysis of TXT records. 
@@ -265,10 +296,10 @@ docs:
 
     > This extension is experimental and potentially unstable. See README for full examples.
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 681
+extension_download_count_pretty: 681
 image: '/images/community_extensions/social_preview/preview_community_extension_dns.png'
 layout: community_extension_doc
 ---
@@ -300,7 +331,8 @@ LOAD {{ page.extension.name }};
 | dns_lookup_all            | scalar        | Performs a forward DNS lookup to resolve a hostname to all its IPv4 addresses, or to all records of a specified DNS record type second parameter.         | NULL    | [SELECT dns_lookup_all('cloudflare.com');]  |
 | reverse_dns_lookup        | scalar        | Performs a reverse DNS lookup to resolve an IPv4 address given as a parameter to a hostname.                                                              | NULL    | [SELECT reverse_dns_lookup('8.8.8.8');]     |
 | set_dns_config            | scalar        | Updates the DNS resolver configuration for all subsequent DNS queries.                                                                                    | NULL    | [SELECT set_dns_config('google');]          |
+| set_dns_concurrency_limit | scalar        | Updates the concurrency limit for DNS lookup operations to prevent TCP connection exhaustion.                                                             | NULL    | [SELECT set_dns_concurrency_limit(100);]    |
+| set_dns_cache_size        | scalar        | Updates the DNS cache size for the resolver.                                                                                                              | NULL    | [SELECT set_dns_cache_size(8192);]          |
 | corey                     | table         | Queries all TXT records for a hostname and returns them as a table with one row per TXT record.                                                           | NULL    | [SELECT * FROM corey('lastweekinaws.com');] |
-| set_dns_concurrency_limit | scalar        | NULL                                                                                                                                                      | NULL    | NULL                                        |
 
 

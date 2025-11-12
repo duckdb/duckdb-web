@@ -60,6 +60,7 @@ if response.status_code == 200:
 
     # Save the upcoming releases as JSON in _data folder
     data_file_path = os.path.join(data_dir, "upcoming_releases.json")
+    upcoming_events = sorted(upcoming_events, key=lambda x: x["start_date"])
     with open(data_file_path, "w") as data_file:
         json.dump(upcoming_events, data_file, indent=4)
 else:
