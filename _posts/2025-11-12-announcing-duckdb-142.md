@@ -8,17 +8,15 @@ excerpt: "Today we are releasing DuckDB 1.4.2, the second patch release of our L
 tags: ["release"]
 ---
 
-In this blog post, we highlight a few important fixes and convenience improvements in DuckDB v1.4.2, the second bugfix release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
+In this blog post, we highlight a few important fixes and convenience improvements in DuckDB v1.4.2, the second patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}). To see the complete list of updates, please consult the [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.2).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few hours to days for some client libraries (e.g., Go, R, Rust, Java) to be released to the extra changes and review rounds required.
-
-In this blog post, we will highlight a few important features and fixes. To see the complete list of updates, please consult the [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.2).
+To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few hours to days for some client libraries (e.g., Go, R, Rust, Java) to be released due to the extra changes and review rounds required.
 
 ## Features and Improvements
 
 ### Iceberg Improvements
 
-Similarly to the [v1.4.1 release blog post]({% post_url 2025-10-07-announcing-duckdb-141 %}#iceberg-improvement), we can start with some good news for our Iceberg users: DuckDB v1.4.2 ships a number of improvements for the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). Insert, update, and delete statements are all supported now:
+Similarly to the [v1.4.1 release blog post]({% post_url 2025-10-07-announcing-duckdb-141 %}#iceberg-improvements), we can start with some good news for our Iceberg users: DuckDB v1.4.2 ships a number of improvements for the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). Insert, update, and delete statements are all supported now:
 
 <details markdown='1'>
 <summary markdown='span'>
@@ -79,7 +77,7 @@ See details in the [pull request](https://github.com/duckdb/duckdb/pull/19579).
 
 #### Time HTTP requests
 
-The logger can now log time of HTTP requests ([`#19691`](https://github.com/duckdb/duckdb/pull/19691)):
+The logger can now log the time of HTTP requests ([`#19691`](https://github.com/duckdb/duckdb/pull/19691)):
 
 ```sql
 CALL enable_logging('HTTP');
@@ -94,8 +92,8 @@ TODO
 
 #### Access the Profiler's Output from the Logger
 
-If both profiler and logger are enabled, then you can [access profiler output also via logger (`#19572`)](https://github.com/duckdb/duckdb/pull/19572).
-This means that you can log information such as the execution time of queries:
+[The logger can now access the profiler's output `#19572`](https://github.com/duckdb/duckdb/pull/19572).
+This means that if both the profiler and the logger are enabled, you can log information such as the execution time of queries:
 
 ```sql
 -- Enable profiling to JSON file
@@ -139,7 +137,7 @@ DuckDB v1.4.2 also ships some small performance improvements:
 ## Fixes
 
 We fixed several crashes, internal errors, incorrect results and regressions.
-Additionally, we fixed several issues reported by our [fuzzer](https://github.com/duckdb/duckdb-fuzzer/).
+We also fixed several issues discovered by our [fuzzer](https://github.com/duckdb/duckdb-fuzzer/).
 
 ### Crashes and Internal Errors
 
@@ -165,7 +163,6 @@ Additionally, we fixed several issues reported by our [fuzzer](https://github.co
 * [`#19424` Fix issue in MetadataManager triggered when doing concurrent reads while checkpointing](https://github.com/duckdb/duckdb/pull/19424)
 * [`#19527` Ensure that DuckDB outputs the expected `STORAGE_VERSION`](https://github.com/duckdb/duckdb/pull/19527)
 * [`#19543` Error when setting `force_compression = 'zstd'` in an in-memory environment database](https://github.com/duckdb/duckdb/pull/19543)
-
 
 ### Issues Discovered by the Fuzzer
 
