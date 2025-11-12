@@ -4,13 +4,13 @@ title: "Announcing DuckDB 1.4.2 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-4-2-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-2-lts.png"
-excerpt: "Today we are releasing DuckDB 1.4.2, the second patch release of our LTS edition. The new release ships several bugfixes and performance optimizations as well as some new Iceberg and CLI features."
+excerpt: "Today we are releasing DuckDB 1.4.2, the second patch release of our LTS edition. The new release ships several bugfixes and performance optimizations as well as some new Iceberg and logger/profiler features. We also fixed vulnerabilities in DuckDB's database encryption."
 tags: ["release"]
 ---
 
 In this blog post, we highlight a few important fixes and convenience improvements in DuckDB v1.4.2, the second patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}). To see the complete list of updates, please consult the [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.2).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few hours to days for some client libraries (e.g., Go, R, Rust, Java) to be released due to the extra changes and review rounds required.
+To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few hours to days for some client libraries (e.g., R, Rust) to be released due to the extra changes and review rounds required.
 
 ## Features and Improvements
 
@@ -162,8 +162,23 @@ SELECT * FROM read_vortex('my.vortex');
 
 ## Fixes
 
-We fixed several crashes, internal errors, incorrect results and regressions.
+We fixed a vulnerability, several crashes, internal errors, incorrect results and regressions.
 We also fixed several issues discovered by our [fuzzer](https://github.com/duckdb/duckdb-fuzzer/).
+
+### Vulnerabilities
+
+We fixed [four vulnerabilities](https://github.com/duckdb/duckdb/security/advisories/GHSA-vmp8-hg63-v2hp) in DuckDB's [database encryption]({% link docs/stable/sql/statements/attach.md %}#database-encryption):
+
+1. The DuckDB can fall back to an insecure random number generator (`pcg32`) to generate cryptographic keys or IVs.
+1. When clearing keys from memory, the compiler may remove the memset() and leave sensitive data on the heap
+1. By modifying the database header, an attacker could downgrade the encryption mode from GCM to CTR to bypass integrity checks.
+1. Failure to check return value on call to OpenSSL `rand_bytes()`.
+
+See the [Security Advisory](https://github.com/duckdb/duckdb/security/advisories/GHSA-vmp8-hg63-v2hp) for more details.
+
+If you are using database encryption, you are strongly encouraged to update to DuckDB v1.4.2.
+
+> We would like to thank [Greg Rubin](https://github.com/SalusaSecondus) and [Sławek Kosowski](https://github.com/skosowski) for reporting these vulnerabilities!
 
 ### Crashes and Internal Errors
 
