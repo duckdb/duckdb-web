@@ -36,15 +36,31 @@ $(document).ready(function(){
 	});
 
 	
-	
-	// Simple detect OS 
-	var OSName="Unknown OS";
-	var OSdatid="Unknown OS";
-	if (navigator.appVersion.indexOf("Win")!=-1) { OSName="Windows"; OSdatid="win" };
-	if (navigator.appVersion.indexOf("Mac")!=-1) { OSName="macOS"; OSdatid="macos" };
-	if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid="linux" };
-	if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid="linux"};
+	// Detect OS (using UAParser)
+	function detectPlatform() {
+		if (window.UAParser) {
+			try {
+				var result = new UAParser().getResult();
+				var osName = (result && result.os && result.os.name) ? String(result.os.name).toLowerCase() : '';
+				if (osName) {
+					if (/mac\s?os|macos|os\s?x/.test(osName)) return 'macos';
+					if (/windows/.test(osName)) return 'windows';
+					if (/linux|ubuntu|debian|fedora|arch|gentoo|suse|centos/.test(osName)) return 'linux';
+				}
+			} catch (e) {}
+		}
+
+		var fallback = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
+		if (/Mac/i.test(fallback)) return 'macos';
+		if (/Win/i.test(fallback)) return 'windows';
+		if (/Linux|X11/i.test(fallback)) return 'linux';
+		return 'macos';
+	}
+
+	var OSdatid = detectPlatform();
+	var OSName = OSdatid === 'macos' ? 'macOS' : OSdatid === 'windows' ? 'Windows' : OSdatid === 'linux' ? 'Linux' : 'Unknown OS';
 	$('.systemdetected').html('System detected: '+OSName);
+	
 	
 	// Get URL Parameter
 	var getUrlParameter = function getUrlParameter(sParam) {
