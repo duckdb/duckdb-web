@@ -18,6 +18,8 @@ To install the new version, please visit the [installation page]({% link install
 
 Similarly to the [v1.4.1 release blog post]({% post_url 2025-10-07-announcing-duckdb-141 %}#iceberg-improvements), we can start with some good news for our Iceberg users: DuckDB v1.4.2 ships a number of improvements for the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). Insert, update, and delete statements are all supported now:
 
+<!-- markdownlint-disable MD040 -->
+
 <details markdown='1'>
 <summary markdown='span'>
 Click to see the SQL code sample for Iceberg updates.
@@ -42,6 +44,8 @@ SET col1 = col1 + 5
 WHERE col1 = 1;
 ```
 </details>
+
+<!-- markdownlint-enable MD040 -->
 
 We will publish a separate blog post on these improvements shortly. Stay tuned!
 
