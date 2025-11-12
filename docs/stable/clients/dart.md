@@ -10,7 +10,7 @@ title: Dart Client
 
 > The latest stable version of the DuckDB Dart client is {{ site.current_duckdb_dart_version }}.
 
-DuckDB.Dart is the native Dart API for [DuckDB](https://duckdb.org/).
+DuckDB.Dart is the native Dart API for DuckDB.
 
 ## Installation
 
