@@ -36,8 +36,8 @@ docs:
     SELECT number, name, type1, "height(m)", "weight(kg)", base_total FROM list_pokemon() WHERE name = 'Charizard';
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 667
-extension_download_count_pretty: 667
+extension_download_count: 675
+extension_download_count_pretty: 675
 image: '/images/community_extensions/social_preview/preview_community_extension_psyduck.png'
 layout: community_extension_doc
 ---
