@@ -168,8 +168,8 @@ docs:
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 695
-extension_download_count_pretty: 695
+extension_download_count: 733
+extension_download_count_pretty: 733
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
 layout: community_extension_doc
 ---
