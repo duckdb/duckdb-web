@@ -17,14 +17,14 @@ extension:
     - rustyconover
   name: inflector
   requires_toolchains: rust
-  version: 2025110901
+  version: 2025111201
 repo:
   github: query-farm/inflector
-  ref: dd7189746d6ac63cc447aa830ec90b5ef4e50b61
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 249
-extension_download_count_pretty: 249
+  ref: 973052ba08aeec5380f79254d3d3b4d805c0b8b3
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 320
+extension_download_count_pretty: 320
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
