@@ -1195,6 +1195,10 @@
               "url": "ui"
             },
             {
+              "page": "Vortex",
+              "url": "vortex"
+            },
+            {
               "page": "VSS",
               "url": "vss"
             }
