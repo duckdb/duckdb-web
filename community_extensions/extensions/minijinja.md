@@ -23,8 +23,8 @@ repo:
   ref: 166f78e6a5bc72ec07366eb1d0af39bfd004f0da
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 622
-extension_download_count_pretty: 622
+extension_download_count: 666
+extension_download_count_pretty: 666
 image: '/images/community_extensions/social_preview/preview_community_extension_minijinja.png'
 layout: community_extension_doc
 ---
