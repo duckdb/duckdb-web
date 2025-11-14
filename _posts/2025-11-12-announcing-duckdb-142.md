@@ -128,8 +128,9 @@ DuckDB v1.4.2 also ships some small performance improvements:
 
 ### Vortex Support
 
-DuckDB now supports the [Vortex file format](https://vortex.dev/) through the [`vortex` extension]({% link docs/stable/core_extensions/vortex.md %}).
-First, install and load the extension:
+DuckDB now supports the [Vortex file format](https://vortex.dev/) through the [`vortex` extension]({% link docs/stable/core_extensions/vortex.md %}) on Linux and macOS.
+
+To use `vortex`, first install and load the extension:
 
 ```sql
 INSTALL vortex;

@@ -6,7 +6,7 @@ title: Vortex Extension
 
 > The `vortex` extension requires DuckDB 1.4.2+.
 
-The `vortex` extension allows you to read and write files using the [Vortex file format](https://vortex.dev/). It is currently available for the Linux (`linux_amd64`, `linux_arm64`) and MacOS (`osx_amd64`, `osx_arm64`) distributions.
+The `vortex` extension allows you to read and write files using the [Vortex file format](https://vortex.dev/). It is currently available for the Linux (`linux_amd64`, `linux_arm64`) and macOS (`osx_amd64`, `osx_arm64`) distributions.
 
 ## Installing and Loading
 
