@@ -5,7 +5,7 @@ title: Node.js Client (Neo)
 
 > The latest stable version of the DuckDB Node.js (Neo) client is {{ site.current_duckdb_node_neo_version }}.
 
-An API for using DuckDB in [Node.js](https://nodejs.org/).
+An API for using [DuckDB]({% link index.html %}) in [Node.js](https://nodejs.org/).
 
 The primary package, [@duckdb/node-api](https://www.npmjs.com/package/@duckdb/node-api), is a high-level API meant for applications.
 It depends on low-level bindings that adhere closely to [DuckDB's C API]({% link docs/preview/clients/c/overview.md %}),
