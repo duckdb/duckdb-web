@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: onelake
   description: This extension allows you to connect DuckDB to Microsoft Fabric OneLake workspaces and lakehouses, enabling you to query data stored in OneLake directly from DuckDB.
-  version: 1.0.0
+  version: 1.0.1
   language: C++
   build: cmake
   license: MIT
@@ -16,8 +16,8 @@ extension:
     - achrafcei
   excluded_platforms: "windows_amd64_mingw"
 repo:
-  github: datumnova/duckdb_onelake.git
-  ref: a5532dc9c8a32bfab297424a4b90a596dd8c9e18
+  github: datumnova/duckdb_onelake
+  ref: 20647375647e2bf62f31f7fb0b926f1ff65d10a6
   canonical_name: onelake
 
 docs:
@@ -53,20 +53,11 @@ docs:
     -- );
 
     -- Attach to your OneLake workspace and lakehouse
-    -- You can provide either IDs or names for the workspace and lakehouse.
-    -- If you wish to only attach to a workspace without specifying a default lakehouse, omit the DEFAULT_LAKEHOUSE parameter.
-    -- If you however wish to only connect to a specific lakehouse run only the second ATTACH command below.
-
-    ATTACH 'onelake://<your_workspace_id>'
-          AS <your_connection_name>
-          (TYPE ONELAKE, DEFAULT_LAKEHOUSE '<your_lakehouse_id_or_name>');
-
-    -- Alternatively, provide workspace and lakehouse names and let the extension resolve them:
     ATTACH '<your_workspace_name>/<your_lakehouse_name>.Lakehouse'
         AS <your_connection_name>
         (TYPE ONELAKE);
 
-    USE <your_connection_name>;
+    USE <your_connection_name>.<your_schema_name>; -- e.g., dbo
 
     SHOW TABLES;
 
@@ -79,16 +70,14 @@ docs:
     This extension enables DuckDB to connect to Microsoft Fabric OneLake workspaces and lakehouses, allowing users to query data stored in OneLake directly from DuckDB. 
     It supports authentication via service principals or credential chains (e.g., Azure CLI) and provides seamless integration with OneLake's data storage capabilities.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/datumnova/duckdb_onelake).
+    
     Current limitations:
-    - Only read access is supported; write operations are not yet implemented.
-    - Schema enabled lakehouses are not supported.
+    - Only read access is supported; write operations are not implemented.
 
-
-
-extension_star_count: {"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
-extension_star_count_pretty: n/a
-extension_download_count: 41
-extension_download_count_pretty: 41
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 53
+extension_download_count_pretty: 53
 image: '/images/community_extensions/social_preview/preview_community_extension_onelake.png'
 layout: community_extension_doc
 ---
