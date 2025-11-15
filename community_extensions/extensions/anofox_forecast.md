@@ -17,10 +17,10 @@ extension:
 repo:
   github: DataZooDE/anofox-forecast
   ref: d22d153cc211d8f086a6812518edcc5afa45e5a4
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 10
-extension_download_count_pretty: 10
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 115
+extension_download_count_pretty: 115
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
