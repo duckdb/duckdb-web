@@ -62,10 +62,10 @@ docs:
 
     > *Note:* Flock is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://dais-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
 
-extension_star_count: 278
-extension_star_count_pretty: 278
-extension_download_count: 696
-extension_download_count_pretty: 696
+extension_star_count: 279
+extension_star_count_pretty: 279
+extension_download_count: 687
+extension_download_count_pretty: 687
 image: '/images/community_extensions/social_preview/preview_community_extension_flock.png'
 layout: community_extension_doc
 ---

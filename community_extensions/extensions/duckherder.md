@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckherder
   description: Run duckdb query on remote server
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-distributed-execution
-  ref: ee2e6632c5aa059067a3fed71fc23f13d52748ca
+  ref: 1a251b4d62abc66b747fa5f6e6054bba432307f3
 
 docs:
   hello_world: |
@@ -28,10 +28,10 @@ docs:
     This extension is built on storage extension, to execute query on remote server and transfer data back with arrow flight.
     From users' perspective, all DML and DDL SQL statements should be used exactly the same as local duckdb.
 
-extension_star_count: 19
-extension_star_count_pretty: 19
-extension_download_count: 637
-extension_download_count_pretty: 637
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 643
+extension_download_count_pretty: 643
 image: '/images/community_extensions/social_preview/preview_community_extension_duckherder.png'
 layout: community_extension_doc
 ---
