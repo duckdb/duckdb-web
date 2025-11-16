@@ -12,7 +12,7 @@ length: "30 min"
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Event** | [](https://aidata.compasstechsummit.com/) |
+| **Event** | [Compass AI & Data Summit](https://aidata.compasstechsummit.com/) |
 | **Speaker** | [Gábor Szárnyas (DuckDB Labs)](https://szarnyasg.org/) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/slides/compass-ai-data-summit-duckdb-unplugged-gabor-szarnyas.pdf) |
 | **YouTube** | _coming later!_ |
