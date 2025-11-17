@@ -21,10 +21,10 @@ extension:
 repo:
   github: query-farm/minijinja
   ref: 166f78e6a5bc72ec07366eb1d0af39bfd004f0da
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 653
-extension_download_count_pretty: 653
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 664
+extension_download_count_pretty: 664
 image: '/images/community_extensions/social_preview/preview_community_extension_minijinja.png'
 layout: community_extension_doc
 ---
