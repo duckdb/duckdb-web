@@ -175,10 +175,16 @@
       var core = String($inst.attr('data-core-version') || '').trim();
       var jv = String($inst.attr('data-java-version') || '').trim();
       var ov = String($inst.attr('data-odbc-version') || '').trim();
+      var gv = String($inst.attr('data-go-version') || '').trim();
+      var rv = String($inst.attr('data-r-version') || '').trim();
+      var rustv = String($inst.attr('data-rust-version') || '').trim();
       var env = state.environment || '';
       var ver = core;
       if (env === 'java' && jv) ver = jv;
       else if (env === 'odbc' && ov) ver = ov;
+      else if (env === 'go' && gv) ver = gv;
+      else if (env === 'r' && rv) ver = rv;
+      else if (env === 'rust' && rustv) ver = rustv;
       var $cv = $inst.find('.currentversion');
       if ($cv.length) {
         if (ver) $cv.text('v' + ver);
