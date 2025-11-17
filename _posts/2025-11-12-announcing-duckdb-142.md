@@ -175,7 +175,7 @@ We fixed [four vulnerabilities](https://github.com/duckdb/duckdb/security/adviso
 1. By modifying the database header, an attacker could downgrade the encryption mode from GCM to CTR to bypass integrity checks.
 1. Failure to check return value on call to OpenSSL `rand_bytes()`.
 
-See the [Security Advisory](https://github.com/duckdb/duckdb/security/advisories/GHSA-vmp8-hg63-v2hp) for more details.
+See the [security advisory](https://github.com/duckdb/duckdb/security/advisories/GHSA-vmp8-hg63-v2hp) for more details.
 
 If you are using database encryption, you are strongly encouraged to update to DuckDB v1.4.2.
 
