@@ -296,10 +296,10 @@ docs:
 
     > This extension is experimental and potentially unstable. See README for full examples.
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 787
-extension_download_count_pretty: 787
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 791
+extension_download_count_pretty: 791
 image: '/images/community_extensions/social_preview/preview_community_extension_dns.png'
 layout: community_extension_doc
 ---
