@@ -24,7 +24,7 @@ which can be cumbersome and slow to implement in standard SQL.
 ## Portfolio Example Dataset
 
 Let's start with a concrete example.
-Suppose we have a table of stock [`prices`](/data/prices.csv) with timestamps:
+Suppose we have a table of stock [`prices`]({% link data/prices.csv %}) with timestamps:
 
 | ticker | when | price |
 | :----- | :--- | ----: |
@@ -38,7 +38,7 @@ Suppose we have a table of stock [`prices`](/data/prices.csv) with timestamps:
 | GOOG   | 2001-01-01 00:01:00 | 2 |
 | GOOG   | 2001-01-01 00:02:00 | 3 |
 
-We have another table containing portfolio [`holdings`](/data/holdings.csv) at various points in time:
+We have another table containing portfolio [`holdings`]({% link data/holdings.csv %}) at various points in time:
 
 | ticker | when | shares |
 | :----- | :--- | -----: |

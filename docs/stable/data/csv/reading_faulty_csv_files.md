@@ -88,7 +88,7 @@ Finally, the last block presents some of the options used in the scanner that ca
 
 There are cases where CSV files may have multiple structural errors, and users simply wish to skip these and read the correct data. Reading erroneous CSV files is possible by utilizing the `ignore_errors` option. With this option set, rows containing data that would otherwise cause the CSV parser to generate an error will be ignored. In our example, we will demonstrate a CAST error, but note that any of the errors described in our Structural Error section would cause the faulty line to be skipped.
 
-For example, consider the following CSV file, [`faulty.csv`](/data/faulty.csv):
+For example, consider the following CSV file, [`faulty.csv`]({% link data/faulty.csv %}):
 
 ```csv
 Pedro,31

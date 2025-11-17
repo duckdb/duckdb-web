@@ -98,7 +98,7 @@ install.packages("arrow")
 
 To execute the sample examples in this section, we need to download the following custom Parquet files:
 
-* [`integers.parquet`](/data/integers.parquet)
+* [`integers.parquet`]({% link data/integers.parquet %})
 * [`lineitemsf1.snappy.parquet`](https://blobs.duckdb.org/data/lineitemsf1.snappy.parquet)
 
 #### Python
