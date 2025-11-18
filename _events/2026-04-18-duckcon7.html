@@ -9,6 +9,7 @@ excerpt: ""
 tags: ["DuckCon"]
 body_class: duckcon7
 venue: "Pakhuis de Zwijger, Amsterdam"
+toc: false
 ---
 
 <section class="hero">
@@ -27,4 +28,35 @@ venue: "Pakhuis de Zwijger, Amsterdam"
 </section>
 <section class="announcement">
   <p>We're looking forward to gathering the DuckDB community at DuckCon 7 — our user conference in Amsterdam, the Netherlands. Join us at <a href="#">Pakhuis de Zwijger</a>, <a href="#">Piet Heinkade 179</a>, for a day of talks and friendly faces on Friday, 10. April 2026.</p>
+</section>
+<section class="speakers">
+  <div class="wrap">
+    <header class="section-header">
+      <h2 class="display-2">Speakers</h2>
+      <p>Meet the engineers, advocates, and innovators advancing embedded analytical databases. DuckCon speakers deliver the technical depth and real-world insight you need—whether you're optimizing queries, building extensions, or scaling DuckDB in production.</p>
+    </header>
+    <div class="speakers-list">
+      {% if site.data.duckcon7_speakers %}
+        {% for speaker in site.data.duckcon7_speakers %}
+        <div class="postpreview">
+          <a href="{{ speaker.url }}" class="blocklink" title="{{ speaker.name }}" target="_blank" rel="noopener noreferrer"></a>
+          <div class="postimg custom">
+            {% if speaker.image %}
+              <img src="{{ speaker.image }}" alt="{{ speaker.name }}" class="zoom-image"/>
+            {% else %}
+              {% assign placeholder_number = forloop.index | modulo: 3 | plus: 1 %}
+              <img src="/images/blog/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image"/>
+            {% endif %}
+          </div>
+          <div class="postdetails">
+            <h3 class="headline-3">{{ speaker.name }}</h3>
+            <div class="meta text-secondary-color body-small">
+              <div class="speaker">{{ speaker.title }}</div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
 </section>

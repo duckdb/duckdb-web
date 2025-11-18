@@ -56,4 +56,35 @@
         line-height: 120%;
         letter-spacing: -0.095px;
     }
+
+    .section-header {
+        text-align: center;
+
+        p {
+            color: var(--main-text-secondary-color, #B2B2B2);
+        }
+    }
+
+    .speakers .speakers-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-row-gap: 32px;
+        grid-column-gap: 16px;
+
+        .postpreview {
+            width: 100%;
+
+            .postimg {
+                aspect-ratio: 1;
+            }
+
+            a::after {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 770px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
 }
