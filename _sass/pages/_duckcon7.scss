@@ -1,0 +1,59 @@
+@use '../abstracts/mixins' as *;
+
+.duckcon7 {
+    --primary-font-stack: "SuisseIntl", sans-serif;
+
+    .hero {
+        @include code-large;
+        --hero-padding: 20px;
+        --hero-footer-button-size: 36px;
+
+        height: 100vh;
+        position: relative;
+        padding: var(--hero-padding);
+        color: var(--yellow-20);
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .hero-footer-content {
+            display: inline-flex;
+            gap: 50px;
+        }
+
+        .hero-footer-column {
+            flex: 1;
+            white-space: nowrap;
+        }
+
+        .hero-footer-button {
+            @include reset-button;
+            position: absolute;
+            right: 0;
+            left: 0;
+            margin: auto;
+            bottom: var(--hero-padding);
+            width: var(--hero-footer-button-size);
+            height: var(--hero-footer-button-size);
+        }
+    }
+
+    .announcement {
+        padding: 260px 0 80px;
+        text-align: center;
+        font-family: var(--primary-font-stack);
+        font-size: 38px;
+        line-height: 120%;
+        letter-spacing: -0.095px;
+    }
+}
