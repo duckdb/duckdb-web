@@ -63,8 +63,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 653
-extension_download_count_pretty: 653
+extension_download_count: 664
+extension_download_count_pretty: 664
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---
