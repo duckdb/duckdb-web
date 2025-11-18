@@ -3,6 +3,11 @@
 .duckcon7 {
     --primary-font-stack: "SuisseIntl", sans-serif;
 
+    // Override the max-width for the header content
+    header .headerline .headercontent {
+        max-width: var(--page-max-width-large, 1150px);
+    }
+
     .hero {
         @include code-large;
         --hero-padding: 20px;
@@ -67,8 +72,10 @@
 
     .speakers .speakers-list {
         @include reset-unordered-list;
+        --columns: 2;
+
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(var(--columns), 1fr);
         grid-row-gap: 32px;
         grid-column-gap: 16px;
 
@@ -89,7 +96,7 @@
         }
 
         @media (min-width: 770px) {
-            grid-template-columns: repeat(4, 1fr);
+            --columns: 4;
         }
     }
 
