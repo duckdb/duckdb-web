@@ -492,7 +492,16 @@
 	font: inherit;
 	cursor: pointer;
 	outline: none;
-  }
+}
+
+@mixin reset-unordered-list {
+	margin: 0;
+	padding: 0;
+}
+
+@mixin reset-list-item {
+	list-style: none;
+}
 
 .duckdb_logo,
 #duckdb_logo{
