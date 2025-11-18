@@ -4,13 +4,18 @@ title: "Announcing DuckDB 1.4.2 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-4-2-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-2-lts.png"
-excerpt: "Today we are releasing DuckDB 1.4.2, the second patch release of our LTS edition. The new release ships several bugfixes and performance optimizations as well as some new Iceberg and logger/profiler features. We also fixed vulnerabilities in DuckDB's database encryption."
+excerpt: "Today we are releasing DuckDB 1.4.2, the second patch release of our LTS edition. The new release ships several bugfixes and performance optimizations. We also fixed vulnerabilities in DuckDB's database encryption, and introduced some (opt-in) logger/profiler features that help users understand performance, and full write support through the Iceberg extension."
 tags: ["release"]
 ---
 
 In this blog post, we highlight a few important fixes and convenience improvements in DuckDB v1.4.2, the second patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}). To see the complete list of updates, please consult the [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.2).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few hours to days for some client libraries (e.g., R, Rust) to be released due to the extra changes and review rounds required.
+While this is a patch release, we are shipping some small features. In LTS releases, these can come in two forms:
+
+1. We add small opt-in features such as [accessing the profiler's output from the logger](#accessing-the-profilers-output-from-the-logger) in this release. These features have been highly-requested from the community and we are confident that these will not cause any issues for people upgrading to the latest release. In fact, using them carefully can help detect and understand performance regressions.
+2. Some of DuckDB's extensions that are marked as [“experimental”]({% link docs/stable/core_extensions/overview.md %}) are shipping full-fledged features. For example, this is how we have rolled out support for [Iceberg deletes and updates](#iceberg-improvements). Extensions are opt-in by nature, so if you stick to core DuckDB and its stable extensions, changes in the experimental extensions will not affect the stability of your installation.
+
+> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few hours to days for some client libraries (e.g., R, Rust) to be released due to the extra changes and review rounds required.
 
 ## Features and Improvements
 
