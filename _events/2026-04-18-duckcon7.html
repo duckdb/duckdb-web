@@ -31,32 +31,51 @@ toc: false
 </section>
 <section class="speakers">
   <div class="wrap">
-    <header class="section-header">
-      <h2 class="display-2">Speakers</h2>
-      <p>Meet the engineers, advocates, and innovators advancing embedded analytical databases. DuckCon speakers deliver the technical depth and real-world insight you need—whether you're optimizing queries, building extensions, or scaling DuckDB in production.</p>
-    </header>
-    <div class="speakers-list">
-      {% if site.data.duckcon7_speakers %}
-        {% for speaker in site.data.duckcon7_speakers %}
-        <div class="postpreview">
-          <a href="{{ speaker.url }}" class="blocklink" title="{{ speaker.name }}" target="_blank" rel="noopener noreferrer"></a>
-          <div class="postimg custom">
-            {% if speaker.image %}
-              <img src="{{ speaker.image }}" alt="{{ speaker.name }}" class="zoom-image"/>
-            {% else %}
-              {% assign placeholder_number = forloop.index | modulo: 3 | plus: 1 %}
-              <img src="/images/blog/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image"/>
-            {% endif %}
-          </div>
-          <div class="postdetails">
-            <h3 class="headline-3">{{ speaker.name }}</h3>
-            <div class="meta text-secondary-color body-small">
-              <div class="speaker">{{ speaker.title }}</div>
+    {% include duckcon7/section_header.html title="Speakers" description="Meet the engineers, advocates, and innovators advancing embedded analytical databases. DuckCon speakers deliver the technical depth and real-world insight you need—whether you're optimizing queries, building extensions, or scaling DuckDB in production." %}
+    <ul class="speakers-list">
+      {% if site.data.duckcon7.speakers %}
+        {% for speaker in site.data.duckcon7.speakers %}
+        <li class="speaker-item">
+          <article class="postpreview">
+            <a href="{{ speaker.url }}" class="blocklink" title="{{ speaker.name }}" target="_blank" rel="noopener noreferrer"></a>
+            <div class="postimg custom">
+              {% if speaker.image %}
+                <img src="{{ speaker.image }}" alt="{{ speaker.name }}" class="zoom-image"/>
+              {% else %}
+                {% assign placeholder_number = forloop.index | modulo: 3 | plus: 1 %}
+                <img src="/images/blog/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image"/>
+              {% endif %}
             </div>
-          </div>
-        </div>
+            <div class="postdetails">
+              <h3 class="headline-3">{{ speaker.name }}</h3>
+              <div class="meta text-secondary-color body-small">
+                <div class="speaker">{{ speaker.title }}</div>
+              </div>
+            </div>
+          </article>
+        </li>
         {% endfor %}
       {% endif %}
-    </div>
+      </ul>
   </div>
+</section>
+<section class="venue">
+  {% include duckcon7/section_header.html title="Venue" description="Pakhuis de Zwijger is DuckCon #7's home on Amsterdam's waterfront. This space offers enough seats for the whole DuckDB flock." %}
+</section>
+<section class="venue-access">
+  {% include duckcon7/section_header.html title="Acessing the venue" description="Whether you’re joining us from across town or across the world, getting here is easy. Pakhuis de Zwijger is just minutes from Amsterdam Centraal station and is fully accessible by public transport, bike, and car." %}
+  {% if site.data.duckcon7.venue_access %}
+    <div class="wrap feature-list">
+      <ul class="flexwrap feature-list">
+        {% for venue_access in site.data.duckcon7.venue_access %}
+          <li class="featurebox">
+            <img class="icon" src="{{ venue_access.icon }}" alt="{{ venue_access.title }}" />
+            <h3 class="title-1">{{ venue_access.title }}</h3>
+            <p class="body-small text-secondary-color">{{ venue_access.description }}</p>
+            <a href="{{ venue_access.url }}" class="textbutton arrow-right">Read more</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 </section>

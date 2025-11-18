@@ -66,10 +66,15 @@
     }
 
     .speakers .speakers-list {
+        @include reset-unordered-list;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-row-gap: 32px;
         grid-column-gap: 16px;
+
+        .speaker-item {
+            @include reset-list-item;
+        }
 
         .postpreview {
             width: 100%;
@@ -85,6 +90,18 @@
 
         @media (min-width: 770px) {
             grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    @media only screen and (max-width: 940px) {
+        section.venue-access .feature-list .featurebox {
+            width: calc(50% - 10px);
+        }
+    }
+
+    @media only screen and (max-width: 660px) {
+        section.venue-access .feature-list .featurebox {
+            width: 100%;
         }
     }
 }
