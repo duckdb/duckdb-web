@@ -104,4 +104,16 @@
             width: 100%;
         }
     }
+
+    .join-us .card {
+        padding: 30px;
+        border-radius: 15px;
+        border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
+        background-color: rgba(24, 24, 24, 0.60);
+        text-align: center;
+
+        .button {
+            margin-top: 130px;
+        }
+    }
 }
