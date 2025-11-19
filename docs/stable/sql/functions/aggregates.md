@@ -228,12 +228,14 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the bitwise `OR` of all bits in a given expression. |
 | **Example** | `bit_or(A)` |
+
 #### `bit_xor(arg)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the bitwise `XOR` of all bits in a given expression. |
 | **Example** | `bit_xor(A)` |
+
 #### `bitstring_agg(arg)`
 
 <div class="nostroke_table"></div>
