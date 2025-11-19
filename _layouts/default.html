@@ -47,7 +47,11 @@
 				</div>
 				<div class="landingmenu">
 					
-					{% include menu_secondary.html %}
+					{% if page.body_class contains "duckcon7" %}
+						{% include duckcon7/menu.html %}
+					{% else %}
+						{% include menu_secondary.html %}
+					{% endif %}
 					
 					<div class="hamburger hamburger--squeeze">
 						<div class="hamburger-box">
@@ -56,11 +60,15 @@
 					</div>
 				</div>
 				<div class="options">
-					<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
-					<button class="mode" data-mode="dark">
-						{% include icon.html name="sun" class="icon icon-sun" size="24" %}
-						{% include icon.html name="moon" class="icon icon-moon" size="24" %}
-					</button>
+					{% if page.body_class contains "duckcon7" %}
+						<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Register now</a>
+					{% else %}
+						<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
+						<button class="mode" data-mode="dark">
+							{% include icon.html name="sun" class="icon icon-sun" size="24" %}
+							{% include icon.html name="moon" class="icon icon-moon" size="24" %}
+						</button>
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -87,7 +95,7 @@
 	-->
 		{% endif %}
 		
-			<div class="wrap {% if page.toc == true %}fullwidth{% endif %}">
+			<div class="{% unless page.body_class contains "duckcon7" %}wrap{% endunless %} {% if page.toc == true %}fullwidth{% endif %}">
 				<div id="main_content_wrap" class="{% if page.toc == true %} contains_toc{% endif %}">
 					<div class="content">
 						{% if page.toc == true %}
