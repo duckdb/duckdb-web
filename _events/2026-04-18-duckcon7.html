@@ -42,11 +42,11 @@ toc: false
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
   </div>
-
+  <hr class="divider" />
 </section>
 <section class="program w-large" id="program">
   {% include duckcon7/section_header.html title="Program" description="Discover talks, demos, and community sessions—live at DuckCon 7. Join in person or online and be part of the action." %}
-  <div class="wrap">
+  <div class="wrap table-section">
     {% for day in site.data.duckcon7.program %}
       <h3 class="table-section-title">{{ day.title }}</h3>
       {% for session in day.sessions %}
@@ -73,8 +73,9 @@ toc: false
       {% endfor %}
     {% endfor %}
   </div>
+  <hr class="divider" />
 </section>
-<section class="speakers" id="speakers">
+<section class="speakers w-large" id="speakers">
   <div class="wrap">
     {% include duckcon7/section_header.html title="Speakers" description="Meet the engineers, advocates, and innovators advancing embedded analytical databases. DuckCon speakers deliver the technical depth and real-world insight you need—whether you're optimizing queries, building extensions, or scaling DuckDB in production." %}
     <ul class="speakers-list">
@@ -103,6 +104,7 @@ toc: false
       {% endif %}
       </ul>
   </div>
+  <hr class="divider" />
 </section>
 <section class="sponsors">
   {% include duckcon7/section_header.html title="Sponsors" description="We extend our sincere thanks to DuckCon #7’s sponsors for powering this community event and supporting the future of open-source analytics." %}
@@ -117,9 +119,25 @@ toc: false
       <img src="/images/events/duckcon7/sponsors/crunchydata.svg" alt="Crunchy Data" />
     </li>
   </ul>
+  <hr class="divider" />
 </section>
 <section class="venue" id="venue">
   {% include duckcon7/section_header.html title="Venue" description="Pakhuis de Zwijger is DuckCon #7's home on Amsterdam's waterfront. This space offers enough seats for the whole DuckDB flock." %}
+</section>
+<section class="slider">
+  <div class="swiper js-duckcon7-slider">
+    <div class="swiper-wrapper">
+      {% for image in site.data.duckcon7.slider %}
+      <div class="swiper-slide">
+        <img src="{{ image.image }}" alt="{{ image.description }}">
+        <p class="text-secondary-color">{{ image.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+  <hr class="divider" />
 </section>
 <section class="venue-access w-large">
   {% include duckcon7/section_header.html title="Acessing the venue" description="Whether you’re joining us from across town or across the world, getting here is easy. Pakhuis de Zwijger is just minutes from Amsterdam Centraal station and is fully accessible by public transport, bike, and car." %}

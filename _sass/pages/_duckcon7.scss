@@ -13,6 +13,19 @@
         padding: 0;
     }
 
+    .content > section {
+        margin-bottom: 150px;
+    }
+
+    .divider {
+        width: 100%;
+        height: 1px;
+        max-width: var(--page-max-width-large, 1150px);
+        margin: 150px auto;
+        background-color: var(--grey-30, #4c4c4c);
+        border: none;
+    }
+
     .hero {
         @include code-large;
         --hero-padding: 20px;
@@ -96,6 +109,10 @@
             td:nth-child(3) {
                 color: var(--main-text-tertiary-color);
             }
+        }
+
+        .table-section {
+            margin-top: 50px;
         }
 
         .table-section-title {
@@ -233,6 +250,7 @@
         grid-template-columns: repeat(var(--columns), 1fr);
         grid-row-gap: 32px;
         grid-column-gap: 16px;
+        margin-top: 50px;
 
         .speaker-item {
             @include reset-list-item;
@@ -272,6 +290,7 @@
             @include reset-unordered-list;
             display: flex;
             justify-content: center;
+            margin-top: 50px;
 
             li {
                 @include reset-list-item;
@@ -286,6 +305,7 @@
             overflow: hidden;
             width: 100%;
             height: 438px;
+            margin-bottom: 100px;
         }
 
         .map-menu {
