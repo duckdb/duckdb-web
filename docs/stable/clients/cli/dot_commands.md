@@ -178,7 +178,7 @@ CREATE TABLE swimmers (animal VARCHAR);
 CREATE TABLE walkers (animal VARCHAR);
 ```
 
-## ProgressBar
+## Progress Bar
 
 The DuckDB CLI client's progress bar supports customization through components.
 
@@ -218,7 +218,7 @@ To set that progress bar component to a red text that displays the current time 
      />
 
 
-> Note `.progress_bar --add` commands are additive, issuing multiple `--add` calls will stack additional components on the progress bar.
+> `.progress_bar --add` commands are additive, issuing multiple `--add` calls will stack additional components on the progress bar.
 
 To set that progress bar component to a blue text that displays the file cache RAM usage on the progress bar:
 
