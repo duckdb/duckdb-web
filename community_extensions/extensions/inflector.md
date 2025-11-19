@@ -23,8 +23,8 @@ repo:
   ref: 973052ba08aeec5380f79254d3d3b4d805c0b8b3
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 682
-extension_download_count_pretty: 682
+extension_download_count: 666
+extension_download_count_pretty: 666
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
