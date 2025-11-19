@@ -47,7 +47,8 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.open ⟨OPTIONS⟩ ⟨FILE⟩`{:.language-sql .highlight}                   | Close existing database and reopen `FILE`                                                                                                                                   |
 | `.output ⟨FILE⟩`{:.language-sql .highlight}                           | Send output to `FILE` or `stdout` if `FILE` is omitted                                                                                                                      |
 | `.print ⟨STRING...⟩`{:.language-sql .highlight}                       | Print literal `STRING`                                                                                                                                                      |
-| `.prompt ⟨MAIN⟩ ⟨CONTINUE⟩`{:.language-sql .highlight}                | Replace the standard prompts                                                                                                                                                |
+| `.progress_bar ⟨OPTIONS⟩ ⟨WHERE⟩`{:.language-sql .highlight}                | Update the progress bar style and functionality                                                                                                                                         |
+| `.prompt ⟨OPTIONS⟩ ⟨CONTINUE⟩`{:.language-sql .highlight}                | Replace the standard prompts                                                                                                                                                |
 | `.quit`{:.language-sql .highlight}                                    | Exit this program                                                                                                                                                           |
 | `.read ⟨FILE⟩`{:.language-sql .highlight}                             | Read input from `FILE`                                                                                                                                                      |
 | `.rows`{:.language-sql .highlight}                                    | Row-wise rendering of query results (default)                                                                                                                               |
@@ -177,11 +178,70 @@ CREATE TABLE swimmers (animal VARCHAR);
 CREATE TABLE walkers (animal VARCHAR);
 ```
 
+## ProgressBar
+
+The DuckDB CLI client's progress bar supports customization through components.
+
+The `.progress_bar` command supports `--add` and `--clear` parameters for adding and removing components. 
+
+For details on specific usage, see the examples below.
+
+### Configuring the Progress Bar Display
+
+To check if the progress bar is enabled: 
+
+```sql
+SELECT * FROM duckdb_settings() WHERE name = 'enable_progress_bar';
+```
+
+To check the current minimum amount of time (in milliseconds) a query needs to take before displaying a progress bar: 
+
+```sql
+SELECT * FROM duckdb_settings() WHERE name = 'progress_bar_time';
+```
+
+To set the minimum amount of time that the progress bar displays to 100 milliseconds:
+
+```sql
+SET progress_bar_time = 100;
+```
+
+To set that progress bar component to a red text that displays the current time on the progress bar:
+
+```sql
+.progress_bar --add "{align:right}{min_size:20}{color:red}Time: {sql:select (current_time::varchar).split('.')[1]}{color:reset} "
+```
+
+<img src="{% link images/progress_bar/duckdb_progressbar_time.gif %}"
+     alt="DuckDB progress bar with current time stamp"
+     width="400"
+     />
+
+
+> Note `.progress_bar --add` commands are additive, issuing multiple `--add` calls will stack additional components on the progress bar.
+
+To set that progress bar component to a blue text that displays the file cache RAM usage on the progress bar:
+
+```sql
+.progress_bar --add "{align:right}{min_size:20}{color:blue}External Cache Usage: {sql:select format_bytes(memory_usage_bytes) from duckdb_memory() where tag='EXTERNAL_FILE_CACHE'}{color:reset};
+```
+
+<img src="{% link images/progress_bar/duckdb_progressbar_cache_usage.gif %}"
+     alt="DuckDB progress bar with cache usage"
+     width="400"
+     />
+
+To resets all existing progress bar components: 
+
+```sql
+.progress_bar --clear
+```
+
 ## Syntax Highlighters
 
 The DuckDB CLI client has a syntax highlighter for the SQL queries and another for the duckbox-formatted result tables.
 
-## Configuring the Query Syntax Highlighter
+### Configuring the Query Syntax Highlighter
 
 By default the shell includes support for syntax highlighting.
 The CLI's syntax highlighter can be configured using the following commands.
@@ -230,7 +290,7 @@ For example:
 .keywordcode 033[31m
 ```
 
-## Configuring the Result Syntax Highlighter
+### Configuring the Result Syntax Highlighter
 
 By default, the result highlighting makes a few small modifications:
 
