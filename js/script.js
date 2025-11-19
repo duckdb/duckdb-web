@@ -877,6 +877,8 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	const DUCKCON7_COORDINATES = [4.922150, 52.376780];
 	
 	const $duckcon7Map = $('.js-duckcon7-map');
+	const duckcon7SliderClass = '.js-duckcon7-slider';
+	const $duckcon7Slider = $(duckcon7SliderClass);
 
 	const duckcon7GeoJson = {
 		type: 'FeatureCollection',
@@ -912,5 +914,15 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
        
   			new mapboxgl.Marker(marker).setLngLat(feature.geometry.coordinates).addTo(map);
 		}
+	}
+
+	// Initialize the slider if present on page
+	if ($duckcon7Slider.length) {
+		const slider = new Swiper(duckcon7SliderClass, {
+			slidesPerView: "auto",
+			spaceBetween: 30,
+			centeredSlides: true,
+			loop: true,
+		});
 	}
 });

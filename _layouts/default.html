@@ -19,6 +19,7 @@
 
 	{% if page.body_class contains "duckcon7" %}
 	<link href='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css' rel='stylesheet' />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 	{% endif %}
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
@@ -152,6 +153,9 @@
 	<script src="/js/copy_button.js" defer></script>
 	{% if page.body_class contains "landing" or page.body_class contains "installation" %}
 	<script src="/js/ua-parser.min.js" defer></script>
+	{% endif %}
+	{% if page.body_class contains "duckcon7" %}
+	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 	{% endif %}
 	<script src="/js/script.js" defer></script>
 	{% if page.body_class contains "installation" %}

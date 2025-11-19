@@ -127,6 +127,48 @@
         }
     }
 
+    .slider {
+        @include tiny;
+        .swiper {
+            width: 100%;
+            height: 100%;
+          }
+
+          .swiper-slide {
+            width: 50vw !important;
+            transform: scale(0.8);
+            transform-origin: top;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+          }
+
+          .swiper-slide-prev {
+            transform-origin: top right;
+          }
+
+          .swiper-slide-next {
+            transform-origin: top left;
+          }
+
+          .swiper-slide-active {
+            transform: scale(1);
+          }
+      
+          .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            overflow: hidden;
+          }
+          
+          .swiper-slide p {
+            margin-top: 10px;
+            margin-bottom: 0;
+          }
+    }
+
     .section-header {
         --section-header-padding: 40px;
 

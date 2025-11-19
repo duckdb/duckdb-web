@@ -29,6 +29,19 @@ toc: false
 <section class="announcement w-large" id="announcement">
   <p class="wrap">We're looking forward to gathering the DuckDB community at DuckCon 7 — our user conference in Amsterdam, the Netherlands. Join us at <a href="#">Pakhuis de Zwijger</a>, <a href="#">Piet Heinkade 179</a>, for a day of talks and friendly faces on Friday, 10. April 2026.</p>
 </section>
+<section class="slider">
+  <div class="swiper js-duckcon7-slider">
+    <div class="swiper-wrapper">
+      {% for image in site.data.duckcon7.slider %}
+      <div class="swiper-slide">
+        <img src="{{ image.image }}" alt="{{ image.description }}">
+        <p class="text-secondary-color">{{ image.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</section>
 <section class="program w-large" id="program">
   {% include duckcon7/section_header.html title="Program" description="Discover talks, demos, and community sessions—live at DuckCon 7. Join in person or online and be part of the action." %}
   <div class="wrap">
