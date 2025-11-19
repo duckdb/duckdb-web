@@ -64,10 +64,6 @@
 
     .section-header {
         text-align: center;
-
-        p {
-            color: var(--main-text-secondary-color, #B2B2B2);
-        }
     }
 
     .speakers .speakers-list {
@@ -123,6 +119,24 @@
             }
         }
 
+    }
+
+    .map .map-menu {
+        @include reset-unordered-list;
+        @include tiny;
+
+        display: flex;
+        justify-content: flex-end;
+        gap: 25px;
+        margin-bottom: 15px;
+
+        li {
+            @include reset-list-item;
+
+            a::after {
+                display: none !important;
+            }
+        }
     }
 
     .join-us .card {
