@@ -897,6 +897,17 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		]
 	}
 
+	const duckcon7SliderOptions = {
+		slidesPerView: "auto",
+		spaceBetween: 30,
+		centeredSlides: true,
+		loop: true,
+		navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev",
+		},
+	}
+
 	// Initialize the map if present on page
 	if ($duckcon7Map.length) {
 		mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
@@ -918,11 +929,6 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 
 	// Initialize the slider if present on page
 	if ($duckcon7Slider.length) {
-		const slider = new Swiper(duckcon7SliderClass, {
-			slidesPerView: "auto",
-			spaceBetween: 30,
-			centeredSlides: true,
-			loop: true,
-		});
+		const slider = new Swiper(duckcon7SliderClass, duckcon7SliderOptions);
 	}
 });

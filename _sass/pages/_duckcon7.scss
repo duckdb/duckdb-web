@@ -167,6 +167,48 @@
             margin-top: 10px;
             margin-bottom: 0;
           }
+
+          .swiper-button-next,
+          .swiper-button-prev {
+            --icon-size: 36px;
+            --icon-offset: 50px;
+
+            top: 0;
+            height: 100%;
+            width: 20%;
+
+            svg {
+                background-color: rgba(108, 108, 108, 0.50);
+                border-radius: 50%;
+                width: var(--icon-size);
+                height: var(--icon-size);
+                padding: 9px;
+
+                path {
+                    fill: var(--main-text-primary-color);
+                }
+            }
+          }
+
+          .swiper-button-prev {
+            justify-content: flex-start;
+            left: 0;
+            background: linear-gradient(270deg, rgba(13, 13, 13, 0.00) 0%, rgba(13, 13, 13, 0.80) 78.79%);
+
+            svg {
+                margin-left: var(--icon-offset);
+            }
+          }
+
+          .swiper-button-next {
+            justify-content: flex-end;
+            right: 0;
+            background: linear-gradient(90deg, rgba(13, 13, 13, 0.00) 0%, rgba(13, 13, 13, 0.80) 78.79%);
+
+            svg {
+                margin-right: var(--icon-offset);
+            }
+          }
     }
 
     .section-header {
