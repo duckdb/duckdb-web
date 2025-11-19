@@ -60,10 +60,24 @@
         font-size: 38px;
         line-height: 120%;
         letter-spacing: -0.095px;
+
+        p {
+            margin: 0 auto;
+        }
     }
 
     .section-header {
+        --section-header-padding: 40px;
+
+        margin-right: auto;
+        margin-left: auto;
+        padding-right: var(--section-header-padding);
+        padding-left: var(--section-header-padding);
         text-align: center;
+        
+        @media (max-width: 940px) {
+            --section-header-padding: 10px;
+        }
     }
 
     .speakers .speakers-list {
@@ -141,6 +155,7 @@
 
     .join-us .card {
         padding: 30px;
+        margin: 0 auto;
         border-radius: 15px;
         border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
         background-color: rgba(24, 24, 24, 0.60);
