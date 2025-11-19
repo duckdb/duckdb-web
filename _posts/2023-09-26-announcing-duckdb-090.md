@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Announcing DuckDB 0.9.0"
-author: Mark Raasveldt and Hannes Mühleisen
+author: Mark Raasveldt, Hannes Mühleisen
 thumb: "/images/blog/thumbs/duckdb-release-0-9-0.svg"
 image: "/images/blog/thumbs/duckdb-release-0-9-0.png"
 excerpt: ""
