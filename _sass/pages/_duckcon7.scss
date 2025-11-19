@@ -112,6 +112,19 @@
         }
     }
 
+    .sponsors {
+        .sponsors-list {
+            @include reset-unordered-list;
+            display: flex;
+            justify-content: center;
+
+            li {
+                @include reset-list-item;
+            }
+        }
+
+    }
+
     .join-us .card {
         padding: 30px;
         border-radius: 15px;
