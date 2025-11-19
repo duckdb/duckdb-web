@@ -270,6 +270,14 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` |
 | **Result** | `Benchmark "CSV" took 42 seconds` |
 
+#### `formatReadableDecimalSize(integer)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
+| **Example** | `formatReadableDecimalSize(16000)` |
+| **Result** | `16.0 kB` |
+
 #### `format_bytes(integer)`
 
 <div class="nostroke_table"></div>
