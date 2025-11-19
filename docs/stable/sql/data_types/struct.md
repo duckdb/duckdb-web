@@ -13,7 +13,7 @@ Conceptually, a `STRUCT` column contains an ordered list of columns called “en
 
 See the [data types overview]({% link docs/stable/sql/data_types/overview.md %}) for a comparison between nested data types.
 
-### Creating Structs
+## Creating Structs
 
 Structs can be created using the [`struct_pack(name := expr, ...)`]({% link docs/stable/sql/functions/struct.md %}) function, the equivalent array notation `{'name': expr, ...}`, using a row variable, or using the `row` function.
 
@@ -63,7 +63,7 @@ SELECT {
     } AS s;
 ```
 
-### Adding or Updating Fields of Structs
+## Adding or Updating Fields of Structs
 
 To add new fields or update existing ones, you can use `struct_update`:
 
@@ -73,7 +73,7 @@ SELECT struct_update({'a': 1, 'b': 2}, b := 3, c := 4) AS s;
 
 Alternatively, `struct_insert` also allows adding new fields but not updating existing ones.
 
-### Retrieving from Structs
+## Retrieving from Structs
 
 Retrieving a value from a struct can be accomplished using dot notation, bracket notation, or through [struct functions]({% link docs/stable/sql/functions/struct.md %}) like `struct_extract`.
 
@@ -101,7 +101,7 @@ The `struct_extract` function is also equivalent. This returns 1:
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3}, 'x space');
 ```
 
-#### `unnest` / `STRUCT.*`
+### `unnest` / `STRUCT.*`
 
 Rather than retrieving a single key from a struct, the `unnest` special function can be used to retrieve all keys from a struct as separate columns.
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys:
@@ -128,11 +128,11 @@ FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 
 > Warning The star notation is currently limited to top-level struct columns and non-aggregate expressions.
 
-### Dot Notation Order of Operations
+## Dot Notation Order of Operations
 
 Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DuckDB looks for columns first, then for struct keys within columns. DuckDB resolves references in these orders, using the first match to occur:
 
-#### No Dots
+### No Dots
 
 ```sql
 SELECT part1
@@ -141,7 +141,7 @@ FROM tbl;
 
 1. `part1` is a column
 
-#### One Dot
+### One Dot
 
 ```sql
 SELECT part1.part2
@@ -151,7 +151,7 @@ FROM tbl;
 1. `part1` is a table, `part2` is a column
 2. `part1` is a column, `part2` is a property of that column
 
-#### Two (or More) Dots
+### Two (or More) Dots
 
 ```sql
 SELECT part1.part2.part3
@@ -164,7 +164,7 @@ FROM tbl;
 
 Any extra parts (e.g., `.part4.part5`, etc.) are always treated as properties
 
-### Creating Structs with the `row` Function
+## Creating Structs with the `row` Function
 
 The `row` function can be used to automatically convert multiple columns to a single struct column.
 When using `row` the keys will be empty strings allowing for easy insertion into a table with a struct column.
