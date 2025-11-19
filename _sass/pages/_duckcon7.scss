@@ -62,6 +62,63 @@
         }
     }
 
+    .program {
+        --first-column-width: 90px;
+        --td-padding: 10px;
+
+        table {
+            display: table;
+            table-layout: fixed;
+        }
+
+        thead, tbody, tr {
+            width: 100%;
+        }
+
+        tr {
+            display: grid;
+            grid-template-columns: var(--first-column-width) 1.7fr 1fr 1fr;
+        }
+
+        td {
+            border-bottom: none;
+            padding: var(--td-padding);
+        }
+
+        tbody tr {
+            align-items: center;
+
+            td:first-child {
+                @include code-standard;
+                color: var(--main-text-secondary-color, #B2B2B2);
+            }
+
+            td:nth-child(3) {
+                color: var(--main-text-tertiary-color);
+            }
+        }
+
+
+        .table-wrapper {
+            margin: 0 auto;
+        }
+
+        .table-section-title {
+            margin-left: calc(var(--first-column-width) + var(--td-padding));
+            margin-bottom: 30px;
+        }
+
+        .table-title {
+            // Both rules are duplicates of the title-1 mixin, but we need to override the font-size and font-weight
+            font-size:var(--type-title-1, 18px);
+            font-weight: 600;
+        }
+
+        .button {
+            text-decoration: none;
+        }
+    }
+
     .announcement {
         padding: 260px 0 80px;
         text-align: center;

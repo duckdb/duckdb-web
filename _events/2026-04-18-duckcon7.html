@@ -29,6 +29,36 @@ toc: false
 <section class="announcement" id="announcement">
   <p class="max-width-large">We're looking forward to gathering the DuckDB community at DuckCon 7 — our user conference in Amsterdam, the Netherlands. Join us at <a href="#">Pakhuis de Zwijger</a>, <a href="#">Piet Heinkade 179</a>, for a day of talks and friendly faces on Friday, 10. April 2026.</p>
 </section>
+<section class="program" id="program">
+  {% include duckcon7/section_header.html title="Program" description="Discover talks, demos, and community sessions—live at DuckCon 7. Join in person or online and be part of the action." %}
+  <div class="max-width-large table-wrapper">
+    {% for day in site.data.duckcon7.program %}
+      <h3 class="table-section-title">{{ day.title }}</h3>
+      {% for session in day.sessions %}
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="title-1 table-title">{{ session.title }}</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for talk in session.timetable %}
+          <tr>
+              <td>{{ talk.time }}</td>
+              <td>{{ talk.title }}</td>
+              <td>{{ talk.speaker }}</td>
+              <td>{% if talk.livestream_url %}<a class="button yellow" href="{{ talk.livestream_url }}" target="_blank" rel="noopener noreferrer">Join Livestream</a>{% endif %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</section>
 <section class="speakers" id="speakers">
   <div class="wrap">
     {% include duckcon7/section_header.html title="Speakers" description="Meet the engineers, advocates, and innovators advancing embedded analytical databases. DuckCon speakers deliver the technical depth and real-world insight you need—whether you're optimizing queries, building extensions, or scaling DuckDB in production." %}
