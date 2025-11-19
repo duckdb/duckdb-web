@@ -52,10 +52,10 @@ docs:
   extended_description: |
     For more information regarding usage, see the [documentation](https://github.com/princeton-ddss/lsh).
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 286
-extension_download_count_pretty: 286
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 468
+extension_download_count_pretty: 468
 image: '/images/community_extensions/social_preview/preview_community_extension_lsh.png'
 layout: community_extension_doc
 ---

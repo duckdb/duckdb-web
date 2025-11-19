@@ -108,8 +108,8 @@ ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db (READ
 Similarly, the following two commands connecting to S3 are equivalent:
 
 ```sql
-ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db;
-ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
+ATTACH 's3://⟨blobs-duckdb⟩/databases/stations.duckdb' AS stations_db;
+ATTACH 's3://⟨blobs-duckdb⟩/databases/stations.duckdb' AS stations_db (READ_ONLY);
 ```
 
 ### Explicit Storage Versions

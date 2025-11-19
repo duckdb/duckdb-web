@@ -82,10 +82,10 @@ docs:
     to download the platform-specific driver. For detailed setup and usage instructions, visit the 
     [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
 
-extension_star_count: 18
-extension_star_count_pretty: 18
-extension_download_count: 10411
-extension_download_count_pretty: 10.4k
+extension_star_count: 19
+extension_star_count_pretty: 19
+extension_download_count: 5330
+extension_download_count_pretty: 5.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
 ---

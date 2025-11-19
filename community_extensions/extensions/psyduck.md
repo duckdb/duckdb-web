@@ -34,10 +34,10 @@ docs:
     
     -- Select the best pokémon
     SELECT number, name, type1, "height(m)", "weight(kg)", base_total FROM list_pokemon() WHERE name = 'Charizard';
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 686
-extension_download_count_pretty: 686
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 712
+extension_download_count_pretty: 712
 image: '/images/community_extensions/social_preview/preview_community_extension_psyduck.png'
 layout: community_extension_doc
 ---
