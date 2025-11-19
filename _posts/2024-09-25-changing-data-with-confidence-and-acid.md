@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Changing Data with Confidence and ACID"
-author: "Hannes Mühleisen and Mark Raasveldt"
+author: "Hannes Mühleisen, Mark Raasveldt"
 thumb: "/images/blog/thumbs/acid.svg"
 image: "/images/blog/thumbs/acid.png"
 excerpt: "Transactions are key features in database management systems and are also beneficial for data analysis workloads. DuckDB supports fully ACID transactions, confirmed by the TPC-H benchmark's test suite."
@@ -11,6 +11,8 @@ tags: ["using DuckDB"]
 The great quote “Everything changes and nothing stays the same” from [Heraclitus, according to Socrates, according to Plato](https://latin.stackexchange.com/a/9473) is not very controversial: change is as old as the universe. Yet somehow, when dealing with data, we often consider change as merely an afterthought.
 
 Static datasets are split-second snapshots of whatever the world looked like at one moment. But very quickly, the world moves on, and the dataset needs to catch up to remain useful. In the world of tables, new rows can be added, old rows may be deleted and sometimes rows have to be changed to reflect a new situation. Often, changes are interconnected. A row in a table that maps orders to customers is not very useful without the corresponding entry in the `orders` table. Most, if not all, datasets eventually get changed. As a data management system, managing change is thus not optional. However, managing changes properly is difficult.
+
+## ACID Guarantees
 
 Early data management systems researchers invented a concept called “transactions”, the notions of which were [first formalized](https://dl.acm.org/doi/abs/10.5555/48751.48761) [in the 1980s](https://dl.acm.org/doi/10.1145/289.291). In essence, transactionality and the well-known ACID principles describe a set of guarantees that a data management system has to provide in order to be considered safe. ACID is an acronym that stands for Atomicity, Consistency, Isolation and Durability.
 

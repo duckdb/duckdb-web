@@ -8,7 +8,7 @@ title: CREATE SEQUENCE Statement
 
 The `CREATE SEQUENCE` statement creates a new sequence number generator.
 
-### Examples
+## Examples
 
 Generate an ascending sequence starting from 1:
 
@@ -144,7 +144,7 @@ SELECT currval('serial') AS currval;
 |--------:|
 | 1       |
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>
 
