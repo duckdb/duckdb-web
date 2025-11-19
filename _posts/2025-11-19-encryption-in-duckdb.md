@@ -10,7 +10,7 @@ tags: ["deep dive"]
 
 > If you would like to use encryption in DuckDB, we recommend using the latest stable version, v1.4.2. For more details, see the [latest release blog post]({% post_url 2025-11-12-announcing-duckdb-142 %}#vulnerabilities).
 
-Many years ago, we read the excellent “[Code Book](https://en.wikipedia.org/wiki/The_Code_Book)” by [Simon Singh](https://en.wikipedia.org/wiki/Simon_Singh). Did you know that [Mary, Queen of Scots](https://en.wikipedia.org/wiki/Mary,_Queen_of_Scots), used an [encryption method harking back to Julius Caesar](https://en.wikipedia.org/wiki/Caesar_cipher) to encrypt her more saucy letters? But alas: The cipher was broken and the contents of the letters got her [executed](https://en.wikipedia.org/wiki/Execution_of_Mary,_Queen_of_Scots).
+Many years ago, we read the excellent “[Code Book](https://en.wikipedia.org/wiki/The_Code_Book)” by [Simon Singh](https://en.wikipedia.org/wiki/Simon_Singh). Did you know that [Mary, Queen of Scots](https://en.wikipedia.org/wiki/Mary,_Queen_of_Scots), used an [encryption method harking back to Julius Caesar](https://en.wikipedia.org/wiki/Caesar_cipher) to encrypt her more saucy letters? But alas: the cipher was broken and the contents of the letters got her [executed](https://en.wikipedia.org/wiki/Execution_of_Mary,_Queen_of_Scots).
 
 Those [days](https://en.wikipedia.org/wiki/Crypto_Wars), strong encryption software and hardware is a commodity. Modern CPUs [come with specialized cryptography instructions](https://developer.arm.com/documentation/ddi0602/2025-09/SIMD-FP-Instructions/AESE--AES-single-round-encryption-), and operating systems small and big contain [mostly](https://www.heartbleed.com/)-robust cryptography software like OpenSSL.
 
@@ -53,14 +53,11 @@ After the main database header, DuckDB stores two 4KB database headers that cont
 
 Blocks in DuckDB are by default 256KB, but their size is configurable. At the start of each *plaintext* block there is an 8-byte block header, which stores an 8-byte checksum. The checksum is a simple calculation that is often used in database systems to check for any corrupted data. 
 
+<img src="{% link images/blog/encryption/checksum.png %}" width="400" />
 
-Figure 3
+For encrypted blocks however, its block header consists of 64-bytes instead of 8 bytes for the checksum. The block header for encrypted blocks contains a 16-byte *nonce/IV* and, optionally, a 16-byte *tag*, depending on which encryption cipher is used. The nonce and tag are stored in plaintext, but the checksum is encrypted for better security. Note that the block header always needs to be 8-bytes aligned to calculate the checksum.
 
-
-For encrypted blocks however, its block header consists of 64-bytes instead of 8 bytes for the checksum (Figure 4). The block header for encrypted blocks contains a 16-byte *nonce/IV* and, optionally, a 16-byte *tag*, depending on which encryption cipher is used. The nonce and tag are stored in plaintext, but the checksum is encrypted for better security. Note that the block header always needs to be 8-bytes aligned to calculate the checksum.
-
-
-Figure 4
+<img src="{% link images/blog/encryption/encrypted-blocks.png %}" width="400" />
 
 ### Write-Ahead-Log Encryption
 
@@ -76,7 +73,10 @@ PRAGMA wal_autocheckpoint = '1TB';
 This way you’ll disable a checkpointing on closing the database, meaning that the WAL does not get merged into the main database file. In addition, by setting wal_autocheckpoint to a high threshold, this will avoid intermediate checkpoints to happen and the WAL will persist. For example, we can create a persistent WAL file by first setting the above PRAGMAS, then attach an encrypted database, and then create a table where we insert 3 values.
 
 ```sql
-ATTACH 'encrypted.db' as enc (ENCRYPTION_KEY 'asdf', ENCRYPTION_CIPHER 'GCM');
+ATTACH 'encrypted.db' as enc (
+    ENCRYPTION_KEY 'asdf',
+    ENCRYPTION_CIPHER 'GCM'
+);
 CREATE TABLE enc.test (a INTEGER, b INTEGER);
 INSERT INTO enc.test VALUES (11, 22), (13, 22), (12, 21)
 ```
@@ -85,11 +85,11 @@ If we now close the DuckDB process, we can see that there is a `.wal` file shown
 
 Before writing new entries (inserts, updates, deletes) to the database, these entries are essentially logged and appended to the WAL. Only *after* logged entries are flushed to disk, a transaction is considered as committed. A plaintext WAL entry has the following structure:
 
-Figure 7
+<img src="{% link images/blog/encryption/plaintext-wal-entry.png %}" width="400" />
 
 Since the WAL is append-only, we encrypt a WAL entry *per value*. For AES-GCM this means that we append a nonce and a tag to each entry. The structure in which we do this is depicted in [image]. When we serialize an encrypted entry to the encrypted WAL, we first store the length in plaintext, because we need to know how many bytes we should decrypt. The length is followed by a nonce, which on its turn is followed by the encrypted checksum and the encrypted entry itself. After the entry, a 16-byte tag is stored for verification.
 
-Figure 8
+<img src="{% link images/blog/encryption/encrypted-wal-entry.png %}" width="400" />
 
 Encrypting the WAL is triggered by default when an encryption key is given for any (un)encrypted database.
 
@@ -99,7 +99,7 @@ Temporary files are used to store intermediate data that is often necessary for 
 
 #### The Structure of Temporary Files
 
-There are three different types of temporary files in DuckDB: (1) temporary files that have the same layout as a regular 256KB block (figure 3), (2) compressed temporary files and (3) temporary files that exceed the standard 256KB block size. The former two are suffixed with .tmp, while the latter is distinguished by a suffix with .block. To keep track of the size of .block temporary files, they are always prefixed with its length. As opposed to regular database blocks, temporary files do not contain a checksum to check for data corruption, since the calculation of a checksum is somewhat expensive. 
+There are three different types of temporary files in DuckDB: (1) temporary files that have the same layout as a regular 256KB block, (2) compressed temporary files and (3) temporary files that exceed the standard 256KB block size. The former two are suffixed with .tmp, while the latter is distinguished by a suffix with .block. To keep track of the size of .block temporary files, they are always prefixed with its length. As opposed to regular database blocks, temporary files do not contain a checksum to check for data corruption, since the calculation of a checksum is somewhat expensive. 
 
 #### Encrypting Temporary Files
 
@@ -109,7 +109,10 @@ To force DuckDB to produce temporary files, you can use a simple trick by just s
 
 ```sql
 SET memory_limit = '1GB';
-ATTACH 'tpch_encrypted.db' as enc (ENCRYPTION_KEY 'asdf', ENCRYPTION_CIPHER '${cipher}');
+ATTACH 'tpch_encrypted.db' AS enc (
+    ENCRYPTION_KEY 'asdf',
+    ENCRYPTION_CIPHER '⟨cipher⟩'
+);
 USE enc;
 CALL dbgen(sf = 1);
 
@@ -132,7 +135,7 @@ In DuckDB, you can (1) encrypt an existing database, (2) initialize a new, empty
 install tpch;
 load tpch;
 ATTACH 'encrypted.duckdb' AS encrypted (ENCRYPTION_KEY 'asdf');
-ATTACH 'unencrypted.duckdb' as unencrypted;
+ATTACH 'unencrypted.duckdb' AS unencrypted;
 USE unencrypted;
 CALL dbgen(sf=1);
 COPY FROM DATABASE unencrypted to encrypted;
@@ -141,15 +144,19 @@ There is not a trivial way to prove that a database is encrypted, but correctly 
 
 When we use ent after executing the above chunk of SQL, i.e., `ent encrypted.duckdb`, this will result in an entropy of 7.99999 bits per byte. If we do the same for the plaintext (unencrypted) database, this results in 7.65876 bits per byte. Note that the plaintext database also has a high entropy, but this is due to compression.
 
-Let’s now visualize both the plaintext and encrypted data with binocle. For the visualization we created both a plaintext DuckDB database with scale factor 1 of TPC-H data, and an encrypted one. The binary data of the plaintext database is visualized in figure 5, while the encrypted database is visualized in figure 6.
+Let’s now visualize both the plaintext and encrypted data with binocle. For the visualization we created both a plaintext DuckDB database with scale factor 1 of TPC-H data and an encrypted one:
 
-![](https://blobs.duckdb.org/images/duckdb-plain-database.png)
-Figure 5
+<div align="center">
+    <img src="https://blobs.duckdb.org/images/duckdb-plaintext-database.png" width="800" />
+    Entropy of a plaintext database
+</div>
 
-![](https://blobs.duckdb.org/images/duckdb-encrypted-database.png)
-Figure 6
+<div align="center" style="margin-top: 20px">
+    <img src="https://blobs.duckdb.org/images/duckdb-encrypted-database.png" width="800" />
+    Entropy of an encrypted database
+</div>
 
-In these figures, we can clearly observe that the encrypted database file (figure 6) seems completely random, while the plaintext database file (figure 5) shows some clear structure in its binary data.
+In these figures, we can clearly observe that the encrypted database file seems completely random, while the plaintext database file shows some clear structure in its binary data.
 
 To decrypt an encrypted database, we can use the following SQL:
 
@@ -170,7 +177,10 @@ COPY FROM DATABASE encrypted TO new_encrypted;
 The default encryption algorithm is AES GCM. This is recommended since it also authenticates data by calculating a tag. Depending on the use case, you can also use AES CTR. This is faster than AES GCM since it skips calculating a tag after encrypting all data. You can specify the CTR cipher as follows:
 
 ```sql
-ATTACH 'encrypted.duckdb' AS encrypted (ENCRYPTION_KEY 'asdf', ENCRYPTION_CIPHER 'CTR');
+ATTACH 'encrypted.duckdb' AS encrypted (
+    ENCRYPTION_KEY 'asdf',
+    ENCRYPTION_CIPHER 'CTR'
+);
 ```
 
 To keep track of which databases are encrypted, you can query this by
@@ -205,7 +215,7 @@ ATTACH 'encrypted.duckdb' AS encrypted (ENCRYPTION_KEY 'asdf');
 CREATE TABLE encrypted.lineitem AS FROM unencrypted.lineitem;
 ```
 
-Now we use DuckDB’s neat `SUMMARIZE` command three times: Once on the unencrypted database, and once on the encrypted database using MbedTLS and once on the encrypted database using OpenSSL. We set a very low memory limit to force more reading and writing from disk.
+Now we use DuckDB’s neat `SUMMARIZE` command three times: once on the unencrypted database, and once on the encrypted database using MbedTLS and once on the encrypted database using OpenSSL. We set a very low memory limit to force more reading and writing from disk.
 
 ```sql
 SET memory_limit = '200MB';
