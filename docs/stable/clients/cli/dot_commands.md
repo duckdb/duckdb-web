@@ -152,7 +152,7 @@ CREATE TABLE walkers AS SELECT 'duck' AS animal;
 .tables
 ```
 
-```text
+```sql
 fliers    swimmers  walkers
 ```
 
@@ -162,13 +162,13 @@ For example, to filter to only tables that contain an `l`, use the `LIKE` patter
 .tables %l%
 ```
 
-```text
+```sql
 fliers   walkers
 ```
 
 The `.schema` command will show all of the SQL statements used to define the schema of the database.
 
-```text
+```sql
 .schema
 ```
 
@@ -248,45 +248,45 @@ The CLI's syntax highlighter can be configured using the following commands.
 
 To turn off the highlighter:
 
-```text
+```sql
 .highlight off
 ```
 
 To turn on the highlighter:
 
-```text
+```sql
 .highlight on
 ```
 
 To configure the color used to highlight constants:
 
-```text
+```sql
 .constant [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
 ```
 
-```text
+```sql
 .constantcode ⟨terminal_code⟩
 ```
 
 For example:
 
-```text
+```sql
 .constantcode 033[31m
 ```
 
 To configure the color used to highlight keywords:
 
-```text
+```sql
 .keyword [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
 ```
 
-```text
+```sql
 .keywordcode ⟨terminal_code⟩
 ```
 
 For example:
 
-```text
+```sql
 .keywordcode 033[31m
 ```
 
@@ -319,13 +319,13 @@ DuckDB's CLI allows using shorthands for dot commands.
 Once a sequence of characters can unambiguously completed to a dot command or an argument, the CLI (silently) autocompletes them.
 For example:
 
-```text
+```sql
 .mo ma
 ```
 
 Is equivalent to:
 
-```text
+```sql
 .mode markdown
 ```
 
@@ -348,7 +348,7 @@ SELECT 1 AS col_1, 2 AS col_2 UNION ALL SELECT 10 AS col1, 20 AS col_2;
 
 Now that the CSV has been written, a table can be created with the desired schema and the CSV can be imported. The output is reset to the terminal to avoid continuing to edit the output file specified above. The `--skip N` option is used to ignore the first row of data since it is a header row and the table has already been created with the correct column names.
 
-```text
+```sql
 .mode csv
 .output
 CREATE TABLE test_table (col_1 INTEGER, col_2 INTEGER);
@@ -357,6 +357,6 @@ CREATE TABLE test_table (col_1 INTEGER, col_2 INTEGER);
 
 Note that the `.import` command utilizes the current `.mode` and `.separator` settings when identifying the structure of the data to import. The `--csv` option can be used to override that behavior.
 
-```text
+```sql
 .import import_example.csv test_table --skip 1 --csv
 ```
