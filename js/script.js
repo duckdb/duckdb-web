@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 	if (window.location.hash) {
 		var hash = window.location.hash;
 		if ($(hash).length) {
@@ -871,5 +870,47 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			updateHighlight($(this), $activeItem);
 		});
 	});
+
+	// DUCKCON7 EVENT PAGE
+	const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW4tYXVjaCIsImEiOiJjbDllMHhxNHowbG50M29vZ3Y0NnZhdHY1In0.XQxUUmkkSGKUkNThK1p9Yg';
+	const MAPBOX_STYLES_URL = 'mapbox://styles/jonathan-auch/cmhz38wfd001801sbe3c06ece'
+	const DUCKCON7_COORDINATES = [4.922150, 52.376780];
 	
+	const $duckcon7Map = $('.js-duckcon7-map');
+
+	const duckcon7GeoJson = {
+		type: 'FeatureCollection',
+		features: [
+			{
+				type: 'Feature',
+				geometry: {
+					type: 'Point',
+					coordinates: DUCKCON7_COORDINATES,
+				},
+				properties: {
+					title: 'Pakhuis de Zwijger',
+					description: 'Pakhuis de Zwijger'
+				}
+			}
+		]
+	}
+
+	// Initialize the map if present on page
+	if ($duckcon7Map.length) {
+		mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
+
+		const map = new mapboxgl.Map({
+			container: 'duckcon7-map',
+			style: MAPBOX_STYLES_URL,
+			center: [4.922150, 52.376780],
+			zoom: 15,
+		});
+
+		for (const feature of duckcon7GeoJson.features) {
+			const marker = document.createElement('div');
+       		marker.className = 'js-marker map-marker';
+       
+  			new mapboxgl.Marker(marker).setLngLat(feature.geometry.coordinates).addTo(map);
+		}
+	}
 });

@@ -17,6 +17,10 @@
 	<link rel="stylesheet" href="/css/{{ page.add_css }}">
 	{% endif %}
 
+	{% if page.body_class contains "duckcon7" %}
+	<link href='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css' rel='stylesheet' />
+	{% endif %}
+
 	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
@@ -31,6 +35,9 @@
 	{% seo title=false %}
 	
 	<script src="/js/determine_color_scheme.js"></script>
+	{% if page.body_class contains "duckcon7" %}
+	<script src='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js'></script>
+	{% endif %}
 </head>
 <body class="layout_default{% if page.body_class %} {{ page.body_class }}{% endif %}">
 
