@@ -8,6 +8,11 @@
         max-width: var(--page-max-width-large, 1150px);
     }
 
+    // Override the padding for the main content
+    &.layout_default #main_content_wrap {
+        padding: 0;
+    }
+
     .hero {
         @include code-large;
         --hero-padding: 20px;
@@ -15,7 +20,6 @@
 
         height: 100vh;
         position: relative;
-        padding: var(--hero-padding);
         color: var(--yellow-20);
         
         .hero-image {
@@ -29,6 +33,7 @@
             bottom: 0;
             left: 0;
             right: 0;
+            padding: var(--hero-padding);
         }
 
         .hero-footer-content {
@@ -39,6 +44,10 @@
         .hero-footer-column {
             flex: 1;
             white-space: nowrap;
+
+            p {
+                margin: 0;
+            }
         }
 
         .hero-footer-button {
