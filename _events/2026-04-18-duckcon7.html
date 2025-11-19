@@ -26,12 +26,12 @@ toc: false
     <a class="hero-footer-button" href="#announcement"><img src="/images/icons/scrolldown.svg" alt="Scroll down"></a>
   </footer>
 </section>
-<section class="announcement" id="announcement">
-  <p class="max-width-large">We're looking forward to gathering the DuckDB community at DuckCon 7 — our user conference in Amsterdam, the Netherlands. Join us at <a href="#">Pakhuis de Zwijger</a>, <a href="#">Piet Heinkade 179</a>, for a day of talks and friendly faces on Friday, 10. April 2026.</p>
+<section class="announcement w-large" id="announcement">
+  <p class="wrap">We're looking forward to gathering the DuckDB community at DuckCon 7 — our user conference in Amsterdam, the Netherlands. Join us at <a href="#">Pakhuis de Zwijger</a>, <a href="#">Piet Heinkade 179</a>, for a day of talks and friendly faces on Friday, 10. April 2026.</p>
 </section>
-<section class="program" id="program">
+<section class="program w-large" id="program">
   {% include duckcon7/section_header.html title="Program" description="Discover talks, demos, and community sessions—live at DuckCon 7. Join in person or online and be part of the action." %}
-  <div class="max-width-large table-wrapper">
+  <div class="wrap">
     {% for day in site.data.duckcon7.program %}
       <h3 class="table-section-title">{{ day.title }}</h3>
       {% for session in day.sessions %}
@@ -106,7 +106,7 @@ toc: false
 <section class="venue" id="venue">
   {% include duckcon7/section_header.html title="Venue" description="Pakhuis de Zwijger is DuckCon #7's home on Amsterdam's waterfront. This space offers enough seats for the whole DuckDB flock." %}
 </section>
-<section class="venue-access">
+<section class="venue-access w-large">
   {% include duckcon7/section_header.html title="Acessing the venue" description="Whether you’re joining us from across town or across the world, getting here is easy. Pakhuis de Zwijger is just minutes from Amsterdam Centraal station and is fully accessible by public transport, bike, and car." %}
   {% if site.data.duckcon7.venue_access %}
     <div class="wrap feature-list">
@@ -123,16 +123,19 @@ toc: false
     </div>
   {% endif %}
 </section>
-<section class="map">
-  <ul class="map-menu text-secondary-color">
-    <li>
-      <a href="https://maps.apple.com/place?place-id=I4F9D0108B24DC669&address=Piet+Heinkade+179%2C+1019+HC+Amsterdam%2C+Netherlands&coordinate=52.376762%2C4.92216&name=Pakhuis+de+Zwijger&_provider=9902" target="_blank" rel="noopener noreferrer">Apple Maps</a>
-    </li>
-    <li>
-      <a href="https://maps.app.goo.gl/zmnGR2xjmNJynr6D7" target="_blank" rel="noopener noreferrer">Google Maps</a>
-    </li>
-  </ul>
-  <img class="fullwidth" src="/images/events/duckcon7/map-placeholder.png" alt="Location of Parkhuis de Zwijger" />
+<section class="map w-large">
+  <div class="wrap">
+    <ul class="map-menu text-secondary-color">
+      <li>
+        <a href="https://maps.apple.com/place?place-id=I4F9D0108B24DC669&address=Piet+Heinkade+179%2C+1019+HC+Amsterdam%2C+Netherlands&coordinate=52.376762%2C4.92216&name=Pakhuis+de+Zwijger&_provider=9902" target="_blank" rel="noopener noreferrer">Apple Maps</a>
+      </li>
+      <li>
+        <a href="https://maps.app.goo.gl/zmnGR2xjmNJynr6D7" target="_blank" rel="noopener noreferrer">Google Maps</a>
+      </li>
+    </ul>
+    <iframe class="map-iframe" width='100%' height='400px' src="https://api.mapbox.com/styles/v1/jonathan-auch/cmhz38wfd001801sbe3c06ece.html?title=false&access_token=pk.eyJ1Ijoiam9uYXRoYW4tYXVjaCIsImEiOiJjbDllMHhxNHowbG50M29vZ3Y0NnZhdHY1In0.XQxUUmkkSGKUkNThK1p9Yg&zoomwheel=false#15.42/52.376885/4.909251" title="DuckCon" style="border:none;" />
+    <!-- <img class="fullwidth" src="/images/events/duckcon7/map-placeholder.png" alt="Location of Parkhuis de Zwijger" /> -->
+  </div>
   {% include duckcon7/section_header.html title="Events Nearby" description="The FOSDEM 2025 conference in Brussels is happening on the weekend after DuckCon #7, so you can conveniently travel there via a direct train." %}
 </section>
 <section class="join-us">
