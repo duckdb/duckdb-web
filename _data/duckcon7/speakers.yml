@@ -1,39 +1,39 @@
 - name: Hannes Mühleisen
   title: CEO of DuckDB Labs
   image: /images/events/duckcon7/speakers/hannes_muhleisen.jpg
-  url: https://www.linkedin.com/in/hannes-m%C3%BChleisen-6b150510/
+  url: "#"
 
 - name: Michael Driscoll
   title: Principal Database Architect
   image: /images/events/duckcon7/speakers/michael_driscoll.jpg
-  url: https://www.linkedin.com/in/michael-driscoll-6b150510/
+  url: "#"
 
 - name: Gabor Szarnyas
   title: Developer Advocate, DuckDB Labs
   image: /images/events/duckcon7/speakers/gabor_szarnyas.jpg
-  url: https://www.linkedin.com/in/gabor-szarnyas-6b150510/
+  url: "#"
 
 - name: Kaivalya Apte
   title: Geek Narrator
   image: /images/events/duckcon7/speakers/kaivalya_apte.jpg
-  url: https://www.linkedin.com/in/kaivalya-apte-6b150510/
+  url: "#"
 
 - name: Jordan Tigani
   title: Chief Duck
   image: /images/events/duckcon7/speakers/jordan_tigani.jpg
-  url: https://www.linkedin.com/in/jordan-tigani-6b150510/
+  url: "#"
 
 - name: Benjamin Wagner
   title: The Data Engineering Show
   image: /images/events/duckcon7/speakers/benjamin_wagner.jpg
-  url: https://www.linkedin.com/in/benjamin-wagner-6b150510/
+  url: "#"
 
 - name: Joe Reis
   title: Founder, Jo Reis Show
   image: /images/events/duckcon7/speakers/joe_reis.jpg
-  url: https://www.linkedin.com/in/joe-reis-6b150510/
+  url: "#"
 
 - name: Mark Raasveldt
   title: CTO of DuckDB Labs
   image: /images/events/duckcon7/speakers/mark_raasveldt.jpg
-  url: https://www.linkedin.com/in/mark-raasveldt-6b150510/
+  url: "#"
