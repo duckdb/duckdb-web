@@ -1,15 +1,25 @@
 @use '../abstracts/mixins' as *;
 
+@mixin mobile-padding {
+    @media (max-width: 940px) {
+        padding-right: var(--mobile-horizontal-padding);
+        padding-left: var(--mobile-horizontal-padding);
+    }
+}
+
 .duckcon7 {
     --primary-font-stack: "SuisseIntl", sans-serif;
+    --mobile-horizontal-padding: 15px;
 
     // Override the max-width for the header content
     header .headerline .headercontent {
+        @include mobile-padding;
         max-width: var(--page-max-width-large, 1150px);
     }
 
     // Override the padding for the main content
     &.layout_default #main_content_wrap {
+        margin-top: 0;
         padding: 0;
     }
 
@@ -91,11 +101,20 @@
         tr {
             display: grid;
             grid-template-columns: var(--first-column-width) 1.7fr 1fr 1fr;
+
+            @media (max-width: 940px) {
+                grid-template-columns: var(--first-column-width) 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
         }
 
         td {
             border-bottom: none;
             padding: var(--td-padding);
+        }
+
+        .button {
+            margin-right: 0;
         }
 
         tbody tr {
@@ -108,6 +127,18 @@
 
             td:nth-child(3) {
                 color: var(--main-text-tertiary-color);
+
+                @media (max-width: 940px) {
+                    grid-column: span 2;
+                    text-align: center;
+                }
+            }
+
+            td:nth-child(4) {
+                @media (max-width: 940px) {
+                    grid-column: span 2;
+                    text-align: center;
+                }
             }
         }
 
@@ -145,6 +176,11 @@
 
         p {
             margin: 0 auto;
+        }
+
+        @media (max-width: 940px) {
+            padding-right: var(--mobile-horizontal-padding);
+            padding-left: var(--mobile-horizontal-padding);
         }
     }
 
@@ -246,6 +282,10 @@
         }
     }
 
+    .speakers {
+        @include mobile-padding;
+    }
+
     .speakers .speakers-list {
         @include reset-unordered-list;
         --columns: 2;
@@ -290,7 +330,13 @@
         }
     }
 
+    .venue-access {
+        @include mobile-padding;
+    }
+
     .sponsors {
+        @include mobile-padding;
+
         .sponsors-list {
             @include reset-unordered-list;
             display: flex;
@@ -305,6 +351,8 @@
     }
 
     .map {
+        @include mobile-padding;
+
         .embedded-map {
             border-radius: 20px;
             overflow: hidden;
@@ -353,6 +401,10 @@
                 white-space: nowrap;
             }
         }
+    }
+
+    .join-us {
+        @include mobile-padding;
     }
 
     .join-us .card {
