@@ -126,7 +126,7 @@ Encrypting the WAL is triggered by default when an encryption key is given for a
 
 ### Temporary File Encryption
 
-Temporary files are used to store intermediate data that is often necessary for large, out-of-core operations such as large joins and [window functions](https://duckdb.org/2021/10/13/windowing). This data could contain sensitive information and can, in case of a crash, remain on disk. To protect this leftover data, DuckDB automatically encrypts temporary files too.
+Temporary files are used to store intermediate data that is often necessary for large, out-of-core operations such as [sorting]({% post_url 2025-09-24-sorting-again.md}), large joins and [window functions](https://duckdb.org/2021/10/13/windowing). This data could contain sensitive information and can, in case of a crash, remain on disk. To protect this leftover data, DuckDB automatically encrypts temporary files too.
 
 #### The Structure of Temporary Files
 
