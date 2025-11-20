@@ -20,7 +20,9 @@ However, database systems and encryption have a somewhat problematic track recor
 
 **DuckDB** has supported [Parquet Modular Encryption](https://parquet.apache.org/docs/file-format/data-pages/encryption/) [for a while](https://duckdb.org/docs/stable/data/parquet/encryption). This feature allows reading and writing Parquet files with encrypted columns. However, while Parquet files are great and [reports of their impending death](https://materializedview.io/p/nimble-and-lance-parquet-killers) are greatly exaggerated, they cannot – for example – be updated in place, a pretty basic feature of a database management system.
 
-Starting with DuckDB 1.4.0, DuckDB supports **transparent data encryption** of data-at-rest using industry-standard AES encryption. 
+Starting with DuckDB 1.4.0, DuckDB supports **transparent data encryption** of data-at-rest using industry-standard AES encryption.
+
+> DuckDB's encryption does not yet meet the official [NIST requirements](https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines).
 
 ## Some Basics of Encryption
 
@@ -62,7 +64,7 @@ Blocks in DuckDB are by default 256KB, but their size is configurable. At the st
      class="darkmode-img"
      />
 
-For encrypted blocks however, its block header consists of 64-bytes instead of 8 bytes for the checksum. The block header for encrypted blocks contains a 16-byte *nonce/IV* and, optionally, a 16-byte *tag*, depending on which encryption cipher is used. The nonce and tag are stored in plaintext, but the checksum is encrypted for better security. Note that the block header always needs to be 8-bytes aligned to calculate the checksum.
+For encrypted blocks however, its block header consists of 40 bytes instead of 8 bytes for the checksum. The block header for encrypted blocks contains a 16-byte *nonce/IV* and, optionally, a 16-byte *tag*, depending on which encryption cipher is used. The nonce and tag are stored in plaintext, but the checksum is encrypted for better security. Note that the block header always needs to be 8-bytes aligned to calculate the checksum.
 
 <img src="{% link images/blog/encryption/encrypted-block-light.svg %}"
      alt="Encrypted block"
@@ -134,7 +136,7 @@ There are three different types of temporary files in DuckDB: (1) temporary file
 
 Temporary files are encrypted (1) **automatically** when you attach an encrypted database or (2) when you use the setting `SET temp_file_encryption = true`. In the latter case, the main database file is plaintext, but the temporary files will be encrypted. For the encryption of temporary files DuckDB internally generates *temporary keys.* This means that when the database crashes, the temporary keys are also lost. Temporary files cannot be decrypted in this case and are then essentially garbage.
 
-To force DuckDB to produce temporary files, you can use a simple trick by just setting the memory limit low. This will create temporary files once the memory limit is exceeded. For example, we can create a new encrypted database, load this database with TPC-H data (sf 1), and then set the memory limit to 1 GB. If we then perform a large join, we force DuckDB to spill intermediate data to disk. For example:
+To force DuckDB to produce temporary files, you can use a simple trick by just setting the memory limit low. This will create temporary files once the memory limit is exceeded. For example, we can create a new encrypted database, load this database with TPC-H data (SF 1), and then set the memory limit to 1 GB. If we then perform a large join, we force DuckDB to spill intermediate data to disk. For example:
 
 ```sql
 SET memory_limit = '1GB';
@@ -173,7 +175,7 @@ There is not a trivial way to prove that a database is encrypted, but correctly 
 
 When we use ent after executing the above chunk of SQL, i.e., `ent encrypted.duckdb`, this will result in an entropy of 7.99999 bits per byte. If we do the same for the plaintext (unencrypted) database, this results in 7.65876 bits per byte. Note that the plaintext database also has a high entropy, but this is due to compression.
 
-Let’s now visualize both the plaintext and encrypted data with binocle. For the visualization we created both a plaintext DuckDB database with scale factor 1 of TPC-H data and an encrypted one:
+Let’s now visualize both the plaintext and encrypted data with binocle. For the visualization we created both a plaintext DuckDB database with scale factor of 0.001 of TPC-H data and an encrypted one:
 
 <div align="center">
     <img src="https://blobs.duckdb.org/images/duckdb-plaintext-database.png" width="800" />
