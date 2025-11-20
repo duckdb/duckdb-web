@@ -142,7 +142,7 @@ To force DuckDB to produce temporary files, you can use a simple trick by just s
 SET memory_limit = '1GB';
 ATTACH 'tpch_encrypted.db' AS enc (
     ENCRYPTION_KEY 'asdf',
-    ENCRYPTION_CIPHER '⟨cipher⟩'
+    ENCRYPTION_CIPHER 'cipher'
 );
 USE enc;
 CALL dbgen(sf = 1);
