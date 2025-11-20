@@ -186,14 +186,27 @@ body.wasm{
 		}
 	}
 
-	// Status and query display
 	.hidden{
 		display: none;
 	}
 	
+	// Table container
+	.datasettable{
+		position: relative;
+		height: 80vh;
+		width: 80vw;
+		left: 50%;
+		transform: translateX(-50%);
+		padding: 20px;
+		
+		@media only screen and (max-width: 650px) {
+			width: 100%;
+		}
+	}
+	
 	regular-table {
 		width: 100%;
-		height: 500px;
+		height: 80vh;
 		border: 1px solid #ddd;
 		border-radius: 6px;
 		overflow: auto;
@@ -215,12 +228,14 @@ body.wasm{
 	}
 
 	pre{
-		margin: 16px 0;
+		margin: 8px 0;
 		padding: 16px;
 		background: var(--doc-codebox-background-color, #F2F2F2);
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		border-radius: 8px;
 		overflow-x: auto;
+		font-size: var(--type-code, 14px);
+		font-family: "JetBrainsMono-Regular", monospace;
 
 		code{
 			background: transparent;
@@ -237,16 +252,32 @@ body.wasm{
 			@include label-1;
 			font-weight: 600;
 			color: var(--main-text-secondary-color, #666);
+			margin-top: 16px;
+			position: relative;
+			padding-left: 20px; 
+			
+			&::before{
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background-color: #7D66FF; 
+				transition: background-color 0.3s ease;
+			}
+			
+			&[data-status="idle"]::before{
+				background-color: #00C770; 
+			}
+			
+			&[data-status="error"]::before{
+				background-color: #FF6900; 
+			}
 		}
 	}
 
-	// Table container
-	.datasettable{
-		position: relative;
-		height: 80vh;
-		width: 80vw;
-		left: 50%;
-		transform: translateX(-50%);
-		padding: 20px;
-	}
+	
 }

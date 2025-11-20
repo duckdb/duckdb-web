@@ -1,8 +1,20 @@
 (function ($) {
   'use strict';
 
+  window.updateStatusIndicator = function(statusText) {
+    var statusElement = document.getElementById("last_query_status");
+    if (!statusElement) return;
+    
+    if (statusText.includes("Idle")) {
+      statusElement.setAttribute('data-status', 'idle');
+    } else if (statusText.includes("Error")) {
+      statusElement.setAttribute('data-status', 'error');
+    } else {
+      statusElement.setAttribute('data-status', 'executing');
+    }
+  };
+
   $(function () {
-    // Run only on wasm page
     if (!$('body').hasClass('wasm')) return;
 
     var $container = $('.content-container');
@@ -20,12 +32,10 @@
     }
 
     function wire() {
-      // Click handler for foldout content (prevent propagation)
       $container.on('click', '.selection-content', function (e) {
         e.stopPropagation();
       });
 
-      // Click handler for entire foldout (opens it)
       $container.on('click', '.selection-foldout', function () {
         var $fold = $(this);
         if ($fold.hasClass('disabled')) return;
@@ -36,7 +46,6 @@
         }
       });
 
-      // Click handler for selection-head (toggles open/close)
       $container.on('click', '.selection-head', function (e) {
         e.stopPropagation();
         var $fold = $(this).closest('.selection-foldout');
@@ -51,7 +60,6 @@
         }
       });
 
-      // Initialize foldouts based on their initial state
       $foldouts.each(function () {
         var $fold = $(this);
         var isOpen = $fold.hasClass('open');
@@ -60,9 +68,7 @@
       });
     }
 
-    // Update selected span based on form inputs (only for credentials foldout)
     function updateSelectedSpan($foldout) {
-      // Only update if this is the credentials foldout
       if ($foldout.data('foldout') !== 'credentials') return;
       
       var $selected = $foldout.find('.selection-head .selected');
@@ -85,18 +91,15 @@
       }
     }
 
-    // Watch for input changes (only for credentials foldout)
     $container.on('input change', '.selection-foldout[data-foldout="credentials"] input[type="text"]', function() {
       var $foldout = $(this).closest('.selection-foldout');
       updateSelectedSpan($foldout);
     });
 
-    // Initialize selected spans (only for credentials foldout)
     $foldouts.filter('[data-foldout="credentials"]').each(function() {
       updateSelectedSpan($(this));
     });
 
-    // Initialize
     wire();
   });
 })(jQuery);

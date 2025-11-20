@@ -5,7 +5,6 @@ body_class: wasm
 excerpt: This is a demo built with duckdb-wasm and regular-tables.
 max_page_width: medium
 toc: false
-published: false
 ---
 <!--
 This is a demo built with duckdb-wasm and regular-tables.
@@ -134,6 +133,7 @@ function extract_hash_segment() {
 }
 extract_hash_segment();
       document.getElementById("last_query_status").innerHTML = "2/5: Instantiating DuckDB-Wasm - main thread component";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("2/5: Instantiating DuckDB-Wasm - main thread component");
       const getDb = async () => {
         const duckdb = window.duckdbduckdbWasm;
         // @ts-ignore
@@ -169,11 +169,13 @@ function progressHandler(progress) {
    <script type="module">
       import * as duckdbduckdbWasm from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.31.1-dev1.0/+esm";
       document.getElementById("last_query_status").innerHTML = "3/5: Instantiating DuckDB-Wasm - WebWorker component";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("3/5: Instantiating DuckDB-Wasm - WebWorker component");
       window.duckdbduckdbWasm = duckdbduckdbWasm;
       getDb().then(async (db) => {
         // Create a new connection
       
       document.getElementById("last_query_status").innerHTML = "5/5: DuckDB-Wasm ready";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("5/5: DuckDB-Wasm ready");
       
 var setup_queries = "";
         var conn = await db.connect();
@@ -187,6 +189,7 @@ var setup_queries = "";
       async function executeQuery(conn, sql, append = false) {
       document.getElementById("last_query").innerHTML = setup_queries + sql;
       document.getElementById("last_query_status").innerHTML = "Executing...";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("Executing...");
       var error = null;
 const startTime = performance.now();
       var res = await conn.query(sql).catch((e) => {error = e; console.log(e);});
@@ -195,9 +198,11 @@ const endTime = performance.now();
       if (error !== null) {
       document.getElementById("last_query").innerHTML = error;
       document.getElementById("last_query_status").innerHTML = "Error!";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("Error!");
       is_valid = false;
       } else {
       document.getElementById("last_query_status").innerHTML = "Idle";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("Idle");
       is_valid = true;
       }
 if (append) {
