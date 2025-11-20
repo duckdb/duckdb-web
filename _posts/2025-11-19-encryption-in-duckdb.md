@@ -93,7 +93,7 @@ PRAGMA wal_autocheckpoint = '1TB';
 This way you’ll disable a checkpointing on closing the database, meaning that the WAL does not get merged into the main database file. In addition, by setting wal_autocheckpoint to a high threshold, this will avoid intermediate checkpoints to happen and the WAL will persist. For example, we can create a persistent WAL file by first setting the above PRAGMAs, then attach an encrypted database, and then create a table where we insert 3 values.
 
 ```sql
-ATTACH 'encrypted.db' as enc (
+ATTACH 'encrypted.db' AS enc (
     ENCRYPTION_KEY 'asdf',
     ENCRYPTION_CIPHER 'GCM'
 );
