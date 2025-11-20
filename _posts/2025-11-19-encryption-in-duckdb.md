@@ -53,11 +53,25 @@ After the main database header, DuckDB stores two 4KB database headers that cont
 
 Blocks in DuckDB are by default 256KB, but their size is configurable. At the start of each *plaintext* block there is an 8-byte block header, which stores an 8-byte checksum. The checksum is a simple calculation that is often used in database systems to check for any corrupted data. 
 
-<img src="{% link images/blog/encryption/checksum.png %}" width="400" />
+<img src="{% link images/blog/encryption/plaintext-block-light.svg %}"
+     alt="Plaintext block"
+     class="lightmode-img"
+     />
+<img src="{% link images/blog/encryption/plaintext-block-dark.svg %}"
+     alt="Plaintext block"
+     class="darkmode-img"
+     />
 
 For encrypted blocks however, its block header consists of 64-bytes instead of 8 bytes for the checksum. The block header for encrypted blocks contains a 16-byte *nonce/IV* and, optionally, a 16-byte *tag*, depending on which encryption cipher is used. The nonce and tag are stored in plaintext, but the checksum is encrypted for better security. Note that the block header always needs to be 8-bytes aligned to calculate the checksum.
 
-<img src="{% link images/blog/encryption/encrypted-blocks.png %}" width="400" />
+<img src="{% link images/blog/encryption/encrypted-block-light.svg %}"
+     alt="Encrypted block"
+     class="lightmode-img"
+     />
+<img src="{% link images/blog/encryption/encrypted-block-dark.svg %}"
+     alt="Encrypted block"
+     class="darkmode-img"
+     />
 
 ### Write-Ahead-Log Encryption
 
@@ -66,7 +80,7 @@ The write ahead log (WAL) in database systems is a crash recovery mechanism to e
 In DuckDB, you can force the creation of a WAL by setting
 
 ```sql
-PRAGMA disable_checkpoint_on_shutdown
+PRAGMA disable_checkpoint_on_shutdown;
 PRAGMA wal_autocheckpoint = '1TB';
 ```
 
@@ -85,11 +99,26 @@ If we now close the DuckDB process, we can see that there is a `.wal` file shown
 
 Before writing new entries (inserts, updates, deletes) to the database, these entries are essentially logged and appended to the WAL. Only *after* logged entries are flushed to disk, a transaction is considered as committed. A plaintext WAL entry has the following structure:
 
-<img src="{% link images/blog/encryption/plaintext-wal-entry.png %}" width="400" />
+<img src="{% link images/blog/encryption/plaintext-wal-entry-light.svg %}"
+     alt="Plaintext block"
+     class="lightmode-img"
+     />
+<img src="{% link images/blog/encryption/plaintext-wal-entry-dark.svg %}"
+     alt="Plaintext block"
+     class="darkmode-img"
+     />
+
 
 Since the WAL is append-only, we encrypt a WAL entry *per value*. For AES-GCM this means that we append a nonce and a tag to each entry. The structure in which we do this is depicted in [image]. When we serialize an encrypted entry to the encrypted WAL, we first store the length in plaintext, because we need to know how many bytes we should decrypt. The length is followed by a nonce, which on its turn is followed by the encrypted checksum and the encrypted entry itself. After the entry, a 16-byte tag is stored for verification.
 
-<img src="{% link images/blog/encryption/encrypted-wal-entry.png %}" width="400" />
+<img src="{% link images/blog/encryption/encrypted-wal-entry-light.svg %}"
+     alt="Plaintext block"
+     class="lightmode-img"
+     />
+<img src="{% link images/blog/encryption/encrypted-wal-entry-dark.svg %}"
+     alt="Plaintext block"
+     class="darkmode-img"
+     />
 
 Encrypting the WAL is triggered by default when an encryption key is given for any (un)encrypted database.
 
@@ -183,13 +212,23 @@ ATTACH 'encrypted.duckdb' AS encrypted (
 );
 ```
 
-To keep track of which databases are encrypted, you can query this by
+To keep track of which databases are encrypted, you can query this by running:
 
 ```sql
 FROM duckdb_databases();
 ```
 
-Which will show which databases are encrypted, and which cipher is used.
+This will show which databases are encrypted, and which cipher is used:
+
+| database_name | database_oid | path                   | … | encrypted | cipher |
+|---------------|--------------|------------------------|---|-----------|--------|
+| encrypted     | 2103         | encrypted.duckdb       | … | true      | GCM    |
+| unencrypted   | 2050         | unencrypted.duckdb     | … | false     | NULL   |
+| memory        | 592          | NULL                   | … | false     | NULL   |
+| system        | 0            | NULL                   | … | false     | NULL   |
+| temp          | 1995         | NULL                   | … | false     | NULL   |
+
+_5 rows —  10 columns (5 shown)_
 
 ## Implementation and Performance
 
