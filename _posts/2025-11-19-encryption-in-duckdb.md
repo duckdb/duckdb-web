@@ -222,6 +222,8 @@ FROM duckdb_databases();
 
 This will show which databases are encrypted, and which cipher is used:
 
+<div class="monospace_table"></div>
+
 | database_name | database_oid | path                   | … | encrypted | cipher |
 |---------------|--------------|------------------------|---|-----------|--------|
 | encrypted     | 2103         | encrypted.duckdb       | … | true      | GCM    |
