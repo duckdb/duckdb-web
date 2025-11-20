@@ -186,17 +186,23 @@ When we use ent after executing the above chunk of SQL, i.e., `ent encrypted.duc
 
 Let’s now visualize both the plaintext and encrypted data with binocle. For the visualization we created both a plaintext DuckDB database with scale factor of 0.001 of TPC-H data and an encrypted one:
 
+<details markdown='1'>
+<summary markdown='span'>
+Click here to see the entropy of a plaintext database
+</summary>
 <div align="center">
     <img src="https://blobs.duckdb.org/images/duckdb-plaintext-database.png" width="800" />
-    <br>
-    Entropy of a plaintext database
 </div>
+</details>
 
-<div align="center" style="margin-top: 20px">
+<details markdown='1' style="margin-top: 15px">
+<summary markdown='span'>
+Click here to see the entropy of an encrypted database
+</summary>
+<div align="center">
     <img src="https://blobs.duckdb.org/images/duckdb-encrypted-database.png" width="800" />
-    <br>
-    Entropy of an encrypted database
 </div>
+</details>
 
 In these figures, we can clearly observe that the encrypted database file seems completely random, while the plaintext database file shows some clear structure in its binary data.
 
