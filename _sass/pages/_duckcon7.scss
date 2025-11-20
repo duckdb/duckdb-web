@@ -128,6 +128,10 @@
 
         .button {
             text-decoration: none;
+
+            &:hover {
+                color: #000;
+            }
         }
     }
 
@@ -258,6 +262,7 @@
 
         .postpreview {
             width: 100%;
+            height: 100%;
 
             .postimg {
                 aspect-ratio: 1;
@@ -359,7 +364,7 @@
         text-align: center;
 
         .button {
-            margin-top: 130px;
+            margin: 25px 0 0;
         }
     }
 }
