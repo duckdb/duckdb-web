@@ -55,25 +55,29 @@ After the main database header, DuckDB stores two 4KB database headers that cont
 
 Blocks in DuckDB are by default 256KB, but their size is configurable. At the start of each *plaintext* block there is an 8-byte block header, which stores an 8-byte checksum. The checksum is a simple calculation that is often used in database systems to check for any corrupted data. 
 
-<img src="{% link images/blog/encryption/plaintext-block-light.svg %}"
-     alt="Plaintext block"
-     class="lightmode-img"
-     />
-<img src="{% link images/blog/encryption/plaintext-block-dark.svg %}"
-     alt="Plaintext block"
-     class="darkmode-img"
-     />
+<div align="center">
+    <img src="{% link images/blog/encryption/plaintext-block-light.svg %}"
+        alt="Plaintext block"
+        class="lightmode-img"
+        />
+    <img src="{% link images/blog/encryption/plaintext-block-dark.svg %}"
+        alt="Plaintext block"
+        class="darkmode-img"
+        />
+</div>
 
 For encrypted blocks however, its block header consists of 40 bytes instead of 8 bytes for the checksum. The block header for encrypted blocks contains a 16-byte *nonce/IV* and, optionally, a 16-byte *tag*, depending on which encryption cipher is used. The nonce and tag are stored in plaintext, but the checksum is encrypted for better security. Note that the block header always needs to be 8-bytes aligned to calculate the checksum.
 
-<img src="{% link images/blog/encryption/encrypted-block-light.svg %}"
-     alt="Encrypted block"
-     class="lightmode-img"
-     />
-<img src="{% link images/blog/encryption/encrypted-block-dark.svg %}"
-     alt="Encrypted block"
-     class="darkmode-img"
-     />
+<div align="center">
+    <img src="{% link images/blog/encryption/encrypted-block-light.svg %}"
+        alt="Encrypted block"
+        class="lightmode-img"
+        />
+    <img src="{% link images/blog/encryption/encrypted-block-dark.svg %}"
+        alt="Encrypted block"
+        class="darkmode-img"
+        />
+</div>
 
 ### Write-Ahead-Log Encryption
 
@@ -101,32 +105,35 @@ If we now close the DuckDB process, we can see that there is a `.wal` file shown
 
 Before writing new entries (inserts, updates, deletes) to the database, these entries are essentially logged and appended to the WAL. Only *after* logged entries are flushed to disk, a transaction is considered as committed. A plaintext WAL entry has the following structure:
 
-<img src="{% link images/blog/encryption/plaintext-wal-entry-light.svg %}"
-     alt="Plaintext block"
-     class="lightmode-img"
-     />
-<img src="{% link images/blog/encryption/plaintext-wal-entry-dark.svg %}"
-     alt="Plaintext block"
-     class="darkmode-img"
-     />
-
+<div align="center">
+    <img src="{% link images/blog/encryption/plaintext-wal-entry-light.svg %}"
+        alt="Plaintext block"
+        class="lightmode-img"
+        />
+    <img src="{% link images/blog/encryption/plaintext-wal-entry-dark.svg %}"
+        alt="Plaintext block"
+        class="darkmode-img"
+        />
+</div>
 
 Since the WAL is append-only, we encrypt a WAL entry *per value*. For AES-GCM this means that we append a nonce and a tag to each entry. The structure in which we do this is depicted in below. When we serialize an encrypted entry to the encrypted WAL, we first store the length in plaintext, because we need to know how many bytes we should decrypt. The length is followed by a nonce, which on its turn is followed by the encrypted checksum and the encrypted entry itself. After the entry, a 16-byte tag is stored for verification.
 
-<img src="{% link images/blog/encryption/encrypted-wal-entry-light.svg %}"
-     alt="Plaintext block"
-     class="lightmode-img"
-     />
-<img src="{% link images/blog/encryption/encrypted-wal-entry-dark.svg %}"
-     alt="Plaintext block"
-     class="darkmode-img"
-     />
+<div align="center">
+    <img src="{% link images/blog/encryption/encrypted-wal-entry-light.svg %}"
+        alt="Plaintext block"
+        class="lightmode-img"
+        />
+    <img src="{% link images/blog/encryption/encrypted-wal-entry-dark.svg %}"
+        alt="Plaintext block"
+        class="darkmode-img"
+        />
+</div>
 
 Encrypting the WAL is triggered by default when an encryption key is given for any (un)encrypted database.
 
 ### Temporary File Encryption
 
-Temporary files are used to store intermediate data that is often necessary for large, out-of-core operations such as [sorting]({% post_url 2025-09-24-sorting-again.md}), large joins and [window functions](https://duckdb.org/2021/10/13/windowing). This data could contain sensitive information and can, in case of a crash, remain on disk. To protect this leftover data, DuckDB automatically encrypts temporary files too.
+Temporary files are used to store intermediate data that is often necessary for large, out-of-core operations such as [sorting]({% post_url 2025-09-24-sorting-again %}), large joins and [window functions](https://duckdb.org/2021/10/13/windowing). This data could contain sensitive information and can, in case of a crash, remain on disk. To protect this leftover data, DuckDB automatically encrypts temporary files too.
 
 #### The Structure of Temporary Files
 
@@ -163,13 +170,15 @@ This sequence of commands will result in encrypted temporary files being written
 
 In DuckDB, you can (1) encrypt an existing database, (2) initialize a new, empty encrypted database or (3) reencrypt a database. For example, let's create a new database, load this database with TPC-H data of scale factor 1 and then encrypt this database.
 
-install tpch;
-load tpch;
+```sql
+INSTALL tpch;
+LOAD tpch;
 ATTACH 'encrypted.duckdb' AS encrypted (ENCRYPTION_KEY 'asdf');
 ATTACH 'unencrypted.duckdb' AS unencrypted;
 USE unencrypted;
-CALL dbgen(sf=1);
-COPY FROM DATABASE unencrypted to encrypted;
+CALL dbgen(sf = 1);
+COPY FROM DATABASE unencrypted TO encrypted;
+```
 
 There is not a trivial way to prove that a database is encrypted, but correctly encrypted data should look like random noise and has a high entropy. So, to check whether a database is actually encrypted, we can use tools to calculate the entropy or visualize the binary, such as [ent](https://github.com/lsauer/entropy) and [binocle](https://github.com/sharkdp/binocle).
 
@@ -179,11 +188,13 @@ Let’s now visualize both the plaintext and encrypted data with binocle. For th
 
 <div align="center">
     <img src="https://blobs.duckdb.org/images/duckdb-plaintext-database.png" width="800" />
+    <br>
     Entropy of a plaintext database
 </div>
 
 <div align="center" style="margin-top: 20px">
     <img src="https://blobs.duckdb.org/images/duckdb-encrypted-database.png" width="800" />
+    <br>
     Entropy of an encrypted database
 </div>
 
@@ -224,13 +235,13 @@ This will show which databases are encrypted, and which cipher is used:
 
 <div class="monospace_table"></div>
 
-| database_name | database_oid | path                   | … | encrypted | cipher |
-|---------------|--------------|------------------------|---|-----------|--------|
-| encrypted     | 2103         | encrypted.duckdb       | … | true      | GCM    |
-| unencrypted   | 2050         | unencrypted.duckdb     | … | false     | NULL   |
-| memory        | 592          | NULL                   | … | false     | NULL   |
-| system        | 0            | NULL                   | … | false     | NULL   |
-| temp          | 1995         | NULL                   | … | false     | NULL   |
+| database_name | database_oid | path               | …   | encrypted | cipher |
+| ------------- | ------------ | ------------------ | --- | --------- | ------ |
+| encrypted     | 2103         | encrypted.duckdb   | …   | true      | GCM    |
+| unencrypted   | 2050         | unencrypted.duckdb | …   | false     | NULL   |
+| memory        | 592          | NULL               | …   | false     | NULL   |
+| system        | 0            | NULL               | …   | false     | NULL   |
+| temp          | 1995         | NULL               | …   | false     | NULL   |
 
 <!-- markdownlint-disable MD036 -->
 _5 rows —  10 columns (5 shown)_
