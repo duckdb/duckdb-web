@@ -20,8 +20,8 @@ repo:
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 446
-extension_download_count_pretty: 446
+extension_download_count: 432
+extension_download_count_pretty: 432
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -47,39 +47,44 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name        | function_type | description | comment | examples |
-|----------------------------|---------------|-------------|---------|----------|
-| forecast                   | table         | NULL        | NULL    |          |
-| ts_analyze_seasonality     | scalar        | NULL        | NULL    |          |
-| ts_bias                    | scalar        | NULL        | NULL    |          |
-| ts_coverage                | scalar        | NULL        | NULL    |          |
-| ts_detect_changepoints     | table_macro   | NULL        | NULL    |          |
-| ts_detect_changepoints_agg | aggregate     | NULL        | NULL    |          |
-| ts_detect_changepoints_by  | table_macro   | NULL        | NULL    |          |
-| ts_detect_seasonality      | scalar        | NULL        | NULL    |          |
-| ts_detect_seasonality_all  | table_macro   | NULL        | NULL    |          |
-| ts_drop_constant           | table_macro   | NULL        | NULL    |          |
-| ts_drop_leading_zeros      | table_macro   | NULL        | NULL    |          |
-| ts_drop_short              | table_macro   | NULL        | NULL    |          |
-| ts_drop_trailing_zeros     | table_macro   | NULL        | NULL    |          |
-| ts_drop_zeros              | table_macro   | NULL        | NULL    |          |
-| ts_fill_gaps               | table_macro   | NULL        | NULL    |          |
-| ts_fill_nulls_backward     | table_macro   | NULL        | NULL    |          |
-| ts_fill_nulls_forward      | table_macro   | NULL        | NULL    |          |
-| ts_fill_nulls_mean         | table_macro   | NULL        | NULL    |          |
-| ts_forecast                | table_macro   | NULL        | NULL    |          |
-| ts_forecast_agg            | aggregate     | NULL        | NULL    |          |
-| ts_forecast_by             | table_macro   | NULL        | NULL    |          |
-| ts_mae                     | scalar        | NULL        | NULL    |          |
-| ts_mape                    | scalar        | NULL        | NULL    |          |
-| ts_mase                    | scalar        | NULL        | NULL    |          |
-| ts_mqloss                  | scalar        | NULL        | NULL    |          |
-| ts_mse                     | scalar        | NULL        | NULL    |          |
-| ts_quantile_loss           | scalar        | NULL        | NULL    |          |
-| ts_r2                      | scalar        | NULL        | NULL    |          |
-| ts_rmae                    | scalar        | NULL        | NULL    |          |
-| ts_rmse                    | scalar        | NULL        | NULL    |          |
-| ts_smape                   | scalar        | NULL        | NULL    |          |
-| ts_stats                   | table_macro   | NULL        | NULL    |          |
+|        function_name         | function_type | description | comment | examples |
+|------------------------------|---------------|-------------|---------|----------|
+| forecast                     | table         | NULL        | NULL    |          |
+| ts_analyze_seasonality       | scalar        | NULL        | NULL    |          |
+| ts_bias                      | scalar        | NULL        | NULL    |          |
+| ts_coverage                  | scalar        | NULL        | NULL    |          |
+| ts_detect_changepoints       | table_macro   | NULL        | NULL    |          |
+| ts_detect_changepoints_agg   | aggregate     | NULL        | NULL    |          |
+| ts_detect_changepoints_by    | table_macro   | NULL        | NULL    |          |
+| ts_detect_seasonality        | scalar        | NULL        | NULL    |          |
+| ts_detect_seasonality_all    | table_macro   | NULL        | NULL    |          |
+| ts_drop_constant             | table_macro   | NULL        | NULL    |          |
+| ts_drop_leading_zeros        | table_macro   | NULL        | NULL    |          |
+| ts_drop_short                | table_macro   | NULL        | NULL    |          |
+| ts_drop_trailing_zeros       | table_macro   | NULL        | NULL    |          |
+| ts_drop_zeros                | table_macro   | NULL        | NULL    |          |
+| ts_features                  | aggregate     | NULL        | NULL    |          |
+| ts_features_config_from_csv  | scalar        | NULL        | NULL    |          |
+| ts_features_config_from_json | scalar        | NULL        | NULL    |          |
+| ts_features_config_template  | table         | NULL        | NULL    |          |
+| ts_features_list             | table         | NULL        | NULL    |          |
+| ts_fill_gaps                 | table_macro   | NULL        | NULL    |          |
+| ts_fill_nulls_backward       | table_macro   | NULL        | NULL    |          |
+| ts_fill_nulls_forward        | table_macro   | NULL        | NULL    |          |
+| ts_fill_nulls_mean           | table_macro   | NULL        | NULL    |          |
+| ts_forecast                  | table_macro   | NULL        | NULL    |          |
+| ts_forecast_agg              | aggregate     | NULL        | NULL    |          |
+| ts_forecast_by               | table_macro   | NULL        | NULL    |          |
+| ts_mae                       | scalar        | NULL        | NULL    |          |
+| ts_mape                      | scalar        | NULL        | NULL    |          |
+| ts_mase                      | scalar        | NULL        | NULL    |          |
+| ts_mqloss                    | scalar        | NULL        | NULL    |          |
+| ts_mse                       | scalar        | NULL        | NULL    |          |
+| ts_quantile_loss             | scalar        | NULL        | NULL    |          |
+| ts_r2                        | scalar        | NULL        | NULL    |          |
+| ts_rmae                      | scalar        | NULL        | NULL    |          |
+| ts_rmse                      | scalar        | NULL        | NULL    |          |
+| ts_smape                     | scalar        | NULL        | NULL    |          |
+| ts_stats                     | table_macro   | NULL        | NULL    |          |
 
 
