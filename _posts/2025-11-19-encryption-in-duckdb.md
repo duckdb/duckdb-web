@@ -232,7 +232,9 @@ This will show which databases are encrypted, and which cipher is used:
 | system        | 0            | NULL                   | … | false     | NULL   |
 | temp          | 1995         | NULL                   | … | false     | NULL   |
 
-**5 rows —  10 columns (5 shown)**
+<!-- markdownlint-disable MD036 -->
+_5 rows —  10 columns (5 shown)_
+<!-- markdownlint-enable MD036 -->
 
 ## Implementation and Performance
 
