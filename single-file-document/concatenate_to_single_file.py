@@ -136,6 +136,27 @@ def adjust_links_in_doc_body(doc_body):
         flags=re.MULTILINE
     )
 
+    # remove videos
+    doc_body = re.sub(
+        r'<video[^§]*?</video>',
+        '',
+        doc_body,
+        flags=re.MULTILINE
+    )
+
+    # remove dark mode images
+    doc_body = re.sub(
+        r'.*{: .darkmode-img }',
+        '',
+        doc_body
+    )
+    doc_body = re.sub(
+        r'<img [^>]*class="darkmode-img"[^>]*>',
+        '',
+        doc_body,
+        flags=re.MULTILINE
+    )
+
     # replace '<img>' HTML tags with Markdown's '![]()' construct
     doc_body = re.sub(
         r'<img src="([^"]*)"[^§]*?/>',
