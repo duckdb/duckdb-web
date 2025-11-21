@@ -1,0 +1,422 @@
+@use '../abstracts/mixins' as *;
+
+@mixin mobile-padding {
+    @media (max-width: 940px) {
+        padding-right: var(--mobile-horizontal-padding);
+        padding-left: var(--mobile-horizontal-padding);
+    }
+}
+
+.duckcon7 {
+    --primary-font-stack: "SuisseIntl", sans-serif;
+    --mobile-horizontal-padding: 15px;
+
+    // Override the max-width for the header content
+    header .headerline .headercontent {
+        @include mobile-padding;
+        max-width: var(--page-max-width-large, 1150px);
+    }
+
+    // Override the padding for the main content
+    &.layout_default #main_content_wrap {
+        margin-top: 0;
+        padding: 0;
+    }
+
+    .content > section {
+        margin-bottom: 150px;
+    }
+
+    .divider {
+        width: 100%;
+        height: 1px;
+        max-width: var(--page-max-width-large, 1150px);
+        margin: 150px auto;
+        background-color: var(--grey-30, #4c4c4c);
+        border: none;
+    }
+
+    .hero {
+        @include code-large;
+        --hero-padding: 20px;
+        --hero-footer-button-size: 36px;
+
+        height: 100vh;
+        position: relative;
+        color: var(--yellow-20);
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--hero-padding);
+        }
+
+        .hero-footer-content {
+            display: inline-flex;
+            gap: 50px;
+        }
+
+        .hero-footer-column {
+            flex: 1;
+            white-space: nowrap;
+
+            p {
+                margin: 0;
+            }
+        }
+
+        .hero-footer-button {
+            @include reset-button;
+            position: absolute;
+            right: 0;
+            left: 0;
+            margin: auto;
+            bottom: var(--hero-padding);
+            width: var(--hero-footer-button-size);
+            height: var(--hero-footer-button-size);
+        }
+    }
+
+    .program {
+        --first-column-width: 90px;
+        --td-padding: 10px;
+
+        table {
+            display: table;
+            table-layout: fixed;
+        }
+
+        thead, tbody, tr {
+            width: 100%;
+        }
+
+        tr {
+            display: grid;
+            grid-template-columns: var(--first-column-width) 1.7fr 1fr 1fr;
+
+            @media (max-width: 940px) {
+                grid-template-columns: var(--first-column-width) 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+        }
+
+        td {
+            border-bottom: none;
+            padding: var(--td-padding);
+        }
+
+        .button {
+            margin-right: 0;
+        }
+
+        tbody tr {
+            align-items: center;
+
+            td:first-child {
+                @include code-standard;
+                color: var(--main-text-secondary-color, #B2B2B2);
+            }
+
+            td:nth-child(3) {
+                color: var(--main-text-tertiary-color);
+
+                @media (max-width: 940px) {
+                    grid-column: span 2;
+                    text-align: center;
+                }
+            }
+
+            td:nth-child(4) {
+                @media (max-width: 940px) {
+                    grid-column: span 2;
+                    text-align: center;
+                }
+            }
+        }
+
+        .table-section {
+            margin-top: 50px;
+        }
+
+        .table-section-title {
+            margin-left: calc(var(--first-column-width) + var(--td-padding));
+            margin-bottom: 30px;
+        }
+
+        .table-title {
+            // Both rules are duplicates of the title-1 mixin, but we need to override the font-size and font-weight
+            font-size:var(--type-title-1, 18px);
+            font-weight: 600;
+        }
+
+        .button {
+            text-decoration: none;
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+
+    .announcement {
+        padding: 260px 0 80px;
+        text-align: center;
+        font-family: var(--primary-font-stack);
+        font-size: 38px;
+        line-height: 120%;
+        letter-spacing: -0.095px;
+
+        p {
+            margin: 0 auto;
+        }
+
+        @media (max-width: 940px) {
+            padding-right: var(--mobile-horizontal-padding);
+            padding-left: var(--mobile-horizontal-padding);
+        }
+    }
+
+    .slider {
+        @include tiny;
+        .swiper {
+            width: 100%;
+            height: 100%;
+          }
+
+          .swiper-slide {
+            width: 50vw !important;
+            transform: scale(0.8);
+            transform-origin: top;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+          }
+
+          .swiper-slide-prev {
+            transform-origin: top right;
+          }
+
+          .swiper-slide-next {
+            transform-origin: top left;
+          }
+
+          .swiper-slide-active {
+            transform: scale(1);
+          }
+      
+          .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            overflow: hidden;
+          }
+          
+          .swiper-slide p {
+            margin-top: 10px;
+            margin-bottom: 0;
+          }
+
+          .swiper-button-next,
+          .swiper-button-prev {
+            --icon-size: 36px;
+            --icon-offset: 50px;
+
+            top: 0;
+            height: 100%;
+            width: 20%;
+
+            svg {
+                background-color: rgba(108, 108, 108, 0.50);
+                border-radius: 50%;
+                width: var(--icon-size);
+                height: var(--icon-size);
+                padding: 9px;
+
+                path {
+                    fill: var(--main-text-primary-color);
+                }
+            }
+          }
+
+          .swiper-button-prev {
+            justify-content: flex-start;
+            left: 0;
+            background: linear-gradient(270deg, rgba(13, 13, 13, 0.00) 0%, rgba(13, 13, 13, 0.80) 78.79%);
+
+            svg {
+                margin-left: var(--icon-offset);
+            }
+          }
+
+          .swiper-button-next {
+            justify-content: flex-end;
+            right: 0;
+            background: linear-gradient(90deg, rgba(13, 13, 13, 0.00) 0%, rgba(13, 13, 13, 0.80) 78.79%);
+
+            svg {
+                margin-right: var(--icon-offset);
+            }
+          }
+    }
+
+    .section-header {
+        --section-header-padding: 40px;
+
+        margin-right: auto;
+        margin-left: auto;
+        padding-right: var(--section-header-padding);
+        padding-left: var(--section-header-padding);
+        text-align: center;
+        
+        @media (max-width: 940px) {
+            --section-header-padding: 10px;
+        }
+    }
+
+    .speakers {
+        @include mobile-padding;
+    }
+
+    .speakers .speakers-list {
+        @include reset-unordered-list;
+        --columns: 2;
+
+        display: grid;
+        grid-template-columns: repeat(var(--columns), 1fr);
+        grid-row-gap: 32px;
+        grid-column-gap: 16px;
+        margin-top: 50px;
+
+        .speaker-item {
+            @include reset-list-item;
+        }
+
+        .postpreview {
+            width: 100%;
+            height: 100%;
+
+            .postimg {
+                aspect-ratio: 1;
+            }
+
+            a::after {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 770px) {
+            --columns: 4;
+        }
+    }
+
+    @media only screen and (max-width: 940px) {
+        section.venue-access .feature-list .featurebox {
+            width: calc(50% - 10px);
+        }
+    }
+
+    @media only screen and (max-width: 660px) {
+        section.venue-access .feature-list .featurebox {
+            width: 100%;
+        }
+    }
+
+    .venue-access {
+        @include mobile-padding;
+    }
+
+    .sponsors {
+        @include mobile-padding;
+
+        .sponsors-list {
+            @include reset-unordered-list;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+
+            li {
+                @include reset-list-item;
+            }
+        }
+
+    }
+
+    .map {
+        @include mobile-padding;
+
+        .embedded-map {
+            border-radius: 20px;
+            overflow: hidden;
+            width: 100%;
+            height: 438px;
+            margin-bottom: 100px;
+        }
+
+        .map-menu {
+            @include reset-unordered-list;
+            @include tiny;
+
+            display: flex;
+            justify-content: flex-end;
+            gap: 25px;
+            margin-bottom: 15px;
+
+            li {
+                @include reset-list-item;
+
+                a::after {
+                    display: none !important;
+                }
+            }
+        }
+
+        .map-marker {
+            background-image: url('/images/events/duckcon7/duckdb-pin.svg');
+            background-size: cover;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: relative;
+
+            &::after {
+                position: absolute;
+                left: calc(100% + 10px);
+                display: block;
+                content: 'Pakhuis de Zwijger';
+                background-color: var(--grey-100);
+                font-size: 15px;
+                font-weight: 600;
+                padding: 10px;
+                border-radius: 44px;
+                color: var(--main-body-background-color);
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .join-us {
+        @include mobile-padding;
+    }
+
+    .join-us .card {
+        padding: 30px;
+        margin: 0 auto;
+        border-radius: 15px;
+        border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
+        background-color: rgba(24, 24, 24, 0.60);
+        text-align: center;
+
+        .button {
+            margin: 25px 0 0;
+        }
+    }
+}

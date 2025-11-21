@@ -1,0 +1,46 @@
+- date: 2026-04-10
+  title: Friday, 10. April 2026
+  sessions:
+    - venue opens:
+      title: Venue opens
+      timetable:
+        - time: "14:00"
+          title: Food, Drinks and Merchandise in the Foyer <a href=https://maps.app.goo.gl/vGe9ZJcwye8zqMxo6">Pakhuis de Zwijger, Piet Heinkade 179, 1019 HC Amsterdam, Netherland<a/>
+    - first session:
+      title: First session
+      timetable:
+        - time: "15:00"
+          title: Welcome and opening remarks
+          speaker: Hannes Mühleisen and Mark Raasveldt, DuckDB Labs
+          livestream_url: "#"
+        - time: "15:20"
+          title: "Airport for DuckDB: Letting DuckDB take Apache Arrow Flights"
+          speaker: Rusty Conover
+          livestream_url: "#"
+        - time: "15:40"
+          title: "Ibis, DuckDB, and GeoParquet: Making geospatial analytics fast, simple, and Pythonic"
+          speaker: Naty Clementi
+          livestream_url: "#"
+        - time: "16:00"
+          title: Coffee break
+    - second session:
+      title: Second session
+      timetable:
+        - time: "16:20"
+          title: Introducing a SQL-based metrics layer powered by DuckDB
+          speaker: Mike Driscoll, Rill Data
+          livestream_url: "#"
+        - time: "16:40"
+          title: Stock data analytics with DuckDB
+          speaker: "Ryan Hamilton, TimeStored"
+          livestream_url: "#"
+    - lightning talks:
+      title: Lightning talks
+      timetable:
+        - time: "17:00"
+          title: "zoekeend: A search engine for information retrieval experiments based on DuckDB"
+          speaker: Djoerd Hiemstra, Radboud University
+          livestream_url: "#"
+        - time: "17:05"
+          title: Unlocking graph analytics in DuckDB with SQL/PGQ
+          speaker: Daniël ten Wolde, CWI

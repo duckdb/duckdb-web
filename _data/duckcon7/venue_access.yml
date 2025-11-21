@@ -1,0 +1,12 @@
+- icon: /images/icons/train.svg
+  title: Public transport
+  description: The easiest way to access the venue is taking public transport from Amsterdam Centraal station. 
+  url: "#"
+- icon: /images/icons/bicycle.svg
+  title: Bicycle parking
+  description: Bicycle parking is available in front of the building. For those arriving by car, there is a parking garage next to the venue..
+  url: "#"
+- icon: /images/icons/wheelchair.svg
+  title: Accessibility
+  description: Amsterdam Centraal station,  our recommended public transport, and Pakhuis de Zwijger are wheelchair-accessible.
+  url: "#"
