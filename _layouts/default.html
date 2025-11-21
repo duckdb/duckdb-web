@@ -142,6 +142,9 @@
 	{% if page.body_class contains "installation" %}
 	<script src="/js/install.js" defer></script>
 	{% endif %}
+	{% if page.body_class contains "wasm" %}
+	<script src="/js/wasm.js" defer></script>
+	{% endif %}
 
 </body>
 </html>
