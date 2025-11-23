@@ -1,4 +1,4 @@
--- Directly query Parquet file in S3
+-- Directly query Parquet file over HTTPS
 SELECT
     station_name,
     count(*) AS num_services
