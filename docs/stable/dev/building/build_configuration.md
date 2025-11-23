@@ -56,7 +56,7 @@ Core extensions can be built as part of DuckDB via the `CORE_EXTENSIONS` flag, t
 CORE_EXTENSIONS='tpch;httpfs;fts;json;parquet' make
 ```
 
-More on this topic at [building duckdb extensions]({% link docs/stable/dev/building/building_extensions.md %}).
+More on this topic at [building DuckDB extensions]({% link docs/stable/dev/building/building_extensions.md %}).
 
 ## Package Flags
 
