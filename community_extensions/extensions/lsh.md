@@ -8,10 +8,10 @@ excerpt: |
 extension:
   name: lsh
   description: Extension for locality-sensitive hashing (LSH)
-  version: 0.1.1
+  version: 0.2.0
   language: Rust
   build: cargo
-  license: GPL-3.0
+  license: MIT
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl"
   requires_toolchains: "rust;python3"
   maintainers:
@@ -20,14 +20,10 @@ extension:
 
 repo:
   github: princeton-ddss/lsh
-  ref: 6400a7b6ca05e9aaa2300573904e000933a317a8
+  ref: f71843eeea4817ad4555cc989634fa19b845a410
 
 docs:
   hello_world: |
-    -- Install and load the extension
-    INSTALL lsh FROM community;
-    LOAD lsh;
-
     -- Create toy data
     CREATE TEMPORARY TABLE temp_names AS
     SELECT * FROM (
@@ -36,14 +32,6 @@ docs:
             ('Robert Smith'),
             (NULL),
             ('Charlotte Brown'),
-            ('David Martinez'),
-            ('Emily Davis'),
-            ('Michael Wilson'),
-            ('Sophia Taylor'),
-            (NULL),
-            ('James Anderson'),
-            ('Olivia Thomas'),
-            ('Benjamin Lee')
     ) AS t(name);
 
     -- Apply MinHash
@@ -54,8 +42,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 468
-extension_download_count_pretty: 468
+extension_download_count: 493
+extension_download_count_pretty: 493
 image: '/images/community_extensions/social_preview/preview_community_extension_lsh.png'
 layout: community_extension_doc
 ---
@@ -81,11 +69,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name  | function_type |                                      description                                      |                             comment                             |                                 examples                                  |
-|-----------------|---------------|---------------------------------------------------------------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------------------|
-| lsh_min         | scalar        | Computes a band hash vector for each input string based on its MinHash signature      | lsh_min(string, ngram_width, band_count, band_size, seed)       | [SELECT lsh_min('Princeton University', 2, 3, 2, 123);]                   |
-| lsh_min32       | scalar        | Computes a band hash vector for each input string based on its MinHash signature      | Reduces each band hash to 32 bits                               | [SELECT lsh_min32('Princeton University', 2, 3, 2, 123);]                 |
-| lsh_euclidean   | scalar        | Computes a band hash vector for each input point based on its Euclidean LSH signature | lsh_euclidean(array, bucket_width, band_count, band_size, seed) | [SELECT lsh_euclidean(ARRAY[1.1, 2.2, 3.3, 5.8, 3.9], 0.5, 2, 3, 123);]   |
-| lsh_euclidean32 | scalar        | Computes a band hash vector for each input point based on its Euclidean LSH signature | Reduces each band hash to 32 bits                               | [SELECT lsh_euclidean32(ARRAY[1.1, 2.2, 3.3, 5.8, 3.9], 0.5, 2, 3, 123);] |
+|  function_name  | function_type |                                               description                                                |                       comment                        | examples |
+|-----------------|---------------|----------------------------------------------------------------------------------------------------------|------------------------------------------------------|----------|
+| lsh_min         | scalar        | Computes band hashes for each input string (or list of existing shingles) based on its MinHash signature | Produces list of 64-bit band hashes                  | NULL     |
+| lsh_min32       | scalar        | Computes band hashes for each input string (or list of existing shingles) based on its MinHash signature | Reduces each band hash to 32 bits                    | NULL     |
+| lsh_euclidean   | scalar        | Computes band hashes for each input point based on its Euclidean LSH signature                           | Produces list of 64-bit band hashes                  | NULL     |
+| lsh_euclidean32 | scalar        | Computes band hashes for each input point based on its Euclidean LSH signature                           | Reduces each band hash to 32 bits                    | NULL     |
+| lsh_jaccard     | scalar        | Computes Jaccard similarity for each input string pair                                                   | Accepts ngram argument, unlike core Jaccard function | NULL     |
 
 

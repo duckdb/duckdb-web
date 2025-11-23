@@ -25,10 +25,10 @@ docs:
   extended_description: |
     Adds support for the Lua embedded scripting language to DuckDB.
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 662
-extension_download_count_pretty: 662
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 747
+extension_download_count_pretty: 747
 image: '/images/community_extensions/social_preview/preview_community_extension_lua.png'
 layout: community_extension_doc
 ---

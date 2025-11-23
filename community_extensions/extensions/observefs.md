@@ -15,6 +15,7 @@ extension:
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64;windows_amd64_mingw"
   maintainers:
     - dentiny
+    - peterxcli
 
 repo:
   github: dentiny/duckdb-filesystem-observability
@@ -33,8 +34,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 694
-extension_download_count_pretty: 694
+extension_download_count: 731
+extension_download_count_pretty: 731
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---

@@ -7,7 +7,7 @@ title: SELECT Statement
 
 The `SELECT` statement retrieves rows from the database.
 
-### Examples
+## Examples
 
 Select all columns from the table `tbl`:
 
@@ -58,7 +58,7 @@ SELECT d
 FROM (SELECT 1 AS a, 2 AS b) d;
 ```
 
-### Syntax
+## Syntax
 
 The `SELECT` statement retrieves rows from the database. The canonical order of a `SELECT` statement is as follows, with less common clauses being indented:
 
@@ -79,7 +79,7 @@ Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause]({% lin
 
 As the `SELECT` statement is so complex, we have split up the syntax diagrams into several parts. The full syntax diagram can be found at the bottom of the page.
 
-## `SELECT` Clause
+### `SELECT` Clause
 
 <div id="rrdiagram3"></div>
 
@@ -87,43 +87,43 @@ The [`SELECT` clause]({% link docs/preview/sql/query_syntax/select.md %}) specif
 
 > Column names are case-insensitive. See the [Rules for Case Sensitivity]({% link docs/preview/sql/dialect/keywords_and_identifiers.md %}#rules-for-case-sensitivity) for more details.
 
-## `FROM` Clause
+### `FROM` Clause
 
 <div id="rrdiagram4"></div>
 
 The [`FROM` clause]({% link docs/preview/sql/query_syntax/from.md %}) specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
 
-## `SAMPLE` Clause
+### `SAMPLE` Clause
 
 <div id="rrdiagram10"></div>
 
 The [`SAMPLE` clause]({% link docs/preview/sql/query_syntax/sample.md %}) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a dataset. The `SAMPLE` clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the where clause or any aggregates). See the [Samples]({% link docs/preview/sql/samples.md %}) page for more information.
 
-## `WHERE` Clause
+### `WHERE` Clause
 
 <div id="rrdiagram5"></div>
 
 The [`WHERE` clause]({% link docs/preview/sql/query_syntax/where.md %}) specifies any filters to apply to the data. This allows you to select only a subset of the data in which you are interested. Logically the `WHERE` clause is applied immediately after the `FROM` clause.
 
-## `GROUP BY` and `HAVING` Clauses
+### `GROUP BY` and `HAVING` Clauses
 
 <div id="rrdiagram6"></div>
 
 The [`GROUP BY` clause]({% link docs/preview/sql/query_syntax/groupby.md %}) specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause. If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
 
-## `WINDOW` Clause
+### `WINDOW` Clause
 
 <div id="rrdiagram7"></div>
 
 The [`WINDOW` clause]({% link docs/preview/sql/query_syntax/window.md %}) allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
 
-## `QUALIFY` Clause
+### `QUALIFY` Clause
 
 <div id="rrdiagram11"></div>
 
 The [`QUALIFY` clause]({% link docs/preview/sql/query_syntax/qualify.md %}) is used to filter the result of [`WINDOW` functions]({% link docs/preview/sql/functions/window_functions.md %}).
 
-## `ORDER BY`, `LIMIT` and `OFFSET` Clauses
+### `ORDER BY`, `LIMIT` and `OFFSET` Clauses
 
 <div id="rrdiagram8"></div>
 
@@ -132,13 +132,13 @@ Logically they are applied at the very end of the query.
 The `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
 The `LIMIT` clause restricts the amount of rows fetched, while the `OFFSET` clause indicates at which position to start reading the values.
 
-## `VALUES` List
+### `VALUES` List
 
 <div id="rrdiagram9"></div>
 
 [A `VALUES` list]({% link docs/preview/sql/query_syntax/values.md %}) is a set of values that is supplied instead of a `SELECT` statement.
 
-## Row IDs
+### Row IDs
 
 For each table, the [`rowid` pseudocolumn](https://docs.oracle.com/cd/B19306_01/server.102/b14200/pseudocolumns008.htm) returns the row identifiers based on the physical storage.
 
@@ -176,7 +176,7 @@ The `rowid` values are stable within a transaction.
 
 > If there is a user-defined column named `rowid`, it shadows the `rowid` pseudocolumn.
 
-## Common Table Expressions
+### Common Table Expressions
 
 <div id="rrdiagram2"></div>
 

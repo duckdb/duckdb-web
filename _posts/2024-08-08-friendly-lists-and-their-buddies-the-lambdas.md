@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Friendly Lists and Their Buddies, the Lambdas"
-author: "Tania Bogatsch and Maia de Graaf"
+author: "Tania Bogatsch, Maia de Graaf"
 thumb: "/images/blog/thumbs/lambda.svg"
 image: "/images/blog/thumbs/lambda.png"
 excerpt: ""

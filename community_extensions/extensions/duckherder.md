@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckherder
   description: Run duckdb query on remote server
-  version: 0.0.2
+  version: 0.0.3
   language: C++
   build: cmake
   license: MIT
@@ -19,19 +19,22 @@ extension:
 
 repo:
   github: dentiny/duckdb-distributed-execution
-  ref: 1a251b4d62abc66b747fa5f6e6054bba432307f3
+  ref: 4a03f33228eac4748172bea5d6834b6839e431ce
 
 docs:
   hello_world: |
     SELECT duckherder_start_local_server(8815); ATTACH DATABASE 'dh' (TYPE duckherder, server_host 'localhost', server_port 8815);
   extended_description: |
     This extension is built on storage extension, to execute query on remote server and transfer data back with arrow flight.
+    For remote and distributed execution, there're two key components: driver and worker(s).
+    As their names suggest, driver node is the control plane, and worker nodes do the real execution tasks.
+    Users are allowed to implement their own driver and worker(s), and register to the duckdb client-side, as long they speaks duckherder dialect (i.e., grpc stubs and arrow flight).
     From users' perspective, all DML and DDL SQL statements should be used exactly the same as local duckdb.
 
-extension_star_count: 22
-extension_star_count_pretty: 22
-extension_download_count: 675
-extension_download_count_pretty: 675
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 682
+extension_download_count_pretty: 682
 image: '/images/community_extensions/social_preview/preview_community_extension_duckherder.png'
 layout: community_extension_doc
 ---
@@ -60,10 +63,15 @@ LOAD {{ page.extension.name }};
 |             function_name             | function_type | description | comment | examples |
 |---------------------------------------|---------------|-------------|---------|----------|
 | duckherder_clear_query_recorder_stats | scalar        | NULL        | NULL    |          |
+| duckherder_get_query_execution_stats  | table         | NULL        | NULL    |          |
 | duckherder_get_query_history          | table         | NULL        | NULL    |          |
+| duckherder_get_worker_count           | scalar        | NULL        | NULL    |          |
 | duckherder_load_extension             | scalar        | NULL        | NULL    |          |
+| duckherder_register_or_replace_driver | scalar        | NULL        | NULL    |          |
 | duckherder_register_remote_table      | pragma        | NULL        | NULL    |          |
+| duckherder_register_worker            | scalar        | NULL        | NULL    |          |
 | duckherder_start_local_server         | scalar        | NULL        | NULL    |          |
+| duckherder_start_standalone_worker    | scalar        | NULL        | NULL    |          |
 | duckherder_stop_local_server          | scalar        | NULL        | NULL    |          |
 | duckherder_unregister_remote_table    | pragma        | NULL        | NULL    |          |
 

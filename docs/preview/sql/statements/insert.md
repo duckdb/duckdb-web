@@ -6,7 +6,7 @@ title: INSERT Statement
 
 The `INSERT` statement inserts new data into a table.
 
-### Examples
+## Examples
 
 Insert the values 1, 2, 3 into `tbl`:
 
@@ -50,7 +50,7 @@ INSERT OR REPLACE INTO tbl (i)
     VALUES (1);
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>
 
