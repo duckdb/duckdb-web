@@ -34,7 +34,7 @@ current_duckdb_r_version: 1.4.2
 current_duckdb_rust_version: 1.4.2
 current_duckdb_wasm_version: 1.4.2
 current_duckdb_csharp_version: 1.4.1
-current_duckdb_dart_version: 1.2.2
+current_duckdb_dart_version: 1.4.4
 current_duckdb_java_version: 1.4.2.0
 current_duckdb_java_short_version: 1.4.2
 livereload: true
