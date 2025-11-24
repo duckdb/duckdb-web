@@ -329,10 +329,10 @@ docs:
 
     > This extension is experimental and actively being developed. See the repository for the latest updates and examples.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 505
-extension_download_count_pretty: 505
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 551
+extension_download_count_pretty: 551
 image: '/images/community_extensions/social_preview/preview_community_extension_fakeit.png'
 layout: community_extension_doc
 ---

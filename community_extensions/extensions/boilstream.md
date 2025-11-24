@@ -108,8 +108,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 662
-extension_download_count_pretty: 662
+extension_download_count: 687
+extension_download_count_pretty: 687
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---
