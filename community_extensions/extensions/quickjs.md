@@ -61,10 +61,10 @@ docs:
     
     This extension is experimental and potentially unstable. Do not use it in production.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 716
-extension_download_count_pretty: 716
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 742
+extension_download_count_pretty: 742
 image: '/images/community_extensions/social_preview/preview_community_extension_quickjs.png'
 layout: community_extension_doc
 ---
