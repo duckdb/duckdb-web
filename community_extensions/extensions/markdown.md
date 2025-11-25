@@ -96,10 +96,10 @@ docs:
     
     The extension is built using cmark-gfm and includes a comprehensive test suite with 218+ passing assertions, ensuring reliable performance and accuracy for production use.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 699
-extension_download_count_pretty: 699
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 709
+extension_download_count_pretty: 709
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---
