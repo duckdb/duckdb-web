@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_delta_share
   description: DuckDB Extension for Delta Sharing
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT
@@ -18,12 +18,12 @@ extension:
 
 repo:
   github: cwiq-os/duck_delta_share
-  ref: fc93bee88ed003dc2787d5f9193a16da255bc876
+  ref: cb54b8a94e9803c4d7c29813c1f20db86402c497
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 690
-extension_download_count_pretty: 690
+extension_download_count: 691
+extension_download_count_pretty: 691
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_delta_share.png'
 layout: community_extension_doc
 ---
