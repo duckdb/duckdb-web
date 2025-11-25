@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 736
-extension_download_count_pretty: 736
+extension_download_count: 756
+extension_download_count_pretty: 756
 image: '/images/community_extensions/social_preview/preview_community_extension_msolap.png'
 layout: community_extension_doc
 ---
