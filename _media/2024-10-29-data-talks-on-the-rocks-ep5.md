@@ -18,4 +18,4 @@ length: "80 min"
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Podcast** | [Data Talks on the Rocks by Rill Data](https://www.youtube.com/playlist?list=PL_ZoDsg2yFKgr_YEc4XOY0wlRLqzyR07q) |
 | **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
-| **YouTube** | [DuckDB – Data Talks on the Rocks](https://www.youtube.com/watch?v=a-RmhY5RPVg) |
+| **YouTube** | [DuckDB – Data Talks on the Rocks](https://www.youtube.com/watch?v=831D6MZCJ28) |
