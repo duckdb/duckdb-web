@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: onelake
   description: This extension allows you to connect DuckDB to Microsoft Fabric OneLake workspaces and lakehouses, enabling you to query data stored in OneLake directly from DuckDB.
-  version: 1.0.1
+  version: 1.0.2
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
   excluded_platforms: "windows_amd64_mingw"
 repo:
   github: datumnova/duckdb_onelake
-  ref: 20647375647e2bf62f31f7fb0b926f1ff65d10a6
+  ref: 838c17038de3756b43afd6d2b4b1d04ea412dfe7
   canonical_name: onelake
 
 docs:
@@ -52,6 +52,24 @@ docs:
     --     CHAIN 'cli'
     -- );
 
+    -- Optional: use preissued tokens stored in env variables (defaults shown), if they are already available with the same name, no need to set them here (only update the SET commands if the names are different
+    --SET onelake_env_fabric_token_variable = 'FABRIC_API_TOKEN';
+    --SET onelake_env_storage_token_variable = 'AZURE_STORAGE_TOKEN';
+    --CREATE SECRET onelake_env (
+    --    TYPE ONELAKE,
+    --    PROVIDER credential_chain,
+    --    CHAIN 'env'
+    --);
+    -- Combine chain steps if you want CLI fallback
+    --CREATE SECRET onelake_env_chain (
+    --    TYPE ONELAKE,
+    --    PROVIDER credential_chain,
+    --    CHAIN 'cli, env'
+    --);
+
+    -- Optionally keep the token in-session instead of touching the shell
+    --SET VARIABLE AZURE_STORAGE_TOKEN = '<preissued_onelake_access_token>';
+
     -- Attach to your OneLake workspace and lakehouse
     ATTACH '<your_workspace_name>/<your_lakehouse_name>.Lakehouse'
         AS <your_connection_name>
@@ -65,7 +83,6 @@ docs:
 
    
 
-
   extended_description: |
     This extension enables DuckDB to connect to Microsoft Fabric OneLake workspaces and lakehouses, allowing users to query data stored in OneLake directly from DuckDB. 
     It supports authentication via service principals or credential chains (e.g., Azure CLI) and provides seamless integration with OneLake's data storage capabilities.
@@ -74,10 +91,10 @@ docs:
     Current limitations:
     - Only read access is supported; write operations are not implemented.
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 499
-extension_download_count_pretty: 499
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 543
+extension_download_count_pretty: 543
 image: '/images/community_extensions/social_preview/preview_community_extension_onelake.png'
 layout: community_extension_doc
 ---
@@ -134,6 +151,8 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                                                                            | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                                                                           | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                                                                          | VARCHAR    | GLOBAL | []      |
+| onelake_env_fabric_token_variable    | Environment variable name that stores the Fabric API access token                                                                               | VARCHAR    | GLOBAL | []      |
+| onelake_env_storage_token_variable   | Environment variable name that stores the OneLake storage access token                                                                          | VARCHAR    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                                                                                | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                                                                     | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                                                                   | VARCHAR    | GLOBAL | []      |

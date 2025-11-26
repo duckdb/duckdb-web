@@ -104,7 +104,7 @@ uvx pre-commit install
 
 This will run all required checks before letting your commit pass.
 
-You can also install a post-checkout hook that always runs `git submodule update --init --recursive`. When you change branches between main and a bugfix branch, this makes sure the duckdb submodule is always correctly initialized:
+You can also install a post-checkout hook that always runs `git submodule update --init --recursive`. When you change branches between main and a bugfix branch, this makes sure the `duckdb` submodule is always correctly initialized:
 
 ```bash
 uvx pre-commit install --hook-type post-checkout

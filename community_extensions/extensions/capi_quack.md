@@ -25,10 +25,10 @@ docs:
     The capi_quack extension is based on DuckDB's [C/C++ C API template](https://github.com/duckdb/extension-template-c/).
 
 
-extension_star_count: 20
-extension_star_count_pretty: 20
-extension_download_count: 689
-extension_download_count_pretty: 689
+extension_star_count: 22
+extension_star_count_pretty: 22
+extension_download_count: 751
+extension_download_count_pretty: 751
 image: '/images/community_extensions/social_preview/preview_community_extension_capi_quack.png'
 layout: community_extension_doc
 ---

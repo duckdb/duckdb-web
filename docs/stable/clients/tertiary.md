@@ -20,3 +20,9 @@ title: Tertiary Clients
 | [Scala](https://www.duck4s.com/docs/index.html)      | [Salar Rahmanian](https://www.softinio.com)           | Tertiary     |         |
 | [Swift]({% link docs/stable/clients/swift.md %})     | The DuckDB team                                       | Tertiary     |         |
 | [Zig](https://github.com/karlseguin/zuckdb.zig)      | [karlseguin](https://github.com/karlseguin)           | Tertiary     |         |
+
+## Support Tiers
+
+There are three tiers of support for clients. [Primary clients and secondary clients]({% link docs/stable/clients/overview.md %}) are guaranteed to receive new features. For tertiary clients, there are no such guarantees as most are maintained by third-party contributors.
+
+For the license of each client, please consult their repositories.

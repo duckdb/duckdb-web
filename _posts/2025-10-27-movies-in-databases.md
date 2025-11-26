@@ -64,7 +64,7 @@ dim_x = vid.get_meta_data()['size'][0]
 dim_y = vid.get_meta_data()['size'][1]
 rows_per_frame = dim_y * dim_x
 
-# setup a duckdb database and table
+# setup a DuckDB database and table
 con = duckdb.connect()
 con.execute("ATTACH 'charade.duckdb' AS m (STORAGE_VERSION 'latest'); USE m;")
 con.execute("CREATE TABLE movie (i BIGINT, y USMALLINT, x USMALLINT, r UTINYINT, g UTINYINT, b UTINYINT)")
