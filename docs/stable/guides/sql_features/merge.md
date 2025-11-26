@@ -163,7 +163,6 @@ SELECT * FROM master_ducks WHERE is_current = false ORDER BY duck_id, begin_date
 
 ### Step 6: Examine a Single Duck
 
-Sometimes the concept of SCD is hard to realize when the data sits in two different tables.
 To better illustrate the concept lets examine a single duck, to drive home the value add for type 2 SCDs.
 If we select from the master table after running the merge statement and the post update insert statement, we can see the individual rows for `Quackers`.
 
