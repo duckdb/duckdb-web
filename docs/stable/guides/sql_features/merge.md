@@ -1,4 +1,9 @@
-# Guide: Efficient Data Upserts with DuckDB — Mastering the MERGE Statement for SCD Type 2
+---
+layout: docu
+redirect_from:
+- /docs/guides/sql_features/merge
+title: Merge Statement for SCD Type 2
+---
 
 This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (introduced in v1.4.0) to perform upserts and build **Slowly Changing Dimension Type 2 (SCD Type 2)** tables. SCD Type 2 lets you keep full historical versions of records while clearly identifying the current version — perfect for audit trails, data warehousing, and analytical workloads.
 
@@ -32,6 +37,7 @@ This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (i
 We’ll track ducks and preserve history whenever their name, breed, or location changes.
 
 #### Step 1: Create the Incoming (Source) Table
+
 This represents today’s transactional data.
 
 ```sql
@@ -53,7 +59,9 @@ INSERT INTO incoming_ducks VALUES
 
 ```
 
-#### Step 1: Create the Incoming (Source) Table
+#### Step 2: Create the Master (Target) Table
+
+This represents the type 2 SCD data, with history.
 
 ```sql
 CREATE TABLE IF NOT EXISTS master_ducks (
@@ -76,7 +84,7 @@ INSERT INTO master_ducks VALUES
     (nextval('duck_record_seq'), 105, 'Puddles',  'Indian Runner', 'Pond A', CURRENT_DATE - INTERVAL '2 days', NULL, true);
 ```
 
-#### Step 3: Create the Incoming (Source) Table
+#### Step 3: Perform the Merge Statement
 
 ```sql
 MERGE INTO master_ducks AS target
