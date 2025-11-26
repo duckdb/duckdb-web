@@ -183,7 +183,7 @@ Returns:
 
 - The `end date` is NOT NULL, it has the date when this ducks data was updated.
 - The `is_current` is `false` indicating this is a historical record.
-- The field that will change is `location`, it will be updated to `Pond B`.
+- The field that will change is `location`, it is currently `Pond A` and will be updated to `Pond B`.
 
 To view the current row of data that is current: 
 
