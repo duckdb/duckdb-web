@@ -5,20 +5,20 @@ redirect_from:
 title: Merge Statement for SCD Type 2
 ---
 
-This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (introduced in v1.4.0) to perform upserts and build **Slowly Changing Dimension Type 2 (SCD Type 2)** tables. SCD Type 2 lets you keep full historical versions of records while clearly identifying the current version — perfect for audit trails, data warehousing, and analytical workloads.
+This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (introduced in v1.4.0) to perform upserts and build [Slowly Changing Dimension Type 2 (SCD Type 2) tables](https://en.wikipedia.org/wiki/Slowly_changing_dimension). Type 2 SCDs let you keep full historical versions of records while clearly identifying the current version, perfect for audit trails, data warehousing, and analytical workloads. Type 2 SCDs are practical when you want to know previous values of your primary key data, when it changed and for how long it was in a particular state.
 
-### Why Use MERGE in DuckDB?
-- Single SQL statement for INSERT + UPDATE + soft DELETE (upsert + expire)
-- Much cleaner and faster than equivalent Python/Pandas logic
-- Full history tracking without hard deletes
-- Works directly on Parquet, CSV, databases, etc., thanks to DuckDB’s connectivity
+## Why Use MERGE in DuckDB?
 
-### Prerequisites
+- Single SQL statement for `INSERT`, `UPDATE`, and soft `DELETE` (upsert and expire).
+- Much cleaner and faster than equivalent Python/Pandas logic.
+- Full history tracking without hard deletes.
+- Works directly on Parquet, CSV, databases, thanks to DuckDB's connectivity!
+
+## Prerequisites
 - DuckDB ≥ 1.4.0
 - Basic SQL knowledge
-- (Optional) DuckDB notebook UI: run `duckdb -ui` → http://localhost:4213/
 
-### Key Terminology
+## Key Terminology
 
 | Term                          | Meaning                                                                                   |
 |-------------------------------|-------------------------------------------------------------------------------------------|
@@ -32,13 +32,17 @@ This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (i
 | **WHEN NOT MATCHED BY SOURCE**| Row disappeared → soft-delete/expire old version                                          |
 | **RETURNING merge_action**    | Optional: shows what happened to each row (INSERT/UPDATE/DELETE)                          |
 
-### Goal: Build an SCD Type 2 Dimension Table
+## Build an SCD Type 2 Dimension Table
 
 We’ll track ducks and preserve history whenever their name, breed, or location changes.
 
-#### Step 1: Create the Incoming (Source) Table
+> DuckDB has a frontend notebook UI, this is great for managing several SQL statements and segmenting your code.
+> The UI ships with the DuckDB CLI, so if you have the CLI installed you can use the front end.
+> To start the notebook front end just run: `duckdb -ui` and you can navigate to [http://localhost:4213/](http://localhost:4213/) to start writing your SQL code inside of your notebooks. Just copy and paste the following code blocks to follow this guide.
 
-This represents today’s transactional data.
+### Step 1: Create the Incoming (source) Table
+
+This table represents today’s transactional data.
 
 ```sql
 CREATE TABLE IF NOT EXISTS incoming_ducks (
@@ -59,9 +63,9 @@ INSERT INTO incoming_ducks VALUES
 
 ```
 
-#### Step 2: Create the Master (Target) Table
+### Step 2: Create the Master (target) Table
 
-This represents the type 2 SCD data, with history.
+This table represents the type 2 SCD data, (i.e. transaction data with history).
 
 ```sql
 CREATE TABLE IF NOT EXISTS master_ducks (
@@ -84,7 +88,9 @@ INSERT INTO master_ducks VALUES
     (nextval('duck_record_seq'), 105, 'Puddles',  'Indian Runner', 'Pond A', CURRENT_DATE - INTERVAL '2 days', NULL, true);
 ```
 
-#### Step 3: Perform the Merge Statement
+### Step 3: Perform the Merge Statement
+
+This statement will perform the merge, it will check for differences between the data of target and source and follow the `WHEN MATCHED` or `WHEN NOT MATCHED` logic specifed.
 
 ```sql
 MERGE INTO master_ducks AS target
@@ -115,7 +121,9 @@ WHEN NOT MATCHED BY TARGET THEN INSERT (
 RETURNING merge_action, *;
 ```
 
-## Step 4: Insert New Current Versions for Changed Records
+### Step 4: Insert New Current Versions for Changed Records
+
+This statement inserts the new current records into the master table. While it's possible to achieve the same result using the `MERGE` statement's `RETURNING` clause, this two-step approach is more straightforward and easier to understand.
 
 ```sql
 INSERT INTO master_ducks (
@@ -138,7 +146,9 @@ WHERE target.is_current = false
   AND target.end_date = CURRENT_DATE - INTERVAL '1 day';
 ```
 
-#### Step 5: Query The Results
+### Step 5: Query The Results
+
+The following queries can be used to examine the data resulting from the `MERGE` statement.
 
 ```sql
 -- All history
@@ -151,21 +161,70 @@ SELECT * FROM master_ducks WHERE is_current = true;
 SELECT * FROM master_ducks WHERE is_current = false ORDER BY duck_id, begin_date DESC;
 ```
 
-### Common Patterns and Variations
+### Step 6: Examine a Single Duck
+
+Sometimes the concept of SCD is hard to realize when the data sits in two different tables.
+To better illustrate the concept lets examine a single duck, to drive home the value add for type 2 SCDs.
+
+If we select from the master table after running the merge statement and the post update insert statement, we can see the individual rows for `Quackers`: 
+
+To view the original row of data that is historical: 
+
+```sql
+SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = false;
+```
+
+Returns:
+
+| record_id | duck_id | duck_name | breed   | location | begin_date   | end_date     | is_current |
+|----------:|--------:|----------:|---------|----------|-------------|--------------|------------|
+| 1         | 101     | Quackers  | Mallard | Pond A   | 2025-11-24  | 2025-11-25   | false      |
+
+**Note**: 
+
+- The `end date` is NOT NULL, it has the date when this ducks data was updated.
+- The `is_current` is `false` indicating this is a historical record.
+- The field that will change is `location`, it will be updated to `Pond B`.
+
+To view the current row of data that is current: 
+
+```sql
+SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = true;
+```
+
+| record_id | duck_id | duck_name | breed   | location | begin_date   | end_date | is_current |
+|----------:|--------:|----------:|---------|----------|-------------|----------|------------|
+| 10        | 101     | Quackers  | Mallard | Pond B   | 2025-11-26  | NULL     | true       |
+
+**Note**: 
+
+- The `end date` is NULL, the NULL in this context indicates this is the latest record.
+- The `is_current` is `true` also indicating this is a current record.
+- The `location` is now `Pond B`.
+
+To view Quackers full data which will contain both rows:
+
+```sql
+SELECT * FROM master_ducks where duck_name = 'Quackers';
+```
+
+| record_id | duck_id | duck_name | breed   | location | begin_date   | end_date | is_current |
+| 1         | 101     | Quackers  | Mallard | Pond A   | 2025-11-24  | 2025-11-25   | false      |
+| 10        | 101     | Quackers  | Mallard | Pond B   | 2025-11-26  | NULL     | true       |
+
+## Common Patterns and Variations
 
 | Use Case                          | Clause to Use                                                      |
 |-----------------------------------|--------------------------------------------------------------------|
-| Simple upsert (no history)        | `WHEN MATCHED THEN UPDATE` + `WHEN NOT MATCHED BY TARGET THEN INSERT` |
-| Upsert + delete missing rows      | Add `WHEN NOT MATCHED BY SOURCE THEN DELETE`                       |
+| Simple upsert (no history)        | `WHEN MATCHED THEN UPDATE` and `WHEN NOT MATCHED BY TARGET THEN INSERT` |
+| Upsert and delete missing rows      | Add `WHEN NOT MATCHED BY SOURCE THEN DELETE`                       |
 | Only insert new, never update     | Omit `WHEN MATCHED`                                                |
 | Return affected rows              | Add `RETURNING merge_action, *`                                    |
 
-### Best Practices
+## Best Practices
 
-Best Practices
-
-- Always match on business key + is_current = true for SCD2
-- Use a surrogate key + sequence for uniqueness
-- Keep end_date NULL for current rows (makes queries faster)
-- Test with RETURNING first
-- Wrap MERGE + INSERT in a transaction when needed
+- Remember that `TARGET` is the master table and `SOURCE` is the incoming table or query.
+- Keep end_date NULL for current rows (makes queries faster).
+- Wrap `MERGE` and `INSERT` statements in a transaction when needed.
+- Use a primary key or a surrogate key for uniqueness.
+- Test with RETURNING first.
