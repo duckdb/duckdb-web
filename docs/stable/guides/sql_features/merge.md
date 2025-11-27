@@ -196,11 +196,11 @@ SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = true;
 
 **Note**: 
 
-- The `end date` is NULL, the NULL in this context indicates this is the latest record.
+- The `end date` is NULL, the NULL in this context indicates this is the latest record for this `duck_id`.
 - The `is_current` is `true` also indicating this is a current record.
 - The `location` is now `Pond B`.
 
-To view Quackers full data which will contain both rows:
+To view all of `Quackers` data, which will contain both current and non-current rows:
 
 ```sql
 SELECT * FROM master_ducks where duck_name = 'Quackers';
