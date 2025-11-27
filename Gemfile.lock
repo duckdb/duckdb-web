@@ -223,7 +223,7 @@ GEM
       ethon (>= 0.9.0)
     unicode-display_width (2.6.0)
     uri (1.1.1)
-    webrick (1.9.1)
+    webrick (1.9.2)
     word_wrap (1.0.0)
 
 PLATFORMS
