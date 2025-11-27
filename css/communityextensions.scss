@@ -44,13 +44,13 @@ body.documentation.communityextensions header .headerline .headercontent .landin
 
 .extension_functions_table + table td:nth-child(1),
 .extension_functions_table + table td:nth-child(5) {
-  font-family: "JetBrainsMono-Regular", "Lucida Console", monospace;
+  font-family: "JetBrainsMono-Regular", monospace;
 }
 
 .extension_settings_table + table td:nth-child(1),
 .extension_settings_table + table td:nth-child(3),
 .extension_settings_table + table td:nth-child(4) {
-  font-family: "JetBrainsMono-Regular", "Lucida Console", monospace;
+  font-family: "JetBrainsMono-Regular", monospace;
 }
 
 a.button {

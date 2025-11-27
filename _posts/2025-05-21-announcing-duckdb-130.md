@@ -99,9 +99,9 @@ DuckDB is used a lot to read from remote files, e.g., Parquet files stored on HT
 ```sql
 .timer on
 .mode trash -- do not show query result
-FROM 's3://duckdb-blobs/data/shakespeare.parquet';
+FROM 'https://blobs.duckdb.org/data/shakespeare.parquet';
 Run Time (s): real ⟨1.456⟩ user 0.037920 sys 0.028510
-FROM 's3://duckdb-blobs/data/shakespeare.parquet';
+FROM 'https://blobs.duckdb.org/data/shakespeare.parquet';
 Run Time (s): real ⟨0.360⟩ user 0.029188 sys 0.007620
 ```
 
@@ -119,8 +119,8 @@ FROM duckdb_external_file_cache();
 │                    path                    │ nr_bytes │ location │ loaded  │
 │                  varchar                   │  int64   │  int64   │ boolean │
 ├────────────────────────────────────────────┼──────────┼──────────┼─────────┤
-│ s3://duckdb-blobs/data/shakespeare.parquet │  1697483 │        4 │ true    │
-│ s3://duckdb-blobs/data/shakespeare.parquet │    16384 │  1681808 │ true    │
+│ https://blobs.duckdb.org/data/shakespeare.parquet │  1697483 │        4 │ true    │
+│ https://blobs.duckdb.org/data/shakespeare.parquet │    16384 │  1681808 │ true    │
 └────────────────────────────────────────────┴──────────┴──────────┴─────────┘
 ```
 

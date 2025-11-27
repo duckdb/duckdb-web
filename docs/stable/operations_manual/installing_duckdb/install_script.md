@@ -13,6 +13,8 @@ To use the [DuckDB install script](https://install.duckdb.org) on Linux and macO
 curl https://install.duckdb.org | sh
 ```
 
+<!-- markdownlint-disable MD040 MD046 -->
+
 <details markdown='1'>
 <summary markdown='span'>
 Click to see the output of the install script.
@@ -48,6 +50,8 @@ To launch DuckDB now, type
 /Users/your_user/.duckdb/cli/latest/duckdb
 ```
 </details>
+
+<!-- markdownlint-enable MD040 MD046 -->
 
 By default, this installs the latest stable version of DuckDB to `~/.duckdb/cli/latest/duckdb`.
 To add the DuckDB binary to your path, append the following line to your shell profile or RC file (e.g., `~/.bashrc`, `~/.zshrc`):

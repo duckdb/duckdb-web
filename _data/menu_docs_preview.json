@@ -477,10 +477,6 @@
                   "url": "analyze"
                 },
                 {
-                  "page": "ALTER DATABASE",
-                  "url": "alter_database"
-                },
-                {
                   "page": "ALTER TABLE",
                   "url": "alter_table"
                 },
@@ -1193,6 +1189,10 @@
             {
               "page": "UI",
               "url": "ui"
+            },
+            {
+              "page": "Vortex",
+              "url": "vortex"
             },
             {
               "page": "VSS",

@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web' }}
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
       with:
         path: '.'
         token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}

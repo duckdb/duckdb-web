@@ -61,7 +61,7 @@ We use the four input files capturing information on cities and airports in the 
 
 <details markdown='1'>
 <summary markdown='span'>
-    [`pop.csv`](/data/cli/pop.csv), the population of each of the top-10 most populous cities.
+    [`pop.csv`]({% link data/cli/pop.csv %}), the population of each of the top-10 most populous cities.
 </summary>
 ```csv
 city,province,population
@@ -80,7 +80,7 @@ Nijmegen,Gelderland,179073
 
 <details markdown='1'>
 <summary markdown='span'>
-    [`area.csv`](/data/cli/area.csv), the area of each of the top-10 most populous cities.
+    [`area.csv`]({% link data/cli/area.csv %}), the area of each of the top-10 most populous cities.
 </summary>
 ```csv
 city,area
@@ -99,7 +99,7 @@ Nijmegen,57.63
 
 <details markdown='1'>
 <summary markdown='span'>
-    [`cities-airports.csv`](/data/cli/cities-airports.csv), the [IATA codes](https://en.wikipedia.org/wiki/IATA_airport_code) of civilian airports serving given cities.
+    [`cities-airports.csv`]({% link data/cli/cities-airports.csv %}), the [IATA codes](https://en.wikipedia.org/wiki/IATA_airport_code) of civilian airports serving given cities.
 </summary>
 ```csv
 city,IATA
@@ -117,7 +117,7 @@ The Hague,RTM
 
 <details markdown='1'>
 <summary markdown='span'>
-    [`airport-names.csv`](/data/cli/airport-names.csv), the airport names belonging to given IATA codes.
+    [`airport-names.csv`]({% link data/cli/airport-names.csv %}), the airport names belonging to given IATA codes.
 </summary>
 ```csv
 IATA,airport name
@@ -129,7 +129,7 @@ RTM,Rotterdam The Hague Airport
 ```
 </details>
 
-You can download all input files as a [single zip file](/data/cli/duckdb-cli-data.zip).
+You can download all input files as a [single zip file]({% link data/cli/duckdb-cli-data.zip %}).
 
 ### Projecting Columns
 
@@ -332,7 +332,7 @@ COPY (
 
 ### Filtering
 
-Filtering is another very common operation. For this, we'll use [`cities-airports.csv` file](/data/cli/cities-airports.csv).
+Filtering is another very common operation. For this, we'll use [`cities-airports.csv` file]({% link data/cli/cities-airports.csv %}).
 For each airport, this file contains its `IATA` code and the main cities that it serves:
 
 ```csv

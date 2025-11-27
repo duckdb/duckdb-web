@@ -45,7 +45,7 @@ To see the available tables run
 SHOW ALL TABLES;
 ```
 
-### ATTACH OPTIONS
+## `ATTACH` Options
 
 A REST Catalog with OAuth2 authorization can also be attached with just an `ATTACH` statement. See the complete list of `ATTACH` options for a REST catalog below. 
 

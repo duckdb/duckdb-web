@@ -3,7 +3,7 @@ layout: docu
 title: DuckDB Docker Container
 ---
 
-DuckDB has an [official Docker image](https://github.com/duckdb/duckdb-docker), which supports both the arm64 (AArch64) and x86_64 (AMD64) architectures.
+DuckDB has an [official Docker image](https://github.com/duckdb/duckdb-docker), which supports both the ARM64 (AArch64) and x86_64 (AMD64) architectures.
 
 ## Usage
 

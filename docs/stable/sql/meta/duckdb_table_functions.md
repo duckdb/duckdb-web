@@ -202,7 +202,7 @@ The `duckdb_log_contexts()` function provides information on the contexts of Duc
 | Column | Description | Type |
 |:-|:---|:-|
 | `context_id` | The identifier of the context. The `context_id` column in the [`duckdb_logs`](#duckdb_logs) table is a foreign key that points to this column. | `UBIGINT` |
-| `scope` | The scope of the context (`connection`, `database` or `file_opener` TODO: + more ? <https://github.com/duckdb/duckdb/pull/15119>). | `VARCHAR` |
+| `scope` | The scope of the context (`connection`, `database` or `file_opener`). | `VARCHAR` |
 | `connection_id` | The identifier of the connection. | `UBIGINT` |
 | `transaction_id` | The identifier of the transaction. | `UBIGINT` |
 | `query_id` | The identifier of the query. | `UBIGINT` |
@@ -216,7 +216,7 @@ The `duckdb_logs()` function returns a table of DuckDB log entries.
 |:-|:---|:-|
 | `context_id` | The identifier of the context of the log entry. Foreign key to the [`duckdb_log_contexts`](#duckdb_log_contexts) table. | `UBIGINT` |
 | `timestamp` | The timestamp of the log entry. | `TIMESTAMP` |
-| `type` | The type of the log entry. TODO: ?? | `VARCHAR` |
+| `type` | The type of the log entry. | `VARCHAR` |
 | `log_level` | The level of the log entry (`TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`). | `VARCHAR` |
 | `message` | The message of the log entry. | `VARCHAR` |
 

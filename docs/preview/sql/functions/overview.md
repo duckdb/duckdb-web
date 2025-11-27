@@ -82,8 +82,8 @@ WHERE function_type = 'scalar'
 ORDER BY function_name;
 ```
 
-| function_name | function_type | return_type |       parameters       |         parameter_types          |                                                               description                                                                |
-|---------------|---------------|-------------|------------------------|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| function_name | function_type | return_type | parameters             | parameter_types                  | description                                                                                                                              |
+| ------------- | ------------- | ----------- | ---------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | bar           | scalar        | VARCHAR     | [x, min, max, width]   | [DOUBLE, DOUBLE, DOUBLE, DOUBLE] | Draws a band whose width is proportional to (x - min) and equal to width characters when x = max. width defaults to 80                   |
 | base64        | scalar        | VARCHAR     | [blob]                 | [BLOB]                           | Convert a blob to a base64 encoded string                                                                                                |
 | bin           | scalar        | VARCHAR     | [value]                | [VARCHAR]                        | Converts the value to binary representation                                                                                              |

@@ -6,7 +6,7 @@ author: Hannes Mühleisen
 #image: "/images/media/thumbs/2025-01-09-duckdb-and-the-future-of-databases.png"
 excerpt: ""
 toc: false
-tags: ["Podcast"]
+tags: ["Talk"]
 length: "40 min"
 ---
 
@@ -16,6 +16,6 @@ length: "40 min"
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Podcast** | [PyData Amsterdam 2025](https://amsterdam.pydata.org/ ) |
-| **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Event** | [PyData Amsterdam 2025](https://amsterdam.pydata.org/) |
+| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Data Architecture Turned Upside Down](https://www.youtube.com/watch?v=DxwDaoUijTc) |

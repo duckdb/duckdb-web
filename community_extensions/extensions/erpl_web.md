@@ -17,12 +17,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-web
-  ref: 22b72bc822ffaf9401b54481ae9e9c49e381a49a
+  ref: d590413c064298fd952b3676c1ac77ef92bbcaa0
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 21
+extension_star_count_pretty: 21
+extension_download_count: 718
+extension_download_count_pretty: 718
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_web.png'
 layout: community_extension_doc
 ---
@@ -56,6 +56,10 @@ LOAD {{ page.extension.name }};
 | datasphere_read_relational    | table         | NULL        | NULL    |          |
 | datasphere_show_assets        | table         | NULL        | NULL    |          |
 | datasphere_show_spaces        | table         | NULL        | NULL    |          |
+| delta_share_scan              | table         | NULL        | NULL    |          |
+| delta_share_show_schemas      | table         | NULL        | NULL    |          |
+| delta_share_show_shares       | table         | NULL        | NULL    |          |
+| delta_share_show_tables       | table         | NULL        | NULL    |          |
 | erpl_trace_directory          | pragma        | NULL        | NULL    |          |
 | erpl_trace_enable             | pragma        | NULL        | NULL    |          |
 | erpl_trace_level              | pragma        | NULL        | NULL    |          |
@@ -76,11 +80,11 @@ LOAD {{ page.extension.name }};
 | odp_odata_show                | table         | NULL        | NULL    |          |
 | sac_get_model_info            | table         | NULL        | NULL    |          |
 | sac_get_story_info            | table         | NULL        | NULL    |          |
-| sac_list_models               | table         | NULL        | NULL    |          |
-| sac_list_stories              | table         | NULL        | NULL    |          |
 | sac_read_analytical           | table         | NULL        | NULL    |          |
 | sac_read_planning_data        | table         | NULL        | NULL    |          |
 | sac_read_story_data           | table         | NULL        | NULL    |          |
+| sac_show_models               | table         | NULL        | NULL    |          |
+| sac_show_stories              | table         | NULL        | NULL    |          |
 
 ### Added Types
 

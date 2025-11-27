@@ -12,7 +12,7 @@ title: Iceberg Extension
 ---
 
 The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/). 
-In this page we will go over the basic usage of the extension without the need to attach to an Iceberg catalog. For full support &mdash;including write support&mdash; see [how to attach Iceberg REST catalogs]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}).
+In this page we will go over the basic usage of the extension without the need to attach to an Iceberg catalog. For full support – including write support – see [how to attach Iceberg REST catalogs]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}).
 
 ## Installing and Loading
 
@@ -40,7 +40,7 @@ UPDATE EXTENSIONS;
 
 ## Usage
 
-To test the examples, download the [`iceberg_data.zip`](/data/iceberg_data.zip) file and unzip it.
+To test the examples, download the [`iceberg_data.zip`]({% link data/iceberg_data.zip %}) file and unzip it.
 
 ### Common Parameters
 
@@ -194,4 +194,4 @@ FROM iceberg_scan(
 - Reads from v3 tables with v2 data types.
 - Geometry data type
 
-For a set of unsupported operations when attaching to an iceberg catalog, [see]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}#unsupported-operations).
+For a set of unsupported operations when attaching to an Iceberg catalog, see [Unsupported Operations]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}#unsupported-operations).
