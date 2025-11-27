@@ -96,10 +96,10 @@ docs:
     - [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otlp/)
     - [OpenTelemetry ClickHouse Exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/clickhouseexporter)
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 712
-extension_download_count_pretty: 712
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 715
+extension_download_count_pretty: 715
 image: '/images/community_extensions/social_preview/preview_community_extension_otlp.png'
 layout: community_extension_doc
 ---

@@ -18,10 +18,10 @@ repo:
   github: DataZooDE/anofox-tabular
   ref: 2bb9a922ce49fbb63ca1b4e1ccb5fd556e471428
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 287
-extension_download_count_pretty: 287
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 446
+extension_download_count_pretty: 446
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
 ---

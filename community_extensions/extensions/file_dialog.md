@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: yutannihilation/duckdb-ext-file-dialog
-  ref: 351d27b1cbfdaf1d4277a6090b895e66c601b70c
+  ref: 528c5ab4340c61094bd3ebd2af62d7f73501b7cb
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 658
-extension_download_count_pretty: 658
+extension_download_count: 736
+extension_download_count_pretty: 736
 image: '/images/community_extensions/social_preview/preview_community_extension_file_dialog.png'
 layout: community_extension_doc
 ---
