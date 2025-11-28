@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Iceberg Writes in DuckDB-Iceberg"
+title:  "Writes in DuckDB-Iceberg"
 author: "Tom Ebergen"
 thumb: "/images/blog/thumbs/iceberg-writes.svg"
 image: "/images/blog/thumbs/iceberg-writes.png"
