@@ -272,8 +272,8 @@ With these features, DuckDB-Iceberg now has a strong base support for the Iceber
 
 Below is a list of improvements planned for the near future (in no particular order):
 
-- Performance improvements
-- Updates / deletes / inserts to partitioned tables
-- Updates / deletes / inserts to sorted tables
-- Schema evolution
-- Support for Iceberg v3 tables, focusing on binary deletion vectors and row lineage tracking
+* Performance improvements
+* Updates / deletes / inserts to partitioned tables
+* Updates / deletes / inserts to sorted tables
+* Schema evolution
+* Support for Iceberg v3 tables, focusing on binary deletion vectors and row lineage tracking
