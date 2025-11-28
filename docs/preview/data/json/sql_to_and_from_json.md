@@ -18,7 +18,7 @@ If you run the `json_execute_serialized_sql(varchar)` table function inside of a
 
 Note that these functions do not preserve syntactic sugar such as `FROM * SELECT ...`, so a statement round-tripped through `json_deserialize_sql(json_serialize_sql(...))` may not be identical to the original statement, but should always be semantically equivalent and produce the same output.
 
-### Examples
+## Examples
 
 Simple example:
 

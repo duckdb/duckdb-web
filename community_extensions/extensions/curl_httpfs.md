@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: curl_httpfs
   description: httpfs with connection pool, HTTP/2 and async IO. 
-  version: 0.2.1
+  version: 0.2.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-curl-filesystem
-  ref: 8dead9f6b45250becd2bb4c7b94428a9a6af9e45
+  ref: 378e0698e0636d26834bc7caff0d8e11be805d37
 
 docs:
   hello_world: |
@@ -30,10 +30,10 @@ docs:
     - Implements TCP connection pool.
     - All network IO operations are performed in asynchronously.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 95
-extension_download_count_pretty: 95
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 748
+extension_download_count_pretty: 748
 image: '/images/community_extensions/social_preview/preview_community_extension_curl_httpfs.png'
 layout: community_extension_doc
 ---
@@ -55,6 +55,16 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|             function_name             | function_type | description | comment | examples |
+|---------------------------------------|---------------|-------------|---------|----------|
+| curl_httpfs_clear_metrics             | scalar        | NULL        | NULL    |          |
+| curl_httpfs_get_httpfs_tcp_connection | table         | NULL        | NULL    |          |
+| curl_httpfs_get_tcp_connection        | table         | NULL        | NULL    |          |
+
 ### Added Settings
 
 <div class="extension_settings_table"></div>
@@ -63,6 +73,7 @@ LOAD {{ page.extension.name }};
 |--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
+| curl_httpfs_enable_verbose_logging   | Turn on and off curl-based http util verbose logging.                                        | BOOLEAN    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |

@@ -18,10 +18,10 @@ repo:
   github: DataZooDE/anofox-statistics
   ref: 88108fab2b080a5ba4e7564d394063bbdbc698e4 
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 722
+extension_download_count_pretty: 722
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_statistics.png'
 layout: community_extension_doc
 ---

@@ -477,10 +477,6 @@
                   "url": "analyze"
                 },
                 {
-                  "page": "ALTER DATABASE",
-                  "url": "alter_database"
-                },
-                {
                   "page": "ALTER TABLE",
                   "url": "alter_table"
                 },
@@ -1195,6 +1191,10 @@
               "url": "ui"
             },
             {
+              "page": "Vortex",
+              "url": "vortex"
+            },
+            {
               "page": "VSS",
               "url": "vss"
             }
@@ -1533,6 +1533,10 @@
                 {
                   "page": "query and query_table Functions",
                   "url": "query_and_query_table_functions"
+                },
+                {
+                  "page": "Merge Statement for SCD Type 2",
+                  "url": "merge"
                 },
                 {
                   "page": "Timestamp Issues",

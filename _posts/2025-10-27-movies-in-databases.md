@@ -64,7 +64,7 @@ dim_x = vid.get_meta_data()['size'][0]
 dim_y = vid.get_meta_data()['size'][1]
 rows_per_frame = dim_y * dim_x
 
-# setup a duckdb database and table
+# setup a DuckDB database and table
 con = duckdb.connect()
 con.execute("ATTACH 'charade.duckdb' AS m (STORAGE_VERSION 'latest'); USE m;")
 con.execute("CREATE TABLE movie (i BIGINT, y USMALLINT, x USMALLINT, r UTINYINT, g UTINYINT, b UTINYINT)")
@@ -255,7 +255,7 @@ clip.write_videofile('averages.mp4')
 
 There is some wrangling here because we want to retrieve the whole frame dataset in bulk and not run a query for every single one. We then use NumPy to split them into frames and stitch the RGB-channels together into the three-dimensional array that the image libraries like. This does not achieve any business purpose but the results are kind of funny, here is average frame #68, with apologies to the actors:
 
-<img src="{% link images/blog/movies/average_frame_68.png %}" width=800 />
+<img src="{% link images/blog/movies/average_frame_68.png %}" width="800" />
 
 We can also stitch all the averages together to make a somewhat twitchy average movie:
 

@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 	if (window.location.hash) {
 		var hash = window.location.hash;
 		if ($(hash).length) {
@@ -36,15 +35,31 @@ $(document).ready(function(){
 	});
 
 	
-	
-	// Simple detect OS 
-	var OSName="Unknown OS";
-	var OSdatid="Unknown OS";
-	if (navigator.appVersion.indexOf("Win")!=-1) { OSName="Windows"; OSdatid="win" };
-	if (navigator.appVersion.indexOf("Mac")!=-1) { OSName="macOS"; OSdatid="macos" };
-	if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid="linux" };
-	if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid="linux"};
+	// Detect OS (using UAParser)
+	function detectPlatform() {
+		if (window.UAParser) {
+			try {
+				var result = new UAParser().getResult();
+				var osName = (result && result.os && result.os.name) ? String(result.os.name).toLowerCase() : '';
+				if (osName) {
+					if (/mac\s?os|macos|os\s?x/.test(osName)) return 'macos';
+					if (/windows/.test(osName)) return 'windows';
+					if (/linux|ubuntu|debian|fedora|arch|gentoo|suse|centos/.test(osName)) return 'linux';
+				}
+			} catch (e) {}
+		}
+
+		var fallback = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
+		if (/Mac/i.test(fallback)) return 'macos';
+		if (/Win/i.test(fallback)) return 'windows';
+		if (/Linux|X11/i.test(fallback)) return 'linux';
+		return 'macos';
+	}
+
+	var OSdatid = detectPlatform();
+	var OSName = OSdatid === 'macos' ? 'macOS' : OSdatid === 'windows' ? 'Windows' : OSdatid === 'linux' ? 'Linux' : 'Unknown OS';
 	$('.systemdetected').html('System detected: '+OSName);
+	
 	
 	// Get URL Parameter
 	var getUrlParameter = function getUrlParameter(sParam) {
@@ -855,5 +870,65 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			updateHighlight($(this), $activeItem);
 		});
 	});
+
+	// DUCKCON7 EVENT PAGE
+	const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW4tYXVjaCIsImEiOiJjbDllMHhxNHowbG50M29vZ3Y0NnZhdHY1In0.XQxUUmkkSGKUkNThK1p9Yg';
+	const MAPBOX_STYLES_URL = 'mapbox://styles/jonathan-auch/cmhz38wfd001801sbe3c06ece'
+	const DUCKCON7_COORDINATES = [4.922150, 52.376780];
 	
+	const $duckcon7Map = $('.js-duckcon7-map');
+	const duckcon7SliderClass = '.js-duckcon7-slider';
+	const $duckcon7Slider = $(duckcon7SliderClass);
+
+	const duckcon7GeoJson = {
+		type: 'FeatureCollection',
+		features: [
+			{
+				type: 'Feature',
+				geometry: {
+					type: 'Point',
+					coordinates: DUCKCON7_COORDINATES,
+				},
+				properties: {
+					title: 'Pakhuis de Zwijger',
+					description: 'Pakhuis de Zwijger'
+				}
+			}
+		]
+	}
+
+	const duckcon7SliderOptions = {
+		slidesPerView: "auto",
+		spaceBetween: 30,
+		centeredSlides: true,
+		loop: true,
+		navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev",
+		},
+	}
+
+	// Initialize the map if present on page
+	if ($duckcon7Map.length) {
+		mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
+
+		const map = new mapboxgl.Map({
+			container: 'duckcon7-map',
+			style: MAPBOX_STYLES_URL,
+			center: [4.922150, 52.376780],
+			zoom: 15,
+		});
+
+		for (const feature of duckcon7GeoJson.features) {
+			const marker = document.createElement('div');
+       		marker.className = 'js-marker map-marker';
+       
+  			new mapboxgl.Marker(marker).setLngLat(feature.geometry.coordinates).addTo(map);
+		}
+	}
+
+	// Initialize the slider if present on page
+	if ($duckcon7Slider.length) {
+		const slider = new Swiper(duckcon7SliderClass, duckcon7SliderOptions);
+	}
 });

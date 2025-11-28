@@ -169,7 +169,7 @@ role. We will now define the three types of unstable extensions by looking at th
 #### DuckDB Targets
 
 Every unstable API extension should target a single version of DuckDB. This target version is defined by a combination
-of **the duckdb submodule** and the target version in the [`MainDistributionPipeline`](https://github.com/duckdb/extension-template/blob/main/.github/workflows/MainDistributionPipeline.yml) workflow.
+of **the `duckdb` submodule** and the target version in the [`MainDistributionPipeline`](https://github.com/duckdb/extension-template/blob/main/.github/workflows/MainDistributionPipeline.yml) workflow.
 Which version an extension targets depends on the release cycle phase and the branch. We will now go over all
 combinations
 

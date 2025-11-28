@@ -33,7 +33,7 @@ Below is an example of how both methods work.
 
 By default, DuckDB unifies the columns of these different files **by position**. This means that the first column in each file is combined together, as well as the second column in each file, etc. For example, consider the following two files.
 
-[`flights1.csv`](/data/flights1.csv):
+[`flights1.csv`]({% link data/flights1.csv %}):
 
 ```csv
 FlightDate|UniqueCarrier|OriginCityName|DestCityName
@@ -41,7 +41,7 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 1988-01-02|AA|New York, NY|Los Angeles, CA
 ```
 
-[`flights2.csv`](/data/flights2.csv):
+[`flights2.csv`]({% link data/flights2.csv %}):
 
 ```csv
 FlightDate|UniqueCarrier|OriginCityName|DestCityName
@@ -62,7 +62,7 @@ This is equivalent to the SQL construct [`UNION ALL`]({% link docs/stable/sql/qu
 
 If you are processing multiple files that have different schemas, perhaps because columns have been added or renamed, it might be desirable to unify the columns of different files **by name** instead. This can be done by providing the `union_by_name` option. For example, consider the following two files, where `flights4.csv` has an extra column (`UniqueCarrier`).
 
-[`flights3.csv`](/data/flights3.csv):
+[`flights3.csv`]({% link data/flights3.csv %}):
 
 ```csv
 FlightDate|OriginCityName|DestCityName
@@ -70,7 +70,7 @@ FlightDate|OriginCityName|DestCityName
 1988-01-02|New York, NY|Los Angeles, CA
 ```
 
-[`flights4.csv`](/data/flights4.csv):
+[`flights4.csv`]({% link data/flights4.csv %}):
 
 ```csv
 FlightDate|UniqueCarrier|OriginCityName|DestCityName

@@ -14,12 +14,12 @@ SELECT *
 FROM filename.json;
 ```
 
-#### Format: `newline_delimited`
+## Format: `newline_delimited`
 
 With `format = 'newline_delimited'` newline-delimited JSON can be parsed.
 Each line is a JSON.
 
-We use the example file [`records.json`](/data/records.json) with the following content:
+We use the example file [`records.json`]({% link data/records.json %}) with the following content:
 
 ```json
 {"key1":"value1", "key2": "value1"}
@@ -40,10 +40,10 @@ FROM read_json('records.json', format = 'newline_delimited');
 | value2 | value2 |
 | value3 | value3 |
 
-#### Format: `array`
+## Format: `array`
 
 If the JSON file contains a JSON array of objects (pretty-printed or not), `array_of_objects` may be used.
-To demonstrate its use, we use the example file [`records-in-array.json`](/data/records-in-array.json):
+To demonstrate its use, we use the example file [`records-in-array.json`]({% link data/records-in-array.json %}):
 
 ```json
 [
@@ -66,10 +66,10 @@ FROM read_json('records-in-array.json', format = 'array');
 | value2 | value2 |
 | value3 | value3 |
 
-#### Format: `unstructured`
+## Format: `unstructured`
 
 If the JSON file contains JSON that is not newline-delimited or an array, `unstructured` may be used.
-To demonstrate its use, we use the example file [`unstructured.json`](/data/unstructured.json):
+To demonstrate its use, we use the example file [`unstructured.json`]({% link data/unstructured.json %}):
 
 ```json
 {
@@ -99,12 +99,12 @@ FROM read_json('unstructured.json', format = 'unstructured');
 | value2 | value2 |
 | value3 | value3 |
 
-### Records Settings
+## `records` Options
 
 The JSON extension can attempt to determine whether a JSON file contains records when setting `records = auto`.
 When `records = true`, the JSON extension expects JSON objects, and will unpack the fields of JSON objects into individual columns.
 
-Continuing with the same example file, [`records.json`](/data/records.json):
+Continuing with the same example file, [`records.json`]({% link data/records.json %}):
 
 ```json
 {"key1":"value1", "key2": "value1"}
@@ -140,7 +140,7 @@ FROM read_json('records.json', records = false);
 | {'key1': value2, 'key2': value2} |
 | {'key1': value3, 'key2': value3} |
 
-This is especially useful if we have non-object JSON, for example, [`arrays.json`](/data/arrays.json):
+This is especially useful if we have non-object JSON, for example, [`arrays.json`]({% link data/arrays.json %}):
 
 ```json
 [1, 2, 3]

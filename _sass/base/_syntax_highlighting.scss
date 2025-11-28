@@ -94,8 +94,10 @@ th .k {
 	background: var(--doc-codebox-background-color, #F2F2F2);
 }
 
-// ??
-.highlight :is(.gh, .gp){
+// prompt
+.highlight :is(.gp){
+	color: #E15300;
+	font-family: $fontMonoBold;
 }
 
 .landing .highlight{
@@ -177,8 +179,10 @@ html.darkmode,
 		font-family: $fontMonoBold;
 	}
 	
-	// ??
-	.highlight :is(.gh, .gp){
+	// prompt
+	.highlight :is(.gp){
+		color: #FC6B16;
+		font-family: $fontMonoBold;
 	}
 	
 }

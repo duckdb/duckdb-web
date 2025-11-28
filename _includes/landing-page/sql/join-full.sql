@@ -1,7 +1,7 @@
 CREATE TABLE stations AS
-    FROM 's3://duckdb-blobs/stations.parquet';
+    FROM 'https://blobs.duckdb.org/stations.parquet';
 CREATE TABLE distances AS
-    FROM 's3://duckdb-blobs/distances.parquet';
+    FROM 'https://blobs.duckdb.org/distances.parquet';
 
 -- Find the top-3 longest domestic train routes
 SELECT s1.name_short, s2.name_short, d.distance

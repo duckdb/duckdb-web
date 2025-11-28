@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) that enables SQL-native analysis of structured documents with intelligent schema inference, XPath-based data extraction, and powerful HTML table parsing capabilities.
-  version: 1.1.1
+  version: 1.2.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
   vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
 repo:
   github: teaguesterling/duckdb_webbed
-  ref: f2e49ff826ac9ecc084968eaf8e64269c1f82361
+  ref: 160b8e8fd0a8bf2350f71d38ce392b3d1a265025
 
 docs:
   hello_world: |
@@ -78,10 +78,10 @@ docs:
     
     Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling, memory-safe RAII implementation, and 100% test coverage. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 30
+extension_star_count_pretty: 30
+extension_download_count: 1814
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
@@ -109,12 +109,14 @@ LOAD {{ page.extension.name }};
 
 |        function_name        | function_type | description | comment | examples |
 |-----------------------------|---------------|-------------|---------|----------|
+| html_escape                 | scalar        | NULL        | NULL    |          |
 | html_extract_images         | scalar        | NULL        | NULL    |          |
 | html_extract_links          | scalar        | NULL        | NULL    |          |
 | html_extract_table_rows     | scalar        | NULL        | NULL    |          |
 | html_extract_tables         | table         | NULL        | NULL    |          |
 | html_extract_tables_json    | scalar        | NULL        | NULL    |          |
 | html_extract_text           | scalar        | NULL        | NULL    |          |
+| html_unescape               | scalar        | NULL        | NULL    |          |
 | json_to_xml                 | scalar        | NULL        | NULL    |          |
 | parse_html                  | scalar        | NULL        | NULL    |          |
 | read_html                   | table         | NULL        | NULL    |          |

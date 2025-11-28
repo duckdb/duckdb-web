@@ -9,7 +9,7 @@ title: CSV Import
 
 ## Examples
 
-The following examples use the [`flights.csv`](/data/flights.csv) file.
+The following examples use the [`flights.csv`]({% link data/flights.csv %}) file.
 
 Read a CSV file from disk, auto-infer options:
 
@@ -139,7 +139,7 @@ The default value for the `auto_type_candidates` option is `['SQLNULL', 'BOOLEAN
 
 ## CSV Functions
 
-The `read_csv` automatically attempts to figure out the correct configuration of the CSV reader using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}). It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`](/data/flights.csv) file:
+The `read_csv` automatically attempts to figure out the correct configuration of the CSV reader using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}). It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`]({% link data/flights.csv %}) file:
 
 ```sql
 SELECT * FROM read_csv('flights.csv');

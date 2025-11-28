@@ -5,7 +5,6 @@ title: Troubleshooting
 
 ## Limitations
 
-* Writing Iceberg tables is currently not supported.
 * Reading tables with deletes is not yet supported.
 
 ## Curl Request Fails

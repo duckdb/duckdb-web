@@ -10,7 +10,6 @@ title: Profiling
 Profiling is essential to help understand why certain queries exhibit specific performance characteristics.
 DuckDB contains several built-in features to enable query profiling, which this page covers.
 For a high-level example of using `EXPLAIN`, see the [“Inspect Query Plans” page]({% link docs/stable/guides/meta/explain.md %}).
-For an in-depth explanation, see the [“Profiling” page]({% link docs/stable/dev/profiling.md %}) in the Developer Documentation.
 
 ## Statements
 

@@ -10,11 +10,14 @@ tags: ["Podcast"]
 length: "35 min"
 ---
 
+<div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HfZuVtY5lZg?si=_hSxJ-qbVvyZZUhx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
 ## Podcast Links
 
 * [Apple Podcasts](https://podcasts.apple.com/us/podcast/parachute-rethinking-query-execution-and/id1631350873?i=1000734163381)
 * [Spotify](https://open.spotify.com/episode/21HQZct3VjcJBnDR2hJ6hi)
-* [YouTube](https://www.youtube.com/watch?v=HfZuVtY5lZg)
 * [Acast](https://shows.acast.com/disseminate/episodes/parachute)
 
 ## Description
@@ -31,7 +34,7 @@ Mihail discusses:
 
 Whether you’re a **database researcher,** **systems engineer,** or **curious practitioner,** this deep-dive reveals how academic innovation continues to shape modern data infrastructure.
 
-### Resources
+## Resources
 
 * [Parachute: Single-Pass Bi-Directional Information Passing (VLDB 2025 Paper)]({% link _science/2025-09-01-parachute.md %})
 * [Mihail's homepage](https://stoianmihail.github.io/)

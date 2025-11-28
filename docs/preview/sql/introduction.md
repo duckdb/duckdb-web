@@ -94,7 +94,7 @@ VALUES ('1994-11-29', 'Hayward', 54, 37);
 
 Please enter all the commands shown above so you have some data to work with in the following sections.
 
-Alternatively, you can use the `COPY` statement. This is faster for large amounts of data because the `COPY` command is optimized for bulk loading while allowing less flexibility than `INSERT`. An example with [`weather.csv`](/data/weather.csv) would be:
+Alternatively, you can use the `COPY` statement. This is faster for large amounts of data because the `COPY` command is optimized for bulk loading while allowing less flexibility than `INSERT`. An example with [`weather.csv`]({% link data/weather.csv %}) would be:
 
 ```sql
 COPY weather
