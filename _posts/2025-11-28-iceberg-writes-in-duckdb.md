@@ -11,9 +11,6 @@ tags: ["deep dive"]
 Over the past several months, the DuckDB Labs team has been hard at work on the [DuckDB-Iceberg extension]({% link docs/stable/core_extensions/iceberg/overview.md %}), with _full read support_ and _initial write support_ released in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 Today, we are happy to announce delete and update support for Iceberg v2 tables is available in [v1.4.2]({% post_url 2025-11-12-announcing-duckdb-142 %})!
 
-> The update support is limited to _tables that are not partitioned and not sorted._
-> Attempting to perform update / insert / delete operations on partitioned or sorted tables using DuckDB-Iceberg will result in an error.
-
 The Iceberg open table format has become extremely popular in the past two years, with many databases announcing support for the open table format [originally developed at Netflix](https://softwareengineeringdaily.com/2024/03/07/iceberg-at-netflix-and-beyond-with-ryan-blue/). This past year the DuckDB team has made Iceberg integration a [priority]({% link roadmap.md %}) and today we are happy to announce another step in that direction. In this blog post we will describe the current feature set of DuckDB-Iceberg in DuckDB v1.4.2.
 
 ## Getting Started
@@ -65,8 +62,11 @@ SELECT * FROM iceberg_catalog.default.simple_table;
 └───────┴─────────────────┘
 ```
 
-> DuckDB-Iceberg only writes positional deletes for `DELETE` and `UPDATE` statements.
-> Copy-on-write functionality is not yet supported.
+> The Iceberg write support current has two limitations:
+> 
+> The update support is limited to _tables that are not partitioned and not sorted._ Attempting to perform update, insert or delete operations on partitioned or sorted tables using DuckDB-Iceberg will result in an error.
+>
+> DuckDB-Iceberg only writes positional deletes for `DELETE` and `UPDATE` statements. Copy-on-write functionality is not yet supported.
 
 ## Functions for Table Properties
 
