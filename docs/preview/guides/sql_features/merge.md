@@ -13,6 +13,7 @@ This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (i
 - Works directly on Parquet, CSV, databases, thanks to DuckDB's connectivity!
 
 ## Prerequisites
+
 - DuckDB ≥ 1.4.0
 - Basic SQL knowledge
 
