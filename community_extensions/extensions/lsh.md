@@ -40,10 +40,10 @@ docs:
   extended_description: |
     For more information regarding usage, see the [documentation](https://github.com/princeton-ddss/lsh).
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 521
-extension_download_count_pretty: 521
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 542
+extension_download_count_pretty: 542
 image: '/images/community_extensions/social_preview/preview_community_extension_lsh.png'
 layout: community_extension_doc
 ---
