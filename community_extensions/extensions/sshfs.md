@@ -58,8 +58,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 571
-extension_download_count_pretty: 571
+extension_download_count: 565
+extension_download_count_pretty: 565
 image: '/images/community_extensions/social_preview/preview_community_extension_sshfs.png'
 layout: community_extension_doc
 ---
