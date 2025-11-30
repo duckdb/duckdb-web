@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: poached
   description: SQL parsing and introspection for IDEs, editors, and developer tools
-  version: 0.1.0
+  version: 0.2.1
   language: C/C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: sidequery/poached
-  ref: c866935e8ae2d455e321bebd72de7e1fb751af10
+  ref: 90b5795fca7b5e1933c0f3e3287393d0d6c10d13
 
 docs:
   hello_world: |
@@ -86,8 +86,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 228
-extension_download_count_pretty: 228
+extension_download_count: 321
+extension_download_count_pretty: 321
 image: '/images/community_extensions/social_preview/preview_community_extension_poached.png'
 layout: community_extension_doc
 ---
@@ -108,5 +108,27 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|    function_name     | function_type | description | comment | examples |
+|----------------------|---------------|-------------|---------|----------|
+| is_keyword           | scalar        | NULL        | NULL    |          |
+| is_valid_sql         | scalar        | NULL        | NULL    |          |
+| num_statements       | scalar        | NULL        | NULL    |          |
+| parse_columns        | table         | NULL        | NULL    |          |
+| parse_function_names | scalar        | NULL        | NULL    |          |
+| parse_functions      | table         | NULL        | NULL    |          |
+| parse_statements     | table         | NULL        | NULL    |          |
+| parse_table_names    | scalar        | NULL        | NULL    |          |
+| parse_tables         | table         | NULL        | NULL    |          |
+| parse_where          | table         | NULL        | NULL    |          |
+| sql_error_message    | scalar        | NULL        | NULL    |          |
+| sql_keywords         | table         | NULL        | NULL    |          |
+| sql_parse_json       | scalar        | NULL        | NULL    |          |
+| sql_strip_comments   | scalar        | NULL        | NULL    |          |
+| tokenize_sql         | table         | NULL        | NULL    |          |
 
 
