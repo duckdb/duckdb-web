@@ -14,8 +14,9 @@ You can find the complete [release notes on GitHub](https://github.com/duckdb/du
 To install the new version, please visit the [installation page]({% link install/index.html %}).
 
 
+## Windows ARM64
 
-## Extension Distribution for Windows ARM64
+### Extension Distribution for Windows ARM64
 
 We are introducing beta support for Windows ARM64. You can now install core extensions now on this platform:
 
@@ -45,4 +46,12 @@ SELECT ST_Area(ST_GeomFromText('POLYGON((0 0, 4 0, 4 3, 0 3, 0 0))')) AS area;
 ├────────┤
 │  12.0  │
 └────────┘
+```
+
+### Python Wheel Distribution for Windows ARM64
+
+We now distribute Python wheels for Windows ARM64. This means that you take e.g. a Copilot+ laptop and run:
+
+```bash
+pip install duckdb
 ```
