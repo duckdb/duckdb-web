@@ -1,5 +1,9 @@
 <!doctype html>
+{% if page.body_class contains "duckcon7" %}
+<html lang="en" class="darkmode">
+{% else %}
 <html lang="en">
+{% endif %}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -17,6 +21,11 @@
 	<link rel="stylesheet" href="/css/{{ page.add_css }}">
 	{% endif %}
 
+	{% if page.body_class contains "duckcon7" %}
+	<link href='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css' rel='stylesheet' />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+	{% endif %}
+
 	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
@@ -31,6 +40,9 @@
 	{% seo title=false %}
 	
 	<script src="/js/determine_color_scheme.js"></script>
+	{% if page.body_class contains "duckcon7" %}
+	<script src='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js'></script>
+	{% endif %}
 </head>
 <body class="layout_default{% if page.body_class %} {{ page.body_class }}{% endif %}">
 
@@ -42,12 +54,16 @@
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<a href="{{ site.url }}/"><img src="/images/logo-dl/DuckDB_Logo-horizontal.svg" alt="DuckDB Logo for Download" class="downloadlogo"></a>
-					<div id="duckdb_logo"></div>
+					<a href="{{ site.url }}/">{% if page.body_class contains "duckcon7" %}<img src="/images/logo-dl/duckcon7.svg" alt="DuckCon 7 Logo for Download" class="downloadlogo">{% else %}<img src="/images/logo-dl/DuckDB_Logo-horizontal.svg" alt="DuckDB Logo for Download" class="downloadlogo">{% endif %}</a>
+					{% if page.body_class contains "duckcon7" %}<div id="duckcon7_logo"></div>{% else %}<div id="duckdb_logo"></div>{% endif %}
 				</div>
 				<div class="landingmenu">
 					
-					{% include menu_secondary.html %}
+					{% if page.body_class contains "duckcon7" %}
+						{% include duckcon7/menu.html %}
+					{% else %}
+						{% include menu_secondary.html %}
+					{% endif %}
 					
 					<div class="hamburger hamburger--squeeze">
 						<div class="hamburger-box">
@@ -56,11 +72,15 @@
 					</div>
 				</div>
 				<div class="options">
-					<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
-					<button class="mode" data-mode="dark">
-						{% include icon.html name="sun" class="icon icon-sun" size="24" %}
-						{% include icon.html name="moon" class="icon icon-moon" size="24" %}
-					</button>
+					{% if page.body_class contains "duckcon7" %}
+						<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Register now</a>
+					{% else %}
+						<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
+						<button class="mode" data-mode="dark">
+							{% include icon.html name="sun" class="icon icon-sun" size="24" %}
+							{% include icon.html name="moon" class="icon icon-moon" size="24" %}
+						</button>
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -87,7 +107,7 @@
 	-->
 		{% endif %}
 		
-			<div class="wrap {% if page.toc == true %}fullwidth{% endif %}">
+			<div class="{% unless page.body_class contains "duckcon7" %}wrap{% endunless %} {% if page.toc == true %}fullwidth{% endif %}">
 				<div id="main_content_wrap" class="{% if page.toc == true %} contains_toc{% endif %}">
 					<div class="content">
 						{% if page.toc == true %}
@@ -135,10 +155,18 @@
 	<script src="/js/search.js" defer></script>
 	<script src="/js/jquery-3.5.1.min.js" defer></script>
 	<script src="/js/copy_button.js" defer></script>
+	{% if page.body_class contains "landing" or page.body_class contains "installation" %}
+	<script src="/js/ua-parser.min.js" defer></script>
+	{% endif %}
+	{% if page.body_class contains "duckcon7" %}
+	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+	{% endif %}
 	<script src="/js/script.js" defer></script>
 	{% if page.body_class contains "installation" %}
-	<script src="/js/ua-parser.min.js" defer></script>
 	<script src="/js/install.js" defer></script>
+	{% endif %}
+	{% if page.body_class contains "wasm" %}
+	<script src="/js/wasm.js" defer></script>
 	{% endif %}
 
 </body>

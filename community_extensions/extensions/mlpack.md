@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: eddelbuettel/duckdb-mlpack
-  ref: 5e1f65f57e885f31dfb8a0289407ba31ad947886
+  ref: b4ba25b96a4c12e7b7843966db0793b60d5949c2
   
 docs:
   hello_world: |
@@ -61,10 +61,10 @@ docs:
 
     For more, please see the [repo](https://github.com/eddelbuettel/duckdb-mlpack).
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 739
+extension_download_count_pretty: 739
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---
@@ -107,6 +107,7 @@ LOAD {{ page.extension.name }};
 
 |      name      |                         description                         | input_type | scope  | aliases |
 |----------------|-------------------------------------------------------------|------------|--------|---------|
+| mlpack_silent  | Toggle whether to operate in silent mode, default is false  | BOOLEAN    | GLOBAL | []      |
 | mlpack_verbose | Toggle whether to operate in verbose mode, default is false | BOOLEAN    | GLOBAL | []      |
 
 

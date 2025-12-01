@@ -3,7 +3,7 @@ INSTALL spatial;
 LOAD spatial;
 
 CREATE TABLE stations AS
-    FROM 's3://duckdb-blobs/stations.parquet';
+    FROM 'https://blobs.duckdb.org/stations.parquet';
 
 -- What are the top-3 closest Intercity stations
 -- using aerial distance?

@@ -258,7 +258,7 @@ Window functions cannot access values outside of the partition containing the ro
 Ordering is also optional, but without it the results of [general-purpose window functions](#general-purpose-window-functions) and [order-sensitive aggregate functions]({% link docs/stable/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions), and the order of [framing](#framing) are not well-defined.
 Each partition is ordered using the same ordering clause.
 
-Here is a table of power generation data, available as a CSV file ([`power-plant-generation-history.csv`](/data/power-plant-generation-history.csv)). To load the data, run:
+Here is a table of power generation data, available as a CSV file ([`power-plant-generation-history.csv`]({% link data/power-plant-generation-history.csv %})). To load the data, run:
 
 ```sql
 CREATE TABLE "Generation History" AS

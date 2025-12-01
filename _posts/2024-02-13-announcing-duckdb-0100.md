@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Announcing DuckDB 0.10.0"
-author: Mark Raasveldt and Hannes Mühleisen
+author: Mark Raasveldt, Hannes Mühleisen
 thumb: "/images/blog/thumbs/duckdb-release-0-10-0.svg"
 image: "/images/blog/thumbs/duckdb-release-0-10-0.png"
 excerpt: "The DuckDB team is happy to announce the latest DuckDB release (0.10.0). This release is named Fusca after the [Velvet scoter](https://en.wikipedia.org/wiki/Velvet_scoter) native to Europe."

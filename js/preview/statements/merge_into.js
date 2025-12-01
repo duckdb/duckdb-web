@@ -49,7 +49,8 @@ function GenerateMerge(options = {}) {
                         Optional(Sequence([Keyword("AND"), Expression("condition")]), "skip"),
                         Keyword("THEN"),
                         Keyword("INSERT"),
-                        GenerateOptionalColumnList(),
+                        Keyword("VALUES"),
+                        GenerateOptionalColumnList()
                     ])
                 ])
             ),

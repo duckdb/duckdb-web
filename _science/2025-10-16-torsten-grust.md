@@ -10,11 +10,14 @@ tags: ["Podcast"]
 length: "50 min"
 ---
 
+<div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Hoo0KZ6EDq0?si=yur7QDGvscjzbbX8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
 ## Podcast Links
 
 * [Apple Podcasts](https://podcasts.apple.com/us/podcast/recursive-ctes-trampolines-and-teaching-databases/id1631350873?i=1000732177402)
 * [Spotify](https://open.spotify.com/episode/3MdbbJP2CzVJT7whI7l0Va?si=7a8594c2795145f1)
-* [YouTube](https://youtu.be/Hoo0KZ6EDq0)
 * [Acast](https://shows.acast.com/disseminate/episodes/torsten-grust)
 
 ## Description
@@ -30,7 +33,7 @@ In the episode they unpack:
 
 If you’re into **data systems, query processing, or bridging research and practice,** this episode is for you.
 
-### Resources
+## Resources
 
 * [USING KEY in Recursive CTEs]({% post_url 2025-05-23-using-key %})
 * [How DuckDB is `USING KEY` to Unlock Recursive Query Performance]({% link _science/2025-06-22-bamberg-using-key-sigmod.md %})

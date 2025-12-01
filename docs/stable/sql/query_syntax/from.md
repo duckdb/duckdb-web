@@ -141,7 +141,7 @@ SELECT *
 FROM read_csv('test.csv');
 ```
 
-All table functions support a `WITH ORDINALITY` prefix, which extends the returned table by an integer column `ordinality` that enumerates the generated rows starting at `1`.
+All table functions support a `WITH ORDINALITY` suffix, which extends the returned table by an integer column `ordinality` that enumerates the generated rows starting at `1`.
 
 ```sql
 SELECT * 

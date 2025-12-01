@@ -1,0 +1,179 @@
+---
+published: false
+layout: default
+event: true
+title: "DuckCon #7 in Amsterdam"
+author: Mark Raasveldt, Hannes Mühleisen, Gabor Szarnyas, Kelly de Smit
+thumb: "/images/events/thumbs/duckcon-6-amsterdam.svg"
+image: "/images/events/thumbs/duckcon-6-amsterdam.png"
+excerpt: ""
+tags: ["DuckCon"]
+body_class: duckcon7
+venue: "Pakhuis de Zwijger, Amsterdam"
+toc: false
+---
+
+<section class="hero">
+  <img class="hero-image" src="/images/events/duckcon7/lottie-placeholder.png" alt="DuckCon #7 in Amsterdam">
+  <footer class="hero-footer">
+    <div class="hero-footer-content">
+      <div class="hero-footer-column">
+        <p>Pakhuis de Zwijger <br/>Amsterdam, NL</p>
+      </div>
+      <div class="hero-footer-column">
+        <p>10. April 2026 <br/>2–8pm</p>
+      </div>
+    </div>
+    <a class="hero-footer-button" href="#announcement"><img src="/images/icons/scrolldown.svg" alt="Scroll down"></a>
+  </footer>
+</section>
+<section class="announcement w-large" id="announcement">
+  <p class="wrap">We're looking forward to gathering the DuckDB community at DuckCon 7 — our user conference in Amsterdam, the Netherlands. Join us at <a href="#">Pakhuis de Zwijger</a>, <a href="#">Piet Heinkade 179</a>, for a day of talks and friendly faces on Friday, 10. April 2026.</p>
+</section>
+<section class="slider">
+  <div class="swiper js-duckcon7-slider">
+    <div class="swiper-wrapper">
+      {% for image in site.data.duckcon7.intro_slider %}
+      <div class="swiper-slide">
+        <img src="{{ image.image }}" alt="{{ image.description }}">
+        <p class="text-secondary-color">{{ image.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+  <hr class="divider" />
+</section>
+<section class="program w-large" id="program">
+  {% include duckcon7/section_header.html title="Program" description="Discover talks, demos, and community sessions—live at DuckCon 7. Join in person or online and be part of the action." %}
+  <div class="wrap table-section">
+    {% for day in site.data.duckcon7.program %}
+      <h3 class="table-section-title">{{ day.title }}</h3>
+      {% for session in day.sessions %}
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="title-1 table-title">{{ session.title }}</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for talk in session.timetable %}
+          <tr>
+              <td>{{ talk.time }}</td>
+              <td>{{ talk.title }}</td>
+              <td>{{ talk.speaker }}</td>
+              <td>{% if talk.livestream_url %}<a class="button yellow" href="{{ talk.livestream_url }}" target="_blank" rel="noopener noreferrer">Join Livestream</a>{% endif %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endfor %}
+    {% endfor %}
+  </div>
+  <hr class="divider" />
+</section>
+<section class="speakers w-large" id="speakers">
+  <div class="wrap">
+    {% include duckcon7/section_header.html title="Speakers" description="Meet the engineers, advocates, and innovators advancing embedded analytical databases. DuckCon speakers deliver the technical depth and real-world insight you need—whether you're optimizing queries, building extensions, or scaling DuckDB in production." %}
+    <ul class="speakers-list">
+      {% if site.data.duckcon7.speakers %}
+        {% for speaker in site.data.duckcon7.speakers %}
+        <li class="speaker-item">
+          <article class="postpreview">
+            <a href="{{ speaker.url }}" class="blocklink" title="{{ speaker.name }}" target="_blank" rel="noopener noreferrer"></a>
+            <div class="postimg custom">
+              {% if speaker.image %}
+                <img src="{{ speaker.image }}" alt="{{ speaker.name }}" class="zoom-image"/>
+              {% else %}
+                {% assign placeholder_number = forloop.index | modulo: 3 | plus: 1 %}
+                <img src="/images/blog/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image"/>
+              {% endif %}
+            </div>
+            <div class="postdetails">
+              <h3 class="headline-3">{{ speaker.name }}</h3>
+              <div class="meta text-secondary-color body-small">
+                <div class="speaker">{{ speaker.title }}</div>
+              </div>
+            </div>
+          </article>
+        </li>
+        {% endfor %}
+      {% endif %}
+      </ul>
+  </div>
+  <hr class="divider" />
+</section>
+<section class="sponsors">
+  {% include duckcon7/section_header.html title="Sponsors" description="We extend our sincere thanks to DuckCon #7’s sponsors for powering this community event and supporting the future of open-source analytics." %}
+  <ul class="sponsors-list">
+    <li>
+      <img src="/images/events/duckcon7/sponsors/monday.svg" alt="Monday.com" />
+    </li>
+    <li>
+      <img src="/images/events/duckcon7/sponsors/rill.svg" alt="Rill" />
+    </li>
+    <li>
+      <img src="/images/events/duckcon7/sponsors/crunchydata.svg" alt="Crunchy Data" />
+    </li>
+  </ul>
+  <hr class="divider" />
+</section>
+<section class="venue" id="venue">
+  {% include duckcon7/section_header.html title="Venue" description="Pakhuis de Zwijger is DuckCon #7's home on Amsterdam's waterfront. This space offers enough seats for the whole DuckDB flock." %}
+</section>
+<section class="slider">
+  <div class="swiper js-duckcon7-slider">
+    <div class="swiper-wrapper">
+      {% for image in site.data.duckcon7.venue_slider %}
+      <div class="swiper-slide">
+        <img src="{{ image.image }}" alt="{{ image.description }}">
+        <p class="text-secondary-color">{{ image.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+  <hr class="divider" />
+</section>
+<section class="venue-access w-large">
+  {% include duckcon7/section_header.html title="Acessing the venue" description="Whether you’re joining us from across town or across the world, getting here is easy. Pakhuis de Zwijger is just minutes from Amsterdam Centraal station and is fully accessible by public transport, bike, and car." %}
+  {% if site.data.duckcon7.venue_access %}
+    <div class="wrap feature-list">
+      <ul class="flexwrap feature-list">
+        {% for venue_access in site.data.duckcon7.venue_access %}
+          <li class="featurebox">
+            <img class="icon" src="{{ venue_access.icon }}" alt="{{ venue_access.title }}" />
+            <h3 class="title-1">{{ venue_access.title }}</h3>
+            <p class="body-small text-secondary-color">{{ venue_access.description }}</p>
+            <a href="{{ venue_access.url }}" class="textbutton arrow-right">Read more</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</section>
+<section class="map w-large">
+  <div class="wrap">
+    <ul class="map-menu text-secondary-color">
+      <li>
+        <a href="https://maps.apple.com/place?place-id=I4F9D0108B24DC669&address=Piet+Heinkade+179%2C+1019+HC+Amsterdam%2C+Netherlands&coordinate=52.376762%2C4.92216&name=Pakhuis+de+Zwijger&_provider=9902" target="_blank" rel="noopener noreferrer">Apple Maps</a>
+      </li>
+      <li>
+        <a href="https://maps.app.goo.gl/zmnGR2xjmNJynr6D7" target="_blank" rel="noopener noreferrer">Google Maps</a>
+      </li>
+    </ul>
+     <div class="js-duckcon7-map embedded-map" id="duckcon7-map"></div>
+  </div>
+  {% include duckcon7/section_header.html title="Events Nearby" description="The FOSDEM 2025 conference in Brussels is happening on the weekend after DuckCon #7, so you can conveniently travel there via a direct train." %}
+</section>
+<section class="join-us">
+  <div class="card max-width-small">
+    {% include duckcon7/section_header.html title="Join us for DuckCon 7!" description="Registration for DuckCon 7 is now officially open! Limited amount of spots available." %}
+    <button class="button yellow">Register now</button>
+  </div>
+</section>

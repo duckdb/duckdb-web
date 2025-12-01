@@ -20,15 +20,16 @@ extension:
 
 repo:
   github: coginiti-dev/QuackStore
-  ref: 0cf83e4024b5fa0e45d8475f152b4166cf938001
+  ref: 4646572622c226a41011d74ebab5254afa3fbb3d
+  ref_next: b03909034d49a77540772d592c7efa6849b3521b
 
 docs:
   extended_description: |
     See [README.md](https://github.com/coginiti-dev/QuackStore)
-extension_star_count: 84
-extension_star_count_pretty: 84
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 94
+extension_star_count_pretty: 94
+extension_download_count: 1366
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_quackstore.png'
 layout: community_extension_doc
 ---

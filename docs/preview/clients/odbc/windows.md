@@ -4,6 +4,8 @@ layout: docu
 title: ODBC API on Windows
 ---
 
+## Setup
+
 Using the DuckDB ODBC API on Windows requires the following steps:
 
 1. The Microsoft Windows requires an ODBC Driver Manager to manage communication between applications and the ODBC drivers.

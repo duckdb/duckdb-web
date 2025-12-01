@@ -1,0 +1,421 @@
+---
+layout: default
+title: DuckDB Table Visualizer
+body_class: wasm
+excerpt: This is a demo built with duckdb-wasm and regular-tables.
+max_page_width: medium
+toc: false
+---
+<!--
+This is a demo built with duckdb-wasm and regular-tables.
+It's showcases how duckdb-wasm can efficiently query on the fly remote resources (whether single files or tables within a datalake catalog)
+-->
+
+<script src="{{ '/js/regular-table.js' | relative_url }}" defer></script>
+
+<div class="content-container">
+<div class="wrap pagetitle pagetitle--small mb-5" style="margin-bottom:0px !important">
+   <h1>DuckDB Table Visualizer</h1>
+</div>
+
+<div class="selection-foldout" data-foldout="credentials">
+     <div class="selection-head">
+         <h3>Credentials<span class="selected">None</span></h3>
+     </div>
+     
+     <div class="selection-content">
+         <form id="credentials_form" class="credentials-form">
+            <div class="form-row">
+               <div class="form-field">
+                  <label for="secret_type">Type</label>
+                  <input type="text" id="secret_type" name="schema" value="">
+               </div>
+               <div class="form-field">
+                  <label for="secret_id">Secret ID</label>
+                  <input type="text" id="secret_id" name="table" value="">
+               </div>
+               <div class="form-field">
+                  <label for="secret_key">Secret Key</label>
+                  <input type="text" id="secret_key" name="table" value="">
+               </div>
+            </div>
+         </form>
+     </div>
+     
+ </div>
+ 
+ <div class="selection-foldout open" data-foldout="attach_options">
+      <div class="selection-head">
+          <h3>Attach options</h3>
+      </div>
+      
+      <div class="selection-content">
+         <form id="attach_form" class="attach-form">
+            <div class="form-row">
+               <div class="form-field form-field-with-inline-dropdown">
+                  <label for="resource_path">
+                     Resource path:
+                     <select id="example_datasets" name="example_datasets" class="inline-dropdown">
+                        <option value="">Example Datasets</option>
+                        <option value="resource_path=https%3A%2F%2Fblobs.duckdb.org%2Ftrain_services.parquet">Parquet, train_services</option>
+                        <option value="resource_path=https%3A%2F%2Fblobs.duckdb.org%2Fdatalake%2Ftpch-sf3.ducklake&resource_type=ducklake&table_name=lineitem">DuckLake, tpch-sf3, lineitem</option>
+                        <option value="resource_path=https%3A%2F%2Fblobs.duckdb.org%2Fdatalake%2Ftpch-sf3.ducklake&resource_type=duckdb">DuckDB, tpch-sf3 ducklake, [metadata]</option>
+                        <option value="resource_path=https%3A%2F%2Fblobs.duckdb.org%2Fdata%2Ffinbench.duckdb&resource_type=duckdb&table_name=Account">DuckDB, finbench, Accounts</option>
+                        <option value="resource_path=FROM%20read_avro('https%3A%2F%2Fblobs.duckdb.org%2Fdata%2Fuserdata1.avro')">Avro, userdata1, via custom SQL</option>
+                        <option value="resource_path=https%3A%2F%2Fraw.githubusercontent.com%2Fmarhar%2Ffrozen%2Fmain%2Fspace.ducklake&resource_type=ducklake&table_name=astronauts">DuckLake, space, astronauts</option>
+                     </select>
+                  </label>
+                  <input type="text" id="resource_path" name="path" value="https://blobs.duckdb.org/datalake/tpch-sf3.ducklake">
+               </div>   
+            </div>
+            <div class="form-row">
+               <div class="form-field">
+                  <label for="resource_type">Type</label>
+                  <input type="text" id="resource_type" name="schema" value="ducklake">
+               </div>
+               <div class="form-field">
+                  <label for="schema_name">Schema</label>
+                  <input type="text" id="schema_name" name="schema" value="">
+               </div>
+               <div class="form-field">
+                  <label for="table_name">Table</label>
+                  <input type="text" id="table_name" name="table" value="lineitem">
+               </div>
+            </div>
+         </form>
+      </div>
+
+  </div>
+<pre><code id="last_query" class="language-sql"></code></pre>
+<p id="last_query_status">1/4: HTML loaded</p>
+</div>
+
+<div class="datasettable">
+  <regular-table></regular-table>
+</div>
+
+<script>
+function extract_hash_segment() {
+   var hash_segment = window.location.hash;
+   if (hash_segment.length == 0) return;
+   if (hash_segment[0] == '#') hash_segment = hash_segment.substring(1);
+
+   function add_component(name) {
+      document.getElementById(name).value = "";
+   }
+   add_component("resource_path");
+   add_component("resource_type");
+   add_component("schema_name");
+   add_component("table_name");
+   add_component("secret_type");
+   add_component("secret_id");
+   add_component("secret_key");
+   const parts = hash_segment.split("&");
+   for (const p in parts) {
+      const inner_parts = parts[p].split("=");
+      document.getElementById(inner_parts[0]).value = decodeURIComponent(inner_parts[1]);
+   }
+}
+extract_hash_segment();
+      document.getElementById("last_query_status").innerHTML = "2/5: Instantiating DuckDB-Wasm - main thread component";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("2/5: Instantiating DuckDB-Wasm - main thread component");
+      const getDb = async () => {
+        const duckdb = window.duckdbduckdbWasm;
+        // @ts-ignore
+        if (window._db) return window._db;
+        const JSDELIVR_BUNDLES = duckdb.getJsDelivrBundles();
+      
+        // Select a bundle based on browser checks
+        const bundle = await duckdb.selectBundle(JSDELIVR_BUNDLES);
+      
+        const worker_url = URL.createObjectURL(
+          new Blob([`importScripts("${bundle.mainWorker}");`], {
+            type: "text/javascript",
+          })
+        );
+      
+        // Instantiate the asynchronous version of DuckDB-wasm
+        const worker = new Worker(worker_url);
+        // const logger = null //new duckdb.ConsoleLogger();
+        const logger = new duckdb.ConsoleLogger();
+        const db = new duckdb.AsyncDuckDB(logger, worker);
+function progressHandler(progress) {
+   var percentage = 100 * progress.bytesLoaded / progress.bytesTotal / 6;
+   if (percentage > 100) percentage = 100;
+   percentage = Math.ceil(percentage);
+      document.getElementById("last_query_status").innerHTML = "4/5: Instantiating DuckDB-Wasm - Wasm module, " + percentage + "%";
+}
+        await db.instantiate(bundle.mainModule, bundle.pthreadWorker, progressHandler);
+        URL.revokeObjectURL(worker_url);
+        window._db = db;
+        return db;
+      };
+   </script>
+   <script type="module">
+      import * as duckdbduckdbWasm from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.31.1-dev1.0/+esm";
+      document.getElementById("last_query_status").innerHTML = "3/5: Instantiating DuckDB-Wasm - WebWorker component";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("3/5: Instantiating DuckDB-Wasm - WebWorker component");
+      window.duckdbduckdbWasm = duckdbduckdbWasm;
+      getDb().then(async (db) => {
+        // Create a new connection
+      
+      document.getElementById("last_query_status").innerHTML = "5/5: DuckDB-Wasm ready";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("5/5: DuckDB-Wasm ready");
+      
+var setup_queries = "";
+        var conn = await db.connect();
+      {
+      
+      
+      await executeQuery(conn, "LOAD httpfs;");
+      await executeQuery(conn, "LOAD icu;");
+      }
+
+      async function executeQuery(conn, sql, append = false) {
+      document.getElementById("last_query").innerHTML = setup_queries + sql;
+      document.getElementById("last_query_status").innerHTML = "Executing...";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("Executing...");
+      var error = null;
+const startTime = performance.now();
+      var res = await conn.query(sql).catch((e) => {error = e; console.log(e);});
+const endTime = performance.now();
+      var is_valid = true;
+      if (error !== null) {
+      document.getElementById("last_query").innerHTML = error;
+      document.getElementById("last_query_status").innerHTML = "Error!";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("Error!");
+      is_valid = false;
+      } else {
+      document.getElementById("last_query_status").innerHTML = "Idle";
+      if (window.updateStatusIndicator) window.updateStatusIndicator("Idle");
+      is_valid = true;
+      }
+if (append) {
+   setup_queries += sql;
+   setup_queries += "\n";
+}
+      return {result:res, is_valid:is_valid};
+      }
+            const table = document.getElementsByTagName("regular-table")[0];
+      
+      async function refresh() {
+        conn.close();
+        db.flushFiles();
+        db.dropFiles();
+        conn = await db.connect();
+      
+      var resource_path = document.getElementById('resource_path').value;
+      var resource_type = document.getElementById('resource_type').value;
+      var target_table_name = document.getElementById('table_name').value;
+      var target_schema_name = document.getElementById('schema_name').value;
+     
+      var secret_type = document.getElementById('secret_type').value;
+      var secret_id = document.getElementById('secret_id').value;
+      var secret_key = document.getElementById('secret_key').value;
+
+      var last_res = null;
+      last_res = await executeQuery(conn, "BEGIN TRANSACTION;");
+      if (!last_res.is_valid) {
+      table.clear();
+      return;
+      }
+      
+
+      await executeQuery(conn, "DETACH __my_resource__;");
+      if (secret_type !== "") {
+   var secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", KEY_ID '" + secret_id + "', SECRET '" + secret_key + "');";
+
+      last_res = await executeQuery(conn, secret_query, true);
+      if (!last_res.is_valid) {
+      table.clear();
+      return;
+      }
+   }
+
+
+
+
+      var view_query = "CREATE OR REPLACE VIEW __my_view__ AS ";
+      
+      setup_queries = "";
+      if (resource_type !== "") {
+   var attach_string = "ATTACH IF NOT EXISTS '" + resource_path + "' AS __my_resource__ (TYPE "+ resource_type;
+   if (resource_type == "iceberg" && resource_path.startsWith("arn:aws:s3tables:")) {
+      attach_string += ", ENDPOINT_TYPE 's3_tables'";
+   }
+   attach_string += ");";
+
+      last_res = await executeQuery(conn, attach_string, true);
+      if (!last_res.is_valid) {
+      table.clear();
+      return;
+      }
+      view_query += "FROM __my_resource__";
+      
+      
+      if (target_table_name !== "") {
+      if (target_schema_name !== "") {
+      view_query += "." + target_schema_name;
+      }
+      view_query += "." + target_table_name;
+      var timetravel_string = null;
+      if (timetravel_string) {
+      view_query += " AT (TIMESTAMP => (" + timetravel_string + ")::TIMESTAMP)";
+      }
+      } else {
+   view_query = "CREATE OR REPLACE VIEW __my_view__ AS FROM (DESCRIBE) WHERE database = '__my_resource__'";
+}
+      } else if (resource_path.includes(' ') ) {
+   if (resource_path.slice(-1) == ";") resource_path = resource_path.substr(0, resource_path.length -1);
+   view_query += "(" + resource_path + ")";
+ } else {
+      view_query += "FROM '" + resource_path + "'";
+      }
+      
+      
+      view_query += ";"
+      
+      
+      last_res = await executeQuery(conn, view_query, true);
+      if (!last_res.is_valid) {
+      table.clear();
+      return;
+      }
+      
+      last_res = (await executeQuery(conn, "SELECT count(*) as num_rows FROM __my_view__;"));
+      if (!last_res.is_valid) {
+      table.clear();
+      return;
+      }
+      var table_num_rows = last_res.result.toArray()[0].num_rows;
+      last_res = (await executeQuery(conn, "SELECT column_name FROM (DESCRIBE __my_view__);"));
+      if (!last_res.is_valid) {
+      table.clear();
+      return;
+      }
+      var table_num_columns = last_res.result;
+      
+      var numColumns = table_num_columns.numRows;
+      var column_names = [];
+      
+      for (var i = 0; i< numColumns; i++) column_names.push(table_num_columns.toArray()[i].column_name);
+      
+            const NUM_ROWS = Number(table_num_rows);
+            const NUM_COLUMNS = Number(table_num_columns.numRows);
+      
+            async function test_data_model(x0, y0, x1, y1) {
+                const data = [];
+                const column_headers = [];
+      
+var my_values = null;
+if (y0 < y1) {
+      last_res = (await executeQuery(conn, "FROM __my_view__ OFFSET " + (y0) + " LIMIT " + (y1 - y0) + ";"))
+      var my_values = last_res.result.toArray();
+      }
+      const columns =new Array(x1 - x0);	
+        for (let i = x0; i < x1 ; i++) {
+      columns[i - x0] = new Array();
+                    data.push(columns[i-x0]);
+                    column_headers.push([
+                        column_names[i-x0],
+                    ]);
+      }
+      
+                    for (let j = y0; j < y1; j++) {
+      
+      var the_row = my_values[j - y0];
+                   for (let i = x0; i < x1 ; i++) {
+      
+                            columns[i - x0].push([the_row[column_names[i]]]);
+                    }
+      }
+      
+                const row_headers = [];
+                for (let j = y0; j < y1; j++) {
+                    row_headers.push(["" + (j+1)]);
+                }
+      
+                return {
+                    num_rows: NUM_ROWS,
+                    num_columns: NUM_COLUMNS,
+                    row_headers,
+                    column_headers,
+                    data,
+                };
+            }
+      
+            table.setDataListener(test_data_model);
+            table.draw();
+      
+      
+      
+      }
+
+var isRefreshing = false;
+
+function toggleTableSelection() {
+   return;
+   var resource_path = document.getElementById('resource_path').value;
+   var tableSelection = document.querySelector('.table-selection');
+   
+   // Check if resource_path ends with .parquet (case insensitive)
+   if (resource_path.toLowerCase().endsWith('.parquet')) {
+      tableSelection.style.display = 'none';
+   } else {
+      tableSelection.style.display = '';
+   }
+}
+
+function store_hash_segment() {
+   var hash_segment = "";
+   function add_component(name) {
+      if (document.getElementById(name).value.length == 0) return;
+      if (hash_segment.length > 0) hash_segment += "&";
+      hash_segment += name + "=" + encodeURIComponent(document.getElementById(name).value);
+   }
+   add_component("resource_path");
+   add_component("resource_type");
+   add_component("schema_name");
+   add_component("table_name");
+   add_component("secret_type");
+   add_component("secret_id");
+   add_component("secret_key");
+   window.location.hash = hash_segment;
+}
+
+      async function form_submitted(event) {
+        event.preventDefault();
+        if (!isRefreshing) {
+           isRefreshing = true;
+           toggleTableSelection();
+           store_hash_segment();
+           await refresh();
+           isRefreshing = false;
+        }
+      }
+      
+      // Event handler for example datasets dropdown
+      document.getElementById('example_datasets').addEventListener("change", async function(event) {
+         const selectedValue = event.target.value;
+         event.target.value = "";
+         
+         if (selectedValue && !isRefreshing) {
+            isRefreshing = true;
+            window.location.hash = selectedValue;
+            extract_hash_segment();
+            toggleTableSelection();
+            await refresh();
+            isRefreshing = false;
+         }
+      });
+      
+      document.getElementById('attach_form').addEventListener("change", form_submitted);
+      document.getElementById('credentials_form').addEventListener("change", form_submitted);
+      
+      // Initial check on page load
+      toggleTableSelection();
+      
+      refresh();
+      
+      });
+   </script>

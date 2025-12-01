@@ -68,6 +68,11 @@ silver:
     url: https://shiguredo.jp/
     logoimg: shiguredo.svg
 
+oss:
+  - name: Bloomberg
+    url: https://www.bloomberg.com/company/stories/bloomberg-ospo-launches-foss-contributor-fund/
+    logoimg: bloomberg.svg
+
 technical:
   - name: Cloudflare
     url: https://www.cloudflare.com/

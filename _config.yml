@@ -20,23 +20,23 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. http://example.com
 # Set current codename of DuckDB and version numbers of DuckDB clients
-current_duckdb_codename: "Ossivalis"
+current_duckdb_codename: "Andium"
 current_short_duckdb_version: "1.4"
 preview_short_duckdb_version: "1.5-dev"
-current_duckdb_version: 1.4.1
-current_duckdb_hash: "b390a7c376"
-current_duckdb_odbc_version: 1.4.1.0
-current_duckdb_odbc_short_version: 1.4.1
-current_duckdb_go_version: 1.4.1
-current_duckdb_nodejs_version: 1.4.1
-current_duckdb_node_neo_version: 1.4.1
-current_duckdb_r_version: 1.4.1
-current_duckdb_rust_version: 1.4.1
-current_duckdb_wasm_version: 1.4.1
+current_duckdb_version: 1.4.2
+current_duckdb_hash: "68d7555f68"
+current_duckdb_odbc_version: 1.4.2.0
+current_duckdb_odbc_short_version: 1.4.2
+current_duckdb_go_version: 1.4.2
+current_duckdb_nodejs_version: 1.4.2
+current_duckdb_node_neo_version: 1.4.2
+current_duckdb_r_version: 1.4.2
+current_duckdb_rust_version: 1.4.2
+current_duckdb_wasm_version: 1.4.2
 current_duckdb_csharp_version: 1.4.1
-current_duckdb_dart_version: 1.2.2
-current_duckdb_java_version: 1.4.1.0
-current_duckdb_java_short_version: 1.4.1
+current_duckdb_dart_version: 1.4.4
+current_duckdb_java_version: 1.4.2.0
+current_duckdb_java_short_version: 1.4.2
 livereload: true
 highlighter: rouge
 incremental: false
@@ -106,7 +106,7 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: '34.0k'
+star_count: '34.5k'
 
 toc:
   min_level: 1

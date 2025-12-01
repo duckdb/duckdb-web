@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB Quacks Arrow: A Zero-Copy Data Integration between Apache Arrow and DuckDB"
-author: Pedro Holanda and Jonathan Keane
+author: Pedro Holanda, Jonathan Keane
 excerpt: The zero-copy integration between DuckDB and Apache Arrow allows for rapid analysis of larger than memory datasets in Python and R using either SQL or relational APIs.
 tags: ["using DuckDB"]
 ---
@@ -98,7 +98,7 @@ install.packages("arrow")
 
 To execute the sample examples in this section, we need to download the following custom Parquet files:
 
-* [`integers.parquet`](/data/integers.parquet)
+* [`integers.parquet`]({% link data/integers.parquet %})
 * [`lineitemsf1.snappy.parquet`](https://blobs.duckdb.org/data/lineitemsf1.snappy.parquet)
 
 #### Python

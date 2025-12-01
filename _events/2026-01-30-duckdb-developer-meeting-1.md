@@ -28,14 +28,16 @@ Attendance is free. Please [RSVP on Eventbrite](https://www.eventbrite.com/e/duc
 
 ### Program Outline
 
-|  Time | Title               |
-| ----: | :------------------ |
-| 15:30 | _Venue opens_       |
-| 16:00 | First session       |
-| 16:50 | _Break_             |
-| 17:10 | Second session      |
-| 18:00 | _Drinks and snacks_ |
-| 19:30 | _End of event_      |
+|  Time | Title                                   | Presenter                           |
+| ----: | :-------------------------------------- | ----------------------------------- |
+| 15:30 | _Venue opens_                           |                                     |
+| 16:00 | Extension building in DuckDB            | Sam Ansmink (DuckDB Labs)           |
+| 16:25 | Encryption in DuckDB                    | Lotte Felius (DuckDB Labs)          |
+| 16:50 | _Break_                                 |
+| 17:10 | DuckPL: A procedural language in DuckDB | Denis Hirn (University of Tübingen) |
+| 17:35 | TBA                                     | TBA                                 |
+| 18:00 | _Drinks and snacks_                     |
+| 19:30 | _End of event_                          |
 
 ### Accessing the Venue
 

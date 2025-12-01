@@ -14,6 +14,7 @@
 
 @use '../_sass/components/copy_button';
 @use '../_sass/components/faq';
+@use '../_sass/components/feature_list';
 @use '../_sass/components/info_boxes';
 @use '../_sass/components/icons';
 
@@ -27,8 +28,10 @@
 @use '../_sass/pages/blog';
 @use '../_sass/pages/home';
 @use '../_sass/pages/installation';
+@use '../_sass/pages/wasm';
 @use '../_sass/pages/foundation';
 @use '../_sass/pages/default';
+@use '../_sass/pages/duckcon7';
 
 @use '../_sass/themes/darkmode';
 @use '../_sass/layout/responsive';

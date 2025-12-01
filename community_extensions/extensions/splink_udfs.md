@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: splink_udfs
   description: Phonetic, text normalization and address matching functions for record linkage.
-  version: 0.0.10
+  version: 0.0.11
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: moj-analytical-services/splink_udfs
-  ref: 86f88013fd7c89d48da63289a5ccf62de8aac472
+  ref: cf00056f887486d0aee0a853a764f9775aa40438
 
 docs:
   hello_world: |
@@ -30,10 +30,10 @@ docs:
     `ngrams(list,n)`, `double_metaphone(str)`
     and faster versions of `levenshtein` and `damerau_levenshtein`.
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 507
-extension_download_count_pretty: 507
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 1292
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
 layout: community_extension_doc
 ---
