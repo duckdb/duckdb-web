@@ -83,12 +83,7 @@
           values.push(label + ': ' + value);
         }
       });
-      
-      if (values.length > 0) {
-        $selected.text(values.join(', '));
-      } else {
-        $selected.text('None');
-      }
+      $selected.text('');
     }
 
     $container.on('input change', '.selection-foldout[data-foldout="credentials"] input[type="text"]', function() {
