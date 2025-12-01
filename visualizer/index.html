@@ -74,26 +74,12 @@ It's showcases how duckdb-wasm can efficiently query on the fly remote resources
                   <input type="text" id="resource_type" name="schema" value="ducklake">
                </div>
                <div class="form-field">
-                  <label for="option1">Option #1</label>
-                  <input type="text" id="option1" name="table" value="">
-               </div>
-               <div class="form-field">
-                  <label for="option2">Option #2</label>
-                  <input type="text" id="option2" name="table" value="">
-               </div>
-            </div>
-            <div class="form-row table-selection">
-               <div class="form-field">
                   <label for="schema_name">Schema</label>
                   <input type="text" id="schema_name" name="schema" value="">
                </div>
                <div class="form-field">
                   <label for="table_name">Table</label>
                   <input type="text" id="table_name" name="table" value="lineitem">
-               </div>
-               <div class="form-field">
-                  <label for="timetravel_string">At clause</label>
-                  <input type="text" id="timetravel_string" name="table" value="">
                </div>
             </div>
          </form>
@@ -121,7 +107,6 @@ function extract_hash_segment() {
    add_component("resource_type");
    add_component("schema_name");
    add_component("table_name");
-   add_component("timetravel_string");
    add_component("secret_type");
    add_component("secret_id");
    add_component("secret_key");
@@ -223,7 +208,6 @@ if (append) {
       var resource_type = document.getElementById('resource_type').value;
       var target_table_name = document.getElementById('table_name').value;
       var target_schema_name = document.getElementById('schema_name').value;
-      var timetravel_string = document.getElementById('timetravel_string').value;
      
       var secret_type = document.getElementById('secret_type').value;
       var secret_id = document.getElementById('secret_id').value;
@@ -274,6 +258,7 @@ if (append) {
       view_query += "." + target_schema_name;
       }
       view_query += "." + target_table_name;
+      var timetravel_string = null;
       if (timetravel_string) {
       view_query += " AT (TIMESTAMP => (" + timetravel_string + ")::TIMESTAMP)";
       }
@@ -369,6 +354,7 @@ if (y0 < y1) {
 var isRefreshing = false;
 
 function toggleTableSelection() {
+   return;
    var resource_path = document.getElementById('resource_path').value;
    var tableSelection = document.querySelector('.table-selection');
    
@@ -391,7 +377,6 @@ function store_hash_segment() {
    add_component("resource_type");
    add_component("schema_name");
    add_component("table_name");
-   add_component("timetravel_string");
    add_component("secret_type");
    add_component("secret_id");
    add_component("secret_key");
