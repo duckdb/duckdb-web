@@ -26,18 +26,23 @@ This event is slightly different from our usual meetups and conferences as it pr
 
 Attendance is free. Please [RSVP on Eventbrite](https://www.eventbrite.com/e/duckdb-developer-meeting-1-tickets-1850334944629?aff=oddtdtcreator).
 
+### Workshop
+
+In the morning, [Rusty Conover](https://rustyconover.work/) will hold a workshop on DuckDB extension development.
+Note that you have to register for this event separately. Please visit [Luma](https://luma.com/3p3ml9f5) to see the detailed program and to register.
+
 ### Program Outline
 
-|  Time | Title                                   | Presenter                           |
-| ----: | :-------------------------------------- | ----------------------------------- |
-| 15:30 | _Venue opens_                           |                                     |
-| 16:00 | Extension building in DuckDB            | Sam Ansmink (DuckDB Labs)           |
-| 16:25 | Encryption in DuckDB                    | Lotte Felius (DuckDB Labs)          |
-| 16:50 | _Break_                                 |
-| 17:10 | DuckPL: A procedural language in DuckDB | Denis Hirn (University of Tübingen) |
-| 17:35 | TBA                                     | TBA                                 |
-| 18:00 | _Drinks and snacks_                     |
-| 19:30 | _End of event_                          |
+|  Time | Title                                          | Presenter                           |
+| ----: | :--------------------------------------------- | ----------------------------------- |
+| 15:30 | _Venue opens_                                  |                                     |
+| 16:00 | Extension building in DuckDB                   | Sam Ansmink (DuckDB Labs)           |
+| 16:25 | Encryption in DuckDB                           | Lotte Felius (DuckDB Labs)          |
+| 16:50 | _Break_                                        |                                     |
+| 17:10 | DuckPL: A procedural language in DuckDB        | Denis Hirn (University of Tübingen) |
+| 17:35 | GizmoEdge: A distributed DuckDB engine for IoT | Philip Moore (GizmoData)            |
+| 18:00 | _Drinks and snacks_                            |                                     |
+| 19:30 | _End of event_                                 |                                     |
 
 ### Accessing the Venue
 
