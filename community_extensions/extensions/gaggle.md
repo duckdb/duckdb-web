@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 698
-extension_download_count_pretty: 698
+extension_download_count: 688
+extension_download_count_pretty: 688
 image: '/images/community_extensions/social_preview/preview_community_extension_gaggle.png'
 layout: community_extension_doc
 ---
