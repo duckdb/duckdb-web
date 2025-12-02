@@ -407,8 +407,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `ltrim('    test  ')` |
-| **Result** | `test  ` |
+| **Example 1** | <code class="language-plaintext highlighter-rouge">ltrim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
+| **Result** | <code class="language-plaintext highlighter-rouge">test&nbsp;&nbsp;</code> |
 | **Example 2** | `ltrim('>>>>test<<', '><')` |
 | **Result** | `test<<` |
 
@@ -650,8 +650,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `rtrim('test  ')` |
-| **Result** | `test` |
+| **Example 1** | <code class="language-plaintext highlighter-rouge">rtrim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
+| **Result** | <code class="language-plaintext highlighter-rouge">&nbsp;&nbsp;&nbsp;&nbsp;test</code> |
 | **Example 2** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 
@@ -782,7 +782,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `trim('    test  ')` |
+| **Example 1** | <code class="language-plaintext highlighter-rouge">trim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
 | **Result** | `test` |
 | **Example 2** | `trim('>>>>test<<', '><')` |
 | **Result** | `test` |
