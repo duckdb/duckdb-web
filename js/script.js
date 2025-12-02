@@ -1,7 +1,13 @@
 $(document).ready(function(){
 	if (window.location.hash) {
 		var hash = window.location.hash;
-		if ($(hash).length) {
+		var has_hash = true;
+		try {
+			$(hash);
+		} catch {
+			has_hash = false;
+		}
+		if (has_hash) if ($(hash).length) {
 			$('html, body').animate({
 				scrollTop: $(hash).offset().top-90
 			}, 300, 'swing');
