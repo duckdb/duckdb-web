@@ -70,6 +70,10 @@ footer{
 						color: $purple;
 					}
 				}
+				span{
+					color: var(--main-text-secondary-color, #B2B2B2);
+					line-height: 2;
+				}
 			}
 			h6{
 				text-decoration: none;

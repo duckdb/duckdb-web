@@ -136,12 +136,21 @@ section.speakers,
 			}
 		}
 	}
-	.postpreview.external-post {
-		position: relative;
-		border: 2px solid var(--lake-infobox-border-color, rgba(204, 235, 255, 0.60));
-	
-		&::after {
-	
+	.postpreview {
+		&.external-post {
+			border: 1px solid var(--lake-infobox-border-color, rgba(204, 235, 255, 0.60));
+			
+			&[data-source="duckdblabs.com"] {
+				border: 1px solid #FF6900;
+			}
+			
+			&[data-source="duckdb.org"] {
+				border: 1px solid var(--main-blogpost-border-color-yellow);
+			}
+			
+			&[data-source="ducklake.com"] {
+				border: 1px solid var(--main-blogpost-border-color-blue);
+			}
 		}
 	}
 	.eventpreview{
