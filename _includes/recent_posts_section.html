@@ -1,6 +1,6 @@
 <section class="blog recentposts">
 	<div class="wrap">
-		<h1>
+		<h2 class="display-1">
 			{% if page.collection == "events" %}
 				Other Events
 			{% elsif page.collection == "media" %}
@@ -12,7 +12,7 @@
 			{% else %}
 				Recent Posts
 			{% endif %}
-		</h1>
+		</h2>
 		<div class="newstileswrap">
 			{% if page.collection == "events" %}
 				{% assign items = site.events | sort: "date" | reverse %}

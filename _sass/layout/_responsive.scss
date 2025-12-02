@@ -457,9 +457,12 @@
 	body.landing .install .result+p span {
 		margin-left: 0;
 	}
-
-	footer .sitefooter .footercontent,
-	header .headerline .headercontent {
+	
+	header .headerline .headercontent{
+		max-width: 100%;
+	}
+	
+	footer .sitefooter .footercontent {
 		max-width: calc(100% - 30px);
 	}
 
