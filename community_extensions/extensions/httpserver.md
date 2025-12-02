@@ -79,7 +79,7 @@ docs:
 
 extension_star_count: 257
 extension_star_count_pretty: 257
-extension_download_count: 5112
+extension_download_count: 5109
 extension_download_count_pretty: 5.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
