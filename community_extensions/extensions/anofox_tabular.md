@@ -16,12 +16,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/anofox-tabular
-  ref: 2bb9a922ce49fbb63ca1b4e1ccb5fd556e471428
+  ref: 058ad4ea3ecb38ed00e8a4c135b0f427d119c8b4
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 559
-extension_download_count_pretty: 559
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 566
+extension_download_count_pretty: 566
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
 ---
