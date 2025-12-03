@@ -2,6 +2,11 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+.wasm .highlight button.copy{
+	top: 16px;
+	right: 16px;
+}
+
 pre.highlight > button,
 .highlight button.copy{
 	position: absolute;

@@ -124,10 +124,10 @@ docs:
     }
     ```
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 509
-extension_download_count_pretty: 509
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 546
+extension_download_count_pretty: 546
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---
@@ -148,5 +148,16 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type |                                              description                                              | comment |                                         examples                                          |
+|---------------|---------------|-------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------|
+| PDAL_Drivers  | table         | Returns the list of supported stage types of a PDAL Pipeline.                                         | NULL    | [SELECT * FROM PDAL_Drivers();]                                                           |
+| PDAL_Read     | table         | Read and import a variety of point cloud data file formats using the PDAL library.                    | NULL    | [SELECT * FROM PDAL_Read('./test/data/autzen_trim.laz');]                                 |
+| PDAL_Info     | table         | Read the metadata from point cloud file[s].                                                           | NULL    | [SELECT * FROM PDAL_Info('./test/data/autzen_trim.la*');]                                 |
+| PDAL_Pipeline | table         | Read and import a point cloud data file, applying also a custom processing pipeline file to the data. | NULL    | [SELECT * FROM PDAL_Pipeline('path/to/your/filename.las', 'path/to/your/pipeline.json');] |
 
 

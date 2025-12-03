@@ -12,6 +12,7 @@ It's showcases how duckdb-wasm can efficiently query on the fly remote resources
 -->
 
 <script src="{{ '/js/regular-table.js' | relative_url }}" defer></script>
+<script src="/js/copy_button.js" defer></script>
 
 <div class="content-container">
 <div class="wrap pagetitle pagetitle--small mb-5">
@@ -44,7 +45,7 @@ It's showcases how duckdb-wasm can efficiently query on the fly remote resources
      
  </div>
  
- <div class="selection-foldout open" data-foldout="attach_options">
+ <div class="selection-foldout" data-foldout="attach_options">
       <div class="selection-head">
           <h3>Attach options</h3>
       </div>
@@ -86,8 +87,9 @@ It's showcases how duckdb-wasm can efficiently query on the fly remote resources
       </div>
 
   </div>
-<pre><code id="last_query" class="language-sql"></code></pre>
-<p id="last_query_status">1/4: HTML loaded</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight" style="position:relative;min-height:62px;"><code id="last_query">
+</code></pre></div></div>
+<p id="last_query_status">1/5: HTML loaded</p>
 </div>
 
 <div class="datasettable">
@@ -222,6 +224,7 @@ if (append) {
       
 
       await executeQuery(conn, "DETACH __my_resource__;");
+      setup_queries = "";
       if (secret_type !== "") {
    var secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", KEY_ID '" + secret_id + "', SECRET '" + secret_key + "');";
 
@@ -237,7 +240,6 @@ if (append) {
 
       var view_query = "CREATE OR REPLACE VIEW __my_view__ AS ";
       
-      setup_queries = "";
       if (resource_type !== "") {
    var attach_string = "ATTACH IF NOT EXISTS '" + resource_path + "' AS __my_resource__ (TYPE "+ resource_type;
    if (resource_type == "iceberg" && resource_path.startsWith("arn:aws:s3tables:")) {

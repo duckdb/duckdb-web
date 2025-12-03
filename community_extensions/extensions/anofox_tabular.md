@@ -20,8 +20,8 @@ repo:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 566
-extension_download_count_pretty: 566
+extension_download_count: 560
+extension_download_count_pretty: 560
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
 ---
@@ -47,83 +47,139 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|                function_name                | function_type | description | comment | examples |
-|---------------------------------------------|---------------|-------------|---------|----------|
-| anofox_currency_name                        | scalar        | NULL        | NULL    |          |
-| anofox_currency_symbol                      | scalar        | NULL        | NULL    |          |
-| anofox_diff_hashdiff                        | table         | NULL        | NULL    |          |
-| anofox_diff_joindiff                        | table         | NULL        | NULL    |          |
-| anofox_email_config                         | table         | NULL        | NULL    |          |
-| anofox_email_is_valid                       | scalar        | NULL        | NULL    |          |
-| anofox_email_validate                       | scalar        | NULL        | NULL    |          |
-| anofox_is_valid_currency                    | scalar        | NULL        | NULL    |          |
-| anofox_is_valid_vat_country                 | scalar        | NULL        | NULL    |          |
-| anofox_metric_dbscan                        | table         | NULL        | NULL    |          |
-| anofox_metric_dbscan_multivariate           | table         | NULL        | NULL    |          |
-| anofox_metric_distinct_count                | table         | NULL        | NULL    |          |
-| anofox_metric_freshness                     | table         | NULL        | NULL    |          |
-| anofox_metric_iqr                           | table         | NULL        | NULL    |          |
-| anofox_metric_isolation_forest              | table         | NULL        | NULL    |          |
-| anofox_metric_isolation_forest_multivariate | table         | NULL        | NULL    |          |
-| anofox_metric_null_rate                     | table         | NULL        | NULL    |          |
-| anofox_metric_schema                        | table         | NULL        | NULL    |          |
-| anofox_metric_volume                        | table         | NULL        | NULL    |          |
-| anofox_metric_zscore                        | table         | NULL        | NULL    |          |
-| anofox_money                                | scalar        | NULL        | NULL    |          |
-| anofox_money_abs                            | scalar        | NULL        | NULL    |          |
-| anofox_money_add                            | scalar        | NULL        | NULL    |          |
-| anofox_money_amount                         | scalar        | NULL        | NULL    |          |
-| anofox_money_currency                       | scalar        | NULL        | NULL    |          |
-| anofox_money_format                         | scalar        | NULL        | NULL    |          |
-| anofox_money_from_cents                     | scalar        | NULL        | NULL    |          |
-| anofox_money_in_range                       | scalar        | NULL        | NULL    |          |
-| anofox_money_is_negative                    | scalar        | NULL        | NULL    |          |
-| anofox_money_is_positive                    | scalar        | NULL        | NULL    |          |
-| anofox_money_is_zero                        | scalar        | NULL        | NULL    |          |
-| anofox_money_multiply                       | scalar        | NULL        | NULL    |          |
-| anofox_money_same_currency                  | scalar        | NULL        | NULL    |          |
-| anofox_money_subtract                       | scalar        | NULL        | NULL    |          |
-| anofox_phonenumber_example                  | scalar        | NULL        | NULL    |          |
-| anofox_phonenumber_format                   | scalar        | NULL        | NULL    |          |
-| anofox_phonenumber_is_possible              | scalar        | NULL        | NULL    |          |
-| anofox_phonenumber_is_valid                 | scalar        | NULL        | NULL    |          |
-| anofox_phonenumber_is_valid_for_region      | scalar        | NULL        | NULL    |          |
-| anofox_phonenumber_match                    | scalar        | NULL        | NULL    |          |
-| anofox_phonenumber_parse                    | scalar        | NULL        | NULL    |          |
-| anofox_phonenumber_region                   | scalar        | NULL        | NULL    |          |
-| anofox_phonenumber_status                   | table         | NULL        | NULL    |          |
-| anofox_postal_expand_address                | scalar        | NULL        | NULL    |          |
-| anofox_postal_load_data                     | scalar        | NULL        | NULL    |          |
-| anofox_postal_parse_address                 | scalar        | NULL        | NULL    |          |
-| anofox_postal_status                        | table         | NULL        | NULL    |          |
-| anofox_vat                                  | scalar        | NULL        | NULL    |          |
-| anofox_vat_country_name                     | scalar        | NULL        | NULL    |          |
-| anofox_vat_exists                           | scalar        | NULL        | NULL    |          |
-| anofox_vat_format                           | scalar        | NULL        | NULL    |          |
-| anofox_vat_is_eu_member                     | scalar        | NULL        | NULL    |          |
-| anofox_vat_is_valid                         | scalar        | NULL        | NULL    |          |
-| anofox_vat_is_valid_syntax                  | scalar        | NULL        | NULL    |          |
-| anofox_vat_normalize                        | scalar        | NULL        | NULL    |          |
-| anofox_vat_split                            | scalar        | NULL        | NULL    |          |
+|                  function_name                  | function_type | description | comment | examples |
+|-------------------------------------------------|---------------|-------------|---------|----------|
+| anofox_tab_currency_name                        | scalar        | NULL        | NULL    |          |
+| anofox_tab_currency_symbol                      | scalar        | NULL        | NULL    |          |
+| anofox_tab_diff_hashdiff                        | table         | NULL        | NULL    |          |
+| anofox_tab_diff_joindiff                        | table         | NULL        | NULL    |          |
+| anofox_tab_email_config                         | table         | NULL        | NULL    |          |
+| anofox_tab_email_is_valid                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_email_validate                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_is_valid_currency                    | scalar        | NULL        | NULL    |          |
+| anofox_tab_is_valid_vat_country                 | scalar        | NULL        | NULL    |          |
+| anofox_tab_metric_dbscan                        | table         | NULL        | NULL    |          |
+| anofox_tab_metric_dbscan_multivariate           | table         | NULL        | NULL    |          |
+| anofox_tab_metric_distinct_count                | table         | NULL        | NULL    |          |
+| anofox_tab_metric_freshness                     | table         | NULL        | NULL    |          |
+| anofox_tab_metric_iqr                           | table         | NULL        | NULL    |          |
+| anofox_tab_metric_isolation_forest              | table         | NULL        | NULL    |          |
+| anofox_tab_metric_isolation_forest_multivariate | table         | NULL        | NULL    |          |
+| anofox_tab_metric_null_rate                     | table         | NULL        | NULL    |          |
+| anofox_tab_metric_schema                        | table         | NULL        | NULL    |          |
+| anofox_tab_metric_volume                        | table         | NULL        | NULL    |          |
+| anofox_tab_metric_zscore                        | table         | NULL        | NULL    |          |
+| anofox_tab_money                                | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_abs                            | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_add                            | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_amount                         | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_currency                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_format                         | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_from_cents                     | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_in_range                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_is_negative                    | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_is_positive                    | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_is_zero                        | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_multiply                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_same_currency                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_subtract                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_example                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_format                   | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_is_possible              | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_is_valid                 | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_is_valid_for_region      | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_match                    | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_parse                    | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_region                   | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_status                   | table         | NULL        | NULL    |          |
+| anofox_tab_postal_expand_address                | scalar        | NULL        | NULL    |          |
+| anofox_tab_postal_load_data                     | scalar        | NULL        | NULL    |          |
+| anofox_tab_postal_parse_address                 | scalar        | NULL        | NULL    |          |
+| anofox_tab_postal_status                        | table         | NULL        | NULL    |          |
+| anofox_tab_vat                                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_country_name                     | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_exists                           | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_format                           | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_is_eu_member                     | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_is_valid                         | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_is_valid_syntax                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_normalize                        | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_split                            | scalar        | NULL        | NULL    |          |
+| currency_name                                   | scalar        | NULL        | NULL    |          |
+| currency_symbol                                 | scalar        | NULL        | NULL    |          |
+| diff_hashdiff                                   | table         | NULL        | NULL    |          |
+| diff_joindiff                                   | table         | NULL        | NULL    |          |
+| email_config                                    | table         | NULL        | NULL    |          |
+| email_is_valid                                  | scalar        | NULL        | NULL    |          |
+| email_validate                                  | scalar        | NULL        | NULL    |          |
+| is_valid_currency                               | scalar        | NULL        | NULL    |          |
+| is_valid_vat_country                            | scalar        | NULL        | NULL    |          |
+| metric_dbscan                                   | table         | NULL        | NULL    |          |
+| metric_dbscan_multivariate                      | table         | NULL        | NULL    |          |
+| metric_distinct_count                           | table         | NULL        | NULL    |          |
+| metric_freshness                                | table         | NULL        | NULL    |          |
+| metric_iqr                                      | table         | NULL        | NULL    |          |
+| metric_isolation_forest                         | table         | NULL        | NULL    |          |
+| metric_isolation_forest_multivariate            | table         | NULL        | NULL    |          |
+| metric_null_rate                                | table         | NULL        | NULL    |          |
+| metric_schema                                   | table         | NULL        | NULL    |          |
+| metric_volume                                   | table         | NULL        | NULL    |          |
+| metric_zscore                                   | table         | NULL        | NULL    |          |
+| money                                           | scalar        | NULL        | NULL    |          |
+| money_abs                                       | scalar        | NULL        | NULL    |          |
+| money_add                                       | scalar        | NULL        | NULL    |          |
+| money_amount                                    | scalar        | NULL        | NULL    |          |
+| money_currency                                  | scalar        | NULL        | NULL    |          |
+| money_format                                    | scalar        | NULL        | NULL    |          |
+| money_from_cents                                | scalar        | NULL        | NULL    |          |
+| money_in_range                                  | scalar        | NULL        | NULL    |          |
+| money_is_negative                               | scalar        | NULL        | NULL    |          |
+| money_is_positive                               | scalar        | NULL        | NULL    |          |
+| money_is_zero                                   | scalar        | NULL        | NULL    |          |
+| money_multiply                                  | scalar        | NULL        | NULL    |          |
+| money_same_currency                             | scalar        | NULL        | NULL    |          |
+| money_subtract                                  | scalar        | NULL        | NULL    |          |
+| phonenumber_example                             | scalar        | NULL        | NULL    |          |
+| phonenumber_format                              | scalar        | NULL        | NULL    |          |
+| phonenumber_is_possible                         | scalar        | NULL        | NULL    |          |
+| phonenumber_is_valid                            | scalar        | NULL        | NULL    |          |
+| phonenumber_is_valid_for_region                 | scalar        | NULL        | NULL    |          |
+| phonenumber_match                               | scalar        | NULL        | NULL    |          |
+| phonenumber_parse                               | scalar        | NULL        | NULL    |          |
+| phonenumber_region                              | scalar        | NULL        | NULL    |          |
+| phonenumber_status                              | table         | NULL        | NULL    |          |
+| postal_expand_address                           | scalar        | NULL        | NULL    |          |
+| postal_load_data                                | scalar        | NULL        | NULL    |          |
+| postal_parse_address                            | scalar        | NULL        | NULL    |          |
+| postal_status                                   | table         | NULL        | NULL    |          |
+| vat                                             | scalar        | NULL        | NULL    |          |
+| vat_country_name                                | scalar        | NULL        | NULL    |          |
+| vat_exists                                      | scalar        | NULL        | NULL    |          |
+| vat_format                                      | scalar        | NULL        | NULL    |          |
+| vat_is_eu_member                                | scalar        | NULL        | NULL    |          |
+| vat_is_valid                                    | scalar        | NULL        | NULL    |          |
+| vat_is_valid_syntax                             | scalar        | NULL        | NULL    |          |
+| vat_normalize                                   | scalar        | NULL        | NULL    |          |
+| vat_split                                       | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|                 name                 |                             description                              | input_type | scope  | aliases |
-|--------------------------------------|----------------------------------------------------------------------|------------|--------|---------|
-| anofox_email_default_validation      | Default validation mode for anofox_email_is_valid (regex, dns, smtp) | VARCHAR    | GLOBAL | []      |
-| anofox_email_dns_timeout_ms          | DNS resolver timeout in milliseconds                                 | BIGINT     | GLOBAL | []      |
-| anofox_email_dns_tries               | Number of DNS queries to attempt before failing                      | INTEGER    | GLOBAL | []      |
-| anofox_email_regex_pattern           | Regular expression used during email regex validation                | VARCHAR    | GLOBAL | []      |
-| anofox_email_smtp_connect_timeout_ms | SMTP connect timeout in milliseconds                                 | BIGINT     | GLOBAL | []      |
-| anofox_email_smtp_helo_domain        | Domain value used during SMTP EHLO negotiation                       | VARCHAR    | GLOBAL | []      |
-| anofox_email_smtp_mail_from          | MAIL FROM address presented during SMTP verification                 | VARCHAR    | GLOBAL | []      |
-| anofox_email_smtp_port               | SMTP port used when connecting to MX hosts                           | INTEGER    | GLOBAL | []      |
-| anofox_email_smtp_read_timeout_ms    | SMTP read/write timeout in milliseconds                              | BIGINT     | GLOBAL | []      |
-| anofox_phonenumber_default_region    | Default region code used when the region hint is NULL                | VARCHAR    | GLOBAL | []      |
-| anofox_postal_data_path              | Directory storing libpostal assets                                   | VARCHAR    | GLOBAL | []      |
-| anofox_trace_enabled                 | Enable anofox tracing output                                         | BOOLEAN    | GLOBAL | []      |
-| anofox_trace_level                   | Minimum tracing level (trace/debug/info/warn/error/critical/off)     | VARCHAR    | GLOBAL | []      |
+|                   name                   |                               description                                | input_type | scope  | aliases |
+|------------------------------------------|--------------------------------------------------------------------------|------------|--------|---------|
+| anofox_tab_email_default_validation      | Default validation mode for anofox_tab_email_is_valid (regex, dns, smtp) | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_dns_timeout_ms          | DNS resolver timeout in milliseconds                                     | BIGINT     | GLOBAL | []      |
+| anofox_tab_email_dns_tries               | Number of DNS queries to attempt before failing                          | INTEGER    | GLOBAL | []      |
+| anofox_tab_email_regex_pattern           | Regular expression used during email regex validation                    | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_smtp_connect_timeout_ms | SMTP connect timeout in milliseconds                                     | BIGINT     | GLOBAL | []      |
+| anofox_tab_email_smtp_helo_domain        | Domain value used during SMTP EHLO negotiation                           | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_smtp_mail_from          | MAIL FROM address presented during SMTP verification                     | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_smtp_port               | SMTP port used when connecting to MX hosts                               | INTEGER    | GLOBAL | []      |
+| anofox_tab_email_smtp_read_timeout_ms    | SMTP read/write timeout in milliseconds                                  | BIGINT     | GLOBAL | []      |
+| anofox_tab_phonenumber_default_region    | Default region code used when the region hint is NULL                    | VARCHAR    | GLOBAL | []      |
+| anofox_tab_postal_data_path              | Directory storing libpostal assets                                       | VARCHAR    | GLOBAL | []      |
+| anofox_tab_trace_enabled                 | Enable anofox tracing output                                             | BOOLEAN    | GLOBAL | []      |
+| anofox_tab_trace_level                   | Minimum tracing level (trace/debug/info/warn/error/critical/off)         | VARCHAR    | GLOBAL | []      |
 
 
