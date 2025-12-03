@@ -224,6 +224,7 @@ if (append) {
       
 
       await executeQuery(conn, "DETACH __my_resource__;");
+      setup_queries = "";
       if (secret_type !== "") {
    var secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", KEY_ID '" + secret_id + "', SECRET '" + secret_key + "');";
 
@@ -239,7 +240,6 @@ if (append) {
 
       var view_query = "CREATE OR REPLACE VIEW __my_view__ AS ";
       
-      setup_queries = "";
       if (resource_type !== "") {
    var attach_string = "ATTACH IF NOT EXISTS '" + resource_path + "' AS __my_resource__ (TYPE "+ resource_type;
    if (resource_type == "iceberg" && resource_path.startsWith("arn:aws:s3tables:")) {
