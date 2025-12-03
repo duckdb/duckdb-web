@@ -95,4 +95,4 @@ The DuckDB Foundation may revoke permission to use the DuckDB Marks if a use is 
 
 ## Questions? Need Permission?
 
-We aim to be a helpful and responsive steward of the DuckDB project. If you have a question or would like approval for a specific use case, please contact us at: quack@duckdb.org. We are happy to review materials and provide quick guidance.
+We aim to be a helpful and responsive steward of the DuckDB project. If you have a question or would like approval for a specific use case, please contact us at: [quack@duckdb.org](mailto:quack@duckdb.org). We are happy to review materials and provide quick guidance.
