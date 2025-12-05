@@ -1,6 +1,6 @@
 <section class="blog recentposts">
 	<div class="wrap">
-		<h2 class="display-1">
+		<h2 class="display-3">
 			{% if page.collection == "events" %}
 				Other Events
 			{% elsif page.collection == "media" %}
@@ -45,7 +45,12 @@
 								{% if item.thumb %}
 									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
 								{% else %}
-									<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+									{% if page.collection == "science" %}
+										{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
+										<img src="/images/science/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+									{% else %}
+										<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+									{% endif %}
 								{% endif %}
 							</div>
 							<div class="postdetails">
@@ -84,7 +89,12 @@
 								{% if item.thumb %}
 									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
 								{% else %}
-									<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+									{% if page.collection == "science" %}
+										{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
+										<img src="/images/science/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+									{% else %}
+										<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+									{% endif %}
 								{% endif %}
 							</div>
 							<div class="postdetails">
