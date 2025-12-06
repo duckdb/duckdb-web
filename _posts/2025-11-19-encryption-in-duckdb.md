@@ -55,7 +55,7 @@ After the main database header, DuckDB stores two 4KB database headers that cont
 
 Blocks in DuckDB are by default 256KB, but their size is configurable. At the start of each *plaintext* block there is an 8-byte block header, which stores an 8-byte checksum. The checksum is a simple calculation that is often used in database systems to check for any corrupted data. 
 
-<div align="center">
+<div>
     <img src="{% link images/blog/encryption/plaintext-block-light.svg %}"
         alt="Plaintext block"
         class="lightmode-img"
@@ -68,7 +68,7 @@ Blocks in DuckDB are by default 256KB, but their size is configurable. At the st
 
 For encrypted blocks however, its block header consists of 40 bytes instead of 8 bytes for the checksum. The block header for encrypted blocks contains a 16-byte *nonce/IV* and, optionally, a 16-byte *tag*, depending on which encryption cipher is used. The nonce and tag are stored in plaintext, but the checksum is encrypted for better security. Note that the block header always needs to be 8-bytes aligned to calculate the checksum.
 
-<div align="center">
+<div>
     <img src="{% link images/blog/encryption/encrypted-block-light.svg %}"
         alt="Encrypted block"
         class="lightmode-img"
@@ -105,7 +105,7 @@ If we now close the DuckDB process, we can see that there is a `.wal` file shown
 
 Before writing new entries (inserts, updates, deletes) to the database, these entries are essentially logged and appended to the WAL. Only *after* logged entries are flushed to disk, a transaction is considered as committed. A plaintext WAL entry has the following structure:
 
-<div align="center">
+<div>
     <img src="{% link images/blog/encryption/plaintext-wal-entry-light.svg %}"
         alt="Plaintext block"
         class="lightmode-img"
@@ -118,7 +118,7 @@ Before writing new entries (inserts, updates, deletes) to the database, these en
 
 Since the WAL is append-only, we encrypt a WAL entry *per value*. For AES-GCM this means that we append a nonce and a tag to each entry. The structure in which we do this is depicted in below. When we serialize an encrypted entry to the encrypted WAL, we first store the length in plaintext, because we need to know how many bytes we should decrypt. The length is followed by a nonce, which on its turn is followed by the encrypted checksum and the encrypted entry itself. After the entry, a 16-byte tag is stored for verification.
 
-<div align="center">
+<div>
     <img src="{% link images/blog/encryption/encrypted-wal-entry-light.svg %}"
         alt="Plaintext block"
         class="lightmode-img"
@@ -190,7 +190,7 @@ Let’s now visualize both the plaintext and encrypted data with binocle. For th
 <summary markdown='span'>
 Click here to see the entropy of a plaintext database
 </summary>
-<div align="center">
+<div>
     <img src="https://blobs.duckdb.org/images/duckdb-plaintext-database.png" width="800" />
 </div>
 </details>
@@ -199,7 +199,7 @@ Click here to see the entropy of a plaintext database
 <summary markdown='span'>
 Click here to see the entropy of an encrypted database
 </summary>
-<div align="center">
+<div>
     <img src="https://blobs.duckdb.org/images/duckdb-encrypted-database.png" width="800" />
 </div>
 </details>
