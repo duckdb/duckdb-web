@@ -40,7 +40,7 @@ jobs:
           python scripts/get_calendar.py
 
       - name: Create PR
-        uses: peter-evans/create-pull-request@v7.0.9
+        uses: peter-evans/create-pull-request@v7.0.11
         with:
           branch: update-preview-branch
           commit-message: "Update star count, copy stable to preview"
