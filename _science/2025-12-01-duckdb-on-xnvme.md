@@ -12,7 +12,7 @@ tags: ["Paper"]
 
 [Implementation (fork)](https://github.com/Ma-Master-DK/duckdb)
 
-Venue: arxiv 2025
+Venue: arXiv preprint, 2025
 
 ## Abstract
 
