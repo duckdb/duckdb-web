@@ -202,15 +202,15 @@ pip install duckdb
     data-docs="{% link docs/stable/clients/r.md %}">
 
 {%- highlight r -%}
-install.packages("duckdb")
+install.packages("duckdb", repos = c("https://duckdb.r-universe.dev", "https://cloud.r-project.org"))
 {%- endhighlight -%}
 
 <div class="alternative">
 
-<h4>Using a Mirror</h4>
+<h4>Installing from CRAN</h4>
 
 {%- highlight r -%}
-install.packages("duckdb", repos = c("https://duckdb.r-universe.dev", "https://cloud.r-project.org"))
+install.packages("duckdb")
 {%- endhighlight -%}
 </div>
 </div>
