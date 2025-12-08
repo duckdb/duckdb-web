@@ -4,7 +4,7 @@ title: "DuckDB on xNVMe"
 author: "Marius Ottosen, Magnus Keinicke Parlo, Philippe Bonnet"
 #thumb: ""
 #image: ""
-#excerpt: ""
+excerpt: ""
 tags: ["Paper"]
 ---
 
