@@ -20,11 +20,11 @@ In this post, we will show how to apply stream windows on static timestamped fac
 For the current implementation, we will use the DuckDB database created in the dbt project detailed in the article [“Fully Local Data Transformation with dbt and DuckDB”]({% post_url 2025-04-04-dbt-duckdb %}), based on the open data from the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/about). We start by attaching (in any DuckDB session) the database from our storage location.
 
 ```sql
-ATTACH 'http://blobs.duckdb.org/data/dutch_railway_network.duckdb';
+ATTACH 'https://blobs.duckdb.org/data/dutch_railway_network.duckdb';
 USE dutch_railway_network.main_main;
 ```
 
-> Warning The database is rather big (approx. 1.2 GB), therefore make sure to have a stable internet connection. Instead of attaching the database, you can also [download the database file](http://blobs.duckdb.org/data/dutch_railway_network.duckdb) and connect to it from the command line:
+> Warning The database is rather big (approx. 1.2 GB), therefore make sure to have a stable internet connection. Instead of attaching the database, you can also [download the database file](https://blobs.duckdb.org/data/dutch_railway_network.duckdb) and connect to it from the command line:
 >
 > ```batch
 > duckdb dutch_railway_network.duckdb -cmd 'USE main_main'

@@ -119,7 +119,7 @@ We do see significant speedups, from 7 up to as much as 53. The [geometric mean]
 
 ## Reproducibility
 
-The binary, scripts, queries, and results are [available on GitHub](https://github.com/hannes/old-macbook-tpch) for inspection. We also made the [TPC-H SF1000 database file](http://blobs.duckdb.org/data/tpch-sf1000.db) available for download so you don't have to generate it. But be warned, it's a large file.
+The binary, scripts, queries, and results are [available on GitHub](https://github.com/hannes/old-macbook-tpch) for inspection. We also made the [TPC-H SF1000 database file](https://blobs.duckdb.org/data/tpch-sf1000.db) available for download so you don't have to generate it. But be warned, it's a large file.
 
 ## Discussion
 
