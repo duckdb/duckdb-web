@@ -99,7 +99,7 @@ This installs the `duckdb` package using the binary distributed through [PyPI](h
 python
 ```
 
-```console
+```text
 Python 3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:51:39) [MSC v.1944 64 bit (ARM64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import duckdb
