@@ -113,7 +113,7 @@ Currently, many Python installations that you'll find on Windows ARM64 computers
 > To understand which platform your Python installation is using, observe the Python CLI's first line (e.g., `Python 3.13.9 ... (ARM64)`).
 
 We used the [`tpch` extension]({% link docs/stable/core_extensions/tpch.md %}) to perform a quick benchmark by running the queries on the TPC-H SF100 dataset.
-We executed the benchmark on a Microsoft Copilot+ Laptop with a 12-core Snapdragon CPU running at 3.4 GHz, 64 GB RAM and 1 TB disk.
+We executed the benchmark on a [15-inch Microsoft Surface Laptop](https://www.microsoft.com/en-us/store/b/buy-surface-laptop/) with a 12-core Snapdragon CPU running at 3.4 GHz, 64 GB RAM and 1 TB disk.
 
 <details markdown='1'>
 <summary markdown='span'>
