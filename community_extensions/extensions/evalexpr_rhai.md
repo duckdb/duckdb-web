@@ -53,8 +53,8 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type |                                           description                                            | comment |                                                           examples                                                           |
 |---------------|---------------|--------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------|
-| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression with a JSON context object accessible as 'context' | NULL    | [evalexpr_rhai('context.x + context.y', '{"x": 10, "y": 20}'), evalexpr_rhai('context.items.len()', '{"items": [1, 2, 3]}')] |
 | evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression and return the result as JSON                      | NULL    | [evalexpr_rhai('40 + 2'), evalexpr_rhai('[1, 2, 3].map(|x| x * 2)')]                                                         |
+| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression with a JSON context object accessible as 'context' | NULL    | [evalexpr_rhai('context.x + context.y', '{"x": 10, "y": 20}'), evalexpr_rhai('context.items.len()', '{"items": [1, 2, 3]}')] |
 
 ### Added Settings
 
