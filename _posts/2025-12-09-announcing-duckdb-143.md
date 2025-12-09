@@ -23,6 +23,8 @@ We now distribute Python wheels for Windows ARM64. This means that you take e.g.
 pip install duckdb
 ```
 
+> Some Python installations on Win
+
 v1.4.4 is expected to also ship [extensions for Windows ARM64](https://github.com/duckdb/duckdb/pull/20004).
 
 ## Fixes
@@ -40,4 +42,5 @@ This version ships a few fixes:
 * [`#18782` Incorrect “rows affected” reported by ART index](https://github.com/duckdb/duckdb/issues/18782)
 * [`#19575` Invalid Unicode error with `LIKE` expressions](https://github.com/duckdb/duckdb/issues/19575)
 
-This was a short summary but there have been XX commits by over YY contributors since we v1.4.2. As usual, the full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.4). We would like to thank our contributors for providing detailed issue reports and patches!
+This was a short summary but, as usual, the full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.3).
+We would like to thank our contributors for providing detailed issue reports and patches!
