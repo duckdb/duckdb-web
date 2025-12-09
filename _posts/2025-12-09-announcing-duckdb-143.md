@@ -45,7 +45,7 @@ This version ships a number of performance improvements and bugfixes.
 
 ## Windows ARM64
 
-With this release, we are introducing beta support for Windows ARM64 by supporting extensions and shipping native Python wheels.
+With this release, we are introducing beta support for Windows ARM64 by distributing native DuckDB extensions and Python wheels.
 
 ### Extension Distribution for Windows ARM64
 
