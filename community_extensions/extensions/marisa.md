@@ -18,15 +18,15 @@ extension:
   maintainers:
   - rustyconover
   name: marisa
-  version: '2025101201'
+  version: '2025120401'
 repo:
   github: query-farm/marisa
-  ref: 62a09ef28fab1d81c18bafe143eaed935b4abf08
+  ref: 6e81aadaa0a41901218fcf02ff39d8ff2594ffa7
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 726
-extension_download_count_pretty: 726
+extension_download_count: 627
+extension_download_count_pretty: 627
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
 layout: community_extension_doc
 ---
@@ -77,6 +77,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

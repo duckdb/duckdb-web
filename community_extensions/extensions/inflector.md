@@ -6,25 +6,26 @@ excerpt: |
   Powerful string case transformation and inflection capabilities directly to your SQL queries.
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_inflector.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_inflector.html).
 extension:
   build: cmake
-  description: Powerful string case transformation and inflection capabilities directly to your SQL queries.
+  description: Powerful string case transformation and inflection capabilities directly
+    to your SQL queries.
   language: C++
   license: Apache-2.0
   maintainers:
-    - rustyconover
+  - rustyconover
   name: inflector
   requires_toolchains: rust
-  version: 2025111201
+  version: '2025120401'
 repo:
   github: query-farm/inflector
-  ref: 973052ba08aeec5380f79254d3d3b4d805c0b8b3
+  ref: 1c628375fdffa25d85e3381f2ec05cefa16b5642
+
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 815
-extension_download_count_pretty: 815
+extension_download_count: 644
+extension_download_count_pretty: 644
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
@@ -101,6 +102,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

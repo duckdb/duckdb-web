@@ -17,15 +17,15 @@ extension:
   - rustyconover
   name: shellfs
   requires_toolchains: python3
-  version: '2025101201'
+  version: '2025120401'
 repo:
   github: query-farm/shellfs
-  ref: f0bcfb8035b2f2d62b3dbfa202bbe61a125b51ee
+  ref: 4fef6d3d58068ce8ef6ed002441e0eca002cf372
 
-extension_star_count: 83
-extension_star_count_pretty: 83
-extension_download_count: 34997
-extension_download_count_pretty: 35.0k
+extension_star_count: 84
+extension_star_count_pretty: 84
+extension_download_count: 33626
+extension_download_count_pretty: 33.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
 layout: community_extension_doc
 ---
@@ -66,6 +66,7 @@ LOAD {{ page.extension.name }};
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
 | ignore_sigpipe                       | Ignore SIGPIPE                                                                               | BOOLEAN    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

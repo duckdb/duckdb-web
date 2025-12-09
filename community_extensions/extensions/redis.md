@@ -5,115 +5,118 @@ excerpt: |
   DuckDB Community Extensions
   Redis compatible Client for DuckDB
 
-extension:
-  name: redis
-  description: Redis compatible Client for DuckDB
-  version: 1.0.1
-  language: C++
-  build: cmake
-  license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
-  maintainers:
-    - lmangani
-    - gigapi
-
-repo:
-  github: quackscience/duckdb-extension-redis
-  ref: 03bb83c5d1f50ac9f085f49c6415ccb6d0854517
-
 docs:
-  hello_world: |
-    -- Create a local Redis connection secret
-    CREATE SECRET IF NOT EXISTS redis (
-            TYPE redis,
-            PROVIDER config,
-            host 'localhost',
-            port '6379',
-            password 'optional_password'
-        );
-    
-    -- Create a Redis cloud connection secret
-    CREATE SECRET IF NOT EXISTS redis (
-            TYPE redis,
-            PROVIDER config,
-            host 'redis-1234.ec2.redns.redis-cloud.com',
-            port '16959',
-            password 'xxxxxx'
-        );
+  extended_description: '<img src="https://github.com/user-attachments/assets/46a5c546-7e9b-42c7-87f4-bc8defe674e0"
+    width=250 />
 
-    -- Set a value
-    SELECT redis_set('user:1', 'John Doe', 'redis') as result;
-    
-    -- Get a value
-    SELECT redis_get('user:1', 'redis') as user_name;
-
-    -- Set hash fields
-    SELECT redis_hset('user:1', 'email', 'john@example.com', 'redis');
-    SELECT redis_hset('user:1', 'age', '30', 'redis');
-    
-    -- Get hash field
-    SELECT redis_hget('user:1', 'email', 'redis') as email;
-
-    -- Push items to list
-    SELECT redis_lpush('mylist', 'first_item', 'redis');
-    SELECT redis_lpush('mylist', 'second_item', 'redis');
-    
-    -- Get range from list (returns comma-separated values)
-    -- Get all items (0 to -1 means start to end)
-    SELECT redis_lrange('mylist', 0, -1, 'redis') as items;
-    
-    -- Get first 5 items
-    SELECT redis_lrange('mylist', 0, 4, 'redis') as items;
-    
-    -- Push multiple items
-    WITH items(value) AS (
-        VALUES ('item1'), ('item2'), ('item3')
-    )
-    SELECT redis_lpush('mylist', value, 'redis')
-    FROM items;
-    
-  extended_description: |
-    <img src="https://github.com/user-attachments/assets/46a5c546-7e9b-42c7-87f4-bc8defe674e0" width=250 />
 
     # DuckDB Redis Client Extension
+
     This extension provides Redis-compatible client functionality for DuckDB
-    
+
+
     > Experimental: USE AT YOUR OWN RISK!
-    
+
+
     ## Features
+
     Currently supported Redis operations:
+
     - String operations: `GET`, `SET`, `MGET`
+
     - Hash operations: `HGET`, `HSET`, `HGETALL`, `HSCAN`, `HSCAN_OVER_SCAN`
+
     - List operations: `LPUSH`, `LRANGE`, `LRANGE_TABLE`
+
     - Key operations: `DEL`, `EXISTS`, `TYPE`, `SCAN`, `KEYS`
+
     - Batch and discovery operations: `SCAN`, `HSCAN_OVER_SCAN`, `KEYS`
-    
+
+
     ## Quick Reference: Available Functions
-    
+
+
     | Function | Type | Description |
+
     |----------|------|-------------|
+
     | `redis_get(key, secret)` | Scalar | Get value of a string key |
+
     | `redis_set(key, value, secret)` | Scalar | Set value of a string key |
-    | `redis_mget(keys_csv, secret)` | Scalar | Get values for multiple keys (comma-separated) |
+
+    | `redis_mget(keys_csv, secret)` | Scalar | Get values for multiple keys (comma-separated)
+    |
+
     | `redis_hget(key, field, secret)` | Scalar | Get value of a hash field |
-    | `redis_hset(key, field, value, secret)` | Scalar | Set value of a hash field |
+
+    | `redis_hset(key, field, value, secret)` | Scalar | Set value of a hash field
+    |
+
     | `redis_lpush(key, value, secret)` | Scalar | Push value to a list |
-    | `redis_lrange(key, start, stop, secret)` | Scalar | Get range from a list (comma-separated) |
+
+    | `redis_lrange(key, start, stop, secret)` | Scalar | Get range from a list (comma-separated)
+    |
+
     | `redis_del(key, secret)` | Scalar | Delete a key (returns TRUE if deleted) |
-    | `redis_exists(key, secret)` | Scalar | Check if a key exists (returns TRUE if exists) |
+
+    | `redis_exists(key, secret)` | Scalar | Check if a key exists (returns TRUE if
+    exists) |
+
     | `redis_type(key, secret)` | Scalar | Get the type of a key |
-    | `redis_scan(cursor, pattern, count, secret)` | Scalar | Scan keys (returns cursor:keys_csv) |
-    | `redis_hscan(key, cursor, pattern, count, secret)` | Scalar | Scan fields in a hash |
+
+    | `redis_scan(cursor, pattern, count, secret)` | Scalar | Scan keys (returns cursor:keys_csv)
+    |
+
+    | `redis_hscan(key, cursor, pattern, count, secret)` | Scalar | Scan fields in
+    a hash |
+
     | `redis_keys(pattern, secret)` | Table | List all keys matching a pattern |
-    | `redis_hgetall(key, secret)` | Table | List all fields and values in a hash |
-    | `redis_lrange_table(key, start, stop, secret)` | Table | List elements in a list as rows |
-    | `redis_hscan_over_scan(scan_pattern, hscan_pattern, count, secret)` | Table | For all keys matching scan_pattern, HSCAN with hscan_pattern, return (key, field, value) rows |
 
+    | `redis_hgetall(key, secret)` | Table | List all fields and values in a hash
+    |
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 435
-extension_download_count_pretty: 435
+    | `redis_lrange_table(key, start, stop, secret)` | Table | List elements in a
+    list as rows |
+
+    | `redis_hscan_over_scan(scan_pattern, hscan_pattern, count, secret)` | Table
+    | For all keys matching scan_pattern, HSCAN with hscan_pattern, return (key, field,
+    value) rows |'
+  hello_world: "-- Create a local Redis connection secret\nCREATE SECRET IF NOT EXISTS\
+    \ redis (\n        TYPE redis,\n        PROVIDER config,\n        host 'localhost',\n\
+    \        port '6379',\n        password 'optional_password'\n    );\n\n-- Create\
+    \ a Redis cloud connection secret\nCREATE SECRET IF NOT EXISTS redis (\n     \
+    \   TYPE redis,\n        PROVIDER config,\n        host 'redis-1234.ec2.redns.redis-cloud.com',\n\
+    \        port '16959',\n        password 'xxxxxx'\n    );\n\n-- Set a value\n\
+    SELECT redis_set('user:1', 'John Doe', 'redis') as result;\n\n-- Get a value\n\
+    SELECT redis_get('user:1', 'redis') as user_name;\n\n-- Set hash fields\nSELECT\
+    \ redis_hset('user:1', 'email', 'john@example.com', 'redis');\nSELECT redis_hset('user:1',\
+    \ 'age', '30', 'redis');\n\n-- Get hash field\nSELECT redis_hget('user:1', 'email',\
+    \ 'redis') as email;\n\n-- Push items to list\nSELECT redis_lpush('mylist', 'first_item',\
+    \ 'redis');\nSELECT redis_lpush('mylist', 'second_item', 'redis');\n\n-- Get range\
+    \ from list (returns comma-separated values)\n-- Get all items (0 to -1 means\
+    \ start to end)\nSELECT redis_lrange('mylist', 0, -1, 'redis') as items;\n\n--\
+    \ Get first 5 items\nSELECT redis_lrange('mylist', 0, 4, 'redis') as items;\n\n\
+    -- Push multiple items\nWITH items(value) AS (\n    VALUES ('item1'), ('item2'),\
+    \ ('item3')\n)\nSELECT redis_lpush('mylist', value, 'redis')\nFROM items;\n"
+extension:
+  build: cmake
+  description: Redis compatible Client for DuckDB
+  excluded_platforms: wasm_mvp;wasm_eh;wasm_threads
+  language: C++
+  license: MIT
+  maintainers:
+  - lmangani
+  - gigapi
+  name: redis
+  version: '2025120401'
+repo:
+  github: quackscience/duckdb-extension-redis
+  ref: 52d4e50c2fce74de9e9c90b15316a63350614495
+
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 218
+extension_download_count_pretty: 218
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'
 layout: community_extension_doc
 ---
@@ -139,23 +142,57 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name     | function_type | description | comment | examples |
-|-----------------------|---------------|-------------|---------|----------|
-| redis_del             | scalar        | NULL        | NULL    |          |
-| redis_exists          | scalar        | NULL        | NULL    |          |
-| redis_get             | scalar        | NULL        | NULL    |          |
-| redis_hget            | scalar        | NULL        | NULL    |          |
-| redis_hgetall         | table         | NULL        | NULL    |          |
-| redis_hscan           | scalar        | NULL        | NULL    |          |
-| redis_hscan_over_scan | table         | NULL        | NULL    |          |
-| redis_hset            | scalar        | NULL        | NULL    |          |
-| redis_keys            | table         | NULL        | NULL    |          |
-| redis_lpush           | scalar        | NULL        | NULL    |          |
-| redis_lrange          | scalar        | NULL        | NULL    |          |
-| redis_lrange_table    | table         | NULL        | NULL    |          |
-| redis_mget            | scalar        | NULL        | NULL    |          |
-| redis_scan            | scalar        | NULL        | NULL    |          |
-| redis_set             | scalar        | NULL        | NULL    |          |
-| redis_type            | scalar        | NULL        | NULL    |          |
+|     function_name     | function_type |                                                                                      description                                                                                       | comment |                                                       examples                                                       |
+|-----------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------|
+| redis_del             | scalar        | Delete a key from Redis. Returns true if the key was deleted, false if it did not exist.                                                                                               | NULL    | [SELECT redis_del('mykey', 'my_redis_secret');]                                                                      |
+| redis_exists          | scalar        | Check if a key exists in Redis. Returns true if the key exists, false otherwise.                                                                                                       | NULL    | [SELECT redis_exists('mykey', 'my_redis_secret');]                                                                   |
+| redis_get             | scalar        | Get the value of a key from Redis. Returns the value associated with the specified key, or an empty string if the key does not exist.                                                  | NULL    | [SELECT redis_get('mykey', 'my_redis_secret');, SELECT redis_get(key_column, 'my_redis_secret') FROM my_table;]      |
+| redis_hget            | scalar        | Get the value of a field in a Redis hash. Returns the value associated with the field, or an empty string if the field does not exist.                                                 | NULL    | [SELECT redis_hget('myhash', 'field1', 'my_redis_secret');]                                                          |
+| redis_hgetall         | table         | Get all fields and values from a Redis hash. Returns a table with 'field' and 'value' columns.                                                                                         | NULL    | [SELECT * FROM redis_hgetall('myhash', 'my_redis_secret');]                                                          |
+| redis_hscan           | scalar        | Incrementally iterate over fields in a Redis hash matching a pattern. Returns 'cursor:field1=value1,field2=value2,...'.                                                                | NULL    | [SELECT redis_hscan('myhash', '0', '*', 100, 'my_redis_secret');]                                                    |
+| redis_hscan_over_scan | table         | Scan all hash keys matching a pattern, then scan fields within each hash. Returns a table with 'key', 'field', and 'value' columns. Useful for iterating over multiple hashes at once. | NULL    | [SELECT * FROM redis_hscan_over_scan('user:*', '*', 100, 'my_redis_secret');]                                        |
+| redis_hset            | scalar        | Set the value of a field in a Redis hash. Returns the number of fields that were added (0 if the field existed and was updated, 1 if it was created).                                  | NULL    | [SELECT redis_hset('myhash', 'field1', 'value1', 'my_redis_secret');]                                                |
+| redis_keys            | table         | Scan all keys in Redis matching a pattern. Returns a table with a single 'key' column containing all matching keys.                                                                    | NULL    | [SELECT * FROM redis_keys('*', 'my_redis_secret');, SELECT * FROM redis_keys('user:*', 'my_redis_secret');]          |
+| redis_lpush           | scalar        | Prepend a value to a Redis list. Returns the length of the list after the push operation.                                                                                              | NULL    | [SELECT redis_lpush('mylist', 'value1', 'my_redis_secret');]                                                         |
+| redis_lrange          | scalar        | Get a range of elements from a Redis list. Returns elements as a comma-separated string. Use 0 for start and -1 for stop to get all elements.                                          | NULL    | [SELECT redis_lrange('mylist', 0, -1, 'my_redis_secret');, SELECT redis_lrange('mylist', 0, 10, 'my_redis_secret');] |
+| redis_lrange_table    | table         | Get a range of elements from a Redis list as a table. Returns a table with 'index' and 'value' columns.                                                                                | NULL    | [SELECT * FROM redis_lrange_table('mylist', 0, -1, 'my_redis_secret');]                                              |
+| redis_mget            | scalar        | Get the values of multiple keys from Redis. Keys should be comma-separated. Returns values as a comma-separated string.                                                                | NULL    | [SELECT redis_mget('key1,key2,key3', 'my_redis_secret');]                                                            |
+| redis_scan            | scalar        | Incrementally iterate over keys in Redis matching a pattern. Returns 'cursor:key1,key2,...'. Use cursor '0' to start, and continue until cursor returns '0'.                           | NULL    | [SELECT redis_scan('0', '*', 100, 'my_redis_secret');, SELECT redis_scan('0', 'user:*', 10, 'my_redis_secret');]     |
+| redis_set             | scalar        | Set the value of a key in Redis. Returns 'OK' on success.                                                                                                                              | NULL    | [SELECT redis_set('mykey', 'myvalue', 'my_redis_secret');]                                                           |
+| redis_type            | scalar        | Get the type of a key in Redis. Returns the type as a string (string, list, set, zset, hash, stream) or 'none' if the key does not exist.                                              | NULL    | [SELECT redis_type('mykey', 'my_redis_secret');]                                                                     |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|                 name                 |                                         description                                          | input_type | scope  | aliases |
+|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
+| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
+| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
+| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
+| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
+| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
+| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
+| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
+| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
+| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
+| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
+| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
+| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
+| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
+| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
+| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
+| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
+| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
+| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
 
 

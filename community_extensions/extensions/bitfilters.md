@@ -17,15 +17,15 @@ extension:
   maintainers:
   - rustyconover
   name: bitfilters
-  version: '2025101201'
+  version: '2025120401'
 repo:
   github: query-farm/bitfilters
-  ref: feb75dd1f5fe7837422a03c6cddde70988b7cad1
+  ref: 1acc412f932a9b88f1504bf76fc0cbdd891b97f3
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 1000
-extension_download_count_pretty: 1.0k
+extension_download_count: 962
+extension_download_count_pretty: 962
 image: '/images/community_extensions/social_preview/preview_community_extension_bitfilters.png'
 layout: community_extension_doc
 ---
@@ -82,6 +82,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

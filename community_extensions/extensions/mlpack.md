@@ -68,10 +68,10 @@ docs:
 
     For more, please see the [repo](https://github.com/eddelbuettel/duckdb-mlpack).
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 717
-extension_download_count_pretty: 717
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 637
+extension_download_count_pretty: 637
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---
@@ -99,17 +99,17 @@ LOAD {{ page.extension.name }};
 
 |          function_name          | function_type |                          description                          |                               comment                               | examples |
 |---------------------------------|---------------|---------------------------------------------------------------|---------------------------------------------------------------------|----------|
-| mlpack_adaboost_train           | table         | use adaboost to train and store model                         | parameters 'iterations', 'tolerance', 'perceptronIter' and 'silent' | NULL     |
+| mlpack_adaboost_train           | table         | use adaboost to train and store a model                       | parameters 'iterations', 'tolerance', 'perceptronIter' and 'silent' | NULL     |
 | mlpack_adaboost_pred            | table         | predict classification using stored adaboost stored model     | NULL                                                                | NULL     |
 | mlpack_linear_regression_fit    | table         | fit and store linear regression model                         | parameters 'lambda', 'intercept' and 'silent'                       | NULL     |
 | mlpack_linear_regression_pred   | table         | predict using stored linear regression model                  | NULL                                                                | NULL     |
 | mlpack_logistic_regression_fit  | table         | fit and store logistic regression model                       | parameters 'lambda', 'intercept' and 'silent'                       | NULL     |
 | mlpack_logistic_regression_pred | table         | predict classification using stored logistic regression model | NULL                                                                | NULL     |
-| mlpack_random_forest_train      | table         | use random forest to train and store model                    | parameters 'nclasses', 'ntrees', 'seed', 'threads' and 'silent'     | NULL     |
+| mlpack_random_forest_train      | table         | use random forest to train and store a model                  | parameters 'nclasses', 'ntrees', 'seed', 'threads' and 'silent'     | NULL     |
 | mlpack_random_forest_pred       | table         | predict classification using stored random forest model       | NULL                                                                | NULL     |
-| mlpack_kmeans                   | table         | NULL                                                          | NULL                                                                | NULL     |
-| mlpack_mlpack_version           | scalar        | NULL                                                          | NULL                                                                | NULL     |
-| mlpack_armadillo_version        | scalar        | NULL                                                          | NULL                                                                | NULL     |
+| mlpack_kmeans                   | table         | use kmeans unsupervised clustering                            | parameters 'clusters', and 'iterations'                             | NULL     |
+| mlpack_mlpack_version           | scalar        | returns the version string for the mlpack version used        | NULL                                                                | NULL     |
+| mlpack_armadillo_version        | scalar        | returns the version string for the armadillo version used     | NULL                                                                | NULL     |
 
 ### Added Settings
 

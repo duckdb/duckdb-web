@@ -8,16 +8,19 @@ excerpt: |
 extension:
   name: yaml
   description: Read YAML files into DuckDB with native YAML type support, comprehensive extraction functions, and seamless JSON interoperability
-  version: 1.2.0
+  version: 1.3.0
   language: C++
   build: cmake
   license: MIT
   maintainers:
     - teaguesterling
+
+  # yaml package issues for windows in previous vcpkg
+  vcpkg_commit: "656be05781442d5c4cb14978f6c7bf47b6e12b32"
   
 repo:
   github: teaguesterling/duckdb_yaml
-  ref: fcd187a17027f0a2a5d98ce6fa44bdbd294f941a
+  ref: "6ae4f53abffceb4cbd5098179539acd39063c3a4"
 
 docs:
   hello_world: |
@@ -61,6 +64,7 @@ docs:
     - **Multi-Document Support**: Handle files with multiple YAML documents separated by `---`
     - **Error Recovery**: Continue processing valid documents even when some contain errors
     - **JSON Interoperability**: Seamless conversion between YAML and JSON formats
+    - **Frontmatter Extraction**: Extract YAML frontmatter metadata from other files
     
     **Example Use Cases:**
     
@@ -76,8 +80,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 752
-extension_download_count_pretty: 752
+extension_download_count: 672
+extension_download_count_pretty: 672
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---
@@ -108,13 +112,20 @@ LOAD {{ page.extension.name }};
 | copy_format_yaml       | scalar        | NULL        | NULL    |          |
 | format_yaml            | scalar        | NULL        | NULL    |          |
 | read_yaml              | table         | NULL        | NULL    |          |
+| read_yaml_frontmatter  | table         | NULL        | NULL    |          |
 | read_yaml_objects      | table         | NULL        | NULL    |          |
 | value_to_yaml          | scalar        | NULL        | NULL    |          |
 | yaml                   | scalar        | NULL        | NULL    |          |
+| yaml_agg               | aggregate     | NULL        | NULL    |          |
+| yaml_array_elements    | table         | NULL        | NULL    |          |
+| yaml_array_length      | scalar        | NULL        | NULL    |          |
+| yaml_build_object      | scalar        | NULL        | NULL    |          |
+| yaml_each              | table         | NULL        | NULL    |          |
 | yaml_exists            | scalar        | NULL        | NULL    |          |
 | yaml_extract           | scalar        | NULL        | NULL    |          |
 | yaml_extract_string    | scalar        | NULL        | NULL    |          |
 | yaml_get_default_style | scalar        | NULL        | NULL    |          |
+| yaml_keys              | scalar        | NULL        | NULL    |          |
 | yaml_set_default_style | scalar        | NULL        | NULL    |          |
 | yaml_to_json           | scalar        | NULL        | NULL    |          |
 | yaml_type              | scalar        | NULL        | NULL    |          |
