@@ -35,8 +35,46 @@ Type "help", "copyright", "credits" or "license" for more information.
 '1.4.3'
 ```
 
-> Some Python installations on Windows run in Microsoft's [Prism emulator](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation), and will hence install DuckDB's x86_64 (AMD64) package.
-> To understand which platform your Python installation is using, observe the Python CLI's first line (e.g., `Python 3.13.9 ... (ARM64)`) or run `import os; print(os.environ.get("PROCESSOR_ARCHITECTURE")`.
+Currently, many Python installations that you'll find on a Windows ARM64 store run in Microsoft's [Prism emulator](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation).
+For example, if you install Python through the Windows Store, you will get an x86_64 (AMD64) installation which will use the DuckDB AMD64 package.
+
+> To understand which platform your Python installation is using, observe the Python CLI's first line (e.g., `Python 3.13.9 ... (ARM64)`).
+
+Using the [`tpch` extension]({% link docs/stable/core_extensions/tpch.md %}), we can perform a quick benchmark by running the queries on the TPC-H SF100 dataset:
+
+<details markdown='1'>
+<summary markdown='span'>
+Click here to see the benchmark snippet.
+</summary>
+```python
+import duckdb
+import os
+import time
+
+con = duckdb.connect("tpch-sf100.db")
+
+con.execute("INSTALL tpch")
+con.execute("LOAD tpch")
+con.execute("CREATE OR REPLACE TABLE timings(query INTEGER, runtime DOUBLE)")
+
+print(f"Architecture: {os.environ.get('PROCESSOR_ARCHITECTURE')}")
+
+for i in range(1, 23):    
+    start = time.time()
+    con.execute(f"PRAGMA tpch({i})")
+    duration = time.time() - start
+    print(f"Q{i}: {duration:.02f}")
+    con.execute(f"INSERT INTO timings VALUES ({i}, {duration})")
+
+res = con.execute(f"""
+    SELECT median(runtime)::DECIMAL(8, 2), geomean(runtime)::DECIMAL(8, 2)
+    FROM timings""").fetchall()
+print(f"Median runtime: {res[0][0]}")
+print(f"Geomean runtime: {res[0][1]}")
+```
+</details>
+
+Running the queries using the ARM64 package
 
 v1.4.4 is expected to also ship [extensions for Windows ARM64](https://github.com/duckdb/duckdb/pull/20004).
 
@@ -44,16 +82,20 @@ v1.4.4 is expected to also ship [extensions for Windows ARM64](https://github.co
 
 This version ships a few fixes:
 
-* [`#19754` Rare segfault occurring in the encryption key cache](https://github.com/duckdb/duckdb/issues/19754)
-* [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
-* [`#19469` Potential error in constraint violation message when checking foreign key constraints](https://github.com/duckdb/duckdb/issues/19469)
+* [`#18782` Incorrect “rows affected” was reported by ART index](https://github.com/duckdb/duckdb/issues/18782)
 * [`#18997` Macro binding had slow performance for unbalanced trees](https://github.com/duckdb/duckdb/issues/18997)
-* [`#19916` The default timezone of DuckDB Wasm in a browser had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
 * [`#19313` Wrong result in cornercase: a `HAVING` clause without a `GROUP BY` returned an incorrect result](https://github.com/duckdb/duckdb/issues/19313)
-* [`#19924` The optimizer incorrectly removed the `ORDER BY` from aggregates](https://github.com/duckdb/duckdb/issues/19924)
+* [`#19469` Potential error occurred in constraint violation message when checking foreign key constraints](https://github.com/duckdb/duckdb/issues/19469)
 * [`#19517` `JOIN` with a `LIKE` pattern resulted in columns being incorrectly included](https://github.com/duckdb/duckdb/issues/19517)
-* [`#18782` Incorrect “rows affected” reported by ART index](https://github.com/duckdb/duckdb/issues/18782)
 * [`#19575` Invalid Unicode error with `LIKE` expressions](https://github.com/duckdb/duckdb/issues/19575)
+* [`#19754` Race condition could trigger a segfault in the encryption key cache](https://github.com/duckdb/duckdb/issues/19754)
+* [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
+* [`#19901` Memory management has been improved during WAL replay in the presence of indexes](https://github.com/duckdb/duckdb/pull/19901)
+* [`#19916` The default timezone of DuckDB Wasm in a browser had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
+* [`#19924` The optimizer incorrectly removed the `ORDER BY` from aggregates](https://github.com/duckdb/duckdb/issues/19924)
+* [`#19970` Fixed updates on indexed tables with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/19970)
+* [`#20009` Fixed updates with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/20009)
+* [`#20044` Fixed edge case in index deletion code path](https://github.com/duckdb/duckdb/pull/20044)
 
 This was a short summary but, as usual, the full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.3).
 We would like to thank our contributors for providing detailed issue reports and patches!
