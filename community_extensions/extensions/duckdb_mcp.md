@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 1.1.0
+  version: 1.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: 440ef9e852a806def5783c7ca4f7fdb3d1021881
+  ref: 17d83c3f82a0a47110a1787f451d6b5fc053c3d7
 
 docs:
   hello_world: |
@@ -50,6 +50,8 @@ docs:
 
   extended_description: |
     DuckDB MCP Extension bridges SQL databases with the Model Context Protocol (MCP), enabling bidirectional integration between DuckDB and MCP servers. The extension operates in dual modes: as an MCP client for accessing remote resources and as an MCP server for exposing database content.
+
+    See the [README.md](https://github.com/teaguesterling/duckdb_mcp/blob/main/README.md) for more details.
     
     **MCP Client Capabilities**: Connect to MCP servers using multiple transport protocols (stdio, TCP, WebSocket) and access remote resources directly in SQL queries. Use the `mcp://` URI scheme with standard DuckDB functions like `read_csv()`, `read_parquet()`, and `read_json()` to seamlessly query remote data sources. Execute remote tools with `mcp_call_tool()` and discover available resources with `mcp_list_resources()`.
     
@@ -74,10 +76,10 @@ docs:
     
     The extension implements the complete JSON-RPC 2.0 MCP protocol with support for multiple transport mechanisms. It enables powerful use cases including database federation, remote data access, tool orchestration, and exposing database insights to external MCP-compatible systems. Perfect for integration with AI agents, data pipelines, and distributed analytical workflows.
 
-extension_star_count: 18
-extension_star_count_pretty: 18
-extension_download_count: 999
-extension_download_count_pretty: 999
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 977
+extension_download_count_pretty: 977
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---

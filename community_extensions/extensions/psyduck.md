@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: psyduck
   description: Pokemon data native in DuckDB
-  version: 1.0.0
+  version: 1.0.1
   language: C++
   build: cmake
   license: MIT
@@ -17,9 +17,8 @@ extension:
 
 repo:
   github: Ian-Fogelman/psyduck
-  ref: c6f12f6e349a9fe4fa0fb2da5b416a7334f66c9b
+  ref: 4aabf9c7e50b577611ad19e6b367df17330c3c0f
   
- 
 docs:
   hello_world: |
     -- Create a table of pokémon and return... A duck
@@ -34,10 +33,13 @@ docs:
     
     -- Select the best pokémon
     SELECT number, name, type1, "height(m)", "weight(kg)", base_total FROM list_pokemon() WHERE name = 'Charizard';
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 737
-extension_download_count_pretty: 737
+
+    -- Select pokemon moves
+    SELECT * FROM list_pokemon_moves();
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 637
+extension_download_count_pretty: 637
 image: '/images/community_extensions/social_preview/preview_community_extension_psyduck.png'
 layout: community_extension_doc
 ---
@@ -63,8 +65,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| list_pokemon  | table         | NULL        | NULL    |          |
+|   function_name    | function_type | description | comment | examples |
+|--------------------|---------------|-------------|---------|----------|
+| list_pokemon       | table         | NULL        | NULL    |          |
+| list_pokemon_moves | table         | NULL        | NULL    |          |
 
 

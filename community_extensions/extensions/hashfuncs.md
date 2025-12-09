@@ -15,15 +15,15 @@ extension:
   maintainers:
   - rustyconover
   name: hashfuncs
-  version: '2025101201'
+  version: '2025120401'
 repo:
   github: query-farm/hashfuncs
-  ref: d07e4e8878b5bb27624be71f5012c64b507b5b60
+  ref: a5898a4aae082444894238cdeaafb12f54e09401
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1793
-extension_download_count_pretty: 1.8k
+extension_download_count: 1738
+extension_download_count_pretty: 1.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---
@@ -52,12 +52,20 @@ LOAD {{ page.extension.name }};
 |    function_name    | function_type | description | comment | examples |
 |---------------------|---------------|-------------|---------|----------|
 | murmurhash3_128     | scalar        | NULL        | NULL    | NULL     |
+| murmurhash3_128     | scalar        | NULL        | NULL    | NULL     |
+| murmurhash3_32      | scalar        | NULL        | NULL    | NULL     |
 | murmurhash3_32      | scalar        | NULL        | NULL    | NULL     |
 | murmurhash3_x64_128 | scalar        | NULL        | NULL    | NULL     |
+| murmurhash3_x64_128 | scalar        | NULL        | NULL    | NULL     |
+| rapidhash           | scalar        | NULL        | NULL    | NULL     |
 | rapidhash           | scalar        | NULL        | NULL    | NULL     |
 | xxh32               | scalar        | NULL        | NULL    | NULL     |
+| xxh32               | scalar        | NULL        | NULL    | NULL     |
+| xxh3_128            | scalar        | NULL        | NULL    | NULL     |
 | xxh3_128            | scalar        | NULL        | NULL    | NULL     |
 | xxh3_64             | scalar        | NULL        | NULL    | NULL     |
+| xxh3_64             | scalar        | NULL        | NULL    | NULL     |
+| xxh64               | scalar        | NULL        | NULL    | NULL     |
 | xxh64               | scalar        | NULL        | NULL    | NULL     |
 
 ### Added Settings
@@ -78,6 +86,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

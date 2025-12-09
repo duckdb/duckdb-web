@@ -108,8 +108,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 720
-extension_download_count_pretty: 720
+extension_download_count: 638
+extension_download_count_pretty: 638
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---
@@ -191,6 +191,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                                                          | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                                                         | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                                                        | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                                                    | BOOLEAN    | GLOBAL | []      |
 | pg_array_as_varchar                  | Read Postgres arrays as varchar - enables reading mixed dimensional arrays                                                    | BOOLEAN    | GLOBAL | []      |
 | pg_connection_cache                  | Whether or not to use the connection cache                                                                                    | BOOLEAN    | GLOBAL | []      |
 | pg_connection_limit                  | The maximum amount of concurrent Postgres connections                                                                         | UBIGINT    | GLOBAL | []      |

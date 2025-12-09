@@ -6,25 +6,26 @@ excerpt: |
   Adds templating to DuckDB, enabling dynamic generation of text, HTML, and reports directly within SQL queries using the Tera engine.
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_tera.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_tera.html).
 extension:
   build: cmake
-  description: Adds templating to DuckDB, enabling dynamic generation of text, HTML, and reports directly within SQL queries using the Tera engine.
+  description: Adds templating to DuckDB, enabling dynamic generation of text, HTML,
+    and reports directly within SQL queries using the Tera engine.
   language: C++
   license: Apache-2.0
   maintainers:
-    - rustyconover
+  - rustyconover
   name: tera
   requires_toolchains: rust
-  version: 2025102001
+  version: '2025120401'
 repo:
   github: query-farm/tera
-  ref: 68c4797ed487445933eae1683bb8074a56a477ff
+  ref: 05e503b956773f808e8a7c757069236933aa796e
+
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 719
-extension_download_count_pretty: 719
+extension_download_count: 647
+extension_download_count_pretty: 647
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---
@@ -72,6 +73,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
