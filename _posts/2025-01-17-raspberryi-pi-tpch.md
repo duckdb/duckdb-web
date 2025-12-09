@@ -56,7 +56,7 @@ We then compiled DuckDB [version `0024e5d4be`](https://github.com/duckdb/duckdb/
 To make the queries easy to run, we also included the [TPC-H extension]({% link docs/stable/core_extensions/tpch.md %}) in the build:
 
 ```bash
-GEN=ninja CORE_EXTENSIONS="tpch" make
+GEN=ninja BUILD_EXTENSIONS="tpch" make
 ```
 
 We then downloaded DuckDB database files containing the TPC-H datasets at different scale factors (SF):

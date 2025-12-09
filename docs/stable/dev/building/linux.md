@@ -113,12 +113,12 @@ build/release/duckdb
 
 For different build configurations (`debug`, `relassert`, etc.), please consult the [“Build Configurations” page]({% link docs/stable/dev/building/build_configuration.md %}).
 
-## Building Using Extension Flags
+## Building Extensions
 
-To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
+To build extensions, set the `BUILD_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
 
 ```bash
-CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
+BUILD_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
 ```
 
 ## Troubleshooting
@@ -163,5 +163,5 @@ sudo apt-get install -y libssl-dev
 Then, build with:
 
 ```bash
-GEN=ninja CORE_EXTENSIONS="httpfs" make
+GEN=ninja BUILD_EXTENSIONS="httpfs" make
 ```

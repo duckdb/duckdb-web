@@ -35,7 +35,7 @@ The user [“LivingLinux” on Bluesky](https://bsky.app/profile/livinglinux.bsk
 GEN=ninja \
     CC='gcc-14 -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \
     CXX='g++-14 -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \
-    CORE_EXTENSIONS='fts' \
+    BUILD_EXTENSIONS='fts' \
     make
 ```
 
