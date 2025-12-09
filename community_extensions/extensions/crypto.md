@@ -17,15 +17,15 @@ extension:
   - rustyconover
   name: crypto
   requires_toolchains: rust
-  version: '2025101201'
+  version: '2025120401'
 repo:
   github: query-farm/crypto
-  ref: 81f20f42d62ac87e879de59e4ad086a3aadc74ae
+  ref: 9308fe3e74a56b3dd5b046533bac582532bdc7bd
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 11774
-extension_download_count_pretty: 11.8k
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 11336
+extension_download_count_pretty: 11.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---
@@ -51,10 +51,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                                   description                                                    | comment |                             examples                              |
-|---------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------|
-| crypto_hash   | scalar        | Apply a cryptographic hash function specified as the first argument to the data supplied as the second argument. | NULL    | [SELECT crypto_hash('md5', 'test');]                              |
-| crypto_hmac   | scalar        | Calculate a HMAC value                                                                                           | NULL    | [SELECT crypto_hmac('sha2-256', 'secret key', 'secret message');] |
+|    function_name    | function_type |                                                   description                                                    | comment |                             examples                              |
+|---------------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------|
+| crypto_hash         | scalar        | Apply a cryptographic hash function specified as the first argument to the data supplied as the second argument. | NULL    | [SELECT crypto_hash('md5', 'test');]                              |
+| crypto_hmac         | scalar        | Calculate a HMAC value                                                                                           | NULL    | [SELECT crypto_hmac('sha2-256', 'secret key', 'secret message');] |
+| crypto_random_bytes | scalar        | NULL                                                                                                             | NULL    | NULL                                                              |
+| crypto_hash_agg     | aggregate     | NULL                                                                                                             | NULL    | NULL                                                              |
 
 ### Added Settings
 
@@ -74,6 +76,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

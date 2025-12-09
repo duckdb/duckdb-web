@@ -5,103 +5,65 @@ excerpt: |
   DuckDB Community Extensions
   DuckDB HTTP Client Extension
 
+docs:
+  extended_description: The HTTP Client Extension is experimental, use at your own
+    risk!
+  hello_world: "-- GET Request Example w/ JSON Parsing\nWITH __input AS (\n  SELECT\n\
+    \    http_get(\n        'https://httpbin.org/delay/0',\n        headers => MAP\
+    \ {\n          'accept': 'application/json',\n        },\n        params => MAP\
+    \ {\n          'limit': 1\n        }\n    ) AS res\n),\n__response AS (\n  SELECT\n\
+    \    (res->>'status')::INT AS status,\n    (res->>'reason') AS reason,\n    unnest(\
+    \ from_json(((res->>'body')::JSON)->'headers', '{\"Host\": \"VARCHAR\"}') ) AS\
+    \ features\n  FROM\n    __input\n)\nSELECT\n  __response.status,\n  __response.reason,\n\
+    \  __response.Host AS host\nFROM\n  __response\n;\n\u250C\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2510\n\u2502 status \u2502 reason  \u2502    host     \u2502\n\u2502\
+    \ int32  \u2502 varchar \u2502   varchar   \u2502\n\u251C\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2524\n\u2502    200 \u2502 OK      \u2502 httpbin.org \u2502\n\u2514\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n-- POST Request Example w/ Headers\
+    \ and Parameters\nWITH __input AS (\nSELECT\n  http_post(\n      'https://httpbin.org/delay/0',\n\
+    \      headers => MAP {\n        'accept': 'application/json',\n      },\n   \
+    \   params => MAP {\n        'limit': 1\n      }\n  ) AS res\n),\n__response AS\
+    \ (\n  SELECT\n    (res->>'status')::INT AS status,\n    (res->>'reason') AS reason,\n\
+    \    unnest( from_json(((res->>'body')::JSON)->'headers', '{\"Host\": \"VARCHAR\"\
+    }') ) AS features\n  FROM\n    __input\n)\nSELECT\n  __response.status,\n  __response.reason,\n\
+    \  __response.Host AS host,\nFROM\n  __response\n;\n\u250C\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2510\n\u2502 status \u2502 reason  \u2502    host     \u2502\n\u2502\
+    \ int32  \u2502 varchar \u2502   varchar   \u2502\n\u251C\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2524\n\u2502    200 \u2502 OK      \u2502 httpbin.org \u2502\n\u2514\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2518\n"
 extension:
-  name: http_client
-  description: DuckDB HTTP Client Extension
-  version: 2025100901
-  language: C++
   build: cmake
+  description: DuckDB HTTP Client Extension
+  excluded_platforms: windows_amd64_mingw
+  language: C++
   license: MIT
-  excluded_platforms: "windows_amd64_mingw"
   maintainers:
-    - lmangani
-    - ahuarte47
-    - Okabintaro
-    - rustyconover
-
+  - lmangani
+  - ahuarte47
+  - Okabintaro
+  - rustyconover
+  name: http_client
+  version: '2025120401'
 repo:
   github: query-farm/httpclient
-  ref: 6717af408e1efc2fbf1f02f46cee0eef08b57dc6
-
-docs:
-  hello_world: |
-    -- GET Request Example w/ JSON Parsing
-    WITH __input AS (
-      SELECT
-        http_get(
-            'https://httpbin.org/delay/0',
-            headers => MAP {
-              'accept': 'application/json',
-            },
-            params => MAP {
-              'limit': 1
-            }
-        ) AS res
-    ),
-    __response AS (
-      SELECT
-        (res->>'status')::INT AS status,
-        (res->>'reason') AS reason,
-        unnest( from_json(((res->>'body')::JSON)->'headers', '{"Host": "VARCHAR"}') ) AS features
-      FROM
-        __input
-    )
-    SELECT
-      __response.status,
-      __response.reason,
-      __response.Host AS host
-    FROM
-      __response
-    ;
-    ┌────────┬─────────┬─────────────┐
-    │ status │ reason  │    host     │
-    │ int32  │ varchar │   varchar   │
-    ├────────┼─────────┼─────────────┤
-    │    200 │ OK      │ httpbin.org │
-    └────────┴─────────┴─────────────┘
-
-    -- POST Request Example w/ Headers and Parameters
-    WITH __input AS (
-    SELECT
-      http_post(
-          'https://httpbin.org/delay/0',
-          headers => MAP {
-            'accept': 'application/json',
-          },
-          params => MAP {
-            'limit': 1
-          }
-      ) AS res
-    ),
-    __response AS (
-      SELECT
-        (res->>'status')::INT AS status,
-        (res->>'reason') AS reason,
-        unnest( from_json(((res->>'body')::JSON)->'headers', '{"Host": "VARCHAR"}') ) AS features
-      FROM
-        __input
-    )
-    SELECT
-      __response.status,
-      __response.reason,
-      __response.Host AS host,
-    FROM
-      __response
-    ;
-    ┌────────┬─────────┬─────────────┐
-    │ status │ reason  │    host     │
-    │ int32  │ varchar │   varchar   │
-    ├────────┼─────────┼─────────────┤
-    │    200 │ OK      │ httpbin.org │
-    └────────┴─────────┴─────────────┘
-
-  extended_description: |
-    The HTTP Client Extension is experimental, use at your own risk!
+  ref: 8cd2b68349581f733f325c32a16e9fc237ab3eba
 
 extension_star_count: 75
 extension_star_count_pretty: 75
-extension_download_count: 8605
-extension_download_count_pretty: 8.6k
+extension_download_count: 8674
+extension_download_count_pretty: 8.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---
@@ -152,6 +114,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

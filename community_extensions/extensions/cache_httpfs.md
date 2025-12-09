@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.9.4
+  version: 0.10.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: 34441da8814f7ae5f71e553060337c021570fd1a
+  ref: 3595bba8b674a7a4e7eb0e7fd3a04b4af66eedde
 
 docs:
   hello_world: |
@@ -35,10 +35,10 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 117
-extension_star_count_pretty: 117
-extension_download_count: 11969
-extension_download_count_pretty: 12.0k
+extension_star_count: 120
+extension_star_count_pretty: 120
+extension_download_count: 6034
+extension_download_count_pretty: 6.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -100,6 +100,7 @@ LOAD {{ page.extension.name }};
 | cache_httpfs_disk_cache_reader_enable_memory_cache        | Whether enable process-wise read-through/write-through cache for disk cache reader. When enabled, local cache file will be accessed with direct IO.                                                                                                                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
 | cache_httpfs_disk_cache_reader_mem_cache_block_count      | Max number of cache blocks for the read-through/write-through cache for disk cache reader.                                                                                                                                                                                                                                                                                                      | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_disk_cache_reader_mem_cache_timeout_millisec | Timeout in milliseconds for the read-through/write-through cache for disk cache reader.                                                                                                                                                                                                                                                                                                         | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_enable_cache_validation                      | Whether to enable cache validation using version tag and last modification timestamp. When enabled, cache entries are validated against the current file version tag and modification timestamp to ensure cache consistency. By default disabled.                                                                                                                                               | BOOLEAN    | GLOBAL | []      |
 | cache_httpfs_enable_file_handle_cache                     | Whether file handle cache is enable for cache filesystem. By default enabled.                                                                                                                                                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      |
 | cache_httpfs_enable_glob_cache                            | Whether glob cache is enable for cache filesystem. By default enabled.                                                                                                                                                                                                                                                                                                                          | BOOLEAN    | GLOBAL | []      |
 | cache_httpfs_enable_metadata_cache                        | Whether metadata cache is enable for cache filesystem. By default enabled.                                                                                                                                                                                                                                                                                                                      | BOOLEAN    | GLOBAL | []      |

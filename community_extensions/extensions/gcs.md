@@ -9,7 +9,7 @@ extension:
   name: gcs
   description: DuckDB GCS Extension
   extended_description: A native GCS extension with support for standard Google auth methods
-  version: 0.0.2
+  version: 0.0.3
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: northpolesec/duckdb-gcs
-  ref: c94878da4cbc385981084e08e839ae99dbf8241e
+  ref: 5465cad377f83637f8233b9756062b98352e3cdd
 
 docs:
   hello_world: |
@@ -36,9 +36,9 @@ docs:
     └─────────────────────────────────────────┴─────────┴───────┴──────────────────────────┘
 
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 1001
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 1021
 extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_gcs.png'
 layout: community_extension_doc
@@ -67,6 +67,7 @@ LOAD {{ page.extension.name }};
 
 |              name              |                                                                                          description                                                                                           | input_type | scope  | aliases |
 |--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| gcs_enable_grpc                | Use gRPC for connection to Google Cloud Storage. Can improve performance, especially when being used from Google Cloud. Default is false.                                                      | BOOLEAN    | GLOBAL | []      |
 | gcs_enable_metadata_cache      | Enable caching of object metadata (size, modification time) to reduce API calls. Set to false to disable caching for debugging or when files change frequently.                                | BOOLEAN    | GLOBAL | []      |
 | gcs_list_cache_ttl             | Time-to-live in seconds for cached object listing results (used in glob operations). Default is 60 seconds. Increase for stable directories, decrease if objects are added/removed frequently. | INTEGER    | GLOBAL | []      |
 | gcs_max_list_cache_entries     | Maximum number of list cache entries to prevent unbounded memory growth. Default is 1000. When limit is reached, least recently used entries are evicted.                                      | UBIGINT    | GLOBAL | []      |

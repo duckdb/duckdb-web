@@ -6,25 +6,26 @@ excerpt: |
   Adds templating to DuckDB, enabling dynamic generation of text, HTML, and reports directly within SQL queries using the MiniJinja engine.
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_minijinja.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_minijinja.html).
 extension:
   build: cmake
-  description: Adds templating to DuckDB, enabling dynamic generation of text, HTML, and reports directly within SQL queries using the MiniJinja engine.
+  description: Adds templating to DuckDB, enabling dynamic generation of text, HTML,
+    and reports directly within SQL queries using the MiniJinja engine.
   language: C++
   license: Apache-2.0
   maintainers:
-    - rustyconover
+  - rustyconover
   name: minijinja
   requires_toolchains: rust
-  version: 2025102701
+  version: '2025120401'
 repo:
   github: query-farm/minijinja
-  ref: 166f78e6a5bc72ec07366eb1d0af39bfd004f0da
+  ref: b5ebd4a45799be8b625b6b0a91cdd82360910dff
+
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 713
-extension_download_count_pretty: 713
+extension_download_count: 646
+extension_download_count_pretty: 646
 image: '/images/community_extensions/social_preview/preview_community_extension_minijinja.png'
 layout: community_extension_doc
 ---
@@ -72,6 +73,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
