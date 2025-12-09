@@ -15,26 +15,37 @@ To install the new version, please visit the [installation page]({% link install
 
 ## Fixes
 
-This version ships a number of fixes:
+This version ships a number of performance improvements and bugfixes.
+
+### Correctness
 
 * [`#18782` Incorrect “rows affected” was reported by ART index](https://github.com/duckdb/duckdb/issues/18782)
-* [`#18997` Macro binding had slow performance for unbalanced trees](https://github.com/duckdb/duckdb/issues/18997)
 * [`#19313` Wrong result in corner case: a `HAVING` clause without a `GROUP BY` returned an incorrect result](https://github.com/duckdb/duckdb/issues/19313)
-* [`#19469` Potential error occurred in constraint violation message when checking foreign key constraints](https://github.com/duckdb/duckdb/issues/19469)
 * [`#19517` `JOIN` with a `LIKE` pattern resulted in columns being incorrectly included](https://github.com/duckdb/duckdb/issues/19517)
-* [`#19575` Invalid Unicode error with `LIKE` expressions](https://github.com/duckdb/duckdb/issues/19575)
-* [`#19754` Race condition could trigger a segfault in the encryption key cache](https://github.com/duckdb/duckdb/issues/19754)
-* [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
-* [`#19901` Memory management has been improved during WAL replay in the presence of indexes](https://github.com/duckdb/duckdb/pull/19901)
-* [`#19916` The default time zone of DuckDB Wasm in a browser had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
 * [`#19924` The optimizer incorrectly removed the `ORDER BY` from aggregates](https://github.com/duckdb/duckdb/issues/19924)
 * [`#19970` Fixed updates on indexed tables with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/19970)
 * [`#20009` Fixed updates with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/20009)
+
+### Crashes and Internal Errors
+
+* [`#19469` Potential error occurred in constraint violation message when checking foreign key constraints](https://github.com/duckdb/duckdb/issues/19469)
+* [`#19754` Race condition could trigger a segfault in the encryption key cache](https://github.com/duckdb/duckdb/issues/19754)
 * [`#20044` Fixed edge case in index deletion code path](https://github.com/duckdb/duckdb/pull/20044)
+
+### Performance
+
+* [`#18997` Macro binding had slow performance for unbalanced trees](https://github.com/duckdb/duckdb/issues/18997)
+* [`#19901` Memory management has been improved during WAL replay in the presence of indexes](https://github.com/duckdb/duckdb/pull/19901)
+
+### Miscellaneous
+
+* [`#19575` Invalid Unicode error with `LIKE` expressions](https://github.com/duckdb/duckdb/issues/19575)
+* [`#19916` The default time zone of DuckDB-Wasm had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
+* [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
 
 ## Windows ARM64
 
-We are introducing beta support for Windows ARM64 by supporting extensions and shipping Python wheels.
+With this release, we are introducing beta support for Windows ARM64 by supporting extensions and shipping native Python wheels.
 
 ### Extension Distribution for Windows ARM64
 
