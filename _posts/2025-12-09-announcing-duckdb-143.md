@@ -4,7 +4,7 @@ title: "Announcing DuckDB 1.4.3 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-4-3-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-3-lts.png"
-excerpt: "Today we are releasing DuckDB 1.4.3. Among bugfixes, we are shipping native extensions and Python support for Windows ARM64."
+excerpt: "Today we are releasing DuckDB 1.4.3. Along with bugfixes, we are shipping native extensions and Python support for Windows ARM64."
 tags: ["release"]
 ---
 
