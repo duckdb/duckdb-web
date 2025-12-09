@@ -290,6 +290,11 @@ Click here to see the detailed TPC-H SF100 results on Windows Arm64
 
 The AMD64 package (running in the emulator) yielded a geometric mean runtime of 2.09 seconds, while the native Arm64 package had a geomean runtime of 1.59 seconds – a 24% performance improvement.
 
+### ODBC Driver for Windows Arm64
+
+We are now shipping a native ODBC driver for Windows Arm64.
+Head to the [ODBC Windows installation page](https://duckdb.org/install/?platform=windows&environment=odbc) to try it out!
+
 ## Conclusion
 
 This post was a short summary of the changes in v1.4.3. As usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.3).
