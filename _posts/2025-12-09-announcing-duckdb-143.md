@@ -15,6 +15,40 @@ To install the new version, please visit the [installation page]({% link install
 
 ## Windows ARM64
 
+We are introducing beta support for Windows ARM64 by supporting extensions and shipping Python wheels.
+
+### Extension Distribution for Windows ARM64
+
+On Windows ARM64, you can now natively install core extensions, including complex ones like [`spatial`]({% link docs/stable/core_extensions/spatial/overview.md %}):
+
+```sql
+PRAGMA platform;
+```
+
+```text
+┌───────────────┐
+│   platform    │
+│    varchar    │
+├───────────────┤
+│ windows_arm64 │
+└───────────────┘
+```
+
+```sql
+INSTALL spatial;
+LOAD spatial;
+SELECT ST_Area(ST_GeomFromText('POLYGON((0 0, 4 0, 4 3, 0 3, 0 0))')) AS area;
+```
+
+```text
+┌────────┐
+│  area  │
+│ double │
+├────────┤
+│  12.0  │
+└────────┘
+```
+
 ### Python Wheel Distribution for Windows ARM64
 
 We now distribute Python wheels for Windows ARM64. This means that you take e.g. a Copilot+ laptop and run:
@@ -74,7 +108,7 @@ print(f"Geomean runtime: {res[0][1]}")
 ```
 </details>
 
-Running the queries using the ARM64 package
+Running the queries using the ARM64 package yielded a geomean runtime of 1.59 seconds, a 24% performance improvement.
 
 v1.4.4 is expected to also ship [extensions for Windows ARM64](https://github.com/duckdb/duckdb/pull/20004).
 
