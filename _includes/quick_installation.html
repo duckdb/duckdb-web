@@ -46,7 +46,23 @@ pip install duckdb
 {% endhighlight %}
 </div>
 
-<div data-install="r">
+<div data-install="r macos">
+{% highlight r %}
+install.packages("duckdb")
+{% endhighlight %}
+</div>
+
+<div data-install="r linux">
+{% highlight r %}
+options(HTTPUserAgent = sprintf("R/%s R (%s)",
+    getRversion(),
+    paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])
+))
+install.packages("duckdb", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/latest/")
+{% endhighlight %}
+</div>
+
+<div data-install="r windows">
 {% highlight r %}
 install.packages("duckdb")
 {% endhighlight %}
