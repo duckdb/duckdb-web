@@ -36,6 +36,7 @@ This version ships a number of performance improvements and bugfixes.
 
 * [`#18997` Macro binding had slow performance for unbalanced trees](https://github.com/duckdb/duckdb/issues/18997)
 * [`#19901` Memory management has been improved during WAL replay in the presence of indexes](https://github.com/duckdb/duckdb/pull/19901)
+* The [`vortex` extension]({% link docs/stable/core_extensions/vortex.md %}) ships significant performance improvements for writing Vortex files
 
 ### Miscellaneous
 
