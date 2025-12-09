@@ -23,7 +23,20 @@ We now distribute Python wheels for Windows ARM64. This means that you take e.g.
 pip install duckdb
 ```
 
-> Some Python installations on Win
+```bash
+python
+```
+
+```console
+Python 3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:51:39) [MSC v.1944 64 bit (ARM64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import duckdb
+>>> duckdb.__version__
+'1.4.3'
+```
+
+> Some Python installations on Windows run in Microsoft's [Prism emulator](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation), and will hence install DuckDB's x86_64 (AMD64) package.
+> To understand which platform your Python installation is using, observe the Python CLI's first line (e.g., `Python 3.13.9 ... (ARM64)`) or run `import os; print(os.environ.get("PROCESSOR_ARCHITECTURE")`.
 
 v1.4.4 is expected to also ship [extensions for Windows ARM64](https://github.com/duckdb/duckdb/pull/20004).
 
