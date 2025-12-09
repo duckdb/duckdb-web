@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mlpack
   description: Connecting duckdb to the mlpack C++ machine learning library 
-  version: 0.0.4
+  version: 0.0.5
   language: C++
   build: cmake
   license: MIT
@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: eddelbuettel/duckdb-mlpack
-  ref: b4ba25b96a4c12e7b7843966db0793b60d5949c2
-  
+  ref: 53a49ae692e53b28876a28283a4e327043346137
+
 docs:
   hello_world: |
     -- Perform adaBoost (using weak learner 'Perceptron' by default)
@@ -48,23 +48,30 @@ docs:
     SELECT * FROM mlpack_adaboost_pred("N", "M");
 
   extended_description: |
+    ### Supervised Learning
     The mlpack extension allows to fit (or train) and predict (or classify) from the models implemented, currently adaBoost, random forests as well as (regularized) linear and logistic regression.
-    The format is the same for all four methods: four tables, say, "X", "Y", "Z" and "M" provide input for, respectively, features "X", labels "Y", optional parameters varying by model in "Z" as well as an output table "M" for the JSON-serialized model.
+    The format is the same for these four methods: four tables, say, "X", "Y", "Z" and "M" provide input for, respectively, features "X", labels "Y", optional parameters varying by model in "Z" as well as an output table "M" for the JSON-serialized model.
     For all four methods, following a model fit (or training), a prediction (or classification) can be made using "M" and new predictor values "N" as shown in the example.
-    All "fit" (or "train") methods take four parameter tables, all "predict" methods take two.
-    A parmater "mlpack_verbose" can also be set.
-    
-    The implementation continues to stress the 'minimal' part of 'a MVP demo'.
-    It wraps four machine learning methods, and provides Linux and macOS builds.
+    All these "fit" (or "train") methods take four parameter tables, all "predict" methods take two.
+
+    ### Unsupervised Learning
+    A kmeans clustering method is also available.
+    It uses three tables for data, parameters and results.
+  
+    ### General Information
+    A pair of paramaters "mlpack_verbose" (to show additional data) and "mlpack_silent" (to suppress display of minimal summaries) can also be set.
+
+    The implementation still stresses the 'minimal' part of 'a (initial) MVP demo' (where MVP stands for 'minimally viable product').
+    It wraps five supervised and unsupervised machine learning methods, and provides Linux and macOS builds.
     More methods, options or parameters can be added quite easily.
-    As interfaces may change while we may work out how to automate interface generation from the mlpack-side, so it should be considered experimental.
+    As interfaces may change while we may work out how to automate interface generation from mlpack itself, it should be considered experimental.
 
     For more, please see the [repo](https://github.com/eddelbuettel/duckdb-mlpack).
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 739
-extension_download_count_pretty: 739
+extension_download_count: 717
+extension_download_count_pretty: 717
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---
@@ -100,6 +107,9 @@ LOAD {{ page.extension.name }};
 | mlpack_logistic_regression_pred | table         | predict classification using stored logistic regression model | NULL                                                                | NULL     |
 | mlpack_random_forest_train      | table         | use random forest to train and store model                    | parameters 'nclasses', 'ntrees', 'seed', 'threads' and 'silent'     | NULL     |
 | mlpack_random_forest_pred       | table         | predict classification using stored random forest model       | NULL                                                                | NULL     |
+| mlpack_kmeans                   | table         | NULL                                                          | NULL                                                                | NULL     |
+| mlpack_mlpack_version           | scalar        | NULL                                                          | NULL                                                                | NULL     |
+| mlpack_armadillo_version        | scalar        | NULL                                                          | NULL                                                                | NULL     |
 
 ### Added Settings
 

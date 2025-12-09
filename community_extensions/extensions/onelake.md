@@ -118,8 +118,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 595
-extension_download_count_pretty: 595
+extension_download_count: 573
+extension_download_count_pretty: 573
 image: '/images/community_extensions/social_preview/preview_community_extension_onelake.png'
 layout: community_extension_doc
 ---

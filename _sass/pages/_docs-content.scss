@@ -584,7 +584,6 @@ body.duckcon7 {
             &::marker {
                 display: none;
             }
-            
         }
         &[open]{
             summary{
@@ -595,6 +594,16 @@ body.duckcon7 {
                 }
             }
         }
+        
+        > div img {
+          max-width: 100%;
+          margin-top: 8px;
+        }
+        
+        > div .highlight{
+            margin-top: 8px;    
+        }
+        
     }
 
 }

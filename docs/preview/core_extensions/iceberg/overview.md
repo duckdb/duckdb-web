@@ -13,8 +13,8 @@ The `iceberg` extension is installed and loaded automatically on first use.
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL json;
-LOAD json;
+INSTALL iceberg;
+LOAD iceberg;
 ```
 
 ## Updating the Extension

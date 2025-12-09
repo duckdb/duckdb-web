@@ -38,6 +38,8 @@ DESCRIBE FROM 'services-2024-08.csv';
 
 The result is a table with the column names and the column types.
 
+<div class="monospace_table"></div>
+
 |         column_name          | column_type | null | key  | default | extra |
 |------------------------------|-------------|------|------|---------|-------|
 | Service:RDT-ID               | BIGINT      | YES  | NULL | NULL    | NULL  |

@@ -14,7 +14,7 @@ But we started wondering, when did this development really start? When did perso
 
 Let's turn our attention to the **2012** [Retina MacBook Pro](https://en.wikipedia.org/wiki/MacBook_Pro#Retina_(2012–2016)), a computer many people (myself included) bought at the time because of its gorgeous “Retina” display. Millions were sold. Despite being unemployed at the time, I had even splurged for the 16 GB RAM upgrade. But there was another often-forgotten revolutionary change in this machine: it was the first MacBook with a built-in Solid-State Disk (SSD) _and_ a competitive [4-core 2.6 GHz “Core i7” CPU](https://everymac.com/systems/apple/macbook_pro/specs/macbook-pro-core-i7-2.6-15-mid-2012-retina-display-specs.html). It's funny to watch the [announcement](https://www.youtube.com/watch?v=QNcbZDQKwSQ) again, where they _do_ stress the performance aspect of the “all-flash architecture” as well.
 
-<div align="center">
+<div>
      <img src="{% link images/blog/lost-decade/specs.png %}"
           alt="2012 MacBook Pro Retina Specs"
           width="600"
@@ -29,7 +29,7 @@ Coincidentally, I still have this laptop in the [DuckDB Labs](https://duckdblabs
 
 First, what about the operating system? In order to make the comparison fair(er) to the decades, we actually _downgraded_ the operating system on the Retina to OS X 10.8.5 “Mountain Lion”, the operating system version that shipped just a few weeks after the laptop itself in July 2012. Even though the Retina can actually run 10.15 (Catalina), we felt a true 2012 comparison should also use an operating system from the era. Below is a screenshot of the user interface for those of us who sometimes feel a little old.
 
-<div align="center">
+<div>
      <img src="{% link images/blog/lost-decade/desktop.png %}"
           alt="Mac OS X Mountain Lion UI"
           width="600"
@@ -46,7 +46,7 @@ From the [audited results on the TPC website](https://www.tpc.org/tpch/results/t
 
 We ran each of the 22 benchmark queries five times, and took the median runtime to remove noise. However, because the amount of RAM (16 GB) is very much less than the database size (265 GB), no significant amount of the input data can be cached in the buffer manager, so those are not really what people sometimes call “hot” runs.
 
-<div align="center">
+<div>
      <img src="{% link images/blog/lost-decade/setup.jpg %}"
           alt="Laptop in the process of running queries"
           width="600"
@@ -119,7 +119,7 @@ We do see significant speedups, from 7 up to as much as 53. The [geometric mean]
 
 ## Reproducibility
 
-The binary, scripts, queries, and results are [available on GitHub](https://github.com/hannes/old-macbook-tpch) for inspection. We also made the [TPC-H SF1000 database file](http://blobs.duckdb.org/data/tpch-sf1000.db) available for download so you don't have to generate it. But be warned, it's a large file.
+The binary, scripts, queries, and results are [available on GitHub](https://github.com/hannes/old-macbook-tpch) for inspection. We also made the [TPC-H SF1000 database file](https://blobs.duckdb.org/data/tpch-sf1000.db) available for download so you don't have to generate it. But be warned, it's a large file.
 
 ## Discussion
 

@@ -13,5 +13,5 @@ tags: ["Talk"]
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Amsterdam Open Lakehouse Meetup](https://luma.com/OLM-827) |
 | **Speaker** | [Hannes Mühleisen](https://hannes.muehleisen.org/) (DuckDB Labs) |
-| **Slide deck** | [Download](http://blobs.duckdb.org/slides/hannes-muehleisen-ducklake-open-lakehouse-meetup.pdf) |
+| **Slide deck** | [Download](https://blobs.duckdb.org/slides/hannes-muehleisen-ducklake-open-lakehouse-meetup.pdf) |
 | **YouTube** | _to be released_ |

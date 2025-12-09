@@ -201,9 +201,18 @@ pip install duckdb
     data-environment="r"
     data-docs="{% link docs/stable/clients/r.md %}">
 
-{%- highlight bash -%}
+{%- highlight r -%}
+install.packages("duckdb", repos = c("https://duckdb.r-universe.dev", "https://cloud.r-project.org"))
+{%- endhighlight -%}
+
+<div class="alternative">
+
+<h4>Installing from CRAN</h4>
+
+{%- highlight r -%}
 install.packages("duckdb")
 {%- endhighlight -%}
+</div>
 </div>
 
 
