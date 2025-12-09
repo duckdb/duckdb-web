@@ -72,8 +72,8 @@ PRAGMA platform;
 INSTALL spatial;
 LOAD spatial;
 SELECT ST_Area(ST_GeomFromText(
-        'POLYGON((0 0, 4 0, 4 3, 0 3, 0 0))')
-    ) AS area;
+        'POLYGON((0 0, 4 0, 4 3, 0 3, 0 0))'
+    )) AS area;
 ```
 
 ```text
