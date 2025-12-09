@@ -116,8 +116,10 @@ We executed the benchmark on a Microsoft Copilot+ Laptop with a 12-core Snapdrag
 
 <details markdown='1'>
 <summary markdown='span'>
-Click here to see the benchmark snippet.
+Click here to see the benchmark snippet
 </summary>
+<!-- markdownlint-disable MD040 MD052 -->
+
 ```python
 import duckdb
 import os
@@ -146,9 +148,11 @@ print(f"Geomean runtime: {res[0][1]}")
 ```
 </details>
 
+<!-- markdownlint-enable MD040 MD052 -->
+
 <details markdown='1'>
 <summary markdown='span'>
-Click here to see the detailed results.
+Click here to see the detailed TPC-H SF100 results on Windows ARM64
 </summary>
 <table>
 <thead>
