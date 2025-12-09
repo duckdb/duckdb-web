@@ -13,6 +13,25 @@ You can find the complete [release notes on GitHub](https://github.com/duckdb/du
 
 To install the new version, please visit the [installation page]({% link install/index.html %}).
 
+## Fixes
+
+This version ships a number of fixes:
+
+* [`#18782` Incorrect “rows affected” was reported by ART index](https://github.com/duckdb/duckdb/issues/18782)
+* [`#18997` Macro binding had slow performance for unbalanced trees](https://github.com/duckdb/duckdb/issues/18997)
+* [`#19313` Wrong result in cornercase: a `HAVING` clause without a `GROUP BY` returned an incorrect result](https://github.com/duckdb/duckdb/issues/19313)
+* [`#19469` Potential error occurred in constraint violation message when checking foreign key constraints](https://github.com/duckdb/duckdb/issues/19469)
+* [`#19517` `JOIN` with a `LIKE` pattern resulted in columns being incorrectly included](https://github.com/duckdb/duckdb/issues/19517)
+* [`#19575` Invalid Unicode error with `LIKE` expressions](https://github.com/duckdb/duckdb/issues/19575)
+* [`#19754` Race condition could trigger a segfault in the encryption key cache](https://github.com/duckdb/duckdb/issues/19754)
+* [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
+* [`#19901` Memory management has been improved during WAL replay in the presence of indexes](https://github.com/duckdb/duckdb/pull/19901)
+* [`#19916` The default timezone of DuckDB Wasm in a browser had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
+* [`#19924` The optimizer incorrectly removed the `ORDER BY` from aggregates](https://github.com/duckdb/duckdb/issues/19924)
+* [`#19970` Fixed updates on indexed tables with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/19970)
+* [`#20009` Fixed updates with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/20009)
+* [`#20044` Fixed edge case in index deletion code path](https://github.com/duckdb/duckdb/pull/20044)
+
 ## Windows ARM64
 
 We are introducing beta support for Windows ARM64 by supporting extensions and shipping Python wheels.
@@ -20,6 +39,10 @@ We are introducing beta support for Windows ARM64 by supporting extensions and s
 ### Extension Distribution for Windows ARM64
 
 On Windows ARM64, you can now natively install core extensions, including complex ones like [`spatial`]({% link docs/stable/core_extensions/spatial/overview.md %}):
+
+```batch
+duckdb
+```
 
 ```sql
 PRAGMA platform;
@@ -37,7 +60,9 @@ PRAGMA platform;
 ```sql
 INSTALL spatial;
 LOAD spatial;
-SELECT ST_Area(ST_GeomFromText('POLYGON((0 0, 4 0, 4 3, 0 3, 0 0))')) AS area;
+SELECT ST_Area(ST_GeomFromText(
+        'POLYGON((0 0, 4 0, 4 3, 0 3, 0 0))')
+    ) AS area;
 ```
 
 ```text
@@ -53,11 +78,13 @@ SELECT ST_Area(ST_GeomFromText('POLYGON((0 0, 4 0, 4 3, 0 3, 0 0))')) AS area;
 
 We now distribute Python wheels for Windows ARM64. This means that you take e.g. a Copilot+ laptop and run:
 
-```bash
+```batch
 pip install duckdb
 ```
 
-```bash
+This installs the `duckdb` package using the binary distributed through [PyPI](https://pypi.org/project/duckdb/).
+
+```batch
 python
 ```
 
@@ -69,8 +96,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 '1.4.3'
 ```
 
-Currently, many Python installations that you'll find on a Windows ARM64 store run in Microsoft's [Prism emulator](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation).
-For example, if you install Python through the Windows Store, you will get an x86_64 (AMD64) installation which will use the DuckDB AMD64 package.
+Currently, many Python installations that you'll find on Windows ARM64 computers use the x86_64 (AMD64) Python distribution and run through Microsoft's [Prism emulator](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation). For example, if you install Python through the Windows Store, you will get the Python AMD64 installation.
 
 > To understand which platform your Python installation is using, observe the Python CLI's first line (e.g., `Python 3.13.9 ... (ARM64)`).
 
@@ -110,26 +136,8 @@ print(f"Geomean runtime: {res[0][1]}")
 
 Running the queries using the ARM64 package yielded a geomean runtime of 1.59 seconds, a 24% performance improvement.
 
-v1.4.4 is expected to also ship [extensions for Windows ARM64](https://github.com/duckdb/duckdb/pull/20004).
+## Conclusion
 
-## Fixes
-
-This version ships a few fixes:
-
-* [`#18782` Incorrect “rows affected” was reported by ART index](https://github.com/duckdb/duckdb/issues/18782)
-* [`#18997` Macro binding had slow performance for unbalanced trees](https://github.com/duckdb/duckdb/issues/18997)
-* [`#19313` Wrong result in cornercase: a `HAVING` clause without a `GROUP BY` returned an incorrect result](https://github.com/duckdb/duckdb/issues/19313)
-* [`#19469` Potential error occurred in constraint violation message when checking foreign key constraints](https://github.com/duckdb/duckdb/issues/19469)
-* [`#19517` `JOIN` with a `LIKE` pattern resulted in columns being incorrectly included](https://github.com/duckdb/duckdb/issues/19517)
-* [`#19575` Invalid Unicode error with `LIKE` expressions](https://github.com/duckdb/duckdb/issues/19575)
-* [`#19754` Race condition could trigger a segfault in the encryption key cache](https://github.com/duckdb/duckdb/issues/19754)
-* [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
-* [`#19901` Memory management has been improved during WAL replay in the presence of indexes](https://github.com/duckdb/duckdb/pull/19901)
-* [`#19916` The default timezone of DuckDB Wasm in a browser had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
-* [`#19924` The optimizer incorrectly removed the `ORDER BY` from aggregates](https://github.com/duckdb/duckdb/issues/19924)
-* [`#19970` Fixed updates on indexed tables with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/19970)
-* [`#20009` Fixed updates with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/20009)
-* [`#20044` Fixed edge case in index deletion code path](https://github.com/duckdb/duckdb/pull/20044)
-
-This was a short summary but, as usual, the full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.3).
-We would like to thank our contributors for providing detailed issue reports and patches!
+This post was a short summary but, as usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.3).
+We would like to thank our contributors for providing detailed issue reports and patches.
+Stay tuned for the release of v1.4.4 and v1.5.0 early next year!
