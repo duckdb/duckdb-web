@@ -158,7 +158,7 @@ Click here to see the detailed TPC-H SF100 results on Windows ARM64
 <table>
 <thead>
 <tr>
-<th>Architecture</th>
+<th></th>
 <th style="text-align: right;">AMD64</th>
 <th style="text-align: right;">ARM64 (native)</th>
 </tr>
