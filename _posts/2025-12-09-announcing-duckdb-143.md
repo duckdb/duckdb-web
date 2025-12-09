@@ -4,7 +4,7 @@ title: "Announcing DuckDB 1.4.3 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-4-3-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-3-lts.png"
-excerpt: "Today we are releasing DuckDB 1.4.3. Along with bugfixes, we are shipping native extensions and Python support for Windows ARM64."
+excerpt: "Today we are releasing DuckDB 1.4.3. Along with bugfixes, we are shipping native extensions and Python support for Windows Arm64."
 tags: ["release"]
 ---
 
@@ -44,13 +44,13 @@ This version ships a number of performance improvements and bugfixes.
 * [`#19916` The default time zone of DuckDB-Wasm had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
 * [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
 
-## Windows ARM64
+## Windows Arm64
 
-With this release, we are introducing beta support for Windows ARM64 by distributing native DuckDB extensions and Python wheels.
+With this release, we are introducing beta support for Windows Arm64 by distributing native DuckDB extensions and Python wheels.
 
-### Extension Distribution for Windows ARM64
+### Extension Distribution for Windows Arm64
 
-On Windows ARM64, you can now natively install core extensions, including complex ones like [`spatial`]({% link docs/stable/core_extensions/spatial/overview.md %}):
+On Windows Arm64, you can now natively install core extensions, including complex ones like [`spatial`]({% link docs/stable/core_extensions/spatial/overview.md %}):
 
 ```batch
 duckdb
@@ -86,9 +86,9 @@ SELECT ST_Area(ST_GeomFromText(
 └────────┘
 ```
 
-### Python Wheel Distribution for Windows ARM64
+### Python Wheel Distribution for Windows Arm64
 
-We now distribute Python wheels for Windows ARM64. This means that you take e.g. a Copilot+ PC and run:
+We now distribute Python wheels for Windows Arm64. This means that you take e.g. a Copilot+ PC and run:
 
 ```batch
 pip install duckdb
@@ -108,7 +108,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 '1.4.3'
 ```
 
-Currently, many Python installations that you'll find on Windows ARM64 computers use the x86_64 (AMD64) Python distribution and run through Microsoft's [Prism emulator](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation). For example, if you install Python through the Windows Store, you will get the Python AMD64 installation.
+Currently, many Python installations that you'll find on Windows Arm64 computers use the x86_64 (AMD64) Python distribution and run through Microsoft's [Prism emulator](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation). For example, if you install Python through the Windows Store, you will get the Python AMD64 installation.
 
 > To understand which platform your Python installation is using, observe the Python CLI's first line (e.g., `Python 3.13.9 ... (ARM64)`).
 
@@ -153,14 +153,14 @@ print(f"Geomean runtime: {res[0][1]}")
 
 <details markdown='1'>
 <summary markdown='span'>
-Click here to see the detailed TPC-H SF100 results on Windows ARM64
+Click here to see the detailed TPC-H SF100 results on Windows Arm64
 </summary>
 <table>
 <thead>
 <tr>
 <th></th>
-<th style="text-align: right;">AMD64</th>
-<th style="text-align: right;">ARM64 (native)</th>
+<th style="text-align: center;">AMD64<br>(emulator)</th>
+<th style="text-align: center;">Arm64<br>(native)</th>
 </tr>
 </thead>
 <tbody>
@@ -288,7 +288,7 @@ Click here to see the detailed TPC-H SF100 results on Windows ARM64
 </table>
 </details>
 
-The AMD64 package (running in the emulator) yielded a geometric mean runtime of 2.09 seconds, while the native ARM64 package had a geomean runtime of 1.59 seconds – a 24% performance improvement.
+The AMD64 package (running in the emulator) yielded a geometric mean runtime of 2.09 seconds, while the native Arm64 package had a geomean runtime of 1.59 seconds – a 24% performance improvement.
 
 ## Conclusion
 
