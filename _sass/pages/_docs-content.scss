@@ -600,10 +600,15 @@ body.duckcon7 {
           margin-top: 8px;
         }
         
+        > table,
         > div .highlight{
             margin-top: 8px;    
         }
         
+    }
+    
+    details + details{
+        margin-top: 1em;
     }
 
 }
