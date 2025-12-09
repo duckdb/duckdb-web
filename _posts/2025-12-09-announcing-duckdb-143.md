@@ -4,7 +4,7 @@ title: "Announcing DuckDB 1.4.3 LTS"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-4-3-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-3-lts.png"
-excerpt: "Today we are releasing DuckDB 1.4.3."
+excerpt: "Today we are releasing DuckDB 1.4.3. Among bugfixes, we are shipping native extensions and Python support for Windows ARM64."
 tags: ["release"]
 ---
 
@@ -19,14 +19,14 @@ This version ships a number of fixes:
 
 * [`#18782` Incorrect “rows affected” was reported by ART index](https://github.com/duckdb/duckdb/issues/18782)
 * [`#18997` Macro binding had slow performance for unbalanced trees](https://github.com/duckdb/duckdb/issues/18997)
-* [`#19313` Wrong result in cornercase: a `HAVING` clause without a `GROUP BY` returned an incorrect result](https://github.com/duckdb/duckdb/issues/19313)
+* [`#19313` Wrong result in corner case: a `HAVING` clause without a `GROUP BY` returned an incorrect result](https://github.com/duckdb/duckdb/issues/19313)
 * [`#19469` Potential error occurred in constraint violation message when checking foreign key constraints](https://github.com/duckdb/duckdb/issues/19469)
 * [`#19517` `JOIN` with a `LIKE` pattern resulted in columns being incorrectly included](https://github.com/duckdb/duckdb/issues/19517)
 * [`#19575` Invalid Unicode error with `LIKE` expressions](https://github.com/duckdb/duckdb/issues/19575)
 * [`#19754` Race condition could trigger a segfault in the encryption key cache](https://github.com/duckdb/duckdb/issues/19754)
 * [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
 * [`#19901` Memory management has been improved during WAL replay in the presence of indexes](https://github.com/duckdb/duckdb/pull/19901)
-* [`#19916` The default timezone of DuckDB Wasm in a browser had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
+* [`#19916` The default time zone of DuckDB Wasm in a browser had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
 * [`#19924` The optimizer incorrectly removed the `ORDER BY` from aggregates](https://github.com/duckdb/duckdb/issues/19924)
 * [`#19970` Fixed updates on indexed tables with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/19970)
 * [`#20009` Fixed updates with DICT_FSST compression](https://github.com/duckdb/duckdb/pull/20009)
@@ -100,7 +100,8 @@ Currently, many Python installations that you'll find on Windows ARM64 computers
 
 > To understand which platform your Python installation is using, observe the Python CLI's first line (e.g., `Python 3.13.9 ... (ARM64)`).
 
-Using the [`tpch` extension]({% link docs/stable/core_extensions/tpch.md %}), we can perform a quick benchmark by running the queries on the TPC-H SF100 dataset:
+We used the [`tpch` extension]({% link docs/stable/core_extensions/tpch.md %}) to perform a quick benchmark by running the queries on the TPC-H SF100 dataset.
+We executed the benchmark on a Microsoft Copilot+ Laptop with a 12-core Snapdragon CPU running at 3.4 GHz, 64 GB RAM and 1 TB disk:
 
 <details markdown='1'>
 <summary markdown='span'>
@@ -134,10 +135,147 @@ print(f"Geomean runtime: {res[0][1]}")
 ```
 </details>
 
-Running the queries using the ARM64 package yielded a geomean runtime of 1.59 seconds, a 24% performance improvement.
+<details markdown='1'>
+<summary markdown='span'>
+Click here to see the detailed results.
+</summary>
+<table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th style="text-align: right;">AMD64</th>
+<th style="text-align: right;">ARM64 (native)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1</td>
+<td style="text-align: right;">2.87</td>
+<td style="text-align: right;">2.10</td>
+</tr>
+<tr>
+<td>Q2</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">0.40</td>
+</tr>
+<tr>
+<td>Q3</td>
+<td style="text-align: right;">2.36</td>
+<td style="text-align: right;">1.58</td>
+</tr>
+<tr>
+<td>Q4</td>
+<td style="text-align: right;">2.01</td>
+<td style="text-align: right;">1.45</td>
+</tr>
+<tr>
+<td>Q5</td>
+<td style="text-align: right;">2.29</td>
+<td style="text-align: right;">1.61</td>
+</tr>
+<tr>
+<td>Q6</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.39</td>
+</tr>
+<tr>
+<td>Q7</td>
+<td style="text-align: right;">2.04</td>
+<td style="text-align: right;">1.52</td>
+</tr>
+<tr>
+<td>Q8</td>
+<td style="text-align: right;">2.13</td>
+<td style="text-align: right;">1.46</td>
+</tr>
+<tr>
+<td>Q9</td>
+<td style="text-align: right;">7.39</td>
+<td style="text-align: right;">7.32</td>
+</tr>
+<tr>
+<td>Q10</td>
+<td style="text-align: right;">4.18</td>
+<td style="text-align: right;">6.98</td>
+</tr>
+<tr>
+<td>Q11</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">0.57</td>
+</tr>
+<tr>
+<td>Q12</td>
+<td style="text-align: right;">2.92</td>
+<td style="text-align: right;">1.04</td>
+</tr>
+<tr>
+<td>Q13</td>
+<td style="text-align: right;">6.65</td>
+<td style="text-align: right;">0.54</td>
+</tr>
+<tr>
+<td>Q14</td>
+<td style="text-align: right;">1.56</td>
+<td style="text-align: right;">1.12</td>
+</tr>
+<tr>
+<td>Q15</td>
+<td style="text-align: right;">0.90</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr>
+<td>Q16</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0.74</td>
+</tr>
+<tr>
+<td>Q17</td>
+<td style="text-align: right;">2.57</td>
+<td style="text-align: right;">1.67</td>
+</tr>
+<tr>
+<td>Q18</td>
+<td style="text-align: right;">4.86</td>
+<td style="text-align: right;">5.15</td>
+</tr>
+<tr>
+<td>Q19</td>
+<td style="text-align: right;">2.96</td>
+<td style="text-align: right;">1.72</td>
+</tr>
+<tr>
+<td>Q20</td>
+<td style="text-align: right;">1.75</td>
+<td style="text-align: right;">1.12</td>
+</tr>
+<tr>
+<td>Q21</td>
+<td style="text-align: right;">7.05</td>
+<td style="text-align: right;">4.44</td>
+</tr>
+<tr>
+<td>Q22</td>
+<td style="text-align: right;">1.78</td>
+<td style="text-align: right;">0.97</td>
+</tr>
+<tr>
+<td><strong>Median</strong></td>
+<td style="text-align: right;"><strong>2.21</strong></td>
+<td style="text-align: right;"><strong>1.49</strong></td>
+</tr>
+<tr>
+<td><strong>Geomean</strong></td>
+<td style="text-align: right;"><strong>2.09</strong></td>
+<td style="text-align: right;"><strong>1.59</strong></td>
+</tr>
+</tbody>
+</table>
+</details>
+
+The AMD64 package (running in the emulator) yielded a geometric mean runtime of 2.09 seconds, while the native ARM64 package had a geomean runtime of 1.59 seconds – a 24% performance improvement.
 
 ## Conclusion
 
-This post was a short summary but, as usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.3).
+This post was a short summary of the changes in v1.4.3. As usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.3).
 We would like to thank our contributors for providing detailed issue reports and patches.
-Stay tuned for the release of v1.4.4 and v1.5.0 early next year!
+Stay tuned for DuckDB v1.4.4 and v1.5.0, both released [early next year]({% link release_calendar.md %})!
