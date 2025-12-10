@@ -50,7 +50,8 @@ SELECT sum(value) FROM db.table WHERE other_column = '⟨some_value⟩';
 
 ## Iceberg with DuckDB in the Browser
 
-We asked ourselves: what would it take to expose Iceberg analytics, without any required setup for users or maintenance of any managed infrastructure, in a *truly serverless* manner?
+We asked ourselves: would it be possible to run *client-is-the-server* model directly from within a Browser tab?
+Could a zero setup or installs on the user, no infrastructure, properly serverless option to interact with Iceberg Catalogs be viable?```
 
 ![Iceberg with DuckDB-Wasm](/images/blog/duckdb-iceberg-with-duckdb-wasm-dark.svg){: .darkmode-img }
 ![Iceberg with DuckDB-Wasm](/images/blog/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
