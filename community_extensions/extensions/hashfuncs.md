@@ -53,20 +53,20 @@ LOAD {{ page.extension.name }};
 |---------------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|------------------------------------|
 | murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input                                 | NULL    | [murmurhash3_128('hello')]         |
 | murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input with a seed                     | NULL    | [murmurhash3_128('hello', 42)]     |
-| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input                                                | NULL    | [murmurhash3_32('hello')]          |
 | murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input with a seed                                    | NULL    | [murmurhash3_32('hello', 42)]      |
-| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input with a seed                     | NULL    | [murmurhash3_x64_128('hello', 42)] |
+| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input                                                | NULL    | [murmurhash3_32('hello')]          |
 | murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input. Optimized for 64-bit platforms | NULL    | [murmurhash3_x64_128('hello')]     |
+| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input with a seed                     | NULL    | [murmurhash3_x64_128('hello', 42)] |
 | rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input. Very fast for all input sizes                   | NULL    | [rapidhash('hello')]               |
 | rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input with a seed                                      | NULL    | [rapidhash('hello', 42)]           |
-| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input with a seed                                 | NULL    | [xxh32('hello', 42)]               |
 | xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input                                             | NULL    | [xxh32('hello')]                   |
+| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input with a seed                                 | NULL    | [xxh32('hello', 42)]               |
 | xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input with a seed                            | NULL    | [xxh3_128('hello', 42)]            |
 | xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input                                        | NULL    | [xxh3_128('hello')]                |
-| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input. Faster than XXH64 for short inputs      | NULL    | [xxh3_64('hello')]                 |
 | xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input with a seed                              | NULL    | [xxh3_64('hello', 42)]             |
-| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input                                             | NULL    | [xxh64('hello')]                   |
+| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input. Faster than XXH64 for short inputs      | NULL    | [xxh3_64('hello')]                 |
 | xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input with a seed                                 | NULL    | [xxh64('hello', 42)]               |
+| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input                                             | NULL    | [xxh64('hello')]                   |
 
 ### Added Settings
 
