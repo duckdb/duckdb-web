@@ -27,8 +27,8 @@ docs:
     The Dash extension allows you to create interactive plots and dashboards locally *within* DuckDB.
     For more information, please see the [Dash documentation](https://www.dash.builders/) or check out the 
     repository [here](https://github.com/gropaul/dash).
-extension_star_count: 22
-extension_star_count_pretty: 22
+extension_star_count: 23
+extension_star_count_pretty: 23
 extension_download_count: 715
 extension_download_count_pretty: 715
 image: '/images/community_extensions/social_preview/preview_community_extension_dash.png'
