@@ -44,11 +44,15 @@ This version ships a number of performance improvements and bugfixes.
 * [`#19916` The default time zone of DuckDB-Wasm had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
 * [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
 
+## OneLake Support in Microsoft Azure
+
+The [`azure` extension]({% link docs/stable/core_extensions/azure.md %}) now support connecting to [OneLake](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview).
+
 ## Windows Arm64
 
 With this release, we are introducing beta support for Windows Arm64 by distributing native DuckDB extensions and Python wheels.
 
-### Extension Distribution for Windows Arm64
+### Extension Distribution
 
 On Windows Arm64, you can now natively install core extensions, including complex ones like [`spatial`]({% link docs/stable/core_extensions/spatial/overview.md %}):
 
@@ -86,7 +90,7 @@ SELECT ST_Area(ST_GeomFromText(
 └────────┘
 ```
 
-### Python Wheel Distribution for Windows Arm64
+### Python Wheel Distribution
 
 We now distribute Python wheels for Windows Arm64. This means that you take e.g. a Copilot+ PC and run:
 
@@ -290,7 +294,7 @@ Click here to see the detailed TPC-H SF100 results on Windows Arm64
 
 The AMD64 package (running in the emulator) yielded a geometric mean runtime of 2.09 seconds, while the native Arm64 package had a geomean runtime of 1.59 seconds – a 24% performance improvement.
 
-### ODBC Driver for Windows Arm64
+### ODBC Driver
 
 We are now shipping a native ODBC driver for Windows Arm64.
 Head to the [ODBC Windows installation page](https://duckdb.org/install/?platform=windows&environment=odbc) to try it out!
