@@ -97,10 +97,34 @@ It's showcases how duckdb-wasm can efficiently query on the fly remote resources
 </div>
 
 <script>
+
+var option_map = new Map();
+function get_mapping(shorthand) {
+	if (option_map.has(shorthand)) return option_map[shorthand];
+	const request = new XMLHttpRequest();
+	request.open("GET", "https://ducdkb-visualizer-shorthands.s3.us-east-2.amazonaws.com/" + shorthand + ".json", false); // `false` makes the request synchronous
+	try {
+	request.send(null);
+	if (request.status === 200) {
+	  var actual_JSON = JSON.parse(request.responseText);
+	  option_map[shorthand] = actual_JSON;
+	  return actual_JSON;
+	} else {
+          option_map[shorthand] = null;
+        }
+	} catch(error) {
+	  console.log(error);
+          option_map[shorthand] = null;
+	}
+	return option_map[shorthand];
+}
+
 function extract_hash_segment() {
    var hash_segment = window.location.hash;
-   if (hash_segment.length == 0) return;
-   if (hash_segment[0] == '#') hash_segment = hash_segment.substring(1);
+   var search_segment = window.location.search;
+   if (hash_segment.length == 0) {
+      if (search_segment.length == 0) return;
+   }
 
    function add_component(name) {
       document.getElementById(name).value = "";
@@ -112,12 +136,29 @@ function extract_hash_segment() {
    add_component("secret_type");
    add_component("secret_id");
    add_component("secret_key");
+
+   if (search_segment.length > 0) {
+      if (search_segment[0] == '?') search_segment = search_segment.substring(1);
+      var data = get_mapping(search_segment);
+      if (data == null) return;
+	console.log(data);
+
+      for (const key in data) {
+         document.getElementById(key).value = data[key];
+	console.log(key);
+      }
+
+      return;
+   }
+   if (hash_segment[0] == '#') hash_segment = hash_segment.substring(1);
+
    const parts = hash_segment.split("&");
    for (const p in parts) {
       const inner_parts = parts[p].split("=");
       document.getElementById(inner_parts[0]).value = decodeURIComponent(inner_parts[1]);
    }
 }
+
 extract_hash_segment();
       document.getElementById("last_query_status").innerHTML = "2/5: Instantiating DuckDB-Wasm - main thread component";
       if (window.updateStatusIndicator) window.updateStatusIndicator("2/5: Instantiating DuckDB-Wasm - main thread component");
