@@ -267,14 +267,17 @@ if (append) {
       await executeQuery(conn, "DETACH __my_resource__;");
       setup_queries = "";
       if (secret_type !== "") {
-   var secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", KEY_ID '" + secret_id + "', SECRET '" + secret_key + "');";
+         var secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", KEY_ID '" + secret_id + "', SECRET '" + secret_key + "');";
+         if (secret_type == "iceberg") {
+           secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", ENDPOINT '" + secret_id + "', TOKEN '" + secret_key + "');";
+         }
 
-      last_res = await executeQuery(conn, secret_query, true);
-      if (!last_res.is_valid) {
-      table.clear();
-      return;
+         last_res = await executeQuery(conn, secret_query, true);
+         if (!last_res.is_valid) {
+            table.clear();
+            return;
+         }
       }
-   }
 
 
 
