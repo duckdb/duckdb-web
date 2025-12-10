@@ -30,7 +30,8 @@ The implementation of existing Iceberg engines follow these categories. Iceberg 
 ![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-dark.svg){: .darkmode-img }
 ![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-light.svg){: .lightmode-img }
 
-DuckDB supports both Iceberg interaction models. For the client-is-the-server model, [install DuckDB locally](https://duckdb.org/install/) and use it as the client to query Iceberg using standard SQL. For example: 
+DuckDB supports both Iceberg interaction models, as engine run either in the *server* or as locally installable *client-is-the-server*.
+From a user point of view, in the *client-server model* engine choice is transparent, while in the *client-is-the-server*, users will [install DuckDB locally](https://duckdb.org/install/) and use it through its SQL interface to query Iceberg Catalogs. For example: 
 
 ```sql
 CREATE SECRET test_secret (
@@ -45,9 +46,9 @@ ATTACH '⟨warehouse⟩' AS db (
 SELECT sum(value) FROM db.table WHERE other_column = '⟨some_value⟩';
 ```
 
-> You can discover the full DuckDB-Iceberg feature set, including insert and update capabilities, in our [earlier blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}).
+> You can discover the full DuckDB-Iceberg extension feature set, including insert and update capabilities, in our [earlier blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}).
 
-## Iceberg with DuckDB-Wasm
+## Iceberg with DuckDB in the Browser
 
 We asked ourselves: what would it take to expose Iceberg analytics, without any required setup for users or maintenance of any managed infrastructure, in a *truly serverless* manner?
 
@@ -79,20 +80,20 @@ TODO - final URL and video
 As of today, this demo works with [Amazon S3 Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}). This has been implemented through a collaboration with the Amazon S3 Tables team.
 
 You can now provide your own Iceberg warehouse and a set of credentials that allows reads from the catalog, metadata and data (policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess)).
-Computations are fully local, and the credentials and warehouse ID are only sent towards the Catalog endpoint you specified.
+Computations are fully local, and the credentials and warehouse ID are only sent to the catalog endpoint specified in your `Attach` command.
 Inputs are translated to SQL, and added to the hash segment of the URL.
 
 What this means:
 
 * no sensitive data is handled or sent to `duckdb.org`
 * computations are local, fully in your browser
-* if you share the link, you might be sharing your credentials
 * interface is SQL, same snippet can be run everywhere DuckDB runs
+* if you share the link, you might be sharing your credentials
 
 ## Conclusion
 
-DuckDB-Iceberg is now supported in DuckDB-Wasm for Iceberg REST Catalogs. At the moment only one major implementation works out of the box, more hopefully to follow.
+DuckDB-Iceberg extension is now supported in DuckDB-Wasm for Iceberg REST Catalogs. At the moment only one major implementation works out of the box, more hopefully to follow.
 
 Iceberg in DuckDB-Wasm will allow users another path to access Iceberg catalogs in their browsers, no extra infrastructure or complexities to be maintained.
 
-This will allow users to unlock the analytical powers of DuckDB with on their Iceberg catalogs without having to install or manage any compute nodes, making Iceberg tables even simpler to access. If you would like to provide feedback or file issues, please reach out to us on either the [DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) or [DuckDB-Iceberg](https://github.com/duckdb/duckdb-iceberg) repository. If you are interested in using any part of this within your organization, feel free to [reach out](https://duckdblabs.com/contact/).
+This will allow users to unlock the analytical powers of DuckDB on their Iceberg catalogs without having to install or manage any compute nodes, making Iceberg tables even simpler to access. If you would like to provide feedback or file issues, please reach out to us on either the [DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) or [DuckDB-Iceberg](https://github.com/duckdb/duckdb-iceberg) repository. If you are interested in using any part of this within your organization, feel free to [reach out](https://duckdblabs.com/contact/).
