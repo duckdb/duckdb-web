@@ -52,22 +52,21 @@ SELECT sum(value) FROM db.table WHERE other_column = '⟨some_value⟩';
 
 We asked ourselves: what would it take to expose Iceberg analytics, without any required setup for users or maintenance of any managed infrastructure, in a *truly serverless* manner?
 
-[DuckDB-Wasm](https://duckdb.org/docs/stable/clients/wasm/overview) is a WebAssembly port of DuckDB, which can run in any browser and [supports loading of extensions](https://duckdb.org/2023/12/18/duckdb-extensions-in-wasm).
-
-What does interacting with an Iceberg REST Catalog require? The ability to talk to a REST API over HTTP(S). The possibility of reading (or writing) `avro` and `parquet` files on object storage. Negotiating authentication to access those resources on behalf of the user.
-
-At a high level, the changes required were:
-* In DuckDB, we redesigned HTTP interactions, so that extensions and clients have an uniform interface to the networking stack.
-* In DuckDB-Wasm, we implemented such an interface, that in this case is a wrapper around the available JavaScript network stack
-* In DuckDB-Iceberg, we routed all networking through the common HTTP interface, so that both in native and Wasm the same logic is executed
-
-The result is that you can now query Iceberg with DuckDB running in a browser tab:
-
 ![Iceberg with DuckDB-Wasm](/images/blog/duckdb-iceberg-with-duckdb-wasm-dark.svg){: .darkmode-img }
 ![Iceberg with DuckDB-Wasm](/images/blog/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
 
-DuckDB-Iceberg in Wasm unlocks the analytical powers of DuckDB on your Iceberg catalog without infrastructure and without setup user side.
-Now you can access the same Iceberg Catalog using client–server, client-as-a-server, or properly serverless from the isolation of a single tab running on your users' browsers!
+We looked at the available pieces, [DuckDB-Wasm](https://duckdb.org/docs/stable/clients/wasm/overview) is a WebAssembly port of DuckDB, which can run in any browser and [supports loading of extensions](https://duckdb.org/2023/12/18/duckdb-extensions-in-wasm).
+
+What does interacting with an Iceberg REST Catalog require? The ability to talk to a REST API over HTTP(S). The possibility of reading (or writing) `avro` and `parquet` files on object storage. Negotiating authentication to access those resources on behalf of the user. All of the above can be done also from a Browser, no native component is actually required.
+
+At a high level, the changes required were:
+* In the core `duckdb` codebase, we redesigned HTTP interactions, so that extensions and clients have an uniform interface to the networking stack.
+* In `duckdb-wasm`, we implemented such an interface, that in this case is a wrapper around the available JavaScript network stack
+* In `duckdb-iceberg`, we routed all networking through the common HTTP interface, so that both in native and Wasm the same logic is executed
+
+The result is that you can now query Iceberg with DuckDB running directly on a Browser.
+
+Now you can access the same Iceberg Catalog using *client–server*, *client-as-a-server*, or properly serverless from the isolation of a single tab running on your browser!
 
 ## Welcome to Serverless Iceberg Analytics
 
