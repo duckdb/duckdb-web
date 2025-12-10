@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 644
-extension_download_count_pretty: 644
+extension_download_count: 653
+extension_download_count_pretty: 653
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
@@ -53,36 +53,36 @@ LOAD {{ page.extension.name }};
 
 |          function_name           | function_type | description | comment | examples |
 |----------------------------------|---------------|-------------|---------|----------|
-| inflect                          | scalar        | NULL        | NULL    | NULL     |
-| inflect                          | table         | NULL        | NULL    | NULL     |
-| inflector_deconstantize          | scalar        | NULL        | NULL    | NULL     |
-| inflector_demodulize             | scalar        | NULL        | NULL    | NULL     |
-| inflector_deordinalize           | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_camel_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_class_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_foreign_key         | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_kebab_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_pascal_case         | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_screamingsnake_case | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_sentence_case       | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_snake_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_table_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_title_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_train_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_ordinalize             | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_camel_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_class_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_foreign_key         | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_kebab_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_pascal_case         | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_plural              | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_screamingsnake_case | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_sentence_case       | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_singular            | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_snake_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_table_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_title_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_train_case          | scalar        | NULL        | NULL    | NULL     |
+| inflect                          | scalar        | NULL        | NULL    |          |
+| inflect                          | table         | NULL        | NULL    |          |
+| inflector_deconstantize          | scalar        | NULL        | NULL    |          |
+| inflector_demodulize             | scalar        | NULL        | NULL    |          |
+| inflector_deordinalize           | scalar        | NULL        | NULL    |          |
+| inflector_is_camel_case          | scalar        | NULL        | NULL    |          |
+| inflector_is_class_case          | scalar        | NULL        | NULL    |          |
+| inflector_is_foreign_key         | scalar        | NULL        | NULL    |          |
+| inflector_is_kebab_case          | scalar        | NULL        | NULL    |          |
+| inflector_is_pascal_case         | scalar        | NULL        | NULL    |          |
+| inflector_is_screamingsnake_case | scalar        | NULL        | NULL    |          |
+| inflector_is_sentence_case       | scalar        | NULL        | NULL    |          |
+| inflector_is_snake_case          | scalar        | NULL        | NULL    |          |
+| inflector_is_table_case          | scalar        | NULL        | NULL    |          |
+| inflector_is_title_case          | scalar        | NULL        | NULL    |          |
+| inflector_is_train_case          | scalar        | NULL        | NULL    |          |
+| inflector_ordinalize             | scalar        | NULL        | NULL    |          |
+| inflector_to_camel_case          | scalar        | NULL        | NULL    |          |
+| inflector_to_class_case          | scalar        | NULL        | NULL    |          |
+| inflector_to_foreign_key         | scalar        | NULL        | NULL    |          |
+| inflector_to_kebab_case          | scalar        | NULL        | NULL    |          |
+| inflector_to_pascal_case         | scalar        | NULL        | NULL    |          |
+| inflector_to_plural              | scalar        | NULL        | NULL    |          |
+| inflector_to_screamingsnake_case | scalar        | NULL        | NULL    |          |
+| inflector_to_sentence_case       | scalar        | NULL        | NULL    |          |
+| inflector_to_singular            | scalar        | NULL        | NULL    |          |
+| inflector_to_snake_case          | scalar        | NULL        | NULL    |          |
+| inflector_to_table_case          | scalar        | NULL        | NULL    |          |
+| inflector_to_title_case          | scalar        | NULL        | NULL    |          |
+| inflector_to_train_case          | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 

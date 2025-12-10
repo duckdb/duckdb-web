@@ -22,8 +22,8 @@ repo:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 953
-extension_download_count_pretty: 953
+extension_download_count: 910
+extension_download_count_pretty: 910
 image: '/images/community_extensions/social_preview/preview_community_extension_json_schema.png'
 layout: community_extension_doc
 ---
@@ -51,9 +51,9 @@ LOAD {{ page.extension.name }};
 
 |        function_name        | function_type | description | comment | examples |
 |-----------------------------|---------------|-------------|---------|----------|
-| json_schema_patch           | scalar        | NULL        | NULL    | NULL     |
-| json_schema_update          | scalar        | NULL        | NULL    | NULL     |
-| json_schema_validate        | scalar        | NULL        | NULL    | NULL     |
-| json_schema_validate_schema | scalar        | NULL        | NULL    | NULL     |
+| json_schema_patch           | scalar        | NULL        | NULL    |          |
+| json_schema_update          | scalar        | NULL        | NULL    |          |
+| json_schema_validate        | scalar        | NULL        | NULL    |          |
+| json_schema_validate_schema | scalar        | NULL        | NULL    |          |
 
 

@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 781
-extension_download_count_pretty: 781
+extension_download_count: 802
+extension_download_count_pretty: 802
 image: '/images/community_extensions/social_preview/preview_community_extension_rapidfuzz.png'
 layout: community_extension_doc
 ---
@@ -52,42 +52,42 @@ LOAD {{ page.extension.name }};
 
 |                function_name                 | function_type | description | comment | examples |
 |----------------------------------------------|---------------|-------------|---------|----------|
-| rapidfuzz_hamming_distance                   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_hamming_normalized_distance        | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_hamming_normalized_similarity      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_hamming_similarity                 | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_indel_distance                     | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_indel_normalized_distance          | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_indel_normalized_similarity        | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_indel_similarity                   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_distance                      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_normalized_distance           | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_normalized_similarity         | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_similarity                    | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_winkler_distance              | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_winkler_normalized_distance   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_winkler_normalized_similarity | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_winkler_similarity            | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_lcs_seq_distance                   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_lcs_seq_normalized_distance        | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_lcs_seq_normalized_similarity      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_lcs_seq_similarity                 | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_osa_distance                       | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_osa_normalized_distance            | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_osa_normalized_similarity          | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_osa_similarity                     | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_partial_ratio                      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_postfix_distance                   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_postfix_normalized_distance        | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_postfix_normalized_similarity      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_postfix_similarity                 | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_prefix_distance                    | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_prefix_normalized_distance         | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_prefix_normalized_similarity       | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_prefix_similarity                  | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_ratio                              | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_token_set_ratio                    | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_token_sort_ratio                   | scalar        | NULL        | NULL    | NULL     |
+| rapidfuzz_hamming_distance                   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_hamming_normalized_distance        | scalar        | NULL        | NULL    |          |
+| rapidfuzz_hamming_normalized_similarity      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_hamming_similarity                 | scalar        | NULL        | NULL    |          |
+| rapidfuzz_indel_distance                     | scalar        | NULL        | NULL    |          |
+| rapidfuzz_indel_normalized_distance          | scalar        | NULL        | NULL    |          |
+| rapidfuzz_indel_normalized_similarity        | scalar        | NULL        | NULL    |          |
+| rapidfuzz_indel_similarity                   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_distance                      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_normalized_distance           | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_normalized_similarity         | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_similarity                    | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_winkler_distance              | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_winkler_normalized_distance   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_winkler_normalized_similarity | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_winkler_similarity            | scalar        | NULL        | NULL    |          |
+| rapidfuzz_lcs_seq_distance                   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_lcs_seq_normalized_distance        | scalar        | NULL        | NULL    |          |
+| rapidfuzz_lcs_seq_normalized_similarity      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_lcs_seq_similarity                 | scalar        | NULL        | NULL    |          |
+| rapidfuzz_osa_distance                       | scalar        | NULL        | NULL    |          |
+| rapidfuzz_osa_normalized_distance            | scalar        | NULL        | NULL    |          |
+| rapidfuzz_osa_normalized_similarity          | scalar        | NULL        | NULL    |          |
+| rapidfuzz_osa_similarity                     | scalar        | NULL        | NULL    |          |
+| rapidfuzz_partial_ratio                      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_postfix_distance                   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_postfix_normalized_distance        | scalar        | NULL        | NULL    |          |
+| rapidfuzz_postfix_normalized_similarity      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_postfix_similarity                 | scalar        | NULL        | NULL    |          |
+| rapidfuzz_prefix_distance                    | scalar        | NULL        | NULL    |          |
+| rapidfuzz_prefix_normalized_distance         | scalar        | NULL        | NULL    |          |
+| rapidfuzz_prefix_normalized_similarity       | scalar        | NULL        | NULL    |          |
+| rapidfuzz_prefix_similarity                  | scalar        | NULL        | NULL    |          |
+| rapidfuzz_ratio                              | scalar        | NULL        | NULL    |          |
+| rapidfuzz_token_set_ratio                    | scalar        | NULL        | NULL    |          |
+| rapidfuzz_token_sort_ratio                   | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
