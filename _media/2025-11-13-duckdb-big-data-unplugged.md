@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB: Big Data Unplugged"
 author: Gábor Szárnyas
-#thumb: "/images/media/thumbs/2025-01-09-duckdb-and-the-future-of-databases.png"
-#image: "/images/media/thumbs/2025-01-09-duckdb-and-the-future-of-databases.png"
+thumb: "/images/media/thumbs/2025-11-13-duckdb-big-data-unplugged.jpg"
+image: "/images/media/thumbs/2025-11-13-duckdb-big-data-unplugged.jpg"
 excerpt: ""
 toc: false
 tags: ["Talk"]

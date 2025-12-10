@@ -2,8 +2,8 @@
 layout: post
 title: "Minus Three Tier: Data Architecture Turned Upside Down"
 author: Hannes Mühleisen
-#thumb: "/images/media/thumbs/2025-01-09-duckdb-and-the-future-of-databases.png"
-#image: "/images/media/thumbs/2025-01-09-duckdb-and-the-future-of-databases.png"
+thumb: "/images/media/thumbs/2025-09-26-data-architecture-turned-upside-down.jpg"
+image: "/images/media/thumbs/2025-09-26-data-architecture-turned-upside-down.jpg"
 excerpt: ""
 toc: false
 tags: ["Talk"]
