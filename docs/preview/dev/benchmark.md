@@ -11,7 +11,7 @@ When making changes that have potential performance implications, it is importan
 To build the benchmark suite, run the following command in the [DuckDB repository](https://github.com/duckdb/duckdb):
 
 ```batch
-BUILD_BENCHMARK=1 CORE_EXTENSIONS='tpch' make
+BUILD_BENCHMARK=1 BUILD_EXTENSIONS='tpch' make
 ```
 
 ## Listing Benchmarks
