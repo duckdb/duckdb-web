@@ -28,9 +28,9 @@ current_duckdb_hash: "d1dc88f950"
 current_duckdb_odbc_version: 1.4.3.0
 current_duckdb_odbc_short_version: 1.4.3
 current_duckdb_go_version: 1.4.2
-current_duckdb_nodejs_version: 1.4.2
-current_duckdb_node_neo_version: 1.4.2
-current_duckdb_r_version: 1.4.2
+current_duckdb_nodejs_version: 1.4.3
+current_duckdb_node_neo_version: 1.4.3
+current_duckdb_r_version: 1.4.3
 current_duckdb_rust_version: 1.4.3
 current_duckdb_wasm_version: 1.4.3
 current_duckdb_csharp_version: 1.4.1
