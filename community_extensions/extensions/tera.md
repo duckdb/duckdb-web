@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 647
-extension_download_count_pretty: 647
+extension_download_count: 644
+extension_download_count_pretty: 644
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---
@@ -53,7 +53,7 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| tera_render   | scalar        | NULL        | NULL    | NULL     |
+| tera_render   | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 

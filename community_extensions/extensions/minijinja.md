@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 646
-extension_download_count_pretty: 646
+extension_download_count: 655
+extension_download_count_pretty: 655
 image: '/images/community_extensions/social_preview/preview_community_extension_minijinja.png'
 layout: community_extension_doc
 ---
@@ -53,7 +53,7 @@ LOAD {{ page.extension.name }};
 
 |  function_name   | function_type | description | comment | examples |
 |------------------|---------------|-------------|---------|----------|
-| minijinja_render | scalar        | NULL        | NULL    | NULL     |
+| minijinja_render | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
