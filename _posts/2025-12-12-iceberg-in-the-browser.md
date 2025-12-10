@@ -70,7 +70,7 @@ Now you can access the same Iceberg Catalog using client–server, client-as-a-s
 
 ## Welcome to Serverless Iceberg Analytics
 
-To see a demo of serverless Iceberg analytics, visit our table visualizer at [`duckdb.org/visualizer`](https://duckdb.org/visualizer/).
+To see a demo of serverless Iceberg analytics, visit our table visualizer at [`duckdb.org/visualizer`](https://duckdb.org/visualizer/?iceberg).
 
 TODO - final URL and video
 
