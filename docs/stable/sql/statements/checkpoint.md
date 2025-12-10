@@ -22,11 +22,14 @@ Synchronize data in the specified database:
 CHECKPOINT file_db;
 ```
 
-Abort any in-progress transactions to synchronize the data:
+Synchronize data and prevent new transactions from starting:
 
 ```sql
 FORCE CHECKPOINT;
 ```
+
+> In earlier DuckDB versions, `FORCE CHECKPOINT` aborted any in-progress transactions.
+> From v1.4, it waits until it can grab the checkpoint lock.
 
 ## Checkpointing In-Memory Tables
 
