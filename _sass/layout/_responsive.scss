@@ -216,10 +216,15 @@
 		display: none;
 	}
 	
-	
-	.opensearch > span.shortcut{
-		display: none!important;
+	.opensearch{
+		aspect-ratio: 1/1;
+		justify-content: center;
+		
+		> span.shortcut{
+			display: none!important;
+		}
 	}
+	
 	body.documentation .sidenavigation {
 		position: fixed;
 		right: 15px;
@@ -722,12 +727,10 @@
 	body.documentation div.version > div:first-child:hover{
 		border: 1px solid var(--menu-dropdown-border-color, #333)!important;
 	}
+	html.darkmode body .opensearch:hover svg.icon,
 	header .headerline .headercontent .options button.mode[data-mode=dark]:hover,
 	header .headerline .headercontent .options button.mode[data-mode=light]:hover,
 	html.darkmode body header .headerline .headercontent .options button.mode[data-mode=light]:hover{
-		color: var(--main-text-secondary-color, #666);
-	}
-	html.darkmode body .opensearch:hover{
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='none' viewBox='0 0 15 15'%3E%3Cpath stroke='%23999999' stroke-width='1.5' d='m10.432 9.692 3.926 3.927'/%3E%3Ccircle cx='6.282' cy='6.303' r='5.173' stroke='%23999999' stroke-width='1.5'/%3E%3C/svg%3E")!important;
+		color: var(--main-text-secondary-color, #666)!important;
 	}
 }
