@@ -1,5 +1,7 @@
 <nav>
-	<div class="search_icon"></div>
+	<div class="search_icon">
+		<svg class="icon"><use href="#search-sm"></use></svg>
+	</div>
 	{% assign archive_url_slug = '/docs' %}
 	{% if site.data.secondarymenu.toc2[0] %}
 		{% for item in site.data.secondarymenu.toc2 %}
