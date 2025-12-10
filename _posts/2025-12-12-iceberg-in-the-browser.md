@@ -55,7 +55,7 @@ We asked ourselves: what would it take to expose Iceberg analytics, without any 
 ![Iceberg with DuckDB-Wasm](/images/blog/duckdb-iceberg-with-duckdb-wasm-dark.svg){: .darkmode-img }
 ![Iceberg with DuckDB-Wasm](/images/blog/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
 
-We looked at the available pieces, [DuckDB-Wasm](https://duckdb.org/docs/stable/clients/wasm/overview) is a WebAssembly port of DuckDB, which can run in any browser and [supports loading of extensions](https://duckdb.org/2023/12/18/duckdb-extensions-in-wasm).
+DuckDB has a client that can run in any browser: [DuckDB-Wasm](https://duckdb.org/docs/stable/clients/wasm/overview) is a WebAssembly port of DuckDB, does [supports loading of extensions](https://duckdb.org/2023/12/18/duckdb-extensions-in-wasm) in general, but not yet of the Iceberg one.
 
 What does interacting with an Iceberg REST Catalog require? The ability to talk to a REST API over HTTP(S). The possibility of reading (or writing) `avro` and `parquet` files on object storage. Negotiating authentication to access those resources on behalf of the user. All of the above can be done also from a Browser, no native component is actually required.
 
