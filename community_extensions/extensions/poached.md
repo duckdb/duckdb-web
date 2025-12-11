@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: poached
   description: SQL parsing and introspection for IDEs, editors, and developer tools
-  version: 0.2.1
+  version: 0.2.3
   language: C/C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: sidequery/poached
-  ref: 90b5795fca7b5e1933c0f3e3287393d0d6c10d13
+  ref: 3ea18b13eef73620a4707c70753331b235a87f37
 
 docs:
   hello_world: |
@@ -84,10 +84,10 @@ docs:
 
     For more details, visit the [extension repository](https://github.com/sidequery/poached).
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 503
-extension_download_count_pretty: 503
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 1384
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_poached.png'
 layout: community_extension_doc
 ---
