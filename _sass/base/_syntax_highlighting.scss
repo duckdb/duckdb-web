@@ -41,27 +41,27 @@
 	// type names
 	:is(.nb, .bp, .vcb)
 	{
-		color: #0098dd;
+		color: #0000ff;
 		font-family: $fontMonoBold;
 	}
 
 	// numbers
 	:is(.m, .mf, .mh, .mi, .mo, .il)
 	{
-		color: #ce33c0;
+		color: #CE33C0;
 	}
 
 	// functions
 	:is(.nf, .nt, .na)
 	{
-		color: #23974a;
+		color: #128A00;
 		font-family: $fontMonoBold;
 	}
 
 	// strings
 	:is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl)
 	{
-		color: #c5a332;
+		color: #875F00;
 	}
 
 	// prompt
@@ -73,7 +73,7 @@
 	// attributes (used for placeholders within angle brackets)
 	:is(.ge)
 	{
-		color: #d52753;
+		color: #FF5F5F;
 		font-family: $fontMonoItalicBold;
 	}
 }
@@ -129,27 +129,27 @@ html.darkmode, .dark {
 		// type names
 		:is(.nb, .bp, .vcb)
 		{
-			color: #10b1fe;
+			color: #1E90FF;
 			font-family: $fontMonoBold;
 		}
 
 		// numbers
 		:is(.m, .mf, .mh, .mi, .mo, .il)
 		{
-			color: #ff78f8;
+			color: #FF55F6;
 		}
 
 		// functions
 		:is(.nf, .nt, .na)
 		{
-			color: #3fc56b;
+			color: #23974a;
 			font-family: $fontMonoBold;
 		}
 
 		// strings
 		:is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl)
 		{
-			color: #f9c859;
+			color: #FFD700;
 		}
 
 		// prompt
@@ -161,7 +161,7 @@ html.darkmode, .dark {
 		// attributes (used for placeholders within angle brackets)
 		:is(.ge)
 		{
-			color: #d52753;
+			color: #FF5F5F;
 			font-family: $fontMonoItalicBold;
 		}
 	}
