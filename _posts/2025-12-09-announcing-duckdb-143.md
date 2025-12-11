@@ -92,7 +92,7 @@ SELECT ST_Area(ST_GeomFromText(
 
 ### Python Wheel Distribution
 
-We now distribute Python wheels for Windows Arm64. This means that you take e.g. a Copilot+ PC and run:
+We now distribute Python wheels for Windows Arm64 for Python 3.11+. This means that you take e.g. a Copilot+ PC and run:
 
 ```batch
 pip install duckdb
@@ -105,8 +105,10 @@ python
 ```
 
 ```text
-Python 3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:51:39) [MSC v.1944 64 bit (ARM64)] on win32
-Type "help", "copyright", "credits" or "license" for more information.
+Python 3.13.9
+    (tags/v3.13.9:8183fa5, Oct 14 2025, 14:51:39)
+    [MSC v.1944 64 bit (ARM64)] on win32
+
 >>> import duckdb
 >>> duckdb.__version__
 '1.4.3'
