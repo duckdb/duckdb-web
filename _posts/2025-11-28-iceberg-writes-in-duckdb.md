@@ -47,9 +47,15 @@ INSERT INTO iceberg_catalog.default.more_data
 Starting with v1.4.2, the standard SQL syntax also works for deletes and updates:
 
 ```sql
-DELETE FROM iceberg_catalog.default.simple_table WHERE col1 = 2;
-UPDATE iceberg_catalog.default.simple_table SET col1 = col1 + 5 WHERE col1 = 1;
-SELECT * FROM iceberg_catalog.default.simple_table;
+DELETE FROM iceberg_catalog.default.simple_table
+WHERE col1 = 2;
+
+UPDATE iceberg_catalog.default.simple_table
+SET col1 = col1 + 5
+WHERE col1 = 1;
+
+SELECT *
+FROM iceberg_catalog.default.simple_table;
 ```
 
 ```text
