@@ -8,30 +8,33 @@ excerpt: "DuckDB is the first complete end-to-end interface to Iceberg REST Cata
 tags: ["extension"]
 ---
 
-In this blog post, we describe the state of Iceberg analytics and introduce a new possibility: interacting with an Iceberg REST Catalog can be as simple as navigating to an URL, no further setup or installs required.
+In this blog post, we describe the state of Iceberg analytics and introduce a new possibility: interacting with an Iceberg REST Catalog can be as simple as navigating to a URL, no further setup or installs required.
 
-## Interaction Models for Iceberg Catalogs
+## Interaction Models for Iceberg catalogs
 
 ![Iceberg analytics today](/images/blog/iceberg-wasm/iceberg-analytics-today-dark.svg){: .darkmode-img }
 ![Iceberg analytics today](/images/blog/iceberg-wasm/iceberg-analytics-today-light.svg){: .lightmode-img }
 
-Iceberg is an Open Table Format, that is to say a database stored as a collection of Parquet files (on object storage), metadata on those files (also static files on object storage) and a REST API to orchestrate data and metadata.
+Iceberg is an _Open Table Format,_ which allows you to capture a mutable database table as static files on object storage such as AWS S3.
+Iceberg catalogs allow you to track and organize Iceberg tables.
+For example, Iceberg REST Catalogs provide these functionalities through a REST API.
 
 There are two common ways to interact with Iceberg catalogs:
+
 * The *client–server model,* where the compute part of the operation is delegated to a managed infrastructure – such as the cloud. Users can interact with the server by installing a native client or a lightweight client such as a browser.
 * The *client-is-the-server model,* where the user first installs the relevant libraries, and then performs queries directly on their machine.
 
-Both models have tradeoffs. In the client–server model, clients can be lightweight, and the server is the uniform point of access allowing for potential efficiencies thanks to scale. However, the infrastructure introduces additional maintenance requirements. In the client-is-the-server model, latency is lower, users can leverage local compute resources, and integrating with local inputs and external data sources happens at user level. However, requiring users to run computation locally means transferring part of the burden on your users (e.g., setting up dependencies).
+Both models have their tradeoffs. In the *client–server model,* clients can be lightweight, and the server is the uniform point of access allowing for potential efficiencies thanks to scale. However, the infrastructure introduces additional maintenance requirements. In the *client-is-the-server model,* latency is lower, users can leverage local compute resources, and integrate with local inputs and external data sources happens at the user's level. However, requiring users to run computation locally means transferring part of the burden on your users (e.g., setting up dependencies).
 
-The implementation of existing Iceberg engines follow these categories. Iceberg engines can run locally as binaries, or an organization can host them in their server infrastructure.
+The implementation of existing Iceberg engines fall into these categories. Iceberg engines can run locally as binaries, or an organization can host them in their server infrastructure.
 
 ## Iceberg with DuckDB
 
 ![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-dark.svg){: .darkmode-img }
 ![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-light.svg){: .lightmode-img }
 
-DuckDB supports both Iceberg interaction models, as engine run either in the *server* or as locally installable *client-is-the-server*.
-From a user point of view, in the *client-server model* engine choice is transparent, while in the *client-is-the-server*, users will [install DuckDB locally](https://duckdb.org/install/) and use it through its SQL interface to query Iceberg Catalogs. For example: 
+DuckDB supports both Iceberg interaction models, as the engine can run either in the *server* or as locally installable binary.
+From a user's point of view, in the *client-server model*, the engine choice is transparent, while in the *client-is-the-server*, users will [install DuckDB locally]({% link install/index.html %}) and use it through its SQL interface to query Iceberg catalogs. For example: 
 
 ```sql
 CREATE SECRET test_secret (
@@ -50,28 +53,27 @@ SELECT sum(value) FROM db.table WHERE other_column = '⟨some_value⟩';
 
 ## Iceberg with DuckDB in the Browser
 
-We asked ourselves: would it be possible to run *client-is-the-server* model directly from within a Browser tab?
-Could a zero setup or installs on the user, no infrastructure, properly serverless option to interact with Iceberg Catalogs be viable?
+We asked ourselves: would it be possible to run the *client-is-the-server* model directly from within a browser tab?
+In other terms, would a zero-setup, no-infrastructure, properly serverless option viable for interacting with Iceberg catalogs?
 
-![Iceberg with DuckDB-Wasm](/images/blog/duckdb-iceberg-with-duckdb-wasm-dark.svg){: .darkmode-img }
-![Iceberg with DuckDB-Wasm](/images/blog/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
+![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-dark.svg){: .darkmode-img }
+![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
 
-DuckDB has a client that can run in any browser: [DuckDB-Wasm](https://duckdb.org/docs/stable/clients/wasm/overview) is a WebAssembly port of DuckDB, does [supports loading of extensions](https://duckdb.org/2023/12/18/duckdb-extensions-in-wasm) in general, but not yet of the Iceberg one.
+Luckily, DuckDB has a client that can run in any browser! [DuckDB-Wasm]({% link docs/stable/clients/wasm/overview.md %}) is a WebAssembly port of DuckDB, which [supports loading of extensions]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
 
 What does interacting with an Iceberg REST Catalog require? The ability to talk to a REST API over HTTP(S). The possibility of reading (or writing) `avro` and `parquet` files on object storage. Negotiating authentication to access those resources on behalf of the user. All of the above can be done also from a Browser, no native component is actually needed.
 
-At a high level, the changes required were:
-* In the core `duckdb` codebase, we redesigned HTTP interactions, so that extensions and clients have an uniform interface to the networking stack.
-* In `duckdb-wasm`, we implemented such an interface, that in this case is a wrapper around the available JavaScript network stack
-* In `duckdb-iceberg`, we routed all networking through the common HTTP interface, so that both in native and Wasm the same logic is executed
+At a high level, the changes required were the following.
 
-The result is that you can now query Iceberg with DuckDB running directly on a Browser.
+* In the core `duckdb` codebase, we redesigned HTTP interactions, so that extensions and clients have a uniform interface to the networking stack.
+* In `duckdb-wasm`, we implemented such an interface, which in this case is a wrapper around the available JavaScript network stack.
+* In `duckdb-iceberg`, we routed all networking through the common HTTP interface, so that both in native and Wasm the same logic is executed.
 
-Now you can access the same Iceberg Catalog using *client–server*, *client-as-a-server*, or properly serverless from the isolation of a single tab running on your browser!
+**The result is that you can now query Iceberg with DuckDB running directly in a browser!** Now you can access the same Iceberg catalog using *client–server*, *client-as-a-server*, or properly serverless from the isolation of a browser tab!
 
 ## Welcome to Serverless Iceberg Analytics
 
-To see a demo of serverless Iceberg analytics, visit our table visualizer at [`duckdb.org/visualizer`](https://duckdb.org/visualizer/?iceberg).
+To see a demo of serverless Iceberg analytics, visit our table visualizer at [`duckdb.org/visualizer`]({% link visualizer/index.html %}?iceberg).
 
 TODO - final URL and video
 
