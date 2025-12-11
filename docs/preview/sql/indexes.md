@@ -131,8 +131,8 @@ Let's say that a `value-row_id` pair exists in the global index and there is a `
 In that case, it **also** stays visible to newer transactions until all **older**, dependent transactions have finished.
 That behavior causes two main limitations, which are listed in more detail below.
 
-Please also note that the limitation extends to concurrent changes to multiple tables.
-Older read transactions on table X can cause write-write conflicts on table Y, if they are in the same schema.
+Please also note that the limitation extends to concurrent access to multiple tables.
+Older read transactions on table X can cause write-write conflicts on consecutive changes to table Y, if both tables are in the same schema.
 
 The long-term solution to these limitations is to enable transaction-timestamp tracking in indexes.
 However, as-of now, DuckDB does not fully support MVCC for its indexes.
