@@ -217,29 +217,37 @@ The connection object and the `duckdb` module can be used interchangeably – th
 ### Using Connections in Parallel Python Programs 
 
 #### Thread Safety of `duckdb.sql()` and the Global Connection
-`duckdb.sql()` and `duckdb.connect(':default:')` use a shared global in-memory connection. This connection is not thread-safe, and running queries on it from multiple threads can cause issues. To run DuckDB in parallel, each thread must have its own connection: 
-```
+
+`duckdb.sql()` and `duckdb.connect(':default:')` use a shared global in-memory connection. This connection is not thread-safe, and running queries on it from multiple threads can cause issues. To run DuckDB in parallel, each thread must have its own connection:
+
+```python
 def good_use():
     con = duckdb.connect()
     # uses new connection
     con.sql("SELECT 1").fetchall()
- ```
-Conversely, the following could cause concurrency issues because they rely on a global connection:
 ```
+
+Conversely, the following could cause concurrency issues because they rely on a global connection:
+
+```python
 def bad_use():
     con = duckdb.connect(':default:')
     # uses global connection
     return con.sql("SELECT 1").fetchall()
 ```
-Or 
-``` 
+
+Or:
+
+```python
 def also_bad():
     return duckdb.sql("SELECT 1").fetchall()
     # uses global connection 
 ```
+
 Avoid using `duckdb.sql()` or sharing a single connection across threads. 
 
 #### About `cursor()` 
+
 A [`DuckDBPyConnection.cursor()` method]({% link docs/stable/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.cursor) creates another handle on the same connection. It does not open a new connection. Therefore, all cursors created from one connection cannot run queries at the same time.
 
 ### Community Extensions
