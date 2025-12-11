@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: acp
   description: Natural language to SQL via Claude Code using the Agent Client Protocol (ACP). Query your data with plain English via CLAUDE statements or the claude() table function.
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: sidequery/duckdb-acp
-  ref: 52f34d4b5920f02fa66fd3031ac8fb6006962ed0
+  ref: 4d047876179e9d5c09da98e837f77245a094541f
 
 docs:
   hello_world: |
@@ -68,10 +68,10 @@ docs:
     - bun or Node.js (for the agent runtime)
     - Claude Code with Anthropic API credentials or a Claude Pro/Max account
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 302
-extension_download_count_pretty: 302
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 361
+extension_download_count_pretty: 361
 image: '/images/community_extensions/social_preview/preview_community_extension_acp.png'
 layout: community_extension_doc
 ---

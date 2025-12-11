@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pdal
   description: Extension that adds support for manipulating point cloud data using SQL.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-pdal
-  ref: c90f11dae18d2444281f16ec3523725046e4b935
+  ref: d75507f8fb74331d24ce27809f20b37e1502a687
 
 docs:
   hello_world: |
@@ -124,10 +124,10 @@ docs:
     }
     ```
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 546
-extension_download_count_pretty: 546
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 390
+extension_download_count_pretty: 390
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---
@@ -153,11 +153,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                              description                                              | comment |                                         examples                                          |
-|---------------|---------------|-------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------|
-| PDAL_Drivers  | table         | Returns the list of supported stage types of a PDAL Pipeline.                                         | NULL    | [SELECT * FROM PDAL_Drivers();]                                                           |
-| PDAL_Read     | table         | Read and import a variety of point cloud data file formats using the PDAL library.                    | NULL    | [SELECT * FROM PDAL_Read('./test/data/autzen_trim.laz');]                                 |
-| PDAL_Info     | table         | Read the metadata from point cloud file[s].                                                           | NULL    | [SELECT * FROM PDAL_Info('./test/data/autzen_trim.la*');]                                 |
-| PDAL_Pipeline | table         | Read and import a point cloud data file, applying also a custom processing pipeline file to the data. | NULL    | [SELECT * FROM PDAL_Pipeline('path/to/your/filename.las', 'path/to/your/pipeline.json');] |
+| function_name | function_type |                                           description                                            | comment |                                         examples                                          |
+|---------------|---------------|--------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------|
+| PDAL_Drivers  | table         | Returns the list of supported stage types of a PDAL Pipeline.                                    | NULL    | [SELECT * FROM PDAL_Drivers();]                                                           |
+| PDAL_Read     | table         | Read and import a variety of point cloud data file formats using the PDAL library.               | NULL    | [SELECT * FROM PDAL_Read('./test/data/autzen_trim.laz');]                                 |
+| PDAL_Info     | table         | Read the metadata from point cloud file[s].                                                      | NULL    | [SELECT * FROM PDAL_Info('./test/data/autzen_trim.la*');]                                 |
+| PDAL_Pipeline | table         | Read and import a point cloud data file, applying also a custom processing pipeline to the data. | NULL    | [SELECT * FROM PDAL_Pipeline('path/to/your/filename.las', 'path/to/your/pipeline.json');] |
 
 
