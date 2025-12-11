@@ -18,9 +18,9 @@ Databases store arbitrary information, it is clear that many if not most dataset
 
 However, database systems and encryption have a somewhat problematic track record. Even PostgreSQL, the self-proclaimed “The World's Most Advanced Open Source Relational Database” has very [limited options](https://www.postgresql.org/docs/current/encryption-options.html) for data encryption. SQLite, the world’s “[Most Widely Deployed and Used Database Engine](https://www.sqlite.org/mostdeployed.html)” does not support data encryption out-of-the-box, its encryption extension is [a $2000 add-on](https://sqlite.org/com/see.html). 
 
-**DuckDB** has supported [Parquet Modular Encryption](https://parquet.apache.org/docs/file-format/data-pages/encryption/) [for a while](https://duckdb.org/docs/stable/data/parquet/encryption). This feature allows reading and writing Parquet files with encrypted columns. However, while Parquet files are great and [reports of their impending death](https://materializedview.io/p/nimble-and-lance-parquet-killers) are greatly exaggerated, they cannot – for example – be updated in place, a pretty basic feature of a database management system.
+DuckDB has supported [Parquet Modular Encryption](https://parquet.apache.org/docs/file-format/data-pages/encryption/) [for a while](https://duckdb.org/docs/stable/data/parquet/encryption). This feature allows reading and writing Parquet files with encrypted columns. However, while Parquet files are great and [reports of their impending death](https://materializedview.io/p/nimble-and-lance-parquet-killers) are greatly exaggerated, they cannot – for example – be updated in place, a pretty basic feature of a database management system.
 
-Starting with DuckDB 1.4.0, DuckDB supports **transparent data encryption** of data-at-rest using industry-standard AES encryption.
+Starting with DuckDB 1.4.0, DuckDB supports _transparent data encryption_ of data-at-rest using industry-standard AES encryption.
 
 > DuckDB's encryption does not yet meet the official [NIST requirements](https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines).
 
