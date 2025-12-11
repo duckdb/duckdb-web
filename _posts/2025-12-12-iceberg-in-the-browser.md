@@ -39,11 +39,13 @@ Let's see how things look with DuckDB in the mix!
 ![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-dark.svg){: .darkmode-img }
 ![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-light.svg){: .lightmode-img }
 
-DuckDB supports _both Iceberg interaction models._
-From a user's point of view, in the *client-server model*, the engine choice is transparent,
-while in the *client-is-the-server*, users will [install DuckDB locally]({% link install/index.html %})
+DuckDB supports both Iceberg interaction models.
+In the _client–server model,_ DuckDB runs on the server to read the Iceberg files.
+From the user's point of view, the choice of engine is transparent, and DuckDB is just one of many engines that the server could use in the background.
+The *client-is-the-server* model is more interesting:
+here, users [install a DuckDB client locally]({% link install/index.html %})
 and use it through its SQL interface to query Iceberg catalogs.
-For example: 
+For example:
 
 ```sql
 CREATE SECRET test_secret (
@@ -51,19 +53,24 @@ CREATE SECRET test_secret (
     KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
     SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩'
 );
+
 ATTACH '⟨warehouse⟩' AS db (
     TYPE iceberg,
     ENDPOINT_URL '⟨https://your-iceberg-endpoint⟩',
 );
-SELECT sum(value) FROM db.table WHERE other_column = '⟨some_value⟩';
+
+SELECT sum(value)
+FROM db.table
+WHERE other_column = '⟨some_value⟩';
 ```
 
 > You can discover the full DuckDB-Iceberg extension feature set, including insert and update capabilities, in our [earlier blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}).
 
 ## Iceberg with DuckDB in the Browser
 
-We asked ourselves: could we run support the *client-is-the-server* model directly from within a browser tab?
-In other terms, would a zero-setup, no-infrastructure, properly serverless option viable for interacting with Iceberg catalogs?
+While setting up a local DuckDB installation is quite simple, opening a browser tab is even quicker.
+Therefore, we asked ourselves: could we support the *client-is-the-server* model directly from within a browser tab?
+This could provide zero-setup, no-infrastructure, properly serverless option for interacting with Iceberg catalogs.
 
 ![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-dark.svg){: .darkmode-img }
 ![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
@@ -91,7 +98,7 @@ TODO - final URL and video
 
 As of today, this demo works with [Amazon S3 Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}). This has been implemented through a collaboration with the Amazon S3 Tables team.
 
-You can now provide your own Iceberg warehouse and a set of credentials that allows reads from the catalog, metadata and data (policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess)).
+You can now provide your own Iceberg warehouse and a set of credentials which allow reads from the catalog, metadata and data (policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess)).
 Computations are fully local, and the credentials and warehouse ID are only sent to the catalog endpoint specified in your `Attach` command.
 Inputs are translated to SQL, and added to the hash segment of the URL.
 
