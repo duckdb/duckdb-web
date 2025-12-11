@@ -45,10 +45,10 @@
 		font-family: $fontMonoBold;
 	}
 
-	// numbers
-	:is(.m, .mf, .mh, .mi, .mo, .il)
+	// strings
+	:is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl)
 	{
-		color: #CE33C0;
+		color: #875F00;
 	}
 
 	// functions
@@ -58,10 +58,10 @@
 		font-family: $fontMonoBold;
 	}
 
-	// strings
-	:is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl)
+	// numbers
+	:is(.m, .mf, .mh, .mi, .mo, .il)
 	{
-		color: #875F00;
+		color: #CE33C0;
 	}
 
 	// prompt
@@ -133,10 +133,10 @@ html.darkmode, .dark {
 			font-family: $fontMonoBold;
 		}
 
-		// numbers
-		:is(.m, .mf, .mh, .mi, .mo, .il)
+		// strings
+		:is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl)
 		{
-			color: #FF55F6;
+			color: #FFD700;
 		}
 
 		// functions
@@ -146,10 +146,10 @@ html.darkmode, .dark {
 			font-family: $fontMonoBold;
 		}
 
-		// strings
-		:is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl)
+		// numbers
+		:is(.m, .mf, .mh, .mi, .mo, .il)
 		{
-			color: #FFD700;
+			color: #FF55F6;
 		}
 
 		// prompt
