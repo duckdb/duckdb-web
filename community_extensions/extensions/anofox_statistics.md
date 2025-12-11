@@ -47,26 +47,54 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name          | function_type | description | comment | examples |
-|---------------------------------|---------------|-------------|---------|----------|
-| anofox_statistics_expanding_ols | table         | NULL        | NULL    |          |
-| anofox_statistics_ols_fit       | table         | NULL        | NULL    |          |
-| anofox_statistics_ols_mae       | scalar        | NULL        | NULL    |          |
-| anofox_statistics_ols_mse       | scalar        | NULL        | NULL    |          |
-| anofox_statistics_ols_r_squared | scalar        | NULL        | NULL    |          |
-| anofox_statistics_ols_rmse      | scalar        | NULL        | NULL    |          |
-| anofox_statistics_ridge_fit     | table         | NULL        | NULL    |          |
-| anofox_statistics_rls_fit       | table         | NULL        | NULL    |          |
-| anofox_statistics_rolling_ols   | table         | NULL        | NULL    |          |
-| anofox_statistics_wls_fit       | table         | NULL        | NULL    |          |
-| information_criteria            | table         | NULL        | NULL    |          |
-| normality_test                  | table         | NULL        | NULL    |          |
-| ols_coeff_agg                   | aggregate     | NULL        | NULL    |          |
-| ols_fit_agg                     | aggregate     | NULL        | NULL    |          |
-| ols_fit_agg_array               | aggregate     | NULL        | NULL    |          |
-| ols_inference                   | table         | NULL        | NULL    |          |
-| ols_predict_interval            | table         | NULL        | NULL    |          |
-| residual_diagnostics            | table         | NULL        | NULL    |          |
-| vif                             | table         | NULL        | NULL    |          |
+|             function_name              | function_type | description | comment | examples |
+|----------------------------------------|---------------|-------------|---------|----------|
+| aic                                    | scalar        | NULL        | NULL    |          |
+| anofox_stats_aic                       | scalar        | NULL        | NULL    |          |
+| anofox_stats_bic                       | scalar        | NULL        | NULL    |          |
+| anofox_stats_elasticnet_fit            | scalar        | NULL        | NULL    |          |
+| anofox_stats_elasticnet_fit_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_elasticnet_fit_predict    | aggregate     | NULL        | NULL    |          |
+| anofox_stats_jarque_bera               | scalar        | NULL        | NULL    |          |
+| anofox_stats_jarque_bera_agg           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ols_fit                   | scalar        | NULL        | NULL    |          |
+| anofox_stats_ols_fit_agg               | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ols_fit_predict           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_predict                   | scalar        | NULL        | NULL    |          |
+| anofox_stats_residuals_diagnostics     | scalar        | NULL        | NULL    |          |
+| anofox_stats_residuals_diagnostics_agg | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ridge_fit                 | scalar        | NULL        | NULL    |          |
+| anofox_stats_ridge_fit_agg             | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ridge_fit_predict         | aggregate     | NULL        | NULL    |          |
+| anofox_stats_rls_fit                   | scalar        | NULL        | NULL    |          |
+| anofox_stats_rls_fit_agg               | aggregate     | NULL        | NULL    |          |
+| anofox_stats_rls_fit_predict           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_vif                       | scalar        | NULL        | NULL    |          |
+| anofox_stats_vif_agg                   | aggregate     | NULL        | NULL    |          |
+| anofox_stats_wls_fit                   | scalar        | NULL        | NULL    |          |
+| anofox_stats_wls_fit_agg               | aggregate     | NULL        | NULL    |          |
+| anofox_stats_wls_fit_predict           | aggregate     | NULL        | NULL    |          |
+| bic                                    | scalar        | NULL        | NULL    |          |
+| elasticnet_fit                         | scalar        | NULL        | NULL    |          |
+| elasticnet_fit_agg                     | aggregate     | NULL        | NULL    |          |
+| elasticnet_fit_predict                 | aggregate     | NULL        | NULL    |          |
+| jarque_bera                            | scalar        | NULL        | NULL    |          |
+| jarque_bera_agg                        | aggregate     | NULL        | NULL    |          |
+| ols_fit                                | scalar        | NULL        | NULL    |          |
+| ols_fit_agg                            | aggregate     | NULL        | NULL    |          |
+| ols_fit_predict                        | aggregate     | NULL        | NULL    |          |
+| residuals_diagnostics                  | scalar        | NULL        | NULL    |          |
+| residuals_diagnostics_agg              | aggregate     | NULL        | NULL    |          |
+| ridge_fit                              | scalar        | NULL        | NULL    |          |
+| ridge_fit_agg                          | aggregate     | NULL        | NULL    |          |
+| ridge_fit_predict                      | aggregate     | NULL        | NULL    |          |
+| rls_fit                                | scalar        | NULL        | NULL    |          |
+| rls_fit_agg                            | aggregate     | NULL        | NULL    |          |
+| rls_fit_predict                        | aggregate     | NULL        | NULL    |          |
+| vif                                    | scalar        | NULL        | NULL    |          |
+| vif_agg                                | aggregate     | NULL        | NULL    |          |
+| wls_fit                                | scalar        | NULL        | NULL    |          |
+| wls_fit_agg                            | aggregate     | NULL        | NULL    |          |
+| wls_fit_predict                        | aggregate     | NULL        | NULL    |          |
 
 
