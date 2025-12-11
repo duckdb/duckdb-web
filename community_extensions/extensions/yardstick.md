@@ -70,8 +70,8 @@ docs:
 
     For more details, visit the [extension repository](https://github.com/sidequery/yardstick).
 
-extension_star_count: 20
-extension_star_count_pretty: 20
+extension_star_count: 22
+extension_star_count_pretty: 22
 extension_download_count: 480
 extension_download_count_pretty: 480
 image: '/images/community_extensions/social_preview/preview_community_extension_yardstick.png'
