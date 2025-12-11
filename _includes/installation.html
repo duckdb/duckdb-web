@@ -104,9 +104,9 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="cli" platform="macos" -%}
 
-<h4>Single Line Specific Version (bash)</h4>
+<h4>Install Specific Version</h4>
 {%- highlight bash -%}
-curl install.duckdb.org | DUCKDB_VERSION=1.4.3 bash
+curl https://install.duckdb.org | DUCKDB_VERSION=1.4.3 sh
 {%- endhighlight -%}
 
 </div>
