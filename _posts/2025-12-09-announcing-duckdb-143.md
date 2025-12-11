@@ -44,9 +44,10 @@ This version ships a number of performance improvements and bugfixes.
 * [`#19916` The default time zone of DuckDB-Wasm had an offset inverted from what it should be](https://github.com/duckdb/duckdb/issues/19916)
 * [`#19884` Copying to Parquet with a prepared statement did not work](https://github.com/duckdb/duckdb/issues/19884)
 
-## OneLake Support in Microsoft Azure
+## Azure Blob Storage Writes
 
-The [`azure` extension]({% link docs/stable/core_extensions/azure.md %}) now support connecting to [OneLake](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview).
+The [`azure` extension]({% link docs/stable/core_extensions/azure.md %}) can now [write to the Azure Blob Storage](https://github.com/duckdb/duckdb-azure/pull/131).
+This unlocks several other Azure and Fabric features, including using [OneLake](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) instances.
 
 ## Windows Arm64
 
