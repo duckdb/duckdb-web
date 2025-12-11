@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 1207
-extension_download_count_pretty: 1.2k
+extension_download_count: 1278
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_textplot.png'
 layout: community_extension_doc
 ---
@@ -51,12 +51,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| tp_bar        | scalar        | NULL        | NULL    | NULL     |
-| tp_density    | scalar        | NULL        | NULL    | NULL     |
-| tp_qr         | scalar        | NULL        | NULL    | NULL     |
-| tp_sparkline  | scalar        | NULL        | NULL    | NULL     |
+| function_name | function_type |                                                                                                            description                                                                                                            | comment |                                                                                                                                   examples                                                                                                                                   |
+|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| tp_bar        | scalar        | Creates a horizontal bar chart visualization from a numeric value. Supports customizable width, colors, shapes (square/circle/heart), and color thresholds.                                                                       | NULL    | [tp_bar(0.75), tp_bar(score, min := 0, max := 100, width := 20), tp_bar(value, on := '#', off := '-', width := 10), tp_bar(pct, shape := 'heart', on_color := 'red'), tp_bar(temp, thresholds := [{'threshold': 80, 'color': 'red'}, {'threshold': 50, 'color': 'yellow'}])] |
+| tp_density    | scalar        | Creates a density plot (histogram) visualization from an array of numeric values. Supports multiple styles: shaded, dots, ascii, height, circles, safety, rainbow_circle, rainbow_square, moon, sparse, and white.                | NULL    | [tp_density(list(value)), tp_density(array_agg(score), width := 40), tp_density(data, style := 'height'), tp_density(temps, style := 'rainbow_square', width := 30)]                                                                                                         |
+| tp_qr         | scalar        | Generates a text-based QR code from a string or blob. Supports configurable error correction levels and custom on/off characters.                                                                                                 | NULL    | [tp_qr('https://duckdb.org'), tp_qr(url, ecc := 'high'), tp_qr(message, on := '##', off := '  ')]                                                                                                                                                                            |
+| tp_sparkline  | scalar        | Creates a sparkline visualization from an array of numeric values. Supports three modes: 'absolute' (height-based), 'delta' (up/down/same direction), and 'trend' (direction with magnitude). Multiple themes available per mode. | NULL    | [tp_sparkline(list(value)), tp_sparkline(array_agg(price), width := 20), tp_sparkline(data, mode := 'delta', theme := 'arrows'), tp_sparkline(temps, mode := 'absolute', theme := 'utf8_blocks'), tp_sparkline(stocks, mode := 'trend', theme := 'faces')]                   |
 
 ### Added Settings
 

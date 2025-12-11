@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 36
 extension_star_count_pretty: 36
-extension_download_count: 1068
-extension_download_count_pretty: 1.1k
+extension_download_count: 1170
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---
@@ -51,74 +51,74 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|               function_name                | function_type | description | comment | examples |
-|--------------------------------------------|---------------|-------------|---------|----------|
-| datasketch_cpc                             | aggregate     | NULL        | NULL    | NULL     |
-| datasketch_cpc_describe                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_cpc_estimate                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_cpc_is_empty                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_cpc_lower_bound                 | scalar        | NULL        | NULL    | NULL     |
-| datasketch_cpc_union                       | aggregate     | NULL        | NULL    | NULL     |
-| datasketch_cpc_upper_bound                 | scalar        | NULL        | NULL    | NULL     |
-| datasketch_hll                             | aggregate     | NULL        | NULL    | NULL     |
-| datasketch_hll_describe                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_hll_estimate                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_hll_is_compact                  | scalar        | NULL        | NULL    | NULL     |
-| datasketch_hll_is_empty                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_hll_lg_config_k                 | scalar        | NULL        | NULL    | NULL     |
-| datasketch_hll_lower_bound                 | scalar        | NULL        | NULL    | NULL     |
-| datasketch_hll_union                       | aggregate     | NULL        | NULL    | NULL     |
-| datasketch_hll_upper_bound                 | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll                             | aggregate     | NULL        | NULL    | NULL     |
-| datasketch_kll_cdf                         | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_describe                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_is_empty                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_is_estimation_mode          | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_k                           | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_max_item                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_min_item                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_n                           | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_normalized_rank_error       | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_num_retained                | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_pmf                         | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_quantile                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_kll_rank                        | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles                       | aggregate     | NULL        | NULL    | NULL     |
-| datasketch_quantiles_cdf                   | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_describe              | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_is_empty              | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_is_estimation_mode    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_k                     | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_max_item              | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_min_item              | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_n                     | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_normalized_rank_error | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_num_retained          | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_pmf                   | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_quantile              | scalar        | NULL        | NULL    | NULL     |
-| datasketch_quantiles_rank                  | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req                             | aggregate     | NULL        | NULL    | NULL     |
-| datasketch_req_cdf                         | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_describe                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_is_empty                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_is_estimation_mode          | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_k                           | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_max_item                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_min_item                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_n                           | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_num_retained                | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_pmf                         | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_quantile                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_req_rank                        | scalar        | NULL        | NULL    | NULL     |
-| datasketch_tdigest                         | aggregate     | NULL        | NULL    | NULL     |
-| datasketch_tdigest_cdf                     | scalar        | NULL        | NULL    | NULL     |
-| datasketch_tdigest_describe                | scalar        | NULL        | NULL    | NULL     |
-| datasketch_tdigest_is_empty                | scalar        | NULL        | NULL    | NULL     |
-| datasketch_tdigest_k                       | scalar        | NULL        | NULL    | NULL     |
-| datasketch_tdigest_pmf                     | scalar        | NULL        | NULL    | NULL     |
-| datasketch_tdigest_quantile                | scalar        | NULL        | NULL    | NULL     |
-| datasketch_tdigest_rank                    | scalar        | NULL        | NULL    | NULL     |
-| datasketch_tdigest_total_weight            | scalar        | NULL        | NULL    | NULL     |
+|               function_name                | function_type |                                                 description                                                  | comment |                                examples                                |
+|--------------------------------------------|---------------|--------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------|
+| datasketch_cpc                             | aggregate     | Creates a sketch_cpc data sketch by aggregating values or by aggregating other CPC data sketches             | NULL    | [datasketch_cpc(k, data)]                                              |
+| datasketch_cpc_describe                    | scalar        | Return a string representation of the sketch                                                                 | NULL    | [datasketch_cpc_describe(sketch)]                                      |
+| datasketch_cpc_estimate                    | scalar        | Return the estimate of the number of distinct items seen by the sketch                                       | NULL    | [datasketch_cpc_estimate(sketch)]                                      |
+| datasketch_cpc_is_empty                    | scalar        | Return a boolean indicating if the sketch is empty                                                           | NULL    | [datasketch_cpc_is_empty(sketch)]                                      |
+| datasketch_cpc_lower_bound                 | scalar        | Return the lower bound of the number of distinct items seen by the sketch                                    | NULL    | [datasketch_cpc_lower_bound(sketch, std_dev)]                          |
+| datasketch_cpc_union                       | aggregate     | Creates a sketch_CPC data sketch by aggregating other CPC data sketches                                      | NULL    | [datasketch_cpc_union(k, data)]                                        |
+| datasketch_cpc_upper_bound                 | scalar        | Return the upper bound of the number of distinct items seen by the sketch                                    | NULL    | [datasketch_cpc_upper_bound(sketch, std_dev)]                          |
+| datasketch_hll                             | aggregate     | Creates a sketch_hll data sketch by aggregating values or by aggregating other HLL data sketches             | NULL    | [datasketch_hll(k, data)]                                              |
+| datasketch_hll_describe                    | scalar        | Return a string representation of the sketch                                                                 | NULL    | [datasketch_hll_describe(sketch, include_summary, include_detail)]     |
+| datasketch_hll_estimate                    | scalar        | Return the estimate of the number of distinct items seen by the sketch                                       | NULL    | [datasketch_hll_estimate(sketch)]                                      |
+| datasketch_hll_is_compact                  | scalar        | Return whether the sketch is in compact form                                                                 | NULL    | [datasketch_hll_is_compact(sketch)]                                    |
+| datasketch_hll_is_empty                    | scalar        | Return a boolean indicating if the sketch is empty                                                           | NULL    | [datasketch_hll_is_empty(sketch)]                                      |
+| datasketch_hll_lg_config_k                 | scalar        | Return the value of log base 2 K for this sketch                                                             | NULL    | [datasketch_hll_lg_config_k(sketch)]                                   |
+| datasketch_hll_lower_bound                 | scalar        | Return the lower bound of the number of distinct items seen by the sketch                                    | NULL    | [datasketch_hll_lower_bound(sketch, std_dev)]                          |
+| datasketch_hll_union                       | aggregate     | Creates a sketch_HLL data sketch by aggregating other HLL data sketches                                      | NULL    | [datasketch_hll_union(k, data)]                                        |
+| datasketch_hll_upper_bound                 | scalar        | Return the upper bound of the number of distinct items seen by the sketch                                    | NULL    | [datasketch_hll_upper_bound(sketch, std_dev)]                          |
+| datasketch_kll                             | aggregate     | Creates a sketch_kll data sketch by aggregating values or by aggregating other KLL data sketches             | NULL    | [datasketch_kll(k, data)]                                              |
+| datasketch_kll_cdf                         | scalar        | Return the Cumulative Distribution Function (CDF) of the sketch for a series of points                       | NULL    | [datasketch_kll_cdf(sketch, points, inclusive)]                        |
+| datasketch_kll_describe                    | scalar        | Return a description of this sketch                                                                          | NULL    | [datasketch_kll_describe(sketch, include_levels, include_items)]       |
+| datasketch_kll_is_empty                    | scalar        | Return a boolean indicating if the sketch is empty                                                           | NULL    | [datasketch_kll_is_empty(sketch)]                                      |
+| datasketch_kll_is_estimation_mode          | scalar        | Return a boolean indicating if the sketch is in estimation mode                                              | NULL    | [datasketch_kll_is_estimation_mode(sketch)]                            |
+| datasketch_kll_k                           | scalar        | Return the value of K for this sketch                                                                        | NULL    | [datasketch_kll_k(sketch)]                                             |
+| datasketch_kll_max_item                    | scalar        | Return the maxium item in the sketch                                                                         | NULL    | [datasketch_kll_max_item(sketch)]                                      |
+| datasketch_kll_min_item                    | scalar        | Return the minimum item in the sketch                                                                        | NULL    | [datasketch_kll_min_item(sketch)]                                      |
+| datasketch_kll_n                           | scalar        | Return the number of items contained in the sketch                                                           | NULL    | [datasketch_kll_rank(sketch)]                                          |
+| datasketch_kll_normalized_rank_error       | scalar        | Return the normalized rank error of the sketch                                                               | NULL    | [datasketch_kll_normalized_rank_error(sketch, is_pmf)]                 |
+| datasketch_kll_num_retained                | scalar        | Return the number of retained items in the sketch                                                            | NULL    | [datasketch_kll_num_retained(sketch)]                                  |
+| datasketch_kll_pmf                         | scalar        | Return the Probability Mass Function (PMF) of the sketch for a series of points                              | NULL    | [datasketch_kll_pmf(sketch, points, inclusive)]                        |
+| datasketch_kll_quantile                    | scalar        | Return the quantile of a rank in the sketch                                                                  | NULL    | [datasketch_kll_rank(sketch, rank, inclusive)]                         |
+| datasketch_kll_rank                        | scalar        | Return the rank of an item in the sketch                                                                     | NULL    | [datasketch_kll_rank(sketch, item, inclusive)]                         |
+| datasketch_quantiles                       | aggregate     | Creates a sketch_quantiles data sketch by aggregating values or by aggregating other Quantiles data sketches | NULL    | [datasketch_quantiles(k, data)]                                        |
+| datasketch_quantiles_cdf                   | scalar        | Return the Cumulative Distribution Function (CDF) of the sketch for a series of points                       | NULL    | [datasketch_quantiles_cdf(sketch, points, inclusive)]                  |
+| datasketch_quantiles_describe              | scalar        | Return a description of this sketch                                                                          | NULL    | [datasketch_quantiles_describe(sketch, include_levels, include_items)] |
+| datasketch_quantiles_is_empty              | scalar        | Return a boolean indicating if the sketch is empty                                                           | NULL    | [datasketch_quantiles_is_empty(sketch)]                                |
+| datasketch_quantiles_is_estimation_mode    | scalar        | Return a boolean indicating if the sketch is in estimation mode                                              | NULL    | [datasketch_quantiles_is_estimation_mode(sketch)]                      |
+| datasketch_quantiles_k                     | scalar        | Return the value of K for this sketch                                                                        | NULL    | [datasketch_quantiles_k(sketch)]                                       |
+| datasketch_quantiles_max_item              | scalar        | Return the maxium item in the sketch                                                                         | NULL    | [datasketch_quantiles_max_item(sketch)]                                |
+| datasketch_quantiles_min_item              | scalar        | Return the minimum item in the sketch                                                                        | NULL    | [datasketch_quantiles_min_item(sketch)]                                |
+| datasketch_quantiles_n                     | scalar        | Return the number of items contained in the sketch                                                           | NULL    | [datasketch_quantiles_rank(sketch)]                                    |
+| datasketch_quantiles_normalized_rank_error | scalar        | Return the normalized rank error of the sketch                                                               | NULL    | [datasketch_quantiles_normalized_rank_error(sketch, is_pmf)]           |
+| datasketch_quantiles_num_retained          | scalar        | Return the number of retained items in the sketch                                                            | NULL    | [datasketch_quantiles_num_retained(sketch)]                            |
+| datasketch_quantiles_pmf                   | scalar        | Return the Probability Mass Function (PMF) of the sketch for a series of points                              | NULL    | [datasketch_quantiles_pmf(sketch, points, inclusive)]                  |
+| datasketch_quantiles_quantile              | scalar        | Return the quantile of a rank in the sketch                                                                  | NULL    | [datasketch_quantiles_rank(sketch, rank, inclusive)]                   |
+| datasketch_quantiles_rank                  | scalar        | Return the rank of an item in the sketch                                                                     | NULL    | [datasketch_quantiles_rank(sketch, item, inclusive)]                   |
+| datasketch_req                             | aggregate     | Creates a sketch_req data sketch by aggregating values or by aggregating other REQ data sketches             | NULL    | [datasketch_req(k, data)]                                              |
+| datasketch_req_cdf                         | scalar        | Return the Cumulative Distribution Function (CDF) of the sketch for a series of points                       | NULL    | [datasketch_req_cdf(sketch, points, inclusive)]                        |
+| datasketch_req_describe                    | scalar        | Return a description of this sketch                                                                          | NULL    | [datasketch_req_describe(sketch, include_levels, include_items)]       |
+| datasketch_req_is_empty                    | scalar        | Return a boolean indicating if the sketch is empty                                                           | NULL    | [datasketch_req_is_empty(sketch)]                                      |
+| datasketch_req_is_estimation_mode          | scalar        | Return a boolean indicating if the sketch is in estimation mode                                              | NULL    | [datasketch_req_is_estimation_mode(sketch)]                            |
+| datasketch_req_k                           | scalar        | Return the value of K for this sketch                                                                        | NULL    | [datasketch_req_k(sketch)]                                             |
+| datasketch_req_max_item                    | scalar        | Return the maxium item in the sketch                                                                         | NULL    | [datasketch_req_max_item(sketch)]                                      |
+| datasketch_req_min_item                    | scalar        | Return the minimum item in the sketch                                                                        | NULL    | [datasketch_req_min_item(sketch)]                                      |
+| datasketch_req_n                           | scalar        | Return the number of items contained in the sketch                                                           | NULL    | [datasketch_req_rank(sketch)]                                          |
+| datasketch_req_num_retained                | scalar        | Return the number of retained items in the sketch                                                            | NULL    | [datasketch_req_num_retained(sketch)]                                  |
+| datasketch_req_pmf                         | scalar        | Return the Probability Mass Function (PMF) of the sketch for a series of points                              | NULL    | [datasketch_req_pmf(sketch, points, inclusive)]                        |
+| datasketch_req_quantile                    | scalar        | Return the quantile of a rank in the sketch                                                                  | NULL    | [datasketch_req_rank(sketch, rank, inclusive)]                         |
+| datasketch_req_rank                        | scalar        | Return the rank of an item in the sketch                                                                     | NULL    | [datasketch_req_rank(sketch, item, inclusive)]                         |
+| datasketch_tdigest                         | aggregate     | Creates a sketch_tdigest data sketch by aggregating values or by aggregating other TDigest data sketches     | NULL    | [datasketch_tdigest(k, data)]                                          |
+| datasketch_tdigest_cdf                     | scalar        | Return the Cumulative Distribution Function (CDF) of the sketch for a series of points                       | NULL    | [datasketch_tdigest_cdf(sketch, points)]                               |
+| datasketch_tdigest_describe                | scalar        | Return a description of this sketch                                                                          | NULL    | [datasketch_tdigest_describe(sketch, include_centroids)]               |
+| datasketch_tdigest_is_empty                | scalar        | Return a boolean indicating if the sketch is empty                                                           | NULL    | [datasketch_tdigest_is_empty(sketch)]                                  |
+| datasketch_tdigest_k                       | scalar        | Return the value of K for this sketch                                                                        | NULL    | [datasketch_tdigest_k(sketch)]                                         |
+| datasketch_tdigest_pmf                     | scalar        | Return the Probability Mass Function (PMF) of the sketch for a series of points                              | NULL    | [datasketch_tdigest_pmf(sketch, points)]                               |
+| datasketch_tdigest_quantile                | scalar        | Return the quantile of a rank in the sketch                                                                  | NULL    | [datasketch_tdigest_quantile(sketch, rank)]                            |
+| datasketch_tdigest_rank                    | scalar        | Return the rank of an item in the sketch                                                                     | NULL    | [datasketch_tdigest_rank(sketch, item)]                                |
+| datasketch_tdigest_total_weight            | scalar        | Return the total weight of this sketch                                                                       | NULL    | [datasketch_tdigest_total_weight(sketch)]                              |
 
 ### Added Types
 

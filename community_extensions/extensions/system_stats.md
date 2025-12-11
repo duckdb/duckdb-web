@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: system_stats
   description: Provides table functions to access system-level statistics for monitoring purpose
-  version: 0.1.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/system_stats
-  ref: 10a267467b51acc3a3b5f9da09cff0dfebbea097
+  ref: d69b30ec406f0a9f06a9f73f7d781633a3645ac9
 
 docs:
   hello_world: |
@@ -30,13 +30,19 @@ docs:
 
     -- Get disk information
     SELECT * FROM sys_disk_info();
+
+    -- Get network information
+    SELECT * FROM sys_network_info();
+
+    -- Get OS information
+    SELECT * FROM sys_os_info();
   extended_description: |
     The system_stats extension provides table functions to access system-level statistics (including memory, CPU, and disk) that can be used for monitoring.
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 99
-extension_download_count_pretty: 99
+extension_download_count: 463
+extension_download_count_pretty: 463
 image: '/images/community_extensions/social_preview/preview_community_extension_system_stats.png'
 layout: community_extension_doc
 ---
@@ -62,10 +68,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name  | function_type | description | comment | examples |
-|-----------------|---------------|-------------|---------|----------|
-| sys_cpu_info    | table         | NULL        | NULL    |          |
-| sys_disk_info   | table         | NULL        | NULL    |          |
-| sys_memory_info | table         | NULL        | NULL    |          |
+|  function_name   | function_type | description | comment | examples |
+|------------------|---------------|-------------|---------|----------|
+| sys_cpu_info     | table         | NULL        | NULL    |          |
+| sys_disk_info    | table         | NULL        | NULL    |          |
+| sys_memory_info  | table         | NULL        | NULL    |          |
+| sys_network_info | table         | NULL        | NULL    |          |
+| sys_os_info      | table         | NULL        | NULL    |          |
 
 

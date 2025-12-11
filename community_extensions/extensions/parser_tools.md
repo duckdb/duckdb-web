@@ -166,10 +166,10 @@ docs:
     Future versions may expose additional aspects of the parsed query structure.
     For more details and examples, visit the [extension repository](https://github.com/zacMode/duckdb_extension_parser_tools).
 
-extension_star_count: 19
-extension_star_count_pretty: 19
-extension_download_count: 644
-extension_download_count_pretty: 644
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 662
+extension_download_count_pretty: 662
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
 layout: community_extension_doc
 ---

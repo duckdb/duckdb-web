@@ -16,15 +16,15 @@ extension:
   maintainers:
     - lnkuiper
   name: fivetran
-  version: 2025111200
+  version: 2025121000
 repo:
   github: lnkuiper/fivetran
-  ref: e24409c2770e70fbb718de2ff0b12aa2c3a74dd3
+  ref: 32a906b45e1ea5677949f7222ffe6382c0985317
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 639
-extension_download_count_pretty: 639
+extension_download_count: 669
+extension_download_count_pretty: 669
 image: '/images/community_extensions/social_preview/preview_community_extension_fivetran.png'
 layout: community_extension_doc
 ---

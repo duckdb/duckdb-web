@@ -53,7 +53,7 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| tera_render   | scalar        | NULL        | NULL    | NULL     |
+| tera_render   | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 

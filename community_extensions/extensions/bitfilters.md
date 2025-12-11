@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 962
-extension_download_count_pretty: 962
+extension_download_count: 1001
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_bitfilters.png'
 layout: community_extension_doc
 ---
@@ -51,18 +51,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name         | function_type | description | comment | examples |
-|-------------------------------|---------------|-------------|---------|----------|
-| binary_fuse16_filter          | aggregate     | NULL        | NULL    | NULL     |
-| binary_fuse16_filter_contains | scalar        | NULL        | NULL    | NULL     |
-| binary_fuse8_filter           | aggregate     | NULL        | NULL    | NULL     |
-| binary_fuse8_filter_contains  | scalar        | NULL        | NULL    | NULL     |
-| quotient_filter               | aggregate     | NULL        | NULL    | NULL     |
-| quotient_filter_contains      | scalar        | NULL        | NULL    | NULL     |
-| xor16_filter                  | aggregate     | NULL        | NULL    | NULL     |
-| xor16_filter_contains         | scalar        | NULL        | NULL    | NULL     |
-| xor8_filter                   | aggregate     | NULL        | NULL    | NULL     |
-| xor8_filter_contains          | scalar        | NULL        | NULL    | NULL     |
+|         function_name         | function_type |                                                                                                 description                                                                                                 | comment |                           examples                            |
+|-------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------|
+| binary_fuse16_filter          | aggregate     | Creates a Binary Fuse 16-bit filter with ~0.0015% false positive rate.                                                                                                                                      | NULL    | [SELECT binary_fuse16_filter(hash(column)) FROM table]        |
+| binary_fuse16_filter_contains | scalar        | Tests if a BinaryFuse16 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives). | NULL    | [SELECT binary_fuse16_filter_contains(filter, 42) FROM table] |
+| binary_fuse8_filter           | aggregate     | Creates a Binary Fuse 8-bit filter with ~0.4% false positive rate.                                                                                                                                          | NULL    | [SELECT binary_fuse8_filter(hash(column)) FROM table]         |
+| binary_fuse8_filter_contains  | scalar        | Tests if a BinaryFuse8 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).  | NULL    | [SELECT binary_fuse8_filter_contains(filter, 42) FROM table]  |
+| quotient_filter               | aggregate     | Creates a Quotient filter by aggregating values or by merging other Quotient filters. Takes q and r as number of bits.                                                                                      | NULL    | [SELECT quotient_filter(16, 8, column) FROM table]            |
+| quotient_filter_contains      | scalar        | Tests if a Quotient filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).     | NULL    | [SELECT quotient_filter_contains(filter, 42) FROM table]      |
+| xor16_filter                  | aggregate     | Creates a Xor16 filter with ~0.0015% false positive rate.                                                                                                                                                   | NULL    | [SELECT xor16_filter(hash(column)) FROM table]                |
+| xor16_filter_contains         | scalar        | Tests if a Xor16 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).        | NULL    | [SELECT xor16_filter_contains(filter, 42) FROM table]         |
+| xor8_filter                   | aggregate     | Creates a Xor8 filter with ~0.4% false positive rate.                                                                                                                                                       | NULL    | [SELECT xor8_filter(hash(column)) FROM table]                 |
+| xor8_filter_contains          | scalar        | Tests if a Xor8 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).         | NULL    | [SELECT xor8_filter_contains(filter, 42) FROM table]          |
 
 ### Added Settings
 

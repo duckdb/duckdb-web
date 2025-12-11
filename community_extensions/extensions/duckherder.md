@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckherder
   description: Run duckdb query on remote server
-  version: 0.0.4
+  version: 0.0.5
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-distributed-execution
-  ref: d4ceb844557d9762c3435c213f9e9709017badab
+  ref: 02f60de8d45c9d3547b1795d4bc7d0b5c1bcf14f
 
 docs:
   hello_world: |
@@ -31,10 +31,10 @@ docs:
     Users are allowed to implement their own driver and worker(s), and register to the duckdb client-side, as long they speaks duckherder dialect (i.e., grpc stubs and arrow flight).
     From users' perspective, all DML and DDL SQL statements should be used exactly the same as local duckdb.
 
-extension_star_count: 30
-extension_star_count_pretty: 30
-extension_download_count: 646
-extension_download_count_pretty: 646
+extension_star_count: 31
+extension_star_count_pretty: 31
+extension_download_count: 603
+extension_download_count_pretty: 603
 image: '/images/community_extensions/social_preview/preview_community_extension_duckherder.png'
 layout: community_extension_doc
 ---

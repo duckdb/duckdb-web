@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB Meets Data Lakes"
 author: Gábor Szárnyas
-#thumb: "/images/media/thumbs/2025-01-09-duckdb-and-the-future-of-databases.png"
-#image: "/images/media/thumbs/2025-01-09-duckdb-and-the-future-of-databases.png"
+thumb: "/images/media/thumbs/2025-11-06-duckdb-meets-data-lakes-oredev.jpg"
+image: "/images/media/thumbs/2025-11-06-duckdb-meets-data-lakes-oredev.jpg"
 excerpt: ""
 toc: false
 tags: ["Talk"]

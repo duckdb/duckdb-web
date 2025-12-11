@@ -119,6 +119,7 @@ body.wasm{
 				background: var(--interactive-filterbox-background-color, #FAFAFA);
 				transition: border-color .3s;
 				font-weight: 500;
+				color: var(--main-text-primary-color, #0D0D0D);
 
 				&:focus{
 					outline: none;

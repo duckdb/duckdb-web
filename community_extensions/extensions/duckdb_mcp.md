@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 1.2.0
+  version: 1.3.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: 17d83c3f82a0a47110a1787f451d6b5fc053c3d7
+  ref: 6bc7cb50d681759e2202816129ee9dbebf89cce7
 
 docs:
   hello_world: |
@@ -43,6 +43,7 @@ docs:
     
     -- Server mode: Start an MCP server to expose database content
     SELECT mcp_server_start('stdio', 'localhost', 0, '{}');
+    -- or mcp_server_start('stdio')
     
     -- Publish database tables as MCP resources
     CREATE TABLE products AS SELECT 'Widget' as name, 10.99 as price;
@@ -78,8 +79,8 @@ docs:
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 977
-extension_download_count_pretty: 977
+extension_download_count: 1047
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---
@@ -117,13 +118,16 @@ LOAD {{ page.extension.name }};
 | mcp_list_tools               | scalar        | NULL        | NULL    |          |
 | mcp_publish_query            | scalar        | NULL        | NULL    |          |
 | mcp_publish_table            | scalar        | NULL        | NULL    |          |
+| mcp_publish_tool             | scalar        | NULL        | NULL    |          |
 | mcp_reconnect_server         | scalar        | NULL        | NULL    |          |
 | mcp_register_prompt_template | scalar        | NULL        | NULL    |          |
 | mcp_render_prompt_template   | scalar        | NULL        | NULL    |          |
 | mcp_server_health            | scalar        | NULL        | NULL    |          |
+| mcp_server_send_request      | scalar        | NULL        | NULL    |          |
 | mcp_server_start             | scalar        | NULL        | NULL    |          |
 | mcp_server_status            | scalar        | NULL        | NULL    |          |
 | mcp_server_stop              | scalar        | NULL        | NULL    |          |
+| mcp_server_test              | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 

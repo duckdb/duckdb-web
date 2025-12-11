@@ -17,7 +17,7 @@ On Ubuntu and Debian (and also MX Linux, Linux Mint, etc.), the requirements for
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y git g++ cmake ninja-build libssl-dev
+sudo apt-get install -y git g++ cmake ninja-build libssl-dev libcurl4-openssl-dev
 git clone https://github.com/duckdb/duckdb
 cd duckdb
 GEN=ninja make

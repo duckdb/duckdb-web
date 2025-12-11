@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 770
-extension_download_count_pretty: 770
+extension_download_count: 661
+extension_download_count_pretty: 661
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
@@ -53,8 +53,8 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type |                                           description                                            | comment |                                                           examples                                                           |
 |---------------|---------------|--------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------|
-| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression with a JSON context object accessible as 'context' | NULL    | [evalexpr_rhai('context.x + context.y', '{"x": 10, "y": 20}'), evalexpr_rhai('context.items.len()', '{"items": [1, 2, 3]}')] |
 | evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression and return the result as JSON                      | NULL    | [evalexpr_rhai('40 + 2'), evalexpr_rhai('[1, 2, 3].map(|x| x * 2)')]                                                         |
+| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression with a JSON context object accessible as 'context' | NULL    | [evalexpr_rhai('context.x + context.y', '{"x": 10, "y": 20}'), evalexpr_rhai('context.items.len()', '{"items": [1, 2, 3]}')] |
 
 ### Added Settings
 

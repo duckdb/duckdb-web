@@ -22,8 +22,8 @@ repo:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1738
-extension_download_count_pretty: 1.7k
+extension_download_count: 2243
+extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---
@@ -49,24 +49,24 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| murmurhash3_128     | scalar        | NULL        | NULL    | NULL     |
-| murmurhash3_128     | scalar        | NULL        | NULL    | NULL     |
-| murmurhash3_32      | scalar        | NULL        | NULL    | NULL     |
-| murmurhash3_32      | scalar        | NULL        | NULL    | NULL     |
-| murmurhash3_x64_128 | scalar        | NULL        | NULL    | NULL     |
-| murmurhash3_x64_128 | scalar        | NULL        | NULL    | NULL     |
-| rapidhash           | scalar        | NULL        | NULL    | NULL     |
-| rapidhash           | scalar        | NULL        | NULL    | NULL     |
-| xxh32               | scalar        | NULL        | NULL    | NULL     |
-| xxh32               | scalar        | NULL        | NULL    | NULL     |
-| xxh3_128            | scalar        | NULL        | NULL    | NULL     |
-| xxh3_128            | scalar        | NULL        | NULL    | NULL     |
-| xxh3_64             | scalar        | NULL        | NULL    | NULL     |
-| xxh3_64             | scalar        | NULL        | NULL    | NULL     |
-| xxh64               | scalar        | NULL        | NULL    | NULL     |
-| xxh64               | scalar        | NULL        | NULL    | NULL     |
+|    function_name    | function_type |                                                   description                                                    | comment |              examples              |
+|---------------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|------------------------------------|
+| murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input                                 | NULL    | [murmurhash3_128('hello')]         |
+| murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input with a seed                     | NULL    | [murmurhash3_128('hello', 42)]     |
+| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input                                                | NULL    | [murmurhash3_32('hello')]          |
+| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input with a seed                                    | NULL    | [murmurhash3_32('hello', 42)]      |
+| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input with a seed                     | NULL    | [murmurhash3_x64_128('hello', 42)] |
+| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input. Optimized for 64-bit platforms | NULL    | [murmurhash3_x64_128('hello')]     |
+| rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input. Very fast for all input sizes                   | NULL    | [rapidhash('hello')]               |
+| rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input with a seed                                      | NULL    | [rapidhash('hello', 42)]           |
+| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input with a seed                                 | NULL    | [xxh32('hello', 42)]               |
+| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input                                             | NULL    | [xxh32('hello')]                   |
+| xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input with a seed                            | NULL    | [xxh3_128('hello', 42)]            |
+| xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input                                        | NULL    | [xxh3_128('hello')]                |
+| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input. Faster than XXH64 for short inputs      | NULL    | [xxh3_64('hello')]                 |
+| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input with a seed                              | NULL    | [xxh3_64('hello', 42)]             |
+| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input                                             | NULL    | [xxh64('hello')]                   |
+| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input with a seed                                 | NULL    | [xxh64('hello', 42)]               |
 
 ### Added Settings
 
