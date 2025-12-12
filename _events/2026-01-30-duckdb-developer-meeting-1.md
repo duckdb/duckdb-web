@@ -29,16 +29,16 @@ Attendance is free. Please [RSVP on Eventbrite](https://www.eventbrite.com/e/duc
 
 ### Program Outline
 
-|  Time | Title                                          | Presenter                                                                                                                   |
-| ----: | :--------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| 15:30 | _Venue opens_                                  |                                                                                                                             |
-| 16:00 | Extension building in DuckDB                   | [Sam Ansmink](https://www.linkedin.com/in/sam-ansmink-5a2b9093/) ([DuckDB Labs](https://duckdblabs.com/))                   |
-| 16:25 | Encryption in DuckDB                           | [Lotte Felius](https://www.linkedin.com/in/lottefelius/) ([DuckDB Labs](https://duckdblabs.com/))                           |
-| 16:50 | _Break_                                        |                                                                                                                             |
-| 17:10 | DuckPL: A procedural language in DuckDB        | [Denis Hirn](https://www.linkedin.com/in/denis-hirn-3a3a74370/) ([University of Tübingen](https://db.cs.uni-tuebingen.de/)) |
-| 17:35 | GizmoEdge: A distributed DuckDB engine for IoT | [Philip Moore](https://www.linkedin.com/in/philip-moore-62a10b7/) ([GizmoData](https://gizmodata.com/))                     |
-| 18:00 | _Drinks and snacks_                            |                                                                                                                             |
-| 19:30 | _End of event_                                 |                                                                                                                             |
+|  Time | Title                                          | Presenter                                                                                                                                             |
+| ----: | :--------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 15:30 | _Venue opens_                                  |                                                                                                                                                       |
+| 16:00 | Extension building in DuckDB                   | [Sam Ansmink](https://www.linkedin.com/in/sam-ansmink-5a2b9093/) ([DuckDB Labs](https://duckdblabs.com/))                                             |
+| 16:25 | Encryption in DuckDB                           | [Lotte Felius](https://www.linkedin.com/in/lottefelius/) ([DuckDB Labs](https://duckdblabs.com/))                                                     |
+| 16:50 | _Break_                                        |                                                                                                                                                       |
+| 17:10 | DuckPL: A procedural language in DuckDB        | [Denis Hirn](https://www.linkedin.com/in/denis-hirn-3a3a74370/) ([Database Systems Group at University of Tübingen](https://db.cs.uni-tuebingen.de/)) |
+| 17:35 | GizmoEdge: A distributed DuckDB engine for IoT | [Philip Moore](https://www.linkedin.com/in/philip-moore-62a10b7/) ([GizmoData](https://gizmodata.com/))                                               |
+| 18:00 | _Drinks and snacks_                            |                                                                                                                                                       |
+| 19:30 | _End of event_                                 |                                                                                                                                                       |
 
 ## Extension Development Workshop
 
