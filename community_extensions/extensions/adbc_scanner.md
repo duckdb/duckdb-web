@@ -9,17 +9,18 @@ docs:
   extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_adbc_scanner.html).
 extension:
   build: cmake
-  description: An ADBC client extension for DuckDB that can access ADBC provided data sources.
+  description: An ADBC client extension for DuckDB that can access ADBC provided data
+    sources.
+  excluded_platforms: wasm_mvp;wasm_eh;wasm_threads
   language: C++
   license: Apache-2.0
   maintainers:
   - rustyconover
   name: adbc_scanner
-  excluded_platforms: wasm_mvp;wasm_eh;wasm_threads
   version: '2025120801'
 repo:
   github: query-farm/adbc_scanner
-  ref: c7db636522539af2a8e82a45e1f5bab48244d70b
+  ref: e13cf90d61dbe573eeb9d95183581d1082567b07
 
 extension_star_count: 3
 extension_star_count_pretty: 3
@@ -52,6 +53,7 @@ LOAD {{ page.extension.name }};
 
 |    function_name    | function_type | description | comment | examples |
 |---------------------|---------------|-------------|---------|----------|
+| adbc_clear_cache    | scalar        | NULL        | NULL    | NULL     |
 | adbc_columns        | table         | NULL        | NULL    | NULL     |
 | adbc_commit         | scalar        | NULL        | NULL    | NULL     |
 | adbc_connect        | scalar        | NULL        | NULL    | NULL     |
@@ -61,6 +63,7 @@ LOAD {{ page.extension.name }};
 | adbc_insert         | table         | NULL        | NULL    | NULL     |
 | adbc_rollback       | scalar        | NULL        | NULL    | NULL     |
 | adbc_scan           | table         | NULL        | NULL    | NULL     |
+| adbc_scan_table     | table         | NULL        | NULL    | NULL     |
 | adbc_schema         | table         | NULL        | NULL    | NULL     |
 | adbc_set_autocommit | scalar        | NULL        | NULL    | NULL     |
 | adbc_table_types    | table         | NULL        | NULL    | NULL     |
