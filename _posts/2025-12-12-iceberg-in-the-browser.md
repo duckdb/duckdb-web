@@ -28,7 +28,7 @@ There are two common ways to interact with Iceberg catalogs:
 * The *client–server model,* where the compute part of the operation is delegated to a managed infrastructure (such as the cloud). Users can interact with the server by installing a local client or using a lightweight client such as a browser.
 * The *client-is-the-server model,* where the user first installs the relevant libraries, and then performs queries directly on their machine.
 
-Both models have their tradeoffs. In the *client–server model,* clients can be lightweight, and the server is the uniform point of access allowing for potential efficiencies thanks to scale. However, the infrastructure necessitates additional maintenance. In the *client-is-the-server model,* the query latency is lower, users can leverage local compute resources, and integrate with local inputs and external data sources happens at the user's level. However, requiring users to run computation locally means transferring part of the burden on your users (e.g., setting up dependencies).
+Both models have their tradeoffs. In the *client–server model,* clients can be lightweight, and the server is the uniform point of access allowing for potential efficiencies thanks to scale. However, the infrastructure necessitates additional maintenance. In the *client-is-the-server model,* the query latency is lower, users can leverage local compute resources, and integration between local inputs and external data sources happens at the user level. This requires users to run computation locally, which means transferring part of the burden to your users (e.g., setting up dependencies).
 
 To fit these catalog models, the implementation of existing Iceberg engines fall into these categories: they can run locally as binaries or an organization can host them in their server infrastructure.
 
@@ -78,13 +78,13 @@ This could provide zero-setup, no-infrastructure, properly serverless option for
 Luckily, DuckDB has a client that can run in any browser!
 [DuckDB-Wasm]({% link docs/stable/clients/wasm/overview.md %}) is a WebAssembly port of DuckDB, which [supports loading of extensions]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
 
-Interacting with a Iceberg REST Catalog requires a number of functionalities. First, the ability to talk to a REST API over HTTP(S). Second, the ability to read and write `avro` and `parquet` files on object storage. Third, negotiating authentication to access those resources on behalf of the user. All of these can be done also from a browser without the need to call a native component.
+Interacting with an Iceberg REST Catalog requires a number of functionalities; the ability to talk to a REST API over HTTP(S), the ability to read and write `avro` and `parquet` files on object storage, and finally, the ability to negotiate authentication to access those resources on behalf of the user. All of these can be done also from a browser without the need to call a native component.
 
-To support these, we implemented the following high-level changes:
+To support these functionalities, we implemented the following high-level changes:
 
 * In the core `duckdb` codebase, we redesigned HTTP interactions, so that extensions and clients have a uniform interface to the networking stack.
 * In `duckdb-wasm`, we implemented such an interface, which in this case is a wrapper around the available JavaScript network stack.
-* In `duckdb-iceberg`, we routed all networking through the common HTTP interface, so that both in native and Wasm the same logic is executed.
+* In `duckdb-iceberg`, we routed all networking through the common HTTP interface, so that native DuckDB and DuckDB-Wasm execute the same logic.
 
 **The result is that you can now query Iceberg with DuckDB running directly in a browser!** Now you can access the same Iceberg catalog using *client–server*, *client-as-a-server*, or properly serverless from the isolation of a browser tab!
 
