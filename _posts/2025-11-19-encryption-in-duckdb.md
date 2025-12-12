@@ -23,6 +23,7 @@ DuckDB has supported [Parquet Modular Encryption](https://parquet.apache.org/doc
 Starting with DuckDB 1.4.0, DuckDB supports _transparent data encryption_ of data-at-rest using industry-standard AES encryption.
 
 > DuckDB's encryption does not yet meet the official [NIST requirements](https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines).
+> Please follow issue [`#20162` “Store and verify tag for canary encryption”](https://github.com/duckdb/duckdb/issues/20162) to track our progress towards NIST-compliance.
 
 ## Some Basics of Encryption
 
