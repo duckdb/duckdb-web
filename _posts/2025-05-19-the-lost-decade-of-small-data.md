@@ -29,7 +29,7 @@ Coincidentally, I still have this laptop in the [DuckDB Labs](https://duckdblabs
 
 First, what about the operating system? In order to make the comparison fair(er) to the decades, we actually _downgraded_ the operating system on the Retina to OS X 10.8.5 “Mountain Lion”, the operating system version that shipped just a few weeks after the laptop itself in July 2012. Even though the Retina can actually run 10.15 (Catalina), we felt a true 2012 comparison should also use an operating system from the era. Below is a screenshot of the user interface for those of us who sometimes feel a little old.
 
-<div class="graphics-box">
+<div>
      <img src="{% link images/blog/lost-decade/desktop.png %}"
           alt="Mac OS X Mountain Lion UI"
           width="600"
