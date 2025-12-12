@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/gaggle
-  ref: 8c5a4bc114e7cb5f0dc8e3343db8d7534878925e
+  ref: 0ed1f71b40d9cc245b8ff6aceeb5da5df33396e7
 
 docs:
   hello_world: |
@@ -50,10 +50,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/gaggle).
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 715
-extension_download_count_pretty: 715
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 489
+extension_download_count_pretty: 489
 image: '/images/community_extensions/social_preview/preview_community_extension_gaggle.png'
 layout: community_extension_doc
 ---
