@@ -27,6 +27,8 @@ LOAD inet;
 SELECT '127.0.0.1'::INET AS ipv4, '2001:db8:3c4d::/48'::INET AS ipv6;
 ```
 
+<div class="monospace_table"></div>
+
 |   ipv4    |        ipv6        |
 |-----------|--------------------|
 | 127.0.0.1 | 2001:db8:3c4d::/48 |
@@ -41,6 +43,8 @@ INSERT INTO tbl VALUES
     (5, '2001:db8:3c4d:15::1a2f:1a2b');
 SELECT * FROM tbl;
 ```
+
+<div class="monospace_table"></div>
 
 | id |             ip              |
 |---:|-----------------------------|
@@ -64,6 +68,8 @@ INSERT INTO tbl VALUES
 SELECT cidr FROM tbl ORDER BY cidr ASC;
 ```
 
+<div class="monospace_table"></div>
+
 |            cidr             |
 |-----------------------------|
 | 127.0.0.1                   |
@@ -81,10 +87,12 @@ INSERT INTO tbl VALUES
     ('192.168.0.0/16'),
     ('127.0.0.1'),
     ('2001:db8:3c4d:15::1a2f:1a2b/96');
-SELECT cidr, host(cidr) FROM tbl;
+SELECT cidr, host(cidr) AS host FROM tbl;
 ```
 
-|              cidr              |         host(cidr)          |
+<div class="monospace_table"></div>
+
+|              cidr              |            host             |
 |--------------------------------|-----------------------------|
 | 192.168.0.0/16                 | 192.168.0.0                 |
 | 127.0.0.1                      | 127.0.0.1                   |
@@ -101,10 +109,12 @@ INSERT INTO tbl VALUES
     ('192.168.1.5/24'),
     ('127.0.0.1'),
     ('2001:db8:3c4d:15::1a2f:1a2b/96');
-SELECT cidr, netmask(cidr) FROM tbl;
+SELECT cidr, netmask(cidr) AS netmask FROM tbl;
 ```
 
-|              cidr              |              netmask(cidr)         |
+<div class="monospace_table"></div>
+
+|              cidr              |              netmask               |
 |--------------------------------|------------------------------------|
 | 192.168.1.5/24                 | 255.255.255.0/24                   |
 | 127.0.0.1                      | 255.255.255.255                    |
@@ -120,14 +130,16 @@ INSERT INTO tbl VALUES
     ('192.168.1.5/24'),
     ('127.0.0.1'),
     ('2001:db8:3c4d:15::1a2f:1a2b/96');
-SELECT cidr, network(cidr) FROM tbl;
+SELECT cidr, network(cidr) AS network FROM tbl;
 ```
 
-|              cidr              |              network(cidr)         |
-|--------------------------------|------------------------------------|
-| 192.168.1.5/24                 | 192.168.1.0/24                     |
-| 127.0.0.1                      | 255.255.255.255                    |
-| 2001:db8:3c4d:15::1a2f:1a2b/96 | ffff:ffff:ffff:ffff:ffff:ffff::/96 |
+<div class="monospace_table"></div>
+
+|              cidr              |        network        |
+|--------------------------------|-----------------------|
+| 192.168.1.5/24                 | 192.168.1.0/24        |
+| 127.0.0.1                      | 127.0.0.1             |
+| 2001:db8:3c4d:15::1a2f:1a2b/96 | 2001:db8:3c4d:15::/96 |
 
 ## `broadcast` Function
 
@@ -139,14 +151,16 @@ INSERT INTO tbl VALUES
     ('192.168.1.5/24'),
     ('127.0.0.1'),
     ('2001:db8:3c4d:15::1a2f:1a2b/96');
-SELECT cidr, broadcast(cidr) FROM tbl;
+SELECT cidr, broadcast(cidr) AS broadcast FROM tbl;
 ```
 
-|              cidr              |            broadcast(cidr)         |
-|--------------------------------|------------------------------------|
-| 192.168.1.5/24                 | 192.168.1.0/24                     |
-| 127.0.0.1                      | 127.0.0.1                          |
-| 2001:db8:3c4d:15::1a2f:1a2b/96 | 2001:db8:3c4d:15::/96              |
+<div class="monospace_table"></div>
+
+|              cidr              |           broadcast            |
+|--------------------------------|--------------------------------|
+| 192.168.1.5/24                 | 192.168.1.255/24               |
+| 127.0.0.1                      | 127.0.0.1                      |
+| 2001:db8:3c4d:15::1a2f:1a2b/96 | 2001:db8:3c4d:15::ffff:ffff/96 |
 
 ## `<<=` Predicate
 
@@ -158,14 +172,16 @@ INSERT INTO tbl VALUES
     ('192.168.1.0/24'),
     ('127.0.0.1'),
     ('2001:db8:3c4d:15::1a2f:1a2b/96');
-SELECT cidr, INET '192.168.1.5/32' <<= cidr FROM tbl;
+SELECT cidr, INET '192.168.1.5/32' <<= cidr AS subnet_contained FROM tbl;
 ```
 
-|              cidr              | (CAST('192.168.1.5/32' AS INET) <<= cidr)   |
-|--------------------------------|---------------------------------------------|
-| 192.168.1.5/24                 | true                                        |
-| 127.0.0.1                      | false                                       |
-| 2001:db8:3c4d:15::1a2f:1a2b/96 | false                                       |
+<div class="monospace_table"></div>
+
+|              cidr              | subnet_contained |
+|--------------------------------|------------------|
+| 192.168.1.0/24                 | true             |
+| 127.0.0.1                      | false            |
+| 2001:db8:3c4d:15::1a2f:1a2b/96 | false            |
 
 ## `>>=` Predicate
 
@@ -177,14 +193,16 @@ INSERT INTO tbl VALUES
     ('192.168.1.0/24'),
     ('127.0.0.1'),
     ('2001:db8:3c4d:15::1a2f:1a2b/96');
-SELECT cidr, INET '192.168.0.0/16' >>= cidr FROM tbl;
+SELECT cidr, INET '192.168.0.0/16' >>= cidr AS subnet_contains FROM tbl;
 ```
 
-|              cidr              | (CAST('192.168.0.0/16' AS INET) >>= cidr)   |
-|--------------------------------|---------------------------------------------|
-| 192.168.1.5/24                 | true                                        |
-| 127.0.0.1                      | false                                       |
-| 2001:db8:3c4d:15::1a2f:1a2b/96 | false                                       |
+<div class="monospace_table"></div>
+
+|              cidr              | subnet_contains |
+|--------------------------------|-----------------|
+| 192.168.1.0/24                 | true            |
+| 127.0.0.1                      | false           |
+| 2001:db8:3c4d:15::1a2f:1a2b/96 | false           |
 
 ## HTML Escape and Unescape Functions
 

@@ -272,7 +272,6 @@ main.main-everywhere .recentposts .newstileswrap .postpreview {
 }
 
 img{
-	margin: 0 auto;
 	border:none;
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -280,6 +279,20 @@ img{
 	-webkit-box-pack: center;
 		-ms-flex-pack: center;
 			justify-content: center;
+}
+
+div.graphics-box, 
+div.graphic-box{
+	border-radius: 10px;
+	border: 1px solid var(--main-infographics-element-border, #D9D9D9);
+	background: var(--main-infographis-primary-background, #E6E6E6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	img{
+		max-width: 100%;
+	}
 }
 
 

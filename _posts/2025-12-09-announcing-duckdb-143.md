@@ -93,13 +93,14 @@ SELECT ST_Area(ST_GeomFromText(
 
 ### Python Wheel Distribution
 
-We now distribute Python wheels for Windows Arm64 for Python 3.11+. This means that you take e.g. a Copilot+ PC and run:
+We now distribute Python wheels for Windows Arm64 for Python 3.11+. This means that you take e.g. a Copilot+ PC, install the native Python interpreter and run:
 
 ```batch
 pip install duckdb
 ```
 
 This installs the `duckdb` package using the binary distributed through [PyPI](https://pypi.org/project/duckdb/).
+Then, you can use it as follows:
 
 ```batch
 python
@@ -115,187 +116,7 @@ Python 3.13.9
 '1.4.3'
 ```
 
-Currently, many Python installations that you'll find on Windows Arm64 computers use the x86_64 (AMD64) Python distribution and run through Microsoft's [Prism emulator](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation). For example, if you install Python through the Windows Store, you will get the Python AMD64 installation.
-
-> To understand which platform your Python installation is using, observe the Python CLI's first line (e.g., `Python 3.13.9 ... (ARM64)`).
-
-We used the [`tpch` extension]({% link docs/stable/core_extensions/tpch.md %}) to perform a quick benchmark by running the queries on the TPC-H SF100 dataset.
-We executed the benchmark on a [15-inch Microsoft Surface Laptop](https://www.microsoft.com/en-us/store/b/buy-surface-laptop/) with a 12-core Snapdragon CPU running at 3.4 GHz, 64 GB RAM and 1 TB disk.
-
-<details markdown='1'>
-<summary markdown='span'>
-Click here to see the benchmark snippet
-</summary>
-<!-- markdownlint-disable MD040 MD052 -->
-
-```python
-import duckdb
-import os
-import time
-
-con = duckdb.connect("tpch-sf100.db")
-
-con.execute("INSTALL tpch")
-con.execute("LOAD tpch")
-con.execute("CREATE OR REPLACE TABLE timings(query INTEGER, runtime DOUBLE)")
-
-print(f"Architecture: {os.environ.get('PROCESSOR_ARCHITECTURE')}")
-
-for i in range(1, 23):    
-    start = time.time()
-    con.execute(f"PRAGMA tpch({i})")
-    duration = time.time() - start
-    print(f"Q{i}: {duration:.02f}")
-    con.execute(f"INSERT INTO timings VALUES ({i}, {duration})")
-
-res = con.execute(f"""
-    SELECT median(runtime)::DECIMAL(8, 2), geomean(runtime)::DECIMAL(8, 2)
-    FROM timings""").fetchall()
-print(f"Median runtime: {res[0][0]}")
-print(f"Geomean runtime: {res[0][1]}")
-```
-</details>
-
-<!-- markdownlint-enable MD040 MD052 -->
-
-<details markdown='1'>
-<summary markdown='span'>
-Click here to see the detailed TPC-H SF100 results on Windows Arm64
-</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th style="text-align: center;">AMD64<br>(emulator)</th>
-<th style="text-align: center;">Arm64<br>(native)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Q1</td>
-<td style="text-align: right;">2.87</td>
-<td style="text-align: right;">2.10</td>
-</tr>
-<tr>
-<td>Q2</td>
-<td style="text-align: right;">0.56</td>
-<td style="text-align: right;">0.40</td>
-</tr>
-<tr>
-<td>Q3</td>
-<td style="text-align: right;">2.36</td>
-<td style="text-align: right;">1.58</td>
-</tr>
-<tr>
-<td>Q4</td>
-<td style="text-align: right;">2.01</td>
-<td style="text-align: right;">1.45</td>
-</tr>
-<tr>
-<td>Q5</td>
-<td style="text-align: right;">2.29</td>
-<td style="text-align: right;">1.61</td>
-</tr>
-<tr>
-<td>Q6</td>
-<td style="text-align: right;">0.50</td>
-<td style="text-align: right;">0.39</td>
-</tr>
-<tr>
-<td>Q7</td>
-<td style="text-align: right;">2.04</td>
-<td style="text-align: right;">1.52</td>
-</tr>
-<tr>
-<td>Q8</td>
-<td style="text-align: right;">2.13</td>
-<td style="text-align: right;">1.46</td>
-</tr>
-<tr>
-<td>Q9</td>
-<td style="text-align: right;">7.39</td>
-<td style="text-align: right;">7.32</td>
-</tr>
-<tr>
-<td>Q10</td>
-<td style="text-align: right;">4.18</td>
-<td style="text-align: right;">6.98</td>
-</tr>
-<tr>
-<td>Q11</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.57</td>
-</tr>
-<tr>
-<td>Q12</td>
-<td style="text-align: right;">2.92</td>
-<td style="text-align: right;">1.04</td>
-</tr>
-<tr>
-<td>Q13</td>
-<td style="text-align: right;">6.65</td>
-<td style="text-align: right;">0.54</td>
-</tr>
-<tr>
-<td>Q14</td>
-<td style="text-align: right;">1.56</td>
-<td style="text-align: right;">1.12</td>
-</tr>
-<tr>
-<td>Q15</td>
-<td style="text-align: right;">0.90</td>
-<td style="text-align: right;">0.55</td>
-</tr>
-<tr>
-<td>Q16</td>
-<td style="text-align: right;">0.97</td>
-<td style="text-align: right;">0.74</td>
-</tr>
-<tr>
-<td>Q17</td>
-<td style="text-align: right;">2.57</td>
-<td style="text-align: right;">1.67</td>
-</tr>
-<tr>
-<td>Q18</td>
-<td style="text-align: right;">4.86</td>
-<td style="text-align: right;">5.15</td>
-</tr>
-<tr>
-<td>Q19</td>
-<td style="text-align: right;">2.96</td>
-<td style="text-align: right;">1.72</td>
-</tr>
-<tr>
-<td>Q20</td>
-<td style="text-align: right;">1.75</td>
-<td style="text-align: right;">1.12</td>
-</tr>
-<tr>
-<td>Q21</td>
-<td style="text-align: right;">7.05</td>
-<td style="text-align: right;">4.44</td>
-</tr>
-<tr>
-<td>Q22</td>
-<td style="text-align: right;">1.78</td>
-<td style="text-align: right;">0.97</td>
-</tr>
-<tr>
-<td><strong>Median</strong></td>
-<td style="text-align: right;"><strong>2.21</strong></td>
-<td style="text-align: right;"><strong>1.49</strong></td>
-</tr>
-<tr>
-<td><strong>Geomean</strong></td>
-<td style="text-align: right;"><strong>2.09</strong></td>
-<td style="text-align: right;"><strong>1.59</strong></td>
-</tr>
-</tbody>
-</table>
-</details>
-
-The AMD64 package (running in the emulator) yielded a geometric mean runtime of 2.09 seconds, while the native Arm64 package had a geomean runtime of 1.59 seconds – a 24% performance improvement.
+> Currently, many Python installations that you'll find on Windows Arm64 computers use the x86_64 (AMD64) Python distribution and run through Microsoft's [Prism emulator](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation). For example, if you install Python through the Windows Store, you will get the Python AMD64 installation. To understand which platform your Python installation is using, observe the Python CLI's first line (e.g., `Python 3.13.9 ... (ARM64)`).
 
 ### ODBC Driver
 

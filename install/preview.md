@@ -39,8 +39,6 @@ pip install duckdb --pre --upgrade
 
 ## Java
 
-For Python, the preview builds are based on the `main` branch of the [`duckdb/duckdb-python` repository](https://github.com/duckdb/duckdb-python/).
-
 There is currently no direct download link for JARs and they are not available in the Sonatype OSS snapshot repository. To download the preview JARs, visit the GitHub Actions section in the [`duckdb-java` repository](https://github.com/duckdb/duckdb-java), list the [successful runs on the `Java JDBC` workflow](https://github.com/duckdb/duckdb-java/actions?query=workflow%3A%22Java+JDBC%22+is%3Asuccess). In the workflow output, you can find the artifacts such as `java-linux-aarch64.zip` and `java-osx-universal.zip`.
 
 ## Node.js
