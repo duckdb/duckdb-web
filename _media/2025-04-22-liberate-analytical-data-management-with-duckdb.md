@@ -2,8 +2,8 @@
 layout: post
 title: "Liberate Analytical Data Management with DuckDB"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.png"
-image: "/images/media/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.png"
+thumb: "/images/media/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.jpg"
+image: "/images/media/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.jpg"
 excerpt: ""
 toc: false
 tags: ["Talk", "Landscape"]

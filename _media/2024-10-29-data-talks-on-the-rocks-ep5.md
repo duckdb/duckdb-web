@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB – Data Talks on the Rocks"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.png"
-image: "/images/media/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.png"
+thumb: "/images/media/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.jpg"
+image: "/images/media/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.jpg"
 excerpt: ""
 toc: false
 tags: ["Podcast"]

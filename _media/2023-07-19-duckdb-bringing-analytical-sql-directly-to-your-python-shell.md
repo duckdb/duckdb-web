@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB: Bringing Analytical SQL Directly to Your Python Shell"
 author: Pedro Holanda
-thumb: "/images/media/thumbs/2023-07-19-duckdb-bringing-analytical-sql-directly-to-your-python-shell.png"
-image: "/images/media/thumbs/2023-07-19-duckdb-bringing-analytical-sql-directly-to-your-python-shell.png"
+thumb: "/images/media/thumbs/2023-07-19-duckdb-bringing-analytical-sql-directly-to-your-python-shell.jpg"
+image: "/images/media/thumbs/2023-07-19-duckdb-bringing-analytical-sql-directly-to-your-python-shell.jpg"
 excerpt: ""
 toc: false
 tags: ["Talk", "Overview"]

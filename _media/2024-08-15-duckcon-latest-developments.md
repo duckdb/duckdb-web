@@ -2,8 +2,8 @@
 layout: post
 title: "Overview and Latest Developments"
 author: Hannes Mühleisen and Mark Raasveldt
-thumb: "/images/media/thumbs/2024-08-15-duckcon-latest-developments.png"
-image: "/images/media/thumbs/2024-08-15-duckcon-latest-developments.png"
+thumb: "/images/media/thumbs/2024-08-15-duckcon-latest-developments.jpg"
+image: "/images/media/thumbs/2024-08-15-duckcon-latest-developments.jpg"
 excerpt: ""
 toc: false
 tags: ["Talk", "Updates"]

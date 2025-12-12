@@ -2,8 +2,8 @@
 layout: post
 title: "Implementing Hardware-Friendly Databases"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2024-02-07-implementing-hardware-friendly-databases.png"
-image: "/images/media/thumbs/2024-02-07-implementing-hardware-friendly-databases.png"
+thumb: "/images/media/thumbs/2024-02-07-implementing-hardware-friendly-databases.jpg"
+image: "/images/media/thumbs/2024-02-07-implementing-hardware-friendly-databases.jpg"
 excerpt: ""
 toc: false
 tags: ["Podcast"]
