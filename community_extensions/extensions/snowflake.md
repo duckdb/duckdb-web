@@ -17,10 +17,10 @@ extension:
 
 repo:
   github: iqea-ai/duckdb-snowflake
-  ref: a30a5c684f19b030f9f56b561fee67ed94b644b1
+  ref: ee2388dc6c32b1231c493be4dacc9897690936de
 
 install_notes: |
-  **Important:** This extension requires DuckDB 1.4.2 and the Apache Arrow ADBC Snowflake driver to function properly.
+  **Important:** This extension requires DuckDB 1.4.3 and the Apache Arrow ADBC Snowflake driver to function properly.
   
   **You must install the ADBC driver separately after installing this extension.** The extension will not work without the driver.
   
@@ -82,7 +82,7 @@ docs:
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 1480
+extension_download_count: 1528
 extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
