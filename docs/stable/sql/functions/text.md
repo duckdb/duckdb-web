@@ -988,6 +988,8 @@ Pad integers with 0s:
 SELECT format('{:04d}', 33); -- 0033
 ```
 
+> Padding cannot currently be combined with the specification of a thousands separator.
+
 Create timestamps from integers:
 
 ```sql
