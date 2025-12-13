@@ -6,24 +6,25 @@ excerpt: |
   The JSONata extension for DuckDB enables expressive, JSON-focused querying and transformation directly within SQL using the powerful JSONata expression language.
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_jsonata.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_jsonata.html).
 extension:
   build: cmake
-  description: The JSONata extension for DuckDB enables expressive, JSON-focused querying and transformation directly within SQL using the powerful JSONata expression language.
+  description: The JSONata extension for DuckDB enables expressive, JSON-focused querying
+    and transformation directly within SQL using the powerful JSONata expression language.
   language: C++
   license: Apache-2.0
   maintainers:
-    - rustyconover
+  - rustyconover
   name: jsonata
   version: 2025110901
 repo:
   github: query-farm/jsonata
-  ref: ae4d2ba664309eb25ceb25f867b5dcf27121dfc3
+  ref: 4f087e852214aea931d3301982f64effec3f3b22
+
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 623
-extension_download_count_pretty: 623
+extension_download_count: 622
+extension_download_count_pretty: 622
 image: '/images/community_extensions/social_preview/preview_community_extension_jsonata.png'
 layout: community_extension_doc
 ---
@@ -51,6 +52,7 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
+| jsonata       | scalar        | NULL        | NULL    | NULL     |
 | jsonata       | scalar        | NULL        | NULL    | NULL     |
 
 ### Added Settings
