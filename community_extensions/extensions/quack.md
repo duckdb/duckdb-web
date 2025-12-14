@@ -36,8 +36,8 @@ docs:
 
 extension_star_count: 247
 extension_star_count_pretty: 247
-extension_download_count: 898
-extension_download_count_pretty: 898
+extension_download_count: 907
+extension_download_count_pretty: 907
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---

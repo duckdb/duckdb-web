@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_hunt
   description: Parse and analyze test results, build outputs, and CI/CD pipeline logs from 45+ development tools with dynamic regexp patterns
-  version: 1.0.0
+  version: 1.1.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: teaguesterling/duck_hunt
-  ref: 03097cb28a19531259aa34d2eeb7d7a293a51ce6
+  ref: c8d6457b014daa3635e1ae770de25e0453932efe
 
 docs:
   hello_world: |
@@ -90,10 +90,10 @@ docs:
 
     Perfect for CI/CD analysis, automated debugging, test aggregation, quality gates, and agent-driven development workflows.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 67
+extension_download_count_pretty: 67
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_hunt.png'
 layout: community_extension_doc
 ---
@@ -121,6 +121,7 @@ LOAD {{ page.extension.name }};
 
 |        function_name         | function_type | description | comment | examples |
 |------------------------------|---------------|-------------|---------|----------|
+| duck_hunt_formats            | table         | NULL        | NULL    |          |
 | parse_duck_hunt_log          | table         | NULL        | NULL    |          |
 | parse_duck_hunt_workflow_log | table         | NULL        | NULL    |          |
 | read_duck_hunt_log           | table         | NULL        | NULL    |          |

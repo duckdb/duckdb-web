@@ -16,12 +16,12 @@ extension:
     - sipemu
 repo:
   github: DataZooDE/anofox-forecast
-  ref: b4ed26b451ef595a97f9c54390acd40a165f8084
+  ref: 32dff21105efc72f61fc9cac5d207c0b902a57e2
 
-extension_star_count: 18
-extension_star_count_pretty: 18
-extension_download_count: 570
-extension_download_count_pretty: 570
+extension_star_count: 19
+extension_star_count_pretty: 19
+extension_download_count: 218
+extension_download_count_pretty: 218
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -50,6 +50,7 @@ LOAD {{ page.extension.name }};
 |              function_name               | function_type | description | comment | examples |
 |------------------------------------------|---------------|-------------|---------|----------|
 | anofox_fcst_forecast                     | table         | NULL        | NULL    |          |
+| anofox_fcst_mstl_decomposition_operator  | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_analyze_seasonality       | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_bias                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_coverage                  | scalar        | NULL        | NULL    |          |
@@ -59,24 +60,25 @@ LOAD {{ page.extension.name }};
 | anofox_fcst_ts_detect_changepoints_agg   | aggregate     | NULL        | NULL    |          |
 | anofox_fcst_ts_detect_changepoints_by    | table_macro   | NULL        | NULL    |          |
 | anofox_fcst_ts_detect_seasonality        | scalar        | NULL        | NULL    |          |
-| anofox_fcst_ts_diff                      | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_constant             | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_edge_zeros           | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_gappy                | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_leading_zeros        | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_short                | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_trailing_zeros       | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_zeros                | table_macro   | NULL        | NULL    |          |
+| anofox_fcst_ts_diff                      | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_drop_constant             | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_drop_edge_zeros           | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_drop_gappy                | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_drop_leading_zeros        | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_drop_short                | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_drop_trailing_zeros       | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_drop_zeros                | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_features                  | aggregate     | NULL        | NULL    |          |
 | anofox_fcst_ts_features_config_from_csv  | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_features_config_from_json | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_features_list             | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_forward              | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_gaps                 | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_nulls_backward       | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_nulls_const          | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_nulls_forward        | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_nulls_mean           | table_macro   | NULL        | NULL    |          |
+| anofox_fcst_ts_fill_forward              | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_fill_gaps                 | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_fill_gaps_operator        | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_fill_nulls_backward       | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_fill_nulls_const          | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_fill_nulls_forward        | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_fill_nulls_mean           | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_forecast                  | table_macro   | NULL        | NULL    |          |
 | anofox_fcst_ts_forecast_agg              | aggregate     | NULL        | NULL    |          |
 | anofox_fcst_ts_forecast_by               | table_macro   | NULL        | NULL    |          |
@@ -85,13 +87,15 @@ LOAD {{ page.extension.name }};
 | anofox_fcst_ts_mase                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mqloss                    | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mse                       | scalar        | NULL        | NULL    |          |
-| anofox_fcst_ts_quality_report            | table_macro   | NULL        | NULL    |          |
+| anofox_fcst_ts_mstl_decomposition        | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_quality_report            | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_quantile_loss             | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_r2                        | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_rmae                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_rmse                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_smape                     | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_stats                     | table_macro   | NULL        | NULL    |          |
+| anofox_fcst_ts_stats_internal            | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_stats_summary             | table_macro   | NULL        | NULL    |          |
 | forecast                                 | table         | NULL        | NULL    |          |
 | ts_analyze_seasonality                   | scalar        | NULL        | NULL    |          |
@@ -103,25 +107,26 @@ LOAD {{ page.extension.name }};
 | ts_detect_changepoints_agg               | aggregate     | NULL        | NULL    |          |
 | ts_detect_changepoints_by                | table_macro   | NULL        | NULL    |          |
 | ts_detect_seasonality                    | scalar        | NULL        | NULL    |          |
-| ts_diff                                  | table_macro   | NULL        | NULL    |          |
-| ts_drop_constant                         | table_macro   | NULL        | NULL    |          |
-| ts_drop_edge_zeros                       | table_macro   | NULL        | NULL    |          |
-| ts_drop_gappy                            | table_macro   | NULL        | NULL    |          |
-| ts_drop_leading_zeros                    | table_macro   | NULL        | NULL    |          |
-| ts_drop_short                            | table_macro   | NULL        | NULL    |          |
-| ts_drop_trailing_zeros                   | table_macro   | NULL        | NULL    |          |
-| ts_drop_zeros                            | table_macro   | NULL        | NULL    |          |
+| ts_diff                                  | table         | NULL        | NULL    |          |
+| ts_drop_constant                         | table         | NULL        | NULL    |          |
+| ts_drop_edge_zeros                       | table         | NULL        | NULL    |          |
+| ts_drop_gappy                            | table         | NULL        | NULL    |          |
+| ts_drop_leading_zeros                    | table         | NULL        | NULL    |          |
+| ts_drop_short                            | table         | NULL        | NULL    |          |
+| ts_drop_trailing_zeros                   | table         | NULL        | NULL    |          |
+| ts_drop_zeros                            | table         | NULL        | NULL    |          |
 | ts_features                              | aggregate     | NULL        | NULL    |          |
 | ts_features_config_from_csv              | scalar        | NULL        | NULL    |          |
 | ts_features_config_from_json             | scalar        | NULL        | NULL    |          |
 | ts_features_config_template              | table         | NULL        | NULL    |          |
 | ts_features_list                         | table         | NULL        | NULL    |          |
-| ts_fill_forward                          | table_macro   | NULL        | NULL    |          |
-| ts_fill_gaps                             | table_macro   | NULL        | NULL    |          |
-| ts_fill_nulls_backward                   | table_macro   | NULL        | NULL    |          |
-| ts_fill_nulls_const                      | table_macro   | NULL        | NULL    |          |
-| ts_fill_nulls_forward                    | table_macro   | NULL        | NULL    |          |
-| ts_fill_nulls_mean                       | table_macro   | NULL        | NULL    |          |
+| ts_fill_forward                          | table         | NULL        | NULL    |          |
+| ts_fill_gaps                             | table         | NULL        | NULL    |          |
+| ts_fill_gaps_operator                    | table         | NULL        | NULL    |          |
+| ts_fill_nulls_backward                   | table         | NULL        | NULL    |          |
+| ts_fill_nulls_const                      | table         | NULL        | NULL    |          |
+| ts_fill_nulls_forward                    | table         | NULL        | NULL    |          |
+| ts_fill_nulls_mean                       | table         | NULL        | NULL    |          |
 | ts_forecast                              | table_macro   | NULL        | NULL    |          |
 | ts_forecast_agg                          | aggregate     | NULL        | NULL    |          |
 | ts_forecast_by                           | table_macro   | NULL        | NULL    |          |
@@ -130,7 +135,8 @@ LOAD {{ page.extension.name }};
 | ts_mase                                  | scalar        | NULL        | NULL    |          |
 | ts_mqloss                                | scalar        | NULL        | NULL    |          |
 | ts_mse                                   | scalar        | NULL        | NULL    |          |
-| ts_quality_report                        | table_macro   | NULL        | NULL    |          |
+| ts_mstl_decomposition                    | table         | NULL        | NULL    |          |
+| ts_quality_report                        | table         | NULL        | NULL    |          |
 | ts_quantile_loss                         | scalar        | NULL        | NULL    |          |
 | ts_r2                                    | scalar        | NULL        | NULL    |          |
 | ts_rmae                                  | scalar        | NULL        | NULL    |          |
