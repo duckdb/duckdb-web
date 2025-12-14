@@ -20,12 +20,12 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/tera
-  ref: 05e503b956773f808e8a7c757069236933aa796e
+  ref: 724e371cc674061e0b8524b77d3fcf18339c8875
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 666
-extension_download_count_pretty: 666
+extension_download_count: 662
+extension_download_count_pretty: 662
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---
@@ -51,9 +51,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| tera_render   | scalar        | NULL        | NULL    |          |
+| function_name | function_type |                        description                         | comment |                                                     examples                                                      |
+|---------------|---------------|------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------|
+| tera_render   | scalar        | Renders a Tera template string with JSON context variables | NULL    | [tera_render('Hello {{ name }}!', '{"name": "World"}'), tera_render('{{ value | upper }}', '{"value": "hello"}')] |
+| tera_render   | scalar        | Renders a Tera template string without context variables   | NULL    | [tera_render('Hello World!')]                                                                                     |
 
 ### Added Settings
 
