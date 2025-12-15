@@ -83,7 +83,7 @@ To support these functionalities, we implemented the following high-level change
 * In `duckdb-wasm`, we implemented such an interface, which in this case is a wrapper around the available JavaScript network stack. ([PR](https://github.com/duckdb/duckdb-wasm/pull/2056))
 * In `duckdb-iceberg`, we routed all networking through the common HTTP interface, so that native DuckDB and DuckDB-Wasm execute the same logic. ([PR](https://github.com/duckdb/duckdb-iceberg/pull/576))
 
-**The result is that you can now query Iceberg with DuckDB running directly in a browser!** Now you can access the same Iceberg catalog using *client–server*, *client-as-a-server*, or properly serverless from the isolation of a browser tab!
+**The result is that you can now query Iceberg with DuckDB running directly in a browser!** Now you can access the same Iceberg catalog using *client–server*, *client-is-the-server*, or properly serverless from the isolation of a browser tab!
 
 ## Welcome to Serverless Iceberg Analytics
 
