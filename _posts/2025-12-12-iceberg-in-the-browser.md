@@ -9,7 +9,7 @@ tags: ["deep dive"]
 ---
 
 Accessing an Iceberg REST Catalogs can be a complex operation requiring multiple moving parts.
-In this post, we describe the current patterns for interacting with Iceberg Catalogs, after which we ask the question, could it be done all within a browser?
+In this post, we describe the current patterns for interacting with Iceberg Catalogs, after which we ask the question, could it be done from a Browser?
 After elaborating on the DuckDB ecosystem changes required to unlock this capability, we demonstrate our browser only approach to interacting with an Iceberg REST Catalog, no extra setup required.
 
 ## Interaction Models for Iceberg Catalogs
