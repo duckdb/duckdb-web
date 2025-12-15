@@ -91,7 +91,7 @@ To see a demo of serverless Iceberg analytics, visit our table visualizer at [`d
 
 TODO - add video
 
-> **Note:** The current credentials in the demo are provided via a throwaway account with minimal permissions. If you enter your own credentials and share a link, you will be sharing your credentials.
+> The current credentials in the demo are provided via a throwaway account with minimal permissions. If you enter your own credentials and share a link, you will be sharing your credentials.
 
 ## Access Your Own Data
 
