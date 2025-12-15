@@ -31,7 +31,13 @@ For the CLI, the preview builds are based on the `main` branch of the [`duckdb/d
 
 ## Python
 
-For Python, the preview builds are based on the `main` branch of the [`duckdb/duckdb-python` repository](https://github.com/duckdb/duckdb-python/).
+For Python, we distribute two nightly builds. To install the nightly build for the 1.4 LTS version of DuckDB, run:
+
+```batch
+pip install "duckdb<1.5.0"
+```
+
+To install the nightly build based on v1.5-dev (the `main` branch of the [`duckdb/duckdb-python` repository](https://github.com/duckdb/duckdb-python/)), run.
 
 ```batch
 pip install duckdb --pre --upgrade
