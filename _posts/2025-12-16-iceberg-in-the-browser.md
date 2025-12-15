@@ -25,7 +25,7 @@ There are two common ways to interact with Iceberg catalogs:
 * The *client–server model,* where the compute part of the operation is delegated to a managed infrastructure (such as the cloud). Users can interact with the server by installing a local client or using a lightweight client such as a browser.
 * The *client-is-the-server model,* where the user first installs the relevant libraries, and then performs queries directly on their machine.
 
-Both models have their tradeoffs. In the *client–server model,* clients can be lightweight, and the server is the uniform point of access allowing for potential efficiencies thanks to scale. However, the infrastructure necessitates additional maintenance. In the *client-is-the-server model,* the query latency is lower, users can leverage local compute resources, and integration between local inputs and external data sources happens at the user level. This requires users to run computation locally, which means transferring part of the burden to your users (e.g., setting up dependencies).
+Both models have their tradeoffs. In the *client–server model,* clients can be lightweight, and the server is a central access point to the Iceberg catalog. However, the infrastructure necessitates additional maintenance. In the *client-is-the-server model,* the query latency is lower, users can leverage local compute resources, and integration between local inputs and external data sources happens at the user level. This requires users to run computation locally, which means transferring part of the burden to your users (e.g., setting up dependencies).
 
 Iceberg engine implementations work using either of those interaction models: they are either run natively in managed compute infrastructure or they are are run locally to the user.
 
@@ -91,11 +91,11 @@ To see a demo of serverless Iceberg analytics, visit our table visualizer at [`d
 
 TODO - add video
 
-> End-to-End Iceberg Catalog interactions in general require authentication, the credentials that we are sharing are from a test organization.
+> **Note:** The current credentials in the demo are provided via a throwaway account with minimal permissions. If you enter your own credentials and share a link, you will be sharing your credentials.
 
 ## Access Your Own Data
 
-You can now provide your own Iceberg warehouse and a set of credentials which allow reads from the catalog, metadata and data (policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess)).
+Substituting your own S3Tables bucket ARN and credentials with policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess), you can also access your catalog, metadata and data.
 Computations are fully local, and the credentials and warehouse ID are only sent to the catalog endpoint specified in your `Attach` command.
 Inputs are translated to SQL, and added to the hash segment of the URL.
 
