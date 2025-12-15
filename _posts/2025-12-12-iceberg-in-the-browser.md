@@ -116,4 +116,3 @@ The DuckDB-Iceberg extension is now supported in DuckDB-Wasm and it can read and
 Users can now access Iceberg data from within a browser, without having to install or manage any compute nodes!
 
 If you would like to provide feedback or file issues, please reach out to us on either the [DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) or [DuckDB-Iceberg](https://github.com/duckdb/duckdb-iceberg) repository. If you are interested in using any part of this within your organization, feel free to [reach out](https://duckdblabs.com/contact/).
-
