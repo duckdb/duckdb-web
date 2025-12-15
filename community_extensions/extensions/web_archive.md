@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: web_archive
   description: Query Common Crawl and Wayback Machine web archive CDX APIs directly from SQL
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-web-archive
-  ref: v0.2.0
+  ref: v0.2.1
 
 docs:
   hello_world: |
@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 16
+extension_download_count_pretty: 16
 image: '/images/community_extensions/social_preview/preview_community_extension_web_archive.png'
 layout: community_extension_doc
 ---
