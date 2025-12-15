@@ -7,13 +7,13 @@ on:
 
 jobs:
   generate_docs:
+    if: ${{ github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web' }}
     uses: duckdb/community-extensions/.github/workflows/generate_docs.yml@main
 
   deploy_docs:
     needs:
       - generate_docs
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web' }}
     steps:
     - uses: actions/checkout@v6
       with:
