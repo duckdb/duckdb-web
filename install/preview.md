@@ -6,6 +6,7 @@ body_class: blog_typography nightly_install
 max_page_width: medium
 toc: false
 redirect_from:
+  - /preview
   - /nightly
   - /nightlies
   - /install/nightly
