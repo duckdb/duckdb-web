@@ -53,7 +53,7 @@ CREATE SECRET test_secret (
 );
 
 ATTACH '⟨warehouse⟩' AS db (
-    TYPE iceberg,
+    TYPE ICEBERG,
     ENDPOINT_URL '⟨https://your-iceberg-endpoint⟩',
 );
 
@@ -68,7 +68,7 @@ WHERE other_column = '⟨some_value⟩';
 
 While setting up a local DuckDB installation is quite simple, opening a browser tab is even quicker.
 Therefore, we asked ourselves: could we support the *client-is-the-server* model directly from within a browser tab?
-This could provide zero-setup, no-infrastructure, properly serverless option for interacting with Iceberg catalogs.
+This could provide a zero-setup, no-infrastructure, properly serverless option for interacting with Iceberg catalogs.
 
 ![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-dark.svg){: .darkmode-img }
 ![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
