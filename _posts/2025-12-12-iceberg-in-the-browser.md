@@ -8,11 +8,9 @@ excerpt: "DuckDB is the first end-to-end interface to Iceberg REST Catalogs with
 tags: ["deep dive"]
 ---
 
-Accessing an Iceberg REST Catalogs is a complex operation that requires quite a few moving parts.
-In this post, we first describe the current state of connecting to Iceberg catalogs.
-Then, we pose the question: could you do simply from a browser tab?
-We then elaborate on the changes required in the DuckDB ecosystem that unlock this capability.
-Finally, we demonstate our new approach that allows you to interact with an Iceberg REST Catalog by simply navigating to a URL – without any setup required.
+Accessing an Iceberg REST Catalogs can be a complex operation requiring multiple moving parts.
+In this post, we describe the current patterns for interacting with Iceberg Catalogs, after which we ask the question, could it be done all within a browser.
+After elaborating on the DuckDB ecosystem changes required to unlock this capability, we demonstrate our browser only approach to interacting with an Iceberg REST Catalog, no extra setup required.
 
 ## Interaction Models for Iceberg Catalogs
 
@@ -30,7 +28,7 @@ There are two common ways to interact with Iceberg catalogs:
 
 Both models have their tradeoffs. In the *client–server model,* clients can be lightweight, and the server is the uniform point of access allowing for potential efficiencies thanks to scale. However, the infrastructure necessitates additional maintenance. In the *client-is-the-server model,* the query latency is lower, users can leverage local compute resources, and integration between local inputs and external data sources happens at the user level. This requires users to run computation locally, which means transferring part of the burden to your users (e.g., setting up dependencies).
 
-To fit these catalog models, the implementation of existing Iceberg engines fall into these categories: they can run locally as binaries or an organization can host them in their server infrastructure.
+All Iceberg engine implementations fall into these interaction models: they must either be run locally or be hosted by some cloud managed compute infrastructure.
 
 Let's see how things look with DuckDB in the mix!
 
@@ -78,7 +76,7 @@ This could provide zero-setup, no-infrastructure, properly serverless option for
 Luckily, DuckDB has a client that can run in any browser!
 [DuckDB-Wasm]({% link docs/stable/clients/wasm/overview.md %}) is a WebAssembly port of DuckDB, which [supports loading of extensions]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
 
-Interacting with an Iceberg REST Catalog requires a number of functionalities; the ability to talk to a REST API over HTTP(S), the ability to read and write `avro` and `parquet` files on object storage, and finally, the ability to negotiate authentication to access those resources on behalf of the user. All of these can be done also from a browser without the need to call a native component.
+Interacting with an Iceberg REST Catalog requires a number of functionalities; the ability to talk to a REST API over HTTP(S), the ability to read and write `avro` and `parquet` files on object storage, and finally, the ability to negotiate authentication to access those resources on behalf of the user. All of these must be done from a within a browser without calling any native components.
 
 To support these functionalities, we implemented the following high-level changes:
 
@@ -117,3 +115,7 @@ This allows users to unlock the analytical powers of DuckDB on their Iceberg cat
 At the moment only one major implementation (Amazon S3 Tables) works out of the box, but hopefully more will follow.
 
 If you would like to provide feedback or file issues, please reach out to us on either the [DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) or [DuckDB-Iceberg](https://github.com/duckdb/duckdb-iceberg) repository. If you are interested in using any part of this within your organization, feel free to [reach out](https://duckdblabs.com/contact/).
+
+## Bonus
+
+Another demo of DuckDB-Iceberg + DuckDB-Wasm querying S3Tables was presented at AWS Re:Invent 2025, you can view it [here](https://www.youtube.com/watch?t=2570&v=Pi82g0YGklU&feature=youtu.be). If you would like to learn more about S3Tables and see their complete feature set, you can take a look at their [product page](https://aws.amazon.com/s3/features/tables/) or [documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
