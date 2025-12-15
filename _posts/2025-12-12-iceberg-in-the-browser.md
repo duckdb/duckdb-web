@@ -110,7 +110,7 @@ This means that:
 ## Conclusion
 
 The DuckDB-Iceberg extension is now supported in DuckDB-Wasm and it can read and edit Iceberg REST Catalogs.
-This allows users to unlock the analytical powers of DuckDB on their Iceberg catalogs without having to install or manage any compute nodes, making Iceberg tables even simpler to access.
+Users can now access Iceberg data from within a browser, without having to install or manage any compute nodes!
 
 At the moment one major implementation (Amazon S3 Tables) works out of the box, but hopefully more will follow.
 
