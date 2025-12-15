@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Analytics for not-so-big data with DuckDB"
+title: "Analytics for Not-so-Big Data with DuckDB"
 author: "David Ostrovsky"
 excerpt: ""
 tags: ["Talk"]

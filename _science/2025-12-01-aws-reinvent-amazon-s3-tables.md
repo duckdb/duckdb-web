@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Amazon S3 Tables architecture, use cases, and best practices"
+title: "Amazon S3 Tables Architecture, Use Cases, and Best Practices"
 author: "AWS re:Invent 2025"
 excerpt: ""
 tags: ["Talk"]

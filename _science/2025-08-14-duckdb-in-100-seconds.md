@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB in 100 seconds"
+title: "DuckDB in 100 Seconds"
 author: "Fireship"
 excerpt: ""
 tags: ["Video"]
