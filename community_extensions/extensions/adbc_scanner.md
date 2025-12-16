@@ -22,10 +22,10 @@ repo:
   github: query-farm/adbc_scanner
   ref: 7a7d206cbff1ad61436ba8bd1a4c438028b8c815
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 412
-extension_download_count_pretty: 412
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 482
+extension_download_count_pretty: 482
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc_scanner.png'
 layout: community_extension_doc
 ---
