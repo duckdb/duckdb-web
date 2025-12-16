@@ -40,8 +40,12 @@ You can specify column names for CTEs:
 
 ```sql
 WITH cte(j) AS (SELECT 42 AS i)
-FROM cte;
+Select * FROM cte;
 ```
+
+| j  |
+|---:|
+| 42 |
 
 ## CTE Materialization
 
