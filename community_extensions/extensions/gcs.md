@@ -36,9 +36,9 @@ docs:
     └─────────────────────────────────────────┴─────────┴───────┴──────────────────────────┘
 
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 1335
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 1337
 extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_gcs.png'
 layout: community_extension_doc
