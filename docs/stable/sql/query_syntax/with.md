@@ -40,7 +40,7 @@ You can specify column names for CTEs:
 
 ```sql
 WITH cte(j) AS (SELECT 42 AS i)
-Select * FROM cte;
+SELECT * FROM cte;
 ```
 
 | j  |
