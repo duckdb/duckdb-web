@@ -89,7 +89,9 @@ To support these functionalities, we implemented the following high-level change
 
 To see a demo of serverless Iceberg analytics, visit our table visualizer at [`duckdb.org/visualizer?iceberg`]({% link visualizer/index.html %}?iceberg).
 
-TODO - add video
+<video muted controls loop width="700">
+  <source src="http://blobs.duckdb.org/videos/iceberg-wasm-demo.mp4" type="video/mp4" />
+</video>
 
 > The current credentials in the demo are provided via a throwaway account with minimal permissions. If you enter your own credentials and share a link, you will be sharing your credentials.
 
