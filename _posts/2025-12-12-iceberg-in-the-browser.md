@@ -90,7 +90,9 @@ To support these functionalities, we implemented the following high-level change
 
 To see a demo of serverless Iceberg analytics, visit our table visualizer at [`duckdb.org/visualizer`]({% link visualizer/index.html %}?iceberg).
 
-TODO - final URL and video
+<video autoplay loop muted playsinline style="max-width:100%; height:auto;">
+  <source src="images/blog/wasm-blog-post.mp4" type="video/mp4">
+</video>
 
 ## Access Your Own Data
 
