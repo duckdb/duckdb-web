@@ -3,10 +3,8 @@
 		<h2 class="display-3">
 			{% if page.collection == "events" %}
 				Other Events
-			{% elsif page.collection == "media" %}
-				Other Media
-			{% elsif page.collection == "science" %}
-				Other Science Posts
+			{% elsif page.collection == "library" %}
+				Other Library Resources
 			{% elsif page.collection == "everywhere" %}
 				Other Everywhere Posts
 			{% else %}
@@ -16,17 +14,15 @@
 		<div class="newstileswrap">
 			{% if page.collection == "events" %}
 				{% assign items = site.events | sort: "date" | reverse %}
-			{% elsif page.collection == "media" %}
-				{% assign items = site.media | sort: "date" | reverse %}
-			{% elsif page.collection == "science" %}
-				{% assign items = site.science | sort: "date" | reverse %}
+			{% elsif page.collection == "library" %}
+				{% assign items = site.library | sort: "date" | reverse %}
 			{% elsif page.collection == "everywhere" %}
 				{% assign items = site.everywhere | sort: "date" | reverse %}
 			{% else %}
 				{% assign items = site.posts | sort: "date" | reverse %}
 			{% endif %}
 			
-			{% if page.collection == "science" or page.collection == "everywhere" %}
+			{% if page.collection == "library" or page.collection == "everywhere" %}
 				{% assign max_recent_posts = 3 %}
 			{% else %}
 				{% assign max_recent_posts = 2 %}
@@ -38,14 +34,14 @@
 					{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
 					{% assign tag_classes = item.tags | default: "" | join: ' ' %}
 					
-					{% if page.collection == "media" %}
+					{% if page.collection == "library" %}
 						<div class="mediapreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}">
-							<a href="/media/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
+							<a href="/library/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
 							<div class="postimg custom">
 								{% if item.thumb %}
 									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
 								{% else %}
-									{% if page.collection == "science" %}
+									{% if page.collection == "science" %} <!-- TODO -->
 										{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
 										<img src="/images/science/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
 									{% else %}
@@ -127,8 +123,8 @@
 				{% endif %}
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}{% if page.collection == "events" %}/events/{% elsif page.collection == "media" %}/media/{% elsif page.collection == "science" %}/science/{% elsif page.collection == "everywhere" %}/everywhere/{% else %}/news/{% endif %}" class="button transparent arrow-right">
-			All {% if page.collection == "events" %}events{% elsif page.collection == "media" %}media{% elsif page.collection == "science" %}science posts{% elsif page.collection == "everywhere" %}everywhere posts{% else %}blog posts{% endif %} <span></span>
+		<a href="{{ site.url }}{% if page.collection == "events" %}/events/{% elsif page.collection == "library" %}/library/{% elsif page.collection == "everywhere" %}/everywhere/{% else %}/news/{% endif %}" class="button transparent arrow-right">
+			All {% if page.collection == "events" %}events{% elsif page.collection == "library" %}library resources{% elsif page.collection == "everywhere" %}everywhere posts{% else %}blog posts{% endif %} <span></span>
 		</a>
 	</div>
 </section>
