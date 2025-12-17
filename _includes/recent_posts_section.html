@@ -41,12 +41,8 @@
 								{% if item.thumb %}
 									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
 								{% else %}
-									{% if page.collection == "science" %} <!-- TODO -->
-										{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
-										<img src="/images/science/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
-									{% else %}
-										<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
-									{% endif %}
+									{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
+									<img src="/images/library/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
 								{% endif %}
 							</div>
 							<div class="postdetails">
