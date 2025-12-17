@@ -25,7 +25,7 @@ This event is slightly different from our usual meetups and conferences as it pr
 
 ### Meeting Registration
 
-Attendance is free. Please [RSVP on Eventbrite](https://www.eventbrite.com/e/duckdb-developer-meeting-1-tickets-1850334944629?aff=oddtdtcreator).
+Attendance is free. Please [reserve a spot on Eventbrite](https://www.eventbrite.com/e/duckdb-developer-meeting-1-tickets-1850334944629?aff=oddtdtcreator).
 
 ### Program Outline
 
