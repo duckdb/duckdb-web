@@ -8,6 +8,7 @@ excerpt: ""
 toc: false
 tags: ["Podcast"]
 length: "80 min"
+thirdparty: false
 ---
 
 |-------|-------|

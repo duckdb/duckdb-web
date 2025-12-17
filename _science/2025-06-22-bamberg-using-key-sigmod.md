@@ -6,6 +6,7 @@ thumb: "/images/science/thumbs/sigmod-2025.svg"
 image: "/images/science/thumbs/sigmod-2025.png"
 excerpt: ""
 tags: ["Paper"]
+thirdparty: true
 ---
 
 [Paper (PDF)](https://db.cs.uni-tuebingen.de/publications/2025/using-key/how-duckdb-is-using-key-to-unlock-recursive-query-performance.pdf)

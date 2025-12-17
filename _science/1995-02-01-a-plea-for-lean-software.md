@@ -6,6 +6,7 @@ author: "Niklaus Wirth"
 #image: "/images/science/thumbs/vldb-2025.png"
 excerpt: ""
 tags: ["Paper"]
+thirdparty: true
 ---
 
 [Paper (PDF)](https://cr.yp.to/bib/1995/wirth.pdf)

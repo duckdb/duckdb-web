@@ -8,6 +8,7 @@ image: "/images/science/thumbs/2025-04-03-david-justen-polar.png"
 excerpt: ""
 tags: ["Podcast"]
 length: "50 min"
+thirdparty: true
 ---
 
 ## Links

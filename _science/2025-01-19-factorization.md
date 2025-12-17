@@ -6,6 +6,7 @@ thumb: "/images/science/thumbs/cidr-2025.svg"
 image: "/images/science/thumbs/cidr-2025.png"
 excerpt: ""
 tags: ["Paper"]
+thirdparty: true
 ---
 
 [Paper (PDF)](https://vldb.org/cidrdb/papers/2025/p21-gro.pdf)

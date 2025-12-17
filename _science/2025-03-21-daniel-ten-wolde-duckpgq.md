@@ -8,6 +8,7 @@ image: "/images/science/thumbs/2025-03-21-daniel-ten-wolde-duckpgq.png"
 excerpt: ""
 tags: ["Podcast"]
 length: "50 min"
+thirdparty: true
 ---
 
 ## Links

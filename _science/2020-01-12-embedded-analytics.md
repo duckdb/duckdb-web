@@ -6,6 +6,7 @@ thumb: "/images/science/thumbs/cidr-2020.svg"
 image: "/images/science/thumbs/cidr-2020.png"
 excerpt: ""
 tags: ["Paper"]
+thirdparty: false
 ---
 
 [Paper (PDF)](https://hannes.muehleisen.org/publications/CIDR2020-raasveldt-muehleisen-duckdb.pdf)

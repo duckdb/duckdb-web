@@ -5,6 +5,7 @@ author: "The Hedgineer Podcast by Michael Watson"
 excerpt: ""
 tags: ["Podcast"]
 length: "60 min"
+thirdparty: true
 ---
 
 <div class="video-container">

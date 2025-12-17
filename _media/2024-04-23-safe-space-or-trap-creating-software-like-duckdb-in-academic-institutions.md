@@ -8,6 +8,7 @@ excerpt: ""
 toc: false
 tags: ["Talk", "Landscape"]
 length: "30 min"
+thirdparty: false
 ---
 
 |-------|-------|

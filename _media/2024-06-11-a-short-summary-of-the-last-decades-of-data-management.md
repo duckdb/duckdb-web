@@ -8,6 +8,7 @@ excerpt: ""
 toc: false
 tags: ["Talk", "Landscape"]
 length: "50 min"
+thirdparty: false
 ---
 
 <div class="video-container">

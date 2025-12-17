@@ -5,6 +5,7 @@ author: "Developer Voices by Kris Jenkins"
 excerpt: ""
 tags: ["Podcast"]
 length: "70 min"
+thirdparty: true
 ---
 
 <div class="video-container">

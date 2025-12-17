@@ -8,6 +8,7 @@ image: "/images/science/thumbs/abigale-kim.png"
 excerpt: ""
 tags: ["Podcast"]
 length: "45 min"
+thirdparty: true
 ---
 
 <div class="video-container">

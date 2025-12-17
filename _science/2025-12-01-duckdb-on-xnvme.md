@@ -6,6 +6,7 @@ author: "Marius Ottosen, Magnus Keinicke Parlo, Philippe Bonnet"
 #image: ""
 excerpt: ""
 tags: ["Paper"]
+thirdparty: true
 ---
 
 [Paper (preprint PDF)](https://arxiv.org/abs/2512.01490)

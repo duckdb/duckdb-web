@@ -6,6 +6,7 @@ thumb: "/images/science/thumbs/vldb-2023.svg"
 image: "/images/science/thumbs/vldb-2023.png"
 excerpt: ""
 tags: ["Paper"]
+thirdparty: true
 ---
 
 [Paper (PDF)](https://www.vldb.org/pvldb/vol16/p4034-wolde.pdf)

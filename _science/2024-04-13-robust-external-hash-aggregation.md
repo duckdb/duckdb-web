@@ -6,6 +6,7 @@ thumb: "/images/science/thumbs/icde-2024.svg"
 image: "/images/science/thumbs/icde-2024.png"
 excerpt: ""
 tags: ["Paper"]
+thirdparty: false
 ---
 
 [Paper (PDF)](https://duckdb.org/pdf/ICDE2024-kuiper-boncz-muehleisen-out-of-core.pdf)

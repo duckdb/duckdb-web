@@ -8,6 +8,7 @@ image: "/images/science/thumbs/mihail-stoian.png"
 excerpt: ""
 tags: ["Podcast"]
 length: "35 min"
+thirdparty: true
 ---
 
 <div class="video-container">

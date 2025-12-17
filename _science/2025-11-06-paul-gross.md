@@ -8,6 +8,7 @@ image: "/images/science/thumbs/paul-gross.png"
 excerpt: ""
 tags: ["Podcast"]
 length: "50 min"
+thirdparty: true
 ---
 
 <div class="video-container">

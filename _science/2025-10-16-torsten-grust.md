@@ -8,6 +8,7 @@ image: "/images/science/thumbs/torsten-grust.png"
 excerpt: ""
 tags: ["Podcast"]
 length: "50 min"
+thirdparty: true
 ---
 
 <div class="video-container">

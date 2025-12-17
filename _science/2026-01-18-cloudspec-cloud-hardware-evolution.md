@@ -6,6 +6,7 @@ thumb: "/images/science/thumbs/cidr-2026.svg"
 image: "/images/science/thumbs/cidr-2026.png"
 excerpt: ""
 tags: ["Paper"]
+thirdparty: true
 ---
 
 [Paper (PDF)](https://www.cs.cit.tum.de/fileadmin/w00cfj/dis/papers/cloudspecs-final.pdf)

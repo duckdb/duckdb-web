@@ -6,6 +6,7 @@ thumb: "/images/science/thumbs/cidr-2024.svg"
 image: "/images/science/thumbs/cidr-2024.png"
 excerpt: ""
 tags: ["Paper"]
+thirdparty: true
 ---
 
 [Paper (PDF)](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf)

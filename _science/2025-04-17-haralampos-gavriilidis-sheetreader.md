@@ -8,6 +8,7 @@ image: "/images/science/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.png
 excerpt: ""
 tags: ["Podcast"]
 length: "40 min"
+thirdparty: true
 ---
 
 ## Links

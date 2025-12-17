@@ -8,6 +8,7 @@ image: "/images/science/thumbs/2025-04-10-arjen-p-de-vries-faiss.png"
 excerpt: ""
 tags: ["Podcast"]
 length: "45 min"
+thirdparty: true
 ---
 
 ## Links

@@ -7,6 +7,7 @@ image: "/images/media/thumbs/2025-08-27-open-lakehouse-meetup.jpg"
 excerpt: ""
 toc: false
 tags: ["Talk"]
+thirdparty: false
 ---
 
 |-------|-------|

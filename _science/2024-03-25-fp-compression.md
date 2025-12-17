@@ -6,6 +6,7 @@ thumb: "/images/science/thumbs/edbt-2024.svg"
 image: "/images/science/thumbs/edbt-2024.png"
 excerpt: ""
 tags: ["Paper"]
+thirdparty: true
 ---
 
 [Paper (PDF)](https://openproceedings.org/2024/conf/edbt/paper-248.pdf)
