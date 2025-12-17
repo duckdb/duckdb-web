@@ -2,8 +2,8 @@
 layout: post
 title: "Freely Moving Between the OLTP and OLAP Worlds: Hermes - an High-Performance OLAP Accelerator for MySQL"
 author: "Tim Gubner, Rune Humborstad, Manyi Lu"
-thumb: "/images/science/thumbs/vldb-2025.svg"
-image: "/images/science/thumbs/vldb-2025.png"
+thumb: "/images/library/thumbs/vldb-2025.svg"
+image: "/images/library/thumbs/vldb-2025.png"
 tags: ["Paper"]
 thirdparty: true
 ---

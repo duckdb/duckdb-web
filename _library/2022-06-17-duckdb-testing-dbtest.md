@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB Testing – Present and Future"
 author: Mark Raasveldt
-thumb: "/images/media/thumbs/2022-06-17-duckdb-testing-dbtest.jpg"
-image: "/images/media/thumbs/2022-06-17-duckdb-testing-dbtest.jpg"
+thumb: "/images/library/thumbs/2022-06-17-duckdb-testing-dbtest.jpg"
+image: "/images/library/thumbs/2022-06-17-duckdb-testing-dbtest.jpg"
 tags: ["Talk", "Deep Dive"]
 length: "60 min"
 thirdparty: false

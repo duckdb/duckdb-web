@@ -2,8 +2,8 @@
 layout: post
 title: "DuckLake & the Future of Open Table Formats"
 author: "Hannes Mühleisen (DuckDB Labs) and Jordan Tigani (MotherDuck)"
-thumb: "/images/media/thumbs/2025-06-17-the-future-of-open-table-formats.jpg"
-image: "/images/media/thumbs/2025-06-17-the-future-of-open-table-formats.jpg"
+thumb: "/images/library/thumbs/2025-06-17-the-future-of-open-table-formats.jpg"
+image: "/images/library/thumbs/2025-06-17-the-future-of-open-table-formats.jpg"
 tags: ["Podcast"]
 length: "60 min"
 thirdparty: false

@@ -2,8 +2,8 @@
 layout: post
 title: "The SQLite for Analytics"
 author: Mark Raasveldt
-thumb: "/images/media/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.jpg"
-image: "/images/media/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.jpg"
+thumb: "/images/library/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.jpg"
+image: "/images/library/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.jpg"
 tags: ["Talk", "Deep Dive"]
 length: "65 min"
 thirdparty: false

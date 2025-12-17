@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB keynote segment (Data + AI Summit)"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2023-07-29-duckdb-data-ai-summit-keynote-segment.jpg"
-image: "/images/media/thumbs/2023-07-29-duckdb-data-ai-summit-keynote-segment.jpg"
+thumb: "/images/library/thumbs/2023-07-29-duckdb-data-ai-summit-keynote-segment.jpg"
+image: "/images/library/thumbs/2023-07-29-duckdb-data-ai-summit-keynote-segment.jpg"
 tags: ["Talk", "Overview"]
 length: "10 min"
 thirdparty: false

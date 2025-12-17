@@ -2,8 +2,8 @@
 layout: post
 title: "BIRNE: Mixed-paradigm Workload Execution in SQL Engines"
 author: "Tim Fischer, Denis Hirn"
-thumb: "/images/science/thumbs/dbpl-2025.svg"
-image: "/images/science/thumbs/dbpl-2025.png"
+thumb: "/images/library/thumbs/dbpl-2025.svg"
+image: "/images/library/thumbs/dbpl-2025.png"
 tags: ["Paper"]
 thirdparty: true
 ---

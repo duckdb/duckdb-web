@@ -2,8 +2,8 @@
 layout: post
 title: "A Plea for Lean Software"
 author: "Niklaus Wirth"
-#thumb: "/images/science/thumbs/vldb-2025.svg"
-#image: "/images/science/thumbs/vldb-2025.png"
+#thumb: "/images/library/thumbs/vldb-2025.svg"
+#image: "/images/library/thumbs/vldb-2025.png"
 tags: ["Paper"]
 thirdparty: true
 ---

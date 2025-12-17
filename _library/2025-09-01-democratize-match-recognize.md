@@ -2,8 +2,8 @@
 layout: post
 title: "Democratize MATCH_RECOGNIZE!"
 author: "Louisa Lambrecht, Tim Findling, Samuel Heid, Marcel Knüdeler, Torsten Grust"
-thumb: "/images/science/thumbs/vldb-2025.svg"
-image: "/images/science/thumbs/vldb-2025.png"
+thumb: "/images/library/thumbs/vldb-2025.svg"
+image: "/images/library/thumbs/vldb-2025.png"
 tags: ["Paper"]
 thirdparty: true
 ---

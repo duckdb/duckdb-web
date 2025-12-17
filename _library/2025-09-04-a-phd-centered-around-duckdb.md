@@ -2,8 +2,8 @@
 layout: post
 title: "Hands-On: A PhD Centered around DuckDB"
 author: "Laurens Kuiper (DuckDB Labs)"
-thumb: "/images/media/thumbs/2025-09-04-a-phd-centered-around-duckdb.jpg"
-image: "/images/media/thumbs/2025-09-04-a-phd-centered-around-duckdb.jpg"
+thumb: "/images/library/thumbs/2025-09-04-a-phd-centered-around-duckdb.jpg"
+image: "/images/library/thumbs/2025-09-04-a-phd-centered-around-duckdb.jpg"
 tags: ["Talk"]
 length: "15 min"
 thirdparty: false

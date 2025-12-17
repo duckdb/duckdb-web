@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB: Harnessing In-Process Analytics for Data Science and Beyond"
 author: Gabor Szarnyas
-thumb: "/images/media/thumbs/2023-11-09-oredev.jpg"
-image: "/images/media/thumbs/2023-11-09-oredev.jpg"
+thumb: "/images/library/thumbs/2023-11-09-oredev.jpg"
+image: "/images/library/thumbs/2023-11-09-oredev.jpg"
 tags: ["talk"]
 length: "40 min"
 thirdparty: false

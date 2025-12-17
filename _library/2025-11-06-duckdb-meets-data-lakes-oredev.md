@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB Meets Data Lakes"
 author: Gábor Szárnyas
-thumb: "/images/media/thumbs/2025-11-06-duckdb-meets-data-lakes-oredev.jpg"
-image: "/images/media/thumbs/2025-11-06-duckdb-meets-data-lakes-oredev.jpg"
+thumb: "/images/library/thumbs/2025-11-06-duckdb-meets-data-lakes-oredev.jpg"
+image: "/images/library/thumbs/2025-11-06-duckdb-meets-data-lakes-oredev.jpg"
 tags: ["Talk"]
 length: "40 min"
 thirdparty: false

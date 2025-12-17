@@ -2,8 +2,8 @@
 layout: post
 title: "Minus Three Tier: Data Architecture Turned Upside Down"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2025-09-26-data-architecture-turned-upside-down.jpg"
-image: "/images/media/thumbs/2025-09-26-data-architecture-turned-upside-down.jpg"
+thumb: "/images/library/thumbs/2025-09-26-data-architecture-turned-upside-down.jpg"
+image: "/images/library/thumbs/2025-09-26-data-architecture-turned-upside-down.jpg"
 tags: ["Talk"]
 length: "40 min"
 thirdparty: false

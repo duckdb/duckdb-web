@@ -2,8 +2,8 @@
 layout: post
 title: "Going beyond Two Tier Data Architectures with DuckDB"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2024-09-12-going-beyond-two-tier-architectures-with-duckdb.jpg"
-image: "/images/media/thumbs/2024-09-12-going-beyond-two-tier-architectures-with-duckdb.jpg"
+thumb: "/images/library/thumbs/2024-09-12-going-beyond-two-tier-architectures-with-duckdb.jpg"
+image: "/images/library/thumbs/2024-09-12-going-beyond-two-tier-architectures-with-duckdb.jpg"
 tags: ["Talk", "Landscape",]
 length: "30 min"
 thirdparty: false

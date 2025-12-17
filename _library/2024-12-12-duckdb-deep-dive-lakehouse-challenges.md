@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB Deep Dive, the Challenges of Lakehouses, and More"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2024-12-12-duckdb-deep-dive-lakehouse-challenges.jpg"
-image: "/images/media/thumbs/2024-12-12-duckdb-deep-dive-lakehouse-challenges.jpg"
+thumb: "/images/library/thumbs/2024-12-12-duckdb-deep-dive-lakehouse-challenges.jpg"
+image: "/images/library/thumbs/2024-12-12-duckdb-deep-dive-lakehouse-challenges.jpg"
 tags: ["Podcast"]
 length: "80 min"
 thirdparty: false

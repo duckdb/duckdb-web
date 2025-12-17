@@ -2,8 +2,8 @@
 layout: post
 title: "Making Iceberg Easy with DuckDB-Iceberg"
 author: "Tom Ebergen (DuckDB Labs)"
-thumb: "/images/media/thumbs/2025-09-08-making-iceberg-easy.jpg"
-image: "/images/media/thumbs/2025-09-08-making-iceberg-easy.jpg"
+thumb: "/images/library/thumbs/2025-09-08-making-iceberg-easy.jpg"
+image: "/images/library/thumbs/2025-09-08-making-iceberg-easy.jpg"
 tags: ["Talk"]
 length: "15 min"
 thirdparty: false

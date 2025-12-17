@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB and the Future of Databases"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2025-01-09-duckdb-and-the-future-of-databases.jpg"
-image: "/images/media/thumbs/2025-01-09-duckdb-and-the-future-of-databases.jpg"
+thumb: "/images/library/thumbs/2025-01-09-duckdb-and-the-future-of-databases.jpg"
+image: "/images/library/thumbs/2025-01-09-duckdb-and-the-future-of-databases.jpg"
 tags: ["Podcast"]
 length: "60 min"
 thirdparty: false

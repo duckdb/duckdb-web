@@ -3,8 +3,8 @@ layout: post
 title: "DuckDB in Research S02E01: Torsten Grust"
 subtitle: "Common Table Extensions and DuckDB in Education"
 author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/science/thumbs/torsten-grust.png"
-image: "/images/science/thumbs/torsten-grust.png"
+thumb: "/images/library/thumbs/torsten-grust.png"
+image: "/images/library/thumbs/torsten-grust.png"
 tags: ["Podcast"]
 length: "50 min"
 thirdparty: true

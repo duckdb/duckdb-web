@@ -2,8 +2,8 @@
 layout: post
 title: "How to Make your Duck Fly: Advanced Floating Point Compression to the Rescue"
 author: "Panagiotis Liakos, Katia Papakonstantinopoulou, Thijs Bruineman, Mark Raasveldt, Yannis Kotidis"
-thumb: "/images/science/thumbs/edbt-2024.svg"
-image: "/images/science/thumbs/edbt-2024.png"
+thumb: "/images/library/thumbs/edbt-2024.svg"
+image: "/images/library/thumbs/edbt-2024.png"
 tags: ["Paper"]
 thirdparty: true
 ---

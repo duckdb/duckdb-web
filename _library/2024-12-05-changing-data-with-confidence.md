@@ -2,8 +2,8 @@
 layout: post
 title: "Changing Data with Confidence"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2024-12-05-changing-data-with-confidence.jpg"
-image: "/images/media/thumbs/2024-12-05-changing-data-with-confidence.jpg"
+thumb: "/images/library/thumbs/2024-12-05-changing-data-with-confidence.jpg"
+image: "/images/library/thumbs/2024-12-05-changing-data-with-confidence.jpg"
 tags: ["Talk"]
 length: "30 min"
 thirdparty: false

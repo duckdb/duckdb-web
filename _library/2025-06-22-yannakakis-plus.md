@@ -2,8 +2,8 @@
 layout: post
 title: "Yannakakis+: Practical Acyclic Query Evaluation with Theoretical Guarantees"
 author: "Qichen Wang, Bingnan Chen, Binyang Dai, Ke Yi, Feifei Li, Liang Lin"
-thumb: "/images/science/thumbs/sigmod-2025.svg"
-image: "/images/science/thumbs/sigmod-2025.png"
+thumb: "/images/library/thumbs/sigmod-2025.svg"
+image: "/images/library/thumbs/sigmod-2025.png"
 tags: ["Paper"]
 thirdparty: true
 ---

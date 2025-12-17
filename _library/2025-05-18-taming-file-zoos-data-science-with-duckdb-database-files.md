@@ -2,8 +2,8 @@
 layout: post
 title: "Taming File Zoos: Data Science with DuckDB Database Files"
 author: Alex Monahan
-thumb: "/images/media/thumbs/2025-05-18-taming-file-zoos-data-science-with-duckdb-database-files.jpg"
-image: "/images/media/thumbs/2025-05-18-taming-file-zoos-data-science-with-duckdb-database-files.jpg"
+thumb: "/images/library/thumbs/2025-05-18-taming-file-zoos-data-science-with-duckdb-database-files.jpg"
+image: "/images/library/thumbs/2025-05-18-taming-file-zoos-data-science-with-duckdb-database-files.jpg"
 tags: ["Talk"]
 length: "30 min"
 thirdparty: false

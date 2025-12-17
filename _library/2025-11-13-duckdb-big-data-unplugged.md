@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB: Big Data Unplugged"
 author: Gábor Szárnyas
-thumb: "/images/media/thumbs/2025-11-13-duckdb-big-data-unplugged.jpg"
-image: "/images/media/thumbs/2025-11-13-duckdb-big-data-unplugged.jpg"
+thumb: "/images/library/thumbs/2025-11-13-duckdb-big-data-unplugged.jpg"
+image: "/images/library/thumbs/2025-11-13-duckdb-big-data-unplugged.jpg"
 tags: ["Talk"]
 length: "30 min"
 thirdparty: false

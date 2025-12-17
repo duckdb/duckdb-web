@@ -3,8 +3,8 @@ layout: post
 title: "DuckDB in Research S02E02: Abigale Kim"
 subtitle: "Anarchy in the Database: Abigale Kim on DuckDB and DBMS Extensibility"
 author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/science/thumbs/abigale-kim.png"
-image: "/images/science/thumbs/abigale-kim.png"
+thumb: "/images/library/thumbs/abigale-kim.png"
+image: "/images/library/thumbs/abigale-kim.png"
 tags: ["Podcast"]
 length: "45 min"
 thirdparty: true

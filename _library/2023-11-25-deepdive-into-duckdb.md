@@ -2,8 +2,8 @@
 layout: post
 title: "Deep Dive into DuckDB"
 author: Mark Raasveldt
-thumb: "/images/media/thumbs/2023-11-25-deepdive-into-duckdb.jpg"
-image: "/images/media/thumbs/2023-11-25-deepdive-into-duckdb.jpg"
+thumb: "/images/library/thumbs/2023-11-25-deepdive-into-duckdb.jpg"
+image: "/images/library/thumbs/2023-11-25-deepdive-into-duckdb.jpg"
 tags: ["Podcast"]
 length: "65 min"
 thirdparty: false

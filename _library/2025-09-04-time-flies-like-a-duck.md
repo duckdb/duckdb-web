@@ -2,8 +2,8 @@
 layout: post
 title: "Time Flies like a Duck"
 author: "Richard Wesley (DuckDB Labs)"
-thumb: "/images/media/thumbs/2025-09-04-time-flies-like-a-duck.jpg"
-image: "/images/media/thumbs/2025-09-04-time-flies-like-a-duck.jpg"
+thumb: "/images/library/thumbs/2025-09-04-time-flies-like-a-duck.jpg"
+image: "/images/library/thumbs/2025-09-04-time-flies-like-a-duck.jpg"
 tags: ["Talk"]
 length: "20 min"
 thirdparty: false

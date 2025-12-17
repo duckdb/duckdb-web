@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB with Hannes Mühleisen"
 author: Hannes Mühleisen
-thumb: "/images/media/thumbs/2024-08-08-duckdb-with-hannes-muehleisen.jpg"
-image: "/images/media/thumbs/2024-08-08-duckdb-with-hannes-muehleisen.jpg"
+thumb: "/images/library/thumbs/2024-08-08-duckdb-with-hannes-muehleisen.jpg"
+image: "/images/library/thumbs/2024-08-08-duckdb-with-hannes-muehleisen.jpg"
 tags: ["Podcast"]
 length: "45 min"
 thirdparty: false

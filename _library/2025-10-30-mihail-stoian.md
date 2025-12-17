@@ -3,8 +3,8 @@ layout: post
 title: "DuckDB in Research S02E03: Mihail Stoian"
 subtitle: "Rethinking Query Execution and Bidirectional Information Flow in DuckDB"
 author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/science/thumbs/mihail-stoian.png"
-image: "/images/science/thumbs/mihail-stoian.png"
+thumb: "/images/library/thumbs/mihail-stoian.png"
+image: "/images/library/thumbs/mihail-stoian.png"
 tags: ["Podcast"]
 length: "35 min"
 thirdparty: true
