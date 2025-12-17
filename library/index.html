@@ -44,13 +44,13 @@ redirect_from:
 				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
 			{% endfor %}
 			<div class="sciencepreview postpreview {{ tag_classes | downcase }}" data-title="{{ library_item.title | escape }}">
-				<a href="/science/{{ library_item.slug | default: library_item.title | slugify }}/" title="{{ library_item.title }}" class="blocklink"></a>
+				<a href="/library/{{ library_item.slug | default: library_item.title | slugify }}/" title="{{ library_item.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if library_item.thumb %}
 						<img src="{{ library_item.thumb }}" alt="{{ library_item.title }}" class="zoom-image">
 					{% else %}
 						{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
-						<img src="/images/science/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+						<img src="/images/library/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
 					{% endif %}
 				</div>
 				<div class="postdetails">
