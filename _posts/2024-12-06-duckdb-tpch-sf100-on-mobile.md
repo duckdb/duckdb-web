@@ -115,7 +115,7 @@ The total runtime of the TPC-H SF100 queries was 407.9 seconds – hence our bas
 Here is a video of Hannes presenting the results at the event:
 
 <div align="center">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/H1N2Jr34jwU?si=7wYychjmxpRWPqcm&amp;start=1617" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/H1N2Jr34jwU?si=7wYychjmxpRWPqcm&amp;start=1617" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 And here are all results visualized on a plot:

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lsh
   description: Extension for locality-sensitive hashing (LSH)
-  version: 0.2.0
+  version: 0.2.1
   language: Rust
   build: cargo
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: princeton-ddss/lsh
-  ref: f71843eeea4817ad4555cc989634fa19b845a410
+  ref: 1df52d0ada664e9282d6c7c5d572f743163e2874
 
 docs:
   hello_world: |
@@ -40,10 +40,10 @@ docs:
   extended_description: |
     For more information regarding usage, see the [documentation](https://github.com/princeton-ddss/lsh).
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 542
-extension_download_count_pretty: 542
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 130
+extension_download_count_pretty: 130
 image: '/images/community_extensions/social_preview/preview_community_extension_lsh.png'
 layout: community_extension_doc
 ---

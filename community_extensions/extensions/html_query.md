@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: html_query
   description: Query HTML using CSS selectors, extract JSON from LD+JSON and JavaScript variables
-  version: 0.1.0
+  version: 0.1.1
   language: Rust
   build: cargo
   license: MIT
@@ -19,12 +19,12 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb_html_query
-  ref: 64efcbce6263f7b186997eb6fa8722fa4bd014bf
+  ref: c7c101b27a0123ccb87526e9aa2e7c6b512e3b0a
 
 docs:
   hello_world: |
-    -- Extract first matching element
-    SELECT html_query('<html><title>Hello World</title></html>', 'title', true);
+    -- Extract text from first matching element
+    SELECT html_query('<html><title>Hello World</title></html>', 'title', '@text');
     ┌─────────────┐
     │ html_query  │
     │   varchar   │
@@ -32,14 +32,14 @@ docs:
     │ Hello World │
     └─────────────┘
 
-    -- Extract all matching elements as JSON array
-    SELECT html_query_all('<div><p>First</p><p>Second</p></div>', 'p', true);
-    ┌────────────────────┐
-    │   html_query_all   │
-    │      varchar       │
-    ├────────────────────┤
-    │ ["First","Second"] │
-    └────────────────────┘
+    -- Extract all matching elements as VARCHAR[]
+    SELECT html_query_all('<div><p>First</p><p>Second</p></div>', 'p', '@text');
+    ┌────────────────┐
+    │ html_query_all │
+    │   varchar[]    │
+    ├────────────────┤
+    │ [First,Second] │
+    └────────────────┘
 
     -- Extract JSON from LD+JSON scripts (returns array)
     SELECT html_extract_json(
@@ -60,38 +60,50 @@ docs:
 
     | Function | Returns | Description |
     |----------|---------|-------------|
-    | `html_query(html, selector?, text_only?)` | VARCHAR | First matching element |
-    | `html_query_all(html, selector?, text_only?)` | JSON array | All matching elements |
+    | `html_query(html, selector?, extract?)` | VARCHAR | First matching element |
+    | `html_query_all(html, selector?, extract?)` | VARCHAR[] | All matching elements as list |
     | `html_extract_json(html, selector, var_pattern?)` | JSON array | JSON from script tags |
 
-    ### `html_query(html, selector, text_only)`
+    All functions accept both VARCHAR and BLOB input types.
+
+    ### Extract Parameter
+
+    The `extract` parameter specifies what to extract from matched elements:
+
+    | Value | Description |
+    |-------|-------------|
+    | (omitted) | Full HTML of element |
+    | `@text` or `text` | Inner text content |
+    | `@href`, `href` | href attribute |
+    | `@src`, `src` | src attribute |
+    | `data-test-id` | Any attribute name |
+    | `['@href', '@text']` | Multiple attributes as JSON object |
+
+    ### `html_query(html, selector, extract)`
 
     Extract first HTML element matching CSS selector.
 
-    **Parameters:**
-    - `html` (VARCHAR): HTML content to parse
-    - `selector` (VARCHAR, optional): CSS selector (default: `:root`)
-    - `text_only` (BOOLEAN, optional): Extract text only (default: false)
-
-    **Returns:** VARCHAR - First matched element, or NULL if no match
-
     **Examples:**
     ```sql
-    SELECT html_query(html, 'title', true) FROM pages;
-    SELECT html_query(html, 'p:last-child', true) FROM pages;
+    SELECT html_query(html, 'title', '@text') FROM pages;
+    SELECT html_query(html, 'a.nav-link', '@href') FROM pages;
+    SELECT html_query(html, 'div.content') FROM pages;  -- returns HTML
     ```
 
-    ### `html_query_all(html, selector, text_only)`
+    ### `html_query_all(html, selector, extract)`
 
-    Extract all HTML elements matching CSS selector as JSON array.
+    Extract all HTML elements matching CSS selector as VARCHAR[].
 
     **Examples:**
     ```sql
-    SELECT html_query_all(html, 'p', true) FROM pages;
-    -- Returns: ["First paragraph", "Second paragraph"]
+    SELECT html_query_all(html, 'a', '@href') FROM pages;
+    -- Returns: [/home, /about, /contact]
 
-    SELECT html_query_all(html, 'a', true)->>0 FROM pages;
-    -- Access first element
+    SELECT list_extract(html_query_all(html, 'a', '@href'), 2) FROM pages;
+    -- Access second element
+
+    SELECT html_query_all(html, 'a', ['@href', '@text']) FROM pages;
+    -- Returns: [{"href":"/home","text":"Home"}, ...]
     ```
 
     ### `html_extract_json(html, selector, var_pattern)`
@@ -117,10 +129,10 @@ docs:
     - Pseudo: `:first-child`, `:last-child`, `:nth-child(n)`
     - Combinators: `div > p`, `div p`
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 113
-extension_download_count_pretty: 113
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 163
+extension_download_count_pretty: 163
 image: '/images/community_extensions/social_preview/preview_community_extension_html_query.png'
 layout: community_extension_doc
 ---

@@ -1,0 +1,120 @@
+---
+layout: post
+title: "Iceberg in the Browser"
+author: "Carlo Piovesan, Tom Ebergen, Gábor Szárnyas"
+thumb: "/images/blog/thumbs/iceberg-in-the-browser.svg"
+image: "/images/blog/thumbs/iceberg-in-the-browser.png"
+excerpt: "DuckDB is the first end-to-end interface to Iceberg REST Catalogs within a browser tab. You can now read and write tables in Iceberg catalogs without needing to manage any infrastructure – directly from your browser!"
+tags: ["deep dive"]
+---
+
+In this post, we describe the current patterns for interacting with Iceberg Catalogs, and pose the question: could it be done from a browser?
+After elaborating on the DuckDB ecosystem changes required to unlock this capability, we demonstrate our approach to interacting with an Iceberg REST Catalog.
+It's browser-only, no extra setup required.
+
+## Interaction Models for Iceberg Catalogs
+
+![Iceberg analytics today](/images/blog/iceberg-wasm/iceberg-analytics-today-dark.svg){: .darkmode-img }
+![Iceberg analytics today](/images/blog/iceberg-wasm/iceberg-analytics-today-light.svg){: .lightmode-img }
+
+_Iceberg_ is an _open table format,_ which allows you to capture a mutable database table as a set of static files on object storage (such as AWS S3).
+_Iceberg catalogs_ allow you to track and organize Iceberg tables.
+For example, [Iceberg REST Catalogs](https://iceberg.apache.org/rest-catalog-spec/) provide these functionalities through a REST API.
+
+There are two common ways to interact with Iceberg catalogs:
+
+* The *client–server model,* where the compute part of the operation is delegated to a managed infrastructure (such as the cloud). Users can interact with the server by installing a local client or using a lightweight client such as a browser.
+* The *client-is-the-server model,* where the user first installs the relevant libraries, and then performs queries directly on their machine.
+
+Iceberg engines follow these interaction models: they are either run natively in managed compute infrastructure or they are run locally by the user.
+Let's see how things look with DuckDB in the mix!
+
+## Iceberg with DuckDB
+
+![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-dark.svg){: .darkmode-img }
+![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-light.svg){: .lightmode-img }
+
+DuckDB supports both Iceberg interaction models.
+In the *client–server model,* DuckDB runs on the server to read the Iceberg datasets.
+From the user's point of view, the choice of engine is transparent, and DuckDB is just one of many engines that the server could use in the background.
+The *client-is-the-server* model is more interesting:
+here, users [install a DuckDB client locally]({% link install/index.html %})
+and use it through its SQL interface to query Iceberg catalogs.
+For example:
+
+```sql
+CREATE SECRET test_secret (
+    TYPE S3, 
+    KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
+    SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩'
+);
+
+ATTACH '⟨warehouse⟩' AS db (
+    TYPE ICEBERG,
+    ENDPOINT_URL '⟨https://your-iceberg-endpoint⟩',
+);
+
+SELECT sum(value)
+FROM db.table
+WHERE other_column = '⟨some_value⟩';
+```
+
+The client-is-the-server model unlocks [empowered clients](https://youtu.be/YQEUkFWa69o?t=3085), which can operate directly on the data.
+
+> You can discover the full DuckDB-Iceberg extension feature set, including insert and update capabilities, in our [earlier blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}).
+
+## Iceberg with DuckDB in the Browser
+
+While setting up a local DuckDB installation is quite simple, opening a browser tab is even quicker.
+Therefore, we asked ourselves: could we support the *client-is-the-server* model directly from within a browser tab?
+This could provide a zero-setup, no-infrastructure, properly serverless option for interacting with Iceberg catalogs.
+
+![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-dark.svg){: .darkmode-img }
+![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
+
+Luckily, DuckDB has a client that can run in any browser!
+[DuckDB-Wasm]({% link docs/stable/clients/wasm/overview.md %}) is a WebAssembly port of DuckDB, which [supports loading of extensions]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
+
+Interacting with an Iceberg REST Catalog requires a number of functionalities; the ability to talk to a REST API over HTTP(S), the ability to read and write `avro` and `parquet` files on object storage, and finally, the ability to negotiate authentication to access those resources on behalf of the user. All of these must be done from within a browser without calling any native components.
+
+To support these functionalities, we implemented the following high-level changes:
+
+* In the core `duckdb` codebase, we redesigned HTTP interactions, so that extensions and clients have a uniform interface to the networking stack. ([PR](https://github.com/duckdb/duckdb/pull/17464))
+* In `duckdb-wasm`, we implemented such an interface, which in this case is a wrapper around the available JavaScript network stack. ([PR](https://github.com/duckdb/duckdb-wasm/pull/2056))
+* In `duckdb-iceberg`, we routed all networking through the common HTTP interface, so that native DuckDB and DuckDB-Wasm execute the same logic. ([PR](https://github.com/duckdb/duckdb-iceberg/pull/576))
+
+**The result is that you can now query Iceberg with DuckDB running directly in a browser!** Now you can access the same Iceberg catalog using *client–server*, *client-is-the-server*, or properly serverless from the isolation of a browser tab!
+
+## Welcome to Serverless Iceberg Analytics
+
+To see a demo of serverless Iceberg analytics, visit our table visualizer at [`duckdb.org/visualizer?iceberg`]({% link visualizer/index.html %}?iceberg).
+
+<video muted controls loop width="700">
+  <source src="https://blobs.duckdb.org/videos/iceberg-wasm-demo.mp4" type="video/mp4" />
+</video>
+
+> The current credentials in the demo are provided via a throwaway account with minimal permissions. If you enter your own credentials and share a link, you will be sharing your credentials.
+
+## Access Your Own Data
+
+Substituting your own S3Tables bucket ARN and credentials with policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess), you can also access your catalog, metadata and data.
+Computations are fully local, and the credentials and warehouse ID are only sent to the catalog endpoint specified in your `ATTACH` command.
+Inputs are translated to SQL, and added to the hash segment of the URL.
+
+This means that:
+
+* no sensitive data is handled or sent to `duckdb.org`
+* computations are local, fully in your browser
+* you can use the familiar SQL interface with the same code snippets that can run everywhere DuckDB runs
+* if you edit the credentials and share the resulting link, you will be sharing the new credentials
+
+As of today, this works with [Amazon S3 Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}). This has been implemented through a collaboration with the Amazon S3 Tables team.
+To learn more about S3 Tables, how to get started and their feature set, you can take a look at their [product page](https://aws.amazon.com/s3/features/tables/) or [documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
+A demo of DuckDB querying S3 Tables from a browser was presented at AWS re:Invent 2025 – [see the presentation](https://www.youtube.com/watch?v=Pi82g0YGklU&t=2603s).
+
+## Conclusion
+
+The DuckDB-Iceberg extension is now supported in DuckDB-Wasm and it can read and edit Iceberg REST Catalogs.
+Users can now access Iceberg data from within a browser, without having to install or manage any compute nodes!
+
+If you would like to provide feedback or file issues, please reach out to us on either the [DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) or [DuckDB-Iceberg](https://github.com/duckdb/duckdb-iceberg) repository. If you are interested in using any part of this within your organization, feel free to [reach out](https://duckdblabs.com/contact/).

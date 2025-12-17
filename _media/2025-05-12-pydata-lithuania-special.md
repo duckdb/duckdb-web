@@ -2,8 +2,8 @@
 layout: post
 title: "PyData Lithuania Special"
 author: Gábor Szárnyas
-thumb: "/images/media/thumbs/2025-05-12-pydata-lithuania-special.png"
-image: "/images/media/thumbs/2025-05-12-pydata-lithuania-special.png"
+thumb: "/images/media/thumbs/2025-05-12-pydata-lithuania-special.jpg"
+image: "/images/media/thumbs/2025-05-12-pydata-lithuania-special.jpg"
 excerpt: ""
 toc: false
 tags: ["Podcast"]

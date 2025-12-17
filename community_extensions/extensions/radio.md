@@ -22,10 +22,10 @@ repo:
   github: query-farm/radio
   ref: 0ace6af84ec2289c23944857fd9aded06e65ec9c
 
-extension_star_count: 34
-extension_star_count_pretty: 34
-extension_download_count: 688
-extension_download_count_pretty: 688
+extension_star_count: 35
+extension_star_count_pretty: 35
+extension_download_count: 681
+extension_download_count_pretty: 681
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---

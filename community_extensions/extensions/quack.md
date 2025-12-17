@@ -34,10 +34,10 @@ docs:
   extended_description: |
     The quack extension is based on DuckDB's [Extension Template](https://github.com/duckdb/extension-template/), and it's a great starting point to get started building more advanced extensions.
 
-extension_star_count: 246
-extension_star_count_pretty: 246
-extension_download_count: 886
-extension_download_count_pretty: 886
+extension_star_count: 247
+extension_star_count_pretty: 247
+extension_download_count: 916
+extension_download_count_pretty: 916
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---

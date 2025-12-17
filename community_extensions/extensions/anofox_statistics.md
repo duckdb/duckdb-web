@@ -16,12 +16,12 @@ extension:
   requires_toolchains: rust
 repo:
   github: DataZooDE/anofox-statistics
-  ref: 7decac30fcd8c77359d2e1320bd93e0d9cfc66b0
+  ref: ad8ddff2117ff5fd9cbf09082d52295eef784db9
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 688
-extension_download_count_pretty: 688
+extension_download_count: 666
+extension_download_count_pretty: 666
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_statistics.png'
 layout: community_extension_doc
 ---
@@ -50,16 +50,26 @@ LOAD {{ page.extension.name }};
 |             function_name              | function_type | description | comment | examples |
 |----------------------------------------|---------------|-------------|---------|----------|
 | aic                                    | scalar        | NULL        | NULL    |          |
+| aid_agg                                | aggregate     | NULL        | NULL    |          |
+| aid_anomaly_agg                        | aggregate     | NULL        | NULL    |          |
+| alm_fit_agg                            | aggregate     | NULL        | NULL    |          |
 | anofox_stats_aic                       | scalar        | NULL        | NULL    |          |
+| anofox_stats_aid_agg                   | aggregate     | NULL        | NULL    |          |
+| anofox_stats_aid_anomaly_agg           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_alm_fit_agg               | aggregate     | NULL        | NULL    |          |
 | anofox_stats_bic                       | scalar        | NULL        | NULL    |          |
+| anofox_stats_bls_fit_agg               | aggregate     | NULL        | NULL    |          |
 | anofox_stats_elasticnet_fit            | scalar        | NULL        | NULL    |          |
 | anofox_stats_elasticnet_fit_agg        | aggregate     | NULL        | NULL    |          |
 | anofox_stats_elasticnet_fit_predict    | aggregate     | NULL        | NULL    |          |
 | anofox_stats_jarque_bera               | scalar        | NULL        | NULL    |          |
 | anofox_stats_jarque_bera_agg           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_nnls_fit_agg              | aggregate     | NULL        | NULL    |          |
 | anofox_stats_ols_fit                   | scalar        | NULL        | NULL    |          |
 | anofox_stats_ols_fit_agg               | aggregate     | NULL        | NULL    |          |
 | anofox_stats_ols_fit_predict           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ols_predict_agg           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_poisson_fit_agg           | aggregate     | NULL        | NULL    |          |
 | anofox_stats_predict                   | scalar        | NULL        | NULL    |          |
 | anofox_stats_residuals_diagnostics     | scalar        | NULL        | NULL    |          |
 | anofox_stats_residuals_diagnostics_agg | aggregate     | NULL        | NULL    |          |
@@ -75,14 +85,18 @@ LOAD {{ page.extension.name }};
 | anofox_stats_wls_fit_agg               | aggregate     | NULL        | NULL    |          |
 | anofox_stats_wls_fit_predict           | aggregate     | NULL        | NULL    |          |
 | bic                                    | scalar        | NULL        | NULL    |          |
+| bls_fit_agg                            | aggregate     | NULL        | NULL    |          |
 | elasticnet_fit                         | scalar        | NULL        | NULL    |          |
 | elasticnet_fit_agg                     | aggregate     | NULL        | NULL    |          |
 | elasticnet_fit_predict                 | aggregate     | NULL        | NULL    |          |
 | jarque_bera                            | scalar        | NULL        | NULL    |          |
 | jarque_bera_agg                        | aggregate     | NULL        | NULL    |          |
+| nnls_fit_agg                           | aggregate     | NULL        | NULL    |          |
 | ols_fit                                | scalar        | NULL        | NULL    |          |
 | ols_fit_agg                            | aggregate     | NULL        | NULL    |          |
 | ols_fit_predict                        | aggregate     | NULL        | NULL    |          |
+| ols_predict_agg                        | aggregate     | NULL        | NULL    |          |
+| poisson_fit_agg                        | aggregate     | NULL        | NULL    |          |
 | residuals_diagnostics                  | scalar        | NULL        | NULL    |          |
 | residuals_diagnostics_agg              | aggregate     | NULL        | NULL    |          |
 | ridge_fit                              | scalar        | NULL        | NULL    |          |

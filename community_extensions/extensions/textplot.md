@@ -22,10 +22,10 @@ repo:
   github: query-farm/textplot
   ref: d3b90faa3372d4204915343546fa0556601bf243
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 1291
-extension_download_count_pretty: 1.3k
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 1581
+extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_textplot.png'
 layout: community_extension_doc
 ---
