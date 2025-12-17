@@ -11,6 +11,6 @@ thirdparty: false
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Podcast** | [Data Engineering Podcast](https://www.dataengineeringpodcast.com/) |
+| **Podcast** | [Data Engineering Podcast by Joe Reis](https://www.dataengineeringpodcast.com/) |
 | **Speakers** | [Mark Raasveldt](https://mytherin.github.io/) (DuckDB Labs) and [Hannes Mühleisen](https://hannes.muehleisen.org/) (DuckDB Labs) |
 | **Episode site** | [Listen to the podcast episode](https://www.dataengineeringpodcast.com/episodepage/duck-lake-simplifying-the-lakehouse-ecosystem) |

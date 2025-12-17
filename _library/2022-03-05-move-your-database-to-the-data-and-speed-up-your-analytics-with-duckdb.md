@@ -11,6 +11,6 @@ thirdparty: false
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Podcast** | [Data Engineering Podcast](https://www.dataengineeringpodcast.com/) |
+| **Podcast** | [Data Engineering Podcast by Joe Reis](https://www.dataengineeringpodcast.com/) |
 | **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
 | **Episode site** | [Listen](https://www.dataengineeringpodcast.com/episodepage/duckdb-in-process-olap-database-episode-270) |

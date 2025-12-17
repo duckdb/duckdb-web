@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Beyond Database Optimization with AI – The Data Engineering Show"
+title: "Beyond Database Optimization with AI – The Data Engineering Podcast"
 author: Hannes Mühleisen
 thumb: "/images/media/thumbs/2025-03-19-data-engineering-show-beyond-database-optimization-with-ai.jpg"
 image: "/images/media/thumbs/2025-03-19-data-engineering-show-beyond-database-optimization-with-ai.jpg"
@@ -15,7 +15,7 @@ thirdparty: false
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Podcast series** | [The Data Engineering Show](https://www.dataengineeringpodcast.com/episodepage/introducing-the-show) |
+| **Podcast series** | [The Data Engineering Podcast by Joe Reis](https://www.dataengineeringpodcast.com/episodepage/introducing-the-show) |
 | **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
 | **Podcast site** | [Listen on the podcast site](https://www.dataengineeringshow.com/e/18pv9vz8-beyond-database-optimization-with-ai) |
 | **Spotify** | [Listen on Spotify](https://open.spotify.com/episode/2MkvDI6jo6mEkcHuUjhI0w) |
