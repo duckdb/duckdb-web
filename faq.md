@@ -519,10 +519,9 @@ You should be particularly cautious when downloading binaries and installation s
 
 Websites:
 
-* [`duckdb.org`](https://duckdb.org/): DuckDB
-* [`duckdb.io`](https://duckdb.io/): redirects to `duckdb.org`
+* [`duckdb.org`](https://duckdb.org/) and [`duckdb.io`](https://duckdb.io/): DuckDB
 * [`duckdblabs.com`](https://duckdblabs.com/): DuckDB Labs
-* [`ducklake.select`](https://ducklake.select/): DuckLake
+* [`ducklake.select`](https://ducklake.select/) and [`ducklake.dev`](https://ducklake.dev/): DuckLake
 
 Social media:
 
