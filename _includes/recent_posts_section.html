@@ -35,7 +35,7 @@
 					{% assign tag_classes = item.tags | default: "" | join: ' ' %}
 					
 					{% if page.collection == "library" %}
-						<div class="mediapreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}">
+						<div class="sciencepreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}">
 							<a href="/library/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
 							<div class="postimg custom">
 								{% if item.thumb %}
