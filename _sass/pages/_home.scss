@@ -547,6 +547,7 @@ body.landing{
 	section.welcome{
 		z-index: 11;
 		.flexwrap{
+			gap: 32px;
 			-webkit-box-align: start;
 				-ms-flex-align: start;
 					align-items: flex-start;
@@ -736,12 +737,16 @@ body.landing{
 
 
 
-@media only screen and (max-width: 1200px) {
-	body.landing{
-		section.welcome .flexwrap .duckdb{
-			margin-left: 15px;
-		}
-	} 
+@media (max-width: 1200px) {
+  body.landing section.welcome .flexwrap {
+	.duckdb {
+		margin-left: 15px;
+	}
+	.window {
+		width: auto;
+		flex: 1;
+	}
+  }
 }
 
 
