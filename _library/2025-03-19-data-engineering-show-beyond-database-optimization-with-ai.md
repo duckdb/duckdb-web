@@ -2,7 +2,7 @@
 layout: post
 title: "Beyond Database Optimization with AI – The Data Engineering Show"
 author: Hannes Mühleisen
-thumb: "/images/library/thumbs/placeholder-duckdb.jpg"
+thumb: "/images/library/thumbs/placeholder-duckdb.svg"
 image: "/images/library/thumbs/placeholder-duckdb.jpg"
 tags: ["Podcast"]
 length: "40 min"

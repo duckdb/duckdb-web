@@ -2,7 +2,7 @@
 layout: post
 title: "Robust External Hash Aggregation in the Solid State Age"
 author: "Laurens Kuiper, Peter A. Boncz, Hannes Mühleisen"
-thumb: "/images/library/thumbs/placeholder-duckdb.jpg"
+thumb: "/images/library/thumbs/placeholder-duckdb.svg"
 image: "/images/library/thumbs/placeholder-duckdb.jpg"
 tags: ["Paper"]
 thirdparty: false

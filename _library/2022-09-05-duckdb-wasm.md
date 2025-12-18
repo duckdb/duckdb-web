@@ -2,7 +2,7 @@
 layout: post
 title: "DuckDB-Wasm: Fast Analytical Processing for the Web"
 author: "André Kohn, Dominik Moritz, Mark Raasveldt, Hannes Mühleisen, Thomas Neumann"
-thumb: "/images/library/thumbs/placeholder-duckdb.jpg"
+thumb: "/images/library/thumbs/placeholder-duckdb.svg"
 image: "/images/library/thumbs/placeholder-duckdb.jpg"
 tags: ["Paper"]
 thirdparty: false

@@ -3,7 +3,7 @@ layout: post
 title: "Integrating Analytics with Relational Databases"
 subtitle: "PhD dissertation"
 author: "Mark Raasveldt"
-thumb: "/images/library/thumbs/placeholder-duckdb.jpg"
+thumb: "/images/library/thumbs/placeholder-duckdb.svg"
 image: "/images/library/thumbs/placeholder-duckdb.jpg"
 tags: ["Book"]
 thirdparty: false
