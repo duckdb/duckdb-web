@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "20 min"
 thirdparty: false
 excerpt: ""
-pill: "DuckDB Science"
+pill: "DuckDB in Science"
 ---
 
 <div class="video-container">
