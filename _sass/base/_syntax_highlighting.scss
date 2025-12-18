@@ -41,7 +41,7 @@
 	// type names
 	:is(.nb, .bp, .vcb)
 	{
-		color: #0000ff;
+		color: #0000FF;
 		font-family: $fontMonoBold;
 	}
 
@@ -61,7 +61,7 @@
 	// numbers
 	:is(.m, .mf, .mh, .mi, .mo, .il)
 	{
-		color: #CE33C0;
+		color: #D100BE;
 	}
 
 	// prompt
@@ -73,7 +73,7 @@
 	// attributes (used for placeholders within angle brackets)
 	:is(.ge)
 	{
-		color: #FF5F5F;
+		color: #D70000;
 		font-family: $fontMonoItalicBold;
 	}
 }
@@ -129,7 +129,7 @@ html.darkmode, .dark {
 		// type names
 		:is(.nb, .bp, .vcb)
 		{
-			color: #1E90FF;
+			color: #0087FF;
 			font-family: $fontMonoBold;
 		}
 
@@ -142,7 +142,7 @@ html.darkmode, .dark {
 		// functions
 		:is(.nf, .nt, .na)
 		{
-			color: #23974a;
+			color: #00AB38;
 			font-family: $fontMonoBold;
 		}
 
