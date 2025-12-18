@@ -4,7 +4,7 @@
 			{% if page.collection == "events" %}
 				Other Events
 			{% elsif page.collection == "library" %}
-				<!-- Other Library Resources -->
+				Other Library Resources
 			{% elsif page.collection == "everywhere" %}
 				Other Everywhere Posts
 			{% else %}
@@ -35,7 +35,6 @@
 					{% assign tag_classes = item.tags | default: "" | join: ' ' %}
 					
 					{% if page.collection == "library" %}
-					<!--
 						{% if item.title contains "ducklake" or item.title contains "DuckLake" %}
 							{% assign data_source = "ducklake" %}
 						{% elsif item.thirdparty == true %}
@@ -49,7 +48,7 @@
 						{% else %}
 							{% assign data_type = "" %}
 						{% endif %}
-						<div class="sciencepreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}" data-source="{{ data_source }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
+						<div class="librarypreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}" data-source="{{ data_source }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
 							<a href="/library/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
 							<div class="postimg custom">
 								{% if item.thumb %}
@@ -87,7 +86,7 @@
 								</div>
 							</div>
 						</div>
-					-->
+						
 					{% else %}
 						{% if item.external_post_url %}
 							{% assign is_external = true %}
