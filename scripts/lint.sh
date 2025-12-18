@@ -22,7 +22,7 @@ if ! $(which vale); then
 fi
 
 vale sync
-vale docs/stable/ _posts/ _media/ _science/
+vale docs/stable/ _library/
 
 if ag --md -l "https://www.youtube.com/embed/"; then
     echo 'Found "https://www.youtube.com/embed/ strings, please use "https://www.youtube-nocookie.com/embed/" instead'

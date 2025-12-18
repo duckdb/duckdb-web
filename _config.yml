@@ -57,15 +57,12 @@ plugins:
   - jekyll-toc
 
 collections:
-  media:
-    output: true
-    permalink: /media/:title/
   events:
     output: true
     permalink: /events/:year/:month/:day/:title/
-  science:
+  library:
     output: true
-    permalink: /science/:title/
+    permalink: /library/:title/
   everywhere:
     output: true
     permalink: /everywhere/:title/

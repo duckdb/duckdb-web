@@ -46,16 +46,12 @@
               "url": "/news/"
             },
             {
-              "page": "Media",
-              "url": "/media/"
+              "page": "Library",
+              "url": "/library/"
             },
             {
               "page": "Events",
               "url": "/events/"
-            },
-            {
-              "page": "Science",
-              "url": "/science/"
             },
             {
               "page": "Webshop",

@@ -95,10 +95,9 @@
 											{% if page.event != true and page.collection != "events" %}
 												<div class="publishedinfo">
 													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
-													{% if page.collection == "media" %}
+													{% if page.collection == "library" %}
 														<span class="bullet">&middot;</span>
 														<span class="readingtime">{{ page.length }}</span>
-													{% elsif page.collection == "science" %}
 													{% else %}
 														<span class="bullet">&middot;</span>
 														<span class="readingtime">{{ content | reading_time }}</span>

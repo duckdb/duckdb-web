@@ -313,7 +313,7 @@ If you are unsure about the DuckDB version used in a process, run the `PRAGMA ve
 
 <div class="answer" markdown="1">
 
-DuckDB has an the official [documentation]({% link docs/stable/index.md %}), [blog]({% link news/index.html %}) and [media collection]({% link media/index.html %}).
+DuckDB has an the official [documentation]({% link docs/stable/index.md %}), [blog]({% link news/index.html %}) and [library]({% link library/index.html %}).
 At the same time, there are a few third-party resources which can help you learn more about DuckDB:
 
 * To discover projects using DuckDB, we recommend visiting the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
