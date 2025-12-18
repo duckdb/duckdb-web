@@ -35,6 +35,7 @@
 					{% assign tag_classes = item.tags | default: "" | join: ' ' %}
 					
 					{% if page.collection == "library" %}
+					
 						{% if item.title contains "ducklake" or item.title contains "DuckLake" %}
 							{% assign data_source = "ducklake" %}
 						{% elsif item.thirdparty == true %}
