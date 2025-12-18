@@ -7,6 +7,7 @@ image: "/images/library/thumbs/edbt.png"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
+pill: "EDBT"
 ---
 
 [Paper (PDF)](https://openproceedings.org/2024/conf/edbt/paper-248.pdf)

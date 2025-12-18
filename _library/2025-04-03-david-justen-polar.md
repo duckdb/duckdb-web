@@ -9,6 +9,8 @@ tags: ["Podcast"]
 length: "50 min"
 thirdparty: true
 excerpt: ""
+pill: "DuckDB in Research"
+episode: "S01E03"
 ---
 
 ## Links

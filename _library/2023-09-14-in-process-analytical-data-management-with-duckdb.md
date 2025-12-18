@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "20 min"
 thirdparty: false
 excerpt: ""
+pill: "PyData"
 ---
 
 <div class="video-container">

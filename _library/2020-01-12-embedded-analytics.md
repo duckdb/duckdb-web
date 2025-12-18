@@ -7,6 +7,7 @@ image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
 thirdparty: false
 excerpt: ""
+pill: "CIDR"
 ---
 
 [Paper (PDF)](https://hannes.muehleisen.org/publications/CIDR2020-raasveldt-muehleisen-duckdb.pdf)

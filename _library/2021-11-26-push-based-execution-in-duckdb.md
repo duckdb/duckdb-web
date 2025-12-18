@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "20 min"
 thirdparty: false
 excerpt: ""
+pill: "Dutch Seminar on Data Systems Design seminar"
 ---
 
 <div class="video-container">

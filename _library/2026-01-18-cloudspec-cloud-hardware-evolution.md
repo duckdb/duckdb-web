@@ -3,10 +3,11 @@ layout: post
 title: "Cloudspecs: Cloud Hardware Evolution Through the Looking Glass"
 author: "Till Steinert, Maximilian Kuschewski, Viktor Leis"
 thumb: "/images/library/thumbs/cidr.svg"
-image: "/images/library/thumbs/cidr.png"
+image: "/images/library/thumbs/cidr.jpg"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
+pill: "CIDR"
 ---
 
 [Paper (PDF)](https://www.cs.cit.tum.de/fileadmin/w00cfj/dis/papers/cloudspecs-final.pdf)

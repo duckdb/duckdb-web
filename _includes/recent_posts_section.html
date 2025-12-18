@@ -36,7 +36,20 @@
 					
 					{% if page.collection == "library" %}
 					<!--
-						<div class="sciencepreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}">
+						{% if item.title contains "ducklake" or item.title contains "DuckLake" %}
+							{% assign data_source = "ducklake" %}
+						{% elsif item.thirdparty == true %}
+							{% assign data_source = "thirdparty" %}
+						{% else %}
+							{% assign data_source = "duckdb" %}
+						{% endif %}
+						{% comment %} Determine data-type value from first tag {% endcomment %}
+						{% if item.tags and item.tags.size > 0 %}
+							{% assign data_type = item.tags[0] | downcase %}
+						{% else %}
+							{% assign data_type = "" %}
+						{% endif %}
+						<div class="sciencepreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}" data-source="{{ data_source }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
 							<a href="/library/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
 							<div class="postimg custom">
 								{% if item.thumb %}
@@ -44,6 +57,16 @@
 								{% else %}
 									{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
 									<img src="/images/library/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+								{% endif %}
+								{% if item.pill or item.episode %}
+									<div class="pill-container">
+										{% if item.pill %}
+											<span class="pill-tag">{{ item.pill }}</span>
+										{% endif %}
+										{% if item.episode %}
+											<span class="pill-tag episode-tag">{{ item.episode }}</span>
+										{% endif %}
+									</div>
 								{% endif %}
 							</div>
 							<div class="postdetails">

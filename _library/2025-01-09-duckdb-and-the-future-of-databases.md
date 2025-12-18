@@ -8,6 +8,7 @@ tags: ["Podcast"]
 length: "60 min"
 thirdparty: false
 excerpt: ""
+pill: "Posit – Data Science Hangout"
 ---
 
 <div class="video-container">

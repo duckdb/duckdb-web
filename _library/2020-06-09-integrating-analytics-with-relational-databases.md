@@ -8,6 +8,7 @@ image: "/images/library/thumbs/integrating-analytics-with-relational-databases.p
 tags: ["Book"]
 thirdparty: false
 excerpt: ""
+pill: "Integrating Analytics with Relational Databases"
 ---
 
 [PDF](https://ir.cwi.nl/pub/29669/29669.pdf)

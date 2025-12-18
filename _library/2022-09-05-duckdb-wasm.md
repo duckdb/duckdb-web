@@ -7,6 +7,7 @@ image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
 thirdparty: false
 excerpt: ""
+pill: "VLDB"
 ---
 
 [Paper (PDF)](https://www.vldb.org/pvldb/vol15/p3574-kohn.pdf)

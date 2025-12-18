@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "30 min"
 thirdparty: false
 excerpt: ""
+pill: "DuckCon #5 Seattle, WA"
 ---
 
 <div class="video-container">

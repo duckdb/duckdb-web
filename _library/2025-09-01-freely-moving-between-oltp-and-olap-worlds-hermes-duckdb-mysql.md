@@ -7,6 +7,7 @@ image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
+pill: "VLDB"
 ---
 
 [Paper (PDF)](https://www.vldb.org/pvldb/vol18/p5113-gubner.pdf)

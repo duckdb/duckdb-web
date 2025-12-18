@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-08-27-open-lakehouse-meetup.jpg"
 tags: ["Talk"]
 thirdparty: false
 excerpt: ""
+pill: "Open Lakehouse Meetup 2025"
 ---
 
 |-------|-------|

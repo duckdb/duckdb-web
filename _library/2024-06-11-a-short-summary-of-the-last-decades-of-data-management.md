@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "50 min"
 thirdparty: false
 excerpt: ""
+pill: "GOTO Amsterdam"
 ---
 
 <div class="video-container">

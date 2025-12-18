@@ -8,6 +8,7 @@ tags: ["Podcast"]
 length: "65 min"
 thirdparty: false
 excerpt: ""
+pill: "The Geek Narrator"
 ---
 
 <div class="video-container">

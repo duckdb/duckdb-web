@@ -8,6 +8,7 @@ tags: ["Podcast"]
 length: "55 min"
 thirdparty: false
 excerpt: ""
+pill: "PyCon LT"
 ---
 
 <div class="video-container">
