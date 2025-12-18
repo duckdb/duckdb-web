@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: antoriche/duckdb-fit-extension
-  ref: main
+  ref: 157a5762bba68e84e9affa4af17af45ef15f4be3
 
 docs:
   hello_world:  |
@@ -37,10 +37,11 @@ docs:
     - `fit_devices(filename)` - Device information and sensor details
     - `fit_events(filename)` - Activity events and markers
     - `fit_users(filename)` - User profile information
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 133
-extension_download_count_pretty: 133
+
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 267
+extension_download_count_pretty: 267
 image: '/images/community_extensions/social_preview/preview_community_extension_fit.png'
 layout: community_extension_doc
 ---

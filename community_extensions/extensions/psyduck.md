@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: psyduck
   description: Pokemon data native in DuckDB
-  version: 1.0.1
+  version: 1.0.2
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: Ian-Fogelman/psyduck
-  ref: 4aabf9c7e50b577611ad19e6b367df17330c3c0f
+  ref: c4f8faa4d25e4ca8b3cb0bac8cb958b030f1b2b5
   
 docs:
   hello_world: |
@@ -36,10 +36,14 @@ docs:
 
     -- Select pokemon moves
     SELECT * FROM list_pokemon_moves();
+    
+    -- Select gen1 items
+    SELECT * FROM list_pokemon_items();
+
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 661
-extension_download_count_pretty: 661
+extension_download_count: 628
+extension_download_count_pretty: 628
 image: '/images/community_extensions/social_preview/preview_community_extension_psyduck.png'
 layout: community_extension_doc
 ---
@@ -68,6 +72,7 @@ LOAD {{ page.extension.name }};
 |   function_name    | function_type | description | comment | examples |
 |--------------------|---------------|-------------|---------|----------|
 | list_pokemon       | table         | NULL        | NULL    |          |
+| list_pokemon_items | table         | NULL        | NULL    |          |
 | list_pokemon_moves | table         | NULL        | NULL    |          |
 
 
