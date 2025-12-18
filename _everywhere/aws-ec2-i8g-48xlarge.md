@@ -8,4 +8,5 @@ excerpt: ""
 tags: ["Cloud"]
 ---
 
-[link]({% post_url 2025-10-09-benchmark-results-14-lts %})
+DuckDB can run [TPC-H SF100,000 on a single AWS EC2 instance]({% post_url 2025-10-09-benchmark-results-14-lts %}).
+These instances feature AWS's recent Graviton 4 (ARM64-based) CPUs and 1.5 TB RAM along with 45 TB disk.
