@@ -1,7 +1,6 @@
 ---
 layout: postarchive
 title: DuckDB Everywhere
-excerpt: This page contains a collection of interesting DuckDB deployments from small single-board computers to big servers. We give DuckDB a spin on cheap hardware and in high-IO cloud servers.
 ---
 
 {% assign all_tags = "" %}
@@ -11,7 +10,7 @@ excerpt: This page contains a collection of interesting DuckDB deployments from 
 {% assign unique_tags = all_tags | split: "," | uniq | sort %}
 
 <div class="wrap blog_typography">
-  <p>This page contains a collection of interesting DuckDB deployments from small single-board computers to big servers. We give DuckDB a spin on cheap hardware and in high-IO cloud servers.</p>
+  <p>This page contains a collection of interesting DuckDB deployments from small single-board computers to big servers.</p>
 </div>
 
 <div class="wrap">
@@ -21,8 +20,9 @@ excerpt: This page contains a collection of interesting DuckDB deployments from 
       <div class="filter-highlight"></div>
       <button type="button" class="filter-btn active" data-filter="*">All</button>
       <button type="button" class="filter-btn" data-filter=".cloud">Cloud</button>
-      <button type="button" class="filter-btn" data-filter=".portable-devices">Portable devices</button>
+      <button type="button" class="filter-btn" data-filter=".laptops">Laptops</button>
       <button type="button" class="filter-btn" data-filter=".microcomputers">Microcomputers</button>
+      <button type="button" class="filter-btn" data-filter=".phones">Phones</button>
       <button type="button" class="filter-btn" data-filter=".other">Other</button>
     </div>
   </div>
@@ -59,10 +59,12 @@ excerpt: This page contains a collection of interesting DuckDB deployments from 
             </div>
           {% endif %}
           <h3>{{ item.title }}</h3>
+          <!--
           <div class="meta">
             <div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
             <div class="author">{{ item.author }}</div>
           </div>
+          -->
         </div>
       </div>
     {% endfor %}
