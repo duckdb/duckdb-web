@@ -2,7 +2,7 @@
 layout: post
 title: Saving Private Hash Join
 author: "Laurens Kuiper, Paul Groß, Peter Boncz, Hannes Mühleisen"
-thumb: "/images/library/thumbs/placeholder-duckdb.jpg"
+thumb: "/images/library/thumbs/placeholder-duckdb.svg"
 image: "/images/library/thumbs/placeholder-duckdb.jpg"
 tags: ["Paper"]
 thirdparty: false

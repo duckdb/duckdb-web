@@ -318,6 +318,13 @@ main.main-everywhere .recentposts .newstileswrap .postpreview {
 	}
 }
 
+.everywhere-tiles .everywherepreview.postpreview,
+main.main-everywhere .recentposts .newstileswrap .postpreview{
+	.postimg{
+		background-color: #CBCBCB;
+	}
+}
+
 
 .filterbar{
 	display: -webkit-box;

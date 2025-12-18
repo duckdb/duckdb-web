@@ -2,7 +2,7 @@
 layout: post
 title: "Runtime-Extensible Parsers"
 author: "Hannes Mühleisen, Mark Raasveldt"
-thumb: "/images/library/thumbs/placeholder-duckdb.jpg"
+thumb: "/images/library/thumbs/placeholder-duckdb.svg"
 image: "/images/library/thumbs/placeholder-duckdb.jpg"
 tags: ["Paper"]
 thirdparty: false
