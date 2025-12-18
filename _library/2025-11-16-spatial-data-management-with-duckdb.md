@@ -8,6 +8,7 @@ image: "/images/library/thumbs/spatial-data-management-with-duckdb.png"
 tags: ["Book"]
 thirdparty: true
 excerpt: ""
+pill: "Spatial Data Management with DuckDB"
 ---
 
 See the book's page on [Goodreads](http://goodreads.com/book/show/244019490-spatial-data-management-with-duckdb).

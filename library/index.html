@@ -34,7 +34,7 @@ redirect_from:
 </div>
 
 <div class="post-list wrap">
-	<div class="newstiles science-tiles">
+	<div class="newstiles library-tiles">
 		{% assign sorted_library = site.library | sort: 'date' | reverse %}
 		{% for library_item in sorted_library %}
 			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
@@ -43,7 +43,20 @@ redirect_from:
 				{% assign slugified_tag = tag | slugify %}
 				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
 			{% endfor %}
-			<div class="sciencepreview postpreview {{ tag_classes | downcase }}" data-title="{{ library_item.title | escape }}">
+			{% if library_item.title contains "ducklake" or library_item.title contains "DuckLake" %}
+				{% assign data_source = "ducklake" %}
+			{% elsif library_item.thirdparty == true %}
+				{% assign data_source = "thirdparty" %}
+			{% else %}
+				{% assign data_source = "duckdb" %}
+			{% endif %}
+			{% comment %} Determine data-type value from first tag {% endcomment %}
+			{% if library_item.tags and library_item.tags.size > 0 %}
+				{% assign data_type = library_item.tags[0] | downcase %}
+			{% else %}
+				{% assign data_type = "" %}
+			{% endif %}
+			<div class="librarypreview postpreview {{ tag_classes | downcase }}" data-title="{{ library_item.title | escape }}" data-source="{{ data_source }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
 				<a href="/library/{{ library_item.slug | default: library_item.title | slugify }}/" title="{{ library_item.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if library_item.thumb %}
@@ -51,6 +64,16 @@ redirect_from:
 					{% else %}
 						{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
 						<img src="/images/library/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+					{% endif %}
+					{% if library_item.pill or library_item.episode %}
+						<div class="pill-container">
+							{% if library_item.pill %}
+								<span class="pill-tag">{{ library_item.pill }}</span>
+							{% endif %}
+							{% if library_item.episode %}
+								<span class="pill-tag episode-tag">{{ library_item.episode }}</span>
+							{% endif %}
+						</div>
 					{% endif %}
 				</div>
 				<div class="postdetails">

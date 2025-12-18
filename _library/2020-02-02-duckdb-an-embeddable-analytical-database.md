@@ -7,7 +7,7 @@ image: "/images/library/thumbs/2020-02-02-duckdb-an-embeddable-analytical-databa
 tags: ["Talk"]
 length: "15 min"
 thirdparty: false
-excerpt: ""
+excerpt: "FOSDEM 2020"
 ---
 
 <div class="video-container">

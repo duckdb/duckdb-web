@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/arxiv.svg"
 image: "/images/library/thumbs/arxiv.png"
 thirdparty: true
 excerpt: ""
+pill: "arXiv"
 ---
 
 [Paper (preprint PDF)](https://arxiv.org/abs/2508.04701)

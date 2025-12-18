@@ -8,6 +8,7 @@ tags: ["Podcast"]
 length: "80 min"
 thirdparty: false
 excerpt: ""
+pill: "Rill: Data Talks on the Rocks"
 ---
 
 <div class="video-container">

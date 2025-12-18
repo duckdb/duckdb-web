@@ -2,8 +2,8 @@
 layout: post
 title: "Scaling DuckDB in the Cloud with MotherDuck CEO Jordan Tigani"
 author: "The Database School Podcast by Aaron Francis"
-#thumb: "/images/library/thumbs/.jpg"
-#image: "/images/library/thumbs/.jpg"
+thumb: "/images/library/thumbs/2025-12-11-database-school-jordan-tigani.jpg"
+image: "/images/library/thumbs/2025-12-11-database-school-jordan-tigani.jpg"
 tags: ["Podcast"]
 length: "65 min"
 thirdparty: true

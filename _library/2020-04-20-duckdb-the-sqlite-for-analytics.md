@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "65 min"
 thirdparty: false
 excerpt: ""
+pill: "Carnegie Mellon University (CMU)"
 ---
 
 <div class="video-container">

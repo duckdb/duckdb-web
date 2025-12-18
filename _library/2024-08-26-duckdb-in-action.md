@@ -7,6 +7,7 @@ image: "/images/library/thumbs/duckdb-in-action.png"
 tags: ["Book"]
 thirdparty: true
 excerpt: ""
+pill: "DuckDB in Action"
 ---
 
 See the book's page on [Goodreads](https://www.goodreads.com/book/show/210225037-duckdb-in-action).

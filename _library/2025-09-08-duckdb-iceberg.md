@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "15 min"
 thirdparty: false
 excerpt: ""
+pill: "Apache Iceberg Europe Community Meetup"
 ---
 
 <div class="video-container">

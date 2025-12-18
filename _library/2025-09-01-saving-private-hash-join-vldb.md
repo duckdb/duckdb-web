@@ -2,11 +2,12 @@
 layout: post
 title: Saving Private Hash Join
 author: "Laurens Kuiper, Paul Groß, Peter Boncz, Hannes Mühleisen"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
+thumb: "/images/library/thumbs/placeholder-duckdb.jpg"
+image: "/images/library/thumbs/placeholder-duckdb.jpg"
 tags: ["Paper"]
 thirdparty: false
 excerpt: ""
+pill: "VLDB"
 ---
 
 [Paper (PDF)](https://www.vldb.org/pvldb/vol18/p2748-kuiper.pdf)

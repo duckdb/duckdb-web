@@ -7,6 +7,7 @@ image: "/images/library/thumbs/emnlp.png"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
+pill: "EMNLP"
 ---
 
 [Paper (PDF)](https://cs.uwaterloo.ca/~jimmylin/publications/ge-etal-2025-quackir.pdf)

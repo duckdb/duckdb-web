@@ -8,6 +8,7 @@ tags: ["Podcast"]
 length: "80 min"
 thirdparty: false
 excerpt: ""
+pill: "Developer Voices"
 ---
 
 <div class="video-container">

@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "10 min"
 thirdparty: false
 excerpt: ""
+pill: "Data + AI Summit"
 ---
 
 <div class="video-container">

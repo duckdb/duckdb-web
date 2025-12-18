@@ -8,6 +8,7 @@ tags: ["Podcast"]
 length: "45 min"
 thirdparty: false
 excerpt: ""
+pill: "Software Engineering Daily"
 ---
 
 |-------|-------|
