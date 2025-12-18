@@ -4,7 +4,7 @@ title: "Overview and Latest Developments"
 author: Hannes Mühleisen and Mark Raasveldt
 thumb: "/images/library/thumbs/2024-08-15-duckcon-latest-developments.jpg"
 image: "/images/library/thumbs/2024-08-15-duckcon-latest-developments.jpg"
-tags: ["Talk", "Updates"]
+tags: ["Talk"]
 length: "30 min"
 thirdparty: false
 ---

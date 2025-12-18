@@ -4,7 +4,7 @@ title: "DuckDB: Crunching Data Anywhere from Laptops to Servers"
 author: Gabor Szarnyas
 thumb: "/images/library/thumbs/2024-06-12-duckdb-crunching-data-anywhere-from-laptops-to-servers.jpg"
 image: "/images/library/thumbs/2024-06-12-duckdb-crunching-data-anywhere-from-laptops-to-servers.jpg"
-tags: ["Talk", "Overview"]
+tags: ["Talk"]
 length: "35 min"
 thirdparty: false
 ---

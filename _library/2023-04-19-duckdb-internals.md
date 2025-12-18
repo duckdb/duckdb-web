@@ -4,7 +4,7 @@ title: "DuckDB: The SQLite for Analytics"
 author: Mark Raasveldt
 thumb: "/images/library/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.jpg"
 image: "/images/library/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.jpg"
-tags: ["Talk", "Deep Dive"]
+tags: ["Talk"]
 length: "80 min"
 thirdparty: false
 ---

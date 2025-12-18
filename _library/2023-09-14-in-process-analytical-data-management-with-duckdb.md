@@ -4,7 +4,7 @@ title: "In-Process Analytical Data Management with DuckDB"
 author: Hannes Mühleisen
 thumb: "/images/library/thumbs/2023-09-14-in-process-analytical-data-management-with-duckdb.jpg"
 image: "/images/library/thumbs/2023-09-14-in-process-analytical-data-management-with-duckdb.jpg"
-tags: ["Talk", "Updates"]
+tags: ["Talk"]
 length: "20 min"
 thirdparty: false
 ---

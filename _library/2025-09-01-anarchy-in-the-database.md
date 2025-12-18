@@ -2,8 +2,8 @@
 layout: post
 title: "Anarchy in the Database: A Survey and Evaluation of Database Management System Extensibility"
 author: "Abigale Kim, Marco Slot, David Andersen, Andrew Pavlo"
-thumb: "/images/library/thumbs/vldb-2025.svg"
-image: "/images/library/thumbs/vldb-2025.png"
+thumb: "/images/library/thumbs/vldb.svg"
+image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
 thirdparty: true
 ---

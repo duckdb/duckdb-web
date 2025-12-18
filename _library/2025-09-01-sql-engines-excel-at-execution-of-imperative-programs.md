@@ -2,8 +2,8 @@
 layout: post
 title: "SQL Engines Excel at the Execution of Imperative Programs"
 author: "Tim Fischer, Denis Hirn, Torsten Grust"
-thumb: "/images/library/thumbs/vldb-2025.svg"
-image: "/images/library/thumbs/vldb-2025.png"
+thumb: "/images/library/thumbs/vldb.svg"
+image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
 thirdparty: true
 ---

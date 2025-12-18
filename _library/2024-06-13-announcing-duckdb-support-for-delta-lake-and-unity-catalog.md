@@ -4,7 +4,7 @@ title: "Announcing DuckDB Support for Delta Lake and the Unity Catalog Extension
 author: Hannes Mühleisen
 thumb: "/images/library/thumbs/2024-06-13-announcing-duckdb-support-for-delta-lake-and-unity-catalog.jpg"
 image: "/images/library/thumbs/2024-06-13-announcing-duckdb-support-for-delta-lake-and-unity-catalog.jpg"
-tags: ["Talk", "Updates"]
+tags: ["Talk"]
 length: "5 min"
 thirdparty: false
 ---

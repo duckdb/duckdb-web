@@ -4,7 +4,7 @@ title: "Safe Space or Trap? Creating Software like DuckDB in Academic Institutio
 author: Hannes Mühleisen
 thumb: "/images/library/thumbs/2024-04-23-safe-space-or-trap-creating-software-like-duckdb-in-academic-institutions.jpg"
 image: "/images/library/thumbs/2024-04-23-safe-space-or-trap-creating-software-like-duckdb-in-academic-institutions.jpg"
-tags: ["Talk", "Landscape"]
+tags: ["Talk"]
 length: "30 min"
 thirdparty: false
 ---

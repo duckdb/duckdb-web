@@ -4,7 +4,7 @@ title: "DuckDB – An Embeddable Analytical Database"
 author: Hannes Mühleisen
 thumb: "/images/library/thumbs/2020-02-02-duckdb-an-embeddable-analytical-database.jpg"
 image: "/images/library/thumbs/2020-02-02-duckdb-an-embeddable-analytical-database.jpg"
-tags: ["Talk", "Overview"]
+tags: ["Talk"]
 length: "15 min"
 thirdparty: false
 ---

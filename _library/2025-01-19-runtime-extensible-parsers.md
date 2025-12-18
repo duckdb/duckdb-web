@@ -2,8 +2,8 @@
 layout: post
 title: "Runtime-Extensible Parsers"
 author: "Hannes Mühleisen, Mark Raasveldt"
-thumb: "/images/library/thumbs/cidr-2025.svg"
-image: "/images/library/thumbs/cidr-2025.png"
+thumb: "/images/library/thumbs/cidr.svg"
+image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
 thirdparty: false
 ---

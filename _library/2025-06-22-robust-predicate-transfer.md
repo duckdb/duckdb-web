@@ -2,8 +2,8 @@
 layout: post
 title: "Debunking the Myth of Join Ordering: Toward Robust SQL Analytics"
 author: "Junyi Zhao, Kai Su, Yifei Yang, Xiangyao Yu, Paraschos Koutris, Huanchen Zhang"
-thumb: "/images/library/thumbs/sigmod-2025.svg"
-image: "/images/library/thumbs/sigmod-2025.png"
+thumb: "/images/library/thumbs/sigmod.svg"
+image: "/images/library/thumbs/sigmod.png"
 tags: ["Paper"]
 thirdparty: true
 ---

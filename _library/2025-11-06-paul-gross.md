@@ -3,8 +3,8 @@ layout: post
 title: "DuckDB in Research S02E04: Paul Groß"
 subtitle: "Adaptive Factorization in DuckDB"
 author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/paul-gross.png"
-image: "/images/library/thumbs/paul-gross.png"
+thumb: "/images/library/thumbs/2025-11-06-paul-gross.jpg"
+image: "/images/library/thumbs/2025-11-06-paul-gross.jpg"
 tags: ["Podcast"]
 length: "50 min"
 thirdparty: true

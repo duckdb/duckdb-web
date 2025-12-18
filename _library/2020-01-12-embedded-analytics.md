@@ -2,8 +2,8 @@
 layout: post
 title: "Data Management for Data Science Towards Embedded Analytics"
 author: "Hannes Mühleisen, Mark Raasveldt"
-thumb: "/images/library/thumbs/cidr-2020.svg"
-image: "/images/library/thumbs/cidr-2020.png"
+thumb: "/images/library/thumbs/cidr.svg"
+image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
 thirdparty: false
 ---

@@ -2,8 +2,8 @@
 layout: post
 title: "How DuckDB is USING KEY to Unlock Recursive Query Performance"
 author: "Björn Bamberg, Denis Hirn, Torsten Grust"
-thumb: "/images/library/thumbs/sigmod-2025.svg"
-image: "/images/library/thumbs/sigmod-2025.png"
+thumb: "/images/library/thumbs/sigmod.svg"
+image: "/images/library/thumbs/sigmod.png"
 tags: ["Paper"]
 thirdparty: true
 ---

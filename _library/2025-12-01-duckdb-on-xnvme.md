@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB on xNVMe"
 author: "Marius Ottosen, Magnus Keinicke Parlo, Philippe Bonnet"
-#thumb: ""
-#image: ""
+thumb: "/images/library/thumbs/arxiv.svg"
+image: "/images/library/thumbs/arxiv.png"
 tags: ["Paper"]
 thirdparty: true
 ---
@@ -12,7 +12,7 @@ thirdparty: true
 
 [Implementation (fork)](https://github.com/Ma-Master-DK/duckdb)
 
-Venue: arXiv preprint, 2025
+Published on arXiv in 2025
 
 ## Abstract
 

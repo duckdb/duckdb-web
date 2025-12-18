@@ -4,7 +4,7 @@ title: "Push-Based Execution in DuckDB"
 author: Mark Raasveldt
 thumb: "/images/library/thumbs/2021-11-26-push-based-execution-in-duckdb.jpg"
 image: "/images/library/thumbs/2021-11-26-push-based-execution-in-duckdb.jpg"
-tags: ["Talk", "Deep Dive"]
+tags: ["Talk"]
 length: "20 min"
 thirdparty: false
 ---
