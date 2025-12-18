@@ -5,7 +5,7 @@ author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/aws-ec2-i8g-48xlarge.jpg"
 image: "/images/everywhere/thumbs/aws-ec2-i8g-48xlarge.jpg"
 excerpt: ""
-tags: ["Cloud"]
+tags: ["Servers"]
 ---
 
 DuckDB can run [TPC-H SF100,000 on a single AWS EC2 instance]({% post_url 2025-10-09-benchmark-results-14-lts %}).
