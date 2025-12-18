@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2023-11-09-oredev.jpg"
 tags: ["talk"]
 length: "40 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

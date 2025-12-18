@@ -5,6 +5,7 @@ author: "Fireship"
 tags: ["Video"]
 length: "2 min"
 thirdparty: true
+excerpt: ""
 ---
 
 <div class="video-container">

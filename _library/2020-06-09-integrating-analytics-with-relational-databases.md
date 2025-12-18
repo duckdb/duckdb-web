@@ -7,6 +7,7 @@ thumb: "/images/library/thumbs/integrating-analytics-with-relational-databases.s
 image: "/images/library/thumbs/integrating-analytics-with-relational-databases.png"
 tags: ["Book"]
 thirdparty: false
+excerpt: ""
 ---
 
 [PDF](https://ir.cwi.nl/pub/29669/29669.pdf)

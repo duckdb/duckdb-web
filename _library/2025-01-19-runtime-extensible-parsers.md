@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/cidr.svg"
 image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
 thirdparty: false
+excerpt: ""
 ---
 
 [Paper (PDF)](https://vldb.org/cidrdb/papers/2025/p18-muhleisen.pdf)

@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
 thirdparty: true
+excerpt: ""
 ---
 
 [Paper (PDF)](https://www.vldb.org/pvldb/vol17/p4696-fischer.pdf)

@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-05-12-pycon-lithuania-special.jpg"
 tags: ["Podcast"]
 length: "55 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

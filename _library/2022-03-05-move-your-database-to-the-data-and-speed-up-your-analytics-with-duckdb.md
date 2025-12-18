@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2022-03-05-move-your-database-to-the-data-and-spe
 tags: ["Podcast"]
 length: "80 min"
 thirdparty: false
+excerpt: ""
 ---
 
 |-------|-------|

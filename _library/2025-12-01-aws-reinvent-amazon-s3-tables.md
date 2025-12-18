@@ -7,6 +7,7 @@ author: "AWS re:Invent 2025"
 tags: ["Talk"]
 length: "6 min"
 thirdparty: true
+excerpt: ""
 ---
 
 <div class="video-container">

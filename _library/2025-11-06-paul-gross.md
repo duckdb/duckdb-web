@@ -8,6 +8,7 @@ image: "/images/library/thumbs/2025-11-06-paul-gross.jpg"
 tags: ["Podcast"]
 length: "50 min"
 thirdparty: true
+excerpt: ""
 ---
 
 <div class="video-container">

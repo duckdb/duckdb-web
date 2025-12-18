@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-09-04-a-phd-centered-around-duckdb.jpg"
 tags: ["Talk"]
 length: "15 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-09-12-going-beyond-two-tier-architectures-wi
 tags: ["Talk"]
 length: "30 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

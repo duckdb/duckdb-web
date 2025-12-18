@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-06-13-announcing-duckdb-support-for-delta-la
 tags: ["Talk"]
 length: "5 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

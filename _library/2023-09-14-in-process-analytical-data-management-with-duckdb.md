@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2023-09-14-in-process-analytical-data-management-
 tags: ["Talk"]
 length: "20 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

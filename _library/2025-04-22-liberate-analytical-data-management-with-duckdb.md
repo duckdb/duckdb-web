@@ -7,6 +7,7 @@ author: Hannes Mühleisen
 tags: ["Talk"]
 length: "35 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

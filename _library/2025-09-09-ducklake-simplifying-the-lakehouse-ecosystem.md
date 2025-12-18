@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-09-09-data-engineering-podcast.jpg"
 tags: ["Podcast"]
 length: "70 min"
 thirdparty: false
+excerpt: ""
 ---
 
 |-------|-------|

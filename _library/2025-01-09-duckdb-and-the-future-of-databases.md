@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-01-09-duckdb-and-the-future-of-databases.jpg
 tags: ["Podcast"]
 length: "60 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

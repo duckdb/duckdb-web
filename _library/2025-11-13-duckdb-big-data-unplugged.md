@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-11-13-duckdb-big-data-unplugged.jpg"
 tags: ["Talk"]
 length: "30 min"
 thirdparty: false
+excerpt: ""
 ---
 
 |-------|-------|

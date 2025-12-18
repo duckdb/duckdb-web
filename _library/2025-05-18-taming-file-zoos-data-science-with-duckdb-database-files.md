@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-05-18-taming-file-zoos-data-science-with-duc
 tags: ["Talk"]
 length: "30 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

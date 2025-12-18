@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-09-08-making-iceberg-easy.jpg"
 tags: ["Talk"]
 length: "15 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

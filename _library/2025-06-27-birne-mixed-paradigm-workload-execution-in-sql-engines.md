@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/dbpl.svg"
 image: "/images/library/thumbs/dbpl.png"
 tags: ["Paper"]
 thirdparty: true
+excerpt: ""
 ---
 
 [Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3735106.3736535)

@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2023-11-25-deep-dive-into-duckdb.jpg"
 tags: ["Podcast"]
 length: "65 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/emnlp.svg"
 image: "/images/library/thumbs/emnlp.png"
 tags: ["Paper"]
 thirdparty: true
+excerpt: ""
 ---
 
 [Paper (PDF)](https://cs.uwaterloo.ca/~jimmylin/publications/ge-etal-2025-quackir.pdf)

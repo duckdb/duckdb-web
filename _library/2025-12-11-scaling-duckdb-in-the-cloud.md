@@ -7,6 +7,7 @@ author: "The Database School Podcast by Aaron Francis"
 tags: ["Podcast"]
 length: "65 min"
 thirdparty: true
+excerpt: ""
 ---
 
 <div class="video-container">

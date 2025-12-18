@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2021-11-26-push-based-execution-in-duckdb.jpg"
 tags: ["Talk"]
 length: "20 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

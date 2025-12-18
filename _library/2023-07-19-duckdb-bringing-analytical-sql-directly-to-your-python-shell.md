@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2023-07-19-duckdb-bringing-analytical-sql-directl
 tags: ["Talk"]
 length: "40 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

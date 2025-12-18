@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-12-05-changing-data-with-confidence.jpg"
 tags: ["Talk"]
 length: "30 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

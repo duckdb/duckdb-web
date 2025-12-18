@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-06-27-joy-of-coding.jpg"
 tags: ["Talk"]
 length: "35 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

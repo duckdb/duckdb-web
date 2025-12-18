@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.jpg"
 tags: ["Talk"]
 length: "65 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

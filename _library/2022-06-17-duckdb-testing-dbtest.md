@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2022-06-17-duckdb-testing-dbtest.jpg"
 tags: ["Talk"]
 length: "60 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

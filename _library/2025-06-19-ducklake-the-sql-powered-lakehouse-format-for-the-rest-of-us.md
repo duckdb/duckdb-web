@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-06-19-systems-distributed.jpg"
 tags: ["Talk"]
 length: "55 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-11-06-duckdb-meets-data-lakes-oredev.jpg"
 tags: ["Talk"]
 length: "40 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-09-26-data-architecture-turned-upside-down.j
 tags: ["Talk"]
 length: "40 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

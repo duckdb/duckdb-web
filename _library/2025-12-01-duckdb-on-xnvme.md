@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/arxiv.svg"
 image: "/images/library/thumbs/arxiv.png"
 tags: ["Paper"]
 thirdparty: true
+excerpt: ""
 ---
 
 [Paper (preprint PDF)](https://arxiv.org/abs/2512.01490)

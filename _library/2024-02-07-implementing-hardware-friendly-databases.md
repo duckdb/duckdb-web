@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-02-07-implementing-hardware-friendly-databas
 tags: ["Podcast"]
 length: "80 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

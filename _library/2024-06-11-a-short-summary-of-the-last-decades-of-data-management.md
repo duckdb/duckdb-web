@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-06-11-a-short-summary-of-the-last-decades-of
 tags: ["Talk"]
 length: "50 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-06-12-duckdb-crunching-data-anywhere-from-la
 tags: ["Talk"]
 length: "35 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

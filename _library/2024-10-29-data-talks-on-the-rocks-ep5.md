@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.jpg"
 tags: ["Podcast"]
 length: "80 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

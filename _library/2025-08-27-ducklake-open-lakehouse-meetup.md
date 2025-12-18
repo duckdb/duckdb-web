@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/2025-08-27-open-lakehouse-meetup.jpg"
 image: "/images/library/thumbs/2025-08-27-open-lakehouse-meetup.jpg"
 tags: ["Talk"]
 thirdparty: false
+excerpt: ""
 ---
 
 |-------|-------|

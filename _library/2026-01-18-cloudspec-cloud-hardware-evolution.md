@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/cidr.svg"
 image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
 thirdparty: true
+excerpt: ""
 ---
 
 [Paper (PDF)](https://www.cs.cit.tum.de/fileadmin/w00cfj/dis/papers/cloudspecs-final.pdf)

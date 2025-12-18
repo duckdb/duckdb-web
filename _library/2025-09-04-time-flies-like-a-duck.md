@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-09-04-time-flies-like-a-duck.jpg"
 tags: ["Talk"]
 length: "20 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

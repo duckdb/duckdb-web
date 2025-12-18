@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-06-17-the-future-of-open-table-formats.jpg"
 tags: ["Podcast"]
 length: "60 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

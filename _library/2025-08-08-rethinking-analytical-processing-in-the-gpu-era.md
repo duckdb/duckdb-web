@@ -5,6 +5,7 @@ author: "Bobbi Yogatama, Yifei Yang, Kevin Kristensen, Devesh Sarda, Abigale Kim
 thumb: "/images/library/thumbs/arxiv.svg"
 image: "/images/library/thumbs/arxiv.png"
 thirdparty: true
+excerpt: ""
 ---
 
 [Paper (preprint PDF)](https://arxiv.org/abs/2508.04701)

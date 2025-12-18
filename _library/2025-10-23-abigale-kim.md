@@ -8,6 +8,7 @@ image: "/images/library/thumbs/2025-10-23-abigale-kim.jpg"
 tags: ["Podcast"]
 length: "45 min"
 thirdparty: true
+excerpt: ""
 ---
 
 <div class="video-container">

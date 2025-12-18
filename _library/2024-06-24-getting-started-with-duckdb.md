@@ -7,6 +7,7 @@ thumb: "/images/library/thumbs/getting-started-with-duckdb.svg"
 image: "/images/library/thumbs/getting-started-with-duckdb.png"
 tags: ["Book"]
 thirdparty: true
+excerpt: ""
 ---
 
 See the book's page on [Goodreads](https://www.goodreads.com/book/show/157532594-getting-started-with-duckdb).

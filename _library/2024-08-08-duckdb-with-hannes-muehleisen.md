@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-08-08-duckdb-with-hannes-muehleisen.jpg"
 tags: ["Podcast"]
 length: "45 min"
 thirdparty: false
+excerpt: ""
 ---
 
 |-------|-------|

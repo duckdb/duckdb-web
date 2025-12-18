@@ -5,6 +5,7 @@ author: "David Ostrovsky"
 tags: ["Talk"]
 length: "60 min"
 thirdparty: true
+excerpt: ""
 ---
 
 <div class="video-container">

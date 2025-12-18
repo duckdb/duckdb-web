@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/duckdb-in-action.svg"
 image: "/images/library/thumbs/duckdb-in-action.png"
 tags: ["Book"]
 thirdparty: true
+excerpt: ""
 ---
 
 See the book's page on [Goodreads](https://www.goodreads.com/book/show/210225037-duckdb-in-action).

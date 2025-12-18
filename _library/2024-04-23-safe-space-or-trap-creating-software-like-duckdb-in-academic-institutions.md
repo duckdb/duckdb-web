@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-04-23-safe-space-or-trap-creating-software-l
 tags: ["Talk"]
 length: "30 min"
 thirdparty: false
+excerpt: ""
 ---
 
 |-------|-------|

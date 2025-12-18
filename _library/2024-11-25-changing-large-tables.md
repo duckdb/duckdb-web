@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-11-25-changing-large-tables.jpg"
 tags: ["Talk"]
 length: "20 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

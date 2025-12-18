@@ -7,6 +7,7 @@ author: Hannes Mühleisen
 tags: ["Podcast"]
 length: "80 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

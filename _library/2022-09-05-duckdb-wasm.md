@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
 thirdparty: false
+excerpt: ""
 ---
 
 [Paper (PDF)](https://www.vldb.org/pvldb/vol15/p3574-kohn.pdf)

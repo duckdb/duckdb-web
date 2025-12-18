@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2024-08-15-duckcon-latest-developments.jpg"
 tags: ["Talk"]
 length: "30 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

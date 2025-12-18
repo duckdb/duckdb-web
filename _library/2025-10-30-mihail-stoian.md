@@ -8,6 +8,7 @@ image: "/images/library/thumbs/2025-10-30-mihail-stoian.jpg"
 tags: ["Podcast"]
 length: "35 min"
 thirdparty: true
+excerpt: ""
 ---
 
 <div class="video-container">

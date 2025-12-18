@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2023-07-29-duckdb-data-ai-summit-keynote-segment.
 tags: ["Talk"]
 length: "10 min"
 thirdparty: false
+excerpt: ""
 ---
 
 <div class="video-container">

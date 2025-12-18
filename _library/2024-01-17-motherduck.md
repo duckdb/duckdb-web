@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/cidr.svg"
 image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
 thirdparty: true
+excerpt: ""
 ---
 
 [Paper (PDF)](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf)
