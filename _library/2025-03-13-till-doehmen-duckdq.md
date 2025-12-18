@@ -3,8 +3,8 @@ layout: post
 title: "DuckDB in Research S01E01: Till Döhmen"
 subtitle: "DuckDQ: A Python Library for Data Quality Checks in ML Pipelines"
 author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.png"
-image: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.png"
+thumb: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.jpg"
+image: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.jpg"
 tags: ["Podcast"]
 length: "60 min"
 thirdparty: true

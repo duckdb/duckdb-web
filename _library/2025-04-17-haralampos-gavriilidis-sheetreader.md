@@ -3,8 +3,8 @@ layout: post
 title: "DuckDB in Research S01E05: Haralampos Gavriilidis"
 subtitle: "SheetReader: Efficient Spreadsheet Parsing"
 author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.png"
-image: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.png"
+thumb: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.jpg"
+image: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.jpg"
 tags: ["Podcast"]
 length: "40 min"
 thirdparty: true
