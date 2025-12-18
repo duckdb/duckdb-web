@@ -137,16 +137,40 @@ LOAD {{ page.extension.name }};
 
 |       function_name       | function_type | description | comment | examples |
 |---------------------------|---------------|-------------|---------|----------|
+| ast_get_source            | macro         | NULL        | NULL    |          |
+| ast_get_source_numbered   | macro         | NULL        | NULL    |          |
 | ast_supported_languages   | table         | NULL        | NULL    |          |
 | get_kind                  | scalar        | NULL        | NULL    |          |
+| get_line                  | macro         | NULL        | NULL    |          |
+| get_lines_text            | macro         | NULL        | NULL    |          |
 | get_searchable_types      | scalar        | NULL        | NULL    |          |
 | get_super_kind            | scalar        | NULL        | NULL    |          |
+| is_arithmetic             | macro         | NULL        | NULL    |          |
+| is_assignment             | macro         | NULL        | NULL    |          |
+| is_block                  | macro         | NULL        | NULL    |          |
+| is_boolean_literal        | macro         | NULL        | NULL    |          |
 | is_call                   | scalar        | NULL        | NULL    |          |
+| is_class_definition       | macro         | NULL        | NULL    |          |
+| is_comparison             | macro         | NULL        | NULL    |          |
+| is_conditional            | macro         | NULL        | NULL    |          |
 | is_control_flow           | scalar        | NULL        | NULL    |          |
 | is_definition             | scalar        | NULL        | NULL    |          |
+| is_function_call          | macro         | NULL        | NULL    |          |
+| is_function_definition    | macro         | NULL        | NULL    |          |
 | is_identifier             | scalar        | NULL        | NULL    |          |
+| is_jump                   | macro         | NULL        | NULL    |          |
 | is_kind                   | scalar        | NULL        | NULL    |          |
+| is_list                   | macro         | NULL        | NULL    |          |
+| is_literal                | macro         | NULL        | NULL    |          |
+| is_logical                | macro         | NULL        | NULL    |          |
+| is_loop                   | macro         | NULL        | NULL    |          |
+| is_member_access          | macro         | NULL        | NULL    |          |
+| is_module_definition      | macro         | NULL        | NULL    |          |
+| is_number_literal         | macro         | NULL        | NULL    |          |
 | is_semantic_type          | scalar        | NULL        | NULL    |          |
+| is_string_literal         | macro         | NULL        | NULL    |          |
+| is_type_definition        | macro         | NULL        | NULL    |          |
+| is_variable_definition    | macro         | NULL        | NULL    |          |
 | kind_code                 | scalar        | NULL        | NULL    |          |
 | parse_ast                 | table         | NULL        | NULL    |          |
 | parse_ast_flat            | table         | NULL        | NULL    |          |
@@ -155,6 +179,9 @@ LOAD {{ page.extension.name }};
 | read_ast_flat             | table         | NULL        | NULL    |          |
 | read_ast_hierarchical     | table         | NULL        | NULL    |          |
 | read_ast_hierarchical_new | table         | NULL        | NULL    |          |
+| read_lines                | table_macro   | NULL        | NULL    |          |
+| read_lines_context        | table_macro   | NULL        | NULL    |          |
+| read_lines_range          | table_macro   | NULL        | NULL    |          |
 | semantic_type_code        | scalar        | NULL        | NULL    |          |
 | semantic_type_to_string   | scalar        | NULL        | NULL    |          |
 
