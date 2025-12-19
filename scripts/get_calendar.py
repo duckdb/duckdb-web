@@ -26,7 +26,7 @@ if response.status_code == 200:
     for event in cal.walk():
         dtstart = event.get("DTSTART")
         title = event.get("SUMMARY")
-        if title is None:
+        if title is None or "freeze" in title.lower():
             continue
         else:
             title = title.replace("DuckDB ", "").replace("Release ", "")
