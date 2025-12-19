@@ -63,7 +63,7 @@ redirect_from:
 						<img src="{{ library_item.thumb }}" alt="{{ library_item.title }}" class="zoom-image">
 					{% else %}
 						{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
-						<img src="/images/library/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+						<img src="/images/library/thumbs/placeholder-{{ data_source }}-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
 					{% endif %}
 					{% if library_item.pill or library_item.episode %}
 						<div class="pill-container">

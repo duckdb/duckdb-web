@@ -210,6 +210,7 @@ section.speakers,
 		}
 		&[data-source="duckdb"]{
 			.postimg{
+				background-color: var(--yellow-50);
 				.pill-tag{
 					background: var(--yellow-45);
 					color: var(--yellow-30);
@@ -238,6 +239,7 @@ section.speakers,
 		}
 		&[data-source="ducklake"]{
 			.postimg{
+				background-color: var(--blue-70);
 				.pill-tag{
 					background: var(--blue-90);
 					color: var(--blue-60);
