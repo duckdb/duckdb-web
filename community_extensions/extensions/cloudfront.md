@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 476
-extension_download_count_pretty: 476
+extension_download_count: 470
+extension_download_count_pretty: 470
 image: '/images/community_extensions/social_preview/preview_community_extension_cloudfront.png'
 layout: community_extension_doc
 ---
