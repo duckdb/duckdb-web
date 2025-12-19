@@ -108,7 +108,7 @@ title: List Functions
 | [`list_last(list)`](#list_lastlist) | Applies aggregate function [`last`]({% link docs/stable/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_mad(list)`](#list_madlist) | Applies aggregate function [`mad`]({% link docs/stable/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_max(list)`](#list_maxlist) | Applies aggregate function [`max`]({% link docs/stable/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| [`list_libraryn(list)`](#list_medianlist) | Applies aggregate function [`median`]({% link docs/stable/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
+| [`list_median(list)`](#list_medianlist) | Applies aggregate function [`median`]({% link docs/stable/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_min(list)`](#list_minlist) | Applies aggregate function [`min`]({% link docs/stable/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_mode(list)`](#list_modelist) | Applies aggregate function [`mode`]({% link docs/stable/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
 | [`list_negative_dot_product(list1, list2)`](#list_negative_inner_productlist1-list2) | Alias for `list_negative_inner_product`. |
@@ -539,12 +539,12 @@ title: List Functions
 | **Example** | `list_max([3,3,9])` |
 | **Result** | `9` |
 
-#### `list_libraryn(list)`
+#### `list_median(list)`
 
 <div class="nostroke_table"></div>
 
 | **Description** | Applies aggregate function [`median`]({% link docs/stable/sql/functions/aggregates.md %}#general-aggregate-functions) to the `list`. |
-| **Example** | `list_libraryn([3,3,9])` |
+| **Example** | `list_median([3,3,9])` |
 | **Result** | `3.0` |
 
 #### `list_min(list)`
@@ -1124,7 +1124,7 @@ SELECT list_aggregate([2, 4, 8, 42], 'string_agg', '|');
 
 ### `list_*` Rewrite Functions
 
-The following is a list of existing rewrites. Rewrites simplify the use of the list aggregate function by only taking the list (column) as their argument. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_kurtosis_pop`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_libraryn`, `list_mad` and `list_histogram`.
+The following is a list of existing rewrites. Rewrites simplify the use of the list aggregate function by only taking the list (column) as their argument. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_kurtosis_pop`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_median`, `list_mad` and `list_histogram`.
 
 ```sql
 SELECT list_min([1, 2, -4, NULL]);
