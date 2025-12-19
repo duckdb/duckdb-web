@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "“DuckDB in the Cloud: A Simple, Powerful SQL Engine for Your Lakehouse"
+title: "DuckDB in the Cloud: A Simple, Powerful SQL Engine for Your Lakehouse"
 author: "Gábor Szárnyas"
 tags: ["Talk"]
 thirdparty: false

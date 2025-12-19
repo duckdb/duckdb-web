@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Funding Lessons Learned Panel"
+title: "Funding Lessons Learned Panel"
 author: "Hannes Mühleisen"
 tags: ["Talk"]
 thirdparty: false
