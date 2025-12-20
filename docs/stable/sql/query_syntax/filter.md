@@ -41,14 +41,14 @@ Different aggregate functions may be used, and multiple `WHERE` expressions are 
 ```sql
 SELECT
     sum(i) FILTER (i <= 5) AS lte_five_sum,
-    median(i) FILTER (i % 2 = 1) AS odds_libraryn,
-    median(i) FILTER (i % 2 = 1 AND i <= 5) AS odds_lte_five_libraryn
+    median(i) FILTER (i % 2 = 1) AS odds_median,
+    median(i) FILTER (i % 2 = 1 AND i <= 5) AS odds_lte_five_median
 FROM generate_series(1, 10) tbl(i);
 ```
 
 <div class="monospace_table"></div>
 
-| lte_five_sum | odds_libraryn | odds_lte_five_median |
+| lte_five_sum | odds_median | odds_lte_five_median |
 |:---|:---|:---|
 | 15 | 5.0 | 3.0 |
 
