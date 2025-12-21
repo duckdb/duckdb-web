@@ -8,17 +8,16 @@ excerpt: |
 extension:
   name: quackfix
   description: Allows the consumption FIX protocol format logs, from all supported duckdb filesystems.
-  version: 0.0.1
+  version: 0.0.2
   language: c++
   build: cmake
   license: MIT
-  excluded_platforms: "osx_amd64;osx_arm64;windows_amd64;wasm"
   maintainers:
     - hyehudai
 
 repo:
   github: hyehudai/quackfix
-  ref: 5f651b8288521282282f0bf32757595205cbfc59
+  ref: cddee855946b0eb70087792982b9c978f491d5e3
 
 docs:
   hello_world: |
@@ -58,8 +57,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 78
-extension_download_count_pretty: 78
+extension_download_count: 137
+extension_download_count_pretty: 137
 image: '/images/community_extensions/social_preview/preview_community_extension_quackfix.png'
 layout: community_extension_doc
 ---
