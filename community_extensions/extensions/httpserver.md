@@ -64,10 +64,10 @@ repo:
   github: Query-farm/httpserver
   ref: 8a53d8b7f4290608e0eb0d4dbfbafefaf04209e9
 
-extension_star_count: 260
-extension_star_count_pretty: 260
-extension_download_count: 5134
-extension_download_count_pretty: 5.1k
+extension_star_count: 261
+extension_star_count_pretty: 261
+extension_download_count: 5604
+extension_download_count_pretty: 5.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---

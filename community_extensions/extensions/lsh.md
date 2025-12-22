@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 368
-extension_download_count_pretty: 368
+extension_download_count: 429
+extension_download_count_pretty: 429
 image: '/images/community_extensions/social_preview/preview_community_extension_lsh.png'
 layout: community_extension_doc
 ---
