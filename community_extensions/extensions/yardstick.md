@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: yardstick
   description: Measure-aware SQL implementing Julian Hyde's 'Measures in SQL' paper
-  version: 0.3.2
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: sidequery/yardstick
-  ref: a683af18856e33c87163c7dfedd0a02afe75df56
+  ref: 7fbe8abd40a926300e58dc6a365c43399710ef42
 
 docs:
   hello_world: |
@@ -30,8 +30,7 @@ docs:
         region,
         SUM(amount) AS MEASURE revenue,
         COUNT(*) AS MEASURE order_count
-    FROM sales
-    GROUP BY year, region;
+    FROM sales;
 
     -- Query with AGGREGATE() and AT modifiers
     SEMANTIC SELECT
@@ -40,8 +39,7 @@ docs:
         AGGREGATE(revenue) AS revenue,
         AGGREGATE(revenue) AT (ALL region) AS year_total,
         AGGREGATE(revenue) / AGGREGATE(revenue) AT (ALL region) AS pct_of_year
-    FROM sales_v
-    GROUP BY year, region;
+    FROM sales_v;
 
   extended_description: |
     `yardstick` implements Julian Hyde's "Measures in SQL" paper ([arXiv:2406.00251](https://arxiv.org/abs/2406.00251)), adding measure-aware SQL to DuckDB.
@@ -51,13 +49,13 @@ docs:
     **Percent of total** calculations without CTEs or window functions:
     ```sql
     SEMANTIC SELECT region, AGGREGATE(revenue) / AGGREGATE(revenue) AT (ALL) AS pct
-    FROM sales_v GROUP BY region;
+    FROM sales_v;
     ```
 
     **Year-over-year comparisons** with simple syntax:
     ```sql
     SEMANTIC SELECT year, AGGREGATE(revenue) AT (SET year = year - 1) AS prior_year
-    FROM sales_v GROUP BY year;
+    FROM sales_v;
     ```
 
     **AT Modifiers**:
@@ -72,8 +70,8 @@ docs:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 492
-extension_download_count_pretty: 492
+extension_download_count: 482
+extension_download_count_pretty: 482
 image: '/images/community_extensions/social_preview/preview_community_extension_yardstick.png'
 layout: community_extension_doc
 ---
