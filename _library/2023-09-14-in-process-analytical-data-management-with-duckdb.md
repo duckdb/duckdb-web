@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "20 min"
 thirdparty: false
 excerpt: ""
-pill: "PyData"
+pill: "PyData 2023"
 ---
 
 <div class="video-container">

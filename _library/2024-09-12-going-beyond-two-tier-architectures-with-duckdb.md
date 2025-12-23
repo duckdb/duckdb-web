@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "30 min"
 thirdparty: false
 excerpt: ""
-pill: "The Joe Reis Show"
+pill: "Data Engineering for AI/ML"
 ---
 
 <div class="video-container">

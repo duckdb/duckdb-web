@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "40 min"
 thirdparty: false
 excerpt: ""
-pill: "EuroPython"
+pill: "EuroPython 2023"
 ---
 
 <div class="video-container">

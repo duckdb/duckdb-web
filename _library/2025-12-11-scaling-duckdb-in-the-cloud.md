@@ -8,6 +8,7 @@ tags: ["Podcast"]
 length: "65 min"
 thirdparty: true
 excerpt: ""
+pill: "The Database School Podcast"
 ---
 
 <div class="video-container">

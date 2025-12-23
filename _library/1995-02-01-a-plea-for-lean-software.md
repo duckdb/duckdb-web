@@ -7,6 +7,7 @@ image: "/images/library/thumbs/paper.png"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
+pill: "Computer 1995"
 ---
 
 [Paper (PDF)](https://cr.yp.to/bib/1995/wirth.pdf)

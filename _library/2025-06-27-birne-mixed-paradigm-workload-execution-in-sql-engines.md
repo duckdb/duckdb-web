@@ -7,7 +7,7 @@ image: "/images/library/thumbs/dbpl.png"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
-pill: "DBPL"
+pill: "DBPL 2025"
 ---
 
 [Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3735106.3736535)

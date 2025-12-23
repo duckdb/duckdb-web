@@ -8,7 +8,7 @@ tags: ["Podcast"]
 length: "70 min"
 thirdparty: false
 excerpt: ""
-pill: "Introducing DuckLake"
+pill: "Data Engineering Podcast"
 ---
 
 |-------|-------|

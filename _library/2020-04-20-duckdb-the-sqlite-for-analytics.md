@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "65 min"
 thirdparty: false
 excerpt: ""
-pill: "Carnegie Mellon University (CMU)"
+pill: "Quarantine 2020 Database Talks at CMU"
 ---
 
 <div class="video-container">

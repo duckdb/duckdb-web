@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "60 min"
 thirdparty: false
 excerpt: ""
-pill: "DBTest"
+pill: "DBTest 2022"
 ---
 
 <div class="video-container">

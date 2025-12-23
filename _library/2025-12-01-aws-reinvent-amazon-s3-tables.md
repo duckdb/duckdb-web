@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Amazon S3 Tables Architecture, Use Cases, and Best Practices"
-author: "AWS re:Invent 2025"
+author: "Yuri Zarubin"
 #thumb: "/images/library/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.jpg"
 #image: "/images/library/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.jpg"
 tags: ["Talk"]
 length: "6 min"
 thirdparty: true
-excerpt: ""
+pill: "AWS re:Invent 2025"
 ---
 
 <div class="video-container">

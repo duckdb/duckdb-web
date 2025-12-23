@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "35 min"
 thirdparty: false
 excerpt: ""
+pill: "Data Council 2025"
 ---
 
 <div class="video-container">

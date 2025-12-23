@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "20 min"
 thirdparty: false
 excerpt: ""
-pill: "Forward Data"
+pill: "Forward Data 2024"
 ---
 
 <div class="video-container">

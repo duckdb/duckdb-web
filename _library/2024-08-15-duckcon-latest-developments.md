@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "30 min"
 thirdparty: false
 excerpt: ""
-pill: "DuckCon #5 Seattle, WA"
+pill: "DuckCon #5"
 ---
 
 <div class="video-container">

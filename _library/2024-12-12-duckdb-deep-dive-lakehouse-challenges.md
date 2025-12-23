@@ -1,13 +1,12 @@
 ---
 layout: post
-title: "DuckDB Deep Dive, the Challenges of Lakehouses, and More – The Joe Reis Show"
+title: "DuckDB Deep Dive, the Challenges of Lakehouses, and More"
 author: Hannes Mühleisen
-thumb: "/images/library/thumbs/placeholder-duckdb.svg"
-image: "/images/library/thumbs/placeholder-duckdb.jpg"
 tags: ["Podcast"]
 length: "80 min"
 thirdparty: false
 excerpt: ""
+pill: "The Joe Reis Show"
 ---
 
 <div class="video-container">

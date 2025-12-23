@@ -6,6 +6,7 @@ tags: ["Talk"]
 length: "60 min"
 thirdparty: true
 excerpt: ""
+pill: "NDC Oslo 2025"
 ---
 
 <div class="video-container">

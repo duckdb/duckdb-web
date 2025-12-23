@@ -7,7 +7,7 @@ image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
-pill: "VLDB"
+pill: "VLDB 2025"
 ---
 
 [Paper (PDF)](https://www.vldb.org/pvldb/vol18/p4629-afroozeh.pdf)

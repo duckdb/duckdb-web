@@ -7,7 +7,7 @@ image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
-pill: "VLDB"
+pill: "VLDB 2023"
 ---
 
 [Paper (PDF)](https://www.vldb.org/pvldb/vol16/p4034-wolde.pdf)

@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "30 min"
 thirdparty: false
 excerpt: ""
-pill: "PyCon US"
+pill: "PyCon US 2025"
 ---
 
 <div class="video-container">

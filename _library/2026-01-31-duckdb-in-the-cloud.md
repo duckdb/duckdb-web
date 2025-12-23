@@ -5,7 +5,7 @@ author: "Gábor Szárnyas"
 tags: ["Talk"]
 thirdparty: false
 excerpt: ""
-pill: "FOSDEM"
+pill: "FOSDEM 2026"
 ---
 
 Gábor Szárnyas will present a lightning talk at FOSDEM 2026's [“Databases” developer room](https://fosdem.org/2026/schedule/track/databases/),

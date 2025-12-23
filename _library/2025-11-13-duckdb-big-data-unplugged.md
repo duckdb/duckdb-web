@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "30 min"
 thirdparty: false
 excerpt: ""
-pill: "Compass 2025"
+pill: "Compass AI & Data Summit 2025"
 ---
 
 |-------|-------|

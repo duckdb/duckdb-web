@@ -6,7 +6,7 @@ tags: ["Talk"]
 length: "60 min"
 thirdparty: true
 excerpt: ""
-pill: "EngageU"
+pill: "EngageU 2024"
 ---
 
 <div class="video-container">

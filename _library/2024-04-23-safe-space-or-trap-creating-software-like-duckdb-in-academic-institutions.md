@@ -8,7 +8,7 @@ tags: ["Talk"]
 length: "30 min"
 thirdparty: false
 excerpt: ""
-pill: "PyCon DE"
+pill: "PyCon DE 2024"
 ---
 
 |-------|-------|

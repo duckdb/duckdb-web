@@ -2,12 +2,10 @@
 layout: post
 title: "Data Management for Data Science Towards Embedded Analytics"
 author: "Hannes Mühleisen, Mark Raasveldt"
-thumb: "/images/library/thumbs/placeholder-duckdb.svg"
-image: "/images/library/thumbs/placeholder-duckdb.jpg"
 tags: ["Paper"]
 thirdparty: false
 excerpt: ""
-pill: "CIDR"
+pill: "CIDR 2020"
 ---
 
 [Paper (PDF)](https://hannes.muehleisen.org/publications/CIDR2020-raasveldt-muehleisen-duckdb.pdf)

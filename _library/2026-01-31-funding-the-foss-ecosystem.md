@@ -5,7 +5,7 @@ author: "Hannes Mühleisen"
 tags: ["Talk"]
 thirdparty: false
 excerpt: ""
-pill: "FOSDEM"
+pill: "FOSDEM 2026"
 ---
 
 DuckDB co-creator Hannes Mühleisen will participate in the [panel discussion](https://fosdem.org/2026/schedule/event/funding_lessons_learned_panel/)

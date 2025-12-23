@@ -7,7 +7,7 @@ image: "/images/library/thumbs/cidr.jpg"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
-pill: "CIDR"
+pill: "CIDR 2026"
 ---
 
 [Paper (PDF)](https://www.cs.cit.tum.de/fileadmin/w00cfj/dis/papers/cloudspecs-final.pdf)

@@ -7,7 +7,7 @@ image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
 thirdparty: true
 excerpt: ""
-pill: "CIDR"
+pill: "CIDR 2025"
 ---
 
 [Paper (PDF)](https://vldb.org/cidrdb/papers/2025/p21-gro.pdf)
