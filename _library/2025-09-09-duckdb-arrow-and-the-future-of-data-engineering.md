@@ -8,6 +8,7 @@ tags: ["Podcast"]
 length: "60 min"
 thirdparty: true
 excerpt: ""
+pill: "The Hedgineer Podcast"
 ---
 
 <div class="video-container">
