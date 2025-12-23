@@ -8,27 +8,33 @@ excerpt: |
 extension:
   name: http_request
   description: HTTP client extension for DuckDB with GET/POST/PUT/PATCH/DELETE and byte-range requests
-  version: 0.1.0
+  version: 0.3.1
   language: C++
   build: cmake
   license: MIT
+  excluded_platforms: "windows_amd64_mingw"
   maintainers:
     - onnimonni
 
 repo:
   github: midwork-finds-jobs/duckdb_http_request
-  ref: dcacd19e733c159462d678c4777a1e33795ca49b
+  ref: 5122074317dfcfaebd38987e1db64c78005c94b2
 
 docs:
   hello_world: |
     -- Simple GET request
     SELECT http_get('https://example.com/');
 
+    -- Access response fields
+    SELECT
+        r.status,
+        r.content_type,
+        r.content_length,
+        r.cookies[1].name as first_cookie
+    FROM (SELECT http_get('https://example.com/') as r);
+
     -- GET with custom headers
     SELECT http_get('https://httpbin.org/get', headers := {'Accept': 'application/json'}).body;
-
-    -- POST with custom body
-    SELECT http_post('https://httpbin.org/get', params := {'limit': 10});
 
     -- Byte-range request for partial content
     SELECT http_get(
@@ -41,19 +47,23 @@ docs:
 
     Features:
     - All HTTP methods: GET, HEAD, POST, PUT, PATCH, DELETE
+    - Parallel execution: requests within a chunk run concurrently
     - Custom headers via STRUCT parameter
     - Query parameters via STRUCT
     - Byte-range requests with helper function
     - Auto-decompression of gzip/zstd responses
     - Form-encoded POST with http_post_form()
+    - Parsed Set-Cookie headers into structured cookies array
+    - Convenience fields: content_type, content_length
     - Respects duckdb http and proxy settings
+    - Configurable concurrency via http_max_concurrency setting (default: 32)
 
     Uses DuckDB's built-in httplib for HTTP connections.
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 169
-extension_download_count_pretty: 169
+extension_download_count: 155
+extension_download_count_pretty: 155
 image: '/images/community_extensions/social_preview/preview_community_extension_http_request.png'
 layout: community_extension_doc
 ---
@@ -97,5 +107,13 @@ LOAD {{ page.extension.name }};
 | http_put          | scalar        | NULL        | NULL    |          |
 | http_put          | table         | NULL        | NULL    |          |
 | http_range_header | scalar        | NULL        | NULL    |          |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|         name         |                                    description                                    | input_type | scope  | aliases |
+|----------------------|-----------------------------------------------------------------------------------|------------|--------|---------|
+| http_max_concurrency | Maximum number of concurrent HTTP requests per scalar function call (default: 32) | UBIGINT    | GLOBAL | []      |
 
 
