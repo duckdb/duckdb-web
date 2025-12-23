@@ -440,7 +440,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`corr(y, x)`](#corry-x) | The correlation coefficient. |
 | [`covar_pop(y, x)`](#covar_popy-x) | The population covariance, which does not include bias correction. |
 | [`covar_samp(y, x)`](#covar_sampy-x) | The sample covariance, which includes Bessel's bias correction. |
-| [`entropy(x)`](#entropyx) | The log-2 entropy. |
+| [`entropy(x)`](#entropyx) | The log-2 entropy of count input-values. |
 | [`kurtosis_pop(x)`](#kurtosis_popx) | The excess kurtosis (Fisher’s definition) without bias correction. |
 | [`kurtosis(x)`](#kurtosisx) | The excess kurtosis (Fisher's definition) with bias correction according to the sample size. |
 | [`mad(x)`](#madx) | The median absolute deviation. Temporal types return a positive `INTERVAL`. |
