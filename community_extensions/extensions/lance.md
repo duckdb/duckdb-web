@@ -29,10 +29,10 @@ docs:
     Lance is a modern columnar data format optimized for ML/AI workloads, with native cloud storage support.
     This extension brings Lance into a familiar SQL workflow.
 
-extension_star_count: 23
-extension_star_count_pretty: 23
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 24
+extension_star_count_pretty: 24
+extension_download_count: 42
+extension_download_count_pretty: 42
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---

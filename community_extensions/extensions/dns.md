@@ -298,8 +298,8 @@ docs:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 501
-extension_download_count_pretty: 501
+extension_download_count: 480
+extension_download_count_pretty: 480
 image: '/images/community_extensions/social_preview/preview_community_extension_dns.png'
 layout: community_extension_doc
 ---
