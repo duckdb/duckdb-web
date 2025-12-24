@@ -490,7 +490,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The log-2 entropy. |
+| **Description** | Returns the log-2 entropy of count input-values. |
 | **Formula** | - |
 
 #### `kurtosis_pop(x)`
