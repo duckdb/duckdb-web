@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: http_request
   description: HTTP client extension for DuckDB with GET/POST/PUT/PATCH/DELETE and byte-range requests
-  version: 0.3.1
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb_http_request
-  ref: 5122074317dfcfaebd38987e1db64c78005c94b2
+  ref: fa3a7438c658a423f607a525673156034bf46244
 
 docs:
   hello_world: |
@@ -53,6 +53,7 @@ docs:
     - Byte-range requests with helper function
     - Auto-decompression of gzip/zstd responses
     - Form-encoded POST with http_post_form()
+    - Multipart/form-data uploads with http_post_multipart()
     - Parsed Set-Cookie headers into structured cookies array
     - Convenience fields: content_type, content_length
     - Respects duckdb http and proxy settings
@@ -62,8 +63,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 155
-extension_download_count_pretty: 155
+extension_download_count: 222
+extension_download_count_pretty: 222
 image: '/images/community_extensions/social_preview/preview_community_extension_http_request.png'
 layout: community_extension_doc
 ---
@@ -89,24 +90,26 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| byte_range        | scalar        | NULL        | NULL    |          |
-| http_delete       | scalar        | NULL        | NULL    |          |
-| http_delete       | table         | NULL        | NULL    |          |
-| http_get          | scalar        | NULL        | NULL    |          |
-| http_get          | table         | NULL        | NULL    |          |
-| http_head         | scalar        | NULL        | NULL    |          |
-| http_head         | table         | NULL        | NULL    |          |
-| http_patch        | scalar        | NULL        | NULL    |          |
-| http_patch        | table         | NULL        | NULL    |          |
-| http_post         | scalar        | NULL        | NULL    |          |
-| http_post         | table         | NULL        | NULL    |          |
-| http_post_form    | scalar        | NULL        | NULL    |          |
-| http_post_form    | table         | NULL        | NULL    |          |
-| http_put          | scalar        | NULL        | NULL    |          |
-| http_put          | table         | NULL        | NULL    |          |
-| http_range_header | scalar        | NULL        | NULL    |          |
+|    function_name    | function_type | description | comment | examples |
+|---------------------|---------------|-------------|---------|----------|
+| byte_range          | scalar        | NULL        | NULL    |          |
+| http_delete         | scalar        | NULL        | NULL    |          |
+| http_delete         | table         | NULL        | NULL    |          |
+| http_get            | scalar        | NULL        | NULL    |          |
+| http_get            | table         | NULL        | NULL    |          |
+| http_head           | scalar        | NULL        | NULL    |          |
+| http_head           | table         | NULL        | NULL    |          |
+| http_patch          | scalar        | NULL        | NULL    |          |
+| http_patch          | table         | NULL        | NULL    |          |
+| http_post           | scalar        | NULL        | NULL    |          |
+| http_post           | table         | NULL        | NULL    |          |
+| http_post_form      | scalar        | NULL        | NULL    |          |
+| http_post_form      | table         | NULL        | NULL    |          |
+| http_post_multipart | scalar        | NULL        | NULL    |          |
+| http_post_multipart | table         | NULL        | NULL    |          |
+| http_put            | scalar        | NULL        | NULL    |          |
+| http_put            | table         | NULL        | NULL    |          |
+| http_range_header   | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 

@@ -20,12 +20,12 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/minijinja
-  ref: f27e100457e2f51a71d343442d0fbb956afb10dd
+  ref: dd070c55ee8a09aa6443f8bfe947a88aaee0315f
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 527
-extension_download_count_pretty: 527
+extension_download_count: 519
+extension_download_count_pretty: 519
 image: '/images/community_extensions/social_preview/preview_community_extension_minijinja.png'
 layout: community_extension_doc
 ---
@@ -51,10 +51,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type |                             description                              | comment |                           examples                           |
-|------------------|---------------|----------------------------------------------------------------------|---------|--------------------------------------------------------------|
-| minijinja_render | scalar        | Render a Jinja2-style template using the MiniJinja templating engine | NULL    | [minijinja_render('Hello World!')]                           |
-| minijinja_render | scalar        | Render a Jinja2-style template with a JSON context                   | NULL    | [minijinja_render('Hello {{ name }}!', '{"name": "World"}')] |
+|         function_name         | function_type |                             description                              | comment |                                 examples                                  |
+|-------------------------------|---------------|----------------------------------------------------------------------|---------|---------------------------------------------------------------------------|
+| minijinja_render              | scalar        | Render a Jinja2-style template using the MiniJinja templating engine | NULL    | [minijinja_render('Hello World!')]                                        |
+| minijinja_render_with_context | scalar        | Render a Jinja2-style template with a JSON context                   | NULL    | [minijinja_render_with_context('Hello {{ name }}!', '{"name": "World"}')] |
 
 ### Added Settings
 
