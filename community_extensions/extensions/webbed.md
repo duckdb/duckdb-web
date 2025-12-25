@@ -78,9 +78,9 @@ docs:
     
     Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling, memory-safe RAII implementation, and 100% test coverage. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
 
-extension_star_count: 37
-extension_star_count_pretty: 37
-extension_download_count: 2788
+extension_star_count: 38
+extension_star_count_pretty: 38
+extension_download_count: 2849
 extension_download_count_pretty: 2.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc

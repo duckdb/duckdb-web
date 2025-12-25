@@ -80,8 +80,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 532
-extension_download_count_pretty: 532
+extension_download_count: 523
+extension_download_count_pretty: 523
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---
