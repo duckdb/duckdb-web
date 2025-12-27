@@ -8,18 +8,18 @@ excerpt: |
 extension:
   name: observefs
   description: Provides IO observability to filesystem
-  version: 0.4.3
+  version: 0.4.4
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64;windows_amd64_mingw"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools"
   maintainers:
     - dentiny
     - peterxcli
 
 repo:
   github: dentiny/duckdb-filesystem-observability
-  ref: 4f505aadb7835475300ede1e49eced1e65ca8a2a
+  ref: f0ee3540d47256178449d84ec503404acfc3f8ba
 
 docs:
   hello_world: |
@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 478
-extension_download_count_pretty: 478
+extension_download_count: 482
+extension_download_count_pretty: 482
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---
