@@ -8,31 +8,70 @@ excerpt: |
 extension:
   name: lance
   description: Query Lance datasets directly from DuckDB.
-  version: 0.1.0
+  version: 0.2.0
   language: Rust & C++
   build: cmake
   license: Apache-2.0
   maintainers:
     - Xuanwo
   requires_toolchains: rust
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;osx_amd64"
 
 repo:
   github: lance-format/lance-duckdb
-  # v0.1.0
-  ref: a1c75b4fbbc9c90a33451c1756e2a6c5c1e3a72f
+  # v0.2.0
+  ref: 5d3c43d8a3a47a013634f5173a1bcb8366e6a2e7
 
 docs:
   hello_world: |
-    SELECT * FROM 's3://bucket/my_dataset.lance';
+    INSTALL lance FROM community;
+    LOAD lance;
+
+    -- Query a local dataset
+    SELECT * FROM 'path/to/dataset.lance' LIMIT 10;
+
+    -- Query an S3 dataset
+    SELECT * FROM 's3://bucket/path/to/dataset.lance' LIMIT 10;
+
+    -- S3 authentication via DuckDB Secrets
+    CREATE SECRET (TYPE S3, provider credential_chain);
+    SELECT * FROM 's3://bucket/path/to/dataset.lance' LIMIT 10;
+
+    -- Vector search (returns `_distance`, smaller is closer)
+    SELECT id, label, _distance
+    FROM lance_vector_search(
+      'path/to/dataset.lance', 'vec',
+      [0.1, 0.2, 0.3, 0.4]::FLOAT[],
+      k = 5, prefilter = true
+    )
+    ORDER BY _distance ASC;
+
+    -- Full-text search (returns `_score`, larger is better)
+    SELECT id, text, _score
+    FROM lance_fts(
+      'path/to/dataset.lance', 'text', 'puppy',
+      k = 10, prefilter = true
+    )
+    ORDER BY _score DESC;
+
+    -- Hybrid search (returns `_hybrid_score`, larger is better)
+    SELECT id, _hybrid_score, _distance, _score
+    FROM lance_hybrid_search(
+      'path/to/dataset.lance',
+      'vec', [0.1, 0.2, 0.3, 0.4]::FLOAT[],
+      'text', 'puppy',
+      k = 10, alpha = 0.5, oversample_factor = 4
+    )
+    ORDER BY _hybrid_score DESC;
   extended_description: |
     Lance is a modern columnar data format optimized for ML/AI workloads, with native cloud storage support.
     This extension brings Lance into a familiar SQL workflow.
+    For detailed setup and usage instructions, visit the [extension repository](https://github.com/lance-format/lance-duckdb).
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: 119
-extension_download_count_pretty: 119
+extension_star_count: 31
+extension_star_count_pretty: 31
+extension_download_count: 285
+extension_download_count_pretty: 285
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---
@@ -58,8 +97,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| lance_scan    | table         | NULL        | NULL    |          |
+|    function_name    | function_type | description | comment | examples |
+|---------------------|---------------|-------------|---------|----------|
+| lance_fts           | table         | NULL        | NULL    |          |
+| lance_hybrid_search | table         | NULL        | NULL    |          |
+| lance_scan          | table         | NULL        | NULL    |          |
+| lance_vector_search | table         | NULL        | NULL    |          |
 
 

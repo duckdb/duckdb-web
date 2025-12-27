@@ -79,8 +79,8 @@ docs:
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 720
-extension_download_count_pretty: 720
+extension_download_count: 764
+extension_download_count_pretty: 764
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---
