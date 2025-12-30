@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: onager
   description: A DuckDB extension for graph data analytics
-  version: 0.1.0-alpha.1
+  version: 0.1.0-alpha.2
   language: Rust & C++
   build: cmake
   license: MIT OR Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/onager
-  ref: d1d67b4f9c342c8b574ee47753da0ef73857c1a5
+  ref: cb5ce3c03a6567d9d44f9c49e718f63aec2d1001
 
 docs:
   hello_world: |
@@ -44,10 +44,10 @@ docs:
     For more information, visit the [GitHub repository](https://github.com/CogitatorTech/onager)
     or the [Onager documentation](https://cogitatortech.github.io/onager/).
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 37
+extension_star_count_pretty: 37
+extension_download_count: 187
+extension_download_count_pretty: 187
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
 layout: community_extension_doc
 ---
@@ -68,5 +68,75 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|          function_name           | function_type |            description            |                           comment                            |                          examples                          |
+|----------------------------------|---------------|-----------------------------------|--------------------------------------------------------------|------------------------------------------------------------|
+| onager_create_graph              | scalar        | Create a named graph (0=success)  | Returns: integer. Params: (name, directed)                   | [select onager_create_graph('my_graph', true);]            |
+| onager_drop_graph                | scalar        | Delete a named graph              | Returns: integer. Params: (name)                             | [select onager_drop_graph('my_graph');]                    |
+| onager_add_node                  | scalar        | Add a node to graph               | Returns: integer. Params: (graph, node_id)                   | [select onager_add_node('my_graph', 1);]                   |
+| onager_add_edge                  | scalar        | Add a weighted edge               | Returns: integer. Params: (graph, src, dst, weight)          | [select onager_add_edge('my_graph', 1, 2, 1.0);]           |
+| onager_list_graphs               | scalar        | List all graphs (JSON array)      | Returns: varchar. Params: ()                                 | [select onager_list_graphs();]                             |
+| onager_node_count                | scalar        | Count nodes in graph              | Returns: bigint. Params: (graph)                             | [select onager_node_count('my_graph');]                    |
+| onager_edge_count                | scalar        | Count edges in graph              | Returns: bigint. Params: (graph)                             | [select onager_edge_count('my_graph');]                    |
+| onager_node_in_degree            | scalar        | In-degree of a node               | Returns: bigint. Params: (graph, node)                       | [select onager_node_in_degree('my_graph', 1);]             |
+| onager_node_out_degree           | scalar        | Out-degree of a node              | Returns: bigint. Params: (graph, node)                       | [select onager_node_out_degree('my_graph', 1);]            |
+| onager_ctr_pagerank              | table         | PageRank centrality               | Returns: node_id, rank. Params: (edges)                      | [select * from onager_ctr_pagerank(edges_table);]          |
+| onager_ctr_degree                | table         | Degree centrality                 | Returns: node_id, in_degree, out_degree. Params: (edges)     | [select * from onager_ctr_degree(edges_table);]            |
+| onager_ctr_betweenness           | table         | Betweenness centrality            | Returns: node_id, betweenness. Params: (edges)               | [select * from onager_ctr_betweenness(edges_table);]       |
+| onager_ctr_closeness             | table         | Closeness centrality              | Returns: node_id, closeness. Params: (edges)                 | [select * from onager_ctr_closeness(edges_table);]         |
+| onager_ctr_eigenvector           | table         | Eigenvector centrality            | Returns: node_id, eigenvector. Params: (edges)               | [select * from onager_ctr_eigenvector(edges_table);]       |
+| onager_ctr_katz                  | table         | Katz centrality                   | Returns: node_id, katz. Params: (edges, alpha)               | [select * from onager_ctr_katz(edges_table, 0.1);]         |
+| onager_ctr_harmonic              | table         | Harmonic centrality               | Returns: node_id, harmonic. Params: (edges)                  | [select * from onager_ctr_harmonic(edges_table);]          |
+| onager_ctr_personalized_pagerank | table         | Personalized PageRank             | Returns: node_id, score. Params: (...)                       | [select * from onager_ctr_personalized_pagerank(...);]     |
+| onager_ctr_voterank              | table         | VoteRank influential spreaders    | Returns: node_id. Params: (edges, num_seeds)                 | [select * from onager_ctr_voterank(edges_table);]          |
+| onager_ctr_local_reaching        | table         | Local reaching centrality         | Returns: node_id, centrality. Params: (edges, distance)      | [select * from onager_ctr_local_reaching(edges_table);]    |
+| onager_ctr_laplacian             | table         | Laplacian centrality              | Returns: node_id, centrality. Params: (edges)                | [select * from onager_ctr_laplacian(edges_table);]         |
+| onager_cmm_louvain               | table         | Louvain modularity optimization   | Returns: node_id, community. Params: (edges [, seed])        | [select * from onager_cmm_louvain(edges_table);]           |
+| onager_cmm_components            | table         | Connected components              | Returns: node_id, component. Params: (edges)                 | [select * from onager_cmm_components(edges_table);]        |
+| onager_cmm_label_prop            | table         | Label propagation                 | Returns: node_id, label. Params: (edges)                     | [select * from onager_cmm_label_prop(edges_table);]        |
+| onager_cmm_girvan_newman         | table         | Girvan-Newman edge betweenness    | Returns: node_id, community. Params: (edges, communities)    | [select * from onager_cmm_girvan_newman(edges_table);]     |
+| onager_cmm_spectral              | table         | Spectral clustering               | Returns: node_id, community. Params: (edges, k)              | [select * from onager_cmm_spectral(edges_table, 2);]       |
+| onager_cmm_infomap               | table         | Infomap community detection       | Returns: node_id, community. Params: (edges)                 | [select * from onager_cmm_infomap(edges_table);]           |
+| onager_lnk_jaccard               | table         | Jaccard coefficient               | Returns: node1, node2, coefficient. Params: (edges)          | [select * from onager_lnk_jaccard(edges_table);]           |
+| onager_lnk_adamic_adar           | table         | Adamic-Adar index                 | Returns: node1, node2, score. Params: (edges)                | [select * from onager_lnk_adamic_adar(edges_table);]       |
+| onager_lnk_pref_attach           | table         | Preferential attachment           | Returns: node1, node2, score. Params: (edges)                | [select * from onager_lnk_pref_attach(edges_table);]       |
+| onager_lnk_resource_alloc        | table         | Resource allocation               | Returns: node1, node2, score. Params: (edges)                | [select * from onager_lnk_resource_alloc(edges_table);]    |
+| onager_lnk_common_neighbors      | table         | Common neighbors count            | Returns: node1, node2, count. Params: (edges)                | [select * from onager_lnk_common_neighbors(edges_table);]  |
+| onager_mtr_diameter              | table         | Graph diameter                    | Returns: diameter. Params: (edges)                           | [select * from onager_mtr_diameter(edges_table);]          |
+| onager_mtr_radius                | table         | Graph radius                      | Returns: radius. Params: (edges)                             | [select * from onager_mtr_radius(edges_table);]            |
+| onager_mtr_avg_clustering        | table         | Average clustering coefficient    | Returns: avg_clustering. Params: (edges)                     | [select * from onager_mtr_avg_clustering(edges_table);]    |
+| onager_mtr_avg_path_length       | table         | Average shortest path length      | Returns: avg_path_length. Params: (edges)                    | [select * from onager_mtr_avg_path_length(edges_table);]   |
+| onager_mtr_transitivity          | table         | Global clustering (transitivity)  | Returns: transitivity. Params: (edges)                       | [select * from onager_mtr_transitivity(edges_table);]      |
+| onager_mtr_triangles             | table         | Triangle count per node           | Returns: node_id, triangles. Params: (edges)                 | [select * from onager_mtr_triangles(edges_table);]         |
+| onager_mtr_assortativity         | table         | Degree assortativity coefficient  | Returns: assortativity. Params: (edges)                      | [select * from onager_mtr_assortativity(edges_table);]     |
+| onager_mtr_density               | table         | Graph density (0 to 1)            | Returns: density. Params: (edges)                            | [select * from onager_mtr_density(edges_table);]           |
+| onager_pth_dijkstra              | table         | Shortest paths from source        | Returns: node_id, distance. Params: (edges, source)          | [select * from onager_pth_dijkstra(edges_table, 1);]       |
+| onager_pth_bellman_ford          | table         | Shortest paths (negative weights) | Returns: node_id, distance. Params: (weighted_edges, source) | [select * from onager_pth_bellman_ford(edges_table, 1);]   |
+| onager_pth_floyd_warshall        | table         | All-pairs shortest paths          | Returns: src, dst, distance. Params: (weighted_edges)        | [select * from onager_pth_floyd_warshall(edges_table);]    |
+| onager_trv_bfs                   | table         | Breadth-first traversal           | Returns: node_id. Params: (edges, source)                    | [select * from onager_trv_bfs(edges_table, 1);]            |
+| onager_trv_dfs                   | table         | Depth-first traversal             | Returns: node_id. Params: (edges, source)                    | [select * from onager_trv_dfs(edges_table, 1);]            |
+| onager_apx_max_clique            | table         | Maximum clique (approximation)    | Returns: node_id. Params: (edges)                            | [select * from onager_apx_max_clique(edges_table);]        |
+| onager_apx_independent_set       | table         | Maximum independent set (approx)  | Returns: node_id. Params: (edges)                            | [select * from onager_apx_independent_set(edges_table);]   |
+| onager_apx_vertex_cover          | table         | Minimum vertex cover (approx)     | Returns: node_id. Params: (edges)                            | [select * from onager_apx_vertex_cover(edges_table);]      |
+| onager_apx_tsp                   | table         | TSP tour (greedy approx)          | Returns: order, node_id. Params: (weighted_edges)            | [select * from onager_apx_tsp(edges_table);]               |
+| onager_mst_kruskal               | table         | Kruskal's MST                     | Returns: src, dst, weight. Params: (weighted_edges)          | [select * from onager_mst_kruskal(edges_table);]           |
+| onager_gen_erdos_renyi           | table         | Random graph (G(n,p))             | Returns: src, dst. Params: (n, p [, seed])                   | [select * from onager_gen_erdos_renyi(100, 0.1);]          |
+| onager_gen_barabasi_albert       | table         | Scale-free graph                  | Returns: src, dst. Params: (n, m [, seed])                   | [select * from onager_gen_barabasi_albert(100, 5);]        |
+| onager_gen_watts_strogatz        | table         | Small-world graph                 | Returns: src, dst. Params: (n, k, beta [, seed])             | [select * from onager_gen_watts_strogatz(100, 4, 0.1);]    |
+| onager_sub_ego_graph             | table         | Ego graph around a node           | Returns: src, dst. Params: (edges, center, radius)           | [select * from onager_sub_ego_graph(edges_table, 1, 2);]   |
+| onager_sub_k_hop                 | table         | Nodes within k hops               | Returns: node_id. Params: (edges, start, k)                  | [select * from onager_sub_k_hop(edges_table, 1, 2);]       |
+| onager_sub_induced               | table         | Induced subgraph                  | Returns: src, dst. Params: (edges, nodes)                    | [select * from onager_sub_induced(edges_table);]           |
+| onager_par_pagerank              | table         | Parallel PageRank                 | Returns: node_id, rank. Params: (edges)                      | [select * from onager_par_pagerank(edges_table);]          |
+| onager_par_bfs                   | table         | Parallel BFS traversal            | Returns: node_id. Params: (edges, source)                    | [select * from onager_par_bfs(edges_table, 1);]            |
+| onager_par_shortest_paths        | table         | Parallel shortest paths           | Returns: node_id, distance. Params: (edges, source)          | [select * from onager_par_shortest_paths(edges_table, 1);] |
+| onager_par_components            | table         | Parallel connected components     | Returns: node_id, component. Params: (edges)                 | [select * from onager_par_components(edges_table);]        |
+| onager_par_clustering            | table         | Parallel clustering coefficients  | Returns: node_id, coefficient. Params: (edges)               | [select * from onager_par_clustering(edges_table);]        |
+| onager_par_triangles             | table         | Parallel triangle count           | Returns: node_id, triangles. Params: (edges)                 | [select * from onager_par_triangles(edges_table);]         |
+| onager_version                   | scalar        | Extension version                 | Returns: varchar. Params: ()                                 | [select onager_version();]                                 |
+| onager_last_error                | scalar        | Last error message                | Returns: varchar. Params: ()                                 | [select onager_last_error();]                              |
 
 
