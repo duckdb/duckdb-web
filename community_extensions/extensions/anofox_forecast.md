@@ -16,12 +16,12 @@ extension:
     - sipemu
 repo:
   github: DataZooDE/anofox-forecast
-  ref: d96383f7f8b2fc98c8b0cb7c90ec3868801ca5f8
+  ref: b04b81734c5d6d95a1e0c19f8a8d16dbb8baea63
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 539
-extension_download_count_pretty: 539
+extension_download_count: 502
+extension_download_count_pretty: 502
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -83,6 +83,8 @@ LOAD {{ page.extension.name }};
 | anofox_fcst_ts_forecast                  | table_macro   | NULL        | NULL    |          |
 | anofox_fcst_ts_forecast_agg              | aggregate     | NULL        | NULL    |          |
 | anofox_fcst_ts_forecast_by               | table_macro   | NULL        | NULL    |          |
+| anofox_fcst_ts_forecast_by_test          | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_forecast_by_test_operator | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_mae                       | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mape                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mase                      | scalar        | NULL        | NULL    |          |
@@ -132,6 +134,7 @@ LOAD {{ page.extension.name }};
 | ts_forecast                              | table_macro   | NULL        | NULL    |          |
 | ts_forecast_agg                          | aggregate     | NULL        | NULL    |          |
 | ts_forecast_by                           | table_macro   | NULL        | NULL    |          |
+| ts_forecast_by_test                      | table         | NULL        | NULL    |          |
 | ts_mae                                   | scalar        | NULL        | NULL    |          |
 | ts_mape                                  | scalar        | NULL        | NULL    |          |
 | ts_mase                                  | scalar        | NULL        | NULL    |          |
@@ -146,5 +149,14 @@ LOAD {{ page.extension.name }};
 | ts_smape                                 | scalar        | NULL        | NULL    |          |
 | ts_stats                                 | table_macro   | NULL        | NULL    |          |
 | ts_stats_summary                         | table_macro   | NULL        | NULL    |          |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|           name           |                 description                 | input_type | scope  | aliases |
+|--------------------------|---------------------------------------------|------------|--------|---------|
+| anofox_telemetry_enabled | Enable or disable anonymous usage telemetry | BOOLEAN    | GLOBAL | []      |
+| anofox_telemetry_key     | PostHog API key for telemetry               | VARCHAR    | GLOBAL | []      |
 
 

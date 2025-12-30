@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance
   description: Query Lance datasets directly from DuckDB.
-  version: 0.2.0
+  version: 0.4.0
   language: Rust & C++
   build: cmake
   license: Apache-2.0
@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: lance-format/lance-duckdb
-  # v0.2.0
-  ref: 5d3c43d8a3a47a013634f5173a1bcb8366e6a2e7
+  # v0.4.0
+  ref: 2292a513020ab2dbdc5ec4daaa9e1cbac641de41
 
 docs:
   hello_world: |
@@ -68,10 +68,10 @@ docs:
     This extension brings Lance into a familiar SQL workflow.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/lance-format/lance-duckdb).
 
-extension_star_count: 31
-extension_star_count_pretty: 31
-extension_download_count: 285
-extension_download_count_pretty: 285
+extension_star_count: 35
+extension_star_count_pretty: 35
+extension_download_count: 509
+extension_download_count_pretty: 509
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---
@@ -97,11 +97,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| lance_fts           | table         | NULL        | NULL    |          |
-| lance_hybrid_search | table         | NULL        | NULL    |          |
-| lance_scan          | table         | NULL        | NULL    |          |
-| lance_vector_search | table         | NULL        | NULL    |          |
+|     function_name      | function_type | description | comment | examples |
+|------------------------|---------------|-------------|---------|----------|
+| __lance_namespace_scan | table         | NULL        | NULL    |          |
+| __lance_scan           | table         | NULL        | NULL    |          |
+| lance_fts              | table         | NULL        | NULL    |          |
+| lance_hybrid_search    | table         | NULL        | NULL    |          |
+| lance_vector_search    | table         | NULL        | NULL    |          |
 
 

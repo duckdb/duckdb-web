@@ -39,10 +39,10 @@ docs:
   extended_description: |
     The system_stats extension provides table functions to access system-level statistics (including memory, CPU, and disk) that can be used for monitoring.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 466
-extension_download_count_pretty: 466
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 475
+extension_download_count_pretty: 475
 image: '/images/community_extensions/social_preview/preview_community_extension_system_stats.png'
 layout: community_extension_doc
 ---
