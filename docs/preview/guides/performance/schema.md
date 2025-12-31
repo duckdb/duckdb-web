@@ -70,9 +70,9 @@ DuckDB allows defining [constraints]({% link docs/preview/sql/constraints.md %})
 
 We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst).
 This table has approx. 554 million entries.
-In the first experiments, we create the schema *without* a primary key, then load the data.
-In the second experiment, we create the schema *with* a primary key, then load the data.
-In the third case, we create the schema *without* a primary key, load the data and then add the primary key constraint.
+In the first experiment, we create the schema *with* a primary key, then load the data.
+In the second experiment, we create the schema *without* a primary key, then load the data.
+In the third experiment, we create the schema *without* a primary key, load the data and then add the primary key constraint.
 In all cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
 
 |                  Operation                    | Execution time |
