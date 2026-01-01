@@ -29,10 +29,10 @@ docs:
     Quackformers, a DuckDB extension embeddings. Intended to be used alongside VSS vector search for RAG-type functionalities.
     Quackformers is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/)
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 477
-extension_download_count_pretty: 477
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 498
+extension_download_count_pretty: 498
 image: '/images/community_extensions/social_preview/preview_community_extension_quackformers.png'
 layout: community_extension_doc
 ---
