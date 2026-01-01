@@ -8,17 +8,17 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) that enables SQL-native analysis of structured documents with intelligent schema inference, XPath-based data extraction, and powerful HTML table parsing capabilities.
-  version: 1.2.0
+  version: 1.2.1
   language: C++
   build: cmake
   license: MIT
   requires_toolchains: "vcpkg"
   maintainers:
     - teaguesterling
-  vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
+  vcpkg_commit: dd3097e305afa53f7b4312371f62058d2e665320
 repo:
   github: teaguesterling/duckdb_webbed
-  ref: 160b8e8fd0a8bf2350f71d38ce392b3d1a265025
+  ref: e65b780dcbfadb5a57f68cee4202249ec71cb164
 
 docs:
   hello_world: |
@@ -80,7 +80,7 @@ docs:
 
 extension_star_count: 38
 extension_star_count_pretty: 38
-extension_download_count: 2573
+extension_download_count: 2639
 extension_download_count_pretty: 2.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
@@ -125,6 +125,8 @@ LOAD {{ page.extension.name }};
 | read_xml_objects            | table         | NULL        | NULL    |          |
 | to_xml                      | scalar        | NULL        | NULL    |          |
 | xml                         | scalar        | NULL        | NULL    |          |
+| xml_common_namespaces       | scalar        | NULL        | NULL    |          |
+| xml_detect_prefixes         | scalar        | NULL        | NULL    |          |
 | xml_extract_all_text        | scalar        | NULL        | NULL    |          |
 | xml_extract_attributes      | scalar        | NULL        | NULL    |          |
 | xml_extract_cdata           | scalar        | NULL        | NULL    |          |
@@ -134,6 +136,7 @@ LOAD {{ page.extension.name }};
 | xml_extract_text            | scalar        | NULL        | NULL    |          |
 | xml_libxml2_version         | scalar        | NULL        | NULL    |          |
 | xml_minify                  | scalar        | NULL        | NULL    |          |
+| xml_mock_namespaces         | scalar        | NULL        | NULL    |          |
 | xml_namespaces              | scalar        | NULL        | NULL    |          |
 | xml_pretty_print            | scalar        | NULL        | NULL    |          |
 | xml_stats                   | scalar        | NULL        | NULL    |          |

@@ -52,9 +52,9 @@ docs:
 
     
 
-extension_star_count: 48
-extension_star_count_pretty: 48
-extension_download_count: 1392
+extension_star_count: 49
+extension_star_count_pretty: 49
+extension_download_count: 1405
 extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_nanodbc.png'
 layout: community_extension_doc
