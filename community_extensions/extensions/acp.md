@@ -68,10 +68,10 @@ docs:
     - bun or Node.js (for the agent runtime)
     - Claude Code with Anthropic API credentials or a Claude Pro/Max account
 
-extension_star_count: 20
-extension_star_count_pretty: 20
-extension_download_count: 493
-extension_download_count_pretty: 493
+extension_star_count: 21
+extension_star_count_pretty: 21
+extension_download_count: 511
+extension_download_count_pretty: 511
 image: '/images/community_extensions/social_preview/preview_community_extension_acp.png'
 layout: community_extension_doc
 ---

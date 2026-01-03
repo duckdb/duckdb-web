@@ -31,8 +31,8 @@ docs:
 
 extension_star_count: 35
 extension_star_count_pretty: 35
-extension_download_count: 552
-extension_download_count_pretty: 552
+extension_download_count: 541
+extension_download_count_pretty: 541
 image: '/images/community_extensions/social_preview/preview_community_extension_geography.png'
 layout: community_extension_doc
 ---
