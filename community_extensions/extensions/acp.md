@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 511
-extension_download_count_pretty: 511
+extension_download_count: 521
+extension_download_count_pretty: 521
 image: '/images/community_extensions/social_preview/preview_community_extension_acp.png'
 layout: community_extension_doc
 ---

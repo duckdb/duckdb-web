@@ -64,9 +64,9 @@ repo:
   github: Query-farm/httpserver
   ref: 8a53d8b7f4290608e0eb0d4dbfbafefaf04209e9
 
-extension_star_count: 263
-extension_star_count_pretty: 263
-extension_download_count: 4812
+extension_star_count: 264
+extension_star_count_pretty: 264
+extension_download_count: 4830
 extension_download_count_pretty: 4.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
