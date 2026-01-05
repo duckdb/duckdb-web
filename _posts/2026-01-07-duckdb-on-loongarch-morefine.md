@@ -32,12 +32,12 @@ For performance comparison, we re-used the methodology from our [previous blog p
 
 Here are the results, and they are not great. We start with aggregated timings:
 
-|  SF   |   sys    |  geomean  | sum           |
-|-------|----------|----------:|--------------:|
-| SF100 | MacBook  |      0.6  | 16.9          |
-| SF100 | MOREFINE |      6.1  | 192.8         |
-| SF300 | MacBook  |      2.8  | 78.8          |
-| SF300 | MOREFINE |      27.3 | 791.6         |
+| SF    | System   | Geometric mean |   Sum |
+| ----- | -------- | -------------: | ----: |
+| SF100 | MacBook  |            0.6 |  16.9 |
+| SF100 | MOREFINE |            6.1 | 192.8 |
+| SF300 | MacBook  |            2.8 |  78.8 |
+| SF300 | MOREFINE |           27.3 | 791.6 |
 
 We can see that the MacBook is around *ten times faster* than the MOREFINE on this benchmark, both in the geometric mean of runtimes as well as in the sum.
 If you are interested in the individual query runtimes, you can find them below.
