@@ -143,7 +143,7 @@ FROM read_csv(['flights1.csv', 'flights2.csv'], union_by_name = true, filename =
 | 1988-01-02 | New York, NY   | Los Angeles, CA | NULL          | flights1.csv |
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            | flights2.csv |
 
-> The `filename` argument also accepts a string (e.g. `filename = 'input_file'`). When provided, the string is used as the name of the added column. This is useful when the source data already contains a filename column and you want to avoid a name collision.
+> The `filename` argument also accepts a string (e.g., `filename = 'input_file'`). When provided, the string is used as the name of the added column. This is useful when the source data already contains a `filename` column and you want to avoid a name collision.
 
 ## Glob Function to Find Filenames
 
