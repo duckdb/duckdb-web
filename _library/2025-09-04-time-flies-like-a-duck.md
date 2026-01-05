@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Time Flies like a Duck"
-author: "Richard Wesley (DuckDB Labs)"
+author: "Richard Wesley"
 thumb: "/images/library/thumbs/2025-09-04-time-flies-like-a-duck.jpg"
 image: "/images/library/thumbs/2025-09-04-time-flies-like-a-duck.jpg"
 tags: ["Talk"]
