@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: yaml
   description: Read YAML files into DuckDB with native YAML type support, comprehensive extraction functions, and seamless JSON interoperability
-  version: 1.4.0
+  version: 1.5.0
   language: C++
   build: cmake
   license: MIT
@@ -20,32 +20,40 @@ extension:
   
 repo:
   github: teaguesterling/duckdb_yaml
-  ref: 238f700422ff5cd2954588d294f409f7227e65a2
+  ref: 2c5f852ceda6a96bd7a95b724c121fd86bce30a5
 
 docs:
   hello_world: |
     -- Load the extension
     LOAD yaml;
-    
+
     -- Query YAML files directly
     SELECT * FROM 'config.yaml';
     SELECT * FROM 'data/*.yml' WHERE active = true;
-    
+
     -- Create tables with YAML columns
     CREATE TABLE configs(id INTEGER, config YAML);
     INSERT INTO configs VALUES (1, E'server: production\nport: 8080\nfeatures: [logging, metrics]');
-    
+
     -- Extract data using YAML functions
-    SELECT 
-        yaml_extract_string(config, '$.server') AS environment,
+    SELECT
+        config ->> '$.server' AS environment,  -- Arrow operator
         yaml_extract(config, '$.port') AS port,
-        yaml_extract(config, '$.features[0]') AS first_feature
+        yaml_value(config, '$.port') AS port_scalar
     FROM configs;
-    
+
+    -- Analyze YAML structure
+    SELECT yaml_structure(config) FROM configs;
+    -- Returns: {"server":"VARCHAR","port":"UBIGINT","features":["VARCHAR"]}
+
+    -- Check containment and merge documents
+    SELECT yaml_contains(config, 'server: production') AS is_prod FROM configs;
+    SELECT yaml_merge_patch(config, 'debug: true') AS with_debug FROM configs;
+
     -- Convert between YAML and JSON
     SELECT yaml_to_json(config) AS json_config FROM configs;
-    SELECT value_to_yaml({name: 'John', age: 30}) AS yaml_person;
-    
+    SELECT to_yaml({name: 'John', age: 30}) AS yaml_person;
+
     -- Write query results to YAML
     COPY (SELECT * FROM users) TO 'output.yaml' (FORMAT yaml, STYLE block);
 
@@ -57,7 +65,8 @@ docs:
     - **Native YAML Type**: Full YAML type support with automatic casting between YAML, JSON, and VARCHAR
     - **File Reading**: Read YAML files with `read_yaml()` and `read_yaml_objects()` functions supporting multi-document files, top-level sequences, and robust error handling
     - **Direct File Querying**: Query YAML files directly using `FROM 'file.yaml'` syntax
-    - **Extraction Functions**: Query YAML data with `yaml_extract()`, `yaml_type()`, `yaml_exists()`, and path-based extraction
+    - **Extraction Functions**: Query YAML data with `yaml_extract()`, `yaml_type()`, `yaml_exists()`, `yaml_value()`, `->>` operator, and path-based extraction
+    - **Document Operations**: Check containment with `yaml_contains()`, merge documents with `yaml_merge_patch()`, and analyze structure with `yaml_structure()`
     - **Type Detection**: Comprehensive automatic type detection for temporal types (DATE, TIME, TIMESTAMP), optimal numeric types, and boolean values
     - **Column Type Specification**: Explicitly define column types when reading YAML files for schema consistency
     - **YAML Output**: Write query results to YAML files using `COPY TO` with configurable formatting styles
@@ -116,22 +125,37 @@ LOAD {{ page.extension.name }};
 | read_yaml              | table         | NULL        | NULL    |          |
 | read_yaml_frontmatter  | table         | NULL        | NULL    |          |
 | read_yaml_objects      | table         | NULL        | NULL    |          |
+| to_yaml                | scalar        | NULL        | NULL    |          |
 | value_to_yaml          | scalar        | NULL        | NULL    |          |
 | yaml                   | scalar        | NULL        | NULL    |          |
 | yaml_agg               | aggregate     | NULL        | NULL    |          |
 | yaml_array_elements    | table         | NULL        | NULL    |          |
 | yaml_array_length      | scalar        | NULL        | NULL    |          |
 | yaml_build_object      | scalar        | NULL        | NULL    |          |
+| yaml_contains          | scalar        | NULL        | NULL    |          |
 | yaml_each              | table         | NULL        | NULL    |          |
 | yaml_exists            | scalar        | NULL        | NULL    |          |
 | yaml_extract           | scalar        | NULL        | NULL    |          |
+| yaml_extract_path      | scalar        | NULL        | NULL    |          |
+| yaml_extract_path_text | scalar        | NULL        | NULL    |          |
 | yaml_extract_string    | scalar        | NULL        | NULL    |          |
 | yaml_get_default_style | scalar        | NULL        | NULL    |          |
 | yaml_keys              | scalar        | NULL        | NULL    |          |
+| yaml_merge_patch       | scalar        | NULL        | NULL    |          |
 | yaml_set_default_style | scalar        | NULL        | NULL    |          |
+| yaml_structure         | scalar        | NULL        | NULL    |          |
 | yaml_to_json           | scalar        | NULL        | NULL    |          |
 | yaml_type              | scalar        | NULL        | NULL    |          |
 | yaml_valid             | scalar        | NULL        | NULL    |          |
+| yaml_value             | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| ->>           | scalar        | NULL        | NULL    |          |
 
 ### Added Types
 

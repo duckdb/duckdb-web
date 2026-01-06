@@ -54,8 +54,8 @@ docs:
 
 extension_star_count: 32
 extension_star_count_pretty: 32
-extension_download_count: 526
-extension_download_count_pretty: 526
+extension_download_count: 525
+extension_download_count_pretty: 525
 image: '/images/community_extensions/social_preview/preview_community_extension_pbix.png'
 layout: community_extension_doc
 ---
