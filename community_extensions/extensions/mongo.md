@@ -20,23 +20,15 @@ extension:
 
 repo:
   github: stephaniewang526/duckdb-mongo
-  ref: faaa7c6912bc8ba297493a137b987c272e63055c
+  ref: f11cf8f51b40c07b161b665cd11e00abb14200e1
 
 docs:
   hello_world: |
-    -- Load the extension
-    LOAD 'mongo';
+    -- Attach to MongoDB
+    ATTACH 'host=localhost port=27017' AS mongo_db (TYPE MONGO);
     
-    -- Connect to MongoDB and query collections
-    SELECT * FROM mongo_scan('mongodb://localhost:27017', 'mydb', 'mycollection');
-    
-    -- Use MongoDB Atlas connection string
-    SELECT * FROM mongo_scan('mongodb+srv://user:pass@cluster.mongodb.net/dbname', 'mydb', 'mycollection');
-    
-    -- Attach MongoDB as a database
-    ATTACH 'mongodb://localhost:27017' AS mongo_db (TYPE mongo);
-    USE mongo_db;
-    SELECT * FROM mycollection;
+    -- Query your collections
+    SELECT * FROM mongo_db.mydb.mycollection LIMIT 10;
   extended_description: |
     The duckdb-mongo extension provides direct SQL access to MongoDB collections without requiring data export or ETL processes. 
     It supports both standalone MongoDB instances and MongoDB Atlas clusters, with automatic schema inference and filter pushdown 
@@ -44,10 +36,10 @@ docs:
     joins, aggregations, and complex analytical operations.
 
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 102
-extension_download_count_pretty: 102
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 175
+extension_download_count_pretty: 175
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
