@@ -58,8 +58,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 484
-extension_download_count_pretty: 484
+extension_download_count: 483
+extension_download_count_pretty: 483
 image: '/images/community_extensions/social_preview/preview_community_extension_nats_js.png'
 layout: community_extension_doc
 ---

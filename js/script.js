@@ -316,10 +316,10 @@ $(document).ready(function(){
 	
 // Add class-name to external Links
 $('a').filter(function() {
-	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0;
+	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0 && !$(this).hasClass('button');
 }).addClass("externallink").attr('target','_blank');
 
-$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a').removeClass('externallink'); 
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button').removeClass('externallink');
 $('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
 $('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
 
