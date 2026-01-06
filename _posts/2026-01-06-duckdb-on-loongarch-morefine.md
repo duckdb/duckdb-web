@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB on LoongArch"
 author: "Hannes Mühleisen"
-#thumb: "/images/blog/thumbs/encryption-in-duckdb.svg"
-#image: "/images/blog/thumbs/encryption-in-duckdb.png"
+thumb: "/images/blog/thumbs/morefine-m700s.svg"
+image: "/images/blog/thumbs/morefine-m700s.jpg"
 excerpt: "In today's “What's On Your Desk?” episode, we test a Loongson CPU with the LoongArch architecture."
 tags: ["benchmark"]
 ---
@@ -80,7 +80,7 @@ Click here to see the individual query runtimes.
 </tr>
 <tr>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.570</td>
 <td style="text-align: right;">7.348</td>
 <td style="text-align: right;">2.331</td>
 <td style="text-align: right;">27.185</td>
@@ -94,21 +94,21 @@ Click here to see the individual query runtimes.
 </tr>
 <tr>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.180</td>
 <td style="text-align: right;">1.236</td>
 <td style="text-align: right;">1.395</td>
 <td style="text-align: right;">13.225</td>
 </tr>
 <tr>
 <td style="text-align: right;">7</td>
-<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">0.620</td>
 <td style="text-align: right;">7.702</td>
 <td style="text-align: right;">3.119</td>
 <td style="text-align: right;">37.411</td>
 </tr>
 <tr>
 <td style="text-align: right;">8</td>
-<td style="text-align: right;">0.64</td>
+<td style="text-align: right;">0.640</td>
 <td style="text-align: right;">5.593</td>
 <td style="text-align: right;">3.611</td>
 <td style="text-align: right;">29.914</td>
@@ -116,8 +116,8 @@ Click here to see the individual query runtimes.
 <tr>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">1.906</td>
-<td style="text-align: right;">30.56</td>
-<td style="text-align: right;">6.67</td>
+<td style="text-align: right;">30.560</td>
+<td style="text-align: right;">6.670</td>
 <td style="text-align: right;">99.884</td>
 </tr>
 <tr>
@@ -152,7 +152,7 @@ Click here to see the individual query runtimes.
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">0.408</td>
 <td style="text-align: right;">5.616</td>
-<td style="text-align: right;">3.24</td>
+<td style="text-align: right;">3.240</td>
 <td style="text-align: right;">26.613</td>
 </tr>
 <tr>
@@ -167,7 +167,7 @@ Click here to see the individual query runtimes.
 <td style="text-align: right;">0.273</td>
 <td style="text-align: right;">3.108</td>
 <td style="text-align: right;">0.879</td>
-<td style="text-align: right;">11.48</td>
+<td style="text-align: right;">11.480</td>
 </tr>
 <tr>
 <td style="text-align: right;">17</td>
