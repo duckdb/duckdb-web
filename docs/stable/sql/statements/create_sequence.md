@@ -53,7 +53,7 @@ CREATE SEQUENCE serial START WITH 1 MAXVALUE 10 CYCLE;
 
 ### Creating and Dropping Sequences
 
-Sequences can be created and dropped similarly to other catalogue items.
+Sequences can be created and dropped similarly to other catalog items.
 
 Overwrite an existing sequence:
 
