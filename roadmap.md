@@ -15,7 +15,7 @@ toc: false
   <h1>Development Roadmap</h1>
 </div>
 
-_(Last updated: December 2025)_
+_(Last updated: January 2026)_
 
 The DuckDB project is governed by the [non-profit DuckDB Foundation]({% link foundation/index.html %}).
 The Foundation and [DuckDB Labs](https://duckdblabs.com) are not funded by external investors (e.g., venture capital).
@@ -41,6 +41,10 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * [Parallel Python UDFs](https://github.com/duckdb/duckdb/issues/14817)
 
 Please note that there are **no guarantees** that a particular feature will be released within the next year. Everything on this page is subject to change without notice.
+
+## Planned Deprecations
+
+* We are [gradually phasing out]({% link docs/stable/sql/functions/lambda.md %}) the lambda syntax (`x -> x + 1`) in favor of the Pythonic `lambda x : x + 1`.
 
 ## Future Work / Looking for Funding
 
