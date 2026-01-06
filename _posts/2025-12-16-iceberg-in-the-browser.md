@@ -87,7 +87,7 @@ To support these functionalities, we implemented the following high-level change
 
 ## Welcome to Serverless Iceberg Analytics
 
-To see a demo of serverless Iceberg analytics, visit our table visualizer at [`duckdb.org/visualizer?iceberg`]({% link visualizer/index.html %}?iceberg).
+Check out our demo of serverless Iceberg analytics using the [DuckDB Table Visualizer]({% link visualizer/index.html %}?iceberg){:.button.yellow}
 
 <video muted controls loop width="700">
   <source src="https://blobs.duckdb.org/videos/iceberg-wasm-demo.mp4" type="video/mp4" />
