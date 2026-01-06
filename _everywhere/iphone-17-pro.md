@@ -8,5 +8,5 @@ excerpt: ""
 tags: ["Phones"]
 ---
 
-iPhone 17 Pro can DuckDB with DuckLake – even when submerged in Water.
+The iPhone 17 Pro can DuckDB with DuckLake – even when submerged in water.
 See more details in the [Compass AI & Data Summit 2025 slide deck](https://blobs.duckdb.org/slides/compass-ai-data-summit-duckdb-unplugged-gabor-szarnyas.pdf#page=75).
