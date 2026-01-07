@@ -2581,7 +2581,7 @@ FROM (SELECT ST_GeomFromText('POINT( 170370.718 11572.405 )') AS bng);
 POINT (-5.202992651563592 49.96007490162923)
 
 -- By using an official NTv2 grid file, we can reduce the error down around the 9th decimal place
--- which in theory is below a millimetre, and in practise unlikely that your coordinates are that precise
+-- which in theory is below a millimetre, and in practice unlikely that your coordinates are that precise
 -- British National Grid "NTv2 format files" download available here:
 -- https://www.ordnancesurvey.co.uk/products/os-net/for-developers
 SELECT ST_Transform(bng
