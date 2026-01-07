@@ -201,7 +201,7 @@ Usually this is not important, but there are some order-sensitive aggregates tha
 aggregates, this clause is parsed and ignored.
 
 ```sql
--- Compute the modal value up to each time, breaking ties in favour of the most recent value.
+-- Compute the modal value up to each time, breaking ties in favor of the most recent value.
 SELECT mode(value ORDER BY time DESC) OVER (ORDER BY time) FROM sales;
 ```
 
