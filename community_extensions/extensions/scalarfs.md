@@ -69,10 +69,10 @@ docs:
 
     **Note**: This extension was written primarily using Claude and Claude Code as an exercise in AI-driven development.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 1218
-extension_download_count_pretty: 1.2k
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 1437
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---

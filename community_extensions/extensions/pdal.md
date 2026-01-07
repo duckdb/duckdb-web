@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pdal
   description: Extension that adds support for manipulating point cloud data using SQL.
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-pdal
-  ref: d75507f8fb74331d24ce27809f20b37e1502a687
+  ref: 9fcc01eec12fbd32dadfd147d7c361d2c1644f91
 
 docs:
   hello_world: |
@@ -124,10 +124,48 @@ docs:
     }
     ```
 
-extension_star_count: 23
-extension_star_count_pretty: 23
-extension_download_count: 467
-extension_download_count_pretty: 467
+    The pipeline can be provided either as a JSON file or as an inline JSON string. If the second parameter value
+    starts with "[" and ends with "]", it represents an inline JSON, otherwise it is a file path:
+
+    ```sql
+    SELECT
+        COUNT(*)
+    FROM
+        PDAL_pipeline('./test/data/autzen_trim.las',
+            '[
+                {
+                    "type": "filters.tail",
+                    "count": 10
+                }
+            ]'
+        )
+    ;
+    ┌──────────────┐
+    │ count_star() │
+    │    int64     │
+    ├──────────────┤
+    │     10       │
+    └──────────────┘
+    ```
+
+    The `PDAL_PipelineTable` function runs a PDAL pipeline on an input table. It is supposed that the input table
+    contains columns compatible with PDAL point clouds.
+
+    The pipeline can be provided either as a JSON file or as an inline JSON string as well. If the second parameter value
+    starts with "[" and ends with "]", it represents an inline JSON, otherwise it is a file path:
+
+    ```sql
+    SELECT
+    	*
+    FROM
+        PDAL_PipelineTable((SELECT X,Y,Z FROM ...), '[ {"type": "filters.tail", "count": 10} ]')
+    ;
+    ```
+
+extension_star_count: 24
+extension_star_count_pretty: 24
+extension_download_count: 483
+extension_download_count_pretty: 483
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---
@@ -153,11 +191,59 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                           description                                            | comment |                                         examples                                          |
-|---------------|---------------|--------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------|
-| PDAL_Drivers  | table         | Returns the list of supported stage types of a PDAL Pipeline.                                    | NULL    | [SELECT * FROM PDAL_Drivers();]                                                           |
-| PDAL_Read     | table         | Read and import a variety of point cloud data file formats using the PDAL library.               | NULL    | [SELECT * FROM PDAL_Read('./test/data/autzen_trim.laz');]                                 |
-| PDAL_Info     | table         | Read the metadata from point cloud file[s].                                                      | NULL    | [SELECT * FROM PDAL_Info('./test/data/autzen_trim.la*');]                                 |
-| PDAL_Pipeline | table         | Read and import a point cloud data file, applying also a custom processing pipeline to the data. | NULL    | [SELECT * FROM PDAL_Pipeline('path/to/your/filename.las', 'path/to/your/pipeline.json');] |
+| function_name | function_type | description | comment |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|---------------|---------------|-------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| PDAL_Drivers  | table         |             | NULL    | [
+		SELECT name, description FROM PDAL_Drivers();
+
+		┌─────────────────────────────┬─────────────────────────────────────────────────────────────────────────────────┐
+		│            name             │                                     description                                 │
+		│           varchar           │                                       varchar                                   │
+		├─────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────┤
+		│ filters.approximatecoplanar │ Estimates the planarity of a neighborhood of points using eigenvalues.          │
+		│ filters.assign              │ Assign values for a dimension range to a specified value.                       │
+		│ filters.chipper             │ Organize points into spatially contiguous, squarish, and non-overlapping chips. │
+		│ filters.cluster             │ Extract and label clusters using Euclidean distance.                            │
+		│      ·                      │      ·                                                                          │
+		│      ·                      │      ·                                                                          │
+		│      ·                      │      ·                                                                          │
+		│ readers.slpk                │ SLPK Reader                                                                     │
+		│ readers.smrmsg              │ SBET smrmsg Reader                                                              │
+		│ readers.stac                │ STAC Reader                                                                     │
+		│ readers.terrasolid          │ TerraSolid Reader                                                               │
+		│ writers.copc                │ COPC Writer                                                                     │
+		│ writers.gdal                │ Write a point cloud as a GDAL raster.                                           │
+		│ writers.las                 │ ASPRS LAS 1.0 - 1.4 writer                                                      │
+		│ writers.text                │ Text Writer                                                                     │
+		├─────────────────────────────┴─────────────────────────────────────────────────────────────────────────────────┤
+		│ 119 rows                                                                                            2 columns │
+		└───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+	] |
+| PDAL_Info     | table         |             | NULL    | [
+		SELECT * FROM PDAL_Info('./test/data/autzen_trim.laz');
+	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| PDAL_Pipeline | table         |             | NULL    | [
+		SELECT * FROM PDAL_Pipeline('path/to/your/filename.las', 'path/to/your/pipeline.json');
+		SELECT * FROM PDAL_Pipeline('path/to/your/filename.las', '[ {"type": "filters.tail", "count": 100} ]');
+	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| PDAL_Read     | table         |             | NULL    | [
+		SELECT * FROM PDAL_Read('path/to/your/filename.las') LIMIT 10;
+
+		┌───────────┬───────────┬────────┐
+		│     X     │     Y     │   Z    │
+		│   double  │   double  │ double │
+		├───────────┼───────────┼────────┤
+		│ 637177.98 │ 849393.95 │ 411.19 │
+		│ 637177.30 │ 849396.95 │ 411.25 │
+		│ 637176.34 │ 849400.84 │ 411.01 │
+		│ 637175.45 │ 849404.62 │ 410.99 │
+		│ 637174.33 │ 849407.37 │ 411.38 │
+		└───────────┴───────────┴────────┘
+
+		SELECT * FROM PDAL_Read('path/to/your/filename.las', options => MAP {'start': 10});
+
+		Optional Options parameter can be used to pass reader-specific options as key-value pairs.
+		For example, for the LAS/LAZ reader, the options are documented at https://pdal.io/en/stable/stages/readers.las.html#options
+	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 
