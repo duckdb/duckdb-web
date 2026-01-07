@@ -57,8 +57,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 487
-extension_download_count_pretty: 487
+extension_download_count: 468
+extension_download_count_pretty: 468
 image: '/images/community_extensions/social_preview/preview_community_extension_quackfix.png'
 layout: community_extension_doc
 ---
