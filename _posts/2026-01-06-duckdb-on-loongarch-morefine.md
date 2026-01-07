@@ -24,7 +24,7 @@ Once plugged in and booted up, things feel pretty normal besides the loud fan th
 
 <img src="{% link images/blog/loongarch/loongnix.jpg %}" width="800" />
 
-Overall, the software seems a little dated, even after running `apt upgrade`: The Linux kernel seems to be version 4.19, which was released back in 2018, and which has been EOL for a year now. The GCC version is 8.3, which similarly came out in 2019.
+Overall, the software seems a little dated, even after running `apt upgrade`: the Linux kernel seems to be version 4.19, which was released back in 2018, and which has been EOL for a year now. The GCC version is 8.3, which similarly came out in 2019.
 
 With the [aforementioned patch](https://github.com/duckdb/duckdb/pull/19962), we managed to compile DuckDB 1.4.3 on Loongnix. There was one small issue where the CMake file `append_metadata.cmake` was not compatible with the older CMake version (3.13.4) available on Loongnix. But simply replacing that file with an empty one allowed us to complete the build. Of course we could also have updated CMake, but life is short. Once completed, we ran DuckDB’s extensive unit test suite (`make allunit`) to confirm that our build runs correctly on the Loongson CPU. Results looked good.
 
