@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 22
 extension_star_count_pretty: 22
-extension_download_count: 250
-extension_download_count_pretty: 250
+extension_download_count: 322
+extension_download_count_pretty: 322
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
@@ -65,9 +65,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| mongo_clear_cache | table         | NULL        | NULL    |          |
-| mongo_scan        | table         | NULL        | NULL    |          |
+|   function_name   | function_type |                                                     description                                                      | comment |                                                                                             examples                                                                                             |
+|-------------------|---------------|----------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| mongo_clear_cache | table         | Clears the schema cache for all attached MongoDB databases. Useful when MongoDB schema changes.                      | NULL    | [SELECT * FROM mongo_clear_cache()]                                                                                                                                                              |
+| mongo_scan        | table         | Scans a MongoDB collection and returns its contents as a table. Supports optional filter and sample_size parameters. | NULL    | [SELECT * FROM mongo_scan('mongodb://localhost:27017', 'mydb', 'mycollection'), SELECT * FROM mongo_scan('mongodb://localhost:27017', 'mydb', 'mycollection', filter := '{"status": "active"}')] |
 
 

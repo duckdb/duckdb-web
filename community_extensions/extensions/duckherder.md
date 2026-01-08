@@ -31,10 +31,10 @@ docs:
     Users are allowed to implement their own driver and worker(s), and register to the duckdb client-side, as long they speaks duckherder dialect (i.e., grpc stubs and arrow flight).
     From users' perspective, all DML and DDL SQL statements should be used exactly the same as local duckdb.
 
-extension_star_count: 40
-extension_star_count_pretty: 40
-extension_download_count: 479
-extension_download_count_pretty: 479
+extension_star_count: 41
+extension_star_count_pretty: 41
+extension_download_count: 471
+extension_download_count_pretty: 471
 image: '/images/community_extensions/social_preview/preview_community_extension_duckherder.png'
 layout: community_extension_doc
 ---

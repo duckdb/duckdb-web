@@ -25,8 +25,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 479
-extension_download_count_pretty: 479
+extension_download_count: 496
+extension_download_count_pretty: 496
 image: '/images/community_extensions/social_preview/preview_community_extension_blockduck.png'
 layout: community_extension_doc
 ---
