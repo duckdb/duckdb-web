@@ -91,10 +91,10 @@ docs:
 
     Aggregate and table functions are not supported.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 262
-extension_download_count_pretty: 262
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 357
+extension_download_count_pretty: 357
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---
