@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sitemap
   description: Parse XML sitemaps from websites with automatic discovery via robots.txt
-  version: 0.1.0
+  version: 0.1.2
   language: C++
   build: cmake
   license: MIT
@@ -19,16 +19,25 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-sitemap
-  ref: 6cd72d65fa3ee544cc25bac574094a8c4faeeb4d
+  ref: v0.1.2
 
 docs:
   hello_world: |
     -- Get all URLs from a sitemap (auto-prepends https://)
     SELECT * FROM sitemap_urls('example.com');
 
+    -- Direct sitemap URL (skips discovery)
+    SELECT * FROM sitemap_urls('https://example.com/sitemap.xml');
+
+    -- Get URLs from multiple sites
+    SELECT * FROM sitemap_urls(['example.com', 'google.com']);
+
     -- Filter specific URLs
     SELECT * FROM sitemap_urls('example.com')
     WHERE url LIKE '%/blog/%';
+
+    -- Ignore errors for invalid domains
+    SELECT * FROM sitemap_urls(['valid.com', 'invalid.com'], ignore_errors := true);
 
     -- Count URLs by type
     SELECT
@@ -46,13 +55,17 @@ docs:
     It automatically discovers sitemaps via robots.txt and supports recursive sitemap index traversal.
 
     Features:
-    - Automatic sitemap discovery from /robots.txt
+    - Multi-fallback sitemap discovery (robots.txt, /sitemap.xml, /sitemap_index.xml, HTML meta tags)
+    - Session caching for discovered sitemap locations
+    - Direct sitemap URL support (skips discovery)
     - Sitemap index support (nested sitemaps)
+    - Array support for processing multiple domains
     - Retry logic with exponential backoff
     - Respects Retry-After header on 429 responses
     - Gzip decompression for .xml.gz files
     - Multiple namespace support (standard + Google schemas)
     - SQL filtering with WHERE clauses
+    - Optional error ignoring for batch processing
 
     The function returns a table with columns:
     - url: Page URL (VARCHAR)
@@ -66,6 +79,7 @@ docs:
     - max_retries (INTEGER): Max retry attempts (default: 5)
     - backoff_ms (INTEGER): Initial backoff in ms (default: 100)
     - max_backoff_ms (INTEGER): Max backoff cap in ms (default: 30000)
+    - ignore_errors (BOOLEAN): Don't throw on failed fetches (default: false)
 
     Example with options:
     ```sql
