@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: http_request
   description: HTTP client extension for DuckDB with GET/POST/PUT/PATCH/DELETE and byte-range requests
-  version: 0.4.0
+  version: 0.5.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb_http_request
-  ref: fa3a7438c658a423f607a525673156034bf46244
+  ref: b4ea40f3e8f1287db8f7a729c10fddb4dda30946
 
 docs:
   hello_world: |
@@ -58,13 +58,14 @@ docs:
     - Convenience fields: content_type, content_length
     - Respects duckdb http and proxy settings
     - Configurable concurrency via http_max_concurrency setting (default: 32)
+    - Global User-Agent override via http_user_agent setting
 
     Uses DuckDB's built-in httplib for HTTP connections.
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 509
-extension_download_count_pretty: 509
+extension_download_count: 548
+extension_download_count_pretty: 548
 image: '/images/community_extensions/social_preview/preview_community_extension_http_request.png'
 layout: community_extension_doc
 ---
@@ -118,5 +119,6 @@ LOAD {{ page.extension.name }};
 |         name         |                                    description                                    | input_type | scope  | aliases |
 |----------------------|-----------------------------------------------------------------------------------|------------|--------|---------|
 | http_max_concurrency | Maximum number of concurrent HTTP requests per scalar function call (default: 32) | UBIGINT    | GLOBAL | []      |
+| http_user_agent      | Custom User-Agent header for all HTTP requests (default: DuckDB)                  | VARCHAR    | GLOBAL | []      |
 
 
