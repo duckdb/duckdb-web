@@ -68,8 +68,8 @@ docs:
 
     For more, please see the [repo](https://github.com/eddelbuettel/duckdb-mlpack).
 
-extension_star_count: 16
-extension_star_count_pretty: 16
+extension_star_count: 17
+extension_star_count_pretty: 17
 extension_download_count: 469
 extension_download_count_pretty: 469
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
