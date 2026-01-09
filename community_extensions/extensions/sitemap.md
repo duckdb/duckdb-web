@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sitemap
   description: Parse XML sitemaps from websites with automatic discovery via robots.txt
-  version: 0.1.2
+  version: 0.1.4
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-sitemap
-  ref: v0.1.2
+  ref: v0.1.4
 
 docs:
   hello_world: |
@@ -36,8 +36,14 @@ docs:
     SELECT * FROM sitemap_urls('example.com')
     WHERE url LIKE '%/blog/%';
 
+    -- Bruteforce find sitemap (tries 587+ patterns)
+    SELECT bruteforce_find_sitemap('example.com') as sitemap_url;
+
     -- Ignore errors for invalid domains
     SELECT * FROM sitemap_urls(['valid.com', 'invalid.com'], ignore_errors := true);
+
+    -- Set custom user agent
+    SET sitemap_user_agent = 'MyBot/1.0';
 
     -- Count URLs by type
     SELECT
@@ -52,11 +58,13 @@ docs:
 
   extended_description: |
     The sitemap extension provides a table function for parsing XML sitemaps from websites.
-    It automatically discovers sitemaps via robots.txt and supports recursive sitemap index traversal.
+    It automatically discovers sitemaps via multiple fallback methods and supports recursive sitemap index traversal.
 
     Features:
     - Multi-fallback sitemap discovery (robots.txt, /sitemap.xml, /sitemap_index.xml, HTML meta tags)
     - Session caching for discovered sitemap locations
+    - Bruteforce finder (bruteforce_find_sitemap) - tries 587+ common sitemap URL patterns
+    - Custom user agent via SET sitemap_user_agent
     - Direct sitemap URL support (skips discovery)
     - Sitemap index support (nested sitemaps)
     - Array support for processing multiple domains
@@ -91,6 +99,20 @@ docs:
     ) WHERE url LIKE '%/product/%';
     ```
 
+    Bruteforce sitemap discovery (scalar function):
+    ```sql
+    -- Find sitemap by trying 587+ common patterns
+    SELECT bruteforce_find_sitemap('https://example.com') as sitemap_url;
+    -- Returns first working sitemap URL or NULL
+
+    -- Patterns tested include:
+    -- /sitemap.xml, /sitemap_index.xml
+    -- /sitemap/sitemap.xml, /sitemaps/sitemap-index.xml
+    -- /en/sitemap.xml, /de/sitemap.xml
+    -- /pub/media/sitemap.xml
+    -- And 580+ more variations
+    ```
+
     Compose with http_request to fetch page content:
     ```sql
     SELECT s.url, h.body
@@ -102,8 +124,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 19
-extension_download_count_pretty: 19
+extension_download_count: 90
+extension_download_count_pretty: 90
 image: '/images/community_extensions/social_preview/preview_community_extension_sitemap.png'
 layout: community_extension_doc
 ---
