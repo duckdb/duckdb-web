@@ -16,10 +16,10 @@ extension:
   maintainers:
     - lnkuiper
   name: fivetran
-  version: 2025121000
+  version: 2026010900
 repo:
   github: lnkuiper/fivetran
-  ref: 32a906b45e1ea5677949f7222ffe6382c0985317
+  ref: cfcb7ef1f1c8d0c719e8be0dc839e169b1c79c75
 
 extension_star_count: 0
 extension_star_count_pretty: 0
