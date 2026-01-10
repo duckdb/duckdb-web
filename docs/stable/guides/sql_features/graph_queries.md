@@ -25,7 +25,7 @@ CREATE TABLE Person (id BIGINT, name VARCHAR);
 CREATE TABLE Knows (person1_id BIGINT, person2_id BIGINT, since DATE);
 
 INSERT INTO Person VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Charlie');
-INSERT INTO Knows VALUES (1, 2, '2020-01-01'), (2, 3, '2021-06-15'), (1, 3, '2022-03-20');
+INSERT INTO Knows VALUES (1, 2, '2020-01-01'), (2, 3, '2021-06-15');
 
 CREATE PROPERTY GRAPH social_network
 VERTEX TABLES (
@@ -53,7 +53,6 @@ FROM GRAPH_TABLE (social_network
 |---------|---------|------------|
 | Alice   | Bob     | 2020-01-01 |
 | Bob     | Charlie | 2021-06-15 |
-| Alice   | Charlie | 2022-03-20 |
 
 ## Path Finding
 
