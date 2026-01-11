@@ -37,7 +37,7 @@ It also allows the computation to be 1.5× faster.
 ### Ordered Integers
 
 Another practical way to exploit ordering is to use the `INTEGER` type with automatic increments rather than `UUID` for columns queried using selective filters.
-In a scenario where a table contains out-of-order `UUID`s,  DuckDB has to scan many row groups to find a specific `UUID` value.
+In a scenario where a table contains out-of-order `UUID`s, DuckDB has to scan many row groups to find a specific `UUID` value.
 An ordered `INTEGER` column allows skipping all row groups except those containing the value.
 
 ## ART Indexes
@@ -95,7 +95,7 @@ Indexes are serialized to disk and deserialized lazily, i.e., when reopening the
 Operations using the index will only load the required parts of the index.
 Therefore, having an index will not cause any slowdowns when opening an existing database.
 
-> Bestpractice We recommend following these guidelines:
+> Best practice: We recommend following these guidelines:
 >
 > * Only use primary keys, foreign keys, or unique constraints, if these are necessary for enforcing constraints on your data.
 > * Do not define explicit indexes unless you have highly selective queries and enough memory available.
