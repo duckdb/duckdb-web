@@ -25,7 +25,7 @@ title: Core Extensions
 | [inet]({% link docs/stable/core_extensions/inet.md %})                 | Adds support for IP-related data types and functions                    | Core team   | experimental |                         |
 | [jemalloc]({% link docs/stable/core_extensions/jemalloc.md %})         | Overwrites the system allocator with jemalloc                           | Core team   | stable       |                         |
 | [json]({% link docs/stable/data/json/overview.md %})                   | Adds support for JSON operations                                        | Core team   | stable       |                         |
-| [motherduck]({% link docs/stable/core_extensions/motherduck.md %})     | Allows connecting to MotherDuck.                                        | Third-party | stable       | md                      |
+| [motherduck]({% link docs/stable/core_extensions/motherduck.md %})     | Allows connecting to MotherDuck                                         | Third-party | stable       | md                      |
 | [mysql]({% link docs/stable/core_extensions/mysql.md %})               | Adds support for reading from and writing to a MySQL database           | Core team   | stable       | mysql_scanner           |
 | [parquet]({% link docs/stable/data/parquet/overview.md %})             | Adds support for reading and writing Parquet files                      | Core team   | stable       |                         |
 | [postgres]({% link docs/stable/core_extensions/postgres.md %})         | Adds support for reading from and writing to a PostgreSQL database      | Core team   | stable       | postgres_scanner        |
