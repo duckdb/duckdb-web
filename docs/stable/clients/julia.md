@@ -38,7 +38,7 @@ con = DBInterface.connect(DuckDB.DB, ":memory:")
 DBInterface.execute(con, "CREATE TABLE integers (i INTEGER)")
 
 # insert data by executing a prepared statement
-stmt = DBInterface.prepare(con, "INSERT INTO integers VALUES(?)")
+stmt = DBInterface.prepare(con, "INSERT INTO integers VALUES (?)")
 DBInterface.execute(stmt, [42])
 
 # query the database

@@ -53,7 +53,7 @@ TO 'f.parquet';
 To add another column `c3` that is not present in the file, run:
 
 ```sql
-FROM (VALUES(NULL::VARCHAR, NULL, NULL)) t(c1, c2, c3)
+FROM (VALUES (NULL::VARCHAR, NULL, NULL)) t(c1, c2, c3)
 WHERE false
 UNION ALL BY NAME
 FROM 'f.parquet';
