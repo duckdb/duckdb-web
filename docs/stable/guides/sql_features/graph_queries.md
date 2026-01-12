@@ -72,18 +72,20 @@ FROM GRAPH_TABLE (social_network
 
 ## Graph Algorithms
 
+> Warning Graph algorithm functions require DuckDB v1.4.3 or later due to a [known issue](https://github.com/cwida/duckpgq-extension/issues/283). Earlier versions will return a `csr_cte does not exist` error.
+
 DuckPGQ includes built-in graph algorithms:
 
 | Function | Description |
 |----------|-------------|
-| `pagerank(graph, vertex_table, edge_table)` | Computes PageRank centrality scores |
-| `local_clustering_coefficient(graph, vertex_table, edge_table)` | Measures how connected a node's neighbors are |
-| `weakly_connected_component(graph, vertex_table, edge_table)` | Identifies connected components |
+| `pagerank(graph, vertex_label, edge_label)` | Computes PageRank centrality scores |
+| `local_clustering_coefficient(graph, vertex_label, edge_label)` | Measures how connected a node's neighbors are |
+| `weakly_connected_component(graph, vertex_label, edge_label)` | Identifies connected components |
 
 Example:
 
 ```sql
-FROM pagerank(social_network, person, knows);
+FROM pagerank(social_network, Person, Knows);
 ```
 
 ## Use Case: Financial Fraud Detection
