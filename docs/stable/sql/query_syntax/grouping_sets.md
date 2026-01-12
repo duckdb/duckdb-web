@@ -2,7 +2,7 @@
 layout: docu
 railroad: query_syntax/groupby.js
 redirect_from:
-- /docs/sql/query_syntax/grouping_sets
+ - /docs/sql/query_syntax/grouping_sets
 title: GROUPING SETS
 ---
 

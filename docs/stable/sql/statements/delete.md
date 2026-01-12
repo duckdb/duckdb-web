@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/delete.js
 redirect_from:
-- /docs/sql/statements/delete
+ - /docs/sql/statements/delete
 title: DELETE Statement
 ---
 
@@ -46,7 +46,7 @@ DELETE FROM employees RETURNING name, 2025 - age AS approx_birthyear;
 
 <div id="rrdiagram"></div>
 
-## The`TRUNCATE` Statement
+## The `TRUNCATE` Statement
 
 The `TRUNCATE` statement removes all rows from a table, acting as an alias for `DELETE FROM` without a `WHERE` clause:
 

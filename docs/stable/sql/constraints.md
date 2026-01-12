@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/constraints.js
 redirect_from:
-- /docs/sql/constraints
+ - /docs/sql/constraints
 title: Constraints
 ---
 
@@ -69,7 +69,7 @@ Constraint Error:
 Duplicate key "id: 1, name: Student 1" violates primary key constraint
 ```
 
-In order to enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every primary key or unique constraint that is defined in the table.
+To enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every primary key or unique constraint that is defined in the table.
 
 Primary key constraints and unique constraints are identical except for two points:
 
@@ -123,6 +123,6 @@ Constraint Error:
 Violates foreign key constraint because key "id: 2" does not exist in the referenced table
 ```
 
-In order to enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every foreign key constraint that is defined in the table.
+To enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every foreign key constraint that is defined in the table.
 
 > Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, leading to constraint errors such as `violates primary key constraint` and `violates unique constraint`. See the [indexes section for more details]({% link docs/stable/sql/indexes.md %}#index-limitations).

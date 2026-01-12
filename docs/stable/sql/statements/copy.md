@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/copy.js
 redirect_from:
-- /docs/sql/statements/copy
+ - /docs/sql/statements/copy
 title: COPY Statement
 ---
 
@@ -291,7 +291,7 @@ With few exceptions, the below options are applicable to all formats written wit
 
 ## `COPY FROM DATABASE ... TO`
 
-The `COPY FROM DATABASE ... TO` statement copies the entire content from one attached database to another attached database. This includes the schema, including constraints, indexes, sequences, macros, and the data itself.
+The `COPY FROM DATABASE ... TO` statement copies the entire content from one attached database to another attached database. This includes the schema, including constraints, indexes, sequences, macros and the data itself.
 
 ```sql
 ATTACH 'db1.db' AS db1;

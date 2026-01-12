@@ -2,7 +2,7 @@
 layout: docu
 railroad: query_syntax/with.js
 redirect_from:
-- /docs/sql/query_syntax/with
+ - /docs/sql/query_syntax/with
 title: WITH Clause
 ---
 
@@ -50,10 +50,10 @@ once and the result is stored in a temporary table. However, under certain condi
 DuckDB can _inline_ the CTE into the main query, which means that the CTE is not
 materialized and its definition is duplicated in each place it is referenced.
 Inlining is done using the following heuristics:
-- The CTE is not referenced more than once.
-- The CTE does not contain a `VOLATILE` function.
-- The CTE is using `AS NOT MATERIALIZED` and does not use `AS MATERIALIZED`.
-- The CTE does not perform a grouped aggregation.
+* The CTE is not referenced more than once.
+* The CTE does not contain a `VOLATILE` function.
+* The CTE is using `AS NOT MATERIALIZED` and does not use `AS MATERIALIZED`.
+* The CTE does not perform a grouped aggregation.
 
 Materialization can be explicitly activated by defining the CTE using `AS MATERIALIZED` and disabled by using `AS NOT MATERIALIZED`. Note that inlining is not always possible, even if the heuristics are met. For example, if the CTE contains a `read_csv` function, it cannot be inlined.
 
