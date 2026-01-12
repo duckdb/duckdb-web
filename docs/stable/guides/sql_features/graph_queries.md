@@ -72,7 +72,7 @@ FROM GRAPH_TABLE (social_network
 
 ## Graph Algorithms
 
-> Warning Graph algorithm functions require DuckDB v1.4.3 or later due to a [known issue](https://github.com/cwida/duckpgq-extension/issues/283). Earlier versions will return a `csr_cte does not exist` error.
+> Warning Graph algorithm functions may currently fail due to a [known issue](https://github.com/cwida/duckpgq-extension/issues/283) and return the `csr_cte does not exist` error.
 
 DuckPGQ includes built-in graph algorithms:
 
