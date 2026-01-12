@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB – Data Talks on the Rocks"
+title: "DuckDB Won by Refusing to Scale Out"
 author: Hannes Mühleisen
 thumb: "/images/library/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.jpg"
 image: "/images/library/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.jpg"
@@ -18,5 +18,6 @@ pill: "Data Talks on the Rocks by Rill Data"
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Podcast** | [Data Talks on the Rocks by Rill Data](https://www.youtube.com/playlist?list=PL_ZoDsg2yFKgr_YEc4XOY0wlRLqzyR07q) |
+| **Episode page** | [DuckDB Won By Refusing to Scale Out](https://www.rilldata.com/blog/duckdb-won-by-refusing-to-scale-out) |
 | **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [DuckDB – Data Talks on the Rocks](https://www.youtube.com/watch?v=831D6MZCJ28) |
