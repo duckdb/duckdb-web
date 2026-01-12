@@ -21,8 +21,8 @@ repo:
 
 extension_star_count: 23
 extension_star_count_pretty: 23
-extension_download_count: 553
-extension_download_count_pretty: 553
+extension_download_count: 554
+extension_download_count_pretty: 554
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -63,7 +63,9 @@ LOAD {{ page.extension.name }};
 | anofox_fcst_ts_detect_seasonality        | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_features_config_from_csv  | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_features_config_from_json | scalar        | NULL        | NULL    |          |
+| anofox_fcst_ts_fill_forward_native       | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_fill_forward_operator     | table         | NULL        | NULL    |          |
+| anofox_fcst_ts_fill_gaps_native          | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_forecast_agg              | aggregate     | NULL        | NULL    |          |
 | anofox_fcst_ts_mae                       | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mape                      | scalar        | NULL        | NULL    |          |
@@ -79,10 +81,17 @@ LOAD {{ page.extension.name }};
 | ts_analyze_peak_timing                   | scalar        | NULL        | NULL    |          |
 | ts_analyze_seasonality                   | scalar        | NULL        | NULL    |          |
 | ts_autoperiod                            | scalar        | NULL        | NULL    |          |
+| ts_backtest_auto                         | table_macro   | NULL        | NULL    |          |
 | ts_bias                                  | scalar        | NULL        | NULL    |          |
 | ts_cfd_autoperiod                        | scalar        | NULL        | NULL    |          |
+| ts_check_leakage                         | table_macro   | NULL        | NULL    |          |
 | ts_classify_seasonality                  | scalar        | NULL        | NULL    |          |
 | ts_coverage                              | scalar        | NULL        | NULL    |          |
+| ts_cv_forecast_by                        | table_macro   | NULL        | NULL    |          |
+| ts_cv_generate_folds                     | table_macro   | NULL        | NULL    |          |
+| ts_cv_split                              | table_macro   | NULL        | NULL    |          |
+| ts_cv_split_folds                        | table_macro   | NULL        | NULL    |          |
+| ts_cv_split_index                        | table_macro   | NULL        | NULL    |          |
 | ts_data_quality                          | table_macro   | NULL        | NULL    |          |
 | ts_data_quality_summary                  | table_macro   | NULL        | NULL    |          |
 | ts_decompose_seasonal                    | scalar        | NULL        | NULL    |          |
@@ -112,27 +121,36 @@ LOAD {{ page.extension.name }};
 | ts_features_config_template              | table         | NULL        | NULL    |          |
 | ts_features_list                         | table         | NULL        | NULL    |          |
 | ts_fill_forward                          | table_macro   | NULL        | NULL    |          |
+| ts_fill_forward_native                   | table         | NULL        | NULL    |          |
 | ts_fill_forward_operator                 | table         | NULL        | NULL    |          |
 | ts_fill_gaps                             | table_macro   | NULL        | NULL    |          |
+| ts_fill_gaps_native                      | table         | NULL        | NULL    |          |
 | ts_fill_gaps_operator                    | table_macro   | NULL        | NULL    |          |
 | ts_fill_nulls_backward                   | table_macro   | NULL        | NULL    |          |
 | ts_fill_nulls_const                      | table_macro   | NULL        | NULL    |          |
 | ts_fill_nulls_forward                    | table_macro   | NULL        | NULL    |          |
 | ts_fill_nulls_mean                       | table_macro   | NULL        | NULL    |          |
+| ts_fill_unknown                          | table_macro   | NULL        | NULL    |          |
 | ts_forecast                              | table_macro   | NULL        | NULL    |          |
 | ts_forecast_agg                          | aggregate     | NULL        | NULL    |          |
 | ts_forecast_by                           | table_macro   | NULL        | NULL    |          |
 | ts_forecast_exog                         | table_macro   | NULL        | NULL    |          |
 | ts_forecast_exog_by                      | table_macro   | NULL        | NULL    |          |
+| ts_hydrate_features                      | table_macro   | NULL        | NULL    |          |
+| ts_hydrate_split                         | table_macro   | NULL        | NULL    |          |
+| ts_hydrate_split_full                    | table_macro   | NULL        | NULL    |          |
+| ts_hydrate_split_strict                  | table_macro   | NULL        | NULL    |          |
 | ts_instantaneous_period                  | scalar        | NULL        | NULL    |          |
 | ts_lomb_scargle                          | scalar        | NULL        | NULL    |          |
 | ts_mae                                   | scalar        | NULL        | NULL    |          |
 | ts_mape                                  | scalar        | NULL        | NULL    |          |
+| ts_mark_unknown                          | table_macro   | NULL        | NULL    |          |
 | ts_mase                                  | scalar        | NULL        | NULL    |          |
 | ts_matrix_profile_period                 | scalar        | NULL        | NULL    |          |
 | ts_mqloss                                | scalar        | NULL        | NULL    |          |
 | ts_mse                                   | scalar        | NULL        | NULL    |          |
 | ts_mstl_decomposition                    | table_macro   | NULL        | NULL    |          |
+| ts_prepare_regression_input              | table_macro   | NULL        | NULL    |          |
 | ts_quality_report                        | table_macro   | NULL        | NULL    |          |
 | ts_quantile_loss                         | scalar        | NULL        | NULL    |          |
 | ts_r2                                    | scalar        | NULL        | NULL    |          |
@@ -146,5 +164,7 @@ LOAD {{ page.extension.name }};
 | ts_stats                                 | table_macro   | NULL        | NULL    |          |
 | ts_stats_summary                         | table_macro   | NULL        | NULL    |          |
 | ts_stl_period                            | scalar        | NULL        | NULL    |          |
+| ts_validate_timestamps                   | table_macro   | NULL        | NULL    |          |
+| ts_validate_timestamps_summary           | table_macro   | NULL        | NULL    |          |
 
 

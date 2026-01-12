@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_hunt
   description: Parse and analyze test results, build outputs, and CI/CD pipeline logs from 90+ formats with severity filtering and format auto-detection
-  version: 1.3.1
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: teaguesterling/duck_hunt
-  ref: 5e4885e824f0f446878f6b371b6d14485094c223
+  ref: da8de2b9ee8ef1fafb9269043a75affb17b24db7
 
 docs:
   readme: https://duck-hunt.readthedocs.io/
@@ -32,16 +32,22 @@ docs:
     FROM read_duck_hunt_log('pytest.json', 'pytest_json', severity_threshold := 'all')
     WHERE status = 'FAIL';
 
-    -- Auto-detect format from content
-    SELECT duck_hunt_detect_format(content) as format
-    FROM read_text('mystery.log');
+    -- Process multiple files, skip failures (new in v1.4.0)
+    SELECT * FROM read_duck_hunt_log('logs/*.json', ignore_errors := true);
+
+    -- Control log_content size for memory efficiency (new in v1.4.0)
+    SELECT * FROM read_duck_hunt_log('huge.log', content := 200);
+    SELECT * FROM read_duck_hunt_log('huge.log', content := 'smart');
+
+    -- Parse GitHub Actions ZIP archives (new in v1.4.0, requires zipfs)
+    -- INSTALL zipfs FROM community; LOAD zipfs;
+    SELECT job_name, severity, message
+    FROM read_duck_hunt_workflow_log('workflow_run.zip', 'github_actions_zip')
+    WHERE severity = 'error';
 
     -- Debug format detection
     SELECT format, can_parse, events_produced, is_selected
     FROM duck_hunt_diagnose_read('build.log');
-
-    -- Read compressed log files (GZIP supported natively)
-    SELECT * FROM read_duck_hunt_log('build.log.gz', 'auto');
 
     -- Build health badge
     SELECT status_badge(
@@ -57,10 +63,16 @@ docs:
     **Documentation:** <https://duck-hunt.readthedocs.io/>
 
     **Core Table Functions:**
-    - `read_duck_hunt_log(file, format, severity_threshold)` - Parse tool outputs from files
-    - `parse_duck_hunt_log(content, format, severity_threshold)` - Parse tool outputs from strings
-    - `read_duck_hunt_workflow_log(file, format, severity_threshold)` - Parse CI/CD workflow logs
-    - `parse_duck_hunt_workflow_log(content, format, severity_threshold)` - Parse workflow strings
+    - `read_duck_hunt_log(source, format, severity_threshold, ignore_errors, content)` - Parse tool outputs from files
+    - `parse_duck_hunt_log(text, format, severity_threshold, content)` - Parse tool outputs from strings
+    - `read_duck_hunt_workflow_log(source, format, severity_threshold, ignore_errors)` - Parse CI/CD workflow logs
+    - `parse_duck_hunt_workflow_log(text, format, severity_threshold)` - Parse workflow strings
+
+    **New in v1.4.0:**
+    - `ignore_errors` parameter - Continue processing when individual files fail
+    - `content` parameter - Control log_content size: integer limit, `'smart'`, `'none'`, or `'full'`
+    - `github_actions_zip` format - Parse ZIP archives from GitHub Actions (requires zipfs extension)
+    - Workflow delegation - Workflow parsers auto-delegate to tool parsers (make, pytest, etc.)
 
     **Diagnostic Functions:**
     - `duck_hunt_detect_format(content)` - Auto-detect format, returns format name or NULL
@@ -98,9 +110,12 @@ docs:
     **Key Features:**
     - Automatic format detection with diagnostic debugging
     - Transparent compression support (GZIP built-in, ZSTD via parquet)
+    - GitHub Actions ZIP archive support (via zipfs extension)
     - Severity-based event filtering
     - Error pattern clustering and fingerprinting
-    - Multi-file glob processing with Hive-style paths
+    - Multi-file glob processing with ignore_errors for robust batch processing
+    - Memory-efficient content modes (limit, smart truncation, omit)
+    - Workflow delegation to tool-specific parsers
     - Pipeline integration with stdin support
     - Hierarchical CI/CD workflow parsing
 
@@ -135,16 +150,17 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name         | function_type | description | comment | examples |
-|------------------------------|---------------|-------------|---------|----------|
-| duck_hunt_detect_format      | scalar        | NULL        | NULL    |          |
-| duck_hunt_diagnose_parse     | table         | NULL        | NULL    |          |
-| duck_hunt_diagnose_read      | table         | NULL        | NULL    |          |
-| duck_hunt_formats            | table         | NULL        | NULL    |          |
-| parse_duck_hunt_log          | table         | NULL        | NULL    |          |
-| parse_duck_hunt_workflow_log | table         | NULL        | NULL    |          |
-| read_duck_hunt_log           | table         | NULL        | NULL    |          |
-| read_duck_hunt_workflow_log  | table         | NULL        | NULL    |          |
-| status_badge                 | scalar        | NULL        | NULL    |          |
+|          function_name           | function_type | description | comment | examples |
+|----------------------------------|---------------|-------------|---------|----------|
+| duck_hunt_detect_format          | scalar        | NULL        | NULL    |          |
+| duck_hunt_diagnose_parse         | table         | NULL        | NULL    |          |
+| duck_hunt_diagnose_read          | table         | NULL        | NULL    |          |
+| duck_hunt_formats                | table         | NULL        | NULL    |          |
+| duck_hunt_match_command_patterns | table_macro   | NULL        | NULL    |          |
+| parse_duck_hunt_log              | table         | NULL        | NULL    |          |
+| parse_duck_hunt_workflow_log     | table         | NULL        | NULL    |          |
+| read_duck_hunt_log               | table         | NULL        | NULL    |          |
+| read_duck_hunt_workflow_log      | table         | NULL        | NULL    |          |
+| status_badge                     | scalar        | NULL        | NULL    |          |
 
 
