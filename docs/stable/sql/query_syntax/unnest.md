@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/query_syntax/unnest
+ - /docs/sql/query_syntax/unnest
 title: Unnesting
 ---
 
@@ -115,7 +115,7 @@ Calling `unnest` with the `recursive` setting will fully unnest lists, followed 
 ### Setting the Maximum Depth of Unnesting
 
 The `max_depth` parameter allows limiting the maximum depth of recursive unnesting (which is assumed by default and does not have to be specified separately).
-For example, unnestig to `max_depth` of 2 yields the following:
+For example, unnesting to `max_depth` of 2 yields the following:
 
 ```sql
 SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth := 2) AS x;

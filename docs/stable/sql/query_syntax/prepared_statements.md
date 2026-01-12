@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/query_syntax/prepared_statements
+ - /docs/sql/query_syntax/prepared_statements
 title: Prepared Statements
 ---
 

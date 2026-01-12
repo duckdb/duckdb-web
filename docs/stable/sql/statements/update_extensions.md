@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/statements/update_extensions
+ - /docs/sql/statements/update_extensions
 title: UPDATE EXTENSIONS
 ---
 

@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/secrets.js
 redirect_from:
-- /docs/sql/statements/create_secret
+ - /docs/sql/statements/create_secret
 title: CREATE SECRET Statement
 ---
 

@@ -10,7 +10,7 @@ It shows the schema of a table, view or query.
 
 ## `SHOW DATABASES` Statement
 
-The `SHOW DATABASES` statement show as list of all attached databases:
+The `SHOW DATABASES` statement shows a list of all attached databases:
 
 ```sql
 ATTACH 'my.duckdb' AS my_database;

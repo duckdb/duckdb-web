@@ -4,7 +4,7 @@ blurb: The SELECT clause specifies the list of columns that will be returned by 
 layout: docu
 railroad: query_syntax/select.js
 redirect_from:
-- /docs/sql/query_syntax/select
+ - /docs/sql/query_syntax/select
 title: SELECT Clause
 ---
 
@@ -128,7 +128,7 @@ ORDER BY population DESC;
 
 The `DISTINCT ON` clause returns only one row per unique value in the set of expressions as defined in the `ON` clause. If an `ORDER BY` clause is present, the row that is returned is the first row that is encountered as per the `ORDER BY` criteria. If an `ORDER BY` clause is not present, the first row that is encountered is not defined and can be any row in the table.
 
-> When querying large datasets, using `DISTINCT` on all columns can be expensive. Therefore, consider using `DISTINCT ON` on a column (or a set of columns) which guaranetees a sufficient degree of uniqueness for your results. For example, using `DISTINCT ON` on the key column(s) of a table guarantees full uniqueness.
+> When querying large datasets, using `DISTINCT` on all columns can be expensive. Therefore, consider using `DISTINCT ON` on a column (or a set of columns) which guarantees a sufficient degree of uniqueness for your results. For example, using `DISTINCT ON` on the key column(s) of a table guarantees full uniqueness.
 
 ### Aggregates
 
