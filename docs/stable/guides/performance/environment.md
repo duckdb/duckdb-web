@@ -15,7 +15,7 @@ DuckDB works efficiently on both AMD64 (x86_64) and ARM64 (AArch64) CPU architec
 
 ### Memory
 
-> Best practice: Aim for 1-4 GB memory per thread.
+> Bestpractice: Aim for 1-4 GB memory per thread.
 
 #### Minimum Required Memory
 

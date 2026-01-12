@@ -78,4 +78,4 @@ The following experiments were run on a `c7gd.12xlarge` instance using the [LDBC
 | Loading only from Parquet | 4.1 GB | 3.5 s |
 | Creating local table from Parquet | 4.1 GB | 5.1 s |
 
-The "loading only" variant is running the load as part of an [`EXPLAIN ANALYZE`]({% link docs/stable/guides/meta/explain_analyze.md %}) statement to measure the runtime without actually creating a local table, while the "creating local table" variant uses [`CREATE TABLE ... AS SELECT`]({% link docs/stable/sql/statements/create_table.md %}#create-table--as-select-ctas) to create a persistent table on the local disk.
+The “loading only” variant is running the load as part of an [`EXPLAIN ANALYZE`]({% link docs/stable/guides/meta/explain_analyze.md %}) statement to measure the runtime without actually creating a local table, while the “creating local table” variant uses [`CREATE TABLE ... AS SELECT`]({% link docs/stable/sql/statements/create_table.md %}#create-table--as-select-ctas) to create a persistent table on the local disk.
