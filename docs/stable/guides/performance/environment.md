@@ -15,7 +15,7 @@ DuckDB works efficiently on both AMD64 (x86_64) and ARM64 (AArch64) CPU architec
 
 ### Memory
 
-> Bestpractice Aim for 1-4 GB memory per thread.
+> Bestpractice: Aim for 1-4 GB memory per thread.
 
 #### Minimum Required Memory
 
@@ -66,11 +66,11 @@ These setups include [NFS](https://en.wikipedia.org/wiki/Network_File_System),
 network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) and
 [Samba](https://en.wikipedia.org/wiki/Samba_(software)).
 Based on user reports, running read-write workloads on network-attached storage can result in slow and unpredictable performance,
-as well as spurious errors cased by the underlying file system.
+as well as spurious errors caused by the underlying file system.
 
 > Warning Avoid running DuckDB in read-write mode on network-attached storage.
 
-> Bestpractice Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they are reliable (e.g., cloud disks) and guarantee high IO.
+> Bestpractice: Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they are reliable (e.g., cloud disks) and guarantee high IO.
 
 ## Operating System
 
@@ -79,7 +79,7 @@ We recommend using the latest stable version of operating systems: macOS, Window
 ### Linux
 
 DuckDB runs on all mainstream Linux distributions released in the last ≈5 years.
-If you don't have a particular preference, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
+If you don't have a particular preference, we recommend using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
 
 #### glibc vs. musl libc
 

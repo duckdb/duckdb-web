@@ -8,7 +8,7 @@ title: Directly Reading Files
 ---
 
 DuckDB allows directly reading files via the [`read_text`](#read_text) and [`read_blob`](#read_blob) functions.
-These functions accept a filename, a list of filenames or a glob pattern, and output the content of each file as a `VARCHAR` or `BLOB`, respectively, as well as additional metadata such as the file size and last modified time.
+These functions accept a filename, a list of filenames, or a glob pattern. They output the content of each file as a `VARCHAR` or `BLOB`, respectively, along with metadata such as the file size and last modified time.
 
 ## `read_text`
 
@@ -27,7 +27,7 @@ FROM read_text('test/sql/table_function/files/*.txt');
 | 2    | [test, sql, table_function, files, three.txt] | 42               |
 | 10   | [test, sql, table_function, files, two.txt]   | Foo Bar\nFöö Bär |
 
-The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8, an error is thrown suggesting to use [`read_blob`](#read_blob) instead.
+DuckDB first validates the file content as valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8, DuckDB throws an error suggesting to use [`read_blob`](#read_blob) instead.
 
 ## `read_blob`
 
@@ -84,8 +84,8 @@ WHERE part IN ('a', 'b') AND date >= '2012-01-01';
 
 ## Handling Missing Metadata
 
-In cases where the underlying filesystem is unable to provide some of this data due (e.g., because HTTPFS can't always return a valid timestamp), the cell is set to `NULL` instead.
+When the underlying filesystem cannot provide this data (e.g., HTTPFS may not always return a valid timestamp), the cell is set to `NULL` instead.
 
 ## Support for Projection Pushdown
 
-The table functions also utilize projection pushdown to avoid computing properties unnecessarily. So you could e.g., use this to glob a directory full of huge files to get the file size in the size column, as long as you omit the content column the data won't be read into DuckDB.
+These table functions also use projection pushdown to avoid computing properties unnecessarily. For example, you can glob a directory of large files to get file sizes in the `size` column. As long as you omit the `content` column, DuckDB won't read the file data.
