@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: Angelerator/Sazgar
-  ref: 4ecfac69559eb366727e92a49805ad6f41ec2c21
+  ref: 79781cfbc77286c3202d035e42bcde5dac1f204b
 
 docs:
   hello_world: |
@@ -293,7 +293,7 @@ docs:
     - ✅ **Supported backends** - PostgreSQL, Tavana, MySQL*, ClickHouse*, Snowflake*, BigQuery*
     - ✅ **Conditional routing** - Route based on system resources
     - ✅ **JOIN support** - Combine remote data with local DuckDB tables
-    - ✅ **Optional TLS** - Build with `--features tls` for secure connections
+    - ✅ **Built-in TLS** - Secure connections enabled by default (rustls, no OpenSSL needed)
     
     > *Non-PostgreSQL backends require PostgreSQL-compatible interface (e.g., protocol adapter)
 
@@ -361,10 +361,10 @@ docs:
     SELECT * FROM sazgar_route('', 'warehouse', 'TRUE', 'SELECT * FROM sales');
     ```
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 502
-extension_download_count_pretty: 502
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 517
+extension_download_count_pretty: 517
 image: '/images/community_extensions/social_preview/preview_community_extension_sazgar.png'
 layout: community_extension_doc
 ---

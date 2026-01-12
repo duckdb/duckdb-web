@@ -174,8 +174,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 181
-extension_download_count_pretty: 181
+extension_download_count: 493
+extension_download_count_pretty: 493
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---
@@ -223,6 +223,7 @@ LOAD {{ page.extension.name }};
 | db_cite                      | scalar        | NULL        | NULL    |          |
 | db_code                      | scalar        | NULL        | NULL    |          |
 | db_concat                    | scalar        | NULL        | NULL    |          |
+| db_div                       | scalar        | NULL        | NULL    |          |
 | db_document                  | scalar        | NULL        | NULL    |          |
 | db_heading                   | scalar        | NULL        | NULL    |          |
 | db_hr                        | scalar        | NULL        | NULL    |          |
@@ -233,6 +234,7 @@ LOAD {{ page.extension.name }};
 | db_italic                    | scalar        | NULL        | NULL    |          |
 | db_linebreak                 | scalar        | NULL        | NULL    |          |
 | db_link                      | scalar        | NULL        | NULL    |          |
+| db_list                      | scalar        | NULL        | NULL    |          |
 | db_list_block                | scalar        | NULL        | NULL    |          |
 | db_list_item                 | scalar        | NULL        | NULL    |          |
 | db_math                      | scalar        | NULL        | NULL    |          |
@@ -254,6 +256,7 @@ LOAD {{ page.extension.name }};
 | db_text                      | scalar        | NULL        | NULL    |          |
 | db_underline                 | scalar        | NULL        | NULL    |          |
 | duck_block                   | scalar        | NULL        | NULL    |          |
+| duck_block_aliases           | pragma        | NULL        | NULL    |          |
 | duck_block_attr              | scalar        | NULL        | NULL    |          |
 | duck_block_content           | scalar        | NULL        | NULL    |          |
 | duck_block_encoding          | scalar        | NULL        | NULL    |          |
@@ -264,11 +267,15 @@ LOAD {{ page.extension.name }};
 | duck_block_set_order         | scalar        | NULL        | NULL    |          |
 | duck_block_type              | scalar        | NULL        | NULL    |          |
 | duck_block_valid             | scalar        | NULL        | NULL    |          |
+| duck_blocks_to_pandoc_ast    | scalar        | NULL        | NULL    |          |
+| duck_blocks_to_pandoc_blocks | scalar        | NULL        | NULL    |          |
+| pandoc_ast                   | table         | NULL        | NULL    |          |
 | pandoc_ast_to_blocks         | scalar        | NULL        | NULL    |          |
-| pandoc_blocks_to_ast         | scalar        | NULL        | NULL    |          |
 | pandoc_inlines_to_db_inlines | scalar        | NULL        | NULL    |          |
 | pandoc_inlines_to_text       | scalar        | NULL        | NULL    |          |
+| read_pandoc_ast              | scalar        | NULL        | NULL    |          |
 | to_duck_block                | scalar        | NULL        | NULL    |          |
+| write_pandoc_ast             | scalar        | NULL        | NULL    |          |
 
 ### Added Types
 

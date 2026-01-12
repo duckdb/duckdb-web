@@ -16,12 +16,12 @@ extension:
   requires_toolchains: rust
 repo:
   github: DataZooDE/anofox-statistics
-  ref: d3d677e4f4a09b87e5c82b841f4092784cbb347c
+  ref: 3a60878e015280be754ae0ca41667e261cc875d6
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 473
-extension_download_count_pretty: 473
+extension_download_count: 528
+extension_download_count_pretty: 528
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_statistics.png'
 layout: community_extension_doc
 ---
@@ -47,138 +47,179 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|             function_name              | function_type | description | comment | examples |
-|----------------------------------------|---------------|-------------|---------|----------|
-| aic                                    | scalar        | NULL        | NULL    |          |
-| aid_agg                                | aggregate     | NULL        | NULL    |          |
-| aid_anomaly_agg                        | aggregate     | NULL        | NULL    |          |
-| alm_fit_agg                            | aggregate     | NULL        | NULL    |          |
-| anofox_stats_aic                       | scalar        | NULL        | NULL    |          |
-| anofox_stats_aid_agg                   | aggregate     | NULL        | NULL    |          |
-| anofox_stats_aid_anomaly_agg           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_alm_fit_agg               | aggregate     | NULL        | NULL    |          |
-| anofox_stats_bic                       | scalar        | NULL        | NULL    |          |
-| anofox_stats_binom_test_agg            | aggregate     | NULL        | NULL    |          |
-| anofox_stats_bls_fit_agg               | aggregate     | NULL        | NULL    |          |
-| anofox_stats_brown_forsythe_agg        | aggregate     | NULL        | NULL    |          |
-| anofox_stats_brunner_munzel_agg        | aggregate     | NULL        | NULL    |          |
-| anofox_stats_chisq_gof_agg             | aggregate     | NULL        | NULL    |          |
-| anofox_stats_chisq_test_agg            | aggregate     | NULL        | NULL    |          |
-| anofox_stats_clark_west_agg            | aggregate     | NULL        | NULL    |          |
-| anofox_stats_cohen_kappa_agg           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_contingency_coef_agg      | aggregate     | NULL        | NULL    |          |
-| anofox_stats_cramers_v_agg             | aggregate     | NULL        | NULL    |          |
-| anofox_stats_dagostino_k2_agg          | aggregate     | NULL        | NULL    |          |
-| anofox_stats_diebold_mariano_agg       | aggregate     | NULL        | NULL    |          |
-| anofox_stats_distance_cor_agg          | aggregate     | NULL        | NULL    |          |
-| anofox_stats_elasticnet_fit            | scalar        | NULL        | NULL    |          |
-| anofox_stats_elasticnet_fit_agg        | aggregate     | NULL        | NULL    |          |
-| anofox_stats_elasticnet_fit_predict    | aggregate     | NULL        | NULL    |          |
-| anofox_stats_energy_distance_agg       | aggregate     | NULL        | NULL    |          |
-| anofox_stats_fisher_exact_agg          | aggregate     | NULL        | NULL    |          |
-| anofox_stats_g_test_agg                | aggregate     | NULL        | NULL    |          |
-| anofox_stats_icc_agg                   | aggregate     | NULL        | NULL    |          |
-| anofox_stats_jarque_bera               | scalar        | NULL        | NULL    |          |
-| anofox_stats_jarque_bera_agg           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_kendall_agg               | aggregate     | NULL        | NULL    |          |
-| anofox_stats_kruskal_wallis_agg        | aggregate     | NULL        | NULL    |          |
-| anofox_stats_mann_whitney_u_agg        | aggregate     | NULL        | NULL    |          |
-| anofox_stats_mcnemar_agg               | aggregate     | NULL        | NULL    |          |
-| anofox_stats_mmd_agg                   | aggregate     | NULL        | NULL    |          |
-| anofox_stats_nnls_fit_agg              | aggregate     | NULL        | NULL    |          |
-| anofox_stats_ols_fit                   | scalar        | NULL        | NULL    |          |
-| anofox_stats_ols_fit_agg               | aggregate     | NULL        | NULL    |          |
-| anofox_stats_ols_fit_predict           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_ols_predict_agg           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_one_way_anova_agg         | aggregate     | NULL        | NULL    |          |
-| anofox_stats_pearson_agg               | aggregate     | NULL        | NULL    |          |
-| anofox_stats_permutation_t_test_agg    | aggregate     | NULL        | NULL    |          |
-| anofox_stats_phi_coefficient_agg       | aggregate     | NULL        | NULL    |          |
-| anofox_stats_poisson_fit_agg           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_predict                   | scalar        | NULL        | NULL    |          |
-| anofox_stats_prop_test_one_agg         | aggregate     | NULL        | NULL    |          |
-| anofox_stats_prop_test_two_agg         | aggregate     | NULL        | NULL    |          |
-| anofox_stats_residuals_diagnostics     | scalar        | NULL        | NULL    |          |
-| anofox_stats_residuals_diagnostics_agg | aggregate     | NULL        | NULL    |          |
-| anofox_stats_ridge_fit                 | scalar        | NULL        | NULL    |          |
-| anofox_stats_ridge_fit_agg             | aggregate     | NULL        | NULL    |          |
-| anofox_stats_ridge_fit_predict         | aggregate     | NULL        | NULL    |          |
-| anofox_stats_rls_fit                   | scalar        | NULL        | NULL    |          |
-| anofox_stats_rls_fit_agg               | aggregate     | NULL        | NULL    |          |
-| anofox_stats_rls_fit_predict           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_shapiro_wilk_agg          | aggregate     | NULL        | NULL    |          |
-| anofox_stats_spearman_agg              | aggregate     | NULL        | NULL    |          |
-| anofox_stats_t_test_agg                | aggregate     | NULL        | NULL    |          |
-| anofox_stats_tost_correlation_agg      | aggregate     | NULL        | NULL    |          |
-| anofox_stats_tost_paired_agg           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_tost_t_test_agg           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_vif                       | scalar        | NULL        | NULL    |          |
-| anofox_stats_vif_agg                   | aggregate     | NULL        | NULL    |          |
-| anofox_stats_wilcoxon_signed_rank_agg  | aggregate     | NULL        | NULL    |          |
-| anofox_stats_wls_fit                   | scalar        | NULL        | NULL    |          |
-| anofox_stats_wls_fit_agg               | aggregate     | NULL        | NULL    |          |
-| anofox_stats_wls_fit_predict           | aggregate     | NULL        | NULL    |          |
-| anofox_stats_yuen_agg                  | aggregate     | NULL        | NULL    |          |
-| bic                                    | scalar        | NULL        | NULL    |          |
-| binom_test_agg                         | aggregate     | NULL        | NULL    |          |
-| bls_fit_agg                            | aggregate     | NULL        | NULL    |          |
-| brown_forsythe_agg                     | aggregate     | NULL        | NULL    |          |
-| brunner_munzel_agg                     | aggregate     | NULL        | NULL    |          |
-| chisq_gof_agg                          | aggregate     | NULL        | NULL    |          |
-| chisq_test_agg                         | aggregate     | NULL        | NULL    |          |
-| clark_west_agg                         | aggregate     | NULL        | NULL    |          |
-| cohen_kappa_agg                        | aggregate     | NULL        | NULL    |          |
-| contingency_coef_agg                   | aggregate     | NULL        | NULL    |          |
-| cramers_v_agg                          | aggregate     | NULL        | NULL    |          |
-| dagostino_k2_agg                       | aggregate     | NULL        | NULL    |          |
-| diebold_mariano_agg                    | aggregate     | NULL        | NULL    |          |
-| distance_cor_agg                       | aggregate     | NULL        | NULL    |          |
-| elasticnet_fit                         | scalar        | NULL        | NULL    |          |
-| elasticnet_fit_agg                     | aggregate     | NULL        | NULL    |          |
-| elasticnet_fit_predict                 | aggregate     | NULL        | NULL    |          |
-| energy_distance_agg                    | aggregate     | NULL        | NULL    |          |
-| fisher_exact_agg                       | aggregate     | NULL        | NULL    |          |
-| g_test_agg                             | aggregate     | NULL        | NULL    |          |
-| icc_agg                                | aggregate     | NULL        | NULL    |          |
-| jarque_bera                            | scalar        | NULL        | NULL    |          |
-| jarque_bera_agg                        | aggregate     | NULL        | NULL    |          |
-| kendall_agg                            | aggregate     | NULL        | NULL    |          |
-| kruskal_wallis_agg                     | aggregate     | NULL        | NULL    |          |
-| mann_whitney_u_agg                     | aggregate     | NULL        | NULL    |          |
-| mcnemar_agg                            | aggregate     | NULL        | NULL    |          |
-| mmd_agg                                | aggregate     | NULL        | NULL    |          |
-| nnls_fit_agg                           | aggregate     | NULL        | NULL    |          |
-| ols_fit                                | scalar        | NULL        | NULL    |          |
-| ols_fit_agg                            | aggregate     | NULL        | NULL    |          |
-| ols_fit_predict                        | aggregate     | NULL        | NULL    |          |
-| ols_predict_agg                        | aggregate     | NULL        | NULL    |          |
-| one_way_anova_agg                      | aggregate     | NULL        | NULL    |          |
-| pearson_agg                            | aggregate     | NULL        | NULL    |          |
-| permutation_t_test_agg                 | aggregate     | NULL        | NULL    |          |
-| phi_coefficient_agg                    | aggregate     | NULL        | NULL    |          |
-| poisson_fit_agg                        | aggregate     | NULL        | NULL    |          |
-| prop_test_one_agg                      | aggregate     | NULL        | NULL    |          |
-| prop_test_two_agg                      | aggregate     | NULL        | NULL    |          |
-| residuals_diagnostics                  | scalar        | NULL        | NULL    |          |
-| residuals_diagnostics_agg              | aggregate     | NULL        | NULL    |          |
-| ridge_fit                              | scalar        | NULL        | NULL    |          |
-| ridge_fit_agg                          | aggregate     | NULL        | NULL    |          |
-| ridge_fit_predict                      | aggregate     | NULL        | NULL    |          |
-| rls_fit                                | scalar        | NULL        | NULL    |          |
-| rls_fit_agg                            | aggregate     | NULL        | NULL    |          |
-| rls_fit_predict                        | aggregate     | NULL        | NULL    |          |
-| shapiro_wilk_agg                       | aggregate     | NULL        | NULL    |          |
-| spearman_agg                           | aggregate     | NULL        | NULL    |          |
-| t_test_agg                             | aggregate     | NULL        | NULL    |          |
-| tost_correlation_agg                   | aggregate     | NULL        | NULL    |          |
-| tost_paired_agg                        | aggregate     | NULL        | NULL    |          |
-| tost_t_test_agg                        | aggregate     | NULL        | NULL    |          |
-| vif                                    | scalar        | NULL        | NULL    |          |
-| vif_agg                                | aggregate     | NULL        | NULL    |          |
-| wilcoxon_signed_rank_agg               | aggregate     | NULL        | NULL    |          |
-| wls_fit                                | scalar        | NULL        | NULL    |          |
-| wls_fit_agg                            | aggregate     | NULL        | NULL    |          |
-| wls_fit_predict                        | aggregate     | NULL        | NULL    |          |
-| yuen_agg                               | aggregate     | NULL        | NULL    |          |
+|              function_name              | function_type | description | comment | examples |
+|-----------------------------------------|---------------|-------------|---------|----------|
+| aic                                     | scalar        | NULL        | NULL    |          |
+| aid_agg                                 | aggregate     | NULL        | NULL    |          |
+| aid_anomaly_agg                         | aggregate     | NULL        | NULL    |          |
+| alm_fit_agg                             | aggregate     | NULL        | NULL    |          |
+| alm_fit_predict_agg                     | aggregate     | NULL        | NULL    |          |
+| alm_fit_predict_by                      | table_macro   | NULL        | NULL    |          |
+| anofox_stats_aic                        | scalar        | NULL        | NULL    |          |
+| anofox_stats_aid_agg                    | aggregate     | NULL        | NULL    |          |
+| anofox_stats_aid_anomaly_agg            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_alm_fit_agg                | aggregate     | NULL        | NULL    |          |
+| anofox_stats_alm_fit_predict_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_bic                        | scalar        | NULL        | NULL    |          |
+| anofox_stats_binom_test_agg             | aggregate     | NULL        | NULL    |          |
+| anofox_stats_bls_fit_agg                | aggregate     | NULL        | NULL    |          |
+| anofox_stats_bls_fit_predict_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_brown_forsythe_agg         | aggregate     | NULL        | NULL    |          |
+| anofox_stats_brunner_munzel_agg         | aggregate     | NULL        | NULL    |          |
+| anofox_stats_chisq_gof_agg              | aggregate     | NULL        | NULL    |          |
+| anofox_stats_chisq_test_agg             | aggregate     | NULL        | NULL    |          |
+| anofox_stats_clark_west_agg             | aggregate     | NULL        | NULL    |          |
+| anofox_stats_cohen_kappa_agg            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_contingency_coef_agg       | aggregate     | NULL        | NULL    |          |
+| anofox_stats_cramers_v_agg              | aggregate     | NULL        | NULL    |          |
+| anofox_stats_dagostino_k2_agg           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_diebold_mariano_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_distance_cor_agg           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_elasticnet_fit             | scalar        | NULL        | NULL    |          |
+| anofox_stats_elasticnet_fit_agg         | aggregate     | NULL        | NULL    |          |
+| anofox_stats_elasticnet_fit_predict     | aggregate     | NULL        | NULL    |          |
+| anofox_stats_elasticnet_fit_predict_agg | aggregate     | NULL        | NULL    |          |
+| anofox_stats_elasticnet_predict_agg     | aggregate     | NULL        | NULL    |          |
+| anofox_stats_energy_distance_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_fisher_exact_agg           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_g_test_agg                 | aggregate     | NULL        | NULL    |          |
+| anofox_stats_icc_agg                    | aggregate     | NULL        | NULL    |          |
+| anofox_stats_jarque_bera                | scalar        | NULL        | NULL    |          |
+| anofox_stats_jarque_bera_agg            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_kendall_agg                | aggregate     | NULL        | NULL    |          |
+| anofox_stats_kruskal_wallis_agg         | aggregate     | NULL        | NULL    |          |
+| anofox_stats_mann_whitney_u_agg         | aggregate     | NULL        | NULL    |          |
+| anofox_stats_mcnemar_agg                | aggregate     | NULL        | NULL    |          |
+| anofox_stats_mmd_agg                    | aggregate     | NULL        | NULL    |          |
+| anofox_stats_nnls_fit_agg               | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ols_fit                    | scalar        | NULL        | NULL    |          |
+| anofox_stats_ols_fit_agg                | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ols_fit_predict            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ols_fit_predict_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ols_predict_agg            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_one_way_anova_agg          | aggregate     | NULL        | NULL    |          |
+| anofox_stats_pearson_agg                | aggregate     | NULL        | NULL    |          |
+| anofox_stats_permutation_t_test_agg     | aggregate     | NULL        | NULL    |          |
+| anofox_stats_phi_coefficient_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_poisson_fit_agg            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_poisson_fit_predict_agg    | aggregate     | NULL        | NULL    |          |
+| anofox_stats_predict                    | scalar        | NULL        | NULL    |          |
+| anofox_stats_prop_test_one_agg          | aggregate     | NULL        | NULL    |          |
+| anofox_stats_prop_test_two_agg          | aggregate     | NULL        | NULL    |          |
+| anofox_stats_residuals_diagnostics      | scalar        | NULL        | NULL    |          |
+| anofox_stats_residuals_diagnostics_agg  | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ridge_fit                  | scalar        | NULL        | NULL    |          |
+| anofox_stats_ridge_fit_agg              | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ridge_fit_predict          | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ridge_fit_predict_agg      | aggregate     | NULL        | NULL    |          |
+| anofox_stats_ridge_predict_agg          | aggregate     | NULL        | NULL    |          |
+| anofox_stats_rls_fit                    | scalar        | NULL        | NULL    |          |
+| anofox_stats_rls_fit_agg                | aggregate     | NULL        | NULL    |          |
+| anofox_stats_rls_fit_predict            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_rls_fit_predict_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_rls_predict_agg            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_shapiro_wilk_agg           | aggregate     | NULL        | NULL    |          |
+| anofox_stats_spearman_agg               | aggregate     | NULL        | NULL    |          |
+| anofox_stats_t_test_agg                 | aggregate     | NULL        | NULL    |          |
+| anofox_stats_tost_correlation_agg       | aggregate     | NULL        | NULL    |          |
+| anofox_stats_tost_paired_agg            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_tost_t_test_agg            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_vif                        | scalar        | NULL        | NULL    |          |
+| anofox_stats_vif_agg                    | aggregate     | NULL        | NULL    |          |
+| anofox_stats_wilcoxon_signed_rank_agg   | aggregate     | NULL        | NULL    |          |
+| anofox_stats_wls_fit                    | scalar        | NULL        | NULL    |          |
+| anofox_stats_wls_fit_agg                | aggregate     | NULL        | NULL    |          |
+| anofox_stats_wls_fit_predict            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_wls_fit_predict_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_wls_predict_agg            | aggregate     | NULL        | NULL    |          |
+| anofox_stats_yuen_agg                   | aggregate     | NULL        | NULL    |          |
+| bic                                     | scalar        | NULL        | NULL    |          |
+| binom_test_agg                          | aggregate     | NULL        | NULL    |          |
+| bls_fit_agg                             | aggregate     | NULL        | NULL    |          |
+| bls_fit_predict_agg                     | aggregate     | NULL        | NULL    |          |
+| bls_fit_predict_by                      | table_macro   | NULL        | NULL    |          |
+| brown_forsythe_agg                      | aggregate     | NULL        | NULL    |          |
+| brunner_munzel_agg                      | aggregate     | NULL        | NULL    |          |
+| chisq_gof_agg                           | aggregate     | NULL        | NULL    |          |
+| chisq_test_agg                          | aggregate     | NULL        | NULL    |          |
+| clark_west_agg                          | aggregate     | NULL        | NULL    |          |
+| cohen_kappa_agg                         | aggregate     | NULL        | NULL    |          |
+| contingency_coef_agg                    | aggregate     | NULL        | NULL    |          |
+| cramers_v_agg                           | aggregate     | NULL        | NULL    |          |
+| dagostino_k2_agg                        | aggregate     | NULL        | NULL    |          |
+| diebold_mariano_agg                     | aggregate     | NULL        | NULL    |          |
+| distance_cor_agg                        | aggregate     | NULL        | NULL    |          |
+| elasticnet_fit                          | scalar        | NULL        | NULL    |          |
+| elasticnet_fit_agg                      | aggregate     | NULL        | NULL    |          |
+| elasticnet_fit_predict                  | aggregate     | NULL        | NULL    |          |
+| elasticnet_fit_predict_agg              | aggregate     | NULL        | NULL    |          |
+| elasticnet_fit_predict_by               | table_macro   | NULL        | NULL    |          |
+| elasticnet_predict_agg                  | aggregate     | NULL        | NULL    |          |
+| energy_distance_agg                     | aggregate     | NULL        | NULL    |          |
+| fisher_exact_agg                        | aggregate     | NULL        | NULL    |          |
+| g_test_agg                              | aggregate     | NULL        | NULL    |          |
+| icc_agg                                 | aggregate     | NULL        | NULL    |          |
+| jarque_bera                             | scalar        | NULL        | NULL    |          |
+| jarque_bera_agg                         | aggregate     | NULL        | NULL    |          |
+| kendall_agg                             | aggregate     | NULL        | NULL    |          |
+| kruskal_wallis_agg                      | aggregate     | NULL        | NULL    |          |
+| mann_whitney_u_agg                      | aggregate     | NULL        | NULL    |          |
+| mcnemar_agg                             | aggregate     | NULL        | NULL    |          |
+| mmd_agg                                 | aggregate     | NULL        | NULL    |          |
+| nnls_fit_agg                            | aggregate     | NULL        | NULL    |          |
+| ols_fit                                 | scalar        | NULL        | NULL    |          |
+| ols_fit_agg                             | aggregate     | NULL        | NULL    |          |
+| ols_fit_predict                         | aggregate     | NULL        | NULL    |          |
+| ols_fit_predict_agg                     | aggregate     | NULL        | NULL    |          |
+| ols_fit_predict_by                      | table_macro   | NULL        | NULL    |          |
+| ols_predict_agg                         | aggregate     | NULL        | NULL    |          |
+| one_way_anova_agg                       | aggregate     | NULL        | NULL    |          |
+| pearson_agg                             | aggregate     | NULL        | NULL    |          |
+| permutation_t_test_agg                  | aggregate     | NULL        | NULL    |          |
+| phi_coefficient_agg                     | aggregate     | NULL        | NULL    |          |
+| poisson_fit_agg                         | aggregate     | NULL        | NULL    |          |
+| poisson_fit_predict_agg                 | aggregate     | NULL        | NULL    |          |
+| poisson_fit_predict_by                  | table_macro   | NULL        | NULL    |          |
+| prop_test_one_agg                       | aggregate     | NULL        | NULL    |          |
+| prop_test_two_agg                       | aggregate     | NULL        | NULL    |          |
+| residuals_diagnostics                   | scalar        | NULL        | NULL    |          |
+| residuals_diagnostics_agg               | aggregate     | NULL        | NULL    |          |
+| ridge_fit                               | scalar        | NULL        | NULL    |          |
+| ridge_fit_agg                           | aggregate     | NULL        | NULL    |          |
+| ridge_fit_predict                       | aggregate     | NULL        | NULL    |          |
+| ridge_fit_predict_agg                   | aggregate     | NULL        | NULL    |          |
+| ridge_fit_predict_by                    | table_macro   | NULL        | NULL    |          |
+| ridge_predict_agg                       | aggregate     | NULL        | NULL    |          |
+| rls_fit                                 | scalar        | NULL        | NULL    |          |
+| rls_fit_agg                             | aggregate     | NULL        | NULL    |          |
+| rls_fit_predict                         | aggregate     | NULL        | NULL    |          |
+| rls_fit_predict_agg                     | aggregate     | NULL        | NULL    |          |
+| rls_fit_predict_by                      | table_macro   | NULL        | NULL    |          |
+| rls_predict_agg                         | aggregate     | NULL        | NULL    |          |
+| shapiro_wilk_agg                        | aggregate     | NULL        | NULL    |          |
+| spearman_agg                            | aggregate     | NULL        | NULL    |          |
+| t_test_agg                              | aggregate     | NULL        | NULL    |          |
+| tost_correlation_agg                    | aggregate     | NULL        | NULL    |          |
+| tost_paired_agg                         | aggregate     | NULL        | NULL    |          |
+| tost_t_test_agg                         | aggregate     | NULL        | NULL    |          |
+| vif                                     | scalar        | NULL        | NULL    |          |
+| vif_agg                                 | aggregate     | NULL        | NULL    |          |
+| wilcoxon_signed_rank_agg                | aggregate     | NULL        | NULL    |          |
+| wls_fit                                 | scalar        | NULL        | NULL    |          |
+| wls_fit_agg                             | aggregate     | NULL        | NULL    |          |
+| wls_fit_predict                         | aggregate     | NULL        | NULL    |          |
+| wls_fit_predict_agg                     | aggregate     | NULL        | NULL    |          |
+| wls_fit_predict_by                      | table_macro   | NULL        | NULL    |          |
+| wls_predict_agg                         | aggregate     | NULL        | NULL    |          |
+| yuen_agg                                | aggregate     | NULL        | NULL    |          |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|           name           |                 description                 | input_type | scope  | aliases |
+|--------------------------|---------------------------------------------|------------|--------|---------|
+| anofox_telemetry_enabled | Enable or disable anonymous usage telemetry | BOOLEAN    | GLOBAL | []      |
+| anofox_telemetry_key     | PostHog API key for telemetry               | VARCHAR    | GLOBAL | []      |
 
 

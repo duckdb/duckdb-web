@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: stephaniewang526/duckdb-mongo
-  ref: f11cf8f51b40c07b161b665cd11e00abb14200e1
+  ref: 3bd20ba2b2d7966853651b1f98d12734b6841d8a
 
 docs:
   hello_world: |
@@ -36,10 +36,10 @@ docs:
     joins, aggregations, and complex analytical operations.
 
 
-extension_star_count: 20
-extension_star_count_pretty: 20
-extension_download_count: 175
-extension_download_count_pretty: 175
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 498
+extension_download_count_pretty: 498
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
@@ -65,9 +65,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| mongo_clear_cache | table         | NULL        | NULL    |          |
-| mongo_scan        | table         | NULL        | NULL    |          |
+|   function_name   | function_type |                                                     description                                                      | comment |                                                                                             examples                                                                                             |
+|-------------------|---------------|----------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| mongo_clear_cache | table         | Clears the schema cache for all attached MongoDB databases. Useful when MongoDB schema changes.                      | NULL    | [SELECT * FROM mongo_clear_cache()]                                                                                                                                                              |
+| mongo_scan        | table         | Scans a MongoDB collection and returns its contents as a table. Supports optional filter and sample_size parameters. | NULL    | [SELECT * FROM mongo_scan('mongodb://localhost:27017', 'mydb', 'mycollection'), SELECT * FROM mongo_scan('mongodb://localhost:27017', 'mydb', 'mycollection', filter := '{"status": "active"}')] |
 
 

@@ -20,6 +20,7 @@ extension:
 repo:
   github: eddelbuettel/duckdb-mlpack
   ref: 1c1f71363b06afcf376e538a7b5e78ebfc7f8c0a
+  ref_next: 013bee3310127e1523763b4a4419a18027f205d6
 
 docs:
   hello_world: |
@@ -68,10 +69,10 @@ docs:
 
     For more, please see the [repo](https://github.com/eddelbuettel/duckdb-mlpack).
 
-extension_star_count: 16
-extension_star_count_pretty: 16
-extension_download_count: 474
-extension_download_count_pretty: 474
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 465
+extension_download_count_pretty: 465
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---

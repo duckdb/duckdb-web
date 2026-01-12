@@ -12,16 +12,17 @@ extension:
   build: cmake
   excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;"
   license: BSL 1.1
+  requires_toolchains: rust
   maintainers:
     - sipemu
 repo:
   github: DataZooDE/anofox-forecast
-  ref: b04b81734c5d6d95a1e0c19f8a8d16dbb8baea63
+  ref: aa827a252fbfc9a3efbc83991874785a7a1c71c3
 
-extension_star_count: 22
-extension_star_count_pretty: 22
-extension_download_count: 475
-extension_download_count_pretty: 475
+extension_star_count: 23
+extension_star_count_pretty: 23
+extension_download_count: 553
+extension_download_count_pretty: 553
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -49,114 +50,101 @@ LOAD {{ page.extension.name }};
 
 |              function_name               | function_type | description | comment | examples |
 |------------------------------------------|---------------|-------------|---------|----------|
-| anofox_fcst_forecast                     | table         | NULL        | NULL    |          |
-| anofox_fcst_mstl_decomposition_operator  | table         | NULL        | NULL    |          |
+| _ts_data_quality                         | scalar        | NULL        | NULL    |          |
+| _ts_detect_changepoints_bocpd            | scalar        | NULL        | NULL    |          |
+| _ts_forecast                             | scalar        | NULL        | NULL    |          |
+| _ts_forecast_exog                        | scalar        | NULL        | NULL    |          |
+| _ts_mstl_decomposition                   | scalar        | NULL        | NULL    |          |
+| _ts_stats                                | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_analyze_seasonality       | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_bias                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_coverage                  | scalar        | NULL        | NULL    |          |
-| anofox_fcst_ts_data_quality              | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_data_quality_summary      | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_detect_changepoints       | table_macro   | NULL        | NULL    |          |
 | anofox_fcst_ts_detect_changepoints_agg   | aggregate     | NULL        | NULL    |          |
-| anofox_fcst_ts_detect_changepoints_by    | table_macro   | NULL        | NULL    |          |
 | anofox_fcst_ts_detect_seasonality        | scalar        | NULL        | NULL    |          |
-| anofox_fcst_ts_diff                      | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_constant             | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_edge_zeros           | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_gappy                | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_leading_zeros        | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_short                | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_trailing_zeros       | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_drop_zeros                | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_features                  | aggregate     | NULL        | NULL    |          |
 | anofox_fcst_ts_features_config_from_csv  | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_features_config_from_json | scalar        | NULL        | NULL    |          |
-| anofox_fcst_ts_features_list             | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_forward              | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_fill_forward_operator     | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_gaps                 | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_gaps_operator        | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_nulls_backward       | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_nulls_const          | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_nulls_forward        | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_nulls_mean           | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_forecast                  | table_macro   | NULL        | NULL    |          |
 | anofox_fcst_ts_forecast_agg              | aggregate     | NULL        | NULL    |          |
-| anofox_fcst_ts_forecast_by               | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_forecast_by_test          | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_forecast_by_test_operator | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_mae                       | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mape                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mase                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mqloss                    | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mse                       | scalar        | NULL        | NULL    |          |
-| anofox_fcst_ts_mstl_decomposition        | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_quality_report            | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_quantile_loss             | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_r2                        | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_rmae                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_rmse                      | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_smape                     | scalar        | NULL        | NULL    |          |
-| anofox_fcst_ts_stats                     | table_macro   | NULL        | NULL    |          |
-| anofox_fcst_ts_stats_internal            | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_stats_summary             | table_macro   | NULL        | NULL    |          |
-| forecast                                 | table         | NULL        | NULL    |          |
+| ts_aic_period                            | scalar        | NULL        | NULL    |          |
+| ts_analyze_peak_timing                   | scalar        | NULL        | NULL    |          |
 | ts_analyze_seasonality                   | scalar        | NULL        | NULL    |          |
+| ts_autoperiod                            | scalar        | NULL        | NULL    |          |
 | ts_bias                                  | scalar        | NULL        | NULL    |          |
+| ts_cfd_autoperiod                        | scalar        | NULL        | NULL    |          |
+| ts_classify_seasonality                  | scalar        | NULL        | NULL    |          |
 | ts_coverage                              | scalar        | NULL        | NULL    |          |
 | ts_data_quality                          | table_macro   | NULL        | NULL    |          |
 | ts_data_quality_summary                  | table_macro   | NULL        | NULL    |          |
+| ts_decompose_seasonal                    | scalar        | NULL        | NULL    |          |
+| ts_detect_amplitude_modulation           | scalar        | NULL        | NULL    |          |
 | ts_detect_changepoints                   | table_macro   | NULL        | NULL    |          |
 | ts_detect_changepoints_agg               | aggregate     | NULL        | NULL    |          |
 | ts_detect_changepoints_by                | table_macro   | NULL        | NULL    |          |
+| ts_detect_multiple_periods               | scalar        | NULL        | NULL    |          |
+| ts_detect_peaks                          | scalar        | NULL        | NULL    |          |
+| ts_detect_periods                        | scalar        | NULL        | NULL    |          |
 | ts_detect_seasonality                    | scalar        | NULL        | NULL    |          |
-| ts_diff                                  | table         | NULL        | NULL    |          |
-| ts_drop_constant                         | table         | NULL        | NULL    |          |
-| ts_drop_edge_zeros                       | table         | NULL        | NULL    |          |
-| ts_drop_gappy                            | table         | NULL        | NULL    |          |
-| ts_drop_leading_zeros                    | table         | NULL        | NULL    |          |
-| ts_drop_short                            | table         | NULL        | NULL    |          |
-| ts_drop_trailing_zeros                   | table         | NULL        | NULL    |          |
-| ts_drop_zeros                            | table         | NULL        | NULL    |          |
+| ts_detect_seasonality_changes            | scalar        | NULL        | NULL    |          |
+| ts_detrend                               | scalar        | NULL        | NULL    |          |
+| ts_diff                                  | table_macro   | NULL        | NULL    |          |
+| ts_drop_constant                         | table_macro   | NULL        | NULL    |          |
+| ts_drop_edge_zeros                       | table_macro   | NULL        | NULL    |          |
+| ts_drop_gappy                            | table_macro   | NULL        | NULL    |          |
+| ts_drop_leading_zeros                    | table_macro   | NULL        | NULL    |          |
+| ts_drop_short                            | table_macro   | NULL        | NULL    |          |
+| ts_drop_trailing_zeros                   | table_macro   | NULL        | NULL    |          |
+| ts_drop_zeros                            | table_macro   | NULL        | NULL    |          |
+| ts_estimate_period_acf                   | scalar        | NULL        | NULL    |          |
+| ts_estimate_period_fft                   | scalar        | NULL        | NULL    |          |
 | ts_features                              | aggregate     | NULL        | NULL    |          |
 | ts_features_config_from_csv              | scalar        | NULL        | NULL    |          |
 | ts_features_config_from_json             | scalar        | NULL        | NULL    |          |
 | ts_features_config_template              | table         | NULL        | NULL    |          |
 | ts_features_list                         | table         | NULL        | NULL    |          |
-| ts_fill_forward                          | table         | NULL        | NULL    |          |
+| ts_fill_forward                          | table_macro   | NULL        | NULL    |          |
 | ts_fill_forward_operator                 | table         | NULL        | NULL    |          |
-| ts_fill_gaps                             | table         | NULL        | NULL    |          |
-| ts_fill_gaps_operator                    | table         | NULL        | NULL    |          |
-| ts_fill_nulls_backward                   | table         | NULL        | NULL    |          |
-| ts_fill_nulls_const                      | table         | NULL        | NULL    |          |
-| ts_fill_nulls_forward                    | table         | NULL        | NULL    |          |
-| ts_fill_nulls_mean                       | table         | NULL        | NULL    |          |
+| ts_fill_gaps                             | table_macro   | NULL        | NULL    |          |
+| ts_fill_gaps_operator                    | table_macro   | NULL        | NULL    |          |
+| ts_fill_nulls_backward                   | table_macro   | NULL        | NULL    |          |
+| ts_fill_nulls_const                      | table_macro   | NULL        | NULL    |          |
+| ts_fill_nulls_forward                    | table_macro   | NULL        | NULL    |          |
+| ts_fill_nulls_mean                       | table_macro   | NULL        | NULL    |          |
 | ts_forecast                              | table_macro   | NULL        | NULL    |          |
 | ts_forecast_agg                          | aggregate     | NULL        | NULL    |          |
 | ts_forecast_by                           | table_macro   | NULL        | NULL    |          |
-| ts_forecast_by_test                      | table         | NULL        | NULL    |          |
+| ts_forecast_exog                         | table_macro   | NULL        | NULL    |          |
+| ts_forecast_exog_by                      | table_macro   | NULL        | NULL    |          |
+| ts_instantaneous_period                  | scalar        | NULL        | NULL    |          |
+| ts_lomb_scargle                          | scalar        | NULL        | NULL    |          |
 | ts_mae                                   | scalar        | NULL        | NULL    |          |
 | ts_mape                                  | scalar        | NULL        | NULL    |          |
 | ts_mase                                  | scalar        | NULL        | NULL    |          |
+| ts_matrix_profile_period                 | scalar        | NULL        | NULL    |          |
 | ts_mqloss                                | scalar        | NULL        | NULL    |          |
 | ts_mse                                   | scalar        | NULL        | NULL    |          |
-| ts_mstl_decomposition                    | table         | NULL        | NULL    |          |
-| ts_quality_report                        | table         | NULL        | NULL    |          |
+| ts_mstl_decomposition                    | table_macro   | NULL        | NULL    |          |
+| ts_quality_report                        | table_macro   | NULL        | NULL    |          |
 | ts_quantile_loss                         | scalar        | NULL        | NULL    |          |
 | ts_r2                                    | scalar        | NULL        | NULL    |          |
 | ts_rmae                                  | scalar        | NULL        | NULL    |          |
 | ts_rmse                                  | scalar        | NULL        | NULL    |          |
+| ts_sazed_period                          | scalar        | NULL        | NULL    |          |
+| ts_seasonal_strength                     | scalar        | NULL        | NULL    |          |
+| ts_seasonal_strength_windowed            | scalar        | NULL        | NULL    |          |
 | ts_smape                                 | scalar        | NULL        | NULL    |          |
+| ts_ssa_period                            | scalar        | NULL        | NULL    |          |
 | ts_stats                                 | table_macro   | NULL        | NULL    |          |
 | ts_stats_summary                         | table_macro   | NULL        | NULL    |          |
-
-### Added Settings
-
-<div class="extension_settings_table"></div>
-
-|           name           |                 description                 | input_type | scope  | aliases |
-|--------------------------|---------------------------------------------|------------|--------|---------|
-| anofox_telemetry_enabled | Enable or disable anonymous usage telemetry | BOOLEAN    | GLOBAL | []      |
-| anofox_telemetry_key     | PostHog API key for telemetry               | VARCHAR    | GLOBAL | []      |
+| ts_stl_period                            | scalar        | NULL        | NULL    |          |
 
 
