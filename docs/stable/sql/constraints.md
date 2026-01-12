@@ -99,6 +99,20 @@ NOT NULL constraint failed: students.id
 
 > Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, leading to constraint errors such as `violates primary key constraint` and `violates unique constraint`. See the [indexes section for more details]({% link docs/stable/sql/indexes.md %}#index-limitations).
 
+You can also define a uniqueness constraint on multiple columns:
+
+```sql
+CREATE TABLE integers (i INTEGER, j INTEGER, k INTEGER, UNIQUE (i, j));
+INSERT INTO integers VALUES (1, 2, 3);
+INSERT INTO integers VALUES (1, 4, 5);
+INSERT INTO integers VALUES (1, 2, 5);
+```
+
+```console
+Constraint Error:
+Duplicate key "i: 1, j: 2" violates unique constraint.
+```
+
 ## Foreign Keys
 
 Foreign keys define a column, or set of columns, that refer to a primary key or unique constraint from *another* table. The constraint enforces that the key exists in the other table.
