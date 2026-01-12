@@ -6,15 +6,13 @@ title: Tableau – A Data Visualization Tool
 ---
 
 [Tableau](https://www.tableau.com/) is a popular commercial data visualization tool.
-In addition to a large number of built in connectors,
+In addition to a large number of built-in connectors,
 it also provides generic database connectivity via ODBC and JDBC connectors.
 
 Tableau has two main versions: Desktop and Online (Server).
 
 * For Desktop, connecting to a DuckDB database is similar to working in an embedded environment like Python.
-* For Online, since DuckDB is in-process, the data needs to be either on the server itself
-
-or in a remote data bucket that is accessible from the server.
+* For Online, since DuckDB is in-process, the data needs to be either on the server itself or in a remote data bucket that is accessible from the server.
 
 ## Database Creation
 
@@ -38,7 +36,7 @@ as the database format used by the DuckDB tool (e.g., Python module, command lin
 Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-gb/jdbc_tableau.htm)
 for Tableau to use.
 
-> Tableau (both Desktop and Server versions) need to be restarted any time you add or modify drivers.
+> Both Tableau Desktop and Server need to be restarted any time you add or modify drivers.
 
 ### Driver Links
 
@@ -51,18 +49,18 @@ Also, check that there is only one version of the driver installed as there are 
 Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar).
 <!-- markdownlint-enable MD034 -->
 
-* macOS: Copy it to `~/Library/Tableau/Drivers/`
-* Windows: Copy it to `C:\Program Files\Tableau\Drivers`
+* macOS: Copy it to `~/Library/Tableau/Drivers/`.
+* Windows: Copy it to `C:\Program Files\Tableau\Drivers`.
 * Linux: Copy it to `/opt/tableau/tableau_driver/jdbc`.
 
 ## Using the PostgreSQL Dialect
 
 If you just want to do something simple, you can try connecting directly to the JDBC driver
-and using Tableau-provided PostgreSQL dialect.
+and using the Tableau-provided PostgreSQL dialect.
 
 1. Create a DuckDB file containing your views and/or data.
-2. Launch Tableau
-3. Under Connect > To a Server > More… click on “Other Databases (JDBC)” This will bring up the connection dialogue box. For the URL, enter `jdbc:duckdb:/User/username/path/to/database.db`. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
+2. Launch Tableau.
+3. Under Connect > To a Server > More…, click on "Other Databases (JDBC)". This brings up the connection dialog box. For the URL, enter `jdbc:duckdb:/User/username/path/to/database.db`. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
 
 ![Tableau PostgreSQL](/images/guides/tableau/tableau-osx-jdbc.png)
 
@@ -73,7 +71,7 @@ please use the DuckDB taco connector as described below.
 ## Installing the Tableau DuckDB Connector
 
 While it is possible to use the Tableau-provided PostgreSQL dialect to communicate with the DuckDB JDBC driver,
-we strongly recommend using the [DuckDB "taco" connector](https://github.com/motherduckdb/duckdb-tableau-connector).
+we strongly recommend using the [DuckDB Taco connector](https://github.com/motherduckdb/duckdb-tableau-connector).
 This connector has been fully tested against the Tableau dialect generator
 and [is more compatible](https://github.com/motherduckdb/duckdb-tableau-connector/blob/main/tableau_connectors/duckdb_jdbc/dialect.tdd)
 than the provided PostgreSQL dialect.
@@ -82,7 +80,7 @@ The documentation on how to install and use the connector is in its repository,
 but essentially you will need the
 [`duckdb_jdbc.taco`](https://github.com/motherduckdb/duckdb-tableau-connector/raw/main/packaged-connector/duckdb_jdbc-v1.0.0-signed.taco) file.
 (Despite what the Tableau documentation says, the real security risk is in the JDBC driver code,
-not the small amount of JavaScript in the Taco.)
+not the small amount of JavaScript in the Taco file.)
 
 ### Server (Online)
 

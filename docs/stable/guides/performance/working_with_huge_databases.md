@@ -13,6 +13,6 @@ DuckDB's [native database format]({% link docs/stable/internals/storage.md %}) s
 
 2. Checkpointing a DuckDB database can be slow. For example, checkpointing after adding a few rows to a table in the [TPC-H]({% link docs/stable/core_extensions/tpch.md %}) SF1000 database takes approximately 5 seconds.
 
-3. On block-based storage, the file has a big effect on performance when working with large files. On Linux, DuckDB performs best with XFS on large files.
+3. On block-based storage, the file system has a significant effect on performance when working with large files. On Linux, DuckDB performs best with XFS on large files.
 
 For storing large amounts of data, consider using the [DuckLake lakehouse format](https://ducklake.select/).
