@@ -70,7 +70,7 @@ as well as spurious errors caused by the underlying file system.
 
 > Warning Avoid running DuckDB in read-write mode on network-attached storage.
 
-> Best practice: Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they are reliable (e.g., cloud disks) and guarantee high IO.
+> Bestpractice: Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they are reliable (e.g., cloud disks) and guarantee high IO.
 
 ## Operating System
 

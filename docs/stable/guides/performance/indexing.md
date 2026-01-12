@@ -95,7 +95,7 @@ Indexes are serialized to disk and deserialized lazily, i.e., when reopening the
 Operations using the index will only load the required parts of the index.
 Therefore, having an index will not cause any slowdowns when opening an existing database.
 
-> Best practice: We recommend following these guidelines:
+> Bestpractice: We recommend following these guidelines:
 >
 > * Only use primary keys, foreign keys, or unique constraints, if these are necessary for enforcing constraints on your data.
 > * Do not define explicit indexes unless you have highly selective queries and enough memory available.
