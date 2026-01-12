@@ -88,8 +88,8 @@ Duplicate key "email: student1@uni.com" violates unique constraint.
 ```
 
 ```sql
-INSERT INTO students(id, name) VALUES (3, 'Student 3');
-INSERT INTO students(name, email) VALUES ('Student 3', 'student3@uni.com');
+INSERT INTO students (id, name) VALUES (3, 'Student 3');
+INSERT INTO students (name, email) VALUES ('Student 3', 'student3@uni.com');
 ```
 
 ```console
