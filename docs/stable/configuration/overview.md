@@ -56,7 +56,7 @@ Write a single log message with the `debug` level and a `connection` scope:
 SELECT write_log('A new client has connected.', level := 'debug', scope := 'connection');
 ```
 
-Write a single log message with the a `debug` level and a `connection` scope and a custom `log_type`:
+Write a single log message with a `debug` level and a `connection` scope and a custom `log_type`:
 
 ```sql
 SELECT write_log(
