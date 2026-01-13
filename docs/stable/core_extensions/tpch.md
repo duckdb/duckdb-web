@@ -73,13 +73,13 @@ This function returns a table with columns `query_nr` and `query`.
 
 ### Listing Expected Answers
 
-To produced the expected results for all queries on scale factors 0.01, 0.1, and 1, run:
+To produce the expected results for all queries on scale factors 0.01, 0.1 and 1, run:
 
 ```sql
 FROM tpch_answers();
 ```
 
-This function returns a table with columns `query_nr`, `scale_factor`, and `answer`.
+This function returns a table with columns `query_nr`, `scale_factor` and `answer`.
 
 ## Generating the Schema
 
