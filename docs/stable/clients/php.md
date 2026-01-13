@@ -13,7 +13,7 @@ title: PHP Client
 Client API for PHP.
 
 Focused on performance, it uses the official C API internally through [FFI](https://www.php.net/manual/en/book.ffi.php), achieving good benchmarks.
-This library is more than just a wrapper for the C API; it introduces custom, PHP-friendly methods to simplify working with DuckDB. It is compatible with Linux, Windows, and macOS, requiring PHP version 8.3 or higher.
+This library is more than just a wrapper for the C API; it introduces custom, PHP-friendly methods to simplify working with DuckDB. It is compatible with Linux, Windows and macOS, requiring PHP version 8.3 or higher.
 
 Full documentation is available at [https://duckdb-php.readthedocs.io/](https://duckdb-php.readthedocs.io/).
 
@@ -155,15 +155,15 @@ DuckDB::sql('SUMMARIZE TABLE "https://blobs.duckdb.org/data/Star_Trek-Season_1.c
 
 ## Requirements
 
-- Linux, macOS, or Windows
-- x64 platform
-- PHP >= 8.3
-- ext-ffi
+* Linux, macOS or Windows.
+* x64 platform.
+* PHP >= 8.3.
+* ext-ffi.
 
 ### Recommended
 
-- ext-bcmath - Needed for big integers (> PHP_INT_MAX)
-- ext-zend-opcache - For better performance
+* ext-bcmath – Needed for big integers (> PHP_INT_MAX).
+* ext-zend-opcache – For better performance.
 
 ## Type Support
 
