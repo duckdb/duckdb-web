@@ -111,22 +111,22 @@ template<typename TR, typename... Args>
 void CreateScalarFunction(string name, TR (*udf_func)(Args…))
 ```
 
-- template parameters:
-    - **TR** is the return type of the UDF function;
-    - **Args** are the arguments up to 3 for the UDF function (this method only supports until ternary functions);
-- **name**: is the name to register the UDF function;
-- **udf_func**: is a pointer to the UDF function.
+* template parameters:
+    * **TR** is the return type of the UDF function.
+    * **Args** are the arguments up to 3 for the UDF function (this method only supports until ternary functions).
+* **name** is the name to register the UDF function.
+* **udf_func** is a pointer to the UDF function.
 
 This method automatically discovers from the template typenames the corresponding LogicalTypes:
 
-- `bool` → `LogicalType::BOOLEAN`
-- `int8_t` → `LogicalType::TINYINT`
-- `int16_t` → `LogicalType::SMALLINT`
-- `int32_t` → `LogicalType::INTEGER`
-- `int64_t`  →` LogicalType::BIGINT`
-- `float` → `LogicalType::FLOAT`
-- `double` → `LogicalType::DOUBLE`
-- `string_t` → `LogicalType::VARCHAR`
+* `bool` → `LogicalType::BOOLEAN`
+* `int8_t` → `LogicalType::TINYINT`
+* `int16_t` → `LogicalType::SMALLINT`
+* `int32_t` → `LogicalType::INTEGER`
+* `int64_t` → `LogicalType::BIGINT`
+* `float` → `LogicalType::FLOAT`
+* `double` → `LogicalType::DOUBLE`
+* `string_t` → `LogicalType::VARCHAR`
 
 In DuckDB some primitive types, e.g., `int32_t`, are mapped to the same `LogicalType`: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
 
@@ -242,23 +242,23 @@ template<typename TR, typename... Args>
 void CreateVectorizedFunction(string name, scalar_function_t udf_func, LogicalType varargs = LogicalType::INVALID)
 ```
 
-- template parameters:
-    - **TR** is the return type of the UDF function;
-    - **Args** are the arguments up to 3 for the UDF function.
-- **name** is the name to register the UDF function;
-- **udf_func** is a _vectorized_ UDF function;
-- **varargs** The type of varargs to support, or LogicalTypeId::INVALID (default value) if the function does not accept variable length arguments.
+* template parameters:
+    * **TR** is the return type of the UDF function.
+    * **Args** are the arguments up to 3 for the UDF function.
+* **name** is the name to register the UDF function.
+* **udf_func** is a _vectorized_ UDF function.
+* **varargs** The type of varargs to support, or LogicalTypeId::INVALID (default value) if the function does not accept variable length arguments.
 
 This method automatically discovers from the template typenames the corresponding LogicalTypes:
 
-- bool → LogicalType::BOOLEAN;
-- int8_t → LogicalType::TINYINT;
-- int16_t → LogicalType::SMALLINT
-- int32_t → LogicalType::INTEGER
-- int64_t  → LogicalType::BIGINT
-- float → LogicalType::FLOAT
-- double → LogicalType::DOUBLE
-- string_t → LogicalType::VARCHAR
+* `bool` → `LogicalType::BOOLEAN`
+* `int8_t` → `LogicalType::TINYINT`
+* `int16_t` → `LogicalType::SMALLINT`
+* `int32_t` → `LogicalType::INTEGER`
+* `int64_t` → `LogicalType::BIGINT`
+* `float` → `LogicalType::FLOAT`
+* `double` → `LogicalType::DOUBLE`
+* `string_t` → `LogicalType::VARCHAR`
 
 **2.**
 
