@@ -188,4 +188,4 @@ The message implies that the database file was created with a newer DuckDB versi
 There are two potential workarounds:
 
 1. Update your DuckDB version to the latest stable version.
-2. Open the database with the latest version of DuckDB, export it to a standard format (e.g., Parquet), then import it using to any version of DuckDB. See the [`EXPORT/IMPORT DATABASE` statements]({% link docs/stable/sql/statements/export.md %}) for details.
+2. Open the database with the latest version of DuckDB, export it to a standard format (e.g., Parquet), then import it to any version of DuckDB. See the [`EXPORT/IMPORT DATABASE` statements]({% link docs/stable/sql/statements/export.md %}) for details.
