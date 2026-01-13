@@ -4,7 +4,7 @@ title: Logging
 ---
 
 DuckDB implements a logging mechanism that provides users with detailed information about events such as query execution,
-performance metrics, and system events.
+performance metrics and system events.
 
 ## Basics
 
@@ -62,7 +62,7 @@ To log only messages of a specific type:
 CALL enable_logging('HTTP');
 ```
 
-The above function will automatically set the correct log level, and will add the `HTTP` type to the `enabled_log_types` settings. This ensures
+The above function will automatically set the correct log level and will add the `HTTP` type to the `enabled_log_types` settings. This ensures
 only log messages of the 'HTTP' type will be written to the log.
 
 To enable multiple log types, simply pass:
@@ -97,9 +97,8 @@ This is a (non-exhaustive) list of the available log types in DuckDB.
 
 ## Log Storages
 
-By default, DuckDB logs to an in-memory log storage (`memory`). DuckDB supports different types of log storage. Currently
-the following log storage types are implemented in core DuckDB
-
+By default, DuckDB logs to an in-memory log storage (`memory`). DuckDB supports different types of log storage. Currently,
+the following log storage types are implemented in core DuckDB.
 
 | Log Storage | Description                                               |
 |-------------|-----------------------------------------------------------|
@@ -156,8 +155,8 @@ CALL enable_logging(storage_path = '/tmp/logs.csv');
 ```
 
 Note that the difference between normalized and denormalized is typically hidden from users through the 'duckdb_logs' function,
-which automatically joins normalized tables into a single unified result. To illustrate, both configurations above will be 
-queryable using `FROM duckdb_logs;` and will produce identical results.  
+which automatically joins normalized tables into a single unified result. To illustrate, both configurations above will be
+queryable using `FROM duckdb_logs;` and will produce identical results.
 
 ### Buffer Size
 

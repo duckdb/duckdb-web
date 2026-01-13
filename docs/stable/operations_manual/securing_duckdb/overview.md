@@ -8,7 +8,7 @@ title: Securing DuckDB
 DuckDB is quite powerful, which can be problematic, especially if untrusted SQL queries are run, e.g., from public-facing user inputs.
 This page lists some options to restrict the potential fallout from malicious SQL queries.
 
-The approach to securing DuckDB varies depending on your use case, environment, and potential attack models.
+The approach to securing DuckDB varies depending on your use case, environment and potential attack models.
 Therefore, consider the security-related configuration options carefully, especially when working with confidential datasets.
 
 If you plan to embed DuckDB in your application, please consult the [“Embedding DuckDB”]({% link docs/stable/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
@@ -57,7 +57,7 @@ SET enable_external_access = false;
 This setting implies that:
 
 * `ATTACH` cannot attach to a database in a file.
-* `COPY` cannot read to or write from files.
+* `COPY` cannot read from or write to files.
 * Functions such as `read_csv`, `read_parquet`, `read_json`, etc. cannot read from an external source.
 
 ### The `allowed_directories` and `allowed_paths` Options
@@ -67,16 +67,16 @@ These options allows fine-grained access control for the file system.
 For example, you can set DuckDB to only use the `/tmp` directory.
 
 ```sql
-SET allowed_directories = ['/tmp'];  
-SET enable_external_access = false;  
-FROM read_csv('test.csv');  
+SET allowed_directories = ['/tmp'];
+SET enable_external_access = false;
+FROM read_csv('test.csv');
 ```
 
 With the setting applied, DuckDB will refuse to read files in the current working directory:
 
 ```console
 Permission Error:
-Cannot access file "test.csv" - file system operations are disabled by configuration  
+Cannot access file "test.csv" - file system operations are disabled by configuration
 ```
 
 ## Secrets
@@ -125,7 +125,7 @@ duckdb.execute("SELECT * FROM (VALUES (32, 'a'), (42, 'b')) t(x) WHERE x = ?", [
 
 ## Constrain Resource Usage
 
-DuckDB can use quite a lot of CPU, RAM, and disk space. To avoid denial of service attacks, these resources can be limited.
+DuckDB can use quite a lot of CPU, RAM and disk space. To avoid denial of service attacks, these resources can be limited.
 
 The number of CPU threads that DuckDB can use can be set using, for example:
 
@@ -149,7 +149,7 @@ SET max_temp_directory_size = '4GB';
 
 ## Extensions
 
-DuckDB has a powerful extension mechanism, which have the same privileges as the user running DuckDB's (parent) process.
+DuckDB has a powerful extension mechanism, which has the same privileges as the user running DuckDB's (parent) process.
 This introduces security considerations. Therefore, we recommend reviewing the configuration options for [securing extensions]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}).
 
 ## Privileges
@@ -161,6 +161,6 @@ There is no good reason to run DuckDB as root.
 
 Securing DuckDB can also be supported via proven means, for example:
 
-* Scoping user privileges via [`chroot`](https://en.wikipedia.org/wiki/Chroot), relying on the operating system
-* Containerization, e.g., via Docker or Podman. See the [“DuckDB Docker Container” page]({% link docs/stable/operations_manual/duckdb_docker.md %})
-* Running DuckDB in WebAssembly
+* Scoping user privileges via [`chroot`](https://en.wikipedia.org/wiki/Chroot), relying on the operating system.
+* Containerization, e.g., via Docker or Podman. See the ["DuckDB Docker Container" page]({% link docs/stable/operations_manual/duckdb_docker.md %}).
+* Running DuckDB in WebAssembly.
