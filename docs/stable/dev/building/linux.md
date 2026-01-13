@@ -49,7 +49,9 @@ cmake ..
 make -j`nproc`
 ```
 
-### Arch and Manjaro
+### Arch Linux
+
+The following instructions are intended for Arch Linux and Arch-based distributions (e.g., Manjaro, Omarchy).
 
 #### CLI Client
 
