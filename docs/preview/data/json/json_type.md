@@ -38,7 +38,7 @@ SELECT '{ "a": 5 }'::JSON = '{"a":5}'::JSON;
 false
 ```
 
-and whitespace survives roundtrips:
+Please not that whitespaces are kept in roundtrips:
 
 ```sql
 SELECT '{  "a":5 }'::JSON::VARCHAR
@@ -48,7 +48,7 @@ SELECT '{  "a":5 }'::JSON::VARCHAR
 {  "a":5 }
 ```
 
-and the order of keys in objects is significant:
+The order of keys in objects is significant:
 
 ```sql
  SELECT '{"a":1,"b":2}'::JSON = '{"b":2,"a":1}'::JSON;
@@ -58,7 +58,7 @@ and the order of keys in objects is significant:
 false
 ```
 
-and we allow duplicate keys:
+Duplicate keys are allowed in JSON objects:
 
 ```sql
 SELECT '{"a":1,"a":2}'::JSON;
@@ -75,7 +75,7 @@ SELECT '{"duck": 42}'::JSON::STRUCT(duck INTEGER);
 ```
 
 ```text
-{duck: 42}
+{'duck': 42}
 ```
 
 And back:
