@@ -201,7 +201,7 @@ Still, it is recommended to always correctly close a database object after you a
 
 #### `duckdb_connect`
 
-Opens a connection to a database. Connections are required to query the database, and store transactional state
+Opens a connection to a database. Connections are required to query the database and store transactional state
 associated with the connection.
 The instantiated connection should be closed using 'duckdb_disconnect'.
 

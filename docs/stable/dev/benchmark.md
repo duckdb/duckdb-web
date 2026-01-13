@@ -117,7 +117,7 @@ Benchmarks are similar to unit test files, and have the same type of header.
 
 ```py
 # name: benchmark/micro/window/window_fill.benchmark
-# description: Measure the perfomance of FILL
+# description: Measure the performance of FILL
 # group: [window]
 ```
 The `make format-head` command fill can ensure that the header has the expected structure and prevent tidy check errors.
@@ -167,7 +167,7 @@ The `argument` parameters are expanded in the query,
 similar to the way that `foreach` values are expanded in unit tests.
 Note that we can issue multiple SQL statements in the `load` section.
 
-One the data is prepared, we are finally ready to specify the query we will benchmark!
+Once the data is prepared, we are finally ready to specify the query we will benchmark!
 This is done in the `run` section, and the restrictions are the same as for a unit test
 (e.g., no blank lines, etc.)
 For the `FILL` benchmark, we want to find all places where the interpolation fails:
@@ -185,7 +185,7 @@ qualify v <> m - 1704067200000;
 
 If the interpolation is correct, then we will have no output, no matter the scale.
 We can check this with the final `result` clause,
-which ash the same syntax as a unit test:
+which has the same syntax as a unit test:
 
 ```text
 result III

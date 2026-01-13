@@ -147,7 +147,7 @@ WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
 
 ### Regular Expressions in a `COLUMNS` Expression
 
-`COLUMNS` expressions don't currently support the pattern matching operators, but they do supports regular expression matching by simply passing a string constant in place of the star:
+`COLUMNS` expressions don't currently support the pattern matching operators, but they do support regular expression matching by simply passing a string constant in place of the star:
 
 ```sql
 SELECT COLUMNS('(id|numbers?)') FROM numbers;

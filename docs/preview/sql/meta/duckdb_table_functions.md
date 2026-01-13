@@ -378,7 +378,7 @@ The `duckdb_types()` function provides metadata about the data types available i
 | `type_oid` | The internal identifier of the data type object. If `NULL`, then this is an alias of the type (as identified by the value in the `logical_type` column). | `BIGINT` |
 | `type_size` | The number of bytes required to represent a value of this type in memory. | `BIGINT` |
 | `logical_type` | The 'canonical' name of this data type. The same `logical_type` may be referenced by several types having different `type_name`s. | `VARCHAR` |
-| `type_category` | The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expression. For example, the `NUMERIC` type_category includes integers, decimals, and floating point numbers. | `VARCHAR` |
+| `type_category` | The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expression. For example, the `NUMERIC` type_category includes integers, decimals and floating point numbers. | `VARCHAR` |
 | `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/preview/sql/statements/comment_on.md %}). | `VARCHAR` |
 | `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `internal` | Whether this is an internal (built-in) or a user object. | `BOOLEAN` |

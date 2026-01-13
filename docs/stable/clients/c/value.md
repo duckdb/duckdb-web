@@ -1481,7 +1481,7 @@ The map value, or nullptr, if the parameters are invalid.
 
 #### `duckdb_create_union_value`
 
-Creates a union value from a union type, a tag index, and a value.
+Creates a union value from a union type, a tag index and a value.
 Must be destroyed with `duckdb_destroy_value`.
 
 ##### Syntax

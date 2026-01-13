@@ -29,7 +29,7 @@ The DuckDB ODBC driver has the following handle types.
 | **Handle name** | [Environment](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/environment-handles?view=sql-server-ver16) |
 | **Type name** | `SQL_HANDLE_ENV` |
 | **Description** | Manages the environment settings for ODBC operations, and provides a global context in which to access data. |
-| **Use case** | Initializing ODBC, managing driver behavior, resource allocation |
+| **Use case** | Initializing ODBC, managing driver behavior, resource allocation. |
 | **Additional information** | Must be [allocated](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-the-environment-handle?view=sql-server-ver16) once per application upon starting, and freed at the end. |
 
 #### Connection
@@ -39,28 +39,28 @@ The DuckDB ODBC driver has the following handle types.
 | **Handle name** | [Connection](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-handles?view=sql-server-ver16) |
 | **Type name** | `SQL_HANDLE_DBC` |
 | **Description** | Represents a connection to a data source. Used to establish, manage, and terminate connections. Defines both the driver and the data source to use within the driver. |
-| **Use case** | Establishing a connection to a database, managing the connection state |
+| **Use case** | Establishing a connection to a database, managing the connection state. |
 | **Additional information** | Multiple connection handles can be [created](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-a-connection-handle-odbc?view=sql-server-ver16) as needed, allowing simultaneous connections to multiple data sources. *Note:* Allocating a connection handle does not establish a connection, but must be allocated first, and then used once the connection has been established. |
 
 #### Statement
 
 <div class="nostroke_table"></div>
 
-| **Handle name** | [Statement](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/statement-handles?view=sql-server-ver16)
-| **Type name** | `SQL_HANDLE_STMT`
-| **Description** | Handles the execution of SQL statements, as well as the returned result sets.
-| **Use case** | Executing SQL queries, fetching result sets, managing statement options.
-| **Additional information** | To facilitate the execution of concurrent queries, multiple handles can be [allocated](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-a-statement-handle-odbc?view=sql-server-ver16) per connection.
+| **Handle name** | [Statement](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/statement-handles?view=sql-server-ver16) |
+| **Type name** | `SQL_HANDLE_STMT` |
+| **Description** | Handles the execution of SQL statements, as well as the returned result sets. |
+| **Use case** | Executing SQL queries, fetching result sets, managing statement options. |
+| **Additional information** | To facilitate the execution of concurrent queries, multiple handles can be [allocated](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/allocating-a-statement-handle-odbc?view=sql-server-ver16) per connection. |
 
 #### Descriptor
 
 <div class="nostroke_table"></div>
 
-| **Handle name** | [Descriptor](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/descriptor-handles?view=sql-server-ver16)
-| **Type name** | `SQL_HANDLE_DESC`
-| **Description** | Describes the attributes of a data structure or parameter, and allows the application to specify the structure of data to be bound/retrieved.
-| **Use case** | Describing table structures, result sets, binding columns to application buffers
-| **Additional information** | Used in situations where data structures need to be explicitly defined, for example during parameter binding or result set fetching. They are automatically allocated when a statement is allocated, but can also be allocated explicitly.
+| **Handle name** | [Descriptor](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/descriptor-handles?view=sql-server-ver16) |
+| **Type name** | `SQL_HANDLE_DESC` |
+| **Description** | Describes the attributes of a data structure or parameter, and allows the application to specify the structure of data to be bound/retrieved. |
+| **Use case** | Describing table structures, result sets, binding columns to application buffers. |
+| **Additional information** | Used in situations where data structures need to be explicitly defined, for example during parameter binding or result set fetching. They are automatically allocated when a statement is allocated, but can also be allocated explicitly. |
 
 ### Connecting
 
@@ -68,11 +68,11 @@ The first step is to connect to the data source so that the application can perf
 
 #### Connection String
 
-A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-strings?view=sql-server-ver16) is a string which contains the information needed to connect to a data source. It is formatted as a semicolon separated list of key-value pairs, however DuckDB currently  only utilizes the DSN and ignores the rest of the parameters.
+A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-strings?view=sql-server-ver16) is a string which contains the information needed to connect to a data source. It is formatted as a semicolon separated list of key-value pairs, however DuckDB currently only utilizes the DSN and ignores the rest of the parameters.
 
 #### DSN
 
-A DSN (_Data Source Name_) is a string that identifies a database. It can be a file path, URL, or a database name. For example:  `C:\Users\me\duckdb.db` and `DuckDB` are both valid DSNs. More information on DSNs can be found on the [“Choosing a Data Source or Driver” page of the SQL Server documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
+A DSN (_Data Source Name_) is a string that identifies a database. It can be a file path, URL, or a database name. For example, `C:\Users\me\duckdb.db` and `DuckDB` are both valid DSNs. More information on DSNs can be found on the [“Choosing a Data Source or Driver” page of the SQL Server documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
 
 ### Error Handling and Diagnostics
 
@@ -80,13 +80,13 @@ All functions in ODBC return a code which represents the success or failure of t
 
 | Return code             | Description                                        |
 |-------------------------|----------------------------------------------------|
-| `SQL_SUCCESS`           | The function completed successfully                                                                                                           |
-| `SQL_SUCCESS_WITH_INFO` | The function completed successfully, but additional information is available, including a warning                                             |
-| `SQL_ERROR`             | The function failed                                                                                                                           |
-| `SQL_INVALID_HANDLE`    | The handle provided was invalid, indicating a programming error, i.e., when a handle is not allocated before it is used, or is the wrong type |
-| `SQL_NO_DATA`           | The function completed successfully, but no more data is available                                                                            |
-| `SQL_NEED_DATA`         | More data is needed, such as when a parameter data is sent at execution time, or additional connection information is required                |
-| `SQL_STILL_EXECUTING`   | A function that was asynchronously executed is still executing                                                                                |
+| `SQL_SUCCESS`           | The function completed successfully.                                                                                                           |
+| `SQL_SUCCESS_WITH_INFO` | The function completed successfully, but additional information is available, including a warning.                                             |
+| `SQL_ERROR`             | The function failed.                                                                                                                           |
+| `SQL_INVALID_HANDLE`    | The handle provided was invalid, indicating a programming error, i.e., when a handle is not allocated before it is used, or is the wrong type. |
+| `SQL_NO_DATA`           | The function completed successfully, but no more data is available.                                                                            |
+| `SQL_NEED_DATA`         | More data is needed, such as when a parameter data is sent at execution time, or additional connection information is required.                |
+| `SQL_STILL_EXECUTING`   | A function that was asynchronously executed is still executing.                                                                                |
 
 ### Buffers and Binding
 
@@ -107,7 +107,7 @@ The first step is to include the SQL header files:
 #include <sqlext.h>
 ```
 
-These files contain the definitions of the ODBC functions, as well as the data types used by ODBC. In order to be able to use these header files you have to have the `unixodbc` package installed:
+These files contain the definitions of the ODBC functions, as well as the data types used by ODBC. To use these header files you have to have the `unixodbc` package installed:
 
 On macOS:
 
@@ -182,7 +182,7 @@ std::cout << "Connected!" << std::endl;
 
 #### 2.b. Connecting with SQLDriverConnect
 
-Alternatively, you can connect to the ODBC driver using  [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
+Alternatively, you can connect to the ODBC driver using [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
 `SQLDriverConnect` accepts a connection string in which you can configure the database using any of the available [DuckDB configuration options]({% link docs/preview/configuration/overview.md %}).
 
 ```cpp
@@ -234,7 +234,7 @@ Then we can fetch the results:
 SQLFetch(stmt);
 ```
 
-### 5. Go Wild
+### 5. Process the Results
 
 Now that we have the results, we can do whatever we want with them. For example, we can print them:
 
@@ -242,7 +242,7 @@ Now that we have the results, we can do whatever we want with them. For example,
 std::cout << "Value: " << int_val << std::endl;
 ```
 
-or do any other processing we want. As well as executing more queries and doing any thing else we want to do with the database such as inserting, updating, or deleting data.
+You can also execute additional queries and perform other database operations such as inserting, updating, or deleting data.
 
 ### 6. Free the Handles and Disconnecting
 

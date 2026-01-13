@@ -26,9 +26,9 @@ By traversing the R-tree from top to bottom, it is possible to very quickly sear
 
 Before you get started using the R-tree index, there are some limitations to be aware of:
 
-- The R-tree index is only supported for the `GEOMETRY` data type.
-- The R-tree index will only be used to perform "index scans" when the table is filtered (using a `WHERE` clause) with one of the following spatial predicate functions (as they all imply intersection): `ST_Equals`, `ST_Intersects`, `ST_Touches`, `ST_Crosses`, `ST_Within`, `ST_Contains`, `ST_Overlaps`, `ST_Covers`, `ST_CoveredBy`, `ST_ContainsProperly`.
-- One of the arguments to the spatial predicate function must be a “constant” (i.e., an expression whose result is known at query planning time). This is because the query planner needs to know the bounding box of the query region _before_ the query itself is executed in order to use the R-tree index scan.
+* The R-tree index is only supported for the `GEOMETRY` data type.
+* The R-tree index will only be used to perform "index scans" when the table is filtered (using a `WHERE` clause) with one of the following spatial predicate functions (as they all imply intersection): `ST_Equals`, `ST_Intersects`, `ST_Touches`, `ST_Crosses`, `ST_Within`, `ST_Contains`, `ST_Overlaps`, `ST_Covers`, `ST_CoveredBy`, `ST_ContainsProperly`.
+* One of the arguments to the spatial predicate function must be a "constant" (i.e., an expression whose result is known at query planning time). This is because the query planner needs to know the bounding box of the query region _before_ the query itself is executed to use the R-tree index scan.
 
 In the future we want to enable R-tree indexes to be used to accelerate additional predicate functions and more complex queries such a spatial joins.
 
@@ -50,7 +50,7 @@ You can also pass in additional options when creating an R-tree index using the 
 CREATE INDEX my_idx ON my_table USING RTREE (geom) WITH (max_node_capacity = 16);
 ```
 
-The impact tweaking these options will have on performance is highly dependent on the system setup DuckDB is running on, the spatial distribution of the dataset, and the query patterns of your specific workload. The defaults should be good enough, but you if you want to experiment with different parameters, see the [full list of options here](#options).
+The impact tweaking these options will have on performance is highly dependent on the system setup DuckDB is running on, the spatial distribution of the dataset and the query patterns of your specific workload. The defaults should be good enough, but you if you want to experiment with different parameters, see the [full list of options here](#options).
 
 ## Example
 
