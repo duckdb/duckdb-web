@@ -21,4 +21,4 @@ DuckDB has a flexible extension mechanism that allows for dynamically loading ex
 
 ### Platform
 
-The platform is a combination of the operating system (e.g., Linux, macOS, Windows), system architecture (e.g., AMD64, ARM64), and, optionally, the compiler used (e.g., GCC4). Platforms are used to distributed DuckDB binaries and [extension packages]({% link docs/preview/extensions/extension_distribution.md %}#platforms).
+The platform is a combination of the operating system (e.g., Linux, macOS, Windows), system architecture (e.g., AMD64, ARM64), and, optionally, the compiler used (e.g., GCC4). Platforms are used to distribute DuckDB binaries and [extension packages]({% link docs/preview/extensions/extension_distribution.md %}#platforms).

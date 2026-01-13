@@ -114,6 +114,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 * [Friendly SQL]({% link docs/preview/sql/dialect/friendly_sql.md %})
 * [As-of join]({% link docs/preview/guides/sql_features/asof_join.md %})
 * [Full-text search]({% link docs/preview/guides/sql_features/full_text_search.md %})
+* [Graph queries]({% link docs/preview/guides/sql_features/graph_queries.md %})
 * [`query` and `query_table` functions]({% link docs/preview/guides/sql_features/query_and_query_table_functions.md %})
 
 ## SQL Editors and IDEs
