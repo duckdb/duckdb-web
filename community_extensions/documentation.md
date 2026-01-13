@@ -5,7 +5,7 @@ title: Documentation
 
 ## Submit a Community Extension
 
-Communinity Extensions must be public, open-source, and hosted on GitHub.
+Community Extensions must be public, open-source, and hosted on GitHub.
 Users of such extensions are encouraged to check the relevant extension repository for giving feedback, to look at the implementation, and to report issues.
 
 To submit a Community Extension, please open a pull request to the [Community Extensions Repository](https://github.com/duckdb/community-extensions) with a single `description.yml` file in the folder `extensions/⟨name_of_the_extension⟩`{:.language-sql .highlight}.
