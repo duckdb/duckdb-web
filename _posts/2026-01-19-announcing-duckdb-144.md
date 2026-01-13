@@ -41,5 +41,5 @@ This version ships a number of performance improvements and bugfixes.
 
 This post was a short summary of the changes in v1.4.4. As usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.4).
 We would like to thank our contributors for providing detailed issue reports and patches.
-In the coming month, we will release DuckDB v1.5.0.
-We will also keep v1.4 LTS updated until September – we'll announce v1.4.5 in the [release calendar]({% link release_calendar.md %}) in the coming months.
+In the coming month, we'll release DuckDB v1.5.0.
+We'll also keep v1.4 LTS updated until mid-September. We'll announce v1.4.5 in the [release calendar]({% link release_calendar.md %}) in the coming months.
