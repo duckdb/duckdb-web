@@ -244,7 +244,7 @@ CREATE SECRET azure_spn_cert (
 
 #### Configuring a Proxy
 
-To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME`, and `PROXY_PASSWORD` in the secret definition. For example:
+To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME` and `PROXY_PASSWORD` in the secret definition. For example:
 
 ```sql
 CREATE SECRET secret5 (
