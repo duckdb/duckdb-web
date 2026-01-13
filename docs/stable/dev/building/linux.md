@@ -49,11 +49,11 @@ cmake ..
 make -j`nproc`
 ```
 
-### Arch, Omarchy and Manjaro
+### Arch and Manjaro
 
 #### CLI Client
 
-The requirements for building the DuckDB CLI client on Arch, Omarchy, Manjaro, etc. are the following:
+The requirements for building the DuckDB CLI client on Arch, Manjaro, etc. are the following:
 
 ```bash
 sudo pacman -S git gcc cmake ninja openssl
