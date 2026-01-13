@@ -121,7 +121,7 @@ SELECT list_transform(
 
 ## Scoping
 
-Lambda functions confirm to scoping rules in the following order:
+Lambda functions conform to scoping rules in the following order:
 
 * inner lambda parameters
 * outer lambda parameters

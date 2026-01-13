@@ -2,7 +2,7 @@
 layout: docu
 railroad: query_syntax/window.js
 redirect_from:
-- /docs/sql/query_syntax/window
+ - /docs/sql/query_syntax/window
 title: WINDOW Clause
 ---
 

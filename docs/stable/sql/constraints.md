@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/constraints.js
 redirect_from:
-- /docs/sql/constraints
+ - /docs/sql/constraints
 title: Constraints
 ---
 
@@ -69,7 +69,7 @@ Constraint Error:
 Duplicate key "id: 1, name: Student 1" violates primary key constraint
 ```
 
-In order to enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every primary key or unique constraint that is defined in the table.
+To enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every primary key or unique constraint that is defined in the table.
 
 Primary key constraints and unique constraints are identical except for two points:
 
@@ -88,8 +88,8 @@ Duplicate key "email: student1@uni.com" violates unique constraint.
 ```
 
 ```sql
-INSERT INTO students(id, name) VALUES (3, 'Student 3');
-INSERT INTO students(name, email) VALUES ('Student 3', 'student3@uni.com');
+INSERT INTO students (id, name) VALUES (3, 'Student 3');
+INSERT INTO students (name, email) VALUES ('Student 3', 'student3@uni.com');
 ```
 
 ```console
@@ -98,6 +98,20 @@ NOT NULL constraint failed: students.id
 ```
 
 > Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, leading to constraint errors such as `violates primary key constraint` and `violates unique constraint`. See the [indexes section for more details]({% link docs/stable/sql/indexes.md %}#index-limitations).
+
+You can also define a uniqueness constraint on multiple columns:
+
+```sql
+CREATE TABLE integers (i INTEGER, j INTEGER, k INTEGER, UNIQUE (i, j));
+INSERT INTO integers VALUES (1, 2, 3);
+INSERT INTO integers VALUES (1, 4, 5);
+INSERT INTO integers VALUES (1, 2, 5);
+```
+
+```console
+Constraint Error:
+Duplicate key "i: 1, j: 2" violates unique constraint.
+```
 
 ## Foreign Keys
 
@@ -123,6 +137,6 @@ Constraint Error:
 Violates foreign key constraint because key "id: 2" does not exist in the referenced table
 ```
 
-In order to enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every foreign key constraint that is defined in the table.
+To enforce this property efficiently, an [ART index is automatically created]({% link docs/stable/sql/indexes.md %}) for every foreign key constraint that is defined in the table.
 
 > Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, leading to constraint errors such as `violates primary key constraint` and `violates unique constraint`. See the [indexes section for more details]({% link docs/stable/sql/indexes.md %}#index-limitations).

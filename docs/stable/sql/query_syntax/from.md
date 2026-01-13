@@ -4,7 +4,7 @@ blurb: The FROM clause can contain a single table, a combination of multiple tab
 layout: docu
 railroad: query_syntax/from.js
 redirect_from:
-- /docs/sql/query_syntax/from
+ - /docs/sql/query_syntax/from
 title: FROM and JOIN Clauses
 ---
 

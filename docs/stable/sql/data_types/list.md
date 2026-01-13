@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/data_types/list
+ - /docs/sql/data_types/list
 title: List Type
 ---
 

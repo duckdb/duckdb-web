@@ -2,7 +2,7 @@
 layout: docu
 railroad: expressions/comparison.js
 redirect_from:
-- /docs/sql/expressions/comparison_operators
+ - /docs/sql/expressions/comparison_operators
 title: Comparisons
 ---
 
@@ -40,7 +40,7 @@ SELECT 1 = true;
 SELECT 1 = '1.1';
 ```
 
-> It is not possible to enforce stricter type-checking for DuckDB's comparison operators. If you require stricter type-checking, we recommend creating a [macro]({% link docs/stable/sql/statements/create_macro.md %}) with the [`typeof` function]({% link docs/stable/sql/functions/utility.md %}#typeofexpression) or implementing a [user-defined function]({% link docs/stable/clients/python/function.md %}).
+> It is not possible to enforce stricter type-checking for DuckDB's comparison operators. If you require stricter type-checking, consider creating a [macro]({% link docs/stable/sql/statements/create_macro.md %}) with the [`typeof` function]({% link docs/stable/sql/functions/utility.md %}#typeofexpression) or implementing a [user-defined function]({% link docs/stable/clients/python/function.md %}).
 
 ## `BETWEEN` and `IS [NOT] NULL`
 

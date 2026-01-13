@@ -39,7 +39,7 @@ for IDX in `seq 1 1`; do
 
     echo "Add PK constraint"
     exec 3>&1 4>&2
-    TIME=$( { time ${DUCKDB} -c "ALTER TABLE Comment ADD PRIMARY KEY(id);" 1>&3 2>&4; } 2>&1)
+    TIME=$( { time ${DUCKDB} -c "ALTER TABLE Comment ADD PRIMARY KEY (id);" 1>&3 2>&4; } 2>&1)
     exec 3>&- 4>&-
     if [ $? == 0 ]; then
         echo "add primary key,${IDX},${TIME}" >> pk.csv

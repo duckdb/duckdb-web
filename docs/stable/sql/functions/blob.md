@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
-- /docs/test/functions/blob
-- /docs/test/functions/blob/
-- /docs/sql/functions/blob
+ - /docs/test/functions/blob
+ - /docs/test/functions/blob/
+ - /docs/sql/functions/blob
 title: Blob Functions
 ---
 

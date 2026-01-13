@@ -35,7 +35,7 @@ SET disabled_optimizers = '';
 
 ### Create Temporary Tables
 
-To force a particular join order, you can break up the query into multiple queries with each creating a temporary tables:
+To force a particular join order, you can break up the query into multiple queries, with each creating a temporary table:
 
 ```sql
 CREATE OR REPLACE TEMPORARY TABLE t1 AS

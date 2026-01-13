@@ -2,9 +2,9 @@
 layout: docu
 railroad: expressions/window.js
 redirect_from:
-- /docs/sql/window_functions
-- /docs/sql/window_functions/
-- /docs/sql/functions/window_functions
+ - /docs/sql/window_functions
+ - /docs/sql/window_functions/
+ - /docs/sql/functions/window_functions
 title: Window Functions
 ---
 
@@ -13,7 +13,7 @@ title: Window Functions
 DuckDB supports [window functions](https://en.wikipedia.org/wiki/Window_function_(SQL)), which can use multiple rows to calculate a value for each row.
 Window functions are [blocking operators]({% link docs/stable/guides/performance/how_to_tune_workloads.md %}#blocking-operators), i.e., they require their entire input to be buffered, making them one of the most memory-intensive operators in SQL.
 
-Window function are available in SQL since [SQL:2003](https://en.wikipedia.org/wiki/SQL:2003) and are supported by major SQL database systems.
+Window functions are available in SQL since [SQL:2003](https://en.wikipedia.org/wiki/SQL:2003) and are supported by major SQL database systems.
 
 ## Examples
 

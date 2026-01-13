@@ -2,7 +2,7 @@
 layout: docu
 railroad: query_syntax/groupby.js
 redirect_from:
-- /docs/sql/query_syntax/groupby
+ - /docs/sql/query_syntax/groupby
 title: GROUP BY Clause
 ---
 

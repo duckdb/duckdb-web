@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/dialect/sql_quirks
+ - /docs/sql/dialect/sql_quirks
 title: SQL Quirks
 ---
 
@@ -29,7 +29,7 @@ To comply with standard SQL, one-based indexing is used almost everywhere, e.g.,
 * `INT8` corresponds to `BIGINT` because it's an _8-byte_ signed integer
 
 Explanation: the `n` in the numeric type `INTn` and `UINTn` denote the width of the number in either bytes or bits.
-`INT1`, `INT2`, `INT4` correspond to the number of bytes, while `INT16`, `INT32` and `INT64` correpsond to the number of bits.
+`INT1`, `INT2`, `INT4` correspond to the number of bytes, while `INT16`, `INT32` and `INT64` correspond to the number of bits.
 The same applies to `UINT` values.
 However, the value `n = 8` is a valid choice for both the number of bits and bytes.
 For unsigned values, `UINT8` corresponds to `UTINYINT` (8 bits).

@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/indexes.js
 redirect_from:
-- /docs/sql/statements/create_index
+ - /docs/sql/statements/create_index
 title: CREATE INDEX Statement
 ---
 

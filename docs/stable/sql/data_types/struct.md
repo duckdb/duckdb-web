@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/data_types/struct
+ - /docs/sql/data_types/struct
 title: Struct Data Type
 ---
 
@@ -352,7 +352,7 @@ FROM test;
 
 ### Renaming a Field
 
-Renaming field `j` of struct `s` to `v1` in table test`:
+Renaming field `j` of struct `s` to `v1` in table `test`:
 
 ```sql
 ALTER TABLE test RENAME s.j TO v1;
