@@ -6,14 +6,14 @@ title: S3 Iceberg Import
 
 ## Prerequisites
 
-To load an Iceberg file from S3, both the [`httpfs`]({% link docs/preview/core_extensions/httpfs/overview.md %}) and [`iceberg`]({% link docs/preview/core_extensions/iceberg/overview.md %}) extensions are required. They can be installed using the `INSTALL` SQL command. The extensions only need to be installed once.
+Loading an Iceberg file from S3 requires both the [`httpfs`]({% link docs/preview/core_extensions/httpfs/overview.md %}) and [`iceberg`]({% link docs/preview/core_extensions/iceberg/overview.md %}) extensions. Install them using the `INSTALL` SQL command. You only need to install extensions once.
 
 ```sql
 INSTALL httpfs;
 INSTALL iceberg;
 ```
 
-To load the extensions for usage, use the `LOAD` command:
+To load the extensions, use the `LOAD` command:
 
 ```sql
 LOAD httpfs;
@@ -44,14 +44,14 @@ CREATE SECRET (
 
 ## Loading Iceberg Tables from S3
 
-After the extensions are set up and the S3 credentials are correctly configured, Iceberg table can be read from S3 using the following command:
+After the extensions are set up and the S3 credentials are correctly configured, Iceberg tables can be read from S3 using the following command:
 
 ```sql
 SELECT *
 FROM iceberg_scan('s3://⟨bucket⟩/⟨iceberg_table_folder⟩/metadata/⟨id⟩.metadata.json');
 ```
 
-Note that you need to link directly to the manifest file. Otherwise you'll get an error like this:
+Note that you need to link directly to the manifest file. Otherwise, you'll get an error like this:
 
 ```console
 IO Error:

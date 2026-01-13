@@ -26,7 +26,7 @@ Create a table with a composite primary key:
 CREATE TABLE t1 (id INTEGER, j VARCHAR, PRIMARY KEY (id, j));
 ```
 
-Create a table with various different types, constraints, and default values:
+Create a table with various different types, constraints and default values:
 
 ```sql
 CREATE TABLE t1 (

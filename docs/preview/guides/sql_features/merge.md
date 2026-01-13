@@ -89,7 +89,7 @@ INSERT INTO master_ducks VALUES
 
 ### Step 3: Perform the Merge Statement
 
-This statement will perform the merge, it will check for differences between the data of target and source and follow the `WHEN MATCHED` or `WHEN NOT MATCHED` logic specifed.
+This statement will perform the merge, it will check for differences between the data of target and source and follow the `WHEN MATCHED` or `WHEN NOT MATCHED` logic specified.
 
 ```sql
 MERGE INTO master_ducks AS target
@@ -162,7 +162,7 @@ SELECT * FROM master_ducks WHERE is_current = false ORDER BY duck_id, begin_date
 
 ### Step 6: Examine a Single Duck
 
-To better illustrate the concept lets examine a single duck, to drive home the value add for type 2 SCDs.
+To better illustrate the concept, let's examine a single duck, to drive home the value add for type 2 SCDs.
 If we select from the master table after running the merge statement and the post update insert statement, we can see the individual rows for `Quackers`.
 
 To view the original row of data that is historical: 

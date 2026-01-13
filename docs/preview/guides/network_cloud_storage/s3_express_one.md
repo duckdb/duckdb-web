@@ -9,7 +9,7 @@ DuckDB can read S3 Express One buckets using the [`httpfs` extension]({% link do
 ## Credentials and Configuration
 
 The configuration of S3 Express One buckets is similar to [regular S3 buckets]({% link docs/preview/guides/network_cloud_storage/s3_import.md %}) with one exception:
-we have to specify the endpoint according to the following pattern:
+you must specify the endpoint according to the following pattern:
 
 ```sql
 s3express-⟨availability_zone⟩.⟨region⟩.amazonaws.com
@@ -31,7 +31,7 @@ CREATE SECRET (
 
 ## Instance Location
 
-For best performance, make sure that the EC2 instance is in the same availability zone as the S3 Express One bucket you are querying.
+For best performance, ensure the EC2 instance is in the same availability zone as the S3 Express One bucket you are querying.
 To determine the mapping between zone names and zone IDs, use the `aws ec2 describe-availability-zones` command.
 
 * Zone name to zone ID mapping:
@@ -58,7 +58,7 @@ To determine the mapping between zone names and zone IDs, use the `aws ec2 descr
 
 ## Querying
 
-You can query the S3 Express One bucket as any other S3 bucket:
+You can query the S3 Express One bucket like any other S3 bucket:
 
 ```sql
 SELECT *
@@ -67,11 +67,11 @@ FROM 's3://express-bucket-name--use1-az5--x-s3/my-file.parquet';
 
 ## Performance
 
-We ran two experiments on a `c7gd.12xlarge` instance using the [LDBC SF300 Comments `creationDate` Parquet file](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet) file (also used in the [microbenchmarks of the performance guide]({% link docs/preview/guides/performance/benchmarks.md %}#data-sets)).
+The following experiments were run on a `c7gd.12xlarge` instance using the [LDBC SF300 Comments `creationDate` Parquet file](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet) (also used in the [microbenchmarks of the performance guide]({% link docs/preview/guides/performance/benchmarks.md %}#data-sets)).
 
 | Experiment | File size | Runtime |
 |:-----|--:|--:|
 | Loading only from Parquet | 4.1 GB | 3.5 s |
 | Creating local table from Parquet | 4.1 GB | 5.1 s |
 
-The “loading only” variant is running the load as part of an [`EXPLAIN ANALYZE`]({% link docs/preview/guides/meta/explain_analyze.md %}) statement to measure the runtime without account creating a local table, while the “creating local table” variant uses [`CREATE TABLE ... AS SELECT`]({% link docs/preview/sql/statements/create_table.md %}#create-table--as-select-ctas) to create a persistent table on the local disk.
+The “loading only” variant is running the load as part of an [`EXPLAIN ANALYZE`]({% link docs/preview/guides/meta/explain_analyze.md %}) statement to measure the runtime without actually creating a local table, while the “creating local table” variant uses [`CREATE TABLE ... AS SELECT`]({% link docs/preview/sql/statements/create_table.md %}#create-table--as-select-ctas) to create a persistent table on the local disk.
