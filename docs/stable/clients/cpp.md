@@ -152,24 +152,24 @@ con.CreateScalarFunction<int32_t, int32_t>("udf_date", {LogicalType::DATE}, Logi
 con.Query("SELECT udf_date(d) FROM dates")->Print();
 ```
 
-- template parameters:
-    - **TR** is the return type of the UDF function;
-    - **Args** are the arguments up to 3 for the UDF function (this method only supports until ternary functions);
-- **name**: is the name to register the UDF function;
-- **args**: are the LogicalType arguments that the function uses, which should match with the template Args types;
-- **ret_type**: is the LogicalType of return of the function, which should match with the template TR type;
-- **udf_func**: is a pointer to the UDF function.
+* template parameters:
+    * **TR** is the return type of the UDF function.
+    * **Args** are the arguments up to 3 for the UDF function (this method only supports until ternary functions).
+* **name** is the name to register the UDF function.
+* **args** are the LogicalType arguments that the function uses, which should match with the template Args types.
+* **ret_type** is the LogicalType of return of the function, which should match with the template TR type.
+* **udf_func** is a pointer to the UDF function.
 
 This function checks the template types against the LogicalTypes passed as arguments and they must match as follow:
 
-- LogicalTypeId::BOOLEAN → bool
-- LogicalTypeId::TINYINT → int8_t
-- LogicalTypeId::SMALLINT → int16_t
-- LogicalTypeId::DATE, LogicalTypeId::TIME, LogicalTypeId::INTEGER → int32_t
-- LogicalTypeId::BIGINT, LogicalTypeId::TIMESTAMP → int64_t
-- LogicalTypeId::FLOAT, LogicalTypeId::DOUBLE, LogicalTypeId::DECIMAL → double
-- LogicalTypeId::VARCHAR, LogicalTypeId::CHAR, LogicalTypeId::BLOB → string_t
-- LogicalTypeId::VARBINARY → blob_t
+* LogicalTypeId::BOOLEAN → bool
+* LogicalTypeId::TINYINT → int8_t
+* LogicalTypeId::SMALLINT → int16_t
+* LogicalTypeId::DATE, LogicalTypeId::TIME, LogicalTypeId::INTEGER → int32_t
+* LogicalTypeId::BIGINT, LogicalTypeId::TIMESTAMP → int64_t
+* LogicalTypeId::FLOAT, LogicalTypeId::DOUBLE, LogicalTypeId::DECIMAL → double
+* LogicalTypeId::VARCHAR, LogicalTypeId::CHAR, LogicalTypeId::BLOB → string_t
+* LogicalTypeId::VARBINARY → blob_t
 
 #### CreateVectorizedFunction
 
@@ -219,18 +219,19 @@ The Vectorized UDF is a pointer of the type _scalar_function_t_:
 typedef std::function<void(DataChunk &args, ExpressionState &expr, Vector &result)> scalar_function_t;
 ```
 
-- **args** is a [DataChunk](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/data_chunk.hpp) that holds a set of input vectors for the UDF that all have the same length;
-- **expr** is an [ExpressionState](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/execution/expression_executor_state.hpp) that provides information to the query's expression state;
-- **result**: is a [Vector](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/vector.hpp) to store the result values.
+* **args** is a [DataChunk](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/data_chunk.hpp) that holds a set of input vectors for the UDF that all have the same length.
+* **expr** is an [ExpressionState](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/execution/expression_executor_state.hpp) that provides information to the query's expression state.
+* **result** is a [Vector](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/vector.hpp) to store the result values.
 
 There are different vector types to handle in a Vectorized UDF:
-- ConstantVector;
-- DictionaryVector;
-- FlatVector;
-- ListVector;
-- StringVector;
-- StructVector;
-- SequenceVector.
+
+* ConstantVector
+* DictionaryVector
+* FlatVector
+* ListVector
+* StringVector
+* StructVector
+* SequenceVector
 
 The general API of the `CreateVectorizedFunction()` method is as follows:
 

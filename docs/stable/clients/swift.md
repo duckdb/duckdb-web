@@ -13,7 +13,7 @@ DuckDB has a Swift client. See the [announcement post]({% post_url 2023-04-21-sw
 ## Instantiating DuckDB
 
 DuckDB supports both in-memory and persistent databases.
-To work with an in-memory datatabase, run:
+To work with an in-memory database, run:
 
 ```swift
 let database = try Database(store: .inMemory)
