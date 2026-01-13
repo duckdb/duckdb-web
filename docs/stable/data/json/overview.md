@@ -24,7 +24,7 @@ DuckDB implements multiple interfaces for JSON extraction: [JSONPath](https://go
 
 Note that DuckDB only supports lookups in JSONPath, i.e., extracting fields with `.<key>` or array elements with `[<index>]`.
 Arrays can be indexed from the back and both approaches support the wildcard `*`.
-DuckDB _not_ support the full JSONPath syntax because SQL is readily available for any further transformations.
+DuckDB does _not_ support the full JSONPath syntax because SQL is readily available for any further transformations.
 
 > It's best to pick either the JSONPath or the JSON Pointer syntax and use it in your entire application.
 
