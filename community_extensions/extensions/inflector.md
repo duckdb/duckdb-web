@@ -22,10 +22,10 @@ repo:
   github: query-farm/inflector
   ref: 1c2cd4eb439853e34cebe4a58ea01b15515e1c66
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 488
-extension_download_count_pretty: 488
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 490
+extension_download_count_pretty: 490
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
