@@ -330,7 +330,7 @@ CREATE TABLE numbers (i BIGINT);
 COPY numbers FROM 'numbers.json' (ARRAY true);
 ```
 
-The format can be detected automatically the format like so:
+The format can be detected automatically like so:
 
 ```sql
 CREATE TABLE numbers (i BIGINT);

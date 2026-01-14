@@ -10,7 +10,7 @@ SELECT '[1, null, {"key": "value"}]'::JSON;
 ```
 
 ```text
-[1, null, {"key": "value"}] 
+[1, null, {"key": "value"}]
 ```
 
 Logically, the `JSON` type is similar to a `VARCHAR`, but with the restriction that it must be valid JSON.
