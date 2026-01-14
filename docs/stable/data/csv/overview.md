@@ -119,7 +119,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `union_by_name` | Align columns from different files [by column name]({% link docs/stable/data/multiple_files/combining_schemas.md %}#union-by-name) instead of position. Using this option increases memory consumption. | `BOOL` | `false` |
 
 > Tip DuckDB's CSV reader supports `UTF-8` (default), `UTF-16` and `Latin-1` encodings.
-> For other encodings, you can either use [the `encodings` extension]({% docs/stable/core_extensions/encodings.md %})
+> For other encodings, you can either use [the `encodings` extension]({% link docs/stable/core_extensions/encodings.md %})
 > or convert them e.g. using the [`iconv` command-line tool](https://linux.die.net/man/1/iconv):
 >
 > ```batch
