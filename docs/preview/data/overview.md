@@ -114,5 +114,5 @@ SELECT *, filename FROM 'test.parquet';
 
 ## Appender
 
-In several APIs (C, C++, Go, Java, and Rust), the [Appender]({% link docs/preview/data/appender.md %}) can be used as an alternative for bulk data loading.
+In several APIs (C, C++, Go, Java and Rust), the [Appender]({% link docs/preview/data/appender.md %}) can be used as an alternative for bulk data loading.
 This class can be used to efficiently add rows to the database system without using SQL statements.

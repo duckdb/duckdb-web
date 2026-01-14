@@ -10,7 +10,7 @@ Each `PIVOT` is implemented as set of aggregations into lists and then the dedic
 Additional pre-processing steps are required if the columns to be created when pivoting are detected dynamically (which occurs when the `IN` clause is not in use).
 
 DuckDB, like most SQL engines, requires that all column names and types be known at the start of a query.
-In order to automatically detect the columns that should be created as a result of a `PIVOT` statement, it must be translated into multiple queries.
+To automatically detect the columns that should be created as a result of a `PIVOT` statement, it must be translated into multiple queries.
 [`ENUM` types]({% link docs/preview/sql/data_types/enum.md %}) are used to find the distinct values that should become columns.
 Each `ENUM` is then injected into one of the `PIVOT` statement's `IN` clauses.
 

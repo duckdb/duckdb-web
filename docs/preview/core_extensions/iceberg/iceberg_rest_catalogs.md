@@ -77,10 +77,10 @@ The following options can only be passed to a `CREATE SECRET` statement, and the
 
 The DuckDB Iceberg extensions supports the following operations when used with a REST catalog attached:
 
-- `CREATE/DROP SCHEMA`
-- `CREATE/DROP TABLE`
-- `INSERT INTO`
-- `SELECT`
+* `CREATE/DROP SCHEMA`
+* `CREATE/DROP TABLE`
+* `INSERT INTO`
+* `SELECT`
 
 Since these operations are supported, the following would also work:
 
@@ -134,10 +134,10 @@ CALL iceberg_to_ducklake('iceberg_datalake', 'my_ducklake', skip_tables := ['tab
 
 The following operations are not supported by the Iceberg DuckDB extension:
 
-- `UPDATE`
-- `DELETE`
-- `MERGE INTO`
-- `ALTER TABLE`
+* `UPDATE`
+* `DELETE`
+* `MERGE INTO`
+* `ALTER TABLE`
 
 ## Specific Catalog Examples
 
