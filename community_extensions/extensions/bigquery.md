@@ -52,10 +52,10 @@ docs:
     It enables users to read, write, and manage their BigQuery datasets/tables directly from DuckDB using standard SQL queries.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/hafenkran/duckdb-bigquery).
 
-extension_star_count: 148
-extension_star_count_pretty: 148
-extension_download_count: 16790
-extension_download_count_pretty: 16.8k
+extension_star_count: 149
+extension_star_count_pretty: 149
+extension_download_count: 17426
+extension_download_count_pretty: 17.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
