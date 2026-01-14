@@ -2,6 +2,8 @@
 github_directory: https://github.com/vortex-data/duckdb-vortex
 layout: docu
 title: Vortex Extension
+redirect_from:
+- /community_extensions/extensions/vortex
 ---
 
 > The `vortex` extension requires DuckDB 1.4.2+.

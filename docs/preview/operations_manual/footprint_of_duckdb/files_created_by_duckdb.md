@@ -22,7 +22,7 @@ DuckDB creates the following files and directories in the working directory (for
 
 | Name | Description | Example |
 |-------|-------------------|---|
-| `⟨database_filename⟩`{:.language-sql .highlight} | Database file. Only created in on-disk mode. The file can have any extension with typical extensions being `.duckdb`, `.db`, and `.ddb`. | `weather.duckdb` |
+| `⟨database_filename⟩`{:.language-sql .highlight} | Database file. Only created in on-disk mode. The file can have any extension with typical extensions being `.duckdb`, `.db` and `.ddb`. | `weather.duckdb` |
 | `.tmp/` | Temporary directory. Only created in in-memory mode. | `.tmp/` |
 | `⟨database_filename⟩.tmp/`{:.language-sql .highlight} | Temporary directory. Only created in on-disk mode. | `weather.tmp/` |
 | `⟨database_filename⟩.wal`{:.language-sql .highlight} | [Write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) file. If DuckDB exits normally, the WAL file is deleted upon exit. If DuckDB crashes, the WAL file is required to recover data. | `weather.wal` |

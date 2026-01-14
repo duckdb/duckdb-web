@@ -146,7 +146,7 @@ Other projects are likely _not affiliated_ with the DuckDB project. Please check
 
 <div class="qa-wrap" markdown="1">
 
-### What's the official name of the project.
+### What is the official name of the project?
 
 <div class="answer" markdown="1">
 

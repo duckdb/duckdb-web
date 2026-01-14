@@ -122,7 +122,7 @@ SELECT 42, 84 UNION ALL SELECT 10, 20;
 ================================================================================
 ```
 
-In a similar manner, `mode output_result` can be used in order to force the program to print the result to the terminal for every query run in the test file.
+In a similar manner, `mode output_result` can be used to force the program to print the result to the terminal for every query run in the test file.
 
 ## Result Sorting
 
