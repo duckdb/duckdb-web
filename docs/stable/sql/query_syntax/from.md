@@ -461,8 +461,6 @@ POSITIONAL JOIN t2;
 | 1 | a    |
 | 2 | b    |
 | 3 | NULL |
-| 4 | NULL |
-| 5 | NULL |
 
 Positional joins are always `FULL OUTER` joins, i.e., the resulting table has the length of the longer input table and the missing entries are filled with `NULL` values.
 
