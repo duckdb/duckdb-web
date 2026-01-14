@@ -134,18 +134,37 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 ```sql
 SELECT *
 FROM (
-    SELECT 0 AS x, 1 AS y, 2 AS z
+    SELECT 0 AS x, 0 AS y
     UNION ALL
-    SELECT 1 AS x, 2 AS y, 3 AS z
+    SELECT 0 AS x, 1 AS y
     UNION ALL
-    SELECT 2 AS x, 3 AS y, 4 AS z
+    SELECT 1 AS x, 1 AS y
 )
-WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
+WHERE COLUMNS(*) > 0; -- equivalent to: x > 0 AND y > 1
 ```
 
-| x | y | z |
-|--:|--:|--:|
-| 2 | 3 | 4 |
+| x | y |
+|--:|--:|
+| 1 | 1 |
+
+To combine using the logical `OR` operator, you can `UNPACK` the `COLUMNS` expression into the variadic `greatest` function.
+
+```sql
+SELECT *
+FROM (
+    SELECT 0 AS x, 0 AS y
+    UNION ALL
+    SELECT 0 AS x, 1 AS y
+    UNION ALL
+    SELECT 1 AS x, 1 AS y
+)
+WHERE greatest(UNPACK(COLUMNS(*) > 0)); -- equivalent to: x > 0 OR y > 1
+```
+
+| x | y |
+|--:|--:|
+| 0 | 1 |
+| 1 | 1 |
 
 ### Regular Expressions in a `COLUMNS` Expression
 
