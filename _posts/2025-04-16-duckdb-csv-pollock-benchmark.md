@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB's CSV Reader and the Pollock Robustness Benchmark: Into the CSV Abyss"
-author: "Pedro Holanda, Gabor Szarnyas (DuckDB Labs); Gerardo Vitagliano (MIT)"
+author: "Pedro Holanda, Gábor Szárnyas (DuckDB Labs); Gerardo Vitagliano (MIT)"
 thumb: "/images/blog/thumbs/duckdb-csv-robustness.svg"
 image: "/images/blog/thumbs/duckdb-csv-robustness.png"
 excerpt: "DuckDB ships with a fast and robust CSV reader, which – we believe – can consume most CSV files found in the wild. To empirically evaluate this, we used the Pollock Benchmark, a state-of-the-art test suite designed to measure how well CSV readers can operate on non-standard files, and found that DuckDB ranks #1."

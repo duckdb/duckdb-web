@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Analyzing Railway Traffic in the Netherlands"
-author: Gabor Szarnyas
+author: Gábor Szárnyas
 thumb: "/images/blog/thumbs/railways.svg"
 image: "/images/blog/thumbs/railways.png"
 excerpt: "We use a real-world railway dataset to demonstrate some of DuckDB's key features, including querying different file formats, connecting to remote endpoints, and using advanced SQL features."

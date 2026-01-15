@@ -38,4 +38,4 @@ Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/ev
 
 ## Inquiries
 
-Please contact Gabor Szarnyas at [gabor@duckdblabs.com](mailto:gabor@duckdblabs.com) if you have any questions.
+Please contact Gábor Szárnyas at [gabor@duckdblabs.com](mailto:gabor@duckdblabs.com) if you have any questions.

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB User Survey Analysis"
-author: "Gabor Szarnyas"
+author: "Gábor Szárnyas"
 thumb: "/images/blog/thumbs/survey.svg"
 image: "/images/blog/thumbs/survey.png"
 excerpt: "We share the findings from a survey of 500+ DuckDB users."

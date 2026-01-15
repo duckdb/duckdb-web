@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Temporal Analysis with Stream Windowing Functions in DuckDB"
-author: Petrica Leuca, Gabor Szarnyas
+author: Petrica Leuca, Gábor Szárnyas
 thumb: "/images/blog/thumbs/time-based-analysis-in-duckdb.svg"
 image: "/images/blog/thumbs/time-based-analysis-in-duckdb.png"
 excerpt: "DuckDB can perform time-based analytics using windows with different semantics (e.g., tumbling, hopping and sliding windows). In this post, we demonstrate these by detecting trends and anomalies in the railway service at Amsterdam Centraal Station."

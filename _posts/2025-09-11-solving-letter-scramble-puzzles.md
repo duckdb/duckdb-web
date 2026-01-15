@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Solving Letter Scramble Puzzles with DuckDB"
-author: "Gabor Szarnyas"
+author: "Gábor Szárnyas"
 tags: ["using DuckDB"]
 thumb: "/images/blog/thumbs/letter-scramble-puzzle.svg"
 image: "/images/blog/thumbs/letter-scramble-puzzle.png"
