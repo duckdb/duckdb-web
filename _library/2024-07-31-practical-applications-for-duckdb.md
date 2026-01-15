@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Practical Applications for DuckDB (with Simon Aubury & Ned Letcher)"
-author: "Developer Voices by Kris Jenkins"
+title: "Practical Applications for DuckDB"
+author: "Simon Aubury, Ned Letcher"
 tags: ["Podcast"]
 length: "70 min"
 thirdparty: true
-excerpt: "Developer Voices"
+pill: "Developer Voices by Kris Jenkins"
 ---
 
 <div class="video-container">

@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "Implementing Hardware-Friendly Databases"
-author: Hannes Mühleisen
+author: "Hannes Mühleisen"
 thumb: "/images/library/thumbs/2024-02-07-implementing-hardware-friendly-databases.jpg"
 image: "/images/library/thumbs/2024-02-07-implementing-hardware-friendly-databases.jpg"
 tags: ["Podcast"]
 length: "80 min"
 thirdparty: false
 excerpt: ""
-pill: "Developer Voices"
+pill: "Developer Voices by Kris Jenkins"
 ---
 
 <div class="video-container">

@@ -8,7 +8,7 @@ tags: ["talk"]
 length: "40 min"
 thirdparty: false
 excerpt: ""
-pill: "Øredev 2025"
+pill: "Øredev 2023"
 ---
 
 <div class="video-container">
