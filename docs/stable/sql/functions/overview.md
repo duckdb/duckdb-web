@@ -3,7 +3,6 @@ layout: docu
 railroad: expressions/function.js
 redirect_from:
   - /docs/test/functions/overview
-  - /docs/test/functions/overview/
   - /docs/sql/functions/overview
 title: Functions
 ---
