@@ -3,9 +3,7 @@ github_directory: https://github.com/duckdb/duckdb-encodings
 layout: docu
 redirect_from:
 - /docs/stable/extensions/encodings
-- /docs/stable/extensions/encodings/
 - /docs/extensions/encodings
-- /docs/extensions/encodings/
 title: Encodings Extension
 ---
 

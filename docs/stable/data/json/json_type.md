@@ -3,7 +3,6 @@ layout: docu
 title: JSON Type
 redirect_from:
 - /docs/sql/data_types/json
-- /docs/sql/data_types/json/
 - /docs/data/json/json_type
 ---
 

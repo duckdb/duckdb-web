@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/c/value
-- /docs/api/c/value/
 - /docs/clients/c/value
 title: Values
 ---

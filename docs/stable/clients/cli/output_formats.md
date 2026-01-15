@@ -2,9 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/api/cli/output-formats
-- /docs/api/cli/output-formats/
 - /docs/api/cli/output_formats
-- /docs/api/cli/output_formats/
 - /docs/clients/cli/output_formats
 title: Output Formats
 ---

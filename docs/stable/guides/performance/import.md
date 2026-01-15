@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/guides/import/overview
-- /docs/guides/import/overview/
 - /docs/guides/performance/import
 title: Data Import
 ---

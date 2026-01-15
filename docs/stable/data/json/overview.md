@@ -2,9 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/data/json
-- /docs/data/json/
 - /docs/extensions/json
-- /docs/extensions/json/
 - /docs/data/json/overview
 title: JSON Overview
 ---
