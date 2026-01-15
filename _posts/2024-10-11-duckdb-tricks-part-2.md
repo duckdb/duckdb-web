@@ -13,13 +13,13 @@ tags: ["using DuckDB"]
 This post is the latest installment of the [DuckDB Tricks series]({% post_url 2024-08-19-duckdb-tricks-part-1 %}), where we show you nifty SQL tricks in DuckDB.
 Here’s a summary of what we’re going to cover:
 
-| Operation | SQL instructions |
-|-----------|---------|
-| [Fixing timestamps in CSV files](#fixing-timestamps-in-csv-files) | `regexp_replace()`{:.language-sql .highlight} and `strptime()`{:.language-sql .highlight} |
-| [Filling in missing values](#filling-in-missing-values) | `CROSS JOIN`{:.language-sql .highlight}, `LEFT JOIN`{:.language-sql .highlight} and `coalesce()`{:.language-sql .highlight} |
-| [Repeated transformation steps](#repeated-data-transformation-steps) | `CREATE OR REPLACE TABLE t AS ... FROM t ...`{:.language-sql .highlight} |
-| [Computing checksums for columns](#computing-checksums-for-columns) | `bit_xor(md5_number(COLUMNS(*)::VARCHAR))`{:.language-sql .highlight} |
-| [Creating a macro for checksum](#creating-a-macro-for-the-checksum-query) | `CREATE MACRO checksum(tbl) AS TABLE ...`{:.language-sql .highlight} |
+| Operation                                                                 | SQL instructions                                                                                                            |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [Fixing timestamps in CSV files](#fixing-timestamps-in-csv-files)         | `regexp_replace()`{:.language-sql .highlight} and `strptime()`{:.language-sql .highlight}                                   |
+| [Filling in missing values](#filling-in-missing-values)                   | `CROSS JOIN`{:.language-sql .highlight}, `LEFT JOIN`{:.language-sql .highlight} and `coalesce()`{:.language-sql .highlight} |
+| [Repeated transformation steps](#repeated-data-transformation-steps)      | `CREATE OR REPLACE TABLE t AS ... FROM t ...`{:.language-sql .highlight}                                                    |
+| [Computing checksums for columns](#computing-checksums-for-columns)       | `bit_xor(md5_number(COLUMNS(*)::VARCHAR))`{:.language-sql .highlight}                                                       |
+| [Creating a macro for checksum](#creating-a-macro-for-the-checksum-query) | `CREATE MACRO checksum(tbl) AS TABLE ...`{:.language-sql .highlight}                                                        |
 
 ## Dataset
 

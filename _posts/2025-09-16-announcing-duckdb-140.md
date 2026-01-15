@@ -227,11 +227,11 @@ SELECT fill(c2) OVER (ORDER BY c1) f;
 
 This will be the result:
 
-| f |
-|---:|
-| 1 |
-| 21 |
-| 42 |
+|    f |
+| ---: |
+|    1 |
+|   21 |
+|   42 |
 
 ### Teradata Connector
 

@@ -128,18 +128,18 @@ Just don't forget to pause every now and then to allow the laptop to cool down a
 
 Here's the cost breakdown of the laptop using retail prices in euros (including the 21% Dutch VAT). The items were purchased in August 2025.
 
-| Item                                                         |   Cost (EUR) |
-| ------------------------------------------------------------ | -----------: |
+| Item                                                                                        |   Cost (EUR) |
+| ------------------------------------------------------------------------------------------- | -----------: |
 | [Framework Laptop 13 DIY Edition w/ AMD Ryzen AI 9 HX 370 CPU](https://frame.work/laptop13) |     1,785.00 |
-| Framework Laptop 13 Bezel – Translucent Green                |        55.00 |
-| Keyboard – US English                                        |       109.00 |
-| Power Adapter – 60W – EU                                     |        49.00 |
-| HDMI (3rd Gen) Expansion Card                                |        20.00 |
-| USB-A Expansion Card                                         |        10.00 |
-| USB-C Expansion Card – Translucent Green (2 pcs)             |        20.00 |
-| [WD_BLACK SN850X NVMe SSD 8TB](https://www.amazon.nl/dp/B0D9WT512W?th=1)                                 |       582.69 |
-| [Crucial DDR5 RAM 128GB Kit](https://www.amazon.nl/dp/B0DSQMKYLN)                                   |       327.87 |
-| **Total (euros, VAT included)**                              | **2,974.87** |
+| Framework Laptop 13 Bezel – Translucent Green                                               |        55.00 |
+| Keyboard – US English                                                                       |       109.00 |
+| Power Adapter – 60W – EU                                                                    |        49.00 |
+| HDMI (3rd Gen) Expansion Card                                                               |        20.00 |
+| USB-A Expansion Card                                                                        |        10.00 |
+| USB-C Expansion Card – Translucent Green (2 pcs)                                            |        20.00 |
+| [WD_BLACK SN850X NVMe SSD 8TB](https://www.amazon.nl/dp/B0D9WT512W?th=1)                    |       582.69 |
+| [Crucial DDR5 RAM 128GB Kit](https://www.amazon.nl/dp/B0DSQMKYLN)                           |       327.87 |
+| **Total (euros, VAT included)**                                                             | **2,974.87** |
 
 Note that Framework currently only sells 96 GB memory kits but both the motherboard and the CPU can handle 128 GB (2 × 64 GB) kits.
 

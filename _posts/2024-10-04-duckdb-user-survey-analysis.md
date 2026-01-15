@@ -126,15 +126,15 @@ Finally, users mentioned low memory usage, protocol support (e.g., HTTPS, S3), d
 We asked users about the features that they'd most like to see in future DuckDB versions. The most popular requests are listed in the table below:
 
 | Feature                                                                 | Percentage |
-|:------------------------------------------------------------------------|-----------:|
-| Improved partitioning and optimizations related to partitioning         | 39%        |
-| Improved support for time series and optimizations for pre-sorted data  | 35%        |
-| Support for materialized views                                          | 28%        |
-| Support for vector search                                               | 24%        |
-| Support for attaching to database systems via ODBC                      | 24%        |
-| Support for time travel queries (query the database as of a given time) | 23%        |
-| Support for the Delta Lake format                                       | 22%        |
-| Improved support for Iceberg (including writes)                         | 17%        |
+| :---------------------------------------------------------------------- | ---------: |
+| Improved partitioning and optimizations related to partitioning         |        39% |
+| Improved support for time series and optimizations for pre-sorted data  |        35% |
+| Support for materialized views                                          |        28% |
+| Support for vector search                                               |        24% |
+| Support for attaching to database systems via ODBC                      |        24% |
+| Support for time travel queries (query the database as of a given time) |        23% |
+| Support for the Delta Lake format                                       |        22% |
+| Improved support for Iceberg (including writes)                         |        17% |
 
 We are happy to report that, since the survey was conducted pre-v1.0.0 and DuckDB is now at version 1.1.1, some of these requests are already a reality:
 

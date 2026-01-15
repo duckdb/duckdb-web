@@ -580,11 +580,11 @@ The experiments were carried out on a MacBook Pro with a 12-core M2 Pro CPU and 
 To reproduce them, run the [`grep-vs-duckdb-microbenchmark.sh` script](https://duckdb.org/microbenchmarks/grep-vs-duckdb-microbenchmark.sh).
 The following table shows the runtimes of the solutions on both compressed and uncompressed inputs:
 
-| Tool | Runtime (compressed) | Runtime (uncompressed) |
-|---|--:|--:|
-| grep 2.6.0-FreeBSD | 20.9 s | 20.5 s |
-| pcregrep 8.45 | 3.1 s | 2.9 s |
-| DuckDB 1.0.0 | 4.2 s | 1.2 s |
+| Tool               | Runtime (compressed) | Runtime (uncompressed) |
+| ------------------ | -------------------: | ---------------------: |
+| grep 2.6.0-FreeBSD |               20.9 s |                 20.5 s |
+| pcregrep 8.45      |                3.1 s |                  2.9 s |
+| DuckDB 1.0.0       |                4.2 s |                  1.2 s |
 
 The results show that on compressed input, `grep` was the slowest, while DuckDB is slightly edged out by `gzcat`+`pcregrep`, which ran in 3.1 seconds compared to DuckDB's 4.2 seconds.
 On uncompressed input, DuckDB can utilize all CPU cores from the get-go (instead of starting with a single-threaded decompression step), allowing it to outperform both `grep` and `pcregrep` by a significant margin: 2.5× faster than `pcregrep` and more than 15× faster than `grep`.

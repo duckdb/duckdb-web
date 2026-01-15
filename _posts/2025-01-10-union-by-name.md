@@ -66,9 +66,9 @@ SELECT
     'more wooting' AS c;
 ```
 
-|  a   |   b   |      c       |
-|-----:|-------|--------------|
-| 42   | woot  | NULL         |
+|    a | b     | c            |
+| ---: | ----- | ------------ |
+|   42 | woot  | NULL         |
 | 9001 | woot2 | more wooting |
 
 > Any column that is not present in all relations is filled in with `NULL` in the places where it is missing.
@@ -119,7 +119,7 @@ FROM read_parquet(
 ```
 
 | col1 | col2 |
-|------|------|
+| ---- | ---- |
 | Star | NULL |
 | NULL | Wars |
 
@@ -158,8 +158,8 @@ INSERT INTO year_info BY NAME
 FROM year_info;
 ```
 
-| year |           status           |
-|-----:|----------------------------|
+| year | status                     |
+| ---: | -------------------------- |
 | 2024 | The planet made it through |
 | 2025 | NULL                       |
 
@@ -301,14 +301,14 @@ Additional threads do use more memory, but with the improvements in 1.1, this is
 
 The table below summarizes the results achieved on a [`c5d.large`](https://instances.vantage.sh/aws/ec2/c5d.large) instance, which has 2 vCPUs and 4 GB RAM. We report the total runtime and the maximum memory usage for each query.
 
-|           Query syntax            |    `UNION` type     | Threads | Runtime | Memory  |
-|:----------------------------------|---------------------|--------:|--------:|--------:|
-| create view, copy                 | `BY NAME`           | 2       | 5.8 min | 0.47 GB |
-| create view, copy                 | `BY POSITION`       | 2       | 4.0 min | 0.47 GB |
-| create view, copy, new column     | `BY NAME`           | 2       | 5.6 min | 0.47 GB |
-| copy subquery, new column         | `BY NAME`           | 2       | 4.1 min | 0.47 GB |
-| copy subquery                     | `BY POSITION`       | 2       | 3.7 min | 0.49 GB |
-| copy subquery, new column         | `BY NAME`           | 4       | 3.0 min | 0.77 GB |
+| Query syntax                  | `UNION` type  | Threads | Runtime |  Memory |
+| :---------------------------- | ------------- | ------: | ------: | ------: |
+| create view, copy             | `BY NAME`     |       2 | 5.8 min | 0.47 GB |
+| create view, copy             | `BY POSITION` |       2 | 4.0 min | 0.47 GB |
+| create view, copy, new column | `BY NAME`     |       2 | 5.6 min | 0.47 GB |
+| copy subquery, new column     | `BY NAME`     |       2 | 4.1 min | 0.47 GB |
+| copy subquery                 | `BY POSITION` |       2 | 3.7 min | 0.49 GB |
+| copy subquery, new column     | `BY NAME`     |       4 | 3.0 min | 0.77 GB |
 
 ## Closing Thoughts
 

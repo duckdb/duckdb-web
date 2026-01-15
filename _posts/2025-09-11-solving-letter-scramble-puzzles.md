@@ -40,9 +40,9 @@ SELECT
     letters_1 = letters_3 AS matches_2;
 ```
 
-|       letters_1       |       letters_2       |       letters_3       | matches_1 | matches_2 |
-|-----------------------|-----------------------|-----------------------|----------:|----------:|
-| [a, d, e, m, r, s, t] | [a, d, e, m, r, s, t] | [a, d, e, m, r, s, t] | true      | true      |
+| letters_1             | letters_2             | letters_3             | matches_1 | matches_2 |
+| --------------------- | --------------------- | --------------------- | --------: | --------: |
+| [a, d, e, m, r, s, t] | [a, d, e, m, r, s, t] | [a, d, e, m, r, s, t] |      true |      true |
 
 Indeed, both expressions are weak anagrams of `Amsterdam`!
 
@@ -108,8 +108,8 @@ WHERE s1.name_long.order_letters() = s2.name_long.order_letters()
 
 There are in fact three station pairs whose names are weak anagrams of each other:
 
-|  station_1  | station_2  |
-|-------------|------------|
+| station_1   | station_2  |
+| ----------- | ---------- |
 | Melsele     | Selm       |
 | Etten-Leur  | Lunteren   |
 | Diemen Zuid | Emmen Zuid |

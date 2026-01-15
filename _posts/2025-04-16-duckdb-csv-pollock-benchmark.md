@@ -329,17 +329,17 @@ It also correctly handles the most common errors, as reflected in the weighted s
 
 Pollock scores sorted by weighted score (out of 10):
 
-| System under test                       | Pollock score (weighted) | Pollock score (simple) |
-| --------------------------------------- | -----------------------: | ---------------------: |
-| _DuckDB 1.2 (benchmark config)_         |                    9.599 |                  9.961 |
-| “SpreadDesktop”                         |                    9.597 |                  9.929 |
-| Pandas 1.4.3                            |                    9.431 |                  9.895 |
-| “SpreadWeb”                             |                    9.431 |                  9.721 |
-| SQLite 3.39.0                           |                    9.375 |                  9.955 |
-| _DuckDB 1.2 (auto-detect only)_         |                    8.439 |                  9.075 |
-| UniVocity 2.9.1                         |                    7.936 |                  9.939 |
-| LibreOffice Calc 7.3.6                  |                    7.833 |                  9.925 |
-| Dataviz                                 |                    5.152 |                  5.003 |
+| System under test               | Pollock score (weighted) | Pollock score (simple) |
+| ------------------------------- | -----------------------: | ---------------------: |
+| _DuckDB 1.2 (benchmark config)_ |                    9.599 |                  9.961 |
+| “SpreadDesktop”                 |                    9.597 |                  9.929 |
+| Pandas 1.4.3                    |                    9.431 |                  9.895 |
+| “SpreadWeb”                     |                    9.431 |                  9.721 |
+| SQLite 3.39.0                   |                    9.375 |                  9.955 |
+| _DuckDB 1.2 (auto-detect only)_ |                    8.439 |                  9.075 |
+| UniVocity 2.9.1                 |                    7.936 |                  9.939 |
+| LibreOffice Calc 7.3.6          |                    7.833 |                  9.925 |
+| Dataviz                         |                    5.152 |                  5.003 |
 
 > According to the [benchmark's website](https://hpi.de/naumann/projects/data-preparation/pollock.html),
 > “SpreadDesktop” is a desktop-based commercial spreadsheet software and “SpreadWeb” is a web-based spreadsheet software.

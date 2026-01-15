@@ -32,9 +32,9 @@ This version introduces [optimistic writing to disk](https://github.com/duckdb/d
 Below is a benchmark comparing loading time of 150 million rows of the Taxi dataset from a Parquet file on an M1 Max with 10 cores:
 
 | Version | Load time |
-|---------|----------:|
-| v0.5.1  | 91.4 s    |
-| v0.6.0  | 17.2 s    |
+| ------- | --------: |
+| v0.5.1  |    91.4 s |
+| v0.6.0  |    17.2 s |
 
 DuckDB supports two modes – the [`order-preserving`](https://github.com/duckdb/duckdb/pull/5082) and the [`non-order-preserving`](https://github.com/duckdb/duckdb/pull/5033) parallel data load.
 
@@ -46,8 +46,8 @@ The order-preserving load preserves the insertion order so that e.g., the first 
 
 The compression ratio improvements of the TPC-H SF1 dataset are shown below:
 
-|    Compression    | Size   |
-|-------------------|-------:|
+| Compression       |   Size |
+| ----------------- | -----: |
 | Uncompressed      | 761 MB |
 | Dictionary        | 510 MB |
 | FSST + Dictionary | 251 MB |
@@ -58,11 +58,11 @@ The compression ratio improvements of the TPC-H SF1 dataset are shown below:
 
 The compression ratio of a dataset containing temperatures of cities stored as double (8-byte floating point numbers) is shown below:
 
-|    Compression    | Size    |
-|-------------------|--------:|
-| Uncompressed      | 25.4 MB |
-| Chimp             |  9.7 MB |
-| Patas             | 10.2 MB |
+| Compression  |    Size |
+| ------------ | ------: |
+| Uncompressed | 25.4 MB |
+| Chimp        |  9.7 MB |
+| Patas        | 10.2 MB |
 
 ## Performance Improvements
 
@@ -78,19 +78,19 @@ SET experimental_parallel_csv = true;
 
 Below is the load time of a 720 MB CSV file containing the `lineitem` table from the `TPC-H` benchmark, 
 
-|     Variant     | Load time |
-|-----------------|----------:|
-| Single-threaded | 3.5 s     |
-| Parallel        | 0.6 s     |
+| Variant         | Load time |
+| --------------- | --------: |
+| Single-threaded |     3.5 s |
+| Parallel        |     0.6 s |
 
 **Parallel CREATE INDEX & Index Memory Management Improvements**. Index creation is also sped up significantly in this release, as [the `CREATE INDEX` statement can now be executed fully in parallel](https://github.com/duckdb/duckdb/pull/4655). In addition, the number of memory allocations done by the ART is greatly reduced through [inlining of small structures](https://github.com/duckdb/duckdb/pull/5292) which both reduces memory size and further improves performance.
 
 The timings of creating an index on a single column with 16 million values is shown below.
 
 | Version | Create index time |
-|---------|------------------:|
-| v0.5.1  |        5.92 s     |
-| v0.6.0  |        1.38 s     |
+| ------- | ----------------: |
+| v0.5.1  |            5.92 s |
+| v0.6.0  |            1.38 s |
 
 **Parallel count(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `count(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
 
@@ -189,17 +189,17 @@ When working with large data sets, memory management is always a potential pain 
 This release further improves on that by greatly optimizing the [out-of-core hash join](https://github.com/duckdb/duckdb/pull/4970), resulting in a much more graceful degradation in performance as the data exceeds the memory limit.
 
 | Memory limit (GB) | Old time (s) | New time (s) |
-|--:|--:|--:|
-|10|1.97|1.96|
-|9|1.97|1.97|
-|8|2.23|2.22|
-|7|2.23|2.44|
-|6|2.27|2.39|
-|5|2.27|2.32|
-|4|2.81|2.45|
-|3|5.60|3.20|
-|2|7.69|3.28|
-|1|17.73|4.35|
+| ----------------: | -----------: | -----------: |
+|                10 |         1.97 |         1.96 |
+|                 9 |         1.97 |         1.97 |
+|                 8 |         2.23 |         2.22 |
+|                 7 |         2.23 |         2.44 |
+|                 6 |         2.27 |         2.39 |
+|                 5 |         2.27 |         2.32 |
+|                 4 |         2.81 |         2.45 |
+|                 3 |         5.60 |         3.20 |
+|                 2 |         7.69 |         3.28 |
+|                 1 |        17.73 |         4.35 |
 
 **jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/duckdb/duckdb/pull/4971) with the Linux version of DuckDB by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on macOS or Windows, and as such we continue using the standard allocators there (at least for now).
 

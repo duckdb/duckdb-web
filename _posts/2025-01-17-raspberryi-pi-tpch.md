@@ -29,14 +29,14 @@ We ventured to find out.
 
 Our setup consisted of the following components, priced at a total of $300:
 
-| Component | Price (USD) |
-|-----------|------------:|
-| [Raspberry Pi 5 with 16 GB RAM](https://www.raspberrypi.com/products/raspberry-pi-5/) | 120.00 |
-| [Raspberry Pi 27 W USB-C power supply](https://www.raspberrypi.com/products/27w-power-supply/) | 13.60 |
-| [Raspberry Pi microSD card (128 GB)](https://www.raspberrypi.com/products/sd-cards/) | 33.40 |
-| [Samsung 980 NVMe SSD (1 TB)](https://www.amazon.com/Technology-Intelligent-Turbowrite-MZ-V8V1T0B-AM/dp/B08V83JZH4) | 84.00 |
-| [Argon ONE V3 Case](https://argon40.com/products/argon-one-v3-m-2-nvme-case) | 49.00 |
-| **Total** | **$300.00** |
+| Component                                                                                                           | Price (USD) |
+| ------------------------------------------------------------------------------------------------------------------- | ----------: |
+| [Raspberry Pi 5 with 16 GB RAM](https://www.raspberrypi.com/products/raspberry-pi-5/)                               |      120.00 |
+| [Raspberry Pi 27 W USB-C power supply](https://www.raspberrypi.com/products/27w-power-supply/)                      |       13.60 |
+| [Raspberry Pi microSD card (128 GB)](https://www.raspberrypi.com/products/sd-cards/)                                |       33.40 |
+| [Samsung 980 NVMe SSD (1 TB)](https://www.amazon.com/Technology-Intelligent-Turbowrite-MZ-V8V1T0B-AM/dp/B08V83JZH4) |       84.00 |
+| [Argon ONE V3 Case](https://argon40.com/products/argon-one-v3-m-2-nvme-case)                                        |       49.00 |
+| **Total**                                                                                                           | **$300.00** |
 
 We installed the heat sinks, popped the SSD into place, and assembled the house.
 Here is a photo of our machine:
@@ -118,7 +118,7 @@ We did not encounter any crashes, errors or incorrect results.
 The following table contains the aggregated runtimes:
 
 | Scale factor | Storage      | Geometric mean runtime | Total runtime |
-|--------------|--------------|-----------------------:|--------------:|
+| ------------ | ------------ | ---------------------: | ------------: |
 | SF100        | microSD card |                 23.8 s |       769.9 s |
 | SF100        | NVMe SSD     |                 11.7 s |       372.3 s |
 | SF300        | microSD card |                171.9 s |     4,866.5 s |

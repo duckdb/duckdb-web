@@ -69,7 +69,7 @@ The details of these benchmarks are far less interesting than those of the previ
 The table contains a summary of the DuckDB benchmark results.
 
 | Setup                          | CPU cores | Memory | Runtime |
-|--------------------------------|----------:|-------:|--------:|
+| ------------------------------ | --------: | -----: | ------: |
 | iPhone 16 Pro (air-cooled)     |         6 |   8 GB | 615.1 s |
 | iPhone 16 Pro (dry ice-cooled) |         6 |   8 GB | 478.2 s |
 | Samsung Galaxy S24 Ultra       |         8 |  12 GB | 235.0 s |
