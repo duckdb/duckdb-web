@@ -464,7 +464,7 @@ Please note that DuckDB Labs, the company that employs the main DuckDB contribut
 
 <div class="answer" markdown="1">
 
-Official supports covers the following components:
+Official support covers the following components:
 
 * [primary clients]({% link docs/stable/clients/overview.md %})
 * [stable extensions]({% link docs/stable/core_extensions/overview.md %})
