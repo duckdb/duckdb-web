@@ -68,8 +68,6 @@ It does not currently support:
 
 ## Supported DuckDB Versions and Platforms
 
-The `delta` extension requires DuckDB version v1.4.4 or newer.
-
 The `unity_catalog` (and `delta`) extension currently supports the following platforms:
 
 - Linux AMD64 (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
