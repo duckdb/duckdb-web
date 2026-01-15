@@ -2,7 +2,7 @@
 layout: docu
 redirect_from:
   - /docs/extensions/official_extensions
-  - /docs/extensions/official_extensions/
+  - /docs/core_extensions
 title: Core Extensions
 ---
 

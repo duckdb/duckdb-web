@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
   - /docs/test/functions/bitstring
-  - /docs/test/functions/bitstring/
   - /docs/sql/functions/bitstring
 title: Bitstring Functions
 ---
