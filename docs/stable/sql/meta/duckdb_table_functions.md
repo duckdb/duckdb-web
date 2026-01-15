@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
- - /docs/sql/duckdb_table_functions
- - /docs/sql/duckdb_table_functions/
- - /docs/sql/meta/duckdb_table_functions
+  - /docs/sql/duckdb_table_functions
+  - /docs/sql/duckdb_table_functions/
+  - /docs/sql/meta/duckdb_table_functions
 title: DuckDB_% Metadata Functions
 ---
 

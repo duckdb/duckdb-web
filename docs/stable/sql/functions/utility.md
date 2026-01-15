@@ -1,9 +1,9 @@
 ---
 layout: docu
 redirect_from:
- - /docs/test/functions/utility
- - /docs/test/functions/utility/
- - /docs/sql/functions/utility
+  - /docs/test/functions/utility
+  - /docs/test/functions/utility/
+  - /docs/sql/functions/utility
 title: Utility Functions
 ---
 

@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/copy.js
 redirect_from:
- - /docs/sql/statements/copy
+  - /docs/sql/statements/copy
 title: COPY Statement
 ---
 

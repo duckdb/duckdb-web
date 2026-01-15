@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
- - /docs/sql/statements/alter_view
+  - /docs/sql/statements/alter_view
 title: ALTER VIEW Statement
 ---
 

@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/alter.js
 redirect_from:
- - /docs/sql/statements/alter_table
+  - /docs/sql/statements/alter_table
 title: ALTER TABLE Statement
 ---
 
