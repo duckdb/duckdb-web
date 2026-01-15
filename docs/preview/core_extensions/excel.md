@@ -4,11 +4,9 @@ layout: docu
 title: Excel Extension
 ---
 
-The `excel` extension provides functions to format numbers per Excel's formatting rules by wrapping the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), but as of DuckDB 1.2 also provides functionality to read and write Excel (`.xlsx`) files. However, `.xls` files are not supported.
+The `excel` extension provides functions to format numbers per Excel's formatting rules by wrapping the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html) and to read/write Excel (`.xlsx`) files. However, please note that `.xls` files are not supported.
 
-Previously, reading and writing Excel files was handled through the [`spatial` extension]({% link docs/preview/core_extensions/spatial/overview.md %}), which coincidentally included support for XLSX files through one of its dependencies, but this capability may be removed from the `spatial` extension. Additionally, the `excel` extension is more efficient and provides more control over the import/export process.
-
-> Tip If the `excel` extension is insufficient for your use case, try using the [`spatial` extension]({% link docs/preview/core_extensions/spatial/overview.md %}). See the [Excel Import]({% link docs/preview/guides/file_formats/excel_import.md %}) and [Excel Export]({% link docs/preview/guides/file_formats/excel_export.md %}) pages for instructions. However, please be aware that these features may be deprecated in the future.
+> Tip Previously, reading and writing Excel files was handled through the [`spatial` extension]({% link docs/preview/core_extensions/spatial/overview.md %}), which coincidentally included support for XLSX files through one of its dependencies, but this capability may be removed from the `spatial` extension. Additionally, the `excel` extension is more efficient and provides more control over the import/export process. If the `excel` extension is insufficient for your use case, try using the [`spatial` extension]({% link docs/preview/core_extensions/spatial/overview.md %}). See the [Excel Import]({% link docs/preview/guides/file_formats/excel_import.md %}) and [Excel Export]({% link docs/preview/guides/file_formats/excel_export.md %}) pages for instructions. However, please be aware that these features may be deprecated in the future.
 
 ## Installing and Loading
 
@@ -111,7 +109,7 @@ the types of the resulting columns are inferred based on the first "data" row in
 
 This can sometimes lead to issues if the first "data row" is not representative of the rest of the sheet (e.g., it contains empty cells) in which case the `ignore_errors` or `empty_as_varchar` options can be used to work around this.
 
-However, when the `COPY TO ... FROM '⟨file⟩.xlsx'` syntax is used, no type inference is done and the types of the resulting columns are determined by the types of the columns in the table being copied to. All cells will simply be converted by casting from `DOUBLE` or `VARCHAR` to the target column type.
+However, when the `COPY TO ... FROM '⟨file⟩.xlsx'`{:.language-sql .highlight} syntax is used, no type inference is done and the types of the resulting columns are determined by the types of the columns in the table being copied to. All cells will simply be converted by casting from `DOUBLE` or `VARCHAR` to the target column type.
 
 ## Writing XLSX Files
 
