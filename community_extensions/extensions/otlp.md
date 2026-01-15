@@ -8,19 +8,18 @@ excerpt: |
 extension:
   name: otlp
   description: Read OpenTelemetry metrics, logs and traces from JSON or protobuf with a ClickHouse-inspired schema
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
-  # needed for protobuf
-  vcpkg_commit: 35c82bb582adab830e1d14f9c4100d251b30aff4
-  excluded_platforms: ""
+  excluded_platforms: "wasm_mvp;wasm_threads;linux_amd64_musl"
+  requires_toolchains: rust
   maintainers:
     - smithclay
 
 repo:
   github: smithclay/duckdb-otlp
-  ref: 37754c54f7fa371dcfec2b1312dd88c2def2c061
+  ref: 9a9b96ea360f990954e9e3d69d090fbdfcc7a64a
 
 docs:
   hello_world: |
@@ -98,8 +97,8 @@ docs:
 
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 496
-extension_download_count_pretty: 496
+extension_download_count: 517
+extension_download_count_pretty: 517
 image: '/images/community_extensions/social_preview/preview_community_extension_otlp.png'
 layout: community_extension_doc
 ---
@@ -134,8 +133,6 @@ LOAD {{ page.extension.name }};
 | read_otlp_metrics_histogram     | table         | NULL        | NULL    |          |
 | read_otlp_metrics_sum           | table         | NULL        | NULL    |          |
 | read_otlp_metrics_summary       | table         | NULL        | NULL    |          |
-| read_otlp_options               | table         | NULL        | NULL    |          |
-| read_otlp_scan_stats            | table         | NULL        | NULL    |          |
 | read_otlp_traces                | table         | NULL        | NULL    |          |
 
 
