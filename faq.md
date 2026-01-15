@@ -464,7 +464,17 @@ Please note that DuckDB Labs, the company that employs the main DuckDB contribut
 
 <div class="answer" markdown="1">
 
-Official supports covers the [primary clients]({% link docs/stable/clients/overview.md %}) of the latest LTS version (currently 1.4.x) and the latest stable version (currently also 1.4.x).
+Official supports covers the following components:
+
+* [primary clients]({% link docs/stable/clients/overview.md %})
+* [stable extensions]({% link docs/stable/core_extensions/overview.md %})
+
+We support the following minor versions:
+
+* latest LTS (long-term support) version, currently {{ site.current_short_duckdb_lts_version }}
+* the latest stable version, currently {{ site.current_short_duckdb_version }}
+
+For more details, see the [DuckDB Community Support Policy](https://duckdblabs.com/community_support_policy/).
 
 </div>
 
