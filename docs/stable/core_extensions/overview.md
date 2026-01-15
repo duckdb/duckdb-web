@@ -39,18 +39,3 @@ title: Core Extensions
 
 The **Maintainer** column denotes whether the extension is maintained by the core DuckDB team or by a third party.
 For the extensions maintained by the core DuckDB team, the **Status** column shows the lifecycle stage (`experimental`, `stable`, `deprecated`, `superseded`) following the convention of the [lifecycle stages used in tidyverse](https://lifecycle.r-lib.org/articles/stages.html).
-
-## Default Extensions
-
-Different DuckDB clients ship a different set of extensions.
-We summarize the main distributions in the table below.
-
-| Name                                                                   | CLI | Python | R   | Java | Node.js |
-| ---------------------------------------------------------------------- | --- | ------ | --- | ---- | ------- |
-| [autocomplete]({% link docs/stable/core_extensions/autocomplete.md %}) | yes |        |     |      |         |
-| [icu]({% link docs/stable/core_extensions/icu.md %})                   | yes | yes    |     | yes  | yes     |
-| [json]({% link docs/stable/data/json/overview.md %})                   | yes | yes    |     | yes  | yes     |
-| [parquet]({% link docs/stable/data/parquet/overview.md %})             | yes | yes    | yes | yes  | yes     |
-
-The jemalloc extension's availability is based on the operating system.
-Please check the [jemalloc page]({% link docs/stable/core_extensions/jemalloc.md %}) for details.
