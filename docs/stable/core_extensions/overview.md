@@ -33,7 +33,7 @@ title: Core Extensions
 | [sqlite]({% link docs/stable/core_extensions/sqlite.md %})               | Adds support for reading from and writing to SQLite database files      | Core team   | Secondary    | sqlite_scanner, sqlite3 |
 | [tpcds]({% link docs/stable/core_extensions/tpcds.md %})                 | Adds TPC-DS data generation and query support                           | Core team   | Secondary    |                         |
 | [tpch]({% link docs/stable/core_extensions/tpch.md %})                   | Adds TPC-H data generation and query support                            | Core team   | Secondary    |                         |
-| [unity_catalog]({% link docs/stable/core_extensions/unity_catalog.md %}) | Adds support for connecting to Unity Catalog                            | Core team   | Secondary    |                         |
+| [unity_catalog]({% link docs/stable/core_extensions/unity_catalog.md %}) | Adds support for connecting to Unity Catalog                            | Core team   | Secondary    | uc_catalog              |
 | [ui]({% link docs/stable/core_extensions/ui.md %})                       | Adds local UI for DuckDB                                                | Third party |              |                         |
 | [vortex]({% link docs/stable/core_extensions/vortex.md %})               | Adds support for reading and writing Vortex files                       | Third party |              |                         |
 | [vss]({% link docs/stable/core_extensions/vss.md %})                     | Adds support for vector similarity search queries                       | Core team   | Secondary    |                         |
