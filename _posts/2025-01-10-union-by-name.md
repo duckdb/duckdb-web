@@ -6,6 +6,9 @@ thumb: "/images/blog/thumbs/union-all-by-name.svg"
 image: "/images/blog/thumbs/union-all-by-name.png"
 excerpt: "DuckDB allows vertical stacking of datasets by column name rather than position. This allows DuckDB to read files with schemas that evolve over time and finally aligns SQL with Codd's relational model."
 tags: ["using DuckDB"]
+redirect_from:
+- /cal/3
+- /cal/03
 ---
 
 ## Overview
