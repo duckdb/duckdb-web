@@ -345,7 +345,7 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	if($('body').hasClass('foundation') && $('section.form').length){
 		var hash = window.location.hash.replace('#', '');
 		if( hash.length ){
-			$('div.select .select-text').val(hash);
+			$('.custom-select .select-text').val(hash);
 		}
 		
 		// AJAX FORM SEND
