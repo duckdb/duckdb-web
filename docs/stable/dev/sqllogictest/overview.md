@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /dev/testing
-- /dev/testing/
 - /docs/dev/sqllogictest/overview
 title: Overview
 ---

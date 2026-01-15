@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /dev/sqllogictest/result_verification
-- /dev/sqllogictest/result_verification/
 - /docs/dev/sqllogictest/result_verification
 title: Result Verification
 ---

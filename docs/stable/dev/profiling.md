@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /dev/profiling
-- /dev/profiling/
 - /docs/dev/profiling
 title: Profiling
 ---

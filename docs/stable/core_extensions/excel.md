@@ -3,9 +3,7 @@ github_repository: https://github.com/duckdb/duckdb-excel
 layout: docu
 redirect_from:
 - /docs/stable/extensions/excel
-- /docs/stable/extensions/excel/
 - /docs/extensions/excel
-- /docs/extensions/excel/
 title: Excel Extension
 ---
 
