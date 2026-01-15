@@ -464,12 +464,13 @@ Please note that DuckDB Labs, the company that employs the main DuckDB contribut
 
 <div class="answer" markdown="1">
 
-Official support covers the following components:
+Whiel the DuckDB database is a relatively small, lean codebase, it has a large surface area with dozens of clients and extensions.
+Currently, the official community support applies to the following components:
 
 * [primary clients]({% link docs/stable/clients/overview.md %})
-* [stable extensions]({% link docs/stable/core_extensions/overview.md %})
+* [primary extensions]({% link docs/stable/core_extensions/overview.md %})
 
-We support the following minor versions:
+Ths support covers the following minor versions:
 
 * latest LTS (long-term support) version, currently {{ site.current_short_duckdb_lts_version }}
 * the latest stable version, currently {{ site.current_short_duckdb_version }}
