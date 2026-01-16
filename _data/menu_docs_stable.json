@@ -1539,6 +1539,10 @@
                   "url": "merge"
                 },
                 {
+                  "page": "Streaming Patterns",
+                  "url": "streaming_patterns"
+                },
+                {
                   "page": "Timestamp Issues",
                   "url": "timestamps"
                 }
