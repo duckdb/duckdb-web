@@ -1659,6 +1659,10 @@
                 {
                   "page": "Securing Extensions",
                   "url": "securing_extensions"
+                },
+                {
+                  "page": "Database Encryption",
+                  "url": "encryption"
                 }
               ]
             },
