@@ -11,7 +11,7 @@ title: Spatial Functions
 
 | Function | Summary |
 | --- | --- |
-| [`DuckDB_PROJ_Compiled_Version`](#duckdb_proj_compiled_version) | Returns a text description of the PROJ library version that that this instance of DuckDB was compiled against. |
+| [`DuckDB_PROJ_Compiled_Version`](#duckdb_proj_compiled_version) | Returns a text description of the PROJ library version that this instance of DuckDB was compiled against. |
 | [`DuckDB_Proj_Version`](#duckdb_proj_version) | Returns a text description of the PROJ library version that is being used by this instance of DuckDB. |
 | [`ST_Affine`](#st_affine) | Applies an affine transformation to a geometry. |
 | [`ST_Area`](#st_area) | Compute the area of a geometry. |
@@ -192,7 +192,7 @@ VARCHAR DuckDB_PROJ_Compiled_Version ()
 
 #### Description
 
-Returns a text description of the PROJ library version that that this instance of DuckDB was compiled against.
+Returns a text description of the PROJ library version that this instance of DuckDB was compiled against.
 
 #### Example
 
@@ -1316,7 +1316,7 @@ GEOMETRY ST_GeomFromHEXEWKB (hexwkb VARCHAR)
 
 Deserialize a GEOMETRY from a HEX(E)WKB encoded string
 
-DuckDB spatial doesnt currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB" are just aliases of eachother.
+DuckDB spatial doesn't currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB` are just aliases of each other.
 
 ----
 
@@ -1333,7 +1333,7 @@ GEOMETRY ST_GeomFromHEXWKB (hexwkb VARCHAR)
 
 Deserialize a GEOMETRY from a HEX(E)WKB encoded string
 
-DuckDB spatial doesnt currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB" are just aliases of eachother.
+DuckDB spatial doesn't currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB` are just aliases of each other.
 
 ----
 
@@ -3269,7 +3269,7 @@ Except for the `path` parameter, all parameters are optional.
 | `allowed_drivers` | VARCHAR[] | A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed. |
 | `sibling_files` | VARCHAR[] | A list of sibling files that are required to open the file. E.g., the ESRI Shapefile driver requires a .shx file to be present. Although most of the time these can be discovered automatically. |
 | `spatial_filter_box` | BOX_2D | If set to a BOX_2D, the table function will only return rows that intersect with the given bounding box. Similar to spatial_filter. |
-| `keep_wkb` | BOOLEAN | If set, the table function will return geometries in a wkb_geometry column with the type WKB_BLOB (which can be cast to BLOB) instead of GEOMETRY. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesnt support representing in the GEOMETRY type yet. |
+| `keep_wkb` | BOOLEAN | If set, the table function will return geometries in a wkb_geometry column with the type WKB_BLOB (which can be cast to BLOB) instead of GEOMETRY. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesn't support representing in the GEOMETRY type yet. |
 
 Note that GDAL is single-threaded, so this table function will not be able to make full use of parallelism.
 
