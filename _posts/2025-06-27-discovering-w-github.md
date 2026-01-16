@@ -247,9 +247,9 @@ And finally we union with the initial GitHub selection query and export the data
 
 Below is a sample of the `exported_records.md` file, rendered as HTML:
 
-|Name|Topics|Stars|Open Issues|Forks|Created At|Updated At|
-|--|--|--|--|--|--|--|
-|[tailpipe](https://github.com/turbot/tailpipe)<br>select * from logs;<br>**License** GNU Affero General Public License v3.0<br>**Owner** turbot|[aws, azure, detections, devops, duckdb, forensics, gcp, incident-response, log-analysis, mitre-attack, open-source, parquet, siem, tailpipe, threat-detection]|438|41|9|2024-04-18 02:44:35|2025-06-17 11:57:42|
+| Name                                                                                                                                            | Topics                                                                                                                                                          | Stars | Open Issues | Forks | Created At          | Updated At          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | ----------- | ----- | ------------------- | ------------------- |
+| [tailpipe](https://github.com/turbot/tailpipe)<br>select * from logs;<br>**License** GNU Affero General Public License v3.0<br>**Owner** turbot | [aws, azure, detections, devops, duckdb, forensics, gcp, incident-response, log-analysis, mitre-attack, open-source, parquet, siem, tailpipe, threat-detection] | 438   | 41          | 9     | 2024-04-18 02:44:35 | 2025-06-17 11:57:42 |
 
 Why a Markdown file you may wonder. Because it is rendered automatically by GitHub and there is no need to host our tiny data application somewhere else. In fact, we copy the above table to README, such that it is displayed automatically on the first page of the repository:
 

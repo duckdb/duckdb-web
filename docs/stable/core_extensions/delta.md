@@ -3,9 +3,7 @@ github_repository: https://github.com/duckdb/duckdb-delta
 layout: docu
 redirect_from:
 - /docs/stable/extensions/delta
-- /docs/stable/extensions/delta/
 - /docs/extensions/delta
-- /docs/extensions/delta/
 title: Delta Extension
 ---
 
@@ -15,7 +13,7 @@ For implementation details, see the [announcement blog post]({% post_url 2024-06
 
 > Warning The `delta` extension is currently experimental and is [only supported on given platforms](#supported-duckdb-versions-and-platforms).
 
-> To connect to Unity Catalog, DuckDB has the [`uc_catalog` experimental extension](https://github.com/duckdb/uc_catalog).
+> To connect to Unity Catalog, DuckDB has the [`unity_catalog` experimental extension](https://github.com/duckdb/unity_catalog).
 > Please note that this extension is a proof-of-concept and not production-ready.
 
 ## Installing and Loading

@@ -22,7 +22,7 @@ title: Core Extensions
 | [inet]({% link docs/preview/core_extensions/inet.md %})                 | Adds support for IP-related data types and functions                    | Core team   | experimental |                         |
 | [jemalloc]({% link docs/preview/core_extensions/jemalloc.md %})         | Overwrites the system allocator with jemalloc                           | Core team   | stable       |                         |
 | [json]({% link docs/preview/data/json/overview.md %})                   | Adds support for JSON operations                                        | Core team   | stable       |                         |
-| [motherduck]({% link docs/preview/core_extensions/motherduck.md %})     | Allows connecting to MotherDuck                                         | Third-party | stable       | md                      |
+| [motherduck]({% link docs/preview/core_extensions/motherduck.md %})     | Allows connecting to MotherDuck                                         | Third party |              | md                      |
 | [mysql]({% link docs/preview/core_extensions/mysql.md %})               | Adds support for reading from and writing to a MySQL database           | Core team   | stable       | mysql_scanner           |
 | [parquet]({% link docs/preview/data/parquet/overview.md %})             | Adds support for reading and writing Parquet files                      | Core team   | stable       |                         |
 | [postgres]({% link docs/preview/core_extensions/postgres.md %})         | Adds support for reading from and writing to a PostgreSQL database      | Core team   | stable       | postgres_scanner        |
@@ -30,10 +30,11 @@ title: Core Extensions
 | [sqlite]({% link docs/preview/core_extensions/sqlite.md %})             | Adds support for reading from and writing to SQLite database files      | Core team   | stable       | sqlite_scanner, sqlite3 |
 | [tpcds]({% link docs/preview/core_extensions/tpcds.md %})               | Adds TPC-DS data generation and query support                           | Core team   | experimental |                         |
 | [tpch]({% link docs/preview/core_extensions/tpch.md %})                 | Adds TPC-H data generation and query support                            | Core team   | stable       |                         |
-| [ui]({% link docs/preview/core_extensions/ui.md %})                     | Adds local UI for DuckDB                                                | Third-party |              |                         |
-| [vortex]({% link docs/preview/core_extensions/vortex.md %})             | Adds support for reading and writing Vortex files                       | Third-party |              |                         |
+| [ui]({% link docs/preview/core_extensions/ui.md %})                     | Adds local UI for DuckDB                                                | Third party |              |                         |
+| [vortex]({% link docs/preview/core_extensions/vortex.md %})             | Adds support for reading and writing Vortex files                       | Third party |              |                         |
 | [vss]({% link docs/preview/core_extensions/vss.md %})                   | Adds support for vector similarity search queries                       | Core team   | experimental |                         |
 
+The **Maintainer** column denotes whether the extension is maintained by the core DuckDB team or by a third party.
 For the extensions maintained by the core DuckDB team, the **Status** column shows the lifecycle stage (`experimental`, `stable`, `deprecated`, `superseded`) following the convention of the [lifecycle stages used in tidyverse](https://lifecycle.r-lib.org/articles/stages.html).
 
 ## Default Extensions

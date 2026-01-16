@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse
-- /docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse/
 title: Amazon SageMaker Lakehouse (AWS Glue)
 ---
 

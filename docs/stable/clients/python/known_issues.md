@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/python/known_issues
-- /docs/api/python/known_issues/
 - /docs/clients/python/known_issues
 title: Troubleshooting
 ---

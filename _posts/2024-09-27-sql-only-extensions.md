@@ -148,7 +148,7 @@ FROM select_distinct_columns_from_table('duckdb_types', ['type_category']);
 ```
 
 | type_category |
-|---------------|
+| ------------- |
 | BOOLEAN       |
 | COMPOSITE     |
 | DATETIME      |
@@ -316,32 +316,32 @@ FROM business_metrics;
 ```
 </details>
 
-|     product_line     |    product    | year | quarter | revenue | cost |
-|----------------------|---------------|-----:|---------|--------:|-----:|
-| Waterfowl watercraft | Duck boats    | 2022 | Q1      | 100     | 100  |
-| Waterfowl watercraft | Duck boats    | 2022 | Q2      | 200     | 100  |
-| Waterfowl watercraft | Duck boats    | 2022 | Q3      | 300     | 100  |
-| Waterfowl watercraft | Duck boats    | 2022 | Q4      | 400     | 100  |
-| Waterfowl watercraft | Duck boats    | 2023 | Q1      | 500     | 100  |
-| Waterfowl watercraft | Duck boats    | 2023 | Q2      | 600     | 100  |
-| Waterfowl watercraft | Duck boats    | 2023 | Q3      | 700     | 100  |
-| Waterfowl watercraft | Duck boats    | 2023 | Q4      | 800     | 100  |
-| Duck Duds            | Duck suits    | 2022 | Q1      | 10      | 10   |
-| Duck Duds            | Duck suits    | 2022 | Q2      | 20      | 10   |
-| Duck Duds            | Duck suits    | 2022 | Q3      | 30      | 10   |
-| Duck Duds            | Duck suits    | 2022 | Q4      | 40      | 10   |
-| Duck Duds            | Duck suits    | 2023 | Q1      | 50      | 10   |
-| Duck Duds            | Duck suits    | 2023 | Q2      | 60      | 10   |
-| Duck Duds            | Duck suits    | 2023 | Q3      | 70      | 10   |
-| Duck Duds            | Duck suits    | 2023 | Q4      | 80      | 10   |
-| Duck Duds            | Duck neckties | 2022 | Q1      | 1       | 1    |
-| Duck Duds            | Duck neckties | 2022 | Q2      | 2       | 1    |
-| Duck Duds            | Duck neckties | 2022 | Q3      | 3       | 1    |
-| Duck Duds            | Duck neckties | 2022 | Q4      | 4       | 1    |
-| Duck Duds            | Duck neckties | 2023 | Q1      | 5       | 1    |
-| Duck Duds            | Duck neckties | 2023 | Q2      | 6       | 1    |
-| Duck Duds            | Duck neckties | 2023 | Q3      | 7       | 1    |
-| Duck Duds            | Duck neckties | 2023 | Q4      | 8       | 1    |
+| product_line         | product       | year | quarter | revenue | cost |
+| -------------------- | ------------- | ---: | ------- | ------: | ---: |
+| Waterfowl watercraft | Duck boats    | 2022 | Q1      |     100 |  100 |
+| Waterfowl watercraft | Duck boats    | 2022 | Q2      |     200 |  100 |
+| Waterfowl watercraft | Duck boats    | 2022 | Q3      |     300 |  100 |
+| Waterfowl watercraft | Duck boats    | 2022 | Q4      |     400 |  100 |
+| Waterfowl watercraft | Duck boats    | 2023 | Q1      |     500 |  100 |
+| Waterfowl watercraft | Duck boats    | 2023 | Q2      |     600 |  100 |
+| Waterfowl watercraft | Duck boats    | 2023 | Q3      |     700 |  100 |
+| Waterfowl watercraft | Duck boats    | 2023 | Q4      |     800 |  100 |
+| Duck Duds            | Duck suits    | 2022 | Q1      |      10 |   10 |
+| Duck Duds            | Duck suits    | 2022 | Q2      |      20 |   10 |
+| Duck Duds            | Duck suits    | 2022 | Q3      |      30 |   10 |
+| Duck Duds            | Duck suits    | 2022 | Q4      |      40 |   10 |
+| Duck Duds            | Duck suits    | 2023 | Q1      |      50 |   10 |
+| Duck Duds            | Duck suits    | 2023 | Q2      |      60 |   10 |
+| Duck Duds            | Duck suits    | 2023 | Q3      |      70 |   10 |
+| Duck Duds            | Duck suits    | 2023 | Q4      |      80 |   10 |
+| Duck Duds            | Duck neckties | 2022 | Q1      |       1 |    1 |
+| Duck Duds            | Duck neckties | 2022 | Q2      |       2 |    1 |
+| Duck Duds            | Duck neckties | 2022 | Q3      |       3 |    1 |
+| Duck Duds            | Duck neckties | 2022 | Q4      |       4 |    1 |
+| Duck Duds            | Duck neckties | 2023 | Q1      |       5 |    1 |
+| Duck Duds            | Duck neckties | 2023 | Q2      |       6 |    1 |
+| Duck Duds            | Duck neckties | 2023 | Q3      |       7 |    1 |
+| Duck Duds            | Duck neckties | 2023 | Q4      |       8 |    1 |
 
 Next, we install the extension from the community repository:
 
@@ -373,20 +373,20 @@ FROM pivot_table(['business_metrics'],          -- table_names
                  );
 ```
 
-|     product_line&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     |    product&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    | value_names  | 2022_Q1 | 2022_Q2 | 2022_Q3 | 2022_Q4 | 2023_Q1 | 2023_Q2 | 2023_Q3 | 2023_Q4 |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| Duck Duds            | Duck neckties | sum(cost)    | 1       | 1       | 1       | 1       | 1       | 1       | 1       | 1       |
-| Duck Duds            | Duck neckties | sum(revenue) | 1       | 2       | 3       | 4       | 5       | 6       | 7       | 8       |
-| Duck Duds            | Duck suits    | sum(cost)    | 10      | 10      | 10      | 10      | 10      | 10      | 10      | 10      |
-| Duck Duds            | Duck suits    | sum(revenue) | 10      | 20      | 30      | 40      | 50      | 60      | 70      | 80      |
-| Duck Duds            | Subtotal      | sum(cost)    | 11      | 11      | 11      | 11      | 11      | 11      | 11      | 11      |
-| Duck Duds            | Subtotal      | sum(revenue) | 11      | 22      | 33      | 44      | 55      | 66      | 77      | 88      |
-| Waterfowl watercraft | Duck boats    | sum(cost)    | 100     | 100     | 100     | 100     | 100     | 100     | 100     | 100     |
-| Waterfowl watercraft | Duck boats    | sum(revenue) | 100     | 200     | 300     | 400     | 500     | 600     | 700     | 800     |
-| Waterfowl watercraft | Subtotal      | sum(cost)    | 100     | 100     | 100     | 100     | 100     | 100     | 100     | 100     |
-| Waterfowl watercraft | Subtotal      | sum(revenue) | 100     | 200     | 300     | 400     | 500     | 600     | 700     | 800     |
-| Grand Total          | Grand Total   | sum(cost)    | 111     | 111     | 111     | 111     | 111     | 111     | 111     | 111     |
-| Grand Total          | Grand Total   | sum(revenue) | 111     | 222     | 333     | 444     | 555     | 666     | 777     | 888     |
+| product_line&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | product&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | value_names  | 2022_Q1 | 2022_Q2 | 2022_Q3 | 2022_Q4 | 2023_Q1 | 2023_Q2 | 2023_Q3 | 2023_Q4 |
+| :----------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------ | :----------- | :------ | :------ | :------ | :------ | :------ | :------ | :------ | :------ |
+| Duck Duds                                                                                                                            | Duck neckties                                                                                                                   | sum(cost)    | 1       | 1       | 1       | 1       | 1       | 1       | 1       | 1       |
+| Duck Duds                                                                                                                            | Duck neckties                                                                                                                   | sum(revenue) | 1       | 2       | 3       | 4       | 5       | 6       | 7       | 8       |
+| Duck Duds                                                                                                                            | Duck suits                                                                                                                      | sum(cost)    | 10      | 10      | 10      | 10      | 10      | 10      | 10      | 10      |
+| Duck Duds                                                                                                                            | Duck suits                                                                                                                      | sum(revenue) | 10      | 20      | 30      | 40      | 50      | 60      | 70      | 80      |
+| Duck Duds                                                                                                                            | Subtotal                                                                                                                        | sum(cost)    | 11      | 11      | 11      | 11      | 11      | 11      | 11      | 11      |
+| Duck Duds                                                                                                                            | Subtotal                                                                                                                        | sum(revenue) | 11      | 22      | 33      | 44      | 55      | 66      | 77      | 88      |
+| Waterfowl watercraft                                                                                                                 | Duck boats                                                                                                                      | sum(cost)    | 100     | 100     | 100     | 100     | 100     | 100     | 100     | 100     |
+| Waterfowl watercraft                                                                                                                 | Duck boats                                                                                                                      | sum(revenue) | 100     | 200     | 300     | 400     | 500     | 600     | 700     | 800     |
+| Waterfowl watercraft                                                                                                                 | Subtotal                                                                                                                        | sum(cost)    | 100     | 100     | 100     | 100     | 100     | 100     | 100     | 100     |
+| Waterfowl watercraft                                                                                                                 | Subtotal                                                                                                                        | sum(revenue) | 100     | 200     | 300     | 400     | 500     | 600     | 700     | 800     |
+| Grand Total                                                                                                                          | Grand Total                                                                                                                     | sum(cost)    | 111     | 111     | 111     | 111     | 111     | 111     | 111     | 111     |
+| Grand Total                                                                                                                          | Grand Total                                                                                                                     | sum(revenue) | 111     | 222     | 333     | 444     | 555     | 666     | 777     | 888     |
 
 ## How the `pivot_table` Extension Works
 
@@ -481,14 +481,14 @@ FROM pivot_table(['business_metrics'],
                  );
 ```
 
-|     product_line     |    product    | sum(revenue) | sum("cost") |
-|----------------------|---------------|-------------:|------------:|
-| Duck Duds            | Duck neckties | 36           | 8           |
-| Duck Duds            | Duck suits    | 360          | 80          |
-| Duck Duds            | Subtotal      | 396          | 88          |
-| Waterfowl watercraft | Duck boats    | 3600         | 800         |
-| Waterfowl watercraft | Subtotal      | 3600         | 800         |
-| Grand Total          | Grand Total   | 3996         | 888         |
+| product_line         | product       | sum(revenue) | sum("cost") |
+| -------------------- | ------------- | -----------: | ----------: |
+| Duck Duds            | Duck neckties |           36 |           8 |
+| Duck Duds            | Duck suits    |          360 |          80 |
+| Duck Duds            | Subtotal      |          396 |          88 |
+| Waterfowl watercraft | Duck boats    |         3600 |         800 |
+| Waterfowl watercraft | Subtotal      |         3600 |         800 |
+| Grand Total          | Grand Total   |         3996 |         888 |
 
 #### Pivot Horizontally, One Column per Metric in `values`
 
@@ -518,14 +518,14 @@ FROM pivot_table(['business_metrics'],
                  );
 ```
 
-|     product_line     |    product    | 2022_sum(revenue) | 2022_sum("cost") | 2023_sum(revenue) | 2023_sum("cost") |
-|----------------------|---------------|------------------:|-----------------:|------------------:|-----------------:|
-| Duck Duds            | Duck neckties | 10                | 4                | 26                | 4                |
-| Duck Duds            | Duck suits    | 100               | 40               | 260               | 40               |
-| Duck Duds            | Subtotal      | 110               | 44               | 286               | 44               |
-| Waterfowl watercraft | Duck boats    | 1000              | 400              | 2600              | 400              |
-| Waterfowl watercraft | Subtotal      | 1000              | 400              | 2600              | 400              |
-| Grand Total          | Grand Total   | 1110              | 444              | 2886              | 444              |
+| product_line         | product       | 2022_sum(revenue) | 2022_sum("cost") | 2023_sum(revenue) | 2023_sum("cost") |
+| -------------------- | ------------- | ----------------: | ---------------: | ----------------: | ---------------: |
+| Duck Duds            | Duck neckties |                10 |                4 |                26 |                4 |
+| Duck Duds            | Duck suits    |               100 |               40 |               260 |               40 |
+| Duck Duds            | Subtotal      |               110 |               44 |               286 |               44 |
+| Waterfowl watercraft | Duck boats    |              1000 |              400 |              2600 |              400 |
+| Waterfowl watercraft | Subtotal      |              1000 |              400 |              2600 |              400 |
+| Grand Total          | Grand Total   |              1110 |              444 |              2886 |              444 |
 
 #### Pivot Horizontally, One Row per Metric in `values`
 
@@ -554,19 +554,19 @@ FROM pivot_table(['business_metrics'],
                  );
 ```
 
-|     product_line     |    product    | value_names  | 2022 | 2023 |
-|----------------------|---------------|--------------|-----:|-----:|
-| Duck Duds            | Duck neckties | sum(cost)    | 4    | 4    |
-| Duck Duds            | Duck neckties | sum(revenue) | 10   | 26   |
-| Duck Duds            | Duck suits    | sum(cost)    | 40   | 40   |
-| Duck Duds            | Duck suits    | sum(revenue) | 100  | 260  |
-| Duck Duds            | Subtotal      | sum(cost)    | 44   | 44   |
-| Duck Duds            | Subtotal      | sum(revenue) | 110  | 286  |
-| Waterfowl watercraft | Duck boats    | sum(cost)    | 400  | 400  |
+| product_line         | product       | value_names  | 2022 | 2023 |
+| -------------------- | ------------- | ------------ | ---: | ---: |
+| Duck Duds            | Duck neckties | sum(cost)    |    4 |    4 |
+| Duck Duds            | Duck neckties | sum(revenue) |   10 |   26 |
+| Duck Duds            | Duck suits    | sum(cost)    |   40 |   40 |
+| Duck Duds            | Duck suits    | sum(revenue) |  100 |  260 |
+| Duck Duds            | Subtotal      | sum(cost)    |   44 |   44 |
+| Duck Duds            | Subtotal      | sum(revenue) |  110 |  286 |
+| Waterfowl watercraft | Duck boats    | sum(cost)    |  400 |  400 |
 | Waterfowl watercraft | Duck boats    | sum(revenue) | 1000 | 2600 |
-| Waterfowl watercraft | Subtotal      | sum(cost)    | 400  | 400  |
+| Waterfowl watercraft | Subtotal      | sum(cost)    |  400 |  400 |
 | Waterfowl watercraft | Subtotal      | sum(revenue) | 1000 | 2600 |
-| Grand Total          | Grand Total   | sum(cost)    | 444  | 444  |
+| Grand Total          | Grand Total   | sum(cost)    |  444 |  444 |
 | Grand Total          | Grand Total   | sum(revenue) | 1110 | 2886 |
 
 ## Conclusion

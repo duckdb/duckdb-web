@@ -147,10 +147,10 @@ SET preserve_insertion_order = false;
 
 All experiments were run on my Apple M1 Max with 64 GB of RAM, and we compare the loading times for a single uncompressed CSV file, and the 65 compressed CSV files.
 
-|             Name             | Time (min) | Avg deviation of CPU usage from 100% |
-|------------------------------|------------:|------------------------------------:|
-| Single File – Uncompressed   | 11:52       | 31.57                               |
-| Multiple Files – Compressed  | 13:52       | 27.13                               |
+| Name                        | Time (min) | Avg deviation of CPU usage from 100% |
+| --------------------------- | ---------: | -----------------------------------: |
+| Single File – Uncompressed  |      11:52 |                                31.57 |
+| Multiple Files – Compressed |      13:52 |                                27.13 |
 
 Unsurprisingly, loading data from multiple compressed files is more CPU-efficient than loading from a single uncompressed file. This is evident from the lower average deviation in CPU usage for multiple compressed files, indicating fewer wasted CPU cycles. There are two main reasons for this: (1) The compressed files are approximately eight times smaller than the uncompressed file, drastically reducing the amount of data that needs to be loaded from disk and, consequently, minimizing CPU stalls while waiting for data to be processed. (2) It is much easier to parallelize the loading of multiple files than a single file, as each thread can handle on a single file.
 
@@ -176,12 +176,12 @@ Below, you can see a similar snapshot for loading the 65 compressed files. We fr
 
 For completeness, we also provide the results of the four queries on a MacBook Pro with an M1 Pro CPU. This comparison demonstrates the time differences between querying a database that does not fit in memory using a purely in-memory connection (i.e., without storage) versus one where the data is first loaded and persisted in the database.
 
-| Name | Time – without storage (s)  | Time – with storage (s) |
-|------|----------------------------:|------------------------:|
-| Q 01 | 2.45                        | 1.45                    |
-| Q 02 | 3.89                        | 0.80                    |
-| Q 03 | 5.21                        | 2.20                    |
-| Q 04 | 11.2                        | 3.12                    |
+| Name | Time – without storage (s) | Time – with storage (s) |
+| ---- | -------------------------: | ----------------------: |
+| Q 01 |                       2.45 |                    1.45 |
+| Q 02 |                       3.89 |                    0.80 |
+| Q 03 |                       5.21 |                    2.20 |
+| Q 04 |                       11.2 |                    3.12 |
 
 The main difference between these times is that when DuckDB uses a storage file, the data is [highly compressed]({% post_url 2022-10-28-lightweight-compression %}), resulting in [much faster access when querying the dataset]({% link docs/stable/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
 In contrast, when we do not use persistent storage, our in-memory database temporarily stores data in an uncompressed `.tmp` file to allow for memory overflow, which increases disk I/O and leads to slower query results. This observation raises a potential area for exploration: determining whether applying compression to temporary data would be beneficial.

@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
- - /docs/sql/functions/struct
+  - /docs/sql/functions/struct
 title: Struct Functions
 ---
 

@@ -66,18 +66,18 @@ SELECT count(*) FROM (SELECT DISTINCT * FROM tbl);
 
 If we keep all the data in memory, the query should use around 6 GB. However, we can still complete the query if less memory is available. In the table below, we can see how the runtime is affected by lowering the memory limit:
 
-|  memory limit |  v0.8.1  |  v0.9.0  |
-|--------------:|---------:|---------:|
-|         10 GB |   8.52 s |   2.91 s |
-|          9 GB |   8.52 s |   3.45 s |
-|          8 GB |   8.52 s |   3.45 s |
-|          7 GB |   8.52 s |   3.47 s |
-|          6 GB |      OOM |   3.41 s |
-|          5 GB |      OOM |   3.67 s |
-|          4 GB |      OOM |   3.87 s |
-|          3 GB |      OOM |   4.20 s |
-|          2 GB |      OOM |   4.39 s |
-|          1 GB |      OOM |   4.91 s |
+| memory limit | v0.8.1 | v0.9.0 |
+| -----------: | -----: | -----: |
+|        10 GB | 8.52 s | 2.91 s |
+|         9 GB | 8.52 s | 3.45 s |
+|         8 GB | 8.52 s | 3.45 s |
+|         7 GB | 8.52 s | 3.47 s |
+|         6 GB |    OOM | 3.41 s |
+|         5 GB |    OOM | 3.67 s |
+|         4 GB |    OOM | 3.87 s |
+|         3 GB |    OOM | 4.20 s |
+|         2 GB |    OOM | 4.39 s |
+|         1 GB |    OOM | 4.91 s |
 
 **[Compressed Materialization.](https://github.com/duckdb/duckdb/pull/7644)** DuckDB's streaming execution engine has a low memory footprint, but more memory is required for operations such as grouped aggregation. The memory footprint of these operations can be reduced by compression. DuckDB already uses [many compression techniques in its storage format]({% post_url 2022-10-28-lightweight-compression %}), but many of these techniques are too costly to use during query execution. However, certain lightweight compression techniques are so cheap that the benefit of the reducing memory footprint outweight the cost of (de)compression.
 
@@ -135,7 +135,7 @@ FROM tripdata;
 
 
 | Version | Run time |
-|--------:|---------:|
+| ------: | -------: |
 |  v0.8.0 |   33.8 s |
 |  v0.9.0 |    3.8 s |
 
@@ -151,10 +151,10 @@ INSERT INTO integers FROM range(10000000);
 ```
 
 
-| Version | Size |
-| -- | --: |
-| v0.8.0 | 278 MB |
-| v0.9.0 | 78 MB |
+| Version |   Size |
+| ------- | -----: |
+| v0.8.0  | 278 MB |
+| v0.9.0  |  78 MB |
 
 In addition, due to improvements in the manner in which indexes are stored on disk they can now be written to disk incrementally instead of always requiring a full rewrite. This allows for much quicker checkpointing for tables that have indexes.
 

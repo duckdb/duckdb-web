@@ -3,9 +3,7 @@ github_repository: https://github.com/duckdb/duckdb-postgres
 layout: docu
 redirect_from:
 - /docs/extensions/postgres
-- /docs/extensions/postgres/
 - /docs/stable/extensions/postgres
-- /docs/stable/extensions/postgres/
 title: PostgreSQL Extension
 ---
 

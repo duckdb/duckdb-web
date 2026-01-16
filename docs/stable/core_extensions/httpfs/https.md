@@ -2,9 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/extensions/httpfs/https
-- /docs/extensions/httpfs/https/
 - /docs/stable/extensions/httpfs/https
-- /docs/stable/extensions/httpfs/https/
 title: HTTP(S) Support
 ---
 

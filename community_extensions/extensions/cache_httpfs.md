@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.12.1
+  version: 0.12.2
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: e66d74d25bcc3866c036a65c435d547c1fccf902
+  ref: ec98b83797a85c6f6ddaf0bdcd5c6397639e5316
 
 docs:
   hello_world: |
@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 124
 extension_star_count_pretty: 124
-extension_download_count: 5518
-extension_download_count_pretty: 5.5k
+extension_download_count: 5597
+extension_download_count_pretty: 5.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -98,6 +98,7 @@ LOAD {{ page.extension.name }};
 | cache_httpfs_cache_block_size                             | Block size for cache, applies to both in-memory cache filesystem and on-disk cache filesystem. It's worth noting for on-disk filesystem, all existing cache files are invalidated after config update.                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_cache_directories_config                     | Advanced configuration for on-disk cache. It supports multiple directories, separated by semicolons (';'). Cache blocks will be evenly distributed under different directories deterministically.Between different runs, it's expected to provide same cache directories, otherwise it's not guaranteed cache files still exist and accessible.Overrides 'cache_httpfs_cache_directory' if set. | VARCHAR    | GLOBAL | []      |
 | cache_httpfs_cache_directory                              | The disk cache directory that stores cached data                                                                                                                                                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      |
+| cache_httpfs_clear_cache_on_write                         | Whether to clear cache entries on write operations. When enabled, write operations will invalidate cached metadata, file handles, and glob entries for the modified file, which could be expensive.Disabling this can improve write performance when many cache entries exist, but may lead to stale cache reads. By default disabled.                                                          | BOOLEAN    | GLOBAL | []      |
 | cache_httpfs_disk_cache_reader_enable_memory_cache        | Whether enable process-wise read-through/write-through cache for disk cache reader. When enabled, local cache file will be accessed with direct IO.                                                                                                                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
 | cache_httpfs_disk_cache_reader_mem_cache_block_count      | Max number of cache blocks for the read-through/write-through cache for disk cache reader.                                                                                                                                                                                                                                                                                                      | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_disk_cache_reader_mem_cache_timeout_millisec | Timeout in milliseconds for the read-through/write-through cache for disk cache reader.                                                                                                                                                                                                                                                                                                         | UBIGINT    | GLOBAL | []      |

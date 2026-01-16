@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /dev/sqllogictest/debugging
-- /dev/sqllogictest/debugging/
 - /docs/dev/sqllogictest/debugging
 title: Debugging
 ---

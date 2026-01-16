@@ -32,8 +32,8 @@ FROM ontime;
 ```
 
 | min(distance) |
-|--------------:|
-| 31.0          |
+| ------------: |
+|          31.0 |
 
 We could manually take this distance and use it in the `WHERE` clause to obtain all flights on this route.
 
@@ -43,8 +43,8 @@ FROM ontime
 WHERE distance = 31.0;
 ```
 
-| uniquecarrier | origincityname |  destcityname  | flightdate |
-|---------------|----------------|----------------|-----------:|
+| uniquecarrier | origincityname | destcityname   | flightdate |
+| ------------- | -------------- | -------------- | ---------: |
 | AS            | Petersburg, AK | Wrangell, AK   | 2017-01-15 |
 | AS            | Wrangell, AK   | Petersburg, AK | 2017-01-15 |
 | AS            | Petersburg, AK | Wrangell, AK   | 2017-01-16 |
@@ -81,8 +81,8 @@ EXECUTE min_distance_per_carrier('UA');
 ```
 
 | min(distance) |
-|--------------:|
-| 67.0          |
+| ------------: |
+|          67.0 |
 
 If we want to use this parameterized query as a subquery, we need to use a *correlated subquery*. Correlated subqueries allow us to use parameterized queries as scalar subqueries by referencing columns from *the outer query*. We can obtain the set of shortest flights per carrier using the following query:
 
@@ -96,11 +96,11 @@ WHERE distance = (
 );
 ```
 
-| uniquecarrier |    origincityname    |     destcityname     | flightdate | distance |
-|---------------|----------------------|----------------------|------------|---------:|
-| AS            | Wrangell, AK         | Petersburg, AK       | 2017-01-01 | 31.0     |
-| NK            | Fort Lauderdale, FL  | Orlando, FL          | 2017-01-01 | 177.0    |
-| VX            | Las Vegas, NV        | Los Angeles, CA      | 2017-01-01 | 236.0    |
+| uniquecarrier | origincityname      | destcityname    | flightdate | distance |
+| ------------- | ------------------- | --------------- | ---------- | -------: |
+| AS            | Wrangell, AK        | Petersburg, AK  | 2017-01-01 |     31.0 |
+| NK            | Fort Lauderdale, FL | Orlando, FL     | 2017-01-01 |    177.0 |
+| VX            | Las Vegas, NV       | Los Angeles, CA | 2017-01-01 |    236.0 |
 
 Notice how the column from the *outer* relation (`ontime_outer`) is used *inside* the query. This is what turns the subquery into a *correlated subquery*. The column from the outer relation (`ontime_outer.uniquecarrier`) is a *parameter* for the subquery. Logically the subquery is executed once for every row that is present in `ontime`, where the value for the column at that row is substituted as a parameter.
 
@@ -142,10 +142,10 @@ EXECUTE flights_after_date('LAX', 'JFK', DATE '2017-05-01');
 ```
 
 | uniquecarrier | origincityname  | destcityname | flightdate | distance |
-|---------------|-----------------|--------------|------------|---------:|
-| AA            | Los Angeles, CA | New York, NY | 2017-08-01 | 2475.0   |
-| AA            | Los Angeles, CA | New York, NY | 2017-08-02 | 2475.0   |
-| AA            | Los Angeles, CA | New York, NY | 2017-08-03 | 2475.0   |
+| ------------- | --------------- | ------------ | ---------- | -------: |
+| AA            | Los Angeles, CA | New York, NY | 2017-08-01 |   2475.0 |
+| AA            | Los Angeles, CA | New York, NY | 2017-08-02 |   2475.0 |
+| AA            | Los Angeles, CA | New York, NY | 2017-08-03 |   2475.0 |
 
 Now in order to obtain the *last flight on a route*, we need to find flights *for which no later flight exists*.
 
@@ -161,11 +161,11 @@ WHERE NOT EXISTS (
 );
 ```
 
-| uniquecarrier |           origincityname           |            destcityname            | flightdate | distance |
-|---------------|------------------------------------|------------------------------------|------------|---------:|
-| AA            | Daytona Beach, FL                  | Charlotte, NC                      | 2017-02-27 | 416.0    |
-| EV            | Abilene, TX                        | Dallas/Fort Worth, TX              | 2017-02-15 | 158.0    |
-| EV            | Dallas/Fort Worth, TX              | Durango, CO                        | 2017-02-13 | 674.0    |
+| uniquecarrier | origincityname        | destcityname          | flightdate | distance |
+| ------------- | --------------------- | --------------------- | ---------- | -------: |
+| AA            | Daytona Beach, FL     | Charlotte, NC         | 2017-02-27 |    416.0 |
+| EV            | Abilene, TX           | Dallas/Fort Worth, TX | 2017-02-15 |    158.0 |
+| EV            | Dallas/Fort Worth, TX | Durango, CO           | 2017-02-13 |    674.0 |
 
 ### IN / ANY / ALL
 
@@ -263,8 +263,8 @@ WHERE distance = (
 
 We can see the drastic performance difference that subquery decorrelation has when we compare the run-time of this query in DuckDB with the run-time in Postgres and SQLite. When running the above query on the [`ontime` dataset](https://www.transtats.bts.gov/Homepage.asp) for `2017` with roughly `~4 million` rows, we get the following performance results:
 
-| DuckDB | Postgres  | SQLite    |
-|-------:|----------:|----------:|
+| DuckDB |  Postgres |    SQLite |
+| -----: | --------: | --------: |
 | 0.06 s | >48 hours | >48 hours |
 
 As Postgres and SQLite do not de-correlate the subquery, the query is not just *logically*, but *actually* executed once for every row. As a result, the subquery is executed *4 million times* in those systems, which takes an immense amount of time.
@@ -286,8 +286,8 @@ JOIN (
 By performing the de-correlation manually, the performance of SQLite and Postgres improves significantly. However, both systems remain over 30× slower than DuckDB.
 
 | DuckDB | Postgres | SQLite |
-|-------:|---------:|-------:|
-| 0.06 s | 1.98 s   | 2.81 s |
+| -----: | -------: | -----: |
+| 0.06 s |   1.98 s | 2.81 s |
 
 Note that while it is possible to manually decorrelate certain subqueries by rewriting the SQL, it is not always possible to do so. As described in the [Unnesting Arbitrary Queries paper](https://cs.emis.de/LNI/Proceedings/Proceedings241/383.pdf), special join types that are not present in SQL are necessary to decorrelate arbitrary queries.
 

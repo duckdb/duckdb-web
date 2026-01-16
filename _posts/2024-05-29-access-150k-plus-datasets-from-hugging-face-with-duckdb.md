@@ -48,8 +48,8 @@ Where:
 
 The result of the query is:
 
-|  kind   | sound |
-|---------|-------|
+| kind    | sound |
+| ------- | ----- |
 | dog     | woof  |
 | cat     | meow  |
 | pokemon | pika  |
@@ -100,8 +100,8 @@ FROM 'hf://datasets/cais/mmlu/astronomy/dev-00000-of-00001.parquet';
 ```
 
 | count |
-|------:|
-| 5     |
+| ----: |
+|     5 |
 
 Similarly, for another file (`test-00000-of-00001.parquet`) in the same dataset, we can run:
 
@@ -111,8 +111,8 @@ FROM 'hf://datasets/cais/mmlu/astronomy/test-00000-of-00001.parquet';
 ```
 
 | count |
-|------:|
-| 152   |
+| ----: |
+|   152 |
 
 To query all files under a specific format, you can use a [glob pattern]({% link docs/stable/data/multiple_files/overview.md %}#multi-file-reads-and-globs). Here’s how you can count the rows in all files that match the pattern `*.parquet`:
 
@@ -122,8 +122,8 @@ FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet';
 ```
 
 | count |
-|------:|
-| 173   |
+| ----: |
+|   173 |
 
 By using glob patterns, you can efficiently handle large datasets and perform comprehensive queries across multiple files, simplifying your data inspections and processing tasks.
 Here, you can see how you can look for questions that contain the word “planet” in astronomy:
@@ -135,8 +135,8 @@ WHERE question LIKE '%planet%';
 ```
 
 | count |
-|------:|
-| 21    |
+| ----: |
+|    21 |
 
 And see some examples:
 
@@ -147,8 +147,8 @@ WHERE question LIKE '%planet%'
 LIMIT 3;
 ```
 
-|                               question                               |
-|----------------------------------------------------------------------|
+| question                                                             |
+| -------------------------------------------------------------------- |
 | Why isn't there a planet where the asteroid belt is located?         |
 | On which planet in our solar system can you find the Great Red Spot? |
 | The lithosphere of a planet is the layer that consists of            |
@@ -170,8 +170,8 @@ SELECT *
 FROM 'hf://datasets/datasets-examples/doc-formats-csv-1@~parquet/**/*.parquet';
 ```
 
-|  kind   | sound |
-|---------|-------|
+| kind    | sound |
+| ------- | ----- |
 | dog     | woof  |
 | cat     | meow  |
 | pokemon | pika  |

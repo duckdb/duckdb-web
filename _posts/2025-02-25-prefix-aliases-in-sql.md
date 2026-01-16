@@ -8,6 +8,7 @@ image: "/images/blog/thumbs/prefix-aliases.png"
 tags: ["using DuckDB"]
 redirect_from:
 - /cal/1
+- /cal/01
 ---
 
 ## Syntax

@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/guides/import/csv_import
-- /docs/guides/import/csv_import/
 - /docs/guides/file_formats/csv_import
 title: CSV Import
 ---

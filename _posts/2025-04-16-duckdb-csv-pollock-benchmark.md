@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB's CSV Reader and the Pollock Robustness Benchmark: Into the CSV Abyss"
-author: "Pedro Holanda, Gabor Szarnyas (DuckDB Labs); Gerardo Vitagliano (MIT)"
+author: "Pedro Holanda, Gábor Szárnyas (DuckDB Labs); Gerardo Vitagliano (MIT)"
 thumb: "/images/blog/thumbs/duckdb-csv-robustness.svg"
 image: "/images/blog/thumbs/duckdb-csv-robustness.png"
 excerpt: "DuckDB ships with a fast and robust CSV reader, which – we believe – can consume most CSV files found in the wild. To empirically evaluate this, we used the Pollock Benchmark, a state-of-the-art test suite designed to measure how well CSV readers can operate on non-standard files, and found that DuckDB ranks #1."
@@ -329,17 +329,17 @@ It also correctly handles the most common errors, as reflected in the weighted s
 
 Pollock scores sorted by weighted score (out of 10):
 
-| System under test                       | Pollock score (weighted) | Pollock score (simple) |
-| --------------------------------------- | -----------------------: | ---------------------: |
-| _DuckDB 1.2 (benchmark config)_         |                    9.599 |                  9.961 |
-| “SpreadDesktop”                         |                    9.597 |                  9.929 |
-| Pandas 1.4.3                            |                    9.431 |                  9.895 |
-| “SpreadWeb”                             |                    9.431 |                  9.721 |
-| SQLite 3.39.0                           |                    9.375 |                  9.955 |
-| _DuckDB 1.2 (auto-detect only)_         |                    8.439 |                  9.075 |
-| UniVocity 2.9.1                         |                    7.936 |                  9.939 |
-| LibreOffice Calc 7.3.6                  |                    7.833 |                  9.925 |
-| Dataviz                                 |                    5.152 |                  5.003 |
+| System under test               | Pollock score (weighted) | Pollock score (simple) |
+| ------------------------------- | -----------------------: | ---------------------: |
+| _DuckDB 1.2 (benchmark config)_ |                    9.599 |                  9.961 |
+| “SpreadDesktop”                 |                    9.597 |                  9.929 |
+| Pandas 1.4.3                    |                    9.431 |                  9.895 |
+| “SpreadWeb”                     |                    9.431 |                  9.721 |
+| SQLite 3.39.0                   |                    9.375 |                  9.955 |
+| _DuckDB 1.2 (auto-detect only)_ |                    8.439 |                  9.075 |
+| UniVocity 2.9.1                 |                    7.936 |                  9.939 |
+| LibreOffice Calc 7.3.6          |                    7.833 |                  9.925 |
+| Dataviz                         |                    5.152 |                  5.003 |
 
 > According to the [benchmark's website](https://hpi.de/naumann/projects/data-preparation/pollock.html),
 > “SpreadDesktop” is a desktop-based commercial spreadsheet software and “SpreadWeb” is a web-based spreadsheet software.

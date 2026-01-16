@@ -56,17 +56,17 @@ FROM example;
 </details>
 
 | col1 | col2 | col3 | col4 |
-|-----:|-----:|-----:|-----:|
-| 1    | 1    | 1    | 1    |
-| 2    | 2    | 0    | 1    |
-| 3    | 3    | 1    | 1    |
-| 4    | 4    | 0    | 1    |
-| 5    | 0    | 1    | 1    |
-| 6    | 1    | 0    | 1    |
-| 7    | 2    | 1    | 1    |
-| 8    | 3    | 0    | 1    |
-| 9    | 4    | 1    | 1    |
-| 10   | 0    | 0    | 1    |
+| ---: | ---: | ---: | ---: |
+|    1 |    1 |    1 |    1 |
+|    2 |    2 |    0 |    1 |
+|    3 |    3 |    1 |    1 |
+|    4 |    4 |    0 |    1 |
+|    5 |    0 |    1 |    1 |
+|    6 |    1 |    0 |    1 |
+|    7 |    2 |    1 |    1 |
+|    8 |    3 |    0 |    1 |
+|    9 |    4 |    1 |    1 |
+|   10 |    0 |    0 |    1 |
 
 ### Creating the Macro
 
@@ -142,9 +142,9 @@ FROM dynamic_aggregates(
 Executing either of those queries will return this result:
 
 | col3 | col4 | list_aggregate(list(example.col1), 'min') | list_aggregate(list(example.col2), 'min') |
-|-----:|-----:|------------------------------------------:|------------------------------------------:|
-| 0    | 1    | 2                                         | 0                                         |
-| 1    | 1    | 1                                         | 0                                         |
+| ---: | ---: | ----------------------------------------: | ----------------------------------------: |
+|    0 |    1 |                                         2 |                                         0 |
+|    1 |    1 |                                         1 |                                         0 |
 
 #### Understanding the Design
 
@@ -256,7 +256,7 @@ FROM dynamic_aggregates_any_cte_any_func(
 ```
 
 | another_group | one_big_group | any_func(any_cte.id) | any_func(any_cte.my_group) |
-|---------------|---------------|----------------------|----------------------------|
+| ------------- | ------------- | -------------------- | -------------------------- |
 | 0             | 1             | 502.0                | 200.0                      |
 | 1             | 1             | 490.0                | 200.0                      |
 
@@ -346,29 +346,29 @@ FROM custom_summarize();
 
 The result contains one row for every column in the raw dataset, and several columns of summary statistics.
 
-|       name       |  type   |                           max                           |             min              | approx_unique | nulls |
-|------------------|---------|---------------------------------------------------------|------------------------------|--------------:|------:|
-| Unnamed: 0       | BIGINT  | 113999                                                  | 0                            | 114089        | 0     |
-| track_id         | VARCHAR | 7zz7iNGIWhmfFE7zlXkMma                                  | 0000vdREvCVMxbQTkS888c       | 89815         | 0     |
-| artists          | VARCHAR | 龍藏Ryuzo                                               | !nvite                       | 31545         | 1     |
-| album_name       | VARCHAR | 당신이 잠든 사이에 Pt. 4 Original Television Soundtrack | ! ! ! ! ! Whispers ! ! ! ! ! | 47093         | 1     |
-| track_name       | VARCHAR | 행복하길 바래                                           | !I'll Be Back!               | 72745         | 1     |
-| popularity       | BIGINT  | 100                                                     | 0                            | 99            | 0     |
-| duration_ms      | BIGINT  | 5237295                                                 | 0                            | 50168         | 0     |
-| explicit         | BOOLEAN | true                                                    | false                        | 2             | 0     |
-| danceability     | DOUBLE  | 0.985                                                   | 0.0                          | 1180          | 0     |
-| energy           | DOUBLE  | 1.0                                                     | 0.0                          | 2090          | 0     |
-| key              | BIGINT  | 11                                                      | 0                            | 12            | 0     |
-| loudness         | DOUBLE  | 4.532                                                   | -49.531                      | 19436         | 0     |
-| mode             | BIGINT  | 1                                                       | 0                            | 2             | 0     |
-| speechiness      | DOUBLE  | 0.965                                                   | 0.0                          | 1475          | 0     |
-| acousticness     | DOUBLE  | 0.996                                                   | 0.0                          | 4976          | 0     |
-| instrumentalness | DOUBLE  | 1.0                                                     | 0.0                          | 5302          | 0     |
-| liveness         | DOUBLE  | 1.0                                                     | 0.0                          | 1717          | 0     |
-| valence          | DOUBLE  | 0.995                                                   | 0.0                          | 1787          | 0     |
-| tempo            | DOUBLE  | 243.372                                                 | 0.0                          | 46221         | 0     |
-| time_signature   | BIGINT  | 5                                                       | 0                            | 5             | 0     |
-| track_genre      | VARCHAR | world-music                                             | acoustic                     | 115           | 0     |
+| name             | type    | max                                                     | min                          | approx_unique | nulls |
+| ---------------- | ------- | ------------------------------------------------------- | ---------------------------- | ------------: | ----: |
+| Unnamed: 0       | BIGINT  | 113999                                                  | 0                            |        114089 |     0 |
+| track_id         | VARCHAR | 7zz7iNGIWhmfFE7zlXkMma                                  | 0000vdREvCVMxbQTkS888c       |         89815 |     0 |
+| artists          | VARCHAR | 龍藏Ryuzo                                               | !nvite                       |         31545 |     1 |
+| album_name       | VARCHAR | 당신이 잠든 사이에 Pt. 4 Original Television Soundtrack | ! ! ! ! ! Whispers ! ! ! ! ! |         47093 |     1 |
+| track_name       | VARCHAR | 행복하길 바래                                           | !I'll Be Back!               |         72745 |     1 |
+| popularity       | BIGINT  | 100                                                     | 0                            |            99 |     0 |
+| duration_ms      | BIGINT  | 5237295                                                 | 0                            |         50168 |     0 |
+| explicit         | BOOLEAN | true                                                    | false                        |             2 |     0 |
+| danceability     | DOUBLE  | 0.985                                                   | 0.0                          |          1180 |     0 |
+| energy           | DOUBLE  | 1.0                                                     | 0.0                          |          2090 |     0 |
+| key              | BIGINT  | 11                                                      | 0                            |            12 |     0 |
+| loudness         | DOUBLE  | 4.532                                                   | -49.531                      |         19436 |     0 |
+| mode             | BIGINT  | 1                                                       | 0                            |             2 |     0 |
+| speechiness      | DOUBLE  | 0.965                                                   | 0.0                          |          1475 |     0 |
+| acousticness     | DOUBLE  | 0.996                                                   | 0.0                          |          4976 |     0 |
+| instrumentalness | DOUBLE  | 1.0                                                     | 0.0                          |          5302 |     0 |
+| liveness         | DOUBLE  | 1.0                                                     | 0.0                          |          1717 |     0 |
+| valence          | DOUBLE  | 0.995                                                   | 0.0                          |          1787 |     0 |
+| tempo            | DOUBLE  | 243.372                                                 | 0.0                          |         46221 |     0 |
+| time_signature   | BIGINT  | 5                                                       | 0                            |             5 |     0 |
+| track_genre      | VARCHAR | world-music                                             | acoustic                     |           115 |     0 |
 
 So how was this query constructed? 
 Let's break down each CTE step by step.
@@ -392,9 +392,9 @@ SELECT
     };
 ```
 
-| main.struct_pack("name" := first(alias(subset."Unnamed: 0")), ... | main.struct_pack("name" := first(alias(subset.track_id)), ... | ... | main.struct_pack("name" := first(alias(subset.time_signature)), ... | main.struct_pack("name" := first(alias(subset.track_genre)), ... |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| {'name': Unnamed: 0, 'type': BIGINT, 'max': 113999, 'min': 0, 'approx_unique': 114089, 'nulls': 0}                                                                                                                                                                                                                                   | {'name': track_id, 'type': VARCHAR, 'max': 7zz7iNGIWhmfFE7zlXkMma, 'min': 0000vdREvCVMxbQTkS888c, 'approx_unique': 89815, 'nulls': 0}                                                                                                                                                                        | ... | {'name': time_signature, 'type': BIGINT, 'max': 5, 'min': 0, 'approx_unique': 5, 'nulls': 0}                                                                                                                                                                                                                                                  | {'name': track_genre, 'type': VARCHAR, 'max': world-music, 'min': acoustic, 'approx_unique': 115, 'nulls': 0}                                                                                                                                                                                                                  |
+| main.struct_pack("name" := first(alias(subset."Unnamed: 0")), ...                                  | main.struct_pack("name" := first(alias(subset.track_id)), ...                                                                         | ... | main.struct_pack("name" := first(alias(subset.time_signature)), ...                          | main.struct_pack("name" := first(alias(subset.track_genre)), ...                                              |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| {'name': Unnamed: 0, 'type': BIGINT, 'max': 113999, 'min': 0, 'approx_unique': 114089, 'nulls': 0} | {'name': track_id, 'type': VARCHAR, 'max': 7zz7iNGIWhmfFE7zlXkMma, 'min': 0000vdREvCVMxbQTkS888c, 'approx_unique': 89815, 'nulls': 0} | ... | {'name': time_signature, 'type': BIGINT, 'max': 5, 'min': 0, 'approx_unique': 5, 'nulls': 0} | {'name': track_genre, 'type': VARCHAR, 'max': world-music, 'min': acoustic, 'approx_unique': 115, 'nulls': 0} |
 
 
 This intermediate result maintains the same number of columns as the original dataset, but only returns a single row of summary statistics.
@@ -418,13 +418,13 @@ UNPIVOT metrics
 ON COLUMNS(*);
 ```
 
-|           name           |                                                                           value                                                                            |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| main.struct_pack("name" := first(alias(spotify_tracks."Unnamed: 0")), ... | {'name': Unnamed: 0, 'type': BIGINT, 'max': 113999, 'min': 0, 'approx_unique': 114089, 'nulls': 0}                                                                             |
-| main.struct_pack("name" := first(alias(spotify_tracks.track_id)), ... | {'name': track_id, 'type': VARCHAR, 'max': 7zz7iNGIWhmfFE7zlXkMma, 'min': 0000vdREvCVMxbQTkS888c, 'approx_unique': 89815, 'nulls': 0}                                          |
-|           ...            |                                                                            ...                                                                             |
-| main.struct_pack("name" := first(alias(spotify_tracks.time_signature)), ... | {'name': time_signature, 'type': BIGINT, 'max': 5, 'min': 0, 'approx_unique': 5, 'nulls': 0}                                                                                   |
-| main.struct_pack("name" := first(alias(spotify_tracks.track_genre)), ... | {'name': track_genre, 'type': VARCHAR, 'max': world-music, 'min': acoustic, 'approx_unique': 115, 'nulls': 0}                                                                  |
+| name                                                                        | value                                                                                                                                 |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| main.struct_pack("name" := first(alias(spotify_tracks."Unnamed: 0")), ...   | {'name': Unnamed: 0, 'type': BIGINT, 'max': 113999, 'min': 0, 'approx_unique': 114089, 'nulls': 0}                                    |
+| main.struct_pack("name" := first(alias(spotify_tracks.track_id)), ...       | {'name': track_id, 'type': VARCHAR, 'max': 7zz7iNGIWhmfFE7zlXkMma, 'min': 0000vdREvCVMxbQTkS888c, 'approx_unique': 89815, 'nulls': 0} |
+| ...                                                                         | ...                                                                                                                                   |
+| main.struct_pack("name" := first(alias(spotify_tracks.time_signature)), ... | {'name': time_signature, 'type': BIGINT, 'max': 5, 'min': 0, 'approx_unique': 5, 'nulls': 0}                                          |
+| main.struct_pack("name" := first(alias(spotify_tracks.track_genre)), ...    | {'name': track_genre, 'type': VARCHAR, 'max': world-music, 'min': acoustic, 'approx_unique': 115, 'nulls': 0}                         |
 
 By unpivoting on `COLUMNS(*)`, we take all columns and pivot them downward into two columns: one for the auto-generated `name` of the column, and one for the `value` that was within that column.
 
@@ -441,29 +441,29 @@ FROM stacked_metrics;
 
 We have now split apart the data into multiple columns, so the summary metrics are nice and interpretable.
 
-|       name       |  type   |                           max                           |             min              | approx_unique | nulls |
-|------------------|---------|---------------------------------------------------------|------------------------------|--------------:|------:|
-| Unnamed: 0       | BIGINT  | 113999                                                  | 0                            | 114089        | 0     |
-| track_id         | VARCHAR | 7zz7iNGIWhmfFE7zlXkMma                                  | 0000vdREvCVMxbQTkS888c       | 89815         | 0     |
-| artists          | VARCHAR | 龍藏Ryuzo                                               | !nvite                       | 31545         | 1     |
-| album_name       | VARCHAR | 당신이 잠든 사이에 Pt. 4 Original Television Soundtrack | ! ! ! ! ! Whispers ! ! ! ! ! | 47093         | 1     |
-| track_name       | VARCHAR | 행복하길 바래                                           | !I'll Be Back!               | 72745         | 1     |
-| popularity       | BIGINT  | 100                                                     | 0                            | 99            | 0     |
-| duration_ms      | BIGINT  | 5237295                                                 | 0                            | 50168         | 0     |
-| explicit         | BOOLEAN | true                                                    | false                        | 2             | 0     |
-| danceability     | DOUBLE  | 0.985                                                   | 0.0                          | 1180          | 0     |
-| energy           | DOUBLE  | 1.0                                                     | 0.0                          | 2090          | 0     |
-| key              | BIGINT  | 11                                                      | 0                            | 12            | 0     |
-| loudness         | DOUBLE  | 4.532                                                   | -49.531                      | 19436         | 0     |
-| mode             | BIGINT  | 1                                                       | 0                            | 2             | 0     |
-| speechiness      | DOUBLE  | 0.965                                                   | 0.0                          | 1475          | 0     |
-| acousticness     | DOUBLE  | 0.996                                                   | 0.0                          | 4976          | 0     |
-| instrumentalness | DOUBLE  | 1.0                                                     | 0.0                          | 5302          | 0     |
-| liveness         | DOUBLE  | 1.0                                                     | 0.0                          | 1717          | 0     |
-| valence          | DOUBLE  | 0.995                                                   | 0.0                          | 1787          | 0     |
-| tempo            | DOUBLE  | 243.372                                                 | 0.0                          | 46221         | 0     |
-| time_signature   | BIGINT  | 5                                                       | 0                            | 5             | 0     |
-| track_genre      | VARCHAR | world-music                                             | acoustic                     | 115           | 0     |
+| name             | type    | max                                                     | min                          | approx_unique | nulls |
+| ---------------- | ------- | ------------------------------------------------------- | ---------------------------- | ------------: | ----: |
+| Unnamed: 0       | BIGINT  | 113999                                                  | 0                            |        114089 |     0 |
+| track_id         | VARCHAR | 7zz7iNGIWhmfFE7zlXkMma                                  | 0000vdREvCVMxbQTkS888c       |         89815 |     0 |
+| artists          | VARCHAR | 龍藏Ryuzo                                               | !nvite                       |         31545 |     1 |
+| album_name       | VARCHAR | 당신이 잠든 사이에 Pt. 4 Original Television Soundtrack | ! ! ! ! ! Whispers ! ! ! ! ! |         47093 |     1 |
+| track_name       | VARCHAR | 행복하길 바래                                           | !I'll Be Back!               |         72745 |     1 |
+| popularity       | BIGINT  | 100                                                     | 0                            |            99 |     0 |
+| duration_ms      | BIGINT  | 5237295                                                 | 0                            |         50168 |     0 |
+| explicit         | BOOLEAN | true                                                    | false                        |             2 |     0 |
+| danceability     | DOUBLE  | 0.985                                                   | 0.0                          |          1180 |     0 |
+| energy           | DOUBLE  | 1.0                                                     | 0.0                          |          2090 |     0 |
+| key              | BIGINT  | 11                                                      | 0                            |            12 |     0 |
+| loudness         | DOUBLE  | 4.532                                                   | -49.531                      |         19436 |     0 |
+| mode             | BIGINT  | 1                                                       | 0                            |             2 |     0 |
+| speechiness      | DOUBLE  | 0.965                                                   | 0.0                          |          1475 |     0 |
+| acousticness     | DOUBLE  | 0.996                                                   | 0.0                          |          4976 |     0 |
+| instrumentalness | DOUBLE  | 1.0                                                     | 0.0                          |          5302 |     0 |
+| liveness         | DOUBLE  | 1.0                                                     | 0.0                          |          1717 |     0 |
+| valence          | DOUBLE  | 0.995                                                   | 0.0                          |          1787 |     0 |
+| tempo            | DOUBLE  | 243.372                                                 | 0.0                          |         46221 |     0 |
+| time_signature   | BIGINT  | 5                                                       | 0                            |             5 |     0 |
+| track_genre      | VARCHAR | world-music                                             | acoustic                     |           115 |     0 |
 
 
 ## Conclusion

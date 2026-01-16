@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/cli/editing
-- /docs/api/cli/editing/
 - /docs/clients/cli/editing
 title: Editing
 ---

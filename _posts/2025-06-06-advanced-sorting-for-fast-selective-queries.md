@@ -636,11 +636,11 @@ FROM rowgroup_counts('flights_hilbert', ['origin', 'dest']);
 ```
 
 | table_name      | column_name | column_value | total_row_groups | rowgroup_id_count |
-| :-------------- | :---------- | :----------- | --------------: | ----------------: |
-| flights_hilbert | dest        | PSG          |             238 |                 2 |
-| flights_hilbert | dest        | ESC          |             238 |                 2 |
-| flights_hilbert | origin      | YUM          |             238 |                 2 |
-| ...             | ...         | ...          |             ... |               ... |
+| :-------------- | :---------- | :----------- | ---------------: | ----------------: |
+| flights_hilbert | dest        | PSG          |              238 |                 2 |
+| flights_hilbert | dest        | ESC          |              238 |                 2 |
+| flights_hilbert | origin      | YUM          |              238 |                 2 |
+| ...             | ...         | ...          |              ... |               ... |
 
 The `rowgroup_id_count` column is a measurement of how many distinct row groups that a specific column value is present in, so it is an indicator of how much work DuckDB would need to do to pull all data associated with that value.
 

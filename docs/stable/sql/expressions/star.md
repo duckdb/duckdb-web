@@ -2,7 +2,7 @@
 layout: docu
 railroad: expressions/star.js
 redirect_from:
- - /docs/sql/expressions/star
+  - /docs/sql/expressions/star
 title: Star Expression
 ---
 
@@ -134,18 +134,37 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 ```sql
 SELECT *
 FROM (
-    SELECT 0 AS x, 1 AS y, 2 AS z
+    SELECT 'a', 'a'
     UNION ALL
-    SELECT 1 AS x, 2 AS y, 3 AS z
+    SELECT 'a', 'b'
     UNION ALL
-    SELECT 2 AS x, 3 AS y, 4 AS z
-)
-WHERE COLUMNS(*) > 1; -- equivalent to: x > 1 AND y > 1 AND z > 1
+    SELECT 'b', 'b'
+) _(x, y)
+WHERE COLUMNS(*) = 'a'; -- equivalent to: x = 'a' AND y = 'a'
 ```
 
-| x | y | z |
-|--:|--:|--:|
-| 2 | 3 | 4 |
+| x | y |
+|--:|--:|
+| a | a |
+
+To combine conditions using the logical `OR` operator, you can `UNPACK` the `COLUMNS` expression into the variadic `greatest` function.
+
+```sql
+SELECT *
+FROM (
+    SELECT 'a', 'a'
+    UNION ALL
+    SELECT 'a', 'b'
+    UNION ALL
+    SELECT 'b', 'b'
+) _(x, y)
+WHERE greatest(UNPACK(COLUMNS(*) = 'a')); -- equivalent to: x = 'a' OR y = 'a'
+```
+
+| x | y |
+|--:|--:|
+| a | a |
+| a | b |
 
 ### Regular Expressions in a `COLUMNS` Expression
 
@@ -224,16 +243,11 @@ SELECT COLUMNS(['id', 'num']) FROM numbers;
 | 2  | 20   |
 | 3  | NULL |
 
-## `*COLUMNS` Unpacked Columns
+## Unpacking a `COLUMNS` Expression
 
-The `*COLUMNS` clause is a variation of `COLUMNS`, which supports all of the previously mentioned capabilities.
-The difference is in how the expression expands.
+By wrapping a `COLUMN` expression in `UNPACK`, the columns expand into a parent expression,  much like the [iterable unpacking behavior in Python](https://peps.python.org/pep-3132/).
 
-`*COLUMNS` will expand in-place, much like the [iterable unpacking behavior in Python](https://peps.python.org/pep-3132/), which inspired the `*` syntax.
-This implies that the expression expands into the parent expression.
-An example that shows this difference between `COLUMNS` and `*COLUMNS`:
-
-With `COLUMNS`:
+Without `UNPACK`, operations on the `COLUMNS` expression are applied to each column separately:
 
 ```sql
 SELECT coalesce(COLUMNS(['a', 'b', 'c'])) AS result
@@ -244,10 +258,10 @@ FROM (SELECT NULL a, 42 b, true c);
 |--------|-------:|-------:|
 | NULL   | 42     | true   |
 
-With `*COLUMNS`, the expression expands in its parent expression `coalesce`, resulting in a single result column:
+With `UNPACK`, the `COLUMNS` expression is expanded into its parent expression, `coalesce` in the example above, which results in a single column:
 
 ```sql
-SELECT coalesce(*COLUMNS(['a', 'b', 'c'])) AS result
+SELECT coalesce(UNPACK(COLUMNS(['a', 'b', 'c']))) AS result
 FROM (SELECT NULL AS a, 42 AS b, true AS c);
 ```
 
@@ -255,7 +269,7 @@ FROM (SELECT NULL AS a, 42 AS b, true AS c);
 |-------:|
 | 42     |
 
-`*COLUMNS` also works with the `(*)` argument:
+The `UNPACK` keyword may be replaced by `*`, [matching Python syntax](https://peps.python.org/pep-3132/), when it is applied directly to the `COLUMNS` expression without any intermediate operations.
 
 ```sql
 SELECT coalesce(*COLUMNS(*)) AS result
@@ -265,6 +279,17 @@ FROM (SELECT NULL a, 42 AS b, true AS c);
 | result |
 |-------:|
 | 42     |
+
+> Warning In the following example, replacing `UNPACK` by `*` results in a syntax error:
+> 
+> ```sql
+> SELECT greatest(UNPACK(COLUMNS(*) + 1)) AS result
+> FROM (SELECT 1 AS a, 2 AS b, 3 AS c);
+> ```
+> 
+> | result |
+> |-------:|
+> | 4      |
 
 ## `STRUCT.*`
 

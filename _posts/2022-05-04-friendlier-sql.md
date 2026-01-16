@@ -119,8 +119,8 @@ SELECT this_is_the_way FROM mandalorian;
 ```  
 
 | THIS_IS_THE_WAY |
-|----------------:|
-| 1               |
+| --------------: |
+|               1 |
 
 ## Friendly Error Messages
 
@@ -161,8 +161,8 @@ SELECT 'I love you! I know'[:-3] AS nearly_soloed;
 ```  
 
 
-|  nearly_soloed  |
-|:---|
+| nearly_soloed   |
+| :-------------- |
 | I love you! I k |
 
 ## Simple List and Struct Creation
@@ -187,7 +187,7 @@ FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list);
 
 
 | dont_forget_the_b_wing |
-|:---|
+| :--------------------- |
 | [B-Wing]               |
 
 ## Struct Dot Notation
@@ -245,7 +245,7 @@ FROM (
 ```  
 
 | tie_fighter | tie_fighter:1 |
-|:---|:---|
+| :---------- | :------------ |
 | green_one   | green_two     |
 
 ## Implicit Type Casts
@@ -264,8 +264,8 @@ JOIN sith_count_varchar s_char
 ```
 
 | sith_count | sith_count |
-|---:|---:|
-| 2  | 2  |
+| ---------: | ---------: |
+|          2 |          2 |
 
 ## Other Friendly Features
 
@@ -281,12 +281,12 @@ The [`DISTINCT ON` clause]({% link docs/stable/sql/statements/select.md %}) allo
 
 In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful – we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/duckdb/duckdb) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design. 
 
- - Choose columns via regex
-    - Decide which columns to select with a pattern rather than specifying columns explicitly
-    - ClickHouse supports this with the [`COLUMNS` expression](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression) 
- - Incremental column aliases
-    - Refer to previously defined aliases in subsequent calculated columns rather than re-specifying the calculations
- - Dot operators for JSON types
-    - The JSON extension is brand new ([see our documentation!]({% link docs/stable/data/json/overview.md %})) and already implements friendly `->` and `->>` syntax
+* Choose columns via regex
+  * Decide which columns to select with a pattern rather than specifying columns explicitly
+  * ClickHouse supports this with the [`COLUMNS` expression](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression) 
+* Incremental column aliases
+  * Refer to previously defined aliases in subsequent calculated columns rather than re-specifying the calculations
+* Dot operators for JSON types
+  * The JSON extension is brand new ([see our documentation!]({% link docs/stable/data/json/overview.md %})) and already implements friendly `->` and `->>` syntax
 
 Thanks for checking out DuckDB! May the Force be with you...

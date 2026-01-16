@@ -44,10 +44,10 @@ While the first release (v0.1.0) of the `delta` extension already came with vari
 For this benchmark, we started up an [AWS c6id.4xlarge instance](https://instances.vantage.sh/aws/ec2/c6id.4xlarge) (16 vCPUs, 32 GB RAM) and wrote the TPC-DS SF1 dataset to an S3 bucket in the same region (eu-west-1) using [PySpark](https://github.com/duckdb/duckdb-delta/blob/026345b9cf9092e3dd5ae42cc501ec8ed45ca09b/scripts/data_generator/generate_test_data.py).
 Each benchmark is run a total of 6 times with the result being the median runtime of the last 5 runs with the first being considered a cold run. The aggregated results are shown in the following table.
 
-|                Result              | Total runtime | Min runtime | Max runtime | Median runtime | Queries timed out |
-|------------------------------------|--------------:|------------:|------------:|---------------:|------------------:|
-| `delta`&nbsp;extension&nbsp;v0.1.0 | 444.76        | 0.48        | 21.31       | 3.63           | 4                 |
-| `delta`&nbsp;extension&nbsp;v0.3.0 | 151.06        | 0.46        | 6.15        | 1.22           | 0                 |
+| Result                             | Total runtime | Min runtime | Max runtime | Median runtime | Queries timed out |
+| ---------------------------------- | ------------: | ----------: | ----------: | -------------: | ----------------: |
+| `delta`&nbsp;extension&nbsp;v0.1.0 |        444.76 |        0.48 |       21.31 |           3.63 |                 4 |
+| `delta`&nbsp;extension&nbsp;v0.3.0 |        151.06 |        0.46 |        6.15 |           1.22 |                 0 |
 
 The detailed results of the benchmark are shown in the foldout:
 <details markdown='1'>
@@ -110,11 +110,11 @@ SELECT * FROM t2;
 
 Metadata caching can have a significant performance impact, especially in situations where the data is relatively small and the latency high. To illustrate this, we will rerun our TPC-DS experiment to compare three different ways of scanning the Delta table: using `delta_scan`, using `ATTACH`, and using `ATTACH ... (PIN_SNAPSHOT)`. The rest of the benchmark setup is identical to the one in the previous section.
 
-|        result             | total runtime | min runtime | max runtime | median runtime |
-|---------------------------|--------------:|------------:|------------:|---------------:|
-| `delta_scan`              | 151.06        | 0.46        | 6.15        | 1.22           |
-| `ATTACH`                  | 134.26        | 0.43        | 4.28        | 1.19           |
-| `ATTACH` (`PIN_SNAPSHOT`) | 102.80        | 0.36        | 4.04        | 0.87           |
+| result                    | total runtime | min runtime | max runtime | median runtime |
+| ------------------------- | ------------: | ----------: | ----------: | -------------: |
+| `delta_scan`              |        151.06 |        0.46 |        6.15 |           1.22 |
+| `ATTACH`                  |        134.26 |        0.43 |        4.28 |           1.19 |
+| `ATTACH` (`PIN_SNAPSHOT`) |        102.80 |        0.36 |        4.04 |           0.87 |
 
 The detailed results of the benchmark are shown in the foldout:
 <details markdown='1'>

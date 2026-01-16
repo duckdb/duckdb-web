@@ -276,8 +276,8 @@ import duckdb
 duckdb.sql("SELECT * FROM 'ontime.parquet' WHERE flightnum = 6805;").fetchone()
 ```
 
-| v1.0   | v1.1   |
-|-------:|-------:|
+|   v1.0 |   v1.1 |
+| -----: | -----: |
 | 1.17 s | 0.12 s |
 
 ### Parallel `union_by_name`
