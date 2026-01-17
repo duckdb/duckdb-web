@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 879515863643f33cae16df93234fe413c3593573
+  revision: 6547518a598d2fdb255d5469e4496f5c205d7fd6
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -176,7 +176,8 @@ GEM
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     liquid (4.0.4)
-    listen (3.9.0)
+    listen (3.10.0)
+      logger
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
