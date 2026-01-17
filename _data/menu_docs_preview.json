@@ -1191,6 +1191,10 @@
               "url": "ui"
             },
             {
+              "page": "Unity Catalog",
+              "url": "unity_catalog"
+            },
+            {
               "page": "Vortex",
               "url": "vortex"
             },
