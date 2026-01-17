@@ -8,12 +8,11 @@ excerpt: ""
 pill: "PGConf.EU 2025"
 ---
 
-[Slides (PDF)](https://nuno-faria.github.io/papers/tetris-sql.pdf)
-
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [PGConf.EU 2025](https://2025.pgconf.eu/) |
 | **Speaker** | [Nuno Faria (INESC TEC / University of Minho)](https://nuno-faria.github.io/) |
+| **Slides** | [Download](https://nuno-faria.github.io/papers/tetris-sql.pdf) |
 
 ## Abstract
 
