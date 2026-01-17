@@ -75,11 +75,13 @@ The following options can only be passed to a `CREATE SECRET` statement, and the
 
 ### Supported Operations
 
-The DuckDB Iceberg extensions supports the following operations when used with a REST catalog attached:
+The DuckDB Iceberg extension supports the following operations when used with a REST catalog attached:
 
 * `CREATE/DROP SCHEMA`
 * `CREATE/DROP TABLE`
 * `INSERT INTO`
+* `UPDATE`
+* `DELETE`
 * `SELECT`
 
 Since these operations are supported, the following would also work:
@@ -92,6 +94,14 @@ COPY FROM DATABASE iceberg_datalake to duckdb_db;
 ```
 
 This functionality enables deep copies between Iceberg and DuckDB storage.
+
+#### Limitations for UPDATE and DELETE
+
+The `UPDATE` and `DELETE` operations have the following limitations:
+
+* They only work on tables that are **not partitioned** and **not sorted**. Attempting these operations on partitioned or sorted tables results in an error.
+* DuckDB-Iceberg only writes **positional deletes**. Copy-on-write functionality is not yet supported.
+* DuckDB-Iceberg only supports **merge-on-read semantics**. If a table has `write.update.mode` or `write.delete.mode` properties set to something other than `merge-on-read`, the operation fails.
 
 ### Metadata Operations
 
@@ -130,12 +140,38 @@ It is also possible to skip a set of tables provided the `skip_tables` parameter
 CALL iceberg_to_ducklake('iceberg_datalake', 'my_ducklake', skip_tables := ['table_to_skip']);
 ```
 
+### Table Properties Functions
+
+DuckDB provides functions to view and modify [Iceberg table properties](https://iceberg.apache.org/spec/#table-metadata-fields):
+
+| Function | Description |
+|----------|-------------|
+| `iceberg_table_properties(table)` | Returns all properties of the specified table. |
+| `set_iceberg_table_properties(table, properties)` | Sets properties on the specified table. |
+| `remove_iceberg_table_properties(table, property_list)` | Removes properties from the specified table. |
+
+```sql
+-- View table properties
+SELECT *
+FROM iceberg_table_properties(iceberg_catalog.default.my_table);
+
+-- Set table properties
+CALL set_iceberg_table_properties(
+    iceberg_catalog.default.my_table,
+    {'write.update.mode': 'merge-on-read', 'write.delete.mode': 'merge-on-read'}
+);
+
+-- Remove table properties
+CALL remove_iceberg_table_properties(
+    iceberg_catalog.default.my_table,
+    ['some.property']
+);
+```
+
 ### Unsupported Operations
 
-The following operations are not supported by the Iceberg DuckDB extension:
+The following operations are not supported by the DuckDB Iceberg extension:
 
-* `UPDATE`
-* `DELETE`
 * `MERGE INTO`
 * `ALTER TABLE`
 
