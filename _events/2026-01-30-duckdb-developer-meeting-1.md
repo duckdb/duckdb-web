@@ -70,10 +70,10 @@ If you experience any incidents, please let us know at <quack@duckdb.org>.
 ## Events Nearby
 
 The [FOSDEM 2026 conference in Brussels](https://fosdem.org/2026/) is happening on the weekend after the DuckDB Developer Meeting, so you can conveniently travel there.
-Two railway companies operate direct services between Amsterdam and Brussels.
-The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation and is generally cheaper.
-The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation and and a slightly more premium pricing.
-Both train services run about once per hour on Friday evenings.
+Two railway companies operate direct services between Amsterdam and Brussels, and both train services run about once per hour on Friday evenings. **However, keep an eye on [news about the strike in Belgium that may affect trains on Jan 30](https://www.nsinternational.com/en/overview-service/6WlA0hSzLkhwJraN7I1XRY):**
+
+* The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation and is generally cheaper.
+* The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation and and a slightly more premium pricing.
 
 ## Inquiries
 
