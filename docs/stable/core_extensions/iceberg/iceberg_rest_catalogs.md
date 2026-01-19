@@ -5,7 +5,7 @@ title: Iceberg REST Catalogs
 
 The `iceberg` extension supports attaching Iceberg REST Catalogs. Before attaching an Iceberg REST Catalog, you must install the `iceberg` extension by following the instructions located in the [overview]({% link docs/stable/core_extensions/iceberg/overview.md %}).
 
-If you are attaching to an Iceberg REST Catalog managed by Amazon, please see the instructions for attaching to [Amazon S3 tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) or [Amazon SageMaker Makehouse]({% link docs/stable/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
+If you are attaching to an Iceberg REST Catalog managed by Amazon, please see the instructions for attaching to [Amazon S3 Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) or [Amazon SageMaker Makehouse]({% link docs/stable/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
 
 For all other Iceberg REST Catalogs, you can follow the instructions below. Please see the [Examples](#specific-catalog-examples) section for questions about specific catalogs.
 
@@ -82,11 +82,10 @@ The DuckDB Iceberg extensions supports the following operations when used with a
 * `INSERT INTO`
 * `SELECT`
 
-Since these operations are supported, the following would also work:
+Since these operations are supported, the following will also work:
 
 ```sql
 COPY FROM DATABASE duckdb_db TO iceberg_datalake;
-
 -- Or
 COPY FROM DATABASE iceberg_datalake to duckdb_db;
 ```
@@ -104,9 +103,10 @@ SELECT * FROM iceberg_metadata(my_datalake.default.t)
 SELECT * FROM iceberg_snapshots(my_datalake.default.t)
 ```
 
-This functionality enables the user to grab a `snapshot_from_id` to do **time-traveling**.
+This functionality enables the user to do **time traveling**.
 
 ```sql
+-- Using a snapshot it
 SELECT * FROM my_datalake.default.t AT (VERSION => ⟨SNAPSHOT_ID⟩)
 
 -- Or using a timestamp
@@ -115,11 +115,11 @@ SELECT * FROM my_datalake.default.t AT (TIMESTAMP => TIMESTAMP '2025-09-22 12:32
 
 ### Interoperability with DuckLake
 
-The DuckDB Iceberg extensions exposes a function to do metadata only copies of the Iceberg metadata to DuckLake, which enables users to query Iceberg tables as if they where DuckLake tables.
+The DuckDB Iceberg extensions exposes a function to do metadata only copies of the Iceberg metadata to [DuckLake]({% link docs/stable/core_extensions/ducklake.md %}), which enables users to query Iceberg tables as if they were DuckLake tables.
 
 ```sql
 -- Given that we have an Iceberg catalog attached aliased to iceberg_datalake
-ATTACH `ducklake:my_ducklake.ducklake` AS my_ducklake;
+ATTACH 'ducklake:my_ducklake.ducklake' AS my_ducklake;
 
 CALL iceberg_to_ducklake('iceberg_datalake', 'my_ducklake');
 ```
@@ -141,22 +141,18 @@ The following operations are not supported by the Iceberg DuckDB extension:
 
 ## Specific Catalog Examples
 
-### R2 Catalog
+### Cloudflare R2 Catalog
 
-To attach to an [R2 cloudflare](https://developers.cloudflare.com/r2/data-catalog/) managed catalog follow the attach steps below. 
-
+To attach to an [R2 Cloudflare](https://developers.cloudflare.com/r2/data-catalog/) managed catalog follow the attach steps below. 
 
 ```sql
 CREATE SECRET r2_secret (
     TYPE iceberg,
     TOKEN '⟨r2_token⟩'
 );
-
 ```
 
-You can create a token by following the [create an API token](https://developers.cloudflare.com/r2/data-catalog/get-started/#3-create-an-api-token) steps in getting started.
-
-Then, attach the catalog with the following commands.
+You can create a token by following the [create an API token](https://developers.cloudflare.com/r2/data-catalog/get-started/#3-create-an-api-token) steps in getting started. Then, attach the catalog with the following commands.
 
 ```sql
 ATTACH '⟨warehouse⟩' AS my_r2_catalog (
@@ -165,11 +161,11 @@ ATTACH '⟨warehouse⟩' AS my_r2_catalog (
 );
 ```
 
-The variables for `warehouse` and `catalog-uri` will be available under the settings of the desired R2 Object Storage Catalog (R2 Object Store > Catalog name > Settings).
+The variables for `warehouse` and `catalog-uri` will be available under the settings of the desired R2 Object Storage Catalog (R2 Object Store, Catalog name, Settings).
 
 ### Polaris
 
-To attach to a [Polaris](https://polaris.apache.org) catalog the following commands will work.
+To attach to a [Polaris](https://polaris.apache.org) catalog, use the following commands:
 
 ```sql
 CREATE SECRET polaris_secret (
@@ -185,7 +181,6 @@ ATTACH 'quickstart_catalog' AS polaris_catalog (
     ENDPOINT '⟨polaris_rest_catalog_endpoint⟩'
 );
 ```
-
 
 ### Lakekeeper
 
@@ -211,4 +206,4 @@ ATTACH '⟨warehouse⟩' AS lakekeeper_catalog (
 
 ## Limitations
 
-Reading from Iceberg REST Catalogs backed by remote storage that is not S3 or S3Tables is not yet supported.
+Reading from Iceberg REST Catalogs backed by remote storage that is not S3 or S3 Tables is not yet supported.
