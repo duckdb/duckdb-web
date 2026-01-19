@@ -7,6 +7,8 @@ length: "80 min"
 thirdparty: false
 excerpt: ""
 pill: "The Joe Reis Show"
+redirect_from:
+- /media/duckdb-deep-dive-lakehouse-challenges
 ---
 
 <div class="video-container">
