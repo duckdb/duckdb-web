@@ -16,7 +16,7 @@ CREATE SECRET iceberg_secret (
     TYPE iceberg,
     CLIENT_ID '⟨admin⟩',
     CLIENT_SECRET '⟨password⟩',
-    OAUTH2_SERVER_URI '⟨http://irc_host_url.com/v1/oauth/tokens⟩'
+    OAUTH2_SERVER_URI '⟨http://iceberg_rest_catalog_url.com/v1/oauth/tokens⟩'
 );
 ```
 
