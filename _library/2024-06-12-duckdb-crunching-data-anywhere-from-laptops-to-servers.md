@@ -9,6 +9,8 @@ length: "35 min"
 thirdparty: false
 excerpt: ""
 pill: "GOTO Amsterdam 2024"
+redirect_from:
+- /media/duckdb-crunching-data-anywhere-from-laptops-to-servers
 ---
 
 <div class="video-container">

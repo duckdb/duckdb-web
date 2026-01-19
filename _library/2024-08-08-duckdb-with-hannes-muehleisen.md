@@ -9,6 +9,8 @@ length: "45 min"
 thirdparty: false
 excerpt: ""
 pill: "Software Engineering Daily"
+redirect_from:
+- /media/duckdb-with-hannes-muehleisen
 ---
 
 |-------|-------|

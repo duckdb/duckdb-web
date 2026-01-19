@@ -9,6 +9,8 @@ length: "30 min"
 thirdparty: false
 excerpt: ""
 pill: "PyData Global 2024"
+redirect_from:
+- /media/changing-data-with-confidence
 ---
 
 <div class="video-container">

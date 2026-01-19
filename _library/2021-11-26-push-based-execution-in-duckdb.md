@@ -9,6 +9,8 @@ length: "20 min"
 thirdparty: false
 excerpt: ""
 pill: "Dutch Seminar on Data Systems Design"
+redirect_from:
+- /media/push-based-execution-in-duckdb
 ---
 
 <div class="video-container">

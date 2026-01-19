@@ -9,6 +9,8 @@ length: "40 min"
 thirdparty: false
 excerpt: ""
 pill: "Øredev 2025"
+redirect_from:
+- /media/duckdb-meets-data-lakes-oredev
 ---
 
 <div class="video-container">

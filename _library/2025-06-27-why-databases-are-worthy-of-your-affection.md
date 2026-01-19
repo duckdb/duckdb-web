@@ -9,6 +9,8 @@ length: "35 min"
 thirdparty: false
 excerpt: ""
 pill: "Joy of Coding 2025"
+redirect_from:
+- /media/joy-of-coding
 ---
 
 <div class="video-container">

@@ -9,6 +9,8 @@ length: "50 min"
 thirdparty: false
 excerpt: ""
 pill: "GOTO Amsterdam 2024"
+redirect_from:
+- /media/a-short-summary-of-the-last-decades-of-data-management
 ---
 
 <div class="video-container">

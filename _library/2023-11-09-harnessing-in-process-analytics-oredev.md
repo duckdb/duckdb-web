@@ -9,6 +9,8 @@ length: "40 min"
 thirdparty: false
 excerpt: ""
 pill: "Øredev 2023"
+redirect_from:
+- /media/oredev
 ---
 
 <div class="video-container">

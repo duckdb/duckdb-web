@@ -8,6 +8,8 @@ tags: ["Talk"]
 length: "55 min"
 thirdparty: false
 excerpt: "Systems Distributed 2025"
+redirect_from:
+- /media/systems-distributed
 ---
 
 <div class="video-container">

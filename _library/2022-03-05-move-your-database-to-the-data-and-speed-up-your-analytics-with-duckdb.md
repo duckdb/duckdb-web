@@ -9,6 +9,8 @@ length: "80 min"
 thirdparty: false
 excerpt: ""
 pill: "Data Engineering Podcast"
+redirect_from:
+- /media/move-your-database-to-the-data-and-speed-up-your-analytics-with-duckdb
 ---
 
 |-------|-------|

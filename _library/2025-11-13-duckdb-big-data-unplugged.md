@@ -9,6 +9,8 @@ length: "30 min"
 thirdparty: false
 excerpt: ""
 pill: "Compass AI & Data Summit 2025"
+redirect_from:
+- /media/duckdb-big-data-unplugged
 ---
 
 |-------|-------|

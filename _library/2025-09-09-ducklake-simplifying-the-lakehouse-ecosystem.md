@@ -9,6 +9,8 @@ length: "70 min"
 thirdparty: false
 excerpt: ""
 pill: "Data Engineering Podcast"
+redirect_from:
+- /media/data-engineering-podcast
 ---
 
 |-------|-------|

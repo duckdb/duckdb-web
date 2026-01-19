@@ -9,6 +9,8 @@ length: "80 min"
 thirdparty: false
 excerpt: ""
 pill: "Developer Voices by Kris Jenkins"
+redirect_from:
+- /media/implementing-hardware-friendly-databases
 ---
 
 <div class="video-container">

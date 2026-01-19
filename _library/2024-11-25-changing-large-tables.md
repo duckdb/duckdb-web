@@ -9,6 +9,8 @@ length: "20 min"
 thirdparty: false
 excerpt: ""
 pill: "Forward Data 2024"
+redirect_from:
+- /media/changing-large-tables
 ---
 
 <div class="video-container">

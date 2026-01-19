@@ -9,6 +9,8 @@ length: "55 min"
 thirdparty: false
 excerpt: ""
 pill: "PyCon LT 2025"
+redirect_from:
+- /media/pycon-lithuania-special
 ---
 
 <div class="video-container">

@@ -8,6 +8,8 @@ tags: ["Podcast"]
 length: "60 min"
 thirdparty: false
 excerpt: ""
+redirect_from:
+- /media/the-future-of-open-table-formats
 ---
 
 <div class="video-container">

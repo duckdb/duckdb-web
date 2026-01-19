@@ -9,6 +9,8 @@ length: "80 min"
 thirdparty: false
 excerpt: ""
 pill: "Data Talks on the Rocks by Rill Data"
+redirect_from:
+- /media/data-talks-on-the-rocks-ep5
 ---
 
 <div class="video-container">

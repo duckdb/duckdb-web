@@ -9,6 +9,8 @@ length: "30 min"
 thirdparty: false
 excerpt: ""
 pill: "PyCon DE 2024"
+redirect_from:
+- /media/safe-space-or-trap-creating-software-like-duckdb-in-academic-institutions
 ---
 
 |-------|-------|

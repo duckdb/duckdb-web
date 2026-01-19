@@ -9,6 +9,8 @@ length: "60 min"
 thirdparty: false
 excerpt: ""
 pill: "DBTest 2022"
+redirect_from:
+- /media/duckdb-testing-dbtest
 ---
 
 <div class="video-container">

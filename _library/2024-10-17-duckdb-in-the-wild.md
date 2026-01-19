@@ -7,6 +7,8 @@ length: "25 min"
 thirdparty: false
 excerpt: ""
 pill: "DuckDB Amsterdam Meetup"
+redirect_from:
+- /media/duckdb-in-the-wild
 ---
 
 <div class="video-container">

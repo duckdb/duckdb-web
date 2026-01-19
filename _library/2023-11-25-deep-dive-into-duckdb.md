@@ -9,6 +9,8 @@ length: "65 min"
 thirdparty: false
 excerpt: ""
 pill: "The Geek Narrator"
+redirect_from:
+- /media/deep-dive-into-duckdb
 ---
 
 <div class="video-container">
