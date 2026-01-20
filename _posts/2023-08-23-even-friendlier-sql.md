@@ -206,10 +206,10 @@ For example, if using the `LIKE` syntax is more comfortable, we can select colum
 ```sql
 SELECT
     episode_num,
-    COLUMNS(col -> col LIKE '%warp%')
+    COLUMNS(lambda col: col LIKE '%warp%')
 FROM trek_facts
 WHERE
-    COLUMNS(col -> col LIKE '%warp%') >= 2;
+    COLUMNS(lambda col: LIKE '%warp%') >= 2;
 ```
 
 
@@ -437,7 +437,7 @@ In this example, a lambda function is used in combination with the `list_transfo
 ```sql
 SELECT 
      (['Enterprise NCC-1701', 'Voyager NCC-74656', 'Discovery NCC-1031'])
-          .list_transform(x -> x.string_split(' ')[1]) AS short_name;
+          .list_transform(lambda x: x.string_split(' ')[1]) AS short_name;
 ```
 
 
@@ -450,7 +450,7 @@ Lambdas can also be used to filter down the items in a list. The lambda returns 
 ```sql
 SELECT 
      (['Enterprise NCC-1701', 'Voyager NCC-74656', 'Discovery NCC-1031'])
-          .list_filter(x -> x.contains('1701')) AS the_original;
+          .list_filter(lambda x: x.contains('1701')) AS the_original;
 ```
 
 

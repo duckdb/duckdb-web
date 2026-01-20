@@ -68,7 +68,7 @@ Alternatively, we can use the [`COLUMNS`]({% link docs/stable/sql/expressions/st
 This works with a regular expression:
 
 ```sql
-SELECT COLUMNS(c -> c NOT SIMILAR TO 'min|max|q.*') 
+SELECT COLUMNS(lambda c: c NOT SIMILAR TO 'min|max|q.*') 
 FROM (SUMMARIZE FROM 'services-2024-08.csv');
 ```
 

@@ -139,7 +139,7 @@ The example we will use demonstrates how to pull a dynamic set of columns from a
 ```sql
 CREATE OR REPLACE MACRO select_distinct_columns_from_table(table_name, columns_list) AS TABLE (
     SELECT DISTINCT
-        COLUMNS(column_name -> list_contains(columns_list, column_name))
+        COLUMNS(lambda column_name: list_contains(columns_list, column_name))
     FROM query_table(table_name)
     ORDER BY ALL
 );
@@ -177,7 +177,7 @@ static const DefaultTableMacro ⟨your_extension_name⟩_table_macros[] = {
         // The SQL text inside of your SQL Macro, wrapped in R"( )", which is a raw string in C++
         R"(
             SELECT DISTINCT
-                COLUMNS(column_name -> list_contains(columns_list, column_name))
+                COLUMNS(lambda column_name: list_contains(columns_list, column_name))
             FROM query_table(table_name)
             ORDER BY ALL
         )"
