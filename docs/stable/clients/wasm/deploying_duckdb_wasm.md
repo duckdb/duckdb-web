@@ -58,4 +58,4 @@ Please review <https://duckdb.org/docs/stable/extensions/extension_distribution>
 
 ## Security Considerations
 
-> Warning Deploying DuckDB-Wasm with access to your own data means whoever has access to SQL can access the data that DuckDB-Wasm can access. Also DuckDB-Wasm in default setting can access to remote endpoints, so have visible effect on external world even from within the sandbox.
+> Warning Deploying DuckDB-Wasm with access to your own data means whoever has access to SQL can access the data that DuckDB-Wasm can access. Also, DuckDB-Wasm in the default setting can access remote endpoints, so it can have a visible effect on the external world even from within the sandbox.

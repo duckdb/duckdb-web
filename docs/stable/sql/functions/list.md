@@ -1175,7 +1175,7 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 ## Sorting Lists
 
 The function `list_sort` sorts the elements of a list either in ascending or descending order.
-In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
+In addition, it allows specifying whether `NULL` values should be moved to the beginning or to the end of the list.
 It has the same sorting behavior as DuckDB's `ORDER BY` clause.
 Therefore, (nested) values compare the same in `list_sort` as in `ORDER BY`.
 
