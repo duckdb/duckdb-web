@@ -1,8 +1,8 @@
 # Jekyll plugin to replace emojis with SVG sprites globally
 module EmojiReplacer
   EMOJI_MAP = {
-    '✅' => 'check-square',
-    '❌' => 'x-square'
+    '✅' => 'check',
+    '❌' => 'minus'
   }.freeze
 
   def self.replace_emojis(output)
@@ -11,7 +11,7 @@ module EmojiReplacer
     emoji_pattern = Regexp.union(EMOJI_MAP.keys)
     output.gsub(emoji_pattern) do |emoji|
       svg_id = EMOJI_MAP[emoji]
-      %(<svg class="icon"><use xlink:href="##{svg_id}"></use></svg>)
+      %(<svg class="icon #{svg_id}"><use xlink:href="##{svg_id}"></use></svg>)
     end
   end
 end
