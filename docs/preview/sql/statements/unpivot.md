@@ -93,7 +93,7 @@ INTO
 | 3     | cars        | May   | 500   |
 | 3     | cars        | Jun   | 600   |
 
-### `UNPIVOT` Dynamically Using Columns Expression
+### `UNPIVOT` Dynamically Using `COLUMNS` Expression
 
 In many cases, the number of columns to unpivot is not easy to predetermine ahead of time.
 In the case of this dataset, the query above would have to change each time a new month is added.
