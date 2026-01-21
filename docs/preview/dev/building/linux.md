@@ -91,7 +91,7 @@ Therefore, it's recommended to use glibc for performance-oriented workloads.
 #### Distribution for the `linux_*_musl` Platforms
 
 Starting with DuckDB v1.2.0, [_DuckDB extensions_ are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions) (but not yet for the `linux_arm64_musl` platform).
-However, there are no official _DuckDB binaries_ distributed for musl libc but it can be build with it manually following the instructions on this page.
+However, there are no official _DuckDB binaries_ distributed for musl libc but it can be built with it manually following the instructions on this page.
 
 #### Python Client on Alpine Linux
 
@@ -115,7 +115,7 @@ For different build configurations (`debug`, `relassert`, etc.), please consult 
 
 ## Building Extensions
 
-To build extensions, set the `BUILD_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
+To build extensions, set the `BUILD_EXTENSIONS` flag to the list of extensions that you want to be built. For example:
 
 ```bash
 BUILD_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make

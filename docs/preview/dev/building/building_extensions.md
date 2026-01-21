@@ -7,7 +7,7 @@ title: Building Extensions
 
 ## Building Extensions
 
-To build using extension flags, set the `BUILD_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
+To build using extension flags, set the `BUILD_EXTENSIONS` flag to the list of extensions that you want to be built. For example:
 
 ```bash
 BUILD_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make

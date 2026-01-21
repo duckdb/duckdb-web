@@ -210,7 +210,7 @@ FROM read_parquet([
 
 ### Globbing
 
-File [globbing]({% link docs/preview/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectsV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
+File [globbing]({% link docs/preview/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectsV2 API call and allows using filesystem-like glob patterns to match multiple files, for example:
 
 ```sql
 SELECT *
