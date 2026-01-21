@@ -20,7 +20,7 @@ title: Struct Functions
 | [`struct_extract_at(struct, idx)`](#struct_extract_atstruct-idx) | Extract the entry from a `STRUCT` (tuple) using an index (1-based). |
 | [`struct_insert(struct, name := any, ...)`](#struct_insertstruct-name--any-) | Add field(s) to an existing `STRUCT`. |
 | [`struct_pack(name := any, ...)`](#struct_packname--any-) | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. |
-| [`struct_position(struct, entry)`](#struct_positionstruct-entry) | Return the index of the entry within the `STRUCT` (1-based), or 0 if not found. |
+| [`struct_position(struct, entry)`](#struct_positionstruct-entry) | Return the index of the entry within the `STRUCT` (1-based), or `NULL` if not found. |
 | [`struct_update(struct, name := any, ...)`](#struct_updatestruct-name--any-) | Add or update field(s) of an existing `STRUCT`. |
 
 #### `struct.entry`
@@ -116,7 +116,7 @@ title: Struct Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return the index of the entry within the `STRUCT` (1-based), or 0 if not found. |
+| **Description** | Return the index of the entry within the `STRUCT` (1-based), or `NULL` if not found. |
 | **Example** | `struct_position(row(1, 2, 3), 2)` |
 | **Result** | `2` |
 | **Alias** | `struct_indexof` |
