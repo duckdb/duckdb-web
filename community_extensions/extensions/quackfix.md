@@ -55,10 +55,10 @@ docs:
       
 
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 509
-extension_download_count_pretty: 509
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 496
+extension_download_count_pretty: 496
 image: '/images/community_extensions/social_preview/preview_community_extension_quackfix.png'
 layout: community_extension_doc
 ---

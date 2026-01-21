@@ -363,8 +363,8 @@ docs:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 570
-extension_download_count_pretty: 570
+extension_download_count: 562
+extension_download_count_pretty: 562
 image: '/images/community_extensions/social_preview/preview_community_extension_sazgar.png'
 layout: community_extension_doc
 ---

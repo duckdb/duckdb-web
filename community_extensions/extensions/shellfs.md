@@ -22,10 +22,10 @@ repo:
   github: query-farm/shellfs
   ref: 4fef6d3d58068ce8ef6ed002441e0eca002cf372
 
-extension_star_count: 91
-extension_star_count_pretty: 91
-extension_download_count: 46898
-extension_download_count_pretty: 46.9k
+extension_star_count: 92
+extension_star_count_pretty: 92
+extension_download_count: 91080
+extension_download_count_pretty: 91.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
 layout: community_extension_doc
 ---
