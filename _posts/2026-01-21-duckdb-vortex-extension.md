@@ -11,7 +11,7 @@ tags: ["benchmark"]
 
 I think it is worth starting this intro by talking a little bit about the established format for columnar data. Parquet has done some amazing things for analytics. If you go back to the times where CSV was the better alternative, then you know how important Parquet is. However, even if the  specification has evolved over time, Parquet has some design constraints. A particular limitation is that it is block-compressed and engines need to decompress pages in order to do further operations like filtering, decoding values, etc. For a while, [researchers and private companies](https://www.cs.cmu.edu/~pavlo/blog/2026/01/2025-databases-retrospective.html?#fileformats) have been working on alternatives to Parquet that could improve on some of Parquet’s shortcomings. Vortex, from the SpiralDB team, is one of them.
 
-# What is Vortex?
+## What is Vortex?
 
 [Vortex](https://vortex.dev/) is an extensible, open source format for columnar data. It was created to handle heterogeneous compute patterns and different data modalities. But, what does this mean?
 
@@ -27,7 +27,7 @@ Besides DuckDB, other engines such as DataFusion, Spark and Arrow already offer 
 
 > For more information, check out the [Vortex documentation](https://spiraldb.com/post/vortex-a-linux-foundation-project).
 
-# The DuckDB Vortex Extension
+## The DuckDB Vortex Extension
 
 DuckDB is a database as the name says, yes, but it is also widely used as an engine to query many different data sources. Through core or community extensions, DuckDB can integrate with:
 
@@ -41,7 +41,7 @@ All this is possible due to the DuckDB [extension system](https://duckdb.org/doc
 
 The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckDB Labs](https://duckdblabs.com/) team, we have made the extension available as a [core DuckDB extension](https://duckdb.org/docs/stable/core_extensions/overview), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
 
-## Example usage
+### Example usage
 
 Installing and using the Vortex extension is very simple:
 
@@ -59,7 +59,7 @@ COPY (SELECT * FROM generate_series(0, 3) t(i))
 TO 'my.vortex' (FORMAT vortex);
 ```
 
-## Why Vortex and DuckDB?
+### Why Vortex and DuckDB?
 
 Vortex claims to do well primarily at three use cases:
 
@@ -69,7 +69,7 @@ Vortex claims to do well primarily at three use cases:
 
 The promise of more efficient IO and memory use through late decompression is a good reason to try DuckDB and Vortex for SQL analytics. On another note, if you are looking at running analytics on unified datasets that are used for multiple use cases, including pre-processing pipelines and AI training, then Vortex may be a good candidate since it is designed to fit all of these use cases well.
 
-## A Benchmark
+### A Benchmark
 
 For those who are number hungry, we decided to run a TPC-H benchmark scale factor 100 with DuckDB to understand how Vortex can perform as a storage format compared to Parquet. We tried to make the benchmark as fair as possible. These are the parameters:
 
