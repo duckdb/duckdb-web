@@ -3,8 +3,8 @@ layout: docu
 title: UPDATE EXTENSIONS
 ---
 
-The `UPDATE EXTENSIONS` statement allows to synchronize the local installed extension state with the repository that published a given extension.
-This statement is the recommended way to keep up to date with new feature or bug fixed being rolled out by extension developers.
+The `UPDATE EXTENSIONS` statement allows synchronizing the locally installed extension state with the repository that published a given extension.
+This statement is the recommended way to keep up to date with new features or bug fixes being rolled out by extension developers.
 
 Note that DuckDB extensions cannot be reloaded during runtime, therefore `UPDATE EXTENSIONS` does not reload the updated extensions.
 To use the updated extensions, restart the process running DuckDB.
