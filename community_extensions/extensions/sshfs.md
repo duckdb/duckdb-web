@@ -19,7 +19,7 @@ extension:
   vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
 repo:
   github: midwork-finds-jobs/duckdb-sshfs
-  ref: d1884ceb1e3912d8d636998156a5016c3abe87be
+  ref: 1679e46e57960ec62523fe7853942d2f97e2c952
 
 docs:
   hello_world: |
@@ -56,10 +56,10 @@ docs:
 
     See: https://github.com/midwork-finds-jobs/duckdb-sshfs/blob/main/README.md for more examples and details.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 568
-extension_download_count_pretty: 568
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 97
+extension_download_count_pretty: 97
 image: '/images/community_extensions/social_preview/preview_community_extension_sshfs.png'
 layout: community_extension_doc
 ---
@@ -85,13 +85,14 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                    description                                                    | input_type | scope  | aliases |
-|------------------------------|-------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| sshfs_chunk_size_mb          | Chunk size in MB for uploads (default: 50MB, larger chunks may improve throughput but use more memory)            | BIGINT     | GLOBAL | []      |
-| sshfs_debug_logging          | Enable debug logging for SSHFS operations                                                                         | BOOLEAN    | GLOBAL | []      |
-| sshfs_initial_retry_delay_ms | Initial delay in milliseconds between retries, with exponential backoff (default: 1000)                           | BIGINT     | GLOBAL | []      |
-| sshfs_max_concurrent_uploads | Maximum number of concurrent chunk uploads (default: 2, higher values may improve speed but use more connections) | BIGINT     | GLOBAL | []      |
-| sshfs_max_retries            | Maximum number of connection retry attempts (default: 3)                                                          | BIGINT     | GLOBAL | []      |
-| sshfs_timeout_seconds        | Timeout in seconds for SSH operations (default: 300 = 5 minutes)                                                  | BIGINT     | GLOBAL | []      |
+|             name             |                                                            description                                                            | input_type | scope  | aliases |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| ssh_keepalive                | SSH keepalive interval in seconds (default: 60, set to 0 to disable). Prevents idle connection timeouts and improves performance. | BIGINT     | GLOBAL | []      |
+| sshfs_chunk_size_mb          | Chunk size in MB for uploads (default: 50MB, larger chunks may improve throughput but use more memory)                            | BIGINT     | GLOBAL | []      |
+| sshfs_debug_logging          | Enable debug logging for SSHFS operations                                                                                         | BOOLEAN    | GLOBAL | []      |
+| sshfs_initial_retry_delay_ms | Initial delay in milliseconds between retries, with exponential backoff (default: 1000)                                           | BIGINT     | GLOBAL | []      |
+| sshfs_max_concurrent_uploads | Maximum number of concurrent chunk uploads (default: 2, higher values may improve speed but use more connections)                 | BIGINT     | GLOBAL | []      |
+| sshfs_max_retries            | Maximum number of connection retry attempts (default: 3)                                                                          | BIGINT     | GLOBAL | []      |
+| sshfs_timeout_seconds        | Timeout in seconds for SSH operations (default: 300 = 5 minutes)                                                                  | BIGINT     | GLOBAL | []      |
 
 
