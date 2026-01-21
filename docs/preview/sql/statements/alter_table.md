@@ -263,6 +263,38 @@ ALTER TABLE integers
 ADD PRIMARY KEY (i, j);
 ```
 
+## `SET` / `RESET` (Table Options)
+
+> This feature was introduced in DuckDB v1.5.
+
+Modify table options after table creation.
+
+Set table options:
+
+```sql
+ALTER TABLE my_table
+SET ('option_name' = 'value');
+```
+
+Reset table options to their defaults:
+
+```sql
+ALTER TABLE my_table
+RESET ('option_name');
+```
+
+The `SET` clause assigns values to table options as key-value pairs. The `RESET` clause removes options or restores them to their default values, depending on the catalog implementation.
+
+Multiple options can be set or reset in a single statement:
+
+```sql
+ALTER TABLE my_table
+SET ('option1' = 'value1', 'option2' = 'value2');
+
+ALTER TABLE my_table
+RESET ('option1', 'option2');
+```
+
 ## `ADD` / `DROP CONSTRAINT`
 
 > `ADD CONSTRAINT` and `DROP CONSTRAINT` clauses are not yet supported in DuckDB.
