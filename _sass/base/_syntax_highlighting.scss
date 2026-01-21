@@ -12,9 +12,10 @@
 	content: 'D ';
 }
 
+// <light mode>
 .highlight {
 	// background of syntax highlight boxes
-	background: var(--doc-codebox-background-color, #F2F2F2);
+	background: var(--doc-codebox-background-color, #f7f7f7);
 
 	// foreground
 	:is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg),
@@ -27,12 +28,12 @@
 	// operators
 	:is(.o, .ow)
 	{
-		color: #383a42;
+		color: #0d0d0d;
 	}
 
 	// comments
 	:is(.c, .ch, .cm, .cp, .cpf, .cs, .c1){
-		color: #a0a1a7;
+		color: #626262;
 		font-family: $fontMonoItalic;
 	}
 
@@ -41,69 +42,67 @@
 	// type names
 	:is(.nb, .bp, .vcb)
 	{
-		color: #0000FF;
+		color: #005fff;
 		font-family: $fontMonoBold;
 	}
 
 	// strings
 	:is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl)
 	{
-		color: #875F00;
+		color: #875f00;
 	}
 
 	// functions
 	:is(.nf, .nt, .na)
 	{
-		color: #128A00;
+		color: #008700;
 		font-family: $fontMonoBold;
 	}
 
 	// numbers
 	:is(.m, .mf, .mh, .mi, .mo, .il)
 	{
-		color: #D100BE;
+		color: #d700af;
 	}
 
 	// prompt
 	:is(.gp){
-		color: #E15300;
+		color: #e15300;
 		font-family: $fontMonoBold;
 	}
 
 	// attributes (used for placeholders within angle brackets)
 	:is(.ge)
 	{
-		color: #D70000;
+		color: #d70000;
 		font-family: $fontMonoItalicBold;
 	}
 }
 
-body.documentation .highlight code a {
-	text-decoration-color: #23974a;
-	text-underline-offset: .05em;
-	text-underline-offset: 0.17em;
-}
-
-// keywords in table headers
 th .k {
-	color: #fff;
+	color: #ffffff;
 	font-family: $fontMonoBold;
 }
 
 .landing .highlight{
 	padding: 15px;
-	border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+	border: 1px solid var(--doc-codebox-border-color, #d9d9d9);
 }
 
+// </light mode>
 
+// <dark mode>
 html.darkmode, .dark {
 	// keywords in table headers
 	th .k {
-		color: #fff;
+		color: #ffffff;
 		font-family: $fontMonoBold;
 	}
 
 	.highlight {
+		// background of syntax highlight boxes
+		background: var(--doc-codebox-background-color, #141414);
+
 		// foreground
 		:is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg),
 		// properties, e.g. SET **threads** = 8;
@@ -115,12 +114,12 @@ html.darkmode, .dark {
 		// operators
 		:is(.o, .ow)
 		{
-			color: $black300;
+			color: #f2f2f2;
 		}
 
 		// comments
 		:is(.c, .ch, .cm, .cp, .cpf, .cs, .c1){
-			color: #636d83;
+			color: #888888;
 			font-family: $fontMonoItalic;
 		}
 
@@ -129,40 +128,41 @@ html.darkmode, .dark {
 		// type names
 		:is(.nb, .bp, .vcb)
 		{
-			color: #0087FF;
+			color: #5fafff;
 			font-family: $fontMonoBold;
 		}
 
 		// strings
 		:is(.ld, .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss, .dl)
 		{
-			color: #FFD700;
+			color: #ffd700;
 		}
 
 		// functions
 		:is(.nf, .nt, .na)
 		{
-			color: #00AB38;
+			color: #00af00;
 			font-family: $fontMonoBold;
 		}
 
 		// numbers
 		:is(.m, .mf, .mh, .mi, .mo, .il)
 		{
-			color: #FF55F6;
+			color: #ff00ff;
 		}
 
 		// prompt
 		:is(.gp){
-			color: #E15300;
+			color: #e15300;
 			font-family: $fontMonoBold;
 		}
 
 		// attributes (used for placeholders within angle brackets)
 		:is(.ge)
 		{
-			color: #FF5F5F;
+			color: #ff6a6a;
 			font-family: $fontMonoItalicBold;
 		}
 	}
 }
+// </dark mode>
