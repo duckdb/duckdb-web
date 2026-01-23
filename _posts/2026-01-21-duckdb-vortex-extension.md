@@ -2,8 +2,8 @@
 layout: post
 title: "Announcing Vortex Support in DuckDB"
 author: "Guillermo Sanchez, SpiralDB Team"
-thumb: 
-image: 
+thumb: "/images/blog/thumbs/vortex.jpg"
+image: "/images/blog/thumbs/vortex.svg"
 excerpt: "Vortex is a new columnar file format with a very promising design. SpiralDB and DuckDB Labs have partnered to give you a very fast experience while reading and writing Vortex files!"
 tags: ["benchmark"]
 ---
@@ -41,7 +41,7 @@ All this is possible due to the DuckDB [extension system](https://duckdb.org/doc
 
 The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckDB Labs](https://duckdblabs.com/) team, we have made the extension available as a [core DuckDB extension](https://duckdb.org/docs/stable/core_extensions/overview), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
 
-### Example usage
+### Example Usage
 
 Installing and using the Vortex extension is very simple:
 
@@ -69,7 +69,7 @@ Vortex claims to do well primarily at three use cases:
 
 The promise of more efficient IO and memory use through late decompression is a good reason to try DuckDB and Vortex for SQL analytics. On another note, if you are looking at running analytics on unified datasets that are used for multiple use cases, including pre-processing pipelines and AI training, then Vortex may be a good candidate since it is designed to fit all of these use cases well.
 
-### A Benchmark
+### Performance Experiment
 
 For those who are number hungry, we decided to run a TPC-H benchmark scale factor 100 with DuckDB to understand how Vortex can perform as a storage format compared to Parquet. We tried to make the benchmark as fair as possible. These are the parameters:
 
@@ -125,4 +125,4 @@ The following is the summary of the sizes of the datasets. Note that both Parque
 
 Vortex is a very interesting alternative to established columnar formats like Parquet. Its focus on lightweight compression encodings, late decompression and being able to run compute expressions on compressed data makes it very interesting for a wide range of use cases. With regard to DuckDB, we see that Vortex is already very performant for analytical queries, where it is on par or better than Parquet v2 on the TPC-H benchmark queries.
 
-> Vortex aims to be backwards compatible since version 0.36.0 (now in 0.56.0).  
+> Vortex has been [backwards compatible](https://docs.vortex.dev/specs/file-format) since version 0.36.0, which was released more than 6 months ago. Vortex is now at version 0.56.0.
