@@ -17,9 +17,9 @@ I think it is worth starting this intro by talking a little bit about the establ
 
 > The project was donated to the Linux Foundation by the [SpiralDB](https://spiraldb.com/post/vortex-a-linux-foundation-project) team in August 2025.
 
-Vortex provides different layouts and encodings for different data types. Some of the most notorious are [ALP](https://duckdb.org/library/alp/) for floating point encoding or [FSST](https://duckdb.org/2022/10/28/lightweight-compression) for string encoding. This lightweight compression strategy keeps data sizes down while allowing one of Vortex’s most important features: compute functions. By knowing the encoded layout of the data, Vortex is able to run arbitrary expressions on compressed data. This allows a Vortex reader to execute, for example, filter expressions within storage segments without decompressing data.
+Vortex provides different layouts and encodings for different data types. Some of the most notorious are [ALP]({% link _library/2024-06-09-alp.md %}) for floating point encoding or [FSST]({% post_url 2022-10-28-lightweight-compression %}) for string encoding. This lightweight compression strategy keeps data sizes down while allowing one of Vortex’s most important features: compute functions. By knowing the encoded layout of the data, Vortex is able to run arbitrary expressions on compressed data. This allows a Vortex reader to execute, for example, filter expressions within storage segments without decompressing data.
 
-We mentioned heterogeneous compute to emphasize that Vortex was designed with the idea of having optimized layouts for different data types, including vectors, large text or even image or audio, but also to maximize CPU or GPU saturation. The idea is that decompression is deferred all the way to the GPU or CPU, enabling what Vortex calls “late materialization”. The [FastLanes](https://duckdb.org/library/fastlanes/) encoding, a project originating at CWI (like DuckDB), is one of the main drivers behind this feature.
+We mentioned heterogeneous compute to emphasize that Vortex was designed with the idea of having optimized layouts for different data types, including vectors, large text or even image or audio, but also to maximize CPU or GPU saturation. The idea is that decompression is deferred all the way to the GPU or CPU, enabling what Vortex calls “late materialization”. The [FastLanes]({% link _library/2025-09-01-fastlanes.md %}) encoding, a project originating at CWI (like DuckDB), is one of the main drivers behind this feature.
 
 Vortex also supports dynamically loaded libraries (similar to DuckDB extensions) to provide new encodings for specific types as well as specific compute functions, e.g. for geospatial data. Another very interesting feature is encoding WebAssembly into the file, which can allow the reader to benefit from specific compute kernels applied to the file.
 
@@ -37,9 +37,9 @@ DuckDB is a database as the name says, yes, but it is also widely used as an eng
 
 > The community has gotten very creative, though, so these days you can even read YAML and Markdown with DuckDB using [community extensions]({% link community_extensions/index.md %}).
 
-All this is possible due to the DuckDB [extension system](https://duckdb.org/docs/stable/extensions/overview), which makes it relatively easy to implement logic to interact with different file formats or external systems.
+All this is possible due to the DuckDB [extension system]({% link docs/stable/extensions/overview.md %}), which makes it relatively easy to implement logic to interact with different file formats or external systems.
 
-The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckDB Labs](https://duckdblabs.com/) team, we have made the extension available as a [core DuckDB extension](https://duckdb.org/docs/stable/core_extensions/overview), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
+The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckDB Labs](https://duckdblabs.com/) team, we have made the extension available as a [core DuckDB extension]({% link docs/stable/core_extensions/overview.md %}), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
 
 ### Example Usage
 
@@ -84,10 +84,10 @@ For those who are number hungry, we decided to run a TPC-H benchmark scale facto
 
 Another interesting result is the standard deviation across runs. There was a considerable difference between the first (and coldest) run of each query and subsequent runs in Parquet, while Vortex performed very well across all runs with a much smaller standard deviation.
 
-![summary](/images/blog/duckdb-vortex/tpch_summary.png)
+![summary]({% link images/blog/duckdb-vortex/tpch_summary.png %})
 
 | Format | Geometric Mean (s) | Arithmetic Mean (s) | Avg Std Dev (s) | Total Time (s) |
-| :---- | :---- | :---- | :---- | :---- |
+| :---- | ---: | ---: | ---: | ---: |
 | parquet\_v1 | 2.324712 | 2.875722 | 0.145914 | 63.265881 |
 | parquet\_v2 | 1.839171 | 2.288013 | 0.182962 | 50.336281 |
 | vortex | 1.507675 | 1.991289 | 0.078893 | 43.808349 |
@@ -115,7 +115,7 @@ The following is the summary of the sizes of the datasets. Note that both Parque
 | partsupp | 4.07 | 3.33 | 3.72 |
 | region | 0.00 | 0.00 | 0.00 |
 | supplier | 0.07 | 0.06 | 0.07 |
-| **TOTAL** | 33.06 | 25.40 | 28.57 |
+| **total** | 33.06 | 25.40 | 28.57 |
  
 </details>
 
