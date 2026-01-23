@@ -13,11 +13,6 @@ The UI is built and maintained by [MotherDuck](https://motherduck.com/).
 An overview of its features can be found
 in the [MotherDuck documentation](https://motherduck.com/docs/getting-started/motherduck-quick-tour/).
 
-## Requirements
-
-* An environment with a browser.
-* Any DuckDB client except Wasm, v1.2.1 or later.
-
 ## Usage
 
 To start the UI from the command line:
