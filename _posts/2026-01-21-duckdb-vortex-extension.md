@@ -21,7 +21,7 @@ Vortex provides different layouts and encodings for different data types. Some o
 
 We mentioned heterogeneous compute to emphasize that Vortex was designed with the idea of having optimized layouts for different data types, including vectors, large text or even image or audio, but also to maximize CPU or GPU saturation. The idea is that decompression is deferred all the way to the GPU or CPU, enabling what Vortex calls “late materialization”. The [FastLanes](https://duckdb.org/library/fastlanes/) encoding, a project originating at CWI (like DuckDB), is one of the main drivers behind this feature.
 
-Vortex is also aiming to provide components as dynamically loaded libraries (similar to DuckDB extensions) to provide new encodings for specific types as well as specific compute functions, e.g. for geospatial data. Another very interesting feature is encoding WebAssembly into the file, which can allow the reader to benefit from specific compute kernels applied to the file.
+Vortex also supports dynamically loaded libraries (similar to DuckDB extensions) to provide new encodings for specific types as well as specific compute functions, e.g. for geospatial data. Another very interesting feature is encoding WebAssembly into the file, which can allow the reader to benefit from specific compute kernels applied to the file.
 
 Besides DuckDB, other engines such as DataFusion, Spark and Arrow already offer integration with Vortex.
 
