@@ -150,7 +150,7 @@ Then, open a notebook and attach to the database:
 
 ```sql
 ATTACH 'test.db' (READ_ONLY) AS my_db;
-USE my_db
+USE my_db;
 ```
 
 ## Limitations
