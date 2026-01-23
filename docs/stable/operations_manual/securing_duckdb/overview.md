@@ -5,13 +5,59 @@ redirect_from:
 title: Securing DuckDB
 ---
 
-DuckDB is quite powerful, which can be problematic, especially if untrusted SQL queries are run, e.g., from public-facing user inputs.
-This page lists some options to restrict the potential fallout from malicious SQL queries.
+DuckDB is a powerful analytical database engine. It can read and write files, access the network via extensions, load custom extensions, 
+and efficiently utilize system resources. Like any powerful tool, these capabilities require appropriate configuration when 
+working with sensitive data or in shared environments.
 
-The approach to securing DuckDB varies depending on your use case, environment and potential attack models.
-Therefore, consider the security-related configuration options carefully, especially when working with confidential datasets.
+This page documents DuckDB's security model and security-related settings. The right configuration depends on your use case, environment, and threat model.
+If you plan to embed DuckDB in your application, also consult the ["Embedding DuckDB"]({% link docs/stable/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
 
-If you plan to embed DuckDB in your application, please consult the [“Embedding DuckDB”]({% link docs/stable/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
+## Reading Unstrusted Files
+
+> Warning Treat SQL in DuckDB like code in Bash or Python. Do not execute SQL from untrusted sources without proper sandboxing.
+
+## Untrusted SQL Input
+
+> Warning Treat SQL in DuckDB like code in Bash or Python. Do not execute SQL from untrusted sources without proper sandboxing.
+
+DuckDB executes SQL with the full privileges of the user running it, much like a shell or scripting interpreter (such as bash or Python).
+Just as you wouldn't run an untrusted shell script or Python program without sandboxing, apply the same caution to SQL in DuckDB.
+
+If your application must execute SQL from untrusted sources, use additional safeguards when running untrusted code:
+
+* Run DuckDB in an isolated container (e.g., Docker with restricted capabilities)
+* Use a virtual machine or separate process with minimal privileges
+* Apply operating system-level sandboxing
+* Use network isolation to prevent data exfiltration
+* Implement strict query timeouts at the application level
+
+The settings described on this page provide **defense-in-depth** and can limit certain capabilities, but they are not a substitute for proper sandboxing.
+
+## Extensions
+
+DuckDB has a flexible [extension mechanism]({% link docs/stable/extensions/overview.md %}) that adds functionality such as new file formats, functions, and remote file system access. Extensions run with the same privileges as the DuckDB process itself, so they warrant careful consideration in security-sensitive environments.
+
+### Autoloading
+
+DuckDB can automatically load [core extensions]({% link docs/stable/extensions/core_extensions.md %}) when certain SQL statements require them. To maintain full control over which extensions are loaded, you can disable autoloading:
+
+```sql
+SET autoload_known_extensions = false;
+SET autoinstall_known_extensions = false;
+```
+
+### Core vs. Community Extensions
+
+DuckDB extensions fall into two categories:
+
+* **Core extensions:** Maintained by the DuckDB team with full support. These include extensions like `parquet`, `json`, and `httpfs`.
+* **[Community extensions]({% link community_extensions/index.md %}):** Contributed by third parties and installed via `INSTALL extension_name FROM community`. These are not maintained by the DuckDB team, so only install community extensions from sources you trust.
+
+To disable community extensions entirely:
+
+```sql
+SET allow_community_extensions = false;
+```
 
 ## Reporting Vulnerabilities
 
@@ -109,6 +155,8 @@ This prevents any configuration settings from being modified from that point onw
 
 Similarly to other SQL databases, it's recommended to use [prepared statements]({% link docs/stable/sql/query_syntax/prepared_statements.md %}) in DuckDB to prevent [SQL injection](https://en.wikipedia.org/wiki/SQL_injection).
 
+> Important Prepared statements protect against SQL injection when **you control the query structure** but accept **untrusted data values** (e.g., user-provided search terms or IDs). If users can supply the SQL query itself, this is equivalent to allowing them to run arbitrary code – see ["Untrusted SQL Input"](#untrusted-sql-input).
+
 **Therefore, avoid concatenating strings for queries:**
 
 ```python
@@ -147,20 +195,7 @@ The size of the temporary file directory can be limited with:
 SET max_temp_directory_size = '4GB';
 ```
 
-## Extensions
-
-DuckDB has a powerful extension mechanism, which has the same privileges as the user running DuckDB's (parent) process.
-This introduces security considerations. Therefore, we recommend reviewing the configuration options for [securing extensions]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}).
-
 ## Privileges
 
 Avoid running DuckDB as a root user (e.g., using `sudo`).
 There is no good reason to run DuckDB as root.
-
-## Generic Solutions
-
-Securing DuckDB can also be supported via proven means, for example:
-
-* Scoping user privileges via [`chroot`](https://en.wikipedia.org/wiki/Chroot), relying on the operating system.
-* Containerization, e.g., via Docker or Podman. See the [“DuckDB Docker Container” page]({% link docs/stable/operations_manual/duckdb_docker.md %}).
-* Running DuckDB in WebAssembly.
