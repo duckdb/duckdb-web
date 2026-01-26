@@ -174,8 +174,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 445
-extension_download_count_pretty: 445
+extension_download_count: 557
+extension_download_count_pretty: 557
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---

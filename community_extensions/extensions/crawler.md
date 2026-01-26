@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: crawler
   description: SQL-native web crawler with HTML extraction and MERGE support
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-crawler
-  ref: 8db43f686788f97b0f7cbba8db3d7d38e194bd05
+  ref: dd318c51c679a5de891b4470b5fb8d6b05faf4f2
 
 docs:
   hello_world: |
@@ -33,10 +33,17 @@ docs:
     - `crawl()` table function with automatic rate limiting and robots.txt compliance
     - `crawl_url()` for LATERAL joins
     - `sitemap()` for XML sitemap parsing
+    - `read_html()` for Google Sheets-style IMPORTHTML (tables, lists, JS variables)
     - `jq()` and `htmlpath()` functions for CSS selector-based extraction
     - `html.readability` for article extraction
     - `html.schema` for JSON-LD/microdata parsing
     - `CRAWLING MERGE INTO` syntax for upsert operations
+
+    Example with read_html (like Google Sheets =IMPORTHTML):
+    ```sql
+    SELECT * FROM read_html('https://en.wikipedia.org/wiki/...', 'table.wikitable', 1);
+    SELECT * FROM read_html('https://example.com/page', 'js=jobs');
+    ```
 
     Example with extraction:
     ```sql
@@ -58,10 +65,10 @@ docs:
 
     For full documentation see: https://github.com/midwork-finds-jobs/duckdb-crawler
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 229
-extension_download_count_pretty: 229
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 580
+extension_download_count_pretty: 580
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'
 layout: community_extension_doc
 ---
@@ -96,6 +103,7 @@ LOAD {{ page.extension.name }};
 | discover              | scalar        | NULL        | NULL    |          |
 | htmlpath              | scalar        | NULL        | NULL    |          |
 | jq                    | scalar        | NULL        | NULL    |          |
+| read_html             | table         | NULL        | NULL    |          |
 | sitemap               | table         | NULL        | NULL    |          |
 | stream_merge_internal | table         | NULL        | NULL    |          |
 
