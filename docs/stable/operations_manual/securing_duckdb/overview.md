@@ -34,7 +34,7 @@ The settings described on this page provide **defense-in-depth** and can limit c
 sandboxing should not just be considered for security purposes, but also for preventing denial of service (DoS) attacks: malicious inputs can easily cause DuckDB to consume excessive resources such 
 as memory, disk, CPU, or network.
 
-### Untrusted non-SQL Input
+### Untrusted Non-SQL Input
 
 > Warning Even non-SQL input into DuckDB can easily have unintended consequences. When building security-sensitive applications with DuckDB, always make sure you properly understand the impact of feeding untrusted input into DuckDB.
 
@@ -60,7 +60,7 @@ DuckDB has a flexible [extension mechanism]({% link docs/stable/extensions/overv
 
 ### Autoloading
 
-DuckDB can automatically load [core extensions]({% link docs/stable/extensions/core_extensions.md %}) when certain SQL statements require them. To maintain full control over which extensions are loaded, you can disable autoloading:
+DuckDB can automatically load [core extensions]({% link docs/stable/core_extensions/overview.md %}) when certain SQL statements require them. To maintain full control over which extensions are loaded, you can disable autoloading:
 
 ```sql
 SET autoload_known_extensions = false;
@@ -84,7 +84,7 @@ SET allow_community_extensions = false;
 
 If you discover a potential vulnerability, please [report it confidentially via GitHub](https://github.com/duckdb/duckdb/security/advisories/new).
 
-## Settings to limit DuckDB's capabilities
+## Settings to Limit DuckDB's Capabilities
 
 The settings documented in this section provide additional hardening for DuckDB deployments. However, they should not be
 relied upon as comprehensive security mechanisms in all configurations. These settings are designed as defense-in-depth
