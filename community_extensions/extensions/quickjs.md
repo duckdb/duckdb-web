@@ -52,8 +52,8 @@ repo:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 465
-extension_download_count_pretty: 465
+extension_download_count: 586
+extension_download_count_pretty: 586
 image: '/images/community_extensions/social_preview/preview_community_extension_quickjs.png'
 layout: community_extension_doc
 ---

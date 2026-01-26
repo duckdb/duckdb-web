@@ -38,10 +38,10 @@ docs:
     The ion extension enables DuckDB to read AWS Ion in text and binary formats and write Ion text or binary,
     preserving Ion types where possible for richer analytics.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 453
-extension_download_count_pretty: 453
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 557
+extension_download_count_pretty: 557
 image: '/images/community_extensions/social_preview/preview_community_extension_ion.png'
 layout: community_extension_doc
 ---
