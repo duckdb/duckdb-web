@@ -51,4 +51,6 @@ We would like to thank our contributors for providing detailed issue reports and
 In the coming month, we'll release DuckDB v1.5.0.
 We'll also keep v1.4 LTS updated until mid-September. We'll announce the release date of v1.4.5 in the [release calendar]({% link release_calendar.md %}) in the coming months.
 
-> Earlier today, we pushed an incorrect tag that was visible for a few minutes. We replaced this tag as soon as we noticed the issue. Our apologies for the erroneous release.
+> Earlier today, we pushed an incorrect tag that was visible for a few minutes.
+No binaries or extensions were available under this tag and we replaced it as soon as we noticed the issue.
+Our apologies for the erroneous release.
