@@ -9,6 +9,8 @@ length: "55 min"
 thirdparty: false
 excerpt: ""
 pill: "PyCon LT 2025"
+redirect_from:
+- /media/pycon-lithuania-special
 ---
 
 <div class="video-container">
@@ -17,7 +19,7 @@ pill: "PyCon LT 2025"
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Guest** | [Gabor Szarnyas](https://szarnyasg.org/) |
+| **Guest** | [Gábor Szárnyas](https://szarnyasg.org/) |
 | **Podcast site** | [Uncle Data](https://creators.spotify.com/pod/profile/duomenu-dede/episodes/)
 | **Episode site** | [PyCon Lithuania Special with Keynote Speaker Gábor Szárnyas](https://creators.spotify.com/pod/profile/duomenu-dede/episodes/PyCon-Lithuania-Special---Gbor-Szrnyas-e329ro3) |
 | **YouTube** | [PyCon Lithuania Special with Keynote Speaker Gábor Szárnyas](https://www.youtube.com/watch?v=08mnYKcGBKg) |

@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/data/csv
-- /docs/data/csv/
 - /docs/data/csv/overview
 title: CSV Import
 ---
@@ -118,9 +117,9 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `types` or `dtypes` or `column_types` | Column types, as either a list (by position) or a struct (by name). See [example]({% link docs/stable/data/csv/tips.md %}#override-the-types-of-specific-columns). | `VARCHAR[]` or `STRUCT` | (empty) |
 | `union_by_name` | Align columns from different files [by column name]({% link docs/stable/data/multiple_files/combining_schemas.md %}#union-by-name) instead of position. Using this option increases memory consumption. | `BOOL` | `false` |
 
-> Tip DuckDB's CSV reader supports `UTF-8` (default), `UTF-16` and `Latin-1` encodings as well as many other `encoding` options
-> natively through the `encoding` extension, for details see [All Supported Encodings]({% link docs/stable/core_extensions/encodings.md%}#all-supported-encodings).
-> To convert files with different encodings, we recommend using the [`iconv` command-line tool](https://linux.die.net/man/1/iconv).
+> Tip DuckDB's CSV reader supports `UTF-8` (default), `UTF-16` and `Latin-1` encodings.
+> For other encodings, you can either use [the `encodings` extension]({% link docs/stable/core_extensions/encodings.md %})
+> or convert them e.g. using the [`iconv` command-line tool](https://linux.die.net/man/1/iconv):
 >
 > ```batch
 > iconv -f ISO-8859-2 -t UTF-8 input.csv > input-utf-8.csv
@@ -135,7 +134,7 @@ Usage example:
 SELECT * FROM read_csv('csv_file.csv', auto_type_candidates = ['BIGINT', 'DATE']);
 ```
 
-The default value for the `auto_type_candidates` option is `['SQLNULL', 'BOOLEAN', 'BIGINT', 'DOUBLE', 'TIME', 'DATE', 'TIMESTAMP', 'VARCHAR']`.
+The default value for the `auto_type_candidates` option is `['NULL', 'BOOLEAN', 'BIGINT', 'DOUBLE', 'TIME', 'DATE', 'TIMESTAMP', 'VARCHAR']`.
 
 ## CSV Functions
 

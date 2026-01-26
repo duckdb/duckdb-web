@@ -9,6 +9,8 @@ length: "30 min"
 thirdparty: false
 excerpt: ""
 pill: "Data Engineering for AI/ML"
+redirect_from:
+- /media/going-beyond-two-tier-architectures-with-duckdb
 ---
 
 <div class="video-container">

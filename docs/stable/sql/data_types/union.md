@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
- - /docs/sql/data_types/union
+  - /docs/sql/data_types/union
 title: Union Type
 ---
 

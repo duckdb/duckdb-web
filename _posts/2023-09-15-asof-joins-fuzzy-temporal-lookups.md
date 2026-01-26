@@ -36,32 +36,32 @@ Let's start with a concrete example.
 Suppose we have a table of stock [`prices`]({% link data/prices.csv %}) with timestamps:
 
 
-| ticker | when | price |
-| :----- | :--- | ----: |
-| APPL   | 2001-01-01 00:00:00 | 1     |
-| APPL   | 2001-01-01 00:01:00 | 2     |
-| APPL   | 2001-01-01 00:02:00 | 3     |
-| MSFT   | 2001-01-01 00:00:00 | 1     |
-| MSFT   | 2001-01-01 00:01:00 | 2     |
-| MSFT   | 2001-01-01 00:02:00 | 3     |
-| GOOG   | 2001-01-01 00:00:00 | 1     |
-| GOOG   | 2001-01-01 00:01:00 | 2     |
-| GOOG   | 2001-01-01 00:02:00 | 3     |
+| ticker | when                | price |
+| :----- | :------------------ | ----: |
+| APPL   | 2001-01-01 00:00:00 |     1 |
+| APPL   | 2001-01-01 00:01:00 |     2 |
+| APPL   | 2001-01-01 00:02:00 |     3 |
+| MSFT   | 2001-01-01 00:00:00 |     1 |
+| MSFT   | 2001-01-01 00:01:00 |     2 |
+| MSFT   | 2001-01-01 00:02:00 |     3 |
+| GOOG   | 2001-01-01 00:00:00 |     1 |
+| GOOG   | 2001-01-01 00:01:00 |     2 |
+| GOOG   | 2001-01-01 00:02:00 |     3 |
 
 We have another table containing portfolio [`holdings`]({% link data/holdings.csv %}) at various points in time:
 
 
-| ticker | when | shares |
-| :----- | :--- | -----: |
-| APPL   | 2000-12-31 23:59:30 | 5.16   |
-| APPL   | 2001-01-01 00:00:30 | 2.94   |
-| APPL   | 2001-01-01 00:01:30 | 24.13  |
-| GOOG   | 2000-12-31 23:59:30 | 9.33   |
-| GOOG   | 2001-01-01 00:00:30 | 23.45  |
-| GOOG   | 2001-01-01 00:01:30 | 10.58  |
-| DATA   | 2000-12-31 23:59:30 | 6.65   |
-| DATA   | 2001-01-01 00:00:30 | 17.95  |
-| DATA   | 2001-01-01 00:01:30 | 18.37  |
+| ticker | when                | shares |
+| :----- | :------------------ | -----: |
+| APPL   | 2000-12-31 23:59:30 |   5.16 |
+| APPL   | 2001-01-01 00:00:30 |   2.94 |
+| APPL   | 2001-01-01 00:01:30 |  24.13 |
+| GOOG   | 2000-12-31 23:59:30 |   9.33 |
+| GOOG   | 2001-01-01 00:00:30 |  23.45 |
+| GOOG   | 2001-01-01 00:01:30 |  10.58 |
+| DATA   | 2000-12-31 23:59:30 |   6.65 |
+| DATA   | 2001-01-01 00:00:30 |  17.95 |
+| DATA   | 2001-01-01 00:01:30 |  18.37 |
 
 We can compute the value of each holding at that point in time by finding
 the most recent price before the holding's timestamp by using an AsOf Join:
@@ -76,9 +76,9 @@ FROM holdings h ASOF JOIN prices p
 This attaches the value of the holding at that time to each row:
 
 
-| ticker | when | value |
-| :----- | :--- | ----: |
-| APPL   | 2001-01-01 00:00:30 | 2.94  |
+| ticker | when                | value |
+| :----- | :------------------ | ----: |
+| APPL   | 2001-01-01 00:00:30 |  2.94 |
 | APPL   | 2001-01-01 00:01:30 | 48.26 |
 | GOOG   | 2001-01-01 00:00:30 | 23.45 |
 | GOOG   | 2001-01-01 00:01:30 | 21.16 |
@@ -105,10 +105,10 @@ As you might expect, this will produce `NULL` prices and values instead of dropp
 when there is no ticker or the time is before the prices begin.
 
 
-| ticker | when | value |
-| :----- | :--- | ----: |
+| ticker | when                | value |
+| :----- | :------------------ | ----: |
 | APPL   | 2000-12-31 23:59:30 |       |
-| APPL   | 2001-01-01 00:00:30 | 2.94  |
+| APPL   | 2001-01-01 00:00:30 |  2.94 |
 | APPL   | 2001-01-01 00:01:30 | 48.26 |
 | GOOG   | 2000-12-31 23:59:30 |       |
 | GOOG   | 2001-01-01 00:00:30 | 23.45 |
@@ -145,17 +145,17 @@ The default value of `infinity` is used to make sure there is an end value for t
 Here is what the `state` CTE looks like for our example:
 
 
-| ticker | price |        when         |         end         |
-|:-------|------:|:--------------------|:--------------------|
-| APPL   | 1     | 2001-01-01 00:00:00 | 2001-01-01 00:01:00 |
-| APPL   | 2     | 2001-01-01 00:01:00 | 2001-01-01 00:02:00 |
-| APPL   | 3     | 2001-01-01 00:02:00 | infinity            |
-| GOOG   | 1     | 2001-01-01 00:00:00 | 2001-01-01 00:01:00 |
-| GOOG   | 2     | 2001-01-01 00:01:00 | 2001-01-01 00:02:00 |
-| GOOG   | 3     | 2001-01-01 00:02:00 | infinity            |
-| MSFT   | 1     | 2001-01-01 00:00:00 | 2001-01-01 00:01:00 |
-| MSFT   | 2     | 2001-01-01 00:01:00 | 2001-01-01 00:02:00 |
-| MSFT   | 3     | 2001-01-01 00:02:00 | infinity            |
+| ticker | price | when                | end                 |
+| :----- | ----: | :------------------ | :------------------ |
+| APPL   |     1 | 2001-01-01 00:00:00 | 2001-01-01 00:01:00 |
+| APPL   |     2 | 2001-01-01 00:01:00 | 2001-01-01 00:02:00 |
+| APPL   |     3 | 2001-01-01 00:02:00 | infinity            |
+| GOOG   |     1 | 2001-01-01 00:00:00 | 2001-01-01 00:01:00 |
+| GOOG   |     2 | 2001-01-01 00:01:00 | 2001-01-01 00:02:00 |
+| GOOG   |     3 | 2001-01-01 00:02:00 | infinity            |
+| MSFT   |     1 | 2001-01-01 00:00:00 | 2001-01-01 00:01:00 |
+| MSFT   |     2 | 2001-01-01 00:01:00 | 2001-01-01 00:02:00 |
+| MSFT   |     3 | 2001-01-01 00:02:00 | infinity            |
 
 In the case where there is no equality condition, the planner would have to use an inequality join,
 which can be very expensive.
@@ -225,10 +225,10 @@ The build side will just have four integer "timestamps" with alphabetic values:
 
 | Time | Value |
 | ---: | ----: |
-| 1 | a |
-| 2 | b |
-| 3 | c |
-| 4 | d |
+|    1 |     a |
+|    2 |     b |
+|    3 |     c |
+|    4 |     d |
 
 The probe table will just be the time values plus the midpoints,
 and we can make a table showing what value each probe time matches
@@ -238,31 +238,31 @@ for greater than or equal to:
 | Probe | >=  |
 | ----: | --- |
 |   0.5 |     |
-|   1.0 |  a  |
-|   1.5 |  a  |
-|   2.0 |  b  |
-|   2.5 |  b  |
-|   3.0 |  c  |
-|   3.5 |  c  |
-|   4.0 |  d  |
-|   4.5 |  d  |
+|   1.0 | a   |
+|   1.5 | a   |
+|   2.0 | b   |
+|   2.5 | b   |
+|   3.0 | c   |
+|   3.5 | c   |
+|   4.0 | d   |
+|   4.5 | d   |
 
 This shows us that the interval a probe value matches is in the half-open interval `[Tn, Tn+1)`.
 
 Now let's see what happens if use strictly greater than as the inequality:
 
 
-| Probe |  >  |
+| Probe | >   |
 | ----: | --- |
 |   0.5 |     |
 |   1.0 |     |
-|   1.5 |  a  |
-|   2.0 |  a  |
-|   2.5 |  b  |
-|   3.0 |  b  |
-|   3.5 |  c  |
-|   4.0 |  c  |
-|   4.5 |  d  |
+|   1.5 | a   |
+|   2.0 | a   |
+|   2.5 | b   |
+|   3.0 | b   |
+|   3.5 | c   |
+|   4.0 | c   |
+|   4.5 | d   |
 
 Now we can see that the interval a probe value matches is in the half-open interval `(Tn, Tn+1]`.
 The only difference is that the interval is closed at the end instead of the beginning.
@@ -273,14 +273,14 @@ What if the inequality goes in the other direction, say less than or equal to?
 
 | Probe | <=  |
 | ----: | --- |
-|   0.5 |  a  |
-|   1.0 |  a  |
-|   1.5 |  b  |
-|   2.0 |  b  |
-|   2.5 |  c  |
-|   3.0 |  c  |
-|   3.5 |  d  |
-|   4.0 |  d  |
+|   0.5 | a   |
+|   1.0 | a   |
+|   1.5 | b   |
+|   2.0 | b   |
+|   2.5 | c   |
+|   3.0 | c   |
+|   3.5 | d   |
+|   4.0 | d   |
 |   4.5 |     |
 
 Again, we have half-open intervals, but this time we are matching the _previous_ interval `(Tn-1, Tn]`.
@@ -295,15 +295,15 @@ when non-strict inequalities are used.
 We can check this by looking at the last inequality: strictly less than:
 
 
-| Probe |  <  |
+| Probe | <   |
 | ----: | --- |
-|   0.5 |  a  |
-|   1.0 |  b  |
-|   1.5 |  b  |
-|   2.0 |  c  |
-|   2.5 |  c  |
-|   3.0 |  d  |
-|   3.5 |  d  |
+|   0.5 | a   |
+|   1.0 | b   |
+|   1.5 | b   |
+|   2.0 | c   |
+|   2.5 | c   |
+|   3.0 | d   |
+|   3.5 | d   |
 |   4.0 |     |
 |   4.5 |     |
 
@@ -315,11 +315,11 @@ To sum up, here is the full list:
 
 
 | Inequality | Interval   |
-| -- | ---------- |
-| >  | (Tn, Tn+1] |
-| >= | [Tn, Tn+1) |
-| <= | (Tn-1, Tn] |
-| <  | [Tn-1, Tn) |
+| ---------- | ---------- |
+| >          | (Tn, Tn+1] |
+| >=         | [Tn, Tn+1) |
+| <=         | (Tn-1, Tn] |
+| <          | [Tn-1, Tn) |
 
 We now have two natural interpretations of what the inequalities mean:
 
@@ -434,24 +434,24 @@ CREATE OR REPLACE TABLE probe AS (
 
 The `build` table looks like this:
 
-| k |          t          | v |
-|---|---------------------|---|
-| 0 | 2001-01-01 00:00:00 | 0 |
-| 0 | 2001-01-01 00:01:00 | 1 |
-| 0 | 2001-01-01 00:02:00 | 2 |
-| 0 | 2001-01-01 00:03:00 | 3 |
-| ... | ... | ... |
+| k   | t                   | v   |
+| --- | ------------------- | --- |
+| 0   | 2001-01-01 00:00:00 | 0   |
+| 0   | 2001-01-01 00:01:00 | 1   |
+| 0   | 2001-01-01 00:02:00 | 2   |
+| 0   | 2001-01-01 00:03:00 | 3   |
+| ... | ...                 | ... |
 
 and the probe table looks like this (with only even values for k):
 
-| k |          t          |
-|---|---------------------|
-| 0 | 2000-12-31 23:59:30 |
-| 0 | 2001-01-01 00:00:30 |
-| 0 | 2001-01-01 00:01:30 |
-| 0 | 2001-01-01 00:02:30 |
-| 0 | 2001-01-01 00:03:30 |
-| ... | ... |
+| k   | t                   |
+| --- | ------------------- |
+| 0   | 2000-12-31 23:59:30 |
+| 0   | 2001-01-01 00:00:30 |
+| 0   | 2001-01-01 00:01:30 |
+| 0   | 2001-01-01 00:02:30 |
+| 0   | 2001-01-01 00:03:30 |
+| ... | ...                 |
 
 The benchmark just does the join and sums up the `v` column:
 

@@ -9,6 +9,8 @@ length: "5 min"
 thirdparty: false
 excerpt: ""
 pill: "Data + AI Summit 2024"
+redirect_from:
+- /media/announcing-duckdb-support-for-delta-lake-and-unity-catalog
 ---
 
 <div class="video-container">

@@ -18,7 +18,7 @@ For more info, visit https://duckdb.org/docs/stable/extensions/troubleshooting?v
 ```
 
 There are multiple scenarios for which an extensions might not be available in a given extension repository at a given time:
-* the extension have not been uploaded yet, here some delay after a given release date might be expected. Consider checking the issues at [`duckdb/duckdb`](https://github.com/duckdb/duckdb) or [`duckdb/community-extensions`](https://github.com/duckdb/community-extensions), or creating one yourself.
+* the extension has not been uploaded yet, here some delay after a given release date might be expected. Consider checking the issues at [`duckdb/duckdb`](https://github.com/duckdb/duckdb) or [`duckdb/community-extensions`](https://github.com/duckdb/community-extensions), or creating one yourself.
 * the extension is available, but in a different repository, try for example `INSTALL <name> FROM core;` or `INSTALL <name> FROM community;` or `INSTALL <name> FROM core_nightly;` (see the [Installing Extensions page]({% link docs/preview/extensions/installing_extensions.md %}#extension-repositories)).
 * networking issues, so extension exists at the endpoint but it's not reachable from your local DuckDB. Here you can try visiting the given URL via a browser directly pasting the link from the error message in the search bar.
 

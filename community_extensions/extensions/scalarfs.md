@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: scalarfs
   description: A collection of virtual filesystems for working with scalars
-  version: 1.2.0
+  version: 1.3.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: teaguesterling/duckdb_scalarfs
-  ref: "4c10606f5124d027a520fadcda0287e6a7732346"
+  ref: "31545aba405a2e9d51ea4d3b79cd0fc68e73a4aa"
 
 docs:
   hello_world: |
@@ -55,13 +55,15 @@ docs:
     Path Variables — Use file paths stored in variables for dynamic file resolution
     Inline literals — Embed content directly in your queries without temporary files
 
-    | Protocol       | Purpose                                |   Mode      |
-    |----------------|----------------------------------------|-------------|
-    | variable:      | DuckDB variable as file                | Read/Write  |
-    | pathvariable:  | File path(s) stored in variable        | Read/Write* |
-    | data:          | RFC 2397 data URI (base64/url-encoded) | Read        |
-    | data+varchar:  | Raw VARCHAR content as file            | Read        |
-    | data+blob:     | Escaped BLOB content as file           | Read        |
+    | Protocol         | Purpose                                |   Mode      |
+    |------------------|----------------------------------------|-------------|
+    | variable:        | DuckDB variable as file                | Read/Write  |
+    | pathvariable:    | File path(s) stored in variable        | Read/Write* |
+    | data:            | RFC 2397 data URI (base64/url-encoded) | Read        |
+    | data+varchar:    | Raw VARCHAR content as file            | Read        |
+    | data+blob:       | Escaped BLOB content as file           | Read        |
+    | decompress+gz:   | Gzip decompression wrapper             | Read        |
+    | decompress+zstd: | Zstd decompression wrapper             | Read        |
 
     * Can only write to a `pathvariable:` that's a scalar path (not lists).
 
@@ -71,8 +73,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 1124
-extension_download_count_pretty: 1.1k
+extension_download_count: 441
+extension_download_count_pretty: 441
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---

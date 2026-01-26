@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB Tricks – Part 3"
-author: "Andra Ionescu, Gabor Szarnyas"
+author: "Andra Ionescu, Gábor Szárnyas"
 thumb: "/images/blog/thumbs/duckdb-tricks.svg"
 image: "/images/blog/thumbs/duckdb-tricks.png"
 excerpt: "In this new installment of the DuckDB Tricks series, we present features for convenient handling of tables and performance optimization tips for Parquet and CSV files."
@@ -13,13 +13,13 @@ tags: ["using DuckDB"]
 We continue our DuckDB [Tricks]({% post_url 2024-08-19-duckdb-tricks-part-1 %}) [series]({% post_url 2024-10-11-duckdb-tricks-part-2 %}) with a third part,
 where we showcase [friendly SQL features]({% link docs/stable/sql/dialect/friendly_sql.md %}) and performance optimizations.
 
-| Operation | SQL instructions |
-|-----------|------------------|
-| [Excluding columns from a table](#excluding-columns-from-a-table) | `EXCLUDE`{:.language-sql .highlight}/`COLUMNS(...)`{:.language-sql .highlight}, `NOT SIMILAR TO`{:.language-sql .highlight} |
-| [Renaming columns with pattern matching](#renaming-columns-with-pattern-matching) | `COLUMNS(...) AS ...`{:.language-sql .highlight} |
-| [Loading with globbing](#loading-with-globbing) | `FROM '*.csv'`{:.language-sql .highlight} |
-| [Reordering Parquet files](#reordering-parquet-files) | `COPY (FROM ... ORDER BY ...) TO ...`{:.language-sql .highlight} |
-| [Hive partitioning](#hive-partitioning) | `hive_partitioning = true`{:.language-sql .highlight}  |
+| Operation                                                                         | SQL instructions                                                                                                            |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [Excluding columns from a table](#excluding-columns-from-a-table)                 | `EXCLUDE`{:.language-sql .highlight}/`COLUMNS(...)`{:.language-sql .highlight}, `NOT SIMILAR TO`{:.language-sql .highlight} |
+| [Renaming columns with pattern matching](#renaming-columns-with-pattern-matching) | `COLUMNS(...) AS ...`{:.language-sql .highlight}                                                                            |
+| [Loading with globbing](#loading-with-globbing)                                   | `FROM '*.csv'`{:.language-sql .highlight}                                                                                   |
+| [Reordering Parquet files](#reordering-parquet-files)                             | `COPY (FROM ... ORDER BY ...) TO ...`{:.language-sql .highlight}                                                            |
+| [Hive partitioning](#hive-partitioning)                                           | `hive_partitioning = true`{:.language-sql .highlight}                                                                       |
 
 ## Dataset
 
@@ -40,14 +40,14 @@ The result is a table with the column names and the column types.
 
 <div class="monospace_table"></div>
 
-|         column_name          | column_type | null | key  | default | extra |
-|------------------------------|-------------|------|------|---------|-------|
-| Service:RDT-ID               | BIGINT      | YES  | NULL | NULL    | NULL  |
-| Service:Date                 | DATE        | YES  | NULL | NULL    | NULL  |
-| Service:Type                 | VARCHAR     | YES  | NULL | NULL    | NULL  |
-| Service:Company              | VARCHAR     | YES  | NULL | NULL    | NULL  |
-| Service:Train number         | BIGINT      | YES  | NULL | NULL    | NULL  |
-| ...                          | ...         | ...  | ...  | ...     | ...   |
+| column_name          | column_type | null | key  | default | extra |
+| -------------------- | ----------- | ---- | ---- | ------- | ----- |
+| Service:RDT-ID       | BIGINT      | YES  | NULL | NULL    | NULL  |
+| Service:Date         | DATE        | YES  | NULL | NULL    | NULL  |
+| Service:Type         | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| Service:Company      | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| Service:Train number | BIGINT      | YES  | NULL | NULL    | NULL  |
+| ...                  | ...         | ...  | ...  | ...     | ...   |
 
 Now, let's use [`SUMMARIZE`]({% link docs/stable/guides/meta/summarize.md %}) to inspect some statistics about the columns.
 
@@ -68,20 +68,20 @@ Alternatively, we can use the [`COLUMNS`]({% link docs/stable/sql/expressions/st
 This works with a regular expression:
 
 ```sql
-SELECT COLUMNS(c -> c NOT SIMILAR TO 'min|max|q.*') 
+SELECT COLUMNS(lambda c: c NOT SIMILAR TO 'min|max|q.*') 
 FROM (SUMMARIZE FROM 'services-2024-08.csv');
 ```
 
 In both cases, the resulting table will contain the 5 remaining statistical columns:
 
-|         column_name          | column_type | approx_unique |         avg         |        std         |  count  | null_percentage |
-|------------------------------|-------------|--------------:|---------------------|--------------------|--------:|----------------:|
-| Service:RDT-ID               | BIGINT      | 259022        | 14200071.03736433   | 59022.836209662266 | 1846574 | 0.00            |
-| Service:Date                 | DATE        | 32            | NULL                | NULL               | 1846574 | 0.00            |
-| Service:Type                 | VARCHAR     | 20            | NULL                | NULL               | 1846574 | 0.00            |
-| Service:Company              | VARCHAR     | 12            | NULL                | NULL               | 1846574 | 0.00            |
-| Service:Train number         | BIGINT      | 17264         | 57781.81688196628   | 186353.76365744913 | 1846574 | 0.00            |
-| ...                          | ...         | ...           | ...                 | ...                | ...     | ...             |
+| column_name          | column_type | approx_unique | avg               | std                |   count | null_percentage |
+| -------------------- | ----------- | ------------: | ----------------- | ------------------ | ------: | --------------: |
+| Service:RDT-ID       | BIGINT      |        259022 | 14200071.03736433 | 59022.836209662266 | 1846574 |            0.00 |
+| Service:Date         | DATE        |            32 | NULL              | NULL               | 1846574 |            0.00 |
+| Service:Type         | VARCHAR     |            20 | NULL              | NULL               | 1846574 |            0.00 |
+| Service:Company      | VARCHAR     |            12 | NULL              | NULL               | 1846574 |            0.00 |
+| Service:Train number | BIGINT      |         17264 | 57781.81688196628 | 186353.76365744913 | 1846574 |            0.00 |
+| ...                  | ...         |           ... | ...               | ...                |     ... |             ... |
 
 ## Renaming Columns with Pattern Matching
 
@@ -108,14 +108,14 @@ FROM (
 
 Add `DESCRIBE` at the beginning of the query and we can see the renamed columns:
 
-|         column_name          | column_type | null | key  | default | extra |
-|------------------------------|-------------|------|------|---------|-------|
-| Service_RDT_ID               | BIGINT      | YES  | NULL | NULL    | NULL  |
-| Service_Date                 | DATE        | YES  | NULL | NULL    | NULL  |
-| Service_Type                 | VARCHAR     | YES  | NULL | NULL    | NULL  |
-| Service_Company              | VARCHAR     | YES  | NULL | NULL    | NULL  |
-| Service_Train_number         | BIGINT      | YES  | NULL | NULL    | NULL  |
-| ...                          | ...         | ...  | ...  | ...     | ...   |
+| column_name          | column_type | null | key  | default | extra |
+| -------------------- | ----------- | ---- | ---- | ------- | ----- |
+| Service_RDT_ID       | BIGINT      | YES  | NULL | NULL    | NULL  |
+| Service_Date         | DATE        | YES  | NULL | NULL    | NULL  |
+| Service_Type         | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| Service_Company      | VARCHAR     | YES  | NULL | NULL    | NULL  |
+| Service_Train_number | BIGINT      | YES  | NULL | NULL    | NULL  |
+| ...                  | ...         | ...  | ...  | ...     | ...   |
 
 Let's break down the query starting with the first `COLUMNS` expression:
 
@@ -151,7 +151,7 @@ ORDER BY service_company;
 ```
 
 | Service_Company |
-|-----------------|
+| --------------- |
 | Arriva          |
 | Blauwnet        |
 | Breng           |
@@ -312,7 +312,7 @@ If all these formats and results got your head spinning, no worries.
 We got your covered with this summary table:
 
 | Format                     | Query runtime (ms) |
-|----------------------------|-------------------:|
+| -------------------------- | -----------------: |
 | DuckDB file format         |                 35 |
 | CSV (vanilla)              |               1800 |
 | CSV (Hive-partitioned)     |                150 |

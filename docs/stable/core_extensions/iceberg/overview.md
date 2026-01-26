@@ -3,11 +3,8 @@ github_repository: https://github.com/duckdb/duckdb-iceberg
 layout: docu
 redirect_from:
 - /docs/stable/extensions/iceberg
-- /docs/stable/extensions/iceberg/
 - /docs/stable/extensions/iceberg/overview
-- /docs/stable/extensions/iceberg/overview/
 - /docs/extensions/iceberg
-- /docs/extensions/iceberg/
 title: Iceberg Extension
 ---
 
@@ -62,7 +59,7 @@ FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 > The `allow_moved_paths` option ensures that some path resolution is performed, 
 > which allows scanning Iceberg tables that are moved.
 
-You can also address specify the current manifest directly in the query, this may be resolved from the catalog prior to the query, in this example the manifest version is a UUID.
+You can also directly specify the current manifest in the query, this may be resolved from the catalog prior to the query, in this example the manifest version is a UUID.
 To do so, navigate to the `data/iceberg` directory and run:
 
 ```sql
@@ -184,8 +181,8 @@ FROM iceberg_scan(
 
 ## Limitations
 
-- Inserts into v3 Iceberg specification tables.
-- Reads from v3 tables with v2 data types.
-- Geometry data type
+* Inserts into v3 Iceberg specification tables.
+* Reads from v3 tables with v2 data types.
+* Geometry data type.
 
 For a set of unsupported operations when attaching to an Iceberg catalog, see [Unsupported Operations]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}#unsupported-operations).

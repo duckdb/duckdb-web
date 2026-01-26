@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /ducklake
 - /docs/extensions/ducklake
-- /docs/extensions/ducklake/
 title: DuckLake
 ---
 

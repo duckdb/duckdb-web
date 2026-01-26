@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/c/vector
-- /docs/api/c/vector/
 - /docs/clients/c/vector
 title: Vectors
 ---
@@ -137,7 +136,7 @@ Note that both list entries itself **and** any children stored in the lists can 
 
 ### Arrays
 
-Arrays are nested types that contain a single child type, repeated exactly `array_size` times per row. Think of them like a fixed-size array in C. Arrays work exactly the same as lists, **except** the length and offset of each entry is fixed. The fixed array size can be obtained by using `duckdb_array_type_array_size`. The data for entry `n` then resides at `offset = n * array_size`, and always has `length = array_size`.
+Arrays are nested types that contain a single child type, repeated exactly `array_size` times per row. Think of them like a fixed-size array in C. Arrays work exactly the same as lists, **except** the length and offset of each entry is fixed. The fixed array size can be obtained by using `duckdb_array_type_array_size`. The data for entry `n` then resides at `offset = n * array_size` and always has `length = array_size`.
 
 Note that much like lists, arrays can still be `NULL`, which must be checked using the validity mask.
 

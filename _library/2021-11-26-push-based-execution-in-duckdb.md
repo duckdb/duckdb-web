@@ -8,7 +8,9 @@ tags: ["Talk"]
 length: "20 min"
 thirdparty: false
 excerpt: ""
-pill: "Dutch Seminar on Data Systems Design seminar"
+pill: "Dutch Seminar on Data Systems Design"
+redirect_from:
+- /media/push-based-execution-in-duckdb
 ---
 
 <div class="video-container">
@@ -17,6 +19,6 @@ pill: "Dutch Seminar on Data Systems Design seminar"
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Event** | [Dutch Seminar on Data Systems Design seminar](https://dsdsd.da.cwi.nl/) |
+| **Event** | [Dutch Seminar on Data Systems Design](https://dsdsd.da.cwi.nl/) |
 | **Speaker** | [Mark Raasveldt](https://mytherin.github.io/) |
 | **YouTube** | [Push-Based Execution in DuckDB](https://www.youtube.com/watch?v=MA0OsvYFGrc) |

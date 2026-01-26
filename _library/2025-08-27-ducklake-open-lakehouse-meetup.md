@@ -8,6 +8,8 @@ tags: ["Talk"]
 thirdparty: false
 excerpt: ""
 pill: "Open Lakehouse Meetup 2025"
+redirect_from:
+- /media/open-lakehouse-meetup
 ---
 
 |-------|-------|

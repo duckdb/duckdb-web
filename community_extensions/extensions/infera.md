@@ -48,10 +48,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/infera).
 
-extension_star_count: 118
-extension_star_count_pretty: 118
-extension_download_count: 517
-extension_download_count_pretty: 517
+extension_star_count: 120
+extension_star_count_pretty: 120
+extension_download_count: 468
+extension_download_count_pretty: 468
 image: '/images/community_extensions/social_preview/preview_community_extension_infera.png'
 layout: community_extension_doc
 ---

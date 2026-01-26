@@ -9,6 +9,8 @@ length: "65 min"
 thirdparty: false
 excerpt: ""
 pill: "Quarantine 2020 Database Talks at CMU"
+redirect_from:
+- /media/duckdb-the-sqlite-for-analytics
 ---
 
 <div class="video-container">

@@ -19,7 +19,7 @@ extension:
   vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
 repo:
   github: midwork-finds-jobs/duckdb-webdavfs
-  ref: 00894c37e652a256a26299b7023fc000d47a85c5
+  ref: 981500f7f10bee044d1e9eb92a62d1494cf987fa
 
 docs:
   hello_world: |
@@ -62,8 +62,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 562
-extension_download_count_pretty: 562
+extension_download_count: 211
+extension_download_count_pretty: 211
 image: '/images/community_extensions/social_preview/preview_community_extension_webdavfs.png'
 layout: community_extension_doc
 ---

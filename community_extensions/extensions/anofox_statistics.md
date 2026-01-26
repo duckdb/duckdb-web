@@ -16,12 +16,12 @@ extension:
   requires_toolchains: rust
 repo:
   github: DataZooDE/anofox-statistics
-  ref: 3a60878e015280be754ae0ca41667e261cc875d6
+  ref: 81f86eb9051dd756493afd3d328a09ac33f86b04
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 522
-extension_download_count_pretty: 522
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 452
+extension_download_count_pretty: 452
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_statistics.png'
 layout: community_extension_doc
 ---
@@ -84,6 +84,7 @@ LOAD {{ page.extension.name }};
 | anofox_stats_fisher_exact_agg           | aggregate     | NULL        | NULL    |          |
 | anofox_stats_g_test_agg                 | aggregate     | NULL        | NULL    |          |
 | anofox_stats_icc_agg                    | aggregate     | NULL        | NULL    |          |
+| anofox_stats_isotonic_fit_predict_agg   | aggregate     | NULL        | NULL    |          |
 | anofox_stats_jarque_bera                | scalar        | NULL        | NULL    |          |
 | anofox_stats_jarque_bera_agg            | aggregate     | NULL        | NULL    |          |
 | anofox_stats_kendall_agg                | aggregate     | NULL        | NULL    |          |
@@ -101,11 +102,13 @@ LOAD {{ page.extension.name }};
 | anofox_stats_pearson_agg                | aggregate     | NULL        | NULL    |          |
 | anofox_stats_permutation_t_test_agg     | aggregate     | NULL        | NULL    |          |
 | anofox_stats_phi_coefficient_agg        | aggregate     | NULL        | NULL    |          |
+| anofox_stats_pls_fit_predict_agg        | aggregate     | NULL        | NULL    |          |
 | anofox_stats_poisson_fit_agg            | aggregate     | NULL        | NULL    |          |
 | anofox_stats_poisson_fit_predict_agg    | aggregate     | NULL        | NULL    |          |
 | anofox_stats_predict                    | scalar        | NULL        | NULL    |          |
 | anofox_stats_prop_test_one_agg          | aggregate     | NULL        | NULL    |          |
 | anofox_stats_prop_test_two_agg          | aggregate     | NULL        | NULL    |          |
+| anofox_stats_quantile_fit_predict_agg   | aggregate     | NULL        | NULL    |          |
 | anofox_stats_residuals_diagnostics      | scalar        | NULL        | NULL    |          |
 | anofox_stats_residuals_diagnostics_agg  | aggregate     | NULL        | NULL    |          |
 | anofox_stats_ridge_fit                  | scalar        | NULL        | NULL    |          |
@@ -159,6 +162,8 @@ LOAD {{ page.extension.name }};
 | fisher_exact_agg                        | aggregate     | NULL        | NULL    |          |
 | g_test_agg                              | aggregate     | NULL        | NULL    |          |
 | icc_agg                                 | aggregate     | NULL        | NULL    |          |
+| isotonic_fit_predict_agg                | aggregate     | NULL        | NULL    |          |
+| isotonic_fit_predict_by                 | table_macro   | NULL        | NULL    |          |
 | jarque_bera                             | scalar        | NULL        | NULL    |          |
 | jarque_bera_agg                         | aggregate     | NULL        | NULL    |          |
 | kendall_agg                             | aggregate     | NULL        | NULL    |          |
@@ -177,11 +182,15 @@ LOAD {{ page.extension.name }};
 | pearson_agg                             | aggregate     | NULL        | NULL    |          |
 | permutation_t_test_agg                  | aggregate     | NULL        | NULL    |          |
 | phi_coefficient_agg                     | aggregate     | NULL        | NULL    |          |
+| pls_fit_predict_agg                     | aggregate     | NULL        | NULL    |          |
+| pls_fit_predict_by                      | table_macro   | NULL        | NULL    |          |
 | poisson_fit_agg                         | aggregate     | NULL        | NULL    |          |
 | poisson_fit_predict_agg                 | aggregate     | NULL        | NULL    |          |
 | poisson_fit_predict_by                  | table_macro   | NULL        | NULL    |          |
 | prop_test_one_agg                       | aggregate     | NULL        | NULL    |          |
 | prop_test_two_agg                       | aggregate     | NULL        | NULL    |          |
+| quantile_fit_predict_agg                | aggregate     | NULL        | NULL    |          |
+| quantile_fit_predict_by                 | table_macro   | NULL        | NULL    |          |
 | residuals_diagnostics                   | scalar        | NULL        | NULL    |          |
 | residuals_diagnostics_agg               | aggregate     | NULL        | NULL    |          |
 | ridge_fit                               | scalar        | NULL        | NULL    |          |

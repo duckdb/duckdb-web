@@ -144,8 +144,8 @@ For creating the table, we focus on the `lineitem` table.
 
 After defining the schema, both files can be loaded with a simple `COPY` statement, with no additional parameters set. Note that even with the schema defined, the CSV sniffer will still be executed to determine the dialect (e.g., quote character, delimiter character, etc.) and match types and names.
 
-|      Name      | Time (s) | Size (GB) |
-|----------------|---------:|----------:|
+| Name           | Time (s) | Size (GB) |
+| -------------- | -------: | --------: |
 | CSV            |    11.76 |     15.95 |
 | Parquet Snappy |     5.21 |      3.78 |
 | Parquet ZSTD   |     5.52 |      3.22 |
@@ -188,8 +188,8 @@ ORDER BY
     l_linestatus;
 ```
 
-|      Name      | Time (s) |
-|----------------|---------:|
+| Name           | Time (s) |
+| -------------- | -------: |
 | CSV            |     6.72 |
 | Parquet Snappy |     0.88 |
 | Parquet ZSTD   |     0.95 |
@@ -243,8 +243,8 @@ ORDER BY
 LIMIT 100;
 ```
 
-|      Name      | Time (s) |
-|----------------|---------:|
+| Name           | Time (s) |
+| -------------- | -------: |
 | CSV            |    19.95 |
 | Parquet Snappy |     2.08 |
 | Parquet ZSTD   |     2.12 |

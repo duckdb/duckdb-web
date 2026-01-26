@@ -7,6 +7,8 @@ length: "40 min"
 thirdparty: false
 excerpt: ""
 pill: "The Data Engineering Show"
+redirect_from:
+- /media/data-engineering-show-beyond-database-optimization-with-ai
 ---
 
 <div class="video-container">

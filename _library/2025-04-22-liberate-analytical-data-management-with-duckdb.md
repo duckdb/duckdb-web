@@ -9,6 +9,8 @@ length: "35 min"
 thirdparty: false
 excerpt: ""
 pill: "Data Council 2025"
+redirect_from:
+- /media/liberate-analytical-data-management-with-duckdb
 ---
 
 <div class="video-container">

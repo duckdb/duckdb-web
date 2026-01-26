@@ -4,9 +4,7 @@ title: Development Roadmap
 body_class: roadmap blog_typography post
 redirect_from:
 - /docs/stable/dev/roadmap
-- /docs/stable/dev/roadmap/
 - /docs/preview/dev/roadmap
-- /docs/preview/dev/roadmap/
 max_page_width: small
 toc: false
 ---

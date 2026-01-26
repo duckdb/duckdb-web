@@ -62,7 +62,7 @@ We'll elaborate more on why this is relevant later.
 ## Lambdas
 
 A **lambda function** is an anonymous function, i.e., a function without a name.
-In DuckDB, a lambda function's syntax is `(param1, param2, ...) -> expression`.
+In DuckDB, a lambda function's syntax is `lambda param1, param2, ...: expression`.
 The parameters can have any name, and the `expression` can be any SQL expression.
 
 Currently, DuckDB has three scalar functions for working with lambdas:
@@ -143,7 +143,7 @@ In the case of transformations, the corresponding list-native function is `list_
 Here is the rewritten query:
 
 ```sql
-SELECT list_transform(l, x -> x + n) AS result
+SELECT list_transform(l, lambda x: x + n) AS result
 FROM my_lists;
 ```
 
@@ -156,7 +156,7 @@ FROM my_lists;
 
 Internally, this query expands all related vectors, which is just `n` in this case.
 Just like before, we employ selection vectors to avoid any data copies.
-Then, we use the lambda function `x -> x + n` to fire our expression execution on the child vector and the expanded vector `n`.
+Then, we use the lambda function `x: x + n` to fire our expression execution on the child vector and the expanded vector `n`.
 As this is a list-native function, we’re aware of the existence of a parent vector and keep it alive.
 So, once we get the result from the transformation, we can completely omit the reaggregation step.
 
@@ -176,9 +176,9 @@ INSERT INTO my_lists
 Then, we ran both our normalized and list-native queries on this data.
 Both queries were run in the CLI with DuckDB v1.0.0 on a MacBook Pro 2021 with a M1 Max chip.
 
-| Normalized | Native  |
-|-----------:|--------:|
-| 0.522 s    | 0.027 s |
+| Normalized |  Native |
+| ---------: | ------: |
+|    0.522 s | 0.027 s |
 
 As we can see, the native query is more than 10× faster. Amazing!
 If we look at the execution plan using `EXPLAIN ANALYZE` (not shown in this blog post), we can see that DuckDB spends most of its time in the `HASH_GROUP_BY` and `UNNEST` operators.
@@ -223,7 +223,7 @@ Here is an example using `list_filter` from a [discussion on our Discord](https:
 
 ```sql
 CREATE OR REPLACE MACRO remove_idx(l, idx) AS (
-    list_filter(l, (_, i) -> i != idx)
+    list_filter(l, lambda _, i: i != idx)
 );
 ```
 
@@ -265,25 +265,11 @@ CREATE OR REPLACE TABLE bsn_tbl AS
 
 #### Solution
 
-When this problem was initially proposed, DuckDB didn't have support for `list_reduce`.
-Instead, the user came up with the following:
-
 ```sql
 CREATE OR REPLACE MACRO valid_bsn(bsn) AS (
-    list_sum(
-        [array_extract(bsn, x)::INTEGER * (IF (x = 9, -1, 10 - x))
-        FOR x IN range(1, 10, 1)]
+    bsn.list_reverse().list_reduce(
+        lambda x, y, i: IF (i = 2, -x, x) + y * i
     ) % 11 = 0
-);
-```
-
-With `list_reduce`, we can rewrite the query as follows.
-We also added a check validating that the length is always nine digits.
-
-```sql
-CREATE OR REPLACE MACRO valid_bsn(bsn) AS (
-    list_reduce(list_reverse(bsn),
-        (x, y, i) -> IF (i = 1, -x, x) + y * (i + 1)) % 11 = 0
     AND len(bsn) = 9
 );
 ```

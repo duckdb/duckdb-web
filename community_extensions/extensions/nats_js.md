@@ -56,10 +56,10 @@ docs:
     GitHub: https://github.com/brannn/duckdb-nats-jetstream
 
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 485
-extension_download_count_pretty: 485
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 469
+extension_download_count_pretty: 469
 image: '/images/community_extensions/social_preview/preview_community_extension_nats_js.png'
 layout: community_extension_doc
 ---

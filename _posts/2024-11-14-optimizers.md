@@ -180,9 +180,9 @@ EXPLAIN ...
 
 Let's first look at the difference in execution times on my MacBook with an M1 Max and 32 GB of memory before talking about the optimizations that have taken place.
 
-|          | Unoptimized | Optimized |
-|----------|-------------|-----------|
-| Runtime  | >24 hours   | 0.769 s   |
+|         | Unoptimized | Optimized |
+| ------- | ----------- | --------- |
+| Runtime | >24 hours   | 0.769 s   |
 
 Hopefully this performance benefit illustrates how powerful the DuckDB Optimizer is. So what optimization rules are responsible for these drastic performance improvements? For the query above, there are three powerful rules that are applied when optimizing the query: _Filter Pushdown,_ _Join Order Optimization,_ and _TopN Optimization_.
 
@@ -218,9 +218,9 @@ LIMIT 5;
 
 Inspecting the runtimes again we get:
 
-|          | Unoptimized | Hand-optimized | Optimized |
-|----------|-------------|----------------|-----------|
-| Runtime  | >24 hours   | 0.926 s        | 0.769 s   |
+|         | Unoptimized | Hand-optimized | Optimized |
+| ------- | ----------- | -------------- | --------- |
+| Runtime | >24 hours   | 0.926 s        | 0.769 s   |
 
 The SQL above results in a plan similar to the DuckDB optimized plan, but it is wordier and more error-prone to write, which can potentially lead to bugs. In very rare cases, it is possible to hand write a query that produces a more efficient plan than an optimizer. These cases are extreme outliers, and in all other cases the optimizer will produce a better plan. Moreover, a hand-optimized query is optimized for the current state of the data, which can change with many updates over time. Once a sufficient amount of changes are applied to the data, the assumptions of a hand-optimized query may no longer hold, leading to bad performance. Let's take a look at the following example.
 
@@ -246,13 +246,13 @@ Naturally, the number of orders will increase as this company gains customers an
 Here is a breakdown of running the queries with and without the optimizer as the orders table increases.
 
 |                   | Unoptimized | Optimized |
-|-------------------|------------:|----------:|
-| \|orders\| = 1K   | 0.004 s     | 0.003 s   |
-| \|orders\| = 10K  | 0.005 s     | 0.005 s   |
-| \|orders\| = 100K | 0.013 s     | 0.008 s   |
-| \|orders\| = 1M   | 0.055 s     | 0.014 s   |
-| \|orders\| = 10M  | 0.240 s     | 0.044 s   |
-| \|orders\| = 100M | 2.266 s     | 0.259 s   |
+| ----------------- | ----------: | --------: |
+| \|orders\| = 1K   |     0.004 s |   0.003 s |
+| \|orders\| = 10K  |     0.005 s |   0.005 s |
+| \|orders\| = 100K |     0.013 s |   0.008 s |
+| \|orders\| = 1M   |     0.055 s |   0.014 s |
+| \|orders\| = 10M  |     0.240 s |   0.044 s |
+| \|orders\| = 100M |     2.266 s |   0.259 s |
 
 At first the difference in execution time is not really noticeable, so no one would think a query rewrite would be the solution. But once enough orders are reached, waiting 2 seconds every time the dashboard loads becomes tedious. If the optimizer is enabled, the query performance improves by a factor of 10×. So if you ever think you have identified a scenario where you are smarter than the optimizer, make sure you have also thought about all possible updates to the data and have hand-optimized for those as well.
 
@@ -277,7 +277,7 @@ Below is a non-exhaustive list of all the optimization rules that DuckDB applies
 The _Expression Rewriter_ simplifies expressions within each operator. Sometimes queries are written with expressions that are not completely evaluated or they can be rewritten in a way that takes advantage of features within the execution engine. Below is a table of common expression rewrites and the optimization rules that are responsible for them. Many of these rules rewrite expressions to use specialized DuckDB functions so expression evaluation is much faster during execution. If an expression can be evaluated to `true` in the optimizer phase, there is no need to pass the original expression to the execution engine. In addition, the optimized expressions are more likely to allow DuckDB to make further improvements to the query plan. For example, the "Move constants" rule could enable filter pushdown to occur.
 
 | Rewriter rule                  | Original expression                   | Optimized expression       |
-|--------------------------------|---------------------------------------|----------------------------|
+| ------------------------------ | ------------------------------------- | -------------------------- |
 | Move constants                 | `x + 1 = 6`                           | `x = 5`                    |
 | Constant folding               | `2 + 2 = 4`                           | `true`                     |
 | Conjunction simplification     | `(1 = 2 AND b)`                       | `false`                    |
@@ -315,7 +315,7 @@ _Filter Pull-Up_ pulls up the filter `t1.a = 50` above the join, and when the fi
 If there is a filter with an `IN` clause, sometimes it can be re-written so execution is more efficient. Some examples are below:
 
 | Original          | Optimized             |
-|-------------------|-----------------------|
+| ----------------- | --------------------- |
 | `c1 IN (1)`       | `c1 = 1`              |
 | `c1 IN (3, 4, 5)` | `c1 >= 3 AND c1 <= 5` |
 

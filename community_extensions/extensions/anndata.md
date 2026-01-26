@@ -80,10 +80,10 @@ docs:
     SELECT * FROM anndata_info('file.h5ad');
     ```
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 481
-extension_download_count_pretty: 481
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 488
+extension_download_count_pretty: 488
 image: '/images/community_extensions/social_preview/preview_community_extension_anndata.png'
 layout: community_extension_doc
 ---

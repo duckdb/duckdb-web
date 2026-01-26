@@ -26,7 +26,7 @@ The DuckDB project is published under the MIT open-source software license. The 
 
 The DuckDB Marks stand for the quality, openness, and engineering discipline of the DuckDB project. Because many people and companies build on top of DuckDB, we must ensure that the names and logos are used in a way that does not imply official status, endorsement, or exclusivity. DuckDB is vendor-neutral and community-driven, and the use of our marks must always reflect that.
 
-## No Endorsement, no Exclusivity
+## No Endorsement, No Exclusivity
 
 Use of DuckDB Marks may never suggest that a third-party product or service is “official,” “preferred,” “primary,” “exclusive,” or endorsed by the DuckDB Foundation. This applies equally to cloud platforms, commercial vendors, libraries, extensions, and integrations. In particular, no company or platform may describe itself as “the official DuckDB platform,” “the primary home of DuckDB,” or use similar language that suggests a privileged or exclusive status.
 
@@ -34,11 +34,11 @@ Factual references to DuckDB are welcome, provided they are accurate and do not 
 
 DuckDB Marks may not be used in any way that disparages the DuckDB project, its contributors, or its community, or that harms the reputation or goodwill associated with the DuckDB Marks.
 
-## Avoid confusion
+## Avoid Confusion
 
 To keep users confident about what is “DuckDB” and what is not, please follow these rules:
 
-**Product and service names.**
+### Product and Service Names
 
 You may not use “DuckDB” or “Duck” as the brand name of your product, offering, service, or company, or in a way that makes your name look like an official DuckDB project (for example, “DuckDB Cloud”, “DuckDB Engine”, or “DuckDB Service”). 
 
@@ -46,23 +46,23 @@ Descriptive phrases such as “for DuckDB”, “compatible with DuckDB”, or �
 
 Events, books, and merchandise have their own guidelines. Please contact us for details.
 
-**Logos and visual branding.**
+### Logos and Visual Branding
 
 DuckDB logos cannot be altered, combined with other logos, used for co-branding, or placed in a way that suggests partnership or endorsement. Modified or look-alike “duck” logos are not permitted.
 
-**User interfaces and cloud consoles.**
+### User Interfaces and Cloud Consoles
 
 Any use of DuckDB Marks in dashboards, menus, marketplace listings, or developer consoles requires written approval.
 
-**Forks, extensions, and derivative software.**
+### Forks, Extensions and Derivative Software
 
 If you maintain a modified version of DuckDB or an extension, you must clearly distinguish it from the official project and may not label it using DuckDB Marks in a way that suggests official maintenance or oversight. 
 
-**Domains.**
+### Domains
 
 Domains or subdomains containing “duckdb” require permission. If you operate websites, documentation, or demos involving DuckDB, please use your own branding and refer to DuckDB factually.
 
-**Attribution.**
+### Attribution
 
 When your materials (web pages, whitepapers, presentations) make significant use of the DuckDB name, we recommend including an attribution such as:
 “DuckDB is a trademark of the DuckDB Foundation.” This helps keep ownership clear while remaining lightweight for users.

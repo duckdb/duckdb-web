@@ -3,9 +3,7 @@ github_repository: https://github.com/duckdb/duckdb-python
 layout: docu
 redirect_from:
 - /docs/api/python
-- /docs/api/python/
 - /docs/api/python/overview
-- /docs/api/python/overview/
 - /docs/clients/python/overview
 title: Python API
 ---

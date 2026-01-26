@@ -667,4 +667,4 @@ as the first argument.
 
 | Function | Description | Alias |
 |:--|:---|:--|
-| `grouping()` | For queries with `GROUP BY` and either [`ROLLUP` or `GROUPING SETS`]({% link docs/preview/sql/query_syntax/grouping_sets.md %}#identifying-grouping-sets-with-grouping_id): Returns an integer identifying which of the argument expressions where used to group on to create the current supper-aggregate row. | `grouping_id()` |
+| `grouping()` | For queries with `GROUP BY` and either [`ROLLUP` or `GROUPING SETS`]({% link docs/preview/sql/query_syntax/grouping_sets.md %}#identifying-grouping-sets-with-grouping_id): Returns an integer identifying which of the argument expressions where used to group on to create the current super-aggregate row. | `grouping_id()` |

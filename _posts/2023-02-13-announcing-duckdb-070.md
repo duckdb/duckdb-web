@@ -63,8 +63,8 @@ orders
 
 | Format  |   Old | New (8T) |
 | ------- | ----: | -------: |
-| CSV     | 2.6 s | 0.4 s    |
-| Parquet | 7.5 s | 1.3 s    |
+| CSV     | 2.6 s |    0.4 s |
+| Parquet | 7.5 s |    1.3 s |
 
 Note that currently the parallel writing is currently limited to non-insertion order preserving – which can be toggled by setting the `preserve_insertion_order` setting to false. In a future release we aim to alleviate this restriction and order parallel insertion order preserving writes as well.
 

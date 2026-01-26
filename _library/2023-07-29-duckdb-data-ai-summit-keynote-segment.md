@@ -9,6 +9,8 @@ length: "10 min"
 thirdparty: false
 excerpt: ""
 pill: "Data + AI Summit 2023"
+redirect_from:
+- /media/duckdb-data-ai-summit-keynote-segment
 ---
 
 <div class="video-container">

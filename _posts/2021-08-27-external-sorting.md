@@ -70,10 +70,10 @@ The binary string comparison technique improves sorting performance by simplifyi
 Let us take another look at 3 rows of the example:
 
 | c_birth_country | c_birth_year |
-|-----------------|-------------:|
-| NETHERLANDS     | 1991         |
-| NETHERLANDS     | 1992         |
-| GERMANY         | 1924         |
+| --------------- | -----------: |
+| NETHERLANDS     |         1991 |
+| NETHERLANDS     |         1992 |
+| GERMANY         |         1924 |
 
 On [little-endian](https://en.wikipedia.org/wiki/Endianness) hardware, the bytes that represent these values look like this in memory, assuming 32-bit integer representation for the year:
 

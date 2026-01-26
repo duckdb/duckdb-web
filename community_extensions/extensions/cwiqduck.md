@@ -20,10 +20,10 @@ repo:
   github: cwiq-os/cwiqduck
   ref: 81bb6a0c509ef91919560cbcddaf8e489e0ac8eb 
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 494
-extension_download_count_pretty: 494
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 474
+extension_download_count_pretty: 474
 image: '/images/community_extensions/social_preview/preview_community_extension_cwiqduck.png'
 layout: community_extension_doc
 ---

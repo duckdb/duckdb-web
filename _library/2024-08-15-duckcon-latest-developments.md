@@ -9,6 +9,8 @@ length: "30 min"
 thirdparty: false
 excerpt: ""
 pill: "DuckCon #5"
+redirect_from:
+- /media/duckcon-latest-developments
 ---
 
 <div class="video-container">

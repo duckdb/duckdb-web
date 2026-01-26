@@ -9,6 +9,8 @@ length: "80 min"
 thirdparty: false
 excerpt: ""
 pill: "Carnegie Mellon University (CMU)"
+redirect_from:
+- /media/duckdb-the-sqlite-for-analytics
 ---
 
 <div class="video-container">

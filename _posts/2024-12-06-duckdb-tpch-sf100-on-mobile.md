@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB: Running TPC-H SF100 on Mobile Phones"
-author: "Gabor Szarnyas, Laurens Kuiper, Hannes Mühleisen"
+author: "Gábor Szárnyas, Laurens Kuiper, Hannes Mühleisen"
 thumb: "/images/blog/thumbs/mobile-benchmarks.svg"
 image: "/images/blog/thumbs/mobile-benchmarks.png"
 excerpt: "DuckDB runs on mobile platforms such as iOS and Android, and completes the TPC-H benchmark faster than state-of-the-art research systems on big iron machines 20 years ago."
@@ -69,7 +69,7 @@ The details of these benchmarks are far less interesting than those of the previ
 The table contains a summary of the DuckDB benchmark results.
 
 | Setup                          | CPU cores | Memory | Runtime |
-|--------------------------------|----------:|-------:|--------:|
+| ------------------------------ | --------: | -----: | ------: |
 | iPhone 16 Pro (air-cooled)     |         6 |   8 GB | 615.1 s |
 | iPhone 16 Pro (dry ice-cooled) |         6 |   8 GB | 478.2 s |
 | Samsung Galaxy S24 Ultra       |         8 |  12 GB | 235.0 s |

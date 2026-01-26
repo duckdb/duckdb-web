@@ -108,7 +108,7 @@ because `date_part` returns 64 bit integers for all parts.
 Notice that we can extract _all_ of the parts with a single call to `date_part`.
 This part list version of the function is faster than extracting the parts one by one
 because the underlying binning computation computes all parts,
-so picking out the ones in the list is avoids duplicate calls to the slow ICU function.
+so picking out the ones in the list avoids duplicate calls to the slow ICU function.
 
 Also notice that we are leveraging the `DATE` cast rules from the previous section 
 to bound the calendar to the model domain.

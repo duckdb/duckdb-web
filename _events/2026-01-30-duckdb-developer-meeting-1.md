@@ -23,27 +23,30 @@ The event will feature talks from DuckDB developers, and is aimed at developers 
 **New event type.**
 This event is slightly different from our usual meetups and conferences as it primarily focuses on DuckDB extension development and building complex applications on top of DuckDB. Therefore, the main topics of the event will be the **C API, extension template, and internals**.
 
-### Meeting Registration
+Attendance is free but please [reserve a spot on Eventbrite](https://www.eventbrite.com/e/duckdb-developer-meeting-1-tickets-1850334944629?aff=oddtdtcreator) and keep you QR code at hand.
 
-Attendance is free. Please [reserve a spot on Eventbrite](https://www.eventbrite.com/e/duckdb-developer-meeting-1-tickets-1850334944629?aff=oddtdtcreator).
+## Program Outline
 
-### Program Outline
-
-|  Time | Title                                          | Presenter                                                                                                                                             |
-| ----: | :--------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 15:30 | _Venue opens_                                  |                                                                                                                                                       |
-| 16:00 | Extension building in DuckDB                   | [Sam Ansmink](https://www.linkedin.com/in/sam-ansmink-5a2b9093/) ([DuckDB Labs](https://duckdblabs.com/))                                             |
-| 16:25 | Encryption in DuckDB                           | [Lotte Felius](https://www.linkedin.com/in/lottefelius/) ([DuckDB Labs](https://duckdblabs.com/))                                                     |
-| 16:50 | _Break_                                        |                                                                                                                                                       |
-| 17:10 | DuckPL: A procedural language in DuckDB        | [Denis Hirn](https://www.linkedin.com/in/denis-hirn-3a3a74370/) ([Database Systems Group at University of Tübingen](https://db.cs.uni-tuebingen.de/)) |
-| 17:35 | GizmoEdge: A distributed DuckDB engine for IoT | [Philip Moore](https://www.linkedin.com/in/philip-moore-62a10b7/) ([GizmoData](https://gizmodata.com/))                                               |
-| 18:00 | _Drinks and snacks_                            |                                                                                                                                                       |
-| 19:30 | _End of event_                                 |                                                                                                                                                       |
+|  Time | Title                                                             | Presenter                                                                                                                                             |
+| ----: | :---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  9:30 | [Extension Development Workshop](#extension-development-workshop) | [Rusty Conover](https://rustyconover.work/) ([Query.Farm](https://query.farm/))                                                                       |
+| 12:00 | _Workshop ends_                                                   |                                                                                                                                                       |
+| 15:30 | _Venue opens for the dev meeting_                                 |                                                                                                                                                       |
+| 16:00 | Extension building in DuckDB                                      | [Sam Ansmink](https://www.linkedin.com/in/sam-ansmink-5a2b9093/) ([DuckDB Labs](https://duckdblabs.com/))                                             |
+| 16:25 | Storage and encryption in DuckDB                                  | [Lotte Felius](https://www.linkedin.com/in/lottefelius/) ([DuckDB Labs](https://duckdblabs.com/))                                                     |
+| 16:50 | _Break_                                                           |                                                                                                                                                       |
+| 17:10 | DuckPL: A procedural language in DuckDB                           | [Denis Hirn](https://www.linkedin.com/in/denis-hirn-3a3a74370/) ([Database Systems Group at University of Tübingen](https://db.cs.uni-tuebingen.de/)) |
+| 17:35 | GizmoEdge: A distributed DuckDB engine for IoT                    | [Philip Moore](https://www.linkedin.com/in/philip-moore-62a10b7/) ([GizmoData](https://gizmodata.com/))                                               |
+| 18:00 | _Drinks and snacks_                                               |                                                                                                                                                       |
+| 19:30 | _End of event_                                                    |                                                                                                                                                       |
 
 ## Extension Development Workshop
 
-In the morning between 9:30 and 12:00, [Rusty Conover](https://rustyconover.work/) will hold a workshop on DuckDB extension development.
-Note that you have to **register for this event separately**. Please visit [Luma](https://luma.com/3p3ml9f5) to see the detailed program and to register.
+DuckDB community member [Rusty Conover](https://rustyconover.work/) will hold a workshop on DuckDB extension development.
+
+Please note that you have to **register for this event separately**. To do so, visit [Luma](https://luma.com/3p3ml9f5) to see the detailed program and to register.
+
+The workshop will focus on a presentation explaining the details of DuckDB extension development and will have little time for hands-on work. Check the event site for more details.
 
 ## Accessing the Venue
 
@@ -67,10 +70,11 @@ If you experience any incidents, please let us know at <quack@duckdb.org>.
 ## Events Nearby
 
 The [FOSDEM 2026 conference in Brussels](https://fosdem.org/2026/) is happening on the weekend after the DuckDB Developer Meeting, so you can conveniently travel there.
-Two railway companies operate direct services between Amsterdam and Brussels.
-The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation and is generally cheaper.
-The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation and and a slightly more premium pricing.
-Both train services run about once per hour on Friday evenings.
+Two railway companies operate direct services between Amsterdam and Brussels, and both train services run about once per hour on Friday evenings. **However, keep an eye on [news about the strike in Belgium that may affect trains on Jan 30](https://www.nsinternational.com/en/overview-service/6WlA0hSzLkhwJraN7I1XRY):**
+
+* The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation and is generally cheaper.
+* The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation and and a slightly more premium pricing.
+
 ## Inquiries
 
 Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.

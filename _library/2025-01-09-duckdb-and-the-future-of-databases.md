@@ -9,6 +9,8 @@ length: "60 min"
 thirdparty: false
 excerpt: ""
 pill: "Posit – Data Science Hangout"
+redirect_from:
+- /media/duckdb-and-the-future-of-databases
 ---
 
 <div class="video-container">

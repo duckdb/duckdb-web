@@ -323,18 +323,18 @@ On my laptop, a 2020 MacBook Pro, some smaller queries will fit in memory, like 
 
 The following table is a summary of the hardware used.
 
-| Specs       | `c6id.metal` | Laptop |  Ratio |
-|:------------|-------------:|-------:|-------:|
-| Memory      |       256 GB |  16 GB |    16× |
-| CPU cores   |           64 |      8 |     8× |
-| CPU threads |          128 |      8 |    16× |
-| Hourly cost |        $6.45 |  $0.00 |    NaN |
+| Specs       | `c6id.metal` | Laptop | Ratio |
+| :---------- | -----------: | -----: | ----: |
+| Memory      |       256 GB |  16 GB |   16× |
+| CPU cores   |           64 |      8 |    8× |
+| CPU threads |          128 |      8 |   16× |
+| Hourly cost |        $6.45 |  $0.00 |   NaN |
 
 Although the CPU cores of the AWS EC2 instance are not directly comparable with those of my laptop, the instance clearly has much more compute power and memory available.
 Despite the large differences in hardware, DuckDB can complete all 10 queries without a problem:
 
 | Query | `c6id.metal` | Laptop |  Ratio |
-|------:|-------------:|-------:|-------:|
+| ----: | -----------: | -----: | -----: |
 |     1 |         0.08 |   0.74 |  9.25× |
 |     2 |         0.09 |   0.76 |  8.44× |
 |     3 |         8.01 | 156.63 | 19.55× |

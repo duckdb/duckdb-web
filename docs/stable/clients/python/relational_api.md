@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/python/relational_api
-- /docs/api/python/relational_api/
 - /docs/clients/python/relational_api
 
 title: Relational API
@@ -2729,7 +2728,17 @@ rel.show()
 
 ## Functions 
 
-This section contains the functions which can be applied to a relation,         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
+This section contains the functions which can be applied to a relation to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
+
+> Warning These functions may take arbitrary expressions as arguments, also when the parameter is named `column`.
+> Make sure to properly validate and escape input.
+> ```python
+> import duckdb
+> 
+> with duckdb.connect() as con:
+>     rel = con.sql('select 1')
+>     rel.max("(select t from read_text('/etc/hostname') as t)")
+> ```
 
 | Name | Description |
 |:--|:-------|

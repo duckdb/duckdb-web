@@ -2,53 +2,59 @@
 layout: default
 title: DuckDB Foundation
 subtitle: An In-Process Analytical Database
-description: The independent non-profit DuckDB Foundation safeguards the long-term maintenance and development of DuckDB. 
-body_class: foundation nowrap
+description: The independent non-profit DuckDB Foundation safeguards the long-term maintenance and development of DuckDB.
+body_class: foundation contactform
+max_page_width: small
+toc: false
 ---
 
 <section class="form">
 	<div class="wrap">
-		<h1>Support</h1>
-	</div>
-	<div class="wrap">
-		<div class="formwrap {{ product.name }}">
-		<form id="ajaxForm" action="https://formspree.io/f/mvgborpa" method="POST">
-    <input type="text" name="_gotcha" style="display:none" />
-			<div class="group halfsize">
-				<input type="text" name="firstname" required="required" placeholder=" " /><span class="highlight"></span><span class="bar"></span>
-				<label>First Name*</label>
+		<div class="maincolumn">
+			<h1>Apply to the Foundation</h1>
+			<div class="formwrap {{ product.name }}">
+				<form id="ajaxForm" action="https://formspree.io/f/mvgborpa" method="POST">
+					<input type="text" name="_gotcha" style="display:none" />
+					<div class="group halfsize">
+						<input type="text" name="firstname" required="required" />
+						<label>First Name <span class="req">*</span></label>
+					</div>
+					<div class="group halfsize">
+						<input type="text" name="lastname" required="required" />
+						<label>Last Name <span class="req">*</span></label>
+					</div>
+					<div class="group">
+						<input type="text" name="email" required="required" />
+						<label>Email <span class="req">*</span></label>
+					</div>
+					<div class="group">
+						<input type="text" name="organization" />
+						<label>Organization</label>
+					</div>
+					<div class="group custom-select">
+						<span class="select-label">Membership</span>
+						<div class="select-wrapper">
+							<select class="select-text" name="membership" required>
+								<option value="" disabled selected>Select membership level</option>
+								<option value="silver">Silver</option>
+								<option value="gold">Gold</option>
+							</select>
+							<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+						</div>
+					</div>
+					<div class="group">
+						<textarea name="message" rows="5"></textarea>
+						<label>Your message to us</label>
+					</div>
+					<input type="hidden" name="subscribe" value="no">
+					<button type="submit">Send</button>
+					<div class="legal">By submitting this form, you agree that DuckDB may contact you regarding your request.</div>
+					<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+					<div class="success">
+						<div>Thanks for contacting us! We will get in touch with you shortly.</div>
+					</div>
+				</form>
 			</div>
-			<div class="group halfsize">
-				<input type="text" name="lastname" required="required" placeholder=" " /><span class="highlight"></span><span class="bar"></span>
-				<label>Last Name*</label>
-			</div>
-			<div class="group">
-				<input type="text" name="email" required="required" /><span class="highlight"></span><span class="bar"></span>
-				<label>Email*</label>
-			</div>
-			<div class="group select">
-				<select class="select-text" name="membership" required>
-					<option value="" disabled selected></option>
-					<option value="silver">Silver</option>
-					<option value="gold">Gold</option>
-				</select>
-				<span class="select-highlight"></span>
-				<span class="select-bar"></span>
-				<label class="select-label">Membership</label>
-			</div>
-			<div class="group">
-				<textarea type="textarea" name="message" rows="5" placeholder=" "></textarea><span class="highlight"></span><span class="bar"></span>
-				<label>Your message to us</label>
-			</div>
-			<!-- checkbox handle --> 
-			<!--<input type="checkbox" name="subscribe" value="yes" checked>-->
-			<input type="hidden" name="subscribe" value="no">
-			<button type="submit">Send <span></span></button>
-			<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-			<div class="success">
-				<div>Thanks for contacting us! We will get in touch with you shortly.</div>
-			</div>
-		</form>
 		</div>
 	</div>
 </section>

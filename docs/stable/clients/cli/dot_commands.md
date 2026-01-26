@@ -2,9 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/api/cli/dot-commands
-- /docs/api/cli/dot-commands/
 - /docs/api/cli/dot_commands
-- /docs/api/cli/dot_commands/
 - /docs/clients/cli/dot_commands
 title: Dot Commands
 ---
@@ -31,7 +29,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.help ⟨-all⟩ ⟨PATTERN⟩`{:.language-sql .highlight}                   | Show help text for `PATTERN`                                                                                                                                                |
 | `.highlight ⟨on/off⟩`{:.language-sql .highlight}                      | Toggle syntax highlighting in the shell `on` / `off`. See the [query syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details               |
 | `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`{:.language-sql .highlight}    | Configure the color of each component in (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details           |
-| `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntaxx highlighting section](#configuring-the-query-syntax-highlighter) for more details |
+| `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details |
 | `.import ⟨FILE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                   | Import data from `FILE` into `TABLE`                                                                                                                                        |
 | `.indexes ⟨TABLE⟩`{:.language-sql .highlight}                         | Show names of indexes                                                                                                                                                       |
 | `.keyword ⟨COLOR⟩`{:.language-sql .highlight}                         | Sets the syntax highlighting color used for keywords                                                                                                                        |
@@ -294,9 +292,9 @@ For example:
 
 By default, the result highlighting makes a few small modifications:
 
-- Bold column names
-- `NULL` values are greyed out
-- Layout elements are grayed out
+* Bold column names.
+* `NULL` values are greyed out.
+* Layout elements are grayed out.
 
 The highlighting of each of the components can be customized using the `.highlight_colors` command.
 For example:

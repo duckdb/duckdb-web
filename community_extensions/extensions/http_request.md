@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: http_request
   description: HTTP client extension for DuckDB with GET/POST/PUT/PATCH/DELETE and byte-range requests
-  version: 0.6.0
+  version: 0.8.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb_http_request
-  ref: fe4e6fc3e2eaecd409a396477927d1f181562e9f
+  ref: e55035fe799fc7173fa8b3706e1d88c866a048d3
 
 docs:
   hello_world: |
@@ -61,13 +61,15 @@ docs:
     - Global User-Agent override via http_user_agent setting
     - Request caching to prevent duplicate requests (http_request_cache setting)
     - Headers support both STRUCT and MAP syntax
+    - Redirect control via http_follow_redirects setting (default: true)
+    - HTTP_HEADERS type with case-insensitive [] access (headers['Content-Type'] = headers['content-type'])
 
     Uses DuckDB's built-in httplib for HTTP connections.
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 558
-extension_download_count_pretty: 558
+extension_download_count: 481
+extension_download_count_pretty: 481
 image: '/images/community_extensions/social_preview/preview_community_extension_http_request.png'
 layout: community_extension_doc
 ---
@@ -114,14 +116,31 @@ LOAD {{ page.extension.name }};
 | http_put            | table         | NULL        | NULL    |          |
 | http_range_header   | scalar        | NULL        | NULL    |          |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+|   function_name   | function_type |                                                                                              description                                                                                               | comment |                     examples                      |
+|-------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------|
+| map_extract_value | scalar        | Returns the value for a given key or NULL if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map’s keys else an error is returned | NULL    | [map_extract_value(map(['key'], ['val']), 'key')] |
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+|  type_name   | type_size | logical_type | type_category | internal |
+|--------------|----------:|--------------|---------------|---------:|
+| HTTP_HEADERS | 16        | MAP          | COMPOSITE     | true     |
+
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|         name         |                                    description                                    | input_type | scope  | aliases |
-|----------------------|-----------------------------------------------------------------------------------|------------|--------|---------|
-| http_max_concurrency | Maximum number of concurrent HTTP requests per scalar function call (default: 32) | UBIGINT    | GLOBAL | []      |
-| http_request_cache   | Cache HTTP responses within query to prevent duplicate requests (default: true)   | BOOLEAN    | GLOBAL | []      |
-| http_user_agent      | Custom User-Agent header for all HTTP requests (default: DuckDB)                  | VARCHAR    | GLOBAL | []      |
+|         name          |                                    description                                    | input_type | scope  | aliases |
+|-----------------------|-----------------------------------------------------------------------------------|------------|--------|---------|
+| http_follow_redirects | Automatically follow HTTP redirects (default: true)                               | BOOLEAN    | GLOBAL | []      |
+| http_max_concurrency  | Maximum number of concurrent HTTP requests per scalar function call (default: 32) | UBIGINT    | GLOBAL | []      |
+| http_request_cache    | Cache HTTP responses within query to prevent duplicate requests (default: true)   | BOOLEAN    | GLOBAL | []      |
+| http_user_agent       | Custom User-Agent header for all HTTP requests (default: DuckDB)                  | VARCHAR    | GLOBAL | []      |
 
 

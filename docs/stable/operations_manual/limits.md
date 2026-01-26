@@ -24,4 +24,4 @@ To check the value of a setting on your system, use the `current_setting` functi
 
 DuckDB doesn't have a practical limit for the size of a single DuckDB database file.
 We have database files using 15 TB+ of disk space and they work fine.
-However, connecting to such a huge database may take a few seconds, and [checkpointing]({% link docs/stable/sql/statements/checkpoint.md %}) can be slower.
+However, connecting to such a huge database may take a few seconds and [checkpointing]({% link docs/stable/sql/statements/checkpoint.md %}) can be slower.

@@ -59,8 +59,8 @@ This includes any publicly available sheets like the one below, so give it a run
 FROM 'https://docs.google.com/spreadsheets/d/1B4RFuOnZ4ITZ-nR9givZ7vWVOTVddC3VTKuSqgifiyE/edit?gid=0#gid=0';
 ```
 
-|                 Gotham Wisdom                  |
-|------------------------------------------------|
+| Gotham Wisdom                                  |
+| ---------------------------------------------- |
 | You either die a hero                          |
 | or live long enough to query from spreadsheets |
 

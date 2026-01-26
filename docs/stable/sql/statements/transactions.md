@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
- - /docs/sql/statements/transactions
+  - /docs/sql/statements/transactions
 title: Transaction Management
 ---
 
@@ -50,7 +50,11 @@ ABORT;
 
 If you are not in an active transaction, the `ROLLBACK` and `ABORT` statements will fail.
 
-### Example
+## Isolation Level
+
+DuckDB's concurrency model guarantees snapshot isolation. Transactions that violate this isolation level are aborted.
+
+## Example
 
 We illustrate the use of transactions through a simple example.
 

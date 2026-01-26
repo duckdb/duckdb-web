@@ -17,7 +17,6 @@ DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "stable")
 redirect_from_text = """\
 redirect_from:
 - /docs/api/python/reference/index
-- /docs/api/python/reference/index/
 - /docs/clients/python/reference/index
 """
 

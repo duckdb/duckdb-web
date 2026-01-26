@@ -113,10 +113,10 @@ repo:
   github: quackscience/duckdb-extension-redis
   ref: 52d4e50c2fce74de9e9c90b15316a63350614495
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 493
-extension_download_count_pretty: 493
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 490
+extension_download_count_pretty: 490
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'
 layout: community_extension_doc
 ---

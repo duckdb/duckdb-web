@@ -4,7 +4,11 @@ blurb: The FROM clause can contain a single table, a combination of multiple tab
 layout: docu
 railroad: query_syntax/from.js
 redirect_from:
- - /docs/sql/query_syntax/from
+- /docs/sql/query_syntax/from
+- /cal/4
+- /cal/04
+- /cal/6
+- /cal/06
 title: FROM and JOIN Clauses
 ---
 
@@ -462,7 +466,7 @@ POSITIONAL JOIN t2;
 | 2 | b    |
 | 3 | NULL |
 
-Positional joins are always `FULL OUTER` joins, i.e., missing values (the last values in the shorter column) are set to `NULL`.
+Positional joins are always `FULL OUTER` joins, i.e., the resulting table has the length of the longer input table and the missing entries are filled with `NULL` values.
 
 ### As-Of Joins
 

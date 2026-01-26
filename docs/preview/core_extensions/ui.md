@@ -34,7 +34,7 @@ Running either of these will open the UI in your default browser.
 The UI connects to the DuckDB instance it was started from,
 so any data you’ve already loaded will be available.
 Since this instance is a native process (not Wasm), it can leverage all
-the resources of your local environment: all cores, memory, and files.
+the resources of your local environment: all cores, memory and files.
 Closing this instance will cause the UI to stop working.
 
 The UI is served from an HTTP server embedded in DuckDB.

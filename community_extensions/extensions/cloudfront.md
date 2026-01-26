@@ -21,10 +21,10 @@ repo:
   github: midwork-finds-jobs/duckdb-cloudfront
   ref: e6b2ff5e933c296ffbe1cb7403cac688f8e41e97
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 473
-extension_download_count_pretty: 473
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 471
+extension_download_count_pretty: 471
 image: '/images/community_extensions/social_preview/preview_community_extension_cloudfront.png'
 layout: community_extension_doc
 ---

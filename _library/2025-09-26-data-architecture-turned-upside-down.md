@@ -9,6 +9,8 @@ length: "40 min"
 thirdparty: false
 excerpt: ""
 pill: "PyData 2025"
+redirect_from:
+- /media/data-architecture-turned-upside-down
 ---
 
 <div class="video-container">

@@ -1964,8 +1964,9 @@ function GenerateStarClause(options) {
 					Sequence(GenerateStarExpression(options, "-2")),
 					Expression("regex"),
 					Sequence([
+						Keyword("lambda"),
 						Expression("c"),
-						Keyword("->"),
+						Keyword(":"),
 						Expression("lambda-filter")
 					])
 				]),

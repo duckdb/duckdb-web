@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: boilstream
   description: Secure remote secrets storage with OPAQUE PAKE authentication, email/password registration, MFA login, and automatic ducklake mounting
-  version: 0.4.0
+  version: 0.5.0
   language: C++, Rust
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dforsber/boilstream-extension
-  ref: 980fb47f9276c04c1aec04868f79974921e7488d
+  ref: 45b114434ec04ffcfc2a3b0231dd9895d08336f0
 
 docs:
   hello_world: |
@@ -95,6 +95,7 @@ docs:
     - `PRAGMA boilstream_bootstrap_session(url_with_token)` - Authenticate with bootstrap token
     - `boilstream_ducklakes()` - List available ducklakes
     - `boilstream_secrets()` - List cached secrets with expiration
+    - `boilstream_buckets()` - List available storage buckets
     - `PRAGMA boilstream_create_ducklake(name, description)` - Create new ducklake
     - `PRAGMA boilstream_help` - Show all available commands
 
@@ -106,10 +107,10 @@ docs:
 
     For detailed documentation, security specification, and setup instructions, visit the [extension repository](https://github.com/dforsber/boilstream-extension).
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 471
-extension_download_count_pretty: 471
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 476
+extension_download_count_pretty: 476
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---
@@ -138,6 +139,7 @@ LOAD {{ page.extension.name }};
 |          function_name           | function_type | description | comment | examples |
 |----------------------------------|---------------|-------------|---------|----------|
 | boilstream_bootstrap_session     | pragma        | NULL        | NULL    |          |
+| boilstream_buckets               | table         | NULL        | NULL    |          |
 | boilstream_create_ducklake       | pragma        | NULL        | NULL    |          |
 | boilstream_ducklakes             | table         | NULL        | NULL    |          |
 | boilstream_help                  | pragma        | NULL        | NULL    |          |

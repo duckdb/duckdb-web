@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Analyzing Railway Traffic in the Netherlands"
-author: Gabor Szarnyas
+author: Gábor Szárnyas
 thumb: "/images/blog/thumbs/railways.svg"
 image: "/images/blog/thumbs/railways.png"
 excerpt: "We use a real-world railway dataset to demonstrate some of DuckDB's key features, including querying different file formats, connecting to remote endpoints, and using advanced SQL features."
@@ -59,8 +59,8 @@ FROM services;
 ```
 
 | num_services |
-|-------------:|
-| 21,239,393   |
+| -----------: |
+|   21,239,393 |
 
 We can see that more than 21&nbsp;million train services ran in the Netherlands in 2023.
 
@@ -110,14 +110,14 @@ WHERE month <= 6
 GROUP BY ALL;
 ```
 
-| month |      station       | num_services |
-|------:|--------------------|-------------:|
-| 1     | Utrecht Centraal   | 34760        |
-| 2     | Utrecht Centraal   | 32300        |
-| 3     | Utrecht Centraal   | 37386        |
-| 4     | Amsterdam Centraal | 33426        |
-| 5     | Utrecht Centraal   | 35383        |
-| 6     | Utrecht Centraal   | 35632        |
+| month | station            | num_services |
+| ----: | ------------------ | -----------: |
+|     1 | Utrecht Centraal   |        34760 |
+|     2 | Utrecht Centraal   |        32300 |
+|     3 | Utrecht Centraal   |        37386 |
+|     4 | Amsterdam Centraal |        33426 |
+|     5 | Utrecht Centraal   |        35383 |
+|     6 | Utrecht Centraal   |        35632 |
 
 Maybe surprisingly, in most months, the busiest railway station is not in Amsterdam but in the country's 4th largest city, [Utrecht](https://en.wikipedia.org/wiki/Utrecht), thanks to its central geographic location.
 
@@ -151,11 +151,11 @@ ORDER BY month;
 
 This gives the following result:
 
-| month | month_name |                        top3_stations                         |
-|------:|------------|--------------------------------------------------------------|
-| 6     | June       | [Utrecht Centraal, Amsterdam Centraal, Schiphol Airport]     |
-| 7     | July       | [Utrecht Centraal, Amsterdam Centraal, Schiphol Airport]     |
-| 8     | August     | [Utrecht Centraal, Amsterdam Centraal, Amsterdam Sloterdijk] |
+| month | month_name | top3_stations                                                |
+| ----: | ---------- | ------------------------------------------------------------ |
+|     6 | June       | [Utrecht Centraal, Amsterdam Centraal, Schiphol Airport]     |
+|     7 | July       | [Utrecht Centraal, Amsterdam Centraal, Schiphol Airport]     |
+|     8 | August     | [Utrecht Centraal, Amsterdam Centraal, Amsterdam Sloterdijk] |
 
 We can see that the top 3 spots are shared between four stations: Utrecht Centraal, Amsterdam Centraal, Schiphol Airport, and Amsterdam Sloterdijk.
 
@@ -189,7 +189,7 @@ LIMIT 3;
 It returns the following result:
 
 | Service:Date | Stop:Station name  |
-|--------------|--------------------|
+| ------------ | ------------------ |
 | 2023-01-01   | Rotterdam Centraal |
 | 2023-01-01   | Delft              |
 | 2023-01-01   | Den Haag HS        |
@@ -255,13 +255,13 @@ FROM stations
 LIMIT 5;
 ```
 
-| id  | name_short |       name_long       | country | latitude | longitude |
-|----:|------------|-----------------------|---------|---------:|----------:|
-| 266 | Den Bosch  | 's-Hertogenbosch      | NL      | 51.69    | 5.29      |
-| 269 | Dn Bosch O | 's-Hertogenbosch Oost | NL      | 51.70    | 5.32      |
-| 227 | 't Harde   | 't Harde              | NL      | 52.41    | 5.89      |
-| 8   | Aachen     | Aachen Hbf            | D       | 50.77    | 6.09      |
-| 818 | Aachen W   | Aachen West           | D       | 50.78    | 6.07      |
+|   id | name_short | name_long             | country | latitude | longitude |
+| ---: | ---------- | --------------------- | ------- | -------: | --------: |
+|  266 | Den Bosch  | 's-Hertogenbosch      | NL      |    51.69 |      5.29 |
+|  269 | Dn Bosch O | 's-Hertogenbosch Oost | NL      |    51.70 |      5.32 |
+|  227 | 't Harde   | 't Harde              | NL      |    52.41 |      5.89 |
+|    8 | Aachen     | Aachen Hbf            | D       |    50.77 |      6.09 |
+|  818 | Aachen W   | Aachen West           | D       |    50.78 |      6.07 |
 
 The second dataset, [`tariff-distances-2022-01.csv`](https://blobs.duckdb.org/data/tariff-distances-2022-01.csv), contains the [station distances](https://www.rijdendetreinen.nl/en/open-data/station-distances). The distances are defined as the shortest route on the railway network and they are used to calculate the tariffs for ticket.
 Let's peek into this file:
@@ -310,7 +310,7 @@ LIMIT 5;
 ```
 
 | column_name | column_type | null | key  | default | extra |
-|-------------|-------------|------|------|---------|-------|
+| ----------- | ----------- | ---- | ---- | ------- | ----- |
 | Station     | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | AC          | BIGINT      | YES  | NULL | NULL    | NULL  |
 | AH          | BIGINT      | YES  | NULL | NULL    | NULL  |
@@ -325,16 +325,16 @@ FROM distances
 LIMIT 8;
 ```
 
-| Station |  AC  |  AH  | AHP  | AHPR | AHZ  | AKL  | AKM  | ALM  |
-|---------|------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
-| AC      | NULL | 82   | 83   | 85   | 90   | 71   | 188  | 32   |
-| AH      | 82   | NULL | 1    | 3    | 8    | 77   | 153  | 98   |
-| AHP     | 83   | 1    | NULL | 2    | 9    | 78   | 152  | 99   |
-| AHPR    | 85   | 3    | 2    | NULL | 11   | 80   | 150  | 101  |
-| AHZ     | 90   | 8    | 9    | 11   | NULL | 69   | 161  | 106  |
-| AKL     | 71   | 77   | 78   | 80   | 69   | NULL | 211  | 96   |
-| AKM     | 188  | 153  | 152  | 150  | 161  | 211  | NULL | 158  |
-| ALM     | 32   | 98   | 99   | 101  | 106  | 96   | 158  | NULL |
+| Station | AC   |   AH |  AHP | AHPR |  AHZ |  AKL |  AKM |  ALM |
+| ------- | ---- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| AC      | NULL |   82 |   83 |   85 |   90 |   71 |  188 |   32 |
+| AH      | 82   | NULL |    1 |    3 |    8 |   77 |  153 |   98 |
+| AHP     | 83   |    1 | NULL |    2 |    9 |   78 |  152 |   99 |
+| AHPR    | 85   |    3 |    2 | NULL |   11 |   80 |  150 |  101 |
+| AHZ     | 90   |    8 |    9 |   11 | NULL |   69 |  161 |  106 |
+| AKL     | 71   |   77 |   78 |   80 |   69 | NULL |  211 |   96 |
+| AKM     | 188  |  153 |  152 |  150 |  161 |  211 | NULL |  158 |
+| ALM     | 32   |   98 |   99 |  101 |  106 |   96 |  158 | NULL |
 
 We can see that the data was loaded correctly but the wide table format is a bit unwieldy for further processing:
 to query for pairs of stations, we need to first turn it into a long table using the [`UNPIVOT`]({% link docs/stable/sql/statements/unpivot.md %}) statement.
@@ -368,10 +368,10 @@ LIMIT 3;
 ```
 
 | Station | other_station | distance |
-|---------|---------------|---------:|
-| AC      | AH            | 82       |
-| AC      | AHP           | 83       |
-| AC      | AHPR          | 85       |
+| ------- | ------------- | -------: |
+| AC      | AH            |       82 |
+| AC      | AHP           |       83 |
+| AC      | AHPR          |       85 |
 
 Now we can join the `distances_long` table on the `stations` table along both the start and end stations,
 then filter for stations which are located in the Netherlands.
@@ -395,11 +395,11 @@ LIMIT 3;
 
 The results show that there are pairs of train stations, which are at least 425 km away – quite the distance for such a small country!
 
-|     station1     |      station2      | distance |
-|------------------|--------------------|---------:|
-| Eemshaven        | Vlissingen         | 426      |
-| Eemshaven        | Vlissingen Souburg | 425      |
-| Bad Nieuweschans | Vlissingen         | 425      |
+| station1         | station2           | distance |
+| ---------------- | ------------------ | -------: |
+| Eemshaven        | Vlissingen         |      426 |
+| Eemshaven        | Vlissingen Souburg |      425 |
+| Bad Nieuweschans | Vlissingen         |      425 |
 
 ## Conclusion
 

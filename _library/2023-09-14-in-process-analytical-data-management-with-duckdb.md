@@ -9,6 +9,8 @@ length: "20 min"
 thirdparty: false
 excerpt: ""
 pill: "PyData 2023"
+redirect_from:
+- /media/in-process-analytical-data-management-with-duckdb
 ---
 
 <div class="video-container">
