@@ -31,7 +31,7 @@ If your application must execute SQL from untrusted sources, use additional safe
 
 The settings described on this page provide **defense-in-depth** and can limit certain capabilities, but they are not a substitute for proper sandboxing.
 
-### Untrusted non-SQL Input
+### Untrusted Non-SQL Input
 
 > Warning Even non-SQL input into DuckDB can easily have unintended consequences. When building security-sensitive applications with DuckDB, always make sure you properly understand the impact of feeding untrusted input into DuckDB.
 
@@ -94,7 +94,7 @@ duckdb -safe ...
 .safe_mode
 ```
 
-## Settings to limit DuckDB's capabilities
+## Settings to Limit DuckDB's Capabilities
 
 The settings documented in this section provide additional hardening for DuckDB deployments. However, they should not be
 relied upon as comprehensive security mechanisms in all configurations. These settings are designed as defense-in-depth
