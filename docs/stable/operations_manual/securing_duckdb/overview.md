@@ -57,7 +57,7 @@ DuckDB has a flexible [extension mechanism]({% link docs/stable/extensions/overv
 
 ### Autoloading
 
-DuckDB can automatically load [core extensions]({% link docs/stable/extensions/core_extensions.md %}) when certain SQL statements require them. To maintain full control over which extensions are loaded, you can disable autoloading:
+DuckDB can automatically load [core extensions]({% link docs/stable/core_extensions/overview.md %}) when certain SQL statements require them. To maintain full control over which extensions are loaded, you can disable autoloading:
 
 ```sql
 SET autoload_known_extensions = false;
