@@ -42,11 +42,12 @@ Attendance is free but please [reserve a spot on Eventbrite](https://www.eventbr
 
 ## Extension Development Workshop
 
-DuckDB community member [Rusty Conover](https://rustyconover.work/) will hold a workshop on DuckDB extension development.
+DuckDB community member [Rusty Conover](https://rustyconover.work/) will hold a workshop on DuckDB extension development. The workshop will focus on a presentation explaining the details of DuckDB extension development and will have little time for hands-on work. Check the [event's site](https://luma.com/3p3ml9f5) for more details.
 
-Please note that you have to **register for this event separately**. To do so, visit [Luma](https://luma.com/3p3ml9f5) to see the detailed program and to register.
+Note that you have to **register for this event separately**. To do so, visit [Luma](https://luma.com/3p3ml9f5) to register.
 
-The workshop will focus on a presentation explaining the details of DuckDB extension development and will have little time for hands-on work. Check the event site for more details.
+Please note that lunch is not included as part of the workshop and the Pakhuis' cafe has limited space available. The nearby Czar Peterstraat and the Amsterdam-Oost borough have [many nice restaurants](https://www.google.com/maps/search/Restaurants/@52.3705416,4.9262679,15.03z/data=!4m7!2m6!3m5!2sCzaar+Peterstraat!3s0x47c6090c0b3fb7b3:0x2508a98590df9129!4m2!1d4.9290601!2d52.3698179?entry=ttu&g_ep=EgoyMDI2MDEyMS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D).
+
 
 ## Accessing the Venue
 
