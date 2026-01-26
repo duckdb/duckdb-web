@@ -23,13 +23,16 @@ Just as you wouldn't run an untrusted shell script or Python program without san
 
 If your application must execute SQL from untrusted sources, use additional safeguards when running untrusted code such as:
 
+* Use [duckdb-wasm](https://github.com/duckdb/duckdb-wasm) for sandboxing
 * Run DuckDB in an isolated container (e.g., Docker with restricted capabilities)
 * Use a virtual machine or separate process with minimal privileges
 * Apply operating system-level sandboxing
 * Use network isolation to prevent data exfiltration
 * Implement strict query timeouts at the application level
 
-The settings described on this page provide **defense-in-depth** and can limit certain capabilities, but they are not a substitute for proper sandboxing.
+The settings described on this page provide **defense-in-depth** and can limit certain capabilities, but they are not a substitute for proper sandboxing. Also keep in mind that
+sandboxing should not just be considered for security purposes, but also for preventing denial of service (DoS) attacks: malicious inputs can easily cause DuckDB to consume excessive resources such 
+as memory, disk, CPU, or network.
 
 ### Untrusted non-SQL Input
 
@@ -43,7 +46,7 @@ These APIs accept user input such as file paths, table names, column names, and 
 
 * **File paths:** Functions like `duckdb.read_csv(path)` or `duckdb.read_parquet(path)` accept file paths. An attacker-controlled path could read sensitive files (e.g., `/etc/passwd`) or access remote URLs.
 * **Table and column names:** While these are typically identifiers rather than executable code, unsanitized input could lead to unexpected behavior or information disclosure.
-* **Filter expressions:** Some APIs accept filter expressions that are compiled into DuckDB queries. Treat these with the same caution as SQL.
+* **Filter expressions:** Some APIs accept filter expressions that are compiled into DuckDB expressions, which often support subqueries containing arbitrary SQL. Treat these with the same caution as SQL.
 
 **Recommendations:**
 
@@ -81,7 +84,16 @@ SET allow_community_extensions = false;
 
 If you discover a potential vulnerability, please [report it confidentially via GitHub](https://github.com/duckdb/duckdb/security/advisories/new).
 
-## Safe Mode (CLI)
+## Settings to limit DuckDB's capabilities
+
+The settings documented in this section provide additional hardening for DuckDB deployments. However, they should not be
+relied upon as comprehensive security mechanisms in all configurations. These settings are designed as defense-in-depth
+measures to limit the impact of potential security issues, but they cannot provide complete protection against all
+attack vectors, especially when executing untrusted SQL. For robust security when dealing with untrusted input, combine
+these settings with proper sandboxing at the operating system or container level, as described in
+the ["Untrusted SQL Input"](#untrusted-sql-input) section.
+
+### Safe Mode (CLI)
 
 DuckDB's CLI client supports [“safe mode”]({% link docs/stable/clients/cli/safe_mode.md %}), which prevents DuckDB from accessing external files other than the database file.
 This can be activated via a command line argument or a [dot command]({% link docs/stable/clients/cli/dot_commands.md %}):
@@ -94,14 +106,6 @@ duckdb -safe ...
 .safe_mode
 ```
 
-## Settings to limit DuckDB's capabilities
-
-The settings documented in this section provide additional hardening for DuckDB deployments. However, they should not be
-relied upon as comprehensive security mechanisms in all configurations. These settings are designed as defense-in-depth
-measures to limit the impact of potential security issues, but they cannot provide complete protection against all
-attack vectors, especially when executing untrusted SQL. For robust security when dealing with untrusted input, combine
-these settings with proper sandboxing at the operating system or container level, as described in
-the ["Untrusted SQL Input"](#untrusted-sql-input) section.
 
 ### Restricting File Access
 
@@ -200,7 +204,7 @@ duckdb.execute("SELECT * FROM (VALUES (32, 'a'), (42, 'b')) t(x) WHERE x = ?", [
 
 ## Constrain Resource Usage
 
-DuckDB can use quite a lot of CPU, RAM and disk space. To avoid denial of service attacks, these resources can be limited.
+DuckDB can use quite a lot of CPU, RAM, and disk space. These resources can be limited to control the usage of the DuckDB instance.
 
 The number of CPU threads that DuckDB can use can be set using, for example:
 
