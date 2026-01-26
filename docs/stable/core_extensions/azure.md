@@ -112,8 +112,6 @@ COPY my_table
 TO 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/output.parquet';
 ```
 
-> Writing to Azure Data Lake Storage (ADLS) via `abfss://` paths is not yet supported. Only Azure Blob Storage (`az://` or `azure://`) paths support writes.
-
 ## Configuration
 
 Use the following [configuration options]({% link docs/stable/configuration/overview.md %}) how the extension reads remote files:
