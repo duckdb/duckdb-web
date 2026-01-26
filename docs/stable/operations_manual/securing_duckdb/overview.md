@@ -5,14 +5,16 @@ redirect_from:
 title: Securing DuckDB
 ---
 
-DuckDB is a powerful analytical database engine. It can read and write files, access the network via extensions, load custom extensions, 
-and efficiently utilize system resources. Like any powerful tool, these capabilities require appropriate configuration when 
+DuckDB is a powerful analytical database engine. It can read and write files, access the network, load extensions, 
+and use system resources. Like any powerful tool, these capabilities require appropriate configuration when 
 working with sensitive data or in shared environments.
 
 This page documents DuckDB's security model and security-related settings. The right configuration depends on your use case, environment, and threat model.
 If you plan to embed DuckDB in your application, also consult the ["Embedding DuckDB"]({% link docs/stable/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
 
-## Untrusted SQL Input
+## Untrusted Input
+
+### Untrusted SQL Input
 
 > Warning Treat SQL in DuckDB like code in Bash or Python. Do not execute SQL from untrusted sources without proper sandboxing.
 
@@ -28,6 +30,26 @@ If your application must execute SQL from untrusted sources, use additional safe
 * Implement strict query timeouts at the application level
 
 The settings described on this page provide **defense-in-depth** and can limit certain capabilities, but they are not a substitute for proper sandboxing.
+
+### Untrusted non-SQL Input
+
+> Warning Even non-SQL input into DuckDB can easily have unintended consequences. When building security-sensitive applications with DuckDB, always make sure you properly understand the impact of feeding untrusted input into DuckDB.
+
+Besides SQL, DuckDB also has several non-SQL APIs that can be used to interact with the database. For example, there is a [relational API]({% link docs/stable/clients/python/relational_api.md %}) in Python that allows building queries programmatically.
+
+These APIs accept user input such as file paths, table names, column names, and filter expressions. While they don't execute raw SQL strings, they still trigger DuckDB operations that can read files, access the network, and use system resources.
+
+**Example considerations for non-SQL APIs:**
+
+* **File paths:** Functions like `duckdb.read_csv(path)` or `duckdb.read_parquet(path)` accept file paths. An attacker-controlled path could read sensitive files (e.g., `/etc/passwd`) or access remote URLs.
+* **Table and column names:** While these are typically identifiers rather than executable code, unsanitized input could lead to unexpected behavior or information disclosure.
+* **Filter expressions:** Some APIs accept filter expressions that are compiled into DuckDB queries. Treat these with the same caution as SQL.
+
+**Recommendations:**
+
+* Validate and sanitize all user-provided inputs before passing them to DuckDB APIs.
+* Apply the same sandboxing principles as for untrusted SQL when accepting input from untrusted sources.
+* Properly read the documentation of all used functions to ensure you understand whether a function is safe to use with untrusted input under your specific use case.
 
 ## Extensions
 
