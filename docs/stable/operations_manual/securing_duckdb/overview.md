@@ -12,10 +12,6 @@ working with sensitive data or in shared environments.
 This page documents DuckDB's security model and security-related settings. The right configuration depends on your use case, environment, and threat model.
 If you plan to embed DuckDB in your application, also consult the ["Embedding DuckDB"]({% link docs/stable/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
 
-## Reading Unstrusted Files
-
-> Warning Treat SQL in DuckDB like code in Bash or Python. Do not execute SQL from untrusted sources without proper sandboxing.
-
 ## Untrusted SQL Input
 
 > Warning Treat SQL in DuckDB like code in Bash or Python. Do not execute SQL from untrusted sources without proper sandboxing.
@@ -23,7 +19,7 @@ If you plan to embed DuckDB in your application, also consult the ["Embedding Du
 DuckDB executes SQL with the full privileges of the user running it, much like a shell or scripting interpreter (such as bash or Python).
 Just as you wouldn't run an untrusted shell script or Python program without sandboxing, apply the same caution to SQL in DuckDB.
 
-If your application must execute SQL from untrusted sources, use additional safeguards when running untrusted code:
+If your application must execute SQL from untrusted sources, use additional safeguards when running untrusted code such as:
 
 * Run DuckDB in an isolated container (e.g., Docker with restricted capabilities)
 * Use a virtual machine or separate process with minimal privileges
@@ -76,7 +72,16 @@ duckdb -safe ...
 .safe_mode
 ```
 
-## Restricting File Access
+## Settings to limit DuckDB's capabilities
+
+The settings documented in this section provide additional hardening for DuckDB deployments. However, they should not be
+relied upon as comprehensive security mechanisms in all configurations. These settings are designed as defense-in-depth
+measures to limit the impact of potential security issues, but they cannot provide complete protection against all
+attack vectors, especially when executing untrusted SQL. For robust security when dealing with untrusted input, combine
+these settings with proper sandboxing at the operating system or container level, as described in
+the ["Untrusted SQL Input"](#untrusted-sql-input) section.
+
+### Restricting File Access
 
 DuckDB can list directories and read arbitrary files via its CSV parser’s [`read_csv` function]({% link docs/stable/data/csv/overview.md %}) or read text via the [`read_text` function]({% link docs/stable/sql/functions/text.md %}#read_textsource).
 This makes it possible to read from the local file system, for example:
@@ -86,7 +91,7 @@ SELECT *
 FROM read_csv('/etc/passwd', sep = ':');
 ```
 
-### Disabling File Access
+#### Disabling File Access
 
 Files access can be disabled in two ways. First, you can disable individual file systems. For example:
 
@@ -106,7 +111,7 @@ This setting implies that:
 * `COPY` cannot read from or write to files.
 * Functions such as `read_csv`, `read_parquet`, `read_json`, etc. cannot read from an external source.
 
-### The `allowed_directories` and `allowed_paths` Options
+#### The `allowed_directories` and `allowed_paths` Options
 
 You can restrict DuckDB's access to certain directories or files using the `allowed_directories` and `allowed_paths` options (respectively).
 These options allows fine-grained access control for the file system.
@@ -125,15 +130,7 @@ Permission Error:
 Cannot access file "test.csv" - file system operations are disabled by configuration
 ```
 
-## Secrets
-
-[Secrets]({% link docs/stable/configuration/secrets_manager.md %}) are used to manage credentials to log into third party services like AWS or Azure. DuckDB can show a list of secrets using the `duckdb_secrets()` table function. This will redact any sensitive information such as security keys by default. The `allow_unredacted_secrets` option can be set to show all information contained within a security key. It is recommended not to turn on this option if you are running untrusted SQL input.
-
-Queries can access the secrets defined in the Secrets Manager. For example, if there is a secret defined to authenticate with a user, who has write privileges to a given AWS S3 bucket, queries may write to that bucket. This is applicable for both persistent and temporary secrets.
-
-[Persistent secrets]({% link docs/stable/configuration/secrets_manager.md %}#persistent-secrets) are stored in unencrypted binary format on the disk. These have the same permissions as SSH keys, `600`, i.e., only user who is running the DuckDB (parent) process can read and write them.
-
-## Locking Configurations
+### Locking Configurations
 
 Security-related configuration settings generally lock themselves for safety reasons. For example, while we can disable [community extensions]({% link community_extensions/index.md %}) using the `SET allow_community_extensions = false`, we cannot re-enable them again after the fact without restarting the database. Trying to do so will result in an error:
 
@@ -141,15 +138,23 @@ Security-related configuration settings generally lock themselves for safety rea
 Invalid Input Error: Cannot upgrade allow_community_extensions setting while database is running
 ```
 
-This prevents untrusted SQL input from re-enabling settings that were explicitly disabled for security reasons.
+This prevents re-enabling settings that were explicitly disabled.
 
-Nevertheless, many configuration settings do not disable themselves, such as the resource constraints. If you allow users to run SQL statements unrestricted on your own hardware, it is recommended that you lock the configuration after your own configuration has finished using the following command:
+Nevertheless, many configuration settings do not disable themselves, such as the resource constraints. If you allow users to run SQL statements unrestricted on your own hardware, you might want to consider locking the configuration after your own configuration has finished using the following command:
 
 ```sql
 SET lock_configuration = true;
 ```
 
 This prevents any configuration settings from being modified from that point onwards.
+
+## Secrets
+
+[Secrets]({% link docs/stable/configuration/secrets_manager.md %}) are used to manage credentials to log into third party services like AWS or Azure. DuckDB can show a list of secrets using the `duckdb_secrets()` table function. This will redact any sensitive information such as security keys by default. The `allow_unredacted_secrets` option can be set to show all information contained within a security key. It is recommended not to turn on this option if you are running untrusted SQL input.
+
+Queries can access the secrets defined in the Secrets Manager. For example, if there is a secret defined to authenticate with a user, who has write privileges to a given AWS S3 bucket, queries may write to that bucket. This is applicable for both persistent and temporary secrets.
+
+[Persistent secrets]({% link docs/stable/configuration/secrets_manager.md %}#persistent-secrets) are stored in unencrypted binary format on the disk. These have the same permissions as SSH keys, `600`, i.e., only user who is running the DuckDB (parent) process can read and write them.
 
 ## Prepared Statements to Prevent SQL Injection
 
