@@ -7,7 +7,7 @@ title: Go Client
 The DuckDB Go client, [`duckdb-go`](https://github.com/duckdb/duckdb-go), allows using DuckDB via the `database/sql` interface.
 For examples on how to use this interface, see the [official documentation](https://pkg.go.dev/database/sql) and [tutorial](https://go.dev/doc/tutorial/database-access).
 
-> The DuckDB Go client's project recently moved from [`github.com/marcboeker/go-duckdb`](https://github.com/marcboeker/go-duckdb) to [`github.com/duckdb/duckdb-go`](https://github.com/duckdb/duckdb-go) starting with `v2.5.0`. Please follow the [migration guide](https://github.com/duckdb/duckdb-go#migration-from-marcboekergo-duckdb) to update to the new repository.
+> The DuckDB Go client's project recently moved from [`github.com/marcboeker/go-duckdb`] to `github.com/duckdb/duckdb-go` starting with `v2.5.0`. Please follow the [migration guide](https://github.com/duckdb/duckdb-go#migration-from-marcboekergo-duckdb) to update to the new repository.
 
 ## Installation
 
