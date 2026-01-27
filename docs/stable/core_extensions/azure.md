@@ -91,18 +91,18 @@ FROM 'abfss://⟨my_storage_account⟩.dfs.core.windows.net/⟨my_filesystem⟩/
 
 ## Writing to Azure Blob Storage
 
-You can write data directly to Azure Blob Storage using the [`COPY` statement]({% link docs/stable/sql/statements/copy.md %}).
+You can write data directly to Azure Blob or ADLSv2 Storage using the [`COPY` statement]({% link docs/stable/sql/statements/copy.md %}).
 
 ```sql
--- Write query results to a Parquet file
+-- Write query results to a Parquet file on Blob Storage
 COPY (SELECT * FROM my_table)
 TO 'az://⟨my_container⟩/⟨path⟩/output.parquet';
 ```
 
 ```sql
--- Write a table to a CSV file
+-- Write a table to a CSV file on ADLSv2 Storage
 COPY my_table
-TO 'az://⟨my_container⟩/⟨path⟩/output.csv';
+TO 'abfss://⟨my_container⟩/⟨path⟩/output.csv';
 ```
 
 You can also use fully qualified paths:
@@ -111,8 +111,6 @@ You can also use fully qualified paths:
 COPY my_table
 TO 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/output.parquet';
 ```
-
-> Writing to Azure Data Lake Storage (ADLS) via `abfss://` paths is not yet supported. Only Azure Blob Storage (`az://` or `azure://`) paths support writes.
 
 ## Configuration
 
