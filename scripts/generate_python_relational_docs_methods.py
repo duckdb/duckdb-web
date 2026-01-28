@@ -90,6 +90,8 @@ FUNCTION_MEMBER_LIST = [
 ]
 OUTPUT_MEMBER_LIST = [
     "arrow",
+    "arrow_reader",
+    "arrow_table",
     "close",
     "create",
     "create_view",

@@ -125,11 +125,11 @@ DuckDB supports converting query results efficiently to a variety of formats. Se
 ```python
 import duckdb
 
-duckdb.sql("SELECT 42").fetchall()   # Python objects
-duckdb.sql("SELECT 42").df()         # Pandas DataFrame
-duckdb.sql("SELECT 42").pl()         # Polars DataFrame
-duckdb.sql("SELECT 42").arrow()      # Arrow Table
-duckdb.sql("SELECT 42").fetchnumpy() # NumPy Arrays
+duckdb.sql("SELECT 42").fetchall()    # Python objects
+duckdb.sql("SELECT 42").df()          # Pandas DataFrame
+duckdb.sql("SELECT 42").pl()          # Polars DataFrame
+duckdb.sql("SELECT 42").arrow_table() # Arrow Table
+duckdb.sql("SELECT 42").fetchnumpy()  # NumPy Arrays
 ```
 
 ## Writing Data to Disk

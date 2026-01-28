@@ -6185,9 +6185,10 @@ This section contains the functions which will trigger an SQL execution and retr
 | [`fetchmany`](#fetchmany) | Execute and fetch the next set of rows as a list of tuples |
 | [`fetchnumpy`](#fetchnumpy) | Execute and fetch all rows as a Python dict mapping each column to one numpy arrays |
 | [`fetchone`](#fetchone) | Execute and fetch a single row as a tuple |
+| [`fetch_record_batch`](#fetch_record_batch) | Execute and return an Arrow Record Batch Reader that yields all rows |
 | [`pl`](#pl) | Execute and fetch all rows as a Polars DataFrame |
-| [`record_batch`](#record_batch) | record_batch(self: object, batch_size: typing.SupportsInt = 1000000) -> object |
 | [`tf`](#tf) | Fetch a result as dict of TensorFlow Tensors |
+| [`to_arrow_reader`](#to_arrow_reader) | Execute and return an Arrow Record Batch Reader that yields all rows |
 | [`to_arrow_table`](#to_arrow_table) | Execute and fetch all rows as an Arrow Table |
 | [`to_csv`](#to_csv) | Write the relation object to a CSV file in 'file_name' |
 | [`to_df`](#to_df) | Execute and fetch all rows as a pandas DataFrame |
@@ -6209,6 +6210,8 @@ arrow(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) 
 ##### Description
 
 Execute and return an Arrow Record Batch Reader that yields all rows
+
+> Note We recommend using [`to_arrow_reader()`](#to_arrow_reader) for streaming results or [`to_arrow_table()`](#to_arrow_table) for fetching all results at once.
 
 **Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`to_arrow_table`](#to_arrow_table)
 
@@ -6499,6 +6502,8 @@ fetch_arrow_reader(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsIn
 
 Execute and return an Arrow Record Batch Reader that yields all rows
 
+> Deprecated `fetch_arrow_reader()` is deprecated. Use [`to_arrow_reader()`](#to_arrow_reader) instead.
+
 ##### Parameters
 
 - **batch_size** : int, default: 1000000
@@ -6556,6 +6561,8 @@ fetch_arrow_table(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt
 ##### Description
 
 Execute and fetch all rows as an Arrow Table
+
+> Deprecated `fetch_arrow_table()` is deprecated. Use [`to_arrow_table()`](#to_arrow_table) instead.
 
 **Aliases**: [`arrow`](#arrow), [`to_arrow_table`](#to_arrow_table)
 
@@ -6971,6 +6978,66 @@ while res := rel.fetchone():
 
 ----
 
+#### `fetch_record_batch`
+
+##### Signature
+
+```python
+fetch_record_batch(self: _duckdb.DuckDBPyRelation, rows_per_batch: typing.SupportsInt = 1000000) -> pyarrow.lib.RecordBatchReader
+```
+
+##### Description
+
+Execute and return an Arrow Record Batch Reader that yields all rows
+
+> Deprecated `fetch_record_batch()` is deprecated. Use [`to_arrow_reader()`](#to_arrow_reader) instead.
+
+##### Parameters
+
+- **rows_per_batch** : int, default: 1000000
+
+	The number of rows to fetch per batch.
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select
+            gen_random_uuid() as id,
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value,
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+pa_reader = rel.fetch_record_batch(rows_per_batch=1)
+
+pa_reader.read_next_batch()
+```
+
+
+##### Result
+
+```text
+pyarrow.RecordBatch
+id: string
+description: string
+value: int64
+created_timestamp: timestamp[us, tz=Europe/Amsterdam]
+----
+id: ["a1b2c3d4-5678-90ab-cdef-1234567890ab"]
+description: ["value is uneven"]
+value: [1]
+created_timestamp: [2025-04-10 09:25:51.259000Z]
+```
+
+----
+
 #### `pl`
 
 ##### Signature
@@ -6986,7 +7053,7 @@ Execute and fetch all rows as a Polars DataFrame
 ##### Parameters
 
 - **batch_size** : int, default: 1000000
-                            
+
 	The number of records to be fetched per batch.
 
 ##### Example
@@ -7020,58 +7087,6 @@ shape: (9, 4)
 │ str                             ┆ str             ┆ i64   ┆ datetime[μs, Europe/Amsterdam] │
 ╞═════════════════════════════════╪═════════════════╪═══════╪════════════════════════════════╡
 │ b2f92c3c-9372-49f3-897f-2c86fc… ┆ value is uneven ┆ 1     ┆ 2025-04-10 11:49:51.886 CEST   │
-```
-
-----
-
-#### `record_batch`
-
-##### Description
-
-record_batch(self: object, batch_size: typing.SupportsInt = 1000000) -> object
-
-##### Parameters
-
-- **batch_size** : int, default: 1000000
-                            
-	The batch size for fetching the data.
-
-##### Example
-
-```python
-import duckdb
-
-duckdb_conn = duckdb.connect()
-
-rel = duckdb_conn.sql("""
-        select 
-            gen_random_uuid() as id, 
-            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
-            range as value, 
-            now() + concat(range,' ', 'minutes')::interval as created_timestamp
-        from range(1, 10)
-    """
-)
-
-pa_batch = rel.record_batch(batch_size=1)
-
-pa_batch.read_next_batch()
-```
-
-
-##### Result
-
-```text
-pyarrow.RecordBatch
-id: string
-description: string
-value: int64
-created_timestamp: timestamp[us, tz=Europe/Amsterdam]
-----
-id: ["908cf67c-a086-4b94-9017-2089a83e4a6c"]
-description: ["value is uneven"]
-value: [1]
-created_timestamp: [2025-04-10 09:52:55.249000Z]
 ```
 
 ----
@@ -7118,6 +7133,64 @@ rel.select("description, value").tf()
         b'value is uneven', b'value is even', b'value is uneven'],
        dtype=object)>,
  'value': <tf.Tensor: shape=(9,), dtype=int64, numpy=array([1, 2, 3, 4, 5, 6, 7, 8, 9])>}
+```
+
+----
+
+#### `to_arrow_reader`
+
+##### Signature
+
+```python
+to_arrow_reader(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.RecordBatchReader
+```
+
+##### Description
+
+Execute and return an Arrow Record Batch Reader that yields all rows
+
+##### Parameters
+
+- **batch_size** : int, default: 1000000
+
+	The batch size for fetching the data.
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select
+            gen_random_uuid() as id,
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value,
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+pa_reader = rel.to_arrow_reader(batch_size=1)
+
+pa_reader.read_next_batch()
+```
+
+
+##### Result
+
+```text
+pyarrow.RecordBatch
+id: string
+description: string
+value: int64
+created_timestamp: timestamp[us, tz=Europe/Amsterdam]
+----
+id: ["a1b2c3d4-5678-90ab-cdef-1234567890ab"]
+description: ["value is uneven"]
+value: [1]
+created_timestamp: [2025-04-10 09:25:51.259000Z]
 ```
 
 ----

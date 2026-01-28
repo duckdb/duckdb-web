@@ -3817,7 +3817,58 @@ rel.distinct().order("range")
 
 OUTPUT_METHODS_MAP = {
     "arrow": PythonRelAPIDetails(
+        additional_description="\n\n> Deprecated `arrow()` is deprecated for fetching results. Use [`arrow_reader()`](#arrow_reader) instead.",
         example="pa_table = rel.arrow()\n\npa_table",
+        result="""
+pyarrow.Table
+id: string
+description: string
+value: int64
+created_timestamp: timestamp[us, tz=Europe/Amsterdam]
+----
+id: [["3ac9e0ba-8390-4a02-ad72-33b1caea6354","8b844392-1404-4bbc-b731-120f42c8ca27","ca5584ca-8e97-4fca-a295-ae3c16c32f5b","926d071e-5f64-488f-ae02-d19e315f9f5c","aabeedf0-5783-4eff-9963-b3967a6ea5d8","1f20db9a-bee8-4b65-b7e8-e7c36b5b8fee","795c678e-3524-4b52-96ec-7b48c24eeab1","9ffbd403-169f-4fe4-bc41-09751066f1f1","8fdb0a60-29f0-4f5b-afcc-c736a03cd083"]]
+description: [["value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven"]]
+value: [[1,2,3,4,5,6,7,8,9]]
+created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,2025-04-10 09:09:12.614000Z,2025-04-10 09:10:12.614000Z,2025-04-10 09:11:12.614000Z,2025-04-10 09:12:12.614000Z,2025-04-10 09:13:12.614000Z,2025-04-10 09:14:12.614000Z,2025-04-10 09:15:12.614000Z]]
+""",
+        use_default_example=True,
+        aliases=["fetch_arrow_table", "to_arrow_table"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="batch_size",
+                parameter_type=["int"],
+                parameter_default="1000000",
+                parameter_description="The batch size of writing the data to the Arrow table",
+            )
+        ],
+    ),
+    "arrow_reader": PythonRelAPIDetails(
+        example="pa_reader = rel.arrow_reader(batch_size=1)\n\npa_reader.read_next_batch()",
+        result="""
+pyarrow.RecordBatch
+id: string
+description: string
+value: int64
+created_timestamp: timestamp[us, tz=Europe/Amsterdam]
+----
+id: ["e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd"]
+description: ["value is even"]
+value: [2]
+created_timestamp: [2025-04-10 09:25:51.259000Z]
+""",
+        use_default_example=True,
+        aliases=["fetch_arrow_reader", "fetch_record_batch"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="batch_size",
+                parameter_type=["int"],
+                parameter_default="1000000",
+                parameter_description="The batch size for fetching the data.",
+            )
+        ],
+    ),
+    "arrow_table": PythonRelAPIDetails(
+        example="rel.arrow_table()",
         result="""
 pyarrow.Table
 id: string
@@ -3924,6 +3975,7 @@ created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,202
         use_default_example=True,
     ),
     "fetch_arrow_reader": PythonRelAPIDetails(
+        additional_description="\n\n> Deprecated `fetch_arrow_reader()` is deprecated. Use [`arrow_reader()`](#arrow_reader) instead.",
         example="pa_reader = rel.fetch_arrow_reader(batch_size=1)\n\npa_reader.read_next_batch()",
         result="""
 pyarrow.RecordBatch
@@ -3948,6 +4000,7 @@ created_timestamp: [2025-04-10 09:25:51.259000Z]
         ],
     ),
     "fetch_arrow_table": PythonRelAPIDetails(
+        additional_description="\n\n> Deprecated `fetch_arrow_table()` is deprecated. Use [`arrow_table()`](#arrow_table) instead.",
         example="rel.fetch_arrow_table()",
         result="""
 pyarrow.Table
@@ -4170,6 +4223,7 @@ shape: (9, 4)
         ],
     ),
     "record_batch": PythonRelAPIDetails(
+        additional_description="\n\n> Deprecated `record_batch()` is deprecated. Use [`arrow_reader()`](#arrow_reader) instead.",
         example="pa_batch = rel.record_batch(batch_size=1)\n\npa_batch.read_next_batch()",
         result="""
 pyarrow.RecordBatch
@@ -4206,6 +4260,7 @@ created_timestamp: [2025-04-10 09:52:55.249000Z]
         use_default_example=True,
     ),
     "to_arrow_table": PythonRelAPIDetails(
+        additional_description="\n\n> Deprecated `to_arrow_table()` is deprecated. Use [`arrow_table()`](#arrow_table) instead.",
         example="rel.to_arrow_table()",
         result="""
 pyarrow.Table
