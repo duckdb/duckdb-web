@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance
   description: Query Lance datasets directly from DuckDB.
-  version: 0.4.1
+  version: 0.5.0
   language: Rust & C++
   build: cmake
   license: Apache-2.0
@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: lance-format/lance-duckdb
-  # v0.4.1
-  ref: da349df4c6884ac0bf6b85ba2841b56835de87e4
+  # v0.5.0
+  ref: 0da11b866265b7c11cade3710a4fd1bda9b316e5
 
 docs:
   hello_world: |
@@ -68,10 +68,10 @@ docs:
     This extension brings Lance into a familiar SQL workflow.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/lance-format/lance-duckdb).
 
-extension_star_count: 64
-extension_star_count_pretty: 64
-extension_download_count: 650
-extension_download_count_pretty: 650
+extension_star_count: 69
+extension_star_count_pretty: 69
+extension_download_count: 646
+extension_download_count_pretty: 646
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---
@@ -99,6 +99,7 @@ LOAD {{ page.extension.name }};
 
 |     function_name      | function_type | description | comment | examples |
 |------------------------|---------------|-------------|---------|----------|
+| __lance_exec           | table         | NULL        | NULL    |          |
 | __lance_namespace_scan | table         | NULL        | NULL    |          |
 | __lance_scan           | table         | NULL        | NULL    |          |
 | lance_fts              | table         | NULL        | NULL    |          |

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 1.3.1
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: 77578ed4a10306b5b1f018be85cea19947bd23aa
+  ref: e1d1e5064f1e6e0acc720718899de96175158d23
 
 docs:
   hello_world: |
@@ -77,10 +77,10 @@ docs:
     
     The extension implements the complete JSON-RPC 2.0 MCP protocol with support for multiple transport mechanisms. It enables powerful use cases including database federation, remote data access, tool orchestration, and exposing database insights to external MCP-compatible systems. Perfect for integration with AI agents, data pipelines, and distributed analytical workflows.
 
-extension_star_count: 28
-extension_star_count_pretty: 28
-extension_download_count: 599
-extension_download_count_pretty: 599
+extension_star_count: 29
+extension_star_count_pretty: 29
+extension_download_count: 640
+extension_download_count_pretty: 640
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---
@@ -117,6 +117,7 @@ LOAD {{ page.extension.name }};
 | mcp_list_resources           | scalar        | NULL        | NULL    |          |
 | mcp_list_tools               | scalar        | NULL        | NULL    |          |
 | mcp_publish_query            | scalar        | NULL        | NULL    |          |
+| mcp_publish_resource         | scalar        | NULL        | NULL    |          |
 | mcp_publish_table            | scalar        | NULL        | NULL    |          |
 | mcp_publish_tool             | scalar        | NULL        | NULL    |          |
 | mcp_reconnect_server         | scalar        | NULL        | NULL    |          |

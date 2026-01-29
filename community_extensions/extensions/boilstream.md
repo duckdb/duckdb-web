@@ -184,6 +184,7 @@ LOAD {{ page.extension.name }};
 | ducklake_retry_backoff               | Backoff factor for exponentially increasing retry wait time                                                                   | DOUBLE     | GLOBAL | []      |
 | ducklake_retry_wait_ms               | Time between retries                                                                                                          | UBIGINT    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                                                 | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                                                               | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                                                  | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                                                               | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                                                               | UBIGINT    | GLOBAL | []      |

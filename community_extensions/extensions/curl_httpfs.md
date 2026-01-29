@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: curl_httpfs
   description: httpfs with connection pool, HTTP/2 and async IO. 
-  version: 0.2.3
+  version: 0.2.4
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-curl-filesystem
-  ref: 5c9f0c085fb0733e00d575a1f76186638cd0c0a8
+  ref: e5c4921e6e908d07abab3f89c0d036a22db0cd4b
 
 docs:
   hello_world: |
@@ -32,8 +32,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1537
-extension_download_count_pretty: 1.5k
+extension_download_count: 1934
+extension_download_count_pretty: 1.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_curl_httpfs.png'
 layout: community_extension_doc
 ---
@@ -55,16 +55,6 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|             function_name             | function_type | description | comment | examples |
-|---------------------------------------|---------------|-------------|---------|----------|
-| curl_httpfs_clear_metrics             | scalar        | NULL        | NULL    |          |
-| curl_httpfs_get_httpfs_tcp_connection | table         | NULL        | NULL    |          |
-| curl_httpfs_get_tcp_connection        | table         | NULL        | NULL    |          |
-
 ### Added Settings
 
 <div class="extension_settings_table"></div>
@@ -73,7 +63,6 @@ LOAD {{ page.extension.name }};
 |--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
-| curl_httpfs_enable_verbose_logging   | Turn on and off curl-based http util verbose logging.                                        | BOOLEAN    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |

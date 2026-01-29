@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 52
 extension_star_count_pretty: 52
-extension_download_count: 593
-extension_download_count_pretty: 593
+extension_download_count: 599
+extension_download_count_pretty: 599
 image: '/images/community_extensions/social_preview/preview_community_extension_tributary.png'
 layout: community_extension_doc
 ---
@@ -66,6 +66,7 @@ LOAD {{ page.extension.name }};
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |

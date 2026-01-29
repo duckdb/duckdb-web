@@ -17,12 +17,12 @@ extension:
     - sipemu
 repo:
   github: DataZooDE/anofox-forecast
-  ref: d5b81b83256694886537a15e7c9fa5dfba44e830
+  ref: 61891e386fd6c340bf086a1a20b078cebf8880ee
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 612
-extension_download_count_pretty: 612
+extension_download_count: 648
+extension_download_count_pretty: 648
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -50,12 +50,21 @@ LOAD {{ page.extension.name }};
 
 |                function_name                | function_type | description | comment | examples |
 |---------------------------------------------|---------------|-------------|---------|----------|
+| _anofox_fcst_ts_backtest_native             | table         | NULL        | NULL    |          |
+| _ts_backtest_native                         | table         | NULL        | NULL    |          |
+| _ts_cv_forecast_native                      | table         | NULL        | NULL    |          |
+| _ts_cv_split_native                         | table         | NULL        | NULL    |          |
 | _ts_data_quality                            | scalar        | NULL        | NULL    |          |
 | _ts_detect_changepoints_bocpd               | scalar        | NULL        | NULL    |          |
 | _ts_detect_periods                          | scalar        | NULL        | NULL    |          |
+| _ts_features_native                         | table         | NULL        | NULL    |          |
+| _ts_fill_forward_native                     | table         | NULL        | NULL    |          |
+| _ts_fill_gaps_native                        | table         | NULL        | NULL    |          |
 | _ts_forecast                                | scalar        | NULL        | NULL    |          |
 | _ts_forecast_exog                           | scalar        | NULL        | NULL    |          |
+| _ts_forecast_native                         | table         | NULL        | NULL    |          |
 | _ts_mstl_decomposition                      | scalar        | NULL        | NULL    |          |
+| _ts_mstl_decomposition_native               | table         | NULL        | NULL    |          |
 | _ts_stats                                   | scalar        | NULL        | NULL    |          |
 | _ts_stats_with_dates                        | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_analyze_seasonality          | scalar        | NULL        | NULL    |          |
@@ -78,9 +87,7 @@ LOAD {{ page.extension.name }};
 | anofox_fcst_ts_features_agg                 | aggregate     | NULL        | NULL    |          |
 | anofox_fcst_ts_features_config_from_csv     | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_features_config_from_json    | scalar        | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_forward_native          | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_fill_forward_operator        | table         | NULL        | NULL    |          |
-| anofox_fcst_ts_fill_gaps_native             | table         | NULL        | NULL    |          |
 | anofox_fcst_ts_forecast_agg                 | aggregate     | NULL        | NULL    |          |
 | anofox_fcst_ts_mae                          | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_mape                         | scalar        | NULL        | NULL    |          |
@@ -94,7 +101,7 @@ LOAD {{ page.extension.name }};
 | anofox_fcst_ts_rmse                         | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_smape                        | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_stats_agg                    | aggregate     | NULL        | NULL    |          |
-| ts_aggregate_hierarchy                      | table_macro   | NULL        | NULL    |          |
+| ts_aggregate_hierarchy                      | table         | NULL        | NULL    |          |
 | ts_aic_period                               | scalar        | NULL        | NULL    |          |
 | ts_analyze_peak_timing                      | scalar        | NULL        | NULL    |          |
 | ts_analyze_peak_timing                      | table_macro   | NULL        | NULL    |          |
@@ -110,7 +117,7 @@ LOAD {{ page.extension.name }};
 | ts_classify_seasonality                     | table_macro   | NULL        | NULL    |          |
 | ts_classify_seasonality_agg                 | aggregate     | NULL        | NULL    |          |
 | ts_classify_seasonality_by                  | table_macro   | NULL        | NULL    |          |
-| ts_combine_keys                             | table_macro   | NULL        | NULL    |          |
+| ts_combine_keys                             | table         | NULL        | NULL    |          |
 | ts_conformal_apply                          | scalar        | NULL        | NULL    |          |
 | ts_conformal_apply_by                       | table_macro   | NULL        | NULL    |          |
 | ts_conformal_by                             | table_macro   | NULL        | NULL    |          |
@@ -148,6 +155,7 @@ LOAD {{ page.extension.name }};
 | ts_detect_seasonality                       | scalar        | NULL        | NULL    |          |
 | ts_detect_seasonality_changes               | scalar        | NULL        | NULL    |          |
 | ts_detrend                                  | scalar        | NULL        | NULL    |          |
+| ts_detrend_by                               | table_macro   | NULL        | NULL    |          |
 | ts_diff_by                                  | table_macro   | NULL        | NULL    |          |
 | ts_drop_constant_by                         | table_macro   | NULL        | NULL    |          |
 | ts_drop_edge_zeros_by                       | table_macro   | NULL        | NULL    |          |
@@ -156,6 +164,7 @@ LOAD {{ page.extension.name }};
 | ts_drop_short_by                            | table_macro   | NULL        | NULL    |          |
 | ts_drop_trailing_zeros_by                   | table_macro   | NULL        | NULL    |          |
 | ts_drop_zeros_by                            | table_macro   | NULL        | NULL    |          |
+| ts_estimate_backtest_memory                 | scalar        | NULL        | NULL    |          |
 | ts_estimate_period_acf                      | scalar        | NULL        | NULL    |          |
 | ts_estimate_period_fft                      | scalar        | NULL        | NULL    |          |
 | ts_features                                 | aggregate     | NULL        | NULL    |          |
@@ -167,11 +176,8 @@ LOAD {{ page.extension.name }};
 | ts_features_list                            | table         | NULL        | NULL    |          |
 | ts_features_table                           | table_macro   | NULL        | NULL    |          |
 | ts_fill_forward_by                          | table_macro   | NULL        | NULL    |          |
-| ts_fill_forward_native                      | table         | NULL        | NULL    |          |
 | ts_fill_forward_operator                    | table         | NULL        | NULL    |          |
 | ts_fill_gaps_by                             | table_macro   | NULL        | NULL    |          |
-| ts_fill_gaps_native                         | table         | NULL        | NULL    |          |
-| ts_fill_gaps_operator_by                    | table_macro   | NULL        | NULL    |          |
 | ts_fill_nulls_backward_by                   | table_macro   | NULL        | NULL    |          |
 | ts_fill_nulls_const_by                      | table_macro   | NULL        | NULL    |          |
 | ts_fill_nulls_forward_by                    | table_macro   | NULL        | NULL    |          |
@@ -217,14 +223,14 @@ LOAD {{ page.extension.name }};
 | ts_seasonal_strength_windowed               | scalar        | NULL        | NULL    |          |
 | ts_smape                                    | scalar        | NULL        | NULL    |          |
 | ts_smape_by                                 | table_macro   | NULL        | NULL    |          |
-| ts_split_keys                               | table_macro   | NULL        | NULL    |          |
+| ts_split_keys                               | table         | NULL        | NULL    |          |
 | ts_ssa_period                               | scalar        | NULL        | NULL    |          |
 | ts_stats                                    | table_macro   | NULL        | NULL    |          |
 | ts_stats_agg                                | aggregate     | NULL        | NULL    |          |
 | ts_stats_by                                 | table_macro   | NULL        | NULL    |          |
 | ts_stats_summary                            | table_macro   | NULL        | NULL    |          |
 | ts_stl_period                               | scalar        | NULL        | NULL    |          |
-| ts_validate_separator                       | table_macro   | NULL        | NULL    |          |
+| ts_validate_separator                       | table         | NULL        | NULL    |          |
 | ts_validate_timestamps_by                   | table_macro   | NULL        | NULL    |          |
 | ts_validate_timestamps_summary_by           | table_macro   | NULL        | NULL    |          |
 
