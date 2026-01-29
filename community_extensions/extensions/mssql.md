@@ -8,33 +8,29 @@ excerpt: |
 extension:
   name: mssql
   description: "Connect DuckDB to Microsoft SQL Server via native TDS (including TLS)."
-  version: "0.1.7"
+  version: "0.1.12"
   language: "C++"
   build: "cmake"
   licence: "MIT"
   maintainers:
     - VGSML
-  excluded_platforms:
-    - "osx_amd64"
-    - "windows_arm64"
-    - "wasm_mvp"
-    - "wasm_eh"
-    - "wasm_threads"
+  excluded_platforms: "osx_amd64;windows_arm64;wasm_mvp;wasm_eh;wasm_threads"
   test_config: '{"test_env_variables": {"SKIP_TESTS": "1"}}'
 
 repo:
   github: "hugr-lab/mssql-extension"
-  ref: "v0.1.7"
+  ref: "v0.1.12"
 
 docs:
   hello_world: |
-    INSTALL mssql FROM community;
+    FORCE INSTALL mssql FROM community;
     LOAD mssql;
     ATTACH 'mssql://sa:YourStrong!Passw0rd@localhost:1433?database=master&use_encrypt=true' AS ms;
     SELECT * FROM ms.dbo.table LIMIT 5;
 
   extended_description: |
     The mssql extension provides a DuckDB connector for Microsoft SQL Server using the native TDS protocol.
+    Support DuckDB version: 1.4.4
 
     The extension is experimental and may not cover all edge cases. Please report any issues on the [GitHub repository](https://github.com/hugr-lab/mssql-extension).
 
@@ -47,16 +43,19 @@ docs:
     - UPDATE and DELETE support (requires primary key)
     - Connection pooling with configurable limits
     - DuckDB secret management for credentials
+    - Transaction support (BEGIN, COMMIT, ROLLBACK)
+    - CREATE TABLE AS SELECT (CTAS) support
 
     Limitations:
     - Limited data type support (see documentation for details)
-    - Create table as select (CTAS) not supported
-    - No transaction support
+    - COPY/BCP not supported
+    - Named instances not supported
+    - Windows Authentication not supported
 
-extension_star_count: 16
-extension_star_count_pretty: 16
-extension_download_count: 388
-extension_download_count_pretty: 388
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 656
+extension_download_count_pretty: 656
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
@@ -97,25 +96,28 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|                name                 |                                 description                                  | input_type | scope  | aliases |
-|-------------------------------------|------------------------------------------------------------------------------|------------|--------|---------|
-| mssql_acquire_timeout               | Connection acquire timeout in seconds (0 = fail immediately)                 | BIGINT     | GLOBAL | []      |
-| mssql_catalog_cache_ttl             | Metadata cache TTL in seconds (0 = manual refresh only)                      | BIGINT     | GLOBAL | []      |
-| mssql_connection_cache              | Enable connection pooling and reuse                                          | BOOLEAN    | GLOBAL | []      |
-| mssql_connection_limit              | Maximum connections per attached mssql database                              | BIGINT     | GLOBAL | []      |
-| mssql_connection_timeout            | TCP connection timeout in seconds                                            | BIGINT     | GLOBAL | []      |
-| mssql_dml_batch_size                | Maximum rows per UPDATE/DELETE batch (default: 500, affects parameter count) | BIGINT     | GLOBAL | []      |
-| mssql_dml_max_parameters            | Maximum parameters per UPDATE/DELETE statement (SQL Server limit ~2100)      | BIGINT     | GLOBAL | []      |
-| mssql_dml_use_prepared              | Use prepared statements for UPDATE/DELETE operations                         | BOOLEAN    | GLOBAL | []      |
-| mssql_enable_statistics             | Enable statistics collection from SQL Server for query optimizer             | BOOLEAN    | GLOBAL | []      |
-| mssql_idle_timeout                  | Idle connection timeout in seconds (0 = no timeout)                          | BIGINT     | GLOBAL | []      |
-| mssql_insert_batch_size             | Maximum rows per INSERT statement (SQL Server limit: 1000)                   | BIGINT     | GLOBAL | []      |
-| mssql_insert_max_rows_per_statement | Hard cap on rows per INSERT statement (SQL Server limit: 1000)               | BIGINT     | GLOBAL | []      |
-| mssql_insert_max_sql_bytes          | Maximum SQL statement size in bytes                                          | BIGINT     | GLOBAL | []      |
-| mssql_insert_use_returning_output   | Use OUTPUT INSERTED for RETURNING clause                                     | BOOLEAN    | GLOBAL | []      |
-| mssql_min_connections               | Minimum connections to maintain per context                                  | BIGINT     | GLOBAL | []      |
-| mssql_statistics_cache_ttl_seconds  | Statistics cache TTL in seconds                                              | BIGINT     | GLOBAL | []      |
-| mssql_statistics_level              | Statistics detail level: 0=row count, 1=+histogram min/max, 2=+NDV           | BIGINT     | GLOBAL | []      |
-| mssql_statistics_use_dbcc           | Allow DBCC SHOW_STATISTICS for column statistics (requires permissions)      | BOOLEAN    | GLOBAL | []      |
+|                name                 |                                       description                                       | input_type | scope  | aliases |
+|-------------------------------------|-----------------------------------------------------------------------------------------|------------|--------|---------|
+| mssql_acquire_timeout               | Connection acquire timeout in seconds (0 = fail immediately)                            | BIGINT     | GLOBAL | []      |
+| mssql_catalog_cache_ttl             | Metadata cache TTL in seconds (0 = manual refresh only)                                 | BIGINT     | GLOBAL | []      |
+| mssql_connection_cache              | Enable connection pooling and reuse                                                     | BOOLEAN    | GLOBAL | []      |
+| mssql_connection_limit              | Maximum connections per attached mssql database                                         | BIGINT     | GLOBAL | []      |
+| mssql_connection_timeout            | TCP connection timeout in seconds                                                       | BIGINT     | GLOBAL | []      |
+| mssql_ctas_drop_on_failure          | Drop table if CTAS insert phase fails (default: false, table remains for debugging)     | BOOLEAN    | GLOBAL | []      |
+| mssql_ctas_text_type                | Text column type for CTAS: NVARCHAR (Unicode, default) or VARCHAR (collation-dependent) | VARCHAR    | GLOBAL | []      |
+| mssql_dml_batch_size                | Maximum rows per UPDATE/DELETE batch (default: 500, affects parameter count)            | BIGINT     | GLOBAL | []      |
+| mssql_dml_max_parameters            | Maximum parameters per UPDATE/DELETE statement (SQL Server limit ~2100)                 | BIGINT     | GLOBAL | []      |
+| mssql_dml_use_prepared              | Use prepared statements for UPDATE/DELETE operations                                    | BOOLEAN    | GLOBAL | []      |
+| mssql_enable_statistics             | Enable statistics collection from SQL Server for query optimizer                        | BOOLEAN    | GLOBAL | []      |
+| mssql_idle_timeout                  | Idle connection timeout in seconds (0 = no timeout)                                     | BIGINT     | GLOBAL | []      |
+| mssql_insert_batch_size             | Maximum rows per INSERT statement (SQL Server limit: 1000)                              | BIGINT     | GLOBAL | []      |
+| mssql_insert_max_rows_per_statement | Hard cap on rows per INSERT statement (SQL Server limit: 1000)                          | BIGINT     | GLOBAL | []      |
+| mssql_insert_max_sql_bytes          | Maximum SQL statement size in bytes                                                     | BIGINT     | GLOBAL | []      |
+| mssql_insert_use_returning_output   | Use OUTPUT INSERTED for RETURNING clause                                                | BOOLEAN    | GLOBAL | []      |
+| mssql_min_connections               | Minimum connections to maintain per context                                             | BIGINT     | GLOBAL | []      |
+| mssql_query_timeout                 | Query execution timeout in seconds (0 = no timeout, default: 30)                        | BIGINT     | GLOBAL | []      |
+| mssql_statistics_cache_ttl_seconds  | Statistics cache TTL in seconds                                                         | BIGINT     | GLOBAL | []      |
+| mssql_statistics_level              | Statistics detail level: 0=row count, 1=+histogram min/max, 2=+NDV                      | BIGINT     | GLOBAL | []      |
+| mssql_statistics_use_dbcc           | Allow DBCC SHOW_STATISTICS for column statistics (requires permissions)                 | BOOLEAN    | GLOBAL | []      |
 
 

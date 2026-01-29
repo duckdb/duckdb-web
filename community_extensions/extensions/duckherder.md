@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckherder
   description: Run duckdb query on remote server
-  version: 0.0.5
+  version: 0.0.6
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-distributed-execution
-  ref: 02f60de8d45c9d3547b1795d4bc7d0b5c1bcf14f
+  ref: fe261c112a110858f5b2588f98f0a85e5ad8e2ad
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 575
-extension_download_count_pretty: 575
+extension_download_count: 594
+extension_download_count_pretty: 594
 image: '/images/community_extensions/social_preview/preview_community_extension_duckherder.png'
 layout: community_extension_doc
 ---

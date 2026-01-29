@@ -64,10 +64,10 @@ repo:
   github: Query-farm/httpserver
   ref: 8a53d8b7f4290608e0eb0d4dbfbafefaf04209e9
 
-extension_star_count: 264
-extension_star_count_pretty: 264
-extension_download_count: 2670
-extension_download_count_pretty: 2.7k
+extension_star_count: 265
+extension_star_count_pretty: 265
+extension_download_count: 1207
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---
@@ -107,6 +107,7 @@ LOAD {{ page.extension.name }};
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |

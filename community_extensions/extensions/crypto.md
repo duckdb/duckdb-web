@@ -22,10 +22,10 @@ repo:
   github: query-farm/crypto
   ref: 9308fe3e74a56b3dd5b046533bac582532bdc7bd
 
-extension_star_count: 26
-extension_star_count_pretty: 26
-extension_download_count: 13094
-extension_download_count_pretty: 13.1k
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 12699
+extension_download_count_pretty: 12.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---
@@ -67,6 +67,7 @@ LOAD {{ page.extension.name }};
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |

@@ -97,8 +97,8 @@ docs:
 
 extension_star_count: 34
 extension_star_count_pretty: 34
-extension_download_count: 609
-extension_download_count_pretty: 609
+extension_download_count: 623
+extension_download_count_pretty: 623
 image: '/images/community_extensions/social_preview/preview_community_extension_otlp.png'
 layout: community_extension_doc
 ---

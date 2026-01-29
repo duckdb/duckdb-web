@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: stephaniewang526/duckdb-mongo
-  ref: 641c4f6b86a2c518a84650793e879105d0fd0f1b
+  ref: 995f75d201156b2a6dc2ee58dbedf432f11c4c49
 
 docs:
   hello_world: |
@@ -36,10 +36,10 @@ docs:
     joins, aggregations, and complex analytical operations.
 
 
-extension_star_count: 34
-extension_star_count_pretty: 34
-extension_download_count: 615
-extension_download_count_pretty: 615
+extension_star_count: 35
+extension_star_count_pretty: 35
+extension_download_count: 606
+extension_download_count_pretty: 606
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
