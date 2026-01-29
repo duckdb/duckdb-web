@@ -319,6 +319,7 @@
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 		padding: 16px;
+		padding-bottom: 0;
 		border-radius: 10px;
 
 		.select-label {
@@ -326,7 +327,6 @@
 			color: $hl-color;
 			font-family: "JetBrainsMono-Regular";
 			font-size: 12px;
-			margin-bottom: 8px;
 		}
 
 		.select-wrapper {
@@ -343,6 +343,8 @@
 				border: none;
 				padding: 0;
 				padding-right: 30px;
+				padding-top: 8px;
+				padding-bottom: 16px;
 				font-family: "SuisseIntl";
 				font-size: 18px;
 				font-weight: 600;
@@ -355,10 +357,16 @@
 
 				option {
 					color: var(--main-text-primary-color, #0D0D0D);
+					background-color: var(--main-section-background-gradient-start-color, #FAFAFA);
 				}
 
 				option[disabled] {
 					color: var(--main-text-tertiary-color, #B2B2B2);
+					background-color: var(--main-section-background-gradient-start-color, #FAFAFA);
+				}
+
+				option:hover {
+					background-color: var(--interactive-filter-selected-background-color, #E6E6E6);
 				}
 			}
 
