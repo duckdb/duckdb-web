@@ -352,8 +352,8 @@ ORDER BY length(path), path;
 > DuckDB 1.5.0 also introduces a new setting to configure the `USING KEY` syntax.
 >
 > ```sql
-> SET using_key_syntax = 'DEFAULT';
-> SET using_key_syntax = 'UNION_AS_UNION_ALL';
+> SET deprecated_using_key_syntax = 'DEFAULT';
+> SET deprecated_using_key_syntax = 'UNION_AS_UNION_ALL';
 > ```
 >
 > Currently, `DEFAULT` enables both syntax styles, i.e., allows both recursive
@@ -364,8 +364,8 @@ ORDER BY length(path), path;
 >
 > DuckDB 1.6.0 disables the `UNION` syntax by default.
 >
-> DuckDB 1.7.0 removes the `using_key_syntax` flag and fully deprecates the
-> `UNION` syntax.
+> DuckDB 1.7.0 removes the `deprecated_using_key_syntax` flag and fully
+> deprecates the `UNION` syntax.
 
 `USING KEY` alters the behavior of a regular recursive CTE.
 
