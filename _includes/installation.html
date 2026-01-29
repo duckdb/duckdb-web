@@ -99,15 +99,15 @@ brew install duckdb
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
 
-<h4>Direct Download</h4>
-{%- assign f = site.data.checksums.artifacts.cli.macos.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="cli" platform="macos" -%}
-
 <h4>Install Specific Version</h4>
 {%- highlight bash -%}
 curl https://install.duckdb.org | DUCKDB_VERSION=1.4.3 sh
 {%- endhighlight -%}
+
+<h4>Direct Download</h4>
+{%- assign f = site.data.checksums.artifacts.cli.macos.x86_64.filename -%}
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
+{%- include checksum_inline.html environment="cli" platform="macos" -%}
 
 </div>
 </div>
@@ -117,11 +117,16 @@ curl https://install.duckdb.org | DUCKDB_VERSION=1.4.3 sh
     data-environment="cli"
     data-docs="{% link docs/stable/clients/cli/overview.md %}">
 
-    <figure class="highlight">
-        <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">sh</span></code></pre>
-    </figure>
+<figure class="highlight">
+    <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">sh</span></code></pre>
+</figure>
 
 <div class="alternative">
+
+<h4>Install Specific Version</h4>
+{%- highlight bash -%}
+curl https://install.duckdb.org | DUCKDB_VERSION=1.4.3 sh
+{%- endhighlight -%}
 
 <h4>Docker Image</h4>
 {%- highlight bash -%}
