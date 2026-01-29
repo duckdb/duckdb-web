@@ -42,7 +42,7 @@ Attendance is free but please [reserve a spot on Eventbrite](https://www.eventbr
 
 ## Extension Development Workshop
 
-DuckDB community member [Rusty Conover](https://rustyconover.work/) will hold a workshop on DuckDB extension development. The workshop will focus on a presentation explaining the details of DuckDB extension development and will have little time for hands-on work. Check the [event's site](https://luma.com/3p3ml9f5) for more details.
+DuckDB community member [Rusty Conover](https://rustyconover.work/) will hold a workshop on DuckDB extension development. The workshop will focus on a presentation explaining the details of DuckDB extension development and will have little time for hands-on work (but you can follow along!). Check the [event's site](https://luma.com/3p3ml9f5) for more details.
 
 Note that you have to **register for this event separately**. To do so, visit [Luma](https://luma.com/3p3ml9f5) to register.
 
