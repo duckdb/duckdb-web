@@ -526,10 +526,9 @@ h5 a {
 				position: fixed;
 				top: 0px;
 				right: 0;
-				width: 22vw;
-				padding: 100px 20px 20px 20px;
+				padding: 100px 0px 20px 20px;
 				z-index: 90;
-				@media only screen and (max-width: 1280px) {
+				@media only screen and (max-width: 1180px) {
 					display: none;
 				}
 				.toc_menu{
@@ -577,7 +576,7 @@ h5 a {
 						a{
 							color: $black400;
 							text-decoration: none;
-							padding: 6px 12px;
+							padding: 6px 0px 6px 12px;
 							border-radius: 100px;
 							display: inline-block;
 							text-overflow: ellipsis; 
@@ -768,10 +767,10 @@ h5 a {
 		}
 
 		.singleentry{
-			max-width: 720px;
+			max-width: 1180px;
 			margin: 0 auto;
-			padding-top: 75px;
-			padding-bottom: 75px;
+			padding: 75px 15px;
+			
 			h1{
 				@include display-2();
 				margin-bottom: 30px;
@@ -798,7 +797,20 @@ h5 a {
 		}
 		.singleentry.contains_toc{
 			display: flex;
-			max-width: unset;
+			justify-content: space-between;
+			
+			@media only screen and (max-width: 1180px) {
+				justify-content: center;
+			}
+			
+			.content{
+				max-width: 750px;
+				@media only screen and (max-width: 800px) {
+					width: 100%;
+					max-width: unset;
+				}
+			}
+			
 			.toc_sidebar{
 				padding-top: 3px;
 				position: relative;
@@ -807,16 +819,7 @@ h5 a {
 					top: 100px;
 				}
 			}
-			> .content{
-				width: 78vw;
-				@media only screen and (max-width: 1280px){
-					width: 100%;
-				}
-			}
-			.contentwidth{
-				max-width: 750px;
-				margin: 0 auto;
-			}
+
 		}
 		.post-list{
 			h3{
@@ -906,13 +909,7 @@ footer{
 	position: relative;
 }
 @media only screen and (max-width: 1280px) {
-	.postwrap {
-		margin: 0 15px;
-	}
-	.recentposts {
-		width: calc(100% + 30px);
-		margin-left: -15px;
-	}
+
 }
 
 @media only screen and (max-width: 940px) {
