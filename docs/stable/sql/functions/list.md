@@ -874,7 +874,13 @@ SELECT [4, 5, 6] AS l, [x FOR x, i IN l IF i != 2] AS filtered;
 |-----------|----------|
 | [4, 5, 6] | [4, 6]   |
 
-Under the hood, `[f(x) FOR x IN l IF g(x)]` is translated to `list_apply(list_filter(l, lambda x: g(x)), lambda x: f(x))`.
+Under the hood, `[f(x, i) FOR x IN l IF g(x, i)]` is translated to:
+
+```text
+list_apply(l, lambda x, i: {'filter': g(x, i), 'result': f(x, i)})
+    .list_filter(lambda x: x.filter)
+    .list_apply(lambda x: x.result)
+```
 
 ## Range Functions
 
