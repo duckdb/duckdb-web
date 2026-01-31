@@ -875,7 +875,7 @@ SELECT [4, 5, 6] AS l, [x FOR x, i IN l IF i != 2] AS filtered;
 Under the hood, `[f(x, i) FOR x IN l IF g(x, i)]` is translated to:
 
 ```text
-list_apply(l, lambda x, i: {'filter': g(x, i), 'result': f(x, i)})
+l.list_apply(lambda x, i: {'filter': g(x, i), 'result': f(x, i)})
     .list_filter(lambda x: x.filter)
     .list_apply(lambda x: x.result)
 ```
