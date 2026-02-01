@@ -72,10 +72,10 @@ docs:
         'Monthly Sales from CSV'
     ) FROM read_csv('sales.csv');
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 654
-extension_download_count_pretty: 654
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 703
+extension_download_count_pretty: 703
 image: '/images/community_extensions/social_preview/preview_community_extension_miniplot.png'
 layout: community_extension_doc
 ---

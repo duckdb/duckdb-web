@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: crawler
   description: SQL-native web crawler with HTML extraction and MERGE support
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -65,10 +65,10 @@ docs:
 
     For full documentation see: https://github.com/midwork-finds-jobs/duckdb-crawler
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 580
-extension_download_count_pretty: 580
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 393
+extension_download_count_pretty: 393
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'
 layout: community_extension_doc
 ---

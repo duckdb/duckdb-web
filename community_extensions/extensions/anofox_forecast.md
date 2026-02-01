@@ -17,12 +17,12 @@ extension:
     - sipemu
 repo:
   github: DataZooDE/anofox-forecast
-  ref: 61891e386fd6c340bf086a1a20b078cebf8880ee
+  ref: 54819774bdca42fd6914fc53d2338d2c8eaf9ffe
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 709
-extension_download_count_pretty: 709
+extension_download_count: 740
+extension_download_count_pretty: 740
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -56,6 +56,7 @@ LOAD {{ page.extension.name }};
 | _ts_cv_split_native                         | table         | NULL        | NULL    |          |
 | _ts_data_quality                            | scalar        | NULL        | NULL    |          |
 | _ts_detect_changepoints_bocpd               | scalar        | NULL        | NULL    |          |
+| _ts_detect_changepoints_by_native           | table         | NULL        | NULL    |          |
 | _ts_detect_periods                          | scalar        | NULL        | NULL    |          |
 | _ts_features_native                         | table         | NULL        | NULL    |          |
 | _ts_fill_forward_native                     | table         | NULL        | NULL    |          |
@@ -66,6 +67,7 @@ LOAD {{ page.extension.name }};
 | _ts_mstl_decomposition                      | scalar        | NULL        | NULL    |          |
 | _ts_mstl_decomposition_native               | table         | NULL        | NULL    |          |
 | _ts_stats                                   | scalar        | NULL        | NULL    |          |
+| _ts_stats_by_native                         | table         | NULL        | NULL    |          |
 | _ts_stats_with_dates                        | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_analyze_seasonality          | scalar        | NULL        | NULL    |          |
 | anofox_fcst_ts_bias                         | scalar        | NULL        | NULL    |          |
