@@ -19,7 +19,7 @@ extension:
   vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
 repo:
   github: midwork-finds-jobs/duckdb-sshfs
-  ref: 1679e46e57960ec62523fe7853942d2f97e2c952
+  ref: 913e81ac5d8eb2940e12d85a3247077a408a944d
 
 docs:
   hello_world: |
@@ -58,8 +58,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 805
-extension_download_count_pretty: 805
+extension_download_count: 353
+extension_download_count_pretty: 353
 image: '/images/community_extensions/social_preview/preview_community_extension_sshfs.png'
 layout: community_extension_doc
 ---

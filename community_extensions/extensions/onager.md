@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: onager
   description: A DuckDB extension for graph data analytics
-  version: 0.1.0-alpha.3
+  version: 0.1.0-alpha.4
   language: Rust & C++
   build: cmake
   license: MIT OR Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/onager
-  ref: 0f2326a93cb4afa4137021619119e77782cfeaf0
+  ref: b6c46f7d989002d2b46cdcf392b5bed93f3cbaaf
 
 docs:
   hello_world: |
@@ -45,10 +45,10 @@ docs:
     For more information, visit the [GitHub repository](https://github.com/CogitatorTech/onager)
     or the [Onager documentation](https://cogitatortech.github.io/onager/).
 
-extension_star_count: 113
-extension_star_count_pretty: 113
-extension_download_count: 590
-extension_download_count_pretty: 590
+extension_star_count: 114
+extension_star_count_pretty: 114
+extension_download_count: 333
+extension_download_count_pretty: 333
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
 layout: community_extension_doc
 ---
@@ -125,6 +125,7 @@ LOAD {{ page.extension.name }};
 | onager_apx_vertex_cover          | table         | Minimum vertex cover (approx)     | Returns: node_id. Params: (edges)                            | [select * from onager_apx_vertex_cover(edges_table);]      |
 | onager_apx_tsp                   | table         | TSP tour (greedy approx)          | Returns: order, node_id. Params: (weighted_edges)            | [select * from onager_apx_tsp(edges_table);]               |
 | onager_mst_kruskal               | table         | Kruskal's MST                     | Returns: src, dst, weight. Params: (weighted_edges)          | [select * from onager_mst_kruskal(edges_table);]           |
+| onager_mst_prim                  | table         | Prims's MST                       | Returns: src, dst, weight. Params: (weighted_edges)          | [select * from onager_mst_prim(edges_table);]              |
 | onager_gen_erdos_renyi           | table         | Random graph (G(n,p))             | Returns: src, dst. Params: (n, p [, seed])                   | [select * from onager_gen_erdos_renyi(100, 0.1);]          |
 | onager_gen_barabasi_albert       | table         | Scale-free graph                  | Returns: src, dst. Params: (n, m [, seed])                   | [select * from onager_gen_barabasi_albert(100, 5);]        |
 | onager_gen_watts_strogatz        | table         | Small-world graph                 | Returns: src, dst. Params: (n, k, beta [, seed])             | [select * from onager_gen_watts_strogatz(100, 4, 0.1);]    |
