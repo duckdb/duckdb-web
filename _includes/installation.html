@@ -186,6 +186,8 @@ You can now install DuckDB with a script from an administrative PowerShell termi
 Set-ExecutionPolicy Bypass -Scope Process -Force
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
 iex ((New-Object System.Net.WebClient).DownloadString('https://install.duckdb.org/install.ps1'))
+
+powershell -NoExit iex (iwr "https://install.duckdb.org/install.ps1").Content
 {%- endhighlight -%}
 
 </div>
