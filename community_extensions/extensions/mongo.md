@@ -36,10 +36,10 @@ docs:
     joins, aggregations, and complex analytical operations.
 
 
-extension_star_count: 37
-extension_star_count_pretty: 37
-extension_download_count: 697
-extension_download_count_pretty: 697
+extension_star_count: 38
+extension_star_count_pretty: 38
+extension_download_count: 688
+extension_download_count_pretty: 688
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---

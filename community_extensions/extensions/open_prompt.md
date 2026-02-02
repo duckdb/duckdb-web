@@ -69,8 +69,8 @@ repo:
 
 extension_star_count: 54
 extension_star_count_pretty: 54
-extension_download_count: 592
-extension_download_count_pretty: 592
+extension_download_count: 644
+extension_download_count_pretty: 644
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
