@@ -32,8 +32,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 2542
-extension_download_count_pretty: 2.5k
+extension_download_count: 2700
+extension_download_count_pretty: 2.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_curl_httpfs.png'
 layout: community_extension_doc
 ---
