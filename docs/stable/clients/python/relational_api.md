@@ -1840,7 +1840,7 @@ Create cross/cartesian product of two relational objects
 
 ##### Parameters
 
-- **other_rel** : duckdb.duckdb.DuckDBPyRelation
+- **other_rel** : _duckdb.DuckDBPyRelation
                             
 	Another relation to perform a cross product with.
 
@@ -1892,7 +1892,7 @@ Create the set except of this relation object with another relation object in ot
 
 ##### Parameters
 
-- **other_rel** : duckdb.duckdb.DuckDBPyRelation
+- **other_rel** : _duckdb.DuckDBPyRelation
                             
 	The relation to subtract from the current relation (set difference).
 
@@ -2128,7 +2128,7 @@ Create the set intersection of this relation object with another relation object
 
 ##### Parameters
 
-- **other_rel** : duckdb.duckdb.DuckDBPyRelation
+- **other_rel** : _duckdb.DuckDBPyRelation
                             
 	The relation to intersect with the current relation (set intersection).
 
@@ -2245,7 +2245,7 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
 
 ##### Parameters
 
-- **other_rel** : duckdb.duckdb.DuckDBPyRelation
+- **other_rel** : _duckdb.DuckDBPyRelation
                             
 	The relation to join with the current relation.
 - **condition** : object
@@ -2623,7 +2623,7 @@ Create the set union of this relation object with another relation object in oth
 
 ##### Parameters
 
-- **union_rel** : duckdb.duckdb.DuckDBPyRelation
+- **union_rel** : _duckdb.DuckDBPyRelation
                             
 	The relation to union with the current relation (set union).
 
@@ -2728,17 +2728,7 @@ rel.show()
 
 ## Functions 
 
-This section contains the functions which can be applied to a relation to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
-
-> Warning These functions may take arbitrary expressions as arguments, also when the parameter is named `column`.
-> Make sure to properly validate and escape input.
-> ```python
-> import duckdb
-> 
-> with duckdb.connect() as con:
->     rel = con.sql('select 1')
->     rel.max("(select t from read_text('/etc/hostname') as t)")
-> ```
+This section contains the functions which can be applied to a relation,         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
 
 | Name | Description |
 |:--|:-------|
@@ -5340,7 +5330,7 @@ Select columns from the relation, by filtering based on type(s)
 ##### Example
 
 ```python
-import duckdb.sqltypes
+import duckdb
 
 duckdb_conn = duckdb.connect()
 
@@ -5395,7 +5385,7 @@ Select columns from the relation, by filtering based on type(s)
 ##### Example
 
 ```python
-import duckdb.sqltypes
+import duckdb
 
 duckdb_conn = duckdb.connect()
 
@@ -6175,7 +6165,7 @@ This section contains the functions which will trigger an SQL execution and retr
 
 | Name | Description |
 |:--|:-------|
-| [`arrow`](#arrow) | Execute and return an Arrow Record Batch Reader that yields all rows |
+| [`arrow`](#arrow) | Alias of to_arrow_reader(). We recommend using to_arrow_reader() instead. |
 | [`close`](#close) | Closes the result |
 | [`create`](#create) | Creates a new table named table_name with the contents of the relation object |
 | [`create_view`](#create_view) | Creates a view named view_name that refers to the relation object |
@@ -6190,7 +6180,6 @@ This section contains the functions which will trigger an SQL execution and retr
 | [`fetchnumpy`](#fetchnumpy) | Execute and fetch all rows as a Python dict mapping each column to one numpy arrays |
 | [`fetchone`](#fetchone) | Execute and fetch a single row as a tuple |
 | [`pl`](#pl) | Execute and fetch all rows as a Polars DataFrame |
-| [`record_batch`](#record_batch) | record_batch(self: object, batch_size: typing.SupportsInt = 1000000) -> object |
 | [`tf`](#tf) | Fetch a result as dict of TensorFlow Tensors |
 | [`to_arrow_table`](#to_arrow_table) | Execute and fetch all rows as an Arrow Table |
 | [`to_csv`](#to_csv) | Write the relation object to a CSV file in 'file_name' |
@@ -6212,7 +6201,9 @@ arrow(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) 
 
 ##### Description
 
-Execute and return an Arrow Record Batch Reader that yields all rows
+Alias of to_arrow_reader(). We recommend using to_arrow_reader() instead.
+
+> Deprecated `arrow()` is deprecated for fetching results. Use [`arrow_reader()`](#arrow_reader) instead.
 
 **Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`to_arrow_table`](#to_arrow_table)
 
@@ -6496,12 +6487,14 @@ rel.execute()
 ##### Signature
 
 ```python
-fetch_arrow_reader(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.RecordBatchReader
+fetch_arrow_reader(self: object, batch_size: typing.SupportsInt = 1000000) -> object
 ```
 
 ##### Description
 
 Execute and return an Arrow Record Batch Reader that yields all rows
+
+> Deprecated `fetch_arrow_reader()` is deprecated. Use [`arrow_reader()`](#arrow_reader) instead.
 
 ##### Parameters
 
@@ -6554,12 +6547,14 @@ created_timestamp: [2025-04-10 09:25:51.259000Z]
 ##### Signature
 
 ```python
-fetch_arrow_table(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.Table
+fetch_arrow_table(self: object, batch_size: typing.SupportsInt = 1000000) -> object
 ```
 
 ##### Description
 
 Execute and fetch all rows as an Arrow Table
+
+> Deprecated `fetch_arrow_table()` is deprecated. Use [`arrow_table()`](#arrow_table) instead.
 
 **Aliases**: [`arrow`](#arrow), [`to_arrow_table`](#to_arrow_table)
 
@@ -7028,58 +7023,6 @@ shape: (9, 4)
 
 ----
 
-#### `record_batch`
-
-##### Description
-
-record_batch(self: object, batch_size: typing.SupportsInt = 1000000) -> object
-
-##### Parameters
-
-- **batch_size** : int, default: 1000000
-                            
-	The batch size for fetching the data.
-
-##### Example
-
-```python
-import duckdb
-
-duckdb_conn = duckdb.connect()
-
-rel = duckdb_conn.sql("""
-        select 
-            gen_random_uuid() as id, 
-            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
-            range as value, 
-            now() + concat(range,' ', 'minutes')::interval as created_timestamp
-        from range(1, 10)
-    """
-)
-
-pa_batch = rel.record_batch(batch_size=1)
-
-pa_batch.read_next_batch()
-```
-
-
-##### Result
-
-```text
-pyarrow.RecordBatch
-id: string
-description: string
-value: int64
-created_timestamp: timestamp[us, tz=Europe/Amsterdam]
-----
-id: ["908cf67c-a086-4b94-9017-2089a83e4a6c"]
-description: ["value is uneven"]
-value: [1]
-created_timestamp: [2025-04-10 09:52:55.249000Z]
-```
-
-----
-
 #### `tf`
 
 ##### Signature
@@ -7137,6 +7080,8 @@ to_arrow_table(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 
 ##### Description
 
 Execute and fetch all rows as an Arrow Table
+
+> Deprecated `to_arrow_table()` is deprecated. Use [`arrow_table()`](#arrow_table) instead.
 
 **Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`arrow`](#arrow)
 
@@ -7336,7 +7281,7 @@ rel.to_df()
 ##### Signature
 
 ```python
-to_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
+to_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None, filename_pattern: object = None, file_size_bytes: object = None) -> None
 ```
 
 ##### Description
@@ -7651,7 +7596,7 @@ The data is exported to a CSV file, named code_example.csv
 ##### Signature
 
 ```python
-write_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
+write_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None, filename_pattern: object = None, file_size_bytes: object = None) -> None
 ```
 
 ##### Description

@@ -1361,7 +1361,7 @@ rel.apply(
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="other_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="Another relation to perform a cross product with.",
             )
         ],
@@ -1382,7 +1382,7 @@ The relation query is executed twice, therefore generating different ids and tim
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="other_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="The relation to subtract from the current relation (set difference).",
             )
         ],
@@ -1521,7 +1521,7 @@ therefore generating different ids and timestamps:
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="other_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="The relation to intersect with the current relation (set intersection).",
             )
         ],
@@ -1612,7 +1612,7 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="other_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="The relation to join with the current relation.",
             ),
             PythonRelAPIParamDetails(
@@ -1780,7 +1780,7 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="union_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="The relation to union with the current relation (set union).",
             )
         ],
