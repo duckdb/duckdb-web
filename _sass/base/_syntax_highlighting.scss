@@ -75,7 +75,7 @@
 	:is(.ge)
 	{
 		color: #d70000;
-		font-family: $fontMonoItalicBold;
+		font-family: $fontMonoItalic;
 	}
 }
 
@@ -161,7 +161,7 @@ html.darkmode, .dark {
 		:is(.ge)
 		{
 			color: #ff6a6a;
-			font-family: $fontMonoItalicBold;
+			font-family: $fontMonoItalic;
 		}
 	}
 }
