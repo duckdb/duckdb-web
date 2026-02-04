@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mssql
   description: "Connect DuckDB to Microsoft SQL Server via native TDS (including TLS)."
-  version: "0.1.14"
+  version: "0.1.15"
   language: "C++"
   build: "cmake"
   licence: "MIT"
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: "hugr-lab/mssql-extension"
-  ref: "v0.1.14"
+  ref: "v0.1.15"
 
 docs:
   hello_world: |
@@ -46,6 +46,7 @@ docs:
     - Transaction support (BEGIN, COMMIT, ROLLBACK)
     - CREATE TABLE AS SELECT (CTAS) support
     - COPY/BCP support for bulk data loading
+    - ANSI-compliant connections for DDL commands
 
     See all features and configuration options in the [documentation](https://github.com/hugr-lab/mssql-extension).
 
@@ -54,10 +55,10 @@ docs:
     - Named instances not supported
     - Windows Authentication not supported
 
-extension_star_count: 22
-extension_star_count_pretty: 22
-extension_download_count: 768
-extension_download_count_pretty: 768
+extension_star_count: 30
+extension_star_count_pretty: 30
+extension_download_count: 843
+extension_download_count_pretty: 843
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
@@ -105,10 +106,12 @@ LOAD {{ page.extension.name }};
 | mssql_connection_cache              | Enable connection pooling and reuse                                                                  | BOOLEAN    | GLOBAL | []      |
 | mssql_connection_limit              | Maximum connections per attached mssql database                                                      | BIGINT     | GLOBAL | []      |
 | mssql_connection_timeout            | TCP connection timeout in seconds                                                                    | BIGINT     | GLOBAL | []      |
+| mssql_convert_varchar_max           | Convert VARCHAR(MAX) to NVARCHAR(MAX) in table scans for UTF-8 compatibility (default: true)         | BOOLEAN    | GLOBAL | []      |
 | mssql_copy_flush_rows               | Rows before flushing to SQL Server during COPY (default: 100000, 0=no flush until end - high memory) | BIGINT     | GLOBAL | []      |
-| mssql_copy_tablock                  | Use TABLOCK hint for COPY operations (default: true, improves performance 15-30%)                    | BOOLEAN    | GLOBAL | []      |
+| mssql_copy_tablock                  | Use TABLOCK hint for COPY/BCP operations (default: false, set true for 15-30% performance)           | BOOLEAN    | GLOBAL | []      |
 | mssql_ctas_drop_on_failure          | Drop table if CTAS insert phase fails (default: false, table remains for debugging)                  | BOOLEAN    | GLOBAL | []      |
 | mssql_ctas_text_type                | Text column type for CTAS: NVARCHAR (Unicode, default) or VARCHAR (collation-dependent)              | VARCHAR    | GLOBAL | []      |
+| mssql_ctas_use_bcp                  | Use BCP protocol for CTAS data transfer (default: true, 2-10x faster than INSERT)                    | BOOLEAN    | GLOBAL | []      |
 | mssql_dml_batch_size                | Maximum rows per UPDATE/DELETE batch (default: 500, affects parameter count)                         | BIGINT     | GLOBAL | []      |
 | mssql_dml_max_parameters            | Maximum parameters per UPDATE/DELETE statement (SQL Server limit ~2100)                              | BIGINT     | GLOBAL | []      |
 | mssql_dml_use_prepared              | Use prepared statements for UPDATE/DELETE operations                                                 | BOOLEAN    | GLOBAL | []      |

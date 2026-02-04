@@ -68,10 +68,10 @@ docs:
     This extension brings Lance into a familiar SQL workflow.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/lance-format/lance-duckdb).
 
-extension_star_count: 69
-extension_star_count_pretty: 69
-extension_download_count: 823
-extension_download_count_pretty: 823
+extension_star_count: 70
+extension_star_count_pretty: 70
+extension_download_count: 875
+extension_download_count_pretty: 875
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---

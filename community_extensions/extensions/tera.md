@@ -22,10 +22,10 @@ repo:
   github: query-farm/tera
   ref: 5b8e2b4701c69b196cc6386d86f811a5343ffc6e
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 697
-extension_download_count_pretty: 697
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 667
+extension_download_count_pretty: 667
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---
