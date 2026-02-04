@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: http_request
   description: HTTP client extension for DuckDB with GET/POST/PUT/PATCH/DELETE and byte-range requests
-  version: 0.8.0
+  version: '2026020301'
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb_http_request
-  ref: e55035fe799fc7173fa8b3706e1d88c866a048d3
+  ref: c3e9b06d912aa5a03d2eaefb686a081b4091d02a
 
 docs:
   hello_world: |
@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 600
-extension_download_count_pretty: 600
+extension_download_count: 340
+extension_download_count_pretty: 340
 image: '/images/community_extensions/social_preview/preview_community_extension_http_request.png'
 layout: community_extension_doc
 ---

@@ -121,8 +121,8 @@ extended_description: |
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 257
-extension_download_count_pretty: 257
+extension_download_count: 343
+extension_download_count_pretty: 343
 image: '/images/community_extensions/social_preview/preview_community_extension_brew.png'
 layout: community_extension_doc
 ---
@@ -148,11 +148,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type |                                              description                                               |                            comment                             |        examples        |
-|-------------------|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|------------------------|
-| brew_casks        | table         | Returns the installed casks                                                                            | NULL                                                           | [from brew_casks()]    |
-| brew_packages     | table         | Returns the installed packages, casks and formulas                                                     | NULL                                                           | [from brew_packages()] |
-| brew_formulas     | table         | Returns the installed formulas                                                                         | NULL                                                           | [from brew_formulas()] |
-| brew_dependencies | table         | Return a table with two columns : the package and the pakage that relies on it. One row per dependency | Useful to produce a graph of dependencies and security reports | [brew_dependencies]    |
+|   function_name   | function_type |                                              description                                               |                            comment                             |         examples         |
+|-------------------|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|--------------------------|
+| brew_casks        | table         | Returns the installed casks                                                                            | NULL                                                           | [from brew_casks()]      |
+| brew_packages     | table         | Returns the installed packages, casks and formulas                                                     | NULL                                                           | [from brew_packages()]   |
+| brew_formulas     | table         | Returns the installed formulas                                                                         | NULL                                                           | [from brew_formulas()]   |
+| brew_dependencies | table         | Return a table with two columns : the package and the pakage that relies on it. One row per dependency | Useful to produce a graph of dependencies and security reports | [from brew_dependencies] |
 
 
