@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 70
 extension_star_count_pretty: 70
-extension_download_count: 875
-extension_download_count_pretty: 875
+extension_download_count: 837
+extension_download_count_pretty: 837
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---
