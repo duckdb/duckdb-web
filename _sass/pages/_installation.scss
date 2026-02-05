@@ -358,6 +358,11 @@ body.installation{
 			border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
 		}
 		
+		button.copy{
+			right: 10px;
+			top: 10px;
+		}
+		
 		.language-text div.highlight {
 			border: none;
 		}
