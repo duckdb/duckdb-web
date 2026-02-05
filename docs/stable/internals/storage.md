@@ -141,6 +141,8 @@ DuckDB uses [lightweight compression]({% post_url 2022-10-28-lightweight-compres
 By default, compression is only applied to persistent databases and is **not applied to in-memory instances**.
 To turn on compression for in-memory databases, use `ATTACH` with the [`COMPRESS` option]({% link docs/stable/sql/statements/attach.md %}#options).
 
+Note that available compression algorithms depend on the storage version used, so you might need to set an explicit storage version to get access to all compression algorithms.
+
 ### Compression Algorithms
 
 The compression algorithms supported by DuckDB include the following:
@@ -154,6 +156,7 @@ The compression algorithms supported by DuckDB include the following:
 * [Adaptive Lossless Floating-Point Compression (ALP)]({% post_url 2024-02-13-announcing-duckdb-0100 %}#adaptive-lossless-floating-point-compression-alp) – [SIGMOD 2024 paper](https://ir.cwi.nl/pub/33334/33334.pdf)
 * [Chimp]({% post_url 2022-10-28-lightweight-compression %}#chimp--patas) – [VLDB 2022 paper](https://www.vldb.org/pvldb/vol15/p3058-liakos.pdf)
 * [Patas]({% post_url 2022-11-14-announcing-duckdb-060 %}#compression-improvements)
+* [Zstd]({% post_url 2025-02-05-announcing-duckdb-120 %}#zstd-compression)
 
 ## Disk Usage
 
