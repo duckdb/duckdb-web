@@ -87,10 +87,10 @@ docs:
     
     **Note**: This extension was written primarily using Claude and Claude Code as an exercise in AI-driven development.
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 924
-extension_download_count_pretty: 924
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 896
+extension_download_count_pretty: 896
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---

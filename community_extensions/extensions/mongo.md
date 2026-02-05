@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: stephaniewang526/duckdb-mongo
-  ref: 995f75d201156b2a6dc2ee58dbedf432f11c4c49
+  ref: 4949183d23ff02ad9d836888cb56b39ac569c237
 
 docs:
   hello_world: |
@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 38
 extension_star_count_pretty: 38
-extension_download_count: 709
-extension_download_count_pretty: 709
+extension_download_count: 690
+extension_download_count_pretty: 690
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---

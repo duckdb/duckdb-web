@@ -12,13 +12,13 @@ extension:
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64;windows_amd64_mingw"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - dentiny
 
 repo:
   github: dentiny/duckdb-rate-limit-filesystem
-  ref: 7d8f9018b55e3eea00ba508b51f192a666e420b3
+  ref: d61d1c4de440f7ad8fb9258699c7db40f610f47f
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 14
-extension_download_count_pretty: 14
+extension_download_count: 60
+extension_download_count_pretty: 60
 image: '/images/community_extensions/social_preview/preview_community_extension_rate_limit_fs.png'
 layout: community_extension_doc
 ---
