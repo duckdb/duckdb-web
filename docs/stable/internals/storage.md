@@ -71,6 +71,14 @@ This shows the storage versions:
 
 This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
 
+The `storage_compatibility_version` [configuration option]({% link docs/stable/configuration/overview.md %}#configuration-reference) can also be used to specify the storage version to use. It can be specified in various ways, for example at connect time using the Python bindings it looks as follows:
+
+```py
+duckdb.connect("file.db", config={'storage_compatibility_version': 'latest'})
+```
+
+When using the [commandline client]({% link docs/stable/clients/cli/overview.md %}), the storage version can be specified using the `-storage-version` option.
+
 ### Converting between Storage Versions
 
 To convert from the new format to the old format for compatibility, use the following sequence in DuckDB v1.2.0+:
