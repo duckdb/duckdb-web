@@ -86,3 +86,4 @@ The Appender is also available in the following client APIs:
 * [Java (JDBC)]({% link docs/stable/clients/java.md %}#appender)
 * [Julia]({% link docs/stable/clients/julia.md %}#appender-api)
 * [Rust]({% link docs/stable/clients/rust.md %}#appender)
+* [Node.js]({% link docs/stable/clients/node_neo/overview.md %}#append-to-table)
