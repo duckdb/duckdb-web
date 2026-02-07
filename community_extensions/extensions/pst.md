@@ -77,10 +77,10 @@ docs:
 
     For full schema documentation and usage examples, see the [GitHub repository](https://github.com/intellekthq/duckdb-pst).
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 296
-extension_download_count_pretty: 296
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 308
+extension_download_count_pretty: 308
 image: '/images/community_extensions/social_preview/preview_community_extension_pst.png'
 layout: community_extension_doc
 ---

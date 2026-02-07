@@ -92,8 +92,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 297
-extension_download_count_pretty: 297
+extension_download_count: 305
+extension_download_count_pretty: 305
 image: '/images/community_extensions/social_preview/preview_community_extension_anndata.png'
 layout: community_extension_doc
 ---
