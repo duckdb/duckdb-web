@@ -54,6 +54,8 @@ For LTS DuckDB versions, the support period for [community support](https://duck
 
 For an overview of end-of-life information, see the [DuckDB entry on `endoflife.date`](https://endoflife.date/duckdb).
 
+There is no set date yet for the release of DuckDB v1.4.5. We will select the date as necessitated by the issues filed for the DuckDB v1.4.x line. For exampe, if we encounter a critical issue or vulnerability, we will expedite the release of v1.4.5.
+
 ## Past Releases
 
 In the following, we list DuckDB's past releases along with their codename where applicable.
