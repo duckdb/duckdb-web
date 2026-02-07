@@ -87,15 +87,15 @@ extension:
   name: llm
   requires_extensions:
     - http_request
-  version: 0.2.0
+  version: '2026020501'
 repo:
   github: midwork-finds-jobs/duckdb-llm
-  ref: d3415f76c722737df109236591f9273d81a7b904
+  ref: 2de6c4d2a7d1bc6cefe8adfac8ecb16c1e7b2f3e
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 592
-extension_download_count_pretty: 592
+extension_download_count: 194
+extension_download_count_pretty: 194
 image: '/images/community_extensions/social_preview/preview_community_extension_llm.png'
 layout: community_extension_doc
 ---

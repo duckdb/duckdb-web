@@ -136,10 +136,10 @@ extended_description: |
   - Enforce data contracts and expectations
   - Track data quality metrics over time
   - Catch data anomalies and schema changes early
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 51
+extension_download_count_pretty: 51
 image: '/images/community_extensions/social_preview/preview_community_extension_dqtest.png'
 layout: community_extension_doc
 ---

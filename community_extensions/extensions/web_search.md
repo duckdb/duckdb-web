@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: web_search
   description: Query Google Custom Search API directly from SQL with filter pushdowns
-  version: 0.4.0
+  version: '2026020501'
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-web-search
-  ref: 7993d775af7f1ab07bb4be1a0a1a68cf65ab8e9b
+  ref: cbfe75a10fbe513d5e3ae30151be427f22cfb4e5
 
 docs:
   hello_world: |
@@ -76,8 +76,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 609
-extension_download_count_pretty: 609
+extension_download_count: 201
+extension_download_count_pretty: 201
 image: '/images/community_extensions/social_preview/preview_community_extension_web_search.png'
 layout: community_extension_doc
 ---

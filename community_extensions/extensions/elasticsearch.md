@@ -67,10 +67,10 @@ docs:
 
     For detailed documentation, visit the [extension repository](https://github.com/tlinhart/duckdb-elasticsearch).
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 123
-extension_download_count_pretty: 123
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 207
+extension_download_count_pretty: 207
 image: '/images/community_extensions/social_preview/preview_community_extension_elasticsearch.png'
 layout: community_extension_doc
 ---

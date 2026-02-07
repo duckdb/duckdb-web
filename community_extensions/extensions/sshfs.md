@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sshfs
   description: Allows reading and writing files over SSH
-  version: 1.0.1
+  version: '2026020501'
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
   vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
 repo:
   github: midwork-finds-jobs/duckdb-sshfs
-  ref: 913e81ac5d8eb2940e12d85a3247077a408a944d
+  ref: 644366f21a80397d38979e6200fd26a544b98e7e
 
 docs:
   hello_world: |
@@ -58,8 +58,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 389
-extension_download_count_pretty: 389
+extension_download_count: 393
+extension_download_count_pretty: 393
 image: '/images/community_extensions/social_preview/preview_community_extension_sshfs.png'
 layout: community_extension_doc
 ---
