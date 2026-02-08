@@ -143,7 +143,6 @@ An expression may be used as the source of a `COPY ... FROM` command if it is pl
 Read the contents of a file whose path is stored in a variable into the `lineitem` table:
 
 ```sql
-
 SET VARIABLE source_file = 'lineitem.json';
 COPY lineitem FROM (getvariable('source_file'));
 ```
