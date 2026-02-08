@@ -242,7 +242,7 @@ COPY (SELECT 'hello world') TO (getvariable('target_file'));
 Copy to a file provided as parameter of a prepared statement:
 
 ```sql
-PREPARE v1 AS COPY (SELECT 42 i) to $1;
+PREPARE v1 AS COPY (SELECT 42 AS i) to $1;
 EXECUTE v1('file.csv');
 ```
 
@@ -250,7 +250,7 @@ Expressions may be used for options as well. Copy to a file using a format store
 
 ```sql
 SET VARIABLE my_format = 'parquet';
-COPY (SELECT 42 i) TO 'file' (FORMAT getvariable('my_format'));
+COPY (SELECT 42 AS i) TO 'file' (FORMAT getvariable('my_format'));
 ```
 
 ### `COPY ... TO` Options
