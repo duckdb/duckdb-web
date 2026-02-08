@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_block_utils
   description: Build, transform, validate, and extract content from structured documents using the duck_block type
-  version: 1.2.0
+  version: 1.2.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: teaguesterling/duckdb_duck_block_utils
-  ref: 88048e0fe27d93acd210623f41999e660c31a3f0
+  ref: a0064ef1405ab86a4d007a14a0e37f0a7ba604fe
 
 docs:
   hello_world: |
@@ -172,10 +172,10 @@ docs:
     ) TO 'output.md' (FORMAT markdown, MARKDOWN_MODE duck_block);
     ```
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 557
-extension_download_count_pretty: 557
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 164
+extension_download_count_pretty: 164
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---

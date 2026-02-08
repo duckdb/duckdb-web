@@ -17,12 +17,12 @@ extension:
     - sipemu
 repo:
   github: DataZooDE/anofox-forecast
-  ref: 54819774bdca42fd6914fc53d2338d2c8eaf9ffe
+  ref: 9f9e1ebbb7aeed388941b0eca6c16e8e0f7c1227
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 480
-extension_download_count_pretty: 480
+extension_download_count: 458
+extension_download_count_pretty: 458
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -52,7 +52,10 @@ LOAD {{ page.extension.name }};
 |---------------------------------------------|---------------|-------------|---------|----------|
 | _anofox_fcst_ts_backtest_native             | table         | NULL        | NULL    |          |
 | _ts_backtest_native                         | table         | NULL        | NULL    |          |
+| _ts_coverage_native                         | table         | NULL        | NULL    |          |
+| _ts_cv_folds_native                         | table         | NULL        | NULL    |          |
 | _ts_cv_forecast_native                      | table         | NULL        | NULL    |          |
+| _ts_cv_hydrate_native                       | table         | NULL        | NULL    |          |
 | _ts_cv_split_native                         | table         | NULL        | NULL    |          |
 | _ts_data_quality                            | scalar        | NULL        | NULL    |          |
 | _ts_detect_changepoints_bocpd               | scalar        | NULL        | NULL    |          |
@@ -64,8 +67,12 @@ LOAD {{ page.extension.name }};
 | _ts_forecast                                | scalar        | NULL        | NULL    |          |
 | _ts_forecast_exog                           | scalar        | NULL        | NULL    |          |
 | _ts_forecast_native                         | table         | NULL        | NULL    |          |
+| _ts_mase_native                             | table         | NULL        | NULL    |          |
+| _ts_metrics_native                          | table         | NULL        | NULL    |          |
 | _ts_mstl_decomposition                      | scalar        | NULL        | NULL    |          |
 | _ts_mstl_decomposition_native               | table         | NULL        | NULL    |          |
+| _ts_quantile_loss_native                    | table         | NULL        | NULL    |          |
+| _ts_rmae_native                             | table         | NULL        | NULL    |          |
 | _ts_stats                                   | scalar        | NULL        | NULL    |          |
 | _ts_stats_by_native                         | table         | NULL        | NULL    |          |
 | _ts_stats_with_dates                        | scalar        | NULL        | NULL    |          |
@@ -110,7 +117,6 @@ LOAD {{ page.extension.name }};
 | ts_analyze_peak_timing_by                   | table_macro   | NULL        | NULL    |          |
 | ts_analyze_seasonality                      | scalar        | NULL        | NULL    |          |
 | ts_autoperiod                               | scalar        | NULL        | NULL    |          |
-| ts_backtest_auto_by                         | table_macro   | NULL        | NULL    |          |
 | ts_bias                                     | scalar        | NULL        | NULL    |          |
 | ts_bias_by                                  | table_macro   | NULL        | NULL    |          |
 | ts_cfd_autoperiod                           | scalar        | NULL        | NULL    |          |
@@ -133,8 +139,9 @@ LOAD {{ page.extension.name }};
 | ts_conformal_quantile                       | scalar        | NULL        | NULL    |          |
 | ts_coverage                                 | scalar        | NULL        | NULL    |          |
 | ts_coverage_by                              | table_macro   | NULL        | NULL    |          |
+| ts_cv_folds_by                              | table_macro   | NULL        | NULL    |          |
 | ts_cv_forecast_by                           | table_macro   | NULL        | NULL    |          |
-| ts_cv_generate_folds                        | table_macro   | NULL        | NULL    |          |
+| ts_cv_hydrate_by                            | table_macro   | NULL        | NULL    |          |
 | ts_cv_split_by                              | table_macro   | NULL        | NULL    |          |
 | ts_cv_split_folds_by                        | table_macro   | NULL        | NULL    |          |
 | ts_cv_split_index_by                        | table_macro   | NULL        | NULL    |          |
@@ -190,10 +197,6 @@ LOAD {{ page.extension.name }};
 | ts_forecast_by                              | table_macro   | NULL        | NULL    |          |
 | ts_forecast_exog                            | table_macro   | NULL        | NULL    |          |
 | ts_forecast_exog_by                         | table_macro   | NULL        | NULL    |          |
-| ts_hydrate_features_by                      | table_macro   | NULL        | NULL    |          |
-| ts_hydrate_split_by                         | table_macro   | NULL        | NULL    |          |
-| ts_hydrate_split_full_by                    | table_macro   | NULL        | NULL    |          |
-| ts_hydrate_split_strict_by                  | table_macro   | NULL        | NULL    |          |
 | ts_instantaneous_period                     | scalar        | NULL        | NULL    |          |
 | ts_interval_width_by                        | table_macro   | NULL        | NULL    |          |
 | ts_lomb_scargle                             | scalar        | NULL        | NULL    |          |
@@ -210,7 +213,6 @@ LOAD {{ page.extension.name }};
 | ts_mse                                      | scalar        | NULL        | NULL    |          |
 | ts_mse_by                                   | table_macro   | NULL        | NULL    |          |
 | ts_mstl_decomposition_by                    | table_macro   | NULL        | NULL    |          |
-| ts_prepare_regression_input_by              | table_macro   | NULL        | NULL    |          |
 | ts_quality_report                           | table_macro   | NULL        | NULL    |          |
 | ts_quantile_loss                            | scalar        | NULL        | NULL    |          |
 | ts_quantile_loss_by                         | table_macro   | NULL        | NULL    |          |
