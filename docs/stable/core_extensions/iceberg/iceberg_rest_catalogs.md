@@ -197,7 +197,14 @@ ATTACH '⟨warehouse⟩' AS my_r2_catalog (
 );
 ```
 
-The variables for `warehouse` and `catalog-uri` will be available under the settings of the desired R2 Object Storage Catalog (R2 Object Store, Catalog name, Settings).
+The variables for `warehouse` and `catalog-uri` are available under the settings of the R2 Object Storage Catalog (R2 Object Store, Catalog name, Settings).
+
+Once you attached to the R2 Data Catalog, create a schema. You can set it as default with the `USE` command:
+
+```sql
+CREATE SCHEMA my_r2_catalog.my_schema;
+USE my_r2_catalog.my_schema;
+```
 
 ### Polaris
 
