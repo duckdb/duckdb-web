@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: teaguesterling/sitting_duck
-  ref: 'deed3fa45652827f5500da9a492ee1f492857d31'
+  ref: 'acfa07a8da6c6d6b6df45180f6f6a48970e1f7b7'
   
 docs:
   hello_world: |
@@ -136,10 +136,10 @@ docs:
 
     **GitHub:** https://github.com/teaguesterling/sitting_duck
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 605
-extension_download_count_pretty: 605
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 171
+extension_download_count_pretty: 171
 image: '/images/community_extensions/social_preview/preview_community_extension_sitting_duck.png'
 layout: community_extension_doc
 ---
