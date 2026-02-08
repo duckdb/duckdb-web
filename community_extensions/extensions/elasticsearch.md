@@ -69,8 +69,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 207
-extension_download_count_pretty: 207
+extension_download_count: 247
+extension_download_count_pretty: 247
 image: '/images/community_extensions/social_preview/preview_community_extension_elasticsearch.png'
 layout: community_extension_doc
 ---

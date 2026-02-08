@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fire_duck_ext
   description: Query Google Cloud Firestore directly from DuckDB using SQL
-  version: 0.1.0
+  version: 0.1.1
   language: C++
   build: cmake
   license: MIT
@@ -18,17 +18,40 @@ extension:
 
 repo:
   github: BorisBesky/fire_duck_ext
-  ref: 0aecf8d9b5495c2419ef015296d613faafccfc58
+  ref: 15b83084be3d51e2aa249eb05a87b5eccf42e43b
 
 docs:
   hello_world: |
     LOAD fire_duck_ext;
 
-    -- Create a secret for the Firestore project
+    -- Authenticate with a service account JSON file
     CREATE SECRET my_firestore (
         TYPE firestore,
         PROJECT_ID 'my-gcp-project',
-        SERVICE_ACCOUNT_JSON '/path/to/credentials.json'
+        SERVICE_ACCOUNT_JSON '/path/to/service-account.json'
+    );
+
+    -- Or use inline JSON for the service account
+    CREATE SECRET my_firestore (
+        TYPE firestore,
+        PROJECT_ID 'my-gcp-project',
+        SERVICE_ACCOUNT_JSON '{
+            "type": "service_account",
+            "project_id": "my-gcp-project",
+            "private_key_id": "key123abc",
+            "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----\n",
+            "client_email": "sa@my-gcp-project.iam.gserviceaccount.com",
+            "client_id": "123456789",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token"
+        }'
+    );
+
+    -- Or authenticate with an API key (for dev/testing)
+    CREATE SECRET my_firestore (
+        TYPE firestore,
+        PROJECT_ID 'my-gcp-project',
+        API_KEY 'AIzaSyYourApiKeyHere'
     );
 
     -- Read documents
@@ -40,7 +63,7 @@ docs:
     WHERE status = 'active';
 
     -- Update documents
-    SELECT * FROM firestore_update('users', 'user123', 'status', 'verified');
+    CALL firestore_update('users', 'user123', 'status', 'verified');
 
     -- Batch update with DuckDB filtering
     SET VARIABLE ids = (
@@ -48,20 +71,47 @@ docs:
         FROM firestore_scan('users')
         WHERE status = 'pending'
     );
-    SELECT * FROM firestore_update_batch('users', getvariable('ids'), 'status', 'reviewed', 'updated_at', now());
+    CALL firestore_update_batch('users', getvariable('ids'), 'status', 'reviewed', 'updated_at', now());
 
     -- Insert documents from a subquery (auto-generated IDs)
-    SELECT * FROM firestore_insert('users', (SELECT name, age FROM read_csv('new_users.csv')));
+    CALL firestore_insert('users', (SELECT name, age FROM read_csv('new_users.csv')));
 
     -- Insert with explicit document IDs from a column
-    SELECT * FROM firestore_insert('users',
+    CALL firestore_insert('users',
         (SELECT * FROM read_csv('new_users.csv')),
         document_id := 'user_id');
-    
+
     -- Insert with explicit document ID selected from a column
-    SELECT * FROM firestore_insert('users', 
-        (SELECT 'Alice' AS name, 30 AS age, 'alice_user_id' AS user_id), 
+    CALL firestore_insert('users',
+        (SELECT 'Alice' AS name, 30 AS age, 'alice_user_id' AS user_id),
         document_id := 'user_id');
+
+    -- Target a specific named database
+    CREATE SECRET my_named_db (
+        TYPE firestore,
+        PROJECT_ID 'my-gcp-project',
+        SERVICE_ACCOUNT_JSON '/path/to/credentials.json',
+        DATABASE 'my-database'
+    );
+
+    -- Target multiple databases with a single secret
+    CREATE SECRET my_multi_db (
+        TYPE firestore,
+        PROJECT_ID 'my-gcp-project',
+        SERVICE_ACCOUNT_JSON '/path/to/credentials.json',
+        DATABASES ['(default)', 'analytics-db']
+    );
+
+    -- Target multiple databases with an API key
+    CREATE SECRET my_multi_db (
+        TYPE firestore,
+        PROJECT_ID 'my-gcp-project',
+        API_KEY 'AIzaSyYourApiKeyHere',
+        DATABASES ['(default)', 'analytics-db']
+    );
+
+    -- Connect to a specific database for the session
+    CALL firestore_connect('analytics-db');
 
     -- Collection group queries
     SELECT __document_id, name, email
@@ -76,35 +126,35 @@ docs:
     secret management for credential storage. Filter pushdown optimizes
     queries by sending supported filters directly to Firestore.
 
-    ## Functions
-    | Function                                                                         | Description                                              |
-    |----------------------------------------------------------------------------------|----------------------------------------------------------|
-    | firestore_scan('collection')                                                     | Read all documents from a collection                     |
-    | firestore_scan('~collection')                                                    | Read all documents from a collection group               |
-    | firestore_insert('collection', (SELECT ...), document_id := 'col')               | Insert documents from a subquery                         |
-    | firestore_update('collection', 'doc_id', 'field1', value1, ...)                  | Update fields on a single document                       |
-    | firestore_delete('collection', 'doc_id')                                         | Delete a single document                                 |
-    | firestore_update_batch('collection', ['id1', ...], 'field1', value1, ...)        | Batch update documents by ID list                        |
-    | firestore_delete_batch('collection', ['id1', ...])                               | Batch delete documents by ID list                        |
-    | firestore_array_union('collection', 'doc_id', 'field', ['v1', ...])              | Add elements to an array field (no duplicates)           |
-    | firestore_array_remove('collection', 'doc_id', 'field', ['v1', ...])             | Remove elements from an array field                      |
-    | firestore_array_append('collection', 'doc_id', 'field', ['v1', ...])             | Append elements to an array field                        |
+    ## Authentication
+    Secrets require `PROJECT_ID` and one of `SERVICE_ACCOUNT_JSON` or
+    `API_KEY`.
+
+    `SERVICE_ACCOUNT_JSON` accepts either a file path or the full inline
+    JSON text of a Google Cloud service account key. The JSON must contain
+    at least `type`, `project_id`, `private_key`, and `client_email`.
+
+    `API_KEY` provides unauthenticated access suitable for development,
+    testing, or public databases. API key auth does not support
+    `batchWrite`, so batch operations fall back to individual requests.
+
+    If the `GOOGLE_APPLICATION_CREDENTIALS` environment variable is set,
+    the extension automatically creates an internal secret on startup that
+    matches all databases (`DATABASE '*'`), so no `CREATE SECRET` is needed.
 
     ## Type Mapping
-    | Firestore Type | DuckDB Type                              |
-    |----------------|------------------------------------------|
-    | string         | VARCHAR                                  |
-    | integer        | BIGINT                                   |
-    | double         | DOUBLE                                   |
-    | boolean        | BOOLEAN                                  |
-    | timestamp      | TIMESTAMP                                |
-    | array          | LIST                                     |
-    | map            | VARCHAR (JSON string)                    |
-    | vector         | ARRAY(DOUBLE, N) (embedding)             |
-    | null           | NULL                                     |
-    | geoPoint       | STRUCT(latitude DOUBLE, longitude DOUBLE) |
-    | reference      | VARCHAR                                  |
-    | bytes          | BLOB                                     |
+    - `string` → VARCHAR
+    - `integer` → BIGINT
+    - `double` → DOUBLE
+    - `boolean` → BOOLEAN
+    - `timestamp` → TIMESTAMP
+    - `array` → LIST
+    - `map` → VARCHAR (JSON string)
+    - `vector` → ARRAY(DOUBLE, N) (embedding)
+    - `null` → NULL
+    - `geoPoint` → STRUCT(latitude DOUBLE, longitude DOUBLE)
+    - `reference` → VARCHAR
+    - `bytes` → BLOB
 
     ## Schema Inference
     When you call `firestore_scan()`, the extension automatically infers the
@@ -144,15 +194,35 @@ docs:
     independently. If batchWrite is unavailable (e.g., API key auth), the
     extension falls back to individual operations automatically.
 
+    ## Database Targeting
+    By default, secrets target the `(default)` Firestore database. Use
+    `DATABASE 'name'` for a single named database, `DATABASE '*'` as a
+    wildcard that matches any database, or `DATABASES ['db1', 'db2']` to
+    allow a single secret to match multiple named databases. You cannot
+    specify both `DATABASE` and `DATABASES` in the same secret.
+
+    Use `CALL firestore_connect('db-name')` to set the session database.
+    All subsequent queries use this database until
+    `CALL firestore_disconnect()` is called. A per-query `database :=`
+    parameter always takes priority over the connected session database.
+
     ## Collection Group Queries
     Use the `~collection` prefix to query across all subcollections with a
     given name. For example, `firestore_scan('~orders')` reads all documents
     from every subcollection named "orders" regardless of parent path.
 
+    ## Missing Documents
+    By default, `firestore_scan()` includes phantom/missing documents —
+    documents that have no fields but exist as parent paths for
+    subcollections. This matches Firebase Console behavior and is controlled
+    by `show_missing` (default: `true`). Set `show_missing := false` to
+    only return documents with fields. When a collection contains only
+    phantom documents, the result includes just the `__document_id` column.
+
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 316
-extension_download_count_pretty: 316
+extension_download_count: 306
+extension_download_count_pretty: 306
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---
@@ -178,16 +248,27 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name      | function_type | description | comment | examples |
-|------------------------|---------------|-------------|---------|----------|
-| firestore_array_append | table         | NULL        | NULL    |          |
-| firestore_array_remove | table         | NULL        | NULL    |          |
-| firestore_array_union  | table         | NULL        | NULL    |          |
-| firestore_delete       | table         | NULL        | NULL    |          |
-| firestore_delete_batch | table         | NULL        | NULL    |          |
-| firestore_insert       | table         | NULL        | NULL    |          |
-| firestore_scan         | table         | NULL        | NULL    |          |
-| firestore_update       | table         | NULL        | NULL    |          |
-| firestore_update_batch | table         | NULL        | NULL    |          |
+|     function_name      | function_type |                             description                             | comment |                                       examples                                       |
+|------------------------|---------------|---------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------|
+| firestore_scan         | table         | Read all documents from a Firestore collection or collection group. | NULL    | [SELECT * FROM firestore_scan('users');]                                             |
+| firestore_insert       | table         | Insert documents into a Firestore collection from a subquery.       | NULL    | [CALL firestore_insert('users', (SELECT name, age FROM read_csv('new_users.csv')));] |
+| firestore_update       | table         | Update fields on a single Firestore document.                       | NULL    | [CALL firestore_update('users', 'user123', 'status', 'verified');]                   |
+| firestore_delete       | table         | Delete a single Firestore document.                                 | NULL    | [CALL firestore_delete('users', 'user123');]                                         |
+| firestore_update_batch | table         | Batch update multiple Firestore documents by ID list.               | NULL    | [CALL firestore_update_batch('users', ['id1', 'id2'], 'status', 'reviewed');]        |
+| firestore_delete_batch | table         | Batch delete multiple Firestore documents by ID list.               | NULL    | [CALL firestore_delete_batch('users', ['id1', 'id2']);]                              |
+| firestore_array_union  | table         | Add elements to an array field without duplicates.                  | NULL    | [CALL firestore_array_union('users', 'user123', 'tags', ['vip', 'active']);]         |
+| firestore_array_remove | table         | Remove elements from an array field.                                | NULL    | [CALL firestore_array_remove('users', 'user123', 'tags', ['inactive']);]             |
+| firestore_array_append | table         | Append elements to an array field (allows duplicates).              | NULL    | [CALL firestore_array_append('users', 'user123', 'log', ['event1']);]                |
+| firestore_clear_cache  | table         | Clear the cached schema for all or a specific collection.           | NULL    | [CALL firestore_clear_cache();]                                                      |
+| firestore_disconnect   | table         | NULL                                                                | NULL    | NULL                                                                                 |
+| firestore_connect      | table         | NULL                                                                | NULL    | NULL                                                                                 |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|            name            |                    description                     | input_type | scope  | aliases |
+|----------------------------|----------------------------------------------------|------------|--------|---------|
+| firestore_schema_cache_ttl | Schema cache TTL in seconds (0 to disable caching) | BIGINT     | GLOBAL | []      |
 
 
