@@ -206,6 +206,14 @@ import duckdb
 con = duckdb.connect(config = {'threads': 1})
 ```
 
+To specify the [storage version]({% link docs/stable/internals/storage.md %}), pass the `storage_compatibility_version` option:
+
+```python
+import duckdb
+
+con = duckdb.connect(config = {'storage_compatibility_version': 'latest'})
+```
+
 ### Connection Object and Module
 
 The connection object and the `duckdb` module can be used interchangeably – they support the same methods. The only difference is that when using the `duckdb` module a global in-memory database is used.

@@ -148,7 +148,7 @@ After defining the schema, both files can be loaded with a simple `COPY` stateme
 | -------------- | -------: | --------: |
 | CSV            |    11.76 |     15.95 |
 | Parquet Snappy |     5.21 |      3.78 |
-| Parquet ZSTD   |     5.52 |      3.22 |
+| Parquet Zstd   |     5.52 |      3.22 |
 
 We can see that the Parquet files are definitely smaller. About 5× smaller than the CSV file, but the performance difference is not drastic.
 
@@ -192,7 +192,7 @@ ORDER BY
 | -------------- | -------: |
 | CSV            |     6.72 |
 | Parquet Snappy |     0.88 |
-| Parquet ZSTD   |     0.95 |
+| Parquet Zstd   |     0.95 |
 
 We can see that running this query directly on our file presents a much larger performance gap of approximately 7x compared to simply loading the data into the table. In the Parquet file, we can directly skip row groups that do not match our filter `l_shipdate <= CAST('1996-09-02' AS date)`. Note that this filter, eliminates approximately 30% of the data. Not only that, but we can also skip individual rows that do not match the filter. Additionally, since the Parquet format is column-oriented, we can completely skip any computation on columns that are not projected.
 
@@ -247,7 +247,7 @@ LIMIT 100;
 | -------------- | -------: |
 | CSV            |    19.95 |
 | Parquet Snappy |     2.08 |
-| Parquet ZSTD   |     2.12 |
+| Parquet Zstd   |     2.12 |
 
 We can see that this query now has a performance difference of approximately 10×. We observe an effect similar to Query 01, but now we also incur the additional cost of performing join ordering with no statistical information for the CSV file.
 

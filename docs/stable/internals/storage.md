@@ -71,6 +71,14 @@ This shows the storage versions:
 
 This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
 
+The `storage_compatibility_version` [configuration option]({% link docs/stable/configuration/overview.md %}#configuration-reference) can also be used to specify the storage version to use. It can be specified in various ways, for example at connect time using the Python bindings it looks as follows:
+
+```python
+duckdb.connect("file.db", config={'storage_compatibility_version': 'latest'})
+```
+
+When using the [commandline client]({% link docs/stable/clients/cli/overview.md %}), the storage version can be specified using the `-storage-version` option.
+
 ### Converting between Storage Versions
 
 To convert from the new format to the old format for compatibility, use the following sequence in DuckDB v1.2.0+:
@@ -141,6 +149,8 @@ DuckDB uses [lightweight compression]({% post_url 2022-10-28-lightweight-compres
 By default, compression is only applied to persistent databases and is **not applied to in-memory instances**.
 To turn on compression for in-memory databases, use `ATTACH` with the [`COMPRESS` option]({% link docs/stable/sql/statements/attach.md %}#options).
 
+Note that available compression algorithms depend on the storage version used, so you might need to set an explicit storage version to get access to all compression algorithms.
+
 ### Compression Algorithms
 
 The compression algorithms supported by DuckDB include the following:
@@ -154,6 +164,7 @@ The compression algorithms supported by DuckDB include the following:
 * [Adaptive Lossless Floating-Point Compression (ALP)]({% post_url 2024-02-13-announcing-duckdb-0100 %}#adaptive-lossless-floating-point-compression-alp) – [SIGMOD 2024 paper](https://ir.cwi.nl/pub/33334/33334.pdf)
 * [Chimp]({% post_url 2022-10-28-lightweight-compression %}#chimp--patas) – [VLDB 2022 paper](https://www.vldb.org/pvldb/vol15/p3058-liakos.pdf)
 * [Patas]({% post_url 2022-11-14-announcing-duckdb-060 %}#compression-improvements)
+* [Zstd]({% post_url 2025-02-05-announcing-duckdb-120 %}#zstd-compression)
 
 ## Disk Usage
 

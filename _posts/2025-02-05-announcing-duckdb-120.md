@@ -259,6 +259,18 @@ Currently, DuckDB extensions use DuckDB’s internal C++ structures. This – al
 [**Distributing extensions for musl.**](https://github.com/duckdb/duckdb/pull/15607)
 The [`musl` C library](https://musl.libc.org/) is often used in lightweight setups such as Docker setups running Alpine Linux. Starting with this release, we officially support musl and we distribute extensions for the `linux_amd64_musl` platform (but not yet for `linux_arm64_musl`). Note that DuckDB binaries (e.g., the CLI client) are not yet distributed for musl platforms, so you have to [build them from source]({% link docs/stable/dev/building/linux.md %}).
 
+### Zstd Compression
+
+Columns can now be compressed with Zstd compression, which is suitable for bigger strings. By default, this compression is only considered for strings longer than 4096 characters, but this can be changed with the `zstd_min_string_length` setting.
+
+Zstd compression can be enabled for a column explicitly when creating the table:
+
+```sql
+CREATE TABLE t (
+    v VARCHAR USING COMPRESSION 'zstd';
+);
+```
+
 ## Final Thoughts
 
 These were a few highlights – but there are many more features and improvements in this release.  There have been **over 5 000 commits** by over 70 contributors since we released 1.1.3. The full – very long – release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
