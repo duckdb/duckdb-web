@@ -43,17 +43,17 @@ As an example of this concept, let us consider the following two data sets.
 
 The constant data set can be compressed by simply storing the value of the pattern and how many times the pattern repeats (e.g., `1x8`). The random noise, on the other hand, has no pattern, and is therefore not compressible.
 
-## General Purpose Compression Algorithms
+## General-Purpose Compression Algorithms
 
-The compression algorithms that most people are familiar with are _general purpose compression algorithms_, such as Zip, Gzip or Zstd. General purpose compression algorithms work by finding patterns in bits. They are therefore agnostic to data types, and can be used on any stream of bits. They can be used to compress files, but they can also be applied to arbitrary data sent over a socket connection.
+The compression algorithms that most people are familiar with are _general-purpose compression algorithms_, such as Zip, Gzip or Zstd. General-purpose compression algorithms work by finding patterns in bits. They are therefore agnostic to data types, and can be used on any stream of bits. They can be used to compress files, but they can also be applied to arbitrary data sent over a socket connection.
 
-General purpose compression is flexible and very easy to set up. There are a number of high quality libraries available (such as Zstd, Snappy or LZ4) that provide compression, and they can be applied to any data set stored in any manner.
+General-purpose compression is flexible and very easy to set up. There are a number of high quality libraries available (such as Zstd, Snappy or LZ4) that provide compression, and they can be applied to any data set stored in any manner.
 
-The downside of general purpose compression is that (de)compression is generally expensive. While this does not matter if we are reading and writing from a hard disk or over a slow internet connection, the speed of (de)compression can become a bottleneck when data is stored in RAM.
+The downside of general-purpose compression is that (de)compression is generally expensive. While this does not matter if we are reading and writing from a hard disk or over a slow internet connection, the speed of (de)compression can become a bottleneck when data is stored in RAM.
 
 Another downside is that these libraries operate as a _black box_. They operate on streams of bits, and do not reveal information of their internal state to the user. While that is not a problem if you are only looking to decrease the size of your data, it prevents the system from taking advantage of the patterns found by the compression algorithm during execution.
 
-Finally, general purpose compression algorithms work better when compressing large chunks of data. As illustrated in the table below, compression ratios suffer significantly when compressing small amounts of data. To achieve a good compression ratio, blocks of at least **256 kB** must be used.
+Finally, general-purpose compression algorithms work better when compressing large chunks of data. As illustrated in the table below, compression ratios suffer significantly when compressing small amounts of data. To achieve a good compression ratio, blocks of at least **256 kB** must be used.
 
 | Compression | 1 kB | 4 kB | 16 kB | 64 kB | 256 kB | 1 MB |
 | ----------- | ---: | ---: | ----: | ----: | -----: | ---: |
@@ -65,13 +65,13 @@ This is relevant because the block size is the minimum amount of data that must 
 
 ## Lightweight Compression Algorithms
 
-Another option for achieving compression is to use specialized lightweight compression algorithms. These algorithms also operate by finding patterns in data. However, unlike general purpose compression, they do not attempt to find generic patterns in bitstreams. Instead, they operate by finding **specific patterns** in data sets.
+Another option for achieving compression is to use specialized lightweight compression algorithms. These algorithms also operate by finding patterns in data. However, unlike general-purpose compression, they do not attempt to find generic patterns in bitstreams. Instead, they operate by finding **specific patterns** in data sets.
 
 By detecting specific patterns, specialized compression algorithms can be significantly more lightweight, providing much faster compression and decompression. In addition, they can be effective on much smaller data sizes. This allows us to decompress a few rows at a time, rather than requiring large blocks of data to be decompressed at once. These specialized compression algorithms can also offer efficient support for random seeks, making data access through an index significantly faster.
 
 Lightweight compression algorithms also provide us with more fine-grained control over the compression process. This is especially relevant for us as DuckDB's file format uses fixed-size blocks in order to avoid fragmentation for workloads involving deletes and updates. The fine-grained control allows us to fill these blocks more effectively, and avoid having to guess how much compressed data will fit into a buffer.
 
-On the flip side, these algorithms are ineffective if the specific patterns they are designed for do not occur in the data. As a result, individually, these lightweight compression algorithms are no replacement for general purpose algorithms. Instead, multiple specialized algorithms must be combined in order to capture many different common patterns in data sets.
+On the flip side, these algorithms are ineffective if the specific patterns they are designed for do not occur in the data. As a result, individually, these lightweight compression algorithms are no replacement for general-purpose algorithms. Instead, multiple specialized algorithms must be combined in order to capture many different common patterns in data sets.
 
 ## Compression Framework
 
