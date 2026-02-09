@@ -73,7 +73,7 @@ This means that `file2` can be opened by past DuckDB versions while `file1` is c
 
 The `storage_compatibility_version` [configuration option]({% link docs/stable/configuration/overview.md %}#configuration-reference) can also be used to specify the storage version to use. It can be specified in various ways, for example at connect time using the Python bindings it looks as follows:
 
-```py
+```python
 duckdb.connect("file.db", config={'storage_compatibility_version': 'latest'})
 ```
 
