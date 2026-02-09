@@ -110,8 +110,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 242
-extension_download_count_pretty: 242
+extension_download_count: 271
+extension_download_count_pretty: 271
 image: '/images/community_extensions/social_preview/preview_community_extension_valhalla_routing.png'
 layout: community_extension_doc
 ---
