@@ -147,8 +147,8 @@ docs:
     Time filters (e.g. `WHERE time_period >= '2000' AND time_period <= '2010'`) are also supported
     and will be encoded as range filters in the EUROSTAT API.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
+extension_star_count: 16
+extension_star_count_pretty: 16
 extension_download_count: 56
 extension_download_count_pretty: 56
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
