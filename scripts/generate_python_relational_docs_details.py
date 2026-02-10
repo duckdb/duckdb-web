@@ -1361,7 +1361,7 @@ rel.apply(
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="other_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="Another relation to perform a cross product with.",
             )
         ],
@@ -1382,7 +1382,7 @@ The relation query is executed twice, therefore generating different ids and tim
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="other_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="The relation to subtract from the current relation (set difference).",
             )
         ],
@@ -1521,7 +1521,7 @@ therefore generating different ids and timestamps:
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="other_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="The relation to intersect with the current relation (set intersection).",
             )
         ],
@@ -1612,7 +1612,7 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="other_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="The relation to join with the current relation.",
             ),
             PythonRelAPIParamDetails(
@@ -1780,7 +1780,7 @@ rel.map(multiply_by_2, schema={"id": int, "text": str})
         parameters=[
             PythonRelAPIParamDetails(
                 parameter_name="union_rel",
-                parameter_type=["duckdb.duckdb.DuckDBPyRelation"],
+                parameter_type=["_duckdb.DuckDBPyRelation"],
                 parameter_description="The relation to union with the current relation (set union).",
             )
         ],
@@ -3969,6 +3969,32 @@ created_timestamp: [[2025-04-10 09:24:51.259000Z,2025-04-10 09:25:51.259000Z,202
                 parameter_type=["int"],
                 parameter_default="1000000",
                 parameter_description="The batch size for fetching the data.",
+            )
+        ],
+    ),
+    "fetch_record_batch": PythonRelAPIDetails(
+        additional_description="\n\n> Deprecated `fetch_record_batch()` is deprecated since 1.4.0. Use [`record_batch()`](#record_batch) instead.",
+        example="pa_reader = rel.fetch_record_batch(rows_per_batch=1)\n\npa_reader.read_next_batch()",
+        result="""
+pyarrow.RecordBatch
+id: string
+description: string
+value: int64
+created_timestamp: timestamp[us, tz=Europe/Amsterdam]
+----
+id: ["908cf67c-a086-4b94-9017-2089a83e4a6c"]
+description: ["value is uneven"]
+value: [1]
+created_timestamp: [2025-04-10 09:52:55.249000Z]
+""",
+        use_default_example=True,
+        aliases=["record_batch"],
+        parameters=[
+            PythonRelAPIParamDetails(
+                parameter_name="rows_per_batch",
+                parameter_type=["int"],
+                parameter_default="1000000",
+                parameter_description="The number of rows per batch.",
             )
         ],
     ),

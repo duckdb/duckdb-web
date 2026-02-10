@@ -95,6 +95,7 @@ OUTPUT_MEMBER_LIST = [
     "create_view",
     "df",
     "execute",
+    "fetch_record_batch",
     "fetch_arrow_reader",
     "fetch_arrow_table",
     "fetch_df_chunk",
@@ -118,20 +119,20 @@ OUTPUT_MEMBER_LIST = [
 ]
 
 CREATION_MEMBER_LIST = [
-    'from_arrow',
-    'from_csv_auto',
-    'from_df',
-    'from_parquet',
-    'from_query',
-    'query',
-    'read_csv',
-    'read_json',
-    'read_parquet',
-    'sql',
-    'table',
-    'table_function',
-    'values',
-    'view',
+    "from_arrow",
+    "from_csv_auto",
+    "from_df",
+    "from_parquet",
+    "from_query",
+    "query",
+    "read_csv",
+    "read_json",
+    "read_parquet",
+    "sql",
+    "table",
+    "table_function",
+    "values",
+    "view",
 ]
 
 PY_RELATION_MEMBERS = (
