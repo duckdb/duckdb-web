@@ -26,7 +26,7 @@ There are multiple scenarios for which an extensions might not be available in a
 
 If you are on a development version of DuckDB, that is any version for which `PRAGMA version` returns a `library_version` not starting with a `v`, then extensions might not be available anymore on the default extension repository.
 
-When in doubt, consider raising an issue on [`duckdb/duckdb`](https://github.com/duckdb/duckdb).
+When in doubt, consider raising an issue in [`duckdb/duckdb`](https://github.com/duckdb/duckdb).
 
 ## Manual Process to Download Extensions via the Browser
 
