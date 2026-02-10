@@ -1,9 +1,6 @@
 name: Nightly documentation updates
 
-on:
-  schedule:
-    - cron: "0 4 * * *"  # run every day
-  workflow_dispatch:
+on: []
 
 jobs:
   UpdateStarCountAndCopyStableToArchive:
