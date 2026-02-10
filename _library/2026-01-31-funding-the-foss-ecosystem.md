@@ -8,5 +8,7 @@ excerpt: ""
 pill: "FOSDEM 2026"
 ---
 
-Gábor Szárnyas will participate in the [panel discussion](https://fosdem.org/2026/schedule/event/funding_lessons_learned_panel/)
+Gábor Szárnyas participated in the [panel discussion](https://fosdem.org/2026/schedule/event/KQEWP9-funding_lessons_learned_panel/)
 at FOSDEM 2026's [“Funding the FOSS Ecosystem” developer room](https://fosdem.org/2026/schedule/track/funding-the-foss-ecosystem/) on January 31, 2026.
+
+[Slides (PDF)](https://fosdem.org/2026/events/attachments/KQEWP9-funding_lessons_learned_panel/slides/266787/funding-d_19qryqr.pdf)
