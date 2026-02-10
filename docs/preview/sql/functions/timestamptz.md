@@ -151,6 +151,11 @@ provided by the ICU extension.
 
 Adding to or subtracting from [infinite values]({% link docs/preview/sql/data_types/timestamp.md %}#special-values) produces the same infinite value.
 
+Addition and subtraction of intervals uses the [ICU Calendar add function](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classicu_1_1Calendar.html#aa6e19a88ca2225eddcbbe82313c9c095).
+For positive intervals (forwards in time) the fields are incremented from least to most significant.
+For negative intervals (backwards in time) the fields are decremented from most to least significant.
+This produces the same results as Postgres, but does not match some [more recent calendar RFCs](https://www.rfc-editor.org/rfc/rfc5545).
+
 ## ICU Timestamp with Time Zone Functions
 
 The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME ZONE` values.
