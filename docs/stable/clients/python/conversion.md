@@ -252,8 +252,9 @@ DuckDB's Python client provides multiple additional methods that can be used to 
 
 ### Apache Arrow
 
-* `arrow()` fetches the data as an [Arrow table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html)
-* `fetch_arrow_table()` is an alias of `arrow()`
+* `fetch_arrow_table()` fetches the data as an [Arrow table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html)
+* `to_arrow_table()` is an alias of `fetch_arrow_table()`
+* `arrow()` returns an [Arrow record batch reader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html)
 * `fetch_record_batch(chunk_size)` returns an [Arrow record batch reader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) with `chunk_size` rows per batch
 
 ### Polars
