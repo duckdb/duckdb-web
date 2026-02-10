@@ -53,6 +53,13 @@ The following instructions are intended for Arch Linux and Arch-based distributi
 
 #### CLI Client
 
+DuckDB is [available in Arch's Extra package repository](https://archlinux.org/packages/extra/x86_64/duckdb/).
+To install it, run:
+
+```bash
+sudo pacman -S duckdb
+```
+
 The requirements for building the DuckDB CLI client on Arch, Manjaro, etc. are the following:
 
 ```bash
