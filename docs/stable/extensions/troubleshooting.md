@@ -30,8 +30,7 @@ When in doubt, consider raising an issue in [`duckdb/duckdb`](https://github.com
 
 ## Manual Process to Download Extensions via the Browser
 
-To check is an extension is available.
-Consider trying to download the relevant extension resource, for example via your browser visiting <https://extensions.duckdb.org/v1.4.4/osx_arm64/spatial.duckdb_extension.gz> or any other link that has been provided. Note that `http://` has been deprecated in favor to `https://`.
+To check if an extension is available, consider trying to download the relevant extension resource, for example via your browser visiting <https://extensions.duckdb.org/v1.4.4/osx_arm64/spatial.duckdb_extension.gz> or any other link that has been provided. Note that `http://` has been deprecated in favor to `https://`.
 
 If successful, this will download and unpack the extension to the default `Downloads` folder, so that from SQL you can run:
 
