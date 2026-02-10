@@ -21,9 +21,23 @@ For more info, visit https://duckdb.org/docs/stable/extensions/troubleshooting?v
 
 There are multiple scenarios for which an extensions might not be available in a given extension repository at a given time:
 * the extension has not been uploaded yet, here some delay after a given release date might be expected. Consider checking the issues at [`duckdb/duckdb`](https://github.com/duckdb/duckdb) or [`duckdb/community-extensions`](https://github.com/duckdb/community-extensions), or creating one yourself.
-* the extension is available, but in a different repository, try for example `INSTALL <name> FROM core;` or `INSTALL <name> FROM community;` or `INSTALL <name> FROM core_nightly;` (see the [Installing Extensions page]({% link docs/stable/extensions/installing_extensions.md %}#extension-repositories)).
+* the extension is available, but in a different repository, try for example `INSTALL ⟨name⟩ FROM core;`{:.language-sql .highlight} or `INSTALL ⟨name⟩ FROM community;`{:.language-sql .highlight} or `INSTALL ⟨name⟩ FROM core_nightly;`{:.language-sql .highlight} (see the [Installing Extensions page]({% link docs/stable/extensions/installing_extensions.md %}#extension-repositories)).
 * networking issues, so extension exists at the endpoint but it's not reachable from your local DuckDB. Here you can try visiting the given URL via a browser directly pasting the link from the error message in the search bar.
 
 If you are on a development version of DuckDB, that is any version for which `PRAGMA version` returns a `library_version` not starting with a `v`, then extensions might not be available anymore on the default extension repository.
 
-When in doubt, consider raising an issue on [`duckdb/duckdb`](https://github.com/duckdb/duckdb).
+When in doubt, consider raising an issue in [`duckdb/duckdb`](https://github.com/duckdb/duckdb).
+
+## Manual Process to Download Extensions via the Browser
+
+To check if an extension is available, consider trying to download the relevant extension resource, for example via your browser visiting <https://extensions.duckdb.org/v1.4.4/osx_arm64/spatial.duckdb_extension.gz> or any other link that has been provided. Note that `http://` has been deprecated in favor to `https://`.
+
+If successful, this will download and unpack the extension to the default `Downloads` folder, so that from SQL you can run:
+
+```sql
+INSTALL '~/Downloads/spatial.duckdb_extension';
+-- or
+FORCE INSTALL '~/Downloads/spatial.duckdb_extension';
+```
+
+and after this command the extension will be regularly installed.
