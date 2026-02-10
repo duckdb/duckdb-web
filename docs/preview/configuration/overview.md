@@ -260,7 +260,7 @@ Configuration options come with different default [scopes]({% link docs/preview/
 | `unsafe_disable_etag_checks`                  | Disable checks on ETag consistency                                                                                                                                                                            | `BOOLEAN`   | `false`                                             |
 | `user`, `username`                            | The username to use. Ignored for legacy compatibility.                                                                                                                                                        | `VARCHAR`   | NULL                                                |
 | `variant_legacy_encoding`                     | Enables the Parquet reader to identify a Variant structurally.                                                                                                                                                | `BOOLEAN`   | `false`                                             |
-| `zstd_min_string_length`                      | The (average) length at which to enable ZSTD compression, defaults to 4096                                                                                                                                    | `UBIGINT`   | `4096`                                              |
+| `zstd_min_string_length`                      | The (average) length at which to consider ZSTD compression. Ignored when ZSTD is enabled explicitly (on 1.3.0 and above).                                                                                     | `UBIGINT`   | `4096`                                              |
 
 ### Local Configuration Options
 
