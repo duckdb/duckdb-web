@@ -176,12 +176,12 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
             member_docs = inspect.getdoc(class_member_value).split("\n\n")
             if len(member_docs) >= 2:
                 member_signature = member_docs[0]
-                member_description = '\n'.join(member_docs[1:])
+                member_description = "\n".join(member_docs[1:])
             else:
                 member_description = member_docs[0]
 
-            if class_member_name in ['from_parquet', 'read_parquet']:
-                member_signature = '\n\n'.join(member_docs)
+            if class_member_name in ["from_parquet", "read_parquet"]:
+                member_signature = "\n\n".join(member_docs)
                 member_description = "Create a relation object from the Parquet files"
             number_of_duplicates = (
                 relational_api_table.filter(f"member_name = '{class_member_name}'")
@@ -201,7 +201,7 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                 f"```python\n{member_signature}\n```" if member_signature else None,
                 f"{member_description}{member_details.additional_description}",
                 (
-                    '\n'.join(
+                    "\n".join(
                         [
                             f"""- **{parameter.parameter_name}** : {', '.join(parameter.parameter_type)}{", default: "+parameter.parameter_default if parameter.parameter_default else ''}
                             \n\t{parameter.parameter_description}"""
@@ -234,7 +234,7 @@ def populate_member_details(relational_api_table, class_name, member_list, secti
                     else None
                 ),
                 (
-                    ', '.join(
+                    ", ".join(
                         f"[`{alias}`](#{alias})" for alias in member_details.aliases
                     )
                     if member_details.aliases
@@ -294,9 +294,9 @@ def generate_from_db(relational_api_table):
             )
             .string_agg(
                 "detailed_section",
-                sep='\n\n----\n\n',
-                groups='section, section_id',
-                projected_columns='section, section_id',
+                sep="\n\n----\n\n",
+                groups="section, section_id",
+                projected_columns="section, section_id",
             )
             .order("section_id")
         )
@@ -306,12 +306,12 @@ def generate_from_db(relational_api_table):
             f.write(SECTION_MAP.get(section[0]).get("description"))
             toc_section = (
                 relational_api_table.filter(f"section_id={section[1]}")
-                .select('section', "section_id", 'member_toc_line')
+                .select("section", "section_id", "member_toc_line")
                 .string_agg(
-                    'member_toc_line',
-                    sep='\n',
-                    groups='section, section_id',
-                    projected_columns='section, section_id',
+                    "member_toc_line",
+                    sep="\n",
+                    groups="section, section_id",
+                    projected_columns="section, section_id",
                 )
             ).fetchone()
             f.write("\n\n")
@@ -352,7 +352,7 @@ def generate_python_relational_api_md():
             member[0]
             for member in inspect.getmembers(duckdb.DuckDBPyConnection)
             if inspect.getdoc(member[1])
-            and '-> duckdb.duckdb.DuckDBPyRelation' in inspect.getdoc(member[1])
+            and "-> _duckdb.DuckDBPyRelation" in inspect.getdoc(member[1])
         ],
     )
 
