@@ -27,3 +27,15 @@ There are multiple scenarios for which an extensions might not be available in a
 If you are on a development version of DuckDB, that is any version for which `PRAGMA version` returns a `library_version` not starting with a `v`, then extensions might not be available anymore on the default extension repository.
 
 When in doubt, consider raising an issue on [`duckdb/duckdb`](https://github.com/duckdb/duckdb).
+
+#### Manual process to download extensions via the browser (or check if they are available)
+
+Consider trying to download the relevant extension resource, for example via your browser visiting https://extensions.duckdb.org/v1.4.4/osx_arm64/spatial.duckdb_extension.gz or whatever other link has been provided. Note `http://` has been bumped to `https://`.
+
+If successful, that will download and unpack the extension to the default 'Download' folder, so that from SQL you can run:
+```sql
+INSTALL '~/Downloads/spatial.duckdb_extension';
+or
+FORCE INSTALL '~/Downloads/spatial.duckdb_extension';
+```
+and after this command the extension will be regularly installed.
