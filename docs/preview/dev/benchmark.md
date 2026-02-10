@@ -111,7 +111,7 @@ To illustrate how to create a benchmark file, we can look at the benchmark for t
 
 Benchmarks are similar to unit test files, and have the same type of header.
 
-```py
+```python
 # name: benchmark/micro/window/window_fill.benchmark
 # description: Measure the performance of FILL
 # group: [window]
