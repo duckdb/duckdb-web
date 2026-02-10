@@ -1,5 +1,6 @@
 ---
 layout: docu
+
 title: Relational API
 ---
 
@@ -1836,7 +1837,7 @@ Create cross/cartesian product of two relational objects
 
 ##### Parameters
 
-- **other_rel** : duckdb.duckdb.DuckDBPyRelation
+- **other_rel** : _duckdb.DuckDBPyRelation
                             
 	Another relation to perform a cross product with.
 
@@ -1888,7 +1889,7 @@ Create the set except of this relation object with another relation object in ot
 
 ##### Parameters
 
-- **other_rel** : duckdb.duckdb.DuckDBPyRelation
+- **other_rel** : _duckdb.DuckDBPyRelation
                             
 	The relation to subtract from the current relation (set difference).
 
@@ -2124,7 +2125,7 @@ Create the set intersection of this relation object with another relation object
 
 ##### Parameters
 
-- **other_rel** : duckdb.duckdb.DuckDBPyRelation
+- **other_rel** : _duckdb.DuckDBPyRelation
                             
 	The relation to intersect with the current relation (set intersection).
 
@@ -2241,7 +2242,7 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
 
 ##### Parameters
 
-- **other_rel** : duckdb.duckdb.DuckDBPyRelation
+- **other_rel** : _duckdb.DuckDBPyRelation
                             
 	The relation to join with the current relation.
 - **condition** : object
@@ -2619,7 +2620,7 @@ Create the set union of this relation object with another relation object in oth
 
 ##### Parameters
 
-- **union_rel** : duckdb.duckdb.DuckDBPyRelation
+- **union_rel** : _duckdb.DuckDBPyRelation
                             
 	The relation to union with the current relation (set union).
 
@@ -2724,86 +2725,76 @@ rel.show()
 
 ## Functions 
 
-This section contains the functions which can be applied to a relation to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
-
-> Warning These functions may take arbitrary expressions as arguments, also when the parameter is named `column`.
-> Make sure to properly validate and escape input.
-> ```python
-> import duckdb
-> 
-> with duckdb.connect() as con:
->     rel = con.sql('select 1')
->     rel.max("(select t from read_text('/etc/hostname') as t)")
-> ```
+This section contains the functions which can be applied to a relation,         in order to get a (scalar) result. The functions are [lazy evaluated](#lazy-evaluation).
 
 | Name | Description |
 |:--|:-------|
-| [`any_value`](#any_value) | Returns the first non-null value from a given column |
+| [`any_value`](#any_value) | Returns the first non-null value from a given expression |
 | [`arg_max`](#arg_max) | Finds the row with the maximum value for a value column and returns the value of that row for an argument column |
 | [`arg_min`](#arg_min) | Finds the row with the minimum value for a value column and returns the value of that row for an argument column |
-| [`avg`](#avg) | Computes the average on a given column |
-| [`bit_and`](#bit_and) | Computes the bitwise AND of all bits present in a given column |
-| [`bit_or`](#bit_or) | Computes the bitwise OR of all bits present in a given column |
-| [`bit_xor`](#bit_xor) | Computes the bitwise XOR of all bits present in a given column |
-| [`bitstring_agg`](#bitstring_agg) | Computes a bitstring with bits set for each distinct value in a given column |
-| [`bool_and`](#bool_and) | Computes the logical AND of all values present in a given column |
-| [`bool_or`](#bool_or) | Computes the logical OR of all values present in a given column |
-| [`count`](#count) | Computes the number of elements present in a given column |
+| [`avg`](#avg) | Computes the average of a given expression |
+| [`bit_and`](#bit_and) | Computes the bitwise AND of all bits present in a given expression |
+| [`bit_or`](#bit_or) | Computes the bitwise OR of all bits present in a given expression |
+| [`bit_xor`](#bit_xor) | Computes the bitwise XOR of all bits present in a given expression |
+| [`bitstring_agg`](#bitstring_agg) | Computes a bitstring with bits set for each distinct value in a given expression |
+| [`bool_and`](#bool_and) | Computes the logical AND of all values present in a given expression |
+| [`bool_or`](#bool_or) | Computes the logical OR of all values present in a given expression |
+| [`count`](#count) | Computes the number of elements present in a given expression |
 | [`cume_dist`](#cume_dist) | Computes the cumulative distribution within the partition |
 | [`dense_rank`](#dense_rank) | Computes the dense rank within the partition |
 | [`distinct`](#distinct) | Retrieve distinct rows from this relation object |
-| [`favg`](#favg) | Computes the average of all values present in a given column using a more accurate floating point summation (Kahan Sum) |
-| [`first`](#first) | Returns the first value of a given column |
+| [`favg`](#favg) | Computes the average of all values present in a given expression using a more accurate floating point summation (Kahan Sum) |
+| [`first`](#first) | Returns the first value of a given expression |
 | [`first_value`](#first_value) | Computes the first value within the group or partition |
-| [`fsum`](#fsum) | Computes the sum of all values present in a given column using a more accurate floating point summation (Kahan Sum) |
-| [`geomean`](#geomean) | Computes the geometric mean over all values present in a given column |
-| [`histogram`](#histogram) | Computes the histogram over all values present in a given column |
+| [`fsum`](#fsum) | Computes the sum of all values present in a given expression using a more accurate floating point summation (Kahan Sum) |
+| [`geomean`](#geomean) | Computes the geometric mean over all values present in a given expression |
+| [`histogram`](#histogram) | Computes the histogram over all values present in a given expression |
 | [`lag`](#lag) | Computes the lag within the partition |
-| [`last`](#last) | Returns the last value of a given column |
+| [`last`](#last) | Returns the last value of a given expression |
 | [`last_value`](#last_value) | Computes the last value within the group or partition |
 | [`lead`](#lead) | Computes the lead within the partition |
-| [`list`](#list) | Returns a list containing all values present in a given column |
-| [`max`](#max) | Returns the maximum value present in a given column |
-| [`mean`](#mean) | Computes the average on a given column |
-| [`median`](#median) | Computes the median over all values present in a given column |
-| [`min`](#min) | Returns the minimum value present in a given column |
-| [`mode`](#mode) | Computes the mode over all values present in a given column |
+| [`list`](#list) | Returns a list containing all values present in a given expression |
+| [`max`](#max) | Returns the maximum value present in a given expression |
+| [`mean`](#mean) | Computes the average of a given expression |
+| [`median`](#median) | Computes the median over all values present in a given expression |
+| [`min`](#min) | Returns the minimum value present in a given expression |
+| [`mode`](#mode) | Computes the mode over all values present in a given expression |
 | [`n_tile`](#n_tile) | Divides the partition as equally as possible into num_buckets |
 | [`nth_value`](#nth_value) | Computes the nth value within the partition |
 | [`percent_rank`](#percent_rank) | Computes the relative rank within the partition |
-| [`product`](#product) | Returns the product of all values present in a given column |
-| [`quantile`](#quantile) | Computes the exact quantile value for a given column |
-| [`quantile_cont`](#quantile_cont) | Computes the interpolated quantile value for a given column |
-| [`quantile_disc`](#quantile_disc) | Computes the exact quantile value for a given column |
+| [`product`](#product) | Returns the product of all values present in a given expression |
+| [`quantile`](#quantile) | Computes the exact quantile value for a given expression |
+| [`quantile_cont`](#quantile_cont) | Computes the interpolated quantile value for a given expression |
+| [`quantile_disc`](#quantile_disc) | Computes the exact quantile value for a given expression |
 | [`rank`](#rank) | Computes the rank within the partition |
 | [`rank_dense`](#rank_dense) | Computes the dense rank within the partition |
 | [`row_number`](#row_number) | Computes the row number within the partition |
 | [`select_dtypes`](#select_dtypes) | Select columns from the relation, by filtering based on type(s) |
 | [`select_types`](#select_types) | Select columns from the relation, by filtering based on type(s) |
-| [`std`](#std) | Computes the sample standard deviation for a given column |
-| [`stddev`](#stddev) | Computes the sample standard deviation for a given column |
-| [`stddev_pop`](#stddev_pop) | Computes the population standard deviation for a given column |
-| [`stddev_samp`](#stddev_samp) | Computes the sample standard deviation for a given column |
-| [`string_agg`](#string_agg) | Concatenates the values present in a given column with a separator |
-| [`sum`](#sum) | Computes the sum of all values present in a given column |
+| [`std`](#std) | Computes the sample standard deviation for a given expression |
+| [`stddev`](#stddev) | Computes the sample standard deviation for a given expression |
+| [`stddev_pop`](#stddev_pop) | Computes the population standard deviation for a given expression |
+| [`stddev_samp`](#stddev_samp) | Computes the sample standard deviation for a given expression |
+| [`string_agg`](#string_agg) | Concatenates the values present in a given expression with a separator |
+| [`sum`](#sum) | Computes the sum of all values present in a given expression |
 | [`unique`](#unique) | Returns the distinct values in a column. |
-| [`value_counts`](#value_counts) | Computes the number of elements present in a given column, also projecting the original column |
-| [`var`](#var) | Computes the sample variance for a given column |
-| [`var_pop`](#var_pop) | Computes the population variance for a given column |
-| [`var_samp`](#var_samp) | Computes the sample variance for a given column |
-| [`variance`](#variance) | Computes the sample variance for a given column |
+| [`value_counts`](#value_counts) | Computes the number of elements present in a given expression, also projecting the original expression |
+| [`var`](#var) | Computes the sample variance for a given expression |
+| [`var_pop`](#var_pop) | Computes the population variance for a given expression |
+| [`var_samp`](#var_samp) | Computes the sample variance for a given expression |
+| [`variance`](#variance) | Computes the sample variance for a given expression |
 
 #### `any_value`
 
 ##### Signature
 
 ```python
-any_value(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+any_value(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Returns the first non-null value from a given column
+Returns the first non-null value from a given expression
 
 ##### Parameters
 
@@ -2989,12 +2980,12 @@ rel.arg_min(arg_column="value", value_column="value", groups="description", proj
 ##### Signature
 
 ```python
-avg(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+avg(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the average on a given column
+Computes the average of a given expression
 
 ##### Parameters
 
@@ -3051,12 +3042,12 @@ rel.avg('value')
 ##### Signature
 
 ```python
-bit_and(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+bit_and(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the bitwise AND of all bits present in a given column
+Computes the bitwise AND of all bits present in a given expression
 
 ##### Parameters
 
@@ -3115,12 +3106,12 @@ rel.bit_and(column="value_bit", groups="description", projected_columns="descrip
 ##### Signature
 
 ```python
-bit_or(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+bit_or(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the bitwise OR of all bits present in a given column
+Computes the bitwise OR of all bits present in a given expression
 
 ##### Parameters
 
@@ -3179,12 +3170,12 @@ rel.bit_or(column="value_bit", groups="description", projected_columns="descript
 ##### Signature
 
 ```python
-bit_xor(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+bit_xor(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the bitwise XOR of all bits present in a given column
+Computes the bitwise XOR of all bits present in a given expression
 
 ##### Parameters
 
@@ -3243,12 +3234,12 @@ rel.bit_xor(column="value_bit", groups="description", projected_columns="descrip
 ##### Signature
 
 ```python
-bitstring_agg(self: _duckdb.DuckDBPyRelation, column: str, min: typing.Optional[object] = None, max: typing.Optional[object] = None, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+bitstring_agg(self: _duckdb.DuckDBPyRelation, expression: str, min: typing.Optional[object] = None, max: typing.Optional[object] = None, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes a bitstring with bits set for each distinct value in a given column
+Computes a bitstring with bits set for each distinct value in a given expression
 
 ##### Parameters
 
@@ -3311,12 +3302,12 @@ rel.bitstring_agg(column="value", groups="description", projected_columns="descr
 ##### Signature
 
 ```python
-bool_and(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+bool_and(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the logical AND of all values present in a given column
+Computes the logical AND of all values present in a given expression
 
 ##### Parameters
 
@@ -3375,12 +3366,12 @@ rel.bool_and(column="uneven", groups="description", projected_columns="descripti
 ##### Signature
 
 ```python
-bool_or(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+bool_or(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the logical OR of all values present in a given column
+Computes the logical OR of all values present in a given expression
 
 ##### Parameters
 
@@ -3439,12 +3430,12 @@ rel.bool_or(column="uneven", groups="description", projected_columns="descriptio
 ##### Signature
 
 ```python
-count(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+count(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the number of elements present in a given column
+Computes the number of elements present in a given expression
 
 ##### Parameters
 
@@ -3669,12 +3660,12 @@ rel.distinct().order("range")
 ##### Signature
 
 ```python
-favg(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+favg(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the average of all values present in a given column using a more accurate floating point summation (Kahan Sum)
+Computes the average of all values present in a given expression using a more accurate floating point summation (Kahan Sum)
 
 ##### Parameters
 
@@ -3731,12 +3722,12 @@ rel.favg(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-first(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+first(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Returns the first value of a given column
+Returns the first value of a given expression
 
 ##### Parameters
 
@@ -3790,7 +3781,7 @@ rel.first(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-first_value(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+first_value(self: _duckdb.DuckDBPyRelation, expression: str, window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -3849,12 +3840,12 @@ rel.first_value(column="value", window_spec="over (partition by description orde
 ##### Signature
 
 ```python
-fsum(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+fsum(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the sum of all values present in a given column using a more accurate floating point summation (Kahan Sum)
+Computes the sum of all values present in a given expression using a more accurate floating point summation (Kahan Sum)
 
 ##### Parameters
 
@@ -3911,12 +3902,12 @@ rel.fsum(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-geomean(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+geomean(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the geometric mean over all values present in a given column
+Computes the geometric mean over all values present in a given expression
 
 ##### Parameters
 
@@ -3970,12 +3961,12 @@ rel.geomean(column="value", groups="description", projected_columns="description
 ##### Signature
 
 ```python
-histogram(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+histogram(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the histogram over all values present in a given column
+Computes the histogram over all values present in a given expression
 
 ##### Parameters
 
@@ -4029,7 +4020,7 @@ rel.histogram(column="value", groups="description", projected_columns="descripti
 ##### Signature
 
 ```python
-lag(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: typing.SupportsInt = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+lag(self: _duckdb.DuckDBPyRelation, expression: str, window_spec: str, offset: typing.SupportsInt = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4104,12 +4095,12 @@ rel.lag(column="description", window_spec="over (order by value)", projected_col
 ##### Signature
 
 ```python
-last(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+last(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Returns the last value of a given column
+Returns the last value of a given expression
 
 ##### Parameters
 
@@ -4163,7 +4154,7 @@ rel.last(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-last_value(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+last_value(self: _duckdb.DuckDBPyRelation, expression: str, window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4222,7 +4213,7 @@ rel.last_value(column="value", window_spec="over (order by description)", projec
 ##### Signature
 
 ```python
-lead(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: typing.SupportsInt = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+lead(self: _duckdb.DuckDBPyRelation, expression: str, window_spec: str, offset: typing.SupportsInt = 1, default_value: str = 'NULL', ignore_nulls: bool = False, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4297,12 +4288,12 @@ rel.lead(column="description", window_spec="over (order by value)", projected_co
 ##### Signature
 
 ```python
-list(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+list(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Returns a list containing all values present in a given column
+Returns a list containing all values present in a given expression
 
 ##### Parameters
 
@@ -4359,12 +4350,12 @@ rel.list(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-max(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+max(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Returns the maximum value present in a given column
+Returns the maximum value present in a given expression
 
 ##### Parameters
 
@@ -4421,12 +4412,12 @@ rel = duckdb_conn.sql("""
 ##### Signature
 
 ```python
-mean(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+mean(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the average on a given column
+Computes the average of a given expression
 
 ##### Parameters
 
@@ -4483,12 +4474,12 @@ rel.mean(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-median(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+median(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the median over all values present in a given column
+Computes the median over all values present in a given expression
 
 ##### Parameters
 
@@ -4545,12 +4536,12 @@ rel.median(column="value", groups="description", projected_columns="description"
 ##### Signature
 
 ```python
-min(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+min(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Returns the minimum value present in a given column
+Returns the minimum value present in a given expression
 
 ##### Parameters
 
@@ -4607,12 +4598,12 @@ rel.min(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-mode(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+mode(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the mode over all values present in a given column
+Computes the mode over all values present in a given expression
 
 ##### Parameters
 
@@ -4735,7 +4726,7 @@ rel.n_tile(window_spec="over (partition by description)", num_buckets=2, project
 ##### Signature
 
 ```python
-nth_value(self: _duckdb.DuckDBPyRelation, column: str, window_spec: str, offset: typing.SupportsInt, ignore_nulls: bool = False, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+nth_value(self: _duckdb.DuckDBPyRelation, expression: str, window_spec: str, offset: typing.SupportsInt, ignore_nulls: bool = False, projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
@@ -4870,12 +4861,12 @@ rel.percent_rank(window_spec="over (partition by description order by value)", p
 ##### Signature
 
 ```python
-product(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+product(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Returns the product of all values present in a given column
+Returns the product of all values present in a given expression
 
 ##### Parameters
 
@@ -4932,12 +4923,12 @@ rel.product(column="value", groups="description", projected_columns="description
 ##### Signature
 
 ```python
-quantile(self: _duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+quantile(self: _duckdb.DuckDBPyRelation, expression: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the exact quantile value for a given column
+Computes the exact quantile value for a given expression
 
 ##### Parameters
 
@@ -4997,12 +4988,12 @@ rel.quantile(column="value", groups="description", projected_columns="descriptio
 ##### Signature
 
 ```python
-quantile_cont(self: _duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+quantile_cont(self: _duckdb.DuckDBPyRelation, expression: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the interpolated quantile value for a given column
+Computes the interpolated quantile value for a given expression
 
 ##### Parameters
 
@@ -5062,12 +5053,12 @@ rel.quantile_cont(column="value", groups="description", projected_columns="descr
 ##### Signature
 
 ```python
-quantile_disc(self: _duckdb.DuckDBPyRelation, column: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+quantile_disc(self: _duckdb.DuckDBPyRelation, expression: str, q: object = 0.5, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the exact quantile value for a given column
+Computes the exact quantile value for a given expression
 
 ##### Parameters
 
@@ -5336,7 +5327,7 @@ Select columns from the relation, by filtering based on type(s)
 ##### Example
 
 ```python
-import duckdb.sqltypes
+import duckdb
 
 duckdb_conn = duckdb.connect()
 
@@ -5391,7 +5382,7 @@ Select columns from the relation, by filtering based on type(s)
 ##### Example
 
 ```python
-import duckdb.sqltypes
+import duckdb
 
 duckdb_conn = duckdb.connect()
 
@@ -5428,12 +5419,12 @@ rel.select_types(types=[duckdb.sqltypes.VARCHAR]).distinct()
 ##### Signature
 
 ```python
-std(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+std(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the sample standard deviation for a given column
+Computes the sample standard deviation for a given expression
 
 **Aliases**: [`stddev`](#stddev), [`stddev_samp`](#stddev_samp)
 
@@ -5492,12 +5483,12 @@ rel.std(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-stddev(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+stddev(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the sample standard deviation for a given column
+Computes the sample standard deviation for a given expression
 
 **Aliases**: [`std`](#std), [`stddev_samp`](#stddev_samp)
 
@@ -5556,12 +5547,12 @@ rel.stddev(column="value", groups="description", projected_columns="description"
 ##### Signature
 
 ```python
-stddev_pop(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+stddev_pop(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the population standard deviation for a given column
+Computes the population standard deviation for a given expression
 
 ##### Parameters
 
@@ -5618,12 +5609,12 @@ rel.stddev_pop(column="value", groups="description", projected_columns="descript
 ##### Signature
 
 ```python
-stddev_samp(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+stddev_samp(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the sample standard deviation for a given column
+Computes the sample standard deviation for a given expression
 
 **Aliases**: [`stddev`](#stddev), [`std`](#std)
 
@@ -5682,12 +5673,12 @@ rel.stddev_samp(column="value", groups="description", projected_columns="descrip
 ##### Signature
 
 ```python
-string_agg(self: _duckdb.DuckDBPyRelation, column: str, sep: str = ',', groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+string_agg(self: _duckdb.DuckDBPyRelation, expression: str, sep: str = ',', groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Concatenates the values present in a given column with a separator
+Concatenates the values present in a given expression with a separator
 
 ##### Parameters
 
@@ -5747,12 +5738,12 @@ rel.string_agg(column="value", sep=",", groups="description", projected_columns=
 ##### Signature
 
 ```python
-sum(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+sum(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the sum of all values present in a given column
+Computes the sum of all values present in a given expression
 
 ##### Parameters
 
@@ -5862,12 +5853,12 @@ rel.unique(unique_aggr="description")
 ##### Signature
 
 ```python
-value_counts(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '') -> _duckdb.DuckDBPyRelation
+value_counts(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the number of elements present in a given column, also projecting the original column
+Computes the number of elements present in a given expression, also projecting the original expression
 
 ##### Parameters
 
@@ -5918,12 +5909,12 @@ rel.value_counts(column="description", groups="description")
 ##### Signature
 
 ```python
-var(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+var(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the sample variance for a given column
+Computes the sample variance for a given expression
 
 **Aliases**: [`variance`](#variance), [`var_samp`](#var_samp)
 
@@ -5982,12 +5973,12 @@ rel.var(column="value", groups="description", projected_columns="description")
 ##### Signature
 
 ```python
-var_pop(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+var_pop(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the population variance for a given column
+Computes the population variance for a given expression
 
 ##### Parameters
 
@@ -6044,12 +6035,12 @@ rel.var_pop(column="value", groups="description", projected_columns="description
 ##### Signature
 
 ```python
-var_samp(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+var_samp(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the sample variance for a given column
+Computes the sample variance for a given expression
 
 **Aliases**: [`variance`](#variance), [`var`](#var)
 
@@ -6108,12 +6099,12 @@ rel.var_samp(column="value", groups="description", projected_columns="descriptio
 ##### Signature
 
 ```python
-variance(self: _duckdb.DuckDBPyRelation, column: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
+variance(self: _duckdb.DuckDBPyRelation, expression: str, groups: str = '', window_spec: str = '', projected_columns: str = '') -> _duckdb.DuckDBPyRelation
 ```
 
 ##### Description
 
-Computes the sample variance for a given column
+Computes the sample variance for a given expression
 
 **Aliases**: [`var`](#var), [`var_samp`](#var_samp)
 
@@ -6171,7 +6162,7 @@ This section contains the functions which will trigger an SQL execution and retr
 
 | Name | Description |
 |:--|:-------|
-| [`arrow`](#arrow) | Execute and return an Arrow Record Batch Reader that yields all rows |
+| [`arrow`](#arrow) | Alias of to_arrow_reader(). We recommend using to_arrow_reader() instead. |
 | [`close`](#close) | Closes the result |
 | [`create`](#create) | Creates a new table named table_name with the contents of the relation object |
 | [`create_view`](#create_view) | Creates a view named view_name that refers to the relation object |
@@ -6180,14 +6171,15 @@ This section contains the functions which will trigger an SQL execution and retr
 | [`fetch_arrow_reader`](#fetch_arrow_reader) | Execute and return an Arrow Record Batch Reader that yields all rows |
 | [`fetch_arrow_table`](#fetch_arrow_table) | Execute and fetch all rows as an Arrow Table |
 | [`fetch_df_chunk`](#fetch_df_chunk) | Execute and fetch a chunk of the rows |
+| [`fetch_record_batch`](#fetch_record_batch) | Execute and return an Arrow Record Batch Reader that yields all rows |
 | [`fetchall`](#fetchall) | Execute and fetch all rows as a list of tuples |
 | [`fetchdf`](#fetchdf) | Execute and fetch all rows as a pandas DataFrame |
 | [`fetchmany`](#fetchmany) | Execute and fetch the next set of rows as a list of tuples |
 | [`fetchnumpy`](#fetchnumpy) | Execute and fetch all rows as a Python dict mapping each column to one numpy arrays |
 | [`fetchone`](#fetchone) | Execute and fetch a single row as a tuple |
 | [`pl`](#pl) | Execute and fetch all rows as a Polars DataFrame |
-| [`record_batch`](#record_batch) | record_batch(self: object, batch_size: typing.SupportsInt = 1000000) -> object |
 | [`tf`](#tf) | Fetch a result as dict of TensorFlow Tensors |
+| [`to_arrow_reader`](#to_arrow_reader) | Execute and return an Arrow Record Batch Reader that yields all rows |
 | [`to_arrow_table`](#to_arrow_table) | Execute and fetch all rows as an Arrow Table |
 | [`to_csv`](#to_csv) | Write the relation object to a CSV file in 'file_name' |
 | [`to_df`](#to_df) | Execute and fetch all rows as a pandas DataFrame |
@@ -6208,15 +6200,17 @@ arrow(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) 
 
 ##### Description
 
-Execute and return an Arrow Record Batch Reader that yields all rows
+Alias of to_arrow_reader(). We recommend using to_arrow_reader() instead.
 
-**Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`to_arrow_table`](#to_arrow_table)
+> We recommend using [`to_arrow_reader()`](#to_arrow_reader) instead.
+
+**Aliases**: [`to_arrow_reader`](#to_arrow_reader)
 
 ##### Parameters
 
 - **batch_size** : int, default: 1000000
                             
-	The batch size of writing the data to the Arrow table
+	The batch size for fetching the data.
 
 ##### Example
 
@@ -6235,25 +6229,25 @@ rel = duckdb_conn.sql("""
     """
 )
 
-pa_table = rel.arrow()
+pa_reader = rel.arrow(batch_size=1)
 
-pa_table
+pa_reader.read_next_batch()
 ```
 
 
 ##### Result
 
 ```text
-pyarrow.Table
+pyarrow.RecordBatch
 id: string
 description: string
 value: int64
 created_timestamp: timestamp[us, tz=Europe/Amsterdam]
 ----
-id: [["3ac9e0ba-8390-4a02-ad72-33b1caea6354","8b844392-1404-4bbc-b731-120f42c8ca27","ca5584ca-8e97-4fca-a295-ae3c16c32f5b","926d071e-5f64-488f-ae02-d19e315f9f5c","aabeedf0-5783-4eff-9963-b3967a6ea5d8","1f20db9a-bee8-4b65-b7e8-e7c36b5b8fee","795c678e-3524-4b52-96ec-7b48c24eeab1","9ffbd403-169f-4fe4-bc41-09751066f1f1","8fdb0a60-29f0-4f5b-afcc-c736a03cd083"]]
-description: [["value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven","value is even","value is uneven"]]
-value: [[1,2,3,4,5,6,7,8,9]]
-created_timestamp: [[2025-04-10 09:07:12.614000Z,2025-04-10 09:08:12.614000Z,2025-04-10 09:09:12.614000Z,2025-04-10 09:10:12.614000Z,2025-04-10 09:11:12.614000Z,2025-04-10 09:12:12.614000Z,2025-04-10 09:13:12.614000Z,2025-04-10 09:14:12.614000Z,2025-04-10 09:15:12.614000Z]]
+id: ["e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd"]
+description: ["value is even"]
+value: [2]
+created_timestamp: [2025-04-10 09:25:51.259000Z]
 ```
 
 ----
@@ -6492,12 +6486,14 @@ rel.execute()
 ##### Signature
 
 ```python
-fetch_arrow_reader(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.RecordBatchReader
+fetch_arrow_reader(self: object, batch_size: typing.SupportsInt = 1000000) -> object
 ```
 
 ##### Description
 
 Execute and return an Arrow Record Batch Reader that yields all rows
+
+> Deprecated `fetch_arrow_reader()` is deprecated. Use [`to_arrow_reader()`](#to_arrow_reader) instead.
 
 ##### Parameters
 
@@ -6550,12 +6546,14 @@ created_timestamp: [2025-04-10 09:25:51.259000Z]
 ##### Signature
 
 ```python
-fetch_arrow_table(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.Table
+fetch_arrow_table(self: object, batch_size: typing.SupportsInt = 1000000) -> object
 ```
 
 ##### Description
 
 Execute and fetch all rows as an Arrow Table
+
+> Deprecated `fetch_arrow_table()` is deprecated. Use [`to_arrow_table()`](#to_arrow_table) instead.
 
 **Aliases**: [`arrow`](#arrow), [`to_arrow_table`](#to_arrow_table)
 
@@ -6653,6 +6651,68 @@ rel.fetch_df_chunk()
 1  e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd    value is even      2 2025-04-10 11:25:51.259000+02:00
 2  3f8ad67a-290f-4a22-b41b-0173b8e45afa  value is uneven      3 2025-04-10 11:26:51.259000+02:00
 ...
+```
+
+----
+
+#### `fetch_record_batch`
+
+##### Signature
+
+```python
+fetch_record_batch(self: object, rows_per_batch: typing.SupportsInt = 1000000) -> object
+```
+
+##### Description
+
+Execute and return an Arrow Record Batch Reader that yields all rows
+
+> Deprecated `fetch_record_batch()` is deprecated. Use [`to_arrow_reader()`](#to_arrow_reader) instead.
+
+**Aliases**: [`record_batch`](#record_batch)
+
+##### Parameters
+
+- **rows_per_batch** : int, default: 1000000
+                            
+	The number of rows per batch.
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+pa_reader = rel.fetch_record_batch(rows_per_batch=1)
+
+pa_reader.read_next_batch()
+```
+
+
+##### Result
+
+```text
+pyarrow.RecordBatch
+id: string
+description: string
+value: int64
+created_timestamp: timestamp[us, tz=Europe/Amsterdam]
+----
+id: ["908cf67c-a086-4b94-9017-2089a83e4a6c"]
+description: ["value is uneven"]
+value: [1]
+created_timestamp: [2025-04-10 09:52:55.249000Z]
 ```
 
 ----
@@ -7024,58 +7084,6 @@ shape: (9, 4)
 
 ----
 
-#### `record_batch`
-
-##### Description
-
-record_batch(self: object, batch_size: typing.SupportsInt = 1000000) -> object
-
-##### Parameters
-
-- **batch_size** : int, default: 1000000
-                            
-	The batch size for fetching the data.
-
-##### Example
-
-```python
-import duckdb
-
-duckdb_conn = duckdb.connect()
-
-rel = duckdb_conn.sql("""
-        select 
-            gen_random_uuid() as id, 
-            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
-            range as value, 
-            now() + concat(range,' ', 'minutes')::interval as created_timestamp
-        from range(1, 10)
-    """
-)
-
-pa_batch = rel.record_batch(batch_size=1)
-
-pa_batch.read_next_batch()
-```
-
-
-##### Result
-
-```text
-pyarrow.RecordBatch
-id: string
-description: string
-value: int64
-created_timestamp: timestamp[us, tz=Europe/Amsterdam]
-----
-id: ["908cf67c-a086-4b94-9017-2089a83e4a6c"]
-description: ["value is uneven"]
-value: [1]
-created_timestamp: [2025-04-10 09:52:55.249000Z]
-```
-
-----
-
 #### `tf`
 
 ##### Signature
@@ -7122,6 +7130,66 @@ rel.select("description, value").tf()
 
 ----
 
+#### `to_arrow_reader`
+
+##### Signature
+
+```python
+to_arrow_reader(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.RecordBatchReader
+```
+
+##### Description
+
+Execute and return an Arrow Record Batch Reader that yields all rows
+
+**Aliases**: [`arrow`](#arrow)
+
+##### Parameters
+
+- **batch_size** : int, default: 1000000
+                            
+	The batch size for fetching the data.
+
+##### Example
+
+```python
+import duckdb
+
+duckdb_conn = duckdb.connect()
+
+rel = duckdb_conn.sql("""
+        select 
+            gen_random_uuid() as id, 
+            concat('value is ', case when mod(range,2)=0 then 'even' else 'uneven' end) as description,
+            range as value, 
+            now() + concat(range,' ', 'minutes')::interval as created_timestamp
+        from range(1, 10)
+    """
+)
+
+pa_reader = rel.to_arrow_reader(batch_size=1)
+
+pa_reader.read_next_batch()
+```
+
+
+##### Result
+
+```text
+pyarrow.RecordBatch
+id: string
+description: string
+value: int64
+created_timestamp: timestamp[us, tz=Europe/Amsterdam]
+----
+id: ["e4ab8cb4-4609-40cb-ad7e-4304ed5ed4bd"]
+description: ["value is even"]
+value: [2]
+created_timestamp: [2025-04-10 09:25:51.259000Z]
+```
+
+----
+
 #### `to_arrow_table`
 
 ##### Signature
@@ -7134,7 +7202,7 @@ to_arrow_table(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 
 
 Execute and fetch all rows as an Arrow Table
 
-**Aliases**: [`fetch_arrow_table`](#fetch_arrow_table), [`arrow`](#arrow)
+**Aliases**: [`fetch_arrow_table`](#fetch_arrow_table)
 
 ##### Parameters
 
@@ -7332,7 +7400,7 @@ rel.to_df()
 ##### Signature
 
 ```python
-to_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
+to_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None, filename_pattern: object = None, file_size_bytes: object = None) -> None
 ```
 
 ##### Description
@@ -7647,7 +7715,7 @@ The data is exported to a CSV file, named code_example.csv
 ##### Signature
 
 ```python
-write_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None) -> None
+write_parquet(self: _duckdb.DuckDBPyRelation, file_name: str, *, compression: object = None, field_ids: object = None, row_group_size_bytes: object = None, row_group_size: object = None, overwrite: object = None, per_thread_output: object = None, use_tmp_file: object = None, partition_by: object = None, write_partition_columns: object = None, append: object = None, filename_pattern: object = None, file_size_bytes: object = None) -> None
 ```
 
 ##### Description
