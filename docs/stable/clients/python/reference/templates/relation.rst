@@ -531,13 +531,6 @@
             <div>Detailed examples can be found at <a href="{% link docs/stable/clients/python/relational_api.md %}#rank_dense">Relational API page</a>.</div>
             <br>
 
-    .. automethod:: record_batch
-    
-        .. raw:: html
-    
-            <div>Detailed examples can be found at <a href="{% link docs/stable/clients/python/relational_api.md %}#record_batch">Relational API page</a>.</div>
-            <br>
-
     .. automethod:: row_number
     
         .. raw:: html
@@ -648,6 +641,13 @@
         .. raw:: html
     
             <div>Detailed examples can be found at <a href="{% link docs/stable/clients/python/relational_api.md %}#tf">Relational API page</a>.</div>
+            <br>
+
+    .. automethod:: to_arrow_reader
+    
+        .. raw:: html
+    
+            <div>Detailed examples can be found at <a href="{% link docs/stable/clients/python/relational_api.md %}#to_arrow_reader">Relational API page</a>.</div>
             <br>
 
     .. automethod:: to_arrow_table

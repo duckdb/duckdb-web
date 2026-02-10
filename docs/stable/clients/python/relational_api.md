@@ -6174,6 +6174,7 @@ This section contains the functions which will trigger an SQL execution and retr
 | [`fetch_arrow_reader`](#fetch_arrow_reader) | Execute and return an Arrow Record Batch Reader that yields all rows |
 | [`fetch_arrow_table`](#fetch_arrow_table) | Execute and fetch all rows as an Arrow Table |
 | [`fetch_df_chunk`](#fetch_df_chunk) | Execute and fetch a chunk of the rows |
+| [`fetch_record_batch`](#fetch_record_batch) | Execute and return an Arrow Record Batch Reader that yields all rows |
 | [`fetchall`](#fetchall) | Execute and fetch all rows as a list of tuples |
 | [`fetchdf`](#fetchdf) | Execute and fetch all rows as a pandas DataFrame |
 | [`fetchmany`](#fetchmany) | Execute and fetch the next set of rows as a list of tuples |
@@ -6181,6 +6182,7 @@ This section contains the functions which will trigger an SQL execution and retr
 | [`fetchone`](#fetchone) | Execute and fetch a single row as a tuple |
 | [`pl`](#pl) | Execute and fetch all rows as a Polars DataFrame |
 | [`tf`](#tf) | Fetch a result as dict of TensorFlow Tensors |
+| [`to_arrow_reader`](#to_arrow_reader) | Execute and return an Arrow Record Batch Reader that yields all rows |
 | [`to_arrow_table`](#to_arrow_table) | Execute and fetch all rows as an Arrow Table |
 | [`to_csv`](#to_csv) | Write the relation object to a CSV file in 'file_name' |
 | [`to_df`](#to_df) | Execute and fetch all rows as a pandas DataFrame |
@@ -6656,6 +6658,20 @@ rel.fetch_df_chunk()
 
 ----
 
+#### `fetch_record_batch`
+
+##### Signature
+
+```python
+fetch_record_batch(self: object, rows_per_batch: typing.SupportsInt = 1000000) -> object
+```
+
+##### Description
+
+Execute and return an Arrow Record Batch Reader that yields all rows
+
+----
+
 #### `fetchall`
 
 ##### Signature
@@ -7066,6 +7082,20 @@ rel.select("description, value").tf()
        dtype=object)>,
  'value': <tf.Tensor: shape=(9,), dtype=int64, numpy=array([1, 2, 3, 4, 5, 6, 7, 8, 9])>}
 ```
+
+----
+
+#### `to_arrow_reader`
+
+##### Signature
+
+```python
+to_arrow_reader(self: _duckdb.DuckDBPyRelation, batch_size: typing.SupportsInt = 1000000) -> pyarrow.lib.RecordBatchReader
+```
+
+##### Description
+
+Execute and return an Arrow Record Batch Reader that yields all rows
 
 ----
 
