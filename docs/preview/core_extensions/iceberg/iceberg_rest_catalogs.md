@@ -60,6 +60,7 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 | `DEFAULT_REGION`              | `VARCHAR` | `NULL`   | A Default region to use when communicating with the storage layer                                     |
 | `OAUTH2_SERVER_URI`           | `VARCHAR` | `NULL`   | OAuth2 server url for getting a Bearer Token                                                          |
 | `AUTHORIZATION_TYPE`          | `VARCHAR` | `OAUTH2` | Pass `SigV4` for Catalogs the require SigV4 authorization, `none` for catalogs that don't need auth   |
+| `EXTRA_HTTP_HEADERS`          | `MAP`     | `NULL`   | Additional HTTP headers to send with REST catalog requests                                            |
 | `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN` | `true`   | Option for catalogs that support nested namespaces.                                                   |
 | `SUPPORT_STAGE_CREATE`        | `BOOLEAN` | `false`  | Option for catalogs that do not support stage create.                                                 |
 
@@ -247,6 +248,61 @@ ATTACH '⟨warehouse⟩' AS lakekeeper_catalog (
 );
 ```
 
+### Google Cloud BigLake
+
+To attach to a [Google Cloud BigLake](https://cloud.google.com/biglake) catalog, you can use extra HTTP headers to specify the GCP project for billing purposes.
+
+First, get your Google Cloud access token:
+
+```bash
+gcloud auth application-default print-access-token
+```
+
+Then create a secret with the token and extra headers:
+
+```sql
+CREATE SECRET biglake_secret (
+    TYPE iceberg,
+    TOKEN '⟨your_access_token⟩',
+    EXTRA_HTTP_HEADERS MAP {
+        'x-goog-user-project': '⟨your_gcp_project_id⟩'
+    }
+);
+```
+
+Attach to the BigLake catalog:
+
+```sql
+ATTACH '⟨gs://your-biglake-bucket⟩' AS biglake_catalog (
+    TYPE iceberg,
+    ENDPOINT 'https://biglake.googleapis.com/iceberg/v1/restcatalog',
+    SECRET biglake_secret
+);
+```
+
+Example using the [BigLake public dataset](https://opensource.googleblog.com/2026/01/explore-public-datasets-with-apache-iceberg-and-biglake.html):
+
+```sql
+CREATE SECRET biglake_public_secret (
+    TYPE iceberg,
+    TOKEN '⟨your_access_token⟩',
+    EXTRA_HTTP_HEADERS MAP {
+        'x-goog-user-project': '⟨your_gcp_project_id⟩'
+    }
+);
+
+ATTACH 'gs://biglake-public-nyc-taxi-iceberg' AS biglake_public (
+    TYPE iceberg,
+    ENDPOINT 'https://biglake.googleapis.com/iceberg/v1/restcatalog',
+    SECRET biglake_public_secret
+);
+
+-- Query the data
+SELECT count(*) FROM biglake_public.public_data.nyc_taxicab;
+```
+
+> Note: Google Cloud access tokens expire after 1 hour. For long-running sessions, you'll need to refresh the token periodically.
+
 ## Limitations
 
-Reading from Iceberg REST Catalogs backed by remote storage that is not S3 or S3 Tables is not yet supported.
+DuckDB supports Iceberg REST Catalogs backed by S3, S3 Tables, and Google Cloud Storage (GCS). Support for other storage backends is not yet available.
