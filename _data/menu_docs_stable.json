@@ -1149,6 +1149,20 @@
               "url": "mysql"
             },
             {
+              "page": "ODBC",
+              "slug": "odbc",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "ODBC Functions",
+                  "url": "functions"
+                }
+              ]
+            },
+            {
               "page": "PostgreSQL",
               "url": "postgres"
             },

@@ -8,17 +8,44 @@ redirect_from:
 title: ODBC Extension
 ---
 
-ODBC extension allows to connect to other databases (using their [ODBC drivers](https://en.wikipedia.org/wiki/Open_Database_Connectivity)) and run queries with [odbc_query](#TODO) or copy data from DuckDB with [odbc_copy](#TODO) functions.
+ODBC extension allows to connect to other databases (using their [ODBC drivers](https://en.wikipedia.org/wiki/Open_Database_Connectivity)) and run queries with [odbc_query](functions#odbc_query) or copy data from DuckDB with [odbc_copy](functions#odbc_copy) functions.
 
-## Installing and Loading
+## Installing and loading
 
 > On Linux and macOS the extension requires [unixODBC](https://en.wikipedia.org/wiki/UnixODBC) driver manager to be installed.
-> See [below](#TODO) for installation instructions.
+> See [below](#installing-unixodbc-driver-manager-on-linux-or-macos) for installation instructions.
 
-The extension can be installed automatically, but needs to be loaded manually:
+The extension can be installed automatically, but needs to be loaded manually with:
 
 ```sql
 LOAD odbc;
+```
+
+## Usage example
+
+```sql
+-- load extension
+LOAD odbc;
+
+-- open ODBC connection to a remote DB
+SET VARIABLE conn = odbc_connect('Driver={Oracle driver};DBQ=//127.0.0.1:1521/XE', 'scott', 'tiger');
+
+-- simple query
+FROM odbc_query(getvariable('conn'), 'SELECT SYSTIMESTAMP FROM DUAL');
+
+-- query with parameters
+FROM odbc_query(getvariable('conn') 
+  'SELECT CAST(? AS NVARCHAR2(2)) || CAST(? AS VARCHAR2(5)) FROM DUAL',
+  params=row('🦆', 'quack'));
+
+-- copy data into remote DB
+FROM odbc_copy(getvariable('conn'),
+  source_file='https://blobs.duckdb.org/nl_stations.csv',
+  dest_table='NL_TRAIN_STATIONS',
+  create_table=TRUE);
+
+-- close connection
+SELECT odbc_close(getvariable('conn'));
 ```
 
 ## Installing nightly version
@@ -31,7 +58,7 @@ Binaries with the most recent changes, that are published to the DuckDB nightly 
 INSTALL 'http://nightly-extensions.duckdb.org/v1.2.0/<platform>/odbc_scanner.duckdb_extension.gz';
 ```
 
-> The URL with `1.2.0` version in it should be used even if you are running later version of DuckDB
+> The URL with the version `1.2.0` in it should be used even if you are running later version of DuckDB
 
 
 Where the `<platform>` is one of:
@@ -54,35 +81,13 @@ FORCE INSTALL 'http://nightly-extensions.duckdb.org/v1.2.0/<platform>/odbc_scann
 Installed version (commit ID) can be checked using the following query:
 
 ```sql
-SELECT * FROM duckdb_extensions() WHERE extension_name = 'odbc_scanner';
+FROM duckdb_extensions() WHERE extension_name = 'odbc_scanner';
 ```
 
 To install a version built from a specific commit run:
 
 ```sql
 FORCE INSTALL 'http://nightly-extensions.duckdb.org/odbc_scanner/<7_chars_commit_id>/v1.2.0/<platform>/odbc_scanner.duckdb_extension.gz';
-```
-
-## Usage example
-
-```sql
--- load extension
-LOAD odbc;
-
--- open ODBC connection to a remote DB
-SET VARIABLE conn = odbc_connect('Driver={Oracle Driver};DBQ=//127.0.0.1:1521/XE;UID=scott;PWD=tiger;');
-
--- simple query
-SELECT * FROM odbc_query(getvariable('conn'), 'SELECT SYSTIMESTAMP FROM dual');
-
--- query with parameters
-SELECT * FROM odbc_query(getvariable('conn'), 
-  'SELECT CAST(? AS NVARCHAR2(2)) || CAST(? AS VARCHAR2(5)) FROM dual',
-  params=row('🦆', 'quack')
-);
-
--- close connection
-SELECT odbc_close(getvariable('conn'));
 ```
 
 ## DBMS-specific types support status
@@ -108,7 +113,7 @@ Tier 1:
 
 ## Installing unixODBC driver manager on Linux or macOS
 
-On Linux it can be installed from using the system package manager. Depending on the Linux distribution one of the following installation commands can be used:
+On Linux `unixODBC` can be installed using the system package manager. Depending on the Linux distribution one of the following installation commands can be used:
 
 Debian, Ubuntu:
 
@@ -144,12 +149,11 @@ arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebr
 
 ## Connection string examples
 
-> ODBC connection can be established using a Data Source name in a form `DSN=data_source1_name` or without a configured Data Source
-> in a form `Driver={Driver name};parameter1=values1;...`
+ODBC connection can be established using a data source name in a form `DSN=data_source1_name` or without a configured data source in a form `Driver={Driver name};parameter1=values1;...`.
 
-[odbc_list_drivers](#TODO) and [odbc_list_data_sources](#TODO) functions can be used to find out available drivers and dta sources.
+[odbc_list_drivers](functions#odbc_list_drivers) and [odbc_list_data_sources](functions#odbc_list_data_sources) functions can be used to find out available drivers and data sources.
 
-Example of connection strings without a configured Data Source:
+Example of connection strings without a configured data source:
 
 Oracle: 
  
@@ -213,17 +217,17 @@ Driver={Dremio Flight SQL ODBC Driver};Host=127.0.0.1;Port=31337;UID=gizmosql_us
 
 ## Query parameters
 
-When a DuckDB query is run using prepared statement, it is possible to pass input parameters from the client code. `odbc_scanner` allows to forward such input parameters over ODBC API to the queries to remote databases.
+When a DuckDB query is run using prepared statement, it is possible to pass input parameters from the client code. The extension allows to forward such input parameters over ODBC API to the queries to remote databases.
 
-`odbc_scanner` supports 2 methods of passing query parameters, using either `params` or `params_handle` named argument to [odbc_query](#odbc_query) function.
+2 methods of passing query parameters are supported, using either `params` or `params_handle` named argument to [odbc_query](functions#odbc_query) function.
 
 `params` argument takes a `STRUCT` value as an input. Struct field names are ignored, so the `row()` function can be used to create a `STRUCT` value inline:
 
 ```sql
-SELECT * FROM odbc_query(
+FROM odbc_query(
   getvariable('conn'),
   '
-    SELECT CAST(? AS VARCHAR2(3)) || CAST(? AS VARCHAR2(3)) FROM dual
+    SELECT CAST(? AS VARCHAR2(3)) || CAST(? AS VARCHAR2(3)) FROM DUAL
   ', 
   params=row(?, ?))
 ```
@@ -235,17 +239,17 @@ The problem with this approach, is that DuckDB is unable to resolve parameter ty
 
 This will result in re-preparing the inner query in remote DB every time `duckdb_execute_prepared()` is called.
 
-To avoid this problem is it possible to use 2-step parameter binding with `params_handle` named argument to [odbc_query](#odbc_query):
+To avoid this problem is it possible to use 2-step parameter binding with `params_handle` named argument to [odbc_query](functions#odbc_query):
 
 ```sql
 -- create parameters handle
 SET VARIABLE params = odbc_create_params();
 
 -- when 'duckdb_prepare()' is called, the inner query will be prepared in the remote DB
-SELECT * FROM odbc_query(
+FROM odbc_query(
   getvariable('conn'),
   '
-    SELECT CAST(? AS VARCHAR2(3)) || CAST(? AS VARCHAR2(3)) FROM dual
+    SELECT CAST(? AS VARCHAR2(3)) || CAST(? AS VARCHAR2(3)) FROM DUAL
   ', 
   params_handle=getvariable('params'));
 
@@ -260,13 +264,13 @@ Parameter handle is tied to the prepared statement and will be freed when the st
 ## Connections and concurrency
 
 DuckDB uses a multi-threaded execution engine to run parts of the query in parallel. ODBC drivers may or may not support
-using the same connection from different threads concurrently. To prevent possible concurrency problems `odbc_scanner` does not
+using the same connection from different threads concurrently. To prevent possible concurrency problems the extension does not
 allow to use the same connection from multiple threads. For example, the following query:
 
 ```sql
-SELECT * FROM odbc_query(getvariable('conn'), 'SELECT ''foo'' col1 FROM dual')
+FROM odbc_query(getvariable('conn'), 'SELECT ''foo'' col1 FROM DUAL')
 UNION ALL
-SELECT * FROM odbc_query(getvariable('conn'), 'SELECT ''bar'' col1 FROM dual')
+FROM odbc_query(getvariable('conn'), 'SELECT ''bar'' col1 FROM DUAL')
 ```
 
 will fail with:
@@ -279,12 +283,12 @@ Invalid Input Error:
 This can be avoided by using multiple ODBC connections:
 
 ```sql
-SELECT * FROM odbc_query(getvariable('conn1'), 'SELECT ''foo'' col1 FROM dual')
+FROM odbc_query(getvariable('conn1'), 'SELECT ''foo'' col1 FROM DUAL')
 UNION ALL
-SELECT * FROM odbc_query(getvariable('conn2'), 'SELECT ''bar'' col1 FROM dual')
+FROM odbc_query(getvariable('conn2'), 'SELECT ''bar'' col1 FROM DUAL')
 ```
 
-Or by disabling mutli-threaded execution setting `threads` DuckDB option to `1`.
+Or by disabling multi-threaded execution setting `threads` DuckDB option to `1`.
 
 ## Transactions management
 
@@ -292,18 +296,18 @@ According to ODBC specification, connections to remote DB are expected to have a
 
 As a general rule, transaction commands `BEGIN TRANSACTION`/`COMMIT`/`ROLLBACK` are not supposed to be send over ODBC as SQL commands. Doing so may or may not be supported by the particular driver. Instead ODBC provides the API to manage transactions.
 
-This API is exposed in `odbc_scanner` in the following functions:
+This API is exposed in the following functions:
 
- - [odbc_begin_transaction](#odbc_begin_transaction)
- - [odbc_commit](#odbc_commit)
- - [odbc_rollback](#odbc_rollback)
+ - [odbc_begin_transaction](functions#odbc_begin_transaction)
+ - [odbc_commit](functions#odbc_commit)
+ - [odbc_rollback](functions#odbc_rollback)
 
-When [odbc_begin_transaction](#odbc_begin_transaction) is called on the connection, the auto-commit mode on this connection is disabled and an implicit transaction is started. There is currently no support for enabling auto-commit back on such connection.
+When [odbc_begin_transaction](functions#odbc_begin_transaction) is called on the connection, the auto-commit mode on this connection is disabled and an implicit transaction is started. There is currently no support for enabling auto-commit back on such connection.
 
-Afer the transaction is started, [odbc_commit](#odbc_commit) or [odbc_rollback](#odbc_rollback) to complete this transaction. After the completion is performed, new implicit transaction is started in this connection automatically.
+Afer the transaction is started, [odbc_commit](functions#odbc_commit) or [odbc_rollback](functions#odbc_rollback) to complete this transaction. After the completion is performed, new implicit transaction is started on this connection automatically.
 
 ## Performance
 
-ODBC is not a high-performance API, `odbc_scanner` uses multiple API calls per-row and performs `UCS-2` to `UTF-8` conversion for every `VARCHAR` value. Besides that, [odbc_query](#odbc_query) processing is strictly single-threaded.
+ODBC is not a high-performance API, [odbc_query](functions#odbc_query) uses multiple API calls per-row and performs `UCS-2` to `UTF-8` conversion for every `VARCHAR` value. Besides that, query processing is strictly single-threaded.
 
 When [submitting issues](https://github.com/duckdb/odbc-scanner/issues) related only to performance please check the performance in comparable scenarios, for example with [pyodbc](https://pypi.org/project/pyodbc/).

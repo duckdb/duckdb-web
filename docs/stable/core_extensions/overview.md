@@ -27,6 +27,7 @@ title: Core Extensions
 | [json]({% link docs/stable/data/json/overview.md %})                     | Adds support for JSON operations                                        | DuckDB&nbsp;team | Primary           |                         |
 | [motherduck]({% link docs/stable/core_extensions/motherduck.md %})       | Allows connecting to MotherDuck                                         | Third party      |                   | md                      |
 | [mysql]({% link docs/stable/core_extensions/mysql.md %})                 | Adds support for reading from and writing to a MySQL database           | DuckDB&nbsp;team | Secondary         | mysql_scanner           |
+| [odbc]({% link docs/stable/core_extensions/odbc/overview.md %})          | Adds support for accessing remote databases over ODBC drivers           | DuckDB&nbsp;team | Secondary         | odbc_scanner           |
 | [parquet]({% link docs/stable/data/parquet/overview.md %})               | Adds support for reading and writing Parquet files                      | DuckDB&nbsp;team | Primary           |                         |
 | [postgres]({% link docs/stable/core_extensions/postgres.md %})           | Adds support for reading from and writing to a PostgreSQL database      | DuckDB&nbsp;team | Secondary         | postgres_scanner        |
 | [spatial]({% link docs/stable/core_extensions/spatial/overview.md %})    | Adds support for working with geospatial data and functions             | DuckDB&nbsp;team | Secondary         |                         |

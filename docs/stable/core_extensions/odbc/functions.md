@@ -2,10 +2,9 @@
 layout: docu
 redirect_from:
 - /docs/stable/extensions/odbc/functions
-title: Functions
+title: ODBC Extension Functions
 ---
 
-## ODBC extension functions 
 
  - [odbc_begin_transaction](#odbc_begin_transaction)
  - [odbc_bind_params](#odbc_bind_params)
@@ -25,7 +24,7 @@ title: Functions
 odbc_begin_transaction(conn_handle BIGINT) -> VARCHAR
 ```
 
-Sets the `SQL_ATTR_AUTOCOMMIT` attribute to `SQL_AUTOCOMMIT_OFF` on the specified connection thus effectively starting an implicit transaction. [odbc_commit](#odbc_commit) or [odbc_rollback](#odbc_rollback) must be called on such connection to complete the transaction. The completion starts another implicit transaction on this connection. See [Transactions management](#transactions-management) for details.
+Sets the `SQL_ATTR_AUTOCOMMIT` attribute to `SQL_AUTOCOMMIT_OFF` on the specified connection thus effectively starting an implicit transaction. [odbc_commit](#odbc_commit) or [odbc_rollback](#odbc_rollback) must be called on such connection to complete the transaction. The completion starts another implicit transaction on this connection. See [Transactions management](overview#transactions-management) for details.
 
 #### Parameters:
 
@@ -71,7 +70,7 @@ SELECT odbc_bind_params(getvariable('conn'), getvariable('params1'), row(42, 'fo
 odbc_close(conn_handle BIGINT) -> VARCHAR
 ```
 
-Closes specified ODBC connection to a remote DBMS. Does not throw errors if the connection is already closed.
+Closes specified ODBC connection to a remote DB. Does not throw errors if the connection is already closed.
 
 #### Parameters:
 
@@ -93,7 +92,7 @@ SELECT odbc_close(getvariable('conn'))
 odbc_commit(conn_handle BIGINT) -> VARCHAR
 ```
 
-Calls `SQLEndTran` with `SQL_COMMIT` argument on the specified connection, completing the current transaction. [odbc_begin_transaction](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](#transactions-management) for details.
+Calls `SQLEndTran` with `SQL_COMMIT` argument on the specified connection, completing the current transaction. [odbc_begin_transaction](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](overview#transactions-management) for details.
 
 #### Parameters:
 
@@ -118,9 +117,9 @@ odbc_connect(conn_string VARCHAR) -> BIGINT
 odbc_connect(conn_string VARCHAR, username VARCHAR, password VARCHAR) -> BIGINT
 ```
 
-Opens an ODBC connection to a remote DBMS.
+Opens an ODBC connection to a remote DB.
 
-If `username` and `password` parameters are specified, they are appended to the connection string as `UID` and `PWD`.
+If `username` and `password` (positional) parameters are specified, they are appended to the connection string as `UID` and `PWD`.
 
 #### Parameters:
 
@@ -133,7 +132,10 @@ Connection handle that can be placed into a `VARIABLE`. Connection is not closed
 #### Example:
 
 ```sql
-SET VARIABLE conn = odbc_connect('Driver={Oracle Driver};DBQ=//127.0.0.1:1521/XE;UID=system;PWD=tiger;')
+SET VARIABLE conn = odbc_connect('Driver={Oracle Driver};DBQ=//127.0.0.1:1521/XE;UID=scott;PWD=tiger')
+```
+```sql
+SET VARIABLE conn = odbc_connect('Driver={Oracle Driver};DBQ=//127.0.0.1:1521/XE', 'scott', 'tiger')
 ```
 
 ### odbc_copy
@@ -156,7 +158,7 @@ Copies rows from a DuckDB accessible file or table into the remote DB.
 Optional named parameters (source):
 
 > Source query is executed using a separate DB instance from the instance on which `odbc_copy` is being called.
-> Thus `source_query` cannot refer to pre-existing in-memory tables and cannot open currenlty opened DuckDB filed.
+> Thus `source_query` cannot refer to pre-existing in-memory tables and cannot open currenlty opened DuckDB files.
 > As a workaround, for complex source queries it is suggested to export the query result into a local Parquet file first and
 > then run `odbc_copy` on that file.
 
@@ -188,14 +190,14 @@ Optional named parameters (create table):
 ```sql
 create_table=TRUE,
 column_types=MAP {
-    'DUCKDB_TYPE_VARCHAR' : 'VARCHAR2(10)',
+    'DUCKDB_TYPE_VARCHAR': 'VARCHAR2(10)',
     'DUCKDB_TYPE_DECIMAL': 'NUMBER({typmod1},{typmod2})'}
 ```
 
  - `column_quotes` (`VARCHAR`, default: `"`): quotation character (or string) to be used to quote column names in the generated `CREATE TABLE` and `INSERT` queries
  - `commit_after_create_table` (`BOOLEAN`, default: `FALSE`): whether to issue a `COMMIT` after executing `CREATE TABLE`, enabled automatically for Firebird
 
-Optional named parameters (query parameters):
+Optional named parameters (query parameters handling):
 
  - `decimal_params_as_chars` (`BOOLEAN`, default: `false`): pass `DECIMAL` parameters as `VARCHAR`s
  - `integral_params_as_decimals` (`BOOLEAN`, default: `false`): pass (unsigned) `TINYINT`, `SMALLINT`, `INTEGER` and `BIGINT` parameters as `SQL_C_NUMERIC`.
@@ -248,7 +250,7 @@ FROM odbc_copy(getvariable('conn'),
 odbc_create_params() -> BIGINT
 ```
 
-Creates a parameters handle. Only necessary with 2-step parameters binding, see [Query parameters](#query-parameters) for details.
+Creates a parameters handle. Only necessary with 2-step parameters binding, see [Query parameters](overview#query-parameters) for details.
 
 #### Parameters:
 
@@ -287,7 +289,7 @@ A table with the following columns:
 #### Example:
 
 ```sql
-SELECT * FROM odbc_list_data_sources()
+FROM odbc_list_data_sources()
 ```
 
 ### odbc_list_drivers
@@ -312,7 +314,7 @@ A table with the following columns:
 #### Example:
 
 ```sql
-SELECT * FROM odbc_list_drivers()
+FROM odbc_list_drivers()
 ```
 
 ### odbc_query
@@ -324,7 +326,7 @@ odbc_query(conn_handle BIGINT, query VARCHAR[, <optional named parameters>]) -> 
 odbc_query(conn_string VARCHAR, query VARCHAR[, <optional named parameters>]) -> TABLE
 ```
 
-Runs specified query in a remote DBMS and returns the query results table.
+Runs specified query in a remote DB and returns the query results table.
 
 #### Parameters:
 
@@ -340,7 +342,7 @@ Optional named parameters that can be used to pass query parameters:
 
 Optional named parameters that can change types mapping:
 
-`odbc_scanner` supports a number of options that can be used to change how the query parameters are passed and how the resulting data is handled. For known DBMSes these options are set automatically. They also can be passed as named parameters to [odbc_query](#odbc_query) function to override the autoconfiguration:
+The extension supports a number of options that can be used to change how the query parameters are passed and how the resulting data is handled. For known DBs these options are set automatically. They also can be passed as named parameters to [odbc_query](#odbc_query) function to override the autoconfiguration:
 
  - `decimal_columns_as_chars` (`BOOLEAN`, default: `false`): read `DECIMAL` values as `VARCHAR`s that are parsed back into `DECIMAL`s before returning them to client
  - `decimal_columns_precision_through_ard` (`BOOLEAN`, default: `false`): when reading a `DECIMAL` specify its `precision` and `scale` through "Application Row Descriptor"
@@ -365,7 +367,7 @@ Other optional named parameters:
 
  ```sql
  FROM odbc_query(
-    odbc_connect('Driver={Oracle Driver};DBQ=//127.0.0.1:1521/XE;UID=system;PWD=tiger;'),
+    odbc_connect('Driver={Oracle Driver};DBQ=//127.0.0.1:1521/XE', 'scott', 'tiger'),
     'SELECT 42 FROM dual',
     close_connection=TRUE);
  ```
@@ -377,7 +379,7 @@ A table with the query result.
 #### Example:
 
 ```sql
-SELECT * FROM odbc_query(getvariable('conn'), 
+FROM odbc_query(getvariable('conn'), 
   'SELECT CAST(? AS NVARCHAR2(2)) || CAST(? AS VARCHAR2(5)) FROM dual',
   params=row('🦆', 'quack')
 )
@@ -389,7 +391,7 @@ SELECT * FROM odbc_query(getvariable('conn'),
 odbc_rollback(conn_handle BIGINT) -> VARCHAR
 ```
 
-Calls `SQLEndTran` with `SQL_ROLLBACK` argument on the specified connection, completing the current transaction. [odbc_begin_transaction](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](#transactions-management) for details.
+Calls `SQLEndTran` with `SQL_ROLLBACK` argument on the specified connection, completing the current transaction. [odbc_begin_transaction](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](overview#transactions-management) for details.
 
 #### Parameters:
 
