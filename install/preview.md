@@ -46,7 +46,26 @@ pip install duckdb --pre --upgrade
 
 ## Java
 
-There is currently no direct download link for JARs and they are not available in the Sonatype OSS snapshot repository. To download the preview JARs, visit the GitHub Actions section in the [`duckdb-java` repository](https://github.com/duckdb/duckdb-java), list the [successful runs on the `Java JDBC` workflow](https://github.com/duckdb/duckdb-java/actions?query=workflow%3A%22Java+JDBC%22+is%3Asuccess). In the workflow output, you can find the artifacts such as `java-linux-aarch64.zip` and `java-osx-universal.zip`.
+The following Maven snippet imports the SNAPSHOT version of the Java package:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.duckdb</groupId>
+        <artifactId>duckdb_jdbc</artifactId>
+        <!-- replace abc1234 with the hash of the build here -->
+        <version>1.6-abc1234-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+
+<repositories>
+    <repository>
+        <id>central-snapshots</id>
+        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+</repositories>
+```
 
 ## Node.js
 
