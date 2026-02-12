@@ -1,6 +1,5 @@
 ---
 layout: docu
-
 title: Relational API
 ---
 
@@ -411,19 +410,21 @@ from_query(self: _duckdb.DuckDBPyConnection, query: object, *, alias: str = '', 
 
 Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
 
+> **Warning.** Passing `params` to this method is [discouraged]({% link docs/preview/clients/python/known_issues.md %}#parameterized-queries-in-relational-api) due to significant performance overhead. Use [`execute()`]({% link docs/preview/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.
+
 **Aliases**: [`query`](#query), [`sql`](#sql)
 
 ##### Parameters
 
 - **query** : object
-                            
+
 	The SQL query or subquery to be executed and converted into a relation.
 - **alias** : str, default: ''
-                            
+
 	Optional alias name to assign to the resulting relation.
 - **params** : object
-                            
-	Optional query parameters to be used in the SQL query.
+
+	Optional query parameters. **Discouraged** due to [significant performance overhead]({% link docs/preview/clients/python/known_issues.md %}#parameterized-queries-in-relational-api). Use [`execute()`]({% link docs/preview/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.
 
 ##### Example
 
@@ -462,19 +463,21 @@ query(self: _duckdb.DuckDBPyConnection, query: object, *, alias: str = '', param
 
 Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
 
+> **Warning.** Passing `params` to this method is [discouraged]({% link docs/preview/clients/python/known_issues.md %}#parameterized-queries-in-relational-api) due to significant performance overhead. Use [`execute()`]({% link docs/preview/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.
+
 **Aliases**: [`from_query`](#from_query), [`sql`](#sql)
 
 ##### Parameters
 
 - **query** : object
-                            
+
 	The SQL query or subquery to be executed and converted into a relation.
 - **alias** : str, default: ''
-                            
+
 	Optional alias name to assign to the resulting relation.
 - **params** : object
-                            
-	Optional query parameters to be used in the SQL query.
+
+	Optional query parameters. **Discouraged** due to [significant performance overhead]({% link docs/preview/clients/python/known_issues.md %}#parameterized-queries-in-relational-api). Use [`execute()`]({% link docs/preview/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.
 
 ##### Example
 
@@ -860,19 +863,21 @@ sql(self: _duckdb.DuckDBPyConnection, query: object, *, alias: str = '', params:
 
 Run a SQL query. If it is a SELECT statement, create a relation object from the given SQL query, otherwise run the query as-is.
 
+> **Warning.** Passing `params` to this method is [discouraged]({% link docs/preview/clients/python/known_issues.md %}#parameterized-queries-in-relational-api) due to significant performance overhead. Use [`execute()`]({% link docs/preview/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.
+
 **Aliases**: [`from_query`](#from_query), [`query`](#query)
 
 ##### Parameters
 
 - **query** : object
-                            
+
 	The SQL query or subquery to be executed and converted into a relation.
 - **alias** : str, default: ''
-                            
+
 	Optional alias name to assign to the resulting relation.
 - **params** : object
-                            
-	Optional query parameters to be used in the SQL query.
+
+	Optional query parameters. **Discouraged** due to [significant performance overhead]({% link docs/preview/clients/python/known_issues.md %}#parameterized-queries-in-relational-api). Use [`execute()`]({% link docs/preview/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.
 
 ##### Example
 
