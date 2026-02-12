@@ -4,12 +4,9 @@ title: "Announcing DuckDB 1.5.0"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-0.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-0.png"
-excerpt: "Today we are releasing DuckDB 1.5.0.
+excerpt: "Today we are releasing DuckDB 1.5.0. ..."
 tags: ["release"]
 ---
-
-
-
 
 ### Dynamic Prompts in the CLI
 
@@ -38,5 +35,3 @@ The prompt also works when attaching to data lakes:
 
 These prompts can be configured using bracket codes to have a maximum length, run a custom query, use different colors, etc.
 See details in the [pull request](https://github.com/duckdb/duckdb/pull/19579).
-
-
