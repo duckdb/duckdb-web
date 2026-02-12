@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.12.4
+  version: 0.12.5
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: 479507fdb79b23e81655547f054f578be16d8cf1
+  ref: 3aae0cd0afc5da029508f3f0a77dc07c4de9a408
 
 docs:
   hello_world: |
@@ -36,10 +36,10 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 130
-extension_star_count_pretty: 130
-extension_download_count: 14114
-extension_download_count_pretty: 14.1k
+extension_star_count: 131
+extension_star_count_pretty: 131
+extension_download_count: 17255
+extension_download_count_pretty: 17.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -121,6 +121,7 @@ LOAD {{ page.extension.name }};
 | cache_httpfs_profile_type                                 | Profiling type for cached filesystem. There're three options available: `noop`, `temp`, and `duckdb`. `temp` option stores the latest IO operation profiling result, which potentially suffers concurrent updates; `duckdb` stores the IO operation profiling results into duckdb table, which unblocks advanced analysis.                                                                      | VARCHAR    | GLOBAL | []      |
 | cache_httpfs_type                                         | Type for cached filesystem. Currently there're two types available, one is `in_mem`, another is `on_disk`. By default we use on-disk cache. Set to `noop` to disable, which behaves exactly same as httpfs extension.                                                                                                                                                                           | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification                      | Enable server side certificate verification for CURL backend.                                                                                                                                                                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration                            | Automatically fetch AWS credentials from environment variables.                                                                                                                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification                           | Enable server side certificate verification.                                                                                                                                                                                                                                                                                                                                                    | BOOLEAN    | GLOBAL | []      |
 | force_download                                            | Forces upfront download of file                                                                                                                                                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                                           | Debug option to limit number of items returned in list requests                                                                                                                                                                                                                                                                                                                                 | UBIGINT    | GLOBAL | []      |
@@ -130,6 +131,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                                        | Time between retries                                                                                                                                                                                                                                                                                                                                                                            | UBIGINT    | GLOBAL | []      |
 | http_timeout                                              | HTTP timeout read/write/connection/retry (in seconds)                                                                                                                                                                                                                                                                                                                                           | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation                              | Select which is the HTTPUtil implementation to be used                                                                                                                                                                                                                                                                                                                                          | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request                         | Merges http secret params into S3 requests                                                                                                                                                                                                                                                                                                                                                      | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                                          | S3 Access Key ID                                                                                                                                                                                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                                               | S3 Endpoint                                                                                                                                                                                                                                                                                                                                                                                     | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                                             | S3 KMS Key ID                                                                                                                                                                                                                                                                                                                                                                                   | VARCHAR    | GLOBAL | []      |

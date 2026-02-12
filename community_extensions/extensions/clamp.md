@@ -63,10 +63,10 @@ docs:
     - Floating-point numbers
     - Large integers
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 141
-extension_download_count_pretty: 141
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 263
+extension_download_count_pretty: 263
 image: '/images/community_extensions/social_preview/preview_community_extension_clamp.png'
 layout: community_extension_doc
 ---

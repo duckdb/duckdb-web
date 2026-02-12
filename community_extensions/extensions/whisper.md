@@ -272,10 +272,10 @@ docs:
 
     See the [GitHub repository](https://github.com/tobilg/duckdb-whisper) for full documentation.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 30
-extension_download_count_pretty: 30
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 143
+extension_download_count_pretty: 143
 image: '/images/community_extensions/social_preview/preview_community_extension_whisper.png'
 layout: community_extension_doc
 ---

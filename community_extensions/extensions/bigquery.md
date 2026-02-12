@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: bigquery
   description: Integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets
-  version: 0.7.0
+  version: 0.7.1
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: hafenkran/duckdb-bigquery
-  ref: 4f48e734b3eae59fecff1a93c0517d313d8010f6
+  ref: b510206066eceb89b518b6b74964a0dfdf45e2fd
 
 docs:
   hello_world: |
@@ -34,7 +34,7 @@ docs:
     │ varchar  │     varchar      │  varchar │  varchar[]   │     varchar[]     │  boolean  │
     ├──────────┼──────────────────┼──────────┼──────────────┼───────────────────┼───────────┤
     │ bq       │ quacking_dataset │ duck_tbl │ [i, s]       │ [BIGINT, VARCHAR] │ false     │
-    | bq       | barking_dataset  | dog_tbl  | [i, s]       | [BIGINT, VARCHAR] │ false     |
+    | bq       | barking_dataset  | dog_tbl  | [i, s]       | [BIGINT, VARCHAR] │ false     │
     └──────────┴──────────────────┴──────────┴──────────────┴───────────────────┴───────────┘
 
     -- Select data from a specific table in BigQuery
@@ -54,8 +54,8 @@ docs:
 
 extension_star_count: 151
 extension_star_count_pretty: 151
-extension_download_count: 27105
-extension_download_count_pretty: 27.1k
+extension_download_count: 28234
+extension_download_count_pretty: 28.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -95,20 +95,20 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|                  name                   |                                                                                                                  description                                                                                                                  | input_type | scope  | aliases |
-|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| bq_arrow_compression                    | Compression codec for BigQuery Storage Read API. Options: UNSPECIFIED, LZ4_FRAME, ZSTD.Default is LZ4_FRAME.                                                                                                                                  | VARCHAR    | GLOBAL | []      |
-| bq_bignumeric_as_varchar                | Read BigQuery BIGNUMERIC data type as VARCHAR                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
-| bq_curl_ca_bundle_path                  | Path to the CA bundle for curl                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      |
-| bq_debug_show_queries                   | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      |
-| bq_default_location                     | Default location for BigQuery queries                                                                                                                                                                                                         | VARCHAR    | GLOBAL | []      |
-| bq_experimental_enable_bigquery_options | Whether to enable BigQuery OPTIONS in CREATE statements                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
-| bq_experimental_filter_pushdown         | Whether to use filter pushdown (currently experimental)                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
-| bq_experimental_use_incubating_scan     | Whether to use the incubating BigQuery scan implementation. This is currently experimental and is targeted to become the default in the future. DEPRECATED: Use bq_use_legacy_scan instead. This setting will be removed in a future version. | BOOLEAN    | GLOBAL | []      |
-| bq_experimental_use_info_schema         | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API.                                                                                                    | BOOLEAN    | GLOBAL | []      |
-| bq_geography_as_geometry                | Whether to return BigQuery GEOGRAPHY columns as DuckDB GEOMETRY types (requires spatial extension). Default is false (returns WKT strings).                                                                                                   | BOOLEAN    | GLOBAL | []      |
-| bq_max_read_streams                     | Maximum number of read streams for BigQuery Storage Read. Set to 0 to automatically match the number of DuckDB threads. `preserve_insertion_order` must be false for parallelization to work.                                                 | BIGINT     | GLOBAL | []      |
-| bq_query_timeout_ms                     | Timeout for BigQuery queries in milliseconds                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      |
-| bq_use_legacy_scan                      | Whether to use legacy scan implementation for BigQuery tables. Default is false (uses optimized Arrow-based implementation).                                                                                                                  | BOOLEAN    | GLOBAL | []      |
+|                name                 |                                                                                                                  description                                                                                                                  | input_type | scope  | aliases |
+|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| bq_arrow_compression                | Compression codec for BigQuery Storage Read API. Options: UNSPECIFIED, LZ4_FRAME, ZSTD.Default is LZ4_FRAME.                                                                                                                                  | VARCHAR    | GLOBAL | []      |
+| bq_bignumeric_as_varchar            | Read BigQuery BIGNUMERIC data type as VARCHAR                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
+| bq_curl_ca_bundle_path              | Path to the CA bundle for curl                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      |
+| bq_debug_show_queries               | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      |
+| bq_default_location                 | Default location for BigQuery queries                                                                                                                                                                                                         | VARCHAR    | GLOBAL | []      |
+| bq_experimental_enable_sql_parser   | Whether to enable BigQuery CREATE TABLE clause parsing extensions                                                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
+| bq_experimental_filter_pushdown     | Whether to use filter pushdown (currently experimental)                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
+| bq_experimental_use_incubating_scan | Whether to use the incubating BigQuery scan implementation. This is currently experimental and is targeted to become the default in the future. DEPRECATED: Use bq_use_legacy_scan instead. This setting will be removed in a future version. | BOOLEAN    | GLOBAL | []      |
+| bq_experimental_use_info_schema     | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API.                                                                                                    | BOOLEAN    | GLOBAL | []      |
+| bq_geography_as_geometry            | Whether to return BigQuery GEOGRAPHY columns as DuckDB GEOMETRY types (requires spatial extension). Default is false (returns WKT strings).                                                                                                   | BOOLEAN    | GLOBAL | []      |
+| bq_max_read_streams                 | Maximum number of read streams for BigQuery Storage Read. Set to 0 to automatically match the number of DuckDB threads. `preserve_insertion_order` must be false for parallelization to work.                                                 | BIGINT     | GLOBAL | []      |
+| bq_query_timeout_ms                 | Timeout for BigQuery queries in milliseconds                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      |
+| bq_use_legacy_scan                  | Whether to use legacy scan implementation for BigQuery tables. Default is false (uses optimized Arrow-based implementation).                                                                                                                  | BOOLEAN    | GLOBAL | []      |
 
 

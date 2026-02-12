@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: rate_limit_fs
   description: Perform rate and burst limit on filesystem operations
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-rate-limit-filesystem
-  ref: d61d1c4de440f7ad8fb9258699c7db40f610f47f
+  ref: 2d70a9f86b5d31fd6104980d5bfd47db82fcd020
 
 docs:
   hello_world: |
@@ -31,10 +31,10 @@ docs:
     - Support burst limit and GCRA-based rate limit.
     - Supports wrap custom filesystems, so users don't need to change their query.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 211
-extension_download_count_pretty: 211
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 252
+extension_download_count_pretty: 252
 image: '/images/community_extensions/social_preview/preview_community_extension_rate_limit_fs.png'
 layout: community_extension_doc
 ---
