@@ -17,6 +17,7 @@ docker run \
     --volume="${PWD}:/srv/jekyll:Z" \
     --publish 4000:4000 \
     --publish 35729:35729 \
+    --env BUNDLE_GEMFILE="/app/Gemfile" \
     ${JEKYLL_DOCKER_IMAGE_NAME} \
     bundle exec jekyll serve \
         --host 0.0.0.0 \
