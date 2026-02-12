@@ -49,6 +49,10 @@ body.landing{
 			max-width: 750px;
 			text-align: center;
 			margin: 0 auto;
+			&.left{
+				text-align: left;
+				margin: 0;
+			}
 		}
 		.section-image{
 			display: block;

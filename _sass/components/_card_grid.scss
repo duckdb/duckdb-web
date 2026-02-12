@@ -1,0 +1,42 @@
+/** Card Grid Component
+ *
+ *  Usage:
+ *  --card-columns: number of cards per row (default: 3)
+ *  --card-aspect-ratio: aspect ratio of image area (default: 4/3)
+ *  --card-content-padding: padding of content area (default: 32px 36px 36px 36px)
+ */
+
+.card-grid{
+	display: grid;
+	grid-template-columns: repeat(var(--card-columns, 3), 1fr);
+	gap: 16px;
+
+	.card{
+		border-radius: 15px;
+		border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+		overflow: hidden;
+
+		.card-image{
+			aspect-ratio: var(--card-aspect-ratio, 4/3);
+			overflow: hidden;
+			img{
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center center;
+			}
+		}
+		.card-content{
+			padding: var(--card-content-padding, 32px 36px 36px 36px);
+			h3{
+				margin: 0 0 24px 0;
+				font-size: var(--type-headline-3, 24px);
+			}
+			p{
+				margin: 0;
+				color: var(--main-text-secondary-color, #B2B2B2);
+				font-size: var(--type-body, 16px);
+			}
+		}
+	}
+}
