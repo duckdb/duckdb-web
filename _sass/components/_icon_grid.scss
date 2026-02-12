@@ -1,0 +1,33 @@
+/** Icon Grid Component
+ *
+ *  Usage:
+ *  --icon-grid-columns: number of columns (default: 3)
+ */
+
+.icon-grid{
+	display: grid;
+	grid-template-columns: repeat(var(--icon-grid-columns, 3), 1fr);
+	gap: 50px 16px;
+
+	.icon-grid-item{
+		padding-right: 20px;
+		
+		.icon{
+			width: 36px;
+			height: 36px;
+			margin-bottom: 16px;
+			color: var(--orange-50);
+			stroke-width: 1.5;
+		}
+		h3{
+			margin: 0 0 8px 0;
+			font-size: var(--type-title-2, 16px);
+			font-weight: 700;
+		}
+		p{
+			margin: 0;
+			font-size: var(--type-body-small, 14px);
+			color: var(--main-text-secondary-color, #B2B2B2);
+		}
+	}
+}

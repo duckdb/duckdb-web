@@ -213,6 +213,7 @@
 	&.transparent{
 		border: 1px solid var(--interactive-button-black-border-color, #1A1A1A);
 		backdrop-filter: blur(5px);
+		color: var(--interactive-button-black-border-color, #999);
 		&:hover{
 			border: 1px solid var(--interactive-button-black-border-color, #1A1A1A);
 			background: var(--interactive-button-black-border-color-hover, #1A1A1A);
