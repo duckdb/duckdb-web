@@ -3,9 +3,7 @@ github_directory: https://github.com/duckdb/duckdb/tree/main/extension/tpcds
 layout: docu
 redirect_from:
 - /docs/stable/extensions/tpcds
-- /docs/stable/extensions/tpcds/
 - /docs/extensions/tpcds
-- /docs/extensions/tpcds/
 title: TPC-DS Extension
 ---
 

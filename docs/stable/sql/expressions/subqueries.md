@@ -2,7 +2,7 @@
 layout: docu
 railroad: expressions/subqueries.js
 redirect_from:
-- /docs/sql/expressions/subqueries
+  - /docs/sql/expressions/subqueries
 title: Subqueries
 ---
 
@@ -143,7 +143,7 @@ SELECT EXISTS (FROM grades WHERE course = 'History') AS history_grades_present;
 |-----------------------:|
 | false                  |
 
-> The subqueries in the examples above make use of the fact that you can omit the `SELECT *` in DuckDB thanks to the [`FROM`-first syntax]({% link docs/stable/sql/query_syntax/from.md %}). The `SELECT` clause is required in subqueries by other SQL systems but cannot fulfil any purpose in `EXISTS` and `NOT EXISTS` subqueries.
+> The subqueries in the examples above make use of the fact that you can omit the `SELECT *` in DuckDB thanks to the [`FROM`-first syntax]({% link docs/stable/sql/query_syntax/from.md %}). The `SELECT` clause is required in subqueries by other SQL systems but cannot fulfill any purpose in `EXISTS` and `NOT EXISTS` subqueries.
 
 ### `NOT EXISTS`
 

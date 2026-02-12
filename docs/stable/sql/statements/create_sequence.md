@@ -2,13 +2,13 @@
 layout: docu
 railroad: statements/createsequence.js
 redirect_from:
-- /docs/sql/statements/create_sequence
+  - /docs/sql/statements/create_sequence
 title: CREATE SEQUENCE Statement
 ---
 
 The `CREATE SEQUENCE` statement creates a new sequence number generator.
 
-### Examples
+## Examples
 
 Generate an ascending sequence starting from 1:
 
@@ -53,7 +53,7 @@ CREATE SEQUENCE serial START WITH 1 MAXVALUE 10 CYCLE;
 
 ### Creating and Dropping Sequences
 
-Sequences can be created and dropped similarly to other catalogue items.
+Sequences can be created and dropped similarly to other catalog items.
 
 Overwrite an existing sequence:
 
@@ -144,7 +144,7 @@ SELECT currval('serial') AS currval;
 |--------:|
 | 1       |
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>
 

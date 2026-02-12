@@ -6,6 +6,9 @@ excerpt: "You can now put your aliases first in DuckDB's SQL dialect with a colo
 thumb: "/images/blog/thumbs/prefix-aliases.svg"
 image: "/images/blog/thumbs/prefix-aliases.png"
 tags: ["using DuckDB"]
+redirect_from:
+- /cal/1
+- /cal/01
 ---
 
 ## Syntax

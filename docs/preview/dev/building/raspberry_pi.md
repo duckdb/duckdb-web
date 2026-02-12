@@ -20,7 +20,7 @@ Then, clone and build it as follows:
 ```bash
 git clone https://github.com/duckdb/duckdb
 cd duckdb
-GEN=ninja CORE_EXTENSIONS="icu;json" make
+GEN=ninja BUILD_EXTENSIONS="icu;json" make
 ```
 
 Finally, run it:
@@ -39,7 +39,7 @@ For example:
 mkdir build
 cd build
 cmake .. \
-    -DCORE_EXTENSIONS="httpfs;json;parquet" \
+    -DBUILD_EXTENSIONS="httpfs;json;parquet" \
     -DDUCKDB_EXTRA_LINK_FLAGS="-latomic"
 make -j4
 ```

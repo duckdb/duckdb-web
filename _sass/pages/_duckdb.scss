@@ -30,6 +30,45 @@ body.design{
 		gap: 8px;
 	}
 	
+	.syntax-highlight-table{
+		width: 100%;
+		max-width: 100%;
+		display: block;
+		overflow-x: auto;
+		border-collapse: collapse;
+		font-variant-numeric: tabular-nums;
+
+		thead th{
+			padding: 10px;
+			font-weight: 700;
+			font-size: 14px;
+			text-align: left;
+			border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+			white-space: nowrap;
+		}
+
+		td{
+			padding: 10px;
+			font-size: 14px;
+			line-height: 1.55;
+			border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+			vertical-align: middle;
+		}
+
+		td:nth-child(3),
+		td:nth-child(6){
+			font-family: $fontMono;
+		}
+
+		.color-dot{
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+
 	.color-card{
 		width: 169px;
 		line-height: 1.37;

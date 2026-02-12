@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Efficient SQL on Pandas with DuckDB"
-author: Mark Raasveldt and Hannes Mühleisen
+author: Mark Raasveldt, Hannes Mühleisen
 excerpt: DuckDB, a free and open source analytical data management system, can efficiently run SQL queries directly on Pandas DataFrames.
 tags: ["using DuckDB"]
 ---
@@ -104,11 +104,11 @@ lineitem.agg(
 )
 ```
 
-|    Name            | Time (s)  |
-|:-------------------|----------:|
-| DuckDB (1 Thread)  | 0.079     |
-| DuckDB (2 Threads) | 0.048     |
-| Pandas             | 0.070     |
+| Name               | Time (s) |
+| :----------------- | -------: |
+| DuckDB (1 Thread)  |    0.079 |
+| DuckDB (2 Threads) |    0.048 |
+| Pandas             |    0.070 |
 
 This benchmark involves a very simple query, and Pandas performs very well here. These simple queries are where Pandas excels (ha), as it can directly call into the numpy routines that implement these aggregates, which are highly efficient. Nevertheless, we can see that DuckDB performs similar to Pandas in the single-threaded scenario, and benefits from its multi-threading support when enabled.
 
@@ -143,11 +143,11 @@ lineitem.groupby(
 )
 ```
 
-|    Name     | Time (s) |
-|:-------------|----------:|
-| DuckDB (1 Thread) | 0.43     |
-| DuckDB (2 Threads)&nbsp; | 0.32     |
-| Pandas      | 0.84     |
+| Name                     | Time (s) |
+| :----------------------- | -------: |
+| DuckDB (1 Thread)        |     0.43 |
+| DuckDB (2 Threads)&nbsp; |     0.32 |
+| Pandas                   |     0.84 |
 
 This query is already getting more complex, and while Pandas does a decent job, it is a factor two slower than the single-threaded version of DuckDB. DuckDB has a highly optimized aggregate hash-table implementation that will perform both the grouping and the computation of all the aggregates in a single pass over the data.
 
@@ -214,12 +214,12 @@ result = filtered_df.groupby(
 )
 ```
 
-|           Name             | Time (s) |
-|:----------------------------|----------:|
-| DuckDB (1 Thread)          | 0.60     |
-| DuckDB (2 Threads)         | 0.42     |
-| Pandas                     | 3.57     |
-| Pandas (manual pushdown)&nbsp;&nbsp;   | 2.23     |
+| Name                                 | Time (s) |
+| :----------------------------------- | -------: |
+| DuckDB (1 Thread)                    |     0.60 |
+| DuckDB (2 Threads)                   |     0.42 |
+| Pandas                               |     3.57 |
+| Pandas (manual pushdown)&nbsp;&nbsp; |     2.23 |
 
 While the manual projection pushdown significantly speeds up the query in Pandas, there is still a significant time penalty for the filtered aggregate. To process a filter, Pandas will write a copy of the entire DataFrame (minus the filtered out rows) back into memory. This operation can be time consuming when the filter is not very selective.
 
@@ -313,12 +313,12 @@ result = merged.groupby(
 
 Both of these optimizations are automatically applied by DuckDB's query optimizer.
 
-|           Name           | Time (s) |
-|:-------------------------|---------:|
-| DuckDB (1 Thread)        | 1.05     |
-| DuckDB (2 Threads)       | 0.53     |
-| Pandas                   | 15.2     |
-| Pandas (manual pushdown) | 3.78     |
+| Name                     | Time (s) |
+| :----------------------- | -------: |
+| DuckDB (1 Thread)        |     1.05 |
+| DuckDB (2 Threads)       |     0.53 |
+| Pandas                   |     15.2 |
+| Pandas (manual pushdown) |     3.78 |
 
 We see that the basic approach is extremely time consuming compared to the optimized version. This demonstrates the usefulness of the automatic query optimizer. Even after optimizing, the Pandas code is still significantly slower than DuckDB because it stores intermediate results in memory after the individual filters and joins.
 
@@ -334,23 +334,23 @@ To showcase how costly this data transfer over a socket is, we have run a benchm
 
 In this benchmark we copy a (fairly small) Pandas data frame consisting of 10M 4-byte integers (40 MB) from Python to the PostgreSQL, SQLite and DuckDB databases. Since the default Pandas `to_sql` was rather slow, we added a separate optimization in which we tell Pandas to write the data frame to a temporary CSV file, and then tell PostgreSQL to directly copy data from that file into a newly created table. This of course will only work if the database server is running on the same machine as Python.
 
-|                    Name                     | Time (s) |
-|:---------------------------------------------|----------:|
-| Pandas to Postgres using to_sql             | 111.25   |
-| Pandas to Postgres using temporary CSV file&nbsp;&nbsp; | 5.57     |
-| Pandas to SQLite using to_sql               | 6.80     |
-| Pandas to DuckDB                            | 0.03     |
+| Name                                                    | Time (s) |
+| :------------------------------------------------------ | -------: |
+| Pandas to Postgres using to_sql                         |   111.25 |
+| Pandas to Postgres using temporary CSV file&nbsp;&nbsp; |     5.57 |
+| Pandas to SQLite using to_sql                           |     6.80 |
+| Pandas to DuckDB                                        |     0.03 |
 
 While SQLite performs significantly better than Postgres here, it is still rather slow. That is because the `to_sql` function in Pandas runs a large number of `INSERT INTO` statements, which involves transforming all the individual values of the Pandas DataFrame into a row-wise representation of  Python objects which are then passed onto the system. DuckDB on the other hand directly reads the underlying array from Pandas, which makes this operation almost instant.
 
 Transferring query results or tables back from the SQL system into Pandas is another potential bottleneck. Using the built-in `read_sql_query` is extremely slow, but even the more optimized CSV route still takes at least a second for this tiny data set. DuckDB, on the other hand, also performs this transformation almost instantaneously.
 
-|                     Name                      | Time (s) |
-|:-----------------------------------------------|----------:|
-| PostgreSQL to Pandas using read_sql_query     | 7.08     |
-| PostgreSQL to Pandas using temporary CSV file | 1.29     |
-| SQLite to Pandas using read_sql_query         | 5.20     |
-| DuckDB to Pandas                              | 0.04     |
+| Name                                          | Time (s) |
+| :-------------------------------------------- | -------: |
+| PostgreSQL to Pandas using read_sql_query     |     7.08 |
+| PostgreSQL to Pandas using temporary CSV file |     1.29 |
+| SQLite to Pandas using read_sql_query         |     5.20 |
+| DuckDB to Pandas                              |     0.04 |
 
 ## Appendix B: Comparison to PandaSQL
 
@@ -358,12 +358,12 @@ There is a package called [PandaSQL](https://pypi.org/project/pandasql/) that al
 
 Nevertheless, for good measure we have run the first Ungrouped Aggregate query in PandaSQL to time it. When we first tried to run the query on the original dataset, however, we ran into an out-of-memory error that crashed our colab session. For that reason, we have decided to run the benchmark again for PandaSQL using a sample of 10% of the original data set size (600K rows). Here are the results:
 
-|    Name     | Time (s)  |
-|:-------------|-----------:|
-| DuckDB (1 Thread) |   0.023   |
-| DuckDB (2 Threads)&nbsp; |   0.014   |
-| Pandas      |   0.017   |
-| PandaSQL    |   24.43   |
+| Name                     | Time (s) |
+| :----------------------- | -------: |
+| DuckDB (1 Thread)        |    0.023 |
+| DuckDB (2 Threads)&nbsp; |    0.014 |
+| Pandas                   |    0.017 |
+| PandaSQL                 |    24.43 |
 
 We can see that PandaSQL (powered by SQLite) is around 1000× slower than either Pandas or DuckDB on this straightforward benchmark. The performance difference was so large we have opted not to run the other benchmarks for PandaSQL.
 
@@ -408,12 +408,12 @@ lineitem_pandas_parquet = pd.read_parquet('lineitemsf1.snappy.parquet', columns=
 result = lineitem_pandas_parquet.agg(Sum=('l_extendedprice', 'sum'), Min=('l_extendedprice', 'min'), Max=('l_extendedprice', 'max'), Avg=('l_extendedprice', 'mean'))
 ```
 
-|    Name                       | Time (s) |
-|:------------------------------|---------:|
-| DuckDB (1 Thread)             | 0.16     |
-| DuckDB (2 Threads)            | 0.14     |
-| Pandas                        | 7.87     |
-| Pandas (manual pushdown)      | 0.17     |
+| Name                     | Time (s) |
+| :----------------------- | -------: |
+| DuckDB (1 Thread)        |     0.16 |
+| DuckDB (2 Threads)       |     0.14 |
+| Pandas                   |     7.87 |
+| Pandas (manual pushdown) |     0.17 |
 
 We can see that the performance difference between doing the pushdown and not doing the pushdown is dramatic. When we perform the pushdown, Pandas has performance in the same ballpark as DuckDB. Without the pushdown, however, it is loading the entire file from disk, including the other 15 columns that are not required to answer the query.
 
@@ -440,11 +440,11 @@ GROUP BY
 
 For Pandas we again create two versions. A naive version, and a manually optimized version. The exact code used can be found [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing).
 
-|    Name                  | Time (s) |
-|:-------------------------|---------:|
-| DuckDB (1 Thread)        | 1.04     |
-| DuckDB (2 Threads)       | 0.89     |
-| Pandas                   | 20.4     |
-| Pandas (manual pushdown) | 3.95     |
+| Name                     | Time (s) |
+| :----------------------- | -------: |
+| DuckDB (1 Thread)        |     1.04 |
+| DuckDB (2 Threads)       |     0.89 |
+| Pandas                   |     20.4 |
+| Pandas (manual pushdown) |     3.95 |
 
 We see that for this more complex query the slight difference in performance between running over a Pandas DataFrame and a Parquet file vanishes, and the DuckDB timings become extremely similar to the timings we saw before. The added Parquet read again increases the necessity of manually performing optimizations on the Pandas code, which is not required at all when running SQL in DuckDB.

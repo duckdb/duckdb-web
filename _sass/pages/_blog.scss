@@ -10,6 +10,7 @@ section.blog .postpreview:nth-child(4){
 
 section.blog,
 section.upcoming-events,
+section.speakers,
 .post-list .newstiles{
 	.newswrap, .newstileswrap{
 		margin-top: 70px;
@@ -44,7 +45,7 @@ section.upcoming-events,
 				}
 				.length{
 					border-radius: 5px;
-					border: 1px solid var(--Landing-Page---codebox-border-gradient-end-color, #D9D9D9);
+					border: 1px solid var(--main-text-tertiary-color, #B2B2B2);
 					background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.60));
 					text-transform: none;
 					padding: 0 .6em;
@@ -76,6 +77,28 @@ section.upcoming-events,
 				   object-position: center center;
 				width: 100%;
 				height: 100%;
+			}
+			.pill-container{
+				position: absolute;
+				top: 16px;
+				left: 16px;
+				display: flex;
+				gap: 8px;
+				z-index: 10;
+			}
+			.pill-tag{
+				font-size: 11px;
+				background: var(--main-body-background-color, #FFF);
+				color: var(--main-text-primary-color, #0D0D0D);
+				padding: 8px 12px;
+				border-radius: 100px;
+				font-weight: 600;
+				white-space: nowrap;
+			}
+			.episode-tag{
+				background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.90));
+				color: var(--main-text-secondary-color, #666);
+				font-weight: 500;
 			}
 		}
 		.meta{
@@ -135,12 +158,123 @@ section.upcoming-events,
 			}
 		}
 	}
-	.postpreview.external-post {
-		position: relative;
-		border: 2px solid var(--lake-infobox-border-color, rgba(204, 235, 255, 0.60));
-	
-		&::after {
-	
+	.postpreview {
+		&.external-post {
+			border: 1px solid var(--lake-infobox-border-color, rgba(204, 235, 255, 0.60));
+			
+			&[data-source="duckdblabs.com"] {
+				border: 1px solid var(--main-blogpost-border-color-orange);
+			}
+			
+			&[data-source="duckdb.org"] {
+				border: 1px solid var(--main-blogpost-border-color-yellow);
+			}
+			
+			&[data-source="ducklake.com"] {
+				border: 1px solid var(--main-blogpost-border-color-blue);
+			}
+		}
+	}
+	.librarypreview{
+		&[data-source="thirdparty"]{
+			.postimg{
+				.pill-tag{
+					background: var(--purple-60);
+					color: var(--purple-95);
+				}
+				.episode-tag{
+					color: var(--purple-60);
+					background: var(--purple-95);
+				}
+			}
+			&[data-type="talk"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/talk_thirdparty.png');
+				}
+			}
+			&[data-type="book"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/book_thirdparty.png');
+				}
+			}
+			&[data-type="podcast"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/podcast_thirdparty.png');
+				}
+			}
+			&[data-type="paper"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/paper_thirdparty.png');
+				}
+			}
+		}
+		&[data-source="duckdb"]{
+			.postimg{
+				background-color: var(--yellow-50);
+				.pill-tag{
+					background: var(--yellow-45);
+					color: var(--yellow-30);
+				}
+			}
+			&[data-type="talk"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/talk_duckdb.png');
+				}
+			}
+			&[data-type="book"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/book_duckdb.png');
+				}
+			}
+			&[data-type="podcast"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/podcast_duckdb.png');
+				}
+			}
+			&[data-type="paper"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/paper_duckdb.png');
+				}
+			}
+		}
+		&[data-source="ducklake"]{
+			.postimg{
+				background-color: var(--blue-70);
+				.pill-tag{
+					background: var(--blue-90);
+					color: var(--blue-60);
+				}
+			}
+			&[data-type="talk"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/talk_ducklake.png');
+				}
+			}
+			&[data-type="book"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/book_ducklake.png');
+				}
+			}
+			&[data-type="podcast"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/podcast_ducklake.png');
+				}
+			}
+			&[data-type="paper"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/paper_ducklake.png');
+				}
+			}
+		}
+		
+		.postimg::after{
+			position: absolute;
+			content: "";
+			width: 160px;
+			height: 160px;
+			bottom: 0px;
+			right: 0px;
+			background-size: contain;
 		}
 	}
 	.eventpreview{
@@ -165,6 +299,7 @@ section.upcoming-events,
 	}
 }
 
+.library-tiles .librarypreview.postpreview,
 .science-tiles .sciencepreview.postpreview,
 .everywhere-tiles .everywherepreview.postpreview {
 	width: calc(33.333% - 15px);
@@ -174,6 +309,7 @@ section.upcoming-events,
 	}
 }
 
+main.main-library .recentposts .newstileswrap .postpreview,
 main.main-science .recentposts .newstileswrap .postpreview,
 main.main-everywhere .recentposts .newstileswrap .postpreview {
 	width: calc(33.333% - 15px);
@@ -181,6 +317,13 @@ main.main-everywhere .recentposts .newstileswrap .postpreview {
 	.postimg {
 		aspect-ratio: 1/1;
 		background-color: #9787f2;
+	}
+}
+
+.everywhere-tiles .everywherepreview.postpreview,
+main.main-everywhere .recentposts .newstileswrap .postpreview{
+	.postimg{
+		background-color: #CBCBCB;
 	}
 }
 
@@ -262,7 +405,6 @@ main.main-everywhere .recentposts .newstileswrap .postpreview {
 }
 
 img{
-	margin: 0 auto;
 	border:none;
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -270,6 +412,20 @@ img{
 	-webkit-box-pack: center;
 		-ms-flex-pack: center;
 			justify-content: center;
+}
+
+div.graphics-box, 
+div.graphic-box{
+	border-radius: 10px;
+	border: 1px solid var(--main-infographics-element-border, #D9D9D9);
+	background: var(--main-infographis-primary-background, #E6E6E6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	img{
+		max-width: 100%;
+	}
 }
 
 
@@ -370,10 +526,9 @@ h5 a {
 				position: fixed;
 				top: 0px;
 				right: 0;
-				width: 22vw;
-				padding: 100px 20px 20px 20px;
+				padding: 100px 0px 20px 20px;
 				z-index: 90;
-				@media only screen and (max-width: 1280px) {
+				@media only screen and (max-width: 1180px) {
 					display: none;
 				}
 				.toc_menu{
@@ -421,7 +576,7 @@ h5 a {
 						a{
 							color: $black400;
 							text-decoration: none;
-							padding: 6px 12px;
+							padding: 6px 0px 6px 12px;
 							border-radius: 100px;
 							display: inline-block;
 							text-overflow: ellipsis; 
@@ -612,10 +767,10 @@ h5 a {
 		}
 
 		.singleentry{
-			max-width: 720px;
+			max-width: 1180px;
 			margin: 0 auto;
-			padding-top: 75px;
-			padding-bottom: 75px;
+			padding: 75px 15px;
+			
 			h1{
 				@include display-2();
 				margin-bottom: 30px;
@@ -642,7 +797,20 @@ h5 a {
 		}
 		.singleentry.contains_toc{
 			display: flex;
-			max-width: unset;
+			justify-content: space-between;
+			
+			@media only screen and (max-width: 1180px) {
+				justify-content: center;
+			}
+			
+			.content{
+				max-width: 750px;
+				@media only screen and (max-width: 800px) {
+					width: 100%;
+					max-width: unset;
+				}
+			}
+			
 			.toc_sidebar{
 				padding-top: 3px;
 				position: relative;
@@ -651,16 +819,7 @@ h5 a {
 					top: 100px;
 				}
 			}
-			> .content{
-				width: 78vw;
-				@media only screen and (max-width: 1280px){
-					width: 100%;
-				}
-			}
-			.contentwidth{
-				max-width: 750px;
-				margin: 0 auto;
-			}
+
 		}
 		.post-list{
 			h3{
@@ -750,13 +909,7 @@ footer{
 	position: relative;
 }
 @media only screen and (max-width: 1280px) {
-	.postwrap {
-		margin: 0 15px;
-	}
-	.recentposts {
-		width: calc(100% + 30px);
-		margin-left: -15px;
-	}
+
 }
 
 @media only screen and (max-width: 940px) {

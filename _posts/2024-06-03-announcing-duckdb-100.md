@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Announcing DuckDB 1.0.0"
-author: Mark Raasveldt and Hannes Mühleisen
+author: Mark Raasveldt, Hannes Mühleisen
 thumb: "/images/blog/thumbs/duckdb-release-1-0-0.svg"
 image: "/images/blog/thumbs/duckdb-release-1-0-0.png"
 excerpt: "The DuckDB team is <i>very happy</i> to announce that today we’re releasing DuckDB version 1.0.0, codename “Snow Duck” (anas nivis)."
@@ -56,4 +56,4 @@ Mark and Hannes
 
 PS: We are holding our next community event, [DuckCon #5]({% link _events/2024-08-15-duckcon5.md %}), in Seattle on August 15, only a few short weeks from today. Attendance is free. Hope to see you there!
 
-_For press inquiries, please reach out to [Gabor Szarnyas](mailto:gabor@duckdblabs.com)._
+_For press inquiries, please reach out to [Gábor Szárnyas](mailto:gabor@duckdblabs.com)._

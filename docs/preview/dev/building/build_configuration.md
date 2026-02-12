@@ -48,13 +48,13 @@ The CI will also run this check, causing it to fail if this check fails.
 
 [Core DuckDB extensions]({% link docs/preview/core_extensions/overview.md %}) are the ones maintained by the DuckDB team. These are hosted in the `duckdb` GitHub organization and are served by the `core` extension repository.
 
-Core extensions can be built as part of DuckDB via the `CORE_EXTENSIONS` flag, then listing the names of the extensions that are to be built.
+Additional extensions can be built as part of DuckDB via the `BUILD_EXTENSIONS` flag, then listing the names of the extensions that are to be built.
 
 ```batch
-CORE_EXTENSIONS='tpch;httpfs;fts;json;parquet' make
+BUILD_EXTENSIONS='tpch;httpfs;fts;json;parquet' make
 ```
 
-More on this topic at [building duckdb extensions]({% link docs/preview/dev/building/building_extensions.md %}).
+More on this topic at [building DuckDB extensions]({% link docs/preview/dev/building/building_extensions.md %}).
 
 ## Package Flags
 

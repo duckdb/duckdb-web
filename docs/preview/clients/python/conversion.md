@@ -248,9 +248,11 @@ DuckDB's Python client provides multiple additional methods that can be used to 
 
 ### Apache Arrow
 
-* `arrow()` fetches the data as an [Arrow table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html)
-* `fetch_arrow_table()` is an alias of `arrow()`
-* `fetch_record_batch(chunk_size)` returns an [Arrow record batch reader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) with `chunk_size` rows per batch
+* `to_arrow_table()` fetches the data as an [Arrow table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html)
+* `to_arrow_reader(chunk_size)` returns an [Arrow record batch reader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) with `chunk_size` rows per batch
+* `arrow()` returns an [Arrow record batch reader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html). We recommend using `to_arrow_reader()` instead.
+
+> Deprecated `fetch_arrow_table()` and `fetch_record_batch()` are deprecated. Use `to_arrow_table()` and `to_arrow_reader()` instead.
 
 ### Polars
 
@@ -298,7 +300,7 @@ print(arr)
 Fetch as an Arrow table. Converting to Pandas afterwards just for pretty printing:
 
 ```python
-tbl = con.execute("SELECT * FROM items").fetch_arrow_table()
+tbl = con.execute("SELECT * FROM items").to_arrow_table()
 print(tbl.to_pandas())
 ```
 

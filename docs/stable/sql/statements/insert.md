@@ -3,12 +3,14 @@ layout: docu
 railroad: statements/insert.js
 redirect_from:
 - /docs/sql/statements/insert
+- /cal/8
+- /cal/08
 title: INSERT Statement
 ---
 
 The `INSERT` statement inserts new data into a table.
 
-### Examples
+## Examples
 
 Insert the values 1, 2, 3 into `tbl`:
 
@@ -52,7 +54,7 @@ INSERT OR REPLACE INTO tbl (i)
     VALUES (1);
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>
 
@@ -296,7 +298,7 @@ NOT NULL constraint failed: t1.val2
 When multiple columns need to be part of the uniqueness constraint, use a single `PRIMARY KEY` clause including all relevant columns:
 
 ```sql
-CREATE TABLE t1 (id1 INTEGER, id2 INTEGER, val1 DOUBLE, PRIMARY KEY(id1, id2));
+CREATE TABLE t1 (id1 INTEGER, id2 INTEGER, val1 DOUBLE, PRIMARY KEY (id1, id2));
 INSERT OR REPLACE INTO t1
     VALUES (1, 2, 3);
 INSERT OR REPLACE INTO t1

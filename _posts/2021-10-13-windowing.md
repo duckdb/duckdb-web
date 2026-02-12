@@ -65,31 +65,31 @@ Notice that at the edge of the partition, there are only two values added togeth
 Now let's look at a concrete example of a window function query.
 Suppose we have some power plant generation data:
 
-| Plant | Date | MWh |
-|:---|:---|---:|
-| Boston | 2019-01-02 | 564337 |
-| Boston | 2019-01-03 | 507405 |
-| Boston | 2019-01-04 | 528523 |
-| Boston | 2019-01-05 | 469538 |
-| Boston | 2019-01-06 | 474163 |
-| Boston | 2019-01-07 | 507213 |
-| Boston | 2019-01-08 | 613040 |
-| Boston | 2019-01-09 | 582588 |
-| Boston | 2019-01-10 | 499506 |
-| Boston | 2019-01-11 | 482014 |
-| Boston | 2019-01-12 | 486134 |
-| Boston | 2019-01-13 | 531518 |
+| Plant     | Date       |    MWh |
+| :-------- | :--------- | -----: |
+| Boston    | 2019-01-02 | 564337 |
+| Boston    | 2019-01-03 | 507405 |
+| Boston    | 2019-01-04 | 528523 |
+| Boston    | 2019-01-05 | 469538 |
+| Boston    | 2019-01-06 | 474163 |
+| Boston    | 2019-01-07 | 507213 |
+| Boston    | 2019-01-08 | 613040 |
+| Boston    | 2019-01-09 | 582588 |
+| Boston    | 2019-01-10 | 499506 |
+| Boston    | 2019-01-11 | 482014 |
+| Boston    | 2019-01-12 | 486134 |
+| Boston    | 2019-01-13 | 531518 |
 | Worcester | 2019-01-02 | 118860 |
 | Worcester | 2019-01-03 | 101977 |
 | Worcester | 2019-01-04 | 106054 |
-| Worcester | 2019-01-05 | 92182 |
-| Worcester | 2019-01-06 | 94492 |
-| Worcester | 2019-01-07 | 99932 |
+| Worcester | 2019-01-05 |  92182 |
+| Worcester | 2019-01-06 |  94492 |
+| Worcester | 2019-01-07 |  99932 |
 | Worcester | 2019-01-08 | 118854 |
 | Worcester | 2019-01-09 | 113506 |
-| Worcester | 2019-01-10 | 96644 |
-| Worcester | 2019-01-11 | 93806 |
-| Worcester | 2019-01-12 | 98963 |
+| Worcester | 2019-01-10 |  96644 |
+| Worcester | 2019-01-11 |  93806 |
+| Worcester | 2019-01-12 |  98963 |
 | Worcester | 2019-01-13 | 107170 |
 
 The data is noisy, so we want to compute a 7 day moving average for each plant.
@@ -115,32 +115,32 @@ and uses a `RANGE` frame of three days on either side of each day for the `avg`
 (to handle any missing days).
 Here is the result:
 
-| Plant | Date | MWh 7-day<br>Moving Average |
-|:---|:---|---:|
-| Boston | 2019-01-02 | 517450.75 |
-| Boston | 2019-01-03 | 508793.20 |
-| Boston | 2019-01-04 | 508529.83 |
-| Boston | 2019-01-05 | 523459.85 |
-| Boston | 2019-01-06 | 526067.14 |
-| Boston | 2019-01-07 | 524938.71 |
-| Boston | 2019-01-08 | 518294.57 |
-| Boston | 2019-01-09 | 520665.42 |
-| Boston | 2019-01-10 | 528859.00 |
-| Boston | 2019-01-11 | 532466.66 |
-| Boston | 2019-01-12 | 516352.00 |
-| Boston | 2019-01-13 | 499793.00 |
-| Worcester | 2019-01-02 | 104768.25 |
-| Worcester | 2019-01-03 | 102713.00 |
-| Worcester | 2019-01-04 | 102249.50 |
-| Worcester | 2019-01-05 | 104621.57 |
-| Worcester | 2019-01-06 | 103856.71 |
-| Worcester | 2019-01-07 | 103094.85 |
-| Worcester | 2019-01-08 | 101345.14 |
-| Worcester | 2019-01-09 | 102313.85 |
-| Worcester | 2019-01-10 | 104125.00 |
-| Worcester | 2019-01-11 | 104823.83 |
-| Worcester | 2019-01-12 | 102017.80 |
-| Worcester | 2019-01-13 | 99145.75 |
+| Plant     | Date       | MWh 7-day<br>Moving Average |
+| :-------- | :--------- | --------------------------: |
+| Boston    | 2019-01-02 |                   517450.75 |
+| Boston    | 2019-01-03 |                   508793.20 |
+| Boston    | 2019-01-04 |                   508529.83 |
+| Boston    | 2019-01-05 |                   523459.85 |
+| Boston    | 2019-01-06 |                   526067.14 |
+| Boston    | 2019-01-07 |                   524938.71 |
+| Boston    | 2019-01-08 |                   518294.57 |
+| Boston    | 2019-01-09 |                   520665.42 |
+| Boston    | 2019-01-10 |                   528859.00 |
+| Boston    | 2019-01-11 |                   532466.66 |
+| Boston    | 2019-01-12 |                   516352.00 |
+| Boston    | 2019-01-13 |                   499793.00 |
+| Worcester | 2019-01-02 |                   104768.25 |
+| Worcester | 2019-01-03 |                   102713.00 |
+| Worcester | 2019-01-04 |                   102249.50 |
+| Worcester | 2019-01-05 |                   104621.57 |
+| Worcester | 2019-01-06 |                   103856.71 |
+| Worcester | 2019-01-07 |                   103094.85 |
+| Worcester | 2019-01-08 |                   101345.14 |
+| Worcester | 2019-01-09 |                   102313.85 |
+| Worcester | 2019-01-10 |                   104125.00 |
+| Worcester | 2019-01-11 |                   104823.83 |
+| Worcester | 2019-01-12 |                   102017.80 |
+| Worcester | 2019-01-13 |                    99145.75 |
 
 You can request multiple different `OVER` clauses in the same `SELECT`, and each will be computed separately.
 Often, however, you want to use the same window for multiple functions,

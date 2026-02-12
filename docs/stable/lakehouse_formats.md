@@ -16,12 +16,12 @@ DuckDB supports Iceberg, Delta and DuckLake as first-class citizens. The followi
 | Extension                    | [`ducklake`](https://ducklake.select/docs/stable/duckdb/introduction) | [`iceberg`]({% link docs/stable/core_extensions/iceberg/overview.md %}) | [`delta`]({% link docs/stable/core_extensions/delta.md %}) |
 | Read                         | ✅                                                                    | ✅                                                                      | ✅                                                         |
 | Write                        | ✅                                                                    | ✅                                                                      | ✅                                                         |
-| Deletes                      | ✅                                                                    | ❌                                                                      | ❌                                                         |
-| Updates                      | ✅                                                                    | ❌                                                                      | ❌                                                         |
+| Deletes                      | ✅                                                                    | ✅                                                                      | ❌                                                         |
+| Updates                      | ✅                                                                    | ✅                                                                      | ❌                                                         |
 | Upserting                    | ✅                                                                    | ❌                                                                      | ❌                                                         |
 | Create table                 | ✅                                                                    | ✅                                                                      | ❌                                                         |
 | Create table with partitions | ✅                                                                    | ❌                                                                      | ❌                                                         |
-| Attaching to a catalog       | ✅                                                                    | ✅                                                                      | ✅ `*`                                                     |
+| Attaching to a catalog       | ✅                                                                    | ✅                                                                      | ✅ \*                                                     |
 | Rename table                 | ✅                                                                    | ❌                                                                      | ❌                                                         |
 | Rename columns               | ✅                                                                    | ❌                                                                      | ❌                                                         |
 | Add/drop columns             | ✅                                                                    | ❌                                                                      | ❌                                                         |
@@ -32,9 +32,9 @@ DuckDB supports Iceberg, Delta and DuckLake as first-class citizens. The followi
 | Time travel                  | ✅                                                                    | ✅                                                                      | ✅                                                         |
 | Query table changes          | ✅                                                                    | ❌                                                                      | ❌                                                         |
 
-`*` Through the `uc_catalog` extension
+\* Through the [`unity_catalog`](https://github.com/duckdb/unity_catalog) extension.
 
-DuckDB aims to build native extensions with minimal dependencies. The `iceberg` extension for example, has dependencies on third-party Iceberg libraries, which means all data and metadata operations are implemented natively in the DuckDB extension. For the `delta` extension, we use the [`delta-kernel-rs` project](https://github.com/delta-io/delta-kernel-rs), which is meant to be a lightweight platform for engines to build delta integrations that are as close to native as possible.
+DuckDB aims to build native extensions with minimal dependencies. The `iceberg` extension for example, has no dependencies on third-party Iceberg libraries, which means all data and metadata operations are implemented natively in the DuckDB extension. For the `delta` extension, we use the [`delta-kernel-rs` project](https://github.com/delta-io/delta-kernel-rs), which is meant to be a lightweight platform for engines to build delta integrations that are as close to native as possible.
 
 > **Why do native implementations matter?** Native implementations allow DuckDB to do more performance optimizations such as complex filter pushdowns (with file-level and row-group level pruning) and improve memory management.
 

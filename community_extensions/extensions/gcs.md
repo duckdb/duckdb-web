@@ -9,7 +9,7 @@ extension:
   name: gcs
   description: DuckDB GCS Extension
   extended_description: A native GCS extension with support for standard Google auth methods
-  version: 0.0.1
+  version: 0.0.3
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: northpolesec/duckdb-gcs
-  ref: b0b3bd3e896417308800a04116cf60a129de7e0c
+  ref: 5465cad377f83637f8233b9756062b98352e3cdd
 
 docs:
   hello_world: |
@@ -36,10 +36,10 @@ docs:
     └─────────────────────────────────────────┴─────────┴───────┴──────────────────────────┘
 
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 655
-extension_download_count_pretty: 655
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 2357
+extension_download_count_pretty: 2.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_gcs.png'
 layout: community_extension_doc
 ---
@@ -60,5 +60,19 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|              name              |                                                                                          description                                                                                           | input_type | scope  | aliases |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| gcs_enable_grpc                | Use gRPC for connection to Google Cloud Storage. Can improve performance, especially when being used from Google Cloud. Default is false.                                                      | BOOLEAN    | GLOBAL | []      |
+| gcs_enable_metadata_cache      | Enable caching of object metadata (size, modification time) to reduce API calls. Set to false to disable caching for debugging or when files change frequently.                                | BOOLEAN    | GLOBAL | []      |
+| gcs_list_cache_ttl             | Time-to-live in seconds for cached object listing results (used in glob operations). Default is 60 seconds. Increase for stable directories, decrease if objects are added/removed frequently. | INTEGER    | GLOBAL | []      |
+| gcs_max_list_cache_entries     | Maximum number of list cache entries to prevent unbounded memory growth. Default is 1000. When limit is reached, least recently used entries are evicted.                                      | UBIGINT    | GLOBAL | []      |
+| gcs_max_metadata_cache_entries | Maximum number of metadata cache entries to prevent unbounded memory growth. Default is 10000. When limit is reached, least recently used entries are evicted.                                 | UBIGINT    | GLOBAL | []      |
+| gcs_metadata_cache_ttl         | Time-to-live in seconds for cached object metadata. Default is 300 seconds (5 minutes). Increase for stable files, decrease if files change frequently.                                        | INTEGER    | GLOBAL | []      |
+| gcs_transfer_concurrency       | Number of concurrent worker threads to use when reading. Default is 5.                                                                                                                         | INTEGER    | GLOBAL | []      |
 
 

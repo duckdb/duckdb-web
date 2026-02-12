@@ -10,7 +10,7 @@ The DuckDB JSON reader can automatically infer which configuration flags to use 
 ## The `read_json` Function
 
 The `read_json` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
-In the following example, we use the [`todos.json`](/data/json/todos.json) file,
+In the following example, we use the [`todos.json`]({% link data/json/todos.json %}) file,
 
 ```sql
 SELECT *
@@ -332,7 +332,7 @@ CREATE TABLE numbers (i BIGINT);
 COPY numbers FROM 'numbers.json' (ARRAY true);
 ```
 
-The format can be detected automatically the format like so:
+The format can be detected automatically like so:
 
 ```sql
 CREATE TABLE numbers (i BIGINT);

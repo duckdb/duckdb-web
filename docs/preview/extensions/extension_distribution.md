@@ -10,13 +10,14 @@ For platforms where packages for certain extensions are not available, users can
 
 All official extensions are distributed for the following platforms.
 
-| Platform name      | Operating system | Architecture    | CPU types                      | Used by                    |
-|--------------------|------------------|-----------------|--------------------------------|----------------------------|
-| `linux_amd64`      | Linux            | x86_64  (AMD64) |                                | Node.js packages, etc.     |
-| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. | All packages               |
-| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          | All packages               |
-| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     | All packages               |
-| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               | All packages               |
+| Platform name      | Operating system | Architecture    | CPU types                      |
+|--------------------|------------------|-----------------|--------------------------------|
+| `linux_amd64`      | Linux            | x86_64  (AMD64) |                                |
+| `linux_arm64`      | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. |
+| `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          |
+| `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     |
+| `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               |
+| `windows_arm64`    | Windows          | AArch64 (ARM64) | Copilot+ PC with Qualcommm CPU |
 
 Some extensions are distributed for the following platforms:
 
@@ -34,13 +35,13 @@ By default, DuckDB uses its built-in public keys to verify the integrity of exte
 All core and community extensions are signed by the DuckDB team.
 
 Signing the extension simplifies their distribution, this is why they can be distributed over HTTP without the need for HTTPS,
-which is itself is supported through an extension ([`httpfs`]({% link docs/preview/core_extensions/httpfs/overview.md %})).
+which itself is supported through an extension ([`httpfs`]({% link docs/preview/core_extensions/httpfs/overview.md %})).
 
 ### Unsigned Extensions
 
 > Warning Only load unsigned extensions from sources you trust.
 > Avoid loading unsigned extensions over HTTP.
-> Consult the [Securing DuckDB page]({% link docs/preview/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how set up DuckDB in a secure manner.
+> Consult the [Securing DuckDB page]({% link docs/preview/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how to set up DuckDB in a secure manner.
 
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
 To load unsigned extensions using the [CLI client]({% link docs/preview/clients/cli/overview.md %}), pass the `-unsigned` flag to it on startup:
@@ -95,7 +96,7 @@ When installing an extension from a custom repository, DuckDB will search for bo
 INSTALL icu FROM '⟨custom_repository⟩';
 ```
 
-The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
+The execution of this statement will first look for `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
 
 If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/preview/extensions/overview.md %}#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.

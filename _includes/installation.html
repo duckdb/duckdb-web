@@ -34,14 +34,14 @@
         <div class="selection-content">
             <div class="selection-options" data-role="platform">
                 <div class="option" aria-checked="false" tabindex="-1" data-value="linux"><span class="symbol"><img src="/images/icons/linux.svg" aria-hidden="true"></span><span class="label">Linux</span></div>
-                <div class="option active" aria-checked="true" tabindex="0" data-value="macos"><span class="symbol"><img src="/images/icons/macos.svg" aria-hidden="true"></span><span class="label">macOS</span></div>
+                <div class="option" aria-checked="false" tabindex="-1" data-value="macos"><span class="symbol"><img src="/images/icons/macos.svg" aria-hidden="true"></span><span class="label">macOS</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="windows"><span class="symbol"><img src="/images/icons/windows.svg" aria-hidden="true"></span><span class="label">Windows</span></div>
             </div>
         </div>
     </div>
     
     
-    <div class="installation-instructions" data-core-version="{{ site.current_duckdb_version }}" data-java-version="{{ site.current_duckdb_java_version }}" data-odbc-version="{{ site.current_duckdb_odbc_version }}">
+    <div class="installation-instructions" data-core-version="{{ site.current_duckdb_version }}" data-java-version="{{ site.current_duckdb_java_version }}" data-odbc-version="{{ site.current_duckdb_odbc_version }}" data-go-version="{{ site.current_duckdb_go_version }}" data-r-version="{{ site.current_duckdb_r_version }}" data-rust-version="{{ site.current_duckdb_rust_version }}">
         
         <h2>Installation <span class="currentversion"></span></h2>
         
@@ -99,6 +99,11 @@ brew install duckdb
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
 
+<h4>Install Specific Version</h4>
+{%- highlight bash -%}
+curl https://install.duckdb.org | DUCKDB_VERSION=1.4.3 sh
+{%- endhighlight -%}
+
 <h4>Direct Download</h4>
 {%- assign f = site.data.checksums.artifacts.cli.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
@@ -112,11 +117,16 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
     data-environment="cli"
     data-docs="{% link docs/stable/clients/cli/overview.md %}">
 
-    <figure class="highlight">
-        <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">sh</span></code></pre>
-    </figure>
+<figure class="highlight">
+    <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">sh</span></code></pre>
+</figure>
 
 <div class="alternative">
+
+<h4>Install Specific Version</h4>
+{%- highlight bash -%}
+curl https://install.duckdb.org | DUCKDB_VERSION=1.4.3 sh
+{%- endhighlight -%}
 
 <h4>Docker Image</h4>
 {%- highlight bash -%}
@@ -162,10 +172,20 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 winget install DuckDB.cli
 {%- endhighlight -%}
 
-<h4>Docker Image</h4>
+<h4>Docker Image (for WSL2)</h4>
 
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
+{%- endhighlight -%}
+
+<h4>Installation Script (Alpha)</h4>
+
+You can now install DuckDB with a script from an administrative PowerShell terminal. Please note that this script is an alpha implementation and exercise cautioen when using it.
+
+{%- highlight powershell -%}
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://install.duckdb.org/install.ps1'))
 {%- endhighlight -%}
 
 </div>
@@ -191,9 +211,22 @@ pip install duckdb
     data-environment="r"
     data-docs="{% link docs/stable/clients/r.md %}">
 
-{%- highlight bash -%}
+{%- highlight r -%}
 install.packages("duckdb")
 {%- endhighlight -%}
+
+<div class="alternative">
+
+<h4>Installing from the Posit Public Package Manager (Linux)</h4>
+
+{%- highlight r -%}
+options(HTTPUserAgent = sprintf("R/%s R (%s)",
+    getRversion(),
+    paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])
+))
+install.packages("duckdb", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/latest/")
+{%- endhighlight -%}
+</div>
 </div>
 
 
@@ -336,13 +369,12 @@ go get github.com/duckdb/duckdb-go/v2
     data-platform="windows"
     data-environment="odbc"
     data-docs="{% link docs/stable/clients/odbc/overview.md %}">
-    
+
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" -%}
 
-<div class="note">
-    The ODBC client is not yet available as a binary for Windows / arm64.
-</div>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-arm64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-arm64.zip</a>
+{%- include checksum_inline.html environment="odbc" platform="windows" architecture="arm64" -%}
 
 </div>
 

@@ -3,9 +3,7 @@ github_repository: https://github.com/duckdb/duckdb-java
 layout: docu
 redirect_from:
 - /docs/api/java
-- /docs/api/java/
 - /docs/api/scala
-- /docs/api/scala/
 - /docs/clients/java
 title: Java JDBC Client
 ---
@@ -187,7 +185,7 @@ try (var allocator = new RootAllocator();
 
 ### Streaming Results
 
-Result streaming is opt-in in the JDBC driver – by setting the `jdbc_stream_results` config to `true` before running a query. The easiest way do that is to pass it in the `Properties` object.
+Result streaming is opt-in in the JDBC driver – by setting the `jdbc_stream_results` config to `true` before running a query. The easiest way to do that is to pass it in the `Properties` object.
 
 ```java
 Properties props = new Properties();

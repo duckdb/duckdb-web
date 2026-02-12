@@ -3,7 +3,7 @@ blurb: The QUALIFY clause is used to filter the results of WINDOW functions.
 layout: docu
 railroad: query_syntax/qualify.js
 redirect_from:
-- /docs/sql/query_syntax/qualify
+  - /docs/sql/query_syntax/qualify
 title: QUALIFY Clause
 ---
 

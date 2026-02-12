@@ -3,13 +3,11 @@ github_repository: https://github.com/duckdb/duckdb-azure
 layout: docu
 redirect_from:
 - /docs/stable/extensions/azure
-- /docs/stable/extensions/azure/
 - /docs/extensions/azure
-- /docs/extensions/azure/
 title: Azure Extension
 ---
 
-The `azure` extension is a loadable extension that adds a filesystem abstraction for the [Azure Blob storage](https://azure.microsoft.com/en-us/products/storage/blobs) to DuckDB.
+The `azure` extension is a loadable extension that adds a filesystem abstraction for [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs) to DuckDB, enabling both reading and writing data.
 
 ## Installing and Loading
 
@@ -89,6 +87,29 @@ FROM 'abfss://⟨my_storage_account⟩.dfs.core.windows.net/⟨my_filesystem⟩/
 ```sql
 SELECT *
 FROM 'abfss://⟨my_storage_account⟩.dfs.core.windows.net/⟨my_filesystem⟩/⟨path⟩/*.csv';
+```
+
+## Writing to Azure Blob Storage
+
+You can write data directly to Azure Blob or ADLSv2 Storage using the [`COPY` statement]({% link docs/stable/sql/statements/copy.md %}).
+
+```sql
+-- Write query results to a Parquet file on Blob Storage
+COPY (SELECT * FROM my_table)
+TO 'az://⟨my_container⟩/⟨path⟩/output.parquet';
+```
+
+```sql
+-- Write a table to a CSV file on ADLSv2 Storage
+COPY my_table
+TO 'abfss://⟨my_container⟩/⟨path⟩/output.csv';
+```
+
+You can also use fully qualified paths:
+
+```sql
+COPY my_table
+TO 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/output.parquet';
 ```
 
 ## Configuration
@@ -244,7 +265,7 @@ CREATE SECRET azure_spn_cert (
 
 #### Configuring a Proxy
 
-To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME`, and `PROXY_PASSWORD` in the secret definition. For example:
+To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME` and `PROXY_PASSWORD` in the secret definition. For example:
 
 ```sql
 CREATE SECRET secret5 (

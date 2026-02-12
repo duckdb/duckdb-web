@@ -169,7 +169,7 @@ role. We will now define the three types of unstable extensions by looking at th
 #### DuckDB Targets
 
 Every unstable API extension should target a single version of DuckDB. This target version is defined by a combination
-of **the duckdb submodule** and the target version in the [`MainDistributionPipeline`](https://github.com/duckdb/extension-template/blob/main/.github/workflows/MainDistributionPipeline.yml) workflow.
+of **the `duckdb` submodule** and the target version in the [`MainDistributionPipeline`](https://github.com/duckdb/extension-template/blob/main/.github/workflows/MainDistributionPipeline.yml) workflow.
 Which version an extension targets depends on the release cycle phase and the branch. We will now go over all
 combinations
 
@@ -257,19 +257,19 @@ type (single/multi branch):
 
 #### Switching between Single Branch, Two Branch and Three Branch
 
-Switching between the different branch types for extensions is a fairly straighforward process and should be done as follows:
+Switching between the different branch types for extensions is a fairly straightforward process and should be done as follows:
 
 - Switch: **Single branch** `->` **Two branch**
     - When: during **any** phase
     - Reasons:
-        - When desire arises to merge features not elligible for `vx.y.<z+1>` while also maintaining ability to do releases for `vx.y.<z+n>`
+        - When desire arises to merge features not eligible for `vx.y.<z+1>` while also maintaining ability to do releases for `vx.y.<z+n>`
         - To be able to test with latest DuckDB main while maintaining ability to do releases for `vx.y.<z+n>` (including `vx.y.z` itself)
     - Actions:
         - Create branch `vx.y-codename` from a commit on main between HEAD of `main` and the commit in the DuckDB `vx.y.z` config file.
 - Switch: **Two branch** `->` **Three branch**
     - When: during **Pre-release** or **Feature-freeze** phase
     - Reasons:
-        - Whenever a feature needs to be merged that is not elligible for merging into `vx.<y+1>.0`.
+        - Whenever a feature needs to be merged that is not eligible for merging into `vx.<y+1>.0`.
     - Actions:
         - Create `vx.<y+1>-codename` branch from main
 - Switch **Three branch** `->` **Two branch** or **Two branch** `->` **Single branch**

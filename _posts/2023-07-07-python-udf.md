@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "From Waddle to Flying: Quickly Expanding DuckDB's Functionality with Scalar Python UDFs"
-author: Pedro Holanda, Thijs Bruineman and Phillip Cloud
+author: Pedro Holanda, Thijs Bruineman, Phillip Cloud
 excerpt: DuckDB now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DuckDB while taking advantage of DuckDB's fast execution model, SQL and data safety.
 tags: ["using DuckDB"]
 ---
@@ -237,10 +237,10 @@ arrow_res = con.sql("SELECT sum(add_arrow_type(i)) FROM numbers").fetchall()
 ```
 
 
-|    Name     | Time (s) |
-|-------------|---------:|
-| Built-In    | 5.37     |
-| PyArrow     | 0.35     |
+| Name     | Time (s) |
+| -------- | -------: |
+| Built-In |     5.37 |
+| PyArrow  |     0.35 |
 
 We can observe a performance difference of more than one order of magnitude between the two UDFs. The difference in performance is primarily due to three factors:
 
@@ -295,10 +295,10 @@ exec_external(con)
 ```
 
 
-|    Name     | Time (s) | Peak memory consumption (MB) |
-|-------------|---------:|-----------------------------:|
-| External    | 5.65     | 584.032                      |
-| UDF         | 5.63     | 112.848                      |
+| Name     | Time (s) | Peak memory consumption (MB) |
+| -------- | -------: | ---------------------------: |
+| External |     5.65 |                      584.032 |
+| UDF      |     5.63 |                      112.848 |
 
 
 Here we can see that there is no significant regression in performance when utilizing UDFs. However, you still have the benefits of safer execution and the utilization of SQL. In our example, we can also notice that the external function materializes the entire query, resulting in a 5× higher peak memory consumption compared to the UDF approach.

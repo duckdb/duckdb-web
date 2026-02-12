@@ -135,30 +135,30 @@ As you can see, the projection and selection pushdown has expanded the queries r
 
 To investigate the performance of the Postgres Scanner, we ran the well-known TPC-H benchmark on DuckDB using its internal storage format, on Postgres also using its internal format and with DuckDB reading from Postgres using the new Postgres Scanner. We used DuckDB 0.5.1 and Postgres 14.5, all experiments were run on a MacBook Pro with an M1 Max CPU. The experiment script [is available](https://gist.github.com/hannes/d2f0914a8e0ed0fb235040b9981c58a7). We run "scale factor" 1 of TPCH, creating a dataset of roughly 1 GB with ca. 6 M rows in the biggest table, `lineitem`. Each of the 22 TPC-H benchmark queries was run 5 times, and we report the median run time in seconds. The time breakdown is given in the following table. 
 
-|query | duckdb| duckdb/postgres| postgres|
-|:-----|------:|---------------:|--------:|
-|1     |   0.03|            0.74|     1.12|
-|2     |   0.01|            0.20|     0.18|
-|3     |   0.02|            0.55|     0.21|
-|4     |   0.03|            0.52|     0.11|
-|5     |   0.02|            0.70|     0.13|
-|6     |   0.01|            0.24|     0.21|
-|7     |   0.04|            0.56|     0.20|
-|8     |   0.02|            0.74|     0.18|
-|9     |   0.05|            1.34|     0.61|
-|10    |   0.04|            0.41|     0.35|
-|11    |   0.01|            0.15|     0.07|
-|12    |   0.01|            0.27|     0.36|
-|13    |   0.04|            0.18|     0.32|
-|14    |   0.01|            0.19|     0.21|
-|15    |   0.03|            0.36|     0.46|
-|16    |   0.03|            0.09|     0.12|
-|17    |   0.05|            0.75|  > 60.00|
-|18    |   0.08|            0.97|     1.05|
-|19    |   0.03|            0.32|     0.31|
-|20    |   0.05|            0.37|  > 60.00|
-|21    |   0.09|            1.53|     0.35|
-|22    |   0.03|            0.15|     0.15|
+| query | duckdb | duckdb/postgres | postgres |
+| :---- | -----: | --------------: | -------: |
+| 1     |   0.03 |            0.74 |     1.12 |
+| 2     |   0.01 |            0.20 |     0.18 |
+| 3     |   0.02 |            0.55 |     0.21 |
+| 4     |   0.03 |            0.52 |     0.11 |
+| 5     |   0.02 |            0.70 |     0.13 |
+| 6     |   0.01 |            0.24 |     0.21 |
+| 7     |   0.04 |            0.56 |     0.20 |
+| 8     |   0.02 |            0.74 |     0.18 |
+| 9     |   0.05 |            1.34 |     0.61 |
+| 10    |   0.04 |            0.41 |     0.35 |
+| 11    |   0.01 |            0.15 |     0.07 |
+| 12    |   0.01 |            0.27 |     0.36 |
+| 13    |   0.04 |            0.18 |     0.32 |
+| 14    |   0.01 |            0.19 |     0.21 |
+| 15    |   0.03 |            0.36 |     0.46 |
+| 16    |   0.03 |            0.09 |     0.12 |
+| 17    |   0.05 |            0.75 |  > 60.00 |
+| 18    |   0.08 |            0.97 |     1.05 |
+| 19    |   0.03 |            0.32 |     0.31 |
+| 20    |   0.05 |            0.37 |  > 60.00 |
+| 21    |   0.09 |            1.53 |     0.35 |
+| 22    |   0.03 |            0.15 |     0.15 |
 
 Stock Postgres is not able to finish queries 17 and 20 within a one-minute timeout because of correlated subqueries containing a query on the lineitem table. For the other queries, we can see that DuckDB with the Postgres Scanner not only finished all queries, it also was faster than stock Postgres on roughly half of them, which is astonishing given that DuckDB has to read its input data from Postgres through the client/server protocol as described above. Of course, stock DuckDB is still 10× faster with its own storage, but as discussed at the very beginning of this post this requires the data to be imported there first. 
 

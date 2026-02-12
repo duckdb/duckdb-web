@@ -6,24 +6,24 @@ excerpt: |
   Adds support for validating JSON data with JSON schemas.
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_json_schema.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_json_schema.html).
 extension:
   build: cmake
   description: Adds support for validating JSON data with JSON schemas.
   language: C++
   license: Apache-2.0
   maintainers:
-    - rustyconover
+  - rustyconover
   name: json_schema
-  version: 2025102402
+  version: '2025120401'
 repo:
   github: query-farm/json_schema
-  ref: 4fc27e93fc6c2e3f6458de2dd47b40e56339cac7
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 613
-extension_download_count_pretty: 613
+  ref: d506aff832d137a4eb3fa826a860e5808bf657f1
+
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 1518
+extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_json_schema.png'
 layout: community_extension_doc
 ---
@@ -51,9 +51,9 @@ LOAD {{ page.extension.name }};
 
 |        function_name        | function_type | description | comment | examples |
 |-----------------------------|---------------|-------------|---------|----------|
-| json_schema_patch           | scalar        | NULL        | NULL    | NULL     |
-| json_schema_update          | scalar        | NULL        | NULL    | NULL     |
-| json_schema_validate        | scalar        | NULL        | NULL    | NULL     |
-| json_schema_validate_schema | scalar        | NULL        | NULL    | NULL     |
+| json_schema_patch           | scalar        | NULL        | NULL    |          |
+| json_schema_update          | scalar        | NULL        | NULL    |          |
+| json_schema_validate        | scalar        | NULL        | NULL    |          |
+| json_schema_validate_schema | scalar        | NULL        | NULL    |          |
 
 

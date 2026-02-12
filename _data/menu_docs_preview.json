@@ -477,10 +477,6 @@
                   "url": "analyze"
                 },
                 {
-                  "page": "ALTER DATABASE",
-                  "url": "alter_database"
-                },
-                {
                   "page": "ALTER TABLE",
                   "url": "alter_table"
                 },
@@ -1153,6 +1149,20 @@
               "url": "mysql"
             },
             {
+              "page": "ODBC",
+              "slug": "odbc",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "ODBC Functions",
+                  "url": "functions"
+                }
+              ]
+            },
+            {
               "page": "PostgreSQL",
               "url": "postgres"
             },
@@ -1193,6 +1203,14 @@
             {
               "page": "UI",
               "url": "ui"
+            },
+            {
+              "page": "Unity Catalog",
+              "url": "unity_catalog"
+            },
+            {
+              "page": "Vortex",
+              "url": "vortex"
             },
             {
               "page": "VSS",
@@ -1531,8 +1549,16 @@
                   "url": "full_text_search"
                 },
                 {
+                  "page": "Graph Queries",
+                  "url": "graph_queries"
+                },
+                {
                   "page": "query and query_table Functions",
                   "url": "query_and_query_table_functions"
+                },
+                {
+                  "page": "Merge Statement for SCD Type 2",
+                  "url": "merge"
                 },
                 {
                   "page": "Timestamp Issues",

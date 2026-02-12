@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: curl_httpfs
   description: httpfs with connection pool, HTTP/2 and async IO. 
-  version: 0.2.1
+  version: 0.2.4
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-curl-filesystem
-  ref: 8dead9f6b45250becd2bb4c7b94428a9a6af9e45
+  ref: e5c4921e6e908d07abab3f89c0d036a22db0cd4b
 
 docs:
   hello_world: |
@@ -30,10 +30,10 @@ docs:
     - Implements TCP connection pool.
     - All network IO operations are performed in asynchronously.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 693
-extension_download_count_pretty: 693
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 7958
+extension_download_count_pretty: 8.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_curl_httpfs.png'
 layout: community_extension_doc
 ---

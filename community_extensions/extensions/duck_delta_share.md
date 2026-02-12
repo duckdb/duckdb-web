@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_delta_share
   description: DuckDB Extension for Delta Sharing
-  version: 0.0.1
+  version: 0.1.0
   language: C++
   build: cmake
   license: MIT
@@ -18,12 +18,12 @@ extension:
 
 repo:
   github: cwiq-os/duck_delta_share
-  ref: fc93bee88ed003dc2787d5f9193a16da255bc876
+  ref: 99c422debc9a7de75621aeba46c72aa4eea1b9df
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 608
-extension_download_count_pretty: 608
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 386
+extension_download_count_pretty: 386
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_delta_share.png'
 layout: community_extension_doc
 ---
@@ -49,10 +49,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| delta_share_list | table         | NULL        | NULL    |          |
-| delta_share_read | table         | NULL        | NULL    |          |
+|     function_name      | function_type | description | comment | examples |
+|------------------------|---------------|-------------|---------|----------|
+| delta_share_list       | table         | NULL        | NULL    |          |
+| delta_share_list_files | scalar        | NULL        | NULL    |          |
+| delta_share_read       | table         | NULL        | NULL    |          |
 
 ### Added Settings
 
@@ -65,6 +66,7 @@ LOAD {{ page.extension.name }};
 | delta_sharing_bearer_token           | JWT Bearer token issued from server                                                          | VARCHAR    | GLOBAL | []      |
 | delta_sharing_endpoint               | URL of delta sharing server                                                                  | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
@@ -74,6 +76,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

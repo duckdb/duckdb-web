@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB-Wasm: Efficient Analytical SQL in the Browser"
-author: André Kohn and Dominik Moritz
+author: André Kohn, Dominik Moritz
 excerpt: "[DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)."
 tags: ["using DuckDB"]
 ---
@@ -301,21 +301,21 @@ WHERE r_regionkey = n_regionkey;
 
 The following table teases the execution times of some TPC-H queries at scale factor 0.5 using the libraries [DuckDB-Wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm), [sql.js](https://github.com/sql-js/sql.js/), [Arquero](https://github.com/uwdata/arquero) and [Lovefield](https://github.com/google/lovefield). You can find a more in-depth discussion with all TPC-H queries, additional scale factors and microbenchmarks on the [“DuckDB-Wasm versus X” page](https://shell.duckdb.org/versus).
 
-| Query | DuckDB-Wasm | sql.js | Arquero | Lovefield |
-|--:|--:|--:|--:|--:|
-| 1 | **0.855 s** | 8.441 s | 24.031 s | 12.666 s |
-| 3 | **0.179 s** | 1.758 s | 16.848 s | 3.587 s |
-| 4 | **0.151 s** | 0.384 s | 6.519 s | 3.779 s |
-| 5 | **0.197 s** | 1.965 s | 18.286 s | 13.117 s |
-| 6 | **0.086 s** | 1.294 s | 1.379 s | 5.253 s |
-| 7 | **0.319 s** | 2.677 s | 6.013 s | 74.926 s |
-| 8 | **0.236 s** | 4.126 s | 2.589 s | 18.983 s |
-| 10 | **0.351 s** | 1.238 s | 23.096 s | 18.229 s |
-| 12 | **0.276 s** | 1.080 s | 11.932 s | 10.372 s |
-| 13 | **0.194 s** | 5.887 s | 16.387 s | 9.795 s |
-| 14 | **0.086 s** | 1.194 s | 6.332 s | 6.449 s |
-| 16 | **0.137 s** | 0.453 s | 0.294 s | 5.590 s |
-| 19 | **0.377 s** | 1.272 s | 65.403 s | 9.977 s |
+| Query | DuckDB-Wasm |  sql.js |  Arquero | Lovefield |
+| ----: | ----------: | ------: | -------: | --------: |
+|     1 | **0.855 s** | 8.441 s | 24.031 s |  12.666 s |
+|     3 | **0.179 s** | 1.758 s | 16.848 s |   3.587 s |
+|     4 | **0.151 s** | 0.384 s |  6.519 s |   3.779 s |
+|     5 | **0.197 s** | 1.965 s | 18.286 s |  13.117 s |
+|     6 | **0.086 s** | 1.294 s |  1.379 s |   5.253 s |
+|     7 | **0.319 s** | 2.677 s |  6.013 s |  74.926 s |
+|     8 | **0.236 s** | 4.126 s |  2.589 s |  18.983 s |
+|    10 | **0.351 s** | 1.238 s | 23.096 s |  18.229 s |
+|    12 | **0.276 s** | 1.080 s | 11.932 s |  10.372 s |
+|    13 | **0.194 s** | 5.887 s | 16.387 s |   9.795 s |
+|    14 | **0.086 s** | 1.194 s |  6.332 s |   6.449 s |
+|    16 | **0.137 s** | 0.453 s |  0.294 s |   5.590 s |
+|    19 | **0.377 s** | 1.272 s | 65.403 s |   9.977 s |
 
 ## Future Research
 

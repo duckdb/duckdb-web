@@ -75,6 +75,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				</div>
 				<div class="options">
 					<div class="opensearch">
+						<svg class="icon"><use href="#search-sm"></use></svg>
 						<span class="mac shortcut">⌘+k</span>
 						<span class="win shortcut">ctrl+k</span>
 					</div>
@@ -125,8 +126,8 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					{% endunless %}
 					{% endif %}
 					<button class="mode" data-mode="dark">
-						{% include icon.html name="sun" class="icon icon-sun" size="24" %}
-						{% include icon.html name="moon" class="icon icon-moon" size="24" %}
+						<svg class="icon icon-sun"><use href="#sun"></use></svg>
+						<svg class="icon icon-moon"><use href="#moon-01"></use></svg>
 					</button>
 				</div>
 			</div>
@@ -198,10 +199,13 @@ Page URL: <https://duckdb.org{{ page.url }}>
 			</div>
 			
 		</div>
-
+		
 	</main>
-
-
+	
+	<div class="svg-sprite" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden; visibility: hidden;">
+		{% include icons.html %}
+	</div>
+	
 	<script src="/js/minisearch.js" defer></script>
 	<script src="/js/search.js" defer></script>
 

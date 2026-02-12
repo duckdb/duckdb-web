@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/indexes.js
 redirect_from:
-- /docs/sql/indexes
+  - /docs/sql/indexes
 title: Indexes
 ---
 
@@ -133,6 +133,9 @@ Let's say that a `value-row_id` pair exists in the global index and there is a `
 In that case, it **also** stays visible to newer transactions until all **older**, dependent transactions have finished.
 That behavior causes two main limitations, which are listed in more detail below.
 
+Please also note that the limitation extends to concurrent access to multiple tables.
+Older read transactions on table X can cause write-write conflicts on consecutive changes to table Y, if both tables are in the same schema.
+
 The long-term solution to these limitations is to enable transaction-timestamp tracking in indexes.
 However, as-of now, DuckDB does not fully support MVCC for its indexes.
 
@@ -171,6 +174,31 @@ duckdbTxCommit(tx1)
 Note that in older versions of DuckDB some variations of this might've **seemed** to work (no constraint exception).
 That is especially the case for `UPSERT` statements.
 However, these variations caused incorrect states, as constraint checking was incorrectly based on an already-deleted value.
+
+For more details, here's a reproducer using our SQLLogic test framework.
+
+```sql
+statement ok
+CREATE SCHEMA IF NOT EXISTS schema__test
+
+concurrentloop threadid 0 3
+
+statement ok
+CREATE TABLE IF NOT EXISTS schema__test.test_table${threadid} (
+                    id VARCHAR PRIMARY KEY,
+                    available_actions VARCHAR[],
+                    subscriber_ids VARCHAR[]
+                )
+
+loop i 0 5
+
+statement ok
+INSERT OR REPLACE INTO schema__test.test_table${threadid} VALUES ('test:scope/test-worker-${threadid}:test-id-0', ['read', 'write', 'delete'], ['sub-{threadid}', 'sub-{threadid}+1'])
+
+endloop
+
+endloop
+```
 
 #### Under-Eager Foreign Key Constraint Checking
 

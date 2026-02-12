@@ -10,11 +10,6 @@ The UI is built and maintained by [MotherDuck](https://motherduck.com/).
 An overview of its features can be found
 in the [MotherDuck documentation](https://motherduck.com/docs/getting-started/motherduck-quick-tour/).
 
-## Requirements
-
-* An environment with a browser.
-* Any DuckDB client except Wasm, v1.2.1 or later.
-
 ## Usage
 
 To start the UI from the command line:
@@ -34,7 +29,7 @@ Running either of these will open the UI in your default browser.
 The UI connects to the DuckDB instance it was started from,
 so any data you’ve already loaded will be available.
 Since this instance is a native process (not Wasm), it can leverage all
-the resources of your local environment: all cores, memory, and files.
+the resources of your local environment: all cores, memory and files.
 Closing this instance will cause the UI to stop working.
 
 The UI is served from an HTTP server embedded in DuckDB.
@@ -152,7 +147,7 @@ Then, open a notebook and attach to the database:
 
 ```sql
 ATTACH 'test.db' (READ_ONLY) AS my_db;
-USE my_db
+USE my_db;
 ```
 
 ## Limitations

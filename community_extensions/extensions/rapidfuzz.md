@@ -16,15 +16,15 @@ extension:
   maintainers:
   - rustyconover
   name: rapidfuzz
-  version: '2025101201'
+  version: '2025120401'
 repo:
   github: query-farm/rapidfuzz
-  ref: ab47af95622e5b23769d3aac2dca16bbf69d8d35
+  ref: eb2fe18d3f60205722521ff2ddd8eb3c932c7888
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 956
-extension_download_count_pretty: 956
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 723
+extension_download_count_pretty: 723
 image: '/images/community_extensions/social_preview/preview_community_extension_rapidfuzz.png'
 layout: community_extension_doc
 ---
@@ -52,42 +52,42 @@ LOAD {{ page.extension.name }};
 
 |                function_name                 | function_type | description | comment | examples |
 |----------------------------------------------|---------------|-------------|---------|----------|
-| rapidfuzz_hamming_distance                   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_hamming_normalized_distance        | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_hamming_normalized_similarity      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_hamming_similarity                 | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_indel_distance                     | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_indel_normalized_distance          | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_indel_normalized_similarity        | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_indel_similarity                   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_distance                      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_normalized_distance           | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_normalized_similarity         | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_similarity                    | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_winkler_distance              | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_winkler_normalized_distance   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_winkler_normalized_similarity | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_jaro_winkler_similarity            | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_lcs_seq_distance                   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_lcs_seq_normalized_distance        | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_lcs_seq_normalized_similarity      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_lcs_seq_similarity                 | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_osa_distance                       | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_osa_normalized_distance            | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_osa_normalized_similarity          | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_osa_similarity                     | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_partial_ratio                      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_postfix_distance                   | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_postfix_normalized_distance        | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_postfix_normalized_similarity      | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_postfix_similarity                 | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_prefix_distance                    | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_prefix_normalized_distance         | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_prefix_normalized_similarity       | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_prefix_similarity                  | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_ratio                              | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_token_set_ratio                    | scalar        | NULL        | NULL    | NULL     |
-| rapidfuzz_token_sort_ratio                   | scalar        | NULL        | NULL    | NULL     |
+| rapidfuzz_hamming_distance                   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_hamming_normalized_distance        | scalar        | NULL        | NULL    |          |
+| rapidfuzz_hamming_normalized_similarity      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_hamming_similarity                 | scalar        | NULL        | NULL    |          |
+| rapidfuzz_indel_distance                     | scalar        | NULL        | NULL    |          |
+| rapidfuzz_indel_normalized_distance          | scalar        | NULL        | NULL    |          |
+| rapidfuzz_indel_normalized_similarity        | scalar        | NULL        | NULL    |          |
+| rapidfuzz_indel_similarity                   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_distance                      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_normalized_distance           | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_normalized_similarity         | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_similarity                    | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_winkler_distance              | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_winkler_normalized_distance   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_winkler_normalized_similarity | scalar        | NULL        | NULL    |          |
+| rapidfuzz_jaro_winkler_similarity            | scalar        | NULL        | NULL    |          |
+| rapidfuzz_lcs_seq_distance                   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_lcs_seq_normalized_distance        | scalar        | NULL        | NULL    |          |
+| rapidfuzz_lcs_seq_normalized_similarity      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_lcs_seq_similarity                 | scalar        | NULL        | NULL    |          |
+| rapidfuzz_osa_distance                       | scalar        | NULL        | NULL    |          |
+| rapidfuzz_osa_normalized_distance            | scalar        | NULL        | NULL    |          |
+| rapidfuzz_osa_normalized_similarity          | scalar        | NULL        | NULL    |          |
+| rapidfuzz_osa_similarity                     | scalar        | NULL        | NULL    |          |
+| rapidfuzz_partial_ratio                      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_postfix_distance                   | scalar        | NULL        | NULL    |          |
+| rapidfuzz_postfix_normalized_distance        | scalar        | NULL        | NULL    |          |
+| rapidfuzz_postfix_normalized_similarity      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_postfix_similarity                 | scalar        | NULL        | NULL    |          |
+| rapidfuzz_prefix_distance                    | scalar        | NULL        | NULL    |          |
+| rapidfuzz_prefix_normalized_distance         | scalar        | NULL        | NULL    |          |
+| rapidfuzz_prefix_normalized_similarity       | scalar        | NULL        | NULL    |          |
+| rapidfuzz_prefix_similarity                  | scalar        | NULL        | NULL    |          |
+| rapidfuzz_ratio                              | scalar        | NULL        | NULL    |          |
+| rapidfuzz_token_set_ratio                    | scalar        | NULL        | NULL    |          |
+| rapidfuzz_token_sort_ratio                   | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 
@@ -98,6 +98,7 @@ LOAD {{ page.extension.name }};
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
@@ -107,6 +108,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

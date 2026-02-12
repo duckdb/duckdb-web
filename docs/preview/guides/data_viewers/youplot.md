@@ -21,9 +21,9 @@ Run `uplot --help` to ensure you've installed it successfully!
 
 ## Piping DuckDB Queries to stdout
 
-By combining the [`COPY...TO`]({% link docs/preview/sql/statements/copy.md %}#copy-to) function with a CSV output file, data can be read from any format supported by DuckDB and piped to YouPlot. There are three important steps to doing this.
+By combining the [`COPY...TO`]({% link docs/preview/sql/statements/copy.md %}#copy-to) function with a CSV output file, you can read data from any format DuckDB supports and pipe it to YouPlot. Follow these three steps:
 
-1. As an example, this is how to read all data from `input.json`:
+1. First, read all data from `input.json`:
 
    ```batch
    duckdb -s "SELECT * FROM read_json_auto('input.json')"
@@ -51,7 +51,7 @@ By combining the [`COPY...TO`]({% link docs/preview/sql/statements/copy.md %}#co
 
 ## Connecting DuckDB to YouPlot
 
-Finally, the data can now be piped to YouPlot! Let's assume we have an `input.json` file with dates and number of purchases made by somebody on that date. Using the query above, we'll pipe the data to the `uplot` command to draw a plot of the Top 10 Purchase Dates
+Finally, the data can now be piped to YouPlot! Let's assume we have an `input.json` file with dates and number of purchases made by somebody on that date. Using the query above, we'll pipe the data to the `uplot` command to draw a plot of the Top 10 Purchase Dates.
 
 ```batch
 duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)" \
@@ -62,9 +62,9 @@ This tells `uplot` to draw a bar plot, use a comma-separated delimiter (`-d,`), 
 
 ![youplot-top-10](/images/guides/youplot/top-10-plot.png)
 
-## Bonus Round! stdin + stdout
+## Additional Example: stdin + stdout
 
-Maybe you're piping some data through `jq`. Maybe you're downloading a JSON file from somewhere. You can also tell DuckDB to read the data from another process by changing the filename to `/dev/stdin`.
+You might be piping data through `jq` or downloading a JSON file from somewhere. You can also tell DuckDB to read data from another process by changing the filename to `/dev/stdin`.
 
 Let's combine this with a quick `curl` from GitHub to see what a certain user has been up to lately.
 

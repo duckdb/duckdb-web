@@ -4,15 +4,10 @@ redirect_from:
 - /cal
 - /release-calendar
 - /dev/release-dates
-- /dev/release-dates/
 - /dev/release-calendar
-- /dev/release-calendar/
 - /docs/dev/release_calendar
-- /docs/dev/release_calendar/
 - /docs/stable/dev/release_calendar
-- /docs/stable/dev/release_calendar/
 - /docs/preview/dev/release_calendar
-- /docs/preview/dev/release_calendar/
 title: Release Calendar
 body_class: release-calendar blog_typography post
 max_page_width: medium
@@ -37,7 +32,7 @@ The planned dates of upcoming DuckDB releases are shown below.
 {% if site.data.upcoming_releases.size > 0 %}
 | Date | Version |
 |:-----|--------:|
-{%- for release in site.data.upcoming_releases reversed %}
+{%- for release in site.data.upcoming_releases %}
 | {{ release.start_date }} | {{ release.title }} |
 {%- endfor %}
 {% else %}
@@ -58,6 +53,8 @@ For LTS DuckDB versions, the support period for [community support](https://duck
 <img src="/images/blog/lts-support-dark.svg" alt="DuckDB LTS support" width="900" class="darkmode-img">
 
 For an overview of end-of-life information, see the [DuckDB entry on `endoflife.date`](https://endoflife.date/duckdb).
+
+There is no set date yet for the release of DuckDB v1.4.5. We will select the date as necessitated by the issues filed for the DuckDB v1.4.x line. For exampe, if we encounter a critical issue or vulnerability, we will expedite the release of v1.4.5.
 
 ## Past Releases
 

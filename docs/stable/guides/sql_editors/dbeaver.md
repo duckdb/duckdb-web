@@ -5,7 +5,7 @@ redirect_from:
 title: DBeaver SQL IDE
 ---
 
-[DBeaver](https://dbeaver.io/) is a powerful and popular desktop sql editor and integrated development environment (IDE). It has both an open source and enterprise version. It is useful for visually inspecting the available tables in DuckDB and for quickly building complex queries. DuckDB's [JDBC connector](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc) allows DBeaver to query DuckDB files, and by extension, any other files that DuckDB can access (like [Parquet files]({% link docs/stable/guides/file_formats/query_parquet.md %})).
+[DBeaver](https://dbeaver.io/) is a powerful and popular desktop SQL editor and integrated development environment (IDE). It has both an open source and enterprise version. DBeaver is useful for visually inspecting the available tables in DuckDB and for quickly building complex queries. DuckDB's [JDBC connector](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc) allows DBeaver to query DuckDB files, and by extension, any other files that DuckDB can access (like [Parquet files]({% link docs/stable/guides/file_formats/query_parquet.md %})).
 
 ## Installing DBeaver
 
@@ -51,7 +51,7 @@ title: DBeaver SQL IDE
 
     <img src="/images/guides/DBeaver_edit_driver_settings.png" alt="DBeaver Edit Driver Settings" title="DBeaver Edit Driver Settings"/>
 
-2. (Alternate) You may also access the driver settings menu by returning to the main DBeaver window and clicking Database > Driver Manager in the menu bar. Then select DuckDB, then click Edit.
+2. Alternatively, you can access the driver settings menu by returning to the main DBeaver window and clicking Database > Driver Manager in the menu bar. Then select DuckDB, then click Edit.
 
     <img src="/images/guides/DBeaver_driver_manager.png" alt="DBeaver Driver Manager" title="DBeaver Driver Manager"/>
     <img src="/images/guides/DBeaver_driver_manager_edit.png" alt="DBeaver Driver Manager Edit" title="DBeaver Driver Manager Edit"/>

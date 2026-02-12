@@ -1,7 +1,7 @@
 ---
 layout: post  
 title: "Parallel Grouped Aggregation in DuckDB"
-author: Hannes Mühleisen and Mark Raasveldt
+author: Hannes Mühleisen, Mark Raasveldt
 excerpt: DuckDB has a fully parallelized aggregate hash table that can efficiently aggregate over millions of groups.
 tags: ["deep dive"]
 ---
@@ -30,11 +30,11 @@ GROUP BY
 `GROUP BY` is followed by two column names, `l_returnflag` and `l_linestatus`. Those are the columns to compute the groups on, and the resulting table will contain all combinations of the same column that occur in the data. We refer to the columns in the `GROUP BY` clause as the “grouping columns” and all occurring combinations of values therein as “groups”. The `SELECT` clause contains four (not five) expressions: References to the grouping columns, and two aggregates: the `sum` over `l_extendedprice` and the `avg` over `l_quantity`. We refer to those as the “aggregates”.  If executed, the result of this query looks something like this:
 
 | l_returnflag | l_linestatus | sum(l_extendedprice) | avg(l_quantity) |
-|--------------|--------------|----------------------|----------------:|
-| N            | O            |  114935210409.19     |           25.5  |
-| R            | F            |  56568041380.9       |           25.51 |
-| A            | F            |  56586554400.73      |           25.52 |
-| N            | F            |  1487504710.38       |           25.52 |
+| ------------ | ------------ | -------------------- | --------------: |
+| N            | O            | 114935210409.19      |            25.5 |
+| R            | F            | 56568041380.9        |           25.51 |
+| A            | F            | 56586554400.73       |           25.52 |
+| N            | F            | 1487504710.38        |           25.52 |
 
 In general, SQL allows only columns that are mentioned in the `GROUP BY` clause to be part of the `SELECT` expressions directly, all other columns need to be subject to one of the aggregate functions like `sum`, `avg` etc. There are [many more aggregate functions]({% link docs/stable/sql/functions/aggregates.md %}) depending on which SQL system you use.
 

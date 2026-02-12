@@ -1,9 +1,8 @@
 ---
 layout: docu
 redirect_from:
-- /docs/test/functions/date
-- /docs/test/functions/date/
-- /docs/sql/functions/date
+  - /docs/test/functions/date
+  - /docs/sql/functions/date
 title: Date Functions
 ---
 
@@ -34,7 +33,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/stable
 | Name | Description |
 |:--|:-------|
 | [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date and return a `DATETIME` value. |
-| [`date_diff(part, startdate, startdate)`](#date_diffpart-startdate-enddate) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `startdate` and `enddate`, inclusive of the larger date and exclusive of the smaller date. |
+| [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `startdate` and `enddate`, inclusive of the larger date and exclusive of the smaller date. |
 | [`date_part(part, date)`](#date_partpart-date) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The signed length of the interval between `startdate` and `enddate`, truncated to whole multiples of [`part`]({% link docs/stable/sql/functions/datepart.md %}). |
 | [`date_trunc(part, date)`](#date_truncpart-date) | Truncate to specified [precision]({% link docs/stable/sql/functions/datepart.md %}). |

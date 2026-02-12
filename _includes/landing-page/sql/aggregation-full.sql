@@ -1,6 +1,6 @@
 -- Create table from Parquet file
 CREATE TABLE train_services AS
-    FROM 's3://duckdb-blobs/train_services.parquet';
+    FROM 'https://blobs.duckdb.org/train_services.parquet';
 
 -- Get the top-3 busiest train stations
 SELECT

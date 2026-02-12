@@ -29,7 +29,7 @@ This means that it's _even more random_™ now. Due to this change fixed seeds w
 For example, `map(['k'], ['v'])['k']` now returns `'v'`, while previously it returned `['v']`. We also introduced the `map_extract_value` function, which is now the alias for the bracket operator `[]`.
 If you would like to return a list, use the [`map_extract` function]({% link docs/stable/sql/functions/map.md %}#map_extractmap-key): `map_extract(map(['k'], ['v']), 'k') = ['v']`.
 
-[**The indexing of `list_reduce` is fixed.**](https://github.com/duckdb/duckdb/pull/15614) When indexing is applied in `list_reduce`, the index points to the [last parameter of the lambda function]({% link docs/stable/sql/functions/lambda.md %}#reduce) and indexing starts from 1. Therefore, `list_reduce(['a', 'b'], (x, y, i) -> x || y || i)` returns `ab2`.
+[**The indexing of `list_reduce` is fixed.**](https://github.com/duckdb/duckdb/pull/15614) When indexing is applied in `list_reduce`, the index points to the [last parameter of the lambda function]({% link docs/stable/sql/functions/lambda.md %}#reduce) and indexing starts from 1. Therefore, `list_reduce(['a', 'b'], lambda x, y, i: x || y || i)` returns `ab2`.
 
 [**The `current_time` and `current_date` functions are now with respect to local timezone.**](https://github.com/duckdb/duckdb/pull/15125) This makes both functions compatible with PostgreSQL at the price of requiring ICU to be loaded to use these functions and their aliases `get_current_time()` and `today()`.
 
@@ -258,6 +258,18 @@ Currently, DuckDB extensions use DuckDB’s internal C++ structures. This – al
 
 [**Distributing extensions for musl.**](https://github.com/duckdb/duckdb/pull/15607)
 The [`musl` C library](https://musl.libc.org/) is often used in lightweight setups such as Docker setups running Alpine Linux. Starting with this release, we officially support musl and we distribute extensions for the `linux_amd64_musl` platform (but not yet for `linux_arm64_musl`). Note that DuckDB binaries (e.g., the CLI client) are not yet distributed for musl platforms, so you have to [build them from source]({% link docs/stable/dev/building/linux.md %}).
+
+### Zstd Compression
+
+Columns can now be compressed with Zstd compression, which is suitable for bigger strings. By default, this compression is only considered for strings longer than 4096 characters, but this can be changed with the `zstd_min_string_length` setting.
+
+Zstd compression can be enabled for a column explicitly when creating the table:
+
+```sql
+CREATE TABLE t (
+    v VARCHAR USING COMPRESSION 'zstd';
+);
+```
 
 ## Final Thoughts
 

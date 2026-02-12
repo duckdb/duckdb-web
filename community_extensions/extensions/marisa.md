@@ -18,15 +18,15 @@ extension:
   maintainers:
   - rustyconover
   name: marisa
-  version: '2025101201'
+  version: '2025120401'
 repo:
   github: query-farm/marisa
-  ref: 62a09ef28fab1d81c18bafe143eaed935b4abf08
+  ref: 6e81aadaa0a41901218fcf02ff39d8ff2594ffa7
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 713
-extension_download_count_pretty: 713
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 393
+extension_download_count_pretty: 393
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
 layout: community_extension_doc
 ---
@@ -52,12 +52,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type | description | comment | examples |
-|----------------------|---------------|-------------|---------|----------|
-| marisa_common_prefix | scalar        | NULL        | NULL    | NULL     |
-| marisa_lookup        | scalar        | NULL        | NULL    | NULL     |
-| marisa_predictive    | scalar        | NULL        | NULL    | NULL     |
-| marisa_trie          | aggregate     | NULL        | NULL    | NULL     |
+|    function_name     | function_type |                    description                     | comment |                examples                 |
+|----------------------|---------------|----------------------------------------------------|---------|-----------------------------------------|
+| marisa_common_prefix | scalar        | NULL                                               | NULL    |                                         |
+| marisa_lookup        | scalar        | NULL                                               | NULL    |                                         |
+| marisa_predictive    | scalar        | NULL                                               | NULL    |                                         |
+| marisa_trie          | aggregate     | Creates a new Marisa Trie from the value supplied. | NULL    | [SELECT marisa_trie(column) FROM table] |
 
 ### Added Settings
 
@@ -68,6 +68,7 @@ LOAD {{ page.extension.name }};
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
@@ -77,6 +78,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

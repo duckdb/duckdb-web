@@ -151,6 +151,11 @@ provided by the ICU extension.
 
 Adding to or subtracting from [infinite values]({% link docs/preview/sql/data_types/timestamp.md %}#special-values) produces the same infinite value.
 
+Addition and subtraction of intervals uses the [ICU Calendar add function](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classicu_1_1Calendar.html#aa6e19a88ca2225eddcbbe82313c9c095).
+For positive intervals (forwards in time) the fields are incremented from least to most significant.
+For negative intervals (backwards in time) the fields are decremented from most to least significant.
+This produces the same results as Postgres, but does not match some [more recent calendar RFCs](https://www.rfc-editor.org/rfc/rfc5545).
+
 ## ICU Timestamp with Time Zone Functions
 
 The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME ZONE` values.
@@ -159,7 +164,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 |:--|:-------|
 | [`age(timestamptz, timestamptz)`](#agetimestamptz-timestamptz) | Subtract arguments, resulting in the time difference between the two timestamps. |
 | [`age(timestamptz)`](#agetimestamptz) | Subtract from current_date. |
-| [`date_diff(part, starttimestamptz, endtimestamptz)`](#date_diffpart-starttimestamptz-endtimestamptz) | The number of [`part`]({% link docs/preview/sql/functions/datepart.md %}) boundaries between `starttimestamptz` and `endtimestamptz` inclusive of the larger timstamp and exclusive of the smaller timestamp. |
+| [`date_diff(part, starttimestamptz, endtimestamptz)`](#date_diffpart-starttimestamptz-endtimestamptz) | The number of [`part`]({% link docs/preview/sql/functions/datepart.md %}) boundaries between `starttimestamptz` and `endtimestamptz` inclusive of the larger timestamp and exclusive of the smaller timestamp. |
 | [`date_part([part, ...], timestamp)`](#date_partpart--timestamptz) | Get the listed [subfields]({% link docs/preview/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
 | [`date_part(part, timestamp)`](#date_partpart-timestamptz) | Get [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, starttimestamptz, endtimestamptz)`](#date_subpart-starttimestamptz-endtimestamptz) | The signed length of the interval between `starttimestamptz` and `endtimestamptz`, truncated to whole multiples of [`part`]({% link docs/preview/sql/functions/datepart.md %}). |

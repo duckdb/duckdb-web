@@ -8,7 +8,7 @@ The `WHERE` clause specifies any filters to apply to the data. This allows you t
 
 ## Examples
 
-Select all rows that where the `id` is equal to 3:
+Select all rows where the `id` is equal to 3:
 
 ```sql
 SELECT *

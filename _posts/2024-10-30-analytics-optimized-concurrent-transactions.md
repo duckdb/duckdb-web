@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Analytics-Optimized Concurrent Transactions"
-author: "Mark Raasveldt and Hannes Mühleisen"
+author: "Mark Raasveldt, Hannes Mühleisen"
 thumb: "/images/blog/thumbs/acid.svg"
 image: "/images/blog/thumbs/acid.png"
 excerpt: "DuckDB employs unique analytics-optimized optimistic multi-version concurrency control techniques. These allow DuckDB to perform large-scale in-place updates efficiently."
@@ -108,8 +108,8 @@ UPDATE mvcc_test_... SET i = i + 1 WHERE i <= 100;
 
 For the **single-column case**, there should not be huge differences between using a row-major or a column-major concurrency control scheme, and indeed the results show this:
 
-| 1 Column   | 1%   | 10%  | 100%  |
-|------------|-----:|-----:|------:|
+| 1 Column   |   1% |  10% |  100% |
+| ---------- | ---: | ---: | ----: |
 | DuckDB     | 0.02 | 0.07 |  0.43 |
 | SQLite     | 0.21 | 0.25 |  0.61 |
 | HyPer      | 0.66 | 0.28 |  2.37 |
@@ -120,8 +120,8 @@ SQLite is doing well, but of course it does not have any MVCC. Timings increase 
 
 For the **100 column case**, results look drastically different:
 
-| 100 Columns | 1%   | 10%  | 100%  |
-|-------------|-----:|-----:|------:|
+| 100 Columns |   1% |  10% |  100% |
+| ----------- | ---: | ---: | ----: |
 | DuckDB      | 0.02 | 0.07 |  0.43 |
 | SQLite      | 0.51 | 1.79 | 12.93 |
 | HyPer       | 0.66 | 6.06 | 61.54 |

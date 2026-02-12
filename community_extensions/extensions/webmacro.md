@@ -5,58 +5,92 @@ excerpt: |
   DuckDB Community Extensions
   Load DuckDB Macros from the web
 
+docs:
+  extended_description: The HTTP Client Extension is experimental, use at your own
+    risk!
+  hello_world: "-- Create a DuckDB Scalar or Table macro statement and save it to\
+    \ a gist;\n\n-- Load your remote macro onto your system using the gist url\n\n\
+    D SELECT load_macro_from_url('https://gist.githubusercontent.com/lmangani/518215a68e674ac662537d518799b893/raw/5f305480fdd7468f4ecda3686011bab8e8e711bf/bsky.sql')\
+    \ as res;\n\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2510\n\u2502                   res                 \
+    \  \u2502\n\u2502                 varchar                 \u2502\n\u251C\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2524\n\u2502 Successfully loaded macro: search_posts \u2502\n\u2514\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2518\n\n-- Use your new macro and have fun:\nD SELECT * FROM search_posts('qxip.bsky.social',\
+    \ text := 'quack');\n\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u252C\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502  author_handle\
+    \   \u2502 display_name \u2502      post_text       \u2502 \u2026 \u2502 replies\
+    \ \u2502 reposts \u2502 likes \u2502 quotes \u2502\n\u2502     varchar      \u2502\
+    \   varchar    \u2502       varchar        \u2502   \u2502  int64  \u2502  int64\
+    \  \u2502 int64 \u2502 int64  \u2502\n\u251C\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\
+    \u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2524\n\u2502 qxip.bsky.social \u2502 qxip         \u2502 This is super cool\u2026\
+    \  \u2502 \u2026 \u2502       1 \u2502       0 \u2502     1 \u2502      0 \u2502\
+    \n\u2502 qxip.bsky.social \u2502 qxip         \u2502 github.com/quacksc\u2026\
+    \  \u2502 \u2026 \u2502       0 \u2502       1 \u2502     2 \u2502      0 \u2502\
+    \n\u2502 qxip.bsky.social \u2502 qxip         \u2502 #DuckDB works grea\u2026\
+    \  \u2502 \u2026 \u2502       2 \u2502       3 \u2502    24 \u2502      0 \u2502\
+    \n\u2502 qxip.bsky.social \u2502 qxip         \u2502 github.com/quacksc\u2026\
+    \  \u2502 \u2026 \u2502       1 \u2502       0 \u2502     0 \u2502      0 \u2502\
+    \n\u2502 qxip.bsky.social \u2502 qxip         \u2502 The latest #Quackp\u2026\
+    \  \u2502 \u2026 \u2502       0 \u2502       0 \u2502     2 \u2502      0 \u2502\
+    \n\u2502 qxip.bsky.social \u2502 qxip         \u2502 The #DuckDB Ecosys\u2026\
+    \  \u2502 \u2026 \u2502       0 \u2502       0 \u2502     5 \u2502      0 \u2502\
+    \n\u2502 qxip.bsky.social \u2502 qxip         \u2502 Ladies and Gents, \u2026\
+    \  \u2502 \u2026 \u2502       1 \u2502       0 \u2502     4 \u2502      0 \u2502\
+    \n\u251C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2534\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 7 rows              \
+    \                                                        9 columns (7 shown) \u2502\
+    \n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n"
 extension:
-  name: webmacro
-  description: Load DuckDB Macros from the web
-  version: 0.0.2
-  language: C++
   build: cmake
+  description: Load DuckDB Macros from the web
+  language: C++
   license: MIT
   maintainers:
-    - lmangani
-
+  - lmangani
+  name: webmacro
+  version: '2025120401'
 repo:
   github: quackscience/duckdb-extension-webmacro
-  ref: 3f980d8f79df0da8da42e7d5f0bc07ddc74f816d
+  ref: 43a4ba8fcc13219be487d0ac12d68d66ac1d8268
 
-docs:
-  hello_world: |
-    -- Create a DuckDB Scalar or Table macro statement and save it to a gist;
-
-    -- Load your remote macro onto your system using the gist url
-    
-    D SELECT load_macro_from_url('https://gist.githubusercontent.com/lmangani/518215a68e674ac662537d518799b893/raw/5f305480fdd7468f4ecda3686011bab8e8e711bf/bsky.sql') as res;
-    ┌─────────────────────────────────────────┐
-    │                   res                   │
-    │                 varchar                 │
-    ├─────────────────────────────────────────┤
-    │ Successfully loaded macro: search_posts │
-    └─────────────────────────────────────────┘
-    
-    -- Use your new macro and have fun:
-    D SELECT * FROM search_posts('qxip.bsky.social', text := 'quack');
-    ┌──────────────────┬──────────────┬──────────────────────┬───┬─────────┬─────────┬───────┬────────┐
-    │  author_handle   │ display_name │      post_text       │ … │ replies │ reposts │ likes │ quotes │
-    │     varchar      │   varchar    │       varchar        │   │  int64  │  int64  │ int64 │ int64  │
-    ├──────────────────┼──────────────┼──────────────────────┼───┼─────────┼─────────┼───────┼────────┤
-    │ qxip.bsky.social │ qxip         │ This is super cool…  │ … │       1 │       0 │     1 │      0 │
-    │ qxip.bsky.social │ qxip         │ github.com/quacksc…  │ … │       0 │       1 │     2 │      0 │
-    │ qxip.bsky.social │ qxip         │ #DuckDB works grea…  │ … │       2 │       3 │    24 │      0 │
-    │ qxip.bsky.social │ qxip         │ github.com/quacksc…  │ … │       1 │       0 │     0 │      0 │
-    │ qxip.bsky.social │ qxip         │ The latest #Quackp…  │ … │       0 │       0 │     2 │      0 │
-    │ qxip.bsky.social │ qxip         │ The #DuckDB Ecosys…  │ … │       0 │       0 │     5 │      0 │
-    │ qxip.bsky.social │ qxip         │ Ladies and Gents, …  │ … │       1 │       0 │     4 │      0 │
-    ├──────────────────┴──────────────┴──────────────────────┴───┴─────────┴─────────┴───────┴────────┤
-    │ 7 rows                                                                      9 columns (7 shown) │
-    └─────────────────────────────────────────────────────────────────────────────────────────────────┘
-
-  extended_description: |
-    The HTTP Client Extension is experimental, use at your own risk!
-
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 474
-extension_download_count_pretty: 474
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 393
+extension_download_count_pretty: 393
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---
@@ -85,5 +119,40 @@ LOAD {{ page.extension.name }};
 |    function_name    | function_type | description | comment | examples |
 |---------------------|---------------|-------------|---------|----------|
 | load_macro_from_url | scalar        | NULL        | NULL    |          |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|                 name                 |                                         description                                          | input_type | scope  | aliases |
+|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
+| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
+| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
+| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
+| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
+| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
+| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
+| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
+| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
+| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
+| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
+| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
+| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
+| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
+| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
+| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
+| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
+| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
+| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
+| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
 
 

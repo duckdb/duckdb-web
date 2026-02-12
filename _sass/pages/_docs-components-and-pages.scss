@@ -243,8 +243,10 @@ body.documentation {
     .opensearch {
         border-radius: 10px;
         border: 1px solid var(--menu-dropdown-border-color, #333);
-        padding: 6px 8px 8px 35px;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='none' viewBox='0 0 15 15'%3E%3Cpath stroke='%23999999' stroke-width='1.5' d='m10.432 9.692 3.926 3.927'/%3E%3Ccircle cx='6.282' cy='6.303' r='5.173' stroke='%23999999' stroke-width='1.5'/%3E%3C/svg%3E");
+        padding: 6px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
         background-size: 15px 15px;
         background-repeat: no-repeat;
         background-position: 12px 12px;
@@ -252,6 +254,12 @@ body.documentation {
         position: relative;
         transition: all .3s;
         height: 40px;
+        
+        svg.icon{
+            width: 18px;
+            height: 18px;
+            color: var(--menu-topmenu-searchbar-shortcut-text-color, #999);
+        }
 
         >.shortcut {
             @include tiny();
@@ -268,7 +276,9 @@ body.documentation {
         &:hover {
             border: 1px solid var(--menu-topmenu-text-color-hover, #6A58DA);
             color: var(--menu-topmenu-searchbar-shortcut-text-color, #999);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='none' viewBox='0 0 15 15'%3E%3Cpath stroke='%236A58DA' stroke-width='1.5' d='m10.432 9.692 3.926 3.927'/%3E%3Ccircle cx='6.282' cy='6.303' r='5.173' stroke='%236A58DA' stroke-width='1.5'/%3E%3C/svg%3E");
+            svg.icon{
+                
+            }
         }
     }
 

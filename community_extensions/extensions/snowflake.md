@@ -17,27 +17,25 @@ extension:
 
 repo:
   github: iqea-ai/duckdb-snowflake
-  ref: fba82f97ca11cb279603c2ccff353b3db4fe1e32
-  ref_next: fba82f97ca11cb279603c2ccff353b3db4fe1e32
+  ref: ee2388dc6c32b1231c493be4dacc9897690936de
 
 install_notes: |
-  **Important:** This extension requires the Apache Arrow ADBC Snowflake driver to function properly.
+  **Important:** This extension requires DuckDB 1.4.3 and the Apache Arrow ADBC Snowflake driver to function properly.
   
-  After installing the extension, you must manually set up the ADBC driver. You can either:
+  **You must install the ADBC driver separately after installing this extension.** The extension will not work without the driver.
   
-  1. **Use the setup script** (recommended):
-     ```bash
-     curl -O https://raw.githubusercontent.com/iqea-ai/duckdb-snowflake/stable/scripts/download_adbc_driver.sh
-     bash download_adbc_driver.sh
-     ```
-     This script downloads the platform-specific driver library (`libadbc_driver_snowflake.so`) 
-     from the Apache Arrow ADBC releases and places it in the appropriate location.
+  For complete installation instructions, platform-specific setup, and troubleshooting, please refer to the official documentation:
   
-  2. **Manual setup**: Follow the instructions in the [README](https://github.com/iqea-ai/duckdb-snowflake) 
-     on GitHub for manual installation and platform-specific driver setup.
+  **[ADBC Driver Installation Guide](https://github.com/iqea-ai/duckdb-snowflake#adbc-driver-setup)**
   
-  For detailed installation instructions, please refer to:
-  https://github.com/iqea-ai/duckdb-snowflake#adbc-driver-setup
+  The documentation includes:
+  - Step-by-step installation instructions for all platforms
+  - Automated setup scripts
+  - Manual installation procedures
+  - Driver location requirements
+  - Troubleshooting common issues
+  
+  Please visit the [extension repository](https://github.com/iqea-ai/duckdb-snowflake) for installation instructions and setup options.
 
 docs:
   hello_world: |
@@ -77,15 +75,15 @@ docs:
     - Hybrid queries: join Snowflake tables with local DuckDB tables
     - Full DML read operations: SELECT with WHERE, JOIN, aggregations, subqueries
     
-    **Prerequisites:** The Apache Arrow ADBC Snowflake driver must be installed separately. After 
-    installing the extension, run `scripts/download_adbc_driver.sh` from the extension repository 
-    to download the platform-specific driver. For detailed setup and usage instructions, visit the 
-    [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
+    **Prerequisites:** The Apache Arrow ADBC Snowflake driver must be installed separately. 
+    **See the [ADBC Driver Installation Guide](https://github.com/iqea-ai/duckdb-snowflake#adbc-driver-setup) 
+    for complete setup instructions.** For comprehensive usage examples, authentication methods, and 
+    advanced features, visit the [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
 
-extension_star_count: 16
-extension_star_count_pretty: 16
-extension_download_count: 10826
-extension_download_count_pretty: 10.8k
+extension_star_count: 38
+extension_star_count_pretty: 38
+extension_download_count: 1413
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
 ---

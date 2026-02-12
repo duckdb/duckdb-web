@@ -10,7 +10,7 @@ tags: ["meetup"]
 venue: "Pakhuis de Zwijger, Amsterdam"
 ---
 
-<img src="/images/events/thumbs/duckdb-developer-meeting-1.svg"
+<img src="/images/events/duckdb-developer-meeting-1-splashscreen.svg"
      alt="DuckDB Developer Meeting #1 splashscreen"
      width="680"
      />
@@ -18,26 +18,38 @@ venue: "Pakhuis de Zwijger, Amsterdam"
 We are excited to announce the first DuckDB Developer Meeting, organized by [DuckDB Labs](https://duckdblabs.com/).
 The event will feature talks from DuckDB developers, and is aimed at developers who build DuckDB extensions or complex applications on top of DuckDB.
 
-### New Event Type
+## Developer Meeting
 
+**New event type.**
 This event is slightly different from our usual meetups and conferences as it primarily focuses on DuckDB extension development and building complex applications on top of DuckDB. Therefore, the main topics of the event will be the **C API, extension template, and internals**.
 
-### Registration Process
+Attendance is free but please [reserve a spot on Eventbrite](https://www.eventbrite.com/e/duckdb-developer-meeting-1-tickets-1850334944629?aff=oddtdtcreator) and keep you QR code at hand.
 
-Attendance is free. Please [RSVP on Eventbrite](https://www.eventbrite.com/e/duckdb-developer-meeting-1-tickets-1850334944629?aff=oddtdtcreator).
+## Program Outline
 
-### Program Outline
+|  Time | Title                                                                                                                                            | Presenter                                                                                                                                             | Slides                                                                                                                              |
+| ----: | :----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+|  9:30 | [Extension Development Workshop](#extension-development-workshop)<br> ([🎞️ part 1](https://youtu.be/Lz0E42yQjw8), [🎞️ part 2](https://youtu.be/jo-G2akmjJM)) | [Rusty Conover](https://rustyconover.work/) ([Query.Farm](https://query.farm/))                                                                       | [js](https://query-farm.github.io/duckdb-developer-day-1-extension-workshop/1)                                                    |
+| 12:00 | _Workshop ends_                                                                                                                                  |                                                                                                                                                       |                                                                                                                                     |
+| 15:30 | _Venue opens for the dev meeting_                                                                                                                |                                                                                                                                                       |                                                                                                                                     |
+| 16:00 | [DuckDB Extensions: The past, the present, and the future 🎞️](https://youtu.be/fKCQgvZYqvo)                                                       | [Sam Ansmink](https://www.linkedin.com/in/sam-ansmink-5a2b9093/) ([DuckDB Labs](https://duckdblabs.com/))                                             | [pdf](https://blobs.duckdb.org/events/duckdb-developer-meeting-1/duckdb-extensions-sam-ansmink.pdf)                                 |
+| 16:25 | [Storage and encryption in DuckDB 🎞️](https://youtu.be/qLjh14TzxPU)                                                                               | [Lotte Felius](https://www.linkedin.com/in/lottefelius/) ([DuckDB Labs](https://duckdblabs.com/))                                                     | [pdf](https://blobs.duckdb.org/events/duckdb-developer-meeting-1/storage-and-encryption-in-duckdb-lotte-felius.pdf)                 |
+| 16:50 | _Break_                                                                                                                                          |                                                                                                                                                       |                                                                                                                                     |
+| 17:10 | [DuckPL: A procedural language in DuckDB 🎞️](https://youtu.be/cjmtEBz_hSc)                                                                        | [Denis Hirn](https://www.linkedin.com/in/denis-hirn-3a3a74370/) ([Database Systems Group at University of Tübingen](https://db.cs.uni-tuebingen.de/)) | [pdf](https://blobs.duckdb.org/events/duckdb-developer-meeting-1/duckpl-a-procedural-language-in-duckdb-denis-hirn.pdf)             |
+| 17:35 | [GizmoEdge: A distributed DuckDB engine for IoT 🎞️](https://youtu.be/xlvjN_eFJvM)                                                                 | [Philip Moore](https://www.linkedin.com/in/philip-moore-62a10b7/) ([GizmoData](https://gizmodata.com/))                                               | [pdf](https://blobs.duckdb.org/events/duckdb-developer-meeting-1/gizmoedge-a-distributed-sql-engine-for-iot-and-edge-analytics.pdf) |
+| 18:00 | _Drinks and snacks_                                                                                                                              |                                                                                                                                                       |                                                                                                                                     |
+| 19:30 | _End of event_                                                                                                                                   |                                                                                                                                                       |                                                                                                                                     |
 
-|  Time | Title               |
-| ----: | :------------------ |
-| 15:30 | _Venue opens_       |
-| 16:00 | First session       |
-| 16:50 | _Break_             |
-| 17:10 | Second session      |
-| 18:00 | _Drinks and snacks_ |
-| 19:30 | _End of event_      |
+## Extension Development Workshop
 
-### Accessing the Venue
+DuckDB community member [Rusty Conover](https://rustyconover.work/) will hold a workshop on DuckDB extension development. The workshop will focus on a presentation explaining the details of DuckDB extension development and will have little time for hands-on work (but you can follow along!). Check the [event's site](https://luma.com/3p3ml9f5) for more details.
+
+Note that you have to **register for this event separately**. To do so, visit [Luma](https://luma.com/3p3ml9f5) to register.
+
+Please note that lunch is not included as part of the workshop and the Pakhuis' cafe has limited space available. The nearby Czar Peterstraat and the Amsterdam-Oost borough have [many nice restaurants](https://www.google.com/maps/search/Restaurants/@52.3705416,4.9262679,15.03z/data=!4m7!2m6!3m5!2sCzaar+Peterstraat!3s0x47c6090c0b3fb7b3:0x2508a98590df9129!4m2!1d4.9290601!2d52.3698179?entry=ttu&g_ep=EgoyMDI2MDEyMS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D).
+
+
+## Accessing the Venue
 
 **Public transport.**
 The easiest way to access the venue is taking [public transport from Amsterdam Centraal station](https://www.ns.nl/en/journeyplanner/#/?vertrek=Amsterdam%20Centraal&vertrektype=treinstation&aankomst=ChIJL4osDqgJxkcRjR_3yE9Ani0&aankomsttype=poi&aankomstlabel=Pakhuis%20de%20Zwijger&type=vertrek&tijd=2024-10-22T12:58&firstMileModality=PUBLIC_TRANSPORT&lastMileModality=WALK).
@@ -48,21 +60,22 @@ All forms of public transport in Amsterdam [accept contactless payment debit/cre
 Bicycle parking is available in front of the building.
 For those arriving by car, there is a [parking garage](https://www.apcoa.nl/parkeerplaats/amsterdam/parkeergarage-de-loodsen/) next to the venue.
 
-**Accessibility.** Amsterdam Centraal station, the recommended public transport options, and [Pakhuis de Zwijger](https://www.iamsterdam.com/en/travel-stay/accessibility/public-transportation) are [wheelchair-accessible](https://www.ableamsterdam.com/public-transportation), employing wide doors and leveled entries, as well as ramps and elevators.
+**Accessibility.**
+Amsterdam Centraal station, the recommended public transport options, and [Pakhuis de Zwijger](https://www.iamsterdam.com/en/travel-stay/accessibility/public-transportation) are [wheelchair-accessible](https://www.ableamsterdam.com/public-transportation), employing wide doors and leveled entries, as well as ramps and elevators.
 
-### Code of Conduct
+## Code of Conduct
 
 The [DuckDB Code of Conduct]({% link code_of_conduct.md %}) applies to the event.
 If you experience any incidents, please let us know at <quack@duckdb.org>.
 
-### Events Nearby
+## Events Nearby
 
 The [FOSDEM 2026 conference in Brussels](https://fosdem.org/2026/) is happening on the weekend after the DuckDB Developer Meeting, so you can conveniently travel there.
-Two railway companies operate direct services between Amsterdam and Brussels.
-The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation and is generally cheaper.
-The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation and and a slightly more premium pricing.
-Both train services run about once per hour on Friday evenings.
+Two railway companies operate direct services between Amsterdam and Brussels, and both train services run about once per hour on Friday evenings. **However, keep an eye on [news about the strike in Belgium that may affect trains on Jan 30](https://www.nsinternational.com/en/overview-service/6WlA0hSzLkhwJraN7I1XRY):**
 
-### Inquiries
+* The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation and is generally cheaper.
+* The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation and and a slightly more premium pricing.
+
+## Inquiries
 
 Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.

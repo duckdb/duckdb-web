@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Preview: Amazon S3 Tables in DuckDB"
-author: "Sam Ansmink, Tom Ebergen, Gabor Szarnyas"
+author: "Sam Ansmink, Tom Ebergen, Gábor Szárnyas"
 thumb: "/images/blog/thumbs/amazon-s3-tables.svg"
 image: "/images/blog/thumbs/amazon-s3-tables.png"
 excerpt: "We are happy to announce a new preview feature that adds support for Apache Iceberg REST Catalogs, enabling DuckDB users to connect to Amazon S3 Tables and Amazon SageMaker Lakehouse with ease."
@@ -112,7 +112,7 @@ You can do so by copy-pasting the S3 Tables ARN value directly from the AWS Mana
 
 ```sql
 ATTACH 'arn:aws:s3tables:⟨us-east-1⟩:⟨111122223333⟩:bucket/⟨bucket-name⟩'
-    AS s3_tables_db (
+    AS my_s3_tables_catalog (
         TYPE iceberg,
         ENDPOINT_TYPE s3_tables
     );
@@ -126,18 +126,18 @@ SHOW ALL TABLES;
 ```
 
 ```text
-┌──────────────┬─────────┬───────────────┬──────────────┬──────────────┬───────────┐
-│   database   │ schema  │     name      │ column_names │ column_types │ temporary │
-│   varchar    │ varchar │    varchar    │  varchar[]   │  varchar[]   │  boolean  │
-├──────────────┼─────────┼───────────────┼──────────────┼──────────────┼───────────┤
-│ s3_tables_db │ ducks   │ duck_species  │ [__]         │ [INTEGER]    │ false     │
-└──────────────┴─────────┴───────────────┴──────────────┴──────────────┴───────────┘
+┌──────────────────────┬─────────┬───────────────┬──────────────┬──────────────┬───────────┐
+│       database       │ schema  │     name      │ column_names │ column_types │ temporary │
+│       varchar        │ varchar │    varchar    │  varchar[]   │  varchar[]   │  boolean  │
+├──────────────────────┼─────────┼───────────────┼──────────────┼──────────────┼───────────┤
+│ my_s3_tables_catalog │ ducks   │ duck_species  │ [__]         │ [INTEGER]    │ false     │
+└──────────────────────┴─────────┴───────────────┴──────────────┴──────────────┴───────────┘
 ```
 
 You can query tables as if they were ordinary DuckDB tables:
 
 ```sql
-FROM s3_tables_db.ducks.duck_species;
+FROM my_s3_tables_catalog.ducks.duck_species;
 ```
 
 ```text
@@ -185,7 +185,7 @@ INSERT INTO duck_species VALUES
 Let's run the query again from DuckDB:
 
 ```sql
-FROM s3_tables_db.ducks.duck_species;
+FROM my_s3_tables_catalog.ducks.duck_species;
 ```
 
 The query now returns a table with the additional fourth column, which has a `NULL` value in the row inserted before the change in the schema

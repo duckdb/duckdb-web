@@ -2,7 +2,7 @@
 layout: docu
 railroad: expressions/in.js
 redirect_from:
-- /docs/sql/expressions/in
+  - /docs/sql/expressions/in
 title: IN Operator
 ---
 

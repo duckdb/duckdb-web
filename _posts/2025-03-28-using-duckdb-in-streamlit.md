@@ -10,7 +10,7 @@ tags: ["using DuckDB"]
 
 ## Introduction
 
-In the article [Analyzing Railway Traffic in the Netherlands]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}), Gabor has shown how to analyze data with SQL and reading remote files with DuckDB, by using open data from the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/about).
+In the article [Analyzing Railway Traffic in the Netherlands]({% post_url 2024-05-31-analyzing-railway-traffic-in-the-netherlands %}), Gábor has shown how to analyze data with SQL and reading remote files with DuckDB, by using open data from the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/about).
 
 Using the above open data, in this post we will build an application, in which a user can:
 

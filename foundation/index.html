@@ -7,6 +7,7 @@ body_class: foundation
 redirect_from:
 - /fdn
 toc: false
+max_page_width: large
 ---
 
 <div class="wrap pagetitle">
@@ -91,7 +92,18 @@ toc: false
 			</ul>
 		</div>
 		{% endif %}
-		
+
+		{% if site.data.supporters.technical %}
+		<h3 id="open-source-grants">Open-Source Grants</h3>
+		<div class="supporterboard technical">
+			<ul>
+				{% for supporter in site.data.supporters.oss %}
+				<li><a href="{{ supporter.url }}"><img src="{{ '/images/foundation/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></a></li>
+				{% endfor %} 
+			</ul>
+		</div>
+		{% endif %}
+
 		{% if site.data.supporters.technical %}
 		<h3 id="technical-sponsors">Technical Sponsors</h3>
 		<div class="supporterboard technical">

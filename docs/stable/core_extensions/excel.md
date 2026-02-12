@@ -3,17 +3,13 @@ github_repository: https://github.com/duckdb/duckdb-excel
 layout: docu
 redirect_from:
 - /docs/stable/extensions/excel
-- /docs/stable/extensions/excel/
 - /docs/extensions/excel
-- /docs/extensions/excel/
 title: Excel Extension
 ---
 
-The `excel` extension provides functions to format numbers per Excel's formatting rules by wrapping the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html), but as of DuckDB 1.2 also provides functionality to read and write Excel (`.xlsx`) files. However, `.xls` files are not supported.
+The `excel` extension provides functions to format numbers per Excel's formatting rules by wrapping the [i18npool library](https://www.openoffice.org/l10n/i18n_framework/index.html) and to read/write Excel (`.xlsx`) files. However, please note that `.xls` files are not supported.
 
-Previously, reading and writing Excel files was handled through the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}), which coincidentally included support for XLSX files through one of its dependencies, but this capability may be removed from the `spatial` extension. Additionally, the `excel` extension is more efficient and provides more control over the import/export process.
-
-> Tip If the `excel` extension is insufficient for your use case, try using the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}). See the [Excel Import]({% link docs/stable/guides/file_formats/excel_import.md %}) and [Excel Export]({% link docs/stable/guides/file_formats/excel_export.md %}) pages for instructions. However, please be aware that these features may be deprecated in the future.
+> Tip Previously, reading and writing Excel files was handled through the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}), which coincidentally included support for XLSX files through one of its dependencies, but this capability may be removed from the `spatial` extension. Additionally, the `excel` extension is more efficient and provides more control over the import/export process. If the `excel` extension is insufficient for your use case, try using the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}). See the [Excel Import]({% link docs/stable/guides/file_formats/excel_import.md %}) and [Excel Export]({% link docs/stable/guides/file_formats/excel_export.md %}) pages for instructions. However, please be aware that these features may be deprecated in the future.
 
 ## Installing and Loading
 
@@ -71,7 +67,7 @@ However, if you want to set additional options to control the import process, yo
 | `header`           | `BOOLEAN` | _automatically inferred_ | Whether to treat the first row as containing the names of the resulting columns.                                                                                                                                                                                                                      |
 | `sheet`            | `VARCHAR` | _automatically inferred_ | The name of the sheet in the xlsx file to read. Default is the first sheet.                                                                                                                                                                                                                           |
 | `all_varchar`      | `BOOLEAN` | `false`                  | Whether to read all cells as containing `VARCHAR`s.                                                                                                                                                                                                                                                   |
-| `ignore_errors`    | `BOOLEAN` | `false`                  | Whether to ignore errors and silently replace cells that cant be cast to the corresponding inferred column type with `NULL`'s.                                                                                                                                                                        |
+| `ignore_errors`    | `BOOLEAN` | `false`                  | Whether to ignore errors and silently replace cells that can't be cast to the corresponding inferred column type with `NULL`'s.                                                                                                                                                                        |
 | `range`            | `VARCHAR` | _automatically inferred_ | The range of cells to read, in spreadsheet notation. For example, `A1:B2` reads the cells from A1 to B2. If not specified the resulting range will be inferred as rectangular region of cells between the first row of consecutive non-empty cells and the first empty row spanning the same columns. |
 | `stop_at_empty`    | `BOOLEAN` | _automatically inferred_ | Whether to stop reading the file when an empty row is encountered. If an explicit `range` option is provided, this is `false` by default, otherwise `true`.                                                                                                                                           |
 | `empty_as_varchar` | `BOOLEAN` | `false`                  | Whether to treat empty cells as `VARCHAR` instead of `DOUBLE` when trying to automatically infer column types.                                                                                                                                                                                        |
@@ -116,7 +112,7 @@ the types of the resulting columns are inferred based on the first "data" row in
 
 This can sometimes lead to issues if the first "data row" is not representative of the rest of the sheet (e.g., it contains empty cells) in which case the `ignore_errors` or `empty_as_varchar` options can be used to work around this.
 
-However, when the `COPY TO ... FROM '⟨file⟩.xlsx'` syntax is used, no type inference is done and the types of the resulting columns are determined by the types of the columns in the table being copied to. All cells will simply be converted by casting from `DOUBLE` or `VARCHAR` to the target column type.
+However, when the `COPY TO ... FROM '⟨file⟩.xlsx'`{:.language-sql .highlight} syntax is used, no type inference is done and the types of the resulting columns are determined by the types of the columns in the table being copied to. All cells will simply be converted by casting from `DOUBLE` or `VARCHAR` to the target column type.
 
 ## Writing XLSX Files
 

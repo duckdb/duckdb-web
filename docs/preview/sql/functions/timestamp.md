@@ -28,9 +28,10 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 |:--|:-------|
 | [`age(timestamp, timestamp)`](#agetimestamp-timestamp) | Subtract arguments, resulting in the time difference between the two timestamps. |
 | [`age(timestamp)`](#agetimestamp) | Subtract from current_date. |
+| [`ago(interval)`](#agointerval) | Subtracts an interval from the current timestamp. |
 | [`century(timestamp)`](#centurytimestamp) | Extracts the century of a timestamp. |
 | [`current_localtimestamp()`](#current_localtimestamp) | Returns the current timestamp (at the start of the transaction). |
-| [`date_diff(part, starttimestamp, endtimestamp)`](#date_diffpart-starttimestamp-endtimestamp) | The number of [`part`]({% link docs/preview/sql/functions/datepart.md %}) boundaries between `starttimestamp` and `endtimestamp`, inclusive of the larger timstamp and exclusive of the smaller timestamp. |
+| [`date_diff(part, starttimestamp, endtimestamp)`](#date_diffpart-starttimestamp-endtimestamp) | The number of [`part`]({% link docs/preview/sql/functions/datepart.md %}) boundaries between `starttimestamp` and `endtimestamp`, inclusive of the larger timestamp and exclusive of the smaller timestamp. |
 | [`date_part([part, ...], timestamp)`](#date_partpart--timestamp) | Get the listed [subfields]({% link docs/preview/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
 | [`date_part(part, timestamp)`](#date_partpart-timestamp) | Get [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, starttimestamp, endtimestamp)`](#date_subpart-starttimestamp-endtimestamp) | The signed length of the interval between `starttimestamp` and `endtimestamp`, truncated to whole multiples of [`part`]({% link docs/preview/sql/functions/datepart.md %}). |
@@ -81,6 +82,14 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Description** | Subtract from current_date. |
 | **Example** | `age(TIMESTAMP '1992-09-20')` |
 | **Result** | `29 years 1 month 27 days 12:39:00.844` |
+
+#### `ago(interval)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Subtracts an interval from the current timestamp, returning a timestamp in the past. Equivalent to `current_timestamp - interval`. |
+| **Example** | `ago(INTERVAL 1 HOUR)` |
+| **Result** | `2024-11-30 12:28:48.895` (if current time is `2024-11-30 13:28:48.895`) |
 
 #### `century(timestamp)`
 

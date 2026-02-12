@@ -9,7 +9,7 @@ title: Spatial Functions
 
 | Function | Summary |
 | --- | --- |
-| [`DuckDB_PROJ_Compiled_Version`](#duckdb_proj_compiled_version) | Returns a text description of the PROJ library version that that this instance of DuckDB was compiled against. |
+| [`DuckDB_PROJ_Compiled_Version`](#duckdb_proj_compiled_version) | Returns a text description of the PROJ library version that this instance of DuckDB was compiled against. |
 | [`DuckDB_Proj_Version`](#duckdb_proj_version) | Returns a text description of the PROJ library version that is being used by this instance of DuckDB. |
 | [`ST_Affine`](#st_affine) | Applies an affine transformation to a geometry. |
 | [`ST_Area`](#st_area) | Compute the area of a geometry. |
@@ -31,7 +31,7 @@ title: Spatial Functions
 | [`ST_ContainsProperly`](#st_containsproperly) | Returns true if the first geometry \"properly\" contains the second geometry |
 | [`ST_ConvexHull`](#st_convexhull) | Returns the convex hull enclosing the geometry |
 | [`ST_CoverageInvalidEdges`](#st_coverageinvalidedges) | Returns the invalid edges in a polygonal coverage, which are edges that are not shared by two polygons. |
-| [`ST_CoverageSimplify`](#st_coveragesimplify) | Simplify the edges in a polygonal coverage, preserving the coverange by ensuring that the there are no seams between the resulting simplified polygons. |
+| [`ST_CoverageSimplify`](#st_coveragesimplify) | Simplify the edges in a polygonal coverage, preserving the coverage by ensuring that there are no seams between the resulting simplified polygons. |
 | [`ST_CoverageUnion`](#st_coverageunion) | Union all geometries in a polygonal coverage into a single geometry. |
 | [`ST_CoveredBy`](#st_coveredby) | Returns true if geom1 is "covered by" geom2 |
 | [`ST_Covers`](#st_covers) | Returns true if the geom1 "covers" geom2 |
@@ -63,7 +63,7 @@ title: Spatial Functions
 | [`ST_GeomFromHEXWKB`](#st_geomfromhexwkb) | Deserialize a GEOMETRY from a HEX(E)WKB encoded string |
 | [`ST_GeomFromText`](#st_geomfromtext) | Deserialize a GEOMETRY from a WKT encoded string |
 | [`ST_GeomFromWKB`](#st_geomfromwkb) | Deserializes a GEOMETRY from a WKB encoded blob |
-| [`ST_GeometryType`](#st_geometrytype) | Returns a 'GEOMETRY_TYPE' enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, and `GEOMETRYCOLLECTION`. |
+| [`ST_GeometryType`](#st_geometrytype) | Returns a 'GEOMETRY_TYPE' enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`. |
 | [`ST_HasM`](#st_hasm) | Check if the input geometry has M values. |
 | [`ST_HasZ`](#st_hasz) | Check if the input geometry has Z values. |
 | [`ST_Hilbert`](#st_hilbert) | Encodes the X and Y values as the hilbert curve index for a curve covering the given bounding box. |
@@ -190,7 +190,7 @@ VARCHAR DuckDB_PROJ_Compiled_Version ()
 
 #### Description
 
-Returns a text description of the PROJ library version that that this instance of DuckDB was compiled against.
+Returns a text description of the PROJ library version that this instance of DuckDB was compiled against.
 
 #### Example
 
@@ -601,10 +601,10 @@ GEOMETRY ST_Collect (geoms GEOMETRY[])
 #### Description
 
 Collects a list of geometries into a collection geometry.
-- If all geometries are `POINT`'s, a `MULTIPOINT` is returned.
-- If all geometries are `LINESTRING`'s, a `MULTILINESTRING` is returned.
-- If all geometries are `POLYGON`'s, a `MULTIPOLYGON` is returned.
-- Otherwise if the input collection contains a mix of geometry types, a `GEOMETRYCOLLECTION` is returned.
+* If all geometries are `POINT`'s, a `MULTIPOINT` is returned.
+* If all geometries are `LINESTRING`'s, a `MULTILINESTRING` is returned.
+* If all geometries are `POLYGON`'s, a `MULTIPOLYGON` is returned.
+* Otherwise if the input collection contains a mix of geometry types, a `GEOMETRYCOLLECTION` is returned.
 
 Empty and `NULL` geometries are ignored. If all geometries are empty or `NULL`, a `GEOMETRYCOLLECTION EMPTY` is returned.
 
@@ -659,9 +659,9 @@ GEOMETRY ST_CollectionExtract (geom GEOMETRY)
 Extracts geometries from a GeometryCollection into a typed multi geometry.
 
 If the input geometry is a GeometryCollection, the function will return a multi geometry, determined by the `type` parameter.
-- if `type` = 1, returns a MultiPoint containg all the Points in the collection
-- if `type` = 2, returns a MultiLineString containg all the LineStrings in the collection
-- if `type` = 3, returns a MultiPolygon containg all the Polygons in the collection
+* If `type` = 1, returns a MultiPoint containing all the Points in the collection.
+* If `type` = 2, returns a MultiLineString containing all the LineStrings in the collection.
+* If `type` = 3, returns a MultiPolygon containing all the Polygons in the collection.
 
 If no `type` parameters is provided, the function will return a multi geometry matching the highest "surface dimension"
 of the contained geometries. E.g. if the collection contains only Points, a MultiPoint will be returned. But if the
@@ -779,7 +779,7 @@ GEOMETRY ST_CoverageSimplify (geoms GEOMETRY[], tolerance DOUBLE)
 
 #### Description
 
-Simplify the edges in a polygonal coverage, preserving the coverange by ensuring that the there are no seams between the resulting simplified polygons.
+Simplify the edges in a polygonal coverage, preserving the coverage by ensuring that there are no seams between the resulting simplified polygons.
 
 By default, the boundary of the coverage is also simplified, but this can be controlled with the optional third 'simplify_boundary' parameter.
 
@@ -921,10 +921,10 @@ INTEGER ST_Dimension (geom GEOMETRY)
 
 Returns the "topological dimension" of a geometry.
 
-- For POINT and MULTIPOINT geometries, returns `0`
-- For LINESTRING and MULTILINESTRING, returns `1`
-- For POLYGON and MULTIPOLYGON, returns `2`
-- For GEOMETRYCOLLECTION, returns the maximum dimension of the contained geometries, or 0 if the collection is empty
+* For POINT and MULTIPOINT geometries, returns `0`.
+* For LINESTRING and MULTILINESTRING, returns `1`.
+* For POLYGON and MULTIPOLYGON, returns `2`.
+* For GEOMETRYCOLLECTION, returns the maximum dimension of the contained geometries, or 0 if the collection is empty.
 
 #### Example
 
@@ -1011,9 +1011,9 @@ DOUBLE ST_Distance_Sphere (point1 POINT_2D, point2 POINT_2D)
 
 Returns the haversine (great circle) distance between two geometries.
 
-- Only supports POINT geometries.
-- Returns the distance in meters.
-- The input is expected to be in WGS84 (EPSG:4326) coordinates, using a [latitude, longitude] axis order.
+* Only supports POINT geometries.
+* Returns the distance in meters.
+* The input is expected to be in WGS84 (EPSG:4326) coordinates, using a [latitude, longitude] axis order.
 
 ----
 
@@ -1228,10 +1228,10 @@ GEOMETRY ST_Force3DM (geom GEOMETRY, m DOUBLE)
 Forces the vertices of a geometry to have X, Y and M components
 
 The following cases apply:
-- If the input geometry has a Z component but no M component, the Z component will be replaced with the new M value.
-- If the input geometry has a M component but no Z component, it will be returned as is.
-- If the input geometry has both a Z component and a M component, the Z component will be removed.
-- Otherwise, if the input geometry has neither a Z or M component, the new M value will be added to the vertices of the input geometry.
+* If the input geometry has a Z component but no M component, the Z component will be replaced with the new M value.
+* If the input geometry has a M component but no Z component, it will be returned as is.
+* If the input geometry has both a Z component and a M component, the Z component will be removed.
+* Otherwise, if the input geometry has neither a Z or M component, the new M value will be added to the vertices of the input geometry.
 
 ----
 
@@ -1249,10 +1249,10 @@ GEOMETRY ST_Force3DZ (geom GEOMETRY, z DOUBLE)
 Forces the vertices of a geometry to have X, Y and Z components
 
 The following cases apply:
-- If the input geometry has a M component but no Z component, the M component will be replaced with the new Z value.
-- If the input geometry has a Z component but no M component, it will be returned as is.
-- If the input geometry has both a Z component and a M component, the M component will be removed.
-- Otherwise, if the input geometry has neither a Z or M component, the new Z value will be added to the vertices of the input geometry.
+* If the input geometry has a M component but no Z component, the M component will be replaced with the new Z value.
+* If the input geometry has a Z component but no M component, it will be returned as is.
+* If the input geometry has both a Z component and a M component, the M component will be removed.
+* Otherwise, if the input geometry has neither a Z or M component, the new Z value will be added to the vertices of the input geometry.
 
 ----
 
@@ -1270,10 +1270,10 @@ GEOMETRY ST_Force4D (geom GEOMETRY, z DOUBLE, m DOUBLE)
 Forces the vertices of a geometry to have X, Y, Z and M components
 
 The following cases apply:
-- If the input geometry has a Z component but no M component, the new M value will be added to the vertices of the input geometry.
-- If the input geometry has a M component but no Z component, the new Z value will be added to the vertices of the input geometry.
-- If the input geometry has both a Z component and a M component, the geometry will be returned as is.
-- Otherwise, if the input geometry has neither a Z or M component, the new Z and M values will be added to the vertices of the input geometry.
+* If the input geometry has a Z component but no M component, the new M value will be added to the vertices of the input geometry.
+* If the input geometry has a M component but no Z component, the new Z value will be added to the vertices of the input geometry.
+* If the input geometry has both a Z component and a M component, the geometry will be returned as is.
+* Otherwise, if the input geometry has neither a Z or M component, the new Z and M values will be added to the vertices of the input geometry.
 
 ----
 
@@ -1314,7 +1314,7 @@ GEOMETRY ST_GeomFromHEXEWKB (hexwkb VARCHAR)
 
 Deserialize a GEOMETRY from a HEX(E)WKB encoded string
 
-DuckDB spatial doesnt currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB" are just aliases of eachother.
+DuckDB spatial doesn't currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB` are just aliases of each other.
 
 ----
 
@@ -1331,7 +1331,7 @@ GEOMETRY ST_GeomFromHEXWKB (hexwkb VARCHAR)
 
 Deserialize a GEOMETRY from a HEX(E)WKB encoded string
 
-DuckDB spatial doesnt currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB" are just aliases of eachother.
+DuckDB spatial doesn't currently differentiate between `WKB` and `EWKB`, so `ST_GeomFromHEXWKB` and `ST_GeomFromHEXEWKB` are just aliases of each other.
 
 ----
 
@@ -1382,7 +1382,7 @@ ANY ST_GeometryType (wkb WKB_BLOB)
 
 #### Description
 
-Returns a 'GEOMETRY_TYPE' enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, and `GEOMETRYCOLLECTION`.
+Returns a 'GEOMETRY_TYPE' enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`.
 
 #### Example
 
@@ -1888,7 +1888,7 @@ STRUCT(center GEOMETRY, nearest GEOMETRY, radius DOUBLE) ST_MaximumInscribedCirc
 Returns the maximum inscribed circle of the input geometry, optionally with a tolerance.
 
 By default, the tolerance is computed as `max(width, height) / 1000`.
-The return value is a struct with the center of the circle, the nearest point to the center on the boundary of the geometry, and the radius of the circle.
+The return value is a struct with the center of the circle, the nearest point to the center on the boundary of the geometry and the radius of the circle.
 
 #### Example
 
@@ -2581,7 +2581,7 @@ FROM (SELECT ST_GeomFromText('POINT( 170370.718 11572.405 )') AS bng);
 POINT (-5.202992651563592 49.96007490162923)
 
 -- By using an official NTv2 grid file, we can reduce the error down around the 9th decimal place
--- which in theory is below a millimetre, and in practise unlikely that your coordinates are that precise
+-- which in theory is below a millimetre, and in practice unlikely that your coordinates are that precise
 -- British National Grid "NTv2 format files" download available here:
 -- https://www.ordnancesurvey.co.uk/products/os-net/for-developers
 SELECT ST_Transform(bng
@@ -3229,7 +3229,7 @@ ST_GeneratePoints (col0 BOX_2D, col1 BIGINT, col2 BIGINT)
 
 Generates a set of random points within the specified bounding box.
 
-Takes a bounding box (min_x, min_y, max_x, max_y), a count of points to generate, and optionally a seed for the random number generator.
+Takes a bounding box (min_x, min_y, max_x, max_y), a count of points to generate and optionally a seed for the random number generator.
 
 #### Example
 
@@ -3267,7 +3267,7 @@ Except for the `path` parameter, all parameters are optional.
 | `allowed_drivers` | VARCHAR[] | A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed. |
 | `sibling_files` | VARCHAR[] | A list of sibling files that are required to open the file. E.g., the ESRI Shapefile driver requires a .shx file to be present. Although most of the time these can be discovered automatically. |
 | `spatial_filter_box` | BOX_2D | If set to a BOX_2D, the table function will only return rows that intersect with the given bounding box. Similar to spatial_filter. |
-| `keep_wkb` | BOOLEAN | If set, the table function will return geometries in a wkb_geometry column with the type WKB_BLOB (which can be cast to BLOB) instead of GEOMETRY. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesnt support representing in the GEOMETRY type yet. |
+| `keep_wkb` | BOOLEAN | If set, the table function will return geometries in a wkb_geometry column with the type WKB_BLOB (which can be cast to BLOB) instead of GEOMETRY. This is useful if you want to use DuckDB with more exotic geometry subtypes that DuckDB spatial doesn't support representing in the GEOMETRY type yet. |
 
 Note that GDAL is single-threaded, so this table function will not be able to make full use of parallelism.
 

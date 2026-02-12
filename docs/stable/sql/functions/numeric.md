@@ -1,9 +1,8 @@
 ---
 layout: docu
 redirect_from:
-- /docs/test/functions/math
-- /docs/test/functions/math/
-- /docs/sql/functions/numeric
+  - /docs/test/functions/math
+  - /docs/sql/functions/numeric
 title: Numeric Functions
 ---
 
@@ -42,7 +41,7 @@ When both operands are integers, `/` performs floating points division (`5 / 2 =
 
 ### Supported Types
 
-The modulo, bitwise, and negation and factorial operators work only on integral data types,
+The modulo, bitwise and negation and factorial operators work only on integral data types,
 whereas the others are available for all numeric data types.
 
 ## Numeric Functions

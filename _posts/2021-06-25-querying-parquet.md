@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Querying Parquet with Precision Using DuckDB"
-author: Hannes Mühleisen and Mark Raasveldt
+author: Hannes Mühleisen, Mark Raasveldt
 excerpt: DuckDB, a free and open source analytical data management system, can run SQL queries directly on Parquet files and automatically take advantage of the advanced features of the Parquet format.
 tags: ["using DuckDB"]
 ---
@@ -89,8 +89,8 @@ con.execute("""
    LIMIT 5""").df()
 ```
 
-|      pickup_at      |     dropoff_at      | passenger_count | trip_distance | rate_code_id |
-|---------------------|---------------------|-----------------|---------------|--------------|
+| pickup_at           | dropoff_at          | passenger_count | trip_distance | rate_code_id |
+| ------------------- | ------------------- | --------------- | ------------- | ------------ |
 | 2019-04-01 00:04:09 | 2019-04-01 00:06:35 | 1               | 0.5           | 1            |
 | 2019-04-01 00:22:45 | 2019-04-01 00:25:43 | 1               | 0.7           | 1            |
 | 2019-04-01 00:39:48 | 2019-04-01 01:19:39 | 1               | 10.9          | 1            |
@@ -114,9 +114,9 @@ print(df.head(5))
 Below are the timings for both of these queries.
 
 | System | Time (s) |
-|:-------|---------:|
-| DuckDB | 0.015    |
-| Pandas | 12.300   |
+| :----- | -------: |
+| DuckDB |    0.015 |
+| Pandas |   12.300 |
 
 Pandas takes significantly longer to complete this query. That is because Pandas not only needs to read each of the three Parquet files in their entirety, it has to concatenate these three separate Pandas DataFrames together.
 
@@ -150,9 +150,9 @@ pandas.read_parquet('alltaxi.parquet')
 ```
 
 | System | Time (s) |
-|:-------|---------:|
-| DuckDB | 0.02     |
-| Pandas | 7.50     |
+| :----- | -------: |
+| DuckDB |     0.02 |
+| Pandas |     7.50 |
 
 We can see that Pandas performs better than before, as the concatenation is avoided. However, the entire file still needs to be read into memory, which takes both a significant amount of time and memory.
 
@@ -174,9 +174,9 @@ len(pandas.read_parquet('alltaxi.parquet'))
 ```
 
 | System | Time (s) |
-|:-------|---------:|
-| DuckDB | 0.015    |
-| Pandas | 7.500    |
+| :----- | -------: |
+| DuckDB |    0.015 |
+| Pandas |    7.500 |
 
 DuckDB completes the query very quickly, as it automatically recognizes  what needs to be read from the Parquet file and minimizes the required reads. Pandas has to read the entire file again, which causes it to take  the same amount of time as the previous query.
 
@@ -186,11 +186,11 @@ For this query, we can improve Pandas' time through manual optimization. In orde
 len(pandas.read_parquet('alltaxi.parquet', columns=['vendor_id']))
 ```
 
-|       System       | Time (s) |
-|:-------------------|---------:|
-| DuckDB             | 0.015    |
-| Pandas             | 7.500    |
-| Pandas (optimized) | 1.200    |
+| System             | Time (s) |
+| :----------------- | -------: |
+| DuckDB             |    0.015 |
+| Pandas             |    7.500 |
+| Pandas (optimized) |    1.200 |
 
 While this is much faster, this still takes more than a second as the entire `vendor_id` column has to be read into memory as a Pandas column only to count the number of rows.
 
@@ -208,8 +208,8 @@ con.execute("""
 
 The query completes in `45ms` and yields the following result:
 
-| count  |
-|-------:|
+|  count |
+| -----: |
 | 167022 |
 
 In Pandas, we can perform the same operation using a naive approach.
@@ -234,12 +234,12 @@ The `pyarrow` Parquet reader also allows us to perform filter pushdown into the 
 len(pandas.read_parquet('alltaxi.parquet', columns=['pickup_at'], filters=[('pickup_at', '>', '2019-06-30')]))
 ```
 
-|                System                 | Time (s) |
-|:--------------------------------------|---------:|
-| DuckDB                                | 0.05     |
-| Pandas                                | 7.50     |
-| Pandas (projection pushdown)          | 0.90     |
-| Pandas (projection & filter pushdown) | 0.07     |
+| System                                | Time (s) |
+| :------------------------------------ | -------: |
+| DuckDB                                |     0.05 |
+| Pandas                                |     7.50 |
+| Pandas (projection pushdown)          |     0.90 |
+| Pandas (projection & filter pushdown) |     0.07 |
 
 This shows that the results here are not due to DuckDB's Parquet reader being faster than the `pyarrow` Parquet reader. The reason that DuckDB performs better on these queries is because its optimizers automatically extract all required columns and filters from the SQL query, which then get automatically utilized in the Parquet reader with no manual effort required.
 
@@ -253,13 +253,13 @@ df = pandas.read_parquet('alltaxi.parquet')
 print(len(df[['pickup_at']].query("pickup_at > '2019-06-30'")))
 ```
 
-|                System                 | Time (s) |
-|:--------------------------------------|---------:|
-| DuckDB                                | 0.05     |
-| Pandas                                | 7.50     |
-| Pandas (projection pushdown)          | 0.90     |
-| Pandas (projection & filter pushdown) | 0.07     |
-| Pandas (native)                       | 0.26     |
+| System                                | Time (s) |
+| :------------------------------------ | -------: |
+| DuckDB                                |     0.05 |
+| Pandas                                |     7.50 |
+| Pandas (projection pushdown)          |     0.90 |
+| Pandas (projection & filter pushdown) |     0.07 |
+| Pandas (native)                       |     0.26 |
 
 ## Aggregates
 
@@ -274,18 +274,18 @@ con.execute("""
 
 The query completes in `220ms` and yields the following result:
 
-| passenger_count |  count   |
-|---------------:|----------:|
-| 0               | 408742   |
-| 1               | 15356631 |
-| 2               | 3332927  |
-| 3               | 944833   |
-| 4               | 439066   |
-| 5               | 910516   |
-| 6               | 546467   |
-| 7               | 106      |
-| 8               | 72       |
-| 9               | 64       |
+| passenger_count |    count |
+| --------------: | -------: |
+|               0 |   408742 |
+|               1 | 15356631 |
+|               2 |  3332927 |
+|               3 |   944833 |
+|               4 |   439066 |
+|               5 |   910516 |
+|               6 |   546467 |
+|               7 |      106 |
+|               8 |       72 |
+|               9 |       64 |
 
 For the SQL-averse and as a teaser for a future blog post, DuckDB also has a "Relational API" that allows for a more Python-esque declaration of queries. Here's the equivalent to the above SQL query, that provides the exact same result and performance:
 
@@ -313,12 +313,12 @@ df.groupby('passenger_count')
   .agg({'passenger_count' : 'count'})
 ```
 
-|            System            | Time (s) |
-|:-----------------------------|---------:|
-| DuckDB                       | 0.22     |
-| Pandas                       | 7.50     |
-| Pandas (projection pushdown) | 0.58     |
-| Pandas (native)              | 0.51     |
+| System                       | Time (s) |
+| :--------------------------- | -------: |
+| DuckDB                       |     0.22 |
+| Pandas                       |     7.50 |
+| Pandas (projection pushdown) |     0.58 |
+| Pandas (native)              |     0.51 |
 
 We can see that DuckDB is faster than Pandas in all three scenarios, without needing to perform any manual optimizations and without needing to load the Parquet file into memory in its entirety.
 

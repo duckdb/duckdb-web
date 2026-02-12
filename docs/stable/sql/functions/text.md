@@ -37,7 +37,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`chr(code_point)`](#chrcode_point) | Returns a character which is corresponding the ASCII code value or Unicode code point. |
 | [`concat(value, ...)`](#concatvalue-) | Concatenates multiple strings or lists. `NULL` inputs are skipped. See also [operator `||`](#arg1--arg2). |
 | [`concat_ws(separator, string, ...)`](#concat_wsseparator-string-) | Concatenates many strings, separated by `separator`. `NULL` inputs are skipped. |
-| [`contains(string, search_string)`](#containsstring-search_string) | Returns `true` if `search_string` is found within `string`. Note that [collations]({% link docs/stable/sql/expressions/collations.md %}) are not supported. |g
+| [`contains(string, search_string)`](#containsstring-search_string) | Returns `true` if `search_string` is found within `string`. Note that [collations]({% link docs/stable/sql/expressions/collations.md %}) are not supported. |
 | [`ends_with(string, search_string)`](#suffixstring-search_string) | Alias for `suffix`. |
 | [`format(format, ...)`](#formatformat-) | Formats a string using the [fmt syntax](#fmt-syntax). |
 | [`formatReadableDecimalSize(integer)`](#formatreadabledecimalsizeinteger) | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
@@ -270,6 +270,14 @@ This section describes functions and operators for examining and manipulating [`
 | **Example** | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` |
 | **Result** | `Benchmark "CSV" took 42 seconds` |
 
+#### `formatReadableDecimalSize(integer)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Converts `integer` to a human-readable representation using units based on powers of 10 (KB, MB, GB, etc.). |
+| **Example** | `formatReadableDecimalSize(16000)` |
+| **Result** | `16.0 kB` |
+
 #### `format_bytes(integer)`
 
 <div class="nostroke_table"></div>
@@ -404,8 +412,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `ltrim('    test  ')` |
-| **Result** | `test  ` |
+| **Example 1** | <code class="language-plaintext highlighter-rouge">ltrim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
+| **Result** | <code class="language-plaintext highlighter-rouge">test&nbsp;&nbsp;</code> |
 | **Example 2** | `ltrim('>>>>test<<', '><')` |
 | **Result** | `test<<` |
 
@@ -647,8 +655,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `rtrim('test  ')` |
-| **Result** | `test` |
+| **Example 1** | <code class="language-plaintext highlighter-rouge">rtrim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
+| **Result** | <code class="language-plaintext highlighter-rouge">&nbsp;&nbsp;&nbsp;&nbsp;test</code> |
 | **Example 2** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 
@@ -779,7 +787,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `trim('    test  ')` |
+| **Example 1** | <code class="language-plaintext highlighter-rouge">trim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
 | **Result** | `test` |
 | **Example 2** | `trim('>>>>test<<', '><')` |
 | **Result** | `test` |
@@ -979,6 +987,8 @@ Pad integers with 0s:
 ```sql
 SELECT format('{:04d}', 33); -- 0033
 ```
+
+> Padding cannot currently be combined with the specification of a thousands separator.
 
 Create timestamps from integers:
 

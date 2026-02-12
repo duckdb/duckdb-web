@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: eeagrid
   description: Extension that adds support for working with the EEA Reference Grid System.
-  version: 1.4.0
+  version: 0.1.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eeagrid
-  ref: 1b4f24e483f1b0be9cb2f774450b14805caddee9
+  ref: 1a03fdf8e3a1f18d26bcf9a6d7a48010739dea55
 
 docs:
   hello_world: |
@@ -69,8 +69,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 708
-extension_download_count_pretty: 708
+extension_download_count: 416
+extension_download_count_pretty: 416
 image: '/images/community_extensions/social_preview/preview_community_extension_eeagrid.png'
 layout: community_extension_doc
 ---

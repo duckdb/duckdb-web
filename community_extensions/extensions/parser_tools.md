@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: parser_tools
   description: Exposes functions for parsing referenced tables and usage context from SQL queries using DuckDB's native parser.
-  version: 0.5.0
+  version: 0.6.0
   language: C++
   build: cmake
   license: MIT
@@ -16,8 +16,9 @@ extension:
     - zfarrell
 
 repo:
-  github: zfarrell/duckdb_extension_parser_tools
-  ref: 0c74f1b24610d324d6254fce6b32755f734e3df7
+  github: hotdata-dev/duckdb_extension_parser_tools
+  ref: 4c294fa226e9994c146d073cdb2e8c5e42a9db86
+  ref_next: 6a94f2b261bdca4c8f2f8454697e2f6e7bcea9c5
 
 docs:
   hello_world: |
@@ -166,10 +167,10 @@ docs:
     Future versions may expose additional aspects of the parsed query structure.
     For more details and examples, visit the [extension repository](https://github.com/zacMode/duckdb_extension_parser_tools).
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 723
-extension_download_count_pretty: 723
+extension_star_count: 23
+extension_star_count_pretty: 23
+extension_download_count: 400
+extension_download_count_pretty: 400
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
 layout: community_extension_doc
 ---

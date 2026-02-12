@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/export.js
 redirect_from:
-- /docs/sql/statements/export
+  - /docs/sql/statements/export
 title: EXPORT and IMPORT DATABASE Statements
 ---
 
@@ -28,7 +28,7 @@ Export to directory 'target_directory', tables serialized as Parquet:
 EXPORT DATABASE 'target_directory' (FORMAT parquet);
 ```
 
-Export to directory 'target_directory', tables serialized as Parquet, compressed with ZSTD, with a row_group_size of 100,000:
+Export to directory 'target_directory', tables serialized as Parquet, compressed with Zstd, with a row_group_size of 100,000:
 
 ```sql
 EXPORT DATABASE 'target_directory' (

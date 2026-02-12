@@ -2,7 +2,7 @@
 blurb: The BOOLEAN type represents a statement of truth (“true” or “false”).
 layout: docu
 redirect_from:
-- /docs/sql/data_types/boolean
+  - /docs/sql/data_types/boolean
 title: Boolean Type
 ---
 

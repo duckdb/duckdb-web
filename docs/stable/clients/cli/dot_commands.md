@@ -2,9 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/api/cli/dot-commands
-- /docs/api/cli/dot-commands/
 - /docs/api/cli/dot_commands
-- /docs/api/cli/dot_commands/
 - /docs/clients/cli/dot_commands
 title: Dot Commands
 ---
@@ -31,7 +29,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.help ⟨-all⟩ ⟨PATTERN⟩`{:.language-sql .highlight}                   | Show help text for `PATTERN`                                                                                                                                                |
 | `.highlight ⟨on/off⟩`{:.language-sql .highlight}                      | Toggle syntax highlighting in the shell `on` / `off`. See the [query syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details               |
 | `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`{:.language-sql .highlight}    | Configure the color of each component in (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details           |
-| `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntaxx highlighting section](#configuring-the-query-syntax-highlighter) for more details |
+| `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details |
 | `.import ⟨FILE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                   | Import data from `FILE` into `TABLE`                                                                                                                                        |
 | `.indexes ⟨TABLE⟩`{:.language-sql .highlight}                         | Show names of indexes                                                                                                                                                       |
 | `.keyword ⟨COLOR⟩`{:.language-sql .highlight}                         | Sets the syntax highlighting color used for keywords                                                                                                                        |
@@ -47,7 +45,8 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.open ⟨OPTIONS⟩ ⟨FILE⟩`{:.language-sql .highlight}                   | Close existing database and reopen `FILE`                                                                                                                                   |
 | `.output ⟨FILE⟩`{:.language-sql .highlight}                           | Send output to `FILE` or `stdout` if `FILE` is omitted                                                                                                                      |
 | `.print ⟨STRING...⟩`{:.language-sql .highlight}                       | Print literal `STRING`                                                                                                                                                      |
-| `.prompt ⟨MAIN⟩ ⟨CONTINUE⟩`{:.language-sql .highlight}                | Replace the standard prompts                                                                                                                                                |
+| `.progress_bar ⟨COMPONENT⟩ `{:.language-sql .highlight}                | Set the progress bar component styles                                                                                                                                        |
+| `.prompt ⟨OPTIONS⟩ ⟨CONTINUE⟩`{:.language-sql .highlight}                | Replace the standard prompts                                                                                                                                                |
 | `.quit`{:.language-sql .highlight}                                    | Exit this program                                                                                                                                                           |
 | `.read ⟨FILE⟩`{:.language-sql .highlight}                             | Read input from `FILE`                                                                                                                                                      |
 | `.rows`{:.language-sql .highlight}                                    | Row-wise rendering of query results (default)                                                                                                                               |
@@ -151,7 +150,7 @@ CREATE TABLE walkers AS SELECT 'duck' AS animal;
 .tables
 ```
 
-```text
+```sql
 fliers    swimmers  walkers
 ```
 
@@ -161,13 +160,13 @@ For example, to filter to only tables that contain an `l`, use the `LIKE` patter
 .tables %l%
 ```
 
-```text
+```sql
 fliers   walkers
 ```
 
 The `.schema` command will show all of the SQL statements used to define the schema of the database.
 
-```text
+```sql
 .schema
 ```
 
@@ -177,66 +176,125 @@ CREATE TABLE swimmers (animal VARCHAR);
 CREATE TABLE walkers (animal VARCHAR);
 ```
 
+## Progress Bar
+
+The DuckDB CLI client's progress bar supports customization through components.
+
+The `.progress_bar` command supports `--add` and `--clear` parameters for adding and removing components. 
+
+For details on specific usage, see the examples below.
+
+### Configuring the Progress Bar Display
+
+To check if the progress bar is enabled: 
+
+```sql
+SELECT * FROM duckdb_settings() WHERE name = 'enable_progress_bar';
+```
+
+To check the current minimum amount of time (in milliseconds) a query needs to take before displaying a progress bar: 
+
+```sql
+SELECT * FROM duckdb_settings() WHERE name = 'progress_bar_time';
+```
+
+To set the minimum amount of time that the progress bar displays to 100 milliseconds:
+
+```sql
+SET progress_bar_time = 100;
+```
+
+To set that progress bar component to a red text that displays the current time on the progress bar:
+
+```sql
+.progress_bar --add "{align:right}{min_size:20}{color:red}Time: {sql:select (current_time::varchar).split('.')[1]}{color:reset} "
+```
+
+<img src="{% link images/progress_bar/duckdb_progressbar_time.gif %}"
+     alt="DuckDB progress bar with current time stamp"
+     width="400"
+     />
+
+
+> `.progress_bar --add` commands are additive, issuing multiple `--add` calls will stack additional components on the progress bar.
+
+To set that progress bar component to a blue text that displays the file cache RAM usage on the progress bar:
+
+```sql
+.progress_bar --add "{align:right}{min_size:20}{color:blue}External Cache Usage: {sql:select format_bytes(memory_usage_bytes) from duckdb_memory() where tag='EXTERNAL_FILE_CACHE'}{color:reset};
+```
+
+<img src="{% link images/progress_bar/duckdb_progressbar_cache_usage.gif %}"
+     alt="DuckDB progress bar with cache usage"
+     width="400"
+     />
+
+To resets all existing progress bar components: 
+
+```sql
+.progress_bar --clear
+```
+
 ## Syntax Highlighters
 
 The DuckDB CLI client has a syntax highlighter for the SQL queries and another for the duckbox-formatted result tables.
 
-## Configuring the Query Syntax Highlighter
+### Configuring the Query Syntax Highlighter
 
 By default the shell includes support for syntax highlighting.
 The CLI's syntax highlighter can be configured using the following commands.
 
 To turn off the highlighter:
 
-```text
+```sql
 .highlight off
 ```
 
 To turn on the highlighter:
 
-```text
+```sql
 .highlight on
 ```
 
 To configure the color used to highlight constants:
 
-```text
+```sql
 .constant [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
 ```
 
-```text
+```sql
 .constantcode ⟨terminal_code⟩
 ```
 
 For example:
 
-```text
+```sql
 .constantcode 033[31m
 ```
 
 To configure the color used to highlight keywords:
 
-```text
+```sql
 .keyword [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
 ```
 
-```text
+```sql
 .keywordcode ⟨terminal_code⟩
 ```
 
 For example:
 
-```text
+```sql
 .keywordcode 033[31m
 ```
 
-## Configuring the Result Syntax Highlighter
+### Configuring the Result Syntax Highlighter
 
 By default, the result highlighting makes a few small modifications:
 
-- Bold column names
-- `NULL` values are greyed out
-- Layout elements are grayed out
+* Bold column names.
+* `NULL` values are greyed out.
+* Layout elements are grayed out.
 
 The highlighting of each of the components can be customized using the `.highlight_colors` command.
 For example:
@@ -259,13 +317,13 @@ DuckDB's CLI allows using shorthands for dot commands.
 Once a sequence of characters can unambiguously completed to a dot command or an argument, the CLI (silently) autocompletes them.
 For example:
 
-```text
+```sql
 .mo ma
 ```
 
 Is equivalent to:
 
-```text
+```sql
 .mode markdown
 ```
 
@@ -288,7 +346,7 @@ SELECT 1 AS col_1, 2 AS col_2 UNION ALL SELECT 10 AS col1, 20 AS col_2;
 
 Now that the CSV has been written, a table can be created with the desired schema and the CSV can be imported. The output is reset to the terminal to avoid continuing to edit the output file specified above. The `--skip N` option is used to ignore the first row of data since it is a header row and the table has already been created with the correct column names.
 
-```text
+```sql
 .mode csv
 .output
 CREATE TABLE test_table (col_1 INTEGER, col_2 INTEGER);
@@ -297,6 +355,6 @@ CREATE TABLE test_table (col_1 INTEGER, col_2 INTEGER);
 
 Note that the `.import` command utilizes the current `.mode` and `.separator` settings when identifying the structure of the data to import. The `--csv` option can be used to override that behavior.
 
-```text
+```sql
 .import import_example.csv test_table --skip 1 --csv
 ```

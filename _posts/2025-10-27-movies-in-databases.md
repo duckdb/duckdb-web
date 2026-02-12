@@ -64,7 +64,7 @@ dim_x = vid.get_meta_data()['size'][0]
 dim_y = vid.get_meta_data()['size'][1]
 rows_per_frame = dim_y * dim_x
 
-# setup a duckdb database and table
+# setup a DuckDB database and table
 con = duckdb.connect()
 con.execute("ATTACH 'charade.duckdb' AS m (STORAGE_VERSION 'latest'); USE m;")
 con.execute("CREATE TABLE movie (i BIGINT, y USMALLINT, x USMALLINT, r UTINYINT, g UTINYINT, b UTINYINT)")
@@ -160,14 +160,14 @@ SUMMARIZE movie;
 This one is admittedly a bit of a flex. DuckDB can compute elaborate summary statistics on all the 47 billion rows in ca. 20 minutes on a MacBook. Here are the results:
 
 
-| column_name | column_type | min |  max   | approx_unique |        avg         |        std         |  q25  |  q50  |  q75   |    count    | null_percentage |
-|------------:|-------------|----:|-------:|--------------:|-------------------:|-------------------:|------:|------:|-------:|------------:|----------------:|
-| i           | BIGINT      | 0   | 169562 | 150076        | 84781.0            | 48948.621846957954 | 42429 | 84751 | 127137 | 47857461120 | 0.00            |
-| y           | USMALLINT   | 0   | 391    | 430           | 195.5              | 113.16028455346597 | 98    | 196   | 294    | 47857461120 | 0.00            |
-| x           | USMALLINT   | 0   | 719    | 840           | 359.5              | 207.84589644146592 | 180   | 359   | 540    | 47857461120 | 0.00            |
-| r           | UTINYINT    | 0   | 255    | 252           | 65.32575855816732  | 44.85627602555231  | 27    | 54    | 96     | 47857461120 | 0.00            |
-| g           | UTINYINT    | 0   | 249    | 249           | 56.79713844669577  | 37.03562456032193  | 28    | 44    | 77     | 47857461120 | 0.00            |
-| b           | UTINYINT    | 0   | 255    | 252           | 43.249715985643995 | 38.39218963268899  | 16    | 28    | 61     | 47857461120 | 0.00            |
+| column_name | column_type |  min |    max | approx_unique |                avg |                std |   q25 |   q50 |    q75 |       count | null_percentage |
+| ----------: | ----------- | ---: | -----: | ------------: | -----------------: | -----------------: | ----: | ----: | -----: | ----------: | --------------: |
+|           i | BIGINT      |    0 | 169562 |        150076 |            84781.0 | 48948.621846957954 | 42429 | 84751 | 127137 | 47857461120 |            0.00 |
+|           y | USMALLINT   |    0 |    391 |           430 |              195.5 | 113.16028455346597 |    98 |   196 |    294 | 47857461120 |            0.00 |
+|           x | USMALLINT   |    0 |    719 |           840 |              359.5 | 207.84589644146592 |   180 |   359 |    540 | 47857461120 |            0.00 |
+|           r | UTINYINT    |    0 |    255 |           252 |  65.32575855816732 |  44.85627602555231 |    27 |    54 |     96 | 47857461120 |            0.00 |
+|           g | UTINYINT    |    0 |    249 |           249 |  56.79713844669577 |  37.03562456032193 |    28 |    44 |     77 | 47857461120 |            0.00 |
+|           b | UTINYINT    |    0 |    255 |           252 | 43.249715985643995 |  38.39218963268899 |    16 |    28 |     61 | 47857461120 |            0.00 |
 
 
 Since we're basically storing a lot of colors, just how many different combinations of red, green and blue are there, DuckDB?
@@ -194,18 +194,18 @@ ORDER BY ct DESC
 LIMIT 10;
 ```
 
-| r   | g   | b   |        ct |
-| --: | --: | --: | --------: |
-| 17  | 20  | 15  | 106521429 |
-| 23  | 25  | 15  |  93004303 |
-| 23  | 25  | 13  |  85552738 |
-| 13  | 22  | 15  |  81734796 |
-| 22  | 24  | 13  |  76560295 |
-| 24  | 26  | 15  |  75376896 |
-| 15  | 19  | 8   |  74285763 |
-| 23  | 24  | 19  |  72904497 |
-| 22  | 24  | 12  |  69269099 |
-| 24  | 26  | 16  |  62230136 |
+|    r |    g |    b |        ct |
+| ---: | ---: | ---: | --------: |
+|   17 |   20 |   15 | 106521429 |
+|   23 |   25 |   15 |  93004303 |
+|   23 |   25 |   13 |  85552738 |
+|   13 |   22 |   15 |  81734796 |
+|   22 |   24 |   13 |  76560295 |
+|   24 |   26 |   15 |  75376896 |
+|   15 |   19 |    8 |  74285763 |
+|   23 |   24 |   19 |  72904497 |
+|   22 |   24 |   12 |  69269099 |
+|   24 |   26 |   16 |  62230136 |
 
 The most common colors here seems to be dark shades of grey. Makes sense! Keep in mind that the MPEG-4 compression is lossy and will probably produce some odd colors as rounding artifacts.
 
@@ -255,7 +255,7 @@ clip.write_videofile('averages.mp4')
 
 There is some wrangling here because we want to retrieve the whole frame dataset in bulk and not run a query for every single one. We then use NumPy to split them into frames and stitch the RGB-channels together into the three-dimensional array that the image libraries like. This does not achieve any business purpose but the results are kind of funny, here is average frame #68, with apologies to the actors:
 
-<img src="{% link images/blog/movies/average_frame_68.png %}" width=800 />
+<img src="{% link images/blog/movies/average_frame_68.png %}" width="800" />
 
 We can also stitch all the averages together to make a somewhat twitchy average movie:
 
@@ -284,4 +284,4 @@ You can see the result in [`movies-table.html`](https://blobs.duckdb.org/data/mo
 
 ## Conclusion
 
-You can probably tell that this post is not entirely serious. Fun was had. But what did we learn? A few things: first, basically anything can be represented as a table, even an obscure 1966 movie. In the grand scheme of things, it is probably not a great idea, there are amazing open-source libraries like `ffmpeg` and apps like `VLC` to deal with movie files, or similarly with their array cousins that contain music or just images. Despite the massive blow-up and billions of rows of data, DuckDB actually handled this pretty well, both its data format and its execution engine. Here at team DuckDB, our [mission](https://www.youtube.com/watch?v=TsWNMwH1NyM) is to raise your overall confidence wrangling data of all shapes and sizes, and we hope this post contributes to that. And to finish up, just pay attention to your copyright notices!
+You can probably tell that this post is not entirely serious. Fun was had. But what did we learn? A few things: first, basically anything can be represented as a table, even an obscure 1963 movie. In the grand scheme of things, it is probably not a great idea, there are amazing open-source libraries like `ffmpeg` and apps like `VLC` to deal with movie files, or similarly with their array cousins that contain music or just images. Despite the massive blow-up and billions of rows of data, DuckDB actually handled this pretty well, both its data format and its execution engine. Here at team DuckDB, our [mission](https://www.youtube.com/watch?v=TsWNMwH1NyM) is to raise your overall confidence wrangling data of all shapes and sizes, and we hope this post contributes to that. And to finish up, just pay attention to your copyright notices!

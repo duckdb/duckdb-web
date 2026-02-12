@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Command Line Data Processing: Using DuckDB as a Unix Tool"
-author: "Gabor Szarnyas"
+author: "Gábor Szárnyas"
 thumb: "/images/blog/thumbs/command-line.svg"
 image: "/images/blog/thumbs/command-line.png"
 excerpt: "DuckDB's CLI client is portable to many platforms and architectures. It handles CSV files conveniently and offers users the same rich SQL syntax everywhere. These characteristics make DuckDB an ideal tool to complement traditional Unix tools for data processing in the command line."
@@ -61,7 +61,7 @@ We use the four input files capturing information on cities and airports in the 
 
 <details markdown='1'>
 <summary markdown='span'>
-    [`pop.csv`](/data/cli/pop.csv), the population of each of the top-10 most populous cities.
+    [`pop.csv`]({% link data/cli/pop.csv %}), the population of each of the top-10 most populous cities.
 </summary>
 ```csv
 city,province,population
@@ -80,7 +80,7 @@ Nijmegen,Gelderland,179073
 
 <details markdown='1'>
 <summary markdown='span'>
-    [`area.csv`](/data/cli/area.csv), the area of each of the top-10 most populous cities.
+    [`area.csv`]({% link data/cli/area.csv %}), the area of each of the top-10 most populous cities.
 </summary>
 ```csv
 city,area
@@ -99,7 +99,7 @@ Nijmegen,57.63
 
 <details markdown='1'>
 <summary markdown='span'>
-    [`cities-airports.csv`](/data/cli/cities-airports.csv), the [IATA codes](https://en.wikipedia.org/wiki/IATA_airport_code) of civilian airports serving given cities.
+    [`cities-airports.csv`]({% link data/cli/cities-airports.csv %}), the [IATA codes](https://en.wikipedia.org/wiki/IATA_airport_code) of civilian airports serving given cities.
 </summary>
 ```csv
 city,IATA
@@ -117,7 +117,7 @@ The Hague,RTM
 
 <details markdown='1'>
 <summary markdown='span'>
-    [`airport-names.csv`](/data/cli/airport-names.csv), the airport names belonging to given IATA codes.
+    [`airport-names.csv`]({% link data/cli/airport-names.csv %}), the airport names belonging to given IATA codes.
 </summary>
 ```csv
 IATA,airport name
@@ -129,7 +129,7 @@ RTM,Rotterdam The Hague Airport
 ```
 </details>
 
-You can download all input files as a [single zip file](/data/cli/duckdb-cli-data.zip).
+You can download all input files as a [single zip file]({% link data/cli/duckdb-cli-data.zip %}).
 
 ### Projecting Columns
 
@@ -332,7 +332,7 @@ COPY (
 
 ### Filtering
 
-Filtering is another very common operation. For this, we'll use [`cities-airports.csv` file](/data/cli/cities-airports.csv).
+Filtering is another very common operation. For this, we'll use [`cities-airports.csv` file]({% link data/cli/cities-airports.csv %}).
 For each airport, this file contains its `IATA` code and the main cities that it serves:
 
 ```csv
@@ -580,11 +580,11 @@ The experiments were carried out on a MacBook Pro with a 12-core M2 Pro CPU and 
 To reproduce them, run the [`grep-vs-duckdb-microbenchmark.sh` script](https://duckdb.org/microbenchmarks/grep-vs-duckdb-microbenchmark.sh).
 The following table shows the runtimes of the solutions on both compressed and uncompressed inputs:
 
-| Tool | Runtime (compressed) | Runtime (uncompressed) |
-|---|--:|--:|
-| grep 2.6.0-FreeBSD | 20.9 s | 20.5 s |
-| pcregrep 8.45 | 3.1 s | 2.9 s |
-| DuckDB 1.0.0 | 4.2 s | 1.2 s |
+| Tool               | Runtime (compressed) | Runtime (uncompressed) |
+| ------------------ | -------------------: | ---------------------: |
+| grep 2.6.0-FreeBSD |               20.9 s |                 20.5 s |
+| pcregrep 8.45      |                3.1 s |                  2.9 s |
+| DuckDB 1.0.0       |                4.2 s |                  1.2 s |
 
 The results show that on compressed input, `grep` was the slowest, while DuckDB is slightly edged out by `gzcat`+`pcregrep`, which ran in 3.1 seconds compared to DuckDB's 4.2 seconds.
 On uncompressed input, DuckDB can utilize all CPU cores from the get-go (instead of starting with a single-threaded decompression step), allowing it to outperform both `grep` and `pcregrep` by a significant margin: 2.5× faster than `pcregrep` and more than 15× faster than `grep`.

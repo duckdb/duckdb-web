@@ -48,7 +48,7 @@ Dictionary vectors are physically stored as a child vector, and a selection vect
 
 <img src="/images/internals/dictionary.png" alt="Dictionary Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
 
-Dictionary vectors are emitted by the storage when decompressing from dictionary
+Dictionary vectors are emitted by the storage when decompressing from dictionary compression.
 
 Just like constant vectors, dictionary vectors are also emitted by the storage.
 When deserializing a dictionary compressed column segment, we store this in a dictionary vector so we can keep the data compressed during query execution.

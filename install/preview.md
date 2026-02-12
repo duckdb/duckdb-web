@@ -6,6 +6,7 @@ body_class: blog_typography nightly_install
 max_page_width: medium
 toc: false
 redirect_from:
+  - /preview
   - /nightly
   - /nightlies
   - /install/nightly
@@ -31,7 +32,13 @@ For the CLI, the preview builds are based on the `main` branch of the [`duckdb/d
 
 ## Python
 
-For Python, the preview builds are based on the `main` branch of the [`duckdb/duckdb-python` repository](https://github.com/duckdb/duckdb-python/).
+For Python, we distribute two nightly builds. To install the nightly build for the 1.4 LTS version of DuckDB, run:
+
+```batch
+pip install "duckdb<1.5.0"
+```
+
+To install the nightly build based on v1.5-dev (the `main` branch of the [`duckdb/duckdb-python` repository](https://github.com/duckdb/duckdb-python/)), run.
 
 ```batch
 pip install duckdb --pre --upgrade
@@ -39,9 +46,26 @@ pip install duckdb --pre --upgrade
 
 ## Java
 
-For Python, the preview builds are based on the `main` branch of the [`duckdb/duckdb-python` repository](https://github.com/duckdb/duckdb-python/).
+The following Maven snippet imports the SNAPSHOT version of the Java package:
 
-There is currently no direct download link for JARs and they are not available in the Sonatype OSS snapshot repository. To download the preview JARs, visit the GitHub Actions section in the [`duckdb-java` repository](https://github.com/duckdb/duckdb-java), list the [successful runs on the `Java JDBC` workflow](https://github.com/duckdb/duckdb-java/actions?query=workflow%3A%22Java+JDBC%22+is%3Asuccess). In the workflow output, you can find the artifacts such as `java-linux-aarch64.zip` and `java-osx-universal.zip`.
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.duckdb</groupId>
+        <artifactId>duckdb_jdbc</artifactId>
+        <!-- replace the hash of the build here -->
+        <version>1.5-627976eb-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+
+<repositories>
+    <repository>
+        <id>central-snapshots</id>
+        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+</repositories>
+```
 
 ## Node.js
 

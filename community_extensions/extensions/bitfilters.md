@@ -17,15 +17,15 @@ extension:
   maintainers:
   - rustyconover
   name: bitfilters
-  version: '2025101201'
+  version: '2025120401'
 repo:
   github: query-farm/bitfilters
-  ref: feb75dd1f5fe7837422a03c6cddde70988b7cad1
+  ref: 1acc412f932a9b88f1504bf76fc0cbdd891b97f3
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 669
-extension_download_count_pretty: 669
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 407
+extension_download_count_pretty: 407
 image: '/images/community_extensions/social_preview/preview_community_extension_bitfilters.png'
 layout: community_extension_doc
 ---
@@ -51,18 +51,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name         | function_type | description | comment | examples |
-|-------------------------------|---------------|-------------|---------|----------|
-| binary_fuse16_filter          | aggregate     | NULL        | NULL    | NULL     |
-| binary_fuse16_filter_contains | scalar        | NULL        | NULL    | NULL     |
-| binary_fuse8_filter           | aggregate     | NULL        | NULL    | NULL     |
-| binary_fuse8_filter_contains  | scalar        | NULL        | NULL    | NULL     |
-| quotient_filter               | aggregate     | NULL        | NULL    | NULL     |
-| quotient_filter_contains      | scalar        | NULL        | NULL    | NULL     |
-| xor16_filter                  | aggregate     | NULL        | NULL    | NULL     |
-| xor16_filter_contains         | scalar        | NULL        | NULL    | NULL     |
-| xor8_filter                   | aggregate     | NULL        | NULL    | NULL     |
-| xor8_filter_contains          | scalar        | NULL        | NULL    | NULL     |
+|         function_name         | function_type |                                                                                                 description                                                                                                 | comment |                           examples                            |
+|-------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------|
+| binary_fuse16_filter          | aggregate     | Creates a Binary Fuse 16-bit filter with ~0.0015% false positive rate.                                                                                                                                      | NULL    | [SELECT binary_fuse16_filter(hash(column)) FROM table]        |
+| binary_fuse16_filter_contains | scalar        | Tests if a BinaryFuse16 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives). | NULL    | [SELECT binary_fuse16_filter_contains(filter, 42) FROM table] |
+| binary_fuse8_filter           | aggregate     | Creates a Binary Fuse 8-bit filter with ~0.4% false positive rate.                                                                                                                                          | NULL    | [SELECT binary_fuse8_filter(hash(column)) FROM table]         |
+| binary_fuse8_filter_contains  | scalar        | Tests if a BinaryFuse8 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).  | NULL    | [SELECT binary_fuse8_filter_contains(filter, 42) FROM table]  |
+| quotient_filter               | aggregate     | Creates a Quotient filter by aggregating values or by merging other Quotient filters. Takes q and r as number of bits.                                                                                      | NULL    | [SELECT quotient_filter(16, 8, column) FROM table]            |
+| quotient_filter_contains      | scalar        | Tests if a Quotient filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).     | NULL    | [SELECT quotient_filter_contains(filter, 42) FROM table]      |
+| xor16_filter                  | aggregate     | Creates a Xor16 filter with ~0.0015% false positive rate.                                                                                                                                                   | NULL    | [SELECT xor16_filter(hash(column)) FROM table]                |
+| xor16_filter_contains         | scalar        | Tests if a Xor16 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).        | NULL    | [SELECT xor16_filter_contains(filter, 42) FROM table]         |
+| xor8_filter                   | aggregate     | Creates a Xor8 filter with ~0.4% false positive rate.                                                                                                                                                       | NULL    | [SELECT xor8_filter(hash(column)) FROM table]                 |
+| xor8_filter_contains          | scalar        | Tests if a Xor8 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).         | NULL    | [SELECT xor8_filter_contains(filter, 42) FROM table]          |
 
 ### Added Settings
 
@@ -73,6 +73,7 @@ LOAD {{ page.extension.name }};
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
@@ -82,6 +83,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

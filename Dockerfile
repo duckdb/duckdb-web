@@ -14,7 +14,6 @@ RUN mkdir /app && chown $UNAME:$GNAME /app
 USER $UNAME
 
 COPY --chown=$UNAME:$GNAME Gemfile /app
-COPY --chown=$UNAME:$GNAME Gemfile.lock /app
 RUN cd /app && bundle config set --local path /home/$UNAME/.gem && bundle install
 
 EXPOSE 4000

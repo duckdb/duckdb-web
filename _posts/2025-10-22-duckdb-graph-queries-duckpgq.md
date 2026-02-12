@@ -57,7 +57,7 @@ If you're thinking this sounds a lot like the relational model, you're exactly r
 
 To write our graph queries, we could use DuckDB and the SQL we are familiar with. But let us make life a little simpler for ourselves and leverage DuckDB's rich extension ecosystem. We will be using [`DuckPGQ`](https://duckdb.org/community_extensions/extensions/duckpgq), a community extension that adds support to DuckDB's parser for a new visual graph syntax. This new syntax is SQL / Property Graph Queries (SQL/PGQ), which is part of the official SQL:2023 standard. SQL/PGQ is partially inspired by the popular graph query language [Cypher](https://en.wikipedia.org/wiki/Cypher_(query_language)).
 
-> The DuckPGQ extension started out as a [research]({% link _science/2023-01-08-duckpgq.md %}) [prototype]({% link _science/2023-08-28-duckpgq-demo.md %}) and is now available as a community extension.
+> The DuckPGQ extension started out as a [research]({% link _library/2023-01-08-duckpgq.md %}) [prototype]({% link _library/2023-08-28-duckpgq-demo.md %}) and is now available as a community extension.
 
 Installing and loading the extension is as simple as it gets:
 

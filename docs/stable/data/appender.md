@@ -5,7 +5,7 @@ redirect_from:
 title: Appender
 ---
 
-The Appender can be used to load bulk data into a DuckDB database. It is currently available in the [C, C++, Go, Java, and Rust APIs](#appender-support-in-other-clients). The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
+The Appender can be used to load bulk data into a DuckDB database. It is currently available in the [C, C++, Go, Java and Rust APIs](#appender-support-in-other-clients). The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
 
 In the [C++ API]({% link docs/stable/clients/cpp.md %}), the Appender works as follows:
 
@@ -63,7 +63,7 @@ appender.AppendRow(
 
 ## Commit Frequency
 
-By default, the appender performs a commits every 204,800 rows.
+By default, the appender performs commits every 204,800 rows.
 You can change this by explicitly using [transactions]({% link docs/stable/sql/statements/transactions.md %}) and surrounding your batches of `AppendRow` calls by `BEGIN TRANSACTION` and `COMMIT` statements.
 
 ## Handling Constraint Violations
@@ -86,3 +86,4 @@ The Appender is also available in the following client APIs:
 * [Java (JDBC)]({% link docs/stable/clients/java.md %}#appender)
 * [Julia]({% link docs/stable/clients/julia.md %}#appender-api)
 * [Rust]({% link docs/stable/clients/rust.md %}#appender)
+* [Node.js]({% link docs/stable/clients/node_neo/overview.md %}#append-to-table)

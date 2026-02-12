@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: gaggle
   description: A DuckDB extension for working with Kaggle datasets
-  version: 0.1.0-alpha.3
+  version: 0.1.0-alpha.5
   language: Rust & C++
   build: cmake
   license: MIT OR Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/gaggle
-  ref: d231ba606456c9addfe33f660591ea5c0f3d935d
+  ref: aaf8bd403ec71632ff2b297ce6a2e23a62b448b2
 
 docs:
   hello_world: |
@@ -29,7 +29,7 @@ docs:
     SELECT gaggle_version();
   
     -- 2. List files in the dataset
-    SELECT * FROM gaggle_ls('habedi/flickr-8k-dataset-clean') LIMIT 5;
+    SELECT * FROM gaggle_ls('habedi/flickr-8k-dataset-clean', true) LIMIT 5;
     
     -- 3. Read a Parquet file FROM local cache using a prepared statement
     PREPARE rp as SELECT * FROM read_parquet(?) LIMIT 10;
@@ -50,10 +50,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/gaggle).
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 650
-extension_download_count_pretty: 650
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 381
+extension_download_count_pretty: 381
 image: '/images/community_extensions/social_preview/preview_community_extension_gaggle.png'
 layout: community_extension_doc
 ---
@@ -79,22 +79,22 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name        | function_type | description | comment | examples |
-|----------------------------|---------------|-------------|---------|----------|
-| gaggle_cache_info          | scalar        | NULL        | NULL    |          |
-| gaggle_clear_cache         | scalar        | NULL        | NULL    |          |
-| gaggle_download            | scalar        | NULL        | NULL    |          |
-| gaggle_enforce_cache_limit | scalar        | NULL        | NULL    |          |
-| gaggle_file_path           | scalar        | NULL        | NULL    |          |
-| gaggle_info                | scalar        | NULL        | NULL    |          |
-| gaggle_is_current          | scalar        | NULL        | NULL    |          |
-| gaggle_json_each           | scalar        | NULL        | NULL    |          |
-| gaggle_last_error          | scalar        | NULL        | NULL    |          |
-| gaggle_ls                  | table         | NULL        | NULL    |          |
-| gaggle_search              | scalar        | NULL        | NULL    |          |
-| gaggle_set_credentials     | scalar        | NULL        | NULL    |          |
-| gaggle_update_dataset      | scalar        | NULL        | NULL    |          |
-| gaggle_version             | scalar        | NULL        | NULL    |          |
-| gaggle_version_info        | scalar        | NULL        | NULL    |          |
+|       function_name        | function_type |                                         description                                         |                                                     comment                                                     |                                  examples                                   |
+|----------------------------|---------------|---------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| gaggle_set_credentials     | scalar        | Sets Kaggle API credentials from SQL.                                                       | Alternatively use env vars or `~/.kaggle/kaggle.json`. Returns true on success.                                 | [select gaggle_set_credentials('your-username', 'your-api-key');]           |
+| gaggle_download            | scalar        | Downloads a Kaggle dataset to the local cache directory and returns the local dataset path. | This function is idempotent.                                                                                    | [select gaggle_download('habedi/flickr-8k-dataset-clean') as local_path;]   |
+| gaggle_search              | scalar        | Searches Kaggle datasets and returns a JSON array.                                          | Constraints: page >= 1, 1 <= page_size <= 100.                                                                  | [select gaggle_search('flickr', 1, 5);]                                     |
+| gaggle_info                | scalar        | Returns metadata for a dataset as JSON.                                                     | For example, title, url, last_updated.                                                                          | [select gaggle_info('habedi/flickr-8k-dataset-clean') as dataset_metadata;] |
+| gaggle_version             | scalar        | Returns the extension version string.                                                       | For example, "0.1.0".                                                                                           | [select gaggle_version();]                                                  |
+| gaggle_clear_cache         | scalar        | Clears the dataset cache directory.                                                         | Returns true on success.                                                                                        | [select gaggle_clear_cache();]                                              |
+| gaggle_cache_info          | scalar        | Returns cache info JSON.                                                                    | Includes path, size_mb, limit_mb, usage_percent, is_soft_limit, and type fields.                                | [select gaggle_cache_info();]                                               |
+| gaggle_enforce_cache_limit | scalar        | Manually enforces cache size limit using LRU eviction.                                      | Returns true on success. (Automatic with soft limit by default).                                                | [select gaggle_enforce_cache_limit();]                                      |
+| gaggle_is_current          | scalar        | Checks if cached dataset is the latest version from Kaggle.                                 | Returns false if not cached or outdated.                                                                        | [select gaggle_is_current('owner/dataset') as is_current;]                  |
+| gaggle_update_dataset      | scalar        | Forces update to latest version (ignores cache).                                            | Returns local path to freshly downloaded dataset.                                                               | [select gaggle_update_dataset('owner/dataset') as updated_path;]            |
+| gaggle_version_info        | scalar        | Returns version info.                                                                       | Includes: cached_version, latest_version, is_current, is_cached.                                                | [select gaggle_version_info('owner/dataset') as version_info;]              |
+| gaggle_json_each           | scalar        | Expands a JSON object into newline-delimited JSON rows.                                     | Fields: key, value, type, path. Users normally shouldn't need to use this function.                             | [select gaggle_json_each('{"a":1,"b":[true,{"c":"x"}]}') as rows;]          |
+| gaggle_file_path           | scalar        | Resolves a specific file's local path inside a downloaded dataset.                          | Will retrieve (and cache if not downloaded). Set GAGGLE_STRICT_ONDEMAND=1 to prevent fallback to full download. | [select gaggle_file_path('owner/dataset', 'file.parquet');]                 |
+| gaggle_ls                  | table         | Lists files in the dataset's local directory; non-recursive by default.                     | Set recursive=true to walk subdirs. size is in MB. path is relative 'owner/dataset/<path>'.                     | [select * from gaggle_ls('habedi/flickr-8k-dataset-clean') limit 5;]        |
+| gaggle_last_error          | scalar        | NULL                                                                                        | NULL                                                                                                            | NULL                                                                        |
 
 

@@ -48,10 +48,10 @@ once and the result is stored in a temporary table. However, under certain condi
 DuckDB can _inline_ the CTE into the main query, which means that the CTE is not
 materialized and its definition is duplicated in each place it is referenced.
 Inlining is done using the following heuristics:
-- The CTE is not referenced more than once.
-- The CTE does not contain a `VOLATILE` function.
-- The CTE is using `AS NOT MATERIALIZED` and does not use `AS MATERIALIZED`.
-- The CTE does not perform a grouped aggregation.
+* The CTE is not referenced more than once.
+* The CTE does not contain a `VOLATILE` function.
+* The CTE is using `AS NOT MATERIALIZED` and does not use `AS MATERIALIZED`.
+* The CTE does not perform a grouped aggregation.
 
 Materialization can be explicitly activated by defining the CTE using `AS MATERIALIZED` and disabled by using `AS NOT MATERIALIZED`. Note that inlining is not always possible, even if the heuristics are met. For example, if the CTE contains a `read_csv` function, it cannot be inlined.
 
@@ -339,6 +339,33 @@ ORDER BY length(path), path;
 | 1         | 8       | [1, 5, 8] |
 
 ## Recursive CTEs with `USING KEY`
+
+> Deprecated DuckDB 1.5.0 deprecated the use of recursive `UNION`s for
+> `USING KEY` CTEs in favor of recursive `UNION ALL`s.
+> 
+> The recursive `UNION`s imply that not all rows that are produced in one
+> iteration are passed to the next, as would be the case for regular recursive
+> CTEs. Since the opposite is true, i.e., all rows are passed from one iteration
+> to the next, going forward DuckDB's `USING KEY` CTEs will require recursive
+> `UNION ALL`s instead.
+>
+> DuckDB 1.5.0 also introduces a new setting to configure the `USING KEY` syntax.
+>
+> ```sql
+> SET deprecated_using_key_syntax = 'DEFAULT';
+> SET deprecated_using_key_syntax = 'UNION_AS_UNION_ALL';
+> ```
+>
+> Currently, `DEFAULT` enables both syntax styles, i.e., allows both recursive
+> `UNION`s and recursive `UNION ALL`s in `USING KEY` CTEs.
+>
+> DuckDB 1.5.0 will be the last release supporting the `UNION` syntax without
+> explicitly enabling it.
+>
+> DuckDB 1.6.0 disables the `UNION` syntax by default.
+>
+> DuckDB 1.7.0 removes the `deprecated_using_key_syntax` flag and fully
+> deprecates the `UNION` syntax.
 
 `USING KEY` alters the behavior of a regular recursive CTE.
 

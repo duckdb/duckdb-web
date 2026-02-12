@@ -9,7 +9,7 @@ toc: true
   <div class="pagetitle-heading" role="heading" aria-level="1">Why DuckDB</div>
 </div>
 
-There are many database management systems (DBMS) out there. But there is [no one-size-fits all database system](https://blobs.duckdb.org/papers/stonebraker-centintemel-one-size-fits-all-icde-2015.pdf). All take different trade-offs to better adjust to specific use cases. DuckDB is no different. Here, we try to explain what goals DuckDB has and why and how we try to achieve those goals through technical means. To start with, DuckDB is a [relational (table-oriented) DBMS](https://en.wikipedia.org/wiki/Relational_database) that supports the [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL).
+There are many database management systems (DBMS) out there. But there is [no one-size-fits-all database system](https://blobs.duckdb.org/papers/stonebraker-centintemel-one-size-fits-all-icde-2015.pdf). All take different trade-offs to better adjust to specific use cases. DuckDB is no different. Here, we try to explain what goals DuckDB has and why and how we try to achieve those goals through technical means. To start with, DuckDB is a [relational (table-oriented) DBMS](https://en.wikipedia.org/wiki/Relational_database) that supports the [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL).
 
 ## Key Characteristics of DuckDB
 
@@ -17,7 +17,7 @@ There are many database management systems (DBMS) out there. But there is [no on
 
 SQLite is the [world's most widely deployed DBMS](https://www.sqlite.org/mostdeployed.html). Simplicity in installation, and embedded in-process operation are central to its success. DuckDB adopts these ideas of simplicity and embedded operation.
 
-DuckDB has **no external dependencies**, neither for compilation nor during run-time. For releases, the entire source tree of DuckDB is compiled into two files, a header and an implementation file, a so-called "amalgamation". This greatly simplifies deployment and integration in other build processes. For building, all that is required to build DuckDB is a working C++11 compiler.
+DuckDB has **no external dependencies**, neither for compilation nor during run-time. For releases, the entire source tree of DuckDB is compiled into two files, a header and an implementation file, a so-called "amalgamation". This greatly simplifies deployment and integration in other build processes. To build DuckDB, all that is required is a working C++11 compiler.
 
 For DuckDB, there is no DBMS server software to install, update and maintain. DuckDB does not run as a separate process, but completely **embedded within a host process**. For the analytical use cases that DuckDB targets, this has the additional advantage of **high-speed data transfer** to and from the database. In some cases, DuckDB can process foreign data without copying. For example, the DuckDB Python package can run queries directly on Pandas data without ever importing or copying any data.
 
@@ -77,21 +77,20 @@ DuckDB uses some components from various open-source projects and draws inspirat
 * **Concurrency control:** Our MVCC implementation is inspired by the paper [Fast Serializable Multi-Version Concurrency Control for Main-Memory Database Systems](https://db.in.tum.de/~muehlbau/papers/mvcc.pdf) by Thomas Neumann, Tobias Mühlbauer and Alfons Kemper.
 * **Secondary indexes:** DuckDB has support for secondary indexes based on the paper [The Adaptive Radix Tree: ARTful Indexing for Main-Memory Databases](https://db.in.tum.de/~leis/papers/ART.pdf) by Viktor Leis, Alfons Kemper and Thomas Neumann.
 * **SQL window functions:** DuckDB's window functions implementation uses Segment Tree Aggregation as described in the paper [Efficient Processing of Window Functions in Analytical SQL Queries](https://www.vldb.org/pvldb/vol8/p1058-leis.pdf) by Viktor Leis, Kan Kundhikanjana, Alfons Kemper and Thomas Neumann.
-* **SQL inequality joins:** DuckDB's inequality join implementation uses the IEJoin algorithm as described in the paper [Lightning Fast and Space Efficient Inequality Joins](https://vldb.org/pvldb/vol8/p2074-khayyat.pdf)
-Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorge-Arnulfo Quiané-Ruiz, Nan Tang and Panos Kalnis.
-* **Compression of floating-point values:** DuckDB supports the multiple algorithms for compressing floating-point values:
-    * [Chimp]({% link _science/2024-03-25-fp-compression.md %}) by Panagiotis Liakos, Katia Papakonstantinopoulou and Yannis Kotidi
+* **SQL inequality joins:** DuckDB's inequality join implementation uses the IEJoin algorithm as described in the paper [Lightning Fast and Space Efficient Inequality Joins](https://vldb.org/pvldb/vol8/p2074-khayyat.pdf) by Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorge-Arnulfo Quiané-Ruiz, Nan Tang and Panos Kalnis.
+* **Compression of floating-point values:** DuckDB supports multiple algorithms for compressing floating-point values:
+    * [Chimp]({% link _library/2024-03-25-fp-compression.md %}) by Panagiotis Liakos, Katia Papakonstantinopoulou and Yannis Kotidis
     * [Patas](https://github.com/duckdb/duckdb/pull/5044), an in-house development
-    * [ALP (adaptive lossless floating-point compression)]({% link _science/2024-06-09-alp.md %}) by Azim Afroozeh, Leonard Kuffo and Peter Boncz, who also [contributed their implementation](https://github.com/duckdb/duckdb/pull/9635)
+    * [ALP (adaptive lossless floating-point compression)]({% link _library/2024-06-09-alp.md %}) by Azim Afroozeh, Leonard Kuffo and Peter Boncz, who also [contributed their implementation](https://github.com/duckdb/duckdb/pull/9635)
 * **SQL Parser:** We use the PostgreSQL parser that was [repackaged as a stand-alone library](https://github.com/lfittl/libpg_query). The translation to our own parse tree is inspired by [Peloton](https://db.cs.cmu.edu/peloton/).
 * **Shell:** We use the [SQLite shell](https://sqlite.org/cli.html) to work with DuckDB.
 * **Regular expressions:** DuckDB uses Google's [RE2](https://github.com/google/re2) regular expression engine.
 * **String formatting:** DuckDB uses the [fmt](https://github.com/fmtlib/fmt) string formatting library.
-* **UTF wrangling:** DuckDB uses the [utf8proc](https://juliastrings.github.io/utf8proc/) library to check and normalize UTF8.
+* **UTF-8 handling:** DuckDB uses the [utf8proc](https://juliastrings.github.io/utf8proc/) library to check and normalize UTF8.
 * **Collation and time:** DuckDB uses the [ICU](https://unicode-org.github.io/icu/) library for collation, time zone, and calendar support.
 * **Test framework:** DuckDB uses the [Catch2](https://github.com/catchorg/Catch2) unit test framework.
 * **Test cases:** We use the [SQL Logic Tests from SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki) to test DuckDB.
 * **Result validation:** [Manuel Rigger](https://www.manuelrigger.at) used his excellent [SQLancer](https://github.com/sqlancer/sqlancer) tool to verify DuckDB result correctness.
 * **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) via the [`sqlsmith` extension]({% link docs/stable/core_extensions/sqlsmith.md %}) to generate random queries for additional testing.
 * **JSON parser:** We use [yyjson](https://github.com/ibireme/yyjson), a high performance JSON library written in ANSI C, to parse JSON in DuckDB's [JSON Extension]({% link docs/stable/data/json/overview.md %}).
-* **`USING KEY` in recursive CTEs:** An innovative idea from the University of Tübingen, which allows treating intermediate results in recursive common table extensions as keyed dictionaries, leading to significant improvements in performance and memory usage. See the paper [“How DuckDB is `USING KEY` to Unlock Recursive Query Performance”]({% link _science/2025-06-22-bamberg-using-key-sigmod.md %}).
+* **`USING KEY` in recursive CTEs:** An innovative idea from the University of Tübingen, which allows treating intermediate results in recursive common table expressions as keyed dictionaries, leading to significant improvements in performance and memory usage. See the paper [“How DuckDB is `USING KEY` to Unlock Recursive Query Performance”]({% link _library/2025-06-22-bamberg-using-key-sigmod.md %}).

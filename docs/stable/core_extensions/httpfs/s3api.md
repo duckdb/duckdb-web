@@ -2,9 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/extensions/httpfs/s3api
-- /docs/extensions/httpfs/s3api/
 - /docs/stable/extensions/httpfs/s3api
-- /docs/stable/extensions/httpfs/s3api/
 title: S3 API Support
 ---
 
@@ -12,7 +10,7 @@ The `httpfs` extension supports reading/writing/[globbing](#globbing) files on o
 
 ## Platforms
 
-The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API (such as [Cloudflare R2](https://www.cloudflare.com/en-gb/developer-platform/r2/)) should also work, but not all features may be supported.
+The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability) and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API (such as [Cloudflare R2](https://www.cloudflare.com/en-gb/developer-platform/r2/)) should also work, but not all features may be supported.
 
 The following table shows which parts of the S3 API are required for each `httpfs` feature.
 
@@ -215,7 +213,7 @@ FROM read_parquet([
 
 ### Globbing
 
-File [globbing]({% link docs/stable/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectsV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
+File [globbing]({% link docs/stable/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectsV2 API call and allows using filesystem-like glob patterns to match multiple files, for example:
 
 ```sql
 SELECT *

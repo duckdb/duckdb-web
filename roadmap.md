@@ -4,9 +4,7 @@ title: Development Roadmap
 body_class: roadmap blog_typography post
 redirect_from:
 - /docs/stable/dev/roadmap
-- /docs/stable/dev/roadmap/
 - /docs/preview/dev/roadmap
-- /docs/preview/dev/roadmap/
 max_page_width: small
 toc: false
 ---
@@ -15,7 +13,7 @@ toc: false
   <h1>Development Roadmap</h1>
 </div>
 
-_(Last updated: October 2025)_
+_(Last updated: January 2026)_
 
 The DuckDB project is governed by the [non-profit DuckDB Foundation]({% link foundation/index.html %}).
 The Foundation and [DuckDB Labs](https://duckdblabs.com) are not funded by external investors (e.g., venture capital).
@@ -32,16 +30,19 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * Migration and documentation to [C client API]({% link docs/stable/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
 * Rust support for extensions
 * Improvements to lakehouse formats
-    * Improved support for the Iceberg format through the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). This was partially implemented in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}), which can write to Iceberg tables.
+    * Continuous improvement for the Iceberg format through the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). Several Iceberg improvements, including write support, were released in [DuckDB v1.4 releases]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}).
     * Improved support for Delta Lake through the [`delta` extension]({% link docs/stable/core_extensions/delta.md %}).
     * In May 2025, we released [DuckLake](https://ducklake.select/), a new lakehouse format. We would like to emphasize that we are still committed to developing both the `iceberg` and `delta` extensions. We also strive to [provide interoperability]({% post_url 2025-09-17-ducklake-03 %}#interoperability-with-iceberg) between DuckLake and other lakehouse formats.
 * [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
 * [`GEOMETRY` type](https://github.com/duckdb/duckdb/pull/19136)
-* Distribution of Windows ARM64 extensions
 * [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
 * [Parallel Python UDFs](https://github.com/duckdb/duckdb/issues/14817)
 
 Please note that there are **no guarantees** that a particular feature will be released within the next year. Everything on this page is subject to change without notice.
+
+## Planned Deprecations
+
+* We are [gradually phasing out]({% link docs/stable/sql/functions/lambda.md %}) the lambda syntax (`x -> x + 1`) in favor of the Pythonic `lambda x : x + 1`.
 
 ## Future Work / Looking for Funding
 
