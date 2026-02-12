@@ -58,10 +58,10 @@ docs:
     FROM g,
         json_each(CAST(chess_moves_json(g.movetext, 40) AS JSON)) m;
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 280
-extension_download_count_pretty: 280
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 243
+extension_download_count_pretty: 243
 image: '/images/community_extensions/social_preview/preview_community_extension_chess.png'
 layout: community_extension_doc
 ---

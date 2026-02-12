@@ -83,8 +83,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 288
-extension_download_count_pretty: 288
+extension_download_count: 265
+extension_download_count_pretty: 265
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksync.png'
 layout: community_extension_doc
 ---
