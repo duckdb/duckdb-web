@@ -417,7 +417,7 @@ DuckDB's use cases can be split into roughly
 <a href="https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf#page=8">three major categories</a>.
 Namely, DuckDB can be used
 for interactive data analysis by a user (“data science”) and
-as pipeline component for automated data processing (“data enginereering”).
+as pipeline component for automated data processing (“data engineering”).
 DuckDB can also be deployed in novel architectures, where one traditionally couldn't run an analytical database management system but DuckDB is available thanks to its portability.
 These architectures include running DuckDB in browsers (using the <a href="{% link docs/stable/clients/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
 Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/stable/core_extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
@@ -464,7 +464,7 @@ Please note that DuckDB Labs, the company that employs the main DuckDB contribut
 
 <div class="answer" markdown="1">
 
-Whiel the DuckDB database is a relatively small, lean codebase, it has a large surface area with dozens of clients and extensions.
+While the DuckDB database is a relatively small, lean codebase, it has a large surface area with dozens of clients and extensions.
 Currently, the official community support applies to the following components:
 
 * [primary clients]({% link docs/stable/clients/overview.md %})
