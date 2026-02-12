@@ -53,8 +53,8 @@ The following Maven snippet imports the SNAPSHOT version of the Java package:
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        <!-- replace abc1234 with the hash of the build here -->
-        <version>1.6-abc1234-SNAPSHOT</version>
+        <!-- replace the hash of the build here -->
+        <version>1.5-627976eb-SNAPSHOT</version>
     </dependency>
 </dependencies>
 
