@@ -81,8 +81,8 @@ docs:
     
     For complete documentation, visit the [extension repository](https://github.com/danjsiegel/ducksync).
 
-extension_star_count: 4
-extension_star_count_pretty: 4
+extension_star_count: 5
+extension_star_count_pretty: 5
 extension_download_count: 265
 extension_download_count_pretty: 265
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksync.png'
