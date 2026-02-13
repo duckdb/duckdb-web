@@ -19,7 +19,6 @@ This version ships a number of performance improvements and bugfixes.
 
 * [`#20233` Function chaining not allowed in QUALIFY #20233](https://github.com/duckdb/duckdb/issues/20233)
 
-
 ### Correctness
 
 * [`#20008` Unexpected Result when Using Utility Function ALIAS #20008](https://github.com/duckdb/duckdb/issues/20008)
