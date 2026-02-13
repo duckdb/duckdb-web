@@ -80,8 +80,8 @@ docs:
     for complete setup instructions.** For comprehensive usage examples, authentication methods, and 
     advanced features, visit the [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
 
-extension_star_count: 38
-extension_star_count_pretty: 38
+extension_star_count: 39
+extension_star_count_pretty: 39
 extension_download_count: 1413
 extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
