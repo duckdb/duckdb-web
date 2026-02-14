@@ -172,18 +172,18 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 winget install DuckDB.cli
 {%- endhighlight -%}
 
+<h4>Installation Script (Beta)</h4>
+
+You can install DuckDB with a script the Run menu or the Command Prompt. Please note that this script is in beta – exercise caution when using it.
+
+{%- highlight powershell -%}
+powershell -NoExit iex (iwr "https://install.duckdb.org/install.ps1").Content
+{%- endhighlight -%}
+
 <h4>Docker Image (for WSL2)</h4>
 
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
-{%- endhighlight -%}
-
-<h4>Installation Script (Alpha)</h4>
-
-You can now install DuckDB with a script the Run menu or the Command Prompt. Please note that this script is a beta implementation – exercise caution when using it.
-
-{%- highlight powershell -%}
-powershell -NoExit iex (iwr "https://install.duckdb.org/install.ps1").Content
 {%- endhighlight -%}
 
 </div>
