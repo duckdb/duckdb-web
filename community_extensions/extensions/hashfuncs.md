@@ -18,12 +18,12 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/hashfuncs
-  ref: a5898a4aae082444894238cdeaafb12f54e09401
+  ref: c3555b56bdcf69520f637ebf7a1c092fd87fcaca
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 1864
-extension_download_count_pretty: 1.9k
+extension_download_count: 3174
+extension_download_count_pretty: 3.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---
