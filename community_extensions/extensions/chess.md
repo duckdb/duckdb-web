@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: chess
   description: A DuckDB extension for parsing and analyzing chess games in PGN format.
-  version: 0.3.1
+  version: 0.4.0
   language: Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dotneB/duckdb-chess
-  ref: v0.3.1
+  ref: v0.4.0
 
 docs:
   hello_world: |
@@ -87,16 +87,19 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name     | function_type | description | comment | examples |
-|-----------------------|---------------|-------------|---------|----------|
-| chess_fen_epd         | scalar        | NULL        | NULL    |          |
-| chess_moves_hash      | scalar        | NULL        | NULL    |          |
-| chess_moves_json      | macro         | NULL        | NULL    |          |
-| chess_moves_json_impl | scalar        | NULL        | NULL    |          |
-| chess_moves_normalize | scalar        | NULL        | NULL    |          |
-| chess_moves_subset    | scalar        | NULL        | NULL    |          |
-| chess_ply_count       | macro         | NULL        | NULL    |          |
-| chess_ply_count_impl  | scalar        | NULL        | NULL    |          |
-| read_pgn              | table         | NULL        | NULL    |          |
+|        function_name        | function_type | description | comment | examples |
+|-----------------------------|---------------|-------------|---------|----------|
+| chess_fen_epd               | scalar        | NULL        | NULL    |          |
+| chess_moves_hash            | scalar        | NULL        | NULL    |          |
+| chess_moves_json            | macro         | NULL        | NULL    |          |
+| chess_moves_json_impl       | scalar        | NULL        | NULL    |          |
+| chess_moves_normalize       | scalar        | NULL        | NULL    |          |
+| chess_moves_subset          | scalar        | NULL        | NULL    |          |
+| chess_ply_count             | macro         | NULL        | NULL    |          |
+| chess_ply_count_impl        | scalar        | NULL        | NULL    |          |
+| chess_timecontrol_category  | scalar        | NULL        | NULL    |          |
+| chess_timecontrol_json      | scalar        | NULL        | NULL    |          |
+| chess_timecontrol_normalize | scalar        | NULL        | NULL    |          |
+| read_pgn                    | table         | NULL        | NULL    |          |
 
 

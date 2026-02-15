@@ -71,8 +71,8 @@ docs:
 
     See the [documentation](https://github.com/the-miint/duckdb-miint) for complete details.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 2
+extension_star_count_pretty: 2
 extension_download_count: 190
 extension_download_count_pretty: 190
 image: '/images/community_extensions/social_preview/preview_community_extension_miint.png'
