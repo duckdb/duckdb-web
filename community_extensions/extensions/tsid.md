@@ -88,11 +88,12 @@ extension:
 repo:
   github: quackscience/duckdb-extension-tsid
   ref: d72eb53d09523d21f93be28016a85302c4319182
+  ref_next: b7a2b2ec13f384035ea9e811a52800acf50d1932
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 369
-extension_download_count_pretty: 369
+extension_download_count: 362
+extension_download_count_pretty: 362
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---

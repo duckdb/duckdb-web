@@ -21,11 +21,12 @@ extension:
 repo:
   github: query-farm/evalexpr_rhai
   ref: f4493ade6aa592402b1b80a3eec002d94254b5e9
+  ref_next: 82fe86bed79fe65a88ea3c41581eea5be60e08e3
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 382
-extension_download_count_pretty: 382
+extension_download_count: 373
+extension_download_count_pretty: 373
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---

@@ -169,8 +169,8 @@ docs:
 
 extension_star_count: 23
 extension_star_count_pretty: 23
-extension_download_count: 357
-extension_download_count_pretty: 357
+extension_download_count: 350
+extension_download_count_pretty: 350
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
 layout: community_extension_doc
 ---
