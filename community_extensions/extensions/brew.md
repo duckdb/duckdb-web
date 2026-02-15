@@ -121,8 +121,8 @@ extended_description: |
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 248
-extension_download_count_pretty: 248
+extension_download_count: 254
+extension_download_count_pretty: 254
 image: '/images/community_extensions/social_preview/preview_community_extension_brew.png'
 layout: community_extension_doc
 ---

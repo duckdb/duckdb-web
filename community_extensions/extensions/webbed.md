@@ -90,8 +90,8 @@ docs:
 
 extension_star_count: 41
 extension_star_count_pretty: 41
-extension_download_count: 6119
-extension_download_count_pretty: 6.1k
+extension_download_count: 6236
+extension_download_count_pretty: 6.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
