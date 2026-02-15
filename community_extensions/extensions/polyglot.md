@@ -119,8 +119,8 @@ docs:
     SELECT * FROM polyglot_query('SELECT 1 AS a, 2 AS b', 'postgresql');
     ```
 
-extension_star_count: 0
-extension_star_count_pretty: 0
+extension_star_count: 1
+extension_star_count_pretty: 1
 extension_download_count: 8
 extension_download_count_pretty: 8
 image: '/images/community_extensions/social_preview/preview_community_extension_polyglot.png'
