@@ -878,6 +878,9 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	});
 
 	// DUCKCON7 EVENT PAGE
+	// Note: This is a Mapbox public access token (pk.*) which is safe for client-side use
+	// Public tokens are intended for browser applications and do not need to be kept secret
+	// See: https://docs.mapbox.com/help/glossary/access-token/#public-access-tokens
 	const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW4tYXVjaCIsImEiOiJjbDllMHhxNHowbG50M29vZ3Y0NnZhdHY1In0.XQxUUmkkSGKUkNThK1p9Yg';
 	const MAPBOX_STYLES_URL = 'mapbox://styles/jonathan-auch/cmhz38wfd001801sbe3c06ece'
 	const DUCKCON7_COORDINATES = [4.922150, 52.376780];
