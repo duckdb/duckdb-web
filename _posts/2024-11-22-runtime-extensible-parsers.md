@@ -36,7 +36,7 @@ As their name suggests, parsing expression grammar consists of a set of *parsing
 
 One big advantage is that PEG parsers *do not require a compilation step* where the grammar is converted to for example a finite state automaton based on lookup tables. PEG can be executed directly on the input with minimal grammar transformation, making it feasible to re-create a parser at runtime. PEG parsers are gaining popularity, for example, the Python programming language has [recently switched to a PEG parser](https://peps.python.org/pep-0617/).
 
-Another big advantage of PEG parsers is *error handling*: the paper ["Syntax Error Recovery in Parsing Expression Grammars"](https://arxiv.org/abs/1806.11150) describes a practical technique where parser rules are annotated with "recovery" actions, which can (1) show more than a single error and (2) annotate errors with a more meaningful error message.
+Another big advantage of PEG parsers is *error handling*: the paper ["Syntax Error Recovery in Parsing Expression Grammars"](https://arxiv.org/pdf/1806.11150.pdf) describes a practical technique where parser rules are annotated with "recovery" actions, which can (1) show more than a single error and (2) annotate errors with a more meaningful error message.
 
 A possible disadvantage of memoized packrat parsing is the memory required for memoization: the amount required is *proportional to the input size*, not the stack size. Of course, memory limitations have relaxed significantly since the invention of LALR parsers sixty years ago and queries typically are not "Big Data"` themselves.
 
@@ -124,7 +124,7 @@ Note that we re-use other machinery from the grammar like the `Identifier` rule 
 
 ### Extending `SELECT` with `GRAPH_TABLE`
 
-Let's now assume we would want to modify the `SELECT` syntax to add support for [SQL/PGQ graph matching patterns](https://arxiv.org/abs/2112.06217). Below is an example query in SQL/PGQ that finds the university name and year for all students called Bob:
+Let's now assume we would want to modify the `SELECT` syntax to add support for [SQL/PGQ graph matching patterns](https://arxiv.org/pdf/2112.06217.pdf). Below is an example query in SQL/PGQ that finds the university name and year for all students called Bob:
 
 ```sql
 SELECT study.classYear, study.name
