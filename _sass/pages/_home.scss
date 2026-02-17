@@ -240,17 +240,17 @@ body.landing{
 			position: relative;
 			.lines{
 				@include code-standard;
-				line-height: 17px;
 				position: absolute;
 				top: 20px;
 				left: 25px;
 				text-align: right;
 				color: var(--main-text-tertiary-color, #B2B2B2);
 				pointer-events: none;
+				line-height: 19.68px !important;
 			}
 			code{
 				@include code-standard;
-				line-height: 17px;
+				line-height: 17px !important;
 			}
 			a{
 				color: inherit;
