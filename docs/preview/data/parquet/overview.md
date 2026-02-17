@@ -153,19 +153,18 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/preview/data/multiple_files/combining_schemas.md %}), rather than by position. | `BOOL` | `false` |
 | `schema` | Allows you to read a Parquet file as if it has the supplied schema. Field IDs are required. | `MAP` | `NULL` |
 
-## Using the schema parameter
+## Using the `schema` Parameter
 
-The `schema` parameter allows you to read the parquet file using a specific schema. This is useful for renaming, adding, deleting, reordering, or casting columns when reading parquet files.
+The `schema` parameter allows you to read the Parquet file using a specific schema. This is useful for renaming, adding, deleting, reordering, or casting columns when reading Parquet files.
 
-Field IDs are required when creating the parquet using DuckDB.
-
-Example:
+To use the `schema` parameter, field IDs are required. To make them available when creating the Parquet using DuckDB, use:
 
 ```sql
-COPY (SELECT 42::INTEGER i) TO 'integers.parquet' (FIELD_IDS {i: 0});
+COPY (SELECT 42::INTEGER AS i) TO 'integers.parquet' (FIELD_IDS {i: 0});
 ```
 
-Reading parquet files:
+Reading Parquet files:
+
 ```sql
 SELECT *
 FROM read_parquet('integers.parquet', schema = MAP {
@@ -173,7 +172,8 @@ FROM read_parquet('integers.parquet', schema = MAP {
                     1: {name: 'new_column', type: 'UTINYINT', default_value: 43}
                   });
 ```
-```bash
+
+```text
 ┌───────────┬────────────┐
 │ renamed_i │ new_column │
 │   int64   │   uint8    │
@@ -181,7 +181,8 @@ FROM read_parquet('integers.parquet', schema = MAP {
 │        42 │         43 │
 └───────────┴────────────┘
 ```
-_NOTE_: This parameter cannot be combined with `union_by_name=true`.
+
+> The `schema` parameter cannot be combined with `union_by_name = true`.
 
 ## Partial Reading
 
