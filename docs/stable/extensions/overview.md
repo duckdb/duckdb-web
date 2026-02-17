@@ -30,6 +30,8 @@ FROM duckdb_extensions();
 This list will show which extensions are available, which extensions are installed, at which version, where it is installed, and more.
 The list includes most, but not all, available core extensions. For the full list, we maintain a [list of core extensions]({% link docs/stable/core_extensions/overview.md %}).
 
+> Tip We provide and endpoint that serves weekly extension download statistics as JSON files: [core extensions](https://extensions.duckdb.org/downloads-last-week.json) and [community extensions](https://community-extensions.duckdb.org/downloads-last-week.json).
+
 ## Built-In Extensions
 
 DuckDB's binary distribution comes standard with a few built-in extensions. They are statically linked into the binary and can be used as is.
