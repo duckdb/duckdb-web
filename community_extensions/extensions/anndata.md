@@ -90,10 +90,10 @@ docs:
     SELECT * FROM anndata_info('file.h5ad');
     ```
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 349
-extension_download_count_pretty: 349
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 367
+extension_download_count_pretty: 367
 image: '/images/community_extensions/social_preview/preview_community_extension_anndata.png'
 layout: community_extension_doc
 ---

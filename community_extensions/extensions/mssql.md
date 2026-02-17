@@ -56,10 +56,10 @@ docs:
     - Named instances not supported
     - Windows Authentication not supported
 
-extension_star_count: 65
-extension_star_count_pretty: 65
-extension_download_count: 918
-extension_download_count_pretty: 918
+extension_star_count: 69
+extension_star_count_pretty: 69
+extension_download_count: 911
+extension_download_count_pretty: 911
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
@@ -93,6 +93,7 @@ LOAD {{ page.extension.name }};
 | mssql_open            | scalar        | NULL        | NULL    |          |
 | mssql_ping            | scalar        | NULL        | NULL    |          |
 | mssql_pool_stats      | table         | NULL        | NULL    |          |
+| mssql_preload_catalog | scalar        | NULL        | NULL    |          |
 | mssql_refresh_cache   | scalar        | NULL        | NULL    |          |
 | mssql_scan            | table         | NULL        | NULL    |          |
 | mssql_version         | scalar        | NULL        | NULL    |          |
@@ -123,6 +124,7 @@ LOAD {{ page.extension.name }};
 | mssql_insert_max_rows_per_statement | Hard cap on rows per INSERT statement (SQL Server limit: 1000)                                       | BIGINT     | GLOBAL | []      |
 | mssql_insert_max_sql_bytes          | Maximum SQL statement size in bytes                                                                  | BIGINT     | GLOBAL | []      |
 | mssql_insert_use_returning_output   | Use OUTPUT INSERTED for RETURNING clause                                                             | BOOLEAN    | GLOBAL | []      |
+| mssql_metadata_timeout              | Metadata query timeout in seconds (default: 300, 0 = no timeout). Increase for very large catalogs   | BIGINT     | GLOBAL | []      |
 | mssql_min_connections               | Minimum connections to maintain per context                                                          | BIGINT     | GLOBAL | []      |
 | mssql_query_timeout                 | Query execution timeout in seconds (0 = no timeout, default: 30)                                     | BIGINT     | GLOBAL | []      |
 | mssql_statistics_cache_ttl_seconds  | Statistics cache TTL in seconds                                                                      | BIGINT     | GLOBAL | []      |

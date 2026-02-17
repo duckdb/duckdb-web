@@ -83,10 +83,10 @@ docs:
     - Process multiple files with glob patterns
     - Parse multi-line string columns
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 92
-extension_download_count_pretty: 92
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 222
+extension_download_count_pretty: 222
 image: '/images/community_extensions/social_preview/preview_community_extension_read_lines.png'
 layout: community_extension_doc
 ---
