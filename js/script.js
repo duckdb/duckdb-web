@@ -576,10 +576,10 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			$('.window .content.haslines').each(function(){
 				var height = $(this).find('pre').height()
 				var fontSize = $(this).find('pre').css('font-size');
-				var lineHeight = 18;//Math.floor(parseInt(fontSize.replace('px','')) * 1.2);
-				var lines = Math.ceil(height / lineHeight) + 1
+				var lineHeight = 20;
+				var lines = Math.ceil(height / lineHeight)
 				var linenumbers = '';
-				for (i = 1; i < lines; i++) {
+				for (i = 1; i <= lines; i++) {
 					linenumbers += i + '<br>'
 				}
 				$(this).find('.lines').html(linenumbers);
