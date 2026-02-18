@@ -48,8 +48,8 @@ repo:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 259
-extension_download_count_pretty: 259
+extension_download_count: 263
+extension_download_count_pretty: 263
 image: '/images/community_extensions/social_preview/preview_community_extension_monetary.png'
 layout: community_extension_doc
 ---
