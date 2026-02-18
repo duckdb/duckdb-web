@@ -23,8 +23,8 @@ repo:
   ref: d3b90faa3372d4204915343546fa0556601bf243
   ref_next: a88441b2d1cb5a0279e3ae701db0630c1ef64a13
 
-extension_star_count: 17
-extension_star_count_pretty: 17
+extension_star_count: 18
+extension_star_count_pretty: 18
 extension_download_count: 476
 extension_download_count_pretty: 476
 image: '/images/community_extensions/social_preview/preview_community_extension_textplot.png'
