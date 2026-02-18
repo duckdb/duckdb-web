@@ -73,8 +73,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 272
-extension_download_count_pretty: 272
+extension_download_count: 285
+extension_download_count_pretty: 285
 image: '/images/community_extensions/social_preview/preview_community_extension_miint.png'
 layout: community_extension_doc
 ---
