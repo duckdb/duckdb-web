@@ -169,7 +169,7 @@ INSERT INTO tbl
     ON CONFLICT DO NOTHING;
 ```
 
-These statements finish successfully and leaves the table with the row `<i: 1, j: 42>`.
+These statements finish successfully and leave the table with the row `<i: 1, j: 42>`.
 
 #### `INSERT OR IGNORE INTO`
 

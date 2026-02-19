@@ -4,7 +4,7 @@ title: Out of Memory Errors
 ---
 
 DuckDB has a state of the art out-of-core query engine that can spill to disk for larger-than-memory processing.
-We continuously strive to improve DuckDB to improve its scalability and prevent out of memory errors whenever possible.
+We continuously strive to improve DuckDB's scalability and prevent out of memory errors whenever possible.
 That said, you may still experience out-of-memory errors if you run queries with multiple [blocking operators]({% link docs/preview/guides/performance/how_to_tune_workloads.md %}#blocking-operators), certain aggregation functions, `PIVOT` operations, etc., or if you have very little available memory compared to the dataset size.
 
 ## Types of “Out of Memory” Errors

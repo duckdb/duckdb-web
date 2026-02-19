@@ -70,7 +70,7 @@ The only [date parts]({% link docs/preview/sql/functions/datepart.md %}) that ar
 
 <div class="nostroke_table"></div>
 
-| **Description** | Current time (start of current transaction) in the local timezone as `TIMETZ`. |
+| **Description** | Current time (start of current transaction) in the local time zone as `TIMETZ`. |
 | **Example** | `get_current_time()` |
 | **Result** | `06:09:59.988+2` |
 | **Alias** | `current_time` (no parentheses necessary) |

@@ -53,7 +53,7 @@ $duckDB->query('SELECT * FROM test')->print();
 ```
 
 As you probably guessed, `DuckDB::create()` creates a new connection to the specified database,
-or create a new one if it doesn't exist yet and then establishes the connection.
+or creates a new one if it doesn't exist yet and then establishes the connection.
 
 After that, we can use the function `query` to perform the requests.
 
@@ -132,7 +132,7 @@ DuckDB::sql(
 --------------------------------------
 ```
 
-Or summarize a remote csv:
+Or summarize a remote CSV:
 
 ```php
 DuckDB::sql('SUMMARIZE TABLE "https://blobs.duckdb.org/data/Star_Trek-Season_1.csv";')->print();

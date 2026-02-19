@@ -6,7 +6,7 @@ title: WITH Clause
 
 The `WITH` clause allows you to specify common table expressions (CTEs).
 Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query.
-CTEs can reference each-other and can be nested. [Recursive CTEs](#recursive-ctes) can reference themselves.
+CTEs can reference each other and can be nested. [Recursive CTEs](#recursive-ctes) can reference themselves.
 
 ## Basic CTE Examples
 

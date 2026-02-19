@@ -96,7 +96,7 @@ returns
 |-----------|
 | false     |
 
-because 8 is not greater than or equal to the subquery result 7. And thus, because not all comparisons evaluate to `true`, `>= ALL` as a whole evaluates to `false`.
+because 8 is not greater than or equal to the subquery result 9. And thus, because not all comparisons evaluate to `true`, `>= ALL` as a whole evaluates to `false`.
 
 ### `ANY`
 

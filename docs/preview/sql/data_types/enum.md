@@ -219,10 +219,10 @@ WHERE priority_level >= 'medium'::priority;
 
 See [Enum Functions]({% link docs/preview/sql/functions/enum.md %}).
 
-For example, show the available values in the `moods` enum using the `enum_range` function:
+For example, show the available values in the `mood` enum using the `enum_range` function:
 
 ```sql
-SELECT enum_range(NULL::moods) AS my_enum_range;
+SELECT enum_range(NULL::mood) AS my_enum_range;
 ```
 
 |  my_enum_range     |

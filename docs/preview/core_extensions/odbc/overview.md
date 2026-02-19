@@ -4,7 +4,7 @@ layout: docu
 title: ODBC Extension
 ---
 
-ODBC extension allows to connect to other databases (using their [ODBC drivers](https://en.wikipedia.org/wiki/Open_Database_Connectivity)) and run queries with [odbc_query](functions#odbc_query) or copy data from DuckDB with [odbc_copy](functions#odbc_copy) functions.
+The ODBC extension allows connecting to other databases (using their [ODBC drivers](https://en.wikipedia.org/wiki/Open_Database_Connectivity)) and run queries with [odbc_query](functions#odbc_query) or copy data from DuckDB with [odbc_copy](functions#odbc_copy) functions.
 
 ## Installing and loading
 
@@ -135,12 +135,12 @@ On macOS unixODBC can be installed using the [Homebrew package manager](https://
 brew install unixodbc
 ```
 
-To use legacy `x86_64` ODBC drivers under the [Rozetta](https://en.wikipedia.org/wiki/Rosetta_(software)) translator, the unixODBC must
+To use legacy `x86_64` ODBC drivers under the [Rosetta](https://en.wikipedia.org/wiki/Rosetta_(software)) translator, the unixODBC must
 be installed using the `x86_64` version of Homebrew:
 
 ```bash
 arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-/usr/local/bin/brew install unixodb
+/usr/local/bin/brew install unixodbc
 ```
 
 ## Connection string examples
@@ -290,7 +290,7 @@ Or by disabling multi-threaded execution setting `threads` DuckDB option to `1`.
 
 According to ODBC specification, connections to remote DB are expected to have auto-commit mode enabled by default.
 
-As a general rule, transaction commands `BEGIN TRANSACTION`/`COMMIT`/`ROLLBACK` are not supposed to be send over ODBC as SQL commands. Doing so may or may not be supported by the particular driver. Instead ODBC provides the API to manage transactions.
+As a general rule, transaction commands `BEGIN TRANSACTION`/`COMMIT`/`ROLLBACK` are not supposed to be sent over ODBC as SQL commands. Doing so may or may not be supported by the particular driver. Instead ODBC provides the API to manage transactions.
 
 This API is exposed in the following functions:
 
@@ -300,7 +300,7 @@ This API is exposed in the following functions:
 
 When [odbc_begin_transaction](functions#odbc_begin_transaction) is called on the connection, the auto-commit mode on this connection is disabled and an implicit transaction is started. There is currently no support for enabling auto-commit back on such connection.
 
-Afer the transaction is started, [odbc_commit](functions#odbc_commit) or [odbc_rollback](functions#odbc_rollback) to complete this transaction. After the completion is performed, new implicit transaction is started on this connection automatically.
+After the transaction is started, call [odbc_commit](functions#odbc_commit) or [odbc_rollback](functions#odbc_rollback) to complete this transaction. After the completion is performed, new implicit transaction is started on this connection automatically.
 
 ## Performance
 

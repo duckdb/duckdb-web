@@ -77,7 +77,7 @@ There are dedicated extraction functions to get certain subfields:
 | [`second(date)`](#seconddate) | Seconds. |
 | [`timezone_hour(date)`](#timezone_hourdate) | Time zone offset hour portion. |
 | [`timezone_minute(date)`](#timezone_minutedate) | Time zone offset minutes portion. |
-| [`timezone(date)`](#timezonedate) | Time zone offset in minutes. |
+| [`timezone(date)`](#timezonedate) | Time zone offset in seconds. |
 | [`week(date)`](#weekdate) | ISO Week. |
 | [`weekday(date)`](#weekdaydate) | Numeric weekday synonym (Sunday = 0, Saturday = 6). |
 | [`weekofyear(date)`](#weekofyeardate) | ISO Week (synonym). |

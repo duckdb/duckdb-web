@@ -95,7 +95,7 @@ DROP SCHEMA myschema CASCADE;
 
 The following dependencies are tracked and thus will raise an error if the user tries to drop the depending object without the `CASCADE` modifier.
 
-| Depending object type | Dependant object type |
+| Depending object type | Dependent object type |
 |--|--|
 | `SCHEMA` | `FUNCTION` |
 | `SCHEMA` | `INDEX` |

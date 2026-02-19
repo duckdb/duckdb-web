@@ -96,7 +96,7 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Replaces `NULL` values of `expr` with a linear interpolation based on the closest non-`NULL` values and  the sort values. Both values must support arithmetic and there must be only one ordering key. For missing values at the ends, linear extrapolation is used. Failure to interpolate results in the `NULL` value being retained. |
+| **Description** | Replaces `NULL` values of `expr` with a linear interpolation based on the closest non-`NULL` values and the sort values. Both values must support arithmetic and there must be only one ordering key. For missing values at the ends, linear extrapolation is used. Failure to interpolate results in the `NULL` value being retained. |
 | **Return type** | Same type as `expr` |
 | **Example** | `fill(column)` |
 
@@ -328,7 +328,7 @@ Framing specifies a set of rows relative to each row where the function is evalu
 The distance from the current row is given as an expression either `PRECEDING` or `FOLLOWING` the current row in the order specified by the `ORDER BY` clause in the `OVER` specification.
 This distance can either be specified as an integral number of `ROWS` or `GROUPS`,
 or as a `RANGE` delta expression. It is invalid for a frame to start after it ends.
-For a `RANGE` specification, there must  be only one ordering expression and it must support subtraction unless only the sentinel boundary values `UNBOUNDED PRECEDING` / `UNBOUNDED FOLLOWING` / `CURRENT ROW` are used.
+For a `RANGE` specification, there must be only one ordering expression and it must support subtraction unless only the sentinel boundary values `UNBOUNDED PRECEDING` / `UNBOUNDED FOLLOWING` / `CURRENT ROW` are used.
 Using the [`EXCLUDE` clause](#exclude-clause), rows comparing equal to the current row in the specified ordering expression (so-called peers) can be excluded from the frame.
 
 The default frame is unbounded (i.e., the entire partition) when no `ORDER BY` clause is present and `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` when an `ORDER BY` clause is present. By default, the `CURRENT ROW` boundary value (but not the `CURRENT ROW` in the `EXCLUDE` clause) means the current row and all its peers when `RANGE` or `GROUP` framing are used but it means only the current row when `ROWS` framing is used.

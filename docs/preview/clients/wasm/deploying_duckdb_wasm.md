@@ -12,7 +12,7 @@ A DuckDB-Wasm deployment needs to access the following components:
 
 ## Main Library Component
 
-This is distributed as either TypeScript code or CommonJS JavaScript code in the `npm` duckdb-wasm package, and can be either bundled together with a given application, served in a same origin (sub-)domain and included at runtime or served from a third party CDN like JSDelivery.
+This is distributed as either TypeScript code or CommonJS JavaScript code in the `npm` duckdb-wasm package, and can be either bundled together with a given application, served in a same origin (sub-)domain and included at runtime or served from a third party CDN like jsDelivr.
 This does need some form of transpilation and can't be served as-is, given it needs to know the location of the follow up files for this to be functional.
 Details will depend on your given setup, examples can be found at <https://github.com/duckdb/duckdb-wasm/tree/main/examples>.
 An example deployment is <https://shell.duckdb.org>, which transpiles the main library component together with shell code (first approach). Or the `bare-browser` example at <https://github.com/duckdb/duckdb-wasm/tree/main/examples/bare-browser>.
@@ -31,7 +31,7 @@ You could serve all 3, and feature detect, or serve a single variant and instruc
 
 ## Wasm Worker Component
 
-Same as the JS Worker component, 3 different flavors, `mvp`, `eh` and `threads`, each one is needed by the relevant JS component. These WebAssembly modules needs to be served as-is at an arbitrary [sub-] domain that is reachable from the main one.
+Same as the JS Worker component, 3 different flavors, `mvp`, `eh` and `threads`, each one is needed by the relevant JS component. These WebAssembly modules need to be served as-is at an arbitrary [sub-] domain that is reachable from the main one.
 
 ## DuckDB Extensions
 

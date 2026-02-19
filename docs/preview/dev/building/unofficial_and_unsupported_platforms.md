@@ -7,7 +7,7 @@ title: Unofficial and Unsupported Platforms
 > The build instructions are provided on a best-effort basis.
 > Community contributions are very welcome.
 
-DuckDB is built and distributed for several platform with [different levels of support]({% link docs/preview/dev/building/overview.md %}).
+DuckDB is built and distributed for several platforms with [different levels of support]({% link docs/preview/dev/building/overview.md %}).
 DuckDB _can be built_ for other platforms with varying levels of success.
 This page provides an overview of these with the intent to clarify which platforms can be expected to work.
 
@@ -27,7 +27,7 @@ Therefore, its use is not recommended.
 
 ## RISC-V Architectures
 
-The user [“LivingLinux” on Bluesky](https://bsky.app/profile/livinglinux.bsky.social) managed to [build DuckDB](https://bsky.app/profile/livinglinux.bsky.social/post/3lak5q7mmg42j) for a [RISC-V](https://en.wikipedia.org/wiki/RISC-V) profile and [published a video about it](https://www.youtube.com/watch?v=G6uVDH3kvNQ). The instruction to build DuckDB, including the `fts` extension, is the following:
+The user [“LivingLinux” on Bluesky](https://bsky.app/profile/livinglinux.bsky.social) managed to [build DuckDB](https://bsky.app/profile/livinglinux.bsky.social/post/3lak5q7mmg42j) for a [RISC-V](https://en.wikipedia.org/wiki/RISC-V) profile and [published a video about it](https://www.youtube.com/watch?v=G6uVDH3kvNQ). The instructions to build DuckDB, including the `fts` extension, are the following:
 
 ```bash
 GEN=ninja \
@@ -37,7 +37,7 @@ GEN=ninja \
     make
 ```
 
-For those who do not have a RISC-V chip development environment, you can cross-compile DuckDB using latest [g++-riscv64-linux-gnu](https://github.com/riscv-collab/riscv-gnu-toolchain) :
+For those who do not have a RISC-V chip development environment, you can cross-compile DuckDB using the latest [g++-riscv64-linux-gnu](https://github.com/riscv-collab/riscv-gnu-toolchain) :
 
 ```bash
 GEN=ninja \

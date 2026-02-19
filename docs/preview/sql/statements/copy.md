@@ -377,7 +377,7 @@ COPY
     (FIELD_IDS {i: 42, j: 43});
 ```
 
-Sets the `field_id` of column `my_struct` to 43, and column `i` (nested inside `my_struct`) to 43:
+Sets the `field_id` of column `my_struct` to 42, and column `i` (nested inside `my_struct`) to 43:
 
 ```sql
 COPY
