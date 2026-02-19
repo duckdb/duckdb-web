@@ -10,7 +10,7 @@ title: DuckLake
 > DuckLake has been released in May 2025.
 > Read the [announcement blog post]({% post_url 2025-05-27-ducklake %}).
 
-The `ducklake` extension add support for attaching to databases stored in the [DuckLake format](http://ducklake.select/). 
+The `ducklake` extension adds support for attaching to databases stored in the [DuckLake format](http://ducklake.select/). 
 The complete documentation of this extension is available at the [DuckLake website](https://ducklake.select/docs/stable/duckdb/introduction).
 
 ## Installing and Loading

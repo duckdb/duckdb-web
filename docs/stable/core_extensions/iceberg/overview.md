@@ -71,7 +71,7 @@ FROM iceberg_scan('lineitem_iceberg/metadata/v1.metadata.json');
 |-------------:|
 | 60175        |
 
-The `iceberg` works together with the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) or the [`azure` extension]({% link docs/stable/core_extensions/azure.md %}) to access Iceberg tables in object stores such as S3 or Azure Blob Storage.
+The `iceberg` extension works together with the [`httpfs` extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) or the [`azure` extension]({% link docs/stable/core_extensions/azure.md %}) to access Iceberg tables in object stores such as S3 or Azure Blob Storage.
 
 ```sql
 SELECT count(*)

@@ -8,7 +8,7 @@ title: VACUUM Statement
 
 The `VACUUM` statement only has basic support in DuckDB and is mostly provided for PostgreSQL-compatibility.
 
-Some variants of it, such as when calling for a given column, recompute the distinct statistics (the amount if distinct entities) if they have become stale due to updates.
+Some variants of it, such as when calling for a given column, recompute the distinct statistics (the number of distinct entities) if they have become stale due to updates.
 
 > Warning The behavior of `VACUUM` is not consistent with PostgreSQL semantics and it is likely going to change in the future.
 
@@ -52,7 +52,7 @@ Full vacuum option
 ## Reclaiming Space
 
 The `VACUUM` statement does not reclaim space.
-For instruction on reclaiming space, refer to the [“Reclaiming space” page]({% link docs/stable/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
+For instructions on reclaiming space, refer to the [“Reclaiming space” page]({% link docs/stable/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
 
 ## Syntax
 

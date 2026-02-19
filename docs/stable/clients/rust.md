@@ -26,7 +26,7 @@ use duckdb::{params, Connection, Result};
 let conn = Connection::open_in_memory()?;
 ```
 
-The `Connection` will automatically close the underlying db connection for you when it goes out of scope (via `Drop`). You can also explicitly close the `Connection` with `conn.close()`. This is not much difference between these in the typical case, but in case there is an error, you'll have the chance to handle it with the explicit close.
+The `Connection` will automatically close the underlying db connection for you when it goes out of scope (via `Drop`). You can also explicitly close the `Connection` with `conn.close()`. There is not much difference between these in the typical case, but in case there is an error, you'll have the chance to handle it with the explicit close.
 
 ### Querying
 

@@ -97,7 +97,7 @@ This can however hide include bugs, this flag disables using the unity build so 
 
 ### `DISABLE_SANITIZER`
 
-In some situations, running an executable that has been built with sanitizers enabled is not support / can cause problems. Julia is an example of this.
+In some situations, running an executable that has been built with sanitizers enabled is not supported / can cause problems. Julia is an example of this.
 With this flag enabled, the sanitizers are disabled for the build.
 
 ## Overriding Git Hash and Version

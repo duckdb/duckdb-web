@@ -40,7 +40,7 @@ DuckDB aims to build native extensions with minimal dependencies. The `iceberg` 
 
 ## Workarounds for Unsupported Features
 
-If the DuckDB core extension does not cover your use case, you can still use DuckDB to process the data and use an external library to help you with the unsupported operations. If you are using the Python client, there are some very good off-the-self libraries that can help you. This examples will have one thing in common, they use Arrow as an efficient, zero-copy data interface with DuckDB.
+If the DuckDB core extension does not cover your use case, you can still use DuckDB to process the data and use an external library to help you with the unsupported operations. If you are using the Python client, there are some very good off-the-shelf libraries that can help you. These examples will have one thing in common, they use Arrow as an efficient, zero-copy data interface with DuckDB.
 
 ### Using PyIceberg with DuckDB
 

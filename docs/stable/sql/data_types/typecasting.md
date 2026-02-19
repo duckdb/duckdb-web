@@ -45,7 +45,7 @@ Even though a casting operation is supported based on the source and target data
 
 ### Lossy Casts
 
-Casting operations that result in loss of precision are allowed. For example, it is  possible to explicitly cast a numeric type with fractional digits – such as `DECIMAL`, `FLOAT` or `DOUBLE` – to an integral type like `INTEGER` or `BIGINT`. The number will be rounded.
+Casting operations that result in loss of precision are allowed. For example, it is possible to explicitly cast a numeric type with fractional digits – such as `DECIMAL`, `FLOAT` or `DOUBLE` – to an integral type like `INTEGER` or `BIGINT`. The number will be rounded.
 
 ```sql
 SELECT CAST(3.1 AS INTEGER);  -- 3

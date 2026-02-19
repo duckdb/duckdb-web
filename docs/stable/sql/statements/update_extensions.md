@@ -13,7 +13,7 @@ To use the updated extensions, restart the process running DuckDB.
 
 ## Updating All Extensions
 
-To update all extensions installed for DuckDB version of your client:
+To update all extensions installed for the DuckDB version of your client:
 
 ```sql
 UPDATE EXTENSIONS;

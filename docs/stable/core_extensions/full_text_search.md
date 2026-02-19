@@ -164,5 +164,5 @@ ORDER BY score DESC;
 |---------------------|------------------------------------------------------------|------:|
 | doc2                | The cat is a domestic species of small carnivorous mammal. | 0.0   |
 
-> Warning The FTS index will not update automatically when input table changes.
+> Warning The FTS index will not update automatically when the input table changes.
 > A workaround of this limitation can be recreating the index to refresh.
