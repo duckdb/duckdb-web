@@ -142,4 +142,4 @@ To check this, use the following `PRAGMA` and check the number of `free_blocks` 
 PRAGMA database_size;
 ```
 
-For instruction on reclaiming space after dropping a table, refer to the [“Reclaiming space” page]({% link docs/stable/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).
+For instructions on reclaiming space after dropping a table, refer to the [“Reclaiming space” page]({% link docs/stable/operations_manual/footprint_of_duckdb/reclaiming_space.md %}).

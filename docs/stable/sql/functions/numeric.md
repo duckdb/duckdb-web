@@ -162,7 +162,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Computes the inverse hyperbolix sine of `x`. |
+| **Description** | Computes the inverse hyperbolic sine of `x`. |
 | **Example** | `asinh(0.5)` |
 | **Result** | `0.48121182505960347` |
 

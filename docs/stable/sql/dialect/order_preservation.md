@@ -53,7 +53,7 @@ The following clauses guarantee that the original row order is preserved:
 * `UNION ALL`
 * `WHERE`
 * Window functions with an empty `OVER` clause
-* Common table expressions and table subqueries as long as they only contains the aforementioned components
+* Common table expressions and table subqueries as long as they only contain the aforementioned components
 
 > Tip `row_number() OVER ()` allows turning the original row order into an explicit column that can be referenced in the operations that don't preserve row order by default. On materialized tables, the `rowid` pseudo-column can be used to the same effect.
 

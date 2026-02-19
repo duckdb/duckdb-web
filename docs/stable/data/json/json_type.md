@@ -41,7 +41,7 @@ SELECT '{ "a": 5 }'::JSON = '{"a":5}'::JSON;
 false
 ```
 
-Please not that whitespaces are kept in roundtrips:
+Please note that whitespaces are kept in roundtrips:
 
 ```sql
 SELECT '{  "a":5 }'::JSON::VARCHAR

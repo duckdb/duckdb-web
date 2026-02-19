@@ -21,7 +21,7 @@ This option also accepts out-of-tree extensions such as [`delta`]({% link docs/s
 BUILD_EXTENSIONS='autocomplete;httpfs;icu;json;tpch;delta' GEN=ninja make
 ```
 
-In most cases, extension will be directly linked in the resulting DuckDB executable.
+In most cases, extensions will be directly linked in the resulting DuckDB executable.
 
 ## Special Extension Flags
 

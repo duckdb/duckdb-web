@@ -303,7 +303,7 @@ This produces the following result:
 
 Note that only rows where the same `iata` attribute was present in both tables were included in the result.
 
-We can also express query using the vanilla `JOIN` clause with the `USING` keyword:
+We can also express this query using the vanilla `JOIN` clause with the `USING` keyword:
 
 ```sql
 SELECT *
@@ -336,7 +336,7 @@ SEMI JOIN airport_names
 | Amsterdam | AMS  |
 | Rotterdam | RTM  |
 
-This query is equivalent with:
+This query is equivalent to:
 
 ```sql
 SELECT *
@@ -360,7 +360,7 @@ ANTI JOIN airport_names
 | Eindhoven | EIN  |
 | Groningen | GRQ  |
 
-This query is equivalent with:
+This query is equivalent to:
 
 ```sql
 SELECT *

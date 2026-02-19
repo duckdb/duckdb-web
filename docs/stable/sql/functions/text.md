@@ -857,7 +857,7 @@ These functions are used to measure the similarity of two strings using various 
 |:--|:-------|
 | [`damerau_levenshtein(s1, s2)`](#damerau_levenshteins1-s2) | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | [`editdist3(s1, s2)`](#levenshteins1-s2) | Alias for `levenshtein`. |
-| [`hamming(s1, s2)`](#hammings1-s2) | The Hamming distance between to strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
+| [`hamming(s1, s2)`](#hammings1-s2) | The Hamming distance between two strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | [`jaccard(s1, s2)`](#jaccards1-s2) | The Jaccard similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
 | [`jaro_similarity(s1, s2[, score_cutoff])`](#jaro_similaritys1-s2-score_cutoff) | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
 | [`jaro_winkler_similarity(s1, s2[, score_cutoff])`](#jaro_winkler_similaritys1-s2-score_cutoff) | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
@@ -878,7 +878,7 @@ These functions are used to measure the similarity of two strings using various 
 
 <div class="nostroke_table"></div>
 
-| **Description** | The Hamming distance between to strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
+| **Description** | The Hamming distance between two strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | **Example** | `hamming('duck', 'luck')` |
 | **Result** | `1` |
 | **Alias** | `mismatches` |
@@ -1069,7 +1069,7 @@ I'd rather be happy than right.
 |:-|:------|:---|
 | `%c`   | character code to character                                    | `a`            |
 | `%d`   | integer                                                        | `654321`       |
-| `%Xd`  | integer with thousand seperarator `X` from `,`, `.`, `''`, `_` | `654_321`      |
+| `%Xd`  | integer with thousand separator `X` from `,`, `.`, `''`, `_` | `654_321`      |
 | `%E`   | scientific notation                                            | `3.141593E+00` |
 | `%f`   | float                                                          | `4.560000`     |
 | `%hd`  | integer                                                        | `654321`       |

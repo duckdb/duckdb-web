@@ -30,7 +30,7 @@ This will return a single row `<'Bob', 41>`.
 
 ### Auto-Incremented Parameters: `?`
 
-DuckDB support using prepared statements with auto-incremented indexing,
+DuckDB supports using prepared statements with auto-incremented indexing,
 i.e., the position of the parameters in the query corresponds to their position in the execution statement.
 For example:
 
@@ -70,7 +70,7 @@ EXECUTE query_person(40, 'B');
 
 ### Named Parameters: `$parameter`
 
-DuckDB also supports names parameters where parameters are denoted with `$parameter_name`.
+DuckDB also supports named parameters where parameters are denoted with `$parameter_name`.
 For example:
 
 ```sql

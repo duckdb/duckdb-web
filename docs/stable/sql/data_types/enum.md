@@ -15,7 +15,7 @@ The enum type represents a dictionary data structure with all possible unique va
 
 ## Creating Enums
 
-You can create enum using hardcoded values:
+You can create an enum using hardcoded values:
 
 ```sql
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
@@ -81,7 +81,7 @@ INSERT INTO person VALUES
     ('Mr. Mackey', 'ok');
 ```
 
-The following query will fail since the mood type does not have `quackity-quack` value.
+The following query will fail since the mood type does not have a `quackity-quack` value.
 
 ```sql
 INSERT INTO person VALUES ('Hannes', 'quackity-quack');

@@ -101,7 +101,7 @@ connection.CreateScalarFunction<bool, int>("bigger_than_four", &bigger_than_four
 connection.Query("SELECT bigger_than_four(i) FROM (VALUES (3), (5)) tbl(i)")->Print();
 ```
 
-The `CreateScalarFunction()` methods automatically creates vectorized scalar UDFs so they are as efficient as built-in functions, we have two variants of this method interface as follows:
+The `CreateScalarFunction()` methods automatically create vectorized scalar UDFs so they are as efficient as built-in functions, we have two variants of this method interface as follows:
 
 **1.**
 

@@ -17,7 +17,7 @@ All official extensions are distributed for the following platforms.
 | `osx_amd64`        | macOS            | x86_64  (AMD64) | Intel                          |
 | `osx_arm64`        | macOS            | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     |
 | `windows_amd64`    | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               |
-| `windows_arm64`    | Windows          | AArch64 (ARM64) | Copilot+ PC with Qualcommm CPU |
+| `windows_arm64`    | Windows          | AArch64 (ARM64) | Copilot+ PC with Qualcomm CPU |
 
 Some extensions are distributed for the following platforms:
 
@@ -67,7 +67,7 @@ When trying to load an extension that was compiled for a different version or pl
 
 ## Creating a Custom Repository
 
-You can create custom DuckDB extension repository.
+You can create a custom DuckDB extension repository.
 A DuckDB repository is an HTTP, HTTPS, S3, or local file based directory that serves the extensions files in a specific structure.
 This structure is described in the [“Downloading Extensions Directly from S3” section]({% link docs/stable/extensions/advanced_installation_methods.md %}#downloading-extensions-directly-from-s3), and is the same
 for local paths and remote servers, for example:

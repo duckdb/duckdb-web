@@ -114,7 +114,7 @@ TO 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨pa
 
 ## Configuration
 
-Use the following [configuration options]({% link docs/stable/configuration/overview.md %}) how the extension reads remote files:
+Use the following [configuration options]({% link docs/stable/configuration/overview.md %}) to control how the extension reads remote files:
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
@@ -279,7 +279,7 @@ CREATE SECRET secret5 (
 
 > * When using secrets, the `HTTP_PROXY` environment variable will still be honored except if you provide an explicit value for it.
 > * When using secrets, the `SET` variable of the *Authentication with variables* session will be ignored.
-> * The Azure `credential_chain` provider, the actual token is fetched at query time, not when the secret is created.
+> * For the Azure `credential_chain` provider, the actual token is fetched at query time, not when the secret is created.
 
 ### Authentication with Variables (Deprecated)
 

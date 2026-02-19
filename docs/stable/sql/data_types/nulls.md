@@ -47,7 +47,7 @@ true
 
 ## NULL and Functions
 
-A function that has input argument as `NULL` **usually** returns `NULL`.
+A function that has an input argument as `NULL` **usually** returns `NULL`.
 
 ```sql
 SELECT cos(NULL);

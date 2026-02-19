@@ -200,7 +200,7 @@ CALL enable_logging(storage_path = '/tmp/mylogs', storage_buffer_size = 2048);
 
 ### Syntactic Sugar
 
-DuckDB contains some syntactic sugar to make common paths. For example, the following statements are all equal:
+DuckDB contains some syntactic sugar to make common paths easier. For example, the following statements are all equal:
 
 ```sql
 -- regular invocation 

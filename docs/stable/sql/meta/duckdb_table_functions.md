@@ -10,7 +10,7 @@ DuckDB offers a collection of table functions that provide metadata about the cu
 
 The resultset returned by a `duckdb_` table function may be used just like an ordinary table or view. For example, you can use a `duckdb_` function call in the `FROM` clause of a `SELECT` statement, and you may refer to the columns of its returned resultset elsewhere in the statement, for example in the `WHERE` clause.
 
-Table functions are still functions, and you should write parenthesis after the function name to call it to obtain its returned resultset:
+Table functions are still functions, and you should write parentheses after the function name to call it to obtain its returned resultset:
 
 ```sql
 SELECT * FROM duckdb_settings();
@@ -55,7 +55,7 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `column_name` | The SQL name of the column. | `VARCHAR` |
 | `column_index` | The unique position of the column within its table. | `INTEGER` |
 | `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
-| `internal` | `true` if this column built-in, `false` if it is user-defined. | `BOOLEAN` |
+| `internal` | `true` if this column is built-in, `false` if it is user-defined. | `BOOLEAN` |
 | `column_default` | The default value of the column (expressed in SQL)| `VARCHAR` |
 | `is_nullable` | `true` if the column can hold `NULL` values; `false` if the column cannot hold `NULL`-values. | `BOOLEAN` |
 | `data_type` | The name of the column datatype. | `VARCHAR` |
@@ -87,7 +87,7 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 | `constraint_column_names` | An array of table column names appearing in the constraint definition. | `VARCHAR[]` |
 | `constraint_name` | The name of the constraint. | `VARCHAR` |
 | `referenced_table` | The table referenced by the constraint. | `VARCHAR` |
-| `referenced_column_names` | The column names references the by the constraint. | `VARCHAR[]` |
+| `referenced_column_names` | The column names referenced by the constraint. | `VARCHAR[]` |
 
 The [`information_schema.referential_constraints`]({% link docs/stable/sql/meta/information_schema.md %}#referential_constraints-referential-constraints) and [`information_schema.table_constraints`]({% link docs/stable/sql/meta/information_schema.md %}#table_constraints-table-constraints) system views provide a more standardized way to obtain metadata about constraints, but the `duckdb_constraints` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.referential_constraints` and `information_schema.table_constraints` are implemented as a query on top of `duckdb_constraints()`)
 
@@ -381,7 +381,7 @@ The `duckdb_types()` function provides metadata about the data types available i
 | `type_oid` | The internal identifier of the data type object. If `NULL`, then this is an alias of the type (as identified by the value in the `logical_type` column). | `BIGINT` |
 | `type_size` | The number of bytes required to represent a value of this type in memory. | `BIGINT` |
 | `logical_type` | The 'canonical' name of this data type. The same `logical_type` may be referenced by several types having different `type_name`s. | `VARCHAR` |
-| `type_category` | The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expression. For example, the `NUMERIC` type_category includes integers, decimals and floating point numbers. | `VARCHAR` |
+| `type_category` | The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expressions. For example, the `NUMERIC` type_category includes integers, decimals and floating point numbers. | `VARCHAR` |
 | `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/stable/sql/statements/comment_on.md %}). | `VARCHAR` |
 | `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `internal` | Whether this is an internal (built-in) or a user object. | `BOOLEAN` |
