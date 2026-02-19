@@ -19,7 +19,7 @@ title: Lambda Functions
 >
 > DuckDB 1.5.0 will be the last release supporting the single arrow syntax without explicitly enabling it.
 >
-> DuckDB 1.6.0 disables the single arrow syntax on default.
+> DuckDB 1.6.0 disables the single arrow syntax by default.
 >
 > DuckDB 1.7.0 removes the `lambda_syntax` flag and fully deprecates the single arrow syntax,
 > so the old behavior will no longer be possible.

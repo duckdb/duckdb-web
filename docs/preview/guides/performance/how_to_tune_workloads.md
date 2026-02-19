@@ -17,7 +17,7 @@ In these cases, consider setting the [`preserve_insertion_order` configuration o
 SET preserve_insertion_order = false;
 ```
 
-This allows the systems to re-order any results that do not contain `ORDER BY` clauses, potentially reducing memory usage.
+This allows the system to re-order any results that do not contain `ORDER BY` clauses, potentially reducing memory usage.
 
 ## Parallelism (Multi-Core Processing)
 

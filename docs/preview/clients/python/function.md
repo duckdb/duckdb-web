@@ -133,7 +133,7 @@ with duckdb.connect() as con:
 ## Type Annotation
 
 When the function has type annotation it's often possible to leave out all of the optional parameters.
-Using `DuckDBPyType` we can implicitly convert many known types to DuckDBs type system.
+Using `DuckDBPyType` we can implicitly convert many known types to DuckDB's type system.
 For example:
 
 ```python

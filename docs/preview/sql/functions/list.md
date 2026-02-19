@@ -1287,7 +1287,7 @@ SELECT
 ```
 
 In general, the input to the flatten function should be a list of lists (not a single level list).
-However, the behavior of the flatten function has specific behavior when handling empty lists and `NULL` values.
+However, the flatten function has specific behavior when handling empty lists and `NULL` values.
 
 If the input list is empty, return an empty list:
 

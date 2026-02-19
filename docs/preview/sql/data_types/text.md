@@ -46,7 +46,7 @@ Values of the text type are character strings, also known as string values or si
 
 ## Strings with Special Characters
 
-To use special characters in string, use [escape string literals]({% link docs/preview/sql/data_types/literal_types.md %}#escape-string-literals) or [dollar-quoted string literals]({% link docs/preview/sql/data_types/literal_types.md %}#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function]({% link docs/preview/sql/functions/text.md %}):
+To use special characters in a string, use [escape string literals]({% link docs/preview/sql/data_types/literal_types.md %}#escape-string-literals) or [dollar-quoted string literals]({% link docs/preview/sql/data_types/literal_types.md %}#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function]({% link docs/preview/sql/functions/text.md %}):
 
 ```sql
 SELECT 'Hello' || chr(10) || 'world' AS msg;
