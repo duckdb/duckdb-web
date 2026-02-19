@@ -34,7 +34,7 @@ For different build configurations (`debug`, `relassert`, etc.), please consult 
 ### Build Failure: `'string' file not found`
 
 **Problem:**
-The build fails on macOS with following error:
+The build fails on macOS with the following error:
 
 ```console
 FAILED: third_party/libpg_query/CMakeFiles/duckdb_pg_query.dir/src_backend_nodes_list.cpp.o

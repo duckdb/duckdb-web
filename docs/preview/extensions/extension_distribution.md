@@ -31,7 +31,7 @@ For platforms outside the ones listed above, we do not officially distribute ext
 ### Signed Extensions
 
 Extensions can be signed with a cryptographic key.
-By default, DuckDB uses its built-in public keys to verify the integrity of extension before loading them.
+By default, DuckDB uses its built-in public keys to verify the integrity of extensions before loading them.
 All core and community extensions are signed by the DuckDB team.
 
 Signing the extension simplifies their distribution, this is why they can be distributed over HTTP without the need for HTTPS,

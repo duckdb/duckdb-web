@@ -36,7 +36,7 @@ GROUP BY ROLLUP (city, street_name);
 
 ## Description
 
-`GROUPING SETS` perform the same aggregate across different `GROUP BY clauses` in a single query.
+`GROUPING SETS` performs the same aggregate across different `GROUP BY` clauses in a single query.
 
 ```sql
 CREATE TABLE students (course VARCHAR, type VARCHAR);

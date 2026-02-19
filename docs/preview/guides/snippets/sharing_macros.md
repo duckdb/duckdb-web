@@ -7,7 +7,7 @@ DuckDB has a powerful [macro mechanism]({% link docs/preview/sql/statements/crea
 
 ## Sharing a Scalar Macro
 
-First, we defined a macro that pretty-prints a non-negative integer as a short string with thousands, millions, and billions (without rounding) as follows:
+First, we define a macro that pretty-prints a non-negative integer as a short string with thousands, millions, and billions (without rounding) as follows:
 
 ```batch
 duckdb pretty_print_integer_macro.duckdb

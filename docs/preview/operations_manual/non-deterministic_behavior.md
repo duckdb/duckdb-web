@@ -38,7 +38,7 @@ For this query, both `[A, B]` and `[B, A]` are valid results.
 
 ## Floating-Point Aggregate Operations with Multi-Threading
 
-Floating-point inaccuracies may produce different results when run in a multi-threaded configurations:
+Floating-point inaccuracies may produce different results when run in multi-threaded configurations:
 For example, [`stddev` and `corr` may produce non-deterministic results](https://github.com/duckdb/duckdb/issues/13763):
 
 ```sql

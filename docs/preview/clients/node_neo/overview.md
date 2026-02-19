@@ -874,7 +874,7 @@ const appender = await connection.createAppender('target_table');
 const chunk = DuckDBDataChunk.create([INTEGER, VARCHAR]);
 chunk.setColumns([
   [42, 123, 17],
-  ['duck', 'mallad', 'goose'],
+  ['duck', 'mallard', 'goose'],
 ]);
 // OR:
 // chunk.setRows([

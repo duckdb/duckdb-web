@@ -8,7 +8,7 @@ title: ODBC API on Windows
 
 Using the DuckDB ODBC API on Windows requires the following steps:
 
-1. The Microsoft Windows requires an ODBC Driver Manager to manage communication between applications and the ODBC drivers.
+1. Microsoft Windows requires an ODBC Driver Manager to manage communication between applications and the ODBC drivers.
    The Driver Manager on Windows is provided in a DLL file `odbccp32.dll`, and other files and tools.
    For detailed information check out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
 

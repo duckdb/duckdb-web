@@ -26,7 +26,7 @@ LOAD spatial;
 
 The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type probably works very different from what you'd expect.
 
-On the surface, the `GEOMETRY` type is a binary representation of “geometry” data made up out of sets of vertices (pairs of X and Y `double` precision floats). But what makes it somewhat special is that its actually used to store one of several different geometry subtypes. These are `POINT`, `LINESTRING`, `POLYGON`, as well as their “collection” equivalents, `MULTIPOINT`, `MULTILINESTRING` and `MULTIPOLYGON`. Lastly there is `GEOMETRYCOLLECTION`, which can contain any of the other subtypes, as well as other `GEOMETRYCOLLECTION`s recursively.
+On the surface, the `GEOMETRY` type is a binary representation of “geometry” data made up out of sets of vertices (pairs of X and Y `double` precision floats). But what makes it somewhat special is that it's actually used to store one of several different geometry subtypes. These are `POINT`, `LINESTRING`, `POLYGON`, as well as their “collection” equivalents, `MULTIPOINT`, `MULTILINESTRING` and `MULTIPOLYGON`. Lastly there is `GEOMETRYCOLLECTION`, which can contain any of the other subtypes, as well as other `GEOMETRYCOLLECTION`s recursively.
 
 This may seem strange at first, since DuckDB already has types like `LIST`, `STRUCT` and `UNION` which could be used in a similar way, but the design and behavior of the `GEOMETRY` type is actually based on the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) geometry model, which is a standard used by many other databases and GIS software.
 

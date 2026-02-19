@@ -20,7 +20,7 @@ import duckdb
 from threading import Thread, current_thread
 import random
 
-duckdb_con = duckdb.connect('my_peristent_db.duckdb')
+duckdb_con = duckdb.connect('my_persistent_db.duckdb')
 # Use connect without parameters for an in-memory database
 # duckdb_con = duckdb.connect()
 duckdb_con.execute("""

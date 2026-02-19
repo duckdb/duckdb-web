@@ -90,7 +90,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`rpad(string, count, character)`](#rpadstring-count-character) | Pads the `string` with the `character` on the right until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
 | [`rtrim(string[, characters])`](#rtrimstring-characters) | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
 | [`sha1(value)`](#sha1value) | Returns a `VARCHAR` with the SHA-1 hash of the `value`. |
-| [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value` |
+| [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value`. |
 | [`split(string, separator)`](#string_splitstring-separator) | Alias for `string_split`. |
 | [`split_part(string, separator, index)`](#split_partstring-separator-index) | Splits the `string` along the `separator` and returns the data at the (1-based) `index` of the list. If the `index` is outside the bounds of the list, return an empty string (to match PostgreSQL's behavior). |
 | [`starts_with(string, search_string)`](#starts_withstring-search_string) | Returns `true` if `string` begins with `search_string`. |

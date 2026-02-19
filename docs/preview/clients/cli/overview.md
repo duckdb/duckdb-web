@@ -196,7 +196,7 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 Several dot commands can be used to configure the CLI.
 On startup, the CLI reads and executes all commands in the file `~/.duckdbrc`, including dot commands and SQL statements.
 This allows you to store the configuration state of the CLI.
-You may also point to a different initialization file using the `-init`.
+You may also point to a different initialization file using the `-init` flag.
 
 ### Setting a Custom Prompt
 

@@ -166,7 +166,7 @@ Note that headers cannot be detected correctly if all columns are of type `VARCH
 
 ### Dates and Timestamps
 
-DuckDB supports the [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) format by default for timestamps, dates and times. Unfortunately, not all dates and times are formatted using this standard. For that reason, the CSV reader also supports the `dateformat` and `timestampformat` options. Using this format the user can specify a [format string]({% link docs/preview/sql/functions/dateformat.md %}) that specifies how the date or timestamp should be read.
+DuckDB supports the [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) by default for timestamps, dates and times. Unfortunately, not all dates and times are formatted using this standard. For that reason, the CSV reader also supports the `dateformat` and `timestampformat` options. Using this format the user can specify a [format string]({% link docs/preview/sql/functions/dateformat.md %}) that specifies how the date or timestamp should be read.
 
 As part of the auto-detection, the system tries to figure out if dates and times are stored in a different representation. This is not always possible – as there are ambiguities in the representation. For example, the date `01-02-2000` can be parsed as either January 2nd or February 1st. Often these ambiguities can be resolved. For example, if we later encounter the date `21-02-2000` then we know that the format must have been `DD-MM-YYYY`. `MM-DD-YYYY` is no longer possible as there is no 21st month.
 

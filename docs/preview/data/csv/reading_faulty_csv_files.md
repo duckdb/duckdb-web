@@ -152,7 +152,7 @@ The CSV Reject Scans Table returns the following information:
 | `file_path` | The file path | `VARCHAR` |
 | `delimiter` | The delimiter used e.g., ; | `VARCHAR` |
 | `quote` | The quote used e.g., " | `VARCHAR` |
-| `escape` | The quote used e.g., " | `VARCHAR` |
+| `escape` | The escape used e.g., " | `VARCHAR` |
 | `newline_delimiter` | The newline delimiter used e.g., \r\n | `VARCHAR` |
 | `skip_rows` | If any rows were skipped from the top of the file | `UINTEGER` |
 | `has_header` | If the file has a header | `BOOLEAN` |

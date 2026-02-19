@@ -117,7 +117,7 @@ FROM read_csv('/etc/passwd', sep = ':');
 
 #### Disabling File Access
 
-Files access can be disabled in two ways. First, you can disable individual file systems. For example:
+File access can be disabled in two ways. First, you can disable individual file systems. For example:
 
 ```sql
 SET disabled_filesystems = 'LocalFileSystem';
@@ -138,7 +138,7 @@ This setting implies that:
 #### The `allowed_directories` and `allowed_paths` Options
 
 You can restrict DuckDB's access to certain directories or files using the `allowed_directories` and `allowed_paths` options (respectively).
-These options allows fine-grained access control for the file system.
+These options allow fine-grained access control for the file system.
 For example, you can set DuckDB to only use the `/tmp` directory.
 
 ```sql
@@ -178,7 +178,7 @@ This prevents any configuration settings from being modified from that point onw
 
 Queries can access the secrets defined in the Secrets Manager. For example, if there is a secret defined to authenticate with a user, who has write privileges to a given AWS S3 bucket, queries may write to that bucket. This is applicable for both persistent and temporary secrets.
 
-[Persistent secrets]({% link docs/preview/configuration/secrets_manager.md %}#persistent-secrets) are stored in unencrypted binary format on the disk. These have the same permissions as SSH keys, `600`, i.e., only user who is running the DuckDB (parent) process can read and write them.
+[Persistent secrets]({% link docs/preview/configuration/secrets_manager.md %}#persistent-secrets) are stored in unencrypted binary format on the disk. These have the same permissions as SSH keys, `600`, i.e., only the user who is running the DuckDB (parent) process can read and write them.
 
 ## Prepared Statements to Prevent SQL Injection
 

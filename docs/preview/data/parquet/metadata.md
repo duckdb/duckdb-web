@@ -135,7 +135,7 @@ Currently, Bloom filters are supported for the following types:
 * `VARCHAR`
 * `BLOB`
 
-The `parquet_bloom_probe(filename, column_name, value)` function shows which row groups can excluded when filtering for a given value of a given column using the Bloom filter.
+The `parquet_bloom_probe(filename, column_name, value)` function shows which row groups can be excluded when filtering for a given value of a given column using the Bloom filter.
 For example:
 
 ```sql

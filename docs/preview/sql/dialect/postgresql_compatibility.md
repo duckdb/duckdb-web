@@ -102,7 +102,7 @@ SELECT * FROM "MyTaBLe";
 ERROR:  relation "MyTaBLe" does not exist
 ```
 
-PostgreSQL does not only treat quoted identifiers as case-sensitive, PostgreSQL treats all identifiers as case-sensitive, e.g., this also does not work:
+PostgreSQL does not only treat quoted identifiers as case-sensitive; it treats all identifiers as case-sensitive, e.g., this also does not work:
 
 ```sql
 CREATE TABLE "PreservedCase" (x INTEGER);
