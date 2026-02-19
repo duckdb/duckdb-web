@@ -81,7 +81,7 @@ You can also set the scope for an HTTP proxy using the `SCOPE` keyword.
 ```sql
 CREATE SECRET http_proxy (
     TYPE HTTP, 
-    SCOPE ['https://duckdb.org', 'https://some-other-website.org'], 
+    SCOPE ['⟨https://duckdb.org⟩', '⟨https://some-other-website.org⟩'], 
     HTTP_PROXY '⟨http_proxy_url⟩',
     HTTP_PROXY_USERNAME '⟨username⟩',
     HTTP_PROXY_PASSWORD '⟨password⟩'
@@ -108,7 +108,7 @@ SET ca_cert_file = '⟨certificate_file⟩';
 SET enable_server_cert_verification = true;
 ```
 
-If you would like to disable SSL verification for all http requests using an HTTP secret you can do so with the following statement
+If you would like to disable SSL verification for all HTTP requests using an HTTP secret you can do so with the following statement:
 
 ```sql
 CREATE SECRET disable_ssl (
@@ -117,12 +117,12 @@ CREATE SECRET disable_ssl (
 );
 ```
 
-To enable it again for one specific endpoint, you can taek advantage of the scope parameter
+To enable it again for one specific endpoint, you can take advantage of the scope parameter:
 
 ```sql
-CREATE SECRET enable_ssl_for_my_website (
+CREATE SECRET enable_ssl_for_your_website (
     TYPE HTTP, 
-    SCOPE 'https://my-website.com', 
+    SCOPE 'https://⟨your-website.com⟩', 
     VERIFY_SSL 1
 ); 
 ```
