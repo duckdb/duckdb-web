@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) that enables SQL-native analysis of structured documents with intelligent schema inference, XPath-based data extraction, and powerful HTML table parsing capabilities.
-  version: 1.3.3
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
   vcpkg_commit: '68a1c387f660632f2f65cdb7e8cd093a08840e5d'
 repo:
   github: teaguesterling/duckdb_webbed
-  ref: 'd9745553de02449d5ea417910194573655424171'
+  ref: '751f2f3d8302c098a8b5594ef7677ce7cfa0b064'
 
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
@@ -45,6 +45,9 @@ docs:
     SELECT html_extract_links('<a href="https://example.com">Click here</a>');
     SELECT html_extract_images('<img src="photo.jpg" alt="Photo" width="800">');
     
+    -- Parse XML strings directly (without files)
+    SELECT * FROM parse_xml('<books><book><title>DuckDB</title><price>29.99</price></book></books>');
+
     -- Convert between XML and JSON formats
     SELECT xml_to_json('<person><name>John</name><age>30</age></person>');
     SELECT json_to_xml('{"name":"John","age":"30"}');
@@ -73,6 +76,8 @@ docs:
     - `xml_validate_schema(xml, xsd)` - XSD schema validation
     - `xml_find_undefined_prefixes(xml, xpath)` - Detect undeclared namespace prefixes
     - `xml_add_namespace_declarations(xml, map)` - Inject namespace declarations
+    - `parse_xml(content)` - Parse XML strings with schema inference
+    - `parse_xml_objects(content)` - Parse XML strings to raw XML type
     
     **Key HTML Functions**:
     - `read_html(pattern)` - Read HTML files into tables
@@ -80,7 +85,8 @@ docs:
     - `html_extract_links(html)` - Extract all links with metadata
     - `html_extract_images(html)` - Extract images with attributes
     - `html_extract_text(html, xpath)` - XPath-based HTML text extraction
-    - `parse_html(content)` - Parse HTML strings into structured format
+    - `parse_html(content)` - Parse HTML strings with schema inference
+    - `parse_html_objects(content)` - Parse HTML strings to raw HTML type
     - `html_to_duck_blocks(html)` - Convert HTML to structured document blocks
     - `duck_blocks_to_html(blocks)` - Convert document blocks back to HTML
 
@@ -90,8 +96,8 @@ docs:
 
 extension_star_count: 41
 extension_star_count_pretty: 41
-extension_download_count: 6107
-extension_download_count_pretty: 6.1k
+extension_download_count: 6029
+extension_download_count_pretty: 6.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
@@ -131,6 +137,10 @@ LOAD {{ page.extension.name }};
 | html_unescape                  | scalar        | NULL        | NULL    |          |
 | json_to_xml                    | scalar        | NULL        | NULL    |          |
 | parse_html                     | scalar        | NULL        | NULL    |          |
+| parse_html                     | table         | NULL        | NULL    |          |
+| parse_html_objects             | table         | NULL        | NULL    |          |
+| parse_xml                      | table         | NULL        | NULL    |          |
+| parse_xml_objects              | table         | NULL        | NULL    |          |
 | read_html                      | table         | NULL        | NULL    |          |
 | read_html_objects              | table         | NULL        | NULL    |          |
 | read_xml                       | table         | NULL        | NULL    |          |
