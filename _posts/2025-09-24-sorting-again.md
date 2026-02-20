@@ -192,7 +192,7 @@ The question is, how can we do this in parallel?
 
 ### _K_-Way Merge Path
 
-Various algorithms to parallelize merge sort exist, such as [Merge Path](https://arxiv.org/pdf/1406.2628), which DuckDB's sort used prior to v1.4.0, and [Bitonic Merge Sort](https://en.wikipedia.org/wiki/Bitonic_sorter).
+Various algorithms to parallelize merge sort exist, such as [Merge Path](https://arxiv.org/pdf/1406.2628.pdf), which DuckDB's sort used prior to v1.4.0, and [Bitonic Merge Sort](https://en.wikipedia.org/wiki/Bitonic_sorter).
 However, these algorithms parallelize a _cascading two-way merge sort_, not a _k_-way merge sort.
 So, while these algorithms are parallel and skew-resistant, they are unattractive for larger-than-memory sorting, as they produce much more I/O.
 

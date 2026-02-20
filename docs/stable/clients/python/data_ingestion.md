@@ -6,7 +6,7 @@ redirect_from:
 title: Data Ingestion
 ---
 
-This page contains examples for data ingestion to Python using DuckDB. First, import the DuckDB page:
+This page contains examples for data ingestion to Python using DuckDB. First, import the DuckDB package:
 
 ```python
 import duckdb

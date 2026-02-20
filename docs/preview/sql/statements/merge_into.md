@@ -101,7 +101,7 @@ ORDER BY id;
 |---:|-------|--------:|
 | 3  | Sarah | 95000.0 |
 
-If needed, DuckDB also supports multiple `UPDATE` and `DELETE` conditions. The `RETURNING` clause can be used to indicate which rows where affected by the `MERGE` statement.
+If needed, DuckDB also supports multiple `UPDATE` and `DELETE` conditions. The `RETURNING` clause can be used to indicate which rows were affected by the `MERGE` statement.
 
 ```sql
 -- Let's get John back in!

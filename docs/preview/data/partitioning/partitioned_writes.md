@@ -92,7 +92,7 @@ COPY orders TO 'orders'
 (FORMAT parquet, PARTITION_BY (year, month), APPEND);
 ```
 
-Using the `APPEND` option result in a behavior similar the `OVERWRITE_OR_IGNORE, FILENAME_PATTERN '{uuid}'` options,
+Using the `APPEND` option results in a behavior similar to the `OVERWRITE_OR_IGNORE, FILENAME_PATTERN '{uuid}'` options,
 but DuckDB performs an extra check for whether the file already exists and then regenerates the UUID in the rare event that it does (to avoid clashes).
 
 ### Handling Slashes in Columns

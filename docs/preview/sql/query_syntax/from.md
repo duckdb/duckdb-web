@@ -121,7 +121,7 @@ WHERE i % 2 = 0;
 
 ### Table Functions
 
-Some functions in duckdb return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references. 
+Some functions in DuckDB return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references. 
 Examples include [`read_csv`]({%link docs/stable/data/csv/overview.md %}#csv-functions), [`read_parquet`]({%link docs/stable/data/parquet/overview.md %}#read_parquet-function), [`range`]({% link docs/preview/sql/functions/list.md %}#rangestart-stop-step), [`generate_series`]({% link docs/preview/sql/functions/list.md %}#generate_seriesstart-stop-step), [`repeat`]({% link docs/preview/sql/functions/utility.md %}#repeat_rowvarargs-num_rows), [`unnest`]({% link docs/preview/sql/query_syntax/unnest.md %}), and [`glob`]({%link docs/stable/sql/functions/utility.md %}#globsearch_path) (note that some of the examples here can be used as both scalar and table functions). 
 
 For example,
@@ -297,7 +297,7 @@ This produces the following result:
 
 Note that only rows where the same `iata` attribute was present in both tables were included in the result.
 
-We can also express query using the vanilla `JOIN` clause with the `USING` keyword:
+We can also express this query using the vanilla `JOIN` clause with the `USING` keyword:
 
 ```sql
 SELECT *
@@ -330,7 +330,7 @@ SEMI JOIN airport_names
 | Amsterdam | AMS  |
 | Rotterdam | RTM  |
 
-This query is equivalent with:
+This query is equivalent to:
 
 ```sql
 SELECT *
@@ -354,7 +354,7 @@ ANTI JOIN airport_names
 | Eindhoven | EIN  |
 | Groningen | GRQ  |
 
-This query is equivalent with:
+This query is equivalent to:
 
 ```sql
 SELECT *

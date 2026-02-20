@@ -14,7 +14,7 @@ A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known a
 
 ### Adaptive Radix Tree (ART)
 
-An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. ART indexes can be created manually using `CREATE INDEX` clause and they are automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint.
+An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. ART indexes can be created manually using the `CREATE INDEX` clause and they are automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint.
 
 > Warning ART indexes must currently be able to fit in memory during index creation. Avoid creating ART indexes if the index does not fit in memory during index creation.
 
@@ -84,7 +84,7 @@ COMMIT;
 ```
 
 In other clients, you might be able to fetch the result of `DELETE ... RETURNING ...`.
-Then, you can use that result in a subsequent `INSERT ...` statements, or potentially make use of DuckDB's `Appender` (if available in the client).
+Then, you can use that result in a subsequent `INSERT ...` statement, or potentially make use of DuckDB's `Appender` (if available in the client).
 
 ### Over-Eager Constraint Checking in Foreign Keys
 

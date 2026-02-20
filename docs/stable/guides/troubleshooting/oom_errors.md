@@ -49,7 +49,7 @@ To this end, please consult the [“How to Tune Workloads” site]({% link docs/
 In short:
 
 * Reduce the number of threads using the `SET threads = ...` command.
-* If your query reads a large mount of data from a file or writes a large amount of data, try setting the `preserve_insertion_order` option to `false`: `SET preserve_insertion_order = false`.
+* If your query reads a large amount of data from a file or writes a large amount of data, try setting the `preserve_insertion_order` option to `false`: `SET preserve_insertion_order = false`.
 * Counter-intuitively, reducing the memory limit below the [default 80%]({% link docs/stable/operations_manual/limits.md %}) can help prevent out of memory errors. This is because some DuckDB operations circumvent the database's buffer manager and thus they can reserve more memory than allowed by the memory limit. If this happens (e.g., DuckDB is killed by the operating system or an OOM reaper process), set the memory limit to just 50-60% of the total system memory by using the `SET memory_limit = '...'` statement.
 * Break up the query into subqueries. This allows you to see where the intermediate results “blow up”, causing the query to run out of memory.
 

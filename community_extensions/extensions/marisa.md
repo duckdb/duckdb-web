@@ -22,11 +22,12 @@ extension:
 repo:
   github: query-farm/marisa
   ref: 6e81aadaa0a41901218fcf02ff39d8ff2594ffa7
+  ref_next: 7fefd40d4bc8976a08143cccc3298af68db1d8f9
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 393
-extension_download_count_pretty: 393
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 377
+extension_download_count_pretty: 377
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
 layout: community_extension_doc
 ---

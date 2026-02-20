@@ -245,7 +245,7 @@ SELECT COLUMNS(['id', 'num']) FROM numbers;
 
 ## Unpacking a `COLUMNS` Expression
 
-By wrapping a `COLUMN` expression in `UNPACK`, the columns expand into a parent expression,  much like the [iterable unpacking behavior in Python](https://peps.python.org/pep-3132/).
+By wrapping a `COLUMNS` expression in `UNPACK`, the columns expand into a parent expression,  much like the [iterable unpacking behavior in Python](https://peps.python.org/pep-3132/).
 
 Without `UNPACK`, operations on the `COLUMNS` expression are applied to each column separately:
 

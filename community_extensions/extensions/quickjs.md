@@ -49,11 +49,12 @@ extension:
 repo:
   github: quackscience/duckdb-quickjs
   ref: 2d31ccebd7f44babc901c84ba0fe8b560647e136
+  ref_next: 3250743f845a2c85957142fa3def70e41ee773c1
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 560
-extension_download_count_pretty: 560
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 495
+extension_download_count_pretty: 495
 image: '/images/community_extensions/social_preview/preview_community_extension_quickjs.png'
 layout: community_extension_doc
 ---

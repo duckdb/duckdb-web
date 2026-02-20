@@ -56,7 +56,7 @@ SUMMARIZE lineitem;
 
 ## Using `SUMMARIZE` in a Subquery
 
-`SUMMARIZE` can be used a subquery. This allows creating a table from the summary, for example:
+`SUMMARIZE` can be used as a subquery. This allows creating a table from the summary, for example:
 
 ```sql
 CREATE TABLE tbl_summary AS SELECT * FROM (SUMMARIZE tbl);

@@ -17,7 +17,7 @@ Candidate extensions: "inet", "encodings", "core_functions", "sqlite_scanner", "
 For more info, visit https://duckdb.org/docs/stable/extensions/troubleshooting?version=v1.4.0&platform=osx_arm64&extension=non_existing
 ```
 
-There are multiple scenarios for which an extensions might not be available in a given extension repository at a given time:
+There are multiple scenarios for which an extension might not be available in a given extension repository at a given time:
 * the extension has not been uploaded yet, here some delay after a given release date might be expected. Consider checking the issues at [`duckdb/duckdb`](https://github.com/duckdb/duckdb) or [`duckdb/community-extensions`](https://github.com/duckdb/community-extensions), or creating one yourself.
 * the extension is available, but in a different repository, try for example `INSTALL ⟨name⟩ FROM core;`{:.language-sql .highlight} or `INSTALL ⟨name⟩ FROM community;`{:.language-sql .highlight} or `INSTALL ⟨name⟩ FROM core_nightly;`{:.language-sql .highlight} (see the [Installing Extensions page]({% link docs/preview/extensions/installing_extensions.md %}#extension-repositories)).
 * networking issues, so extension exists at the endpoint but it's not reachable from your local DuckDB. Here you can try visiting the given URL via a browser directly pasting the link from the error message in the search bar.
@@ -28,7 +28,7 @@ When in doubt, consider raising an issue in [`duckdb/duckdb`](https://github.com
 
 ## Manual Process to Download Extensions via the Browser
 
-To check if an extension is available, consider trying to download the relevant extension resource, for example via your browser visiting <https://extensions.duckdb.org/v1.4.4/osx_arm64/spatial.duckdb_extension.gz> or any other link that has been provided. Note that `http://` has been deprecated in favor to `https://`.
+To check if an extension is available, consider trying to download the relevant extension resource, for example via your browser visiting <https://extensions.duckdb.org/v1.4.4/osx_arm64/spatial.duckdb_extension.gz> or any other link that has been provided. Note that `http://` has been deprecated in favor of `https://`.
 
 If successful, this will download and unpack the extension to the default `Downloads` folder, so that from SQL you can run:
 

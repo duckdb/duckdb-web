@@ -37,6 +37,6 @@ title: Core Extensions
 | [vss]({% link docs/preview/core_extensions/vss.md %})                     | Adds support for vector similarity search queries                       | DuckDB&nbsp;team | Secondary         |                         |
 
 The **Maintainer** column denotes whether the extension is maintained by the DuckDB team or by a third party.
-For the extensions maintained by the DuckDB team, the **Support tier** column denotes whether the extension's support status.
-_Primary extension_ are covered by [community support](https://duckdblabs.com/community_support_policy/).
+For the extensions maintained by the DuckDB team, the **Support tier** column denotes the extension's support status.
+_Primary extensions_ are covered by [community support](https://duckdblabs.com/community_support_policy/).
 _Secondary extensions_ are supported on a best-effort basis. That said, they still receive frequent bugfixes/updates and are shipped with new DuckDB releases.

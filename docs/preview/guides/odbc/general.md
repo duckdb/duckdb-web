@@ -18,7 +18,7 @@ title: 'ODBC 101: A Duck Themed Guide to ODBC'
 
 ### Handles
 
-A [handle](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/handles?view=sql-server-ver16) is a pointer to a specific ODBC object which is used to interact with the database. There are several different types of handles, each with a different purpose, these are the environment handle, the connection handle, the statement handle, and the descriptor handle. Handles are allocated using the [`SQLAllocHandle`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlallochandle-function?view=sql-server-ver16) which takes as input the type of handle to allocate, and a pointer to the handle, the driver then creates a new handle of the specified type which it returns to the application.
+A [handle](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/handles?view=sql-server-ver16) is a pointer to a specific ODBC object which is used to interact with the database. There are several different types of handles, each with a different purpose, these are the environment handle, the connection handle, the statement handle, and the descriptor handle. Handles are allocated using the [`SQLAllocHandle`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlallochandle-function?view=sql-server-ver16) which takes as input the type of handle to allocate, and a pointer to the handle, the driver then creates a new handle of the specified type, which it returns to the application.
 
 The DuckDB ODBC driver has the following handle types.
 
@@ -134,7 +134,7 @@ For `MAKEFILE`:
 ```make
 CFLAGS=-I/usr/local/include
 # or
-CFLAGS=-/opt/homebrew/Cellar/unixodbc/2.3.11/include
+CFLAGS=-I/opt/homebrew/Cellar/unixodbc/2.3.11/include
 ```
 
 For `CMAKE`:
@@ -339,7 +339,7 @@ int main() {
 }
 ```
 
-### Sample `CMakelists.txt` File
+### Sample `CMakeLists.txt` File
 
 ```cmake
 cmake_minimum_required(VERSION 3.25)

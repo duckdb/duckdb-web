@@ -82,7 +82,7 @@ std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ### UDF API
 
 The UDF API allows the definition of user-defined functions. It is exposed in `duckdb:Connection` through the methods: `CreateScalarFunction()`, `CreateVectorizedFunction()`, and variants.
-These methods created UDFs into the temporary schema (`TEMP_SCHEMA`) of the owner connection that is the only one allowed to use and change them.
+These methods create UDFs in the temporary schema (`TEMP_SCHEMA`) of the owner connection that is the only one allowed to use and change them.
 
 #### CreateScalarFunction
 
@@ -98,7 +98,7 @@ connection.CreateScalarFunction<bool, int>("bigger_than_four", &bigger_than_four
 connection.Query("SELECT bigger_than_four(i) FROM (VALUES (3), (5)) tbl(i)")->Print();
 ```
 
-The `CreateScalarFunction()` methods automatically creates vectorized scalar UDFs so they are as efficient as built-in functions, we have two variants of this method interface as follows:
+The `CreateScalarFunction()` methods automatically create vectorized scalar UDFs so they are as efficient as built-in functions, we have two variants of this method interface as follows:
 
 **1.**
 
@@ -156,7 +156,7 @@ con.Query("SELECT udf_date(d) FROM dates")->Print();
 * **ret_type** is the LogicalType of return of the function, which should match with the template TR type.
 * **udf_func** is a pointer to the UDF function.
 
-This function checks the template types against the LogicalTypes passed as arguments and they must match as follow:
+This function checks the template types against the LogicalTypes passed as arguments and they must match as follows:
 
 * LogicalTypeId::BOOLEAN → bool
 * LogicalTypeId::TINYINT → int8_t

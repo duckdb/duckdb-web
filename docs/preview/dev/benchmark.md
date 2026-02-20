@@ -59,7 +59,7 @@ The output will contain the following:
 0.182948
 ```
 
-### Running Multiple Benchmark Using a Regular Expression
+### Running Multiple Benchmarks Using a Regular Expression
 
 You can also use a regular expression to specify which benchmarks to run.
 Be careful of shell expansion of certain regex characters (e.g., `*` will likely be expanded by your shell, hence this requires proper quoting or escaping).
@@ -116,7 +116,7 @@ Benchmarks are similar to unit test files, and have the same type of header.
 # description: Measure the performance of FILL
 # group: [window]
 ```
-The `make format-head` command fill can ensure that the header has the expected structure and prevent tidy check errors.
+The `make format-head` command can ensure that the header has the expected structure and prevent tidy check errors.
 
 Below this header, there are a set of keywords summarizing the benchmark.
 
@@ -128,7 +128,7 @@ subgroup window
 
 While some benchmarks run a single query,
 it can often be useful to _parameterize_ a benchmark using the `argument` keyword.
-This allows the benchmark to be with different settings, such as data volume.
+This allows the benchmark to be run with different settings, such as data volume.
 For the `FILL` benchmark, there are three arguments:
 
 ```text

@@ -20,10 +20,10 @@ repo:
   github: cwiq-os/duck_delta_share
   ref: 99c422debc9a7de75621aeba46c72aa4eea1b9df
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 386
-extension_download_count_pretty: 386
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 418
+extension_download_count_pretty: 418
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_delta_share.png'
 layout: community_extension_doc
 ---

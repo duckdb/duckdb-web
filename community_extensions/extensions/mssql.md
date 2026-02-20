@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mssql
   description: "Connect DuckDB to Microsoft SQL Server via native TDS protocol"
-  version: "0.1.16"
+  version: "0.1.17"
   language: "C++"
   build: "cmake"
   licence: "MIT"
@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: "hugr-lab/mssql-extension"
-  ref: "v0.1.16"
+  ref: "v0.1.17"
+  ref_next: "v0.1.18"
 
 docs:
   hello_world: |
@@ -30,13 +31,13 @@ docs:
 
   extended_description: |
     The mssql extension provides a DuckDB connector for Microsoft SQL Server using the native TDS protocol.
-    Support DuckDB version: 1.4.4
+    Support DuckDB version: 1.4.4 and later.
 
     The extension is experimental and may not cover all edge cases. Please report any issues on the [GitHub repository](https://github.com/hugr-lab/mssql-extension).
 
     Features:
     - Native TDS protocol (no ODBC/JDBC required)
-    - Azure [Entra ID](https://github.com/hugr-lab/mssql-extension/blob/v0.1.16/AZURE.md) authentication (Service Principal, CLI, Device Code, Environment Variables)
+    - Azure [Entra ID](https://github.com/hugr-lab/mssql-extension/blob/v0.1.17/AZURE.md) authentication (Service Principal, CLI, Device Code, Environment Variables)
     - Azure SQL Database and Microsoft Fabric support
     - Lazy metadata loading for fast connections
     - Schema, table, and view catalog integration
@@ -55,10 +56,10 @@ docs:
     - Named instances not supported
     - Windows Authentication not supported
 
-extension_star_count: 60
-extension_star_count_pretty: 60
-extension_download_count: 825
-extension_download_count_pretty: 825
+extension_star_count: 76
+extension_star_count_pretty: 76
+extension_download_count: 944
+extension_download_count_pretty: 944
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
@@ -92,6 +93,7 @@ LOAD {{ page.extension.name }};
 | mssql_open            | scalar        | NULL        | NULL    |          |
 | mssql_ping            | scalar        | NULL        | NULL    |          |
 | mssql_pool_stats      | table         | NULL        | NULL    |          |
+| mssql_preload_catalog | scalar        | NULL        | NULL    |          |
 | mssql_refresh_cache   | scalar        | NULL        | NULL    |          |
 | mssql_scan            | table         | NULL        | NULL    |          |
 | mssql_version         | scalar        | NULL        | NULL    |          |
@@ -122,6 +124,7 @@ LOAD {{ page.extension.name }};
 | mssql_insert_max_rows_per_statement | Hard cap on rows per INSERT statement (SQL Server limit: 1000)                                       | BIGINT     | GLOBAL | []      |
 | mssql_insert_max_sql_bytes          | Maximum SQL statement size in bytes                                                                  | BIGINT     | GLOBAL | []      |
 | mssql_insert_use_returning_output   | Use OUTPUT INSERTED for RETURNING clause                                                             | BOOLEAN    | GLOBAL | []      |
+| mssql_metadata_timeout              | Metadata query timeout in seconds (default: 300, 0 = no timeout). Increase for very large catalogs   | BIGINT     | GLOBAL | []      |
 | mssql_min_connections               | Minimum connections to maintain per context                                                          | BIGINT     | GLOBAL | []      |
 | mssql_query_timeout                 | Query execution timeout in seconds (0 = no timeout, default: 30)                                     | BIGINT     | GLOBAL | []      |
 | mssql_statistics_cache_ttl_seconds  | Statistics cache TTL in seconds                                                                      | BIGINT     | GLOBAL | []      |

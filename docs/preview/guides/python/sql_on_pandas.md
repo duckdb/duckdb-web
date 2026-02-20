@@ -17,4 +17,4 @@ my_df = pandas.DataFrame.from_dict({'a': [42]})
 results = duckdb.sql("SELECT * FROM my_df").df()
 ```
 
-The seamless integration of Pandas DataFrames to DuckDB SQL queries is allowed by [replacement scans]({% link docs/preview/clients/c/replacement_scans.md %}), which replace instances of accessing the `my_df` table (which does not exist in DuckDB) with a table function that reads the `my_df` dataframe.
+The seamless integration of Pandas DataFrames into DuckDB SQL queries is allowed by [replacement scans]({% link docs/preview/clients/c/replacement_scans.md %}), which replace instances of accessing the `my_df` table (which does not exist in DuckDB) with a table function that reads the `my_df` dataframe.

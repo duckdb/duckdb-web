@@ -37,7 +37,7 @@ Using the DuckDB ODBC API on Windows requires the following steps:
 
 After the installation, it is possible to change the default DSN configuration or add a new one using the Windows ODBC Data Source Administrator tool `odbcad32.exe`.
 
-It also can be launched thought the Windows start:
+It also can be launched through the Windows start:
 
 <img src="/images/blog/odbc/launch_odbcad.png" style="width: 60%; height: 60%"/>
 

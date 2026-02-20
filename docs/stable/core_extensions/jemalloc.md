@@ -16,7 +16,7 @@ The availability of the `jemalloc` extension depends on the operating system.
 
 ### Linux
 
-Linux distributions of DuckDB ships with the `jemalloc` extension.
+Linux distributions of DuckDB ship with the `jemalloc` extension.
 To disable the `jemalloc` extension, [build DuckDB from source]({% link docs/stable/dev/building/overview.md %}) and set the `SKIP_EXTENSIONS` flag as follows:
 
 ```batch

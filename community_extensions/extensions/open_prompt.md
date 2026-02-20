@@ -66,11 +66,12 @@ extension:
 repo:
   github: quackscience/duckdb-extension-openprompt
   ref: 5328a2ff7100887263259ccc5ad8c03b8c6bc58a
+  ref_next: 4f8525f8c1fe41d60df5ff27773f609391779678
 
 extension_star_count: 55
 extension_star_count_pretty: 55
-extension_download_count: 276
-extension_download_count_pretty: 276
+extension_download_count: 292
+extension_download_count_pretty: 292
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---

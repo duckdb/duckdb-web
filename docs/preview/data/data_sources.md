@@ -3,7 +3,7 @@ layout: docu
 title: Data Sources
 ---
 
-DuckDB sources several data sources, including file formats, network protocols and database systems:
+DuckDB supports several data sources, including file formats, network protocols, and database systems:
 
 * [AWS S3 buckets and storage with S3-compatible API]({% link docs/preview/core_extensions/httpfs/s3api.md %})
 * [Azure Blob Storage]({% link docs/preview/core_extensions/azure.md %})

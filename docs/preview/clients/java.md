@@ -280,7 +280,7 @@ stmt.close();
 
 ### Driver Class Not Found
 
-If the Java application is unable to find the DuckDB, it may throw the following error:
+If the Java application is unable to find the DuckDB driver, it may throw the following error:
 
 ```console
 Exception in thread "main" java.sql.SQLException: No suitable driver found for jdbc:duckdb:

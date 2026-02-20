@@ -80,7 +80,7 @@ The conversion between strings *without* UTC offsets or IANA time zone names and
 The conversion between strings *with* UTC offsets or time zone names and `WITH TIME ZONE` types is also unambiguous, but requires the `ICU` extension to handle time zone names.
 
 When strings *without* UTC offsets or time zone names are converted to a `WITH TIME ZONE` type, the string is interpreted in the configured time zone. 
-When strings with UTC offsets are passed to a `WITHOUT TIME ZONE` type, the offsets or timezone specifications are ignored.
+When strings with UTC offsets are passed to a `WITHOUT TIME ZONE` type, the offsets or time zone specifications are ignored.
 When strings with time zone names other than `UTC` are passed to a `WITHOUT TIME ZONE` type, an error is thrown. 
 
 Finally, when `WITH TIME ZONE` and `WITHOUT TIME ZONE` types are converted to each other via explicit or implicit casts, the translation uses the configured time zone. To use an alternative time zone, the `timezone` function provided by the `ICU` extension may be used:
@@ -164,8 +164,8 @@ For example, here is what binning for the `'America/Los_Angeles'` time zone look
      class="darkmode-img"
      />
 
-The most common temporal binning problem occurs when daylight savings time changes.
-The example below contains a daylight savings time change where the "hour" bin is two hours long.
+The most common temporal binning problem occurs when daylight saving time changes.
+The example below contains a daylight saving time change where the "hour" bin is two hours long.
 To distinguish the two hours, another range of bins containing the offset from UTC is needed:
 
 <img src="/images/blog/timezones/tz-daylight-light.svg"

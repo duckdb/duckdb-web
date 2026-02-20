@@ -20,6 +20,7 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-webdavfs
   ref: 359f4c05601798855c07954cf560a6e3beb6fc10
+  ref_next: 49d8be58834230f4466c6c75199e960c50e21a51
 
 docs:
   hello_world: |
@@ -62,8 +63,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 416
-extension_download_count_pretty: 416
+extension_download_count: 363
+extension_download_count_pretty: 363
 image: '/images/community_extensions/social_preview/preview_community_extension_webdavfs.png'
 layout: community_extension_doc
 ---

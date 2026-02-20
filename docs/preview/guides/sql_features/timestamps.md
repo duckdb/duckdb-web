@@ -82,7 +82,7 @@ For example, if the application is modeling electrical supply and demand out to 
 one can create the calendar table like so:
 
 ```sql
-SET timezone = 'Europe/Netherlands';
+SET timezone = 'Europe/Amsterdam';
 
 CREATE OR REPLACE TABLE hourly AS
     SELECT 
