@@ -21,13 +21,13 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/marisa
-  ref: 6e81aadaa0a41901218fcf02ff39d8ff2594ffa7
-  ref_next: 7fefd40d4bc8976a08143cccc3298af68db1d8f9
+  ref: 8feeb0b0157b7fad0694ee09c430bbabce54cbb7
+  ref_next: 7f1df16cbe53df651a71314ebf0ffc428ef10166
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 377
-extension_download_count_pretty: 377
+extension_download_count: 382
+extension_download_count_pretty: 382
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
 layout: community_extension_doc
 ---
