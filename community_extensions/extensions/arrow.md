@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 67
 extension_star_count_pretty: 67
-extension_download_count: 23351
-extension_download_count_pretty: 23.4k
+extension_download_count: 19342
+extension_download_count_pretty: 19.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_nanoarrow.png'
 layout: community_extension_doc
 ---

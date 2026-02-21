@@ -18,6 +18,7 @@ extension:
 repo:
   github: djouallah/delta_classic
   ref: fdb489d9c28f4dc7e8690cbf92a5f9cb34733124
+  ref_next: 1b3fc8a2020f149e5a05965b9b27a82d509f75bd
 
 docs:
   hello_world: |
@@ -44,10 +45,10 @@ docs:
     ATTACH ... (TYPE DELTA). Supports PIN_SNAPSHOT and all storage backends
     (local filesystem, S3, ABFSS, GCS).
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 35
-extension_download_count_pretty: 35
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 78
+extension_download_count_pretty: 78
 image: '/images/community_extensions/social_preview/preview_community_extension_delta_classic.png'
 layout: community_extension_doc
 ---

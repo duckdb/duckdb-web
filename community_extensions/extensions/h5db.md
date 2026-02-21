@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 385
-extension_download_count_pretty: 385
+extension_download_count: 403
+extension_download_count_pretty: 403
 image: '/images/community_extensions/social_preview/preview_community_extension_h5db.png'
 layout: community_extension_doc
 ---
