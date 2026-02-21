@@ -20,13 +20,13 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/inflector
-  ref: 1c2cd4eb439853e34cebe4a58ea01b15515e1c66
-  ref_next: 6c513a41e11e4662874bf6334d83873a424c8b54
+  ref: 5f2fa551e1c8ca6fdf50f8752afc637fb7a1ceee
+  ref_next: 15d7d6a04ff4db940ca05750a766b5fae024905b
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 232
-extension_download_count_pretty: 232
+extension_download_count: 288
+extension_download_count_pretty: 288
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
@@ -105,6 +105,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| inflector_acronyms                   | List of acronyms preserved as uppercase in case conversions (e.g., HTML, API)                | VARCHAR[]  | GLOBAL | []      |
 | merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |

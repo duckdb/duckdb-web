@@ -90,10 +90,10 @@ repo:
   ref: d72eb53d09523d21f93be28016a85302c4319182
   ref_next: 0708f4a60ed81b5d4fa5e92034cd26b5a15dcce7
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 403
-extension_download_count_pretty: 403
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 401
+extension_download_count_pretty: 401
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---
