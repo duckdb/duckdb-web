@@ -156,7 +156,7 @@ Copies rows from a DuckDB accessible file or table into the remote DB.
 Optional named parameters (source):
 
 > Source query is executed using a separate DB instance from the instance on which `odbc_copy` is being called.
-> Thus `source_query` cannot refer to pre-existing in-memory tables and cannot open currenlty opened DuckDB files.
+> Thus `source_query` cannot refer to pre-existing in-memory tables and cannot open currently opened DuckDB files.
 > As a workaround, for complex source queries it is suggested to export the query result into a local Parquet file first and
 > then run `odbc_copy` on that file.
 
