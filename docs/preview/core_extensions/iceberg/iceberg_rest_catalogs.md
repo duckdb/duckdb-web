@@ -223,7 +223,8 @@ CREATE SECRET polaris_secret (
 ```sql
 ATTACH 'quickstart_catalog' AS polaris_catalog (
     TYPE iceberg,
-    ENDPOINT '⟨polaris_rest_catalog_endpoint⟩'
+    ENDPOINT '⟨polaris_rest_catalog_endpoint⟩',
+    ACCESS_DELEGATION_MODE 'vended_credentials'
 );
 ```
 
