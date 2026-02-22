@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: chess
   description: A DuckDB extension for parsing and analyzing chess games in PGN format.
-  version: 0.4.0
+  version: 0.5.0
   language: Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dotneB/duckdb-chess
-  ref: v0.4.0
+  ref: v0.5.0
 
 docs:
   hello_world: |
@@ -29,17 +29,23 @@ docs:
     -- Read multiple pgn files
     SELECT COUNT(*) FROM read_pgn('test/pgn_files/*.pgn');
 
+    -- Read zstd-compressed pgn files
+    SELECT COUNT(*) FROM read_pgn('test/pgn_files/sample.pgn.zst', compression := 'zstd');
+
     -- How many games started with 1. e4 e5
     SELECT COUNT_IF(chess_moves_subset('1. e4 e5', movetext))  FROM read_pgn('test/pgn_files/sample.pgn');
 
     -- Removes comments/variations/NAGs and normalizes move numbers
     SELECT chess_moves_normalize(movetext) FROM read_pgn('test/pgn_files/sample.pgn');
 
-    -- Hash of the normalized movetext
+    -- Zobrist hash of the final mainline position
     SELECT chess_moves_hash('1. e4 e5 2. Nf3 Nc6') AS hash;
 
     -- Ply count
     SELECT chess_ply_count('1. e4 e5 2. Nf3') AS ply;
+
+    -- Normalize Time control notation
+    SELECT chess_timecontrol_normalize('90min./40 + 30min. + 30s./move'); -- 40/5400+30:1800+30
 
     -- Converts FEN to EPD
     SELECT chess_fen_epd('rnbq1rk1/1pp1bppp/p3pn2/8/2pP4/2N2NP1/PP2PPBP/R1BQ1RK1 w - - 0 8') AS epd;
@@ -60,8 +66,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 309
-extension_download_count_pretty: 309
+extension_download_count: 334
+extension_download_count_pretty: 334
 image: '/images/community_extensions/social_preview/preview_community_extension_chess.png'
 layout: community_extension_doc
 ---

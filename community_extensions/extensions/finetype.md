@@ -124,8 +124,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 136
-extension_download_count_pretty: 136
+extension_download_count: 185
+extension_download_count_pretty: 185
 image: '/images/community_extensions/social_preview/preview_community_extension_finetype.png'
 layout: community_extension_doc
 ---
