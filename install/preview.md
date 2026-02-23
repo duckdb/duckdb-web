@@ -32,17 +32,19 @@ For the CLI, the preview builds are based on the `main` branch of the [`duckdb/d
 
 ## Python
 
-For Python, we distribute two nightly builds. To install the nightly build for the 1.4 LTS version of DuckDB, run:
+For Python, we distribute two nightly builds.
 
-```batch
-pip install "duckdb<1.5.0"
-```
+* To install the nightly build for the 1.4 LTS version of DuckDB, run:
 
-To install the nightly build based on v1.5-dev (the `main` branch of the [`duckdb/duckdb-python` repository](https://github.com/duckdb/duckdb-python/)), run.
+  ```batch
+  pip install "duckdb<1.5.0"
+  ```
 
-```batch
-pip install duckdb --pre --upgrade
-```
+* To install the nightly build based on v1.5-dev (the `main` branch of [`duckdb/duckdb-python`](https://github.com/duckdb/duckdb-python/)), run:
+
+  ```batch
+  pip install duckdb --pre --upgrade
+  ```
 
 ## Java
 
@@ -67,13 +69,9 @@ The following Maven snippet imports the SNAPSHOT version of the Java package:
 </repositories>
 ```
 
-## Node.js
+## Node.js (Neo)
 
-```batch
-npm install duckdb@next
-```
-
-Note: The nightly release of the Node.js driver installs the old (deprecated) Node.js driver and not DuckDB Node Neo. For the Node Neo driver, the nightly release is currently not available.
+For the DuckDB Node Neo driver, the nightly release is currently not available.
 
 ## ODBC
 
