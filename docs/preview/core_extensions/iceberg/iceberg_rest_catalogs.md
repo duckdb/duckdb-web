@@ -60,6 +60,7 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 | `DEFAULT_REGION`              | `VARCHAR` | `NULL`   | A Default region to use when communicating with the storage layer                                     |
 | `OAUTH2_SERVER_URI`           | `VARCHAR` | `NULL`   | OAuth2 server url for getting a Bearer Token                                                          |
 | `AUTHORIZATION_TYPE`          | `VARCHAR` | `OAUTH2` | Pass `SigV4` for Catalogs the require SigV4 authorization, `none` for catalogs that don't need auth   |
+| `ACCESS_DELEGATION_MODE`      | `VARCHAR` | `vended_credentials` | Access delegation mode. Allowed values are `vended_credentials` and `none`               |
 | `EXTRA_HTTP_HEADERS`          | `MAP`     | `NULL`   | Additional HTTP headers to send with REST catalog requests                                            |
 | `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN` | `true`   | Option for catalogs that support nested namespaces.                                                   |
 | `SUPPORT_STAGE_CREATE`        | `BOOLEAN` | `false`  | Option for catalogs that do not support stage create.                                                 |
@@ -222,7 +223,8 @@ CREATE SECRET polaris_secret (
 ```sql
 ATTACH 'quickstart_catalog' AS polaris_catalog (
     TYPE iceberg,
-    ENDPOINT '⟨polaris_rest_catalog_endpoint⟩'
+    ENDPOINT '⟨polaris_rest_catalog_endpoint⟩',
+    ACCESS_DELEGATION_MODE 'vended_credentials'
 );
 ```
 
