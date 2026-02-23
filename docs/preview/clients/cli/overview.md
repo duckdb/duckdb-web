@@ -204,8 +204,14 @@ As an example, a file in the same directory as the DuckDB CLI named `prompt.sql`
 Note that the duck head is built with Unicode characters and does not work in all terminal environments (e.g., in Windows, unless running with WSL and using the Windows Terminal).
 
 ```text
-.prompt '⚫◗ '
+.prompt "{color:yellow1}{sql:select current_database()} ⚫◗ "
 ```
+
+Or a simpler version without colours:
+```sql
+.prompt "{sql:select current_database()} ⚫◗ "
+```
+
 
 To invoke that file on initialization, use this command:
 
