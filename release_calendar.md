@@ -80,7 +80,7 @@ You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.c
 For example, you can compute the average number of days between releases using the [`lag` window function]({% link docs/stable/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls):
 
 ```sql
-SELECT avg(diff) AS average_days_between_releases
+SELECT avg(diff)::DECIMAL(8, 2) AS average_days_between_releases
 FROM (
     SELECT release_date - lag(release_date) OVER (ORDER BY release_date) AS diff
     FROM 'https://duckdb.org/data/duckdb-releases.csv'
