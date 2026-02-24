@@ -20,8 +20,8 @@ extension:
   
 repo:
   github: teaguesterling/duckdb_yaml
-  ref: 28706b37eb0e5ecaa794f642d44eea26a2fcef71
-  ref_next: 8485f9b61e466f8a6d5f9e998e6c4f58e9306ec0
+  ref: de60de55fb238c44661cef27373e82ab21920f43
+  ref_next: de60de55fb238c44661cef27373e82ab21920f43
 
 docs:
   hello_world: |
@@ -90,8 +90,8 @@ docs:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 572
-extension_download_count_pretty: 572
+extension_download_count: 556
+extension_download_count_pretty: 556
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---

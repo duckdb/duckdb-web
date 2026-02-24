@@ -17,7 +17,8 @@ extension:
 
 repo:
   github: teaguesterling/duck_hunt
-  ref: 3ff499f4880a0efd9bc3e6d44e5766bf3aa5f9d1
+  ref: ce8400922b0710fbb02e8e440380a1b9e4fa9d60
+  ref_next: ce8400922b0710fbb02e8e440380a1b9e4fa9d60
 
 docs:
   readme: https://duck-hunt.readthedocs.io/
@@ -162,8 +163,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 495
-extension_download_count_pretty: 495
+extension_download_count: 417
+extension_download_count_pretty: 417
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_hunt.png'
 layout: community_extension_doc
 ---
