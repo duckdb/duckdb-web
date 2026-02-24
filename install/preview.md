@@ -46,7 +46,7 @@ For Python, we distribute two nightly builds.
   pip install "duckdb<1.5.0"
   ```
 
-* To install the nightly build based on v1.5-dev (the `main` branch of [`duckdb/duckdb-python`](https://github.com/duckdb/duckdb-python/)), run:
+* To install the nightly build based on v1.5-dev, run:
 
   ```batch
   pip install duckdb --pre --upgrade
