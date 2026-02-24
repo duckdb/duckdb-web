@@ -181,10 +181,6 @@
               "url": "overview"
             },
             {
-              "page": "Tertiary Clients",
-              "url": "tertiary"
-            },
-            {
               "page": "ADBC",
               "url": "adbc"
             },
@@ -293,20 +289,12 @@
               ]
             },
             {
-              "page": "Dart",
-              "url": "dart"
-            },
-            {
               "page": "Go",
               "url": "go"
             },
             {
               "page": "Java (JDBC)",
               "url": "java"
-            },
-            {
-              "page": "Julia",
-              "url": "julia"
             },
             {
               "page": "Node.js (Neo)",
@@ -343,10 +331,6 @@
                   "url": "configuration"
                 }
               ]
-            },
-            {
-              "page": "PHP",
-              "url": "php"
             },
             {
               "page": "Python",
@@ -407,10 +391,6 @@
               "url": "rust"
             },
             {
-              "page": "Swift",
-              "url": "swift"
-            },
-            {
               "page": "Wasm",
               "slug": "wasm",
               "subsubfolderitems": [
@@ -437,6 +417,32 @@
                 {
                   "page": "Extensions",
                   "url": "extensions"
+                }
+              ]
+            },
+            {
+              "page": "Tertiary Clients",
+              "slug": "tertiary_clients",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Dart",
+                  "url": "dart"
+                },
+                {
+                  "page": "Julia",
+                  "url": "julia"
+                },
+                {
+                  "page": "PHP",
+                  "url": "php"
+                },
+                {
+                  "page": "Swift",
+                  "url": "swift"
                 }
               ]
             }
