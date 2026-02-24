@@ -29,7 +29,7 @@ There are currently the following DuckDB versions under development:
 
 For the CLI, C and C++ clients, there are three preview builds available:
 
-| Platform | Architecture       | v1.4-dev                                                                             | v1.5-dev                                                                                | v1.6                                                                            |
+| Platform | Architecture       | v1.4-dev                                                                             | v1.5-dev                                                                                | v1.6-dev                                                                        |
 | -------- | ------------------ | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [Download](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-arm64.zip) | [Download](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-arm64.zip) | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip) |
 | Linux    | `x86_64`           | [Download](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-amd64.zip) | [Download](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-amd64.zip) | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip) |
