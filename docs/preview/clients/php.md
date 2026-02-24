@@ -6,9 +6,7 @@ title: PHP Client
 
 > The DuckDB PHP client is a [tertiary client]({% link docs/preview/clients/overview.md %}) and is maintained by a third-party.
 
-Client API for PHP.
-
-Focused on performance, it uses the official C API internally through [FFI](https://www.php.net/manual/en/book.ffi.php), achieving good benchmarks.
+Client API for PHP, focused on performance. The DuckDB PHP client uses the official C API internally through [FFI](https://www.php.net/manual/en/book.ffi.php), achieving good benchmark results.
 This library is more than just a wrapper for the C API; it introduces custom, PHP-friendly methods to simplify working with DuckDB. It is compatible with Linux, Windows and macOS, requiring PHP version 8.3 or higher.
 
 Full documentation is available at [https://duckdb-php.readthedocs.io/](https://duckdb-php.readthedocs.io/).
