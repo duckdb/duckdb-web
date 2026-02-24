@@ -21,9 +21,9 @@ The preview (nightly) builds provide the latest development version of DuckDB. A
 
 There are currently the following DuckDB versions under development:
 
-* v1.4 (LTS)
-* v1.5 (to be released soon)
-* v1.6 (pre-alpha)
+* v1.4. This is the LTS release.
+* v1.5. This is the next stable DuckDB release, to be released in early March.
+* v1.6. This version is in a very early stage of the development.
 
 ## Command Line Interface (CLI), C and C++ clients
 
@@ -40,13 +40,13 @@ For the CLI, C and C++ clients, there are three preview builds available:
 
 For Python, we distribute two nightly builds.
 
-* To install the nightly build for the 1.4 LTS version of DuckDB, run:
+* To install the nightly build for v1.4-dev, run:
 
   ```batch
   pip install "duckdb<1.5.0"
   ```
 
-* To install the nightly build based on v1.5-dev, run:
+* To install the nightly build for v1.5-dev, run:
 
   ```batch
   pip install duckdb --pre --upgrade
