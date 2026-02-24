@@ -155,7 +155,7 @@ Ibis has a collection of useful table methods to manipulate and query the data i
 
 `filter` allows you to select rows based on a condition or set of conditions.
 
-We can filter so we only have penguins of the species Adelie:
+We can filter so we only have penguins of the species Gentoo:
 
 ```python
 penguins.filter(penguins.species == "Gentoo")

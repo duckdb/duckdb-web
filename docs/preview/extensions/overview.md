@@ -109,7 +109,7 @@ can and do receive updates. To ensure all currently installed extensions are on 
 UPDATE EXTENSIONS;
 ```
 
-For more details on extension version refer to the [Extension Versioning page]({% link docs/preview/extensions/versioning_of_extensions.md %}).
+For more details on extension versions, refer to the [Extension Versioning page]({% link docs/preview/extensions/versioning_of_extensions.md %}).
 
 ## Developing Extensions
 

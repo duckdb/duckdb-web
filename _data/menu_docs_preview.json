@@ -309,20 +309,6 @@
               "url": "julia"
             },
             {
-              "page": "Node.js (Deprecated)",
-              "slug": "nodejs",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "API Reference",
-                  "url": "reference"
-                }
-              ]
-            },
-            {
               "page": "Node.js (Neo)",
               "slug": "node_neo",
               "subsubfolderitems": [

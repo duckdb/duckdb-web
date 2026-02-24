@@ -151,12 +151,12 @@ Copies rows from a DuckDB accessible file or table into the remote DB.
 
  - `conn_handle_or_string` (`BIGINT` or `VARCHAR`), one of:
    - ODBC connection handle created with [odbc_connect](#odbc_connect)
-   - ODBC connection string, intended for for one-off queries, in this case new ODBC connection will be opened and will be closed automatically after the query is complete
+   - ODBC connection string, intended for one-off queries, in this case new ODBC connection will be opened and will be closed automatically after the query is complete
 
 Optional named parameters (source):
 
 > Source query is executed using a separate DB instance from the instance on which `odbc_copy` is being called.
-> Thus `source_query` cannot refer to pre-existing in-memory tables and cannot open currenlty opened DuckDB files.
+> Thus `source_query` cannot refer to pre-existing in-memory tables and cannot open currently opened DuckDB files.
 > As a workaround, for complex source queries it is suggested to export the query result into a local Parquet file first and
 > then run `odbc_copy` on that file.
 
@@ -182,7 +182,7 @@ Optional named parameters (destination):
 
 Optional named parameters (create table):
 
- - `create_table` (`BOOLEAN`, deafult: `FALSE`): whether to create a table in the destination remote DB using the column names and column types from the source query, effectively implements CTAS (create table as select)
+ - `create_table` (`BOOLEAN`, default: `FALSE`): whether to create a table in the destination remote DB using the column names and column types from the source query, effectively implements CTAS (create table as select)
  - `column_types` (`MAP(VARCHAR, VARCHAR)`): when `create_table=TRUE` is specified, allows to provide/override the type mapping between source DuckDB types and destination RDBMS types, example:
 
 ```sql
@@ -220,7 +220,7 @@ A table with the following columns:
  - `rows_per_second` (`FLOAT`): a number of rows processed in one second
  - `table_ddl` (`VARCHAR`): generated `CREATE TABLE` query that was executed in remote DB before starting the copy process
 
- One resulting row is emitted for every `2048` rows read from source. Only the last row has the `completed=TRUE` and non null `table_dll` (only when `create_table=TRUE` is specified) values.
+ One resulting row is emitted for every `2048` rows read from source. Only the last row has the `completed=TRUE` and non null `table_ddl` (only when `create_table=TRUE` is specified) values.
 
 #### Examples:
 
@@ -330,7 +330,7 @@ Runs specified query in a remote DB and returns the query results table.
 
  - `conn_handle_or_string` (`BIGINT` or `VARCHAR`), one of:
    - ODBC connection handle created with [odbc_connect](#odbc_connect)
-   - ODBC connection string, intended for for one-off queries, in this case new ODBC connection will be opened and will be closed automatically after the query is complete
+   - ODBC connection string, intended for one-off queries, in this case new ODBC connection will be opened and will be closed automatically after the query is complete
  - `query` (`VARCHAR`): SQL query, passed to the remote DBMS
 
 Optional named parameters that can be used to pass query parameters:
@@ -360,7 +360,7 @@ The extension supports a number of options that can be used to change how the qu
 
 Other optional named parameters:
 
- - `ignore_exec_failure` (`BOOLEAN`, default: `false`): when a query, that is run in remote DB, can be prepared successfully, but may or may not fail at execution time (for example, because of schema state like table existence), then this flag an be used to not thow an error when query execution fails. Empty result set is returned if query execution fails.
+ - `ignore_exec_failure` (`BOOLEAN`, default: `false`): when a query, that is run in remote DB, can be prepared successfully, but may or may not fail at execution time (for example, because of schema state like table existence), then this flag can be used to not throw an error when query execution fails. Empty result set is returned if query execution fails.
  - `close_connection` (`BOOLEAN`, default: `false`): closes the passed connection after the function call is completed, intended to be used with one-shot invocations of the `odbc_query`, example:
 
  ```sql

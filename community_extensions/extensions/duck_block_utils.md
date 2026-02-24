@@ -14,11 +14,10 @@ extension:
   license: MIT
   maintainers:
     - teaguesterling
-
 repo:
   github: teaguesterling/duckdb_duck_block_utils
-  ref: a0064ef1405ab86a4d007a14a0e37f0a7ba604fe
-
+  ref: 125662df9e5450105dc9b7957ad955cb53d7beec
+  ref_next: 125662df9e5450105dc9b7957ad955cb53d7beec
 docs:
   hello_world: |
     -- Build a document programmatically
@@ -174,8 +173,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 285
-extension_download_count_pretty: 285
+extension_download_count: 416
+extension_download_count_pretty: 416
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---

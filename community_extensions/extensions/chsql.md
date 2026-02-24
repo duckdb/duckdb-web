@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: chsql
   description: ClickHouse SQL Macros for DuckDB
-  version: 1.0.132
+  version: 1.4.0
   language: SQL & C++
   build: cmake
   license: MIT
@@ -18,8 +18,8 @@ extension:
   excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;windows_amd64;"
 
 repo:
-  github: quackscience/duckdb-extension-clickhouse-sql
-  ref: f056022f4a9d20e280059d66458d907f4a080cdd
+  github: Query-farm/clickhouse-sql
+  ref: 7c871adf7990631ecdca77fb2cd0fc7e5c5b5665
 
 docs:
   hello_world: |
@@ -96,10 +96,10 @@ docs:
     #### Legal Disclaimer
     > DuckDB ® is a trademark of DuckDB Foundation. ClickHouse® is a trademark of ClickHouse Inc. All trademarks, service marks, and logos mentioned or depicted are the property of their respective owners. The use of any third-party trademarks, brand names, product names, and company names is purely informative or intended as parody and does not imply endorsement, affiliation, or association with the respective owners.
 
-extension_star_count: 70
-extension_star_count_pretty: 70
-extension_download_count: 5668
-extension_download_count_pretty: 5.7k
+extension_star_count: 89
+extension_star_count_pretty: 89
+extension_download_count: 13064
+extension_download_count_pretty: 13.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql.png'
 layout: community_extension_doc
 ---
@@ -236,10 +236,8 @@ LOAD {{ page.extension.name }};
 | system_databases       | table         | NULL                                                                                         | NULL                                          | NULL                                                                                                   |
 | uptime                 | scalar        | NULL                                                                                         | NULL                                          | NULL                                                                                                   |
 | url_flock              | table         | NULL                                                                                         | NULL                                          | NULL                                                                                                   |
-| chsql                  | scalar        | NULL                                                                                         | NULL                                          | NULL                                                                                                   |
 | system_functions       | table         | NULL                                                                                         | NULL                                          | NULL                                                                                                   |
 | system_columns         | table         | NULL                                                                                         | NULL                                          | NULL                                                                                                   |
-| chsql_openssl_version  | scalar        | NULL                                                                                         | NULL                                          | NULL                                                                                                   |
 | system_disks           | table         | NULL                                                                                         | NULL                                          | NULL                                                                                                   |
 | system_tables          | table         | NULL                                                                                         | NULL                                          | NULL                                                                                                   |
 

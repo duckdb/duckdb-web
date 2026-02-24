@@ -30,7 +30,7 @@ SELECT .50;          -- 0.5
 SELECT 2.;           -- 2.0
 ```
 
-Non-integer numeric literals can also be denoted using [_E notation_](https://en.wikipedia.org/wiki/Scientific_notation#E_notation). In E notation, an integer or decimal literal is followed by and exponential part, which is denoted by `e` or `E`, followed by a literal integer indicating the exponent.
+Non-integer numeric literals can also be denoted using [_E notation_](https://en.wikipedia.org/wiki/Scientific_notation#E_notation). In E notation, an integer or decimal literal is followed by an exponential part, which is denoted by `e` or `E`, followed by a literal integer indicating the exponent.
 The exponential part indicates that the preceding value should be multiplied by 10 raised to the power of the exponent:
 
 ```sql

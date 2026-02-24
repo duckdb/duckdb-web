@@ -41,7 +41,7 @@ CREATE SECRET (
 );
 ```
 
-Then, connect to the catalog using you S3 Tables ARN (available in the AWS Management Console) and the `ENDPOINT_TYPE s3_tables` option:
+Then, connect to the catalog using your S3 Tables ARN (available in the AWS Management Console) and the `ENDPOINT_TYPE s3_tables` option:
 
 ```sql
 ATTACH '⟨s3_tables_arn⟩' AS my_s3_tables_catalog (

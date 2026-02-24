@@ -28,7 +28,7 @@ SELECT .50;          -- 0.5
 SELECT 2.;           -- 2.0
 ```
 
-Non-integer numeric literals can also be denoted using [_E notation_](https://en.wikipedia.org/wiki/Scientific_notation#E_notation). In E notation, an integer or decimal literal is followed by and exponential part, which is denoted by `e` or `E`, followed by a literal integer indicating the exponent.
+Non-integer numeric literals can also be denoted using [_E notation_](https://en.wikipedia.org/wiki/Scientific_notation#E_notation). In E notation, an integer or decimal literal is followed by an exponential part, which is denoted by `e` or `E`, followed by a literal integer indicating the exponent.
 The exponential part indicates that the preceding value should be multiplied by 10 raised to the power of the exponent:
 
 ```sql
@@ -42,8 +42,8 @@ SELECT 1e-10;         -- 1 ångström
 DuckDB's SQL dialect allows using the underscore character `_` in numeric literals as an optional separator. The rules for using underscores are as follows:
 
 * Underscores are allowed in integer, decimal, hexadecimal and binary notation.
-* Underscores can not be the first or last character in a literal.
-* Underscores have to have an integer/numeric part on either side of them, i.e., there can not be multiple underscores in a row and not immediately before/after a decimal or exponent.
+* Underscores cannot be the first or last character in a literal.
+* Underscores have to have an integer/numeric part on either side of them, i.e., there cannot be multiple underscores in a row and underscores cannot appear immediately before or after a decimal or exponent.
 
 Examples:
 

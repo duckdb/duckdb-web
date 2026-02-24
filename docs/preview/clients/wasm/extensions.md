@@ -44,7 +44,7 @@ WebAssembly is basically an additional platform, and there might be platform-spe
 
 ### HTTPFS
 
-The HTTPFS extension is, at the moment, not available in DuckDB-Wasm. Https protocol capabilities needs to go through an additional layer, the browser, which adds both differences and some restrictions to what is doable from native.
+The HTTPFS extension is, at the moment, not available in DuckDB-Wasm. Https protocol capabilities need to go through an additional layer, the browser, which adds both differences and some restrictions to what is doable from native.
 
 Instead, DuckDB-Wasm has a separate implementation that for most purposes is interchangeable, but does not support all use cases (as it must follow security rules imposed by the browser, such as CORS).
 Due to this CORS restriction, any requests for data made using the HTTPFS extension must be to websites that allow (using CORS headers) the website hosting the DuckDB-Wasm instance to access that data.
@@ -52,7 +52,7 @@ The [MDN website](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a g
 
 ## Extension Signing
 
-As with regular DuckDB extensions, DuckDB-Wasm extension are by default checked on `LOAD` to verify the signature confirm the extension has not been tampered with.
+As with regular DuckDB extensions, DuckDB-Wasm extensions are by default checked on `LOAD` to verify the signature and confirm the extension has not been tampered with.
 Extension signature verification can be disabled via a configuration option.
 Signing is a property of the binary itself, so copying a DuckDB extension (say to serve it from a different location) will still keep a valid signature (e.g., for local development).
 
@@ -75,7 +75,7 @@ Note that GET requests on the extensions needs to be [CORS enabled](https://www.
 
 ## Tooling
 
-Both DuckDB-Wasm and its extensions have been compiled using latest packaged Emscripten toolchain.
+Both DuckDB-Wasm and its extensions have been compiled using the latest packaged Emscripten toolchain.
 
 <!-- markdownlint-disable-next-line -->
 {% include iframe.html src="https://shell.duckdb.org" %}

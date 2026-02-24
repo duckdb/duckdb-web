@@ -225,7 +225,7 @@ To set that progress bar component to a blue text that displays the file cache R
      width="400"
      />
 
-To resets all existing progress bar components: 
+To reset all existing progress bar components:
 
 ```sql
 .progress_bar --clear
@@ -310,7 +310,7 @@ The result highlighting can be disabled using `.highlight_results off`.
 ## Shorthands
 
 DuckDB's CLI allows using shorthands for dot commands.
-Once a sequence of characters can unambiguously completed to a dot command or an argument, the CLI (silently) autocompletes them.
+Once a sequence of characters can be unambiguously completed to a dot command or an argument, the CLI (silently) autocompletes them.
 For example:
 
 ```sql
@@ -323,7 +323,7 @@ Is equivalent to:
 .mode markdown
 ```
 
-> Tip Avoid using shorthands in SQL scripts to improve readability and ensure that the scripts and futureproof.
+> Tip Avoid using shorthands in SQL scripts to improve readability and ensure that the scripts are future-proof.
 
 ## Importing Data from CSV
 

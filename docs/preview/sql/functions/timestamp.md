@@ -167,7 +167,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return the total number of nanoseconds since the epoch. |
+| **Description** | Returns the total number of nanoseconds since the epoch. |
 | **Example** | `epoch_ns(TIMESTAMP '2021-08-03 11:59:44.123456')` |
 | **Result** | `1627991984123456000` |
 

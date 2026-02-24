@@ -131,7 +131,7 @@ subgroup window
 
 While some benchmarks run a single query,
 it can often be useful to _parameterize_ a benchmark using the `argument` keyword.
-This allows the benchmark to be with different settings, such as data volume.
+This allows the benchmark to be run with different settings, such as data volume.
 For the `FILL` benchmark, there are three arguments:
 
 ```text

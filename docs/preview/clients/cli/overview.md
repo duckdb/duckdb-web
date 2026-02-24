@@ -3,6 +3,8 @@ layout: docu
 title: Command Line Client
 ---
 
+> Tip To use the DuckDB CLI client, visit the [CLI installation page]({% link install/index.html %}?environment=cli).
+>
 > The latest stable version of the DuckDB command line client is {{ site.current_duckdb_version }}.
 
 ## Installation
@@ -196,7 +198,7 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 Several dot commands can be used to configure the CLI.
 On startup, the CLI reads and executes all commands in the file `~/.duckdbrc`, including dot commands and SQL statements.
 This allows you to store the configuration state of the CLI.
-You may also point to a different initialization file using the `-init`.
+You may also point to a different initialization file using the `-init` flag.
 
 ### Setting a Custom Prompt
 
@@ -204,8 +206,14 @@ As an example, a file in the same directory as the DuckDB CLI named `prompt.sql`
 Note that the duck head is built with Unicode characters and does not work in all terminal environments (e.g., in Windows, unless running with WSL and using the Windows Terminal).
 
 ```text
-.prompt '⚫◗ '
+.prompt "{color:yellow1}{sql:select current_database()} ⚫◗ "
 ```
+
+Or a simpler version without colours:
+```sql
+.prompt "{sql:select current_database()} ⚫◗ "
+```
+
 
 To invoke that file on initialization, use this command:
 

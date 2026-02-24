@@ -44,7 +44,7 @@ The result must be destroyed with `duckdb_destroy_data_chunk`.
 
 ##### Parameters
 
-* `types`: An array of column types. Column types can not contain ANY and INVALID types.
+* `types`: An array of column types. Column types cannot contain ANY and INVALID types.
 * `column_count`: The number of columns.
 
 ##### Return Value

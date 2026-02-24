@@ -5,7 +5,7 @@ title: Iceberg REST Catalogs
 
 The `iceberg` extension supports attaching Iceberg REST Catalogs. Before attaching an Iceberg REST Catalog, you must install the `iceberg` extension by following the instructions located in the [overview]({% link docs/stable/core_extensions/iceberg/overview.md %}).
 
-If you are attaching to an Iceberg REST Catalog managed by Amazon, please see the instructions for attaching to [Amazon S3 Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) or [Amazon SageMaker Makehouse]({% link docs/stable/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
+If you are attaching to an Iceberg REST Catalog managed by Amazon, please see the instructions for attaching to [Amazon S3 Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) or [Amazon SageMaker Lakehouse]({% link docs/stable/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
 
 For all other Iceberg REST Catalogs, you can follow the instructions below. Please see the [Examples](#specific-catalog-examples) section for questions about specific catalogs.
 
@@ -60,6 +60,7 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 | `DEFAULT_REGION`              | `VARCHAR` | `NULL`   | A Default region to use when communicating with the storage layer                                     |
 | `OAUTH2_SERVER_URI`           | `VARCHAR` | `NULL`   | OAuth2 server url for getting a Bearer Token                                                          |
 | `AUTHORIZATION_TYPE`          | `VARCHAR` | `OAUTH2` | Pass `SigV4` for Catalogs the require SigV4 authorization, `none` for catalogs that don't need auth   |
+| `ACCESS_DELEGATION_MODE`      | `VARCHAR` | `vended_credentials` | Access delegation mode. Allowed values are `vended_credentials` and `none`               |
 | `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN` | `true`   | Option for catalogs that support nested namespaces.                                                   |
 | `SUPPORT_STAGE_CREATE`        | `BOOLEAN` | `false`  | Option for catalogs that do not support stage create.                                                 |
 
@@ -116,7 +117,7 @@ SELECT * FROM iceberg_snapshots(my_datalake.default.t)
 This functionality enables the user to do **time traveling**.
 
 ```sql
--- Using a snapshot it
+-- Using a snapshot id
 SELECT * FROM my_datalake.default.t AT (VERSION => ⟨SNAPSHOT_ID⟩)
 
 -- Or using a timestamp

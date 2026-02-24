@@ -19,30 +19,38 @@ redirect_from:
 
 The preview (nightly) builds provide the latest development version of DuckDB. As such, they are constantly in flux and they are less suitable for production use than the stable releases of DuckDB. You should only use these releases if you are looking for [recent bugfixes](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Amerged) or optimizations.
 
-## Command Line Interface (CLI)
+There are currently the following DuckDB versions under development:
 
-For the CLI, the preview builds are based on the `main` branch of the [`duckdb/duckdb` repository](https://github.com/duckdb/duckdb/).
+* v1.4 (LTS)
+* v1.5 (to be released soon)
+* v1.6 (pre-alpha)
 
-| Platform | Architecture       | Download                                                                        |
-| -------- | ------------------ | ------------------------------------------------------------------------------- |
-| Linux    | `arm64`            | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip) |
-| Linux    | `x86_64`           | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip) |
-| macOS    | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip)         |
-| Windows  | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip)     |
+## Command Line Interface (CLI), C and C++ clients
+
+For the CLI, C and C++ clients, there are three preview builds available:
+
+| Platform | Architecture       | v1.4-dev                                                                             | v1.5-dev                                                                                | v1.6-dev                                                                        |
+| -------- | ------------------ | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [Download](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-arm64.zip) | [Download](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-arm64.zip) | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip) |
+| Linux    | `x86_64`           | [Download](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-amd64.zip) | [Download](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-amd64.zip) | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip) |
+| macOS    | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-osx.zip)         | [Download](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-osx.zip)         | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip)         |
+| Windows  | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-windows.zip)     | [Download](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-windows.zip)     | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip)     |
 
 ## Python
 
-For Python, we distribute two nightly builds. To install the nightly build for the 1.4 LTS version of DuckDB, run:
+For Python, we distribute two nightly builds.
 
-```batch
-pip install "duckdb<1.5.0"
-```
+* To install the nightly build for the 1.4 LTS version of DuckDB, run:
 
-To install the nightly build based on v1.5-dev (the `main` branch of the [`duckdb/duckdb-python` repository](https://github.com/duckdb/duckdb-python/)), run.
+  ```batch
+  pip install "duckdb<1.5.0"
+  ```
 
-```batch
-pip install duckdb --pre --upgrade
-```
+* To install the nightly build based on v1.5-dev, run:
+
+  ```batch
+  pip install duckdb --pre --upgrade
+  ```
 
 ## Java
 
@@ -67,13 +75,9 @@ The following Maven snippet imports the SNAPSHOT version of the Java package:
 </repositories>
 ```
 
-## Node.js
+## Node.js (Neo)
 
-```batch
-npm install duckdb@next
-```
-
-Note: The nightly release of the Node.js driver installs the old (deprecated) Node.js driver and not DuckDB Node Neo. For the Node Neo driver, the nightly release is currently not available.
+For the DuckDB Node Neo driver, the nightly release is currently not available.
 
 ## ODBC
 
@@ -86,17 +90,6 @@ For ODBC, the preview builds are based on the `main` branch of the [`duckdb/duck
 | macOS    | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-osx-universal.zip) |
 | Windows  | `arm64`            | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip) |
 | Windows  | `x86_64`           | [Download](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip) |
-
-## C / C++
-
-For the C / C++ clients, the preview builds are based on the `main` branch of the [`duckdb/duckdb` repository](https://github.com/duckdb/duckdb/).
-
-| Platform | Architecture       | Download                                                                        |
-| -------- | ------------------ | ------------------------------------------------------------------------------- |
-| Linux    | `arm64`            | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip) |
-| Linux    | `x86_64`           | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip) |
-| macOS    | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip)         |
-| Windows  | `arm64` / `x86_64` | [Download](https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip)     |
 
 ## R
 

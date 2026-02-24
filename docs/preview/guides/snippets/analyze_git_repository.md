@@ -162,7 +162,7 @@ LIMIT 20;
 ```
 
 As expected, there are many Git terms (`merge`, `branch`, `pull`, etc.), followed by terminology related to development (`fix`, `test`/`tests`, `issue`, `format`).
-We also see the account names of some developers ([`mytherin`](https://github.com/Mytherin), [`hawkfish`](https://github.com/hawkfish)), which are likely there due to commit message for merging pull requests (e.g., [”Merge pull request #13776 from Mytherin/expressiondepth”](https://github.com/duckdb/duckdb/commit/4d18b9d05caf88f0420dbdbe03d35a0faabf4aa7)).
+We also see the account names of some developers ([`mytherin`](https://github.com/Mytherin), [`hawkfish`](https://github.com/hawkfish)), which are likely there due to commit messages for merging pull requests (e.g., [”Merge pull request #13776 from Mytherin/expressiondepth”](https://github.com/duckdb/duckdb/commit/4d18b9d05caf88f0420dbdbe03d35a0faabf4aa7)).
 Finally, we also see some DuckDB-related terms such as `duckdb` (shocking!) and `function`.
 
 ### Visualizing the Number of Commits

@@ -6,7 +6,7 @@ title: WITH Clause
 
 The `WITH` clause allows you to specify common table expressions (CTEs).
 Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query.
-CTEs can reference each-other and can be nested. [Recursive CTEs](#recursive-ctes) can reference themselves.
+CTEs can reference each other and can be nested. [Recursive CTEs](#recursive-ctes) can reference themselves.
 
 ## Basic CTE Examples
 
@@ -387,7 +387,7 @@ This will overwrite the old payload `4` with the new payload `3`.
 WITH RECURSIVE tbl(a, b) USING KEY (a) AS (
     SELECT a, b
     FROM (VALUES (1, 3), (2, 4)) t(a, b)
-        UNION
+        UNION ALL
     SELECT a + 1, b
     FROM tbl
     WHERE a < 3
@@ -409,7 +409,7 @@ You can use the `VALUES` clause for the initial (anchor) part of the CTE:
 ```sql
 WITH RECURSIVE tbl(a, b) USING KEY (a) AS (
     VALUES (1, 3), (2, 4)
-        UNION
+        UNION ALL
     SELECT a + 1, b
     FROM tbl
     WHERE a < 3
@@ -439,7 +439,7 @@ INSERT INTO edges VALUES
 WITH RECURSIVE connected_components(id, comp) USING KEY (id) AS (
     SELECT n.id, n.id AS comp
     FROM nodes AS n
-        UNION (
+        UNION ALL (
     SELECT DISTINCT ON (previous_iter.id) previous_iter.id, initial_iter.comp
     FROM 
         recurring.connected_components AS previous_iter,

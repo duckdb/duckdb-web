@@ -86,7 +86,7 @@ COPY FROM DATABASE db1 TO db2 (SCHEMA);
 
 `COPY ... FROM` imports data from an external file into an existing table. The data is appended to whatever data is in the table already. The amount of columns inside the file must match the amount of columns in the table `tbl`, and the contents of the columns must be convertible to the column types of the table. In case this is not possible, an error will be thrown.
 
-If a list of columns is specified, `COPY` will only copy the data in the specified columns from the file. If there are any columns in the table that are not in the column list, `COPY ... FROM` will insert the default values for those columns
+If a list of columns is specified, `COPY` will only copy the data in the specified columns from the file. If there are any columns in the table that are not in the column list, `COPY ... FROM` will insert the default values for those columns.
 
 Copy the contents of a comma-separated file `test.csv` without a header into the table `test`:
 
@@ -377,7 +377,7 @@ COPY
     (FIELD_IDS {i: 42, j: 43});
 ```
 
-Sets the `field_id` of column `my_struct` to 43, and column `i` (nested inside `my_struct`) to 43:
+Sets the `field_id` of column `my_struct` to 42, and column `i` (nested inside `my_struct`) to 43:
 
 ```sql
 COPY

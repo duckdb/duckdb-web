@@ -148,7 +148,7 @@ The table below shows the available general aggregate functions.
 | [`string_agg(arg)`](#string_aggarg-sep) | Concatenates the column string values with a comma separator (`,`). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`sum(arg)`](#sumarg) | Calculates the sum of all non-null values in `arg` / counts `true` values when `arg` is boolean. The floating-point versions of this function are [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`weighted_avg(arg, weight)`](#weighted_avgarg-weight) | Calculates the weighted average all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the corresponding `arg` value will be skipped. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`weighted_avg(arg, weight)`](#weighted_avgarg-weight) | Calculates the weighted average of all non-null values in `arg`, where each value is scaled by its corresponding `weight`. If `weight` is `NULL`, the corresponding `arg` value will be skipped. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 
 #### `any_value(arg)`
 
@@ -192,7 +192,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | The generalized case of [`arg_min`](#arg_minarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Description** | The generalized case of [`arg_min`](#arg_minarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the bottom `n` rows ordered by `val` ascending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_min(A, B, 2)` |
 | **Alias(es)** | `argmin(arg, val, n)`, `min_by(arg, val, n)` |
 
@@ -265,7 +265,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the number rows where `arg` is not `NULL`. |
+| **Description** | Returns the number of rows where `arg` is not `NULL`. |
 | **Example** | `count(A)` |
 
 #### `countif(arg)`
@@ -452,7 +452,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`regr_slope(y, x)`](#regr_slopey-x) | The slope of the linear regression line, where x is the independent variable and y is the dependent variable. |
 | [`regr_sxx(y, x)`](#regr_sxxy-x) | The sample variance, which includes Bessel's bias correction, of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | [`regr_sxy(y, x)`](#regr_sxyy-x) | The sample covariance, which includes Bessel's bias correction. |
-| [`regr_syy(y, x)`](#regr_syyy-x) | The sample variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs , where x is the independent variable and y is the dependent variable. |
+| [`regr_syy(y, x)`](#regr_syyy-x) | The sample variance, which includes Bessel's bias correction, of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | [`skewness(x)`](#skewnessx) | The skewness. |
 | [`sem(x)`](#semx) | The standard error of the mean. |
 | [`stddev_pop(x)`](#stddev_popx) | The population standard deviation. |
@@ -464,7 +464,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The correlation coefficient.
+| **Description** | The correlation coefficient. |
 | **Formula** | `covar_pop(y, x) / (stddev_pop(x) * stddev_pop(y))` |
 
 #### `covar_pop(y, x)`
@@ -667,4 +667,4 @@ as the first argument.
 
 | Function | Description | Alias |
 |:--|:---|:--|
-| `grouping()` | For queries with `GROUP BY` and either [`ROLLUP` or `GROUPING SETS`]({% link docs/preview/sql/query_syntax/grouping_sets.md %}#identifying-grouping-sets-with-grouping_id): Returns an integer identifying which of the argument expressions where used to group on to create the current super-aggregate row. | `grouping_id()` |
+| `grouping()` | For queries with `GROUP BY` and either [`ROLLUP` or `GROUPING SETS`]({% link docs/preview/sql/query_syntax/grouping_sets.md %}#identifying-grouping-sets-with-grouping_id): Returns an integer identifying which of the argument expressions were used to group on to create the current super-aggregate row. | `grouping_id()` |

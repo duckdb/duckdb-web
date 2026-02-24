@@ -8,7 +8,7 @@ title: JSON Processing Functions
 ## JSON Extraction Functions
 
 There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the `JSON` logical type.
-These functions supports the same two location notations as [JSON Scalar functions](#json-scalar-functions).
+These functions support the same two location notations as [JSON Scalar functions](#json-scalar-functions).
 
 | Function                          | Alias                    | Operator | Description                                                                                                                       |
 | :-------------------------------- | :----------------------- | :------- | --------------------------------------------------------------------------------------------------------------------------------- |

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: urlpattern
   description: WHATWG URLPattern API for matching and extracting components from URLs using pattern syntax
-  version: 0.1.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: teaguesterling/duckdb_urlpattern
-  ref: 5a02887dfe0190d13527861ceb111ef4de9ad9ed
+  ref: 91719fd6a03574be86bf53f73b3d0fc8a9c3d493
+  ref_next: 91719fd6a03574be86bf53f73b3d0fc8a9c3d493
 
 docs:
   hello_world: |
@@ -41,41 +42,42 @@ docs:
 
   extended_description: |
     The URLPattern extension implements the [WHATWG URLPattern API](https://urlpattern.spec.whatwg.org/)
-    for DuckDB, enabling powerful URL matching and component extraction using a standard pattern syntax.
+    for DuckDB, enabling powerful URL matching, extraction, parsing, and construction.
 
     ## Features
 
     - **Custom URLPATTERN type** with validation and implicit casting from VARCHAR
     - **Pattern matching** with named groups (`:name`), wildcards (`*`), and regex groups
-    - **Component extraction** for protocol, hostname, port, pathname, search, and hash
-    - **Pattern caching** for improved performance on repeated patterns
+    - **URL parsing** into components (protocol, host, path, query, hash)
+    - **URL building** and modification from components
+    - **Query parameter extraction** as MAP or individual values
+    - **Pattern caching** for improved performance (~320k matches/sec)
 
-    ## Functions
+    ## Key Functions
 
     | Function | Description |
     |----------|-------------|
-    | `urlpattern(pattern)` | Create a validated URLPATTERN |
     | `urlpattern_test(pattern, url)` | Test if URL matches pattern |
     | `urlpattern_extract(pattern, url, group)` | Extract a named group |
     | `urlpattern_exec(pattern, url)` | Get full match results as STRUCT |
-    | `urlpattern_pathname(pattern)` | Get pathname component of pattern |
-    | `urlpattern_protocol(pattern)` | Get protocol component of pattern |
-    | `urlpattern_hostname(pattern)` | Get hostname component of pattern |
+    | `url_parse(url)` | Parse URL into struct with all components |
+    | `url_build(...)` | Build URL from named components |
+    | `url_modify(url, ...)` | Modify existing URL components |
+    | `url_search_params(url)` | Get query parameters as MAP |
 
     ## Pattern Syntax
 
     URLPattern uses a syntax similar to Express.js routes:
     - `:name` - Named parameter (matches any segment)
     - `*` - Wildcard (matches everything)
-    - `:name(regex)` - Named parameter with regex constraint
-    - `{optionalGroup}` - Optional group
+    - `/path/:id` - Path-only patterns match any protocol/host
 
-    For full pattern syntax, see the [URLPattern specification](https://urlpattern.spec.whatwg.org/).
+    For full documentation, see [duckdb-urlpattern.readthedocs.io](https://duckdb-urlpattern.readthedocs.io/).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 542
-extension_download_count_pretty: 542
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 526
+extension_download_count_pretty: 526
 image: '/images/community_extensions/social_preview/preview_community_extension_urlpattern.png'
 layout: community_extension_doc
 ---
@@ -103,11 +105,30 @@ LOAD {{ page.extension.name }};
 
 |    function_name    | function_type | description | comment | examples |
 |---------------------|---------------|-------------|---------|----------|
+| url_build           | scalar        | NULL        | NULL    |          |
+| url_hash            | scalar        | NULL        | NULL    |          |
+| url_host            | scalar        | NULL        | NULL    |          |
+| url_hostname        | scalar        | NULL        | NULL    |          |
+| url_href            | scalar        | NULL        | NULL    |          |
+| url_modify          | scalar        | NULL        | NULL    |          |
+| url_origin          | scalar        | NULL        | NULL    |          |
+| url_parse           | scalar        | NULL        | NULL    |          |
+| url_password        | scalar        | NULL        | NULL    |          |
+| url_pathname        | scalar        | NULL        | NULL    |          |
+| url_port            | scalar        | NULL        | NULL    |          |
+| url_protocol        | scalar        | NULL        | NULL    |          |
+| url_resolve         | scalar        | NULL        | NULL    |          |
+| url_search          | scalar        | NULL        | NULL    |          |
+| url_search_param    | scalar        | NULL        | NULL    |          |
+| url_search_params   | scalar        | NULL        | NULL    |          |
+| url_username        | scalar        | NULL        | NULL    |          |
+| url_valid           | scalar        | NULL        | NULL    |          |
 | urlpattern          | scalar        | NULL        | NULL    |          |
 | urlpattern_exec     | scalar        | NULL        | NULL    |          |
 | urlpattern_extract  | scalar        | NULL        | NULL    |          |
 | urlpattern_hash     | scalar        | NULL        | NULL    |          |
 | urlpattern_hostname | scalar        | NULL        | NULL    |          |
+| urlpattern_init     | scalar        | NULL        | NULL    |          |
 | urlpattern_pathname | scalar        | NULL        | NULL    |          |
 | urlpattern_port     | scalar        | NULL        | NULL    |          |
 | urlpattern_protocol | scalar        | NULL        | NULL    |          |

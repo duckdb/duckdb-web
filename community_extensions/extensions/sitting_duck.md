@@ -14,11 +14,10 @@ extension:
   license: MIT
   maintainers:
     - teaguesterling
-
 repo:
   github: teaguesterling/sitting_duck
-  ref: 'acfa07a8da6c6d6b6df45180f6f6a48970e1f7b7'
-  
+  ref: 95f0e1243fce165dfcf3ae3dc9eda4d47afb1b98
+  ref_next: 95f0e1243fce165dfcf3ae3dc9eda4d47afb1b98
 docs:
   hello_world: |
     -- Parse Python code and find function definitions
@@ -136,10 +135,10 @@ docs:
 
     **GitHub:** https://github.com/teaguesterling/sitting_duck
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 261
-extension_download_count_pretty: 261
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 410
+extension_download_count_pretty: 410
 image: '/images/community_extensions/social_preview/preview_community_extension_sitting_duck.png'
 layout: community_extension_doc
 ---

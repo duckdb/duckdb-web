@@ -9,7 +9,7 @@ excerpt: ""
 pill: "arXiv"
 ---
 
-[Paper (preprint PDF)](https://arxiv.org/abs/2508.04701)
+[Paper (preprint PDF)](https://arxiv.org/pdf/2508.04701.pdf)
 
 Published on arXiv in 2025
 

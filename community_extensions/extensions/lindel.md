@@ -20,6 +20,7 @@ extension:
 repo:
   github: query-farm/lindel
   ref: 3f9906c71e7883e0f2ee8696d9e8648750bdb76b
+  ref_next: 9ef24770f13ad50006f0ed922ca497daaece20dc
 
 extension_star_count: 58
 extension_star_count_pretty: 58

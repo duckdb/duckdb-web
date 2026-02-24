@@ -64,7 +64,7 @@ INSERT INTO incoming_ducks VALUES
 
 ### Step 2: Create the Master (target) Table
 
-This table represents the type 2 SCD data, (i.e. transaction data with history).
+This table represents the type 2 SCD data (i.e., transaction data with history).
 
 ```sql
 CREATE TABLE IF NOT EXISTS master_ducks (
@@ -179,11 +179,11 @@ Returns:
 
 **Note**: 
 
-- The `end date` is NOT NULL, it has the date when this ducks data was updated.
+- The `end date` is NOT NULL, it has the date when this duck's data was updated.
 - The `is_current` is `false` indicating this is a historical record.
 - The field that will change is `location`, it is currently `Pond A` and will be updated to `Pond B`.
 
-To view the current row of data that is current: 
+To view the current row of data:
 
 ```sql
 SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = true;

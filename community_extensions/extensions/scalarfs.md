@@ -14,11 +14,10 @@ extension:
   license: MIT
   maintainers:
     - teaguesterling
-
 repo:
   github: teaguesterling/duckdb_scalarfs
-  ref: "a2ddb7e34c9b7533d22155f02fd251142dbec76a"
-
+  ref: f1b17a25ad0635520186b22cf8158730b1c68712
+  ref_next: f1b17a25ad0635520186b22cf8158730b1c68712
 docs:
   hello_world: |
     LOAD scalarfs;
@@ -73,8 +72,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 817
-extension_download_count_pretty: 817
+extension_download_count: 418
+extension_download_count_pretty: 418
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---

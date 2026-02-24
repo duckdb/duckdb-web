@@ -32,7 +32,7 @@ FROM generate_series(1, 10) tbl(i);
 |:---|:---|:---|
 | 10 | 5 | 5 |
 
-> Simply counting rows that satisfy a condition can also be achieved without `FILTER` clause, using the boolean `sum` aggregate function, e.g., `sum(i <= 5)`.
+> Simply counting rows that satisfy a condition can also be achieved without the `FILTER` clause, using the boolean `sum` aggregate function, e.g., `sum(i <= 5)`.
 
 Different aggregate functions may be used, and multiple `WHERE` expressions are also permitted:
 

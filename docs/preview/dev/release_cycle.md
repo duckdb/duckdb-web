@@ -163,7 +163,7 @@ extensions follow the same branching scheme as DuckDB where a combination of `ma
 role. We will now define the three types of unstable extensions by looking at their **number of active branches**.
 
 - **Single branch extensions** have only the `main` *active* branch
-- **Two branch extensions** have two *active* branches: `main`and `vx.y-codename`
+- **Two branch extensions** have two *active* branches: `main` and `vx.y-codename`
 - **Three branch extensions** have three *active* branches: `main`, `vx.y-codename`, and `vx.<y+1>-codename`
 
 #### DuckDB Targets

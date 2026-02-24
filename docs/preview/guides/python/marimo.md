@@ -58,7 +58,7 @@ The SQL statement itself is an f-string, letting you interpolate Python values i
 
 ## Connecting a Custom DuckDB Connection
 
-To connect to a custom DuckDB connection instead of using the default global connection, create a cell and create a DuckDB connection as Python variable:
+To connect to a custom DuckDB connection instead of using the default global connection, create a cell and create a DuckDB connection as a Python variable:
 
 ```python
 import duckdb
@@ -79,7 +79,7 @@ marimo automatically discovers the connection and lets you select it in the SQL 
 
 ## Database, Schema, and Table Auto-Discovery
 
-marimo introspects connections and display the database, schemas, tables, and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
+marimo introspects connections and displays the database, schemas, tables, and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
 
 <div align="center">
   <figure>
@@ -117,7 +117,7 @@ Defining a non-private (non-underscored) output variable in the SQL cell allows 
 
 ## Reactive SQL Cells
 
-marimo allows you to create reactive SQL cells that automatically update when their dependencies change. **Working with expensive queries or large datasets?** You can configure marimo's runtime to be “lazy”. By doing so, dependent cells are only marked as stale letting the user choose when they should be re-run.
+marimo allows you to create reactive SQL cells that automatically update when their dependencies change. **Working with expensive queries or large datasets?** You can configure marimo's runtime to be “lazy”. By doing so, dependent cells are only marked as stale, letting the user choose when they should be re-run.
 
 ```python
 digits = mo.ui.slider(label="Digits", start=100, stop=10000, step=200)

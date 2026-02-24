@@ -16,7 +16,7 @@ extension:
     - tlinhart
 repo:
   github: tlinhart/duckdb-elasticsearch
-  ref: f7e5f93c4e7b3997d799d8172d53e67d27a453bb
+  ref: ea88cc2e09378c1ceb286926755727df909699f5
 docs:
   hello_world: |
     -- Basic query.
@@ -41,7 +41,17 @@ docs:
     )
     WHERE category = 'electronics' AND price > 100;
 
-    -- Combine with a base Elasticsearch query.
+    -- Geospatial query pushdown (requires the DuckDB spatial extension).
+    INSTALL spatial;
+    LOAD spatial;
+
+    SELECT name FROM elasticsearch_query(
+        host := 'localhost',
+        index := 'places'
+    )
+    WHERE ST_Intersects(ST_GeomFromGeoJSON(geometry), ST_Point(-122.4194, 37.7749));
+
+    -- Combine WHERE clause with a base Elasticsearch query.
     SELECT title, author FROM elasticsearch_query(
         host := 'localhost',
         index := 'books',
@@ -67,10 +77,10 @@ docs:
 
     For detailed documentation, visit the [extension repository](https://github.com/tlinhart/duckdb-elasticsearch).
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 290
-extension_download_count_pretty: 290
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 342
+extension_download_count_pretty: 342
 image: '/images/community_extensions/social_preview/preview_community_extension_elasticsearch.png'
 layout: community_extension_doc
 ---

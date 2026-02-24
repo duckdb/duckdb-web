@@ -8,11 +8,11 @@ excerpt: |
 extension:
   name: aixchess
   description: Efficiently query large chess game collections
-  version: 0.1.0
+  version: 0.1.1
   language: C++
   build: cmake
   license: GPL-3.0
-  excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   opt_in_platforms: "windows_arm64;"
   requires_toolchains: rust
   maintainers:
@@ -20,19 +20,37 @@ extension:
 
 repo:
   github: thomas-daniels/aix
-  ref: d668f7ac4a1e62625adade526ee6d9e3387c123f
+  ref: f565c29a3dd51c219c4bc9013ad90596ec83df69
 
 docs:
+  hello_world: |
+    -- Count en passant moves played in Lichess games from January 2013
+
+    WITH lichess_2013_01 AS (
+        FROM 'hf://datasets/thomasd1/aix-lichess-database/low_compression/aix_lichess_2013-01_low.parquet'
+    ),
+    en_passant_move_count AS (
+        SELECT
+            SUM(
+                move_details(movedata).filter(lambda m: m.is_en_passant).length()
+            ) AS nb_ep_moves 
+        FROM lichess_2013_01
+    )
+    
+    FROM en_passant_move_count;
+
+    -- Result: 3496
+
   extended_description: |
     Aix enables efficient storage and querying of large chess game collections.
     A game's moves are encoded in a binary representation, and this extension
     [provides scalar functions](https://github.com/thomas-daniels/aix/blob/main/docs/functions.md) to decode and query these games directly within DuckDB.
 
     See the [GitHub repository](https://github.com/thomas-daniels/aix) or [blog post](https://thomasd.be/2026/02/01/aix-storing-querying-chess-games.html) for more details.
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 274
-extension_download_count_pretty: 274
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 336
+extension_download_count_pretty: 336
 image: '/images/community_extensions/social_preview/preview_community_extension_aixchess.png'
 layout: community_extension_doc
 ---

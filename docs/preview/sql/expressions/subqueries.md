@@ -96,7 +96,7 @@ returns
 |-----------|
 | false     |
 
-because 8 is not greater than or equal to the subquery result 7. And thus, because not all comparisons evaluate `true`, `>= ALL` as a whole evaluates to `false`.
+because 8 is not greater than or equal to the subquery result 9. And thus, because not all comparisons evaluate to `true`, `>= ALL` as a whole evaluates to `false`.
 
 ### `ANY`
 
@@ -115,7 +115,7 @@ returns
 
 because no result of the subquery is less than or equal to 5.
 
-The quantifier `SOME` maybe used instead of `ANY`: `ANY` and `SOME` are interchangeable.
+The quantifier `SOME` may be used instead of `ANY`: `ANY` and `SOME` are interchangeable.
 
 ## `EXISTS`
 

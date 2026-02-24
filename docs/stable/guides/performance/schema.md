@@ -52,7 +52,7 @@ JOIN Comment c2 ON c1.ParentCommentId = c2.id;
 
 In the first experiment, we use the correct (most restrictive) types, i.e., both the `id` and the `ParentCommentId` columns are defined as `BIGINT`.
 In the second experiment, we define all columns with the `VARCHAR` type.
-While the results of the queries are the same for all both experiments, their runtime vary significantly.
+While the results of the queries are the same for both experiments, their runtimes vary significantly.
 The results below show that joining on `BIGINT` columns is approx. 1.8× faster than performing the same join on `VARCHAR`-typed columns encoding the same value.
 
 | Join column payload type | Join column schema type | Example value      | Query time |

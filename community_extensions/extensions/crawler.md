@@ -21,6 +21,7 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-crawler
   ref: f0aad857435a2ce138c567e8af11f9d4f8ae0c25
+  ref_next: 7725ede99eff1657a2cee770048be33328ae9f02
 
 docs:
   hello_world: |
@@ -67,8 +68,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 393
-extension_download_count_pretty: 393
+extension_download_count: 416
+extension_download_count_pretty: 416
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'
 layout: community_extension_doc
 ---

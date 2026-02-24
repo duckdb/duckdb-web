@@ -37,7 +37,7 @@ Note that there are subtle differences: compared to the result when [describing 
 
 ## Using `DESCRIBE` in a Subquery
 
-`DESCRIBE` can be used a subquery. This allows creating a table from the description, for example:
+`DESCRIBE` can be used as a subquery. This allows creating a table from the description, for example:
 
 ```sql
 CREATE TABLE tbl_description AS SELECT * FROM (DESCRIBE tbl);

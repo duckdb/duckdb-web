@@ -42,7 +42,7 @@ DESCRIBE todos;
 | title       | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | completed   | BOOLEAN     | YES  | NULL | NULL    | NULL  |
 
-If we specify types for subset of columns, `read_json` excludes columns that we don't specify:
+If we specify types for a subset of columns, `read_json` excludes columns that we don't specify:
 
 ```sql
 SELECT *
@@ -193,7 +193,7 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 | `records` | Can be one of `auto`, `true`, `false` | `VARCHAR` | `auto` |
 | `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format]({% link docs/preview/sql/functions/dateformat.md %}) | `VARCHAR` | `iso`|
-| `union_by_name` | Whether the schema's of multiple JSON files should be [unified]({% link docs/preview/data/multiple_files/combining_schemas.md %}) | `BOOL` | `false` |
+| `union_by_name` | Whether the schemas of multiple JSON files should be [unified]({% link docs/preview/data/multiple_files/combining_schemas.md %}) | `BOOL` | `false` |
 | `map_inference_threshold` | Controls the threshold for number of columns whose schema will be auto-detected; if JSON schema auto-detection would infer a `STRUCT` type for a field that has _more_ than this threshold number of subfields, it infers a `MAP` type instead. Set to `-1` to disable `MAP` inference. | `BIGINT` | `200` |
 | `field_appearance_threshold` | The JSON reader divides the number of appearances of each JSON field by the auto-detection sample size. If the average over the fields of an object is less than this threshold, it will default to using a `MAP` type with value type of merged field types. | `DOUBLE` | `0.1` |
 
@@ -362,4 +362,4 @@ CREATE TABLE numbers AS
 | `records` | Can be one of `auto`, `true`, `false` | `VARCHAR` | `records` |
 | `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format]({% link docs/preview/sql/functions/dateformat.md %}) | `VARCHAR` | `iso`|
-| `union_by_name` | Whether the schema's of multiple JSON files should be [unified]({% link docs/preview/data/multiple_files/combining_schemas.md %}). | `BOOL` | `false` |
+| `union_by_name` | Whether the schemas of multiple JSON files should be [unified]({% link docs/preview/data/multiple_files/combining_schemas.md %}). | `BOOL` | `false` |

@@ -325,7 +325,7 @@ The arrow options associated with the given result. This must be destroyed with
 
 #### `duckdb_column_count`
 
-Returns the number of columns present in a the result object.
+Returns the number of columns present in the result object.
 
 ##### Syntax
 

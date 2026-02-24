@@ -23,7 +23,7 @@ DuckDB's implementation is based on [PostgreSQL's information schema](https://ww
 
 ### `columns`: Columns
 
-The view that describes the catalog information for columns is `information_schema.columns`. It lists the column present in the database and has the following layout:
+The view that describes the catalog information for columns is `information_schema.columns`. It lists the columns present in the database and has the following layout:
 
 | Column | Description | Type | Example |
 |:--|:---|:-|:-|
@@ -38,7 +38,7 @@ The view that describes the catalog information for columns is `information_sche
 | `character_maximum_length` | If `data_type` identifies a character or bit string type, the declared maximum length; `NULL` for all other data types or if no maximum length was declared. |`INTEGER`| `255` |
 | `character_octet_length` | If `data_type` identifies a character type, the maximum possible length in octets (bytes) of a datum; `NULL` for all other data types. The maximum octet length depends on the declared character maximum length (see above) and the character encoding. |`INTEGER`| `1073741824` |
 | `numeric_precision` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) precision of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is `NULL`. |`INTEGER`| `18` |
-| `numeric_scale` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) scale of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is `NULL`. |`INTEGER`| `2` |
+| `numeric_scale` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) scale of the type for this column. The scale indicates the number of digits after the decimal point. For all other data types, this column is `NULL`. |`INTEGER`| `2` |
 | `datetime_precision` | If `data_type` identifies a date, time, timestamp, or interval type, this column contains the (declared or implicit) fractional seconds precision of the type for this column, that is, the number of decimal digits maintained following the decimal point in the seconds value. No fractional seconds are currently supported in DuckDB. For all other data types, this column is `NULL`. |`INTEGER`| `0` |
 
 ### `constraint_column_usage`: Constraint Column Usage

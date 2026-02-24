@@ -51,7 +51,7 @@ SELECT * FROM test_catalog.test_schema.test_table LIMIT 10;
 
 ## Features
 
-This extension is still experiment and work-in-progress; it supports:
+This extension is still experimental and work-in-progress; it supports:
 
 - Listing available tables (`SHOW ALL TABLES;`)
 - Interacting with tables using standard SQL (`SELECT * FROM <catalog>.<schema>.<table>;`)

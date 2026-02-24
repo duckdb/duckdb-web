@@ -1,9 +1,11 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-java
 layout: docu
-title: Java JDBC Client
+title: Java (JDBC) Client
 ---
 
+> Tip To use the DuckDB Java (JDBC) client, visit the [Java installation page]({% link install/index.html %}?environment=java).
+>
 > The latest stable version of the DuckDB Java (JDBC) client is {{ site.current_duckdb_java_short_version }}.
 
 ## Installation
@@ -280,7 +282,7 @@ stmt.close();
 
 ### Driver Class Not Found
 
-If the Java application is unable to find the DuckDB, it may throw the following error:
+If the Java application is unable to find the DuckDB driver, it may throw the following error:
 
 ```console
 Exception in thread "main" java.sql.SQLException: No suitable driver found for jdbc:duckdb:

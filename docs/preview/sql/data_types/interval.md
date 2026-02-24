@@ -63,7 +63,7 @@ FROM (
 
 > Warning The *microseconds* component is split only into hours, minutes and microseconds, rather than hours, minutes, *seconds* and microseconds.
 
-The following table describe how these parts are extracted by `datepart` in formulas, as a function of the three basis units.
+The following table describes how these parts are extracted by `datepart` in formulas, as a function of the three basis units.
 
 | Part                 | Formula                                          |
 |----------------------|--------------------------------------------------|

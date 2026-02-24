@@ -13,7 +13,7 @@ The enum type represents a dictionary data structure with all possible unique va
 
 ## Creating Enums
 
-You can create enum using hardcoded values:
+You can create an enum using hardcoded values:
 
 ```sql
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
@@ -79,7 +79,7 @@ INSERT INTO person VALUES
     ('Mr. Mackey', 'ok');
 ```
 
-The following query will fail since the mood type does not have `quackity-quack` value.
+The following query will fail since the mood type does not have a `quackity-quack` value.
 
 ```sql
 INSERT INTO person VALUES ('Hannes', 'quackity-quack');
@@ -219,10 +219,10 @@ WHERE priority_level >= 'medium'::priority;
 
 See [Enum Functions]({% link docs/preview/sql/functions/enum.md %}).
 
-For example, show the available values in the `moods` enum using the `enum_range` function:
+For example, show the available values in the `mood` enum using the `enum_range` function:
 
 ```sql
-SELECT enum_range(NULL::moods) AS my_enum_range;
+SELECT enum_range(NULL::mood) AS my_enum_range;
 ```
 
 |  my_enum_range     |

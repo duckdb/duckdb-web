@@ -32,7 +32,7 @@ Use the `default_null_order` option to change the default `NULL` sorting order t
 SET default_null_order = 'NULLS_FIRST';
 ```
 
-Use the `default_order` to change the direction of the default sorting order to either `DESC` or `ASC`:
+Use the `default_order` option to change the direction of the default sorting order to either `DESC` or `ASC`:
 
 ```sql
 SET default_order = 'DESC';

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sshfs
   description: Allows reading and writing files over SSH
-  version: '2026020501'
+  version: '2026021601'
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,8 @@ extension:
   vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
 repo:
   github: midwork-finds-jobs/duckdb-sshfs
-  ref: 644366f21a80397d38979e6200fd26a544b98e7e
+  ref: 5f2e422f964010d11a0bea040ab421c4d7f7fa41
+  ref_next: 8c4216e8f33d7f7c3d7c3a8f171856eb7a5ac8e6
 
 docs:
   hello_world: |
@@ -58,8 +59,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 412
-extension_download_count_pretty: 412
+extension_download_count: 430
+extension_download_count_pretty: 430
 image: '/images/community_extensions/social_preview/preview_community_extension_sshfs.png'
 layout: community_extension_doc
 ---
@@ -85,14 +86,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                            description                                                            | input_type | scope  | aliases |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| ssh_keepalive                | SSH keepalive interval in seconds (default: 60, set to 0 to disable). Prevents idle connection timeouts and improves performance. | BIGINT     | GLOBAL | []      |
-| sshfs_chunk_size_mb          | Chunk size in MB for uploads (default: 50MB, larger chunks may improve throughput but use more memory)                            | BIGINT     | GLOBAL | []      |
-| sshfs_debug_logging          | Enable debug logging for SSHFS operations                                                                                         | BOOLEAN    | GLOBAL | []      |
-| sshfs_initial_retry_delay_ms | Initial delay in milliseconds between retries, with exponential backoff (default: 1000)                                           | BIGINT     | GLOBAL | []      |
-| sshfs_max_concurrent_uploads | Maximum number of concurrent chunk uploads (default: 2, higher values may improve speed but use more connections)                 | BIGINT     | GLOBAL | []      |
-| sshfs_max_retries            | Maximum number of connection retry attempts (default: 3)                                                                          | BIGINT     | GLOBAL | []      |
-| sshfs_timeout_seconds        | Timeout in seconds for SSH operations (default: 300 = 5 minutes)                                                                  | BIGINT     | GLOBAL | []      |
+|             name             |                                                                           description                                                                            | input_type | scope  | aliases |
+|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| ssh_keepalive                | SSH keepalive interval in seconds (default: 60, set to 0 to disable). Prevents idle connection timeouts and improves performance.                                | BIGINT     | GLOBAL | []      |
+| sshfs_chunk_size_mb          | Chunk size in MB for uploads (default: 50MB, larger chunks may improve throughput but use more memory)                                                           | BIGINT     | GLOBAL | []      |
+| sshfs_debug_logging          | Enable debug logging for SSHFS operations                                                                                                                        | BOOLEAN    | GLOBAL | []      |
+| sshfs_initial_retry_delay_ms | Initial delay in milliseconds between retries, with exponential backoff (default: 1000)                                                                          | BIGINT     | GLOBAL | []      |
+| sshfs_max_concurrent_uploads | Maximum number of concurrent chunk uploads (default: 2, higher values may improve speed but use more connections)                                                | BIGINT     | GLOBAL | []      |
+| sshfs_max_retries            | Maximum number of connection retry attempts (default: 3)                                                                                                         | BIGINT     | GLOBAL | []      |
+| sshfs_strict_crypto          | Restrict SSH to non-NIST algorithms only (curve25519, ed25519, DH group14+). Removes ecdh-sha2-nistp*, ecdsa-sha2-nistp*, and legacy algorithms (default: false) | BOOLEAN    | GLOBAL | []      |
+| sshfs_timeout_seconds        | Timeout in seconds for SSH operations (default: 300 = 5 minutes)                                                                                                 | BIGINT     | GLOBAL | []      |
 
 

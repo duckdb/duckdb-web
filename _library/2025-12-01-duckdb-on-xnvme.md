@@ -10,7 +10,7 @@ excerpt: ""
 pill: "arXiv"
 ---
 
-[Paper (preprint PDF)](https://arxiv.org/abs/2512.01490)
+[Paper (preprint PDF)](https://arxiv.org/pdf/2512.01490.pdf)
 
 [Implementation (fork)](https://github.com/Ma-Master-DK/duckdb)
 

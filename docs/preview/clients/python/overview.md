@@ -4,6 +4,8 @@ layout: docu
 title: Python API
 ---
 
+> Tip To use the DuckDB Python client, visit the [Rust installation page]({% link install/index.html %}?environment=python).
+>
 > The latest stable version of the DuckDB Python client is {{ site.current_duckdb_version }}.
 
 ## Installation
@@ -214,7 +216,7 @@ con = duckdb.connect(config = {'storage_compatibility_version': 'latest'})
 
 The connection object and the `duckdb` module can be used interchangeably – they support the same methods. The only difference is that when using the `duckdb` module a global in-memory database is used.
 
-> If you are developing a package designed for others to use, and use DuckDB in the package, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
+> If you are developing a package designed for others to use, and use DuckDB in the package, it is recommended that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
 
 ### Using Connections in Parallel Python Programs 
 

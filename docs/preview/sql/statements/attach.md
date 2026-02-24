@@ -121,7 +121,7 @@ Using this, you can opt-in to newer forwards-incompatible features:
 ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
 ```
 
-This setting specifies the minimum DuckDB version that should be able to read the database file. When database files are written with this option, the resulting files cannot be opened by older DuckDB released versions than the specified version. They can be read by the specified version and all newer versions of DuckDB.
+This setting specifies the minimum DuckDB version that should be able to read the database file. When database files are written with this option, the resulting files cannot be opened by older DuckDB versions than the specified version. They can be read by the specified version and all newer versions of DuckDB.
 
 For more details, see the [“Storage” page]({% link docs/preview/internals/storage.md %}#explicit-storage-versions).
 

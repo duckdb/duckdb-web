@@ -44,7 +44,7 @@ DESCRIBE todos;
 | title       | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | completed   | BOOLEAN     | YES  | NULL | NULL    | NULL  |
 
-If we specify types for subset of columns, `read_json` excludes columns that we don't specify:
+If we specify types for a subset of columns, `read_json` excludes columns that we don't specify:
 
 ```sql
 SELECT *

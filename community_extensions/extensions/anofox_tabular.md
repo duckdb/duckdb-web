@@ -10,18 +10,18 @@ extension:
   description: A duckdb extension which combines data quality and data preparation tools for tabular data.
   language: C++
   build: cmake
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads;"
+  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads;linux_arm64;linux_amd64_musl;" 
   license: BSL 1.1
   maintainers:
     - jrosskopf
 repo:
   github: DataZooDE/anofox-tabular
-  ref: 058ad4ea3ecb38ed00e8a4c135b0f427d119c8b4
+  ref: f5de13f6bd2aba433d3bd24f92df53852ff04798
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 560
-extension_download_count_pretty: 560
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 212
+extension_download_count_pretty: 212
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
 ---
@@ -47,139 +47,196 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|                  function_name                  | function_type | description | comment | examples |
-|-------------------------------------------------|---------------|-------------|---------|----------|
-| anofox_tab_currency_name                        | scalar        | NULL        | NULL    |          |
-| anofox_tab_currency_symbol                      | scalar        | NULL        | NULL    |          |
-| anofox_tab_diff_hashdiff                        | table         | NULL        | NULL    |          |
-| anofox_tab_diff_joindiff                        | table         | NULL        | NULL    |          |
-| anofox_tab_email_config                         | table         | NULL        | NULL    |          |
-| anofox_tab_email_is_valid                       | scalar        | NULL        | NULL    |          |
-| anofox_tab_email_validate                       | scalar        | NULL        | NULL    |          |
-| anofox_tab_is_valid_currency                    | scalar        | NULL        | NULL    |          |
-| anofox_tab_is_valid_vat_country                 | scalar        | NULL        | NULL    |          |
-| anofox_tab_metric_dbscan                        | table         | NULL        | NULL    |          |
-| anofox_tab_metric_dbscan_multivariate           | table         | NULL        | NULL    |          |
-| anofox_tab_metric_distinct_count                | table         | NULL        | NULL    |          |
-| anofox_tab_metric_freshness                     | table         | NULL        | NULL    |          |
-| anofox_tab_metric_iqr                           | table         | NULL        | NULL    |          |
-| anofox_tab_metric_isolation_forest              | table         | NULL        | NULL    |          |
-| anofox_tab_metric_isolation_forest_multivariate | table         | NULL        | NULL    |          |
-| anofox_tab_metric_null_rate                     | table         | NULL        | NULL    |          |
-| anofox_tab_metric_schema                        | table         | NULL        | NULL    |          |
-| anofox_tab_metric_volume                        | table         | NULL        | NULL    |          |
-| anofox_tab_metric_zscore                        | table         | NULL        | NULL    |          |
-| anofox_tab_money                                | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_abs                            | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_add                            | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_amount                         | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_currency                       | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_format                         | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_from_cents                     | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_in_range                       | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_is_negative                    | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_is_positive                    | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_is_zero                        | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_multiply                       | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_same_currency                  | scalar        | NULL        | NULL    |          |
-| anofox_tab_money_subtract                       | scalar        | NULL        | NULL    |          |
-| anofox_tab_phonenumber_example                  | scalar        | NULL        | NULL    |          |
-| anofox_tab_phonenumber_format                   | scalar        | NULL        | NULL    |          |
-| anofox_tab_phonenumber_is_possible              | scalar        | NULL        | NULL    |          |
-| anofox_tab_phonenumber_is_valid                 | scalar        | NULL        | NULL    |          |
-| anofox_tab_phonenumber_is_valid_for_region      | scalar        | NULL        | NULL    |          |
-| anofox_tab_phonenumber_match                    | scalar        | NULL        | NULL    |          |
-| anofox_tab_phonenumber_parse                    | scalar        | NULL        | NULL    |          |
-| anofox_tab_phonenumber_region                   | scalar        | NULL        | NULL    |          |
-| anofox_tab_phonenumber_status                   | table         | NULL        | NULL    |          |
-| anofox_tab_postal_expand_address                | scalar        | NULL        | NULL    |          |
-| anofox_tab_postal_load_data                     | scalar        | NULL        | NULL    |          |
-| anofox_tab_postal_parse_address                 | scalar        | NULL        | NULL    |          |
-| anofox_tab_postal_status                        | table         | NULL        | NULL    |          |
-| anofox_tab_vat                                  | scalar        | NULL        | NULL    |          |
-| anofox_tab_vat_country_name                     | scalar        | NULL        | NULL    |          |
-| anofox_tab_vat_exists                           | scalar        | NULL        | NULL    |          |
-| anofox_tab_vat_format                           | scalar        | NULL        | NULL    |          |
-| anofox_tab_vat_is_eu_member                     | scalar        | NULL        | NULL    |          |
-| anofox_tab_vat_is_valid                         | scalar        | NULL        | NULL    |          |
-| anofox_tab_vat_is_valid_syntax                  | scalar        | NULL        | NULL    |          |
-| anofox_tab_vat_normalize                        | scalar        | NULL        | NULL    |          |
-| anofox_tab_vat_split                            | scalar        | NULL        | NULL    |          |
-| currency_name                                   | scalar        | NULL        | NULL    |          |
-| currency_symbol                                 | scalar        | NULL        | NULL    |          |
-| diff_hashdiff                                   | table         | NULL        | NULL    |          |
-| diff_joindiff                                   | table         | NULL        | NULL    |          |
-| email_config                                    | table         | NULL        | NULL    |          |
-| email_is_valid                                  | scalar        | NULL        | NULL    |          |
-| email_validate                                  | scalar        | NULL        | NULL    |          |
-| is_valid_currency                               | scalar        | NULL        | NULL    |          |
-| is_valid_vat_country                            | scalar        | NULL        | NULL    |          |
-| metric_dbscan                                   | table         | NULL        | NULL    |          |
-| metric_dbscan_multivariate                      | table         | NULL        | NULL    |          |
-| metric_distinct_count                           | table         | NULL        | NULL    |          |
-| metric_freshness                                | table         | NULL        | NULL    |          |
-| metric_iqr                                      | table         | NULL        | NULL    |          |
-| metric_isolation_forest                         | table         | NULL        | NULL    |          |
-| metric_isolation_forest_multivariate            | table         | NULL        | NULL    |          |
-| metric_null_rate                                | table         | NULL        | NULL    |          |
-| metric_schema                                   | table         | NULL        | NULL    |          |
-| metric_volume                                   | table         | NULL        | NULL    |          |
-| metric_zscore                                   | table         | NULL        | NULL    |          |
-| money                                           | scalar        | NULL        | NULL    |          |
-| money_abs                                       | scalar        | NULL        | NULL    |          |
-| money_add                                       | scalar        | NULL        | NULL    |          |
-| money_amount                                    | scalar        | NULL        | NULL    |          |
-| money_currency                                  | scalar        | NULL        | NULL    |          |
-| money_format                                    | scalar        | NULL        | NULL    |          |
-| money_from_cents                                | scalar        | NULL        | NULL    |          |
-| money_in_range                                  | scalar        | NULL        | NULL    |          |
-| money_is_negative                               | scalar        | NULL        | NULL    |          |
-| money_is_positive                               | scalar        | NULL        | NULL    |          |
-| money_is_zero                                   | scalar        | NULL        | NULL    |          |
-| money_multiply                                  | scalar        | NULL        | NULL    |          |
-| money_same_currency                             | scalar        | NULL        | NULL    |          |
-| money_subtract                                  | scalar        | NULL        | NULL    |          |
-| phonenumber_example                             | scalar        | NULL        | NULL    |          |
-| phonenumber_format                              | scalar        | NULL        | NULL    |          |
-| phonenumber_is_possible                         | scalar        | NULL        | NULL    |          |
-| phonenumber_is_valid                            | scalar        | NULL        | NULL    |          |
-| phonenumber_is_valid_for_region                 | scalar        | NULL        | NULL    |          |
-| phonenumber_match                               | scalar        | NULL        | NULL    |          |
-| phonenumber_parse                               | scalar        | NULL        | NULL    |          |
-| phonenumber_region                              | scalar        | NULL        | NULL    |          |
-| phonenumber_status                              | table         | NULL        | NULL    |          |
-| postal_expand_address                           | scalar        | NULL        | NULL    |          |
-| postal_load_data                                | scalar        | NULL        | NULL    |          |
-| postal_parse_address                            | scalar        | NULL        | NULL    |          |
-| postal_status                                   | table         | NULL        | NULL    |          |
-| vat                                             | scalar        | NULL        | NULL    |          |
-| vat_country_name                                | scalar        | NULL        | NULL    |          |
-| vat_exists                                      | scalar        | NULL        | NULL    |          |
-| vat_format                                      | scalar        | NULL        | NULL    |          |
-| vat_is_eu_member                                | scalar        | NULL        | NULL    |          |
-| vat_is_valid                                    | scalar        | NULL        | NULL    |          |
-| vat_is_valid_syntax                             | scalar        | NULL        | NULL    |          |
-| vat_normalize                                   | scalar        | NULL        | NULL    |          |
-| vat_split                                       | scalar        | NULL        | NULL    |          |
+|               function_name                | function_type | description | comment | examples |
+|--------------------------------------------|---------------|-------------|---------|----------|
+| anofox_ner_status                          | table         | NULL        | NULL    |          |
+| anofox_tab_currency_name                   | scalar        | NULL        | NULL    |          |
+| anofox_tab_currency_symbol                 | scalar        | NULL        | NULL    |          |
+| anofox_tab_dbscan                          | table         | NULL        | NULL    |          |
+| anofox_tab_dbscan_mv                       | table         | NULL        | NULL    |          |
+| anofox_tab_diff_hashdiff                   | table         | NULL        | NULL    |          |
+| anofox_tab_diff_joindiff                   | table         | NULL        | NULL    |          |
+| anofox_tab_distinct_count                  | table         | NULL        | NULL    |          |
+| anofox_tab_email_config                    | table         | NULL        | NULL    |          |
+| anofox_tab_email_is_valid                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_email_validate                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_freshness                       | table         | NULL        | NULL    |          |
+| anofox_tab_iqr                             | table         | NULL        | NULL    |          |
+| anofox_tab_is_valid_currency               | scalar        | NULL        | NULL    |          |
+| anofox_tab_is_valid_vat_country            | scalar        | NULL        | NULL    |          |
+| anofox_tab_isolation_forest                | table         | NULL        | NULL    |          |
+| anofox_tab_isolation_forest_mv             | table         | NULL        | NULL    |          |
+| anofox_tab_money                           | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_abs                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_add                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_amount                    | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_currency                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_format                    | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_from_cents                | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_in_range                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_is_negative               | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_is_positive               | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_is_zero                   | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_multiply                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_same_currency             | scalar        | NULL        | NULL    |          |
+| anofox_tab_money_subtract                  | scalar        | NULL        | NULL    |          |
+| anofox_tab_null_rate                       | table         | NULL        | NULL    |          |
+| anofox_tab_outlier_tree                    | table         | NULL        | NULL    |          |
+| anofox_tab_phonenumber_example             | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_format              | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_is_possible         | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_is_valid            | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_is_valid_for_region | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_match               | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_parse               | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_region              | scalar        | NULL        | NULL    |          |
+| anofox_tab_phonenumber_status              | table         | NULL        | NULL    |          |
+| anofox_tab_pii_audit_table                 | table         | NULL        | NULL    |          |
+| anofox_tab_pii_config                      | table         | NULL        | NULL    |          |
+| anofox_tab_pii_contains                    | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_count                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_detect                      | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_detect_batch                | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_detect_credit_cards         | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_detect_emails               | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_detect_ibans                | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_detect_names                | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_detect_phones               | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_detect_ssns                 | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_is_valid_credit_card        | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_is_valid_crypto_address     | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_is_valid_de_tax_id          | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_is_valid_iban               | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_is_valid_nino               | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_is_valid_ssn                | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_mask                        | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_mask_column                 | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_redact_column               | scalar        | NULL        | NULL    |          |
+| anofox_tab_pii_scan_table                  | table         | NULL        | NULL    |          |
+| anofox_tab_pii_status                      | table         | NULL        | NULL    |          |
+| anofox_tab_postal_expand_address           | scalar        | NULL        | NULL    |          |
+| anofox_tab_postal_load_data                | scalar        | NULL        | NULL    |          |
+| anofox_tab_postal_parse_address            | scalar        | NULL        | NULL    |          |
+| anofox_tab_postal_status                   | table         | NULL        | NULL    |          |
+| anofox_tab_schema_check                    | table         | NULL        | NULL    |          |
+| anofox_tab_vat                             | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_country_name                | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_exists                      | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_format                      | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_is_eu_member                | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_is_valid                    | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_is_valid_syntax             | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_normalize                   | scalar        | NULL        | NULL    |          |
+| anofox_tab_vat_split                       | scalar        | NULL        | NULL    |          |
+| anofox_tab_volume                          | table         | NULL        | NULL    |          |
+| anofox_tab_zscore                          | table         | NULL        | NULL    |          |
+| currency_name                              | scalar        | NULL        | NULL    |          |
+| currency_symbol                            | scalar        | NULL        | NULL    |          |
+| dbscan                                     | table         | NULL        | NULL    |          |
+| dbscan_mv                                  | table         | NULL        | NULL    |          |
+| diff_hashdiff                              | table         | NULL        | NULL    |          |
+| diff_joindiff                              | table         | NULL        | NULL    |          |
+| distinct_count                             | table         | NULL        | NULL    |          |
+| email_config                               | table         | NULL        | NULL    |          |
+| email_is_valid                             | scalar        | NULL        | NULL    |          |
+| email_validate                             | scalar        | NULL        | NULL    |          |
+| freshness                                  | table         | NULL        | NULL    |          |
+| iqr                                        | table         | NULL        | NULL    |          |
+| is_valid_currency                          | scalar        | NULL        | NULL    |          |
+| is_valid_vat_country                       | scalar        | NULL        | NULL    |          |
+| isolation_forest                           | table         | NULL        | NULL    |          |
+| isolation_forest_mv                        | table         | NULL        | NULL    |          |
+| money                                      | scalar        | NULL        | NULL    |          |
+| money_abs                                  | scalar        | NULL        | NULL    |          |
+| money_add                                  | scalar        | NULL        | NULL    |          |
+| money_amount                               | scalar        | NULL        | NULL    |          |
+| money_currency                             | scalar        | NULL        | NULL    |          |
+| money_format                               | scalar        | NULL        | NULL    |          |
+| money_from_cents                           | scalar        | NULL        | NULL    |          |
+| money_in_range                             | scalar        | NULL        | NULL    |          |
+| money_is_negative                          | scalar        | NULL        | NULL    |          |
+| money_is_positive                          | scalar        | NULL        | NULL    |          |
+| money_is_zero                              | scalar        | NULL        | NULL    |          |
+| money_multiply                             | scalar        | NULL        | NULL    |          |
+| money_same_currency                        | scalar        | NULL        | NULL    |          |
+| money_subtract                             | scalar        | NULL        | NULL    |          |
+| null_rate                                  | table         | NULL        | NULL    |          |
+| outlier_tree                               | table         | NULL        | NULL    |          |
+| phonenumber_example                        | scalar        | NULL        | NULL    |          |
+| phonenumber_format                         | scalar        | NULL        | NULL    |          |
+| phonenumber_is_possible                    | scalar        | NULL        | NULL    |          |
+| phonenumber_is_valid                       | scalar        | NULL        | NULL    |          |
+| phonenumber_is_valid_for_region            | scalar        | NULL        | NULL    |          |
+| phonenumber_match                          | scalar        | NULL        | NULL    |          |
+| phonenumber_parse                          | scalar        | NULL        | NULL    |          |
+| phonenumber_region                         | scalar        | NULL        | NULL    |          |
+| phonenumber_status                         | table         | NULL        | NULL    |          |
+| pii_audit_table                            | table         | NULL        | NULL    |          |
+| pii_config                                 | table         | NULL        | NULL    |          |
+| pii_contains                               | scalar        | NULL        | NULL    |          |
+| pii_count                                  | scalar        | NULL        | NULL    |          |
+| pii_detect                                 | scalar        | NULL        | NULL    |          |
+| pii_detect_batch                           | scalar        | NULL        | NULL    |          |
+| pii_detect_credit_cards                    | scalar        | NULL        | NULL    |          |
+| pii_detect_emails                          | scalar        | NULL        | NULL    |          |
+| pii_detect_ibans                           | scalar        | NULL        | NULL    |          |
+| pii_detect_names                           | scalar        | NULL        | NULL    |          |
+| pii_detect_phones                          | scalar        | NULL        | NULL    |          |
+| pii_detect_ssns                            | scalar        | NULL        | NULL    |          |
+| pii_is_valid_credit_card                   | scalar        | NULL        | NULL    |          |
+| pii_is_valid_crypto_address                | scalar        | NULL        | NULL    |          |
+| pii_is_valid_de_tax_id                     | scalar        | NULL        | NULL    |          |
+| pii_is_valid_iban                          | scalar        | NULL        | NULL    |          |
+| pii_is_valid_nino                          | scalar        | NULL        | NULL    |          |
+| pii_is_valid_ssn                           | scalar        | NULL        | NULL    |          |
+| pii_mask                                   | scalar        | NULL        | NULL    |          |
+| pii_mask_column                            | scalar        | NULL        | NULL    |          |
+| pii_redact_column                          | scalar        | NULL        | NULL    |          |
+| pii_scan_table                             | table         | NULL        | NULL    |          |
+| pii_status                                 | table         | NULL        | NULL    |          |
+| postal_expand_address                      | scalar        | NULL        | NULL    |          |
+| postal_load_data                           | scalar        | NULL        | NULL    |          |
+| postal_parse_address                       | scalar        | NULL        | NULL    |          |
+| postal_status                              | table         | NULL        | NULL    |          |
+| schema_check                               | table         | NULL        | NULL    |          |
+| vat                                        | scalar        | NULL        | NULL    |          |
+| vat_country_name                           | scalar        | NULL        | NULL    |          |
+| vat_exists                                 | scalar        | NULL        | NULL    |          |
+| vat_format                                 | scalar        | NULL        | NULL    |          |
+| vat_is_eu_member                           | scalar        | NULL        | NULL    |          |
+| vat_is_valid                               | scalar        | NULL        | NULL    |          |
+| vat_is_valid_syntax                        | scalar        | NULL        | NULL    |          |
+| vat_normalize                              | scalar        | NULL        | NULL    |          |
+| vat_split                                  | scalar        | NULL        | NULL    |          |
+| volume                                     | table         | NULL        | NULL    |          |
+| zscore                                     | table         | NULL        | NULL    |          |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|                   name                   |                               description                                | input_type | scope  | aliases |
-|------------------------------------------|--------------------------------------------------------------------------|------------|--------|---------|
-| anofox_tab_email_default_validation      | Default validation mode for anofox_tab_email_is_valid (regex, dns, smtp) | VARCHAR    | GLOBAL | []      |
-| anofox_tab_email_dns_timeout_ms          | DNS resolver timeout in milliseconds                                     | BIGINT     | GLOBAL | []      |
-| anofox_tab_email_dns_tries               | Number of DNS queries to attempt before failing                          | INTEGER    | GLOBAL | []      |
-| anofox_tab_email_regex_pattern           | Regular expression used during email regex validation                    | VARCHAR    | GLOBAL | []      |
-| anofox_tab_email_smtp_connect_timeout_ms | SMTP connect timeout in milliseconds                                     | BIGINT     | GLOBAL | []      |
-| anofox_tab_email_smtp_helo_domain        | Domain value used during SMTP EHLO negotiation                           | VARCHAR    | GLOBAL | []      |
-| anofox_tab_email_smtp_mail_from          | MAIL FROM address presented during SMTP verification                     | VARCHAR    | GLOBAL | []      |
-| anofox_tab_email_smtp_port               | SMTP port used when connecting to MX hosts                               | INTEGER    | GLOBAL | []      |
-| anofox_tab_email_smtp_read_timeout_ms    | SMTP read/write timeout in milliseconds                                  | BIGINT     | GLOBAL | []      |
-| anofox_tab_phonenumber_default_region    | Default region code used when the region hint is NULL                    | VARCHAR    | GLOBAL | []      |
-| anofox_tab_postal_data_path              | Directory storing libpostal assets                                       | VARCHAR    | GLOBAL | []      |
-| anofox_tab_trace_enabled                 | Enable anofox tracing output                                             | BOOLEAN    | GLOBAL | []      |
-| anofox_tab_trace_level                   | Minimum tracing level (trace/debug/info/warn/error/critical/off)         | VARCHAR    | GLOBAL | []      |
+|                   name                   |                                     description                                     | input_type | scope  | aliases |
+|------------------------------------------|-------------------------------------------------------------------------------------|------------|--------|---------|
+| anofox_ner_cache_size                    | LRU cache size for NER results (0 to disable)                                       | BIGINT     | GLOBAL | []      |
+| anofox_ner_model                         | NER model to use: distilbert-en (fast, English) or xlm-roberta-multi (multilingual) | VARCHAR    | GLOBAL | []      |
+| anofox_pii_deep_validation               | Enable deep validation using libphonenumber for phone numbers (default: false)      | BOOLEAN    | GLOBAL | []      |
+| anofox_pii_default_mask_strategy         | Default masking strategy (REDACT, HASH, PARTIAL, ASTERISK, NONE)                    | VARCHAR    | GLOBAL | []      |
+| anofox_pii_enabled_types                 | Comma-separated list of PII types to detect (empty = all)                           | VARCHAR    | GLOBAL | []      |
+| anofox_pii_min_confidence                | Minimum confidence threshold for NER-based PII detection (0.0 - 1.0)                | DOUBLE     | GLOBAL | []      |
+| anofox_tab_email_default_validation      | Default validation mode for anofox_tab_email_is_valid (regex, dns, smtp)            | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_dns_timeout_ms          | DNS resolver timeout in milliseconds                                                | BIGINT     | GLOBAL | []      |
+| anofox_tab_email_dns_tries               | Number of DNS queries to attempt before failing                                     | INTEGER    | GLOBAL | []      |
+| anofox_tab_email_regex_pattern           | Regular expression used during email regex validation                               | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_smtp_connect_timeout_ms | SMTP connect timeout in milliseconds                                                | BIGINT     | GLOBAL | []      |
+| anofox_tab_email_smtp_helo_domain        | Domain value used during SMTP EHLO negotiation                                      | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_smtp_mail_from          | MAIL FROM address presented during SMTP verification                                | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_smtp_port               | SMTP port used when connecting to MX hosts                                          | INTEGER    | GLOBAL | []      |
+| anofox_tab_email_smtp_read_timeout_ms    | SMTP read/write timeout in milliseconds                                             | BIGINT     | GLOBAL | []      |
+| anofox_tab_phonenumber_default_region    | Default region code used when the region hint is NULL                               | VARCHAR    | GLOBAL | []      |
+| anofox_tab_postal_data_path              | Directory storing libpostal assets                                                  | VARCHAR    | GLOBAL | []      |
+| anofox_tab_trace_enabled                 | Enable anofox tracing output                                                        | BOOLEAN    | GLOBAL | []      |
+| anofox_tab_trace_level                   | Minimum tracing level (trace/debug/info/warn/error/critical/off)                    | VARCHAR    | GLOBAL | []      |
+| anofox_telemetry_enabled                 | Enable or disable anonymous usage telemetry                                         | BOOLEAN    | GLOBAL | []      |
+| anofox_telemetry_key                     | PostHog API key for telemetry                                                       | VARCHAR    | GLOBAL | []      |
 
 

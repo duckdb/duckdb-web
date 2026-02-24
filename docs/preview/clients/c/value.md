@@ -1467,7 +1467,7 @@ Creates a map value from a map type and two arrays, one for the keys and one for
 * `map_type`: The map type
 * `keys`: The keys of the map
 * `values`: The values of the map
-* `entry_count`: The number of entrys (key-value pairs) in the map
+* `entry_count`: The number of entries (key-value pairs) in the map
 
 ##### Return Value
 

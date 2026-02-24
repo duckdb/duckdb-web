@@ -1,5 +1,5 @@
 ---
-blurb: The bitstring type are strings of 1s and 0s.
+blurb: The bitstring type is a string of 1s and 0s.
 layout: docu
 title: Bitstring Type
 ---
