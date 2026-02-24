@@ -28,10 +28,10 @@ docs:
     ATTACH 'hog:my_database?user=username&password=pw&flight_server=grpc+tls://localhost:8815' AS posthog_db;
     SELECT * FROM posthog_db.events LIMIT 10;
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 82
+extension_download_count_pretty: 82
 image: '/images/community_extensions/social_preview/preview_community_extension_duckhog.png'
 layout: community_extension_doc
 ---

@@ -97,8 +97,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 248
-extension_download_count_pretty: 248
+extension_download_count: 355
+extension_download_count_pretty: 355
 image: '/images/community_extensions/social_preview/preview_community_extension_dazzleduck.png'
 layout: community_extension_doc
 ---

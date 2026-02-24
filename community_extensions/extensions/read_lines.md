@@ -14,11 +14,10 @@ extension:
   license: MIT
   maintainers:
     - teaguesterling
-
 repo:
   github: teaguesterling/duckdb_read_lines
-  ref: 4af06cb19e138ace8d7313ce983b2f54a961c559
-
+  ref: 46612a0e56fa8153e3847249a668d211b317ffd9
+  ref_next: 46612a0e56fa8153e3847249a668d211b317ffd9
 docs:
   hello_world: |
     -- Read all lines from a file
@@ -85,8 +84,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 366
-extension_download_count_pretty: 366
+extension_download_count: 353
+extension_download_count_pretty: 353
 image: '/images/community_extensions/social_preview/preview_community_extension_read_lines.png'
 layout: community_extension_doc
 ---
