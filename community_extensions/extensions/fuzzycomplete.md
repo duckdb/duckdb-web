@@ -23,8 +23,8 @@ repo:
   ref: 74630cc8548a8ee6b32129abdc8bd70e1cf2bf87
   ref_next: 24d95eff386b66695fcadc84b21744c363af74bd
 
-extension_star_count: 25
-extension_star_count_pretty: 25
+extension_star_count: 26
+extension_star_count_pretty: 26
 extension_download_count: 707
 extension_download_count_pretty: 707
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
