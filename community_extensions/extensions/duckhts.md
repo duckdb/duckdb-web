@@ -95,14 +95,19 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| read_bam      | table         | NULL        | NULL    |          |
-| read_bcf      | table         | NULL        | NULL    |          |
-| read_fasta    | table         | NULL        | NULL    |          |
-| read_fastq    | table         | NULL        | NULL    |          |
-| read_gff      | table         | NULL        | NULL    |          |
-| read_gtf      | table         | NULL        | NULL    |          |
-| read_tabix    | table         | NULL        | NULL    |          |
+|    function_name     | function_type | description | comment | examples |
+|----------------------|---------------|-------------|---------|----------|
+| fasta_index          | table         | NULL        | NULL    |          |
+| read_bam             | table         | NULL        | NULL    |          |
+| read_bcf             | table         | NULL        | NULL    |          |
+| read_fasta           | table         | NULL        | NULL    |          |
+| read_fastq           | table         | NULL        | NULL    |          |
+| read_gff             | table         | NULL        | NULL    |          |
+| read_gtf             | table         | NULL        | NULL    |          |
+| read_hts_header      | table         | NULL        | NULL    |          |
+| read_hts_index       | table         | NULL        | NULL    |          |
+| read_hts_index_raw   | table_macro   | NULL        | NULL    |          |
+| read_hts_index_spans | table_macro   | NULL        | NULL    |          |
+| read_tabix           | table         | NULL        | NULL    |          |
 
 

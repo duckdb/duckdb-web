@@ -52,6 +52,8 @@ LOAD {{ page.extension.name }};
 | aic                                     | scalar        | NULL        | NULL    |          |
 | aid_agg                                 | aggregate     | NULL        | NULL    |          |
 | aid_anomaly_agg                         | aggregate     | NULL        | NULL    |          |
+| aid_anomaly_by                          | table_macro   | NULL        | NULL    |          |
+| aid_by                                  | table_macro   | NULL        | NULL    |          |
 | alm_fit_agg                             | aggregate     | NULL        | NULL    |          |
 | alm_fit_predict_agg                     | aggregate     | NULL        | NULL    |          |
 | alm_fit_predict_by                      | table_macro   | NULL        | NULL    |          |
