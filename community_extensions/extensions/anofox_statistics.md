@@ -16,12 +16,12 @@ extension:
   requires_toolchains: rust
 repo:
   github: DataZooDE/anofox-statistics
-  ref: b181fd46e5e1e65c4bac9d6e670b1f3d090926d3
+  ref: ea70303c7e8cf4af16fcc2f10a30fefcf9f03396
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 447
-extension_download_count_pretty: 447
+extension_download_count: 425
+extension_download_count_pretty: 425
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_statistics.png'
 layout: community_extension_doc
 ---
@@ -52,6 +52,8 @@ LOAD {{ page.extension.name }};
 | aic                                     | scalar        | NULL        | NULL    |          |
 | aid_agg                                 | aggregate     | NULL        | NULL    |          |
 | aid_anomaly_agg                         | aggregate     | NULL        | NULL    |          |
+| aid_anomaly_by                          | table_macro   | NULL        | NULL    |          |
+| aid_by                                  | table_macro   | NULL        | NULL    |          |
 | alm_fit_agg                             | aggregate     | NULL        | NULL    |          |
 | alm_fit_predict_agg                     | aggregate     | NULL        | NULL    |          |
 | alm_fit_predict_by                      | table_macro   | NULL        | NULL    |          |

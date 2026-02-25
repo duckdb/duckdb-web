@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: teaguesterling/duckdb_urlpattern
-  ref: 987739dae7466f5cd11f12845fdd30c1bdbcd3d8
+  ref: 91719fd6a03574be86bf53f73b3d0fc8a9c3d493
+  ref_next: 91719fd6a03574be86bf53f73b3d0fc8a9c3d493
 
 docs:
   hello_world: |
@@ -75,8 +76,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 433
-extension_download_count_pretty: 433
+extension_download_count: 526
+extension_download_count_pretty: 526
 image: '/images/community_extensions/social_preview/preview_community_extension_urlpattern.png'
 layout: community_extension_doc
 ---

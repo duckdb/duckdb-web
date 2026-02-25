@@ -4,6 +4,8 @@ layout: docu
 title: Rust Client
 ---
 
+> Tip To use the DuckDB Rust client, visit the [Rust installation page]({% link install/index.html %}?environment=rust).
+>
 > The latest stable version of the DuckDB Rust client is {{ site.current_duckdb_rust_version }}.
 
 ## Installation

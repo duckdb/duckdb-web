@@ -5,6 +5,7 @@ redirect_from:
   - /docs/clients
   - /docs/api/overview
   - /docs/clients/overview
+  - /docs/stable/clients
 title: Client Overview
 ---
 
