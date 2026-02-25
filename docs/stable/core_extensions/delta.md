@@ -2,19 +2,16 @@
 github_repository: https://github.com/duckdb/duckdb-delta
 layout: docu
 redirect_from:
-- /docs/stable/extensions/delta
-- /docs/extensions/delta
+  - /docs/stable/extensions/delta
+  - /docs/extensions/delta
 title: Delta Extension
 ---
 
-The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers **read support** for Delta tables, both local and remote.
+The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers read and limited write (blind insert) support for Delta tables, both local and remote.
 
 For implementation details, see the [announcement blog post]({% post_url 2024-06-10-delta %}).
 
-> Warning The `delta` extension is currently experimental and is [only supported on given platforms](#supported-duckdb-versions-and-platforms).
-
-> To connect to Unity Catalog, DuckDB has the [`unity_catalog` experimental extension](https://github.com/duckdb/unity_catalog).
-> Please note that this extension is a proof-of-concept and not production-ready.
+> To connect to Unity Catalog, DuckDB also has the [`unity_catalog` extension](https://github.com/duckdb/unity_catalog).
 
 ## Installing and Loading
 
@@ -88,19 +85,20 @@ FROM delta_scan('az://my-container/my-table-with-auth');
 
 ## Features
 
-While the `delta` extension is still experimental, many (scanning) features and optimizations are already supported:
+Many features/optimizations are supported in this extension as it reuses most of DuckDB's
+regular parquet scanning logic:
 
-* multithreaded scans and Parquet metadata reading
-* data skipping/filter pushdown
-    * skipping row groups in file (based on Parquet metadata)
-    * skipping complete files (based on Delta partition information)
-* projection pushdown
-* scanning tables with deletion vectors
-* all primitive types
-* structs
-* S3 support with secrets
-
-More optimizations are going to be released in the future.
+- multithreaded scans and parquet metadata reading
+- data skipping/filter pushdown
+  - skipping row-groups in file (based on parquet metadata)
+  - skipping complete files (based on delta partition info)
+- projection pushdown
+- blind inserts
+- scanning tables with deletion vectors
+- all primitive types
+- structs
+- VARIANT type support
+- Cloud storage (AWS, Azure, GCP) support with secrets
 
 ## Supported DuckDB Versions and Platforms
 
@@ -108,8 +106,8 @@ The `delta` extension requires DuckDB version 0.10.3 or newer.
 
 The `delta` extension currently only supports the following platforms:
 
-* Linux AMD64 (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
-* macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
-* Windows AMD64: `windows_amd64`
+- Linux AMD64 (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
+- macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
+- Windows AMD64: `windows_amd64`
 
 Support for the [other DuckDB platforms]({% link docs/stable/extensions/extension_distribution.md %}#platforms) is work-in-progress.
